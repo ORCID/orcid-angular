@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core'
+import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from '../../platform-info'
 import { environment } from '../../../../environments/environment'
+import { WINDOW } from '../../window'
 
 @Component({
   selector: 'app-side-bar-id',
@@ -20,7 +21,10 @@ export class SideBarIdComponent implements OnInit, OnDestroy {
   @Input() privateView = true
   platform: PlatformInfo
 
-  constructor(private _platform: PlatformInfoService) {
+  constructor(
+    private _platform: PlatformInfoService,
+    @Inject(WINDOW) private window: Window
+  ) {
     _platform
       .get()
       .pipe(takeUntil(this.$destroy))
@@ -29,7 +33,18 @@ export class SideBarIdComponent implements OnInit, OnDestroy {
       })
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.clipboard()
+  }
+
+  clipboard() {
+    const source = document.querySelector('div.id');
+    source.addEventListener('copy', (event) => {
+      const selection = document.getSelection();
+      this.window.navigator.clipboard.writeText(selection.toString().replace(/\s+/g, ''))
+      event.preventDefault();
+    });
+  }
 
   ngOnDestroy(): void {
     this.$destroy.next(true)
