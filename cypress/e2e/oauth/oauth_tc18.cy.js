@@ -11,13 +11,14 @@ result: user is taken to redirect_uri appended with authorization code
 */
 
 describe('OAuth cypress tests', async function () {
-
   const recordOwner = userData.cyOAuth_RecordOwnerTC18
-  const scope = "/person/update" //matches authorized scopes in fixture file
+  const scope = '/person/update' //matches authorized scopes in fixture file
   const authorizationLink =
     'https://qa.orcid.org/oauth/authorize?client_id=' +
     userData.cyOAuth_MemberUser.clientID +
-    '&response_type=code&scope='+ scope +'&redirect_uri=' +
+    '&response_type=code&scope=' +
+    scope +
+    '&redirect_uri=' +
     userData.cyOAuth_MemberUser.redirect_uri
 
   before(() => {
@@ -28,7 +29,7 @@ describe('OAuth cypress tests', async function () {
     cy.get('#username').clear().type(recordOwner.oid)
     cy.get('#password').clear().type(recordOwner.password)
     cy.get('#signin-button').click()
-    cy.wait(3000)//need to wait for the redirect to take effect  
+    cy.wait(3000) //need to wait for the redirect to take effect
 
     //verify user is taken to redirect_uri with appended authorization code
     cy.url().then((urlString) => {

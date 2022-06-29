@@ -81,7 +81,6 @@ describe('OAuth cypress tests', async function () {
       cy.url().should('include', userData.cyOAuth_MemberUser.redirect_uri)
       cy.url().should('include', '?code=')
     })
-
   })
 
   after(() => {})
