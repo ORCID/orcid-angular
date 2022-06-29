@@ -3,7 +3,14 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 import { ModalFundingComponent } from './modal-funding.component'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
-import { Form, FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms'
+import {
+  Form,
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 import { WINDOW_PROVIDERS } from '../../../../../cdk/window'
 import { MatSnackBar } from '@angular/material/snack-bar'
@@ -46,7 +53,7 @@ describe('ModalFundingComponent', () => {
           ReactiveFormsModule,
           RecordModule,
           RouterTestingModule,
-          SharedModule
+          SharedModule,
         ],
         declarations: [ModalFundingComponent],
         providers: [
@@ -59,10 +66,10 @@ describe('ModalFundingComponent', () => {
           MatSnackBar,
           Overlay,
           PlatformInfoService,
-          UserService
+          UserService,
         ],
       }).compileComponents()
-    }),
+    })
   )
 
   beforeEach(() => {
@@ -87,7 +94,9 @@ describe('ModalFundingComponent', () => {
 
     fixture.detectChanges()
 
-    const addExternalIdentifierButton = fixture.debugElement.query(By.css('#add-link'))
+    const addExternalIdentifierButton = fixture.debugElement.query(
+      By.css('#add-link')
+    )
     await addExternalIdentifierButton.nativeElement.click()
 
     await fixture.whenStable()

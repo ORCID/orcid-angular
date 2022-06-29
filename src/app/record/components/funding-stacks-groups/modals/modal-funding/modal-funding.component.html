@@ -809,7 +809,10 @@
         >
           <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
           <span class="mat-body-1">
-            <ng-container i18n="@@shared.addAnotherId" *ngIf="grantsArray.length">
+            <ng-container
+              i18n="@@shared.addAnotherId"
+              *ngIf="grantsArray.length"
+            >
               Add another identifier
             </ng-container>
             <ng-container i18n="@@shared.addId" *ngIf="!grantsArray.length">

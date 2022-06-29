@@ -18,7 +18,7 @@ import { WorkRelationships } from 'src/app/types/works.endpoint'
   templateUrl: './funding-external-identifiers-edit.component.html',
   styleUrls: [
     './funding-external-identifiers-edit.component.scss',
-    './funding-external-identifiers-edit.component.scss-theme.scss'
+    './funding-external-identifiers-edit.component.scss-theme.scss',
   ],
 })
 export class FundingExternalIdentifiersEditComponent

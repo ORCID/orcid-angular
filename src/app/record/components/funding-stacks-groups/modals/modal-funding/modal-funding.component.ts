@@ -503,7 +503,10 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       this._formBuilder.group({
         grantNumber: [
           existingGrant?.externalIdentifierId?.value || '',
-          [Validators.required, Validators.maxLength(MAX_LENGTH_LESS_THAN_TWO_THOUSAND_EIGHTY_FOUR)],
+          [
+            Validators.required,
+            Validators.maxLength(MAX_LENGTH_LESS_THAN_TWO_THOUSAND_EIGHTY_FOUR),
+          ],
         ],
         grantUrl: [
           existingGrant?.url?.value || '',
