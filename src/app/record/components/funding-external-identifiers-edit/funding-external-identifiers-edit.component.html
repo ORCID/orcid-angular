@@ -12,7 +12,8 @@
   <div>
     <div class="row">
       <label for="grant-number-input" class="mat-caption">
-        <strong i18n="@@funding.grantNumber">Grant number </strong>
+        <strong i18n="@@funding.grantNumber">Grant number</strong>
+        <span class="required">*</span>
       </label>
     </div>
     <mat-form-field
@@ -25,6 +26,12 @@
         matInput
         formControlName="grantNumber"
       />
+      <mat-error
+        *ngIf="grantForm.get('grantNumber').errors?.required"
+        i18n="@@funding.grantNumberRequired"
+      >
+        Grant number is required
+      </mat-error>
       <mat-error
         *ngIf="grantForm.get('grantNumber').errors?.maxlength"
         i18n="@@shared.maxLength.less_than_two_thousand_forty_eight"
