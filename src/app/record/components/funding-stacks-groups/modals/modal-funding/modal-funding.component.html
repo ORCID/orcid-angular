@@ -721,7 +721,7 @@
             fundingForm.get('country').touched
         }"
       >
-        <strong i18n="@@shared.country">Country</strong>
+        <strong i18n="@@shared.countryOrLocation">Country/Location</strong>
         <span class="required">*</span>
       </label>
     </div>
@@ -732,7 +732,11 @@
         class="mat-form-field-min"
         [ngClass]="{ 'two-line-hint': isMobile }"
       >
-        <mat-select #countrySelect formControlName="country">
+        <mat-select
+          placeholder="{{ ngOrcidSelectACountryOrLocation }}"
+          #countrySelect
+          formControlName="country"
+        >
           <mat-option
             *ngFor="let countryCode of countryCodes"
             [value]="countryCode.key"
@@ -741,13 +745,13 @@
           </mat-option>
         </mat-select>
         <mat-error
-          i18n="@@shared.countryError"
+          i18n="@@shared.countryOrLocationError"
           *ngIf="
             fundingForm.get('country').hasError('required') &&
             fundingForm.get('country').touched
           "
         >
-          Please enter a country
+          Please enter a country or location
         </mat-error>
       </mat-form-field>
     </div>

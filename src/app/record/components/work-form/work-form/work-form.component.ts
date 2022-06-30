@@ -95,7 +95,8 @@ export class WorkFormComponent implements OnInit {
   ngOrcidMonth = $localize`:@@shared.month:Month`
   ngOrcidDay = $localize`:@@shared.day:Day`
   ngOrcidSelectLanguage = $localize`:@@shared.selectLanguage:Select a language`
-  ngOrcidSelectACountry = $localize`:@@shared.selectACountry:Select a country`
+  ngOrcidSelectACitationType = $localize`:@@works.selectACitationType:Select a citation type`
+  ngOrcidSelectACountryOrLocation = $localize`:@@shared.selectACountryOrLocation:Select a country or location`
   ngOrcidDefaultVisibilityLabel = $localize`:@@shared.visibilityDescription:Control who can see this information by setting the visibility. Your default visibility is`
   defaultVisibility: VisibilityStrings
 
@@ -118,7 +119,6 @@ export class WorkFormComponent implements OnInit {
     private _recordCountryService: RecordCountriesService,
     private _snackBar: SnackbarService,
     private _record: RecordService,
-
     @Inject(WINDOW) private _window: Window,
     @Inject(MAT_DIALOG_DATA) public data: UserRecord
   ) {}
@@ -419,6 +419,7 @@ export class WorkFormComponent implements OnInit {
       this.workIdentifiersFormArray
     )
   }
+
   deleteWorkId(id: number) {
     this.workIdentifiersFormArrayDisplayState.splice(id, 1)
     this.workIdentifiersFormArray.removeAt(id)
