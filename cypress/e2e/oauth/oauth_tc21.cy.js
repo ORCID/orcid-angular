@@ -27,7 +27,7 @@ describe('OAuth cypress tests', async function () {
     cy.wait(2000) //need to wait for the redirect to take effect
   })
 
-  it('TC#21 Authorization link with redirect uri variations', function () {   
+  it('TC#21 Authorization link with redirect uri variations', function () {
     // 1 - visit authorization link with redirect URI "https://www.example.com"
     // expected: user taken to authorization screen
     cy.visit(authorizationLink + userData.cyOAuth_MemberUser.redirect_uri_tc21)
