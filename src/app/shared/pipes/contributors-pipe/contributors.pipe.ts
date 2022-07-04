@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core'
 import { Contributor } from 'src/app/types'
+import { RolesAndSequences } from '../../../types/common.endpoint'
 
 @Pipe({
   name: 'contributorsPipe',
@@ -65,7 +66,7 @@ export class ContributorsPipe implements PipeTransform {
 
   private addRoleAndSequence(
     value: string,
-    roleAndSequence: { contributorRole: string; contributorSequence: string },
+    roleAndSequence: RolesAndSequences,
     length: number,
     index: number
   ): string {

@@ -63,7 +63,7 @@ describe('TwoFactorEnableComponent', () => {
     ).not.toBeNull()
   })
 
-  it('should display a textarea with a textarea', () => {
+  it('should display a textarea with a text code', () => {
     expect(
       debugElement.nativeElement.querySelector('[data-cy="textCode"]')
     ).toBeNull()
@@ -78,7 +78,7 @@ describe('TwoFactorEnableComponent', () => {
     ).not.toBeNull()
   })
 
-  it('should call the method register when the input is filled and the button has been press', () => {
+  it('should call the method register when the input is filled and the button has been press', async () => {
     const resetInput = debugElement.query(
       By.css('[data-cy="verification-code-input"]')
     )
@@ -86,6 +86,8 @@ describe('TwoFactorEnableComponent', () => {
     const twoFactorButton = debugElement.query(By.css('#cy-continue'))
     twoFactorButton.triggerEventHandler('click', null)
     fixture.detectChanges()
+    await fixture.whenStable()
+
     expect(fakeTwoFactorAuthenticationService.register).toHaveBeenCalled()
   })
 })

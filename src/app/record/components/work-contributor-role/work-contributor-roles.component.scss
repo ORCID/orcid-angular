@@ -1,0 +1,28 @@
+.container {
+  width: 100%;
+  margin-bottom: 32px;
+
+  .title {
+    label {
+      display: block;
+      margin-bottom: 32px;
+    }
+  }
+
+  .role {
+    margin-bottom: 4px;
+
+    .mat-form-field {
+      width: 100%;
+    }
+
+    ::ng-deep .mat-form-field-wrapper {
+      padding-bottom: 1em !important;
+    }
+
+    .delete-button {
+      justify-content: flex-end;
+      display: flex;
+    }
+  }
+}

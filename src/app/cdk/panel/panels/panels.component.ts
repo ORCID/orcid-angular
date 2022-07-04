@@ -129,6 +129,7 @@ export class PanelsComponent implements OnInit {
           })
 
           modalComponent.componentInstance.type = options?.type
+          modalComponent.componentInstance.userRecord = this.userRecord
         })
     }
   }

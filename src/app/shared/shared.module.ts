@@ -31,6 +31,9 @@ import { RecordWorkTypeLabelPipe } from './pipes/record-work-type-label/record-w
 import { SafeHtmlPipe } from './pipes/safe-html/safe-html.pipe'
 import { TrailingZerosPipe } from './pipes/trailing-zeros/trailing-zeros.pipe'
 import { VisibilityStringLabelPipe } from './pipes/visibility-string-label/visibility-string-label.pipe'
+import { DisableRolePipe } from './pipes/disabled-role/disable-role.pipe'
+import { RoleTranslationPipe } from './pipes/role-translation/role-translation.pipe'
+import { RecordHolderRolesPipe } from './pipes/record-holder-roles/record-holder-roles.pipe'
 
 @NgModule({
   imports: [
@@ -62,6 +65,9 @@ import { VisibilityStringLabelPipe } from './pipes/visibility-string-label/visib
     TrailingZerosPipe,
     VisibilityStringLabelPipe,
     EmailFrequencyLabelPipe,
+    DisableRolePipe,
+    RoleTranslationPipe,
+    RecordHolderRolesPipe,
   ],
   exports: [
     CommonModule,
@@ -91,6 +97,9 @@ import { VisibilityStringLabelPipe } from './pipes/visibility-string-label/visib
     TrailingZerosPipe,
     VisibilityStringLabelPipe,
     EmailFrequencyLabelPipe,
+    DisableRolePipe,
+    RoleTranslationPipe,
+    RecordHolderRolesPipe,
   ],
   providers: [], // Should not provide anything
 })

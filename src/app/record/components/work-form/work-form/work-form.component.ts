@@ -35,6 +35,7 @@ import { first, map, startWith } from 'rxjs/operators'
 import { dateValidator } from '../../../../shared/validators/date/date.validator'
 import { GetFormErrors, URL_REGEXP } from '../../../../constants'
 import {
+  Contributor,
   ExternalIdentifier,
   VisibilityStrings,
 } from '../../../../types/common.endpoint'
@@ -55,6 +56,8 @@ import { RecordService } from 'src/app/core/record/record.service'
 })
 export class WorkFormComponent implements OnInit {
   @Input() work: Work
+  @Input() userRecord: UserRecord
+
   $workTypeUpdateEvent = new Subject<WorkIdType>()
 
   loading = true
@@ -502,6 +505,7 @@ export class WorkFormComponent implements OnInit {
         workType: {
           value: this.workForm.value.workType,
         },
+        contributorsGroupedByOrcid: this.getOrcidGroupedByOrcid(),
       }
       if (this.work?.putCode) {
         work.putCode = this.work.putCode
@@ -597,11 +601,32 @@ export class WorkFormComponent implements OnInit {
     return workRelationship
   }
 
-  closeEvent() {
-    this._dialogRef.close()
+  private getOrcidGroupedByOrcid(): Contributor[] {
+    const rolesFormArray = this.workForm.get('roles') as FormArray
+    const roles = rolesFormArray?.controls
+      ?.filter((fg) => fg?.value?.role)
+      .map((formGroup) => formGroup?.value?.role)
+    const recordHolderContribution = this.workForm.get('contributors')?.value[0]
+    return [
+      {
+        creditName: {
+          value: recordHolderContribution?.creditName,
+        },
+        contributorOrcid: {
+          uri: recordHolderContribution?.contributorOrcid?.uri,
+          path: recordHolderContribution?.contributorOrcid?.path,
+        },
+        rolesAndSequences: [
+          ...roles.map((r) => ({
+            contributorRole: this._workService.getContributionRoleByKey(r)
+              .value,
+          })),
+        ],
+      },
+    ]
   }
 
-  returnZero() {
-    return 0
+  closeEvent() {
+    this._dialogRef.close()
   }
 }

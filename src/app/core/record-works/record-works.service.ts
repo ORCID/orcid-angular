@@ -18,7 +18,9 @@ import {
 } from 'src/app/types/record-works.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
 import {
+  ContributionRoles,
   GroupingSuggestions,
+  Role,
   WorkCombineEndpoint,
   WorkIdType,
   WorkIdTypeValidation,
@@ -45,6 +47,7 @@ export class RecordWorksService {
   sortAsc = false
   pageSize = DEFAULT_PAGE_SIZE
   togglzWorksContributors: boolean
+  contributionRoles = ContributionRoles
 
   userRecordOptions: UserRecordOptions = {}
 
@@ -448,5 +451,13 @@ export class RecordWorksService {
         .subscribe((x) => this.groupingSuggestionsSubject.next(x))
     }
     return this.groupingSuggestionsSubject.asObservable()
+  }
+
+  getContributionRoles(): Observable<Role[]> {
+    return of(this.contributionRoles)
+  }
+
+  getContributionRoleByKey(key: string): Role {
+    return this.contributionRoles.find((role) => role.key === key)
   }
 }
