@@ -237,14 +237,14 @@ export class WorkFormComponent implements OnInit {
 
       visibility: [
         currentWork?.visibility?.visibility ||
-          currentWork.visibility.visibility,
+          currentWork?.visibility?.visibility,
         [],
       ],
     })
     this.workIdentifiersFormArray = this.workForm.controls
       .workIdentifiers as FormArray
 
-    currentWork.workExternalIdentifiers.forEach((workExternalId) => {
+    currentWork?.workExternalIdentifiers.forEach((workExternalId) => {
       this.addOtherWorkId(workExternalId)
     })
   }

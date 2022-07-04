@@ -50,8 +50,8 @@ export class WorkComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.contributorsGroupedByOrcid = this.work.contributorsGroupedByOrcid
-    this.numberOfContributors = this.work.numberOfContributors
+    this.contributorsGroupedByOrcid = this.work?.contributorsGroupedByOrcid
+    this.numberOfContributors = this.work?.numberOfContributors
   }
 
   /**

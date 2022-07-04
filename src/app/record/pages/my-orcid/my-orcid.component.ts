@@ -74,7 +74,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   }
 
   private getRouteOrcidID(): string {
-    if (this.route.parent.snapshot.url) {
+    if (this.route.parent?.snapshot.url) {
       const firstUrlSegment = this.route.parent.snapshot.url[0]
       if (
         firstUrlSegment &&

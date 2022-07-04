@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { NotificationHtmlComponent } from './notification-html.component'
+import { SharedModule } from '../../../shared/shared.module'
 
 describe('NotificationHtmlComponent', () => {
   let component: NotificationHtmlComponent
@@ -8,6 +9,7 @@ describe('NotificationHtmlComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [SharedModule],
       declarations: [NotificationHtmlComponent],
     }).compileComponents()
   })

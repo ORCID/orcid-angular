@@ -32,7 +32,7 @@
       Adding keywords can help people find you when searching the ORCID
       registry.
     </p>
-    <ng-container *ngIf="keywords.length > 0">
+    <ng-container *ngIf="keywords?.length > 0">
       <div class="row">
         <h3 class="col no-gutters orc-font-body" i18n="@@topBar.myKeywords">
           My keywords
@@ -136,13 +136,13 @@
         <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
         <span class="mat-body-1">
           <ng-container
-            *ngIf="keywords.length === 0"
+            *ngIf="keywords?.length === 0"
             i18n="@@topBar.addKeyword"
           >
             Add a keyword
           </ng-container>
           <ng-container
-            *ngIf="keywords.length !== 0"
+            *ngIf="keywords?.length !== 0"
             i18n="@@topBar.addAnotherKeyword"
           >
             Add another keyword

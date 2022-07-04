@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { FundingComponent } from './funding.component'
+import { SharedModule } from '../../../shared/shared.module'
 
 describe('FundingComponent', () => {
   let component: FundingComponent
@@ -8,6 +9,7 @@ describe('FundingComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [SharedModule],
       declarations: [FundingComponent],
     }).compileComponents()
   }))

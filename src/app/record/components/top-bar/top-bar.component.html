@@ -12,7 +12,7 @@
   [userStatus]="userStatus"
   [isPublicRecord]="isPublicRecord"
   *ngIf="!recordWithIssues"
-  [onlyShowPrintButton]="!platform.columns12"
+  [showPrintButton]="!platform.columns12"
 ></app-top-bar-actions>
 
 <app-top-bar-verification-email
@@ -227,7 +227,7 @@
       [userStatus]="userStatus"
       [isPublicRecord]="isPublicRecord"
       *ngIf="!recordWithIssues && !platform.columns12"
-      [onlyShowIsThisYouButton]="true"
+      [showIsThisYouButton]="true"
     ></app-top-bar-actions>
 
     <div

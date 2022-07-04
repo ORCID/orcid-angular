@@ -2,7 +2,7 @@
   <ng-container i18n="@@inbox.youCanNowSignin"
     >You can now sign in to ORCID with your</ng-container
   >
-  {{ notification.idpName }}
+  {{ notification?.idpName }}
   <ng-container i18n="@@inbox.account">account</ng-container>.
 </div>
 
@@ -10,7 +10,7 @@
   <ng-container i18n="@@inbox.pleaseCompleteThe"
     >Please complete the process by connecting</ng-container
   >
-  <strong>{{ notification.source.sourceName.content }}</strong>
+  <strong>{{ notification?.source.sourceName.content }}</strong>
   <ng-container i18n="@@inbox.yourOrcidRecord">
     with your ORCID record.</ng-container
   >
@@ -19,7 +19,7 @@
 <a
   target="_blank"
   rel="noopener noreferrer"
-  [href]="notification.authorizationUrl.uri"
+  [href]="notification?.authorizationUrl.uri"
 >
   <button
     mat-raised-button

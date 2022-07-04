@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { DialogSecurityAlternateAccountDeleteComponent } from './dialog-security-alternate-account-delete.component'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 
 describe('DialogSecurityAlternateAccountDeleteComponent', () => {
   let component: DialogSecurityAlternateAccountDeleteComponent
@@ -9,6 +10,10 @@ describe('DialogSecurityAlternateAccountDeleteComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [DialogSecurityAlternateAccountDeleteComponent],
+      providers: [
+        { provide: MatDialogRef, useValue: {} },
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+      ],
     }).compileComponents()
   })
 

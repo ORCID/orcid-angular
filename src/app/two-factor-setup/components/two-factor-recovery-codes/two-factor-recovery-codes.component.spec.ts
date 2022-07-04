@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { TwoFactorRecoveryCodesComponent } from './two-factor-recovery-codes.component'
 import { WINDOW_PROVIDERS } from '../../../cdk/window'
+import { MatTooltipModule } from '@angular/material/tooltip'
 
 describe('TwoFactorRecoveryCodesComponent', () => {
   let component: TwoFactorRecoveryCodesComponent
@@ -9,6 +10,7 @@ describe('TwoFactorRecoveryCodesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [MatTooltipModule],
       declarations: [TwoFactorRecoveryCodesComponent],
       providers: [WINDOW_PROVIDERS],
     }).compileComponents()

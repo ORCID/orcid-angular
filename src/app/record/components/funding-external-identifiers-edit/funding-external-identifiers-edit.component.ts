@@ -39,7 +39,7 @@ export class FundingExternalIdentifiersEditComponent
   constructor(private changeDedectionRef: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    this.backupValue = this.grantForm.value
+    this.backupValue = this.grantForm?.value
   }
   ngAfterViewInit() {
     this.grantNumberRef.nativeElement.focus()

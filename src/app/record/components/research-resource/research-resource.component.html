@@ -1,16 +1,16 @@
 <app-panel-data
   class="orc-font-body-small"
-  [borderBottom]="researchResource.showDetails"
+  [borderBottom]="researchResource?.showDetails"
 >
   <app-panel-element [hideVisibility]="false">
     <div
       class="description-container"
       [ngClass]="{
-        'show-details': researchResource.showDetails
+        'show-details': researchResource?.showDetails
       }"
     >
       <div class="description">
-        <div *ngFor="let host of researchResource.hosts">
+        <div *ngFor="let host of researchResource?.hosts">
           <span>{{ host.name | titlecase }}</span>
           <span *ngIf="host.city || host.region || host.country"> (</span>
           <span *ngIf="host.city">{{ host.city }}</span
@@ -19,7 +19,7 @@
           <span *ngIf="host.city || host.region || host.country">)</span>
         </div>
         <div>
-          <span *ngIf="researchResource.startDate">
+          <span *ngIf="researchResource?.startDate">
             <span>{{
               researchResource.startDate | monthDayYearDateToString
             }}</span>
@@ -39,14 +39,16 @@
             </span>
           </span>
           <!--End date-->
-          <span *ngIf="!researchResource.startDate && researchResource.endDate">
+          <span
+            *ngIf="!researchResource?.startDate && researchResource?.endDate"
+          >
             <span>{{
               researchResource.endDate | monthDayYearDateToString
             }}</span>
           </span>
         </div>
         <app-display-external-ids
-          [externalIdentifiers]="researchResource.externalIdentifiers"
+          [externalIdentifiers]="researchResource?.externalIdentifiers"
           [noBoldTitle]="true"
         ></app-display-external-ids>
       </div>
@@ -59,7 +61,7 @@
       >
         <a
           class="underline"
-          *ngIf="!researchResource.showDetails"
+          *ngIf="!researchResource?.showDetails"
           (click)="getDetails(researchResource, researchResource.putCode)"
           i18n="@@shared.showMoreDetail"
           id="show-more-button"
@@ -68,7 +70,7 @@
         </a>
         <a
           class="underline"
-          *ngIf="researchResource.showDetails"
+          *ngIf="researchResource?.showDetails"
           (click)="collapse(researchResource)"
           i18n="@@shared.showLessDetail"
           id="show-less-button"
@@ -80,7 +82,7 @@
   </app-panel-element>
   <app-panel-element
     [hideVisibility]="false"
-    *ngIf="researchResource.showDetails"
+    *ngIf="researchResource?.showDetails"
   >
     <div
       class="description"

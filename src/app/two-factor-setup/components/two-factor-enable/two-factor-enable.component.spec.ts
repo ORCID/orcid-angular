@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { TwoFactorEnableComponent } from './two-factor-enable.component'
 import { RouterTestingModule } from '@angular/router/testing'
-import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { TwoFactorAuthenticationService } from '../../../core/two-factor-authentication/two-factor-authentication.service'
 import { PlatformInfoService } from '../../../cdk/platform-info'
 import { ErrorHandlerService } from '../../../core/error-handler/error-handler.service'
@@ -12,6 +11,11 @@ import { Overlay } from '@angular/cdk/overlay'
 import { WINDOW_PROVIDERS } from '../../../cdk/window'
 import { DebugElement } from '@angular/core'
 import { By } from '@angular/platform-browser'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatInputModule } from '@angular/material/input'
+import { NoopAnimationsModule } from '@angular/platform-browser/animations'
+import { of } from 'rxjs'
 
 describe('TwoFactorEnableComponent', () => {
   let component: TwoFactorEnableComponent
@@ -21,15 +25,22 @@ describe('TwoFactorEnableComponent', () => {
 
   beforeEach(async () => {
     fakeTwoFactorAuthenticationService = jasmine.createSpyObj<TwoFactorAuthenticationService>(
-      'CounterService',
+      'TwoFactorAuthenticationService',
       {
-        getTextCode: undefined,
+        getTextCode: of({ secret: '123456' }),
         register: undefined,
       }
     )
 
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, HttpClientTestingModule],
+      imports: [
+        FormsModule,
+        MatInputModule,
+        NoopAnimationsModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        RouterTestingModule,
+      ],
       declarations: [TwoFactorEnableComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -78,15 +89,16 @@ describe('TwoFactorEnableComponent', () => {
     ).not.toBeNull()
   })
 
-  it('should call the method register when the input is filled and the button has been press', async () => {
-    const resetInput = debugElement.query(
-      By.css('[data-cy="verification-code-input"]')
-    )
-    resetInput.nativeElement.value = '123456'
-    const twoFactorButton = debugElement.query(By.css('#cy-continue'))
-    twoFactorButton.triggerEventHandler('click', null)
+  it('should call register method when input is filled button has been press', async () => {
+    component.twoFactorForm.get('verificationCode').setValue('123456')
+
     fixture.detectChanges()
     await fixture.whenStable()
+
+    const twoFactorButton = debugElement.query(By.css('#cy-continue'))
+    twoFactorButton.nativeElement.click()
+
+    fixture.detectChanges()
 
     expect(fakeTwoFactorAuthenticationService.register).toHaveBeenCalled()
   })

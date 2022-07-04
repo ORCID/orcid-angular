@@ -1,6 +1,6 @@
 <ng-container
   *ngFor="
-    let funding of fundingStack.fundings;
+    let funding of fundingStack?.fundings;
     let i = index;
     let last = last;
     trackBy: trackByFundingStack

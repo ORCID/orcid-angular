@@ -23,7 +23,7 @@ export class NotificationPermissionComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.itemsByType = chain(this.notification.items.items)
+    this.itemsByType = chain(this.notification?.items.items)
       .groupBy('itemType')
       .map((value, key) => ({ type: key, items: value }))
       .value()

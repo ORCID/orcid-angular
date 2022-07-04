@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { SourceHitComponent } from './source-hit.component'
+import { SharedModule } from '../../../../shared/shared.module'
 
 describe('SourceHitComponent', () => {
   let component: SourceHitComponent
@@ -8,6 +9,7 @@ describe('SourceHitComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [SharedModule],
       declarations: [SourceHitComponent],
     }).compileComponents()
   })

@@ -77,7 +77,6 @@ export class ModalNameComponent implements OnInit, OnDestroy {
     private _recordNameService: RecordNamesService,
     private _recordOtherNamesService: RecordOtherNamesService,
     private _changeDetectorRef: ChangeDetectorRef,
-    private _userSession: UserService,
     private _snackBar: SnackbarService
   ) {
     this._platform.get().subscribe((platform) => {
@@ -234,7 +233,7 @@ export class ModalNameComponent implements OnInit, OnDestroy {
             )
           ),
           switchMap((_) =>
-            this._userSession.refreshUserSession(true).pipe(take(1))
+            this._userService.refreshUserSession(true).pipe(take(1))
           )
         )
         .subscribe(
