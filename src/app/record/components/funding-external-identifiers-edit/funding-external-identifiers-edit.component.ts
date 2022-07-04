@@ -16,7 +16,10 @@ import { WorkRelationships } from 'src/app/types/works.endpoint'
 @Component({
   selector: 'app-funding-external-identifiers-edit',
   templateUrl: './funding-external-identifiers-edit.component.html',
-  styleUrls: ['./funding-external-identifiers-edit.component.scss'],
+  styleUrls: [
+    './funding-external-identifiers-edit.component.scss',
+    './funding-external-identifiers-edit.component.scss-theme.scss',
+  ],
 })
 export class FundingExternalIdentifiersEditComponent
   implements OnInit, AfterViewInit {
