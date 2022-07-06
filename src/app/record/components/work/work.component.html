@@ -142,7 +142,7 @@
     <div>
       <a
         class="underline"
-        *ngIf="isUrl(work?.url.value)"
+        *ngIf="work?.url.value | isUrl"
         rel="noopener noreferrer"
         target="_blank"
         href="{{ work?.url.value }}"
@@ -150,7 +150,7 @@
         {{ work.url.value }}
       </a>
 
-      <ng-container *ngIf="!isUrl(work?.url.value)">
+      <ng-container *ngIf="!(work?.url.value | isUrl)">
         {{ work.url.value }}
       </ng-container>
     </div>
