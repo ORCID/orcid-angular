@@ -12,11 +12,10 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
   providedIn: 'root',
 })
 export class OrganizationsService {
-
   constructor(
     private _http: HttpClient,
     private _errorHandler: ErrorHandlerService
-  ) { }
+  ) {}
 
   getOrgDisambiguated(type, value): Observable<OrgDisambiguated> {
     if (type && value) {

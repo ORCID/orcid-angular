@@ -1,8 +1,8 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core'
 import { URL_REGEXP_BACKEND, WHITE_SPACE_REGEXP } from '../../../constants'
 
 @Pipe({
-  name: 'organizationLink'
+  name: 'organizationLink',
 })
 export class OrganizationLinkPipe implements PipeTransform {
   transform(type: string, value: string): string {
@@ -35,5 +35,4 @@ export class OrganizationLinkPipe implements PipeTransform {
         return ''
     }
   }
-
 }

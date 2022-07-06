@@ -15,5 +15,4 @@ export class OrgIdentifierComponent implements OnInit {
   constructor(private _organizationsService: OrganizationsService) {}
 
   ngOnInit(): void {}
-
 }

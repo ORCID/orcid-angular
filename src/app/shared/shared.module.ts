@@ -33,10 +33,10 @@ import { TrailingZerosPipe } from './pipes/trailing-zeros/trailing-zeros.pipe'
 import { VisibilityStringLabelPipe } from './pipes/visibility-string-label/visibility-string-label.pipe'
 import { DisableRolePipe } from './pipes/disabled-role/disable-role.pipe'
 import { RoleTranslationPipe } from './pipes/role-translation/role-translation.pipe'
-import { RecordHolderRolesPipe } from './pipes/record-holder-roles/record-holder-roles.pipe';
-import { IsUrlPipe } from './pipes/is-url/is-url.pipe';
+import { RecordHolderRolesPipe } from './pipes/record-holder-roles/record-holder-roles.pipe'
+import { IsUrlPipe } from './pipes/is-url/is-url.pipe'
 import { IsUrlWithProtocolPipe } from './pipes/is-url-with-protocol/is-url-with-protocol.pipe'
-import { OrganizationLinkPipe } from './pipes/organization-link/organization-link.pipe';
+import { OrganizationLinkPipe } from './pipes/organization-link/organization-link.pipe'
 
 @NgModule({
   imports: [

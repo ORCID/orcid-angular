@@ -1,7 +1,6 @@
 import { IsUrlWithProtocolPipe } from './is-url-with-protocol.pipe'
 
 describe('IsUrlWithProtocolPipe', () => {
-
   let pipe: IsUrlWithProtocolPipe
 
   beforeEach(() => {
@@ -15,9 +14,9 @@ describe('IsUrlWithProtocolPipe', () => {
   it('should return true if is a valid url', () => {
     expect(pipe.transform('https://orcid.org')).toBe(true)
     expect(pipe.transform('HTTPS://URL.COM')).toBe(true)
-    expect(pipe.transform('http://www.site.com:8008?test/ok/test%20test')).toBe(true)
-
-
+    expect(pipe.transform('http://www.site.com:8008?test/ok/test%20test')).toBe(
+      true
+    )
   })
 
   it('should return false if is an invalid url', () => {
@@ -26,4 +25,3 @@ describe('IsUrlWithProtocolPipe', () => {
     expect(pipe.transform('https://url')).toBe(false)
   })
 })
-
