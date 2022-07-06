@@ -14,7 +14,7 @@ import { CopyOnClickComponent } from './components/copy-on-click/copy-on-click.c
 import { OfflineMessageComponent } from './components/offline-message/offline-message.component'
 import { ShowingOfComponent } from './components/showing-of/showing-of.component'
 import { CopyOnClickDirective } from './directives/copy-on-click/copy-on-click.directive'
-import { AffiliationTypeLabelPipe } from './pipes/affiliation-type-label.pipe'
+import { AffiliationTypeLabelPipe } from './pipes/affiliation-type/affiliation-type-label.pipe'
 import { CityRegionCountry } from './pipes/city-region-country/city-region-country.pipe'
 import { FormatBibtex } from './pipes/format-bibtex/format-bibtex.pipe'
 import { ContributorsPipe } from './pipes/contributors-pipe/contributors.pipe'
@@ -33,7 +33,10 @@ import { TrailingZerosPipe } from './pipes/trailing-zeros/trailing-zeros.pipe'
 import { VisibilityStringLabelPipe } from './pipes/visibility-string-label/visibility-string-label.pipe'
 import { DisableRolePipe } from './pipes/disabled-role/disable-role.pipe'
 import { RoleTranslationPipe } from './pipes/role-translation/role-translation.pipe'
-import { RecordHolderRolesPipe } from './pipes/record-holder-roles/record-holder-roles.pipe'
+import { RecordHolderRolesPipe } from './pipes/record-holder-roles/record-holder-roles.pipe';
+import { IsUrlPipe } from './pipes/is-url/is-url.pipe';
+import { IsUrlWithProtocolPipe } from './pipes/is-url-with-protocol/is-url-with-protocol.pipe'
+import { OrganizationLinkPipe } from './pipes/organization-link/organization-link.pipe';
 
 @NgModule({
   imports: [
@@ -68,6 +71,9 @@ import { RecordHolderRolesPipe } from './pipes/record-holder-roles/record-holder
     DisableRolePipe,
     RoleTranslationPipe,
     RecordHolderRolesPipe,
+    IsUrlPipe,
+    IsUrlWithProtocolPipe,
+    OrganizationLinkPipe,
   ],
   exports: [
     CommonModule,
@@ -100,6 +106,9 @@ import { RecordHolderRolesPipe } from './pipes/record-holder-roles/record-holder
     DisableRolePipe,
     RoleTranslationPipe,
     RecordHolderRolesPipe,
+    IsUrlPipe,
+    IsUrlWithProtocolPipe,
+    OrganizationLinkPipe,
   ],
   providers: [], // Should not provide anything
 })

@@ -16,18 +16,4 @@ export class OrgIdentifierComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  getLink(type: string, value: string) {
-    if (this.isUrl(value)) {
-      return value
-    } else {
-      return this._organizationsService.getLink(type, value)
-    }
-  }
-
-  /**
-   * RegEx function to check if the elements contains a URL
-   */
-  isUrl(element) {
-    return RegExp(URL_REGEXP_BACKEND).test(element)
-  }
 }
