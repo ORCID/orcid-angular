@@ -34,12 +34,6 @@ export class AffiliationComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  /**
-   * RegEx function to check if the elements contains a URL
-   */
-  isUrl(element) {
-    return RegExp(URL_REGEXP).test(element)
-  }
   private isAffiliationEndDateRangeShown(affiliation: Affiliation): boolean {
     return !(
       affiliation?.affiliationType.value === AffiliationType.distinction &&

@@ -54,13 +54,6 @@ export class WorkComponent implements OnInit {
     this.numberOfContributors = this.work?.numberOfContributors
   }
 
-  /**
-   * RegEx function to check if the elements contains a URL
-   */
-  isUrl(element): boolean {
-    return RegExp(URL_REGEXP).test(element)
-  }
-
   exportWork(work: Work) {
     this._recordWorksService
       .exportSelected([work.putCode.value])

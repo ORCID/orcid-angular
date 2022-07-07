@@ -84,14 +84,14 @@
     <div>
       <a
         class="underline"
-        *ngIf="isUrl(affiliation.url?.value)"
+        *ngIf="affiliation.url?.value | isUrl"
         rel="noopener noreferrer"
         target="_blank"
         href="{{ affiliation.url.value }}"
       >
         {{ affiliation.url.value }}
       </a>
-      <ng-container *ngIf="!isUrl(affiliation.url?.value)">
+      <ng-container *ngIf="!(affiliation.url?.value | isUrl)">
         {{ affiliation.url.value }}
       </ng-container>
     </div>

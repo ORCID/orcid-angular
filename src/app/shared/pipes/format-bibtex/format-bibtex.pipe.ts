@@ -5,8 +5,8 @@ import { Pipe, PipeTransform } from '@angular/core'
 })
 export class FormatBibtex implements PipeTransform {
   transform(text: string): string {
-    var bibtexParse = require('@orcid/bibtex-parse-js')
-    var formatted = bibtexParse.toBibtex(bibtexParse.toJSON(text), false)
+    const bibtexParse = require('@orcid/bibtex-parse-js')
+    const formatted = bibtexParse.toBibtex(bibtexParse.toJSON(text), false)
     return formatted.trim()
   }
 }

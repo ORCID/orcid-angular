@@ -238,10 +238,10 @@
               </div>
               <div *ngIf="item.url" class="description">
                 <h3 class="orc-font-body-small" i18n="@@shared.url">URL</h3>
-                <ng-container *ngIf="!isUrl(item.url)">
+                <ng-container *ngIf="!(item.url | isUrl)">
                   {{ item.url }}
                 </ng-container>
-                <ng-container *ngIf="isUrl(item.url)">
+                <ng-container *ngIf="item.url | isUrl">
                   <a
                     target="_blank"
                     rel="noopener noreferrer"

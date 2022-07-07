@@ -157,10 +157,6 @@ export class ResearchResourceComponent implements OnInit {
       })
   }
 
-  isUrl(value: string) {
-    return RegExp(URL_REGEXP).test(value)
-  }
-
   collapse(value: ResearchResource | Item) {
     value.showDetails = !value.showDetails
   }
