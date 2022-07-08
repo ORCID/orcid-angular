@@ -615,18 +615,27 @@
       </label>
     </div>
     <div class="input-container">
-      <mat-form-field appearance="outline" class="mat-form-field-min">
+      <mat-form-field
+        appearance="outline"
+        class="mat-form-field-min"
+        [ngClass]="{
+          'two-line-hint': selectedOrganizationFromDatabase?.value.length > 50
+        }"
+      >
         <input
           id="funding-agency-name-input"
           matInput
           formControlName="agencyName"
           [matAutocomplete]="auto"
         />
-        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-autocomplete
+          autoActiveFirstOption
+          #auto="matAutocomplete"
+          [displayWith]="autoCompleteDisplayOrganization"
+        >
           <mat-option
             *ngFor="let option of filteredOptions | async"
-            [value]="option.value"
-            (onSelectionChange)="fillForm(option)"
+            [value]="option"
           >
             <div class="row orc-font-body-small title">
               {{ option.value }}
@@ -636,6 +645,22 @@
             </div>
           </mat-option>
         </mat-autocomplete>
+        <mat-hint
+          *ngIf="selectedOrganizationFromDatabase && displayOrganizationHint"
+        >
+          <ng-container i18n="@@record.identifyAS">Identify as:</ng-container>
+          {{ selectedOrganizationFromDatabase.value }}
+        </mat-hint>
+        <mat-hint
+          *ngIf="
+            !selectedOrganizationFromDatabase &&
+            fundingForm.get('agencyName').value &&
+            displayOrganizationHint
+          "
+          i18n="@@record.unidentifiedOrganization"
+        >
+          Unidentified organization
+        </mat-hint>
         <button
           class="clear"
           matSuffix

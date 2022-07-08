@@ -186,7 +186,8 @@ export interface Organization {
   city: string
   country: string
   countryForDisplay: string
-  disambiguatedAffiliationIdentifier: string
+  disambiguatedFundingSourceId?: string
+  disambiguatedAffiliationIdentifier?: string
   orgType: string
   region: string
   sourceId: string
