@@ -77,8 +77,6 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
   isMobile: boolean
   filteredOptions: Observable<Organization[]>
   loadingFunding = true
-  startDateValid: boolean
-  endDateValid: boolean
   countryCodes: { key: string; value: string }[]
   loadingCountryCodes = true
   fundingType = ''

@@ -39,11 +39,6 @@ export class AffiliationStacksGroupsComponent implements OnInit {
   @Input() isPublicRecord: string = null
   @Output() total: EventEmitter<any> = new EventEmitter()
 
-  expandedEducation: boolean
-  expandedEmployment: boolean
-  expandedInvited: boolean
-  expandedMembership: boolean
-
   profileAffiliationUiGroups: AffiliationUIGroup[]
   userRecord: UserRecord
 

@@ -52,8 +52,6 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
   loadingCountryCodes = true
   loadingAffiliations = true
   isMobile: boolean
-  startDateValid: boolean
-  endDateValid: boolean
   defaultVisibility: VisibilityStrings
   filteredOptions: Observable<Organization[]>
 
