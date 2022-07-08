@@ -281,45 +281,43 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
   }
 
   private listenFormChanges() {
-    this.filteredOptions = this.fundingForm
-      .get('agencyName')
-      .valueChanges.pipe(
-        tap((organization: string | Organization) => {
-          // Auto fill form when the user select an organization from the autocomplete list
-          if (
-            typeof organization === 'object' &&
-            organization.disambiguatedAffiliationIdentifier
-          ) {
-            this.selectedOrganizationFromDatabase = organization
-            this.displayOrganizationHint = true
-            this.fillForm(organization)
-          }
-          if (!organization) {
-            this.selectedOrganizationFromDatabase = undefined
-            this.displayOrganizationHint = false
-            this.fundingForm.patchValue({
-              city: '',
-              region: '',
-              country: '',
+    this.filteredOptions = this.fundingForm.get('agencyName').valueChanges.pipe(
+      tap((organization: string | Organization) => {
+        // Auto fill form when the user select an organization from the autocomplete list
+        if (
+          typeof organization === 'object' &&
+          organization.disambiguatedAffiliationIdentifier
+        ) {
+          this.selectedOrganizationFromDatabase = organization
+          this.displayOrganizationHint = true
+          this.fillForm(organization)
+        }
+        if (!organization) {
+          this.selectedOrganizationFromDatabase = undefined
+          this.displayOrganizationHint = false
+          this.fundingForm.patchValue({
+            city: '',
+            region: '',
+            country: '',
+          })
+        }
+      }),
+      switchMap((organization: string | Organization) => {
+        if (
+          typeof organization === 'string' &&
+          !this.selectedOrganizationFromDatabase
+        ) {
+          // Display matching organization based on the user string input
+          return this._filter((organization as string) || '').pipe(
+            tap((x) => {
+              this.displayOrganizationHint = true
             })
-          }
-        }),
-        switchMap((organization: string | Organization) => {
-          if (
-            typeof organization === 'string' &&
-            !this.selectedOrganizationFromDatabase
-          ) {
-            // Display matching organization based on the user string input
-            return this._filter((organization as string) || '').pipe(
-              tap((x) => {
-                this.displayOrganizationHint = true
-              })
-            )
-          } else {
-            // Do not display options once the user has selected an Organization
-            return of([])
-          }
-        })
+          )
+        } else {
+          // Do not display options once the user has selected an Organization
+          return of([])
+        }
+      })
     )
 
     this.fundingForm.get('amount').valueChanges.subscribe((value) => {
@@ -535,10 +533,14 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
         value: this.selectedOrganizationFromDatabase.value,
       }
       funding.disambiguatedFundingSourceId = {
-        value: this.disambiguatedFundingSourceId || this.selectedOrganizationFromDatabase.sourceId,
+        value:
+          this.disambiguatedFundingSourceId ||
+          this.selectedOrganizationFromDatabase.sourceId,
       }
       funding.disambiguationSource = {
-        value: this.disambiguatedFundingSource || this.selectedOrganizationFromDatabase.sourceType,
+        value:
+          this.disambiguatedFundingSource ||
+          this.selectedOrganizationFromDatabase.sourceType,
       }
     } else {
       funding.fundingName = {
