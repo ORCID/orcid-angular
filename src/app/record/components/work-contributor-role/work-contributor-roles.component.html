@@ -33,7 +33,7 @@
                 [value]="contributionRole.key"
                 [disabled]="contributionRole.key | disableRole: role"
               >
-                {{ contributionRole.translation }}
+                {{ contributionRole.translation | titlecase }}
               </mat-option>
             </mat-select>
             <mat-error
