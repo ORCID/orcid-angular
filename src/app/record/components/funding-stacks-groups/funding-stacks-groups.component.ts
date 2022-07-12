@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
-import { Subject } from 'rxjs'
+import { Observable, Subject } from 'rxjs'
 import { first, takeUntil } from 'rxjs/operators'
 import { UserService } from 'src/app/core'
 import { RecordCountriesService } from 'src/app/core/record-countries/record-countries.service'
@@ -22,8 +22,8 @@ import { UserInfo } from '../../../types'
   styleUrls: ['./funding-stacks-groups.component.scss'],
 })
 export class FundingStacksGroupsComponent implements OnInit {
-  labelAddButton = $localize`:@@shared.addFunding:Add Funding`
-  labelSortButton = $localize`:@@shared.sortFundings:Sort Fundings`
+  $loading: Observable<boolean>
+
   @Input() userInfo: UserInfo
   @Input() isPublicRecord: any = false
   @Input() expandedContent: MainPanelsState
@@ -38,6 +38,8 @@ export class FundingStacksGroupsComponent implements OnInit {
   fundings: FundingGroup[] = []
 
   ngOrcidFunding = $localize`:@@shared.funding:Funding`
+  labelAddButton = $localize`:@@shared.addFunding:Add Funding`
+  labelSortButton = $localize`:@@shared.sortFundings:Sort Fundings`
   countryCodes: { key: string; value: string }[]
   loading = true
 
@@ -53,6 +55,7 @@ export class FundingStacksGroupsComponent implements OnInit {
   }
 
   private getRecord() {
+    this.$loading = this._recordFundingsService.$loading
     this._userSession
       .getUserSession()
       .pipe(takeUntil(this.$destroy))
