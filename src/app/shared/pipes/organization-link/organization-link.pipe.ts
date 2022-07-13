@@ -6,10 +6,12 @@ import { URL_REGEXP_BACKEND, WHITE_SPACE_REGEXP } from '../../../constants'
 })
 export class OrganizationLinkPipe implements PipeTransform {
   transform(type: string, value: string): string {
-    if (this.isUrl(value)) {
-      return value
-    } else {
-      return this.getLink(type, value)
+    if (value) {
+      if (this.isUrl(value)) {
+        return value
+      } else {
+        return this.getLink(type, value)
+      }
     }
   }
 
