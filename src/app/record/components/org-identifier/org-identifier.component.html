@@ -77,26 +77,23 @@
         class="underline"
         target="_blank"
         rel="noopener noreferrer"
-        href="{{
-            org.identifierType
-              | organizationLink: org.preferred
-          }}"
+        href="{{ org.identifierType | organizationLink: org.preferred }}"
         *ngIf="
-            org.identifierType
-              | organizationLink: org.preferred
-              | isUrlWithProtocol
-          "
+          org.identifierType
+            | organizationLink: org.preferred
+            | isUrlWithProtocol
+        "
       >
         {{ org.preferred }}
       </a>
       <ng-container
         *ngIf="
-            !(
-              org.identifierType
-              | organizationLink: org.preferred
-              | isUrlWithProtocol
-            )
-          "
+          !(
+            org.identifierType
+            | organizationLink: org.preferred
+            | isUrlWithProtocol
+          )
+        "
       >
         {{ org.preferred }}
       </ng-container>
