@@ -23,25 +23,24 @@ describe('OAuth cypress tests', async function () {
     scope +
     '&redirect_uri=https://example.com/subpath&parameter=true'
 
-
   before(() => {
     cy.visit(authorizationLink)
     cy.wait(2000) //need to wait for the redirect to take effect
   })
 
   it('TC#23 Authorization link with parameter', function () {
-     //sign in
-     cy.signin(recordOwner)
-     cy.wait(2000) //need to wait for the redirect to take effect
-     cy.url().then((urlString) => {
-       cy.url().should('contain', 'qa.orcid.org/oauth/authorize?')
-     })
-     cy.get('#authorize-button').click()
-     cy.wait(2000) //wait to be redirected
-     cy.url().then((urlString) => {
-       cy.url().should('include', userData.cyOAuth_MemberUser.redirect_uri_tc22)
-       cy.url().should('not.include', '&parameter=true')
-     })
+    //sign in
+    cy.signin(recordOwner)
+    cy.wait(2000) //need to wait for the redirect to take effect
+    cy.url().then((urlString) => {
+      cy.url().should('contain', 'qa.orcid.org/oauth/authorize?')
+    })
+    cy.get('#authorize-button').click()
+    cy.wait(2000) //wait to be redirected
+    cy.url().then((urlString) => {
+      cy.url().should('include', userData.cyOAuth_MemberUser.redirect_uri_tc22)
+      cy.url().should('not.include', '&parameter=true')
+    })
   })
 
   after(() => {})
