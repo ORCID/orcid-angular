@@ -9,7 +9,7 @@
   $background: map-get($theme, background);
   $config: mat-typography-config();
 
-  .required {
+  .error {
     color: map-get($foreground, 'state-warning-dark');
   }
 }
