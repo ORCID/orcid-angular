@@ -316,6 +316,10 @@ export class WorkFormComponent implements OnInit {
         formGroup
       )
     })
+
+    formGroup.controls.externalIdentifierUrl.valueChanges.subscribe((value) => {
+      this.manageWorkIdentifierUrlUpdates(formGroup, value)
+    })
   }
 
   private manageWorkIdentifierTypeUpdates(
@@ -323,9 +327,7 @@ export class WorkFormComponent implements OnInit {
     formGroup: FormGroup
   ) {
     if (externalIdentifierType !== '') {
-      formGroup.controls.externalIdentifierId.setValidators([
-        Validators.required,
-      ])
+      formGroup.controls.externalIdentifierId.addValidators(Validators.required)
       formGroup.controls.externalIdentifierId.setAsyncValidators(
         this.externalIdentifierTypeAsyncValidator(
           formGroup,
@@ -341,25 +343,33 @@ export class WorkFormComponent implements OnInit {
         formGroup.controls.externalRelationship.setValue(suggestedRelationship)
       }
     } else {
-      formGroup.controls.externalIdentifierId.clearValidators()
-      formGroup.controls.externalIdentifierId.clearAsyncValidators()
-      formGroup.controls.externalIdentifierId.updateValueAndValidity()
+      if (!formGroup.controls.externalIdentifierUrl.value) {
+        formGroup.controls.externalIdentifierId.removeValidators(
+          Validators.required
+        )
+        formGroup.controls.externalIdentifierId.clearAsyncValidators()
+        formGroup.controls.externalIdentifierId.updateValueAndValidity()
+      }
     }
   }
 
   private manageWorkIdentifierIdUpdates(value: any, formGroup: FormGroup) {
     if (value) {
-      formGroup.controls.externalIdentifierType.setValidators([
-        Validators.required,
-      ])
+      formGroup.controls.externalIdentifierType.addValidators(
+        Validators.required
+      )
       formGroup.controls.externalIdentifierType.updateValueAndValidity({
         emitEvent: false,
       })
     } else {
-      formGroup.controls.externalIdentifierType.clearValidators()
-      formGroup.controls.externalIdentifierType.updateValueAndValidity({
-        emitEvent: false,
-      })
+      if (!formGroup.controls.externalIdentifierUrl.value) {
+        formGroup.controls.externalIdentifierType.removeValidators(
+          Validators.required
+        )
+        formGroup.controls.externalIdentifierType.updateValueAndValidity({
+          emitEvent: false,
+        })
+      }
     }
   }
 
@@ -381,6 +391,34 @@ export class WorkFormComponent implements OnInit {
         })
       }
     })
+  }
+
+  private manageWorkIdentifierUrlUpdates(
+    formGroup: FormGroup,
+    value: string
+  ): void {
+    if (value) {
+      formGroup.controls.externalIdentifierType.addValidators(
+        Validators.required
+      )
+      formGroup.controls.externalIdentifierType.updateValueAndValidity()
+      formGroup.controls.externalIdentifierId.addValidators(Validators.required)
+      formGroup.controls.externalIdentifierId.updateValueAndValidity()
+    } else {
+      if (
+        !formGroup.controls.externalIdentifierType.value &&
+        !formGroup.controls.externalIdentifierId.value
+      ) {
+        formGroup.controls.externalIdentifierType.removeValidators(
+          Validators.required
+        )
+        formGroup.controls.externalIdentifierType.updateValueAndValidity()
+        formGroup.controls.externalIdentifierId.removeValidators(
+          Validators.required
+        )
+        formGroup.controls.externalIdentifierId.updateValueAndValidity()
+      }
+    }
   }
 
   addOtherWorkId(existingExternalId?: ExternalIdentifier) {
