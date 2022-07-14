@@ -15,7 +15,7 @@
         class="mat-caption"
         [ngClass]="{
           error:
-            externalIdForm.hasError('required', 'externalIdentifierType') &&
+            externalIdForm.get('externalIdentifierType').hasError('required') &&
             externalIdForm.get('externalIdentifierType').touched
         }"
       >
@@ -33,10 +33,6 @@
           formControlName="externalIdentifierType"
           (selectionChange)="updateExternal($event)"
         >
-          <mat-option [value]="''" i18n="@@works.selectAnIdentifier">
-            Select an identifier type
-          </mat-option>
-
           <mat-option *ngFor="let item of workIdTypes" [value]="item.name">
             {{ item.description }}
           </mat-option>
@@ -45,6 +41,14 @@
           >The type of identifier associated with the work, such as an ISBN, DOI
           or PMID.
         </mat-hint>
+        <mat-error
+          *ngIf="
+          externalIdForm.get('externalIdentifierType').hasError('required') &&
+          externalIdForm.get('externalIdentifierType').touched
+        "
+          i18n="@@works.pleaseSelectIdentifierType"
+        >Please select an identifier type</mat-error
+        >
       </mat-form-field>
     </div>
   </div>
@@ -135,7 +139,9 @@
         for="external-identifier-url-input"
         class="mat-caption"
         [ngClass]="{
-          error: externalIdForm.get('externalIdentifierUrl').hasError('pattern')
+          error:
+            externalIdForm.get('externalIdentifierUrl').hasError('pattern') &&
+            externalIdForm.get('externalIdentifierUrl').touched
         }"
       >
         <strong i18n="@@works.identifierUrl">Identifier URL </strong>
