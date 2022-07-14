@@ -21,8 +21,9 @@
     }
 
     .delete-button {
-      justify-content: flex-end;
       display: flex;
+      justify-content: flex-end;
+      padding: 0;
     }
   }
 }
