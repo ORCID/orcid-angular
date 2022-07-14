@@ -43,11 +43,11 @@
         </mat-hint>
         <mat-error
           *ngIf="
-          externalIdForm.get('externalIdentifierType').hasError('required') &&
-          externalIdForm.get('externalIdentifierType').touched
-        "
+            externalIdForm.get('externalIdentifierType').hasError('required') &&
+            externalIdForm.get('externalIdentifierType').touched
+          "
           i18n="@@works.pleaseSelectIdentifierType"
-        >Please select an identifier type</mat-error
+          >Please select an identifier type</mat-error
         >
       </mat-form-field>
     </div>

@@ -318,7 +318,7 @@ export class WorkFormComponent implements OnInit {
     })
 
     formGroup.controls.externalIdentifierUrl.valueChanges.subscribe((value) => {
-     this.manageWorkIdentifierUrlUpdates(formGroup, value)
+      this.manageWorkIdentifierUrlUpdates(formGroup, value)
     })
   }
 
@@ -344,7 +344,9 @@ export class WorkFormComponent implements OnInit {
       }
     } else {
       if (!formGroup.controls.externalIdentifierUrl.value) {
-        formGroup.controls.externalIdentifierId.removeValidators(Validators.required)
+        formGroup.controls.externalIdentifierId.removeValidators(
+          Validators.required
+        )
         formGroup.controls.externalIdentifierId.clearAsyncValidators()
         formGroup.controls.externalIdentifierId.updateValueAndValidity()
       }
@@ -353,13 +355,17 @@ export class WorkFormComponent implements OnInit {
 
   private manageWorkIdentifierIdUpdates(value: any, formGroup: FormGroup) {
     if (value) {
-      formGroup.controls.externalIdentifierType.addValidators(Validators.required)
+      formGroup.controls.externalIdentifierType.addValidators(
+        Validators.required
+      )
       formGroup.controls.externalIdentifierType.updateValueAndValidity({
         emitEvent: false,
       })
     } else {
       if (!formGroup.controls.externalIdentifierUrl.value) {
-        formGroup.controls.externalIdentifierType.removeValidators(Validators.required)
+        formGroup.controls.externalIdentifierType.removeValidators(
+          Validators.required
+        )
         formGroup.controls.externalIdentifierType.updateValueAndValidity({
           emitEvent: false,
         })
@@ -387,17 +393,29 @@ export class WorkFormComponent implements OnInit {
     })
   }
 
-  private manageWorkIdentifierUrlUpdates(formGroup: FormGroup, value: string): void {
+  private manageWorkIdentifierUrlUpdates(
+    formGroup: FormGroup,
+    value: string
+  ): void {
     if (value) {
-      formGroup.controls.externalIdentifierType.addValidators(Validators.required)
+      formGroup.controls.externalIdentifierType.addValidators(
+        Validators.required
+      )
       formGroup.controls.externalIdentifierType.updateValueAndValidity()
       formGroup.controls.externalIdentifierId.addValidators(Validators.required)
       formGroup.controls.externalIdentifierId.updateValueAndValidity()
     } else {
-      if (!formGroup.controls.externalIdentifierType.value && !formGroup.controls.externalIdentifierId.value) {
-        formGroup.controls.externalIdentifierType.removeValidators(Validators.required)
+      if (
+        !formGroup.controls.externalIdentifierType.value &&
+        !formGroup.controls.externalIdentifierId.value
+      ) {
+        formGroup.controls.externalIdentifierType.removeValidators(
+          Validators.required
+        )
         formGroup.controls.externalIdentifierType.updateValueAndValidity()
-        formGroup.controls.externalIdentifierId.removeValidators(Validators.required)
+        formGroup.controls.externalIdentifierId.removeValidators(
+          Validators.required
+        )
         formGroup.controls.externalIdentifierId.updateValueAndValidity()
       }
     }
