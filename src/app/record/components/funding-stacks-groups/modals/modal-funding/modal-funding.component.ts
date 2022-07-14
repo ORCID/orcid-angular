@@ -565,10 +565,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       this._formBuilder.group({
         grantNumber: [
           existingGrant?.externalIdentifierId?.value || '',
-          [
-            Validators.required,
-            Validators.maxLength(MAX_LENGTH_LESS_THAN_TWO_THOUSAND_EIGHTY_FOUR),
-          ],
+          [Validators.maxLength(MAX_LENGTH_LESS_THAN_TWO_THOUSAND_EIGHTY_FOUR)],
         ],
         grantUrl: [
           existingGrant?.url?.value || '',
@@ -641,14 +638,16 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
     const formGroup = this.grantsArray.controls[index] as FormGroup
     formGroup.controls.grantNumber.valueChanges.subscribe((value) => {
       if (value) {
-        formGroup.controls.grantNumber.setValidators([
-          Validators.maxLength(MAX_LENGTH_LESS_THAN_TWO_THOUSAND_EIGHTY_FOUR),
-        ])
+        formGroup.controls.grantNumber.addValidators(
+          Validators.maxLength(MAX_LENGTH_LESS_THAN_TWO_THOUSAND_EIGHTY_FOUR)
+        )
         formGroup.controls.grantNumber.updateValueAndValidity({
           emitEvent: false,
         })
       } else {
-        formGroup.controls.grantNumber.clearValidators()
+        formGroup.controls.grantNumber.removeValidators(
+          Validators.maxLength(MAX_LENGTH_LESS_THAN_TWO_THOUSAND_EIGHTY_FOUR)
+        )
         formGroup.controls.grantNumber.updateValueAndValidity({
           emitEvent: false,
         })
@@ -657,6 +656,10 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
 
     formGroup.controls.grantUrl.valueChanges.subscribe((value) => {
       if (value) {
+        formGroup.controls.grantNumber.addValidators(Validators.required)
+        formGroup.controls.grantNumber.updateValueAndValidity({
+          emitEvent: false,
+        })
         formGroup.controls.grantUrl.setValidators([
           Validators.pattern(URL_REGEXP),
           Validators.maxLength(MAX_LENGTH_LESS_THAN_TWO_THOUSAND),
@@ -665,6 +668,8 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
           emitEvent: false,
         })
       } else {
+        formGroup.controls.grantNumber.removeValidators(Validators.required)
+        formGroup.controls.grantNumber.updateValueAndValidity()
         formGroup.controls.grantUrl.clearValidators()
         formGroup.controls.grantUrl.updateValueAndValidity({
           emitEvent: false,

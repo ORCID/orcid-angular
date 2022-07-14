@@ -11,9 +11,16 @@
   <!-- Grant number value -->
   <div>
     <div class="row">
-      <label for="grant-number-input" class="mat-caption">
+      <label
+        for="grant-number-input"
+        class="mat-caption"
+        [ngClass]="{
+          error:
+            grantForm?.hasError('required', 'grantNumber') &&
+            grantForm?.get('grantNumber').touched
+        }"
+      >
         <strong i18n="@@funding.grantNumber">Grant number</strong>
-        <span class="required">*</span>
       </label>
     </div>
     <mat-form-field
@@ -90,7 +97,6 @@
         }"
       >
         <strong i18n="@@shared.relationship">Relationship</strong>
-        <span class="required">*</span>
       </label>
     </div>
 
