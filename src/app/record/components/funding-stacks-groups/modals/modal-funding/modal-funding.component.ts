@@ -565,9 +565,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       this._formBuilder.group({
         grantNumber: [
           existingGrant?.externalIdentifierId?.value || '',
-          [
-            Validators.maxLength(MAX_LENGTH_LESS_THAN_TWO_THOUSAND_EIGHTY_FOUR)
-          ],
+          [Validators.maxLength(MAX_LENGTH_LESS_THAN_TWO_THOUSAND_EIGHTY_FOUR)],
         ],
         grantUrl: [
           existingGrant?.url?.value || '',
@@ -660,7 +658,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       if (value) {
         formGroup.controls.grantNumber.addValidators(Validators.required)
         formGroup.controls.grantNumber.updateValueAndValidity({
-          emitEvent: false
+          emitEvent: false,
         })
         formGroup.controls.grantUrl.setValidators([
           Validators.pattern(URL_REGEXP),
