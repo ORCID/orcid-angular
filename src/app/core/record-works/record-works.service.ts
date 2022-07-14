@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { EMPTY, Observable, of, ReplaySubject } from 'rxjs'
+import { BehaviorSubject, EMPTY, Observable, of, ReplaySubject } from 'rxjs'
 import {
   catchError,
   first,
@@ -51,6 +51,11 @@ export class RecordWorksService {
 
   userRecordOptions: UserRecordOptions = {}
 
+  private _$loading = new BehaviorSubject<boolean>(true)
+  public get $loading() {
+    return this._$loading.asObservable()
+  }
+
   constructor(
     private _togglz: TogglzService,
     private _http: HttpClient,
@@ -100,6 +105,7 @@ export class RecordWorksService {
     this.sortOrder = options.sort
     this.sortAsc = options.sortAsc
 
+    this._$loading.next(true)
     this._togglz
       .getStateOf('ORCID_ANGULAR_WORKS_CONTRIBUTORS')
       .pipe(
@@ -145,6 +151,7 @@ export class RecordWorksService {
           return data
         }),
         tap((data) => {
+          this._$loading.next(false)
           this.lastEmittedValue = data
           this.$workSubject.next(data)
         }),
