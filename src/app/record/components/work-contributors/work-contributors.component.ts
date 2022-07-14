@@ -134,9 +134,9 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
     const affiliationUIGroup = this.userRecord?.affiliations?.find(
       (value) => value.type === 'EMPLOYMENT'
     ).affiliationGroup
-    const defaultAffiliation = affiliationUIGroup?.filter(
-      (value) => !value.defaultAffiliation?.endDate?.year
-    ).map((value => value.defaultAffiliation?.affiliationName?.value))
+    const defaultAffiliation = affiliationUIGroup
+      ?.filter((value) => !value.defaultAffiliation?.endDate?.year)
+      .map((value) => value.defaultAffiliation?.affiliationName?.value)
     this.affiliation = defaultAffiliation?.join(', ')
   }
 
