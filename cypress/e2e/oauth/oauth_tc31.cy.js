@@ -9,8 +9,8 @@ expected: user is taken to OAuth error page "invalid_grant / Redirect URI doesn'
 */
 
 describe('OAuth cypress tests', async function () {
-  const errorMessage_unregistered_uri = 
-  "does not match the redirect URIs registered by"
+  const errorMessage_unregistered_uri =
+    'does not match the redirect URIs registered by'
 
   const recordOwner = userData.cyOAuth_RecordOwnerTC31
   const scope = '/read-limited'
