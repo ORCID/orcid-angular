@@ -643,7 +643,11 @@ export class WorkFormComponent implements OnInit {
     const rolesFormArray = this.workForm.get('roles') as FormArray
     const roles = rolesFormArray?.controls
       ?.filter((fg) => fg?.value?.role)
-      .map((formGroup) => formGroup?.value?.role)
+      .map((formGroup) => {
+        const role = formGroup?.value?.role
+        const value = this._workService.getContributionRoleByKey(role)?.value
+        return value ? value : role
+      })
     const recordHolderContribution = this.workForm.get('contributors')?.value[0]
     return [
       {
@@ -655,12 +659,11 @@ export class WorkFormComponent implements OnInit {
           path: recordHolderContribution?.contributorOrcid?.path,
         },
         rolesAndSequences: [
-          ...roles.map((r) => ({
-            contributorRole: this._workService.getContributionRoleByKey(r)
-              .value,
-          })),
-        ],
-      },
+          ...roles.map((role) => ({
+            contributorRole: role,
+          }))
+        ]
+      }
     ]
   }
 

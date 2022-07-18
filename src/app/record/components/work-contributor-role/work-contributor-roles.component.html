@@ -14,7 +14,7 @@
       <div class="row role">
         <div class="col l9 m8 s4 no-gutters orc-font-body-small">
           <ng-container *ngIf="role.disabled">
-            {{ role.get('role').value | roleTranslation: contributionRoles }}
+            {{ role.get('role').value | roleTranslation: contributionRoles | titlecase }}
           </ng-container>
           <mat-form-field
             *ngIf="!role.disabled"
