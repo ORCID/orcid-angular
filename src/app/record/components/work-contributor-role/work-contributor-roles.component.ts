@@ -1,4 +1,11 @@
-import { ChangeDetectorRef, Component, Input, OnInit, QueryList, ViewChildren } from '@angular/core'
+import {
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnInit,
+  QueryList,
+  ViewChildren,
+} from '@angular/core'
 import { Role } from '../../../types/works.endpoint'
 import {
   ControlContainer,
@@ -46,7 +53,7 @@ export class WorkContributorRolesComponent implements OnInit {
     private formBuilder: FormBuilder,
     private parentForm: FormGroupDirective,
     private workService: RecordWorksService
-) {}
+  ) {}
 
   get roles() {
     return this.parentForm.control.controls['roles'] as FormArray
