@@ -131,10 +131,18 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
   }
 
   private getAffiliation(): void {
-    this.affiliation = this.userRecord?.affiliations?.map(
-      affiliationUIGroup => affiliationUIGroup.affiliationGroup.filter(
-        affiliation => !affiliation.defaultAffiliation?.endDate?.year).map(
-        affiliation => affiliation.defaultAffiliation?.affiliationName?.value))?.join(', ')
+    this.affiliation = this.userRecord?.affiliations
+      ?.map((affiliationUIGroup) =>
+        affiliationUIGroup.affiliationGroup
+          .filter(
+            (affiliation) => !affiliation.defaultAffiliation?.endDate?.year
+          )
+          .map(
+            (affiliation) =>
+              affiliation.defaultAffiliation?.affiliationName?.value
+          )
+      )
+      ?.join(', ')
   }
 
   private getRecordHolderContribution(): Contributor {

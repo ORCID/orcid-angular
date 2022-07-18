@@ -5,7 +5,8 @@ import { UserInfo } from '../../../types'
 import { UserRecord } from '../../../types/record.local'
 import {
   Affiliation,
-  AffiliationGroup, AffiliationGroupsTypes,
+  AffiliationGroup,
+  AffiliationGroupsTypes,
 } from '../../../types/record-affiliation.endpoint'
 import {
   ControlContainer,
@@ -131,12 +132,12 @@ function getUserRecord(): UserRecord {
   } as NamesEndPoint
   const affiliationUIGroupEmployment = {
     defaultAffiliation: {
-      affiliationName: { value: 'ORCID' }
+      affiliationName: { value: 'ORCID' },
     } as Affiliation,
   } as AffiliationGroup
   const affiliationUIGroupMembership = {
     defaultAffiliation: {
-      affiliationName: { value: 'University' }
+      affiliationName: { value: 'University' },
     } as Affiliation,
   } as AffiliationGroup
   userRecord.affiliations = [
