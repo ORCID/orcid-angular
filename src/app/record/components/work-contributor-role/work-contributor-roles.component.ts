@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { ChangeDetectorRef, Component, Input, OnInit, QueryList, ViewChildren } from '@angular/core'
 import { Role } from '../../../types/works.endpoint'
 import {
   ControlContainer,
@@ -12,6 +12,7 @@ import { UserRecord } from '../../../types/record.local'
 import { unique } from '../../../shared/validators/unique/unique.validator'
 import { RecordWorksService } from '../../../core/record-works/record-works.service'
 import { tap } from 'rxjs/operators'
+import { MatSelect } from '@angular/material/select'
 
 @Component({
   selector: 'app-work-contributor-roles',
@@ -22,6 +23,8 @@ import { tap } from 'rxjs/operators'
   ],
 })
 export class WorkContributorRolesComponent implements OnInit {
+  @ViewChildren('roleSelect') inputs: QueryList<MatSelect>
+
   _contributors: Contributor[]
   @Input() userRecord: UserRecord
 
@@ -39,10 +42,11 @@ export class WorkContributorRolesComponent implements OnInit {
   }
 
   constructor(
+    private changeDetectorRef: ChangeDetectorRef,
     private formBuilder: FormBuilder,
     private parentForm: FormGroupDirective,
     private workService: RecordWorksService
-  ) {}
+) {}
 
   get roles() {
     return this.parentForm.control.controls['roles'] as FormArray
@@ -58,6 +62,9 @@ export class WorkContributorRolesComponent implements OnInit {
 
   addRole(): void {
     this.roles.push(this.getRoleForm())
+    this.changeDetectorRef.detectChanges()
+    const input = this.inputs.last
+    input.focus()
   }
 
   deleteRole(roleIndex: number): void {
