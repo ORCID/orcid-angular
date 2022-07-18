@@ -126,7 +126,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
             Validators.required,
             OrcidValidators.patternAfterTrimming(URL_REGEXP),
             this.allUrlsAreUnique(website.putCode),
-            Validators.maxLength(this.urlMaxLength)
+            Validators.maxLength(this.urlMaxLength),
           ],
           updateOn: 'change',
         }),
@@ -209,7 +209,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
             Validators.required,
             OrcidValidators.patternAfterTrimming(URL_REGEXP),
             this.allUrlsAreUnique(newPutCode),
-            Validators.maxLength(this.urlMaxLength)
+            Validators.maxLength(this.urlMaxLength),
           ],
           updateOn: 'change',
         }),
