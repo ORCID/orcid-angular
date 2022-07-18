@@ -160,6 +160,16 @@
                   >
                     An URL is required
                   </mat-error>
+
+                  <mat-error 
+                  *ngIf="
+                      websitesForm
+                        .get(website.putCode)
+                        .hasError('maxlength', 'url')
+                    ">
+                    Must be less than 2000 characters
+                  </mat-error>
+
                   <mat-error
                     *ngIf="
                       websitesForm

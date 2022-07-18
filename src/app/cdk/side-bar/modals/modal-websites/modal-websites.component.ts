@@ -57,7 +57,8 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
   screenDirection = 'ltr'
   addedWebsiteCount = 0
   loadingWebsites = true
-  urlMaxLength = 354
+  urlMaxLength = 1999
+  urlTitleMaxLength = 354
 
   ngOrcidDescription = $localize`:@@topBar.description:Link Title`
   ngOrcidUrl = $localize`:@@topBar.url:Link URL`
@@ -116,7 +117,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
         description: new FormControl(
           website.urlName == null ? '' : website.urlName.trim(),
           {
-            validators: [Validators.maxLength(this.urlMaxLength)],
+            validators: [Validators.maxLength(this.urlTitleMaxLength)],
             updateOn: 'change',
           }
         ),
@@ -125,6 +126,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
             Validators.required,
             OrcidValidators.patternAfterTrimming(URL_REGEXP),
             this.allUrlsAreUnique(website.putCode),
+            Validators.maxLength(this.urlMaxLength)
           ],
           updateOn: 'change',
         }),
@@ -199,7 +201,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
       newPutCode,
       new FormGroup({
         description: new FormControl('', {
-          validators: [Validators.maxLength(this.urlMaxLength)],
+          validators: [Validators.maxLength(this.urlTitleMaxLength)],
           updateOn: 'change',
         }),
         url: new FormControl('', {
@@ -207,6 +209,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
             Validators.required,
             OrcidValidators.patternAfterTrimming(URL_REGEXP),
             this.allUrlsAreUnique(newPutCode),
+            Validators.maxLength(this.urlMaxLength)
           ],
           updateOn: 'change',
         }),
