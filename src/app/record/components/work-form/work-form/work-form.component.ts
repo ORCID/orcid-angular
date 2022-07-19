@@ -661,9 +661,9 @@ export class WorkFormComponent implements OnInit {
         rolesAndSequences: [
           ...roles.map((role) => ({
             contributorRole: role,
-          }))
-        ]
-      }
+          })),
+        ],
+      },
     ]
   }
 
