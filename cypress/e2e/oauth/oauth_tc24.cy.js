@@ -12,16 +12,14 @@ expected: user is taken to authorization screen
 */
 
 describe('OAuth cypress tests', async function () {
-  
   const scope = '/read-limited'
   const authorizationLink =
-  'https://qa.orcid.org/oauth/authorize?client_id=' +
-  userData.cyOAuth_MemberUser.clientID +
-  '&response_type=code&scope=/activities/update%20/person/update&redirect_uri=' +
-  userData.cyOAuth_MemberUser.redirect_uri
+    'https://qa.orcid.org/oauth/authorize?client_id=' +
+    userData.cyOAuth_MemberUser.clientID +
+    '&response_type=code&scope=/activities/update%20/person/update&redirect_uri=' +
+    userData.cyOAuth_MemberUser.redirect_uri
 
-  before(() => {
-  })
+  before(() => {})
 
   it('TC#24 sign out from authorization screen and sign in with different account', function () {
     cy.visit(authorizationLink)
@@ -38,7 +36,7 @@ describe('OAuth cypress tests', async function () {
     cy.signin(userData.cyOAuth_RecordOwnerTC31)
     cy.wait(2000) //need to wait for the redirect to complete
     cy.url().then((urlString) => {
-     cy.url().should('contain', 'qa.orcid.org/oauth/authorize?')
+      cy.url().should('contain', 'qa.orcid.org/oauth/authorize?')
     })
   })
 
