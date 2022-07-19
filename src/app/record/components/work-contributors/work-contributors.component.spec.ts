@@ -6,6 +6,7 @@ import { UserRecord } from '../../../types/record.local'
 import {
   Affiliation,
   AffiliationGroup,
+  AffiliationGroupsTypes,
 } from '../../../types/record-affiliation.endpoint'
 import {
   ControlContainer,
@@ -116,7 +117,7 @@ describe('WorkContributorsComponent', () => {
       'Name Surname (Conceptualization, Unspecified, Methodology)'
     )
     expect(affiliation.innerHTML).not.toBeNull()
-    expect(affiliation.textContent).toBe('ORCID')
+    expect(affiliation.textContent).toBe('ORCID, University')
   })
 })
 
@@ -129,14 +130,24 @@ function getUserRecord(): UserRecord {
     givenNames: { value: 'Name' },
     familyName: { value: 'Surname' },
   } as NamesEndPoint
-  const affiliation = { affiliationName: { value: 'ORCID' } } as Affiliation
-  const affiliationUIGroup = {
-    defaultAffiliation: affiliation,
+  const affiliationUIGroupEmployment = {
+    defaultAffiliation: {
+      affiliationName: { value: 'ORCID' },
+    } as Affiliation,
+  } as AffiliationGroup
+  const affiliationUIGroupMembership = {
+    defaultAffiliation: {
+      affiliationName: { value: 'University' },
+    } as Affiliation,
   } as AffiliationGroup
   userRecord.affiliations = [
     {
-      type: 'EMPLOYMENT',
-      affiliationGroup: [affiliationUIGroup],
+      type: AffiliationGroupsTypes.EMPLOYMENT,
+      affiliationGroup: [affiliationUIGroupEmployment],
+    },
+    {
+      type: AffiliationGroupsTypes.MEMBERSHIP,
+      affiliationGroup: [affiliationUIGroupMembership],
     },
   ]
   return userRecord
