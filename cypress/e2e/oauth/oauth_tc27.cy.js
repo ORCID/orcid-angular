@@ -17,7 +17,7 @@ expected: OAuth session must not be revived at this stage
 
 describe('OAuth cypress tests', async function () {
   const recordOwner = userData.cyOAuth_RecordOwnerTC_Sessions
-  const scope = '/person/update' 
+  const scope = '/person/update'
   const authorizationLink =
     'https://qa.orcid.org/oauth/authorize?client_id=' +
     userData.cyOAuth_MemberUser.clientID +
@@ -26,8 +26,7 @@ describe('OAuth cypress tests', async function () {
     '&redirect_uri=' +
     userData.cyOAuth_MemberUser.redirect_uri
 
-  before(() => {
-  })
+  before(() => {})
 
   it('TC#27 OAuth session must end once user denies access', function () {
     cy.visit(authorizationLink)
@@ -40,15 +39,18 @@ describe('OAuth cypress tests', async function () {
     cy.wait(2000) //wait to be redirected
     //verify user is taken to redirect_uri with appended authorization code
     cy.url().then((urlString) => {
-      cy.url().should('include', '?error=access_denied&error_description=User%20denied%20access')
+      cy.url().should(
+        'include',
+        '?error=access_denied&error_description=User%20denied%20access'
+      )
     })
     cy.visit('https://qa.orcid.org/signout')
     //verify user is redirected to Sign in page
     cy.url().should('contain', Cypress.env('signInURL'))
     cy.signin(recordOwner)
     cy.wait(2000) //need to wait for the redirect to complete
-     //verify user taken to my orcid
-     cy.url().then((urlString) => {
+    //verify user taken to my orcid
+    cy.url().then((urlString) => {
       cy.url().should('include', 'my-orcid?orcid=')
     })
   })
