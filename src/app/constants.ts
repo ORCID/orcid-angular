@@ -243,7 +243,14 @@ export function GetFormErrors(form: AbstractControl) {
     const formErrors = groupErrors ? { groupErrors } : {}
     Object.keys(form.controls).forEach((key) => {
       const error = GetFormErrors(form.get(key))
-      if (error !== null) {
+      if (error instanceof Array) {
+        error.forEach((e) => {
+          if (e !== null) {
+            formErrors[key] = error
+            return
+          }
+        })
+      } else if (error !== null) {
         formErrors[key] = error
       }
     })

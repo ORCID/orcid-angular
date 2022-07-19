@@ -101,11 +101,14 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
   private getDisabledRoles(): string[] {
     return this.rolesFormArray?.controls
       .filter((formGroup) => formGroup.disabled)
-      .map(
-        (formGroup) =>
-          this.workService.getContributionRoleByKey(formGroup?.value?.role)
-            .translation
-      )
+      .map((formGroup) => {
+        const role = formGroup?.value?.role
+        const translation = this.workService.getContributionRoleByKey(role)
+          ?.translation
+        return translation
+          ? translation
+          : role.charAt(0).toUpperCase() + role.slice(1)
+      })
   }
 
   private getEnabledRoles(): string[] {

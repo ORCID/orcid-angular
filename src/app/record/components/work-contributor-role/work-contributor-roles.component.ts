@@ -77,10 +77,7 @@ export class WorkContributorRolesComponent implements OnInit {
           if (rs?.contributorRole && role) {
             this.addRoleFormGroup(role.translation)
           } else {
-            this.addRoleFormGroup(
-              this.workService.getContributionRoleByKey('unspecified')
-                .translation
-            )
+            this.addRoleFormGroup(rs?.contributorRole)
           }
         })
       } else {

@@ -6,6 +6,7 @@ import { Role } from '../../../types/works.endpoint'
 })
 export class RoleTranslationPipe implements PipeTransform {
   transform(key: string, roles: Role[]): string {
-    return roles.find((role) => role.key === key).translation
+    const translation = roles.find((role) => role.key === key)?.translation
+    return translation ? translation : key
   }
 }
