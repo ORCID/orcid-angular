@@ -17,7 +17,7 @@ expected: OAuth session must not be revived at this stage
 
 describe('OAuth cypress tests', async function () {
   const recordOwner = userData.cyOAuth_RecordOwnerTC_Sessions
-  const scope = '/person/update' 
+  const scope = '/person/update'
   const authorizationLink =
     'https://qa.orcid.org/oauth/authorize?client_id=' +
     userData.cyOAuth_MemberUser.clientID +
@@ -26,8 +26,7 @@ describe('OAuth cypress tests', async function () {
     '&redirect_uri=' +
     userData.cyOAuth_MemberUser.redirect_uri
 
-  before(() => {
-  })
+  before(() => {})
 
   it('TC#26 OAuth session must end once user grants access, denies access, or moves away from the session', function () {
     cy.visit(authorizationLink)
@@ -48,8 +47,8 @@ describe('OAuth cypress tests', async function () {
     cy.url().should('contain', Cypress.env('signInURL'))
     cy.signin(recordOwner)
     cy.wait(2000) //need to wait for the redirect to complete
-     //verify user taken to my orcid
-     cy.url().then((urlString) => {
+    //verify user taken to my orcid
+    cy.url().then((urlString) => {
       cy.url().should('include', 'my-orcid?orcid=')
     })
   })
