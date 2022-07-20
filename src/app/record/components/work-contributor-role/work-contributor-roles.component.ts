@@ -91,16 +91,28 @@ export class WorkContributorRolesComponent implements OnInit {
           if (rs?.contributorRole && role) {
             this.addRoleFormGroup(role.translation, true)
           } else if (rs?.contributorRole != null) {
-            this.addRoleFormGroup(rs?.contributorRole , true)
+            this.addRoleFormGroup(rs?.contributorRole, true)
           } else {
-            this.addRoleFormGroup(this.workService.getContributionRoleByKey('no specified role').translation, false)
+            this.addRoleFormGroup(
+              this.workService.getContributionRoleByKey('no specified role')
+                .translation,
+              false
+            )
           }
         })
       } else {
-        this.addRoleFormGroup(this.workService.getContributionRoleByKey('no specified role').translation, false)
+        this.addRoleFormGroup(
+          this.workService.getContributionRoleByKey('no specified role')
+            .translation,
+          false
+        )
       }
     } else {
-      this.addRoleFormGroup(this.workService.getContributionRoleByKey('no specified role').translation, false)
+      this.addRoleFormGroup(
+        this.workService.getContributionRoleByKey('no specified role')
+          .translation,
+        false
+      )
     }
   }
 
