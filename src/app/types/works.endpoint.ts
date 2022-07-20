@@ -416,9 +416,9 @@ export const CitationTypes = {
 
 export const ContributionRoles: Role[] = [
   {
-    key: 'unspecified',
-    value: 'unspecified',
-    translation: $localize`:@@works.unspecified:Unspecified`,
+    key: 'no specified role',
+    value: null,
+    translation: $localize`:@@works.noSpecifiedRole:No specified role`,
   },
   {
     key: 'conceptualization',
