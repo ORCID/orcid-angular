@@ -36,6 +36,12 @@
       Invalid id for the selected identifier type
     </ng-container>
   </mat-error>
+  <mat-error
+    *ngIf="externalIdForm.get('externalIdentifierUrl').hasError('pattern')"
+    i18n="@@works.invalidUrl"
+  >
+    Invalid url
+  </mat-error>
 </div>
 <div class="controls">
   <a (click)="edit.emit()" i18n="@@shared.edit">Edit</a>
