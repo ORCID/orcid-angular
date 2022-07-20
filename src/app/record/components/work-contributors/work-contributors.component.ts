@@ -144,8 +144,10 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
             (affiliation) =>
               affiliation.defaultAffiliation?.affiliationName?.value
           )
-      ?.join(', ')
-      ).filter(affiliation => affiliation.length > 0 ).join(', ')
+          ?.join(', ')
+      )
+      .filter((affiliation) => affiliation.length > 0)
+      .join(', ')
   }
 
   private getRecordHolderContribution(): Contributor {
