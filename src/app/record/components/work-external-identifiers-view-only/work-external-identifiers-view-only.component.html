@@ -37,7 +37,7 @@
     </ng-container>
   </mat-error>
   <mat-error
-    *ngIf="externalIdForm.get('externalIdentifierUrl').hasError('pattern')"
+    *ngIf="externalIdForm?.get('externalIdentifierUrl').hasError('pattern')"
     i18n="@@works.invalidUrl"
   >
     Invalid url
