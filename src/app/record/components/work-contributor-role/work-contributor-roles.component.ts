@@ -89,27 +89,29 @@ export class WorkContributorRolesComponent implements OnInit {
             rs?.contributorRole
           )
           if (rs?.contributorRole && role) {
-            this.addRoleFormGroup(role.translation)
+            this.addRoleFormGroup(role.translation, true)
+          } else if (rs?.contributorRole != null) {
+            this.addRoleFormGroup(rs?.contributorRole , true)
           } else {
-            this.addRoleFormGroup(rs?.contributorRole)
+            this.addRoleFormGroup(this.workService.getContributionRoleByKey('no specified role').translation, false)
           }
         })
       } else {
-        this.addRoleFormGroup()
+        this.addRoleFormGroup(this.workService.getContributionRoleByKey('no specified role').translation, false)
       }
     } else {
-      this.addRoleFormGroup()
+      this.addRoleFormGroup(this.workService.getContributionRoleByKey('no specified role').translation, false)
     }
   }
 
-  private addRoleFormGroup(role?: string): void {
-    this.roles.push(this.getRoleForm(role))
+  private addRoleFormGroup(role?: string, disabled?: boolean): void {
+    this.roles.push(this.getRoleForm(role, disabled))
   }
 
-  private getRoleForm(role?: string): FormGroup {
+  private getRoleForm(role?: string, disabled?: boolean): FormGroup {
     return this.formBuilder.group({
       role: [
-        { value: role ? role.toLowerCase() : '', disabled: !!role },
+        { value: role ? role.toLowerCase() : '', disabled },
         [unique('role')],
       ],
     })

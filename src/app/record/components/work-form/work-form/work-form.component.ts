@@ -645,6 +645,9 @@ export class WorkFormComponent implements OnInit {
       ?.filter((fg) => fg?.value?.role)
       .map((formGroup) => {
         const role = formGroup?.value?.role
+        if (role === 'no specified role') {
+          return null
+        }
         const value = this._workService.getContributionRoleByKey(role)?.value
         return value ? value : role
       })
