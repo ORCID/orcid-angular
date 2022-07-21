@@ -94,8 +94,8 @@ export class WorkContributorRolesComponent implements OnInit {
         ?.rolesAndSequences
       if (rolesAndSequences?.length > 0) {
         const roles = rolesAndSequences
-          .filter(roleAndSequence => roleAndSequence.contributorRole)
-          .map(rolesAndSequence => rolesAndSequence.contributorRole)
+          .filter((roleAndSequence) => roleAndSequence.contributorRole)
+          .map((rolesAndSequence) => rolesAndSequence.contributorRole)
         if (roles?.length > 0) {
           roles.forEach((rs) => {
             const role = this.workService.getContributionRoleByKey(rs)
