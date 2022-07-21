@@ -82,6 +82,9 @@ export class WorkContributorRolesComponent implements OnInit {
 
   deleteRole(roleIndex: number): void {
     this.roles.removeAt(roleIndex)
+    if (roleIndex === 0 && this.roles.length === 0) {
+      this.addRole()
+    }
   }
 
   private initializeFormArray(): void {
@@ -90,22 +93,25 @@ export class WorkContributorRolesComponent implements OnInit {
       const rolesAndSequences = this.getRecordHolderContribution()
         ?.rolesAndSequences
       if (rolesAndSequences?.length > 0) {
-        rolesAndSequences.forEach((rs) => {
-          const role = this.workService.getContributionRoleByKey(
-            rs?.contributorRole
+        const roles = rolesAndSequences
+          .filter((roleAndSequence) => roleAndSequence.contributorRole)
+          .map((rolesAndSequence) => rolesAndSequence.contributorRole)
+        if (roles?.length > 0) {
+          roles.forEach((rs) => {
+            const role = this.workService.getContributionRoleByKey(rs)
+            if (rs && role) {
+              this.addRoleFormGroup(role.translation, true)
+            } else {
+              this.addRoleFormGroup(rs, true)
+            }
+          })
+        } else {
+          this.addRoleFormGroup(
+            this.workService.getContributionRoleByKey('no specified role')
+              .translation,
+            false
           )
-          if (rs?.contributorRole && role) {
-            this.addRoleFormGroup(role.translation, true)
-          } else if (rs?.contributorRole != null) {
-            this.addRoleFormGroup(rs?.contributorRole, true)
-          } else {
-            this.addRoleFormGroup(
-              this.workService.getContributionRoleByKey('no specified role')
-                .translation,
-              false
-            )
-          }
-        })
+        }
       } else {
         this.addRoleFormGroup(
           this.workService.getContributionRoleByKey('no specified role')
