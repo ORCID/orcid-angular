@@ -83,7 +83,7 @@ export class WorkContributorRolesComponent implements OnInit {
     if (this.contributors) {
       const rolesAndSequences = this.getRecordHolderContribution()
         ?.rolesAndSequences
-      if (rolesAndSequences) {
+      if (rolesAndSequences?.length > 0) {
         rolesAndSequences.forEach((rs) => {
           const role = this.workService.getContributionRoleByKey(
             rs?.contributorRole
