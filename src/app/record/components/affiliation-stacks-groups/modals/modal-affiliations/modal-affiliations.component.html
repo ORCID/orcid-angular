@@ -171,6 +171,9 @@
         appearance="outline"
         class="mat-form-field-min"
         id="cy-org-dd-mat-form"
+        [ngClass]="{
+          'two-line-hint': selectedOrganizationFromDatabase?.value.length > 50
+        }"
       >
         <input
           id="organization-input"

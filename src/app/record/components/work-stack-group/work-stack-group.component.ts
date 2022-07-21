@@ -13,7 +13,7 @@ import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox'
 import { MatDialog } from '@angular/material/dialog'
 import { PageEvent } from '@angular/material/paginator'
 import { isEmpty } from 'lodash'
-import { Subject } from 'rxjs'
+import { Observable, Subject } from 'rxjs'
 import { first } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import {
@@ -107,6 +107,7 @@ export class WorkStackGroupComponent implements OnInit {
   ]
 
   $destroy: Subject<boolean> = new Subject<boolean>()
+  $loading: Observable<boolean>
 
   userRecord: UserRecord
   workGroup: WorksEndpoint
@@ -133,6 +134,7 @@ export class WorkStackGroupComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.$loading = this._works.$loading
     this._record
       .getRecord({ publicRecordId: this.isPublicRecord })
       .subscribe((userRecord) => {
@@ -140,11 +142,10 @@ export class WorkStackGroupComponent implements OnInit {
         if (!isEmpty(userRecord?.works)) {
           this.paginationLoading = false
           this.workGroup = userRecord.works
-          this.total.emit(userRecord.works?.groups?.length)
           this.paginationTotalAmountOfWorks = userRecord.works.totalGroups
           this.paginationIndex = userRecord.works.pageIndex
           this.paginationPageSize = userRecord.works.pageSize
-          this.total.emit(userRecord.works.groups?.length || 0)
+          this.total.emit(userRecord.works?.groups?.length || 0)
         }
       })
     if (!this.isPublicRecord) {

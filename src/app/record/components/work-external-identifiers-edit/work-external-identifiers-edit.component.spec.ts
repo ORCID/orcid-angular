@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { WorkExternalIdentifiersEditComponent } from './work-external-identifiers-edit.component'
 
-describe('ExternalIdentifiersEditComponent', () => {
+describe('WorkExternalIdentifiersEditComponent', () => {
   let component: WorkExternalIdentifiersEditComponent
   let fixture: ComponentFixture<WorkExternalIdentifiersEditComponent>
 

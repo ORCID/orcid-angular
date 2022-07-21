@@ -37,7 +37,7 @@
       Add links to personal websites, department profiles, Wikipedia pages or
       social media accounts.
     </p>
-    <ng-container *ngIf="websites.length > 0">
+    <ng-container *ngIf="websites?.length > 0">
       <div class="row">
         <h3 class="col no-gutters orc-font-body" i18n="@@topBar.myLinks">
           My links
@@ -160,6 +160,17 @@
                   >
                     An URL is required
                   </mat-error>
+
+                  <mat-error
+                    *ngIf="
+                      websitesForm
+                        .get(website.putCode)
+                        .hasError('maxlength', 'url')
+                    "
+                  >
+                    Must be less than 2000 characters
+                  </mat-error>
+
                   <mat-error
                     *ngIf="
                       websitesForm
@@ -224,11 +235,11 @@
       <a id="add-link" class="col add-more no-gutters" (click)="addWebsite()">
         <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
         <span class="mat-body-1">
-          <ng-container *ngIf="websites.length === 0" i18n="@@topBar.addLink">
+          <ng-container *ngIf="websites?.length === 0" i18n="@@topBar.addLink">
             Add a link
           </ng-container>
           <ng-container
-            *ngIf="websites.length !== 0"
+            *ngIf="websites?.length !== 0"
             i18n="@@topBar.addAnotherLink"
           >
             Add another link

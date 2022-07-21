@@ -2,13 +2,13 @@
   <mat-card-header>
     <mat-card-title role="heading" aria-level="1">
       <ng-container
-        *ngIf="!reactivation.isReactivation"
+        *ngIf="!reactivation?.isReactivation"
         i18n="@@register.create"
       >
         Create your ORCID iD
       </ng-container>
       <ng-container
-        *ngIf="reactivation.isReactivation"
+        *ngIf="reactivation?.isReactivation"
         i18n="@@register.reactivation"
       >
         Thank you for reactivating your ORCID iD.
@@ -20,7 +20,7 @@
   </mat-card-header>
 
   <mat-card-content>
-    <p *ngIf="!reactivation.isReactivation">
+    <p *ngIf="!reactivation?.isReactivation">
       <ng-container i18n="@@register.orcids">Per ORCID's</ng-container>
       <a
         href="{{ infoSiteBaseUrl }}content/orcid-terms-use"

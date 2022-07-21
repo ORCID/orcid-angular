@@ -35,6 +35,7 @@ import { first, map, startWith } from 'rxjs/operators'
 import { dateValidator } from '../../../../shared/validators/date/date.validator'
 import { GetFormErrors, URL_REGEXP } from '../../../../constants'
 import {
+  Contributor,
   ExternalIdentifier,
   VisibilityStrings,
 } from '../../../../types/common.endpoint'
@@ -55,6 +56,8 @@ import { RecordService } from 'src/app/core/record/record.service'
 })
 export class WorkFormComponent implements OnInit {
   @Input() work: Work
+  @Input() userRecord: UserRecord
+
   $workTypeUpdateEvent = new Subject<WorkIdType>()
 
   loading = true
@@ -234,14 +237,14 @@ export class WorkFormComponent implements OnInit {
 
       visibility: [
         currentWork?.visibility?.visibility ||
-          currentWork.visibility.visibility,
+          currentWork?.visibility?.visibility,
         [],
       ],
     })
     this.workIdentifiersFormArray = this.workForm.controls
       .workIdentifiers as FormArray
 
-    currentWork.workExternalIdentifiers.forEach((workExternalId) => {
+    currentWork?.workExternalIdentifiers.forEach((workExternalId) => {
       this.addOtherWorkId(workExternalId)
     })
   }
@@ -313,6 +316,10 @@ export class WorkFormComponent implements OnInit {
         formGroup
       )
     })
+
+    formGroup.controls.externalIdentifierUrl.valueChanges.subscribe((value) => {
+      this.manageWorkIdentifierUrlUpdates(formGroup, value)
+    })
   }
 
   private manageWorkIdentifierTypeUpdates(
@@ -320,9 +327,7 @@ export class WorkFormComponent implements OnInit {
     formGroup: FormGroup
   ) {
     if (externalIdentifierType !== '') {
-      formGroup.controls.externalIdentifierId.setValidators([
-        Validators.required,
-      ])
+      formGroup.controls.externalIdentifierId.addValidators(Validators.required)
       formGroup.controls.externalIdentifierId.setAsyncValidators(
         this.externalIdentifierTypeAsyncValidator(
           formGroup,
@@ -338,25 +343,33 @@ export class WorkFormComponent implements OnInit {
         formGroup.controls.externalRelationship.setValue(suggestedRelationship)
       }
     } else {
-      formGroup.controls.externalIdentifierId.clearValidators()
-      formGroup.controls.externalIdentifierId.clearAsyncValidators()
-      formGroup.controls.externalIdentifierId.updateValueAndValidity()
+      if (!formGroup.controls.externalIdentifierUrl.value) {
+        formGroup.controls.externalIdentifierId.removeValidators(
+          Validators.required
+        )
+        formGroup.controls.externalIdentifierId.clearAsyncValidators()
+        formGroup.controls.externalIdentifierId.updateValueAndValidity()
+      }
     }
   }
 
   private manageWorkIdentifierIdUpdates(value: any, formGroup: FormGroup) {
     if (value) {
-      formGroup.controls.externalIdentifierType.setValidators([
-        Validators.required,
-      ])
+      formGroup.controls.externalIdentifierType.addValidators(
+        Validators.required
+      )
       formGroup.controls.externalIdentifierType.updateValueAndValidity({
         emitEvent: false,
       })
     } else {
-      formGroup.controls.externalIdentifierType.clearValidators()
-      formGroup.controls.externalIdentifierType.updateValueAndValidity({
-        emitEvent: false,
-      })
+      if (!formGroup.controls.externalIdentifierUrl.value) {
+        formGroup.controls.externalIdentifierType.removeValidators(
+          Validators.required
+        )
+        formGroup.controls.externalIdentifierType.updateValueAndValidity({
+          emitEvent: false,
+        })
+      }
     }
   }
 
@@ -378,6 +391,34 @@ export class WorkFormComponent implements OnInit {
         })
       }
     })
+  }
+
+  private manageWorkIdentifierUrlUpdates(
+    formGroup: FormGroup,
+    value: string
+  ): void {
+    if (value) {
+      formGroup.controls.externalIdentifierType.addValidators(
+        Validators.required
+      )
+      formGroup.controls.externalIdentifierType.updateValueAndValidity()
+      formGroup.controls.externalIdentifierId.addValidators(Validators.required)
+      formGroup.controls.externalIdentifierId.updateValueAndValidity()
+    } else {
+      if (
+        !formGroup.controls.externalIdentifierType.value &&
+        !formGroup.controls.externalIdentifierId.value
+      ) {
+        formGroup.controls.externalIdentifierType.removeValidators(
+          Validators.required
+        )
+        formGroup.controls.externalIdentifierType.updateValueAndValidity()
+        formGroup.controls.externalIdentifierId.removeValidators(
+          Validators.required
+        )
+        formGroup.controls.externalIdentifierId.updateValueAndValidity()
+      }
+    }
   }
 
   addOtherWorkId(existingExternalId?: ExternalIdentifier) {
@@ -502,6 +543,7 @@ export class WorkFormComponent implements OnInit {
         workType: {
           value: this.workForm.value.workType,
         },
+        contributorsGroupedByOrcid: this.getOrcidGroupedByOrcid(),
       }
       if (this.work?.putCode) {
         work.putCode = this.work.putCode
@@ -597,11 +639,38 @@ export class WorkFormComponent implements OnInit {
     return workRelationship
   }
 
-  closeEvent() {
-    this._dialogRef.close()
+  private getOrcidGroupedByOrcid(): Contributor[] {
+    const rolesFormArray = this.workForm.get('roles') as FormArray
+    const roles = rolesFormArray?.controls
+      ?.filter((fg) => fg?.value?.role)
+      .map((formGroup) => {
+        const role = formGroup?.value?.role
+        if (role === 'no specified role') {
+          return null
+        }
+        const value = this._workService.getContributionRoleByKey(role)?.value
+        return value ? value : role
+      })
+    const recordHolderContribution = this.workForm.get('contributors')?.value[0]
+    return [
+      {
+        creditName: {
+          value: recordHolderContribution?.creditName,
+        },
+        contributorOrcid: {
+          uri: recordHolderContribution?.contributorOrcid?.uri,
+          path: recordHolderContribution?.contributorOrcid?.path,
+        },
+        rolesAndSequences: [
+          ...roles.map((role) => ({
+            contributorRole: role,
+          })),
+        ],
+      },
+    ]
   }
 
-  returnZero() {
-    return 0
+  closeEvent() {
+    this._dialogRef.close()
   }
 }

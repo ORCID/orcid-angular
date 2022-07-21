@@ -1,6 +1,6 @@
 <ng-container
   *ngFor="
-    let subPeerReview of peerReviewStack.peerReviews;
+    let subPeerReview of peerReviewStack?.peerReviews;
     trackBy: trackByPeerReviewStack;
     let i = index;
     let last = last

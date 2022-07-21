@@ -23,8 +23,8 @@ export class SnackbarComponent implements OnInit {
     public data: { caption: string; displayMessage: DisplayMessage },
     private _platform: PlatformInfoService
   ) {
-    this.closable = data.displayMessage.closable
-    this._contentDirection = data.displayMessage.contentDirection
+    this.closable = data.displayMessage?.closable
+    this._contentDirection = data.displayMessage?.contentDirection
     this._platform
       .get()
       .pipe(take(1))

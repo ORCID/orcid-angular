@@ -8,13 +8,13 @@
     interact with your ORCID record.
   </p>
   <p class="orcid-id-container">
-    <strong>{{ data.receiverName.value }}</strong>
+    <strong>{{ data.receiverName?.value }}</strong>
     <a
       class="underline"
       target="_blank"
       rel="noreferrer noopener"
-      href="{{ baseUrl }}{{ data.receiverOrcid.path }}"
-      >https:{{ baseUrl }}{{ data.receiverOrcid.path }}</a
+      href="{{ baseUrl }}{{ data.receiverOrcid?.path }}"
+      >https:{{ baseUrl }}{{ data.receiverOrcid?.path }}</a
     >
   </p>
 

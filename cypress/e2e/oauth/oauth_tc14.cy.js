@@ -68,10 +68,18 @@ describe('OAuth cypress tests', async function () {
     cy.get('#username').clear().type(recordOwner.oid)
     cy.get('#password').clear().type(newPassword)
     cy.get('#signin-button').click()
-
-    //verify user taken to my orcid instead of authorization screen
+    cy.wait(2000)
+    //verify user taken to authorization screen
     cy.url().then((urlString) => {
       cy.url().should('contain', 'qa.orcid.org/oauth/authorize?')
+    })
+    //grant access
+    cy.get('#authorize-button').click()
+    cy.wait(2000)
+    //verify user is taken to redirect_uri with appended authorization code
+    cy.url().then((urlString) => {
+      cy.url().should('include', userData.cyOAuth_MemberUser.redirect_uri)
+      cy.url().should('include', '?code=')
     })
   })
 

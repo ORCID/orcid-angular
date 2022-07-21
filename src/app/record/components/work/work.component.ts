@@ -50,25 +50,8 @@ export class WorkComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.contributorsGroupedByOrcid = this.work.contributorsGroupedByOrcid
-    this.numberOfContributors = this.work.numberOfContributors
-    if (this.contributorsGroupedByOrcid) {
-      if (this.isPublicRecord) {
-        this.getContributionRole(this.contributorsGroupedByOrcid)
-      } else {
-        this._userInfo.getUserInfo().subscribe((config) => {
-          this.id = config.EFFECTIVE_USER_ORCID
-          this.getContributionRole(this.contributorsGroupedByOrcid)
-        })
-      }
-    }
-  }
-
-  /**
-   * RegEx function to check if the elements contains a URL
-   */
-  isUrl(element): boolean {
-    return RegExp(URL_REGEXP).test(element)
+    this.contributorsGroupedByOrcid = this.work?.contributorsGroupedByOrcid
+    this.numberOfContributors = this.work?.numberOfContributors
   }
 
   exportWork(work: Work) {
@@ -97,32 +80,5 @@ export class WorkComponent implements OnInit {
       anchor.click()
       anchor.remove()
     }
-  }
-
-  getContributionRole(contributors: Contributor[]) {
-    contributors.forEach((c) => {
-      if (
-        (this.isPublicRecord &&
-          c?.contributorOrcid?.path === this.isPublicRecord) ||
-        (this.id && c?.contributorOrcid?.path === this.id)
-      ) {
-        this.addRole(c)
-      }
-    })
-  }
-
-  addRole(contributor: Contributor) {
-    contributor.rolesAndSequences.forEach((roleAndSequence) => {
-      if (roleAndSequence?.contributorRole) {
-        if (this.contributionRole) {
-          this.contributionRole =
-            this.contributionRole +
-            ', ' +
-            roleAndSequence?.contributorRole?.toLowerCase()
-        } else {
-          this.contributionRole = roleAndSequence?.contributorRole?.toLowerCase()
-        }
-      }
-    })
   }
 }

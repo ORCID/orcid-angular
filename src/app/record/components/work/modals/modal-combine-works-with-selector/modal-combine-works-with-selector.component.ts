@@ -48,7 +48,7 @@ export class ModalCombineWorksWithSelectorComponent
 
     this.suggestions = this.data.suggestions
     this.loadingWorks = true
-    const suggestionObservableList = this.suggestions.map((group) => {
+    const suggestionObservableList = this.suggestions?.map((group) => {
       const groupObservableList = group.putCodes.map((putCode) =>
         this._recordWorksService.getWorkInfo(putCode + '')
       )
@@ -58,18 +58,20 @@ export class ModalCombineWorksWithSelectorComponent
         })
       )
     })
-    forkJoin(suggestionObservableList).subscribe((value) => {
-      this.suggestionsWorks = value
-      const formObject = {}
-      value.forEach((suggestionGroup) => {
-        formObject[suggestionGroup.putCodes] = [false]
+    if (suggestionObservableList) {
+      forkJoin(suggestionObservableList).subscribe((value) => {
+        this.suggestionsWorks = value
+        const formObject = {}
+        value.forEach((suggestionGroup) => {
+          formObject[suggestionGroup.putCodes] = [false]
+        })
+        this.form = this._fb.group(formObject)
+        this.form.valueChanges.subscribe(() => {
+          this.getSetOkWorkToCombine()
+        })
+        this.loadingWorks = false
       })
-      this.form = this._fb.group(formObject)
-      this.form.valueChanges.subscribe(() => {
-        this.getSetOkWorkToCombine()
-      })
-      this.loadingWorks = false
-    })
+    }
   }
 
   saveEvent() {

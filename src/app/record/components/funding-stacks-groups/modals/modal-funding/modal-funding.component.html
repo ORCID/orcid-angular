@@ -615,18 +615,27 @@
       </label>
     </div>
     <div class="input-container">
-      <mat-form-field appearance="outline" class="mat-form-field-min">
+      <mat-form-field
+        appearance="outline"
+        class="mat-form-field-min"
+        [ngClass]="{
+          'two-line-hint': selectedOrganizationFromDatabase?.value.length > 50
+        }"
+      >
         <input
           id="funding-agency-name-input"
           matInput
           formControlName="agencyName"
           [matAutocomplete]="auto"
         />
-        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-autocomplete
+          autoActiveFirstOption
+          #auto="matAutocomplete"
+          [displayWith]="autoCompleteDisplayOrganization"
+        >
           <mat-option
             *ngFor="let option of filteredOptions | async"
-            [value]="option.value"
-            (onSelectionChange)="fillForm(option)"
+            [value]="option"
           >
             <div class="row orc-font-body-small title">
               {{ option.value }}
@@ -636,6 +645,22 @@
             </div>
           </mat-option>
         </mat-autocomplete>
+        <mat-hint
+          *ngIf="selectedOrganizationFromDatabase && displayOrganizationHint"
+        >
+          <ng-container i18n="@@record.identifyAS">Identify as:</ng-container>
+          {{ selectedOrganizationFromDatabase.value }}
+        </mat-hint>
+        <mat-hint
+          *ngIf="
+            !selectedOrganizationFromDatabase &&
+            fundingForm.get('agencyName').value &&
+            displayOrganizationHint
+          "
+          i18n="@@record.unidentifiedOrganization"
+        >
+          Unidentified organization
+        </mat-hint>
         <button
           class="clear"
           matSuffix
@@ -801,19 +826,23 @@
         </ng-container>
       </div>
       <!-- Add another -->
-      <div class="row" *ngIf="grantsArray.length">
-        <a class="col add-more no-gutters" (click)="addAnotherGrant()">
+      <div class="row">
+        <a
+          id="add-link"
+          class="col add-more no-gutters"
+          (click)="addAnotherGrant()"
+        >
           <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
-          <span class="mat-body-1" i18n="@@shared.addAnotherId">
-            Add another identifier
-          </span>
-        </a>
-      </div>
-      <div class="row" *ngIf="!grantsArray.length">
-        <a class="col add-more no-gutters" (click)="addAnotherGrant()">
-          <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
-          <span class="mat-body-1" i18n="@@shared.addId">
-            Add an identifier
+          <span class="mat-body-1">
+            <ng-container
+              i18n="@@shared.addAnotherId"
+              *ngIf="grantsArray.length"
+            >
+              Add another identifier
+            </ng-container>
+            <ng-container i18n="@@shared.addId" *ngIf="!grantsArray.length">
+              Add an identifier
+            </ng-container>
           </span>
         </a>
       </div>

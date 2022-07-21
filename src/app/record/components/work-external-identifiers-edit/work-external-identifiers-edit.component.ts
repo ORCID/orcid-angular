@@ -44,7 +44,7 @@ export class WorkExternalIdentifiersEditComponent
   constructor(private changeDedectionRef: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    this.backupValue = this.externalIdForm.value
+    this.backupValue = this.externalIdForm?.value
   }
 
   updateExternal(event: MatSelectChange): void {
@@ -52,7 +52,7 @@ export class WorkExternalIdentifiersEditComponent
   }
 
   ngAfterViewInit() {
-    this.externalIdentifierTypeRef.focus()
+    this.externalIdentifierTypeRef?.focus()
     this.changeDedectionRef.detectChanges()
   }
 

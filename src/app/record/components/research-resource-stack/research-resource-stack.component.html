@@ -1,6 +1,6 @@
 <ng-container
   *ngFor="
-    let research of researchResourceStack.researchResources;
+    let research of researchResourceStack?.researchResources;
     trackBy: trackByResearchResourceStack;
     let i = index;
     let last = last

@@ -5,5 +5,5 @@ export interface NamesEndPoint {
   errors: any[]
   givenNames: Value
   familyName: Value
-  creditName?: any
+  creditName?: Value
 }

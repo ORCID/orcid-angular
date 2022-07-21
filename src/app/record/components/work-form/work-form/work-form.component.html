@@ -612,6 +612,31 @@
   </div>
 
   <!---------------------->
+  <!-- Contributors  -->
+  <!---------------------->
+
+  <div
+    class="title"
+    id="contributors"
+    [ngClass]="{
+      'orc-font-body': !platform.columns12,
+      'orc-font-body-large': platform.columns12
+    }"
+  >
+    <p>
+      <strong i18n="@@works.contributors">Contributors</strong>
+    </p>
+  </div>
+  <hr />
+
+  <app-work-contributor-roles
+    [contributors]="work?.contributorsGroupedByOrcid"
+    [userRecord]="userRecord"
+  ></app-work-contributor-roles>
+
+  <app-work-contributors [userRecord]="userRecord"></app-work-contributors>
+
+  <!---------------------->
   <!-- Work Other Information -->
   <!---------------------->
 

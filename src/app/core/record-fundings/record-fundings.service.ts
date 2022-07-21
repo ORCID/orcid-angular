@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, of, ReplaySubject } from 'rxjs'
+import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs'
 import { catchError, retry, switchMap, tap } from 'rxjs/operators'
 import { Funding, FundingGroup } from 'src/app/types/record-funding.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
@@ -21,6 +21,10 @@ export class RecordFundingsService {
   })
 
   $fundings: ReplaySubject<FundingGroup[]> = new ReplaySubject<FundingGroup[]>()
+  private _$loading = new BehaviorSubject<boolean>(true)
+  public get $loading() {
+    return this._$loading.asObservable()
+  }
 
   constructor(
     private _http: HttpClient,
@@ -28,7 +32,7 @@ export class RecordFundingsService {
   ) {}
 
   getFundings(options: UserRecordOptions): Observable<FundingGroup[]> {
-    if (options.publicRecordId) {
+    if (options?.publicRecordId) {
       this._http
         .get<FundingGroup[]>(
           environment.API_WEB +
@@ -51,11 +55,13 @@ export class RecordFundingsService {
         )
         .subscribe()
     } else {
+      this._$loading.next(true)
       this.getAndSortFundings(options)
         .pipe(
           retry(3),
           catchError((error) => this._errorHandler.handleError(error)),
           tap((data) => {
+            this._$loading.next(false)
             this.lastEmittedValue = data
             this.$fundings.next(data)
           }),
@@ -101,9 +107,9 @@ export class RecordFundingsService {
         environment.API_WEB +
           `fundings/fundingGroups.json?` +
           '&sort=' +
-          (options.sort != null ? options.sort : 'date') +
+          (options?.sort != null ? options.sort : 'date') +
           '&sortAsc=' +
-          (options.sortAsc != null ? options.sortAsc : false)
+          (options?.sortAsc != null ? options.sortAsc : false)
       )
       .pipe(
         retry(3),
