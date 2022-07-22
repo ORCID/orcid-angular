@@ -19,6 +19,7 @@ import { EXTERNAL_ID_TYPE_WORK, URL_REGEXP } from '../../../../../constants'
 import { Work } from '../../../../../types/record-works.endpoint'
 import { WorkFormComponent } from '../../../work-form/work-form/work-form.component'
 import { WINDOW } from 'src/app/cdk/window'
+import { UserRecord } from '../../../../../types/record.local'
 
 @Component({
   selector: 'app-work-doi-modal',
@@ -32,6 +33,7 @@ export class WorkExternalIdModalComponent
   @ViewChild('workFormComponent') workFormComponent: WorkFormComponent
   @ViewChild('externalIdRef') externalIdElement: ElementRef
 
+  @Input() userRecord: UserRecord
   @Input() type: EXTERNAL_ID_TYPE_WORK
   EXTERNAL_ID_TYPE_WORK = EXTERNAL_ID_TYPE_WORK
 
@@ -101,6 +103,10 @@ export class WorkExternalIdModalComponent
 
   toIdentifiers() {
     this._window.document.getElementById('identifiers').scrollIntoView()
+  }
+
+  toContributors() {
+    this._window.document.getElementById('contributors').scrollIntoView()
   }
 
   toCitation() {
