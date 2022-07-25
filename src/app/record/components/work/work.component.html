@@ -29,7 +29,9 @@
     ></app-display-external-ids>
     <div
       class="general-data"
-      *ngIf="togglzWorksContributors && work?.contributorsGroupedByOrcid?.length > 0"
+      *ngIf="
+        togglzWorksContributors && work?.contributorsGroupedByOrcid?.length > 0
+      "
     >
       <span class="uppercase" i18n="@@works.contributors">Contributors</span>:
       <ng-container

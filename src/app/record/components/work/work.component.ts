@@ -46,7 +46,7 @@ export class WorkComponent implements OnInit {
     @Inject(WINDOW) private window: Window
   ) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   exportWork(work: Work) {
     this._recordWorksService
