@@ -34,9 +34,6 @@ export class WorkComponent implements OnInit {
   maxNumberContributors = 10
   maxNumberContributorsWorkDetails = 50
   maxBibtexCharacters = 5000
-  contributorsGroupedByOrcid: Contributor[] = []
-  numberOfContributors: number
-  contributionRole: string
   showCitation = false
   showExpandedFormatting = false
   privateName = 'Name is private'
@@ -49,10 +46,7 @@ export class WorkComponent implements OnInit {
     @Inject(WINDOW) private window: Window
   ) {}
 
-  ngOnInit(): void {
-    this.contributorsGroupedByOrcid = this.work?.contributorsGroupedByOrcid
-    this.numberOfContributors = this.work?.numberOfContributors
-  }
+  ngOnInit(): void { }
 
   exportWork(work: Work) {
     this._recordWorksService
