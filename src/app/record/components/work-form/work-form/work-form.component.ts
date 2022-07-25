@@ -642,7 +642,9 @@ export class WorkFormComponent implements OnInit {
   private getContributorRoles(): Contributor[] {
     const rolesFormArray = this.workForm.get('roles') as FormArray
     const roles = rolesFormArray?.controls
-      ?.filter((fg) => fg?.value?.role && fg?.value?.role !== 'no specified role')
+      ?.filter(
+        (fg) => fg?.value?.role && fg?.value?.role !== 'no specified role'
+      )
       .map((formGroup) => {
         const role = formGroup?.value?.role
         const value = this._workService.getContributionRoleByKey(role)?.value
@@ -657,14 +659,14 @@ export class WorkFormComponent implements OnInit {
         contributorOrcid: {
           uri: recordHolderContribution?.contributorOrcid?.uri,
           path: recordHolderContribution?.contributorOrcid?.path,
-        }
-      } as Contributor
+        },
+      } as Contributor,
     ]
     if (roles.length > 0) {
       contributorRoles[0].rolesAndSequences = [
         ...roles.map((role) => ({
           contributorRole: role,
-        }))
+        })),
       ]
     }
     return contributorRoles
