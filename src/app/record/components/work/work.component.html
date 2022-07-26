@@ -29,12 +29,14 @@
     ></app-display-external-ids>
     <div
       class="general-data"
-      *ngIf="togglzWorksContributors && contributorsGroupedByOrcid?.length > 0"
+      *ngIf="
+        togglzWorksContributors && work?.contributorsGroupedByOrcid?.length > 0
+      "
     >
       <span class="uppercase" i18n="@@works.contributors">Contributors</span>:
       <ng-container
         *ngFor="
-          let contributor of contributorsGroupedByOrcid
+          let contributor of work?.contributorsGroupedByOrcid
             | slice: 0:maxNumberContributors;
           let last = last
         "
@@ -66,7 +68,7 @@
         </ng-container>
       </ng-container>
       <span
-        *ngIf="numberOfContributors > maxNumberContributors"
+        *ngIf="work?.numberOfContributors > maxNumberContributors"
         i18n="@@works.etAl"
       >
         et al.
@@ -169,7 +171,7 @@
 
     <div *ngIf="togglzWorksContributors">
       <ng-container
-        *ngIf="numberOfContributors > maxNumberContributorsWorkDetails"
+        *ngIf="work?.numberOfContributors > maxNumberContributorsWorkDetails"
       >
         <p>
           <span i18n="@@works.showing">Showing the first</span>
@@ -185,7 +187,7 @@
           'record-holder': contributor?.contributorOrcid?.path === id
         }"
         *ngFor="
-          let contributor of contributorsGroupedByOrcid
+          let contributor of work?.contributorsGroupedByOrcid
             | slice: 0:maxNumberContributorsWorkDetails;
           let index = index
         "
@@ -216,10 +218,10 @@
         </ng-container>
       </p>
       <ng-container
-        *ngIf="numberOfContributors > maxNumberContributorsWorkDetails"
+        *ngIf="work?.numberOfContributors > maxNumberContributorsWorkDetails"
       >
         <span
-          *ngIf="numberOfContributors > maxNumberContributors"
+          *ngIf="work?.numberOfContributors > maxNumberContributors"
           i18n="@@works.etAl"
         >
           et al.
@@ -435,7 +437,7 @@
           </ng-container>
         </ng-container>
       </ng-container>
-      <ng-container *ngIf="!togglzWorksContributors" && showCitation>
+      <ng-container *ngIf="!togglzWorksContributors && showCitation">
         <ng-container *ngIf="!showExpandedFormatting">
           {{ work.citation.citation.value }}
         </ng-container>
