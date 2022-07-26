@@ -543,7 +543,7 @@ export class WorkFormComponent implements OnInit {
         workType: {
           value: this.workForm.value.workType,
         },
-        contributorsGroupedByOrcid: this.getOrcidGroupedByOrcid(),
+        contributorsGroupedByOrcid: this.getContributorRoles(),
       }
       if (this.work?.putCode) {
         work.putCode = this.work.putCode
@@ -639,35 +639,37 @@ export class WorkFormComponent implements OnInit {
     return workRelationship
   }
 
-  private getOrcidGroupedByOrcid(): Contributor[] {
+  private getContributorRoles(): Contributor[] {
     const rolesFormArray = this.workForm.get('roles') as FormArray
     const roles = rolesFormArray?.controls
-      ?.filter((fg) => fg?.value?.role)
+      ?.filter(
+        (fg) => fg?.value?.role && fg?.value?.role !== 'no specified role'
+      )
       .map((formGroup) => {
         const role = formGroup?.value?.role
-        if (role === 'no specified role') {
-          return null
-        }
         const value = this._workService.getContributionRoleByKey(role)?.value
         return value ? value : role
       })
     const recordHolderContribution = this.workForm.get('contributors')?.value[0]
-    return [
+    const contributorRoles = [
       {
         creditName: {
-          value: recordHolderContribution?.creditName,
+          content: recordHolderContribution?.creditName,
         },
         contributorOrcid: {
           uri: recordHolderContribution?.contributorOrcid?.uri,
           path: recordHolderContribution?.contributorOrcid?.path,
         },
-        rolesAndSequences: [
-          ...roles.map((role) => ({
-            contributorRole: role,
-          })),
-        ],
-      },
+      } as Contributor,
     ]
+    if (roles.length > 0) {
+      contributorRoles[0].rolesAndSequences = [
+        ...roles.map((role) => ({
+          contributorRole: role,
+        })),
+      ]
+    }
+    return contributorRoles
   }
 
   closeEvent() {
