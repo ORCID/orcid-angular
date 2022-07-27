@@ -24,7 +24,7 @@ import {
 } from '../../../../../constants'
 import { UserRecord } from '../../../../../types/record.local'
 import { RecordCountriesService } from '../../../../../core/record-countries/record-countries.service'
-import { EMPTY, Subject } from 'rxjs'
+import { EMPTY, of, Subject } from 'rxjs'
 import {
   PlatformInfo,
   PlatformInfoService,
@@ -35,7 +35,7 @@ import {
   ExternalIdentifier,
 } from '../../../../../types/common.endpoint'
 import { Observable } from 'rxjs/internal/Observable'
-import { debounceTime, first, startWith, switchMap } from 'rxjs/operators'
+import { first, switchMap, tap } from 'rxjs/operators'
 import { RecordFundingsService } from 'src/app/core/record-fundings/record-fundings.service'
 import { UserService } from '../../../../../core'
 import { WINDOW } from '../../../../../cdk/window'
@@ -77,8 +77,6 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
   isMobile: boolean
   filteredOptions: Observable<Organization[]>
   loadingFunding = true
-  startDateValid: boolean
-  endDateValid: boolean
   countryCodes: { key: string; value: string }[]
   loadingCountryCodes = true
   fundingType = ''
@@ -87,7 +85,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
   fundingProjectLink = ''
   description = ''
   defaultVisibility: VisibilityStrings
-  agencyName = ''
+  agencyName: string | Organization = ''
   city = ''
   region = ''
   country = ''
@@ -107,6 +105,8 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
   fundingRelationships: FundingRelationships[] = Object.keys(
     FundingRelationships
   ) as FundingRelationships[]
+  selectedOrganizationFromDatabase: Organization
+  displayOrganizationHint: boolean
 
   years = Array(110)
     .fill(0)
@@ -124,6 +124,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
   ngOrcidMonth = $localize`:@@shared.month:Month`
   ngOrcidFundingType = $localize`:@@funding.selectAType:Select a funding type`
   ngOrcidSelectLanguage = $localize`:@@shared.selectLanguage:Select a language`
+  ngOrcidSelectACountryOrLocation = $localize`:@@shared.selectACountryOrLocation:Select a country or location`
   ngOrcidDefaultVisibilityLabel = $localize`:@@shared.visibilityDescription:Control who can see this information by setting the visibility. Your default visibility is`
 
   constructor(
@@ -275,12 +276,47 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       })
   }
 
+  autoCompleteDisplayOrganization(organization: Organization) {
+    return organization.value
+  }
+
   private listenFormChanges() {
     this.filteredOptions = this.fundingForm.get('agencyName').valueChanges.pipe(
-      startWith(''),
-      debounceTime(400),
-      switchMap((val) => {
-        return this._filter(val || '')
+      tap((organization: string | Organization) => {
+        // Auto fill form when the user select an organization from the autocomplete list
+        if (
+          typeof organization === 'object' &&
+          organization.disambiguatedAffiliationIdentifier
+        ) {
+          this.selectedOrganizationFromDatabase = organization
+          this.displayOrganizationHint = true
+          this.fillForm(organization)
+        }
+        if (!organization) {
+          this.selectedOrganizationFromDatabase = undefined
+          this.displayOrganizationHint = false
+          this.fundingForm.patchValue({
+            city: '',
+            region: '',
+            country: '',
+          })
+        }
+      }),
+      switchMap((organization: string | Organization) => {
+        if (
+          typeof organization === 'string' &&
+          !this.selectedOrganizationFromDatabase
+        ) {
+          // Display matching organization based on the user string input
+          return this._filter((organization as string) || '').pipe(
+            tap((x) => {
+              this.displayOrganizationHint = true
+            })
+          )
+        } else {
+          // Do not display options once the user has selected an Organization
+          return of([])
+        }
       })
     )
 
@@ -373,21 +409,28 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       this.translatedTitleLanguage = this.funding.fundingTitle?.translatedTitle?.languageCode
       this.fundingProjectLink = this.funding.url?.value
       this.description = this.funding.description?.value
-      this.agencyName = this.funding.fundingName?.value
       this.currencyCode = this.funding.currencyCode?.value
       this.amount = this.funding.amount?.value
-      this.loadingFunding = false
       this.disambiguatedFundingSourceId = this.funding.disambiguatedFundingSourceId?.value
       this.disambiguatedFundingSource = this.funding.disambiguationSource?.value
       this.showTranslationTitle = !!this.funding.fundingTitle?.translatedTitle
         ?.content
+      this.agencyName = {
+        value: this.funding.fundingName.value,
+      } as Organization
+      if (this.disambiguatedFundingSourceId) {
+        this.selectedOrganizationFromDatabase = {
+          value: this.agencyName.value,
+        } as Organization
+      }
+      this.displayOrganizationHint = true
     } else {
       this.loadingFunding = false
     }
   }
 
   formToBackendFunding(): Funding {
-    return {
+    const funding = {
       visibility: {
         visibility: this.fundingForm.get('visibility').value
           ? this.fundingForm.get('visibility').value
@@ -415,9 +458,6 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       organizationDefinedFundingSubType: {
         subtype: this.fundingForm.value.fundingSubtype,
         alreadyIndexed: false, // what value should be here ?
-      },
-      fundingName: {
-        value: this.fundingForm.value.agencyName,
       },
       fundingType: {
         value: this.fundingForm.value.fundingType,
@@ -486,7 +526,30 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       assertionOriginName: this.funding?.assertionOriginName,
       assertionOriginOrcid: this.funding?.assertionOriginOrcid,
       countryForDisplay: this.funding?.countryForDisplay,
+    } as Funding
+
+    if (this.selectedOrganizationFromDatabase) {
+      funding.fundingName = {
+        value: this.selectedOrganizationFromDatabase.value,
+      }
+      funding.disambiguatedFundingSourceId = {
+        value:
+          this.disambiguatedFundingSourceId ||
+          this.selectedOrganizationFromDatabase.sourceId,
+      }
+      funding.disambiguationSource = {
+        value:
+          this.disambiguatedFundingSource ||
+          this.selectedOrganizationFromDatabase.sourceType,
+      }
+    } else {
+      funding.fundingName = {
+        value: this.fundingForm.get('agencyName').value?.value
+          ? this.fundingForm.get('agencyName').value?.value
+          : this.fundingForm.get('agencyName').value,
+      }
     }
+    return funding
   }
 
   onSubmit() {}
@@ -529,6 +592,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
   saveEvent() {
     this.fundingForm.markAllAsTouched()
     if (this.fundingForm.valid) {
+      this.loadingFunding = true
       this._fundingsService
         .save(this.formToBackendFunding())
         .pipe(first())
@@ -574,14 +638,16 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
     const formGroup = this.grantsArray.controls[index] as FormGroup
     formGroup.controls.grantNumber.valueChanges.subscribe((value) => {
       if (value) {
-        formGroup.controls.grantNumber.setValidators([
-          Validators.maxLength(MAX_LENGTH_LESS_THAN_TWO_THOUSAND_EIGHTY_FOUR),
-        ])
+        formGroup.controls.grantNumber.addValidators(
+          Validators.maxLength(MAX_LENGTH_LESS_THAN_TWO_THOUSAND_EIGHTY_FOUR)
+        )
         formGroup.controls.grantNumber.updateValueAndValidity({
           emitEvent: false,
         })
       } else {
-        formGroup.controls.grantNumber.clearValidators()
+        formGroup.controls.grantNumber.removeValidators(
+          Validators.maxLength(MAX_LENGTH_LESS_THAN_TWO_THOUSAND_EIGHTY_FOUR)
+        )
         formGroup.controls.grantNumber.updateValueAndValidity({
           emitEvent: false,
         })
@@ -590,6 +656,10 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
 
     formGroup.controls.grantUrl.valueChanges.subscribe((value) => {
       if (value) {
+        formGroup.controls.grantNumber.addValidators(Validators.required)
+        formGroup.controls.grantNumber.updateValueAndValidity({
+          emitEvent: false,
+        })
         formGroup.controls.grantUrl.setValidators([
           Validators.pattern(URL_REGEXP),
           Validators.maxLength(MAX_LENGTH_LESS_THAN_TWO_THOUSAND),
@@ -598,6 +668,8 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
           emitEvent: false,
         })
       } else {
+        formGroup.controls.grantNumber.removeValidators(Validators.required)
+        formGroup.controls.grantNumber.updateValueAndValidity()
         formGroup.controls.grantUrl.clearValidators()
         formGroup.controls.grantUrl.updateValueAndValidity({
           emitEvent: false,

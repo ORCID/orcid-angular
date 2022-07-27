@@ -10,22 +10,24 @@
   </div>
   <div class="text-container">
     <div
+      class="id"
       [ngClass]="{
         'orc-font-body-small': !platform.columns12,
         'orc-font-body-large': platform.columns12
       }"
       dir="ltr"
     >
-      {{ 'https:' + environment.BASE_URL }}
+      <span>{{ 'https:' + environment.BASE_URL }}</span>
+      <span>
+        <strong
+          [ngClass]="{
+            'orc-font-body-large': !platform.columns12,
+            'orc-font-heading-small': platform.columns12
+          }"
+          >{{ id }}</strong
+        >
+      </span>
     </div>
-    <strong
-      [ngClass]="{
-        'orc-font-body-large': !platform.columns12,
-        'orc-font-heading-small': platform.columns12
-      }"
-    >
-      {{ id }}
-    </strong>
   </div>
   <a
     [href]="id"

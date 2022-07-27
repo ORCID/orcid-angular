@@ -1,7 +1,7 @@
-<div class="intro">{{ notification.notificationIntro }}</div>
+<div class="intro">{{ notification?.notificationIntro }}</div>
 
 <div>
-  <strong>{{ notification.source.sourceName.content }}</strong>
+  <strong>{{ notification?.source.sourceName.content }}</strong>
   <ng-container i18n="@@inbox.likeYourPermission"
     >would like your permission to interact with your ORCID Record as a trusted
     party.</ng-container
@@ -26,7 +26,7 @@
 </div>
 <div class="buttons-container">
   <button
-    *ngIf="!notification.archivedDate"
+    *ngIf="!notification?.archivedDate"
     (click)="archive(); $event.stopPropagation()"
     mat-button
     color="primary"
@@ -38,7 +38,7 @@
   <a
     target="_blank"
     rel="noopener noreferrer"
-    [href]="notification.authorizationUrl.uri"
+    [href]="notification?.authorizationUrl.uri"
   >
     <button
       mat-raised-button

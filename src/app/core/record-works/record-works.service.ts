@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { EMPTY, Observable, of, ReplaySubject } from 'rxjs'
+import { BehaviorSubject, EMPTY, Observable, of, ReplaySubject } from 'rxjs'
 import {
   catchError,
   first,
@@ -11,10 +11,16 @@ import {
   take,
   tap,
 } from 'rxjs/operators'
-import { Work, WorksEndpoint } from 'src/app/types/record-works.endpoint'
+import {
+  Work,
+  WorkGroup,
+  WorksEndpoint,
+} from 'src/app/types/record-works.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
 import {
+  ContributionRoles,
   GroupingSuggestions,
+  Role,
   WorkCombineEndpoint,
   WorkIdType,
   WorkIdTypeValidation,
@@ -41,8 +47,14 @@ export class RecordWorksService {
   sortAsc = false
   pageSize = DEFAULT_PAGE_SIZE
   togglzWorksContributors: boolean
+  contributionRoles = ContributionRoles
 
   userRecordOptions: UserRecordOptions = {}
+
+  private _$loading = new BehaviorSubject<boolean>(true)
+  public get $loading() {
+    return this._$loading.asObservable()
+  }
 
   constructor(
     private _togglz: TogglzService,
@@ -75,20 +87,25 @@ export class RecordWorksService {
    * Return an observable with a list of Works
    * For full work details getDetails(id, putCode) must be called
    *
-   * @param id user Orcid id
+   * @param options
    */
   getWorks(options: UserRecordOptions): Observable<WorksEndpoint> {
-    if (options.cleanCacheIfExist && this.$workSubject) {
+    if (!options) {
+      options = {}
+    }
+
+    if (options?.cleanCacheIfExist && this.$workSubject) {
       this.$workSubject.next(<WorksEndpoint>undefined)
     }
 
-    options.pageSize = options.pageSize || DEFAULT_PAGE_SIZE
+    options.pageSize = options?.pageSize || DEFAULT_PAGE_SIZE
     options.offset = options.offset || 0
     this.pageSize = options.pageSize
     this.offset = options.offset
     this.sortOrder = options.sort
     this.sortAsc = options.sortAsc
 
+    this._$loading.next(true)
     this._togglz
       .getStateOf('ORCID_ANGULAR_WORKS_CONTRIBUTORS')
       .pipe(
@@ -130,9 +147,11 @@ export class RecordWorksService {
           data.pageIndex = options.offset
             ? Math.floor(options.offset / options.pageSize)
             : 0
+          data.groups = this.calculateVisibilityErrors(data.groups)
           return data
         }),
         tap((data) => {
+          this._$loading.next(false)
           this.lastEmittedValue = data
           this.$workSubject.next(data)
         }),
@@ -144,6 +163,15 @@ export class RecordWorksService {
       )
       .subscribe()
     return this.$workSubject.asObservable()
+  }
+
+  private calculateVisibilityErrors(groups: WorkGroup[]): WorkGroup[] {
+    return groups.map((group) => {
+      group.visibilityError = !!group.works.find(
+        (x) => x.visibility.visibility !== group.activeVisibility
+      )
+      return group
+    })
   }
 
   changeUserRecordContext(
@@ -434,5 +462,13 @@ export class RecordWorksService {
         .subscribe((x) => this.groupingSuggestionsSubject.next(x))
     }
     return this.groupingSuggestionsSubject.asObservable()
+  }
+
+  getContributionRoles(): Observable<Role[]> {
+    return of(this.contributionRoles)
+  }
+
+  getContributionRoleByKey(key: string): Role {
+    return this.contributionRoles.find((role) => role.key === key)
   }
 }

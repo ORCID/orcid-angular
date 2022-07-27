@@ -146,21 +146,26 @@ export interface ExternalIdentifierId {
 }
 
 export interface Contributor {
-  errors: any[]
-  contributorSequence: Value
+  errors?: any[]
+  contributorSequence?: Value
   contributorEmail?: Value
   contributorOrcid?: ContributorOrcid
   email?: Value
   orcid?: Value
-  uri: Value
+  uri?: Value
   creditName?: any
-  contributorRole: any
-  rolesAndSequences: any[]
+  contributorRole?: any
+  rolesAndSequences?: RolesAndSequences[]
 }
 
 export interface ContributorOrcid {
   path?: string
   uri: string
+}
+
+export interface RolesAndSequences {
+  contributorRole?: string
+  contributorSequence?: string
 }
 
 export interface Title {
@@ -181,7 +186,8 @@ export interface Organization {
   city: string
   country: string
   countryForDisplay: string
-  disambiguatedAffiliationIdentifier: string
+  disambiguatedFundingSourceId?: string
+  disambiguatedAffiliationIdentifier?: string
   orgType: string
   region: string
   sourceId: string

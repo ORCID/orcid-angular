@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 
 import { AffiliationComponent } from './affiliation.component'
+import { SharedModule } from '../../../shared/shared.module'
 
 describe('AffiliationComponent', () => {
   let component: AffiliationComponent
@@ -9,6 +10,7 @@ describe('AffiliationComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
+        imports: [SharedModule],
         declarations: [AffiliationComponent],
       }).compileComponents()
     })

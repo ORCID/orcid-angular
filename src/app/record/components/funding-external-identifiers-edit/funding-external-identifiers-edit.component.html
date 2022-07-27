@@ -11,8 +11,16 @@
   <!-- Grant number value -->
   <div>
     <div class="row">
-      <label for="grant-number-input" class="mat-caption">
-        <strong i18n="@@funding.grantNumber">Grant number </strong>
+      <label
+        for="grant-number-input"
+        class="mat-caption"
+        [ngClass]="{
+          error:
+            grantForm?.hasError('required', 'grantNumber') &&
+            grantForm?.get('grantNumber').touched
+        }"
+      >
+        <strong i18n="@@funding.grantNumber">Grant number</strong>
       </label>
     </div>
     <mat-form-field
@@ -26,7 +34,13 @@
         formControlName="grantNumber"
       />
       <mat-error
-        *ngIf="grantForm.get('grantNumber').errors?.maxlength"
+        *ngIf="grantForm?.get('grantNumber').errors?.required"
+        i18n="@@funding.grantNumberRequired"
+      >
+        Grant number is required
+      </mat-error>
+      <mat-error
+        *ngIf="grantForm?.get('grantNumber').errors?.maxlength"
         i18n="@@shared.maxLength.less_than_two_thousand_forty_eight"
       >
         Must be less than 2084 characters
@@ -41,8 +55,8 @@
       class="mat-caption"
       [ngClass]="{
         error:
-          grantForm.hasError('pattern', 'grantUrl') &&
-          grantForm.get('grantUrl').touched
+          grantForm?.hasError('pattern', 'grantUrl') &&
+          grantForm?.get('grantUrl').touched
       }"
     >
       <strong i18n="@@funding.grantUrl">Grant link </strong>
@@ -58,13 +72,13 @@
       A link to more information about the funding award
     </mat-hint>
     <mat-error
-      *ngIf="grantForm.get('grantUrl').hasError('pattern')"
+      *ngIf="grantForm?.get('grantUrl').hasError('pattern')"
       i18n="@@funding.invalidUrl"
     >
       Invalid URL
     </mat-error>
     <mat-error
-      *ngIf="grantForm.get('grantUrl').hasError('maxlength')"
+      *ngIf="grantForm?.get('grantUrl').hasError('maxlength')"
       i18n="@@shared.maxLength.less_than_two_thousand"
     >
       Must be less than 2000 characters
@@ -78,12 +92,11 @@
         class="mat-caption"
         [ngClass]="{
           error:
-            grantForm.hasError('required', 'fundingRelationship') &&
-            grantForm.get('fundingRelationship').touched
+            grantForm?.hasError('required', 'fundingRelationship') &&
+            grantForm?.get('fundingRelationship').touched
         }"
       >
         <strong i18n="@@shared.relationship">Relationship</strong>
-        <span class="required">*</span>
       </label>
     </div>
 

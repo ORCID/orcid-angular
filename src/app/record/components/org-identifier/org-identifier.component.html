@@ -15,17 +15,24 @@
           target="_blank"
           rel="noopener noreferrer"
           href="{{
-            getLink(orgDisambiguated.sourceType, orgDisambiguated.sourceId)
+            orgDisambiguated.sourceType
+              | organizationLink: orgDisambiguated.sourceId
           }}"
           *ngIf="
-            getLink(orgDisambiguated.sourceType, orgDisambiguated.sourceId)
+            orgDisambiguated.sourceType
+              | organizationLink: orgDisambiguated.sourceId
+              | isUrlWithProtocol
           "
         >
           {{ orgDisambiguated.sourceId }}
         </a>
         <ng-container
           *ngIf="
-            !getLink(orgDisambiguated.sourceType, orgDisambiguated.sourceId)
+            !(
+              orgDisambiguated.sourceType
+              | organizationLink: orgDisambiguated.sourceId
+              | isUrlWithProtocol
+            )
           "
         >
           {{ orgDisambiguated?.sourceId }}
@@ -66,35 +73,29 @@
       class="padding-level-3"
     >
       {{ org.identifierType }}:
-      <ng-container *ngIf="org.preferred && !isUrl(org.preferred)">
-        <ng-container
-          *ngIf="
-            getLink(org.identifierType, org.preferred) !== '';
-            else plainText
-          "
-        >
-          <a
-            class="underline"
-            target="_blank"
-            rel="noopener noreferrer"
-            href="{{ getLink(org.identifierType, org.preferred) }}"
-          >
-            {{ org.preferred }}
-          </a>
-        </ng-container>
-        <ng-template #plainText>
-          {{ org.preferred }}
-        </ng-template>
-      </ng-container>
-      <ng-container *ngIf="org.preferred && isUrl(org.preferred)">
-        <a
-          class="underline"
-          target="_blank"
-          rel="noreferrer noopener"
-          href="{{ org.preferred }}"
-        >
-          {{ org.preferred }}
-        </a>
+      <a
+        class="underline"
+        target="_blank"
+        rel="noopener noreferrer"
+        href="{{ org.identifierType | organizationLink: org.preferred }}"
+        *ngIf="
+          org.identifierType
+            | organizationLink: org.preferred
+            | isUrlWithProtocol
+        "
+      >
+        {{ org.preferred }}
+      </a>
+      <ng-container
+        *ngIf="
+          !(
+            org.identifierType
+            | organizationLink: org.preferred
+            | isUrlWithProtocol
+          )
+        "
+      >
+        {{ org.preferred }}
       </ng-container>
       <ng-container *ngIf="org.preferred">
         <span> (</span><span i18n="@@shared.preferred">preferred</span
@@ -103,23 +104,29 @@
       ><ng-container *ngFor="let id of org.all; index as j"
         ><ng-container *ngIf="id != org.preferred"
           ><ng-container
-            *ngIf="!isUrl(id) && getLink(org.identifierType, id) === ''"
+            *ngIf="
+              !(id | isUrlWithProtocol) &&
+              (org.identifierType | organizationLink: id) === ''
+            "
             >{{ id }}</ng-container
           ><ng-container
-            *ngIf="getLink(org.identifierType, id) !== ''; else plainUrl"
+            *ngIf="
+              (org.identifierType | organizationLink: id) !== '';
+              else plainUrl
+            "
           >
             <a
               class="underline"
               target="_blank"
               rel="noopener noreferrer"
-              href="{{ getLink(org.identifierType, id) }}"
+              href="{{ org.identifierType | organizationLink: id }}"
             >
               {{ id }}
             </a>
           </ng-container>
           <ng-template #plainUrl
             ><a
-              *ngIf="isUrl(id)"
+              *ngIf="id | isUrlWithProtocol"
               class="underline"
               target="_blank"
               rel="noopener noreferrer"

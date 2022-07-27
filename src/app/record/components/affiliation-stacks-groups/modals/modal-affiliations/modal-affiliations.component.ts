@@ -52,8 +52,6 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
   loadingCountryCodes = true
   loadingAffiliations = true
   isMobile: boolean
-  startDateValid: boolean
-  endDateValid: boolean
   defaultVisibility: VisibilityStrings
   filteredOptions: Observable<Organization[]>
 
@@ -83,6 +81,7 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
   ngOrcidYear = $localize`:@@shared.year:Year`
   ngOrcidMonth = $localize`:@@shared.month:Month`
   ngOrcidDay = $localize`:@@shared.day:Day`
+  ngOrcidSelectACountryOrLocation = $localize`:@@shared.selectACountryOrLocation:Select a country or location`
   ngOrcidDefaultVisibilityLabel = $localize`:@@shared.visibilityDescription:Control who can see this information by setting the visibility. Your default visibility is`
 
   selectedOrganizationFromDatabase: Organization

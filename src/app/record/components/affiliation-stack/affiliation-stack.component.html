@@ -1,6 +1,6 @@
 <ng-container
   *ngFor="
-    let affiliation of affiliationStack.affiliations;
+    let affiliation of affiliationStack?.affiliations;
     let i = index;
     let last = last;
     trackBy: trackByAffiliationStack

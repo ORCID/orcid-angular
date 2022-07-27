@@ -61,7 +61,7 @@ export class TopBarMyPublicRecordPreviewComponent implements OnInit {
       // TODO: SHOULD NOT BE REQUIRE TO RELOAD
       // the user session service should be updated
       // https://github.com/ORCID/orcid-angular/projects/1#card-61932970
-      this.window.location.reload()
+      this.window.location.href = '/my-orcid'
     })
   }
 }

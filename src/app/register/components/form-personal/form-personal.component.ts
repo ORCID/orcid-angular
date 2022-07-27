@@ -78,14 +78,14 @@ export class FormPersonalComponent
         ],
         asyncValidators: [
           this._register.backendAdditionalEmailsValidate(
-            this.reactivation.isReactivation
+            this.reactivation?.isReactivation
           ),
         ],
         updateOn: 'change',
       }
     )
 
-    if (!this.reactivation.isReactivation) {
+    if (!this.reactivation?.isReactivation) {
       this.emails.addControl(
         'confirmEmail',
         new FormControl('', {
@@ -105,7 +105,7 @@ export class FormPersonalComponent
       emails: this.emails,
     })
 
-    if (this.reactivation.isReactivation) {
+    if (this.reactivation?.isReactivation) {
       this._reactivationService
         .getReactivationData(this.reactivation.reactivationCode)
         .pipe(first())

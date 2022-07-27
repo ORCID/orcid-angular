@@ -2,7 +2,7 @@
   <div
     class="input-container"
     *ngFor="
-      let additionalEmailControl of additionalEmails.controls | keyvalue;
+      let additionalEmailControl of additionalEmails?.controls | keyvalue;
       index as i
     "
   >

@@ -49,8 +49,7 @@ export class HeaderComponent implements OnInit {
     _userInfo: UserService,
     _togglz: TogglzService,
     location: Location,
-    private _signingService: SignInService,
-    private _platformInfo: PlatformInfoService
+    private _signingService: SignInService
   ) {
     _router.events
       .pipe(filter((event: any) => event instanceof NavigationStart))
@@ -75,7 +74,9 @@ export class HeaderComponent implements OnInit {
         ORCID_REGEXP.test(path) ||
         path === `/${ApplicationRoutes.myOrcid}` ||
         path === `/${ApplicationRoutes.account}` ||
-        path === `/${ApplicationRoutes.trustedParties}`
+        path === `/${ApplicationRoutes.trustedParties}` ||
+        path === `/${ApplicationRoutes.selfService}` ||
+        path === `/${ApplicationRoutes.inbox}`
     })
   }
 

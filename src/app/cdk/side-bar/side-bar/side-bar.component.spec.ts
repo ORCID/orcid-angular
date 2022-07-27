@@ -1,6 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { SideBarComponent } from './side-bar.component'
+import { HttpClientTestingModule } from '@angular/common/http/testing'
+import { RouterTestingModule } from '@angular/router/testing'
+import { WINDOW_PROVIDERS } from '../../window'
+import { RegisterService } from '../../../core/register/register.service'
+import { PlatformInfoService } from '../../platform-info'
+import { ErrorHandlerService } from '../../../core/error-handler/error-handler.service'
+import { SnackbarService } from '../../snackbar/snackbar.service'
+import { MatSnackBar } from '@angular/material/snack-bar'
+import { MatDialog } from '@angular/material/dialog'
+import { Overlay } from '@angular/cdk/overlay'
+import { RecordService } from '../../../core/record/record.service'
+import { UserService } from '../../../core'
 
 describe('SideBarComponent', () => {
   let component: SideBarComponent
@@ -8,7 +20,19 @@ describe('SideBarComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule, RouterTestingModule],
       declarations: [SideBarComponent],
+      providers: [
+        WINDOW_PROVIDERS,
+        RecordService,
+        UserService,
+        PlatformInfoService,
+        ErrorHandlerService,
+        SnackbarService,
+        MatSnackBar,
+        MatDialog,
+        Overlay,
+      ],
     }).compileComponents()
   })
 

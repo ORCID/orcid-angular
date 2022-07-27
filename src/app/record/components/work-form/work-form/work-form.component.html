@@ -41,6 +41,7 @@
         formControlName="workType"
         (selectionChange)="$workTypeUpdateEvent.next()"
         id="cy-work-types"
+        i18n-placeholder="@@works.selectWorkType"
       >
         <mat-optgroup
           *ngFor="let workType of workTypeByCategory"
@@ -445,14 +446,10 @@
         class="mat-form-field-min input-container"
       >
         <mat-select
-          placeholder="Placeholder"
+          placeholder="{{ ngOrcidSelectACitationType }}"
           formControlName="citationType"
           id="cy-citation-type"
         >
-          <mat-option [value]="''" i18n="@@works.selectACitationType">
-            Select a citation type
-          </mat-option>
-
           <mat-option
             *ngFor="let item of citationTypes | keyvalue"
             [value]="item.key"
@@ -615,6 +612,31 @@
   </div>
 
   <!---------------------->
+  <!-- Contributors  -->
+  <!---------------------->
+
+  <div
+    class="title"
+    id="contributors"
+    [ngClass]="{
+      'orc-font-body': !platform.columns12,
+      'orc-font-body-large': platform.columns12
+    }"
+  >
+    <p>
+      <strong i18n="@@works.contributors">Contributors</strong>
+    </p>
+  </div>
+  <hr />
+
+  <app-work-contributor-roles
+    [contributors]="work?.contributorsGroupedByOrcid"
+    [userRecord]="userRecord"
+  ></app-work-contributor-roles>
+
+  <app-work-contributors [userRecord]="userRecord"></app-work-contributors>
+
+  <!---------------------->
   <!-- Work Other Information -->
   <!---------------------->
 
@@ -664,8 +686,8 @@
   <div>
     <div class="row">
       <label for="country-input" class="mat-caption">
-        <strong i18n="@@works.countryPublication"
-          >Country of publication</strong
+        <strong i18n="@@works.countryOrLocationOfPublication"
+          >Country/Location of publication</strong
         >
       </label>
     </div>
@@ -676,7 +698,7 @@
       >
         <mat-select
           id="country-input"
-          placeholder="{{ ngOrcidSelectACountry }}"
+          placeholder="{{ ngOrcidSelectACountryOrLocation }}"
           formControlName="countryCode"
         >
           <mat-option *ngFor="let item of countryCodes" [value]="item.value">

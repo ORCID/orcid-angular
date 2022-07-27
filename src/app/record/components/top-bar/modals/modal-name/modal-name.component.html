@@ -84,7 +84,7 @@
         for="given-names-input"
         class="mat-caption"
         [ngClass]="{
-          error: namesForm.hasError('required', 'givenNames')
+          error: namesForm?.hasError('required', 'givenNames')
         }"
       >
         <strong i18n="@@topBar.givenNames">Given names</strong>
@@ -101,19 +101,19 @@
         />
         <mat-error
           class="mat-caption"
-          *ngIf="namesForm.get('givenNames').hasError('required')"
+          *ngIf="namesForm?.get('givenNames').hasError('required')"
           i18n="@@topBar.firstNameError"
         >
           Please enter your first/given name
         </mat-error>
         <mat-error
-          *ngIf="namesForm.get('givenNames').hasError('illegalName')"
+          *ngIf="namesForm?.get('givenNames').hasError('illegalName')"
           i18n="@@topBar.invalidName"
         >
           Invalid name characters or format
         </mat-error>
         <mat-error
-          *ngIf="namesForm.get('givenNames').hasError('maxlength')"
+          *ngIf="namesForm?.get('givenNames').hasError('maxlength')"
           i18n="@@topBar.namesMaxLenght"
         >
           Must be less than 100 characters
@@ -135,19 +135,19 @@
         />
         <mat-error
           class="mat-caption"
-          *ngIf="namesForm.get('familyName').hasError('required')"
+          *ngIf="namesForm?.get('familyName').hasError('required')"
           i18n="@@topBar.firstNameError"
         >
           Please enter your first/given name
         </mat-error>
         <mat-error
-          *ngIf="namesForm.get('familyName').hasError('illegalName')"
+          *ngIf="namesForm?.get('familyName').hasError('illegalName')"
           i18n="@@topBar.invalidName"
         >
           Invalid name characters or format
         </mat-error>
         <mat-error
-          *ngIf="namesForm.get('familyName').hasError('maxlength')"
+          *ngIf="namesForm?.get('familyName').hasError('maxlength')"
           i18n="@@topBar.namesMaxLenght"
         >
           Must be less than 100 characters
@@ -177,7 +177,7 @@
           placeholder=" {{ ngOrcidAddPublishedName }}"
         />
         <mat-error
-          *ngIf="namesForm.get('publishedName').hasError('maxlength')"
+          *ngIf="namesForm?.get('publishedName').hasError('maxlength')"
           i18n="@@topBar.namesMaxLenght"
         >
           Must be less than 100 characters
@@ -223,7 +223,7 @@
       language. Adding other names can help people find your record when they
       search the ORCID registry.
     </p>
-    <ng-container *ngIf="otherNames.length > 0">
+    <ng-container *ngIf="otherNames?.length > 0">
       <div
         class="row other-names-list"
         id="otherName-dropList"
@@ -310,13 +310,13 @@
         <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
         <span class="mat-body-1">
           <ng-container
-            *ngIf="otherNames.length === 0"
+            *ngIf="otherNames?.length === 0"
             i18n="@@topBar.addOtherName"
           >
             Add other name
           </ng-container>
           <ng-container
-            *ngIf="otherNames.length !== 0"
+            *ngIf="otherNames?.length !== 0"
             i18n="@@topBar.addAnotherName"
           >
             Add another name
