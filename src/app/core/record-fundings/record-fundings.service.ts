@@ -32,6 +32,7 @@ export class RecordFundingsService {
   ) {}
 
   getFundings(options: UserRecordOptions): Observable<FundingGroup[]> {
+    this._$loading.next(true)
     if (options?.publicRecordId) {
       this._http
         .get<FundingGroup[]>(
@@ -48,6 +49,7 @@ export class RecordFundingsService {
           catchError((error) => this._errorHandler.handleError(error)),
           catchError(() => of([])),
           tap((data) => {
+            this._$loading.next(false)
             this.lastEmittedValue = data
             this.$fundings.next(data)
           }),
@@ -55,7 +57,6 @@ export class RecordFundingsService {
         )
         .subscribe()
     } else {
-      this._$loading.next(true)
       this.getAndSortFundings(options)
         .pipe(
           retry(3),
