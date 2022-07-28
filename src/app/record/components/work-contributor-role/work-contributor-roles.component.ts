@@ -144,7 +144,7 @@ export class WorkContributorRolesComponent implements OnInit {
   private getRecordHolderContribution(): Contributor {
     return this.contributors?.find(
       (c) =>
-        c?.contributorOrcid?.path === this.userRecord?.userInfo?.REAL_USER_ORCID
+        c?.contributorOrcid?.path === this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID
     )
   }
 }

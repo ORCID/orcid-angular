@@ -52,7 +52,9 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.id = this.userRecord?.userInfo?.REAL_USER_ORCID
+    // EFFECTIVE_USER_ORCID keeps the ORCID id of the user you are on.
+    // REAL_USER_ORCID will contain the orcid id of a delegator when on delegation mode.
+    this.id = this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID
     this.platform
       .get()
       .pipe(takeUntil(this.$destroy))
