@@ -173,7 +173,7 @@ function getContributor(): Contributor[] {
 function getUserRecord(): UserRecord {
   return {
     userInfo: {
-      REAL_USER_ORCID: '0000-0000-0000-000X',
+      EFFECTIVE_USER_ORCID: '0000-0000-0000-000X',
     },
   } as UserRecord
 }
