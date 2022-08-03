@@ -552,7 +552,15 @@ export class WorkFormComponent implements OnInit {
         work.source = this.work.source
       }
       this._workService.save(work).subscribe((value) => {
-        this._dialogRef.close()
+        if (value?.errors?.length > 0) {
+          this.loading = false
+          this._snackBar.showValidationError(
+            value?.errors[0],
+            $localize`:@@shared.pleaseReview:Please review and fix the issue`
+          )
+        } else {
+          this.closeEvent()
+        }
       })
     } else {
       this._snackBar.showValidationError()
