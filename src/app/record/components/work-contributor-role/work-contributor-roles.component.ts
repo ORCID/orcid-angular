@@ -136,7 +136,7 @@ export class WorkContributorRolesComponent implements OnInit {
     return this.formBuilder.group({
       role: [
         { value: role ? role.toLowerCase() : '', disabled },
-        [unique('role')],
+        [unique('role', 'no specified role')],
       ],
     })
   }
