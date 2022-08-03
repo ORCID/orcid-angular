@@ -6,7 +6,10 @@ import {
   ValidatorFn,
 } from '@angular/forms'
 
-export function unique(controlName: string, duplicatedOptionAllowed?: string): ValidatorFn {
+export function unique(
+  controlName: string,
+  duplicatedOptionAllowed?: string
+): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     if (control.value) {
       const parentFormGroup: FormArray | FormGroup = control.parent
