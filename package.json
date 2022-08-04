@@ -51,8 +51,8 @@
     "cypress:report:clean": "rimraf cypress/reports/temp",
     "cypress:run": "cypress run",
     "cyp": "npx cypress open",
-    "cypress:report:merge": "mochawesome-merge cypress/reports/temp/mochawesome-report/*.json > cypress/reports/temp/output.json",
-    "cypress:report:html": "marge cypress/reports/temp/output.json -f report --reportDir ./cypress/reports --inline --autoOpen true --overwrite false"
+    "merge-report": "mochawesome-merge cypress/reports/mocha/.json -o cypress/reports/report.json",
+    "generate-report": "merge cypress/reports/mochareports/report.json -f report -o cypress/reports/mocha"
   },
   "private": true,
   "dependencies": {
@@ -112,8 +112,9 @@
     "babel-loader": "^8.0.6",
     "codelyzer": "^6.0.0",
     "cross-env": "^5.2.1",
-    "cypress": "10.0.3",
+    "cypress": "10.3.1",
     "cypress-axe": "^0.14.0",
+    "cypress-mochawesome-reporter": "^3.2.0",
     "fs-extra": "^8.1.0",
     "git-repo-info": "^2.1.1",
     "glob": "^7.1.6",
