@@ -25,7 +25,7 @@ export default defineConfig({
   chromeWebSecurity: false,
   viewportWidth: 1000,
   viewportHeight: 1000,
-  reporter: 'cypress-mochawesome-reporter',  
+  reporter: 'cypress-mochawesome-reporter',
   reporterOptions: {
     charts: true,
     overwrite: false,
@@ -38,7 +38,7 @@ export default defineConfig({
     reportDir: 'cypress/reports/mochawesome-report',
     reportPageTitle: 'Orcid Automated Regression Test Results',
     reportFileName: '[status]_[daytime]-[name]-report',
-    timestamp: 'longDate'
+    timestamp: 'longDate',
   },
   e2e: {
     // We've imported your old cypress plugins here.
@@ -49,10 +49,12 @@ export default defineConfig({
         require('./cypress/plugins/index.js')(on, config)
         require('cypress-mochawesome-reporter/plugin')(on)
         return {
-          excludeSpecPattern: ['**/registry/all-registry.cy.js',
-          '**/my-orcid/all-add.cy.js',
-          '**/my-orcid/all-other-features.cy.js',
-          '**/oauth/all-oauth.cy.js']
+          excludeSpecPattern: [
+            '**/registry/all-registry.cy.js',
+            '**/my-orcid/all-add.cy.js',
+            '**/my-orcid/all-other-features.cy.js',
+            '**/oauth/all-oauth.cy.js',
+          ],
         }
       }
       return require('./cypress/plugins/index.js')(on, config)
@@ -61,6 +63,6 @@ export default defineConfig({
     excludeSpecPattern: [
       '**/legacy_oldScripts/*',
       '**/registry/gmail_check_test_ignore.js',
-    ]
-  }
+    ],
+  },
 })

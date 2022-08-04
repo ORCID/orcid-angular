@@ -15,7 +15,7 @@ expected: OAuth session must not be revived at this stage
 
 describe('OAuth cypress tests', async function () {
   const recordOwner = userData.cyOAuth_RecordOwnerTC_Sessions
-  const scope = '/person/update' 
+  const scope = '/person/update'
   const authorizationLink =
     'https://qa.orcid.org/oauth/authorize?client_id=' +
     userData.cyOAuth_MemberUser.clientID +
@@ -24,19 +24,18 @@ describe('OAuth cypress tests', async function () {
     '&redirect_uri=' +
     userData.cyOAuth_MemberUser.redirect_uri
 
-  before(() => {
-  })
+  before(() => {})
 
   it('TC#28 OAuth session must end once user moves away from the session', function () {
     cy.visit(authorizationLink)
-    cy.wait(2000) 
+    cy.wait(2000)
     //navigate directly to sign in page
     cy.visit(Cypress.env('signInURL'))
     cy.wait(2000)
     cy.signin(recordOwner)
-    cy.wait(2000) 
+    cy.wait(2000)
     cy.url().then((urlString) => {
-        cy.url().should('include', 'my-orcid?orcid=')
+      cy.url().should('include', 'my-orcid?orcid=')
     })
     //log out
     cy.get('#cy-user-info').click()
@@ -44,8 +43,8 @@ describe('OAuth cypress tests', async function () {
     cy.wait(2000) //need to wait for the session to close
     cy.signin(recordOwner)
     cy.wait(2000)
-     //verify user taken to my orcid
-     cy.url().then((urlString) => {
+    //verify user taken to my orcid
+    cy.url().then((urlString) => {
       cy.url().should('include', 'my-orcid?orcid=')
     })
   })

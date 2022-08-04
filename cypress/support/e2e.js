@@ -7,4 +7,3 @@ import './signin.commands'
 import './clean.commands'
 import './create.commands'
 import 'cypress-mochawesome-reporter/register'
-
