@@ -650,7 +650,14 @@ export class WorkFormComponent implements OnInit {
   private getContributorRoles(): Contributor[] {
     const rolesFormArray = this.workForm.get('roles') as FormArray
     const roles = rolesFormArray?.controls
-      ?.filter((fg) => fg?.value?.role && (this._workService.getContributionRoleByKey(fg?.value?.role) !== null && this._workService.getContributionRoleByKey(fg?.value?.role).key !== 'no specified role'))
+      ?.filter(
+        (fg) =>
+          fg?.value?.role &&
+          this._workService.getContributionRoleByKey(fg?.value?.role) !==
+            null &&
+          this._workService.getContributionRoleByKey(fg?.value?.role).key !==
+            'no specified role'
+      )
       .map((formGroup) => {
         const role = formGroup?.value?.role
         const value = this._workService.getContributionRoleByKey(role)?.value
