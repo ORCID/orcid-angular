@@ -1,4 +1,3 @@
-
 /// <reference types="cypress" />
 
 import userData from '../../fixtures/oauth-users.fixture.json'
@@ -14,7 +13,7 @@ expected: user is taken to redirect URI appended with "?error=access_denied&erro
 
 describe('OAuth cypress tests', async function () {
   const recordOwner = userData.cyOAuth_RecordOwnerTC_Sessions
-  const scope = '/person/update' 
+  const scope = '/person/update'
   const authorizationLink =
     'https://qa.orcid.org/oauth/authorize?client_id=' +
     userData.cyOAuth_MemberUser.clientID +
@@ -23,22 +22,23 @@ describe('OAuth cypress tests', async function () {
     '&redirect_uri=' +
     userData.cyOAuth_MemberUser.redirect_uri
 
-  before(() => {
-  })
+  before(() => {})
 
   it('TC#32 OAuth session must end once user denies permission', function () {
     cy.visit(authorizationLink)
-    cy.wait(2000) 
+    cy.wait(2000)
     cy.signin(recordOwner)
     cy.url().then((urlString) => {
-        cy.url().should('contain', 'qa.orcid.org/oauth/authorize?')
-      })
+      cy.url().should('contain', 'qa.orcid.org/oauth/authorize?')
+    })
     cy.get('#deny-button').click()
     cy.url().then((urlString) => {
-        cy.url().should('include', '?error=access_denied&error_description=User%20denied%20access')
+      cy.url().should(
+        'include',
+        '?error=access_denied&error_description=User%20denied%20access'
+      )
     })
   })
 
-  after(() => {
-  })
+  after(() => {})
 })
