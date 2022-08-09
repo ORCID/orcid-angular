@@ -117,10 +117,10 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
     return this.rolesFormArray?.controls
       .filter((formGroup) => !formGroup.disabled && formGroup?.value?.role)
       .map(
-        (formGroup) => 
-          this.workService.getContributionRoleByKey(formGroup?.value?.role).translation 
+        (formGroup) =>
+          this.workService.getContributionRoleByKey(formGroup?.value?.role)
+            .translation
       )
-      
   }
 
   private getCreditNameFromUserRecord(): string {

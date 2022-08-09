@@ -107,22 +107,19 @@ export class WorkContributorRolesComponent implements OnInit {
           })
         } else {
           this.addRoleFormGroup(
-            this.workService.getContributionRoleByKey('no specified role')
-              .key,
+            this.workService.getContributionRoleByKey('no specified role').key,
             false
           )
         }
       } else {
         this.addRoleFormGroup(
-          this.workService.getContributionRoleByKey('no specified role')
-            .key,
+          this.workService.getContributionRoleByKey('no specified role').key,
           false
         )
       }
     } else {
       this.addRoleFormGroup(
-        this.workService.getContributionRoleByKey('no specified role')
-          .key,
+        this.workService.getContributionRoleByKey('no specified role').key,
         false
       )
     }
@@ -136,11 +133,12 @@ export class WorkContributorRolesComponent implements OnInit {
     return this.formBuilder.group({
       role: [
         {
-          value: role ? role.toLowerCase() : '', disabled },
+          value: role ? role.toLowerCase() : '',
+          disabled,
+        },
         [unique('role', 'no specified role')],
       ],
     })
-    
   }
 
   private getRecordHolderContribution(): Contributor {
