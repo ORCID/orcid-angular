@@ -85,7 +85,7 @@ describe('WorkContributorsComponent', () => {
           role: [{ value: 'conceptualization', disabled: true }],
         }),
         formBuilder.group({
-          role: [{ value: 'unspecified', disabled: true }],
+          role: [{ value: 'no specified role', disabled: true }],
         }),
       ])
     )
@@ -114,7 +114,7 @@ describe('WorkContributorsComponent', () => {
 
     expect(recordHolderData.innerHTML).not.toBeNull()
     expect(recordHolderData.textContent).toBe(
-      'Name Surname (Conceptualization, Unspecified, Methodology)'
+      'Name Surname (Conceptualization, No specified role, Methodology)'
     )
     expect(affiliation.innerHTML).not.toBeNull()
     expect(affiliation.textContent).toBe('ORCID, University')
