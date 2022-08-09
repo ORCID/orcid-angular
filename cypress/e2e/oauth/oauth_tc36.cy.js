@@ -1,4 +1,3 @@
-
 /// <reference types="cypress" />
 
 import userData from '../../fixtures/oauth-users.fixture.json'
@@ -11,24 +10,21 @@ expected: user is taken to OAuth error page "oauth_error / Please specify the de
 */
 
 describe('OAuth cypress tests', async function () {
-
   const recordOwner = userData.cyOAuth_RecordOwnerTC_Sessions
   const authorizationLink =
-  'https://qa.orcid.org/oauth/authorize?client_id=' +
-  userData.cyOAuth_MemberUser.clientID +
-  '&response_type=code'+
-  '&redirect_uri=' +
-  userData.cyOAuth_MemberUser.redirect_uri
+    'https://qa.orcid.org/oauth/authorize?client_id=' +
+    userData.cyOAuth_MemberUser.clientID +
+    '&response_type=code' +
+    '&redirect_uri=' +
+    userData.cyOAuth_MemberUser.redirect_uri
 
-  before(() => {
-  })
-    
+  before(() => {})
+
   it('TC#36 missing scope in authorization takes user to oauth error page', function () {
     cy.visit(authorizationLink)
-    cy.wait(2000) 
+    cy.wait(2000)
     cy.get('.oauth-error').contains('Please specify the desired scopes')
   })
 
-  after(() => {
-  })
+  after(() => {})
 })
