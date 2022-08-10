@@ -25,9 +25,10 @@ describe('OAuth link customization tests', async function () {
 
   it('TC#41 authorization link contains parameter "show_login=false"', function () {
     cy.visit(authorizationLink)
-    cy.wait(2000) 
-    cy.url().should('include', 'register')
-    .and('include', userData.cyOAuth_MemberUser.clientID)
+    cy.wait(2000)
+    cy.url()
+      .should('include', 'register')
+      .and('include', userData.cyOAuth_MemberUser.clientID)
   })
 
   after(() => {})
