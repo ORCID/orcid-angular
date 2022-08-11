@@ -71,7 +71,7 @@ export class WorkContributorRolesComponent implements OnInit {
     this.roles.push(
       this.getRoleForm(
         this.workService.getContributionRoleByKey('no specified role')
-          .translation,
+          .key,
         false
       )
     )
