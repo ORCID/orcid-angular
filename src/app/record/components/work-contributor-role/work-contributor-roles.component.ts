@@ -99,7 +99,7 @@ export class WorkContributorRolesComponent implements OnInit {
           roles.forEach((rs) => {
             const role = this.workService.getContributionRoleByKey(rs)
             if (rs && role) {
-              this.addRoleFormGroup(role.translation, true)
+              this.addRoleFormGroup(role.key, true)
             } else {
               this.addRoleFormGroup(rs, true)
             }
