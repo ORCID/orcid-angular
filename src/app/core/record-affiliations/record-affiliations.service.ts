@@ -7,7 +7,8 @@ import {
   AffiliationsEndpoint,
   Affiliation,
   Organization,
-  DisambiguatedOrganization, EmploymentsEndpoint,
+  DisambiguatedOrganization,
+  EmploymentsEndpoint,
 } from 'src/app/types/record-affiliation.endpoint'
 import { environment } from 'src/environments/environment'
 
@@ -273,5 +274,4 @@ export class RecordAffiliationService {
         catchError((error) => this._errorHandler.handleError(error))
       )
   }
-
 }

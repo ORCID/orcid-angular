@@ -139,13 +139,13 @@ export const AffiliationTypeLabel = {
 }
 
 export interface EmploymentsEndpoint {
-  lastModifiedDate: string,
-  path: string,
+  lastModifiedDate: string
+  path: string
   employmentGroups: EmploymentGroups[]
 }
 
 export interface EmploymentGroups {
-  lastModifiedDate: string,
-  identifiers: string,
+  lastModifiedDate: string
+  identifiers: string
   activities: Affiliation[]
 }

@@ -46,10 +46,12 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
     private parentForm: FormGroupDirective,
     private platform: PlatformInfoService,
     private workService: RecordWorksService,
-    private affiliationService: RecordAffiliationService,
+    private affiliationService: RecordAffiliationService
   ) {
     _togglz
-      .getStateOf('ORCID_ANGULAR_CURRENT_EMPLOYMENT_AFFILIATIONS_WORK_CONTRIBUTORS')
+      .getStateOf(
+        'ORCID_ANGULAR_CURRENT_EMPLOYMENT_AFFILIATIONS_WORK_CONTRIBUTORS'
+      )
       .subscribe((value) => (this.togglzCurrentEmploymentAffiliations = value))
   }
 
@@ -72,11 +74,17 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
         this.isMobile = platform.columns4 || platform.columns8
         this.screenDirection = platform.screenDirection
       })
-    if (this.togglzCurrentEmploymentAffiliations && !this.userRecord?.affiliations) {
-      this.affiliationService.getEmployments()
-        .pipe(tap(employments => {
-          this.getEmployments(employments)
-        }))
+    if (
+      this.togglzCurrentEmploymentAffiliations &&
+      !this.userRecord?.affiliations
+    ) {
+      this.affiliationService
+        .getEmployments()
+        .pipe(
+          tap((employments) => {
+            this.getEmployments(employments)
+          })
+        )
         .subscribe()
     } else {
       this.getEmploymentsFromAffiliations(this.userRecord?.affiliations)
@@ -157,13 +165,8 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
     this.affiliation = employments.employmentGroups
       ?.map((employmentGroup) =>
         employmentGroup.activities
-          .filter(
-            (activity) => !activity?.endDate?.year
-          )
-          .map(
-            (activity) =>
-              activity.organization?.name
-          )
+          .filter((activity) => !activity?.endDate?.year)
+          .map((activity) => activity.organization?.name)
           ?.join(', ')
       )
       .filter((affiliation) => affiliation.length > 0)
@@ -175,7 +178,10 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
       ?.map((affiliationUIGroup) =>
         affiliationUIGroup.affiliationGroup
           .filter(
-            (affiliation) => !affiliation.defaultAffiliation?.endDate?.year && affiliation.defaultAffiliation.affiliationType.value === 'employment'
+            (affiliation) =>
+              !affiliation.defaultAffiliation?.endDate?.year &&
+              affiliation.defaultAffiliation.affiliationType.value ===
+                'employment'
           )
           .map(
             (affiliation) =>
