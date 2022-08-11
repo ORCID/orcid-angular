@@ -139,7 +139,7 @@ describe('WorkContributorRoleComponent', () => {
 
     const deleteButtons = await loader.getAllHarnesses(MatIconHarness)
 
-    expect(disabledStates.filter((value) => value).length).toBe(3)
+    expect(disabledStates.filter((value) => value).length).toBe(2)
     expect(deleteButtons.length).toBe(4)
   })
 })
