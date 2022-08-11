@@ -471,12 +471,6 @@ export class RecordWorksService {
   }
 
   getContributionRoleByKey(key: string): Role {
-    let aRole = this.contributionRoles.find((role) => role.key === key)
-    if (!aRole) {
-      aRole = this.contributionRoles.find(
-        (role) => role.key === 'no specified role'
-      )
-    }
-    return aRole
+    return this.contributionRoles.find((role) => role.key === key)
   }
 }
