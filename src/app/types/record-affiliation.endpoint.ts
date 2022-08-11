@@ -77,6 +77,7 @@ export interface Affiliation extends AssertionBase {
   url: Value
   orgDisambiguatedExternalIdentifiers?: any // TODO is this always empty?
   affiliationExternalIdentifiers?: ExternalIdentifier[]
+  organization?: Organization
 }
 
 export interface Organization {
@@ -91,6 +92,7 @@ export interface Organization {
   sourceType: string
   url: string
   value: string
+  name?: string
 }
 
 export interface DisambiguatedOrganization {
@@ -134,4 +136,16 @@ export const AffiliationTypeLabel = {
   [AffiliationType.distinction]: $localize`:@@shared.distinction:Distinction`,
   [AffiliationType.membership]: $localize`:@@shared.membershipTitle:Membership`,
   [AffiliationType.service]: $localize`:@@shared.service:Service`,
+}
+
+export interface EmploymentsEndpoint {
+  lastModifiedDate: string,
+  path: string,
+  employmentGroups: EmploymentGroups[]
+}
+
+export interface EmploymentGroups {
+  lastModifiedDate: string,
+  identifiers: string,
+  activities: Affiliation[]
 }
