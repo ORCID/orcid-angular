@@ -1,6 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core'
 import { Contributor } from 'src/app/types'
 import { RolesAndSequences } from '../../../types/common.endpoint'
+import { Role, ContributionRoles } from '../../../types/works.endpoint'
+
 
 @Pipe({
   name: 'contributorsPipe',
@@ -23,7 +25,7 @@ export class ContributorsPipe implements PipeTransform {
         })
       } else {
         if (contributor.contributorRole && contributor.contributorRole.value) {
-          value = contributor.contributorRole.value.toLowerCase()
+          value = this.getContributionRoleByKey(contributor.contributorRole.value.toLowerCase()).translation
         }
 
         if (
@@ -71,7 +73,12 @@ export class ContributorsPipe implements PipeTransform {
     index: number
   ): string {
     const sequence = roleAndSequence?.contributorSequence?.toLowerCase()
-    const role = roleAndSequence?.contributorRole?.toLowerCase()
+    const roleKey = roleAndSequence?.contributorRole?.toLowerCase()
+    let role = roleKey;
+    if(roleKey) {
+      role = this.getContributionRoleByKey(role).translation
+    }
+
     if (role && sequence) {
       return (
         value +
@@ -95,5 +102,9 @@ export class ContributorsPipe implements PipeTransform {
     return length - 1 === index
       ? value + roleSequence
       : value + this.addComma(roleSequence)
+  }
+
+  private getContributionRoleByKey(key: string): Role {
+    return ContributionRoles.find((role) => role.key === key)
   }
 }

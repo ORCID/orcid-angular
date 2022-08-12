@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core'
+import { ContributionRoles, Role } from 'src/app/types/works.endpoint'
 import { Contributor } from '../../../types'
 
 @Pipe({
@@ -20,14 +21,20 @@ export class RecordHolderRolesPipe implements PipeTransform {
         })
         ?.rolesAndSequences.forEach((roleAndSequence) => {
           if (roleAndSequence?.contributorRole) {
+            let role = this.getContributionRoleByKey(roleAndSequence?.contributorRole?.toLowerCase()).translation
             if (roles) {
-              roles = `${roles}, ${roleAndSequence?.contributorRole?.toLowerCase()}`
+              roles = `${roles}, ${role}`
             } else {
-              roles = roleAndSequence?.contributorRole?.toLowerCase()
+              roles = role
             }
           }
         })
     }
     return roles
   }
+  
+  private getContributionRoleByKey(key: string): Role {
+    return ContributionRoles.find((role) => role.key === key)
+  }
+
 }
