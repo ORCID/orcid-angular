@@ -3,7 +3,6 @@ import { Contributor } from 'src/app/types'
 import { RolesAndSequences } from '../../../types/common.endpoint'
 import { Role, ContributionRoles } from '../../../types/works.endpoint'
 
-
 @Pipe({
   name: 'contributorsPipe',
 })
@@ -25,7 +24,9 @@ export class ContributorsPipe implements PipeTransform {
         })
       } else {
         if (contributor.contributorRole && contributor.contributorRole.value) {
-          value = this.getContributionRoleByKey(contributor.contributorRole.value.toLowerCase()).translation
+          value = this.getContributionRoleByKey(
+            contributor.contributorRole.value.toLowerCase()
+          ).translation
         }
 
         if (
@@ -74,8 +75,8 @@ export class ContributorsPipe implements PipeTransform {
   ): string {
     const sequence = roleAndSequence?.contributorSequence?.toLowerCase()
     const roleKey = roleAndSequence?.contributorRole?.toLowerCase()
-    let role = roleKey;
-    if(roleKey) {
+    let role = roleKey
+    if (roleKey) {
       role = this.getContributionRoleByKey(role).translation
     }
 

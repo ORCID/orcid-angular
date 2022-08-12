@@ -21,7 +21,9 @@ export class RecordHolderRolesPipe implements PipeTransform {
         })
         ?.rolesAndSequences.forEach((roleAndSequence) => {
           if (roleAndSequence?.contributorRole) {
-            let role = this.getContributionRoleByKey(roleAndSequence?.contributorRole?.toLowerCase()).translation
+            let role = this.getContributionRoleByKey(
+              roleAndSequence?.contributorRole?.toLowerCase()
+            ).translation
             if (roles) {
               roles = `${roles}, ${role}`
             } else {
@@ -32,9 +34,8 @@ export class RecordHolderRolesPipe implements PipeTransform {
     }
     return roles
   }
-  
+
   private getContributionRoleByKey(key: string): Role {
     return ContributionRoles.find((role) => role.key === key)
   }
-
 }
