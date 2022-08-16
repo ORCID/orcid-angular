@@ -15,7 +15,7 @@ describe('RecordHolderContributionPipe', () => {
   it('should return roles of contribution holder if exist', () => {
     const contributors = getContributor()
     expect(pipe.transform(contributors, null, '0000-0000-0000-000X')).toBe(
-      'conceptualization, project administration'
+      'Conceptualization, Project administration'
     )
     expect(pipe.transform(contributors, null, '0000-0000-0000-000Z')).toBe(null)
   })
