@@ -653,7 +653,8 @@ export class WorkFormComponent implements OnInit {
       ?.filter(
         (fg) =>
           fg?.value?.role &&
-          this._workService.getContributionRoleByKey(fg?.value?.role) &&
+          this._workService.getContributionRoleByKey(fg?.value?.role) !==
+            null &&
           this._workService.getContributionRoleByKey(fg?.value?.role)?.key !==
             'no specified role'
       )
