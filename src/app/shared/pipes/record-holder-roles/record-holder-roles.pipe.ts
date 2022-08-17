@@ -23,7 +23,7 @@ export class RecordHolderRolesPipe implements PipeTransform {
           if (roleAndSequence?.contributorRole) {
             let role = this.getContributionRoleByKey(
               roleAndSequence?.contributorRole?.toLowerCase()
-            ).translation
+            )?.translation
             if (roles) {
               roles = `${roles}, ${role}`
             } else {
