@@ -180,7 +180,7 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
           .filter(
             (affiliation) =>
               !affiliation.defaultAffiliation?.endDate?.year &&
-              affiliation.defaultAffiliation.affiliationType.value ===
+              affiliation.defaultAffiliation?.affiliationType?.value ===
                 'employment'
           )
           .map(
