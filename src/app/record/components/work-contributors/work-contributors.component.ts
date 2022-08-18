@@ -6,12 +6,15 @@ import {
   FormGroupDirective,
 } from '@angular/forms'
 import { UserRecord } from '../../../types/record.local'
-import { takeUntil } from 'rxjs/operators'
+import { takeUntil, tap } from 'rxjs/operators'
 import { PlatformInfoService } from '../../../cdk/platform-info'
 import { Subject } from 'rxjs'
 import { Contributor } from '../../../types'
 import { environment } from 'src/environments/environment'
 import { RecordWorksService } from '../../../core/record-works/record-works.service'
+import { RecordAffiliationService } from '../../../core/record-affiliations/record-affiliations.service'
+import { TogglzService } from '../../../core/togglz/togglz.service'
+import { EmploymentsEndpoint } from '../../../types/record-affiliation.endpoint'
 
 @Component({
   selector: 'app-work-contributors',
@@ -35,13 +38,22 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
   isMobile: boolean
   screenDirection = 'ltr'
   roles: string
+  togglzCurrentEmploymentAffiliations: boolean
 
   constructor(
+    _togglz: TogglzService,
     private formBuilder: FormBuilder,
     private parentForm: FormGroupDirective,
     private platform: PlatformInfoService,
-    private workService: RecordWorksService
-  ) {}
+    private workService: RecordWorksService,
+    private affiliationService: RecordAffiliationService
+  ) {
+    _togglz
+      .getStateOf(
+        'ORCID_ANGULAR_CURRENT_EMPLOYMENT_AFFILIATIONS_WORK_CONTRIBUTORS'
+      )
+      .subscribe((value) => (this.togglzCurrentEmploymentAffiliations = value))
+  }
 
   get contributorsFormArray() {
     return this.parentForm.control.controls['contributors'] as FormArray
@@ -62,6 +74,21 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
         this.isMobile = platform.columns4 || platform.columns8
         this.screenDirection = platform.screenDirection
       })
+    if (
+      this.togglzCurrentEmploymentAffiliations &&
+      !this.userRecord?.affiliations
+    ) {
+      this.affiliationService
+        .getEmployments()
+        .pipe(
+          tap((employments) => {
+            this.getEmployments(employments)
+          })
+        )
+        .subscribe()
+    } else {
+      this.getEmploymentsFromAffiliations(this.userRecord?.affiliations)
+    }
     this.initializeFormArray()
   }
 
@@ -97,7 +124,6 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
         ...this.getEnabledRoles(),
       ]?.join(', ')
     })
-    this.getAffiliation()
   }
 
   private getDisabledRoles(): string[] {
@@ -135,12 +161,27 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
     }
   }
 
-  private getAffiliation(): void {
-    this.affiliation = this.userRecord?.affiliations
+  private getEmployments(employments: EmploymentsEndpoint): void {
+    this.affiliation = employments.employmentGroups
+      ?.map((employmentGroup) =>
+        employmentGroup.activities
+          .filter((activity) => !activity?.endDate?.year)
+          .map((activity) => activity.organization?.name)
+          ?.join(', ')
+      )
+      .filter((affiliation) => affiliation.length > 0)
+      .join(', ')
+  }
+
+  private getEmploymentsFromAffiliations(affiliations): void {
+    this.affiliation = affiliations
       ?.map((affiliationUIGroup) =>
         affiliationUIGroup.affiliationGroup
           .filter(
-            (affiliation) => !affiliation.defaultAffiliation?.endDate?.year
+            (affiliation) =>
+              !affiliation.defaultAffiliation?.endDate?.year &&
+              affiliation.defaultAffiliation?.affiliationType?.value ===
+                'employment'
           )
           .map(
             (affiliation) =>

@@ -133,11 +133,13 @@ function getUserRecord(): UserRecord {
   const affiliationUIGroupEmployment = {
     defaultAffiliation: {
       affiliationName: { value: 'ORCID' },
+      affiliationType: { value: 'employment' },
     } as Affiliation,
   } as AffiliationGroup
   const affiliationUIGroupMembership = {
     defaultAffiliation: {
       affiliationName: { value: 'University' },
+      affiliationType: { value: 'employment' },
     } as Affiliation,
   } as AffiliationGroup
   userRecord.affiliations = [
