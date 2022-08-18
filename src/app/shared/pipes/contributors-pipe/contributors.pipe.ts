@@ -77,7 +77,7 @@ export class ContributorsPipe implements PipeTransform {
     const roleKey = roleAndSequence?.contributorRole?.toLowerCase()
     let role = roleKey
     if (roleKey) {
-      role = this.getContributionRoleByKey(role).translation
+      role = this.getContributionRoleByKey(role)?.translation
     }
 
     if (role && sequence) {
