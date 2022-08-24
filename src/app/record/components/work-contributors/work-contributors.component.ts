@@ -75,9 +75,11 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
         this.screenDirection = platform.screenDirection
       })
     if (
-      this.togglzCurrentEmploymentAffiliations &&
-      !this.userRecord?.affiliations
+      !this.togglzCurrentEmploymentAffiliations &&
+      this.userRecord?.affiliations?.length > 0
     ) {
+      this.getEmploymentsFromAffiliations(this.userRecord?.affiliations)
+    } else {
       this.affiliationService
         .getEmployments()
         .pipe(
@@ -86,8 +88,6 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
           })
         )
         .subscribe()
-    } else {
-      this.getEmploymentsFromAffiliations(this.userRecord?.affiliations)
     }
     this.initializeFormArray()
   }
