@@ -18,8 +18,8 @@ describe('OAuth cypress tests', async function () {
     scope +
     '&redirect_uri=' +
     userData.cyOAuth_MemberUser.redirect_uri
-  
-    const authorizationLinkEmptyClient =
+
+  const authorizationLinkEmptyClient =
     'https://qa.orcid.org/oauth/authorize?client_id=' +
     '&response_type=code&scope=' +
     scope +
@@ -36,7 +36,9 @@ describe('OAuth cypress tests', async function () {
   it('TC#34 missing client id in authorization link results in error message', function () {
     cy.visit(authorizationLinkNoClient)
     cy.wait(2000)
-    cy.get('.oauth-error').contains('Incorrect OAuth Link, missing client id parameter')
+    cy.get('.oauth-error').contains(
+      'Incorrect OAuth Link, missing client id parameter'
+    )
   })
   after(() => {})
 })
