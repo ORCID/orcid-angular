@@ -21,8 +21,8 @@ describe('OAuth link customization tests', async function () {
     scope +
     '&email=' +
     emailParamValue +
-    '&given_names=Jane' + 
-    '&family_names=Doe'+
+    '&given_names=Jane' +
+    '&family_names=Doe' +
     '&show_login=true' +
     '&redirect_uri=' +
     userData.cyOAuth_MemberUser.redirect_uri
