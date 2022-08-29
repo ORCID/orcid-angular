@@ -38,22 +38,14 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
   isMobile: boolean
   screenDirection = 'ltr'
   roles: string
-  togglzCurrentEmploymentAffiliations: boolean
 
   constructor(
-    _togglz: TogglzService,
     private formBuilder: FormBuilder,
     private parentForm: FormGroupDirective,
     private platform: PlatformInfoService,
     private workService: RecordWorksService,
     private affiliationService: RecordAffiliationService
-  ) {
-    _togglz
-      .getStateOf(
-        'ORCID_ANGULAR_CURRENT_EMPLOYMENT_AFFILIATIONS_WORK_CONTRIBUTORS'
-      )
-      .subscribe((value) => (this.togglzCurrentEmploymentAffiliations = value))
-  }
+  ) {}
 
   get contributorsFormArray() {
     return this.parentForm.control.controls['contributors'] as FormArray
@@ -74,10 +66,7 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
         this.isMobile = platform.columns4 || platform.columns8
         this.screenDirection = platform.screenDirection
       })
-    if (
-      !this.togglzCurrentEmploymentAffiliations &&
-      this.userRecord?.affiliations?.length > 0
-    ) {
+    if (this.userRecord?.affiliations?.length > 0) {
       this.getEmploymentsFromAffiliations(this.userRecord?.affiliations)
     } else {
       this.affiliationService
