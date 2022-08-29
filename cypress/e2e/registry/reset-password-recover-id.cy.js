@@ -40,15 +40,14 @@ describe('Password reset and OID recovery', () => {
       //follow the link from the email
       cy.visit(href)
     })
-
+    cy.wait(3000)
     //type new passw
-    cy.get('#passwordField').clear().type(newPassword)
+    cy.get('#cy-password-input').clear().type(newPassword)
     //confirm new passw
-    cy.get('#retypedPassword').clear().type(newPassword)
+    cy.get('#cy-password-confirm-input').clear().type(newPassword)
     //save
-    cy.get('#reg-form-password').within(($form) => {
-      cy.get('button').click()
-    })
+    cy.get('#cy-save-password').click()
+
     //verify user is redirected to Sign in page
     cy.url().should('contain', Cypress.env('signInURL'))
 

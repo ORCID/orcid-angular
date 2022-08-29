@@ -82,7 +82,7 @@ describe('Register new user', async function () {
 
     //reload page
     cy.reload()
-
+    cy.wait(4000) //REMOVE after fix by dev
     //try editing Bio which only users with verified emails can do
     cy.get('#biography-panel').within(($bioSection) => {
       cy.get('#edit-button').click()
@@ -95,10 +95,8 @@ describe('Register new user', async function () {
       'only users with verified emails can edit bio'
     )
 
-    //sign out
-    cy.get('app-user-menu').click()
-    cy.get('#cdk-overlay-2').within(($menu) => {
-      cy.get('.mat-menu-item').contains('Logout').click()
-    })
+    //log out
+    cy.get('#cy-user-info').click()
+    cy.get('#cy-signout').click({ force: true })
   })
 })

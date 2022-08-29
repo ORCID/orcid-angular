@@ -21,6 +21,7 @@ describe('My orcid - works - visibility inconsistency notification scenarios', a
     cy.visit(Cypress.env('baseUrl') + `/my-orcid`)
     cy.get('#cy-user-info').click()
     cy.get('#cy-account-settings').click()
+    cy.wait(3000)
     cy.get('#cy-visibility-panel-action-more').click()
     cy.get('#cy-visibility-private-input').click()
     //Log out to save changes
@@ -59,6 +60,7 @@ describe('My orcid - works - visibility inconsistency notification scenarios', a
     cy.visit(Cypress.env('baseUrl') + `/my-orcid`)
     cy.get('#cy-user-info').click()
     cy.get('#cy-account-settings').click()
+    cy.wait(3000)
     cy.get('#cy-visibility-panel-action-more').click()
     cy.get('#cy-visibility-everyone-input').click()
     //Log out to save changes
@@ -96,7 +98,7 @@ describe('My orcid - works - visibility inconsistency notification scenarios', a
       //select group visibility & verify icon is not displayed
       cy.get('mat-checkbox').click()
       cy.get('#cy-visibility-limited').click()
-      cy.wait(2000) //wait for change to take effect
+      cy.wait(3000) //wait for change to take effect
       cy.get('#cy-buttons-container').within(() => {
         cy.get('#cy-inconsistency-issue').should('not.exist')
       })
