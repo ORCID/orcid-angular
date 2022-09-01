@@ -258,10 +258,22 @@ export class WorkFormComponent implements OnInit {
         .validateWorkIdTypes(externalIdentifierType, control.value)
         .pipe(
           map((value) => {
-            if (formGroup.controls.externalIdentifierUrl?.value?.length > 0) {
+            if (
+              formGroup.controls.externalIdentifierUrl?.value?.length > 0 &&
+              formGroup.controls.externalIdentifierUrl.value !==
+                formGroup.controls.externalIdentifierUrlWasBackendGenerated
+                  .value
+            ) {
               // do not overwrite the existing URL
-            } else if (value.generatedUrl) {
+            } else if (
+              value.generatedUrl &&
+              value.generatedUrl !==
+                formGroup.controls.externalIdentifierUrl.value
+            ) {
               formGroup.controls.externalIdentifierUrl.setValue(
+                decodeURI(value.generatedUrl)
+              )
+              formGroup.controls.externalIdentifierUrlWasBackendGenerated.setValue(
                 decodeURI(value.generatedUrl)
               )
             } else if (
@@ -441,6 +453,12 @@ export class WorkFormComponent implements OnInit {
           existingExternalId?.url?.value ||
           '',
         [Validators.pattern(URL_REGEXP)],
+      ],
+
+      externalIdentifierUrlWasBackendGenerated: [
+        existingExternalId?.normalizedUrl?.value ||
+          existingExternalId?.url?.value ||
+          '',
       ],
       externalRelationship: [
         existingExternalId?.relationship?.value || WorkRelationships.self,
