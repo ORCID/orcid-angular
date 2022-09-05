@@ -28,7 +28,7 @@ export default defineConfig({
   reporter: 'cypress-mochawesome-reporter',
   reporterOptions: {
     charts: true,
-    overwrite: false,
+    overwrite: true,
     quiet: true,
     html: false,
     json: true,
