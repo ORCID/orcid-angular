@@ -1,5 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core'
-import { ContributionRoles, Role } from 'src/app/types/works.endpoint'
+import {
+  ContributionRoles,
+  Role,
+  _LEGACY_ContributionRoles,
+} from 'src/app/types/works.endpoint'
 import { Contributor } from '../../../types'
 
 @Pipe({
@@ -36,6 +40,9 @@ export class RecordHolderRolesPipe implements PipeTransform {
   }
 
   private getContributionRoleByKey(key: string): Role {
-    return ContributionRoles.find((role) => role.key === key)
+    return (
+      ContributionRoles.find((role) => role.key === key) ||
+      _LEGACY_ContributionRoles.find((role) => role.key === key)
+    )
   }
 }

@@ -492,6 +492,64 @@ export const ContributionRoles: Role[] = [
   },
 ]
 
+export const _LEGACY_ContributionRoles: Role[] = [
+  {
+    key: 'author',
+    value: null,
+    translation: $localize`:@@works.author:Author`,
+  },
+  {
+    key: 'assignee',
+    value: null,
+    translation: $localize`:@@works.assignee:Assignee`,
+  },
+  {
+    key: 'editor',
+    value: null,
+    translation: $localize`:@@works.editor:Editor`,
+  },
+  {
+    key: 'chair-or-translator',
+    value: null,
+    translation: $localize`:@@works.chairOrTranslator:Chair or Translator`,
+  },
+  {
+    key: 'co-investigator',
+    value: null,
+    translation: $localize`:@@works.coInvestigator:Co-investigator`,
+  },
+  {
+    key: 'co-inventor',
+    value: null,
+    translation: $localize`:@@works.coInventor:Co-inventor`,
+  },
+  {
+    key: 'graduate-student',
+    value: null,
+    translation: $localize`:@@works.graduateStudent:Graduate Student`,
+  },
+  {
+    key: 'other-inventor',
+    value: null,
+    translation: $localize`:@@works.otherInventor:Other inventor`,
+  },
+  {
+    key: 'principal-investigator',
+    value: null,
+    translation: $localize`:@@works.principalInvestigator:Principal Investigator`,
+  },
+  {
+    key: 'postdoctoral-researcher',
+    value: null,
+    translation: $localize`:@@works.postdoctoralResearcher:Postdoctoral Researcher`,
+  },
+  {
+    key: 'support-staff',
+    value: null,
+    translation: $localize`:@@works.supportStaff:Support Staff`,
+  },
+]
+
 export interface WorkIdType {
   name: string
   description: string
