@@ -466,10 +466,6 @@ export class RecordWorksService {
     return this.groupingSuggestionsSubject.asObservable()
   }
 
-  getContributionRoles(): Observable<Role[]> {
-    return of(this.contributionRoles)
-  }
-
   getContributionRoleByKey(key: string): Role {
     return this.contributionRoles.find((role) => role.key === key)
   }

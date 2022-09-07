@@ -7,7 +7,6 @@ describe('RoleTranslationPipe', () => {
 
   beforeEach(() => {
     pipe = new RoleTranslationPipe()
-    roles = ContributionRoles
   })
 
   it('create an instance', () => {
@@ -15,7 +14,7 @@ describe('RoleTranslationPipe', () => {
   })
 
   it('should return translation of the role by key', () => {
-    expect(pipe.transform('writing - review & editing', roles)).toBe(
+    expect(pipe.transform('writing - review & editing')).toBe(
       'Writing - review & editing'
     )
   })
