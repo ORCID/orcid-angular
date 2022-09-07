@@ -1,7 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core'
 import { Contributor } from 'src/app/types'
 import { RolesAndSequences } from '../../../types/common.endpoint'
-import { Role, ContributionRoles } from '../../../types/works.endpoint'
+import {
+  Role,
+  ContributionRoles,
+  _LEGACY_ContributionRoles,
+} from '../../../types/works.endpoint'
 
 @Pipe({
   name: 'contributorsPipe',
@@ -106,6 +110,9 @@ export class ContributorsPipe implements PipeTransform {
   }
 
   private getContributionRoleByKey(key: string): Role {
-    return ContributionRoles.find((role) => role.key === key)
+    return (
+      ContributionRoles.find((role) => role.key === key) ||
+      _LEGACY_ContributionRoles.find((role) => role.key === key)
+    )
   }
 }

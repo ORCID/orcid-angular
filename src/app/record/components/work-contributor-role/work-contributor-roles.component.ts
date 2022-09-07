@@ -6,7 +6,7 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core'
-import { Role } from '../../../types/works.endpoint'
+import { ContributionRoles, Role } from '../../../types/works.endpoint'
 import {
   ControlContainer,
   FormArray,
@@ -35,7 +35,7 @@ export class WorkContributorRolesComponent implements OnInit {
   _contributors: Contributor[]
   @Input() userRecord: UserRecord
 
-  contributionRoles: Role[]
+  contributionRoles = ContributionRoles
 
   ngOrcidSelectRole = $localize`:@@works.pleaseSelectRole:Please select a role`
 
@@ -60,10 +60,6 @@ export class WorkContributorRolesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.workService
-      .getContributionRoles()
-      .pipe(tap((contributors) => (this.contributionRoles = contributors)))
-      .subscribe()
     this.initializeFormArray()
   }
 

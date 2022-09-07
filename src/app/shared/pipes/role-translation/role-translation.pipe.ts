@@ -1,12 +1,18 @@
 import { Pipe, PipeTransform } from '@angular/core'
-import { Role } from '../../../types/works.endpoint'
+import {
+  ContributionRoles,
+  _LEGACY_ContributionRoles,
+  Role,
+} from '../../../types/works.endpoint'
 
 @Pipe({
   name: 'roleTranslation',
 })
 export class RoleTranslationPipe implements PipeTransform {
-  transform(key: string, roles: Role[]): string {
-    const translation = roles.find((role) => role.key === key)?.translation
-    return translation ? translation : key
+  transform(key: string): string {
+    return (
+      ContributionRoles.find((role) => role.key === key) ||
+      _LEGACY_ContributionRoles.find((role) => role.key === key)
+    ).translation
   }
 }
