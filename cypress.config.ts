@@ -20,6 +20,9 @@ export default defineConfig({
     membersAPI_workEndpoint: '/work',
     membersAPI_peerReviewEndpoint: '/peer-review',
     registrationPage: 'https://qa.orcid.org/register',
+    reactivationEmailSubject: '[ORCID] Reactivating your ORCID record',
+    reactivationEmailSender:'reset@notify.orcid.org',
+    reactivationEmailLink:'https://qa.orcid.org/reactivation/'
   },
   video: false,
   chromeWebSecurity: false,
