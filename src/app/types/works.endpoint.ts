@@ -126,7 +126,7 @@ export const WorkTypesLabels = {
     [WorkOtherOutputTypes.lectureSpeech]: $localize`:@@works.speech:Lecture/speech`,
     [WorkOtherOutputTypes.physicalObject]: $localize`:@@works.object:Physical object`,
     [WorkOtherOutputTypes.researchTechnique]: $localize`:@@works.technique:Research technique`,
-    [WorkOtherOutputTypes.software]: $localize`:@@works.software:software`,
+    [WorkOtherOutputTypes.software]: $localize`:@@works.software:Software`,
     [WorkOtherOutputTypes.spinOffCompany]: $localize`:@@works.company:Spin off company`,
     [WorkOtherOutputTypes.standardsAndPolicy]: $localize`:@@works.policy:Standards and policy`,
     [WorkOtherOutputTypes.technicalStandard]: $localize`:@@works.standard:Technical Standard`,
