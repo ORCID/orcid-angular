@@ -498,9 +498,9 @@
     regexpu-core "^4.7.1"
 
 "@babel/helper-create-regexp-features-plugin@^7.16.7":
-  version "7.18.6"
-  resolved "https://registry.yarnpkg.com/@babel/helper-create-regexp-features-plugin/-/helper-create-regexp-features-plugin-7.18.6.tgz#3e35f4e04acbbf25f1b3534a657610a000543d3c"
-  integrity sha512-7LcpH1wnQLGrI+4v+nPp+zUvIkF9x0ddv1Hkdue10tg3gmRnLy97DXh4STiOf1qeIInyD69Qv5kKSZzKD8B/7A==
+  version "7.19.0"
+  resolved "https://registry.yarnpkg.com/@babel/helper-create-regexp-features-plugin/-/helper-create-regexp-features-plugin-7.19.0.tgz#7976aca61c0984202baca73d84e2337a5424a41b"
+  integrity sha512-htnV+mHX32DF81amCDrwIDr8nrp1PTm+3wfBN9/v8QJOLEioOCOG7qNyq0nHeFiWbT3Eb7gsPwEmV64UCQ1jzw==
   dependencies:
     "@babel/helper-annotate-as-pure" "^7.18.6"
     regexpu-core "^5.1.0"
@@ -717,6 +717,11 @@
   integrity sha512-xbWoy/PFoxSWazIToT9Sif+jJTlrMcndIsaOKvTA6u7QEo7ilkRZpjew18/W3c7nm8fXdUDXh02VXTbZ0pGDNw==
   dependencies:
     "@babel/types" "^7.16.7"
+
+"@babel/helper-string-parser@^7.18.10":
+  version "7.18.10"
+  resolved "https://registry.yarnpkg.com/@babel/helper-string-parser/-/helper-string-parser-7.18.10.tgz#181f22d28ebe1b3857fa575f5c290b1aaf659b56"
+  integrity sha512-XtIfWmeNY3i4t7t4D2t02q50HvqHybPqW2ki1kosnvWCwuCMeo81Jf0gwr85jy/neUdg5XDdeFE/80DXiO+njw==
 
 "@babel/helper-validator-identifier@^7.12.11":
   version "7.12.11"
@@ -1491,10 +1496,11 @@
     to-fast-properties "^2.0.0"
 
 "@babel/types@^7.18.6":
-  version "7.18.9"
-  resolved "https://registry.yarnpkg.com/@babel/types/-/types-7.18.9.tgz#7148d64ba133d8d73a41b3172ac4b83a1452205f"
-  integrity sha512-WwMLAg2MvJmt/rKEVQBBhIVffMmnilX4oe0sRe7iPOHIGsqpruFHHdrfj4O1CMMtgMtCU4oPafZjDPCRgO57Wg==
+  version "7.19.0"
+  resolved "https://registry.yarnpkg.com/@babel/types/-/types-7.19.0.tgz#75f21d73d73dc0351f3368d28db73465f4814600"
+  integrity sha512-YuGopBq3ke25BVSiS6fgF49Ul9gH1x70Bcr6bqRLjWCkcX8Hre1/5+z+IiWOIerRMSSEfGZVB9z9kyq7wVs9YA==
   dependencies:
+    "@babel/helper-string-parser" "^7.18.10"
     "@babel/helper-validator-identifier" "^7.18.6"
     to-fast-properties "^2.0.0"
 
@@ -4230,19 +4236,19 @@ cypress-axe@^0.14.0:
   integrity sha512-7Rdjnko0MjggCmndc1wECAkvQBIhuy+DRtjF7bd5YPZRFvubfMNvrxfqD8PWQmxm7MZE0ffS4Xr43V6ZmvLopg==
 
 cypress-mochawesome-reporter@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/cypress-mochawesome-reporter/-/cypress-mochawesome-reporter-3.2.0.tgz#4e335b674973bd0d5bbfa3e8ff1229b98df0bba3"
-  integrity sha512-2cTKgjQmmCdNvMTca1ieCcfF8fFih7Ums/iJxqXpN9RCIE/4wIGzwjmEDDNgRm+SyGOUac6EdfAVe48S82Bw0Q==
+  version "3.2.2"
+  resolved "https://registry.npmjs.org/cypress-mochawesome-reporter/-/cypress-mochawesome-reporter-3.2.2.tgz"
+  integrity sha512-Ldoim06xGTRWXwdOkZf+wlV50Rm0oigSmR76jY3b2/GkM4sFudG5KF+RY0T/h6DF6zWFmFXrr1XAWYX/uL6L0Q==
   dependencies:
     fs-extra "^10.0.1"
     mochawesome "^7.1.3"
     mochawesome-merge "^4.2.1"
     mochawesome-report-generator "^6.2.0"
 
-cypress@10.3.1:
-  version "10.3.1"
-  resolved "https://registry.npmjs.org/cypress/-/cypress-10.3.1.tgz"
-  integrity sha512-As9HrExjAgpgjCnbiQCuPdw5sWKx5HUJcK2EOKziu642akwufr/GUeqL5UnCPYXTyyibvEdWT/pSC2qnGW/e5w==
+cypress@^10.7.0:
+  version "10.7.0"
+  resolved "https://registry.npmjs.org/cypress/-/cypress-10.7.0.tgz"
+  integrity sha512-gTFvjrUoBnqPPOu9Vl5SBHuFlzx/Wxg/ZXIz2H4lzoOLFelKeF7mbwYUOzgzgF0oieU2WhJAestQdkgwJMMTvQ==
   dependencies:
     "@cypress/request" "^2.88.10"
     "@cypress/xvfb" "^1.2.4"
@@ -5588,7 +5594,7 @@ fs-extra@^10.0.0:
 
 fs-extra@^10.0.1:
   version "10.1.0"
-  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-10.1.0.tgz#02873cfbc4084dde127eaa5f9905eef2325d1abf"
+  resolved "https://registry.npmjs.org/fs-extra/-/fs-extra-10.1.0.tgz"
   integrity sha512-oRXApq54ETRj4eMiFzGnHWGy+zo5raudjuxN0b8H7s/RU2oW0Wvsx9O0ACRN/kRq9E8Vu/ReskGB5o3ji+FzHQ==
   dependencies:
     graceful-fs "^4.2.0"
@@ -8317,34 +8323,16 @@ mocha@^9.1.3:
 
 mochawesome-merge@^4.2.1:
   version "4.2.1"
-  resolved "https://registry.yarnpkg.com/mochawesome-merge/-/mochawesome-merge-4.2.1.tgz#484e5c500dd5d88b33adb440e6dfef80d9109a18"
+  resolved "https://registry.npmjs.org/mochawesome-merge/-/mochawesome-merge-4.2.1.tgz"
   integrity sha512-G7+LqIKgixShKG4FyWDn1PIrzpKEwCofrJip/VzdqghNGqZl4S5MNoXx5YDfk9KLe+pr4qGa1TOzCc/oVw/8Kw==
   dependencies:
     fs-extra "^7.0.1"
     glob "^7.1.6"
     yargs "^15.3.1"
 
-mochawesome-report-generator@^6.0.1:
-  version "6.0.1"
-  resolved "https://registry.npmjs.org/mochawesome-report-generator/-/mochawesome-report-generator-6.0.1.tgz"
-  integrity sha512-/+RoE/lD7QTJBh7VsymdQOTqS8QuB94xKJCJXxZ3fy3JsDdPNgTBgUlEOR99r+2W1zPgEWVhRBU1Tl9fe6kI+w==
-  dependencies:
-    chalk "^4.1.2"
-    dateformat "^4.5.1"
-    escape-html "^1.0.3"
-    fs-extra "^10.0.0"
-    fsu "^1.1.1"
-    lodash.isfunction "^3.0.9"
-    opener "^1.5.2"
-    prop-types "^15.7.2"
-    tcomb "^3.2.17"
-    tcomb-validation "^3.3.0"
-    validator "^13.6.0"
-    yargs "^17.2.1"
-
-mochawesome-report-generator@^6.2.0:
+mochawesome-report-generator@^6.0.1, mochawesome-report-generator@^6.2.0:
   version "6.2.0"
-  resolved "https://registry.yarnpkg.com/mochawesome-report-generator/-/mochawesome-report-generator-6.2.0.tgz#65a30a11235ba7a68e1cf0ca1df80d764b93ae78"
+  resolved "https://registry.npmjs.org/mochawesome-report-generator/-/mochawesome-report-generator-6.2.0.tgz"
   integrity sha512-Ghw8JhQFizF0Vjbtp9B0i//+BOkV5OWcQCPpbO0NGOoxV33o+gKDYU0Pr2pGxkIHnqZ+g5mYiXF7GMNgAcDpSg==
   dependencies:
     chalk "^4.1.2"
@@ -8360,25 +8348,9 @@ mochawesome-report-generator@^6.2.0:
     validator "^13.6.0"
     yargs "^17.2.1"
 
-mochawesome@^7.0.1:
-  version "7.0.1"
-  resolved "https://registry.npmjs.org/mochawesome/-/mochawesome-7.0.1.tgz"
-  integrity sha512-2FTU7KVNDiKohi4IG3IVmJ2OTy0Nm0Q2RjueK9hsj7blbkcrpFVH209cP8P4egi+LBidKdX+QmtN3thJde2yiQ==
-  dependencies:
-    chalk "^4.1.2"
-    diff "^5.0.0"
-    json-stringify-safe "^5.0.1"
-    lodash.isempty "^4.4.0"
-    lodash.isfunction "^3.0.9"
-    lodash.isobject "^3.0.2"
-    lodash.isstring "^4.0.1"
-    mochawesome-report-generator "^6.0.1"
-    strip-ansi "^6.0.1"
-    uuid "^8.3.2"
-
-mochawesome@^7.1.3:
+mochawesome@^7.0.1, mochawesome@^7.1.3:
   version "7.1.3"
-  resolved "https://registry.yarnpkg.com/mochawesome/-/mochawesome-7.1.3.tgz#07b358138f37f5b07b51a1b255d84babfa36fa83"
+  resolved "https://registry.npmjs.org/mochawesome/-/mochawesome-7.1.3.tgz"
   integrity sha512-Vkb3jR5GZ1cXohMQQ73H3cZz7RoxGjjUo0G5hu0jLaW+0FdUxUwg3Cj29bqQdh0rFcnyV06pWmqmi5eBPnEuNQ==
   dependencies:
     chalk "^4.1.2"
