@@ -8,6 +8,7 @@ import {
   Affiliation,
   Organization,
   DisambiguatedOrganization,
+  EmploymentsEndpoint,
 } from 'src/app/types/record-affiliation.endpoint'
 import { environment } from 'src/environments/environment'
 
@@ -257,6 +258,20 @@ export class RecordAffiliationService {
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => this.getAffiliations({ forceReload: true }))
+      )
+  }
+
+  getEmployments(): Observable<EmploymentsEndpoint> {
+    return this._http
+      .get<EmploymentsEndpoint>(
+        environment.API_WEB + 'affiliations/employments.json',
+        {
+          headers: this.headers,
+        }
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
       )
   }
 }

@@ -6,7 +6,7 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core'
-import { Role } from '../../../types/works.endpoint'
+import { ContributionRoles, Role } from '../../../types/works.endpoint'
 import {
   ControlContainer,
   FormArray,
@@ -35,7 +35,7 @@ export class WorkContributorRolesComponent implements OnInit {
   _contributors: Contributor[]
   @Input() userRecord: UserRecord
 
-  contributionRoles: Role[]
+  contributionRoles = ContributionRoles
 
   ngOrcidSelectRole = $localize`:@@works.pleaseSelectRole:Please select a role`
 
@@ -60,18 +60,13 @@ export class WorkContributorRolesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.workService
-      .getContributionRoles()
-      .pipe(tap((contributors) => (this.contributionRoles = contributors)))
-      .subscribe()
     this.initializeFormArray()
   }
 
   addRole(): void {
     this.roles.push(
       this.getRoleForm(
-        this.workService.getContributionRoleByKey('no specified role')
-          .translation,
+        this.workService.getContributionRoleByKey('no specified role').key,
         false
       )
     )
@@ -100,29 +95,26 @@ export class WorkContributorRolesComponent implements OnInit {
           roles.forEach((rs) => {
             const role = this.workService.getContributionRoleByKey(rs)
             if (rs && role) {
-              this.addRoleFormGroup(role.translation, true)
+              this.addRoleFormGroup(role.key, true)
             } else {
               this.addRoleFormGroup(rs, true)
             }
           })
         } else {
           this.addRoleFormGroup(
-            this.workService.getContributionRoleByKey('no specified role')
-              .translation,
+            this.workService.getContributionRoleByKey('no specified role').key,
             false
           )
         }
       } else {
         this.addRoleFormGroup(
-          this.workService.getContributionRoleByKey('no specified role')
-            .translation,
+          this.workService.getContributionRoleByKey('no specified role').key,
           false
         )
       }
     } else {
       this.addRoleFormGroup(
-        this.workService.getContributionRoleByKey('no specified role')
-          .translation,
+        this.workService.getContributionRoleByKey('no specified role').key,
         false
       )
     }
@@ -135,8 +127,11 @@ export class WorkContributorRolesComponent implements OnInit {
   private getRoleForm(role?: string, disabled?: boolean): FormGroup {
     return this.formBuilder.group({
       role: [
-        { value: role ? role.toLowerCase() : '', disabled },
-        [unique('role')],
+        {
+          value: role ? role.toLowerCase() : '',
+          disabled,
+        },
+        [unique('role', 'no specified role')],
       ],
     })
   }
@@ -144,7 +139,8 @@ export class WorkContributorRolesComponent implements OnInit {
   private getRecordHolderContribution(): Contributor {
     return this.contributors?.find(
       (c) =>
-        c?.contributorOrcid?.path === this.userRecord?.userInfo?.REAL_USER_ORCID
+        c?.contributorOrcid?.path ===
+        this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID
     )
   }
 }

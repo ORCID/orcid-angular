@@ -53,10 +53,8 @@ describe('Primary account email verification reminders', async function () {
         .should('include', Cypress.env('verifyEmailUrl'))
     })
 
-    //sign out
-    cy.get('app-user-menu').click()
-    cy.get('#cdk-overlay-1').within(($menu) => {
-      cy.get('.mat-menu-item').contains('Logout').click()
-    })
+    //log out
+    cy.get('#cy-user-info').click()
+    cy.get('#cy-signout').click({ force: true })
   })
 })

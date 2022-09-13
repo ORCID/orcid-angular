@@ -6,12 +6,15 @@ import {
   FormGroupDirective,
 } from '@angular/forms'
 import { UserRecord } from '../../../types/record.local'
-import { takeUntil } from 'rxjs/operators'
+import { takeUntil, tap } from 'rxjs/operators'
 import { PlatformInfoService } from '../../../cdk/platform-info'
 import { Subject } from 'rxjs'
 import { Contributor } from '../../../types'
 import { environment } from 'src/environments/environment'
 import { RecordWorksService } from '../../../core/record-works/record-works.service'
+import { RecordAffiliationService } from '../../../core/record-affiliations/record-affiliations.service'
+import { TogglzService } from '../../../core/togglz/togglz.service'
+import { EmploymentsEndpoint } from '../../../types/record-affiliation.endpoint'
 
 @Component({
   selector: 'app-work-contributors',
@@ -40,7 +43,8 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private parentForm: FormGroupDirective,
     private platform: PlatformInfoService,
-    private workService: RecordWorksService
+    private workService: RecordWorksService,
+    private affiliationService: RecordAffiliationService
   ) {}
 
   get contributorsFormArray() {
@@ -52,7 +56,9 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.id = this.userRecord?.userInfo?.REAL_USER_ORCID
+    // EFFECTIVE_USER_ORCID keeps the ORCID id of the user you are on.
+    // REAL_USER_ORCID will contain the orcid id of a delegator when on delegation mode.
+    this.id = this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID
     this.platform
       .get()
       .pipe(takeUntil(this.$destroy))
@@ -60,6 +66,18 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
         this.isMobile = platform.columns4 || platform.columns8
         this.screenDirection = platform.screenDirection
       })
+    if (this.userRecord?.affiliations?.length > 0) {
+      this.getEmploymentsFromAffiliations(this.userRecord?.affiliations)
+    } else {
+      this.affiliationService
+        .getEmployments()
+        .pipe(
+          tap((employments) => {
+            this.getEmployments(employments)
+          })
+        )
+        .subscribe()
+    }
     this.initializeFormArray()
   }
 
@@ -95,7 +113,6 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
         ...this.getEnabledRoles(),
       ]?.join(', ')
     })
-    this.getAffiliation()
   }
 
   private getDisabledRoles(): string[] {
@@ -133,12 +150,27 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
     }
   }
 
-  private getAffiliation(): void {
-    this.affiliation = this.userRecord?.affiliations
+  private getEmployments(employments: EmploymentsEndpoint): void {
+    this.affiliation = employments.employmentGroups
+      ?.map((employmentGroup) =>
+        employmentGroup.activities
+          .filter((activity) => !activity?.endDate?.year)
+          .map((activity) => activity.organization?.name)
+          ?.join(', ')
+      )
+      .filter((affiliation) => affiliation.length > 0)
+      .join(', ')
+  }
+
+  private getEmploymentsFromAffiliations(affiliations): void {
+    this.affiliation = affiliations
       ?.map((affiliationUIGroup) =>
         affiliationUIGroup.affiliationGroup
           .filter(
-            (affiliation) => !affiliation.defaultAffiliation?.endDate?.year
+            (affiliation) =>
+              !affiliation.defaultAffiliation?.endDate?.year &&
+              affiliation.defaultAffiliation?.affiliationType?.value ===
+                'employment'
           )
           .map(
             (affiliation) =>

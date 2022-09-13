@@ -258,10 +258,22 @@ export class WorkFormComponent implements OnInit {
         .validateWorkIdTypes(externalIdentifierType, control.value)
         .pipe(
           map((value) => {
-            if (formGroup.controls.externalIdentifierUrl?.value?.length > 0) {
+            if (
+              formGroup.controls.externalIdentifierUrl?.value?.length > 0 &&
+              formGroup.controls.externalIdentifierUrl.value !==
+                formGroup.controls.externalIdentifierUrlWasBackendGenerated
+                  .value
+            ) {
               // do not overwrite the existing URL
-            } else if (value.generatedUrl) {
+            } else if (
+              value.generatedUrl &&
+              value.generatedUrl !==
+                formGroup.controls.externalIdentifierUrl.value
+            ) {
               formGroup.controls.externalIdentifierUrl.setValue(
+                decodeURI(value.generatedUrl)
+              )
+              formGroup.controls.externalIdentifierUrlWasBackendGenerated.setValue(
                 decodeURI(value.generatedUrl)
               )
             } else if (
@@ -442,6 +454,12 @@ export class WorkFormComponent implements OnInit {
           '',
         [Validators.pattern(URL_REGEXP)],
       ],
+
+      externalIdentifierUrlWasBackendGenerated: [
+        existingExternalId?.normalizedUrl?.value ||
+          existingExternalId?.url?.value ||
+          '',
+      ],
       externalRelationship: [
         existingExternalId?.relationship?.value || WorkRelationships.self,
         [],
@@ -552,7 +570,15 @@ export class WorkFormComponent implements OnInit {
         work.source = this.work.source
       }
       this._workService.save(work).subscribe((value) => {
-        this._dialogRef.close()
+        if (value?.errors?.length > 0) {
+          this.loading = false
+          this._snackBar.showValidationError(
+            value?.errors[0],
+            $localize`:@@shared.pleaseReview:Please review and fix the issue`
+          )
+        } else {
+          this.closeEvent()
+        }
       })
     } else {
       this._snackBar.showValidationError()
@@ -643,7 +669,12 @@ export class WorkFormComponent implements OnInit {
     const rolesFormArray = this.workForm.get('roles') as FormArray
     const roles = rolesFormArray?.controls
       ?.filter(
-        (fg) => fg?.value?.role && fg?.value?.role !== 'no specified role'
+        (fg) =>
+          fg?.value?.role &&
+          this._workService.getContributionRoleByKey(fg?.value?.role) !==
+            null &&
+          this._workService.getContributionRoleByKey(fg?.value?.role)?.key !==
+            'no specified role'
       )
       .map((formGroup) => {
         const role = formGroup?.value?.role

@@ -19,6 +19,8 @@ const tokenFileName = 'token_qa.json' //token file is inside plugins/ directory
 const credentialsFileName = 'credentials_qa.json' //credentials is inside plugins/ directory
 
 module.exports = (on, config) => {
+  require('cypress-mochawesome-reporter/plugin')(on)
+
   on('before:browser:launch', (browser, launchOptions) => {
     if (browser.name === 'chrome' && browser.isHeadless) {
       launchOptions.args.push('--disable-gpu')

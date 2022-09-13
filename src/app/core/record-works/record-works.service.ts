@@ -258,15 +258,17 @@ export class RecordWorksService {
       )
   }
 
-  save(work: Work, bibtex?: boolean): Observable<WorksEndpoint | never> {
+  save(work: Work, bibtex?: boolean): Observable<Work> {
     return this._http
       .post<Work>(environment.API_WEB + `works/work.json`, work)
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        switchMap(() =>
-          bibtex === false ? EMPTY : this.getWorks({ forceReload: true })
-        )
+        tap(() => {
+          if (!bibtex) {
+            this.getWorks({ forceReload: true })
+          }
+        })
       )
   }
 
@@ -462,10 +464,6 @@ export class RecordWorksService {
         .subscribe((x) => this.groupingSuggestionsSubject.next(x))
     }
     return this.groupingSuggestionsSubject.asObservable()
-  }
-
-  getContributionRoles(): Observable<Role[]> {
-    return of(this.contributionRoles)
   }
 
   getContributionRoleByKey(key: string): Role {
