@@ -1,5 +1,21 @@
-import { Component, Inject, Input, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core'
-import { AbstractControl, ControlContainer, FormArray, FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms'
+import {
+  Component,
+  Inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  ViewChildren,
+} from '@angular/core'
+import {
+  AbstractControl,
+  ControlContainer,
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  FormGroupDirective,
+  Validators,
+} from '@angular/forms'
 import { UserRecord } from '../../../types/record.local'
 import { takeUntil, tap } from 'rxjs/operators'
 import { PlatformInfoService } from '../../../cdk/platform-info'
@@ -80,7 +96,7 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
         .pipe(
           tap((employments) => {
             this.getEmployments(employments)
-          }),
+          })
         )
         .subscribe()
     }
@@ -98,8 +114,11 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
   }
 
   addAnotherRole(contributor): void {
-    (contributor.get('roles') as FormArray).push(
-      this.getRoleForm(this.workService.getContributionRoleByKey('no specified role').key, false),
+    ;(contributor.get('roles') as FormArray).push(
+      this.getRoleForm(
+        this.workService.getContributionRoleByKey('no specified role').key,
+        false
+      )
     )
   }
 
@@ -108,14 +127,18 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
   }
 
   deleteRole(contributor, roleIndex: number): void {
-    (contributor.get('roles') as FormArray).removeAt(roleIndex)
+    ;(contributor.get('roles') as FormArray).removeAt(roleIndex)
     if (roleIndex === 0 && this.roles.length === 0) {
       this.addAnotherRole(contributor)
     }
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.contributorsFormArray.controls, event.previousIndex, event.currentIndex)
+    moveItemInArray(
+      this.contributorsFormArray.controls,
+      event.previousIndex,
+      event.currentIndex
+    )
   }
 
   private initializeFormArray(): void {
@@ -123,29 +146,41 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
     const orcid = recordHolderContribution?.contributorOrcid?.path
       ? recordHolderContribution?.contributorOrcid?.path
       : this.id
-    const name = recordHolderContribution ? recordHolderContribution?.creditName?.value : this.getCreditNameFromUserRecord()
+    const name = recordHolderContribution
+      ? recordHolderContribution?.creditName?.value
+      : this.getCreditNameFromUserRecord()
     const uri = recordHolderContribution?.contributorOrcid?.uri
       ? recordHolderContribution?.contributorOrcid?.uri
       : `https:${environment.BASE_URL}${orcid}`
     this.parentForm.control.setControl('contributors', new FormArray([]))
-    const contributorsFormArray = this.parentForm.control.get('contributors') as FormArray
+    const contributorsFormArray = this.parentForm.control.get(
+      'contributors'
+    ) as FormArray
     if (this.contributors?.length > 0) {
       if (!recordHolderContribution) {
-        contributorsFormArray.push(this.getContributorForm(name, orcid, uri, [], true))
+        contributorsFormArray.push(
+          this.getContributorForm(name, orcid, uri, [], true)
+        )
       }
       this.contributors.forEach((contributor) => {
         contributorsFormArray.push(
           this.getContributorForm(
             contributor?.creditName?.content,
-            contributor?.contributorOrcid?.path ? contributor?.contributorOrcid?.path : null,
-            contributor?.contributorOrcid?.uri ? contributor?.contributorOrcid?.uri : null,
-            contributor.rolesAndSequences.map(role => role.contributorRole),
-            true,
-          ),
+            contributor?.contributorOrcid?.path
+              ? contributor?.contributorOrcid?.path
+              : null,
+            contributor?.contributorOrcid?.uri
+              ? contributor?.contributorOrcid?.uri
+              : null,
+            contributor.rolesAndSequences.map((role) => role.contributorRole),
+            true
+          )
         )
       })
     } else {
-      contributorsFormArray.push(this.getContributorForm(name, orcid, uri, [], true))
+      contributorsFormArray.push(
+        this.getContributorForm(name, orcid, uri, [], true)
+      )
     }
     // Validate if contributor is in the list of contributors otherwise added it
     this.roles = this.getDisabledRoles()?.join(', ')
@@ -157,14 +192,23 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
     })
   }
 
-  private getContributorForm(name?: string, orcid?: string, uri?: string, roles?: string[], disabled?: boolean): FormGroup {
+  private getContributorForm(
+    name?: string,
+    orcid?: string,
+    uri?: string,
+    roles?: string[],
+    disabled?: boolean
+  ): FormGroup {
     const contributor = this.formBuilder.group({
       creditName: [
         {
           value: name ? name : '',
           disabled,
         },
-        [Validators.required, Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND)],
+        [
+          Validators.required,
+          Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
+        ],
       ],
       contributorOrcid: this.formBuilder.group({
         path: [orcid ? orcid : null],
@@ -176,7 +220,7 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
     })
     const rolesFormArray = contributor.controls.roles as FormArray
     if (roles?.length > 0) {
-      roles.forEach(role => {
+      roles.forEach((role) => {
         if (role) {
           const r = this.workService.getContributionRoleByKey(role)?.key
           rolesFormArray.push(this.getRoleForm(r ? r : role, disabled))
@@ -184,7 +228,12 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
       })
     } else {
       if (!disabled) {
-        rolesFormArray.push(this.getRoleForm(this.workService.getContributionRoleByKey('no specified role').key, false))
+        rolesFormArray.push(
+          this.getRoleForm(
+            this.workService.getContributionRoleByKey('no specified role').key,
+            false
+          )
+        )
       }
     }
     return contributor
@@ -221,7 +270,7 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
       .map(
         (formGroup) =>
           this.workService.getContributionRoleByKey(formGroup?.value?.role)
-            .translation,
+            .translation
       )
   }
 
@@ -243,7 +292,7 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
         employmentGroup.activities
           .filter((activity) => !activity?.endDate?.year)
           .map((activity) => activity.organization?.name)
-          ?.join(', '),
+          ?.join(', ')
       )
       .filter((affiliation) => affiliation.length > 0)
       .join(', ')
@@ -257,20 +306,22 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
             (affiliation) =>
               !affiliation.defaultAffiliation?.endDate?.year &&
               affiliation.defaultAffiliation?.affiliationType?.value ===
-              'employment',
+                'employment'
           )
           .map(
             (affiliation) =>
-              affiliation.defaultAffiliation?.affiliationName?.value,
+              affiliation.defaultAffiliation?.affiliationName?.value
           )
-          ?.join(', '),
+          ?.join(', ')
       )
       .filter((affiliation) => affiliation.length > 0)
       .join(', ')
   }
 
   private getRecordHolderContribution(): Contributor {
-    return this.contributors?.find((c) => c?.contributorOrcid?.path && c?.contributorOrcid?.path === this.id)
+    return this.contributors?.find(
+      (c) => c?.contributorOrcid?.path && c?.contributorOrcid?.path === this.id
+    )
   }
 
   ngOnDestroy() {

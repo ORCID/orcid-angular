@@ -2,7 +2,7 @@
   <div class="row title">
     <label class="orc-font-body">
       <strong i18n="@@works.contributorsToThisWork"
-      >Contributors to this work</strong
+        >Contributors to this work</strong
       >
     </label>
   </div>
@@ -39,34 +39,51 @@
                   class="orcid-logo"
                   src="assets/vectors/orcid.logo.icon.svg"
                   alt="orcid logo"
-                  *ngIf="contributor.get(['contributorOrcid','path'])?.value"
-                  (click)="goto(contributor.get(['contributorOrcid','uri'])?.value)"
+                  *ngIf="contributor.get(['contributorOrcid', 'path'])?.value"
+                  (click)="
+                    goto(contributor.get(['contributorOrcid', 'uri'])?.value)
+                  "
                 />
               </div>
               <p>
                 <span
                   class="credit-name-and-roles orc-font-body-small"
                   [ngClass]="{
-                    'record-holder': contributor.get(['contributorOrcid','path'])?.value === id,
-                    'not-record-holder': contributor.get(['contributorOrcid','path'])?.value !== id
+                    'record-holder':
+                      contributor.get(['contributorOrcid', 'path'])?.value ===
+                      id,
+                    'not-record-holder':
+                      contributor.get(['contributorOrcid', 'path'])?.value !==
+                      id
                   }"
-                >{{ contributor.get('creditName')?.value }}
-                  <ng-container
-                    *ngIf="roles && contributor.get(['contributorOrcid','path'])?.value === id"
-                  >({{ roles }})</ng-container>
+                  >{{ contributor.get('creditName')?.value }}
                   <ng-container
                     *ngIf="
-                          contributor.get(['contributorOrcid','path'])?.value !== id &&
-                          contributor.get('roles')?.value?.length > 0
-                        "
-                  >({{ contributor.get('roles')?.value | contributorRoles }})</ng-container
+                      roles &&
+                      contributor.get(['contributorOrcid', 'path'])?.value ===
+                        id
+                    "
+                    >({{ roles }})</ng-container
+                  >
+                  <ng-container
+                    *ngIf="
+                      contributor.get(['contributorOrcid', 'path'])?.value !==
+                        id && contributor.get('roles')?.value?.length > 0
+                    "
+                    >({{
+                      contributor.get('roles')?.value | contributorRoles
+                    }})</ng-container
                   >
                 </span>
 
                 <span
                   class="affiliation orc-font-small-print"
-                  *ngIf="affiliation && contributor.get(['contributorOrcid','path'])?.value === id"
-                >{{ affiliation }}</span>
+                  *ngIf="
+                    affiliation &&
+                    contributor.get(['contributorOrcid', 'path'])?.value === id
+                  "
+                  >{{ affiliation }}</span
+                >
               </p>
             </ng-container>
             <ng-container *ngIf="!contributor.get('creditName').disabled">
@@ -76,10 +93,13 @@
                     appearance="outline"
                     class="mat-form-field-min"
                     [ngClass]="{
-                      'no-hint': !(contributor.get('creditName').touched && contributor.get('creditName')?.errors)
+                      'no-hint': !(
+                        contributor.get('creditName').touched &&
+                        contributor.get('creditName')?.errors
+                      )
                     }"
                   >
-                    <input matInput formControlName="creditName"/>
+                    <input matInput formControlName="creditName" />
                     <mat-error
                       *ngIf="contributor.get('creditName').hasError('required')"
                       i18n="@@works.contributorNameIsRequired"
@@ -98,10 +118,11 @@
                   <button
                     mat-icon-button
                     (click)="deleteContributor(i)"
-                    [id]="'cy-delete-button-'+ i"
+                    [id]="'cy-delete-button-' + i"
                   >
-                    <mat-icon class="material-icons-outlined extra-large-material-icon"
-                    >delete
+                    <mat-icon
+                      class="material-icons-outlined extra-large-material-icon"
+                      >delete
                     </mat-icon>
                   </button>
                 </div>
@@ -127,7 +148,9 @@
                           <mat-option
                             *ngFor="let contributionRole of contributionRoles"
                             [value]="contributionRole.key"
-                            [disabled]="contributionRole.key | disableRole: role"
+                            [disabled]="
+                              contributionRole.key | disableRole: role
+                            "
                           >
                             {{ contributionRole.translation | titlecase }}
                           </mat-option>
@@ -144,18 +167,23 @@
                       <button
                         mat-icon-button
                         (click)="deleteRole(contributor, i)"
-                        [id]="'cy-remove-role-'+ i"
+                        [id]="'cy-remove-role-' + i"
                         *ngIf="i !== 0"
                       >
-                        <mat-icon class="material-icons-outlined extra-large-material-icon"
-                        >delete
+                        <mat-icon
+                          class="material-icons-outlined extra-large-material-icon"
+                          >delete
                         </mat-icon>
                       </button>
                     </div>
                   </div>
                 </ng-container>
                 <div class="row">
-                  <a class="underline" (click)="addAnotherRole(contributor)" id="cy-add-another-role">
+                  <a
+                    class="underline"
+                    (click)="addAnotherRole(contributor)"
+                    id="cy-add-another-role"
+                  >
                     <span class="mat-body-1" i18n="@@works.addAnotherRole">
                       Add another role
                     </span>
@@ -168,7 +196,7 @@
             class="col l3 delete-button"
             *ngIf="
               contributor.get('creditName').disabled &&
-              contributor.get(['contributorOrcid','path'])?.value !== id
+              contributor.get(['contributorOrcid', 'path'])?.value !== id
             "
           >
             <button
@@ -176,8 +204,9 @@
               (click)="deleteContributor(i)"
               id="cy-delete-button"
             >
-              <mat-icon class="material-icons-outlined extra-large-material-icon"
-              >delete
+              <mat-icon
+                class="material-icons-outlined extra-large-material-icon"
+                >delete
               </mat-icon>
             </button>
           </div>
@@ -224,17 +253,16 @@
         contributors?.length > maxNumberOfContributors ||
         contributorsFormArray?.length > maxNumberOfContributors
       "
-      (click)="addAnotherContributor(
-        contributors?.length > maxNumberOfContributors ||
-        contributorsFormArray?.length > maxNumberOfContributors
-      )"
+      (click)="
+        addAnotherContributor(
+          contributors?.length > maxNumberOfContributors ||
+            contributorsFormArray?.length > maxNumberOfContributors
+        )
+      "
       id="cy-add-another-contributor"
     >
       <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
-      <span
-        class="mat-body-1"
-        i18n="@@works.addAnotherContributor"
-      >
+      <span class="mat-body-1" i18n="@@works.addAnotherContributor">
         Add another contributor
       </span>
     </a>

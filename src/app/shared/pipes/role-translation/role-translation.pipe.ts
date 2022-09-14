@@ -1,5 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core'
-import { _LEGACY_ContributionRoles, ContributionRoles } from '../../../types/works.endpoint'
+import {
+  _LEGACY_ContributionRoles,
+  ContributionRoles,
+} from '../../../types/works.endpoint'
 
 @Pipe({
   name: 'roleTranslation',

@@ -36,7 +36,7 @@ import { RoleTranslationPipe } from './pipes/role-translation/role-translation.p
 import { RecordHolderRolesPipe } from './pipes/record-holder-roles/record-holder-roles.pipe'
 import { IsUrlPipe } from './pipes/is-url/is-url.pipe'
 import { IsUrlWithProtocolPipe } from './pipes/is-url-with-protocol/is-url-with-protocol.pipe'
-import { OrganizationLinkPipe } from './pipes/organization-link/organization-link.pipe';
+import { OrganizationLinkPipe } from './pipes/organization-link/organization-link.pipe'
 import { ContributorRolesPipe } from './pipes/contributors-roles/contributor-roles.pipe'
 
 @NgModule({

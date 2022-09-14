@@ -8,20 +8,14 @@ describe('ContributorRolesPipe', () => {
   })
 
   it('create an instance', () => {
-    expect(pipe).toBeTruthy();
-  });
+    expect(pipe).toBeTruthy()
+  })
 
   it('should return roles separated by comma if they exist', () => {
-    expect(pipe.transform(getRoles())).toBe(
-      'Conceptualization, Author, Editor'
-    )
+    expect(pipe.transform(getRoles())).toBe('Conceptualization, Author, Editor')
   })
-});
+})
 
 function getRoles(): { role: string }[] {
-  return [
-    {role: 'conceptualization'},
-    {role: 'author'},
-    {role: 'editor'},
-  ]
+  return [{ role: 'conceptualization' }, { role: 'author' }, { role: 'editor' }]
 }

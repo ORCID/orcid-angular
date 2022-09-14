@@ -3,7 +3,11 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { WorkContributorsComponent } from './work-contributors.component'
 import { Contributor, UserInfo } from '../../../types'
 import { UserRecord } from '../../../types/record.local'
-import { Affiliation, AffiliationGroup, AffiliationGroupsTypes } from '../../../types/record-affiliation.endpoint'
+import {
+  Affiliation,
+  AffiliationGroup,
+  AffiliationGroupsTypes,
+} from '../../../types/record-affiliation.endpoint'
 import {
   ControlContainer,
   FormArray,
@@ -88,7 +92,7 @@ describe('WorkContributorsComponent', () => {
     const mockFormGroup: FormGroup = new FormGroup({})
     const formGroupDirective: FormGroupDirective = new FormGroupDirective(
       [],
-      [],
+      []
     )
     component['parentForm'].form = mockFormGroup
     component['parentForm'].control.setControl(
@@ -100,7 +104,7 @@ describe('WorkContributorsComponent', () => {
         formBuilder.group({
           role: [{ value: 'no specified role', disabled: true }],
         }),
-      ]),
+      ])
     )
     component.userRecord = getUserRecord()
 
@@ -115,16 +119,21 @@ describe('WorkContributorsComponent', () => {
   it('should display record holder name with roles and affiliation', async () => {
     const rolesFormArray = component['parentForm'].control?.controls[
       'roles'
-      ] as FormArray
+    ] as FormArray
     rolesFormArray.push(formBuilder.group({ role: 'methodology' }))
 
     fixture.detectChanges()
 
-    const creditNameAndRoles = fixture.debugElement.query(By.css('.credit-name-and-roles')).nativeElement
-    const affiliation = fixture.debugElement.query(By.css('.affiliation')).nativeElement
+    const creditNameAndRoles = fixture.debugElement.query(
+      By.css('.credit-name-and-roles')
+    ).nativeElement
+    const affiliation = fixture.debugElement.query(By.css('.affiliation'))
+      .nativeElement
 
     expect(creditNameAndRoles.innerHTML).not.toBeNull()
-    expect(creditNameAndRoles.textContent).toBe('Name Surname (Conceptualization, No specified role, Methodology)')
+    expect(creditNameAndRoles.textContent).toBe(
+      'Name Surname (Conceptualization, No specified role, Methodology)'
+    )
     expect(affiliation.innerHTML).not.toBeNull()
     expect(affiliation.textContent).toBe('ORCID, University')
   })
@@ -132,33 +141,37 @@ describe('WorkContributorsComponent', () => {
   it('should display contributors metadata', async () => {
     const rolesFormArray = component['parentForm'].control?.controls[
       'roles'
-      ] as FormArray
+    ] as FormArray
     rolesFormArray.push(formBuilder.group({ role: 'methodology' }))
 
     fixture.detectChanges()
 
     const recordHolderData = fixture.debugElement.query(
-      By.css('.credit-name-and-roles'),
+      By.css('.credit-name-and-roles')
     ).nativeElement
     const affiliation = fixture.debugElement.query(By.css('.affiliation'))
       .nativeElement
 
     expect(recordHolderData.innerHTML).not.toBeNull()
     expect(recordHolderData.textContent).toBe(
-      'Name Surname (Conceptualization, No specified role, Methodology)',
+      'Name Surname (Conceptualization, No specified role, Methodology)'
     )
     expect(affiliation.innerHTML).not.toBeNull()
     expect(affiliation.textContent).toBe('ORCID, University')
   })
 
   it('should display `Add another contributor button`', () => {
-    expect(debugElement.query(
-      By.css('#cy-add-another-contributor'),
-    )).toBeTruthy()
+    expect(
+      debugElement.query(By.css('#cy-add-another-contributor'))
+    ).toBeTruthy()
   })
 
   it('should add new contributor form when you click `Add another contributor`', async () => {
-    await findByClassNameAndClickButton(debugElement, fixture, '#cy-add-another-contributor')
+    await findByClassNameAndClickButton(
+      debugElement,
+      fixture,
+      '#cy-add-another-contributor'
+    )
 
     const contributorName = await loader.getHarness(MatInputHarness)
     const role = await loader.getHarness(MatSelectHarness)
@@ -168,11 +181,19 @@ describe('WorkContributorsComponent', () => {
   })
 
   it('should add new role input to new contributor form when you click `Add another role`', async () => {
-    await findByClassNameAndClickButton(debugElement, fixture, '#cy-add-another-contributor')
+    await findByClassNameAndClickButton(
+      debugElement,
+      fixture,
+      '#cy-add-another-contributor'
+    )
 
     fixture.detectChanges()
 
-    await findByClassNameAndClickButton(debugElement, fixture, '#cy-add-another-role')
+    await findByClassNameAndClickButton(
+      debugElement,
+      fixture,
+      '#cy-add-another-role'
+    )
 
     const roles = await loader.getAllHarnesses(MatSelectHarness)
 
@@ -180,11 +201,19 @@ describe('WorkContributorsComponent', () => {
   })
 
   it('should display two error messages if `Save changes` is clicked and there is no name and role is duplicated`', async () => {
-    await findByClassNameAndClickButton(debugElement, fixture, '#cy-add-another-contributor')
+    await findByClassNameAndClickButton(
+      debugElement,
+      fixture,
+      '#cy-add-another-contributor'
+    )
 
     fixture.detectChanges()
 
-    await findByClassNameAndClickButton(debugElement, fixture, '#cy-add-another-role')
+    await findByClassNameAndClickButton(
+      debugElement,
+      fixture,
+      '#cy-add-another-role'
+    )
 
     const roles = await loader.getAllHarnesses(MatSelectHarness)
     await roles[0].open()
@@ -208,7 +237,9 @@ describe('WorkContributorsComponent', () => {
 
     fixture.detectChanges()
 
-    const contributors = fixture.nativeElement.querySelectorAll('.contributors-box')
+    const contributors = fixture.nativeElement.querySelectorAll(
+      '.contributors-box'
+    )
 
     expect(contributors.length).toBe(2)
     expect(contributors[0].querySelector('.orcid-logo')).toBeTruthy()
@@ -221,7 +252,9 @@ describe('WorkContributorsComponent', () => {
 
     fixture.detectChanges()
 
-    const contributors = fixture.nativeElement.querySelectorAll('.contributors-box')
+    const contributors = fixture.nativeElement.querySelectorAll(
+      '.contributors-box'
+    )
 
     expect(contributors.length).toBe(2)
     expect(contributors[0].querySelector('.orcid-logo')).toBeTruthy()
@@ -237,17 +270,27 @@ describe('WorkContributorsComponent', () => {
     const deleteButton = await loader.getHarness(MatButtonHarness)
     await deleteButton.click()
 
-    const contributors = fixture.nativeElement.querySelectorAll('.contributors-box')
+    const contributors = fixture.nativeElement.querySelectorAll(
+      '.contributors-box'
+    )
 
     expect(contributors.length).toBe(1)
   })
 
   it('should remove contributor role from the list when you click the delete button first role should not have delete button', async () => {
-    await findByClassNameAndClickButton(debugElement, fixture, '#cy-add-another-contributor')
+    await findByClassNameAndClickButton(
+      debugElement,
+      fixture,
+      '#cy-add-another-contributor'
+    )
 
     fixture.detectChanges()
 
-    await findByClassNameAndClickButton(debugElement, fixture, '#cy-add-another-role')
+    await findByClassNameAndClickButton(
+      debugElement,
+      fixture,
+      '#cy-add-another-role'
+    )
 
     const roles = await loader.getAllHarnesses(MatSelectHarness)
     await roles[0].open()
@@ -275,7 +318,9 @@ describe('WorkContributorsComponent', () => {
 
     fixture.detectChanges()
 
-    const contributors = fixture.nativeElement.querySelectorAll('.contributors-box')
+    const contributors = fixture.nativeElement.querySelectorAll(
+      '.contributors-box'
+    )
 
     const noticePanel = fixture.nativeElement.querySelector('.notice-panel')
 
@@ -293,7 +338,9 @@ describe('WorkContributorsComponent', () => {
 
     fixture.detectChanges()
 
-    const contributors = fixture.nativeElement.querySelectorAll('.contributors-box')
+    const contributors = fixture.nativeElement.querySelectorAll(
+      '.contributors-box'
+    )
 
     const noticePanel = fixture.nativeElement.querySelector('.notice-panel')
 
@@ -311,8 +358,12 @@ describe('WorkContributorsComponent', () => {
 
     fixture.detectChanges()
 
-    const contributors = fixture.nativeElement.querySelectorAll('.contributors-box')
-    const creditNameAndRoles = contributors[1].querySelector('.credit-name-and-roles')
+    const contributors = fixture.nativeElement.querySelectorAll(
+      '.contributors-box'
+    )
+    const creditNameAndRoles = contributors[1].querySelector(
+      '.credit-name-and-roles'
+    )
 
     expect(contributors.length).toBe(2)
     expect(creditNameAndRoles.innerText).toBe('Contributor no role no sequence')
@@ -325,11 +376,17 @@ describe('WorkContributorsComponent', () => {
 
     fixture.detectChanges()
 
-    const contributors = fixture.nativeElement.querySelectorAll('.contributors-box')
-    const creditNameAndRoles = contributors[1].querySelector('.credit-name-and-roles')
+    const contributors = fixture.nativeElement.querySelectorAll(
+      '.contributors-box'
+    )
+    const creditNameAndRoles = contributors[1].querySelector(
+      '.credit-name-and-roles'
+    )
 
     expect(contributors.length).toBe(2)
-    expect(creditNameAndRoles.innerText).toBe('Contributor one role (Conceptualization)')
+    expect(creditNameAndRoles.innerText).toBe(
+      'Contributor one role (Conceptualization)'
+    )
   })
 
   it('should display record holder and one contributor with only one sequence', async () => {
@@ -339,8 +396,12 @@ describe('WorkContributorsComponent', () => {
 
     fixture.detectChanges()
 
-    const contributors = fixture.nativeElement.querySelectorAll('.contributors-box')
-    const creditNameAndRoles = contributors[1].querySelector('.credit-name-and-roles')
+    const contributors = fixture.nativeElement.querySelectorAll(
+      '.contributors-box'
+    )
+    const creditNameAndRoles = contributors[1].querySelector(
+      '.credit-name-and-roles'
+    )
 
     expect(contributors.length).toBe(2)
     expect(creditNameAndRoles.innerText).toBe('Contributor one sequence')
@@ -353,12 +414,17 @@ describe('WorkContributorsComponent', () => {
 
     fixture.detectChanges()
 
-    const contributors = fixture.nativeElement.querySelectorAll('.contributors-box')
-    const creditNameAndRoles = contributors[1].querySelector('.credit-name-and-roles')
-
+    const contributors = fixture.nativeElement.querySelectorAll(
+      '.contributors-box'
+    )
+    const creditNameAndRoles = contributors[1].querySelector(
+      '.credit-name-and-roles'
+    )
 
     expect(contributors.length).toBe(2)
-    expect(creditNameAndRoles.innerText).toBe('Contributor one role and one sequence (Conceptualization)')
+    expect(creditNameAndRoles.innerText).toBe(
+      'Contributor one role and one sequence (Conceptualization)'
+    )
   })
 
   it('should display record holder and one contributor with multiple roles new and old', async () => {
@@ -368,16 +434,23 @@ describe('WorkContributorsComponent', () => {
 
     fixture.detectChanges()
 
-    const contributors = fixture.nativeElement.querySelectorAll('.contributors-box')
-    const creditNameAndRoles = contributors[1].querySelector('.credit-name-and-roles')
-
+    const contributors = fixture.nativeElement.querySelectorAll(
+      '.contributors-box'
+    )
+    const creditNameAndRoles = contributors[1].querySelector(
+      '.credit-name-and-roles'
+    )
 
     expect(contributors.length).toBe(2)
-    expect(creditNameAndRoles.innerText).toBe('Contributor multiple roles (Conceptualization, Author)')
+    expect(creditNameAndRoles.innerText).toBe(
+      'Contributor multiple roles (Conceptualization, Author)'
+    )
   })
 
   it('should display notice panel if 50+ contributors are added and button `Add another contributor` must be disabled', async () => {
-    const addAnotherContributor = debugElement.query(By.css('#cy-add-another-contributor'))
+    const addAnotherContributor = debugElement.query(
+      By.css('#cy-add-another-contributor')
+    )
 
     await Array.from({ length: 51 }, (x, i) => {
       addAnotherContributor.triggerEventHandler('click', null)
@@ -385,19 +458,21 @@ describe('WorkContributorsComponent', () => {
       fixture.detectChanges()
     })
 
-    const contributors = fixture.nativeElement.querySelectorAll('.contributors-box')
+    const contributors = fixture.nativeElement.querySelectorAll(
+      '.contributors-box'
+    )
 
     const noticePanel = fixture.nativeElement.querySelector('.notice-panel')
 
-    const addAnotherContributorDisabled = debugElement.query(By.css('a.disabled'))
+    const addAnotherContributorDisabled = debugElement.query(
+      By.css('a.disabled')
+    )
 
     expect(contributors.length).toBe(52)
     expect(noticePanel).toBeTruthy()
     expect(addAnotherContributorDisabled).toBeTruthy()
   })
-
 })
-
 
 function getUserRecord(): UserRecord {
   const userRecord: UserRecord = {} as UserRecord
@@ -564,7 +639,11 @@ function getContributor(): Contributor {
   } as Contributor
 }
 
-async function findByClassNameAndClickButton(debugElement, fixture, className: string) {
+async function findByClassNameAndClickButton(
+  debugElement,
+  fixture,
+  className: string
+) {
   const addAnotherContributor = debugElement.query(By.css(className))
   addAnotherContributor.triggerEventHandler('click', null)
   await fixture.whenStable()

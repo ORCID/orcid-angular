@@ -178,7 +178,10 @@ export class WorkFormComponent implements OnInit {
       workType: [currentWork?.workType?.value || '', [Validators.required]],
       title: [
         currentWork?.title?.value || '',
-        [Validators.required, Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND)],
+        [
+          Validators.required,
+          Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
+        ],
       ],
       translatedTitleGroup: this._fb.group(
         {
@@ -669,18 +672,21 @@ export class WorkFormComponent implements OnInit {
 
   private getContributors(): Contributor[] {
     const contributorsFormArray = this.workForm.get('contributors') as FormArray
-    return contributorsFormArray?.controls.map(c => {
+    return contributorsFormArray?.controls.map((c) => {
       const contributor = {
         creditName: {
           content: c.get('creditName')?.value,
         },
         contributorOrcid: {
           uri: c.get(['contributorOrcid', 'uri'])?.value,
-          path: c.get(['contributorOrcid', 'path'])?.value
+          path: c.get(['contributorOrcid', 'path'])?.value,
         },
       } as Contributor
       let rolesFormArray: FormArray = null
-      if (c.get(['contributorOrcid', 'path'])?.value === this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID) {
+      if (
+        c.get(['contributorOrcid', 'path'])?.value ===
+        this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID
+      ) {
         rolesFormArray = this.workForm.get('roles') as FormArray
       } else {
         rolesFormArray = c.get('roles') as FormArray
@@ -690,9 +696,9 @@ export class WorkFormComponent implements OnInit {
           (fg) =>
             fg?.value?.role &&
             this._workService.getContributionRoleByKey(fg?.value?.role) !==
-            null &&
+              null &&
             this._workService.getContributionRoleByKey(fg?.value?.role)?.key !==
-            'no specified role'
+              'no specified role'
         )
         .map((formGroup) => {
           const role = formGroup?.value?.role
