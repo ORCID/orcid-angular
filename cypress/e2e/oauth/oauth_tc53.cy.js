@@ -27,7 +27,7 @@ describe('OAuth client revokes access token', async function () {
         cy.get('#signin-button').click()
     
         //grant access to get code
-        cy.get('#authorize-button',{timeout:2000}).click()
+        cy.get('#authorize-button',{timeout:4000}).click()
         cy.url({timeout:4000}).should('include', userData.cyOAuth_MemberUser.redirect_uri+'/?code=')
         cy.url().then((urlString) => {
             //grab appended code and exchange it for token
@@ -56,9 +56,9 @@ describe('OAuth client revokes access token', async function () {
         })
     })
   
-    it('TC#53 client revokes access token', function () {
+    it('TC#53 & TC#54 client revokes access token which cannot be used to make changes to record', function () {
 
-      //Revoke access token  
+      //TC#53 Revoke access token  
       const curlRevokeToken =
       "curl -i -L -H 'Accept: application/json' --data 'client_id=" +
       userData.cyOAuth_MemberUser.clientID +
@@ -71,7 +71,21 @@ describe('OAuth client revokes access token', async function () {
       cy.exec(curlRevokeToken).then((response) => {
         expect(response.stdout).to.contain('HTTP/2 200')
     })
-    
+
+     //TC#54 Try to use revoked token
+     const curlPostWork = 
+     "curl -i -H 'Content-type: application/vnd.orcid+xml' -H "+
+     "'Authorization: Bearer "+ token2revoke +"' -d "+
+     "'@/Users/karenmadrigal/Documents/projects/registry/cypress/fixtures/work_minimal.xml' -X"+
+     " POST 'https://api.qa.orcid.org/v3.0/"+ recordOwner.oid +"/work'"
+     cy.log(curlPostWork)
+
+     cy.exec(curlPostWork).then((response) => {
+         const responseStr= response.stdout
+         //verify error message indicates token is invalid
+         expect(responseStr).to.contain('"error":"invalid_token"')
+     })
+
     })
   
     after(() => {})
