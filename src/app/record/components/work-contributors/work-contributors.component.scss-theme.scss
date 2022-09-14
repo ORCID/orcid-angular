@@ -29,6 +29,14 @@
       color: mat-color($foreground, text-dark-mid);
     }
   }
+
+  .notice-panel {
+    border-color: mat-color($foreground, 'state-notice-dark') !important;
+
+    mat-icon {
+      color: mat-color($foreground, 'state-notice-dark') !important;
+    }
+  }
 }
 
 @include work-contributors-theme($orcid-app-theme);
