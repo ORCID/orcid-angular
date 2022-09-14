@@ -1,8 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core'
 import {
-  ContributionRoles,
   _LEGACY_ContributionRoles,
-  Role,
+  ContributionRoles,
 } from '../../../types/works.endpoint'
 
 @Pipe({

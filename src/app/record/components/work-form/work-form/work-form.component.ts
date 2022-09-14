@@ -33,7 +33,13 @@ import { WINDOW } from '../../../../cdk/window'
 import { UserRecord } from '../../../../types/record.local'
 import { first, map, startWith } from 'rxjs/operators'
 import { dateValidator } from '../../../../shared/validators/date/date.validator'
-import { GetFormErrors, URL_REGEXP } from '../../../../constants'
+import {
+  GetFormErrors,
+  MAX_LENGTH_LESS_THAN_FIVE_THOUSAND,
+  MAX_LENGTH_LESS_THAN_ONE_THOUSAND,
+  MAX_LENGTH_LESS_THAN_TWO_THOUSAND,
+  URL_REGEXP,
+} from '../../../../constants'
 import {
   Contributor,
   ExternalIdentifier,
@@ -81,10 +87,6 @@ export class WorkFormComponent implements OnInit {
   dayOptions = Array(31)
     .fill(0)
     .map((i, idx) => idx + 1)
-
-  MAX_LENGTH_TITLE = 999
-  MAX_LENGTH_DESCRIPTION = 4999
-  MAX_LENGTH_URL = 1999
 
   citationTypes = CitationTypes
 
@@ -176,13 +178,16 @@ export class WorkFormComponent implements OnInit {
       workType: [currentWork?.workType?.value || '', [Validators.required]],
       title: [
         currentWork?.title?.value || '',
-        [Validators.required, Validators.maxLength(this.MAX_LENGTH_TITLE)],
+        [
+          Validators.required,
+          Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
+        ],
       ],
       translatedTitleGroup: this._fb.group(
         {
           translatedTitleContent: [
             currentWork?.translatedTitle?.content || '',
-            [Validators.maxLength(this.MAX_LENGTH_TITLE)],
+            [Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND)],
           ],
           translatedTitleLanguage: [
             currentWork?.translatedTitle?.languageCode || '',
@@ -193,11 +198,11 @@ export class WorkFormComponent implements OnInit {
       ),
       subtitle: [
         currentWork?.subtitle?.value || '',
-        [Validators.maxLength(this.MAX_LENGTH_TITLE)],
+        [Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND)],
       ],
       journalTitle: [
         currentWork?.journalTitle?.value || '',
-        [Validators.maxLength(this.MAX_LENGTH_TITLE)],
+        [Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND)],
       ],
       publicationDate: this._fb.group(
         {
@@ -217,7 +222,7 @@ export class WorkFormComponent implements OnInit {
         currentWork?.url?.value || '',
         [
           Validators.pattern(URL_REGEXP),
-          Validators.maxLength(this.MAX_LENGTH_URL),
+          Validators.maxLength(MAX_LENGTH_LESS_THAN_TWO_THOUSAND),
         ],
       ],
       citationGroup: this._fb.group(
@@ -226,7 +231,7 @@ export class WorkFormComponent implements OnInit {
           citation: [currentWork?.citation?.citation?.value || '', []],
           shortDescription: [
             currentWork?.shortDescription?.value || '',
-            [Validators.maxLength(this.MAX_LENGTH_DESCRIPTION)],
+            [Validators.maxLength(MAX_LENGTH_LESS_THAN_FIVE_THOUSAND)],
           ],
         },
         { validator: workCitationValidator }
@@ -561,7 +566,7 @@ export class WorkFormComponent implements OnInit {
         workType: {
           value: this.workForm.value.workType,
         },
-        contributorsGroupedByOrcid: this.getContributorRoles(),
+        contributorsGroupedByOrcid: this.getContributors(),
       }
       if (this.work?.putCode) {
         work.putCode = this.work.putCode
@@ -665,42 +670,50 @@ export class WorkFormComponent implements OnInit {
     return workRelationship
   }
 
-  private getContributorRoles(): Contributor[] {
-    const rolesFormArray = this.workForm.get('roles') as FormArray
-    const roles = rolesFormArray?.controls
-      ?.filter(
-        (fg) =>
-          fg?.value?.role &&
-          this._workService.getContributionRoleByKey(fg?.value?.role) !==
-            null &&
-          this._workService.getContributionRoleByKey(fg?.value?.role)?.key !==
-            'no specified role'
-      )
-      .map((formGroup) => {
-        const role = formGroup?.value?.role
-        const value = this._workService.getContributionRoleByKey(role)?.value
-        return value ? value : role
-      })
-    const recordHolderContribution = this.workForm.get('contributors')?.value[0]
-    const contributorRoles = [
-      {
+  private getContributors(): Contributor[] {
+    const contributorsFormArray = this.workForm.get('contributors') as FormArray
+    return contributorsFormArray?.controls.map((c) => {
+      const contributor = {
         creditName: {
-          content: recordHolderContribution?.creditName,
+          content: c.get('creditName')?.value,
         },
         contributorOrcid: {
-          uri: recordHolderContribution?.contributorOrcid?.uri,
-          path: recordHolderContribution?.contributorOrcid?.path,
+          uri: c.get(['contributorOrcid', 'uri'])?.value,
+          path: c.get(['contributorOrcid', 'path'])?.value,
         },
-      } as Contributor,
-    ]
-    if (roles.length > 0) {
-      contributorRoles[0].rolesAndSequences = [
-        ...roles.map((role) => ({
-          contributorRole: role,
-        })),
-      ]
-    }
-    return contributorRoles
+      } as Contributor
+      let rolesFormArray: FormArray = null
+      if (
+        c.get(['contributorOrcid', 'path'])?.value ===
+        this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID
+      ) {
+        rolesFormArray = this.workForm.get('roles') as FormArray
+      } else {
+        rolesFormArray = c.get('roles') as FormArray
+      }
+      const roles = rolesFormArray?.controls
+        ?.filter(
+          (fg) =>
+            fg?.value?.role &&
+            this._workService.getContributionRoleByKey(fg?.value?.role) !==
+              null &&
+            this._workService.getContributionRoleByKey(fg?.value?.role)?.key !==
+              'no specified role'
+        )
+        .map((formGroup) => {
+          const role = formGroup?.value?.role
+          const value = this._workService.getContributionRoleByKey(role)?.value
+          return value ? value : role
+        })
+      if (roles?.length > 0) {
+        contributor.rolesAndSequences = [
+          ...roles.map((role) => ({
+            contributorRole: role,
+          })),
+        ]
+      }
+      return contributor
+    })
   }
 
   closeEvent() {
