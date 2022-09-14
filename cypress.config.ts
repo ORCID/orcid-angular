@@ -20,6 +20,7 @@ export default defineConfig({
     membersAPI_workEndpoint: '/work',
     membersAPI_peerReviewEndpoint: '/peer-review',
     registrationPage: 'https://qa.orcid.org/register',
+    membersAPI_revokeTokenEndPoint: 'https://qa.orcid.org/oauth/revoke'
   },
   video: false,
   chromeWebSecurity: false,
