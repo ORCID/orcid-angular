@@ -634,7 +634,10 @@
     [userRecord]="userRecord"
   ></app-work-contributor-roles>
 
-  <app-work-contributors [userRecord]="userRecord"></app-work-contributors>
+  <app-work-contributors
+    [contributors]="work?.contributorsGroupedByOrcid"
+    [userRecord]="userRecord"
+  ></app-work-contributors>
 
   <!---------------------->
   <!-- Work Other Information -->

@@ -2,12 +2,16 @@
   <div class="row title">
     <label class="orc-font-body">
       <strong i18n="@@works.contributorsToThisWork"
-        >Contributors to this work</strong
+      >Contributors to this work</strong
       >
     </label>
   </div>
   <ng-container formArrayName="contributors">
-    <div class="row contributors-list" cdkDropList>
+    <div
+      class="row contributors-list"
+      cdkDropList
+      (cdkDropListDropped)="drop($event)"
+    >
       <div
         cdkDrag
         class="row contributors-box"
@@ -28,26 +32,211 @@
                 src="assets/vectors/draggable.svg"
                 alt="drag handle"
               />
-              <img
-                class="orcid-logo"
-                src="assets/vectors/orcid.logo.icon.svg"
-                alt="orcid logo"
-              />
             </div>
-            <p>
-              <span class="record-holder-name-and-roles orc-font-body-small"
+            <ng-container *ngIf="contributor.get('creditName').disabled">
+              <div class="icons-wrapper">
+                <img
+                  class="orcid-logo"
+                  src="assets/vectors/orcid.logo.icon.svg"
+                  alt="orcid logo"
+                  *ngIf="contributor.get(['contributorOrcid','path'])?.value"
+                  (click)="goto(contributor.get(['contributorOrcid','uri'])?.value)"
+                />
+              </div>
+              <p>
+                <span
+                  class="credit-name-and-roles orc-font-body-small"
+                  [ngClass]="{
+                    'record-holder': contributor.get(['contributorOrcid','path'])?.value === id,
+                    'not-record-holder': contributor.get(['contributorOrcid','path'])?.value !== id
+                  }"
                 >{{ contributor.get('creditName')?.value }}
-                <ng-container *ngIf="roles">({{ roles }})</ng-container>
-              </span>
-              <span
-                class="affiliation orc-font-small-print"
-                *ngIf="affiliation"
-                >{{ affiliation }}</span
-              >
-            </p>
+                  <ng-container
+                    *ngIf="roles && contributor.get(['contributorOrcid','path'])?.value === id"
+                  >({{ roles }})</ng-container>
+                  <ng-container
+                    *ngIf="
+                          contributor.get(['contributorOrcid','path'])?.value !== id &&
+                          contributor.get('roles')?.value?.length > 0
+                        "
+                  >({{ contributor.get('roles')?.value | contributorRoles }})</ng-container
+                  >
+                </span>
+
+                <span
+                  class="affiliation orc-font-small-print"
+                  *ngIf="affiliation && contributor.get(['contributorOrcid','path'])?.value === id"
+                >{{ affiliation }}</span>
+              </p>
+            </ng-container>
+            <ng-container *ngIf="!contributor.get('creditName').disabled">
+              <div class="row contributor">
+                <div class="col l9 no-gutters">
+                  <mat-form-field
+                    appearance="outline"
+                    class="mat-form-field-min"
+                    [ngClass]="{
+                      'no-hint': !(contributor.get('creditName').touched && contributor.get('creditName')?.errors)
+                    }"
+                  >
+                    <input matInput formControlName="creditName"/>
+                    <mat-error
+                      *ngIf="contributor.get('creditName').hasError('required')"
+                      i18n="@@works.contributorNameIsRequired"
+                    >
+                      Contributors name is required
+                    </mat-error>
+                    <mat-error
+                      *ngIf="contributor.get('creditName').errors?.maxlength"
+                      i18n="@@works.titleMaxLength"
+                    >
+                      Must be less than 1000 characters
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col l3 delete-button">
+                  <button
+                    mat-icon-button
+                    (click)="deleteContributor(i)"
+                    [id]="'cy-delete-button-'+ i"
+                  >
+                    <mat-icon class="material-icons-outlined extra-large-material-icon"
+                    >delete
+                    </mat-icon>
+                  </button>
+                </div>
+                <ng-container formArrayName="roles">
+                  <div
+                    class="row roles-box"
+                    *ngFor="let role of rolesFormArray(contributor); index as i"
+                    [formGroupName]="i"
+                  >
+                    <div class="col l9 no-gutters orc-font-body-small">
+                      <mat-form-field
+                        appearance="outline"
+                        class="mat-form-field-min"
+                        [ngClass]="{
+                          'no-hint': !role.get('role').errors
+                        }"
+                      >
+                        <mat-select
+                          #roleSelect
+                          placeholder="{{ ngOrcidSelectRole }}"
+                          formControlName="role"
+                        >
+                          <mat-option
+                            *ngFor="let contributionRole of contributionRoles"
+                            [value]="contributionRole.key"
+                            [disabled]="contributionRole.key | disableRole: role"
+                          >
+                            {{ contributionRole.translation | titlecase }}
+                          </mat-option>
+                        </mat-select>
+                        <mat-error
+                          *ngIf="role.get('role').errors?.unique"
+                          i18n="@@works.roleNotDuplicated"
+                        >
+                          Role cannot be duplicated
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col l3 delete-button">
+                      <button
+                        mat-icon-button
+                        (click)="deleteRole(contributor, i)"
+                        [id]="'cy-remove-role-'+ i"
+                        *ngIf="i !== 0"
+                      >
+                        <mat-icon class="material-icons-outlined extra-large-material-icon"
+                        >delete
+                        </mat-icon>
+                      </button>
+                    </div>
+                  </div>
+                </ng-container>
+                <div class="row">
+                  <a class="underline" (click)="addAnotherRole(contributor)" id="cy-add-another-role">
+                    <span class="mat-body-1" i18n="@@works.addAnotherRole">
+                      Add another role
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+          <div
+            class="col l3 delete-button"
+            *ngIf="
+              contributor.get('creditName').disabled &&
+              contributor.get(['contributorOrcid','path'])?.value !== id
+            "
+          >
+            <button
+              mat-icon-button
+              (click)="deleteContributor(i)"
+              id="cy-delete-button"
+            >
+              <mat-icon class="material-icons-outlined extra-large-material-icon"
+              >delete
+              </mat-icon>
+            </button>
           </div>
         </div>
+        <hr
+          class="dashed-line"
+          *ngIf="!(i === contributorsFormArray.length - 1)"
+        />
+      </div>
+    </div>
+    <div
+      class="notice-panel"
+      *ngIf="
+        contributors?.length > maxNumberOfContributors ||
+        contributorsFormArray?.length > maxNumberOfContributors
+      "
+    >
+      <div class="col">
+        <mat-icon class="large-material-icon">info</mat-icon>
+      </div>
+      <div class="col l11 m6 s3">
+        <h2 class="orc-font-body" i18n="@@works.youCannotAddMoreContributors">
+          You cannot add any more contributors to this work
+        </h2>
+        <p class="orc-font-body-small" i18n="@@works.orcidSupportsMaximum">
+          ORCID supports a maximum of 50 contributors when adding them manually.
+        </p>
+        <a
+          class="underline orc-font-body-small"
+          rel="noopener noreferrer"
+          target="_blank"
+          href="https://support.orcid.org/hc/en-us/articles/360006971353-Metadata-in-the-Works-section"
+          i18n="@@works.findOutMoreAboutContributors"
+        >
+          Find out more about managing contributors in ORCID
+        </a>
       </div>
     </div>
   </ng-container>
+  <div class="row">
+    <a
+      class="col add-more no-gutters"
+      [class.disabled]="
+        contributors?.length > maxNumberOfContributors ||
+        contributorsFormArray?.length > maxNumberOfContributors
+      "
+      (click)="addAnotherContributor(
+        contributors?.length > maxNumberOfContributors ||
+        contributorsFormArray?.length > maxNumberOfContributors
+      )"
+      id="cy-add-another-contributor"
+    >
+      <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
+      <span
+        class="mat-body-1"
+        i18n="@@works.addAnotherContributor"
+      >
+        Add another contributor
+      </span>
+    </a>
+  </div>
 </div>
