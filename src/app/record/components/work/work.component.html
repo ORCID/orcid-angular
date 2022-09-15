@@ -243,16 +243,16 @@
             i18n="@@works.or"
             *ngIf="
               !isPublicRecord &&
-              (work.workExternalIdentifiers[0].normalizedUrl?.value ||
-                work.workExternalIdentifiers[0].url?.value)
+              (work.workExternalIdentifiers[0]?.normalizedUrl?.value ||
+                work.workExternalIdentifiers[0]?.url?.value)
             "
           >
             or
           </ng-container>
           <a
             href="{{
-              work?.workExternalIdentifiers[0].normalizedUrl?.value ||
-                work?.workExternalIdentifiers[0].url?.value
+              work?.workExternalIdentifiers[0]?.normalizedUrl?.value ||
+                work?.workExternalIdentifiers[0]?.url?.value
             }}"
             target="_blank"
             rel="noopener noreferrer"
@@ -385,8 +385,8 @@
           </ng-container>
           <a
             href="{{
-              work.workExternalIdentifiers[0].normalizedUrl?.value ||
-                work.workExternalIdentifiers[0].url?.value
+              work.workExternalIdentifiers[0]?.normalizedUrl?.value ||
+                work.workExternalIdentifiers[0]?.url?.value
             }}"
             target="_blank"
             rel="noopener noreferrer"
