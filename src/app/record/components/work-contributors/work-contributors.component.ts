@@ -54,7 +54,7 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
   isMobile: boolean
   screenDirection = 'ltr'
   roles: string
-  maxNumberOfContributors = 51
+  maxNumberOfContributors = 49
 
   contributionRoles = ContributionRoles
 

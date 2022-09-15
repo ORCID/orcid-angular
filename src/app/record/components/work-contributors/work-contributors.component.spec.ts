@@ -331,7 +331,7 @@ describe('WorkContributorsComponent', () => {
     expect(addAnotherContributor).toBeTruthy()
   })
 
-  it('should not display notice panel if there is less than 50 editable contributors', async () => {
+  it('should not display notice panel if there is less than 50 contributors', async () => {
     component.contributors = getNumberOfContributors(30)
 
     component.ngOnInit()
@@ -452,7 +452,7 @@ describe('WorkContributorsComponent', () => {
       By.css('#cy-add-another-contributor')
     )
 
-    await Array.from({ length: 51 }, (x, i) => {
+    await Array.from({ length: 49 }, (x, i) => {
       addAnotherContributor.triggerEventHandler('click', null)
 
       fixture.detectChanges()
@@ -468,7 +468,7 @@ describe('WorkContributorsComponent', () => {
       By.css('a.disabled')
     )
 
-    expect(contributors.length).toBe(52)
+    expect(contributors.length).toBe(50)
     expect(noticePanel).toBeTruthy()
     expect(addAnotherContributorDisabled).toBeTruthy()
   })
