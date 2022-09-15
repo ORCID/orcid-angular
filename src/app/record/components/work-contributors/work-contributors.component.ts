@@ -59,6 +59,7 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
   contributionRoles = ContributionRoles
 
   ngOrcidSelectRole = $localize`:@@works.pleaseSelectRole:Please select a role`
+  ngOrcidContributorName = $localize`:@@works.contributorName:Contributor name`
 
   constructor(
     @Inject(WINDOW) private window: Window,

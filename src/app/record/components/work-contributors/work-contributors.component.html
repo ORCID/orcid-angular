@@ -99,7 +99,11 @@
                       )
                     }"
                   >
-                    <input matInput formControlName="creditName" />
+                    <input
+                      matInput
+                      formControlName="creditName"
+                      placeholder="{{ ngOrcidContributorName }}"
+                    />
                     <mat-error
                       *ngIf="contributor.get('creditName').hasError('required')"
                       i18n="@@works.contributorNameIsRequired"
