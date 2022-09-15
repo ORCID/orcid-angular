@@ -26,10 +26,9 @@ import { RecordWorksService } from '../../../core/record-works/record-works.serv
 import { RecordAffiliationService } from '../../../core/record-affiliations/record-affiliations.service'
 import { EmploymentsEndpoint } from '../../../types/record-affiliation.endpoint'
 import { unique } from '../../../shared/validators/unique/unique.validator'
-import { ContributionRoles, Role } from '../../../types/works.endpoint'
-import { MAX_LENGTH_LESS_THAN_ONE_THOUSAND } from '../../../constants'
+import { ContributionRoles } from '../../../types/works.endpoint'
+import { MAX_LENGTH_LESS_THAN_ONE_HUNDRED } from '../../../constants'
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
-import { MatSelect } from '@angular/material/select'
 import { WINDOW } from '../../../cdk/window'
 
 @Component({
@@ -54,7 +53,7 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
   isMobile: boolean
   screenDirection = 'ltr'
   roles: string
-  maxNumberOfContributors = 51
+  maxNumberOfContributors = 49
 
   contributionRoles = ContributionRoles
 
@@ -208,7 +207,7 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
         },
         [
           Validators.required,
-          Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
+          Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_HUNDRED),
         ],
       ],
       contributorOrcid: this.formBuilder.group({
