@@ -306,7 +306,7 @@ describe('WorkContributorsComponent', () => {
   })
 
   it('should not display delete button if there is only record holder contribution', async () => {
-    const deleteButton = debugElement.query(By.css('#cy-delete-button'))
+    const deleteButton = debugElement.query(By.css('#cy-delete-button-1'))
 
     expect(deleteButton).not.toBeTruthy()
   })
@@ -472,6 +472,37 @@ describe('WorkContributorsComponent', () => {
     expect(noticePanel).toBeTruthy()
     expect(addAnotherContributorDisabled).toBeTruthy()
   })
+
+  it('should display a notice panel if there are 50 contributors, but should disappear if a contributor is removed', async () => {
+    component.contributors = getNumberOfContributors(49)
+
+    component.ngOnInit()
+
+    fixture.detectChanges()
+
+    await findByClassNameAndClickButton(
+      debugElement,
+      fixture,
+      '#cy-delete-button-49'
+    )
+
+    fixture.detectChanges()
+
+    const contributors = fixture.nativeElement.querySelectorAll(
+      '.contributors-box'
+    )
+
+    const noticePanel = fixture.nativeElement.querySelector('.notice-panel')
+
+    const addAnotherContributorDisabled = debugElement.query(
+      By.css('a.disabled')
+    )
+
+    expect(contributors.length).toBe(49)
+    expect(noticePanel).not.toBeTruthy()
+    expect(addAnotherContributorDisabled).not.toBeTruthy()
+  })
+
 })
 
 function getUserRecord(): UserRecord {
@@ -616,8 +647,8 @@ function getNumberOfContributors(numberOfContributors: number): Contributor[] {
   const contributors = []
   for (let i = 0; i < numberOfContributors; i++) {
     const contributor = getContributor()
-    contributor.creditName = contributor.creditName + ' ' + (i + 1)
-    contributor.contributorOrcid.path = contributor.creditName + i
+    contributor.creditName.content = contributor.creditName.content + ' ' + (i + 1)
+    contributor.contributorOrcid.path = contributor.contributorOrcid.path + i
     contributors.push(contributor)
   }
   return contributors
@@ -625,7 +656,9 @@ function getNumberOfContributors(numberOfContributors: number): Contributor[] {
 
 function getContributor(): Contributor {
   return {
-    creditName: 'Contributor',
+    creditName: {
+      content: 'Contributor'
+    },
     contributorOrcid: {
       path: '0000-0000-0000-000',
       uri: 'https://dev.orcid.org/0000-0000-0000-0001',
