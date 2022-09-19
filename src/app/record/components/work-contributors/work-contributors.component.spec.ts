@@ -502,7 +502,6 @@ describe('WorkContributorsComponent', () => {
     expect(noticePanel).not.toBeTruthy()
     expect(addAnotherContributorDisabled).not.toBeTruthy()
   })
-
 })
 
 function getUserRecord(): UserRecord {
@@ -647,7 +646,8 @@ function getNumberOfContributors(numberOfContributors: number): Contributor[] {
   const contributors = []
   for (let i = 0; i < numberOfContributors; i++) {
     const contributor = getContributor()
-    contributor.creditName.content = contributor.creditName.content + ' ' + (i + 1)
+    contributor.creditName.content =
+      contributor.creditName.content + ' ' + (i + 1)
     contributor.contributorOrcid.path = contributor.contributorOrcid.path + i
     contributors.push(contributor)
   }
@@ -657,7 +657,7 @@ function getNumberOfContributors(numberOfContributors: number): Contributor[] {
 function getContributor(): Contributor {
   return {
     creditName: {
-      content: 'Contributor'
+      content: 'Contributor',
     },
     contributorOrcid: {
       path: '0000-0000-0000-000',
