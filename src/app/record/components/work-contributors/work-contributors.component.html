@@ -278,7 +278,7 @@
               <button
                 mat-icon-button
                 (click)="deleteContributor(i)"
-                id="cy-delete-button"
+                [id]="'cy-delete-button-' + i"
               >
                 <mat-icon
                   class="material-icons-outlined extra-large-material-icon"
