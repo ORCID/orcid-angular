@@ -91,8 +91,9 @@ describe('OAuth client refreshes access token', async function () {
       const curlPostWork =
         "curl -i -H 'Content-type: application/json' -H " +
         "'Authorization: Bearer " +
-        newAccessToken +"' -d '" +
-       recordOwner.curlPostWorkPath +
+        newAccessToken +
+        "' -d '" +
+        recordOwner.curlPostWorkPath +
         "' -X POST 'https://api.qa.orcid.org/v3.0/" +
         recordOwner.oid +
         "/work'"
