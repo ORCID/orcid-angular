@@ -82,9 +82,9 @@ describe('OAuth client revokes access token', async function () {
       "curl -i -H 'Content-type: application/vnd.orcid+xml' -H " +
       "'Authorization: Bearer " +
       token2revoke +
-      "' -d " +
-      "'@/Users/karenmadrigal/Documents/projects/registry/cypress/fixtures/work_minimal.xml' -X" +
-      " POST 'https://api.qa.orcid.org/v3.0/" +
+      "' -d '" +
+      recordOwner.curlPostWorkPath +
+      "' -X POST 'https://api.qa.orcid.org/v3.0/" +
       recordOwner.oid +
       "/work'"
     cy.log(curlPostWork)

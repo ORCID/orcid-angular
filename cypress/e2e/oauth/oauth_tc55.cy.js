@@ -83,11 +83,11 @@ describe('OAuth client refreshes access token', async function () {
 
       //Try to use new access token
       const curlPostWork =
-        "curl -i -H 'Content-type: application/vnd.orcid+xml' -H " +
+        "curl -i -H 'Content-type: application/json' -H " +
         "'Authorization: Bearer " +
-        newAccessToken +"' -d " +
-        "'@/Users/karenmadrigal/Documents/projects/registry/cypress/fixtures/work_minimal.xml' -X" +
-        " POST 'https://api.qa.orcid.org/v3.0/" +
+        newAccessToken +"' -d '" +
+       recordOwner.curlPostWorkPath +
+        "' -X POST 'https://api.qa.orcid.org/v3.0/" +
         recordOwner.oid +
         "/work'"
       cy.log(curlPostWork)
