@@ -207,7 +207,7 @@
             <button
               mat-icon-button
               (click)="deleteContributor(i)"
-              id="cy-delete-button"
+              [id]="'cy-delete-button-' + i"
             >
               <mat-icon
                 class="material-icons-outlined extra-large-material-icon"
@@ -224,10 +224,7 @@
     </div>
     <div
       class="notice-panel"
-      *ngIf="
-        contributors?.length > maxNumberOfContributors ||
-        contributorsFormArray?.length > maxNumberOfContributors
-      "
+      *ngIf="contributorsFormArray?.length > maxNumberOfContributors"
     >
       <div class="col">
         <mat-icon class="large-material-icon">info</mat-icon>
@@ -254,14 +251,10 @@
   <div class="row">
     <a
       class="col add-more no-gutters"
-      [class.disabled]="
-        contributors?.length > maxNumberOfContributors ||
-        contributorsFormArray?.length > maxNumberOfContributors
-      "
+      [class.disabled]="contributorsFormArray?.length > maxNumberOfContributors"
       (click)="
         addAnotherContributor(
-          contributors?.length > maxNumberOfContributors ||
-            contributorsFormArray?.length > maxNumberOfContributors
+          contributorsFormArray?.length > maxNumberOfContributors
         )
       "
       id="cy-add-another-contributor"
