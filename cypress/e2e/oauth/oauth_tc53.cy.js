@@ -79,7 +79,7 @@ describe('OAuth client revokes access token', async function () {
 
     //TC#54 Try to use revoked token
     const curlPostWork =
-      "curl -i -H 'Content-type: application/vnd.orcid+xml' -H " +
+      "curl -i -H 'Content-type: application/json' -H " +
       "'Authorization: Bearer " +
       token2revoke +
       "' -d '" +
@@ -92,7 +92,7 @@ describe('OAuth client revokes access token', async function () {
     cy.exec(curlPostWork).then((response) => {
       const responseStr = response.stdout
       //verify error message indicates token is invalid
-      expect(responseStr).to.contain('"error":"invalid_token"')
+      expect(responseStr).to.contain('"error" : "invalid_token"')
     })
   })
 
