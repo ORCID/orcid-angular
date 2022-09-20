@@ -34,7 +34,7 @@ describe('OAuth client refreshes access token', async function () {
       //grab appended code and exchange it for a valid access token
       const codeToExchange = urlString.split('=')[1]
       cy.log('codeToExchange: ' + codeToExchange)
-     
+
       const curlGetAccessToken =
         "curl -i -L -H 'Accept: application/json' --data 'client_id=" +
         userData.cyOAuth_MemberUser.clientID +
@@ -43,8 +43,8 @@ describe('OAuth client refreshes access token', async function () {
         '&grant_type=authorization_code&code=' +
         codeToExchange +
         "' 'https://qa.orcid.org/oauth/token'"
-      
-        cy.exec(curlGetAccessToken).then((response) => {
+
+      cy.exec(curlGetAccessToken).then((response) => {
         const responseStr = response.stdout
         cy.log(responseStr)
         //verify response is OK
@@ -62,12 +62,18 @@ describe('OAuth client refreshes access token', async function () {
 
   it('TC#55 client exchanges refresh token for a new access token', function () {
     //use refresh token to get a new access token
-    const curlGetNewToken = 
-    "curl -d 'refresh_token="+ refreshToken +"'"+
-    " -d 'grant_type=refresh_token' -d 'client_id="+ userData.cyOAuth_MemberUser.clientID +"'"+
-    " -d 'client_secret=" + userData.cyOAuth_MemberUser.clientSecret + "'"+
-    " -d 'revoke_old=true' https://api.qa.orcid.org/oauth/token"
-    
+    const curlGetNewToken =
+      "curl -d 'refresh_token=" +
+      refreshToken +
+      "'" +
+      " -d 'grant_type=refresh_token' -d 'client_id=" +
+      userData.cyOAuth_MemberUser.clientID +
+      "'" +
+      " -d 'client_secret=" +
+      userData.cyOAuth_MemberUser.clientSecret +
+      "'" +
+      " -d 'revoke_old=true' https://api.qa.orcid.org/oauth/token"
+
     cy.exec(curlGetNewToken).then((response) => {
       const responseStr = response.stdout
       cy.log(responseStr)
@@ -85,7 +91,8 @@ describe('OAuth client refreshes access token', async function () {
       const curlPostWork =
         "curl -i -H 'Content-type: application/vnd.orcid+xml' -H " +
         "'Authorization: Bearer " +
-        newAccessToken +"' -d " +
+        newAccessToken +
+        "' -d " +
         "'@/Users/karenmadrigal/Documents/projects/registry/cypress/fixtures/work_minimal.xml' -X" +
         " POST 'https://api.qa.orcid.org/v3.0/" +
         recordOwner.oid +
