@@ -166,7 +166,7 @@ export class RecordWorksService {
   }
 
   private calculateVisibilityErrors(groups: WorkGroup[]): WorkGroup[] {
-    return groups.map((group) => {
+    return groups?.map((group) => {
       group.visibilityError = !!group.works.find(
         (x) => x.visibility.visibility !== group.activeVisibility
       )
