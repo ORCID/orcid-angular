@@ -7,7 +7,12 @@
       ({{ contributorsFormArray?.controls?.length || contributors?.length }})
     </label>
   </div>
-  <ng-container *ngIf="contributors?.length > maxNumberOfContributors + 1">
+  <ng-container
+    *ngIf="
+      togglzAddOtherContributors &&
+      contributors?.length > maxNumberOfContributors + 1
+    "
+  >
     <div class="contributors-summary orc-font-body-small">
       <ng-container
         *ngFor="
@@ -71,7 +76,12 @@
       </div>
     </div>
   </ng-container>
-  <ng-container *ngIf="!(contributors?.length > maxNumberOfContributors + 1)">
+  <ng-container
+    *ngIf="
+      !togglzAddOtherContributors ||
+      !(contributors?.length > maxNumberOfContributors + 1)
+    "
+  >
     <ng-container formArrayName="contributors">
       <div
         class="row contributors-list"
@@ -323,7 +333,7 @@
         </div>
       </div>
     </ng-container>
-    <div class="row">
+    <div class="row" *ngIf="togglzAddOtherContributors">
       <a
         class="col add-more no-gutters"
         [class.disabled]="

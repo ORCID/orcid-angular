@@ -30,6 +30,7 @@ import { ContributionRoles } from '../../../types/works.endpoint'
 import { MAX_LENGTH_LESS_THAN_ONE_HUNDRED } from '../../../constants'
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
 import { WINDOW } from '../../../cdk/window'
+import { TogglzService } from '../../../core/togglz/togglz.service'
 
 @Component({
   selector: 'app-work-contributors',
@@ -56,6 +57,7 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
   maxNumberOfContributors = 49
   maxNumberOfContributorsSummary = 10
   privateName = 'Name is private'
+  togglzAddOtherContributors: boolean
 
   contributionRoles = ContributionRoles
 
@@ -63,13 +65,18 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
   ngOrcidContributorName = $localize`:@@works.contributorName:Contributor name`
 
   constructor(
+    _togglz: TogglzService,
     @Inject(WINDOW) private window: Window,
     private formBuilder: FormBuilder,
     private parentForm: FormGroupDirective,
     private platform: PlatformInfoService,
     private workService: RecordWorksService,
     private affiliationService: RecordAffiliationService
-  ) {}
+  ) {
+    _togglz
+      .getStateOf('ADD_OTHER_WORK_CONTRIBUTORS')
+      .subscribe((value) => (this.togglzAddOtherContributors = value))
+  }
 
   get contributorsFormArray() {
     return this.parentForm.control.controls['contributors'] as FormArray
@@ -164,21 +171,23 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
           this.getContributorForm(name, orcid, uri, [], true)
         )
       }
-      this.contributors.forEach((contributor) => {
-        contributorsFormArray.push(
-          this.getContributorForm(
-            contributor?.creditName?.content,
-            contributor?.contributorOrcid?.path
-              ? contributor?.contributorOrcid?.path
-              : null,
-            contributor?.contributorOrcid?.uri
-              ? contributor?.contributorOrcid?.uri
-              : null,
-            contributor.rolesAndSequences.map((role) => role.contributorRole),
-            true
+      if (this.togglzAddOtherContributors) {
+        this.contributors.forEach((contributor) => {
+          contributorsFormArray.push(
+            this.getContributorForm(
+              contributor?.creditName?.content,
+              contributor?.contributorOrcid?.path
+                ? contributor?.contributorOrcid?.path
+                : null,
+              contributor?.contributorOrcid?.uri
+                ? contributor?.contributorOrcid?.uri
+                : null,
+              contributor.rolesAndSequences.map((role) => role.contributorRole),
+              true
+            )
           )
-        )
-      })
+        })
+      }
     } else {
       contributorsFormArray.push(
         this.getContributorForm(name, orcid, uri, [], true)
