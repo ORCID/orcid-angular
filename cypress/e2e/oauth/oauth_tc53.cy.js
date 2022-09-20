@@ -79,12 +79,12 @@ describe('OAuth client revokes access token', async function () {
 
     //TC#54 Try to use revoked token
     const curlPostWork =
-      "curl -i -H 'Content-type: application/vnd.orcid+xml' -H " +
+      "curl -i -H 'Content-type: application/json' -H " +
       "'Authorization: Bearer " +
       token2revoke +
-      "' -d " +
-      "'@/Users/karenmadrigal/Documents/projects/registry/cypress/fixtures/work_minimal.xml' -X" +
-      " POST 'https://api.qa.orcid.org/v3.0/" +
+      "' -d '" +
+      recordOwner.curlPostWorkPath +
+      "' -X POST 'https://api.qa.orcid.org/v3.0/" +
       recordOwner.oid +
       "/work'"
     cy.log(curlPostWork)
@@ -92,7 +92,7 @@ describe('OAuth client revokes access token', async function () {
     cy.exec(curlPostWork).then((response) => {
       const responseStr = response.stdout
       //verify error message indicates token is invalid
-      expect(responseStr).to.contain('"error":"invalid_token"')
+      expect(responseStr).to.contain('"error" : "invalid_token"')
     })
   })
 
