@@ -107,6 +107,7 @@ describe('WorkContributorsComponent', () => {
       ])
     )
     component.userRecord = getUserRecord()
+    component.togglzAddOtherContributors = true
 
     fixture.detectChanges()
     loader = TestbedHarnessEnvironment.loader(fixture)
