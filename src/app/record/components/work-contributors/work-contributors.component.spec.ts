@@ -522,16 +522,15 @@ describe('WorkContributorsComponent', () => {
 
     const counter = fixture.nativeElement.querySelector('.title ')
 
-    const contributorsSummary = 'Contributor 1; Contributor 2; Contributor 3; Contributor 4; Contributor 5; Contributor 6; Contributor 7; Contributor 8; Contributor 9; Contributor 10 et al.'
+    const contributorsSummary =
+      'Contributor 1; Contributor 2; Contributor 3; Contributor 4; Contributor 5; Contributor 6; Contributor 7; Contributor 8; Contributor 9; Contributor 10 et al.'
 
     expect(contributors).toBeTruthy()
     expect(contributors.item(0).innerText).toBe(contributorsSummary)
     expect(noticePanel).toBeTruthy()
     expect(addAnotherContributor).not.toBeTruthy()
     expect(counter.innerText).toBe('Contributors to this work (52)')
-
   })
-
 })
 
 function getUserRecord(): UserRecord {
@@ -687,7 +686,7 @@ function getNumberOfContributors(numberOfContributors: number): Contributor[] {
 function getContributor(): Contributor {
   return {
     creditName: {
-      content: 'Contributor'
+      content: 'Contributor',
     },
     contributorOrcid: {
       path: '0000-0000-0000-000',

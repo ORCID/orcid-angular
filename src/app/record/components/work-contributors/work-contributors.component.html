@@ -37,27 +37,27 @@
               target="_blank"
               rel="noreferrer noopener"
               href="{{ contributor?.contributorOrcid?.uri }}"
-            >{{ contributor?.contributorOrcid?.path }}</a
+              >{{ contributor?.contributorOrcid?.path }}</a
             >{{ !last ? '; ' : '' }}
           </ng-container>
         </ng-container>
       </ng-container>
-      <span i18n="@@works.etAl">
-        et al.
-      </span>
+      <span i18n="@@works.etAl"> et al. </span>
     </div>
-    <div
-      class="notice-panel orc-font-body-small"
-    >
+    <div class="notice-panel orc-font-body-small">
       <div class="col no-gutters info">
         <mat-icon class="large-material-icon">info</mat-icon>
       </div>
       <div class="col l11 m6 s3">
-        <h2 class="orc-font-body-small" i18n="@@works.largeNumberOfContributors">
+        <h2
+          class="orc-font-body-small"
+          i18n="@@works.largeNumberOfContributors"
+        >
           This work has a large number of contributors
         </h2>
         <p i18n="@@works.cannotEditListOfContributors">
-          You cannot edit the list of contributors on a work with more than 50 named participants.
+          You cannot edit the list of contributors on a work with more than 50
+          named participants.
         </p>
         <a
           class="underline"
@@ -146,7 +146,8 @@
                     class="affiliation orc-font-small-print"
                     *ngIf="
                       affiliation &&
-                      contributor.get(['contributorOrcid', 'path'])?.value === id
+                      contributor.get(['contributorOrcid', 'path'])?.value ===
+                        id
                     "
                     >{{ affiliation }}</span
                   >
@@ -171,7 +172,9 @@
                         placeholder="{{ ngOrcidContributorName }}"
                       />
                       <mat-error
-                        *ngIf="contributor.get('creditName').hasError('required')"
+                        *ngIf="
+                          contributor.get('creditName').hasError('required')
+                        "
                         i18n="@@works.contributorNameIsRequired"
                       >
                         Contributors name is required
@@ -199,7 +202,10 @@
                   <ng-container formArrayName="roles">
                     <div
                       class="row roles-box"
-                      *ngFor="let role of rolesFormArray(contributor); index as i"
+                      *ngFor="
+                        let role of rolesFormArray(contributor);
+                        index as i
+                      "
                       [formGroupName]="i"
                     >
                       <div class="col l9 no-gutters orc-font-body-small">
@@ -295,11 +301,15 @@
           <mat-icon class="large-material-icon">info</mat-icon>
         </div>
         <div class="col l11 m6 s3">
-          <h2 class="orc-font-body-small" i18n="@@works.youCannotAddMoreContributors">
+          <h2
+            class="orc-font-body-small"
+            i18n="@@works.youCannotAddMoreContributors"
+          >
             You cannot add any more contributors to this work
           </h2>
           <p i18n="@@works.orcidSupportsMaximum">
-            ORCID supports a maximum of 50 contributors when adding them manually.
+            ORCID supports a maximum of 50 contributors when adding them
+            manually.
           </p>
           <a
             class="underline"
@@ -316,7 +326,9 @@
     <div class="row">
       <a
         class="col add-more no-gutters"
-        [class.disabled]="contributorsFormArray?.length > maxNumberOfContributors"
+        [class.disabled]="
+          contributorsFormArray?.length > maxNumberOfContributors
+        "
         (click)="
           addAnotherContributor(
             contributorsFormArray?.length > maxNumberOfContributors
