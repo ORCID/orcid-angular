@@ -311,8 +311,8 @@ describe('WorkContributorsComponent', () => {
     expect(deleteButton).not.toBeTruthy()
   })
 
-  it('should display notice panel if theres 50+ editable contributors and button `Add another contributor` must be disabled', async () => {
-    component.contributors = getNumberOfContributors(60)
+  it('should display notice panel if theres 49 editable contributors and button `Add another contributor` must be disabled', async () => {
+    component.contributors = getNumberOfContributors(49)
 
     component.ngOnInit()
 
@@ -326,7 +326,7 @@ describe('WorkContributorsComponent', () => {
 
     const addAnotherContributor = debugElement.query(By.css('a.disabled'))
 
-    expect(contributors.length).toBe(61)
+    expect(contributors.length).toBe(50)
     expect(noticePanel).toBeTruthy()
     expect(addAnotherContributor).toBeTruthy()
   })
@@ -501,6 +501,35 @@ describe('WorkContributorsComponent', () => {
     expect(contributors.length).toBe(49)
     expect(noticePanel).not.toBeTruthy()
     expect(addAnotherContributorDisabled).not.toBeTruthy()
+  })
+
+  it('should display no editable panel when 50+ contributors and a counter, button `Add contributor` should not be', async () => {
+    component.contributors = getNumberOfContributors(51)
+
+    component.ngOnInit()
+
+    fixture.detectChanges()
+
+    const contributors = fixture.nativeElement.querySelectorAll(
+      '.contributors-summary'
+    )
+
+    const noticePanel = fixture.nativeElement.querySelector('.notice-panel ')
+
+    const addAnotherContributor = debugElement.query(
+      By.css('#cy-add-another-contributor')
+    )
+
+    const counter = fixture.nativeElement.querySelector('.title ')
+
+    const contributorsSummary =
+      'Contributor 1; Contributor 2; Contributor 3; Contributor 4; Contributor 5; Contributor 6; Contributor 7; Contributor 8; Contributor 9; Contributor 10 et al.'
+
+    expect(contributors).toBeTruthy()
+    expect(contributors.item(0).innerText).toBe(contributorsSummary)
+    expect(noticePanel).toBeTruthy()
+    expect(addAnotherContributor).not.toBeTruthy()
+    expect(counter.innerText).toBe('Contributors to this work (52)')
   })
 })
 

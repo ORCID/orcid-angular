@@ -54,6 +54,8 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
   screenDirection = 'ltr'
   roles: string
   maxNumberOfContributors = 49
+  maxNumberOfContributorsSummary = 10
+  privateName = 'Name is private'
 
   contributionRoles = ContributionRoles
 
