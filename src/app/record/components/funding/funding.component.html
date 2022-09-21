@@ -132,7 +132,11 @@
         <ng-container
           *ngIf="funding.fundingTitle.translatedTitle?.languageCode"
         >
-          ({{ getLanguageValue(funding.fundingTitle.translatedTitle?.languageCode) }})
+          ({{
+            getLanguageValue(
+              funding.fundingTitle.translatedTitle?.languageCode
+            )
+          }})
         </ng-container>
       </div>
       <div>

@@ -58,8 +58,8 @@ export class WorkComponent implements OnInit {
       })
   }
 
-  getLanguageKey(val:  String) {
-    return Object.keys(LanguageMap).find(key => LanguageMap[key] === val);
+  getLanguageKey(val: String) {
+    return Object.keys(LanguageMap).find((key) => LanguageMap[key] === val)
   }
 
   createTxtFile(data) {

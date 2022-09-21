@@ -23,10 +23,10 @@ export class FundingComponent implements OnInit {
 
   getLanguageValue(langCode: String) {
     for (const [key, value] of Object.entries(LanguageMap)) {
-      if(langCode === key ) {
-         return value
+      if (langCode === key) {
+        return value
       }
     }
-    return ""
+    return ''
   }
 }
