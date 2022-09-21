@@ -182,8 +182,8 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
               ? contributor?.contributorOrcid?.uri
               : null,
             contributor.rolesAndSequences.map((role) => role.contributorRole),
-            true,
-          ),
+            true
+          )
         )
       })
     } else {
