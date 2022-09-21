@@ -13,6 +13,7 @@ import { Work } from 'src/app/types/record-works.endpoint'
 import { RecordWorksService } from '../../../core/record-works/record-works.service'
 import { WINDOW } from '../../../cdk/window'
 import { UserInfoService } from '../../../core/user-info/user-info.service'
+import { LanguageMap } from 'src/app/types/works.endpoint'
 
 @Component({
   selector: 'app-work',
@@ -38,6 +39,7 @@ export class WorkComponent implements OnInit {
   showExpandedFormatting = false
   privateName = 'Name is private'
   privateNameTranslation = $localize`:@@account.nameIsPri:Name is private`
+  languageMap = LanguageMap
 
   constructor(
     private elementRef: ElementRef,
@@ -54,6 +56,10 @@ export class WorkComponent implements OnInit {
       .subscribe((data) => {
         this.createTxtFile(data)
       })
+  }
+
+  getLanguageKey(val: String) {
+    return Object.keys(LanguageMap).find((key) => LanguageMap[key] === val)
   }
 
   createTxtFile(data) {
