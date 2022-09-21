@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { OrgDisambiguated } from 'src/app/types'
-import { Funding } from 'src/app/types/record-funding.endpoint'
+import { Funding, LanguageMap } from 'src/app/types/record-funding.endpoint'
 
 @Component({
   selector: 'app-funding',
@@ -20,4 +20,13 @@ export class FundingComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  getLanguageValue(langCode: String) {
+    for (const [key, value] of Object.entries(LanguageMap)) {
+      if(langCode === key ) {
+         return value
+      }
+    }
+    return ""
+  }
 }

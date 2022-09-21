@@ -130,9 +130,9 @@
           >&nbsp;</span
         >
         <ng-container
-          *ngIf="funding.fundingTitle.translatedTitle?.languageName"
+          *ngIf="funding.fundingTitle.translatedTitle?.languageCode"
         >
-          ({{ funding.fundingTitle.translatedTitle?.languageName }})
+          ({{ getLanguageValue(funding.fundingTitle.translatedTitle?.languageCode) }})
         </ng-container>
       </div>
       <div>

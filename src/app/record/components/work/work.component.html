@@ -104,8 +104,8 @@
         <ng-container i18n="@@works.translatedTitle"
           >Translated title</ng-container
         >&nbsp;</span
-      ><ng-container *ngIf="work?.translatedTitle?.languageName">
-        ({{ work.translatedTitle.languageName }})
+      ><ng-container *ngIf="work?.translatedTitle?.languageCode">
+        ({{ getLanguageKey(work.translatedTitle.languageCode) }})
       </ng-container>
     </div>
 
