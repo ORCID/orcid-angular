@@ -156,7 +156,7 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
       ? recordHolderContribution?.contributorOrcid?.path
       : this.id
     const name = recordHolderContribution
-      ? recordHolderContribution?.creditName?.value
+      ? recordHolderContribution?.creditName?.content
       : this.getCreditNameFromUserRecord()
     const uri = recordHolderContribution?.contributorOrcid?.uri
       ? recordHolderContribution?.contributorOrcid?.uri
@@ -165,29 +165,27 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
     const contributorsFormArray = this.parentForm.control.get(
       'contributors'
     ) as FormArray
-    if (this.contributors?.length > 0) {
+    if (this.togglzAddOtherContributors && this.contributors?.length > 0) {
       if (!recordHolderContribution) {
         contributorsFormArray.push(
           this.getContributorForm(name, orcid, uri, [], true)
         )
       }
-      if (this.togglzAddOtherContributors) {
-        this.contributors.forEach((contributor) => {
-          contributorsFormArray.push(
-            this.getContributorForm(
-              contributor?.creditName?.content,
-              contributor?.contributorOrcid?.path
-                ? contributor?.contributorOrcid?.path
-                : null,
-              contributor?.contributorOrcid?.uri
-                ? contributor?.contributorOrcid?.uri
-                : null,
-              contributor.rolesAndSequences.map((role) => role.contributorRole),
-              true
-            )
-          )
-        })
-      }
+      this.contributors.forEach((contributor) => {
+        contributorsFormArray.push(
+          this.getContributorForm(
+            contributor?.creditName?.content,
+            contributor?.contributorOrcid?.path
+              ? contributor?.contributorOrcid?.path
+              : null,
+            contributor?.contributorOrcid?.uri
+              ? contributor?.contributorOrcid?.uri
+              : null,
+            contributor.rolesAndSequences.map((role) => role.contributorRole),
+            true,
+          ),
+        )
+      })
     } else {
       contributorsFormArray.push(
         this.getContributorForm(name, orcid, uri, [], true)
