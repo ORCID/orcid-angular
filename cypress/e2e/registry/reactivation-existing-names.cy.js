@@ -77,7 +77,6 @@ describe('reactivation process for deactivated account', async function () {
     cy.get('#step-c-register-button').click()
     //user taken my orcid page
     cy.url({ timeout: 40000 }).should('include', '/my-orcid')
-   
   })
 
   after(() => {})
