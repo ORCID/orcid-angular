@@ -1,7 +1,10 @@
 import { TestBed } from '@angular/core/testing'
 
 import { RecordWorksService } from './record-works.service'
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing'
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 import { WINDOW_PROVIDERS } from '../../cdk/window'
 import { PlatformInfoService } from '../../cdk/platform-info'
@@ -25,12 +28,9 @@ describe('RecordWorksService', () => {
   let fakeTogglzService: TogglzService
 
   beforeEach(() => {
-    fakeTogglzService = jasmine.createSpyObj<TogglzService>(
-      'TogglzService',
-      {
-        getStateOf: of(true),
-      },
-    )
+    fakeTogglzService = jasmine.createSpyObj<TogglzService>('TogglzService', {
+      getStateOf: of(true),
+    })
 
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, RouterTestingModule],
@@ -49,7 +49,9 @@ describe('RecordWorksService', () => {
     togglzService = TestBed.inject(TogglzService)
     httpTestingController = TestBed.inject(HttpTestingController)
     togglzService.togglzSubject = new ReplaySubject<Config>()
-    togglzService.togglzSubject.next({ 'messages': { 'ORCID_ANGULAR_WORKS_CONTRIBUTORS': 'true', 'LIVE_IDS': '4,561' } })
+    togglzService.togglzSubject.next({
+      messages: { ORCID_ANGULAR_WORKS_CONTRIBUTORS: 'true', LIVE_IDS: '4,561' },
+    })
   })
 
   afterEach(() => {
@@ -65,18 +67,24 @@ describe('RecordWorksService', () => {
     let requestGetWorks = null
 
     works.forEach((work, index) => {
-      service.save(work, !(index === works.length - 1))
-        .subscribe(workSaved => {
+      service
+        .save(work, !(index === works.length - 1))
+        .subscribe((workSaved) => {
           expect(workSaved).toBeTruthy()
-          requestGetWorks = httpTestingController.match(environment.API_WEB + 'works/worksExtendedPage.json?offset=0&sort=date&sortAsc=false&pageSize=50')
+          requestGetWorks = httpTestingController.match(
+            environment.API_WEB +
+              'works/worksExtendedPage.json?offset=0&sort=date&sortAsc=false&pageSize=50'
+          )
           if (index === works.length - 1) {
             expect(requestGetWorks.length).toEqual(1)
 
-            requestGetWorks.forEach(getWorks => {
+            requestGetWorks.forEach((getWorks) => {
               getWorks.flush({})
-              const requestGroupingSuggestions = httpTestingController.match(environment.API_WEB + 'works/groupingSuggestions.json')
+              const requestGroupingSuggestions = httpTestingController.match(
+                environment.API_WEB + 'works/groupingSuggestions.json'
+              )
               expect(requestGroupingSuggestions.length).toEqual(1)
-              requestGroupingSuggestions.forEach(grouping  => {
+              requestGroupingSuggestions.forEach((grouping) => {
                 grouping.flush({})
               })
             })
@@ -84,14 +92,15 @@ describe('RecordWorksService', () => {
         })
     })
 
-    const requestsSaveWorks = httpTestingController.match(environment.API_WEB + 'works/work.json')
+    const requestsSaveWorks = httpTestingController.match(
+      environment.API_WEB + 'works/work.json'
+    )
 
     expect(requestsSaveWorks.length).toEqual(5)
 
-    requestsSaveWorks.forEach(r => {
+    requestsSaveWorks.forEach((r) => {
       r.flush({})
     })
-
   })
 })
 
@@ -99,8 +108,7 @@ function getNumberOfWorks(numberOfContributors: number): Work[] {
   const works = []
   for (let i = 0; i < numberOfContributors; i++) {
     const work = getWork()
-    work.title.value =
-      work.title.value + ' ' + (i + 1)
+    work.title.value = work.title.value + ' ' + (i + 1)
     works.push(work)
   }
   return works
