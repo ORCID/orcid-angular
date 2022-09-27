@@ -46,7 +46,6 @@ export class RecordWorksService {
   sortOrder: SortOrderType = 'date'
   sortAsc = false
   pageSize = DEFAULT_PAGE_SIZE
-  togglzWorksContributors: boolean
   contributionRoles = ContributionRoles
 
   userRecordOptions: UserRecordOptions = {}
