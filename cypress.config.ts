@@ -24,6 +24,11 @@ export default defineConfig({
     reactivationEmailSubject: '[ORCID] Reactivating your ORCID record',
     reactivationEmailSender: 'reset@notify.orcid.org',
     reactivationEmailLink: 'https://qa.orcid.org/reactivation/',
+    deactivationEmailSubject: '[ORCID] Confirm deactivation of your ORCID Account',
+    deactivationEmailSender:'deactivate@notify.orcid.org',
+    deactivationEmailLink:'https://qa.orcid.org/account/confirm-deactivate-orcid',
+    deactivationBannerMessage: 'An account deactivation email has been sent to',
+    deactivatedRecordMessage:'A deactivated ORCID record is associated with this email address'
   },
   video: false,
   chromeWebSecurity: false,
