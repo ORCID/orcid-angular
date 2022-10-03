@@ -1,7 +1,10 @@
 import { TestBed } from '@angular/core/testing'
 
 import { RecordWorksService } from './record-works.service'
-import { HttpClientTestingModule } from '@angular/common/http/testing'
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 import { WINDOW_PROVIDERS } from '../../cdk/window'
 import { PlatformInfoService } from '../../cdk/platform-info'
@@ -10,14 +13,29 @@ import { SnackbarService } from '../../cdk/snackbar/snackbar.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatDialog } from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
+import { Work } from '../../types/record-works.endpoint'
+import { WorkPublicationTypes } from '../../types/works.endpoint'
+import { environment } from '../../../environments/environment.local'
+import { TogglzService } from '../togglz/togglz.service'
+import { of, ReplaySubject } from 'rxjs'
+import { UserService } from '..'
+import { Config } from '../../types/togglz.endpoint'
 
 describe('RecordWorksService', () => {
   let service: RecordWorksService
+  let togglzService: TogglzService
+  let httpTestingController: HttpTestingController
+  let fakeTogglzService: TogglzService
 
   beforeEach(() => {
+    fakeTogglzService = jasmine.createSpyObj<TogglzService>('TogglzService', {
+      getStateOf: of(true),
+    })
+
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, RouterTestingModule],
       providers: [
+        UserService,
         WINDOW_PROVIDERS,
         PlatformInfoService,
         ErrorHandlerService,
@@ -28,9 +46,81 @@ describe('RecordWorksService', () => {
       ],
     })
     service = TestBed.inject(RecordWorksService)
+    togglzService = TestBed.inject(TogglzService)
+    httpTestingController = TestBed.inject(HttpTestingController)
+    togglzService.togglzSubject = new ReplaySubject<Config>()
+    togglzService.togglzSubject.next({
+      messages: { ORCID_ANGULAR_WORKS_CONTRIBUTORS: 'true', LIVE_IDS: '4,561' },
+    })
+  })
+
+  afterEach(() => {
+    httpTestingController.verify()
   })
 
   it('should be created', () => {
     expect(service).toBeTruthy()
   })
+
+  it('should call the method `save` 5 times and only `getWorks` and `getWorksGroupingSuggestions` once', () => {
+    const works: Work[] = getNumberOfWorks(5)
+    let requestGetWorks = null
+
+    works.forEach((work, index) => {
+      service
+        .save(work, !(index === works.length - 1))
+        .subscribe((workSaved) => {
+          expect(workSaved).toBeTruthy()
+          requestGetWorks = httpTestingController.match(
+            environment.API_WEB +
+              'works/worksExtendedPage.json?offset=0&sort=date&sortAsc=false&pageSize=50'
+          )
+          if (index === works.length - 1) {
+            expect(requestGetWorks.length).toEqual(1)
+
+            requestGetWorks.forEach((getWorks) => {
+              getWorks.flush({})
+              const requestGroupingSuggestions = httpTestingController.match(
+                environment.API_WEB + 'works/groupingSuggestions.json'
+              )
+              expect(requestGroupingSuggestions.length).toEqual(1)
+              requestGroupingSuggestions.forEach((grouping) => {
+                grouping.flush({})
+              })
+            })
+          }
+        })
+    })
+
+    const requestsSaveWorks = httpTestingController.match(
+      environment.API_WEB + 'works/work.json'
+    )
+
+    expect(requestsSaveWorks.length).toEqual(5)
+
+    requestsSaveWorks.forEach((r) => {
+      r.flush({})
+    })
+  })
 })
+
+function getNumberOfWorks(numberOfContributors: number): Work[] {
+  const works = []
+  for (let i = 0; i < numberOfContributors; i++) {
+    const work = getWork()
+    work.title.value = work.title.value + ' ' + (i + 1)
+    works.push(work)
+  }
+  return works
+}
+
+function getWork(): Work {
+  return {
+    title: {
+      value: 'Book',
+    },
+    workType: {
+      value: WorkPublicationTypes.book,
+    },
+  } as Work
+}
