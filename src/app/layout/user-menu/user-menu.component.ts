@@ -6,8 +6,9 @@ import { PlatformInfoService, PlatformInfo } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { Router } from '@angular/router'
 import { ApplicationRoutes } from 'src/app/constants'
-import { SignInService } from 'src/app/core/sign-in/sign-in.service'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
+import { InboxService } from '../../core/inbox/inbox.service'
+import { first } from 'rxjs/operators'
 
 @Component({
   selector: 'app-user-menu',
@@ -27,14 +28,14 @@ export class UserMenuComponent implements OnInit {
   togglzOrcidAngularAccountSettings: boolean
   isAccountDelegate: boolean
   restrictedDelegators: boolean
+  inboxUnread = 0
 
   constructor(
     private _router: Router,
     _userInfo: UserService,
     @Inject(WINDOW) private window: Window,
     _platform: PlatformInfoService,
-    private _signingService: SignInService,
-    private _platformInfo: PlatformInfoService,
+    private _inboxService: InboxService,
     private _togglz: TogglzService
   ) {
     _userInfo.getUserSession().subscribe((data) => {
@@ -60,6 +61,10 @@ export class UserMenuComponent implements OnInit {
     this._togglz
       .getStateOf('RESTRICTED_DELEGATORS')
       .subscribe((value) => (this.restrictedDelegators = value))
+    this._inboxService
+      .retrieveUnreadCount()
+      .pipe(first())
+      .subscribe(inboxUnread => this.inboxUnread = inboxUnread)
   }
 
   goto(url) {

@@ -212,6 +212,12 @@ export class InboxService {
       )
   }
 
+  retrieveUnreadCount(): any {
+    return this._http.get(
+      environment.BASE_URL + 'inbox/unreadCount.json'
+    )
+  }
+
   totalNumber() {
     return this._http
       .get<TotalNotificationCount>(
