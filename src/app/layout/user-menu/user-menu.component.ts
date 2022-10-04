@@ -64,7 +64,7 @@ export class UserMenuComponent implements OnInit {
     this._inboxService
       .retrieveUnreadCount()
       .pipe(first())
-      .subscribe(inboxUnread => this.inboxUnread = inboxUnread)
+      .subscribe((inboxUnread) => (this.inboxUnread = inboxUnread))
   }
 
   goto(url) {

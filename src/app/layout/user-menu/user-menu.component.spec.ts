@@ -31,8 +31,8 @@ describe('UserMenuComponent', () => {
   let component: UserMenuComponent
   let fixture: ComponentFixture<UserMenuComponent>
   let togglzService: TogglzService
-  let fakeInboxService: InboxService;
-  let fakeUserService: UserService;
+  let fakeInboxService: InboxService
+  let fakeUserService: UserService
   let loader: HarnessLoader
 
   beforeEach(() => {
@@ -50,7 +50,7 @@ describe('UserMenuComponent', () => {
         MatIconModule,
         MatMenuModule,
         NoopAnimationsModule,
-        RouterTestingModule
+        RouterTestingModule,
       ],
       declarations: [UserMenuComponent],
       providers: [
