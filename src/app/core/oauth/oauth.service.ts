@@ -191,23 +191,7 @@ export class OauthService {
     }
     return of(session)
   }
-  /**
-   * @deprecated in favor of using the same `oauth/custom/init.json` endpoint to
-   * initialize Oauth, initialize Oauth after a login or initialize Oauth after a logout
-   */
-  updateOauthSession(value: OauthParameters): Observable<RequestInfoForm> {
-    return this._http
-      .get<RequestInfoForm>(
-        environment.BASE_URL +
-          // tslint:disable-next-line:max-line-length
-          `oauth/custom/authorize.json?${objectToUrlParameters(value)}`,
-        { headers: this.headers }
-      )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
-  }
+
 
   loadShibbolethSignInData(): Observable<SignInData> {
     return this._http
