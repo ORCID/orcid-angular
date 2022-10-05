@@ -4,7 +4,9 @@
       <strong i18n="@@works.contributorsToThisWork"
         >Contributors to this work</strong
       >
-      ({{ contributorsFormArray?.controls?.length || contributors?.length }})
+      <ng-container *ngIf="contributors?.length <= maxNumberOfContributors + 1">
+        ({{ contributorsFormArray?.controls?.length || contributors?.length }})
+      </ng-container>
     </label>
   </div>
   <ng-container

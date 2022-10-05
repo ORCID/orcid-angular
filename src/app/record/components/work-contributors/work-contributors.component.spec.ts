@@ -530,7 +530,7 @@ describe('WorkContributorsComponent', () => {
     expect(contributors.item(0).innerText).toBe(contributorsSummary)
     expect(noticePanel).toBeTruthy()
     expect(addAnotherContributor).not.toBeTruthy()
-    expect(counter.innerText).toBe('Contributors to this work (52)')
+    expect(counter.innerText).toBe('Contributors to this work')
   })
 })
 
