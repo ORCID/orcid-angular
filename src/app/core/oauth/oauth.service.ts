@@ -192,7 +192,6 @@ export class OauthService {
     return of(session)
   }
 
-
   loadShibbolethSignInData(): Observable<SignInData> {
     return this._http
       .get<SignInData>(environment.BASE_URL + 'shibboleth/signinData.json', {

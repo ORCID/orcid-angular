@@ -42,7 +42,10 @@ export class UserInfoService {
             value.PRIMARY_RECORD
           )
 
-          if (this.platform.queryParameters.hasOwnProperty('orcid') && !this.platform.hasOauthParameters) {
+          if (
+            this.platform.queryParameters.hasOwnProperty('orcid') &&
+            !this.platform.hasOauthParameters
+          ) {
             this._router.navigate(['/my-orcid'], {
               queryParams: { orcid: value.EFFECTIVE_USER_ORCID },
             })
