@@ -24,6 +24,7 @@ import {
   WorkCombineEndpoint,
   WorkIdType,
   WorkIdTypeValidation,
+  _LEGACY_ContributionRoles,
 } from 'src/app/types/works.endpoint'
 import { environment } from 'src/environments/environment'
 
@@ -466,6 +467,7 @@ export class RecordWorksService {
   }
 
   getContributionRoleByKey(key: string): Role {
-    return this.contributionRoles.find((role) => role.key === key)
+    return this.contributionRoles.find((role) => role.key === key)||
+    _LEGACY_ContributionRoles.find((role) => role.key === key)
   }
 }
