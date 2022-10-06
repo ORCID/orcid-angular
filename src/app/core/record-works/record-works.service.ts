@@ -467,7 +467,9 @@ export class RecordWorksService {
   }
 
   getContributionRoleByKey(key: string): Role {
-    return this.contributionRoles.find((role) => role.key === key)||
-    _LEGACY_ContributionRoles.find((role) => role.key === key)
+    return (
+      this.contributionRoles.find((role) => role.key === key) ||
+      _LEGACY_ContributionRoles.find((role) => role.key === key)
+    )
   }
 }
