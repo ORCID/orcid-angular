@@ -19,7 +19,8 @@ describe('OAuth link with orcid param', async function () {
     userData.cyOAuth_MemberUser.clientID +
     '&response_type=code&scope=/activities/update%20/person/update&redirect_uri=' +
     userData.cyOAuth_MemberUser.redirect_uri +
-    '&orcid='+ recordOwner.oid
+    '&orcid=' +
+    recordOwner.oid
 
   before(() => {
     cy.visit(Cypress.env('signInURL'))
