@@ -24,6 +24,7 @@ import { HarnessLoader } from '@angular/cdk/testing'
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed'
 import { MatCheckboxHarness } from '@angular/material/checkbox/testing'
 import { By } from '@angular/platform-browser'
+import { Contributor } from '../../../../../types'
 
 describe('WorkDoiBibtexModalComponent', () => {
   let component: WorkBibtexModalComponent
@@ -98,6 +99,24 @@ describe('WorkDoiBibtexModalComponent', () => {
     expect(worksCheckboxes.length).toBe(5)
     expect(fakeRecordWorksService.save).toHaveBeenCalledTimes(4)
   })
+
+  it('should import contributors from bibtex', async () => {
+    const files = { target: { files: getFileList() } }
+    component.bibTexInputChange(files)
+
+    await delay(100)
+
+    await fixture.detectChanges()
+
+    const workWithContributors = component.worksFromBibtex[3]
+    const contributors = workWithContributors.contributorsGroupedByOrcid
+    const authors = filterContributorsByRole(contributors, 'author')
+    const editors = filterContributorsByRole(contributors, 'editor')
+
+    expect(workWithContributors.contributorsGroupedByOrcid.length).toBe(4)
+    expect(authors.length).toBe(2)
+    expect(editors.length).toBe(2)
+  })
 })
 
 function getFileList() {
@@ -112,14 +131,23 @@ function getFileList() {
     'author={Test Author and Test Author 2},\n' +
     'year={2022}\n' +
     '},\n' +
-    '@book{Test_Testing_119267798,\n' +
-    'title={Work 1},\n' +
+    '@ARTICLE{Test_Testing_119267798,\n' +
     'author={Test Author and Test Author 2},\n' +
-    'year={2022}\n' +
+    'journal={Nature Energy},\n' +
+    'title={Article title},\n' +
+    'year={2020},\n' +
+    'month={Jan.},\n' +
+    'volume={5},\n' +
+    'number={},\n' +
+    'pages={79–88},\n' +
+    'keywords={},\n' +
+    'doi={10.1038/s41560-019-0535-7},\n' +
+    'ISSN={}\n' +
     '},\n' +
     '@book{Test_Testing_119268314,\n' +
     'title={Work 4},\n' +
-    'author={Test Author and Pedro Test Author 2}\n' +
+    'author={Test Author 1 and Test Author 2},\n' +
+    'editor={Test Author 3 and Test Author 4}\n' +
     '}\n'
   const dt = new DataTransfer()
   dt.items.add(new File([bibText], 'src/test/files/works.bib'))
@@ -309,10 +337,60 @@ function getWorksValidated(): any[] {
         required: true,
         getRequiredMessage: null,
       },
+      contributorsGroupedByOrcid: [
+        {
+          creditName: {
+            content: 'Test Author 1',
+          },
+          rolesAndSequences: [
+            {
+              contributorRole: 'author',
+              contributorSequence: null,
+            },
+          ],
+        },
+        {
+          creditName: {
+            content: 'Test Author 2',
+          },
+          rolesAndSequences: [
+            {
+              contributorRole: 'author',
+              contributorSequence: null,
+            },
+          ],
+        },
+        {
+          creditName: {
+            content: 'Test Author 3',
+          },
+          rolesAndSequences: [
+            {
+              contributorRole: 'editor',
+              contributorSequence: null,
+            },
+          ],
+        },
+        {
+          creditName: {
+            content: 'Test Author 4',
+          },
+          rolesAndSequences: [
+            {
+              contributorRole: 'editor',
+              contributorSequence: null,
+            },
+          ],
+        }
+      ],
       errors: [],
       userSource: false,
     },
   ]
+}
+
+function filterContributorsByRole(contributors: Contributor[], role: 'author' | 'editor'): Contributor[] {
+  return contributors.filter(c => c.rolesAndSequences.some(r => r.contributorRole === role))
 }
 
 function delay(time) {

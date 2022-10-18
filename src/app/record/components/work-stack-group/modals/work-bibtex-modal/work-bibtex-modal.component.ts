@@ -1,4 +1,4 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
+import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core'
 import { Subject } from 'rxjs'
 import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
@@ -10,6 +10,9 @@ import bibtexParse from '@orcid/bibtex-parse-js'
 import latexParse from 'src/assets/scripts/latexParse.js'
 import { WINDOW } from 'src/app/cdk/window'
 import { SnackbarService } from '../../../../../cdk/snackbar/snackbar.service'
+import { environment } from '../../../../../../environments/environment.local'
+import { Contributor } from '../../../../../types'
+import { UserRecord } from '../../../../../types/record.local'
 
 @Component({
   selector: 'app-work-doi-bibtex-modal',
@@ -21,6 +24,8 @@ import { SnackbarService } from '../../../../../cdk/snackbar/snackbar.service'
 })
 export class WorkBibtexModalComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
+
+  @Input() userRecord: UserRecord
 
   importForm: FormGroup
   loadingWorks = false
@@ -247,8 +252,49 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
           value: lowerKeyTags['url'],
         }
       }
+
+      work.contributorsGroupedByOrcid = this.addRecordHolderAsContributor()
+
+      if (lowerKeyTags.hasOwnProperty('author')) {
+        this.addContributors(lowerKeyTags['author'].split('and'), 'author', work)
+      }
+      if (lowerKeyTags.hasOwnProperty('editor')) {
+        this.addContributors(lowerKeyTags['editor'].split('and'), 'editor', work)
+      }
     }
     return work
+  }
+
+  addContributors(contributors: string[], type: 'author' | 'editor', work: Work) {
+    contributors.forEach(contributor => {
+      work.contributorsGroupedByOrcid.push(
+        {
+          creditName: {
+            content: contributor,
+          },
+          rolesAndSequences: [
+            {
+              contributorRole: type,
+              contributorSequence: null,
+            },
+          ],
+        }
+      )
+    })
+  }
+
+  addRecordHolderAsContributor(): Contributor[] {
+   return [
+      {
+        creditName: {
+          content: this.getCreditNameFromUserRecord(),
+        },
+        contributorOrcid: {
+          path: this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID,
+          uri: `https:${environment.BASE_URL}${this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID}`,
+        }
+      }
+    ]
   }
 
   externalIdentifierId(work, idType, value) {
@@ -356,6 +402,18 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
       errorMessage,
       $localize`:@@shared.pleaseReview:Please review and fix the issue`
     )
+  }
+
+  private getCreditNameFromUserRecord(): string {
+    const creditName = this.userRecord?.names?.creditName?.value
+    const givenNames = this.userRecord?.names?.givenNames?.value
+    const familyName = this.userRecord?.names?.familyName?.value
+
+    if (creditName) {
+      return creditName
+    } else {
+      return familyName ? `${givenNames} ${familyName}` : givenNames
+    }
   }
 
   closeEvent() {
