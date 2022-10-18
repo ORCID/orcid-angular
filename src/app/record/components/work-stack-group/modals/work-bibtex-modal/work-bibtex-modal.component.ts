@@ -256,35 +256,45 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
       work.contributorsGroupedByOrcid = this.addRecordHolderAsContributor()
 
       if (lowerKeyTags.hasOwnProperty('author')) {
-        this.addContributors(lowerKeyTags['author'].split('and'), 'author', work)
+        this.addContributors(
+          lowerKeyTags['author'].split('and'),
+          'author',
+          work
+        )
       }
       if (lowerKeyTags.hasOwnProperty('editor')) {
-        this.addContributors(lowerKeyTags['editor'].split('and'), 'editor', work)
+        this.addContributors(
+          lowerKeyTags['editor'].split('and'),
+          'editor',
+          work
+        )
       }
     }
     return work
   }
 
-  addContributors(contributors: string[], type: 'author' | 'editor', work: Work) {
-    contributors.forEach(contributor => {
-      work.contributorsGroupedByOrcid.push(
-        {
-          creditName: {
-            content: contributor,
+  addContributors(
+    contributors: string[],
+    type: 'author' | 'editor',
+    work: Work
+  ) {
+    contributors.forEach((contributor) => {
+      work.contributorsGroupedByOrcid.push({
+        creditName: {
+          content: contributor,
+        },
+        rolesAndSequences: [
+          {
+            contributorRole: type,
+            contributorSequence: null,
           },
-          rolesAndSequences: [
-            {
-              contributorRole: type,
-              contributorSequence: null,
-            },
-          ],
-        }
-      )
+        ],
+      })
     })
   }
 
   addRecordHolderAsContributor(): Contributor[] {
-   return [
+    return [
       {
         creditName: {
           content: this.getCreditNameFromUserRecord(),
@@ -292,8 +302,8 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
         contributorOrcid: {
           path: this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID,
           uri: `https:${environment.BASE_URL}${this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID}`,
-        }
-      }
+        },
+      },
     ]
   }
 

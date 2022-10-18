@@ -381,7 +381,7 @@ function getWorksValidated(): any[] {
               contributorSequence: null,
             },
           ],
-        }
+        },
       ],
       errors: [],
       userSource: false,
@@ -389,8 +389,13 @@ function getWorksValidated(): any[] {
   ]
 }
 
-function filterContributorsByRole(contributors: Contributor[], role: 'author' | 'editor'): Contributor[] {
-  return contributors.filter(c => c.rolesAndSequences.some(r => r.contributorRole === role))
+function filterContributorsByRole(
+  contributors: Contributor[],
+  role: 'author' | 'editor'
+): Contributor[] {
+  return contributors.filter((c) =>
+    c.rolesAndSequences.some((r) => r.contributorRole === role)
+  )
 }
 
 function delay(time) {
