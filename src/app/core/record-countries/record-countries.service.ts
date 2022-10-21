@@ -148,6 +148,7 @@ export class RecordCountriesService {
       { key: $localize`:@@share.KZ:Kazakhstan`, value: 'KZ' },
       { key: $localize`:@@share.KE:Kenya`, value: 'KE' },
       { key: $localize`:@@share.KI:Kiribati`, value: 'KI' },
+      { key: $localize`:@@share.XK:Kosovo`, value: 'XK' },
       { key: $localize`:@@share.KW:Kuwait`, value: 'KW' },
       { key: $localize`:@@share.KG:Kyrgyzstan`, value: 'KG' },
       { key: $localize`:@@share.LA:Laos`, value: 'LA' },
