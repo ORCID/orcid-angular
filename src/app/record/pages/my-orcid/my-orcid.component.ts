@@ -141,7 +141,11 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
           }
 
           if (togglz.messages['CRAZY_EGG'] === 'true') {
-            this._scriptService.load({ name: 'crazy-egg', src: 'https://script.crazyegg.com/pages/scripts/0113/7579.js'})
+            this._scriptService
+              .load({
+                name: 'crazy-egg',
+                src: 'https://script.crazyegg.com/pages/scripts/0113/7579.js',
+              })
               .subscribe()
           }
         })
