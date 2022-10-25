@@ -248,4 +248,5 @@ export const COUNTRY_NAMES_TO_COUNTRY_CODES = {
   Micronesia: 'FM',
   'Saint Helena': 'SH',
   Greenland: 'GL',
+  Kosovo: 'XK',
 }
