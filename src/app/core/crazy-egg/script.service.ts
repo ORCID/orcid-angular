@@ -9,11 +9,11 @@ export class ScriptService {
 
   constructor() {}
 
-  public load(script: ScriptModel): Observable<ScriptModel> {
+  load(script: ScriptModel): Observable<ScriptModel> {
     return new Observable<ScriptModel>((observer: Observer<ScriptModel>) => {
       const existingScript = this.scripts.find((s) => s.name === script.name)
 
-      if (existingScript && existingScript.loaded) {
+      if (existingScript) {
         observer.next(existingScript)
         observer.complete()
       } else {
