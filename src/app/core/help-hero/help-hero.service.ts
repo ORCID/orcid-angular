@@ -37,7 +37,7 @@ export class HelpHeroService {
       userRecord?.affiliations &&
       userRecord?.works &&
       !this.hlp &&
-      (this.window as any).Cypress
+      !(this.window as any).Cypress
     ) {
       this.hlp = initHelpHero(environment.HELP_HERO_ID)
       const helpHeroIdentifyObject = {
