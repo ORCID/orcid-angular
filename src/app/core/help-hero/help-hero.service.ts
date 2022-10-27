@@ -78,6 +78,7 @@ export class HelpHeroService {
     this.window.document
       .querySelector('app-root')
       .insertAdjacentElement('beforebegin', helpheroFrame)
+    helpheroFrame.setAttribute('aria-hidden', 'true')
   }
 
   affiliationsCount(affiliations: AffiliationUIGroup[]): number {
