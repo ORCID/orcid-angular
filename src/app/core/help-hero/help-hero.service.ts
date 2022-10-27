@@ -38,6 +38,7 @@ export class HelpHeroService {
       userRecord?.works &&
       !this.hlp
     ) {
+      this.modifyHelpHeroScriptOnCreate()
       this.hlp = initHelpHero(environment.HELP_HERO_ID)
       const helpHeroIdentifyObject = {
         numberOfValidatedEmails: this.getNumberOfValidatedEmails(
@@ -58,6 +59,27 @@ export class HelpHeroService {
       this.hlp.identify(userInfo.EFFECTIVE_USER_ORCID, helpHeroIdentifyObject)
     }
   }
+  private modifyHelpHeroScriptOnCreate() {
+    const observer = new MutationObserver((mutations, me) => {
+      var helpheroFrame = document.getElementById('helphero-frame')
+      if (helpheroFrame) {
+        this.handleHelpHeroChanges(helpheroFrame)
+        me.disconnect()
+        return
+      }
+    })
+
+    observer.observe(document, {
+      childList: true,
+      subtree: true,
+    })
+  }
+  handleHelpHeroChanges(helpheroFrame: HTMLElement) {
+    this.window.document
+      .querySelector('app-root')
+      .insertAdjacentElement('beforebegin', helpheroFrame)
+  }
+
   affiliationsCount(affiliations: AffiliationUIGroup[]): number {
     return affiliations.reduce((p, c) => (p += c.affiliationGroup.length), 0)
   }
