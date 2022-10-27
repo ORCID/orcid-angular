@@ -20,8 +20,7 @@ describe('My orcid - users are able to add content to their record', async funct
     cy.get('#add-link').click()
 
     cy.get('#newEmailInput1').clear().type(addSecondaryEmail)
-    cy.get('#save-emails-button').click()
-    cy.wait(1000)
+    cy.get('#save-emails-button').wait(1000).click()
 
     //verify the keyword is displayed
     cy.get('#emails-panel')
@@ -34,9 +33,7 @@ describe('My orcid - users are able to add content to their record', async funct
     cy.cleanEmails()
 
     //sign out
-    cy.get('app-user-menu').click()
-    cy.get('#cdk-overlay-2').within(($menu) => {
-      cy.get('.mat-menu-item').contains('Logout').click()
-    })
+    cy.get('#cy-user-info').click()
+    cy.get('#cy-signout').click({ force: true })
   })
 })

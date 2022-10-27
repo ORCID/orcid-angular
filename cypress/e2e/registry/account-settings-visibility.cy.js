@@ -9,9 +9,9 @@ describe('Account Settings - users can change default visibility setting for dat
 
   it('Verify default visibility is "Everyone" when user has this setting', function () {
     //check Account Settings> visibility has "Everyone" selected
-    cy.get('#cy-user-info').click()
-    cy.get('#cy-account-settings').click()
-    cy.get('#cy-visibility-panel-action-more').click()
+    cy.get('#cy-user-info').click({ force: true })
+    cy.get('#cy-account-settings').wait(1000).click({ force: true })
+    cy.get('#cy-visibility-panel-action-more').wait(1000).click({ force: true })
     cy.get('#cy-visibility-everyone-input').click()
     //try to add new affiliation, visibility "Everyone" is selected
     cy.get('#cy-user-info').click()
@@ -25,9 +25,9 @@ describe('Account Settings - users can change default visibility setting for dat
 
   it('Verify default visibility is "Trusted Organizations" when user has this setting', function () {
     //check Account Settings> visibility has "Trusted Organizations" selected
-    cy.get('#cy-user-info').click()
-    cy.get('#cy-account-settings').click()
-    cy.get('#cy-visibility-panel-action-more').click()
+    cy.get('#cy-user-info').click({ force: true })
+    cy.get('#cy-account-settings').wait(1000).click({ force: true })
+    cy.get('#cy-visibility-panel-action-more').wait(1000).click({ force: true })
     cy.get('#cy-visibility-trusted-input').click()
     //try to add new affiliation, visibility "Trusted Organizations" is selected
     cy.get('#cy-user-info').click()
@@ -41,9 +41,9 @@ describe('Account Settings - users can change default visibility setting for dat
 
   it('Verify default visibility is "Only me" when user has this setting', function () {
     //check Account Settings> visibility has "Only me" selected
-    cy.get('#cy-user-info').click()
-    cy.get('#cy-account-settings').click()
-    cy.get('#cy-visibility-panel-action-more').click()
+    cy.get('#cy-user-info').click({ force: true })
+    cy.get('#cy-account-settings').wait(1000).click({ force: true })
+    cy.get('#cy-visibility-panel-action-more').wait(1000).click({ force: true })
     cy.get('#cy-visibility-private-input').click()
     //try to add new affiliation, visibility "Only me" is selected
     cy.get('#cy-user-info').click()

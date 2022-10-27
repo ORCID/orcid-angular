@@ -6,7 +6,7 @@ const uniqueId = require('../../helpers/uniqueEntry')
 describe('My orcid - users are able to edit education info in their record', async function () {
   before(() => {
     cy.programmaticallySignin('cyUserPrimaryEmaiVerified') //send user key from fixture file
-    cy.visit(Cypress.env('baseUrl') + `/my-orcid`)
+    cy.visit(`/my-orcid`)
     cy.get('#cy-affiliation-education-and-qualification') //wait for page to load
   })
 
@@ -17,7 +17,7 @@ describe('My orcid - users are able to edit education info in their record', asy
     cy.get('#cy-affiliation-education-and-qualification').within(($myPanel) => {
       cy.get('#cy-menu-add-education').click()
     })
-    cy.contains('Add Education').click() //TO DO: replace once element id is added
+    cy.contains('Add Education').wait(1000).click({ force: true }) //TO DO: replace once element id is added
 
     cy.get('#organization-input').clear().type(testNewOrg.name)
     cy.get('#city-input').clear().type(testNewOrg.city)
