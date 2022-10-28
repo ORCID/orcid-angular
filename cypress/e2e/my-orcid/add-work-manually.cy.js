@@ -91,9 +91,12 @@ describe('My orcid - users are able to edit work info in their record', async fu
     })
     //save entry
     cy.get('#save-work-button').wait(1000).click({ force: true })
- 
+
     //Verify work was added
-    cy.get('#cy-works',{timeout:6000}).should('contain', testWorks.manuallyTitle)
+    cy.get('#cy-works', { timeout: 6000 }).should(
+      'contain',
+      testWorks.manuallyTitle
+    )
   })
 
   after(() => {

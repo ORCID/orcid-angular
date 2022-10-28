@@ -86,7 +86,7 @@ describe('My orcid - works - visibility inconsistency notification scenarios', a
     cy.visit(`/my-orcid`)
 
     //Verify work was added and grouped & inconsistency icon is displayed
-    cy.get('#cy-works',{timeout:6000}) //wait for page to load
+    cy.get('#cy-works', { timeout: 6000 }) //wait for page to load
     cy.contains('app-work-stack', externalId).within(() => {
       cy.contains('a', 'of 2') //REPLACE locator with id
       //verify icon is displayed

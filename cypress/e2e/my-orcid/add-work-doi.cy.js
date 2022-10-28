@@ -11,7 +11,7 @@ describe('My orcid - users are able to edit work info in their record', async fu
   it('User adds work by DOI and without modifying manually', function () {
     const testWorks = testData.affilliantionWorks
 
-    cy.get('#cy-works',{timeout:6000}).within(($myPanel) => {
+    cy.get('#cy-works', { timeout: 6000 }).within(($myPanel) => {
       cy.get('#cy-menu-add-works').click()
     })
     cy.get('#cy-add-work-doi').click({ force: true })
@@ -19,7 +19,10 @@ describe('My orcid - users are able to edit work info in their record', async fu
     cy.get(`[id^='cy-retrieve-work-details']`).click()
     cy.get('#save-work-button').wait(1000).click({ force: true }) //wait for modal to display
     //Verify work was added
-    cy.get('#cy-works',{timeout:6000}).should('contain', testWorks.workTitleDOI)
+    cy.get('#cy-works', { timeout: 6000 }).should(
+      'contain',
+      testWorks.workTitleDOI
+    )
   })
 
   after(() => {

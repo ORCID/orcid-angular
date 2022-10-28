@@ -94,9 +94,9 @@ describe('My orcid - works - visibility inconsistency notification scenario', as
     })
     //save entry
     cy.get('#save-work-button').wait(4000).click({ force: true })
-  
+
     //Verify work was added and grouped & inconsistency icon is displayed
-    cy.wait(4000)//wait for page to load - timeout alternative didnt work
+    cy.wait(4000) //wait for page to load - timeout alternative didnt work
     cy.contains('app-work-stack', externalId).within(() => {
       cy.contains('a', 'of 2') //REPLACE locator with id
       //verify icon is displayed
@@ -106,7 +106,7 @@ describe('My orcid - works - visibility inconsistency notification scenario', as
       //select group visibility & verify icon is not displayed
       cy.get('mat-checkbox').click()
       cy.get('#cy-visibility-limited').click()
-      cy.get('#cy-buttons-container',{timeout:6000}).within(() => {
+      cy.get('#cy-buttons-container', { timeout: 6000 }).within(() => {
         cy.get('#cy-inconsistency-issue').should('not.exist')
       })
     })

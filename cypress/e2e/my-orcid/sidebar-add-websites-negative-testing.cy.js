@@ -64,9 +64,7 @@ describe('App displays error messages when user inputs invalid data', async func
     cy.get('#description-input')
       .clear()
       .type(testingData.sidebarWebsitesURL.titleURL)
-    cy.get('#url-input')
-      .clear()
-      .type(testingData.sidebarWebsitesURL.maxSizeURL)
+    cy.get('#url-input').clear().type(testingData.sidebarWebsitesURL.maxSizeURL)
 
     //save
     cy.get('#save-websites-button').click()

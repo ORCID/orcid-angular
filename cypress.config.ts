@@ -1,7 +1,7 @@
 import { defineConfig } from 'cypress'
 
 export default defineConfig({
-  blockHosts: ['*.crazyegg.com','*.zendesk.com'],
+  blockHosts: ['*.crazyegg.com', '*.zendesk.com'],
   env: {
     infoSiteBaseUrl: 'https://info.qa.orcid.org',
     duplicatedModalEndPoint: 'https://pub.qa.orcid.org/v3.0/expanded-search/**',
