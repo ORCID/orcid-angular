@@ -19,7 +19,7 @@ describe('My orcid - users are able to edit distinctions info in their record', 
         cy.get('#cy-menu-add-invited-position').click()
       }
     )
-    cy.contains('Add Distinction').click() //TO DO: replace once element id is added
+    cy.contains('Add Distinction').click({ force: true }) //TO DO: replace once element id is added
 
     cy.get('#organization-input').clear().type(testNewOrg.name)
     cy.get('#city-input').clear().type(testNewOrg.city)

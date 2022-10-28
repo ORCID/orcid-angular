@@ -17,7 +17,7 @@ describe('My orcid - users are able to add funding info in their record', async 
     cy.get('#cy-fundings').within(($myPanel) => {
       cy.get('#cy-menu-add-funding').click()
     })
-    cy.contains('Add manually').should('be.visible').click() //TO DO: replace once element id is added
+    cy.contains('Add manually').should('be.visible').click({ force: true }) //TO DO: replace once element id is added
     cy.get('[formcontrolname="fundingType"]').click()
     cy.get('[role="listbox"]').within(($types) => {
       //TO DO: replace with id for the element when we add it
