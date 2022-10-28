@@ -3,7 +3,6 @@
 import { uniqueLength } from './unique-length.postbuild'
 import { buildInfo } from './build-info.postbuild'
 import { googleAnalytics } from './google-analytics.postbuild'
-import { hotjarAnalytics } from './hotjar-analytics.postbuild'
 import {
   addLanguageCodeToHashesOnToHTMLFiles,
   addLanguageCodeToHashesOnJSFiles,
@@ -23,7 +22,6 @@ glob
     data = uniqueLength(data, options)
     data = buildInfo(data, options)
     data = googleAnalytics(data, options)
-    data = hotjarAnalytics(data, options)
     data = zendeskPlugin(data, options)
     // Replace all the `*.js` references to match updated JS file names with the language code.
     data = addLanguageCodeToHashesOnToHTMLFiles(data, options)

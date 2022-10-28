@@ -63,6 +63,7 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
         let parsed = null
         try {
           parsed = bibtexParse.toJSON(reader.result)
+
           if (
             typeof parsed === 'string' &&
             parsed.substring(0, 5).toLowerCase().indexOf('error') > -1
@@ -123,6 +124,7 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
   populateWork(bibJSON): Work {
     const work = {} as Work
     const bibtex = bibtexParse.toBibtex([bibJSON])
+
     work.citation = {
       citation: { value: bibtex },
       citationType: { value: 'bibtex' },
