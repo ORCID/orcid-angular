@@ -21,8 +21,9 @@ describe('openID test cases', async function () {
 
   it('TC#4 - authorization link with openid scope + response_type "id_token token" without nonce parameter', function () {
     cy.visit(authorizationLink)
-    cy.contains('Implicit id_token requests must have nonce').should('be.visible')
-
+    cy.contains('Implicit id_token requests must have nonce').should(
+      'be.visible'
+    )
   })
 
   after(() => {})
