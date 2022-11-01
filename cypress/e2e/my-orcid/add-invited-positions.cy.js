@@ -19,7 +19,7 @@ describe('My orcid - users are able to edit invited positions info in their reco
         cy.get('#cy-menu-add-invited-position').click()
       }
     )
-    cy.contains('Add Invited Position').click() //TO DO: replace once element id is added
+    cy.contains('Add Invited Position').click({ force: true }) //TO DO: replace once element id is added
 
     cy.get('#organization-input').clear().type(testNewOrg.name)
     cy.get('#city-input').clear().type(testNewOrg.city)

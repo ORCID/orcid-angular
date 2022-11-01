@@ -55,7 +55,7 @@ describe('App displays error messages when user inputs invalid data', async func
     cy.get('#cancel-websites-button').click()
   })
 
-  it('Boundary value analysis: URL max size allowed is 2000 characters', function () {
+  it('Boundary value analysis: URL max size allowed is 1999 characters', function () {
     //click on edit pencil for websites section
     cy.get('#websites-panel').within(($myPanel) => {
       cy.get('#edit-button').click()
@@ -64,9 +64,7 @@ describe('App displays error messages when user inputs invalid data', async func
     cy.get('#description-input')
       .clear()
       .type(testingData.sidebarWebsitesURL.titleURL)
-    cy.get('#url-input')
-      .clear()
-      .type(testingData.sidebarWebsitesURL.maxSize2000)
+    cy.get('#url-input').clear().type(testingData.sidebarWebsitesURL.maxSizeURL)
 
     //save
     cy.get('#save-websites-button').click()
@@ -79,7 +77,7 @@ describe('App displays error messages when user inputs invalid data', async func
       .should('contain', testingData.sidebarWebsitesURL.titleURL)
   })
 
-  it('Boundary value analysis: Max size +1 (2001 characters) is invalid', function () {
+  it('Boundary value analysis: Max size +1 (2000 characters) is invalid', function () {
     //click on edit pencil for websites section
     cy.get('#websites-panel').within(($myPanel) => {
       cy.get('#edit-button').click()
@@ -88,10 +86,10 @@ describe('App displays error messages when user inputs invalid data', async func
     cy.get('#description-input')
       .clear()
       .type(testingData.sidebarWebsitesURL.titleURL)
-    //type a valid url longer than 2000 characters
+    //type a valid url longer than 1999 characters
     cy.get('#url-input')
       .clear()
-      .type(testingData.sidebarWebsitesURL.maxSize2000 + '/test')
+      .type(testingData.sidebarWebsitesURL.maxSizeURL + '/test')
     //try to save
     cy.get('#save-websites-button').click()
 

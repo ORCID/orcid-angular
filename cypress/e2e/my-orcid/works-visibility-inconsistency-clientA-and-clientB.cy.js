@@ -18,10 +18,9 @@ describe('My orcid - works - visibility inconsistency notification scenarios', a
   before(() => {
     //Set default visibility to PRIVATE(ONLY ME)
     cy.programmaticallySignin('cyWorkVisibilityUser') //send user key from fixture file
-    cy.visit(Cypress.env('baseUrl') + `/my-orcid`)
+    cy.visit(`/my-orcid`)
     cy.get('#cy-user-info').click()
-    cy.get('#cy-account-settings').click()
-    cy.wait(3000)
+    cy.get('#cy-account-settings').wait(1000).click({ force: true })
     cy.get('#cy-visibility-panel-action-more').click()
     cy.get('#cy-visibility-private-input').click()
     //Log out to save changes
@@ -57,10 +56,9 @@ describe('My orcid - works - visibility inconsistency notification scenarios', a
 
     //change visibility to Public
     cy.programmaticallySignin('cyWorkVisibilityUser') //send user key from fixture file
-    cy.visit(Cypress.env('baseUrl') + `/my-orcid`)
+    cy.visit(`/my-orcid`)
     cy.get('#cy-user-info').click()
-    cy.get('#cy-account-settings').click()
-    cy.wait(3000)
+    cy.get('#cy-account-settings').wait(1000).click({ force: true })
     cy.get('#cy-visibility-panel-action-more').click()
     cy.get('#cy-visibility-everyone-input').click()
     //Log out to save changes
@@ -85,10 +83,10 @@ describe('My orcid - works - visibility inconsistency notification scenarios', a
 
     //Sign in and got to my orcid page
     cy.programmaticallySignin('cyWorkVisibilityUser') //send user key from fixture file
-    cy.visit(Cypress.env('baseUrl') + `/my-orcid`)
+    cy.visit(`/my-orcid`)
 
     //Verify work was added and grouped & inconsistency icon is displayed
-    cy.get('#cy-works') //wait for page to load
+    cy.get('#cy-works', { timeout: 6000 }) //wait for page to load
     cy.contains('app-work-stack', externalId).within(() => {
       cy.contains('a', 'of 2') //REPLACE locator with id
       //verify icon is displayed

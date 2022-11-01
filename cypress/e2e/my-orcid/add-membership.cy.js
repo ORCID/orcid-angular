@@ -17,7 +17,7 @@ describe('My orcid - users are able to edit memberships info in their record', a
     cy.get('#cy-affiliation-membership-and-service').within(($myPanel) => {
       cy.get('#cy-menu-add-membership').should('be.visible').click()
     })
-    cy.contains('Add Membership').should('be.visible').click() //TO DO: replace once element id is added
+    cy.contains('Add Membership').should('be.visible').click({ force: true }) //TO DO: replace once element id is added
 
     cy.get('#organization-input').clear().type(testNewOrg.name)
     cy.get('#city-input').clear().type(testNewOrg.city)
