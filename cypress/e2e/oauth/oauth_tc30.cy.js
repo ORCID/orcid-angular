@@ -19,7 +19,7 @@ describe('Registered redirect uri contains trailing whitespaces', async function
     scope +
     '&redirect_uri='
 
-   beforeEach(() => {
+  beforeEach(() => {
     //sign in
     cy.visit(Cypress.env('signInURL'))
     cy.signin(recordOwner)
@@ -42,38 +42,45 @@ describe('Registered redirect uri contains trailing whitespaces', async function
     cy.wait(2000) //need to wait for the redirect to take effect
     cy.url().should('contain', 'qa.orcid.org/oauth/authorize?')
     cy.get('#authorize-button').should('be.visible')
-  })  
-  
+  })
+
   it('QASE#66_negative_1', function () {
     //visit authorization link with redirect URI https://subdomain1.example.com
     //expected: user taken to oauth error page
     cy.visit(authorizationLink + 'https://subdomain1.example.com')
     cy.wait(2000) //need to wait for the redirect to take effect
-    cy.contains(`Redirect URI doesn't match your registered redirect URIs.`).should('be.visible')
-  }) 
-  
-  it('QASE#66_negative_2', function () { 
+    cy.contains(
+      `Redirect URI doesn't match your registered redirect URIs.`
+    ).should('be.visible')
+  })
+
+  it('QASE#66_negative_2', function () {
     //visit authorization link with redirect URI https://subdomain1.example.com/subpath
-    //expected: user taken to oauth error page 
+    //expected: user taken to oauth error page
     cy.visit(authorizationLink + 'https://subdomain1.example.com/subpath')
     cy.wait(2000) //need to wait for the redirect to take effect
-    cy.contains(`Redirect URI doesn't match your registered redirect URIs.`).should('be.visible')
+    cy.contains(
+      `Redirect URI doesn't match your registered redirect URIs.`
+    ).should('be.visible')
   })
-  it('QASE#66_negative_3', function () { 
+  it('QASE#66_negative_3', function () {
     //visit authorization link with redirect URI https://www.example.com
-    //expected: user taken to oauth error page 
+    //expected: user taken to oauth error page
     cy.visit(authorizationLink + 'https://www.example.com')
     cy.wait(2000) //need to wait for the redirect to take effect
-    cy.contains(`Redirect URI doesn't match your registered redirect URIs.`).should('be.visible')
+    cy.contains(
+      `Redirect URI doesn't match your registered redirect URIs.`
+    ).should('be.visible')
   })
-  it('QASE#66_negative_4', function () { 
-    //visit authorization link with redirect URI 
+  it('QASE#66_negative_4', function () {
+    //visit authorization link with redirect URI
     //expected: user taken to oauth error page https://www.example.com/subpath
     cy.visit(authorizationLink + 'https://www.example.com/subpath')
     cy.wait(2000) //need to wait for the redirect to take effect
-    cy.contains(`Redirect URI doesn't match your registered redirect URIs.`).should('be.visible')
+    cy.contains(
+      `Redirect URI doesn't match your registered redirect URIs.`
+    ).should('be.visible')
   })
 
-  this.afterEach(() => {
-  })
+  this.afterEach(() => {})
 })
