@@ -1,6 +1,6 @@
 <div class="container no-padding">
   <div class="row title">
-    <label class="orc-font-body">
+    <label for="cy-role" class="orc-font-body">
       <strong i18n="@@works.yourContributionsToThisWork"
         >Your contributions to this work</strong
       >
@@ -25,6 +25,7 @@
             }"
           >
             <mat-select
+              aria-label="{{ ngOrcidSelectRole }}"
               #roleSelect
               placeholder="{{ ngOrcidSelectRole }}"
               formControlName="role"
