@@ -62,9 +62,9 @@ export class HelpHeroService {
   }
   private modifyHelpHeroScriptOnCreate() {
     const observer = new MutationObserver((mutations, me) => {
-      var helpheroFrame = document.getElementById('helphero-frame')
-      if (helpheroFrame) {
-        this.handleHelpHeroChanges(helpheroFrame)
+      const helpheroDom = document.getElementById('helphero-dom')
+      if (helpheroDom) {
+        this.handleHelpHeroChanges(helpheroDom)
         me.disconnect()
         return
       }

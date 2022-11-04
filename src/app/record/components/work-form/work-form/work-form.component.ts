@@ -99,6 +99,7 @@ export class WorkFormComponent implements OnInit {
   ngOrcidYear = $localize`:@@shared.year:Year`
   ngOrcidMonth = $localize`:@@shared.month:Month`
   ngOrcidDay = $localize`:@@shared.day:Day`
+  ngOrcidSelectWorkType = $localize`:@@works.selectWorkType:Select a work type`
   ngOrcidSelectLanguage = $localize`:@@shared.selectLanguage:Select a language`
   ngOrcidSelectACitationType = $localize`:@@works.selectACitationType:Select a citation type`
   ngOrcidSelectACountryOrLocation = $localize`:@@shared.selectACountryOrLocation:Select a country or location`
