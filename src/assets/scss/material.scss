@@ -1,4 +1,4 @@
-@import '~@angular/material/_theming';
+@use '@angular/material/_index.scss' as mat;
 @import './material.typography.scss';
 @import './material.light-theme.scss';
 @import './material.orcid-theme.scss';
@@ -26,9 +26,9 @@
 // .
 // .
 // Style material components more info on  https://github.com/angular/components/blob/8.1.4/guides/theming.md
-@include mat-core($orcid-material-typography);
+@include mat.core($orcid-material-typography);
 // TODO: include only the CSS for the used components, instead of everything
-@include angular-material-theme($orcid-app-theme);
+@include mat.all-component-themes($orcid-app-theme);
 // .
 // .
 // MATERIAL OVERWRITES

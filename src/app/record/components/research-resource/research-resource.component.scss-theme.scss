@@ -1,4 +1,4 @@
-@import '~@angular/material/theming';
+@use '~@angular/material' as mat;
 @import 'src/assets/scss/material.orcid-theme.scss';
 
 @mixin research-resource-theme($theme) {
@@ -10,34 +10,34 @@
 
   .description-container,
   .show-details {
-    border-color: mat-color($background, ui-background) !important;
+    border-color: mat.get-color-from-palette($background, ui-background) !important;
   }
 
   .infrastructures {
-    color: mat-contrast($accent, 600);
+    color: mat.get-contrast-color-from-palette($accent, 600);
     .dot {
-      background-color: mat-contrast($accent, 600);
+      background-color: mat.get-contrast-color-from-palette($accent, 600);
     }
   }
 
   .equipment {
-    color: mat-contrast($accent, 600);
+    color: mat.get-contrast-color-from-palette($accent, 600);
     .dot {
-      background-color: mat-contrast($accent, 600);
+      background-color: mat.get-contrast-color-from-palette($accent, 600);
     }
   }
 
   .services {
-    color: mat-contrast($accent, 600);
+    color: mat.get-contrast-color-from-palette($accent, 600);
     .dot {
-      background-color: mat-contrast($accent, 600);
+      background-color: mat.get-contrast-color-from-palette($accent, 600);
     }
   }
 
   .collections {
-    color: mat-contrast($accent, 600);
+    color: mat.get-contrast-color-from-palette($accent, 600);
     .dot {
-      background-color: mat-contrast($accent, 600);
+      background-color: mat.get-contrast-color-from-palette($accent, 600);
     }
   }
 }

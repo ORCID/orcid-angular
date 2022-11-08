@@ -1,4 +1,4 @@
-@import '~@angular/material/theming';
+@use '~@angular/material' as mat;
 @import 'src/assets/scss/material.orcid-theme.scss';
 
 @mixin dialog-trusted-organizations($theme) {
@@ -9,7 +9,7 @@
   $background: map-get($theme, background);
 
   .warn {
-    color: mat-color($warn, 700);
+    color: mat.get-color-from-palette($warn, 700);
   }
 }
 

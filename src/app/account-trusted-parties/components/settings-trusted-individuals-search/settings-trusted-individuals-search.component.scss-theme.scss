@@ -1,4 +1,4 @@
-@import '~@angular/material/theming';
+@use '~@angular/material' as mat;
 @import 'src/assets/scss/material.orcid-theme.scss';
 
 @mixin dialog-trusted-organizations($theme) {
@@ -9,16 +9,16 @@
   $background: map-get($theme, background);
 
   .warn {
-    color: mat-color($warn, 700);
+    color: mat.get-color-from-palette($warn, 700);
   }
 
   .disabled a.mat-tooltip-trigger.black-url.underline {
-    color: mat-color($background, dark-grey);
+    color: mat.get-color-from-palette($background, dark-grey);
   }
 
   .disabled
     mat-icon.mat-icon.mat-tooltip-trigger.pointer.material-icons.mat-icon-no-color {
-    color: mat-color($background, dark-grey);
+    color: mat.get-color-from-palette($background, dark-grey);
   }
 }
 
