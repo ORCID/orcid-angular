@@ -101,15 +101,6 @@
               <mat-icon class="material-icons-outlined">call_split</mat-icon>
             </button>
           </div>
-          <button
-            *ngIf="!userVersionPresent"
-            mat-icon-button
-            [matTooltip]="tooltipLabelMakeCopy"
-            (click)="openModal({ createACopy: true })"
-            [disabled]
-          >
-            <mat-icon class="material-icons-outlined">call_split</mat-icon>
-          </button>
         </ng-container>
       </ng-container>
       <ng-container *ngIf="!isAffiliation()">

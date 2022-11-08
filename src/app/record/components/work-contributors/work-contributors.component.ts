@@ -1,9 +1,20 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import {
+  Component,
+  Inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  ViewChildren,
+} from '@angular/core'
+import {
+  AbstractControl,
   ControlContainer,
   FormArray,
   FormBuilder,
+  FormGroup,
   FormGroupDirective,
+  Validators,
 } from '@angular/forms'
 import { UserRecord } from '../../../types/record.local'
 import { takeUntil, tap } from 'rxjs/operators'
@@ -13,8 +24,13 @@ import { Contributor } from '../../../types'
 import { environment } from 'src/environments/environment'
 import { RecordWorksService } from '../../../core/record-works/record-works.service'
 import { RecordAffiliationService } from '../../../core/record-affiliations/record-affiliations.service'
-import { TogglzService } from '../../../core/togglz/togglz.service'
 import { EmploymentsEndpoint } from '../../../types/record-affiliation.endpoint'
+import { unique } from '../../../shared/validators/unique/unique.validator'
+import { ContributionRoles } from '../../../types/works.endpoint'
+import { MAX_LENGTH_LESS_THAN_ONE_HUNDRED } from '../../../constants'
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
+import { WINDOW } from '../../../cdk/window'
+import { TogglzService } from '../../../core/togglz/togglz.service'
 
 @Component({
   selector: 'app-work-contributors',
@@ -38,20 +54,35 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
   isMobile: boolean
   screenDirection = 'ltr'
   roles: string
+  maxNumberOfContributors = 49
+  maxNumberOfContributorsSummary = 10
+  privateName = 'Name is private'
+  togglzAddOtherContributors: boolean
+
+  contributionRoles = ContributionRoles
+
+  ngOrcidSelectRole = $localize`:@@works.pleaseSelectRole:Please select a role`
+  ngOrcidContributorName = $localize`:@@works.contributorName:Contributor name`
 
   constructor(
+    _togglz: TogglzService,
+    @Inject(WINDOW) private window: Window,
     private formBuilder: FormBuilder,
     private parentForm: FormGroupDirective,
     private platform: PlatformInfoService,
     private workService: RecordWorksService,
     private affiliationService: RecordAffiliationService
-  ) {}
+  ) {
+    _togglz
+      .getStateOf('ADD_OTHER_WORK_CONTRIBUTORS')
+      .subscribe((value) => (this.togglzAddOtherContributors = value))
+  }
 
   get contributorsFormArray() {
     return this.parentForm.control.controls['contributors'] as FormArray
   }
 
-  get rolesFormArray() {
+  get rolesRecordHolderFormArray() {
     return this.parentForm.control.controls['roles'] as FormArray
   }
 
@@ -81,33 +112,88 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
     this.initializeFormArray()
   }
 
+  addAnotherContributor(addAnotherContributorStatus: boolean): void {
+    if (!addAnotherContributorStatus) {
+      this.contributorsFormArray.push(this.getContributorForm())
+    }
+  }
+
+  rolesFormArray(contributor): AbstractControl[] {
+    return (contributor.get('roles') as FormArray).controls
+  }
+
+  addAnotherRole(contributor): void {
+    ;(contributor.get('roles') as FormArray).push(
+      this.getRoleForm(
+        this.workService.getContributionRoleByKey('no specified role').key,
+        false
+      )
+    )
+  }
+
+  deleteContributor(contributorIndex: number): void {
+    this.contributorsFormArray.removeAt(contributorIndex)
+  }
+
+  deleteRole(contributor, roleIndex: number): void {
+    ;(contributor.get('roles') as FormArray).removeAt(roleIndex)
+    if (roleIndex === 0 && this.roles.length === 0) {
+      this.addAnotherRole(contributor)
+    }
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(
+      this.contributorsFormArray.controls,
+      event.previousIndex,
+      event.currentIndex
+    )
+  }
+
   private initializeFormArray(): void {
     const recordHolderContribution = this.getRecordHolderContribution()
     const orcid = recordHolderContribution?.contributorOrcid?.path
       ? recordHolderContribution?.contributorOrcid?.path
       : this.id
-    this.parentForm.control.setControl(
-      'contributors',
-      new FormArray([
-        this.formBuilder.group({
-          creditName: [
-            recordHolderContribution
-              ? recordHolderContribution?.creditName?.value
-              : this.getCreditNameFromUserRecord(),
-          ],
-          contributorOrcid: this.formBuilder.group({
-            path: [orcid],
-            uri: [
-              recordHolderContribution?.contributorOrcid?.uri
-                ? recordHolderContribution?.contributorOrcid?.uri
-                : `https:${environment.BASE_URL}${orcid}`,
-            ],
-          }),
-        }),
-      ])
-    )
+    const name = recordHolderContribution
+      ? recordHolderContribution?.creditName?.content
+      : this.getCreditNameFromUserRecord()
+    const uri = recordHolderContribution?.contributorOrcid?.uri
+      ? recordHolderContribution?.contributorOrcid?.uri
+      : `https:${environment.BASE_URL}${orcid}`
+    this.parentForm.control.setControl('contributors', new FormArray([]))
+    const contributorsFormArray = this.parentForm.control.get(
+      'contributors'
+    ) as FormArray
+    if (this.togglzAddOtherContributors && this.contributors?.length > 0) {
+      if (!recordHolderContribution) {
+        contributorsFormArray.push(
+          this.getContributorForm(name, orcid, uri, [], true)
+        )
+      }
+      this.contributors.forEach((contributor) => {
+        contributorsFormArray.push(
+          this.getContributorForm(
+            contributor?.creditName?.content,
+            contributor?.contributorOrcid?.path
+              ? contributor?.contributorOrcid?.path
+              : null,
+            contributor?.contributorOrcid?.uri
+              ? contributor?.contributorOrcid?.uri
+              : null,
+            contributor.rolesAndSequences.map((role) => role.contributorRole),
+            true
+          )
+        )
+      })
+    } else {
+      contributorsFormArray.push(
+        this.getContributorForm(name, orcid, uri, [], true)
+      )
+    }
+    // Validate if contributor is in the list of contributors otherwise added it
     this.roles = this.getDisabledRoles()?.join(', ')
-    this.rolesFormArray?.valueChanges.subscribe(() => {
+    this.rolesRecordHolderFormArray?.valueChanges.subscribe(() => {
       this.roles = [
         ...this.getDisabledRoles(),
         ...this.getEnabledRoles(),
@@ -115,8 +201,67 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
     })
   }
 
+  private getContributorForm(
+    name?: string,
+    orcid?: string,
+    uri?: string,
+    roles?: string[],
+    disabled?: boolean
+  ): FormGroup {
+    const contributor = this.formBuilder.group({
+      creditName: [
+        {
+          value: name ? name : '',
+          disabled,
+        },
+        [
+          Validators.required,
+          Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_HUNDRED),
+        ],
+      ],
+      contributorOrcid: this.formBuilder.group({
+        path: [orcid ? orcid : null],
+        uri: [
+          uri ? uri : orcid ? `https:${environment.BASE_URL}${orcid}` : null,
+        ],
+      }),
+      roles: new FormArray([]),
+    })
+    const rolesFormArray = contributor.controls.roles as FormArray
+    if (roles?.length > 0) {
+      roles.forEach((role) => {
+        if (role) {
+          const r = this.workService.getContributionRoleByKey(role)?.key
+          rolesFormArray.push(this.getRoleForm(r ? r : role, disabled))
+        }
+      })
+    } else {
+      if (!disabled) {
+        rolesFormArray.push(
+          this.getRoleForm(
+            this.workService.getContributionRoleByKey('no specified role').key,
+            false
+          )
+        )
+      }
+    }
+    return contributor
+  }
+
+  private getRoleForm(role?: string, disabled?: boolean): FormGroup {
+    return this.formBuilder.group({
+      role: [
+        {
+          value: role ? role.toLowerCase() : '',
+          disabled,
+        },
+        [unique('role', 'no specified role')],
+      ],
+    })
+  }
+
   private getDisabledRoles(): string[] {
-    return this.rolesFormArray?.controls
+    return this.rolesRecordHolderFormArray?.controls
       .filter((formGroup) => formGroup.disabled)
       .map((formGroup) => {
         const role = formGroup?.value?.role
@@ -129,7 +274,7 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
   }
 
   private getEnabledRoles(): string[] {
-    return this.rolesFormArray?.controls
+    return this.rolesRecordHolderFormArray?.controls
       .filter((formGroup) => !formGroup.disabled && formGroup?.value?.role)
       .map(
         (formGroup) =>
@@ -183,11 +328,17 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
   }
 
   private getRecordHolderContribution(): Contributor {
-    return this.contributors?.find((c) => c?.contributorOrcid?.path === this.id)
+    return this.contributors?.find(
+      (c) => c?.contributorOrcid?.path && c?.contributorOrcid?.path === this.id
+    )
   }
 
   ngOnDestroy() {
     this.$destroy.next(true)
     this.$destroy.unsubscribe()
+  }
+
+  goto(url: string) {
+    this.window.open(url)
   }
 }

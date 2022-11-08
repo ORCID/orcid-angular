@@ -11,6 +11,8 @@
 }
 
 .contributor-wrapper {
+  margin: 5px 0;
+
   p {
     margin-block-start: 0.5em;
     margin-block-end: 0.5em;
@@ -36,13 +38,72 @@
       width: 32px;
       margin-inline-start: 8px;
       margin-inline-end: 8px;
+      cursor: pointer;
     }
   }
 
-  .record-holder-name-and-roles {
+  .contributor {
+    margin-bottom: 12px;
+  }
+
+  .credit-name-and-roles {
     display: flex;
     flex-direction: column;
+  }
+
+  .record-holder {
     font-style: italic;
+  }
+
+  .not-record-holder {
+    padding: 0 8px;
+  }
+
+  .mat-form-field {
+    width: 100%;
+  }
+
+  a {
+    margin-top: 4px;
+  }
+}
+
+.notice-panel {
+  padding: 16px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  border: solid 2px;
+  border-radius: 4px;
+  display: flex;
+
+  h2 {
+    margin: 0 0 12px 0;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .info {
+    padding-right: 8px;
+  }
+}
+
+.delete-button {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0;
+}
+
+.add-more {
+  margin-top: 27px;
+  padding-inline-start: 0;
+  a {
+    margin: 0;
+  }
+  span {
+    margin: auto;
+    padding-inline-start: 6px;
   }
 }
 

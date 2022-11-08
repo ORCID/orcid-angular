@@ -1,4 +1,4 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
+import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core'
 import { Subject } from 'rxjs'
 import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
@@ -10,6 +10,10 @@ import bibtexParse from '@orcid/bibtex-parse-js'
 import latexParse from 'src/assets/scripts/latexParse.js'
 import { WINDOW } from 'src/app/cdk/window'
 import { SnackbarService } from '../../../../../cdk/snackbar/snackbar.service'
+import { environment } from '../../../../../../environments/environment.local'
+import { Contributor } from '../../../../../types'
+import { UserRecord } from '../../../../../types/record.local'
+import { TogglzService } from 'src/app/core/togglz/togglz.service'
 
 @Component({
   selector: 'app-work-doi-bibtex-modal',
@@ -21,6 +25,8 @@ import { SnackbarService } from '../../../../../cdk/snackbar/snackbar.service'
 })
 export class WorkBibtexModalComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
+
+  @Input() userRecord: UserRecord
 
   importForm: FormGroup
   loadingWorks = false
@@ -38,86 +44,104 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
     public dialogRef: MatDialogRef<ModalComponent>,
     private _snackBar: SnackbarService,
     private _recordWorksService: RecordWorksService,
-    @Inject(WINDOW) private _window: Window
+    @Inject(WINDOW) private _window: Window,
+    private _togglz: TogglzService
   ) {}
 
   ngOnInit(): void {}
 
   bibTexInputChange($fileInputEvent: any) {
-    this.bibtexErrorParsingText = undefined
-    this.bibtexErrorParsing = false
-    this.loadingWorks = true
-    const textFiles = $fileInputEvent.target.files
-    for (const bibtex of textFiles) {
-      const reader = new FileReader()
-      reader.readAsText(bibtex)
+    this._togglz
+      .getStateOf('ADD_OTHER_WORK_CONTRIBUTORS_WITH_BIBTEX')
+      .subscribe((ADD_OTHER_WORK_CONTRIBUTORS_WITH_BIBTEX_TOGGLZ) => {
+        this.bibtexErrorParsingText = undefined
+        this.bibtexErrorParsing = false
+        this.loadingWorks = true
+        const textFiles = $fileInputEvent.target.files
+        for (const bibtex of textFiles) {
+          const reader = new FileReader()
+          reader.readAsText(bibtex)
 
-      const that = this
+          const that = this
 
-      reader.onloadend = function (e) {
-        let parsed = null
-        try {
-          parsed = bibtexParse.toJSON(reader.result)
-          if (
-            typeof parsed === 'string' &&
-            parsed.substring(0, 5).toLowerCase().indexOf('error') > -1
-          ) {
-            that.bibtexErrorParsingText = parsed
-            that.bibtexErrorParsing = true
-            that.loadingWorks = false
-          } else {
-            if (parsed) {
-              const newWorks = []
-              if (parsed.length === 0) {
-                that.bibtexErrorNoEntries = true
+          reader.onloadend = function (e) {
+            let parsed = null
+            try {
+              parsed = bibtexParse.toJSON(reader.result)
+
+              if (
+                typeof parsed === 'string' &&
+                parsed.substring(0, 5).toLowerCase().indexOf('error') > -1
+              ) {
+                that.bibtexErrorParsingText = parsed
+                that.bibtexErrorParsing = true
                 that.loadingWorks = false
-              }
-              while (parsed.length > 0) {
-                const cur = parsed.shift()
-                const bibtexEntry = cur.entryType.toLowerCase()
-                if (bibtexEntry !== 'preamble' && bibtexEntry !== 'comment') {
-                  newWorks.push(that.populateWork(cur))
+              } else {
+                if (parsed) {
+                  const newWorks = []
+                  if (parsed.length === 0) {
+                    that.bibtexErrorNoEntries = true
+                    that.loadingWorks = false
+                  }
+                  while (parsed.length > 0) {
+                    const cur = parsed.shift()
+                    const bibtexEntry = cur.entryType.toLowerCase()
+                    if (
+                      bibtexEntry !== 'preamble' &&
+                      bibtexEntry !== 'comment'
+                    ) {
+                      newWorks.push(
+                        that.populateWork(
+                          cur,
+                          ADD_OTHER_WORK_CONTRIBUTORS_WITH_BIBTEX_TOGGLZ
+                        )
+                      )
+                    }
+                  }
+                  if (newWorks.length > 0) {
+                    that._recordWorksService
+                      .worksValidate(newWorks)
+                      .pipe(first())
+                      .subscribe((data) => {
+                        data.forEach((work) => {
+                          that.worksFromBibtex.push(work)
+                          if (work.errors.length > 0 && !that.isAnInvalidWork) {
+                            that.isAnInvalidWork = true
+                            that._snackBar.showValidationError()
+                          }
+                        })
+                        that.worksFromBibtex.forEach((w) => {
+                          const newPutCode = 'new-' + that.addedWorkCount++
+                          w.putCode = {
+                            value: newPutCode,
+                          }
+                          that.group[newPutCode] = new FormGroup({
+                            checked: new FormControl(false),
+                          })
+                        })
+                        that.importForm = new FormGroup(that.group)
+                        that.loadingWorks = false
+                      })
+                  }
                 }
               }
-              if (newWorks.length > 0) {
-                that._recordWorksService
-                  .worksValidate(newWorks)
-                  .pipe(first())
-                  .subscribe((data) => {
-                    data.forEach((work) => {
-                      that.worksFromBibtex.push(work)
-                      if (work.errors.length > 0 && !that.isAnInvalidWork) {
-                        that.isAnInvalidWork = true
-                        that._snackBar.showValidationError()
-                      }
-                    })
-                    that.worksFromBibtex.forEach((w) => {
-                      const newPutCode = 'new-' + that.addedWorkCount++
-                      w.putCode = {
-                        value: newPutCode,
-                      }
-                      that.group[newPutCode] = new FormGroup({
-                        checked: new FormControl(false),
-                      })
-                    })
-                    that.importForm = new FormGroup(that.group)
-                    that.loadingWorks = false
-                  })
-              }
+            } catch (e) {
+              that.bibtexErrorParsingText = e
+              that.bibtexErrorParsing = true
+              that.loadingWorks = false
             }
           }
-        } catch (e) {
-          that.bibtexErrorParsingText = e
-          that.bibtexErrorParsing = true
-          that.loadingWorks = false
         }
-      }
-    }
+      })
   }
 
-  populateWork(bibJSON): Work {
+  populateWork(
+    bibJSON,
+    ADD_OTHER_WORK_CONTRIBUTORS_WITH_BIBTEX_TOGGLZ: boolean
+  ): Work {
     const work = {} as Work
     const bibtex = bibtexParse.toBibtex([bibJSON])
+
     work.citation = {
       citation: { value: bibtex },
       citationType: { value: 'bibtex' },
@@ -247,8 +271,61 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
           value: lowerKeyTags['url'],
         }
       }
+
+      if (ADD_OTHER_WORK_CONTRIBUTORS_WITH_BIBTEX_TOGGLZ) {
+        work.contributorsGroupedByOrcid = this.addRecordHolderAsContributor()
+
+        if (lowerKeyTags.hasOwnProperty('author')) {
+          this.addContributors(
+            lowerKeyTags['author'].split('and'),
+            'author',
+            work
+          )
+        }
+        if (lowerKeyTags.hasOwnProperty('editor')) {
+          this.addContributors(
+            lowerKeyTags['editor'].split('and'),
+            'editor',
+            work
+          )
+        }
+      }
     }
     return work
+  }
+
+  addContributors(
+    contributors: string[],
+    type: 'author' | 'editor',
+    work: Work
+  ) {
+    contributors.forEach((contributor) => {
+      work.contributorsGroupedByOrcid.push({
+        creditName: {
+          content: contributor,
+        },
+        rolesAndSequences: [
+          {
+            contributorRole: type,
+            contributorSequence: null,
+          },
+        ],
+      })
+    })
+  }
+
+  addRecordHolderAsContributor(): Contributor[] {
+    return [
+      {
+        creditName: {
+          content: this.getCreditNameFromUserRecord(),
+        },
+        contributorOrcid: {
+          path: this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID,
+          uri: `https:${environment.BASE_URL}${this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID}`,
+        },
+      },
+    ]
   }
 
   externalIdentifierId(work, idType, value) {
@@ -334,7 +411,7 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
       this.selectedWorks.forEach((work, index) => {
         work.putCode = null
         this._recordWorksService
-          .save(work, index === this.selectedWorks.length - 1)
+          .save(work, !(index === this.selectedWorks.length - 1))
           .subscribe(() => {
             if (index === this.selectedWorks.length - 1) {
               this.loadingWorks = false
@@ -356,6 +433,18 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
       errorMessage,
       $localize`:@@shared.pleaseReview:Please review and fix the issue`
     )
+  }
+
+  private getCreditNameFromUserRecord(): string {
+    const creditName = this.userRecord?.names?.creditName?.value
+    const givenNames = this.userRecord?.names?.givenNames?.value
+    const familyName = this.userRecord?.names?.familyName?.value
+
+    if (creditName) {
+      return creditName
+    } else {
+      return familyName ? `${givenNames} ${familyName}` : givenNames
+    }
   }
 
   closeEvent() {

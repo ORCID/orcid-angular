@@ -21,6 +21,7 @@
   <!-- Work Types -->
   <div id="cy-work-types-div">
     <label
+      for="cy-work-types"
       class="row mat-caption"
       [ngClass]="{
         error:
@@ -37,11 +38,10 @@
       id="cy-work-types-form-field"
     >
       <mat-select
-        placeholder="Select a work type"
         formControlName="workType"
         (selectionChange)="$workTypeUpdateEvent.next()"
         id="cy-work-types"
-        i18n-placeholder="@@works.selectWorkType"
+        placeholder="{{ ngOrcidSelectWorkType }}"
       >
         <mat-optgroup
           *ngFor="let workType of workTypeByCategory"
@@ -270,7 +270,7 @@
 
   <div>
     <div class="row">
-      <label for="given-names-input" class="mat-caption">
+      <label for="cy-journal-title" class="mat-caption">
         <strong>{{ dynamicTitle | recordWorkTitleNameLabel }}</strong>
       </label>
     </div>
@@ -309,6 +309,7 @@
           class="mat-form-field-min"
         >
           <mat-select
+            aria-label="{{ ngOrcidYear }}"
             placeholder="{{ ngOrcidYear }}"
             formControlName="publicationYear"
             id="cy-start-date-year-sel"
@@ -322,12 +323,12 @@
       </div>
       <div class="col l4 date">
         <mat-form-field
-          class="input-container"
           id="start-date-month-input"
           appearance="outline"
           class="mat-form-field-min"
         >
           <mat-select
+            aria-label="{{ ngOrcidMonth }}"
             placeholder="{{ ngOrcidMonth }}"
             formControlName="publicationMonth"
             id="cy-start-date-month-sel"
@@ -341,12 +342,12 @@
       </div>
       <div class="col l4 date">
         <mat-form-field
-          class="input-container"
           id="start-date-day-input"
           appearance="outline"
           class="mat-form-field-min"
         >
           <mat-select
+            aria-label="{{ ngOrcidDay }}"
             placeholder="{{ ngOrcidDay }}"
             formControlName="publicationDay"
             id="cy-start-date-day-sel"
@@ -431,7 +432,7 @@
   <div formGroupName="citationGroup" id="cy-citation-group">
     <div class="row">
       <label
-        for="given-names-input"
+        for="cy-citation-type"
         class="mat-caption title"
         [ngClass]="{
           error: workForm.hasError('citationType', 'citationGroup')
@@ -634,7 +635,10 @@
     [userRecord]="userRecord"
   ></app-work-contributor-roles>
 
-  <app-work-contributors [userRecord]="userRecord"></app-work-contributors>
+  <app-work-contributors
+    [contributors]="work?.contributorsGroupedByOrcid"
+    [userRecord]="userRecord"
+  ></app-work-contributors>
 
   <!---------------------->
   <!-- Work Other Information -->

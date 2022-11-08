@@ -112,7 +112,7 @@
     "babel-loader": "^8.0.6",
     "codelyzer": "^6.0.0",
     "cross-env": "^5.2.1",
-    "cypress": "10.3.1",
+    "cypress": "^10.10.0",
     "cypress-axe": "^0.14.0",
     "cypress-mochawesome-reporter": "^3.2.0",
     "fs-extra": "^8.1.0",

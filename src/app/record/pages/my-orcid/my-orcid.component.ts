@@ -14,6 +14,7 @@ import { UserService } from 'src/app/core'
 import { WINDOW } from 'src/app/cdk/window'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { HelpHeroService } from 'src/app/core/help-hero/help-hero.service'
+import { ScriptService } from '../../../core/crazy-egg/script.service'
 
 @Component({
   selector: 'app-my-orcid',
@@ -63,7 +64,8 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     private _router: Router,
     private _userSession: UserService,
     @Inject(WINDOW) private window: Window,
-    private _togglz: TogglzService
+    private _togglz: TogglzService,
+    private _scriptService: ScriptService
   ) {}
 
   private checkIfThisIsAPublicOrcid() {
@@ -136,6 +138,15 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
               this.userInfo,
               this.userRecord
             )
+          }
+
+          if (togglz.messages['CRAZY_EGG'] === 'true') {
+            this._scriptService
+              .load({
+                name: 'crazy-egg',
+                src: 'https://script.crazyegg.com/pages/scripts/0113/7579.js',
+              })
+              .subscribe()
           }
         })
       )

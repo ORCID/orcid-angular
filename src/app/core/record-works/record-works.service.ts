@@ -24,6 +24,7 @@ import {
   WorkCombineEndpoint,
   WorkIdType,
   WorkIdTypeValidation,
+  _LEGACY_ContributionRoles,
 } from 'src/app/types/works.endpoint'
 import { environment } from 'src/environments/environment'
 
@@ -46,7 +47,6 @@ export class RecordWorksService {
   sortOrder: SortOrderType = 'date'
   sortAsc = false
   pageSize = DEFAULT_PAGE_SIZE
-  togglzWorksContributors: boolean
   contributionRoles = ContributionRoles
 
   userRecordOptions: UserRecordOptions = {}
@@ -166,7 +166,7 @@ export class RecordWorksService {
   }
 
   private calculateVisibilityErrors(groups: WorkGroup[]): WorkGroup[] {
-    return groups.map((group) => {
+    return groups?.map((group) => {
       group.visibilityError = !!group.works.find(
         (x) => x.visibility.visibility !== group.activeVisibility
       )
@@ -467,6 +467,9 @@ export class RecordWorksService {
   }
 
   getContributionRoleByKey(key: string): Role {
-    return this.contributionRoles.find((role) => role.key === key)
+    return (
+      this.contributionRoles.find((role) => role.key === key) ||
+      _LEGACY_ContributionRoles.find((role) => role.key === key)
+    )
   }
 }

@@ -104,8 +104,8 @@
         <ng-container i18n="@@works.translatedTitle"
           >Translated title</ng-container
         >&nbsp;</span
-      ><ng-container *ngIf="work?.translatedTitle?.languageName">
-        ({{ work.translatedTitle.languageName }})
+      ><ng-container *ngIf="work?.translatedTitle?.languageCode">
+        ({{ getLanguageKey(work.translatedTitle.languageCode) }})
       </ng-container>
     </div>
 
@@ -121,7 +121,7 @@
     </h3>
 
     <div>
-      {{ work?.languageName.value }}
+      {{ getLanguageKey(work?.languageCode.value) }}
     </div>
   </app-display-attribute>
 
@@ -243,16 +243,16 @@
             i18n="@@works.or"
             *ngIf="
               !isPublicRecord &&
-              (work.workExternalIdentifiers[0].normalizedUrl?.value ||
-                work.workExternalIdentifiers[0].url?.value)
+              (work.workExternalIdentifiers[0]?.normalizedUrl?.value ||
+                work.workExternalIdentifiers[0]?.url?.value)
             "
           >
             or
           </ng-container>
           <a
             href="{{
-              work?.workExternalIdentifiers[0].normalizedUrl?.value ||
-                work?.workExternalIdentifiers[0].url?.value
+              work?.workExternalIdentifiers[0]?.normalizedUrl?.value ||
+                work?.workExternalIdentifiers[0]?.url?.value
             }}"
             target="_blank"
             rel="noopener noreferrer"
@@ -385,8 +385,8 @@
           </ng-container>
           <a
             href="{{
-              work.workExternalIdentifiers[0].normalizedUrl?.value ||
-                work.workExternalIdentifiers[0].url?.value
+              work.workExternalIdentifiers[0]?.normalizedUrl?.value ||
+                work.workExternalIdentifiers[0]?.url?.value
             }}"
             target="_blank"
             rel="noopener noreferrer"

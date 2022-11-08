@@ -17,9 +17,9 @@ describe('My orcid - works - visibility inconsistency notification scenario', as
   before(() => {
     //Set default visibility for this record is set to Public
     cy.programmaticallySignin('cyWorkVisibilityUser') //send user key from fixture file
-    cy.visit(Cypress.env('baseUrl') + `/my-orcid`)
+    cy.visit(`/my-orcid`)
     cy.get('#cy-user-info').click()
-    cy.get('#cy-account-settings').click()
+    cy.get('#cy-account-settings').wait(1000).click({ force: true })
     cy.get('#cy-visibility-panel-action-more').click()
     cy.get('#cy-visibility-everyone-input').click()
     //Log out to save changes
@@ -55,7 +55,7 @@ describe('My orcid - works - visibility inconsistency notification scenario', as
 
     //Login
     cy.programmaticallySignin('cyWorkVisibilityUser') //send user key from fixture file
-    cy.visit(Cypress.env('baseUrl') + `/my-orcid`)
+    cy.visit(`/my-orcid`)
     cy.get('#cy-works').should('be.visible') //wait for page to load
 
     //verify work added by client is displayed
@@ -90,14 +90,13 @@ describe('My orcid - works - visibility inconsistency notification scenario', as
 
     //by default visibility is set to public, change it to Private
     cy.get('#modal-container').within(($modal) => {
-      cy.get('#cy-visibility-private').click()
+      cy.get('#cy-visibility-private').click({ force: true })
     })
     //save entry
-    cy.get('#save-work-button').click({ force: true })
-    cy.wait(2000) //wait for change to take effect
+    cy.get('#save-work-button').wait(4000).click({ force: true })
 
     //Verify work was added and grouped & inconsistency icon is displayed
-    cy.get('#cy-works') //wait for page to load
+    cy.wait(4000) //wait for page to load - timeout alternative didnt work
     cy.contains('app-work-stack', externalId).within(() => {
       cy.contains('a', 'of 2') //REPLACE locator with id
       //verify icon is displayed
@@ -107,8 +106,7 @@ describe('My orcid - works - visibility inconsistency notification scenario', as
       //select group visibility & verify icon is not displayed
       cy.get('mat-checkbox').click()
       cy.get('#cy-visibility-limited').click()
-      cy.wait(2000) //wait for change to take effect
-      cy.get('#cy-buttons-container').within(() => {
+      cy.get('#cy-buttons-container', { timeout: 6000 }).within(() => {
         cy.get('#cy-inconsistency-issue').should('not.exist')
       })
     })

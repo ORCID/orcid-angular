@@ -36,8 +36,10 @@ export class HelpHeroService {
       userRecord?.names &&
       userRecord?.affiliations &&
       userRecord?.works &&
-      !this.hlp
+      !this.hlp &&
+      !(this.window as any).Cypress
     ) {
+      this.modifyHelpHeroScriptOnCreate()
       this.hlp = initHelpHero(environment.HELP_HERO_ID)
       const helpHeroIdentifyObject = {
         numberOfValidatedEmails: this.getNumberOfValidatedEmails(
@@ -58,6 +60,28 @@ export class HelpHeroService {
       this.hlp.identify(userInfo.EFFECTIVE_USER_ORCID, helpHeroIdentifyObject)
     }
   }
+  private modifyHelpHeroScriptOnCreate() {
+    const observer = new MutationObserver((mutations, me) => {
+      const helpheroDom = document.getElementById('helphero-dom')
+      if (helpheroDom) {
+        this.handleHelpHeroChanges(helpheroDom)
+        me.disconnect()
+        return
+      }
+    })
+
+    observer.observe(document, {
+      childList: true,
+      subtree: true,
+    })
+  }
+  handleHelpHeroChanges(helpheroFrame: HTMLElement) {
+    this.window.document
+      .querySelector('app-root')
+      .insertAdjacentElement('beforebegin', helpheroFrame)
+    helpheroFrame.setAttribute('aria-hidden', 'true')
+  }
+
   affiliationsCount(affiliations: AffiliationUIGroup[]): number {
     return affiliations.reduce((p, c) => (p += c.affiliationGroup.length), 0)
   }

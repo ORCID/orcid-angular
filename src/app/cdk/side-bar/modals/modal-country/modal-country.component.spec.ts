@@ -110,7 +110,7 @@ describe('ModalCountryComponent', () => {
     ).toBe('Add another country or location')
   })
 
-  it('should display three countries with the next status disabled (source is not user), enabled and enabled', async () => {
+  it('should display 4 countries with the next status disabled (source is not user), enabled and enabled', async () => {
     const adressesResponse: Observable<CountriesEndpoint> = of({
       errors: [],
       addresses: getAddresses(),
@@ -139,6 +139,7 @@ describe('ModalCountryComponent', () => {
     )
 
     expect(countriesForm.controls[1].value.country).toBe('Albania')
+    expect(countriesForm.controls[3].value.country).toBe('Kosovo')
     expect(countriesForm.controls['new-0'].value.country).toBe('Mexico')
     expect(disabledStates.filter((value) => value).length).toBe(1)
     expect(countriesSelects.length).toBe(3)
@@ -159,6 +160,15 @@ function getAddresses(): Address[] {
     {
       putCode: '2',
       countryName: 'United States',
+      source: '0000-0000-0000-000Z',
+      sourceName: 'ORCID',
+      visibility: {
+        visibility: 'PRIVATE',
+      },
+    } as Address,
+    {
+      putCode: '3',
+      countryName: 'Kosovo',
       source: '0000-0000-0000-000Z',
       sourceName: 'ORCID',
       visibility: {

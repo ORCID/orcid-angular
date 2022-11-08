@@ -1,6 +1,7 @@
 import { defineConfig } from 'cypress'
 
 export default defineConfig({
+  blockHosts: ['*.crazyegg.com', '*.zendesk.com'],
   env: {
     infoSiteBaseUrl: 'https://info.qa.orcid.org',
     duplicatedModalEndPoint: 'https://pub.qa.orcid.org/v3.0/expanded-search/**',
@@ -20,6 +21,18 @@ export default defineConfig({
     membersAPI_workEndpoint: '/work',
     membersAPI_peerReviewEndpoint: '/peer-review',
     registrationPage: 'https://qa.orcid.org/register',
+    membersAPI_revokeTokenEndPoint: 'https://qa.orcid.org/oauth/revoke',
+    reactivationEmailSubject: '[ORCID] Reactivating your ORCID record',
+    reactivationEmailSender: 'reset@notify.orcid.org',
+    reactivationEmailLink: 'https://qa.orcid.org/reactivation/',
+    deactivationEmailSubject:
+      '[ORCID] Confirm deactivation of your ORCID Account',
+    deactivationEmailSender: 'deactivate@notify.orcid.org',
+    deactivationEmailLink:
+      'https://qa.orcid.org/account/confirm-deactivate-orcid',
+    deactivationBannerMessage: 'An account deactivation email has been sent to',
+    deactivatedRecordMessage:
+      'A deactivated ORCID record is associated with this email address',
   },
   video: false,
   chromeWebSecurity: false,

@@ -15,7 +15,7 @@ describe('My orcid - users are able to add content to their record', async funct
       cy.get('#edit-button').click()
     })
     //clear and type new input
-    cy.get('#published-names-input').clear().type(addPublishedName)
+    cy.get('#published-names-input').wait(1000).clear().type(addPublishedName)
     cy.get('#save-names-button').click()
 
     //verify the name is displayed
