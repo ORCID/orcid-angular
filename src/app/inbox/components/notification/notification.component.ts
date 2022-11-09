@@ -20,8 +20,8 @@ import { FocusMonitor } from '@angular/cdk/a11y'
 import { heightAnimation } from 'src/app/animations'
 import {
   ControlValueAccessor,
-  FormGroup,
-  FormControl,
+  UntypedFormGroup,
+  UntypedFormControl,
   NG_VALUE_ACCESSOR,
   Validators,
 } from '@angular/forms'
@@ -62,7 +62,7 @@ export class NotificationComponent
 
   ariaLabelArchived = $localize`:@@inbox.archive:archive`
 
-  form: FormGroup
+  form: UntypedFormGroup
   @HostBinding('class.mat-elevation-z2') showNotificationContent = false
 
   @Input()
@@ -98,8 +98,8 @@ export class NotificationComponent
     private _ngZone: NgZone
   ) {
     _platform.get().subscribe((value) => (this.platform = value))
-    this.form = new FormGroup({
-      selected: new FormControl(false, Validators.required),
+    this.form = new UntypedFormGroup({
+      selected: new UntypedFormControl(false, Validators.required),
     })
   }
 

@@ -5,7 +5,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core'
-import { FormBuilder, FormGroup } from '@angular/forms'
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
@@ -36,12 +36,12 @@ export class SettingsDefaultsEmailFrequencyComponent
     EmailFrequencies.never,
   ]
   emailFrequenciesValues = EmailFrequenciesValues
-  form: FormGroup
+  form: UntypedFormGroup
   @Output() loading = new EventEmitter<boolean>()
 
   constructor(
     private _platform: PlatformInfoService,
-    private _fb: FormBuilder,
+    private _fb: UntypedFormBuilder,
     private _emailFrequency: AccountDefaultEmailFrequenciesService
   ) {}
 

@@ -1,5 +1,5 @@
 import {
-  FormGroup,
+  UntypedFormGroup,
   AsyncValidatorFn,
   AbstractControl,
   ValidationErrors,
@@ -18,12 +18,12 @@ interface HasHttpClientAndErrorHandler {
 }
 
 interface HasFormAdapters {
-  formGroupToEmailRegisterForm(formGroup: FormGroup): RegisterForm
-  formGroupToPasswordRegisterForm(formGroup: FormGroup): RegisterForm
+  formGroupToEmailRegisterForm(formGroup: UntypedFormGroup): RegisterForm
+  formGroupToPasswordRegisterForm(formGroup: UntypedFormGroup): RegisterForm
   formGroupToFullRegistrationForm(
-    StepA: FormGroup,
-    StepB: FormGroup,
-    StepC: FormGroup
+    StepA: UntypedFormGroup,
+    StepB: UntypedFormGroup,
+    StepC: UntypedFormGroup
   ): RegisterForm
 }
 
@@ -112,7 +112,7 @@ export function RegisterBackendValidatorMixin<
     }
 
     backendAdditionalEmailsValidate(reactivate: boolean): AsyncValidatorFn {
-      return (formGroup: FormGroup): Observable<ValidationErrors | null> => {
+      return (formGroup: UntypedFormGroup): Observable<ValidationErrors | null> => {
         const value: RegisterForm = this.formGroupToEmailRegisterForm(formGroup)
         if (!value.emailsAdditional || value.emailsAdditional.length === 0) {
           return of(null)
@@ -137,7 +137,7 @@ export function RegisterBackendValidatorMixin<
     }
 
     backendPasswordValidate(): AsyncValidatorFn {
-      return (formGroup: FormGroup): Observable<ValidationErrors | null> => {
+      return (formGroup: UntypedFormGroup): Observable<ValidationErrors | null> => {
         const value: RegisterForm = this.formGroupToPasswordRegisterForm(
           formGroup
         )
@@ -154,9 +154,9 @@ export function RegisterBackendValidatorMixin<
     }
 
     backendRegisterFormValidate(
-      StepA: FormGroup,
-      StepB: FormGroup,
-      StepC: FormGroup,
+      StepA: UntypedFormGroup,
+      StepB: UntypedFormGroup,
+      StepC: UntypedFormGroup,
       type?: 'shibboleth'
     ): Observable<RegisterForm> {
       const registerForm = this.formGroupToFullRegistrationForm(

@@ -11,8 +11,8 @@ import {
 } from '@angular/core'
 import {
   AbstractControl,
-  FormControl,
-  FormGroup,
+  UntypedFormControl,
+  UntypedFormGroup,
   ValidationErrors,
   ValidatorFn,
   Validators,
@@ -47,7 +47,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   id: string
-  websitesForm: FormGroup
+  websitesForm: UntypedFormGroup
   platform: PlatformInfo
   defaultVisibility: VisibilityStrings
   websites: Assertion[]
@@ -110,18 +110,18 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
 
   backendJsonToForm(websitesEndPoint: WebsitesEndPoint) {
     const websites = websitesEndPoint.websites
-    const group: { [key: string]: FormGroup } = {}
+    const group: { [key: string]: UntypedFormGroup } = {}
 
     websites.forEach((website) => {
-      group[website.putCode] = new FormGroup({
-        description: new FormControl(
+      group[website.putCode] = new UntypedFormGroup({
+        description: new UntypedFormControl(
           website.urlName == null ? '' : website.urlName.trim(),
           {
             validators: [Validators.maxLength(this.urlTitleMaxLength)],
             updateOn: 'change',
           }
         ),
-        url: new FormControl(website.url.value.trim(), {
+        url: new UntypedFormControl(website.url.value.trim(), {
           validators: [
             Validators.required,
             OrcidValidators.patternAfterTrimming(URL_REGEXP),
@@ -130,14 +130,14 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
           ],
           updateOn: 'change',
         }),
-        visibility: new FormControl(website.visibility.visibility, {}),
+        visibility: new UntypedFormControl(website.visibility.visibility, {}),
       })
     })
 
-    this.websitesForm = new FormGroup(group)
+    this.websitesForm = new UntypedFormGroup(group)
   }
 
-  formToBackend(websitesForm: FormGroup): WebsitesEndPoint {
+  formToBackend(websitesForm: UntypedFormGroup): WebsitesEndPoint {
     const websites: WebsitesEndPoint = {
       errors: [],
       websites: [],
@@ -199,12 +199,12 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
     const newPutCode = 'new-' + this.addedWebsiteCount
     this.websitesForm.addControl(
       newPutCode,
-      new FormGroup({
-        description: new FormControl('', {
+      new UntypedFormGroup({
+        description: new UntypedFormControl('', {
           validators: [Validators.maxLength(this.urlTitleMaxLength)],
           updateOn: 'change',
         }),
-        url: new FormControl('', {
+        url: new UntypedFormControl('', {
           validators: [
             Validators.required,
             OrcidValidators.patternAfterTrimming(URL_REGEXP),
@@ -213,7 +213,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
           ],
           updateOn: 'change',
         }),
-        visibility: new FormControl(this.defaultVisibility, {}),
+        visibility: new UntypedFormControl(this.defaultVisibility, {}),
       })
     )
     this.websites.push({
@@ -262,18 +262,18 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
     }
   }
 
-  private listDuplicateInputKeys(formGroup: FormGroup) {
+  private listDuplicateInputKeys(formGroup: UntypedFormGroup) {
     const formGroupKeysWithDuplicatedValues: string[] = []
 
     // Add errors error on duplicated urls
     Object.keys(formGroup.controls).forEach((keyX) => {
-      let urlControlX: string = (formGroup.controls[keyX] as FormGroup)
+      let urlControlX: string = (formGroup.controls[keyX] as UntypedFormGroup)
         .controls['url'].value
       urlControlX = urlControlX.toLowerCase().trim()
       urlControlX = this.removeProtocol(urlControlX)
 
       Object.keys(formGroup.controls).forEach((keyY) => {
-        let urlControlY: string = (formGroup.controls[keyY] as FormGroup)
+        let urlControlY: string = (formGroup.controls[keyY] as UntypedFormGroup)
           .controls['url'].value
         urlControlY = urlControlY.toLowerCase().trim()
         urlControlY = this.removeProtocol(urlControlY)
@@ -292,11 +292,11 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
 
   private removeDuplicateErrorFromOtherControls(
     formGroupKeysWithDuplicatedValues: string[],
-    websitesForm: FormGroup = new FormGroup({})
+    websitesForm: UntypedFormGroup = new UntypedFormGroup({})
   ): void {
     Object.keys(websitesForm.controls).forEach((currentControlKey) => {
-      const urlControl = (websitesForm.controls[currentControlKey] as FormGroup)
-        .controls.url as FormControl
+      const urlControl = (websitesForm.controls[currentControlKey] as UntypedFormGroup)
+        .controls.url as UntypedFormControl
       if (
         formGroupKeysWithDuplicatedValues.indexOf(currentControlKey) === -1 &&
         urlControl.errors &&

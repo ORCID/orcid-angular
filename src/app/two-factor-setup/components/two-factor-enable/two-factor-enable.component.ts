@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core'
 import { first } from 'rxjs/operators'
-import { FormControl, FormGroup, Validators } from '@angular/forms'
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms'
 import { environment } from '../../../../environments/environment'
 import {
   MAT_TOOLTIP_DEFAULT_OPTIONS,
@@ -33,7 +33,7 @@ export class TwoFactorEnableComponent implements OnInit {
     backupCodesClipboard?: string
   }>()
   environment = environment
-  twoFactorForm: FormGroup
+  twoFactorForm: UntypedFormGroup
   showTextCode = false
   showBadVerificationCode = false
   loading = false
@@ -41,8 +41,8 @@ export class TwoFactorEnableComponent implements OnInit {
   constructor(private _twoFactorService: TwoFactorAuthenticationService) {}
 
   ngOnInit(): void {
-    this.twoFactorForm = new FormGroup({
-      verificationCode: new FormControl('', [
+    this.twoFactorForm = new UntypedFormGroup({
+      verificationCode: new UntypedFormControl('', [
         Validators.required,
         Validators.minLength(6),
         Validators.maxLength(6),
@@ -85,7 +85,7 @@ export class TwoFactorEnableComponent implements OnInit {
         this.showTextCode = true
         this.twoFactorForm.addControl(
           'textCode',
-          new FormControl({ value: result.secret, disabled: true }, {})
+          new UntypedFormControl({ value: result.secret, disabled: true }, {})
         )
       })
   }

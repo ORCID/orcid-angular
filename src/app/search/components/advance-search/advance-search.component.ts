@@ -11,7 +11,7 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core'
-import { FormControl, FormGroup, Validators } from '@angular/forms'
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { ORCID_REGEXP_CASE_INSENSITIVE } from 'src/app/constants'
@@ -38,7 +38,7 @@ export class AdvanceSearchComponent implements OnInit, OnChanges {
   ngOrcidShowAdvanceSearch = $localize`:@@search.showAdvanceSearch:Show advanced search form`
   ngOrcidHideAdvanceSearch = $localize`:@@search.hideAdvanceSearch:Hide advanced search form`
 
-  advanceSearch: FormGroup
+  advanceSearch: UntypedFormGroup
   constructor(
     _platform: PlatformInfoService,
     @Optional() private _search: SearchService,
@@ -49,14 +49,14 @@ export class AdvanceSearchComponent implements OnInit, OnChanges {
     _platform.get().subscribe((data) => {
       this.isAPhoneScreen = data.columns4
     })
-    this.advanceSearch = new FormGroup(
+    this.advanceSearch = new UntypedFormGroup(
       {
-        firstName: new FormControl('', []),
-        lastName: new FormControl('', []),
-        institution: new FormControl('', []),
-        keyword: new FormControl('', []),
-        otherFields: new FormControl('', []),
-        orcid: new FormControl('', [
+        firstName: new UntypedFormControl('', []),
+        lastName: new UntypedFormControl('', []),
+        institution: new UntypedFormControl('', []),
+        keyword: new UntypedFormControl('', []),
+        otherFields: new UntypedFormControl('', []),
+        orcid: new UntypedFormControl('', [
           Validators.pattern(ORCID_REGEXP_CASE_INSENSITIVE),
         ]),
       },

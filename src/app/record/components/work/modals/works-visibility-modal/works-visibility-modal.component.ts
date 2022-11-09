@@ -4,7 +4,7 @@ import { Work } from '../../../../../types/record-works.endpoint'
 import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import { RecordWorksService } from '../../../../../core/record-works/record-works.service'
-import { FormControl, FormGroup, Validators } from '@angular/forms'
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms'
 import { PlatformInfoService } from '../../../../../cdk/platform-info'
 import { takeUntil } from 'rxjs/operators'
 import { VisibilityStrings } from 'src/app/types/common.endpoint'
@@ -18,7 +18,7 @@ import { RecordService } from 'src/app/core/record/record.service'
 export class WorksVisibilityModalComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
-  worksForm: FormGroup
+  worksForm: UntypedFormGroup
   defaultVisibility: VisibilityStrings
   isMobile: boolean
   loadingWorks = false
@@ -41,8 +41,8 @@ export class WorksVisibilityModalComponent implements OnInit, OnDestroy {
         this.isMobile = platform.columns4 || platform.columns8
       })
 
-    this.worksForm = new FormGroup({
-      visibility: new FormControl(this.defaultVisibility, {
+    this.worksForm = new UntypedFormGroup({
+      visibility: new UntypedFormControl(this.defaultVisibility, {
         validators: [Validators.required],
       }),
     })

@@ -9,7 +9,7 @@ import { Overlay } from '@angular/cdk/overlay'
 import { RouterTestingModule } from '@angular/router/testing'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { WINDOW_PROVIDERS } from '../../../cdk/window'
-import { FormBuilder } from '@angular/forms'
+import { UntypedFormBuilder } from '@angular/forms'
 import { MatDialog, MatDialogModule } from '@angular/material/dialog'
 import { RegisterService } from '../../../core/register/register.service'
 import { UserService } from '../../../core'
@@ -25,7 +25,7 @@ describe('RegisterComponent', () => {
       declarations: [RegisterComponent],
       providers: [
         WINDOW_PROVIDERS,
-        FormBuilder,
+        UntypedFormBuilder,
         RegisterService,
         SearchService,
         UserService,

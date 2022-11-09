@@ -5,7 +5,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core'
-import { FormControl, FormGroup, Validators } from '@angular/forms'
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms'
 import { MatChip } from '@angular/material/chips'
 import { matFormFieldAnimations } from '@angular/material/form-field'
 import { Observable } from 'rxjs'
@@ -33,10 +33,10 @@ export class PasswordRecoveryComponent implements OnInit, AfterViewInit {
   submitted = false
   @ViewChild('passwordChip') passwordChip: MatChip
 
-  emailFormControl = new FormControl('', [Validators.required])
-  typeFormControl = new FormControl('resetPassword', [Validators.required])
+  emailFormControl = new UntypedFormControl('', [Validators.required])
+  typeFormControl = new UntypedFormControl('resetPassword', [Validators.required])
 
-  recoveryForm = new FormGroup({
+  recoveryForm = new UntypedFormGroup({
     type: this.typeFormControl,
     email: this.emailFormControl,
   })

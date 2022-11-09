@@ -6,7 +6,7 @@ import {
   OnInit,
 } from '@angular/core'
 import { Subject } from 'rxjs'
-import { FormControl, FormGroup } from '@angular/forms'
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms'
 import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../cdk/modal/modal/modal.component'
 import { PlatformInfoService } from '../../../../cdk/platform-info'
@@ -55,7 +55,7 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
   selectedItems: string[] = []
   selectAll: false
 
-  deleteForm: FormGroup
+  deleteForm: UntypedFormGroup
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
@@ -70,8 +70,8 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.deleteForm = new FormGroup({})
-    const group: { [key: string]: FormGroup } = {}
+    this.deleteForm = new UntypedFormGroup({})
+    const group: { [key: string]: UntypedFormGroup } = {}
 
     this._platform
       .get()
@@ -83,11 +83,11 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
     if (this.item && this.putCodes?.length === 0) {
       this.items.push(this.item)
       this.items.forEach((i) => {
-        group[i?.putCode?.value || i.putCode] = new FormGroup({
-          checked: new FormControl(false),
+        group[i?.putCode?.value || i.putCode] = new UntypedFormGroup({
+          checked: new UntypedFormControl(false),
         })
       })
-      this.deleteForm = new FormGroup(group)
+      this.deleteForm = new UntypedFormGroup(group)
     }
 
     if (this.putCodes.length > 0) {
@@ -97,11 +97,11 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
         .subscribe((works: Work[]) => {
           works.forEach((w) => {
             this.items.push(w)
-            group[w.putCode.value] = new FormGroup({
-              checked: new FormControl(false),
+            group[w.putCode.value] = new UntypedFormGroup({
+              checked: new UntypedFormControl(false),
             })
           })
-          this.deleteForm = new FormGroup(group)
+          this.deleteForm = new UntypedFormGroup(group)
           this.loadingItems = false
         })
     }

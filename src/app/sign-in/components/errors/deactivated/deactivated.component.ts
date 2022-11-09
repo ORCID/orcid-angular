@@ -1,5 +1,5 @@
 import { Component, Inject, Input, OnInit } from '@angular/core'
-import { FormControl, FormGroup, Validators } from '@angular/forms'
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms'
 import { SignInService } from '../../../../core/sign-in/sign-in.service'
 import { WINDOW } from '../../../../cdk/window'
 import { OrcidValidators } from 'src/app/validators'
@@ -17,12 +17,12 @@ export class DeactivatedComponent implements OnInit {
   showReactivationSentError = false
   showReactivationSentErrorMessage: string
 
-  emailFormControl = new FormControl('', [
+  emailFormControl = new UntypedFormControl('', [
     Validators.required,
     OrcidValidators.emailGeneric,
   ])
 
-  deactivatedForm = new FormGroup({
+  deactivatedForm = new UntypedFormGroup({
     email: this.emailFormControl,
   })
 

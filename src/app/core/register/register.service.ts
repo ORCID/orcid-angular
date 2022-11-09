@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { FormGroup } from '@angular/forms'
+import { UntypedFormGroup } from '@angular/forms'
 import { Observable } from 'rxjs'
 import { catchError, first, map, retry, switchMap } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
@@ -75,9 +75,9 @@ export class RegisterService extends _RegisterServiceMixingBase {
   }
 
   register(
-    StepA: FormGroup,
-    StepB: FormGroup,
-    StepC: FormGroup,
+    StepA: UntypedFormGroup,
+    StepB: UntypedFormGroup,
+    StepC: UntypedFormGroup,
     reactivation: ReactivationLocal,
     requestInfoForm?: RequestInfoForm,
     updateUserService = true

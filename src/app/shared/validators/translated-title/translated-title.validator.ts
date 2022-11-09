@@ -1,8 +1,8 @@
-import { FormGroup } from '@angular/forms'
+import { UntypedFormGroup } from '@angular/forms'
 
 export function translatedTitleValidator({
   value,
-}: FormGroup): { [key: string]: any } {
+}: UntypedFormGroup): { [key: string]: any } {
   const translatedTitleContent = value?.translatedTitleContent
   const translatedTitleLanguage = value?.translatedTitleLanguage
   if (translatedTitleContent && !translatedTitleLanguage) {

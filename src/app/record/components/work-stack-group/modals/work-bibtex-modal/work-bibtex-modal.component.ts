@@ -5,7 +5,7 @@ import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import { RecordWorksService } from '../../../../../core/record-works/record-works.service'
 import { Work } from '../../../../../types/record-works.endpoint'
 import { first } from 'rxjs/operators'
-import { FormControl, FormGroup } from '@angular/forms'
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms'
 import bibtexParse from '@orcid/bibtex-parse-js'
 import latexParse from 'src/assets/scripts/latexParse.js'
 import { WINDOW } from 'src/app/cdk/window'
@@ -28,7 +28,7 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
 
   @Input() userRecord: UserRecord
 
-  importForm: FormGroup
+  importForm: UntypedFormGroup
   loadingWorks = false
   bibtexErrorParsingText = ''
   bibtexErrorParsing = false
@@ -36,7 +36,7 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
   worksFromBibtex: Work[] = []
   selectedWorks: Work[] = []
   selectAll: false
-  group: { [key: string]: FormGroup } = {}
+  group: { [key: string]: UntypedFormGroup } = {}
   addedWorkCount = 0
   isAnInvalidWork = false
 
@@ -115,11 +115,11 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
                           w.putCode = {
                             value: newPutCode,
                           }
-                          that.group[newPutCode] = new FormGroup({
-                            checked: new FormControl(false),
+                          that.group[newPutCode] = new UntypedFormGroup({
+                            checked: new UntypedFormControl(false),
                           })
                         })
-                        that.importForm = new FormGroup(that.group)
+                        that.importForm = new UntypedFormGroup(that.group)
                         that.loadingWorks = false
                       })
                   }

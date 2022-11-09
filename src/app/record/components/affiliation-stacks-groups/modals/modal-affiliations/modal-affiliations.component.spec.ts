@@ -14,7 +14,7 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
-import { FormBuilder } from '@angular/forms'
+import { UntypedFormBuilder } from '@angular/forms'
 import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import { SharedModule } from '../../../../../shared/shared.module'
 
@@ -35,7 +35,7 @@ describe('ModalAffiliationsComponent', () => {
         { provide: MatDialogRef, useValue: {} },
         { provide: MAT_DIALOG_DATA, useValue: {} },
         WINDOW_PROVIDERS,
-        FormBuilder,
+        UntypedFormBuilder,
         PlatformInfoService,
         ErrorHandlerService,
         SnackbarService,

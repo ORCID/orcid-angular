@@ -8,7 +8,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core'
-import { FormControl, FormGroup } from '@angular/forms'
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms'
 import { ErrorStateMatcher } from '@angular/material/core'
 import { MatSelect, MatSelectChange } from '@angular/material/select'
 import { WorkIdType, WorkRelationships } from 'src/app/types/works.endpoint'
@@ -24,7 +24,7 @@ import { WorkIdType, WorkRelationships } from 'src/app/types/works.endpoint'
 export class WorkExternalIdentifiersEditComponent
   implements OnInit, AfterViewInit {
   @ViewChild('externalIdentifierType') externalIdentifierTypeRef: MatSelect
-  @Input() externalIdForm: FormGroup
+  @Input() externalIdForm: UntypedFormGroup
   @Input() index: number
   @Input() workIdTypes: WorkIdType[]
   @Output() cancelEvent = new EventEmitter<void>()
@@ -63,7 +63,7 @@ export class WorkExternalIdentifiersEditComponent
 }
 
 export class WorkExternalIdErrorMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null): boolean {
+  isErrorState(control: UntypedFormControl | null): boolean {
     return (
       (control.hasError('required') || control.hasError('validFormat')) &&
       control.touched

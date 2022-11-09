@@ -7,7 +7,7 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core'
-import { AbstractControl, FormControl, FormGroup } from '@angular/forms'
+import { AbstractControl, UntypedFormControl, UntypedFormGroup } from '@angular/forms'
 import { OrcidValidators } from 'src/app/validators'
 
 import { ErrorStateMatcherForFormLevelErrors } from '../../ErrorStateMatcherForFormLevelErrors'
@@ -22,7 +22,7 @@ export class FormPersonalAdditionalEmailsComponent implements AfterViewInit {
   labelDeleteEmail = $localize`:@@register.ariaLabelDeleteEmail:delete email`
   labelClose = $localize`:@@register.ariaLabelClose:close`
   @ViewChildren('emailInput') inputs: QueryList<ElementRef>
-  @Input() additionalEmails: FormGroup
+  @Input() additionalEmails: UntypedFormGroup
   additionalEmailsPopoverTrigger
   additionalEmailsCount = 1
 
@@ -65,7 +65,7 @@ export class FormPersonalAdditionalEmailsComponent implements AfterViewInit {
     const controlName = ++this.additionalEmailsCount
     this.additionalEmails.addControl(
       this.zeroPad(controlName, 2),
-      new FormControl('', {
+      new UntypedFormControl('', {
         validators: [OrcidValidators.email],
       })
     )

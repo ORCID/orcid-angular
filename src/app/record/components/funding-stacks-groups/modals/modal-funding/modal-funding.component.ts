@@ -2,11 +2,11 @@ import { Component, Inject, OnDestroy, OnInit, Input } from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
-  FormArray,
+  UntypedFormArray,
 } from '@angular/forms'
 import {
   dateMonthYearValidator,
@@ -69,7 +69,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
   @Input() options: { createACopy: boolean }
 
   platform: PlatformInfo
-  fundingForm: FormGroup
+  fundingForm: UntypedFormGroup
   showTranslationTitle = false
   languageMap = LanguageMap
   currencyCodeMap = CurrencyCodeMap
@@ -92,7 +92,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
   countryForDisplay = ''
   amount = ''
   currencyCode = ''
-  grantsArray: FormArray
+  grantsArray: UntypedFormArray
   grantsArrayDisplayState: boolean[] = []
 
   disambiguatedFundingSourceId = ''
@@ -136,7 +136,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
     private _userService: UserService,
     private _recordCountryService: RecordCountriesService,
     private _fundingsService: RecordFundingsService,
-    private _formBuilder: FormBuilder,
+    private _formBuilder: UntypedFormBuilder,
     private _snackBar: SnackbarService,
     private _record: RecordService
   ) {
@@ -150,15 +150,15 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
     this.initialValues()
     this.fundingForm = this._formBuilder.group(
       {
-        fundingType: new FormControl(this.fundingType, {
+        fundingType: new UntypedFormControl(this.fundingType, {
           validators: [Validators.required],
         }),
-        fundingSubtype: new FormControl(this.fundingSubtype, {
+        fundingSubtype: new UntypedFormControl(this.fundingSubtype, {
           validators: [
             Validators.maxLength(MAX_LENGTH_LESS_THAN_TWO_HUNDRED_FIFTY_FIVE),
           ],
         }),
-        fundingProjectTitle: new FormControl(this.fundingProjectTitle, {
+        fundingProjectTitle: new UntypedFormControl(this.fundingProjectTitle, {
           validators: [
             Validators.required,
             Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
@@ -166,7 +166,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
         }),
         translatedTitleGroup: this._formBuilder.group(
           {
-            translatedTitleContent: new FormControl('', {
+            translatedTitleContent: new UntypedFormControl('', {
               validators: [
                 Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
               ],
@@ -180,21 +180,21 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
             ],
           }
         ),
-        fundingProjectLink: new FormControl(this.fundingProjectLink, {
+        fundingProjectLink: new UntypedFormControl(this.fundingProjectLink, {
           validators: [
             Validators.pattern(URL_REGEXP),
             Validators.maxLength(MAX_LENGTH_LESS_THAN_TWO_THOUSAND),
           ],
         }),
-        description: new FormControl(this.description, {
+        description: new UntypedFormControl(this.description, {
           validators: [
             Validators.maxLength(MAX_LENGTH_LESS_THAN_FIVE_THOUSAND),
           ],
         }),
-        amount: new FormControl(this.amount, {
+        amount: new UntypedFormControl(this.amount, {
           validators: validateFundingAmount(),
         }),
-        currencyCode: new FormControl(this.currencyCode, {}),
+        currencyCode: new UntypedFormControl(this.currencyCode, {}),
         startDateGroup: this._formBuilder.group(
           {
             startDateMonth: [''],
@@ -209,29 +209,29 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
           },
           { validator: dateMonthYearValidator('endDate') }
         ),
-        agencyName: new FormControl(this.agencyName, {
+        agencyName: new UntypedFormControl(this.agencyName, {
           validators: [
             Validators.required,
             Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
           ],
         }),
-        city: new FormControl(this.city, {
+        city: new UntypedFormControl(this.city, {
           validators: [
             Validators.required,
             Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
           ],
         }),
-        region: new FormControl(this.region, {
+        region: new UntypedFormControl(this.region, {
           validators: [Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND)],
         }),
-        country: new FormControl(this.country, {
+        country: new UntypedFormControl(this.country, {
           validators: [
             Validators.required,
             Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
           ],
         }),
-        grants: new FormArray([]),
-        visibility: new FormControl(this.defaultVisibility, {
+        grants: new UntypedFormArray([]),
+        visibility: new UntypedFormControl(this.defaultVisibility, {
           validators: [Validators.required],
         }),
       },
@@ -239,7 +239,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
         validator: endDateMonthYearValidator(),
       }
     )
-    this.grantsArray = this.fundingForm.controls.grants as FormArray
+    this.grantsArray = this.fundingForm.controls.grants as UntypedFormArray
 
     if (this.funding) {
       this.initFormValues()
@@ -635,7 +635,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
   }
 
   private checkGrantsChanges(index: number) {
-    const formGroup = this.grantsArray.controls[index] as FormGroup
+    const formGroup = this.grantsArray.controls[index] as UntypedFormGroup
     formGroup.controls.grantNumber.valueChanges.subscribe((value) => {
       if (value) {
         formGroup.controls.grantNumber.addValidators(

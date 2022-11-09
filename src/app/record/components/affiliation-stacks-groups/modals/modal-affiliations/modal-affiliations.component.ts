@@ -2,7 +2,7 @@ import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core'
 import { EMPTY, of, Subject } from 'rxjs'
 import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms'
 
 import {
   PlatformInfo,
@@ -47,7 +47,7 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
   @Input() options: { createACopy: boolean }
 
   platform: PlatformInfo
-  affiliationForm: FormGroup
+  affiliationForm: UntypedFormGroup
   countryCodes: { key: string; value: string }[]
   loadingCountryCodes = true
   loadingAffiliations = true
@@ -94,7 +94,7 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
     public dialogRef: MatDialogRef<ModalComponent>,
     private _recordCountryService: RecordCountriesService,
     private _recordAffiliationService: RecordAffiliationService,
-    private _formBuilder: FormBuilder,
+    private _formBuilder: UntypedFormBuilder,
     private _snackbar: SnackbarService,
     private _record: RecordService
   ) {
@@ -109,28 +109,28 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
 
     this.affiliationForm = this._formBuilder.group(
       {
-        organization: new FormControl(this.organization, {
+        organization: new UntypedFormControl(this.organization, {
           validators: [
             Validators.required,
             Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
           ],
         }),
-        city: new FormControl(this.city, {
+        city: new UntypedFormControl(this.city, {
           validators: [
             Validators.required,
             Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
           ],
         }),
-        region: new FormControl(this.region, {
+        region: new UntypedFormControl(this.region, {
           validators: [Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND)],
         }),
-        country: new FormControl('', {
+        country: new UntypedFormControl('', {
           validators: [Validators.required],
         }),
-        department: new FormControl(this.department, {
+        department: new UntypedFormControl(this.department, {
           validators: [Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND)],
         }),
-        title: new FormControl(this.title, {
+        title: new UntypedFormControl(this.title, {
           validators: [Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND)],
         }),
         startDateGroup: this._formBuilder.group(
@@ -149,13 +149,13 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
           },
           { validator: dateValidator('endDate') }
         ),
-        link: new FormControl(this.link, {
+        link: new UntypedFormControl(this.link, {
           validators: [
             Validators.pattern(URL_REGEXP),
             Validators.maxLength(MAX_LENGTH_LESS_THAN_TWO_THOUSAND),
           ],
         }),
-        visibility: new FormControl(this.defaultVisibility, {
+        visibility: new UntypedFormControl(this.defaultVisibility, {
           validators: [Validators.required],
         }),
       },
@@ -310,7 +310,7 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
   }
 
   formToBackendAffiliation(
-    affiliationForm: FormGroup
+    affiliationForm: UntypedFormGroup
   ): Observable<Affiliation> {
     const affiliationToSave = {
       visibility: {

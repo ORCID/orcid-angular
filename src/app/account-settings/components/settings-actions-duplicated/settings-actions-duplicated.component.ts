@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core'
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog'
 import { of, throwError } from 'rxjs'
 import { switchMap, take } from 'rxjs/operators'
@@ -21,14 +21,14 @@ export class SettingsActionsDuplicatedComponent implements OnInit {
   userSession: UserSession
   constructor(
     private _duplicateService: AccountActionsDuplicatedService,
-    private _form: FormBuilder,
+    private _form: UntypedFormBuilder,
     private _dialog: MatDialog,
     private _user: UserService
   ) {}
   @Output() loading = new EventEmitter<boolean>()
   @Output() close = new EventEmitter()
 
-  form: FormGroup
+  form: UntypedFormGroup
   errors: any[]
   showBadRecoveryCode = false
   showBadVerificationCode = false

@@ -9,7 +9,7 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core'
-import { FormControl, FormGroup, Validators } from '@angular/forms'
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { cloneDeep } from 'lodash'
 import { Subject } from 'rxjs'
@@ -47,8 +47,8 @@ export class ModalNameComponent implements OnInit, OnDestroy {
 
   id: string
   platform: PlatformInfo
-  namesForm: FormGroup
-  otherNamesForm: FormGroup
+  namesForm: UntypedFormGroup
+  otherNamesForm: UntypedFormGroup
   userRecord: UserRecord
   userSession: UserSession
   otherNames: Assertion[]
@@ -124,21 +124,21 @@ export class ModalNameComponent implements OnInit, OnDestroy {
     otherNamesEndpointJson: OtherNamesEndPoint
   ) {
     const otherNames = otherNamesEndpointJson.otherNames
-    const group: { [key: string]: FormGroup } = {}
+    const group: { [key: string]: UntypedFormGroup } = {}
 
     otherNames.forEach((otherName) => {
-      group[otherName.putCode] = new FormGroup({
-        otherName: new FormControl(
+      group[otherName.putCode] = new UntypedFormGroup({
+        otherName: new UntypedFormControl(
           {
             value: otherName.content,
             disabled: otherName.source !== this.id,
           },
           [Validators.maxLength(this.otherNameMaxLength)]
         ),
-        visibility: new FormControl(otherName.visibility.visibility, {}),
+        visibility: new UntypedFormControl(otherName.visibility.visibility, {}),
       })
     })
-    this.namesForm = new FormGroup(group)
+    this.namesForm = new UntypedFormGroup(group)
 
     const givenNames = namesEndPoint.givenNames
       ? namesEndPoint.givenNames.value
@@ -153,7 +153,7 @@ export class ModalNameComponent implements OnInit, OnDestroy {
 
     this.namesForm.addControl(
       'givenNames',
-      new FormControl(givenNames, {
+      new UntypedFormControl(givenNames, {
         validators: [
           Validators.required,
           OrcidValidators.illegalName,
@@ -163,7 +163,7 @@ export class ModalNameComponent implements OnInit, OnDestroy {
     )
     this.namesForm.addControl(
       'familyName',
-      new FormControl(familyName, {
+      new UntypedFormControl(familyName, {
         validators: [
           OrcidValidators.illegalName,
           Validators.maxLength(this.nameMaxLength),
@@ -172,14 +172,14 @@ export class ModalNameComponent implements OnInit, OnDestroy {
     )
     this.namesForm.addControl(
       'publishedName',
-      new FormControl(publishedName, {
+      new UntypedFormControl(publishedName, {
         validators: [Validators.maxLength(this.nameMaxLength)],
       })
     )
-    this.namesForm.addControl('visibility', new FormControl(visibilityName, {}))
+    this.namesForm.addControl('visibility', new UntypedFormControl(visibilityName, {}))
   }
 
-  formToBackendNames(namesForm: FormGroup): any {
+  formToBackendNames(namesForm: UntypedFormGroup): any {
     const visibility = namesForm.get('visibility').value
     return {
       errors: [],
@@ -192,7 +192,7 @@ export class ModalNameComponent implements OnInit, OnDestroy {
     } as NamesEndPoint
   }
 
-  formToBackendOtherNames(namesForm: FormGroup): OtherNamesEndPoint {
+  formToBackendOtherNames(namesForm: UntypedFormGroup): OtherNamesEndPoint {
     const otherNames = {
       errors: [],
       otherNames: [],
@@ -258,11 +258,11 @@ export class ModalNameComponent implements OnInit, OnDestroy {
   addOtherName() {
     this.namesForm.addControl(
       'new-' + this.addedOtherNameCount,
-      new FormGroup({
-        otherName: new FormControl('', [
+      new UntypedFormGroup({
+        otherName: new UntypedFormControl('', [
           Validators.maxLength(this.otherNameMaxLength),
         ]),
-        visibility: new FormControl(this.otherNamesDefaultVisibility),
+        visibility: new UntypedFormControl(this.otherNamesDefaultVisibility),
       })
     )
     this.otherNames.push({

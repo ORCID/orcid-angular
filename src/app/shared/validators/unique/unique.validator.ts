@@ -1,7 +1,7 @@
 import {
   AbstractControl,
-  FormArray,
-  FormGroup,
+  UntypedFormArray,
+  UntypedFormGroup,
   ValidationErrors,
   ValidatorFn,
 } from '@angular/forms'
@@ -12,10 +12,10 @@ export function unique(
 ): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     if (control.value) {
-      const parentFormGroup: FormArray | FormGroup = control.parent
-      const formArray: FormArray | FormGroup = parentFormGroup?.parent
+      const parentFormGroup: UntypedFormArray | UntypedFormGroup = control.parent
+      const formArray: UntypedFormArray | UntypedFormGroup = parentFormGroup?.parent
 
-      if (formArray instanceof FormArray) {
+      if (formArray instanceof UntypedFormArray) {
         for (const formGroup of formArray.controls) {
           if (formGroup !== parentFormGroup) {
             if (formGroup.get(controlName).hasError('unique')) {

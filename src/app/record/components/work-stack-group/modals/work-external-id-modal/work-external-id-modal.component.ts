@@ -14,7 +14,7 @@ import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import { RecordWorksService } from '../../../../../core/record-works/record-works.service'
 import { first } from 'rxjs/operators'
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms'
 import { EXTERNAL_ID_TYPE_WORK, URL_REGEXP } from '../../../../../constants'
 import { Work } from '../../../../../types/record-works.endpoint'
 import { WorkFormComponent } from '../../../work-form/work-form/work-form.component'
@@ -40,20 +40,20 @@ export class WorkExternalIdModalComponent
   loading = false
   recordImportWizardsOriginal: RecordImportWizard[]
   recordImportWizards: RecordImportWizard[]
-  externalIdentifierForm: FormGroup
+  externalIdentifierForm: UntypedFormGroup
   work: Work
   metadataNotFound = false
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
-    private _formBuilder: FormBuilder,
+    private _formBuilder: UntypedFormBuilder,
     private _recordWorksService: RecordWorksService,
     @Inject(WINDOW) private _window: Window
   ) {}
 
   ngOnInit(): void {
     this.externalIdentifierForm = this._formBuilder.group({
-      externalId: new FormControl(''),
+      externalId: new UntypedFormControl(''),
     })
     if (this.type === EXTERNAL_ID_TYPE_WORK.doi) {
       this.externalIdentifierForm.controls.externalId.setValidators([

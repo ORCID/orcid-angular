@@ -9,7 +9,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core'
-import { FormControl, FormGroup, Validators } from '@angular/forms'
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms'
 import { WINDOW } from '../../window'
 
 @Component({
@@ -33,19 +33,19 @@ export class TwoFactorAuthenticationFormComponent implements AfterViewInit {
 
   recoveryCode = false
 
-  verificationFormControl = new FormControl('', [
+  verificationFormControl = new UntypedFormControl('', [
     Validators.required,
     Validators.minLength(6),
     Validators.maxLength(6),
   ])
 
-  recoveryCodeFormControl = new FormControl('', [
+  recoveryCodeFormControl = new UntypedFormControl('', [
     Validators.required,
     Validators.maxLength(10),
     Validators.minLength(10),
   ])
 
-  twoFactorForm = new FormGroup({
+  twoFactorForm = new UntypedFormGroup({
     verificationCode: this.verificationFormControl,
     recoveryCode: this.recoveryCodeFormControl,
   })

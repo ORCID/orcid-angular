@@ -2,9 +2,9 @@ import { Component, Inject, Input, OnInit } from '@angular/core'
 import {
   AbstractControl,
   AsyncValidatorFn,
-  FormArray,
-  FormBuilder,
-  FormGroup,
+  UntypedFormArray,
+  UntypedFormBuilder,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms'
 import {
@@ -67,7 +67,7 @@ export class WorkFormComponent implements OnInit {
   $workTypeUpdateEvent = new Subject<WorkIdType>()
 
   loading = true
-  workForm: FormGroup
+  workForm: UntypedFormGroup
   platform: PlatformInfo
 
   showTranslationTitle = false
@@ -92,7 +92,7 @@ export class WorkFormComponent implements OnInit {
 
   dynamicTitle = WorksTitleName.journalTitle
   workIdTypes: WorkIdType[]
-  workIdentifiersFormArray: FormArray = new FormArray([])
+  workIdentifiersFormArray: UntypedFormArray = new UntypedFormArray([])
   workIdentifiersFormArrayDisplayState: boolean[] = []
   externalIdentifier: string
 
@@ -118,7 +118,7 @@ export class WorkFormComponent implements OnInit {
   countryCodes: { key: string; value: string }[]
 
   constructor(
-    private _fb: FormBuilder,
+    private _fb: UntypedFormBuilder,
     private _platform: PlatformInfoService,
     private _workService: RecordWorksService,
     private _dialogRef: MatDialogRef<ModalComponent>,
@@ -237,7 +237,7 @@ export class WorkFormComponent implements OnInit {
         },
         { validator: workCitationValidator }
       ),
-      workIdentifiers: new FormArray([]),
+      workIdentifiers: new UntypedFormArray([]),
       languageCode: [currentWork?.languageCode?.value || '', []],
       countryCode: [currentWork?.countryCode?.value || '', []],
 
@@ -248,7 +248,7 @@ export class WorkFormComponent implements OnInit {
       ],
     })
     this.workIdentifiersFormArray = this.workForm.controls
-      .workIdentifiers as FormArray
+      .workIdentifiers as UntypedFormArray
 
     currentWork?.workExternalIdentifiers.forEach((workExternalId) => {
       this.addOtherWorkId(workExternalId)
@@ -256,7 +256,7 @@ export class WorkFormComponent implements OnInit {
   }
 
   private externalIdentifierTypeAsyncValidator(
-    formGroup: FormGroup,
+    formGroup: UntypedFormGroup,
     externalIdentifierType: string
   ): AsyncValidatorFn {
     return (control: AbstractControl) => {
@@ -308,9 +308,9 @@ export class WorkFormComponent implements OnInit {
 
   private checkWorkIdentifiersChanges(
     index: number,
-    workIdentifiersArray: FormArray
+    workIdentifiersArray: UntypedFormArray
   ) {
-    const formGroup = this.workIdentifiersFormArray.controls[index] as FormGroup
+    const formGroup = this.workIdentifiersFormArray.controls[index] as UntypedFormGroup
     merge(
       this.$workTypeUpdateEvent,
       formGroup.controls.externalIdentifierType.valueChanges
@@ -342,7 +342,7 @@ export class WorkFormComponent implements OnInit {
 
   private manageWorkIdentifierTypeUpdates(
     externalIdentifierType: any,
-    formGroup: FormGroup
+    formGroup: UntypedFormGroup
   ) {
     if (externalIdentifierType !== '') {
       formGroup.controls.externalIdentifierId.addValidators(Validators.required)
@@ -371,7 +371,7 @@ export class WorkFormComponent implements OnInit {
     }
   }
 
-  private manageWorkIdentifierIdUpdates(value: any, formGroup: FormGroup) {
+  private manageWorkIdentifierIdUpdates(value: any, formGroup: UntypedFormGroup) {
     if (value) {
       formGroup.controls.externalIdentifierType.addValidators(
         Validators.required
@@ -392,10 +392,10 @@ export class WorkFormComponent implements OnInit {
   }
 
   private manageWorkIdentyfiersRelationshipUpdates(
-    workIdentifiersArray: FormArray,
-    formGroup: FormGroup
+    workIdentifiersArray: UntypedFormArray,
+    formGroup: UntypedFormGroup
   ) {
-    workIdentifiersArray.controls.forEach((element: FormGroup) => {
+    workIdentifiersArray.controls.forEach((element: UntypedFormGroup) => {
       // Updates the value and validity of all the external identifier relationships on the array
       // Since those depend on each other to validate the `versionOfInvalidRelationship` validator
       if (
@@ -412,7 +412,7 @@ export class WorkFormComponent implements OnInit {
   }
 
   private manageWorkIdentifierUrlUpdates(
-    formGroup: FormGroup,
+    formGroup: UntypedFormGroup,
     value: string
   ): void {
     if (value) {
@@ -672,7 +672,7 @@ export class WorkFormComponent implements OnInit {
   }
 
   private getContributors(): Contributor[] {
-    const contributorsFormArray = this.workForm.get('contributors') as FormArray
+    const contributorsFormArray = this.workForm.get('contributors') as UntypedFormArray
     return contributorsFormArray?.controls.map((c) => {
       const contributor = {
         creditName: {
@@ -683,14 +683,14 @@ export class WorkFormComponent implements OnInit {
           path: c.get(['contributorOrcid', 'path'])?.value,
         },
       } as Contributor
-      let rolesFormArray: FormArray = null
+      let rolesFormArray: UntypedFormArray = null
       if (
         c.get(['contributorOrcid', 'path'])?.value ===
         this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID
       ) {
-        rolesFormArray = this.workForm.get('roles') as FormArray
+        rolesFormArray = this.workForm.get('roles') as UntypedFormArray
       } else {
-        rolesFormArray = c.get('roles') as FormArray
+        rolesFormArray = c.get('roles') as UntypedFormArray
       }
       const roles = rolesFormArray?.controls
         ?.filter(

@@ -1,7 +1,7 @@
 import { Component, DoCheck, forwardRef, OnInit } from '@angular/core'
 import {
-  FormControl,
-  FormGroup,
+  UntypedFormControl,
+  UntypedFormGroup,
   NG_ASYNC_VALIDATORS,
   NG_VALUE_ACCESSOR,
   Validators,
@@ -35,7 +35,7 @@ export class FormVisibilityComponent
   implements OnInit, DoCheck {
   visibilityOptions = VISIBILITY_OPTIONS
   errorState = false
-  activitiesVisibilityDefault = new FormControl('', Validators.required)
+  activitiesVisibilityDefault = new UntypedFormControl('', Validators.required)
   constructor(
     private _register: RegisterService,
     private _errorStateMatcher: ErrorStateMatcher
@@ -43,7 +43,7 @@ export class FormVisibilityComponent
     super()
   }
   ngOnInit() {
-    this.form = new FormGroup({
+    this.form = new UntypedFormGroup({
       activitiesVisibilityDefault: this.activitiesVisibilityDefault,
     })
   }
@@ -59,7 +59,7 @@ export class FormVisibilityComponent
   registerOnChange(fn: any) {
     this.form.valueChanges.subscribe((value) => {
       const registerForm = this._register.formGroupToActivitiesVisibilityForm(
-        this.form as FormGroup
+        this.form as UntypedFormGroup
       )
       fn(registerForm)
     })
