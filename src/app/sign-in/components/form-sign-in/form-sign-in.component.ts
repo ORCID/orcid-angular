@@ -11,7 +11,11 @@ import {
   Output,
   ViewChild,
 } from '@angular/core'
-import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms'
+import {
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { catchError, first, map, takeUntil } from 'rxjs/operators'
 import { isRedirectToTheAuthorizationPage } from 'src/app/constants'

@@ -101,7 +101,8 @@ describe('ModalFundingComponent', () => {
 
     await fixture.whenStable()
 
-    const grantsArray = component.fundingForm.controls.grants as UntypedFormArray
+    const grantsArray = component.fundingForm.controls
+      .grants as UntypedFormArray
     const grant = grantsArray.controls[0] as UntypedFormGroup
     grant.get('grantNumber').setValue('1234')
 

@@ -10,7 +10,10 @@
 
   .drag-placeholder {
     min-height: 60px;
-    background-color: mat.get-color-from-palette($background, brand-primary-lightest);
+    background-color: mat.get-color-from-palette(
+      $background,
+      brand-primary-lightest
+    );
     border: dashed 1px mat.get-color-from-palette($foreground, brand-primary);
     transition: transform 250ms cubic-bezier(0, 0, 0, 1);
   }
@@ -31,10 +34,16 @@
   }
 
   .notice-panel {
-    border-color: mat.get-color-from-palette($foreground, 'state-notice-dark') !important;
+    border-color: mat.get-color-from-palette(
+      $foreground,
+      'state-notice-dark'
+    ) !important;
 
     mat-icon {
-      color: mat.get-color-from-palette($foreground, 'state-notice-dark') !important;
+      color: mat.get-color-from-palette(
+        $foreground,
+        'state-notice-dark'
+      ) !important;
     }
   }
 }

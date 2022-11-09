@@ -58,7 +58,14 @@ describe('WorkDoiBibtexModalComponent', () => {
         { provide: RecordWorksService, useValue: fakeRecordWorksService },
         { provide: MatDialogRef, useValue: {} },
         { provide: MAT_DIALOG_DATA, useValue: {} },
-        { provide: TogglzService, useValue: {getStateOf: (x) => {return of(true)} } },
+        {
+          provide: TogglzService,
+          useValue: {
+            getStateOf: (x) => {
+              return of(true)
+            },
+          },
+        },
 
         WINDOW_PROVIDERS,
         PlatformInfoService,
@@ -111,8 +118,8 @@ describe('WorkDoiBibtexModalComponent', () => {
 
     await fixture.detectChanges()
 
-    console.log(component.worksFromBibtex);
-    
+    console.log(component.worksFromBibtex)
+
     const workWithContributors = component.worksFromBibtex[3]
     const contributors = workWithContributors.contributorsGroupedByOrcid
     const authors = filterContributorsByRole(contributors, 'author')

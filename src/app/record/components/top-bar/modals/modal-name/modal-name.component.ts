@@ -9,7 +9,11 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core'
-import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms'
+import {
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { cloneDeep } from 'lodash'
 import { Subject } from 'rxjs'
@@ -176,7 +180,10 @@ export class ModalNameComponent implements OnInit, OnDestroy {
         validators: [Validators.maxLength(this.nameMaxLength)],
       })
     )
-    this.namesForm.addControl('visibility', new UntypedFormControl(visibilityName, {}))
+    this.namesForm.addControl(
+      'visibility',
+      new UntypedFormControl(visibilityName, {})
+    )
   }
 
   formToBackendNames(namesForm: UntypedFormGroup): any {

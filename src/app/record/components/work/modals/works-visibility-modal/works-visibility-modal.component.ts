@@ -4,7 +4,11 @@ import { Work } from '../../../../../types/record-works.endpoint'
 import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import { RecordWorksService } from '../../../../../core/record-works/record-works.service'
-import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms'
+import {
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms'
 import { PlatformInfoService } from '../../../../../cdk/platform-info'
 import { takeUntil } from 'rxjs/operators'
 import { VisibilityStrings } from 'src/app/types/common.endpoint'

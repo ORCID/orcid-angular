@@ -9,7 +9,10 @@
   $background: map-get($theme, background);
 
   .info {
-    color: mat.get-color-from-palette($foreground, 'state-notice-dark') !important;
+    color: mat.get-color-from-palette(
+      $foreground,
+      'state-notice-dark'
+    ) !important;
   }
 }
 

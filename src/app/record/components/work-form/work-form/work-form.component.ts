@@ -310,7 +310,9 @@ export class WorkFormComponent implements OnInit {
     index: number,
     workIdentifiersArray: UntypedFormArray
   ) {
-    const formGroup = this.workIdentifiersFormArray.controls[index] as UntypedFormGroup
+    const formGroup = this.workIdentifiersFormArray.controls[
+      index
+    ] as UntypedFormGroup
     merge(
       this.$workTypeUpdateEvent,
       formGroup.controls.externalIdentifierType.valueChanges
@@ -371,7 +373,10 @@ export class WorkFormComponent implements OnInit {
     }
   }
 
-  private manageWorkIdentifierIdUpdates(value: any, formGroup: UntypedFormGroup) {
+  private manageWorkIdentifierIdUpdates(
+    value: any,
+    formGroup: UntypedFormGroup
+  ) {
     if (value) {
       formGroup.controls.externalIdentifierType.addValidators(
         Validators.required
@@ -672,7 +677,9 @@ export class WorkFormComponent implements OnInit {
   }
 
   private getContributors(): Contributor[] {
-    const contributorsFormArray = this.workForm.get('contributors') as UntypedFormArray
+    const contributorsFormArray = this.workForm.get(
+      'contributors'
+    ) as UntypedFormArray
     return contributorsFormArray?.controls.map((c) => {
       const contributor = {
         creditName: {

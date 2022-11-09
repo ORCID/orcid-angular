@@ -13,9 +13,7 @@ export class EnvironmentBannerComponent implements OnInit {
   canDismiss = environment['CAN_DISABLE_TEST_WARNING_BANNER']
   @HostBinding('style.display') display = 'none'
   labelWarning = $localize`:@@environmentBanner.ariaLabelWarning:Warning, testing website`
-  constructor(
-    @Inject(WINDOW) private window: Window,
-  ) {
+  constructor(@Inject(WINDOW) private window: Window) {
     this.hostUrl = window.location.host
     // if (!this._cs.get('testWarningCookie') || !this.canDismiss) { // TODO: Anguar update
     //   this.display = 'auto'

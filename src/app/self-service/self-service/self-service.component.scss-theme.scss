@@ -19,7 +19,10 @@
     border-color: mat.get-color-from-palette($foreground, 'state-notice-dark');
 
     mat-icon {
-      color: mat.get-color-from-palette($foreground, 'state-notice-dark') !important;
+      color: mat.get-color-from-palette(
+        $foreground,
+        'state-notice-dark'
+      ) !important;
     }
   }
 }

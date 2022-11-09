@@ -63,12 +63,10 @@ export class LanguageGuard implements CanActivateChild {
       /// HANDLE LANGUAGE COOKIE UPDATES, like when a user login into a `spanish` user from a `english` signin page.
       switchMap(() => {
         if (this.currentAppLanguageMatchCookieLanguage(langContext)) {
-          this._cookie.delete(GUARD_COOKIE_CHECK) 
+          this._cookie.delete(GUARD_COOKIE_CHECK)
           return of(true)
         } else {
-          if (
-            this._cookie.get(GUARD_COOKIE_CHECK) !== langContext.cookie 
-          ) {
+          if (this._cookie.get(GUARD_COOKIE_CHECK) !== langContext.cookie) {
             // the browser needs to be reloaded to set the right cookie.
             this._cookie.set(GUARD_COOKIE_CHECK, langContext.cookie)
             // Redirect the user to the destiny LOCAL (without using the router)

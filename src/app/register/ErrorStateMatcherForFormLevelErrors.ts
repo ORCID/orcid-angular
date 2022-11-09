@@ -2,7 +2,10 @@ import { UntypedFormControl, FormGroupDirective, NgForm } from '@angular/forms'
 import { ErrorStateMatcher } from '@angular/material/core'
 
 export class ErrorStateMatcherForFormLevelErrors implements ErrorStateMatcher {
-  getControlErrorAtForm: (control: UntypedFormControl, errorGroup: string) => string[]
+  getControlErrorAtForm: (
+    control: UntypedFormControl,
+    errorGroup: string
+  ) => string[]
   errorGroup: string
   constructor(
     getControlErrorAtForm: (

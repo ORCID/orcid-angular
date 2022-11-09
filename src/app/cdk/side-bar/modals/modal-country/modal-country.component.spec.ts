@@ -140,7 +140,9 @@ describe('ModalCountryComponent', () => {
     )
 
     expect(countriesForm.controls[1].value.country).toBe('Albania')
-    expect(countriesForm.controls[2].getRawValue().country).toBe('United States')
+    expect(countriesForm.controls[2].getRawValue().country).toBe(
+      'United States'
+    )
     expect(countriesForm.controls[3].getRawValue().country).toBe('Kosovo')
     expect(countriesForm.controls['new-0'].value.country).toBe('Afghanistan')
     expect(disabledStates.filter((value) => value).length).toBe(2)

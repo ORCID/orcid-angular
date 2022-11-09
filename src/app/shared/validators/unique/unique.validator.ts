@@ -12,8 +12,10 @@ export function unique(
 ): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     if (control.value) {
-      const parentFormGroup: UntypedFormArray | UntypedFormGroup = control.parent
-      const formArray: UntypedFormArray | UntypedFormGroup = parentFormGroup?.parent
+      const parentFormGroup: UntypedFormArray | UntypedFormGroup =
+        control.parent
+      const formArray: UntypedFormArray | UntypedFormGroup =
+        parentFormGroup?.parent
 
       if (formArray instanceof UntypedFormArray) {
         for (const formGroup of formArray.controls) {

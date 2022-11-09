@@ -90,10 +90,10 @@ stack: "${processedError.stack}"
   }
 
   private checkCSRF() {
-      if (!this._cookie.get('XSRF-TOKEN')) { 
-        return 'no-XSRF'
-      } else {
-        return ''
-      }
+    if (!this._cookie.get('XSRF-TOKEN')) {
+      return 'no-XSRF'
+    } else {
+      return ''
+    }
   }
 }

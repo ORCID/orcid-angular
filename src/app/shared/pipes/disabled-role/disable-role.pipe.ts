@@ -1,5 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core'
-import { AbstractControl, UntypedFormArray, UntypedFormGroup } from '@angular/forms'
+import {
+  AbstractControl,
+  UntypedFormArray,
+  UntypedFormGroup,
+} from '@angular/forms'
 
 @Pipe({
   name: 'disableRole',

@@ -5,7 +5,11 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core'
-import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms'
+import {
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms'
 import { MatAutocompleteTrigger } from '@angular/material/autocomplete'
 import { Router } from '@angular/router'
 import { CookieService } from 'ngx-cookie-service'
@@ -155,7 +159,7 @@ export class InstitutionalComponent implements OnInit {
     return institution.DisplayNames?.find((name) => name.lang === 'en')
   }
 
-  addUserSelectedIdPs() { 
+  addUserSelectedIdPs() {
     let dataCookie = this._cookie.get('_saml_idp')
     let institutions = []
     if (dataCookie) {
@@ -174,7 +178,7 @@ export class InstitutionalComponent implements OnInit {
       institutions.push(btoa(this.entityID))
     }
     // Encode cookie base 64
-    this._cookie.set(            
+    this._cookie.set(
       '_saml_institutional',
       institutions.join('%20'),
       dateCookie !== null ? dateCookie : this.cookieExpirationTime
@@ -182,7 +186,7 @@ export class InstitutionalComponent implements OnInit {
   }
 
   retrieveUserSelectedIdPs() {
-    let cookieValues = this._cookie.get('_saml_institutional') 
+    let cookieValues = this._cookie.get('_saml_institutional')
     if (cookieValues) {
       cookieValues = cookieValues.replace(/^\s+|\s+$/g, '')
       cookieValues = cookieValues.replace('+', '%20')

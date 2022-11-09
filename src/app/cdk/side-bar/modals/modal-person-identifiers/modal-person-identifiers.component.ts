@@ -66,7 +66,9 @@ export class ModalPersonIdentifiersComponent implements OnInit, OnDestroy {
     this.personIdentifiersForm = new UntypedFormGroup(group)
   }
 
-  formToBackend(personIdentifiersForm: UntypedFormGroup): PersonIdentifierEndpoint {
+  formToBackend(
+    personIdentifiersForm: UntypedFormGroup
+  ): PersonIdentifierEndpoint {
     const personIdentifiers: PersonIdentifierEndpoint = {
       errors: [],
       externalIdentifiers: [],

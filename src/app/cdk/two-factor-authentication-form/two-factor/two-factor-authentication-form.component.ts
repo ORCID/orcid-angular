@@ -9,7 +9,11 @@ import {
   Output,
   ViewChild,
 } from '@angular/core'
-import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms'
+import {
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms'
 import { WINDOW } from '../../window'
 
 @Component({

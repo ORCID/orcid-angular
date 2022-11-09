@@ -42,7 +42,9 @@ export function RegisterFormAdapterMixin<T extends Constructor<any>>(base: T) {
       }
     }
 
-    formGroupToActivitiesVisibilityForm(formGroup: UntypedFormGroup): RegisterForm {
+    formGroupToActivitiesVisibilityForm(
+      formGroup: UntypedFormGroup
+    ): RegisterForm {
       let activitiesVisibilityDefault: Visibility
       if (
         formGroup &&

@@ -295,8 +295,9 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
     websitesForm: UntypedFormGroup = new UntypedFormGroup({})
   ): void {
     Object.keys(websitesForm.controls).forEach((currentControlKey) => {
-      const urlControl = (websitesForm.controls[currentControlKey] as UntypedFormGroup)
-        .controls.url as UntypedFormControl
+      const urlControl = (websitesForm.controls[
+        currentControlKey
+      ] as UntypedFormGroup).controls.url as UntypedFormControl
       if (
         formGroupKeysWithDuplicatedValues.indexOf(currentControlKey) === -1 &&
         urlControl.errors &&

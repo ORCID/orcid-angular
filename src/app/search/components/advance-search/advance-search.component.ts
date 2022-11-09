@@ -11,7 +11,11 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core'
-import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms'
+import {
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms'
 import { Router } from '@angular/router'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { ORCID_REGEXP_CASE_INSENSITIVE } from 'src/app/constants'

@@ -4,7 +4,7 @@ const oauthUrlBuilder = require('../helpers/oauthUrlBuilder')
 const runInfo = require('../helpers/runInfo')
 
 describe('Homepage' + runInfo(), () => {
-  // it('Has no detectable a11y critical violations', () => { 
+  // it('Has no detectable a11y critical violations', () => {
   //   cy.visit(`${environment.baseUrl}`)
   //     .injectAxe() //TODO: Angular 14 aupdate need me to remove this old axe lib for now
   //     .checkA11y(null, {

@@ -1,5 +1,9 @@
 import { Component, Inject, Input, OnInit } from '@angular/core'
-import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms'
+import {
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms'
 import { SignInService } from '../../../../core/sign-in/sign-in.service'
 import { WINDOW } from '../../../../cdk/window'
 import { OrcidValidators } from 'src/app/validators'

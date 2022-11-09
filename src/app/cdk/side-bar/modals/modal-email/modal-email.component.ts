@@ -165,20 +165,23 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
       this.emailsForm.addControl(
         newPutCode,
         new UntypedFormGroup({
-          email: new UntypedFormControl(existingEmail ? existingEmail.value : '', {
-            validators: [
-              Validators.required,
-              OrcidValidators.email,
-              this.allEmailsAreUnique(newPutCode),
-            ],
-            asyncValidators: [
-              this._recordEmails.backendEmailValidate(
-                this.originalEmailsBackendCopy
-              ),
-            ],
+          email: new UntypedFormControl(
+            existingEmail ? existingEmail.value : '',
+            {
+              validators: [
+                Validators.required,
+                OrcidValidators.email,
+                this.allEmailsAreUnique(newPutCode),
+              ],
+              asyncValidators: [
+                this._recordEmails.backendEmailValidate(
+                  this.originalEmailsBackendCopy
+                ),
+              ],
 
-            updateOn: 'change',
-          }),
+              updateOn: 'change',
+            }
+          ),
           visibility: new UntypedFormControl(
             existingEmail ? existingEmail.visibility : this.defaultVisibility,
             {
@@ -303,8 +306,9 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
       emailControlX = emailControlX.toLowerCase().trim()
 
       Object.keys(formGroup.controls).forEach((keyY) => {
-        let emailControlY: string = (formGroup.controls[keyY] as UntypedFormGroup)
-          .controls['email'].value
+        let emailControlY: string = (formGroup.controls[
+          keyY
+        ] as UntypedFormGroup).controls['email'].value
         emailControlY = emailControlY.toLowerCase().trim()
 
         // Only if both controls are not empty

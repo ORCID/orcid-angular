@@ -112,7 +112,9 @@ export function RegisterBackendValidatorMixin<
     }
 
     backendAdditionalEmailsValidate(reactivate: boolean): AsyncValidatorFn {
-      return (formGroup: UntypedFormGroup): Observable<ValidationErrors | null> => {
+      return (
+        formGroup: UntypedFormGroup
+      ): Observable<ValidationErrors | null> => {
         const value: RegisterForm = this.formGroupToEmailRegisterForm(formGroup)
         if (!value.emailsAdditional || value.emailsAdditional.length === 0) {
           return of(null)
@@ -137,7 +139,9 @@ export function RegisterBackendValidatorMixin<
     }
 
     backendPasswordValidate(): AsyncValidatorFn {
-      return (formGroup: UntypedFormGroup): Observable<ValidationErrors | null> => {
+      return (
+        formGroup: UntypedFormGroup
+      ): Observable<ValidationErrors | null> => {
         const value: RegisterForm = this.formGroupToPasswordRegisterForm(
           formGroup
         )
