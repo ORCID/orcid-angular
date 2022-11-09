@@ -4,6 +4,7 @@ import { take, filter } from 'rxjs/operators'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { MaintenanceMessage } from 'src/app/types/togglz.local'
 import { environment } from 'src/environments/environment'
+import { CookieService } from 'ngx-cookie-service'
 
 @Component({
   selector: 'app-banners',
@@ -21,7 +22,8 @@ export class BannersComponent implements OnInit {
 
   constructor(
     _platformInfo: PlatformInfoService,
-    togglz: TogglzService
+    togglz: TogglzService,
+    private _cookie: CookieService
   ) {
     // All closable maintenance messages are displayed as banners
     togglz.getMaintenanceMessages().subscribe((value) => {
@@ -42,7 +44,7 @@ export class BannersComponent implements OnInit {
       )
 
     // Show cookie banner
-    // this.showCookieBanner = !_cookie.check('orcidCookiePolicyAlert') //TODO: Angular update
+    this.showCookieBanner = !_cookie.check('orcidCookiePolicyAlert')
   }
 
   updateClosableMessage() {
@@ -51,7 +53,7 @@ export class BannersComponent implements OnInit {
         if (
           node &&
           node.id &&
-          // !this._cookie.check(node.id) && //TODO: Angular
+          !this._cookie.check(node.id) &&
           !this.closableElementAtDisplay
         ) {
           this.closableElementAtDisplay = node
@@ -62,7 +64,7 @@ export class BannersComponent implements OnInit {
 
   understoodClosableMessage(element: Element) {
     this.closableElementAtDisplay = null
-    // this._cookie.set(element.id, 'understood', 365) //TODO: Angular update
+    this._cookie.set(element.id, 'understood', 365)
     this.updateClosableMessage()
   }
 

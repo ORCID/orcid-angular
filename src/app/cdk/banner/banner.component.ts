@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core'
+import { CookieService } from 'ngx-cookie-service'
 
 @Component({
   selector: 'app-banner',
@@ -12,16 +13,16 @@ export class BannerComponent implements OnInit {
   @Output() dismiss = new EventEmitter()
   @Input() ariaLabel
 
-  constructor() {}
+  constructor(private _cookie: CookieService) {}
 
   ngOnInit() {}
 
   onDismiss() {
-    // this._cookie.set(
-    //   this.dismissCookie,
-    //   'dont show message',
-    //   this.dismissCookieTime
-    // )
+    this._cookie.set(
+      this.dismissCookie,
+      'dont show message',
+      this.dismissCookieTime
+    )
     this.dismiss.emit()
   }
 }

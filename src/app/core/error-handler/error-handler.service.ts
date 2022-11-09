@@ -6,6 +6,7 @@ import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { ErrorReport } from 'src/app/types'
 import { ERROR_REPORT } from 'src/app/errors'
+import { CookieService } from 'ngx-cookie-service'
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +14,7 @@ import { ERROR_REPORT } from 'src/app/errors'
 export class ErrorHandlerService {
   browserSupport = 'unchecked'
   constructor(
+    private _cookie: CookieService,
     private _platform: PlatformInfoService,
     private _snackBar: SnackbarService
   ) {
@@ -88,10 +90,10 @@ stack: "${processedError.stack}"
   }
 
   private checkCSRF() {
-    //   if (!this._cookie.get('XSRF-TOKEN')) { //TODO: UPDATE
-    //     return 'no-XSRF'
-    //   } else {
-    //     return ''
-    //   }
+      if (!this._cookie.get('XSRF-TOKEN')) { 
+        return 'no-XSRF'
+      } else {
+        return ''
+      }
   }
 }
