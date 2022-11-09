@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core'
-import { FormControl, FormGroup } from '@angular/forms'
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms'
 import { TwoFactor } from '../../../types/two-factor.endpoint'
 import { WINDOW } from '../../../cdk/window'
 import { PlatformInfoService } from '../../../cdk/platform-info'
@@ -16,7 +16,7 @@ export class TwoFactorComponent implements OnInit {
   loading = false
   showBadVerificationCode = false
   showBadRecoveryCode = false
-  twoFactorForm: FormGroup
+  twoFactorForm: UntypedFormGroup
   labelInfo = $localize`:@@twoFactor.ariaLabelInfoTwoFactor:info about two factor authentication`
 
   constructor(
@@ -26,9 +26,9 @@ export class TwoFactorComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.twoFactorForm = new FormGroup({
-      verificationCode: new FormControl(),
-      recoveryCode: new FormControl(),
+    this.twoFactorForm = new UntypedFormGroup({
+      verificationCode: new UntypedFormControl(),
+      recoveryCode: new UntypedFormControl(),
     })
   }
 

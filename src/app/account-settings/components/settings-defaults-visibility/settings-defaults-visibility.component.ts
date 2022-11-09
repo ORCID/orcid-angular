@@ -5,7 +5,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core'
-import { FormBuilder, FormGroup } from '@angular/forms'
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms'
 import { Subject } from 'rxjs'
 import { take, takeUntil } from 'rxjs/operators'
 import { VISIBILITY_OPTIONS } from 'src/app/constants'
@@ -21,13 +21,13 @@ import { RecordService } from 'src/app/core/record/record.service'
 export class SettingsDefaultsVisibilityComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
   @Output() loading = new EventEmitter<boolean>()
-  form: FormGroup
+  form: UntypedFormGroup
   visibilityOptions = VISIBILITY_OPTIONS
 
   constructor(
     private _defaultVisibilityService: AccountDefaultVisibilityService,
     private _record: RecordService,
-    private _fb: FormBuilder
+    private _fb: UntypedFormBuilder
   ) {}
 
   ngOnInit() {

@@ -1,16 +1,16 @@
-import { FormGroup } from '@angular/forms'
+import { UntypedFormGroup } from '@angular/forms'
 import { RegisterForm } from 'src/app/types/register.endpoint'
 import { Value, Visibility } from 'src/app/types/common.endpoint'
 import { Constructor } from 'src/app/types'
 
 export function RegisterFormAdapterMixin<T extends Constructor<any>>(base: T) {
   return class RegisterFormAdapter extends base {
-    formGroupToEmailRegisterForm(formGroup: FormGroup): RegisterForm {
+    formGroupToEmailRegisterForm(formGroup: UntypedFormGroup): RegisterForm {
       let additionalEmailsValue: Value[]
       if (formGroup.controls['additionalEmails']) {
         const additionalEmailsControls = (formGroup.controls[
           'additionalEmails'
-        ] as FormGroup).controls
+        ] as UntypedFormGroup).controls
         additionalEmailsValue = Object.keys(additionalEmailsControls)
           .filter((name) => additionalEmailsControls[name].value !== '')
           .map((name) => {
@@ -35,14 +35,16 @@ export function RegisterFormAdapterMixin<T extends Constructor<any>>(base: T) {
       return value
     }
 
-    formGroupToNamesRegisterForm(formGroup: FormGroup): RegisterForm {
+    formGroupToNamesRegisterForm(formGroup: UntypedFormGroup): RegisterForm {
       return {
         givenNames: { value: formGroup.controls['givenNames'].value },
         familyNames: { value: formGroup.controls['familyNames'].value },
       }
     }
 
-    formGroupToActivitiesVisibilityForm(formGroup: FormGroup): RegisterForm {
+    formGroupToActivitiesVisibilityForm(
+      formGroup: UntypedFormGroup
+    ): RegisterForm {
       let activitiesVisibilityDefault: Visibility
       if (
         formGroup &&
@@ -56,7 +58,7 @@ export function RegisterFormAdapterMixin<T extends Constructor<any>>(base: T) {
       return { activitiesVisibilityDefault }
     }
 
-    formGroupToPasswordRegisterForm(formGroup: FormGroup): RegisterForm {
+    formGroupToPasswordRegisterForm(formGroup: UntypedFormGroup): RegisterForm {
       let password: Value
       if (formGroup && formGroup.controls && formGroup.controls['password']) {
         password = { value: formGroup.controls['password'].value }
@@ -73,7 +75,7 @@ export function RegisterFormAdapterMixin<T extends Constructor<any>>(base: T) {
     }
 
     formGroupTermsOfUseAndDataProcessedRegisterForm(
-      formGroup: FormGroup
+      formGroup: UntypedFormGroup
     ): RegisterForm {
       let termsOfUse: Value
       let dataProcessed: Value
@@ -88,7 +90,7 @@ export function RegisterFormAdapterMixin<T extends Constructor<any>>(base: T) {
       return { termsOfUse, dataProcessed }
     }
 
-    formGroupToSendOrcidNewsForm(formGroup: FormGroup) {
+    formGroupToSendOrcidNewsForm(formGroup: UntypedFormGroup) {
       let sendOrcidNews: Value
       if (
         formGroup &&
@@ -101,7 +103,7 @@ export function RegisterFormAdapterMixin<T extends Constructor<any>>(base: T) {
     }
 
     formGroupToRecaptchaForm(
-      formGroup: FormGroup,
+      formGroup: UntypedFormGroup,
       widgetId: number
     ): RegisterForm {
       const value: RegisterForm = {}
@@ -115,9 +117,9 @@ export function RegisterFormAdapterMixin<T extends Constructor<any>>(base: T) {
     }
 
     formGroupToFullRegistrationForm(
-      StepA: FormGroup,
-      StepB: FormGroup,
-      StepC: FormGroup
+      StepA: UntypedFormGroup,
+      StepB: UntypedFormGroup,
+      StepC: UntypedFormGroup
     ): RegisterForm {
       return {
         ...StepA.value.personal,

@@ -1,4 +1,4 @@
-@import '~@angular/material/_theming';
+@use '@angular/material' as mat;
 @import '../../../../assets/scss/material.orcid-theme.scss';
 
 @mixin snackbar($theme) {
@@ -7,11 +7,11 @@
   $warn: map-get($theme, warn);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
-  $overlay-color: mat-color($background, blue-overlay);
+  $overlay-color: mat.get-color-from-palette($background, blue-overlay);
 
   mat-icon,
   div {
-    color: mat-contrast($warn, 900);
+    color: mat.get-contrast-color-from-palette($warn, 900);
   }
 }
 

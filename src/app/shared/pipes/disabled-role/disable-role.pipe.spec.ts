@@ -1,5 +1,5 @@
 import { DisableRolePipe } from './disable-role.pipe'
-import { FormBuilder } from '@angular/forms'
+import { UntypedFormBuilder } from '@angular/forms'
 
 describe('DisableRolePipe', () => {
   let pipe: DisableRolePipe
@@ -13,7 +13,7 @@ describe('DisableRolePipe', () => {
   })
 
   it('should return true if value is present and disabled in form', () => {
-    const formBuilder = new FormBuilder()
+    const formBuilder = new UntypedFormBuilder()
     const rolesFormArray = formBuilder.array([
       formBuilder.group({
         role: [{ value: 'conceptualization', disabled: true }],

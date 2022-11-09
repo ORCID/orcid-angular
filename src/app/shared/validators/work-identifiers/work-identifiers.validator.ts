@@ -1,4 +1,4 @@
-import { AbstractControl, FormArray, ValidatorFn } from '@angular/forms'
+import { AbstractControl, UntypedFormArray, ValidatorFn } from '@angular/forms'
 
 export class WorkIdentifiers {
   static fundedByInvalidRelationship(): ValidatorFn {
@@ -19,7 +19,7 @@ export class WorkIdentifiers {
     }
   }
   static versionOfInvalidRelationship(
-    identifiersArray: FormArray
+    identifiersArray: UntypedFormArray
   ): ValidatorFn {
     return (c: AbstractControl): { [key: string]: boolean } | null => {
       if (c.get('externalRelationship')?.value === 'version-of') {

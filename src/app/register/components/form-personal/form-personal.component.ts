@@ -8,8 +8,8 @@ import {
   ViewChild,
 } from '@angular/core'
 import {
-  FormControl,
-  FormGroup,
+  UntypedFormControl,
+  UntypedFormGroup,
   NG_ASYNC_VALIDATORS,
   NG_VALUE_ACCESSOR,
   ValidatorFn,
@@ -55,17 +55,17 @@ export class FormPersonalComponent
     super()
   }
 
-  emails: FormGroup = new FormGroup({})
-  additionalEmails: FormGroup = new FormGroup({
-    '0': new FormControl('', {
+  emails: UntypedFormGroup = new UntypedFormGroup({})
+  additionalEmails: UntypedFormGroup = new UntypedFormGroup({
+    '0': new UntypedFormControl('', {
       validators: [OrcidValidators.email],
     }),
   })
 
   ngOnInit() {
-    this.emails = new FormGroup(
+    this.emails = new UntypedFormGroup(
       {
-        email: new FormControl('', {
+        email: new UntypedFormControl('', {
           validators: [Validators.required, OrcidValidators.email],
           asyncValidators: this._register.backendValueValidate('email'),
         }),
@@ -88,18 +88,18 @@ export class FormPersonalComponent
     if (!this.reactivation?.isReactivation) {
       this.emails.addControl(
         'confirmEmail',
-        new FormControl('', {
+        new UntypedFormControl('', {
           validators: [Validators.required, OrcidValidators.email],
         })
       )
     }
 
-    this.form = new FormGroup({
-      givenNames: new FormControl('', {
+    this.form = new UntypedFormGroup({
+      givenNames: new UntypedFormControl('', {
         validators: [Validators.required, OrcidValidators.illegalName],
         asyncValidators: this._register.backendValueValidate('givenNames'),
       }),
-      familyNames: new FormControl('', {
+      familyNames: new UntypedFormControl('', {
         validators: [OrcidValidators.illegalName],
       }),
       emails: this.emails,
@@ -126,7 +126,7 @@ export class FormPersonalComponent
   }
 
   allEmailsAreUnique(): ValidatorFn {
-    return (formGroup: FormGroup) => {
+    return (formGroup: UntypedFormGroup) => {
       let hasError = false
       const registerForm = this._register.formGroupToEmailRegisterForm(
         formGroup
@@ -175,7 +175,7 @@ export class FormPersonalComponent
   registerOnChange(fn: any) {
     this.form.valueChanges.subscribe((value) => {
       const emailsForm = this._register.formGroupToEmailRegisterForm(
-        this.form.controls['emails'] as FormGroup
+        this.form.controls['emails'] as UntypedFormGroup
       )
       const namesForm =
         this._register.formGroupToNamesRegisterForm(this.form) || {}

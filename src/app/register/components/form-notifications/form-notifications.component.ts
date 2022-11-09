@@ -1,7 +1,7 @@
 import { Component, forwardRef, OnInit } from '@angular/core'
 import {
-  FormControl,
-  FormGroup,
+  UntypedFormControl,
+  UntypedFormGroup,
   NG_ASYNC_VALIDATORS,
   NG_VALUE_ACCESSOR,
   Validators,
@@ -32,8 +32,8 @@ export class FormNotificationsComponent extends BaseForm implements OnInit {
     super()
   }
   ngOnInit() {
-    this.form = new FormGroup({
-      sendOrcidNews: new FormControl(false, {
+    this.form = new UntypedFormGroup({
+      sendOrcidNews: new UntypedFormControl(false, {
         validators: Validators.required,
       }),
     })
@@ -43,7 +43,7 @@ export class FormNotificationsComponent extends BaseForm implements OnInit {
   registerOnChange(fn: any) {
     this.form.valueChanges.subscribe((value) => {
       const registerForm = this._register.formGroupToSendOrcidNewsForm(
-        this.form as FormGroup
+        this.form as UntypedFormGroup
       )
       fn(registerForm)
     })

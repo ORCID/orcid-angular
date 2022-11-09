@@ -1,7 +1,7 @@
 import { Component, forwardRef, Input, OnInit, ViewChild } from '@angular/core'
 import {
-  FormControl,
-  FormGroup,
+  UntypedFormControl,
+  UntypedFormGroup,
   NG_ASYNC_VALIDATORS,
   NG_VALUE_ACCESSOR,
   ValidatorFn,
@@ -47,9 +47,9 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
     super()
   }
   ngOnInit() {
-    this.form = new FormGroup(
+    this.form = new UntypedFormGroup(
       {
-        password: new FormControl('', {
+        password: new UntypedFormControl('', {
           validators: [
             Validators.required,
             Validators.minLength(8),
@@ -60,7 +60,7 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
           ],
           asyncValidators: [this._register.backendValueValidate('password')],
         }),
-        passwordConfirm: new FormControl('', Validators.required),
+        passwordConfirm: new UntypedFormControl('', Validators.required),
       },
       {
         validators: OrcidValidators.matchValues('password', 'passwordConfirm'),
@@ -70,7 +70,7 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
   }
 
   passwordDoesNotContainUserEmails(): ValidatorFn {
-    return (control: FormControl) => {
+    return (control: UntypedFormControl) => {
       const password: string = control.value
       let hasError = false
 
@@ -103,7 +103,7 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
   registerOnChange(fn: any) {
     this.form.valueChanges.subscribe((value) => {
       const registerForm = this._register.formGroupToPasswordRegisterForm(
-        this.form as FormGroup
+        this.form as UntypedFormGroup
       )
 
       fn(registerForm)

@@ -1,7 +1,7 @@
 import { Component, DoCheck, forwardRef, OnInit } from '@angular/core'
 import {
-  FormControl,
-  FormGroup,
+  UntypedFormControl,
+  UntypedFormGroup,
   NG_ASYNC_VALIDATORS,
   NG_VALUE_ACCESSOR,
   Validators,
@@ -41,10 +41,10 @@ export class FormTermsComponent extends BaseForm implements OnInit, DoCheck {
   }
   errorState = false
 
-  termsOfUse = new FormControl('', Validators.requiredTrue)
-  dataProcessed = new FormControl('', Validators.requiredTrue)
+  termsOfUse = new UntypedFormControl('', Validators.requiredTrue)
+  dataProcessed = new UntypedFormControl('', Validators.requiredTrue)
   ngOnInit() {
-    this.form = new FormGroup({
+    this.form = new UntypedFormGroup({
       termsOfUse: this.termsOfUse,
       dataProcessed: this.dataProcessed,
     })
@@ -54,7 +54,7 @@ export class FormTermsComponent extends BaseForm implements OnInit, DoCheck {
   registerOnChange(fn: any) {
     this.form.valueChanges.subscribe((value) => {
       const registerForm = this._register.formGroupTermsOfUseAndDataProcessedRegisterForm(
-        this.form as FormGroup
+        this.form as UntypedFormGroup
       )
       fn(registerForm)
     })

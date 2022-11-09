@@ -1,9 +1,9 @@
-import { AbstractControl, FormControl } from '@angular/forms'
-import { ErrorStateMatcher } from '@angular/material/core/error/error-options'
+import { AbstractControl, UntypedFormControl } from '@angular/forms'
+import { ErrorStateMatcher } from '@angular/material/core'
 
 export class ErrorStateMatcherForPasswordField implements ErrorStateMatcher {
   constructor() {}
-  isErrorState(control: FormControl | AbstractControl | null): boolean {
+  isErrorState(control: UntypedFormControl | AbstractControl | null): boolean {
     return control.invalid
   }
 }

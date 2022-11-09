@@ -10,9 +10,9 @@ import {
 import {
   AbstractControl,
   ControlContainer,
-  FormArray,
-  FormBuilder,
-  FormGroup,
+  UntypedFormArray,
+  UntypedFormBuilder,
+  UntypedFormGroup,
   FormGroupDirective,
   Validators,
 } from '@angular/forms'
@@ -67,7 +67,7 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
   constructor(
     _togglz: TogglzService,
     @Inject(WINDOW) private window: Window,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private parentForm: FormGroupDirective,
     private platform: PlatformInfoService,
     private workService: RecordWorksService,
@@ -79,11 +79,11 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
   }
 
   get contributorsFormArray() {
-    return this.parentForm.control.controls['contributors'] as FormArray
+    return this.parentForm.control.controls['contributors'] as UntypedFormArray
   }
 
   get rolesRecordHolderFormArray() {
-    return this.parentForm.control.controls['roles'] as FormArray
+    return this.parentForm.control.controls['roles'] as UntypedFormArray
   }
 
   ngOnInit(): void {
@@ -119,11 +119,11 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
   }
 
   rolesFormArray(contributor): AbstractControl[] {
-    return (contributor.get('roles') as FormArray).controls
+    return (contributor.get('roles') as UntypedFormArray).controls
   }
 
   addAnotherRole(contributor): void {
-    ;(contributor.get('roles') as FormArray).push(
+    ;(contributor.get('roles') as UntypedFormArray).push(
       this.getRoleForm(
         this.workService.getContributionRoleByKey('no specified role').key,
         false
@@ -136,7 +136,7 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
   }
 
   deleteRole(contributor, roleIndex: number): void {
-    ;(contributor.get('roles') as FormArray).removeAt(roleIndex)
+    ;(contributor.get('roles') as UntypedFormArray).removeAt(roleIndex)
     if (roleIndex === 0 && this.roles.length === 0) {
       this.addAnotherRole(contributor)
     }
@@ -161,10 +161,10 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
     const uri = recordHolderContribution?.contributorOrcid?.uri
       ? recordHolderContribution?.contributorOrcid?.uri
       : `https:${environment.BASE_URL}${orcid}`
-    this.parentForm.control.setControl('contributors', new FormArray([]))
+    this.parentForm.control.setControl('contributors', new UntypedFormArray([]))
     const contributorsFormArray = this.parentForm.control.get(
       'contributors'
-    ) as FormArray
+    ) as UntypedFormArray
     if (this.togglzAddOtherContributors && this.contributors?.length > 0) {
       if (!recordHolderContribution) {
         contributorsFormArray.push(
@@ -207,7 +207,7 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
     uri?: string,
     roles?: string[],
     disabled?: boolean
-  ): FormGroup {
+  ): UntypedFormGroup {
     const contributor = this.formBuilder.group({
       creditName: [
         {
@@ -225,9 +225,9 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
           uri ? uri : orcid ? `https:${environment.BASE_URL}${orcid}` : null,
         ],
       }),
-      roles: new FormArray([]),
+      roles: new UntypedFormArray([]),
     })
-    const rolesFormArray = contributor.controls.roles as FormArray
+    const rolesFormArray = contributor.controls.roles as UntypedFormArray
     if (roles?.length > 0) {
       roles.forEach((role) => {
         if (role) {
@@ -248,7 +248,7 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
     return contributor
   }
 
-  private getRoleForm(role?: string, disabled?: boolean): FormGroup {
+  private getRoleForm(role?: string, disabled?: boolean): UntypedFormGroup {
     return this.formBuilder.group({
       role: [
         {

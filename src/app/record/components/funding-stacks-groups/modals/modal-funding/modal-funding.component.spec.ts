@@ -5,9 +5,9 @@ import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 import {
   Form,
-  FormArray,
-  FormBuilder,
-  FormGroup,
+  UntypedFormArray,
+  UntypedFormBuilder,
+  UntypedFormGroup,
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms'
@@ -60,7 +60,7 @@ describe('ModalFundingComponent', () => {
           { provide: MatDialogRef, useValue: {} },
           { provide: MAT_DIALOG_DATA, useValue: {} },
           WINDOW_PROVIDERS,
-          FormBuilder,
+          UntypedFormBuilder,
           ErrorHandlerService,
           SnackbarService,
           MatSnackBar,
@@ -101,8 +101,9 @@ describe('ModalFundingComponent', () => {
 
     await fixture.whenStable()
 
-    const grantsArray = component.fundingForm.controls.grants as FormArray
-    const grant = grantsArray.controls[0] as FormGroup
+    const grantsArray = component.fundingForm.controls
+      .grants as UntypedFormArray
+    const grant = grantsArray.controls[0] as UntypedFormGroup
     grant.get('grantNumber').setValue('1234')
 
     fixture.detectChanges()

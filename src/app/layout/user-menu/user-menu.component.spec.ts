@@ -82,7 +82,7 @@ describe('UserMenuComponent', () => {
     expect(component).toBeTruthy()
   })
 
-  fit('should display 3 as unread notifications count', async () => {
+  it('should display 3 as unread notifications count', async () => {
     const userMenuButton = fixture.debugElement.query(By.css('#cy-user-info'))
     userMenuButton.triggerEventHandler('click', null)
 

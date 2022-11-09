@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
-import { CookieService } from 'ngx-cookie-service'
 import { MaintenanceMessage } from 'src/app/types/togglz.local'
 
 @Component({
@@ -16,7 +15,7 @@ export class MaintenanceMessageComponent implements OnInit {
   closableElement: Element
   labelMaintenance = $localize`:@@layout.ariaLabelMaintenance:Maintenance message`
 
-  constructor(togglz: TogglzService, private _cookie: CookieService) {
+  constructor(togglz: TogglzService) {
     togglz.getMaintenanceMessages().subscribe((value) => {
       this.maintenanceMessage = value
     })

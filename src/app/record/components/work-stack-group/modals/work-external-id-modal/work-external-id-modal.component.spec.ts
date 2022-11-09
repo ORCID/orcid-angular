@@ -11,7 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatDialog, MatDialogRef } from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { RecordWorksService } from '../../../../../core/record-works/record-works.service'
-import { FormBuilder } from '@angular/forms'
+import { UntypedFormBuilder } from '@angular/forms'
 
 describe('WorkDoiModalComponent', () => {
   let component: WorkExternalIdModalComponent
@@ -24,7 +24,7 @@ describe('WorkDoiModalComponent', () => {
       providers: [
         { provide: MatDialogRef, useValue: {} },
         WINDOW_PROVIDERS,
-        FormBuilder,
+        UntypedFormBuilder,
         RecordWorksService,
         PlatformInfoService,
         ErrorHandlerService,

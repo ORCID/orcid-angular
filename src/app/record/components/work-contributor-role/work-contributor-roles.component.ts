@@ -9,9 +9,9 @@ import {
 import { ContributionRoles, Role } from '../../../types/works.endpoint'
 import {
   ControlContainer,
-  FormArray,
-  FormBuilder,
-  FormGroup,
+  UntypedFormArray,
+  UntypedFormBuilder,
+  UntypedFormGroup,
   FormGroupDirective,
 } from '@angular/forms'
 import { Contributor } from '../../../types'
@@ -50,13 +50,13 @@ export class WorkContributorRolesComponent implements OnInit {
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private parentForm: FormGroupDirective,
     private workService: RecordWorksService
   ) {}
 
   get roles() {
-    return this.parentForm.control.controls['roles'] as FormArray
+    return this.parentForm.control.controls['roles'] as UntypedFormArray
   }
 
   ngOnInit(): void {
@@ -83,7 +83,7 @@ export class WorkContributorRolesComponent implements OnInit {
   }
 
   private initializeFormArray(): void {
-    this.parentForm.control.setControl('roles', new FormArray([]))
+    this.parentForm.control.setControl('roles', new UntypedFormArray([]))
     if (this.contributors) {
       const rolesAndSequences = this.getRecordHolderContribution()
         ?.rolesAndSequences
@@ -124,7 +124,7 @@ export class WorkContributorRolesComponent implements OnInit {
     this.roles.push(this.getRoleForm(role, disabled))
   }
 
-  private getRoleForm(role?: string, disabled?: boolean): FormGroup {
+  private getRoleForm(role?: string, disabled?: boolean): UntypedFormGroup {
     return this.formBuilder.group({
       role: [
         {

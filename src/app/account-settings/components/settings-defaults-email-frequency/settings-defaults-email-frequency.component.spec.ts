@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { SettingsDefaultsEmailFrequencyComponent } from './settings-defaults-email-frequency.component'
 import { MatDialog } from '@angular/material/dialog'
 import { WINDOW_PROVIDERS } from '../../../cdk/window'
-import { FormBuilder } from '@angular/forms'
+import { UntypedFormBuilder } from '@angular/forms'
 import { PlatformInfoService } from '../../../cdk/platform-info'
 import { ErrorHandlerService } from '../../../core/error-handler/error-handler.service'
 import { SnackbarService } from '../../../cdk/snackbar/snackbar.service'
@@ -22,7 +22,7 @@ describe('SettingsDefaultsEmailFrequencyComponent', () => {
       declarations: [SettingsDefaultsEmailFrequencyComponent],
       providers: [
         WINDOW_PROVIDERS,
-        FormBuilder,
+        UntypedFormBuilder,
         PlatformInfoService,
         ErrorHandlerService,
         SnackbarService,

@@ -2,7 +2,7 @@ import {
   ValidatorFn,
   AbstractControl,
   Validators,
-  FormGroup,
+  UntypedFormGroup,
 } from '@angular/forms'
 import {
   EMAIL_REGEXP,
@@ -72,7 +72,7 @@ export class OrcidValidators {
     value2: string,
     caseSensitive = true
   ): ValidatorFn {
-    return (formGroup: FormGroup) => {
+    return (formGroup: UntypedFormGroup) => {
       const control = formGroup.controls[value1]
       const confirmControl = formGroup.controls[value2]
 

@@ -7,7 +7,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core'
-import { FormBuilder } from '@angular/forms'
+import { UntypedFormBuilder } from '@angular/forms'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { WINDOW } from 'src/app/cdk/window'
@@ -29,7 +29,7 @@ export class SettingsDefaultsLanguageComponent implements OnInit, OnDestroy {
     @Inject(LOCALE_ID) public locale: string,
     @Inject(WINDOW) private window: Window,
     private _language: LanguageService,
-    private _fb: FormBuilder
+    private _fb: UntypedFormBuilder
   ) {
     this.languageMenuOptions = environment.LANGUAGE_MENU_OPTIONS
   }

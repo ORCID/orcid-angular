@@ -1,5 +1,5 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
-import { FormBuilder, FormGroup } from '@angular/forms'
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms'
 import { forkJoin, Subject, Subscription } from 'rxjs'
 import { first, takeUntil, tap } from 'rxjs/operators'
 import { WINDOW } from 'src/app/cdk/window'
@@ -18,7 +18,7 @@ import {
 export class NotificationsComponent implements OnInit, OnDestroy {
   notifications: InboxNotification[]
   $destroy: Subject<boolean> = new Subject<boolean>()
-  form: FormGroup = this._fromBuilder.group({})
+  form: UntypedFormGroup = this._fromBuilder.group({})
   _allCheck = false
   loading = true
   showArchived = false
@@ -44,7 +44,7 @@ export class NotificationsComponent implements OnInit, OnDestroy {
 
   constructor(
     private _inbox: InboxService,
-    private _fromBuilder: FormBuilder,
+    private _fromBuilder: UntypedFormBuilder,
     @Inject(WINDOW) private window: Window
   ) {}
 

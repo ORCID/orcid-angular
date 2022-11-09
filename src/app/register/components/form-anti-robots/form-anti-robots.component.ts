@@ -1,7 +1,7 @@
 import { Component, DoCheck, forwardRef, OnInit } from '@angular/core'
 import {
-  FormControl,
-  FormGroup,
+  UntypedFormControl,
+  UntypedFormGroup,
   NG_ASYNC_VALIDATORS,
   NG_VALUE_ACCESSOR,
   ValidatorFn,
@@ -37,11 +37,11 @@ export class FormAntiRobotsComponent
   captchaLoadedWithWidgetId: number
   $widgetIdUpdated = new Subject()
   errorState = false
-  captcha = new FormControl(null, {
+  captcha = new UntypedFormControl(null, {
     validators: [this.captchaValidator()],
   })
   ngOnInit(): void {
-    this.form = new FormGroup({
+    this.form = new UntypedFormGroup({
       captcha: this.captcha,
     })
   }
@@ -55,7 +55,7 @@ export class FormAntiRobotsComponent
 
   // Captcha must be clicked unless it was not loaded
   captchaValidator(): ValidatorFn {
-    return (control: FormControl) => {
+    return (control: UntypedFormControl) => {
       const hasError = Validators.required(control)
       if (
         hasError &&

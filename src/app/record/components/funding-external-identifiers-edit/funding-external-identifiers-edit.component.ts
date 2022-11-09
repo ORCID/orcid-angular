@@ -9,7 +9,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core'
-import { FormGroup } from '@angular/forms'
+import { UntypedFormGroup } from '@angular/forms'
 import { FundingRelationships } from 'src/app/types/record-funding.endpoint'
 import { WorkRelationships } from 'src/app/types/works.endpoint'
 
@@ -24,7 +24,7 @@ import { WorkRelationships } from 'src/app/types/works.endpoint'
 export class FundingExternalIdentifiersEditComponent
   implements OnInit, AfterViewInit {
   @ViewChild('grantNumber') grantNumberRef: ElementRef
-  @Input() grantForm: FormGroup
+  @Input() grantForm: UntypedFormGroup
   @Input() index: number
   @Output() cancelEvent = new EventEmitter<void>()
   workRelationships: WorkRelationships[] = Object.keys(

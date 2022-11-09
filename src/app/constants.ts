@@ -2,9 +2,9 @@ import { Address, MonthDayYearDate } from './types'
 import { UrlMatchResult, UrlSegment } from '@angular/router'
 import {
   AbstractControl,
-  FormControl,
-  FormGroup,
-  FormArray,
+  UntypedFormControl,
+  UntypedFormGroup,
+  UntypedFormArray,
 } from '@angular/forms'
 
 export { COUNTRY_NAMES_TO_COUNTRY_CODES } from './constants-country-codes'
@@ -236,10 +236,10 @@ export const MAX_LENGTH_LESS_THAN_TWO_HUNDRED_FIFTY_FIVE = 254
 export const MAX_LENGTH_LESS_THAN_TWO_THOUSAND_EIGHTY_FOUR = 2083
 
 export function GetFormErrors(form: AbstractControl) {
-  if (form instanceof FormControl) {
+  if (form instanceof UntypedFormControl) {
     return form.errors ?? null
   }
-  if (form instanceof FormGroup) {
+  if (form instanceof UntypedFormGroup) {
     const groupErrors = form.errors
     const formErrors = groupErrors ? { groupErrors } : {}
     Object.keys(form.controls).forEach((key) => {
@@ -257,7 +257,7 @@ export function GetFormErrors(form: AbstractControl) {
     })
     return Object.keys(formErrors).length > 0 ? formErrors : null
   }
-  if (form instanceof FormArray) {
+  if (form instanceof UntypedFormArray) {
     const groupErrors = form.errors
     const formErrors = groupErrors ? [groupErrors] : []
     form.controls.forEach((control) => {

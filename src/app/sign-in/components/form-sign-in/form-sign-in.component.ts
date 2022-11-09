@@ -11,7 +11,11 @@ import {
   Output,
   ViewChild,
 } from '@angular/core'
-import { FormControl, FormGroup, Validators } from '@angular/forms'
+import {
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { catchError, first, map, takeUntil } from 'rxjs/operators'
 import { isRedirectToTheAuthorizationPage } from 'src/app/constants'
@@ -60,7 +64,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() email
   orcidPrimaryDeprecated: string
   signInLocal = {} as SignInLocal
-  authorizationForm: FormGroup
+  authorizationForm: UntypedFormGroup
   platform: PlatformInfo
   private readonly $destroy = new Subject()
   authorizationFormSubmitted: boolean
@@ -119,13 +123,13 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.authorizationForm = new FormGroup({
-      username: new FormControl(),
-      password: new FormControl('', {
+    this.authorizationForm = new UntypedFormGroup({
+      username: new UntypedFormControl(),
+      password: new UntypedFormControl('', {
         validators: [Validators.maxLength(256)],
       }),
-      recoveryCode: new FormControl(),
-      verificationCode: new FormControl(),
+      recoveryCode: new UntypedFormControl(),
+      verificationCode: new UntypedFormControl(),
     })
 
     if (this.email) {

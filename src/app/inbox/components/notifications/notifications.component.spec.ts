@@ -11,7 +11,7 @@ import { SnackbarService } from '../../../cdk/snackbar/snackbar.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatDialog } from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
-import { FormBuilder } from '@angular/forms'
+import { UntypedFormBuilder } from '@angular/forms'
 import { InboxService } from '../../../core/inbox/inbox.service'
 
 describe('NotificationsComponent', () => {
@@ -24,7 +24,7 @@ describe('NotificationsComponent', () => {
       declarations: [NotificationsComponent],
       providers: [
         WINDOW_PROVIDERS,
-        FormBuilder,
+        UntypedFormBuilder,
         InboxService,
         PlatformInfoService,
         ErrorHandlerService,

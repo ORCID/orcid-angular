@@ -10,10 +10,10 @@ import {
 } from '../../../types/record-affiliation.endpoint'
 import {
   ControlContainer,
-  FormArray,
-  FormBuilder,
+  UntypedFormArray,
+  UntypedFormBuilder,
   FormControlDirective,
-  FormGroup,
+  UntypedFormGroup,
   FormGroupDirective,
   FormsModule,
   ReactiveFormsModule,
@@ -51,7 +51,7 @@ describe('WorkContributorsComponent', () => {
   let debugElement: DebugElement
   let formGroupDirective: FormControlDirective
   let loader: HarnessLoader
-  const formBuilder = new FormBuilder()
+  const formBuilder = new UntypedFormBuilder()
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -89,7 +89,7 @@ describe('WorkContributorsComponent', () => {
     fixture = TestBed.createComponent(WorkContributorsComponent)
     component = fixture.componentInstance
     debugElement = fixture.debugElement
-    const mockFormGroup: FormGroup = new FormGroup({})
+    const mockFormGroup: UntypedFormGroup = new UntypedFormGroup({})
     const formGroupDirective: FormGroupDirective = new FormGroupDirective(
       [],
       []
@@ -97,7 +97,7 @@ describe('WorkContributorsComponent', () => {
     component['parentForm'].form = mockFormGroup
     component['parentForm'].control.setControl(
       'roles',
-      new FormArray([
+      new UntypedFormArray([
         formBuilder.group({
           role: [{ value: 'conceptualization', disabled: true }],
         }),
@@ -120,7 +120,7 @@ describe('WorkContributorsComponent', () => {
   it('should display record holder name with roles and affiliation', async () => {
     const rolesFormArray = component['parentForm'].control?.controls[
       'roles'
-    ] as FormArray
+    ] as UntypedFormArray
     rolesFormArray.push(formBuilder.group({ role: 'methodology' }))
 
     fixture.detectChanges()
@@ -142,7 +142,7 @@ describe('WorkContributorsComponent', () => {
   it('should display contributors metadata', async () => {
     const rolesFormArray = component['parentForm'].control?.controls[
       'roles'
-    ] as FormArray
+    ] as UntypedFormArray
     rolesFormArray.push(formBuilder.group({ role: 'methodology' }))
 
     fixture.detectChanges()

@@ -1,4 +1,4 @@
-@import '~@angular/material/theming';
+@use '@angular/material' as mat;
 @import 'src/assets/scss/material.orcid-theme.scss';
 
 @mixin warning-message-theme($theme) {
@@ -8,11 +8,17 @@
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
   :host {
-    border-color: mat-color($foreground, 'state-notice-dark') !important;
+    border-color: mat.get-color-from-palette(
+      $foreground,
+      'state-notice-dark'
+    ) !important;
   }
   .container-text-and-icon {
     mat-icon {
-      color: mat-color($foreground, 'state-notice-dark') !important;
+      color: mat.get-color-from-palette(
+        $foreground,
+        'state-notice-dark'
+      ) !important;
     }
   }
 }

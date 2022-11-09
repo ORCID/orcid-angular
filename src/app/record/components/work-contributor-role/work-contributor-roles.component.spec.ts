@@ -6,7 +6,7 @@ import { HarnessLoader, parallel } from '@angular/cdk/testing'
 import {
   ControlContainer,
   FormControlDirective,
-  FormGroup,
+  UntypedFormGroup,
   FormGroupDirective,
   FormsModule,
   ReactiveFormsModule,
@@ -75,7 +75,7 @@ describe('WorkContributorRoleComponent', () => {
     fixture = TestBed.createComponent(WorkContributorRolesComponent)
     component = fixture.componentInstance
     debugElement = fixture.debugElement
-    const mockFormGroup: FormGroup = new FormGroup({})
+    const mockFormGroup: UntypedFormGroup = new UntypedFormGroup({})
     const formGroupDirective: FormGroupDirective = new FormGroupDirective(
       [],
       []

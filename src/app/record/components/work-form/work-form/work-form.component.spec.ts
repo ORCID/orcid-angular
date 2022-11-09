@@ -12,7 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar'
 import { Overlay } from '@angular/cdk/overlay'
 import { RecordService } from '../../../../core/record/record.service'
 import { RecordCountriesService } from '../../../../core/record-countries/record-countries.service'
-import { FormBuilder } from '@angular/forms'
+import { UntypedFormBuilder } from '@angular/forms'
 import { SharedModule } from '../../../../shared/shared.module'
 
 describe('WorkFormComponent', () => {
@@ -27,7 +27,7 @@ describe('WorkFormComponent', () => {
         { provide: MatDialogRef, useValue: {} },
         { provide: MAT_DIALOG_DATA, useValue: {} },
         WINDOW_PROVIDERS,
-        FormBuilder,
+        UntypedFormBuilder,
         PlatformInfoService,
         RecordService,
         RecordWorksService,
