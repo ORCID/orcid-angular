@@ -20,8 +20,10 @@ describe('openID response type validations', async function () {
 
   it('TC#10 - authorization link with openid scope + no response_type parameter ', function () {
     cy.visit(authorizationLink)
-    cy.contains('oauth_error / Please specify a response type').should('be.visible')
+    cy.contains('oauth_error / Please specify a response type').should(
+      'be.visible'
+    )
   })
- 
+
   after(() => {})
 })

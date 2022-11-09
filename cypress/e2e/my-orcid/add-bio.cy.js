@@ -15,7 +15,7 @@ describe('My orcid - users are able to add content to their record', async funct
       cy.get('#edit-button').click()
     })
     cy.get('#biography-input').clear().type(addBio)
-    cy.get('#save-biography-button').should('be.enabled').click({force:true})
+    cy.get('#save-biography-button').should('be.enabled').click({ force: true })
     cy.wait(2000)
 
     //verify the name is displayed
