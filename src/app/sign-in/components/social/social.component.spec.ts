@@ -10,7 +10,6 @@ import { SnackbarService } from '../../../cdk/snackbar/snackbar.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatDialog } from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
-import { CookieService } from 'ngx-cookie-service'
 import { SignInService } from '../../../core/sign-in/sign-in.service'
 import { OauthService } from '../../../core/oauth/oauth.service'
 
@@ -24,7 +23,6 @@ describe('SocialComponent', () => {
       declarations: [SocialComponent],
       providers: [
         WINDOW_PROVIDERS,
-        CookieService,
         SignInService,
         OauthService,
         PlatformInfoService,

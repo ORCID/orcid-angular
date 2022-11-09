@@ -1,6 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
-import { CookieService } from 'ngx-cookie-service'
 import { first } from 'rxjs/operators'
 
 import { environment } from '../../../../environments/environment'
@@ -23,9 +22,7 @@ export class SocialComponent implements OnInit {
   labelFacebookButton = $localize`:@@ngOrcid.signin.facebook:Sign in with Facebook`
 
   constructor(
-    private _signIn: SignInService,
-    private _oauth: OauthService,
-    private _cookie: CookieService,
+ 
     private _platformInfo: PlatformInfoService,
     private _router: Router,
     @Inject(WINDOW) private window: Window,
@@ -35,7 +32,7 @@ export class SocialComponent implements OnInit {
       this.platform = data
     })
     this.baseUri = environment.API_WEB
-    this.csrf = this._cookie.get('XSRF-TOKEN')
+    // this.csrf = this._cookie.get('XSRF-TOKEN') TODO: Update
   }
 
   accessThroughInstitution() {

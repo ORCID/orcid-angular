@@ -1,6 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { CookieService } from 'ngx-cookie-service'
 import { of, throwError } from 'rxjs'
 import { catchError, switchMap, take } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
@@ -15,7 +14,6 @@ export class ErrorHandlerService {
   browserSupport = 'unchecked'
   constructor(
     private _platform: PlatformInfoService,
-    private _cookie: CookieService,
     private _snackBar: SnackbarService
   ) {
     this.checkBrowser()
@@ -90,10 +88,10 @@ stack: "${processedError.stack}"
   }
 
   private checkCSRF() {
-    if (!this._cookie.get('XSRF-TOKEN')) {
-      return 'no-XSRF'
-    } else {
-      return ''
-    }
+    //   if (!this._cookie.get('XSRF-TOKEN')) { //TODO: UPDATE
+    //     return 'no-XSRF'
+    //   } else {
+    //     return ''
+    //   }
   }
 }

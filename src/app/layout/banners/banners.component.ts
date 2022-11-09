@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core'
-import { CookieService } from 'ngx-cookie-service'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { take, filter } from 'rxjs/operators'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
@@ -21,7 +20,6 @@ export class BannersComponent implements OnInit {
   ariaLabelCookiesPolicy = $localize`:@@layout.ariaLabelCookies:Cookies Policy`
 
   constructor(
-    private _cookie: CookieService,
     _platformInfo: PlatformInfoService,
     togglz: TogglzService
   ) {
@@ -44,7 +42,7 @@ export class BannersComponent implements OnInit {
       )
 
     // Show cookie banner
-    this.showCookieBanner = !_cookie.check('orcidCookiePolicyAlert')
+    // this.showCookieBanner = !_cookie.check('orcidCookiePolicyAlert') //TODO: Angular update
   }
 
   updateClosableMessage() {
@@ -53,7 +51,7 @@ export class BannersComponent implements OnInit {
         if (
           node &&
           node.id &&
-          !this._cookie.check(node.id) &&
+          // !this._cookie.check(node.id) && //TODO: Angular
           !this.closableElementAtDisplay
         ) {
           this.closableElementAtDisplay = node
@@ -64,7 +62,7 @@ export class BannersComponent implements OnInit {
 
   understoodClosableMessage(element: Element) {
     this.closableElementAtDisplay = null
-    this._cookie.set(element.id, 'understood', 365)
+    // this._cookie.set(element.id, 'understood', 365) //TODO: Angular update
     this.updateClosableMessage()
   }
 

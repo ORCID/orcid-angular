@@ -1,5 +1,4 @@
 import { Component, OnInit, Inject, HostBinding } from '@angular/core'
-import { CookieService } from 'ngx-cookie-service'
 import { WINDOW } from 'src/app/cdk/window'
 import { environment } from '../../../environments/environment'
 
@@ -16,17 +15,16 @@ export class EnvironmentBannerComponent implements OnInit {
   labelWarning = $localize`:@@environmentBanner.ariaLabelWarning:Warning, testing website`
   constructor(
     @Inject(WINDOW) private window: Window,
-    private _cs: CookieService
   ) {
     this.hostUrl = window.location.host
-    if (!this._cs.get('testWarningCookie') || !this.canDismiss) {
-      this.display = 'auto'
-    }
+    // if (!this._cs.get('testWarningCookie') || !this.canDismiss) { // TODO: Anguar update
+    //   this.display = 'auto'
+    // }
   }
 
   onDismiss() {
     this.display = 'none'
-    this._cs.set('testWarningCookie', 'dont show message', 365)
+    // this._cs.set('testWarningCookie', 'dont show message', 365) // TODO: Anguar update
   }
 
   ngOnInit() {}

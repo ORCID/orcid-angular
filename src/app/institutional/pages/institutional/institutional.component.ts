@@ -8,7 +8,6 @@ import {
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatAutocompleteTrigger } from '@angular/material/autocomplete'
 import { Router } from '@angular/router'
-import { CookieService } from 'ngx-cookie-service'
 import { Observable } from 'rxjs'
 import { first, map, startWith, tap } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
@@ -55,7 +54,6 @@ export class InstitutionalComponent implements OnInit {
 
   constructor(
     @Inject(WINDOW) private window: Window,
-    private _cookie: CookieService,
     private _disco: DiscoService,
     private _router: Router,
     private _platformInfo: PlatformInfoService
@@ -155,44 +153,44 @@ export class InstitutionalComponent implements OnInit {
     return institution.DisplayNames?.find((name) => name.lang === 'en')
   }
 
-  addUserSelectedIdPs() {
-    let dataCookie = this._cookie.get('_saml_idp')
-    let institutions = []
-    if (dataCookie) {
-      dataCookie = dataCookie.replace(/^\s+|\s+$/g, '')
-      dataCookie = dataCookie.replace('+', '%20')
-      institutions = dataCookie.split('%20')
-    }
+  addUserSelectedIdPs() { //TODO: Angular update
+    // let dataCookie = this._cookie.get('_saml_idp')
+    // let institutions = []
+    // if (dataCookie) {
+    //   dataCookie = dataCookie.replace(/^\s+|\s+$/g, '')
+    //   dataCookie = dataCookie.replace('+', '%20')
+    //   institutions = dataCookie.split('%20')
+    // }
 
-    const dateCookie = new Date(
-      new Date().getTime() + this.cookieExpirationTime * 24 * 60 * 60 * 1000
-    )
-    if (institutions.indexOf(btoa(this.entityID)) === -1) {
-      if (institutions.length === 3) {
-        institutions.shift()
-      }
-      institutions.push(btoa(this.entityID))
-    }
+    // const dateCookie = new Date(
+    //   new Date().getTime() + this.cookieExpirationTime * 24 * 60 * 60 * 1000
+    // )
+    // if (institutions.indexOf(btoa(this.entityID)) === -1) {
+    //   if (institutions.length === 3) {
+    //     institutions.shift()
+    //   }
+    //   institutions.push(btoa(this.entityID))
+    // }
     // Encode cookie base 64
-    this._cookie.set(
-      '_saml_institutional',
-      institutions.join('%20'),
-      dateCookie !== null ? dateCookie : this.cookieExpirationTime
-    )
+    // this._cookie.set(            
+    //   '_saml_institutional',
+    //   institutions.join('%20'),
+    //   dateCookie !== null ? dateCookie : this.cookieExpirationTime
+    // )
   }
 
   retrieveUserSelectedIdPs() {
-    let cookieValues = this._cookie.get('_saml_institutional')
-    if (cookieValues) {
-      cookieValues = cookieValues.replace(/^\s+|\s+$/g, '')
-      cookieValues = cookieValues.replace('+', '%20')
-      const institutions = cookieValues.split('%20')
-      for (const inst of institutions) {
-        this._disco.getInstitutionBaseOnID(atob(inst)).subscribe((res) => {
-          this.userSelectedInstitutions.push(res)
-        })
-      }
-    }
+    // let cookieValues = this._cookie.get('_saml_institutional') TODO: Angular update
+    // if (cookieValues) {
+    //   cookieValues = cookieValues.replace(/^\s+|\s+$/g, '')
+    //   cookieValues = cookieValues.replace('+', '%20')
+    //   const institutions = cookieValues.split('%20')
+    //   for (const inst of institutions) {
+    //     this._disco.getInstitutionBaseOnID(atob(inst)).subscribe((res) => {
+    //       this.userSelectedInstitutions.push(res)
+    //     })
+    //   }
+    // }
   }
 
   selectInstitution(institution: Institutional) {
