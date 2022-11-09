@@ -67,7 +67,7 @@ export class LanguageGuard implements CanActivateChild {
           return of(true)
         } else {
           if (
-            this._cookies.get(GUARD_COOKIE_CHECK) !== langContext.cookie 
+            this._cookie.get(GUARD_COOKIE_CHECK) !== langContext.cookie 
           ) {
             // the browser needs to be reloaded to set the right cookie.
             this._cookie.set(GUARD_COOKIE_CHECK, langContext.cookie)

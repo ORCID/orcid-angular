@@ -131,18 +131,20 @@ describe('ModalCountryComponent', () => {
     fixture.detectChanges()
 
     const countriesSelects = await loader.getAllHarnesses(MatSelectHarness)
-    await countriesSelects[2].open()
-    await countriesSelects[2].clickOptions({ text: 'Mexico' })
+
+    await countriesSelects[3].open()
+    await countriesSelects[3].clickOptions() //Select the first option
 
     const disabledStates = await parallel(() =>
       countriesSelects.map((select) => select.isDisabled())
     )
 
     expect(countriesForm.controls[1].value.country).toBe('Albania')
-    expect(countriesForm.controls[3].value.country).toBe('Kosovo')
-    expect(countriesForm.controls['new-0'].value.country).toBe('Mexico')
-    expect(disabledStates.filter((value) => value).length).toBe(1)
-    expect(countriesSelects.length).toBe(3)
+    expect(countriesForm.controls[2].getRawValue().country).toBe('United States')
+    expect(countriesForm.controls[3].getRawValue().country).toBe('Kosovo')
+    expect(countriesForm.controls['new-0'].value.country).toBe('Afghanistan')
+    expect(disabledStates.filter((value) => value).length).toBe(2)
+    expect(countriesSelects.length).toBe(4)
   })
 })
 
