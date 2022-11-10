@@ -272,7 +272,7 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
         }
       }
 
-      if (true) {
+      if (ADD_OTHER_WORK_CONTRIBUTORS_WITH_BIBTEX_TOGGLZ) {
         work.contributorsGroupedByOrcid = []
         if (lowerKeyTags.hasOwnProperty('author')) {
           this.addContributors(
