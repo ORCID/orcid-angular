@@ -1,5 +1,5 @@
 import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core'
-import { Subject } from 'rxjs'
+import { of, Subject } from 'rxjs'
 import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import { RecordWorksService } from '../../../../../core/record-works/record-works.service'
@@ -14,6 +14,7 @@ import { environment } from '../../../../../../environments/environment.local'
 import { Contributor } from '../../../../../types'
 import { UserRecord } from '../../../../../types/record.local'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
+import { cleanData } from 'cypress/types/jquery'
 
 @Component({
   selector: 'app-work-doi-bibtex-modal',
@@ -51,88 +52,84 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
   ngOnInit(): void {}
 
   bibTexInputChange($fileInputEvent: any) {
-    this._togglz
-      .getStateOf('ADD_OTHER_WORK_CONTRIBUTORS_WITH_BIBTEX')
-      .subscribe((ADD_OTHER_WORK_CONTRIBUTORS_WITH_BIBTEX_TOGGLZ) => {
-        this.bibtexErrorParsingText = undefined
-        this.bibtexErrorParsing = false
-        this.loadingWorks = true
-        const textFiles = $fileInputEvent.target.files
-        for (const bibtex of textFiles) {
-          const reader = new FileReader()
-          reader.readAsText(bibtex)
 
-          const that = this
+    of(true).subscribe((ADD_OTHER_WORK_CONTRIBUTORS_WITH_BIBTEX_TOGGLZ) => {
+      this.bibtexErrorParsingText = undefined
+      this.bibtexErrorParsing = false
+      this.loadingWorks = true
+      const textFiles = $fileInputEvent.target.files
+      for (const bibtex of textFiles) {
+        const reader = new FileReader()
+        reader.readAsText(bibtex)
 
-          reader.onloadend = function (e) {
-            let parsed = null
-            try {
-              parsed = bibtexParse.toJSON(reader.result)
+        const that = this
 
-              if (
-                typeof parsed === 'string' &&
-                parsed.substring(0, 5).toLowerCase().indexOf('error') > -1
-              ) {
-                that.bibtexErrorParsingText = parsed
-                that.bibtexErrorParsing = true
-                that.loadingWorks = false
-              } else {
-                if (parsed) {
-                  const newWorks = []
-                  if (parsed.length === 0) {
-                    that.bibtexErrorNoEntries = true
-                    that.loadingWorks = false
-                  }
-                  while (parsed.length > 0) {
-                    const cur = parsed.shift()
-                    const bibtexEntry = cur.entryType.toLowerCase()
-                    if (
-                      bibtexEntry !== 'preamble' &&
-                      bibtexEntry !== 'comment'
-                    ) {
-                      newWorks.push(
-                        that.populateWork(
-                          cur,
-                          ADD_OTHER_WORK_CONTRIBUTORS_WITH_BIBTEX_TOGGLZ
-                        )
-                      )
-                    }
-                  }
-                  if (newWorks.length > 0) {
-                    that._recordWorksService
-                      .worksValidate(newWorks)
-                      .pipe(first())
-                      .subscribe((data) => {
-                        data.forEach((work) => {
-                          that.worksFromBibtex.push(work)
-                          if (work.errors.length > 0 && !that.isAnInvalidWork) {
-                            that.isAnInvalidWork = true
-                            that._snackBar.showValidationError()
-                          }
-                        })
-                        that.worksFromBibtex.forEach((w) => {
-                          const newPutCode = 'new-' + that.addedWorkCount++
-                          w.putCode = {
-                            value: newPutCode,
-                          }
-                          that.group[newPutCode] = new UntypedFormGroup({
-                            checked: new UntypedFormControl(false),
-                          })
-                        })
-                        that.importForm = new UntypedFormGroup(that.group)
-                        that.loadingWorks = false
-                      })
-                  }
-                }
-              }
-            } catch (e) {
-              that.bibtexErrorParsingText = e
+        reader.onloadend = function (e) {
+          let parsed = null
+          try {
+            parsed = bibtexParse.toJSON(reader.result)
+
+            if (
+              typeof parsed === 'string' &&
+              parsed.substring(0, 5).toLowerCase().indexOf('error') > -1
+            ) {
+              that.bibtexErrorParsingText = parsed
               that.bibtexErrorParsing = true
               that.loadingWorks = false
+            } else {
+              if (parsed) {
+                const newWorks = []
+                if (parsed.length === 0) {
+                  that.bibtexErrorNoEntries = true
+                  that.loadingWorks = false
+                }
+                while (parsed.length > 0) {
+                  const cur = parsed.shift()
+                  const bibtexEntry = cur.entryType.toLowerCase()
+                  if (bibtexEntry !== 'preamble' && bibtexEntry !== 'comment') {
+                    newWorks.push(
+                      that.populateWork(
+                        cur,
+                        ADD_OTHER_WORK_CONTRIBUTORS_WITH_BIBTEX_TOGGLZ
+                      )
+                    )
+                  }
+                }
+                if (newWorks.length > 0) {
+                  that._recordWorksService
+                    .worksValidate(newWorks)
+                    .pipe(first())
+                    .subscribe((data) => {
+                      data.forEach((work) => {
+                        that.worksFromBibtex.push(work)
+                        if (work.errors.length > 0 && !that.isAnInvalidWork) {
+                          that.isAnInvalidWork = true
+                          that._snackBar.showValidationError()
+                        }
+                      })
+                      that.worksFromBibtex.forEach((w) => {
+                        const newPutCode = 'new-' + that.addedWorkCount++
+                        w.putCode = {
+                          value: newPutCode,
+                        }
+                        that.group[newPutCode] = new UntypedFormGroup({
+                          checked: new UntypedFormControl(false),
+                        })
+                      })
+                      that.importForm = new UntypedFormGroup(that.group)
+                      that.loadingWorks = false
+                    })
+                }
+              }
             }
+          } catch (e) {
+            that.bibtexErrorParsingText = e
+            that.bibtexErrorParsing = true
+            that.loadingWorks = false
           }
         }
-      })
+      }
+    })
   }
 
   populateWork(
@@ -271,7 +268,7 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
           value: lowerKeyTags['url'],
         }
       }
-
+  
       if (ADD_OTHER_WORK_CONTRIBUTORS_WITH_BIBTEX_TOGGLZ) {
         work.contributorsGroupedByOrcid = this.addRecordHolderAsContributor()
 
@@ -300,17 +297,20 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
     work: Work
   ) {
     contributors.forEach((contributor) => {
-      work.contributorsGroupedByOrcid.push({
-        creditName: {
-          content: contributor,
-        },
-        rolesAndSequences: [
-          {
-            contributorRole: type,
-            contributorSequence: null,
+      contributor = latexParse.decodeLatex(contributor).trim()
+      if (contributor) {
+        work.contributorsGroupedByOrcid.push({
+          creditName: {
+            content: contributor,
           },
-        ],
-      })
+          rolesAndSequences: [
+            {
+              contributorRole: type,
+              contributorSequence: null,
+            },
+          ],
+        })
+      }
     })
   }
 
