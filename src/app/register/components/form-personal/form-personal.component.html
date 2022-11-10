@@ -1,6 +1,6 @@
 <ng-container [formGroup]="form">
   <div class="input-container">
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" [hideRequiredMarker]="true">
       <mat-label i18n="@@register.firstName">First name</mat-label>
       <input
         id="given-names-input"
@@ -40,7 +40,7 @@
       >
     </button>
   </div>
-  <mat-form-field appearance="outline">
+  <mat-form-field appearance="outline" [hideRequiredMarker]="true">
     <mat-label
       ><ng-container i18n="@@register.lastName">Last name</ng-container>
       <ng-container i18n="@@register.optional"
@@ -62,7 +62,7 @@
   </mat-form-field>
 
   <ng-container formGroupName="emails">
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" [hideRequiredMarker]="true">
       <mat-label i18n="@@register.primaryEmail">Primary email</mat-label>
       <input
         id="email-input"
@@ -98,7 +98,11 @@
         </div>
       </mat-error>
     </mat-form-field>
-    <mat-form-field appearance="outline" *ngIf="!reactivation?.isReactivation">
+    <mat-form-field
+      appearance="outline"
+      *ngIf="!reactivation?.isReactivation"
+      [hideRequiredMarker]="true"
+    >
       <mat-label i18n="@@register.confirmEmail"
         >Confirm primary email</mat-label
       >
