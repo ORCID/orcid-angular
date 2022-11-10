@@ -316,8 +316,6 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
     })
   }
 
-
-
   externalIdentifierId(work, idType, value) {
     if (!value) {
       console.warn('Empty value for ext id: ' + idType)
