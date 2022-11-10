@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject, HostBinding } from '@angular/core'
 import { CookieService } from 'ngx-cookie-service'
-import { Cookie } from 'puppeteer'
 import { WINDOW } from 'src/app/cdk/window'
 import { environment } from '../../../environments/environment'
 
@@ -28,7 +27,7 @@ export class EnvironmentBannerComponent implements OnInit {
   onDismiss() {
     this.display = 'none'
     this._cookieService.set('testWarningCookie', 'dont show message', 365)
-  }of
+  }
 
   ngOnInit() {}
 }
