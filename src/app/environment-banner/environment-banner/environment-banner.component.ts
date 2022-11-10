@@ -28,7 +28,7 @@ export class EnvironmentBannerComponent implements OnInit {
   onDismiss() {
     this.display = 'none'
     this._cookieService.set('testWarningCookie', 'dont show message', 365)
-  }
+  }of
 
   ngOnInit() {}
 }
