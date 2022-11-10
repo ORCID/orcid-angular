@@ -21,14 +21,13 @@ export class EnvironmentBannerComponent implements OnInit {
   ) {
     this.hostUrl = window.location.host
     if (!this._cookieService.get('testWarningCookie') || !this.canDismiss) {
-      // TODO: Anguar update
       this.display = 'auto'
     }
   }
 
   onDismiss() {
     this.display = 'none'
-    this._cookieService.set('testWarningCookie', 'dont show message', 365) // TODO: Anguar update
+    this._cookieService.set('testWarningCookie', 'dont show message', 365)
   }
 
   ngOnInit() {}
