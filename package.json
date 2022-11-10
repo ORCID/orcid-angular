@@ -78,6 +78,7 @@
     "gulp-clean": "^0.4.0",
     "gulp-flatten": "^0.4.0",
     "helphero": "^3.6.0",
+    "jwt-decode": "^3.1.2",
     "lodash": "^4.17.20",
     "ngx-cookie-service": "^14.0.1",
     "nodemailer": "^6.7.2",
