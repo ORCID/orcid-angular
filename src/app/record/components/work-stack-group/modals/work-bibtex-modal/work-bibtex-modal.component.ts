@@ -272,9 +272,8 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
         }
       }
 
-      if (ADD_OTHER_WORK_CONTRIBUTORS_WITH_BIBTEX_TOGGLZ) {
-        work.contributorsGroupedByOrcid = this.addRecordHolderAsContributor()
-
+      if (true) {
+        work.contributorsGroupedByOrcid = []
         if (lowerKeyTags.hasOwnProperty('author')) {
           this.addContributors(
             lowerKeyTags['author'].split('and'),
@@ -317,19 +316,7 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
     })
   }
 
-  addRecordHolderAsContributor(): Contributor[] {
-    return [
-      {
-        creditName: {
-          content: this.getCreditNameFromUserRecord(),
-        },
-        contributorOrcid: {
-          path: this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID,
-          uri: `https:${environment.BASE_URL}${this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID}`,
-        },
-      },
-    ]
-  }
+
 
   externalIdentifierId(work, idType, value) {
     if (!value) {
