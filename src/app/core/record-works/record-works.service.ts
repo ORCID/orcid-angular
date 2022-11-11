@@ -259,16 +259,14 @@ export class RecordWorksService {
   }
 
   save(work: Work, bibtex?: boolean): Observable<Work> {
-    let endpoint = bibtex ? `works/work.json?isBibtex=true` : `works/work.json`;
-    return this._http
-      .post<Work>(environment.API_WEB + endpoint, work)
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error)),
-        tap(() => {
-          this.getWorks({ forceReload: true })
-        })
-      )
+    let endpoint = bibtex ? `works/work.json?isBibtex=true` : `works/work.json`
+    return this._http.post<Work>(environment.API_WEB + endpoint, work).pipe(
+      retry(3),
+      catchError((error) => this._errorHandler.handleError(error)),
+      tap(() => {
+        this.getWorks({ forceReload: true })
+      })
+    )
   }
 
   getWork(): Observable<Work> {
