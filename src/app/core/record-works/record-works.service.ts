@@ -123,6 +123,7 @@ export class RecordWorksService {
               ? 'works/worksExtendedPage.json'
               : 'works/worksPage.json'
           }
+
           return url
         }),
         switchMap((url) =>
@@ -264,7 +265,7 @@ export class RecordWorksService {
       retry(3),
       catchError((error) => this._errorHandler.handleError(error)),
       tap(() => {
-        if (!requireReload) {
+        if (requireReload) {
           this.getWorks({ forceReload: true })
         }
       })
