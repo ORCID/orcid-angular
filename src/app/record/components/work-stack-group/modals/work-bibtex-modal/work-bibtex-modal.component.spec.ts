@@ -117,9 +117,6 @@ describe('WorkDoiBibtexModalComponent', () => {
     await delay(100)
 
     await fixture.detectChanges()
-
-    console.log(component.worksFromBibtex)
-
     const workWithContributors = component.worksFromBibtex[3]
     const contributors = workWithContributors.contributorsGroupedByOrcid
     const authors = filterContributorsByRole(contributors, 'author')
