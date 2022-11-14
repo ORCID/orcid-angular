@@ -75,6 +75,7 @@ describe('RecordWorksService', () => {
             environment.API_WEB +
               'works/worksExtendedPage.json?offset=0&sort=date&sortAsc=false&pageSize=50'
           )
+
           if (index === works.length - 1) {
             expect(requestGetWorks.length).toEqual(1)
 
@@ -97,7 +98,6 @@ describe('RecordWorksService', () => {
     )
 
     expect(requestsSaveWorks.length).toEqual(5)
-
 
     requestsSaveWorks.forEach((r) => {
       r.flush({})
