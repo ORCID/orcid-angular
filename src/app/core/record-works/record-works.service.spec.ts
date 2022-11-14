@@ -62,19 +62,23 @@ describe('RecordWorksService', () => {
     expect(service).toBeTruthy()
   })
 
-  it('should call the method `save` 5 times and only `getWorks` and `getWorksGroupingSuggestions` once', () => {
+  fit('should call the method `save` 5 times and only `getWorks` and `getWorksGroupingSuggestions` once', () => {
     const works: Work[] = getNumberOfWorks(5)
     let requestGetWorks = null
 
     works.forEach((work, index) => {
       service
-        .save(work, !(index === works.length - 1))
+        .save(work, !(index === works.length - 1), true)
         .subscribe((workSaved) => {
           expect(workSaved).toBeTruthy()
           requestGetWorks = httpTestingController.match(
             environment.API_WEB +
               'works/worksExtendedPage.json?offset=0&sort=date&sortAsc=false&pageSize=50'
           )
+          if (index !== works.length - 1) {
+            expect(requestGetWorks.length).toEqual(0)
+
+          }
           if (index === works.length - 1) {
             expect(requestGetWorks.length).toEqual(1)
 
@@ -93,10 +97,11 @@ describe('RecordWorksService', () => {
     })
 
     const requestsSaveWorks = httpTestingController.match(
-      environment.API_WEB + 'works/work.json'
+      environment.API_WEB + 'works/work.json?isBibtex=true'
     )
 
     expect(requestsSaveWorks.length).toEqual(5)
+
 
     requestsSaveWorks.forEach((r) => {
       r.flush({})

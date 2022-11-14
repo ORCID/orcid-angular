@@ -398,13 +398,15 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
       this.loadingWorks = true
       this.selectedWorks.forEach((work, index) => {
         work.putCode = null
-        this._recordWorksService.save(work, true).subscribe(() => {
-          if (index === this.selectedWorks.length - 1) {
-            this.loadingWorks = false
-            this.worksFromBibtex = []
-            this.closeEvent()
-          }
-        })
+        this._recordWorksService
+          .save(work, true, !(index === this.selectedWorks.length - 1))
+          .subscribe(() => {
+            if (index === this.selectedWorks.length - 1) {
+              this.loadingWorks = false
+              this.worksFromBibtex = []
+              this.closeEvent()
+            }
+          })
       })
     } else {
       this._snackBar.showValidationError(
