@@ -77,7 +77,6 @@ describe('RecordWorksService', () => {
           )
           if (index !== works.length - 1) {
             expect(requestGetWorks.length).toEqual(0)
-
           }
           if (index === works.length - 1) {
             expect(requestGetWorks.length).toEqual(1)
@@ -101,7 +100,6 @@ describe('RecordWorksService', () => {
     )
 
     expect(requestsSaveWorks.length).toEqual(5)
-
 
     requestsSaveWorks.forEach((r) => {
       r.flush({})
