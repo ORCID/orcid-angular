@@ -4,14 +4,13 @@ import { RecordFundingsService } from './record-fundings.service'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 import { WINDOW_PROVIDERS } from '../../cdk/window'
-import { AffiliationsSortService } from '..'
-import { RecordAffiliationsGroupingService } from '../record-affiliations-affiliations-grouping/record-affiliations-grouping.service'
 import { PlatformInfoService } from '../../cdk/platform-info'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { SnackbarService } from '../../cdk/snackbar/snackbar.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatDialog } from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
+import { Funding, FundingGroup, FundingTypes } from '../../types/record-funding.endpoint'
 
 describe('FundingService', () => {
   beforeEach(() =>
@@ -34,3 +33,29 @@ describe('FundingService', () => {
     expect(service).toBeTruthy()
   })
 })
+
+export function getFundingGroup(): FundingGroup[] {
+  return [
+    {
+      defaultFunding: getFunding(),
+      fundings: [ getFunding() ],
+      externalIdentifiers: [],
+    },
+  ] as FundingGroup[]
+}
+
+function getFunding(): Funding {
+  return {
+    fundingName: {
+      value: 'Grant',
+    },
+    fundingTitle: { title: { value: 'funding' }},
+    fundingType: {
+      value: FundingTypes.grant,
+    },
+    putCode: {
+      value: '1',
+    },
+    visibility: { visibility: 'PUBLIC' },
+  } as Funding
+}

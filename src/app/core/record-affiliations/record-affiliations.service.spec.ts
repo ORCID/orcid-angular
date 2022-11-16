@@ -3,14 +3,8 @@ import { TestBed } from '@angular/core/testing'
 import { RecordAffiliationService } from './record-affiliations.service'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
-import {
-  MAT_DIALOG_DATA,
-  MatDialog,
-  MatDialogRef,
-} from '@angular/material/dialog'
+import { MatDialog } from '@angular/material/dialog'
 import { WINDOW_PROVIDERS } from '../../cdk/window'
-import { FormBuilder } from '@angular/forms'
-import { RecordWorksService } from '../record-works/record-works.service'
 import { PlatformInfoService } from '../../cdk/platform-info'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { SnackbarService } from '../../cdk/snackbar/snackbar.service'
@@ -18,6 +12,13 @@ import { MatSnackBar } from '@angular/material/snack-bar'
 import { Overlay } from '@angular/cdk/overlay'
 import { RecordAffiliationsGroupingService } from '../record-affiliations-affiliations-grouping/record-affiliations-grouping.service'
 import { AffiliationsSortService } from '..'
+import {
+  Affiliation,
+  AffiliationGroup,
+  AffiliationGroupsTypes,
+  AffiliationType,
+  AffiliationUIGroup,
+} from '../../types/record-affiliation.endpoint'
 
 describe('AffiliationsService', () => {
   beforeEach(() =>
@@ -44,3 +45,36 @@ describe('AffiliationsService', () => {
     expect(service).toBeTruthy()
   })
 })
+
+export function getAffiliationUIGroup(): AffiliationUIGroup[] {
+  return  [
+    {
+      type: AffiliationGroupsTypes.EMPLOYMENT,
+      affiliationGroup: [getAffiliationGroup(AffiliationType.employment)],
+    },
+    {
+      type: AffiliationGroupsTypes.MEMBERSHIP,
+      affiliationGroup: [getAffiliationGroup(AffiliationType.membership)],
+    },
+  ]
+}
+
+function getAffiliationGroup(affiliationType: AffiliationType): AffiliationGroup {
+  return {
+    externalIdentifiers: [],
+    affiliations: [getAffiliation(affiliationType)],
+    defaultAffiliation: getAffiliation(affiliationType)
+  } as AffiliationGroup
+}
+
+function getAffiliation(affiliationType: AffiliationType): Affiliation {
+  return  {
+    affiliationName: { value: 'ORCID' },
+    affiliationType: { value: affiliationType },
+    putCode: { value: '1'},
+    visibility: { visibility: 'PUBLIC'},
+    city: { value: 'city' },
+    region: { value: 'region' },
+    country: { value: 'country' }
+  } as Affiliation
+}

@@ -6,11 +6,10 @@ import { environment } from '../../../environments/environment'
 import { PeerReview } from '../../types/record-peer-review.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
 import { RecordImportWizard } from '../../types/record-peer-review-import.endpoint'
-import { retry, catchError, tap, first, map, switchMap } from 'rxjs/operators'
+import { catchError, first, map, retry, switchMap, tap } from 'rxjs/operators'
 import { VisibilityStrings } from '../../types/common.endpoint'
-import { cloneDeep } from 'lodash'
 import { TogglzService } from '../togglz/togglz.service'
-import { take } from 'rxjs/operators'
+
 @Injectable({
   providedIn: 'root',
 })

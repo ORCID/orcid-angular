@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing'
 
-import { UserInfoService } from './user-info.service'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 import { WINDOW_PROVIDERS } from '../../cdk/window'
@@ -10,10 +9,11 @@ import { SnackbarService } from '../../cdk/snackbar/snackbar.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatDialog } from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
-import { UserInfo } from '../../types'
+import { RecordPeerReviewService } from './record-peer-review.service'
+import { PeerReview, PeerReviewDuplicateGroup } from '../../types/record-peer-review.endpoint'
 
-describe('UserInfoService', () => {
-  let service: UserInfoService
+describe('RecordPeerReviewService', () => {
+  let service: RecordPeerReviewService
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -28,7 +28,7 @@ describe('UserInfoService', () => {
         Overlay,
       ],
     })
-    service = TestBed.inject(UserInfoService)
+    service = TestBed.inject(RecordPeerReviewService)
   })
 
   it('should be created', () => {
@@ -36,16 +36,23 @@ describe('UserInfoService', () => {
   })
 })
 
-export function getUserInfo(): UserInfo {
-  return {
-    REAL_USER_ORCID: '0000-0000-0000-000X',
-    EFFECTIVE_USER_ORCID: '0000-0000-0000-000X',
-    PRIMARY_EMAIL: 'test@orcid.org',
-    IS_PRIMARY_EMAIL_VERIFIED: 'true',
-    LOCKED: 'false',
-    CLAIMED: 'true',
-    HAS_VERIFIED_EMAIL: 'true',
-    RECORD_WITH_ISSUES: false,
-    LAST_MODIFIED: '2022-08-03 11:30:49.870566'
-  } as UserInfo
+export function getPeerReviews(): PeerReview[] {
+  return [
+    {
+      name: 'Name',
+      visibility: 'PUBLIC',
+      peerReviewDuplicateGroups: [
+        {
+          activePutCode: 1,
+          id: 1,
+          peerReviews: [
+            {
+              name: 'Name',
+              visibility: 'PUBLIC'
+            }
+          ] as PeerReview[]
+        }
+      ] as PeerReviewDuplicateGroup[]
+    } as PeerReview
+  ]
 }

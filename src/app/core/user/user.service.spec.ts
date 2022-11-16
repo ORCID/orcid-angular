@@ -10,6 +10,8 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { SnackbarService } from '../../cdk/snackbar/snackbar.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { Overlay } from '@angular/cdk/overlay'
+import { UserSession } from '../../types/session.local'
+import { UserInfo } from '../../types'
 
 describe('UserService', () => {
   beforeEach(() =>
@@ -32,3 +34,15 @@ describe('UserService', () => {
     expect(service).toBeTruthy()
   })
 })
+
+export function getUserSession(): UserSession {
+  const userSession = {} as UserSession
+  userSession.userInfo = {
+    REAL_USER_ORCID: '0000-0000-0000-000X',
+    EFFECTIVE_USER_ORCID: '0000-0000-0000-000X',
+    IS_LOCKED: 'false'
+  } as UserInfo
+  userSession.loggedIn = true
+  userSession.displayName = 'Test Name'
+  return userSession
+}

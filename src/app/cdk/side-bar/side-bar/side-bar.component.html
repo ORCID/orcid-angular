@@ -1,4 +1,7 @@
-<div>
+<section
+  id="personal-information"
+  *ngIf="!hideOrcidId || !orcidId"
+>
   <app-side-bar-id
     *ngIf="!hideOrcidId"
     [ngClass]="{
@@ -289,4 +292,4 @@
       </app-panel-data>
     </app-panel>
   </ng-container>
-</div>
+</section>

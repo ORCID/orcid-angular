@@ -42,74 +42,82 @@
     </ng-container>
   </app-warning-message>
 
-  <app-panel
+  <section
+    id="names"
     *ngIf="userRecord?.names"
-    [isPublicRecord]="isPublicRecord"
-    [elements]="userRecord.names.givenNames"
-    [editModalComponent]="modalNameComponent"
-    [userRecord]="userRecord"
-    [type]="'top-bar'"
-    [id]="userInfo?.EFFECTIVE_USER_ORCID"
-    [names]="true"
-    id="names-panel"
   >
-    <h2 header class="orc-font-body" i18n="@@topBar.names">Names</h2>
-    <app-panel-data>
-      <app-panel-element [visibility]="userRecord.names.visibility.visibility">
-        <ng-container *ngIf="creditName">
+    <app-panel
+      [isPublicRecord]="isPublicRecord"
+      [elements]="userRecord.names.givenNames"
+      [editModalComponent]="modalNameComponent"
+      [userRecord]="userRecord"
+      [type]="'top-bar'"
+      [id]="userInfo?.EFFECTIVE_USER_ORCID"
+      [names]="true"
+      id="names-panel"
+    >
+      <h2 header class="orc-font-body" i18n="@@topBar.names">Names</h2>
+      <app-panel-data>
+        <app-panel-element [visibility]="userRecord.names.visibility.visibility">
+          <ng-container *ngIf="creditName">
           <span i18n="@@topBar.publishedName" class="mat-caption">
             Published Name
           </span>
-          <p class="mat-card-title published-name">
-            <b id="publishedName">
-              {{ creditName }}
-            </b>
-          </p>
-        </ng-container>
-        <span i18n="@@topBar.name" class="mat-caption description"> Name </span>
-        <div id="givenAndFamilyNames" class="mat-body-1">
-          {{ givenNames + ' ' + familyName }}
-        </div>
-      </app-panel-element>
-      <ng-container *ngIf="userRecord?.otherNames?.otherNames?.length > 0">
-        <div class="other-names-container">
+            <p class="mat-card-title published-name">
+              <b id="publishedName">
+                {{ creditName }}
+              </b>
+            </p>
+          </ng-container>
+          <span i18n="@@topBar.name" class="mat-caption description"> Name </span>
+          <div id="givenAndFamilyNames" class="mat-body-1">
+            {{ givenNames + ' ' + familyName }}
+          </div>
+        </app-panel-element>
+        <ng-container *ngIf="userRecord?.otherNames?.otherNames?.length > 0">
+          <div class="other-names-container">
           <span i18n="@@topBar.alsoKnowAs" class="mat-caption description">
             Also known as
           </span>
-          <app-panel-element
-            id="other-names"
-            *ngFor="let otherNames of userRecord.otherNames.otherNames"
-            [visibility]="otherNames.visibility.visibility"
-          >
-            <p class="mat-body-1 other-names">
-              {{ otherNames.content }}
-            </p>
-          </app-panel-element>
-        </div>
-      </ng-container>
-    </app-panel-data>
-  </app-panel>
-  <app-panel
+            <app-panel-element
+              id="other-names"
+              *ngFor="let otherNames of userRecord.otherNames.otherNames"
+              [visibility]="otherNames.visibility.visibility"
+            >
+              <p class="mat-body-1 other-names">
+                {{ otherNames.content }}
+              </p>
+            </app-panel-element>
+          </div>
+        </ng-container>
+      </app-panel-data>
+    </app-panel>
+  </section>
+  <section
+    id="biography"
     *ngIf="userRecord?.biography"
-    [elements]="userRecord.biography.biography"
-    [editModalComponent]="modalBiographyComponent"
-    [userRecord]="userRecord"
-    [type]="'top-bar'"
-    id="biography-panel"
   >
-    <h2 header class="orc-font-body" i18n="@@topBar.biography">Biography</h2>
-    <app-panel-data *ngIf="!!userRecord.biography.biography">
-      <app-panel-element
-        [visibility]="userRecord.biography.visibility.visibility"
-      >
-        <span
-          id="biography"
-          class="mat-body-1"
-          [innerText]="userRecord.biography.biography.value"
-        ></span>
-      </app-panel-element>
-    </app-panel-data>
-  </app-panel>
+    <app-panel
+      [elements]="userRecord.biography.biography"
+      [editModalComponent]="modalBiographyComponent"
+      [userRecord]="userRecord"
+      [type]="'top-bar'"
+      id="biography-panel"
+    >
+      <h2 header class="orc-font-body" i18n="@@topBar.biography">Biography</h2>
+      <app-panel-data *ngIf="!!userRecord.biography.biography">
+        <app-panel-element
+          [visibility]="userRecord.biography.visibility.visibility"
+        >
+          <span
+            id="biography-value"
+            class="mat-body-1"
+            [innerText]="userRecord.biography.biography.value"
+          ></span>
+        </app-panel-element>
+      </app-panel-data>
+    </app-panel>
+  </section>
 </ng-container>
 
 <!--PUBLIC VIEWS-->
@@ -121,106 +129,108 @@
       mobile: !platform.columns12
     }"
   >
-    <div
-      class="row names-container"
+    <section
+      [id]="'names'"
       *ngIf="userRecord?.names || userRecord?.otherNames"
     >
-      <div class="published-name" *ngIf="creditName">
-        <div class="row mat-caption description" i18n="@@topBar.publishedName">
-          Published Name
+      <div class="row names-container">
+        <div class="published-name" *ngIf="creditName">
+          <div class="row mat-caption description" i18n="@@topBar.publishedName">
+            Published Name
+          </div>
+          <h3 class="orc-font-heading-small">{{ creditName }}</h3>
         </div>
-        <h3 class="orc-font-heading-small">{{ creditName }}</h3>
-      </div>
-      <div
-        class="published-name"
-        *ngIf="!creditName && (givenNames || familyName)"
-      >
-        <div class="row mat-caption description" i18n="@@topBar.name">Name</div>
-        <h3 class="orc-font-heading-small">
-          {{ givenNames + ' ' + familyName }}
-        </h3>
-      </div>
-      <div class="row names-wrapper">
         <div
-          class="names"
-          [ngClass]="{
+          class="published-name"
+          *ngIf="!creditName && (givenNames || familyName)"
+        >
+          <div class="row mat-caption description" i18n="@@topBar.name">Name</div>
+          <h3 class="orc-font-heading-small">
+            {{ givenNames + ' ' + familyName }}
+          </h3>
+        </div>
+        <div class="row names-wrapper">
+          <div
+            class="names"
+            [ngClass]="{
             col: platform.columns12,
             'row mobile': !platform.columns12,
             'names-extended': expandedContent
           }"
-          *ngIf="creditName"
-        >
-          <div class="names-content">
-            <div class="mat-caption description" i18n="@@topBar.name">Name</div>
-            <div class="orc-font-body-small">
-              <ng-container *ngIf="givenNames">
-                {{ givenNames + ' ' }}
-              </ng-container>
-              {{ familyName }}
+            *ngIf="creditName"
+          >
+            <div class="names-content">
+              <div class="mat-caption description" i18n="@@topBar.name">Name</div>
+              <div class="orc-font-body-small">
+                <ng-container *ngIf="givenNames">
+                  {{ givenNames + ' ' }}
+                </ng-container>
+                {{ familyName }}
+              </div>
             </div>
           </div>
-        </div>
-        <div
-          class="other-names"
-          [ngClass]="{
+          <div
+            class="other-names"
+            [ngClass]="{
             col: platform.columns12,
             'row mobile': !platform.columns12,
             'other-names-no-border': expandedContent
           }"
-          *ngIf="userRecord.otherNames?.otherNames.length > 0"
-        >
-          <div
-            class="row space-between"
-            [ngClass]="{
+            *ngIf="userRecord.otherNames?.otherNames.length > 0"
+          >
+            <div
+              class="row space-between"
+              [ngClass]="{
               'other-names-extended': expandedContent
             }"
-          >
-            <div class="col l10 mat-caption other-names-wrapper">
-              <div class="other-names-content">
-                <div class="description" i18n="@@topBar.alsoKnowAs">
-                  Also known as
-                </div>
-                <p class="orc-font-body-small" *ngIf="!expandedContent">
-                  {{ getOtherNamesUnique(userRecord.otherNames?.otherNames) }}
-                </p>
-                <ng-container
-                  *ngFor="
+            >
+              <div class="col l10 mat-caption other-names-wrapper">
+                <div class="other-names-content">
+                  <div class="description" i18n="@@topBar.alsoKnowAs">
+                    Also known as
+                  </div>
+                  <p class="orc-font-body-small" *ngIf="!expandedContent">
+                    {{ getOtherNamesUnique(userRecord.otherNames?.otherNames) }}
+                  </p>
+                  <ng-container
+                    *ngFor="
                     let otherNames of userRecord.otherNames?.otherNames;
                     index as i;
                     let last = last
                   "
-                >
-                  <div class="row other-name" *ngIf="expandedContent">
-                    <div class="row">
-                      <b class="orc-font-body-small">
-                        {{ otherNames.content }}
-                      </b>
-                    </div>
-                    <app-panel-element-source
-                      [isLastItem]="last"
-                      *ngIf="true"
-                      [name]="otherNames.sourceName || otherNames.source"
-                      [date]="otherNames.createdDate | monthDayYearDateToString"
-                      [assertion]="
+                  >
+                    <div class="row other-name" *ngIf="expandedContent">
+                      <div class="row">
+                        <b class="orc-font-body-small">
+                          {{ otherNames.content }}
+                        </b>
+                      </div>
+                      <app-panel-element-source
+                        [isLastItem]="last"
+                        *ngIf="true"
+                        [name]="otherNames.sourceName || otherNames.source"
+                        [date]="otherNames.createdDate | monthDayYearDateToString"
+                        [assertion]="
                         otherNames.assertionOriginName ||
                         otherNames.assertionOriginOrcid
                       "
-                    >
-                    </app-panel-element-source>
-                  </div>
-                </ng-container>
+                      >
+                      </app-panel-element-source>
+                    </div>
+                  </ng-container>
+                </div>
               </div>
-            </div>
-            <div>
-              <app-panel-expand-buttons
-                (toggle)="collapse()"
-                [openState]="expandedContent"
-              ></app-panel-expand-buttons>
+              <div>
+                <app-panel-expand-buttons
+                  (toggle)="collapse()"
+                  [openState]="expandedContent"
+                ></app-panel-expand-buttons>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
     <app-top-bar-actions
       [userRecord]="userRecord"
@@ -230,15 +240,17 @@
       [showIsThisYouButton]="true"
     ></app-top-bar-actions>
 
-    <div
-      class="div biography-container"
+    <section
+      [id]="'biography'"
       *ngIf="userRecord?.biography?.biography"
     >
-      <h3 class="orc-font-body" i18n="@@topBar.biography">Biography</h3>
-      <p
-        class="orc-font-body-small"
-        [innerText]="userRecord.biography.biography.value"
-      ></p>
-    </div>
+      <div class="biography-container">
+        <h3 class="orc-font-body" i18n="@@topBar.biography">Biography</h3>
+        <p
+          class="orc-font-body-small"
+          [innerText]="userRecord.biography.biography.value"
+        ></p>
+      </div>
+    </section>
   </div>
 </ng-container>
