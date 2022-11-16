@@ -65,8 +65,12 @@ describe('MyOrcidComponent', () => {
     userService = TestBed.inject(UserService)
     recordPublicSideBarService = TestBed.inject(RecordPublicSideBarService)
 
-    userService.getUserSession = jasmine.createSpy().and.returnValue(of(getUserSession()))
-    recordPublicSideBarService.getPublicRecordSideBar = jasmine.createSpy().and.returnValue(of(getSideBarPublicUserRecord()))
+    userService.getUserSession = jasmine
+      .createSpy()
+      .and.returnValue(of(getUserSession()))
+    recordPublicSideBarService.getPublicRecordSideBar = jasmine
+      .createSpy()
+      .and.returnValue(of(getSideBarPublicUserRecord()))
 
     fixture = TestBed.createComponent(MyOrcidComponent)
     component = fixture.componentInstance
@@ -104,28 +108,56 @@ describe('MyOrcidComponent', () => {
 
     validateTopBarAndActivities(fixture, 1)
   })
-
 })
 
-function validateTopBarAndActivities(fixture: ComponentFixture<MyOrcidComponent>, numberOfElements: number) {
+function validateTopBarAndActivities(
+  fixture: ComponentFixture<MyOrcidComponent>,
+  numberOfElements: number
+) {
   validateThatExistAndNumberOfElements(fixture, 'names', numberOfElements)
   validateThatExistAndNumberOfElements(fixture, 'biography', numberOfElements)
   validateThatExistAndNumberOfElements(fixture, 'activities', numberOfElements)
-  validateThatExistAndNumberOfElements(fixture, 'affiliations', numberOfElements)
-  validateThatExistAndNumberOfElements(fixture, 'professional-activities', numberOfElements)
-  validateThatExistAndNumberOfElements(fixture, 'research-resources', numberOfElements)
+  validateThatExistAndNumberOfElements(
+    fixture,
+    'affiliations',
+    numberOfElements
+  )
+  validateThatExistAndNumberOfElements(
+    fixture,
+    'professional-activities',
+    numberOfElements
+  )
+  validateThatExistAndNumberOfElements(
+    fixture,
+    'research-resources',
+    numberOfElements
+  )
   validateThatExistAndNumberOfElements(fixture, 'funding', numberOfElements)
   validateThatExistAndNumberOfElements(fixture, 'works', numberOfElements)
-  validateThatExistAndNumberOfElements(fixture, 'peer-reviews', numberOfElements)
+  validateThatExistAndNumberOfElements(
+    fixture,
+    'peer-reviews',
+    numberOfElements
+  )
 }
 
-function validateThatExistAndNumberOfElements(fixture: ComponentFixture<MyOrcidComponent>, id: string, numberOfElements: number) {
+function validateThatExistAndNumberOfElements(
+  fixture: ComponentFixture<MyOrcidComponent>,
+  id: string,
+  numberOfElements: number
+) {
   const elements = fixture.debugElement.queryAll(By.css(`#${id}`))
   expect(elements).toBeTruthy()
-  expect(elements.length).toBe(numberOfElements, `Section ${id} should be unique`)
+  expect(elements.length).toBe(
+    numberOfElements,
+    `Section ${id} should be unique`
+  )
 }
 
-function addIsPublicRecord(component: MyOrcidComponent, fixture: ComponentFixture<MyOrcidComponent>) {
+function addIsPublicRecord(
+  component: MyOrcidComponent,
+  fixture: ComponentFixture<MyOrcidComponent>
+) {
   component.publicOrcid = getUserRecord().userInfo.REAL_USER_ORCID
   fixture.detectChanges()
 }

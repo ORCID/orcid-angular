@@ -1,6 +1,8 @@
 <section
   id="works"
-  *ngIf="workGroup?.groups && !(isPublicRecord && workGroup?.groups?.length === 0)"
+  *ngIf="
+    workGroup?.groups && !(isPublicRecord && workGroup?.groups?.length === 0)
+  "
 >
   <app-panels
     [userRecord]="userRecord"
@@ -27,9 +29,9 @@
 
     <mat-paginator
       *ngIf="
-          workGroup.totalGroups > workGroup.groups.length ||
-          this.paginationPageSize != defaultPageSize
-        "
+        workGroup.totalGroups > workGroup.groups.length ||
+        this.paginationPageSize != defaultPageSize
+      "
       [length]="paginationTotalAmountOfWorks"
       [pageSize]="paginationPageSize"
       [pageSizeOptions]="[10, 50, 100]"
@@ -50,10 +52,7 @@
               [(ngModel)]="selectAll"
               [ngModelOptions]="{ standalone: true }"
             >
-              <ng-container i18n="@@shared.selectAll"
-              >Select all
-              </ng-container
-              >
+              <ng-container i18n="@@shared.selectAll">Select all </ng-container>
               ({{ workGroup.groups.length }})
             </mat-checkbox>
           </p>
@@ -61,9 +60,8 @@
         <div class="items-selected">
           <p>
             <ng-container i18n="@@shared.itemsCurrentlySelected"
-            >Items currently selected
-            </ng-container
-            >
+              >Items currently selected
+            </ng-container>
             ({{ selectedWorks.length }})
           </p>
         </div>
@@ -93,20 +91,20 @@
             >
               <mat-icon>file_download</mat-icon>
               <span>
-                  <ng-container i18n="@@shared.exportWorks">
-                    Export works
-                  </ng-container>
-                  ({{ selectedWorks.length }})
-                </span>
+                <ng-container i18n="@@shared.exportWorks">
+                  Export works
+                </ng-container>
+                ({{ selectedWorks.length }})
+              </span>
             </button>
             <button mat-menu-item (click)="exportAllWorks()">
               <mat-icon>file_download</mat-icon>
               <span>
-                  <ng-container i18n="@@shared.exportAllWorks">
-                    Export all works
-                  </ng-container>
-                  ({{ this.workGroup.totalGroups }})
-                </span>
+                <ng-container i18n="@@shared.exportAllWorks">
+                  Export all works
+                </ng-container>
+                ({{ this.workGroup.totalGroups }})
+              </span>
             </button>
             <button
               mat-menu-item
@@ -152,8 +150,8 @@
     <ng-container *ngIf="workGroup.groups.length === 0">
       <div class="orc-font-body-small">
         <p class="empty" i18n="@@shared.worksDescription">
-          Add your research outputs such as publications, data sets,
-          conference presentations and more.
+          Add your research outputs such as publications, data sets, conference
+          presentations and more.
         </p>
         <a
           class="underline"
@@ -168,9 +166,9 @@
     </ng-container>
     <mat-paginator
       *ngIf="
-          workGroup.totalGroups > workGroup.groups.length ||
-          paginationPageSize !== defaultPageSize
-        "
+        workGroup.totalGroups > workGroup.groups.length ||
+        paginationPageSize !== defaultPageSize
+      "
       [length]="paginationTotalAmountOfWorks"
       [pageSize]="paginationPageSize"
       [pageSizeOptions]="[10, 50, 100]"

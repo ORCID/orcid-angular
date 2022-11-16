@@ -1,6 +1,8 @@
 <section
   id="research-resources"
-  *ngIf="researchResources?.groups && !(researchResources?.groups?.length === 0)"
+  *ngIf="
+    researchResources?.groups && !(researchResources?.groups?.length === 0)
+  "
 >
   <app-panels
     class="row"

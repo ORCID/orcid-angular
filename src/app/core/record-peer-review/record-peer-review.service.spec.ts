@@ -10,7 +10,10 @@ import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatDialog } from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { RecordPeerReviewService } from './record-peer-review.service'
-import { PeerReview, PeerReviewDuplicateGroup } from '../../types/record-peer-review.endpoint'
+import {
+  PeerReview,
+  PeerReviewDuplicateGroup,
+} from '../../types/record-peer-review.endpoint'
 
 describe('RecordPeerReviewService', () => {
   let service: RecordPeerReviewService
@@ -48,11 +51,11 @@ export function getPeerReviews(): PeerReview[] {
           peerReviews: [
             {
               name: 'Name',
-              visibility: 'PUBLIC'
-            }
-          ] as PeerReview[]
-        }
-      ] as PeerReviewDuplicateGroup[]
-    } as PeerReview
+              visibility: 'PUBLIC',
+            },
+          ] as PeerReview[],
+        },
+      ] as PeerReviewDuplicateGroup[],
+    } as PeerReview,
   ]
 }

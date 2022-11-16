@@ -1,8 +1,20 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs'
-import { catchError, first, map, retry, switchMap, take, tap } from 'rxjs/operators'
-import { Work, WorkGroup, WorksEndpoint } from 'src/app/types/record-works.endpoint'
+import {
+  catchError,
+  first,
+  map,
+  retry,
+  switchMap,
+  take,
+  tap,
+} from 'rxjs/operators'
+import {
+  Work,
+  WorkGroup,
+  WorksEndpoint,
+} from 'src/app/types/record-works.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
 import {
   ContributionRoles,

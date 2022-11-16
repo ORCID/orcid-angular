@@ -13,7 +13,11 @@ import { Overlay } from '@angular/cdk/overlay'
 import { SideBarPublicUserRecord } from '../../types/record.local'
 import { BiographyEndPoint } from '../../types/record-biography.endpoint'
 import { OtherNamesEndPoint } from '../../types/record-other-names.endpoint'
-import { CountriesEndpoint, EmailsEndpoint, PersonIdentifierEndpoint } from '../../types'
+import {
+  CountriesEndpoint,
+  EmailsEndpoint,
+  PersonIdentifierEndpoint,
+} from '../../types'
 import { KeywordEndPoint } from '../../types/record-keyword.endpoint'
 import { WebsitesEndPoint } from '../../types/record-websites.endpoint'
 import { getNamesEndPoint } from '../record-names/record-names.service.spec'

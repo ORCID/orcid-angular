@@ -47,7 +47,7 @@ describe('AffiliationsService', () => {
 })
 
 export function getAffiliationUIGroup(): AffiliationUIGroup[] {
-  return  [
+  return [
     {
       type: AffiliationGroupsTypes.EMPLOYMENT,
       affiliationGroup: [getAffiliationGroup(AffiliationType.employment)],
@@ -59,22 +59,24 @@ export function getAffiliationUIGroup(): AffiliationUIGroup[] {
   ]
 }
 
-function getAffiliationGroup(affiliationType: AffiliationType): AffiliationGroup {
+function getAffiliationGroup(
+  affiliationType: AffiliationType
+): AffiliationGroup {
   return {
     externalIdentifiers: [],
     affiliations: [getAffiliation(affiliationType)],
-    defaultAffiliation: getAffiliation(affiliationType)
+    defaultAffiliation: getAffiliation(affiliationType),
   } as AffiliationGroup
 }
 
 function getAffiliation(affiliationType: AffiliationType): Affiliation {
-  return  {
+  return {
     affiliationName: { value: 'ORCID' },
     affiliationType: { value: affiliationType },
-    putCode: { value: '1'},
-    visibility: { visibility: 'PUBLIC'},
+    putCode: { value: '1' },
+    visibility: { visibility: 'PUBLIC' },
     city: { value: 'city' },
     region: { value: 'region' },
-    country: { value: 'country' }
+    country: { value: 'country' },
   } as Affiliation
 }

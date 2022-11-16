@@ -42,10 +42,7 @@
     </ng-container>
   </app-warning-message>
 
-  <section
-    id="names"
-    *ngIf="userRecord?.names"
-  >
+  <section id="names" *ngIf="userRecord?.names">
     <app-panel
       [isPublicRecord]="isPublicRecord"
       [elements]="userRecord.names.givenNames"
@@ -58,27 +55,31 @@
     >
       <h2 header class="orc-font-body" i18n="@@topBar.names">Names</h2>
       <app-panel-data>
-        <app-panel-element [visibility]="userRecord.names.visibility.visibility">
+        <app-panel-element
+          [visibility]="userRecord.names.visibility.visibility"
+        >
           <ng-container *ngIf="creditName">
-          <span i18n="@@topBar.publishedName" class="mat-caption">
-            Published Name
-          </span>
+            <span i18n="@@topBar.publishedName" class="mat-caption">
+              Published Name
+            </span>
             <p class="mat-card-title published-name">
               <b id="publishedName">
                 {{ creditName }}
               </b>
             </p>
           </ng-container>
-          <span i18n="@@topBar.name" class="mat-caption description"> Name </span>
+          <span i18n="@@topBar.name" class="mat-caption description">
+            Name
+          </span>
           <div id="givenAndFamilyNames" class="mat-body-1">
             {{ givenNames + ' ' + familyName }}
           </div>
         </app-panel-element>
         <ng-container *ngIf="userRecord?.otherNames?.otherNames?.length > 0">
           <div class="other-names-container">
-          <span i18n="@@topBar.alsoKnowAs" class="mat-caption description">
-            Also known as
-          </span>
+            <span i18n="@@topBar.alsoKnowAs" class="mat-caption description">
+              Also known as
+            </span>
             <app-panel-element
               id="other-names"
               *ngFor="let otherNames of userRecord.otherNames.otherNames"
@@ -93,10 +94,7 @@
       </app-panel-data>
     </app-panel>
   </section>
-  <section
-    id="biography"
-    *ngIf="userRecord?.biography"
-  >
+  <section id="biography" *ngIf="userRecord?.biography">
     <app-panel
       [elements]="userRecord.biography.biography"
       [editModalComponent]="modalBiographyComponent"
@@ -129,13 +127,13 @@
       mobile: !platform.columns12
     }"
   >
-    <section
-      [id]="'names'"
-      *ngIf="userRecord?.names || userRecord?.otherNames"
-    >
+    <section [id]="'names'" *ngIf="userRecord?.names || userRecord?.otherNames">
       <div class="row names-container">
         <div class="published-name" *ngIf="creditName">
-          <div class="row mat-caption description" i18n="@@topBar.publishedName">
+          <div
+            class="row mat-caption description"
+            i18n="@@topBar.publishedName"
+          >
             Published Name
           </div>
           <h3 class="orc-font-heading-small">{{ creditName }}</h3>
@@ -144,7 +142,9 @@
           class="published-name"
           *ngIf="!creditName && (givenNames || familyName)"
         >
-          <div class="row mat-caption description" i18n="@@topBar.name">Name</div>
+          <div class="row mat-caption description" i18n="@@topBar.name">
+            Name
+          </div>
           <h3 class="orc-font-heading-small">
             {{ givenNames + ' ' + familyName }}
           </h3>
@@ -153,14 +153,16 @@
           <div
             class="names"
             [ngClass]="{
-            col: platform.columns12,
-            'row mobile': !platform.columns12,
-            'names-extended': expandedContent
-          }"
+              col: platform.columns12,
+              'row mobile': !platform.columns12,
+              'names-extended': expandedContent
+            }"
             *ngIf="creditName"
           >
             <div class="names-content">
-              <div class="mat-caption description" i18n="@@topBar.name">Name</div>
+              <div class="mat-caption description" i18n="@@topBar.name">
+                Name
+              </div>
               <div class="orc-font-body-small">
                 <ng-container *ngIf="givenNames">
                   {{ givenNames + ' ' }}
@@ -172,17 +174,17 @@
           <div
             class="other-names"
             [ngClass]="{
-            col: platform.columns12,
-            'row mobile': !platform.columns12,
-            'other-names-no-border': expandedContent
-          }"
+              col: platform.columns12,
+              'row mobile': !platform.columns12,
+              'other-names-no-border': expandedContent
+            }"
             *ngIf="userRecord.otherNames?.otherNames.length > 0"
           >
             <div
               class="row space-between"
               [ngClass]="{
-              'other-names-extended': expandedContent
-            }"
+                'other-names-extended': expandedContent
+              }"
             >
               <div class="col l10 mat-caption other-names-wrapper">
                 <div class="other-names-content">
@@ -194,10 +196,10 @@
                   </p>
                   <ng-container
                     *ngFor="
-                    let otherNames of userRecord.otherNames?.otherNames;
-                    index as i;
-                    let last = last
-                  "
+                      let otherNames of userRecord.otherNames?.otherNames;
+                      index as i;
+                      let last = last
+                    "
                   >
                     <div class="row other-name" *ngIf="expandedContent">
                       <div class="row">
@@ -209,11 +211,13 @@
                         [isLastItem]="last"
                         *ngIf="true"
                         [name]="otherNames.sourceName || otherNames.source"
-                        [date]="otherNames.createdDate | monthDayYearDateToString"
+                        [date]="
+                          otherNames.createdDate | monthDayYearDateToString
+                        "
                         [assertion]="
-                        otherNames.assertionOriginName ||
-                        otherNames.assertionOriginOrcid
-                      "
+                          otherNames.assertionOriginName ||
+                          otherNames.assertionOriginOrcid
+                        "
                       >
                       </app-panel-element-source>
                     </div>
@@ -240,10 +244,7 @@
       [showIsThisYouButton]="true"
     ></app-top-bar-actions>
 
-    <section
-      [id]="'biography'"
-      *ngIf="userRecord?.biography?.biography"
-    >
+    <section [id]="'biography'" *ngIf="userRecord?.biography?.biography">
       <div class="biography-container">
         <h3 class="orc-font-body" i18n="@@topBar.biography">Biography</h3>
         <p

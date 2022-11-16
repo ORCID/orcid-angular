@@ -46,6 +46,6 @@ export function getUserInfo(): UserInfo {
     CLAIMED: 'true',
     HAS_VERIFIED_EMAIL: 'true',
     RECORD_WITH_ISSUES: false,
-    LAST_MODIFIED: '2022-08-03 11:30:49.870566'
+    LAST_MODIFIED: '2022-08-03 11:30:49.870566',
   } as UserInfo
 }

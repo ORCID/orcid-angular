@@ -106,7 +106,7 @@
               >
                 <mat-icon>error</mat-icon>
                 <ng-container i18n="@@record.noPublicInfo"
-                >No public information available.
+                  >No public information available.
                 </ng-container>
               </div>
               <div
@@ -115,9 +115,9 @@
                 [ngClass]="{ 'last-modified': affiliations === 0 }"
               >
                 <i>
-                <span i18n="@@shared.lastModifiedTime">
-                  Record last modified
-                </span>
+                  <span i18n="@@shared.lastModifiedTime">
+                    Record last modified
+                  </span>
                   {{ userRecord?.lastModifiedTime | date: 'medium':'UTC' }} UTC
                 </i>
               </div>

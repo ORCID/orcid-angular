@@ -13,7 +13,11 @@ import { SnackbarService } from '../../cdk/snackbar/snackbar.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatDialog } from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
-import { Work, WorkGroup, WorksEndpoint } from '../../types/record-works.endpoint'
+import {
+  Work,
+  WorkGroup,
+  WorksEndpoint,
+} from '../../types/record-works.endpoint'
 import { WorkPublicationTypes } from '../../types/works.endpoint'
 import { environment } from '../../../environments/environment.local'
 import { TogglzService } from '../togglz/togglz.service'
@@ -117,7 +121,7 @@ function getNumberOfWorks(numberOfContributors: number): Work[] {
 
 export function getWorksEndpoint(): WorksEndpoint {
   return {
-    groups: [ getWorkGroup() ],
+    groups: [getWorkGroup()],
   } as WorksEndpoint
 }
 
@@ -125,9 +129,9 @@ function getWorkGroup(): WorkGroup {
   return {
     activePutCode: 1,
     defaultPutCode: 1,
-    works: [ getWork() ],
+    works: [getWork()],
     activeVisibility: 'PUBLIC',
-    externalIdentifiers: []
+    externalIdentifiers: [],
   } as WorkGroup
 }
 
@@ -140,7 +144,7 @@ function getWork(): Work {
       value: WorkPublicationTypes.book,
     },
     putCode: {
-      value: 1
-    }
+      value: 1,
+    },
   } as Work
 }

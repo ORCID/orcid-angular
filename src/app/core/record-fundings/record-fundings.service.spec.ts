@@ -10,7 +10,11 @@ import { SnackbarService } from '../../cdk/snackbar/snackbar.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatDialog } from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
-import { Funding, FundingGroup, FundingTypes } from '../../types/record-funding.endpoint'
+import {
+  Funding,
+  FundingGroup,
+  FundingTypes,
+} from '../../types/record-funding.endpoint'
 
 describe('FundingService', () => {
   beforeEach(() =>
@@ -38,7 +42,7 @@ export function getFundingGroup(): FundingGroup[] {
   return [
     {
       defaultFunding: getFunding(),
-      fundings: [ getFunding() ],
+      fundings: [getFunding()],
       externalIdentifiers: [],
     },
   ] as FundingGroup[]
@@ -49,7 +53,7 @@ function getFunding(): Funding {
     fundingName: {
       value: 'Grant',
     },
-    fundingTitle: { title: { value: 'funding' }},
+    fundingTitle: { title: { value: 'funding' } },
     fundingType: {
       value: FundingTypes.grant,
     },

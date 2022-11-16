@@ -40,7 +40,7 @@ export function getUserSession(): UserSession {
   userSession.userInfo = {
     REAL_USER_ORCID: '0000-0000-0000-000X',
     EFFECTIVE_USER_ORCID: '0000-0000-0000-000X',
-    IS_LOCKED: 'false'
+    IS_LOCKED: 'false',
   } as UserInfo
   userSession.loggedIn = true
   userSession.displayName = 'Test Name'

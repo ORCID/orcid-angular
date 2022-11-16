@@ -10,7 +10,12 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { SnackbarService } from '../../cdk/snackbar/snackbar.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { Overlay } from '@angular/cdk/overlay'
-import { Host, ResearchResource, ResearchResourcesEndpoint, ResearchResourcesGroup } from '../../types/record-research-resources.endpoint'
+import {
+  Host,
+  ResearchResource,
+  ResearchResourcesEndpoint,
+  ResearchResourcesGroup,
+} from '../../types/record-research-resources.endpoint'
 
 describe('RecordResearchResourceService', () => {
   let service: RecordResearchResourceService
@@ -38,7 +43,7 @@ describe('RecordResearchResourceService', () => {
 
 export function getResearchResourcesEndpoint(): ResearchResourcesEndpoint {
   return {
-    groups: [ getResearchResourcesGroup() ]
+    groups: [getResearchResourcesGroup()],
   } as ResearchResourcesEndpoint
 }
 
@@ -46,8 +51,8 @@ export function getResearchResourcesGroup(): ResearchResourcesGroup {
   return {
     activePutCode: 1,
     defaultResearchResource: getResearchResource(),
-    researchResources: [ getResearchResource() ],
-    activeVisibility: 'PUBLIC'
+    researchResources: [getResearchResource()],
+    activeVisibility: 'PUBLIC',
   } as ResearchResourcesGroup
 }
 
@@ -57,7 +62,7 @@ export function getResearchResource(): ResearchResource {
       {
         name: '',
         orgDisambiguatedId: '',
-        disambiguationSource: ''
+        disambiguationSource: '',
       } as Host,
     ],
   } as ResearchResource
