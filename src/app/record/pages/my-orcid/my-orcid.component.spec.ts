@@ -90,7 +90,11 @@ describe('MyOrcidComponent', () => {
   })
 
   it('should have only one section personal information', () => {
-    validateThatExistAndNumberOfElements(fixture, 'personal-information', 1)
+    if (component.platform.columns12) {
+      validateThatExistAndNumberOfElements(fixture, 'personal-information', 1)
+    } else {
+      validateThatExistAndNumberOfElements(fixture, 'personal-information', 2)
+    }
   })
 
   it('[PRIVATE] should have only one section status-bar', () => {
