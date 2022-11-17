@@ -1,13 +1,12 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { BehaviorSubject, EMPTY, Observable, of, ReplaySubject } from 'rxjs'
+import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs'
 import {
   catchError,
   first,
   map,
   retry,
   switchMap,
-  switchMapTo,
   take,
   tap,
 } from 'rxjs/operators'

@@ -167,7 +167,8 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
     const input = this.inputs.last
     input.focus()
   }
-  deleteEmail(putcode: string) {
+
+  deleteCountry(putcode: string) {
     const i = this.countries.findIndex((value) => value.putCode === putcode)
     this.countries.splice(i, 1)
     this.countryForm.removeControl(putcode)

@@ -10,6 +10,7 @@ import { SnackbarService } from '../../cdk/snackbar/snackbar.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatDialog } from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
+import { NamesEndPoint } from '../../types/record-name.endpoint'
 
 describe('RecordNamesService', () => {
   let service: RecordNamesService
@@ -34,3 +35,11 @@ describe('RecordNamesService', () => {
     expect(service).toBeTruthy()
   })
 })
+
+export function getNamesEndPoint(): NamesEndPoint {
+  return {
+    givenNames: { value: 'Name' },
+    familyName: { value: 'Surname' },
+    visibility: { visibility: 'PUBLIC' },
+  } as NamesEndPoint
+}

@@ -1,115 +1,119 @@
-<app-panels
+<section
+  id="peer-reviews"
   *ngIf="!(loading || (peerReviews?.length === 0 && isPublicRecord))"
-  class="row"
-  [title]="ngOrcidPeerReview"
-  [type]="'peer-review'"
-  [userRecord]="userRecord"
-  [currentAmount]="peerReviews.length"
-  [isPublicRecord]="isPublicRecord"
-  [(expandedContent)]="expandedContent['PEER_REVIEW']"
-  (expandedContentChange)="expandedContentChange.emit(expandedContent)"
-  [labelAddButton]="labelAddButton"
-  [labelSortButton]="labelSortButton"
-  [sortTypes]="['order']"
-  [sortType]="'order'"
-  [sortDirection]="'asc'"
-  (sort)="sortEvent($event)"
 >
-  <ng-container *ngIf="peerReviews.length > 0">
-    <app-panel
-      class="top-bar"
-      *ngFor="let peerReview of peerReviews"
-      [elements]="peerReview"
-      [type]="'peer-review'"
-      [editable]="false"
-      [openState]="this.moreInfo.includes(peerReview.groupId)"
-      [expandButtonsPosition]="'left'"
-      [isPublicRecord]="isPublicRecord"
-      (openStateChange)="expandedClicked($event, peerReview)"
-      [showVisibilityControl]="true"
-      [stackSiblings]="peerReview.peerReviewDuplicateGroups"
-      [visibility]="getVisibility(peerReview)"
-      [visibilityError]="peerReview.visibilityError"
-      #peerReviewPanelComponent
-    >
-      <div header>
-        <ng-container i18n="@@peerReview.reviewActivity">
-          Review activity for
-        </ng-container>
-        <b>
-          {{ peerReview.name }}
-        </b>
-        ({{
-          peerReview?.peerReviewDuplicateGroups?.length ||
-            peerReview?.duplicated
-        }})
-      </div>
-      <app-panel-data class="orc-font-body-small">
-        <div class="row horizontal-center" *ngIf="!peerReview?.type">
-          <mat-progress-spinner
-            color="primary"
-            mode="indeterminate"
-            class="col"
-          >
-          </mat-progress-spinner>
-        </div>
-        <ng-container *ngIf="peerReview?.type">
-          <app-panel-element [hideVisibility]="false">
-            <div class="description">
-              <p>
-                <span class="capitalize">
-                  {{ peerReview.type + (peerReview.description ? ',' : '') }}
-                </span>
-                {{ peerReview.description }}
-              </p>
-              <ng-container *ngIf="peerReview.groupType">
-                <p>
-                  {{ peerReview.groupType }}:
-                  <a
-                    class="underline"
-                    href="{{ peerReview.url }}"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {{ peerReview.groupIdValue }}
-                  </a>
-                </p>
-              </ng-container>
-            </div>
-          </app-panel-element>
-          <app-panel-element class="nested-panels" [hideVisibility]="false">
-            <div nested-panels>
-              <app-peer-review-stack
-                [userRecord]="userRecord"
-                [isPublicRecord]="isPublicRecord"
-                [peerReviewStack]="group"
-                *ngFor="
-                  let group of peerReview.peerReviewDuplicateGroups;
-                  trackBy: trackByPeerReviewGroup
-                "
-              >
-              </app-peer-review-stack>
-            </div>
-          </app-panel-element>
-        </ng-container>
-      </app-panel-data>
-    </app-panel>
-  </ng-container>
-  <ng-container *ngIf="peerReviews.length === 0 && IS_QA">
-    <div class="orc-font-body-small">
-      <p class="empty" i18n="@@peerReview.description">
-        Connect to trusted organizations to automatically add your peer review
-        activity to your ORCID record.
-      </p>
-      <a
-        class="underline"
-        rel="noopener noreferrer"
-        target="_blank"
-        href="https://support.orcid.org/hc/en-us/articles/360006971333-Peer-Review"
-        i18n="@@peerReview.learnMore"
+  <app-panels
+    class="row"
+    [title]="ngOrcidPeerReview"
+    [type]="'peer-review'"
+    [userRecord]="userRecord"
+    [currentAmount]="peerReviews.length"
+    [isPublicRecord]="isPublicRecord"
+    [(expandedContent)]="expandedContent['PEER_REVIEW']"
+    (expandedContentChange)="expandedContentChange.emit(expandedContent)"
+    [labelAddButton]="labelAddButton"
+    [labelSortButton]="labelSortButton"
+    [sortTypes]="['order']"
+    [sortType]="'order'"
+    [sortDirection]="'asc'"
+    (sort)="sortEvent($event)"
+  >
+    <ng-container *ngIf="peerReviews.length > 0">
+      <app-panel
+        class="top-bar"
+        *ngFor="let peerReview of peerReviews"
+        [elements]="peerReview"
+        [type]="'peer-review'"
+        [editable]="false"
+        [openState]="this.moreInfo.includes(peerReview.groupId)"
+        [expandButtonsPosition]="'left'"
+        [isPublicRecord]="isPublicRecord"
+        (openStateChange)="expandedClicked($event, peerReview)"
+        [showVisibilityControl]="true"
+        [stackSiblings]="peerReview.peerReviewDuplicateGroups"
+        [visibility]="getVisibility(peerReview)"
+        [visibilityError]="peerReview.visibilityError"
+        #peerReviewPanelComponent
       >
-        Learn more about how peer reviews are added to your ORCID record
-      </a>
-    </div>
-  </ng-container>
-</app-panels>
+        <div header>
+          <ng-container i18n="@@peerReview.reviewActivity">
+            Review activity for
+          </ng-container>
+          <b>
+            {{ peerReview.name }}
+          </b>
+          ({{
+            peerReview?.peerReviewDuplicateGroups?.length ||
+              peerReview?.duplicated
+          }})
+        </div>
+        <app-panel-data class="orc-font-body-small">
+          <div class="row horizontal-center" *ngIf="!peerReview?.type">
+            <mat-progress-spinner
+              color="primary"
+              mode="indeterminate"
+              class="col"
+            >
+            </mat-progress-spinner>
+          </div>
+          <ng-container *ngIf="peerReview?.type">
+            <app-panel-element [hideVisibility]="false">
+              <div class="description">
+                <p>
+                  <span class="capitalize">
+                    {{ peerReview.type + (peerReview.description ? ',' : '') }}
+                  </span>
+                  {{ peerReview.description }}
+                </p>
+                <ng-container *ngIf="peerReview.groupType">
+                  <p>
+                    {{ peerReview.groupType }}:
+                    <a
+                      class="underline"
+                      href="{{ peerReview.url }}"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {{ peerReview.groupIdValue }}
+                    </a>
+                  </p>
+                </ng-container>
+              </div>
+            </app-panel-element>
+            <app-panel-element class="nested-panels" [hideVisibility]="false">
+              <div nested-panels>
+                <app-peer-review-stack
+                  [userRecord]="userRecord"
+                  [isPublicRecord]="isPublicRecord"
+                  [peerReviewStack]="group"
+                  *ngFor="
+                    let group of peerReview.peerReviewDuplicateGroups;
+                    trackBy: trackByPeerReviewGroup
+                  "
+                >
+                </app-peer-review-stack>
+              </div>
+            </app-panel-element>
+          </ng-container>
+        </app-panel-data>
+      </app-panel>
+    </ng-container>
+    <ng-container *ngIf="peerReviews.length === 0 && IS_QA">
+      <div class="orc-font-body-small">
+        <p class="empty" i18n="@@peerReview.description">
+          Connect to trusted organizations to automatically add your peer review
+          activity to your ORCID record.
+        </p>
+        <a
+          class="underline"
+          rel="noopener noreferrer"
+          target="_blank"
+          href="https://support.orcid.org/hc/en-us/articles/360006971333-Peer-Review"
+          i18n="@@peerReview.learnMore"
+        >
+          Learn more about how peer reviews are added to your ORCID record
+        </a>
+      </div>
+    </ng-container>
+  </app-panels>
+</section>
