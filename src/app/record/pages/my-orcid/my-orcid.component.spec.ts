@@ -108,6 +108,17 @@ describe('MyOrcidComponent', () => {
 
     validateTopBarAndActivities(fixture, 1)
   })
+
+  it('[PUBLIC] should have heading hierarchy', () => {
+    addIsPublicRecord(component, fixture)
+
+    expect(fixture.debugElement.query(By.css('h1.name'))).toBeTruthy()
+    expect(fixture.debugElement.query(By.css('h2.biography-header'))).toBeTruthy()
+    expect(fixture.debugElement.query(By.css('h2.activities-header'))).toBeTruthy()
+    expect(fixture.debugElement.queryAll(By.css('h3.activity-header')).length).toBe(5)
+    expect(fixture.debugElement.query(By.css('h3.orcid-id'))).toBeTruthy()
+  })
+
 })
 
 function validateTopBarAndActivities(

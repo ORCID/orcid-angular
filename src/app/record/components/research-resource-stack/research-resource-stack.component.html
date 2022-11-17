@@ -26,11 +26,14 @@
     *ngIf="isPreferred(research) || displayTheStack"
     [stackedHeader]="!platform.columns12"
   >
-    <div header>
+    <h4
+      header
+      class="research-resources-title"
+    >
       <b>
         {{ research.title }}
       </b>
-    </div>
+    </h4>
     <app-research-resource
       *ngIf="stackPanelsDisplay[research.putCode].topPanelOfTheStack"
       [isPublicRecord]="isPublicRecord"

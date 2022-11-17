@@ -9,7 +9,6 @@
           class="col l3 m8 s4"
           [isPublicRecord]="publicOrcid"
           [orcidId]="platform.columns8 || platform.columns4"
-          *ngIf="platform.columns12"
         >
         </app-side-bar>
         <div class="col l9 m8 s4 content">
@@ -32,7 +31,7 @@
                   class="activities"
                   *ngIf="!(publicOrcid && affiliations === 0)"
                 >
-                  <h2 class="orc-font-body col" i18n="@@shared.activities">
+                  <h2 class="activities-header orc-font-body col" i18n="@@shared.activities">
                     Activities
                   </h2>
                   <div class="expand-buttons">
