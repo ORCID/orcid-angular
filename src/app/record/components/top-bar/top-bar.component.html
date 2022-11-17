@@ -42,10 +42,7 @@
     </ng-container>
   </app-warning-message>
 
-  <section
-    id="names"
-    *ngIf="userRecord?.names"
-  >
+  <section id="names" *ngIf="userRecord?.names">
     <app-panel
       [isPublicRecord]="isPublicRecord"
       [elements]="userRecord.names.givenNames"
@@ -56,20 +53,26 @@
       [names]="true"
       id="names-panel"
     >
-      <h2 header class="names-header orc-font-body" i18n="@@topBar.names">Names</h2>
+      <h2 header class="names-header orc-font-body" i18n="@@topBar.names">
+        Names
+      </h2>
       <app-panel-data>
-        <app-panel-element [visibility]="userRecord.names.visibility.visibility">
+        <app-panel-element
+          [visibility]="userRecord.names.visibility.visibility"
+        >
           <h1 class="name" *ngIf="creditName">
-          <span i18n="@@topBar.publishedName" class="mat-caption">
-            Published Name
-          </span>
+            <span i18n="@@topBar.publishedName" class="mat-caption">
+              Published Name
+            </span>
             <p class="mat-card-title published-name">
               <b id="publishedName">
                 {{ creditName }}
               </b>
             </p>
           </h1>
-          <span i18n="@@topBar.name" class="mat-caption description"> Name </span>
+          <span i18n="@@topBar.name" class="mat-caption description">
+            Name
+          </span>
           <div id="givenAndFamilyNames" class="mat-body-1">
             {{ givenNames + ' ' + familyName }}
           </div>
@@ -93,10 +96,7 @@
       </app-panel-data>
     </app-panel>
   </section>
-  <section
-    id="biography"
-    *ngIf="userRecord?.biography"
-  >
+  <section id="biography" *ngIf="userRecord?.biography">
     <app-panel
       [elements]="userRecord.biography.biography"
       [editModalComponent]="modalBiographyComponent"
@@ -104,7 +104,13 @@
       [type]="'top-bar'"
       id="biography-panel"
     >
-      <h2 header class="biography-header orc-font-body" i18n="@@topBar.biography">Biography</h2>
+      <h2
+        header
+        class="biography-header orc-font-body"
+        i18n="@@topBar.biography"
+      >
+        Biography
+      </h2>
       <app-panel-data *ngIf="!!userRecord.biography.biography">
         <app-panel-element
           [visibility]="userRecord.biography.visibility.visibility"
@@ -129,10 +135,7 @@
       mobile: !platform.columns12
     }"
   >
-    <section
-      [id]="'names'"
-      *ngIf="userRecord?.names || userRecord?.otherNames"
-    >
+    <section [id]="'names'" *ngIf="userRecord?.names || userRecord?.otherNames">
       <div class="row names-container">
         <div class="published-name" *ngIf="creditName">
           <div
@@ -147,7 +150,9 @@
           class="published-name"
           *ngIf="!creditName && (givenNames || familyName)"
         >
-          <div class="row mat-caption description" i18n="@@topBar.name">Name</div>
+          <div class="row mat-caption description" i18n="@@topBar.name">
+            Name
+          </div>
           <h1 class="name orc-font-heading-small">
             {{ givenNames + ' ' + familyName }}
           </h1>
@@ -247,12 +252,11 @@
       [showIsThisYouButton]="true"
     ></app-top-bar-actions>
 
-    <section
-      [id]="'biography'"
-      *ngIf="userRecord?.biography?.biography"
-    >
+    <section [id]="'biography'" *ngIf="userRecord?.biography?.biography">
       <div class="biography-container">
-        <h2 class="biography-header orc-font-body" i18n="@@topBar.biography">Biography</h2>
+        <h2 class="biography-header orc-font-body" i18n="@@topBar.biography">
+          Biography
+        </h2>
         <p
           class="orc-font-body-small"
           [innerText]="userRecord.biography.biography.value"

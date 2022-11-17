@@ -27,10 +27,7 @@
     *ngIf="isPreferred(affiliation) || displayTheStack"
     id="{{ 'cy-affiliation-' + type + '-' + i }}"
   >
-    <h4
-      header
-      class="affiliation-title orc-font-body"
-    >
+    <h4 header class="affiliation-title orc-font-body">
       {{ affiliation.affiliationName.value }}:
 
       <ng-container *ngIf="affiliation.city.value">
