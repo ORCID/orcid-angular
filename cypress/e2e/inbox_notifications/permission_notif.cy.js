@@ -1,22 +1,21 @@
-
 /// <reference types="cypress" />
 
 import userData from '../../fixtures/inboxNotif-users.fixture.json'
 
 describe('Inbox: Permission Notification', async function () {
-    before(() => {
-       //log in
-       cy.visit(Cypress.env('signInURL'))
-       cy.signin(userData.cyNotifPerm)
-    })
+  before(() => {
+    //log in
+    cy.visit(Cypress.env('signInURL'))
+    cy.signin(userData.cyNotifPerm)
+  })
 
   it('Verify Permission Notification was received', function () {
-
     const curlStatement =
       "curl -k -i -H 'Authorization: Bearer " +
-      userData.cyNotifPerm.clientBearer+
+      userData.cyNotifPerm.clientBearer +
       "' -H 'Content-type: application/json' -X POST -d '" +
-      userData.cyNotifPerm.curlPermissionNotifPath +"' "+
+      userData.cyNotifPerm.curlPermissionNotifPath +
+      "' " +
       Cypress.env('membersAPI_URL') +
       userData.cyNotifPerm.oid +
       Cypress.env('membersAPI_notifPermEndpoint')
@@ -38,13 +37,12 @@ describe('Inbox: Permission Notification', async function () {
 
   after(() => {
     //CLEAN INBOX: archive notification
-    cy.get('app-notification').within(()=>{
-        cy.get('button').contains('Archive').click()
+    cy.get('app-notification').within(() => {
+      cy.get('button').contains('Archive').click()
     })
-    cy.wait(2000)//wait for back end to complete
+    cy.wait(2000) //wait for back end to complete
     //log out
     cy.get('#cy-user-info').click({ force: true })
     cy.get('#cy-signout').click({ force: true })
   })
-
 })
