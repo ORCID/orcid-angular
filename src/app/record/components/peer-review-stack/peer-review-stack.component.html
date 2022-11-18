@@ -18,8 +18,9 @@
     *ngIf="isPreferred(subPeerReview) || displayTheStack"
     [stackedHeader]="!platform.columns12"
   >
-    <div
+    <h4
       header
+      class="peer-review-title"
       [ngClass]="{
         'orc-font-small-print': isMobile,
         'orc-font-body-small': !isMobile
@@ -39,7 +40,7 @@
           {{ subPeerReview.role.value }}
         </span>
       </span>
-    </div>
+    </h4>
     <div
       custom-controls
       [ngClass]="{

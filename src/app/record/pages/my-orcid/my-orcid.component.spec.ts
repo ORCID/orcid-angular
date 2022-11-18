@@ -90,7 +90,11 @@ describe('MyOrcidComponent', () => {
   })
 
   it('should have only one section personal information', () => {
-    validateThatExistAndNumberOfElements(fixture, 'personal-information', 1)
+    if (component.platform.columns12) {
+      validateThatExistAndNumberOfElements(fixture, 'personal-information', 1)
+    } else {
+      validateThatExistAndNumberOfElements(fixture, 'personal-information', 2)
+    }
   })
 
   it('[PRIVATE] should have only one section status-bar', () => {
@@ -107,6 +111,22 @@ describe('MyOrcidComponent', () => {
     addIsPublicRecord(component, fixture)
 
     validateTopBarAndActivities(fixture, 1)
+  })
+
+  it('[PUBLIC] should have heading hierarchy', () => {
+    addIsPublicRecord(component, fixture)
+
+    expect(fixture.debugElement.query(By.css('h1.name'))).toBeTruthy()
+    expect(
+      fixture.debugElement.query(By.css('h2.biography-header'))
+    ).toBeTruthy()
+    expect(
+      fixture.debugElement.query(By.css('h2.activities-header'))
+    ).toBeTruthy()
+    expect(
+      fixture.debugElement.queryAll(By.css('h3.activity-header')).length
+    ).toBe(5)
+    expect(fixture.debugElement.query(By.css('h3.orcid-id'))).toBeTruthy()
   })
 })
 

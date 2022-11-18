@@ -40,6 +40,7 @@ export function getNamesEndPoint(): NamesEndPoint {
   return {
     givenNames: { value: 'Name' },
     familyName: { value: 'Surname' },
+    creditName: { value: 'Published Name' },
     visibility: { visibility: 'PUBLIC' },
   } as NamesEndPoint
 }

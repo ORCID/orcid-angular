@@ -26,9 +26,9 @@
     *ngIf="isPreferred(funding) || displayTheStack"
     type="funding"
   >
-    <h2 header class="orc-font-body">
+    <h4 header class="funding-title orc-font-body">
       {{ funding.fundingTitle.title.value }}
-    </h2>
+    </h4>
     <!-- FUNDING BODY -->
     <app-funding
       *ngIf="stackPanelsDisplay[funding.putCode.value].topPanelOfTheStack"

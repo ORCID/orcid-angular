@@ -53,12 +53,14 @@
       [names]="true"
       id="names-panel"
     >
-      <h2 header class="orc-font-body" i18n="@@topBar.names">Names</h2>
+      <h2 header class="names-header orc-font-body" i18n="@@topBar.names">
+        Names
+      </h2>
       <app-panel-data>
         <app-panel-element
           [visibility]="userRecord.names.visibility.visibility"
         >
-          <ng-container *ngIf="creditName">
+          <h1 class="name" *ngIf="creditName">
             <span i18n="@@topBar.publishedName" class="mat-caption">
               Published Name
             </span>
@@ -67,7 +69,7 @@
                 {{ creditName }}
               </b>
             </p>
-          </ng-container>
+          </h1>
           <span i18n="@@topBar.name" class="mat-caption description">
             Name
           </span>
@@ -102,7 +104,13 @@
       [type]="'top-bar'"
       id="biography-panel"
     >
-      <h2 header class="orc-font-body" i18n="@@topBar.biography">Biography</h2>
+      <h2
+        header
+        class="biography-header orc-font-body"
+        i18n="@@topBar.biography"
+      >
+        Biography
+      </h2>
       <app-panel-data *ngIf="!!userRecord.biography.biography">
         <app-panel-element
           [visibility]="userRecord.biography.visibility.visibility"
@@ -136,7 +144,7 @@
           >
             Published Name
           </div>
-          <h3 class="orc-font-heading-small">{{ creditName }}</h3>
+          <h1 class="name orc-font-heading-small">{{ creditName }}</h1>
         </div>
         <div
           class="published-name"
@@ -145,9 +153,9 @@
           <div class="row mat-caption description" i18n="@@topBar.name">
             Name
           </div>
-          <h3 class="orc-font-heading-small">
+          <h1 class="name orc-font-heading-small">
             {{ givenNames + ' ' + familyName }}
-          </h3>
+          </h1>
         </div>
         <div class="row names-wrapper">
           <div
@@ -246,7 +254,9 @@
 
     <section [id]="'biography'" *ngIf="userRecord?.biography?.biography">
       <div class="biography-container">
-        <h3 class="orc-font-body" i18n="@@topBar.biography">Biography</h3>
+        <h2 class="biography-header orc-font-body" i18n="@@topBar.biography">
+          Biography
+        </h2>
         <p
           class="orc-font-body-small"
           [innerText]="userRecord.biography.biography.value"
