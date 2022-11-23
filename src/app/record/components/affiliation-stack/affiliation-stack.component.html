@@ -28,7 +28,7 @@
     id="{{ 'cy-affiliation-' + type + '-' + i }}"
     [panelTitle] ="affiliation.affiliationName.value"
   >
-    <h2 header class="orc-font-body">
+    <h4 header class="affiliation-title orc-font-body">
       {{ affiliation.affiliationName.value }}:
 
       <ng-container *ngIf="affiliation.city.value">
@@ -40,7 +40,7 @@
       <ng-container *ngIf="affiliation.country.value">
         {{ affiliation.country.value }}
       </ng-container>
-    </h2>
+    </h4>
     <!-- AFFILIATION BODY -->
     <app-affiliation
       *ngIf="stackPanelsDisplay[affiliation.putCode.value].topPanelOfTheStack"

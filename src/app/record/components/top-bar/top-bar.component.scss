@@ -3,6 +3,10 @@
   box-sizing: border-box;
 }
 
+section {
+  width: 100%;
+}
+
 app-panel {
   width: 100%;
   margin-top: 16px;
@@ -36,7 +40,8 @@ app-top-bar-actions {
   width: 100%;
 
   .names-container {
-    h3 {
+    .name,
+    .names-header {
       margin-top: 0;
     }
 
@@ -127,6 +132,9 @@ app-top-bar-actions {
   }
 
   .biography-container {
+    .biography-header {
+      margin: 0;
+    }
     margin-top: 1em;
     p {
       overflow-wrap: break-word;

@@ -1,4 +1,7 @@
-<div>
+<section id="personal-information" *ngIf="!hideOrcidId || !orcidId">
+  <h2 class="sr-only" i18n="@@shared.personalInformation">
+    Personal information
+  </h2>
   <app-side-bar-id
     *ngIf="!hideOrcidId"
     [ngClass]="{
@@ -25,7 +28,7 @@
       "
       [userRecord]="userRecord"
     >
-      <h2 header class="orc-font-body" i18n="@@shared.emails">Emails</h2>
+      <h3 header class="orc-font-body" i18n="@@shared.emails">Emails</h3>
       <app-panel-data *ngIf="userRecord.emails.emails.length > 0">
         <app-panel-element
           *ngFor="let email of userRecord.emails.emails; let last = last"
@@ -65,9 +68,9 @@
         (!isPublicRecord || userRecord.website.websites.length > 0)
       "
     >
-      <h2 header class="orc-font-body" i18n="@@record.websitesAndSocialLinks">
+      <h3 header class="orc-font-body" i18n="@@record.websitesAndSocialLinks">
         Websites & social links
-      </h2>
+      </h3>
       <app-panel-data *ngIf="userRecord.website.websites.length > 0">
         <app-panel-element
           [isPublicRecord]="isPublicRecord"
@@ -112,7 +115,7 @@
       [(openState)]="externalIdentifierOpenState"
       [userRecord]="userRecord"
     >
-      <h2 header class="orc-font-body" i18n="@@record.otherIds">Other IDs</h2>
+      <h3 header class="orc-font-body" i18n="@@record.otherIds">Other IDs</h3>
       <app-panel-data
         *ngIf="userRecord?.externalIdentifier.externalIdentifiers.length > 0"
       >
@@ -167,7 +170,7 @@
       [id]="userInfo?.EFFECTIVE_USER_ORCID"
       [userRecord]="userRecord"
     >
-      <h2 header class="orc-font-body" i18n="@@record.keywords">Keywords</h2>
+      <h3 header class="orc-font-body" i18n="@@record.keywords">Keywords</h3>
       <app-panel-data *ngIf="userRecord.keyword.keywords.length > 0">
         <ng-container *ngIf="!isPublicRecord">
           <app-panel-element
@@ -235,7 +238,7 @@
       [id]="userInfo?.EFFECTIVE_USER_ORCID"
       [userRecord]="userRecord"
     >
-      <h2 header class="orc-font-body" i18n="@@record.countries">Countries</h2>
+      <h3 header class="orc-font-body" i18n="@@record.countries">Countries</h3>
       <app-panel-data *ngIf="userRecord.countries.addresses.length > 0">
         <ng-container *ngIf="!isPublicRecord">
           <app-panel-element
@@ -289,4 +292,4 @@
       </app-panel-data>
     </app-panel>
   </ng-container>
-</div>
+</section>
