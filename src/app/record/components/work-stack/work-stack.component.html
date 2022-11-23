@@ -31,7 +31,7 @@
     #panelsComponent
     [type]="'works'"
   >
-    <h4 header class="orc-font-body">{{ work.title.value }}</h4>
+    <h4 header class="work-title orc-font-body">{{ work.title.value }}</h4>
     <!-- WORK BODY -->
     <app-work
       *ngIf="stackPanelsDisplay[work.putCode.value].topPanelOfTheStack"
