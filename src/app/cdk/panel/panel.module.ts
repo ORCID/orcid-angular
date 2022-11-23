@@ -22,6 +22,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox'
 import { PrivacySelectorModule } from '../privacy-selector/privacy-selector.module'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
+import { SharedModule } from '../../shared/shared.module'
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar'
     ReactiveFormsModule,
     FormsModule,
     MatProgressBarModule,
+    SharedModule,
   ],
   exports: [
     PanelComponent,

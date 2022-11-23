@@ -58,6 +58,7 @@
       (click)="toggleDetails.next(affiliation)"
       *ngIf="!panelDetailsState?.state"
       i18n="@@shared.showMoreDetail"
+      [attr.aria-label]="affiliation?.affiliationType.value| appPanelShowDetailsAriaLabel : affiliation?.affiliationName?.value"
       >Show more detail</a
     >
     <a
@@ -65,6 +66,7 @@
       (click)="toggleDetails.next(affiliation)"
       *ngIf="panelDetailsState?.state"
       i18n="@@shared.showLessDetail"
+      [attr.aria-label]="affiliation?.affiliationType.value| appPanelHideDetailsAriaLabel : affiliation?.affiliationName?.value"
       >Show less detail</a
     >
   </div>

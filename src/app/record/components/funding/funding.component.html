@@ -68,6 +68,7 @@
       (click)="toggleDetails.next(funding)"
       *ngIf="!panelDetailsState?.state"
       i18n="@@shared.showMoreDetail"
+      [attr.aria-label]="'funding'| appPanelShowDetailsAriaLabel : funding?.fundingTitle?.title?.value"
       >Show more detail</a
     >
     <a
@@ -75,6 +76,8 @@
       (click)="toggleDetails.next(funding)"
       *ngIf="panelDetailsState?.state"
       i18n="@@shared.showLessDetail"
+      [attr.aria-label]="'funding'| appPanelHideDetailsAriaLabel : funding?.fundingTitle?.title?.value"
+
       >Show less detail</a
     >
   </div>

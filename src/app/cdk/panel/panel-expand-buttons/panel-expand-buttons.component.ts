@@ -12,7 +12,27 @@ export class PanelExpandButtonsComponent implements OnInit {
   @Input() type: boolean
   @Input() openState: boolean
   @Output() toggle = new EventEmitter<void>()
+  @Input() panelType:
+    | 'top-bar'
+    | 'side-bar'
+    | 'affiliations'
+    | 'employment'
+    | 'education'
+    | 'qualification'
+    | 'invited-position'
+    | 'distinction'
+    | 'membership'
+    | 'service'
+    | 'peer-review'
+    | 'sub-peer-review'
+    | 'main'
+    | 'works'
+    | 'activities'
+    | 'funding'
+    | 'research-resources'
+
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 }

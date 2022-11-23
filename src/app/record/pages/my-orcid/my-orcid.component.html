@@ -38,6 +38,7 @@
                   color="primary"
                   type="button"
                   i18n="@@shared.expandAll"
+                  [attr.aria-label]="expandAllActivitiesArialLabel"
                   (click)="switchPanelsState()"
                   *ngIf="!globalExpandState"
                 >
@@ -48,6 +49,7 @@
                   color="primary"
                   type="button"
                   i18n="@@shared.collapseAll"
+                  [attr.aria-label]="collapseAllActivitiesArialLabel"
                   (click)="switchPanelsState()"
                   *ngIf="globalExpandState"
                 >
