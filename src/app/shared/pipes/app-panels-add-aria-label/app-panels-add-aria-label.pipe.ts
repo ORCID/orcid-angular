@@ -18,7 +18,7 @@ export class AppPanelsAddAriaLabelPipe implements PipeTransform {
     } else if (panelType == 'works') {
       return $localize`:@@shared.workServiceAddAriaLabel:Add a work`
     } else {
-    /*else if (panelType == 'peer-review') {
+      /*else if (panelType == 'peer-review') {
       console.log("in peer-review")
       return $localize`:@@shared.peerReviewServiceCollapseAriaLabel:Collapse the Peer review section`
     }*/
