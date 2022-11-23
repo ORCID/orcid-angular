@@ -17,8 +17,8 @@
       ></app-panel-expand-buttons>
 
       <div class="text-container">
-        <div class="orc-font-body-large clickable" (click)="collapse()">
-          <h3 class="activity-header">
+        <div class="clickable" (click)="collapse()">
+          <h3 class="activity-header orc-font-body-large">
             <strong> {{ title }} </strong>
             <span
               *ngIf="currentAmount && total && currentAmount !== total"
