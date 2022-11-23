@@ -44,9 +44,8 @@ export const AMOUNT_DIGITS_ONLY_REGEX = /^\d+$/
 // https://regex101.com/r/XvbCrA/1
 export const WHITE_SPACE_REGEXP = /\s+/g
 
-export const PANEL_TYPE_PLACEHOLDER ='%TYPE%'
+export const PANEL_TYPE_PLACEHOLDER = '%TYPE%'
 export const PANEL_TITLE_PLACEHOLDER = '%TITLE%'
-
 
 export const ApplicationRoutes = {
   myOrcid: 'my-orcid',

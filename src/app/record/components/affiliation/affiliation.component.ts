@@ -1,6 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { OrgDisambiguated } from 'src/app/types'
-import { PANEL_TYPE_PLACEHOLDER, PANEL_TITLE_PLACEHOLDER } from '../../../constants'
+import {
+  PANEL_TYPE_PLACEHOLDER,
+  PANEL_TITLE_PLACEHOLDER,
+} from '../../../constants'
 import {
   Affiliation,
   AffiliationType,
@@ -33,11 +36,9 @@ export class AffiliationComponent implements OnInit {
   @Input() orgDisambiguated: OrgDisambiguated
   showEndDateRange = true
 
-  constructor() {
-  }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   private isAffiliationEndDateRangeShown(affiliation: Affiliation): boolean {
     return !(

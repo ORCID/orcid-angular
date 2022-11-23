@@ -154,7 +154,9 @@
       <button
         mat-button
         class="orc-font-body-small"
-        [attr.aria-label]="type | appPanelsSortAriaLabel : (!currentAmount && !total)"
+        [attr.aria-label]="
+          type | appPanelsSortAriaLabel: !currentAmount && !total
+        "
         [matMenuTriggerFor]="menu"
         [disabled]="!currentAmount && !total"
       >

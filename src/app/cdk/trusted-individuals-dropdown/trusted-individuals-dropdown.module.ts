@@ -9,5 +9,4 @@ import { A11yLinkModule } from '../a11y-link/a11y-link.module'
   imports: [CommonModule, MatMenuModule, A11yLinkModule],
   exports: [TrustedIndividualsDropdownComponent],
 })
-export class TrustedIndividualsDropdownModule {
-}
+export class TrustedIndividualsDropdownModule {}

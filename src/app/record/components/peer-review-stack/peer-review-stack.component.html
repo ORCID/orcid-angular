@@ -62,7 +62,11 @@
           *ngIf="!subPeerReview.showDetails"
           (click)="getDetails(subPeerReview, subPeerReview.putCode.value)"
           i18n="@@shared.showMoreDetail"
-          [attr.aria-label]="'peer-review'| appPanelShowDetailsAriaLabel : (subPeerReview.completionDate | monthDayYearDateToString) "
+          [attr.aria-label]="
+            'peer-review'
+              | appPanelShowDetailsAriaLabel
+                : (subPeerReview.completionDate | monthDayYearDateToString)
+          "
           id="show-more-button"
         >
           Show more detail
@@ -72,7 +76,11 @@
           *ngIf="subPeerReview.showDetails"
           (click)="collapse(subPeerReview)"
           i18n="@@shared.showLessDetail"
-          [attr.aria-label]="'peer-review'| appPanelHideDetailsAriaLabel : (subPeerReview.completionDate | monthDayYearDateToString) "
+          [attr.aria-label]="
+            'peer-review'
+              | appPanelHideDetailsAriaLabel
+                : (subPeerReview.completionDate | monthDayYearDateToString)
+          "
           id="show-less-button"
         >
           Show less detail
@@ -117,7 +125,7 @@
       (topPanelOfTheStackModeChange)="changeTopPanelOfTheStack(subPeerReview)"
       [type]="'peer-review'"
       [item]="subPeerReview"
-      [panelTitle]='subPeerReview.completionDate | monthDayYearDateToString'
+      [panelTitle]="subPeerReview.completionDate | monthDayYearDateToString"
     >
     </app-panel-source>
   </app-panel>

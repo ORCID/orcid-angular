@@ -30,7 +30,7 @@
     [visibilityError]="workStack.visibilityError"
     #panelsComponent
     [type]="'works'"
-    [panelTitle] ="work.title.value"
+    [panelTitle]="work.title.value"
   >
     <h4 header class="orc-font-body">{{ work.title.value }}</h4>
     <!-- WORK BODY -->
@@ -61,7 +61,7 @@
       (topPanelOfTheStackModeChange)="changeTopPanelOfTheStack(work)"
       [type]="'works'"
       [item]="work"
-      [panelTitle] ="work.title.value"
+      [panelTitle]="work.title.value"
     >
     </app-panel-source>
   </app-panel>

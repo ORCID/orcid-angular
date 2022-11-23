@@ -33,6 +33,5 @@ export class PanelExpandButtonsComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 }

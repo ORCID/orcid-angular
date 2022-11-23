@@ -82,7 +82,7 @@ export class PanelComponent implements OnInit {
   @Input() selectable = false
   @Input() selectAll = false
   @Input() checkbox = false
-  @Input() panelTitle: any 
+  @Input() panelTitle: any
   _displayTheStack: boolean
   @Input()
   set displayTheStack(value: boolean) {
@@ -92,11 +92,10 @@ export class PanelComponent implements OnInit {
   get displayTheStack(): boolean {
     return this._displayTheStack
   }
-  
+
   @Output() displayTheStackChange = new EventEmitter<boolean>()
   @Output() openStateChange = new EventEmitter<boolean>()
   @Output() checkboxChangePanel = new EventEmitter<any>()
-
 
   _isPublicRecord: string
   @Input() set isPublicRecord(value: string) {
@@ -140,11 +139,10 @@ export class PanelComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
     this._togglz
       .getStateOf('ORCID_ANGULAR_LAZY_LOAD_PEER_REVIEWS')
       .subscribe((value) => (this.togglzPeerReviews = value))
-    if(!this.panelTitle) {
+    if (!this.panelTitle) {
       this.panelTitle = ''
     }
   }
@@ -313,39 +311,29 @@ export class PanelComponent implements OnInit {
         break
     }
   }
-  
+
   personalizedAriaLabelInfo(): String {
     if (this.type == 'employment') {
-      return $localize`:@@shared.employmentAriaLabel:employment` 
-    }
-    else if (this.type == 'education') {
-      return  $localize`:@@shared.educationAriaLabel:education`
-    }
-    else if (this.type == 'qualification') {
+      return $localize`:@@shared.employmentAriaLabel:employment`
+    } else if (this.type == 'education') {
+      return $localize`:@@shared.educationAriaLabel:education`
+    } else if (this.type == 'qualification') {
       $localize`:@@shared.qualificationAriaLabel:qualification`
-    }
-    else if (this.type == 'distinction') {
+    } else if (this.type == 'distinction') {
       return $localize`:@@shared.distinctionAriaLabel:distinction`
-    }
-    else if (this.type == 'invited-position') {
+    } else if (this.type == 'invited-position') {
       return $localize`:@@shared.invitedPositionAriaLabel:invited position`
-    }
-    else if (this.type == 'membership') {
+    } else if (this.type == 'membership') {
       return $localize`:@@shared.membershipAriaLabel:membership`
-    }
-    else if (this.type == 'service') {
+    } else if (this.type == 'service') {
       return $localize`:@@shared.serviceAriaLabel:service`
-    }
-    else if (this.type == 'funding') {
+    } else if (this.type == 'funding') {
       return $localize`:@@shared.fundingAriaLabel:funding`
-    }
-    else if (this.type == 'works') {
+    } else if (this.type == 'works') {
       return $localize`:@@shared.worksAriaLabel:work`
-    }
-    else if (this.type == 'peer-review') {
+    } else if (this.type == 'peer-review') {
       return $localize`:@@shared.peerReviewAriaLabel:peer review`
-    }
-    else {
+    } else {
       return ''
     }
   }

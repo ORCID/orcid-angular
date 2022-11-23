@@ -75,7 +75,9 @@
           mat-icon-button
           *ngIf="!isPublicRecord && isUserSource"
           [matTooltip]="tooltipLabelEdit"
-          [attr.aria-label]="type | appPanelEditActivityAriaLabel : (' ' + this.panelTitle)"
+          [attr.aria-label]="
+            type | appPanelEditActivityAriaLabel: ' ' + this.panelTitle
+          "
           (click)="openModal()"
         >
           <mat-icon class="material-icons-outlined">edit</mat-icon>
