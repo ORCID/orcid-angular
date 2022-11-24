@@ -47,8 +47,7 @@ export const WHITE_SPACE_REGEXP = /\s+/g
 export const ITEM_ACTION_EDIT = 'edit'
 export const ITEM_ACTION_DELETE = 'delete'
 export const ITEM_ACTION_HIDE = 'hide'
-export const ITEM_ACTION_SHOW  = 'show'
-
+export const ITEM_ACTION_SHOW = 'show'
 
 export const ApplicationRoutes = {
   myOrcid: 'my-orcid',
@@ -137,8 +136,6 @@ export enum ADD_EVENT_ACTION {
   pubMed,
   bibText,
 }
-
-
 
 export enum EXTERNAL_ID_TYPE_WORK {
   doi,

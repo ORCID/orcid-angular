@@ -83,7 +83,7 @@
       *ngIf="!panelDetailsState?.state"
       i18n="@@shared.showMoreDetail"
       [attr.aria-label]="
-        'work' | appPanelActivityActionAriaLabel: 'show' : work?.title?.value
+        'work' | appPanelActivityActionAriaLabel: 'show':work?.title?.value
       "
       >Show more detail</a
     >
@@ -93,7 +93,7 @@
       *ngIf="panelDetailsState?.state"
       i18n="@@shared.showLessDetail"
       [attr.aria-label]="
-        'work' | appPanelActivityActionAriaLabel: 'hide' : work?.title?.value
+        'work' | appPanelActivityActionAriaLabel: 'hide':work?.title?.value
       "
       >Show less detail</a
     >

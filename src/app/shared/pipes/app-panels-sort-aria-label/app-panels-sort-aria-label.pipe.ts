@@ -19,7 +19,10 @@ export class AppPanelsSortAriaLabelPipe implements PipeTransform {
         $localize`:@@shared.educationQualificationSortAriaLabel:Sort your education and qualifications` +
         disabledStr
       )
-    } else if (panelType === 'distinction' || panelType === 'invited-position') {
+    } else if (
+      panelType === 'distinction' ||
+      panelType === 'invited-position'
+    ) {
       return (
         $localize`:@@shared.distinctionInvitedPositionSortAriaLabel:Sort your invited positions and distinctions` +
         disabledStr

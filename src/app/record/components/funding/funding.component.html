@@ -70,7 +70,9 @@
       i18n="@@shared.showMoreDetail"
       [attr.aria-label]="
         'funding'
-          | appPanelActivityActionAriaLabel: 'show' : funding?.fundingTitle?.title?.value
+          | appPanelActivityActionAriaLabel
+            : 'show'
+            : funding?.fundingTitle?.title?.value
       "
       >Show more detail</a
     >
@@ -81,7 +83,9 @@
       i18n="@@shared.showLessDetail"
       [attr.aria-label]="
         'funding'
-          | appPanelActivityActionAriaLabel: 'hide' : funding?.fundingTitle?.title?.value
+          | appPanelActivityActionAriaLabel
+            : 'hide'
+            : funding?.fundingTitle?.title?.value
       "
       >Show less detail</a
     >

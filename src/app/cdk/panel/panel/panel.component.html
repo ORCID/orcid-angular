@@ -76,7 +76,7 @@
           *ngIf="!isPublicRecord && isUserSource"
           [matTooltip]="tooltipLabelEdit"
           [attr.aria-label]="
-            type | appPanelActivityActionAriaLabel: 'edit' : this.panelTitle
+            type | appPanelActivityActionAriaLabel: 'edit':this.panelTitle
           "
           (click)="openModal()"
         >
