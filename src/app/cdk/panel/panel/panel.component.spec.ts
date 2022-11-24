@@ -17,7 +17,7 @@ import { RecordPeerReviewService } from '../../../core/record-peer-review/record
 import { RecordResearchResourceService } from '../../../core/record-research-resource/record-research-resource.service'
 import { RecordWorksService } from '../../../core/record-works/record-works.service'
 import { VerificationEmailModalService } from '../../../core/verification-email-modal/verification-email-modal.service'
-import { EditButtonAriaLabelPipe } from 'src/app/shared/pipes/edit-button-aria-label/edit-button-aria-label.pipe'
+import { EditButtonAriaLabelPipe } from '../../../shared/pipes/edit-button-aria-label/edit-button-aria-label.pipe'
 
 describe('PanelComponent', () => {
   let component: PanelComponent
@@ -26,7 +26,7 @@ describe('PanelComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, MatDialogModule, RouterTestingModule],
-      declarations: [PanelComponent],
+      declarations: [PanelComponent,EditButtonAriaLabelPipe,],
       providers: [
         WINDOW_PROVIDERS,
         UserService,
@@ -42,7 +42,6 @@ describe('PanelComponent', () => {
         MatSnackBar,
         MatDialog,
         Overlay,
-        EditButtonAriaLabelPipe,
       ],
     }).compileComponents()
   })
