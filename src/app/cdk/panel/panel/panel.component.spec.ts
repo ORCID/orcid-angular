@@ -26,7 +26,7 @@ describe('PanelComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, MatDialogModule, RouterTestingModule],
-      declarations: [PanelComponent,EditButtonAriaLabelPipe,],
+      declarations: [PanelComponent, EditButtonAriaLabelPipe],
       providers: [
         WINDOW_PROVIDERS,
         UserService,
