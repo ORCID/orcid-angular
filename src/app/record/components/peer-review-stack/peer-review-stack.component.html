@@ -64,7 +64,7 @@
           i18n="@@shared.showMoreDetail"
           [attr.aria-label]="
             'peer-review'
-              | appPanelShowDetailsAriaLabel
+              | appPanelActivityActionAriaLabel: 'show'
                 : (subPeerReview.completionDate | monthDayYearDateToString)
           "
           id="show-more-button"
@@ -78,7 +78,7 @@
           i18n="@@shared.showLessDetail"
           [attr.aria-label]="
             'peer-review'
-              | appPanelHideDetailsAriaLabel
+              | appPanelActivityActionAriaLabel: 'hide'
                 : (subPeerReview.completionDate | monthDayYearDateToString)
           "
           id="show-less-button"

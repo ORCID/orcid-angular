@@ -9,37 +9,37 @@ export class AppPanelsSortAriaLabelPipe implements PipeTransform {
     if (disabled) {
       disabledStr = ' ' + $localize`:@@shared.disabled:(Disabled)`
     }
-    if (panelType == 'employment') {
+    if (panelType === 'employment') {
       return (
         $localize`:@@shared.employmentSortAriaLabel:Sort your employment` +
         disabledStr
       )
-    } else if (panelType == 'education' || panelType == 'qualification') {
+    } else if (panelType === 'education' || panelType === 'qualification') {
       return (
         $localize`:@@shared.educationQualificationSortAriaLabel:Sort your education and qualifications` +
         disabledStr
       )
-    } else if (panelType == 'distinction' || panelType == 'invited-position') {
+    } else if (panelType === 'distinction' || panelType === 'invited-position') {
       return (
         $localize`:@@shared.distinctionInvitedPositionSortAriaLabel:Sort your invited positions and distinctions` +
         disabledStr
       )
-    } else if (panelType == 'membership' || panelType == 'service') {
+    } else if (panelType === 'membership' || panelType === 'service') {
       return (
         $localize`:@@shared.membershipServiceSortAriaLabel:Sort your membership and services` +
         disabledStr
       )
-    } else if (panelType == 'funding') {
+    } else if (panelType === 'funding') {
       return (
         $localize`:@@shared.fundingServiceSortAriaLabel:Sort your funding` +
         disabledStr
       )
-    } else if (panelType == 'works') {
+    } else if (panelType === 'works') {
       return (
         $localize`:@@shared.workServiceSortAriaLabel:Sort your works` +
         disabledStr
       )
-    } else if (panelType == 'peer-review') {
+    } else if (panelType === 'peer-review') {
       return (
         $localize`:@@shared.peerReviewSortAriaLabel:Sort your peer reviews` +
         disabledStr

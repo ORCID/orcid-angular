@@ -42,13 +42,9 @@ import { EditButtonAriaLabelPipe } from './pipes/edit-button-aria-label/edit-but
 import { AppPanelsExpandAriaLabelPipe } from './pipes/app-panels-expand-aria-label/app-panels-expand-aria-label.pipe'
 import { AppPanelsCollapseAriaLabelPipe } from './pipes/app-panels-collapse-aria-label/app-panels-collapse-aria-label.pipe'
 import { ReplaceTextPipe } from './pipes/replace-text/replace-text.pipe'
-import { AppPanelShowDetailsAriaLabelPipe } from './pipes/app-panel-show-details-aria-label/app-panel-show-details-aria-label.pipe'
-import { AppPanelHideDetailsAriaLabelPipe } from './pipes/app-panel-hide-details-aria-label/app-panel-hide-details-aria-label.pipe'
 import { AppPanelsAddAriaLabelPipe } from './pipes/app-panels-add-aria-label/app-panels-add-aria-label.pipe'
 import { AppPanelsSortAriaLabelPipe } from './pipes/app-panels-sort-aria-label/app-panels-sort-aria-label.pipe'
-import { AppPanelEditActivityAriaLabelPipe } from './pipes/app-panel-edit-activity-aria-label/app-panel-edit-activity-aria-label.pipe'
-import { AppPanelDeleteActivityAriaLabelPipe } from './pipes/app-panel-delete-activity-aria-label/app-panel-delete-activity-aria-label.pipe'
-
+import { AppPanelActivityActionAriaLabelPipe } from './pipes/app-panel-activity-action-aria-label/app-panel-activity-action-aria-label.pipe'
 @NgModule({
   imports: [
     CommonModule,
@@ -90,12 +86,9 @@ import { AppPanelDeleteActivityAriaLabelPipe } from './pipes/app-panel-delete-ac
     AppPanelsExpandAriaLabelPipe,
     AppPanelsCollapseAriaLabelPipe,
     ReplaceTextPipe,
-    AppPanelShowDetailsAriaLabelPipe,
-    AppPanelHideDetailsAriaLabelPipe,
     AppPanelsAddAriaLabelPipe,
     AppPanelsSortAriaLabelPipe,
-    AppPanelEditActivityAriaLabelPipe,
-    AppPanelDeleteActivityAriaLabelPipe,
+    AppPanelActivityActionAriaLabelPipe,
   ],
   exports: [
     CommonModule,
@@ -136,12 +129,9 @@ import { AppPanelDeleteActivityAriaLabelPipe } from './pipes/app-panel-delete-ac
     AppPanelsExpandAriaLabelPipe,
     AppPanelsCollapseAriaLabelPipe,
     ReplaceTextPipe,
-    AppPanelShowDetailsAriaLabelPipe,
-    AppPanelHideDetailsAriaLabelPipe,
     AppPanelsAddAriaLabelPipe,
     AppPanelsSortAriaLabelPipe,
-    AppPanelEditActivityAriaLabelPipe,
-    AppPanelDeleteActivityAriaLabelPipe,
+    AppPanelActivityActionAriaLabelPipe,
   ],
   providers: [], // Should not provide anything
 })

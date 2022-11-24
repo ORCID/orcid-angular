@@ -1,10 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { OrgDisambiguated } from 'src/app/types'
 import {
-  PANEL_TYPE_PLACEHOLDER,
-  PANEL_TITLE_PLACEHOLDER,
-} from '../../../constants'
-import {
   Affiliation,
   AffiliationType,
 } from 'src/app/types/record-affiliation.endpoint'
@@ -18,8 +14,6 @@ import { URL_REGEXP } from '../../../constants'
 })
 export class AffiliationComponent implements OnInit {
   affiliationValue: Affiliation
-  panelTypePlaceHolder = PANEL_TYPE_PLACEHOLDER
-  panelTitlePlaceHolder = PANEL_TITLE_PLACEHOLDER
   @Input() set affiliation(value: Affiliation) {
     this.showEndDateRange = this.isAffiliationEndDateRangeShown(value)
     this.affiliationValue = value

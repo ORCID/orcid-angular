@@ -60,7 +60,7 @@
       i18n="@@shared.showMoreDetail"
       [attr.aria-label]="
         affiliation?.affiliationType.value
-          | appPanelShowDetailsAriaLabel: affiliation?.affiliationName?.value
+          | appPanelActivityActionAriaLabel: 'show' : affiliation?.affiliationName?.value
       "
       >Show more detail</a
     >
@@ -71,7 +71,7 @@
       i18n="@@shared.showLessDetail"
       [attr.aria-label]="
         affiliation?.affiliationType.value
-          | appPanelHideDetailsAriaLabel: affiliation?.affiliationName?.value
+          | appPanelActivityActionAriaLabel: 'hide' : affiliation?.affiliationName?.value
       "
       >Show less detail</a
     >
