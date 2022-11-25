@@ -10,6 +10,7 @@ import { SnackbarService } from '../../cdk/snackbar/snackbar.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatDialog } from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
+import { UserInfo } from '../../types'
 
 describe('UserInfoService', () => {
   let service: UserInfoService
@@ -34,3 +35,17 @@ describe('UserInfoService', () => {
     expect(service).toBeTruthy()
   })
 })
+
+export function getUserInfo(): UserInfo {
+  return {
+    REAL_USER_ORCID: '0000-0000-0000-000X',
+    EFFECTIVE_USER_ORCID: '0000-0000-0000-000X',
+    PRIMARY_EMAIL: 'test@orcid.org',
+    IS_PRIMARY_EMAIL_VERIFIED: 'true',
+    LOCKED: 'false',
+    CLAIMED: 'true',
+    HAS_VERIFIED_EMAIL: 'true',
+    RECORD_WITH_ISSUES: false,
+    LAST_MODIFIED: '2022-08-03 11:30:49.870566',
+  } as UserInfo
+}

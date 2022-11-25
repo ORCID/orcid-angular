@@ -22,6 +22,7 @@ export default defineConfig({
     membersAPI_peerReviewEndpoint: '/peer-review',
     membersAPI_employmentEndpoint: '/employment',
     membersAPI_allEmploymentsEndpoint: '/employments',
+    membersAPI_notifPermEndpoint: '/notification-permission',
     registrationPage: 'https://qa.orcid.org/register',
     membersAPI_revokeTokenEndPoint: 'https://qa.orcid.org/oauth/revoke',
     reactivationEmailSubject: '[ORCID] Reactivating your ORCID record',

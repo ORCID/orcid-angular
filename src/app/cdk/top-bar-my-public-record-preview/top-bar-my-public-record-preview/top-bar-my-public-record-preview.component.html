@@ -1,4 +1,5 @@
-<div
+<section
+  [id]="'status-bar'"
   *ngIf="iAmEditingThisRecord && isPublicRecord"
   [ngClass]="{ 'yellow-bg': !isMyRecord }"
 >
@@ -32,9 +33,10 @@
   </div>
 
   <mat-divider class="bottom-divider"></mat-divider>
-</div>
+</section>
 
-<div
+<section
+  [id]="'status-bar'"
   *ngIf="
     iAmEditingThisRecord &&
     (trustedIndividuals?.delegators?.length || trustedIndividuals?.me) &&
@@ -80,4 +82,4 @@
     class="bottom-divider"
     [ngClass]="{ orange: isPublicRecord, green: !isPublicRecord && isMyRecord }"
   ></mat-divider>
-</div>
+</section>

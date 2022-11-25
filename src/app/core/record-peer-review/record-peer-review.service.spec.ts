@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing'
 
-import { RecordBiographyService } from './record-biography.service'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 import { WINDOW_PROVIDERS } from '../../cdk/window'
@@ -10,10 +9,14 @@ import { SnackbarService } from '../../cdk/snackbar/snackbar.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatDialog } from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
-import { BiographyEndPoint } from '../../types/record-biography.endpoint'
+import { RecordPeerReviewService } from './record-peer-review.service'
+import {
+  PeerReview,
+  PeerReviewDuplicateGroup,
+} from '../../types/record-peer-review.endpoint'
 
-describe('RecordBiographyService', () => {
-  let service: RecordBiographyService
+describe('RecordPeerReviewService', () => {
+  let service: RecordPeerReviewService
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -28,7 +31,7 @@ describe('RecordBiographyService', () => {
         Overlay,
       ],
     })
-    service = TestBed.inject(RecordBiographyService)
+    service = TestBed.inject(RecordPeerReviewService)
   })
 
   it('should be created', () => {
@@ -36,9 +39,23 @@ describe('RecordBiographyService', () => {
   })
 })
 
-export function getBiographyEndPoint() {
-  return {
-    biography: { value: 'My Biography' },
-    visibility: { visibility: 'PUBLIC' },
-  } as BiographyEndPoint
+export function getPeerReviews(): PeerReview[] {
+  return [
+    {
+      name: 'Name',
+      visibility: 'PUBLIC',
+      peerReviewDuplicateGroups: [
+        {
+          activePutCode: 1,
+          id: 1,
+          peerReviews: [
+            {
+              name: 'Name',
+              visibility: 'PUBLIC',
+            },
+          ] as PeerReview[],
+        },
+      ] as PeerReviewDuplicateGroup[],
+    } as PeerReview,
+  ]
 }

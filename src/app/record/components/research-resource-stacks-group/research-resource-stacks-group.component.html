@@ -1,6 +1,10 @@
-<ng-container *ngIf="!(researchResources?.groups?.length === 0)">
+<section
+  id="research-resources"
+  *ngIf="
+    researchResources?.groups && !(researchResources?.groups?.length === 0)
+  "
+>
   <app-panels
-    *ngIf="researchResources?.groups"
     class="row"
     [title]="ngOrcidResearchResources"
     [type]="'research-resources'"
@@ -72,4 +76,4 @@
       *ngIf="paginationLoading"
     ></mat-progress-bar>
   </app-panels>
-</ng-container>
+</section>

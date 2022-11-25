@@ -17,31 +17,35 @@
       ></app-panel-expand-buttons>
 
       <div class="text-container">
-        <div class="orc-font-body-large clickable" (click)="collapse()">
-          <strong> {{ title }} </strong>
-          <span
-            *ngIf="currentAmount && total && currentAmount !== total"
-            class="clickable"
-            (click)="collapse()"
-            >({{ currentAmount }}
-            <ng-container i18n="@@shared.of">of</ng-container>
-            {{ total }})</span
-          >
-          <span
-            *ngIf="
-              (currentAmount && !total) ||
-              (currentAmount !== 0 && currentAmount === total)
-            "
-            class="clickable"
-            (click)="collapse()"
-          >
-            ({{ currentAmount }})
-          </span>
-          <span
-            *ngIf="(!currentAmount && total == 0) || (!currentAmount && !total)"
-            >(0)</span
-          >
-          <span *ngIf="!currentAmount && currentAmount !== 0"></span>
+        <div class="clickable" (click)="collapse()">
+          <h3 class="activity-header orc-font-body-large">
+            <strong> {{ title }} </strong>
+            <span
+              *ngIf="currentAmount && total && currentAmount !== total"
+              class="clickable"
+              (click)="collapse()"
+              >({{ currentAmount }}
+              <ng-container i18n="@@shared.of">of</ng-container>
+              {{ total }})</span
+            >
+            <span
+              *ngIf="
+                (currentAmount && !total) ||
+                (currentAmount !== 0 && currentAmount === total)
+              "
+              class="clickable"
+              (click)="collapse()"
+            >
+              ({{ currentAmount }})
+            </span>
+            <span
+              *ngIf="
+                (!currentAmount && total == 0) || (!currentAmount && !total)
+              "
+              >(0)</span
+            >
+            <span *ngIf="!currentAmount && currentAmount !== 0"></span>
+          </h3>
         </div>
         <ng-container> </ng-container>
       </div>
