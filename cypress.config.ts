@@ -20,6 +20,8 @@ export default defineConfig({
     membersAPI_fundingsEndpoint: '/funding',
     membersAPI_workEndpoint: '/work',
     membersAPI_peerReviewEndpoint: '/peer-review',
+    membersAPI_employmentEndpoint: '/employment',
+    membersAPI_allEmploymentsEndpoint: '/employments',
     registrationPage: 'https://qa.orcid.org/register',
     membersAPI_revokeTokenEndPoint: 'https://qa.orcid.org/oauth/revoke',
     reactivationEmailSubject: '[ORCID] Reactivating your ORCID record',

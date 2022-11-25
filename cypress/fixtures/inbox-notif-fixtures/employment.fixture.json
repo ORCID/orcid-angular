@@ -1,0 +1,46 @@
+{
+  "source": {
+    "source-orcid": {
+      "uri": "https://qa.orcid.org/0000-0002-5078-7150",
+      "path": "0000-0002-5078-7150",
+      "host": "qa.orcid.org"
+    },
+    "source-client-id": null,
+    "source-name": {
+      "value": "inbox_notif"
+    },
+    "assertion-origin-orcid": null,
+    "assertion-origin-client-id": null,
+    "assertion-origin-name": null
+  },
+  "department-name": null,
+  "role-title": "Awesome Astronaut",
+  "start-date": {
+    "year": {
+      "value": "2023"
+    },
+    "month": {
+      "value": "01"
+    },
+    "day": {
+      "value": "01"
+    }
+  },
+  "end-date": null,
+  "organization": {
+    "name": "NASA Headquarters",
+    "address": {
+      "city": "DC",
+      "region": "DC",
+      "country": "US"
+    },
+    "disambiguated-organization": {
+      "disambiguated-organization-identifier": "http://dx.doi.org/10.13039/100017437",
+      "disambiguation-source": "FUNDREF"
+    }
+  },
+  "url": null,
+  "external-ids": null,
+  "display-index": "1",
+  "visibility": "public"
+}
