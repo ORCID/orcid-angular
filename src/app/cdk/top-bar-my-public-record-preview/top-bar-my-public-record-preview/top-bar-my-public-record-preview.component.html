@@ -40,7 +40,7 @@
 <section
   [id]="'status-bar'"
   role="region"
-  aria-label="Status bar"
+  [attr.aria-label]="regionStatusBar"
   *ngIf="
     iAmEditingThisRecord &&
     (trustedIndividuals?.delegators?.length || trustedIndividuals?.me) &&
