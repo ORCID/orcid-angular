@@ -1,5 +1,7 @@
 <section
   id="affiliations"
+  role="region"
+  [attr.aria-label]="regionAffiliations"
   *ngIf="
     !(
       isPublicRecord &&
@@ -59,7 +61,11 @@
   </app-panels>
 </section>
 
-<section id="professional-activities">
+<section
+  id="professional-activities"
+  role="region"
+  [attr.aria-label]="regionProfessionalActivities"
+>
   <ng-container
     *ngIf="
       !(
