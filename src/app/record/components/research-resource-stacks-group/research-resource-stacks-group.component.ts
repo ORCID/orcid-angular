@@ -25,7 +25,7 @@ import { DEFAULT_PAGE_SIZE } from 'src/app/constants'
 })
 export class ResearchResourceStacksGroupComponent implements OnInit {
   defaultPageSize = DEFAULT_PAGE_SIZE
-  regionResearchResources  = $localize`:@@researchResources.researchResources:Research resources`
+  regionResearchResources = $localize`:@@researchResources.researchResources:Research resources`
   labelSortButton = $localize`:@@shared.sortResearch:Sort Research Resources`
   @Input() isPublicRecord: string
   @Input() expandedContent: MainPanelsState
