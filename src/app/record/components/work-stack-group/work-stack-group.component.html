@@ -1,5 +1,7 @@
 <section
   id="works"
+  role="region"
+  [attr.aria-label]="regionWorks"
   *ngIf="
     workGroup?.groups && !(isPublicRecord && workGroup?.groups?.length === 0)
   "
