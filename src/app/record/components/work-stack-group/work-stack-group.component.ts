@@ -59,6 +59,9 @@ import { GroupingSuggestions } from 'src/app/types/works.endpoint'
 export class WorkStackGroupComponent implements OnInit {
   showManageSimilarWorks = false
   defaultPageSize = DEFAULT_PAGE_SIZE
+  regionWorks = $localize`:@@shared.works:Works`
+  labelAddButton = $localize`:@@shared.addWork:Add Work`
+  labelSortButton = $localize`:@@shared.sortWorks:Sort Works`
   paginationLoading = true
   @Input() userInfo: UserInfo
   @Input() isPublicRecord: string

@@ -1,5 +1,7 @@
 <section
   id="research-resources"
+  role="region"
+  [attr.aria-label]="regionResearchResources"
   *ngIf="
     researchResources?.groups && !(researchResources?.groups?.length === 0)
   "

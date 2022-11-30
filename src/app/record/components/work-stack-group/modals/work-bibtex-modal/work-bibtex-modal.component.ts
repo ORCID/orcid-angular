@@ -103,6 +103,7 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
                       .worksValidate(newWorks)
                       .pipe(first())
                       .subscribe((data) => {
+                        that.worksFromBibtex = []
                         data.forEach((work) => {
                           that.worksFromBibtex.push(work)
                           if (work.errors.length > 0 && !that.isAnInvalidWork) {

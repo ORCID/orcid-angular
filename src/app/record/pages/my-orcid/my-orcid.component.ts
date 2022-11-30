@@ -56,6 +56,8 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   globalExpandState = true
   initMyOrcidParameter = false
 
+  regionActivities = $localize`:@@shared.activities:Activities`
+
   constructor(
     _userInfoService: UserInfoService,
     private _platform: PlatformInfoService,

@@ -1,6 +1,8 @@
 <!-- A PANELS COMPONENT FOR EACH GROUP OF FUNDING -->
 <section
   id="funding"
+  role="region"
+  [attr.aria-label]="ngOrcidFunding"
   *ngIf="!(loading || (fundings?.length === 0 && isPublicRecord))"
 >
   <app-panels

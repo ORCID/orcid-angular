@@ -12,10 +12,6 @@
   border-radius: 4px;
   border-width: 2px;
 
-  .funding-title {
-    margin: 0;
-  }
-
   app-panel:not(.last) {
     -webkit-box-shadow: 0px 9px 5px 0px rgba(214, 214, 214, 1);
     -moz-box-shadow: 0px 9px 5px 0px rgba(214, 214, 214, 1);
@@ -23,4 +19,8 @@
     display: block;
     position: relative;
   }
+}
+
+.funding-title {
+  margin: 0;
 }

@@ -1,5 +1,7 @@
 <section
   id="peer-reviews"
+  role="region"
+  [attr.aria-label]="regionPeerReviews"
   *ngIf="!(loading || (peerReviews?.length === 0 && isPublicRecord))"
 >
   <app-panels
