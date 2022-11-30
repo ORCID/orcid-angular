@@ -9,9 +9,9 @@
     "oid": "0000-0002-5078-7150",
     "password": "test1234",
     "clientBearer": "a4320bf6-868b-4007-a2fa-aa534b6083f1",
-    "curlPermissionNotifPath": "@/Users/karenmadrigal/Documents/projects/registry/cypress/fixtures/permission_notification.fixture.json",
-    "curlEmploymentPath": "@/Users/karenmadrigal/Documents/projects/registry/cypress/fixtures/inbox-notif-fixtures/employment.fixture.json",
-    "curlEmploymentUpdatePath": "@/Users/karenmadrigal/Documents/projects/registry/cypress/fixtures/inbox-notif-fixtures/put_employment.fixture.json",
+    "curlPermissionNotifPath": "@cypress/fixtures/permission_notification.fixture.json",
+    "curlEmploymentPath": "@cypress/fixtures/inbox-notif-fixtures/employment.fixture.json",
+    "curlEmploymentUpdatePath": "@cypress/fixtures/inbox-notif-fixtures/put_employment.fixture.json",
     "contentToBeReplaced": "Awesome",
     "replaceWith": "AMAZING",
     "putWriteFilePath": "cypress/fixtures/inbox-notif-fixtures/put_employment.fixture.json"
