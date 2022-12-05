@@ -10,7 +10,11 @@
   </div>
 </button>
 
-<mat-menu #languageMenu="matMenu" id="cy-language-menu">
+<mat-menu
+  #languageMenu="matMenu"
+  id="cy-language-menu"
+  [attr.aria-label]="labelLanguage"
+>
   <div
     *ngFor="let language of languageMenuOptions | keyvalue"
     (click)="changeLanguage(language.key)"
@@ -19,6 +23,7 @@
       mat-menu-item
       [ngClass]="{ 'orcid-mat-menu-item-active': language.key === locale }"
       class="orcid-menu-item-small"
+      [attr.aria-label]="language.value"
     >
       <mat-icon *ngIf="language.key === locale">check</mat-icon>
       <mat-icon *ngIf="language.key !== locale"></mat-icon>

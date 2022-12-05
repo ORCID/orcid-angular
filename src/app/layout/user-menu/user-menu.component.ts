@@ -23,7 +23,7 @@ export class UserMenuComponent implements OnInit {
   userInfo: UserInfo
   displayName: string
   platform: PlatformInfo
-  labelSigninRegister = $localize`:@@layout.ariaLabelSigninRegister:sign in or register`
+  labelSigninRegister = $localize`:@@layout.ariaLabelSigninRegister:Sign in to ORCID or register for your ORCID iD`
   labelUserMenu = $localize`:@@layout.ariaLabelUserMenu:User menu`
   togglzOrcidAngularAccountSettings: boolean
   isAccountDelegate: boolean

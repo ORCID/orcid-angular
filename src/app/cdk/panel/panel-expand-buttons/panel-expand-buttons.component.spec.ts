@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { PanelExpandButtonsComponent } from './panel-expand-buttons.component'
+import { AppPanelsExpandAriaLabelPipe } from '../../../shared/pipes/app-panels-expand-aria-label/app-panels-expand-aria-label.pipe'
 
 describe('PanelExpandButtonsComponent', () => {
   let component: PanelExpandButtonsComponent
@@ -8,7 +9,7 @@ describe('PanelExpandButtonsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PanelExpandButtonsComponent],
+      declarations: [PanelExpandButtonsComponent, AppPanelsExpandAriaLabelPipe],
     }).compileComponents()
   })
 

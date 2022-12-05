@@ -15,8 +15,6 @@
     [isPublicRecord]="isPublicRecord"
     [(expandedContent)]="expandedContent['WORK']"
     (expandedContentChange)="expandedContentChange.emit(expandedContent)"
-    [labelAddButton]="labelAddButton"
-    [labelSortButton]="labelSortButton"
     [sortTypes]="['date', 'title', 'type']"
     [sortType]="'date'"
     [addMenuOptions]="addMenuOptions"
@@ -28,7 +26,6 @@
       mode="indeterminate"
       *ngIf="paginationLoading"
     ></mat-progress-bar>
-
     <mat-paginator
       *ngIf="
         workGroup.totalGroups > workGroup.groups.length ||

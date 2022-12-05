@@ -17,6 +17,7 @@
       <app-panel-expand-buttons
         (toggle)="toggle()"
         [openState]="openState"
+        [panelType]="this.type"
         id="cy-panel-component-expand-button"
       ></app-panel-expand-buttons>
       <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
@@ -74,6 +75,9 @@
           mat-icon-button
           *ngIf="!isPublicRecord && isUserSource"
           [matTooltip]="tooltipLabelEdit"
+          [attr.aria-label]="
+            type | appPanelActivityActionAriaLabel: 'edit':this.panelTitle
+          "
           (click)="openModal()"
         >
           <mat-icon class="material-icons-outlined">edit</mat-icon>
@@ -108,6 +112,7 @@
           mat-icon-button
           *ngIf="!isPublicRecord"
           [matTooltip]="tooltipLabelEdit"
+          [attr.aria-label]="this.editModalComponent | editButtonAriaLabel"
           (click)="openModal()"
           id="edit-button"
         >
@@ -123,6 +128,7 @@
         <app-panel-expand-buttons
           (toggle)="toggle()"
           [openState]="openState"
+          [panelType]="this.type"
         ></app-panel-expand-buttons>
       </ng-container>
     </ng-container>

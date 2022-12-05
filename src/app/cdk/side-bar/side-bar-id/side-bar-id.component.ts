@@ -15,7 +15,7 @@ import { WINDOW } from '../../window'
 })
 export class SideBarIdComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
-
+  labelPreviewPublicRecord = $localize`:@@record.ariaLabelpreviewPublicRecord:Preview the public version of this record (Opens in a new tab)`
   environment = environment
   @Input() id: string
   @Input() privateView = true

@@ -26,6 +26,7 @@
     [hasExternalIds]="hasExternalIdentifiers"
     *ngIf="isPreferred(affiliation) || displayTheStack"
     id="{{ 'cy-affiliation-' + type + '-' + i }}"
+    [panelTitle]="affiliation.affiliationName.value"
   >
     <h4 header class="affiliation-title orc-font-body">
       {{ affiliation.affiliationName.value }}:
@@ -66,6 +67,7 @@
       (topPanelOfTheStackModeChange)="changeTopPanelOfTheStack(affiliation)"
       [type]="type"
       [item]="affiliation"
+      [panelTitle]="affiliation.affiliationName.value"
     >
     </app-panel-source>
   </app-panel>
