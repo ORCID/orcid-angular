@@ -12,7 +12,11 @@ import { MatSnackBar } from '@angular/material/snack-bar'
 import { Overlay } from '@angular/cdk/overlay'
 import { RecordService } from '../../../../core/record/record.service'
 import { RecordCountriesService } from '../../../../core/record-countries/record-countries.service'
-import { FormsModule, ReactiveFormsModule, UntypedFormBuilder } from '@angular/forms'
+import {
+  FormsModule,
+  ReactiveFormsModule,
+  UntypedFormBuilder,
+} from '@angular/forms'
 import { SharedModule } from '../../../../shared/shared.module'
 import { getWork } from '../../../../core/record-works/record-works.service.spec'
 import { getContributor } from '../../work-contributors/work-contributors.component.spec'
@@ -36,7 +40,7 @@ describe('WorkFormComponent', () => {
         ReactiveFormsModule,
         RecordModule,
         RouterTestingModule,
-        SharedModule
+        SharedModule,
       ],
       declarations: [WorkFormComponent],
       providers: [

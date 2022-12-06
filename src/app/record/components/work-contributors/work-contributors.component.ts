@@ -1,4 +1,11 @@
-import { ChangeDetectorRef, Component, Inject, Input, OnDestroy, OnInit } from '@angular/core'
+import {
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  Input,
+  OnDestroy,
+  OnInit,
+} from '@angular/core'
 import {
   AbstractControl,
   ControlContainer,
@@ -66,8 +73,8 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
     private parentForm: FormGroupDirective,
     private platform: PlatformInfoService,
     private workService: RecordWorksService,
-    private affiliationService: RecordAffiliationService,
-) {
+    private affiliationService: RecordAffiliationService
+  ) {
     _togglz
       .getStateOf('ADD_OTHER_WORK_CONTRIBUTORS')
       .subscribe((value) => (this.togglzAddOtherContributors = value))
@@ -114,13 +121,16 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
   }
 
   addRecordHolderAsContributor(): void {
-    this.roles = '';
-    this.parentForm.control.setControl('roles', new UntypedFormArray([
-      this.getRoleForm(
-        this.workService.getContributionRoleByKey('no specified role').key,
-        false,
-      ),
-    ]))
+    this.roles = ''
+    this.parentForm.control.setControl(
+      'roles',
+      new UntypedFormArray([
+        this.getRoleForm(
+          this.workService.getContributionRoleByKey('no specified role').key,
+          false
+        ),
+      ])
+    )
     this.contributorsFormArray.push(this.getRecordHolder())
     this.rolesValuesChange()
   }
@@ -139,7 +149,11 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
   }
 
   deleteContributor(contributorIndex: number): void {
-    if (this.contributorsFormArray.at(contributorIndex).get(['contributorOrcid', 'path'])?.value === this.id) {
+    if (
+      this.contributorsFormArray
+        .at(contributorIndex)
+        .get(['contributorOrcid', 'path'])?.value === this.id
+    ) {
       this.parentForm.control.setControl('roles', new UntypedFormArray([]))
     }
     this.contributorsFormArray.removeAt(contributorIndex)
@@ -352,10 +366,10 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
       this.recordHolderContribution = {
         contributorOrcid: {
           path: this.id,
-          uri: uri
+          uri: uri,
         },
         creditName: {
-          content: name
+          content: name,
         },
       } as Contributor
     }

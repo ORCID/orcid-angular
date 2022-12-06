@@ -146,6 +146,6 @@ export function getWork(): Work {
     putCode: {
       value: 1,
     },
-    workExternalIdentifiers: []
+    workExternalIdentifiers: [],
   } as Work
 }

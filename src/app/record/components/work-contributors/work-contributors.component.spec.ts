@@ -99,7 +99,7 @@ describe('WorkContributorsComponent', () => {
   it('should display record holder name with roles and affiliation', async () => {
     const rolesFormArray = component['parentForm'].control?.controls[
       'roles'
-      ] as UntypedFormArray
+    ] as UntypedFormArray
     rolesFormArray.push(formBuilder.group({ role: 'conceptualization' }))
     rolesFormArray.push(formBuilder.group({ role: 'methodology' }))
 
@@ -564,9 +564,9 @@ describe('WorkContributorsComponent', () => {
 
     fixture.detectChanges()
 
-    await debugElement.query(
-      By.css('#cy-add-record-holder-contributor')
-    ).nativeElement.click()
+    await debugElement
+      .query(By.css('#cy-add-record-holder-contributor'))
+      .nativeElement.click()
 
     fixture.detectChanges()
 
@@ -688,7 +688,9 @@ function getContributors(): Contributor[] {
   ]
 }
 
-export function getNumberOfContributors(numberOfContributors: number): Contributor[] {
+export function getNumberOfContributors(
+  numberOfContributors: number
+): Contributor[] {
   const contributors = []
   for (let i = 0; i < numberOfContributors; i++) {
     const contributor = getContributor()

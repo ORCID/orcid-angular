@@ -88,8 +88,7 @@ export class WorkContributorRolesComponent implements OnInit {
     this.recordHolder = this.getRecordHolderContribution()
     if (!this.recordHolderAsContributor || this.recordHolder) {
       if (this.contributors) {
-        const rolesAndSequences = this.recordHolder
-          ?.rolesAndSequences
+        const rolesAndSequences = this.recordHolder?.rolesAndSequences
         if (rolesAndSequences?.length > 0) {
           const roles = rolesAndSequences
             .filter((roleAndSequence) => roleAndSequence.contributorRole)
@@ -105,7 +104,8 @@ export class WorkContributorRolesComponent implements OnInit {
             })
           } else {
             this.addRoleFormGroup(
-              this.workService.getContributionRoleByKey('no specified role').key,
+              this.workService.getContributionRoleByKey('no specified role')
+                .key,
               false
             )
           }
