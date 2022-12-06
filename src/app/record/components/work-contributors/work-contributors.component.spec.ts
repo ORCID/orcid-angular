@@ -1,26 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { WorkContributorsComponent } from './work-contributors.component'
-import { Contributor, UserInfo } from '../../../types'
-import { UserRecord } from '../../../types/record.local'
-import {
-  Affiliation,
-  AffiliationGroup,
-  AffiliationGroupsTypes,
-} from '../../../types/record-affiliation.endpoint'
+import { Contributor } from '../../../types'
 import {
   ControlContainer,
-  UntypedFormArray,
-  UntypedFormBuilder,
   FormControlDirective,
-  UntypedFormGroup,
   FormGroupDirective,
   FormsModule,
   ReactiveFormsModule,
+  UntypedFormArray,
+  UntypedFormBuilder,
+  UntypedFormGroup,
 } from '@angular/forms'
 import { DebugElement } from '@angular/core'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
-import { NamesEndPoint } from '../../../types/record-name.endpoint'
 import { By } from '@angular/platform-browser'
 import { ErrorHandlerService } from '../../../core/error-handler/error-handler.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
@@ -44,6 +37,7 @@ import { SharedModule } from '../../../shared/shared.module'
 import { MatInputModule } from '@angular/material/input'
 import { MatButtonHarness } from '@angular/material/button/testing'
 import { ModalModule } from '../../../cdk/modal/modal.module'
+import { getUserRecord } from '../../../core/record/record.service.spec'
 
 describe('WorkContributorsComponent', () => {
   let component: WorkContributorsComponent
@@ -90,22 +84,7 @@ describe('WorkContributorsComponent', () => {
     component = fixture.componentInstance
     debugElement = fixture.debugElement
     const mockFormGroup: UntypedFormGroup = new UntypedFormGroup({})
-    const formGroupDirective: FormGroupDirective = new FormGroupDirective(
-      [],
-      []
-    )
     component['parentForm'].form = mockFormGroup
-    component['parentForm'].control.setControl(
-      'roles',
-      new UntypedFormArray([
-        formBuilder.group({
-          role: [{ value: 'conceptualization', disabled: true }],
-        }),
-        formBuilder.group({
-          role: [{ value: 'no specified role', disabled: true }],
-        }),
-      ])
-    )
     component.userRecord = getUserRecord()
     component.togglzAddOtherContributors = true
 
@@ -120,7 +99,8 @@ describe('WorkContributorsComponent', () => {
   it('should display record holder name with roles and affiliation', async () => {
     const rolesFormArray = component['parentForm'].control?.controls[
       'roles'
-    ] as UntypedFormArray
+      ] as UntypedFormArray
+    rolesFormArray.push(formBuilder.group({ role: 'conceptualization' }))
     rolesFormArray.push(formBuilder.group({ role: 'methodology' }))
 
     fixture.detectChanges()
@@ -133,16 +113,17 @@ describe('WorkContributorsComponent', () => {
 
     expect(creditNameAndRoles.innerHTML).not.toBeNull()
     expect(creditNameAndRoles.textContent).toBe(
-      'Name Surname (Conceptualization, No specified role, Methodology)'
+      'Published Name (No specified role, Conceptualization, Methodology)'
     )
     expect(affiliation.innerHTML).not.toBeNull()
-    expect(affiliation.textContent).toBe('ORCID, University')
+    expect(affiliation.textContent).toBe('ORCID')
   })
 
   it('should display contributors metadata', async () => {
     const rolesFormArray = component['parentForm'].control?.controls[
       'roles'
     ] as UntypedFormArray
+    rolesFormArray.push(formBuilder.group({ role: 'conceptualization' }))
     rolesFormArray.push(formBuilder.group({ role: 'methodology' }))
 
     fixture.detectChanges()
@@ -155,10 +136,10 @@ describe('WorkContributorsComponent', () => {
 
     expect(recordHolderData.innerHTML).not.toBeNull()
     expect(recordHolderData.textContent).toBe(
-      'Name Surname (Conceptualization, No specified role, Methodology)'
+      'Published Name (No specified role, Conceptualization, Methodology)'
     )
     expect(affiliation.innerHTML).not.toBeNull()
-    expect(affiliation.textContent).toBe('ORCID, University')
+    expect(affiliation.textContent).toBe('ORCID')
   })
 
   it('should display `Add another contributor button`', () => {
@@ -306,10 +287,10 @@ describe('WorkContributorsComponent', () => {
     expect(debugElement.query(By.css('#cy-remove-role-0'))).not.toBeTruthy()
   })
 
-  it('should not display delete button if there is only record holder contribution', async () => {
-    const deleteButton = debugElement.query(By.css('#cy-delete-button-1'))
+  it('should display delete button if there is only record holder contribution', async () => {
+    const deleteButton = debugElement.query(By.css('#cy-delete-button-0'))
 
-    expect(deleteButton).not.toBeTruthy()
+    expect(deleteButton).toBeTruthy()
   })
 
   it('should display notice panel if theres 49 editable contributors and button `Add another contributor` must be disabled', async () => {
@@ -532,42 +513,77 @@ describe('WorkContributorsComponent', () => {
     expect(addAnotherContributor).not.toBeTruthy()
     expect(counter.innerText).toBe('Contributors to this work')
   })
-})
 
-function getUserRecord(): UserRecord {
-  const userRecord: UserRecord = {} as UserRecord
-  userRecord.userInfo = {
-    REAL_USER_ORCID: '0000-0000-0000-000X',
-    EFFECTIVE_USER_ORCID: '0000-0000-0000-000X',
-  } as UserInfo
-  userRecord.names = {
-    givenNames: { value: 'Name' },
-    familyName: { value: 'Surname' },
-  } as NamesEndPoint
-  const affiliationUIGroupEmployment = {
-    defaultAffiliation: {
-      affiliationName: { value: 'ORCID' },
-      affiliationType: { value: 'employment' },
-    } as Affiliation,
-  } as AffiliationGroup
-  const affiliationUIGroupMembership = {
-    defaultAffiliation: {
-      affiliationName: { value: 'University' },
-      affiliationType: { value: 'employment' },
-    } as Affiliation,
-  } as AffiliationGroup
-  userRecord.affiliations = [
-    {
-      type: AffiliationGroupsTypes.EMPLOYMENT,
-      affiliationGroup: [affiliationUIGroupEmployment],
-    },
-    {
-      type: AffiliationGroupsTypes.MEMBERSHIP,
-      affiliationGroup: [affiliationUIGroupMembership],
-    },
-  ]
-  return userRecord
-}
+  it('should not display contributors section if there is no contributors to display', async () => {
+    component.recordHolderAsContributor = true
+
+    component.ngOnInit()
+
+    fixture.detectChanges()
+
+    const contributors = fixture.nativeElement.querySelectorAll(
+      '.contributors-box'
+    ).nativeElement
+
+    const addOtherContributor = debugElement.query(
+      By.css('#cy-add-another-contributor')
+    )
+
+    expect(contributors).not.toBeTruthy()
+    expect(addOtherContributor).toBeTruthy()
+  })
+
+  it('should display button `Add yourself as contributor` if record holder is not present in contributors list', async () => {
+    component.contributors = getNumberOfContributors(2)
+    component.recordHolderAsContributor = true
+    component['parentForm'].control.setControl(
+      'roles',
+      new UntypedFormArray([])
+    )
+
+    component.ngOnInit()
+
+    fixture.detectChanges()
+
+    const addRecordHolderAsContributor = debugElement.query(
+      By.css('#cy-add-record-holder-contributor')
+    )
+
+    expect(addRecordHolderAsContributor).toBeTruthy()
+  })
+
+  it('should add record holder as contributor if `Add yourself as contributor` is clicked and hide button afterwards', async () => {
+    component.contributors = getNumberOfContributors(2)
+    component.recordHolderAsContributor = true
+    component['parentForm'].control.setControl(
+      'roles',
+      new UntypedFormArray([])
+    )
+
+    component.ngOnInit()
+
+    fixture.detectChanges()
+
+    await debugElement.query(
+      By.css('#cy-add-record-holder-contributor')
+    ).nativeElement.click()
+
+    fixture.detectChanges()
+
+    const contributors = fixture.nativeElement.querySelectorAll(
+      '.contributors-box'
+    )
+
+    const addRecordHolderAsContributor = debugElement.query(
+      By.css('#cy-add-record-holder-contributor')
+    )
+
+    expect(contributors.length).toBe(3)
+    expect(addRecordHolderAsContributor).not.toBeTruthy()
+  })
+
+  // should remove roles formgroup when record holder is removed as contributor
+})
 
 function getContributors(): Contributor[] {
   return [
@@ -672,7 +688,7 @@ function getContributors(): Contributor[] {
   ]
 }
 
-function getNumberOfContributors(numberOfContributors: number): Contributor[] {
+export function getNumberOfContributors(numberOfContributors: number): Contributor[] {
   const contributors = []
   for (let i = 0; i < numberOfContributors; i++) {
     const contributor = getContributor()
@@ -684,14 +700,14 @@ function getNumberOfContributors(numberOfContributors: number): Contributor[] {
   return contributors
 }
 
-function getContributor(): Contributor {
+export function getContributor(): Contributor {
   return {
     creditName: {
       content: 'Contributor',
     },
     contributorOrcid: {
       path: '0000-0000-0000-000',
-      uri: 'https://dev.orcid.org/0000-0000-0000-0001',
+      uri: 'https://dev.orcid.org/0000-0000-0000-0000',
     },
     rolesAndSequences: [
       {

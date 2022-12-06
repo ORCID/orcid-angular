@@ -18,7 +18,6 @@ import { Contributor } from '../../../types'
 import { UserRecord } from '../../../types/record.local'
 import { unique } from '../../../shared/validators/unique/unique.validator'
 import { RecordWorksService } from '../../../core/record-works/record-works.service'
-import { tap } from 'rxjs/operators'
 import { MatSelect } from '@angular/material/select'
 
 @Component({
@@ -34,8 +33,10 @@ export class WorkContributorRolesComponent implements OnInit {
 
   _contributors: Contributor[]
   @Input() userRecord: UserRecord
+  @Input() recordHolderAsContributor: boolean
 
   contributionRoles = ContributionRoles
+  recordHolder: Contributor
 
   ngOrcidSelectRole = $localize`:@@works.pleaseSelectRole:Please select a role`
 
@@ -84,22 +85,30 @@ export class WorkContributorRolesComponent implements OnInit {
 
   private initializeFormArray(): void {
     this.parentForm.control.setControl('roles', new UntypedFormArray([]))
-    if (this.contributors) {
-      const rolesAndSequences = this.getRecordHolderContribution()
-        ?.rolesAndSequences
-      if (rolesAndSequences?.length > 0) {
-        const roles = rolesAndSequences
-          .filter((roleAndSequence) => roleAndSequence.contributorRole)
-          .map((rolesAndSequence) => rolesAndSequence.contributorRole)
-        if (roles?.length > 0) {
-          roles.forEach((rs) => {
-            const role = this.workService.getContributionRoleByKey(rs)
-            if (rs && role) {
-              this.addRoleFormGroup(role.key, true)
-            } else {
-              this.addRoleFormGroup(rs, true)
-            }
-          })
+    this.recordHolder = this.getRecordHolderContribution()
+    if (!this.recordHolderAsContributor || this.recordHolder) {
+      if (this.contributors) {
+        const rolesAndSequences = this.recordHolder
+          ?.rolesAndSequences
+        if (rolesAndSequences?.length > 0) {
+          const roles = rolesAndSequences
+            .filter((roleAndSequence) => roleAndSequence.contributorRole)
+            .map((rolesAndSequence) => rolesAndSequence.contributorRole)
+          if (roles?.length > 0) {
+            roles.forEach((rs) => {
+              const role = this.workService.getContributionRoleByKey(rs)
+              if (rs && role) {
+                this.addRoleFormGroup(role.key, true)
+              } else {
+                this.addRoleFormGroup(rs, true)
+              }
+            })
+          } else {
+            this.addRoleFormGroup(
+              this.workService.getContributionRoleByKey('no specified role').key,
+              false
+            )
+          }
         } else {
           this.addRoleFormGroup(
             this.workService.getContributionRoleByKey('no specified role').key,
@@ -112,11 +121,6 @@ export class WorkContributorRolesComponent implements OnInit {
           false
         )
       }
-    } else {
-      this.addRoleFormGroup(
-        this.workService.getContributionRoleByKey('no specified role').key,
-        false
-      )
     }
   }
 

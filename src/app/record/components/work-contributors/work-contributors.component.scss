@@ -107,6 +107,22 @@
   }
 }
 
+.add-record-holder {
+  margin-bottom: 27px;
+  padding-inline-start: 0;
+  a {
+    margin: 0;
+  }
+  span {
+    margin: auto;
+    padding-inline-start: 6px;
+  }
+}
+
+.no-contributors {
+  margin-bottom: 0;
+}
+
 ::ng-deep .columns-4-or-8 .contributors-wrapper {
   margin: 16px 0 16px 0;
 }
