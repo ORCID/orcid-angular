@@ -135,7 +135,7 @@ function getWorkGroup(): WorkGroup {
   } as WorkGroup
 }
 
-function getWork(): Work {
+export function getWork(): Work {
   return {
     title: {
       value: 'Book',
@@ -146,5 +146,6 @@ function getWork(): Work {
     putCode: {
       value: 1,
     },
+    workExternalIdentifiers: [],
   } as Work
 }

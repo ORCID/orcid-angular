@@ -1,4 +1,4 @@
-<div class="container no-padding">
+<div class="container no-padding" *ngIf="roles?.controls?.length > 0">
   <div class="row title">
     <label for="cy-role" class="orc-font-body">
       <strong i18n="@@works.yourContributionsToThisWork"
@@ -8,7 +8,7 @@
   </div>
   <ng-container formArrayName="roles">
     <ng-container
-      *ngFor="let role of roles.controls; index as i"
+      *ngFor="let role of roles?.controls; index as i"
       [formGroupName]="i"
     >
       <div class="row role">
