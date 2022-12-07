@@ -26,7 +26,11 @@
             >
             </app-side-bar>
             <ng-container *ngIf="!recordWithIssues">
-              <section id="activities">
+              <section
+                id="activities"
+                role="region"
+                [attr.aria-label]="regionActivities"
+              >
                 <div
                   class="activities"
                   *ngIf="!(publicOrcid && affiliations === 0)"

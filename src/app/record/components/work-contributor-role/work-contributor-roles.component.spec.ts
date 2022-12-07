@@ -6,10 +6,10 @@ import { HarnessLoader, parallel } from '@angular/cdk/testing'
 import {
   ControlContainer,
   FormControlDirective,
-  UntypedFormGroup,
   FormGroupDirective,
   FormsModule,
   ReactiveFormsModule,
+  UntypedFormGroup,
 } from '@angular/forms'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatSelectModule } from '@angular/material/select'
@@ -18,7 +18,6 @@ import { By } from '@angular/platform-browser'
 import { DebugElement } from '@angular/core'
 import { MatSelectHarness } from '@angular/material/select/testing'
 import { Contributor } from '../../../types'
-import { UserRecord } from '../../../types/record.local'
 import { MatIconModule } from '@angular/material/icon'
 import { MatIconHarness } from '@angular/material/icon/testing'
 import { SharedModule } from '../../../shared/shared.module'
@@ -33,6 +32,7 @@ import { WINDOW_PROVIDERS } from '../../../cdk/window'
 import { SnackbarService } from '../../../cdk/snackbar/snackbar.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { Overlay } from '@angular/cdk/overlay'
+import { getUserRecord } from '../../../core/record/record.service.spec'
 
 describe('WorkContributorRoleComponent', () => {
   let component: WorkContributorRolesComponent
@@ -76,10 +76,6 @@ describe('WorkContributorRoleComponent', () => {
     component = fixture.componentInstance
     debugElement = fixture.debugElement
     const mockFormGroup: UntypedFormGroup = new UntypedFormGroup({})
-    const formGroupDirective: FormGroupDirective = new FormGroupDirective(
-      [],
-      []
-    )
     component['parentForm'].form = mockFormGroup
     component.userRecord = getUserRecord()
 
@@ -142,6 +138,20 @@ describe('WorkContributorRoleComponent', () => {
     expect(disabledStates.filter((value) => value).length).toBe(2)
     expect(deleteButtons.length).toBe(4)
   })
+
+  it('should not display contributor roles if record holder is not present in the contributors list', async () => {
+    component.contributors = getContributor()
+    component.contributors[0].contributorOrcid.path = '0000-0000-0000-0001'
+    component.recordHolderAsContributor = true
+
+    component.ngOnInit()
+
+    fixture.detectChanges()
+
+    const roles = await loader.getAllHarnesses(MatSelectHarness)
+
+    expect(roles.length).toBe(0)
+  })
 })
 
 function getContributor(): Contributor[] {
@@ -168,12 +178,4 @@ function getContributor(): Contributor[] {
       ],
     } as Contributor,
   ]
-}
-
-function getUserRecord(): UserRecord {
-  return {
-    userInfo: {
-      EFFECTIVE_USER_ORCID: '0000-0000-0000-000X',
-    },
-  } as UserRecord
 }

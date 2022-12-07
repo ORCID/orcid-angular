@@ -42,7 +42,12 @@
     </ng-container>
   </app-warning-message>
 
-  <section id="names" *ngIf="userRecord?.names">
+  <section
+    id="names"
+    role="region"
+    [attr.aria-label]="regionNames"
+    *ngIf="userRecord?.names"
+  >
     <app-panel
       [isPublicRecord]="isPublicRecord"
       [elements]="userRecord.names.givenNames"
@@ -96,7 +101,12 @@
       </app-panel-data>
     </app-panel>
   </section>
-  <section id="biography" *ngIf="userRecord?.biography">
+  <section
+    id="biography"
+    role="region"
+    [attr.aria-label]="regionBiography"
+    *ngIf="userRecord?.biography"
+  >
     <app-panel
       [elements]="userRecord.biography.biography"
       [editModalComponent]="modalBiographyComponent"
@@ -135,7 +145,12 @@
       mobile: !platform.columns12
     }"
   >
-    <section [id]="'names'" *ngIf="userRecord?.names || userRecord?.otherNames">
+    <section
+      [id]="'names'"
+      role="region"
+      [attr.aria-label]="regionNames"
+      *ngIf="userRecord?.names || userRecord?.otherNames"
+    >
       <div class="row names-container">
         <div class="published-name" *ngIf="creditName">
           <div
@@ -252,7 +267,12 @@
       [showIsThisYouButton]="true"
     ></app-top-bar-actions>
 
-    <section [id]="'biography'" *ngIf="userRecord?.biography?.biography">
+    <section
+      [id]="'biography'"
+      role="region"
+      [attr.aria-label]="regionBiography"
+      *ngIf="userRecord?.biography?.biography"
+    >
       <div class="biography-container">
         <h2 class="biography-header orc-font-body" i18n="@@topBar.biography">
           Biography

@@ -14,6 +14,11 @@
     "curlEmploymentUpdatePath": "@cypress/fixtures/inbox-notif-fixtures/put_employment.fixture.json",
     "contentToBeReplaced": "Awesome",
     "replaceWith": "AMAZING",
-    "putWriteFilePath": "cypress/fixtures/inbox-notif-fixtures/put_employment.fixture.json"
+    "putWriteFilePath": "cypress/fixtures/inbox-notif-fixtures/put_employment.fixture.json",
+    "curlWorkPath": "@cypress/fixtures/inbox-notif-fixtures/work-inbox-notif.fixture.json",
+    "curlWorkUpdatePath": "@cypress/fixtures/inbox-notif-fixtures/put_work.fixture.json",
+    "workToBeReplaced": "Work added via API",
+    "workReplaceWith": "Work updated via API",
+    "work_putWriteFilePath": "cypress/fixtures/inbox-notif-fixtures/put_work.fixture.json"
   }
 }

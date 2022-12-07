@@ -14,7 +14,8 @@ import { ApplicationRoutes } from '../../constants'
   styleUrls: ['./search.component.scss-theme.scss', './search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-  labelSearch = $localize`:@@layout.ariaLabelSearch:Search`
+  labelSearch = $localize`:@@layout.ariaLabelSearch:Search the ORCID registry`
+  labelSearchBy = $localize`:@@layout.ariaLabelSearchBy:Search by name, affiliation or ORCID iD`
   form: UntypedFormGroup
   platform: PlatformInfo
   togglzEnableUserMenu: boolean

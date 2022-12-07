@@ -10,8 +10,6 @@ import bibtexParse from '@orcid/bibtex-parse-js'
 import latexParse from 'src/assets/scripts/latexParse.js'
 import { WINDOW } from 'src/app/cdk/window'
 import { SnackbarService } from '../../../../../cdk/snackbar/snackbar.service'
-import { environment } from '../../../../../../environments/environment.local'
-import { Contributor } from '../../../../../types'
 import { UserRecord } from '../../../../../types/record.local'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 

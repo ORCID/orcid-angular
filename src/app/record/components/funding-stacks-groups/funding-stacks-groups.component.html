@@ -1,6 +1,8 @@
 <!-- A PANELS COMPONENT FOR EACH GROUP OF FUNDING -->
 <section
   id="funding"
+  role="region"
+  [attr.aria-label]="ngOrcidFunding"
   *ngIf="!(loading || (fundings?.length === 0 && isPublicRecord))"
 >
   <app-panels
@@ -13,8 +15,6 @@
     [isPublicRecord]="isPublicRecord"
     [(expandedContent)]="expandedContent['FUNDING']"
     (expandedContentChange)="expandedContentChange.emit(expandedContent)"
-    [labelAddButton]="labelAddButton"
-    [labelSortButton]="labelSortButton"
     [sortTypes]="['date', 'title', 'type']"
     [sortType]="'date'"
     (sort)="sortEvent($event)"

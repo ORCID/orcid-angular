@@ -82,6 +82,9 @@
       (click)="toggleDetails.next(work)"
       *ngIf="!panelDetailsState?.state"
       i18n="@@shared.showMoreDetail"
+      [attr.aria-label]="
+        'work' | appPanelActivityActionAriaLabel: 'show':work?.title?.value
+      "
       >Show more detail</a
     >
     <a
@@ -89,6 +92,9 @@
       (click)="toggleDetails.next(work)"
       *ngIf="panelDetailsState?.state"
       i18n="@@shared.showLessDetail"
+      [attr.aria-label]="
+        'work' | appPanelActivityActionAriaLabel: 'hide':work?.title?.value
+      "
       >Show less detail</a
     >
   </div>

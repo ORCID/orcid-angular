@@ -633,11 +633,13 @@
   <app-work-contributor-roles
     [contributors]="work?.contributorsGroupedByOrcid"
     [userRecord]="userRecord"
+    [recordHolderAsContributor]="work?.putCode?.value || externalIdentifier"
   ></app-work-contributor-roles>
 
   <app-work-contributors
     [contributors]="work?.contributorsGroupedByOrcid"
     [userRecord]="userRecord"
+    [recordHolderAsContributor]="work?.putCode?.value || externalIdentifier"
   ></app-work-contributors>
 
   <!---------------------->

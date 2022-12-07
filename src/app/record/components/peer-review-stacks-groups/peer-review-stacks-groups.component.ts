@@ -31,8 +31,10 @@ import { TogglzService } from '../../../core/togglz/togglz.service'
   preserveWhitespaces: true,
 })
 export class PeerReviewStacksGroupsComponent implements OnInit {
+  regionPeerReviews = $localize`:@@peerReview.peerReviews:Peer reviews`
   labelAddButton = $localize`:@@shared.addPeerReviews:Add Peer Review`
   labelSortButton = $localize`:@@shared.sortPeerReviews:Sort Peer Reviews`
+
   @Input() userInfo: UserInfo
   @Input() isPublicRecord: string
   @Input() expandedContent: MainPanelsState

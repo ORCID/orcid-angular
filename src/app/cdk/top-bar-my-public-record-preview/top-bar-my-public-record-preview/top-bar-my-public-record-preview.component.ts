@@ -26,6 +26,8 @@ export class TopBarMyPublicRecordPreviewComponent implements OnInit {
   loadingTrustedIndividuals: boolean
   loadingUserInfo: boolean
 
+  regionStatusBar = $localize`:@@shared.statusBar:Status bar`
+
   constructor(
     _platform: PlatformInfoService,
     private _user: UserService,

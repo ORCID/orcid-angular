@@ -1,5 +1,7 @@
 <section
   id="affiliations"
+  role="region"
+  [attr.aria-label]="regionAffiliations"
   *ngIf="
     !(
       isPublicRecord &&
@@ -19,8 +21,6 @@
     [(expandedContent)]="expandedContent['EMPLOYMENT']"
     (expandedContentChange)="expandedContentChange.emit(expandedContent)"
     [isPublicRecord]="isPublicRecord"
-    [labelAddButton]="labelAddEmploymentButton"
-    [labelSortButton]="labelSortEmploymentButton"
     [sortType]="'end'"
     (sort)="sortEvent($event, 'EMPLOYMENT')"
     id="cy-affiliation-employment"
@@ -59,7 +59,11 @@
   </app-panels>
 </section>
 
-<section id="professional-activities">
+<section
+  id="professional-activities"
+  role="region"
+  [attr.aria-label]="regionProfessionalActivities"
+>
   <ng-container
     *ngIf="
       !(
@@ -86,8 +90,6 @@
       [(expandedContent)]="expandedContent['EDUCATION_AND_QUALIFICATION']"
       (expandedContentChange)="expandedContentChange.emit(expandedContent)"
       [isPublicRecord]="isPublicRecord"
-      [labelAddButton]="labelEducationAddButton"
-      [labelSortButton]="labelEducationSortButton"
       [sortType]="'end'"
       (sort)="sortEvent($event, 'EDUCATION_AND_QUALIFICATION')"
       id="cy-affiliation-education-and-qualification"
@@ -159,8 +161,6 @@
       [(expandedContent)]="expandedContent['INVITED_POSITION_AND_DISTINCTION']"
       (expandedContentChange)="expandedContentChange.emit(expandedContent)"
       [isPublicRecord]="isPublicRecord"
-      [labelAddButton]="labelInvitedAddButton"
-      [labelSortButton]="labelInvitedSortButton"
       [sortType]="'end'"
       (sort)="sortEvent($event, 'INVITED_POSITION_AND_DISTINCTION')"
       id="cy-affiliation-invited-position-and-distinction"
@@ -229,8 +229,6 @@
       [(expandedContent)]="expandedContent['MEMBERSHIP_AND_SERVICE']"
       (expandedContentChange)="expandedContentChange.emit(expandedContent)"
       [isPublicRecord]="isPublicRecord"
-      [labelAddButton]="labelMembershipAddButton"
-      [labelSortButton]="labelMembershipSortButton"
       [sortType]="'end'"
       (sort)="sortEvent($event, 'MEMBERSHIP_AND_SERVICE')"
       id="cy-affiliation-membership-and-service"

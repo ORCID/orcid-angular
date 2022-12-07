@@ -44,6 +44,11 @@ export const AMOUNT_DIGITS_ONLY_REGEX = /^\d+$/
 // https://regex101.com/r/XvbCrA/1
 export const WHITE_SPACE_REGEXP = /\s+/g
 
+export const ITEM_ACTION_EDIT = 'edit'
+export const ITEM_ACTION_DELETE = 'delete'
+export const ITEM_ACTION_HIDE = 'hide'
+export const ITEM_ACTION_SHOW = 'show'
+
 export const ApplicationRoutes = {
   myOrcid: 'my-orcid',
   twoFactor: '2fa-signin',

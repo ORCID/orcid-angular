@@ -1,4 +1,9 @@
-<section id="personal-information" *ngIf="!hideOrcidId || !orcidId">
+<section
+  id="personal-information"
+  role="region"
+  [attr.aria-label]="regionPersonalInformation"
+  *ngIf="!hideOrcidId || !orcidId"
+>
   <h2 class="sr-only" i18n="@@shared.personalInformation">
     Personal information
   </h2>

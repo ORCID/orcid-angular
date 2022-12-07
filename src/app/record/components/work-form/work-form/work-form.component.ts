@@ -63,6 +63,7 @@ import { RecordService } from 'src/app/core/record/record.service'
 export class WorkFormComponent implements OnInit {
   @Input() work: Work
   @Input() userRecord: UserRecord
+  @Input() externalIdentifier: boolean
 
   $workTypeUpdateEvent = new Subject<WorkIdType>()
 
@@ -94,7 +95,6 @@ export class WorkFormComponent implements OnInit {
   workIdTypes: WorkIdType[]
   workIdentifiersFormArray: UntypedFormArray = new UntypedFormArray([])
   workIdentifiersFormArrayDisplayState: boolean[] = []
-  externalIdentifier: string
 
   ngOrcidYear = $localize`:@@shared.year:Year`
   ngOrcidMonth = $localize`:@@shared.month:Month`

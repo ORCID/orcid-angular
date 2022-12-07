@@ -46,6 +46,9 @@ export class TopBarComponent implements OnInit, OnDestroy {
   inDelegationMode: boolean
   @Input() loadingUserRecord = true
 
+  regionNames = $localize`:@@topBar.names:Names`
+  regionBiography = $localize`:@@topBar.biography:Biography`
+
   constructor(
     _dialog: MatDialog,
     _platform: PlatformInfoService,

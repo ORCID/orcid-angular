@@ -59,6 +59,8 @@ export class SideBarComponent implements OnInit, OnDestroy {
   externalIdentifierOpenState = false
   emailsOpenState = false
 
+  regionPersonalInformation = $localize`:@@shared.personalInformation:Personal information`
+
   constructor(
     _platform: PlatformInfoService,
     private _user: UserService,
