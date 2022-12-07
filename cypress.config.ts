@@ -19,6 +19,7 @@ export default defineConfig({
     membersAPI_websitesEndPoint: '/researcher-urls',
     membersAPI_fundingsEndpoint: '/funding',
     membersAPI_workEndpoint: '/work',
+    membersAPI_allWorksEndpoint: '/works',
     membersAPI_peerReviewEndpoint: '/peer-review',
     membersAPI_notifPermEndpoint: '/notification-permission',
     registrationPage: 'https://qa.orcid.org/register',
