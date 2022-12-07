@@ -71,6 +71,7 @@ export class ModalNameComponent implements OnInit, OnDestroy {
   ngOrcidAddPublishedName = $localize`:@@topBar.addPublishedName:Add a published or credit name`
   ngOrcidAddOtherName = $localize`:@@topBar.addOtherName:Add other name`
   ngOrcidDefaultVisibilityLabel = $localize`:@@topBar.manageWhoCanSee:Control who can see your given, family and published names by setting the visibility. The default visibility for your names is`
+  dialogAriaLabelledBy = $localize`:@@shared.dialogAriaLabeledByNames:Manage your names dialog`
 
   constructor(
     @Inject(WINDOW) private window: Window,

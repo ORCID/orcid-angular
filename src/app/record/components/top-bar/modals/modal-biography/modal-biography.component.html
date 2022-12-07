@@ -1,4 +1,7 @@
-<app-modal [loading]="loadingBiography">
+<app-modal
+  [loading]="loadingBiography"
+  [dialogAriaLabelledBy]="dialogAriaLabelledBy"
+>
   <app-modal-header>
     <ng-container i18n="@@topBar.biography"> Biography </ng-container>
   </app-modal-header>
