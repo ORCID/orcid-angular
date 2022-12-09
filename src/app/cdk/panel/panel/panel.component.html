@@ -1,5 +1,5 @@
 <div
-  class="header box orc-font-body"
+  class="header box orc-font-body cy-panel-component"
   [ngClass]="{
     'header-bottom': isArrayAndIsNotEmpty(elements) || valueIsNotNull(elements),
     'top-bar-or-main': type === 'top-bar' || type === 'main' || isAffiliation(),
@@ -7,7 +7,7 @@
     'staked-header': stackedHeader,
     'expand-button': !editable && !isPublicRecord && !customControls
   }"
-  [attr.id]="'cy-panel-component-' + panelId + '_' + type + '_' + putCode"
+  [attr.id]="'cy-panel-component-' + panelId + '-' + type + '-' + putCode"
 >
   <!-- [EXPAND BUTTONS] FOR NESTED PANELS -->
   <ng-container
@@ -18,14 +18,7 @@
         (toggle)="toggle()"
         [openState]="openState"
         [panelType]="this.type"
-        [attr.id]="
-          'cy-panel-component-expand-button-' +
-          panelId +
-          '_' +
-          type +
-          '_' +
-          putCode
-        "
+        class="cy-panel-component-expand-button"
       ></app-panel-expand-buttons>
       <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
     </div>
@@ -54,20 +47,14 @@
       <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
     </ng-container>
   </div>
-  <div
-    class="buttons-container"
-    [attr.id]="'cy-buttons-container-' + panelId + '_' + type + '_' + putCode"
-  >
+  <div class="buttons-container cy-buttons-container">
     <!-- [PRIVACY display] FOR `AFFILIATIONS`, `WORKS`, `FUNDINGS`  -->
     <ng-container
       *ngIf="visibility && !isPublicRecord && showVisibilityControl"
     >
       <ng-container *ngIf="visibilityError">
         <mat-icon
-          [attr.id]="
-            'cy-inconsistency-issue-' + panelId + '_' + type + '_' + putCode
-          "
-          class="large-material-icon error"
+          class="large-material-icon error cy-inconsistency-issue"
           [matTooltip]="tooltipLabelVisibilityError"
           >info</mat-icon
         >
@@ -129,7 +116,7 @@
           [matTooltip]="tooltipLabelEdit"
           [attr.aria-label]="this.editModalComponent | editButtonAriaLabel"
           (click)="openModal()"
-          [attr.id]="'edit-button-' + panelId"
+          class="cy-edit-button"
         >
           <mat-icon class="material-icons-outlined">edit</mat-icon>
         </button>

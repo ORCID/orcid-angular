@@ -53,14 +53,14 @@ describe('My Orcid top bar' + runInfo(), () => {
           .should('not.be.empty')
           .get('#givenAndFamilyNames')
           .should('not.be.empty')
-          .get('#other-names')
+          .get('#other-names') //TODO is a class now
           .should('not.exist')
       })
     })
     it('edit user given names, family names and published name"', () => {
       cy.get('#names-panel')
         .within(() => {
-          cy.get('#edit-button').click()
+          cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
         })
         .get('#modal-container')
         .get('#given-names-input')
@@ -91,7 +91,7 @@ describe('My Orcid top bar' + runInfo(), () => {
             .should('contain', publishedNames)
             .get('#givenAndFamilyNames')
             .should('contain', givenNames + ' ' + familyNames)
-            .get('#other-names')
+            .get('#other-names') //TODO is a class now
             .should('not.exist')
             .get('app-panel-privacy')
             .should(
@@ -104,7 +104,7 @@ describe('My Orcid top bar' + runInfo(), () => {
     it('add other names with default privacy', () => {
       cy.get('#names-panel')
         .within(() => {
-          cy.get('#edit-button').click()
+          cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
         })
         .get('#modal-container')
         .get('#add-link')
@@ -130,7 +130,7 @@ describe('My Orcid top bar' + runInfo(), () => {
     it('remove/delete other names', () => {
       cy.get('#names-panel')
         .within(() => {
-          cy.get('#edit-button').click()
+          cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
         })
         .get('#modal-container')
         .get('#delete-button')
@@ -174,7 +174,7 @@ describe('My Orcid top bar' + runInfo(), () => {
     it('edit user biography"', () => {
       cy.get('#biography-panel')
         .within(() => {
-          cy.get('#edit-button').click()
+          cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
         })
         .get('#modal-container')
         .get('#biography-input')
@@ -199,7 +199,7 @@ describe('My Orcid top bar' + runInfo(), () => {
     it('edit user biography privacy"', () => {
       cy.get('#biography-panel')
         .within(() => {
-          cy.get('#edit-button').click()
+          cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
         })
         .get('#modal-container')
         .get('.public-button')
@@ -219,7 +219,7 @@ describe('My Orcid top bar' + runInfo(), () => {
     it('make changes and cancel', () => {
       cy.get('#biography-panel')
         .within(() => {
-          cy.get('#edit-button').click()
+          cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
         })
         .get('#modal-container')
         .get('.private-button')

@@ -12,7 +12,7 @@ describe('My orcid - users are able to add content to their record', async funct
     //sign in
     cy.signin(userData.cyUserPrimaryEmaiVerified) //send user key from fixture file
     cy.get('#biography-panel').within(($myPanel) => {
-      cy.get('#edit-button').click()
+      cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
     })
     cy.get('#biography-input').clear().type(addBio)
     cy.get('#save-biography-button').should('be.enabled').click({ force: true })

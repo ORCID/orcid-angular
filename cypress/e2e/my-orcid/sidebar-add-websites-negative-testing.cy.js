@@ -17,7 +17,7 @@ describe('App displays error messages when user inputs invalid data', async func
   it('Title is not required', function () {
     //click on edit pencil for websites section
     cy.get('#websites-panel').within(($myPanel) => {
-      cy.get('#edit-button').click()
+      cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
     })
     cy.get('#add-link').click()
     cy.get('#description-input').clear() //empty
@@ -37,7 +37,7 @@ describe('App displays error messages when user inputs invalid data', async func
   it('URL field is required', function () {
     //click on edit pencil for websites section
     cy.get('#websites-panel').within(($myPanel) => {
-      cy.get('#edit-button').click()
+      cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
     })
     cy.get('#add-link').click()
     cy.get('#description-input')
@@ -58,7 +58,7 @@ describe('App displays error messages when user inputs invalid data', async func
   it('Boundary value analysis: URL max size allowed is 1999 characters', function () {
     //click on edit pencil for websites section
     cy.get('#websites-panel').within(($myPanel) => {
-      cy.get('#edit-button').click()
+      cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
     })
     cy.get('#add-link').click()
     cy.get('#description-input')
@@ -80,7 +80,7 @@ describe('App displays error messages when user inputs invalid data', async func
   it('Boundary value analysis: Max size +1 (2000 characters) is invalid', function () {
     //click on edit pencil for websites section
     cy.get('#websites-panel').within(($myPanel) => {
-      cy.get('#edit-button').click()
+      cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
     })
     cy.get('#add-link').click()
     cy.get('#description-input')
@@ -103,7 +103,7 @@ describe('App displays error messages when user inputs invalid data', async func
     //The duplicate detection is case insensitive and irrelevant of which protocol is used
     //click edit pencil for websites section
     cy.get('#websites-panel').within(($myPanel) => {
-      cy.get('#edit-button').click()
+      cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
     })
     //add valid title and url
     cy.get('#add-link').click()
@@ -120,7 +120,7 @@ describe('App displays error messages when user inputs invalid data', async func
 
     //click edit pencil for websites section
     cy.get('#websites-panel').within(($myPanel1) => {
-      cy.get('#edit-button').click()
+      cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
     })
     //try to add same url with all caps
     cy.get('#add-link').click()
@@ -146,7 +146,7 @@ describe('App displays error messages when user inputs invalid data', async func
   it('Automatically prefix protocol if not provided by user', function () {
     //click on edit pencil for websites section
     cy.get('#websites-panel').within(($myPanel) => {
-      cy.get('#edit-button').click()
+      cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
     })
     cy.get('#add-link').click()
     cy.get('#url-input')
@@ -165,7 +165,7 @@ describe('App displays error messages when user inputs invalid data', async func
   it('URLs in mixedcase are valid', function () {
     //click on edit pencil for websites section
     cy.get('#websites-panel').within(($myPanel) => {
-      cy.get('#edit-button').click()
+      cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
     })
     cy.get('#add-link').click()
     cy.get('#url-input')
@@ -185,7 +185,7 @@ describe('App displays error messages when user inputs invalid data', async func
     /* Business rule: valid internationalized URLs are NOT supported */
     //click on edit pencil for websites section
     cy.get('#websites-panel').within(($myPanel) => {
-      cy.get('#edit-button').click()
+      cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
     })
     cy.get('#add-link').click()
     cy.get('#description-input')
@@ -245,7 +245,7 @@ describe('App displays error messages when user inputs invalid data', async func
     cy.get('[lang="es"]') //wait for language to refresh
     //click on edit pencil for websites section
     cy.get('#websites-panel').within(($myPanel) => {
-      cy.get('#edit-button').click()
+      cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
     })
     cy.get('#add-link').click()
     cy.get('#description-input')
@@ -279,7 +279,7 @@ describe('App displays error messages when user inputs invalid data', async func
 
     //click on edit pencil for websites section
     cy.get('#websites-panel').within(($myPanel) => {
-      cy.get('#edit-button').click()
+      cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
     })
     cy.get('#add-link').click()
     cy.get('#description-input')
@@ -315,7 +315,7 @@ describe('App displays error messages when user inputs invalid data', async func
 
     //verify both entries are displayed with error message
     cy.get('#websites-panel').within(($myPanel) => {
-      cy.get('#edit-button').click()
+      cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
     })
     cy.get('mat-error')
       .eq(0)

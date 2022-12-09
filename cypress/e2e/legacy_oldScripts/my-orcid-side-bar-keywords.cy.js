@@ -46,7 +46,7 @@ describe('My Orcid sidebar - Keywords' + runInfo(), () => {
       // Expect changes to be display outside and inside of the modal
       cy.get('#keywords-panel')
         .within(() => {
-          cy.get('#edit-button').click()
+          cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
         })
         .get('#modal-container')
         .get('#add-keyword')
@@ -81,7 +81,7 @@ describe('My Orcid sidebar - Keywords' + runInfo(), () => {
     it('remove/delete', () => {
       cy.get('#keywords-panel')
         .within(() => {
-          cy.get('#edit-button').click()
+          cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
         })
         .get('#modal-container')
         .get('.delete-button')
@@ -97,7 +97,7 @@ describe('My Orcid sidebar - Keywords' + runInfo(), () => {
     it('add multiple keywords', () => {
       cy.get('#keywords-panel')
         .within(() => {
-          cy.get('#edit-button').click()
+          cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
         })
         .get('#modal-container')
         .get('#add-keyword')
@@ -143,7 +143,7 @@ describe('My Orcid sidebar - Keywords' + runInfo(), () => {
     it('change privacy', () => {
       cy.get('#keywords-panel')
         .within(() => {
-          cy.get('#edit-button').click()
+          cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
         })
         .get('#modal-container')
         .within(() => {
@@ -165,7 +165,7 @@ describe('My Orcid sidebar - Keywords' + runInfo(), () => {
     it('make changes and cancel', () => {
       cy.get('#keywords-panel')
         .within(() => {
-          cy.get('#edit-button').click()
+          cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
         })
         .get('#modal-container')
         .within(() => {

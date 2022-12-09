@@ -21,6 +21,7 @@
     <ng-container *ngIf="peerReviews.length > 0">
       <app-panel
         panelId="peer-review-stacks"
+        [putCode]="peerReview.groupId"
         class="top-bar"
         *ngFor="let peerReview of peerReviews"
         [elements]="peerReview"

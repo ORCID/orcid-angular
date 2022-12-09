@@ -12,7 +12,7 @@ describe('My orcid - users are able to add content to their record', async funct
     //sign in
     cy.signin(userData.cyUserPrimaryEmaiVerified)
     cy.get('#names-panel').within(($namePanel) => {
-      cy.get('#edit-button').click()
+      cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
     })
     //clear and type new input
     cy.get('#published-names-input').wait(1000).clear().type(addPublishedName)
