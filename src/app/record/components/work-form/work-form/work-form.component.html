@@ -637,6 +637,7 @@
   ></app-work-contributor-roles>
 
   <app-work-contributors
+    [putcode]="work?.putCode?.value"
     [contributors]="work?.contributorsGroupedByOrcid"
     [userRecord]="userRecord"
     [recordHolderAsContributor]="work?.putCode?.value || externalIdentifier"

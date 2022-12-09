@@ -233,7 +233,7 @@
                       <button
                         mat-icon-button
                         (click)="deleteContributor(i)"
-                        [id]="'cy-delete-button-' + i"
+                        [id]="'cy-delete-button-' + i + putcode"
                       >
                         <mat-icon
                           class="material-icons-outlined extra-large-material-icon"
@@ -319,8 +319,8 @@
                 <button
                   mat-icon-button
                   (click)="deleteContributor(i)"
-                  [id]="'cy-delete-button-' + i"
-                >
+                  [id]="'cy-delete-button-' + i + putcode"
+                  >
                   <mat-icon
                     class="material-icons-outlined extra-large-material-icon"
                     >delete

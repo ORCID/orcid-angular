@@ -47,6 +47,7 @@
     </app-work>
     <!-- WORK SOURCE -->
     <app-panel-source
+      id="{{ '-work-stack-' + work.putCode.value }}"
       [userRecord]="userRecord"
       [isPreferred]="isPreferred(work)"
       [sourceName]="work.sourceName || work.source"

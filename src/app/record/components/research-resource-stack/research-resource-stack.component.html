@@ -39,6 +39,7 @@
     >
     </app-research-resource>
     <app-panel-source
+      id="{{ '-research-resource-' + research.putCode }}"
       [isPreferred]="isPreferred(research)"
       [sourceName]="research.sourceName || research.source"
       [assertionOriginName]="research.assertionOriginName"

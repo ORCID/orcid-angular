@@ -77,7 +77,7 @@
       (click)="delete()"
       *ngIf="(stackLength > 1 && displayTheStack) || stackLength === 1"
     >
-      <mat-icon class="large-material-icon" id="delete-button">
+      <mat-icon class="large-material-icon" [id]="'cy-delete-button' + id">
         delete_outline
       </mat-icon>
     </button>

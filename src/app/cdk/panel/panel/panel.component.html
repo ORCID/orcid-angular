@@ -19,7 +19,12 @@
         [openState]="openState"
         [panelType]="this.type"
         [attr.id]="
-          'cy-panel-component-expand-button-' + panelId + '_' + type + '_' + putCode
+          'cy-panel-component-expand-button-' +
+          panelId +
+          '_' +
+          type +
+          '_' +
+          putCode
         "
       ></app-panel-expand-buttons>
       <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
@@ -68,6 +73,7 @@
         >
       </ng-container>
       <app-privacy-selector
+        [id]="panelId + '_' + type + '_' + putCode"
         [whiteBackground]="true"
         (ngModelChange)="updateVisibility($event)"
         [ngModel]="visibility"

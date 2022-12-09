@@ -45,6 +45,7 @@ import { TogglzService } from '../../../core/togglz/togglz.service'
 export class WorkContributorsComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
+  @Input() putcode
   @Input() contributors: Contributor[]
   @Input() userRecord: UserRecord
   @Input() recordHolderAsContributor: boolean

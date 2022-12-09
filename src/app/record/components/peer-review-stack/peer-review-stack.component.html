@@ -113,6 +113,7 @@
     >
     </app-peer-review>
     <app-panel-source
+      id="{{ 'peer-review-' + subPeerReview.putCode.value }}"
       [userRecord]="userRecord"
       [isPreferred]="isPreferred(subPeerReview)"
       [sourceName]="subPeerReview.sourceName || subPeerReview.source"

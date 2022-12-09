@@ -19,7 +19,7 @@ import { VerificationEmailModalService } from 'src/app/core/verification-email-m
 export class PanelSourceComponent implements OnInit {
   closeOtherSources = $localize`:@@record.closeOtherSources:Close other sources`
   openOtherSources = $localize`:@@record.openOtherSources:Open other sources`
-
+  @Input() id
   @Input() isPublicRecord
   @Input() isPreferred = true
   @Input() sourceName
