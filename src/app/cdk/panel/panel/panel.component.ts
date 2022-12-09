@@ -38,7 +38,6 @@ import { TogglzService } from '../../../core/togglz/togglz.service'
   styleUrls: ['./panel.component.scss', 'panel.component.scss-theme.scss'],
 })
 export class PanelComponent implements OnInit {
-  labelSelect = $localize`:@@share.selectAll:Select`
   @Input() panelId
   @Input() showVisibilityControl = false
   @Input() stackSiblings: any[]

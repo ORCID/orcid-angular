@@ -62,7 +62,7 @@ export class WorkStackGroupComponent implements OnInit {
   regionWorks = $localize`:@@shared.works:Works`
   labelAddButton = $localize`:@@shared.addWork:Add Work`
   labelSortButton = $localize`:@@shared.sortWorks:Sort Works`
-  labelSelectAll = $localize`:@@share.selectAll:Select all Works on this page`
+  labelSelectAll = $localize`:@@share.selectAllWorks:Select all Works on this page`
 
   paginationLoading = true
   @Input() userInfo: UserInfo
