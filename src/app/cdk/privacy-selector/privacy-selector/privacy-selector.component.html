@@ -10,7 +10,7 @@
       selected: privacy === 'PUBLIC'
     }"
     class="public-button"
-    [attr.id]="'cy-visibility-public-' + id"
+    id="cy-visibility-public"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +45,7 @@
       selected: privacy === 'LIMITED'
     }"
     class="limited-button"
-    [attr.id]="'cy-visibility-limited' + id"
+    id="cy-visibility-limited"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -73,7 +73,7 @@
       'no-selected': privacy !== 'PRIVATE',
       selected: privacy === 'PRIVATE'
     }"
-    [attr.id]="'cy-visibility-private' + id"
+    id="cy-visibility-private"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
