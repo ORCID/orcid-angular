@@ -49,6 +49,7 @@
                       i18n="@@shared.expandAll"
                       (click)="switchPanelsState()"
                       *ngIf="!globalExpandState"
+                      [attr.aria-label]="expandAllActivitiesArialLabel"
                     >
                       Expand all
                     </button>
@@ -59,6 +60,7 @@
                       i18n="@@shared.collapseAll"
                       (click)="switchPanelsState()"
                       *ngIf="globalExpandState"
+                      [attr.aria-label]="collapseAllActivitiesArialLabel"
                     >
                       Collapse all
                     </button>

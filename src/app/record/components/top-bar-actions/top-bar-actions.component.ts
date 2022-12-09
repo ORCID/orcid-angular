@@ -13,6 +13,7 @@ import { UserStatus } from '../../../types/userStatus.endpoint'
   styleUrls: ['./top-bar-actions.component.scss'],
 })
 export class TopBarActionsComponent implements OnInit, OnDestroy {
+  labelPrintableVersion = $localize`:@@topBar.ariaLabelPrintableVersion:View printable version (Opens of a different tab)`
   $destroy: Subject<boolean> = new Subject<boolean>()
   platform: PlatformInfo
   @Input() userRecord: UserRecord

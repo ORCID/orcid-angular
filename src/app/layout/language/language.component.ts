@@ -20,6 +20,7 @@ export class LanguageComponent implements OnInit {
     this.languageMenuOptions = environment.LANGUAGE_MENU_OPTIONS
     // LOCAL DEV GET'S `en-US` from locale but `en` is required
     this.locale = this.locale === 'en-US' ? 'en' : this.locale
+    this.labelLanguage += ` ${environment.LANGUAGE_MENU_OPTIONS[this.locale]}`
   }
 
   changeLanguage(languageKey: string) {

@@ -35,13 +35,3 @@
     <mat-icon matSuffix>search</mat-icon>
   </button>
 </form>
-
-<mat-menu #menu="matMenu">
-  <button
-    mat-menu-item
-    *ngFor="let item of whereToSearch"
-    (click)="changeWhereToSearch(item)"
-  >
-    {{ item }}
-  </button>
-</mat-menu>

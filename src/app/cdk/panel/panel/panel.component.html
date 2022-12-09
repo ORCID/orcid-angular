@@ -7,7 +7,7 @@
     'staked-header': stackedHeader,
     'expand-button': !editable && !isPublicRecord && !customControls
   }"
-  id="cy-panel-component"
+  [attr.id]="'cy-panel-component-' + panelId + '_' + type + '_' + putCode"
 >
   <!-- [EXPAND BUTTONS] FOR NESTED PANELS -->
   <ng-container
@@ -18,7 +18,14 @@
         (toggle)="toggle()"
         [openState]="openState"
         [panelType]="this.type"
-        id="cy-panel-component-expand-button"
+        [attr.id]="
+          'cy-panel-component-expand-button-' +
+          panelId +
+          '_' +
+          type +
+          '_' +
+          putCode
+        "
       ></app-panel-expand-buttons>
       <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
     </div>
@@ -26,6 +33,9 @@
 
   <div *ngIf="selectable">
     <mat-checkbox
+      [aria-label]="
+        type | appPanelActivityActionAriaLabel: 'select':this.panelTitle
+      "
       class="text-wrap"
       *ngIf="(defaultPutCode === putCode || displayTheStack) && !isPublicRecord"
       (change)="checked($event)"
@@ -44,14 +54,19 @@
       <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
     </ng-container>
   </div>
-  <div class="buttons-container" id="cy-buttons-container">
+  <div
+    class="buttons-container"
+    [attr.id]="'cy-buttons-container-' + panelId + '_' + type + '_' + putCode"
+  >
     <!-- [PRIVACY display] FOR `AFFILIATIONS`, `WORKS`, `FUNDINGS`  -->
     <ng-container
       *ngIf="visibility && !isPublicRecord && showVisibilityControl"
     >
       <ng-container *ngIf="visibilityError">
         <mat-icon
-          id="cy-inconsistency-issue"
+          [attr.id]="
+            'cy-inconsistency-issue-' + panelId + '_' + type + '_' + putCode
+          "
           class="large-material-icon error"
           [matTooltip]="tooltipLabelVisibilityError"
           >info</mat-icon
@@ -114,7 +129,7 @@
           [matTooltip]="tooltipLabelEdit"
           [attr.aria-label]="this.editModalComponent | editButtonAriaLabel"
           (click)="openModal()"
-          id="edit-button"
+          [attr.id]="'edit-button-' + panelId"
         >
           <mat-icon class="material-icons-outlined">edit</mat-icon>
         </button>
