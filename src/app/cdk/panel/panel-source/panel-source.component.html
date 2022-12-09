@@ -58,10 +58,7 @@
       class="preferred-source"
       *ngIf="!isPreferred && stackLength > 1 && !isPublicRecord"
     >
-      <a
-        (click)="clickMakePrimary()"
-        *ngIf="stackLength > 1"
-      >
+      <a (click)="clickMakePrimary()" *ngIf="stackLength > 1">
         Make preferred source
       </a>
     </div>

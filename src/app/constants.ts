@@ -50,7 +50,6 @@ export const ITEM_ACTION_HIDE = 'hide'
 export const ITEM_ACTION_SHOW = 'show'
 export const ITEM_ACTION_SELECT = 'select'
 
-
 export const ApplicationRoutes = {
   myOrcid: 'my-orcid',
   twoFactor: '2fa-signin',

@@ -51,7 +51,7 @@ import { SharedModule } from '../../shared/shared.module'
     FormsModule,
     MatProgressBarModule,
     SharedModule,
-    A11yLinkModule
+    A11yLinkModule,
   ],
   exports: [
     PanelComponent,
