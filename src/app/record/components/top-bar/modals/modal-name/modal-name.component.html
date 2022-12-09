@@ -1,4 +1,7 @@
-<app-modal [loading]="loadingNames">
+<app-modal
+  [loading]="loadingNames"
+  [dialogAriaLabelledBy]="dialogAriaLabelledBy"
+>
   <app-modal-header>
     <ng-container i18n="@@topBar.names"> Names </ng-container>
   </app-modal-header>

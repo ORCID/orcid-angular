@@ -3,6 +3,10 @@
   width: 100%;
 }
 
+h1 {
+  margin: 0;
+}
+
 .container {
   display: flex;
   justify-content: space-between;
@@ -17,9 +21,9 @@
 }
 
 .orc-font-body-large {
-  margin-left: 8px;
+  margin-left: 4px;
 }
 
-.orc-font-heading-small {
-  margin-left: 4px;
+.orc-font-body {
+  margin-left: 6px;
 }

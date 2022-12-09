@@ -1,11 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core'
-import { ModalEmailComponent } from '../../../cdk/side-bar/modals/modal-email/modal-email.component'
-import { ModalCountryComponent } from '../../../cdk/side-bar/modals/modal-country/modal-country.component'
-import { ModalWebsitesComponent } from 'src/app/cdk/side-bar/modals/modal-websites/modal-websites.component'
-import { ModalKeywordComponent } from 'src/app/cdk/side-bar/modals/modal-keyword/modal-keyword.component'
-import { ModalPersonIdentifiersComponent } from 'src/app/cdk/side-bar/modals/modal-person-identifiers/modal-person-identifiers.component'
-import { ModalNameComponent } from 'src/app/record/components/top-bar/modals/modal-name/modal-name.component'
-import { ModalBiographyComponent } from 'src/app/record/components/top-bar/modals/modal-biography/modal-biography.component'
 
 @Pipe({
   name: 'appPanelsCollapseAriaLabel',
