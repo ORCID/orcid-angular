@@ -50,7 +50,7 @@ describe('Account Settings - users can change default visibility setting for dat
     cy.get('#cy-my-orcid').click()
     cy.get('#cy-add-btn-employment').click()
     cy.get('app-modal').within(() => {
-      cy.get('#cy-visibility-private').should('have.class', 'selected')  //TODO is a class now cy-visibility-private
+      cy.get('#cy-visibility-private').should('have.class', 'selected') //TODO is a class now cy-visibility-private
       cy.get('#cancel-affiliation-button').click()
     })
   })

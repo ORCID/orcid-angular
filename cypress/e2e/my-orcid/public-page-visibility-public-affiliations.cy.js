@@ -42,7 +42,7 @@ describe('Public record page: validate public affiliations are displayed', async
   it('Public peer reviews data is displayed', function () {
     cy.get('#cy-peer-reviews').within(() => {
       cy.get('#cy-panel-component-expand-button').click() //TODO is a class now
-      cy.get('#cy-panel-component').should('contain', testUser.publicPRdate)//TODO is a class now and as a more descriptive id
+      cy.get('#cy-panel-component').should('contain', testUser.publicPRdate) //TODO is a class now and as a more descriptive id
     })
   })
 })

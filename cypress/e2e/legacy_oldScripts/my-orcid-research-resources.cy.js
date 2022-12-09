@@ -36,7 +36,7 @@ describe('My Orcid research resources' + runInfo(), () => {
         .within(() => {
           cy.get('#expand-content-button').click()
         })
-        .get('#panel-0')//TODO is tag attribute now, use cy.get('[panel-sequence="cy-research-resource-stack-panel-0"]') 
+        .get('#panel-0') //TODO is tag attribute now, use cy.get('[panel-sequence="cy-research-resource-stack-panel-0"]')
         .should('not.exist')
         .get('#research-resources-panel')
         .within(() => {
@@ -47,14 +47,14 @@ describe('My Orcid research resources' + runInfo(), () => {
   describe('Research resources' + runInfo(), () => {
     it('show research resources description', () => {
       cy.get('#research-resources-panel')
-        .get('#panel-0')//TODO is tag attribute now, use cy.get('[panel-sequence="cy-research-resource-stack-panel-0"]') 
+        .get('#panel-0') //TODO is tag attribute now, use cy.get('[panel-sequence="cy-research-resource-stack-panel-0"]')
         .within(() => {
           cy.get('#expand-more-button').click()
         })
-        .get('#panel-0')//TODO is tag attribute now, use cy.get('[panel-sequence="cy-research-resource-stack-panel-0"]') 
+        .get('#panel-0') //TODO is tag attribute now, use cy.get('[panel-sequence="cy-research-resource-stack-panel-0"]')
         .get('.description-container > .description')
         .should('exist')
-        .get('#show-more-button')//TODO is a class now
+        .get('#show-more-button') //TODO is a class now
         .click()
         .get('.organization-identifiers')
         .should('exist')
@@ -74,7 +74,7 @@ describe('My Orcid research resources' + runInfo(), () => {
           '.orc-font-body-small.ng-star-inserted > .panel-data-container > .data-content > app-panel-element > :nth-child(1) > .line > :nth-child(1)'
         )
         .should('not.exist')
-        .get('#panel-0')//TODO is tag attribute now, use cy.get('[panel-sequence="cy-research-resource-stack-panel-0"]') 
+        .get('#panel-0') //TODO is tag attribute now, use cy.get('[panel-sequence="cy-research-resource-stack-panel-0"]')
         .get('#show-less-button')
         .click()
         .get('.organization-identifiers')
