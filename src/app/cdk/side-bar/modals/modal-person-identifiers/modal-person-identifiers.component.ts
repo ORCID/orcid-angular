@@ -34,6 +34,8 @@ export class ModalPersonIdentifiersComponent implements OnInit, OnDestroy {
   screenDirection = 'ltr'
   loadingPersonalIdentifiers = true
 
+  dialogAriaLabelledBy = $localize`:@@shared.dialogAriaLabeledByOtherIds:Manage your other IDs dialog`
+
   ngOnInit(): void {
     this._recordPersonalIdentifiers
       .getPersonalIdentifiers()

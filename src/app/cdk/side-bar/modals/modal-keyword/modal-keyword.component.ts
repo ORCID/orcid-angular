@@ -58,6 +58,7 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
   keywordMaxLength = 99
 
   ngOrcidKeyword = $localize`:@@topBar.keyword:Keyword`
+  dialogAriaLabelledBy = $localize`:@@shared.dialogAriaLabeledByKeywords:Manage your keywords dialog`
 
   constructor(
     @Inject(WINDOW) private window: Window,

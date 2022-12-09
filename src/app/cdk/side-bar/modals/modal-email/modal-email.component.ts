@@ -54,6 +54,8 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   isMobile: boolean
   userInfo: UserInfo
 
+  dialogAriaLabelledBy = $localize`:@@shared.dialogAriaLabeledByEmails:Manage your emails dialog`
+
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
     public _recordEmails: RecordEmailsService,
