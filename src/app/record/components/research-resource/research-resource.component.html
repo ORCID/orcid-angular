@@ -141,6 +141,7 @@
       </div>
       <div *ngFor="let item of researchDetail.items; index as i">
         <app-panel
+          panelId="research-resource"
           [elements]="item"
           [type]="'top-bar'"
           [editable]="false"
