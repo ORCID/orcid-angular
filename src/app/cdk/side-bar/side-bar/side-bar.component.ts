@@ -28,6 +28,12 @@ import { ModalWebsitesComponent } from '../modals/modal-websites/modal-websites.
   ],
 })
 export class SideBarComponent implements OnInit, OnDestroy {
+  labelManageYourEmails = $localize`:"@@record.manageYourEmails:Manage your emails`
+  labelManageYourWebsites = $localize`:"@@record.manageYourWebsite:Manage your websites & social links`
+  labelManageYourKeyword = $localize`:"@@record.labelManageYourKeyword:Manage your keywords`
+  labelManageYourCountries = $localize`:"@@record.labelManageYourCountries:Manage your countries`
+  labelManageYourPersonalIds = $localize`:"@@record.labelManageYourPersonalIds:Manage your personalIds`
+
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   @Input() isPublicRecord: string

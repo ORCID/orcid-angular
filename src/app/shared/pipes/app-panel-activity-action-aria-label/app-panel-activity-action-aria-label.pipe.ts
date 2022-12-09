@@ -4,6 +4,7 @@ import {
   ITEM_ACTION_EDIT,
   ITEM_ACTION_HIDE,
   ITEM_ACTION_SHOW,
+  ITEM_ACTION_SELECT,
 } from 'src/app/constants'
 
 @Pipe({
@@ -20,6 +21,8 @@ export class AppPanelActivityActionAriaLabelPipe implements PipeTransform {
       translationForAction = $localize`:@@shared.activityShowDetailsAriaLabel:Show more details for`
     } else if (activity === ITEM_ACTION_HIDE) {
       translationForAction = $localize`:@@shared.activityHideDetailsAriaLabel:Hide details for`
+    } else if (activity === ITEM_ACTION_SELECT) {
+      translationForAction = $localize`:@@shared.activitySelectAriaLabel:Select`
     }
 
     if (panelType === 'employment') {

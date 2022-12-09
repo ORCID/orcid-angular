@@ -18,6 +18,9 @@
   <div
     *ngFor="let language of languageMenuOptions | keyvalue"
     (click)="changeLanguage(language.key)"
+    mat-menu-item
+    [ngClass]="{ 'orcid-mat-menu-item-active': language.key === locale }"
+    class="orcid-menu-item-small"
   >
     <button
       mat-menu-item

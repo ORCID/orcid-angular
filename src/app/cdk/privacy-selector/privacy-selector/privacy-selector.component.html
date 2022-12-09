@@ -1,6 +1,8 @@
 <div class="panel" [ngClass]="{ 'white-background': whiteBackground }">
   <button
-    aria-label="limited public"
+    [attr.aria-label]="
+      ariaLabelPublic + (privacy === 'PUBLIC' ? ariaLabelCurrentlySelected : '')
+    "
     mat-icon-button
     (click)="public()"
     [ngClass]="{
@@ -32,6 +34,10 @@
   </button>
   <button
     aria-label="visibility limited"
+    [attr.aria-label]="
+      ariaLabelTrustedParty +
+      (privacy === 'LIMITED' ? ariaLabelCurrentlySelected : '')
+    "
     mat-icon-button
     (click)="limited()"
     [ngClass]="{
@@ -56,6 +62,10 @@
   </button>
   <button
     aria-label="visibility private"
+    [attr.aria-label]="
+      ariaLabelPrivate +
+      (privacy === 'PRIVATE' ? ariaLabelCurrentlySelected : '')
+    "
     mat-icon-button
     (click)="private()"
     class="private-button"
@@ -79,6 +89,7 @@
     </svg>
   </button>
 </div>
+
 <div class="hide">
   <div
     class="privacy-selector orc-font-body-small"

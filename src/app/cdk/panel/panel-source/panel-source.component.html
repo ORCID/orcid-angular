@@ -37,12 +37,14 @@
         <a
           *ngIf="!displayTheStack && stackLength > 1"
           (click)="toggleStackMode()"
+          [attr.aria-label]="openOtherSources"
         >
           (<ng-container i18n="@@shared.of">of</ng-container>
           {{ stackLength }})&#x200E;
         </a>
         <a
           (click)="toggleStackMode()"
+          [attr.aria-label]="closeOtherSources"
           *ngIf="stackLength > 1 && displayTheStack"
         >
           <ng-container i18n="@@shared.closeOtherSources"

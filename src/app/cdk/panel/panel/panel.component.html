@@ -26,6 +26,9 @@
 
   <div *ngIf="selectable">
     <mat-checkbox
+      [aria-label]="
+        type | appPanelActivityActionAriaLabel: 'select':this.panelTitle
+      "
       class="text-wrap"
       *ngIf="(defaultPutCode === putCode || displayTheStack) && !isPublicRecord"
       (change)="checked($event)"
@@ -114,7 +117,7 @@
           [matTooltip]="tooltipLabelEdit"
           [attr.aria-label]="this.editModalComponent | editButtonAriaLabel"
           (click)="openModal()"
-          id="edit-button"
+          [attr.id]="'edit-button-' + panelId"
         >
           <mat-icon class="material-icons-outlined">edit</mat-icon>
         </button>

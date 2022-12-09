@@ -24,6 +24,29 @@ import { VisibilityStrings } from 'src/app/types/common.endpoint'
   ],
 })
 export class PrivacySelectorComponent implements OnInit, ControlValueAccessor {
+  ariaLabelPublic = $localize`:@@shared.ariaLabelPublic:set item visibility to Everyone`
+  ariaLabelTrustedParty = $localize`:@@shared.ariaLabelTrustedParty:set item visibility to Trusted Parties `
+  ariaLabelPrivate = $localize`:@@shared.ariaLabelPrivate:set item visibility to Only Me`
+  ariaLabelCurrentlySelected = $localize`:@@shared.currentSelected: (Currently selected)`
+
+  @Input() type:
+    | 'top-bar'
+    | 'side-bar'
+    | 'affiliations'
+    | 'employment'
+    | 'education'
+    | 'qualification'
+    | 'invited-position'
+    | 'distinction'
+    | 'membership'
+    | 'service'
+    | 'peer-review'
+    | 'main'
+    | 'works'
+    | 'activities'
+    | 'funding'
+    | 'research-resources'
+
   private onChange: (value: string) => void
   private onTouched: (value: string) => void
   @Input() whiteBackground = false
