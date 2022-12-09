@@ -91,14 +91,16 @@ describe('My orcid - works - visibility inconsistency notification scenarios', a
       cy.contains('a', 'of 2') //REPLACE locator with id
       //verify icon is displayed
       cy.get('#cy-buttons-container').within(() => {
-        cy.get('#cy-inconsistency-issue').should('be.visible')
+        //TODO is a class now
+        cy.get('#cy-inconsistency-issue').should('be.visible') //TODO is a class now
       })
       //select group visibility & verify icon is not displayed
       cy.get('mat-checkbox').click()
       cy.get('#cy-visibility-limited').click()
       cy.wait(3000) //wait for change to take effect
       cy.get('#cy-buttons-container').within(() => {
-        cy.get('#cy-inconsistency-issue').should('not.exist')
+        //TODO is a class now
+        cy.get('#cy-inconsistency-issue').should('not.exist') //TODO is a class now
       })
     })
   })

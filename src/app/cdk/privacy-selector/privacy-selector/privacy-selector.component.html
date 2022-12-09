@@ -9,8 +9,7 @@
       'no-selected': privacy !== 'PUBLIC',
       selected: privacy === 'PUBLIC'
     }"
-    class="public-button"
-    id="cy-visibility-public"
+    class="public-button cy-visibility-public"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -44,8 +43,7 @@
       'no-selected': privacy !== 'LIMITED',
       selected: privacy === 'LIMITED'
     }"
-    class="limited-button"
-    id="cy-visibility-limited"
+    class="limited-button cy-visibility-limited"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -68,12 +66,11 @@
     "
     mat-icon-button
     (click)="private()"
-    class="private-button"
+    class="private-button cy-visibility-private"
     [ngClass]="{
       'no-selected': privacy !== 'PRIVATE',
       selected: privacy === 'PRIVATE'
     }"
-    id="cy-visibility-private"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"

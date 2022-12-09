@@ -89,9 +89,9 @@
               Also known as
             </span>
             <app-panel-element
-              id="other-names"
               *ngFor="let otherNames of userRecord.otherNames.otherNames"
               [visibility]="otherNames.visibility.visibility"
+              class="other-names"
             >
               <p class="mat-body-1 other-names">
                 {{ otherNames.content }}

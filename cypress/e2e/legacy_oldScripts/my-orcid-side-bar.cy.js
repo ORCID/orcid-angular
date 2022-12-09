@@ -64,7 +64,7 @@ describe('My Orcid sidebar' + runInfo(), () => {
         const randomUserEmail = randomUser()
         cy.get('#emails-panel')
           .within(() => {
-            cy.get('#edit-button').click()
+            cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
           })
           .get('#modal-container')
           .get('#add-link')
@@ -87,7 +87,7 @@ describe('My Orcid sidebar' + runInfo(), () => {
       it('remove emails', () => {
         cy.get('#emails-panel')
           .within(() => {
-            cy.get('#edit-button').click()
+            cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
           })
           .get('#modal-container')
           .get('.delete-button')
@@ -108,7 +108,7 @@ describe('My Orcid sidebar' + runInfo(), () => {
         const randomUserEmail4 = randomUser()
         cy.get('#emails-panel')
           .within(() => {
-            cy.get('#edit-button').click()
+            cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
           })
           .get('#modal-container')
           .get('#add-link')
@@ -138,7 +138,7 @@ describe('My Orcid sidebar' + runInfo(), () => {
       it('change privacy', () => {
         cy.get('#emails-panel')
           .within(() => {
-            cy.get('#edit-button').click()
+            cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
           })
           .get('#modal-container')
           .get('.public-button')
@@ -174,7 +174,7 @@ describe('My Orcid sidebar' + runInfo(), () => {
       it('make changes and cancel', () => {
         cy.get('#emails-panel')
           .within(() => {
-            cy.get('#edit-button').click()
+            cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
           })
           .get('#modal-container')
           .get('.private-button')
@@ -193,7 +193,7 @@ describe('My Orcid sidebar' + runInfo(), () => {
       it('open the terms of use on a separate window ', () => {
         cy.get('#emails-panel')
           .within(() => {
-            cy.get('#edit-button').click()
+            cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
           })
           .get('#modal-container')
           .within(() => {
@@ -222,7 +222,7 @@ describe('My Orcid sidebar' + runInfo(), () => {
     it('add items and display those with default privacy', () => {
       cy.get('#websites-panel')
         .within(() => {
-          cy.get('#edit-button').click()
+          cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
         })
         .get('#modal-container')
         .within(() => {
@@ -253,7 +253,7 @@ describe('My Orcid sidebar' + runInfo(), () => {
     it('remove/delete', () => {
       cy.get('#websites-panel')
         .within(() => {
-          cy.get('#edit-button').click()
+          cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
         })
         .get('#modal-container')
         .within(() => {
@@ -271,7 +271,7 @@ describe('My Orcid sidebar' + runInfo(), () => {
     it('add multiple websites', () => {
       cy.get('#websites-panel')
         .within(() => {
-          cy.get('#edit-button').click()
+          cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
         })
         .get('#modal-container')
         .within(() => {
@@ -329,7 +329,7 @@ describe('My Orcid sidebar' + runInfo(), () => {
     it('change privacy', () => {
       cy.get('#websites-panel')
         .within(() => {
-          cy.get('#edit-button').click()
+          cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
         })
         .get('#modal-container')
         .within(() => {
@@ -350,7 +350,7 @@ describe('My Orcid sidebar' + runInfo(), () => {
     it('make changes and cancel', () => {
       cy.get('#websites-panel')
         .within(() => {
-          cy.get('#edit-button').click()
+          cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
         })
         .get('#modal-container')
         .within(() => {
@@ -388,7 +388,7 @@ describe('My Orcid sidebar' + runInfo(), () => {
     it('add items and display those with default privacy', () => {
       cy.get('#countries-panel')
         .within(() => {
-          cy.get('#edit-button').click()
+          cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
         })
         .get('#modal-container')
         .get('#add-link')
@@ -415,7 +415,7 @@ describe('My Orcid sidebar' + runInfo(), () => {
     it('remove/delete', () => {
       cy.get('#countries-panel')
         .within(() => {
-          cy.get('#edit-button').click()
+          cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
         })
         .get('#modal-container')
         .get('.delete-button')
@@ -433,7 +433,7 @@ describe('My Orcid sidebar' + runInfo(), () => {
     it('add multiple countries', () => {
       cy.get('#countries-panel')
         .within(() => {
-          cy.get('#edit-button').click()
+          cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
         })
         .get('#modal-container')
         .get('#add-link')
@@ -481,7 +481,7 @@ describe('My Orcid sidebar' + runInfo(), () => {
     it('change privacy', () => {
       cy.get('#countries-panel')
         .within(() => {
-          cy.get('#edit-button').click()
+          cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
         })
         .get('#modal-container')
         .get('.public-button')
@@ -502,7 +502,7 @@ describe('My Orcid sidebar' + runInfo(), () => {
     it('make changes and cancel', () => {
       cy.get('#countries-panel')
         .within(() => {
-          cy.get('#edit-button').click()
+          cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
         })
         .get('#modal-container')
         .get('.private-button')

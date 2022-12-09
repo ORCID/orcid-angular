@@ -8,6 +8,7 @@
 >
   <app-panel
     panelId="peer-review"
+    [putCode]="subPeerReview.putCode.value"
     [elements]="subPeerReview"
     [type]="'top-bar'"
     [ngStyle]="{
@@ -59,7 +60,7 @@
         "
       >
         <a
-          class="underline"
+          class="underline show-more-button"
           *ngIf="!subPeerReview.showDetails"
           (click)="getDetails(subPeerReview, subPeerReview.putCode.value)"
           i18n="@@shared.showMoreDetail"
@@ -69,7 +70,6 @@
                 : 'show'
                 : (subPeerReview.completionDate | monthDayYearDateToString)
           "
-          id="show-more-button"
         >
           Show more detail
         </a>
