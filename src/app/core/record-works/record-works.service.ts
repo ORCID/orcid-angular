@@ -258,17 +258,18 @@ export class RecordWorksService {
       )
   }
 
-  save(work: Work, requireReload = true, bibtex = false): Observable<Work> {
-    let endpoint = bibtex ? `works/work.json?isBibtex=true` : `works/work.json`
-    return this._http.post<Work>(environment.API_WEB + endpoint, work).pipe(
-      retry(3),
-      catchError((error) => this._errorHandler.handleError(error)),
-      tap(() => {
-        if (requireReload) {
-          this.getWorks({ forceReload: true })
-        }
-      })
-    )
+  save(work: Work, requireReload = true, isLastWorkElement = false): Observable<Work> {
+    return this._http
+      .post<Work>(environment.API_WEB + `works/work.json`, work)
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() => {
+          if (!isLastWorkElement) {
+            this.getWorks({ forceReload: true })
+          }
+        }),
+      )
   }
 
   getWork(): Observable<Work> {
