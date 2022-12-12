@@ -18,7 +18,6 @@ export class AppPanelsCollapseAriaLabelPipe implements PipeTransform {
     } else if (panelType == 'works') {
       return $localize`:@@shared.workServiceCollapseAriaLabel:Collapse the Works section`
     } else if (panelType == 'peer-review') {
-      console.log('in peer-review')
       return $localize`:@@shared.peerReviewServiceCollapseAriaLabel:Collapse the Peer review section`
     } else if (panelType == 'sub-peer-review') {
       return $localize`:@@shared.activityCollapseForAriaLabel:Collapse for`
