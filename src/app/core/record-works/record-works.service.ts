@@ -258,7 +258,11 @@ export class RecordWorksService {
       )
   }
 
-  save(work: Work, requireReload = true, isLastWorkElement = false): Observable<Work> {
+  save(
+    work: Work,
+    requireReload = true,
+    isLastWorkElement = false
+  ): Observable<Work> {
     return this._http
       .post<Work>(environment.API_WEB + `works/work.json`, work)
       .pipe(
@@ -268,7 +272,7 @@ export class RecordWorksService {
           if (!isLastWorkElement) {
             this.getWorks({ forceReload: true })
           }
-        }),
+        })
       )
   }
 
