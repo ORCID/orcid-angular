@@ -8,7 +8,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 export class PanelExpandButtonsComponent implements OnInit {
   tooltipLabelShowDetails = $localize`:@@shared.showDetails:Show details`
   tooltipLabelHideDetails = $localize`:@@shared.hideDetails:Hide details`
-
+  @Input() panelId
   @Input() type: boolean
   @Input() openState: boolean
   @Output() toggle = new EventEmitter<void>()
