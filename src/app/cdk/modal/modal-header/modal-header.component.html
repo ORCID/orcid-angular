@@ -1,4 +1,4 @@
-<div class="container">
+<header class="container">
   <div class="text-container">
     <h1
       [ngClass]="{
@@ -9,7 +9,12 @@
       <ng-content></ng-content>
     </h1>
   </div>
-  <button mat-icon-button [attr.aria-label]="closeLabel" (click)="closeEvent()">
+  <button
+    mat-icon-button
+    [attr.aria-label]="closeLabel"
+    (click)="closeEvent()"
+    tabindex="-1"
+  >
     <mat-icon class="large-material-icon">close</mat-icon>
   </button>
-</div>
+</header>

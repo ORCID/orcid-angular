@@ -31,6 +31,7 @@ import { VerificationEmailModalService } from '../../../core/verification-email-
 import { UserService } from 'src/app/core'
 import { WINDOW } from 'src/app/cdk/window'
 import { TogglzService } from '../../../core/togglz/togglz.service'
+import { getAriaLabelledBy } from '../../../constants'
 
 @Component({
   selector: 'app-panel',
@@ -193,6 +194,10 @@ export class PanelComponent implements OnInit {
             width: '850px',
             maxWidth: platform.tabletOrHandset ? '99%' : '80vw',
             data: this.userRecord,
+            ariaLabelledBy: getAriaLabelledBy(
+              this.editModalComponent,
+              this.type
+            ),
           })
           modalComponent.componentInstance.id = this.id
           modalComponent.componentInstance.options = options
@@ -310,32 +315,6 @@ export class PanelComponent implements OnInit {
           )
           .subscribe()
         break
-    }
-  }
-
-  personalizedAriaLabelInfo(): String {
-    if (this.type == 'employment') {
-      return $localize`:@@shared.employmentAriaLabel:employment`
-    } else if (this.type == 'education') {
-      return $localize`:@@shared.educationAriaLabel:education`
-    } else if (this.type == 'qualification') {
-      $localize`:@@shared.qualificationAriaLabel:qualification`
-    } else if (this.type == 'distinction') {
-      return $localize`:@@shared.distinctionAriaLabel:distinction`
-    } else if (this.type == 'invited-position') {
-      return $localize`:@@shared.invitedPositionAriaLabel:invited position`
-    } else if (this.type == 'membership') {
-      return $localize`:@@shared.membershipAriaLabel:membership`
-    } else if (this.type == 'service') {
-      return $localize`:@@shared.serviceAriaLabel:service`
-    } else if (this.type == 'funding') {
-      return $localize`:@@shared.fundingAriaLabel:funding`
-    } else if (this.type == 'works') {
-      return $localize`:@@shared.worksAriaLabel:work`
-    } else if (this.type == 'peer-review') {
-      return $localize`:@@shared.peerReviewAriaLabel:peer review`
-    } else {
-      return ''
     }
   }
 }
