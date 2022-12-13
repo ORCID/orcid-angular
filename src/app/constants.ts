@@ -288,7 +288,10 @@ export function GetFormErrors(form: AbstractControl) {
   }
 }
 
-export function getAriaLabelledBy(component: ComponentType<any>, type?: string): string {
+export function getAriaLabelledBy(
+  component: ComponentType<any>,
+  type?: string
+): string {
   switch (component) {
     case ModalAffiliationsComponent:
       switch (type) {
@@ -333,4 +336,3 @@ export function getAriaLabelledBy(component: ComponentType<any>, type?: string):
       return $localize`:@@shared.dialogAriaLabeledByPeerReview:Manage peer review dialog`
   }
 }
-

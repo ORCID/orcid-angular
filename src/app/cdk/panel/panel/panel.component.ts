@@ -194,7 +194,10 @@ export class PanelComponent implements OnInit {
             width: '850px',
             maxWidth: platform.tabletOrHandset ? '99%' : '80vw',
             data: this.userRecord,
-            ariaLabelledBy: getAriaLabelledBy(this.editModalComponent, this.type)
+            ariaLabelledBy: getAriaLabelledBy(
+              this.editModalComponent,
+              this.type
+            ),
           })
           modalComponent.componentInstance.id = this.id
           modalComponent.componentInstance.options = options

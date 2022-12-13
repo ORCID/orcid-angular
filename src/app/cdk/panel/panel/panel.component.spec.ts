@@ -38,7 +38,7 @@ describe('PanelComponent', () => {
         MatIconModule,
         NoopAnimationsModule,
         RouterTestingModule,
-        SharedModule
+        SharedModule,
       ],
       declarations: [PanelComponent],
       providers: [
@@ -64,7 +64,7 @@ describe('PanelComponent', () => {
     fixture = TestBed.createComponent(PanelComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
-    loader = TestbedHarnessEnvironment.documentRootLoader(fixture);
+    loader = TestbedHarnessEnvironment.documentRootLoader(fixture)
   })
 
   it('should create', () => {
@@ -75,8 +75,10 @@ describe('PanelComponent', () => {
     component.editModalComponent = ModalBiographyComponent
     component.open()
 
-    const dialogs = await loader.getAllHarnesses(MatDialogHarness);
-    expect(dialogs.length).toBe(1);
-    expect(await dialogs[0].getAriaLabelledby()).toBe('Manage your biography dialog');
-    });
+    const dialogs = await loader.getAllHarnesses(MatDialogHarness)
+    expect(dialogs.length).toBe(1)
+    expect(await dialogs[0].getAriaLabelledby()).toBe(
+      'Manage your biography dialog'
+    )
+  })
 })

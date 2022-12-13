@@ -4,7 +4,11 @@ import { ComponentType } from '@angular/cdk/portal'
 import { MatDialog } from '@angular/material/dialog'
 import { PlatformInfoService } from '../../platform-info'
 import { SortData, SortOrderDirection, SortOrderType } from 'src/app/types/sort'
-import { ADD_EVENT_ACTION, EXTERNAL_ID_TYPE_WORK, getAriaLabelledBy } from 'src/app/constants'
+import {
+  ADD_EVENT_ACTION,
+  EXTERNAL_ID_TYPE_WORK,
+  getAriaLabelledBy,
+} from 'src/app/constants'
 import { ModalAffiliationsComponent } from '../../../record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component'
 import { ModalFundingComponent } from '../../../record/components/funding-stacks-groups/modals/modal-funding/modal-funding.component'
 import { AffiliationType } from 'src/app/types/record-affiliation.endpoint'
@@ -126,7 +130,7 @@ export class PanelsComponent implements OnInit {
           modalComponent = this._dialog.open(modal, {
             width: '850px',
             maxWidth: platform.tabletOrHandset ? '99%' : '80vw',
-            ariaLabelledBy: getAriaLabelledBy(modal, this.type)
+            ariaLabelledBy: getAriaLabelledBy(modal, this.type),
           })
 
           modalComponent.componentInstance.type = options?.type

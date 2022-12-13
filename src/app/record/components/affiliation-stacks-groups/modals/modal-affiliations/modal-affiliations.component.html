@@ -18,10 +18,7 @@
     <ng-container i18n="@@shared.distinction" *ngIf="type === 'distinction'">
       Distinction
     </ng-container>
-    <ng-container
-      i18n="@@shared.membershipTitle"
-      *ngIf="type === 'membership'"
-    >
+    <ng-container i18n="@@shared.membershipTitle" *ngIf="type === 'membership'">
       Membership
     </ng-container>
     <ng-container i18n="@@shared.service" *ngIf="type === 'service'">
@@ -144,12 +141,12 @@
           >
             <span class="required">*</span>
             <ng-container i18n="@@shared.requiredInformation"
-            >Required information
+              >Required information
             </ng-container>
           </p>
         </div>
       </div>
-      <hr/>
+      <hr />
     </form>
     <div class="row">
       <label
@@ -260,7 +257,7 @@
     </div>
     <div class="input-container">
       <mat-form-field appearance="outline" class="mat-form-field-min">
-        <input id="city-input" matInput formControlName="city"/>
+        <input id="city-input" matInput formControlName="city" />
         <mat-error
           class="mat-caption"
           *ngIf="affiliationForm.get('city').hasError('required')"
@@ -283,7 +280,7 @@
     </div>
     <div class="input-container">
       <mat-form-field appearance="outline" class="mat-form-field-min">
-        <input id="region-input" matInput formControlName="region"/>
+        <input id="region-input" matInput formControlName="region" />
         <mat-error
           *ngIf="affiliationForm.get('region').errors?.maxlength"
           i18n="@@shared.maxLength.less_than_one_thousand"
@@ -388,7 +385,7 @@
           </p>
         </div>
       </div>
-      <hr/>
+      <hr />
     </form>
     <div class="row">
       <label for="department-input" class="mat-caption">
@@ -397,7 +394,7 @@
     </div>
     <div class="input-container">
       <mat-form-field appearance="outline" class="mat-form-field-min">
-        <input id="department-input" matInput formControlName="department"/>
+        <input id="department-input" matInput formControlName="department" />
         <mat-error
           *ngIf="affiliationForm.get('department').errors?.maxlength"
           i18n="@@shared.maxLength.less_than_one_thousand"
@@ -432,7 +429,7 @@
     </div>
     <div class="input-container">
       <mat-form-field appearance="outline" class="mat-form-field-min">
-        <input id="title-input" matInput formControlName="title"/>
+        <input id="title-input" matInput formControlName="title" />
         <mat-error
           *ngIf="affiliationForm.get('title').errors?.maxlength"
           i18n="@@shared.maxLength.less_than_one_thousand"
@@ -632,7 +629,7 @@
     </div>
     <div class="input-container">
       <mat-form-field appearance="outline" class="mat-form-field-min">
-        <input id="url-input" matInput formControlName="link"/>
+        <input id="url-input" matInput formControlName="link" />
         <mat-hint class="mat-caption" i18n="@@shared.linkDescription">
           A link to a profile page or description of the role. Links should be
           in the full URL format e.g. http://www.website.com/page.html
@@ -665,7 +662,7 @@
           <strong i18n="@@shared.visibility">Visibility</strong>
         </p>
       </div>
-      <hr/>
+      <hr />
       <p class="orc-font-body-small">
         {{ ngOrcidDefaultVisibilityLabel }}
         <strong>{{ defaultVisibility | visibilityStringLabel }}</strong

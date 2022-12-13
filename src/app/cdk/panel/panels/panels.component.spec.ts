@@ -60,7 +60,7 @@ describe('PanelsComponent', () => {
     fixture = TestBed.createComponent(PanelsComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
-    loader = TestbedHarnessEnvironment.documentRootLoader(fixture);
+    loader = TestbedHarnessEnvironment.documentRootLoader(fixture)
   })
 
   it('should create', () => {
@@ -70,8 +70,8 @@ describe('PanelsComponent', () => {
   it('should be able to get aria-labelledby of dialog', async () => {
     component.openModal(ModalFundingComponent)
 
-    const dialogs = await loader.getAllHarnesses(MatDialogHarness);
-    expect(dialogs.length).toBe(1);
-    expect(await dialogs[0].getAriaLabelledby()).toBe('Manage funding dialog');
-  });
+    const dialogs = await loader.getAllHarnesses(MatDialogHarness)
+    expect(dialogs.length).toBe(1)
+    expect(await dialogs[0].getAriaLabelledby()).toBe('Manage funding dialog')
+  })
 })
