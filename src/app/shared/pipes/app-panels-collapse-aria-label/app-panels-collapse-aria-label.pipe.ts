@@ -20,8 +20,7 @@ export class AppPanelsCollapseAriaLabelPipe implements PipeTransform {
       return $localize`:@@shared.fundingServiceCollapseAriaLabel:Collapse the Funding section`
     } else if (panelType === 'works') {
       return $localize`:@@shared.workServiceCollapseAriaLabel:Collapse the Works section`
-    } else if (panelType === 'peer-review') {
-      console.log('in peer-review')
+    } else if (panelType == 'peer-review') {
       return $localize`:@@shared.peerReviewServiceCollapseAriaLabel:Collapse the Peer review section`
     } else if (panelType === 'sub-peer-review') {
       return $localize`:@@shared.activityCollapseForAriaLabel:Collapse for`
@@ -39,7 +38,7 @@ export class AppPanelsCollapseAriaLabelPipe implements PipeTransform {
         return $localize`:@@shared.countriesCollapseAriaLabel:Collapse the Countries section`
       }
     } else {
-      return $localize`:@@shared.hideDetails:Hide details` + panelType
+      return $localize`:@@shared.hideDetails:Hide details`
     }
   }
 }
