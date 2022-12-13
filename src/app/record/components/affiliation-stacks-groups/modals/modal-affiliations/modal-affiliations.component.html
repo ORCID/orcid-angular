@@ -1,129 +1,129 @@
-<form [formGroup]="affiliationForm">
-  <app-modal [loading]="loadingCountryCodes || loadingAffiliations">
-    <app-modal-header>
-      <ng-container i18n="@@shared.employment" *ngIf="type === 'employment'">
-        Employment
-      </ng-container>
-      <ng-container i18n="@@shared.education" *ngIf="type === 'education'">
-        Education
-      </ng-container>
-      <ng-container
-        i18n="@@shared.qualification"
+<app-modal [loading]="loadingCountryCodes || loadingAffiliations">
+  <app-modal-header>
+    <ng-container i18n="@@shared.employment" *ngIf="type === 'employment'">
+      Employment
+    </ng-container>
+    <ng-container i18n="@@shared.education" *ngIf="type === 'education'">
+      Education
+    </ng-container>
+    <ng-container
+      i18n="@@shared.qualification"
+      *ngIf="type === 'qualification'"
+    >
+      Qualification
+    </ng-container>
+    <ng-container i18n="@@shared.invited" *ngIf="type === 'invited-position'">
+      Invited Position
+    </ng-container>
+    <ng-container i18n="@@shared.distinction" *ngIf="type === 'distinction'">
+      Distinction
+    </ng-container>
+    <ng-container
+      i18n="@@shared.membershipTitle"
+      *ngIf="type === 'membership'"
+    >
+      Membership
+    </ng-container>
+    <ng-container i18n="@@shared.service" *ngIf="type === 'service'">
+      Service
+    </ng-container>
+  </app-modal-header>
+  <app-modal-side-bar>
+    <ng-container id="side-bar-title">
+      <a
+        class="side-bar"
+        i18n="@@shared.organization"
+        (click)="toOrganization()"
+      >
+        Organization
+      </a>
+    </ng-container>
+    <ng-container id="side-bar-url-1">
+      <a
+        class="side-bar"
+        i18n="@@shared.employmentDetails"
+        (click)="toAffiliationDetails()"
+        *ngIf="type === 'employment'"
+      >
+        Employment details
+      </a>
+      <a
+        class="side-bar"
+        i18n="@@shared.qualificationDetails"
+        (click)="toAffiliationDetails()"
         *ngIf="type === 'qualification'"
       >
-        Qualification
-      </ng-container>
-      <ng-container i18n="@@shared.invited" *ngIf="type === 'invited-position'">
-        Invited Position
-      </ng-container>
-      <ng-container i18n="@@shared.distinction" *ngIf="type === 'distinction'">
-        Distinction
-      </ng-container>
-      <ng-container
-        i18n="@@shared.membershipTitle"
+        Qualification details
+      </a>
+      <a
+        class="side-bar"
+        i18n="@@shared.educationDetails"
+        (click)="toAffiliationDetails()"
+        *ngIf="type === 'education'"
+      >
+        Education details
+      </a>
+      <a
+        class="side-bar"
+        i18n="@@shared.invitedPositionDetails"
+        (click)="toAffiliationDetails()"
+        *ngIf="type === 'invited-position'"
+      >
+        Invited Position details
+      </a>
+      <a
+        class="side-bar"
+        i18n="@@shared.distinctionDetails"
+        (click)="toAffiliationDetails()"
+        *ngIf="type === 'distinction'"
+      >
+        Distinction details
+      </a>
+      <a
+        class="side-bar"
+        i18n="@@shared.membershipDetails"
+        (click)="toAffiliationDetails()"
         *ngIf="type === 'membership'"
       >
-        Membership
-      </ng-container>
-      <ng-container i18n="@@shared.service" *ngIf="type === 'service'">
-        Service
-      </ng-container>
-    </app-modal-header>
-    <app-modal-side-bar>
-      <ng-container id="side-bar-title">
-        <a
-          class="side-bar"
-          i18n="@@shared.organization"
-          (click)="toOrganization()"
-        >
-          Organization
-        </a>
-      </ng-container>
-      <ng-container id="side-bar-url-1">
-        <a
-          class="side-bar"
-          i18n="@@shared.employmentDetails"
-          (click)="toAffiliationDetails()"
-          *ngIf="type === 'employment'"
-        >
-          Employment details
-        </a>
-        <a
-          class="side-bar"
-          i18n="@@shared.qualificationDetails"
-          (click)="toAffiliationDetails()"
-          *ngIf="type === 'qualification'"
-        >
-          Qualification details
-        </a>
-        <a
-          class="side-bar"
-          i18n="@@shared.educationDetails"
-          (click)="toAffiliationDetails()"
-          *ngIf="type === 'education'"
-        >
-          Education details
-        </a>
-        <a
-          class="side-bar"
-          i18n="@@shared.invitedPositionDetails"
-          (click)="toAffiliationDetails()"
-          *ngIf="type === 'invited-position'"
-        >
-          Invited Position details
-        </a>
-        <a
-          class="side-bar"
-          i18n="@@shared.distinctionDetails"
-          (click)="toAffiliationDetails()"
-          *ngIf="type === 'distinction'"
-        >
-          Distinction details
-        </a>
-        <a
-          class="side-bar"
-          i18n="@@shared.membershipDetails"
-          (click)="toAffiliationDetails()"
-          *ngIf="type === 'membership'"
-        >
-          Membership details
-        </a>
-        <a
-          class="side-bar"
-          i18n="@@shared.serviceDetails"
-          (click)="toAffiliationDetails()"
-          *ngIf="type === 'service'"
-        >
-          Service details
-        </a>
-      </ng-container>
-      <ng-container id="side-bar-url-2">
-        <a class="side-bar" i18n="@@shared.visibility" (click)="toVisibility()">
-          Visibility
-        </a>
-      </ng-container>
-    </app-modal-side-bar>
-    <app-modal-footer>
-      <button
-        mat-raised-button
-        color="primary"
-        type="submit"
-        (click)="saveEvent()"
-        i18n="@@shared.saveChanges"
-        id="save-affiliation-button"
+        Membership details
+      </a>
+      <a
+        class="side-bar"
+        i18n="@@shared.serviceDetails"
+        (click)="toAffiliationDetails()"
+        *ngIf="type === 'service'"
       >
-        Save changes
-      </button>
-      <button
-        mat-stroked-button
-        color="primary"
-        (click)="closeEvent()"
-        i18n="@@shared.cancel"
-        id="cancel-affiliation-button"
-      >
-        Cancel
-      </button>
-    </app-modal-footer>
+        Service details
+      </a>
+    </ng-container>
+    <ng-container id="side-bar-url-2">
+      <a class="side-bar" i18n="@@shared.visibility" (click)="toVisibility()">
+        Visibility
+      </a>
+    </ng-container>
+  </app-modal-side-bar>
+  <app-modal-footer>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      (click)="saveEvent()"
+      i18n="@@shared.saveChanges"
+      id="save-affiliation-button"
+    >
+      Save changes
+    </button>
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="closeEvent()"
+      i18n="@@shared.cancel"
+      id="cancel-affiliation-button"
+    >
+      Cancel
+    </button>
+  </app-modal-footer>
+  <form [formGroup]="affiliationForm">
     <form>
       <div
         id="organization"
@@ -144,12 +144,12 @@
           >
             <span class="required">*</span>
             <ng-container i18n="@@shared.requiredInformation"
-              >Required information
+            >Required information
             </ng-container>
           </p>
         </div>
       </div>
-      <hr />
+      <hr/>
     </form>
     <div class="row">
       <label
@@ -260,7 +260,7 @@
     </div>
     <div class="input-container">
       <mat-form-field appearance="outline" class="mat-form-field-min">
-        <input id="city-input" matInput formControlName="city" />
+        <input id="city-input" matInput formControlName="city"/>
         <mat-error
           class="mat-caption"
           *ngIf="affiliationForm.get('city').hasError('required')"
@@ -283,7 +283,7 @@
     </div>
     <div class="input-container">
       <mat-form-field appearance="outline" class="mat-form-field-min">
-        <input id="region-input" matInput formControlName="region" />
+        <input id="region-input" matInput formControlName="region"/>
         <mat-error
           *ngIf="affiliationForm.get('region').errors?.maxlength"
           i18n="@@shared.maxLength.less_than_one_thousand"
@@ -388,7 +388,7 @@
           </p>
         </div>
       </div>
-      <hr />
+      <hr/>
     </form>
     <div class="row">
       <label for="department-input" class="mat-caption">
@@ -397,7 +397,7 @@
     </div>
     <div class="input-container">
       <mat-form-field appearance="outline" class="mat-form-field-min">
-        <input id="department-input" matInput formControlName="department" />
+        <input id="department-input" matInput formControlName="department"/>
         <mat-error
           *ngIf="affiliationForm.get('department').errors?.maxlength"
           i18n="@@shared.maxLength.less_than_one_thousand"
@@ -432,7 +432,7 @@
     </div>
     <div class="input-container">
       <mat-form-field appearance="outline" class="mat-form-field-min">
-        <input id="title-input" matInput formControlName="title" />
+        <input id="title-input" matInput formControlName="title"/>
         <mat-error
           *ngIf="affiliationForm.get('title').errors?.maxlength"
           i18n="@@shared.maxLength.less_than_one_thousand"
@@ -632,7 +632,7 @@
     </div>
     <div class="input-container">
       <mat-form-field appearance="outline" class="mat-form-field-min">
-        <input id="url-input" matInput formControlName="link" />
+        <input id="url-input" matInput formControlName="link"/>
         <mat-hint class="mat-caption" i18n="@@shared.linkDescription">
           A link to a profile page or description of the role. Links should be
           in the full URL format e.g. http://www.website.com/page.html
@@ -665,7 +665,7 @@
           <strong i18n="@@shared.visibility">Visibility</strong>
         </p>
       </div>
-      <hr />
+      <hr/>
       <p class="orc-font-body-small">
         {{ ngOrcidDefaultVisibilityLabel }}
         <strong>{{ defaultVisibility | visibilityStringLabel }}</strong
@@ -680,5 +680,5 @@
         ></app-privacy-selector>
       </div>
     </div>
-  </app-modal>
-</form>
+  </form>
+</app-modal>

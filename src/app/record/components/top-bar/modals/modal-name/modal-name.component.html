@@ -1,6 +1,5 @@
 <app-modal
   [loading]="loadingNames"
-  [dialogAriaLabelledBy]="dialogAriaLabelledBy"
 >
   <app-modal-header>
     <ng-container i18n="@@topBar.names"> Names </ng-container>
@@ -72,6 +71,7 @@
       target="_blank"
       href="https://support.orcid.org/hc/en-us/articles/360006973853-Add-and-edit-your-name-on-your-ORCID-record"
       i18n="@@topBar.findOutMore"
+      tabindex="-1"
     >
       Find out more about managing names in your ORCID record
     </a>
