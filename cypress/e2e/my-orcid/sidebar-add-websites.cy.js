@@ -42,7 +42,7 @@ describe('My orcid - users are able to add content to their record', async funct
   it('Arabic characters in URL title field are allowed', function () {
     //click on edit pencil for websites section
     cy.get('#websites-panel').within(($myPanel) => {
-      cy.get('.cy-edit-button').click() 
+      cy.get('.cy-edit-button').click()
     })
     cy.get('#add-link').click()
     cy.get('#description-input')
@@ -65,7 +65,7 @@ describe('My orcid - users are able to add content to their record', async funct
   it('Russian characters in URL title field are allowed', function () {
     //click on edit pencil for websites section
     cy.get('#websites-panel').within(($myPanel) => {
-      cy.get('.cy-edit-button').click() 
+      cy.get('.cy-edit-button').click()
     })
     cy.get('#add-link').click()
     cy.get('#description-input')
@@ -88,7 +88,7 @@ describe('My orcid - users are able to add content to their record', async funct
   it('Chinese characters in URL title field are allowed', function () {
     //click on edit pencil for websites section
     cy.get('#websites-panel').within(($myPanel) => {
-      cy.get('.cy-edit-button').click() 
+      cy.get('.cy-edit-button').click()
     })
     cy.get('#add-link').click()
     cy.get('#description-input')

@@ -5,9 +5,8 @@ import userData from '../../fixtures/testing-users.fixture.json'
 describe('My orcid - users are able to add content to their record', async function () {
   beforeEach(() => {
     cy.visit(Cypress.env('signInURL'))
-     //clean up state
-     cy.cleanBiography()
-
+    //clean up state
+    cy.cleanBiography()
   })
 
   it('User adds a biography content', function () {
@@ -22,8 +21,8 @@ describe('My orcid - users are able to add content to their record', async funct
     cy.wait(2000)
 
     //verify the name is displayed
-    cy.get('#biography-value').should('contain',addBio)
-   
+    cy.get('#biography-value').should('contain', addBio)
+
     //sign out
     cy.get('app-user-menu').click()
     cy.get('#cdk-overlay-2').within(($menu) => {

@@ -40,8 +40,6 @@ describe('My orcid - via API members can add Peer reviews', async function () {
     cy.get('.cy-panel-component-expand-button').click()
     //check for the correct review group id
     cy.get('#cy-peer-reviews').should('contain', groupId.split(':')[1])
-    
-   
   })
 
   after(() => {

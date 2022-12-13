@@ -17,7 +17,7 @@ describe('App displays error messages when user inputs invalid data', async func
   it('Title is not required', function () {
     //click on edit pencil for websites section
     cy.get('#websites-panel').within(($myPanel) => {
-      cy.get('.cy-edit-button').click() 
+      cy.get('.cy-edit-button').click()
     })
     cy.get('#add-link').click()
     cy.get('#description-input').clear() //empty

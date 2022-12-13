@@ -13,7 +13,7 @@ describe('My orcid - users are able to add content to their record', async funct
   it('User changes visibility to the primary email account', function () {
     //click on edit pencil for Emails section
     cy.get('#emails-panel').within(($myPanel) => {
-      cy.get('.cy-edit-button').click() 
+      cy.get('.cy-edit-button').click()
     })
 
     //set visibility to public
