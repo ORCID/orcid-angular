@@ -103,3 +103,16 @@ html {
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
+
+::ng-deep .mat-select-placeholder {
+  color: #707070 !important;;
+}
+
+::ng-deep .mat-input-element::placeholder {
+  color: #707070 !important;
+}
+
+::ng-deep .mat-textarea-placeholder {
+  color: #707070 !important;
+  ;
+}
