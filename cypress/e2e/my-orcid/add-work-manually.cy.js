@@ -85,7 +85,7 @@ describe('My orcid - users are able to edit work info in their record', async fu
         cy.get('#cy-visibility-limited').click()
       } else {
         if (testWorks.manuallyVisibility == 'private') {
-          cy.get('#cy-visibility-private').click() //TODO is a class now
+          cy.get('.cy-visibility-private').click() 
         }
       }
     })

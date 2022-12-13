@@ -37,9 +37,11 @@ describe('My orcid - via API members can add Peer reviews', async function () {
     cy.get('#cy-peer-reviews').should('be.visible') //wait for page to load
 
     //verify Peer Review was added to the record
-    cy.get('#cy-panel-component-expand-button').click() //TODO is a class now
+    cy.get('.cy-panel-component-expand-button').click()
     //check for the correct review group id
     cy.get('#cy-peer-reviews').should('contain', groupId.split(':')[1])
+    
+   
   })
 
   after(() => {

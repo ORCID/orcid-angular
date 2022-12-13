@@ -18,6 +18,7 @@ export default defineConfig({
     membersAPI_URL: 'https://api.qa.orcid.org/v3.0/',
     membersAPI_websitesEndPoint: '/researcher-urls',
     membersAPI_fundingsEndpoint: '/funding',
+    membersAPI_allFundingsEndpoint: '/fundings',
     membersAPI_workEndpoint: '/work',
     membersAPI_allWorksEndpoint: '/works',
     membersAPI_peerReviewEndpoint: '/peer-review',

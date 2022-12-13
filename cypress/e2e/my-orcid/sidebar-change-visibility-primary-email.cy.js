@@ -13,15 +13,13 @@ describe('My orcid - users are able to add content to their record', async funct
   it('User changes visibility to the primary email account', function () {
     //click on edit pencil for Emails section
     cy.get('#emails-panel').within(($myPanel) => {
-      cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
+      cy.get('.cy-edit-button').click() 
     })
 
     //set visibility to public
     //TO DO: use id for public button instead of class
     cy.get('#modal-container').within(($myModal) => {
-      cy.get(
-        'button[class="mat-focus-indicator public-button mat-icon-button mat-button-base no-selected"]'
-      ).click()
+      cy.get('.cy-visibility-public').click()
     })
     //save changes
     cy.get('#save-emails-button').click()
@@ -30,13 +28,11 @@ describe('My orcid - users are able to add content to their record', async funct
 
     //revert back to PRIVATE visibility
     cy.get('#emails-panel').within(($myPanel1) => {
-      cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
+      cy.get('.cy-edit-button').click()
     })
     //TO DO: use id for private button instead of class
     cy.get('#modal-container').within(($myModal1) => {
-      cy.get(
-        'button[class="mat-focus-indicator private-button mat-icon-button mat-button-base no-selected"]'
-      ).click()
+      cy.get('.cy-visibility-private').click()
     })
     //save changes
     cy.get('#save-emails-button').click()
