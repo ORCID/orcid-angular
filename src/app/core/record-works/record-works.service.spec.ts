@@ -72,7 +72,7 @@ describe('RecordWorksService', () => {
 
     works.forEach((work, index) => {
       service
-        .save(work, index === works.length - 1, true)
+        .save(work, !(index === works.length - 1))
         .subscribe((workSaved) => {
           expect(workSaved).toBeTruthy()
           requestGetWorks = httpTestingController.match(
@@ -98,7 +98,7 @@ describe('RecordWorksService', () => {
     })
 
     const requestsSaveWorks = httpTestingController.match(
-      environment.API_WEB + 'works/work.json?isBibtex=true'
+      environment.API_WEB + 'works/work.json'
     )
 
     expect(requestsSaveWorks.length).toEqual(5)
