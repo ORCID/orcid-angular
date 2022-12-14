@@ -24,8 +24,11 @@ import { VisibilityStrings } from 'src/app/types/common.endpoint'
   ],
 })
 export class PrivacySelectorComponent implements OnInit, ControlValueAccessor {
+  @Input()
   ariaLabelPublic = $localize`:@@share.ariaLabelPublic:set item visibility to Everyone`
+  @Input()
   ariaLabelTrustedParty = $localize`:@@share.ariaLabelTrustedParty:set item visibility to Trusted Parties `
+  @Input()
   ariaLabelPrivate = $localize`:@@share.ariaLabelPrivate:set item visibility to Only Me`
   ariaLabelCurrentlySelected = $localize`:@@share.currentSelected: (Currently selected)`
 
