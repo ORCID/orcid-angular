@@ -45,9 +45,9 @@ export class ModalBiographyComponent implements OnInit, OnDestroy {
   ngOrcidAddYourBiography = $localize`:@@topBar.addYourBiography:Add you biography`
   ngOrcidDefaultVisibilityLabel = $localize`:@@shared.whoCanSeeBio:Control who can see your biography by setting the visibility. Your default visibility setting is`
   dialogAriaLabelledBy = $localize`:@@shared.dialogAriaLabeledByBiography:Manage your biography dialog`
-  closeAriaLabel = $localize`:@@topBar.closeBiography:Close Names`
-  saveAriaLabel = $localize`:@@topBar.saveChangesBiography:Close Names`
-  cancelAriaLabel = $localize`:@@topBar.cancelChangesBiography:Close Names`
+  closeAriaLabel = $localize`:@@topBar.closeBiography:Close Biography`
+  saveAriaLabel = $localize`:@@topBar.saveChangesBiography:Save changes to Biography`
+  cancelAriaLabel = $localize`:@@topBar.cancelChangesBiography:Cancel changes close Biography`
   visibilityPublicAriaLabel = $localize`:@@topBar.biographyPublicAriaLabel:Set biography visibility to Everyone`
   visibilityTrustedPartyAriaLabel = $localize`:@@topBar.biographyTrustedPartyAriaLabel:Set biography visibility to Trusted Parties`
   visibilityPrivateAriaLabel = $localize`:@@topBar.biographyPrivateAriaLabel:Set biography visibility to Only Me`
