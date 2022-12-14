@@ -31,7 +31,7 @@ import { VerificationEmailModalService } from '../../../core/verification-email-
 import { UserService } from 'src/app/core'
 import { WINDOW } from 'src/app/cdk/window'
 import { TogglzService } from '../../../core/togglz/togglz.service'
-import { getAriaLabelledBy } from '../../../constants'
+import { getAriaLabel } from '../../../constants'
 
 @Component({
   selector: 'app-panel',
@@ -195,10 +195,7 @@ export class PanelComponent implements OnInit {
             width: '850px',
             maxWidth: platform.tabletOrHandset ? '99%' : '80vw',
             data: this.userRecord,
-            ariaLabelledBy: getAriaLabelledBy(
-              this.editModalComponent,
-              this.type
-            ),
+            ariaLabel: getAriaLabel(this.editModalComponent, this.type),
           })
           modalComponent.componentInstance.id = this.id
           modalComponent.componentInstance.options = options
