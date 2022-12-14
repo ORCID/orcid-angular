@@ -125,6 +125,7 @@ export class PanelComponent implements OnInit {
   tooltipLabelOpenSources = $localize`:@@shared.openSourceToEdit:Open sources to edit you own version`
   tooltipLabelYourOwnVersion = $localize`:@@shared.youCanOnlyEditYour:You can only edit your own version`
   tooltipLabelVisibilityError = $localize`:@@peerReview.dataInconsistency:Data inconsistency found. Please click your preferred visibility setting to fix`
+  openOtherSources = $localize`:@@record.openOtherSources:Open other sources`
 
   constructor(
     private _togglz: TogglzService,
