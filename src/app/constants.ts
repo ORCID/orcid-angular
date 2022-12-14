@@ -288,7 +288,7 @@ export function GetFormErrors(form: AbstractControl) {
   }
 }
 
-export function getAriaLabelledBy(
+export function getAriaLabel(
   component: ComponentType<any>,
   type?: string
 ): string {

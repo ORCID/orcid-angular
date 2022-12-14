@@ -67,11 +67,11 @@ describe('PanelsComponent', () => {
     expect(component).toBeTruthy()
   })
 
-  it('should be able to get aria-labelledby of dialog', async () => {
+  it('should be able to get aria-label of dialog', async () => {
     component.openModal(ModalFundingComponent)
 
     const dialogs = await loader.getAllHarnesses(MatDialogHarness)
     expect(dialogs.length).toBe(1)
-    expect(await dialogs[0].getAriaLabelledby()).toBe('Manage funding dialog')
+    expect(await dialogs[0].getAriaLabel()).toBe('Manage funding dialog')
   })
 })
