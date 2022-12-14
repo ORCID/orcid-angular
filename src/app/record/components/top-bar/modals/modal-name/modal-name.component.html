@@ -50,7 +50,10 @@
             <ng-container i18n="@@topBar.yourNames"> Your names </ng-container>
             <span *ngIf="!platform.columns12" class="required">*</span>
           </h2>
-          <p *ngIf="platform.columns12" class="required-information mat-caption">
+          <p
+            *ngIf="platform.columns12"
+            class="required-information mat-caption"
+          >
             <span class="required">*</span>
             <ng-container i18n="@@shared.requiredInformation"
               >Required information</ng-container
@@ -77,7 +80,8 @@
       <div class="title">
         <h3
           class="your-given-names orc-font-body"
-          i18n="@@topBar.yourGivenAndFamilyNames">
+          i18n="@@topBar.yourGivenAndFamilyNames"
+        >
           Your given and family names
         </h3>
       </div>
@@ -158,17 +162,14 @@
           </mat-error>
         </mat-form-field>
       </div>
-      <div id="published-name" class="title ">
-        <h3
-          class="orc-font-body"
-          i18n="@@topBar.yourPublishedName"
-        >
+      <div id="published-name" class="title">
+        <h3 class="orc-font-body" i18n="@@topBar.yourPublishedName">
           Your published name
         </h3>
       </div>
       <p class="orc-font-body-small" i18n="@@topBar.howYouPreferYourName">
-        How you prefer your name to appear when credited. Adding a published name
-        lets you control how your name is displayed in your ORCID record.
+        How you prefer your name to appear when credited. Adding a published
+        name lets you control how your name is displayed in your ORCID record.
       </p>
       <div class="row">
         <label for="published-names-input" class="mat-caption">
@@ -193,10 +194,7 @@
         </mat-form-field>
       </div>
       <div id="visibility" class="title">
-        <h3
-          class="orc-font-body"
-          i18n="@@topBar.whoCanSeeYourNames"
-        >
+        <h3 class="orc-font-body" i18n="@@topBar.whoCanSeeYourNames">
           Who can see your names
         </h3>
       </div>
@@ -218,9 +216,7 @@
       </div>
     </section>
     <section id="also-known-as">
-      <div
-        class="title"
-      >
+      <div class="title">
         <h2
           [ngClass]="{
             'orc-font-body': !platform.columns12,
@@ -233,10 +229,10 @@
       </div>
       <hr />
       <p class="orc-font-body-small" i18n="@@topBar.addOtherNames">
-        Add other names you may be known by. These can include abbreviated names,
-        middle names, former names or names in a different character set or
-        language. Adding other names can help people find your record when they
-        search the ORCID registry.
+        Add other names you may be known by. These can include abbreviated
+        names, middle names, former names or names in a different character set
+        or language. Adding other names can help people find your record when
+        they search the ORCID registry.
       </p>
       <ng-container *ngIf="otherNames?.length > 0">
         <div

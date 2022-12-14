@@ -29,7 +29,7 @@ describe('ModalBiographyComponent', () => {
           SharedModule,
           ReactiveFormsModule,
           RecordModule,
-          RouterTestingModule
+          RouterTestingModule,
         ],
         declarations: [ModalBiographyComponent],
         providers: [

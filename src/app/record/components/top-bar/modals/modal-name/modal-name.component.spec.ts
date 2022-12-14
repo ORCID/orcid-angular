@@ -3,7 +3,11 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 import { ModalNameComponent } from './modal-name.component'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog'
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog'
 import { WINDOW_PROVIDERS } from '../../../../../cdk/window'
 import { PlatformInfoService } from '../../../../../cdk/platform-info'
 import { ErrorHandlerService } from '../../../../../core/error-handler/error-handler.service'
@@ -16,7 +20,11 @@ import { RecordOtherNamesService } from '../../../../../core/record-other-names/
 import { SharedModule } from '../../../../../shared/shared.module'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 import { RecordModule } from '../../../../record.module'
-import { FormsModule, ReactiveFormsModule, UntypedFormBuilder } from '@angular/forms'
+import {
+  FormsModule,
+  ReactiveFormsModule,
+  UntypedFormBuilder,
+} from '@angular/forms'
 import { of } from 'rxjs'
 import { getNamesEndPoint } from '../../../../../core/record-names/record-names.service.spec'
 import { getOtherNamesEndPoint } from '../../../../../core/record-other-names/record-other-names.service.spec'
@@ -33,13 +41,19 @@ describe('ModalNameComponent', () => {
 
   beforeEach(
     waitForAsync(() => {
-      fakeRecordNamesService = jasmine.createSpyObj<RecordNamesService>('RecordNamesService', {
-        getNames: of(getNamesEndPoint()),
-      })
+      fakeRecordNamesService = jasmine.createSpyObj<RecordNamesService>(
+        'RecordNamesService',
+        {
+          getNames: of(getNamesEndPoint()),
+        }
+      )
 
-      fakeRecordOtherNamesService = jasmine.createSpyObj<RecordOtherNamesService>('RecordNamesService', {
-        getOtherNames: of(getOtherNamesEndPoint()),
-      })
+      fakeRecordOtherNamesService = jasmine.createSpyObj<RecordOtherNamesService>(
+        'RecordNamesService',
+        {
+          getOtherNames: of(getOtherNamesEndPoint()),
+        }
+      )
 
       TestBed.configureTestingModule({
         imports: [
@@ -49,12 +63,15 @@ describe('ModalNameComponent', () => {
           SharedModule,
           ReactiveFormsModule,
           RecordModule,
-          RouterTestingModule
+          RouterTestingModule,
         ],
         declarations: [ModalNameComponent],
         providers: [
           { provide: RecordNamesService, useValue: fakeRecordNamesService },
-          { provide: RecordOtherNamesService, useValue: fakeRecordOtherNamesService },
+          {
+            provide: RecordOtherNamesService,
+            useValue: fakeRecordOtherNamesService,
+          },
           { provide: MatDialogRef, useValue: {} },
           { provide: MAT_DIALOG_DATA, useValue: {} },
           WINDOW_PROVIDERS,
@@ -76,8 +93,7 @@ describe('ModalNameComponent', () => {
     component = fixture.componentInstance
     loader = TestbedHarnessEnvironment.loader(fixture)
     fixture.detectChanges()
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000000;
-
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000000
   })
 
   it('should create', () => {
