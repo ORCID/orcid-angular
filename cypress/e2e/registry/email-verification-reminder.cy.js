@@ -26,7 +26,7 @@ describe('Primary account email verification reminders', async function () {
 
     //request to get reminder email to verify primary account email
     cy.get('#biography-panel').within(($myPanel) => {
-      cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
+      cy.get('.cy-edit-button').click()
     })
     cy.contains('Resend verification email').click()
 

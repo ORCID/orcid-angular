@@ -14,7 +14,7 @@ describe('My orcid - users are able to add content to their record', async funct
     const countrySelected = 'Albania'
 
     cy.get('#countries-panel').within(($myPanel) => {
-      cy.get('#edit-button').click() //TODO is a class now called cy-edit-button
+      cy.get('.cy-edit-button').click()
     })
     cy.get('#add-link').click()
 
