@@ -95,13 +95,19 @@
                 : tooltipLabelOpenSources
             "
           >
-            <button *ngIf="displayTheStack" [disabled]="true" mat-icon-button>
+            <button
+              *ngIf="displayTheStack"
+              [disabled]="true"
+              mat-icon-button
+              [attr.aria-label]="tooltipLabelYourOwnVersion"
+            >
               <mat-icon class="material-icons-outlined">call_split</mat-icon>
             </button>
             <button
               *ngIf="!displayTheStack"
               [disabled]="false"
               mat-icon-button
+              [attr.aria-label]="openOtherSources"
               (click)="displayTheStackChange.next(true)"
             >
               <mat-icon class="material-icons-outlined">call_split</mat-icon>
