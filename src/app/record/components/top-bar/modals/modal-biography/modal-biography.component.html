@@ -1,5 +1,5 @@
 <app-modal [loading]="loadingBiography">
-  <app-modal-header>
+  <app-modal-header [closeLabel]="closeAriaLabel">
     <ng-container i18n="@@topBar.biography"> Biography </ng-container>
   </app-modal-header>
   <app-modal-side-bar>
@@ -21,6 +21,7 @@
       (click)="saveEvent()"
       i18n="@@shared.saveChanges"
       id="save-biography-button"
+      [attr.aria-label]="saveAriaLabel"
     >
       Save changes
     </button>
@@ -30,6 +31,7 @@
       (click)="closeEvent()"
       i18n="@@shared.cancel"
       id="cancel-biography-button"
+      [attr.aria-label]="cancelAriaLabel"
     >
       Cancel
     </button>
@@ -95,6 +97,9 @@
         <app-privacy-selector
           [alignment]="'start'"
           formControlName="visibility"
+          [ariaLabelPrivate]="visibilityPrivateAriaLabel"
+          [ariaLabelPublic]="visibilityPublicAriaLabel"
+          [ariaLabelTrustedParty]="visibilityTrustedPartyAriaLabel"
         >
         </app-privacy-selector>
       </div>

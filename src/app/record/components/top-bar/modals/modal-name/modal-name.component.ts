@@ -72,6 +72,19 @@ export class ModalNameComponent implements OnInit, OnDestroy {
   ngOrcidAddOtherName = $localize`:@@topBar.addOtherName:Add other name`
   ngOrcidDefaultVisibilityLabel = $localize`:@@topBar.manageWhoCanSee:Control who can see your given, family and published names by setting the visibility. The default visibility for your names is`
   dialogAriaLabelledBy = $localize`:@@shared.dialogAriaLabeledByNames:Manage your names dialog`
+  closeAriaLabel = $localize`:@@topBar.closeNames:Close Names`
+  saveAriaLabel = $localize`:@@topBar.closeNames:Close Names`
+  cancelAriaLabel = $localize`:@@topBar.closeNames:Close Names`
+  inputGivenNamesAriaLabel = $localize`:@@topBar.yourGivenNames:Your given names`
+  inputFamilyNamesAriaLabel = $localize`:@@topBar.yourFamilyNames:Your family names`
+  inputPublishedNamesAriaLabel = $localize`:@@topBar.yourPublishedNames:Your published names`
+  inputAlsoKnownAsAriaLabel = $localize`:@@topBar.iAmAlsoKnownAs:I am also known as`
+  visibilityNamesPublicAriaLabel = $localize`:@@topBar.namesPublicAriaLabel:Set names visibility to Everyone`
+  visibilityNamesTrustedPartyAriaLabel = $localize`:@@topBar.namesTrustedPartiesAriaLabel:Set names visibility to Trusted Parties`
+  visibilityNamesPrivateAriaLabel = $localize`:@@topBar.namesAriaLabelPrivate:Set names visibility to Only Me`
+  visibilityOtherNamesPublicAriaLabel = $localize`:@@topBar.otherNamesPublicAriaLabel:Set names visibility to Everyone`
+  visibilityOtherNamesTrustedPartyAriaLabel = $localize`:@@topBar.otherNamesTrustedPartyAriaLabel:Set names visibility to Trusted Parties`
+  visibilityOtherNamesPrivateAriaLabel = $localize`:@@topBar.otherNamesPrivateAriaLabel:Set names visibility to Only Me`
 
   constructor(
     @Inject(WINDOW) private window: Window,

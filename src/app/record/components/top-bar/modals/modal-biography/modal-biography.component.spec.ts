@@ -11,6 +11,9 @@ import { MatSnackBar } from '@angular/material/snack-bar'
 import { Overlay } from '@angular/cdk/overlay'
 import { RecordBiographyService } from '../../../../../core/record-biography/record-biography.service'
 import { SharedModule } from '../../../../../shared/shared.module'
+import { NoopAnimationsModule } from '@angular/platform-browser/animations'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { RecordModule } from '../../../../record.module'
 
 describe('ModalBiographyComponent', () => {
   let component: ModalBiographyComponent
@@ -19,7 +22,15 @@ describe('ModalBiographyComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule, SharedModule, RouterTestingModule],
+        imports: [
+          FormsModule,
+          HttpClientTestingModule,
+          NoopAnimationsModule,
+          SharedModule,
+          ReactiveFormsModule,
+          RecordModule,
+          RouterTestingModule
+        ],
         declarations: [ModalBiographyComponent],
         providers: [
           { provide: MAT_DIALOG_DATA, useValue: {} },

@@ -1,5 +1,5 @@
 <app-modal [loading]="loadingNames">
-  <app-modal-header>
+  <app-modal-header [closeLabel]="closeAriaLabel">
     <ng-container i18n="@@topBar.names"> Names </ng-container>
   </app-modal-header>
   <app-modal-side-bar>
@@ -21,6 +21,7 @@
       (click)="saveEvent()"
       i18n="@@shared.saveChanges"
       id="save-names-button"
+      [attr.aria-label]="saveAriaLabel"
     >
       Save changes
     </button>
@@ -30,6 +31,7 @@
       (click)="closeEvent()"
       i18n="@@shared.cancel"
       id="cancel-names-button"
+      [attr.aria-label]="cancelAriaLabel"
     >
       Cancel
     </button>
@@ -98,6 +100,7 @@
             matInput
             formControlName="givenNames"
             placeholder=" {{ ngOrcidAddGivenName }}"
+            [attr.aria-label]="inputGivenNamesAriaLabel"
           />
           <mat-error
             class="mat-caption"
@@ -132,6 +135,7 @@
             matInput
             formControlName="familyName"
             placeholder=" {{ ngOrcidAddFamilyName }}"
+            [attr.aria-label]="inputFamilyNamesAriaLabel"
           />
           <mat-error
             class="mat-caption"
@@ -178,6 +182,7 @@
             matInput
             formControlName="publishedName"
             placeholder=" {{ ngOrcidAddPublishedName }}"
+            [attr.aria-label]="inputPublishedNamesAriaLabel"
           />
           <mat-error
             *ngIf="namesForm?.get('publishedName').hasError('maxlength')"
@@ -205,6 +210,9 @@
           <app-privacy-selector
             [alignment]="'start'"
             formControlName="visibility"
+            [ariaLabelPrivate]="visibilityOtherNamesPrivateAriaLabel"
+            [ariaLabelPublic]="visibilityOtherNamesPublicAriaLabel"
+            [ariaLabelTrustedParty]="visibilityOtherNamesTrustedPartyAriaLabel"
           ></app-privacy-selector>
         </div>
       </div>
@@ -261,6 +269,7 @@
                     matInput
                     formControlName="otherName"
                     placeholder="{{ ngOrcidAddOtherName }}"
+                    [attr.aria-label]="inputAlsoKnownAsAriaLabel"
                   />
                   <mat-hint
                     class="mat-caption"
@@ -295,6 +304,9 @@
                 <app-privacy-selector
                   [ngClass]="{ selector: !platform.columns12 }"
                   formControlName="visibility"
+                  [ariaLabelPrivate]="visibilityNamesPrivateAriaLabel"
+                  [ariaLabelPublic]="visibilityNamesPublicAriaLabel"
+                  [ariaLabelTrustedParty]="visibilityNamesTrustedPartyAriaLabel"
                 ></app-privacy-selector>
                 <button
                   id="delete-button"
@@ -313,7 +325,12 @@
         </div>
       </ng-container>
       <div class="row">
-        <a id="add-link" class="col add-more no-gutters" (click)="addOtherName()">
+        <a
+          role="button"
+          id="add-link"
+          class="col add-more no-gutters"
+          (click)="addOtherName()"
+        >
           <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
           <span class="mat-body-1">
             <ng-container
