@@ -77,8 +77,6 @@ describe('PanelComponent', () => {
 
     const dialogs = await loader.getAllHarnesses(MatDialogHarness)
     expect(dialogs.length).toBe(1)
-    expect(await dialogs[0].getAriaLabel()).toBe(
-      'Manage your biography dialog'
-    )
+    expect(await dialogs[0].getAriaLabel()).toBe('Manage your biography dialog')
   })
 })
