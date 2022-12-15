@@ -28,15 +28,15 @@ export class AppPanelsExpandAriaLabelPipe implements PipeTransform {
       }
     } else if (panelType === 'side-bar' && args) {
       if (args === 'emails-panel') {
-        return $localize`:@@shared.emailsExpandAriaLabel:Expand the Emails`
+        return $localize`:@@shared.emailsExpandAriaLabel:Expand Emails`
       } else if (args === 'websites-panel') {
-        return $localize`:@@shared.websiteExpandAriaLabel:Expand the Website & Social links`
+        return $localize`:@@shared.websiteExpandAriaLabel:Expand Website & Social links`
       } else if (args === 'personal-identifiers-panel') {
-        return $localize`:@@shared.personalIdsExpandAriaLabel:Expand the Personal identifiers`
+        return $localize`:@@shared.personalIdsExpandAriaLabel:Expand Personal identifiers`
       } else if (args === 'keywords-panel') {
-        return $localize`:@@shared.keywordsExpandAriaLabel:Expand the Keywords`
+        return $localize`:@@shared.keywordsExpandAriaLabel:Expand Keywords`
       } else if (args === 'countries-panel') {
-        return $localize`:@@shared.countriesExpandAriaLabel:Expand the Countries`
+        return $localize`:@@shared.countriesExpandAriaLabel:Expand Countries`
       }
     } else {
       return $localize`:@@shared.showDetails:Show details`

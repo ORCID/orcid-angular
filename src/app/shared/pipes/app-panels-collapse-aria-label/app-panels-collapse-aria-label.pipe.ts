@@ -26,7 +26,7 @@ export class AppPanelsCollapseAriaLabelPipe implements PipeTransform {
       return $localize`:@@shared.activityCollapseForAriaLabel:Collapse for`
     } else if (panelType === 'top-bar' && args) {
       if (args === 'also-know-as') {
-        return $localize`:@@shared.countriesExpandOtherNames:Collapse Other names`
+        return $localize`:@@shared.countriesCollapseOtherNames:Collapse Other names`
       }
     } else if (panelType === 'side-bar' && args) {
       // emails-panel, websites-panel, personal-identifiers-panel, keywords-panel, countries-panel
