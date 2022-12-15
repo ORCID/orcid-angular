@@ -33,7 +33,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   userInfo: UserInfo
   userRecord: UserRecord
   collapseAllActivitiesArialLabel = $localize`:@@shared.collapseAllActivitiesArialLabel:Collapse all activity sections`
-  expandAllActivitiesArialLabel = $localize`:@@shared.expandAllActivitiesArialLabel:Expand all all activity sections`
+  expandAllActivitiesArialLabel = $localize`:@@shared.expandAllActivitiesArialLabel:Expand all activity sections`
 
   expandedContent: MainPanelsState = {
     EMPLOYMENT: true,
