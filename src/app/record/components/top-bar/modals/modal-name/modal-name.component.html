@@ -257,6 +257,7 @@
                   class="icon-drag"
                   cdkDragHandle
                   src="./assets/vectors/draggable.svg"
+                  role="none"
                 />
                 <mat-form-field appearance="outline" class="mat-form-field-min">
                   <input
@@ -308,6 +309,7 @@
                   id="delete-button"
                   (click)="deleteOtherName(otherName.putCode)"
                   mat-icon-button
+                  [attr.aria-label]="deleteOtherNameAriaLabel"
                 >
                   <mat-icon
                     class="material-icons-outlined extra-large-material-icon"
@@ -326,6 +328,7 @@
           id="add-link"
           class="col add-more no-gutters"
           (click)="addOtherName()"
+          tabindex="0"
         >
           <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
           <span class="mat-body-1">
