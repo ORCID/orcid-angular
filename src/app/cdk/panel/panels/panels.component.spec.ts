@@ -13,12 +13,19 @@ import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 import { MatMenuModule } from '@angular/material/menu'
 import { SharedModule } from '../../../shared/shared.module'
-import { SortLabelPipe } from '../sort-label.pipe'
 import { PanelModule } from '../panel.module'
+import { NoopAnimationsModule } from '@angular/platform-browser/animations'
+import { HarnessLoader } from '@angular/cdk/testing'
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed'
+import { MatDialogHarness } from '@angular/material/dialog/testing'
+import { RecordModule } from '../../../record/record.module'
+import { UntypedFormBuilder } from '@angular/forms'
+import { ModalFundingComponent } from '../../../record/components/funding-stacks-groups/modals/modal-funding/modal-funding.component'
 
 describe('PanelsComponent', () => {
   let component: PanelsComponent
   let fixture: ComponentFixture<PanelsComponent>
+  let loader: HarnessLoader
 
   beforeEach(
     waitForAsync(() => {
@@ -27,12 +34,15 @@ describe('PanelsComponent', () => {
           HttpClientTestingModule,
           MatDialogModule,
           MatMenuModule,
+          NoopAnimationsModule,
+          PanelModule,
+          RecordModule,
           RouterTestingModule,
           SharedModule,
-          PanelModule,
         ],
         declarations: [PanelsComponent],
         providers: [
+          UntypedFormBuilder,
           WINDOW_PROVIDERS,
           RegisterService,
           PlatformInfoService,
@@ -50,9 +60,18 @@ describe('PanelsComponent', () => {
     fixture = TestBed.createComponent(PanelsComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
+    loader = TestbedHarnessEnvironment.documentRootLoader(fixture)
   })
 
   it('should create', () => {
     expect(component).toBeTruthy()
+  })
+
+  it('should be able to get aria-label of dialog', async () => {
+    component.openModal(ModalFundingComponent)
+
+    const dialogs = await loader.getAllHarnesses(MatDialogHarness)
+    expect(dialogs.length).toBe(1)
+    expect(await dialogs[0].getAriaLabel()).toBe('Manage funding dialog')
   })
 })

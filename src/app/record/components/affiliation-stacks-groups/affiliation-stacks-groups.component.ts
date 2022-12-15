@@ -26,6 +26,8 @@ import { UserInfo } from '../../../types'
 export class AffiliationStacksGroupsComponent implements OnInit {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
+  regionAffiliations = $localize`:@@ngOrcid.signin.affiliations:Affiliations`
+  regionProfessionalActivities = $localize`:@@shared.professionalActivities:Professional activities`
   labelAddEmploymentButton = $localize`:@@shared.addEmployment:Add Employment`
   labelSortEmploymentButton = $localize`:@@shared.sortEmployments:Sort Employments`
   labelEducationAddButton = $localize`:@@shared.addEducation:Add Education`

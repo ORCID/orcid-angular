@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, ChangeDetectorRef } from '@angular/core'
-import { FormGroup } from '@angular/forms'
+import { UntypedFormGroup } from '@angular/forms'
 import { WINDOW } from 'src/app/cdk/window'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { Router, ActivatedRoute } from '@angular/router'
@@ -14,8 +14,9 @@ import { ApplicationRoutes } from '../../constants'
   styleUrls: ['./search.component.scss-theme.scss', './search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-  labelSearch = $localize`:@@layout.ariaLabelSearch:Search`
-  form: FormGroup
+  labelSearch = $localize`:@@layout.ariaLabelSearch:Search the ORCID registry`
+  labelSearchBy = $localize`:@@layout.ariaLabelSearchBy:Search by name, affiliation or ORCID iD`
+  form: UntypedFormGroup
   platform: PlatformInfo
   togglzEnableUserMenu: boolean
   togglzOrcidAngularSearch: boolean

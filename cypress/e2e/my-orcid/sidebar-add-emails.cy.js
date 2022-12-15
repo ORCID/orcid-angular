@@ -14,7 +14,7 @@ describe('My orcid - users are able to add content to their record', async funct
     const addSecondaryEmail = 'qa@orcid.org'
     //click on edit pencil for Emails section
     cy.get('#emails-panel').within(($myPanel) => {
-      cy.get('#edit-button').click()
+      cy.get('.cy-edit-button').click()
     })
 
     cy.get('#add-link').click()

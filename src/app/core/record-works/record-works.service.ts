@@ -1,13 +1,12 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { BehaviorSubject, EMPTY, Observable, of, ReplaySubject } from 'rxjs'
+import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs'
 import {
   catchError,
   first,
   map,
   retry,
   switchMap,
-  switchMapTo,
   take,
   tap,
 } from 'rxjs/operators'
@@ -123,6 +122,7 @@ export class RecordWorksService {
               ? 'works/worksExtendedPage.json'
               : 'works/worksPage.json'
           }
+
           return url
         }),
         switchMap((url) =>
@@ -258,14 +258,18 @@ export class RecordWorksService {
       )
   }
 
-  save(work: Work, bibtex?: boolean): Observable<Work> {
+  save(
+    work: Work,
+    requireReload = true,
+    isLastWorkElement = false
+  ): Observable<Work> {
     return this._http
       .post<Work>(environment.API_WEB + `works/work.json`, work)
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => {
-          if (!bibtex) {
+          if (!isLastWorkElement) {
             this.getWorks({ forceReload: true })
           }
         })

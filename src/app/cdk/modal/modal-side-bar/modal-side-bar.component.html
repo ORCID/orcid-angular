@@ -1,23 +1,31 @@
-<div class="container">
-  <div class="orc-font-body-small">
-    <ul class="side-bar-url">
-      <ng-content select="#side-bar-title"></ng-content>
-    </ul>
-    <mat-divider class="divider"></mat-divider>
-    <ul class="side-bar-url">
-      <ng-content select="#side-bar-url-1"></ng-content>
-    </ul>
-    <mat-divider class="divider"></mat-divider>
-    <ul class="side-bar-url">
-      <ng-content select="#side-bar-url-2"></ng-content>
-    </ul>
-    <mat-divider class="divider"></mat-divider>
-    <ul class="side-bar-url">
-      <ng-content select="#side-bar-url-3"></ng-content>
-    </ul>
-    <mat-divider class="divider"></mat-divider>
-    <ul>
+<nav class="container orc-font-body-small">
+  <ul>
+    <li>
+      <span class="side-bar-url">
+        <ng-content select="#side-bar-title"></ng-content>
+      </span>
+      <mat-divider class="divider"></mat-divider>
+    </li>
+    <li>
+      <span class="side-bar-url">
+        <ng-content select="#side-bar-url-1"></ng-content>
+      </span>
+      <mat-divider class="divider"></mat-divider>
+    </li>
+    <li>
+      <span class="side-bar-url">
+        <ng-content select="#side-bar-url-2"></ng-content>
+      </span>
+      <mat-divider class="divider"></mat-divider>
+    </li>
+    <li>
+      <span class="side-bar-url">
+        <ng-content select="#side-bar-url-3"></ng-content>
+      </span>
+      <mat-divider class="divider"></mat-divider>
+    </li>
+    <li>
       <ng-content select="#side-bar-url-4"></ng-content>
-    </ul>
-  </div>
-</div>
+    </li>
+  </ul>
+</nav>

@@ -10,7 +10,7 @@ import { LanguageService } from 'src/app/core/language/language.service'
 })
 export class LanguageComponent implements OnInit {
   languageMenuOptions: { [key: string]: string }
-  labelLanguage = $localize`:@@layout.ariaLabelLanguage:language`
+  labelLanguage = $localize`:@@layout.ariaLabelLanguage:Select your preferred language. Current language is`
 
   constructor(
     @Inject(LOCALE_ID) public locale: string,
@@ -20,6 +20,7 @@ export class LanguageComponent implements OnInit {
     this.languageMenuOptions = environment.LANGUAGE_MENU_OPTIONS
     // LOCAL DEV GET'S `en-US` from locale but `en` is required
     this.locale = this.locale === 'en-US' ? 'en' : this.locale
+    this.labelLanguage += ` ${environment.LANGUAGE_MENU_OPTIONS[this.locale]}`
   }
 
   changeLanguage(languageKey: string) {

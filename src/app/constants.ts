@@ -2,10 +2,24 @@ import { Address, MonthDayYearDate } from './types'
 import { UrlMatchResult, UrlSegment } from '@angular/router'
 import {
   AbstractControl,
-  FormControl,
-  FormGroup,
-  FormArray,
+  UntypedFormControl,
+  UntypedFormGroup,
+  UntypedFormArray,
 } from '@angular/forms'
+import { ComponentType } from '@angular/cdk/portal'
+import { ModalEmailComponent } from './cdk/side-bar/modals/modal-email/modal-email.component'
+import { ModalAffiliationsComponent } from './record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component'
+import { ModalNameComponent } from './record/components/top-bar/modals/modal-name/modal-name.component'
+import { ModalFundingComponent } from './record/components/funding-stacks-groups/modals/modal-funding/modal-funding.component'
+import { ModalFundingSearchLinkComponent } from './record/components/funding-stacks-groups/modals/modal-funding-search-link/modal-funding-search-link.component'
+import { ModalWorksSearchLinkComponent } from './record/components/work-stack-group/modals/work-search-link-modal/modal-works-search-link.component'
+import { WorkModalComponent } from './record/components/work-modal/work-modal.component'
+import { ModalPeerReviewsComponent } from './record/components/peer-review-stacks-groups/modals/modal-peer-reviews/modal-peer-reviews.component'
+import { WorkExternalIdModalComponent } from './record/components/work-stack-group/modals/work-external-id-modal/work-external-id-modal.component'
+import { ModalBiographyComponent } from './record/components/top-bar/modals/modal-biography/modal-biography.component'
+import { ModalCountryComponent } from './cdk/side-bar/modals/modal-country/modal-country.component'
+import { ModalKeywordComponent } from './cdk/side-bar/modals/modal-keyword/modal-keyword.component'
+import { ModalWebsitesComponent } from './cdk/side-bar/modals/modal-websites/modal-websites.component'
 
 export { COUNTRY_NAMES_TO_COUNTRY_CODES } from './constants-country-codes'
 
@@ -43,6 +57,12 @@ export const AMOUNT_FULLY_FORMATTED_REGEX = /(?=.*\d)^(([1-9]\d{0,2}(,\d{3})*)|0
 export const AMOUNT_DIGITS_ONLY_REGEX = /^\d+$/
 // https://regex101.com/r/XvbCrA/1
 export const WHITE_SPACE_REGEXP = /\s+/g
+
+export const ITEM_ACTION_EDIT = 'edit'
+export const ITEM_ACTION_DELETE = 'delete'
+export const ITEM_ACTION_HIDE = 'hide'
+export const ITEM_ACTION_SHOW = 'show'
+export const ITEM_ACTION_SELECT = 'select'
 
 export const ApplicationRoutes = {
   myOrcid: 'my-orcid',
@@ -236,10 +256,10 @@ export const MAX_LENGTH_LESS_THAN_TWO_HUNDRED_FIFTY_FIVE = 254
 export const MAX_LENGTH_LESS_THAN_TWO_THOUSAND_EIGHTY_FOUR = 2083
 
 export function GetFormErrors(form: AbstractControl) {
-  if (form instanceof FormControl) {
+  if (form instanceof UntypedFormControl) {
     return form.errors ?? null
   }
-  if (form instanceof FormGroup) {
+  if (form instanceof UntypedFormGroup) {
     const groupErrors = form.errors
     const formErrors = groupErrors ? { groupErrors } : {}
     Object.keys(form.controls).forEach((key) => {
@@ -257,7 +277,7 @@ export function GetFormErrors(form: AbstractControl) {
     })
     return Object.keys(formErrors).length > 0 ? formErrors : null
   }
-  if (form instanceof FormArray) {
+  if (form instanceof UntypedFormArray) {
     const groupErrors = form.errors
     const formErrors = groupErrors ? [groupErrors] : []
     form.controls.forEach((control) => {
@@ -265,5 +285,54 @@ export function GetFormErrors(form: AbstractControl) {
       formErrors.push(error)
     })
     return formErrors.length > 0 ? formErrors : null
+  }
+}
+
+export function getAriaLabel(
+  component: ComponentType<any>,
+  type?: string
+): string {
+  switch (component) {
+    case ModalAffiliationsComponent:
+      switch (type) {
+        case 'employment':
+          return $localize`:@@shared.dialogAriaLabeledByEmployment:Manage employment dialog`
+        case 'education':
+          return $localize`:@@shared.dialogAriaLabeledByEducation:Manage education dialog`
+        case 'qualification':
+          return $localize`:@@shared.dialogAriaLabeledByQualification:Manage qualification dialog`
+        case 'distinction':
+          return $localize`:@@shared.dialogAriaLabeledByDistinction:Manage distinction dialog`
+        case 'invited-position':
+          return $localize`:@@shared.dialogAriaLabeledByInvitedPosition:Manage invited position dialog`
+        case 'membership':
+          return $localize`:@@shared.dialogAriaLabeledByMembership:Manage membership dialog`
+        case 'service':
+          return $localize`:@@shared.dialogAriaLabeledByService:Manage service dialog`
+      }
+    case WorkExternalIdModalComponent:
+      return $localize`:@@shared.dialogAriaLabeledByExternalIdentifier:Manage external identifier dialog`
+    case ModalNameComponent:
+      return $localize`:@@shared.dialogAriaLabeledByNames:Manage your names dialog`
+    case ModalBiographyComponent:
+      return $localize`:@@shared.dialogAriaLabeledByBiography:Manage your biography dialog`
+    case ModalEmailComponent:
+      return $localize`:@@shared.dialogAriaLabeledByEmails:Manage your emails dialog`
+    case ModalCountryComponent:
+      return $localize`:@@shared.dialogAriaLabeledByCountries:Manage your countries dialog`
+    case ModalKeywordComponent:
+      return $localize`:@@shared.dialogAriaLabeledByKeywords:Manage your keywords dialog`
+    case ModalWebsitesComponent:
+      return $localize`:@@shared.dialogAriaLabeledByWebsites:Manage your websites & social dialog`
+    case ModalFundingComponent:
+      return $localize`:@@shared.dialogAriaLabeledByFunding:Manage funding dialog`
+    case ModalFundingSearchLinkComponent:
+      return $localize`:@@shared.dialogAriaLabeledByFundingSearch:Manage funding search dialog`
+    case WorkModalComponent:
+      return $localize`:@@shared.dialogAriaLabeledByWork:Manage work dialog`
+    case ModalWorksSearchLinkComponent:
+      return $localize`:@@shared.dialogAriaLabeledByWorkSearch:Manage work search dialog`
+    case ModalPeerReviewsComponent:
+      return $localize`:@@shared.dialogAriaLabeledByPeerReview:Manage peer review dialog`
   }
 }

@@ -13,7 +13,11 @@ import { SnackbarService } from '../../cdk/snackbar/snackbar.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatDialog } from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
-import { Work } from '../../types/record-works.endpoint'
+import {
+  Work,
+  WorkGroup,
+  WorksEndpoint,
+} from '../../types/record-works.endpoint'
 import { WorkPublicationTypes } from '../../types/works.endpoint'
 import { environment } from '../../../environments/environment.local'
 import { TogglzService } from '../togglz/togglz.service'
@@ -75,6 +79,7 @@ describe('RecordWorksService', () => {
             environment.API_WEB +
               'works/worksExtendedPage.json?offset=0&sort=date&sortAsc=false&pageSize=50'
           )
+
           if (index === works.length - 1) {
             expect(requestGetWorks.length).toEqual(1)
 
@@ -114,7 +119,23 @@ function getNumberOfWorks(numberOfContributors: number): Work[] {
   return works
 }
 
-function getWork(): Work {
+export function getWorksEndpoint(): WorksEndpoint {
+  return {
+    groups: [getWorkGroup()],
+  } as WorksEndpoint
+}
+
+function getWorkGroup(): WorkGroup {
+  return {
+    activePutCode: 1,
+    defaultPutCode: 1,
+    works: [getWork()],
+    activeVisibility: 'PUBLIC',
+    externalIdentifiers: [],
+  } as WorkGroup
+}
+
+export function getWork(): Work {
   return {
     title: {
       value: 'Book',
@@ -122,5 +143,9 @@ function getWork(): Work {
     workType: {
       value: WorkPublicationTypes.book,
     },
+    putCode: {
+      value: 1,
+    },
+    workExternalIdentifiers: [],
   } as Work
 }

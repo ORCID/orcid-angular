@@ -5,7 +5,12 @@ import {
   OnInit,
   Output,
 } from '@angular/core'
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
+import {
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms'
 import { Subject } from 'rxjs'
 import { HAS_LETTER_OR_SYMBOL, HAS_NUMBER } from 'src/app/constants'
 import { AccountSecurityPasswordService } from 'src/app/core/account-security-password/account-security-password.service'
@@ -21,7 +26,7 @@ import { OrcidValidators } from 'src/app/validators'
   ],
 })
 export class SettingsSecurityPasswordComponent implements OnInit, OnDestroy {
-  form: FormGroup
+  form: UntypedFormGroup
   hasNumberPattern = HAS_NUMBER
   hasLetterOrSymbolPattern = HAS_LETTER_OR_SYMBOL
   @Output() loading = new EventEmitter<boolean>()
@@ -30,7 +35,7 @@ export class SettingsSecurityPasswordComponent implements OnInit, OnDestroy {
   $destroy = new Subject()
 
   constructor(
-    private _fb: FormBuilder,
+    private _fb: UntypedFormBuilder,
     private _register: RegisterService,
     private _accountPassword: AccountSecurityPasswordService
   ) {}
@@ -39,7 +44,7 @@ export class SettingsSecurityPasswordComponent implements OnInit, OnDestroy {
     this.form = this._fb.group(
       {
         oldPassword: ['', Validators.required],
-        password: new FormControl('', {
+        password: new UntypedFormControl('', {
           validators: [
             Validators.required,
             Validators.minLength(8),
@@ -49,7 +54,7 @@ export class SettingsSecurityPasswordComponent implements OnInit, OnDestroy {
           ],
           asyncValidators: [this._register.backendValueValidate('password')],
         }),
-        retypedPassword: new FormControl('', Validators.required),
+        retypedPassword: new UntypedFormControl('', Validators.required),
       },
       {
         validators: OrcidValidators.matchValues('password', 'retypedPassword'),

@@ -5,13 +5,11 @@ import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import { RecordWorksService } from '../../../../../core/record-works/record-works.service'
 import { Work } from '../../../../../types/record-works.endpoint'
 import { first } from 'rxjs/operators'
-import { FormControl, FormGroup } from '@angular/forms'
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms'
 import bibtexParse from '@orcid/bibtex-parse-js'
 import latexParse from 'src/assets/scripts/latexParse.js'
 import { WINDOW } from 'src/app/cdk/window'
 import { SnackbarService } from '../../../../../cdk/snackbar/snackbar.service'
-import { environment } from '../../../../../../environments/environment.local'
-import { Contributor } from '../../../../../types'
 import { UserRecord } from '../../../../../types/record.local'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 
@@ -28,7 +26,7 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
 
   @Input() userRecord: UserRecord
 
-  importForm: FormGroup
+  importForm: UntypedFormGroup
   loadingWorks = false
   bibtexErrorParsingText = ''
   bibtexErrorParsing = false
@@ -36,7 +34,7 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
   worksFromBibtex: Work[] = []
   selectedWorks: Work[] = []
   selectAll: false
-  group: { [key: string]: FormGroup } = {}
+  group: { [key: string]: UntypedFormGroup } = {}
   addedWorkCount = 0
   isAnInvalidWork = false
 
@@ -103,6 +101,7 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
                       .worksValidate(newWorks)
                       .pipe(first())
                       .subscribe((data) => {
+                        that.worksFromBibtex = []
                         data.forEach((work) => {
                           that.worksFromBibtex.push(work)
                           if (work.errors.length > 0 && !that.isAnInvalidWork) {
@@ -115,11 +114,11 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
                           w.putCode = {
                             value: newPutCode,
                           }
-                          that.group[newPutCode] = new FormGroup({
-                            checked: new FormControl(false),
+                          that.group[newPutCode] = new UntypedFormGroup({
+                            checked: new UntypedFormControl(false),
                           })
                         })
-                        that.importForm = new FormGroup(that.group)
+                        that.importForm = new UntypedFormGroup(that.group)
                         that.loadingWorks = false
                       })
                   }
@@ -273,8 +272,7 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
       }
 
       if (ADD_OTHER_WORK_CONTRIBUTORS_WITH_BIBTEX_TOGGLZ) {
-        work.contributorsGroupedByOrcid = this.addRecordHolderAsContributor()
-
+        work.contributorsGroupedByOrcid = []
         if (lowerKeyTags.hasOwnProperty('author')) {
           this.addContributors(
             lowerKeyTags['author'].split('and'),
@@ -300,32 +298,21 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
     work: Work
   ) {
     contributors.forEach((contributor) => {
-      work.contributorsGroupedByOrcid.push({
-        creditName: {
-          content: contributor,
-        },
-        rolesAndSequences: [
-          {
-            contributorRole: type,
-            contributorSequence: null,
+      contributor = latexParse.decodeLatex(contributor).trim()
+      if (contributor) {
+        work.contributorsGroupedByOrcid.push({
+          creditName: {
+            content: contributor,
           },
-        ],
-      })
+          rolesAndSequences: [
+            {
+              contributorRole: type,
+              contributorSequence: null,
+            },
+          ],
+        })
+      }
     })
-  }
-
-  addRecordHolderAsContributor(): Contributor[] {
-    return [
-      {
-        creditName: {
-          content: this.getCreditNameFromUserRecord(),
-        },
-        contributorOrcid: {
-          path: this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID,
-          uri: `https:${environment.BASE_URL}${this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID}`,
-        },
-      },
-    ]
   }
 
   externalIdentifierId(work, idType, value) {

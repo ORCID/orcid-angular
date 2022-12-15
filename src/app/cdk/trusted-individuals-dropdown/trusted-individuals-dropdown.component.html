@@ -3,10 +3,15 @@
   class="mat-button-font"
   [matMenuTriggerFor]="menu"
   i18n="@@delegators.switchAccount"
+  [attr.aria-label]="labelSwitchAccount"
   >Switch to another account</a
 >
 
-<mat-menu #menu="matMenu" class="mat-body-1 trusted-individuals">
+<mat-menu
+  #menu="matMenu"
+  class="mat-body-1 trusted-individuals"
+  [attr.aria-label]="labelSwitchAccount"
+>
   <strong class="header text-container" i18n="@@delegators.switchAccount">
     Switch to another account
   </strong>

@@ -5,7 +5,11 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core'
-import { FormControl, FormGroup, Validators } from '@angular/forms'
+import {
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms'
 import { MatAutocompleteTrigger } from '@angular/material/autocomplete'
 import { Router } from '@angular/router'
 import { CookieService } from 'ngx-cookie-service'
@@ -47,18 +51,18 @@ export class InstitutionalComponent implements OnInit {
   labelClear = $localize`:@@institutional.ariaLabelClear:Clear`
   @ViewChild(MatAutocompleteTrigger) autocomplete: MatAutocompleteTrigger
 
-  institutionFormControl = new FormControl('', [Validators.required])
+  institutionFormControl = new UntypedFormControl('', [Validators.required])
 
-  institutionalForm = new FormGroup({
+  institutionalForm = new UntypedFormGroup({
     institution: this.institutionFormControl,
   })
 
   constructor(
     @Inject(WINDOW) private window: Window,
-    private _cookie: CookieService,
     private _disco: DiscoService,
     private _router: Router,
-    private _platformInfo: PlatformInfoService
+    private _platformInfo: PlatformInfoService,
+    private _cookie: CookieService
   ) {
     this.loading = true
     this._disco.getDiscoFeed().subscribe((res) => {

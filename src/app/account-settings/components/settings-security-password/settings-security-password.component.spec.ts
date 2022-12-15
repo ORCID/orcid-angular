@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { SettingsSecurityPasswordComponent } from './settings-security-password.component'
-import { FormBuilder } from '@angular/forms'
+import { UntypedFormBuilder } from '@angular/forms'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { WINDOW_PROVIDERS } from '../../../cdk/window'
 import { PlatformInfoService } from '../../../cdk/platform-info'
@@ -22,7 +22,7 @@ describe('SettingsSecurityPasswordComponent', () => {
       declarations: [SettingsSecurityPasswordComponent],
       providers: [
         WINDOW_PROVIDERS,
-        FormBuilder,
+        UntypedFormBuilder,
         PlatformInfoService,
         ErrorHandlerService,
         SnackbarService,

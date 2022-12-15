@@ -10,6 +10,11 @@ hr.dashed-line {
   margin-bottom: 0 !important;
 }
 
+h2,
+h3 {
+  margin: 6px 0;
+}
+
 ::ng-deep .columns-4-or-8 .mat-form-field {
   width: 100%;
   margin-inline-end: auto;

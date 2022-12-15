@@ -7,6 +7,8 @@
   "
 >
   <app-panel
+    panelId="peer-review"
+    [putCode]="subPeerReview.putCode.value"
     [elements]="subPeerReview"
     [type]="'top-bar'"
     [ngStyle]="{
@@ -18,8 +20,9 @@
     *ngIf="isPreferred(subPeerReview) || displayTheStack"
     [stackedHeader]="!platform.columns12"
   >
-    <div
+    <h4
       header
+      class="peer-review-title"
       [ngClass]="{
         'orc-font-small-print': isMobile,
         'orc-font-body-small': !isMobile
@@ -39,7 +42,7 @@
           {{ subPeerReview.role.value }}
         </span>
       </span>
-    </div>
+    </h4>
     <div
       custom-controls
       [ngClass]="{
@@ -57,11 +60,16 @@
         "
       >
         <a
-          class="underline"
+          class="underline show-more-button"
           *ngIf="!subPeerReview.showDetails"
           (click)="getDetails(subPeerReview, subPeerReview.putCode.value)"
           i18n="@@shared.showMoreDetail"
-          id="show-more-button"
+          [attr.aria-label]="
+            'peer-review'
+              | appPanelActivityActionAriaLabel
+                : 'show'
+                : (subPeerReview.completionDate | monthDayYearDateToString)
+          "
         >
           Show more detail
         </a>
@@ -70,6 +78,12 @@
           *ngIf="subPeerReview.showDetails"
           (click)="collapse(subPeerReview)"
           i18n="@@shared.showLessDetail"
+          [attr.aria-label]="
+            'peer-review'
+              | appPanelActivityActionAriaLabel
+                : 'hide'
+                : (subPeerReview.completionDate | monthDayYearDateToString)
+          "
           id="show-less-button"
         >
           Show less detail
@@ -114,6 +128,7 @@
       (topPanelOfTheStackModeChange)="changeTopPanelOfTheStack(subPeerReview)"
       [type]="'peer-review'"
       [item]="subPeerReview"
+      [panelTitle]="subPeerReview.completionDate | monthDayYearDateToString"
     >
     </app-panel-source>
   </app-panel>

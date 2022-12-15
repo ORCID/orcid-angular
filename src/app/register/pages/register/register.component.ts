@@ -8,7 +8,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core'
-import { FormBuilder, FormGroup } from '@angular/forms'
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog'
 import { MatStep } from '@angular/material/stepper'
 import { Router } from '@angular/router'
@@ -45,9 +45,9 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   @ViewChild('stepComponentB', { read: ElementRef }) stepComponentB: ElementRef
   @ViewChild('stepComponentC', { read: ElementRef }) stepComponentC: ElementRef
   platform: PlatformInfo
-  FormGroupStepA: FormGroup
-  FormGroupStepB: FormGroup
-  FormGroupStepC: FormGroup
+  FormGroupStepA: UntypedFormGroup
+  FormGroupStepB: UntypedFormGroup
+  FormGroupStepC: UntypedFormGroup
   isLinear = true
   personalData: RegisterForm
   backendForm: RegisterForm
@@ -62,7 +62,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   constructor(
     private _cdref: ChangeDetectorRef,
     private _platformInfo: PlatformInfoService,
-    private _formBuilder: FormBuilder,
+    private _formBuilder: UntypedFormBuilder,
     private _register: RegisterService,
     private _dialog: MatDialog,
     @Inject(WINDOW) private window: Window,

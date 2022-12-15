@@ -9,8 +9,8 @@ import {
 } from '@angular/core'
 import {
   AbstractControl,
-  FormControl,
-  FormGroup,
+  UntypedFormControl,
+  UntypedFormGroup,
   ValidationErrors,
   ValidatorFn,
   Validators,
@@ -46,13 +46,15 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   verificationsSend: string[] = []
   $destroy: Subject<boolean> = new Subject<boolean>()
   addedEmailsCount = 0
-  emailsForm: FormGroup = new FormGroup({})
+  emailsForm: UntypedFormGroup = new UntypedFormGroup({})
   emails: AssertionVisibilityString[] = []
   originalEmailsBackendCopy: AssertionVisibilityString[]
   defaultVisibility: VisibilityStrings = 'PRIVATE'
 
   isMobile: boolean
   userInfo: UserInfo
+
+  dialogAriaLabelledBy = $localize`:@@shared.dialogAriaLabeledByEmails:Manage your emails dialog`
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
@@ -94,8 +96,8 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
    */
   backendJsonToForm(emailEndpointJson: EmailsEndpoint): void {
     // Create an empty form
-    const group: { [key: string]: FormGroup } = {}
-    this.emailsForm = new FormGroup(group, {
+    const group: { [key: string]: UntypedFormGroup } = {}
+    this.emailsForm = new UntypedFormGroup(group, {
       validators: [],
       updateOn: 'change',
     })
@@ -113,7 +115,7 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
    */
 
   private formToBackend(
-    emailForm: FormGroup,
+    emailForm: UntypedFormGroup,
     emails: AssertionVisibilityString[]
   ): AssertionVisibilityString[] {
     const allEmails = []
@@ -164,22 +166,25 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
       // Add a new control to the formGroup
       this.emailsForm.addControl(
         newPutCode,
-        new FormGroup({
-          email: new FormControl(existingEmail ? existingEmail.value : '', {
-            validators: [
-              Validators.required,
-              OrcidValidators.email,
-              this.allEmailsAreUnique(newPutCode),
-            ],
-            asyncValidators: [
-              this._recordEmails.backendEmailValidate(
-                this.originalEmailsBackendCopy
-              ),
-            ],
+        new UntypedFormGroup({
+          email: new UntypedFormControl(
+            existingEmail ? existingEmail.value : '',
+            {
+              validators: [
+                Validators.required,
+                OrcidValidators.email,
+                this.allEmailsAreUnique(newPutCode),
+              ],
+              asyncValidators: [
+                this._recordEmails.backendEmailValidate(
+                  this.originalEmailsBackendCopy
+                ),
+              ],
 
-            updateOn: 'change',
-          }),
-          visibility: new FormControl(
+              updateOn: 'change',
+            }
+          ),
+          visibility: new UntypedFormControl(
             existingEmail ? existingEmail.visibility : this.defaultVisibility,
             {
               validators: [this.emailsIsUnverified(newPutCode)],
@@ -216,7 +221,7 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
     Object.keys(this.emailsForm.controls).forEach((currentControlKey) => {
       ;(this.emailsForm.controls[
         currentControlKey
-      ] as FormGroup).controls.email.updateValueAndValidity()
+      ] as UntypedFormGroup).controls.email.updateValueAndValidity()
     })
   }
 
@@ -267,12 +272,12 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
    */
   private removeDuplicateErrorFromOtherControls(
     formGroupKeysWithDuplicatedValues: string[],
-    emailsForm: FormGroup = new FormGroup({})
+    emailsForm: UntypedFormGroup = new UntypedFormGroup({})
   ): void {
     Object.keys(emailsForm.controls).forEach((currentControlKey) => {
       const otherEmailControl = (emailsForm.controls[
         currentControlKey
-      ] as FormGroup).controls.email as FormControl
+      ] as UntypedFormGroup).controls.email as UntypedFormControl
       if (
         formGroupKeysWithDuplicatedValues.indexOf(currentControlKey) === -1 &&
         otherEmailControl.errors &&
@@ -293,18 +298,19 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
    * @returns a list of control keys with duplicated emails
    */
 
-  private listDuplicateInputKeys(formGroup: FormGroup) {
+  private listDuplicateInputKeys(formGroup: UntypedFormGroup) {
     const formGroupKeysWithDuplicatedValues: string[] = []
 
     // Add errors error on duplicated emails
     Object.keys(formGroup.controls).forEach((keyX) => {
-      let emailControlX: string = (formGroup.controls[keyX] as FormGroup)
+      let emailControlX: string = (formGroup.controls[keyX] as UntypedFormGroup)
         .controls['email'].value
       emailControlX = emailControlX.toLowerCase().trim()
 
       Object.keys(formGroup.controls).forEach((keyY) => {
-        let emailControlY: string = (formGroup.controls[keyY] as FormGroup)
-          .controls['email'].value
+        let emailControlY: string = (formGroup.controls[
+          keyY
+        ] as UntypedFormGroup).controls['email'].value
         emailControlY = emailControlY.toLowerCase().trim()
 
         // Only if both controls are not empty

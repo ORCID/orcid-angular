@@ -17,6 +17,9 @@ import { VerificationEmailModalService } from 'src/app/core/verification-email-m
   preserveWhitespaces: true,
 })
 export class PanelSourceComponent implements OnInit {
+  closeOtherSources = $localize`:@@record.closeOtherSources:Close other sources`
+  openOtherSources = $localize`:@@record.openOtherSources:Open other sources`
+
   @Input() isPublicRecord
   @Input() isPreferred = true
   @Input() sourceName
@@ -54,6 +57,7 @@ export class PanelSourceComponent implements OnInit {
   @Input() topPanelOfTheStackMode: boolean
   @Input() clickableSource = true
   @Input() userRecord
+  @Input() panelTitle: any
   @Output() topPanelOfTheStackModeChange = new EventEmitter<void>()
 
   labelDeleteButton = $localize`:@@shared.delete:Delete`
@@ -67,7 +71,11 @@ export class PanelSourceComponent implements OnInit {
       this.isHandset = person.handset
     })
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (!this.panelTitle) {
+      this.panelTitle = ''
+    }
+  }
 
   toggleStackMode() {
     if (this.stackLength > 1) {

@@ -10,7 +10,7 @@
       <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
     </div>
   </div>
-  <div class="row main-area no-padding">
+  <main class="row main-area no-padding">
     <div
       class="col s4 m8 no-gutters content-wrapper"
       [ngClass]="{ l9: !noSidebar, l12: noSidebar }"
@@ -22,7 +22,7 @@
     <div class="col l3 no-gutters side-bar" *ngIf="columns12 && !noSidebar">
       <ng-content select="app-modal-side-bar"></ng-content>
     </div>
-  </div>
+  </main>
   <div class="row footer-area no-padding">
     <div class="col s4 l12 no-gutters">
       <ng-content select="app-modal-footer"></ng-content>

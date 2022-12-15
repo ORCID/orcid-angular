@@ -1,7 +1,7 @@
 import { Component, Inject, Input, OnInit } from '@angular/core'
 import { ApplicationRoutes } from '../../../constants'
 import { WINDOW } from '../../../cdk/window'
-import { FormControl, FormGroup } from '@angular/forms'
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms'
 
 @Component({
   selector: 'app-two-factor-recovery-codes',
@@ -15,15 +15,15 @@ export class TwoFactorRecoveryCodesComponent implements OnInit {
   @Input() backupCodes: string
   @Input() backupCodesClipboard: string
   applicationRoutes = ApplicationRoutes
-  twoFactorForm: FormGroup
+  twoFactorForm: UntypedFormGroup
 
   tooltipClipboard = $localize`:@@account.clipboard:Backup codes have been copied to the clipboard`
 
   constructor(@Inject(WINDOW) private window: Window) {}
 
   ngOnInit(): void {
-    this.twoFactorForm = new FormGroup({
-      backupCodes: new FormControl(
+    this.twoFactorForm = new UntypedFormGroup({
+      backupCodes: new UntypedFormControl(
         { value: this.backupCodes, disabled: true },
         []
       ),

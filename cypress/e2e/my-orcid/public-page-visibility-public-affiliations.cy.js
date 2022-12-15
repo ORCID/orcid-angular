@@ -41,8 +41,8 @@ describe('Public record page: validate public affiliations are displayed', async
   })
   it('Public peer reviews data is displayed', function () {
     cy.get('#cy-peer-reviews').within(() => {
-      cy.get('#cy-panel-component-expand-button').click()
-      cy.get('#cy-panel-component').should('contain', testUser.publicPRdate)
+      cy.get('.cy-panel-component-expand-button').click()
+      cy.get('.cy-panel-component').should('contain', testUser.publicPRdate)
     })
   })
 })

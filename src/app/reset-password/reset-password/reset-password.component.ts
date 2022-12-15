@@ -1,5 +1,10 @@
 import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core'
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
+import {
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms'
 import { ActivatedRoute, Router, UrlTree } from '@angular/router'
 import { Subject } from 'rxjs'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
@@ -25,7 +30,7 @@ import { OrcidValidators } from 'src/app/validators'
   preserveWhitespaces: true,
 })
 export class ResetPasswordComponent implements OnInit {
-  form: FormGroup
+  form: UntypedFormGroup
   hasNumberPattern = HAS_NUMBER
   hasLetterOrSymbolPattern = HAS_LETTER_OR_SYMBOL
   labelInfo = $localize`:@@register.ariaLabelInfoPassword:info about password`
@@ -39,7 +44,7 @@ export class ResetPasswordComponent implements OnInit {
   isMobile: boolean
 
   constructor(
-    private _fb: FormBuilder,
+    private _fb: UntypedFormBuilder,
     private _register: RegisterService,
     private _accountRecoveryService: PasswordRecoveryService,
     private _route: ActivatedRoute,
@@ -74,7 +79,7 @@ export class ResetPasswordComponent implements OnInit {
 
     this.form = this._fb.group(
       {
-        password: new FormControl('', {
+        password: new UntypedFormControl('', {
           validators: [
             Validators.required,
             Validators.minLength(8),
@@ -84,7 +89,7 @@ export class ResetPasswordComponent implements OnInit {
           ],
           asyncValidators: [this._register.backendValueValidate('password')],
         }),
-        retypedPassword: new FormControl('', Validators.required),
+        retypedPassword: new UntypedFormControl('', Validators.required),
       },
       {
         validators: OrcidValidators.matchValues('password', 'retypedPassword'),

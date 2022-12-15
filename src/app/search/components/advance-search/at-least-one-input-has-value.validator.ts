@@ -1,7 +1,7 @@
-import { FormGroup } from '@angular/forms'
+import { UntypedFormGroup } from '@angular/forms'
 
 export function AtLeastOneInputHasValue() {
-  return (group: FormGroup) => {
+  return (group: UntypedFormGroup) => {
     if (
       !Object.keys(group.value).some(
         (x) =>

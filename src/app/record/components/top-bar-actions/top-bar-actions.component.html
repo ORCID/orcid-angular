@@ -17,6 +17,7 @@
       mat-icon-button
       class="orc-font-small-print"
       (click)="printRecord()"
+      [attr.aria-label]="labelPrintableVersion"
     >
       <mat-icon fontSet="material-icons-outlined" class="icon"> print</mat-icon>
       <ng-container i18n="@@topBar.printableVersion">

@@ -1,16 +1,16 @@
 import { EventEmitter, Input, Output, Directive } from '@angular/core'
-import { FormGroup } from '@angular/forms'
+import { UntypedFormGroup } from '@angular/forms'
 
 @Directive()
 export abstract class BaseStepDirective {
-  public _formGroup: FormGroup
+  public _formGroup: UntypedFormGroup
   @Input()
-  set formGroup(formGroup: FormGroup) {
+  set formGroup(formGroup: UntypedFormGroup) {
     this._formGroup = formGroup
     this.formGroupChange.emit(this._formGroup)
   }
   get formGroup() {
     return this._formGroup
   }
-  @Output() formGroupChange = new EventEmitter<FormGroup>()
+  @Output() formGroupChange = new EventEmitter<UntypedFormGroup>()
 }

@@ -38,8 +38,6 @@ export class FundingStacksGroupsComponent implements OnInit {
   fundings: FundingGroup[] = []
 
   ngOrcidFunding = $localize`:@@shared.funding:Funding`
-  labelAddButton = $localize`:@@shared.addFunding:Add Funding`
-  labelSortButton = $localize`:@@shared.sortFundings:Sort Fundings`
   countryCodes: { key: string; value: string }[]
   loading = true
 

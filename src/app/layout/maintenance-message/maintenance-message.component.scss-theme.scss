@@ -1,4 +1,4 @@
-@import '~@angular/material/theming';
+@use '@angular/material' as mat;
 @import 'src/assets/scss/material.orcid-theme.scss';
 @import 'src/assets/scss/material.typography.scss';
 
@@ -11,7 +11,7 @@
 
   ::ng-deep .closable,
   .text-container {
-    border-top: mat-color($foreground, 'box-border') 1px solid;
+    border-top: mat.get-color-from-palette($foreground, 'box-border') 1px solid;
   }
 }
 

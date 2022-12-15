@@ -7,7 +7,7 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core'
-import { FormControl, FormGroup } from '@angular/forms'
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms'
 import { MatDialogRef } from '@angular/material/dialog'
 import { MatSelect } from '@angular/material/select'
 import { cloneDeep } from 'lodash'
@@ -42,7 +42,7 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
 
   id: string
   addedEmailsCount = 0
-  countryForm: FormGroup
+  countryForm: UntypedFormGroup
   countries: Address[]
   countriesMap: { [key: string]: Address }
   countryCodes: { key: string; value: string }[]
@@ -55,6 +55,7 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
   @ViewChildren('countrySelect') inputs: QueryList<MatSelect>
 
   ngOrcidCountry = $localize`:@@shared.selectACountryOrLocation:Select a country or location`
+  dialogAriaLabelledBy = $localize`:@@shared.dialogAriaLabeledByCountries:Manage your countries dialog`
 
   ngOnInit(): void {
     this._recordCountryService
@@ -89,21 +90,21 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
 
   backendJsonToForm(emailEndpointJson: CountriesEndpoint) {
     const countries = emailEndpointJson.addresses
-    const group: { [key: string]: FormGroup } = {}
+    const group: { [key: string]: UntypedFormGroup } = {}
 
     countries.forEach((country) => {
-      group[country.putCode] = new FormGroup({
-        country: new FormControl({
+      group[country.putCode] = new UntypedFormGroup({
+        country: new UntypedFormControl({
           value: country.countryName,
           disabled: country.source !== this.id,
         }),
-        visibility: new FormControl(country.visibility.visibility, {}),
+        visibility: new UntypedFormControl(country.visibility.visibility, {}),
       })
     })
-    this.countryForm = new FormGroup(group)
+    this.countryForm = new UntypedFormGroup(group)
   }
 
-  formToBackend(countryForm: FormGroup): CountriesEndpoint {
+  formToBackend(countryForm: UntypedFormGroup): CountriesEndpoint {
     const countries: CountriesEndpoint = {
       errors: [],
       addresses: [],
@@ -152,9 +153,9 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
   addCountry() {
     this.countryForm.addControl(
       'new-' + this.addedEmailsCount,
-      new FormGroup({
-        country: new FormControl(),
-        visibility: new FormControl(this.defaultVisibility, {}),
+      new UntypedFormGroup({
+        country: new UntypedFormControl(),
+        visibility: new UntypedFormControl(this.defaultVisibility, {}),
       })
     )
     this.countries.push({
@@ -167,7 +168,8 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
     const input = this.inputs.last
     input.focus()
   }
-  deleteEmail(putcode: string) {
+
+  deleteCountry(putcode: string) {
     const i = this.countries.findIndex((value) => value.putCode === putcode)
     this.countries.splice(i, 1)
     this.countryForm.removeControl(putcode)

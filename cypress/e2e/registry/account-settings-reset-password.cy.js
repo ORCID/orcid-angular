@@ -10,9 +10,8 @@ describe('Account Settings - users can reset their password', async function () 
 
   it('Verify user is able to reset the password to a different valid password and log in', function () {
     cy.get('#cy-user-info').click()
-    cy.get('#cy-account-settings').click()
-    cy.wait(3000)
-    cy.get('#cy-password-panel-action-more').click()
+    cy.get('#cy-account-settings').wait(1000).click({ force: true })
+    cy.get('#cy-password-panel-action-more').wait(1000).click({ force: true })
     cy.get('[formcontrolname="oldPassword"]')
       .clear()
       .type(userData.cyAcctSettRestPasswUser.password)

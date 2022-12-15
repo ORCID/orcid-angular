@@ -37,12 +37,14 @@
         <a
           *ngIf="!displayTheStack && stackLength > 1"
           (click)="toggleStackMode()"
+          [attr.aria-label]="openOtherSources"
         >
           (<ng-container i18n="@@shared.of">of</ng-container>
           {{ stackLength }})&#x200E;
         </a>
         <a
           (click)="toggleStackMode()"
+          [attr.aria-label]="closeOtherSources"
           *ngIf="stackLength > 1 && displayTheStack"
         >
           <ng-container i18n="@@shared.closeOtherSources"
@@ -56,11 +58,7 @@
       class="preferred-source"
       *ngIf="!isPreferred && stackLength > 1 && !isPublicRecord"
     >
-      <a
-        (click)="clickMakePrimary()"
-        *ngIf="stackLength > 1"
-        i18n="@@record.closeOtherSources"
-      >
+      <a (click)="clickMakePrimary()" *ngIf="stackLength > 1">
         Make preferred source
       </a>
     </div>
@@ -69,11 +67,13 @@
     <button
       mat-icon-button
       [matTooltip]="labelDeleteButton"
-      [attr.aria-label]="labelDeleteButton"
+      [attr.aria-label]="
+        type | appPanelActivityActionAriaLabel: 'delete':this.panelTitle
+      "
       (click)="delete()"
       *ngIf="(stackLength > 1 && displayTheStack) || stackLength === 1"
     >
-      <mat-icon class="large-material-icon" id="delete-button">
+      <mat-icon class="large-material-icon delete-button">
         delete_outline
       </mat-icon>
     </button>

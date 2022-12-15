@@ -45,7 +45,7 @@ A `.scss` file can be created inside the component folder, to declare a theme mi
 Following the name convection of `<component-name>.scss-theme.scss` (proposed on the post [The complete guide to Angular Material Themes](https://medium.com/@tomastrajan/the-complete-guide-to-angular-material-themes-4d165a9d24d1)), create a new file with the following content:
 
 ```
-@import '~@angular/material/theming';
+@import '@angular/material/theming';
 @mixin <component-name>-theme($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);

@@ -1,6 +1,6 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core'
-import { FormControl, FormGroup } from '@angular/forms'
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms'
 import { MatDialogRef } from '@angular/material/dialog'
 import { cloneDeep } from 'lodash'
 import { Subject } from 'rxjs'
@@ -27,12 +27,14 @@ export class ModalPersonIdentifiersComponent implements OnInit, OnDestroy {
     private _platform: PlatformInfoService
   ) {}
 
-  personIdentifiersForm: FormGroup = new FormGroup({})
+  personIdentifiersForm: UntypedFormGroup = new UntypedFormGroup({})
   personIdentifiers: Assertion[]
   originalPersonalIdentifiers: PersonIdentifierEndpoint
   isMobile: boolean
   screenDirection = 'ltr'
   loadingPersonalIdentifiers = true
+
+  dialogAriaLabelledBy = $localize`:@@shared.dialogAriaLabeledByOtherIds:Manage your other IDs dialog`
 
   ngOnInit(): void {
     this._recordPersonalIdentifiers
@@ -56,17 +58,19 @@ export class ModalPersonIdentifiersComponent implements OnInit, OnDestroy {
 
   backendJsonToForm(emailEndpointJson: PersonIdentifierEndpoint) {
     const personIdentifiers = emailEndpointJson.externalIdentifiers
-    const group: { [key: string]: FormGroup } = {}
+    const group: { [key: string]: UntypedFormGroup } = {}
 
     personIdentifiers.forEach((personId) => {
-      group[personId.putCode] = new FormGroup({
-        visibility: new FormControl(personId.visibility.visibility, {}),
+      group[personId.putCode] = new UntypedFormGroup({
+        visibility: new UntypedFormControl(personId.visibility.visibility, {}),
       })
     })
-    this.personIdentifiersForm = new FormGroup(group)
+    this.personIdentifiersForm = new UntypedFormGroup(group)
   }
 
-  formToBackend(personIdentifiersForm: FormGroup): PersonIdentifierEndpoint {
+  formToBackend(
+    personIdentifiersForm: UntypedFormGroup
+  ): PersonIdentifierEndpoint {
     const personIdentifiers: PersonIdentifierEndpoint = {
       errors: [],
       externalIdentifiers: [],

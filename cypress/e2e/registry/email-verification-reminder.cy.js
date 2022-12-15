@@ -25,11 +25,10 @@ describe('Primary account email verification reminders', async function () {
     cy.get('#signin-button').click()
 
     //request to get reminder email to verify primary account email
-
-    cy.get('[class="row resend-verification"]')
-      .get('[mat-raised-button]')
-      .contains('Resend')
-      .click()
+    cy.get('#biography-panel').within(($myPanel) => {
+      cy.get('.cy-edit-button').click()
+    })
+    cy.contains('Resend verification email').click()
 
     //use gmail api to check verification email was sent
     cy.task('checkInbox_from_to_subject', {

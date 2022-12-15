@@ -46,7 +46,8 @@ describe('Password reset and OID recovery', () => {
     //confirm new passw
     cy.get('#cy-password-confirm-input').clear().type(newPassword)
     //save
-    cy.get('#cy-save-password', { timeout: 6000 }).click()
+    cy.wait(2000) //need to wait for button to become enabled
+    cy.get('#cy-save-password').should('be.enabled').click({ force: true })
 
     //verify user is redirected to Sign in page
     cy.url().should('contain', Cypress.env('signInURL'))

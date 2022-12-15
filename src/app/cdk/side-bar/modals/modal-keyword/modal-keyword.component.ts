@@ -9,7 +9,11 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core'
-import { FormControl, FormGroup, Validators } from '@angular/forms'
+import {
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { cloneDeep } from 'lodash'
 import { Subject } from 'rxjs'
@@ -42,7 +46,7 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
   id: string
   addedKeywordsCount = 0
   userRecord: UserRecord
-  keywordsForm: FormGroup
+  keywordsForm: UntypedFormGroup
   keywords: Assertion[]
   defaultVisibility: VisibilityStrings
   originalBackendKeywords: KeywordEndPoint
@@ -54,6 +58,7 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
   keywordMaxLength = 99
 
   ngOrcidKeyword = $localize`:@@topBar.keyword:Keyword`
+  dialogAriaLabelledBy = $localize`:@@shared.dialogAriaLabeledByKeywords:Manage your keywords dialog`
 
   constructor(
     @Inject(WINDOW) private window: Window,
@@ -96,11 +101,11 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
 
   backendJsonToForm(keywordEndpointJson: KeywordEndPoint) {
     const keywords = keywordEndpointJson.keywords
-    const group: { [key: string]: FormGroup } = {}
+    const group: { [key: string]: UntypedFormGroup } = {}
 
     keywords.forEach((keyword) => {
-      group[keyword.putCode] = new FormGroup({
-        content: new FormControl(
+      group[keyword.putCode] = new UntypedFormGroup({
+        content: new UntypedFormControl(
           {
             value: keyword.content,
             disabled: keyword.source !== this.id,
@@ -110,13 +115,13 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
             updateOn: 'change',
           }
         ),
-        visibility: new FormControl(keyword.visibility.visibility, {}),
+        visibility: new UntypedFormControl(keyword.visibility.visibility, {}),
       })
     })
-    this.keywordsForm = new FormGroup(group)
+    this.keywordsForm = new UntypedFormGroup(group)
   }
 
-  formToBackend(keywordsForm: FormGroup): KeywordEndPoint {
+  formToBackend(keywordsForm: UntypedFormGroup): KeywordEndPoint {
     const keywords = {
       errors: [],
       keywords: [],
@@ -170,12 +175,12 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
     const newPutCode = 'new-' + this.addedKeywordsCount
     this.keywordsForm.addControl(
       newPutCode,
-      new FormGroup({
-        content: new FormControl('', {
+      new UntypedFormGroup({
+        content: new UntypedFormControl('', {
           validators: [Validators.maxLength(this.keywordMaxLength)],
           updateOn: 'change',
         }),
-        visibility: new FormControl(this.defaultVisibility, {}),
+        visibility: new UntypedFormControl(this.defaultVisibility, {}),
       })
     )
     this.keywords.push({

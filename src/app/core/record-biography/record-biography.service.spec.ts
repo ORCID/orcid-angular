@@ -10,6 +10,7 @@ import { SnackbarService } from '../../cdk/snackbar/snackbar.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatDialog } from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
+import { BiographyEndPoint } from '../../types/record-biography.endpoint'
 
 describe('RecordBiographyService', () => {
   let service: RecordBiographyService
@@ -34,3 +35,10 @@ describe('RecordBiographyService', () => {
     expect(service).toBeTruthy()
   })
 })
+
+export function getBiographyEndPoint() {
+  return {
+    biography: { value: 'My Biography' },
+    visibility: { visibility: 'PUBLIC' },
+  } as BiographyEndPoint
+}

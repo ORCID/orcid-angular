@@ -25,6 +25,7 @@ import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed'
 import { MatCheckboxHarness } from '@angular/material/checkbox/testing'
 import { By } from '@angular/platform-browser'
 import { Contributor } from '../../../../../types'
+import { TogglzService } from 'src/app/core/togglz/togglz.service'
 
 describe('WorkDoiBibtexModalComponent', () => {
   let component: WorkBibtexModalComponent
@@ -57,6 +58,15 @@ describe('WorkDoiBibtexModalComponent', () => {
         { provide: RecordWorksService, useValue: fakeRecordWorksService },
         { provide: MatDialogRef, useValue: {} },
         { provide: MAT_DIALOG_DATA, useValue: {} },
+        {
+          provide: TogglzService,
+          useValue: {
+            getStateOf: (x) => {
+              return of(true)
+            },
+          },
+        },
+
         WINDOW_PROVIDERS,
         PlatformInfoService,
         ErrorHandlerService,
@@ -107,7 +117,6 @@ describe('WorkDoiBibtexModalComponent', () => {
     await delay(100)
 
     await fixture.detectChanges()
-
     const workWithContributors = component.worksFromBibtex[3]
     const contributors = workWithContributors.contributorsGroupedByOrcid
     const authors = filterContributorsByRole(contributors, 'author')

@@ -1,4 +1,4 @@
-@import '~@angular/material/theming';
+@use '@angular/material' as mat;
 @import 'src/assets/scss/material.orcid-theme.scss';
 
 @mixin app-menu-icon-theme($theme) {
@@ -11,13 +11,13 @@
   .hamburger__icon {
     &.open {
       span {
-        background: mat-color($accent, '500-contrast');
+        background: mat.get-color-from-palette($accent, '500-contrast');
       }
     }
   }
   .hamburger__icon {
     span {
-      background: mat-color($accent, '500-contrast');
+      background: mat.get-color-from-palette($accent, '500-contrast');
     }
   }
 }

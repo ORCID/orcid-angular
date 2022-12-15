@@ -16,17 +16,17 @@ export class EnvironmentBannerComponent implements OnInit {
   labelWarning = $localize`:@@environmentBanner.ariaLabelWarning:Warning, testing website`
   constructor(
     @Inject(WINDOW) private window: Window,
-    private _cs: CookieService
+    private _cookieService: CookieService
   ) {
     this.hostUrl = window.location.host
-    if (!this._cs.get('testWarningCookie') || !this.canDismiss) {
+    if (!this._cookieService.get('testWarningCookie') || !this.canDismiss) {
       this.display = 'auto'
     }
   }
 
   onDismiss() {
     this.display = 'none'
-    this._cs.set('testWarningCookie', 'dont show message', 365)
+    this._cookieService.set('testWarningCookie', 'dont show message', 365)
   }
 
   ngOnInit() {}

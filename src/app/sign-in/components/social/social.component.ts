@@ -23,12 +23,10 @@ export class SocialComponent implements OnInit {
   labelFacebookButton = $localize`:@@ngOrcid.signin.facebook:Sign in with Facebook`
 
   constructor(
-    private _signIn: SignInService,
-    private _oauth: OauthService,
-    private _cookie: CookieService,
     private _platformInfo: PlatformInfoService,
     private _router: Router,
     @Inject(WINDOW) private window: Window,
+    private _cookie: CookieService,
     _platform: PlatformInfoService
   ) {
     _platform.get().subscribe((data) => {

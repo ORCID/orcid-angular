@@ -8,6 +8,7 @@
 >
   <!-- A PANEL COMPONENT FOR EACH WORK ON THE STACK -->
   <app-panel
+    panelId="work-stack"
     [showVisibilityControl]="isPreferred(work)"
     [stackSiblings]="workStack.works"
     [userRecord]="userRecord"
@@ -30,8 +31,9 @@
     [visibilityError]="workStack.visibilityError"
     #panelsComponent
     [type]="'works'"
+    [panelTitle]="work.title.value"
   >
-    <h2 header class="orc-font-body">{{ work.title.value }}</h2>
+    <h4 header class="work-title orc-font-body">{{ work.title.value }}</h4>
     <!-- WORK BODY -->
     <app-work
       *ngIf="stackPanelsDisplay[work.putCode.value].topPanelOfTheStack"
@@ -60,6 +62,7 @@
       (topPanelOfTheStackModeChange)="changeTopPanelOfTheStack(work)"
       [type]="'works'"
       [item]="work"
+      [panelTitle]="work.title.value"
     >
     </app-panel-source>
   </app-panel>

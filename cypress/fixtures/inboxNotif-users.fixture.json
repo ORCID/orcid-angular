@@ -1,0 +1,29 @@
+{
+  "cyUserMemmerAPI": {
+    "clientID": "APP-6RTM54FDADENEKUK",
+    "clientSecret": "95533ab6-3594-40a7-98b8-c8db637f2514",
+    "orcidMember": "0000-0003-0667-1019",
+    "bearer": "2900e981-b9d3-488b-9106-ed70a241d54b"
+  },
+  "cyNotifPerm": {
+    "oid": "0000-0002-5078-7150",
+    "password": "test1234",
+    "clientBearer": "a4320bf6-868b-4007-a2fa-aa534b6083f1",
+    "curlPermissionNotifPath": "@cypress/fixtures/permission_notification.fixture.json",
+    "curlEmploymentPath": "@cypress/fixtures/inbox-notif-fixtures/employment.fixture.json",
+    "curlEmploymentUpdatePath": "@cypress/fixtures/inbox-notif-fixtures/put-employment.fixture.json",
+    "contentToBeReplaced": "Awesome",
+    "replaceWith": "AMAZING",
+    "putWriteFilePath": "cypress/fixtures/inbox-notif-fixtures/put-employment.fixture.json",
+    "curlWorkPath": "@cypress/fixtures/inbox-notif-fixtures/work-inbox-notif.fixture.json",
+    "curlWorkUpdatePath": "@cypress/fixtures/inbox-notif-fixtures/put-work.fixture.json",
+    "workToBeReplaced": "Work added via API",
+    "workReplaceWith": "Work updated via API",
+    "work_putWriteFilePath": "cypress/fixtures/inbox-notif-fixtures/put-work.fixture.json",
+    "curlFundingPath": "@cypress/fixtures/inbox-notif-fixtures/funding-inbox-notif.fixture.json",
+    "curlFundingUpdatePath": "@cypress/fixtures/inbox-notif-fixtures/put-funding.fixture.json",
+    "fundingToBeReplaced": "2022",
+    "fundingReplaceWith": "2000",
+    "funding_putWriteFilePath": "cypress/fixtures/inbox-notif-fixtures/put-funding.fixture.json"
+  }
+}

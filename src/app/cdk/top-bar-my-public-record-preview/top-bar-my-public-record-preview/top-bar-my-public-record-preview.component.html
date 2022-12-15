@@ -1,10 +1,12 @@
-<div
+<section
+  [id]="'status-bar'"
+  role="region"
+  [attr.aria-label]="regionStatusBar"
   *ngIf="iAmEditingThisRecord && isPublicRecord"
   [ngClass]="{ 'yellow-bg': !isMyRecord }"
 >
   <div class="container">
     <div class="content">
-      <mat-icon class="margin-end">preview</mat-icon>
       <div
         class="margin-end"
         i18n="@@topBar.youArePreviewing"
@@ -32,9 +34,12 @@
   </div>
 
   <mat-divider class="bottom-divider"></mat-divider>
-</div>
+</section>
 
-<div
+<section
+  [id]="'status-bar'"
+  role="region"
+  [attr.aria-label]="regionStatusBar"
   *ngIf="
     iAmEditingThisRecord &&
     (trustedIndividuals?.delegators?.length || trustedIndividuals?.me) &&
@@ -46,7 +51,6 @@
 
   <div class="container">
     <div class="content">
-      <mat-icon class="margin-end">preview</mat-icon>
       <div
         class="margin-end"
         i18n="@@topBar.youAreManaging"
@@ -80,4 +84,4 @@
     class="bottom-divider"
     [ngClass]="{ orange: isPublicRecord, green: !isPublicRecord && isMyRecord }"
   ></mat-divider>
-</div>
+</section>

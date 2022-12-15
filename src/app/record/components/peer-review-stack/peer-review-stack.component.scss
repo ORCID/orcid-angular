@@ -21,6 +21,10 @@
 app-panel {
   word-break: break-word;
 
+  .research-resources-title {
+    margin: 0;
+  }
+
   p {
     margin-top: 0;
     margin-bottom: 5px;

@@ -60,11 +60,10 @@
         }"
       >
         <a
-          class="underline"
+          class="underline show-more-button"
           *ngIf="!researchResource?.showDetails"
           (click)="getDetails(researchResource, researchResource.putCode)"
           i18n="@@shared.showMoreDetail"
-          id="show-more-button"
         >
           Show more detail
         </a>
@@ -141,6 +140,7 @@
       </div>
       <div *ngFor="let item of researchDetail.items; index as i">
         <app-panel
+          panelId="research-resource"
           [elements]="item"
           [type]="'top-bar'"
           [editable]="false"

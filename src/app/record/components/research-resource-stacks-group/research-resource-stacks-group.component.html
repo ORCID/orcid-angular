@@ -1,6 +1,12 @@
-<ng-container *ngIf="!(researchResources?.groups?.length === 0)">
+<section
+  id="research-resources"
+  role="region"
+  [attr.aria-label]="regionResearchResources"
+  *ngIf="
+    researchResources?.groups && !(researchResources?.groups?.length === 0)
+  "
+>
   <app-panels
-    *ngIf="researchResources?.groups"
     class="row"
     [title]="ngOrcidResearchResources"
     [type]="'research-resources'"
@@ -9,7 +15,6 @@
     [(expandedContent)]="expandedContent['RESEARCH_RESOURCE']"
     (expandedContentChange)="expandedContentChange.emit(expandedContent)"
     id="research-resources-panel"
-    [labelSortButton]="labelSortButton"
     [sortTypes]="['date', 'title']"
     [sortType]="'date'"
     [sortDirection]="'desc'"
@@ -72,4 +77,4 @@
       *ngIf="paginationLoading"
     ></mat-progress-bar>
   </app-panels>
-</ng-container>
+</section>

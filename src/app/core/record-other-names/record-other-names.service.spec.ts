@@ -10,6 +10,8 @@ import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatDialog } from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
+import { OtherNamesEndPoint } from '../../types/record-other-names.endpoint'
+import { Assertion } from '../../types'
 
 describe('RecordOtherNamesService', () => {
   let service: RecordOtherNamesService
@@ -34,3 +36,16 @@ describe('RecordOtherNamesService', () => {
     expect(service).toBeTruthy()
   })
 })
+
+export function getOtherNamesEndPoint(): OtherNamesEndPoint {
+  return {
+    otherNames: [
+      {
+        content: 'Published Name',
+        putCode: '1',
+        visibility: { visibility: 'PUBLIC' },
+      } as Assertion,
+    ],
+    visibility: { visibility: 'PUBLIC' },
+  } as OtherNamesEndPoint
+}

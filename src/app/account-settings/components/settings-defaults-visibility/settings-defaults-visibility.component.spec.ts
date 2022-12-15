@@ -4,7 +4,7 @@ import { SettingsDefaultsVisibilityComponent } from './settings-defaults-visibil
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 import { RecordService } from '../../../core/record/record.service'
-import { FormBuilder } from '@angular/forms'
+import { UntypedFormBuilder } from '@angular/forms'
 import { WINDOW_PROVIDERS } from '../../../cdk/window'
 import { RegisterService } from '../../../core/register/register.service'
 import { PlatformInfoService } from '../../../cdk/platform-info'
@@ -26,7 +26,7 @@ describe('SettingsDefaultsVisibilityComponent', () => {
       providers: [
         WINDOW_PROVIDERS,
         AccountDefaultVisibilityService,
-        FormBuilder,
+        UntypedFormBuilder,
         RecordService,
         PlatformInfoService,
         ErrorHandlerService,

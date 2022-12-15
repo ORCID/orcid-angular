@@ -2,14 +2,14 @@ import {
   AbstractControl,
   AsyncValidator,
   ControlValueAccessor,
-  FormGroup,
+  UntypedFormGroup,
   ValidationErrors,
 } from '@angular/forms'
 import { merge, Observable, timer } from 'rxjs'
 import { filter, map, startWith, take } from 'rxjs/operators'
 
 export abstract class BaseForm implements ControlValueAccessor, AsyncValidator {
-  public form: FormGroup
+  public form: UntypedFormGroup
   public onTouchedFunction
   constructor() {}
   writeValue(val: any): void {

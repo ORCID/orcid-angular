@@ -20,7 +20,7 @@
       [(ngModel)]="whatToSearch"
       [placeholder]="searchPlaceHolder"
       type="text"
-      [attr.aria-label]="labelSearch"
+      [attr.aria-label]="labelSearchBy"
       id="cy-search"
     />
   </div>
@@ -35,13 +35,3 @@
     <mat-icon matSuffix>search</mat-icon>
   </button>
 </form>
-
-<mat-menu #menu="matMenu">
-  <button
-    mat-menu-item
-    *ngFor="let item of whereToSearch"
-    (click)="changeWhereToSearch(item)"
-  >
-    {{ item }}
-  </button>
-</mat-menu>

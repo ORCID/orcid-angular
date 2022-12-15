@@ -17,6 +17,8 @@ export class TrustedIndividualsDropdownComponent implements OnInit {
   _trustedIndividuals: TrustedIndividuals
   delegators: Delegator[]
   switchToMeAccount: Delegator
+  labelSwitchAccount = $localize`:@@delegators.ariaLabelswitchAccount:Switch to managing another ORCID account`
+
   @Input()
   set trustedIndividuals(value: TrustedIndividuals) {
     this.delegators = value.delegators

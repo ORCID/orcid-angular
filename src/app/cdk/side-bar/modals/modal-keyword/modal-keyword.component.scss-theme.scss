@@ -1,4 +1,4 @@
-@import '~@angular/material/theming';
+@use '@angular/material' as mat;
 @import 'src/assets/scss/material.orcid-theme.scss';
 
 @mixin modal-keyword-theme($theme) {
@@ -17,7 +17,7 @@
     color: map-get($background, ui-background);
   }
   :host ::ng-deep mat-form-field.email-activated mat-icon {
-    color: mat-color($accent, 400);
+    color: mat.get-color-from-palette($accent, 400);
   }
 }
 

@@ -1,4 +1,12 @@
-<div>
+<section
+  id="personal-information"
+  role="region"
+  [attr.aria-label]="regionPersonalInformation"
+  *ngIf="!hideOrcidId || !orcidId"
+>
+  <h2 class="sr-only" i18n="@@shared.personalInformation">
+    Personal information
+  </h2>
   <app-side-bar-id
     *ngIf="!hideOrcidId"
     [ngClass]="{
@@ -10,6 +18,7 @@
 
   <ng-container *ngIf="!orcidId">
     <app-panel
+      panelId="emails-panel"
       expandButtonsPosition="right"
       [isPublicRecord]="isPublicRecord"
       [elements]="userRecord.emails.emails"
@@ -25,7 +34,7 @@
       "
       [userRecord]="userRecord"
     >
-      <h2 header class="orc-font-body" i18n="@@shared.emails">Emails</h2>
+      <h3 header class="orc-font-body" i18n="@@shared.emails">Emails</h3>
       <app-panel-data *ngIf="userRecord.emails.emails.length > 0">
         <app-panel-element
           *ngFor="let email of userRecord.emails.emails; let last = last"
@@ -50,6 +59,7 @@
     </app-panel>
 
     <app-panel
+      panelId="websites-panel"
       expandButtonsPosition="right"
       [elements]="userRecord.website.websites"
       [editModalComponent]="modalWebsitesComponent"
@@ -65,15 +75,16 @@
         (!isPublicRecord || userRecord.website.websites.length > 0)
       "
     >
-      <h2 header class="orc-font-body" i18n="@@record.websitesAndSocialLinks">
+      <h3 header class="orc-font-body" i18n="@@record.websitesAndSocialLinks">
         Websites & social links
-      </h2>
+      </h3>
       <app-panel-data *ngIf="userRecord.website.websites.length > 0">
         <app-panel-element
           [isPublicRecord]="isPublicRecord"
           *ngFor="let website of userRecord.website.websites; let last = last"
           [visibility]="!isPublicRecord && website.visibility.visibility"
           ><a
+            tabindex="-1"
             [href]="website.url.value"
             [ngClass]="{
               'orc-font-body-small': getWebsite(website).length > 20
@@ -98,6 +109,7 @@
     </app-panel>
 
     <app-panel
+      panelId="personal-identifiers-panel"
       expandButtonsPosition="right"
       *ngIf="
         userRecord?.externalIdentifier?.externalIdentifiers &&
@@ -112,7 +124,7 @@
       [(openState)]="externalIdentifierOpenState"
       [userRecord]="userRecord"
     >
-      <h2 header class="orc-font-body" i18n="@@record.otherIds">Other IDs</h2>
+      <h3 header class="orc-font-body" i18n="@@record.otherIds">Other IDs</h3>
       <app-panel-data
         *ngIf="userRecord?.externalIdentifier.externalIdentifiers.length > 0"
       >
@@ -127,6 +139,7 @@
             !isPublicRecord && externalIdentifier.visibility.visibility
           "
           ><a
+            tabindex="-1"
             [href]="externalIdentifier.url"
             target="_blank"
             rel="me nofollow noopener noreferrer"
@@ -152,6 +165,7 @@
       </app-panel-data>
     </app-panel>
     <app-panel
+      panelId="keywords-panel"
       expandButtonsPosition="right"
       *ngIf="
         userRecord?.keyword?.keywords &&
@@ -167,7 +181,7 @@
       [id]="userInfo?.EFFECTIVE_USER_ORCID"
       [userRecord]="userRecord"
     >
-      <h2 header class="orc-font-body" i18n="@@record.keywords">Keywords</h2>
+      <h3 header class="orc-font-body" i18n="@@record.keywords">Keywords</h3>
       <app-panel-data *ngIf="userRecord.keyword.keywords.length > 0">
         <ng-container *ngIf="!isPublicRecord">
           <app-panel-element
@@ -220,6 +234,7 @@
       </app-panel-data>
     </app-panel>
     <app-panel
+      panelId="countries-panel"
       expandButtonsPosition="right"
       *ngIf="
         userRecord?.countries?.addresses &&
@@ -235,7 +250,7 @@
       [id]="userInfo?.EFFECTIVE_USER_ORCID"
       [userRecord]="userRecord"
     >
-      <h2 header class="orc-font-body" i18n="@@record.countries">Countries</h2>
+      <h3 header class="orc-font-body" i18n="@@record.countries">Countries</h3>
       <app-panel-data *ngIf="userRecord.countries.addresses.length > 0">
         <ng-container *ngIf="!isPublicRecord">
           <app-panel-element
@@ -289,4 +304,4 @@
       </app-panel-data>
     </app-panel>
   </ng-container>
-</div>
+</section>

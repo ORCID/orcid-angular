@@ -8,7 +8,7 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core'
-import { FormGroup } from '@angular/forms'
+import { UntypedFormGroup } from '@angular/forms'
 import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox'
 import { MatDialog } from '@angular/material/dialog'
 import { PageEvent } from '@angular/material/paginator'
@@ -59,8 +59,11 @@ import { GroupingSuggestions } from 'src/app/types/works.endpoint'
 export class WorkStackGroupComponent implements OnInit {
   showManageSimilarWorks = false
   defaultPageSize = DEFAULT_PAGE_SIZE
+  regionWorks = $localize`:@@shared.works:Works`
   labelAddButton = $localize`:@@shared.addWork:Add Work`
   labelSortButton = $localize`:@@shared.sortWorks:Sort Works`
+  labelSelectAll = $localize`:@@share.selectAllWorks:Select all Works on this page`
+
   paginationLoading = true
   @Input() userInfo: UserInfo
   @Input() isPublicRecord: string
@@ -111,10 +114,10 @@ export class WorkStackGroupComponent implements OnInit {
 
   userRecord: UserRecord
   workGroup: WorksEndpoint
-  workStackGroupForm: FormGroup = new FormGroup({})
+  workStackGroupForm: UntypedFormGroup = new UntypedFormGroup({})
 
   works = $localize`:@@shared.works:Works`
-  labelActionsButton = $localize`:@@shared.actions:Actions`
+  labelActionsButton = $localize`:@@shared.ariaLabelActions:Choose an action to apply to selected works`
   paginationTotalAmountOfWorks: number
   paginationIndex: number
   paginationPageSize: number

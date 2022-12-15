@@ -1,6 +1,7 @@
 import {
   Component,
   EventEmitter,
+  Input,
   OnDestroy,
   OnInit,
   Output,
@@ -22,8 +23,8 @@ export class ModalHeaderComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   @Output() close = new EventEmitter<boolean>()
+  @Input() closeLabel = $localize`:@@shared.ariaLabelClose:Close`
   platform: PlatformInfo
-  closeLabel = $localize`:@@shared.ariaLabelClose:Close`
 
   constructor(
     private dialogReg: MatDialogRef<any>,

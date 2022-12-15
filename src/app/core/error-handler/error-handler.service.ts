@@ -1,12 +1,12 @@
 import { HttpErrorResponse } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { CookieService } from 'ngx-cookie-service'
 import { of, throwError } from 'rxjs'
 import { catchError, switchMap, take } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { ErrorReport } from 'src/app/types'
 import { ERROR_REPORT } from 'src/app/errors'
+import { CookieService } from 'ngx-cookie-service'
 
 @Injectable({
   providedIn: 'root',
@@ -14,8 +14,8 @@ import { ERROR_REPORT } from 'src/app/errors'
 export class ErrorHandlerService {
   browserSupport = 'unchecked'
   constructor(
-    private _platform: PlatformInfoService,
     private _cookie: CookieService,
+    private _platform: PlatformInfoService,
     private _snackBar: SnackbarService
   ) {
     this.checkBrowser()

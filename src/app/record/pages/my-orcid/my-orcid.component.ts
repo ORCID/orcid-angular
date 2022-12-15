@@ -32,6 +32,9 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   affiliations: number
   userInfo: UserInfo
   userRecord: UserRecord
+  collapseAllActivitiesArialLabel = $localize`:@@shared.collapseAllActivitiesArialLabel:Collapse all activity sections`
+  expandAllActivitiesArialLabel = $localize`:@@shared.expandAllActivitiesArialLabel:Expand all all activity sections`
+
   expandedContent: MainPanelsState = {
     EMPLOYMENT: true,
     EDUCATION_AND_QUALIFICATION: true,
@@ -52,6 +55,8 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   loadingUserRecord: boolean
   globalExpandState = true
   initMyOrcidParameter = false
+
+  regionActivities = $localize`:@@shared.activities:Activities`
 
   constructor(
     _userInfoService: UserInfoService,

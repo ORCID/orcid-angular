@@ -9,16 +9,15 @@ import {
 import { ContributionRoles, Role } from '../../../types/works.endpoint'
 import {
   ControlContainer,
-  FormArray,
-  FormBuilder,
-  FormGroup,
+  UntypedFormArray,
+  UntypedFormBuilder,
+  UntypedFormGroup,
   FormGroupDirective,
 } from '@angular/forms'
 import { Contributor } from '../../../types'
 import { UserRecord } from '../../../types/record.local'
 import { unique } from '../../../shared/validators/unique/unique.validator'
 import { RecordWorksService } from '../../../core/record-works/record-works.service'
-import { tap } from 'rxjs/operators'
 import { MatSelect } from '@angular/material/select'
 
 @Component({
@@ -34,8 +33,10 @@ export class WorkContributorRolesComponent implements OnInit {
 
   _contributors: Contributor[]
   @Input() userRecord: UserRecord
+  @Input() recordHolderAsContributor: boolean
 
   contributionRoles = ContributionRoles
+  recordHolder: Contributor
 
   ngOrcidSelectRole = $localize`:@@works.pleaseSelectRole:Please select a role`
 
@@ -50,13 +51,13 @@ export class WorkContributorRolesComponent implements OnInit {
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private parentForm: FormGroupDirective,
     private workService: RecordWorksService
   ) {}
 
   get roles() {
-    return this.parentForm.control.controls['roles'] as FormArray
+    return this.parentForm.control.controls['roles'] as UntypedFormArray
   }
 
   ngOnInit(): void {
@@ -83,23 +84,31 @@ export class WorkContributorRolesComponent implements OnInit {
   }
 
   private initializeFormArray(): void {
-    this.parentForm.control.setControl('roles', new FormArray([]))
-    if (this.contributors) {
-      const rolesAndSequences = this.getRecordHolderContribution()
-        ?.rolesAndSequences
-      if (rolesAndSequences?.length > 0) {
-        const roles = rolesAndSequences
-          .filter((roleAndSequence) => roleAndSequence.contributorRole)
-          .map((rolesAndSequence) => rolesAndSequence.contributorRole)
-        if (roles?.length > 0) {
-          roles.forEach((rs) => {
-            const role = this.workService.getContributionRoleByKey(rs)
-            if (rs && role) {
-              this.addRoleFormGroup(role.key, true)
-            } else {
-              this.addRoleFormGroup(rs, true)
-            }
-          })
+    this.parentForm.control.setControl('roles', new UntypedFormArray([]))
+    this.recordHolder = this.getRecordHolderContribution()
+    if (!this.recordHolderAsContributor || this.recordHolder) {
+      if (this.contributors) {
+        const rolesAndSequences = this.recordHolder?.rolesAndSequences
+        if (rolesAndSequences?.length > 0) {
+          const roles = rolesAndSequences
+            .filter((roleAndSequence) => roleAndSequence.contributorRole)
+            .map((rolesAndSequence) => rolesAndSequence.contributorRole)
+          if (roles?.length > 0) {
+            roles.forEach((rs) => {
+              const role = this.workService.getContributionRoleByKey(rs)
+              if (rs && role) {
+                this.addRoleFormGroup(role.key, true)
+              } else {
+                this.addRoleFormGroup(rs, true)
+              }
+            })
+          } else {
+            this.addRoleFormGroup(
+              this.workService.getContributionRoleByKey('no specified role')
+                .key,
+              false
+            )
+          }
         } else {
           this.addRoleFormGroup(
             this.workService.getContributionRoleByKey('no specified role').key,
@@ -112,11 +121,6 @@ export class WorkContributorRolesComponent implements OnInit {
           false
         )
       }
-    } else {
-      this.addRoleFormGroup(
-        this.workService.getContributionRoleByKey('no specified role').key,
-        false
-      )
     }
   }
 
@@ -124,7 +128,7 @@ export class WorkContributorRolesComponent implements OnInit {
     this.roles.push(this.getRoleForm(role, disabled))
   }
 
-  private getRoleForm(role?: string, disabled?: boolean): FormGroup {
+  private getRoleForm(role?: string, disabled?: boolean): UntypedFormGroup {
     return this.formBuilder.group({
       role: [
         {

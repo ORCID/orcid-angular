@@ -1,4 +1,4 @@
-@import '~@angular/material/theming';
+@use '@angular/material' as mat;
 @import 'src/assets/scss/material.orcid-theme.scss';
 
 @mixin search-theme($theme) {
@@ -9,40 +9,40 @@
   $background: map-get($theme, background);
 
   .search-where {
-    background-color: mat-color($background, dark-grey);
-    color: mat-contrast($primary, 500);
+    background-color: mat.get-color-from-palette($background, dark-grey);
+    color: mat.get-contrast-color-from-palette($primary, 500);
   }
   .input-box {
     input::placeholder {
-      color: mat-contrast($accent, 200);
+      color: mat.get-contrast-color-from-palette($accent, 200);
     }
     input {
-      border-color: mat-color($background, dark-grey);
+      border-color: mat.get-color-from-palette($background, dark-grey);
     }
   }
   .input-box-new-info {
     input {
-      border: solid 1px mat-color($background, grey);
+      border: solid 1px mat.get-color-from-palette($background, grey);
     }
 
     ::placeholder {
-      color: mat-color($background, grey);
+      color: mat.get-color-from-palette($background, grey);
     }
 
     :-ms-input-placeholder {
       /* Internet Explorer 10-11 */
-      color: mat-color($background, grey);
+      color: mat.get-color-from-palette($background, grey);
     }
   }
 
   .search-icon {
-    background-color: mat-color($background, dark-grey);
-    color: mat-contrast($primary, 500);
+    background-color: mat.get-color-from-palette($background, dark-grey);
+    color: mat.get-contrast-color-from-palette($primary, 500);
   }
   .columns-4,
   .columns-8 {
     .search-box & {
-      background-color: mat-color($background, light-grey);
+      background-color: mat.get-color-from-palette($background, light-grey);
     }
   }
 }

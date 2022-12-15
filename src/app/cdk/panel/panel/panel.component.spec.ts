@@ -17,14 +17,29 @@ import { RecordPeerReviewService } from '../../../core/record-peer-review/record
 import { RecordResearchResourceService } from '../../../core/record-research-resource/record-research-resource.service'
 import { RecordWorksService } from '../../../core/record-works/record-works.service'
 import { VerificationEmailModalService } from '../../../core/verification-email-modal/verification-email-modal.service'
+import { SharedModule } from '../../../shared/shared.module'
+import { MatIconModule } from '@angular/material/icon'
+import { HarnessLoader } from '@angular/cdk/testing'
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed'
+import { MatDialogHarness } from '@angular/material/dialog/testing'
+import { NoopAnimationsModule } from '@angular/platform-browser/animations'
+import { ModalBiographyComponent } from '../../../record/components/top-bar/modals/modal-biography/modal-biography.component'
 
 describe('PanelComponent', () => {
   let component: PanelComponent
   let fixture: ComponentFixture<PanelComponent>
+  let loader: HarnessLoader
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, RouterTestingModule],
+      imports: [
+        HttpClientTestingModule,
+        MatDialogModule,
+        MatIconModule,
+        NoopAnimationsModule,
+        RouterTestingModule,
+        SharedModule,
+      ],
       declarations: [PanelComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -49,9 +64,19 @@ describe('PanelComponent', () => {
     fixture = TestBed.createComponent(PanelComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
+    loader = TestbedHarnessEnvironment.documentRootLoader(fixture)
   })
 
   it('should create', () => {
     expect(component).toBeTruthy()
+  })
+
+  it('should be able to get aria-label of dialog', async () => {
+    component.editModalComponent = ModalBiographyComponent
+    component.open()
+
+    const dialogs = await loader.getAllHarnesses(MatDialogHarness)
+    expect(dialogs.length).toBe(1)
+    expect(await dialogs[0].getAriaLabel()).toBe('Manage your biography dialog')
   })
 })

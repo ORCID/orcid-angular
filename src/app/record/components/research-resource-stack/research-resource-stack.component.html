@@ -7,6 +7,7 @@
   "
 >
   <app-panel
+    panelId="research-resource-stack"
     [stackSiblings]="researchResourceStack.researchResources"
     [showVisibilityControl]="isPreferred(research)"
     class="top-bar"
@@ -18,7 +19,7 @@
     [ngClass]="{ last: last }"
     [editable]="false"
     [openState]="false"
-    [attr.id]="'panel-' + i"
+    [attr.panel-sequence]="'cy-research-resource-stack-panel-' + i"
     [expandButtonsPosition]="'left'"
     [putCode]="research.putCode"
     [visibility]="researchResourceStack.activeVisibility"
@@ -26,11 +27,11 @@
     *ngIf="isPreferred(research) || displayTheStack"
     [stackedHeader]="!platform.columns12"
   >
-    <div header>
+    <h4 header class="research-resources-title">
       <b>
         {{ research.title }}
       </b>
-    </div>
+    </h4>
     <app-research-resource
       *ngIf="stackPanelsDisplay[research.putCode].topPanelOfTheStack"
       [isPublicRecord]="isPublicRecord"

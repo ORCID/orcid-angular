@@ -9,6 +9,7 @@
   <!-- A PANEL COMPONENT FOR EACH AFFILIATION ON THE STACK -->
 
   <app-panel
+    panelId="affiliation-stack"
     [userRecord]="userRecord"
     [elements]="affiliation"
     [stackSiblings]="affiliationStack.affiliations"
@@ -26,8 +27,9 @@
     [hasExternalIds]="hasExternalIdentifiers"
     *ngIf="isPreferred(affiliation) || displayTheStack"
     id="{{ 'cy-affiliation-' + type + '-' + i }}"
+    [panelTitle]="affiliation.affiliationName.value"
   >
-    <h2 header class="orc-font-body">
+    <h4 header class="affiliation-title orc-font-body">
       {{ affiliation.affiliationName.value }}:
 
       <ng-container *ngIf="affiliation.city.value">
@@ -39,7 +41,7 @@
       <ng-container *ngIf="affiliation.country.value">
         {{ affiliation.country.value }}
       </ng-container>
-    </h2>
+    </h4>
     <!-- AFFILIATION BODY -->
     <app-affiliation
       *ngIf="stackPanelsDisplay[affiliation.putCode.value].topPanelOfTheStack"
@@ -66,6 +68,7 @@
       (topPanelOfTheStackModeChange)="changeTopPanelOfTheStack(affiliation)"
       [type]="type"
       [item]="affiliation"
+      [panelTitle]="affiliation.affiliationName.value"
     >
     </app-panel-source>
   </app-panel>

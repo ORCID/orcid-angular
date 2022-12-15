@@ -14,34 +14,39 @@
       <app-panel-expand-buttons
         (toggle)="collapse()"
         [openState]="expandedContent"
+        [panelType]="this.type"
       ></app-panel-expand-buttons>
 
       <div class="text-container">
-        <div class="orc-font-body-large clickable" (click)="collapse()">
-          <strong> {{ title }} </strong>
-          <span
-            *ngIf="currentAmount && total && currentAmount !== total"
-            class="clickable"
-            (click)="collapse()"
-            >({{ currentAmount }}
-            <ng-container i18n="@@shared.of">of</ng-container>
-            {{ total }})</span
-          >
-          <span
-            *ngIf="
-              (currentAmount && !total) ||
-              (currentAmount !== 0 && currentAmount === total)
-            "
-            class="clickable"
-            (click)="collapse()"
-          >
-            ({{ currentAmount }})
-          </span>
-          <span
-            *ngIf="(!currentAmount && total == 0) || (!currentAmount && !total)"
-            >(0)</span
-          >
-          <span *ngIf="!currentAmount && currentAmount !== 0"></span>
+        <div class="clickable" (click)="collapse()">
+          <h3 class="activity-header orc-font-body-large">
+            <strong> {{ title }} </strong>
+            <span
+              *ngIf="currentAmount && total && currentAmount !== total"
+              class="clickable"
+              (click)="collapse()"
+              >({{ currentAmount }}
+              <ng-container i18n="@@shared.of">of</ng-container>
+              {{ total }})</span
+            >
+            <span
+              *ngIf="
+                (currentAmount && !total) ||
+                (currentAmount !== 0 && currentAmount === total)
+              "
+              class="clickable"
+              (click)="collapse()"
+            >
+              ({{ currentAmount }})
+            </span>
+            <span
+              *ngIf="
+                (!currentAmount && total == 0) || (!currentAmount && !total)
+              "
+              >(0)</span
+            >
+            <span *ngIf="!currentAmount && currentAmount !== 0"></span>
+          </h3>
         </div>
         <ng-container> </ng-container>
       </div>
@@ -54,6 +59,7 @@
         class="orc-font-body-small add"
         [attr.aria-label]="labelAddButton"
         (click)="add(type)"
+        [attr.aria-label]="type | appPanelsAddAriaLabel"
         id="{{ 'cy-add-btn-' + type }}"
       >
         <mat-icon class="large-material-icon" id="add-button">
@@ -69,11 +75,11 @@
         "
         mat-button
         class="orc-font-body-small add"
-        [attr.aria-label]="labelAddButton"
+        [attr.aria-label]="type | appPanelsAddAriaLabel"
         [matMenuTriggerFor]="menuAdd"
         id="{{ 'cy-menu-add-' + type }}"
       >
-        <mat-icon class="large-material-icon" id="add-button-multiple">
+        <mat-icon class="large-material-icon add-button-multiple">
           add_circle_outline
         </mat-icon>
         <ng-container i18n="@@shared.add"> Add </ng-container>
@@ -148,7 +154,9 @@
       <button
         mat-button
         class="orc-font-body-small"
-        [attr.aria-label]="labelSortButton"
+        [attr.aria-label]="
+          type | appPanelsSortAriaLabel: !currentAmount && !total
+        "
         [matMenuTriggerFor]="menu"
         [disabled]="!currentAmount && !total"
       >

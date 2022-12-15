@@ -1,4 +1,4 @@
-@import '~@angular/material/theming';
+@use '@angular/material' as mat;
 @import 'src/assets/scss/material.orcid-theme.scss';
 
 @mixin social-theme($theme) {
@@ -8,16 +8,16 @@
 
   .institution {
     background-color: map-get($background, 'seamlessaccess');
-    color: mat-color($primary, default-contrast);
+    color: mat.get-color-from-palette($primary, default-contrast);
   }
 
   .google {
-    border: 1px solid mat-color($background, gray);
+    border: 1px solid mat.get-color-from-palette($background, gray);
   }
 
   .facebook {
     background-color: map-get($background, 'facebook');
-    color: mat-color($primary, default-contrast);
+    color: mat.get-color-from-palette($primary, default-contrast);
   }
 }
 

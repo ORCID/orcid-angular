@@ -85,7 +85,7 @@ describe('Register new user', async function () {
     cy.wait(4000) //REMOVE after fix by dev
     //try editing Bio which only users with verified emails can do
     cy.get('#biography-panel').within(($bioSection) => {
-      cy.get('#edit-button').click()
+      cy.get('.cy-edit-button').click()
     })
     cy.get('#biography-input')
       .clear()

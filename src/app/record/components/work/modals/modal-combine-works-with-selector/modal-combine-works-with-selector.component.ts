@@ -7,7 +7,7 @@ import { RecordWorksService } from '../../../../../core/record-works/record-work
 import { PlatformInfoService } from '../../../../../cdk/platform-info'
 import { map, takeUntil } from 'rxjs/operators'
 import { GroupingSuggestions, Suggestion } from 'src/app/types/works.endpoint'
-import { FormBuilder, FormGroup } from '@angular/forms'
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms'
 
 @Component({
   selector: 'app-modal-combine-works-with-selector',
@@ -26,12 +26,12 @@ export class ModalCombineWorksWithSelectorComponent
   putCodes: string[] = []
   suggestionGroups: number[][]
   suggestions: Suggestion[]
-  form: FormGroup
+  form: UntypedFormGroup
   suggestionsWorks: { works: Work[]; putCodes: string }[]
   selectSetOfWorksToCombine: string[] = []
 
   constructor(
-    private _fb: FormBuilder,
+    private _fb: UntypedFormBuilder,
     public dialogRef: MatDialogRef<ModalComponent>,
     private _platform: PlatformInfoService,
     private _recordWorksService: RecordWorksService,

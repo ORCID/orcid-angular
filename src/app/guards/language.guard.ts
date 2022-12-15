@@ -22,11 +22,11 @@ const GUARD_COOKIE_CHECK = 'lang_refresh'
 export class LanguageGuard implements CanActivateChild {
   constructor(
     @Inject(LOCALE_ID) public locale: string,
-    private _cookies: CookieService,
     private _user: UserService,
     @Inject(WINDOW) private window: Window,
     private _errorHandler: ErrorHandlerService,
-    private _languageService: LanguageService
+    private _languageService: LanguageService,
+    private _cookie: CookieService
   ) {}
   canActivateChild(
     next: ActivatedRouteSnapshot,
@@ -46,7 +46,7 @@ export class LanguageGuard implements CanActivateChild {
       /// HANDLE LANGUAGE CHANGE BY QUERY PARAMETERS, like `https://orcid.org/signin?lang=pt`
       switchMap(() => {
         if (this.currentAppLanguageMatchTheParamLanguage(langContext)) {
-          this._cookies.delete(GUARD_COOKIE_CHECK)
+          this._cookie.delete(GUARD_COOKIE_CHECK)
           return of(true)
         } else {
           // the browser needs to be reloaded to set the right cookie.
@@ -63,15 +63,12 @@ export class LanguageGuard implements CanActivateChild {
       /// HANDLE LANGUAGE COOKIE UPDATES, like when a user login into a `spanish` user from a `english` signin page.
       switchMap(() => {
         if (this.currentAppLanguageMatchCookieLanguage(langContext)) {
-          this._cookies.delete(GUARD_COOKIE_CHECK)
+          this._cookie.delete(GUARD_COOKIE_CHECK)
           return of(true)
         } else {
-          if (
-            !this._cookies.check(GUARD_COOKIE_CHECK) ||
-            this._cookies.get(GUARD_COOKIE_CHECK) !== langContext.cookie
-          ) {
+          if (this._cookie.get(GUARD_COOKIE_CHECK) !== langContext.cookie) {
             // the browser needs to be reloaded to set the right cookie.
-            this._cookies.set(GUARD_COOKIE_CHECK, langContext.cookie)
+            this._cookie.set(GUARD_COOKIE_CHECK, langContext.cookie)
             // Redirect the user to the destiny LOCAL (without using the router)
             return of((this.window.location.href = state?.url || '/')).pipe(
               switchMap(() => NEVER)
@@ -95,7 +92,7 @@ export class LanguageGuard implements CanActivateChild {
         queryParams['lang'] || queryParams['LANG']
       ),
       app: this.normalizeLanguageCode(this.locale),
-      cookie: this.normalizeLanguageCode(this._cookies.get('locale_v3')),
+      cookie: this.normalizeLanguageCode(this._cookie.get('locale_v3')),
     }
   }
 

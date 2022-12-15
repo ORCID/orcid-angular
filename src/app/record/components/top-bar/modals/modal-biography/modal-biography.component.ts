@@ -7,7 +7,7 @@ import {
 } from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
-import { FormControl, FormGroup } from '@angular/forms'
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms'
 import { UserRecord } from '../../../../../types/record.local'
 import { RecordBiographyService } from '../../../../../core/record-biography/record-biography.service'
 import { BiographyEndPoint } from '../../../../../types/record-biography.endpoint'
@@ -34,7 +34,7 @@ import { WINDOW } from '../../../../../cdk/window'
 export class ModalBiographyComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
-  biographyForm: FormGroup
+  biographyForm: UntypedFormGroup
   userRecord: UserRecord
   biography = ''
   biographyVisibility: VisibilityStrings = 'PRIVATE'
@@ -44,6 +44,13 @@ export class ModalBiographyComponent implements OnInit, OnDestroy {
 
   ngOrcidAddYourBiography = $localize`:@@topBar.addYourBiography:Add you biography`
   ngOrcidDefaultVisibilityLabel = $localize`:@@shared.whoCanSeeBio:Control who can see your biography by setting the visibility. Your default visibility setting is`
+  dialogAriaLabelledBy = $localize`:@@shared.dialogAriaLabeledByBiography:Manage your biography dialog`
+  closeAriaLabel = $localize`:@@topBar.ariaLabelCloseBiography:Close Biography`
+  saveAriaLabel = $localize`:@@topBar.ariaLabelSaveChangesBiography:Save changes to Biography`
+  cancelAriaLabel = $localize`:@@topBar.ariaLabelCancelChangesBiography:Cancel changes close Biography`
+  visibilityPublicAriaLabel = $localize`:@@topBar.ariaLabelBiographyPublic:Set biography visibility to Everyone`
+  visibilityTrustedPartyAriaLabel = $localize`:@@topBar.ariaLabelBiographyTrustedParty:Set biography visibility to Trusted Parties`
+  visibilityPrivateAriaLabel = $localize`:@@topBar.ariaLabelBiographyPrivate:Set biography visibility to Only Me`
 
   constructor(
     @Inject(WINDOW) private window: Window,
@@ -70,15 +77,15 @@ export class ModalBiographyComponent implements OnInit, OnDestroy {
       this.biography = this.userRecord.biography.biography.value
       this.biographyVisibility = this.userRecord.biography.visibility.visibility
     }
-    this.biographyForm = new FormGroup({
-      biography: new FormControl(this.biography),
-      visibility: new FormControl(this.biographyVisibility),
+    this.biographyForm = new UntypedFormGroup({
+      biography: new UntypedFormControl(this.biography),
+      visibility: new UntypedFormControl(this.biographyVisibility),
     })
   }
 
   onSubmit() {}
 
-  formToBackend(biographyForm: FormGroup): BiographyEndPoint {
+  formToBackend(biographyForm: UntypedFormGroup): BiographyEndPoint {
     const visibility = {
       errors: [],
       required: undefined,

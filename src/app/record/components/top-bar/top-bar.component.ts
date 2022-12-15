@@ -46,6 +46,9 @@ export class TopBarComponent implements OnInit, OnDestroy {
   inDelegationMode: boolean
   @Input() loadingUserRecord = true
 
+  regionNames = $localize`:@@topBar.names:Names`
+  regionBiography = $localize`:@@topBar.biography:Biography`
+
   constructor(
     _dialog: MatDialog,
     _platform: PlatformInfoService,
@@ -86,13 +89,13 @@ export class TopBarComponent implements OnInit, OnDestroy {
         this.userRecord = userRecord
         this.userInfo = userRecord?.userInfo
 
-        if (!isEmpty(userRecord?.otherNames)) {
-          this.setNames(userRecord)
+        if (!isEmpty(this.userRecord?.names)) {
+          this.setNames()
         }
       })
   }
 
-  private setNames(userRecord: UserRecord) {
+  private setNames() {
     this.givenNames = this.userRecord?.names?.givenNames
       ? this.userRecord.names.givenNames.value
       : ''

@@ -14,7 +14,7 @@ describe('My orcid - users are able to add content to their record', async funct
     const addKeyword = 'Research'
     //click on edit pencil for Keywords section
     cy.get('#keywords-panel').within(($myPanel) => {
-      cy.get('#edit-button').click()
+      cy.get('.cy-edit-button').click()
     })
 
     cy.get('#add-keyword').click()

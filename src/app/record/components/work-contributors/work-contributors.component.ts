@@ -1,19 +1,18 @@
 import {
+  ChangeDetectorRef,
   Component,
   Inject,
   Input,
   OnDestroy,
   OnInit,
-  QueryList,
-  ViewChildren,
 } from '@angular/core'
 import {
   AbstractControl,
   ControlContainer,
-  FormArray,
-  FormBuilder,
-  FormGroup,
   FormGroupDirective,
+  UntypedFormArray,
+  UntypedFormBuilder,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms'
 import { UserRecord } from '../../../types/record.local'
@@ -48,6 +47,7 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
 
   @Input() contributors: Contributor[]
   @Input() userRecord: UserRecord
+  @Input() recordHolderAsContributor: boolean
 
   affiliation: string
   id: string
@@ -60,6 +60,7 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
   togglzAddOtherContributors: boolean
 
   contributionRoles = ContributionRoles
+  recordHolderContribution: Contributor
 
   ngOrcidSelectRole = $localize`:@@works.pleaseSelectRole:Please select a role`
   ngOrcidContributorName = $localize`:@@works.contributorName:Contributor name`
@@ -67,7 +68,8 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
   constructor(
     _togglz: TogglzService,
     @Inject(WINDOW) private window: Window,
-    private formBuilder: FormBuilder,
+    private _changeDetectorRef: ChangeDetectorRef,
+    private formBuilder: UntypedFormBuilder,
     private parentForm: FormGroupDirective,
     private platform: PlatformInfoService,
     private workService: RecordWorksService,
@@ -79,11 +81,11 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
   }
 
   get contributorsFormArray() {
-    return this.parentForm.control.controls['contributors'] as FormArray
+    return this.parentForm.control.controls['contributors'] as UntypedFormArray
   }
 
   get rolesRecordHolderFormArray() {
-    return this.parentForm.control.controls['roles'] as FormArray
+    return this.parentForm.control.controls['roles'] as UntypedFormArray
   }
 
   ngOnInit(): void {
@@ -118,12 +120,27 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
     }
   }
 
+  addRecordHolderAsContributor(): void {
+    this.roles = ''
+    this.parentForm.control.setControl(
+      'roles',
+      new UntypedFormArray([
+        this.getRoleForm(
+          this.workService.getContributionRoleByKey('no specified role').key,
+          false
+        ),
+      ])
+    )
+    this.contributorsFormArray.push(this.getRecordHolder())
+    this.rolesValuesChange()
+  }
+
   rolesFormArray(contributor): AbstractControl[] {
-    return (contributor.get('roles') as FormArray).controls
+    return (contributor.get('roles') as UntypedFormArray).controls
   }
 
   addAnotherRole(contributor): void {
-    ;(contributor.get('roles') as FormArray).push(
+    ;(contributor.get('roles') as UntypedFormArray).push(
       this.getRoleForm(
         this.workService.getContributionRoleByKey('no specified role').key,
         false
@@ -132,11 +149,18 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
   }
 
   deleteContributor(contributorIndex: number): void {
+    if (
+      this.contributorsFormArray
+        .at(contributorIndex)
+        .get(['contributorOrcid', 'path'])?.value === this.id
+    ) {
+      this.parentForm.control.setControl('roles', new UntypedFormArray([]))
+    }
     this.contributorsFormArray.removeAt(contributorIndex)
   }
 
   deleteRole(contributor, roleIndex: number): void {
-    ;(contributor.get('roles') as FormArray).removeAt(roleIndex)
+    ;(contributor.get('roles') as UntypedFormArray).removeAt(roleIndex)
     if (roleIndex === 0 && this.roles.length === 0) {
       this.addAnotherRole(contributor)
     }
@@ -151,25 +175,15 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
   }
 
   private initializeFormArray(): void {
-    const recordHolderContribution = this.getRecordHolderContribution()
-    const orcid = recordHolderContribution?.contributorOrcid?.path
-      ? recordHolderContribution?.contributorOrcid?.path
-      : this.id
-    const name = recordHolderContribution
-      ? recordHolderContribution?.creditName?.content
-      : this.getCreditNameFromUserRecord()
-    const uri = recordHolderContribution?.contributorOrcid?.uri
-      ? recordHolderContribution?.contributorOrcid?.uri
-      : `https:${environment.BASE_URL}${orcid}`
-    this.parentForm.control.setControl('contributors', new FormArray([]))
+    this.recordHolderContribution = this.getRecordHolderContribution()
+    this.parentForm.control.setControl('contributors', new UntypedFormArray([]))
     const contributorsFormArray = this.parentForm.control.get(
       'contributors'
-    ) as FormArray
+    ) as UntypedFormArray
+
     if (this.togglzAddOtherContributors && this.contributors?.length > 0) {
-      if (!recordHolderContribution) {
-        contributorsFormArray.push(
-          this.getContributorForm(name, orcid, uri, [], true)
-        )
+      if (!this.recordHolderContribution && !this.recordHolderAsContributor) {
+        this.addRecordHolderAsContributor()
       }
       this.contributors.forEach((contributor) => {
         contributorsFormArray.push(
@@ -187,12 +201,16 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
         )
       })
     } else {
-      contributorsFormArray.push(
-        this.getContributorForm(name, orcid, uri, [], true)
-      )
+      if (!this.recordHolderAsContributor) {
+        this.addRecordHolderAsContributor()
+      }
     }
-    // Validate if contributor is in the list of contributors otherwise added it
     this.roles = this.getDisabledRoles()?.join(', ')
+    this.rolesValuesChange()
+    this._changeDetectorRef.detectChanges()
+  }
+
+  private rolesValuesChange(): void {
     this.rolesRecordHolderFormArray?.valueChanges.subscribe(() => {
       this.roles = [
         ...this.getDisabledRoles(),
@@ -207,7 +225,7 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
     uri?: string,
     roles?: string[],
     disabled?: boolean
-  ): FormGroup {
+  ): UntypedFormGroup {
     const contributor = this.formBuilder.group({
       creditName: [
         {
@@ -225,9 +243,9 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
           uri ? uri : orcid ? `https:${environment.BASE_URL}${orcid}` : null,
         ],
       }),
-      roles: new FormArray([]),
+      roles: new UntypedFormArray([]),
     })
-    const rolesFormArray = contributor.controls.roles as FormArray
+    const rolesFormArray = contributor.controls.roles as UntypedFormArray
     if (roles?.length > 0) {
       roles.forEach((role) => {
         if (role) {
@@ -248,7 +266,7 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
     return contributor
   }
 
-  private getRoleForm(role?: string, disabled?: boolean): FormGroup {
+  private getRoleForm(role?: string, disabled?: boolean): UntypedFormGroup {
     return this.formBuilder.group({
       role: [
         {
@@ -331,6 +349,32 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
     return this.contributors?.find(
       (c) => c?.contributorOrcid?.path && c?.contributorOrcid?.path === this.id
     )
+  }
+
+  private getRecordHolder(): UntypedFormGroup {
+    const orcid = this.recordHolderContribution?.contributorOrcid?.path
+      ? this.recordHolderContribution?.contributorOrcid?.path
+      : this.id
+    const name = this.recordHolderContribution
+      ? this.recordHolderContribution?.creditName?.content
+      : this.getCreditNameFromUserRecord()
+    const uri = this.recordHolderContribution?.contributorOrcid?.uri
+      ? this.recordHolderContribution?.contributorOrcid?.uri
+      : `https:${environment.BASE_URL}${orcid}`
+    // todo validate if its necessary
+    if (!this.recordHolderContribution) {
+      this.recordHolderContribution = {
+        contributorOrcid: {
+          path: this.id,
+          uri: uri,
+        },
+        creditName: {
+          content: name,
+        },
+      } as Contributor
+    }
+
+    return this.getContributorForm(name, orcid, uri, [], true)
   }
 
   ngOnDestroy() {

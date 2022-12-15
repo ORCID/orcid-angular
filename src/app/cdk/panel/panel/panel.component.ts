@@ -31,6 +31,7 @@ import { VerificationEmailModalService } from '../../../core/verification-email-
 import { UserService } from 'src/app/core'
 import { WINDOW } from 'src/app/cdk/window'
 import { TogglzService } from '../../../core/togglz/togglz.service'
+import { getAriaLabel } from '../../../constants'
 
 @Component({
   selector: 'app-panel',
@@ -38,6 +39,7 @@ import { TogglzService } from '../../../core/togglz/togglz.service'
   styleUrls: ['./panel.component.scss', 'panel.component.scss-theme.scss'],
 })
 export class PanelComponent implements OnInit {
+  @Input() panelId
   @Input() showVisibilityControl = false
   @Input() stackSiblings: any[]
   @Input() stackedHeader = false
@@ -82,6 +84,7 @@ export class PanelComponent implements OnInit {
   @Input() selectable = false
   @Input() selectAll = false
   @Input() checkbox = false
+  @Input() panelTitle: any
   _displayTheStack: boolean
   @Input()
   set displayTheStack(value: boolean) {
@@ -91,6 +94,7 @@ export class PanelComponent implements OnInit {
   get displayTheStack(): boolean {
     return this._displayTheStack
   }
+
   @Output() displayTheStackChange = new EventEmitter<boolean>()
   @Output() openStateChange = new EventEmitter<boolean>()
   @Output() checkboxChangePanel = new EventEmitter<any>()
@@ -121,6 +125,7 @@ export class PanelComponent implements OnInit {
   tooltipLabelOpenSources = $localize`:@@shared.openSourceToEdit:Open sources to edit you own version`
   tooltipLabelYourOwnVersion = $localize`:@@shared.youCanOnlyEditYour:You can only edit your own version`
   tooltipLabelVisibilityError = $localize`:@@peerReview.dataInconsistency:Data inconsistency found. Please click your preferred visibility setting to fix`
+  openOtherSources = $localize`:@@record.openOtherSources:Open other sources`
 
   constructor(
     private _togglz: TogglzService,
@@ -140,6 +145,9 @@ export class PanelComponent implements OnInit {
     this._togglz
       .getStateOf('ORCID_ANGULAR_LAZY_LOAD_PEER_REVIEWS')
       .subscribe((value) => (this.togglzPeerReviews = value))
+    if (!this.panelTitle) {
+      this.panelTitle = ''
+    }
   }
 
   isArrayAndIsNotEmpty(
@@ -187,6 +195,7 @@ export class PanelComponent implements OnInit {
             width: '850px',
             maxWidth: platform.tabletOrHandset ? '99%' : '80vw',
             data: this.userRecord,
+            ariaLabel: getAriaLabel(this.editModalComponent, this.type),
           })
           modalComponent.componentInstance.id = this.id
           modalComponent.componentInstance.options = options

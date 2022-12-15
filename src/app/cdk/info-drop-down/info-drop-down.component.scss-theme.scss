@@ -1,4 +1,4 @@
-@import '~@angular/material/theming';
+@use '@angular/material' as mat;
 @import 'src/assets/scss/material.orcid-theme.scss';
 
 @mixin info-drop-down($theme) {
@@ -10,11 +10,11 @@
   }
   .university-dropdown.active > a,
   .university-dropdown.active > mat-icon {
-    color: mat-color($accent, 900) !important;
+    color: mat.get-color-from-palette($accent, 900) !important;
   }
   .university-dropdown > a,
   .university-dropdown > mat-icon {
-    color: mat-color($primary, 500) !important;
+    color: mat.get-color-from-palette($primary, 500) !important;
   }
 }
 
