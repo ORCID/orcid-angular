@@ -1,12 +1,12 @@
 // Overwrites the  color for the form fields placeholders
-::ng-deep .mat-select-placeholder {
+.mat-select-placeholder {
   color: #707070 !important;
 }
 
-::ng-deep .mat-input-element::placeholder {
+.mat-input-element::placeholder {
   color: #707070 !important;
 }
 
-::ng-deep .mat-textarea-placeholder {
+.mat-textarea-placeholder {
   color: #707070 !important;
 }

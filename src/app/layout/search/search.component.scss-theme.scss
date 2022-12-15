@@ -26,12 +26,12 @@
     }
 
     ::placeholder {
-      color: mat.get-color-from-palette($background, grey);
+      color: #707070;
     }
 
     :-ms-input-placeholder {
       /* Internet Explorer 10-11 */
-      color: mat.get-color-from-palette($background, grey);
+      color: #707070;
     }
   }
 
