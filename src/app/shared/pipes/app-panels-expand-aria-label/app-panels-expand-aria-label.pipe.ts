@@ -22,9 +22,11 @@ export class AppPanelsExpandAriaLabelPipe implements PipeTransform {
       return $localize`:@@shared.workServiceExpandAriaLabel:Expand the Works section`
     } else if (panelType === 'peer-review' || panelType === 'sub-peer-review') {
       return $localize`:@@shared.peerReviewServiceExpandAriaLabel:Expand the Peer review section`
+    } else if (panelType === 'top-bar' && args) {
+      if (args === 'also-know-as') {
+        return $localize`:@@shared.countriesCollapseOtherNames:Expand Other names`
+      }
     } else if (panelType === 'side-bar' && args) {
-      console.log(panelType, args)
-
       if (args === 'emails-panel') {
         return $localize`:@@shared.emailsExpandAriaLabel:Expand the Emails`
       } else if (args === 'websites-panel') {
