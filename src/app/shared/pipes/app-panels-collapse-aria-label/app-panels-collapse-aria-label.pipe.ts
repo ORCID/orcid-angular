@@ -24,22 +24,18 @@ export class AppPanelsCollapseAriaLabelPipe implements PipeTransform {
       return $localize`:@@shared.peerReviewServiceCollapseAriaLabel:Collapse the Peer review section`
     } else if (panelType === 'sub-peer-review') {
       return $localize`:@@shared.activityCollapseForAriaLabel:Collapse for`
-    } else if (panelType === 'top-bar' && args) {
-      if (args === 'also-know-as') {
-        return $localize`:@@shared.countriesExpandOtherNames:Collapse Other names`
-      }
     } else if (panelType === 'side-bar' && args) {
       // emails-panel, websites-panel, personal-identifiers-panel, keywords-panel, countries-panel
       if (args === 'emails-panel') {
-        return $localize`:@@shared.emailsCollapseAriaLabel:Collapse Emails`
+        return $localize`:@@shared.emailsCollapseAriaLabel:Collapse the Emails`
       } else if (args === 'websites-panel') {
-        return $localize`:@@shared.websiteCollapseAriaLabel:Collapse Website & Social links`
+        return $localize`:@@shared.websiteCollapseAriaLabel:Collapse the Website & Social links`
       } else if (args === 'personal-identifiers-panel') {
-        return $localize`:@@shared.personalIdsCollapseAriaLabel:Collapse Personal identifiers`
+        return $localize`:@@shared.personalIdsCollapseAriaLabel:Collapse the Personal identifiers`
       } else if (args === 'keywords-panel') {
-        return $localize`:@@shared.keywordsCollapseAriaLabel:Collapse Keywords`
+        return $localize`:@@shared.keywordsCollapseAriaLabel:Collapse the Keywords`
       } else if (args === 'countries-panel') {
-        return $localize`:@@shared.countriesCollapseAriaLabel:Collapse Countries`
+        return $localize`:@@shared.countriesCollapseAriaLabel:Collapse the Countries`
       }
     } else {
       return $localize`:@@shared.hideDetails:Hide details`
