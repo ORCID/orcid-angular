@@ -26,15 +26,15 @@ export class AppPanelsExpandAriaLabelPipe implements PipeTransform {
       console.log(panelType, args)
 
       if (args === 'emails-panel') {
-        return $localize`:@@shared.emailsExpandAriaLabel:Expand the Emails section`
+        return $localize`:@@shared.emailsExpandAriaLabel:Expand the Emails`
       } else if (args === 'websites-panel') {
-        return $localize`:@@shared.websiteExpandAriaLabel:Expand the Website & Social links section`
+        return $localize`:@@shared.websiteExpandAriaLabel:Expand the Website & Social links`
       } else if (args === 'personal-identifiers-panel') {
-        return $localize`:@@shared.personalIdsExpandAriaLabel:Expand the Personal identifiers section`
+        return $localize`:@@shared.personalIdsExpandAriaLabel:Expand the Personal identifiers`
       } else if (args === 'keywords-panel') {
-        return $localize`:@@shared.keywordsExpandAriaLabel:Expand the Keywords section`
+        return $localize`:@@shared.keywordsExpandAriaLabel:Expand the Keywords`
       } else if (args === 'countries-panel') {
-        return $localize`:@@shared.countriesExpandAriaLabel:Expand the Countries section`
+        return $localize`:@@shared.countriesExpandAriaLabel:Expand the Countries`
       }
     } else {
       return $localize`:@@shared.showDetails:Show details`
