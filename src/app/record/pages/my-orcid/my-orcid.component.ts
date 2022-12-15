@@ -139,10 +139,15 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
         switchMap(() => this._togglz.getTogglz().pipe(first())),
         tap((togglz) => {
           if (togglz.messages['ORCID_ANGULAR_HELP_HERO'] === 'true') {
-            this._helpHeroService.initializeHelpHero(
-              this.userInfo,
-              this.userRecord
-            )
+            if (
+              !this.publicOrcid &&
+              !(this.recordWithIssues || this.userNotFound)
+            ) {
+              this._helpHeroService.initializeHelpHero(
+                this.userInfo,
+                this.userRecord
+              )
+            }
           }
 
           if (togglz.messages['CRAZY_EGG'] === 'true') {
