@@ -25,10 +25,10 @@
     "fundingToBeReplaced": "2022",
     "fundingReplaceWith": "2000",
     "funding_putWriteFilePath": "cypress/fixtures/inbox-notif-fixtures/put-funding.fixture.json",
-    "curlResearchPath":"@cypress/fixtures/inbox-notif-fixtures/research-inbox-notif.fixture.json",
+    "curlResearchPath": "@cypress/fixtures/inbox-notif-fixtures/research-inbox-notif.fixture.json",
     "curlResearchUpdatePath": "@cypress/fixtures/inbox-notif-fixtures/put-research.fixture.json",
-    "researchToBeReplaced":"Award",
-    "researchReplaceWith":"PRIZE",
-    "research_putWriteFilePath":"cypress/fixtures/inbox-notif-fixtures/put-research.fixture.json"
+    "researchToBeReplaced": "Award",
+    "researchReplaceWith": "PRIZE",
+    "research_putWriteFilePath": "cypress/fixtures/inbox-notif-fixtures/put-research.fixture.json"
   }
 }
