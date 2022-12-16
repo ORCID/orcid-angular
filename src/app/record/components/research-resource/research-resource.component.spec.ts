@@ -10,6 +10,8 @@ import { SnackbarService } from '../../../cdk/snackbar/snackbar.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatDialog } from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
+import { SharedModule } from 'src/app/shared/shared.module'
+import { ResearchResource } from 'src/app/types/record-research-resources.endpoint'
 
 describe('ResearchResourceComponent', () => {
   let component: ResearchResourceComponent
@@ -17,7 +19,7 @@ describe('ResearchResourceComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule],
+      imports: [HttpClientTestingModule, RouterTestingModule, SharedModule],
       declarations: [ResearchResourceComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -34,6 +36,8 @@ describe('ResearchResourceComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ResearchResourceComponent)
     component = fixture.componentInstance
+    component.researchResource = { title: 'mock' } as ResearchResource
+
     fixture.detectChanges()
   })
 
