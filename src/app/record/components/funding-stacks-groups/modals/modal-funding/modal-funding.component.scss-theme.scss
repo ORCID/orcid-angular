@@ -14,12 +14,12 @@
   }
 
   ::placeholder {
-    color: mat.get-color-from-palette($background, grey);
+    color: mat.get-color-from-palette($background, placeholder-grey);
   }
 
   :-ms-input-placeholder {
     /* Internet Explorer 10-11 */
-    color: mat.get-color-from-palette($background, grey);
+    color: mat.get-color-from-palette($background, placeholder-grey);
   }
 
   .error {
