@@ -24,7 +24,11 @@ export class AppPanelsCollapseAriaLabelPipe implements PipeTransform {
       return $localize`:@@shared.peerReviewServiceCollapseAriaLabel:Collapse the Peer review section`
     } else if (panelType === 'sub-peer-review') {
       return $localize`:@@shared.activityCollapseForAriaLabel:Collapse for`
-    } else if (panelType === 'top-bar' && args) {
+    } else if (panelType === 'research-resources') {
+      return $localize`:@@shared.researchResourcesCollapseAriaLabel:Collapse the Research resources section`
+    }
+    
+    else if (panelType === 'top-bar' && args) {
       if (args === 'also-know-as') {
         return $localize`:@@shared.countriesCollapseOtherName:Collapse Other names`
       }
