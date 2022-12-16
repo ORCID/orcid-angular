@@ -3,8 +3,14 @@
     class="is-this-you orc-font-body-small"
     *ngIf="isPublicRecord && !userStatus?.loggedIn && !showPrintButton"
   >
-    <mat-icon class="large-material-icon" [attr.aria-label]="this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID">account_circle</mat-icon>
-    <p i18n="@@topBar.isThisYou" [attr.aria-label]="labelIsThisYou">Is this you?</p>
+    <mat-icon
+      class="large-material-icon"
+      [attr.aria-label]="this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID"
+      >account_circle</mat-icon
+    >
+    <p i18n="@@topBar.isThisYou" [attr.aria-label]="labelIsThisYou">
+      Is this you?
+    </p>
     <a
       class="underline"
       i18n="@@topBar.signInToStart"

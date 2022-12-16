@@ -47,14 +47,12 @@ export class AppPanelsSortAriaLabelPipe implements PipeTransform {
         $localize`:@@shared.peerReviewSortAriaLabel:Sort your peer reviews` +
         disabledStr
       )
-    } 
-    else if (panelType === 'research-resources') {
+    } else if (panelType === 'research-resources') {
       return (
         $localize`:@@shared.researchResourcesSortAriaLabel:Sort your research resources` +
         disabledStr
       )
-    }
-    else {
+    } else {
       return $localize`:@@shared.sort:Sort` + disabledStr
     }
   }

@@ -65,11 +65,9 @@
           (click)="getDetails(researchResource, researchResource.putCode)"
           i18n="@@shared.showMoreDetail"
           [attr.aria-label]="
-          'research-resource'
-          | appPanelActivityActionAriaLabel
-            : 'show'
-            : researchResource.title
-      "
+            'research-resource'
+              | appPanelActivityActionAriaLabel: 'show':researchResource.title
+          "
         >
           Show more detail
         </a>
@@ -80,11 +78,9 @@
           i18n="@@shared.showLessDetail"
           id="show-less-button"
           [attr.aria-label]="
-          'research-resource'
-          | appPanelActivityActionAriaLabel
-            : 'hide'
-            : researchResource.title
-      "
+            'research-resource'
+              | appPanelActivityActionAriaLabel: 'hide':researchResource.title
+          "
         >
           Show less detail
         </a>
@@ -210,11 +206,10 @@
                 "
                 i18n="@@shared.showMoreDetail"
                 id="show-more-item-button"
-                [attr.aria-label]="'research-resource'
-          | appPanelActivityActionAriaLabel
-            : 'show'
-            : item.resourceName
-      "
+                [attr.aria-label]="
+                  'research-resource'
+                    | appPanelActivityActionAriaLabel: 'show':item.resourceName
+                "
               >
                 Show more detail
               </a>
@@ -225,11 +220,9 @@
                 i18n="@@shared.showLessDetail"
                 id="show-less-item-button"
                 [attr.aria-label]="
-          'research-resource'
-          | appPanelActivityActionAriaLabel
-            : 'hide'
-            : item.resourceName
-      "
+                  'research-resource'
+                    | appPanelActivityActionAriaLabel: 'hide':item.resourceName
+                "
               >
                 Show less detail
               </a>

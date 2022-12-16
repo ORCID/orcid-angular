@@ -13,7 +13,6 @@ import {
   name: 'appPanelActivityActionAriaLabel',
 })
 export class AppPanelActivityActionAriaLabelPipe implements PipeTransform {
-  
   transform(panelType: string, activity: string, title: string): string {
     let translationForAction = ''
     if (activity === ITEM_ACTION_DELETE) {
@@ -26,11 +25,9 @@ export class AppPanelActivityActionAriaLabelPipe implements PipeTransform {
       translationForAction = $localize`:@@shared.activityHideDetailsAriaLabel:Hide details for`
     } else if (activity === ITEM_ACTION_SELECT) {
       translationForAction = $localize`:@@shared.activitySelectAriaLabel:Select`
-    }
-    else if (activity === ITEM_ACTION_EXPAND) {
+    } else if (activity === ITEM_ACTION_EXPAND) {
       translationForAction = $localize`:@@shared.activityExpandAriaLabel:Expand`
-    }
-    else if (activity === ITEM_ACTION_COLLAPSE) {
+    } else if (activity === ITEM_ACTION_COLLAPSE) {
       translationForAction = $localize`:@@shared.activityCollapseAriaLabel:Collapse`
     }
 
@@ -65,10 +62,10 @@ export class AppPanelActivityActionAriaLabelPipe implements PipeTransform {
     } else if (panelType === 'peer-review' || panelType === 'sub-peer-review') {
       translationForAction +=
         ' ' + $localize`:@@shared.peerReviewAriaLabel:peer review`
-    }
-    else if (panelType === 'research-resources') {
+    } else if (panelType === 'research-resources') {
       translationForAction +=
-        ' ' + $localize`:@@shared.researchResourcesAriaLabel: research resources`
+        ' ' +
+        $localize`:@@shared.researchResourcesAriaLabel: research resources`
     }
     return translationForAction + ' ' + title
   }
