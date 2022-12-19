@@ -20,6 +20,8 @@ import { ModalBiographyComponent } from './record/components/top-bar/modals/moda
 import { ModalCountryComponent } from './cdk/side-bar/modals/modal-country/modal-country.component'
 import { ModalKeywordComponent } from './cdk/side-bar/modals/modal-keyword/modal-keyword.component'
 import { ModalWebsitesComponent } from './cdk/side-bar/modals/modal-websites/modal-websites.component'
+import { ModalPersonIdentifiersComponent } from './cdk/side-bar/modals/modal-person-identifiers/modal-person-identifiers.component'
+import { AffiliationType } from './types/record-affiliation.endpoint'
 
 export { COUNTRY_NAMES_TO_COUNTRY_CODES } from './constants-country-codes'
 
@@ -292,7 +294,7 @@ export function GetFormErrors(form: AbstractControl) {
 
 export function getAriaLabel(
   component: ComponentType<any>,
-  type?: string
+  type?: string | AffiliationType | EXTERNAL_ID_TYPE_WORK
 ): string {
   switch (component) {
     case ModalAffiliationsComponent:
@@ -324,6 +326,8 @@ export function getAriaLabel(
       return $localize`:@@shared.dialogAriaLabeledByCountries:Manage your countries dialog`
     case ModalKeywordComponent:
       return $localize`:@@shared.dialogAriaLabeledByKeywords:Manage your keywords dialog`
+    case ModalPersonIdentifiersComponent:
+      return $localize`:@@shared.dialogAriaLabeledByOtherIds:Manage your other IDs dialog`
     case ModalWebsitesComponent:
       return $localize`:@@shared.dialogAriaLabeledByWebsites:Manage your websites & social dialog`
     case ModalFundingComponent:
