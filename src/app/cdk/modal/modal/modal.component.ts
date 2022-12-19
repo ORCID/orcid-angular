@@ -15,7 +15,6 @@ export class ModalComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
   @Input() loading = false
   @Input() noSidebar = false
-  @Input() dialogAriaLabelledBy: string
 
   constructor(
     private dialogRef: MatDialogRef<any>,
