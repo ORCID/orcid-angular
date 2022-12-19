@@ -329,7 +329,7 @@ export function getAriaLabel(
     case ModalPersonIdentifiersComponent:
       return $localize`:@@shared.dialogAriaLabeledByOtherIds:Manage your other IDs dialog`
     case ModalWebsitesComponent:
-      return $localize`:@@shared.dialogAriaLabeledByWebsites:Manage your websites & social dialog`
+      return $localize`:@@shared.dialogAriaLabeledByWebsites:Manage your websites & social links dialog`
     case ModalFundingComponent:
       return $localize`:@@shared.dialogAriaLabeledByFunding:Manage funding dialog`
     case ModalFundingSearchLinkComponent:
