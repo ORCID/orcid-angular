@@ -12,7 +12,6 @@ describe('SortByPipe', () => {
     expect(pipe).toBeTruthy()
   })
 
-
   it('should sort contributors alphabetically in ascending order', () => {
     const countriesSorted = [
       { key: 'Albania', value: 'AL' },
@@ -20,16 +19,13 @@ describe('SortByPipe', () => {
       { key: 'South Africa', value: 'ZA' },
     ]
 
-    expect(pipe.transform(getUnsortedCountries(), 'asc', 'key')).toEqual(countriesSorted)
+    expect(pipe.transform(getUnsortedCountries(), 'asc', 'key')).toEqual(
+      countriesSorted
+    )
   })
 })
 
-
 export const getUnsortedCountries = (): { key: string; value: string }[] => {
   const countries = getCountries()
-  return [
-    countries[1],
-    countries[2],
-    countries[0],
-  ]
+  return [countries[1], countries[2], countries[0]]
 }

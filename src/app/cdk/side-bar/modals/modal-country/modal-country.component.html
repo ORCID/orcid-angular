@@ -86,7 +86,9 @@
                   placeholder=" {{ ngOrcidCountry }}"
                 >
                   <mat-option
-                    *ngFor="let countryCode of countryCodes | sortBy: 'asc':'key'"
+                    *ngFor="
+                      let countryCode of countryCodes | sortBy: 'asc':'key'
+                    "
                     [value]="countryCode.key"
                   >
                     {{ countryCode.key }}
