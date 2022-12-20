@@ -22,6 +22,7 @@ export default defineConfig({
     membersAPI_workEndpoint: '/work',
     membersAPI_allWorksEndpoint: '/works',
     membersAPI_peerReviewEndpoint: '/peer-review',
+    membersAPI_allPeerReviewsEndpoint: '/peer-reviews',
     membersAPI_employmentEndpoint: '/employment',
     membersAPI_allEmploymentsEndpoint: '/employments',
     membersAPI_notifPermEndpoint: '/notification-permission',
