@@ -55,7 +55,6 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
   @ViewChildren('countrySelect') inputs: QueryList<MatSelect>
 
   ngOrcidCountry = $localize`:@@shared.selectACountryOrLocation:Select a country or location`
-  dialogAriaLabelledBy = $localize`:@@shared.dialogAriaLabeledByCountries:Manage your countries dialog`
 
   ngOnInit(): void {
     this._recordCountryService

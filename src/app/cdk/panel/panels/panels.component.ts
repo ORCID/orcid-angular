@@ -130,7 +130,7 @@ export class PanelsComponent implements OnInit {
           modalComponent = this._dialog.open(modal, {
             width: '850px',
             maxWidth: platform.tabletOrHandset ? '99%' : '80vw',
-            ariaLabel: getAriaLabel(modal, this.type),
+            ariaLabel: getAriaLabel(modal, options?.type),
           })
 
           modalComponent.componentInstance.type = options?.type
