@@ -45,6 +45,7 @@ import { ReplaceTextPipe } from './pipes/replace-text/replace-text.pipe'
 import { AppPanelsAddAriaLabelPipe } from './pipes/app-panels-add-aria-label/app-panels-add-aria-label.pipe'
 import { AppPanelsSortAriaLabelPipe } from './pipes/app-panels-sort-aria-label/app-panels-sort-aria-label.pipe'
 import { AppPanelActivityActionAriaLabelPipe } from './pipes/app-panel-activity-action-aria-label/app-panel-activity-action-aria-label.pipe'
+import { SortByPipe } from './pipes/sort-by/sort-by.pipe'
 @NgModule({
   imports: [
     CommonModule,
@@ -89,6 +90,7 @@ import { AppPanelActivityActionAriaLabelPipe } from './pipes/app-panel-activity-
     AppPanelsAddAriaLabelPipe,
     AppPanelsSortAriaLabelPipe,
     AppPanelActivityActionAriaLabelPipe,
+    SortByPipe,
   ],
   exports: [
     CommonModule,
@@ -132,6 +134,7 @@ import { AppPanelActivityActionAriaLabelPipe } from './pipes/app-panel-activity-
     AppPanelsAddAriaLabelPipe,
     AppPanelsSortAriaLabelPipe,
     AppPanelActivityActionAriaLabelPipe,
+    SortByPipe,
   ],
   providers: [], // Should not provide anything
 })
