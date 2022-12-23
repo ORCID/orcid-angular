@@ -8,10 +8,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 export class PanelExpandButtonsComponent implements OnInit {
   tooltipLabelShowDetails = $localize`:@@shared.showDetails:Show details`
   tooltipLabelHideDetails = $localize`:@@shared.hideDetails:Hide details`
-  @Input() panelId
+  @Input() panelId: string
   @Input() type: boolean
   @Input() openState: boolean
   @Output() toggle = new EventEmitter<void>()
+  @Input() panelTitle: string
   @Input() panelType:
     | 'top-bar'
     | 'side-bar'
@@ -30,8 +31,10 @@ export class PanelExpandButtonsComponent implements OnInit {
     | 'activities'
     | 'funding'
     | 'research-resources'
+    | 'research-resources-stack'
 
-  constructor() {}
+  constructor() {
+   }
 
   ngOnInit(): void {}
 }
