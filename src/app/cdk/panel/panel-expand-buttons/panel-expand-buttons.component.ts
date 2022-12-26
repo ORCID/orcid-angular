@@ -33,8 +33,7 @@ export class PanelExpandButtonsComponent implements OnInit {
     | 'research-resources'
     | 'research-resources-stack'
 
-  constructor() {
-   }
+  constructor() {}
 
   ngOnInit(): void {}
 }

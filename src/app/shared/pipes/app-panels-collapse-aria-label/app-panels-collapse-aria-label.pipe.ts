@@ -20,24 +20,27 @@ export class AppPanelsCollapseAriaLabelPipe implements PipeTransform {
       return $localize`:@@shared.fundingServiceCollapseAriaLabel:Collapse the Funding section`
     } else if (panelType === 'works') {
       return $localize`:@@shared.workServiceCollapseAriaLabel:Collapse the Works section`
-    } 
-    else if (panelType === 'peer-review' || panelType === 'sub-peer-review') {
+    } else if (panelType === 'peer-review' || panelType === 'sub-peer-review') {
       if (panelTitle) {
-        return $localize`:@@shared.peerReviewCollapseAriaLabel:Collapse review activity` + ' ' + panelTitle
-      }
-      else {
+        return (
+          $localize`:@@shared.peerReviewCollapseAriaLabel:Collapse review activity` +
+          ' ' +
+          panelTitle
+        )
+      } else {
         return $localize`:@@shared.peerReviewServiceCollapseAriaLabel:Collapse the Peer review section`
       }
-    } 
-    else if (panelType === 'research-resources') {
+    } else if (panelType === 'research-resources') {
       if (panelTitle) {
-        return $localize`:@@shared.researchResourceCollapseAriaLabel:Collapse the research resource` + ' ' + panelTitle
-      }
-      else {
+        return (
+          $localize`:@@shared.researchResourceCollapseAriaLabel:Collapse the research resource` +
+          ' ' +
+          panelTitle
+        )
+      } else {
         return $localize`:@@shared.researchResourcesCollapseAriaLabel:Collapse the Research resources section`
       }
-    }
-    else if (panelType === 'top-bar' && args) {
+    } else if (panelType === 'top-bar' && args) {
       if (args === 'also-know-as') {
         return $localize`:@@shared.countriesCollapseOtherName:Collapse Other names`
       }

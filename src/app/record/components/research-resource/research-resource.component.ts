@@ -30,7 +30,6 @@ export class ResearchResourceComponent implements OnInit {
   @Input() panelTitle: string
   @Input() panelId: string
 
-
   detailsResearchResources: {
     putCode: string
     researchResource: ResearchResource

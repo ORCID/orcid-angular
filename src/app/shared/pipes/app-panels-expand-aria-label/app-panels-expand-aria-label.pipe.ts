@@ -4,8 +4,8 @@ import { Pipe, PipeTransform } from '@angular/core'
   name: 'appPanelsExpandAriaLabel',
 })
 export class AppPanelsExpandAriaLabelPipe implements PipeTransform {
-  transform(panelType: any, args?: any , panelTitle?: any): string {
-     if (panelType === 'employment') {
+  transform(panelType: any, args?: any, panelTitle?: any): string {
+    if (panelType === 'employment') {
       return $localize`:@@shared.employmentExpandAriaLabel:Expand the Employment section`
     } else if (panelType === 'education' || panelType === 'qualification') {
       return $localize`:@@shared.educationQualificationExpandAriaLabel:Expand the Education and qualifications section`
@@ -22,21 +22,25 @@ export class AppPanelsExpandAriaLabelPipe implements PipeTransform {
       return $localize`:@@shared.workServiceExpandAriaLabel:Expand the Works section`
     } else if (panelType === 'peer-review' || panelType === 'sub-peer-review') {
       if (panelTitle) {
-         return $localize`:@@shared.peerReviewExpandAriaLabel:Expand review activity` + ' ' + panelTitle
-       }
-       else {
+        return (
+          $localize`:@@shared.peerReviewExpandAriaLabel:Expand review activity` +
+          ' ' +
+          panelTitle
+        )
+      } else {
         return $localize`:@@shared.peerReviewServiceExpandAriaLabel:Expand the Peer review section`
-       }
-    } 
-    else if (panelType === 'research-resources') {
+      }
+    } else if (panelType === 'research-resources') {
       if (panelTitle) {
-        return $localize`:@@shared.researchResourceExpandAriaLabel:Expand the research resource` + ' ' + panelTitle
+        return (
+          $localize`:@@shared.researchResourceExpandAriaLabel:Expand the research resource` +
+          ' ' +
+          panelTitle
+        )
+      } else {
+        return $localize`:@@shared.researchResourcesExpandAriaLabel:Expand the Research resources section`
       }
-      else  {
-       return $localize`:@@shared.researchResourcesExpandAriaLabel:Expand the Research resources section`
-      }
-    } 
-    else if (panelType === 'top-bar' && args) {
+    } else if (panelType === 'top-bar' && args) {
       if (args === 'also-know-as') {
         return $localize`:@@shared.countriesExpandOtherNames:Expand Other names`
       }

@@ -15,8 +15,11 @@ import { UserStatus } from '../../../types/userStatus.endpoint'
 export class TopBarActionsComponent implements OnInit, OnDestroy {
   labelPrintableVersion = $localize`:@@topBar.ariaLabelPrintableVersion:View printable version (Opens of a different tab)`
   labelIsThisYou = $localize`:@@topBar.isThisYou:Is this you?`
-  labelSignInToStart = $localize`:@@topBar.isThisYou:Is this you?` + ' ' + $localize`:@@topBar.signInToStart:Sign in to start editing`
-  name :string
+  labelSignInToStart =
+    $localize`:@@topBar.isThisYou:Is this you?` +
+    ' ' +
+    $localize`:@@topBar.signInToStart:Sign in to start editing`
+  name: string
 
   $destroy: Subject<boolean> = new Subject<boolean>()
   platform: PlatformInfo
@@ -37,8 +40,7 @@ export class TopBarActionsComponent implements OnInit, OnDestroy {
         this.getRecordName()
       })
   }
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
   ngOnDestroy(): void {
     this.$destroy.next()
   }
@@ -54,25 +56,26 @@ export class TopBarActionsComponent implements OnInit, OnDestroy {
   private getRecordName() {
     if (this.userRecord?.names) {
       if (this.userRecord?.names?.creditName?.value) {
-        this.name = this.userRecord?.names?.creditName?.value;
-      }
-      else {
+        this.name = this.userRecord?.names?.creditName?.value
+      } else {
         if (this.userRecord?.names?.givenNames?.value) {
-         this.name = this.userRecord?.names?.givenNames?.value
+          this.name = this.userRecord?.names?.givenNames?.value
         }
         if (this.userRecord?.names?.familyName?.value) {
           if (this.name) {
-            this.name = this.name + ' ' + this.userRecord?.names?.familyName?.value
-          }
-          else {
+            this.name =
+              this.name + ' ' + this.userRecord?.names?.familyName?.value
+          } else {
             this.name = this.userRecord?.names?.familyName?.value
           }
         }
       }
       if (!this.name) {
-        this.labelSignInToStart = this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID + " " + this.labelSignInToStart
+        this.labelSignInToStart =
+          this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID +
+          ' ' +
+          this.labelSignInToStart
       }
     }
-
   }
 }
