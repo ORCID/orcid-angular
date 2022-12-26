@@ -22,6 +22,7 @@ import { ModalKeywordComponent } from './cdk/side-bar/modals/modal-keyword/modal
 import { ModalWebsitesComponent } from './cdk/side-bar/modals/modal-websites/modal-websites.component'
 import { ModalPersonIdentifiersComponent } from './cdk/side-bar/modals/modal-person-identifiers/modal-person-identifiers.component'
 import { AffiliationType } from './types/record-affiliation.endpoint'
+import { WorkBibtexModalComponent } from './record/components/work-stack-group/modals/work-bibtex-modal/work-bibtex-modal.component'
 
 export { COUNTRY_NAMES_TO_COUNTRY_CODES } from './constants-country-codes'
 
@@ -314,6 +315,8 @@ export function getAriaLabel(
         case 'service':
           return $localize`:@@shared.dialogAriaLabeledByService:Manage service dialog`
       }
+    case WorkBibtexModalComponent:
+      return $localize`:@@shared.dialogAriaLabeledByBibtex:Manage bibtex dialog`
     case WorkExternalIdModalComponent:
       return $localize`:@@shared.dialogAriaLabeledByExternalIdentifier:Manage external identifier dialog`
     case ModalNameComponent:
