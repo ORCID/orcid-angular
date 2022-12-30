@@ -23,7 +23,7 @@ export class AppPanelsExpandAriaLabelPipe implements PipeTransform {
     } else if (panelType === 'peer-review' || panelType === 'sub-peer-review') {
       if (panelTitle) {
         return (
-          $localize`:@@shared.peerReviewExpandAriaLabel:Expand review activity` +
+          $localize`:@@shared.peerReviewExpandAriaLabel:Expand review activity for` +
           ' ' +
           panelTitle
         )

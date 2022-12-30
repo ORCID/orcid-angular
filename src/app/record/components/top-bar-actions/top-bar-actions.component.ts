@@ -65,17 +65,14 @@ export class TopBarActionsComponent implements OnInit, OnDestroy {
           if (this.name) {
             this.name =
               this.name + ' ' + this.userRecord?.names?.familyName?.value
+
           } else {
             this.name = this.userRecord?.names?.familyName?.value
           }
         }
       }
-      if (!this.name) {
-        this.labelSignInToStart =
-          this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID +
-          ' ' +
-          this.labelSignInToStart
-      }
+
     }
+    return
   }
 }
