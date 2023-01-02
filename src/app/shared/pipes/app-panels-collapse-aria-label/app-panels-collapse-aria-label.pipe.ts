@@ -23,7 +23,7 @@ export class AppPanelsCollapseAriaLabelPipe implements PipeTransform {
     } else if (panelType === 'peer-review' || panelType === 'sub-peer-review') {
       if (panelTitle) {
         return (
-          $localize`:@@shared.peerReviewCollapseAriaLabel:Collapse review activity` +
+          $localize`:@@shared.peerReviewCollapseAriaLabel:Collapse review activity for` +
           ' ' +
           panelTitle
         )

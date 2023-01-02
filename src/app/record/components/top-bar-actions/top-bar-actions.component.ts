@@ -70,12 +70,7 @@ export class TopBarActionsComponent implements OnInit, OnDestroy {
           }
         }
       }
-      if (!this.name) {
-        this.labelSignInToStart =
-          this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID +
-          ' ' +
-          this.labelSignInToStart
-      }
     }
+    return
   }
 }
