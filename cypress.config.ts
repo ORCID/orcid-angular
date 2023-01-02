@@ -1,6 +1,8 @@
 import { defineConfig } from 'cypress'
+require('dotenv').config({debug: true})
 
 export default defineConfig({
+
   blockHosts: ['*.crazyegg.com', '*.zendesk.com'],
   env: {
     infoSiteBaseUrl: 'https://info.qa.orcid.org',
@@ -61,23 +63,30 @@ export default defineConfig({
     timestamp: 'longDate',
   },
   e2e: {
-    // We've imported your old cypress plugins here.
-    // You may want to clean this up later by importing these.
-    setupNodeEvents(on, config) {
+    setupNodeEvents(on, config){
+
+      require('cypress-mochawesome-reporter/plugin')(on)
+      require('./cypress/plugins/index.js')(on, config)
+      
+      // we can grab some process environment variables
+      // and stick it into config.env before returning the updated config
+      config.env = config.env || {}
+      config.env.cy_admin_oid = process.env.CY_ADMIN_OID
+      config.env.cy_admin_secret = process.env.CY_ADMIN_SECRET
+      config.env.cy_admin_password = process.env.CY_ADMIN_PASSWORD
+
+      //if running headless then skip all-*.cy.js files
       if (config.isTextTerminal) {
-        // skip the all.cy.js spec in "cypress run" mode
-        require('./cypress/plugins/index.js')(on, config)
-        require('cypress-mochawesome-reporter/plugin')(on)
-        return {
-          excludeSpecPattern: [
+          config.excludeSpecPattern= [
             '**/registry/all-registry.cy.js',
             '**/my-orcid/all-add.cy.js',
             '**/my-orcid/all-other-features.cy.js',
             '**/oauth/all-oauth.cy.js',
-          ],
-        }
+          ]
       }
-      return require('./cypress/plugins/index.js')(on, config)
+
+      //return the updated config
+      return config
     },
     baseUrl: 'https://qa.orcid.org',
     excludeSpecPattern: [
