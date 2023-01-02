@@ -56,8 +56,7 @@ module.exports = (on, config) => {
     },
   })
 
-  on("task", {
-    generateOTP: require("cypress-otp")
+  on('task', {
+    generateOTP: require('cypress-otp'),
   })
-
 }

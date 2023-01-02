@@ -1,8 +1,7 @@
 import { defineConfig } from 'cypress'
-require('dotenv').config({debug: true})
+require('dotenv').config({ debug: true })
 
 export default defineConfig({
-
   blockHosts: ['*.crazyegg.com', '*.zendesk.com'],
   env: {
     infoSiteBaseUrl: 'https://info.qa.orcid.org',
@@ -64,11 +63,10 @@ export default defineConfig({
     timestamp: 'longDate',
   },
   e2e: {
-    setupNodeEvents(on, config){
-
+    setupNodeEvents(on, config) {
       require('cypress-mochawesome-reporter/plugin')(on)
       require('./cypress/plugins/index.js')(on, config)
-      
+
       // we can grab some process environment variables
       // and stick it into config.env before returning the updated config
       config.env = config.env || {}
@@ -78,12 +76,12 @@ export default defineConfig({
 
       //if running headless then skip all-*.cy.js files
       if (config.isTextTerminal) {
-          config.excludeSpecPattern= [
-            '**/registry/all-registry.cy.js',
-            '**/my-orcid/all-add.cy.js',
-            '**/my-orcid/all-other-features.cy.js',
-            '**/oauth/all-oauth.cy.js',
-          ]
+        config.excludeSpecPattern = [
+          '**/registry/all-registry.cy.js',
+          '**/my-orcid/all-add.cy.js',
+          '**/my-orcid/all-other-features.cy.js',
+          '**/oauth/all-oauth.cy.js',
+        ]
       }
 
       //return the updated config

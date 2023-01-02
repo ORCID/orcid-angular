@@ -105,5 +105,6 @@ Cypress.Commands.add('signin2FA', (token2FA) =>
     .get('[formcontrolname="verificationCode"]')
     .clear()
     .type(token2FA)
-    .get('#authenticateButton').click()
+    .get('#authenticateButton')
+    .click()
 )

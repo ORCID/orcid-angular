@@ -1,2 +1,2 @@
-declare module 'cypress-otp';
-declare module 'gmail-tester-extended';
+declare module 'cypress-otp'
+declare module 'gmail-tester-extended'
