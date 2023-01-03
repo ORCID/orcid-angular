@@ -49,6 +49,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
   regionNames = $localize`:@@topBar.names:Names`
   regionBiography = $localize`:@@topBar.biography:Biography`
 
+  ariaLabelName: string
   constructor(
     _dialog: MatDialog,
     _platform: PlatformInfoService,
@@ -91,6 +92,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
 
         if (!isEmpty(this.userRecord?.names)) {
           this.setNames()
+          this.getAriaLabelName()
         }
       })
   }
@@ -105,6 +107,29 @@ export class TopBarComponent implements OnInit, OnDestroy {
     this.creditName = this.userRecord?.names?.creditName
       ? this.userRecord.names.creditName.value
       : ''
+  }
+
+  private getAriaLabelName() {
+    if (this.userRecord?.names) {
+      if (this.userRecord?.names?.creditName?.value) {
+        this.ariaLabelName = this.userRecord?.names?.creditName?.value
+      } else {
+        if (this.userRecord?.names?.givenNames?.value) {
+          this.ariaLabelName = this.userRecord?.names?.givenNames?.value
+        }
+        if (this.userRecord?.names?.familyName?.value) {
+          if (this.ariaLabelName) {
+            this.ariaLabelName =
+              this.ariaLabelName +
+              ' ' +
+              this.userRecord?.names?.familyName?.value
+          } else {
+            this.ariaLabelName = this.userRecord?.names?.familyName?.value
+          }
+        }
+      }
+    }
+    return
   }
 
   getOtherNamesUnique(otherNames: Assertion[]): string {

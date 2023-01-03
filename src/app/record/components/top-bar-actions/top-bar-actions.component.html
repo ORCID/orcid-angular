@@ -16,7 +16,9 @@
       i18n="@@topBar.signInToStart"
       [routerLink]="['/signin']"
       [attr.aria-label]="
-        (name ? name : this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID) +
+        (ariaLabelName
+          ? ariaLabelName
+          : userRecord?.userInfo?.EFFECTIVE_USER_ORCID) +
         ' ' +
         labelSignInToStart
       "
