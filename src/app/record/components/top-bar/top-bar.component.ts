@@ -110,7 +110,6 @@ export class TopBarComponent implements OnInit, OnDestroy {
   }
 
   private getAriaLabelName() {
-    this.ariaLabelName = ''
     if (this.userRecord?.names) {
       if (this.userRecord?.names?.creditName?.value) {
         this.ariaLabelName = this.userRecord?.names?.creditName?.value
@@ -129,10 +128,8 @@ export class TopBarComponent implements OnInit, OnDestroy {
           }
         }
       }
-      if (this.ariaLabelName === '') {
-        this.ariaLabelName = this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID
-      }
     }
+    return
   }
 
   getOtherNamesUnique(otherNames: Assertion[]): string {
