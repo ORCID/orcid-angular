@@ -1,14 +1,14 @@
 {
   "cyUserMemmerAPI": {
-    "clientID": "APP-6RTM54FDADENEKUK",
-    "clientSecret": "95533ab6-3594-40a7-98b8-c8db637f2514",
-    "orcidMember": "0000-0003-0667-1019",
-    "bearer": "2900e981-b9d3-488b-9106-ed70a241d54b"
+    "clientID": "APP-***********",
+    "clientSecret": "********-****-****-****-************",
+    "orcidMember": "0000-****-****-****",
+    "bearer": "********-****-****-****-************"
   },
   "cyNotifPerm": {
-    "oid": "0000-0002-5078-7150",
-    "password": "test1234",
-    "clientBearer": "a4320bf6-868b-4007-a2fa-aa534b6083f1",
+    "oid": "0000-****-****-****",
+    "password": "********",
+    "clientBearer": "********-****-****-****-************",
     "curlPermissionNotifPath": "@cypress/fixtures/permission_notification.fixture.json",
     "curlEmploymentPath": "@cypress/fixtures/inbox-notif-fixtures/employment.fixture.json",
     "curlEmploymentUpdatePath": "@cypress/fixtures/inbox-notif-fixtures/put-employment.fixture.json",
@@ -24,6 +24,11 @@
     "curlFundingUpdatePath": "@cypress/fixtures/inbox-notif-fixtures/put-funding.fixture.json",
     "fundingToBeReplaced": "2022",
     "fundingReplaceWith": "2000",
-    "funding_putWriteFilePath": "cypress/fixtures/inbox-notif-fixtures/put-funding.fixture.json"
+    "funding_putWriteFilePath": "cypress/fixtures/inbox-notif-fixtures/put-funding.fixture.json",
+    "curlResearchPath": "@cypress/fixtures/inbox-notif-fixtures/research-inbox-notif.fixture.json",
+    "curlResearchUpdatePath": "@cypress/fixtures/inbox-notif-fixtures/put-research.fixture.json",
+    "researchToBeReplaced": "Award",
+    "researchReplaceWith": "PRIZE",
+    "research_putWriteFilePath": "cypress/fixtures/inbox-notif-fixtures/put-research.fixture.json"
   }
 }

@@ -27,6 +27,8 @@ export class ResearchResourceComponent implements OnInit {
   @Input() researchResource: ResearchResource
   @Input() stackMode
   @Input() orgDisambiguated: OrgDisambiguated
+  @Input() panelTitle: string
+  @Input() panelId: string
 
   detailsResearchResources: {
     putCode: string

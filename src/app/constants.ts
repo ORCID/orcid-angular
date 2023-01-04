@@ -20,6 +20,9 @@ import { ModalBiographyComponent } from './record/components/top-bar/modals/moda
 import { ModalCountryComponent } from './cdk/side-bar/modals/modal-country/modal-country.component'
 import { ModalKeywordComponent } from './cdk/side-bar/modals/modal-keyword/modal-keyword.component'
 import { ModalWebsitesComponent } from './cdk/side-bar/modals/modal-websites/modal-websites.component'
+import { ModalPersonIdentifiersComponent } from './cdk/side-bar/modals/modal-person-identifiers/modal-person-identifiers.component'
+import { AffiliationType } from './types/record-affiliation.endpoint'
+import { WorkBibtexModalComponent } from './record/components/work-stack-group/modals/work-bibtex-modal/work-bibtex-modal.component'
 
 export { COUNTRY_NAMES_TO_COUNTRY_CODES } from './constants-country-codes'
 
@@ -63,6 +66,8 @@ export const ITEM_ACTION_DELETE = 'delete'
 export const ITEM_ACTION_HIDE = 'hide'
 export const ITEM_ACTION_SHOW = 'show'
 export const ITEM_ACTION_SELECT = 'select'
+export const ITEM_ACTION_EXPAND = 'expand'
+export const ITEM_ACTION_COLLAPSE = 'collapse'
 
 export const ApplicationRoutes = {
   myOrcid: 'my-orcid',
@@ -290,7 +295,7 @@ export function GetFormErrors(form: AbstractControl) {
 
 export function getAriaLabel(
   component: ComponentType<any>,
-  type?: string
+  type?: string | AffiliationType | EXTERNAL_ID_TYPE_WORK
 ): string {
   switch (component) {
     case ModalAffiliationsComponent:
@@ -310,6 +315,8 @@ export function getAriaLabel(
         case 'service':
           return $localize`:@@shared.dialogAriaLabeledByService:Manage service dialog`
       }
+    case WorkBibtexModalComponent:
+      return $localize`:@@shared.dialogAriaLabeledByBibtex:Manage bibtex dialog`
     case WorkExternalIdModalComponent:
       return $localize`:@@shared.dialogAriaLabeledByExternalIdentifier:Manage external identifier dialog`
     case ModalNameComponent:
@@ -322,8 +329,10 @@ export function getAriaLabel(
       return $localize`:@@shared.dialogAriaLabeledByCountries:Manage your countries dialog`
     case ModalKeywordComponent:
       return $localize`:@@shared.dialogAriaLabeledByKeywords:Manage your keywords dialog`
+    case ModalPersonIdentifiersComponent:
+      return $localize`:@@shared.dialogAriaLabeledByOtherIds:Manage your other IDs dialog`
     case ModalWebsitesComponent:
-      return $localize`:@@shared.dialogAriaLabeledByWebsites:Manage your websites & social dialog`
+      return $localize`:@@shared.dialogAriaLabeledByWebsites:Manage your websites & social links dialog`
     case ModalFundingComponent:
       return $localize`:@@shared.dialogAriaLabeledByFunding:Manage funding dialog`
     case ModalFundingSearchLinkComponent:

@@ -14,9 +14,16 @@ import { UserStatus } from '../../../types/userStatus.endpoint'
 })
 export class TopBarActionsComponent implements OnInit, OnDestroy {
   labelPrintableVersion = $localize`:@@topBar.ariaLabelPrintableVersion:View printable version (Opens of a different tab)`
+  labelIsThisYou = $localize`:@@topBar.isThisYou:Is this you?`
+  labelSignInToStart =
+    $localize`:@@topBar.isThisYou:Is this you?` +
+    ' ' +
+    $localize`:@@topBar.signInToStart:Sign in to start editing`
+
   $destroy: Subject<boolean> = new Subject<boolean>()
   platform: PlatformInfo
   @Input() userRecord: UserRecord
+  @Input() ariaLabelName: string
   @Input() userStatus: UserStatus
   @Input() isPublicRecord: string
   @Input() showPrintButton = false

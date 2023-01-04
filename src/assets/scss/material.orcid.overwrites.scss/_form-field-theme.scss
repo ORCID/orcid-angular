@@ -33,6 +33,16 @@
   .mat-form-field.mat-form-field-invalid .mat-form-field-label {
     color: mat.get-color-from-palette($warn, 700);
   }
+
+  .mat-select-placeholder,
+  .mat-input-element::placeholder,
+  textarea.mat-input-element::placeholder {
+    color: mat.get-color-from-palette($background, placeholder-grey);
+  }
+
+  :-ms-input-placeholder {
+    color: mat.get-color-from-palette($background, placeholder-grey);
+  }
 }
 
 @mixin angular-material-form-field-typography($config) {

@@ -1,0 +1,102 @@
+{
+  "proposal": {
+    "title": {
+      "title": {
+        "value": "Giant Laser Award"
+      },
+      "translated-title": {
+        "value": "Giant Laser Award",
+        "language-code": "ab"
+      }
+    },
+    "hosts": {
+      "organization": [
+        {
+          "name": "ORCID",
+          "address": {
+            "city": "Bethesda",
+            "region": "Maryland",
+            "country": "US"
+          },
+          "disambiguated-organization": {
+            "disambiguated-organization-identifier": "grid.455335.1",
+            "disambiguation-source": "GRID"
+          }
+        }
+      ]
+    },
+    "external-ids": {
+      "external-id": [
+        {
+          "external-id-type": "source-work-id",
+          "external-id-value": "123456",
+          "external-id-normalized": {
+            "value": "123456",
+            "transient": true
+          },
+          "external-id-relationship": "part-of"
+        }
+      ]
+    },
+    "start-date": {
+      "year": {
+        "value": "1999"
+      },
+      "month": {
+        "value": "01"
+      },
+      "day": {
+        "value": "28"
+      }
+    },
+    "end-date": {
+      "year": {
+        "value": "1999"
+      },
+      "month": {
+        "value": "01"
+      },
+      "day": {
+        "value": "28"
+      }
+    },
+    "url": {
+      "value": "https://orcid.org"
+    }
+  },
+  "resource-item": [
+    {
+      "resource-name": "Giant Laser 1",
+      "resource-type": "infrastructures",
+      "hosts": {
+        "organization": [
+          {
+            "name": "Lasers-R-US",
+            "address": {
+              "city": "Bethesda",
+              "region": "Maryland",
+              "country": "US"
+            },
+            "disambiguated-organization": {
+              "disambiguated-organization-identifier": "grid.455335.1",
+              "disambiguation-source": "GRID"
+            }
+          }
+        ]
+      },
+      "external-ids": {
+        "external-id": [
+          {
+            "external-id-type": "rrid",
+            "external-id-value": "rrid:giantLASER",
+            "external-id-relationship": "part-of"
+          }
+        ]
+      },
+      "url": {
+        "value": "https://example.com"
+      }
+    }
+  ],
+  "visibility": "limited"
+}

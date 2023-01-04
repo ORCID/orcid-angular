@@ -33,7 +33,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   userInfo: UserInfo
   userRecord: UserRecord
   collapseAllActivitiesArialLabel = $localize`:@@shared.collapseAllActivitiesArialLabel:Collapse all activity sections`
-  expandAllActivitiesArialLabel = $localize`:@@shared.expandAllActivitiesArialLabel:Expand all all activity sections`
+  expandAllActivitiesArialLabel = $localize`:@@shared.expandAllActivitiesArialLabel:Expand all activity sections`
 
   expandedContent: MainPanelsState = {
     EMPLOYMENT: true,
@@ -139,10 +139,15 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
         switchMap(() => this._togglz.getTogglz().pipe(first())),
         tap((togglz) => {
           if (togglz.messages['ORCID_ANGULAR_HELP_HERO'] === 'true') {
-            this._helpHeroService.initializeHelpHero(
-              this.userInfo,
-              this.userRecord
-            )
+            if (
+              !this.publicOrcid &&
+              !(this.recordWithIssues || this.userNotFound)
+            ) {
+              this._helpHeroService.initializeHelpHero(
+                this.userInfo,
+                this.userRecord
+              )
+            }
           }
 
           if (togglz.messages['CRAZY_EGG'] === 'true') {

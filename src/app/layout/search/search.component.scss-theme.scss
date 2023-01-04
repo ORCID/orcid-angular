@@ -14,7 +14,7 @@
   }
   .input-box {
     input::placeholder {
-      color: mat.get-contrast-color-from-palette($accent, 200);
+      color: mat.get-color-from-palette($background, placeholder-grey);
     }
     input {
       border-color: mat.get-color-from-palette($background, dark-grey);
@@ -26,12 +26,12 @@
     }
 
     ::placeholder {
-      color: mat.get-color-from-palette($background, grey);
+      color: mat.get-color-from-palette($background, placeholder-grey);
     }
 
     :-ms-input-placeholder {
       /* Internet Explorer 10-11 */
-      color: mat.get-color-from-palette($background, grey);
+      color: mat.get-color-from-palette($background, placeholder-grey);
     }
   }
 

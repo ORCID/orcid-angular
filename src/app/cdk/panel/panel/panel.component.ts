@@ -39,7 +39,7 @@ import { getAriaLabel } from '../../../constants'
   styleUrls: ['./panel.component.scss', 'panel.component.scss-theme.scss'],
 })
 export class PanelComponent implements OnInit {
-  @Input() panelId
+  @Input() panelId: string
   @Input() showVisibilityControl = false
   @Input() stackSiblings: any[]
   @Input() stackedHeader = false
@@ -84,7 +84,7 @@ export class PanelComponent implements OnInit {
   @Input() selectable = false
   @Input() selectAll = false
   @Input() checkbox = false
-  @Input() panelTitle: any
+  @Input() panelTitle: string
   _displayTheStack: boolean
   @Input()
   set displayTheStack(value: boolean) {
