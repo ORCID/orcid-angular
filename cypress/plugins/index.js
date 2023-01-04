@@ -55,4 +55,8 @@ module.exports = (on, config) => {
       return email //this task returns one email (JSON object)
     },
   })
+
+  on('task', {
+    generateOTP: require('cypress-otp'),
+  })
 }
