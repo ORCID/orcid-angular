@@ -47,20 +47,34 @@ export default defineConfig({
   chromeWebSecurity: false,
   viewportWidth: 1000,
   viewportHeight: 1000,
-  reporter: 'cypress-mochawesome-reporter',
+  reporter: 'cypress-multi-reporters',
   reporterOptions: {
-    charts: true,
-    overwrite: false,
-    quiet: true,
-    html: false,
-    json: true,
-    embeddedScreenshots: true,
-    inlineAssets: true,
-    saveAllAttempts: false,
-    reportDir: 'cypress/reports/mochawesome-report',
-    reportPageTitle: 'Orcid Automated Regression Test Results',
-    reportFileName: '[status]_[daytime]-[name]-report',
-    timestamp: 'longDate',
+    reporterEnabled: 'cypress-qase-reporter,cypress-mochawesome-reporter',
+    cypressMochawesomeReporterReporterOptions: {
+      charts: true,
+      overwrite: false,
+      quiet: true,
+      html: false,
+      json: true,
+      embeddedScreenshots: true,
+      inlineAssets: true,
+      saveAllAttempts: false,
+      reportDir: 'cypress/reports/mochawesome-report',
+      reportPageTitle: 'Orcid Automated Regression Test Results',
+      reportFileName: '[status]_[daytime]-[name]-report',
+      timestamp: 'longDate',
+    },
+    cypressQaseReporterReporterOptions: {
+      apiToken: process.env.CY_QASE_TOKEN,
+      projectCode: process.env.CY_QASE_PROJECT_CODE,
+      logging: true,
+      basePath: 'https://api.qase.io/v1',
+      screenshotFolder: 'screenshots',
+      sendScreenshot: true,
+      runComplete: true,
+      environmentId: 1,
+      rootSuiteTitle: 'Cypress tests',
+    },
   },
   e2e: {
     setupNodeEvents(on, config) {
@@ -73,6 +87,8 @@ export default defineConfig({
       config.env.cy_admin_oid = process.env.CY_ADMIN_OID
       config.env.cy_admin_secret = process.env.CY_ADMIN_SECRET
       config.env.cy_admin_password = process.env.CY_ADMIN_PASSWORD
+     // config.env.cy_qase_api_token = process.env.CY_QASE_TOKEN
+     // config.env.cy_qase_project_code = process.env.CY_QASE_PROJECT_CODE
 
       //if running headless then skip all-*.cy.js files
       if (config.isTextTerminal) {
