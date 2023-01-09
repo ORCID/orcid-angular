@@ -34,3 +34,11 @@ describe('RecordCountriesService', () => {
     expect(service).toBeTruthy()
   })
 })
+
+export const getCountries = (): { key: string; value: string }[] => {
+  return [
+    { key: 'Albania', value: 'AL' },
+    { key: 'Mexico', value: 'MX' },
+    { key: 'South Africa', value: 'ZA' },
+  ]
+}

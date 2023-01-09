@@ -15,7 +15,13 @@
       class="underline"
       i18n="@@topBar.signInToStart"
       [routerLink]="['/signin']"
-      [attr.aria-label]="labelSignInToStart"
+      [attr.aria-label]="
+        (ariaLabelName
+          ? ariaLabelName
+          : userRecord?.userInfo?.EFFECTIVE_USER_ORCID) +
+        ' ' +
+        labelSignInToStart
+      "
       >Sign in to start editing</a
     >
   </div>

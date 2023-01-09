@@ -90,7 +90,7 @@ export class AccountTrustedIndividualsService {
     return this._http
       .get<SearchResultsByEmailOrOrcid>(
         environment.API_WEB +
-          `manage/search-for-delegate-by-email/${encodeURIComponent(email)}/`,
+          `account/search-for-delegate-by-email/${encodeURIComponent(email)}/`,
         { headers: this.headers }
       )
       .pipe(
@@ -116,7 +116,7 @@ export class AccountTrustedIndividualsService {
     return this._http
       .get<SearchResultsByEmailOrOrcid>(
         environment.API_WEB +
-          `manage/search-for-delegate-by-orcid/${encodeURIComponent(email)}/`,
+          `account/search-for-delegate-by-orcid/${encodeURIComponent(email)}/`,
         { headers: this.headers }
       )
       .pipe(

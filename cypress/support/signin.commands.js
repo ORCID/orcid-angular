@@ -86,3 +86,25 @@ Cypress.Commands.add('programmaticallySignin', (user) => {
     }
   })
 })
+
+//login with admin user that has 2FA enabled, oid and passw from env variables
+Cypress.Commands.add('signin2FA', (token2FA) =>
+  cy
+    .location()
+    .should((loc) => {
+      expect(loc.pathname).to.eq('/signin')
+    })
+    .get('#username')
+    .clear()
+    .type(Cypress.env('cy_admin_oid'))
+    .get('#password')
+    .type(Cypress.env('cy_admin_password'))
+    .get('#signin-button')
+    .click()
+    .wait(2000)
+    .get('[formcontrolname="verificationCode"]')
+    .clear()
+    .type(token2FA)
+    .get('#authenticateButton')
+    .click()
+)

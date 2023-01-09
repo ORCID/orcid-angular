@@ -8,6 +8,7 @@
 ></app-top-bar-record-issues>
 
 <app-top-bar-actions
+  [ariaLabelName]="ariaLabelName"
   [userRecord]="userRecord"
   [userStatus]="userStatus"
   [isPublicRecord]="isPublicRecord"
@@ -251,6 +252,8 @@
               </div>
               <div>
                 <app-panel-expand-buttons
+                  panelType="top-bar"
+                  panelId="also-know-as"
                   (toggle)="collapse()"
                   [openState]="expandedContent"
                 ></app-panel-expand-buttons>
@@ -262,6 +265,7 @@
     </section>
 
     <app-top-bar-actions
+      [ariaLabelName]="ariaLabelName"
       [userRecord]="userRecord"
       [userStatus]="userStatus"
       [isPublicRecord]="isPublicRecord"

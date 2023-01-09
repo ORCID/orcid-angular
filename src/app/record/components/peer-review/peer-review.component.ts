@@ -10,6 +10,8 @@ export class PeerReviewComponent implements OnInit {
   @Input() isPublicRecord: string
   @Input() subPeerReview: PeerReview
   @Input() detailsPeerReviews: any
+  @Input() panelTitle: string
+  @Input() panelId: string
 
   @Input() stackMode
 

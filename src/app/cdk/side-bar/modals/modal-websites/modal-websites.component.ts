@@ -62,7 +62,6 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
 
   ngOrcidDescription = $localize`:@@topBar.description:Link Title`
   ngOrcidUrl = $localize`:@@topBar.url:Link URL`
-  dialogAriaLabelledBy = $localize`:@@shared.dialogAriaLabeledByWebsites:Manage your websites & social links dialog`
 
   constructor(
     @Inject(WINDOW) private window: Window,
