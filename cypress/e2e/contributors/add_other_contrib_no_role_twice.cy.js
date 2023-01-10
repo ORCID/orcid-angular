@@ -52,10 +52,11 @@ describe('Other ppl contributions - add contributor with no specific credit role
         }
       )
       cy.wait(2000)
-      //verify the contributor is displayed in the contributors section 
-      cy.get('app-work-contributors').should('contain.text',otherContributorName)
-      //verify default role txt is NOT displayed
-     .and('not.contain.text',"No Specified Role")
+      //verify the contributor is displayed in the contributors section
+      cy.get('app-work-contributors')
+        .should('contain.text', otherContributorName)
+        //verify default role txt is NOT displayed
+        .and('not.contain.text', 'No Specified Role')
     })
   ) //end of qase tag
 

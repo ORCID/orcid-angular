@@ -46,13 +46,15 @@ describe('Other ppl contributions - add contributor with multiple credit roles',
       })
       cy.get('app-work-contributors').within(($section) => {
         cy.get('#cy-add-another-role').click()
-        cy.get('[formcontrolname="role"]').contains("No Specified Role").click({ force: true })
+        cy.get('[formcontrolname="role"]')
+          .contains('No Specified Role')
+          .click({ force: true })
         cy.wait(2000)
       })
       //choose credit role
       cy.get('[role="listbox"]').within(($list) => {
-      cy.contains(creditRole2).click()
-      cy.wait(1000)
+        cy.contains(creditRole2).click()
+        cy.wait(1000)
       })
 
       //save entry
@@ -67,9 +69,10 @@ describe('Other ppl contributions - add contributor with multiple credit roles',
       )
 
       //verify contributor is displayed in details section for this work
-      cy.get('app-display-attribute').contains(otherContributorName)
-      .contains(creditRole1, { matchCase: false })
-      .contains(creditRole2, { matchCase: false })
+      cy.get('app-display-attribute')
+        .contains(otherContributorName)
+        .contains(creditRole1, { matchCase: false })
+        .contains(creditRole2, { matchCase: false })
     })
   ) //end of qase tag
 

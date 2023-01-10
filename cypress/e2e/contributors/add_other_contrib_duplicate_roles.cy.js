@@ -17,7 +17,7 @@ describe('Add other contributor with duplicate roles - negative testing', async 
       const otherContributorName = 'Bryan Adams'
       const creditRole = 'Conceptualization'
       const fieldErrorMessage = 'Role cannot be duplicated'
-      const formErrorPopUp= 'Form validation error'
+      const formErrorPopUp = 'Form validation error'
 
       cy.get('#cy-works').within(($myPanel) => {
         cy.get('#cy-menu-add-works').click()
@@ -47,22 +47,28 @@ describe('Add other contributor with duplicate roles - negative testing', async 
       })
       cy.get('app-work-contributors').within(($section) => {
         cy.get('#cy-add-another-role').click()
-        cy.get('[formcontrolname="role"]').contains("No Specified Role").click({ force: true })
+        cy.get('[formcontrolname="role"]')
+          .contains('No Specified Role')
+          .click({ force: true })
         cy.wait(2000)
       })
       //choose credit role
       cy.get('[role="listbox"]').within(($list) => {
-      cy.contains(creditRole).click()
-      cy.wait(1000)
+        cy.contains(creditRole).click()
+        cy.wait(1000)
       })
       //form validation is displayed
-      cy.get('mat-error').contains(fieldErrorMessage,{ matchCase: false }).should('be.visible')
+      cy.get('mat-error')
+        .contains(fieldErrorMessage, { matchCase: false })
+        .should('be.visible')
 
       //try to save entry
       cy.get('#save-work-button').wait(1000).click({ force: true })
       cy.wait(1000)
-      cy.get('snack-bar-container').contains(formErrorPopUp,{ matchCase: false }).should('be.visible')
-      
+      cy.get('snack-bar-container')
+        .contains(formErrorPopUp, { matchCase: false })
+        .should('be.visible')
+
       //remove duplicate role
       cy.get('app-work-contributors').within(($section) => {
         cy.get('[id*="cy-remove-role"]').click()
@@ -70,7 +76,7 @@ describe('Add other contributor with duplicate roles - negative testing', async 
 
       //save entry
       cy.get('#save-work-button').wait(1000).click({ force: true })
-      
+
       //Verify work was added
       cy.contains('app-panel-data', otherContributorName).within(
         ($thisWork) => {
@@ -78,9 +84,9 @@ describe('Add other contributor with duplicate roles - negative testing', async 
         }
       )
       //verify contributor is displayed in details section for this work
-      cy.get('app-display-attribute').contains(otherContributorName)
-      .contains(creditRole, { matchCase: false })
-
+      cy.get('app-display-attribute')
+        .contains(otherContributorName)
+        .contains(creditRole, { matchCase: false })
     })
   ) //end of qase tag
 
