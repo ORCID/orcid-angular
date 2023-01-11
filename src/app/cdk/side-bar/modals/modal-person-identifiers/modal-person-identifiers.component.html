@@ -9,6 +9,7 @@
       (click)="saveEvent()"
       i18n="@@shared.saveChanges"
       id="save-personal-id-button"
+      [attr.aria-label]="ariaLabelSave"
     >
       Save changes
     </button>
@@ -18,6 +19,7 @@
       (click)="closeEvent()"
       i18n="@@shared.cancel"
       id="cancel-personal-id-button"
+      [attr.aria-label]="ariaLabelCancel"
     >
       Cancel
     </button>
@@ -118,6 +120,7 @@
                 (click)="deletePersonalIdentifier(personIdentifier.putCode)"
                 mat-icon-button
                 class="delete-button"
+                [attr.aria-label]="ariaLabelDelete"
               >
                 <mat-icon
                   class="material-icons-outlined extra-large-material-icon"

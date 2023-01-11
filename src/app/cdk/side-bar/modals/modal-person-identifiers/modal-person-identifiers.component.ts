@@ -18,6 +18,10 @@ import { PersonIdentifierEndpoint } from 'src/app/types/record-person-identifier
   preserveWhitespaces: true,
 })
 export class ModalPersonIdentifiersComponent implements OnInit, OnDestroy {
+  ariaLabelSave = $localize`:@@side-bar.ariaLabelPersonalIdSave:Save changes to Other IDs`
+  ariaLabelCancel = $localize`:@@side-bar.ariaLabelPersonalIdCancel:Cancel changes to Other IDs`
+  ariaLabelDelete = $localize`:@@side-bar.ariaLabelPersonalIdDelete:Delete Other IDs`
+  
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   constructor(

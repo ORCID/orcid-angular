@@ -10,6 +10,7 @@
       (click)="saveEvent()"
       i18n="@@shared.saveChanges"
       id="save-countries-button"
+      [attr.aria-label]="ariaLabelSave"
     >
       Save changes
     </button>
@@ -19,6 +20,7 @@
       (click)="closeEvent()"
       i18n="@@shared.cancel"
       id="cancel-countries-button"
+      [attr.aria-label]="ariaLabelCancel"
     >
       Cancel
     </button>
@@ -114,6 +116,7 @@
                 (click)="deleteCountry(country.putCode)"
                 mat-icon-button
                 class="delete-button"
+                [attr.aria-label]="ariaLabelDelete"
               >
                 <mat-icon
                   class="material-icons-outlined extra-large-material-icon"

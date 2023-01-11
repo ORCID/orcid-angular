@@ -7,6 +7,7 @@
       (click)="saveEvent()"
       i18n="@@shared.saveChanges"
       id="save-emails-button"
+      [attr.aria-label]="ariaLabelSave"
     >
       Save changes
     </button>
@@ -16,6 +17,7 @@
       (click)="closeEvent()"
       i18n="@@shared.cancel"
       id="cancel-emails-button"
+      [attr.aria-label]="ariaLabelCancel"
     >
       Cancel
     </button>
@@ -35,6 +37,7 @@
               rel="noopener noreferrer"
               href="/content/orcid-terms-use"
               i18n="@@side-bar.termOfUse"
+              [attr.ariaLabel]="ariaLabelOrcidTermsOfUseLink"
               >ORCID terms of use</a
             >
             <ng-container i18n="@@side-bar.youMayOnly">
@@ -253,6 +256,7 @@
               formControlName="email"
               type="email"
               appTrim
+              aria-label="email"
             />
             <mat-icon matPrefix>verified</mat-icon>
             <mat-error
@@ -347,6 +351,7 @@
               (click)="deleteEmail(email.putCode)"
               mat-icon-button
               class="delete-button"
+              [attr.aria-label]="ariaLabelDelete"
             >
               <mat-icon
                 class="material-icons-outlined extra-large-material-icon"

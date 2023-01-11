@@ -11,6 +11,7 @@
       (click)="saveEvent()"
       i18n="@@shared.saveChanges"
       id="save-websites-button"
+      [attr.aria-label]="ariaLabelSave"
     >
       Save changes
     </button>
@@ -20,6 +21,7 @@
       (click)="closeEvent()"
       i18n="@@shared.cancel"
       id="cancel-websites-button"
+      [attr.aria-label]="ariaLabelCancel"
     >
       Cancel
     </button>
@@ -87,7 +89,7 @@
                   class="mat-form-field-min description"
                 >
                   <input
-                    id="description-input"
+                    class="cy-description-input"
                     #descriptionInput
                     matInput
                     formControlName="description"
@@ -144,7 +146,7 @@
                   class="mat-form-field-min"
                 >
                   <input
-                    id="url-input"
+                    class="cy-url-input"
                     matInput
                     formControlName="url"
                     placeholder="{{ ngOrcidUrl }}"
@@ -217,9 +219,10 @@
                 formControlName="visibility"
               ></app-privacy-selector>
               <button
-                id="delete-button"
+                class="delete-button"
                 (click)="deleteWebsite(website.putCode)"
                 mat-icon-button
+                [attr.aria-label]="ariaLabelDelete"
               >
                 <mat-icon
                   class="material-icons-outlined extra-large-material-icon"

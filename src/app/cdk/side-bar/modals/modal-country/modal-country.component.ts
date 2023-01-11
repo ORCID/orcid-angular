@@ -31,6 +31,9 @@ import {
   ],
 })
 export class ModalCountryComponent implements OnInit, OnDestroy {
+  ariaLabelSave = $localize`:@@side-bar.ariaLabelCountrySave:Save changes to Countries`
+  ariaLabelCancel = $localize`:@@side-bar.ariaLabelCountryCancel:Cancel changes to Countries`
+  ariaLabelDelete = $localize`:@@side-bar.ariaLabelCountryDelete:Delete Country`
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   constructor(

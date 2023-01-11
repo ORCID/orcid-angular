@@ -20,8 +20,8 @@ describe('App displays error messages when user inputs invalid data', async func
       cy.get('.cy-edit-button').click()
     })
     cy.get('#add-link').click()
-    cy.get('#description-input').clear() //empty
-    cy.get('#url-input')
+    cy.get('.cy-description-input').clear() //empty
+    cy.get('.url-input')
       .clear()
       .type(testingData.sidebarWebsitesURL.duplicateURL)
     cy.get('#save-websites-button').click({ force: true })
@@ -40,10 +40,10 @@ describe('App displays error messages when user inputs invalid data', async func
       cy.get('.cy-edit-button').click()
     })
     cy.get('#add-link').click()
-    cy.get('#description-input')
+    cy.get('.cy-description-input')
       .clear()
       .type(testingData.sidebarWebsitesURL.titleURL)
-    cy.get('#url-input').clear() //empty
+    cy.get('.url-input').clear() //empty
     //try to save
     cy.get('#save-websites-button').click()
 
@@ -61,10 +61,10 @@ describe('App displays error messages when user inputs invalid data', async func
       cy.get('.cy-edit-button').click()
     })
     cy.get('#add-link').click()
-    cy.get('#description-input')
+    cy.get('.cy-description-input')
       .clear()
       .type(testingData.sidebarWebsitesURL.titleURL)
-    cy.get('#url-input').clear().type(testingData.sidebarWebsitesURL.maxSizeURL)
+    cy.get('.url-input').clear().type(testingData.sidebarWebsitesURL.maxSizeURL)
 
     //save
     cy.get('#save-websites-button').click()
@@ -83,11 +83,11 @@ describe('App displays error messages when user inputs invalid data', async func
       cy.get('.cy-edit-button').click()
     })
     cy.get('#add-link').click()
-    cy.get('#description-input')
+    cy.get('.cy-description-input')
       .clear()
       .type(testingData.sidebarWebsitesURL.titleURL)
     //type a valid url longer than 1999 characters
-    cy.get('#url-input')
+    cy.get('.url-input')
       .clear()
       .type(testingData.sidebarWebsitesURL.maxSizeURL + '/test')
     //try to save
@@ -107,10 +107,10 @@ describe('App displays error messages when user inputs invalid data', async func
     })
     //add valid title and url
     cy.get('#add-link').click()
-    cy.get('#description-input')
+    cy.get('.cy-description-input')
       .clear()
       .type(testingData.sidebarWebsitesURL.titleURL)
-    cy.get('#url-input')
+    cy.get('.url-input')
       .clear()
       .type(testingData.sidebarWebsitesURL.duplicateURL)
     cy.get('#save-websites-button').click()
@@ -125,10 +125,10 @@ describe('App displays error messages when user inputs invalid data', async func
     //try to add same url with all caps
     cy.get('#add-link').click()
     cy.get('#draggable-1').within(($row1) => {
-      cy.get('#description-input')
+      cy.get('.cy-description-input')
         .clear()
         .type(testingData.sidebarWebsitesURL.duplicateTitle)
-      cy.get('#url-input')
+      cy.get('.url-input')
         .clear()
         .type(testingData.sidebarWebsitesURL.duplicateAllCapsURL)
     })
@@ -149,7 +149,7 @@ describe('App displays error messages when user inputs invalid data', async func
       cy.get('.cy-edit-button').click()
     })
     cy.get('#add-link').click()
-    cy.get('#url-input')
+    cy.get('.url-input')
       .clear()
       .type(testingData.sidebarWebsitesURL.noProtocolURL)
     cy.get('#save-websites-button').click()
@@ -168,7 +168,7 @@ describe('App displays error messages when user inputs invalid data', async func
       cy.get('.cy-edit-button').click()
     })
     cy.get('#add-link').click()
-    cy.get('#url-input')
+    cy.get('.url-input')
       .clear()
       .type(testingData.sidebarWebsitesURL.mixedCaseURL)
     cy.get('#save-websites-button').click()
@@ -188,10 +188,10 @@ describe('App displays error messages when user inputs invalid data', async func
       cy.get('.cy-edit-button').click()
     })
     cy.get('#add-link').click()
-    cy.get('#description-input')
+    cy.get('.cy-description-input')
       .clear()
       .type(testingData.sidebarWebsitesURL.titleURL)
-    cy.get('#url-input')
+    cy.get('.url-input')
       .clear()
       .type(testingData.sidebarWebsitesURL.internationalURL1)
     cy.get('#save-websites-button').click()
@@ -201,7 +201,7 @@ describe('App displays error messages when user inputs invalid data', async func
       testingData.errorMessages.invalidURL
     )
 
-    cy.get('#url-input')
+    cy.get('.url-input')
       .clear()
       .type(testingData.sidebarWebsitesURL.internationalURL2)
     cy.get('#save-websites-button').click()
@@ -211,7 +211,7 @@ describe('App displays error messages when user inputs invalid data', async func
       testingData.errorMessages.invalidURL
     )
 
-    cy.get('#url-input')
+    cy.get('.url-input')
       .clear()
       .type(testingData.sidebarWebsitesURL.internationalURL3)
     cy.get('#save-websites-button').click()
@@ -221,7 +221,7 @@ describe('App displays error messages when user inputs invalid data', async func
       testingData.errorMessages.invalidURL
     )
 
-    cy.get('#url-input')
+    cy.get('.url-input')
       .clear()
       .type(testingData.sidebarWebsitesURL.internationalURL4)
     cy.get('#save-websites-button').click()
@@ -248,10 +248,10 @@ describe('App displays error messages when user inputs invalid data', async func
       cy.get('.cy-edit-button').click()
     })
     cy.get('#add-link').click()
-    cy.get('#description-input')
+    cy.get('.cy-description-input')
       .clear()
       .type(testingData.sidebarWebsitesURL.titleURL)
-    cy.get('#url-input').clear() //empty
+    cy.get('.url-input').clear() //empty
     cy.get('#save-websites-button').click()
 
     //verify the URL field is required
@@ -282,10 +282,10 @@ describe('App displays error messages when user inputs invalid data', async func
       cy.get('.cy-edit-button').click()
     })
     cy.get('#add-link').click()
-    cy.get('#description-input')
+    cy.get('.cy-description-input')
       .clear()
       .type(testingData.sidebarWebsitesURL.titleURL)
-    cy.get('#url-input')
+    cy.get('.url-input')
       .clear()
       .type(testingData.sidebarWebsitesURL.duplicateURL)
     cy.get('#save-websites-button').click()

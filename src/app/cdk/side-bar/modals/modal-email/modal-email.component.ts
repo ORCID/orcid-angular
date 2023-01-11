@@ -42,6 +42,11 @@ import { OrcidValidators } from 'src/app/validators'
   preserveWhitespaces: true,
 })
 export class ModalEmailComponent implements OnInit, OnDestroy {
+  ariaLabelOrcidTermsOfUseLink = $localize`:@@side-bar.ariaLabelOrcidTermsOfUseLink:ORCID terms of use`
+  ariaLabelSave = $localize`:@@side-bar.ariaLabelEmailSave:Save changes to Emails`
+  ariaLabelCancel = $localize`:@@side-bar.ariaLabelEmailCancel:Cancel changes to Emails`
+  ariaLabelDelete = $localize`:@@side-bar.ariaLabelEmailDelete:Delete Email`
+
   @ViewChildren('emailInput') inputs: QueryList<ElementRef>
   verificationsSend: string[] = []
   $destroy: Subject<boolean> = new Subject<boolean>()
