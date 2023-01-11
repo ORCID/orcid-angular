@@ -24,9 +24,9 @@ describe('Delete contributor while adding a work', async function () {
         cy.contains(workType).click()
       })
       cy.get('#title-input').clear().type(title)
-    
+
       //remove the record owner as contributor
-      cy.get('app-work-contributors').within(($contribSection)=>{
+      cy.get('app-work-contributors').within(($contribSection) => {
         cy.get('#cy-delete-button-0').click()
       })
 
@@ -35,12 +35,12 @@ describe('Delete contributor while adding a work', async function () {
       cy.wait(2000)
 
       //Verify work was added
-      cy.contains('app-work-stack', title).within(
-        ($thisWork) => {
-          cy.contains('Show more detail').click()
-          cy.get('app-panel-data').should('not.include.text','Contributors', { matchCase: false })
-        }
-      )
+      cy.contains('app-work-stack', title).within(($thisWork) => {
+        cy.contains('Show more detail').click()
+        cy.get('app-panel-data').should('not.include.text', 'Contributors', {
+          matchCase: false,
+        })
+      })
     })
   ) //end of qase tag
 
