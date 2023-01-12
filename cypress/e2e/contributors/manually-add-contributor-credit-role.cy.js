@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 
 import userData from '../../fixtures/contributors-fixtures/contributors-users.fixture.json'
+import { qase } from 'cypress-qase-reporter/dist/mocha'
 
 describe('Manually add work with contributor credit role', async function () {
   before(() => {
@@ -10,9 +11,11 @@ describe('Manually add work with contributor credit role', async function () {
 
   //manually adding a simple work entry
   //choosing a contributor credit role for the record owner
+  qase(
+    '1',
   it('Manually add work with contributor credit role', function () {
     const workType = 'Book'
-    const title = 'Cypress test contributors'
+    const title = 'Cypress test contributors 1'
     const creditRole = 'Conceptualization'
 
     cy.get('#cy-works').within(($myPanel) => {
@@ -42,7 +45,8 @@ describe('Manually add work with contributor credit role', async function () {
     //verify contributors info is displayed
     cy.get('#cy-works').should('contain', creditRole)
   })
-
+ )//end of qase tag
+ 
   after(() => {
     //log out
     cy.get('#cy-user-info').click({ force: true })
