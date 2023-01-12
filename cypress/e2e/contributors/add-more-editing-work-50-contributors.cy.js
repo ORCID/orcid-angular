@@ -3,11 +3,10 @@
 import userData from '../../fixtures/contributors-fixtures/contributors-users.fixture.json'
 import { qase } from 'cypress-qase-reporter/dist/mocha'
 
-
 describe('Add more contributors while editing a work with 50 contributors', async function () {
-  const workTitle="QASE19"
-  const noticeMessage = "You cannot add any more contributors to this work"
-  
+  const workTitle = 'QASE19'
+  const noticeMessage = 'You cannot add any more contributors to this work'
+
   before(() => {
     //log in with user that has 50 contrib
     cy.visit(Cypress.env('signInURL'))
@@ -16,20 +15,18 @@ describe('Add more contributors while editing a work with 50 contributors', asyn
 
   qase(
     '19',
-    it('Add more contributors while editing a work with 50 contributors', function () { 
+    it('Add more contributors while editing a work with 50 contributors', function () {
       //edit work added
-      cy.contains('app-work-stack', workTitle).within(
-        ($thisWork) => {
-          cy.get('button[aria-label*="Edit work"]').click()
-        }
-      )
+      cy.contains('app-work-stack', workTitle).within(($thisWork) => {
+        cy.get('button[aria-label*="Edit work"]').click()
+      })
       //verify link to add one more contrib is disabled
       cy.get('#cy-add-another-contributor').should('have.class', 'disabled')
 
       //verify the panel is displayed
-      cy.contains('.notice-panel',noticeMessage)
+      cy.contains('.notice-panel', noticeMessage)
     })
-  )//end of qase tag
+  ) //end of qase tag
 
   after(() => {
     //log out
