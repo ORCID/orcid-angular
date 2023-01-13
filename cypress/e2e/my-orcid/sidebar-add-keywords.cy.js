@@ -19,7 +19,7 @@ describe('My orcid - users are able to add content to their record', async funct
 
     cy.get('#add-keyword').click()
 
-    cy.get('#content-input').clear().type(addKeyword)
+    cy.get('.content-input').clear().type(addKeyword)
     cy.get('#save-keywords-button').click()
     cy.wait(1000)
 
