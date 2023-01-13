@@ -40,7 +40,6 @@ import { WINDOW } from '../../../window'
   ],
 })
 export class ModalKeywordComponent implements OnInit, OnDestroy {
-
   ariaLabelSave = $localize`:@@side-bar.ariaLabelKeywordSave:Save changes to Keywords`
   ariaLabelCancel = $localize`:@@side-bar.ariaLabelKeywordCancel:Cancel changes to Keywords`
   ariaLabelDelete = $localize`:@@side-bar.ariaLabelKeywordDelete:Delete Keyword`
