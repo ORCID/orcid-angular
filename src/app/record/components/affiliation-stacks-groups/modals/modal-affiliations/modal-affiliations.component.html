@@ -102,6 +102,7 @@
     </button>
   </app-modal-footer>
   <form [formGroup]="affiliationForm">
+    
     <form>
       <div
         id="organization"
@@ -112,12 +113,15 @@
         }"
       >
         <div class="row">
-          <p>
+          <h2       [ngClass]="{
+            'orc-font-body': !platform.columns12,
+            'orc-font-body-large': platform.columns12
+          }">
             <strong i18n="@@shared.organization" >
               Organization
             </strong>
             <span *ngIf="!platform.columns12" class="required">*</span>
-          </p>
+          </h2>
           <p
             *ngIf="platform.columns12"
             class="required-information mat-caption"
@@ -131,6 +135,7 @@
       </div>
       <hr />
     </form>
+    <section id="{{type}} + 'organization'">
     <div class="row">
       <label
         class="mat-caption"
@@ -330,6 +335,8 @@
         </mat-error>
       </mat-form-field>
     </div>
+    </section>
+    <section id="{{type}} + 'details'">
     <form>
       <div
         id="affiliation-details"
@@ -340,7 +347,10 @@
         }"
       >
         <div class="row">
-          <p>
+          <h2       [ngClass]="{
+            'orc-font-body': !platform.columns12,
+            'orc-font-body-large': platform.columns12
+          }">
             <strong
               i18n="@@shared.employmentDetails"
               *ngIf="type === 'employment'"
@@ -370,7 +380,7 @@
               *ngIf="type === 'distinction'"
             >
               Distinction details
-            </strong>
+          </strong>
             <strong
               i18n="@@shared.membershipDetails"
               *ngIf="type === 'membership'"
@@ -381,7 +391,7 @@
               Service details
             </strong>
             <span *ngIf="!platform.columns12" class="required">*</span>
-          </p>
+          </h2>
         </div>
       </div>
       <hr />
@@ -654,8 +664,10 @@
         </mat-error>
       </mat-form-field>
     </div>
+    </section >
+    <section id="{{type}} + 'visibility'">
     <form>
-      <div
+      <h2 
         id="visibility"
         class="title visibility"
         [ngClass]="{
@@ -666,7 +678,7 @@
         <p>
           <strong i18n="@@shared.visibility">Visibility</strong>
         </p>
-      </div>
+      </h2>
       <hr />
       <p class="orc-font-body-small">
         {{ ngOrcidDefaultVisibilityLabel }}
@@ -682,5 +694,6 @@
         ></app-privacy-selector>
       </div>
     </div>
+    </section>
   </form>
 </app-modal>
