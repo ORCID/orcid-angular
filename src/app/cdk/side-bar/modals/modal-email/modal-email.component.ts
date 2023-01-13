@@ -49,7 +49,7 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   ariaLabelCancel = $localize`:@@side-bar.ariaLabelEmailCancel:Cancel changes to Emails`
   ariaLabelDelete = $localize`:@@side-bar.ariaLabelEmailDelete:Delete Email`
   ariaLabelClose = $localize`:@@side-bar.ariaLabelEmailClose:Close Emails`
-  ariaLabelEmail = $localize`:@@side-bar.ariaLabelEmailClose:Email Emails`
+  ariaLabelEmail = $localize`:@@side-bar.ariaLabelEmail:Emails`
 
   @ViewChildren('emailInput') inputs: QueryList<ElementRef>
   verificationsSend: string[] = []

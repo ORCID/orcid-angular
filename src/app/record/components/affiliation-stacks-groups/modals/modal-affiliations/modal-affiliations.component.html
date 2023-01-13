@@ -1,29 +1,8 @@
 <app-modal [loading]="loadingCountryCodes || loadingAffiliations">
-  <app-modal-header>
-    <ng-container i18n="@@shared.employment" *ngIf="type === 'employment'">
-      Employment
-    </ng-container>
-    <ng-container i18n="@@shared.education" *ngIf="type === 'education'">
-      Education
-    </ng-container>
-    <ng-container
-      i18n="@@shared.qualification"
-      *ngIf="type === 'qualification'"
-    >
-      Qualification
-    </ng-container>
-    <ng-container i18n="@@shared.invited" *ngIf="type === 'invited-position'">
-      Invited Position
-    </ng-container>
-    <ng-container i18n="@@shared.distinction" *ngIf="type === 'distinction'">
-      Distinction
-    </ng-container>
-    <ng-container i18n="@@shared.membershipTitle" *ngIf="type === 'membership'">
-      Membership
-    </ng-container>
-    <ng-container i18n="@@shared.service" *ngIf="type === 'service'">
-      Service
-    </ng-container>
+  <app-modal-header
+    [closeLabel]="closeLabel + ' ' + (type | affiliationTypeLabel)"
+  >
+    {{ type | affiliationTypeLabel }}
   </app-modal-header>
   <app-modal-side-bar>
     <ng-container id="side-bar-title">
@@ -107,6 +86,7 @@
       (click)="saveEvent()"
       i18n="@@shared.saveChanges"
       id="save-affiliation-button"
+      [attr.aria-label]="saveLabel + ' ' + (type | affiliationTypeLabel)"
     >
       Save changes
     </button>
@@ -116,6 +96,7 @@
       (click)="closeEvent()"
       i18n="@@shared.cancel"
       id="cancel-affiliation-button"
+      [attr.aria-label]="cancelChanges + ' ' + (type | affiliationTypeLabel)"
     >
       Cancel
     </button>
@@ -132,7 +113,9 @@
       >
         <div class="row">
           <p>
-            <strong i18n="@@shared.organization"> Organization </strong>
+            <strong i18n="@@shared.organization" >
+              Organization
+            </strong>
             <span *ngIf="!platform.columns12" class="required">*</span>
           </p>
           <p
@@ -150,7 +133,6 @@
     </form>
     <div class="row">
       <label
-        for="organization-input"
         class="mat-caption"
         [ngClass]="{
           error:
@@ -159,7 +141,9 @@
               affiliationForm.get('organization').touched)
         }"
       >
-        <strong i18n="@@shared.organization">Organization</strong>
+        <strong i18n="@@shared.organization" id="organizationLabel"
+          >Organization</strong
+        >
         <span class="required">*</span>
       </label>
     </div>
@@ -173,6 +157,7 @@
         }"
       >
         <input
+          aria-labelledby="organizationLabel"
           id="organization-input"
           matInput
           formControlName="organization"
@@ -251,13 +236,18 @@
               affiliationForm.get('city').touched)
         }"
       >
-        <strong i18n="@@shared.city">City</strong>
+        <strong i18n="@@shared.city" id="cityLabel">City</strong>
         <span class="required">*</span>
       </label>
     </div>
     <div class="input-container">
       <mat-form-field appearance="outline" class="mat-form-field-min">
-        <input id="city-input" matInput formControlName="city" />
+        <input
+          id="city-input"
+          matInput
+          formControlName="city"
+          aria-labelledby="cityLabel"
+        />
         <mat-error
           class="mat-caption"
           *ngIf="affiliationForm.get('city').hasError('required')"
@@ -275,12 +265,19 @@
     </div>
     <div class="row">
       <label for="region-input" class="mat-caption">
-        <strong i18n="@@shared.region">Region, State or County</strong>
+        <strong i18n="@@shared.region" aria-labelledby="regionLabel"
+          >Region, State or County</strong
+        >
       </label>
     </div>
     <div class="input-container">
       <mat-form-field appearance="outline" class="mat-form-field-min">
-        <input id="region-input" matInput formControlName="region" />
+        <input
+          id="region-input"
+          aria-labelledby="regionLabel"
+          matInput
+          formControlName="region"
+        />
         <mat-error
           *ngIf="affiliationForm.get('region').errors?.maxlength"
           i18n="@@shared.maxLength.less_than_one_thousand"
@@ -300,7 +297,9 @@
               affiliationForm.get('country').touched)
         }"
       >
-        <strong i18n="@@shared.countryOrLocation">Country/Location</strong>
+        <strong i18n="@@shared.countryOrLocation" id="countryLabel"
+          >Country/Location</strong
+        >
         <span class="required">*</span>
       </label>
     </div>
@@ -389,12 +388,19 @@
     </form>
     <div class="row">
       <label for="department-input" class="mat-caption">
-        <strong i18n="@@shared.department">Department</strong>
+        <strong i18n="@@shared.department" id="deparmentLabel"
+          >Department</strong
+        >
       </label>
     </div>
     <div class="input-container">
       <mat-form-field appearance="outline" class="mat-form-field-min">
-        <input id="department-input" matInput formControlName="department" />
+        <input
+          id="department-input"
+          matInput
+          formControlName="department"
+          aria-labelledby="deparmentLabel"
+        />
         <mat-error
           *ngIf="affiliationForm.get('department').errors?.maxlength"
           i18n="@@shared.maxLength.less_than_one_thousand"
@@ -404,7 +410,7 @@
       </mat-form-field>
     </div>
     <div class="row">
-      <label for="title-input" class="mat-caption">
+      <label for="title-input" class="mat-caption" id="award-label">
         <strong i18n="@@shared.degree" *ngIf="type === 'education'">
           Degree/title
         </strong>
@@ -429,7 +435,12 @@
     </div>
     <div class="input-container">
       <mat-form-field appearance="outline" class="mat-form-field-min">
-        <input id="title-input" matInput formControlName="title" />
+        <input
+          aria-labelledby="award-label"
+          id="title-input"
+          matInput
+          formControlName="title"
+        />
         <mat-error
           *ngIf="affiliationForm.get('title').errors?.maxlength"
           i18n="@@shared.maxLength.less_than_one_thousand"
@@ -444,18 +455,12 @@
     >
       <div class="row">
         <label
-          for="url-input"
           class="mat-caption"
           [ngClass]="{
             error: affiliationForm.hasError('date', 'startDateGroup')
           }"
         >
-          <ng-container *ngIf="type !== 'distinction'">
-            <strong i18n="@@shared.startDate">Start date</strong>
-          </ng-container>
-          <ng-container *ngIf="type == 'distinction'">
-            <strong i18n="@@shared.distinctionDate">Date of distinction</strong>
-          </ng-container>
+          <strong>{{ dateLabel }}</strong>
         </label>
       </div>
       <div class="row input-container date-group" id="cy-start-date-group">
@@ -466,7 +471,7 @@
             class="mat-form-field-min"
           >
             <mat-select
-              aria-label="{{ ngOrcidYear }}"
+              aria-label="{{ dateLabel + ' ' + ngOrcidYear }}"
               placeholder="{{ ngOrcidYear }}"
               formControlName="startDateYear"
               id="cy-start-date-year-sel"
@@ -485,7 +490,7 @@
             class="mat-form-field-min"
           >
             <mat-select
-              aria-label="{{ ngOrcidMonth }}"
+              aria-label="{{ dateLabel + ' ' + ngOrcidMonth }}"
               placeholder="{{ ngOrcidMonth }}"
               formControlName="startDateMonth"
               id="cy-start-date-month-sel"
@@ -504,7 +509,7 @@
             class="mat-form-field-min"
           >
             <mat-select
-              aria-label="{{ ngOrcidDay }}"
+              aria-label="{{ dateLabel + ' ' + ngOrcidDay }}"
               placeholder="{{ ngOrcidDay }}"
               formControlName="startDateDay"
               id="cy-start-date-day-sel"
@@ -549,7 +554,7 @@
             class="mat-form-field-min"
           >
             <mat-select
-              aria-label="{{ ngOrcidYear }}"
+              aria-label="{{ dateLabel + ' ' + ngOrcidYear }}"
               placeholder="{{ ngOrcidYear }}"
               formControlName="endDateYear"
               id="cy-end-date-year-sel"
@@ -568,7 +573,7 @@
             class="mat-form-field-min"
           >
             <mat-select
-              aria-label="{{ ngOrcidMonth }}"
+              aria-label="{{ dateLabel + ' ' + ngOrcidMonth }}"
               placeholder="{{ ngOrcidMonth }}"
               formControlName="endDateMonth"
               id="cy-end-date-month-sel"
@@ -587,7 +592,7 @@
             class="mat-form-field-min"
           >
             <mat-select
-              aria-label="{{ ngOrcidDay }}"
+              aria-label="{{ dateLabel + ' ' + ngOrcidDay }}"
               placeholder="{{ ngOrcidDay }}"
               formControlName="endDateDay"
               id="cy-end-date-day-sel"
@@ -624,12 +629,12 @@
         class="mat-caption"
         [ngClass]="{ error: affiliationForm.hasError('pattern', 'link') }"
       >
-        <strong i18n="@@shared.link">Link</strong>
+        <strong i18n="@@shared.link" aria-label=>Link</strong>
       </label>
     </div>
     <div class="input-container">
       <mat-form-field appearance="outline" class="mat-form-field-min">
-        <input id="url-input" matInput formControlName="link" />
+        <input id="url-input" matInput formControlName="link" [attr.aria-label]="(type | affiliationTypeLabel)+ ' ' + linkLabel"/>
         <mat-hint class="mat-caption" i18n="@@shared.linkDescription">
           A link to a profile page or description of the role. Links should be
           in the full URL format e.g. http://www.website.com/page.html

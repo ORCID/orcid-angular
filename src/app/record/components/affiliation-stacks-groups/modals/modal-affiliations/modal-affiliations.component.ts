@@ -46,8 +46,26 @@ import { RecordService } from 'src/app/core/record/record.service'
 })
 export class ModalAffiliationsComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
+  closeLabel = $localize`:@@shared.ariaLabelClose:Close`
+  saveLabel = $localize`:@@shared.saveChangesTo:Save changes to`
+  cancelChanges = $localize`:@@shared.cancelChangesAndClose:Cancel changes and close`
+  linkLabel = $localize`:@@shared.link:Link`
+  endDateLabel = $localize`:@@shared.endDate:End date`
+  private _type: AffiliationType
+  dateLabel: string
+  @Input()
+  public get type(): AffiliationType {
+    return this._type
+  }
+  public set type(value: AffiliationType) {
+    this._type = value
+    if (value !== 'distinction') {
+      this.dateLabel = $localize`:@@shared.startDate:Start date`
+    } else {
+      this.dateLabel = $localize`:@@shared.distinctionDate:Date of distinction`
+    }
+  }
 
-  @Input() type: AffiliationType
   @Input() affiliation: Affiliation
   @Input() options: { createACopy: boolean }
 
