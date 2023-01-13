@@ -44,6 +44,9 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
   ariaLabelSave = $localize`:@@side-bar.ariaLabelKeywordSave:Save changes to Keywords`
   ariaLabelCancel = $localize`:@@side-bar.ariaLabelKeywordCancel:Cancel changes to Keywords`
   ariaLabelDelete = $localize`:@@side-bar.ariaLabelKeywordDelete:Delete Keyword`
+  ariaLabelNewKeyword = $localize`:@@side-bar.ariaLabelKeywordNew:New Keyword`
+  ariaLabelKeyword = $localize`:@@side-bar.ariaLabelKeyword:Keyword`
+  ariaLabelKeywordsClose = $localize`:@@side-bar.ariaLabelCloseKeywords:Close Keywords`
 
   $destroy: Subject<boolean> = new Subject<boolean>()
   @ViewChildren('keywordInput') inputs: QueryList<ElementRef>

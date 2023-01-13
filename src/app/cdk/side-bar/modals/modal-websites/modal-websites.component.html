@@ -1,5 +1,5 @@
 <app-modal [loading]="loadingWebsites" [noSidebar]="true">
-  <app-modal-header>
+  <app-modal-header [closeLabel]="ariaLabelClose">
     <ng-container i18n="@@topBar.websites">
       Websites & social links</ng-container
     >
@@ -41,9 +41,9 @@
     </p>
     <ng-container *ngIf="websites?.length > 0">
       <div class="row">
-        <h3 class="col no-gutters orc-font-body" i18n="@@topBar.myLinks">
+        <h2 class="col no-gutters orc-font-body" i18n="@@topBar.myLinks">
           My links
-        </h3>
+        </h2>
       </div>
       <hr class="dashed-line" />
       <div
@@ -91,6 +91,7 @@
                   <input
                     class="cy-description-input"
                     #descriptionInput
+                    [attr.aria-label]="ariaLabelTitle"
                     matInput
                     formControlName="description"
                     placeholder=" {{ ngOrcidDescription }}"
@@ -146,6 +147,7 @@
                   class="mat-form-field-min"
                 >
                   <input
+                    [attr.aria-label]="ariaLabelURL"
                     class="cy-url-input"
                     matInput
                     formControlName="url"
@@ -222,7 +224,12 @@
                 class="delete-button"
                 (click)="deleteWebsite(website.putCode)"
                 mat-icon-button
-                [attr.aria-label]="ariaLabelDelete"
+                [attr.aria-label]="
+                  ariaLabelDelete +
+                  ' ' +
+                  (websitesForm.get(website.putCode).get('description').value ||
+                    '')
+                "
               >
                 <mat-icon
                   class="material-icons-outlined extra-large-material-icon"

@@ -2,7 +2,9 @@
   [loading]="loadingCountries || loadingCountryCodes"
   [noSidebar]="true"
 >
-  <app-modal-header i18n="@@side-bar.countries">Countries</app-modal-header>
+  <app-modal-header [closeLabel]="ariaLabelClose" i18n="@@side-bar.countries"
+    >Countries</app-modal-header
+  >
   <app-modal-footer>
     <button
       mat-raised-button
@@ -41,15 +43,16 @@
     </div>
     <ng-container *ngIf="countries?.length > 0">
       <div class="row">
-        <h3
+        <h2
           class="col no-gutters orc-font-body"
           i18n="@@side-bar.myCountriesAndLocations"
         >
           My countries/locations
-        </h3>
+        </h2>
       </div>
       <hr class="dashed-line" />
-      <div
+      <section
+        id="my-countries"
         class="row country-list"
         id="country-dropList"
         cdkDropList
@@ -81,20 +84,23 @@
                 [ngClass]="{ 'two-line-hint': isMobile }"
                 [attr.id]="'cy-country-' + i"
               >
+                her here
                 <mat-select
+                  [aria-label]="ariaLabelSelect"
                   #countrySelect
                   id="cy-country-select-{{ i }}"
                   formControlName="country"
                   placeholder=" {{ ngOrcidCountry }}"
                 >
-                  <mat-option
+                  <ng-container
                     *ngFor="
                       let countryCode of countryCodes | sortBy: 'asc':'key'
                     "
-                    [value]="countryCode.key"
                   >
-                    {{ countryCode.key }}
-                  </mat-option>
+                    <mat-option [value]="countryCode.key">
+                      {{ countryCode.key }}
+                    </mat-option>
+                  </ng-container>
                 </mat-select>
                 <mat-hint *ngIf="country.putCode.indexOf('new') < 0">
                   <app-source-hit
@@ -116,7 +122,9 @@
                 (click)="deleteCountry(country.putCode)"
                 mat-icon-button
                 class="delete-button"
-                [attr.aria-label]="ariaLabelDelete"
+                [attr.aria-label]="
+                  ariaLabelDelete + ' ' + (country.countryName || '')
+                "
               >
                 <mat-icon
                   class="material-icons-outlined extra-large-material-icon"
@@ -127,7 +135,7 @@
           </div>
           <hr class="dashed-line" />
         </div>
-      </div>
+      </section>
     </ng-container>
     <div class="row">
       <a class="col add-more no-gutters" (click)="addCountry()" id="add-link">

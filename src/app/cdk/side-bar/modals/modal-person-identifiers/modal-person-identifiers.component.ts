@@ -19,9 +19,11 @@ import { PersonIdentifierEndpoint } from 'src/app/types/record-person-identifier
 })
 export class ModalPersonIdentifiersComponent implements OnInit, OnDestroy {
   ariaLabelSave = $localize`:@@side-bar.ariaLabelPersonalIdSave:Save changes to Other IDs`
-  ariaLabelCancel = $localize`:@@side-bar.ariaLabelPersonalIdCancel:Cancel changes to Other IDs`
-  ariaLabelDelete = $localize`:@@side-bar.ariaLabelPersonalIdDelete:Delete Other IDs`
-  
+  ariaLabelCancel = $localize`:@@side-bar.ariaLabelPersonalIdCancel:Cancel changes to Other IDs and close Other identifiers`
+  ariaLabelDelete = $localize`:@@share.ariaLabelDelete:Delete identifier`
+  ariaLabelIdentifier = $localize`:@@share.ariaLabelIdentifier:Identifier`
+  ariaLabelOtherIdsSupport = $localize`:@@side-bar.ariaLabelOtherIdsSupport:Find out how to add other identifiers to your ORCID record (Opens in a new tab)`
+  ariaLabelIdentifierUrl = $localize`:@@side-bar.ariaLabelUrl:Open identifier page (Opens in a new tab)`
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   constructor(
