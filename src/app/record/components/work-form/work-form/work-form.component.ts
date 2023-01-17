@@ -61,6 +61,10 @@ import { RecordService } from 'src/app/core/record/record.service'
   ],
 })
 export class WorkFormComponent implements OnInit {
+  ngOrcidYear = $localize`:@@shared.yearPub:Publication year`
+  ngOrcidMonth = $localize`:@@shared.monthub:Publication month`
+  ngOrcidDay = $localize`:@@shared.dayub:Publication day`
+
   @Input() work: Work
   @Input() userRecord: UserRecord
   @Input() externalIdentifier: boolean
@@ -96,9 +100,6 @@ export class WorkFormComponent implements OnInit {
   workIdentifiersFormArray: UntypedFormArray = new UntypedFormArray([])
   workIdentifiersFormArrayDisplayState: boolean[] = []
 
-  ngOrcidYear = $localize`:@@shared.year:Year`
-  ngOrcidMonth = $localize`:@@shared.month:Month`
-  ngOrcidDay = $localize`:@@shared.day:Day`
   ngOrcidSelectWorkType = $localize`:@@works.selectWorkType:Select a work type`
   ngOrcidSelectLanguage = $localize`:@@shared.selectLanguage:Select a language`
   ngOrcidSelectACitationType = $localize`:@@works.selectACitationType:Select a citation type`
