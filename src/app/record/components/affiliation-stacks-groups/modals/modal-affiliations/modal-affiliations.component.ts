@@ -51,7 +51,7 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
   ngOrcidYear = $localize`:@@shared.year:Year`
   ngOrcidMonth = $localize`:@@shared.month:Month`
   ngOrcidDay = $localize`:@@shared.day:Day`
-  
+
   cancelChanges = $localize`:@@shared.cancelChangesAndClose:Cancel changes and close`
   linkLabel = $localize`:@@shared.link:Link`
   endDateLabel = $localize`:@@shared.endDate:End date`
@@ -104,7 +104,6 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
   days = Array(31)
     .fill(0)
     .map((i, idx) => idx + 1)
-
 
   ngOrcidSelectACountryOrLocation = $localize`:@@shared.selectACountryOrLocation:Select a country or location`
   ngOrcidDefaultVisibilityLabel = $localize`:@@shared.visibilityDescription:Control who can see this information by setting the visibility. Your default visibility is`
