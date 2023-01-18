@@ -234,6 +234,11 @@
                         mat-icon-button
                         (click)="deleteContributor(i)"
                         [id]="'cy-delete-button-' + i"
+                        [attr.aria-label]="
+                          deleteLabel +
+                          ' ' +
+                          contributor.get('creditName')?.value
+                        "
                       >
                         <mat-icon
                           class="material-icons-outlined extra-large-material-icon"
@@ -259,6 +264,7 @@
                             }"
                           >
                             <mat-select
+                              [aria-label]="ngOrcidSelectRoleAriaLabel"
                               #roleSelect
                               placeholder="{{ ngOrcidSelectRole }}"
                               formControlName="role"
@@ -285,6 +291,7 @@
                         </div>
                         <div class="col l3 delete-button">
                           <button
+                            [attr.aria-label]="deleteLabel + ' ' + role.value"
                             mat-icon-button
                             (click)="deleteRole(contributor, i)"
                             [id]="'cy-remove-role-' + i"
@@ -302,7 +309,7 @@
                       <a
                         class="underline"
                         (click)="addAnotherRole(contributor)"
-                        id="cy-add-another-role"
+                        [id]="'cy-add-another-role-' + id"
                       >
                         <span class="mat-body-1" i18n="@@works.addAnotherRole">
                           Add another role
@@ -320,6 +327,9 @@
                   mat-icon-button
                   (click)="deleteContributor(i)"
                   [id]="'cy-delete-button-' + i"
+                  [attr.aria-label]="
+                    deleteLabel + ' ' + contributor.get('creditName')?.value
+                  "
                 >
                   <mat-icon
                     class="material-icons-outlined extra-large-material-icon"

@@ -100,7 +100,7 @@ describe('WorkContributorRoleComponent', () => {
     await roles[0].clickOptions({ text: 'Conceptualization' })
 
     const addAnotherRoleButton = debugElement.query(
-      By.css('#cy-add-another-role')
+      By.css('#cy-add-another-role-contributors')
     )
     addAnotherRoleButton.triggerEventHandler('click', null)
     await fixture.whenStable()
@@ -119,7 +119,7 @@ describe('WorkContributorRoleComponent', () => {
     fixture.detectChanges()
 
     const addAnotherRoleButton = debugElement.query(
-      By.css('#cy-add-another-role')
+      By.css('#cy-add-another-role-contributors')
     )
     addAnotherRoleButton.triggerEventHandler('click', null)
     await fixture.whenStable()

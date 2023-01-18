@@ -29,6 +29,7 @@ import { MatSelect } from '@angular/material/select'
   ],
 })
 export class WorkContributorRolesComponent implements OnInit {
+  deleteLabel = $localize`:@@shared.deleteActivityAriaLabel:Delete`
   @ViewChildren('roleSelect') inputs: QueryList<MatSelect>
 
   _contributors: Contributor[]
