@@ -7,9 +7,8 @@ describe('contributor name field is required', async function () {
   const workType = 'Book'
   const title = 'Cypress test contributors 29'
   const errorTxt = 'Contributor name is required'
-  
-  before(() => {
-  })
+
+  before(() => {})
 
   qase(
     '29',
@@ -19,15 +18,17 @@ describe('contributor name field is required', async function () {
 
       //go to add work form
       cy.get('#cy-works').within(($myPanel) => {
-      cy.get('#cy-menu-add-works').click()
+        cy.get('#cy-menu-add-works').click()
       })
       cy.get('#cy-add-work-manually').click({ force: true })
       cy.wait(1000)
       cy.get('[formcontrolname="workType"]').click()
-      cy.get('[role="listbox"], [aria-label="work-type-label"]').contains(workType).click()
+      cy.get('[role="listbox"], [aria-label="work-type-label"]')
+        .contains(workType)
+        .click()
       cy.get('#title-input').clear().type(title)
       cy.get('#cy-add-another-contributor').click()
-      
+
       //save entry
       cy.get('#save-work-button').wait(1000).click({ force: true })
 
@@ -37,7 +38,7 @@ describe('contributor name field is required', async function () {
       cy.get('#cancel-work-button').click()
     })
   ) //end of qase tag
- 
+
   after(() => {
     //log out
     cy.get('#cy-user-info').click({ force: true })
