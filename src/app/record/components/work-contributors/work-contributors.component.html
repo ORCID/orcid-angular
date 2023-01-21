@@ -17,16 +17,18 @@
   <ng-container *ngIf="contributorsFormArray?.controls?.length > 0">
     <div class="row title">
       <label class="orc-font-body">
-        <strong i18n="@@works.contributorsToThisWork"
-          >Contributors to this work</strong
-        >
-        <ng-container
-          *ngIf="contributors?.length <= maxNumberOfContributors + 1"
-        >
-          ({{
-            contributorsFormArray?.controls?.length || contributors?.length
-          }})
-        </ng-container>
+        <h3 class="orc-font-body">
+          <ng-container i18n="@@works.contributorsToThisWork">
+            Contributors to this work
+          </ng-container>
+          <ng-container
+            *ngIf="contributors?.length <= maxNumberOfContributors + 1"
+          >
+            ({{
+              contributorsFormArray?.controls?.length || contributors?.length
+            }})
+          </ng-container>
+        </h3>
       </label>
     </div>
     <ng-container
