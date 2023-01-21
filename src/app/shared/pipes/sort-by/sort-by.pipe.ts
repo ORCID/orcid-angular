@@ -1,5 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core'
-import { orderBy } from 'lodash'
 
 @Pipe({
   name: 'sortBy',
@@ -12,13 +11,21 @@ export class SortByPipe implements PipeTransform {
     if (value.length <= 1) {
       return value
     }
-    if (!column || column === '') {
+    if (column) {
       if (order === 'asc') {
-        return value.sort()
+        return sortLocalCompare(value, column)
       } else {
-        return value.sort().reverse()
+        return sortLocalCompare(value, column).reverse()
       }
     }
-    return orderBy(value, [column], order === 'asc')
+    if (order === 'asc') {
+      return value.sort()
+    } else {
+      return value.sort().reverse()
+    }
   }
+}
+
+const sortLocalCompare = (value, column) => {
+  return value.sort((a, b) => a[column].localeCompare(b[column]))
 }
