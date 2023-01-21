@@ -1,16 +1,16 @@
 <form [formGroup]="workForm" *ngIf="workForm">
   <section id="wok-detail">
-    <div
-      id="workDetails"
-      class="title row"
-      [ngClass]="{
-        'orc-font-body': !platform.columns12,
-        'orc-font-body-large': platform.columns12
-      }"
-    >
-      <p>
-        <strong i18n="@@works.workDetails"> Work details </strong>
-      </p>
+    <div id="workDetails" class="title row">
+      <h2
+        [ngClass]="{
+          'orc-font-body': !platform.columns12,
+          'orc-font-body-large': platform.columns12
+        }"
+        class="orc-font-body"
+        i18n="@@works.workDetails"
+      >
+        Work details
+      </h2>
       <p *ngIf="platform.columns12" class="required-information mat-caption">
         <span class="required">*</span>
         <ng-container i18n="@@shared.requiredInformation"
@@ -39,7 +39,7 @@
         id="cy-work-types-form-field"
       >
         <mat-select
-          aria-label="work-type-label"
+          aria-labelledby="work-type-label"
           formControlName="workType"
           (selectionChange)="$workTypeUpdateEvent.next()"
           placeholder="{{ ngOrcidSelectWorkType }}"
@@ -434,10 +434,10 @@
         class="mat-form-field-min two-line-hint input-container"
       >
         <input
+          aria-labelledby="linkLabel"
           id="url-input"
           matInput
           formControlName="url"
-          aria-labelledby="linkLabel"
         />
         <mat-error
           *ngIf="workForm.get('url').hasError('pattern')"
@@ -471,9 +471,17 @@
         'orc-font-body-large': platform.columns12
       }"
     >
-      <p>
-        <strong i18n="@@works.citation" id="citationLabel"> Citation </strong>
-      </p>
+      <h2
+        [ngClass]="{
+          'orc-font-body': !platform.columns12,
+          'orc-font-body-large': platform.columns12
+        }"
+        class="orc-font-body"
+        i18n="@@works.citation"
+        id="citationLabel"
+      >
+        Citation
+      </h2>
     </div>
 
     <hr />
@@ -608,11 +616,17 @@
         'orc-font-body-large': platform.columns12
       }"
     >
-      <p>
-        <strong i18n="@@works.workIds" id="work-id-label">
-          Work identifiers</strong
-        >
-      </p>
+      <h2
+        class="orc-font-body"
+        [ngClass]="{
+          'orc-font-body': !platform.columns12,
+          'orc-font-body-large': platform.columns12
+        }"
+        i18n="@@works.workIds"
+        id="work-id-label"
+      >
+        Work identifiers
+      </h2>
     </div>
     <hr />
 
@@ -679,18 +693,17 @@
     <!-- Contributors  -->
     <!---------------------->
 
-    <div
-      class="title"
-      [ngClass]="{
-        'orc-font-body': !platform.columns12,
-        'orc-font-body-large': platform.columns12
-      }"
-    >
-      <p>
-        <strong i18n="@@works.contributors" id="contributors-label"
-          >Contributors</strong
-        >
-      </p>
+    <div class="title">
+      <h2
+        [ngClass]="{
+          'orc-font-body': !platform.columns12,
+          'orc-font-body-large': platform.columns12
+        }"
+        i18n="@@works.contributors"
+        id="contributors-label"
+      >
+        Contributors
+      </h2>
     </div>
     <hr />
 
@@ -704,26 +717,25 @@
       [contributors]="work?.contributorsGroupedByOrcid"
       [userRecord]="userRecord"
       [recordHolderAsContributor]="work?.putCode?.value || externalIdentifier"
-    ></app-work-contributors>
+    ></app-work-contributors
+    >z
   </section>
   <section id="other-info">
     <!---------------------->
     <!-- Work Other Information -->
     <!---------------------->
 
-    <div
-      class="title"
-      id="otherInformation"
-      [ngClass]="{
-        'orc-font-body': !platform.columns12,
-        'orc-font-body-large': platform.columns12
-      }"
-    >
-      <p>
-        <strong i18n="@@works.otherInformation" id="other-info-label">
-          Other information</strong
-        >
-      </p>
+    <div class="title" id="otherInformation">
+      <h2
+        [ngClass]="{
+          'orc-font-body': !platform.columns12,
+          'orc-font-body-large': platform.columns12
+        }"
+        i18n="@@works.otherInformation"
+        id="other-info-label"
+      >
+        Other information
+      </h2>
     </div>
     <hr />
 
@@ -795,17 +807,16 @@
     <!-- Work Visibility -->
     <!---------------------->
 
-    <div
-      id="visibility"
-      class="title"
-      [ngClass]="{
-        'orc-font-body': !platform.columns12,
-        'orc-font-body-large': platform.columns12
-      }"
-    >
-      <p>
-        <strong i18n="@@shared.visibility"> Visibility </strong>
-      </p>
+    <div id="visibility" class="title">
+      <h2
+        [ngClass]="{
+          'orc-font-body': !platform.columns12,
+          'orc-font-body-large': platform.columns12
+        }"
+        i18n="@@shared.visibility"
+      >
+        Visibility
+      </h2>
     </div>
     <hr />
 

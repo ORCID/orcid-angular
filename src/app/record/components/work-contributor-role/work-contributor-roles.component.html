@@ -1,11 +1,13 @@
 <div class="container no-padding" *ngIf="roles?.controls?.length > 0">
   <div class="row title">
     <label for="cy-role" class="orc-font-body">
-      <strong
+      <h3
         i18n="@@works.yourContributionsToThisWork"
         id="your-contributors-label"
-        >Your contributions to this work</strong
+        class="orc-font-body"
       >
+        Your contributions to this work
+      </h3>
     </label>
   </div>
   <ng-container formArrayName="roles">

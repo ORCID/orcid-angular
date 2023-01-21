@@ -120,6 +120,13 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
     .fill(0)
     .map((i, idx) => idx + 1)
 
+  totalFundingAmountCurrency = $localize`:@@share.totalFundingAmountCurrency:Currency`
+  totalFundingAmount = $localize`:@@share.totalFundingAmount:Total funding amount`
+  ariaLabelStartDate = $localize`:@@shared.startDate:Start date`
+  ariaLabelEndDate = $localize`:@@shared.startDate:End date`
+  ariaLabelSaveChanges = $localize`:@@shared.saveFundingChanges:Save funding changes`
+  ariaLabelCancelChanges = $localize`:@@shared.cancelFundingChanges:Cancel changes and close Funding`
+
   ngOrcidYear = $localize`:@@shared.year:Year`
   ngOrcidMonth = $localize`:@@shared.month:Month`
   ngOrcidFundingType = $localize`:@@funding.selectAType:Select a funding type`
