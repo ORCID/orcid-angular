@@ -319,21 +319,30 @@
     >
       <div class="row">
         <label
-          for="start-date-year-input"
           class="mat-caption"
           [ngClass]="{
             error: workForm.hasError('date', 'startDateGroup')
           }"
         >
-          <strong i18n="@@shared.publicationDate" id="publica-date-label"
+          <strong i18n="@@shared.publicationDate" id="publication-date-label"
             >Publication date</strong
           >
         </label>
       </div>
-      <div class="input-container date">
+      <div
+        class="input-container date"
+        id="publication-date-group"
+        role="group"
+        aria-labelledby="publication-date-label"
+      >
         <div class="col l4 date">
+          <label
+            for="cy-start-date-year-sel"
+            class="sr-only"
+            i18n="@@shared.year">
+            Year
+          </label>
           <mat-form-field
-            id="start-date-year-input"
             appearance="outline"
             class="mat-form-field-min"
           >
@@ -356,6 +365,12 @@
           </mat-form-field>
         </div>
         <div class="col l4 date">
+          <label
+            for="cy-start-date-month-sel"
+            class="sr-only"
+            i18n="@@shared.month">
+            Month
+          </label>
           <mat-form-field
             id="start-date-month-input"
             appearance="outline"
@@ -380,6 +395,12 @@
           </mat-form-field>
         </div>
         <div class="col l4 date">
+          <label
+            for="cy-start-date-day-sel"
+            class="sr-only"
+            i18n="@@shared.day">
+            Day
+          </label>
           <mat-form-field
             id="start-date-day-input"
             appearance="outline"
