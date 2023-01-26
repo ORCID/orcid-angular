@@ -41,6 +41,7 @@
         <mat-select
           id="cy-work-types"
           aria-labelledby="work-type-label"
+          id="cy-work-types"
           formControlName="workType"
           (selectionChange)="$workTypeUpdateEvent.next()"
           placeholder="{{ ngOrcidSelectWorkType }}"
@@ -740,7 +741,7 @@
       [userRecord]="userRecord"
       [recordHolderAsContributor]="work?.putCode?.value || externalIdentifier"
     ></app-work-contributors
-    >z
+    >
   </section>
   <section id="other-info">
     <!---------------------->
