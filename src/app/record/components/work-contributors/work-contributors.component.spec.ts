@@ -174,7 +174,7 @@ describe('WorkContributorsComponent', () => {
     await findByClassNameAndClickButton(
       debugElement,
       fixture,
-      '#cy-add-another-role'
+      '#cy-add-another-role-0000-0000-0000-000X'
     )
 
     const roles = await loader.getAllHarnesses(MatSelectHarness)
@@ -194,7 +194,7 @@ describe('WorkContributorsComponent', () => {
     await findByClassNameAndClickButton(
       debugElement,
       fixture,
-      '#cy-add-another-role'
+      '#cy-add-another-role-0000-0000-0000-000X'
     )
 
     const roles = await loader.getAllHarnesses(MatSelectHarness)
@@ -271,7 +271,7 @@ describe('WorkContributorsComponent', () => {
     await findByClassNameAndClickButton(
       debugElement,
       fixture,
-      '#cy-add-another-role'
+      '#cy-add-another-role-0000-0000-0000-000X'
     )
 
     const roles = await loader.getAllHarnesses(MatSelectHarness)
