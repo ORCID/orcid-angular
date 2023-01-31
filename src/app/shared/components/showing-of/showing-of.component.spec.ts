@@ -6,13 +6,11 @@ describe('ShowingOfComponent', () => {
   let component: ShowingOfComponent
   let fixture: ComponentFixture<ShowingOfComponent>
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [ShowingOfComponent],
-      }).compileComponents()
-    })
-  )
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [ShowingOfComponent],
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ShowingOfComponent)

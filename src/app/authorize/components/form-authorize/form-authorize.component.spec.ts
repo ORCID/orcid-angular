@@ -17,25 +17,23 @@ describe('FormAuthorizeComponent', () => {
   let component: FormAuthorizeComponent
   let fixture: ComponentFixture<FormAuthorizeComponent>
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule, RouterTestingModule],
-        declarations: [FormAuthorizeComponent],
-        providers: [
-          WINDOW_PROVIDERS,
-          UserService,
-          OauthService,
-          PlatformInfoService,
-          ErrorHandlerService,
-          SnackbarService,
-          MatSnackBar,
-          MatDialog,
-          Overlay,
-        ],
-      }).compileComponents()
-    })
-  )
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule, RouterTestingModule],
+      declarations: [FormAuthorizeComponent],
+      providers: [
+        WINDOW_PROVIDERS,
+        UserService,
+        OauthService,
+        PlatformInfoService,
+        ErrorHandlerService,
+        SnackbarService,
+        MatSnackBar,
+        MatDialog,
+        Overlay,
+      ],
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
     fixture = TestBed.createComponent(FormAuthorizeComponent)

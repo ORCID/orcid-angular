@@ -20,26 +20,24 @@ describe('ModalPersonIdentifiersComponent', () => {
   let component: ModalPersonIdentifiersComponent
   let fixture: ComponentFixture<ModalPersonIdentifiersComponent>
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule, RouterTestingModule],
-        declarations: [ModalPersonIdentifiersComponent],
-        providers: [
-          { provide: MatDialogRef, useValue: {} },
-          { provide: MAT_DIALOG_DATA, useValue: {} },
-          WINDOW_PROVIDERS,
-          RecordPersonIdentifierService,
-          PlatformInfoService,
-          ErrorHandlerService,
-          SnackbarService,
-          MatSnackBar,
-          MatDialog,
-          Overlay,
-        ],
-      }).compileComponents()
-    })
-  )
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule, RouterTestingModule],
+      declarations: [ModalPersonIdentifiersComponent],
+      providers: [
+        { provide: MatDialogRef, useValue: {} },
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+        WINDOW_PROVIDERS,
+        RecordPersonIdentifierService,
+        PlatformInfoService,
+        ErrorHandlerService,
+        SnackbarService,
+        MatSnackBar,
+        MatDialog,
+        Overlay,
+      ],
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ModalPersonIdentifiersComponent)

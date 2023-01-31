@@ -32,7 +32,8 @@ import { UserRecord } from '../../../../../types/record.local'
   styleUrls: ['./work-external-id-modal.component.scss'],
 })
 export class WorkExternalIdModalComponent
-  implements OnInit, OnDestroy, AfterViewInit {
+  implements OnInit, OnDestroy, AfterViewInit
+{
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   @ViewChild('workFormComponent') workFormComponent: WorkFormComponent

@@ -14,27 +14,21 @@ describe('SettingsPanelsComponent', () => {
   let component: SettingsPanelsComponent
   let fixture: ComponentFixture<SettingsPanelsComponent>
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        imports: [
-          HttpClientTestingModule,
-          MatDialogModule,
-          RouterTestingModule,
-        ],
-        declarations: [SettingsPanelsComponent],
-        providers: [
-          WINDOW_PROVIDERS,
-          PlatformInfoService,
-          ErrorHandlerService,
-          SnackbarService,
-          MatSnackBar,
-          MatDialog,
-          Overlay,
-        ],
-      }).compileComponents()
-    })
-  )
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule, MatDialogModule, RouterTestingModule],
+      declarations: [SettingsPanelsComponent],
+      providers: [
+        WINDOW_PROVIDERS,
+        PlatformInfoService,
+        ErrorHandlerService,
+        SnackbarService,
+        MatSnackBar,
+        MatDialog,
+        Overlay,
+      ],
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SettingsPanelsComponent)
