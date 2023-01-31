@@ -46,7 +46,7 @@ describe('Manually add work with contributor credit role', async function () {
       cy.get('#cy-works').should('contain', creditRole)
     })
   ) //end of qase tag
-
+  
   after(() => {
     //log out
     cy.get('#cy-user-info').click({ force: true })

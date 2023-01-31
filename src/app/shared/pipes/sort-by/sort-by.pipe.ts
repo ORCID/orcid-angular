@@ -11,6 +11,7 @@ export class SortByPipe implements PipeTransform {
     if (value.length <= 1) {
       return value
     }
+
     if (column) {
       if (order === 'asc') {
         return sortLocalCompare(value, column)
