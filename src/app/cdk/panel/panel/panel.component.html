@@ -29,7 +29,7 @@
   <div *ngIf="selectable">
     <mat-checkbox
       [aria-label]="
-        type | appPanelActivityActionAriaLabel: 'select':this.panelTitle
+        type | appPanelActivityActionAriaLabel : 'select' : this.panelTitle
       "
       class="text-wrap"
       *ngIf="(defaultPutCode === putCode || displayTheStack) && !isPublicRecord"
@@ -80,7 +80,7 @@
           *ngIf="!isPublicRecord && isUserSource"
           [matTooltip]="tooltipLabelEdit"
           [attr.aria-label]="
-            type | appPanelActivityActionAriaLabel: 'edit':this.panelTitle
+            type | appPanelActivityActionAriaLabel : 'edit' : this.panelTitle
           "
           (click)="openModal()"
         >

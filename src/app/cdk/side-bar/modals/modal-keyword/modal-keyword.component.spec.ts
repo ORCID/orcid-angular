@@ -21,27 +21,25 @@ describe('ModalKeywordComponent', () => {
   let component: ModalKeywordComponent
   let fixture: ComponentFixture<ModalKeywordComponent>
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule, RouterTestingModule],
-        declarations: [ModalKeywordComponent],
-        providers: [
-          { provide: MatDialogRef, useValue: {} },
-          { provide: MAT_DIALOG_DATA, useValue: {} },
-          WINDOW_PROVIDERS,
-          RecordKeywordService,
-          UserService,
-          PlatformInfoService,
-          ErrorHandlerService,
-          SnackbarService,
-          MatSnackBar,
-          MatDialog,
-          Overlay,
-        ],
-      }).compileComponents()
-    })
-  )
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule, RouterTestingModule],
+      declarations: [ModalKeywordComponent],
+      providers: [
+        { provide: MatDialogRef, useValue: {} },
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+        WINDOW_PROVIDERS,
+        RecordKeywordService,
+        UserService,
+        PlatformInfoService,
+        ErrorHandlerService,
+        SnackbarService,
+        MatSnackBar,
+        MatDialog,
+        Overlay,
+      ],
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ModalKeywordComponent)

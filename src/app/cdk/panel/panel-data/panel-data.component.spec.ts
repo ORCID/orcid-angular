@@ -15,23 +15,21 @@ describe('PanelDataComponent', () => {
   let component: PanelDataComponent
   let fixture: ComponentFixture<PanelDataComponent>
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule, RouterTestingModule],
-        declarations: [PanelDataComponent],
-        providers: [
-          WINDOW_PROVIDERS,
-          PlatformInfoService,
-          ErrorHandlerService,
-          SnackbarService,
-          MatSnackBar,
-          MatDialog,
-          Overlay,
-        ],
-      }).compileComponents()
-    })
-  )
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule, RouterTestingModule],
+      declarations: [PanelDataComponent],
+      providers: [
+        WINDOW_PROVIDERS,
+        PlatformInfoService,
+        ErrorHandlerService,
+        SnackbarService,
+        MatSnackBar,
+        MatDialog,
+        Overlay,
+      ],
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PanelDataComponent)

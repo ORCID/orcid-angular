@@ -99,9 +99,8 @@ describe('Inbox: add/update/delete Employment via API', async function () {
       cy.exec(curlReadSingleEmployment + putCode + "'").then(
         (singleEmploymentResp) => {
           //remove non json header from string
-          const jsonStartIndex = singleEmploymentResp.stdout.indexOf(
-            '{"created-date"'
-          ) //where does the json start?
+          const jsonStartIndex =
+            singleEmploymentResp.stdout.indexOf('{"created-date"') //where does the json start?
           updatedContent = singleEmploymentResp.stdout.substring(jsonStartIndex)
           //update the employment: make a change in the content
           updatedContent = updatedContent.replace(

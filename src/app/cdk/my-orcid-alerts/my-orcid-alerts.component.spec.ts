@@ -6,13 +6,11 @@ describe('MyOrcidAlertsComponent', () => {
   let component: MyOrcidAlertsComponent
   let fixture: ComponentFixture<MyOrcidAlertsComponent>
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [MyOrcidAlertsComponent],
-      }).compileComponents()
-    })
-  )
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [MyOrcidAlertsComponent],
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MyOrcidAlertsComponent)
