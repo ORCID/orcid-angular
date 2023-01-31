@@ -26,8 +26,8 @@ describe('My orcid - users are able to add content to their record', async funct
 
     cy.get('#add-link').click()
 
-    cy.get('#description-input').clear().type(addDesc)
-    cy.get('#url-input').clear().type(addUrl)
+    cy.get('.cy-description-input').clear().type(addDesc)
+    cy.get('.url-input').clear().type(addUrl)
     cy.get('#save-websites-button').click()
     cy.wait(1000)
 
@@ -45,10 +45,10 @@ describe('My orcid - users are able to add content to their record', async funct
       cy.get('.cy-edit-button').click()
     })
     cy.get('#add-link').click()
-    cy.get('#description-input')
+    cy.get('.cy-description-input')
       .clear()
       .type(testingData.sidebarWebsitesURL.arabicTitle)
-    cy.get('#url-input')
+    cy.get('.url-input')
       .clear()
       .type(testingData.sidebarWebsitesURL.duplicateURL)
     //try to save
@@ -68,10 +68,10 @@ describe('My orcid - users are able to add content to their record', async funct
       cy.get('.cy-edit-button').click()
     })
     cy.get('#add-link').click()
-    cy.get('#description-input')
+    cy.get('.cy-description-input')
       .clear()
       .type(testingData.sidebarWebsitesURL.russianTitle)
-    cy.get('#url-input')
+    cy.get('.url-input')
       .clear()
       .type(testingData.sidebarWebsitesURL.duplicateURL)
     //try to save
@@ -91,10 +91,10 @@ describe('My orcid - users are able to add content to their record', async funct
       cy.get('.cy-edit-button').click()
     })
     cy.get('#add-link').click()
-    cy.get('#description-input')
+    cy.get('.cy-description-input')
       .clear()
       .type(testingData.sidebarWebsitesURL.chineseTitle)
-    cy.get('#url-input')
+    cy.get('.url-input')
       .clear()
       .type(testingData.sidebarWebsitesURL.duplicateURL)
     //try to save
@@ -114,10 +114,10 @@ describe('My orcid - users are able to add content to their record', async funct
       cy.get('.cy-edit-button').click()
     })
     cy.get('#add-link').click()
-    cy.get('#description-input')
+    cy.get('.cy-description-input')
       .clear()
       .type(testingData.sidebarWebsitesURL.titleURL)
-    cy.get('#url-input')
+    cy.get('.url-input')
       .clear()
       .type('   ' + testingData.sidebarWebsitesURL.duplicateURL)
 
@@ -135,7 +135,7 @@ describe('My orcid - users are able to add content to their record', async funct
     cy.get('#websites-panel').within(($myPanel) => {
       cy.get('.cy-edit-button').click()
     })
-    cy.get('#url-input').should('not.contain', ' ')
+    cy.get('.url-input').should('not.contain', ' ')
   })
 
   it('Trailing whitespaces in URL are trimmed on save', function () {
@@ -144,10 +144,10 @@ describe('My orcid - users are able to add content to their record', async funct
       cy.get('.cy-edit-button').click()
     })
     cy.get('#add-link').click()
-    cy.get('#description-input')
+    cy.get('.cy-description-input')
       .clear()
       .type(testingData.sidebarWebsitesURL.titleURL)
-    cy.get('#url-input')
+    cy.get('.url-input')
       .clear()
       .type(testingData.sidebarWebsitesURL.duplicateURL + '     ')
 
@@ -165,7 +165,7 @@ describe('My orcid - users are able to add content to their record', async funct
     cy.get('#websites-panel').within(($myPanel) => {
       cy.get('.cy-edit-button').click()
     })
-    cy.get('#url-input').should('not.contain', ' ')
+    cy.get('.url-input').should('not.contain', ' ')
   })
 
   afterEach(() => {

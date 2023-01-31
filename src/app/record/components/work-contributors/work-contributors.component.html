@@ -17,16 +17,18 @@
   <ng-container *ngIf="contributorsFormArray?.controls?.length > 0">
     <div class="row title">
       <label class="orc-font-body">
-        <strong i18n="@@works.contributorsToThisWork"
-          >Contributors to this work</strong
-        >
-        <ng-container
-          *ngIf="contributors?.length <= maxNumberOfContributors + 1"
-        >
-          ({{
-            contributorsFormArray?.controls?.length || contributors?.length
-          }})
-        </ng-container>
+        <h3 class="orc-font-body">
+          <ng-container i18n="@@works.contributorsToThisWork">
+            Contributors to this work
+          </ng-container>
+          <ng-container
+            *ngIf="contributors?.length <= maxNumberOfContributors + 1"
+          >
+            ({{
+              contributorsFormArray?.controls?.length || contributors?.length
+            }})
+          </ng-container>
+        </h3>
       </label>
     </div>
     <ng-container
@@ -217,7 +219,7 @@
                           "
                           i18n="@@works.contributorNameIsRequired"
                         >
-                          Contributors name is required
+                          Contributor name is required
                         </mat-error>
                         <mat-error
                           *ngIf="
@@ -234,6 +236,11 @@
                         mat-icon-button
                         (click)="deleteContributor(i)"
                         [id]="'cy-delete-button-' + i"
+                        [attr.aria-label]="
+                          deleteLabel +
+                          ' ' +
+                          contributor.get('creditName')?.value
+                        "
                       >
                         <mat-icon
                           class="material-icons-outlined extra-large-material-icon"
@@ -259,6 +266,7 @@
                             }"
                           >
                             <mat-select
+                              [aria-label]="ngOrcidSelectRoleAriaLabel"
                               #roleSelect
                               placeholder="{{ ngOrcidSelectRole }}"
                               formControlName="role"
@@ -285,6 +293,7 @@
                         </div>
                         <div class="col l3 delete-button">
                           <button
+                            [attr.aria-label]="deleteLabel + ' ' + role.value"
                             mat-icon-button
                             (click)="deleteRole(contributor, i)"
                             [id]="'cy-remove-role-' + i"
@@ -302,7 +311,7 @@
                       <a
                         class="underline"
                         (click)="addAnotherRole(contributor)"
-                        id="cy-add-another-role"
+                        [id]="'cy-add-another-role-' + id"
                       >
                         <span class="mat-body-1" i18n="@@works.addAnotherRole">
                           Add another role
@@ -320,6 +329,9 @@
                   mat-icon-button
                   (click)="deleteContributor(i)"
                   [id]="'cy-delete-button-' + i"
+                  [attr.aria-label]="
+                    deleteLabel + ' ' + contributor.get('creditName')?.value
+                  "
                 >
                   <mat-icon
                     class="material-icons-outlined extra-large-material-icon"
