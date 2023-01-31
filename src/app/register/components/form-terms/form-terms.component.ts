@@ -53,9 +53,10 @@ export class FormTermsComponent extends BaseForm implements OnInit, DoCheck {
   // OVERWRITE
   registerOnChange(fn: any) {
     this.form.valueChanges.subscribe((value) => {
-      const registerForm = this._register.formGroupTermsOfUseAndDataProcessedRegisterForm(
-        this.form as UntypedFormGroup
-      )
+      const registerForm =
+        this._register.formGroupTermsOfUseAndDataProcessedRegisterForm(
+          this.form as UntypedFormGroup
+        )
       fn(registerForm)
     })
   }

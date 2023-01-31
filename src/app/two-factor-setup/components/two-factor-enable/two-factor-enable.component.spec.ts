@@ -24,13 +24,14 @@ describe('TwoFactorEnableComponent', () => {
   let debugElement: DebugElement
 
   beforeEach(async () => {
-    fakeTwoFactorAuthenticationService = jasmine.createSpyObj<TwoFactorAuthenticationService>(
-      'TwoFactorAuthenticationService',
-      {
-        getTextCode: of({ secret: '123456' }),
-        register: undefined,
-      }
-    )
+    fakeTwoFactorAuthenticationService =
+      jasmine.createSpyObj<TwoFactorAuthenticationService>(
+        'TwoFactorAuthenticationService',
+        {
+          getTextCode: of({ secret: '123456' }),
+          register: undefined,
+        }
+      )
 
     await TestBed.configureTestingModule({
       imports: [

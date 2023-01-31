@@ -92,9 +92,8 @@ abstract class PropertyFolderImpl implements PropertyFolder {
 */
   cloneValues(originFolder: PropertyFolderImpl): PropertyFolder {
     console.debug('Clone values from properties ________')
-    const matchingProperties: MatchingPair[] = this.matchingValueEnglishProperties(
-      originFolder
-    )
+    const matchingProperties: MatchingPair[] =
+      this.matchingValueEnglishProperties(originFolder)
     matchingProperties.forEach((matching) => {
       PropertyFolderImpl.supportedLanguagesFile.forEach((language) => {
         if (language !== 'en') {

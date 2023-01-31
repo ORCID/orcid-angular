@@ -142,9 +142,8 @@ export function RegisterBackendValidatorMixin<
       return (
         formGroup: UntypedFormGroup
       ): Observable<ValidationErrors | null> => {
-        const value: RegisterForm = this.formGroupToPasswordRegisterForm(
-          formGroup
-        )
+        const value: RegisterForm =
+          this.formGroupToPasswordRegisterForm(formGroup)
         if (value.password.value === '' || value.passwordConfirm.value === '') {
           return of(null)
         }

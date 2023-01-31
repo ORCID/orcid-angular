@@ -25,7 +25,8 @@ import {
   preserveWhitespaces: true,
 })
 export class SettingsDefaultsEmailFrequencyComponent
-  implements OnInit, OnDestroy {
+  implements OnInit, OnDestroy
+{
   $destroy: Subject<boolean> = new Subject<boolean>()
   isMobile: boolean
   frequencyOption = [

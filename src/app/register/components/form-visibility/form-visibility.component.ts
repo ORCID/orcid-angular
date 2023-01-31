@@ -32,7 +32,8 @@ import { BaseForm } from '../BaseForm'
 })
 export class FormVisibilityComponent
   extends BaseForm
-  implements OnInit, DoCheck {
+  implements OnInit, DoCheck
+{
   visibilityOptions = VISIBILITY_OPTIONS
   errorState = false
   activitiesVisibilityDefault = new UntypedFormControl('', Validators.required)

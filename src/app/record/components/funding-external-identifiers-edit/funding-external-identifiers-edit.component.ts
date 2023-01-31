@@ -22,7 +22,8 @@ import { WorkRelationships } from 'src/app/types/works.endpoint'
   ],
 })
 export class FundingExternalIdentifiersEditComponent
-  implements OnInit, AfterViewInit {
+  implements OnInit, AfterViewInit
+{
   @ViewChild('grantNumber') grantNumberRef: ElementRef
   @Input() grantForm: UntypedFormGroup
   @Input() index: number
