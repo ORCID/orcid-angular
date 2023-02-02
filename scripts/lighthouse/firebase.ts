@@ -41,9 +41,9 @@ export class FirebaseManager {
       // Without auth
       'no-auth'
 
-    const id = `${
-      result.auditDefinition.url || 'root'
-    }.${user}.${date.toISOString().replace(/:/g, '.')}`
+    const id = `${result.auditDefinition.url || 'root'}.${user}.${date
+      .toISOString()
+      .replace(/:/g, '.')}`
 
     return id
   }

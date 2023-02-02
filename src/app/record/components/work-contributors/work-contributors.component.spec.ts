@@ -108,8 +108,9 @@ describe('WorkContributorsComponent', () => {
     const creditNameAndRoles = fixture.debugElement.query(
       By.css('.credit-name-and-roles')
     ).nativeElement
-    const affiliation = fixture.debugElement.query(By.css('.affiliation'))
-      .nativeElement
+    const affiliation = fixture.debugElement.query(
+      By.css('.affiliation')
+    ).nativeElement
 
     expect(creditNameAndRoles.innerHTML).not.toBeNull()
     expect(creditNameAndRoles.textContent).toBe(
@@ -131,8 +132,9 @@ describe('WorkContributorsComponent', () => {
     const recordHolderData = fixture.debugElement.query(
       By.css('.credit-name-and-roles')
     ).nativeElement
-    const affiliation = fixture.debugElement.query(By.css('.affiliation'))
-      .nativeElement
+    const affiliation = fixture.debugElement.query(
+      By.css('.affiliation')
+    ).nativeElement
 
     expect(recordHolderData.innerHTML).not.toBeNull()
     expect(recordHolderData.textContent).toBe(
@@ -219,9 +221,8 @@ describe('WorkContributorsComponent', () => {
 
     fixture.detectChanges()
 
-    const contributors = fixture.nativeElement.querySelectorAll(
-      '.contributors-box'
-    )
+    const contributors =
+      fixture.nativeElement.querySelectorAll('.contributors-box')
 
     expect(contributors.length).toBe(2)
     expect(contributors[0].querySelector('.orcid-logo')).toBeTruthy()
@@ -234,9 +235,8 @@ describe('WorkContributorsComponent', () => {
 
     fixture.detectChanges()
 
-    const contributors = fixture.nativeElement.querySelectorAll(
-      '.contributors-box'
-    )
+    const contributors =
+      fixture.nativeElement.querySelectorAll('.contributors-box')
 
     expect(contributors.length).toBe(2)
     expect(contributors[0].querySelector('.orcid-logo')).toBeTruthy()
@@ -252,9 +252,8 @@ describe('WorkContributorsComponent', () => {
     const deleteButton = await loader.getHarness(MatButtonHarness)
     await deleteButton.click()
 
-    const contributors = fixture.nativeElement.querySelectorAll(
-      '.contributors-box'
-    )
+    const contributors =
+      fixture.nativeElement.querySelectorAll('.contributors-box')
 
     expect(contributors.length).toBe(1)
   })
@@ -300,9 +299,8 @@ describe('WorkContributorsComponent', () => {
 
     fixture.detectChanges()
 
-    const contributors = fixture.nativeElement.querySelectorAll(
-      '.contributors-box'
-    )
+    const contributors =
+      fixture.nativeElement.querySelectorAll('.contributors-box')
 
     const noticePanel = fixture.nativeElement.querySelector('.notice-panel')
 
@@ -320,9 +318,8 @@ describe('WorkContributorsComponent', () => {
 
     fixture.detectChanges()
 
-    const contributors = fixture.nativeElement.querySelectorAll(
-      '.contributors-box'
-    )
+    const contributors =
+      fixture.nativeElement.querySelectorAll('.contributors-box')
 
     const noticePanel = fixture.nativeElement.querySelector('.notice-panel')
 
@@ -340,9 +337,8 @@ describe('WorkContributorsComponent', () => {
 
     fixture.detectChanges()
 
-    const contributors = fixture.nativeElement.querySelectorAll(
-      '.contributors-box'
-    )
+    const contributors =
+      fixture.nativeElement.querySelectorAll('.contributors-box')
     const creditNameAndRoles = contributors[1].querySelector(
       '.credit-name-and-roles'
     )
@@ -358,9 +354,8 @@ describe('WorkContributorsComponent', () => {
 
     fixture.detectChanges()
 
-    const contributors = fixture.nativeElement.querySelectorAll(
-      '.contributors-box'
-    )
+    const contributors =
+      fixture.nativeElement.querySelectorAll('.contributors-box')
     const creditNameAndRoles = contributors[1].querySelector(
       '.credit-name-and-roles'
     )
@@ -378,9 +373,8 @@ describe('WorkContributorsComponent', () => {
 
     fixture.detectChanges()
 
-    const contributors = fixture.nativeElement.querySelectorAll(
-      '.contributors-box'
-    )
+    const contributors =
+      fixture.nativeElement.querySelectorAll('.contributors-box')
     const creditNameAndRoles = contributors[1].querySelector(
       '.credit-name-and-roles'
     )
@@ -396,9 +390,8 @@ describe('WorkContributorsComponent', () => {
 
     fixture.detectChanges()
 
-    const contributors = fixture.nativeElement.querySelectorAll(
-      '.contributors-box'
-    )
+    const contributors =
+      fixture.nativeElement.querySelectorAll('.contributors-box')
     const creditNameAndRoles = contributors[1].querySelector(
       '.credit-name-and-roles'
     )
@@ -416,9 +409,8 @@ describe('WorkContributorsComponent', () => {
 
     fixture.detectChanges()
 
-    const contributors = fixture.nativeElement.querySelectorAll(
-      '.contributors-box'
-    )
+    const contributors =
+      fixture.nativeElement.querySelectorAll('.contributors-box')
     const creditNameAndRoles = contributors[1].querySelector(
       '.credit-name-and-roles'
     )
@@ -440,9 +432,8 @@ describe('WorkContributorsComponent', () => {
       fixture.detectChanges()
     })
 
-    const contributors = fixture.nativeElement.querySelectorAll(
-      '.contributors-box'
-    )
+    const contributors =
+      fixture.nativeElement.querySelectorAll('.contributors-box')
 
     const noticePanel = fixture.nativeElement.querySelector('.notice-panel')
 
@@ -470,9 +461,8 @@ describe('WorkContributorsComponent', () => {
 
     fixture.detectChanges()
 
-    const contributors = fixture.nativeElement.querySelectorAll(
-      '.contributors-box'
-    )
+    const contributors =
+      fixture.nativeElement.querySelectorAll('.contributors-box')
 
     const noticePanel = fixture.nativeElement.querySelector('.notice-panel')
 
@@ -521,9 +511,8 @@ describe('WorkContributorsComponent', () => {
 
     fixture.detectChanges()
 
-    const contributors = fixture.nativeElement.querySelectorAll(
-      '.contributors-box'
-    ).nativeElement
+    const contributors =
+      fixture.nativeElement.querySelectorAll('.contributors-box').nativeElement
 
     const addOtherContributor = debugElement.query(
       By.css('#cy-add-another-contributor')
@@ -570,9 +559,8 @@ describe('WorkContributorsComponent', () => {
 
     fixture.detectChanges()
 
-    const contributors = fixture.nativeElement.querySelectorAll(
-      '.contributors-box'
-    )
+    const contributors =
+      fixture.nativeElement.querySelectorAll('.contributors-box')
 
     const addRecordHolderAsContributor = debugElement.query(
       By.css('#cy-add-record-holder-contributor')

@@ -10,7 +10,8 @@ import { environment } from 'src/environments/environment'
   styleUrls: ['./dialog-add-trusted-individuals-your-own-email.component.scss'],
 })
 export class DialogAddTrustedIndividualsYourOwnEmailComponent
-  implements OnInit {
+  implements OnInit
+{
   constructor(
     private matRef: MatDialogRef<DialogAddTrustedIndividualsYourOwnEmailComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ExpandedSearchResultsContent | string

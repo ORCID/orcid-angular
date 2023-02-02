@@ -126,8 +126,8 @@ export class AffiliationStackComponent implements OnInit {
    */
   toggleDetails(affiliation: Affiliation) {
     const putCode = affiliation.putCode.value
-    this.panelDetailsState[putCode].state = !this.panelDetailsState[putCode]
-      .state
+    this.panelDetailsState[putCode].state =
+      !this.panelDetailsState[putCode].state
 
     if (this.panelDetailsState[putCode].state) {
       this.getMoreDetailsAndOrganizationDisambiguatedFromTheServer(
@@ -147,15 +147,15 @@ export class AffiliationStackComponent implements OnInit {
   ): Observable<[false | OrgDisambiguated, AffiliationUIGroup[]]> {
     const putCode = affiliation.putCode.value
 
-    let $affiliationDisambiguationSource: Observable<
-      false | OrgDisambiguated
-    > = of(false)
+    let $affiliationDisambiguationSource: Observable<false | OrgDisambiguated> =
+      of(false)
     // Adds call for disambiguationSource if the affiliation has
     if (affiliation.disambiguationSource) {
-      $affiliationDisambiguationSource = this._organizationsService.getOrgDisambiguated(
-        affiliation.disambiguationSource.value,
-        affiliation.disambiguatedAffiliationSourceId.value
-      )
+      $affiliationDisambiguationSource =
+        this._organizationsService.getOrgDisambiguated(
+          affiliation.disambiguationSource.value,
+          affiliation.disambiguatedAffiliationSourceId.value
+        )
     }
     const $affiliationDetails = this._affiliationService.getAffiliationsDetails(
       affiliation.affiliationType.value,

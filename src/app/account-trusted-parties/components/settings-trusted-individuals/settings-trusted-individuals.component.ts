@@ -45,10 +45,11 @@ export class SettingsTrustedIndividualsComponent implements OnInit, OnDestroy {
   }
 
   private setupTrustedIndividualsObs() {
-    this.$trustedIndividuals = this._trustedIndividualsService.updateTrustedIndividualsSuccess.pipe(
-      startWith(() => undefined),
-      switchMap(() => this._trustedIndividualsService.get())
-    )
+    this.$trustedIndividuals =
+      this._trustedIndividualsService.updateTrustedIndividualsSuccess.pipe(
+        startWith(() => undefined),
+        switchMap(() => this._trustedIndividualsService.get())
+      )
   }
 
   revokeAccess(accountTrustedOrganization: AccountTrustedIndividual) {

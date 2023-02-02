@@ -6,13 +6,11 @@ describe('DisplayExternalIdsComponent', () => {
   let component: DisplayExternalIdsComponent
   let fixture: ComponentFixture<DisplayExternalIdsComponent>
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [DisplayExternalIdsComponent],
-      }).compileComponents()
-    })
-  )
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [DisplayExternalIdsComponent],
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DisplayExternalIdsComponent)

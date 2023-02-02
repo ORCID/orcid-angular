@@ -252,9 +252,8 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
         this.websitesForm
       ) {
         const formGroup = this.websitesForm
-        const formGroupKeysWithDuplicatedValues: string[] = this.listDuplicateInputKeys(
-          formGroup
-        )
+        const formGroupKeysWithDuplicatedValues: string[] =
+          this.listDuplicateInputKeys(formGroup)
         this.removeDuplicateErrorFromOtherControls(
           formGroupKeysWithDuplicatedValues,
           formGroup
@@ -302,9 +301,9 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
     websitesForm: UntypedFormGroup = new UntypedFormGroup({})
   ): void {
     Object.keys(websitesForm.controls).forEach((currentControlKey) => {
-      const urlControl = (websitesForm.controls[
-        currentControlKey
-      ] as UntypedFormGroup).controls.url as UntypedFormControl
+      const urlControl = (
+        websitesForm.controls[currentControlKey] as UntypedFormGroup
+      ).controls.url as UntypedFormControl
       if (
         formGroupKeysWithDuplicatedValues.indexOf(currentControlKey) === -1 &&
         urlControl.errors &&
