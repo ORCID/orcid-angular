@@ -29,7 +29,8 @@ export { COUNTRY_NAMES_TO_COUNTRY_CODES } from './constants-country-codes'
 // Custom email REGEXP
 // https://regex101.com/r/jV4aN7/16
 // tslint:disable-next-line: max-line-length
-export const EMAIL_REGEXP = /^([^@\s]|(".+"))+@([^@\s\."'\(\)\[\]\{\}\\/,:;]+\.)+([^@\s\."'\(\)\[\]\{\}\\/,:;]{2,})+$/
+export const EMAIL_REGEXP =
+  /^([^@\s]|(".+"))+@([^@\s\."'\(\)\[\]\{\}\\/,:;]+\.)+([^@\s\."'\(\)\[\]\{\}\\/,:;]{2,})+$/
 
 export const EMAIL_REGEXP_GENERIC = /^\s*?(.+)@(.+?)\s*$/
 // https://regex101.com/r/9MXmdl/1
@@ -37,13 +38,16 @@ export const ORCID_REGEXP = /(\d{4}[- ]{0,}){3}\d{3}[\dX]$/
 export const ORCID_REGEXP_CASE_INSENSITIVE = /(\d{4}[- ]{0,}){3}\d{3}[\dX]$/i
 // https://regex101.com/r/V95col/6
 // tslint:disable-next-line: max-line-length
-export const ORCID_URI_REGEXP = /(orcid\.org\/|qa\.orcid\.org\/|sandbox\.orcid\.org\/|dev\.orcid\.org\/|localhost.*)(\d{4}[- ]{0,}){3}\d{3}[\dX]$/i
+export const ORCID_URI_REGEXP =
+  /(orcid\.org\/|qa\.orcid\.org\/|sandbox\.orcid\.org\/|dev\.orcid\.org\/|localhost.*)(\d{4}[- ]{0,}){3}\d{3}[\dX]$/i
 /* NO PROTOCOL REQUIRED*/
 // https://regex101.com/r/M1fqZi/1
-export const URL_REGEXP = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#%[\]@!\$&'\(\)\*\+\\,;=.>< ]+$/i
+export const URL_REGEXP =
+  /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#%[\]@!\$&'\(\)\*\+\\,;=.>< ]+$/i
 /* PROTOCOL REQUIRED*/
 // https://regex101.com/r/pSnDC7/1
-export const URL_REGEXP_BACKEND = /^((https?):\/\/)[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#%[\]@!\$&'\(\)\*\+\\,;=.>< ]+$/i
+export const URL_REGEXP_BACKEND =
+  /^((https?):\/\/)[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#%[\]@!\$&'\(\)\*\+\\,;=.>< ]+$/i
 // https://www.regextester.com/96577
 export const ILLEGAL_NAME_CHARACTERS_REGEXP = /([@\$!])/
 // https://regex101.com/r/aoHxNo/1
@@ -51,11 +55,14 @@ export const HAS_NUMBER = /(?=.*[0-9]).*/
 // https://regex101.com/r/NNIuKQ/1
 export const HAS_LETTER_OR_SYMBOL = /(?=.*[^\d\s]).*/
 // https://regex101.com/r/gznzc6/1 strips params for OJS links
-export const REDIRECT_URI_REGEXP = /(?=redirect_uri=)(.*?)(?=orcidapi)|(?=redirect_uri=)(.*?)$/
+export const REDIRECT_URI_REGEXP =
+  /(?=redirect_uri=)(.*?)(?=orcidapi)|(?=redirect_uri=)(.*?)$/
 //https://regex101.com/r/yjxqUa/1
-export const AMOUNT_FORMATTED_WITH_DECIMAL_REGEXP = /^(\d+(\.\d{1,2})?|\.?\d{1,2})$/
+export const AMOUNT_FORMATTED_WITH_DECIMAL_REGEXP =
+  /^(\d+(\.\d{1,2})?|\.?\d{1,2})$/
 //https://regex101.com/r/pIQDel/1
-export const AMOUNT_FULLY_FORMATTED_REGEX = /(?=.*\d)^(([1-9]\d{0,2}(,\d{3})*)|0)?(\.\d{1,2})?$/
+export const AMOUNT_FULLY_FORMATTED_REGEX =
+  /(?=.*\d)^(([1-9]\d{0,2}(,\d{3})*)|0)?(\.\d{1,2})?$/
 //https://regex101.com/r/EAlANV/1
 export const AMOUNT_DIGITS_ONLY_REGEX = /^\d+$/
 // https://regex101.com/r/XvbCrA/1

@@ -161,9 +161,10 @@ export class RecordEmailsService {
       }
       const value: Assertion = { value: control.value }
 
-      const thisEmailIsAlreadyOnTheBackend = emailThatAreAlreadySaveOnTheBackend.filter(
-        (email) => email.value === value.value
-      )
+      const thisEmailIsAlreadyOnTheBackend =
+        emailThatAreAlreadySaveOnTheBackend.filter(
+          (email) => email.value === value.value
+        )
 
       if (thisEmailIsAlreadyOnTheBackend.length) {
         return of(null)

@@ -6,13 +6,11 @@ describe('DisplayAttributeComponent', () => {
   let component: DisplayAttributeComponent
   let fixture: ComponentFixture<DisplayAttributeComponent>
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [DisplayAttributeComponent],
-      }).compileComponents()
-    })
-  )
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [DisplayAttributeComponent],
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DisplayAttributeComponent)

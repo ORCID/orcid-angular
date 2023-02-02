@@ -43,7 +43,8 @@ import { ReactivationLocal } from '../../../types/reactivation.local'
 })
 export class FormPersonalComponent
   extends BaseForm
-  implements OnInit, AfterViewInit {
+  implements OnInit, AfterViewInit
+{
   @Input() reactivation: ReactivationLocal
   @ViewChild('firstInput') firstInput: ElementRef
   labelInfoAboutName = $localize`:@@register.ariaLabelInfo:info about names`
@@ -128,9 +129,8 @@ export class FormPersonalComponent
   allEmailsAreUnique(): ValidatorFn {
     return (formGroup: UntypedFormGroup) => {
       let hasError = false
-      const registerForm = this._register.formGroupToEmailRegisterForm(
-        formGroup
-      )
+      const registerForm =
+        this._register.formGroupToEmailRegisterForm(formGroup)
 
       const error = { backendErrors: { additionalEmails: {} } }
 

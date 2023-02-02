@@ -15,9 +15,10 @@ import { environment } from 'src/environments/environment'
 export class HelpHeroService {
   hlp: HelpHero
 
-  private getNumberOfValidatedEmails(
-    emails: AssertionVisibilityString[]
-  ): { numberOfValidatedEmails: number; numberOfUnvalidatedEmails: number } {
+  private getNumberOfValidatedEmails(emails: AssertionVisibilityString[]): {
+    numberOfValidatedEmails: number
+    numberOfUnvalidatedEmails: number
+  } {
     return {
       numberOfValidatedEmails: emails?.filter((email) => {
         return email.verified === true

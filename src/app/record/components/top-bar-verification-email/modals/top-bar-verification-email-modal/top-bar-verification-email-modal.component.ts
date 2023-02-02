@@ -16,7 +16,8 @@ import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
   preserveWhitespaces: true,
 })
 export class TopBarVerificationEmailModalComponent
-  implements OnInit, OnDestroy {
+  implements OnInit, OnDestroy
+{
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   primaryEmail: string

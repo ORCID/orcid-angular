@@ -15,7 +15,7 @@
         *ngIf="
           togglzWorksContributors &&
           (work?.contributorsGroupedByOrcid
-            | recordHolderRoles: isPublicRecord:id) as roles
+            | recordHolderRoles : isPublicRecord : id) as roles
         "
       >
         <ng-container *ngIf="roles">
@@ -37,7 +37,7 @@
       <ng-container
         *ngFor="
           let contributor of work?.contributorsGroupedByOrcid
-            | slice: 0:maxNumberContributors;
+            | slice : 0 : maxNumberContributors;
           let last = last
         "
       >
@@ -83,7 +83,7 @@
       *ngIf="!panelDetailsState?.state"
       i18n="@@shared.showMoreDetail"
       [attr.aria-label]="
-        'work' | appPanelActivityActionAriaLabel: 'show':work?.title?.value
+        'work' | appPanelActivityActionAriaLabel : 'show' : work?.title?.value
       "
       >Show more detail</a
     >
@@ -93,7 +93,7 @@
       *ngIf="panelDetailsState?.state"
       i18n="@@shared.showLessDetail"
       [attr.aria-label]="
-        'work' | appPanelActivityActionAriaLabel: 'hide':work?.title?.value
+        'work' | appPanelActivityActionAriaLabel : 'hide' : work?.title?.value
       "
       >Show less detail</a
     >
@@ -194,7 +194,7 @@
         }"
         *ngFor="
           let contributor of work?.contributorsGroupedByOrcid
-            | slice: 0:maxNumberContributorsWorkDetails;
+            | slice : 0 : maxNumberContributorsWorkDetails;
           let index = index
         "
       >

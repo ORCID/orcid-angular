@@ -27,34 +27,32 @@ describe('PanelsComponent', () => {
   let fixture: ComponentFixture<PanelsComponent>
   let loader: HarnessLoader
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        imports: [
-          HttpClientTestingModule,
-          MatDialogModule,
-          MatMenuModule,
-          NoopAnimationsModule,
-          PanelModule,
-          RecordModule,
-          RouterTestingModule,
-          SharedModule,
-        ],
-        declarations: [PanelsComponent],
-        providers: [
-          UntypedFormBuilder,
-          WINDOW_PROVIDERS,
-          RegisterService,
-          PlatformInfoService,
-          ErrorHandlerService,
-          SnackbarService,
-          MatSnackBar,
-          MatDialog,
-          Overlay,
-        ],
-      }).compileComponents()
-    })
-  )
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        HttpClientTestingModule,
+        MatDialogModule,
+        MatMenuModule,
+        NoopAnimationsModule,
+        PanelModule,
+        RecordModule,
+        RouterTestingModule,
+        SharedModule,
+      ],
+      declarations: [PanelsComponent],
+      providers: [
+        UntypedFormBuilder,
+        WINDOW_PROVIDERS,
+        RegisterService,
+        PlatformInfoService,
+        ErrorHandlerService,
+        SnackbarService,
+        MatSnackBar,
+        MatDialog,
+        Overlay,
+      ],
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PanelsComponent)
