@@ -17,13 +17,13 @@ describe('Account delegate adds work with contributors', async function () {
       const workType = 'Book'
       const title = 'Cypress test contributors 34'
 
-      cy.contains('a','Switch to').click({force:true})
-      cy.contains(userData.cyRecordOwner.oid).click({force:true})
+      cy.contains('a', 'Switch to').click({ force: true })
+      cy.contains(userData.cyRecordOwner.oid).click({ force: true })
       cy.wait('@switchUser')
       //work around for cypress to aknowledge we switched users
       cy.visit('/my-orcid')
       //verify we switched to record owner account
-      cy.get('#status-bar').should('contain',userData.cyRecordOwner.oid)
+      cy.get('#status-bar').should('contain', userData.cyRecordOwner.oid)
 
       cy.get('#cy-works').within(($myPanel) => {
         cy.get('#cy-menu-add-works').click()
@@ -42,9 +42,13 @@ describe('Account delegate adds work with contributors', async function () {
       //Verify work was added for the record owner not the delegate
       cy.contains('app-work-stack', title).within(($thisWork) => {
         cy.contains('Show more detail').click()
-        cy.get('app-display-attribute').should('contain', userData.cyRecordOwner.name, {
-          matchCase: false,
-        })
+        cy.get('app-display-attribute').should(
+          'contain',
+          userData.cyRecordOwner.name,
+          {
+            matchCase: false,
+          }
+        )
       })
     })
   ) //end of qase tag
