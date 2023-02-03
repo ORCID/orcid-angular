@@ -20,6 +20,7 @@ describe('Account delegate adds work with contributors', async function () {
       cy.contains('a','Switch to').click({force:true})
       cy.contains(userData.cyRecordOwner.oid).click({force:true})
       cy.wait('@switchUser')
+      //work around for cypress to aknowledge we switched users
       cy.visit('/my-orcid')
       //verify we switched to record owner account
       cy.get('#status-bar').should('contain',userData.cyRecordOwner.oid)
@@ -38,7 +39,7 @@ describe('Account delegate adds work with contributors', async function () {
       cy.get('#save-work-button').wait(1000).click({ force: true })
       cy.wait(2000)
 
-      //Verify work was added even when role was not selected
+      //Verify work was added for the record owner not the delegate
       cy.contains('app-work-stack', title).within(($thisWork) => {
         cy.contains('Show more detail').click()
         cy.get('app-display-attribute').should('contain', userData.cyRecordOwner.name, {
@@ -50,7 +51,7 @@ describe('Account delegate adds work with contributors', async function () {
 
   after(() => {
     //log out
-    //cy.get('#cy-user-info').click({ force: true })
-   //cy.get('#cy-signout').click({ force: true })
+    cy.get('#cy-user-info').click({ force: true })
+    cy.get('#cy-signout').click({ force: true })
   })
 })
