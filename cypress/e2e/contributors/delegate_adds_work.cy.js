@@ -15,7 +15,7 @@ describe('Account delegate adds work with contributors', async function () {
     '34',
     it('Account delegate adds work with contributors', function () {
       const workType = 'Book'
-      const title = 'Cypress test contributors 34'
+      const title = 'Cypress test contributors 34 - delegate'
 
       cy.contains('a','Switch to').click({force:true})
       cy.contains(userData.cyRecordOwner.oid).click({force:true})
