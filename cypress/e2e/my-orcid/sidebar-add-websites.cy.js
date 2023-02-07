@@ -11,7 +11,7 @@ describe('My orcid - users are able to add content to their record', async funct
       cy.signin(user)
       cy.url().should('contain', '/my-orcid')
     })
-    cy.visit('/my-orcid?orcid='+user.oid)
+    cy.visit('/my-orcid?orcid=' + user.oid)
   }
 
   beforeEach(() => {
@@ -150,7 +150,7 @@ describe('My orcid - users are able to add content to their record', async funct
     cy.get('[formcontrolname="description"]')
       .clear()
       .type(testingData.sidebarWebsitesURL.titleURL)
-      cy.get('[formcontrolname="url"]')
+    cy.get('[formcontrolname="url"]')
       .clear()
       .type(testingData.sidebarWebsitesURL.duplicateURL + '     ')
 

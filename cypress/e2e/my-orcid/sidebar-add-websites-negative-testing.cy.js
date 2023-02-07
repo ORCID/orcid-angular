@@ -4,7 +4,6 @@ import userData from '../../fixtures/testing-users.fixture.json'
 import testingData from '../../fixtures/negative-testing-data.fixture.json'
 
 describe('App displays error messages when user inputs invalid data', async function () {
-
   //caching user session for each test
   const login = (user) => {
     cy.session(user.oid, () => {
@@ -12,7 +11,7 @@ describe('App displays error messages when user inputs invalid data', async func
       cy.signin(user)
       cy.url().should('contain', '/my-orcid')
     })
-    cy.visit('/my-orcid?orcid='+user.oid)
+    cy.visit('/my-orcid?orcid=' + user.oid)
   }
 
   beforeEach(() => {
@@ -48,7 +47,7 @@ describe('App displays error messages when user inputs invalid data', async func
     cy.get('[formcontrolname="description"]')
       .clear()
       .type(testingData.sidebarWebsitesURL.titleURL)
-      cy.get('[formcontrolname="url"]').clear() //empty
+    cy.get('[formcontrolname="url"]').clear() //empty
     //try to save
     cy.get('#save-websites-button').click()
 
@@ -69,7 +68,9 @@ describe('App displays error messages when user inputs invalid data', async func
     cy.get('[formcontrolname="description"]')
       .clear()
       .type(testingData.sidebarWebsitesURL.titleURL)
-      cy.get('[formcontrolname="url"]').clear().type(testingData.sidebarWebsitesURL.maxSizeURL)
+    cy.get('[formcontrolname="url"]')
+      .clear()
+      .type(testingData.sidebarWebsitesURL.maxSizeURL)
 
     //save
     cy.get('#save-websites-button').click()
@@ -115,7 +116,7 @@ describe('App displays error messages when user inputs invalid data', async func
     cy.get('[formcontrolname="description"]')
       .clear()
       .type(testingData.sidebarWebsitesURL.titleURL)
-      cy.get('[formcontrolname="url"]')
+    cy.get('[formcontrolname="url"]')
       .clear()
       .type(testingData.sidebarWebsitesURL.duplicateURL)
     cy.get('#save-websites-button').click()
@@ -133,7 +134,7 @@ describe('App displays error messages when user inputs invalid data', async func
       cy.get('[formcontrolname="description"]')
         .clear()
         .type(testingData.sidebarWebsitesURL.duplicateTitle)
-        cy.get('[formcontrolname="url"]')
+      cy.get('[formcontrolname="url"]')
         .clear()
         .type(testingData.sidebarWebsitesURL.duplicateAllCapsURL)
     })
@@ -196,7 +197,7 @@ describe('App displays error messages when user inputs invalid data', async func
     cy.get('.cy-description-input')
       .clear()
       .type(testingData.sidebarWebsitesURL.titleURL)
-      cy.get('[formcontrolname="url"]')
+    cy.get('[formcontrolname="url"]')
       .clear()
       .type(testingData.sidebarWebsitesURL.internationalURL1)
     cy.get('#save-websites-button').click()
@@ -256,7 +257,7 @@ describe('App displays error messages when user inputs invalid data', async func
     cy.get('[formcontrolname="description"]')
       .clear()
       .type(testingData.sidebarWebsitesURL.titleURL)
-      cy.get('[formcontrolname="url"]').clear() //empty
+    cy.get('[formcontrolname="url"]').clear() //empty
     cy.get('#save-websites-button').click()
 
     //verify the URL field is required
