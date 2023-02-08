@@ -16,11 +16,11 @@
           rel="noopener noreferrer"
           href="{{
             orgDisambiguated.sourceType
-              | organizationLink: orgDisambiguated.sourceId
+              | organizationLink : orgDisambiguated.sourceId
           }}"
           *ngIf="
             orgDisambiguated.sourceType
-              | organizationLink: orgDisambiguated.sourceId
+              | organizationLink : orgDisambiguated.sourceId
               | isUrlWithProtocol
           "
         >
@@ -30,7 +30,7 @@
           *ngIf="
             !(
               orgDisambiguated.sourceType
-              | organizationLink: orgDisambiguated.sourceId
+              | organizationLink : orgDisambiguated.sourceId
               | isUrlWithProtocol
             )
           "
@@ -77,10 +77,10 @@
         class="underline"
         target="_blank"
         rel="noopener noreferrer"
-        href="{{ org.identifierType | organizationLink: org.preferred }}"
+        href="{{ org.identifierType | organizationLink : org.preferred }}"
         *ngIf="
           org.identifierType
-            | organizationLink: org.preferred
+            | organizationLink : org.preferred
             | isUrlWithProtocol
         "
       >
@@ -90,7 +90,7 @@
         *ngIf="
           !(
             org.identifierType
-            | organizationLink: org.preferred
+            | organizationLink : org.preferred
             | isUrlWithProtocol
           )
         "
@@ -106,12 +106,12 @@
           ><ng-container
             *ngIf="
               !(id | isUrlWithProtocol) &&
-              (org.identifierType | organizationLink: id) === ''
+              (org.identifierType | organizationLink : id) === ''
             "
             >{{ id }}</ng-container
           ><ng-container
             *ngIf="
-              (org.identifierType | organizationLink: id) !== '';
+              (org.identifierType | organizationLink : id) !== '';
               else plainUrl
             "
           >
@@ -119,7 +119,7 @@
               class="underline"
               target="_blank"
               rel="noopener noreferrer"
-              href="{{ org.identifierType | organizationLink: id }}"
+              href="{{ org.identifierType | organizationLink : id }}"
             >
               {{ id }}
             </a>

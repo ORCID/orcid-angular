@@ -17,7 +17,8 @@ import { DEFAULT_PAGE_SIZE } from 'src/app/constants'
   providedIn: 'root',
 })
 export class RecordResearchResourceService {
-  $researchResourcesSubject: ReplaySubject<ResearchResourcesEndpoint> = new ReplaySubject<ResearchResourcesEndpoint>()
+  $researchResourcesSubject: ReplaySubject<ResearchResourcesEndpoint> =
+    new ReplaySubject<ResearchResourcesEndpoint>()
 
   headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',

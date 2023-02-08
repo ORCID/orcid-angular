@@ -15,9 +15,7 @@ import { environment } from 'src/environments/environment'
 export class HelpHeroService {
   hlp: HelpHero
 
-  private getNumberOfValidatedEmails(
-    emails: AssertionVisibilityString[]
-  ): {
+  private getNumberOfValidatedEmails(emails: AssertionVisibilityString[]): {
     numberOfValidatedEmails: number
     numberOfUnvalidatedEmails: number
   } {

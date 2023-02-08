@@ -19,27 +19,25 @@ describe('FundingStacksGroupsComponent', () => {
   let component: FundingStacksGroupsComponent
   let fixture: ComponentFixture<FundingStacksGroupsComponent>
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule, RouterTestingModule],
-        declarations: [FundingStacksGroupsComponent],
-        providers: [
-          WINDOW_PROVIDERS,
-          UserService,
-          RecordService,
-          RecordFundingsService,
-          RecordCountriesService,
-          PlatformInfoService,
-          ErrorHandlerService,
-          SnackbarService,
-          MatSnackBar,
-          MatDialog,
-          Overlay,
-        ],
-      }).compileComponents()
-    })
-  )
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule, RouterTestingModule],
+      declarations: [FundingStacksGroupsComponent],
+      providers: [
+        WINDOW_PROVIDERS,
+        UserService,
+        RecordService,
+        RecordFundingsService,
+        RecordCountriesService,
+        PlatformInfoService,
+        ErrorHandlerService,
+        SnackbarService,
+        MatSnackBar,
+        MatDialog,
+        Overlay,
+      ],
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
     fixture = TestBed.createComponent(FundingStacksGroupsComponent)

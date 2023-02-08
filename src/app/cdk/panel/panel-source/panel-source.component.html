@@ -68,7 +68,7 @@
       mat-icon-button
       [matTooltip]="labelDeleteButton"
       [attr.aria-label]="
-        type | appPanelActivityActionAriaLabel: 'delete':this.panelTitle
+        type | appPanelActivityActionAriaLabel : 'delete' : this.panelTitle
       "
       (click)="delete()"
       *ngIf="(stackLength > 1 && displayTheStack) || stackLength === 1"

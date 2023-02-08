@@ -76,9 +76,8 @@ export class PlatformInfoService {
         this.platform.queryParameters = queryParameters
         const previousOauthState = this.hasOauthParameters()
         const previousSocialState = this.updateSocialState(queryParameters)
-        const previousInstitutionalState = this.updatesInstitutionalState(
-          queryParameters
-        )
+        const previousInstitutionalState =
+          this.updatesInstitutionalState(queryParameters)
         if (
           this.platform.hasOauthParameters !== previousOauthState ||
           this.platform.social !== previousSocialState ||

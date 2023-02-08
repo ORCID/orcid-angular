@@ -36,41 +36,39 @@ describe('ModalFundingComponent', () => {
   let component: ModalFundingComponent
   let fixture: ComponentFixture<ModalFundingComponent>
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        imports: [
-          FormsModule,
-          HttpClientTestingModule,
-          MatAutocompleteModule,
-          MatFormFieldModule,
-          MatIconModule,
-          MatInputModule,
-          MatSelectModule,
-          ModalModule,
-          NoopAnimationsModule,
-          PrivacySelectorModule,
-          ReactiveFormsModule,
-          RecordModule,
-          RouterTestingModule,
-          SharedModule,
-        ],
-        declarations: [ModalFundingComponent],
-        providers: [
-          { provide: MatDialogRef, useValue: {} },
-          { provide: MAT_DIALOG_DATA, useValue: {} },
-          WINDOW_PROVIDERS,
-          UntypedFormBuilder,
-          ErrorHandlerService,
-          SnackbarService,
-          MatSnackBar,
-          Overlay,
-          PlatformInfoService,
-          UserService,
-        ],
-      }).compileComponents()
-    })
-  )
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        FormsModule,
+        HttpClientTestingModule,
+        MatAutocompleteModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatSelectModule,
+        ModalModule,
+        NoopAnimationsModule,
+        PrivacySelectorModule,
+        ReactiveFormsModule,
+        RecordModule,
+        RouterTestingModule,
+        SharedModule,
+      ],
+      declarations: [ModalFundingComponent],
+      providers: [
+        { provide: MatDialogRef, useValue: {} },
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+        WINDOW_PROVIDERS,
+        UntypedFormBuilder,
+        ErrorHandlerService,
+        SnackbarService,
+        MatSnackBar,
+        Overlay,
+        PlatformInfoService,
+        UserService,
+      ],
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ModalFundingComponent)
