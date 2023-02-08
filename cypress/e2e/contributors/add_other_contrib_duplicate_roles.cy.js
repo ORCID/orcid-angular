@@ -28,7 +28,7 @@ describe('Add other contributor with duplicate roles - negative testing', async 
         cy.contains(workType).click()
       })
       cy.get('#title-input').clear().type(title)
-      
+
       //add someone else as contributor with credit role
       cy.get('#cy-add-another-contributor').click()
       cy.get('app-work-contributors').within(($section) => {

@@ -28,12 +28,14 @@ describe('Manually add work with contributor credit role', async function () {
       })
       cy.get('#title-input').clear().type(title)
       cy.get('[formcontrolname="role"]').click() //TO DO: replace locators with ids
-      cy.get('[role="listbox"][aria-label="Please select a role"]').within(($myOptions) => {
-        cy.contains(creditRole).click()
-      })
+      cy.get('[role="listbox"][aria-label="Please select a role"]').within(
+        ($myOptions) => {
+          cy.contains(creditRole).click()
+        }
+      )
       //save entry
       cy.get('#save-work-button').wait(1000).click({ force: true })
-      cy.wait(1000)//wait for the page to refresh
+      cy.wait(1000) //wait for the page to refresh
       //Verify work was added
       cy.get('#cy-works', { timeout: 10000 }).should('contain', title)
 
