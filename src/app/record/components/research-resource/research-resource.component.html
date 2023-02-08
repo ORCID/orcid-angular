@@ -66,9 +66,7 @@
           i18n="@@shared.showMoreDetail"
           [attr.aria-label]="
             'research-resource'
-              | appPanelActivityActionAriaLabel
-                : 'show'
-                : researchResource.title
+              | appPanelActivityActionAriaLabel: 'show':researchResource.title
           "
         >
           Show more detail
@@ -81,9 +79,7 @@
           id="show-less-button"
           [attr.aria-label]="
             'research-resource'
-              | appPanelActivityActionAriaLabel
-                : 'hide'
-                : researchResource.title
+              | appPanelActivityActionAriaLabel: 'hide':researchResource.title
           "
         >
           Show less detail
@@ -212,9 +208,7 @@
                 id="show-more-item-button"
                 [attr.aria-label]="
                   'research-resource'
-                    | appPanelActivityActionAriaLabel
-                      : 'show'
-                      : item.resourceName
+                    | appPanelActivityActionAriaLabel: 'show':item.resourceName
                 "
               >
                 Show more detail
@@ -227,9 +221,7 @@
                 id="show-less-item-button"
                 [attr.aria-label]="
                   'research-resource'
-                    | appPanelActivityActionAriaLabel
-                      : 'hide'
-                      : item.resourceName
+                    | appPanelActivityActionAriaLabel: 'hide':item.resourceName
                 "
               >
                 Show less detail

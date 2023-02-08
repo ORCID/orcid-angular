@@ -35,7 +35,6 @@ export class SettingsUsersThatThrustYouComponent implements OnInit {
   }
 
   private setupTrustedIndividualsObs() {
-    this.$usersThatThrustYou =
-      this._trustedIndividualsService.getTrustedIndividuals()
+    this.$usersThatThrustYou = this._trustedIndividualsService.getTrustedIndividuals()
   }
 }

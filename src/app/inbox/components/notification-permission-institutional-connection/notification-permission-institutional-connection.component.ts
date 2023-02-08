@@ -12,8 +12,7 @@ import { InboxNotificationInstitutional } from 'src/app/types/notifications.endp
   preserveWhitespaces: true,
 })
 export class NotificationPermissionInstitutionalConnectionComponent
-  implements OnInit
-{
+  implements OnInit {
   _notification: InboxNotificationInstitutional
   @Input()
   set notification(notification: InboxNotificationInstitutional) {

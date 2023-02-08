@@ -44,8 +44,7 @@ import {
   ],
 })
 export class NotificationComponent
-  implements OnInit, AfterViewInit, ControlValueAccessor
-{
+  implements OnInit, AfterViewInit, ControlValueAccessor {
   state = 'close'
   @ViewChild('header') header: ElementRef<HTMLElement>
   @HostBinding('class.archived') _archived = false

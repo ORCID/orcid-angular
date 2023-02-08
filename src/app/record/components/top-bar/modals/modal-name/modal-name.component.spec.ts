@@ -39,52 +39,54 @@ describe('ModalNameComponent', () => {
   let fakeRecordOtherNamesService: RecordOtherNamesService
   let loader: HarnessLoader
 
-  beforeEach(waitForAsync(() => {
-    fakeRecordNamesService = jasmine.createSpyObj<RecordNamesService>(
-      'RecordNamesService',
-      {
-        getNames: of(getNamesEndPoint()),
-      }
-    )
-
-    fakeRecordOtherNamesService = jasmine.createSpyObj<RecordOtherNamesService>(
-      'RecordNamesService',
-      {
-        getOtherNames: of(getOtherNamesEndPoint()),
-      }
-    )
-
-    TestBed.configureTestingModule({
-      imports: [
-        FormsModule,
-        HttpClientTestingModule,
-        NoopAnimationsModule,
-        SharedModule,
-        ReactiveFormsModule,
-        RecordModule,
-        RouterTestingModule,
-      ],
-      declarations: [ModalNameComponent],
-      providers: [
-        { provide: RecordNamesService, useValue: fakeRecordNamesService },
+  beforeEach(
+    waitForAsync(() => {
+      fakeRecordNamesService = jasmine.createSpyObj<RecordNamesService>(
+        'RecordNamesService',
         {
-          provide: RecordOtherNamesService,
-          useValue: fakeRecordOtherNamesService,
-        },
-        { provide: MatDialogRef, useValue: {} },
-        { provide: MAT_DIALOG_DATA, useValue: {} },
-        WINDOW_PROVIDERS,
-        UntypedFormBuilder,
-        UserService,
-        PlatformInfoService,
-        ErrorHandlerService,
-        SnackbarService,
-        MatSnackBar,
-        MatDialog,
-        Overlay,
-      ],
-    }).compileComponents()
-  }))
+          getNames: of(getNamesEndPoint()),
+        }
+      )
+
+      fakeRecordOtherNamesService = jasmine.createSpyObj<RecordOtherNamesService>(
+        'RecordNamesService',
+        {
+          getOtherNames: of(getOtherNamesEndPoint()),
+        }
+      )
+
+      TestBed.configureTestingModule({
+        imports: [
+          FormsModule,
+          HttpClientTestingModule,
+          NoopAnimationsModule,
+          SharedModule,
+          ReactiveFormsModule,
+          RecordModule,
+          RouterTestingModule,
+        ],
+        declarations: [ModalNameComponent],
+        providers: [
+          { provide: RecordNamesService, useValue: fakeRecordNamesService },
+          {
+            provide: RecordOtherNamesService,
+            useValue: fakeRecordOtherNamesService,
+          },
+          { provide: MatDialogRef, useValue: {} },
+          { provide: MAT_DIALOG_DATA, useValue: {} },
+          WINDOW_PROVIDERS,
+          UntypedFormBuilder,
+          UserService,
+          PlatformInfoService,
+          ErrorHandlerService,
+          SnackbarService,
+          MatSnackBar,
+          MatDialog,
+          Overlay,
+        ],
+      }).compileComponents()
+    })
+  )
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ModalNameComponent)

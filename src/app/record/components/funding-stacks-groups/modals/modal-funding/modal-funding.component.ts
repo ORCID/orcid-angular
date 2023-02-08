@@ -367,10 +367,10 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
     if (this.funding.fundingTitle?.translatedTitle) {
       this.fundingForm.patchValue({
         translatedTitleGroup: {
-          translatedTitleContent:
-            this.funding.fundingTitle?.translatedTitle.content,
-          translatedTitleLanguage:
-            this.funding.fundingTitle?.translatedTitle.languageCode,
+          translatedTitleContent: this.funding.fundingTitle?.translatedTitle
+            .content,
+          translatedTitleLanguage: this.funding.fundingTitle?.translatedTitle
+            .languageCode,
         },
       })
     }
@@ -410,22 +410,18 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       this.region = this.funding.region?.value
       this.country = this.funding.country?.value
       this.fundingType = this.funding.fundingType?.value
-      this.fundingSubtype =
-        this.funding.organizationDefinedFundingSubType?.subtype?.value
+      this.fundingSubtype = this.funding.organizationDefinedFundingSubType?.subtype?.value
       this.fundingProjectTitle = this.funding.fundingTitle?.title.value
-      this.translatedTitleContent =
-        this.funding.fundingTitle?.translatedTitle?.content
-      this.translatedTitleLanguage =
-        this.funding.fundingTitle?.translatedTitle?.languageCode
+      this.translatedTitleContent = this.funding.fundingTitle?.translatedTitle?.content
+      this.translatedTitleLanguage = this.funding.fundingTitle?.translatedTitle?.languageCode
       this.fundingProjectLink = this.funding.url?.value
       this.description = this.funding.description?.value
       this.currencyCode = this.funding.currencyCode?.value
       this.amount = this.funding.amount?.value
-      this.disambiguatedFundingSourceId =
-        this.funding.disambiguatedFundingSourceId?.value
+      this.disambiguatedFundingSourceId = this.funding.disambiguatedFundingSourceId?.value
       this.disambiguatedFundingSource = this.funding.disambiguationSource?.value
-      this.showTranslationTitle =
-        !!this.funding.fundingTitle?.translatedTitle?.content
+      this.showTranslationTitle = !!this.funding.fundingTitle?.translatedTitle
+        ?.content
       this.agencyName = {
         value: this.funding.fundingName.value,
       } as Organization

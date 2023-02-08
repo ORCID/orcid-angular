@@ -36,8 +36,9 @@ export class RecordPublicSideBarService {
         (options.forceReload && !this.sleepForceReloads)
       ) {
         this.sleepForceReloads = true
-        this.$SideBarPublicUserRecordSubject =
-          new ReplaySubject<SideBarPublicUserRecord>(1)
+        this.$SideBarPublicUserRecordSubject = new ReplaySubject<SideBarPublicUserRecord>(
+          1
+        )
         setTimeout(() => {
           this.sleepForceReloads = false
         }, 100)

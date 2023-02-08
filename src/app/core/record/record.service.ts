@@ -183,8 +183,7 @@ export class RecordService {
               countries: countries as CountriesEndpoint,
               keyword: keyword as KeywordEndPoint,
               website: website as WebsitesEndPoint,
-              externalIdentifier:
-                externalIdentifier as PersonIdentifierEndpoint,
+              externalIdentifier: externalIdentifier as PersonIdentifierEndpoint,
               names: names as NamesEndPoint,
               biography: biography as BiographyEndPoint,
               affiliations: affiliations as AffiliationUIGroup[],

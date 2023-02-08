@@ -17,23 +17,25 @@ describe('AffiliationStacksGroupsComponent', () => {
   let component: AffiliationStacksGroupsComponent
   let fixture: ComponentFixture<AffiliationStacksGroupsComponent>
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule],
-      declarations: [AffiliationStacksGroupsComponent],
-      providers: [
-        WINDOW_PROVIDERS,
-        RecordService,
-        RecordAffiliationService,
-        PlatformInfoService,
-        ErrorHandlerService,
-        SnackbarService,
-        MatSnackBar,
-        MatDialog,
-        Overlay,
-      ],
-    }).compileComponents()
-  }))
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [HttpClientTestingModule, RouterTestingModule],
+        declarations: [AffiliationStacksGroupsComponent],
+        providers: [
+          WINDOW_PROVIDERS,
+          RecordService,
+          RecordAffiliationService,
+          PlatformInfoService,
+          ErrorHandlerService,
+          SnackbarService,
+          MatSnackBar,
+          MatDialog,
+          Overlay,
+        ],
+      }).compileComponents()
+    })
+  )
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AffiliationStacksGroupsComponent)

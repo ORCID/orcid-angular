@@ -93,7 +93,13 @@
               />
               <div class="person-identifier">
                 <a
-                  [attr.aria-label]="ariaLabelIdentifierUrl"
+                  [attr.aria-label]="
+                    personIdentifier.commonName +
+                    ' : ' +
+                    personIdentifier.reference +
+                    ' ' +
+                    ariaLabelIdentifierUrl
+                  "
                   class="underline"
                   [href]="personIdentifier.url"
                   target="_blank"
