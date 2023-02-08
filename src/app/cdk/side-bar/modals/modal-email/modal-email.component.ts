@@ -42,11 +42,11 @@ import { OrcidValidators } from 'src/app/validators'
   preserveWhitespaces: true,
 })
 export class ModalEmailComponent implements OnInit, OnDestroy {
-  ariaLabelKnowledgeBase = $localize`:@@side-bar.ariaLabelOrcidTermsOfUseBase:ORCID terms of use page (Opens in a new tab)`
+  ariaLabelKnowledgeBase = $localize`:@@side-bar.ariaLabelOrcidTermsOfUseBase:ORCID knowledge base (Opens in a new tab)`
   ariaLabelKnowledgeSupport = $localize`:@@side-bar.ariaLabelOrcidTermsSupport:ORCID support page (Opens in a new tab)`
-  ariaLabelOrcidTermsOfUseLink = $localize`:@@side-bar.ariaLabelOrcidTermsOfUseLink:ORCID terms of use`
+  ariaLabelOrcidTermsOfUseLink = $localize`:@@side-bar.ariaLabelOrcidTermsOfUseLink:ORCID terms of use (Opens in a new tab)`
   ariaLabelSave = $localize`:@@side-bar.ariaLabelEmailSave:Save changes to Emails`
-  ariaLabelCancel = $localize`:@@side-bar.ariaLabelEmailCancel:Cancel changes to Emails`
+  ariaLabelCancel = $localize`:@@side-bar.ariaLabelEmailCancel:Cancel changes and close Emails`
   ariaLabelDelete = $localize`:@@side-bar.ariaLabelEmailDelete:Delete Email`
   ariaLabelClose = $localize`:@@side-bar.ariaLabelEmailClose:Close Emails`
   ariaLabelEmail = $localize`:@@side-bar.ariaLabelEmail:Emails`

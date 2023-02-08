@@ -114,7 +114,7 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
         content: new UntypedFormControl(
           {
             value: keyword.content,
-            disabled: keyword.source !== this.id,
+            // disabled: keyword.source !== this.id,
           },
           {
             validators: [Validators.maxLength(this.keywordMaxLength)],

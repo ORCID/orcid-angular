@@ -1,4 +1,16 @@
+@use '@angular/material' as mat;
 @import 'styles.scss-theme.scss';
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+@mixin global-style-theme($theme) {
+  $primary: map-get($theme, primary);
+
+  *:focus-visible {
+    outline: mat.get-color-from-palette($primary) auto 1px !important;
+  }
+}
+
+@include global-style-theme($orcid-app-theme);
 
 [dir='rtl'] .material-icons {
   direction: rtl;

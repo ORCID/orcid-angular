@@ -45,7 +45,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
   ariaLabelSave = $localize`:@@side-bar.ariaLabelWebsiteSave:Save changes to Websites & social links`
   ariaLabelCancel = $localize`:@@side-bar.ariaLabelWebsiteCancel:Cancel changes to Websites & social links`
   ariaLabelDelete = $localize`:@@side-bar.ariaLabelWebsiteDelete:Delete Websites or social link`
-  ariaLabelClose = $localize`:@@side-bar.ariaLabelWebsiteClose:Close Websites or social link`
+  ariaLabelClose = $localize`:@@side-bar.ariaLabelWebsiteClose:Close Websites and social links`
   ariaLabelTitle = $localize`:@@side-bar.ariaLabelWebsiteTitle:Websites or social link Title`
   ariaLabelURL = $localize`:@@side-bar.ariaLabelWebsiteUrl:Link URL`
 
