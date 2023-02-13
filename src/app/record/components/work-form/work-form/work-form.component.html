@@ -1,6 +1,6 @@
 <form [formGroup]="workForm" *ngIf="workForm">
-  <section id="wok-detail">
-    <div id="workDetails" class="title row">
+  <section id="work-detail">
+    <div class="title row">
       <h2
         [ngClass]="{
           'orc-font-body': !platform.columns12,
@@ -8,6 +8,7 @@
         }"
         class="orc-font-body"
         i18n="@@works.workDetails"
+        id="workDetailsLabel"
       >
         Work details
       </h2>
@@ -78,13 +79,13 @@
               workForm.get('title').touched
           }"
         >
-          <strong i18n="@@works.title" id="work-title-label">Title</strong>
+          <strong i18n="@@works.worktitle" id="work-title-label">Work title</strong>
           <span class="required">*</span>
         </label>
       </div>
 
       <mat-form-field
-        aria-label="work-title-label"
+        aria-labelledby="work-title-label"
         appearance="outline"
         class="mat-form-field-min input-container"
       >
@@ -260,8 +261,8 @@
     <div>
       <div class="row">
         <label for="work-subtitle-input" class="mat-caption">
-          <strong i18n="@@works.subtitle" id="work-subtitle-label"
-            >Work Subtitle</strong
+          <strong i18n="@@works.subtitle-2" id="work-subtitle-label"
+            >Work subtitle</strong
           >
         </label>
       </div>
@@ -593,8 +594,8 @@
       <div>
         <div class="row">
           <label for="description-input" class="mat-caption">
-            <strong i18n="@@works.description" id="description-label"
-              >Description</strong
+            <strong i18n="@@works.citationDescription" id="description-label"
+              >Citation description</strong
             >
           </label>
         </div>
@@ -632,7 +633,7 @@
 
     <div
       class="title"
-      id="identifiers"
+      id="work-identifiers"
       [ngClass]="{
         'orc-font-body': !platform.columns12,
         'orc-font-body-large': platform.columns12
@@ -710,7 +711,7 @@
       </div>
     </div>
   </section>
-  <section id="contributors">
+  <section id="work-contributors">
     <!---------------------->
     <!-- Contributors  -->
     <!---------------------->
@@ -741,7 +742,7 @@
       [recordHolderAsContributor]="work?.putCode?.value || externalIdentifier"
     ></app-work-contributors>
   </section>
-  <section id="other-info">
+  <section id="work-other-info">
     <!---------------------->
     <!-- Work Other Information -->
     <!---------------------->
@@ -764,7 +765,7 @@
     <div>
       <div class="row title">
         <label for="language-input" class="mat-caption">
-          <strong i18n="@@works.languageUsed"
+          <strong i18n="@@works.languageUsed" id="language-label"
             >Language used in this form</strong
           >
         </label>
@@ -778,6 +779,7 @@
             id="language-input"
             placeholder="{{ ngOrcidSelectLanguage }}"
             formControlName="languageCode"
+            [attr.aria-label]="languageLabelAriaLabel"
           >
             <mat-option
               *ngFor="let item of languageMap | keyvalue"
@@ -807,7 +809,7 @@
           class="mat-form-field-min input-container"
         >
           <mat-select
-            aria-labelledby="country-location-label"
+            [attr.aria-label]="selectCountryLocationLabel"
             id="country-input"
             placeholder="{{ ngOrcidSelectACountryOrLocation }}"
             formControlName="countryCode"
@@ -823,18 +825,19 @@
       </div>
     </div>
   </section>
-  <section id="work-visibiltiy">
+  <section id="work-visibility">
     <!---------------------->
     <!-- Work Visibility -->
     <!---------------------->
 
-    <div id="visibility" class="title">
+    <div class="title">
       <h2
         [ngClass]="{
           'orc-font-body': !platform.columns12,
           'orc-font-body-large': platform.columns12
         }"
         i18n="@@shared.visibility"
+        id="visibilityLabel"
       >
         Visibility
       </h2>
