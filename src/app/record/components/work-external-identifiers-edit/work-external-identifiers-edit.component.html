@@ -147,7 +147,7 @@
 
   <div>
     <div class="row">
-      <div
+      <label
         class="mat-caption"
         [ngClass]="{
           error:
@@ -155,10 +155,10 @@
             externalIdForm.get('externalIdentifierUrl').touched
         }"
       >
-        <label i18n="@@works.identifierUrl" id="{{ 'id-url-' + index }}"
+        <strong i18n="@@works.identifierUrl" id="{{ 'id-url-' + index }}"
           >Identifier URL
-        </label>
-      </div>
+        </strong>
+      </label>
     </div>
     <mat-form-field
       appearance="outline"
