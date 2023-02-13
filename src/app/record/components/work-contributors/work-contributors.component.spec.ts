@@ -146,7 +146,7 @@ describe('WorkContributorsComponent', () => {
 
   it('should display `Add another contributor button`', () => {
     expect(
-      debugElement.query(By.css('#cy-add-another-contributor'))
+      debugElement.query(By.css('.cy-add-another-contributor'))
     ).toBeTruthy()
   })
 
@@ -154,7 +154,7 @@ describe('WorkContributorsComponent', () => {
     await findByClassNameAndClickButton(
       debugElement,
       fixture,
-      '#cy-add-another-contributor'
+      '.cy-add-another-contributor'
     )
 
     const contributorName = await loader.getHarness(MatInputHarness)
@@ -168,7 +168,7 @@ describe('WorkContributorsComponent', () => {
     await findByClassNameAndClickButton(
       debugElement,
       fixture,
-      '#cy-add-another-contributor'
+      '.cy-add-another-contributor'
     )
 
     fixture.detectChanges()
@@ -176,7 +176,7 @@ describe('WorkContributorsComponent', () => {
     await findByClassNameAndClickButton(
       debugElement,
       fixture,
-      '#cy-add-another-role-0000-0000-0000-000X'
+      '.cy-add-another-role'
     )
 
     const roles = await loader.getAllHarnesses(MatSelectHarness)
@@ -188,7 +188,7 @@ describe('WorkContributorsComponent', () => {
     await findByClassNameAndClickButton(
       debugElement,
       fixture,
-      '#cy-add-another-contributor'
+      '.cy-add-another-contributor'
     )
 
     fixture.detectChanges()
@@ -196,7 +196,7 @@ describe('WorkContributorsComponent', () => {
     await findByClassNameAndClickButton(
       debugElement,
       fixture,
-      '#cy-add-another-role-0000-0000-0000-000X'
+      '.cy-add-another-role'
     )
 
     const roles = await loader.getAllHarnesses(MatSelectHarness)
@@ -262,7 +262,7 @@ describe('WorkContributorsComponent', () => {
     await findByClassNameAndClickButton(
       debugElement,
       fixture,
-      '#cy-add-another-contributor'
+      '.cy-add-another-contributor'
     )
 
     fixture.detectChanges()
@@ -270,7 +270,7 @@ describe('WorkContributorsComponent', () => {
     await findByClassNameAndClickButton(
       debugElement,
       fixture,
-      '#cy-add-another-role-0000-0000-0000-000X'
+      '.cy-add-another-role'
     )
 
     const roles = await loader.getAllHarnesses(MatSelectHarness)
@@ -423,7 +423,7 @@ describe('WorkContributorsComponent', () => {
 
   it('should display notice panel if 50+ contributors are added and button `Add another contributor` must be disabled', async () => {
     const addAnotherContributor = debugElement.query(
-      By.css('#cy-add-another-contributor')
+      By.css('.cy-add-another-contributor')
     )
 
     await Array.from({ length: 49 }, (x, i) => {
@@ -489,7 +489,7 @@ describe('WorkContributorsComponent', () => {
     const noticePanel = fixture.nativeElement.querySelector('.notice-panel ')
 
     const addAnotherContributor = debugElement.query(
-      By.css('#cy-add-another-contributor')
+      By.css('.cy-add-another-contributor')
     )
 
     const counter = fixture.nativeElement.querySelector('.title ')
@@ -515,7 +515,7 @@ describe('WorkContributorsComponent', () => {
       fixture.nativeElement.querySelectorAll('.contributors-box').nativeElement
 
     const addOtherContributor = debugElement.query(
-      By.css('#cy-add-another-contributor')
+      By.css('.cy-add-another-contributor')
     )
 
     expect(contributors).not.toBeTruthy()

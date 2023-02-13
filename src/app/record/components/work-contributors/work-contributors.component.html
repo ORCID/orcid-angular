@@ -309,9 +309,8 @@
                     </ng-container>
                     <div class="row">
                       <a
-                        class="underline"
+                        class="underline cy-add-another-role"
                         (click)="addAnotherRole(contributor)"
-                        [id]="'cy-add-another-role-' + id"
                       >
                         <span class="mat-body-1" i18n="@@works.addAnotherRole">
                           Add another role
@@ -386,14 +385,13 @@
     "
   >
     <a
-      class="col add-more no-gutters"
+      class="col add-more no-gutters cy-add-another-contributor"
       [class.disabled]="contributorsFormArray?.length > maxNumberOfContributors"
       (click)="
         addAnotherContributor(
           contributorsFormArray?.length > maxNumberOfContributors
         )
       "
-      id="cy-add-another-contributor"
     >
       <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
       <span class="mat-body-1">
