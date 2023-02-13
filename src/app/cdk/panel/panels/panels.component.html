@@ -171,14 +171,18 @@
         >
           {{ option | sortLabel }}
           <mat-icon
+            aria-hidden="false"
             class="sort"
             *ngIf="option === sortType && sortDirection === 'asc'"
+            [attr.aria-label]="ariaLabelAscending"
           >
             south
           </mat-icon>
           <mat-icon
+            aria-hidden="false"
             class="sort"
             *ngIf="option === sortType && sortDirection === 'desc'"
+            [attr.aria-label]="ariaLabelDescending"
           >
             north
           </mat-icon>
