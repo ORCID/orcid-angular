@@ -75,7 +75,7 @@
                     class="mat-form-field-min"
                   >
                     <input
-                      [readonly]="keyword.source !== this.id"
+                      [readonly]="keyword.source && keyword.source !== this.id"
                       class="content-input"
                       matInput
                       #keywordInput
