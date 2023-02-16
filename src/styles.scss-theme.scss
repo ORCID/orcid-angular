@@ -13,6 +13,10 @@
   a {
     color: mat.get-color-from-palette($primary);
   }
+  mat-form-field.read-only .mat-form-field-flex {
+    background-color: map-get($background, 'ui-background-lightest');
+    color: map-get($foreground, 'text-dark-high');
+  }
 }
 
 @mixin global-theme-typography($config) {

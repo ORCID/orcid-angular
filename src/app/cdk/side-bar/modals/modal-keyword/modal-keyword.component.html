@@ -73,6 +73,9 @@
                   <mat-form-field
                     appearance="outline"
                     class="mat-form-field-min"
+                    [ngClass]="{
+                      'read-only': keyword.source && keyword.source !== this.id
+                    }"
                   >
                     <input
                       [readonly]="keyword.source && keyword.source !== this.id"
