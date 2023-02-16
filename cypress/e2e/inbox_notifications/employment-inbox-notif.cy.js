@@ -30,7 +30,7 @@ describe('Inbox: add/update/delete Employment via API', async function () {
     Cypress.env('membersAPI_URL') +
     userData.cyNotifPerm.oid +
     Cypress.env('membersAPI_employmentEndpoint') +
-    "/" //here append "{PUTCODE}" + "'"
+    '/' //here append "{PUTCODE}" + "'"
 
   const curlPutEmployment =
     "curl -i -H 'Content-type: application/json' -H 'Authorization: Bearer " +
@@ -41,7 +41,7 @@ describe('Inbox: add/update/delete Employment via API', async function () {
     Cypress.env('membersAPI_URL') +
     userData.cyNotifPerm.oid +
     Cypress.env('membersAPI_employmentEndpoint') +
-    "/" //here append "{PUTCODE}"+ "'"
+    '/' //here append "{PUTCODE}"+ "'"
 
   const curlDeleteEmployment =
     "curl -i -H 'Content-type: application/json' -H 'Authorization: Bearer " +
@@ -50,7 +50,7 @@ describe('Inbox: add/update/delete Employment via API', async function () {
     Cypress.env('membersAPI_URL') +
     userData.cyNotifPerm.oid +
     Cypress.env('membersAPI_employmentEndpoint') +
-    "/" //here append "{PUTCODE}"+ "'"
+    '/' //here append "{PUTCODE}"+ "'"
 
   before(() => {
     //log in
@@ -96,7 +96,7 @@ describe('Inbox: add/update/delete Employment via API', async function () {
         putCodeStartPosition,
         putCodeEndPosition
       )
-      cy.exec(curlReadSingleEmployment + putCode +"'").then(
+      cy.exec(curlReadSingleEmployment + putCode + "'").then(
         (singleEmploymentResp) => {
           //remove non json header from string
           const jsonStartIndex =

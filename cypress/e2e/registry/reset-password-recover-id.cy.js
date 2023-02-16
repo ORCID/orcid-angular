@@ -43,7 +43,9 @@ describe('Password reset and OID recovery', () => {
     })
     cy.wait(3000)
     //type new passw
-    cy.contains('There is a problem with your reset password link.').should('not.exist')
+    cy.contains('There is a problem with your reset password link.').should(
+      'not.exist'
+    )
     cy.get('#cy-password-input').clear().type(newPassword)
     //confirm new passw
     cy.get('#cy-password-confirm-input').clear().type(newPassword)

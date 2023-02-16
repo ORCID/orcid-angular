@@ -30,7 +30,7 @@ describe('Inbox: add/update/delete funding via API', async function () {
     Cypress.env('membersAPI_URL') +
     userData.cyNotifPerm.oid +
     Cypress.env('membersAPI_fundingsEndpoint') +
-    "/" //here append "{PUTCODE}" + "'"
+    '/' //here append "{PUTCODE}" + "'"
 
   const curlPutFunding =
     "curl -i -H 'Content-type: application/json' -H 'Authorization: Bearer " +
@@ -41,7 +41,7 @@ describe('Inbox: add/update/delete funding via API', async function () {
     Cypress.env('membersAPI_URL') +
     userData.cyNotifPerm.oid +
     Cypress.env('membersAPI_fundingsEndpoint') +
-    "/" //here append "{PUTCODE}"
+    '/' //here append "{PUTCODE}"
 
   const curlDeleteFunding =
     "curl -i -H 'Content-type: application/json' -H 'Authorization: Bearer " +
@@ -50,7 +50,7 @@ describe('Inbox: add/update/delete funding via API', async function () {
     Cypress.env('membersAPI_URL') +
     userData.cyNotifPerm.oid +
     Cypress.env('membersAPI_fundingsEndpoint') +
-    "/" //here append "{PUTCODE}"
+    '/' //here append "{PUTCODE}"
 
   before(() => {
     //log in
@@ -114,7 +114,7 @@ describe('Inbox: add/update/delete funding via API', async function () {
       })
 
       //Client Updates the work
-      cy.exec(curlPutFunding + putCode+ "'").then((responsePUT) => {
+      cy.exec(curlPutFunding + putCode + "'").then((responsePUT) => {
         //verify curl was executed successfully
         expect(responsePUT.code).to.eq(0)
         //verify http response status is successful: 200
@@ -127,7 +127,7 @@ describe('Inbox: add/update/delete funding via API', async function () {
       cy.contains('Updated').should('be.visible')
 
       //Client deletes work with that put code
-      cy.exec(curlDeleteFunding + putCode+ "'").then((responseDelete) => {
+      cy.exec(curlDeleteFunding + putCode + "'").then((responseDelete) => {
         //verify curl was executed successfully
         expect(responseDelete.code).to.eq(0)
         //verify http response status is successful: 204
