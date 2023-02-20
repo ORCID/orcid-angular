@@ -42,6 +42,13 @@ import { OrcidValidators } from 'src/app/validators'
   styleUrls: ['./modal-websites.component.scss'],
 })
 export class ModalWebsitesComponent implements OnInit, OnDestroy {
+  ariaLabelSave = $localize`:@@side-bar.ariaLabelWebsiteSave:Save changes to Websites & social links`
+  ariaLabelCancel = $localize`:@@side-bar.ariaLabelWebsiteCancel:Cancel changes to Websites & social links`
+  ariaLabelDelete = $localize`:@@side-bar.ariaLabelWebsiteDelete:Delete Websites or social link`
+  ariaLabelClose = $localize`:@@side-bar.ariaLabelWebsiteClose:Close Websites and social links`
+  ariaLabelTitle = $localize`:@@side-bar.ariaLabelWebsiteTitle:Websites or social link Title`
+  ariaLabelURL = $localize`:@@side-bar.ariaLabelWebsiteUrl:Link URL`
+
   @ViewChildren('descriptionInput') inputs: QueryList<ElementRef>
 
   $destroy: Subject<boolean> = new Subject<boolean>()
@@ -245,9 +252,8 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
         this.websitesForm
       ) {
         const formGroup = this.websitesForm
-        const formGroupKeysWithDuplicatedValues: string[] = this.listDuplicateInputKeys(
-          formGroup
-        )
+        const formGroupKeysWithDuplicatedValues: string[] =
+          this.listDuplicateInputKeys(formGroup)
         this.removeDuplicateErrorFromOtherControls(
           formGroupKeysWithDuplicatedValues,
           formGroup
@@ -295,9 +301,9 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
     websitesForm: UntypedFormGroup = new UntypedFormGroup({})
   ): void {
     Object.keys(websitesForm.controls).forEach((currentControlKey) => {
-      const urlControl = (websitesForm.controls[
-        currentControlKey
-      ] as UntypedFormGroup).controls.url as UntypedFormControl
+      const urlControl = (
+        websitesForm.controls[currentControlKey] as UntypedFormGroup
+      ).controls.url as UntypedFormControl
       if (
         formGroupKeysWithDuplicatedValues.indexOf(currentControlKey) === -1 &&
         urlControl.errors &&

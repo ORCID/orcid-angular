@@ -61,6 +61,12 @@ import { RecordService } from 'src/app/core/record/record.service'
   ],
 })
 export class WorkFormComponent implements OnInit {
+  ngOrcidYear = $localize`:@@shared.year:Year`
+  ngOrcidMonth = $localize`:@@shared.month:Month`
+  ngOrcidDay = $localize`:@@shared.day:Day`
+  languageLabelAriaLabel = $localize`:@@shared.languageLabelAriaLabel:Select the language used in this form`
+  selectCountryLocationLabel = $localize`:@@shared.selectCountryLocationLabel:Select a country or location of publication`
+
   @Input() work: Work
   @Input() userRecord: UserRecord
   @Input() externalIdentifier: boolean
@@ -96,9 +102,6 @@ export class WorkFormComponent implements OnInit {
   workIdentifiersFormArray: UntypedFormArray = new UntypedFormArray([])
   workIdentifiersFormArrayDisplayState: boolean[] = []
 
-  ngOrcidYear = $localize`:@@shared.year:Year`
-  ngOrcidMonth = $localize`:@@shared.month:Month`
-  ngOrcidDay = $localize`:@@shared.day:Day`
   ngOrcidSelectWorkType = $localize`:@@works.selectWorkType:Select a work type`
   ngOrcidSelectLanguage = $localize`:@@shared.selectLanguage:Select a language`
   ngOrcidSelectACitationType = $localize`:@@works.selectACitationType:Select a citation type`
@@ -605,9 +608,11 @@ export class WorkFormComponent implements OnInit {
       Object.keys(formErrors).length === 1 &&
       formErrors.workIdentifiers?.length
     ) {
-      return (formErrors.workIdentifiers as {
-        [key: string]: { [key: string]: boolean }
-      }[]).every((workIdentifiersErrorList) => {
+      return (
+        formErrors.workIdentifiers as {
+          [key: string]: { [key: string]: boolean }
+        }[]
+      ).every((workIdentifiersErrorList) => {
         return (
           // Either workIdentifiers is null
           // OR it only contains allow error like unResolved or validFormat

@@ -43,6 +43,8 @@ import { TogglzService } from '../../../core/togglz/togglz.service'
   ],
 })
 export class WorkContributorsComponent implements OnInit, OnDestroy {
+  deleteLabel = $localize`:@@shared.deleteActivityAriaLabel:Delete`
+
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   @Input() contributors: Contributor[]
@@ -63,6 +65,8 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
   recordHolderContribution: Contributor
 
   ngOrcidSelectRole = $localize`:@@works.pleaseSelectRole:Please select a role`
+  ngOrcidSelectRoleAriaLabel = $localize`:@@works.pleaseSelectRoleAriaLabel:Select your contributor to this work`
+
   ngOrcidContributorName = $localize`:@@works.contributorName:Contributor name`
 
   constructor(
@@ -283,8 +287,8 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
       .filter((formGroup) => formGroup.disabled)
       .map((formGroup) => {
         const role = formGroup?.value?.role
-        const translation = this.workService.getContributionRoleByKey(role)
-          ?.translation
+        const translation =
+          this.workService.getContributionRoleByKey(role)?.translation
         return translation
           ? translation
           : role.charAt(0).toUpperCase() + role.slice(1)

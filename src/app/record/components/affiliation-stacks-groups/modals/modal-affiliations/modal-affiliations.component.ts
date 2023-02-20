@@ -46,8 +46,30 @@ import { RecordService } from 'src/app/core/record/record.service'
 })
 export class ModalAffiliationsComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
+  closeLabel = $localize`:@@shared.ariaLabelClose:Close`
+  saveLabel = $localize`:@@shared.saveChangesTo:Save changes to`
+  ngOrcidYear = $localize`:@@shared.year:Year`
+  ngOrcidMonth = $localize`:@@shared.month:Month`
+  ngOrcidDay = $localize`:@@shared.day:Day`
 
-  @Input() type: AffiliationType
+  cancelChanges = $localize`:@@shared.cancelChangesAndClose:Cancel changes and close`
+  linkLabel = $localize`:@@shared.link:Link`
+  endDateLabel = $localize`:@@shared.endDate:End date`
+  private _type: AffiliationType
+  dateLabel: string
+  @Input()
+  public get type(): AffiliationType {
+    return this._type
+  }
+  public set type(value: AffiliationType) {
+    this._type = value
+    if (value !== 'distinction') {
+      this.dateLabel = $localize`:@@shared.startDate:Start date`
+    } else {
+      this.dateLabel = $localize`:@@shared.distinctionDate:Date of distinction`
+    }
+  }
+
   @Input() affiliation: Affiliation
   @Input() options: { createACopy: boolean }
 
@@ -83,9 +105,6 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
     .fill(0)
     .map((i, idx) => idx + 1)
 
-  ngOrcidYear = $localize`:@@shared.year:Year`
-  ngOrcidMonth = $localize`:@@shared.month:Month`
-  ngOrcidDay = $localize`:@@shared.day:Day`
   ngOrcidSelectACountryOrLocation = $localize`:@@shared.selectACountryOrLocation:Select a country or location`
   ngOrcidDefaultVisibilityLabel = $localize`:@@shared.visibilityDescription:Control who can see this information by setting the visibility. Your default visibility is`
 
@@ -386,20 +405,20 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
       source: this.options?.createACopy ? null : this.affiliation?.source,
       sourceName: this.affiliation?.sourceName,
       dateSortString: this.affiliation?.dateSortString,
-      affiliationExternalIdentifiers: this.affiliation
-        ?.affiliationExternalIdentifiers,
+      affiliationExternalIdentifiers:
+        this.affiliation?.affiliationExternalIdentifiers,
       affiliationTypeForDisplay: this.affiliation?.affiliationTypeForDisplay,
       assertionOriginClientId: this.affiliation?.assertionOriginClientId,
       assertionOriginName: this.affiliation?.assertionOriginName,
       assertionOriginOrcid: this.affiliation?.assertionOriginOrcid,
       disambiguationSource: this.affiliation?.disambiguationSource,
-      disambiguatedAffiliationSourceId: this.affiliation
-        ?.disambiguatedAffiliationSourceId,
+      disambiguatedAffiliationSourceId:
+        this.affiliation?.disambiguatedAffiliationSourceId,
       orgDisambiguatedId: this.affiliation?.orgDisambiguatedId,
       orgDisambiguatedCity: this.affiliation?.orgDisambiguatedCity,
       orgDisambiguatedCountry: this.affiliation?.orgDisambiguatedCountry,
-      orgDisambiguatedExternalIdentifiers: this.affiliation
-        ?.orgDisambiguatedExternalIdentifiers,
+      orgDisambiguatedExternalIdentifiers:
+        this.affiliation?.orgDisambiguatedExternalIdentifiers,
       orgDisambiguatedName: this.affiliation?.orgDisambiguatedName,
       orgDisambiguatedRegion: this.affiliation?.orgDisambiguatedRegion,
       orgDisambiguatedUrl: this.affiliation?.orgDisambiguatedUrl,

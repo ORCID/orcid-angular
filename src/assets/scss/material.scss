@@ -19,7 +19,7 @@
 @import './orcid/divider.scss';
 @import './orcid/app-settings-panels-data.scss';
 
-@import './material.orcid.overwrites.scss/form-field-theme';
+// @import './material.orcid.overwrites.scss/form-field-theme';
 // .
 // .
 // MATERIAL THEMING
@@ -27,8 +27,12 @@
 // .
 // Style material components more info on  https://github.com/angular/components/blob/8.1.4/guides/theming.md
 @include mat.core($orcid-material-typography);
+@include mat.strong-focus-indicators();
+
 // TODO: include only the CSS for the used components, instead of everything
 @include mat.all-component-themes($orcid-app-theme);
+@include mat.strong-focus-indicators-theme($orcid-app-theme);
+
 // .
 // .
 // MATERIAL OVERWRITES

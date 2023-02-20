@@ -5,7 +5,7 @@ import userData from '../../fixtures/testing-users.fixture.json'
 describe('Public record page: validate data limited or private is not displayed', async function () {
   const testUser = userData.cyUserPublicPageNoAffiliations
 
-  before(() => {
+  beforeEach(() => {
     cy.visit('/' + testUser.oid)
   })
 

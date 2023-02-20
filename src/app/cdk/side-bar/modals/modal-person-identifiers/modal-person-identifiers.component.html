@@ -1,5 +1,5 @@
 <app-modal [loading]="loadingPersonalIdentifiers" [noSidebar]="true">
-  <app-modal-header i18n="@@side-bar.personalIdentifiers"
+  <app-modal-header i18n="@@side-bar.personalIdentifiers" [closeLabel]=""
     >Other IDs</app-modal-header
   >
   <app-modal-footer>
@@ -9,6 +9,7 @@
       (click)="saveEvent()"
       i18n="@@shared.saveChanges"
       id="save-personal-id-button"
+      [attr.aria-label]="ariaLabelSave"
     >
       Save changes
     </button>
@@ -18,6 +19,7 @@
       (click)="closeEvent()"
       i18n="@@shared.cancel"
       id="cancel-personal-id-button"
+      [attr.aria-label]="ariaLabelCancel"
     >
       Cancel
     </button>
@@ -39,6 +41,9 @@
             Find out more on our
           </ng-container>
           <a
+            [attr.aria-label]="
+              ariaLabelIdentifier + ' ' + ariaLabelOtherIdsSupport
+            "
             target="_blank"
             rel="noopener noreferrer"
             href="https://support.orcid.org/hc/en-us/articles/360006894854-Add-person-identifiers-other-identifiers-to-your-ORCID-record"
@@ -50,15 +55,16 @@
     </div>
     <ng-container *ngIf="personIdentifiers?.length > 0">
       <div class="row">
-        <h3
+        <h2
           class="col no-gutters orc-font-body"
           i18n="@@side-bar.myOtherIdentifiers"
         >
           My other identifiers
-        </h3>
+        </h2>
       </div>
       <hr class="dashed-line" />
-      <div
+      <section
+        id="my-other-identifiers"
         class="row"
         id="ids-list"
         cdkDropList
@@ -87,6 +93,13 @@
               />
               <div class="person-identifier">
                 <a
+                  [attr.aria-label]="
+                    personIdentifier.commonName +
+                    ' : ' +
+                    personIdentifier.reference +
+                    ' ' +
+                    ariaLabelIdentifierUrl
+                  "
                   class="underline"
                   [href]="personIdentifier.url"
                   target="_blank"
@@ -118,6 +131,13 @@
                 (click)="deletePersonalIdentifier(personIdentifier.putCode)"
                 mat-icon-button
                 class="delete-button"
+                [attr.aria-label]="
+                  ariaLabelDelete +
+                  ' ' +
+                  personIdentifier.commonName +
+                  ':' +
+                  personIdentifier.reference
+                "
               >
                 <mat-icon
                   class="material-icons-outlined extra-large-material-icon"
@@ -128,7 +148,7 @@
           </div>
           <hr class="dashed-line" />
         </div>
-      </div>
+      </section>
     </ng-container>
   </div>
 </app-modal>

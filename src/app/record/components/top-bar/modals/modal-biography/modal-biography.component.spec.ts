@@ -19,32 +19,30 @@ describe('ModalBiographyComponent', () => {
   let component: ModalBiographyComponent
   let fixture: ComponentFixture<ModalBiographyComponent>
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        imports: [
-          FormsModule,
-          HttpClientTestingModule,
-          NoopAnimationsModule,
-          SharedModule,
-          ReactiveFormsModule,
-          RecordModule,
-          RouterTestingModule,
-        ],
-        declarations: [ModalBiographyComponent],
-        providers: [
-          { provide: MAT_DIALOG_DATA, useValue: {} },
-          { provide: MatDialogRef, useValue: {} },
-          WINDOW_PROVIDERS,
-          PlatformInfoService,
-          RecordBiographyService,
-          SnackbarService,
-          MatSnackBar,
-          Overlay,
-        ],
-      }).compileComponents()
-    })
-  )
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        FormsModule,
+        HttpClientTestingModule,
+        NoopAnimationsModule,
+        SharedModule,
+        ReactiveFormsModule,
+        RecordModule,
+        RouterTestingModule,
+      ],
+      declarations: [ModalBiographyComponent],
+      providers: [
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+        { provide: MatDialogRef, useValue: {} },
+        WINDOW_PROVIDERS,
+        PlatformInfoService,
+        RecordBiographyService,
+        SnackbarService,
+        MatSnackBar,
+        Overlay,
+      ],
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ModalBiographyComponent)

@@ -1,160 +1,271 @@
 <form [formGroup]="workForm" *ngIf="workForm">
-  <div
-    id="workDetails"
-    class="title row"
-    [ngClass]="{
-      'orc-font-body': !platform.columns12,
-      'orc-font-body-large': platform.columns12
-    }"
-  >
-    <p>
-      <strong i18n="@@works.workDetails"> Work details </strong>
-    </p>
-    <p *ngIf="platform.columns12" class="required-information mat-caption">
-      <span class="required">*</span>
-      <ng-container i18n="@@shared.requiredInformation"
-        >Required information</ng-container
+  <section id="work-detail">
+    <div class="title row">
+      <h2
+        [ngClass]="{
+          'orc-font-body': !platform.columns12,
+          'orc-font-body-large': platform.columns12
+        }"
+        class="orc-font-body"
+        i18n="@@works.workDetails"
+        id="workDetailsLabel"
       >
-    </p>
-  </div>
-  <hr />
-  <!-- Work Types -->
-  <div id="cy-work-types-div">
-    <label
-      for="cy-work-types"
-      class="row mat-caption"
-      [ngClass]="{
-        error:
-          workForm.get('workType').hasError('required') &&
-          workForm.get('workType').touched
-      }"
-    >
-      <strong i18n="@@works.workType">Work type</strong>
-      <span class="required">*</span>
-    </label>
-    <mat-form-field
-      appearance="outline"
-      class="mat-form-field-min input-container"
-      id="cy-work-types-form-field"
-    >
-      <mat-select
-        formControlName="workType"
-        (selectionChange)="$workTypeUpdateEvent.next()"
-        id="cy-work-types"
-        placeholder="{{ ngOrcidSelectWorkType }}"
-      >
-        <mat-optgroup
-          *ngFor="let workType of workTypeByCategory"
-          label="{{ workType.category | recordWorkCategoryLabel }}"
+        Work details
+      </h2>
+      <p *ngIf="platform.columns12" class="required-information mat-caption">
+        <span class="required">*</span>
+        <ng-container i18n="@@shared.requiredInformation"
+          >Required information</ng-container
         >
-          <mat-option
-            *ngFor="let type of workType.types | keyvalue"
-            [value]="type.value"
-          >
-            {{ type.value | recordWorkTypeLabel }}
-          </mat-option>
-        </mat-optgroup>
-      </mat-select>
-      <mat-error
-        *ngIf="workForm.get('workType').hasError('required')"
-        i18n="@@works.selectWorkType"
-      >
-        Select a work type
-      </mat-error>
-    </mat-form-field>
-  </div>
-  <!-- Title -->
-
-  <div>
-    <div class="row">
+      </p>
+    </div>
+    <hr />
+    <!-- Work Types -->
+    <div id="cy-work-types-div">
       <label
-        for="title-input"
-        class="mat-caption"
+        for="cy-work-types"
+        class="row mat-caption"
         [ngClass]="{
           error:
-            workForm.hasError('required', 'title') &&
-            workForm.get('title').touched
+            workForm.get('workType').hasError('required') &&
+            workForm.get('workType').touched
         }"
       >
-        <strong i18n="@@works.title">Title</strong>
+        <strong i18n="@@works.workType" id="work-type-label">Work type</strong>
         <span class="required">*</span>
       </label>
+      <mat-form-field
+        appearance="outline"
+        class="mat-form-field-min input-container"
+        id="cy-work-types-form-field"
+      >
+        <mat-select
+          id="cy-work-types"
+          aria-labelledby="work-type-label"
+          formControlName="workType"
+          (selectionChange)="$workTypeUpdateEvent.next()"
+          placeholder="{{ ngOrcidSelectWorkType }}"
+        >
+          <mat-optgroup
+            *ngFor="let workType of workTypeByCategory"
+            label="{{ workType.category | recordWorkCategoryLabel }}"
+          >
+            <mat-option
+              *ngFor="let type of workType.types | keyvalue"
+              [value]="type.value"
+            >
+              {{ type.value | recordWorkTypeLabel }}
+            </mat-option>
+          </mat-optgroup>
+        </mat-select>
+        <mat-error
+          *ngIf="workForm.get('workType').hasError('required')"
+          i18n="@@works.selectWorkType"
+        >
+          Select a work type
+        </mat-error>
+      </mat-form-field>
     </div>
+    <!-- Title -->
 
-    <mat-form-field
-      appearance="outline"
-      class="mat-form-field-min input-container"
-    >
-      <input id="title-input" matInput formControlName="title" />
-      <mat-error
-        *ngIf="workForm.get('title').hasError('required')"
-        i18n="@@works.setAWorkTitle"
-      >
-        Set a work title
-      </mat-error>
-      <mat-error
-        *ngIf="workForm.get('title').errors?.maxlength"
-        i18n="@@works.titleMaxLength"
-      >
-        Must be less than 1000 characters
-      </mat-error>
-    </mat-form-field>
-  </div>
-  <!-- SHOW-HIDE translated title button  -->
-  <div class="row">
-    <a
-      class="col add-more no-gutters"
-      (click)="showTranslationTitle = !showTranslationTitle"
-      id="cy-translated-title-toggle-link"
-    >
-      <mat-icon
-        *ngIf="!showTranslationTitle"
-        class="large-material-icon"
-        id="cy-add-translated-title-icon"
-        >add_circle_outline</mat-icon
-      >
-      <mat-icon
-        *ngIf="showTranslationTitle"
-        class="large-material-icon"
-        id="cy-hide-translated-title-icon"
-        >remove_circle_outline</mat-icon
-      >
-      <span class="mat-body-1">
-        <ng-container
-          i18n="@@works.addTranslatedTitle"
-          *ngIf="!showTranslationTitle"
-        >
-          Add translated title
-        </ng-container>
-        <ng-container
-          i18n="@@works.hideTranslatedTitle"
-          *ngIf="showTranslationTitle"
-        >
-          Hide translation title
-        </ng-container>
-      </span>
-    </a>
-  </div>
-
-  <!-- Work translations title -->
-  <div
-    [hidden]="!showTranslationTitle"
-    formGroupName="translatedTitleGroup"
-    id="cy-translation-title-group"
-  >
     <div>
       <div class="row">
         <label
-          for="given-names-input"
+          for="title-input"
           class="mat-caption"
           [ngClass]="{
-            error: workForm.hasError(
+            error:
+              workForm.hasError('required', 'title') &&
+              workForm.get('title').touched
+          }"
+        >
+          <strong i18n="@@works.worktitle" id="work-title-label"
+            >Work title</strong
+          >
+          <span class="required">*</span>
+        </label>
+      </div>
+
+      <mat-form-field
+        aria-labelledby="work-title-label"
+        appearance="outline"
+        class="mat-form-field-min input-container"
+      >
+        <input id="title-input" matInput formControlName="title" />
+        <mat-error
+          *ngIf="workForm.get('title').hasError('required')"
+          i18n="@@works.setAWorkTitle"
+        >
+          Set a work title
+        </mat-error>
+        <mat-error
+          *ngIf="workForm.get('title').errors?.maxlength"
+          i18n="@@works.titleMaxLength"
+        >
+          Must be less than 1000 characters
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <!-- SHOW-HIDE translated title button  -->
+    <div class="row">
+      <a
+        class="col add-more no-gutters"
+        (click)="showTranslationTitle = !showTranslationTitle"
+        id="cy-translated-title-toggle-link"
+      >
+        <mat-icon
+          *ngIf="!showTranslationTitle"
+          class="large-material-icon"
+          id="cy-add-translated-title-icon"
+          >add_circle_outline</mat-icon
+        >
+        <mat-icon
+          *ngIf="showTranslationTitle"
+          class="large-material-icon"
+          id="cy-hide-translated-title-icon"
+          >remove_circle_outline</mat-icon
+        >
+        <span class="mat-body-1">
+          <ng-container
+            i18n="@@works.addTranslatedTitle"
+            *ngIf="!showTranslationTitle"
+          >
+            Add translated title
+          </ng-container>
+          <ng-container
+            i18n="@@works.hideTranslatedTitle"
+            *ngIf="showTranslationTitle"
+          >
+            Hide translation title
+          </ng-container>
+        </span>
+      </a>
+    </div>
+
+    <!-- Work translations title -->
+    <div
+      [hidden]="!showTranslationTitle"
+      formGroupName="translatedTitleGroup"
+      id="cy-translation-title-group"
+    >
+      <div>
+        <div class="row">
+          <label
+            for="given-names-input"
+            class="mat-caption"
+            [ngClass]="{
+              error: workForm.hasError(
+                'invalidTranslatedTitleContent',
+                'translatedTitleGroup'
+              )
+            }"
+          >
+            <strong
+              i18n="@@works.translatedTitle"
+              id="work-translate-title-label"
+              >Work translated title</strong
+            >
+          </label>
+        </div>
+
+        <mat-form-field
+          appearance="outline"
+          class="mat-form-field-min input-container"
+        >
+          <input
+            aria-labelledby="work-translate-title-label"
+            id="cy-translated-title-content"
+            matInput
+            formControlName="translatedTitleContent"
+          />
+        </mat-form-field>
+        <mat-error
+          class="mat-caption"
+          *ngIf="
+            workForm.hasError(
               'invalidTranslatedTitleContent',
               'translatedTitleGroup'
             )
-          }"
+          "
+          i18n="@@shared.translatedTitleError"
         >
-          <strong i18n="@@works.translatedTitle">Work translated title</strong>
+          Please enter a translated title
+        </mat-error>
+        <mat-error
+          class="mat-caption"
+          *ngIf="
+            workForm.get('translatedTitleGroup.translatedTitleContent').errors
+              ?.maxlength
+          "
+          i18n="@@works.titleMaxLength"
+        >
+          Must be less than 1000 characters
+        </mat-error>
+      </div>
+
+      <!-- Language of this title -->
+      <div>
+        <div class="row">
+          <label
+            for="language-of-title-input"
+            class="mat-caption"
+            [ngClass]="{
+              error: workForm.hasError(
+                'invalidTranslatedTitleLanguage',
+                'translatedTitleGroup'
+              )
+            }"
+          >
+            <strong
+              i18n="@@works.languageOnThisTitle"
+              id="work-translate-language-label"
+              >Language of this title</strong
+            >
+          </label>
+        </div>
+        <div class="select-error">
+          <mat-form-field
+            appearance="outline"
+            class="mat-form-field-min input-container"
+          >
+            <mat-select
+              aria-labelledby="work-translate-language-label"
+              id="language-of-title-input"
+              placeholder="{{ ngOrcidSelectLanguage }}"
+              formControlName="translatedTitleLanguage"
+            >
+              <mat-option
+                *ngFor="let item of languageMap | keyvalue"
+                [value]="item.value"
+              >
+                {{ item.key }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-error
+            class="mat-caption"
+            *ngIf="
+              workForm.hasError(
+                'invalidTranslatedTitleLanguage',
+                'translatedTitleGroup'
+              )
+            "
+            i18n="@@shared.translatedTitleLanguageError"
+          >
+            Please select a language
+          </mat-error>
+        </div>
+      </div>
+    </div>
+
+    <!-- Work subtitle -->
+
+    <div>
+      <div class="row">
+        <label for="work-subtitle-input" class="mat-caption">
+          <strong i18n="@@works.subtitle-2" id="work-subtitle-label"
+            >Work subtitle</strong
+          >
         </label>
       </div>
 
@@ -163,50 +274,255 @@
         class="mat-form-field-min input-container"
       >
         <input
-          id="cy-translated-title-content"
+          id="work-subtitle-input"
           matInput
-          formControlName="translatedTitleContent"
+          formControlName="subtitle"
+          aria-labelledby="work-subtitle-label"
         />
+        <mat-error
+          *ngIf="workForm.get('subtitle').errors?.maxlength"
+          i18n="@@shared.maxLength.less_than_one_thousand"
+        >
+          Must be less than 1000 characters
+        </mat-error>
       </mat-form-field>
-      <mat-error
-        class="mat-caption"
-        *ngIf="
-          workForm.hasError(
-            'invalidTranslatedTitleContent',
-            'translatedTitleGroup'
-          )
-        "
-        i18n="@@shared.translatedTitleError"
-      >
-        Please enter a translated title
-      </mat-error>
-      <mat-error
-        class="mat-caption"
-        *ngIf="
-          workForm.get('translatedTitleGroup.translatedTitleContent').errors
-            ?.maxlength
-        "
-        i18n="@@works.titleMaxLength"
-      >
-        Must be less than 1000 characters
-      </mat-error>
     </div>
+    <!-- Journal title -->
 
-    <!-- Language of this title -->
+    <div>
+      <div class="row">
+        <label for="cy-journal-title" class="mat-caption">
+          <strong id="journal-title-label">{{
+            dynamicTitle | recordWorkTitleNameLabel
+          }}</strong>
+        </label>
+      </div>
+
+      <mat-form-field
+        appearance="outline"
+        class="mat-form-field-min input-container"
+      >
+        <input
+          matInput
+          formControlName="journalTitle"
+          id="cy-journal-title"
+          aria-labelledby="journal-title-label"
+        />
+        <mat-error
+          *ngIf="workForm.get('journalTitle').errors?.maxlength"
+          i18n="@@works.titleMaxLength"
+        >
+          Must be less than 1000 characters
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <!-- Publication date -->
+    <ng-container
+      formGroupName="publicationDate"
+      id="cy-publication-date-group"
+    >
+      <div class="row">
+        <label
+          class="mat-caption"
+          [ngClass]="{
+            error: workForm.hasError('date', 'startDateGroup')
+          }"
+        >
+          <strong i18n="@@shared.publicationDate" id="publication-date-label"
+            >Publication date</strong
+          >
+        </label>
+      </div>
+      <div
+        class="input-container date"
+        id="publication-date-group"
+        role="group"
+        aria-labelledby="publication-date-label"
+      >
+        <div class="col l4 date">
+          <label
+            for="cy-start-date-year-sel"
+            class="sr-only"
+            i18n="@@shared.year"
+          >
+            Year
+          </label>
+          <mat-form-field appearance="outline" class="mat-form-field-min">
+            <mat-select
+              [aria-label]="ngOrcidYear"
+              placeholder="{{ ngOrcidYear }}"
+              formControlName="publicationYear"
+              id="cy-start-date-year-sel"
+            >
+              <mat-option
+                i18n="@@shared.year"
+                [value]=""
+                id="publication-year-label"
+                >Year</mat-option
+              >
+              <mat-option *ngFor="let year of yearOptions" [value]="year">
+                {{ year }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col l4 date">
+          <label
+            for="cy-start-date-month-sel"
+            class="sr-only"
+            i18n="@@shared.month"
+          >
+            Month
+          </label>
+          <mat-form-field
+            id="start-date-month-input"
+            appearance="outline"
+            class="mat-form-field-min"
+          >
+            <mat-select
+              aria-label="{{ ngOrcidMonth }}"
+              placeholder="{{ ngOrcidMonth }}"
+              formControlName="publicationMonth"
+              id="cy-start-date-month-sel"
+            >
+              <mat-option
+                i18n="@@shared.month"
+                [value]=""
+                id="publication-month-label"
+                >Month</mat-option
+              >
+              <mat-option *ngFor="let month of monthOptions" [value]="month">
+                {{ month | trailingZeros }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col l4 date">
+          <label
+            for="cy-start-date-day-sel"
+            class="sr-only"
+            i18n="@@shared.day"
+          >
+            Day
+          </label>
+          <mat-form-field
+            id="start-date-day-input"
+            appearance="outline"
+            class="mat-form-field-min"
+          >
+            <mat-select
+              aria-label="{{ ngOrcidDay }}"
+              placeholder="{{ ngOrcidDay }}"
+              formControlName="publicationDay"
+              id="cy-start-date-day-sel"
+            >
+              <mat-option
+                i18n="@@shared.day"
+                [value]=""
+                id="publication-day-label"
+                >Day</mat-option
+              >
+              <mat-option *ngFor="let day of dayOptions" [value]="day">
+                {{ day | trailingZeros }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <mat-error
+          class="mat-caption"
+          i18n="@@shared.invalidDate"
+          *ngIf="workForm.get('publicationDate').errors?.date"
+        >
+          Invalid date
+        </mat-error>
+      </div>
+    </ng-container>
+
+    <!-- Work url -->
+
     <div>
       <div class="row">
         <label
-          for="language-of-title-input"
+          for="url-input"
           class="mat-caption"
           [ngClass]="{
-            error: workForm.hasError(
-              'invalidTranslatedTitleLanguage',
-              'translatedTitleGroup'
-            )
+            error:
+              workForm.hasError('pattern', 'url') && workForm.get('url').touched
           }"
         >
-          <strong i18n="@@works.languageOnThisTitle"
-            >Language of this title</strong
+          <strong i18n="@@works.link" id="linkLabel">Link</strong>
+        </label>
+      </div>
+
+      <mat-form-field
+        appearance="outline"
+        class="mat-form-field-min two-line-hint input-container"
+      >
+        <input
+          aria-labelledby="linkLabel"
+          id="url-input"
+          matInput
+          formControlName="url"
+        />
+        <mat-error
+          *ngIf="workForm.get('url').hasError('pattern')"
+          i18n="@@works.invalidUrl"
+        >
+          Invalid url
+        </mat-error>
+        <mat-error
+          *ngIf="workForm.get('url').errors?.maxlength"
+          i18n="@@works.urlMaxLength"
+        >
+          Must be less than 2000 characters
+        </mat-error>
+        <mat-hint i18n="@@works.linkMoreInformationAbout"
+          >A link to more information about the work. Links should be in the
+          full URL format e.g. http://www.website.com/page.html
+        </mat-hint>
+      </mat-form-field>
+    </div>
+
+    <!------------------->
+    <!-- Work Citation -->
+    <!------------------->
+  </section>
+  <section id="work-citation">
+    <div
+      class="title"
+      id="citation"
+      [ngClass]="{
+        'orc-font-body': !platform.columns12,
+        'orc-font-body-large': platform.columns12
+      }"
+    >
+      <h2
+        [ngClass]="{
+          'orc-font-body': !platform.columns12,
+          'orc-font-body-large': platform.columns12
+        }"
+        class="orc-font-body"
+        i18n="@@works.citation"
+        id="citationLabel"
+      >
+        Citation
+      </h2>
+    </div>
+
+    <hr />
+
+    <!-- Citation type -->
+    <div formGroupName="citationGroup" id="cy-citation-group">
+      <div class="row">
+        <label
+          for="cy-citation-type"
+          class="mat-caption title"
+          [ngClass]="{
+            error: workForm.hasError('citationType', 'citationGroup')
+          }"
+        >
+          <strong i18n="@@works.citationType" id="citationType"
+            >Citation type</strong
           >
         </label>
       </div>
@@ -216,9 +532,256 @@
           class="mat-form-field-min input-container"
         >
           <mat-select
-            id="language-of-title-input"
+            aria-labelledby="citationType"
+            placeholder="{{ ngOrcidSelectACitationType }}"
+            formControlName="citationType"
+            id="cy-citation-type"
+          >
+            <mat-option
+              *ngFor="let item of citationTypes | keyvalue"
+              [value]="item.key"
+            >
+              {{ item.value }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-error
+          class="mat-caption"
+          *ngIf="workForm.hasError('citationType', 'citationGroup')"
+          i18n="@@works.selectACitationType"
+        >
+          Select a citation type
+        </mat-error>
+      </div>
+      <!-- Citation  -->
+
+      <div>
+        <div class="row">
+          <label
+            for="citation-input"
+            class="mat-caption"
+            [ngClass]="{
+              error: workForm.hasError('citation', 'citationGroup')
+            }"
+          >
+            <strong i18n="@@works.citation" id="citation-label"
+              >Citation</strong
+            >
+          </label>
+        </div>
+        <mat-form-field
+          appearance="outline"
+          class="mat-form-field-min input-container"
+        >
+          <textarea
+            aria-labelledby="citation-label"
+            id="citation-input"
+            matInput
+            formControlName="citation"
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="5"
+            cdkAutosizeMaxRows="7"
+          ></textarea>
+        </mat-form-field>
+        <mat-error
+          class="mat-caption"
+          *ngIf="workForm.hasError('citation', 'citationGroup')"
+          i18n="@@works.selectACitation"
+        >
+          Select a citation
+        </mat-error>
+      </div>
+      <!-- Description  -->
+
+      <div>
+        <div class="row">
+          <label for="description-input" class="mat-caption">
+            <strong i18n="@@works.citationDescription" id="description-label"
+              >Citation description</strong
+            >
+          </label>
+        </div>
+        <mat-form-field
+          appearance="outline"
+          class="mat-form-field-min biography input-container"
+        >
+          <textarea
+            aria-labelledby="description-label"
+            class="cy-description-input"
+            matInput
+            formControlName="shortDescription"
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="5"
+            cdkAutosizeMaxRows="7"
+          >
+          </textarea>
+          <mat-error
+            class="mat-caption"
+            *ngIf="
+              workForm.get('citationGroup.shortDescription').errors?.maxlength
+            "
+            i18n="@@works.descriptionMaxLength"
+          >
+            Must be less than 5000 characters
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+  </section>
+  <section id="work-ids">
+    <!---------------------->
+    <!-- Work Identifiers -->
+    <!---------------------->
+
+    <div
+      class="title"
+      id="work-identifiers"
+      [ngClass]="{
+        'orc-font-body': !platform.columns12,
+        'orc-font-body-large': platform.columns12
+      }"
+    >
+      <h2
+        class="orc-font-body"
+        [ngClass]="{
+          'orc-font-body': !platform.columns12,
+          'orc-font-body-large': platform.columns12
+        }"
+        i18n="@@works.workIds"
+        id="work-id-label"
+      >
+        Work identifiers
+      </h2>
+    </div>
+    <hr />
+
+    <div formArrayName="workIdentifiers">
+      <div
+        class="externalIdBox"
+        *ngFor="
+          let workIdentifiersGroup of workIdentifiersFormArray.controls;
+          let i = index;
+          let last = last
+        "
+      >
+        <ng-container
+          *ngIf="workIdentifiersFormArrayDisplayState[i]"
+          [formGroupName]="i"
+        >
+          <app-work-external-identifiers-edit
+            class="input-container"
+            [externalIdForm]="$any(workIdentifiersFormArray.controls[i])"
+            [workIdTypes]="workIdTypes"
+            (cancelEvent)="cancelExternalIdEdit(i)"
+            [index]="i"
+            id="{{ 'cy-external-ids-edit' + i }}"
+          ></app-work-external-identifiers-edit>
+        </ng-container>
+        <ng-container *ngIf="!workIdentifiersFormArrayDisplayState[i]">
+          <app-work-external-identifiers-view-only
+            [externalIdForm]="$any(workIdentifiersFormArray.controls[i])"
+            [workIdentifier]="workIdentifiersFormArray.controls[i].value"
+            (edit)="workIdentifiersFormArrayDisplayState[i] = true"
+            (delete)="deleteWorkId(i)"
+          ></app-work-external-identifiers-view-only>
+        </ng-container>
+      </div>
+      <!-- Add other identifier  -->
+      <div class="row" *ngIf="workIdentifiersFormArray.length">
+        <a
+          class="col add-more no-gutters"
+          (click)="addOtherWorkId()"
+          id="cy-add-another-work-external-id"
+        >
+          <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
+          <span class="mat-body-1" i18n="@@shared.addAnotherId">
+            Add another identifier
+          </span>
+        </a>
+      </div>
+      <div class="row" *ngIf="!workIdentifiersFormArray.length">
+        <a
+          class="col add-more no-gutters"
+          (click)="addOtherWorkId()"
+          id="cy-add-an-work-external-id"
+        >
+          <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
+          <span class="mat-body-1" i18n="@@shared.addId">
+            Add an identifier
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+  <section id="work-contributors">
+    <!---------------------->
+    <!-- Contributors  -->
+    <!---------------------->
+
+    <div class="title">
+      <h2
+        [ngClass]="{
+          'orc-font-body': !platform.columns12,
+          'orc-font-body-large': platform.columns12
+        }"
+        i18n="@@works.contributors"
+        id="contributors-label"
+      >
+        Contributors
+      </h2>
+    </div>
+    <hr />
+
+    <app-work-contributor-roles
+      [contributors]="work?.contributorsGroupedByOrcid"
+      [userRecord]="userRecord"
+      [recordHolderAsContributor]="work?.putCode?.value || externalIdentifier"
+    ></app-work-contributor-roles>
+
+    <app-work-contributors
+      [contributors]="work?.contributorsGroupedByOrcid"
+      [userRecord]="userRecord"
+      [recordHolderAsContributor]="work?.putCode?.value || externalIdentifier"
+    ></app-work-contributors>
+  </section>
+  <section id="work-other-info">
+    <!---------------------->
+    <!-- Work Other Information -->
+    <!---------------------->
+
+    <div class="title" id="otherInformation">
+      <h2
+        [ngClass]="{
+          'orc-font-body': !platform.columns12,
+          'orc-font-body-large': platform.columns12
+        }"
+        i18n="@@works.otherInformation"
+        id="other-info-label"
+      >
+        Other information
+      </h2>
+    </div>
+    <hr />
+
+    <!-- Language of this form -->
+    <div>
+      <div class="row title">
+        <label for="language-input" class="mat-caption">
+          <strong i18n="@@works.languageUsed" id="language-label"
+            >Language used in this form</strong
+          >
+        </label>
+      </div>
+      <div class="row">
+        <mat-form-field
+          appearance="outline"
+          class="mat-form-field-min input-container"
+        >
+          <mat-select
+            id="language-input"
             placeholder="{{ ngOrcidSelectLanguage }}"
-            formControlName="translatedTitleLanguage"
+            formControlName="languageCode"
+            [attr.aria-label]="languageLabelAriaLabel"
           >
             <mat-option
               *ngFor="let item of languageMap | keyvalue"
@@ -228,529 +791,78 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-error
-          class="mat-caption"
-          *ngIf="
-            workForm.hasError(
-              'invalidTranslatedTitleLanguage',
-              'translatedTitleGroup'
-            )
-          "
-          i18n="@@shared.translatedTitleLanguageError"
-        >
-          Please select a language
-        </mat-error>
       </div>
     </div>
-  </div>
 
-  <!-- Work subtitle -->
-
-  <div>
-    <div class="row">
-      <label for="work-subtitle-input" class="mat-caption">
-        <strong i18n="@@works.subtitle">Work Subtitle</strong>
-      </label>
-    </div>
-
-    <mat-form-field
-      appearance="outline"
-      class="mat-form-field-min input-container"
-    >
-      <input id="work-subtitle-input" matInput formControlName="subtitle" />
-      <mat-error
-        *ngIf="workForm.get('subtitle').errors?.maxlength"
-        i18n="@@shared.maxLength.less_than_one_thousand"
-      >
-        Must be less than 1000 characters
-      </mat-error>
-    </mat-form-field>
-  </div>
-  <!-- Journal title -->
-
-  <div>
-    <div class="row">
-      <label for="cy-journal-title" class="mat-caption">
-        <strong>{{ dynamicTitle | recordWorkTitleNameLabel }}</strong>
-      </label>
-    </div>
-
-    <mat-form-field
-      appearance="outline"
-      class="mat-form-field-min input-container"
-    >
-      <input matInput formControlName="journalTitle" id="cy-journal-title" />
-      <mat-error
-        *ngIf="workForm.get('journalTitle').errors?.maxlength"
-        i18n="@@works.titleMaxLength"
-      >
-        Must be less than 1000 characters
-      </mat-error>
-    </mat-form-field>
-  </div>
-  <!-- Publication date -->
-  <ng-container formGroupName="publicationDate" id="cy-publication-date-group">
-    <div class="row">
-      <label
-        for="start-date-year-input"
-        class="mat-caption"
-        [ngClass]="{
-          error: workForm.hasError('date', 'startDateGroup')
-        }"
-      >
-        <strong i18n="@@shared.publicationDate">Publication date</strong>
-      </label>
-    </div>
-    <div class="input-container date">
-      <div class="col l4 date">
-        <mat-form-field
-          id="start-date-year-input"
-          appearance="outline"
-          class="mat-form-field-min"
-        >
-          <mat-select
-            aria-label="{{ ngOrcidYear }}"
-            placeholder="{{ ngOrcidYear }}"
-            formControlName="publicationYear"
-            id="cy-start-date-year-sel"
-          >
-            <mat-option i18n="@@shared.year" [value]="">Year</mat-option>
-            <mat-option *ngFor="let year of yearOptions" [value]="year">
-              {{ year }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="col l4 date">
-        <mat-form-field
-          id="start-date-month-input"
-          appearance="outline"
-          class="mat-form-field-min"
-        >
-          <mat-select
-            aria-label="{{ ngOrcidMonth }}"
-            placeholder="{{ ngOrcidMonth }}"
-            formControlName="publicationMonth"
-            id="cy-start-date-month-sel"
-          >
-            <mat-option i18n="@@shared.month" [value]="">Month</mat-option>
-            <mat-option *ngFor="let month of monthOptions" [value]="month">
-              {{ month | trailingZeros }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="col l4 date">
-        <mat-form-field
-          id="start-date-day-input"
-          appearance="outline"
-          class="mat-form-field-min"
-        >
-          <mat-select
-            aria-label="{{ ngOrcidDay }}"
-            placeholder="{{ ngOrcidDay }}"
-            formControlName="publicationDay"
-            id="cy-start-date-day-sel"
-          >
-            <mat-option i18n="@@shared.day" [value]="">Day</mat-option>
-            <mat-option *ngFor="let day of dayOptions" [value]="day">
-              {{ day | trailingZeros }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <mat-error
-        class="mat-caption"
-        i18n="@@shared.invalidDate"
-        *ngIf="workForm.get('publicationDate').errors?.date"
-      >
-        Invalid date
-      </mat-error>
-    </div>
-  </ng-container>
-
-  <!-- Work url -->
-
-  <div>
-    <div class="row">
-      <label
-        for="url-input"
-        class="mat-caption"
-        [ngClass]="{
-          error:
-            workForm.hasError('pattern', 'url') && workForm.get('url').touched
-        }"
-      >
-        <strong i18n="@@works.link">Link</strong>
-      </label>
-    </div>
-
-    <mat-form-field
-      appearance="outline"
-      class="mat-form-field-min two-line-hint input-container"
-    >
-      <input id="url-input" matInput formControlName="url" />
-      <mat-error
-        *ngIf="workForm.get('url').hasError('pattern')"
-        i18n="@@works.invalidUrl"
-      >
-        Invalid url
-      </mat-error>
-      <mat-error
-        *ngIf="workForm.get('url').errors?.maxlength"
-        i18n="@@works.urlMaxLength"
-      >
-        Must be less than 2000 characters
-      </mat-error>
-      <mat-hint i18n="@@works.linkMoreInformationAbout"
-        >A link to more information about the work. Links should be in the full
-        URL format e.g. http://www.website.com/page.html
-      </mat-hint>
-    </mat-form-field>
-  </div>
-
-  <!------------------->
-  <!-- Work Citation -->
-  <!------------------->
-
-  <div
-    class="title"
-    id="citation"
-    [ngClass]="{
-      'orc-font-body': !platform.columns12,
-      'orc-font-body-large': platform.columns12
-    }"
-  >
-    <p>
-      <strong i18n="@@works.citation"> Citation </strong>
-    </p>
-  </div>
-
-  <hr />
-
-  <!-- Citation type -->
-  <div formGroupName="citationGroup" id="cy-citation-group">
-    <div class="row">
-      <label
-        for="cy-citation-type"
-        class="mat-caption title"
-        [ngClass]="{
-          error: workForm.hasError('citationType', 'citationGroup')
-        }"
-      >
-        <strong i18n="@@works.citationType">Citation type</strong>
-      </label>
-    </div>
-    <div class="select-error">
-      <mat-form-field
-        appearance="outline"
-        class="mat-form-field-min input-container"
-      >
-        <mat-select
-          placeholder="{{ ngOrcidSelectACitationType }}"
-          formControlName="citationType"
-          id="cy-citation-type"
-        >
-          <mat-option
-            *ngFor="let item of citationTypes | keyvalue"
-            [value]="item.key"
-          >
-            {{ item.value }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-error
-        class="mat-caption"
-        *ngIf="workForm.hasError('citationType', 'citationGroup')"
-        i18n="@@works.selectACitationType"
-      >
-        Select a citation type
-      </mat-error>
-    </div>
-    <!-- Citation  -->
-
+    <!-- Country of publication -->
     <div>
       <div class="row">
-        <label
-          for="citation-input"
-          class="mat-caption"
-          [ngClass]="{
-            error: workForm.hasError('citation', 'citationGroup')
-          }"
-        >
-          <strong i18n="@@works.citation">Citation</strong>
+        <label for="country-input" class="mat-caption">
+          <strong
+            i18n="@@works.countryOrLocationOfPublication"
+            id="country-location-label"
+            >Country/Location of publication</strong
+          >
         </label>
       </div>
-      <mat-form-field
-        appearance="outline"
-        class="mat-form-field-min input-container"
-      >
-        <textarea
-          id="citation-input"
-          matInput
-          formControlName="citation"
-          cdkTextareaAutosize
-          cdkAutosizeMinRows="5"
-          cdkAutosizeMaxRows="7"
-        ></textarea>
-      </mat-form-field>
-      <mat-error
-        class="mat-caption"
-        *ngIf="workForm.hasError('citation', 'citationGroup')"
-        i18n="@@works.selectACitation"
-      >
-        Select a citation
-      </mat-error>
-    </div>
-    <!-- Description  -->
-
-    <div>
       <div class="row">
-        <label for="description-input" class="mat-caption">
-          <strong i18n="@@works.description">Description</strong>
-        </label>
-      </div>
-      <mat-form-field
-        appearance="outline"
-        class="mat-form-field-min biography input-container"
-      >
-        <textarea
-          id="description-input"
-          matInput
-          formControlName="shortDescription"
-          cdkTextareaAutosize
-          cdkAutosizeMinRows="5"
-          cdkAutosizeMaxRows="7"
+        <mat-form-field
+          appearance="outline"
+          class="mat-form-field-min input-container"
         >
-        </textarea>
-        <mat-error
-          class="mat-caption"
-          *ngIf="
-            workForm.get('citationGroup.shortDescription').errors?.maxlength
-          "
-          i18n="@@works.descriptionMaxLength"
-        >
-          Must be less than 5000 characters
-        </mat-error>
-      </mat-form-field>
-    </div>
-  </div>
-
-  <!---------------------->
-  <!-- Work Identifiers -->
-  <!---------------------->
-
-  <div
-    class="title"
-    id="identifiers"
-    [ngClass]="{
-      'orc-font-body': !platform.columns12,
-      'orc-font-body-large': platform.columns12
-    }"
-  >
-    <p>
-      <strong i18n="@@works.workIds"> Work identifiers</strong>
-    </p>
-  </div>
-  <hr />
-
-  <div formArrayName="workIdentifiers">
-    <div
-      class="externalIdBox"
-      *ngFor="
-        let workIdentifiersGroup of workIdentifiersFormArray.controls;
-        let i = index;
-        let last = last
-      "
-    >
-      <ng-container
-        *ngIf="workIdentifiersFormArrayDisplayState[i]"
-        [formGroupName]="i"
-      >
-        <app-work-external-identifiers-edit
-          class="input-container"
-          [externalIdForm]="$any(workIdentifiersFormArray.controls[i])"
-          [workIdTypes]="workIdTypes"
-          (cancelEvent)="cancelExternalIdEdit(i)"
-          [index]="i"
-          id="{{ 'cy-external-ids-edit' + i }}"
-        ></app-work-external-identifiers-edit>
-      </ng-container>
-      <ng-container *ngIf="!workIdentifiersFormArrayDisplayState[i]">
-        <app-work-external-identifiers-view-only
-          [externalIdForm]="$any(workIdentifiersFormArray.controls[i])"
-          [workIdentifier]="workIdentifiersFormArray.controls[i].value"
-          (edit)="workIdentifiersFormArrayDisplayState[i] = true"
-          (delete)="deleteWorkId(i)"
-        ></app-work-external-identifiers-view-only>
-      </ng-container>
-    </div>
-    <!-- Add other identifier  -->
-    <div class="row" *ngIf="workIdentifiersFormArray.length">
-      <a
-        class="col add-more no-gutters"
-        (click)="addOtherWorkId()"
-        id="cy-add-another-work-external-id"
-      >
-        <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
-        <span class="mat-body-1" i18n="@@shared.addAnotherId">
-          Add another identifier
-        </span>
-      </a>
-    </div>
-    <div class="row" *ngIf="!workIdentifiersFormArray.length">
-      <a
-        class="col add-more no-gutters"
-        (click)="addOtherWorkId()"
-        id="cy-add-an-work-external-id"
-      >
-        <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
-        <span class="mat-body-1" i18n="@@shared.addId">
-          Add an identifier
-        </span>
-      </a>
-    </div>
-  </div>
-
-  <!---------------------->
-  <!-- Contributors  -->
-  <!---------------------->
-
-  <div
-    class="title"
-    id="contributors"
-    [ngClass]="{
-      'orc-font-body': !platform.columns12,
-      'orc-font-body-large': platform.columns12
-    }"
-  >
-    <p>
-      <strong i18n="@@works.contributors">Contributors</strong>
-    </p>
-  </div>
-  <hr />
-
-  <app-work-contributor-roles
-    [contributors]="work?.contributorsGroupedByOrcid"
-    [userRecord]="userRecord"
-    [recordHolderAsContributor]="work?.putCode?.value || externalIdentifier"
-  ></app-work-contributor-roles>
-
-  <app-work-contributors
-    [contributors]="work?.contributorsGroupedByOrcid"
-    [userRecord]="userRecord"
-    [recordHolderAsContributor]="work?.putCode?.value || externalIdentifier"
-  ></app-work-contributors>
-
-  <!---------------------->
-  <!-- Work Other Information -->
-  <!---------------------->
-
-  <div
-    class="title"
-    id="otherInformation"
-    [ngClass]="{
-      'orc-font-body': !platform.columns12,
-      'orc-font-body-large': platform.columns12
-    }"
-  >
-    <p>
-      <strong i18n="@@works.otherInformation"> Other information</strong>
-    </p>
-  </div>
-  <hr />
-
-  <!-- Language of this form -->
-  <div>
-    <div class="row title">
-      <label for="language-input" class="mat-caption">
-        <strong i18n="@@works.languageUsed">Language used in this form</strong>
-      </label>
-    </div>
-    <div class="row">
-      <mat-form-field
-        appearance="outline"
-        class="mat-form-field-min input-container"
-      >
-        <mat-select
-          id="language-input"
-          placeholder="{{ ngOrcidSelectLanguage }}"
-          formControlName="languageCode"
-        >
-          <mat-option
-            *ngFor="let item of languageMap | keyvalue"
-            [value]="item.value"
+          <mat-select
+            [attr.aria-label]="selectCountryLocationLabel"
+            id="country-input"
+            placeholder="{{ ngOrcidSelectACountryOrLocation }}"
+            formControlName="countryCode"
           >
-            {{ item.key }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-  </div>
-
-  <!-- Country of publication -->
-  <div>
-    <div class="row">
-      <label for="country-input" class="mat-caption">
-        <strong i18n="@@works.countryOrLocationOfPublication"
-          >Country/Location of publication</strong
-        >
-      </label>
-    </div>
-    <div class="row">
-      <mat-form-field
-        appearance="outline"
-        class="mat-form-field-min input-container"
-      >
-        <mat-select
-          id="country-input"
-          placeholder="{{ ngOrcidSelectACountryOrLocation }}"
-          formControlName="countryCode"
-        >
-          <mat-option
-            *ngFor="let item of countryCodes | sortBy: 'asc':'key'"
-            [value]="item.value"
-          >
-            {{ item.key }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-  </div>
-
-  <!---------------------->
-  <!-- Work Visibility -->
-  <!---------------------->
-
-  <div
-    id="visibility"
-    class="title"
-    [ngClass]="{
-      'orc-font-body': !platform.columns12,
-      'orc-font-body-large': platform.columns12
-    }"
-  >
-    <p>
-      <strong i18n="@@shared.visibility"> Visibility </strong>
-    </p>
-  </div>
-  <hr />
-
-  <!-- Work Visibility -->
-  <div>
-    <p class="orc-font-body-small">
-      {{ ngOrcidDefaultVisibilityLabel }}
-      <strong>{{ defaultVisibility | visibilityStringLabel }}</strong
-      >.
-    </p>
-    <div class="row visibility">
-      <div class="col no-wrap actions-wrapper no-gutters">
-        <app-privacy-selector
-          [alignment]="'start'"
-          formControlName="visibility"
-        >
-        </app-privacy-selector>
+            <mat-option
+              *ngFor="let item of countryCodes | sortBy : 'asc' : 'key'"
+              [value]="item.value"
+            >
+              {{ item.key }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
     </div>
-  </div>
+  </section>
+  <section id="work-visibility">
+    <!---------------------->
+    <!-- Work Visibility -->
+    <!---------------------->
+
+    <div class="title">
+      <h2
+        [ngClass]="{
+          'orc-font-body': !platform.columns12,
+          'orc-font-body-large': platform.columns12
+        }"
+        i18n="@@shared.visibility"
+        id="visibilityLabel"
+      >
+        Visibility
+      </h2>
+    </div>
+    <hr />
+
+    <!-- Work Visibility -->
+    <div>
+      <p class="orc-font-body-small">
+        {{ ngOrcidDefaultVisibilityLabel }}
+        <strong>{{ defaultVisibility | visibilityStringLabel }}</strong
+        >.
+      </p>
+
+      <div class="row visibility">
+        <div class="col no-wrap actions-wrapper no-gutters">
+          <app-privacy-selector
+            [alignment]="'start'"
+            formControlName="visibility"
+          >
+          </app-privacy-selector>
+        </div>
+      </div>
+    </div>
+  </section>
 </form>

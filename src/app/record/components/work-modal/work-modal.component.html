@@ -1,5 +1,5 @@
 <app-modal [loading]="loading">
-  <app-modal-header>
+  <app-modal-header [closeLabel]="closeLabel">
     <ng-container i18n="@@work.works"> Works </ng-container>
   </app-modal-header>
   <app-modal-side-bar>
@@ -50,6 +50,7 @@
       (click)="workFormComponent.saveEvent()"
       i18n="@@shared.saveChanges"
       id="save-work-button"
+      [attr.aria-label]="saveAndClose"
     >
       Save changes
     </button>
@@ -59,6 +60,7 @@
       (click)="closeEvent()"
       i18n="@@shared.cancel"
       id="cancel-work-button"
+      [attr.aria-label]="cancelAndClose"
     >
       Cancel
     </button>

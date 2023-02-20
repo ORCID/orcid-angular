@@ -20,7 +20,8 @@ import { DialogSecurityAlternateAccountDeleteComponent } from '../dialog-securit
   styleUrls: ['./settings-security-alternate-sign-in.component.scss'],
 })
 export class SettingsSecurityAlternateSignInComponent
-  implements OnInit, OnDestroy {
+  implements OnInit, OnDestroy
+{
   @Output() loading = new EventEmitter<boolean>()
   accounts$: Observable<SocialAccount[]>
 

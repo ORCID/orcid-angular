@@ -1,4 +1,15 @@
+@use '@angular/material' as mat;
 @import 'styles.scss-theme.scss';
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+a:focus-visible {
+  // Angular Material styled focus indicator for anchor tags (which is not applied by default by Material)
+  border: var(--mat-focus-indicator-border-width, 3px)
+    var(--mat-focus-indicator-border-style, solid)
+    var(--mat-focus-indicator-border-color, transparent);
+  border-radius: var(--mat-focus-indicator-border-radius, 4px);
+  outline: none;
+}
 
 [dir='rtl'] .material-icons {
   direction: rtl;

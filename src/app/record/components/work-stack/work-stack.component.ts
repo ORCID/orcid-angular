@@ -132,8 +132,8 @@ export class WorkStackComponent implements OnInit {
   ) {
     const putCode = work.putCode.value
     if (options.showDetails) {
-      this.panelDetailsState[putCode].state = !this.panelDetailsState[putCode]
-        .state
+      this.panelDetailsState[putCode].state =
+        !this.panelDetailsState[putCode].state
     }
 
     if (this.panelDetailsState[putCode].state) {

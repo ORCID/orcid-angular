@@ -22,7 +22,10 @@ import { WorkIdType, WorkRelationships } from 'src/app/types/works.endpoint'
   ],
 })
 export class WorkExternalIdentifiersEditComponent
-  implements OnInit, AfterViewInit {
+  implements OnInit, AfterViewInit
+{
+  setLabel = $localize`:@@shared.setRelationShipAriaLabel:Set relationship of `
+  asLabel = $localize`:@@shared.asAriaLabel:as`
   @ViewChild('externalIdentifierType') externalIdentifierTypeRef: MatSelect
   @Input() externalIdForm: UntypedFormGroup
   @Input() index: number
@@ -30,6 +33,8 @@ export class WorkExternalIdentifiersEditComponent
   @Output() cancelEvent = new EventEmitter<void>()
   @Output() updateExternalEvent = new EventEmitter<void>()
   workExternalIdErrorMatcher = new WorkExternalIdErrorMatcher()
+
+  cancelAddingExternalIdAriaLabel = $localize`:@@works.cancelAddingAnId:Cancel adding an identifier`
 
   unResolvedTooltip = $localize`:@@works.unResolved:We couldn't find a resource that matches the identifier you entered.
   Please check the value or enter a valid link to the resource.`

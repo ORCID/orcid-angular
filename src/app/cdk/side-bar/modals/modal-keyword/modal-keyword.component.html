@@ -1,5 +1,5 @@
 <app-modal [loading]="loadingKeywords" [noSidebar]="true">
-  <app-modal-header>
+  <app-modal-header [closeLabel]="ariaLabelKeywordsClose">
     <ng-container i18n="@@topBar.keywords">Keywords</ng-container>
   </app-modal-header>
   <app-modal-footer>
@@ -9,6 +9,7 @@
       (click)="saveEvent()"
       i18n="@@shared.saveChanges"
       id="save-keywords-button"
+      [attr.aria-label]="ariaLabelSave"
     >
       Save changes
     </button>
@@ -18,6 +19,7 @@
       (click)="closeEvent()"
       i18n="@@shared.cancel"
       id="cancel-keywords-button"
+      [attr.aria-label]="ariaLabelCancel"
     >
       Cancel
     </button>
@@ -27,128 +29,148 @@
     [formGroup]="keywordsForm"
     (ngSubmit)="onSubmit()"
   >
-    <p class="orc-font-body-small" i18n="@@topBar.keywordsAre">
-      Keywords are words or phrases which describe your research activities.
-      Adding keywords can help people find you when searching the ORCID
-      registry.
-    </p>
-    <ng-container *ngIf="keywords?.length > 0">
-      <div class="row">
-        <h3 class="col no-gutters orc-font-body" i18n="@@topBar.myKeywords">
-          My keywords
-        </h3>
-      </div>
-      <hr class="dashed-line" />
-      <div
-        class="row keyword-list"
-        id="keyword-dropList"
-        cdkDropList
-        (cdkDropListDropped)="drop($event)"
-      >
-        <div
-          cdkDrag
-          class="row keyword-box"
-          [ngStyle]="{ direction: screenDirection }"
-          [formGroupName]="keyword.putCode"
-          *ngFor="let keyword of keywords"
-        >
-          <div class="row drag-placeholder" *cdkDragPlaceholder></div>
-          <div
-            class="row keywords-input-line"
-            [ngClass]="{ 'no-wrap': !isMobile }"
-          >
-            <div class="col l12 m8 s4 top no-wrap no-gutters input-container">
-              <div class="image-container">
-                <img
-                  class="icon-drag"
-                  cdkDragHandle
-                  src="./assets/vectors/draggable.svg"
-                  aria-label="drag handle"
-                />
-              </div>
-              <div class="row">
-                <mat-form-field appearance="outline" class="mat-form-field-min">
-                  <input
-                    id="content-input"
-                    matInput
-                    #keywordInput
-                    formControlName="content"
-                    placeholder=" {{ ngOrcidKeyword }}"
-                    [ngClass]="{ 'keyword-input': screenDirection === 'rtl' }"
-                  />
-                  <mat-hint
-                    class="mat-caption"
-                    *ngIf="keyword.putCode.indexOf('new') < 0"
-                  >
-                    <app-source-hit
-                      [createdDate]="keyword.createdDate"
-                      [source]="keyword.sourceName || keyword.source"
-                      [assertion]="
-                        keyword.assertionOriginName ||
-                        keyword.assertionOriginOrcid
-                      "
-                    ></app-source-hit>
-                  </mat-hint>
-
-                  <mat-error
-                    *ngIf="
-                      keywordsForm.get(keyword.putCode)?.get('content')?.errors
-                        ?.maxlength
-                    "
-                    i18n="@@topBar.keywordMaxLength"
-                  >
-                    Must be less than 100 characters
-                  </mat-error>
-                </mat-form-field>
-              </div>
-            </div>
-
-            <div
-              class="col no-wrap actions-wrapper no-gutters"
-              [ngClass]="{ privacy: !platform.columns12 }"
-            >
-              <app-privacy-selector
-                [ngClass]="{ selector: !platform.columns12 }"
-                formControlName="visibility"
-              ></app-privacy-selector>
-              <button
-                (click)="deleteKeyword(keyword.putCode)"
-                mat-icon-button
-                class="delete-button"
-              >
-                <mat-icon
-                  class="material-icons-outlined extra-large-material-icon"
-                  >delete
-                </mat-icon>
-              </button>
-            </div>
-          </div>
-          <hr class="dashed-line" />
+    <section id="my-keywords">
+      <p class="orc-font-body-small" i18n="@@topBar.keywordsAre">
+        Keywords are words or phrases which describe your research activities.
+        Adding keywords can help people find you when searching the ORCID
+        registry.
+      </p>
+      <ng-container *ngIf="keywords?.length > 0">
+        <div class="row">
+          <h2 class="col no-gutters orc-font-body" i18n="@@topBar.myKeywords">
+            My keywords
+          </h2>
         </div>
+        <hr class="dashed-line" />
+        <div
+          class="row keyword-list"
+          id="keyword-dropList"
+          cdkDropList
+          (cdkDropListDropped)="drop($event)"
+        >
+          <div
+            cdkDrag
+            class="row keyword-box"
+            [ngStyle]="{ direction: screenDirection }"
+            [formGroupName]="keyword.putCode"
+            *ngFor="let keyword of keywords"
+          >
+            <div class="row drag-placeholder" *cdkDragPlaceholder></div>
+            <div
+              class="row keywords-input-line"
+              [ngClass]="{ 'no-wrap': !isMobile }"
+            >
+              <div class="col l12 m8 s4 top no-wrap no-gutters input-container">
+                <div class="image-container">
+                  <img
+                    class="icon-drag"
+                    cdkDragHandle
+                    src="./assets/vectors/draggable.svg"
+                    aria-label="drag handle"
+                  />
+                </div>
+                <div class="row">
+                  <mat-form-field
+                    appearance="outline"
+                    class="mat-form-field-min"
+                    [ngClass]="{
+                      'read-only': keyword.source && keyword.source !== this.id
+                    }"
+                  >
+                    <input
+                      [readonly]="keyword.source && keyword.source !== this.id"
+                      class="content-input"
+                      matInput
+                      #keywordInput
+                      formControlName="content"
+                      placeholder=" {{ ngOrcidKeyword }}"
+                      [ngClass]="{ 'keyword-input': screenDirection === 'rtl' }"
+                      [attr.aria-label]="
+                        keyword.putCode.indexOf('new') < 0
+                          ? ariaLabelKeyword
+                          : ariaLabelNewKeyword
+                      "
+                    />
+                    <mat-hint
+                      class="mat-caption"
+                      *ngIf="keyword.putCode.indexOf('new') < 0"
+                    >
+                      <app-source-hit
+                        [createdDate]="keyword.createdDate"
+                        [source]="keyword.sourceName || keyword.source"
+                        [assertion]="
+                          keyword.assertionOriginName ||
+                          keyword.assertionOriginOrcid
+                        "
+                      ></app-source-hit>
+                    </mat-hint>
+
+                    <mat-error
+                      *ngIf="
+                        keywordsForm.get(keyword.putCode)?.get('content')
+                          ?.errors?.maxlength
+                      "
+                      i18n="@@topBar.keywordMaxLength"
+                    >
+                      Must be less than 100 characters
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div
+                class="col no-wrap actions-wrapper no-gutters"
+                [ngClass]="{ privacy: !platform.columns12 }"
+              >
+                <app-privacy-selector
+                  [ngClass]="{ selector: !platform.columns12 }"
+                  formControlName="visibility"
+                ></app-privacy-selector>
+                <button
+                  (click)="deleteKeyword(keyword.putCode)"
+                  mat-icon-button
+                  class="delete-button"
+                  [attr.aria-label]="
+                    ariaLabelDelete +
+                    ' ' +
+                    (keywordsForm.get(keyword.putCode)?.get('content').value ||
+                      '')
+                  "
+                >
+                  <mat-icon
+                    class="material-icons-outlined extra-large-material-icon"
+                    >delete
+                  </mat-icon>
+                </button>
+              </div>
+            </div>
+            <hr class="dashed-line" />
+          </div>
+        </div>
+      </ng-container>
+      <div class="row">
+        <a
+          id="add-keyword"
+          class="col add-more no-gutters"
+          (click)="addKeyword()"
+        >
+          <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
+          <span class="mat-body-1">
+            <ng-container
+              *ngIf="keywords?.length === 0"
+              i18n="@@topBar.addKeyword"
+            >
+              Add a keyword
+            </ng-container>
+            <ng-container
+              *ngIf="keywords?.length !== 0"
+              i18n="@@topBar.addAnotherKeyword"
+            >
+              Add another keyword
+            </ng-container>
+          </span>
+        </a>
       </div>
-    </ng-container>
-    <div class="row">
-      <a
-        id="add-keyword"
-        class="col add-more no-gutters"
-        (click)="addKeyword()"
-      >
-        <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
-        <span class="mat-body-1">
-          <ng-container
-            *ngIf="keywords?.length === 0"
-            i18n="@@topBar.addKeyword"
-          >
-            Add a keyword
-          </ng-container>
-          <ng-container
-            *ngIf="keywords?.length !== 0"
-            i18n="@@topBar.addAnotherKeyword"
-          >
-            Add another keyword
-          </ng-container>
-        </span>
-      </a>
-    </div>
+    </section>
   </div>
 </app-modal>

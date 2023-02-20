@@ -84,7 +84,7 @@ describe('My orcid - works - visibility inconsistency notification scenario', as
         jsonfile['external-ids']['external-id']['external-id-type']
       ).click()
     })
-    cy.get('#external-identifier-id-input')
+    cy.get('[formcontrolname="externalIdentifierId"]')
       .clear()
       .type(jsonfile['external-ids']['external-id']['external-id-value'])
 

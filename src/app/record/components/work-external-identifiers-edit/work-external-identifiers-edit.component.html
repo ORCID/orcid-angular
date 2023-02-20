@@ -4,14 +4,18 @@
       index + 1
     }})</strong
   >
-  <a i18n="@@shared.cancel" (click)="cancel()">Cancel</a>
+  <a
+    i18n="@@shared.cancel"
+    (click)="cancel()"
+    [attr.aria-label]="cancelAddingExternalIdAriaLabel"
+    >Cancel</a
+  >
 </div>
 <ng-container *ngIf="externalIdForm" [formGroup]="externalIdForm">
   <!-- Work identifier type -->
   <div>
     <div class="row">
-      <label
-        for="given-names-input"
+      <strong
         class="mat-caption"
         [ngClass]="{
           error:
@@ -19,8 +23,12 @@
             externalIdForm.get('externalIdentifierType').touched
         }"
       >
-        <strong i18n="@@works.type">Identifier type</strong>
-      </label>
+        <label
+          i18n="@@works.type"
+          id="{{ 'id-type-' + index + externalIdForm }}"
+          >Identifier type</label
+        >
+      </strong>
     </div>
     <div class="row">
       <mat-form-field
@@ -28,6 +36,7 @@
         class="mat-form-field-min input-container two-line-hint"
       >
         <mat-select
+          [aria-labelledby]="'id-type-' + index"
           #externalIdentifierType
           placeholder="{{ ngOrcidSelectIdentifierType }}"
           formControlName="externalIdentifierType"
@@ -57,7 +66,6 @@
   <div>
     <div class="row">
       <label
-        for="external-identifier-id-input"
         class="mat-caption"
         [ngClass]="{
           error:
@@ -65,7 +73,11 @@
             externalIdForm.get('externalIdentifierId').touched
         }"
       >
-        <strong i18n="@@works.identifierValue">Identifier value </strong>
+        <strong
+          i18n="@@works.identifierValue"
+          id="{{ 'id-external-id-' + index }}"
+          >Identifier value
+        </strong>
       </label>
     </div>
     <mat-form-field
@@ -73,8 +85,8 @@
       class="mat-form-field-min three-line-hint input-container"
     >
       <input
+        [attr.aria-labelledby]="'id-external-id-' + index"
         autocomplete="off"
-        id="external-identifier-id-input"
         matInput
         formControlName="externalIdentifierId"
         [errorStateMatcher]="workExternalIdErrorMatcher"
@@ -136,7 +148,6 @@
   <div>
     <div class="row">
       <label
-        for="external-identifier-url-input"
         class="mat-caption"
         [ngClass]="{
           error:
@@ -144,7 +155,9 @@
             externalIdForm.get('externalIdentifierUrl').touched
         }"
       >
-        <strong i18n="@@works.identifierUrl">Identifier URL </strong>
+        <strong i18n="@@works.identifierUrl" id="{{ 'id-url-' + index }}"
+          >Identifier URL
+        </strong>
       </label>
     </div>
     <mat-form-field
@@ -152,7 +165,7 @@
       class="mat-form-field-min three-line-hint input-container"
     >
       <input
-        id="external-identifier-url-input"
+        [attr.aria-labelledby]="'id-url-' + index"
         matInput
         formControlName="externalIdentifierUrl"
       />
@@ -174,8 +187,7 @@
 
   <div>
     <div class="row">
-      <label
-        for="external-relationship-input"
+      <strong
         class="mat-caption"
         [ngClass]="{
           error:
@@ -183,19 +195,30 @@
             externalIdForm.get('externalRelationship').touched
         }"
       >
-        <strong i18n="@@works.relationship">Relationship</strong>
-      </label>
+        <label i18n="@@works.relationship" id="{{ 'id-relationship-' + index }}"
+          >Relationship</label
+        >
+      </strong>
     </div>
 
     <mat-radio-group
-      id="external-relationship-input"
-      aria-label="Select an option"
+      [id]="'external-relationship-input-' + index"
       appearance="outline"
       class="mat-form-field-min"
       formControlName="externalRelationship"
     >
       <ng-container *ngFor="let value of workRelationships">
-        <mat-radio-button [value]="value"
+        <mat-radio-button
+          [value]="value"
+          [aria-label]="
+            setLabel +
+            ' ' +
+            externalIdForm.get('externalIdentifierType').value +
+            ' ' +
+            asLabel +
+            ' ' +
+            (value | recordWorkRelationshipLabel)
+          "
           >{{ value | recordWorkRelationshipLabel }}
         </mat-radio-button>
         <mat-hint class="mat-caption"

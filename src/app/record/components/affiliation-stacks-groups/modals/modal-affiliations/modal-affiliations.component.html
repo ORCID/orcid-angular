@@ -1,29 +1,8 @@
 <app-modal [loading]="loadingCountryCodes || loadingAffiliations">
-  <app-modal-header>
-    <ng-container i18n="@@shared.employment" *ngIf="type === 'employment'">
-      Employment
-    </ng-container>
-    <ng-container i18n="@@shared.education" *ngIf="type === 'education'">
-      Education
-    </ng-container>
-    <ng-container
-      i18n="@@shared.qualification"
-      *ngIf="type === 'qualification'"
-    >
-      Qualification
-    </ng-container>
-    <ng-container i18n="@@shared.invited" *ngIf="type === 'invited-position'">
-      Invited Position
-    </ng-container>
-    <ng-container i18n="@@shared.distinction" *ngIf="type === 'distinction'">
-      Distinction
-    </ng-container>
-    <ng-container i18n="@@shared.membershipTitle" *ngIf="type === 'membership'">
-      Membership
-    </ng-container>
-    <ng-container i18n="@@shared.service" *ngIf="type === 'service'">
-      Service
-    </ng-container>
+  <app-modal-header
+    [closeLabel]="closeLabel + ' ' + (type | affiliationTypeLabel)"
+  >
+    {{ type | affiliationTypeLabel }}
   </app-modal-header>
   <app-modal-side-bar>
     <ng-container id="side-bar-title">
@@ -107,6 +86,7 @@
       (click)="saveEvent()"
       i18n="@@shared.saveChanges"
       id="save-affiliation-button"
+      [attr.aria-label]="saveLabel + ' ' + (type | affiliationTypeLabel)"
     >
       Save changes
     </button>
@@ -116,6 +96,7 @@
       (click)="closeEvent()"
       i18n="@@shared.cancel"
       id="cancel-affiliation-button"
+      [attr.aria-label]="cancelChanges + ' ' + (type | affiliationTypeLabel)"
     >
       Cancel
     </button>
@@ -131,10 +112,15 @@
         }"
       >
         <div class="row">
-          <p>
+          <h2
+            [ngClass]="{
+              'orc-font-body': !platform.columns12,
+              'orc-font-body-large': platform.columns12
+            }"
+          >
             <strong i18n="@@shared.organization"> Organization </strong>
             <span *ngIf="!platform.columns12" class="required">*</span>
-          </p>
+          </h2>
           <p
             *ngIf="platform.columns12"
             class="required-information mat-caption"
@@ -148,534 +134,572 @@
       </div>
       <hr />
     </form>
-    <div class="row">
-      <label
-        for="organization-input"
-        class="mat-caption"
-        [ngClass]="{
-          error:
-            affiliationForm.hasError('required', 'organization') &&
-            (affiliationForm.get('organization').dirty ||
-              affiliationForm.get('organization').touched)
-        }"
-      >
-        <strong i18n="@@shared.organization">Organization</strong>
-        <span class="required">*</span>
-      </label>
-    </div>
-    <div class="input-container" id="cy-org-dd-div">
-      <mat-form-field
-        appearance="outline"
-        class="mat-form-field-min"
-        id="cy-org-dd-mat-form"
-        [ngClass]="{
-          'two-line-hint': selectedOrganizationFromDatabase?.value.length > 50
-        }"
-      >
-        <input
-          id="organization-input"
-          matInput
-          formControlName="organization"
-          [matAutocomplete]="auto"
-        />
-        <mat-autocomplete
-          autoActiveFirstOption
-          #auto="matAutocomplete"
-          [displayWith]="autoCompleteDisplayOrganization"
-          id="cy-org-dd"
-        >
-          <ng-container *ngIf="filteredOptions" id="cy-org-filtered-options">
-            <mat-option
-              *ngFor="let option of filteredOptions | async"
-              [value]="option"
-            >
-              <div class="row orc-font-body-small title">
-                {{ option.value }}
-              </div>
-              <div class="row orc-font-small-print">
-                {{ option.city }} {{ option.region }} {{ option.country }}
-              </div>
-            </mat-option>
-          </ng-container>
-        </mat-autocomplete>
-        <mat-hint
-          *ngIf="selectedOrganizationFromDatabase && displayOrganizationHint"
-        >
-          <ng-container i18n="@@record.identifyAS">Identify as:</ng-container>
-          {{ selectedOrganizationFromDatabase.value }}
-        </mat-hint>
-        <mat-hint
-          *ngIf="
-            !selectedOrganizationFromDatabase &&
-            affiliationForm.get('organization').value &&
-            displayOrganizationHint
-          "
-          i18n="@@record.unidentifiedOrganization"
-        >
-          Unidentified organization
-        </mat-hint>
-
-        <button
-          class="clear"
-          matSuffix
-          mat-icon-button
-          aria-label="Clear"
-          (click)="clearForm()"
-          *ngIf="affiliationForm.get('organization').value"
-        >
-          <mat-icon>close</mat-icon>
-        </button>
-        <mat-error
-          class="mat-caption"
-          *ngIf="affiliationForm.hasError('required', 'organization')"
-          i18n="@@shared.pleaseEnterAnOrganization"
-        >
-          Please enter an organization
-        </mat-error>
-        <mat-error
-          *ngIf="affiliationForm.get('organization').errors?.maxlength"
-          i18n="@@shared.maxLength.less_than_one_thousand"
-        >
-          Must be less than 1000 characters
-        </mat-error>
-      </mat-form-field>
-    </div>
-    <div class="row">
-      <label
-        for="city-input"
-        class="mat-caption"
-        [ngClass]="{
-          error:
-            affiliationForm.hasError('required', 'city') &&
-            (affiliationForm.get('city').dirty ||
-              affiliationForm.get('city').touched)
-        }"
-      >
-        <strong i18n="@@shared.city">City</strong>
-        <span class="required">*</span>
-      </label>
-    </div>
-    <div class="input-container">
-      <mat-form-field appearance="outline" class="mat-form-field-min">
-        <input id="city-input" matInput formControlName="city" />
-        <mat-error
-          class="mat-caption"
-          *ngIf="affiliationForm.get('city').hasError('required')"
-          i18n="@@shared.cityError"
-        >
-          Please enter a city
-        </mat-error>
-        <mat-error
-          *ngIf="affiliationForm.get('city').errors?.maxlength"
-          i18n="@@shared.maxLength.less_than_one_thousand"
-        >
-          Must be less than 1000 characters
-        </mat-error>
-      </mat-form-field>
-    </div>
-    <div class="row">
-      <label for="region-input" class="mat-caption">
-        <strong i18n="@@shared.region">Region, State or County</strong>
-      </label>
-    </div>
-    <div class="input-container">
-      <mat-form-field appearance="outline" class="mat-form-field-min">
-        <input id="region-input" matInput formControlName="region" />
-        <mat-error
-          *ngIf="affiliationForm.get('region').errors?.maxlength"
-          i18n="@@shared.maxLength.less_than_one_thousand"
-        >
-          Must be less than 1000 characters
-        </mat-error>
-      </mat-form-field>
-    </div>
-    <div class="row">
-      <label
-        for="country-input"
-        class="mat-caption"
-        [ngClass]="{
-          error:
-            affiliationForm.hasError('required', 'country') &&
-            (affiliationForm.get('country').dirty ||
-              affiliationForm.get('country').touched)
-        }"
-      >
-        <strong i18n="@@shared.countryOrLocation">Country/Location</strong>
-        <span class="required">*</span>
-      </label>
-    </div>
-    <div class="input-container">
-      <mat-form-field
-        appearance="outline"
-        class="mat-form-field-min"
-        [ngClass]="{ 'two-line-hint': isMobile }"
-      >
-        <mat-select
-          id="country-input"
-          placeholder="{{ ngOrcidSelectACountryOrLocation }}"
-          #countrySelect
-          formControlName="country"
-        >
-          <mat-option
-            *ngFor="let countryCode of countryCodes | sortBy: 'asc':'key'"
-            [value]="countryCode.key"
-          >
-            {{ countryCode.key }}
-          </mat-option>
-        </mat-select>
-        <mat-error
-          i18n="@@shared.countryOrLocationError"
-          *ngIf="affiliationForm.get('country').hasError('required')"
-        >
-          Please enter a country or location
-        </mat-error>
-      </mat-form-field>
-    </div>
-    <form>
-      <div
-        id="affiliation-details"
-        class="title"
-        [ngClass]="{
-          'orc-font-body': !platform.columns12,
-          'orc-font-body-large': platform.columns12
-        }"
-      >
-        <div class="row">
-          <p>
-            <strong
-              i18n="@@shared.employmentDetails"
-              *ngIf="type === 'employment'"
-            >
-              Employment details
-            </strong>
-            <strong
-              i18n="@@shared.qualificationDetails"
-              *ngIf="type === 'qualification'"
-            >
-              Qualification details
-            </strong>
-            <strong
-              i18n="@@shared.educationDetails"
-              *ngIf="type === 'education'"
-            >
-              Education details
-            </strong>
-            <strong
-              i18n="@@shared.invitedPositionDetails"
-              *ngIf="type === 'invited-position'"
-            >
-              Invited Position details
-            </strong>
-            <strong
-              i18n="@@shared.distinctionDetails"
-              *ngIf="type === 'distinction'"
-            >
-              Distinction details
-            </strong>
-            <strong
-              i18n="@@shared.membershipDetails"
-              *ngIf="type === 'membership'"
-            >
-              Membership details
-            </strong>
-            <strong i18n="@@shared.serviceDetails" *ngIf="type === 'service'">
-              Service details
-            </strong>
-            <span *ngIf="!platform.columns12" class="required">*</span>
-          </p>
-        </div>
-      </div>
-      <hr />
-    </form>
-    <div class="row">
-      <label for="department-input" class="mat-caption">
-        <strong i18n="@@shared.department">Department</strong>
-      </label>
-    </div>
-    <div class="input-container">
-      <mat-form-field appearance="outline" class="mat-form-field-min">
-        <input id="department-input" matInput formControlName="department" />
-        <mat-error
-          *ngIf="affiliationForm.get('department').errors?.maxlength"
-          i18n="@@shared.maxLength.less_than_one_thousand"
-        >
-          Must be less than 1000 characters
-        </mat-error>
-      </mat-form-field>
-    </div>
-    <div class="row">
-      <label for="title-input" class="mat-caption">
-        <strong i18n="@@shared.degree" *ngIf="type === 'education'">
-          Degree/title
-        </strong>
-        <strong
-          i18n="@@shared.role"
-          *ngIf="
-            type === 'employment' ||
-            type === 'qualification' ||
-            type === 'invited-position' ||
-            type === 'service'
-          "
-        >
-          Role/title
-        </strong>
-        <strong i18n="@@shared.award" *ngIf="type === 'distinction'">
-          Distinction/award
-        </strong>
-        <strong i18n="@@shared.membershipType" *ngIf="type === 'membership'">
-          Membership type
-        </strong>
-      </label>
-    </div>
-    <div class="input-container">
-      <mat-form-field appearance="outline" class="mat-form-field-min">
-        <input id="title-input" matInput formControlName="title" />
-        <mat-error
-          *ngIf="affiliationForm.get('title').errors?.maxlength"
-          i18n="@@shared.maxLength.less_than_one_thousand"
-        >
-          Must be less than 1000 characters
-        </mat-error>
-      </mat-form-field>
-    </div>
-    <ng-container
-      formGroupName="startDateGroup"
-      id="cy-affiliation-start-date-group"
-    >
+    <section id="{{ type }} + 'organization'">
       <div class="row">
         <label
-          for="url-input"
           class="mat-caption"
           [ngClass]="{
-            error: affiliationForm.hasError('date', 'startDateGroup')
+            error:
+              affiliationForm.hasError('required', 'organization') &&
+              (affiliationForm.get('organization').dirty ||
+                affiliationForm.get('organization').touched)
           }"
         >
-          <ng-container *ngIf="type !== 'distinction'">
-            <strong i18n="@@shared.startDate">Start date</strong>
-          </ng-container>
-          <ng-container *ngIf="type == 'distinction'">
-            <strong i18n="@@shared.distinctionDate">Date of distinction</strong>
-          </ng-container>
+          <strong i18n="@@shared.organization" id="organizationLabel"
+            >Organization</strong
+          >
+          <span class="required">*</span>
         </label>
       </div>
-      <div class="row input-container date-group" id="cy-start-date-group">
-        <div class="col l4 date">
-          <mat-form-field
-            id="start-date-year-input"
-            appearance="outline"
-            class="mat-form-field-min"
-          >
-            <mat-select
-              aria-label="{{ ngOrcidYear }}"
-              placeholder="{{ ngOrcidYear }}"
-              formControlName="startDateYear"
-              id="cy-start-date-year-sel"
-            >
-              <mat-option i18n="@@shared.year" [value]="">Year</mat-option>
-              <mat-option *ngFor="let year of years" [value]="year">
-                {{ year }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div class="col l4 date">
-          <mat-form-field
-            id="start-date-month-input"
-            appearance="outline"
-            class="mat-form-field-min"
-          >
-            <mat-select
-              aria-label="{{ ngOrcidMonth }}"
-              placeholder="{{ ngOrcidMonth }}"
-              formControlName="startDateMonth"
-              id="cy-start-date-month-sel"
-            >
-              <mat-option i18n="@@shared.month" [value]="">Month</mat-option>
-              <mat-option *ngFor="let month of months" [value]="month">
-                {{ month | trailingZeros }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div class="col l4 date">
-          <mat-form-field
-            id="start-date-day-input"
-            appearance="outline"
-            class="mat-form-field-min"
-          >
-            <mat-select
-              aria-label="{{ ngOrcidDay }}"
-              placeholder="{{ ngOrcidDay }}"
-              formControlName="startDateDay"
-              id="cy-start-date-day-sel"
-            >
-              <mat-option i18n="@@shared.day" [value]="">Day</mat-option>
-              <mat-option *ngFor="let day of days" [value]="day">
-                {{ day | trailingZeros }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <mat-error
-          class="mat-caption"
-          i18n="@@shared.invalidDate"
-          *ngIf="affiliationForm.get('startDateGroup').errors?.date"
-        >
-          Invalid date
-        </mat-error>
-      </div>
-    </ng-container>
-    <ng-container
-      formGroupName="endDateGroup"
-      *ngIf="type !== 'distinction'"
-      id="cy-affiliation-end-date-group"
-    >
-      <div class="row">
-        <label
-          for="url-input"
-          class="mat-caption"
+      <div class="input-container" id="cy-org-dd-div">
+        <mat-form-field
+          appearance="outline"
+          class="mat-form-field-min"
+          id="cy-org-dd-mat-form"
           [ngClass]="{
-            error: affiliationForm.hasError('date', 'endDateGroup')
+            'two-line-hint': selectedOrganizationFromDatabase?.value.length > 50
           }"
         >
-          <strong i18n="@@shared.endDate">End date</strong>
-        </label>
-      </div>
-      <div class="row input-container date-group" id="cy-end-date-group">
-        <div class="col l4 date">
-          <mat-form-field
-            id="end-date-year-input"
-            appearance="outline"
-            class="mat-form-field-min"
+          <input
+            aria-labelledby="organizationLabel"
+            id="organization-input"
+            matInput
+            formControlName="organization"
+            [matAutocomplete]="auto"
+          />
+          <mat-autocomplete
+            autoActiveFirstOption
+            #auto="matAutocomplete"
+            [displayWith]="autoCompleteDisplayOrganization"
+            id="cy-org-dd"
           >
-            <mat-select
-              aria-label="{{ ngOrcidYear }}"
-              placeholder="{{ ngOrcidYear }}"
-              formControlName="endDateYear"
-              id="cy-end-date-year-sel"
-            >
-              <mat-option i18n="@@shared.year" [value]="">Year</mat-option>
-              <mat-option *ngFor="let year of yearsEndDate" [value]="year">
-                {{ year }}
+            <ng-container *ngIf="filteredOptions" id="cy-org-filtered-options">
+              <mat-option
+                *ngFor="let option of filteredOptions | async"
+                [value]="option"
+              >
+                <div class="row orc-font-body-small title">
+                  {{ option.value }}
+                </div>
+                <div class="row orc-font-small-print">
+                  {{ option.city }} {{ option.region }} {{ option.country }}
+                </div>
               </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div class="col l4 date">
-          <mat-form-field
-            id="end-date-month-input"
-            appearance="outline"
-            class="mat-form-field-min"
+            </ng-container>
+          </mat-autocomplete>
+          <mat-hint
+            *ngIf="selectedOrganizationFromDatabase && displayOrganizationHint"
           >
-            <mat-select
-              aria-label="{{ ngOrcidMonth }}"
-              placeholder="{{ ngOrcidMonth }}"
-              formControlName="endDateMonth"
-              id="cy-end-date-month-sel"
-            >
-              <mat-option i18n="@@shared.month" [value]="">Month</mat-option>
-              <mat-option *ngFor="let month of months" [value]="month">
-                {{ month | trailingZeros }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div class="col l4 date">
-          <mat-form-field
-            id="end-date-day-input"
-            appearance="outline"
-            class="mat-form-field-min"
+            <ng-container i18n="@@record.identifyAS">Identify as:</ng-container>
+            {{ selectedOrganizationFromDatabase.value }}
+          </mat-hint>
+          <mat-hint
+            *ngIf="
+              !selectedOrganizationFromDatabase &&
+              affiliationForm.get('organization').value &&
+              displayOrganizationHint
+            "
+            i18n="@@record.unidentifiedOrganization"
           >
-            <mat-select
-              aria-label="{{ ngOrcidDay }}"
-              placeholder="{{ ngOrcidDay }}"
-              formControlName="endDateDay"
-              id="cy-end-date-day-sel"
-            >
-              <mat-option i18n="@@shared.day" [value]="">Day</mat-option>
-              <mat-option *ngFor="let day of days" [value]="day">
-                {{ day | trailingZeros }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
+            Unidentified organization
+          </mat-hint>
 
-        <mat-error
-          class="mat-caption"
-          i18n="@@shared.invalidDate"
-          *ngIf="affiliationForm.get('endDateGroup').errors?.date"
-        >
-          Invalid date
-        </mat-error>
-        <div class="row">
+          <button
+            class="clear"
+            matSuffix
+            mat-icon-button
+            aria-label="Clear"
+            (click)="clearForm()"
+            *ngIf="affiliationForm.get('organization').value"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
           <mat-error
             class="mat-caption"
-            i18n="@@shared.endDateError"
-            *ngIf="affiliationForm.errors?.invalidEndDate"
+            *ngIf="affiliationForm.hasError('required', 'organization')"
+            i18n="@@shared.pleaseEnterAnOrganization"
           >
-            End date must come after start date
+            Please enter an organization
+          </mat-error>
+          <mat-error
+            *ngIf="affiliationForm.get('organization').errors?.maxlength"
+            i18n="@@shared.maxLength.less_than_one_thousand"
+          >
+            Must be less than 1000 characters
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <label
+          for="city-input"
+          class="mat-caption"
+          [ngClass]="{
+            error:
+              affiliationForm.hasError('required', 'city') &&
+              (affiliationForm.get('city').dirty ||
+                affiliationForm.get('city').touched)
+          }"
+        >
+          <strong i18n="@@shared.city" id="cityLabel">City</strong>
+          <span class="required">*</span>
+        </label>
+      </div>
+      <div class="input-container">
+        <mat-form-field appearance="outline" class="mat-form-field-min">
+          <input
+            id="city-input"
+            matInput
+            formControlName="city"
+            aria-labelledby="cityLabel"
+          />
+          <mat-error
+            class="mat-caption"
+            *ngIf="affiliationForm.get('city').hasError('required')"
+            i18n="@@shared.cityError"
+          >
+            Please enter a city
+          </mat-error>
+          <mat-error
+            *ngIf="affiliationForm.get('city').errors?.maxlength"
+            i18n="@@shared.maxLength.less_than_one_thousand"
+          >
+            Must be less than 1000 characters
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <label for="region-input" class="mat-caption">
+          <strong i18n="@@shared.region" aria-labelledby="regionLabel"
+            >Region, State or County</strong
+          >
+        </label>
+      </div>
+      <div class="input-container">
+        <mat-form-field appearance="outline" class="mat-form-field-min">
+          <input
+            id="region-input"
+            aria-labelledby="regionLabel"
+            matInput
+            formControlName="region"
+          />
+          <mat-error
+            *ngIf="affiliationForm.get('region').errors?.maxlength"
+            i18n="@@shared.maxLength.less_than_one_thousand"
+          >
+            Must be less than 1000 characters
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <label
+          for="country-input"
+          class="mat-caption"
+          [ngClass]="{
+            error:
+              affiliationForm.hasError('required', 'country') &&
+              (affiliationForm.get('country').dirty ||
+                affiliationForm.get('country').touched)
+          }"
+        >
+          <strong i18n="@@shared.countryOrLocation" id="countryLabel"
+            >Country/Location</strong
+          >
+          <span class="required">*</span>
+        </label>
+      </div>
+      <div class="input-container">
+        <mat-form-field
+          appearance="outline"
+          class="mat-form-field-min"
+          [ngClass]="{ 'two-line-hint': isMobile }"
+        >
+          <mat-select
+            id="country-input"
+            placeholder="{{ ngOrcidSelectACountryOrLocation }}"
+            #countrySelect
+            formControlName="country"
+          >
+            <mat-option
+              *ngFor="let countryCode of countryCodes | sortBy : 'asc' : 'key'"
+              [value]="countryCode.key"
+            >
+              {{ countryCode.key }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            i18n="@@shared.countryOrLocationError"
+            *ngIf="affiliationForm.get('country').hasError('required')"
+          >
+            Please enter a country or location
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </section>
+    <section id="{{ type }} + 'details'">
+      <form>
+        <div
+          id="affiliation-details"
+          class="title"
+          [ngClass]="{
+            'orc-font-body': !platform.columns12,
+            'orc-font-body-large': platform.columns12
+          }"
+        >
+          <div class="row">
+            <h2
+              [ngClass]="{
+                'orc-font-body': !platform.columns12,
+                'orc-font-body-large': platform.columns12
+              }"
+            >
+              <strong
+                i18n="@@shared.employmentDetails"
+                *ngIf="type === 'employment'"
+              >
+                Employment details
+              </strong>
+              <strong
+                i18n="@@shared.qualificationDetails"
+                *ngIf="type === 'qualification'"
+              >
+                Qualification details
+              </strong>
+              <strong
+                i18n="@@shared.educationDetails"
+                *ngIf="type === 'education'"
+              >
+                Education details
+              </strong>
+              <strong
+                i18n="@@shared.invitedPositionDetails"
+                *ngIf="type === 'invited-position'"
+              >
+                Invited Position details
+              </strong>
+              <strong
+                i18n="@@shared.distinctionDetails"
+                *ngIf="type === 'distinction'"
+              >
+                Distinction details
+              </strong>
+              <strong
+                i18n="@@shared.membershipDetails"
+                *ngIf="type === 'membership'"
+              >
+                Membership details
+              </strong>
+              <strong i18n="@@shared.serviceDetails" *ngIf="type === 'service'">
+                Service details
+              </strong>
+              <span *ngIf="!platform.columns12" class="required">*</span>
+            </h2>
+          </div>
+        </div>
+        <hr />
+      </form>
+      <div class="row">
+        <label for="department-input" class="mat-caption">
+          <strong i18n="@@shared.department" id="deparmentLabel"
+            >Department</strong
+          >
+        </label>
+      </div>
+      <div class="input-container">
+        <mat-form-field appearance="outline" class="mat-form-field-min">
+          <input
+            id="department-input"
+            matInput
+            formControlName="department"
+            aria-labelledby="deparmentLabel"
+          />
+          <mat-error
+            *ngIf="affiliationForm.get('department').errors?.maxlength"
+            i18n="@@shared.maxLength.less_than_one_thousand"
+          >
+            Must be less than 1000 characters
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <label for="title-input" class="mat-caption" id="award-label">
+          <strong i18n="@@shared.degree" *ngIf="type === 'education'">
+            Degree/title
+          </strong>
+          <strong
+            i18n="@@shared.role"
+            *ngIf="
+              type === 'employment' ||
+              type === 'qualification' ||
+              type === 'invited-position' ||
+              type === 'service'
+            "
+          >
+            Role/title
+          </strong>
+          <strong i18n="@@shared.award" *ngIf="type === 'distinction'">
+            Distinction/award
+          </strong>
+          <strong i18n="@@shared.membershipType" *ngIf="type === 'membership'">
+            Membership type
+          </strong>
+        </label>
+      </div>
+      <div class="input-container">
+        <mat-form-field appearance="outline" class="mat-form-field-min">
+          <input
+            aria-labelledby="award-label"
+            id="title-input"
+            matInput
+            formControlName="title"
+          />
+          <mat-error
+            *ngIf="affiliationForm.get('title').errors?.maxlength"
+            i18n="@@shared.maxLength.less_than_one_thousand"
+          >
+            Must be less than 1000 characters
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <ng-container
+        formGroupName="startDateGroup"
+        id="cy-affiliation-start-date-group"
+      >
+        <div class="row">
+          <label
+            class="mat-caption"
+            [ngClass]="{
+              error: affiliationForm.hasError('date', 'startDateGroup')
+            }"
+          >
+            <strong>{{ dateLabel }}</strong>
+          </label>
+        </div>
+        <div class="row input-container date-group" id="cy-start-date-group">
+          <div class="col l4 date">
+            <mat-form-field
+              id="start-date-year-input"
+              appearance="outline"
+              class="mat-form-field-min"
+            >
+              <mat-select
+                aria-label="{{ dateLabel + ' ' + ngOrcidYear }}"
+                placeholder="{{ ngOrcidYear }}"
+                formControlName="startDateYear"
+                id="cy-start-date-year-sel"
+              >
+                <mat-option i18n="@@shared.year" [value]="">Year</mat-option>
+                <mat-option *ngFor="let year of years" [value]="year">
+                  {{ year }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col l4 date">
+            <mat-form-field
+              id="start-date-month-input"
+              appearance="outline"
+              class="mat-form-field-min"
+            >
+              <mat-select
+                aria-label="{{ dateLabel + ' ' + ngOrcidMonth }}"
+                placeholder="{{ ngOrcidMonth }}"
+                formControlName="startDateMonth"
+                id="cy-start-date-month-sel"
+              >
+                <mat-option i18n="@@shared.month" [value]="">Month</mat-option>
+                <mat-option *ngFor="let month of months" [value]="month">
+                  {{ month | trailingZeros }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col l4 date">
+            <mat-form-field
+              id="start-date-day-input"
+              appearance="outline"
+              class="mat-form-field-min"
+            >
+              <mat-select
+                aria-label="{{ dateLabel + ' ' + ngOrcidDay }}"
+                placeholder="{{ ngOrcidDay }}"
+                formControlName="startDateDay"
+                id="cy-start-date-day-sel"
+              >
+                <mat-option i18n="@@shared.day" [value]="">Day</mat-option>
+                <mat-option *ngFor="let day of days" [value]="day">
+                  {{ day | trailingZeros }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <mat-error
+            class="mat-caption"
+            i18n="@@shared.invalidDate"
+            *ngIf="affiliationForm.get('startDateGroup').errors?.date"
+          >
+            Invalid date
           </mat-error>
         </div>
-      </div>
-    </ng-container>
-    <div class="row">
-      <label
-        for="url-input"
-        class="mat-caption"
-        [ngClass]="{ error: affiliationForm.hasError('pattern', 'link') }"
+      </ng-container>
+      <ng-container
+        formGroupName="endDateGroup"
+        *ngIf="type !== 'distinction'"
+        id="cy-affiliation-end-date-group"
       >
-        <strong i18n="@@shared.link">Link</strong>
-      </label>
-    </div>
-    <div class="input-container">
-      <mat-form-field appearance="outline" class="mat-form-field-min">
-        <input id="url-input" matInput formControlName="link" />
-        <mat-hint class="mat-caption" i18n="@@shared.linkDescription">
-          A link to a profile page or description of the role. Links should be
-          in the full URL format e.g. http://www.website.com/page.html
-        </mat-hint>
-        <mat-error
+        <div class="row">
+          <label
+            for="url-input"
+            class="mat-caption"
+            [ngClass]="{
+              error: affiliationForm.hasError('date', 'endDateGroup')
+            }"
+          >
+            <strong i18n="@@shared.endDate">End date</strong>
+          </label>
+        </div>
+        <div class="row input-container date-group" id="cy-end-date-group">
+          <div class="col l4 date">
+            <mat-form-field
+              id="end-date-year-input"
+              appearance="outline"
+              class="mat-form-field-min"
+            >
+              <mat-select
+                aria-label="{{ dateLabel + ' ' + ngOrcidYear }}"
+                placeholder="{{ ngOrcidYear }}"
+                formControlName="endDateYear"
+                id="cy-end-date-year-sel"
+              >
+                <mat-option i18n="@@shared.year" [value]="">Year</mat-option>
+                <mat-option *ngFor="let year of yearsEndDate" [value]="year">
+                  {{ year }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col l4 date">
+            <mat-form-field
+              id="end-date-month-input"
+              appearance="outline"
+              class="mat-form-field-min"
+            >
+              <mat-select
+                aria-label="{{ dateLabel + ' ' + ngOrcidMonth }}"
+                placeholder="{{ ngOrcidMonth }}"
+                formControlName="endDateMonth"
+                id="cy-end-date-month-sel"
+              >
+                <mat-option i18n="@@shared.month" [value]="">Month</mat-option>
+                <mat-option *ngFor="let month of months" [value]="month">
+                  {{ month | trailingZeros }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col l4 date">
+            <mat-form-field
+              id="end-date-day-input"
+              appearance="outline"
+              class="mat-form-field-min"
+            >
+              <mat-select
+                aria-label="{{ dateLabel + ' ' + ngOrcidDay }}"
+                placeholder="{{ ngOrcidDay }}"
+                formControlName="endDateDay"
+                id="cy-end-date-day-sel"
+              >
+                <mat-option i18n="@@shared.day" [value]="">Day</mat-option>
+                <mat-option *ngFor="let day of days" [value]="day">
+                  {{ day | trailingZeros }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <mat-error
+            class="mat-caption"
+            i18n="@@shared.invalidDate"
+            *ngIf="affiliationForm.get('endDateGroup').errors?.date"
+          >
+            Invalid date
+          </mat-error>
+          <div class="row">
+            <mat-error
+              class="mat-caption"
+              i18n="@@shared.endDateError"
+              *ngIf="affiliationForm.errors?.invalidEndDate"
+            >
+              End date must come after start date
+            </mat-error>
+          </div>
+        </div>
+      </ng-container>
+      <div class="row">
+        <label
+          for="url-input"
           class="mat-caption"
-          *ngIf="affiliationForm.get('link').hasError('pattern')"
-          i18n="@@shared.invalidLink"
+          [ngClass]="{ error: affiliationForm.hasError('pattern', 'link') }"
         >
-          Invalid Link
-        </mat-error>
-        <mat-error
-          *ngIf="affiliationForm.get('link').errors?.maxlength"
-          i18n="@@shared.maxLength.less_than_two_thousand"
+          <strong i18n="@@shared.link">Link</strong>
+        </label>
+      </div>
+      <div class="input-container">
+        <mat-form-field appearance="outline" class="mat-form-field-min">
+          <input
+            id="url-input"
+            matInput
+            formControlName="link"
+            [attr.aria-label]="(type | affiliationTypeLabel) + ' ' + linkLabel"
+          />
+          <mat-hint class="mat-caption" i18n="@@shared.linkDescription">
+            A link to a profile page or description of the role. Links should be
+            in the full URL format e.g. http://www.website.com/page.html
+          </mat-hint>
+          <mat-error
+            class="mat-caption"
+            *ngIf="affiliationForm.get('link').hasError('pattern')"
+            i18n="@@shared.invalidLink"
+          >
+            Invalid Link
+          </mat-error>
+          <mat-error
+            *ngIf="affiliationForm.get('link').errors?.maxlength"
+            i18n="@@shared.maxLength.less_than_two_thousand"
+          >
+            Must be less than 2000 characters
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </section>
+    <section id="{{ type }} + 'visibility'">
+      <form>
+        <h2
+          id="visibility"
+          class="title visibility"
+          [ngClass]="{
+            'orc-font-body': !platform.columns12,
+            'orc-font-body-large': platform.columns12
+          }"
         >
-          Must be less than 2000 characters
-        </mat-error>
-      </mat-form-field>
-    </div>
-    <form>
-      <div
-        id="visibility"
-        class="title visibility"
-        [ngClass]="{
-          'orc-font-body': !platform.columns12,
-          'orc-font-body-large': platform.columns12
-        }"
-      >
-        <p>
-          <strong i18n="@@shared.visibility">Visibility</strong>
+          <p>
+            <strong i18n="@@shared.visibility">Visibility</strong>
+          </p>
+        </h2>
+        <hr />
+        <p class="orc-font-body-small">
+          {{ ngOrcidDefaultVisibilityLabel }}
+          <strong>{{ defaultVisibility | visibilityStringLabel }}</strong
+          >.
         </p>
+      </form>
+      <div class="row">
+        <div class="col no-wrap actions-wrapper no-gutters">
+          <app-privacy-selector
+            [alignment]="'start'"
+            formControlName="visibility"
+          ></app-privacy-selector>
+        </div>
       </div>
-      <hr />
-      <p class="orc-font-body-small">
-        {{ ngOrcidDefaultVisibilityLabel }}
-        <strong>{{ defaultVisibility | visibilityStringLabel }}</strong
-        >.
-      </p>
-    </form>
-    <div class="row">
-      <div class="col no-wrap actions-wrapper no-gutters">
-        <app-privacy-selector
-          [alignment]="'start'"
-          formControlName="visibility"
-        ></app-privacy-selector>
-      </div>
-    </div>
+    </section>
   </form>
 </app-modal>

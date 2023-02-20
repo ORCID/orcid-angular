@@ -18,7 +18,8 @@ import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms'
   ],
 })
 export class ModalCombineWorksWithSelectorComponent
-  implements OnInit, OnDestroy {
+  implements OnInit, OnDestroy
+{
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   isMobile: boolean

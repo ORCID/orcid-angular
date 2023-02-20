@@ -1,9 +1,13 @@
 <div class="container no-padding" *ngIf="roles?.controls?.length > 0">
   <div class="row title">
     <label for="cy-role" class="orc-font-body">
-      <strong i18n="@@works.yourContributionsToThisWork"
-        >Your contributions to this work</strong
+      <h3
+        i18n="@@works.yourContributionsToThisWork"
+        id="your-contributors-label"
+        class="orc-font-body"
       >
+        Your contributions to this work
+      </h3>
     </label>
   </div>
   <ng-container formArrayName="roles">
@@ -33,7 +37,7 @@
               <mat-option
                 *ngFor="let contributionRole of contributionRoles"
                 [value]="contributionRole.key"
-                [disabled]="contributionRole.key | disableRole: role"
+                [disabled]="contributionRole.key | disableRole : role"
               >
                 {{ contributionRole.translation | titlecase }}
               </mat-option>
@@ -51,6 +55,11 @@
             mat-icon-button
             *ngIf="role.disabled || (!role.disabled && i !== 0)"
             (click)="deleteRole(i)"
+            [attr.aria-label]="
+              deleteLabel +
+              ' ' +
+              (role.get('role').value | roleTranslation | titlecase)
+            "
           >
             <mat-icon class="material-icons-outlined extra-large-material-icon"
               >delete
@@ -63,7 +72,11 @@
   </ng-container>
 
   <div class="row">
-    <a class="underline" (click)="addRole()" id="cy-add-another-role">
+    <a
+      class="underline"
+      (click)="addRole()"
+      id="cy-add-another-role-contributors"
+    >
       <span class="mat-body-1" i18n="@@works.addAnotherRole">
         Add another role
       </span>

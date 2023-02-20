@@ -40,6 +40,13 @@ import { WINDOW } from '../../../window'
   ],
 })
 export class ModalKeywordComponent implements OnInit, OnDestroy {
+  ariaLabelSave = $localize`:@@side-bar.ariaLabelKeywordSave:Save changes to Keywords`
+  ariaLabelCancel = $localize`:@@side-bar.ariaLabelKeywordCancel:Cancel changes to Keywords`
+  ariaLabelDelete = $localize`:@@side-bar.ariaLabelKeywordDelete:Delete Keyword`
+  ariaLabelNewKeyword = $localize`:@@side-bar.ariaLabelKeywordNew:New Keyword`
+  ariaLabelKeyword = $localize`:@@side-bar.ariaLabelKeyword:Keyword`
+  ariaLabelKeywordsClose = $localize`:@@side-bar.ariaLabelCloseKeywords:Close Keywords`
+
   $destroy: Subject<boolean> = new Subject<boolean>()
   @ViewChildren('keywordInput') inputs: QueryList<ElementRef>
 
@@ -104,16 +111,10 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
 
     keywords.forEach((keyword) => {
       group[keyword.putCode] = new UntypedFormGroup({
-        content: new UntypedFormControl(
-          {
-            value: keyword.content,
-            disabled: keyword.source !== this.id,
-          },
-          {
-            validators: [Validators.maxLength(this.keywordMaxLength)],
-            updateOn: 'change',
-          }
-        ),
+        content: new UntypedFormControl(keyword.content, {
+          validators: [Validators.maxLength(this.keywordMaxLength)],
+          updateOn: 'change',
+        }),
         visibility: new UntypedFormControl(keyword.visibility.visibility, {}),
       })
     })

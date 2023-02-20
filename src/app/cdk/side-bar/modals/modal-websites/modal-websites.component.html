@@ -1,5 +1,5 @@
 <app-modal [loading]="loadingWebsites" [noSidebar]="true">
-  <app-modal-header>
+  <app-modal-header [closeLabel]="ariaLabelClose">
     <ng-container i18n="@@topBar.websites">
       Websites & social links</ng-container
     >
@@ -11,6 +11,7 @@
       (click)="saveEvent()"
       i18n="@@shared.saveChanges"
       id="save-websites-button"
+      [attr.aria-label]="ariaLabelSave"
     >
       Save changes
     </button>
@@ -20,6 +21,7 @@
       (click)="closeEvent()"
       i18n="@@shared.cancel"
       id="cancel-websites-button"
+      [attr.aria-label]="ariaLabelCancel"
     >
       Cancel
     </button>
@@ -39,9 +41,9 @@
     </p>
     <ng-container *ngIf="websites?.length > 0">
       <div class="row">
-        <h3 class="col no-gutters orc-font-body" i18n="@@topBar.myLinks">
+        <h2 class="col no-gutters orc-font-body" i18n="@@topBar.myLinks">
           My links
-        </h3>
+        </h2>
       </div>
       <hr class="dashed-line" />
       <div
@@ -87,8 +89,9 @@
                   class="mat-form-field-min description"
                 >
                   <input
-                    id="description-input"
+                    class="cy-description-input"
                     #descriptionInput
+                    [attr.aria-label]="ariaLabelTitle"
                     matInput
                     formControlName="description"
                     placeholder=" {{ ngOrcidDescription }}"
@@ -144,7 +147,8 @@
                   class="mat-form-field-min"
                 >
                   <input
-                    id="url-input"
+                    [attr.aria-label]="ariaLabelURL"
+                    class="cy-url-input"
                     matInput
                     formControlName="url"
                     placeholder="{{ ngOrcidUrl }}"
@@ -217,9 +221,15 @@
                 formControlName="visibility"
               ></app-privacy-selector>
               <button
-                id="delete-button"
+                class="delete-button"
                 (click)="deleteWebsite(website.putCode)"
                 mat-icon-button
+                [attr.aria-label]="
+                  ariaLabelDelete +
+                  ' ' +
+                  (websitesForm.get(website.putCode).get('description').value ||
+                    '')
+                "
               >
                 <mat-icon
                   class="material-icons-outlined extra-large-material-icon"

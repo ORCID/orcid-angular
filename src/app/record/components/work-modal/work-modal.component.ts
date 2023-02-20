@@ -15,6 +15,9 @@ import { WorkFormComponent } from '../work-form/work-form/work-form.component'
   styleUrls: ['./work-modal.component.scss'],
 })
 export class WorkModalComponent implements OnInit {
+  closeLabel = $localize`:@@shared.closeActivityAriaLabel:Close Works`
+  cancelAndClose = $localize`:@@shared.cancelAndCloseActivityAriaLabel:Cancel changes and close Works`
+  saveAndClose = $localize`:@@shared.saveAndCloseActivityAriaLabel:Save changes to Works`
   @ViewChild('workFormComponent') workFormComponent: WorkFormComponent
   @Input() options: { createACopy: boolean }
   @Input() userRecord: UserRecord
