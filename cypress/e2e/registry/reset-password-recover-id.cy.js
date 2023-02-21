@@ -20,6 +20,7 @@ describe('Password reset and OID recovery', () => {
       .type(userData.cyResetPasswordUser.email)
     //click button to recover details
     cy.get('#cy-recover-acc-details').click()
+    cy.wait(2000)
 
     //use gmail api to check recovery email was sent
     cy.task('checkInbox_from_to_subject', {
@@ -42,11 +43,14 @@ describe('Password reset and OID recovery', () => {
     })
     cy.wait(3000)
     //type new passw
+    cy.contains('There is a problem with your reset password link.').should(
+      'not.exist'
+    )
     cy.get('#cy-password-input').clear().type(newPassword)
     //confirm new passw
     cy.get('#cy-password-confirm-input').clear().type(newPassword)
     //save
-    cy.wait(2000) //need to wait for button to become enabled
+    //cy.wait(2000)
     cy.get('#cy-save-password').should('be.enabled').click({ force: true })
 
     //verify user is redirected to Sign in page
