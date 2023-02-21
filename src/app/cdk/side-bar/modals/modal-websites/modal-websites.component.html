@@ -75,12 +75,9 @@
                 />
               </div>
               <div class="row web-site-input-container">
-
-
                 <mat-form-field
                   [ngClass]="{
-                    'read-only':
-                      website.source && website.source !== this.id
+                    'read-only': website.source && website.source !== this.id
                   }"
                   appearance="outline"
                   class="mat-form-field-min description"
@@ -105,13 +102,12 @@
                     Must be less than 355 characters
                   </mat-error>
                 </mat-form-field>
-             
+
                 <mat-form-field
                   appearance="outline"
                   class="mat-form-field-min"
                   [ngClass]="{
-                    'read-only':
-                      website.source && website.source !== this.id
+                    'read-only': website.source && website.source !== this.id
                   }"
                 >
                   <input
