@@ -1,179 +1,178 @@
 [main]
 host = https://www.transifex.com
 
-[orcid-angular.src-locale-properties-environment-banner-environment-banner-en-properties--transifex]
-file_filter = src/locale/properties/environment-banner/environment-banner.<lang>.properties
+[o:orcid-inc-1:p:orcid-angular:r:environment-banner]
+file_filter  = src/locale/properties/environment-banner/environment-banner.<lang>.properties
+source_file  = src/locale/properties/environment-banner/environment-banner.en.properties
+source_lang  = en
+type         = UNICODEPROPERTIES
 minimum_perc = 0
-source_file = src/locale/properties/environment-banner/environment-banner.en.properties
-source_lang = en
-type = UNICODEPROPERTIES
 
-[orcid-angular.src-locale-properties-home-home-en-properties--transifex]
-file_filter = src/locale/properties/home/home.<lang>.properties
+[o:orcid-inc-1:p:orcid-angular:r:src-locale-properties-account-account-en-properties--transifex]
+file_filter  = src/locale/properties/account/account.<lang>.properties
+source_file  = src/locale/properties/account/account.en.properties
+source_lang  = en
+type         = UNICODEPROPERTIES
 minimum_perc = 0
-source_file = src/locale/properties/home/home.en.properties
-source_lang = en
-type = UNICODEPROPERTIES
 
-[orcid-angular.src-locale-properties-layout-layout-en-properties--transifex]
-file_filter = src/locale/properties/layout/layout.<lang>.properties
+[o:orcid-inc-1:p:orcid-angular:r:src-locale-properties-authorize-authorize-en-properties--transifex]
+file_filter  = src/locale/properties/authorize/authorize.<lang>.properties
+source_file  = src/locale/properties/authorize/authorize.en.properties
+source_lang  = en
+type         = UNICODEPROPERTIES
 minimum_perc = 0
-source_file = src/locale/properties/layout/layout.en.properties
-source_lang = en
-type = UNICODEPROPERTIES
 
-[orcid-angular.src-locale-properties-material-material-en-properties--transifex]
-file_filter = src/locale/properties/material/material.<lang>.properties
+[o:orcid-inc-1:p:orcid-angular:r:src-locale-properties-delegators-delegators-en-properties--transifex]
+file_filter  = src/locale/properties/delegators/delegators.<lang>.properties
+source_file  = src/locale/properties/delegators/delegators.en.properties
+source_lang  = en
+type         = UNICODEPROPERTIES
 minimum_perc = 0
-source_file = src/locale/properties/material/material.en.properties
-source_lang = en
-type = UNICODEPROPERTIES
 
-[orcid-angular.src-locale-properties-password-recovery-password-recovery-en-properties--transifex]
-file_filter = src/locale/properties/password-recovery/password-recovery.<lang>.properties
+[o:orcid-inc-1:p:orcid-angular:r:src-locale-properties-funding-funding-en-properties--transifex]
+file_filter  = src/locale/properties/funding/funding.<lang>.properties
+source_file  = src/locale/properties/funding/funding.en.properties
+source_lang  = en
+type         = UNICODEPROPERTIES
 minimum_perc = 0
-source_file = src/locale/properties/password-recovery/password-recovery.en.properties
-source_lang = en
-type = UNICODEPROPERTIES
 
-[orcid-angular.src-locale-properties-profile-profile-en-properties--transifex]
-file_filter = src/locale/properties/profile/profile.<lang>.properties
+[o:orcid-inc-1:p:orcid-angular:r:src-locale-properties-home-home-en-properties--transifex]
+file_filter  = src/locale/properties/home/home.<lang>.properties
+source_file  = src/locale/properties/home/home.en.properties
+source_lang  = en
+type         = UNICODEPROPERTIES
 minimum_perc = 0
-source_file = src/locale/properties/profile/profile.en.properties
-source_lang = en
-type = UNICODEPROPERTIES
 
-[orcid-angular.src-locale-properties-search-search-en-properties--transifex]
-file_filter = src/locale/properties/search/search.<lang>.properties
+[o:orcid-inc-1:p:orcid-angular:r:src-locale-properties-inbox-inbox-en-properties--transifex]
+file_filter  = src/locale/properties/inbox/inbox.<lang>.properties
+source_file  = src/locale/properties/inbox/inbox.en.properties
+source_lang  = en
+type         = UNICODEPROPERTIES
 minimum_perc = 0
-source_file = src/locale/properties/search/search.en.properties
-source_lang = en
-type = UNICODEPROPERTIES
 
-[orcid-angular.src-locale-properties-signin-signin-en-properties--transifex]
-file_filter = src/locale/properties/signin/signin.<lang>.properties
+[o:orcid-inc-1:p:orcid-angular:r:src-locale-properties-institutional-institutional-en-properties--transifex]
+file_filter  = src/locale/properties/institutional/institutional.<lang>.properties
+source_file  = src/locale/properties/institutional/institutional.en.properties
+source_lang  = en
+type         = UNICODEPROPERTIES
 minimum_perc = 0
-source_file = src/locale/properties/signin/signin.en.properties
-source_lang = en
-type = UNICODEPROPERTIES
 
-[orcid-angular.src-locale-properties-institutional-institutional-en-properties--transifex]
-file_filter = src/locale/properties/institutional/institutional.<lang>.properties
+[o:orcid-inc-1:p:orcid-angular:r:src-locale-properties-layout-layout-en-properties--transifex]
+file_filter  = src/locale/properties/layout/layout.<lang>.properties
+source_file  = src/locale/properties/layout/layout.en.properties
+source_lang  = en
+type         = UNICODEPROPERTIES
 minimum_perc = 0
-source_file = src/locale/properties/institutional/institutional.en.properties
-source_lang = en
-type = UNICODEPROPERTIES
 
-[orcid-angular.src-locale-properties-linking-linking-en-properties--transifex]
-file_filter = src/locale/properties/linking/linking.<lang>.properties
+[o:orcid-inc-1:p:orcid-angular:r:src-locale-properties-linking-linking-en-properties--transifex]
+file_filter  = src/locale/properties/linking/linking.<lang>.properties
+source_file  = src/locale/properties/linking/linking.en.properties
+source_lang  = en
+type         = UNICODEPROPERTIES
 minimum_perc = 0
-source_file = src/locale/properties/linking/linking.en.properties
-source_lang = en
-type = UNICODEPROPERTIES
 
-[orcid-angular.src-locale-properties-register-register-en-properties--transifex]
-file_filter = src/locale/properties/register/register.<lang>.properties
+[o:orcid-inc-1:p:orcid-angular:r:src-locale-properties-material-material-en-properties--transifex]
+file_filter  = src/locale/properties/material/material.<lang>.properties
+source_file  = src/locale/properties/material/material.en.properties
+source_lang  = en
+type         = UNICODEPROPERTIES
 minimum_perc = 0
-source_file = src/locale/properties/register/register.en.properties
-source_lang = en
-type = UNICODEPROPERTIES
 
-[orcid-angular.src-locale-properties-inbox-inbox-en-properties--transifex]
-file_filter = src/locale/properties/inbox/inbox.<lang>.properties
+[o:orcid-inc-1:p:orcid-angular:r:src-locale-properties-my-orcid-alerts-my-orcid-alerts-en-properties--transifex]
+file_filter  = src/locale/properties/my-orcid-alerts/my-orcid-alerts.<lang>.properties
+source_file  = src/locale/properties/my-orcid-alerts/my-orcid-alerts.en.properties
+source_lang  = en
+type         = UNICODEPROPERTIES
 minimum_perc = 0
-source_file = src/locale/properties/inbox/inbox.en.properties
-source_lang = en
-type = UNICODEPROPERTIES
 
-[orcid-angular.src-locale-properties-delegators-delegators-en-properties--transifex]
-file_filter = src/locale/properties/delegators/delegators.<lang>.properties
+[o:orcid-inc-1:p:orcid-angular:r:src-locale-properties-password-recovery-password-recovery-en-properties--transifex]
+file_filter  = src/locale/properties/password-recovery/password-recovery.<lang>.properties
+source_file  = src/locale/properties/password-recovery/password-recovery.en.properties
+source_lang  = en
+type         = UNICODEPROPERTIES
 minimum_perc = 0
-source_file = src/locale/properties/delegators/delegators.en.properties
-source_lang = en
-type = UNICODEPROPERTIES
 
-[orcid-angular.src-locale-properties-authorize-authorize-en-properties--transifex]
-file_filter = src/locale/properties/authorize/authorize.<lang>.properties
+[o:orcid-inc-1:p:orcid-angular:r:src-locale-properties-peer-review-peer-review-en-properties--transifex]
+file_filter  = src/locale/properties/peer-review/peer-review.<lang>.properties
+source_file  = src/locale/properties/peer-review/peer-review.en.properties
+source_lang  = en
+type         = UNICODEPROPERTIES
 minimum_perc = 0
-source_file = src/locale/properties/authorize/authorize.en.properties
-source_lang = en
-type = UNICODEPROPERTIES
 
-[orcid-angular.src-locale-properties-shared-shared-en-properties--transifex]
-file_filter = src/locale/properties/shared/shared.<lang>.properties
+[o:orcid-inc-1:p:orcid-angular:r:src-locale-properties-profile-profile-en-properties--transifex]
+file_filter  = src/locale/properties/profile/profile.<lang>.properties
+source_file  = src/locale/properties/profile/profile.en.properties
+source_lang  = en
+type         = UNICODEPROPERTIES
 minimum_perc = 0
-source_file = src/locale/properties/shared/shared.en.properties
-source_lang = en
-type = UNICODEPROPERTIES
 
-[orcid-angular.src-locale-properties-two-factor-two-factor-en-properties--transifex]
-file_filter = src/locale/properties/two-factor/two-factor.<lang>.properties
+[o:orcid-inc-1:p:orcid-angular:r:src-locale-properties-record-record-en-properties--transifex]
+file_filter  = src/locale/properties/record/record.<lang>.properties
+source_file  = src/locale/properties/record/record.en.properties
+source_lang  = en
+type         = UNICODEPROPERTIES
 minimum_perc = 0
-source_file = src/locale/properties/two-factor/two-factor.en.properties
-source_lang = en
-type = UNICODEPROPERTIES
 
-[orcid-angular.src-locale-properties-record-record-en-properties--transifex]
-file_filter = src/locale/properties/record/record.<lang>.properties
+[o:orcid-inc-1:p:orcid-angular:r:src-locale-properties-register-register-en-properties--transifex]
+file_filter  = src/locale/properties/register/register.<lang>.properties
+source_file  = src/locale/properties/register/register.en.properties
+source_lang  = en
+type         = UNICODEPROPERTIES
 minimum_perc = 0
-source_file = src/locale/properties/record/record.en.properties
-source_lang = en
-type = UNICODEPROPERTIES
 
-[orcid-angular.src-locale-properties-top-bar-top-bar-en-properties--transifex]
-file_filter = src/locale/properties/top-bar/top-bar.<lang>.properties
+[o:orcid-inc-1:p:orcid-angular:r:src-locale-properties-research-resources-research-resources-en-properties--transifex]
+file_filter  = src/locale/properties/research-resources/research-resources.<lang>.properties
+source_file  = src/locale/properties/research-resources/research-resources.en.properties
+source_lang  = en
+type         = UNICODEPROPERTIES
 minimum_perc = 0
-source_file = src/locale/properties/top-bar/top-bar.en.properties
-source_lang = en
-type = UNICODEPROPERTIES
 
-[orcid-angular.src-locale-properties-peer-review-peer-review-en-properties--transifex]
-file_filter = src/locale/properties/peer-review/peer-review.<lang>.properties
+[o:orcid-inc-1:p:orcid-angular:r:src-locale-properties-search-search-en-properties--transifex]
+file_filter  = src/locale/properties/search/search.<lang>.properties
+source_file  = src/locale/properties/search/search.en.properties
+source_lang  = en
+type         = UNICODEPROPERTIES
 minimum_perc = 0
-source_file = src/locale/properties/peer-review/peer-review.en.properties
-source_lang = en
-type = UNICODEPROPERTIES
 
-[orcid-angular.src-locale-properties-my-orcid-alerts-my-orcid-alerts-en-properties--transifex]
-file_filter = src/locale/properties/my-orcid-alerts/my-orcid-alerts.<lang>.properties
+[o:orcid-inc-1:p:orcid-angular:r:src-locale-properties-shared-shared-en-properties--transifex]
+file_filter  = src/locale/properties/shared/shared.<lang>.properties
+source_file  = src/locale/properties/shared/shared.en.properties
+source_lang  = en
+type         = UNICODEPROPERTIES
 minimum_perc = 0
-source_file = src/locale/properties/my-orcid-alerts/my-orcid-alerts.en.properties
-source_lang = en
-type = UNICODEPROPERTIES
 
-
-[orcid-angular.src-locale-properties-research-resources-research-resources-en-properties--transifex]
-file_filter = src/locale/properties/research-resources/research-resources.<lang>.properties
+[o:orcid-inc-1:p:orcid-angular:r:src-locale-properties-side-bar-side-bar-en-properties--transifex]
+file_filter  = src/locale/properties/side-bar/side-bar.<lang>.properties
+source_file  = src/locale/properties/side-bar/side-bar.en.properties
+source_lang  = en
+type         = UNICODEPROPERTIES
 minimum_perc = 0
-source_file = src/locale/properties/research-resources/research-resources.en.properties
-source_lang = en
-type = UNICODEPROPERTIES
 
-
-[orcid-angular.src-locale-properties-funding-funding-en-properties--transifex]
-file_filter = src/locale/properties/funding/funding.<lang>.properties
+[o:orcid-inc-1:p:orcid-angular:r:src-locale-properties-signin-signin-en-properties--transifex]
+file_filter  = src/locale/properties/signin/signin.<lang>.properties
+source_file  = src/locale/properties/signin/signin.en.properties
+source_lang  = en
+type         = UNICODEPROPERTIES
 minimum_perc = 0
-source_file = src/locale/properties/funding/funding.en.properties
-source_lang = en
-type = UNICODEPROPERTIES
 
-[orcid-angular.src-locale-properties-side-bar-side-bar-en-properties--transifex]
-file_filter = src/locale/properties/side-bar/side-bar.<lang>.properties
+[o:orcid-inc-1:p:orcid-angular:r:src-locale-properties-top-bar-top-bar-en-properties--transifex]
+file_filter  = src/locale/properties/top-bar/top-bar.<lang>.properties
+source_file  = src/locale/properties/top-bar/top-bar.en.properties
+source_lang  = en
+type         = UNICODEPROPERTIES
 minimum_perc = 0
-source_file = src/locale/properties/side-bar/side-bar.en.properties
-source_lang = en
-type = UNICODEPROPERTIES
 
-[orcid-angular.src-locale-properties-works-works-en-properties--transifex]
-file_filter = src/locale/properties/works/works.<lang>.properties
+[o:orcid-inc-1:p:orcid-angular:r:src-locale-properties-two-factor-two-factor-en-properties--transifex]
+file_filter  = src/locale/properties/two-factor/two-factor.<lang>.properties
+source_file  = src/locale/properties/two-factor/two-factor.en.properties
+source_lang  = en
+type         = UNICODEPROPERTIES
 minimum_perc = 0
-source_file = src/locale/properties/works/works.en.properties
-source_lang = en
-type = UNICODEPROPERTIES
 
-[orcid-angular.src-locale-properties-account-account-en-properties--transifex]
-file_filter = src/locale/properties/account/account.<lang>.properties
+[o:orcid-inc-1:p:orcid-angular:r:src-locale-properties-works-works-en-properties--transifex]
+file_filter  = src/locale/properties/works/works.<lang>.properties
+source_file  = src/locale/properties/works/works.en.properties
+source_lang  = en
+type         = UNICODEPROPERTIES
 minimum_perc = 0
-source_file = src/locale/properties/account/account.en.properties
-source_lang = en
-type = UNICODEPROPERTIES
+
