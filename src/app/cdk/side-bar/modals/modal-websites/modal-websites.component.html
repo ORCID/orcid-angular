@@ -75,20 +75,15 @@
                 />
               </div>
               <div class="row web-site-input-container">
-                <div
-                  class="not-editable-description"
-                  *ngIf="website.source && website.source !== id"
-                >
-                  <strong>{{ website.urlName }}</strong>
-                </div>
-
                 <mat-form-field
-                  *ngIf="!website.source || website.source === id"
-                  [ngClass]="{ 'mat-form-field-readonly': true }"
+                  [ngClass]="{
+                    'read-only': website.source && website.source !== this.id
+                  }"
                   appearance="outline"
                   class="mat-form-field-min description"
                 >
                   <input
+                    [readonly]="website.source && website.source !== id"
                     class="cy-description-input"
                     #descriptionInput
                     [attr.aria-label]="ariaLabelTitle"
@@ -107,46 +102,16 @@
                     Must be less than 355 characters
                   </mat-error>
                 </mat-form-field>
-                <div
-                  *ngIf="website.source && website.source !== id"
-                  class="not-editable-url"
-                >
-                  <a
-                    class="underline"
-                    [href]="website.url.value"
-                    target="_blank"
-                    rel="me nofollow noopener noreferrer"
-                    >{{ website.url.value }}</a
-                  >
 
-                  <mat-error
-                    class="mat-form-field-subscript-wrapper"
-                    *ngIf="
-                      websitesForm
-                        .get(website.putCode)
-                        .hasError('duplicated', 'url')
-                    "
-                    i18n="@@topBar.urlDuplicated"
-                  >
-                    URL can not be duplicated
-                  </mat-error>
-                  <mat-hint class="mat-caption">
-                    <app-source-hit
-                      [createdDate]="website.createdDate"
-                      [source]="website.sourceName || website.source"
-                      [assertion]="
-                        website.assertionOriginName ||
-                        website.assertionOriginOrcid
-                      "
-                    ></app-source-hit>
-                  </mat-hint>
-                </div>
                 <mat-form-field
-                  *ngIf="!website.source || website.source === id"
                   appearance="outline"
                   class="mat-form-field-min"
+                  [ngClass]="{
+                    'read-only': website.source && website.source !== this.id
+                  }"
                 >
                   <input
+                    [readonly]="website.source && website.source !== id"
                     [attr.aria-label]="ariaLabelURL"
                     class="cy-url-input"
                     matInput
