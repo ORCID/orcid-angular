@@ -27,7 +27,7 @@ describe('contributor name field is required', async function () {
         .contains(workType)
         .click()
       cy.get('#title-input').clear().type(title)
-      cy.get('#cy-add-another-contributor').click()
+      cy.get('.cy-add-another-contributor').click()
 
       //save entry
       cy.get('#save-work-button').wait(1000).click({ force: true })
