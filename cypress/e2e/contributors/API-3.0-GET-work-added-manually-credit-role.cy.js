@@ -5,22 +5,22 @@ import { qase } from 'cypress-qase-reporter/dist/mocha'
 
 describe('API 3.0 - GET work added manually', async function () {
   const curlReadAllWorks =
-  "curl -i -H 'Accept: application/json' -H 'Authorization: Bearer " +
-  userData.cyRecordOwner.clientBearer +
-  "' -X GET '" +
-  Cypress.env('membersAPI_URL') +
-  userData.cyRecordOwner.oid +
-  Cypress.env('membersAPI_allWorksEndpoint') +
-  "'"
+    "curl -i -H 'Accept: application/json' -H 'Authorization: Bearer " +
+    userData.cyRecordOwner.clientBearer +
+    "' -X GET '" +
+    Cypress.env('membersAPI_URL') +
+    userData.cyRecordOwner.oid +
+    Cypress.env('membersAPI_allWorksEndpoint') +
+    "'"
 
-const curlReadSingleWork =
-  "curl -i -H 'Accept: application/json' -H 'Authorization: Bearer " +
-  userData.cyRecordOwner.clientBearer +
-  "' -X GET '" +
-  Cypress.env('membersAPI_URL') +
-  userData.cyRecordOwner.oid +
-  Cypress.env('membersAPI_workEndpoint') +
-  '/' //here append "{PUTCODE}" + "'"
+  const curlReadSingleWork =
+    "curl -i -H 'Accept: application/json' -H 'Authorization: Bearer " +
+    userData.cyRecordOwner.clientBearer +
+    "' -X GET '" +
+    Cypress.env('membersAPI_URL') +
+    userData.cyRecordOwner.oid +
+    Cypress.env('membersAPI_workEndpoint') +
+    '/' //here append "{PUTCODE}" + "'"
 
   before(() => {
     cy.visit(Cypress.env('signInURL'))
@@ -90,17 +90,16 @@ const curlReadSingleWork =
           putCodeStartPosition,
           putCodeEndPosition
         )
-        cy.log("putCode found:" + putCode)
+        cy.log('putCode found:' + putCode)
         cy.exec(curlReadSingleWork + putCode + "'").then((singleWorkResp) => {
           //verify curl was executed successfully
           expect(singleWorkResp.code).to.eq(0)
           //verify http response status is successful: 200
           expect(singleWorkResp.stdout).to.contain('HTTP/2 200')
-         })
+        })
       })
-    
     })
-  )//end of qase tag
+  ) //end of qase tag
 
   after(() => {
     //log out
