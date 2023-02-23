@@ -44,30 +44,27 @@ export class ThirdPartySigninCompletedGuard implements CanActivateChild {
       map((requestInfoForm: RequestInfoForm) => {
         const analyticsReports: Observable<void>[] = []
         analyticsReports.push(
-          this._analytics
-            .reportEvent(
-              'Sign-In',
-              'RegGrowth',
-              requestInfoForm || 'Website' // If the is no requestInfoForm report a Website signin]]\
-            )
+          this._analytics.reportEvent(
+            'Sign-In',
+            'RegGrowth',
+            requestInfoForm || 'Website' // If the is no requestInfoForm report a Website signin]]\
+          )
         )
         analyticsReports.push(
-          this._googleTagManagerService
-            .reportEvent(
-              'Sign-In',
-              'RegGrowth',
-              requestInfoForm || 'Website'
-            )
-        )
-        forkJoin(analyticsReports)
-          .pipe(
-            catchError((err) =>
-              this._errorHandler.handleError(
-                err,
-                ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA,
-              ),
-            ),
+          this._googleTagManagerService.reportEvent(
+            'Sign-In',
+            'RegGrowth',
+            requestInfoForm || 'Website'
           )
+        )
+        forkJoin(analyticsReports).pipe(
+          catchError((err) =>
+            this._errorHandler.handleError(
+              err,
+              ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
+            )
+          )
+        )
         if (state.url.startsWith('/my-orcid')) {
           // This "out of router navigation" is necesary while my-orcid exist on the old page
           // as a temporal side effect will show the new app header/footer before navigating into the old app

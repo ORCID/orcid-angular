@@ -75,22 +75,23 @@ export class AuthorizeGuard implements CanActivateChild {
   reportAlreadyAuthorize(request: RequestInfoForm) {
     const analyticsReports: Observable<void>[] = []
     analyticsReports.push(
-      this._gtag
-        .reportEvent(`Reauthorize`, 'RegGrowth', request)
+      this._gtag.reportEvent(`Reauthorize`, 'RegGrowth', request)
     )
     analyticsReports.push(
-      this._googleTagManagerService
-        .reportEvent(`Reauthorize`, 'RegGrowth', request)
+      this._googleTagManagerService.reportEvent(
+        `Reauthorize`,
+        'RegGrowth',
+        request
+      )
     )
-    return forkJoin(analyticsReports)
-      .pipe(
-        catchError((err) =>
-          this._errorHandler.handleError(
-            err,
-            ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
-          )
+    return forkJoin(analyticsReports).pipe(
+      catchError((err) =>
+        this._errorHandler.handleError(
+          err,
+          ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
         )
       )
+    )
   }
 
   private redirectToLoginPage(

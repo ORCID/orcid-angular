@@ -80,7 +80,8 @@ export class AppComponent {
       if (event instanceof NavigationEnd) {
         _googleAnalytics.reportNavigationEnd(event.url)
         _googleAnalytics.reportPageView(event.urlAfterRedirects)
-        _googleTagManagerService.reportNavigationEnd(event.url)
+        _googleTagManagerService
+          .reportNavigationEnd(event.url)
           .subscribe(() => {
             _googleTagManagerService.reportPageView(event.urlAfterRedirects)
           })

@@ -94,22 +94,30 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
 
       if (value) {
         analyticsReports.push(
-          this._gtag
-            .reportEvent(`Authorize`, 'RegGrowth', this.oauthRequest)
+          this._gtag.reportEvent(`Authorize`, 'RegGrowth', this.oauthRequest)
         )
         analyticsReports.push(
-          this._googleTagManagerService
-            .reportEvent(`Authorize`, 'RegGrowth', this.oauthRequest)
+          this._googleTagManagerService.reportEvent(
+            `Authorize`,
+            'RegGrowth',
+            this.oauthRequest
+          )
         )
       } else {
         // Create a GA for deny access
         analyticsReports.push(
-          this._gtag
-            .reportEvent(`Authorize_Deny`, 'Disengagement', this.oauthRequest)
+          this._gtag.reportEvent(
+            `Authorize_Deny`,
+            'Disengagement',
+            this.oauthRequest
+          )
         )
         analyticsReports.push(
-          this._googleTagManagerService
-            .reportEvent(`Authorize_Deny`, 'Disengagement', this.oauthRequest)
+          this._googleTagManagerService.reportEvent(
+            `Authorize_Deny`,
+            'Disengagement',
+            this.oauthRequest
+          )
         )
       }
       forkJoin(analyticsReports)
@@ -117,14 +125,14 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
           catchError((err) =>
             this._errorHandler.handleError(
               err,
-              ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA,
-            ),
-          ),
+              ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
+            )
+          )
         )
         .subscribe(
-        () => (this.window as any).outOfRouterNavigation(data.redirectUrl),
-        () => (this.window as any).outOfRouterNavigation(data.redirectUrl)
-      )
+          () => (this.window as any).outOfRouterNavigation(data.redirectUrl),
+          () => (this.window as any).outOfRouterNavigation(data.redirectUrl)
+        )
     })
   }
 

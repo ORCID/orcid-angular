@@ -11,14 +11,17 @@ export function startPerformanceMeasurement(url: string, window: Window): void {
   }
 }
 
-export function finishPerformanceMeasurement(url: string, window: Window): number | void {
+export function finishPerformanceMeasurement(
+  url: string,
+  window: Window
+): number | void {
   if (window.performance) {
     window.performance.mark(PerformanceMarks.navigationEndPrefix + url)
     let timeForNavigation
     window.performance.measure(
       url,
       PerformanceMarks.navigationStartPrefix + url,
-      PerformanceMarks.navigationEndPrefix + url,
+      PerformanceMarks.navigationEndPrefix + url
     )
     window.performance.getEntriesByName(url).forEach((value) => {
       timeForNavigation = value.duration
@@ -30,12 +33,8 @@ export function finishPerformanceMeasurement(url: string, window: Window): numbe
 
 export function clearPerformanceMarks(url: string, window: Window) {
   if (window.performance) {
-    window.performance.clearMarks(
-      PerformanceMarks.navigationStartPrefix + url,
-    )
-    window.performance.clearMarks(
-      PerformanceMarks.navigationEndPrefix + url,
-    )
+    window.performance.clearMarks(PerformanceMarks.navigationStartPrefix + url)
+    window.performance.clearMarks(PerformanceMarks.navigationEndPrefix + url)
     window.performance.clearMeasures(url)
   }
 }

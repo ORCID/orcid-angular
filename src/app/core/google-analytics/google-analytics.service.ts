@@ -5,7 +5,12 @@ import { RequestInfoForm } from 'src/app/types'
 import { environment } from 'src/environments/environment'
 // @ts-ignore
 import Gtag from 'gtag.js'
-import { buildClientString, finishPerformanceMeasurement, removeUrlParameters, startPerformanceMeasurement } from '../../analytics-utils'
+import {
+  buildClientString,
+  finishPerformanceMeasurement,
+  removeUrlParameters,
+  startPerformanceMeasurement,
+} from '../../analytics-utils'
 
 @Injectable({
   providedIn: 'root',

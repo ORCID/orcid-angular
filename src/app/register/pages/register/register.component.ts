@@ -164,10 +164,10 @@ export class RegisterComponent implements OnInit, AfterViewInit {
 
             analyticsReports.push(
               this._gtag.reportEvent(
-                  'New-Registration',
-                  'RegGrowth',
-                  this.requestInfoForm || 'Website'
-                )
+                'New-Registration',
+                'RegGrowth',
+                this.requestInfoForm || 'Website'
+              )
             )
             analyticsReports.push(
               this._googleTagManagerService.reportEvent(
