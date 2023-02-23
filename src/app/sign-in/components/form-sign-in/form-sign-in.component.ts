@@ -32,10 +32,11 @@ import { SignInLocal, TypeSignIn } from '../../../types/sign-in.local'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 import { SignInGuard } from '../../../guards/sign-in.guard'
 import { OauthService } from '../../../core/oauth/oauth.service'
-import { combineLatest, Subject } from 'rxjs'
+import { combineLatest, forkJoin, Observable, Subject } from 'rxjs'
 import { UserSession } from 'src/app/types/session.local'
 import { ERROR_REPORT } from 'src/app/errors'
 import { ErrorStateMatcherForPasswordField } from '../../ErrorStateMatcherForPasswordField'
+import { GoogleTagManagerService } from '../../../core/google-tag-manager/google-tag-manager.service'
 
 @Component({
   selector: 'app-form-sign-in',
@@ -79,6 +80,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
     private _oauthService: OauthService,
     private _router: Router,
     private _gtag: GoogleAnalyticsService,
+    private _googleTagManagerService: GoogleTagManagerService,
     private _errorHandler: ErrorHandlerService,
     private _signInGuard: SignInGuard,
     private _userInfo: UserService,
@@ -174,15 +176,23 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
           if (isRedirectToTheAuthorizationPage(data)) {
             this.handleOauthLogin(data.url)
           } else {
-            this._gtag
-              .reportEvent('Sign-In', 'RegGrowth', 'Website')
+            const analyticsReports: Observable<void>[] = []
+
+            analyticsReports.push(
+              this._gtag
+              .reportEvent('RegGrowth', 'Sign-In', 'Website')
+            )
+            analyticsReports.push(
+              this._googleTagManagerService.reportEvent('RegGrowth', 'Sign-In', 'Website')
+            )
+            forkJoin(analyticsReports)
               .pipe(
                 catchError((err) =>
                   this._errorHandler.handleError(
                     err,
-                    ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
-                  )
-                )
+                    ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA,
+                  ),
+                ),
               )
               .subscribe(
                 () => this.navigateTo(data.url),
@@ -316,19 +326,28 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
           this.loading.next(false)
           this.errorDescription.next(requestInfoForm.errorDescription)
         }
-        this._gtag
-          .reportEvent('Sign-In', 'RegGrowth', requestInfoForm)
+        const analyticsReports: Observable<void>[] = []
+
+        analyticsReports.push(
+          this._gtag
+            .reportEvent('Sign-In', 'RegGrowth', requestInfoForm)
+        )
+        analyticsReports.push(
+          this._googleTagManagerService.reportEvent('RegGrowth', 'Sign-In', requestInfoForm)
+        )
+
+        forkJoin(analyticsReports)
           .pipe(
             catchError((err) =>
               this._errorHandler.handleError(
                 err,
-                ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
-              )
-            )
+                ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA,
+              ),
+            ),
           )
           .subscribe(
             () => this.oauthAuthorize(urlRedirect),
-            () => this.oauthAuthorize(urlRedirect)
+            () => this.oauthAuthorize(urlRedirect),
           )
       })
   }
@@ -369,6 +388,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   navigateTo(val: string): void {
+    console.log('navigateeee!!')
     if (val.indexOf('orcid.org/my-orcid')) {
       this._router.navigate(['/my-orcid'])
     } else {
