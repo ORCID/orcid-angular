@@ -1,6 +1,14 @@
 import { inject, TestBed, waitForAsync } from '@angular/core/testing'
 import { GoogleTagManagerService } from './google-tag-manager.service'
 import { ItemGTM } from '../../types/item_gtm'
+import { ErrorHandlerService } from '../error-handler/error-handler.service'
+import { PlatformInfoService } from '../../cdk/platform-info'
+import { SnackbarService } from '../../cdk/snackbar/snackbar.service'
+import { MatSnackBar } from '@angular/material/snack-bar'
+import { MatDialog } from '@angular/material/dialog'
+import { Overlay } from '@angular/cdk/overlay'
+import { RouterTestingModule } from '@angular/router/testing'
+import { WINDOW_PROVIDERS } from '../../cdk/window'
 
 describe('GoogleTagManagerService', () => {
   let service: GoogleTagManagerService
@@ -15,10 +23,21 @@ describe('GoogleTagManagerService', () => {
     },
   }
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      providers: [GoogleTagManagerService],
-    })
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [RouterTestingModule],
+        providers: [
+          WINDOW_PROVIDERS,
+          GoogleTagManagerService,
+          PlatformInfoService,
+          ErrorHandlerService,
+          SnackbarService,
+          MatSnackBar,
+          MatDialog,
+          Overlay,
+        ]
+      });
     browserGlobals.windowRef().dataLayer = []
   }))
 
@@ -60,4 +79,4 @@ describe('GoogleTagManagerService', () => {
       })
     }
   ))
-})
+});
