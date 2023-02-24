@@ -23,21 +23,20 @@ describe('GoogleTagManagerService', () => {
     },
   }
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        imports: [RouterTestingModule],
-        providers: [
-          WINDOW_PROVIDERS,
-          GoogleTagManagerService,
-          PlatformInfoService,
-          ErrorHandlerService,
-          SnackbarService,
-          MatSnackBar,
-          MatDialog,
-          Overlay,
-        ]
-      });
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [RouterTestingModule],
+      providers: [
+        WINDOW_PROVIDERS,
+        GoogleTagManagerService,
+        PlatformInfoService,
+        ErrorHandlerService,
+        SnackbarService,
+        MatSnackBar,
+        MatDialog,
+        Overlay,
+      ],
+    })
     browserGlobals.windowRef().dataLayer = []
   }))
 
@@ -79,4 +78,4 @@ describe('GoogleTagManagerService', () => {
       })
     }
   ))
-});
+})
