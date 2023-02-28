@@ -394,7 +394,6 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   navigateTo(val: string): void {
-    console.log('navigateeee!!')
     if (val.indexOf('orcid.org/my-orcid')) {
       this._router.navigate(['/my-orcid'])
     } else {

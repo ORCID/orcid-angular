@@ -10,6 +10,7 @@ import { UserService } from './core'
 import { GoogleAnalyticsService } from './core/google-analytics/google-analytics.service'
 import { ZendeskService } from './core/zendesk/zendesk.service'
 import { GoogleTagManagerService } from './core/google-tag-manager/google-tag-manager.service'
+import { finishPerformanceMeasurement, reportNavigationStart } from './analytics-utils'
 
 @Component({
   selector: 'app-root',
@@ -73,15 +74,15 @@ export class AppComponent {
 
     _router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
-        _googleAnalytics.reportNavigationStart(event.url)
-        _googleTagManagerService.reportNavigationStart(event.url)
+        reportNavigationStart(event.url)
         this.currentRoute = event.url
       }
       if (event instanceof NavigationEnd) {
-        _googleAnalytics.reportNavigationEnd(event.url)
+        const duration = finishPerformanceMeasurement(event.url);
+        _googleAnalytics.reportNavigationEnd(event.url, duration)
         _googleAnalytics.reportPageView(event.urlAfterRedirects)
         _googleTagManagerService
-          .reportNavigationEnd(event.url)
+          .reportNavigationEnd(event.url, duration)
           .subscribe(() => {
             _googleTagManagerService.reportPageView(event.urlAfterRedirects)
           })

@@ -5,12 +5,7 @@ import { RequestInfoForm } from 'src/app/types'
 import { environment } from 'src/environments/environment'
 // @ts-ignore
 import Gtag from 'gtag.js'
-import {
-  buildClientString,
-  finishPerformanceMeasurement,
-  removeUrlParameters,
-  startPerformanceMeasurement,
-} from '../../analytics-utils'
+import { buildClientString, removeUrlParameters } from '../../analytics-utils'
 
 @Injectable({
   providedIn: 'root',
@@ -37,12 +32,7 @@ export class GoogleAnalyticsService {
     })
   }
 
-  reportNavigationStart(url: string) {
-    startPerformanceMeasurement(url, this.window)
-  }
-
-  reportNavigationEnd(url: string) {
-    const duration = finishPerformanceMeasurement(url, this.window)
+  reportNavigationEnd(url: string, duration: number | void) {
     if (duration) {
       if (environment.debugger) {
         console.debug(`GA - Took ${duration} to load ${url}`)
