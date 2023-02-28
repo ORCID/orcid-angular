@@ -19,6 +19,7 @@ import {
   TrustedIndividuals,
 } from 'src/app/types/trusted-individuals.endpoint'
 import { environment } from 'src/environments/environment'
+import { GoogleTagManagerService } from '../../../core/google-tag-manager/google-tag-manager.service'
 
 @Component({
   selector: 'app-form-authorize',
@@ -42,6 +43,7 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
     private _user: UserService,
     private _oauth: OauthService,
     private _gtag: GoogleAnalyticsService,
+    private _googleTagManagerService: GoogleTagManagerService,
     private _signingService: SignInService,
     private _platformInfo: PlatformInfoService,
     private _router: Router,
@@ -92,36 +94,45 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
 
       if (value) {
         analyticsReports.push(
-          this._gtag
-            .reportEvent(`Authorize`, 'RegGrowth', this.oauthRequest)
-            .pipe(
-              catchError((err) =>
-                this._errorHandler.handleError(
-                  err,
-                  ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
-                )
-              )
-            )
+          this._gtag.reportEvent(`Authorize`, 'RegGrowth', this.oauthRequest)
+        )
+        analyticsReports.push(
+          this._googleTagManagerService.reportEvent(
+            `Authorize`,
+            'RegGrowth',
+            this.oauthRequest
+          )
         )
       } else {
         // Create a GA for deny access
         analyticsReports.push(
-          this._gtag
-            .reportEvent(`Authorize_Deny`, 'Disengagement', this.oauthRequest)
-            .pipe(
-              catchError((err) =>
-                this._errorHandler.handleError(
-                  err,
-                  ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
-                )
-              )
-            )
+          this._gtag.reportEvent(
+            `Authorize_Deny`,
+            'Disengagement',
+            this.oauthRequest
+          )
+        )
+        analyticsReports.push(
+          this._googleTagManagerService.reportEvent(
+            `Authorize_Deny`,
+            'Disengagement',
+            this.oauthRequest
+          )
         )
       }
-      forkJoin(analyticsReports).subscribe(
-        () => (this.window as any).outOfRouterNavigation(data.redirectUrl),
-        () => (this.window as any).outOfRouterNavigation(data.redirectUrl)
-      )
+      forkJoin(analyticsReports)
+        .pipe(
+          catchError((err) =>
+            this._errorHandler.handleError(
+              err,
+              ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
+            )
+          )
+        )
+        .subscribe(
+          () => (this.window as any).outOfRouterNavigation(data.redirectUrl),
+          () => (this.window as any).outOfRouterNavigation(data.redirectUrl)
+        )
     })
   }
 

@@ -1,11 +1,16 @@
 import { Inject, Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { WINDOW } from 'src/app/cdk/window'
-import { PerformanceMarks } from 'src/app/constants'
 import { RequestInfoForm } from 'src/app/types'
 import { environment } from 'src/environments/environment'
 // @ts-ignore
 import Gtag from 'gtag.js'
+import {
+  buildClientString,
+  finishPerformanceMeasurement,
+  removeUrlParameters,
+  startPerformanceMeasurement,
+} from '../../analytics-utils'
 
 @Injectable({
   providedIn: 'root',
@@ -33,17 +38,17 @@ export class GoogleAnalyticsService {
   }
 
   reportNavigationStart(url: string) {
-    this.startPerformanceMeasurement(url)
+    startPerformanceMeasurement(url, this.window)
   }
 
   reportNavigationEnd(url: string) {
-    const duration = this.finishPerformanceMeasurement(url)
+    const duration = finishPerformanceMeasurement(url, this.window)
     if (duration) {
       if (environment.debugger) {
         console.debug(`GA - Took ${duration} to load ${url}`)
       }
       this.gtag('event', 'timing_complete', {
-        name: this.removeUrlParameters(url),
+        name: removeUrlParameters(url),
         value: Math.round(duration),
         event_category: 'angular_navigation',
         page_location: url,
@@ -71,7 +76,7 @@ fatal: "${fatal}"
   ): Observable<void> {
     // if has RequestInfoForm add the client string as event_label
     if (typeof event_label !== 'string') {
-      event_label = 'OAuth ' + this.buildClientString(event_label)
+      event_label = 'OAuth ' + buildClientString(event_label)
     }
     if (environment.debugger) {
       console.debug(`GA - Event /${event_category}/${action}/${event_label}/`)
@@ -80,45 +85,6 @@ fatal: "${fatal}"
       event_category,
       event_label,
     })
-  }
-
-  removeUrlParameters(url: string) {
-    return url.split('?')[0]
-  }
-
-  private startPerformanceMeasurement(url: string): void {
-    if (this.window.performance) {
-      this.window.performance.mark(PerformanceMarks.navigationStartPrefix + url)
-    }
-  }
-
-  private finishPerformanceMeasurement(url: string): number | void {
-    if (this.window.performance) {
-      this.window.performance.mark(PerformanceMarks.navigationEndPrefix + url)
-      let timeForNavigation
-      this.window.performance.measure(
-        url,
-        PerformanceMarks.navigationStartPrefix + url,
-        PerformanceMarks.navigationEndPrefix + url
-      )
-      this.window.performance.getEntriesByName(url).forEach((value) => {
-        timeForNavigation = value.duration
-      })
-      this.clearPerformanceMarks(url)
-      return timeForNavigation
-    }
-  }
-
-  private clearPerformanceMarks(url: string) {
-    if (this.window.performance) {
-      this.window.performance.clearMarks(
-        PerformanceMarks.navigationStartPrefix + url
-      )
-      this.window.performance.clearMarks(
-        PerformanceMarks.navigationEndPrefix + url
-      )
-      this.window.performance.clearMeasures(url)
-    }
   }
 
   // see https://medium.com/wizdm-genesys/using-gtag-in-angular-b99a10025fcd
@@ -148,9 +114,5 @@ fatal: "${fatal}"
         observer.error(e)
       }
     })
-  }
-
-  buildClientString(request: RequestInfoForm) {
-    return request.memberName + ' - ' + request.clientName
   }
 }

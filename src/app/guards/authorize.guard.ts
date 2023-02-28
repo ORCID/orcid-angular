@@ -6,7 +6,7 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router'
-import { NEVER, Observable, of } from 'rxjs'
+import { forkJoin, NEVER, Observable, of } from 'rxjs'
 import { catchError, map, switchMap } from 'rxjs/operators'
 
 import { PlatformInfoService } from '../cdk/platform-info'
@@ -16,6 +16,7 @@ import { ErrorHandlerService } from '../core/error-handler/error-handler.service
 import { GoogleAnalyticsService } from '../core/google-analytics/google-analytics.service'
 import { ERROR_REPORT } from '../errors'
 import { RequestInfoForm } from '../types'
+import { GoogleTagManagerService } from '../core/google-tag-manager/google-tag-manager.service'
 
 @Injectable({
   providedIn: 'root',
@@ -27,6 +28,7 @@ export class AuthorizeGuard implements CanActivateChild {
     private _platform: PlatformInfoService,
     @Inject(WINDOW) private window: Window,
     private _gtag: GoogleAnalyticsService,
+    private _googleTagManagerService: GoogleTagManagerService,
     private _errorHandler: ErrorHandlerService
   ) {}
   canActivateChild(
@@ -71,16 +73,25 @@ export class AuthorizeGuard implements CanActivateChild {
   }
 
   reportAlreadyAuthorize(request: RequestInfoForm) {
-    return this._gtag
-      .reportEvent(`Reauthorize`, 'RegGrowth', request)
-      .pipe(
-        catchError((err) =>
-          this._errorHandler.handleError(
-            err,
-            ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
-          )
+    const analyticsReports: Observable<void>[] = []
+    analyticsReports.push(
+      this._gtag.reportEvent(`Reauthorize`, 'RegGrowth', request)
+    )
+    analyticsReports.push(
+      this._googleTagManagerService.reportEvent(
+        `Reauthorize`,
+        'RegGrowth',
+        request
+      )
+    )
+    return forkJoin(analyticsReports).pipe(
+      catchError((err) =>
+        this._errorHandler.handleError(
+          err,
+          ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
         )
       )
+    )
   }
 
   private redirectToLoginPage(
