@@ -150,15 +150,7 @@ export class GoogleTagManagerService {
     },
   }
 
-  reportNavigationStart(url: string) {
-    startPerformanceMeasurement(url, this.browserGlobals.windowRef())
-  }
-
-  reportNavigationEnd(url: string): Observable<void> {
-    const duration = finishPerformanceMeasurement(
-      url,
-      this.browserGlobals.windowRef()
-    )
+  reportNavigationEnd(url: string, duration: number | void): Observable<void> {
     if (duration) {
       if (environment.debugger) {
         console.debug(`GTM - Took ${duration} to load ${url}`)
