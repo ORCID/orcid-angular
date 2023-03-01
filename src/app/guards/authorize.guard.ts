@@ -80,7 +80,6 @@ export class AuthorizeGuard implements CanActivateChild {
     analyticsReports.push(
       this._googleTagManagerService.reportEvent(
         `Reauthorize`,
-        'RegGrowth',
         request
       )
     )

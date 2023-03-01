@@ -53,7 +53,6 @@ export class ThirdPartySigninCompletedGuard implements CanActivateChild {
         analyticsReports.push(
           this._googleTagManagerService.reportEvent(
             'Sign-In',
-            'RegGrowth',
             requestInfoForm || 'Website'
           )
         )

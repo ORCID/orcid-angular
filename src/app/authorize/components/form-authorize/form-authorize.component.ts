@@ -99,7 +99,6 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
         analyticsReports.push(
           this._googleTagManagerService.reportEvent(
             `Authorize`,
-            'RegGrowth',
             this.oauthRequest
           )
         )
@@ -115,7 +114,6 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
         analyticsReports.push(
           this._googleTagManagerService.reportEvent(
             `Authorize_Deny`,
-            'Disengagement',
             this.oauthRequest
           )
         )

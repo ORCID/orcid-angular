@@ -172,7 +172,6 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             analyticsReports.push(
               this._googleTagManagerService.reportEvent(
                 'New-Registration',
-                'RegGrowth',
                 this.requestInfoForm || 'Website'
               )
             )
