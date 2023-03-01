@@ -179,11 +179,11 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
             const analyticsReports: Observable<void>[] = []
 
             analyticsReports.push(
-              this._gtag.reportEvent('RegGrowth', 'Sign-In', 'Website')
+              this._gtag
+                .reportEvent('Sign-In', 'RegGrowth', 'Website')
             )
             analyticsReports.push(
               this._googleTagManagerService.reportEvent(
-                'RegGrowth',
                 'Sign-In',
                 'Website'
               )
@@ -336,7 +336,6 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
         )
         analyticsReports.push(
           this._googleTagManagerService.reportEvent(
-            'RegGrowth',
             'Sign-In',
             requestInfoForm
           )
