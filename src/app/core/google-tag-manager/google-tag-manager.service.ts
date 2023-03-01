@@ -110,23 +110,20 @@ export class GoogleTagManagerService {
 
   public reportEvent(
     event: string,
-    category: string,
     label: RequestInfoForm | string
   ): Observable<void> {
     let clientId
     // if has RequestInfoForm add the client string as event_label
     if (typeof label !== 'string') {
       label = 'OAuth ' + buildClientString(label)
-      if (typeof label)
-        clientId = (label as unknown as RequestInfoForm).clientId
+      clientId = (label as unknown as RequestInfoForm).clientId
     }
     if (environment.debugger) {
-      console.debug(`GTM - Event /${category}/${event}/${label}/`)
+      console.debug(`GTM - Event /${event}/${label}/`)
     }
 
     let tagItem = {
       event,
-      category,
       label,
     } as ItemGTM
     if (clientId) {
@@ -135,7 +132,6 @@ export class GoogleTagManagerService {
 
     return this.pushTag({
       event,
-      category,
       label,
       clientId,
     })
@@ -158,7 +154,6 @@ export class GoogleTagManagerService {
 
       return this.pushTag({
         event: 'timing_complete',
-        category: 'angular_navigation',
         orcid: removeUrlParameters(url),
         duration: Math.round(duration),
         pageName: url,

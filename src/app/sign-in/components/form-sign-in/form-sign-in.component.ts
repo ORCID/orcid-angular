@@ -179,14 +179,10 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
             const analyticsReports: Observable<void>[] = []
 
             analyticsReports.push(
-              this._gtag.reportEvent('RegGrowth', 'Sign-In', 'Website')
+              this._gtag.reportEvent('Sign-In', 'RegGrowth', 'Website')
             )
             analyticsReports.push(
-              this._googleTagManagerService.reportEvent(
-                'RegGrowth',
-                'Sign-In',
-                'Website'
-              )
+              this._googleTagManagerService.reportEvent('Sign-In', 'Website')
             )
             forkJoin(analyticsReports)
               .pipe(
@@ -335,11 +331,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
           this._gtag.reportEvent('Sign-In', 'RegGrowth', requestInfoForm)
         )
         analyticsReports.push(
-          this._googleTagManagerService.reportEvent(
-            'RegGrowth',
-            'Sign-In',
-            requestInfoForm
-          )
+          this._googleTagManagerService.reportEvent('Sign-In', requestInfoForm)
         )
 
         forkJoin(analyticsReports)
