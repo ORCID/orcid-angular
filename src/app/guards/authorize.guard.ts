@@ -78,10 +78,7 @@ export class AuthorizeGuard implements CanActivateChild {
       this._gtag.reportEvent(`Reauthorize`, 'RegGrowth', request)
     )
     analyticsReports.push(
-      this._googleTagManagerService.reportEvent(
-        `Reauthorize`,
-        request
-      )
+      this._googleTagManagerService.reportEvent(`Reauthorize`, request)
     )
     return forkJoin(analyticsReports).pipe(
       catchError((err) =>
