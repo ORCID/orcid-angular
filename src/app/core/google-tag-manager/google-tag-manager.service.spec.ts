@@ -47,7 +47,6 @@ describe('GoogleTagManagerService', () => {
     }
   ))
 
-
   it('should be able to add script element', inject(
     [GoogleTagManagerService],
     (service: GoogleTagManagerService) => {
