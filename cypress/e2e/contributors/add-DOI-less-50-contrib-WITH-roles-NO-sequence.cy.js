@@ -18,7 +18,9 @@ describe('Add DOI with less than 50 contributors WITH roles NO sequences', async
         cy.get('#cy-menu-add-works').click()
       })
       cy.get('#cy-add-work-doi').click({ force: true })
-      cy.get('#external-id-input').clear().type(userData.cyRecordOwner.doi_qase42)
+      cy.get('#external-id-input')
+        .clear()
+        .type(userData.cyRecordOwner.doi_qase42)
       //retrieve data
       cy.get('[id^=cy-retrieve-work-details]').click()
       cy.wait(4000)
@@ -27,9 +29,12 @@ describe('Add DOI with less than 50 contributors WITH roles NO sequences', async
       cy.get('#save-work-button').click({ force: true })
       cy.wait(2000)
       //Verify work was added
-      cy.get('app-work-stack').should('contain', userData.cyRecordOwner.doi_qase42)
+      cy.get('app-work-stack').should(
+        'contain',
+        userData.cyRecordOwner.doi_qase42
+      )
     })
-  )//end of qase tag
+  ) //end of qase tag
 
   after(() => {
     //log out

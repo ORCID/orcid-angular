@@ -12,21 +12,25 @@ describe('Add DOI with less than 50 contributors WITH roles AND sequences', asyn
   qase(
     '41',
     it('Add DOI with less than 50 contributors WITH roles AND sequences', function () {
-
       cy.get('#cy-works').within(($myPanel) => {
         cy.get('#cy-menu-add-works').click()
       })
       cy.get('#cy-add-work-doi').click({ force: true })
-      cy.get('#external-id-input').clear().type(userData.cyRecordOwner.doi_qase41)
+      cy.get('#external-id-input')
+        .clear()
+        .type(userData.cyRecordOwner.doi_qase41)
       cy.get('[id^=cy-retrieve-work-details]').click()
-      cy.wait(4000)//need to wait for back end
-      
+      cy.wait(4000) //need to wait for back end
+
       //save entry
       cy.get('#save-work-button').click({ force: true })
       cy.wait(2000)
-     
+
       //Verify work was added
-      cy.get('app-work-stack').should('contain', userData.cyRecordOwner.doi_qase41)
+      cy.get('app-work-stack').should(
+        'contain',
+        userData.cyRecordOwner.doi_qase41
+      )
     })
   ) //end of qase tag
 

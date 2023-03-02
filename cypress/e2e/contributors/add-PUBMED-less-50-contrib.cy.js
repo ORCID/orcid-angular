@@ -14,21 +14,25 @@ describe('Add PUBMED ID with less than 50 contributors', async function () {
   qase(
     '44',
     it('Add PUBMED ID with less than 50 contributors', function () {
-
       cy.get('#cy-works').within(($myPanel) => {
         cy.get('#cy-menu-add-works').click()
       })
       cy.get('#cy-add-work-pubmed').click({ force: true })
-      cy.get('#external-id-input').clear().type(pubmedURL + userData.cyRecordOwner.pubmed_qase44 +'/')
+      cy.get('#external-id-input')
+        .clear()
+        .type(pubmedURL + userData.cyRecordOwner.pubmed_qase44 + '/')
       cy.get('[id^=cy-retrieve-work-details]').click()
-      cy.wait(4000)//need to wait for back end
-      
+      cy.wait(4000) //need to wait for back end
+
       //save entry
       cy.get('#save-work-button').click({ force: true })
       cy.wait(2000)
-     
+
       //Verify work was added
-      cy.get('app-work-stack').should('contain', userData.cyRecordOwner.pubmed_qase44)
+      cy.get('app-work-stack').should(
+        'contain',
+        userData.cyRecordOwner.pubmed_qase44
+      )
     })
   ) //end of qase tag
 
