@@ -11,7 +11,7 @@ export class MatPaginatorIntlImplementation extends MatPaginatorIntl {
   nextPageLabel = $localize`:@@ngOrcid.material.nextPageLabel:Next page`
   previousPageLabel = $localize`:@@ngOrcid.material.previousPageLabel:Previous page`
   ofLabel = $localize`:@@ngOrcid.material.of:of`
-  pageLabel =  $localize`:@@ngOrcid.material.page:Page`
+  pageLabel = $localize`:@@ngOrcid.material.page:Page`
 
   /** The following function was taken from
   / https://github.com/angular/components/blob/dd37ca57406412c1ebeaec56cab5a517f796d4b9/src/material/paginator/paginator-intl.ts

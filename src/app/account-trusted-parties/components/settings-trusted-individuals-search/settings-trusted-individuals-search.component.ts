@@ -36,7 +36,8 @@ import { DialogAddTrustedIndividualsComponent } from '../dialog-add-trusted-indi
   ],
 })
 export class SettingsTrustedIndividualsSearchComponent
-  implements OnInit, OnDestroy {
+  implements OnInit, OnDestroy
+{
   $destroy = new Subject()
   searchDone = false
   displayedColumns = ['trustedIndividuals', 'orcid', 'actions']

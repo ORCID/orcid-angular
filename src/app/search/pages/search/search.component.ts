@@ -61,7 +61,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     this._robotsMetadata.restoreEnvironmentRobotsConfig()
   }
 
-  changePage(event: PageEvent) {    
+  changePage(event: PageEvent) {
     this.pageIndex = event.pageIndex
     this.pageSize = event.pageSize
 
