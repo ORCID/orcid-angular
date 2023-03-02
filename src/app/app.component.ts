@@ -1,14 +1,21 @@
 import { Component, HostBinding, HostListener, Inject } from '@angular/core'
 import { NavigationEnd, NavigationStart, Router } from '@angular/router'
-import { tap } from 'rxjs/operators'
+import { catchError, tap } from 'rxjs/operators'
 
 import { PlatformInfo } from './cdk/platform-info'
 import { PlatformInfoService } from './cdk/platform-info/platform-info.service'
 import { WINDOW } from './cdk/window'
 import { HeadlessOnOauthRoutes } from './constants'
 import { UserService } from './core'
-import { GoogleAnalyticsService } from './core/google-analytics/google-analytics.service'
+import { GoogleUniversalAnalyticsService } from './core/google-analytics/google-universal-analytics.service'
 import { ZendeskService } from './core/zendesk/zendesk.service'
+import { GoogleTagManagerService } from './core/google-tag-manager/google-tag-manager.service'
+import {
+  finishPerformanceMeasurement,
+  reportNavigationStart,
+} from './analytics-utils'
+import { ERROR_REPORT } from './errors'
+import { ErrorHandlerService } from './core/error-handler/error-handler.service'
 
 @Component({
   selector: 'app-root',
@@ -35,9 +42,11 @@ export class AppComponent {
   constructor(
     _platformInfo: PlatformInfoService,
     _router: Router,
-    _googleAnalytics: GoogleAnalyticsService,
+    _googleAnalytics: GoogleUniversalAnalyticsService,
+    _googleTagManagerService: GoogleTagManagerService,
     _zendesk: ZendeskService,
     private _userService: UserService,
+    private _errorHandler: ErrorHandlerService,
     @Inject(WINDOW) private _window: Window
   ) {
     _platformInfo
@@ -71,12 +80,37 @@ export class AppComponent {
 
     _router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
-        _googleAnalytics.reportNavigationStart(event.url)
+        reportNavigationStart(event.url)
         this.currentRoute = event.url
       }
       if (event instanceof NavigationEnd) {
-        _googleAnalytics.reportNavigationEnd(event.url)
-        _googleAnalytics.reportPageView(event.urlAfterRedirects)
+        const duration = finishPerformanceMeasurement(event.url)
+        _googleTagManagerService
+          .addGtmToDom()
+          .pipe(
+            catchError((err) =>
+              this._errorHandler.handleError(
+                err,
+                ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
+              )
+            )
+          )
+          .subscribe((response) => {
+            if (response) {
+              _googleAnalytics
+                .reportNavigationEnd(event.url, duration)
+                .subscribe(() => {
+                  _googleAnalytics.reportPageView(event.urlAfterRedirects)
+                })
+              _googleTagManagerService
+                .reportNavigationEnd(event.url, duration)
+                .subscribe(() => {
+                  _googleTagManagerService.reportPageView(
+                    event.urlAfterRedirects
+                  )
+                })
+            }
+          })
       }
     })
   }

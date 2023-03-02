@@ -2,12 +2,13 @@ import { Component, OnDestroy, OnInit, Optional } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { SearchService } from '../../../core/search/search.service'
 import { tap, switchMap, retry, catchError } from 'rxjs/operators'
-import { PageEvent } from '@angular/material/paginator'
+import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator'
 import { SearchResults } from 'src/app/types'
 import { SearchParameters } from 'src/app/types'
 import { Meta } from '@angular/platform-browser'
 import { EMPTY } from 'rxjs'
 import { RobotsMetaTagsService } from 'src/app/core/robots-meta-tags/robots-meta-tags.service'
+import { LiveAnnouncer } from '@angular/cdk/a11y'
 
 @Component({
   selector: 'app-search',
@@ -22,13 +23,16 @@ export class SearchComponent implements OnInit, OnDestroy {
   loadingNewResults = false
   ariaLabelPaginator = $localize`:@@search.paginator:paginator`
   ariaLabelBottomPaginator = $localize`:@@search.bottomPaginator:bottom paginator`
+  paginatorLabel: string
 
   constructor(
     route: ActivatedRoute,
     private _searchService: SearchService,
     @Optional() private router: Router,
     meta: Meta,
-    private _robotsMetadata: RobotsMetaTagsService
+    private _robotsMetadata: RobotsMetaTagsService,
+    private _liveAnnouncer: LiveAnnouncer,
+    private _matPaginatorIntl: MatPaginatorIntl
   ) {
     this._robotsMetadata.disallowRobots()
     route.queryParams
@@ -60,6 +64,13 @@ export class SearchComponent implements OnInit, OnDestroy {
   changePage(event: PageEvent) {
     this.pageIndex = event.pageIndex
     this.pageSize = event.pageSize
+
+    this.paginatorLabel = this._matPaginatorIntl.getRangeLabel(
+      event.pageIndex,
+      event.pageSize,
+      event.length
+    )
+    this._liveAnnouncer.announce(this.paginatorLabel)
 
     this.router.navigate(['/orcid-search/search'], {
       queryParams: {

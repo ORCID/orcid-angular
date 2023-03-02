@@ -1,6 +1,7 @@
 import { ComponentType } from '@angular/cdk/portal'
 import {
   Component,
+  ElementRef,
   EventEmitter,
   Input,
   OnInit,
@@ -11,7 +12,7 @@ import {
 import { UntypedFormGroup } from '@angular/forms'
 import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox'
 import { MatDialog } from '@angular/material/dialog'
-import { PageEvent } from '@angular/material/paginator'
+import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator'
 import { isEmpty } from 'lodash'
 import { Observable, Subject } from 'rxjs'
 import { first } from 'rxjs/operators'
@@ -47,6 +48,7 @@ import { WorkExternalIdModalComponent } from './modals/work-external-id-modal/wo
 import { WorkBibtexModalComponent } from './modals/work-bibtex-modal/work-bibtex-modal.component'
 import { ModalCombineWorksWithSelectorComponent } from '../work/modals/modal-combine-works-with-selector/modal-combine-works-with-selector.component'
 import { GroupingSuggestions } from 'src/app/types/works.endpoint'
+import { LiveAnnouncer } from '@angular/cdk/a11y'
 
 @Component({
   selector: 'app-work-stack-group',
@@ -57,13 +59,14 @@ import { GroupingSuggestions } from 'src/app/types/works.endpoint'
   ],
 })
 export class WorkStackGroupComponent implements OnInit {
+  paginatorLabel
   showManageSimilarWorks = false
   defaultPageSize = DEFAULT_PAGE_SIZE
   regionWorks = $localize`:@@shared.works:Works`
   labelAddButton = $localize`:@@shared.addWork:Add Work`
   labelSortButton = $localize`:@@shared.sortWorks:Sort Works`
   labelSelectAll = $localize`:@@share.selectAllWorks:Select all Works on this page`
-
+  paginationLength = 0
   paginationLoading = true
   @Input() userInfo: UserInfo
   @Input() isPublicRecord: string
@@ -133,7 +136,9 @@ export class WorkStackGroupComponent implements OnInit {
     private _dialog: MatDialog,
     private _platform: PlatformInfoService,
     private _record: RecordService,
-    private _works: RecordWorksService
+    private _works: RecordWorksService,
+    private _matPaginatorIntl: MatPaginatorIntl,
+    private _liveAnnouncer: LiveAnnouncer
   ) {}
 
   ngOnInit(): void {
@@ -171,10 +176,18 @@ export class WorkStackGroupComponent implements OnInit {
   }
 
   pageEvent(event: PageEvent) {
+    this.paginationLength = event.length
     this.paginationLoading = true
     this.userRecordContext.offset = event.pageIndex * event.pageSize
     this.userRecordContext.pageSize = event.pageSize
     this.userRecordContext.publicRecordId = this.isPublicRecord
+    this.paginatorLabel = this._matPaginatorIntl.getRangeLabel(
+      event.pageIndex,
+      event.pageSize,
+      event.length
+    )
+    this._liveAnnouncer.announce(this.paginatorLabel)
+
     this.loadWorks()
   }
 

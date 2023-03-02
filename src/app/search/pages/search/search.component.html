@@ -18,8 +18,8 @@
         [length]="searchResults['num-found']"
         (page)="changePage($event)"
         [attr.aria-label]="ariaLabelPaginator"
-        role="navigation"
       ></mat-paginator>
+
       <mat-progress-bar
         mode="indeterminate"
         *ngIf="loadingNewResults"

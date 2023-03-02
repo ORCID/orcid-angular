@@ -3,15 +3,34 @@
 import userData from '../../fixtures/contributors-fixtures/contributors-users.fixture.json'
 import { qase } from 'cypress-qase-reporter/dist/mocha'
 
-describe('Other ppl contributions - add contributor with credit role', async function () {
+describe('API 3.0 - GET work added manually', async function () {
+  const curlReadAllWorks =
+    "curl -i -H 'Accept: application/json' -H 'Authorization: Bearer " +
+    userData.cyRecordOwner.clientBearer +
+    "' -X GET '" +
+    Cypress.env('membersAPI_URL') +
+    userData.cyRecordOwner.oid +
+    Cypress.env('membersAPI_allWorksEndpoint') +
+    "'"
+
+  const curlReadSingleWork =
+    "curl -i -H 'Accept: application/json' -H 'Authorization: Bearer " +
+    userData.cyRecordOwner.clientBearer +
+    "' -X GET '" +
+    Cypress.env('membersAPI_URL') +
+    userData.cyRecordOwner.oid +
+    Cypress.env('membersAPI_workEndpoint') +
+    '/' //here append "{PUTCODE}" + "'"
+
   before(() => {
     cy.visit(Cypress.env('signInURL'))
     cy.signin(userData.cyRecordOwner)
   })
 
   qase(
-    '3',
-    it('Add other contributor with credit role to a work added manually', function () {
+    '35',
+    it('API 3.0 - GET work added manually - credit role', function () {
+      let putCode
       const workType = 'Book'
       const title = 'Cypress test contributors'
       const otherContributorName = 'Michael Jordan'
@@ -54,6 +73,31 @@ describe('Other ppl contributions - add contributor with credit role', async fun
 
       //verify contributor is displayed in details section for this work
       cy.get('app-display-attribute').contains(otherContributorName)
+
+      //Read works to grab putcode
+      //There should only be one work
+      cy.exec(curlReadAllWorks).then((response) => {
+        //verify curl was executed successfully
+        expect(response.code).to.eq(0)
+        //verify http response status is successful: 200
+        expect(response.stdout).to.contain('HTTP/2 200')
+        //grab put code
+        const responseString = response.stdout
+        const putcodeIndex = responseString.indexOf('put-code":')
+        const putCodeStartPosition = putcodeIndex + 10 // +length
+        const putCodeEndPosition = responseString.indexOf(',"created-date')
+        putCode = responseString.substring(
+          putCodeStartPosition,
+          putCodeEndPosition
+        )
+        cy.log('putCode found:' + putCode)
+        cy.exec(curlReadSingleWork + putCode + "'").then((singleWorkResp) => {
+          //verify curl was executed successfully
+          expect(singleWorkResp.code).to.eq(0)
+          //verify http response status is successful: 200
+          expect(singleWorkResp.stdout).to.contain('HTTP/2 200')
+        })
+      })
     })
   ) //end of qase tag
 

@@ -29,7 +29,7 @@ describe('Other ppl contributions - add contributor with multiple credit roles',
       cy.get('#title-input').clear().type(title)
 
       //add someone else as contributor with credit role
-      cy.get('#cy-add-another-contributor').click()
+      cy.get('.cy-add-another-contributor').click()
       cy.get('app-work-contributors').within(($section) => {
         cy.get('[formcontrolname="creditName"]')
           .clear()
@@ -42,7 +42,7 @@ describe('Other ppl contributions - add contributor with multiple credit roles',
         cy.wait(1000)
       })
       cy.get('app-work-contributors').within(($section) => {
-        cy.get('[id^=cy-add-another-role]').click()
+        cy.get('.cy-add-another-role').click()
         cy.get('[formcontrolname="role"]')
           .contains('No Specified Role')
           .click({ force: true })

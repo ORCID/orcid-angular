@@ -35,7 +35,7 @@ describe('Add other contributor while editing work', async function () {
         cy.get('button[aria-label*="Edit work"]').click()
       })
       //add someone else as contributor with credit role
-      cy.get('#cy-add-another-contributor').click()
+      cy.get('.cy-add-another-contributor').click()
       cy.get('app-work-contributors').within(($section) => {
         cy.get('[formcontrolname="creditName"]')
           .clear()
