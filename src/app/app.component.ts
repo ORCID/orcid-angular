@@ -85,7 +85,8 @@ export class AppComponent {
       }
       if (event instanceof NavigationEnd) {
         const duration = finishPerformanceMeasurement(event.url)
-        _googleTagManagerService.addGtmToDom()
+        _googleTagManagerService
+          .addGtmToDom()
           .pipe(
             catchError((err) =>
               this._errorHandler.handleError(
@@ -104,10 +105,12 @@ export class AppComponent {
               _googleTagManagerService
                 .reportNavigationEnd(event.url, duration)
                 .subscribe(() => {
-                  _googleTagManagerService.reportPageView(event.urlAfterRedirects)
+                  _googleTagManagerService.reportPageView(
+                    event.urlAfterRedirects
+                  )
                 })
             }
-        })
+          })
       }
     })
   }

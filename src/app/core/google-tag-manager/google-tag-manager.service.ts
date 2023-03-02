@@ -5,7 +5,8 @@ import { BehaviorSubject, fromEvent, Observable, of, throwError } from 'rxjs'
 import {
   browserGlobals,
   buildClientString,
-  finishPerformanceMeasurement, pushOnDataLayer,
+  finishPerformanceMeasurement,
+  pushOnDataLayer,
   removeUrlParameters,
   startPerformanceMeasurement,
 } from '../../analytics-utils'

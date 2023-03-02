@@ -14,7 +14,7 @@ export type ItemGTM = {
     page_location?: string
   }
   page?: {
-    path?: string,
+    path?: string
     location?: string
   }
 }

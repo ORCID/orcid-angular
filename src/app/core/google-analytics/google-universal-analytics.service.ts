@@ -2,15 +2,18 @@ import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { RequestInfoForm } from 'src/app/types'
 import { environment } from 'src/environments/environment'
-import { buildClientString, pushOnDataLayer, removeUrlParameters } from '../../analytics-utils'
+import {
+  buildClientString,
+  pushOnDataLayer,
+  removeUrlParameters,
+} from '../../analytics-utils'
 import { ItemGTM } from '../../types/item_gtm'
 
 @Injectable({
   providedIn: 'root',
 })
 export class GoogleUniversalAnalyticsService {
-
-  constructor() { }
+  constructor() {}
 
   reportPageView(url: string) {
     if (environment.debugger) {
@@ -21,14 +24,14 @@ export class GoogleUniversalAnalyticsService {
       event: 'pageview',
       page: {
         path: url,
-        location: window.location.href
-      }
+        location: window.location.href,
+      },
     }
 
     return this.pushTag(item).subscribe()
   }
 
-  reportNavigationEnd(url: string, duration: number | void): Observable<void>  {
+  reportNavigationEnd(url: string, duration: number | void): Observable<void> {
     if (duration) {
       if (environment.debugger) {
         console.debug(`GA - Took ${duration} to load ${url}`)
@@ -37,11 +40,11 @@ export class GoogleUniversalAnalyticsService {
       const item: ItemGTM = {
         event: 'timing_complete',
         eventProps: {
-            name: removeUrlParameters(url),
-            value: Math.round(duration),
-            category: 'angular_navigation',
-            page_location: url,
-        }
+          name: removeUrlParameters(url),
+          value: Math.round(duration),
+          category: 'angular_navigation',
+          page_location: url,
+        },
       }
 
       return this.pushTag(item)
@@ -75,7 +78,7 @@ fatal: "${fatal}"
         category: event_category,
         action: action,
         label: event_label,
-      }
+      },
     }
 
     return this.pushTag(item)
@@ -83,9 +86,9 @@ fatal: "${fatal}"
 
   public pushTag(item: ItemGTM): Observable<void> {
     return new Observable<void>((subscriber) => {
-        pushOnDataLayer(item)
-        subscriber.next()
-        subscriber.complete()
+      pushOnDataLayer(item)
+      subscriber.next()
+      subscriber.complete()
     })
   }
 }
