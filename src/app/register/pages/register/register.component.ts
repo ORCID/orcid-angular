@@ -19,7 +19,7 @@ import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { isRedirectToTheAuthorizationPage } from 'src/app/constants'
 import { UserService } from 'src/app/core'
-import { GoogleAnalyticsService } from 'src/app/core/google-analytics/google-analytics.service'
+import { GoogleUniversalAnalyticsService } from 'src/app/core/google-analytics/google-universal-analytics.service'
 import { RegisterService } from 'src/app/core/register/register.service'
 import { RequestInfoForm } from 'src/app/types'
 import {
@@ -67,7 +67,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     private _register: RegisterService,
     private _dialog: MatDialog,
     @Inject(WINDOW) private window: Window,
-    private _gtag: GoogleAnalyticsService,
+    private _gtag: GoogleUniversalAnalyticsService,
     private _googleTagManagerService: GoogleTagManagerService,
     private _user: UserService,
     private _router: Router,

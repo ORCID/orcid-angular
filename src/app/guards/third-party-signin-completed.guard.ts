@@ -11,7 +11,7 @@ import { catchError, first, map } from 'rxjs/operators'
 
 import { WINDOW } from '../cdk/window'
 import { UserService } from '../core'
-import { GoogleAnalyticsService } from '../core/google-analytics/google-analytics.service'
+import { GoogleUniversalAnalyticsService } from '../core/google-analytics/google-universal-analytics.service'
 import { RequestInfoForm } from '../types'
 import { GoogleTagManagerService } from '../core/google-tag-manager/google-tag-manager.service'
 import { ERROR_REPORT } from '../errors'
@@ -24,7 +24,7 @@ export class ThirdPartySigninCompletedGuard implements CanActivateChild {
   constructor(
     private _router: Router,
     @Inject(WINDOW) private window: Window,
-    private _analytics: GoogleAnalyticsService,
+    private _analytics: GoogleUniversalAnalyticsService,
     private _googleTagManagerService: GoogleTagManagerService,
     private _errorHandler: ErrorHandlerService,
     private _user: UserService

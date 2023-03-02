@@ -24,7 +24,7 @@ import { OauthParameters, RequestInfoForm } from 'src/app/types'
 
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { WINDOW } from '../../../cdk/window'
-import { GoogleAnalyticsService } from '../../../core/google-analytics/google-analytics.service'
+import { GoogleUniversalAnalyticsService } from '../../../core/google-analytics/google-universal-analytics.service'
 import { SignInService } from '../../../core/sign-in/sign-in.service'
 import { UsernameValidator } from '../../../shared/validators/username/username.validator'
 import { SignInData } from '../../../types/sign-in-data.endpoint'
@@ -79,7 +79,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
     private _signIn: SignInService,
     private _oauthService: OauthService,
     private _router: Router,
-    private _gtag: GoogleAnalyticsService,
+    private _gtag: GoogleUniversalAnalyticsService,
     private _googleTagManagerService: GoogleTagManagerService,
     private _errorHandler: ErrorHandlerService,
     private _signInGuard: SignInGuard,
