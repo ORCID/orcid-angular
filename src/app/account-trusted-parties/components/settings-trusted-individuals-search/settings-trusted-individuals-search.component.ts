@@ -1,6 +1,7 @@
+import { LiveAnnouncer } from '@angular/cdk/a11y'
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
-import { PageEvent } from '@angular/material/paginator'
+import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator'
 import { Observable, of, Subject } from 'rxjs'
 import {
   map,
@@ -35,8 +36,7 @@ import { DialogAddTrustedIndividualsComponent } from '../dialog-add-trusted-indi
   ],
 })
 export class SettingsTrustedIndividualsSearchComponent
-  implements OnInit, OnDestroy
-{
+  implements OnInit, OnDestroy {
   $destroy = new Subject()
   searchDone = false
   displayedColumns = ['trustedIndividuals', 'orcid', 'actions']
@@ -54,13 +54,16 @@ export class SettingsTrustedIndividualsSearchComponent
   searchResultsByName: boolean
   alreadyAddedLabel = $localize`:@@account.alreadyAdded:You already added this user`
   trustedPartiesUrl = '/trusted-parties'
+  paginatorLabel: any
 
   constructor(
     private _search: SearchService,
     private dialog: MatDialog,
     private _platform: PlatformInfoService,
     private account: AccountTrustedIndividualsService,
-    private _user: UserService
+    private _user: UserService,
+    private _liveAnnouncer: LiveAnnouncer,
+    private _matPaginatorIntl: MatPaginatorIntl
   ) {}
 
   search(value: string) {
@@ -237,6 +240,12 @@ export class SettingsTrustedIndividualsSearchComponent
   changePage(event: PageEvent) {
     this.pageIndex = event.pageIndex
     this.pageSize = event.pageSize
+    this.paginatorLabel = this._matPaginatorIntl.getRangeLabel(
+      event.pageIndex,
+      event.pageSize,
+      event.length
+    )
+    this._liveAnnouncer.announce(this.paginatorLabel)
     this.search(this.searchValue)
   }
   ngOnInit(): void {

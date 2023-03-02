@@ -102,7 +102,7 @@
     </button>
   </app-modal-footer>
   <form [formGroup]="affiliationForm">
-    <form>
+    <section id="{{ type }}-organization">
       <div
         id="organization"
         class="title"
@@ -133,10 +133,10 @@
         </div>
       </div>
       <hr />
-    </form>
-    <section id="{{ type }} + 'organization'">
+
       <div class="row">
         <label
+          for="organization-input"
           class="mat-caption"
           [ngClass]="{
             error:
@@ -269,9 +269,7 @@
       </div>
       <div class="row">
         <label for="region-input" class="mat-caption">
-          <strong i18n="@@shared.region" aria-labelledby="regionLabel"
-            >Region, State or County</strong
-          >
+          <strong i18n="@@shared.region">Region, State or County</strong>
         </label>
       </div>
       <div class="input-container">
@@ -320,7 +318,7 @@
             formControlName="country"
           >
             <mat-option
-              *ngFor="let countryCode of countryCodes | sortBy : 'asc' : 'key'"
+              *ngFor="let countryCode of countryCodes | sortBy: 'asc':'key'"
               [value]="countryCode.key"
             >
               {{ countryCode.key }}
@@ -335,68 +333,66 @@
         </mat-form-field>
       </div>
     </section>
-    <section id="{{ type }} + 'details'">
-      <form>
-        <div
-          id="affiliation-details"
-          class="title"
-          [ngClass]="{
-            'orc-font-body': !platform.columns12,
-            'orc-font-body-large': platform.columns12
-          }"
-        >
-          <div class="row">
-            <h2
-              [ngClass]="{
-                'orc-font-body': !platform.columns12,
-                'orc-font-body-large': platform.columns12
-              }"
+    <section id="{{ type }}-details">
+      <div
+        id="affiliation-details"
+        class="title"
+        [ngClass]="{
+          'orc-font-body': !platform.columns12,
+          'orc-font-body-large': platform.columns12
+        }"
+      >
+        <div class="row">
+          <h2
+            [ngClass]="{
+              'orc-font-body': !platform.columns12,
+              'orc-font-body-large': platform.columns12
+            }"
+          >
+            <strong
+              i18n="@@shared.employmentDetails"
+              *ngIf="type === 'employment'"
             >
-              <strong
-                i18n="@@shared.employmentDetails"
-                *ngIf="type === 'employment'"
-              >
-                Employment details
-              </strong>
-              <strong
-                i18n="@@shared.qualificationDetails"
-                *ngIf="type === 'qualification'"
-              >
-                Qualification details
-              </strong>
-              <strong
-                i18n="@@shared.educationDetails"
-                *ngIf="type === 'education'"
-              >
-                Education details
-              </strong>
-              <strong
-                i18n="@@shared.invitedPositionDetails"
-                *ngIf="type === 'invited-position'"
-              >
-                Invited Position details
-              </strong>
-              <strong
-                i18n="@@shared.distinctionDetails"
-                *ngIf="type === 'distinction'"
-              >
-                Distinction details
-              </strong>
-              <strong
-                i18n="@@shared.membershipDetails"
-                *ngIf="type === 'membership'"
-              >
-                Membership details
-              </strong>
-              <strong i18n="@@shared.serviceDetails" *ngIf="type === 'service'">
-                Service details
-              </strong>
-              <span *ngIf="!platform.columns12" class="required">*</span>
-            </h2>
-          </div>
+              Employment details
+            </strong>
+            <strong
+              i18n="@@shared.qualificationDetails"
+              *ngIf="type === 'qualification'"
+            >
+              Qualification details
+            </strong>
+            <strong
+              i18n="@@shared.educationDetails"
+              *ngIf="type === 'education'"
+            >
+              Education details
+            </strong>
+            <strong
+              i18n="@@shared.invitedPositionDetails"
+              *ngIf="type === 'invited-position'"
+            >
+              Invited Position details
+            </strong>
+            <strong
+              i18n="@@shared.distinctionDetails"
+              *ngIf="type === 'distinction'"
+            >
+              Distinction details
+            </strong>
+            <strong
+              i18n="@@shared.membershipDetails"
+              *ngIf="type === 'membership'"
+            >
+              Membership details
+            </strong>
+            <strong i18n="@@shared.serviceDetails" *ngIf="type === 'service'">
+              Service details
+            </strong>
+            <span *ngIf="!platform.columns12" class="required">*</span>
+          </h2>
         </div>
-        <hr />
-      </form>
+      </div>
+      <hr />
       <div class="row">
         <label for="department-input" class="mat-caption">
           <strong i18n="@@shared.department" id="deparmentLabel"
@@ -466,6 +462,7 @@
       >
         <div class="row">
           <label
+            for="cy-start-date-year-sel"
             class="mat-caption"
             [ngClass]="{
               error: affiliationForm.hasError('date', 'startDateGroup')

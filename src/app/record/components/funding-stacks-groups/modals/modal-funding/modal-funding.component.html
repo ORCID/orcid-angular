@@ -668,9 +668,7 @@
                 fundingForm.get('agencyName').dirty)
           }"
         >
-          <strong i18n="@@funding.agencyName" id="c"
-            >Funding agency name</strong
-          >
+          <strong i18n="@@funding.agencyName">Funding agency name</strong>
           <span class="required">*</span>
         </label>
       </div>
@@ -749,6 +747,7 @@
       </div>
       <div class="row">
         <label
+          for="city-input"
           class="mat-caption"
           [ngClass]="{
             error:
@@ -839,7 +838,7 @@
             formControlName="country"
           >
             <mat-option
-              *ngFor="let countryCode of countryCodes | sortBy : 'asc' : 'key'"
+              *ngFor="let countryCode of countryCodes | sortBy: 'asc':'key'"
               [value]="countryCode.key"
             >
               {{ countryCode.key }}
