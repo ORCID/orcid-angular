@@ -47,15 +47,6 @@ describe('GoogleTagManagerService', () => {
     }
   ))
 
-  it('should provide a dataLayer taken from the global window variable', inject(
-    [GoogleTagManagerService],
-    (service: GoogleTagManagerService) => {
-      expect(service.getDataLayer()).toEqual([])
-      browserGlobals.windowRef().dataLayer = [tag]
-      expect(service.getDataLayer()).toEqual([tag])
-    }
-  ))
-
   it('should be able to add script element', inject(
     [GoogleTagManagerService],
     (service: GoogleTagManagerService) => {

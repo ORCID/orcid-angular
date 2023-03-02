@@ -3,8 +3,10 @@ import { environment } from '../../../environments/environment'
 import { RequestInfoForm } from '../../types'
 import { BehaviorSubject, fromEvent, Observable, of, throwError } from 'rxjs'
 import {
+  browserGlobals,
   buildClientString,
   finishPerformanceMeasurement,
+  pushOnDataLayer,
   removeUrlParameters,
   startPerformanceMeasurement,
 } from '../../analytics-utils'
@@ -39,7 +41,7 @@ export class GoogleTagManagerService {
           .subscribe(
             (response) => {
               if (response) {
-                this.pushOnDataLayer(item)
+                pushOnDataLayer(item)
                 subscriber.next()
                 subscriber.complete()
               }
@@ -47,7 +49,7 @@ export class GoogleTagManagerService {
             (error) => console.log('GTM error')
           )
       } else {
-        this.pushOnDataLayer(item)
+        pushOnDataLayer(item)
         subscriber.next()
         subscriber.complete()
       }
@@ -59,8 +61,8 @@ export class GoogleTagManagerService {
       if (this.isLoaded) {
         subscriber.next(true)
       }
-      const doc = this.browserGlobals.documentRef()
-      this.pushOnDataLayer({
+      const doc = browserGlobals.documentRef()
+      pushOnDataLayer({
         'gtm.start': new Date().getTime(),
         event: 'gtm.js',
       })
@@ -84,17 +86,6 @@ export class GoogleTagManagerService {
       })
       doc.head.insertBefore(gtmScript, doc.head.firstChild)
     })
-  }
-
-  public getDataLayer(): any[] {
-    const window = this.browserGlobals.windowRef()
-    window.dataLayer = window.dataLayer || []
-    return window.dataLayer
-  }
-
-  private pushOnDataLayer(object: Object): void {
-    const dataLayer = this.getDataLayer()
-    dataLayer.push(object)
   }
 
   reportPageView(url: string) {
@@ -130,20 +121,7 @@ export class GoogleTagManagerService {
       tagItem.clientId = clientId
     }
 
-    return this.pushTag({
-      event,
-      label,
-      clientId,
-    })
-  }
-
-  private browserGlobals = {
-    windowRef(): any {
-      return window
-    },
-    documentRef(): any {
-      return document
-    },
+    return this.pushTag(tagItem)
   }
 
   reportNavigationEnd(url: string, duration: number | void): Observable<void> {

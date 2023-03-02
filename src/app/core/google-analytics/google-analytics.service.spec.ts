@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing'
 
-import { GoogleAnalyticsService } from './google-analytics.service'
+import { GoogleUniversalAnalyticsService } from './google-universal-analytics.service'
 import { WINDOW_PROVIDERS } from '../../cdk/window'
 
 describe('GoogleAnalyticsService', () => {
@@ -11,8 +11,8 @@ describe('GoogleAnalyticsService', () => {
   )
 
   it('should be created', () => {
-    const service: GoogleAnalyticsService = TestBed.inject(
-      GoogleAnalyticsService
+    const service: GoogleUniversalAnalyticsService = TestBed.inject(
+      GoogleUniversalAnalyticsService
     )
     expect(service).toBeTruthy()
   })

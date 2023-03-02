@@ -8,7 +8,6 @@ export const environment = {
   BASE_URL: '//dev.orcid.org/',
   INFO_SITE: 'https://info.orcid.org/',
   GOOGLE_ANALYTICS_TESTING_MODE: true,
-  GOOGLE_ANALYTICS: 'UA-0000000-00',
   GOOGLE_TAG_MANAGER: 'GTM-0000000',
   GOOGLE_RECAPTCHA: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
   HELP_HERO_ID: 'oYFQMrzFHA',

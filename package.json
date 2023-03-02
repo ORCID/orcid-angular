@@ -69,7 +69,6 @@
     "@angular/router": "^14.2.9",
     "@angular/service-worker": "^14.2.9",
     "@orcid/bibtex-parse-js": "0.0.25",
-    "@types/gtag.js": "^0.0.3",
     "browserslist": "^4.19.1",
     "browserslist-useragent-regexp": "^3.0.0",
     "core-js": "^3.6.5",
