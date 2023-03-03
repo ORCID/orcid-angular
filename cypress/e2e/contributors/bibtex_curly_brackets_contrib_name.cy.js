@@ -4,9 +4,8 @@ import userData from '../../fixtures/contributors-fixtures/contributors-users.fi
 import { qase } from 'cypress-qase-reporter/dist/mocha'
 
 describe('Add work using BibTeX citation containing curly brackets around contributor names', async function () {
-  const pubmedURL = 'https://pubmed.ncbi.nlm.nih.gov/'
-  const bibtextFilePath = userData.cyRecordOwner.bibtext_qase67_path
-  const contribName = userData.cyRecordOwner.bibtext_qase67_contrib
+  const bibtextFilePath = userData.cyRecordOwner.bibtex_qase67_path
+  const contribName = userData.cyRecordOwner.bibtex_qase67_contrib
 
   before(() => {
     cy.visit(Cypress.env('signInURL'))

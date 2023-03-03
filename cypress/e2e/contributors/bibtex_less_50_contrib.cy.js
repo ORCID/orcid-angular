@@ -4,9 +4,8 @@ import userData from '../../fixtures/contributors-fixtures/contributors-users.fi
 import { qase } from 'cypress-qase-reporter/dist/mocha'
 
 describe('Add work using BibTeX citation containing multiple contributors (less than 50)', async function () {
-  const pubmedURL = 'https://pubmed.ncbi.nlm.nih.gov/'
-  const bibtextFilePath = userData.cyRecordOwner.bibtext_qase71_path
-  const contribName = userData.cyRecordOwner.bibtext_qase71_contrib
+  const bibtextFilePath = userData.cyRecordOwner.bibtex_qase71_path
+  const contribName = userData.cyRecordOwner.bibtex_qase71_contrib
 
   before(() => {
     cy.visit(Cypress.env('signInURL'))

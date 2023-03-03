@@ -4,9 +4,8 @@ import userData from '../../fixtures/contributors-fixtures/contributors-users.fi
 import { qase } from 'cypress-qase-reporter/dist/mocha'
 
 describe('Add work using BibTeX citation containing a single contributor', async function () {
-  const pubmedURL = 'https://pubmed.ncbi.nlm.nih.gov/'
-  const bibtextFilePath = userData.cyRecordOwner.bibtext_qase70_path
-  const contribName = userData.cyRecordOwner.bibtext_qase70_contrib
+  const bibtextFilePath = userData.cyRecordOwner.bibtex_qase70_path
+  const contribName = userData.cyRecordOwner.bibtex_qase70_contrib
 
   before(() => {
     cy.visit(Cypress.env('signInURL'))
