@@ -73,6 +73,7 @@
     "browserslist": "^4.19.1",
     "browserslist-useragent-regexp": "^3.0.0",
     "core-js": "^3.6.5",
+    "cypress-file-upload": "^5.0.8",
     "del": "^6.0.0",
     "dotenv": "^16.0.3",
     "firebase": "^7.6.0",
