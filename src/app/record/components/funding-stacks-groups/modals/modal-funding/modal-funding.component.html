@@ -45,13 +45,13 @@
       (click)="closeEvent()"
       i18n="@@shared.cancel"
       id="cancel-names-button"
-      [attr.aria-label]="ariaLabelCancelChanges"
+      [attr.aria-label]="ariaLabelClose"
     >
       Cancel
     </button>
   </app-modal-footer>
   <form [formGroup]="fundingForm" (ngSubmit)="onSubmit()">
-    <section id="funding-details-section">
+    <section id="funding-details">
       <div
         id="funding-details"
         class="title top-title"
@@ -91,10 +91,9 @@
                 fundingForm.get('fundingType').hasError('required') &&
                 fundingForm.get('fundingType').touched
             }"
+            id="funding-type"
           >
-            <strong i18n="@@funding.type" id="funding-type"
-              >Funding type</strong
-            >
+            <strong i18n="@@funding.type">Funding type</strong>
             <span class="required">*</span>
           </label>
         </div>
@@ -125,10 +124,12 @@
 
       <!-- Funding Subtype -->
       <div class="row">
-        <label for="funding-subtype-input" class="mat-caption">
-          <strong
-            i18n="@@funding.organizationDefinedFundingSubType"
-            id="funding-subtype"
+        <label
+          for="funding-subtype-input"
+          class="mat-caption"
+          id="funding-subtype"
+        >
+          <strong i18n="@@funding.organizationDefinedFundingSubType"
             >Funding subtype</strong
           >
         </label>
@@ -161,8 +162,9 @@
                 (fundingForm.get('fundingProjectTitle').touched ||
                   fundingForm.get('fundingProjectTitle').dirty)
             }"
+            id="funding-funded-project"
           >
-            <strong i18n="@@funding.projectTitle" id="funding-funded-project"
+            <strong i18n="@@funding.projectTitle"
               >Title of funded project</strong
             >
             <span class="required">*</span>
@@ -243,10 +245,9 @@
                   'translatedTitleGroup'
                 )
               }"
+              id="funding-funded-project"
             >
-              <strong
-                i18n="@@funding.translatedTitle"
-                id="funding-translated-title"
+              <strong i18n="@@funding.translatedTitle" x
                 >Funding project translated title</strong
               >
             </label>
@@ -298,10 +299,9 @@
                   'translatedTitleGroup'
                 )
               }"
+              id="language-title"
             >
-              <strong
-                i18n="@@funding.translatedTitleLanguage"
-                id="langauge-title"
+              <strong i18n="@@funding.translatedTitleLanguage"
                 >Language of this title</strong
               >
             </label>
@@ -309,7 +309,7 @@
           <div class="input-container language">
             <mat-form-field appearance="outline" class="mat-form-field-min">
               <mat-select
-                aria-labelledby="langauge-title"
+                aria-labelledby="language-title"
                 id="language-title-input"
                 placeholder="{{ ngOrcidSelectLanguage }}"
                 formControlName="translatedTitleLanguage"
@@ -349,10 +349,9 @@
                 fundingForm.get('fundingProjectLink').hasError('pattern') &&
                 fundingForm.get('fundingProjectLink').touched
             }"
+            id="funding-project-link"
           >
-            <strong i18n="@@funding.projectLink" id="funding-project-link"
-              >Project link</strong
-            >
+            <strong i18n="@@funding.projectLink">Project link</strong>
           </label>
         </div>
         <div
@@ -393,24 +392,22 @@
       <!-- Description  -->
       <div class="row description">
         <div class="row">
-          <label for="description-input" class="mat-caption">
-            <strong i18n="@@funding.description" id="funding-descrition"
-              >Description</strong
-            >
+          <label class="mat-caption" id="funding-description">
+            <strong i18n="@@funding.description">Description</strong>
           </label>
         </div>
         <mat-form-field
           appearance="outline"
           class="mat-form-field-min input-container"
-          aria-labelledby="funding-descrition"
+          aria-labelledby="funding-description"
         >
           <textarea
-            id="description-input"
             matInput
             formControlName="description"
             cdkTextareaAutosize
             cdkAutosizeMinRows="5"
             cdkAutosizeMaxRows="7"
+            [attr.aria-label]="ariaLabelDescription"
           >
           </textarea>
           <mat-error
@@ -425,10 +422,12 @@
       <!-- Total funding amount -->
       <div class="row">
         <div class="row">
-          <label for="funding-amount-input" class="mat-caption">
-            <strong i18n="@@funding.amount" id="funding-total-fuding-amount"
-              >Total funding amount</strong
-            >
+          <label
+            for="funding-amount-input"
+            class="mat-caption"
+            id="funding-total-funding-amount"
+          >
+            <strong i18n="@@funding.amount">Total funding amount</strong>
           </label>
         </div>
         <!-- Currency  -->
@@ -440,7 +439,7 @@
               class="mat-form-field-min no-hint input-container"
             >
               <mat-select
-                placeholder="-"
+                [placeholder]="totalFundingAmountCurrency"
                 formControlName="currencyCode"
                 [aria-label]="totalFundingAmountCurrency"
               >
@@ -464,6 +463,7 @@
                 matInput
                 formControlName="amount"
                 [attr.aria-label]="totalFundingAmount"
+                [placeholder]="ariaLabelAmount"
               />
             </mat-form-field>
           </div>
@@ -630,7 +630,7 @@
         </div>
       </div>
     </section>
-    <section id="funding-agency-section">
+    <section id="funding-agency">
       <!---------------------->
       <!-- Funding agency   -->
       <!---------------------->
@@ -747,6 +747,7 @@
       </div>
       <div class="row">
         <label
+          id="funding-city"
           for="city-input"
           class="mat-caption"
           [ngClass]="{
@@ -755,7 +756,7 @@
               (fundingForm.get('city').touched || fundingForm.get('city').dirty)
           }"
         >
-          <strong i18n="@@shared.city" id="funding-city">City</strong>
+          <strong i18n="@@shared.city">City</strong>
           <span class="required">*</span>
         </label>
       </div>
@@ -786,10 +787,8 @@
         </mat-form-field>
       </div>
       <div class="row">
-        <label for="region-input" class="mat-caption">
-          <strong i18n="@@shared.region" id="funding-region-state"
-            >Region, State or County</strong
-          >
+        <label for="region-input" class="mat-caption" id="funding-region-state">
+          <strong i18n="@@shared.region">Region, State or County</strong>
         </label>
       </div>
       <div class="input-container">
@@ -817,10 +816,9 @@
               fundingForm.get('country').hasError('required') &&
               fundingForm.get('country').touched
           }"
+          id="funding-countr-location"
         >
-          <strong i18n="@@shared.countryOrLocation" id="funding-countr-location"
-            >Country/Location</strong
-          >
+          <strong i18n="@@shared.countryOrLocation">Country/Location</strong>
           <span class="required">*</span>
         </label>
       </div>
@@ -856,7 +854,7 @@
         </mat-form-field>
       </div>
     </section>
-    <section id="funding-ids-section">
+    <section id="funding-ids">
       <!-------------------------->
       <!-- Funding Identifiers-->
       <!-------------------------->
@@ -928,7 +926,7 @@
         </div>
       </div>
     </section>
-    <section id="funding-visibility-section">
+    <section id="funding-visibility">
       <!------------------------>
       <!-- Funding Visibility -->
       <!------------------------>
