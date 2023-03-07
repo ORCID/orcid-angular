@@ -2,7 +2,12 @@ import { Injectable } from '@angular/core'
 import { environment } from '../../../environments/environment'
 import { RequestInfoForm } from '../../types'
 import { BehaviorSubject, Observable } from 'rxjs'
-import { browserGlobals, buildClientString, pushOnDataLayer, removeUrlParameters } from '../../analytics-utils'
+import {
+  browserGlobals,
+  buildClientString,
+  pushOnDataLayer,
+  removeUrlParameters,
+} from '../../analytics-utils'
 import { catchError } from 'rxjs/operators'
 import { ItemGTM } from '../../types/item_gtm'
 import { ERROR_REPORT } from '../../errors'

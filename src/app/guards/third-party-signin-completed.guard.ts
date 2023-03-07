@@ -68,14 +68,16 @@ export class ThirdPartySigninCompletedGuard implements CanActivateChild {
           )
           .subscribe((response) => {
             if (response) {
-              forkJoin(analyticsReports).pipe(
-                catchError((err) =>
-                  this._errorHandler.handleError(
-                    err,
-                    ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA,
-                  ),
-                ),
-              ).subscribe()
+              forkJoin(analyticsReports)
+                .pipe(
+                  catchError((err) =>
+                    this._errorHandler.handleError(
+                      err,
+                      ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
+                    )
+                  )
+                )
+                .subscribe()
             }
           })
         if (state.url.startsWith('/my-orcid')) {
