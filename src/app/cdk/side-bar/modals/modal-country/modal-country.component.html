@@ -79,6 +79,7 @@
               />
 
               <mat-form-field
+                *ngIf="(country.source && country.source !== this.id)"
                 appearance="outline"
                 class="mat-form-field-min"
                 [ngClass]="{ 'two-line-hint': isMobile }"
@@ -89,11 +90,11 @@
                   #countrySelect
                   id="cy-country-select-{{ i }}"
                   formControlName="country"
-                  placeholder=" {{ ngOrcidCountry }}"
+                  placeholder=" {{ countryOrLocationLabel }}"
                 >
                   <ng-container
                     *ngFor="
-                      let countryCode of countryCodes | sortBy : 'asc' : 'key'
+                      let countryCode of countryCodes | sortBy: 'asc':'key'
                     "
                   >
                     <mat-option [value]="countryCode.key">
@@ -101,6 +102,33 @@
                     </mat-option>
                   </ng-container>
                 </mat-select>
+                <mat-hint *ngIf="country.putCode.indexOf('new') < 0">
+                  <app-source-hit
+                    [createdDate]="countriesMap[country.putCode].createdDate"
+                    [source]="country.sourceName || country.source"
+                    [assertion]="
+                      country.assertionOriginName ||
+                      country.assertionOriginOrcid
+                    "
+                  ></app-source-hit>
+                </mat-hint>
+              </mat-form-field>
+
+              <mat-form-field
+                *ngIf="!(country.source && country.source !== this.id)"
+                appearance="outline"
+                class="mat-form-field-min description read-only"
+              >
+                <input
+                  [readonly]="true"
+                  class="cy-description-input"
+                  #descriptionInput
+                  [attr.aria-label]="ariaLabelSelect"
+                  matInput
+                  formControlName="country"
+                  placeholder=" {{ ngOrcidCountry }}"
+                  [ngClass]="{ 'website-input': screenDirection === 'rtl' }"
+                />
                 <mat-hint *ngIf="country.putCode.indexOf('new') < 0">
                   <app-source-hit
                     [createdDate]="countriesMap[country.putCode].createdDate"
