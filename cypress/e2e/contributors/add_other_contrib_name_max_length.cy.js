@@ -13,13 +13,13 @@ describe('Contributor name field max limit validation', async function () {
     '148',
     it('Contributor name field max limit validation', function () {
       const otherContributorName = userData.cyRecordOwner.contrib_name_100_chars
-      const errorMessage = "Must be less than 100 characters"
+      const errorMessage = 'Must be less than 100 characters'
 
       cy.get('#cy-works').within(($myPanel) => {
         cy.get('#cy-menu-add-works').click()
       })
       cy.get('#cy-add-work-manually').click({ force: true })
-     
+
       //add someone else as contributor with credit role
       cy.get('.cy-add-another-contributor').click()
       cy.get('app-work-contributors').within(($section) => {

@@ -4,8 +4,8 @@ import userData from '../../fixtures/contributors-fixtures/contributors-users.fi
 import { qase } from 'cypress-qase-reporter/dist/mocha'
 
 describe('Record holder not added as default contributor to works imported from DOI', async function () {
-    const extId= userData.cyRecordOwner.doi_qase77_extId
-    const contribName = userData.cyRecordOwner.doi_qase77_contrib
+  const extId = userData.cyRecordOwner.doi_qase77_extId
+  const contribName = userData.cyRecordOwner.doi_qase77_contrib
 
   before(() => {
     cy.visit(Cypress.env('signInURL'))
@@ -15,7 +15,6 @@ describe('Record holder not added as default contributor to works imported from 
   qase(
     '77',
     it('Record holder not added as default contributor to works imported from DOI', function () {
-
       cy.get('#cy-works').within(($myPanel) => {
         cy.get('#cy-menu-add-works').click()
       })
@@ -25,22 +24,25 @@ describe('Record holder not added as default contributor to works imported from 
       cy.wait(2000)
 
       //verify contributors loaded
-      cy.contains('.credit-name-and-roles',contribName).should('exist')
+      cy.contains('.credit-name-and-roles', contribName).should('exist')
       cy.get('#save-work-button').click()
-      cy.wait(2000)//waiting for backend
+      cy.wait(2000) //waiting for backend
 
       //Verify work was added with contrib in summary
       cy.get('app-work-stack').should('contain', contribName)
-     
-     //Summary view - record owner not added
-     cy.contains('app-panel-data', contribName).within(
-      ($thisWork) => {
-        cy.contains('Contributors').parent().should('not.contain',userData.cyRecordOwner.name)
+
+      //Summary view - record owner not added
+      cy.contains('app-panel-data', contribName).within(($thisWork) => {
+        cy.contains('Contributors')
+          .parent()
+          .should('not.contain', userData.cyRecordOwner.name)
         cy.contains('Show more detail').click()
-      }
-    )  
-    //Details section - - record owner not added
-    cy.contains('app-display-attribute','Contributors').should('not.contain', userData.cyRecordOwner.name)
+      })
+      //Details section - - record owner not added
+      cy.contains('app-display-attribute', 'Contributors').should(
+        'not.contain',
+        userData.cyRecordOwner.name
+      )
     })
   ) //end of qase tag
 
