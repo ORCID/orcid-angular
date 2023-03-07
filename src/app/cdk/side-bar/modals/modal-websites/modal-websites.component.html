@@ -180,109 +180,109 @@
                   </mat-form-field>
                 </ng-container>
                 <ng-container
-                *ngIf="website.source && website.source !== this.id"
-              >
-                <mat-form-field
-                  [ngClass]="{
-                    'read-only': website.source && website.source !== this.id
-                  }"
-                  appearance="outline"
-                  class="mat-form-field-min description"
+                  *ngIf="website.source && website.source !== this.id"
                 >
-                  <input
-                    [readonly]="website.source && website.source !== id"
-                    class="cy-description-input"
-                    #descriptionInput
-                    [attr.aria-label]="ariaLabelTitle"
-                    matInput
-                    formControlName="description"
-                    placeholder=" {{ ngOrcidDescription }}"
-                    [ngClass]="{ 'website-input': screenDirection === 'rtl' }"
-                  />
-                  <mat-error
-                    *ngIf="
-                      websitesForm.get(website.putCode).get('description')
-                        ?.errors?.maxlength
-                    "
-                    i18n="@@topBar.urlMaxLength"
+                  <mat-form-field
+                    [ngClass]="{
+                      'read-only': website.source && website.source !== this.id
+                    }"
+                    appearance="outline"
+                    class="mat-form-field-min description"
                   >
-                    Must be less than 355 characters
-                  </mat-error>
-                </mat-form-field>
-
-                <mat-form-field
-                  appearance="outline"
-                  class="mat-form-field-min"
-                  [ngClass]="{
-                    'read-only': website.source && website.source !== this.id
-                  }"
-                >
-                  <input
-                    [readonly]="website.source && website.source !== id"
-                    [attr.aria-label]="ariaLabelURL"
-                    class="cy-url-input"
-                    matInput
-                    formControlName="url"
-                    placeholder="{{ ngOrcidUrl }}"
-                    [ngClass]="{ 'website-input': screenDirection === 'rtl' }"
-                  />
-                  <mat-error
-                    *ngIf="
-                      websitesForm
-                        .get(website.putCode)
-                        .hasError('required', 'url')
-                    "
-                    i18n="@@topBar.requiredURL"
-                  >
-                    An URL is required
-                  </mat-error>
-
-                  <mat-error
-                    *ngIf="
-                      websitesForm
-                        .get(website.putCode)
-                        .hasError('maxlength', 'url')
-                    "
-                    i18n="@@shared.maxLength.less_than_two_thousand"
-                  >
-                    Must be less than 2000 characters
-                  </mat-error>
-
-                  <mat-error
-                    *ngIf="
-                      websitesForm
-                        .get(website.putCode)
-                        .hasError('pattern', 'url')
-                    "
-                    i18n="@@topBar.invalidURL"
-                  >
-                    Invalid URL
-                  </mat-error>
-                  <mat-error
-                    *ngIf="
-                      websitesForm
-                        .get(website.putCode)
-                        .hasError('duplicated', 'url')
-                    "
-                    i18n="@@topBar.urlDuplicated"
-                  >
-                    URL can not be duplicated
-                  </mat-error>
-                  <mat-hint
-                    class="mat-caption"
-                    *ngIf="website.putCode.indexOf('new') < 0"
-                  >
-                    <app-source-hit
-                      [createdDate]="website.createdDate"
-                      [source]="website.sourceName || website.source"
-                      [assertion]="
-                        website.assertionOriginName ||
-                        website.assertionOriginOrcid
+                    <input
+                      [readonly]="website.source && website.source !== id"
+                      class="cy-description-input"
+                      #descriptionInput
+                      [attr.aria-label]="ariaLabelTitle"
+                      matInput
+                      formControlName="description"
+                      placeholder=" {{ ngOrcidDescription }}"
+                      [ngClass]="{ 'website-input': screenDirection === 'rtl' }"
+                    />
+                    <mat-error
+                      *ngIf="
+                        websitesForm.get(website.putCode).get('description')
+                          ?.errors?.maxlength
                       "
-                    ></app-source-hit>
-                  </mat-hint>
-                </mat-form-field>
-              </ng-container>
+                      i18n="@@topBar.urlMaxLength"
+                    >
+                      Must be less than 355 characters
+                    </mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field
+                    appearance="outline"
+                    class="mat-form-field-min"
+                    [ngClass]="{
+                      'read-only': website.source && website.source !== this.id
+                    }"
+                  >
+                    <input
+                      [readonly]="website.source && website.source !== id"
+                      [attr.aria-label]="ariaLabelURL"
+                      class="cy-url-input"
+                      matInput
+                      formControlName="url"
+                      placeholder="{{ ngOrcidUrl }}"
+                      [ngClass]="{ 'website-input': screenDirection === 'rtl' }"
+                    />
+                    <mat-error
+                      *ngIf="
+                        websitesForm
+                          .get(website.putCode)
+                          .hasError('required', 'url')
+                      "
+                      i18n="@@topBar.requiredURL"
+                    >
+                      An URL is required
+                    </mat-error>
+
+                    <mat-error
+                      *ngIf="
+                        websitesForm
+                          .get(website.putCode)
+                          .hasError('maxlength', 'url')
+                      "
+                      i18n="@@shared.maxLength.less_than_two_thousand"
+                    >
+                      Must be less than 2000 characters
+                    </mat-error>
+
+                    <mat-error
+                      *ngIf="
+                        websitesForm
+                          .get(website.putCode)
+                          .hasError('pattern', 'url')
+                      "
+                      i18n="@@topBar.invalidURL"
+                    >
+                      Invalid URL
+                    </mat-error>
+                    <mat-error
+                      *ngIf="
+                        websitesForm
+                          .get(website.putCode)
+                          .hasError('duplicated', 'url')
+                      "
+                      i18n="@@topBar.urlDuplicated"
+                    >
+                      URL can not be duplicated
+                    </mat-error>
+                    <mat-hint
+                      class="mat-caption"
+                      *ngIf="website.putCode.indexOf('new') < 0"
+                    >
+                      <app-source-hit
+                        [createdDate]="website.createdDate"
+                        [source]="website.sourceName || website.source"
+                        [assertion]="
+                          website.assertionOriginName ||
+                          website.assertionOriginOrcid
+                        "
+                      ></app-source-hit>
+                    </mat-hint>
+                  </mat-form-field>
+                </ng-container>
               </div>
             </div>
             <div

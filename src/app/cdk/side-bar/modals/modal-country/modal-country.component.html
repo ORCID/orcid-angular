@@ -79,7 +79,7 @@
               />
 
               <mat-form-field
-                *ngIf="(country.source && country.source !== this.id)"
+                *ngIf="country.source && country.source !== this.id"
                 appearance="outline"
                 class="mat-form-field-min"
                 [ngClass]="{ 'two-line-hint': isMobile }"
@@ -94,7 +94,7 @@
                 >
                   <ng-container
                     *ngFor="
-                      let countryCode of countryCodes | sortBy: 'asc':'key'
+                      let countryCode of countryCodes | sortBy : 'asc' : 'key'
                     "
                   >
                     <mat-option [value]="countryCode.key">

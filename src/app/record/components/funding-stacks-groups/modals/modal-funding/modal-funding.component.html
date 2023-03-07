@@ -392,10 +392,7 @@
       <!-- Description  -->
       <div class="row description">
         <div class="row">
-          <label
-            class="mat-caption"
-            id="funding-description"
-          >
+          <label class="mat-caption" id="funding-description">
             <strong i18n="@@funding.description">Description</strong>
           </label>
         </div>
@@ -839,7 +836,7 @@
             formControlName="country"
           >
             <mat-option
-              *ngFor="let countryCode of countryCodes | sortBy: 'asc':'key'"
+              *ngFor="let countryCode of countryCodes | sortBy : 'asc' : 'key'"
               [value]="countryCode.key"
             >
               {{ countryCode.key }}
