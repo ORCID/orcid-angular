@@ -30,6 +30,7 @@ import { MatButtonModule } from '@angular/material/button'
 import { Observable, of } from 'rxjs'
 import { ChangeDetectorRef } from '@angular/core'
 import { MatSelectHarness } from '@angular/material/select/testing'
+import { MatInputHarness } from '@angular/material/input/testing'
 
 describe('ModalCountryComponent', () => {
   let component: ModalCountryComponent
@@ -110,7 +111,7 @@ describe('ModalCountryComponent', () => {
     ).toBe('Add another country or location')
   })
 
-  it('should display 4 countries with the next status disabled (source is not user), enabled and enabled', async () => {
+  it('should display 4 countries, 2 read only (source is not the user) and 2 editable ', async () => {
     const adressesResponse: Observable<CountriesEndpoint> = of({
       errors: [],
       addresses: getAddresses(),
@@ -131,13 +132,17 @@ describe('ModalCountryComponent', () => {
     fixture.detectChanges()
 
     const countriesSelects = await loader.getAllHarnesses(MatSelectHarness)
+    const countriesInputs = await loader.getAllHarnesses(MatInputHarness)
 
-    await countriesSelects[3].open()
-    await countriesSelects[3].clickOptions() //Select the first option
+    console.log(countriesSelects)
+    console.log(countriesInputs)
 
-    const disabledStates = await parallel(() =>
-      countriesSelects.map((select) => select.isDisabled())
-    )
+    await countriesSelects[1].open()
+    await countriesSelects[1].clickOptions() //Select the first option
+
+    // const disabledStates = await parallel(() =>
+    //   countriesSelects.map((select) => select.isDisabled())
+    // )
 
     expect(countriesForm.controls[1].value.country).toBe('Albania')
     expect(countriesForm.controls[2].getRawValue().country).toBe(
@@ -145,8 +150,8 @@ describe('ModalCountryComponent', () => {
     )
     expect(countriesForm.controls[3].getRawValue().country).toBe('Kosovo')
     expect(countriesForm.controls['new-0'].value.country).toBe('Afghanistan')
-    expect(disabledStates.filter((value) => value).length).toBe(2)
-    expect(countriesSelects.length).toBe(4)
+    expect(countriesInputs.length).toBe(2)
+    expect(countriesSelects.length).toBe(2)
   })
 })
 
