@@ -63,7 +63,6 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
   ngOrcidCountry = $localize`:@@shared.selectACountryOrLocation:Select a country or location`
   countryOrLocationLabel = $localize`:@@shared.countryOrLocation:Country or location`
 
-
   ngOnInit(): void {
     this._recordCountryService
       .getAddresses()

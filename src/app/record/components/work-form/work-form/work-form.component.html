@@ -822,7 +822,7 @@
             formControlName="countryCode"
           >
             <mat-option
-              *ngFor="let item of countryCodes | sortBy: 'asc':'key'"
+              *ngFor="let item of countryCodes | sortBy : 'asc' : 'key'"
               [value]="item.value"
             >
               {{ item.key }}

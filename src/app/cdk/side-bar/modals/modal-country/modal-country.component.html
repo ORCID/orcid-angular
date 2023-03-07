@@ -95,7 +95,7 @@
                 >
                   <ng-container
                     *ngFor="
-                      let countryCode of countryCodes | sortBy: 'asc':'key'
+                      let countryCode of countryCodes | sortBy : 'asc' : 'key'
                     "
                   >
                     <mat-option [value]="countryCode.key">
