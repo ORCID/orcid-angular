@@ -76,17 +76,19 @@ export class AuthorizeGuard implements CanActivateChild {
     analyticsReports.push(
       this._googleTagManagerService.reportEvent(`Reauthorize`, request)
     )
-    forkJoin(analyticsReports).pipe(
-      catchError((err) =>
-        this._errorHandler.handleError(
-          err,
-          ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
+    forkJoin(analyticsReports)
+      .pipe(
+        catchError((err) =>
+          this._errorHandler.handleError(
+            err,
+            ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
+          )
         )
       )
-    ).subscribe(
-      () => this.sendUserToRedirectURL(request),
-      () => this.sendUserToRedirectURL(request)
-    )
+      .subscribe(
+        () => this.sendUserToRedirectURL(request),
+        () => this.sendUserToRedirectURL(request)
+      )
   }
 
   private redirectToLoginPage(

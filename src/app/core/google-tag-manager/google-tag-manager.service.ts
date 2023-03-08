@@ -44,10 +44,11 @@ export class GoogleTagManagerService {
                 subscriber.complete()
               }
             },
-            () => subscriber.error({
-              name: 'GTM - Error',
-              message: 'Unable to add GTM',
-            })
+            () =>
+              subscriber.error({
+                name: 'GTM - Error',
+                message: 'Unable to add GTM',
+              })
           )
       } else {
         pushOnDataLayer(item)

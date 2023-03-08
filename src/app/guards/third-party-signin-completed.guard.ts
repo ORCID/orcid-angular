@@ -81,9 +81,9 @@ export class ThirdPartySigninCompletedGuard implements CanActivateChild {
             }
           })
         return this._router.parseUrl(
-          state.url.replace(/\/third-party-signin-completed/, ''),
+          state.url.replace(/\/third-party-signin-completed/, '')
         )
-      }),
+      })
     )
   }
 }
