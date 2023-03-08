@@ -50,7 +50,7 @@ describe('GoogleTagManagerService', () => {
   it('should be able to add script element', inject(
     [GoogleTagManagerService],
     (service: GoogleTagManagerService) => {
-      service.pushTag(tag).subscribe(() => {
+      service.addGtmToDom().subscribe(() => {
         const script = document.querySelector('#GTM')
         expect(script).toBeTruthy()
         expect(script.getAttribute('src')).toContain(
