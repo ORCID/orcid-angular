@@ -44,7 +44,11 @@ export class GoogleTagManagerService {
                 subscriber.complete()
               }
             },
-            (error) => console.log('GTM error')
+            () =>
+              subscriber.error({
+                name: 'GTM - Error',
+                message: 'Unable to add GTM',
+              })
           )
       } else {
         pushOnDataLayer(item)
@@ -102,7 +106,6 @@ export class GoogleTagManagerService {
     label: RequestInfoForm | string
   ): Observable<void> {
     let clientId
-    // if has RequestInfoForm add the client string as event_label
     if (typeof label !== 'string') {
       clientId = (label as unknown as RequestInfoForm).clientId
       label = 'OAuth ' + buildClientString(label)

@@ -80,16 +80,9 @@ export class ThirdPartySigninCompletedGuard implements CanActivateChild {
                 .subscribe()
             }
           })
-        if (state.url.startsWith('/my-orcid')) {
-          // This "out of router navigation" is necesary while my-orcid exist on the old page
-          // as a temporal side effect will show the new app header/footer before navigating into the old app
-          ;(<any>this.window).outOfRouterNavigation('/my-orcid')
-          return false
-        } else {
-          return this._router.parseUrl(
-            state.url.replace(/\/third-party-signin-completed/, '')
-          )
-        }
+        return this._router.parseUrl(
+          state.url.replace(/\/third-party-signin-completed/, '')
+        )
       })
     )
   }
