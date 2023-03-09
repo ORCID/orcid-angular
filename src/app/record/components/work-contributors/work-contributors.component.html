@@ -41,7 +41,7 @@
         <ng-container
           *ngFor="
             let contributor of contributors
-              | slice : 0 : maxNumberOfContributorsSummary;
+              | slice: 0:maxNumberOfContributorsSummary;
             let last = last
           "
         >
@@ -116,12 +116,12 @@
             cdkDrag
             class="row contributors-box"
             [ngStyle]="{ direction: screenDirection }"
-            [formGroupName]="i"
+            [formGroupName]="contributorIndex"
             *ngFor="
               let contributor of contributorsFormArray?.controls;
-              index as i
+              index as contributorIndex
             "
-            [attr.id]="'draggable-' + i"
+            [attr.id]="'draggable-' + contributorIndex"
           >
             <div class="row drag-placeholder" *cdkDragPlaceholder></div>
             <div class="row" [ngClass]="{ 'no-wrap': !isMobile }">
@@ -235,8 +235,8 @@
                     <div class="col l3 delete-button">
                       <button
                         mat-icon-button
-                        (click)="deleteContributor(i)"
-                        [id]="'cy-delete-button-' + i"
+                        (click)="deleteContributor(contributorIndex)"
+                        [id]="'cy-delete-button-' + contributorIndex"
                         [attr.aria-label]="
                           deleteLabel +
                           ' ' +
@@ -269,6 +269,9 @@
                             <mat-select
                               [aria-label]="ngOrcidSelectRoleAriaLabel"
                               #roleSelect
+                              [ngClass]="[
+                                'contributor-role-' + contributorIndex
+                              ]"
                               placeholder="{{ ngOrcidSelectRole }}"
                               formControlName="role"
                             >
@@ -278,7 +281,7 @@
                                 "
                                 [value]="contributionRole.key"
                                 [disabled]="
-                                  contributionRole.key | disableRole : role
+                                  contributionRole.key | disableRole: role
                                 "
                               >
                                 {{ contributionRole.translation | titlecase }}
@@ -311,7 +314,7 @@
                     <div class="row">
                       <a
                         class="underline cy-add-another-role"
-                        (click)="addAnotherRole(contributor)"
+                        (click)="addAnotherRole(contributor, contributorIndex)"
                       >
                         <span class="mat-body-1" i18n="@@works.addAnotherRole">
                           Add another role
@@ -327,8 +330,8 @@
               >
                 <button
                   mat-icon-button
-                  (click)="deleteContributor(i)"
-                  [id]="'cy-delete-button-' + i"
+                  (click)="deleteContributor(contributorIndex)"
+                  [id]="'cy-delete-button-' + contributorIndex"
                   [attr.aria-label]="
                     deleteLabel + ' ' + contributor.get('creditName')?.value
                   "
@@ -342,7 +345,7 @@
             </div>
             <hr
               class="dashed-line"
-              *ngIf="!(i === contributorsFormArray.length - 1)"
+              *ngIf="!(contributorIndex === contributorsFormArray.length - 1)"
             />
           </div>
         </div>

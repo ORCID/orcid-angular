@@ -71,7 +71,7 @@ export class WorkContributorRolesComponent implements OnInit {
         this.workService.getContributionRoleByKey('no specified role').key,
         false
       )
-    )
+    )    
     this.changeDetectorRef.detectChanges()
     const input = this.inputs.last
     input.focus()
