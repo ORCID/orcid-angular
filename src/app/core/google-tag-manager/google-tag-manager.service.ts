@@ -1,16 +1,14 @@
 import { Injectable } from '@angular/core'
 import { environment } from '../../../environments/environment'
 import { RequestInfoForm } from '../../types'
-import { BehaviorSubject, fromEvent, Observable, of, throwError } from 'rxjs'
+import { BehaviorSubject, Observable } from 'rxjs'
 import {
   browserGlobals,
   buildClientString,
-  finishPerformanceMeasurement,
   pushOnDataLayer,
   removeUrlParameters,
-  startPerformanceMeasurement,
 } from '../../analytics-utils'
-import { catchError, first, map } from 'rxjs/operators'
+import { catchError } from 'rxjs/operators'
 import { ItemGTM } from '../../types/item_gtm'
 import { ERROR_REPORT } from '../../errors'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
@@ -46,7 +44,11 @@ export class GoogleTagManagerService {
                 subscriber.complete()
               }
             },
-            (error) => console.log('GTM error')
+            () =>
+              subscriber.error({
+                name: 'GTM - Error',
+                message: 'Unable to add GTM',
+              })
           )
       } else {
         pushOnDataLayer(item)
@@ -104,10 +106,9 @@ export class GoogleTagManagerService {
     label: RequestInfoForm | string
   ): Observable<void> {
     let clientId
-    // if has RequestInfoForm add the client string as event_label
     if (typeof label !== 'string') {
-      label = 'OAuth ' + buildClientString(label)
       clientId = (label as unknown as RequestInfoForm).clientId
+      label = 'OAuth ' + buildClientString(label)
     }
     if (environment.debugger) {
       console.debug(`GTM - Event /${event}/${label}/`)

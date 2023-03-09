@@ -126,6 +126,9 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
   ariaLabelEndDate = $localize`:@@shared.startDate:End date`
   ariaLabelSaveChanges = $localize`:@@shared.saveFundingChanges:Save funding changes`
   ariaLabelCancelChanges = $localize`:@@shared.cancelFundingChanges:Cancel changes and close Funding`
+  ariaLabelClose = $localize`:@@shared.closeFunding:Close funding`
+  ariaLabelDescription = $localize`:@@shared.descriptionFunding:Project description`
+  ariaLabelAmount = $localize`:@@shared.amountFunding:Amount`
 
   ngOrcidYear = $localize`:@@shared.year:Year`
   ngOrcidMonth = $localize`:@@shared.month:Month`
@@ -133,7 +136,6 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
   ngOrcidSelectLanguage = $localize`:@@shared.selectLanguage:Select a language`
   ngOrcidSelectACountryOrLocation = $localize`:@@shared.selectACountryOrLocation:Select a country or location`
   ngOrcidDefaultVisibilityLabel = $localize`:@@shared.visibilityDescription:Control who can see this information by setting the visibility. Your default visibility is`
-
   constructor(
     @Inject(WINDOW) private window: Window,
     private _platform: PlatformInfoService,
