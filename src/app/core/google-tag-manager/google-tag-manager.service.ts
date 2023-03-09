@@ -106,8 +106,10 @@ export class GoogleTagManagerService {
     label: RequestInfoForm | string
   ): Observable<void> {
     let clientId
+    let redirectUrl
     if (typeof label !== 'string') {
       clientId = (label as unknown as RequestInfoForm).clientId
+      redirectUrl = (label as unknown as RequestInfoForm).redirectUrl
       label = 'OAuth ' + buildClientString(label)
     }
     if (environment.debugger) {
@@ -120,6 +122,10 @@ export class GoogleTagManagerService {
     } as ItemGTM
     if (clientId) {
       tagItem.clientId = clientId
+    }
+
+    if (event === 'Reauthorize') {
+      tagItem.redirectUrl = redirectUrl
     }
 
     return this.pushTag(tagItem)

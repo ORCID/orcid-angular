@@ -17,4 +17,5 @@ export type ItemGTM = {
     path?: string
     location?: string
   }
+  redirectUrl?: any
 }
