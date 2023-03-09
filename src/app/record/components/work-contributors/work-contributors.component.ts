@@ -1,10 +1,14 @@
 import {
   ChangeDetectorRef,
   Component,
+  ElementRef,
   Inject,
   Input,
   OnDestroy,
   OnInit,
+  QueryList,
+  ViewChildren,
+  ViewContainerRef,
 } from '@angular/core'
 import {
   AbstractControl,
@@ -30,6 +34,7 @@ import { MAX_LENGTH_LESS_THAN_ONE_HUNDRED } from '../../../constants'
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
 import { WINDOW } from '../../../cdk/window'
 import { TogglzService } from '../../../core/togglz/togglz.service'
+import { MatSelect } from '@angular/material/select'
 
 @Component({
   selector: 'app-work-contributors',
@@ -43,7 +48,12 @@ import { TogglzService } from '../../../core/togglz/togglz.service'
   ],
 })
 export class WorkContributorsComponent implements OnInit, OnDestroy {
+  @ViewChildren('roleSelect', { read: ViewContainerRef })
+  inputs: QueryList<MatSelect>
+
   deleteLabel = $localize`:@@shared.deleteActivityAriaLabel:Delete`
+  @ViewChildren('contributorNames')
+  contributorNamesInputs: QueryList<ElementRef>
 
   $destroy: Subject<boolean> = new Subject<boolean>()
 
@@ -122,6 +132,9 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
     if (!addAnotherContributorStatus) {
       this.contributorsFormArray.push(this.getContributorForm())
     }
+    this._changeDetectorRef.detectChanges()
+
+    this.contributorNamesInputs.last.nativeElement.focus()
   }
 
   addRecordHolderAsContributor(): void {
@@ -143,13 +156,35 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
     return (contributor.get('roles') as UntypedFormArray).controls
   }
 
-  addAnotherRole(contributor): void {
+  addAnotherRole(contributor, contributorIndex?): void {
     ;(contributor.get('roles') as UntypedFormArray).push(
       this.getRoleForm(
         this.workService.getContributionRoleByKey('no specified role').key,
         false
       )
     )
+    this._changeDetectorRef.detectChanges()
+    if (contributorIndex) {
+      // Find las input with id contributor and focus on it
+      const contributorIndexInputs = this.inputs.toArray().filter((input) => {
+        // Get input native element
+        const nativeElement = ((input as any).element as ElementRef)
+          .nativeElement
+
+        // Check if nativeElement has class
+        if (
+          nativeElement.classList.contains(
+            'contributor-role-' + contributorIndex
+          )
+        ) {
+          return input
+        }
+        return false
+      })
+      ;(
+        contributorIndexInputs[contributorIndexInputs.length - 1] as any
+      ).element.nativeElement.focus()
+    }
   }
 
   deleteContributor(contributorIndex: number): void {

@@ -12,7 +12,7 @@
   <div>
     <div class="row">
       <label
-        for="grant-number-input"
+        [attr.for]="'grant-number-input-' + index"
         class="mat-caption"
         [ngClass]="{
           error:
@@ -28,7 +28,7 @@
       class="mat-form-field-min input-container"
     >
       <input
-        id="grant-number-input"
+        [id]="'grant-number-input-' + index"
         #grantNumber
         matInput
         formControlName="grantNumber"
@@ -51,7 +51,7 @@
   <!-- Grant link value -->
   <div class="row">
     <label
-      for="grant-url-input"
+      [attr.for]="'grant-url-input-' + index"
       class="mat-caption"
       [ngClass]="{
         error:
@@ -66,7 +66,11 @@
     appearance="outline"
     class="mat-form-field-min input-container"
   >
-    <input id="grant-url-input" matInput formControlName="grantUrl" />
+    <input
+      [id]="'grant-url-input-' + index"
+      matInput
+      formControlName="grantUrl"
+    />
 
     <mat-hint i18n="@@funding.grantUrlHint">
       A link to more information about the funding award
