@@ -23,6 +23,7 @@ import { ModalWebsitesComponent } from './cdk/side-bar/modals/modal-websites/mod
 import { ModalPersonIdentifiersComponent } from './cdk/side-bar/modals/modal-person-identifiers/modal-person-identifiers.component'
 import { AffiliationType } from './types/record-affiliation.endpoint'
 import { WorkBibtexModalComponent } from './record/components/work-stack-group/modals/work-bibtex-modal/work-bibtex-modal.component'
+import { environment } from 'src/environments/environment'
 
 export { COUNTRY_NAMES_TO_COUNTRY_CODES } from './constants-country-codes'
 
@@ -350,5 +351,14 @@ export function getAriaLabel(
       return $localize`:@@shared.dialogAriaLabeledByWorkSearch:Manage work search dialog`
     case ModalPeerReviewsComponent:
       return $localize`:@@shared.dialogAriaLabeledByPeerReview:Manage peer review dialog`
+  }
+}
+
+
+export function navigateTo(val, windowRef){
+  if (val === '/signout' && environment.proxyMode) {
+    this._user.noRedirectLogout().subscribe()
+  } else {
+    windowRef.location.href = val
   }
 }

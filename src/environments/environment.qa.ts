@@ -36,4 +36,6 @@ export const environment = {
     uk: '** Ukrainian',
     ca: '** Catalan',
   },
+  proxyMode: false,
+
 }

@@ -31,4 +31,6 @@ export const environment = {
     'zh-CN': '简体中文',
     'zh-TW': '繁體中文',
   },
+  proxyMode: false,
+
 }

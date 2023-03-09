@@ -17,7 +17,7 @@ import {
   Validators,
 } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
-import { catchError, first, map, takeUntil } from 'rxjs/operators'
+import { catchError, first, map, takeUntil, tap } from 'rxjs/operators'
 import { isRedirectToTheAuthorizationPage } from 'src/app/constants'
 import { UserService } from 'src/app/core'
 import { OauthParameters, RequestInfoForm } from 'src/app/types'
@@ -175,23 +175,27 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
         if (data.success) {
           if (isRedirectToTheAuthorizationPage(data)) {
             this.handleOauthLogin(data.url)
-          } else {
+          } else {            
             const analyticsReports: Observable<void>[] = []
 
             analyticsReports.push(
-              this._gtag.reportEvent('Sign-In', 'RegGrowth', 'Website')
+              this._gtag.reportEvent('Sign-In', 'RegGrowth', 'Website').pipe(tap(()=> {}, (err) => {console.log('_gtag' ,err)}))
             )
+
             analyticsReports.push(
-              this._googleTagManagerService.reportEvent('Sign-In', 'Website')
+              this._googleTagManagerService.reportEvent('Sign-In', 'Website').pipe(tap(()=> {}, (err) => {console.log('_googleTagManagerService' ,err)}))
             )
+
             forkJoin(analyticsReports)
               .pipe(
-                catchError((err) =>
-                  this._errorHandler.handleError(
+                catchError((err) => {
+                 console.log( 'ERROR WITH GTM');
+                 
+                  return this._errorHandler.handleError(
                     err,
                     ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
                   )
-                )
+                })
               )
               .subscribe(
                 () => this.navigateTo(data.url),
@@ -386,6 +390,8 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   navigateTo(val: string): void {
+    console.log('VAL ', val)
+
     if (val.indexOf('orcid.org/my-orcid')) {
       this._router.navigate(['/my-orcid'])
     } else {
