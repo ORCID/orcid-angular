@@ -134,9 +134,6 @@ describe('ModalCountryComponent', () => {
     const countriesSelects = await loader.getAllHarnesses(MatSelectHarness)
     const countriesInputs = await loader.getAllHarnesses(MatInputHarness)
 
-    console.log(countriesSelects)
-    console.log(countriesInputs)
-
     await countriesSelects[1].open()
     await countriesSelects[1].clickOptions() //Select the first option
 

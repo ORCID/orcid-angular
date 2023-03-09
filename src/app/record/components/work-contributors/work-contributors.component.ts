@@ -170,8 +170,6 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
         // Get input native element
         const nativeElement = ((input as any).element as ElementRef)
           .nativeElement
-        console.log(nativeElement)
-        console.log(nativeElement.classList)
 
         // Check if nativeElement has class
         if (
