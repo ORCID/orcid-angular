@@ -37,7 +37,7 @@
               <mat-option
                 *ngFor="let contributionRole of contributionRoles"
                 [value]="contributionRole.key"
-                [disabled]="contributionRole.key | disableRole: role"
+                [disabled]="contributionRole.key | disableRole : role"
               >
                 {{ contributionRole.translation | titlecase }}
               </mat-option>

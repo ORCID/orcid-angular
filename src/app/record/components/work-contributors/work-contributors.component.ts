@@ -183,9 +183,9 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
         }
         return false
       })
-      ;(contributorIndexInputs[
-        contributorIndexInputs.length - 1
-      ] as any).element.nativeElement.focus()
+      ;(
+        contributorIndexInputs[contributorIndexInputs.length - 1] as any
+      ).element.nativeElement.focus()
     }
   }
 
@@ -324,8 +324,8 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
       .filter((formGroup) => formGroup.disabled)
       .map((formGroup) => {
         const role = formGroup?.value?.role
-        const translation = this.workService.getContributionRoleByKey(role)
-          ?.translation
+        const translation =
+          this.workService.getContributionRoleByKey(role)?.translation
         return translation
           ? translation
           : role.charAt(0).toUpperCase() + role.slice(1)

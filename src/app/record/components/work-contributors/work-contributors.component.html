@@ -41,7 +41,7 @@
         <ng-container
           *ngFor="
             let contributor of contributors
-              | slice: 0:maxNumberOfContributorsSummary;
+              | slice : 0 : maxNumberOfContributorsSummary;
             let last = last
           "
         >
@@ -281,7 +281,7 @@
                                 "
                                 [value]="contributionRole.key"
                                 [disabled]="
-                                  contributionRole.key | disableRole: role
+                                  contributionRole.key | disableRole : role
                                 "
                               >
                                 {{ contributionRole.translation | titlecase }}
