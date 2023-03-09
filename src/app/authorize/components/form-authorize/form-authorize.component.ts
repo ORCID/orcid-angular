@@ -48,7 +48,7 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
     private _platformInfo: PlatformInfoService,
     private _router: Router,
     private _errorHandler: ErrorHandlerService,
-    private _trustedIndividuals: TrustedIndividualsService,
+    private _trustedIndividuals: TrustedIndividualsService
   ) {
     this._user
       .getUserSession()
@@ -84,11 +84,7 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
   ngOnInit(): void {}
 
   navigateTo(val) {
-    if (val === '/signout' && environment.proxyMode) {
-      this._user.noRedirectLogout().subscribe()
-    } else {
-      this.window.location.href = val
-    }
+    this.window.location.href = val
   }
 
   authorize(value = true) {
