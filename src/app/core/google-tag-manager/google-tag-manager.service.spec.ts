@@ -47,7 +47,7 @@ describe('GoogleTagManagerService', () => {
     }
   ))
 
-  it('should be able to add script element', inject(
+  it('should be able to add script element and throw error because cannot connect with GTM', inject(
     [GoogleTagManagerService],
     (service: GoogleTagManagerService) => {
       service.addGtmToDom().subscribe(() => {
@@ -56,6 +56,8 @@ describe('GoogleTagManagerService', () => {
         expect(script.getAttribute('src')).toContain(
           'https://www.googletagmanager.com/gtm.js?id='
         )
+      }, (error) => {
+        expect(error).toEqual({ name: 'GTM - Error', message: 'Unable to add GTM' });
       })
     }
   ))
@@ -66,6 +68,8 @@ describe('GoogleTagManagerService', () => {
       return service.pushTag(tag).subscribe(() => {
         expect(browserGlobals.windowRef().dataLayer[1]).toEqual(tag)
         expect(browserGlobals.windowRef().dataLayer[2]).toBeFalsy()
+      },(error) => {
+        expect(error).toEqual({ name: 'GTM - Error', message: 'Unable to add GTM' });
       })
     }
   ))
