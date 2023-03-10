@@ -62,6 +62,7 @@ export class GoogleTagManagerService {
     return new Observable<boolean>((subscriber) => {
       if (this.isLoaded) {
         subscriber.next(true)
+        subscriber.complete()
       }
       const doc = browserGlobals.documentRef()
       pushOnDataLayer({
