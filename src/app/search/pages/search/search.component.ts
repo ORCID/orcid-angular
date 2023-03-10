@@ -71,10 +71,7 @@ export class SearchComponent implements OnInit, OnDestroy {
       event.pageSize,
       event.length
     )
-    this._announcer.liveAnnouncePagination(
-      event,
-      this.labelSearchResults
-    )
+    this._announcer.liveAnnouncePagination(event, this.labelSearchResults)
 
     this.router.navigate(['/orcid-search/search'], {
       queryParams: {

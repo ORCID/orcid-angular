@@ -180,7 +180,7 @@ export class WorkStackGroupComponent implements OnInit {
     this.paginationLoading = true
     this.userRecordContext.offset = event.pageIndex * event.pageSize
     this.userRecordContext.pageSize = event.pageSize
-    this.userRecordContext.publicRecordId = this.isPublicRecord    
+    this.userRecordContext.publicRecordId = this.isPublicRecord
     this._announce.liveAnnouncePagination(event, this.regionWorks)
 
     this.loadWorks()
