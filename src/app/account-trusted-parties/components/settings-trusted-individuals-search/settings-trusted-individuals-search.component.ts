@@ -19,6 +19,7 @@ import {
 } from 'src/app/constants'
 import { UserService } from 'src/app/core'
 import { AccountTrustedIndividualsService } from 'src/app/core/account-trusted-individuals/account-trusted-individuals.service'
+import { AnnouncerService } from 'src/app/core/announcer/announcer.service'
 import { SearchService } from 'src/app/core/search/search.service'
 import { ExpandedSearchResultsContent, SearchResults } from 'src/app/types'
 import { AccountTrustedIndividual } from 'src/app/types/account-trusted-individuals'
@@ -36,8 +37,7 @@ import { DialogAddTrustedIndividualsComponent } from '../dialog-add-trusted-indi
   ],
 })
 export class SettingsTrustedIndividualsSearchComponent
-  implements OnInit, OnDestroy
-{
+  implements OnInit, OnDestroy {
   $destroy = new Subject()
   searchDone = false
   displayedColumns = ['trustedIndividuals', 'orcid', 'actions']
@@ -56,6 +56,7 @@ export class SettingsTrustedIndividualsSearchComponent
   alreadyAddedLabel = $localize`:@@account.alreadyAdded:You already added this user`
   trustedPartiesUrl = '/trusted-parties'
   paginatorLabel: any
+  trustedIndividualsLabel = $localize`:@@account.trustedIndividuals:Trusted individuals`
 
   constructor(
     private _search: SearchService,
@@ -63,7 +64,7 @@ export class SettingsTrustedIndividualsSearchComponent
     private _platform: PlatformInfoService,
     private account: AccountTrustedIndividualsService,
     private _user: UserService,
-    private _liveAnnouncer: LiveAnnouncer,
+    private _announcer: AnnouncerService,
     private _matPaginatorIntl: MatPaginatorIntl
   ) {}
 
@@ -246,7 +247,7 @@ export class SettingsTrustedIndividualsSearchComponent
       event.pageSize,
       event.length
     )
-    this._liveAnnouncer.announce(this.paginatorLabel)
+    this._announcer.liveAnnouncePagination(event, this.trustedIndividualsLabel)
     this.search(this.searchValue)
   }
   ngOnInit(): void {

@@ -48,7 +48,7 @@ import { WorkExternalIdModalComponent } from './modals/work-external-id-modal/wo
 import { WorkBibtexModalComponent } from './modals/work-bibtex-modal/work-bibtex-modal.component'
 import { ModalCombineWorksWithSelectorComponent } from '../work/modals/modal-combine-works-with-selector/modal-combine-works-with-selector.component'
 import { GroupingSuggestions } from 'src/app/types/works.endpoint'
-import { LiveAnnouncer } from '@angular/cdk/a11y'
+import { AnnouncerService } from 'src/app/core/announcer/announcer.service'
 
 @Component({
   selector: 'app-work-stack-group',
@@ -138,7 +138,7 @@ export class WorkStackGroupComponent implements OnInit {
     private _record: RecordService,
     private _works: RecordWorksService,
     private _matPaginatorIntl: MatPaginatorIntl,
-    private _liveAnnouncer: LiveAnnouncer
+    private _announce: AnnouncerService
   ) {}
 
   ngOnInit(): void {
@@ -180,13 +180,8 @@ export class WorkStackGroupComponent implements OnInit {
     this.paginationLoading = true
     this.userRecordContext.offset = event.pageIndex * event.pageSize
     this.userRecordContext.pageSize = event.pageSize
-    this.userRecordContext.publicRecordId = this.isPublicRecord
-    this.paginatorLabel = this._matPaginatorIntl.getRangeLabel(
-      event.pageIndex,
-      event.pageSize,
-      event.length
-    )
-    this._liveAnnouncer.announce(this.paginatorLabel)
+    this.userRecordContext.publicRecordId = this.isPublicRecord    
+    this._announce.liveAnnouncePagination(event, this.regionWorks)
 
     this.loadWorks()
   }

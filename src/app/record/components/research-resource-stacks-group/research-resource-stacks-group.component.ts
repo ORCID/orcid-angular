@@ -18,6 +18,7 @@ import {
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator'
 import { DEFAULT_PAGE_SIZE } from 'src/app/constants'
 import { LiveAnnouncer } from '@angular/cdk/a11y'
+import { AnnouncerService } from 'src/app/core/announcer/announcer.service'
 
 @Component({
   selector: 'app-research-resources',
@@ -71,8 +72,8 @@ export class ResearchResourceStacksGroupComponent implements OnInit {
     private _record: RecordService,
     private _recordResearchResourceService: RecordResearchResourceService,
     private _user: UserService,
-    private _liveAnnouncer: LiveAnnouncer,
-    private _matPaginatorIntl: MatPaginatorIntl
+    private _matPaginatorIntl: MatPaginatorIntl,
+    private _announcer: AnnouncerService
   ) {
     _platform
       .get()
@@ -120,7 +121,7 @@ export class ResearchResourceStacksGroupComponent implements OnInit {
       event.pageSize,
       event.length
     )
-    this._liveAnnouncer.announce(this.paginatorLabel)
+    this._announcer.liveAnnouncePagination(event, this.regionResearchResources)
 
     this.loadResearchResources()
   }
