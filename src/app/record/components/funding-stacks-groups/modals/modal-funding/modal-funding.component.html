@@ -53,7 +53,7 @@
   <form [formGroup]="fundingForm" (ngSubmit)="onSubmit()">
     <section id="funding-details">
       <div
-        id="funding-details"
+        id="funding-detail"
         class="title top-title"
         [ngClass]="{
           'orc-font-body': !platform.columns12,
@@ -245,7 +245,7 @@
                   'translatedTitleGroup'
                 )
               }"
-              id="funding-funded-project"
+              id="funding-funded-project-translated-input"
             >
               <strong i18n="@@funding.translatedTitle" x
                 >Funding project translated title</strong
@@ -256,7 +256,7 @@
           <div class="input-container">
             <mat-form-field appearance="outline" class="mat-form-field-min">
               <input
-                aria-labelledby="funding-translated-title"
+                aria-labelledby="funding-funded-project-translated-input"
                 id="funding-project-translated-title-input"
                 matInput
                 formControlName="translatedTitleContent"
@@ -816,7 +816,7 @@
               fundingForm.get('country').hasError('required') &&
               fundingForm.get('country').touched
           }"
-          id="funding-countr-location"
+          id="funding-country-location"
         >
           <strong i18n="@@shared.countryOrLocation">Country/Location</strong>
           <span class="required">*</span>

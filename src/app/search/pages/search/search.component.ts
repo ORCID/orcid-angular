@@ -8,7 +8,7 @@ import { SearchParameters } from 'src/app/types'
 import { Meta } from '@angular/platform-browser'
 import { EMPTY } from 'rxjs'
 import { RobotsMetaTagsService } from 'src/app/core/robots-meta-tags/robots-meta-tags.service'
-import { LiveAnnouncer } from '@angular/cdk/a11y'
+import { AnnouncerService } from 'src/app/core/announcer/announcer.service'
 
 @Component({
   selector: 'app-search',
@@ -23,6 +23,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   loadingNewResults = false
   ariaLabelPaginator = $localize`:@@search.paginator:paginator`
   ariaLabelBottomPaginator = $localize`:@@search.bottomPaginator:bottom paginator`
+  labelSearchResults = $localize`:@@ngOrcid.search.ariaLabelSearchResults:Search Results`
   paginatorLabel: string
 
   constructor(
@@ -31,8 +32,8 @@ export class SearchComponent implements OnInit, OnDestroy {
     @Optional() private router: Router,
     meta: Meta,
     private _robotsMetadata: RobotsMetaTagsService,
-    private _liveAnnouncer: LiveAnnouncer,
-    private _matPaginatorIntl: MatPaginatorIntl
+    private _matPaginatorIntl: MatPaginatorIntl,
+    private _announcer: AnnouncerService
   ) {
     this._robotsMetadata.disallowRobots()
     route.queryParams
@@ -70,7 +71,7 @@ export class SearchComponent implements OnInit, OnDestroy {
       event.pageSize,
       event.length
     )
-    this._liveAnnouncer.announce(this.paginatorLabel)
+    this._announcer.liveAnnouncePagination(event, this.labelSearchResults)
 
     this.router.navigate(['/orcid-search/search'], {
       queryParams: {

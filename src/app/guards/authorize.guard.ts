@@ -51,10 +51,7 @@ export class AuthorizeGuard implements CanActivateChild {
             oauthSession.responseType &&
             oauthSession.redirectUrl.includes(oauthSession.responseType + '=')
           ) {
-            return this.reportAlreadyAuthorize(session.oauthSession).pipe(
-              catchError(() => this.sendUserToRedirectURL(oauthSession)),
-              switchMap(() => this.sendUserToRedirectURL(oauthSession))
-            )
+            return this.reportAlreadyAuthorize(oauthSession)
           } else if (
             oauthSession.forceLogin ||
             !session.oauthSessionIsLoggedIn
@@ -67,7 +64,7 @@ export class AuthorizeGuard implements CanActivateChild {
     )
   }
 
-  sendUserToRedirectURL(oauthSession: RequestInfoForm) {
+  sendUserToRedirectURL(oauthSession: RequestInfoForm): Observable<boolean> {
     this.window.location.href = oauthSession.redirectUrl
     return NEVER
   }
@@ -81,12 +78,16 @@ export class AuthorizeGuard implements CanActivateChild {
       this._googleTagManagerService.reportEvent(`Reauthorize`, request)
     )
     return forkJoin(analyticsReports).pipe(
-      catchError((err) =>
+      catchError((err) => {
         this._errorHandler.handleError(
           err,
           ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
         )
-      )
+        return this.sendUserToRedirectURL(request)
+      }),
+      switchMap(() => {
+        return NEVER
+      })
     )
   }
 
