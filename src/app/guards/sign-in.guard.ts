@@ -7,7 +7,7 @@ import {
   UrlTree,
 } from '@angular/router'
 import { Observable } from 'rxjs'
-import { map, take } from 'rxjs/operators'
+import { map } from 'rxjs/operators'
 
 import { PlatformInfoService } from '../cdk/platform-info'
 import { WINDOW } from '../cdk/window'
@@ -33,7 +33,6 @@ export class SignInGuard implements CanActivateChild {
     const queryParams = next.queryParams
 
     return this._user.getUserSession().pipe(
-      take(1),
       map((session) => {
         if (session.oauthSession) {
           if (queryParams.email || queryParams.orcid) {
