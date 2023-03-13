@@ -37,7 +37,7 @@ export class AuthorizeGuard implements CanActivateChild {
   ): Observable<boolean | UrlTree> | UrlTree | boolean {
     return this._user.getUserSession().pipe(
       take(1),
-      switchMap((session) => {        
+      switchMap((session) => {
         const oauthSession = session.oauthSession
         if (session.userInfo?.LOCKED === 'true') {
           return of(this._router.createUrlTree(['/my-orcid']))
