@@ -7,7 +7,7 @@ import {
   UrlTree,
 } from '@angular/router'
 import { forkJoin, NEVER, Observable, of } from 'rxjs'
-import { catchError, map, switchMap } from 'rxjs/operators'
+import { catchError, map, switchMap, take } from 'rxjs/operators'
 
 import { PlatformInfoService } from '../cdk/platform-info'
 import { WINDOW } from '../cdk/window'
@@ -36,7 +36,8 @@ export class AuthorizeGuard implements CanActivateChild {
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | UrlTree | boolean {
     return this._user.getUserSession().pipe(
-      switchMap((session) => {
+      take(1),
+      switchMap((session) => {        
         const oauthSession = session.oauthSession
         if (session.userInfo?.LOCKED === 'true') {
           return of(this._router.createUrlTree(['/my-orcid']))
