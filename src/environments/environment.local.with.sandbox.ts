@@ -10,7 +10,6 @@ export const environment = {
   BLOG_NEWS: 'https://orcid.org/about/news',
   INFO_SITE: 'http://orcidaboutdev.wpengine.com/',
   GOOGLE_ANALYTICS_TESTING_MODE: true,
-  GOOGLE_ANALYTICS: 'UA-0000000-00',
   GOOGLE_TAG_MANAGER: 'GTM-0000000',
   GOOGLE_RECAPTCHA: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
   ZENDESK: null,
