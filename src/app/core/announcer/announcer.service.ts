@@ -24,7 +24,8 @@ export class AnnouncerService {
       ' ' +
       this.ofLabel +
       ' ' +
-      paginatorLabel.length +
+      // Total pages
+      Math.ceil(paginatorLabel.length / paginatorLabel.pageSize) +
       '. ' +
       this.thereAreLabel +
       ' ' +
@@ -54,6 +55,6 @@ export class AnnouncerService {
     if (environment.debugger) {
       console.debug('📢' + announcement)
     }
-    this._liveAnnouncer.announce(announcement)
+    this._liveAnnouncer.announce(announcement, 'assertive')
   }
 }

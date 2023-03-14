@@ -155,7 +155,7 @@
         mat-button
         class="orc-font-body-small"
         [attr.aria-label]="
-          type | appPanelsSortAriaLabel : !currentAmount && !total
+          type | appPanelsSortAriaLabel: !currentAmount && !total
         "
         [matMenuTriggerFor]="menu"
         [disabled]="!currentAmount && !total"
@@ -176,7 +176,7 @@
             *ngIf="option === sortType && sortDirection === 'asc'"
             [attr.aria-label]="ariaLabelAscending"
           >
-            south
+            north
           </mat-icon>
           <mat-icon
             aria-hidden="false"
@@ -184,7 +184,7 @@
             *ngIf="option === sortType && sortDirection === 'desc'"
             [attr.aria-label]="ariaLabelDescending"
           >
-            north
+            south
           </mat-icon>
         </button>
       </mat-menu>
