@@ -4,7 +4,7 @@ import userData from '../../fixtures/contributors-fixtures/contributors-users.fi
 import { qase } from 'cypress-qase-reporter/dist/mocha'
 
 describe('Add work using BibTeX citation where accents in contributor names are escaped', async function () {
-  const bibtextFilePath = userData.cyRecordOwner.bibtex_qase68_path
+  const bibtexFilePath = userData.cyRecordOwner.bibtex_qase68_path
   const contribName = userData.cyRecordOwner.bibtex_qase68_contrib
 
   before(() => {
@@ -19,8 +19,9 @@ describe('Add work using BibTeX citation where accents in contributor names are 
         cy.get('#cy-menu-add-works').click()
       })
       cy.get('#cy-add-work-bibtext').click({ force: true })
+      cy.wait(2000) //need to wait for back end
       //use CYPRESS-UPLOAD-FILE package to bypass OS file picker modal
-      cy.get('[type="file"]').attachFile(bibtextFilePath)
+      cy.get('[type="file"]').attachFile(bibtexFilePath)
       cy.wait(2000) //need to wait for back end
 
       //select work
@@ -42,7 +43,7 @@ describe('Add work using BibTeX citation where accents in contributor names are 
 
   after(() => {
     //log out
-    cy.get('#cy-user-info').click({ force: true })
-    cy.get('#cy-signout').click({ force: true })
+   // cy.get('#cy-user-info').click({ force: true })
+   // cy.get('#cy-signout').click({ force: true })
   })
 })
