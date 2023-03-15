@@ -33,7 +33,7 @@ describe('Add PUBMED ID with more than 50 contributors', async function () {
 
       //save entry
       cy.get('#save-work-button').click({ force: true })
-      cy.wait(4000)//waiting for back end to complete
+      cy.wait(4000) //waiting for back end to complete
 
       //Verify work was added
       cy.get('app-work-stack').should(

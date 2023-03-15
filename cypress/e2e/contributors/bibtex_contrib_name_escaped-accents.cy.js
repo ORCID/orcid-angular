@@ -43,7 +43,7 @@ describe('Add work using BibTeX citation where accents in contributor names are 
 
   after(() => {
     //log out
-   // cy.get('#cy-user-info').click({ force: true })
-   // cy.get('#cy-signout').click({ force: true })
+    // cy.get('#cy-user-info').click({ force: true })
+    // cy.get('#cy-signout').click({ force: true })
   })
 })

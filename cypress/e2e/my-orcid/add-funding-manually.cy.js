@@ -38,7 +38,9 @@ describe('My orcid - users are able to add funding info in their record', async 
       cy.contains(fundingData.tranlationLanguage).click()
     })
     cy.get('#funding-project-link-input').clear().type(fundingData.fundingLink)
-    cy.get('[formcontrolname="description"]').clear().type(fundingData.description)
+    cy.get('[formcontrolname="description"]')
+      .clear()
+      .type(fundingData.description)
     cy.get('[formcontrolname="currencyCode"]').click()
     cy.get('[role="listbox"]').within(($currency) => {
       //TO DO: replace with id for the element when we add it
