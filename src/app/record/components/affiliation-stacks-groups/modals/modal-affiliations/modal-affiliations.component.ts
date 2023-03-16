@@ -113,21 +113,27 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
   displayOrganizationHint: boolean
 
   get organizationIsInvalidAndTouched() {
-    return this.affiliationForm.hasError('required', 'organization') &&
+    return (
+      this.affiliationForm.hasError('required', 'organization') &&
       (this.affiliationForm.get('organization').dirty ||
-      this.affiliationForm.get('organization').touched)
+        this.affiliationForm.get('organization').touched)
+    )
   }
 
   get cityIsInvalidAndTouched() {
-    return this.affiliationForm.hasError('required', 'city') &&
-    (this.affiliationForm.get('city').dirty ||
-      this.affiliationForm.get('city').touched)
+    return (
+      this.affiliationForm.hasError('required', 'city') &&
+      (this.affiliationForm.get('city').dirty ||
+        this.affiliationForm.get('city').touched)
+    )
   }
 
   get countryIsInvalidAndTouched() {
-    return this.affiliationForm.hasError('required', 'country') &&
-    (this.affiliationForm.get('country').dirty ||
-      this.affiliationForm.get('country').touched)
+    return (
+      this.affiliationForm.hasError('required', 'country') &&
+      (this.affiliationForm.get('country').dirty ||
+        this.affiliationForm.get('country').touched)
+    )
   }
 
   constructor(
