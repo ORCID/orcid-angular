@@ -139,10 +139,7 @@
           for="organization-input"
           class="mat-caption"
           [ngClass]="{
-            error:
-              affiliationForm.hasError('required', 'organization') &&
-              (affiliationForm.get('organization').dirty ||
-                affiliationForm.get('organization').touched)
+            error: organizationIsInvalidAndTouched
           }"
         >
           <strong i18n="@@shared.organization" id="organizationLabel"
@@ -166,6 +163,7 @@
             matInput
             formControlName="organization"
             [matAutocomplete]="auto"
+            [attr.aria-invalid]="organizationIsInvalidAndTouched"
           />
           <mat-autocomplete
             autoActiveFirstOption
@@ -215,8 +213,12 @@
             <mat-icon>close</mat-icon>
           </button>
           <mat-error
+            role="alert"
+            aria-atomic="true"
+            aria-describedby="city-label"
+            tabindex="0"
             class="mat-caption"
-            *ngIf="affiliationForm.hasError('required', 'organization')"
+            *ngIf="organizationIsInvalidAndTouched"
             i18n="@@shared.pleaseEnterAnOrganization"
           >
             Please enter an organization
@@ -232,12 +234,10 @@
       <div class="row">
         <label
           for="city-input"
+          id="city-label"
           class="mat-caption"
           [ngClass]="{
-            error:
-              affiliationForm.hasError('required', 'city') &&
-              (affiliationForm.get('city').dirty ||
-                affiliationForm.get('city').touched)
+            error: cityIsInvalidAndTouched
           }"
         >
           <strong i18n="@@shared.city" id="cityLabel">City</strong>
@@ -251,8 +251,12 @@
             matInput
             formControlName="city"
             aria-labelledby="cityLabel"
+            [attr.aria-invalid]="cityIsInvalidAndTouched"
           />
           <mat-error
+            role="alert"
+            aria-describedby="city-label"
+            tabindex="0"
             class="mat-caption"
             *ngIf="affiliationForm.get('city').hasError('required')"
             i18n="@@shared.cityError"
@@ -291,12 +295,10 @@
       <div class="row">
         <label
           for="country-input"
+          id="country-label"
           class="mat-caption"
           [ngClass]="{
-            error:
-              affiliationForm.hasError('required', 'country') &&
-              (affiliationForm.get('country').dirty ||
-                affiliationForm.get('country').touched)
+            error: countryIsInvalidAndTouched
           }"
         >
           <strong i18n="@@shared.countryOrLocation" id="countryLabel"
@@ -316,6 +318,7 @@
             placeholder="{{ ngOrcidSelectACountryOrLocation }}"
             #countrySelect
             formControlName="country"
+            [attr.aria-invalid]="countryIsInvalidAndTouched"
           >
             <mat-option
               *ngFor="let countryCode of countryCodes | sortBy : 'asc' : 'key'"
@@ -325,8 +328,11 @@
             </mat-option>
           </mat-select>
           <mat-error
+            role="alert"
+            aria-describedby="country-label"
             i18n="@@shared.countryOrLocationError"
-            *ngIf="affiliationForm.get('country').hasError('required')"
+            tabindex="0"
+            *ngIf="countryIsInvalidAndTouched"
           >
             Please enter a country or location
           </mat-error>
