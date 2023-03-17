@@ -12,7 +12,7 @@ describe('deactivation process', async function () {
 
   before(() => {})
   qase(
-    ['219','217'],
+    ['219','217','46','53'],
   it('deactivation process - user signed in', function () {
     /*
     1. Sign in
