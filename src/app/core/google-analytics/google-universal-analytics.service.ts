@@ -81,8 +81,6 @@ fatal: "${fatal}"
       },
     }
 
-    if(environment.GOOGLE_TAG_MANAGER)
-
     return this.pushTag(item)
   }
 
