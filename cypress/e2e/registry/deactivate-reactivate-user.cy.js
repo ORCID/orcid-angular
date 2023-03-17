@@ -12,9 +12,9 @@ describe('deactivation process', async function () {
 
   before(() => {})
   qase(
-    ['219','217','46','53'],
-  it('deactivation process - user signed in', function () {
-    /*
+    ['219', '217', '46', '53'],
+    it('deactivation process - user signed in', function () {
+      /*
     1. Sign in
     2. go to account settings
     3. request deactivation link
