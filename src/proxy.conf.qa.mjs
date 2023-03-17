@@ -23,9 +23,7 @@ export default {
       if (req.headers.accept.includes('html') && req.path !== '/signout') {
         console.log('Skipping proxy', req.path)
         return '/index.html'
-      } else {
-        console.log('REDIRECTING TO QA', req.path)
-      }
+      } 
       req.headers['X-Dev-Header'] = 'local-host-proxy-call'
     },
   },

@@ -189,8 +189,6 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
             forkJoin(analyticsReports)
               .pipe(
                 catchError((err) => {
-                 console.log( 'ERROR WITH GTM');
-                 
                   return this._errorHandler.handleError(
                     err,
                     ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
