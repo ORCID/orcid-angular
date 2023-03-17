@@ -37,5 +37,4 @@ export const environment = {
     ca: '** Catalan',
   },
   proxyMode: false,
-
 }

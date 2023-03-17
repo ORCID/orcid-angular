@@ -354,8 +354,7 @@ export function getAriaLabel(
   }
 }
 
-
-export function navigateTo(val, windowRef){
+export function navigateTo(val, windowRef) {
   if (val === '/signout' && environment.proxyMode) {
     this._user.noRedirectLogout().subscribe()
   } else {

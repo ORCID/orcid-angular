@@ -36,7 +36,7 @@ export class UserMenuComponent implements OnInit {
     @Inject(WINDOW) private window: Window,
     _platform: PlatformInfoService,
     private _inboxService: InboxService,
-    private _togglz: TogglzService,
+    private _togglz: TogglzService
   ) {
     _userInfo.getUserSession().subscribe((data) => {
       if (data.loggedIn) {

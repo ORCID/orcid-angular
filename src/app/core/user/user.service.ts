@@ -64,7 +64,7 @@ export class UserService {
     private _oauth: OauthService,
     private _disco: DiscoService,
     private _userInfo: UserInfoService,
-    @Inject(WINDOW) private window: Window,
+    @Inject(WINDOW) private window: Window
   ) {}
   $userStatusChecked = new ReplaySubject()
   private currentlyLoggedIn: boolean
@@ -497,14 +497,20 @@ export class UserService {
     }
   }
 
-  noRedirectLogout () {
-    return this._http.get(`${environment.API_WEB}signout`, {
-      headers: this.headers,
-      observe: 'response',
-      responseType: 'text',
-    }).pipe(tap(()=> {},() => {
-      this.window.location.reload()
-    }))
-    
+  noRedirectLogout() {
+    return this._http
+      .get(`${environment.API_WEB}signout`, {
+        headers: this.headers,
+        observe: 'response',
+        responseType: 'text',
+      })
+      .pipe(
+        tap(
+          () => {},
+          () => {
+            this.window.location.reload()
+          }
+        )
+      )
   }
 }
