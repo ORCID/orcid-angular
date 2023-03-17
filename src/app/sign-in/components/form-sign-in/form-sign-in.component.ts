@@ -175,15 +175,15 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
         if (data.success) {
           if (isRedirectToTheAuthorizationPage(data)) {
             this.handleOauthLogin(data.url)
-          } else {            
+          } else {
             const analyticsReports: Observable<void>[] = []
 
             analyticsReports.push(
-              this._gtag.reportEvent('Sign-In', 'RegGrowth', 'Website').pipe(tap(()=> {}, (err) => {console.log('_gtag' ,err)}))
+              this._gtag.reportEvent('Sign-In', 'RegGrowth', 'Website')
             )
 
             analyticsReports.push(
-              this._googleTagManagerService.reportEvent('Sign-In', 'Website').pipe(tap(()=> {}, (err) => {console.log('_googleTagManagerService' ,err)}))
+              this._googleTagManagerService.reportEvent('Sign-In', 'Website')
             )
 
             forkJoin(analyticsReports)
