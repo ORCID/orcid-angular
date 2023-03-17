@@ -286,10 +286,6 @@
               "browserTarget": "ng-orcid:build:local-with-proxy",
               "proxyConfig": "src/proxy.conf.sandbox..mjs"
             },
-            "local-prod": {
-              "browserTarget": "ng-orcid:build:local-with-proxy",
-              "proxyConfig": "src/proxy.conf.prod.mjs"
-            },
             "local": {
               "browserTarget": "ng-orcid:build:local"
             },

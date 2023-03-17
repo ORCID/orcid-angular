@@ -24,7 +24,7 @@ $orcid-green: (
   600: #87be00,
   700: #70aa00,
   800: #599700,
-  900: #447405 /*brand-primary-darkest / USE: mat-color($accent, 900); */,
+  900: #63627c /*brand-primary-darkest / USE: mat-color($accent, 900); */,
   contrast: (
     50: $orcid-dark-secondary-text,
     100: $orcid-dark-secondary-text,
@@ -46,7 +46,7 @@ $orcid-blue: (
   400: #4f92b1,
   500: #2e7f9f,
   600: #1e708d,
-  700: #085c77 /*#brand-secondary-dark*/,
+  700: #523456 /*#brand-secondary-dark*/,
   800: #004961,
   900: #003449,
   contrast: (
@@ -104,8 +104,8 @@ $text-dark-mid: rgba(0, 0, 0, 0.6);
 $text-dark-high: rgba(0, 0, 0, 0.9);
 $ui-background-darkest: #212121;
 
-$brand-primary-lightest: #f5f9e8;
-$ui-background-lightest: #fafafa;
+$brand-primary-lightest: #7c627a;
+$ui-background-lightest: #7c627a;
 $ui-background-light: #eeeeee;
 $ui-background: #bdbdbd;
 
