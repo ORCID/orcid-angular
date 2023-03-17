@@ -1,6 +1,8 @@
 /// <reference types="cypress" />
 
 import userData from '../../fixtures/testing-users.fixture.json'
+import { qase } from 'cypress-qase-reporter/dist/mocha'
+
 
 describe('Primary account email verification reminders', async function () {
   beforeEach(() => {
@@ -10,6 +12,8 @@ describe('Primary account email verification reminders', async function () {
   /* registered user has not verified primary account email, gets reminder
     in scope: check the user gets the reminder email with correct link
     out of scope: this test case will not click on the link so states remains the same */
+ qase(
+  '106',
   it('Receive reminder email if primary account email has not been verified', function () {
     //click Sign in
     cy.get('#menu-signin-button').click()
@@ -56,4 +60,5 @@ describe('Primary account email verification reminders', async function () {
     cy.get('#cy-user-info').click()
     cy.get('#cy-signout').click({ force: true })
   })
+  ) //end of qase tag
 })
