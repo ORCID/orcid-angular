@@ -9,8 +9,6 @@ export default {
       if (req.headers.accept.includes('html')) {
         console.log('Skipping proxy', req.path)
         return '/index.html'
-      } else {
-        console.log('REDIRECTING TO QA', req.path)
       }
       req.headers['X-Dev-Header'] = 'local-host-proxy-call'
     },
