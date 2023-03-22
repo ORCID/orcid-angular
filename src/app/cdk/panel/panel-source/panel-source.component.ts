@@ -1,7 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { PlatformInfoService } from '../../platform-info'
 import { first } from 'rxjs/operators'
-import { Affiliation, AffiliationTypeLabel } from '../../../types/record-affiliation.endpoint'
+import {
+  Affiliation,
+  AffiliationTypeLabel,
+} from '../../../types/record-affiliation.endpoint'
 import { MatDialog } from '@angular/material/dialog'
 import { ModalDeleteItemsComponent } from '../../../record/components/modals/modal-delete-item/modal-delete-items.component'
 import { Funding } from '../../../types/record-funding.endpoint'
@@ -9,9 +12,7 @@ import { ResearchResource } from '../../../types/record-research-resources.endpo
 import { Work } from '../../../types/record-works.endpoint'
 import { PeerReview } from '../../../types/record-peer-review.endpoint'
 import { VerificationEmailModalService } from 'src/app/core/verification-email-modal/verification-email-modal.service'
-import {
-  AppPanelActivityActionAriaLabelPipe
-} from '../../../shared/pipes/app-panel-activity-action-aria-label/app-panel-activity-action-aria-label.pipe'
+import { AppPanelActivityActionAriaLabelPipe } from '../../../shared/pipes/app-panel-activity-action-aria-label/app-panel-activity-action-aria-label.pipe'
 
 @Component({
   selector: 'app-panel-source',
