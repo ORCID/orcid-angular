@@ -79,7 +79,7 @@ export class PanelSourceComponent implements OnInit {
     if (!this.panelTitle) {
       this.panelTitle = ''
     }
-    const itemType = this._activityAction.transform(this.type, undefined, undefined)
+    const itemType = this._activityAction.transform(this.type, null, null)
     const typeAndTitle = `${itemType} ${this.panelTitle}`
     this.closeOtherSources += typeAndTitle
     this.openOtherSources += typeAndTitle
