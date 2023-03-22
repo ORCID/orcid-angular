@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
-import { Injectable } from '@angular/core'
+import { Inject, Injectable } from '@angular/core'
 import {
   BehaviorSubject,
   combineLatest,
@@ -26,6 +26,7 @@ import {
   tap,
 } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
+import { WINDOW } from 'src/app/cdk/window'
 import { ERROR_REPORT } from 'src/app/errors'
 import {
   NameForm,
@@ -62,7 +63,8 @@ export class UserService {
     private _platform: PlatformInfoService,
     private _oauth: OauthService,
     private _disco: DiscoService,
-    private _userInfo: UserInfoService
+    private _userInfo: UserInfoService,
+    @Inject(WINDOW) private window: Window
   ) {}
   $userStatusChecked = new ReplaySubject()
   private currentlyLoggedIn: boolean
@@ -493,5 +495,22 @@ export class UserService {
         this.START_IMMEDIATELY_AND_CHECK_EVERY_TWENTY_FIVE_MINUTES
       )
     }
+  }
+
+  noRedirectLogout() {
+    return this._http
+      .get(`${environment.API_WEB}signout`, {
+        headers: this.headers,
+        observe: 'response',
+        responseType: 'text',
+      })
+      .pipe(
+        tap(
+          () => {},
+          () => {
+            this.window.location.reload()
+          }
+        )
+      )
   }
 }

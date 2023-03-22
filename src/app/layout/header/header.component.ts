@@ -49,7 +49,7 @@ export class HeaderComponent implements OnInit {
     _userInfo: UserService,
     _togglz: TogglzService,
     location: Location,
-    private _signingService: SignInService
+    private _user: UserService
   ) {
     _router.events
       .pipe(filter((event: any) => event instanceof NavigationStart))
@@ -275,6 +275,10 @@ export class HeaderComponent implements OnInit {
   }
 
   navigateTo(val) {
-    ;(this.window as any).outOfRouterNavigation(val)
+    if (val === '/signout' && environment.proxyMode) {
+      this._user.noRedirectLogout().subscribe()
+    } else {
+      ;(this.window as any).outOfRouterNavigation(val)
+    }
   }
 }

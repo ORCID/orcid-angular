@@ -1,4 +1,6 @@
 import { Component, Inject, Input, OnInit } from '@angular/core'
+import { UserService } from 'src/app/core'
+import { environment } from 'src/environments/environment'
 import { WINDOW } from '../../../cdk/window'
 
 @Component({
@@ -10,11 +12,18 @@ export class LoggedInComponent implements OnInit {
   @Input() realUserOrcid: string
   @Input() displayName: string
 
-  constructor(@Inject(WINDOW) private window: Window) {}
+  constructor(
+    @Inject(WINDOW) private window: Window,
+    private user: UserService
+  ) {}
 
   ngOnInit() {}
 
   navigateTo(val) {
-    this.window.location.href = val
+    if (val === '/signout' && environment.proxyMode) {
+      this.user.noRedirectLogout().subscribe()
+    } else {
+      this.window.location.href = val
+    }
   }
 }

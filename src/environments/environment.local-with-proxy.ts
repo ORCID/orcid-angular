@@ -1,20 +1,20 @@
-import { EnvironmentBannerModule } from 'src/app/environment-banner/environment-banner.module'
-
 export const environment = {
-  production: true,
+  production: false,
   debugger: true,
+  ROBOTS: 'all',
   API_NEWS: 'https://www.mocky.io/v2/5dced45b3000007300931ce8',
-  API_PUB: '//pub.localhost/v3.0',
-  API_WEB: '//localhost/',
-  BASE_URL: '//localhost/',
-  BLOG_NEWS: 'https://localhost/about/news',
+  API_PUB: '/v3.0',
+  API_WEB: '/',
+  BASE_URL: '/',
+  INFO_SITE: 'https://info.orcid.org/',
   GOOGLE_ANALYTICS_TESTING_MODE: true,
   GOOGLE_TAG_MANAGER: 'GTM-0000000',
   GOOGLE_RECAPTCHA: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
   HELP_HERO_ID: 'oYFQMrzFHA',
   ZENDESK: null,
   SHOW_TEST_WARNING_BANNER: true,
-  INSTITUTIONAL_AUTOCOMPLETE_DISPLAY_AMOUNT: 20,
+  CAN_DISABLE_TEST_WARNING_BANNER: true,
+  INSTITUTIONAL_AUTOCOMPLETE_DISPLAY_AMOUNT: 50,
   VERBOSE_SNACKBAR_ERRORS_REPORTS: true,
   LANGUAGE_MENU_OPTIONS: {
     ar: 'العربية',
@@ -36,5 +36,5 @@ export const environment = {
     uk: '** Ukrainian',
     ca: '** Catalan',
   },
-  proxyMode: false,
+  proxyMode: true,
 }

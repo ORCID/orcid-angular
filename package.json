@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "start": "ng serve --disable-host-check --host 0.0.0.0",
+    "start-qa": "ng serve --configuration=local-qa --host 0.0.0.0",
+    "start-sandbox": "ng serve --configuration=local-sandbox --host 0.0.0.0",
+
     "start:en": "ng serve --configuration=local,en --disable-host-check",
     "start:fr": "ng serve --configuration=local,fr --disable-host-check",
     "start:ar": "ng serve --configuration=local,ar --disable-host-check",
