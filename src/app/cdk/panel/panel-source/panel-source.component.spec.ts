@@ -11,9 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatDialog, MatDialogModule } from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { VerificationEmailModalService } from '../../../core/verification-email-modal/verification-email-modal.service'
-import {
-  AppPanelActivityActionAriaLabelPipe
-} from '../../../shared/pipes/app-panel-activity-action-aria-label/app-panel-activity-action-aria-label.pipe'
+import { AppPanelActivityActionAriaLabelPipe } from '../../../shared/pipes/app-panel-activity-action-aria-label/app-panel-activity-action-aria-label.pipe'
 
 describe('PanelSourceComponent', () => {
   let component: PanelSourceComponent
@@ -24,7 +22,7 @@ describe('PanelSourceComponent', () => {
       imports: [HttpClientTestingModule, MatDialogModule, RouterTestingModule],
       declarations: [PanelSourceComponent],
       providers: [
-        AppPanelActivityActionAriaLabelPipe ,
+        AppPanelActivityActionAriaLabelPipe,
         WINDOW_PROVIDERS,
         VerificationEmailModalService,
         PlatformInfoService,
