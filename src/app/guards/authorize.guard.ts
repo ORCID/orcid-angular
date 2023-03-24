@@ -71,8 +71,8 @@ export class AuthorizeGuard implements CanActivateChild {
   }
 
   reportAlreadyAuthorize(request: RequestInfoForm) {
-    console.log('reportAlreadyAuthorize');
-    
+    console.log('reportAlreadyAuthorize')
+
     const analyticsReports: Observable<void>[] = []
     analyticsReports.push(
       this._gtag.reportEvent(`Reauthorize`, 'RegGrowth', request)
