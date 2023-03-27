@@ -5,8 +5,8 @@ export default {
     logLevel: 'debug',
     changeOrigin: true,
     bypass: function (req, res, proxyOptions) {
-      /// PRRINT REQUEST PATH
-      if (req.headers.accept.includes('html')) {
+      /// PRINT REQUEST PATH
+      if (req.headers.accept?.includes('html')) {
         console.log('Skipping proxy', req.path)
         return '/index.html'
       }
@@ -19,8 +19,8 @@ export default {
     logLevel: 'debug',
     changeOrigin: true,
     bypass: function (req, res, proxyOptions) {
-      /// PRRINT REQUEST PATH
-      if (req.headers.accept.includes('html') && req.path !== '/signout') {
+      /// PRINT REQUEST PATH
+      if (req.headers.accept?.includes('html') && req.path !== '/signout') {
         console.log('Skipping proxy', req.path)
         return '/index.html'
       }
