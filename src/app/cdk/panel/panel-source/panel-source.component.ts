@@ -1,7 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { PlatformInfoService } from '../../platform-info'
 import { first } from 'rxjs/operators'
-import { Affiliation } from '../../../types/record-affiliation.endpoint'
+import {
+  Affiliation,
+  AffiliationTypeLabel,
+} from '../../../types/record-affiliation.endpoint'
 import { MatDialog } from '@angular/material/dialog'
 import { ModalDeleteItemsComponent } from '../../../record/components/modals/modal-delete-item/modal-delete-items.component'
 import { Funding } from '../../../types/record-funding.endpoint'
@@ -9,6 +12,7 @@ import { ResearchResource } from '../../../types/record-research-resources.endpo
 import { Work } from '../../../types/record-works.endpoint'
 import { PeerReview } from '../../../types/record-peer-review.endpoint'
 import { VerificationEmailModalService } from 'src/app/core/verification-email-modal/verification-email-modal.service'
+import { AppPanelActivityActionAriaLabelPipe } from '../../../shared/pipes/app-panel-activity-action-aria-label/app-panel-activity-action-aria-label.pipe'
 
 @Component({
   selector: 'app-panel-source',
@@ -17,8 +21,8 @@ import { VerificationEmailModalService } from 'src/app/core/verification-email-m
   preserveWhitespaces: true,
 })
 export class PanelSourceComponent implements OnInit {
-  closeOtherSources = $localize`:@@record.closeOtherSources:Close other sources`
-  openOtherSources = $localize`:@@record.openOtherSources:Open other sources`
+  closeOtherSources = $localize`:@@record.hideAllSources:Hide all sources for`
+  openOtherSources = $localize`:@@record.showAllSources:Show all sources for`
 
   @Input() isPublicRecord
   @Input() isPreferred = true
@@ -65,7 +69,8 @@ export class PanelSourceComponent implements OnInit {
   constructor(
     private _verificationEmailModalService: VerificationEmailModalService,
     private _dialog: MatDialog,
-    private _platformInfo: PlatformInfoService
+    private _platformInfo: PlatformInfoService,
+    private _activityAction: AppPanelActivityActionAriaLabelPipe
   ) {
     this._platformInfo.get().subscribe((person) => {
       this.isHandset = person.handset
@@ -75,6 +80,10 @@ export class PanelSourceComponent implements OnInit {
     if (!this.panelTitle) {
       this.panelTitle = ''
     }
+    const itemType = this._activityAction.transform(this.type, null, null)
+    const typeAndTitle = `${itemType} ${this.panelTitle}`
+    this.closeOtherSources += typeAndTitle
+    this.openOtherSources += typeAndTitle
   }
 
   toggleStackMode() {

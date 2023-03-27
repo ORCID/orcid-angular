@@ -67,6 +67,6 @@ export class AppPanelActivityActionAriaLabelPipe implements PipeTransform {
         ' ' +
         $localize`:@@shared.researchResourcesAriaLabel: research resources`
     }
-    return translationForAction + ' ' + title
+    return title ? translationForAction + ' ' + title : translationForAction
   }
 }
