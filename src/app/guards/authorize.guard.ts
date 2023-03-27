@@ -7,7 +7,7 @@ import {
   UrlTree,
 } from '@angular/router'
 import { forkJoin, NEVER, Observable, of } from 'rxjs'
-import { catchError, map, switchMap, take } from 'rxjs/operators'
+import { catchError, map, switchMap, take, tap } from 'rxjs/operators'
 
 import { PlatformInfoService } from '../cdk/platform-info'
 import { WINDOW } from '../cdk/window'
@@ -71,6 +71,8 @@ export class AuthorizeGuard implements CanActivateChild {
   }
 
   reportAlreadyAuthorize(request: RequestInfoForm) {
+    console.log('reportAlreadyAuthorize')
+
     const analyticsReports: Observable<void>[] = []
     analyticsReports.push(
       this._gtag.reportEvent(`Reauthorize`, 'RegGrowth', request)
@@ -79,13 +81,16 @@ export class AuthorizeGuard implements CanActivateChild {
       this._googleTagManagerService.reportEvent(`Reauthorize`, request)
     )
     return forkJoin(analyticsReports).pipe(
-      catchError((err) => {
+      catchError((err) =>
         this._errorHandler.handleError(
           err,
           ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
         )
-        return this.sendUserToRedirectURL(request)
-      }),
+      ),
+      tap(
+        () => this.sendUserToRedirectURL(request),
+        () => this.sendUserToRedirectURL(request)
+      ),
       switchMap(() => {
         return NEVER
       })
