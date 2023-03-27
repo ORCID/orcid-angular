@@ -21,7 +21,7 @@ describe('Add more contributors while editing a work with 50 contributors', asyn
         cy.get('button[aria-label*="Edit work"]').click()
       })
       //verify link to add one more contrib is disabled
-      cy.get('#cy-add-another-contributor').should('have.class', 'disabled')
+      cy.contains('Add another contributor').should('have.class', 'disabled')
 
       //verify the panel is displayed
       cy.contains('.notice-panel', noticeMessage)

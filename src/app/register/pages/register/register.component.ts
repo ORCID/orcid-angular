@@ -12,14 +12,14 @@ import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog'
 import { MatStep } from '@angular/material/stepper'
 import { Router } from '@angular/router'
-import { combineLatest } from 'rxjs'
+import { combineLatest, forkJoin, Observable } from 'rxjs'
 import { catchError, first, map, switchMap } from 'rxjs/operators'
 import { IsThisYouComponent } from 'src/app/cdk/is-this-you'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { isRedirectToTheAuthorizationPage } from 'src/app/constants'
 import { UserService } from 'src/app/core'
-import { GoogleAnalyticsService } from 'src/app/core/google-analytics/google-analytics.service'
+import { GoogleUniversalAnalyticsService } from 'src/app/core/google-analytics/google-universal-analytics.service'
 import { RegisterService } from 'src/app/core/register/register.service'
 import { RequestInfoForm } from 'src/app/types'
 import {
@@ -33,6 +33,7 @@ import { ThirdPartyAuthData } from 'src/app/types/sign-in-data.endpoint'
 import { ReactivationLocal } from '../../../types/reactivation.local'
 import { SearchService } from '../../../core/search/search.service'
 import { SearchParameters, SearchResults } from 'src/app/types'
+import { GoogleTagManagerService } from '../../../core/google-tag-manager/google-tag-manager.service'
 
 @Component({
   selector: 'app-register',
@@ -66,7 +67,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     private _register: RegisterService,
     private _dialog: MatDialog,
     @Inject(WINDOW) private window: Window,
-    private _gtag: GoogleAnalyticsService,
+    private _gtag: GoogleUniversalAnalyticsService,
+    private _googleTagManagerService: GoogleTagManagerService,
     private _user: UserService,
     private _router: Router,
     private _errorHandler: ErrorHandlerService,
@@ -158,12 +160,22 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         .subscribe((response) => {
           this.loading = false
           if (response.url) {
-            this._gtag
-              .reportEvent(
+            const analyticsReports: Observable<void>[] = []
+
+            analyticsReports.push(
+              this._gtag.reportEvent(
                 'New-Registration',
                 'RegGrowth',
                 this.requestInfoForm || 'Website'
               )
+            )
+            analyticsReports.push(
+              this._googleTagManagerService.reportEvent(
+                'New-Registration',
+                this.requestInfoForm || 'Website'
+              )
+            )
+            forkJoin(analyticsReports)
               .pipe(
                 catchError((err) =>
                   this._errorHandler.handleError(

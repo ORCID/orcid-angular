@@ -29,7 +29,7 @@ describe('contributor name over 100 characters', async function () {
         .contains(workType)
         .click()
       cy.get('#title-input').clear().type(title)
-      cy.get('#cy-add-another-contributor').click()
+      cy.get('.cy-add-another-contributor').click()
       cy.get('app-work-contributors').within(() => {
         cy.get('[formcontrolname="creditName"]').clear().type(name)
         //leave default role

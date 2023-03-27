@@ -8,7 +8,7 @@ export const environment = {
   BASE_URL: '//sandbox.orcid.org/',
   INFO_SITE: 'https://info.qa.orcid.org/',
   GOOGLE_ANALYTICS_TESTING_MODE: false,
-  GOOGLE_ANALYTICS: 'UA-17492803-5',
+  GOOGLE_TAG_MANAGER: 'GTM-M9Z7DHS',
   GOOGLE_RECAPTCHA: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
   HELP_HERO_ID: 'oYFQMrzFHA',
   ZENDESK: null,
@@ -30,4 +30,5 @@ export const environment = {
     'zh-CN': '简体中文',
     'zh-TW': '繁體中文',
   },
+  proxyMode: false,
 }

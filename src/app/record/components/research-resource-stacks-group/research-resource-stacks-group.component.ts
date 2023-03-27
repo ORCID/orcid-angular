@@ -15,8 +15,10 @@ import {
   ResearchResourcesEndpoint,
   ResearchResourcesGroup,
 } from '../../../types/record-research-resources.endpoint'
-import { PageEvent } from '@angular/material/paginator'
+import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator'
 import { DEFAULT_PAGE_SIZE } from 'src/app/constants'
+import { LiveAnnouncer } from '@angular/cdk/a11y'
+import { AnnouncerService } from 'src/app/core/announcer/announcer.service'
 
 @Component({
   selector: 'app-research-resources',
@@ -62,13 +64,16 @@ export class ResearchResourceStacksGroupComponent implements OnInit {
   paginationIndex: number
   paginationPageSize: number
   paginationLoading = true
+  paginatorLabel: string
 
   constructor(
     _platform: PlatformInfoService,
     private _organizationsService: OrganizationsService,
     private _record: RecordService,
     private _recordResearchResourceService: RecordResearchResourceService,
-    private _user: UserService
+    private _user: UserService,
+    private _matPaginatorIntl: MatPaginatorIntl,
+    private _announcer: AnnouncerService
   ) {
     _platform
       .get()
@@ -110,6 +115,14 @@ export class ResearchResourceStacksGroupComponent implements OnInit {
     this.userRecordContext.offset = event.pageIndex * event.pageSize
     this.userRecordContext.pageSize = event.pageSize
     this.userRecordContext.publicRecordId = this.isPublicRecord
+
+    this.paginatorLabel = this._matPaginatorIntl.getRangeLabel(
+      event.pageIndex,
+      event.pageSize,
+      event.length
+    )
+    this._announcer.liveAnnouncePagination(event, this.regionResearchResources)
+
     this.loadResearchResources()
   }
 

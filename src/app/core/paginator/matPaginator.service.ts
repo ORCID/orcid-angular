@@ -1,5 +1,7 @@
 import { MatPaginatorIntl } from '@angular/material/paginator'
 import { Injectable } from '@angular/core'
+import { BehaviorSubject, Subject } from 'rxjs'
+import { LiveAnnouncer } from '@angular/cdk/a11y'
 
 @Injectable()
 export class MatPaginatorIntlImplementation extends MatPaginatorIntl {
@@ -9,6 +11,7 @@ export class MatPaginatorIntlImplementation extends MatPaginatorIntl {
   nextPageLabel = $localize`:@@ngOrcid.material.nextPageLabel:Next page`
   previousPageLabel = $localize`:@@ngOrcid.material.previousPageLabel:Previous page`
   ofLabel = $localize`:@@ngOrcid.material.of:of`
+  pageLabel = $localize`:@@ngOrcid.material.page:Page`
 
   /** The following function was taken from
   / https://github.com/angular/components/blob/dd37ca57406412c1ebeaec56cab5a517f796d4b9/src/material/paginator/paginator-intl.ts
@@ -16,20 +19,9 @@ export class MatPaginatorIntlImplementation extends MatPaginatorIntl {
 
   /** A label for the range of items within the current page and the length of the whole list. */
   getRangeLabel = (page: number, pageSize: number, length: number) => {
-    if (length === 0 || pageSize === 0) {
-      return `0 ${this.ofLabel} ${length}`
-    }
+    const pageLength =
+      length === 0 || pageSize === 0 ? 0 : Math.ceil(length / pageSize)
 
-    length = Math.max(length, 0)
-
-    const startIndex = page * pageSize
-
-    // If the start index exceeds the list length, do not try and fix the end index to the end.
-    const endIndex =
-      startIndex < length
-        ? Math.min(startIndex + pageSize, length)
-        : startIndex + pageSize
-
-    return `${startIndex + 1} – ${endIndex} ${this.ofLabel} ${length}`
+    return ` ${this.pageLabel} ${page + 1} ${this.ofLabel} ${pageLength}`
   }
 }

@@ -6,13 +6,16 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router'
-import { Observable } from 'rxjs'
-import { first, map } from 'rxjs/operators'
+import { forkJoin, Observable } from 'rxjs'
+import { catchError, first, map } from 'rxjs/operators'
 
 import { WINDOW } from '../cdk/window'
 import { UserService } from '../core'
-import { GoogleAnalyticsService } from '../core/google-analytics/google-analytics.service'
+import { GoogleUniversalAnalyticsService } from '../core/google-analytics/google-universal-analytics.service'
 import { RequestInfoForm } from '../types'
+import { GoogleTagManagerService } from '../core/google-tag-manager/google-tag-manager.service'
+import { ERROR_REPORT } from '../errors'
+import { ErrorHandlerService } from '../core/error-handler/error-handler.service'
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +24,9 @@ export class ThirdPartySigninCompletedGuard implements CanActivateChild {
   constructor(
     private _router: Router,
     @Inject(WINDOW) private window: Window,
-    private _analytics: GoogleAnalyticsService,
+    private _analytics: GoogleUniversalAnalyticsService,
+    private _googleTagManagerService: GoogleTagManagerService,
+    private _errorHandler: ErrorHandlerService,
     private _user: UserService
   ) {}
 
@@ -37,21 +42,47 @@ export class ThirdPartySigninCompletedGuard implements CanActivateChild {
       first(),
       map((value) => value.oauthSession),
       map((requestInfoForm: RequestInfoForm) => {
-        this._analytics.reportEvent(
-          'Sign-In',
-          'RegGrowth',
-          requestInfoForm || 'Website' // If the is no requestInfoForm report a Website signin]]\
-        )
-        if (state.url.startsWith('/my-orcid')) {
-          // This "out of router navigation" is necesary while my-orcid exist on the old page
-          // as a temporal side effect will show the new app header/footer before navigating into the old app
-          ;(<any>this.window).outOfRouterNavigation('/my-orcid')
-          return false
-        } else {
-          return this._router.parseUrl(
-            state.url.replace(/\/third-party-signin-completed/, '')
+        const analyticsReports: Observable<void>[] = []
+        analyticsReports.push(
+          this._analytics.reportEvent(
+            'Sign-In',
+            'RegGrowth',
+            requestInfoForm || 'Website' // If the is no requestInfoForm report a Website signin]]\
           )
-        }
+        )
+        analyticsReports.push(
+          this._googleTagManagerService.reportEvent(
+            'Sign-In',
+            requestInfoForm || 'Website'
+          )
+        )
+        this._googleTagManagerService
+          .addGtmToDom()
+          .pipe(
+            catchError((err) =>
+              this._errorHandler.handleError(
+                err,
+                ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
+              )
+            )
+          )
+          .subscribe((response) => {
+            if (response) {
+              forkJoin(analyticsReports)
+                .pipe(
+                  catchError((err) =>
+                    this._errorHandler.handleError(
+                      err,
+                      ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
+                    )
+                  )
+                )
+                .subscribe()
+            }
+          })
+        return this._router.parseUrl(
+          state.url.replace(/\/third-party-signin-completed/, '')
+        )
       })
     )
   }

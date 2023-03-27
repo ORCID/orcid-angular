@@ -4,7 +4,7 @@ import {
   MatSnackBarHorizontalPosition,
 } from '@angular/material/snack-bar'
 import { take } from 'rxjs/operators'
-import { GoogleAnalyticsService } from 'src/app/core/google-analytics/google-analytics.service'
+import { GoogleUniversalAnalyticsService } from 'src/app/core/google-analytics/google-universal-analytics.service'
 import { DisplayMessage, ErrorReport, ScreenDirection } from 'src/app/types'
 
 import { PlatformInfoService } from '../platform-info'
@@ -22,7 +22,7 @@ export class SnackbarService {
   constructor(
     private _snackBar: MatSnackBar,
     _platform: PlatformInfoService,
-    private _gtag: GoogleAnalyticsService
+    private _gtag: GoogleUniversalAnalyticsService
   ) {
     _platform
       .get()

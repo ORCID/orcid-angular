@@ -17,14 +17,14 @@ import {
   Validators,
 } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
-import { catchError, first, map, takeUntil } from 'rxjs/operators'
+import { catchError, first, map, takeUntil, tap } from 'rxjs/operators'
 import { isRedirectToTheAuthorizationPage } from 'src/app/constants'
 import { UserService } from 'src/app/core'
 import { OauthParameters, RequestInfoForm } from 'src/app/types'
 
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { WINDOW } from '../../../cdk/window'
-import { GoogleAnalyticsService } from '../../../core/google-analytics/google-analytics.service'
+import { GoogleUniversalAnalyticsService } from '../../../core/google-analytics/google-universal-analytics.service'
 import { SignInService } from '../../../core/sign-in/sign-in.service'
 import { UsernameValidator } from '../../../shared/validators/username/username.validator'
 import { SignInData } from '../../../types/sign-in-data.endpoint'
@@ -32,10 +32,11 @@ import { SignInLocal, TypeSignIn } from '../../../types/sign-in.local'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 import { SignInGuard } from '../../../guards/sign-in.guard'
 import { OauthService } from '../../../core/oauth/oauth.service'
-import { combineLatest, Subject } from 'rxjs'
+import { combineLatest, forkJoin, Observable, Subject } from 'rxjs'
 import { UserSession } from 'src/app/types/session.local'
 import { ERROR_REPORT } from 'src/app/errors'
 import { ErrorStateMatcherForPasswordField } from '../../ErrorStateMatcherForPasswordField'
+import { GoogleTagManagerService } from '../../../core/google-tag-manager/google-tag-manager.service'
 
 @Component({
   selector: 'app-form-sign-in',
@@ -78,7 +79,8 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
     private _signIn: SignInService,
     private _oauthService: OauthService,
     private _router: Router,
-    private _gtag: GoogleAnalyticsService,
+    private _gtag: GoogleUniversalAnalyticsService,
+    private _googleTagManagerService: GoogleTagManagerService,
     private _errorHandler: ErrorHandlerService,
     private _signInGuard: SignInGuard,
     private _userInfo: UserService,
@@ -174,15 +176,24 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
           if (isRedirectToTheAuthorizationPage(data)) {
             this.handleOauthLogin(data.url)
           } else {
-            this._gtag
-              .reportEvent('Sign-In', 'RegGrowth', 'Website')
+            const analyticsReports: Observable<void>[] = []
+
+            analyticsReports.push(
+              this._gtag.reportEvent('Sign-In', 'RegGrowth', 'Website')
+            )
+
+            analyticsReports.push(
+              this._googleTagManagerService.reportEvent('Sign-In', 'Website')
+            )
+
+            forkJoin(analyticsReports)
               .pipe(
-                catchError((err) =>
-                  this._errorHandler.handleError(
+                catchError((err) => {
+                  return this._errorHandler.handleError(
                     err,
                     ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
                   )
-                )
+                })
               )
               .subscribe(
                 () => this.navigateTo(data.url),
@@ -316,8 +327,16 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
           this.loading.next(false)
           this.errorDescription.next(requestInfoForm.errorDescription)
         }
-        this._gtag
-          .reportEvent('Sign-In', 'RegGrowth', requestInfoForm)
+        const analyticsReports: Observable<void>[] = []
+
+        analyticsReports.push(
+          this._gtag.reportEvent('Sign-In', 'RegGrowth', requestInfoForm)
+        )
+        analyticsReports.push(
+          this._googleTagManagerService.reportEvent('Sign-In', requestInfoForm)
+        )
+
+        forkJoin(analyticsReports)
           .pipe(
             catchError((err) =>
               this._errorHandler.handleError(

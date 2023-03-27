@@ -23,6 +23,7 @@
     <!-- Work Types -->
     <div id="cy-work-types-div">
       <label
+        id="work-type-label"
         for="cy-work-types"
         class="row mat-caption"
         [ngClass]="{
@@ -31,7 +32,7 @@
             workForm.get('workType').touched
         }"
       >
-        <strong i18n="@@works.workType" id="work-type-label">Work type</strong>
+        <strong i18n="@@works.workType">Work type</strong>
         <span class="required">*</span>
       </label>
       <mat-form-field
@@ -71,6 +72,7 @@
     <div>
       <div class="row">
         <label
+          id="work-title-label"
           for="title-input"
           class="mat-caption"
           [ngClass]="{
@@ -79,15 +81,12 @@
               workForm.get('title').touched
           }"
         >
-          <strong i18n="@@works.worktitle" id="work-title-label"
-            >Work title</strong
-          >
+          <strong i18n="@@works.worktitle">Work title</strong>
           <span class="required">*</span>
         </label>
       </div>
 
       <mat-form-field
-        aria-labelledby="work-title-label"
         appearance="outline"
         class="mat-form-field-min input-container"
       >
@@ -127,16 +126,16 @@
         >
         <span class="mat-body-1">
           <ng-container
-            i18n="@@works.addTranslatedTitle"
+            i18n="@@works.showTranslatedTitle"
             *ngIf="!showTranslationTitle"
           >
-            Add translated title
+            Show translated title
           </ng-container>
           <ng-container
-            i18n="@@works.hideTranslatedTitle"
+            i18n="@@works.hideTranslatedTitle2"
             *ngIf="showTranslationTitle"
           >
-            Hide translation title
+            Hide translated title
           </ng-container>
         </span>
       </a>
@@ -151,6 +150,7 @@
       <div>
         <div class="row">
           <label
+            id="work-translate-title-label"
             for="given-names-input"
             class="mat-caption"
             [ngClass]="{
@@ -160,9 +160,7 @@
               )
             }"
           >
-            <strong
-              i18n="@@works.translatedTitle"
-              id="work-translate-title-label"
+            <strong i18n="@@works.translatedTitle"
               >Work translated title</strong
             >
           </label>
@@ -208,6 +206,7 @@
         <div class="row">
           <label
             for="language-of-title-input"
+            id="work-translate-language-label"
             class="mat-caption"
             [ngClass]="{
               error: workForm.hasError(
@@ -216,9 +215,7 @@
               )
             }"
           >
-            <strong
-              i18n="@@works.languageOnThisTitle"
-              id="work-translate-language-label"
+            <strong i18n="@@works.languageOnThisTitle"
               >Language of this title</strong
             >
           </label>
@@ -262,10 +259,12 @@
 
     <div>
       <div class="row">
-        <label for="work-subtitle-input" class="mat-caption">
-          <strong i18n="@@works.subtitle-2" id="work-subtitle-label"
-            >Work subtitle</strong
-          >
+        <label
+          for="work-subtitle-input"
+          class="mat-caption"
+          id="work-subtitle-label"
+        >
+          <strong i18n="@@works.subtitle-2">Work subtitle</strong>
         </label>
       </div>
 
@@ -291,10 +290,12 @@
 
     <div>
       <div class="row">
-        <label for="cy-journal-title" class="mat-caption">
-          <strong id="journal-title-label">{{
-            dynamicTitle | recordWorkTitleNameLabel
-          }}</strong>
+        <label
+          for="cy-journal-title"
+          class="mat-caption"
+          id="journal-title-label"
+        >
+          <strong>{{ dynamicTitle | recordWorkTitleNameLabel }}</strong>
         </label>
       </div>
 
@@ -323,14 +324,13 @@
     >
       <div class="row">
         <label
+          id="publication-date-label"
           class="mat-caption"
           [ngClass]="{
             error: workForm.hasError('date', 'startDateGroup')
           }"
         >
-          <strong i18n="@@shared.publicationDate" id="publication-date-label"
-            >Publication date</strong
-          >
+          <strong i18n="@@shared.publicationDate">Publication date</strong>
         </label>
       </div>
       <div
@@ -443,6 +443,7 @@
     <div>
       <div class="row">
         <label
+          id="linkLabel"
           for="url-input"
           class="mat-caption"
           [ngClass]="{
@@ -450,7 +451,7 @@
               workForm.hasError('pattern', 'url') && workForm.get('url').touched
           }"
         >
-          <strong i18n="@@works.link" id="linkLabel">Link</strong>
+          <strong i18n="@@works.link">Link</strong>
         </label>
       </div>
 
@@ -520,10 +521,9 @@
           [ngClass]="{
             error: workForm.hasError('citationType', 'citationGroup')
           }"
+          id="citationType"
         >
-          <strong i18n="@@works.citationType" id="citationType"
-            >Citation type</strong
-          >
+          <strong i18n="@@works.citationType">Citation type</strong>
         </label>
       </div>
       <div class="select-error">
@@ -563,10 +563,9 @@
             [ngClass]="{
               error: workForm.hasError('citation', 'citationGroup')
             }"
+            id="citation-label"
           >
-            <strong i18n="@@works.citation" id="citation-label"
-              >Citation</strong
-            >
+            <strong i18n="@@works.citation">Citation</strong>
           </label>
         </div>
         <mat-form-field
@@ -595,8 +594,12 @@
 
       <div>
         <div class="row">
-          <label for="description-input" class="mat-caption">
-            <strong i18n="@@works.citationDescription" id="description-label"
+          <label
+            for="description-input"
+            class="mat-caption"
+            id="description-label"
+          >
+            <strong i18n="@@works.citationDescription"
               >Citation description</strong
             >
           </label>
@@ -766,8 +769,8 @@
     <!-- Language of this form -->
     <div>
       <div class="row title">
-        <label for="language-input" class="mat-caption">
-          <strong i18n="@@works.languageUsed" id="language-label"
+        <label for="language-input" class="mat-caption" id="language-label">
+          <strong i18n="@@works.languageUsed"
             >Language used in this form</strong
           >
         </label>
@@ -781,7 +784,7 @@
             id="language-input"
             placeholder="{{ ngOrcidSelectLanguage }}"
             formControlName="languageCode"
-            [attr.aria-label]="languageLabelAriaLabel"
+            [aria-label]="languageLabelAriaLabel"
           >
             <mat-option
               *ngFor="let item of languageMap | keyvalue"
@@ -797,10 +800,12 @@
     <!-- Country of publication -->
     <div>
       <div class="row">
-        <label for="country-input" class="mat-caption">
-          <strong
-            i18n="@@works.countryOrLocationOfPublication"
-            id="country-location-label"
+        <label
+          for="country-input"
+          class="mat-caption"
+          id="country-location-label"
+        >
+          <strong i18n="@@works.countryOrLocationOfPublication"
             >Country/Location of publication</strong
           >
         </label>
