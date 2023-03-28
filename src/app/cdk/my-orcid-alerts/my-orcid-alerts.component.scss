@@ -6,9 +6,11 @@ mat-toolbar {
   mat-toolbar-row {
     text-align: center;
 
-    p {
+    div {
       width: 100%;
-      white-space: pre-wrap;
+      p {
+        white-space: pre-wrap;
+      }
     }
   }
 }
