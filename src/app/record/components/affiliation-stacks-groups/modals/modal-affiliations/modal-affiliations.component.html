@@ -137,6 +137,7 @@
       <div class="row">
         <label
           for="organization-input"
+          id="organization-label"
           class="mat-caption"
           [ngClass]="{
             error: organizationIsInvalidAndTouched
@@ -214,9 +215,7 @@
           </button>
           <mat-error
             role="alert"
-            aria-atomic="true"
-            aria-describedby="city-label"
-            tabindex="0"
+            aria-describedby="organization-label"
             class="mat-caption"
             *ngIf="organizationIsInvalidAndTouched"
             i18n="@@shared.pleaseEnterAnOrganization"
@@ -256,7 +255,6 @@
           <mat-error
             role="alert"
             aria-describedby="city-label"
-            tabindex="0"
             class="mat-caption"
             *ngIf="affiliationForm.get('city').hasError('required')"
             i18n="@@shared.cityError"
@@ -331,7 +329,6 @@
             role="alert"
             aria-describedby="country-label"
             i18n="@@shared.countryOrLocationError"
-            tabindex="0"
             *ngIf="countryIsInvalidAndTouched"
           >
             Please enter a country or location
