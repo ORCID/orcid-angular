@@ -27,6 +27,16 @@
     <ng-container id="side-bar-url-1">
       <a
         class="side-bar"
+        i18n="@@works.citation"
+        (click)="toCitation()"
+        id="cy-external-id-to-citation"
+      >
+        Citation
+      </a>
+    </ng-container>
+    <ng-container id="side-bar-url-2">
+      <a
+        class="side-bar"
         i18n="@@works.identifiers"
         (click)="toIdentifiers()"
         id="cy-external-id-to-identifiers"
@@ -34,23 +44,13 @@
         Identifiers
       </a>
     </ng-container>
-    <ng-container id="side-bar-url-2">
+    <ng-container id="side-bar-url-3">
       <a
         class="side-bar"
         i18n="@@works.contributors"
         (click)="toContributors()"
       >
         Contributors
-      </a>
-    </ng-container>
-    <ng-container id="side-bar-url-3">
-      <a
-        class="side-bar"
-        i18n="@@works.citation"
-        (click)="toCitation()"
-        id="cy-external-id-to-citation"
-      >
-        Citation
       </a>
     </ng-container>
     <ng-container id="side-bar-url-4">
