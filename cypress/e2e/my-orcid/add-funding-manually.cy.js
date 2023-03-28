@@ -38,7 +38,9 @@ describe('My orcid - users are able to add funding info in their record', async 
       cy.contains(fundingData.tranlationLanguage).click()
     })
     cy.get('#funding-project-link-input').clear().type(fundingData.fundingLink)
-    cy.get('#description-input').clear().type(fundingData.description)
+    cy.get('[formcontrolname="description"]')
+      .clear()
+      .type(fundingData.description)
     cy.get('[formcontrolname="currencyCode"]').click()
     cy.get('[role="listbox"]').within(($currency) => {
       //TO DO: replace with id for the element when we add it
@@ -74,8 +76,8 @@ describe('My orcid - users are able to add funding info in their record', async 
     })
     //add identifier
     cy.contains('Add an identifier').click() //TO DO: replace with id for the element when we add it
-    cy.get('#grant-number-input').clear().type(uniqueIdentifier)
-    cy.get('#grant-url-input').clear().type(fundingData.grantLink)
+    cy.get('[formcontrolname="grantNumber"]').clear().type(uniqueIdentifier)
+    cy.get('[formcontrolname="grantUrl"]').clear().type(fundingData.grantLink)
 
     //save entry
     cy.get('#save-names-button').click()

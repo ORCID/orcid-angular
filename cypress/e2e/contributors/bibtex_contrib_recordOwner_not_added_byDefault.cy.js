@@ -3,7 +3,7 @@
 import userData from '../../fixtures/contributors-fixtures/contributors-users.fixture.json'
 import { qase } from 'cypress-qase-reporter/dist/mocha'
 
-describe('Add work using BibTeX citation where contributor list ends with "and"', async function () {
+describe('Record holder not added as default contributor to works imported from BibTeX', async function () {
   const bibtextFilePath = userData.cyRecordOwner.bibtex_qase76_path
   const contribName = userData.cyRecordOwner.bibtex_qase76_contrib
 
@@ -14,7 +14,7 @@ describe('Add work using BibTeX citation where contributor list ends with "and"'
 
   qase(
     '76',
-    it('Add work using BibTeX citation where contributor list ends with "and"', function () {
+    it('Record holder not added as default contributor to works imported from BibTeX', function () {
       cy.get('#cy-works').within(($myPanel) => {
         cy.get('#cy-menu-add-works').click()
       })
