@@ -16,11 +16,12 @@ export class AnnouncerService {
   lastAnnouncement: string
 
   liveAnnouncePagination(paginatorLabel: PageEvent, itemType: string) {
+    console.log('paginatorLabel.pageIndex', paginatorLabel.pageIndex)
+
     const announcement =
       this.youAreOnPageLabel +
       ' ' +
-      paginatorLabel.pageIndex +
-      1 +
+      (paginatorLabel.pageIndex + 1) +
       ' ' +
       this.ofLabel +
       ' ' +
