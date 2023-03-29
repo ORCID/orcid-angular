@@ -274,15 +274,17 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
       if (ADD_OTHER_WORK_CONTRIBUTORS_WITH_BIBTEX_TOGGLZ) {
         work.contributorsGroupedByOrcid = []
         if (lowerKeyTags.hasOwnProperty('author')) {
+          const authors = this.removeEndingAnd(lowerKeyTags['author'])
           this.addContributors(
-            lowerKeyTags['author'].split(' and '),
+            authors.split(' and '),
             'author',
             work
           )
         }
         if (lowerKeyTags.hasOwnProperty('editor')) {
+          const editors = this.removeEndingAnd(lowerKeyTags['editor'])
           this.addContributors(
-            lowerKeyTags['editor'].split(' and '),
+            editors.split(' and '),
             'editor',
             work
           )
@@ -432,6 +434,14 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
     } else {
       return familyName ? `${givenNames} ${familyName}` : givenNames
     }
+  }
+
+  private removeEndingAnd(contributors: string): string {
+    if (contributors.endsWith(' and')) {
+      contributors = contributors.substring(0, contributors.length - 4)
+    }
+
+    return contributors
   }
 
   closeEvent() {
