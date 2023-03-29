@@ -19,8 +19,7 @@ export class AnnouncerService {
     const announcement =
       this.youAreOnPageLabel +
       ' ' +
-      paginatorLabel.pageIndex +
-      1 +
+      (paginatorLabel.pageIndex + 1) +
       ' ' +
       this.ofLabel +
       ' ' +
