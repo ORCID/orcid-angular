@@ -275,19 +275,11 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
         work.contributorsGroupedByOrcid = []
         if (lowerKeyTags.hasOwnProperty('author')) {
           const authors = this.removeEndingAnd(lowerKeyTags['author'])
-          this.addContributors(
-            authors.split(' and '),
-            'author',
-            work
-          )
+          this.addContributors(authors.split(' and '), 'author', work)
         }
         if (lowerKeyTags.hasOwnProperty('editor')) {
           const editors = this.removeEndingAnd(lowerKeyTags['editor'])
-          this.addContributors(
-            editors.split(' and '),
-            'editor',
-            work
-          )
+          this.addContributors(editors.split(' and '), 'editor', work)
         }
       }
     }
