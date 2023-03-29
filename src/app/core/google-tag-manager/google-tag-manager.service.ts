@@ -44,7 +44,11 @@ export class GoogleTagManagerService {
                 subscriber.complete()
               }
             },
-            () => {}
+            () =>
+              subscriber.error({
+                name: 'GTM - Error',
+                message: 'Unable to add GTM',
+              })
           )
       } else {
         pushOnDataLayer(item)
@@ -77,7 +81,12 @@ export class GoogleTagManagerService {
         subscriber.next(true)
         subscriber.complete()
       })
-      gtmScript.addEventListener('error', () => {})
+      gtmScript.addEventListener('error', () => {
+        subscriber.error({
+          name: 'GTM - Error',
+          message: 'Unable to add GTM',
+        })
+      })
       doc.head.insertBefore(gtmScript, doc.head.firstChild)
     })
   }
