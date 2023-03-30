@@ -90,6 +90,7 @@ export class AuthorizeGuard implements CanActivateChild {
     )
 
     return forkJoin(analyticsReports).pipe(
+      take(1),
       switchMap((value) => {
         if (value[0] === undefined && value[1] === undefined) {
           return throwError('blocked-analytics')
