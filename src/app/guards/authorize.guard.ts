@@ -99,8 +99,6 @@ export class AuthorizeGuard implements CanActivateChild {
         }
       }),
       catchError((err) => {
-        console.log('error', err)
-
         this._errorHandler.handleError(
           err,
           ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
