@@ -67,10 +67,10 @@ export class AuthorizeGuard implements CanActivateChild {
   }
 
   sendUserToRedirectURL(oauthSession: RequestInfoForm): Observable<boolean> {
-    if (this.lastRedirectUrl !== oauthSession.redirectUrl) {
-      this.lastRedirectUrl = oauthSession.redirectUrl
+    // if (this.lastRedirectUrl !== oauthSession.redirectUrl) {
+      // this.lastRedirectUrl = oauthSession.redirectUrl
       this.window.location.href = oauthSession.redirectUrl
-    }
+    // }
     return NEVER
   }
 
@@ -84,14 +84,14 @@ export class AuthorizeGuard implements CanActivateChild {
     )
 
     return forkJoin(analyticsReports).pipe(
-      take(1),
-      switchMap((value) => {
-        if (value[0] === undefined && value[1] === undefined) {
-          return throwError('blocked-analytics')
-        } else {
-          return of(value)
-        }
-      }),
+      // take(1),
+      // switchMap((value) => {
+      //   if (value[0] === undefined && value[1] === undefined) {
+      //     return throwError('blocked-analytics')
+      //   } else {
+      //     return of(value)
+      //   }
+      // }),
       catchError((err) => {
         this._errorHandler.handleError(
           err,
