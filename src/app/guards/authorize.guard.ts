@@ -22,6 +22,7 @@ import { GoogleTagManagerService } from '../core/google-tag-manager/google-tag-m
   providedIn: 'root',
 })
 export class AuthorizeGuard implements CanActivateChild {
+  lastRedirectUrl: string
   constructor(
     private _user: UserService,
     private _router: Router,
@@ -66,7 +67,10 @@ export class AuthorizeGuard implements CanActivateChild {
   }
 
   sendUserToRedirectURL(oauthSession: RequestInfoForm): Observable<boolean> {
-    this.window.location.href = oauthSession.redirectUrl
+    if (this.lastRedirectUrl !== oauthSession.redirectUrl) {
+      this.lastRedirectUrl = oauthSession.redirectUrl
+      this.window.location.href = oauthSession.redirectUrl
+    }
     return NEVER
   }
 
@@ -80,6 +84,7 @@ export class AuthorizeGuard implements CanActivateChild {
     )
 
     return forkJoin(analyticsReports).pipe(
+      take(1),
       switchMap((value) => {
         if (value[0] === undefined && value[1] === undefined) {
           return throwError('blocked-analytics')
