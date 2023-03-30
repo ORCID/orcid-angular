@@ -89,7 +89,6 @@ export class AuthorizeGuard implements CanActivateChild {
     )
 
     return forkJoin(analyticsReports).pipe(
-
       tap(
         (value) => {
           console.log('reportAlreadyAuthorize tap', value)
