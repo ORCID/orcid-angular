@@ -67,14 +67,18 @@ export class AuthorizeGuard implements CanActivateChild {
   }
 
   sendUserToRedirectURL(oauthSession: RequestInfoForm): Observable<boolean> {
+    console.log('sendUserToRedirectURL ', oauthSession)
+
     // if (this.lastRedirectUrl !== oauthSession.redirectUrl) {
-      // this.lastRedirectUrl = oauthSession.redirectUrl
-      this.window.location.href = oauthSession.redirectUrl
+    // this.lastRedirectUrl = oauthSession.redirectUrl
+    this.window.location.href = oauthSession.redirectUrl
     // }
     return NEVER
   }
 
   reportAlreadyAuthorize(request: RequestInfoForm) {
+    console.log('reportAlreadyAuthorize')
+
     const analyticsReports: Observable<void>[] = []
     analyticsReports.push(
       this._gtag.reportEvent(`Reauthorize`, 'RegGrowth', request)
@@ -92,6 +96,14 @@ export class AuthorizeGuard implements CanActivateChild {
       //     return of(value)
       //   }
       // }),
+      tap(
+        (value) => {
+          console.log('reportAlreadyAuthorize tap', value)
+        },
+        (err) => {
+          console.log('reportAlreadyAuthorize tap err', err)
+        }
+      ),
       catchError((err) => {
         this._errorHandler.handleError(
           err,
