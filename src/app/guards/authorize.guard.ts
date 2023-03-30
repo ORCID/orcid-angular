@@ -22,6 +22,7 @@ import { GoogleTagManagerService } from '../core/google-tag-manager/google-tag-m
   providedIn: 'root',
 })
 export class AuthorizeGuard implements CanActivateChild {
+  lastRedirectUrl: string
   constructor(
     private _user: UserService,
     private _router: Router,
@@ -66,17 +67,26 @@ export class AuthorizeGuard implements CanActivateChild {
   }
 
   sendUserToRedirectURL(oauthSession: RequestInfoForm): Observable<boolean> {
-    this.window.location.href = oauthSession.redirectUrl
+    this.lastRedirectUrl = oauthSession.redirectUrl
+    if (this.lastRedirectUrl !== oauthSession.redirectUrl) {
+      this.window.location.href = oauthSession.redirectUrl
+    }
     return NEVER
   }
 
   reportAlreadyAuthorize(request: RequestInfoForm) {
     const analyticsReports: Observable<void>[] = []
     analyticsReports.push(
-      this._gtag.reportEvent(`Reauthorize`, 'RegGrowth', request)
+      this._gtag.reportEvent(`Reauthorize`, 'RegGrowth', {
+        ...request,
+        redirectUrl: 'thefirstone.com',
+      })
     )
     analyticsReports.push(
-      this._googleTagManagerService.reportEvent(`Reauthorize`, request)
+      this._googleTagManagerService.reportEvent(`Reauthorize`, {
+        ...request,
+        redirectUrl: 'thesecondOne.com',
+      })
     )
 
     return forkJoin(analyticsReports).pipe(
@@ -88,6 +98,8 @@ export class AuthorizeGuard implements CanActivateChild {
         }
       }),
       catchError((err) => {
+        console.log('error', err)
+
         this._errorHandler.handleError(
           err,
           ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
