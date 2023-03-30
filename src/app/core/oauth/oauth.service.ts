@@ -154,6 +154,8 @@ export class OauthService {
     session: RequestInfoForm,
     queryParameters?: OauthParameters
   ): Observable<RequestInfoForm> {
+    console.log('handleSessionErrors');
+    
     if (!session) {
       return of(null)
     }
