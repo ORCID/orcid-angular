@@ -67,8 +67,8 @@ export class AuthorizeGuard implements CanActivateChild {
   }
 
   sendUserToRedirectURL(oauthSession: RequestInfoForm): Observable<boolean> {
-    this.lastRedirectUrl = oauthSession.redirectUrl
     if (this.lastRedirectUrl !== oauthSession.redirectUrl) {
+      this.lastRedirectUrl = oauthSession.redirectUrl
       this.window.location.href = oauthSession.redirectUrl
     }
     return NEVER
