@@ -72,6 +72,8 @@ export class AuthorizeGuard implements CanActivateChild {
   }
 
   reportAlreadyAuthorize(request: RequestInfoForm) {
+    console.log('reportAlreadyAuthorize')
+
     const analyticsReports: Observable<void>[] = []
     analyticsReports.push(
       this._gtag.reportEvent(`Reauthorize`, 'RegGrowth', request)
@@ -81,6 +83,14 @@ export class AuthorizeGuard implements CanActivateChild {
     )
 
     return forkJoin(analyticsReports).pipe(
+      tap(
+        (value) => {
+          console.log('reportAlreadyAuthorize tap', value)
+        },
+        (err) => {
+          console.log('reportAlreadyAuthorize tap err', err)
+        }
+      ),
       catchError((err) => {
         this._errorHandler.handleError(
           err,
