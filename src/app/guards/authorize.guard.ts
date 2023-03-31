@@ -6,7 +6,7 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router'
-import { forkJoin, NEVER, Observable, of, throwError } from 'rxjs'
+import { forkJoin, NEVER, Observable, of, throwError, timer } from 'rxjs'
 import { catchError, map, switchMap, take, tap, timeout } from 'rxjs/operators'
 
 import { PlatformInfoService } from '../cdk/platform-info'
@@ -67,13 +67,7 @@ export class AuthorizeGuard implements CanActivateChild {
   }
 
   sendUserToRedirectURL(oauthSession: RequestInfoForm): Observable<boolean> {
-    console.log('sendUserToRedirectURL ', oauthSession)
-
-    // if (this.lastRedirectUrl !== oauthSession.redirectUrl) {
-    // this.lastRedirectUrl = oauthSession.redirectUrl
     this.window.location.href = oauthSession.redirectUrl
-    // }
-
     return NEVER
   }
 
@@ -104,9 +98,11 @@ export class AuthorizeGuard implements CanActivateChild {
         )
         return this.sendUserToRedirectURL(request)
       }),
-      switchMap(() => {
-        return NEVER
-      })
+      // If and Add blocker like Ublock is enable the GTM `redirectURL` will never be called
+      // This add blockers will also not trigger the `catchError` above, since GTM will not throw an error
+      // So this timeout will redirect the user to the redirectURL after 4 seconds of waiting for the GTM redirect
+      switchMap(() => timer(4000)),
+      switchMap(() => this.sendUserToRedirectURL(request))
     )
   }
 
