@@ -56,24 +56,26 @@ export class WorkModalComponent implements OnInit {
   }
 
   toWorkDetails() {
-    this._window.document.getElementById('workDetails').scrollIntoView()
+    this._window.document.getElementById('work-detail').scrollIntoView()
   }
 
   toIdentifiers() {
-    this._window.document.getElementById('identifiers').scrollIntoView()
+    this._window.document.getElementById('work-identifiers').scrollIntoView()
   }
 
   toContributors() {
-    this._window.document.getElementById('contributors').scrollIntoView()
+    this._window.document.getElementById('work-contributors').scrollIntoView()
   }
 
   toCitation() {
-    this._window.document.getElementById('citation').scrollIntoView()
+    this._window.document.getElementById('work-citation').scrollIntoView()
   }
+
   toOtherInformation() {
-    this._window.document.getElementById('otherInformation').scrollIntoView()
+    this._window.document.getElementById('work-other-info').scrollIntoView()
   }
+
   toVisibility() {
-    this._window.document.getElementById('visibility').scrollIntoView()
+    this._window.document.getElementById('work-visibility').scrollIntoView()
   }
 }

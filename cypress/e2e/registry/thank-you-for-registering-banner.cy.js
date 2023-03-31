@@ -2,14 +2,17 @@
 const randomUser = require('../../helpers/randomUser')
 import { qase } from 'cypress-qase-reporter/dist/mocha'
 
-describe('Register new user', async function () {
+describe('Register new user - a Thank you banner is displayed - verify email sent', async function () {
+  const welcomeMessage = 'Thank you for registering with ORCID'
+  const emailVerifRemidnerMessage = 'Please verify your primary email address!'
+
   beforeEach(() => {
     cy.visit('/')
   })
 
   qase(
-    ['104', '161'],
-    it('New user registers and verifies primary email', function () {
+    ['105'],
+    it('Register new user - a Thank you banner is displayed - verify email sent', function () {
       //Bypass the duplicated research call to avoid getting the "Is this you modal"
       cy.intercept('GET', Cypress.env('duplicatedModalEndPoint'), [])
 
@@ -54,8 +57,19 @@ describe('Register new user', async function () {
           'recaptcha-checkbox-checked'
         )
       })
-
       cy.get('#step-c-register-button').click()
+
+      //verify top banner
+      cy.contains('app-top-bar-verification-email', welcomeMessage).should(
+        'be.visible'
+      )
+      cy.wait(4000) //wait for back end so button is clickable
+      cy.contains('button', 'Resend verification email').click({ force: true })
+      cy.wait(4000) //wait for banner to dinamically update message
+      cy.contains(
+        'app-top-bar-verification-email',
+        emailVerifRemidnerMessage
+      ).should('be.visible')
 
       //use Gmail API to check verification email was sent
       //this task will poll the inbox every 15sec to check for the email
@@ -63,7 +77,7 @@ describe('Register new user', async function () {
         options: {
           from: Cypress.env('senderVerifyEmail'),
           to: userToRegister.email,
-          subject: Cypress.env('verifyEmailSubject'),
+          subject: Cypress.env('verifyEmailReminderSubject'),
           include_body: true,
         },
       }).then((email) => {
@@ -85,7 +99,7 @@ describe('Register new user', async function () {
 
       //reload page
       cy.reload()
-      cy.wait(4000) //REMOVE after fix by dev
+      cy.wait(4000)
       //try editing Bio which only users with verified emails can do
       cy.get('#biography-panel').within(($bioSection) => {
         cy.get('.cy-edit-button').click()

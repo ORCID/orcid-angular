@@ -6,8 +6,8 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router'
-import { forkJoin, NEVER, Observable, of } from 'rxjs'
-import { catchError, map, switchMap, take } from 'rxjs/operators'
+import { forkJoin, NEVER, Observable, of, throwError, timer } from 'rxjs'
+import { catchError, map, switchMap, take, tap, timeout } from 'rxjs/operators'
 
 import { PlatformInfoService } from '../cdk/platform-info'
 import { WINDOW } from '../cdk/window'
@@ -22,6 +22,7 @@ import { GoogleTagManagerService } from '../core/google-tag-manager/google-tag-m
   providedIn: 'root',
 })
 export class AuthorizeGuard implements CanActivateChild {
+  lastRedirectUrl: string
   constructor(
     private _user: UserService,
     private _router: Router,
@@ -71,6 +72,8 @@ export class AuthorizeGuard implements CanActivateChild {
   }
 
   reportAlreadyAuthorize(request: RequestInfoForm) {
+    console.log('reportAlreadyAuthorize')
+
     const analyticsReports: Observable<void>[] = []
     analyticsReports.push(
       this._gtag.reportEvent(`Reauthorize`, 'RegGrowth', request)
@@ -78,7 +81,16 @@ export class AuthorizeGuard implements CanActivateChild {
     analyticsReports.push(
       this._googleTagManagerService.reportEvent(`Reauthorize`, request)
     )
+
     return forkJoin(analyticsReports).pipe(
+      tap(
+        (value) => {
+          console.log('reportAlreadyAuthorize tap', value)
+        },
+        (err) => {
+          console.log('reportAlreadyAuthorize tap err', err)
+        }
+      ),
       catchError((err) => {
         this._errorHandler.handleError(
           err,
@@ -86,9 +98,11 @@ export class AuthorizeGuard implements CanActivateChild {
         )
         return this.sendUserToRedirectURL(request)
       }),
-      switchMap(() => {
-        return NEVER
-      })
+      // If and Add blocker like Ublock is enable the GTM `redirectURL` will never be called
+      // This add blockers will also not trigger the `catchError` above, since GTM will not throw an error
+      // So this timeout will redirect the user to the redirectURL after 4 seconds of waiting for the GTM redirect
+      switchMap(() => timer(4000)),
+      switchMap(() => this.sendUserToRedirectURL(request))
     )
   }
 

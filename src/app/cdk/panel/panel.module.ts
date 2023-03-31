@@ -23,6 +23,7 @@ import { PrivacySelectorModule } from '../privacy-selector/privacy-selector.modu
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { SharedModule } from '../../shared/shared.module'
+import { AppPanelActivityActionAriaLabelPipe } from '../../shared/pipes/app-panel-activity-action-aria-label/app-panel-activity-action-aria-label.pipe'
 
 @NgModule({
   declarations: [
@@ -65,5 +66,6 @@ import { SharedModule } from '../../shared/shared.module'
     PanelElementSourceComponent,
     PanelExpandButtonsComponent,
   ],
+  providers: [AppPanelActivityActionAriaLabelPipe],
 })
 export class PanelModule {}
