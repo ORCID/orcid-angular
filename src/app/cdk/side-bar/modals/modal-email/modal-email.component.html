@@ -112,6 +112,7 @@
             </mat-form-field>
 
             <strong
+              tabindex="0"
               class="orc-font-body-large email-activated primary-email-label verify-icon"
               *ngIf="showEmailAsVerified(email.putCode)"
             >
@@ -150,6 +151,9 @@
               <app-privacy-selector
                 formControlName="visibility"
                 id="cy-primary-email-visibility"
+                [ariaLabelPrivate]="ariaLabelVisibilityPrimaryEmailPublic"
+                [ariaLabelPublic]="ariaLabelVisibilityPrimaryEmailTrustedParty"
+                [ariaLabelTrustedParty]="ariaLabelVisibilityPrimaryEmailPrivate"
               ></app-privacy-selector>
               <div></div>
             </div>
@@ -313,6 +317,7 @@
             <strong
               class="orc-font-body email-activated primary-email-label verify-icon"
               *ngIf="showEmailAsVerified(email.putCode)"
+              tabindex="0"
             >
               <mat-icon class="large-material-icon" matPrefix
                 >verified</mat-icon
@@ -363,6 +368,9 @@
               <app-privacy-selector
                 [hidden]="!showVisibility(email.putCode, email.action)"
                 formControlName="visibility"
+                [ariaLabelPrivate]="ariaLabelVisibilityOtherEmailPublic"
+                [ariaLabelPublic]="ariaLabelVisibilityOtherEmailTrustedParty"
+                [ariaLabelTrustedParty]="ariaLabelVisibilityOtherEmailPrivate"
               ></app-privacy-selector>
               <button
                 (click)="deleteEmail(email.putCode)"
