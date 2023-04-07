@@ -81,6 +81,7 @@ export class AuthorizeGuard implements CanActivateChild {
       this._googleTagManagerService.reportEvent(`Reauthorize`, request)
     )
     addEventListener('beforeunload', (event) => {
+      // temporally keeping the console logs to debug the issue
       console.log('beforeunload', event)
       this.redirectTroughGtmWasCalled = true
     })
