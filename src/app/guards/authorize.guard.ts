@@ -23,6 +23,7 @@ import { GoogleTagManagerService } from '../core/google-tag-manager/google-tag-m
 })
 export class AuthorizeGuard implements CanActivateChild {
   lastRedirectUrl: string
+  inTheMiddleOfRedirect: boolean = false
   constructor(
     private _user: UserService,
     private _router: Router,
@@ -67,7 +68,14 @@ export class AuthorizeGuard implements CanActivateChild {
   }
 
   sendUserToRedirectURL(oauthSession: RequestInfoForm): Observable<boolean> {
+    // Prevent double redirection caused by races using simple semaphore like construct
+    if (this.inTheMiddleOfRedirect) {
+      return;
+    }
+
     this.window.location.href = oauthSession.redirectUrl
+    this.inTheMiddleOfRedirect = true;
+
     return NEVER
   }
 
