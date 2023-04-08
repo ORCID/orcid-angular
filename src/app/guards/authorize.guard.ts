@@ -23,6 +23,7 @@ import { GoogleTagManagerService } from '../core/google-tag-manager/google-tag-m
 })
 export class AuthorizeGuard implements CanActivateChild {
   lastRedirectUrl: string
+  redirectTroughGtmWasCalled: boolean
   constructor(
     private _user: UserService,
     private _router: Router,
@@ -72,8 +73,6 @@ export class AuthorizeGuard implements CanActivateChild {
   }
 
   reportAlreadyAuthorize(request: RequestInfoForm) {
-    console.log('reportAlreadyAuthorize')
-
     const analyticsReports: Observable<void>[] = []
     analyticsReports.push(
       this._gtag.reportEvent(`Reauthorize`, 'RegGrowth', request)
@@ -81,6 +80,11 @@ export class AuthorizeGuard implements CanActivateChild {
     analyticsReports.push(
       this._googleTagManagerService.reportEvent(`Reauthorize`, request)
     )
+    addEventListener('beforeunload', (event) => {
+      // temporally keeping the console logs to debug the issue
+      console.log('beforeunload', event)
+      this.redirectTroughGtmWasCalled = true
+    })
 
     return forkJoin(analyticsReports).pipe(
       tap(
@@ -102,7 +106,14 @@ export class AuthorizeGuard implements CanActivateChild {
       // This add blockers will also not trigger the `catchError` above, since GTM will not throw an error
       // So this timeout will redirect the user to the redirectURL after 4 seconds of waiting for the GTM redirect
       switchMap(() => timer(4000)),
-      switchMap(() => this.sendUserToRedirectURL(request))
+      switchMap(() => {
+        // Checks that a redirect by GTM is not already in progress
+        // Stop a second redirect to happen if the a browser event `beforeunload` event was triggered
+        if (this.redirectTroughGtmWasCalled) {
+          return NEVER
+        }
+        return this.sendUserToRedirectURL(request)
+      })
     )
   }
 
