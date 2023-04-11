@@ -270,9 +270,10 @@ export class WorkFormComponent implements OnInit {
             if (
               formGroup.controls.externalIdentifierUrl?.value?.length > 0 &&
               formGroup.controls.externalIdentifierUrl.value !==
-                formGroup.controls.externalIdentifierUrlWasBackendGenerated
-                  .value
-            ) {
+              formGroup.controls.externalIdentifierUrlWasBackendGenerated.value ||
+              formGroup.controls.externalIdentifierId.value ===
+              formGroup.controls.externalIdentifierIdStored.value
+              ) {
               // do not overwrite the existing URL
             } else if (
               value.generatedUrl &&
@@ -468,7 +469,9 @@ export class WorkFormComponent implements OnInit {
           '',
         [Validators.pattern(URL_REGEXP)],
       ],
-
+      externalIdentifierIdStored: [
+        existingExternalId?.externalIdentifierId?.value || '',
+      ],
       externalIdentifierUrlWasBackendGenerated: [
         existingExternalId?.normalizedUrl?.value ||
           existingExternalId?.url?.value ||
