@@ -112,6 +112,30 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
   requireOrganizationDisambiguatedDataOnRefresh = false
   displayOrganizationHint: boolean
 
+  get organizationIsInvalidAndTouched() {
+    return (
+      this.affiliationForm.hasError('required', 'organization') &&
+      (this.affiliationForm.get('organization').dirty ||
+        this.affiliationForm.get('organization').touched)
+    )
+  }
+
+  get cityIsInvalidAndTouched() {
+    return (
+      this.affiliationForm.hasError('required', 'city') &&
+      (this.affiliationForm.get('city').dirty ||
+        this.affiliationForm.get('city').touched)
+    )
+  }
+
+  get countryIsInvalidAndTouched() {
+    return (
+      this.affiliationForm.hasError('required', 'country') &&
+      (this.affiliationForm.get('country').dirty ||
+        this.affiliationForm.get('country').touched)
+    )
+  }
+
   constructor(
     @Inject(WINDOW) private window: Window,
     private _platform: PlatformInfoService,
@@ -405,20 +429,20 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
       source: this.options?.createACopy ? null : this.affiliation?.source,
       sourceName: this.affiliation?.sourceName,
       dateSortString: this.affiliation?.dateSortString,
-      affiliationExternalIdentifiers: this.affiliation
-        ?.affiliationExternalIdentifiers,
+      affiliationExternalIdentifiers:
+        this.affiliation?.affiliationExternalIdentifiers,
       affiliationTypeForDisplay: this.affiliation?.affiliationTypeForDisplay,
       assertionOriginClientId: this.affiliation?.assertionOriginClientId,
       assertionOriginName: this.affiliation?.assertionOriginName,
       assertionOriginOrcid: this.affiliation?.assertionOriginOrcid,
       disambiguationSource: this.affiliation?.disambiguationSource,
-      disambiguatedAffiliationSourceId: this.affiliation
-        ?.disambiguatedAffiliationSourceId,
+      disambiguatedAffiliationSourceId:
+        this.affiliation?.disambiguatedAffiliationSourceId,
       orgDisambiguatedId: this.affiliation?.orgDisambiguatedId,
       orgDisambiguatedCity: this.affiliation?.orgDisambiguatedCity,
       orgDisambiguatedCountry: this.affiliation?.orgDisambiguatedCountry,
-      orgDisambiguatedExternalIdentifiers: this.affiliation
-        ?.orgDisambiguatedExternalIdentifiers,
+      orgDisambiguatedExternalIdentifiers:
+        this.affiliation?.orgDisambiguatedExternalIdentifiers,
       orgDisambiguatedName: this.affiliation?.orgDisambiguatedName,
       orgDisambiguatedRegion: this.affiliation?.orgDisambiguatedRegion,
       orgDisambiguatedUrl: this.affiliation?.orgDisambiguatedUrl,

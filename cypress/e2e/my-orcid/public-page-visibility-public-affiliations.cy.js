@@ -5,7 +5,7 @@ import userData from '../../fixtures/testing-users.fixture.json'
 describe('Public record page: validate public affiliations are displayed', async function () {
   var testUser = userData.cyUserPublicPagePublicAffiliations
 
-  before(() => {
+  beforeEach(() => {
     cy.visit('/' + testUser.oid)
   })
 

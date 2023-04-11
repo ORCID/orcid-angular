@@ -120,8 +120,8 @@ export class FundingStackComponent implements OnInit {
    */
   toggleDetails(funding: Funding) {
     const putCode = funding.putCode.value
-    this.panelDetailsState[putCode].state = !this.panelDetailsState[putCode]
-      .state
+    this.panelDetailsState[putCode].state =
+      !this.panelDetailsState[putCode].state
     const itemToUpdate = this._fundingStack.fundings.find(
       (x) => x.putCode.value === putCode
     )

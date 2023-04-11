@@ -69,6 +69,9 @@ export class PanelsComponent implements OnInit {
   @Input() labelSortButton = $localize`:@@shared.addItem:Add Item`
   IS_QA: boolean
 
+  ariaLabelAscending = $localize`:@@shared.ariaLabelAscending:Ascending`
+  ariaLabelDescending = $localize`:@@shared.ariaLabelDescending:Descending`
+
   constructor(
     private _dialog: MatDialog,
     private _platform: PlatformInfoService,

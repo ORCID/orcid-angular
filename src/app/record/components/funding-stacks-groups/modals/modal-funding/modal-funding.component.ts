@@ -126,6 +126,9 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
   ariaLabelEndDate = $localize`:@@shared.startDate:End date`
   ariaLabelSaveChanges = $localize`:@@shared.saveFundingChanges:Save funding changes`
   ariaLabelCancelChanges = $localize`:@@shared.cancelFundingChanges:Cancel changes and close Funding`
+  ariaLabelClose = $localize`:@@shared.closeFunding:Close funding`
+  ariaLabelDescription = $localize`:@@shared.descriptionFunding:Project description`
+  ariaLabelAmount = $localize`:@@shared.amountFunding:Amount`
 
   ngOrcidYear = $localize`:@@shared.year:Year`
   ngOrcidMonth = $localize`:@@shared.month:Month`
@@ -133,7 +136,6 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
   ngOrcidSelectLanguage = $localize`:@@shared.selectLanguage:Select a language`
   ngOrcidSelectACountryOrLocation = $localize`:@@shared.selectACountryOrLocation:Select a country or location`
   ngOrcidDefaultVisibilityLabel = $localize`:@@shared.visibilityDescription:Control who can see this information by setting the visibility. Your default visibility is`
-
   constructor(
     @Inject(WINDOW) private window: Window,
     private _platform: PlatformInfoService,
@@ -367,10 +369,10 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
     if (this.funding.fundingTitle?.translatedTitle) {
       this.fundingForm.patchValue({
         translatedTitleGroup: {
-          translatedTitleContent: this.funding.fundingTitle?.translatedTitle
-            .content,
-          translatedTitleLanguage: this.funding.fundingTitle?.translatedTitle
-            .languageCode,
+          translatedTitleContent:
+            this.funding.fundingTitle?.translatedTitle.content,
+          translatedTitleLanguage:
+            this.funding.fundingTitle?.translatedTitle.languageCode,
         },
       })
     }
@@ -410,18 +412,22 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       this.region = this.funding.region?.value
       this.country = this.funding.country?.value
       this.fundingType = this.funding.fundingType?.value
-      this.fundingSubtype = this.funding.organizationDefinedFundingSubType?.subtype?.value
+      this.fundingSubtype =
+        this.funding.organizationDefinedFundingSubType?.subtype?.value
       this.fundingProjectTitle = this.funding.fundingTitle?.title.value
-      this.translatedTitleContent = this.funding.fundingTitle?.translatedTitle?.content
-      this.translatedTitleLanguage = this.funding.fundingTitle?.translatedTitle?.languageCode
+      this.translatedTitleContent =
+        this.funding.fundingTitle?.translatedTitle?.content
+      this.translatedTitleLanguage =
+        this.funding.fundingTitle?.translatedTitle?.languageCode
       this.fundingProjectLink = this.funding.url?.value
       this.description = this.funding.description?.value
       this.currencyCode = this.funding.currencyCode?.value
       this.amount = this.funding.amount?.value
-      this.disambiguatedFundingSourceId = this.funding.disambiguatedFundingSourceId?.value
+      this.disambiguatedFundingSourceId =
+        this.funding.disambiguatedFundingSourceId?.value
       this.disambiguatedFundingSource = this.funding.disambiguationSource?.value
-      this.showTranslationTitle = !!this.funding.fundingTitle?.translatedTitle
-        ?.content
+      this.showTranslationTitle =
+        !!this.funding.fundingTitle?.translatedTitle?.content
       this.agencyName = {
         value: this.funding.fundingName.value,
       } as Organization

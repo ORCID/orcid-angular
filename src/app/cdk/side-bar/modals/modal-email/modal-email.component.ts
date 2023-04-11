@@ -42,11 +42,11 @@ import { OrcidValidators } from 'src/app/validators'
   preserveWhitespaces: true,
 })
 export class ModalEmailComponent implements OnInit, OnDestroy {
-  ariaLabelKnowledgeBase = $localize`:@@side-bar.ariaLabelOrcidTermsOfUseBase:ORCID terms of use page (Opens in a new tab)`
+  ariaLabelKnowledgeBase = $localize`:@@side-bar.ariaLabelOrcidTermsOfUseBase:ORCID knowledge base (Opens in a new tab)`
   ariaLabelKnowledgeSupport = $localize`:@@side-bar.ariaLabelOrcidTermsSupport:ORCID support page (Opens in a new tab)`
-  ariaLabelOrcidTermsOfUseLink = $localize`:@@side-bar.ariaLabelOrcidTermsOfUseLink:ORCID terms of use`
+  ariaLabelOrcidTermsOfUseLink = $localize`:@@side-bar.ariaLabelOrcidTermsOfUseLink:ORCID terms of use (Opens in a new tab)`
   ariaLabelSave = $localize`:@@side-bar.ariaLabelEmailSave:Save changes to Emails`
-  ariaLabelCancel = $localize`:@@side-bar.ariaLabelEmailCancel:Cancel changes to Emails`
+  ariaLabelCancel = $localize`:@@side-bar.ariaLabelEmailCancel:Cancel changes and close Emails`
   ariaLabelDelete = $localize`:@@side-bar.ariaLabelEmailDelete:Delete Email`
   ariaLabelClose = $localize`:@@side-bar.ariaLabelEmailClose:Close Emails`
   ariaLabelEmail = $localize`:@@side-bar.ariaLabelEmail:Emails`
@@ -226,9 +226,9 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
 
   private triggerGeneralFormValidation() {
     Object.keys(this.emailsForm.controls).forEach((currentControlKey) => {
-      ;(this.emailsForm.controls[
-        currentControlKey
-      ] as UntypedFormGroup).controls.email.updateValueAndValidity()
+      ;(
+        this.emailsForm.controls[currentControlKey] as UntypedFormGroup
+      ).controls.email.updateValueAndValidity()
     })
   }
 
@@ -243,9 +243,8 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   allEmailsAreUnique(controlKey): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const formGroup = this.emailsForm
-      const formGroupKeysWithDuplicatedValues: string[] = this.listDuplicateInputKeys(
-        formGroup
-      )
+      const formGroupKeysWithDuplicatedValues: string[] =
+        this.listDuplicateInputKeys(formGroup)
       this.removeDuplicateErrorFromOtherControls(
         formGroupKeysWithDuplicatedValues,
         this.emailsForm
@@ -282,9 +281,9 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
     emailsForm: UntypedFormGroup = new UntypedFormGroup({})
   ): void {
     Object.keys(emailsForm.controls).forEach((currentControlKey) => {
-      const otherEmailControl = (emailsForm.controls[
-        currentControlKey
-      ] as UntypedFormGroup).controls.email as UntypedFormControl
+      const otherEmailControl = (
+        emailsForm.controls[currentControlKey] as UntypedFormGroup
+      ).controls.email as UntypedFormControl
       if (
         formGroupKeysWithDuplicatedValues.indexOf(currentControlKey) === -1 &&
         otherEmailControl.errors &&
@@ -315,9 +314,9 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
       emailControlX = emailControlX.toLowerCase().trim()
 
       Object.keys(formGroup.controls).forEach((keyY) => {
-        let emailControlY: string = (formGroup.controls[
-          keyY
-        ] as UntypedFormGroup).controls['email'].value
+        let emailControlY: string = (
+          formGroup.controls[keyY] as UntypedFormGroup
+        ).controls['email'].value
         emailControlY = emailControlY.toLowerCase().trim()
 
         // Only if both controls are not empty

@@ -47,7 +47,6 @@ import { AppPanelsSortAriaLabelPipe } from './pipes/app-panels-sort-aria-label/a
 import { AppPanelActivityActionAriaLabelPipe } from './pipes/app-panel-activity-action-aria-label/app-panel-activity-action-aria-label.pipe'
 import { SortByPipe } from './pipes/sort-by/sort-by.pipe'
 import { AffiliationLabelPipe } from './pipes/affiliation-label.pipe'
-
 @NgModule({
   imports: [
     CommonModule,

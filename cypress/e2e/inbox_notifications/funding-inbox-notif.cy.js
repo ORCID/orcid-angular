@@ -35,9 +35,9 @@ describe('Inbox: add/update/delete funding via API', async function () {
   const curlPutFunding =
     "curl -i -H 'Content-type: application/json' -H 'Authorization: Bearer " +
     userData.cyNotifPerm.clientBearer +
-    "' -X PUT -d '" +
+    "' -d '" +
     userData.cyNotifPerm.curlFundingUpdatePath +
-    "' " +
+    "' -X PUT '" +
     Cypress.env('membersAPI_URL') +
     userData.cyNotifPerm.oid +
     Cypress.env('membersAPI_fundingsEndpoint') +
@@ -46,7 +46,7 @@ describe('Inbox: add/update/delete funding via API', async function () {
   const curlDeleteFunding =
     "curl -i -H 'Content-type: application/json' -H 'Authorization: Bearer " +
     userData.cyNotifPerm.clientBearer +
-    "' -X DELETE " +
+    "' -X DELETE '" +
     Cypress.env('membersAPI_URL') +
     userData.cyNotifPerm.oid +
     Cypress.env('membersAPI_fundingsEndpoint') +
@@ -65,7 +65,7 @@ describe('Inbox: add/update/delete funding via API', async function () {
     let putCode
     let updatedContent
 
-    //Client adds an work
+    //Client adds funding
     cy.exec(curlAddFunding).then((response) => {
       //verify curl was executed successfully
       expect(response.code).to.eq(0)
@@ -81,7 +81,7 @@ describe('Inbox: add/update/delete funding via API', async function () {
     cy.get('button').contains('Archive').click()
 
     //Read works to grab putcode
-    //There should only be one work
+    //There should only be one funding
     cy.exec(curlReadAllFundings).then((response) => {
       //verify curl was executed successfully
       expect(response.code).to.eq(0)
@@ -114,7 +114,7 @@ describe('Inbox: add/update/delete funding via API', async function () {
       })
 
       //Client Updates the work
-      cy.exec(curlPutFunding + putCode).then((responsePUT) => {
+      cy.exec(curlPutFunding + putCode + "'").then((responsePUT) => {
         //verify curl was executed successfully
         expect(responsePUT.code).to.eq(0)
         //verify http response status is successful: 200
@@ -127,7 +127,7 @@ describe('Inbox: add/update/delete funding via API', async function () {
       cy.contains('Updated').should('be.visible')
 
       //Client deletes work with that put code
-      cy.exec(curlDeleteFunding + putCode).then((responseDelete) => {
+      cy.exec(curlDeleteFunding + putCode + "'").then((responseDelete) => {
         //verify curl was executed successfully
         expect(responseDelete.code).to.eq(0)
         //verify http response status is successful: 204

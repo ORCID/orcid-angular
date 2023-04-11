@@ -35,6 +35,7 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
   ariaLabelCancel = $localize`:@@side-bar.ariaLabelCountryCancel:Cancel changes and close Countries`
   ariaLabelDelete = $localize`:@@side-bar.ariaLabelCountryDelete:Delete Country or location`
   ariaLabelSelect = $localize`:@@side-bar.ariaLabelCountrySelect:Select country or location`
+  ariaLabelCountryLocationReadOnly = $localize`:@@side-bar.ariaLabelCountrySelect:Country or location`
   ariaLabelClose = $localize`:@@side-bar.ariaLabelCountryClose:Close Countries`
 
   $destroy: Subject<boolean> = new Subject<boolean>()
@@ -61,6 +62,7 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
   @ViewChildren('countrySelect') inputs: QueryList<MatSelect>
 
   ngOrcidCountry = $localize`:@@shared.selectACountryOrLocation:Select a country or location`
+  countryOrLocationLabel = $localize`:@@shared.countryOrLocation:Country or location`
 
   ngOnInit(): void {
     this._recordCountryService
@@ -99,10 +101,7 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
 
     countries.forEach((country) => {
       group[country.putCode] = new UntypedFormGroup({
-        country: new UntypedFormControl({
-          value: country.countryName,
-          disabled: country.source !== this.id,
-        }),
+        country: new UntypedFormControl(country.countryName),
         visibility: new UntypedFormControl(country.visibility.visibility, {}),
       })
     })

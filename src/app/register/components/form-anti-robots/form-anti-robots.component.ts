@@ -32,7 +32,8 @@ import { BaseForm } from '../BaseForm'
 })
 export class FormAntiRobotsComponent
   extends BaseForm
-  implements OnInit, DoCheck {
+  implements OnInit, DoCheck
+{
   captchaFailState = false
   captchaLoadedWithWidgetId: number
   $widgetIdUpdated = new Subject()

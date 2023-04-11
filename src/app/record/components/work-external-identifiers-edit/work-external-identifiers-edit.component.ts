@@ -22,7 +22,8 @@ import { WorkIdType, WorkRelationships } from 'src/app/types/works.endpoint'
   ],
 })
 export class WorkExternalIdentifiersEditComponent
-  implements OnInit, AfterViewInit {
+  implements OnInit, AfterViewInit
+{
   setLabel = $localize`:@@shared.setRelationShipAriaLabel:Set relationship of `
   asLabel = $localize`:@@shared.asAriaLabel:as`
   @ViewChild('externalIdentifierType') externalIdentifierTypeRef: MatSelect

@@ -6,27 +6,31 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router'
-import { NEVER, Observable, of } from 'rxjs'
-import { catchError, map, switchMap } from 'rxjs/operators'
+import { forkJoin, NEVER, Observable, of, throwError, timer } from 'rxjs'
+import { catchError, map, switchMap, take, tap, timeout } from 'rxjs/operators'
 
 import { PlatformInfoService } from '../cdk/platform-info'
 import { WINDOW } from '../cdk/window'
 import { UserService } from '../core'
 import { ErrorHandlerService } from '../core/error-handler/error-handler.service'
-import { GoogleAnalyticsService } from '../core/google-analytics/google-analytics.service'
+import { GoogleUniversalAnalyticsService } from '../core/google-analytics/google-universal-analytics.service'
 import { ERROR_REPORT } from '../errors'
 import { RequestInfoForm } from '../types'
+import { GoogleTagManagerService } from '../core/google-tag-manager/google-tag-manager.service'
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthorizeGuard implements CanActivateChild {
+  lastRedirectUrl: string
+  redirectTroughGtmWasCalled: boolean
   constructor(
     private _user: UserService,
     private _router: Router,
     private _platform: PlatformInfoService,
     @Inject(WINDOW) private window: Window,
-    private _gtag: GoogleAnalyticsService,
+    private _gtag: GoogleUniversalAnalyticsService,
+    private _googleTagManagerService: GoogleTagManagerService,
     private _errorHandler: ErrorHandlerService
   ) {}
   canActivateChild(
@@ -34,6 +38,7 @@ export class AuthorizeGuard implements CanActivateChild {
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | UrlTree | boolean {
     return this._user.getUserSession().pipe(
+      take(1),
       switchMap((session) => {
         const oauthSession = session.oauthSession
         if (session.userInfo?.LOCKED === 'true') {
@@ -49,10 +54,7 @@ export class AuthorizeGuard implements CanActivateChild {
             oauthSession.responseType &&
             oauthSession.redirectUrl.includes(oauthSession.responseType + '=')
           ) {
-            return this.reportAlreadyAuthorize(session.oauthSession).pipe(
-              catchError(() => this.sendUserToRedirectURL(oauthSession)),
-              switchMap(() => this.sendUserToRedirectURL(oauthSession))
-            )
+            return this.reportAlreadyAuthorize(oauthSession)
           } else if (
             oauthSession.forceLogin ||
             !session.oauthSessionIsLoggedIn
@@ -65,22 +67,54 @@ export class AuthorizeGuard implements CanActivateChild {
     )
   }
 
-  sendUserToRedirectURL(oauthSession: RequestInfoForm) {
+  sendUserToRedirectURL(oauthSession: RequestInfoForm): Observable<boolean> {
     this.window.location.href = oauthSession.redirectUrl
     return NEVER
   }
 
   reportAlreadyAuthorize(request: RequestInfoForm) {
-    return this._gtag
-      .reportEvent(`Reauthorize`, 'RegGrowth', request)
-      .pipe(
-        catchError((err) =>
-          this._errorHandler.handleError(
-            err,
-            ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
-          )
+    const analyticsReports: Observable<void>[] = []
+    analyticsReports.push(
+      this._gtag.reportEvent(`Reauthorize`, 'RegGrowth', request)
+    )
+    analyticsReports.push(
+      this._googleTagManagerService.reportEvent(`Reauthorize`, request)
+    )
+    addEventListener('beforeunload', (event) => {
+      // temporally keeping the console logs to debug the issue
+      console.log('beforeunload', event)
+      this.redirectTroughGtmWasCalled = true
+    })
+
+    return forkJoin(analyticsReports).pipe(
+      tap(
+        (value) => {
+          console.log('reportAlreadyAuthorize tap', value)
+        },
+        (err) => {
+          console.log('reportAlreadyAuthorize tap err', err)
+        }
+      ),
+      catchError((err) => {
+        this._errorHandler.handleError(
+          err,
+          ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
         )
-      )
+        return this.sendUserToRedirectURL(request)
+      }),
+      // If and Add blocker like Ublock is enable the GTM `redirectURL` will never be called
+      // This add blockers will also not trigger the `catchError` above, since GTM will not throw an error
+      // So this timeout will redirect the user to the redirectURL after 4 seconds of waiting for the GTM redirect
+      switchMap(() => timer(4000)),
+      switchMap(() => {
+        // Checks that a redirect by GTM is not already in progress
+        // Stop a second redirect to happen if the a browser event `beforeunload` event was triggered
+        if (this.redirectTroughGtmWasCalled) {
+          return NEVER
+        }
+        return this.sendUserToRedirectURL(request)
+      })
+    )
   }
 
   private redirectToLoginPage(

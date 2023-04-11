@@ -32,7 +32,7 @@ export class UserMenuComponent implements OnInit {
 
   constructor(
     private _router: Router,
-    _userInfo: UserService,
+    private _userInfo: UserService,
     @Inject(WINDOW) private window: Window,
     _platform: PlatformInfoService,
     private _inboxService: InboxService,
@@ -84,6 +84,10 @@ export class UserMenuComponent implements OnInit {
   }
 
   navigateTo(val) {
-    this.window.location.href = val
+    if (val === '/signout' && environment.proxyMode) {
+      this._userInfo.noRedirectLogout().subscribe()
+    } else {
+      this.window.location.href = val
+    }
   }
 }

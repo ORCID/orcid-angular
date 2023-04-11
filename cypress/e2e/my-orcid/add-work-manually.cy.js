@@ -52,7 +52,9 @@ describe('My orcid - users are able to edit work info in their record', async fu
       cy.contains(testWorks.manuallyCitationType).click()
     })
     cy.get('#citation-input').clear().type(testWorks.manuallyCitation)
-    cy.get('#description-input').clear().type(testWorks.manuallyCitationDesc)
+    cy.get('[formcontrolname="shortDescription"]')
+      .clear()
+      .type(testWorks.manuallyCitationDesc)
     //add identifier
     cy.get('#cy-add-an-work-external-id').click()
     cy.get('[formcontrolname="externalIdentifierType"]').click() //to do REPLACE with id for the element next sprint
@@ -60,10 +62,10 @@ describe('My orcid - users are able to edit work info in their record', async fu
       //to do REPLACE with id for the element next sprint
       cy.contains(testWorks.manuallyIdentifierType).click()
     })
-    cy.get('#external-identifier-id-input')
+    cy.get('[formcontrolname="externalIdentifierId"]')
       .clear()
       .type(testWorks.manuallyIdentifierId)
-    cy.get('#external-identifier-url-input')
+    cy.get('[formcontrolname="externalIdentifierUrl"]')
       .clear()
       .type(testWorks.manuallyIdentifierLink)
     //by default Self relationship is checked

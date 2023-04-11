@@ -102,7 +102,7 @@
     </button>
   </app-modal-footer>
   <form [formGroup]="affiliationForm">
-    <form>
+    <section id="{{ type }}-organization">
       <div
         id="organization"
         class="title"
@@ -133,16 +133,14 @@
         </div>
       </div>
       <hr />
-    </form>
-    <section id="{{ type }} + 'organization'">
+
       <div class="row">
         <label
+          for="organization-input"
+          id="organization-label"
           class="mat-caption"
           [ngClass]="{
-            error:
-              affiliationForm.hasError('required', 'organization') &&
-              (affiliationForm.get('organization').dirty ||
-                affiliationForm.get('organization').touched)
+            error: organizationIsInvalidAndTouched
           }"
         >
           <strong i18n="@@shared.organization" id="organizationLabel"
@@ -166,6 +164,7 @@
             matInput
             formControlName="organization"
             [matAutocomplete]="auto"
+            [attr.aria-invalid]="organizationIsInvalidAndTouched"
           />
           <mat-autocomplete
             autoActiveFirstOption
@@ -215,8 +214,10 @@
             <mat-icon>close</mat-icon>
           </button>
           <mat-error
+            role="alert"
+            aria-describedby="organization-label"
             class="mat-caption"
-            *ngIf="affiliationForm.hasError('required', 'organization')"
+            *ngIf="organizationIsInvalidAndTouched"
             i18n="@@shared.pleaseEnterAnOrganization"
           >
             Please enter an organization
@@ -232,12 +233,10 @@
       <div class="row">
         <label
           for="city-input"
+          id="city-label"
           class="mat-caption"
           [ngClass]="{
-            error:
-              affiliationForm.hasError('required', 'city') &&
-              (affiliationForm.get('city').dirty ||
-                affiliationForm.get('city').touched)
+            error: cityIsInvalidAndTouched
           }"
         >
           <strong i18n="@@shared.city" id="cityLabel">City</strong>
@@ -251,8 +250,11 @@
             matInput
             formControlName="city"
             aria-labelledby="cityLabel"
+            [attr.aria-invalid]="cityIsInvalidAndTouched"
           />
           <mat-error
+            role="alert"
+            aria-describedby="city-label"
             class="mat-caption"
             *ngIf="affiliationForm.get('city').hasError('required')"
             i18n="@@shared.cityError"
@@ -269,9 +271,7 @@
       </div>
       <div class="row">
         <label for="region-input" class="mat-caption">
-          <strong i18n="@@shared.region" aria-labelledby="regionLabel"
-            >Region, State or County</strong
-          >
+          <strong i18n="@@shared.region">Region, State or County</strong>
         </label>
       </div>
       <div class="input-container">
@@ -293,12 +293,10 @@
       <div class="row">
         <label
           for="country-input"
+          id="country-label"
           class="mat-caption"
           [ngClass]="{
-            error:
-              affiliationForm.hasError('required', 'country') &&
-              (affiliationForm.get('country').dirty ||
-                affiliationForm.get('country').touched)
+            error: countryIsInvalidAndTouched
           }"
         >
           <strong i18n="@@shared.countryOrLocation" id="countryLabel"
@@ -318,85 +316,86 @@
             placeholder="{{ ngOrcidSelectACountryOrLocation }}"
             #countrySelect
             formControlName="country"
+            [attr.aria-invalid]="countryIsInvalidAndTouched"
           >
             <mat-option
-              *ngFor="let countryCode of countryCodes | sortBy: 'asc':'key'"
+              *ngFor="let countryCode of countryCodes | sortBy : 'asc' : 'key'"
               [value]="countryCode.key"
             >
               {{ countryCode.key }}
             </mat-option>
           </mat-select>
           <mat-error
+            role="alert"
+            aria-describedby="country-label"
             i18n="@@shared.countryOrLocationError"
-            *ngIf="affiliationForm.get('country').hasError('required')"
+            *ngIf="countryIsInvalidAndTouched"
           >
             Please enter a country or location
           </mat-error>
         </mat-form-field>
       </div>
     </section>
-    <section id="{{ type }} + 'details'">
-      <form>
-        <div
-          id="affiliation-details"
-          class="title"
-          [ngClass]="{
-            'orc-font-body': !platform.columns12,
-            'orc-font-body-large': platform.columns12
-          }"
-        >
-          <div class="row">
-            <h2
-              [ngClass]="{
-                'orc-font-body': !platform.columns12,
-                'orc-font-body-large': platform.columns12
-              }"
+    <section id="{{ type }}-details">
+      <div
+        id="affiliation-details"
+        class="title"
+        [ngClass]="{
+          'orc-font-body': !platform.columns12,
+          'orc-font-body-large': platform.columns12
+        }"
+      >
+        <div class="row">
+          <h2
+            [ngClass]="{
+              'orc-font-body': !platform.columns12,
+              'orc-font-body-large': platform.columns12
+            }"
+          >
+            <strong
+              i18n="@@shared.employmentDetails"
+              *ngIf="type === 'employment'"
             >
-              <strong
-                i18n="@@shared.employmentDetails"
-                *ngIf="type === 'employment'"
-              >
-                Employment details
-              </strong>
-              <strong
-                i18n="@@shared.qualificationDetails"
-                *ngIf="type === 'qualification'"
-              >
-                Qualification details
-              </strong>
-              <strong
-                i18n="@@shared.educationDetails"
-                *ngIf="type === 'education'"
-              >
-                Education details
-              </strong>
-              <strong
-                i18n="@@shared.invitedPositionDetails"
-                *ngIf="type === 'invited-position'"
-              >
-                Invited Position details
-              </strong>
-              <strong
-                i18n="@@shared.distinctionDetails"
-                *ngIf="type === 'distinction'"
-              >
-                Distinction details
-              </strong>
-              <strong
-                i18n="@@shared.membershipDetails"
-                *ngIf="type === 'membership'"
-              >
-                Membership details
-              </strong>
-              <strong i18n="@@shared.serviceDetails" *ngIf="type === 'service'">
-                Service details
-              </strong>
-              <span *ngIf="!platform.columns12" class="required">*</span>
-            </h2>
-          </div>
+              Employment details
+            </strong>
+            <strong
+              i18n="@@shared.qualificationDetails"
+              *ngIf="type === 'qualification'"
+            >
+              Qualification details
+            </strong>
+            <strong
+              i18n="@@shared.educationDetails"
+              *ngIf="type === 'education'"
+            >
+              Education details
+            </strong>
+            <strong
+              i18n="@@shared.invitedPositionDetails"
+              *ngIf="type === 'invited-position'"
+            >
+              Invited Position details
+            </strong>
+            <strong
+              i18n="@@shared.distinctionDetails"
+              *ngIf="type === 'distinction'"
+            >
+              Distinction details
+            </strong>
+            <strong
+              i18n="@@shared.membershipDetails"
+              *ngIf="type === 'membership'"
+            >
+              Membership details
+            </strong>
+            <strong i18n="@@shared.serviceDetails" *ngIf="type === 'service'">
+              Service details
+            </strong>
+            <span *ngIf="!platform.columns12" class="required">*</span>
+          </h2>
         </div>
-        <hr />
-      </form>
+      </div>
+      <hr />
       <div class="row">
         <label for="department-input" class="mat-caption">
           <strong i18n="@@shared.department" id="deparmentLabel"
@@ -466,6 +465,7 @@
       >
         <div class="row">
           <label
+            for="cy-start-date-year-sel"
             class="mat-caption"
             [ngClass]="{
               error: affiliationForm.hasError('date', 'startDateGroup')

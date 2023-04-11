@@ -9,7 +9,7 @@ export const environment = {
   INFO_SITE: 'https://info.orcid.org/',
   SHOW_TEST_WARNING_BANNER: false,
   GOOGLE_ANALYTICS_TESTING_MODE: false,
-  GOOGLE_ANALYTICS: 'UA-17492803-4',
+  GOOGLE_TAG_MANAGER: 'GTM-WDKLQXL',
   GOOGLE_RECAPTCHA: '6Lfj4AoTAAAAAAjr0x3Gu2RcVpA1-0LJAhV-GRQj',
   ZENDESK: 'b8313acd-6439-4894-b431-8c5a2ae9e7cb',
   HELP_HERO_ID: 'oYFQMrzFHA',
@@ -29,4 +29,5 @@ export const environment = {
     'zh-CN': '简体中文',
     'zh-TW': '繁體中文',
   },
+  proxyMode: false,
 }

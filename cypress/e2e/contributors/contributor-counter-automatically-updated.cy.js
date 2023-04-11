@@ -20,10 +20,16 @@ describe('Counter in contributors section updates accordingly while adding a wor
       //only record owner listed
       cy.get('app-work-contributors').contains('Contributors to this work (1)')
       //add a second contributor
-      cy.get('#cy-add-another-contributor').click()
+      cy.get('.cy-add-another-contributor').click()
+      cy.get('#draggable-1').within(() => {
+        cy.get('[formcontrolname="creditName"]').clear().type('Name2')
+      })
       cy.get('app-work-contributors').contains('Contributors to this work (2)')
       //add a third contributor
-      cy.get('#cy-add-another-contributor').click()
+      cy.get('.cy-add-another-contributor').click()
+      cy.get('#draggable-2').within(() => {
+        cy.get('[formcontrolname="creditName"]').clear().type('Name3')
+      })
       cy.get('app-work-contributors').contains('Contributors to this work (3)')
 
       //remove second contributor

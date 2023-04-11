@@ -64,6 +64,8 @@ export class WorkFormComponent implements OnInit {
   ngOrcidYear = $localize`:@@shared.year:Year`
   ngOrcidMonth = $localize`:@@shared.month:Month`
   ngOrcidDay = $localize`:@@shared.day:Day`
+  languageLabelAriaLabel = $localize`:@@shared.languageLabelAriaLabel:Select the language used in this form`
+  selectCountryLocationLabel = $localize`:@@shared.selectCountryLocationLabel:Select a country or location of publication`
 
   @Input() work: Work
   @Input() userRecord: UserRecord
@@ -606,9 +608,11 @@ export class WorkFormComponent implements OnInit {
       Object.keys(formErrors).length === 1 &&
       formErrors.workIdentifiers?.length
     ) {
-      return (formErrors.workIdentifiers as {
-        [key: string]: { [key: string]: boolean }
-      }[]).every((workIdentifiersErrorList) => {
+      return (
+        formErrors.workIdentifiers as {
+          [key: string]: { [key: string]: boolean }
+        }[]
+      ).every((workIdentifiersErrorList) => {
         return (
           // Either workIdentifiers is null
           // OR it only contains allow error like unResolved or validFormat

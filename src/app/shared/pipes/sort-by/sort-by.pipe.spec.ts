@@ -18,6 +18,7 @@ describe('SortByPipe', () => {
       { key: 'Mexico', value: 'MX' },
       { key: 'South Africa', value: 'ZA' },
     ]
+
     expect(
       equalsCheck(
         pipe.transform(getUnsortedCountries(), 'asc', 'key'),

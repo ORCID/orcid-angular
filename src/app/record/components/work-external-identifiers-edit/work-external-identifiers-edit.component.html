@@ -15,7 +15,7 @@
   <!-- Work identifier type -->
   <div>
     <div class="row">
-      <label
+      <strong
         class="mat-caption"
         [ngClass]="{
           error:
@@ -23,12 +23,12 @@
             externalIdForm.get('externalIdentifierType').touched
         }"
       >
-        <strong
+        <label
           i18n="@@works.type"
           id="{{ 'id-type-' + index + externalIdForm }}"
-          >Identifier type</strong
+          >Identifier type</label
         >
-      </label>
+      </strong>
     </div>
     <div class="row">
       <mat-form-field
@@ -36,7 +36,7 @@
         class="mat-form-field-min input-container two-line-hint"
       >
         <mat-select
-          [aria-label]="'id-type-' + index"
+          [aria-labelledby]="'id-type-' + index"
           #externalIdentifierType
           placeholder="{{ ngOrcidSelectIdentifierType }}"
           formControlName="externalIdentifierType"
@@ -187,7 +187,7 @@
 
   <div>
     <div class="row">
-      <label
+      <strong
         class="mat-caption"
         [ngClass]="{
           error:
@@ -195,12 +195,10 @@
             externalIdForm.get('externalRelationship').touched
         }"
       >
-        <strong
-          i18n="@@works.relationship"
-          id="{{ 'id-relationship-' + index }}"
-          >Relationship</strong
+        <label i18n="@@works.relationship" id="{{ 'id-relationship-' + index }}"
+          >Relationship</label
         >
-      </label>
+      </strong>
     </div>
 
     <mat-radio-group

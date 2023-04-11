@@ -1,5 +1,7 @@
 <app-modal [loading]="loadingPersonalIdentifiers" [noSidebar]="true">
-  <app-modal-header i18n="@@side-bar.personalIdentifiers" [closeLabel]=""
+  <app-modal-header
+    i18n="@@side-bar.personalIdentifiers"
+    [closeLabel]="ariaLabelClose"
     >Other IDs</app-modal-header
   >
   <app-modal-footer>
@@ -93,7 +95,13 @@
               />
               <div class="person-identifier">
                 <a
-                  [attr.aria-label]="ariaLabelIdentifierUrl"
+                  [attr.aria-label]="
+                    personIdentifier.commonName +
+                    ' : ' +
+                    personIdentifier.reference +
+                    ' ' +
+                    ariaLabelIdentifierUrl
+                  "
                   class="underline"
                   [href]="personIdentifier.url"
                   target="_blank"

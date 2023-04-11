@@ -16,7 +16,11 @@ import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
   preserveWhitespaces: true,
 })
 export class TopBarVerificationEmailModalComponent
-  implements OnInit, OnDestroy {
+  implements OnInit, OnDestroy
+{
+  ariaLabelKnowledgeBase = $localize`:@@side-bar.ariaLabelOrcidTermsOfUseBase:ORCID knowledge base (Opens in a new tab)`
+  ariaLabelKnowledgeSupport = $localize`:@@side-bar.ariaLabelOrcidTermsSupport:ORCID support page (Opens in a new tab)`
+
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   primaryEmail: string

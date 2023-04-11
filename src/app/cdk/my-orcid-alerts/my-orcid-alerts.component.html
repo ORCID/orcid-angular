@@ -1,16 +1,21 @@
 <mat-toolbar>
   <mat-toolbar-row>
-    <p class="mat-body-2">
-      <ng-container
-        i18n="@@myOrcidAlerts.invalidVerifyUrl"
-        *ngIf="invalidVerifyUrl"
-      >
-        Your email couldn't be verified, please check the link you used to
-        verify it.
-      </ng-container>
-      <ng-container i18n="@@myOrcidAlerts.emailVerified" *ngIf="emailVerified">
-        Thank you for verifying your email
-      </ng-container>
-    </p>
+    <div role="alert">
+      <p class="mat-body-2">
+        <ng-container
+          i18n="@@myOrcidAlerts.invalidVerifyUrl"
+          *ngIf="invalidVerifyUrl"
+        >
+          Your email couldn't be verified, please check the link you used to
+          verify it.
+        </ng-container>
+        <ng-container
+          i18n="@@myOrcidAlerts.emailVerified"
+          *ngIf="emailVerified"
+        >
+          Thank you for verifying your email
+        </ng-container>
+      </p>
+    </div>
   </mat-toolbar-row>
 </mat-toolbar>

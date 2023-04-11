@@ -111,16 +111,10 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
 
     keywords.forEach((keyword) => {
       group[keyword.putCode] = new UntypedFormGroup({
-        content: new UntypedFormControl(
-          {
-            value: keyword.content,
-            disabled: keyword.source !== this.id,
-          },
-          {
-            validators: [Validators.maxLength(this.keywordMaxLength)],
-            updateOn: 'change',
-          }
-        ),
+        content: new UntypedFormControl(keyword.content, {
+          validators: [Validators.maxLength(this.keywordMaxLength)],
+          updateOn: 'change',
+        }),
         visibility: new UntypedFormControl(keyword.visibility.visibility, {}),
       })
     })

@@ -8,7 +8,7 @@ export const environment = {
   BASE_URL: '//qa.orcid.org/',
   INFO_SITE: 'https://info.qa.orcid.org/',
   GOOGLE_ANALYTICS_TESTING_MODE: true,
-  GOOGLE_ANALYTICS: 'G-1GFQQG8TQ1',
+  GOOGLE_TAG_MANAGER: 'GTM-TRLHLRZ',
   GOOGLE_RECAPTCHA: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
   ZENDESK: 'b8313acd-6439-4894-b431-8c5a2ae9e7cb',
   HELP_HERO_ID: 'oYFQMrzFHA',
@@ -36,4 +36,5 @@ export const environment = {
     uk: '** Ukrainian',
     ca: '** Catalan',
   },
+  proxyMode: false,
 }

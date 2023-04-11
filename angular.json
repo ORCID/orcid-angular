@@ -145,7 +145,7 @@
               "buildOptimizer": false,
               "outputPath": "dist"
             },
-            "local-tomcat": {
+            "local-with-proxy": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -155,7 +155,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local.tomcat.ts"
+                  "with": "src/environments/environment.local-with-proxy.ts"
                 }
               ]
             },
@@ -278,6 +278,14 @@
             "browserTarget": "ng-orcid:build:local"
           },
           "configurations": {
+            "local-qa": {
+              "browserTarget": "ng-orcid:build:local-with-proxy",
+              "proxyConfig": "src/proxy.conf.qa.mjs"
+            },
+            "local-sandbox": {
+              "browserTarget": "ng-orcid:build:local-with-proxy",
+              "proxyConfig": "src/proxy.conf.sandbox..mjs"
+            },
             "local": {
               "browserTarget": "ng-orcid:build:local"
             },

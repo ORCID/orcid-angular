@@ -35,22 +35,22 @@ describe('Inbox: add/update/delete Employment via API', async function () {
   const curlPutEmployment =
     "curl -i -H 'Content-type: application/json' -H 'Authorization: Bearer " +
     userData.cyNotifPerm.clientBearer +
-    "' -X PUT -d '" +
+    "' -d '" +
     userData.cyNotifPerm.curlEmploymentUpdatePath +
-    "' " +
+    "' -X PUT '" +
     Cypress.env('membersAPI_URL') +
     userData.cyNotifPerm.oid +
     Cypress.env('membersAPI_employmentEndpoint') +
-    '/' //here append "{PUTCODE}"
+    '/' //here append "{PUTCODE}"+ "'"
 
   const curlDeleteEmployment =
     "curl -i -H 'Content-type: application/json' -H 'Authorization: Bearer " +
     userData.cyNotifPerm.clientBearer +
-    "' -X DELETE " +
+    "' -X DELETE '" +
     Cypress.env('membersAPI_URL') +
     userData.cyNotifPerm.oid +
     Cypress.env('membersAPI_employmentEndpoint') +
-    '/' //here append "{PUTCODE}"
+    '/' //here append "{PUTCODE}"+ "'"
 
   before(() => {
     //log in
@@ -99,9 +99,8 @@ describe('Inbox: add/update/delete Employment via API', async function () {
       cy.exec(curlReadSingleEmployment + putCode + "'").then(
         (singleEmploymentResp) => {
           //remove non json header from string
-          const jsonStartIndex = singleEmploymentResp.stdout.indexOf(
-            '{"created-date"'
-          ) //where does the json start?
+          const jsonStartIndex =
+            singleEmploymentResp.stdout.indexOf('{"created-date"') //where does the json start?
           updatedContent = singleEmploymentResp.stdout.substring(jsonStartIndex)
           //update the employment: make a change in the content
           updatedContent = updatedContent.replace(
@@ -114,7 +113,7 @@ describe('Inbox: add/update/delete Employment via API', async function () {
       )
 
       //Client Updates the employment
-      cy.exec(curlPutEmployment + putCode).then((responsePUT) => {
+      cy.exec(curlPutEmployment + putCode + "'").then((responsePUT) => {
         //verify curl was executed successfully
         expect(responsePUT.code).to.eq(0)
         //verify http response status is successful: 200
@@ -127,7 +126,7 @@ describe('Inbox: add/update/delete Employment via API', async function () {
       cy.contains('Updated').should('be.visible')
 
       //Client deletes employment with that put code
-      cy.exec(curlDeleteEmployment + putCode).then((responseDelete) => {
+      cy.exec(curlDeleteEmployment + putCode + "'").then((responseDelete) => {
         //verify curl was executed successfully
         expect(responseDelete.code).to.eq(0)
         //verify http response status is successful: 204
