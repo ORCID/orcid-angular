@@ -36,7 +36,10 @@ export class AnnouncerService {
       '. ' +
       this.showingLabel +
       ' ' +
-      paginatorLabel.pageSize +
+      (paginatorLabel.pageIndex + 1 !==
+      Math.ceil(paginatorLabel.length / paginatorLabel.pageSize)
+        ? paginatorLabel.pageSize
+        : paginatorLabel.length % paginatorLabel.pageSize) +
       ' ' +
       this.ofLabel +
       ' ' +
