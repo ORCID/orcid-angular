@@ -17,9 +17,7 @@
 ></app-top-bar-actions>
 
 <app-top-bar-verification-email
-  [justRegistered]="justRegistered"
   [emailVerified]="emailVerified"
-  *ngIf="justRegistered || emailVerified"
 ></app-top-bar-verification-email>
 
 <ng-container *ngIf="!isPublicRecord && !recordWithIssues">

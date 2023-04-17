@@ -184,7 +184,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
 
       if (!this.platform.queryParameters.hasOwnProperty('justRegistered')) {
         this._router.navigate(['/my-orcid'], {
-          queryParams: { orcid: this.userInfo.EFFECTIVE_USER_ORCID },
+          queryParams: { ...this.platform.queryParameters, orcid: this.userInfo.EFFECTIVE_USER_ORCID, },
         })
       } else {
         this._router.navigate(['/my-orcid'], {
