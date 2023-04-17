@@ -265,7 +265,7 @@ export class RecordCountriesService {
       { key: $localize`:@@share.TO:Tonga`, value: 'TO' },
       { key: $localize`:@@share.TT:Trinidad and Tobago`, value: 'TT' },
       { key: $localize`:@@share.TN:Tunisia`, value: 'TN' },
-      { key: $localize`:@@share.TR:Turkey`, value: 'TR' },
+      { key: $localize`:@@share.TR:Türkiye`, value: 'TR' },
       { key: $localize`:@@share.TM:Turkmenistan`, value: 'TM' },
       { key: $localize`:@@share.TC:Turks and Caicos Islands`, value: 'TC' },
       { key: $localize`:@@share.TV:Tuvalu`, value: 'TV' },
