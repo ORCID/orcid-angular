@@ -71,7 +71,7 @@ export class GoogleTagManagerService {
   }
 
   public isGtmRunning(): boolean {
-    // When GTM is blocked by add blockers like Ublock 
+    // When GTM is blocked by add blockers like Ublock
     // the `gtm.uniqueEventId` will not be added to the dataLayer objects
     const gtmData = (this._window as any).dataLayer || []
     return gtmData.some((event: any) => event['gtm.uniqueEventId'])
