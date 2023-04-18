@@ -12,7 +12,7 @@ on:
       version_tag:
         description: 'version tag to use'
         required: false
-        default: "next_tag"
+        default: 'next_tag'
         type: string
 
   workflow_dispatch:
@@ -20,11 +20,10 @@ on:
       version_tag:
         description: 'version tag to use'
         required: false
-        default: "next_tag"
+        default: 'next_tag'
         type: string
 
 jobs:
-
   bld_prod:
     uses: ./.github/workflows/bld_maven.yml
     secrets: inherit # pass all secrets
@@ -72,4 +71,3 @@ jobs:
     with:
       artifact_name: int
       version_tag: ${{ inputs.version_tag }}
-
