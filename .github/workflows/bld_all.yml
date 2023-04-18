@@ -1,0 +1,73 @@
+name: bld_all
+
+permissions:
+  checks: write
+  contents: read
+  issues: read
+  pull-requests: write
+
+on:
+  workflow_call:
+    inputs:
+      version_tag:
+        description: 'version tag to use'
+        required: false
+        default: 'next_tag'
+        type: string
+
+  workflow_dispatch:
+    inputs:
+      version_tag:
+        description: 'version tag to use'
+        required: false
+        default: 'next_tag'
+        type: string
+
+jobs:
+  bld_prod:
+    uses: ./.github/workflows/bld_maven.yml
+    secrets: inherit # pass all secrets
+    permissions:
+      checks: write
+      contents: read
+      issues: read
+      pull-requests: write
+    with:
+      artifact_name: prod
+      version_tag: ${{ inputs.version_tag }}
+
+  bld_sandbox:
+    uses: ./.github/workflows/bld_maven.yml
+    secrets: inherit # pass all secrets
+    permissions:
+      checks: write
+      contents: read
+      issues: read
+      pull-requests: write
+    with:
+      artifact_name: sandbox
+      version_tag: ${{ inputs.version_tag }}
+
+  bld_qa:
+    uses: ./.github/workflows/bld_maven.yml
+    secrets: inherit # pass all secrets
+    permissions:
+      checks: write
+      contents: read
+      issues: read
+      pull-requests: write
+    with:
+      artifact_name: qa
+      version_tag: ${{ inputs.version_tag }}
+
+  bld_int:
+    uses: ./.github/workflows/bld_maven.yml
+    secrets: inherit # pass all secrets
+    permissions:
+      checks: write
+      contents: read
+      issues: read
+      pull-requests: write
+    with:
+      artifact_name: int
+      version_tag: ${{ inputs.version_tag }}
