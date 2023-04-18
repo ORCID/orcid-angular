@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'
+import { Inject, Injectable } from '@angular/core'
 import { environment } from '../../../environments/environment'
 import { RequestInfoForm } from '../../types'
 import { BehaviorSubject, Observable } from 'rxjs'
@@ -12,6 +12,7 @@ import { catchError } from 'rxjs/operators'
 import { ItemGTM } from '../../types/item_gtm'
 import { ERROR_REPORT } from '../../errors'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
+import { WINDOW } from 'src/app/cdk/window'
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +23,10 @@ export class GoogleTagManagerService {
 
   private isLoaded = false
 
-  constructor(private _errorHandler: ErrorHandlerService) {}
+  constructor(
+    private _errorHandler: ErrorHandlerService,
+    @Inject(WINDOW) private _window: Window
+  ) {}
 
   public pushTag(item: ItemGTM): Observable<void> {
     return new Observable<void>((subscriber) => {
@@ -40,15 +44,23 @@ export class GoogleTagManagerService {
             (response) => {
               if (response) {
                 pushOnDataLayer(item)
-                subscriber.next()
-                subscriber.complete()
+                if (!this.isGtmRunning()) {
+                  subscriber.error({
+                    name: 'GTM - Error',
+                    message: 'Gtm is not adding uniqueEventId attributes',
+                  })
+                } else {
+                  subscriber.next()
+                  subscriber.complete()
+                }
               }
             },
-            () =>
+            () => {
               subscriber.error({
                 name: 'GTM - Error',
                 message: 'Unable to add GTM',
               })
+            }
           )
       } else {
         pushOnDataLayer(item)
@@ -56,6 +68,13 @@ export class GoogleTagManagerService {
         subscriber.complete()
       }
     })
+  }
+
+  public isGtmRunning(): boolean {
+    // When GTM is blocked by add blockers like Ublock
+    // the `gtm.uniqueEventId` will not be added to the dataLayer objects
+    const gtmData = (this._window as any).dataLayer || []
+    return gtmData.some((event: any) => event['gtm.uniqueEventId'])
   }
 
   public addGtmToDom(): Observable<boolean> {
