@@ -13,17 +13,17 @@ on:
       artifact_name:
         description: 'Name of the artifact env'
         required: false
-        default: "prod"
+        default: 'prod'
         type: string
       git_checkout:
         description: 'branch or tag to checkout for building'
         required: false
-        default: "main"
+        default: 'main'
         type: string
       version_tag:
         description: 'Name of the tag to build'
         required: false
-        default: "v2.0.1"
+        default: 'v2.0.1'
         type: string
 
   workflow_dispatch:
@@ -31,17 +31,17 @@ on:
       artifact_name:
         description: 'Name of the artifact env'
         required: false
-        default: "prod"
+        default: 'prod'
         type: string
       git_checkout:
         description: 'branch or tag to checkout for building'
         required: false
-        default: "main"
+        default: 'main'
         type: string
       version_tag:
         description: 'Name of the tag to build'
         required: false
-        default: "v2.0.1"
+        default: 'v2.0.1'
         type: string
 
 jobs:
@@ -80,16 +80,16 @@ jobs:
           echo "$project"
         shell: bash
         env:
-          version_tag_numeric: "${{ steps.version.outputs.version_tag_numeric }}"
-          project: "${{ inputs.artifact_name }}"
+          version_tag_numeric: '${{ steps.version.outputs.version_tag_numeric }}'
+          project: '${{ inputs.artifact_name }}'
 
       - name: bump version
         run: |
           mvn -T 1C --batch-mode versions:set \
               -DnewVersion="$version_tag_numeric" -DgenerateBackupPoms=false --activate-profiles "${build_env}" -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
         env:
-          version_tag_numeric: "${{ steps.version.outputs.version_tag_numeric }}"
-          build_env: "${{ inputs.artifact_name }}"
+          version_tag_numeric: '${{ steps.version.outputs.version_tag_numeric }}'
+          build_env: '${{ inputs.artifact_name }}'
 
       - name: check some build related things
         run: |
@@ -116,10 +116,9 @@ jobs:
           find . -name '*.war'
           find . -name '*.jar'
         env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-          ARTIFACT_URL: "${{ secrets.ARTIFACT_URL }}"
-          ARTIFACT_REPO_PATH: "${{ secrets.ARTIFACT_REPO_PATH }}"
-          ARTIFACT_USER: "${{ secrets.ARTIFACT_USER }}"
-          ARTIFACT_PASSWORD: "${{ secrets.ARTIFACT_PASSWORD }}"
-          build_env: "${{ inputs.artifact_name }}"
-
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+          ARTIFACT_URL: '${{ secrets.ARTIFACT_URL }}'
+          ARTIFACT_REPO_PATH: '${{ secrets.ARTIFACT_REPO_PATH }}'
+          ARTIFACT_USER: '${{ secrets.ARTIFACT_USER }}'
+          ARTIFACT_PASSWORD: '${{ secrets.ARTIFACT_PASSWORD }}'
+          build_env: '${{ inputs.artifact_name }}'
