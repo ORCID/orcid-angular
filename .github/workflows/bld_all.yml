@@ -12,7 +12,12 @@ on:
       version_tag:
         description: 'version tag to use'
         required: false
-        default: 'next_tag'
+        default: "next_tag"
+        type: string
+      git_checkout:
+        description: 'branch or tag to checkout for building'
+        required: false
+        default: "main"
         type: string
 
   workflow_dispatch:
@@ -20,10 +25,16 @@ on:
       version_tag:
         description: 'version tag to use'
         required: false
-        default: 'next_tag'
+        default: "next_tag"
+        type: string
+      git_checkout:
+        description: 'branch or tag to checkout for building'
+        required: false
+        default: "main"
         type: string
 
 jobs:
+
   bld_prod:
     uses: ./.github/workflows/bld_maven.yml
     secrets: inherit # pass all secrets
@@ -35,6 +46,7 @@ jobs:
     with:
       artifact_name: prod
       version_tag: ${{ inputs.version_tag }}
+      git_checkout: ${{ inputs.git_checkout }}
 
   bld_sandbox:
     uses: ./.github/workflows/bld_maven.yml
@@ -47,6 +59,7 @@ jobs:
     with:
       artifact_name: sandbox
       version_tag: ${{ inputs.version_tag }}
+      git_checkout: ${{ inputs.git_checkout }}
 
   bld_qa:
     uses: ./.github/workflows/bld_maven.yml
@@ -59,6 +72,7 @@ jobs:
     with:
       artifact_name: qa
       version_tag: ${{ inputs.version_tag }}
+      git_checkout: ${{ inputs.git_checkout }}
 
   bld_int:
     uses: ./.github/workflows/bld_maven.yml
@@ -71,3 +85,5 @@ jobs:
     with:
       artifact_name: int
       version_tag: ${{ inputs.version_tag }}
+      git_checkout: ${{ inputs.git_checkout }}
+
