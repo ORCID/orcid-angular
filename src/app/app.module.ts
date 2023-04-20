@@ -37,7 +37,7 @@ export class AppModule {
   }
 
   getCurrentDomain() {
-    const port = window.location.port ? ':' + window.location.port : '';
-    return '//' + window.location.hostname + port + '/';
+    const port = window.location.port ? ':' + window.location.port : ''
+    return '//' + window.location.hostname + port + '/'
   }
 }
