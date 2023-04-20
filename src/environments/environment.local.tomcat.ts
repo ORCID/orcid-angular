@@ -6,7 +6,7 @@ export const environment = {
   API_NEWS: 'https://www.mocky.io/v2/5dced45b3000007300931ce8',
   API_PUB: '//pub.localhost/v3.0',
   API_WEB: '//localhost/',
-  BASE_URL: '//localhost/',
+  BASE_URL: '',
   BLOG_NEWS: 'https://localhost/about/news',
   GOOGLE_ANALYTICS_TESTING_MODE: true,
   GOOGLE_TAG_MANAGER: 'GTM-0000000',

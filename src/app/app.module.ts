@@ -27,4 +27,17 @@ import { PseudoModule } from 'src/locale/i18n.pseudo.component'
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  constructor() {
+    this.initializeApp()
+  }
+
+  private initializeApp() {
+    environment.BASE_URL = this.getCurrentDomain()
+  }
+
+  getCurrentDomain() {
+    const port = window.location.port ? ':' + window.location.port : '';
+    return '//' + window.location.hostname + port + '/';
+  }
+}

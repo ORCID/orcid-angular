@@ -5,7 +5,7 @@ export const environment = {
   API_NEWS: 'https://info.int.orcid.org/feed/',
   API_PUB: '//pub.int.orcid.org/v3.0',
   API_WEB: '//int.orcid.org/',
-  BASE_URL: '//int.orcid.org/',
+  BASE_URL: '',
   INFO_SITE: 'https://info.qa.orcid.org/',
   GOOGLE_ANALYTICS_TESTING_MODE: true,
   GOOGLE_TAG_MANAGER: 'GTM-0000000',

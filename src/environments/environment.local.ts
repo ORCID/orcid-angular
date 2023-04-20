@@ -5,7 +5,7 @@ export const environment = {
   API_NEWS: 'https://www.mocky.io/v2/5dced45b3000007300931ce8',
   API_PUB: '//pub.dev.orcid.org/v3.0',
   API_WEB: '//dev.orcid.org/',
-  BASE_URL: '//dev.orcid.org/',
+  BASE_URL: '',
   INFO_SITE: 'https://info.orcid.org/',
   GOOGLE_ANALYTICS_TESTING_MODE: true,
   GOOGLE_TAG_MANAGER: 'GTM-0000000',
