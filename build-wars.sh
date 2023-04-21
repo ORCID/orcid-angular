@@ -82,10 +82,12 @@ sk-dir-make ~/log
 
 for build_env in $build_envs;do
   echo_log "building $build_env"
-  # set the version tag to be -${build_env}-${tag_numeric}
-  mvn versions:set -DnewVersion="${tag_numeric}" -DgenerateBackupPoms=false --activate-profiles ${build_env} -Dnodejs.workingDirectory=. --settings settings-custom.xml
-
   build_log_file=~/log/orcid-angular-${build_env}-${tag_numeric}.log
+
+  echo_log "log file: $build_log_file"
+
+  # set the version tag to be -${build_env}-${tag_numeric}
+  mvn versions:set -DnewVersion="${tag_numeric}" -DgenerateBackupPoms=false --activate-profiles ${build_env} -Dnodejs.workingDirectory=. --settings settings-custom.xml -l $build_log_file
 
   # perform the build
   mvnd install --activate-profiles ${build_env} -Dnodejs.workingDirectory=. -DskipTest -l $build_log_file --settings settings-custom.xml
