@@ -14,7 +14,7 @@
     <mat-icon *ngIf="emailVerified">verified</mat-icon>
   </div>
   <div class="col l11 m6 s3">
-    <ng-container *ngIf="!verifyEmailSend">
+    <ng-container *ngIf="!emailVerified && !verifyEmailSend">
       <h2 class="orc-font-body" i18n="@@topBar.thankYouForRegistering">
         Thank you for registering with ORCID
       </h2>
@@ -32,7 +32,7 @@
         Resend verification email
       </button>
     </ng-container>
-    <ng-container *ngIf="verifyEmailSend">
+    <ng-container *ngIf="!emailVerified && verifyEmailSend">
       <h2 class="orc-font-body" i18n="@@side-bar.pleaseVerify">
         Please verify your primary email address!
       </h2>
