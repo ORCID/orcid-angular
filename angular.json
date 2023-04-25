@@ -65,7 +65,7 @@
           "ru": {
             "translation": "src/locale/messages.static.ru.xlf",
             "baseHref": "/"
-          },		  
+          },
           "tr": {
             "translation": "src/locale/messages.static.tr.xlf",
             "baseHref": "/"
