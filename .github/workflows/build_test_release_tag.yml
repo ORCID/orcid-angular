@@ -1,0 +1,115 @@
+name: build_test_release_tag
+
+on:
+  workflow_call:
+    inputs:
+      version_tag:
+        description: 'version tag to use'
+        required: false
+        default: "latest"
+        type: string
+      bump:
+        description: 'whether to bump the version number by a major minor patch amount or try gitlog'
+        required: false
+        default: "patch"
+        type: string
+      ref:
+        description: 'git reference to use with the checkout use default_branch to have that calculated'
+        required: false
+        default: "default"
+        type: string
+
+  workflow_dispatch:
+    inputs:
+      version_tag:
+        description: 'version tag to use'
+        required: false
+        default: "latest"
+        type: string
+      bump:
+        description: |
+          How to optionally bump the semver version ( Major.Minor.Patch ) : git log will be searched for
+          '#major #minor #patch' or feat/ or fix/ branch names to optionally override the bump. Set to none to keep a specific version
+        required: false
+        options:
+          - patch
+          - minor
+          - major
+          - none
+        type: choice
+      ref:
+        description: 'git reference to use with the checkout use default_branch to have that calculated'
+        required: false
+        default: "default_branch"
+        type: string
+
+
+# cancel running job if another commit comes in
+concurrency:
+  group: main-${{ github.ref }}-1
+  cancel-in-progress: true
+
+jobs:
+  format_i18n:
+    uses: ./.github/workflows/format_i18n.yml
+    secrets: inherit # pass all secrets for pushing
+
+  format_prettier:
+    uses: ./.github/workflows/format_prettier.yml
+    secrets: inherit # pass all secrets for pushing
+
+##############################################################################
+
+  lint:
+    uses: ./.github/workflows/lint.yml
+    needs:
+      - format_i18n
+      - format_prettier
+
+  unit_tests:
+    uses: ./.github/workflows/unit_tests.yml
+    needs:
+      - format_i18n
+      - format_prettier
+
+  # this is a test
+  bld_all_yarn:
+    uses: ./.github/workflows/bld_all_yarn.yml
+    needs:
+      - format_i18n
+      - format_prettier
+
+##############################################################################
+  bld_all:
+    uses: ./.github/workflows/bld_all.yml
+    secrets: inherit # pass all secrets for uploading assets
+    needs:
+      - lint
+      - bld_all_yarn
+      - format_i18n
+      - format_prettier
+    permissions:
+      checks: write
+      contents: read
+      issues: read
+      pull-requests: write
+    with:
+      version_tag: ${{ inputs.version_tag }}
+      bump: ${{ inputs.bump }}
+      ref: ${{ inputs.ref }}
+
+##############################################################################
+
+  rel_tag:
+    uses: ./.github/workflows/rel_tag.yml
+    needs: bld_all
+    with:
+      version_tag: ${{ inputs.version_tag }}
+      bump: ${{ inputs.bump }}
+      ref: ${{ inputs.ref }}
+    secrets: inherit # pass all secrets
+    permissions:
+      checks: write
+      contents: write
+      issues: read
+      pull-requests: write

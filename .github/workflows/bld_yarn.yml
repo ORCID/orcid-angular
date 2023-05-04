@@ -1,0 +1,36 @@
+name: bld_yarn
+run-name: bld-{{ inputs.artifact_name }}
+
+permissions:
+  checks: write
+  contents: read
+  issues: read
+
+on:
+  workflow_call:
+    inputs:
+      artifact_name:
+        description: 'Name of the artifact env'
+        required: false
+        default: 'prod'
+        type: string
+
+  workflow_dispatch:
+    inputs:
+      artifact_name:
+        description: 'Name of the artifact env'
+        required: false
+        default: 'prod'
+        type: string
+
+jobs:
+  bld_yarn:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 'v16.13.2'
+          cache: 'yarn'
+      - run: yarn
+      - run: yarn build:${{ inputs.artifact_name }}

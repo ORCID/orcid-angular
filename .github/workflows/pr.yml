@@ -1,0 +1,29 @@
+name: pr
+
+# read-only repo token
+# no access to secrets
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+  workflow_call:
+
+  workflow_dispatch:
+
+# cancel running job if another commit comes in
+concurrency:
+  group: pr-${{ github.ref }}-1
+  cancel-in-progress: true
+
+jobs:
+  unit_tests:
+    uses: ./.github/workflows/unit_tests.yml
+
+  # NOTE: this is just to test
+  bld_all_yarn:
+    uses: ./.github/workflows/bld_all_yarn.yml
+#   NOTE: codeql is only available on public repos or enterprise github accounts
+#   codeql:
+#     uses: ./.github/workflows/codeql.yml
+#
