@@ -13,6 +13,7 @@ import { ItemGTM } from '../../types/item_gtm'
 import { ERROR_REPORT } from '../../errors'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { WINDOW } from 'src/app/cdk/window'
+import { log } from 'console'
 
 @Injectable({
   providedIn: 'root',
@@ -64,8 +65,15 @@ export class GoogleTagManagerService {
           )
       } else {
         pushOnDataLayer(item)
-        subscriber.next()
-        subscriber.complete()
+        if (!this.isGtmRunning()) {
+          subscriber.error({
+            name: 'GTM - Error',
+            message: 'Gtm is not adding uniqueEventId attributes',
+          })
+        } else {
+          subscriber.next()
+          subscriber.complete()
+        }
       }
     })
   }
