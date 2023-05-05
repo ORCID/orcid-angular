@@ -49,7 +49,7 @@ export class AppComponent {
     _zendesk: ZendeskService,
     private _userService: UserService,
     private _errorHandler: ErrorHandlerService,
-	private _togglz: TogglzService,
+    private _togglz: TogglzService,
     @Inject(WINDOW) private _window: Window
   ) {
     _platformInfo
@@ -116,16 +116,14 @@ export class AppComponent {
           })
       }
     })
-	
-	_togglz
-      .getStateOf('ENABLE_DE_PL_TR')
-      .subscribe((togglz_enabled) => {
-	    if(togglz_enabled) {
-			environment.LANGUAGE_MENU_OPTIONS['de'] = 'Deutsch';
-			environment.LANGUAGE_MENU_OPTIONS['pl'] = 'Polski';
-			environment.LANGUAGE_MENU_OPTIONS['tr'] = 'Türkçe';
-		}
-	})
+
+    _togglz.getStateOf('ENABLE_DE_PL_TR').subscribe((togglz_enabled) => {
+      if (togglz_enabled) {
+        environment.LANGUAGE_MENU_OPTIONS['de'] = 'Deutsch'
+        environment.LANGUAGE_MENU_OPTIONS['pl'] = 'Polski'
+        environment.LANGUAGE_MENU_OPTIONS['tr'] = 'Türkçe'
+      }
+    })
   }
   showHeadlessOnOauthPage(currentRoute: string): boolean {
     if (currentRoute) {
