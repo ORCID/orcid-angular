@@ -120,7 +120,6 @@ export class AppComponent {
 	_togglz
       .getStateOf('ENABLE_DE_PL_TR')
       .subscribe((togglz_enabled) => {
-	  console.log('Is togglz enabled? ' + togglz_enabled)
 	    if(togglz_enabled) {
 			environment.LANGUAGE_MENU_OPTIONS['de'] = 'Deutsch';
 			environment.LANGUAGE_MENU_OPTIONS['pl'] = 'Polski';
