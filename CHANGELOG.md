@@ -1,3 +1,15 @@
+## v2.30.4 - 2023-05-05
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.30.3...v2.30.4)
+
+
+### Fix
+
+-  use correct token for formatting jobs
+
+### Feature
+
+-  Remove count of orcid records (#1944)
+
 ## v2.30.3 - 2023-05-04
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.30.2...v2.30.3)
