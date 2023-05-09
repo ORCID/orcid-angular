@@ -40,8 +40,7 @@ describe('PanelComponent', () => {
         NoopAnimationsModule,
         RouterTestingModule,
         SharedModule,
-        MatMenuModule
-
+        MatMenuModule,
       ],
       declarations: [PanelComponent],
       providers: [

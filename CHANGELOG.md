@@ -1,4 +1,5 @@
 ## v2.30.6 - 2023-05-09
+
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.30.5...v2.30.6)
 
 - [#1949](https://github.com/ORCID/orcid-angular/pull/1949): Remove new languages from the selector until the files are ready
