@@ -47,7 +47,7 @@ export class AppComponent {
     _googleTagManagerService: GoogleTagManagerService,
     _zendesk: ZendeskService,
     private _userService: UserService,
-    private _errorHandler: ErrorHandlerService,    
+    private _errorHandler: ErrorHandlerService,
     @Inject(WINDOW) private _window: Window
   ) {
     _platformInfo
@@ -113,7 +113,7 @@ export class AppComponent {
             }
           })
       }
-    })    
+    })
   }
   showHeadlessOnOauthPage(currentRoute: string): boolean {
     if (currentRoute) {
