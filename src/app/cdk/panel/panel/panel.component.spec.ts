@@ -24,6 +24,7 @@ import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed'
 import { MatDialogHarness } from '@angular/material/dialog/testing'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 import { ModalBiographyComponent } from '../../../record/components/top-bar/modals/modal-biography/modal-biography.component'
+import { MatMenuModule } from '@angular/material/menu'
 
 describe('PanelComponent', () => {
   let component: PanelComponent
@@ -39,6 +40,8 @@ describe('PanelComponent', () => {
         NoopAnimationsModule,
         RouterTestingModule,
         SharedModule,
+        MatMenuModule
+
       ],
       declarations: [PanelComponent],
       providers: [

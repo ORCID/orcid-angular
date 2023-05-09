@@ -28,7 +28,7 @@
 
 .mat-form-field {
   width: 100%;
-  margin-inline-end: 32px;
+  margin-inline-end: 16px;
 }
 
 .keyword-input {
@@ -47,9 +47,6 @@
   }
 }
 
-app-privacy-selector {
-  min-width: 180px;
-}
 
 ::ng-deep .columns-4-or-8 {
   .keywords-input-line .input-container {

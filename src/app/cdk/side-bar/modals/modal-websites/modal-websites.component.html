@@ -289,10 +289,10 @@
               class="col no-wrap actions-wrapper"
               [ngClass]="{ privacy: !platform.columns12 }"
             >
-              <app-privacy-selector
+              <app-visibility-selector
                 [ngClass]="{ selector: !platform.columns12 }"
                 formControlName="visibility"
-              ></app-privacy-selector>
+              ></app-visibility-selector>
               <button
                 class="delete-button"
                 (click)="deleteWebsite(website.putCode)"

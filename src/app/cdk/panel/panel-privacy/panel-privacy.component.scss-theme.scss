@@ -8,8 +8,6 @@
   $background: map-get($theme, background);
 
   .container {
-    border-color: map-get($background, 'ui-background-lightest');
-    background-color: map-get($background, 'ui-background-lightest');
 
     .dot {
       background-color: map-get($background, 'ui-background');

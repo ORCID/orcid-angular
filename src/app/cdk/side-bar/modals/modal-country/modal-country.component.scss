@@ -20,7 +20,7 @@
 
 .mat-form-field {
   width: 100%;
-  margin-inline-end: 32px;
+  margin-inline-end: 16px;
 }
 
 ::ng-deep .columns-4-or-8 .mat-form-field {
@@ -35,9 +35,6 @@
   }
 }
 
-app-privacy-selector {
-  min-width: 180px;
-}
 
 ::ng-deep .columns-4-or-8 {
   .country-input-line .input-container {

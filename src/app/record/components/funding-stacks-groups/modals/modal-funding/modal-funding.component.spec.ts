@@ -26,11 +26,11 @@ import { ModalModule } from '../../../../../cdk/modal/modal.module'
 import { MatSelectModule } from '@angular/material/select'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatIconModule } from '@angular/material/icon'
-import { PrivacySelectorModule } from '../../../../../cdk/privacy-selector/privacy-selector.module'
 import { MatInputModule } from '@angular/material/input'
 import { By } from '@angular/platform-browser'
 import { RecordModule } from '../../../../record.module'
 import { FundingTypes } from '../../../../../types/record-funding.endpoint'
+import { VisibilitySelectorModule } from 'src/app/cdk/visibility-selector/visibility-selector.module'
 
 describe('ModalFundingComponent', () => {
   let component: ModalFundingComponent
@@ -48,7 +48,7 @@ describe('ModalFundingComponent', () => {
         MatSelectModule,
         ModalModule,
         NoopAnimationsModule,
-        PrivacySelectorModule,
+        VisibilitySelectorModule,
         ReactiveFormsModule,
         RecordModule,
         RouterTestingModule,

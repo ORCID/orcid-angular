@@ -20,7 +20,6 @@ import { MatSelectModule } from '@angular/material/select'
 import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
 import { ModalModule } from '../cdk/modal/modal.module'
 import { PanelModule } from '../cdk/panel/panel.module'
-import { PrivacySelectorModule } from '../cdk/privacy-selector/privacy-selector.module'
 import { SideBarModule } from '../cdk/side-bar/side-bar.module'
 import { TrustedIndividualsDropdownModule } from '../cdk/trusted-individuals-dropdown/trusted-individuals-dropdown.module'
 import { LayoutModule } from '../layout/layout.module'
@@ -79,6 +78,7 @@ import { ModalCombineWorksWithSelectorComponent } from './components/work/modals
 import { TopBarMyPublicRecordPreviewModule } from '../cdk/top-bar-my-public-record-preview/top-bar-my-public-record-preview.module'
 import { WorkContributorRolesComponent } from './components/work-contributor-role/work-contributor-roles.component'
 import { WorkContributorsComponent } from './components/work-contributors/work-contributors.component'
+import { VisibilitySelectorModule } from '../cdk/visibility-selector/visibility-selector.module'
 
 @NgModule({
   declarations: [
@@ -146,7 +146,7 @@ import { WorkContributorsComponent } from './components/work-contributors/work-c
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    PrivacySelectorModule,
+    VisibilitySelectorModule,
     DragDropModule,
     SharedModule,
     MatIconModule,
