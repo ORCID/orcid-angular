@@ -16,7 +16,6 @@ import {
 } from './analytics-utils'
 import { ERROR_REPORT } from './errors'
 import { ErrorHandlerService } from './core/error-handler/error-handler.service'
-import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { environment } from 'src/environments/environment'
 
 @Component({
@@ -48,8 +47,7 @@ export class AppComponent {
     _googleTagManagerService: GoogleTagManagerService,
     _zendesk: ZendeskService,
     private _userService: UserService,
-    private _errorHandler: ErrorHandlerService,
-    private _togglz: TogglzService,
+    private _errorHandler: ErrorHandlerService,    
     @Inject(WINDOW) private _window: Window
   ) {
     _platformInfo
@@ -115,15 +113,7 @@ export class AppComponent {
             }
           })
       }
-    })
-
-    _togglz.getStateOf('ENABLE_DE_PL_TR').subscribe((togglz_enabled) => {
-      if (togglz_enabled) {
-        environment.LANGUAGE_MENU_OPTIONS['de'] = 'Deutsch'
-        environment.LANGUAGE_MENU_OPTIONS['pl'] = 'Polski'
-        environment.LANGUAGE_MENU_OPTIONS['tr'] = 'Türkçe'
-      }
-    })
+    })    
   }
   showHeadlessOnOauthPage(currentRoute: string): boolean {
     if (currentRoute) {
