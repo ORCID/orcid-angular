@@ -3,7 +3,6 @@
 # war file builds
 target/**
 temp/**
-src/**
 
 # compiled output
 /dist

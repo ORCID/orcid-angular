@@ -1,0 +1,54 @@
+.visibilityTitleContainer,
+.urlContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+}
+
+.icon-circle {
+  display: flex;
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  margin-inline-end: 16px;
+}
+[mat-menu-item] {
+  display: flex;
+  align-items: center;
+}
+
+.main-menu {
+  border: solid 1px;
+  height: 40px;
+}
+
+.menu-icon {
+  margin-right: 6px;
+}
+
+[mat-button] {
+  width: 133px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.selectedMenu .title-container {
+  font-weight: bold;
+}
+
+.main-button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .icon-title-container {
+    display: flex;
+    align-items: center;
+    padding-inline-end: 10px;
+  }
+}
+
+.arrow-drop-down {
+  width: 17px;
+}

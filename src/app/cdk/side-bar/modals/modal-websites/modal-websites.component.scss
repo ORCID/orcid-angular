@@ -50,9 +50,6 @@
     }
   }
 
-  app-privacy-selector {
-    min-width: 180px;
-  }
 
   .selector {
     margin: 0 !important;
@@ -84,7 +81,7 @@
 
 .mat-form-field {
   width: 100%;
-  margin-inline-end: 32px;
+  margin-inline-end: 16px;
 }
 ::ng-deep .columns-4-or-8 .mat-form-field {
   margin-inline-end: 0;

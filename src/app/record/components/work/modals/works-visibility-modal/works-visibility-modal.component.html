@@ -32,10 +32,11 @@
     </p>
     <div class="row">
       <div class="col no-wrap actions-wrapper no-gutters">
-        <app-privacy-selector
-          [alignment]="'bottom'"
+        <app-visibility-selector
           formControlName="visibility"
-        ></app-privacy-selector>
+          [multiEdit]="'selected'"
+        >
+        </app-visibility-selector>
       </div>
     </div>
     <div class="row">

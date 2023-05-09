@@ -50,13 +50,10 @@
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-app-privacy-selector {
-  min-width: 180px;
-}
 
 .mat-form-field {
   width: 100%;
-  margin-inline-end: 32px;
+  margin-inline-end: 16px;
 }
 
 .icon-drag {

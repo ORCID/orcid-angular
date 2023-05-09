@@ -314,5 +314,6 @@ export class PanelComponent implements OnInit {
           .subscribe()
         break
     }
+    this.visibilityError = false
   }
 }

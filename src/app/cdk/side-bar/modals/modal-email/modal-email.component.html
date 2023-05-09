@@ -151,13 +151,13 @@
                 'privacy-selector': !showNonVerifiedData(email.putCode)
               }"
             >
-              <app-privacy-selector
+              <app-visibility-selector
                 formControlName="visibility"
                 id="cy-primary-email-visibility"
                 [ariaLabelPrivate]="ariaLabelVisibilityPrimaryEmailPublic"
                 [ariaLabelPublic]="ariaLabelVisibilityPrimaryEmailTrustedParty"
                 [ariaLabelTrustedParty]="ariaLabelVisibilityPrimaryEmailPrivate"
-              ></app-privacy-selector>
+              ></app-visibility-selector>
               <div></div>
             </div>
           </div>
@@ -371,13 +371,13 @@
                 )
               }"
             >
-              <app-privacy-selector
+              <app-visibility-selector
                 [hidden]="!showVisibility(email.putCode, email.action)"
                 formControlName="visibility"
                 [ariaLabelPrivate]="ariaLabelVisibilityOtherEmailPublic"
                 [ariaLabelPublic]="ariaLabelVisibilityOtherEmailTrustedParty"
                 [ariaLabelTrustedParty]="ariaLabelVisibilityOtherEmailPrivate"
-              ></app-privacy-selector>
+              ></app-visibility-selector>
               <button
                 (click)="deleteEmail(email.putCode)"
                 mat-icon-button
