@@ -75,7 +75,7 @@
                 formControlName="email"
                 type="email"
                 appTrim
-                [attr.aria-label]="ariaLabelEmail"
+                [attr.aria-label]="ariaLabelPrimaryEmail"
               />
               <mat-icon matPrefix>verified</mat-icon>
               <mat-error
@@ -268,7 +268,7 @@
             >
               <input
                 [id]="email.putCode"
-                [attr.aria-label]="ariaLabelEmail"
+                [attr.aria-label]="ariaLabelOtherEmailAddresses"
                 #emailInput
                 matInput
                 formControlName="email"
