@@ -64,7 +64,7 @@
       <app-visibility-selector
         (ngModelChange)="updateVisibility($event)"
         [ngModel]="visibility"
-        [multiEdit]="stackSiblings.length > 1 ? 'multi' : 'single'"
+        [multiEdit]="stackSiblings?.length > 1 ? 'multi' : 'single'"
         [visibilityError]="visibilityError"
       ></app-visibility-selector>
     </ng-container>
