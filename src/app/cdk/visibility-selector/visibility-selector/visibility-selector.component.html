@@ -35,9 +35,9 @@
 </button>
 <mat-menu #menu="matMenu">
   <div class="visibilityTitleContainer">
-    <h1 class="orc-font-body"><strong i18n="@@shared.setVisibilityFor"
-      >Set visibility for</strong
-    ></h1>
+    <h1 class="orc-font-body">
+      <strong i18n="@@shared.setVisibilityFor">Set visibility for</strong>
+    </h1>
     <i
       class="orc-font-body-small"
       *ngIf="multiEdit === 'single'"
@@ -160,6 +160,7 @@
     (click)="navigate()"
     class="underline wrap-menu-item"
     i18n="@@shared.moreInformationOnOrcidVisibility"
-    >More information on ORCID visibility settings
+  >
+    More information on ORCID visibility settings
   </button>
 </mat-menu>
