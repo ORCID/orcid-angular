@@ -1,4 +1,9 @@
-<button mat-button [matMenuTriggerFor]="menu" class="main-menu">
+<button
+  mat-button
+  [matMenuTriggerFor]="menu"
+  class="main-menu"
+  [attr.aria-label]="mainButtonLabel"
+>
   <div class="main-button-container">
     <div class="icon-title-container">
       <mat-icon
@@ -30,23 +35,23 @@
 </button>
 <mat-menu #menu="matMenu">
   <div class="visibilityTitleContainer">
-    <strong class="orc-font-body" i18n="@@shared.setVisibility"
-      >Set visibility</strong
-    >
+    <h1 class="orc-font-body"><strong i18n="@@shared.setVisibilityFor"
+      >Set visibility for</strong
+    ></h1>
     <i
-      class="orc-font-small"
+      class="orc-font-body-small"
       *ngIf="multiEdit === 'single'"
       i18n="@@shared.thisItemOnly"
       >This item only</i
     >
     <i
-      class="orc-font-small"
+      class="orc-font-body-small"
       *ngIf="multiEdit === 'multi'"
       i18n="@@shared.allItemsInThisGroup"
       >All items in this group</i
     >
     <i
-      class="orc-font-small"
+      class="orc-font-body-small"
       *ngIf="multiEdit === 'selected'"
       i18n="@@shared.selectedItemsForVisibility"
       >Selected items
@@ -150,14 +155,11 @@
     <div class="title-container" i18n="@@shared.onlyMe">Only me</div>
   </button>
 
-  <div class="urlContainer">
-    <a
-      href="https://support.orcid.org/hc/en-us/articles/360006897614-Visibility-settings"
-      rel="noopener noreferrer"
-      target="_blank"
-      class="underline"
-      i18n="@@shared.moreInformationOnOrcidVisibility"
-      >More information on ORCID visibility settings
-    </a>
-  </div>
+  <button
+    mat-menu-item
+    (click)="navigate()"
+    class="underline wrap-menu-item"
+    i18n="@@shared.moreInformationOnOrcidVisibility"
+    >More information on ORCID visibility settings
+  </button>
 </mat-menu>

@@ -108,5 +108,9 @@
   .main-menu {
     border-color: map-get($background, 'ui-background');
   }
+
+  .wrap-menu-item {
+    color: mat.get-color-from-palette($primary);
+  }
 }
 @include privacy-selector-theme($orcid-app-theme);

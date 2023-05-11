@@ -28,7 +28,6 @@
 
 .mat-form-field {
   width: 100%;
-  margin-inline-end: 16px;
 }
 
 .keyword-input {
@@ -59,4 +58,13 @@
   .actions-wrapper {
     width: 100%;
   }
+}
+
+.delete-button, app-visibility-selector {
+  margin-inline-start: 16px;
+}
+
+
+.delete-button {
+  margin-top: -3px;
 }
