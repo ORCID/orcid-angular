@@ -12,11 +12,11 @@
       >
 
       <ng-container
-        *ngIf="privacy === 'LIMITED'"
+        *ngIf="privacy === 'PUBLIC'"
         i18n="@@register.VisibilityEveryone"
         >Everyone</ng-container
       >
-      <ng-container *ngIf="privacy === 'PUBLIC'" i18n="@@account.trusted"
+      <ng-container *ngIf="privacy === 'LIMITED'" i18n="@@account.trusted"
         >Trusted</ng-container
       >
       <ng-container
