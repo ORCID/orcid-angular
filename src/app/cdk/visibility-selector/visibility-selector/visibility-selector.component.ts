@@ -75,7 +75,7 @@ export class VisibilitySelectorComponent
         this.mainButtonLabel =
           this.ariaLabelVisibility +
           ' ' +
-          $localize`:@@register.Visibility:Everyone`
+          $localize`:@@register.VisibilityEveryone:Everyone`
 
         break
       case 'PRIVATE':
