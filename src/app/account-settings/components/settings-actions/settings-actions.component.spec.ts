@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { SettingsActionsComponent } from './settings-actions.component'
-import { WINDOW_PROVIDERS } from '../../../cdk/window'
+import { WINDOW_PROVIDERS } from 'src/app/cdk/window/window.service'
 
 describe('SettingsActionsComponent', () => {
   let component: SettingsActionsComponent
