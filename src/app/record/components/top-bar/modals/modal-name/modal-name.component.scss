@@ -166,3 +166,10 @@ hr {
     opacity: 0;
   }
 }
+.actions-wrapper-last app-visibility-selector {
+  margin-inline-end: 16px;
+  margin-inline-start: 16px;
+  .mat-icon-button {
+    top: -3px;
+  }
+}

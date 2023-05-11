@@ -104,7 +104,7 @@
 }
 
 .actions-wrapper {
-  padding: 0 32px;
+  padding: 0 32px 0 0;
 }
 
 .web-site-input-container {
@@ -132,4 +132,18 @@
   .actions-wrapper {
     padding: 0;
   }
+}
+
+
+.delete-button, app-visibility-selector {
+  margin-inline-start: 16px;
+}
+
+
+.delete-button {
+  margin-top: -3px;
+}
+
+button.mat-focus-indicator.delete-button.mat-icon-button {
+  margin-inline-start: 16px;
 }

@@ -52,7 +52,6 @@
 
 .mat-form-field {
   width: 100%;
-  margin-inline-end: 16px;
 }
 
 .icon-drag {
@@ -69,4 +68,14 @@
 .line {
   overflow-wrap: break-word;
   word-break: break-word;
+}
+
+
+.delete-button, app-visibility-selector {
+  margin-inline-start: 16px;
+}
+
+
+.delete-button {
+  margin-top: -3px;
 }

@@ -1,7 +1,7 @@
-import { Component, Input, OnInit, forwardRef } from '@angular/core'
+import { Component, Inject, Input, OnInit, forwardRef } from '@angular/core'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
-import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { VisibilityStrings } from 'src/app/types/common.endpoint'
+import { WINDOW } from '../../window'
 
 @Component({
   selector: 'app-visibility-selector',
@@ -33,8 +33,10 @@ export class VisibilitySelectorComponent
   @Input()
   ariaLabelPrivate = $localize`:@@share.ariaLabelPrivate:set item visibility to Only Me`
   ariaLabelCurrentlySelected = $localize`:@@share.currentSelected: (Currently selected)`
+  ariaLabelVisibility = $localize`:@@share.visibilityCurrentlySetTo:visibility is currently set to`
 
   @Input() visibilityError
+  mainButtonLabel: string
   @Input() set privacy(value: VisibilityStrings) {
     this._privacy = value
   }
@@ -42,7 +44,7 @@ export class VisibilitySelectorComponent
     return this._privacy
   }
 
-  constructor() {}
+  constructor(@Inject(WINDOW) private window: Window) {}
 
   ngOnInit(): void {}
   private onChange: (value: string) => void
@@ -68,6 +70,28 @@ export class VisibilitySelectorComponent
   }
 
   writeValue(visibility: VisibilityStrings): void {
+    switch (visibility) {
+      case 'PUBLIC':
+        this.mainButtonLabel =
+          this.ariaLabelVisibility +
+          ' ' +
+          $localize`:@@register.Visibility:Everyone`
+
+        break
+      case 'PRIVATE':
+        this.mainButtonLabel =
+          this.ariaLabelVisibility + ' ' + $localize`:@@shared.onlyMe:Only me`
+
+        break
+      case 'LIMITED':
+        this.mainButtonLabel =
+          this.ariaLabelVisibility + ' ' + $localize`:@@account.trusted:Trusted`
+
+        break
+
+      default:
+        break
+    }
     this.privacy = visibility
   }
   registerOnChange(fn: any): void {
@@ -78,5 +102,10 @@ export class VisibilitySelectorComponent
   }
   setDisabledState?(isDisabled: boolean): void {
     throw new Error('Method not implemented.')
+  }
+  navigate() {
+    this.window.open(
+      'https://support.orcid.org/hc/en-us/articles/360006897614-Visibility-settings'
+    )
   }
 }

@@ -29,7 +29,7 @@
 }
 
 [mat-button] {
-  width: 133px;
+  min-width: 140px;
   display: flex;
   justify-content: space-around;
 }
@@ -40,15 +40,28 @@
 
 .main-button-container {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   .icon-title-container {
+    min-width: 100px;
     display: flex;
     align-items: center;
-    padding-inline-end: 10px;
   }
 }
 
 .arrow-drop-down {
   width: 17px;
+}
+
+.wrap-menu-item {
+  white-space: normal;
+  line-height: 1.6;
+  max-width: 220px;
+  text-decoration: underline;
+}
+
+h1 {
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 4px;
 }

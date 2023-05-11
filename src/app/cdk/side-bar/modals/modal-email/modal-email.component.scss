@@ -119,7 +119,6 @@ mat-form-field {
   .actions-sub-wrapper {
     width: 100%;
     flex-wrap: wrap;
-    margin: 10px 0 10px 0;
   }
   .actions-sub-wrapper {
     justify-content: space-between !important;
@@ -154,4 +153,13 @@ mat-form-field {
   p {
     margin: 0;
   }
+}
+
+.delete-button {
+  top: -10px;
+  margin-inline-start: 16px;
+}
+
+app-visibility-selector {
+  margin-inline-start: 16px;
 }
