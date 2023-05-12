@@ -154,9 +154,9 @@
               <app-visibility-selector
                 formControlName="visibility"
                 id="cy-primary-email-visibility"
-                [ariaLabelPrivate]="ariaLabelVisibilityPrimaryEmailPublic"
-                [ariaLabelPublic]="ariaLabelVisibilityPrimaryEmailTrustedParty"
-                [ariaLabelTrustedParty]="ariaLabelVisibilityPrimaryEmailPrivate"
+                [ariaLabelPrivate]="ariaLabelVisibilityPrimaryEmailPrivate"
+                [ariaLabelPublic]="ariaLabelVisibilityPrimaryEmailPublic"
+                [ariaLabelTrustedParty]="ariaLabelVisibilityPrimaryEmailTrustedParty"
               ></app-visibility-selector>
               <div></div>
             </div>
@@ -333,7 +333,7 @@
           </div>
 
           <div class="col actions-wrapper no-gutters">
-            <div class="actions-sub-wrapper">
+            <div class="actions-sub-wrapper url-wrapper">
               <a
                 class="orc-font-body-small underline"
                 *ngIf="showEmailAsVerified(email.putCode)"
@@ -363,7 +363,7 @@
             </div>
 
             <div
-              class="actions-sub-wrapper"
+              class="actions-sub-wrapper visibility-wrapper"
               [ngClass]="{
                 'visibility-hidden': !showVisibility(
                   email.putCode,

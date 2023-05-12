@@ -12,9 +12,32 @@ import { VisibilityStrings } from 'src/app/types/common.endpoint'
 export class PanelPrivacyComponent implements OnInit {
   @HostBinding('attr.aria-label') label = ''
   _visibility: VisibilityStrings
+  ariaLabelVisibility = $localize`:@@share.visibilityCurrentlySetTo:visibility is currently set to`
 
   @Input() set visibility(visibility: VisibilityStrings) {
-    this.label = visibility
+    switch (visibility) {
+      case 'PUBLIC':
+        this.label =
+          this.ariaLabelVisibility +
+          ' ' +
+          $localize`:@@register.VisibilityEveryone:Everyone`
+
+        break
+      case 'PRIVATE':
+        this.label =
+          this.ariaLabelVisibility + ' ' + $localize`:@@shared.onlyMe:Only me`
+
+        break
+      case 'LIMITED':
+        this.label =
+          this.ariaLabelVisibility + ' ' + $localize`:@@account.trusted:Trusted`
+
+        break
+
+      default:
+        break
+    }
+
     this._visibility = visibility
   }
   get visibility() {
