@@ -52,6 +52,7 @@ export class PanelsComponent implements OnInit {
   @Input() sortType: SortOrderType = 'end'
   @Input() sortDirection: SortOrderDirection = 'desc'
   @Input() defaultDirection: SortOrderDirection = 'asc'
+  @Input() reviewsNumber: number
 
   @Output() sort: EventEmitter<SortData> = new EventEmitter()
   @Output() addEvent: EventEmitter<ADD_EVENT_ACTION> = new EventEmitter()
@@ -69,6 +70,11 @@ export class PanelsComponent implements OnInit {
   @Input() labelSortButton = $localize`:@@shared.addItem:Add Item`
   IS_QA: boolean
 
+  reviews = $localize`:@@peerReview.reviews:reviews`
+  review = $localize`:@@peerReview.review:review`
+  for = $localize`:@@peerReview.for:for`
+  publicationGrant = $localize`:@@peerReview.publicationGrant:publication/grant`
+  publicationsGrants = $localize`:@@peerReview.publicationsGrants:publications/grants`
   ariaLabelAscending = $localize`:@@shared.ariaLabelAscending:Ascending`
   ariaLabelDescending = $localize`:@@shared.ariaLabelDescending:Descending`
 
