@@ -103,6 +103,7 @@ export class GoogleTagManagerService {
       gtmScript.src =
         'https://www.googletagmanager.com/gtm.js?id=' +
         environment.GOOGLE_TAG_MANAGER
+      gtmScript.setAttributeNode(doc.createAttribute('data-ot-ignore'))
       gtmScript.addEventListener('load', () => {
         this.isLoaded = true
         subscriber.next(true)
