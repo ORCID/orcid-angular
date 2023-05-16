@@ -17,18 +17,18 @@
         [panelType]="this.type"
       ></app-panel-expand-buttons>
 
-      <div class="text-container">
-        <div class="clickable" (click)="collapse()">
-          <h3 class="activity-header orc-font-body-large">
-            <strong> {{ title }} </strong>
-            <span
-              *ngIf="currentAmount && total && currentAmount !== total"
-              class="clickable"
-              (click)="collapse()"
+      <div class="text-container clickable" (click)="collapse()">
+        <h3 class="activity-header orc-font-body-large">
+          <strong> {{ title }} </strong>
+          <ng-container *ngIf="type !== 'peer-review'">
+              <span
+                *ngIf="currentAmount && total && currentAmount !== total"
+                class="clickable"
+                (click)="collapse()"
               >({{ currentAmount }}
-              <ng-container i18n="@@shared.of">of</ng-container>
-              {{ total }})</span
-            >
+                <ng-container i18n="@@shared.of">of</ng-container>
+                {{ total }})</span
+              >
             <span
               *ngIf="
                 (currentAmount && !total) ||
@@ -43,11 +43,28 @@
               *ngIf="
                 (!currentAmount && total == 0) || (!currentAmount && !total)
               "
-              >(0)</span
+            >(0)</span
             >
             <span *ngIf="!currentAmount && currentAmount !== 0"></span>
-          </h3>
-        </div>
+          </ng-container>
+        </h3>
+        <ng-container *ngIf="type === 'peer-review'">
+              <span>
+                ({{ reviewsNumber }}
+                <ng-container *ngIf="reviewsNumber> 1" i18n="@@peerReview.reviews">
+                  reviews
+                </ng-container>
+                <ng-container *ngIf="reviewsNumber === 1" i18n="@@peerReview.reviews">
+                  review
+                </ng-container>
+                <ng-container i18n="@@peerReview.for">for</ng-container>
+                {{ currentAmount }}
+                <ng-container *ngIf="currentAmount > 1" i18n="@@peerReview.publicationsGrants"
+                >publications/grants</ng-container>
+                <ng-container *ngIf="currentAmount === 1" i18n="@@peerReview.publicationGrant"
+                >publication/grant</ng-container>)
+              </span>
+        </ng-container>
         <ng-container> </ng-container>
       </div>
     </div>
@@ -57,7 +74,6 @@
         *ngIf="!isPublicRecord && singleAddButton()"
         mat-button
         class="orc-font-body-small add"
-        [attr.aria-label]="labelAddButton"
         (click)="add(type)"
         [attr.aria-label]="type | appPanelsAddAriaLabel"
         id="{{ 'cy-add-btn-' + type }}"
