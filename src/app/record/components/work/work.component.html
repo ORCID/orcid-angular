@@ -13,7 +13,6 @@
       {{ work?.workType.value | recordWorkTypeLabel }}
       <ng-container
         *ngIf="
-          togglzWorksContributors &&
           (work?.contributorsGroupedByOrcid
             | recordHolderRoles : isPublicRecord : id) as roles
         "
@@ -30,7 +29,7 @@
     <div
       class="general-data"
       *ngIf="
-        togglzWorksContributors && work?.contributorsGroupedByOrcid?.length > 0
+        work?.contributorsGroupedByOrcid?.length > 0
       "
     >
       <span class="uppercase" i18n="@@works.contributors">Contributors</span>:
@@ -175,7 +174,7 @@
       Contributors
     </h3>
 
-    <div *ngIf="togglzWorksContributors">
+    <div>
       <ng-container
         *ngIf="work?.numberOfContributors > maxNumberContributorsWorkDetails"
       >
@@ -269,36 +268,7 @@
           </a>
         </p>
       </ng-container>
-    </div>
-    <!--    todo @DanielPalafox Remove div once togglz is removed-->
-    <div *ngIf="!togglzWorksContributors">
-      <div
-        *ngFor="let contributor of work?.contributors"
-        class="padding-level-3"
-      >
-        <ng-container *ngIf="contributor?.creditName">
-          <ng-container
-            *ngIf="
-              contributor?.creditName?.value !== privateName;
-              else elseBlock
-            "
-          >
-            {{ contributor.creditName.value }}
-          </ng-container>
-          <ng-template #elseBlock>{{ privateNameTranslation }}</ng-template>
-        </ng-container>
-        {{ contributor | contributorsPipe }}
-        <ng-container *ngIf="contributor?.orcid">
-          <a
-            class="underline"
-            target="_blank"
-            rel="noreferrer noopener"
-            href="{{ contributor.uri.value }}"
-            >{{ contributor.orcid.value }}</a
-          >)
-        </ng-container>
-      </div>
-    </div>
+    </div>    
   </app-display-attribute>
 
   <!-- CITATION-->
@@ -333,7 +303,7 @@
         </a>
       </div>
       <br />
-      <ng-container *ngIf="togglzWorksContributors">
+      <ng-container>
         <ng-container
           *ngIf="
             work.citation?.citation?.value?.length > maxBibtexCharacters &&
@@ -443,7 +413,7 @@
           </ng-container>
         </ng-container>
       </ng-container>
-      <ng-container *ngIf="!togglzWorksContributors && showCitation">
+      <ng-container *ngIf="showCitation">
         <ng-container *ngIf="!showExpandedFormatting">
           {{ work.citation.citation.value }}
         </ng-container>

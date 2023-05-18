@@ -39,8 +39,7 @@ export class WorkStackComponent implements OnInit {
   worksModal = WorkModalComponent
   @Input() isPublicRecord: string
   hasExternalIds: boolean
-  togglzWorksContributors: boolean
-
+  
   @Input()
   set workStack(value: WorkGroup) {
     this.hasExternalIds = !!value.externalIdentifiers.length
@@ -78,9 +77,7 @@ export class WorkStackComponent implements OnInit {
     _togglz: TogglzService,
     private _workService: RecordWorksService
   ) {
-    _togglz
-      .getStateOf('ORCID_ANGULAR_WORKS_CONTRIBUTORS')
-      .subscribe((value) => (this.togglzWorksContributors = value))
+    
   }
 
   /**
