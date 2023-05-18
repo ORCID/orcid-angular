@@ -6,7 +6,7 @@ export const environment = {
   API_NEWS: 'https://www.mocky.io/v2/5dced45b3000007300931ce8',
   API_PUB: '//pub.localhost/v3.0',
   API_WEB: 'https://orcid.herokuapp.com/https://sandbox.orcid.org/',
-  BASE_URL: 'https://orcid.org/',
+  BASE_URL: '',
   BLOG_NEWS: 'https://orcid.org/about/news',
   INFO_SITE: 'http://orcidaboutdev.wpengine.com/',
   GOOGLE_ANALYTICS_TESTING_MODE: true,

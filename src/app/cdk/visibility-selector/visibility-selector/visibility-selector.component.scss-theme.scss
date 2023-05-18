@@ -1,0 +1,116 @@
+@use '@angular/material' as mat;
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+@mixin privacy-selector-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+  .panel {
+    background-color: map-get($background, light-grey);
+  }
+  .panel.white-background {
+    background-color: mat.get-color-from-palette($foreground, text-light-high);
+  }
+  ::ng-deep .no-selected svg > g,
+  ::ng-deep .no-selected svg > path {
+    fill: map-get($background, ui-background);
+  }
+  ::ng-deep .selected svg > g,
+  ::ng-deep .selected svg > path {
+    fill: map-get($foreground, text-light-high);
+  }
+  ::ng-deep .panel button {
+    background-color: map-get($foreground, text-light-high);
+  }
+
+  ::ng-deep button.private-button.selected {
+    background-color: map-get($foreground, visibility-private);
+  }
+  ::ng-deep button.limited-button.selected {
+    background-color: map-get($foreground, visibility-trusted);
+  }
+  ::ng-deep button.public-button.selected {
+    background-color: map-get($foreground, visibility-everyone);
+  }
+
+  .privacy-selector {
+    background-color: map-get($foreground, 'text-light-high');
+    border-color: mat.get-color-from-palette($background, ui-background);
+  }
+
+  .limitedIcon {
+    color: map-get($foreground, visibility-trusted);
+  }
+  .privateIcon {
+    color: map-get($foreground, visibility-private);
+  }
+  .publicIcon {
+    color: map-get($foreground, visibility-everyone);
+  }
+
+  .main-menu {
+    border: solid 1px;
+  }
+
+  svg path {
+    fill: black;
+  }
+  .icon-public,
+  .icon-private,
+  .icon-limited {
+    background-color: map-get($background, 'ui-background-lightest');
+  }
+  .selectedMenu {
+    .icon-public {
+      background: map-get($foreground, visibility-everyone);
+      svg path {
+        fill: white;
+      }
+    }
+
+    .icon-private {
+      background: map-get($foreground, visibility-private);
+      svg path {
+        fill: white;
+      }
+    }
+    .icon-limited {
+      background: map-get($foreground, visibility-trusted);
+      svg path {
+        fill: white;
+      }
+    }
+  }
+
+  ::ng-deep {
+    .mat-menu-item.selectedMenu.private-button:not([disabled]) {
+      background: rgba(171, 22, 0, 0.05);
+    }
+    .mat-menu-item.selectedMenu.limited-button:not([disabled]) {
+      background: rgba(255, 189, 50, 0.05);
+    }
+    .mat-menu-item.selectedMenu.public-button:not([disabled]) {
+      background: rgba(0, 165, 0, 0.05);
+    }
+
+    .mat-menu-item.selectedMenu.private-button:hover:not([disabled]) {
+      background: rgba(171, 22, 0, 0.05);
+    }
+    .mat-menu-item.selectedMenu.limited-button:hover:not([disabled]) {
+      background: rgba(255, 189, 50, 0.05);
+    }
+    .mat-menu-item.selectedMenu.public-button:hover:not([disabled]) {
+      background: rgba(0, 165, 0, 0.05);
+    }
+  }
+  .main-menu {
+    border-color: map-get($background, 'ui-background');
+  }
+
+  .wrap-menu-item {
+    color: mat.get-color-from-palette($primary);
+  }
+}
+@include privacy-selector-theme($orcid-app-theme);

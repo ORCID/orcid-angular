@@ -28,7 +28,6 @@
 
 .mat-form-field {
   width: 100%;
-  margin-inline-end: 32px;
 }
 
 .keyword-input {
@@ -47,10 +46,6 @@
   }
 }
 
-app-privacy-selector {
-  min-width: 180px;
-}
-
 ::ng-deep .columns-4-or-8 {
   .keywords-input-line .input-container {
     padding-bottom: 30px;
@@ -63,4 +58,13 @@ app-privacy-selector {
   .actions-wrapper {
     width: 100%;
   }
+}
+
+.delete-button,
+app-visibility-selector {
+  margin-inline-start: 16px;
+}
+
+.delete-button {
+  margin-top: -3px;
 }

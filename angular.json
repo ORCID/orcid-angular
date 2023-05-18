@@ -26,6 +26,10 @@
             "translation": "src/locale/messages.static.cs.xlf",
             "baseHref": "/"
           },
+          "de": {
+            "translation": "src/locale/messages.static.de.xlf",
+            "baseHref": "/"
+          },
           "es": {
             "translation": "src/locale/messages.static.es.xlf",
             "baseHref": "/"
@@ -46,6 +50,10 @@
             "translation": "src/locale/messages.static.lr.xlf",
             "baseHref": "/"
           },
+          "pl": {
+            "translation": "src/locale/messages.static.pl.xlf",
+            "baseHref": "/"
+          },
           "pt": {
             "translation": "src/locale/messages.static.pt.xlf",
             "baseHref": "/"
@@ -56,6 +64,10 @@
           },
           "ru": {
             "translation": "src/locale/messages.static.ru.xlf",
+            "baseHref": "/"
+          },
+          "tr": {
+            "translation": "src/locale/messages.static.tr.xlf",
             "baseHref": "/"
           },
           "uk": {

@@ -1,14 +1,17 @@
 <div class="container">
   <div
     class="dot everyone"
+    *ngIf="visibility === 'PUBLIC'"
     [ngClass]="{ active: visibility === 'PUBLIC' }"
   ></div>
   <div
     class="dot trusted"
+    *ngIf="visibility === 'LIMITED'"
     [ngClass]="{ active: visibility === 'LIMITED' }"
   ></div>
   <div
     class="dot private"
+    *ngIf="visibility === 'PRIVATE'"
     [ngClass]="{ active: visibility === 'PRIVATE' }"
   ></div>
 </div>

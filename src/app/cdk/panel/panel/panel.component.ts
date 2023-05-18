@@ -124,7 +124,8 @@ export class PanelComponent implements OnInit {
   tooltipLabelMakeCopy = $localize`:@@shared.makeCopy:Make a copy and edit`
   tooltipLabelOpenSources = $localize`:@@shared.openSourceToEdit:Open sources to edit you own version`
   tooltipLabelYourOwnVersion = $localize`:@@shared.youCanOnlyEditYour:You can only edit your own version`
-  tooltipLabelVisibilityError = $localize`:@@peerReview.dataInconsistency:Data inconsistency found. Please click your preferred visibility setting to fix`
+  tooltipLabelVisibilityError = $localize`:@@peerReview.dataInconsistencyv2:This group of items has mixed visibility settings. Please select a visibility to apply to all items in the group.
+  `
   openOtherSources = $localize`:@@record.openOtherSources:Open other sources`
 
   constructor(
@@ -314,5 +315,6 @@ export class PanelComponent implements OnInit {
           .subscribe()
         break
     }
+    this.visibilityError = false
   }
 }

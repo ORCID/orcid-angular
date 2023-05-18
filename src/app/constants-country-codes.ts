@@ -150,7 +150,7 @@ export const COUNTRY_NAMES_TO_COUNTRY_CODES = {
   India: 'IN',
   Canada: 'CA',
   Maldives: 'MV',
-  Turkey: 'TR',
+  Türkiye: 'TR',
   Belgium: 'BE',
   Taiwan: 'TW',
   'Trinidad and Tobago': 'TT',

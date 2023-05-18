@@ -17,8 +17,6 @@ import { RecordService } from '../../../core/record/record.service'
 })
 export class TopBarVerificationEmailComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
-
-  @Input() justRegistered: boolean
   @Input() emailVerified: boolean
 
   primaryEmail: string

@@ -16,6 +16,7 @@ import {
 } from './analytics-utils'
 import { ERROR_REPORT } from './errors'
 import { ErrorHandlerService } from './core/error-handler/error-handler.service'
+import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-root',

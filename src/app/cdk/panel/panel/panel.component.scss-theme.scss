@@ -34,7 +34,7 @@
   }
 
   .error {
-    color: map-get($foreground, 'state-notice-dark');
+    color: map-get($foreground, 'state-warning-dark');
   }
 }
 @include panel-theme($orcid-app-theme);

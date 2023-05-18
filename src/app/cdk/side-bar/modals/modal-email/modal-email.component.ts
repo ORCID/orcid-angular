@@ -49,7 +49,14 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   ariaLabelCancel = $localize`:@@side-bar.ariaLabelEmailCancel:Cancel changes and close Emails`
   ariaLabelDelete = $localize`:@@side-bar.ariaLabelEmailDelete:Delete Email`
   ariaLabelClose = $localize`:@@side-bar.ariaLabelEmailClose:Close Emails`
-  ariaLabelEmail = $localize`:@@side-bar.ariaLabelEmail:Emails`
+  ariaLabelPrimaryEmail = $localize`:@@side-bar.primaryEmail:Primary email address`
+  ariaLabelOtherEmailAddresses = $localize`:@@side-bar.otherEmails:Other email addresses`
+  ariaLabelVisibilityPrimaryEmailPublic = $localize`:@@side-bar.ariaLabelPrimaryEmailPublic:Set primary email visibility to Everyone`
+  ariaLabelVisibilityPrimaryEmailTrustedParty = $localize`:@@side-bar.ariaLabelPrimaryEmailTrustedParties:Set primary email visibility to Trusted Parties`
+  ariaLabelVisibilityPrimaryEmailPrivate = $localize`:@@side-bar.ariaLabelPrimaryEmailPrivate:Set primary email visibility to Only Me`
+  ariaLabelVisibilityOtherEmailPublic = $localize`:@@side-bar.ariaLabelOtherEmailPublic:Set other email visibility to Everyone`
+  ariaLabelVisibilityOtherEmailTrustedParty = $localize`:@@side-bar.ariaLabelOtherEmailTrustedParties:Set other email visibility to Trusted Parties`
+  ariaLabelVisibilityOtherEmailPrivate = $localize`:@@side-bar.ariaLabelOtherEmailPrivate:Set other email visibility to Only Me`
 
   @ViewChildren('emailInput') inputs: QueryList<ElementRef>
   verificationsSend: string[] = []

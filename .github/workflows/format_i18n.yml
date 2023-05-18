@@ -1,0 +1,26 @@
+on:
+  workflow_call:
+  workflow_dispatch:
+
+name: format_i18n
+
+jobs:
+  format_i18n:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          # token with write permissions to protected branches
+          # standard github token does not allow this
+          token: ${{ secrets.RELEASE_TOKEN }}
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 'v16.13.2'
+          cache: 'yarn'
+      - run: yarn
+      - run: yarn build:i18n:generate-testing
+      - uses: EndBug/add-and-commit@c8bfb4ff65642c4c54445500822f6e7da558994a
+        with:
+          message: '🤖 GITHUB ACTIONS i18n generator'
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}

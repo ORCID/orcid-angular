@@ -205,13 +205,12 @@
       </p>
       <div class="row names-visibility">
         <div class="col no-wrap actions-wrapper no-gutters">
-          <app-privacy-selector
-            [alignment]="'start'"
+          <app-visibility-selector
             formControlName="visibility"
             [ariaLabelPrivate]="visibilityOtherNamesPrivateAriaLabel"
             [ariaLabelPublic]="visibilityOtherNamesPublicAriaLabel"
             [ariaLabelTrustedParty]="visibilityOtherNamesTrustedPartyAriaLabel"
-          ></app-privacy-selector>
+          ></app-visibility-selector>
         </div>
       </div>
     </section>
@@ -295,16 +294,16 @@
                 </mat-form-field>
               </div>
               <div
-                class="col no-wrap actions-wrapper no-gutters"
+                class="col no-wrap actions-wrapper no-gutters actions-wrapper-last"
                 [ngClass]="{ privacy: !platform.columns12 }"
               >
-                <app-privacy-selector
+                <app-visibility-selector
                   [ngClass]="{ selector: !platform.columns12 }"
                   formControlName="visibility"
                   [ariaLabelPrivate]="visibilityNamesPrivateAriaLabel"
                   [ariaLabelPublic]="visibilityNamesPublicAriaLabel"
                   [ariaLabelTrustedParty]="visibilityNamesTrustedPartyAriaLabel"
-                ></app-privacy-selector>
+                ></app-visibility-selector>
                 <button
                   id="delete-button"
                   (click)="deleteOtherName(otherName.putCode)"

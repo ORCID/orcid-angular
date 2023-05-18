@@ -1,0 +1,27 @@
+name: bld_all_yarn
+
+on:
+  workflow_call:
+
+  workflow_dispatch:
+
+jobs:
+  bld_prod:
+    uses: ./.github/workflows/bld_yarn.yml
+    with:
+      artifact_name: prod
+#   bld_sandbox:
+#     uses: ./.github/workflows/bld_yarn.yml
+#     with:
+#       artifact_name: sandbox
+#
+#   bld_qa:
+#     uses: ./.github/workflows/bld_yarn.yml
+#     with:
+#       artifact_name: qa
+#
+#   bld_int:
+#     uses: ./.github/workflows/bld_yarn.yml
+#     with:
+#       artifact_name: int
+#

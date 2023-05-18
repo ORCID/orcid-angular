@@ -75,7 +75,7 @@
                 formControlName="email"
                 type="email"
                 appTrim
-                [attr.aria-label]="ariaLabelEmail"
+                [attr.aria-label]="ariaLabelPrimaryEmail"
               />
               <mat-icon matPrefix>verified</mat-icon>
               <mat-error
@@ -112,11 +112,15 @@
             </mat-form-field>
 
             <strong
+              tabindex="0"
               class="orc-font-body-large email-activated primary-email-label verify-icon"
               *ngIf="showEmailAsVerified(email.putCode)"
             >
               <mat-icon class="title-material-icon other-names" matPrefix
                 >verified</mat-icon
+              >
+              <span class="sr-only" i18n="@@side-bar.primaryEmail"
+                >Primary email address</span
               >
               {{ emailsForm.value[email.putCode].email }}</strong
             >
@@ -147,10 +151,15 @@
                 'privacy-selector': !showNonVerifiedData(email.putCode)
               }"
             >
-              <app-privacy-selector
+              <app-visibility-selector
                 formControlName="visibility"
                 id="cy-primary-email-visibility"
-              ></app-privacy-selector>
+                [ariaLabelPrivate]="ariaLabelVisibilityPrimaryEmailPrivate"
+                [ariaLabelPublic]="ariaLabelVisibilityPrimaryEmailPublic"
+                [ariaLabelTrustedParty]="
+                  ariaLabelVisibilityPrimaryEmailTrustedParty
+                "
+              ></app-visibility-selector>
               <div></div>
             </div>
           </div>
@@ -261,7 +270,7 @@
             >
               <input
                 [id]="email.putCode"
-                [attr.aria-label]="ariaLabelEmail"
+                [attr.aria-label]="ariaLabelOtherEmailAddresses"
                 #emailInput
                 matInput
                 formControlName="email"
@@ -313,16 +322,20 @@
             <strong
               class="orc-font-body email-activated primary-email-label verify-icon"
               *ngIf="showEmailAsVerified(email.putCode)"
+              tabindex="0"
             >
               <mat-icon class="large-material-icon" matPrefix
                 >verified</mat-icon
+              >
+              <span class="sr-only" i18n="@@side-bar.otherEmails"
+                >Other email addresses</span
               >
               {{ emailsForm.value[email.putCode].email }}</strong
             >
           </div>
 
           <div class="col actions-wrapper no-gutters">
-            <div class="actions-sub-wrapper">
+            <div class="actions-sub-wrapper url-wrapper">
               <a
                 class="orc-font-body-small underline"
                 *ngIf="showEmailAsVerified(email.putCode)"
@@ -352,7 +365,7 @@
             </div>
 
             <div
-              class="actions-sub-wrapper"
+              class="actions-sub-wrapper visibility-wrapper"
               [ngClass]="{
                 'visibility-hidden': !showVisibility(
                   email.putCode,
@@ -360,10 +373,13 @@
                 )
               }"
             >
-              <app-privacy-selector
+              <app-visibility-selector
                 [hidden]="!showVisibility(email.putCode, email.action)"
                 formControlName="visibility"
-              ></app-privacy-selector>
+                [ariaLabelPrivate]="ariaLabelVisibilityOtherEmailPublic"
+                [ariaLabelPublic]="ariaLabelVisibilityOtherEmailTrustedParty"
+                [ariaLabelTrustedParty]="ariaLabelVisibilityOtherEmailPrivate"
+              ></app-visibility-selector>
               <button
                 (click)="deleteEmail(email.putCode)"
                 mat-icon-button

@@ -50,13 +50,8 @@
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-app-privacy-selector {
-  min-width: 180px;
-}
-
 .mat-form-field {
   width: 100%;
-  margin-inline-end: 32px;
 }
 
 .icon-drag {
@@ -73,4 +68,13 @@ app-privacy-selector {
 .line {
   overflow-wrap: break-word;
   word-break: break-word;
+}
+
+.delete-button,
+app-visibility-selector {
+  margin-inline-start: 16px;
+}
+
+.delete-button {
+  margin-top: -3px;
 }

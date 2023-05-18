@@ -19,11 +19,11 @@ import { PanelExpandButtonsComponent } from './panel-expand-buttons/panel-expand
 import { MatMenuModule } from '@angular/material/menu'
 import { SortLabelPipe } from './sort-label.pipe'
 import { MatCheckboxModule } from '@angular/material/checkbox'
-import { PrivacySelectorModule } from '../privacy-selector/privacy-selector.module'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { SharedModule } from '../../shared/shared.module'
 import { AppPanelActivityActionAriaLabelPipe } from '../../shared/pipes/app-panel-activity-action-aria-label/app-panel-activity-action-aria-label.pipe'
+import { VisibilitySelectorModule } from '../visibility-selector/visibility-selector.module'
 
 @NgModule({
   declarations: [
@@ -47,7 +47,7 @@ import { AppPanelActivityActionAriaLabelPipe } from '../../shared/pipes/app-pane
     MatDividerModule,
     MatMenuModule,
     MatCheckboxModule,
-    PrivacySelectorModule,
+    VisibilitySelectorModule,
     ReactiveFormsModule,
     FormsModule,
     MatProgressBarModule,

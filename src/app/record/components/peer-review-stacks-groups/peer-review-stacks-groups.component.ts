@@ -59,6 +59,7 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
   }
   userRecord: UserRecord
   peerReviews: PeerReview[] = []
+  reviewsNumber: number
   platform: PlatformInfo
   detailsPeerReviews: {
     putCode: number
@@ -129,6 +130,10 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
         }
         if (userRecord?.peerReviews !== undefined) {
           this.peerReviews = userRecord.peerReviews
+          this.reviewsNumber = 0
+          this.peerReviews.forEach((p) => {
+            this.reviewsNumber += p.putCodes.length
+          })
           this.total.emit(this.peerReviews.length)
         }
       })

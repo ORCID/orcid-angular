@@ -54,7 +54,7 @@ describe('RecordWorksService', () => {
     httpTestingController = TestBed.inject(HttpTestingController)
     togglzService.togglzSubject = new ReplaySubject<Config>()
     togglzService.togglzSubject.next({
-      messages: { ORCID_ANGULAR_WORKS_CONTRIBUTORS: 'true', LIVE_IDS: '4,561' },
+      messages: { ORCID_ANGULAR_WORKS_CONTRIBUTORS: 'true' },
     })
   })
 

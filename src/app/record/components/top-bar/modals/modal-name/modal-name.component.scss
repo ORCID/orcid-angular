@@ -66,10 +66,6 @@ h3 {
     }
   }
 
-  app-privacy-selector {
-    margin: 0 30px;
-  }
-
   .selector {
     margin: 0 !important;
   }
@@ -168,5 +164,12 @@ hr {
   }
   .columns-4-or-8 .cdk-drag-placeholder {
     opacity: 0;
+  }
+}
+.actions-wrapper-last app-visibility-selector {
+  margin-inline-end: 16px;
+  margin-inline-start: 16px;
+  .mat-icon-button {
+    top: -3px;
   }
 }

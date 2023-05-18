@@ -13,6 +13,7 @@
 .add-more-email {
   display: flex;
   align-items: center;
+
   mat-icon {
     margin-inline-end: 8px;
   }
@@ -24,22 +25,41 @@
 
 mat-form-field {
   width: 100%;
+  top: 12px;
+
+  mat-icon {
+    line-height: 1.1;
+  }
+}
+
+.visibility-wrapper {
+  width: 60%;
+}
+
+.url-wrapper {
+  width: 40%;
+}
+
+.actions-wrapper {
+  width: 50%;
 }
 
 .actions-wrapper,
 .actions-sub-wrapper {
   display: flex;
-  width: 50%;
   flex-wrap: nowrap;
   flex-shrink: 0;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
+
   .actions-sub-wrapper {
-    justify-content: space-around;
+    justify-content: end;
+
     a {
       width: 100%;
     }
   }
+
   .privacy-selector {
     justify-content: unset;
     padding-inline-start: 8px;
@@ -50,11 +70,13 @@ mat-form-field {
   display: flex;
   align-items: center;
   word-break: break-all;
+
   mat-icon {
     margin-inline-start: 6px;
     margin-inline-end: 16px;
     width: 32px;
   }
+
   mat-icon,
   .other-names {
     margin-inline-start: 12px;
@@ -64,17 +86,17 @@ mat-form-field {
 .email-input-line {
   margin-top: 5px;
   margin-bottom: 8px;
+
   img {
     margin-top: 6px;
     cursor: move;
     z-index: 1;
     margin-inline-end: 18px;
   }
+
   .email-activated {
     margin-bottom: 12px;
-  }
-  mat-icon {
-    line-height: 1.1;
+    margin-top: 10px;
   }
 }
 
@@ -89,6 +111,7 @@ mat-form-field {
 
 .add-more {
   margin-top: 16px;
+
   mat-icon {
     padding-inline-end: 8px;
   }
@@ -98,9 +121,11 @@ mat-form-field {
   p {
     margin: 0;
   }
+
   p.email-container {
     margin: 16px 0 16px 0;
   }
+
   margin-bottom: 20px;
 }
 
@@ -119,8 +144,8 @@ mat-form-field {
   .actions-sub-wrapper {
     width: 100%;
     flex-wrap: wrap;
-    margin: 10px 0 10px 0;
   }
+
   .actions-sub-wrapper {
     justify-content: space-between !important;
   }
@@ -138,9 +163,6 @@ mat-form-field {
 
 .visibility-hidden {
   justify-content: end !important;
-  button {
-    margin-inline-end: 8px;
-  }
 }
 
 .info {
@@ -151,7 +173,24 @@ mat-form-field {
   height: 30px;
   display: flex;
   align-items: center;
+
   p {
     margin: 0;
+  }
+}
+
+.delete-button {
+  margin-inline-start: 16px;
+}
+
+app-visibility-selector {
+  margin-inline-start: 16px;
+}
+
+::ng-deep .columns-4-or-8 {
+  app-visibility-selector {
+    margin-inline-start: 0;
+    margin-top: 16px;
+    margin-bottom: 16px;
   }
 }

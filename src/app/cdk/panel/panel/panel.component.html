@@ -56,16 +56,17 @@
     >
       <ng-container *ngIf="visibilityError">
         <mat-icon
-          class="large-material-icon error cy-inconsistency-issue"
+          class="large-material-icon error cy-inconsistency-issue material-icons-outlined"
           [matTooltip]="tooltipLabelVisibilityError"
           >info</mat-icon
         >
       </ng-container>
-      <app-privacy-selector
-        [whiteBackground]="true"
+      <app-visibility-selector
         (ngModelChange)="updateVisibility($event)"
         [ngModel]="visibility"
-      ></app-privacy-selector>
+        [multiEdit]="stackSiblings?.length > 1 ? 'multi' : 'single'"
+        [visibilityError]="visibilityError"
+      ></app-visibility-selector>
     </ng-container>
 
     <!-- [CUSTOM CONTROLS] FOR `PEER REVIEWS` AND `RESEARCH RESOURCES` -->

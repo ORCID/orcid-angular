@@ -126,9 +126,8 @@
             <div
               class="col no-wrap actions-wrapper no-gutters personal-identifiers-controls-wrapper"
             >
-              <app-privacy-selector
-                formControlName="visibility"
-              ></app-privacy-selector>
+              <app-visibility-selector formControlName="visibility">
+              </app-visibility-selector>
               <button
                 (click)="deletePersonalIdentifier(personIdentifier.putCode)"
                 mat-icon-button

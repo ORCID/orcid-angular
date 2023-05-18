@@ -9,7 +9,6 @@ import { MatDialogModule } from '@angular/material/dialog'
 import { MatButtonModule } from '@angular/material/button'
 import { MatInputModule } from '@angular/material/input'
 import { MatIconModule } from '@angular/material/icon'
-import { PrivacySelectorModule } from '../privacy-selector/privacy-selector.module'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { ModalCountryComponent } from './modals/modal-country/modal-country.component'
 import { DragDropModule } from '@angular/cdk/drag-drop'
@@ -21,6 +20,7 @@ import { ModalPersonIdentifiersComponent } from './modals/modal-person-identifie
 import { SharedModule } from 'src/app/shared/shared.module'
 import { FormDirectivesModule } from '../form-directives/form-directives.module'
 import { SourceHitComponent } from './modals/source-hit/source-hit.component'
+import { VisibilitySelectorModule } from '../visibility-selector/visibility-selector.module'
 
 @NgModule({
   declarations: [
@@ -42,7 +42,7 @@ import { SourceHitComponent } from './modals/source-hit/source-hit.component'
     MatButtonModule,
     MatInputModule,
     MatIconModule,
-    PrivacySelectorModule,
+    VisibilitySelectorModule,
     ReactiveFormsModule,
     FormsModule,
     DragDropModule,

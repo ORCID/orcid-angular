@@ -1,0 +1,67 @@
+.visibilityTitleContainer,
+.urlContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+}
+
+.icon-circle {
+  display: flex;
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  margin-inline-end: 16px;
+}
+[mat-menu-item] {
+  display: flex;
+  align-items: center;
+}
+
+.main-menu {
+  border: solid 1px;
+  height: 40px;
+}
+
+.menu-icon {
+  margin-right: 6px;
+}
+
+[mat-button] {
+  min-width: 140px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.selectedMenu .title-container {
+  font-weight: bold;
+}
+
+.main-button-container {
+  display: flex;
+  align-items: center;
+  .icon-title-container {
+    min-width: 100px;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.arrow-drop-down {
+  width: 17px;
+}
+
+.wrap-menu-item {
+  white-space: normal;
+  line-height: 1.6;
+  max-width: 220px;
+  text-decoration: underline;
+}
+
+h1 {
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 4px;
+}
