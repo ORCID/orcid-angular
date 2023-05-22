@@ -32,7 +32,6 @@ import { VisibilityStrings } from '../../types/common.endpoint'
 import { DEFAULT_PAGE_SIZE, EXTERNAL_ID_TYPE_WORK } from 'src/app/constants'
 import { RecordImportWizard } from '../../types/record-peer-review-import.endpoint'
 import { SortOrderType } from '../../types/sort'
-import { TogglzService } from '../togglz/togglz.service'
 
 @Injectable({
   providedIn: 'root',
@@ -55,8 +54,7 @@ export class RecordWorksService {
     return this._$loading.asObservable()
   }
 
-  constructor(
-    private _togglz: TogglzService,
+  constructor(    
     private _http: HttpClient,
     private _errorHandler: ErrorHandlerService
   ) {}

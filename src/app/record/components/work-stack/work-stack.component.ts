@@ -21,7 +21,6 @@ import { UserRecord } from 'src/app/types/record.local'
 import { PanelComponent } from '../../../cdk/panel/panel/panel.component'
 import { UserInfo } from '../../../types'
 import { WorkModalComponent } from '../work-modal/work-modal.component'
-import { TogglzService } from '../../../core/togglz/togglz.service'
 
 @Component({
   selector: 'app-work-stack',
@@ -73,8 +72,7 @@ export class WorkStackComponent implements OnInit {
     }
   } = {}
 
-  constructor(
-    _togglz: TogglzService,
+  constructor(    
     private _workService: RecordWorksService
   ) {
     
