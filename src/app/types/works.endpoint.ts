@@ -548,6 +548,26 @@ export const _LEGACY_ContributionRoles: Role[] = [
     value: null,
     translation: $localize`:@@works.supportStaff:Support Staff`,
   },
+  {
+    key: 'lead',
+    value: null,
+    translation: $localize`:@@works.lead:Lead`,
+  },
+  {
+    key: 'co-lead',
+    value: null,
+    translation: $localize`:@@works.coLead:Co-lead`,
+  },
+  {
+    key: 'supported-by',
+    value: null,
+    translation: $localize`:@@works.supportedBy:Support by`,
+  },
+  {
+    key: 'other-contribution',
+    value: null,
+    translation: $localize`:@@works.otherContribution:Other contribution`,
+  },
 ]
 
 export interface WorkIdType {
