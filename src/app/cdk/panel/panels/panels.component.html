@@ -48,7 +48,7 @@
             <span *ngIf="!currentAmount && currentAmount !== 0"></span>
           </ng-container>
         </h3>
-        <ng-container *ngIf="type === 'peer-review'">
+        <ng-container *ngIf="type === 'peer-review' && currentAmount !== 0">
           <span>
             ({{ reviewsNumber }}
             <ng-container *ngIf="reviewsNumber > 1" i18n="@@peerReview.reviews">
@@ -56,11 +56,13 @@
             </ng-container>
             <ng-container
               *ngIf="reviewsNumber === 1"
-              i18n="@@peerReview.reviews"
+              i18n="@@peerReview.review"
             >
               review
             </ng-container>
-            <ng-container i18n="@@peerReview.for">for</ng-container>
+            <ng-container i18n="@@peerReview.for">
+              for
+            </ng-container>
             {{ currentAmount }}
             <ng-container
               *ngIf="currentAmount > 1"
