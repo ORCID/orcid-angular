@@ -51,11 +51,7 @@ describe('RecordWorksService', () => {
     })
     service = TestBed.inject(RecordWorksService)
     togglzService = TestBed.inject(TogglzService)
-    httpTestingController = TestBed.inject(HttpTestingController)
-    togglzService.togglzSubject = new ReplaySubject<Config>()
-    togglzService.togglzSubject.next({
-      messages: { ORCID_ANGULAR_WORKS_CONTRIBUTORS: 'true' },
-    })
+    httpTestingController = TestBed.inject(HttpTestingController)    
   })
 
   afterEach(() => {

@@ -21,7 +21,6 @@ import { UserRecord } from 'src/app/types/record.local'
 import { PanelComponent } from '../../../cdk/panel/panel/panel.component'
 import { UserInfo } from '../../../types'
 import { WorkModalComponent } from '../work-modal/work-modal.component'
-import { TogglzService } from '../../../core/togglz/togglz.service'
 
 @Component({
   selector: 'app-work-stack',
@@ -39,8 +38,7 @@ export class WorkStackComponent implements OnInit {
   worksModal = WorkModalComponent
   @Input() isPublicRecord: string
   hasExternalIds: boolean
-  togglzWorksContributors: boolean
-
+  
   @Input()
   set workStack(value: WorkGroup) {
     this.hasExternalIds = !!value.externalIdentifiers.length
@@ -74,13 +72,10 @@ export class WorkStackComponent implements OnInit {
     }
   } = {}
 
-  constructor(
-    _togglz: TogglzService,
+  constructor(    
     private _workService: RecordWorksService
   ) {
-    _togglz
-      .getStateOf('ORCID_ANGULAR_WORKS_CONTRIBUTORS')
-      .subscribe((value) => (this.togglzWorksContributors = value))
+    
   }
 
   /**

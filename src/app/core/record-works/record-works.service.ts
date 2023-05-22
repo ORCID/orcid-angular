@@ -32,7 +32,6 @@ import { VisibilityStrings } from '../../types/common.endpoint'
 import { DEFAULT_PAGE_SIZE, EXTERNAL_ID_TYPE_WORK } from 'src/app/constants'
 import { RecordImportWizard } from '../../types/record-peer-review-import.endpoint'
 import { SortOrderType } from '../../types/sort'
-import { TogglzService } from '../togglz/togglz.service'
 
 @Injectable({
   providedIn: 'root',
@@ -55,8 +54,7 @@ export class RecordWorksService {
     return this._$loading.asObservable()
   }
 
-  constructor(
-    private _togglz: TogglzService,
+  constructor(    
     private _http: HttpClient,
     private _errorHandler: ErrorHandlerService
   ) {}
@@ -105,63 +103,49 @@ export class RecordWorksService {
     this.sortAsc = options.sortAsc
 
     this._$loading.next(true)
-    this._togglz
-      .getStateOf('ORCID_ANGULAR_WORKS_CONTRIBUTORS')
-      .pipe(
-        first(),
-        map((togglzWorksContributors) => {
-          let url: string
-          if (options.publicRecordId) {
-            url =
-              options.publicRecordId +
-              (togglzWorksContributors
-                ? '/worksExtendedPage.json'
-                : '/worksPage.json')
-          } else {
-            url = togglzWorksContributors
-              ? 'works/worksExtendedPage.json'
-              : 'works/worksPage.json'
-          }
-
-          return url
-        }),
-        switchMap((url) =>
-          this._http.get<WorksEndpoint>(
-            environment.API_WEB +
-              url +
-              '?offset=' +
-              options.offset +
-              '&sort=' +
-              (options.sort != null ? options.sort : 'date') +
-              '&sortAsc=' +
-              (options.sortAsc != null ? options.sortAsc : false) +
-              `&pageSize=` +
-              options.pageSize
-          )
-        ),
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error)),
-        catchError(() => of({ groups: [] } as WorksEndpoint)),
-        map((data) => {
-          data.pageSize = options.pageSize
-          data.pageIndex = options.offset
-            ? Math.floor(options.offset / options.pageSize)
-            : 0
-          data.groups = this.calculateVisibilityErrors(data.groups)
-          return data
-        }),
-        tap((data) => {
-          this._$loading.next(false)
-          this.lastEmittedValue = data
-          this.$workSubject.next(data)
-        }),
-        tap(() => {
-          if (!options.publicRecordId) {
-            this.getWorksGroupingSuggestions({ force: true })
-          }
-        })
-      )
-      .subscribe()
+	
+    let url: string
+    if (options.publicRecordId) {
+        url = options.publicRecordId + '/worksExtendedPage.json'
+    } else {
+        url = 'works/worksExtendedPage.json'
+    }
+	
+	this._http.get<WorksEndpoint>(
+		environment.API_WEB +
+		url +
+        '?offset=' +
+        options.offset +
+        '&sort=' +
+        (options.sort != null ? options.sort : 'date') +
+        '&sortAsc=' +
+        (options.sortAsc != null ? options.sortAsc : false) +
+        `&pageSize=` +
+        options.pageSize
+	  ).pipe(
+		retry(3),
+		catchError((error) => this._errorHandler.handleError(error)),
+		catchError(() => of({ groups: [] } as WorksEndpoint)),
+		map((data) => {
+			data.pageSize = options.pageSize
+			data.pageIndex = options.offset
+			? Math.floor(options.offset / options.pageSize)
+			: 0
+			data.groups = this.calculateVisibilityErrors(data.groups)
+			return data
+		}),
+		tap((data) => {
+			this._$loading.next(false)
+			this.lastEmittedValue = data
+			this.$workSubject.next(data)
+		}),
+		tap(() => {
+			if (!options.publicRecordId) {
+				this.getWorksGroupingSuggestions({ force: true })
+			}
+		})
+	).subscribe()
+	
     return this.$workSubject.asObservable()
   }
 
