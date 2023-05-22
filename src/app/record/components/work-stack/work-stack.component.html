@@ -39,7 +39,7 @@
       *ngIf="stackPanelsDisplay[work.putCode.value].topPanelOfTheStack"
       [work]="work"
       [panelDetailsState]="panelDetailsState[work.putCode.value]"
-      [id]="userInfo?.EFFECTIVE_USER_ORCID"      
+      [id]="userInfo?.EFFECTIVE_USER_ORCID"
       [isPublicRecord]="isPublicRecord"
       (toggleDetails)="toggleDetails($event)"
     >

@@ -38,7 +38,7 @@ export class WorkStackComponent implements OnInit {
   worksModal = WorkModalComponent
   @Input() isPublicRecord: string
   hasExternalIds: boolean
-  
+
   @Input()
   set workStack(value: WorkGroup) {
     this.hasExternalIds = !!value.externalIdentifiers.length
@@ -72,11 +72,7 @@ export class WorkStackComponent implements OnInit {
     }
   } = {}
 
-  constructor(    
-    private _workService: RecordWorksService
-  ) {
-    
-  }
+  constructor(private _workService: RecordWorksService) {}
 
   /**
    * Set the panelDetails and top of the stack card to default mode

@@ -51,7 +51,7 @@ describe('RecordWorksService', () => {
     })
     service = TestBed.inject(RecordWorksService)
     togglzService = TestBed.inject(TogglzService)
-    httpTestingController = TestBed.inject(HttpTestingController)    
+    httpTestingController = TestBed.inject(HttpTestingController)
   })
 
   afterEach(() => {

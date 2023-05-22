@@ -54,7 +54,7 @@ export class RecordWorksService {
     return this._$loading.asObservable()
   }
 
-  constructor(    
+  constructor(
     private _http: HttpClient,
     private _errorHandler: ErrorHandlerService
   ) {}
@@ -103,49 +103,52 @@ export class RecordWorksService {
     this.sortAsc = options.sortAsc
 
     this._$loading.next(true)
-	
+
     let url: string
     if (options.publicRecordId) {
-        url = options.publicRecordId + '/worksExtendedPage.json'
+      url = options.publicRecordId + '/worksExtendedPage.json'
     } else {
-        url = 'works/worksExtendedPage.json'
+      url = 'works/worksExtendedPage.json'
     }
-	
-	this._http.get<WorksEndpoint>(
-		environment.API_WEB +
-		url +
-        '?offset=' +
-        options.offset +
-        '&sort=' +
-        (options.sort != null ? options.sort : 'date') +
-        '&sortAsc=' +
-        (options.sortAsc != null ? options.sortAsc : false) +
-        `&pageSize=` +
-        options.pageSize
-	  ).pipe(
-		retry(3),
-		catchError((error) => this._errorHandler.handleError(error)),
-		catchError(() => of({ groups: [] } as WorksEndpoint)),
-		map((data) => {
-			data.pageSize = options.pageSize
-			data.pageIndex = options.offset
-			? Math.floor(options.offset / options.pageSize)
-			: 0
-			data.groups = this.calculateVisibilityErrors(data.groups)
-			return data
-		}),
-		tap((data) => {
-			this._$loading.next(false)
-			this.lastEmittedValue = data
-			this.$workSubject.next(data)
-		}),
-		tap(() => {
-			if (!options.publicRecordId) {
-				this.getWorksGroupingSuggestions({ force: true })
-			}
-		})
-	).subscribe()
-	
+
+    this._http
+      .get<WorksEndpoint>(
+        environment.API_WEB +
+          url +
+          '?offset=' +
+          options.offset +
+          '&sort=' +
+          (options.sort != null ? options.sort : 'date') +
+          '&sortAsc=' +
+          (options.sortAsc != null ? options.sortAsc : false) +
+          `&pageSize=` +
+          options.pageSize
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        catchError(() => of({ groups: [] } as WorksEndpoint)),
+        map((data) => {
+          data.pageSize = options.pageSize
+          data.pageIndex = options.offset
+            ? Math.floor(options.offset / options.pageSize)
+            : 0
+          data.groups = this.calculateVisibilityErrors(data.groups)
+          return data
+        }),
+        tap((data) => {
+          this._$loading.next(false)
+          this.lastEmittedValue = data
+          this.$workSubject.next(data)
+        }),
+        tap(() => {
+          if (!options.publicRecordId) {
+            this.getWorksGroupingSuggestions({ force: true })
+          }
+        })
+      )
+      .subscribe()
+
     return this.$workSubject.asObservable()
   }
 

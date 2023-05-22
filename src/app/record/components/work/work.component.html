@@ -13,8 +13,8 @@
       {{ work?.workType.value | recordWorkTypeLabel }}
       <ng-container
         *ngIf="
-          (work?.contributorsGroupedByOrcid
-            | recordHolderRoles : isPublicRecord : id) as roles
+          work?.contributorsGroupedByOrcid
+            | recordHolderRoles : isPublicRecord : id as roles
         "
       >
         <ng-container *ngIf="roles">
@@ -28,9 +28,7 @@
     ></app-display-external-ids>
     <div
       class="general-data"
-      *ngIf="
-        work?.contributorsGroupedByOrcid?.length > 0
-      "
+      *ngIf="work?.contributorsGroupedByOrcid?.length > 0"
     >
       <span class="uppercase" i18n="@@works.contributors">Contributors</span>:
       <ng-container
@@ -268,7 +266,7 @@
           </a>
         </p>
       </ng-container>
-    </div>    
+    </div>
   </app-display-attribute>
 
   <!-- CITATION-->
@@ -412,7 +410,7 @@
             </a>
           </ng-container>
         </ng-container>
-      </ng-container>      
+      </ng-container>
     </div>
   </app-display-attribute>
 
