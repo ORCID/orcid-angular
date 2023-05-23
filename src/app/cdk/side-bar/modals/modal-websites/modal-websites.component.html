@@ -97,7 +97,7 @@
                     />
                     <mat-error
                       *ngIf="
-                        websitesForm.get(website.putCode).get('description')
+                        websitesForm.get(website.putCode)?.get('description')
                           ?.errors?.maxlength
                       "
                       i18n="@@topBar.urlMaxLength"
@@ -201,7 +201,7 @@
                     />
                     <mat-error
                       *ngIf="
-                        websitesForm.get(website.putCode).get('description')
+                        websitesForm.get(website.putCode)?.get('description')
                           ?.errors?.maxlength
                       "
                       i18n="@@topBar.urlMaxLength"
@@ -293,7 +293,7 @@
                 [ngClass]="{ selector: !platform.columns12 }"
                 formControlName="visibility"
                 [itemTitle]="
-                  websitesForm.get(website.putCode).get('description').value ||
+                  websitesForm.get(website.putCode)?.get('description').value ||
                   ''
                 "
               ></app-visibility-selector>
@@ -304,7 +304,7 @@
                 [attr.aria-label]="
                   ariaLabelDelete +
                   ' ' +
-                  (websitesForm.get(website.putCode).get('description').value ||
+                  (websitesForm.get(website.putCode)?.get('description').value ||
                     '')
                 "
               >
