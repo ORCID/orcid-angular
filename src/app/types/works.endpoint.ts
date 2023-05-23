@@ -561,7 +561,7 @@ export const _LEGACY_ContributionRoles: Role[] = [
   {
     key: 'supported-by',
     value: null,
-    translation: $localize`:@@works.supportedBy:Support by`,
+    translation: $localize`:@@works.supportedBy:Supported by`,
   },
   {
     key: 'other-contribution',
