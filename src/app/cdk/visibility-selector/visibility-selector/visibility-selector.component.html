@@ -3,7 +3,7 @@
   mat-button
   [matMenuTriggerFor]="menu"
   class="main-menu"
-  [attr.aria-label]="itemTitle + ' ' + mainButtonLabel"
+  [attr.aria-label]="(itemTitle || '') + ' ' + mainButtonLabel"
 >
   <div class="main-button-container">
     <div class="icon-title-container">
