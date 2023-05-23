@@ -292,6 +292,10 @@
               <app-visibility-selector
                 [ngClass]="{ selector: !platform.columns12 }"
                 formControlName="visibility"
+                [itemTitle]="
+                  websitesForm.get(website.putCode).get('description').value ||
+                  ''
+                "
               ></app-visibility-selector>
               <button
                 class="delete-button"

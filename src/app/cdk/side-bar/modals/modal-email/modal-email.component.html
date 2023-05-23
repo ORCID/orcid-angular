@@ -159,6 +159,7 @@
                 [ariaLabelTrustedParty]="
                   ariaLabelVisibilityPrimaryEmailTrustedParty
                 "
+                [itemTitle]="ariaLabelPrimaryEmail"
               ></app-visibility-selector>
               <div></div>
             </div>
@@ -379,6 +380,7 @@
                 [ariaLabelPrivate]="ariaLabelVisibilityOtherEmailPublic"
                 [ariaLabelPublic]="ariaLabelVisibilityOtherEmailTrustedParty"
                 [ariaLabelTrustedParty]="ariaLabelVisibilityOtherEmailPrivate"
+                [itemTitle]="emailsForm.value[email.putCode].email"
               ></app-visibility-selector>
               <button
                 (click)="deleteEmail(email.putCode)"

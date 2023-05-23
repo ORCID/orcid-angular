@@ -694,7 +694,10 @@
       </form>
       <div class="row">
         <div class="col no-wrap actions-wrapper no-gutters">
-          <app-visibility-selector formControlName="visibility">
+          <app-visibility-selector
+            formControlName="visibility"
+            [itemTitle]="type | affiliationTypeLabel"
+          >
           </app-visibility-selector>
         </div>
       </div>

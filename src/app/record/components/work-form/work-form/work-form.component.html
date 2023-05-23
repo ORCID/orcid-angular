@@ -860,7 +860,10 @@
 
       <div class="row visibility">
         <div class="col no-wrap actions-wrapper no-gutters">
-          <app-visibility-selector formControlName="visibility">
+          <app-visibility-selector
+            formControlName="visibility"
+            [itemTitle]="ariaLabelWork"
+          >
           </app-visibility-selector>
         </div>
       </div>

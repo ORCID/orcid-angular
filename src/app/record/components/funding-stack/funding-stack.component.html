@@ -12,7 +12,7 @@
     panelId="funding-stack"
     [userRecord]="userRecord"
     [stackSiblings]="fundingStack.fundings"
-    [showVisibilityControl]="isPreferred(funding)"
+    [editableVisibilityControl]="isPreferred(funding)"
     [elements]="funding"
     [editModalComponent]="modalFundingComponent"
     [ngStyle]="{ 'z-index': fundingStack.fundings.length - i }"

@@ -125,6 +125,7 @@
                 <app-visibility-selector
                   [ngClass]="{ selector: !platform.columns12 }"
                   formControlName="visibility"
+                  [itemTitle]="keywordsForm.get(keyword.putCode)?.get('content').value || ''"
                 ></app-visibility-selector>
                 <button
                   (click)="deleteKeyword(keyword.putCode)"

@@ -86,6 +86,8 @@ export class ModalNameComponent implements OnInit, OnDestroy {
   visibilityOtherNamesPrivateAriaLabel = $localize`:@@topBar.ariaLabelOtherNamesPrivate:Set other names visibility to Only Me`
   deleteOtherNameAriaLabel = $localize`:@@topBar.ariaLabelDeleteOtherName:Delete other name`
 
+  ariaLabelYourNames = $localize`:@@topBar.yourNames:Your names`
+
   constructor(
     @Inject(WINDOW) private window: Window,
     private _platform: PlatformInfoService,

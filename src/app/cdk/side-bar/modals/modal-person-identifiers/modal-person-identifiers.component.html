@@ -126,7 +126,12 @@
             <div
               class="col no-wrap actions-wrapper no-gutters personal-identifiers-controls-wrapper"
             >
-              <app-visibility-selector formControlName="visibility">
+              <app-visibility-selector
+                formControlName="visibility"
+                [itemTitle]="personIdentifier.commonName +
+              ':' +
+              personIdentifier.reference"
+              >
               </app-visibility-selector>
               <button
                 (click)="deletePersonalIdentifier(personIdentifier.putCode)"
