@@ -66,8 +66,7 @@ export class WorkFormComponent implements OnInit {
   ngOrcidDay = $localize`:@@shared.day:Day`
   languageLabelAriaLabel = $localize`:@@shared.languageLabelAriaLabel:Select the language used in this form`
   selectCountryLocationLabel = $localize`:@@shared.selectCountryLocationLabel:Select a country or location of publication`
-  ariaLabelWork= $localize`:@@shared.ariaLabelWork:Work`
-
+  ariaLabelWork = $localize`:@@shared.ariaLabelWork:Work`
 
   @Input() work: Work
   @Input() userRecord: UserRecord

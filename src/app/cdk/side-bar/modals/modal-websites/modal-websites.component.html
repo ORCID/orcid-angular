@@ -304,8 +304,8 @@
                 [attr.aria-label]="
                   ariaLabelDelete +
                   ' ' +
-                  (websitesForm.get(website.putCode)?.get('description').value ||
-                    '')
+                  (websitesForm.get(website.putCode)?.get('description')
+                    .value || '')
                 "
               >
                 <mat-icon
