@@ -40,7 +40,7 @@ import { getAriaLabel } from '../../../constants'
 })
 export class PanelComponent implements OnInit {
   @Input() panelId: string
-  @Input() showVisibilityControl = false
+  @Input() editableVisibilityControl = false
   @Input() stackSiblings: any[]
   @Input() stackedHeader = false
   @Input() expandButtonsPosition: 'right' | 'left' = null

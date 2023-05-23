@@ -97,7 +97,7 @@
                     />
                     <mat-error
                       *ngIf="
-                        websitesForm.get(website.putCode).get('description')
+                        websitesForm.get(website.putCode)?.get('description')
                           ?.errors?.maxlength
                       "
                       i18n="@@topBar.urlMaxLength"
@@ -201,7 +201,7 @@
                     />
                     <mat-error
                       *ngIf="
-                        websitesForm.get(website.putCode).get('description')
+                        websitesForm.get(website.putCode)?.get('description')
                           ?.errors?.maxlength
                       "
                       i18n="@@topBar.urlMaxLength"
@@ -292,6 +292,10 @@
               <app-visibility-selector
                 [ngClass]="{ selector: !platform.columns12 }"
                 formControlName="visibility"
+                [itemTitle]="
+                  websitesForm.get(website.putCode)?.get('description').value ||
+                  ''
+                "
               ></app-visibility-selector>
               <button
                 class="delete-button"
@@ -300,7 +304,7 @@
                 [attr.aria-label]="
                   ariaLabelDelete +
                   ' ' +
-                  (websitesForm.get(website.putCode).get('description').value ||
+                  (websitesForm.get(website.putCode)?.get('description').value ||
                     '')
                 "
               >

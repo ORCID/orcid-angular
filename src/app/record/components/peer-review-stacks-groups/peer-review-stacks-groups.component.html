@@ -32,7 +32,7 @@
         [expandButtonsPosition]="'left'"
         [isPublicRecord]="isPublicRecord"
         (openStateChange)="expandedClicked($event, peerReview)"
-        [showVisibilityControl]="true"
+        [editableVisibilityControl]="true"
         [stackSiblings]="peerReview.peerReviewDuplicateGroups"
         [visibility]="getVisibility(peerReview)"
         [visibilityError]="peerReview.visibilityError"

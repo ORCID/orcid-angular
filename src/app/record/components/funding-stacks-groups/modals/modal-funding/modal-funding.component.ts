@@ -129,6 +129,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
   ariaLabelClose = $localize`:@@shared.closeFunding:Close funding`
   ariaLabelDescription = $localize`:@@shared.descriptionFunding:Project description`
   ariaLabelAmount = $localize`:@@shared.amountFunding:Amount`
+  ariaLabelFundingTitle = $localize`:@@shared.funding:Funding`
 
   ngOrcidYear = $localize`:@@shared.year:Year`
   ngOrcidMonth = $localize`:@@shared.month:Month`

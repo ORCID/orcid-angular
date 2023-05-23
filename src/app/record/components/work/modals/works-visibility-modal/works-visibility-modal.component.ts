@@ -29,6 +29,7 @@ export class WorksVisibilityModalComponent implements OnInit, OnDestroy {
   putCodes: string[] = []
   works: Work[] = []
   ngOrcidDefaultVisibilityLabel = $localize`:@@shared.visibilityDescription:Control who can see this information by setting the visibility. Your default visibility is`
+  ariaLabelWork= $localize`:@@shared.works:Works`
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,

@@ -51,10 +51,8 @@
   </div>
   <div class="buttons-container cy-buttons-container">
     <!-- [PRIVACY display] FOR `AFFILIATIONS`, `WORKS`, `FUNDINGS`  -->
-    <ng-container
-      *ngIf="visibility && !isPublicRecord && showVisibilityControl"
-    >
-      <ng-container *ngIf="visibilityError">
+    <ng-container *ngIf="visibility && !isPublicRecord">
+      <ng-container *ngIf="visibilityError && editableVisibilityControl">
         <mat-icon
           class="large-material-icon error cy-inconsistency-issue material-icons-outlined"
           [matTooltip]="tooltipLabelVisibilityError"
@@ -66,6 +64,8 @@
         [ngModel]="visibility"
         [multiEdit]="stackSiblings?.length > 1 ? 'multi' : 'single'"
         [visibilityError]="visibilityError"
+        [editable]="editableVisibilityControl"
+        [itemTitle]="this.panelTitle"
       ></app-visibility-selector>
     </ng-container>
 

@@ -50,6 +50,7 @@ export class ModalBiographyComponent implements OnInit, OnDestroy {
   visibilityPublicAriaLabel = $localize`:@@topBar.ariaLabelBiographyPublic:Set biography visibility to Everyone`
   visibilityTrustedPartyAriaLabel = $localize`:@@topBar.ariaLabelBiographyTrustedParty:Set biography visibility to Trusted Parties`
   visibilityPrivateAriaLabel = $localize`:@@topBar.ariaLabelBiographyPrivate:Set biography visibility to Only Me`
+  ariaLabelBiography = $localize`:@@topBar.biography:Biography`
 
   constructor(
     @Inject(WINDOW) private window: Window,

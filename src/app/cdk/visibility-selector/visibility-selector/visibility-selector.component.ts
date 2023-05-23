@@ -26,6 +26,8 @@ export class VisibilitySelectorComponent
 
   @Input() multiEdit: 'multi' | 'single' | 'selected' = 'single'
 
+  @Input() editable = true
+
   @Input()
   ariaLabelPublic = $localize`:@@share.ariaLabelPublic:set item visibility to Everyone`
   @Input()
@@ -34,6 +36,8 @@ export class VisibilitySelectorComponent
   ariaLabelPrivate = $localize`:@@share.ariaLabelPrivate:set item visibility to Only Me`
   ariaLabelCurrentlySelected = $localize`:@@share.currentSelected: (Currently selected)`
   ariaLabelVisibility = $localize`:@@share.visibilityCurrentlySetTo:visibility is currently set to`
+
+  @Input() itemTitle: string
 
   @Input() visibilityError
   mainButtonLabel: string
