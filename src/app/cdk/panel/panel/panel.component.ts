@@ -117,8 +117,7 @@ export class PanelComponent implements OnInit {
   @Input() id: string
   @Input() email = false
   @Input() names = false
-  selected: boolean
-  togglzPeerReviews: boolean
+  selected: boolean  
 
   tooltipLabelEdit = $localize`:@@shared.edit:Edit`
   tooltipLabelMakeCopy = $localize`:@@shared.makeCopy:Make a copy and edit`
@@ -142,10 +141,7 @@ export class PanelComponent implements OnInit {
     @Inject(WINDOW) private _window: Window
   ) {}
 
-  ngOnInit(): void {
-    this._togglz
-      .getStateOf('ORCID_ANGULAR_LAZY_LOAD_PEER_REVIEWS')
-      .subscribe((value) => (this.togglzPeerReviews = value))
+  ngOnInit(): void {    
     if (!this.panelTitle) {
       this.panelTitle = ''
     }
@@ -291,20 +287,14 @@ export class PanelComponent implements OnInit {
         break
       case 'peer-review':
         const peerReviewPutCodes = []
-        if (this.elements) {
-          if (this.togglzPeerReviews) {
-            this.elements.putCodes.forEach((putCode) => {
-              peerReviewPutCodes.push(putCode)
-            })
-          } else {
-            this.elements.peerReviewDuplicateGroups.forEach(
-              (peerReviewDuplicateGroup) => {
-                peerReviewDuplicateGroup.peerReviews.forEach((peerReview) => {
-                  peerReviewPutCodes.push(peerReview.putCode.value)
-                })
-              }
-            )
-          }
+        if (this.elements) {          
+          this.elements.peerReviewDuplicateGroups.forEach(
+            (peerReviewDuplicateGroup) => {
+              peerReviewDuplicateGroup.peerReviews.forEach((peerReview) => {
+                peerReviewPutCodes.push(peerReview.putCode.value)
+              })
+            }
+          )         
         }
         this._peerReviewService
           .updateVisibility(
