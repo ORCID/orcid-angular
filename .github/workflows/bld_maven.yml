@@ -96,7 +96,7 @@ jobs:
 #       - name: setup node
 #         uses: actions/setup-node@v3
 #         with:
-#           node-version: 'v16.13.2'
+#           node-version: 'vv16.x'
 
       - name: show path
         run: |
