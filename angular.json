@@ -117,7 +117,10 @@
               {
                 "glob": "**/*",
                 "input": "src/assets/",
-                "ignore": ["fonts/**/*", "**/*.scss"],
+                "ignore": [
+                  "fonts/**/*",
+                  "**/*.scss"
+                ],
                 "output": "/assets/"
               },
               {
@@ -228,58 +231,94 @@
               ]
             },
             "en": {
-              "localize": ["en"]
+              "localize": [
+                "en"
+              ]
             },
             "fr": {
-              "localize": ["fr"]
+              "localize": [
+                "fr"
+              ]
             },
             "ar": {
-              "localize": ["ar"]
+              "localize": [
+                "ar"
+              ]
             },
             "ca": {
-              "localize": ["ca"]
+              "localize": [
+                "ca"
+              ]
             },
             "cs": {
-              "localize": ["cs"]
+              "localize": [
+                "cs"
+              ]
             },
             "es": {
-              "localize": ["es"]
+              "localize": [
+                "es"
+              ]
             },
             "it": {
-              "localize": ["it"]
+              "localize": [
+                "it"
+              ]
             },
             "ja": {
-              "localize": ["ja"]
+              "localize": [
+                "ja"
+              ]
             },
             "ko": {
-              "localize": ["ko"]
+              "localize": [
+                "ko"
+              ]
             },
             "lr": {
-              "localize": ["lr"]
+              "localize": [
+                "lr"
+              ]
             },
             "pt": {
-              "localize": ["pt"]
+              "localize": [
+                "pt"
+              ]
             },
             "rl": {
-              "localize": ["rl"]
+              "localize": [
+                "rl"
+              ]
             },
             "ru": {
-              "localize": ["ru"]
+              "localize": [
+                "ru"
+              ]
             },
             "uk": {
-              "localize": ["uk"]
+              "localize": [
+                "uk"
+              ]
             },
             "xx": {
-              "localize": ["xx"]
+              "localize": [
+                "xx"
+              ]
             },
             "src": {
-              "localize": ["src"]
+              "localize": [
+                "src"
+              ]
             },
             "zh-CN": {
-              "localize": ["zh-CN"]
+              "localize": [
+                "zh-CN"
+              ]
             },
             "zh-TW": {
-              "localize": ["zh-TW"]
+              "localize": [
+                "zh-TW"
+              ]
             }
           },
           "defaultConfiguration": ""
@@ -387,7 +426,41 @@
               "src/styles.scss"
             ],
             "scripts": [],
-            "assets": ["src/favicon.ico", "src/assets", "src/manifest.json"]
+            "assets": [
+              "src/favicon.ico",
+              "src/assets",
+              "src/manifest.json"
+            ]
+          }
+        },
+        "storybook": {
+          "builder": "@storybook/angular:start-storybook",
+          "options": {
+            "configDir": ".storybook",
+            "browserTarget": "ng-orcid:build",
+            "compodoc": true,
+            "compodocArgs": [
+              "-e",
+              "json",
+              "-d",
+              "."
+            ],
+            "port": 6006
+          }
+        },
+        "build-storybook": {
+          "builder": "@storybook/angular:build-storybook",
+          "options": {
+            "configDir": ".storybook",
+            "browserTarget": "ng-orcid:build",
+            "compodoc": true,
+            "compodocArgs": [
+              "-e",
+              "json",
+              "-d",
+              "."
+            ],
+            "outputDir": "dist/storybook/ng-orcid"
           }
         }
       }

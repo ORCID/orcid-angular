@@ -1,5 +1,11 @@
 {
-  "extends": "../src/tsconfig.app.json",
-  "exclude": ["../src/karma.ts", "../src/**/*.spec.ts"],
-  "include": ["../src/**/*"]
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "types": ["node"],
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true
+  },
+  "exclude": ["../src/test.ts", "../src/**/*.spec.ts"],
+  "include": ["../src/**/*", "./preview.ts"],
+  "files": ["./typings.d.ts"]
 }
