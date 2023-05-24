@@ -12,6 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar'
 import { Overlay } from '@angular/cdk/overlay'
 import { RecordService } from '../../../core/record/record.service'
 import { RecordEmailsService } from '../../../core/record-emails/record-emails.service'
+import { of } from 'rxjs'
 
 describe('TopBarVerificationEmailComponent', () => {
   let component: TopBarVerificationEmailComponent
@@ -23,7 +24,14 @@ describe('TopBarVerificationEmailComponent', () => {
       declarations: [TopBarVerificationEmailComponent],
       providers: [
         WINDOW_PROVIDERS,
-        RecordService,
+        {
+          provide: RecordService,
+          useValue: {
+            getRecord: () => {
+              return of({})
+            },
+          },
+        },
         RecordEmailsService,
         PlatformInfoService,
         ErrorHandlerService,
