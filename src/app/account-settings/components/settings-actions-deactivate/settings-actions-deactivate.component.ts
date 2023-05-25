@@ -25,7 +25,6 @@ export class SettingsActionsDeactivateComponent implements OnInit, OnDestroy {
   isMobile: any
   $destroy = new Subject<void>()
   deactivatedEmail
-  togglzOrcidAngularAccountSettings: boolean
   removeDuplicateUrl: string
   alreadySendedDeactivatedAccountRequest: boolean
   constructor(
@@ -36,12 +35,7 @@ export class SettingsActionsDeactivateComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.deactivatedEmail = ''
-    this._togglz
-      .getStateOf('ORCID_ANGULAR_ACCOUNT_SETTINGS')
-      .subscribe((value) => {
-        this.togglzOrcidAngularAccountSettings = value
-        this.removeDuplicateUrl = '/account'
-      })
+    this.removeDuplicateUrl = '/account'
     this._platform
       .get()
       .pipe(takeUntil(this.$destroy))

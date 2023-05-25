@@ -37,8 +37,7 @@ export const menu: ApplicationMenuItemBasic[] = [
     label: $localize`:@@public-layout.sign_in:SIGN IN`,
     requirements: {
       desktop: true,
-      logging: false,
-      togglz: { ENABLE_USER_MENU: 'false' },
+      logging: false
     },
     route: 'signin',
   },
@@ -47,8 +46,7 @@ export const menu: ApplicationMenuItemBasic[] = [
     label: $localize`:@@public-layout.sign_out:SIGN OUT`,
     requirements: {
       desktop: true,
-      logging: true,
-      togglz: { ENABLE_USER_MENU: 'false' },
+      logging: true
     },
     route: 'signout',
   },
