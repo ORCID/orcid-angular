@@ -288,13 +288,9 @@ export class PanelComponent implements OnInit {
       case 'peer-review':
         const peerReviewPutCodes = []
         if (this.elements) {          
-          this.elements.peerReviewDuplicateGroups.forEach(
-            (peerReviewDuplicateGroup) => {
-              peerReviewDuplicateGroup.peerReviews.forEach((peerReview) => {
-                peerReviewPutCodes.push(peerReview.putCode.value)
-              })
-            }
-          )         
+          this.elements.putCodes.forEach((putCode) => {
+              peerReviewPutCodes.push(putCode)
+            })       
         }
         this._peerReviewService
           .updateVisibility(
