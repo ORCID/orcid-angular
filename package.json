@@ -58,6 +58,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-devkit/core": "^14.2.11",
     "@angular/animations": "^14.2.9",
     "@angular/cdk": "^14.2.6",
     "@angular/common": "^14.2.9",
@@ -97,6 +98,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^14.2.8",
+    "@angular-devkit/schematics": "14.2.11",
     "@angular/cli": "^14.2.8",
     "@angular/compiler-cli": "^14.2.9",
     "@angular/language-service": "^14.2.9",

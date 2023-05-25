@@ -20,8 +20,7 @@ export class RecordPeerReviewService {
     'Content-Type': 'application/json',
   })
   lastEmittedValue: PeerReview[]
-  togglzPeerReviews: boolean
-
+  
   constructor(
     private _http: HttpClient,
     private _errorHandler: ErrorHandlerService,
@@ -33,41 +32,26 @@ export class RecordPeerReviewService {
       this.$peer.next(<PeerReview[]>undefined)
     }
 
-    this._togglz
-      .getStateOf('ORCID_ANGULAR_LAZY_LOAD_PEER_REVIEWS')
-      .pipe(
-        first(),
-        map((togglzPeerReviews) => {
-          let url: string
-          if (options.publicRecordId) {
-            url =
-              options.publicRecordId +
-              (togglzPeerReviews
-                ? '/peer-reviews-minimized.json?sortAsc='
-                : '/peer-reviews.json?sortAsc=')
-          } else {
-            url = togglzPeerReviews
-              ? 'peer-reviews/peer-reviews-minimized.json?sortAsc='
-              : 'peer-reviews/peer-reviews.json?sortAsc='
-          }
-          return url
-        }),
-        switchMap((url) =>
-          this._http.get<PeerReview[]>(
-            environment.API_WEB +
-              url +
-              (options.sortAsc != null ? options.sortAsc : true)
-          )
-        ),
-        retry(3),
+
+    let url: string
+    if (options.publicRecordId) {
+      url = options.publicRecordId + '/peer-reviews-minimized.json?sortAsc='
+    } else {
+      url = 'peer-reviews/peer-reviews-minimized.json?sortAsc='
+    }
+
+    this._http.get<PeerReview[]>(
+      environment.API_WEB + url +  (options.sortAsc != null ? options.sortAsc : true)
+    ).pipe(
+	  retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         catchError(() => of([])),
         tap((data) => {
           this.lastEmittedValue = data
           this.$peer.next(data)
         })
-      )
-      .subscribe()
+	).subscribe()
+
     return this.$peer.asObservable()
   }
 

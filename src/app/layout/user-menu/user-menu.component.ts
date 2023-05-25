@@ -24,8 +24,7 @@ export class UserMenuComponent implements OnInit {
   displayName: string
   platform: PlatformInfo
   labelSigninRegister = $localize`:@@layout.ariaLabelSigninRegister:Sign in to ORCID or register for your ORCID iD`
-  labelUserMenu = $localize`:@@layout.ariaLabelUserMenu:User menu`
-  togglzOrcidAngularAccountSettings: boolean
+  labelUserMenu = $localize`:@@layout.ariaLabelUserMenu:User menu`  
   isAccountDelegate: boolean
   restrictedDelegators: boolean
   inboxUnread = 0
@@ -54,10 +53,7 @@ export class UserMenuComponent implements OnInit {
     })
   }
 
-  ngOnInit() {
-    this._togglz
-      .getStateOf('ORCID_ANGULAR_ACCOUNT_SETTINGS')
-      .subscribe((value) => (this.togglzOrcidAngularAccountSettings = value))
+  ngOnInit() {    
     this._togglz
       .getStateOf('RESTRICTED_DELEGATORS')
       .subscribe((value) => (this.restrictedDelegators = value))
@@ -74,7 +70,7 @@ export class UserMenuComponent implements OnInit {
       this._router.navigate([ApplicationRoutes.signin])
     } else if (url === 'inbox') {
       this._router.navigate([ApplicationRoutes.inbox])
-    } else if (url === 'account' && this.togglzOrcidAngularAccountSettings) {
+    } else if (url === 'account') {
       this._router.navigate([ApplicationRoutes.account])
     } else if (url === 'trusted-parties') {
       this._router.navigate([ApplicationRoutes.trustedParties])
