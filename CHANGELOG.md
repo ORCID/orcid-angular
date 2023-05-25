@@ -1,3 +1,12 @@
+## v2.31.4 - 2023-05-25
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.31.3...v2.31.4)
+
+
+### Fix
+
+-  all multiple prs to be merged at the same time
+-  stop jobs if a commit has happened
+
 ## v2.31.3 - 2023-05-23
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.31.2...v2.31.3)
