@@ -57,7 +57,7 @@
                 <version>1.8.0</version>
                 <configuration>
                    <nodeVersion>v16.20.0</nodeVersion>
-                    <yarnVersion>v1.19.1</yarnVersion>
+                    <yarnVersion>v1.22.18</yarnVersion>
                    <downloadRoot>https://nodejs.org/dist/</downloadRoot>
                    <workingDirectory>${nodejs.workingDirectory}</workingDirectory>
                    <installDirectory>temp</installDirectory>
