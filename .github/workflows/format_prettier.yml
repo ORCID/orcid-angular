@@ -13,14 +13,26 @@ jobs:
           # token with write permissions to protected branches
           # standard github token does not allow this
           token: ${{ secrets.RELEASE_TOKEN }}
+
       - uses: actions/setup-node@v3
         with:
           node-version: 'v16.13.2'
           cache: 'yarn'
       - run: yarn
+
       - run: yarn format
-      - uses: EndBug/add-and-commit@c8bfb4ff65642c4c54445500822f6e7da558994a
+
+      - name: add and commit any files that have changed
+        id: add_and_commit
+        uses: EndBug/add-and-commit@c8bfb4ff65642c4c54445500822f6e7da558994a
         with:
           message: '🤖 GITHUB ACTIONS format_prettier'
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+
+      - name: fail our run if commit is done so the second run is used
+        run: |
+            if ${{ steps.add_and_commit.outputs.committed }};then
+              exit 222
+            fi
+
