@@ -117,7 +117,7 @@ export class PanelComponent implements OnInit {
   @Input() id: string
   @Input() email = false
   @Input() names = false
-  selected: boolean  
+  selected: boolean
 
   tooltipLabelEdit = $localize`:@@shared.edit:Edit`
   tooltipLabelMakeCopy = $localize`:@@shared.makeCopy:Make a copy and edit`
@@ -141,7 +141,7 @@ export class PanelComponent implements OnInit {
     @Inject(WINDOW) private _window: Window
   ) {}
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
     if (!this.panelTitle) {
       this.panelTitle = ''
     }
@@ -287,10 +287,10 @@ export class PanelComponent implements OnInit {
         break
       case 'peer-review':
         const peerReviewPutCodes = []
-        if (this.elements) {          
+        if (this.elements) {
           this.elements.putCodes.forEach((putCode) => {
-              peerReviewPutCodes.push(putCode)
-            })       
+            peerReviewPutCodes.push(putCode)
+          })
         }
         this._peerReviewService
           .updateVisibility(

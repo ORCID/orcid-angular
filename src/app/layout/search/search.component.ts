@@ -17,7 +17,7 @@ export class SearchComponent implements OnInit {
   labelSearch = $localize`:@@layout.ariaLabelSearch:Search the ORCID registry`
   labelSearchBy = $localize`:@@layout.ariaLabelSearchBy:Search by name, affiliation or ORCID iD`
   form: UntypedFormGroup
-  platform: PlatformInfo  
+  platform: PlatformInfo
   signinRegisterButton = true
   whereToSearch = [
     this.firstLetterUppercase(
@@ -62,7 +62,7 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
     this._platform.platformSubject.subscribe((data) => {
       this.platform = data
-    })     
+    })
 
     this.router.events.subscribe(
       () =>
@@ -77,13 +77,13 @@ export class SearchComponent implements OnInit {
       this.firstLetterUppercase(
         $localize`:@@layout.public-layout.registry:registry`
       )
-    ) {      
+    ) {
       // navigate using the angular router to never leave the Angular app
       this.router.navigate(['/orcid-search/search'], {
         queryParams: {
           searchQuery: whatToSearch.trim(),
         },
-      })      
+      })
     } else {
       this.window.location.href = '/search/node/' + whatToSearch
     }

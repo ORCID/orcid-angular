@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/angular';
-import Button from './button.component';
+import type { Meta, StoryObj } from '@storybook/angular'
+import Button from './button.component'
 
 // More on how to set up stories at: https://storybook.js.org/docs/angular/writing-stories/introduction
 const meta: Meta<Button> = {
@@ -17,10 +17,10 @@ const meta: Meta<Button> = {
       control: 'color',
     },
   },
-};
+}
 
-export default meta;
-type Story = StoryObj<Button>;
+export default meta
+type Story = StoryObj<Button>
 
 // More on writing stories with args: https://storybook.js.org/docs/angular/writing-stories/args
 export const Primary: Story = {
@@ -28,24 +28,24 @@ export const Primary: Story = {
     primary: true,
     label: 'Button',
   },
-};
+}
 
 export const Secondary: Story = {
   args: {
     label: 'Button',
   },
-};
+}
 
 export const Large: Story = {
   args: {
     size: 'large',
     label: 'Button',
   },
-};
+}
 
 export const Small: Story = {
   args: {
     size: 'small',
     label: 'Button',
   },
-};
+}

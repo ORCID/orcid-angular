@@ -68,7 +68,7 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
   moreInfo: number[] = []
 
   ngOrcidPeerReview = $localize`:@@peerReview.peerReview:Peer review`
-  loading = true  
+  loading = true
 
   constructor(
     _platform: PlatformInfoService,
@@ -82,7 +82,7 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
       .subscribe((data) => {
         this.platform = data
         this.isMobile = data.columns4 || data.columns8
-      })    
+      })
   }
 
   ngOnInit(): void {
@@ -183,7 +183,7 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
       })[0]
   }
 
-  getVisibility(peerReview: PeerReview): VisibilityStrings {    
+  getVisibility(peerReview: PeerReview): VisibilityStrings {
     return peerReview.visibility
   }
 
@@ -192,8 +192,8 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
   }
 
   expandedClicked(expanded: boolean, peerReview?: PeerReview) {
-    if (peerReview) {      
-      this.getPeerReviewSummaryByGroupId(peerReview)      
+    if (peerReview) {
+      this.getPeerReviewSummaryByGroupId(peerReview)
     }
   }
 

@@ -27,12 +27,7 @@
               id="cy-language-mob"
             ></app-language>
           </div>
-          <div
-            *ngIf="
-              !mobileMenuState
-            "
-            class="col no-gutters"
-          >
+          <div *ngIf="!mobileMenuState" class="col no-gutters">
             <app-user-menu></app-user-menu>
           </div>
 

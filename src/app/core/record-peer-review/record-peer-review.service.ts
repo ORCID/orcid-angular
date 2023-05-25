@@ -20,7 +20,7 @@ export class RecordPeerReviewService {
     'Content-Type': 'application/json',
   })
   lastEmittedValue: PeerReview[]
-  
+
   constructor(
     private _http: HttpClient,
     private _errorHandler: ErrorHandlerService,
@@ -32,7 +32,6 @@ export class RecordPeerReviewService {
       this.$peer.next(<PeerReview[]>undefined)
     }
 
-
     let url: string
     if (options.publicRecordId) {
       url = options.publicRecordId + '/peer-reviews-minimized.json?sortAsc='
@@ -40,17 +39,22 @@ export class RecordPeerReviewService {
       url = 'peer-reviews/peer-reviews-minimized.json?sortAsc='
     }
 
-    this._http.get<PeerReview[]>(
-      environment.API_WEB + url +  (options.sortAsc != null ? options.sortAsc : true)
-    ).pipe(
-	  retry(3),
+    this._http
+      .get<PeerReview[]>(
+        environment.API_WEB +
+          url +
+          (options.sortAsc != null ? options.sortAsc : true)
+      )
+      .pipe(
+        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         catchError(() => of([])),
         tap((data) => {
           this.lastEmittedValue = data
           this.$peer.next(data)
         })
-	).subscribe()
+      )
+      .subscribe()
 
     return this.$peer.asObservable()
   }

@@ -1,10 +1,10 @@
 ## v2.31.3 - 2023-05-23
-[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.31.2...v2.31.3)
 
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.31.2...v2.31.3)
 
 ### Fix
 
--  Add missing legacy role missing translations (#1957)
+- Add missing legacy role missing translations (#1957)
 
 ## v2.30.7 - 2023-05-09
 

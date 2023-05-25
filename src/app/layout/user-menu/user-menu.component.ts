@@ -24,7 +24,7 @@ export class UserMenuComponent implements OnInit {
   displayName: string
   platform: PlatformInfo
   labelSigninRegister = $localize`:@@layout.ariaLabelSigninRegister:Sign in to ORCID or register for your ORCID iD`
-  labelUserMenu = $localize`:@@layout.ariaLabelUserMenu:User menu`  
+  labelUserMenu = $localize`:@@layout.ariaLabelUserMenu:User menu`
   isAccountDelegate: boolean
   restrictedDelegators: boolean
   inboxUnread = 0
@@ -53,7 +53,7 @@ export class UserMenuComponent implements OnInit {
     })
   }
 
-  ngOnInit() {    
+  ngOnInit() {
     this._togglz
       .getStateOf('RESTRICTED_DELEGATORS')
       .subscribe((value) => (this.restrictedDelegators = value))
