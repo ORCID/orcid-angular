@@ -1,9 +1,9 @@
-import { moduleMetadata } from '@storybook/angular';
-import type { Meta, StoryObj } from '@storybook/angular';
-import { CommonModule } from '@angular/common';
+import { moduleMetadata } from '@storybook/angular'
+import type { Meta, StoryObj } from '@storybook/angular'
+import { CommonModule } from '@angular/common'
 
-import Button from './button.component';
-import Header from './header.component';
+import Button from './button.component'
+import Header from './header.component'
 
 const meta: Meta<Header> = {
   title: 'Example/Header',
@@ -21,10 +21,10 @@ const meta: Meta<Header> = {
     // More on how to position stories at: https://storybook.js.org/docs/angular/configure/story-layout
     layout: 'fullscreen',
   },
-};
+}
 
-export default meta;
-type Story = StoryObj<Header>;
+export default meta
+type Story = StoryObj<Header>
 
 export const LoggedIn: Story = {
   args: {
@@ -32,6 +32,6 @@ export const LoggedIn: Story = {
       name: 'Jane Doe',
     },
   },
-};
+}
 
-export const LoggedOut: Story = {};
+export const LoggedOut: Story = {}

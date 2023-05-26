@@ -18,8 +18,6 @@ export class SearchComponent implements OnInit {
   labelSearchBy = $localize`:@@layout.ariaLabelSearchBy:Search by name, affiliation or ORCID iD`
   form: UntypedFormGroup
   platform: PlatformInfo
-  togglzEnableUserMenu: boolean
-  togglzOrcidAngularSearch: boolean
   signinRegisterButton = true
   whereToSearch = [
     this.firstLetterUppercase(
@@ -65,12 +63,6 @@ export class SearchComponent implements OnInit {
     this._platform.platformSubject.subscribe((data) => {
       this.platform = data
     })
-    this._togglz
-      .getStateOf('ENABLE_USER_MENU')
-      .subscribe((value) => (this.togglzEnableUserMenu = value))
-    this._togglz
-      .getStateOf('ORCID_ANGULAR_SEARCH')
-      .subscribe((value) => (this.togglzOrcidAngularSearch = value))
 
     this.router.events.subscribe(
       () =>
@@ -86,18 +78,12 @@ export class SearchComponent implements OnInit {
         $localize`:@@layout.public-layout.registry:registry`
       )
     ) {
-      if (!this.togglzOrcidAngularSearch) {
-        // navigate directly the window location
-        this.window.location.href =
-          '/orcid-search/quick-search/?searchQuery=' + whatToSearch
-      } else {
-        // navigate using the angular router to never leave the Angular app
-        this.router.navigate(['/orcid-search/search'], {
-          queryParams: {
-            searchQuery: whatToSearch.trim(),
-          },
-        })
-      }
+      // navigate using the angular router to never leave the Angular app
+      this.router.navigate(['/orcid-search/search'], {
+        queryParams: {
+          searchQuery: whatToSearch.trim(),
+        },
+      })
     } else {
       this.window.location.href = '/search/node/' + whatToSearch
     }

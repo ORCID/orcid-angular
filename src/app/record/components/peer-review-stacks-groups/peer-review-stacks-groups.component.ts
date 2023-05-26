@@ -19,7 +19,6 @@ import {
 } from 'src/app/types/record.local'
 import { VisibilityStrings } from '../../../types/common.endpoint'
 import { isQA } from 'src/app/shared/validators/environment-check/environment-check'
-import { TogglzService } from '../../../core/togglz/togglz.service'
 
 @Component({
   selector: 'app-peer-reviews',
@@ -70,10 +69,8 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
 
   ngOrcidPeerReview = $localize`:@@peerReview.peerReview:Peer review`
   loading = true
-  togglzPeerReviews: boolean
 
   constructor(
-    _togglz: TogglzService,
     _platform: PlatformInfoService,
     private _user: UserService,
     private _record: RecordService,
@@ -86,9 +83,6 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
         this.platform = data
         this.isMobile = data.columns4 || data.columns8
       })
-    _togglz
-      .getStateOf('ORCID_ANGULAR_LAZY_LOAD_PEER_REVIEWS')
-      .subscribe((value) => (this.togglzPeerReviews = value))
   }
 
   ngOnInit(): void {
@@ -190,27 +184,7 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
   }
 
   getVisibility(peerReview: PeerReview): VisibilityStrings {
-    let visibility
-    if (this.togglzPeerReviews) {
-      visibility = peerReview.visibility
-    } else {
-      // Validate if there are not different types of visibilities between the Peer Reviews other wise display the error
-      visibility =
-        peerReview.peerReviewDuplicateGroups[0].peerReviews[0].visibility
-          .visibility
-      peerReview.peerReviewDuplicateGroups.forEach(
-        (peerReviewDuplicateGroup) => {
-          const peerReviews = peerReviewDuplicateGroup.peerReviews.filter(
-            (p) => p.visibility.visibility !== visibility
-          )
-          if (peerReviews.length > 0) {
-            peerReview.visibilityError = true
-          }
-        }
-      )
-    }
-
-    return visibility
+    return peerReview.visibility
   }
 
   collapse(peerReview: PeerReview) {
@@ -219,17 +193,7 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
 
   expandedClicked(expanded: boolean, peerReview?: PeerReview) {
     if (peerReview) {
-      if (this.togglzPeerReviews) {
-        this.getPeerReviewSummaryByGroupId(peerReview)
-      } else {
-        if (expanded) {
-          if (!this.moreInfo.includes(peerReview.groupId)) {
-            this.moreInfo.push(peerReview.groupId)
-          }
-        } else {
-          this.moreInfo = this.moreInfo.filter((p) => p !== peerReview.groupId)
-        }
-      }
+      this.getPeerReviewSummaryByGroupId(peerReview)
     }
   }
 

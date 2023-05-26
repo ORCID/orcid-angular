@@ -1,7 +1,5 @@
 <div class="row h-end language-menu no-wrap" *ngIf="platform.columns12">
-  <app-user-menu
-    *ngIf="togglzEnableUserMenu && signinRegisterButton"
-  ></app-user-menu>
+  <app-user-menu *ngIf="signinRegisterButton"></app-user-menu>
   <app-language
     role="navigation"
     [attr.aria-label]="labelSearch"

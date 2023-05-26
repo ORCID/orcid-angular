@@ -38,7 +38,6 @@ export const menu: ApplicationMenuItemBasic[] = [
     requirements: {
       desktop: true,
       logging: false,
-      togglz: { ENABLE_USER_MENU: 'false' },
     },
     route: 'signin',
   },
@@ -48,7 +47,6 @@ export const menu: ApplicationMenuItemBasic[] = [
     requirements: {
       desktop: true,
       logging: true,
-      togglz: { ENABLE_USER_MENU: 'false' },
     },
     route: 'signout',
   },
