@@ -1,14 +1,14 @@
 ## v2.31.5 - 2023-05-29
-[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.31.4...v2.31.5)
 
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.31.4...v2.31.5)
 
 ### Fix
 
--  Temporarily remove onetrust script tags (#1965)
+- Temporarily remove onetrust script tags (#1965)
 
 ### Refactor
 
--  cancel rather than fail runs for cleaner workflow
+- cancel rather than fail runs for cleaner workflow
 
 ## v2.31.4 - 2023-05-25
 
