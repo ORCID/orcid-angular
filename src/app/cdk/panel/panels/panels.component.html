@@ -50,7 +50,10 @@
           <ng-container *ngIf="type === 'peer-review' && currentAmount !== 0">
             <span>
               ({{ reviewsNumber }}
-              <ng-container *ngIf="reviewsNumber > 1" i18n="@@peerReview.reviews">
+              <ng-container
+                *ngIf="reviewsNumber > 1"
+                i18n="@@peerReview.reviews"
+              >
                 reviews
               </ng-container>
               <ng-container
@@ -64,12 +67,12 @@
               <ng-container
                 *ngIf="currentAmount > 1"
                 i18n="@@peerReview.publicationsGrants"
-              >publications/grants</ng-container
+                >publications/grants</ng-container
               >
               <ng-container
                 *ngIf="currentAmount === 1"
                 i18n="@@peerReview.publicationGrant"
-              >publication/grant</ng-container
+                >publication/grant</ng-container
               >)
             </span>
           </ng-container>
@@ -185,7 +188,9 @@
         [disabled]="!currentAmount && !total"
       >
         <mat-icon class="large-material-icon"> sort </mat-icon>
-        <ng-container *ngIf="!isMobile" i18n="@@shared.sort"> Sort </ng-container>
+        <ng-container *ngIf="!isMobile" i18n="@@shared.sort">
+          Sort
+        </ng-container>
       </button>
       <mat-menu #menu="matMenu">
         <button
