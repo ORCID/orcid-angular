@@ -19,7 +19,7 @@
 
       <div class="text-container clickable" (click)="collapse()">
         <h3 class="activity-header orc-font-body-large">
-          <strong> {{ title }} </strong>
+          {{ title }}
           <ng-container *ngIf="type !== 'peer-review'">
             <span
               *ngIf="currentAmount && total && currentAmount !== total"
@@ -47,34 +47,33 @@
             >
             <span *ngIf="!currentAmount && currentAmount !== 0"></span>
           </ng-container>
-        </h3>
-        <ng-container *ngIf="type === 'peer-review' && currentAmount !== 0">
-          <span>
-            ({{ reviewsNumber }}
-            <ng-container *ngIf="reviewsNumber > 1" i18n="@@peerReview.reviews">
-              reviews
-            </ng-container>
-            <ng-container
-              *ngIf="reviewsNumber === 1"
-              i18n="@@peerReview.review"
-            >
-              review
-            </ng-container>
-            <ng-container i18n="@@peerReview.for"> for </ng-container>
-            {{ currentAmount }}
-            <ng-container
-              *ngIf="currentAmount > 1"
-              i18n="@@peerReview.publicationsGrants"
+          <ng-container *ngIf="type === 'peer-review' && currentAmount !== 0">
+            <span>
+              ({{ reviewsNumber }}
+              <ng-container *ngIf="reviewsNumber > 1" i18n="@@peerReview.reviews">
+                reviews
+              </ng-container>
+              <ng-container
+                *ngIf="reviewsNumber === 1"
+                i18n="@@peerReview.review"
+              >
+                review
+              </ng-container>
+              <ng-container i18n="@@peerReview.for"> for </ng-container>
+              {{ currentAmount }}
+              <ng-container
+                *ngIf="currentAmount > 1"
+                i18n="@@peerReview.publicationsGrants"
               >publications/grants</ng-container
-            >
-            <ng-container
-              *ngIf="currentAmount === 1"
-              i18n="@@peerReview.publicationGrant"
+              >
+              <ng-container
+                *ngIf="currentAmount === 1"
+                i18n="@@peerReview.publicationGrant"
               >publication/grant</ng-container
-            >)
-          </span>
-        </ng-container>
-        <ng-container> </ng-container>
+              >)
+            </span>
+          </ng-container>
+        </h3>
       </div>
     </div>
 
@@ -90,7 +89,7 @@
         <mat-icon class="large-material-icon" id="add-button">
           add_circle_outline
         </mat-icon>
-        <ng-container i18n="@@shared.add"> Add </ng-container>
+        <ng-container *ngIf="!isMobile" i18n="@@shared.add"> Add </ng-container>
       </button>
       <button
         *ngIf="
@@ -107,7 +106,7 @@
         <mat-icon class="large-material-icon add-button-multiple">
           add_circle_outline
         </mat-icon>
-        <ng-container i18n="@@shared.add"> Add </ng-container>
+        <ng-container *ngIf="!isMobile" i18n="@@shared.add"> Add </ng-container>
       </button>
       <mat-menu #menuAdd="matMenu">
         <ng-container *ngIf="type === 'education' || type === 'qualification'">
@@ -186,7 +185,7 @@
         [disabled]="!currentAmount && !total"
       >
         <mat-icon class="large-material-icon"> sort </mat-icon>
-        <ng-container i18n="@@shared.sort"> Sort </ng-container>
+        <ng-container *ngIf="!isMobile" i18n="@@shared.sort"> Sort </ng-container>
       </button>
       <mat-menu #menu="matMenu">
         <button
