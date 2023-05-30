@@ -27,16 +27,25 @@
     .text-container {
       margin-bottom: 5px;
       margin-top: 5px;
+      h3 {
+        span {
+          font-weight: normal;
+        }
+      }
     }
   }
   .controls {
     display: flex;
 
     button {
+      min-width: 40px;
       font-weight: normal;
       padding: 0 6px;
 
       mat-icon {
+        font-size: 32px;
+        height: 32px;
+        width: 32px;
         margin-right: 8px;
         margin-bottom: 2px;
       }
