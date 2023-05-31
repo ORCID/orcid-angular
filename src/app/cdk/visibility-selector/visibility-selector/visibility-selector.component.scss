@@ -14,6 +14,7 @@
   justify-content: center;
   margin-inline-end: 16px;
 }
+
 [mat-menu-item] {
   display: flex;
   align-items: center;
@@ -41,10 +42,12 @@
 .main-button-container {
   display: flex;
   align-items: center;
+
   .icon-title-container {
     min-width: 100px;
     display: flex;
     align-items: center;
+    font-weight: 400;
   }
 }
 
@@ -64,4 +67,21 @@ h1 {
   margin: 0;
   padding: 0;
   margin-bottom: 4px;
+}
+
+
+:host {
+  ::ng-deep {
+    .mat-button-disabled {
+      .icon-title-container {
+        color: initial;
+      }
+    }
+
+
+  }
+}
+
+.mat-button-disabled.main-menu {
+  border: none
 }
