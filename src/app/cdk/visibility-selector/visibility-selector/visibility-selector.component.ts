@@ -57,18 +57,21 @@ export class VisibilitySelectorComponent
   private() {
     this.privacy = 'PRIVATE'
     this.visibilityError = false
+    this.writeValue(this.privacy)
     this.onChange(this.privacy)
     this.onTouched(this.privacy)
   }
   limited() {
     this.privacy = 'LIMITED'
     this.visibilityError = false
+    this.writeValue(this.privacy)
     this.onChange(this.privacy)
     this.onTouched(this.privacy)
   }
   public() {
     this.privacy = 'PUBLIC'
     this.visibilityError = false
+    this.writeValue(this.privacy)
     this.onChange(this.privacy)
     this.onTouched(this.privacy)
   }

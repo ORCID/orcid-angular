@@ -21,6 +21,7 @@
 
 .email-input-line {
   justify-content: space-between;
+  align-items: center;
 }
 
 mat-form-field {
@@ -57,6 +58,7 @@ mat-form-field {
 
     a {
       width: 100%;
+      max-width: 240px;
     }
   }
 
