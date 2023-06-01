@@ -69,7 +69,6 @@ h1 {
   margin-bottom: 4px;
 }
 
-
 :host {
   ::ng-deep {
     .mat-button-disabled {
@@ -77,11 +76,9 @@ h1 {
         color: initial;
       }
     }
-
-
   }
 }
 
 .mat-button-disabled.main-menu {
-  border: none
+  border: none;
 }
