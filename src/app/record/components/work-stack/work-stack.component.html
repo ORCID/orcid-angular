@@ -17,7 +17,11 @@
     [ngClass]="{ last: last }"
     [defaultPutCode]="workStack.defaultPutCode.toString()"
     [putCode]="work.putCode.value"
-    [visibility]="workStack.activeVisibility"
+    [visibility]="
+      isPreferred(work)
+        ? workStack.activeVisibility
+        : work.visibility.visibility
+    "
     *ngIf="isPreferred(work) || displayTheStack"
     [isPublicRecord]="isPublicRecord"
     [editModalComponent]="worksModal"
