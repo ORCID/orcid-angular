@@ -69,6 +69,7 @@ export class PanelsComponent implements OnInit {
   @Input() labelExportButton = $localize`:@@shared.exportItems:Export Items`
   @Input() labelSortButton = $localize`:@@shared.addItem:Add Item`
   IS_QA: boolean
+  isMobile: boolean
 
   ariaLabelAscending = $localize`:@@shared.ariaLabelAscending:Ascending`
   ariaLabelDescending = $localize`:@@shared.ariaLabelDescending:Descending`
@@ -178,6 +179,9 @@ export class PanelsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this._platform.get().subscribe((platform) => {
+      this.isMobile = platform.columns4 || platform.columns8
+    })
     this.IS_QA = isQA()
   }
 }

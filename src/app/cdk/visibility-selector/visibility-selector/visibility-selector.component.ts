@@ -57,23 +57,44 @@ export class VisibilitySelectorComponent
   private() {
     this.privacy = 'PRIVATE'
     this.visibilityError = false
+    this.updateAriaLabel(this.privacy)
     this.onChange(this.privacy)
     this.onTouched(this.privacy)
   }
   limited() {
     this.privacy = 'LIMITED'
     this.visibilityError = false
+    this.updateAriaLabel(this.privacy)
     this.onChange(this.privacy)
     this.onTouched(this.privacy)
   }
   public() {
     this.privacy = 'PUBLIC'
     this.visibilityError = false
+    this.updateAriaLabel(this.privacy)
     this.onChange(this.privacy)
     this.onTouched(this.privacy)
   }
 
   writeValue(visibility: VisibilityStrings): void {
+    this.updateAriaLabel(visibility)
+    this.privacy = visibility
+  }
+  registerOnChange(fn: any): void {
+    this.onChange = fn
+  }
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn
+  }
+  setDisabledState?(isDisabled: boolean): void {
+    throw new Error('Method not implemented.')
+  }
+  navigate() {
+    this.window.open(
+      'https://support.orcid.org/hc/en-us/articles/360006897614-Visibility-settings'
+    )
+  }
+  updateAriaLabel(visibility: VisibilityStrings) {
     switch (visibility) {
       case 'PUBLIC':
         this.mainButtonLabel =
@@ -96,20 +117,5 @@ export class VisibilitySelectorComponent
       default:
         break
     }
-    this.privacy = visibility
-  }
-  registerOnChange(fn: any): void {
-    this.onChange = fn
-  }
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn
-  }
-  setDisabledState?(isDisabled: boolean): void {
-    throw new Error('Method not implemented.')
-  }
-  navigate() {
-    this.window.open(
-      'https://support.orcid.org/hc/en-us/articles/360006897614-Visibility-settings'
-    )
   }
 }

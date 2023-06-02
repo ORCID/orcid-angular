@@ -1,6 +1,28 @@
-## v2.31.6 - 2023-05-29
-[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.31.5...v2.31.6)
+## v2.31.10 - 2023-06-01
 
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.31.9...v2.31.10)
+
+### Fix
+
+- Add missing whitespace in peer review (#1972)
+
+## v2.31.9 - 2023-06-01
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.31.8...v2.31.9)
+
+## v2.31.8 - 2023-05-31
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.31.7...v2.31.8)
+
+## v2.31.7 - 2023-05-30
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.31.6...v2.31.7)
+
+- [#1967](https://github.com/ORCID/orcid-angular/pull/1967): Transifex
+
+## v2.31.6 - 2023-05-29
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.31.5...v2.31.6)
 
 ## v2.31.5 - 2023-05-29
 

@@ -1,4 +1,7 @@
 <button
+  [ngClass]="{
+    'not-editable': !editable
+  }"
   [disabled]="!editable"
   mat-button
   [matMenuTriggerFor]="menu"
@@ -31,7 +34,9 @@
         >Only me</ng-container
       >
     </div>
-    <mat-icon class="arrow-drop-down">arrow_drop_down</mat-icon>
+    <mat-icon *ngIf="editable" class="arrow-drop-down"
+      >arrow_drop_down</mat-icon
+    >
   </div>
 </button>
 <mat-menu #menu="matMenu">

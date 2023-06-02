@@ -250,7 +250,9 @@
       [id]="userInfo?.EFFECTIVE_USER_ORCID"
       [userRecord]="userRecord"
     >
-      <h3 header class="orc-font-body" i18n="@@record.countries">Countries</h3>
+      <h3 header class="orc-font-body" i18n="@@side-bar.countries">
+        Countries
+      </h3>
       <app-panel-data *ngIf="userRecord.countries.addresses.length > 0">
         <ng-container *ngIf="!isPublicRecord">
           <app-panel-element
