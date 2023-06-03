@@ -1,3 +1,9 @@
+## v2.31.11 - 2023-06-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.31.10...v2.31.11)
+
+- [#1973](https://github.com/ORCID/orcid-angular/pull/1973): Pre release add missing translations
+
 ## v2.31.10 - 2023-06-01
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.31.9...v2.31.10)
