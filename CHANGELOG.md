@@ -1,3 +1,9 @@
+## v2.31.12 - 2023-06-05
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.31.11...v2.31.12)
+
+- [#1974](https://github.com/ORCID/orcid-angular/pull/1974): Tx pull
+
 ## v2.31.11 - 2023-06-03
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.31.10...v2.31.11)
