@@ -1,3 +1,9 @@
+## v2.31.13 - 2023-06-05
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.31.12...v2.31.13)
+
+- [#1975](https://github.com/ORCID/orcid-angular/pull/1975): move-back-to-trusted-only-string
+
 ## v2.31.12 - 2023-06-05
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.31.11...v2.31.12)
