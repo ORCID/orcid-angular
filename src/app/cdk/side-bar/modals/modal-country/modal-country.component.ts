@@ -127,7 +127,7 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
           countries.addresses.push({
             putCode: key.indexOf('new-') === 0 ? null : key,
             countryName: this.countryCodes.find((x) => x.value === countryCode)
-              .key,
+              ?.key,
             iso2Country: {
               value: countryCode,
             },
