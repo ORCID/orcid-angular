@@ -31,6 +31,7 @@ import { ChangeDetectorRef } from '@angular/core'
 import { MatSelectHarness } from '@angular/material/select/testing'
 import { MatInputHarness } from '@angular/material/input/testing'
 import { VisibilitySelectorModule } from 'src/app/cdk/visibility-selector/visibility-selector.module'
+import { log } from 'console'
 
 describe('ModalCountryComponent', () => {
   let component: ModalCountryComponent
@@ -134,6 +135,7 @@ describe('ModalCountryComponent', () => {
     const countriesSelects = await loader.getAllHarnesses(MatSelectHarness)
     const countriesInputs = await loader.getAllHarnesses(MatInputHarness)
 
+    console.log(countriesSelects)
     await countriesSelects[1].open()
     await countriesSelects[1].clickOptions() //Select the first option
 
@@ -141,12 +143,10 @@ describe('ModalCountryComponent', () => {
     //   countriesSelects.map((select) => select.isDisabled())
     // )
 
-    expect(countriesForm.controls[1].value.country).toBe('Albania')
-    expect(countriesForm.controls[2].getRawValue().country).toBe(
-      'United States'
-    )
-    expect(countriesForm.controls[3].getRawValue().country).toBe('Kosovo')
-    expect(countriesForm.controls['new-0'].value.country).toBe('Afghanistan')
+    expect(countriesForm.controls[1].value.country).toBe('AL')
+    expect(countriesForm.controls[2].getRawValue().country).toBe('US')
+    expect(countriesForm.controls[3].getRawValue().country).toBe('XK')
+    expect(countriesForm.controls['new-0'].value.country).toBe('AF')
     expect(countriesInputs.length).toBe(2)
     expect(countriesSelects.length).toBe(2)
   })
@@ -159,6 +159,9 @@ function getAddresses(): Address[] {
       countryName: 'Albania',
       source: '0000-0000-0000-000X',
       sourceName: 'Test Record',
+      iso2Country: {
+        value: 'AL',
+      },
       visibility: {
         visibility: 'PUBLIC',
       },
@@ -168,6 +171,9 @@ function getAddresses(): Address[] {
       countryName: 'United States',
       source: '0000-0000-0000-000Z',
       sourceName: 'ORCID',
+      iso2Country: {
+        value: 'US',
+      },
       visibility: {
         visibility: 'PRIVATE',
       },
@@ -175,6 +181,9 @@ function getAddresses(): Address[] {
     {
       putCode: '3',
       countryName: 'Kosovo',
+      iso2Country: {
+        value: 'XK',
+      },
       source: '0000-0000-0000-000Z',
       sourceName: 'ORCID',
       visibility: {

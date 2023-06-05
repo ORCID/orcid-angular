@@ -101,7 +101,7 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
 
     countries.forEach((country) => {
       group[country.putCode] = new UntypedFormGroup({
-        country: new UntypedFormControl(country.countryName),
+        country: new UntypedFormControl(country.iso2Country.value),
         visibility: new UntypedFormControl(country.visibility.visibility, {}),
       })
     })
@@ -121,14 +121,15 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
       // Clear empty inputs
       .filter((key) => countryForm.getRawValue()[key].country)
       .forEach((key, i) => {
-        const countryName = countryForm.getRawValue()[key].country
+        const countryCode = countryForm.getRawValue()[key].country
         const visibility = countryForm.getRawValue()[key].visibility
         if (countryForm.getRawValue()[key]) {
           countries.addresses.push({
             putCode: key.indexOf('new-') === 0 ? null : key,
-            countryName,
+            countryName: this.countryCodes.find((x) => x.value === countryCode)
+              ?.key,
             iso2Country: {
-              value: this.countryCodes.find((x) => x.key === countryName).value,
+              value: countryCode,
             },
             displayIndex: i + 1,
             visibility: {
