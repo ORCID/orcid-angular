@@ -25,11 +25,8 @@
         i18n="@@register.VisibilityEveryone"
         >Everyone</ng-container
       >
-      <ng-container
-        *ngIf="privacy === 'LIMITED'"
-        i18n="@@account.trustedParties"
-      >
-        Trusted Parties</ng-container
+      <ng-container *ngIf="privacy === 'LIMITED'" i18n="@@account.trusted"
+        >Trusted</ng-container
       >
       <ng-container
         *ngIf="privacy === 'PRIVATE'"
