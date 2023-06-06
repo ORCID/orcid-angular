@@ -10,7 +10,6 @@ import {
 import { environment } from 'src/environments/environment'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { RecordPublicSideBarService } from '../record-public-side-bar/record-public-side-bar.service'
-import { log } from 'console'
 
 @Injectable({
   providedIn: 'root',
@@ -300,7 +299,6 @@ export class RecordCountriesService {
       forceReload: false,
     }
   ): Observable<CountriesEndpoint> {
-    console.log('here')
     if (options.publicRecordId) {
       return forkJoin([
         this._recordPublicSidebar.getPublicRecordSideBar(options).pipe(take(1)),
