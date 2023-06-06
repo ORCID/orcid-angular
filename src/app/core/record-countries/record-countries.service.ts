@@ -1,9 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, of, ReplaySubject } from 'rxjs'
+import { forkJoin, merge, Observable, of, ReplaySubject } from 'rxjs'
 import { retry, catchError, tap, map } from 'rxjs/operators'
 import { CountriesEndpoint } from 'src/app/types/record-country.endpoint'
-import { UserRecordOptions } from 'src/app/types/record.local'
+import {
+  SideBarPublicUserRecord,
+  UserRecordOptions,
+} from 'src/app/types/record.local'
 import { environment } from 'src/environments/environment'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { RecordPublicSideBarService } from '../record-public-side-bar/record-public-side-bar.service'
@@ -297,9 +300,19 @@ export class RecordCountriesService {
     }
   ): Observable<CountriesEndpoint> {
     if (options.publicRecordId) {
-      return this._recordPublicSidebar
-        .getPublicRecordSideBar(options)
-        .pipe(map((value) => value.countries))
+      return forkJoin([
+        this._recordPublicSidebar.getPublicRecordSideBar(options),
+        this.getCountryCodes(),
+      ]).pipe(
+        map((value) => {
+          const countries = value[0].countries
+          const countryCodes = value[1]
+          countries.addresses.forEach((country) => {
+            country.countryName = countryCodes[country.iso2Country.value] || ''
+          })
+          return countries
+        })
+      )
     }
 
     if (!this.$addresses) {

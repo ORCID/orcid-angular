@@ -99,7 +99,7 @@
                     "
                   >
                     <mat-option [value]="countryCode.value">
-                      {{ countryCode.key }}
+                      {{ countryCode.key }} here
                     </mat-option>
                   </ng-container>
                 </mat-select>
@@ -126,9 +126,8 @@
                   #descriptionInput
                   [attr.aria-label]="ariaLabelCountryLocationReadOnly"
                   matInput
-                  formControlName="country"
-                  placeholder=" {{ ngOrcidCountry }}"
                   [ngClass]="{ 'website-input': screenDirection === 'rtl' }"
+                  [value]="country.countryName || ''"
                 />
                 <mat-hint *ngIf="country.putCode.indexOf('new') < 0">
                   <app-source-hit
