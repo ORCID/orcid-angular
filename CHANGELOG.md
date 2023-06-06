@@ -1,3 +1,9 @@
+## v2.31.15 - 2023-06-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.31.14...v2.31.15)
+
+- [#1977](https://github.com/ORCID/orcid-angular/pull/1977): 8662 qa items in countries modal not displayed correctly for de pl and tr
+
 ## v2.31.14 - 2023-06-05
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.31.13...v2.31.14)
