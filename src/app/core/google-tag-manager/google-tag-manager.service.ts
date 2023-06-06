@@ -13,7 +13,6 @@ import { ItemGTM } from '../../types/item_gtm'
 import { ERROR_REPORT } from '../../errors'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { WINDOW } from 'src/app/cdk/window'
-import { log } from 'console'
 
 @Injectable({
   providedIn: 'root',
