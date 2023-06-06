@@ -1,3 +1,9 @@
+## v2.31.16 - 2023-06-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.31.15...v2.31.16)
+
+- [#1979](https://github.com/ORCID/orcid-angular/pull/1979): 8662-qa-items-in-countries-modal-not-displayed-correctly-for-de-pl-an…
+
 ## v2.31.15 - 2023-06-06
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.31.14...v2.31.15)
