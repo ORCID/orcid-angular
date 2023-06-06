@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { forkJoin, merge, Observable, of, ReplaySubject } from 'rxjs'
-import { retry, catchError, tap, map } from 'rxjs/operators'
+import { retry, catchError, tap, map, take } from 'rxjs/operators'
 import { CountriesEndpoint } from 'src/app/types/record-country.endpoint'
 import {
   SideBarPublicUserRecord,
@@ -301,15 +301,17 @@ export class RecordCountriesService {
   ): Observable<CountriesEndpoint> {
     if (options.publicRecordId) {
       return forkJoin([
-        this._recordPublicSidebar.getPublicRecordSideBar(options),
-        this.getCountryCodes(),
+        this._recordPublicSidebar.getPublicRecordSideBar(options).pipe(take(1)),
+        this.getCountryCodes().pipe(take(1)),
       ]).pipe(
         map((value) => {
           const countries = value[0].countries
           const countryCodes = value[1]
           countries.addresses.forEach((country) => {
             //Override backend country name translations
-            country.countryName = countryCodes[country.iso2Country.value] || ''
+            country.countryName =
+              countryCodes.find((x) => x.value === country.iso2Country.value)
+                .key || ''
           })
           return countries
         })
@@ -325,22 +327,37 @@ export class RecordCountriesService {
       this.$addresses.next(<CountriesEndpoint>undefined)
     }
 
-    this._http
-      .get<CountriesEndpoint>(
-        environment.API_WEB + `account/countryForm.json`,
-        {
-          headers: this.headers,
-        }
-      )
+    forkJoin([
+      this._http
+        .get<CountriesEndpoint>(
+          environment.API_WEB + `account/countryForm.json`,
+          {
+            headers: this.headers,
+          }
+        )
+        .pipe(take(1)),
+      this.getCountryCodes().pipe(take(1)),
+    ])
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         catchError(() => of({ addresses: [] } as CountriesEndpoint)),
         tap((value) => {
-          this.reverseSort(value)
+          this.reverseSort(value[0])
         }),
         tap((value) => {
-          this.$addresses.next(value)
+          this.$addresses.next(value[0])
+        }),
+        map((value) => {
+          const countries = value[0] as CountriesEndpoint
+          const countryCodes = value[1] as { key: string; value: string }[]
+          countries.addresses.forEach((country) => {
+            //Override backend country name translations
+            country.countryName =
+              countryCodes.find((x) => x.value === country.iso2Country.value)
+                .key || ''
+          })
+          return countries
         })
       )
       .subscribe()
