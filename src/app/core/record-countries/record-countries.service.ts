@@ -308,6 +308,7 @@ export class RecordCountriesService {
           const countries = value[0].countries
           const countryCodes = value[1]
           countries.addresses.forEach((country) => {
+            //Overrride backend country name translations
             country.countryName = countryCodes[country.iso2Country.value] || ''
           })
           return countries
