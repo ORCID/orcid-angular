@@ -33,6 +33,7 @@ export enum AffiliationUIGroupsTypes {
   EDUCATION_AND_QUALIFICATION = 'EDUCATION_AND_QUALIFICATION',
   INVITED_POSITION_AND_DISTINCTION = 'INVITED_POSITION_AND_DISTINCTION',
   MEMBERSHIP_AND_SERVICE = 'MEMBERSHIP_AND_SERVICE',
+  PROFESSIONAL_ACTIVITIES = 'PROFESSIONAL_ACTIVITIES',
 }
 
 export interface AffiliationUIGroup {
@@ -124,6 +125,7 @@ export enum AffiliationType {
   'distinction' = 'distinction',
   'membership' = 'membership',
   'service' = 'service',
+  'professional-activities' = 'professional-activities'
 }
 
 export const AffiliationTypeLabel = {

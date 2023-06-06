@@ -34,7 +34,7 @@
           trackBy: trackByAffiliationGroup
         "
         [affiliationStack]="affiliationGroup"
-        [type]="'employment'"
+        [type]="affiliationType.employment"
         [userInfo]="userInfo"
       ></app-affiliation-stack>
     </ng-container>
@@ -106,9 +106,7 @@
           "
           [affiliationStack]="affiliationGroup"
           [type]="
-            affiliationGroup.affiliationType === 'EDUCATION'
-              ? 'education'
-              : 'qualification'
+            affiliationGroup.affiliationType | affiliationType
           "
           [userInfo]="userInfo"
         ></app-affiliation-stack>
@@ -138,6 +136,7 @@
 
   <ng-container
     *ngIf="
+      !professionalActivitiesTogglz &&
       !(
         isPublicRecord &&
         getAffiliationType('INVITED_POSITION_AND_DISTINCTION')?.affiliationGroup
@@ -177,9 +176,7 @@
           "
           [affiliationStack]="affiliationGroup"
           [type]="
-            affiliationGroup.affiliationType === 'DISTINCTION'
-              ? 'distinction'
-              : 'invited-position'
+            affiliationGroup.affiliationType | affiliationType
           "
           [userInfo]="userInfo"
         ></app-affiliation-stack>
@@ -208,6 +205,7 @@
 
   <ng-container
     *ngIf="
+      !professionalActivitiesTogglz &&
       !(
         isPublicRecord &&
         getAffiliationType('MEMBERSHIP_AND_SERVICE')?.affiliationGroup
@@ -245,9 +243,7 @@
           "
           [affiliationStack]="affiliationGroup"
           [type]="
-            affiliationGroup.affiliationType === 'MEMBERSHIP'
-              ? 'membership'
-              : 'service'
+            affiliationGroup.affiliationType | affiliationType
           "
           [userInfo]="userInfo"
         ></app-affiliation-stack>
@@ -272,4 +268,69 @@
       </ng-container>
     </app-panels>
   </ng-container>
+
+  <ng-container
+    *ngIf="
+      professionalActivitiesTogglz &&
+      !(
+        isPublicRecord &&
+        getAffiliationType('INVITED_POSITION_AND_DISTINCTION')?.affiliationGroup
+          ?.length === 0 &&
+        getAffiliationType('MEMBERSHIP_AND_SERVICE')?.affiliationGroup
+          ?.length === 0
+      )
+    "
+  >
+    <!-- A PANELS COMPONENT FOR INVITED_POSITION_AND_DISTINCTION AND MEMBERSHIP_AND_SERVICE -->
+    <app-panels
+      [loading]="$loading | async"
+      class="row"
+      [title]="affiliationTypeLabel('PROFESSIONAL_ACTIVITIES')"
+      [type]="'professional-activities'"
+      [userRecord]="userRecord"
+      [currentAmount]="getAffiliationType('PROFESSIONAL_ACTIVITIES')?.affiliationGroup?.length"
+      [(expandedContent)]="expandedContent['PROFESSIONAL_ACTIVITIES']"
+      (expandedContentChange)="expandedContentChange.emit(expandedContent)"
+      [isPublicRecord]="isPublicRecord"
+      [sortTypes]="['title', 'type', 'start', 'end']"
+      (sort)="sortEvent($event, 'PROFESSIONAL_ACTIVITIES')"
+      id="cy-affiliation-professional-activities"
+    >
+      <ng-container
+        *ngIf="getAffiliationType('PROFESSIONAL_ACTIVITIES')?.affiliationGroup?.length > 0"
+      >
+        <app-affiliation-stack
+          [userRecord]="userRecord"
+          [isPublicRecord]="isPublicRecord"
+          *ngFor="
+            let affiliationGroup of getAffiliationType('PROFESSIONAL_ACTIVITIES').affiliationGroup;
+            trackBy: trackByAffiliationGroup
+          "
+          [affiliationStack]="affiliationGroup"
+          [type]="affiliationGroup.affiliationType | affiliationType"
+          [userInfo]="userInfo"
+        ></app-affiliation-stack>
+      </ng-container>
+      <ng-container
+        *ngIf="
+          getAffiliationType('PROFESSIONAL_ACTIVITIES')?.affiliationGroup?.length === 0
+        "
+      >
+        <div class="orc-font-body-small">
+          <p i18n="@@shared.addInvitedPositionsMemberships">
+            Add the invited positions or memberships you have held, awards or prizes you have received, and donations of time and resources given in service of organizations or institutions.
+          </p>
+          <a
+            class="underline"
+            target="_blank"
+            href="https://support.orcid.org/hc/en-us/articles/360008897654-Add-an-invited-position-or-distinction-to-your-ORCID-record"
+            i18n="@@shared.invitedPositionsLearnMore"
+          >
+            Learn more about adding professional activities to your ORCID record
+          </a>
+        </div>
+      </ng-container>
+    </app-panels>
+  </ng-container>
+
 </section>

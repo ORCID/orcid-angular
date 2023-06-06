@@ -106,6 +106,17 @@ export class AffiliationsSortService {
             affiliationGroup.reverse()
           }
         }
+
+        if (by === 'type') {
+          affiliationGroup.sort((a, b) => {
+            return (
+              '' + a.affiliationType
+            ).localeCompare('' + b.affiliationType)
+          })
+          if (!ascending) {
+            affiliationGroup.reverse()
+          }
+        }
       }
     })
     return affiliationGroups
