@@ -116,7 +116,7 @@ export class AffiliationStacksGroupsComponent implements OnInit {
       case AffiliationUIGroupsTypes.MEMBERSHIP_AND_SERVICE:
         return $localize`:@@shared.membership:Membership and service`
       case AffiliationUIGroupsTypes.PROFESSIONAL_ACTIVITIES:
-        return $localize`:@@shared.professionalActivities:Professional Activities`
+        return $localize`:@@shared.professionalActivities:Professional activities`
     }
   }
 
