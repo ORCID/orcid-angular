@@ -71,6 +71,7 @@ export class PanelComponent implements OnInit {
     | 'activities'
     | 'funding'
     | 'research-resources'
+    | 'professional-activities'
   @Input() userRecord: UserRecord
   @Input() defaultPutCode: any
   @Input() putCode: any
@@ -217,7 +218,8 @@ export class PanelComponent implements OnInit {
       this.type === 'funding' ||
       this.type === 'works' ||
       this.type === 'research-resources' ||
-      this.type === 'peer-review'
+      this.type === 'peer-review' ||
+      this.type === 'professional-activities'
     )
   }
 

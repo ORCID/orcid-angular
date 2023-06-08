@@ -42,6 +42,7 @@ export class PanelsComponent implements OnInit {
     | 'peer-review'
     | 'sub-peer-review'
     | 'funding'
+    | 'professional-activities'
     | 'research-resources' = 'activities'
   @Input() userRecord: UserRecord
   @Input() currentAmount
@@ -170,7 +171,8 @@ export class PanelsComponent implements OnInit {
       this.type === 'membership' ||
       this.type === 'funding' ||
       this.type === 'works' ||
-      this.type === 'peer-review'
+      this.type === 'peer-review' ||
+      this.type === 'professional-activities'
     )
   }
 

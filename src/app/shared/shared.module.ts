@@ -14,7 +14,7 @@ import { CopyOnClickComponent } from './components/copy-on-click/copy-on-click.c
 import { OfflineMessageComponent } from './components/offline-message/offline-message.component'
 import { ShowingOfComponent } from './components/showing-of/showing-of.component'
 import { CopyOnClickDirective } from './directives/copy-on-click/copy-on-click.directive'
-import { AffiliationTypeLabelPipe } from './pipes/affiliation-type/affiliation-type-label.pipe'
+import { AffiliationTypeLabelPipe } from './pipes/affiliation-type-label/affiliation-type-label.pipe'
 import { CityRegionCountry } from './pipes/city-region-country/city-region-country.pipe'
 import { FormatBibtex } from './pipes/format-bibtex/format-bibtex.pipe'
 import { ContributorsPipe } from './pipes/contributors-pipe/contributors.pipe'
@@ -46,7 +46,8 @@ import { AppPanelsAddAriaLabelPipe } from './pipes/app-panels-add-aria-label/app
 import { AppPanelsSortAriaLabelPipe } from './pipes/app-panels-sort-aria-label/app-panels-sort-aria-label.pipe'
 import { AppPanelActivityActionAriaLabelPipe } from './pipes/app-panel-activity-action-aria-label/app-panel-activity-action-aria-label.pipe'
 import { SortByPipe } from './pipes/sort-by/sort-by.pipe'
-import { AffiliationLabelPipe } from './pipes/affiliation-label.pipe'
+import { AffiliationLabelPipe } from './pipes/affiliation-label.pipe';
+import { AffiliationTypePipe } from './pipes/affiliation-type/affiliation-type.pipe'
 @NgModule({
   imports: [
     CommonModule,
@@ -93,6 +94,7 @@ import { AffiliationLabelPipe } from './pipes/affiliation-label.pipe'
     AppPanelActivityActionAriaLabelPipe,
     SortByPipe,
     AffiliationLabelPipe,
+    AffiliationTypePipe,
   ],
   exports: [
     CommonModule,
@@ -137,6 +139,7 @@ import { AffiliationLabelPipe } from './pipes/affiliation-label.pipe'
     AppPanelsSortAriaLabelPipe,
     AppPanelActivityActionAriaLabelPipe,
     SortByPipe,
+    AffiliationTypePipe,
   ],
   providers: [], // Should not provide anything
 })

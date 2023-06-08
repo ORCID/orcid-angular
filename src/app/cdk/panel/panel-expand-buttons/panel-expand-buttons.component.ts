@@ -32,7 +32,7 @@ export class PanelExpandButtonsComponent implements OnInit {
     | 'funding'
     | 'research-resources'
     | 'research-resources-stack'
-
+    | 'professional-activities'
   constructor() {}
 
   ngOnInit(): void {}
