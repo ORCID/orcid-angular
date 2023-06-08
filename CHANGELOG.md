@@ -1,3 +1,13 @@
+## v2.31.19 - 2023-06-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.31.18...v2.31.19)
+
+### Fix
+
+- Update text link in footer (#1983)
+- Remove double white space in translations (#1982)
+- Rollback onetrust (#1969)
+
 ## v2.31.18 - 2023-06-07
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.31.17...v2.31.18)
