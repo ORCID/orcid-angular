@@ -46,7 +46,7 @@ import { AppPanelsAddAriaLabelPipe } from './pipes/app-panels-add-aria-label/app
 import { AppPanelsSortAriaLabelPipe } from './pipes/app-panels-sort-aria-label/app-panels-sort-aria-label.pipe'
 import { AppPanelActivityActionAriaLabelPipe } from './pipes/app-panel-activity-action-aria-label/app-panel-activity-action-aria-label.pipe'
 import { SortByPipe } from './pipes/sort-by/sort-by.pipe'
-import { AffiliationLabelPipe } from './pipes/affiliation-label.pipe';
+import { AffiliationLabelPipe } from './pipes/affiliation-label.pipe'
 import { AffiliationTypePipe } from './pipes/affiliation-type/affiliation-type.pipe'
 @NgModule({
   imports: [

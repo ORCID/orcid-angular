@@ -124,12 +124,16 @@
           </button>
         </ng-container>
         <ng-container
-          *ngIf="type === 'professional-activities' || type === 'invited-position' || type === 'distinction'"
+          *ngIf="
+            type === 'professional-activities' ||
+            type === 'invited-position' ||
+            type === 'distinction'
+          "
         >
           <button mat-menu-item (click)="add('membership')">
             <mat-icon class="mat-18">card_membership</mat-icon>
             <ng-container i18n="@@shared.addMembership"
-            >Add Membership</ng-container
+              >Add Membership</ng-container
             >
           </button>
           <button mat-menu-item (click)="add('service')">

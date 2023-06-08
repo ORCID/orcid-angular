@@ -109,9 +109,9 @@ export class AffiliationsSortService {
 
         if (by === 'type') {
           affiliationGroup.sort((a, b) => {
-            return (
-              '' + a.affiliationType
-            ).localeCompare('' + b.affiliationType)
+            return ('' + a.affiliationType).localeCompare(
+              '' + b.affiliationType
+            )
           })
           if (!ascending) {
             affiliationGroup.reverse()

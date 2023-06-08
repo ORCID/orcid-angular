@@ -156,10 +156,17 @@ export class RecordAffiliationService {
   }
 
   changeUserRecordContext(userRecordContext: UserRecordOptions, type: string) {
-    const professionalActivities = this.lastEmittedValue.find(profileAffiliation => profileAffiliation.type === 'PROFESSIONAL_ACTIVITIES')
+    const professionalActivities = this.lastEmittedValue.find(
+      (profileAffiliation) =>
+        profileAffiliation.type === 'PROFESSIONAL_ACTIVITIES'
+    )
     const lastEmittedProfessional = [
-      ...getAffiliationType(this.lastEmittedValue, 'INVITED_POSITION_AND_DISTINCTION').affiliationGroup,
-      ...getAffiliationType(this.lastEmittedValue, 'MEMBERSHIP_AND_SERVICE').affiliationGroup,
+      ...getAffiliationType(
+        this.lastEmittedValue,
+        'INVITED_POSITION_AND_DISTINCTION'
+      ).affiliationGroup,
+      ...getAffiliationType(this.lastEmittedValue, 'MEMBERSHIP_AND_SERVICE')
+        .affiliationGroup,
     ]
 
     if (professionalActivities) {
@@ -167,7 +174,7 @@ export class RecordAffiliationService {
     } else {
       this.lastEmittedValue.push({
         type: 'PROFESSIONAL_ACTIVITIES',
-        affiliationGroup: lastEmittedProfessional
+        affiliationGroup: lastEmittedProfessional,
       })
     }
     const value = this._affiliationsSortService.transform(

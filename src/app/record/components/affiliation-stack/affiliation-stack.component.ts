@@ -6,7 +6,8 @@ import { RecordAffiliationService } from 'src/app/core/record-affiliations/recor
 import { OrgDisambiguated, UserInfo } from 'src/app/types'
 import {
   Affiliation,
-  AffiliationGroup, AffiliationType,
+  AffiliationGroup,
+  AffiliationType,
   AffiliationUIGroup,
 } from 'src/app/types/record-affiliation.endpoint'
 import { UserRecord } from 'src/app/types/record.local'

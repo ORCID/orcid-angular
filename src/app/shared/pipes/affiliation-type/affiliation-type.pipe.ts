@@ -1,11 +1,10 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core'
 import { AffiliationType } from '../../../types/record-affiliation.endpoint'
 
 @Pipe({
-  name: 'affiliationType'
+  name: 'affiliationType',
 })
 export class AffiliationTypePipe implements PipeTransform {
-
   transform(value: string): AffiliationType {
     switch (value) {
       case 'EDUCATION':
@@ -22,5 +21,4 @@ export class AffiliationTypePipe implements PipeTransform {
         return AffiliationType['invited-position']
     }
   }
-
 }

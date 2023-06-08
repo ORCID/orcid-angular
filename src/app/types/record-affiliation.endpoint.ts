@@ -125,7 +125,7 @@ export enum AffiliationType {
   'distinction' = 'distinction',
   'membership' = 'membership',
   'service' = 'service',
-  'professional-activities' = 'professional-activities'
+  'professional-activities' = 'professional-activities',
 }
 
 export const AffiliationTypeLabel = {

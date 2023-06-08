@@ -5,7 +5,8 @@ import { takeUntil } from 'rxjs/operators'
 import { RecordAffiliationService } from 'src/app/core/record-affiliations/record-affiliations.service'
 import { RecordService } from 'src/app/core/record/record.service'
 import {
-  AffiliationGroup, AffiliationType,
+  AffiliationGroup,
+  AffiliationType,
   AffiliationUIGroup,
   AffiliationUIGroupsTypes,
 } from 'src/app/types/record-affiliation.endpoint'
@@ -83,14 +84,19 @@ export class AffiliationStacksGroupsComponent implements OnInit {
             this.getAffiliationType('MEMBERSHIP_AND_SERVICE')?.affiliationGroup
               .length
           this.total.emit(this.affiliationsCount)
-          const professionalActivities = this.profileAffiliationUiGroups.find(profileAffiliation => profileAffiliation.type === 'PROFESSIONAL_ACTIVITIES')
+          const professionalActivities = this.profileAffiliationUiGroups.find(
+            (profileAffiliation) =>
+              profileAffiliation.type === 'PROFESSIONAL_ACTIVITIES'
+          )
           if (!professionalActivities) {
             this.profileAffiliationUiGroups.push({
               type: 'PROFESSIONAL_ACTIVITIES',
               affiliationGroup: [
-                ...this.getAffiliationType('INVITED_POSITION_AND_DISTINCTION')?.affiliationGroup,
-                ...this.getAffiliationType('MEMBERSHIP_AND_SERVICE')?.affiliationGroup,
-              ]
+                ...this.getAffiliationType('INVITED_POSITION_AND_DISTINCTION')
+                  ?.affiliationGroup,
+                ...this.getAffiliationType('MEMBERSHIP_AND_SERVICE')
+                  ?.affiliationGroup,
+              ],
             })
           }
         }

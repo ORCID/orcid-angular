@@ -105,9 +105,7 @@
             trackBy: trackByAffiliationGroup
           "
           [affiliationStack]="affiliationGroup"
-          [type]="
-            affiliationGroup.affiliationType | affiliationType
-          "
+          [type]="affiliationGroup.affiliationType | affiliationType"
           [userInfo]="userInfo"
         ></app-affiliation-stack>
       </ng-container>
@@ -175,9 +173,7 @@
             trackBy: trackByAffiliationGroup
           "
           [affiliationStack]="affiliationGroup"
-          [type]="
-            affiliationGroup.affiliationType | affiliationType
-          "
+          [type]="affiliationGroup.affiliationType | affiliationType"
           [userInfo]="userInfo"
         ></app-affiliation-stack>
       </ng-container>
@@ -242,9 +238,7 @@
             trackBy: trackByAffiliationGroup
           "
           [affiliationStack]="affiliationGroup"
-          [type]="
-            affiliationGroup.affiliationType | affiliationType
-          "
+          [type]="affiliationGroup.affiliationType | affiliationType"
           [userInfo]="userInfo"
         ></app-affiliation-stack>
       </ng-container>
@@ -288,7 +282,9 @@
       [title]="affiliationTypeLabel('PROFESSIONAL_ACTIVITIES')"
       [type]="'professional-activities'"
       [userRecord]="userRecord"
-      [currentAmount]="getAffiliationType('PROFESSIONAL_ACTIVITIES')?.affiliationGroup?.length"
+      [currentAmount]="
+        getAffiliationType('PROFESSIONAL_ACTIVITIES')?.affiliationGroup?.length
+      "
       [(expandedContent)]="expandedContent['PROFESSIONAL_ACTIVITIES']"
       (expandedContentChange)="expandedContentChange.emit(expandedContent)"
       [isPublicRecord]="isPublicRecord"
@@ -297,13 +293,18 @@
       id="cy-affiliation-professional-activities"
     >
       <ng-container
-        *ngIf="getAffiliationType('PROFESSIONAL_ACTIVITIES')?.affiliationGroup?.length > 0"
+        *ngIf="
+          getAffiliationType('PROFESSIONAL_ACTIVITIES')?.affiliationGroup
+            ?.length > 0
+        "
       >
         <app-affiliation-stack
           [userRecord]="userRecord"
           [isPublicRecord]="isPublicRecord"
           *ngFor="
-            let affiliationGroup of getAffiliationType('PROFESSIONAL_ACTIVITIES').affiliationGroup;
+            let affiliationGroup of getAffiliationType(
+              'PROFESSIONAL_ACTIVITIES'
+            ).affiliationGroup;
             trackBy: trackByAffiliationGroup
           "
           [affiliationStack]="affiliationGroup"
@@ -313,12 +314,15 @@
       </ng-container>
       <ng-container
         *ngIf="
-          getAffiliationType('PROFESSIONAL_ACTIVITIES')?.affiliationGroup?.length === 0
+          getAffiliationType('PROFESSIONAL_ACTIVITIES')?.affiliationGroup
+            ?.length === 0
         "
       >
         <div class="orc-font-body-small">
           <p i18n="@@shared.addInvitedPositionsMemberships">
-            Add the invited positions or memberships you have held, awards or prizes you have received, and donations of time and resources given in service of organizations or institutions.
+            Add the invited positions or memberships you have held, awards or
+            prizes you have received, and donations of time and resources given
+            in service of organizations or institutions.
           </p>
           <a
             class="underline"
@@ -332,5 +336,4 @@
       </ng-container>
     </app-panels>
   </ng-container>
-
 </section>
