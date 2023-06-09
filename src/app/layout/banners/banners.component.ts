@@ -41,7 +41,6 @@ export class BannersComponent implements OnInit {
         (platform) =>
           (this.showUnsupportedBrowserBanner = platform.unsupportedBrowser)
       )
-
   }
 
   updateClosableMessage() {
