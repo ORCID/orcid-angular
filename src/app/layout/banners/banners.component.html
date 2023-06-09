@@ -1,29 +1,4 @@
 <app-banner
-  ariaLabel="Cookies policy"
-  *ngIf="showCookieBanner"
-  (dismiss)="showCookieBanner = false"
-  [dismissCookie]="'orcidCookiePolicyAlert'"
-  [dismissCookieTime]="365"
-  [canDismiss]="true"
-  ><ng-container i18n="@@common.cookies.orcid_uses">
-    ORCID uses cookies to improve your experience and to help us understand how
-    you use our websites.</ng-container
-  >
-  <a
-    target="common.cookies.learn_more"
-    href="{{ environment.INFO_SITE + 'privacy-policy#TrackingTechnology' }}"
-    i18n="@@common.cookies.learn_more"
-    class="mat-button-font black-url"
-  >
-    Learn more about how we use cookies</a
-  >.
-
-  <label class="closeButton" i18n="@@common.cookies.click_dismiss"
-    >Dismiss</label
-  >
-</app-banner>
-
-<app-banner
   *ngIf="showUnsupportedBrowserBanner"
   [canDismiss]="false"
   ariaLabel="Unsupported browser"
