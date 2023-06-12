@@ -1,8 +1,8 @@
-import { ScopePathTypePipe } from './scope-path-type.pipe';
+import { ScopePathTypePipe } from './scope-path-type.pipe'
 
 describe('ScopePathTypePipe', () => {
   it('create an instance', () => {
-    const pipe = new ScopePathTypePipe();
-    expect(pipe).toBeTruthy();
-  });
-});
+    const pipe = new ScopePathTypePipe()
+    expect(pipe).toBeTruthy()
+  })
+})

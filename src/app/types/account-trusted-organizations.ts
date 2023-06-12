@@ -74,5 +74,5 @@ export const ScopePathTypeLabel = {
   [ScopePathType.PERSON_UPDATE]: $localize`:@@account.scopePathType.personUpdate:Add/update other information about you (country, keywords, etc.)`,
   [ScopePathType.READ_LIMITED]: $localize`:@@account.scopePathType.readLimited:Read your information with visibility set to Trusted Parties`,
   [ScopePathType.READ_PUBLIC]: $localize`:@@account.scopePathType.readPublic:Read public info only`,
-  [ScopePathType.WEBHOOK]: $localize`:@@account.scopePathType.webhook:Notifies Application if there are changes to your record`
+  [ScopePathType.WEBHOOK]: $localize`:@@account.scopePathType.webhook:Notifies Application if there are changes to your record`,
 }
