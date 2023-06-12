@@ -1,0 +1,281 @@
+<app-top-bar-my-public-record-preview></app-top-bar-my-public-record-preview>
+<div class="container no-padding">
+  <div class="row">
+    <app-side-bar [orcidId]="true" class="col l3 m8 s4"></app-side-bar>
+    <main id="main" class="col l9 m8 s4 orc-font-body-small">
+      <div class="loading-container">
+        <mat-progress-spinner *ngIf="this.loading" color="primary" mode="indeterminate" class="col">
+        </mat-progress-spinner>
+      </div>
+      <ng-container
+        *ngIf="developerToolsEnable && !this.loading"
+        [formGroup]="form"
+      >
+        <h1>Developer tools</h1>
+
+        <div class="info">
+          <div class="col">
+            <mat-icon class="large-material-icon">info</mat-icon>
+          </div>
+          <div class="col l11 m6 s3">
+            <strong i18n="@@account.warningDuplicated">
+              You’ve registered for your ORCID Public API credentials
+            </strong>
+
+            <p>
+              Add your application details and one or more redirect URIs in the
+              form below. Once these details are saved we’ll generate your
+              client ID and secret so you can start using the Public API right
+              away.
+            </p>
+          </div>
+        </div>
+
+        <h2 class="orc-font-body-large">Application details</h2>
+        <hr />
+
+        <div class="row">
+          <label
+            class="row mat-caption"
+            [ngClass]="{
+              error:
+                form.controls.displayName?.invalid &&
+                form.controls.displayName?.touched
+            }"
+          >
+            <strong i18n="@@xxx.displayName">Application name</strong>
+          </label>
+          <mat-form-field appearance="outline" class="mat-form-field-min">
+            <input matInput formControlName="displayName" type="text" />
+            <mat-error
+              *ngIf="form.hasError('required', 'displayName')"
+              i18n="@@xxx.accountCannotBeEmpty"
+            >
+              Application name cannot be empty
+            </mat-error>
+            <mat-hint
+              >The name shown to users on the OAuth authorization
+              screen</mat-hint
+            >
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <label
+            class="row mat-caption"
+            [ngClass]="{
+              error:
+                form.controls.website?.invalid && form.controls.website?.touched
+            }"
+          >
+            <strong i18n="@@xxx.website">Application URL</strong>
+          </label>
+          <mat-form-field appearance="outline" class="mat-form-field-min">
+            <input matInput formControlName="website" type="text" />
+            <mat-error
+              *ngIf="form.hasError('required', 'website')"
+              i18n="@@xxx.accountCannotBeEmpty"
+            >
+              Website name cannot be empty
+            </mat-error>
+            <mat-error
+              *ngIf="form.hasError('pattern', 'website')"
+              i18n="@@xxx.accountCannotBeEmpty"
+            >
+              Invalid website
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <label
+            class="row mat-caption"
+            [ngClass]="{
+              error:
+                form.controls.shortDescription?.invalid &&
+                form.controls.shortDescription?.touched
+            }"
+          >
+            <strong i18n="@@xxx.shortDescription">Application URL</strong>
+          </label>
+          <mat-form-field appearance="outline" class="mat-form-field-min">
+            <textarea
+              formControlName="shortDescription"
+              maxlength="1000"
+              id="api-description"
+              matInput
+              [cdkTextareaAutosize]="true"
+              cdkAutosizeMinRows="5"
+              cdkAutosizeMaxRows="1000"
+            >
+            </textarea>
+            <mat-error
+              *ngIf="form.hasError('required', 'shortDescription')"
+              i18n="@@xxx.accountCannotBeEmpty"
+            >
+              Application description cannot be empty
+            </mat-error>
+            <mat-hint
+              >The description shown to users on the OAuth authorization screen.
+              Maximum 1000 characters.</mat-hint
+            >
+          </mat-form-field>
+        </div>
+
+        <h2>Redirect URIs</h2>
+        <hr />
+
+        <p>
+          Once the user has authorized your application, they will be returned
+          to a URI that you specify. You must provide these URIs in advance or
+          your integration users will experience an error.
+        </p>
+
+        <div class="info">
+          <div class="col">
+            <mat-icon class="large-material-icon">info</mat-icon>
+          </div>
+          <div class="col l11 m6 s3">
+            <strong i18n="@@account.warningDuplicated">Please note</strong>
+            <ul>
+              <li>
+                Only <strong>HTTPS URIs</strong> are accepted in production
+              </li>
+              <li>
+                Domains registered <strong>MUST</strong> exactly match the
+                domains used, including subdomains
+              </li>
+              <li>
+                <strong
+                  >Register all redirect URIs fully where possible.</strong
+                >
+                This is the most secure option and what we recommend. For more
+                information about redirect URIs, please see our redirect URI FAQ
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="warn" *ngIf="triedToSaveWithoutUrls">
+          <div class="col">
+            <mat-icon class="large-material-icon">info</mat-icon>
+          </div>
+          <div class="col l11 m6 s3">
+            <p i18n="@@account.warningDuplicated">
+              Please add a redirect URI before saving your application
+            </p>
+          </div>
+        </div>
+
+        <mat-error
+          *ngIf="
+            form.hasError('forbiddenLength', 'redirectUris') && formWasSummited
+          "
+          i18n="@@xxx.accountCannotBeEmpty"
+        >
+          You should provide at least one redirect URI
+        </mat-error>
+        <ng-container formArrayName="redirectUris">
+          <ng-container
+            *ngFor="let redirectUri of redirectUris.controls; index as i"
+          >
+            <mat-form-field appearance="outline" class="mat-form-field-min">
+              <input
+                matInput
+                [formControlName]="i"
+                type="text"
+                placeholder="eg: https://orcid.org
+          "
+              />
+              <mat-error
+                *ngIf="form.hasError('required', ['redirectUris', i])"
+                i18n="@@xxx.accountCannotBeEmpty"
+              >
+                Redirect URI cannot be empty
+              </mat-error>
+              <mat-error
+                *ngIf="form.hasError('pattern', ['redirectUris', i])"
+                i18n="@@xxx.accountCannotBeEmpty"
+              >
+                Invalid redirect URL
+              </mat-error>
+            </mat-form-field>
+
+            <button
+              *ngIf="redirectUris.controls.length > 1"
+              class="delete-button"
+              (click)="removeRedirectUri(i)"
+              mat-icon-button
+              [attr.aria-label]="
+                ariaLabelDelete + ' ' + (redirectUri.value || '')
+              "
+            >
+              <mat-icon
+                class="material-icons-outlined extra-large-material-icon"
+                >delete
+              </mat-icon>
+            </button>
+          </ng-container>
+        </ng-container>
+
+        <div class="row">
+          <a
+            id="add-link"
+            class="col add-more no-gutters undeline-link"
+            (click)="addRedirectUri()"
+          >
+            <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
+            <span class="mat-body-1">
+              <ng-container i18n="@@topBar.addAnotherLink">
+                Add another redirect URI
+              </ng-container>
+            </span>
+          </a>
+        </div>
+
+        <p>
+          <button
+            mat-raised-button
+            color="primary"
+            id="cy-register-for-public-api"
+            (click)="save()"
+          >
+            Save application and generate my client ID and secret
+          </button>
+        </p>
+        <!-- 
+      panelId="peer-review-stacks"
+      class="top-bar"
+      [type]="'peer-review'"
+      [editable]="false"
+      [openState]="authRequest"
+      [expandButtonsPosition]="'left'"
+      (openStateChange)="expandedClicked($event)"
+      [editableVisibilityControl]="true"
+      #PanelComponent -->
+        <app-code-panel [title]="labelAuthorizeRequest">
+          <p>
+            Provides an authorization code that can be exchanged for an access
+            token and an authenticated ORCID iD.
+          </p>
+          Endpoint Scope Response type code
+
+          <strong>Ednpoint</strong>
+          <p>https://sandbox.orcid.org/oauth/authorize</p>
+
+          <strong>Scope</strong>
+          <p>/authenticate</p>
+
+          <strong>Response</strong>
+          <p>code</p>
+        </app-code-panel>
+        <app-code-panel [title]="labelTokenRequest"> </app-code-panel>
+        <app-code-panel [title]="labelOpenIdImplicitRequest"> </app-code-panel>
+      </ng-container>
+
+      <app-terms-of-use
+        *ngIf="!developerToolsEnable && !this.loading"
+        (developerToolsEnable)="refreshUserInfo()"
+      ></app-terms-of-use>
+    </main>
+  </div>
+</div>

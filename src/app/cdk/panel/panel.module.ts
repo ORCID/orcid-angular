@@ -43,7 +43,6 @@ import { VisibilitySelectorModule } from '../visibility-selector/visibility-sele
     MatIconModule,
     MatButtonModule,
     MatTooltipModule,
-    MatDialogModule,
     MatDividerModule,
     MatMenuModule,
     MatCheckboxModule,
@@ -53,6 +52,8 @@ import { VisibilitySelectorModule } from '../visibility-selector/visibility-sele
     MatProgressBarModule,
     SharedModule,
     A11yLinkModule,
+    MatDialogModule,
+
   ],
   exports: [
     PanelComponent,

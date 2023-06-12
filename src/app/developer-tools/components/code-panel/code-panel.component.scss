@@ -1,0 +1,16 @@
+:host {
+  width: 100%;
+  margin-top: 16px;
+  word-break: break-word;
+}
+
+.top-bar {
+  box-sizing: border-box;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 56px px;
+  word-break: normal;
+  overflow-wrap: anywhere;
+}

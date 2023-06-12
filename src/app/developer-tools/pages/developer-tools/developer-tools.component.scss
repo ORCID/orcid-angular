@@ -1,0 +1,91 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+
+.warn {
+  padding: 16px;
+  margin-top: 0px;
+  margin-bottom: 16px;
+  border: solid 2px;
+  border-radius: 4px;
+  display: flex;
+
+  p {
+    margin: 0;
+  }
+}
+
+
+
+.info {
+  padding: 16px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  border: solid 2px;
+  border-radius: 4px;
+  display: flex;
+
+  p {
+    margin: 0;
+  }
+}
+
+hr {
+  margin-bottom: 16px;
+}
+
+hr {
+  height: 2px;
+  border: 0;
+  margin: 0 0 20px;
+}
+
+h2 {
+  margin-bottom: 8px;
+}
+
+
+mat-form-field {
+  width: 100%;
+  max-width: 646px;
+}
+
+:host {
+  ::ng-deep {
+    .mat-form-field-appearance-outline .mat-form-field-subscript-wrapper {
+      padding-left: 0;
+    }
+  }
+}
+
+p {
+  padding: 0;
+  margin: 0;
+}
+
+ul {
+  padding-left: 16px;
+}
+
+.add-more {
+  margin-top: 12px;
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+
+  mat-icon {
+    margin-inline-end: 8px;
+    display: block;
+  }
+}
+
+.loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  width: 100%;
+}
