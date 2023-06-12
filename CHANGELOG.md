@@ -1,3 +1,11 @@
+## v2.32.3 - 2023-06-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.32.2...v2.32.3)
+
+### Feature
+
+- Add scope type translations in frontend (#1985)
+
 ## v2.32.2 - 2023-06-09
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.32.1...v2.32.2)
