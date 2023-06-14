@@ -12,6 +12,7 @@ import {
 } from 'src/app/types/record-affiliation.endpoint'
 import { UserRecord } from 'src/app/types/record.local'
 import { ModalAffiliationsComponent } from '../affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component'
+import { TogglzService } from '../../../core/togglz/togglz.service'
 
 @Component({
   selector: 'app-affiliation-stack',
@@ -59,9 +60,12 @@ export class AffiliationStackComponent implements OnInit {
   } = {}
   modalAffiliationsComponent = ModalAffiliationsComponent
 
+  professionalActivitiesTogglz = false
+
   constructor(
     private _affiliationService: RecordAffiliationService,
-    private _organizationsService: OrganizationsService
+    private _organizationsService: OrganizationsService,
+    private _togglz: TogglzService
   ) {}
 
   /**
@@ -190,5 +194,9 @@ export class AffiliationStackComponent implements OnInit {
     return false
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._togglz
+      .getStateOf('PROFESSIONAL_ACTIVITIES')
+      .subscribe((value) => (this.professionalActivitiesTogglz = value))
+  }
 }

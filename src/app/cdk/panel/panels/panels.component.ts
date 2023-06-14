@@ -18,6 +18,7 @@ import { ModalWorksSearchLinkComponent } from '../../../record/components/work-s
 import { VerificationEmailModalService } from '../../../core/verification-email-modal/verification-email-modal.service'
 import { UserRecord } from '../../../types/record.local'
 import { isQA } from 'src/app/shared/validators/environment-check/environment-check'
+import { TogglzService } from '../../../core/togglz/togglz.service'
 
 @Component({
   selector: 'app-panels',
@@ -75,10 +76,13 @@ export class PanelsComponent implements OnInit {
   ariaLabelAscending = $localize`:@@shared.ariaLabelAscending:Ascending`
   ariaLabelDescending = $localize`:@@shared.ariaLabelDescending:Descending`
 
+  professionalActivitiesTogglz = false
+
   constructor(
     private _dialog: MatDialog,
     private _platform: PlatformInfoService,
-    private _verificationEmailModalService: VerificationEmailModalService
+    private _verificationEmailModalService: VerificationEmailModalService,
+    private _togglz: TogglzService
   ) {}
 
   add(type: string, action?: ADD_EVENT_ACTION) {
@@ -181,6 +185,9 @@ export class PanelsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this._togglz
+      .getStateOf('PROFESSIONAL_ACTIVITIES')
+      .subscribe((value) => (this.professionalActivitiesTogglz = value))
     this._platform.get().subscribe((platform) => {
       this.isMobile = platform.columns4 || platform.columns8
     })
