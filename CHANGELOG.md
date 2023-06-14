@@ -1,3 +1,11 @@
+## v2.32.4 - 2023-06-14
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.32.3...v2.32.4)
+
+### Fix
+
+- Remove unused attributes on interface and rename orcidPAth attribute (#1986)
+
 ## v2.32.3 - 2023-06-12
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.32.2...v2.32.3)
