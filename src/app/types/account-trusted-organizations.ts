@@ -1,16 +1,9 @@
 export interface AccountTrustedOrganization {
-  orcidUri: string
-  orcidPath: string
-  orcidHost: string
   name: string
-  groupOrcidUri?: any
-  groupOrcidPath: string
-  groupOrcidHost?: any
-  groupName: string
+  clientId: string
   websiteValue: string
   approvalDate: number
   scopePaths: { [key in ScopePathType]: string }
-  tokenId: string
 }
 
 export enum ScopePathType {

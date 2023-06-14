@@ -39,7 +39,7 @@ export class AccountTrustedOrganizationsService {
       .post<AccountTrustedOrganization[]>(
         environment.API_WEB +
           `account/revoke-application.json?clientId=` +
-          account.orcidPath,
+          account.clientId,
         undefined,
         { headers: this.headers }
       )
