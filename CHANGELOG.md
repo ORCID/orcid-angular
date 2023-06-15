@@ -1,3 +1,11 @@
+## v2.32.6 - 2023-06-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.32.5...v2.32.6)
+
+### Fix
+
+- Replace filled with outlined icons in professional activities (#1987)
+
 ## v2.32.5 - 2023-06-15
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.32.4...v2.32.5)
