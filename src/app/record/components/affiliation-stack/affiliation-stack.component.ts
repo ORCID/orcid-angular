@@ -193,5 +193,5 @@ export class AffiliationStackComponent implements OnInit {
     return false
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

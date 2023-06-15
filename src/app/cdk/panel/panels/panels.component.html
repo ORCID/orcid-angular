@@ -125,8 +125,7 @@
         </ng-container>
         <ng-container
           *ngIf="
-            professionalActivitiesTogglz &&
-            type === 'professional-activities'
+            professionalActivitiesTogglz && type === 'professional-activities'
           "
         >
           <button mat-menu-item (click)="add('membership')">
@@ -154,37 +153,34 @@
         </ng-container>
         <ng-container
           *ngIf="
-            !professionalActivitiesTogglz &&
-            type === 'invited-position' ||
+            (!professionalActivitiesTogglz && type === 'invited-position') ||
             type === 'distinction'
           "
         >
           <button mat-menu-item (click)="add('invited-position')">
             <ng-container i18n="@@shared.addInvited"
-            >Add Invited Position</ng-container
+              >Add Invited Position</ng-container
             >
           </button>
           <button mat-menu-item (click)="add('distinction')">
             <ng-container i18n="@@shared.addDistinction"
-            >Add Distinction</ng-container
+              >Add Distinction</ng-container
             >
           </button>
         </ng-container>
         <ng-container
           *ngIf="
-            !professionalActivitiesTogglz &&
-             type === 'membership' ||
-              type === 'service'
+            (!professionalActivitiesTogglz && type === 'membership') ||
+            type === 'service'
           "
         >
           <button mat-menu-item (click)="add('membership')">
             <ng-container i18n="@@shared.addMembership"
-            >Add Membership</ng-container
+              >Add Membership</ng-container
             >
           </button>
           <button mat-menu-item (click)="add('service')">
-            <ng-container i18n="@@shared.addService"
-            >Add Service</ng-container>
+            <ng-container i18n="@@shared.addService">Add Service</ng-container>
           </button>
         </ng-container>
         <ng-container *ngIf="type === 'funding'">
