@@ -290,6 +290,7 @@
       [isPublicRecord]="isPublicRecord"
       [sortTypes]="['title', 'type', 'start', 'end']"
       (sort)="sortEvent($event, 'PROFESSIONAL_ACTIVITIES')"
+      [professionalActivitiesTogglz]="professionalActivitiesTogglz"
       id="cy-affiliation-professional-activities"
     >
       <ng-container
@@ -310,6 +311,7 @@
           [affiliationStack]="affiliationGroup"
           [type]="affiliationGroup.affiliationType | affiliationType"
           [userInfo]="userInfo"
+          [professionalActivitiesTogglz]="professionalActivitiesTogglz"
         ></app-affiliation-stack>
       </ng-container>
       <ng-container
