@@ -50,6 +50,7 @@ export class AffiliationStackComponent implements OnInit {
   }
 
   @Input() userInfo: UserInfo
+  @Input() professionalActivitiesTogglz = false
 
   orgDisambiguated: { [key: string]: OrgDisambiguated | null } = {}
   stackPanelsDisplay: { [key: string]: { topPanelOfTheStack: boolean } } = {}
@@ -59,8 +60,6 @@ export class AffiliationStackComponent implements OnInit {
     }
   } = {}
   modalAffiliationsComponent = ModalAffiliationsComponent
-
-  professionalActivitiesTogglz = false
 
   constructor(
     private _affiliationService: RecordAffiliationService,
@@ -194,9 +193,5 @@ export class AffiliationStackComponent implements OnInit {
     return false
   }
 
-  ngOnInit(): void {
-    this._togglz
-      .getStateOf('PROFESSIONAL_ACTIVITIES')
-      .subscribe((value) => (this.professionalActivitiesTogglz = value))
-  }
+  ngOnInit(): void { }
 }

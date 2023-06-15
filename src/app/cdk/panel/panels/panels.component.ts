@@ -70,13 +70,12 @@ export class PanelsComponent implements OnInit {
   @Input() labelAddButton = $localize`:@@shared.sortItems:Sort Items`
   @Input() labelExportButton = $localize`:@@shared.exportItems:Export Items`
   @Input() labelSortButton = $localize`:@@shared.addItem:Add Item`
+  @Input() professionalActivitiesTogglz = false
   IS_QA: boolean
   isMobile: boolean
 
   ariaLabelAscending = $localize`:@@shared.ariaLabelAscending:Ascending`
   ariaLabelDescending = $localize`:@@shared.ariaLabelDescending:Descending`
-
-  professionalActivitiesTogglz = false
 
   constructor(
     private _dialog: MatDialog,
@@ -185,9 +184,6 @@ export class PanelsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._togglz
-      .getStateOf('PROFESSIONAL_ACTIVITIES')
-      .subscribe((value) => (this.professionalActivitiesTogglz = value))
     this._platform.get().subscribe((platform) => {
       this.isMobile = platform.columns4 || platform.columns8
     })

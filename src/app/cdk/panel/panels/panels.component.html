@@ -126,9 +126,7 @@
         <ng-container
           *ngIf="
             professionalActivitiesTogglz &&
-            type === 'professional-activities' ||
-            type === 'invited-position' ||
-            type === 'distinction'
+            type === 'professional-activities'
           "
         >
           <button mat-menu-item (click)="add('membership')">
@@ -162,7 +160,6 @@
           "
         >
           <button mat-menu-item (click)="add('invited-position')">
-            <mat-icon class="material-icons-outlined">join_inner</mat-icon>
             <ng-container i18n="@@shared.addInvited"
             >Add Invited Position</ng-container
             >
