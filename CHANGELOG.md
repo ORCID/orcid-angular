@@ -1,3 +1,11 @@
+## v2.32.5 - 2023-06-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.32.4...v2.32.5)
+
+### Fix
+
+- Add conditional operator to addresses (#1988)
+
 ## v2.32.4 - 2023-06-14
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.32.3...v2.32.4)
