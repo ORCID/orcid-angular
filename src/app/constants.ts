@@ -21,7 +21,10 @@ import { ModalCountryComponent } from './cdk/side-bar/modals/modal-country/modal
 import { ModalKeywordComponent } from './cdk/side-bar/modals/modal-keyword/modal-keyword.component'
 import { ModalWebsitesComponent } from './cdk/side-bar/modals/modal-websites/modal-websites.component'
 import { ModalPersonIdentifiersComponent } from './cdk/side-bar/modals/modal-person-identifiers/modal-person-identifiers.component'
-import { AffiliationType } from './types/record-affiliation.endpoint'
+import {
+  AffiliationType,
+  AffiliationUIGroup,
+} from './types/record-affiliation.endpoint'
 import { WorkBibtexModalComponent } from './record/components/work-stack-group/modals/work-bibtex-modal/work-bibtex-modal.component'
 import { environment } from 'src/environments/environment'
 
@@ -360,4 +363,13 @@ export function navigateTo(val, windowRef) {
   } else {
     windowRef.location.href = val
   }
+}
+
+export function getAffiliationType(
+  affiliationUiGroups: AffiliationUIGroup[],
+  type: string
+): AffiliationUIGroup {
+  return affiliationUiGroups.filter((affiliation) => {
+    return affiliation.type === type
+  })[0]
 }

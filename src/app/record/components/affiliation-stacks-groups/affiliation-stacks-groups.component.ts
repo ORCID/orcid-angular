@@ -6,6 +6,7 @@ import { RecordAffiliationService } from 'src/app/core/record-affiliations/recor
 import { RecordService } from 'src/app/core/record/record.service'
 import {
   AffiliationGroup,
+  AffiliationType,
   AffiliationUIGroup,
   AffiliationUIGroupsTypes,
 } from 'src/app/types/record-affiliation.endpoint'
@@ -17,6 +18,7 @@ import {
 import { SortData } from 'src/app/types/sort'
 
 import { UserInfo } from '../../../types'
+import { TogglzService } from '../../../core/togglz/togglz.service'
 
 @Component({
   selector: 'app-affiliations',
@@ -42,6 +44,8 @@ export class AffiliationStacksGroupsComponent implements OnInit {
   @Output() total: EventEmitter<any> = new EventEmitter()
 
   profileAffiliationUiGroups: AffiliationUIGroup[]
+  affiliationUIGroupsTypes: AffiliationUIGroupsTypes
+  affiliationType = AffiliationType
   userRecord: UserRecord
 
   affiliationsCount: number
@@ -49,13 +53,18 @@ export class AffiliationStacksGroupsComponent implements OnInit {
   @Input() expandedContent: MainPanelsState
   @Output()
   expandedContentChange: EventEmitter<MainPanelsState> = new EventEmitter()
+  professionalActivitiesTogglz = false
 
   constructor(
     private _record: RecordService,
-    private _recordAffiliationService: RecordAffiliationService
+    private _recordAffiliationService: RecordAffiliationService,
+    private _togglz: TogglzService
   ) {}
 
   ngOnInit(): void {
+    this._togglz
+      .getStateOf('PROFESSIONAL_ACTIVITIES')
+      .subscribe((value) => (this.professionalActivitiesTogglz = value))
     this.$loading = this._recordAffiliationService.$loading
     this._record
       .getRecord({
@@ -75,6 +84,21 @@ export class AffiliationStacksGroupsComponent implements OnInit {
             this.getAffiliationType('MEMBERSHIP_AND_SERVICE')?.affiliationGroup
               .length
           this.total.emit(this.affiliationsCount)
+          const professionalActivities = this.profileAffiliationUiGroups.find(
+            (profileAffiliation) =>
+              profileAffiliation.type === 'PROFESSIONAL_ACTIVITIES'
+          )
+          if (!professionalActivities) {
+            this.profileAffiliationUiGroups.push({
+              type: 'PROFESSIONAL_ACTIVITIES',
+              affiliationGroup: [
+                ...this.getAffiliationType('INVITED_POSITION_AND_DISTINCTION')
+                  ?.affiliationGroup,
+                ...this.getAffiliationType('MEMBERSHIP_AND_SERVICE')
+                  ?.affiliationGroup,
+              ],
+            })
+          }
         }
       })
   }
@@ -97,6 +121,8 @@ export class AffiliationStacksGroupsComponent implements OnInit {
         return $localize`:@@shared.invitedPositions:Invited positions and distinctions`
       case AffiliationUIGroupsTypes.MEMBERSHIP_AND_SERVICE:
         return $localize`:@@shared.membership:Membership and service`
+      case AffiliationUIGroupsTypes.PROFESSIONAL_ACTIVITIES:
+        return $localize`:@@shared.professionalActivities:Professional activities`
     }
   }
 

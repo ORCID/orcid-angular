@@ -18,6 +18,7 @@ import { RecordAffiliationsGroupingService } from '../record-affiliations-affili
 import { cloneDeep } from 'lodash'
 import { UserRecordOptions } from 'src/app/types/record.local'
 import { VisibilityStrings } from '../../types/common.endpoint'
+import { getAffiliationType } from '../../constants'
 
 @Injectable({
   providedIn: 'root',
@@ -155,6 +156,27 @@ export class RecordAffiliationService {
   }
 
   changeUserRecordContext(userRecordContext: UserRecordOptions, type: string) {
+    const professionalActivities = this.lastEmittedValue.find(
+      (profileAffiliation) =>
+        profileAffiliation.type === 'PROFESSIONAL_ACTIVITIES'
+    )
+    const lastEmittedProfessional = [
+      ...getAffiliationType(
+        this.lastEmittedValue,
+        'INVITED_POSITION_AND_DISTINCTION'
+      ).affiliationGroup,
+      ...getAffiliationType(this.lastEmittedValue, 'MEMBERSHIP_AND_SERVICE')
+        .affiliationGroup,
+    ]
+
+    if (professionalActivities) {
+      professionalActivities.affiliationGroup = lastEmittedProfessional
+    } else {
+      this.lastEmittedValue.push({
+        type: 'PROFESSIONAL_ACTIVITIES',
+        affiliationGroup: lastEmittedProfessional,
+      })
+    }
     const value = this._affiliationsSortService.transform(
       this.lastEmittedValue,
       userRecordContext,

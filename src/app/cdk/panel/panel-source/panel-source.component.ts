@@ -44,6 +44,7 @@ export class PanelSourceComponent implements OnInit {
     | 'activities'
     | 'research-resources'
     | 'peer-review'
+    | 'professional-activities'
   _displayTheStack
   _displayAsMainStackCard
   @Input()

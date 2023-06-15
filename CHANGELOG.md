@@ -1,3 +1,67 @@
+## v2.32.4 - 2023-06-14
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.32.3...v2.32.4)
+
+### Fix
+
+- Remove unused attributes on interface and rename orcidPAth attribute (#1986)
+
+## v2.32.3 - 2023-06-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.32.2...v2.32.3)
+
+### Feature
+
+- Add scope type translations in frontend (#1985)
+
+## v2.32.2 - 2023-06-09
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.32.1...v2.32.2)
+
+### Feature
+
+- Add cookie settings link in footer and remove old banner (#1984)
+
+## v2.32.1 - 2023-06-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.32.0...v2.32.1)
+
+### Feature
+
+- Refactor `Membership`, `Service`, `Distinction` and `Invited… (#1978)
+
+## v2.32.0 - 2023-06-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.31.20...v2.32.0)
+
+## v2.31.20 - 2023-06-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.31.19...v2.31.20)
+
+## v2.31.19 - 2023-06-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.31.18...v2.31.19)
+
+### Fix
+
+- Update text link in footer (#1983)
+- Remove double white space in translations (#1982)
+- Rollback onetrust (#1969)
+
+## v2.31.18 - 2023-06-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.31.17...v2.31.18)
+
+## v2.31.17 - 2023-06-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.31.16...v2.31.17)
+
+## v2.31.16 - 2023-06-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.31.15...v2.31.16)
+
+- [#1979](https://github.com/ORCID/orcid-angular/pull/1979): 8662-qa-items-in-countries-modal-not-displayed-correctly-for-de-pl-an…
+
 ## v2.31.15 - 2023-06-06
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.31.14...v2.31.15)

@@ -15,7 +15,6 @@ import { CookieService } from 'ngx-cookie-service'
 export class BannersComponent implements OnInit {
   environment = environment
   maintenanceMessages: MaintenanceMessage
-  showCookieBanner
   showUnsupportedBrowserBanner
   closableElementAtDisplay
   ariaLabelCookiesPolicy = $localize`:@@layout.ariaLabelCookies:Cookies Policy`
@@ -42,9 +41,6 @@ export class BannersComponent implements OnInit {
         (platform) =>
           (this.showUnsupportedBrowserBanner = platform.unsupportedBrowser)
       )
-
-    // Show cookie banner
-    this.showCookieBanner = !_cookie.check('orcidCookiePolicyAlert')
   }
 
   updateClosableMessage() {

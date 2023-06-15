@@ -7,6 +7,7 @@ import { OrgDisambiguated, UserInfo } from 'src/app/types'
 import {
   Affiliation,
   AffiliationGroup,
+  AffiliationType,
   AffiliationUIGroup,
 } from 'src/app/types/record-affiliation.endpoint'
 import { UserRecord } from 'src/app/types/record.local'
@@ -25,14 +26,7 @@ export class AffiliationStackComponent implements OnInit {
   _affiliationStack: AffiliationGroup
   @Input() userRecord: UserRecord
   @Input() isPublicRecord: string = null
-  @Input() type:
-    | 'employment'
-    | 'education'
-    | 'qualification'
-    | 'invited-position'
-    | 'distinction'
-    | 'membership'
-    | 'service'
+  @Input() type: AffiliationType
   hasExternalIdentifiers: boolean
   @Input()
   set affiliationStack(value: AffiliationGroup) {

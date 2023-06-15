@@ -44,6 +44,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     PEER_REVIEW: true,
     RESEARCH_RESOURCE: true,
     WORK: true,
+    PROFESSIONAL_ACTIVITIES: true,
   }
 
   researchResourcePresent: boolean
