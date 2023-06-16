@@ -1,3 +1,27 @@
+## v2.32.4 - 2023-06-14
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.32.3...v2.32.4)
+
+### Fix
+
+- Remove unused attributes on interface and rename orcidPAth attribute (#1986)
+
+## v2.32.3 - 2023-06-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.32.2...v2.32.3)
+
+### Feature
+
+- Add scope type translations in frontend (#1985)
+
+## v2.32.2 - 2023-06-09
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.32.1...v2.32.2)
+
+### Feature
+
+- Add cookie settings link in footer and remove old banner (#1984)
+
 ## v2.32.1 - 2023-06-08
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.32.0...v2.32.1)

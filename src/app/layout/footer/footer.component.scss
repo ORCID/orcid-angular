@@ -81,3 +81,21 @@ a:focus {
 .CC0 > a:hover {
   text-decoration: underline;
 }
+
+.ot-sdk-show-settings {
+  color: inherit !important;
+  line-height: inherit !important;
+  border-width: initial !important;
+  border-style: none !important;
+  border-color: initial !important;
+  border-image: initial !important;
+  margin: 0px auto !important;
+  padding: 7px 20px !important;
+  transition: inherit !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+}
+.ot-sdk-show-settings:hover {
+  color: inherit !important;
+  background-color: inherit !important;
+}
