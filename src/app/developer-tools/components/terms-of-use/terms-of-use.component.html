@@ -1,10 +1,12 @@
-<h1>Developer tools</h1>
+<h1 class="orc-font-heading-small">Developer tools</h1>
 <p>
   This section is intended for developers who plan to integrate ORCID into their
   system using the ORCID Public API.
 </p>
 
-<h2>Getting started with the free ORCID Public API</h2>
+<h2 class="orc-font-body-large">
+  Getting started with the free ORCID Public API
+</h2>
 
 <p>
   ORCID offers an API (Application Programming Interface) that allows your
@@ -24,8 +26,14 @@
 </ul>
 
 <p>
-  The ORCID API is RESTful and uses OAuth 2.0, a well-established, standard
-  protocol for user-based permissions.
+  The ORCID API is RESTful and uses
+  <a
+    href="https://oauth.net/2/"
+    rel="noopener noreferrer"
+    target="_blank"
+    class="underline"
+    >OAuth 2.0</a
+  >, a well-established, standard protocol for user-based permissions.
 </p>
 <p>
   Public Client Applications are granted to individuals and not organizations,
@@ -33,24 +41,51 @@
   connection with your work for an organization).
 </p>
 
-<h2>Additional resources</h2>
+<h2 class="orc-font-body-large">Additional resources</h2>
 
-<a>Read the Public API documentation </a>
-<a>Find out more about the differences between the Public and Member APIs</a>
+<ul>
+  <li>
+    <a
+      class="underline"
+      href="https://support.orcid.org/hc/en-us/articles/360006897174"
+      rel="noopener noreferrer"
+      target="_blank"
+      >Read the Public API documentation
+    </a>
+  </li>
+  <li>
+    <a
+      class="underline"
+      href="https://info.orcid.org/membership/"
+      rel="noopener noreferrer"
+      target="_blank"
+      >Find out more about the differences between the Public and Member APIs</a
+    >
+  </li>
+</ul>
 
-<h2>ORCID Public Client Terms of Service</h2>
-DIVIDER HERE
+<h2 class="orc-font-body-large no-margin-bottom">
+  ORCID Public Client Terms of Service
+</h2>
+<hr />
 
 <p>
   The ORCID Public API allows you to request permission to receive an
   authenticated ORCID iD, to read public information from an ORCID record and to
   search public data on the ORCID registry according to the conditions stated in
-  the Public Client Terms of Service.
+  the
+  <a
+    href="https://info.orcid.org/public-client-terms-of-service/"
+    rel="noopener noreferrer"
+    target="_blank"
+    class="underline"
+    >Public Client Terms of Service.</a
+  >
 </p>
 
 <div class="info" *ngIf="!checked && dirty">
   <div class="col">
-    <mat-icon class="large-material-icon">info</mat-icon>
+    <mat-icon class="large-material-icon outline">warning</mat-icon>
   </div>
   <div class="col l11 m6 s3">
     <p i18n="@@account.warningDuplicated">
@@ -59,7 +94,7 @@ DIVIDER HERE
     </p>
   </div>
 </div>
-<p>
+<p class="checkbox-container">
   <mat-checkbox class="mat-checkbox" [(ngModel)]="checked"
     >I have read and agree to the ORCID Public Client Terms of
     Service</mat-checkbox

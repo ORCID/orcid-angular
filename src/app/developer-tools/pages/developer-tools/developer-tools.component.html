@@ -4,16 +4,28 @@
     <app-side-bar [orcidId]="true" class="col l3 m8 s4"></app-side-bar>
     <main id="main" class="col l9 m8 s4 orc-font-body-small">
       <div class="loading-container">
-        <mat-progress-spinner *ngIf="this.loading" color="primary" mode="indeterminate" class="col">
+        <mat-progress-spinner
+          *ngIf="this.loading"
+          color="primary"
+          mode="indeterminate"
+          class="col"
+        >
         </mat-progress-spinner>
       </div>
       <ng-container
         *ngIf="developerToolsEnable && !this.loading"
         [formGroup]="form"
       >
-        <h1>Developer tools</h1>
+        <h1 class="orc-font-heading-small">Developer tools</h1>
+        <app-client-secret
+          *ngIf="existingClient?.clientId?.value"
+          [clientId]="existingClient.clientId.value"
+          [clientSecret]="existingClient.clientSecret.value"
+          (clientSecretUpdated)="onClientSecretUpdated()"
+        >
+        </app-client-secret>
 
-        <div class="info">
+        <div class="info" *ngIf="!existingClient?.clientId?.value">
           <div class="col">
             <mat-icon class="large-material-icon">info</mat-icon>
           </div>
@@ -149,7 +161,8 @@
                   >Register all redirect URIs fully where possible.</strong
                 >
                 This is the most secure option and what we recommend. For more
-                information about redirect URIs, please see our redirect URI FAQ
+                information about redirect URIs, please see our
+                <a class="undeline">redirect URI FAQ</a>
               </li>
             </ul>
           </div>
@@ -242,39 +255,87 @@
             Save application and generate my client ID and secret
           </button>
         </p>
-        <!-- 
-      panelId="peer-review-stacks"
-      class="top-bar"
-      [type]="'peer-review'"
-      [editable]="false"
-      [openState]="authRequest"
-      [expandButtonsPosition]="'left'"
-      (openStateChange)="expandedClicked($event)"
-      [editableVisibilityControl]="true"
-      #PanelComponent -->
-        <app-code-panel [title]="labelAuthorizeRequest">
-          <p>
-            Provides an authorization code that can be exchanged for an access
-            token and an authenticated ORCID iD.
-          </p>
-          Endpoint Scope Response type code
 
-          <strong>Ednpoint</strong>
-          <p>https://sandbox.orcid.org/oauth/authorize</p>
+        <ng-container *ngIf="existingClient?.clientId?.value">
+          <div class="title-example-code">
+            <h3 class="orc-font-body">Example code</h3>
+          </div>
+          <app-code-panel [title]="labelAuthorizeRequest">
+            <p>
+              Provides an authorization code that can be exchanged for an access
+              token and an authenticated ORCID iD.
+            </p>
 
-          <strong>Scope</strong>
-          <p>/authenticate</p>
+            <strong>Ednpoint</strong>
+            <p>https://sandbox.orcid.org/oauth/authorize</p>
 
-          <strong>Response</strong>
-          <p>code</p>
-        </app-code-panel>
-        <app-code-panel [title]="labelTokenRequest"> </app-code-panel>
-        <app-code-panel [title]="labelOpenIdImplicitRequest"> </app-code-panel>
+            <strong>Scope</strong>
+            <p>/authenticate</p>
+
+            <strong>Response type</strong>
+            <p>code</p>
+
+            <code
+              >https://sandbox.orcid.org/oauth/authorize?client_id={{
+                this.existingClient.clientId.value
+              }}&response_type=code&scope=/authenticate&redirect_uri=REPLACE
+              WITH REDIRECT URI
+            </code>
+          </app-code-panel>
+          <app-code-panel [title]="labelTokenRequest">
+            <p>
+              Provides an authenticated ORCID iD and an access token that can be
+              used to read public information on the record.
+            </p>
+
+            <strong>Ednpoint</strong>
+            <p>https://sandbox.orcid.org/oauth/token</p>
+
+            <strong>Response type</strong>
+            <p>access token and ORCID iD</p>
+
+            <code
+              >curl -i -L -k -H 'Accept: application/json' --data 'client_id={{
+                this.existingClient.clientId.value
+              }}&client_secret={{
+                this.existingClient.clientSecret.value
+              }}&grant_type=authorization_code&redirect_uri=REPLACE WITH
+              REDIRECT URI&code=REPLACE WITH OAUTH CODE'
+              https://sandbox.orcid.org/oauth/token
+            </code>
+          </app-code-panel>
+          <app-code-panel [title]="labelOpenIdImplicitRequest">
+            <p>
+              Provides an access token that can be used to read public
+              information on the record and an id_token using OpenID Connect and
+              client-side only implicit OAuth.
+              <a class="undeline"
+                >More information on OpenID Connect Endpoint</a
+              >
+            </p>
+
+            <strong>Ednpoint</strong>
+            <p>https://sandbox.orcid.org/oauth/token</p>
+
+            <strong>Scope</strong>
+            <p>openid</p>
+
+            <strong>Response type</strong>
+            <p>token</p>
+
+            <code
+              >https://sandbox.orcid.org/oauth/authorize?client_id={{
+                this.existingClient.clientId.value
+              }}&response_type=token&scope=openid&redirect_uri=REPLACE WITH
+              REDIRECT URI
+            </code>
+          </app-code-panel>
+        </ng-container>
       </ng-container>
 
       <app-terms-of-use
         *ngIf="!developerToolsEnable && !this.loading"
-        (developerToolsEnable)="refreshUserInfo()"
+        (developerToolsEnable)="ngOnInit()"
       ></app-terms-of-use>
     </main>
   </div>

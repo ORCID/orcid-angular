@@ -1,5 +1,9 @@
-<div class="container">
-  <div class="top-bar">
+<div class="code-panel-container">
+  <div
+    class="top-bar"
+    [ngClass]="{ 'tob-bar-expand': openState }"
+    (click)="(openState != openState)"
+  >
     <button
       mat-icon-button
       (click)="openState = true"
@@ -8,18 +12,13 @@
     >
       <mat-icon>expand_less</mat-icon>
     </button>
-    <button
-      mat-icon-button
-      (click)="openState = false"
-      *ngIf="openState"
-      class="expand_more"
-    >
+    <button mat-icon-button (click)="openState = false" *ngIf="openState">
       <mat-icon>expand_more</mat-icon>
     </button>
 
-    <div>{{ title }}</div>
+    <strong>{{ title }}</strong>
   </div>
-  <div *ngIf="openState">
+  <div *ngIf="openState" class="code-panel-content">
     <ng-content></ng-content>
   </div>
 </div>

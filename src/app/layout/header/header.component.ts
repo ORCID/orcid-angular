@@ -76,7 +76,8 @@ export class HeaderComponent implements OnInit {
         path === `/${ApplicationRoutes.account}` ||
         path === `/${ApplicationRoutes.trustedParties}` ||
         path === `/${ApplicationRoutes.selfService}` ||
-        path === `/${ApplicationRoutes.inbox}`
+        path === `/${ApplicationRoutes.inbox}` ||
+        path === `/${ApplicationRoutes.developerTools}`
     })
   }
 

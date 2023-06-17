@@ -14,12 +14,22 @@ import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { PanelModule } from '../cdk/panel/panel.module'
 import { MatDialogModule } from '@angular/material/dialog'
-import { PlatformInfoModule } from '../cdk/platform-info';
+import { PlatformInfoModule } from '../cdk/platform-info'
 import { CodePanelComponent } from './components/code-panel/code-panel.component'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
+import { ClientSecretComponent } from './components/client-secret/client-secret.component'
+import { ClientSecretModalComponent } from './components/client-secret-modal/client-secret-modal.component'
+import { ModalModule } from '../cdk/modal/modal.module'
+import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
 
 @NgModule({
-  declarations: [DeveloperToolsComponent, TermsOfUseComponent, CodePanelComponent],
+  declarations: [
+    DeveloperToolsComponent,
+    TermsOfUseComponent,
+    CodePanelComponent,
+    ClientSecretComponent,
+    ClientSecretModalComponent,
+  ],
   imports: [
     CommonModule,
     DeveloperToolsRoutingModule,
@@ -34,7 +44,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
     ReactiveFormsModule,
     PanelModule,
     PlatformInfoModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    ModalModule,
+    A11yLinkModule,
   ],
 })
 export class DeveloperToolsModule {}

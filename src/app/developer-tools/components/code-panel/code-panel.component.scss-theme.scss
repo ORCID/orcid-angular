@@ -10,14 +10,15 @@
 
   .top-bar {
     background-color: mat.get-color-from-palette($background,
-        ui-background-light) !important;
-  }
-
-  .container {
+        ui-background-lightest) !important;
     border-color: mat.get-color-from-palette($background,
-        ui-background) !important;
+        ui-background);
   }
 
+  .code-panel-container {
+    border-color: mat.get-color-from-palette($background,
+        ui-background);
+  }
 }
 
 @include developer-tools-theme($orcid-app-theme);

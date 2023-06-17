@@ -1,27 +1,19 @@
 @use '@angular/material' as mat;
 @import 'src/assets/scss/material.orcid-theme.scss';
 
-@mixin developer-tools-theme($theme) {
+@mixin top-bar-verification-modal-theme($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, accent);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
 
-
   .info {
-    border-color: mat.get-color-from-palette(
+    color: mat.get-color-from-palette(
       $foreground,
-      'state-warning-dark'
+      'state-notice-dark'
     ) !important;
-
-    mat-icon {
-      color: mat.get-color-from-palette(
-        $foreground,
-        'state-warning-dark'
-      ) !important;
-    }
   }
 }
 
-@include developer-tools-theme($orcid-app-theme);
+@include top-bar-verification-modal-theme($orcid-app-theme);

@@ -9,7 +9,7 @@ import { Component, Input, OnInit } from '@angular/core'
   ],
 })
 export class CodePanelComponent implements OnInit {
-  openState = false
+  openState = true
   @Input() title: string
   constructor() {}
 

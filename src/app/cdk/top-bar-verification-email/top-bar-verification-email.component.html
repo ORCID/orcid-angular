@@ -1,0 +1,81 @@
+<div
+  *ngIf="primaryEmail || verifyEmailSend || emailVerified"
+  role="alert"
+  class="info"
+  [ngClass]="{
+    'orc-font-body-small': !isMobile,
+    'orc-font-small-print': isMobile,
+    'just-registered': !emailVerified,
+    'email-verified': emailVerified
+  }"
+>
+  <div class="col">
+    <mat-icon *ngIf="!emailVerified">info</mat-icon>
+    <mat-icon *ngIf="emailVerified">verified</mat-icon>
+  </div>
+  <div class="col l11 m6 s3">
+    <ng-container *ngIf="!emailVerified && !verifyEmailSend">
+      <h2 class="orc-font-body" i18n="@@topBar.thankYouForRegistering">
+        Thank you for registering with ORCID
+      </h2>
+      <p class="orc-font-body-small" i18n="@@topBar.weHaveSent">
+        We have sent verification messages to each of your registered email
+        addresses. You will need to verify your primary email address before you
+        can begin adding information manually to your ORCID record.
+      </p>
+      <button
+        mat-raised-button
+        color="primary"
+        i18n="@@topBar.resendVerificationEmail"
+        (click)="verifyEmail()"
+      >
+        Resend verification email
+      </button>
+    </ng-container>
+    <ng-container *ngIf="!emailVerified && verifyEmailSend">
+      <h2 class="orc-font-body" i18n="@@side-bar.pleaseVerify">
+        Please verify your primary email address!
+      </h2>
+      <p class="you-need">
+        <ng-container i18n="@@side-bar.youNeedToVerify">
+          You need to verify your primary email in order to access all of
+          ORCID’s editing features.
+        </ng-container>
+        <br />
+        <ng-container i18n="@@side-bar.youNeedToVerify2">
+          To verify your email, click the link in the message sent to:
+        </ng-container>
+      </p>
+      <div class="no-wrap">
+        <p class="email-container">{{ primaryEmail }}</p>
+        <p>
+          <strong i18n="@@side-bar.needHelp"> Need help?</strong> <br />
+          <ng-container i18n="@@side-bar.visitOur"> Visit our </ng-container>
+          <a
+            class="underline"
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://support.orcid.org/hc/articles/360006973793"
+            i18n="@@side-bar.knowledge"
+            >knowledge base
+          </a>
+          <ng-container i18n="@@side-bar.orContact"> or contact </ng-container>
+          <a
+            class="underline"
+            target="_blank"
+            rel="noopener noreferrer"
+            i18n="@@side-bar.support"
+            href="https://support.orcid.org/hc/en-us/requests/new"
+          >
+            support.
+          </a>
+        </p>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="emailVerified">
+      <h2 class="orc-font-body" i18n="@@myOrcidAlerts.emailVerified">
+        Thank you for verifying your email
+      </h2>
+    </ng-container>
+  </div>
+</div>

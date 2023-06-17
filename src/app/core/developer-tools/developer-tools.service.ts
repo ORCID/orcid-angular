@@ -82,4 +82,18 @@ export class DeveloperToolsService {
         )
       )
   }
+
+  resetClientSecret(client: Client): Observable<Client> {
+    return this._http
+      .post<Client>(
+        environment.BASE_URL + 'developer-tools/reset-client-secret.json',
+        client
+      )
+      .pipe(
+        retry(3),
+        catchError((error) =>
+          this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
+        )
+      )
+  }
 }
