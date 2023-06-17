@@ -21,6 +21,7 @@ import { ClientSecretComponent } from './components/client-secret/client-secret.
 import { ClientSecretModalComponent } from './components/client-secret-modal/client-secret-modal.component'
 import { ModalModule } from '../cdk/modal/modal.module'
 import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
+import { TopBarVerificationEmailModule } from '../cdk/top-bar-verification-email/top-bar-verification-email.module'
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
     MatProgressSpinnerModule,
     ModalModule,
     A11yLinkModule,
+    TopBarVerificationEmailModule,
   ],
 })
 export class DeveloperToolsModule {}

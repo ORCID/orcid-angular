@@ -4,19 +4,22 @@ import { TopBarVerificationEmailComponent } from './top-bar-verification-email.c
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 import { MatDialog, MatDialogModule } from '@angular/material/dialog'
-import { WINDOW_PROVIDERS } from '../../../cdk/window'
-import { PlatformInfoService } from '../../../cdk/platform-info'
-import { ErrorHandlerService } from '../../../core/error-handler/error-handler.service'
-import { SnackbarService } from '../../../cdk/snackbar/snackbar.service'
+
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { Overlay } from '@angular/cdk/overlay'
-import { RecordService } from '../../../core/record/record.service'
-import { RecordEmailsService } from '../../../core/record-emails/record-emails.service'
+
 import { of } from 'rxjs'
+import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
+import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
+import { RecordService } from 'src/app/core/record/record.service'
+import { PlatformInfoService } from '../platform-info'
+import { SnackbarService } from '../snackbar/snackbar.service'
+import { WINDOW_PROVIDERS } from '../window'
 
 describe('TopBarVerificationEmailComponent', () => {
+
   let component: TopBarVerificationEmailComponent
-  let fixture: ComponentFixture<TopBarVerificationEmailComponent>
+  let fixture: ComponentFixture<TopBarVerificationEmailComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

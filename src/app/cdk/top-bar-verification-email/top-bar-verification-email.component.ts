@@ -6,7 +6,6 @@ import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.se
 import { RecordService } from 'src/app/core/record/record.service'
 import { PlatformInfoService } from '../platform-info'
 
-
 @Component({
   selector: 'app-top-bar-verification-email',
   templateUrl: './top-bar-verification-email.component.html',
@@ -19,16 +18,16 @@ import { PlatformInfoService } from '../platform-info'
 export class TopBarVerificationEmailComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
   @Input() emailVerified: boolean
+  @Input() messageType: 'forCredentials' | 'forManualEditing' =
+    'forManualEditing'
 
   primaryEmail: string
   verifyEmailSend: boolean
   isMobile: boolean
 
   constructor(
-    private _dialog: MatDialog,
-    private _platform: PlatformInfoService,
+    _platform: PlatformInfoService,
     private _record: RecordService,
-    private _recordEmails: RecordEmailsService,
     private _recordEmailsService: RecordEmailsService
   ) {
     _platform
@@ -40,6 +39,7 @@ export class TopBarVerificationEmailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    console.log('ngOnInit')
     this._record
       .getRecord()
       .pipe(takeUntil(this.$destroy))
@@ -50,6 +50,7 @@ export class TopBarVerificationEmailComponent implements OnInit, OnDestroy {
         if (!primaryEmail?.verified) {
           this.primaryEmail = primaryEmail?.value
         }
+        console.log(this.primaryEmail)
       })
   }
 

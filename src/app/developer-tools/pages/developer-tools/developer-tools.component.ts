@@ -1,4 +1,11 @@
-import { Component, OnInit } from '@angular/core'
+import {
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  ViewChildren,
+} from '@angular/core'
 import { FormControl } from '@angular/forms'
 import {
   FormArray,
@@ -17,9 +24,12 @@ import { UserInfoService } from 'src/app/core/user-info/user-info.service'
 import { UserInfo } from 'src/app/types'
 import { Client } from 'src/app/types/developer-tools'
 import { ClientSecretModalComponent } from '../../components/client-secret-modal/client-secret-modal.component'
-import { map, switchMap, tap } from 'rxjs/operators'
-import { Observable, of } from 'rxjs'
+import { filter, map, switchMap, takeUntil, tap } from 'rxjs/operators'
+import { Observable, Subject, of } from 'rxjs'
 import { Empty } from '@angular-devkit/core/src/virtual-fs/host'
+import { RecordService } from 'src/app/core/record/record.service'
+import { MatSelect } from '@angular/material/select'
+import { MatInput } from '@angular/material/input'
 
 @Component({
   selector: 'app-developer-tools',
@@ -29,9 +39,12 @@ import { Empty } from '@angular-devkit/core/src/virtual-fs/host'
     './developer-tools.component.scss-theme.scss',
   ],
 })
-export class DeveloperToolsComponent implements OnInit {
+export class DeveloperToolsComponent implements OnInit, OnDestroy {
+  @ViewChildren('websiteInput') inputs: QueryList<MatInput>
+
+  destroy$ = new Subject<boolean>()
   formWasSummited = false
-  ariaLabelDelete = $localize`:@@xxxx.ariaLabelWebsiteDelete:Delete URI`
+  ariaLabelDelete = $localize`:@@xxxx.ariaLabelWebsiteDelete:Delete redirect URI`
   labelAuthorizeRequest = $localize`:@@xxxx.labelAuthorizeRequest:Authorize request`
   labelTokenRequest = $localize`:@@xxxx.labelTokenRequest:Token request`
   labelOpenIdImplicitRequest = $localize`:@@xxxx.labelOpenIdImplicitRequest:OpenID/Implicit request`
@@ -42,12 +55,20 @@ export class DeveloperToolsComponent implements OnInit {
   triedToSaveWithoutUrls: boolean
   loading: boolean
   existingClient: Client
+  sucessSave: boolean
+  loadingUserDevTolsState: boolean
   constructor(
     private fb: FormBuilder,
     private userInfo: UserInfoService,
     private developerToolsService: DeveloperToolsService,
-    private matDialog: MatDialog
+    private matDialog: MatDialog,
+    private recordService: RecordService,
+    private _changeDetectorRef: ChangeDetectorRef
   ) {}
+  ngOnDestroy(): void {
+    this.destroy$.next(true)
+    this.destroy$.complete()
+  }
 
   ngOnInit(): void {
     this.getDeveloperToolsEnableState()
@@ -61,7 +82,7 @@ export class DeveloperToolsComponent implements OnInit {
         })
       )
       .subscribe((currentClient) => {
-        currentClient = null
+        this.loading = false
         this.existingClient = currentClient
         this.form = this.fb.group({
           displayName: [currentClient?.displayName?.value, Validators.required],
@@ -97,6 +118,10 @@ export class DeveloperToolsComponent implements OnInit {
       this.form.get('redirectUris').value as string[]
     ).some((uri) => !uri)
     this.form.markAllAsTouched()
+
+    if (this.form.invalid) {
+      return
+    }
     const devToolsClient: Client = {
       allowAutoDeprecate: null,
       authenticationProviderId: null,
@@ -135,7 +160,8 @@ export class DeveloperToolsComponent implements OnInit {
       this.developerToolsService
         .updateDeveloperToolsClient(devToolsClient)
         .subscribe((res) => {
-          console.log(res)
+          this.form.markAsPristine()
+          this.sucessSave = true
         })
     } else {
       this.developerToolsService
@@ -153,10 +179,17 @@ export class DeveloperToolsComponent implements OnInit {
   }
   getDeveloperToolsEnableState(): Observable<boolean> {
     this.loading = true
-    return this.userInfo.getUserInfo().pipe(
+    this.loadingUserDevTolsState = true
+    return this.recordService.getRecord({ forceReload: true }).pipe(
+      takeUntil(this.destroy$),
+      filter((user) => !!user.userInfo),
       map((user) => {
-        this.developerToolsEnable = user['DEVELOPER_TOOLS_ENABLED'] === 'true2'
-        this.loading = false
+        if (user?.userInfo) {
+          this.loadingUserDevTolsState = false
+        }
+        this.developerToolsEnable =
+          user?.userInfo?.['DEVELOPER_TOOLS_ENABLED'] === 'true'
+
         return this.developerToolsEnable
       })
     )
@@ -177,6 +210,11 @@ export class DeveloperToolsComponent implements OnInit {
       console.log(this.form.errors)
     })
     this.redirectUris.push(fc)
+    this._changeDetectorRef.detectChanges()
+    console.log(this.inputs)
+
+    const input = (this.inputs.last as any).nativeElement
+    input.focus()
   }
 
   removeRedirectUri(index: number) {

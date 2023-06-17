@@ -9,9 +9,13 @@ import { Component, Input, OnInit } from '@angular/core'
   ],
 })
 export class CodePanelComponent implements OnInit {
-  openState = true
+  openState = false
   @Input() title: string
   constructor() {}
 
   ngOnInit(): void {}
+
+  swapOpenState() {
+    this.openState = !this.openState
+  }
 }

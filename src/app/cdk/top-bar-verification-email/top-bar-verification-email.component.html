@@ -18,10 +18,23 @@
       <h2 class="orc-font-body" i18n="@@topBar.thankYouForRegistering">
         Thank you for registering with ORCID
       </h2>
-      <p class="orc-font-body-small" i18n="@@topBar.weHaveSent">
+      <p
+        class="orc-font-body-small"
+        i18n="@@topBar.weHaveSent"
+        *ngIf="messageType === 'forManualEditing'"
+      >
         We have sent verification messages to each of your registered email
         addresses. You will need to verify your primary email address before you
         can begin adding information manually to your ORCID record.
+      </p>
+      <p
+        class="orc-font-body-small"
+        i18n="@@topBar.weHaveSentForCredentials"
+        *ngIf="messageType === 'forCredentials'"
+      >
+        We have sent verification messages to each of your registered email
+        addresses. You will need to verify your primary email address before you
+        can register your ORCID Public API credentials.
       </p>
       <button
         mat-raised-button

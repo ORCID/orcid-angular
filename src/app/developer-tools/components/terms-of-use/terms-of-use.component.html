@@ -94,14 +94,24 @@
     </p>
   </div>
 </div>
+
+<app-top-bar-verification-email
+  *ngIf="!emailAlreadyVerified"
+></app-top-bar-verification-email>
+
 <p class="checkbox-container">
-  <mat-checkbox class="mat-checkbox" [(ngModel)]="checked"
+  <mat-checkbox
+    class="mat-checkbox"
+    [(ngModel)]="checked"
+    [disabled]="!emailAlreadyVerified"
     >I have read and agree to the ORCID Public Client Terms of
     Service</mat-checkbox
   >
 </p>
+
 <p>
   <button
+    [disabled]="!emailAlreadyVerified"
     mat-raised-button
     color="primary"
     id="cy-register-for-public-api"

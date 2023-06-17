@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { PlatformInfoService } from '../../cdk/platform-info'
 import { first } from 'rxjs/operators'
-import { TopBarVerificationEmailModalComponent } from '../../record/components/top-bar-verification-email/modals/top-bar-verification-email-modal/top-bar-verification-email-modal.component'
+import { TopBarVerificationEmailModalComponent } from 'src/app/cdk/top-bar-verification-email/modals/top-bar-verification-email-modal/top-bar-verification-email-modal.component'
 
 @Injectable({
   providedIn: 'root',
