@@ -15,7 +15,7 @@ import {
   Validators,
 } from '@angular/forms'
 import { MatDialog, MatDialogModule } from '@angular/material/dialog'
-import { MAX_LENGTH_LESS_THAN_ONE_THOUSAND } from 'src/app/constants'
+import { MAX_LENGTH_LESS_THAN_ONE_THOUSAND, URL_REGEXP } from 'src/app/constants'
 import { URL_REGEXP_BACKEND } from 'src/app/constants'
 import { UserService } from 'src/app/core'
 import { DeveloperToolsService } from 'src/app/core/developer-tools/developer-tools.service'
@@ -29,6 +29,7 @@ import { Empty } from '@angular-devkit/core/src/virtual-fs/host'
 import { RecordService } from 'src/app/core/record/record.service'
 import { MatSelect } from '@angular/material/select'
 import { MatInput } from '@angular/material/input'
+import { URL } from 'url'
 
 @Component({
   selector: 'app-developer-tools',
@@ -96,7 +97,10 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
               Validators.required,
             ],
           ],
-          redirectUris: this.fb.array([], this.ValidatorAtLeastOne()),
+          redirectUris: this.fb.array(
+            [],
+            [this.validatorAtLeastOne(), this.validatorNotDuplicate()]
+          ),
         })
 
         currentClient?.redirectUris?.forEach((uri) => {
@@ -168,12 +172,25 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
         .subscribe((res) => {})
     }
   }
-  ValidatorAtLeastOne(): ValidatorFn {
+  validatorAtLeastOne(): ValidatorFn {
     return (control: FormArray) => {
       const forbidden = control.length === 0
       return forbidden ? { forbiddenLength: { value: control.value } } : null
     }
   }
+
+  validatorNotDuplicate(): ValidatorFn {
+    return (control: FormArray) => {
+      if (control.length > 1) {
+        // Checks if there is a duplicate in the array
+        const duplicate = control.value.some((uri, index) => {
+          return uri && control.value.indexOf(uri) !== index
+        })
+        return duplicate ? { duplicate: { value: control.value } } : null
+      }
+    }
+  }
+
   getDeveloperToolsEnableState(): Observable<boolean> {
     this.loading = true
     this.loadingUserDevTolsState = true
@@ -199,7 +216,7 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
   addRedirectUri() {
     const fc = new FormControl('', [
       Validators.required,
-      Validators.pattern(URL_REGEXP_BACKEND),
+      Validators.pattern(URL_REGEXP),
     ])
     this.redirectUris.push(fc)
     this._changeDetectorRef.detectChanges()

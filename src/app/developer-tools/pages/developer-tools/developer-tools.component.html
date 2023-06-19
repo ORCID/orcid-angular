@@ -209,15 +209,6 @@
             </div>
           </div>
 
-          <mat-error
-            *ngIf="
-              form.hasError('forbiddenLength', 'redirectUris') &&
-              formWasSummited
-            "
-            i18n="@@developerTools.youShouldProvideAtLeastOneRedirectUri"
-          >
-            You should provide at least one redirect URI
-          </mat-error>
           <ng-container formArrayName="redirectUris">
             <ng-container
               *ngFor="let redirectUri of redirectUris.controls; index as i"
@@ -285,6 +276,25 @@
             </p>
           </ng-container>
           <p>
+            <mat-error
+              *ngIf="
+                form.hasError('forbiddenLength', 'redirectUris') &&
+                formWasSummited
+              "
+              i18n="@@developerTools.youShouldProvideAtLeastOneRedirectUri"
+            >
+              You should provide at least one redirect URI
+            </mat-error>
+
+            <mat-error
+              *ngIf="
+                form.hasError('duplicate', 'redirectUris') && formWasSummited
+              "
+              i18n="@@developerTools.redirectUrisMustBeUnique"
+            >
+              Redirect URIs must be unique
+            </mat-error>
+
             <button
               mat-raised-button
               color="primary"
