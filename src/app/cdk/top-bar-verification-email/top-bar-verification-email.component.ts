@@ -39,7 +39,6 @@ export class TopBarVerificationEmailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log('ngOnInit')
     this._record
       .getRecord()
       .pipe(takeUntil(this.$destroy))
@@ -50,7 +49,6 @@ export class TopBarVerificationEmailComponent implements OnInit, OnDestroy {
         if (!primaryEmail?.verified) {
           this.primaryEmail = primaryEmail?.value
         }
-        console.log(this.primaryEmail)
       })
   }
 

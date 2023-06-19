@@ -15,7 +15,6 @@ import {
   Validators,
 } from '@angular/forms'
 import { MatDialog, MatDialogModule } from '@angular/material/dialog'
-import { log } from 'console'
 import { MAX_LENGTH_LESS_THAN_ONE_THOUSAND } from 'src/app/constants'
 import { URL_REGEXP_BACKEND } from 'src/app/constants'
 import { UserService } from 'src/app/core'
@@ -166,9 +165,7 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
     } else {
       this.developerToolsService
         .postDeveloperToolsClient(devToolsClient)
-        .subscribe((res) => {
-          console.log(res)
-        })
+        .subscribe((res) => {})
     }
   }
   ValidatorAtLeastOne(): ValidatorFn {
@@ -196,7 +193,6 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
   }
 
   get redirectUris() {
-    console.log(this.form.get('redirectUris'))
     return this.form.get('redirectUris') as FormArray
   }
 
@@ -205,13 +201,8 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
       Validators.required,
       Validators.pattern(URL_REGEXP_BACKEND),
     ])
-    fc.valueChanges.subscribe((value) => {
-      console.log(value)
-      console.log(this.form.errors)
-    })
     this.redirectUris.push(fc)
     this._changeDetectorRef.detectChanges()
-    console.log(this.inputs)
 
     const input = (this.inputs.last as any).nativeElement
     input.focus()
@@ -219,9 +210,6 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
 
   removeRedirectUri(index: number) {
     this.redirectUris.removeAt(index)
-  }
-  expandedClicked(event) {
-    console.log(event)
   }
 
   onClientSecretUpdated() {

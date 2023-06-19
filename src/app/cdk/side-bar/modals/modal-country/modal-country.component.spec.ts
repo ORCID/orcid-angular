@@ -31,7 +31,6 @@ import { ChangeDetectorRef } from '@angular/core'
 import { MatSelectHarness } from '@angular/material/select/testing'
 import { MatInputHarness } from '@angular/material/input/testing'
 import { VisibilitySelectorModule } from 'src/app/cdk/visibility-selector/visibility-selector.module'
-import { log } from 'console'
 
 describe('ModalCountryComponent', () => {
   let component: ModalCountryComponent
@@ -135,7 +134,6 @@ describe('ModalCountryComponent', () => {
     const countriesSelects = await loader.getAllHarnesses(MatSelectHarness)
     const countriesInputs = await loader.getAllHarnesses(MatInputHarness)
 
-    console.log(countriesSelects)
     await countriesSelects[1].open()
     await countriesSelects[1].clickOptions() //Select the first option
 

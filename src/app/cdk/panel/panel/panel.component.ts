@@ -32,7 +32,6 @@ import { UserService } from 'src/app/core'
 import { WINDOW } from 'src/app/cdk/window'
 import { TogglzService } from '../../../core/togglz/togglz.service'
 import { getAriaLabel } from '../../../constants'
-import { log } from 'console'
 
 @Component({
   selector: 'app-panel',
@@ -138,9 +137,7 @@ export class PanelComponent implements OnInit {
     private _researchResourcesService: RecordResearchResourceService,
     private _worksService: RecordWorksService,
     private _verificationEmailModalService: VerificationEmailModalService
-  ) {
-    console.log('PanelComponent constructor')
-  }
+  ) {}
 
   ngOnInit(): void {
     if (!this.panelTitle) {
