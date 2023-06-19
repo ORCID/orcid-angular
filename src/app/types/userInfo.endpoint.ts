@@ -17,4 +17,5 @@ export interface UserInfo {
   RECORD_WITH_ISSUES: boolean
   USER_NOT_FOUND: boolean
   DELEGATED_BY_ADMIN: 'true' | undefined
+  READY_FOR_INDEXING: string
 }
