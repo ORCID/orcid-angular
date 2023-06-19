@@ -17,21 +17,16 @@ $orcid-light-disabled-text: rgba(white, 0.38);
 $orcid-green: (
   50: #f4f9e5,
   100: #e3f1bf,
-  200: #d4e7a1
-  /*#brand-primary-light / USE: mat-color($accent, 200);*/
-  ,
+  200: #d4e7a1 /*#brand-primary-light / USE: mat-color($accent, 200);*/,
   300: #bade67,
-  400: #a6ce39
-  /*#brand-primary / USE: mat-color($accent, 400);*/
-  ,
+  400: #a6ce39 /*#brand-primary / USE: mat-color($accent, 400);*/,
   500: #98ce00,
   600: #87be00,
   700: #70aa00,
   800: #599700,
-  900: #447405
-  /*brand-primary-darkest / USE: mat-color($accent, 900); */
-  ,
-  contrast: (50: $orcid-dark-secondary-text,
+  900: #447405 /*brand-primary-darkest / USE: mat-color($accent, 900); */,
+  contrast: (
+    50: $orcid-dark-secondary-text,
     100: $orcid-dark-secondary-text,
     200: $orcid-dark-secondary-text,
     300: $orcid-dark-primary-text,
@@ -51,12 +46,11 @@ $orcid-blue: (
   400: #4f92b1,
   500: #2e7f9f,
   600: #1e708d,
-  700: #085c77
-  /*#brand-secondary-dark*/
-  ,
+  700: #085c77 /*#brand-secondary-dark*/,
   800: #004961,
   900: #003449,
-  contrast: (50: $orcid-dark-secondary-text,
+  contrast: (
+    50: $orcid-dark-secondary-text,
     100: $orcid-dark-secondary-text,
     200: $orcid-dark-secondary-text,
     300: $orcid-dark-primary-text,
@@ -83,7 +77,8 @@ $orcid-red: (
   A200: #ff5252,
   A400: #ff1744,
   A700: #d50000,
-  contrast: (50: $orcid-dark-primary-text,
+  contrast: (
+    50: $orcid-dark-primary-text,
     100: $orcid-dark-primary-text,
     200: $orcid-dark-primary-text,
     300: $orcid-dark-primary-text,
@@ -156,5 +151,5 @@ $panel-shadow: rgba(214, 214, 214, 1);
 // .
 $dark-primary-background: #f6f6f6;
 
-$state-info-dark: #1565C0;
-$state-info-lightest: #BBDEFB;
+$state-info-dark: #1565c0;
+$state-info-lightest: #bbdefb;

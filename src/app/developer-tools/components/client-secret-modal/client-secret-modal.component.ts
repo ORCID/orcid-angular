@@ -13,7 +13,7 @@ export class ClientSecretModalComponent implements OnInit {
     this.matDialogRef.close(true)
   }
 
-  ariaLabelClose = $localize`:@@xxxx.ariaLabelClose:Close`
+  ariaLabelClose = $localize`:@@developerTools.ariaLabelClose:Close`
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { secretId: string },

@@ -1,4 +1,4 @@
-import { Value } from "./common.endpoint"
+import { Value } from './common.endpoint'
 
 export interface Client {
   errors?: any[]
@@ -27,7 +27,4 @@ export interface RedirectUri {
   actType: Value
   geoArea: Value
   status: string
-  
 }
-
-

@@ -4,7 +4,6 @@
   width: 100%;
 }
 
-
 .warn {
   padding: 16px;
   margin-top: 0px;
@@ -17,8 +16,6 @@
     margin: 0;
   }
 }
-
-
 
 .info {
   padding: 16px;
@@ -47,7 +44,6 @@ h2 {
   margin-bottom: 8px;
   margin-top: 32px;
 }
-
 
 mat-form-field {
   width: 100%;
@@ -93,7 +89,7 @@ ul {
 code {
   padding: 8px;
   border: 1px solid;
-  display: block
+  display: block;
 }
 
 p {
@@ -111,20 +107,19 @@ h3 {
   margin: 0;
 }
 
-
 .title-example-code {
   margin-top: 16px;
 }
 
 h1 {
   margin-top: 32px;
-
 }
 
 main#main {
   padding-left: 16px;
 }
 
-.info p, .info strong {
+.info p,
+.info strong {
   display: inline;
 }

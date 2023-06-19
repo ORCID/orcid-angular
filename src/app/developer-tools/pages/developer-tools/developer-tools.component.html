@@ -29,11 +29,11 @@
               <mat-icon class="large-material-icon">info</mat-icon>
             </div>
             <div class="col l11 m6 s3">
-              <strong i18n="@@account.warningDuplicated">
+              <strong i18n="@@developerTools.warningDuplicated">
                 You’ve registered for your ORCID Public API credentials
               </strong>
 
-              <p>
+              <p i18n="@@developerTools.addYourApplicationDetails">
                 Add your application details and one or more redirect URIs in
                 the form below. Once these details are saved we’ll generate your
                 client ID and secret so you can start using the Public API right
@@ -42,7 +42,12 @@
             </div>
           </div>
 
-          <h2 class="orc-font-body-large">Application details</h2>
+          <h2
+            class="orc-font-body-large"
+            i18n="@@developerTools.applicationDetails"
+          >
+            Application details
+          </h2>
 
           <hr />
 
@@ -55,17 +60,19 @@
                   form.controls.displayName?.touched
               }"
             >
-              <strong i18n="@@xxx.displayName">Application name</strong>
+              <strong i18n="@@developerTools.applicationName"
+                >Application name</strong
+              >
             </label>
             <mat-form-field appearance="outline" class="mat-form-field-min">
               <input matInput formControlName="displayName" type="text" />
               <mat-error
                 *ngIf="form.hasError('required', 'displayName')"
-                i18n="@@xxx.accountCannotBeEmpty"
+                i18n="@@developerTools.applicationNameCannotBeEmpty"
               >
                 Application name cannot be empty
               </mat-error>
-              <mat-hint
+              <mat-hint i18n="@@developerTools.nameShownToUsers"
                 >The name shown to users on the OAuth authorization
                 screen</mat-hint
               >
@@ -80,19 +87,21 @@
                   form.controls.website?.touched
               }"
             >
-              <strong i18n="@@xxx.website">Application URL</strong>
+              <strong i18n="@@developerTools.applicationUrl"
+                >Application URL</strong
+              >
             </label>
             <mat-form-field appearance="outline" class="mat-form-field-min">
               <input matInput formControlName="website" type="text" />
               <mat-error
                 *ngIf="form.hasError('required', 'website')"
-                i18n="@@xxx.accountCannotBeEmpty"
+                i18n="@@developerTools.websiteNameCannotBeEmpty"
               >
                 Website name cannot be empty
               </mat-error>
               <mat-error
                 *ngIf="form.hasError('pattern', 'website')"
-                i18n="@@xxx.accountCannotBeEmpty"
+                i18n="@@developerTools.invalidWebsite"
               >
                 Invalid website
               </mat-error>
@@ -108,7 +117,9 @@
                   form.controls.shortDescription?.touched
               }"
             >
-              <strong i18n="@@xxx.shortDescription">Application URL</strong>
+              <strong i18n="@@developerTools.applicationUrl"
+                >Application URL</strong
+              >
             </label>
             <mat-form-field appearance="outline" class="mat-form-field-min">
               <textarea
@@ -123,18 +134,18 @@
               </textarea>
               <mat-error
                 *ngIf="form.hasError('required', 'shortDescription')"
-                i18n="@@xxx.accountCannotBeEmpty"
+                i18n="@@developerTools.applicationDescription"
               >
                 Application description cannot be empty
               </mat-error>
-              <mat-hint
+              <mat-hint i18n="@@developerTools.theDescriptionShown"
                 >The description shown to users on the OAuth authorization
                 screen. Maximum 1000 characters.</mat-hint
               >
             </mat-form-field>
           </div>
 
-          <h2>Redirect URIs</h2>
+          <h2 i18n="@@developerTools.redirectUris">Redirect URIs</h2>
           <hr />
 
           <p>
@@ -148,22 +159,40 @@
               <mat-icon class="large-material-icon">info</mat-icon>
             </div>
             <div class="col l11 m6 s3">
-              <strong i18n="@@account.warningDuplicated">Please note</strong>
+              <strong i18n="@@developerTools.pleaseNote">Please note</strong>
               <ul>
                 <li>
-                  Only <strong>HTTPS URIs</strong> are accepted in production
+                  <ng-container i18n="@@developerTools.only">
+                    Only</ng-container
+                  >
+                  <strong i18n="@@developerTools.httpsURI">HTTPS URIs</strong>
+                  <ng-container i18n="@@developerTools.areAccepted">
+                    are accepted in production
+                  </ng-container>
                 </li>
                 <li>
-                  Domains registered <strong>MUST</strong> exactly match the
-                  domains used, including subdomains
+                  <ng-container i18n="@@developerTools.domainsRegisted"
+                    >Domains registered</ng-container
+                  >
+                  <strong i18n="@@developerTools.must">MUST</strong>
+                  <ng-container i18n="@@developerTools.exactlyMatchTheDomains"
+                    >exactly match the domains used, including
+                    subdomains</ng-container
+                  >
                 </li>
                 <li>
-                  <strong
+                  <strong i18n="@@developerTools.registerAllRedirectURIs"
                     >Register all redirect URIs fully where possible.</strong
                   >
-                  This is the most secure option and what we recommend. For more
-                  information about redirect URIs, please see our
-                  <a class="undeline">redirect URI FAQ</a>
+                  <ng-container i18n="@@developerTools.thisIsTheMostSecure"
+                    >This is the most secure option and what we recommend. For
+                    more information about redirect URIs, please see
+                    our</ng-container
+                  >
+
+                  <a class="undeline" i18n="@@developerTools.redirectUriFaq"
+                    >redirect URI FAQ</a
+                  >
                 </li>
               </ul>
             </div>
@@ -174,7 +203,7 @@
               <mat-icon class="large-material-icon">info</mat-icon>
             </div>
             <div class="col l11 m6 s3">
-              <p i18n="@@account.warningDuplicated">
+              <p i18n="@@developerTools.addARedirectUriBefore">
                 Please add a redirect URI before saving your application
               </p>
             </div>
@@ -185,7 +214,7 @@
               form.hasError('forbiddenLength', 'redirectUris') &&
               formWasSummited
             "
-            i18n="@@xxx.accountCannotBeEmpty"
+            i18n="@@developerTools.youShouldProvideAtLeastOneRedirectUri"
           >
             You should provide at least one redirect URI
           </mat-error>
@@ -204,13 +233,13 @@
                 />
                 <mat-error
                   *ngIf="form.hasError('required', ['redirectUris', i])"
-                  i18n="@@xxx.accountCannotBeEmpty"
+                  i18n="@@developerTools.redirectUriCannotBeEmpty"
                 >
                   Redirect URI cannot be empty
                 </mat-error>
                 <mat-error
                   *ngIf="form.hasError('pattern', ['redirectUris', i])"
-                  i18n="@@xxx.accountCannotBeEmpty"
+                  i18n="@@developerTools.invalidRedirectUrl"
                 >
                   Invalid redirect URL
                 </mat-error>
@@ -243,7 +272,7 @@
                 >add_circle_outline</mat-icon
               >
               <span class="mat-body-1">
-                <ng-container i18n="@@topBar.addAnotherLink">
+                <ng-container i18n="@@developerTools.addAnotherRedirectUri">
                   Add another redirect URI
                 </ng-container>
               </span>
@@ -251,7 +280,9 @@
           </div>
 
           <ng-container *ngIf="sucessSave && form.pristine">
-            <p>Changes have been saved successfully.</p>
+            <p i18n="@@developerTools.changesHaveBeenSavedSuccessfully">
+              Changes have been saved successfully.
+            </p>
           </ng-container>
           <p>
             <button
@@ -261,11 +292,17 @@
               (click)="save()"
               [disabled]="form.pristine"
             >
-              <ng-container *ngIf="!existingClient">
+              <ng-container
+                *ngIf="!existingClient"
+                i18n="@@developerTools.saveApplicationAndGenerate"
+              >
                 Save application and generate my client ID and secret
               </ng-container>
 
-              <ng-container *ngIf="existingClient">
+              <ng-container
+                *ngIf="existingClient"
+                i18n="@@developerTools.saveApplication"
+              >
                 Save application
               </ng-container>
             </button>
@@ -273,22 +310,26 @@
 
           <ng-container *ngIf="existingClient?.clientId?.value">
             <div class="title-example-code">
-              <h3 class="orc-font-body">Example code</h3>
+              <h3 class="orc-font-body" i18n="@@developerTools.exampleCode">
+                Example code
+              </h3>
             </div>
             <app-code-panel [title]="labelAuthorizeRequest">
-              <p>
+              <p i18n="@@developerTools.providesAnAuthorizationCode">
                 Provides an authorization code that can be exchanged for an
                 access token and an authenticated ORCID iD.
               </p>
 
-              <strong>Ednpoint</strong>
+              <strong i18n="@@developerTools.endpoint">Ednpoint</strong>
               <p>https://sandbox.orcid.org/oauth/authorize</p>
 
-              <strong>Scope</strong>
+              <strong i18n="@@developerTools.scope">Scope</strong>
               <p>/authenticate</p>
 
-              <strong>Response type</strong>
-              <p>code</p>
+              <strong i18n="@@developerTools.responseType"
+                >Response type</strong
+              >
+              <p i18n="@@developerTools.code">code</p>
 
               <code
                 >https://sandbox.orcid.org/oauth/authorize?client_id={{
@@ -298,16 +339,20 @@
               </code>
             </app-code-panel>
             <app-code-panel [title]="labelTokenRequest">
-              <p>
+              <p i18n="@@developerTools.providesAnAuthenticatd">
                 Provides an authenticated ORCID iD and an access token that can
                 be used to read public information on the record.
               </p>
 
-              <strong>Ednpoint</strong>
+              <strong i18n="@@developerTools.endpoint">Ednpoint</strong>
               <p>https://sandbox.orcid.org/oauth/token</p>
 
-              <strong>Response type</strong>
-              <p>access token and ORCID iD</p>
+              <strong i18n="@@developerTools.responseType"
+                >Response type</strong
+              >
+              <p i18n="@@developerTools.accessTokenAndOrcidId">
+                access token and ORCID iD
+              </p>
 
               <code
                 >curl -i -L -k -H 'Accept: application/json' --data
@@ -322,21 +367,26 @@
             </app-code-panel>
             <app-code-panel [title]="labelOpenIdImplicitRequest">
               <p>
-                Provides an access token that can be used to read public
-                information on the record and an id_token using OpenID Connect
-                and client-side only implicit OAuth.
-                <a class="undeline"
+                <ng-container i18n="@@developerTools.providesAnAccess">
+                  Provides an access token that can be used to read public
+                  information on the record and an id_token using OpenID Connect
+                  and client-side only implicit OAuth.</ng-container
+                >
+
+                <a class="undeline" i18n="@@developerTools.moreInformation"
                   >More information on OpenID Connect Endpoint</a
                 >
               </p>
 
-              <strong>Ednpoint</strong>
+              <strong i18n="@@developerTools.endpoint">Ednpoint</strong>
               <p>https://sandbox.orcid.org/oauth/token</p>
 
-              <strong>Scope</strong>
+              <strong i18n="@@developerTools.scope">Scope</strong>
               <p>openid</p>
 
-              <strong>Response type</strong>
+              <strong i18n="@@developerTools.responseType"
+                >Response type</strong
+              >
               <p>token</p>
 
               <code

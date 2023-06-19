@@ -137,7 +137,7 @@ export class PanelComponent implements OnInit {
     private _peerReviewService: RecordPeerReviewService,
     private _researchResourcesService: RecordResearchResourceService,
     private _worksService: RecordWorksService,
-    private _verificationEmailModalService: VerificationEmailModalService,
+    private _verificationEmailModalService: VerificationEmailModalService
   ) {
     console.log('PanelComponent constructor')
   }

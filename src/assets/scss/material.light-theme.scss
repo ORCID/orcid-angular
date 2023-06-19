@@ -11,8 +11,10 @@
   // Overwrites $mat-light-theme-background values
   // https://github.com/angular/components/blob/8.1.4/src/material/core/theming/_palette.scss
   $background: map-get($mat-light-theme-object, background);
-  $background: map_merge($background,
-    ( // COLORS ADDED
+  $background: map_merge(
+    $background,
+    (
+      // COLORS ADDED
       app-news: $dark-primary-background,
       light-grey: $light-grey,
       grey: $grey,
@@ -31,7 +33,9 @@
       unselected-chip: white,
       panel-shadow: $panel-shadow,
       state-info-dark: $state-info-dark,
-      state-info-lightest: $state-info-lightest ));
+      state-info-lightest: $state-info-lightest
+    )
+  );
   // .
   // .
   // OVERWRITE FOREGROUND COLORS
@@ -40,8 +44,10 @@
   // Overwrites $mat-light-theme-foreground values
   // https://github.com/angular/components/blob/8.1.4/src/material/core/theming/_palette.scss
   $foreground: map-get($mat-light-theme-object, foreground);
-  $foreground: map_merge($foreground,
-    (box-border: $soft-grey,
+  $foreground: map_merge(
+    $foreground,
+    (
+      box-border: $soft-grey,
       brand-primary: $brand-primary,
       brand-primary-dark: $brand-primary-dark,
       state-notice-light: $state-notice-light,
@@ -54,10 +60,14 @@
       visibility-everyone: $visibility-everyone,
       visibility-private: $visibility-private,
       visibility-trusted: $visibility-trusted,
-    ));
-  $result: map_merge($mat-light-theme-object,
-    (background: $background,
+    )
+  );
+  $result: map_merge(
+    $mat-light-theme-object,
+    (
+      background: $background,
       foreground: $foreground,
-    ));
+    )
+  );
   @return $result;
 }

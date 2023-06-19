@@ -44,10 +44,10 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
 
   destroy$ = new Subject<boolean>()
   formWasSummited = false
-  ariaLabelDelete = $localize`:@@xxxx.ariaLabelWebsiteDelete:Delete redirect URI`
-  labelAuthorizeRequest = $localize`:@@xxxx.labelAuthorizeRequest:Authorize request`
-  labelTokenRequest = $localize`:@@xxxx.labelTokenRequest:Token request`
-  labelOpenIdImplicitRequest = $localize`:@@xxxx.labelOpenIdImplicitRequest:OpenID/Implicit request`
+  ariaLabelDelete = $localize`:@@developerTools.ariaLabelWebsiteDelete:Delete redirect URI`
+  labelAuthorizeRequest = $localize`:@@developerTools.labelAuthorizeRequest:Authorize request`
+  labelTokenRequest = $localize`:@@developerTools.labelTokenRequest:Token request`
+  labelOpenIdImplicitRequest = $localize`:@@developerTools.labelOpenIdImplicitRequest:OpenID/Implicit request`
   authRequest = true
   checked
   form: FormGroup

@@ -17,9 +17,8 @@ import { SnackbarService } from '../snackbar/snackbar.service'
 import { WINDOW_PROVIDERS } from '../window'
 
 describe('TopBarVerificationEmailComponent', () => {
-
   let component: TopBarVerificationEmailComponent
-  let fixture: ComponentFixture<TopBarVerificationEmailComponent>;
+  let fixture: ComponentFixture<TopBarVerificationEmailComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

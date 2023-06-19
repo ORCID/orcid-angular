@@ -53,7 +53,6 @@ import { VisibilitySelectorModule } from '../visibility-selector/visibility-sele
     SharedModule,
     A11yLinkModule,
     MatDialogModule,
-
   ],
   exports: [
     PanelComponent,

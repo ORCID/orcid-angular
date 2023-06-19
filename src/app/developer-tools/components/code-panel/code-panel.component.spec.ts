@@ -1,23 +1,22 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { CodePanelComponent } from './code-panel.component';
+import { CodePanelComponent } from './code-panel.component'
 
 describe('CodePanelComponent', () => {
-  let component: CodePanelComponent;
-  let fixture: ComponentFixture<CodePanelComponent>;
+  let component: CodePanelComponent
+  let fixture: ComponentFixture<CodePanelComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CodePanelComponent ]
-    })
-    .compileComponents();
+      declarations: [CodePanelComponent],
+    }).compileComponents()
 
-    fixture = TestBed.createComponent(CodePanelComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(CodePanelComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})
