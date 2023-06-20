@@ -1,3 +1,31 @@
+## v2.32.8 - 2023-06-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.32.7...v2.32.8)
+
+### Fix
+
+- Add missing conditional to display professional activities panel (#1991)
+
+## v2.32.7 - 2023-06-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.32.6...v2.32.7)
+
+## v2.32.6 - 2023-06-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.32.5...v2.32.6)
+
+### Fix
+
+- Replace filled with outlined icons in professional activities (#1987)
+
+## v2.32.5 - 2023-06-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.32.4...v2.32.5)
+
+### Fix
+
+- Add conditional operator to addresses (#1988)
+
 ## v2.32.4 - 2023-06-14
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.32.3...v2.32.4)

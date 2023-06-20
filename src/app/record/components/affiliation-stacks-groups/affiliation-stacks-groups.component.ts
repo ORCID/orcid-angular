@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { isEmpty } from 'lodash'
 import { Observable, Subject } from 'rxjs'
-import { takeUntil } from 'rxjs/operators'
+import { take, takeUntil } from 'rxjs/operators'
 import { RecordAffiliationService } from 'src/app/core/record-affiliations/record-affiliations.service'
 import { RecordService } from 'src/app/core/record/record.service'
 import {
@@ -64,6 +64,7 @@ export class AffiliationStacksGroupsComponent implements OnInit {
   ngOnInit(): void {
     this._togglz
       .getStateOf('PROFESSIONAL_ACTIVITIES')
+      .pipe(take(1))
       .subscribe((value) => (this.professionalActivitiesTogglz = value))
     this.$loading = this._recordAffiliationService.$loading
     this._record
