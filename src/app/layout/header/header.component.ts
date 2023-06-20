@@ -102,17 +102,18 @@ export class HeaderComponent implements OnInit {
   }
 
   click(treeLocation: string[], button: ApplicationMenuItem) {
+    console.log('click', treeLocation, button)
     if (!this.platform.columns12) {
       if (
         button.route !== undefined &&
         (!button.buttons || !button.buttons.length)
       ) {
-        this.preNavigate(button.route)
+        this.goto(button.route)
       } else {
         this.updateMenu(this.menu, treeLocation, true)
       }
     } else if (button.route !== undefined) {
-      this.preNavigate(button.route)
+      this.goto(button.route)
     }
   }
 
@@ -257,28 +258,14 @@ export class HeaderComponent implements OnInit {
       : null
   }
 
-  goto(url) {
-    if (url === 'signin') {
+  goto(route: string) {
+    if (route === 'signin') {
       this._router.navigate([ApplicationRoutes.signin])
       this.mobileMenuState = false
-    } else {
-      ;(this.window as any).outOfRouterNavigation(environment.BASE_URL + url)
-    }
-  }
-
-  preNavigate(route: string) {
-    if (route.indexOf('://') >= 0) {
-      this.navigateTo(route)
-    } else {
-      this.navigateTo(environment.INFO_SITE + route)
-    }
-  }
-
-  navigateTo(val) {
-    if (val === '/signout' && environment.proxyMode) {
+    } else if (route === 'signout' && environment.proxyMode) {
       this._user.noRedirectLogout().subscribe()
     } else {
-      ;(this.window as any).outOfRouterNavigation(val)
+      ;(this.window as any).outOfRouterNavigation(environment.INFO_SITE + route)
     }
   }
 }
