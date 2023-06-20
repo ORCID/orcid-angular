@@ -285,9 +285,7 @@
       [title]="affiliationTypeLabel('PROFESSIONAL_ACTIVITIES')"
       [type]="'professional-activities'"
       [userRecord]="userRecord"
-      [currentAmount]="
-        profileAffiliationsGroup?.affiliationGroup?.length
-      "
+      [currentAmount]="profileAffiliationsGroup?.affiliationGroup?.length"
       [(expandedContent)]="expandedContent['PROFESSIONAL_ACTIVITIES']"
       (expandedContentChange)="expandedContentChange.emit(expandedContent)"
       [isPublicRecord]="isPublicRecord"
@@ -297,10 +295,7 @@
       id="cy-affiliation-professional-activities"
     >
       <ng-container
-        *ngIf="
-          profileAffiliationsGroup?.affiliationGroup
-            ?.length > 0
-        "
+        *ngIf="profileAffiliationsGroup?.affiliationGroup?.length > 0"
       >
         <app-affiliation-stack
           [userRecord]="userRecord"
@@ -318,10 +313,7 @@
         ></app-affiliation-stack>
       </ng-container>
       <ng-container
-        *ngIf="
-          profileAffiliationsGroup?.affiliationGroup
-            ?.length === 0
-        "
+        *ngIf="profileAffiliationsGroup?.affiliationGroup?.length === 0"
       >
         <div class="orc-font-body-small">
           <p i18n="@@shared.addInvitedPositionsMemberships">
