@@ -3,6 +3,7 @@ import { Meta, Title } from '@angular/platform-browser'
 import { NamesEndPoint } from 'src/app/types/record-name.endpoint'
 import { UserRecord } from 'src/app/types/record.local'
 import { environment } from 'src/environments/environment'
+import { TitleService } from '../title-service/title.service'
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +20,7 @@ export class OpenGraphService {
   private usernameMeta = 'profile:username'
   private siteNameMeta = 'og:site_name'
 
-  constructor(private meta: Meta, private _titleService: Title) {}
+  constructor(private meta: Meta, private _titleService: TitleService) {}
 
   addOpenGraphData(
     record: UserRecord,
@@ -43,7 +44,7 @@ export class OpenGraphService {
           displayedNameWithId !== undefined &&
           displayedNameWithId !== 'undefined'
         ) {
-          this._titleService.setTitle(displayedNameWithId)
+          this._titleService.setDisplayName(displayedNameWithId)
         }
         return this.meta.addTags([
           { property: this.titleMeta, content: displayedNameWithId },

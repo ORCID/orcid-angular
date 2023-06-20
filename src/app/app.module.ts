@@ -10,6 +10,7 @@ import { CoreModule } from './core/core.module'
 import { LayoutModule } from './layout/layout.module'
 import { BidiModule } from '@angular/cdk/bidi'
 import { PseudoModule } from 'src/locale/i18n.pseudo.component'
+import { TitleService } from './core/title-service/title.service'
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,7 +25,7 @@ import { PseudoModule } from 'src/locale/i18n.pseudo.component'
     // Environmental dependent modules
     environment.SHOW_TEST_WARNING_BANNER ? EnvironmentBannerModule : [],
   ],
-  providers: [],
+  providers: [TitleService],
   bootstrap: [AppComponent],
 })
 export class AppModule {
