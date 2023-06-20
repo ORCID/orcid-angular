@@ -59,7 +59,7 @@ describe('MyOrcidComponent', () => {
         {
           provide: OpenGraphService,
           useValue: {},
-        }
+        },
       ],
     }).compileComponents()
   })
