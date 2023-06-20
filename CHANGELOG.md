@@ -1,3 +1,11 @@
+## v2.32.8 - 2023-06-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.32.7...v2.32.8)
+
+### Fix
+
+- Add missing conditional to display professional activities panel (#1991)
+
 ## v2.32.7 - 2023-06-19
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.32.6...v2.32.7)
