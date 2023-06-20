@@ -23,7 +23,6 @@ export class BrowserWindowRef extends WindowRef {
   constructor() {
     if (!(window as any).outOfRouterNavigation) {
       ;(window as any).outOfRouterNavigation = (value) => {
-        console.log('outOfRouterNavigation', value)
         window.location.href = value
       }
     }

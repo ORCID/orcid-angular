@@ -102,7 +102,6 @@ export class HeaderComponent implements OnInit {
   }
 
   click(treeLocation: string[], button: ApplicationMenuItem) {
-    console.log('click', treeLocation, button)
     if (!this.platform.columns12) {
       if (
         button.route !== undefined &&
