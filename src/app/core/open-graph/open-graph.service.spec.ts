@@ -6,7 +6,14 @@ describe('OpenGraphService', () => {
   let service: OpenGraphService
 
   beforeEach(() => {
-    TestBed.configureTestingModule({})
+    TestBed.configureTestingModule({
+      providers: [
+        {
+          provide: OpenGraphService,
+          useValue: {},
+        },
+      ],
+    })
     service = TestBed.inject(OpenGraphService)
   })
 
