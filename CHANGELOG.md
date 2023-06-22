@@ -1,3 +1,11 @@
+## v2.32.12 - 2023-06-22
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.32.11...v2.32.12)
+
+### Fix
+
+- Temporarily remove onetrust link from footer (#1996)
+
 ## v2.32.11 - 2023-06-21
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.32.10...v2.32.11)
