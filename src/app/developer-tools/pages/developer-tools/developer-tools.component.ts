@@ -15,7 +15,10 @@ import {
   Validators,
 } from '@angular/forms'
 import { MatDialog, MatDialogModule } from '@angular/material/dialog'
-import { MAX_LENGTH_LESS_THAN_ONE_THOUSAND, URL_REGEXP } from 'src/app/constants'
+import {
+  MAX_LENGTH_LESS_THAN_ONE_THOUSAND,
+  URL_REGEXP,
+} from 'src/app/constants'
 import { URL_REGEXP_BACKEND } from 'src/app/constants'
 import { UserService } from 'src/app/core'
 import { DeveloperToolsService } from 'src/app/core/developer-tools/developer-tools.service'
