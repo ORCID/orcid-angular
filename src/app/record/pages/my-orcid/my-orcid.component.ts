@@ -58,6 +58,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   initMyOrcidParameter = false
 
   regionActivities = $localize`:@@shared.activities:Activities`
+  readyForIndexing: boolean
 
   constructor(
     _userInfoService: UserInfoService,
@@ -121,6 +122,9 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
           this.userInfo = userRecord?.userInfo
           this.checkLoadingState(userRecord)
           this.recordWithIssues = userRecord?.userInfo?.RECORD_WITH_ISSUES
+          this.readyForIndexing =
+            userRecord?.userInfo?.READY_FOR_INDEXING === 'true'
+
           this.userNotFound = userRecord?.userInfo?.USER_NOT_FOUND
           this.userRecord = userRecord
 
@@ -129,10 +133,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
             this.observeSessionUpdates()
           }
 
-          if (
-            this.publicOrcid &&
-            (this.recordWithIssues || this.userNotFound)
-          ) {
+          if (this.publicOrcid && !this.readyForIndexing) {
             this._robotsMeta.disallowRobots()
           }
           this._openGraph.addOpenGraphData(userRecord, { force: true })

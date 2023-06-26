@@ -268,9 +268,7 @@
       professionalActivitiesTogglz &&
       !(
         isPublicRecord &&
-        getAffiliationType('INVITED_POSITION_AND_DISTINCTION')?.affiliationGroup
-          ?.length === 0 &&
-        getAffiliationType('MEMBERSHIP_AND_SERVICE')?.affiliationGroup
+        getAffiliationType('PROFESSIONAL_ACTIVITIES')?.affiliationGroup
           ?.length === 0
       )
     "
@@ -279,24 +277,25 @@
     <app-panels
       [loading]="$loading | async"
       class="row"
+      *ngIf="
+        getAffiliationType(
+          'PROFESSIONAL_ACTIVITIES'
+        ) as profileAffiliationsGroup
+      "
       [title]="affiliationTypeLabel('PROFESSIONAL_ACTIVITIES')"
       [type]="'professional-activities'"
       [userRecord]="userRecord"
-      [currentAmount]="
-        getAffiliationType('PROFESSIONAL_ACTIVITIES')?.affiliationGroup?.length
-      "
+      [currentAmount]="profileAffiliationsGroup?.affiliationGroup?.length"
       [(expandedContent)]="expandedContent['PROFESSIONAL_ACTIVITIES']"
       (expandedContentChange)="expandedContentChange.emit(expandedContent)"
       [isPublicRecord]="isPublicRecord"
       [sortTypes]="['title', 'type', 'start', 'end']"
       (sort)="sortEvent($event, 'PROFESSIONAL_ACTIVITIES')"
+      [professionalActivitiesTogglz]="professionalActivitiesTogglz"
       id="cy-affiliation-professional-activities"
     >
       <ng-container
-        *ngIf="
-          getAffiliationType('PROFESSIONAL_ACTIVITIES')?.affiliationGroup
-            ?.length > 0
-        "
+        *ngIf="profileAffiliationsGroup?.affiliationGroup?.length > 0"
       >
         <app-affiliation-stack
           [userRecord]="userRecord"
@@ -310,13 +309,11 @@
           [affiliationStack]="affiliationGroup"
           [type]="affiliationGroup.affiliationType | affiliationType"
           [userInfo]="userInfo"
+          [professionalActivitiesTogglz]="professionalActivitiesTogglz"
         ></app-affiliation-stack>
       </ng-container>
       <ng-container
-        *ngIf="
-          getAffiliationType('PROFESSIONAL_ACTIVITIES')?.affiliationGroup
-            ?.length === 0
-        "
+        *ngIf="profileAffiliationsGroup?.affiliationGroup?.length === 0"
       >
         <div class="orc-font-body-small">
           <p i18n="@@shared.addInvitedPositionsMemberships">

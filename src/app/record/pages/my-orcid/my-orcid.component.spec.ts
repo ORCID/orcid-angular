@@ -23,6 +23,7 @@ import { getUserRecord } from '../../../core/record/record.service.spec'
 import { getUserSession } from '../../../core/user/user.service.spec'
 import { RecordPublicSideBarService } from '../../../core/record-public-side-bar/record-public-side-bar.service'
 import { getSideBarPublicUserRecord } from '../../../core/record-public-side-bar/record-public-side-bar.service.spec'
+import { OpenGraphService } from 'src/app/core/open-graph/open-graph.service'
 
 describe('MyOrcidComponent', () => {
   let component: MyOrcidComponent
@@ -55,6 +56,10 @@ describe('MyOrcidComponent', () => {
         MatSnackBar,
         MatDialog,
         Overlay,
+        {
+          provide: OpenGraphService,
+          useValue: {},
+        },
       ],
     }).compileComponents()
   })
