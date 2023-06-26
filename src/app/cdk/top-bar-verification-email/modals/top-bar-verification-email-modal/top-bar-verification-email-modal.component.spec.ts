@@ -8,15 +8,14 @@ import {
   MatDialog,
   MatDialogRef,
 } from '@angular/material/dialog'
-import { WINDOW_PROVIDERS } from '../../../../../cdk/window'
-import { FormBuilder } from '@angular/forms'
-import { RecordWorksService } from '../../../../../core/record-works/record-works.service'
-import { PlatformInfoService } from '../../../../../cdk/platform-info'
-import { ErrorHandlerService } from '../../../../../core/error-handler/error-handler.service'
-import { SnackbarService } from '../../../../../cdk/snackbar/snackbar.service'
+
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { Overlay } from '@angular/cdk/overlay'
-import { RecordEmailsService } from '../../../../../core/record-emails/record-emails.service'
+import { PlatformInfoService } from 'src/app/cdk/platform-info'
+import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
+import { WINDOW_PROVIDERS } from 'src/app/cdk/window'
+import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
+import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
 
 describe('TopBarVerificationEmailModalComponent', () => {
   let component: TopBarVerificationEmailModalComponent

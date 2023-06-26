@@ -100,6 +100,7 @@ export const ApplicationRoutes = {
   trustedParties: 'trusted-parties',
   resetPasswordEmail: 'reset-password-email',
   selfService: 'self-service',
+  developerTools: 'developer-tools',
   home: '',
 }
 

@@ -129,17 +129,14 @@ export class PanelComponent implements OnInit {
   openOtherSources = $localize`:@@record.openOtherSources:Open other sources`
 
   constructor(
-    private _togglz: TogglzService,
     private _dialog: MatDialog,
     private _platform: PlatformInfoService,
-    private _userService: UserService,
     private _affiliationService: RecordAffiliationService,
     private _fundingService: RecordFundingsService,
     private _peerReviewService: RecordPeerReviewService,
     private _researchResourcesService: RecordResearchResourceService,
     private _worksService: RecordWorksService,
-    private _verificationEmailModalService: VerificationEmailModalService,
-    @Inject(WINDOW) private _window: Window
+    private _verificationEmailModalService: VerificationEmailModalService
   ) {}
 
   ngOnInit(): void {

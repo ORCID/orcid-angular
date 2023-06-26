@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { first, takeUntil } from 'rxjs/operators'
-import { PlatformInfoService } from '../../../../../cdk/platform-info'
 import { Subject } from 'rxjs'
-import { RecordEmailsService } from '../../../../../core/record-emails/record-emails.service'
 import { MatDialogRef } from '@angular/material/dialog'
-import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
+import { ModalComponent } from 'src/app/cdk/modal/modal/modal.component'
+import { PlatformInfoService } from 'src/app/cdk/platform-info'
+import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
 
 @Component({
   selector: 'app-top-bar-verification-email-modal',

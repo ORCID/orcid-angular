@@ -1,10 +1,10 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { first, takeUntil } from 'rxjs/operators'
-import { PlatformInfoService } from '../../../cdk/platform-info'
 import { Subject } from 'rxjs'
 import { MatDialog } from '@angular/material/dialog'
-import { RecordEmailsService } from '../../../core/record-emails/record-emails.service'
-import { RecordService } from '../../../core/record/record.service'
+import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
+import { RecordService } from 'src/app/core/record/record.service'
+import { PlatformInfoService } from '../platform-info'
 
 @Component({
   selector: 'app-top-bar-verification-email',
@@ -18,16 +18,16 @@ import { RecordService } from '../../../core/record/record.service'
 export class TopBarVerificationEmailComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
   @Input() emailVerified: boolean
+  @Input() messageType: 'forCredentials' | 'forManualEditing' =
+    'forManualEditing'
 
   primaryEmail: string
   verifyEmailSend: boolean
   isMobile: boolean
 
   constructor(
-    private _dialog: MatDialog,
-    private _platform: PlatformInfoService,
+    _platform: PlatformInfoService,
     private _record: RecordService,
-    private _recordEmails: RecordEmailsService,
     private _recordEmailsService: RecordEmailsService
   ) {
     _platform

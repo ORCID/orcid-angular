@@ -31,7 +31,9 @@
       ui-background: $ui-background,
       // COLORS OVERWRITES
       unselected-chip: white,
-      panel-shadow: $panel-shadow
+      panel-shadow: $panel-shadow,
+      state-info-dark: $state-info-dark,
+      state-info-lightest: $state-info-lightest
     )
   );
   // .
