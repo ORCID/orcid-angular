@@ -133,12 +133,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
             this.observeSessionUpdates()
           }
 
-          if (
-            this.publicOrcid &&
-            (this.recordWithIssues ||
-              this.userNotFound ||
-              !this.readyForIndexing)
-          ) {
+          if (this.publicOrcid && !this.readyForIndexing) {
             this._robotsMeta.disallowRobots()
           }
           this._openGraph.addOpenGraphData(userRecord, { force: true })

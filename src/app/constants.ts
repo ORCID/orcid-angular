@@ -104,6 +104,34 @@ export const ApplicationRoutes = {
   home: '',
 }
 
+export const ApplicationRoutesLabels = {
+  [ApplicationRoutes.home]: $localize`:@@share.titleOrcid:ORCID`,
+  [ApplicationRoutes.myOrcid]: '{dynamic}',
+  [ApplicationRoutes.twoFactor]: $localize`:@@share.twoFactor:2FA - ORCID`,
+  [ApplicationRoutes.twoFactorSetup]: $localize`:@@share.twoFactorSetup:2FA - ORCID`,
+  [ApplicationRoutes.institutionalLinking]: $localize`:@@share.institutionalLinking:Institutional linking - ORCID`,
+  [ApplicationRoutes.social]: $localize`:@@share.social:Social linking - ORCID`,
+  [ApplicationRoutes.institutional]: $localize`:@@share.institutional:Institutional sign in - ORCID`,
+  [ApplicationRoutes.inbox]: $localize`:@@share.inbox:Notifications inbox - ORCID`,
+  [ApplicationRoutes.login]: $localize`:@@share.login:Sign in - ORCID`,
+  [ApplicationRoutes.signin]: $localize`:@@share.signin:Sign in - ORCID`,
+  [ApplicationRoutes.authorize]: $localize`:@@share.authorize:Oauth - ORCID`,
+  [ApplicationRoutes.search]: $localize`:@@share.search:Search - ORCID`,
+  [ApplicationRoutes.reactivation]: $localize`:@@share.reactivation:Account reactivation - ORCID`,
+  [ApplicationRoutes.resetPassword]: $localize`:@@share.resetPassword:Reset password - ORCID`,
+  [ApplicationRoutes.register]: $localize`:@@share.register:Register - ORCID`,
+  [ApplicationRoutes.thirdPartySignIn]: $localize`:@@share.thirdPartySignIn:Sign in - ORCID`,
+  [ApplicationRoutes.account]: $localize`:@@share.account:Account settings - ORCID`,
+  [ApplicationRoutes.trustedParties]: $localize`:@@share.trustedParties:Trusted parties - ORCID `,
+  [ApplicationRoutes.resetPasswordEmail]: $localize`:@@share.resetPasswordEmail:Reset password - ORCID`,
+  [ApplicationRoutes.selfService]: $localize`:@@share.selfService:Self Service - ORCID`,
+}
+
+export const ApplicationDynamicRoutesLabels = {
+  orcidPageTitle: $localize`:@@share.orcidTitle:- ORCID`,
+  orcidMyPageTitle: $localize`:@@share.myOrcidTitle:- My ORCID`,
+}
+
 export const HeadlessOnOauthRoutes = [
   ApplicationRoutes.twoFactor,
   ApplicationRoutes.twoFactorSetup,

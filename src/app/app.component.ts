@@ -17,6 +17,7 @@ import {
 import { ERROR_REPORT } from './errors'
 import { ErrorHandlerService } from './core/error-handler/error-handler.service'
 import { environment } from 'src/environments/environment'
+import { TitleService } from './core/title-service/title.service'
 
 @Component({
   selector: 'app-root',
@@ -48,8 +49,10 @@ export class AppComponent {
     _zendesk: ZendeskService,
     private _userService: UserService,
     private _errorHandler: ErrorHandlerService,
-    @Inject(WINDOW) private _window: Window
+    @Inject(WINDOW) private _window: Window,
+    _titleService: TitleService
   ) {
+    _titleService.init()
     _platformInfo
       .get()
       .pipe(

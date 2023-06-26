@@ -307,7 +307,7 @@ export class RecordCountriesService {
         map((value) => {
           const countries = value[0].countries
           const countryCodes = value[1]
-          countries.addresses.forEach((country) => {
+          countries?.addresses.forEach((country) => {
             //Override backend country name translations
             country.countryName =
               countryCodes.find((x) => x.value === country.iso2Country.value)

@@ -1,20 +1,20 @@
 import { TestBed } from '@angular/core/testing'
 
-import { OpenGraphService } from './open-graph.service'
+import { TitleService } from './title.service'
 
-describe('OpenGraphService', () => {
-  let service: OpenGraphService
+describe('TitleServiceService', () => {
+  let service: TitleService
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
         {
-          provide: OpenGraphService,
+          provide: TitleService,
           useValue: {},
         },
       ],
     })
-    service = TestBed.inject(OpenGraphService)
+    service = TestBed.inject(TitleService)
   })
 
   it('should be created', () => {

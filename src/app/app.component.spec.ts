@@ -15,6 +15,8 @@ import { ErrorHandlerService } from './core/error-handler/error-handler.service'
 import { SnackbarService } from './cdk/snackbar/snackbar.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { Overlay } from '@angular/cdk/overlay'
+import { TitleService } from './core/title-service/title.service'
+import { of } from 'rxjs'
 describe('AppComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -28,6 +30,12 @@ describe('AppComponent', () => {
         MatSnackBar,
         MatDialog,
         Overlay,
+        {
+          provide: TitleService,
+          useValue: {
+            init: () => of({}),
+          },
+        },
       ],
     }).compileComponents()
   })
