@@ -1,3 +1,11 @@
+## v2.32.15 - 2023-06-28
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.32.14...v2.32.15)
+
+### Feature
+
+- Enable language detection in onetrust (#1994)
+
 ## 2.33.0 - 2023-06-26
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.32.14...2.33.0)
