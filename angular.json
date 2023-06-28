@@ -406,7 +406,14 @@
             "compodoc": true,
             "compodocArgs": ["-e", "json", "-d", "."],
             "port": 6006
-          }
+          },
+          "styles": [
+            "src/assets/scss/noto-sans.scss",
+            "src/assets/scss/material.scss",
+            "src/assets/scss/orcid.scss",
+            "src/styles.scss",
+            "src/assets/scss/grid.scss"
+          ]
         },
         "build-storybook": {
           "builder": "@storybook/angular:build-storybook",
