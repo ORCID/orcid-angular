@@ -2,9 +2,9 @@ name: Build and Deploy
 
 on:
   push:
-    paths: ["src/stories/**", ".storybook/**"]
     branches:
-      - storybook-2023
+      - "storybook-2023"
+    # paths: ["src/stories/**", ".storybook/**"]
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
