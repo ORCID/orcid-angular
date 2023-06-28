@@ -5,6 +5,8 @@ on:
     branches:
       - "storybook-2023"
     # paths: ["src/stories/**", ".storybook/**"]
+permissions:
+  contents: write
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -18,8 +20,7 @@ jobs:
         run: | # Install npm packages and build the Storybook files
           yarn install
           yarn run build:storybook
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@3.6.2
+      - name: Deploy  
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FOLDER: dist/storybook/ng-orcid # The folder that the build-storybook script generates files.
