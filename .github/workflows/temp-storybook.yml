@@ -14,8 +14,6 @@ jobs:
         with:
           node-version: 'v16.x'
           cache: 'yarn'
-      - run: yarn
-      - run: yarn build:${{ inputs.artifact_name }}
       - name: Install and Build
         run: | # Install npm packages and build the Storybook files
           yarn install
