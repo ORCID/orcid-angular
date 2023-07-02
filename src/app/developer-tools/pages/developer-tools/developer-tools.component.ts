@@ -17,6 +17,7 @@ import {
 import { MatDialog, MatDialogModule } from '@angular/material/dialog'
 import {
   MAX_LENGTH_LESS_THAN_ONE_THOUSAND,
+  MAX_LENGTH_LESS_THAN_TWO_HUNDRED_FIFTY_FIVE,
   URL_REGEXP,
 } from 'src/app/constants'
 import { URL_REGEXP_BACKEND } from 'src/app/constants'
@@ -41,6 +42,7 @@ import { URL } from 'url'
     './developer-tools.component.scss',
     './developer-tools.component.scss-theme.scss',
   ],
+  preserveWhitespaces: true,
 })
 export class DeveloperToolsComponent implements OnInit, OnDestroy {
   @ViewChildren('websiteInput') inputs: QueryList<MatInput>
@@ -88,7 +90,13 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
         this.loading = false
         this.existingClient = currentClient
         this.form = this.fb.group({
-          displayName: [currentClient?.displayName?.value, Validators.required],
+          displayName: [
+            currentClient?.displayName?.value,
+            [
+              Validators.required,
+              Validators.maxLength(MAX_LENGTH_LESS_THAN_TWO_HUNDRED_FIFTY_FIVE),
+            ],
+          ],
           website: [
             currentClient?.website?.value,
             [Validators.required, Validators.pattern(URL_REGEXP_BACKEND)],
@@ -172,7 +180,9 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
     } else {
       this.developerToolsService
         .postDeveloperToolsClient(devToolsClient)
-        .subscribe((res) => {})
+        .subscribe((res) => {
+          this.ngOnInit()
+        })
     }
   }
   validatorAtLeastOne(): ValidatorFn {
@@ -230,6 +240,7 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
 
   removeRedirectUri(index: number) {
     this.redirectUris.removeAt(index)
+    this.redirectUris.markAsDirty()
   }
 
   onClientSecretUpdated() {

@@ -20,7 +20,7 @@
 .info {
   padding: 16px;
   margin-top: 16px;
-  margin-bottom: 16px;
+  margin-bottom: 32px;
   border: solid 2px;
   border-radius: 4px;
   display: flex;
@@ -41,8 +41,16 @@ hr {
 }
 
 h2 {
-  margin-bottom: 8px;
+  margin-bottom: 16px;
   margin-top: 32px;
+}
+
+label {
+ margin-bottom: 8px;
+}
+
+mat-form-field {
+  margin-bottom: 12px;
 }
 
 mat-form-field {
@@ -112,7 +120,7 @@ h3 {
 }
 
 h1 {
-  margin-top: 32px;
+  margin: 0;
 }
 
 main#main {
@@ -122,4 +130,18 @@ main#main {
 .info p,
 .info strong {
   display: inline;
+}
+
+
+.title-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  margin-top: 32px;
+}
+
+.warning-title {
+  margin-bottom: 12px;
 }
