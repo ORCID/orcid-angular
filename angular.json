@@ -179,6 +179,38 @@
                 }
               ]
             },
+            "local-with-proxy-localize-en": {
+              "localize": ["en"],
+              "optimization": false,
+              "outputHashing": "none",
+              "sourceMap": true,
+              "namedChunks": true,
+              "extractLicenses": false,
+              "vendorChunk": true,
+              "buildOptimizer": false,
+              "outputPath": "dist",
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local-with-proxy.ts"
+                }
+              ]
+            },
+            "local-with-proxy-localize-fr": {
+              "localize": ["fr"],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local-with-proxy.ts"
+                }
+              ]
+            },
             "production": {
               "budgets": [
                 {
@@ -300,6 +332,14 @@
           "configurations": {
             "local-qa": {
               "browserTarget": "ng-orcid:build:local-with-proxy",
+              "proxyConfig": "src/proxy.conf.qa.mjs"
+            },
+            "local-qa-en": {
+              "browserTarget": "ng-orcid:build:local-with-proxy-localize-en",
+              "proxyConfig": "src/proxy.conf.qa.mjs"
+            },
+            "local-qa-fr": {
+              "browserTarget": "ng-orcid:build:local-with-proxy-localize-fr",
               "proxyConfig": "src/proxy.conf.qa.mjs"
             },
             "local-sandbox": {

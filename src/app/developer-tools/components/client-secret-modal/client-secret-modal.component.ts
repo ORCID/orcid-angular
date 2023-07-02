@@ -23,4 +23,7 @@ export class ClientSecretModalComponent implements OnInit {
   ngOnInit(): void {
     this.secret = this.data.secretId
   }
+  close() {
+    this.matDialogRef.close()
+  }
 }

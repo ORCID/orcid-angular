@@ -5,10 +5,16 @@
       (click)="swapOpenState()"
       *ngIf="!openState"
       class="expand_more"
+      [attr.aria-label]="expandAriaLabel + ' ' + title"
     >
       <mat-icon>expand_less</mat-icon>
     </button>
-    <button mat-icon-button (click)="swapOpenState()" *ngIf="openState">
+    <button
+      [attr.aria-label]="collapseAriaLabel + ' ' + title"
+      mat-icon-button
+      (click)="swapOpenState()"
+      *ngIf="openState"
+    >
       <mat-icon>expand_more</mat-icon>
     </button>
 

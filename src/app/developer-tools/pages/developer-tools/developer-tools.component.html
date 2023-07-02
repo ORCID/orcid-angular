@@ -3,6 +3,16 @@
   <div class="row">
     <app-side-bar [orcidId]="true" class="col l3 m8 s4"></app-side-bar>
     <main id="main" class="col l9 m8 s4 orc-font-body-small">
+      <div class="title-container">
+        <h1
+          class="orc-font-heading-small"
+          i18n="@@developerTools.developerTools"
+        >
+          Developer tools
+        </h1>
+        <a routerLink="/my-orcid">Back to my record</a>
+      </div>
+
       <div class="loading-container">
         <mat-progress-spinner
           *ngIf="this.loading"
@@ -14,8 +24,6 @@
       </div>
       <ng-container *ngIf="developerToolsEnable" [formGroup]="form">
         <ng-container *ngIf="!loading">
-          <h1 class="orc-font-heading-small">Developer tools</h1>
-
           <app-client-secret
             *ngIf="existingClient?.clientId?.value"
             [clientId]="existingClient.clientId.value"
@@ -26,10 +34,15 @@
 
           <div class="info" *ngIf="!existingClient?.clientId?.value">
             <div class="col">
-              <mat-icon class="large-material-icon">info</mat-icon>
+              <mat-icon class="material-icons-outlined large-material-icon"
+                >info</mat-icon
+              >
             </div>
             <div class="col l11 m6 s3">
-              <strong i18n="@@developerTools.warningDuplicated">
+              <strong
+                i18n="@@developerTools.warningDuplicated"
+                class="warning-title"
+              >
                 You’ve registered for your ORCID Public API credentials
               </strong>
 
@@ -71,6 +84,12 @@
                 i18n="@@developerTools.applicationNameCannotBeEmpty"
               >
                 Application name cannot be empty
+              </mat-error>
+              <mat-error
+                *ngIf="form.hasError('maxlength', 'displayName')"
+                i18n="@@developerTools.applicationNameMaxLength"
+              >
+                Application name cannot exceed 255 characters.
               </mat-error>
               <mat-hint i18n="@@developerTools.nameShownToUsers"
                 >The name shown to users on the OAuth authorization
@@ -117,8 +136,8 @@
                   form.controls.shortDescription?.touched
               }"
             >
-              <strong i18n="@@developerTools.applicationUrl"
-                >Application URL</strong
+              <strong i18n="@@developerTools.applicationDescription"
+                >Application description</strong
               >
             </label>
             <mat-form-field appearance="outline" class="mat-form-field-min">
@@ -138,6 +157,12 @@
               >
                 Application description cannot be empty
               </mat-error>
+              <mat-error
+                *ngIf="form.hasError('maxlength', 'shortDescription')"
+                i18n="@@developerTools.descriptionNameMaxLength"
+              >
+                Application description cannot exceed 1000 characters.
+              </mat-error>
               <mat-hint i18n="@@developerTools.theDescriptionShown"
                 >The description shown to users on the OAuth authorization
                 screen. Maximum 1000 characters.</mat-hint
@@ -145,10 +170,12 @@
             </mat-form-field>
           </div>
 
-          <h2 i18n="@@developerTools.redirectUris">Redirect URIs</h2>
+          <h2 class="orc-font-body-large" i18n="@@developerTools.redirectUris">
+            Redirect URIs
+          </h2>
           <hr />
 
-          <p>
+          <p i18n="@@developerTools.onceTheUserHasAuthorized">
             Once the user has authorized your application, they will be returned
             to a URI that you specify. You must provide these URIs in advance or
             your integration users will experience an error.
@@ -156,7 +183,9 @@
 
           <div class="info">
             <div class="col">
-              <mat-icon class="large-material-icon">info</mat-icon>
+              <mat-icon class="material-icons-outlined large-material-icon"
+                >info</mat-icon
+              >
             </div>
             <div class="col l11 m6 s3">
               <strong i18n="@@developerTools.pleaseNote">Please note</strong>
@@ -190,7 +219,12 @@
                     our</ng-container
                   >
 
-                  <a class="undeline" i18n="@@developerTools.redirectUriFaq"
+                  <a
+                    class="undeline"
+                    i18n="@@developerTools.redirectUriFaq"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    href="https://info.orcid.org/ufaqs/how-do-redirect-uris-work/"
                     >redirect URI FAQ</a
                   >
                 </li>
@@ -200,7 +234,9 @@
 
           <div class="warn" *ngIf="triedToSaveWithoutUrls">
             <div class="col">
-              <mat-icon class="large-material-icon">info</mat-icon>
+              <mat-icon class="material-icons-outlined large-material-icon"
+                >info</mat-icon
+              >
             </div>
             <div class="col l11 m6 s3">
               <p i18n="@@developerTools.addARedirectUriBefore">
@@ -270,54 +306,6 @@
             </a>
           </div>
 
-          <ng-container *ngIf="sucessSave && form.pristine">
-            <p i18n="@@developerTools.changesHaveBeenSavedSuccessfully">
-              Changes have been saved successfully.
-            </p>
-          </ng-container>
-          <p>
-            <mat-error
-              *ngIf="
-                form.hasError('forbiddenLength', 'redirectUris') &&
-                formWasSummited
-              "
-              i18n="@@developerTools.youShouldProvideAtLeastOneRedirectUri"
-            >
-              You should provide at least one redirect URI
-            </mat-error>
-
-            <mat-error
-              *ngIf="
-                form.hasError('duplicate', 'redirectUris') && formWasSummited
-              "
-              i18n="@@developerTools.redirectUrisMustBeUnique"
-            >
-              Redirect URIs must be unique
-            </mat-error>
-
-            <button
-              mat-raised-button
-              color="primary"
-              id="cy-register-for-public-api"
-              (click)="save()"
-              [disabled]="form.pristine"
-            >
-              <ng-container
-                *ngIf="!existingClient"
-                i18n="@@developerTools.saveApplicationAndGenerate"
-              >
-                Save application and generate my client ID and secret
-              </ng-container>
-
-              <ng-container
-                *ngIf="existingClient"
-                i18n="@@developerTools.saveApplication"
-              >
-                Save application
-              </ng-container>
-            </button>
-          </p>
-
           <ng-container *ngIf="existingClient?.clientId?.value">
             <div class="title-example-code">
               <h3 class="orc-font-body" i18n="@@developerTools.exampleCode">
@@ -383,7 +371,12 @@
                   and client-side only implicit OAuth.</ng-container
                 >
 
-                <a class="undeline" i18n="@@developerTools.moreInformation"
+                <a
+                  class="undeline"
+                  i18n="@@developerTools.moreInformation"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  href="https://github.com/ORCID/ORCID-Source/blob/main/orcid-web/ORCID_AUTH_WITH_OPENID_CONNECT.md"
                   >More information on OpenID Connect Endpoint</a
                 >
               </p>
@@ -407,6 +400,55 @@
               </code>
             </app-code-panel>
           </ng-container>
+
+          <ng-container *ngIf="sucessSave && form.pristine">
+            <p i18n="@@developerTools.changesHaveBeenSavedSuccessfully">
+              Changes have been saved successfully.
+            </p>
+          </ng-container>
+          <p>
+            <mat-error
+              *ngIf="
+                form.hasError('forbiddenLength', 'redirectUris') &&
+                formWasSummited
+              "
+              i18n="@@developerTools.youShouldProvideAtLeastOneRedirectUri"
+            >
+              You should provide at least one redirect URI
+            </mat-error>
+
+            <mat-error
+              *ngIf="
+                form.hasError('duplicate', 'redirectUris') && formWasSummited
+              "
+              i18n="@@developerTools.redirectUrisMustBeUnique"
+            >
+              Redirect URIs must be unique
+            </mat-error>
+
+            <button
+              mat-raised-button
+              color="primary"
+              id="cy-register-for-public-api"
+              (click)="save()"
+              [disabled]="form.pristine"
+              class="save-button"
+            >
+              <ng-container
+                *ngIf="!existingClient?.clientId?.value"
+                i18n="@@developerTools.saveApplicationAndGenerate"
+              >
+                Save application and generate my client ID and secret
+              </ng-container>
+
+              <ng-container
+                *ngIf="existingClient?.clientId?.value"
+                i18n="@@developerTools.saveApplication"
+              >
+                Save application
+              </ng-container>
+            </button>
+          </p>
         </ng-container>
       </ng-container>
 

@@ -18,6 +18,7 @@ import { RecordService } from 'src/app/core/record/record.service'
     './terms-of-use.component.scss',
     './terms-of-use.component.scss-theme.scss',
   ],
+  preserveWhitespaces: true,
 })
 export class TermsOfUseComponent implements OnInit, OnDestroy {
   checked
@@ -28,7 +29,6 @@ export class TermsOfUseComponent implements OnInit, OnDestroy {
 
   constructor(
     private developerToolsService: DeveloperToolsService,
-    private _platform: PlatformInfoService,
     private _record: RecordService
   ) {}
   ngOnDestroy(): void {
