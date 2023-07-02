@@ -306,54 +306,6 @@
             </a>
           </div>
 
-          <ng-container *ngIf="sucessSave && form.pristine">
-            <p i18n="@@developerTools.changesHaveBeenSavedSuccessfully">
-              Changes have been saved successfully.
-            </p>
-          </ng-container>
-          <p>
-            <mat-error
-              *ngIf="
-                form.hasError('forbiddenLength', 'redirectUris') &&
-                formWasSummited
-              "
-              i18n="@@developerTools.youShouldProvideAtLeastOneRedirectUri"
-            >
-              You should provide at least one redirect URI
-            </mat-error>
-
-            <mat-error
-              *ngIf="
-                form.hasError('duplicate', 'redirectUris') && formWasSummited
-              "
-              i18n="@@developerTools.redirectUrisMustBeUnique"
-            >
-              Redirect URIs must be unique
-            </mat-error>
-
-            <button
-              mat-raised-button
-              color="primary"
-              id="cy-register-for-public-api"
-              (click)="save()"
-              [disabled]="form.pristine"
-            >
-              <ng-container
-                *ngIf="!existingClient?.clientId?.value"
-                i18n="@@developerTools.saveApplicationAndGenerate"
-              >
-                Save application and generate my client ID and secret
-              </ng-container>
-
-              <ng-container
-                *ngIf="existingClient?.clientId?.value"
-                i18n="@@developerTools.saveApplication"
-              >
-                Save application
-              </ng-container>
-            </button>
-          </p>
-
           <ng-container *ngIf="existingClient?.clientId?.value">
             <div class="title-example-code">
               <h3 class="orc-font-body" i18n="@@developerTools.exampleCode">
@@ -419,7 +371,12 @@
                   and client-side only implicit OAuth.</ng-container
                 >
 
-                <a class="undeline" i18n="@@developerTools.moreInformation"
+                <a
+                  class="undeline"
+                  i18n="@@developerTools.moreInformation"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  href="https://github.com/ORCID/ORCID-Source/blob/main/orcid-web/ORCID_AUTH_WITH_OPENID_CONNECT.md"
                   >More information on OpenID Connect Endpoint</a
                 >
               </p>
@@ -443,6 +400,55 @@
               </code>
             </app-code-panel>
           </ng-container>
+
+          <ng-container *ngIf="sucessSave && form.pristine">
+            <p i18n="@@developerTools.changesHaveBeenSavedSuccessfully">
+              Changes have been saved successfully.
+            </p>
+          </ng-container>
+          <p>
+            <mat-error
+              *ngIf="
+                form.hasError('forbiddenLength', 'redirectUris') &&
+                formWasSummited
+              "
+              i18n="@@developerTools.youShouldProvideAtLeastOneRedirectUri"
+            >
+              You should provide at least one redirect URI
+            </mat-error>
+
+            <mat-error
+              *ngIf="
+                form.hasError('duplicate', 'redirectUris') && formWasSummited
+              "
+              i18n="@@developerTools.redirectUrisMustBeUnique"
+            >
+              Redirect URIs must be unique
+            </mat-error>
+
+            <button
+              mat-raised-button
+              color="primary"
+              id="cy-register-for-public-api"
+              (click)="save()"
+              [disabled]="form.pristine"
+              class="save-button"
+            >
+              <ng-container
+                *ngIf="!existingClient?.clientId?.value"
+                i18n="@@developerTools.saveApplicationAndGenerate"
+              >
+                Save application and generate my client ID and secret
+              </ng-container>
+
+              <ng-container
+                *ngIf="existingClient?.clientId?.value"
+                i18n="@@developerTools.saveApplication"
+              >
+                Save application
+              </ng-container>
+            </button>
+          </p>
         </ng-container>
       </ng-container>
 

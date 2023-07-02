@@ -76,7 +76,6 @@ ul {
 }
 
 .add-more {
-  margin-bottom: 32px;
   display: flex;
   align-items: center;
 
@@ -116,7 +115,7 @@ h3 {
 }
 
 .title-example-code {
-  margin-top: 16px;
+  margin-top: 32px;
 }
 
 h1 {
@@ -143,4 +142,13 @@ main#main {
 
 .warning-title {
   margin-bottom: 12px;
+}
+
+
+app-client-secret {
+  margin-top: 16px;
+}
+
+.save-button {
+  margin-top: 32px;
 }
