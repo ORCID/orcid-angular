@@ -22,7 +22,6 @@ import { ModalModule } from '../cdk/modal/modal.module'
 import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
 import { TopBarVerificationEmailModule } from '../cdk/top-bar-verification-email/top-bar-verification-email.module'
 import { DeveloperToolsComponent } from './pages/developer-tools/developer-tools.component'
-import { A11yModule } from '@angular/cdk/a11y'
 
 @NgModule({
   declarations: [
@@ -50,7 +49,6 @@ import { A11yModule } from '@angular/cdk/a11y'
     ModalModule,
     A11yLinkModule,
     TopBarVerificationEmailModule,
-    A11yModule,
   ],
 })
 export class DeveloperToolsModule {}

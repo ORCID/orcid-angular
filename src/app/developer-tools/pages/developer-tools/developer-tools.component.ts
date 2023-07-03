@@ -140,9 +140,6 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
       this.form.get('redirectUris').value as string[]
     ).some((uri) => !uri)
     this.form.markAllAsTouched()
-
-    console.log('triedToSaveWithoutUrls ', this.triedToSaveWithoutUrls)
-
     if (this.form.invalid) {
       return
     }
