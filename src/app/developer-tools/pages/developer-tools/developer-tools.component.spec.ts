@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { DeveloperToolsComponent } from './developer-tools.component'
 import { FormBuilder } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog'
 import { DeveloperToolsService } from 'src/app/core/developer-tools/developer-tools.service'
@@ -8,6 +7,8 @@ import { RecordService } from 'src/app/core/record/record.service'
 import { ChangeDetectorRef } from '@angular/core'
 import { UserInfoService } from 'src/app/core/user-info/user-info.service'
 import { of } from 'rxjs'
+import { WINDOW_PROVIDERS } from 'src/app/cdk/window'
+import { DeveloperToolsComponent } from './developer-tools.component'
 
 describe('DeveloperToolsComponent', () => {
   let component: DeveloperToolsComponent
@@ -17,6 +18,7 @@ describe('DeveloperToolsComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [DeveloperToolsComponent],
       providers: [
+        WINDOW_PROVIDERS,
         {
           provide: FormBuilder,
           useValue: {},

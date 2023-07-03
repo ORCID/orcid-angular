@@ -7,7 +7,7 @@
 .warn {
   padding: 16px;
   margin-top: 0px;
-  margin-bottom: 16px;
+  margin-bottom: 32px;
   border: solid 2px;
   border-radius: 4px;
   display: flex;
@@ -150,4 +150,11 @@ app-client-secret {
 
 .save-button {
   margin-top: 32px;
+}
+
+.save-message {
+  display: block;
+  width: 100%;
+  margin-top: 32px;
+  margin-bottom: 0;
 }
