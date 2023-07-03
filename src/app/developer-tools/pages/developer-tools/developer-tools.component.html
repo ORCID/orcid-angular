@@ -10,7 +10,7 @@
         >
           Developer tools
         </h1>
-        <a routerLink="/my-orcid">Back to my record</a>
+        <a routerLink="/my-orcid" i18n="@@developerTools.backToMyRecod">Back to my record</a>
       </div>
 
       <div class="loading-container">
@@ -336,7 +336,7 @@
               </p>
 
               <strong i18n="@@developerTools.endpoint">Ednpoint</strong>
-              <p>https://sandbox.orcid.org/oauth/authorize</p>
+              <p>{{ baseURL }}/oauth/authorize</p>
 
               <strong i18n="@@developerTools.scope">Scope</strong>
               <p>/authenticate</p>
@@ -347,10 +347,12 @@
               <p i18n="@@developerTools.code">code</p>
 
               <code
-                >https://sandbox.orcid.org/oauth/authorize?client_id={{
+                >{{ baseURL }}/oauth/authorize?client_id={{
                   this.existingClient.clientId.value
-                }}&response_type=code&scope=/authenticate&redirect_uri=REPLACE
-                WITH REDIRECT URI
+                }}&response_type=code&scope=/authenticate&redirect_uri=<ng-container
+                  i18n="@@developerTools.replaceWithRedirect"
+                  >REPLACE WITH REDIRECT URI</ng-container
+                >
               </code>
             </app-code-panel>
             <app-code-panel [title]="labelTokenRequest">
@@ -360,7 +362,7 @@
               </p>
 
               <strong i18n="@@developerTools.endpoint">Ednpoint</strong>
-              <p>https://sandbox.orcid.org/oauth/token</p>
+              <p>{{ baseURL }}/oauth/token</p>
 
               <strong i18n="@@developerTools.responseType"
                 >Response type</strong
@@ -375,9 +377,12 @@
                   this.existingClient.clientId.value
                 }}&client_secret={{
                   this.existingClient.clientSecret.value
-                }}&grant_type=authorization_code&redirect_uri=REPLACE WITH
-                REDIRECT URI&code=REPLACE WITH OAUTH CODE'
-                https://sandbox.orcid.org/oauth/token
+                }}&grant_type=authorization_code&redirect_uri=<ng-container
+                  i18n="@@developerTools.replaceWithRedirect"
+                  >REPLACE WITH REDIRECT URI</ng-container
+                >&code=<ng-container i18n="@@developerTools.replaceWithOauth"
+                  >REPLACE WITH OAUTH CODE</ng-container
+                >' {{ baseURL }}/oauth/token
               </code>
             </app-code-panel>
             <app-code-panel [title]="labelOpenIdImplicitRequest">
@@ -399,7 +404,7 @@
               </p>
 
               <strong i18n="@@developerTools.endpoint">Ednpoint</strong>
-              <p>https://sandbox.orcid.org/oauth/token</p>
+              <p>{{ baseURL }}/oauth/token</p>
 
               <strong i18n="@@developerTools.scope">Scope</strong>
               <p>openid</p>
@@ -410,11 +415,13 @@
               <p>token</p>
 
               <code
-                >https://sandbox.orcid.org/oauth/authorize?client_id={{
+                >{{ baseURL }}/oauth/authorize?client_id={{
                   this.existingClient.clientId.value
-                }}&response_type=token&scope=openid&redirect_uri=REPLACE WITH
-                REDIRECT URI
-              </code>
+                }}&response_type=token&scope=openid&redirect_uri=<ng-container
+                  i18n="@@developerTools.replaceWithRedirect"
+                  >REPLACE WITH REDIRECT URI</ng-container
+                ></code
+              >
             </app-code-panel>
           </ng-container>
 
