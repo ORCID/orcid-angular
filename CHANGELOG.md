@@ -1,3 +1,9 @@
+## v2.33.3 - 2023-07-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.33.2...v2.33.3)
+
+- [#1999](https://github.com/ORCID/orcid-angular/pull/1999): Fix/developer tools second batch
+
 ## v2.33.2 - 2023-07-02
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.33.1...v2.33.2)
