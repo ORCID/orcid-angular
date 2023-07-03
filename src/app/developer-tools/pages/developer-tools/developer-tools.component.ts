@@ -187,7 +187,9 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
     } else {
       this.developerToolsService
         .postDeveloperToolsClient(devToolsClient)
-        .subscribe((res) => {})
+        .subscribe((res) => {
+          this.ngOnInit()
+        })
     }
   }
   validatorAtLeastOne(): ValidatorFn {
