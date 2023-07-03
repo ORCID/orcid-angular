@@ -66,6 +66,7 @@
 
           <div class="row">
             <label
+              for="displayName"
               class="row mat-caption"
               [ngClass]="{
                 error:
@@ -78,7 +79,12 @@
               >
             </label>
             <mat-form-field appearance="outline" class="mat-form-field-min">
-              <input matInput formControlName="displayName" type="text" />
+              <input
+                matInput
+                formControlName="displayName"
+                type="text"
+                id="displayName"
+              />
               <mat-error
                 *ngIf="form.hasError('required', 'displayName')"
                 i18n="@@developerTools.applicationNameCannotBeEmpty"
@@ -99,6 +105,7 @@
           </div>
           <div class="row">
             <label
+              for="website"
               class="row mat-caption"
               [ngClass]="{
                 error:
@@ -111,7 +118,12 @@
               >
             </label>
             <mat-form-field appearance="outline" class="mat-form-field-min">
-              <input matInput formControlName="website" type="text" />
+              <input
+                matInput
+                formControlName="website"
+                type="text"
+                id="website"
+              />
               <mat-error
                 *ngIf="form.hasError('required', 'website')"
                 i18n="@@developerTools.websiteNameCannotBeEmpty"
@@ -129,6 +141,7 @@
 
           <div class="row">
             <label
+              for="api-description"
               class="row mat-caption"
               [ngClass]="{
                 error:
@@ -249,7 +262,11 @@
             <ng-container
               *ngFor="let redirectUri of redirectUris.controls; index as i"
             >
-              <mat-form-field appearance="outline" class="mat-form-field-min">
+              <mat-form-field
+                appearance="outline"
+                class="mat-form-field-min"
+                [id]="i + 'url'"
+              >
                 <input
                   #websiteInput
                   matInput
