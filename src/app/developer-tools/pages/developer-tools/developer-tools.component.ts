@@ -1,10 +1,12 @@
 import {
   ChangeDetectorRef,
   Component,
+  ElementRef,
   Inject,
   OnDestroy,
   OnInit,
   QueryList,
+  ViewChild,
   ViewChildren,
 } from '@angular/core'
 import { FormControl } from '@angular/forms'
@@ -61,6 +63,7 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
   sucessSave: boolean
   loadingUserDevTolsState: boolean
   baseURL: string
+  @ViewChild('firstInput') firstInput: ElementRef
 
   constructor(
     private fb: FormBuilder,
@@ -69,7 +72,7 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
     private matDialog: MatDialog,
     private recordService: RecordService,
     private _changeDetectorRef: ChangeDetectorRef,
-    @Inject(WINDOW) private window: Window,
+    @Inject(WINDOW) private window: Window
   ) {}
   ngOnDestroy(): void {
     this.destroy$.next(true)
@@ -124,6 +127,10 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
             ])
           )
         })
+
+        this._changeDetectorRef.detectChanges()
+
+        this.firstInput.nativeElement.focus()
       })
   }
 
@@ -134,6 +141,8 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
       this.form.get('redirectUris').value as string[]
     ).some((uri) => !uri)
     this.form.markAllAsTouched()
+
+    console.log('triedToSaveWithoutUrls ', this.triedToSaveWithoutUrls)
 
     if (this.form.invalid) {
       return
@@ -182,9 +191,7 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
     } else {
       this.developerToolsService
         .postDeveloperToolsClient(devToolsClient)
-        .subscribe((res) => {
-          this.ngOnInit()
-        })
+        .subscribe((res) => {})
     }
   }
   validatorAtLeastOne(): ValidatorFn {

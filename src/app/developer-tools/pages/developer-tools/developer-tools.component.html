@@ -10,7 +10,13 @@
         >
           Developer tools
         </h1>
-        <a routerLink="/my-orcid" i18n="@@developerTools.backToMyRecod">Back to my record</a>
+        <a
+          routerLink="/my-orcid"
+          i18n="@@developerTools.backToMyRecod"
+          cdkFocusInitial
+          #firstInput
+          >Back to my record</a
+        >
       </div>
 
       <div class="loading-container">
@@ -425,54 +431,46 @@
             </app-code-panel>
           </ng-container>
 
-          <ng-container *ngIf="sucessSave && form.pristine">
-            <p i18n="@@developerTools.changesHaveBeenSavedSuccessfully">
+          <p class="save-message" *ngIf="sucessSave && form.pristine">
+            <ng-container
+              i18n="@@developerTools.changesHaveBeenSavedSuccessfully"
+            >
               Changes have been saved successfully.
-            </p>
-          </ng-container>
-          <p>
-            <mat-error
-              *ngIf="
-                form.hasError('forbiddenLength', 'redirectUris') &&
-                formWasSummited
-              "
-              i18n="@@developerTools.youShouldProvideAtLeastOneRedirectUri"
-            >
-              You should provide at least one redirect URI
-            </mat-error>
-
-            <mat-error
-              *ngIf="
-                form.hasError('duplicate', 'redirectUris') && formWasSummited
-              "
-              i18n="@@developerTools.redirectUrisMustBeUnique"
-            >
+            </ng-container>
+          </p>
+          <p
+            class="save-message"
+            *ngIf="
+              form.hasError('duplicate', 'redirectUris') && formWasSummited
+            "
+          >
+            <mat-error i18n="@@developerTools.redirectUrisMustBeUnique">
               Redirect URIs must be unique
             </mat-error>
-
-            <button
-              mat-raised-button
-              color="primary"
-              id="cy-register-for-public-api"
-              (click)="save()"
-              [disabled]="form.pristine"
-              class="save-button"
-            >
-              <ng-container
-                *ngIf="!existingClient?.clientId?.value"
-                i18n="@@developerTools.saveApplicationAndGenerate"
-              >
-                Save application and generate my client ID and secret
-              </ng-container>
-
-              <ng-container
-                *ngIf="existingClient?.clientId?.value"
-                i18n="@@developerTools.saveApplication"
-              >
-                Save application
-              </ng-container>
-            </button>
           </p>
+
+          <button
+            mat-raised-button
+            color="primary"
+            id="cy-register-for-public-api"
+            (click)="save()"
+            [disabled]="form.pristine"
+            class="save-button"
+          >
+            <ng-container
+              *ngIf="!existingClient?.clientId?.value"
+              i18n="@@developerTools.saveApplicationAndGenerate"
+            >
+              Save application and generate my client ID and secret
+            </ng-container>
+
+            <ng-container
+              *ngIf="existingClient?.clientId?.value"
+              i18n="@@developerTools.saveApplication"
+            >
+              Save application
+            </ng-container>
+          </button>
         </ng-container>
       </ng-container>
 
