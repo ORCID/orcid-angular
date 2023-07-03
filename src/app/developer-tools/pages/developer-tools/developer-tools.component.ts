@@ -127,11 +127,10 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
             ])
           )
         })
-
-        this._changeDetectorRef.detectChanges()
-
-        this.firstInput.nativeElement.focus()
       })
+    this._changeDetectorRef.detectChanges()
+
+    this.firstInput.nativeElement.focus()
   }
 
   save() {
