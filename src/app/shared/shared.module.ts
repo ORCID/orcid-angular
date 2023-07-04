@@ -48,7 +48,8 @@ import { AppPanelActivityActionAriaLabelPipe } from './pipes/app-panel-activity-
 import { SortByPipe } from './pipes/sort-by/sort-by.pipe'
 import { AffiliationLabelPipe } from './pipes/affiliation-label.pipe'
 import { AffiliationTypePipe } from './pipes/affiliation-type/affiliation-type.pipe'
-import { ScopePathTypePipe } from './pipes/scope-path-type/scope-path-type.pipe'
+import { ScopePathTypePipe } from './pipes/scope-path-type/scope-path-type.pipe';
+import { AppPanelsSortByAriaLabelPipe } from './pipes/app-panels-sort-by-aria-label/app-panels-sort-by-aria-label.pipe'
 @NgModule({
   imports: [
     CommonModule,
@@ -97,6 +98,7 @@ import { ScopePathTypePipe } from './pipes/scope-path-type/scope-path-type.pipe'
     AffiliationLabelPipe,
     AffiliationTypePipe,
     ScopePathTypePipe,
+    AppPanelsSortByAriaLabelPipe,
   ],
   exports: [
     CommonModule,
@@ -143,6 +145,7 @@ import { ScopePathTypePipe } from './pipes/scope-path-type/scope-path-type.pipe'
     SortByPipe,
     AffiliationTypePipe,
     ScopePathTypePipe,
+    AppPanelsSortByAriaLabelPipe,
   ],
   providers: [], // Should not provide anything
 })
