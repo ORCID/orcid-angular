@@ -2,7 +2,7 @@
 <div class="container no-padding">
   <div class="row">
     <app-side-bar [orcidId]="true" class="col l3 m8 s4"></app-side-bar>
-    <main id="main" class="col l9 m8 s4 orc-font-body-small">
+    <main id="main" class="col l9 m8 s4 orc-font-body-small" #firstInput>
       <div class="title-container">
         <h1
           class="orc-font-heading-small"
@@ -14,7 +14,6 @@
           routerLink="/my-orcid"
           i18n="@@developerTools.backToMyRecod"
           cdkFocusInitial
-          #firstInput
           class="underline orc-font-body-small"
           >Back to my record</a
         >
@@ -463,9 +462,7 @@
             [disabled]="form.pristine"
             class="save-button mat-button-wrap-text"
           >
-            <ng-container
-              i18n="@@developerTools.saveApplicationAndGenerate"
-            >
+            <ng-container i18n="@@developerTools.saveApplicationAndGenerate">
               Save application and generate my client ID and secret
             </ng-container>
 
