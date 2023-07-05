@@ -150,6 +150,7 @@ app-client-secret {
 
 .save-button {
   margin-top: 32px;
+  margin-bottom: 32px;
 }
 
 .save-message {
@@ -157,4 +158,31 @@ app-client-secret {
   width: 100%;
   margin-top: 32px;
   margin-bottom: 0;
+}
+
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  .input-group {
+    display: flex;
+    flex-direction: row;
+
+    .mat-icon-button {
+      top: -5px;
+    }
+  }
+
+
+}
+
+
+.columns-8 :host,
+.columns-4 :host {
+  .title-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }

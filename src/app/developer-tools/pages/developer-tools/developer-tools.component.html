@@ -85,7 +85,11 @@
                 >Application name</strong
               >
             </label>
-            <mat-form-field appearance="outline" class="mat-form-field-min">
+            <mat-form-field
+              appearance="outline"
+              class="mat-form-field-min"
+              [ngClass]="{ 'two-line-hint': isMobile }"
+            >
               <input
                 matInput
                 formControlName="displayName"
@@ -265,8 +269,9 @@
             </div>
           </div>
 
-          <ng-container formArrayName="redirectUris">
-            <ng-container
+          <div class="input-container" formArrayName="redirectUris">
+            <div
+              class="input-group"
               *ngFor="let redirectUri of redirectUris.controls; index as i"
             >
               <mat-form-field
@@ -310,8 +315,8 @@
                   >delete
                 </mat-icon>
               </button>
-            </ng-container>
-          </ng-container>
+            </div>
+          </div>
 
           <div class="row">
             <a
@@ -456,10 +461,9 @@
             id="cy-register-for-public-api"
             (click)="save()"
             [disabled]="form.pristine"
-            class="save-button"
+            class="save-button mat-button-wrap-text"
           >
             <ng-container
-              *ngIf="!existingClient?.clientId?.value"
               i18n="@@developerTools.saveApplicationAndGenerate"
             >
               Save application and generate my client ID and secret
