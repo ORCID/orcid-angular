@@ -2,7 +2,7 @@
 <div class="container no-padding">
   <div class="row">
     <app-side-bar [orcidId]="true" class="col l3 m8 s4"></app-side-bar>
-    <main id="main" class="col l9 m8 s4 orc-font-body-small" #firstInput>
+    <main id="main" class="col l9 m8 s4 orc-font-body-small">
       <div class="title-container">
         <h1
           class="orc-font-heading-small"
@@ -11,6 +11,7 @@
           Developer tools
         </h1>
         <a
+          #firstInput
           routerLink="/my-orcid"
           i18n="@@developerTools.backToMyRecod"
           cdkFocusInitial

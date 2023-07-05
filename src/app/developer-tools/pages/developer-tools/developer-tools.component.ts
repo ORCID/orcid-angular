@@ -35,7 +35,6 @@ import { MatInput } from '@angular/material/input'
 import { environment } from 'src/environments/environment'
 import { WINDOW } from 'src/app/cdk/window'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
-import { log } from 'console'
 
 @Component({
   selector: 'app-developer-tools',
@@ -67,7 +66,7 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
   baseURL: string
   isMobile: boolean
 
-  @ViewChild('firstInput') mainElement: ElementRef
+  @ViewChild('firstInput') firstInput: ElementRef
 
   constructor(
     private fb: FormBuilder,
@@ -142,8 +141,7 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
       })
     this._changeDetectorRef.detectChanges()
 
-    console.log('......... ', this.mainElement)
-    this.mainElement.nativeElement.focus()
+    this.firstInput.nativeElement.focus()
   }
 
   save() {
