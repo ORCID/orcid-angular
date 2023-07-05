@@ -439,6 +439,7 @@
 
           <p class="save-message" *ngIf="sucessSave && form.pristine">
             <ng-container
+              *ngIf="!existingClient?.clientId?.value"
               i18n="@@developerTools.changesHaveBeenSavedSuccessfully"
             >
               Changes have been saved successfully.
