@@ -439,7 +439,6 @@
 
           <p class="save-message" *ngIf="sucessSave && form.pristine">
             <ng-container
-              *ngIf="!existingClient?.clientId?.value"
               i18n="@@developerTools.changesHaveBeenSavedSuccessfully"
             >
               Changes have been saved successfully.
@@ -464,7 +463,11 @@
             [disabled]="form.pristine"
             class="save-button mat-button-wrap-text"
           >
-            <ng-container i18n="@@developerTools.saveApplicationAndGenerate">
+            <ng-container
+              i18n="@@developerTools.saveApplicationAndGenerate"
+              *ngIf="!existingClient?.clientId?.value"
+              i18n="@@developerTools.saveApplicationAndGenerate"
+            >
               Save application and generate my client ID and secret
             </ng-container>
 
