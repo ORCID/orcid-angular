@@ -14,6 +14,11 @@ export class AppPanelsSortAriaLabelPipe implements PipeTransform {
         $localize`:@@shared.employmentSortAriaLabel:Sort your employment` +
         disabledStr
       )
+    } else if (panelType === 'professional-activities') {
+      return (
+        $localize`:@@shared.sortProfessionalActivities:Sort your professional activities` +
+        disabledStr
+      )
     } else if (panelType === 'education' || panelType === 'qualification') {
       return (
         $localize`:@@shared.educationQualificationSortAriaLabel:Sort your education and qualifications` +
