@@ -99,6 +99,7 @@ export class AffiliationStacksGroupsComponent implements OnInit {
                   ?.affiliationGroup,
               ],
             })
+            this.sortEvent({ type: 'end', direction: 'desc' }, 'PROFESSIONAL_ACTIVITIES')
           }
         }
       })
