@@ -23,7 +23,6 @@ export class ResearchResourceStackComponent implements OnInit {
   @Input() isPublicRecord: string
   @Input() userRecord: UserRecord
 
-
   @Input()
   set researchResourceStack(value: ResearchResourcesGroup) {
     this._researchResourceStack = value

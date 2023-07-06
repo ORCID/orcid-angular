@@ -9,19 +9,13 @@
   $background: map-get($theme, background);
   $overlay-color: mat.get-color-from-palette($background, blue-overlay);
 
-
   .verified {
     color: mat.get-color-from-palette($accent, 400);
-
   }
 
   .not-verified {
     color: mat.get-color-from-palette($primary, 200);
-
   }
 }
-
-
-
 
 @include theme($orcid-app-theme);

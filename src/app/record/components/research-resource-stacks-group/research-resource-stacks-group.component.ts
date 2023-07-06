@@ -2,7 +2,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { isEmpty } from 'lodash'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
-import { MainPanelsState, UserRecord, UserRecordOptions } from 'src/app/types/record.local'
+import {
+  MainPanelsState,
+  UserRecord,
+  UserRecordOptions,
+} from 'src/app/types/record.local'
 import { SortData } from 'src/app/types/sort'
 
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
