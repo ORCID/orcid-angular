@@ -188,7 +188,7 @@ export class PanelComponent implements OnInit {
         if (this.editModalComponent) {
           modalComponent = this._dialog.open(this.editModalComponent, {
             width: '850px',
-            maxWidth: platform.tabletOrHandset ? '99%' : '80vw',
+            maxWidth: '99%',
             data: this.userRecord,
             ariaLabel: getAriaLabel(this.editModalComponent, this.type),
           })
