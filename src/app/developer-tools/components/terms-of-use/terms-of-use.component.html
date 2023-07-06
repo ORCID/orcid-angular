@@ -124,7 +124,7 @@
 
 <p class="checkbox-container">
   <mat-checkbox
-    class="mat-checkbox"
+    class="mat-checkbox orcid-checkbox-baseline"
     [(ngModel)]="checked"
     [disabled]="!emailAlreadyVerified"
     i18n="@@developerTools.haveReadAndAgreeToTheOrcidPublicClientTermsOfService"
@@ -136,6 +136,7 @@
 <p>
   <button
     [disabled]="!emailAlreadyVerified"
+    class="mat-button-wrap-text"
     mat-raised-button
     color="primary"
     id="cy-register-for-public-api"
