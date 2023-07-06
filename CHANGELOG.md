@@ -1,3 +1,13 @@
+## v2.34.2 - 2023-07-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.34.1...v2.34.2)
+
+- [#2004](https://github.com/ORCID/orcid-angular/pull/2004): fix: Add end desc default sort to `Professional Activities`
+
+### Fix
+
+- Add end desc default sort to `Professional Activities`
+
 ## v2.34.1 - 2023-07-06
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.34.0...v2.34.1)
