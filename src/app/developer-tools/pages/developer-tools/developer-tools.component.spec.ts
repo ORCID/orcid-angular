@@ -9,6 +9,7 @@ import { UserInfoService } from 'src/app/core/user-info/user-info.service'
 import { of } from 'rxjs'
 import { WINDOW_PROVIDERS } from 'src/app/cdk/window'
 import { DeveloperToolsComponent } from './developer-tools.component'
+import { PlatformInfoService } from 'src/app/cdk/platform-info'
 
 describe('DeveloperToolsComponent', () => {
   let component: DeveloperToolsComponent
@@ -19,6 +20,10 @@ describe('DeveloperToolsComponent', () => {
       declarations: [DeveloperToolsComponent],
       providers: [
         WINDOW_PROVIDERS,
+        {
+          provide: PlatformInfoService,
+          useValue: { get: () => of({}) },
+        },
         {
           provide: FormBuilder,
           useValue: {},
