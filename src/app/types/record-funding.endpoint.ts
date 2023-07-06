@@ -54,6 +54,7 @@ export interface Funding extends AssertionBase {
   typeForDisplay?: string
   dateSortString?: MonthDayYearDate
   fullyLoaded?: boolean
+  userIsSource?: boolean
 }
 
 export enum FundingTypes {

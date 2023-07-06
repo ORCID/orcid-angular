@@ -21,7 +21,7 @@
     [putCode]="affiliation.putCode.value"
     [visibility]="affiliationStack.defaultAffiliation.visibility.visibility"
     [isPublicRecord]="isPublicRecord"
-    [isUserSource]="userIsSource(affiliation)"
+    [isUserSource]="affiliation.userIsSource"
     [userVersionPresent]="affiliationStack.userVersionPresent"
     [(displayTheStack)]="displayTheStack"
     [hasExternalIds]="hasExternalIdentifiers"

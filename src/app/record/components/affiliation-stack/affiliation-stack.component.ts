@@ -33,6 +33,14 @@ export class AffiliationStackComponent implements OnInit {
   set affiliationStack(value: AffiliationGroup) {
     this.hasExternalIdentifiers = !!value.externalIdentifiers.length
     this._affiliationStack = value
+    this._affiliationStack.affiliations =
+      this._affiliationStack.affiliations.map((affiliation) => {
+        return {
+          ...affiliation,
+          userIsSource: this.userIsSource(affiliation),
+        }
+      })
+
     this.setAffiliationsInitialStates(value)
   }
   get affiliationStack(): AffiliationGroup {

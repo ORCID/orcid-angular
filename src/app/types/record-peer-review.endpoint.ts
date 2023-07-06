@@ -27,6 +27,7 @@ export interface PeerReview extends AssertionBase {
   visibilityError: boolean
   duplicated?: number
   putCodes?: any
+  userIsSource?: boolean
 }
 
 export interface PeerReviewDuplicateGroup {
