@@ -206,9 +206,6 @@ export class PeerReviewStackComponent implements OnInit {
   }
 
   userIsSource(peerReview: PeerReview): boolean {
-    console.log(this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID)
-    console.log(peerReview.source)
-
     return (
       this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID === peerReview?.source
     )
