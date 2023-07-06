@@ -1,3 +1,23 @@
+## v2.34.0 - 2023-07-05
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.33.3...v2.34.0)
+
+- [#2000](https://github.com/ORCID/orcid-angular/pull/2000): Rollback fix: Temporarily remove onetrust link from footer
+- [#2002](https://github.com/ORCID/orcid-angular/pull/2002): fix: Add missing assistive text to professional activities and sort type
+- [#2001](https://github.com/ORCID/orcid-angular/pull/2001): fix: Update professional activities link section
+
+### Fix
+
+- Add missing assistive text to professional activities and sort type
+- Update professional activities link section
+- Temporarily remove onetrust link from footer
+
+## v2.33.3 - 2023-07-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.33.2...v2.33.3)
+
+- [#1999](https://github.com/ORCID/orcid-angular/pull/1999): Fix/developer tools second batch
+
 ## v2.33.2 - 2023-07-02
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.33.1...v2.33.2)
