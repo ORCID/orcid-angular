@@ -42,7 +42,7 @@ export interface AffiliationUIGroup {
 }
 
 export interface AffiliationGroup {
-  affiliations: [Affiliation]
+  affiliations: Affiliation[]
   activePutCode: number
   defaultAffiliation: Affiliation
   groupId: string
@@ -79,6 +79,7 @@ export interface Affiliation extends AssertionBase {
   orgDisambiguatedExternalIdentifiers?: any // TODO is this always empty?
   affiliationExternalIdentifiers?: ExternalIdentifier[]
   organization?: Organization
+  userIsSource?: boolean
 }
 
 export interface Organization {

@@ -43,6 +43,9 @@ export class WorkStackComponent implements OnInit {
   set workStack(value: WorkGroup) {
     this.hasExternalIds = !!value.externalIdentifiers.length
     this._workStack = value
+    this._workStack.works = this._workStack.works.map((work) => {
+      return { ...work, userIsSource: this.userIsSource(work) }
+    })
     this.setInitialStates(value, true)
   }
   get workStack(): WorkGroup {

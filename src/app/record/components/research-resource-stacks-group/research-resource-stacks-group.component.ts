@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { isEmpty } from 'lodash'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
-import { MainPanelsState, UserRecordOptions } from 'src/app/types/record.local'
+import { MainPanelsState, UserRecord, UserRecordOptions } from 'src/app/types/record.local'
 import { SortData } from 'src/app/types/sort'
 
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
@@ -65,6 +65,7 @@ export class ResearchResourceStacksGroupComponent implements OnInit {
   paginationPageSize: number
   paginationLoading = true
   paginatorLabel: string
+  userRecord: UserRecord
 
   constructor(
     _platform: PlatformInfoService,
@@ -98,6 +99,7 @@ export class ResearchResourceStacksGroupComponent implements OnInit {
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
         if (!isEmpty(userRecord?.researchResources)) {
+          this.userRecord = userRecord
           this.paginationLoading = false
           this.researchResources = userRecord.researchResources
           this.total.emit(this.researchResources.groups?.length || 0)

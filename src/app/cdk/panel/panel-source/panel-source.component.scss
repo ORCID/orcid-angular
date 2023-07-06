@@ -9,7 +9,7 @@ app-panel-data {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 8px 16px;
+  padding: 16px 16px;
 }
 
 .preferred-source {
@@ -33,5 +33,22 @@ app-panel-data {
       margin-inline-start: 0px;
       align-items: center;
     }
+  }
+}
+
+.source-title {
+  display: flex;
+  align-items: center;
+  mat-icon {
+    padding-left: 8px;
+    padding-right: 8px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    img {
+      width: 20px;
+      height: 20px;
+    }
+
   }
 }

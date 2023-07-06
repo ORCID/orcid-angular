@@ -6,6 +6,7 @@ import {
 } from '../../../types/record-research-resources.endpoint'
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { RecordResearchResourceService } from '../../../core/record-research-resource/record-research-resource.service'
+import { UserRecord } from 'src/app/types/record.local'
 
 @Component({
   selector: 'app-research-resource-stack',
@@ -20,6 +21,8 @@ export class ResearchResourceStackComponent implements OnInit {
   _researchResourceStack: ResearchResourcesGroup
   visibility: VisibilityStrings
   @Input() isPublicRecord: string
+  @Input() userRecord: UserRecord
+
 
   @Input()
   set researchResourceStack(value: ResearchResourcesGroup) {
