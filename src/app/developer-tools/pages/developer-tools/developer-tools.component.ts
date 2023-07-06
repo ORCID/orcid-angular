@@ -34,6 +34,7 @@ import { RecordService } from 'src/app/core/record/record.service'
 import { MatInput } from '@angular/material/input'
 import { environment } from 'src/environments/environment'
 import { WINDOW } from 'src/app/cdk/window'
+import { PlatformInfoService } from 'src/app/cdk/platform-info'
 
 @Component({
   selector: 'app-developer-tools',
@@ -63,6 +64,8 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
   sucessSave: boolean
   loadingUserDevTolsState: boolean
   baseURL: string
+  isMobile: boolean
+
   @ViewChild('firstInput') firstInput: ElementRef
 
   constructor(
@@ -72,7 +75,8 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
     private matDialog: MatDialog,
     private recordService: RecordService,
     private _changeDetectorRef: ChangeDetectorRef,
-    @Inject(WINDOW) private window: Window
+    @Inject(WINDOW) private window: Window,
+    private _platform: PlatformInfoService
   ) {}
   ngOnDestroy(): void {
     this.destroy$.next(true)
@@ -80,6 +84,13 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this._platform
+      .get()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((platform) => {
+        this.isMobile = platform.columns4 || platform.columns8
+      })
+
     this.baseURL = this.window.location.origin
     this.getDeveloperToolsEnableState()
       .pipe(
