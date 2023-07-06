@@ -1,3 +1,9 @@
+## v2.34.1 - 2023-07-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.34.0...v2.34.1)
+
+- [#2003](https://github.com/ORCID/orcid-angular/pull/2003): 8712 qa developer tools mobile issues
+
 ## v2.34.0 - 2023-07-05
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.33.3...v2.34.0)
