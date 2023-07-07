@@ -1,3 +1,9 @@
+## v2.34.4 - 2023-07-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.34.3...v2.34.4)
+
+- [#2007](https://github.com/ORCID/orcid-angular/pull/2007): 8717 qa edit button missing from activities
+
 ## v2.34.3 - 2023-07-06
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.34.2...v2.34.3)
