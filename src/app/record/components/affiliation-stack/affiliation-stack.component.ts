@@ -13,7 +13,6 @@ import {
 import { UserRecord } from 'src/app/types/record.local'
 import { ModalAffiliationsComponent } from '../affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component'
 import { TogglzService } from '../../../core/togglz/togglz.service'
-import { log } from 'console'
 
 @Component({
   selector: 'app-affiliation-stack',
