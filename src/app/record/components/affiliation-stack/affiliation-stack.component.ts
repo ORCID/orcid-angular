@@ -56,8 +56,23 @@ export class AffiliationStackComponent implements OnInit {
   get displayTheStack(): boolean {
     return this._displayTheStack
   }
+  private _userInfo: UserInfo
 
-  @Input() userInfo: UserInfo
+  @Input()
+  public set userInfo(value: UserInfo) {
+    this._userInfo = value
+    this._affiliationStack.affiliations =
+      this._affiliationStack.affiliations.map((affiliation) => {
+        return {
+          ...affiliation,
+          userIsSource: this.userIsSource(affiliation),
+        }
+      })
+  }
+  public get userInfo(): UserInfo {
+    return this._userInfo
+  }
+
   @Input() professionalActivitiesTogglz = false
 
   orgDisambiguated: { [key: string]: OrgDisambiguated | null } = {}
