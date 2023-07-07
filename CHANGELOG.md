@@ -1,3 +1,9 @@
+## v2.34.3 - 2023-07-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.34.2...v2.34.3)
+
+- [#2006](https://github.com/ORCID/orcid-angular/pull/2006): 8633 source icon and sorting option
+
 ## v2.34.2 - 2023-07-06
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.34.1...v2.34.2)
