@@ -23,7 +23,11 @@ export class FooterComponent implements OnInit {
     })
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    setTimeout(() => {
+      document.getElementById('ot-sdk-btn').innerText = $localize`:@@footer.cookieSettings:Cookie Settings`
+    }, 200)
+  }
 
   goTo(url) {
     this.window.location.href = url
