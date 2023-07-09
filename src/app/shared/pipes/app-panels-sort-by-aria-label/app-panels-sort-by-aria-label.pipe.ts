@@ -5,7 +5,7 @@ import { SortOrderType } from '../../../types/sort'
   name: 'appPanelsSortByAriaLabel',
 })
 export class AppPanelsSortByAriaLabelPipe implements PipeTransform {
-  transform(sortBy: SortOrderType): string {
+  transform(sortBy: SortOrderType, type: string): string {
     switch (sortBy) {
       case 'title':
         return getTitleLabelByType(type);
