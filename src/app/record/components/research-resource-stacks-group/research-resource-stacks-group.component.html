@@ -39,6 +39,7 @@
     </mat-paginator>
     <ng-container *ngIf="researchResources.groups.length > 0">
       <app-research-resource-stack
+        [userRecord]="userRecord"
         [isPublicRecord]="isPublicRecord"
         [researchResourceStack]="group"
         *ngFor="

@@ -154,6 +154,14 @@ const routes: Routes = [
       ),
   },
   {
+    path: ApplicationRoutes.developerTools,
+    canActivateChild: [AuthenticatedGuard],
+    loadChildren: () =>
+      import('./developer-tools/developer-tools.module').then(
+        (m) => m.DeveloperToolsModule
+      ),
+  },
+  {
     path: '**',
     redirectTo: '/',
   },

@@ -1,0 +1,184 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.warn {
+  padding: 16px;
+  margin-top: 0px;
+  margin-bottom: 32px;
+  border: solid 2px;
+  border-radius: 4px;
+  display: flex;
+
+  p {
+    margin: 0;
+  }
+}
+
+.info {
+  padding: 16px;
+  margin-top: 16px;
+  margin-bottom: 32px;
+  border: solid 2px;
+  border-radius: 4px;
+  display: flex;
+
+  p {
+    margin: 0;
+  }
+}
+
+hr {
+  margin-bottom: 16px;
+}
+
+hr {
+  height: 2px;
+  border: 0;
+  margin: 0 0 20px;
+}
+
+h2 {
+  margin-bottom: 16px;
+  margin-top: 32px;
+}
+
+label {
+  margin-bottom: 8px;
+}
+
+mat-form-field {
+  margin-bottom: 12px;
+}
+
+mat-form-field {
+  width: 100%;
+  max-width: 646px;
+}
+
+:host {
+  ::ng-deep {
+    .mat-form-field-appearance-outline .mat-form-field-subscript-wrapper {
+      padding-left: 0;
+    }
+  }
+}
+
+p {
+  padding: 0;
+  margin: 0;
+}
+
+ul {
+  padding-left: 16px;
+}
+
+.add-more {
+  display: flex;
+  align-items: center;
+
+  mat-icon {
+    margin-inline-end: 8px;
+    display: block;
+  }
+}
+
+.loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+}
+
+code {
+  padding: 8px;
+  border: 1px solid;
+  display: block;
+}
+
+p {
+  margin-bottom: 16px;
+}
+
+p,
+strong {
+  display: block;
+  width: 100%;
+}
+
+h3 {
+  display: block;
+  margin: 0;
+}
+
+.title-example-code {
+  margin-top: 32px;
+}
+
+h1 {
+  margin: 0;
+}
+
+main#main {
+  padding-left: 16px;
+}
+
+.info p,
+.info strong {
+  display: inline;
+}
+
+.title-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  margin-top: 32px;
+}
+
+.warning-title {
+  margin-bottom: 12px;
+}
+
+app-client-secret {
+  margin-top: 16px;
+}
+
+.save-button {
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+.save-message {
+  display: block;
+  width: 100%;
+  margin-top: 32px;
+  margin-bottom: 0;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  .input-group {
+    display: flex;
+    flex-direction: row;
+
+    .mat-icon-button {
+      top: -5px;
+    }
+  }
+}
+
+.columns-8 :host,
+.columns-4 :host {
+  .title-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

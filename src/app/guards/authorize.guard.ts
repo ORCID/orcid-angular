@@ -82,19 +82,7 @@ export class AuthorizeGuard implements CanActivateChild {
     )
 
     return forkJoin(analyticsReports).pipe(
-      tap((value) => {
-        console.log(
-          'reportAlreadyAuthorize tap',
-          value,
-          JSON.stringify((this.window as any).dataLayer)
-        )
-      }),
       catchError((err) => {
-        console.log(
-          'reportAlreadyAuthorize catchError',
-          err,
-          JSON.stringify((this.window as any).dataLayer)
-        )
         this._errorHandler.handleError(
           err,
           ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA

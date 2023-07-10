@@ -100,6 +100,7 @@ export const ApplicationRoutes = {
   trustedParties: 'trusted-parties',
   resetPasswordEmail: 'reset-password-email',
   selfService: 'self-service',
+  developerTools: 'developer-tools',
   home: '',
 }
 
@@ -124,6 +125,7 @@ export const ApplicationRoutesLabels = {
   [ApplicationRoutes.trustedParties]: $localize`:@@share.trustedParties:Trusted parties - ORCID `,
   [ApplicationRoutes.resetPasswordEmail]: $localize`:@@share.resetPasswordEmail:Reset password - ORCID`,
   [ApplicationRoutes.selfService]: $localize`:@@share.selfService:Self Service - ORCID`,
+  [ApplicationRoutes.developerTools]: $localize`:@@share.developerTools:Developer tools - ORCID`,
 }
 
 export const ApplicationDynamicRoutesLabels = {

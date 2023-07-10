@@ -1,3 +1,75 @@
+## v2.34.3 - 2023-07-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.34.2...v2.34.3)
+
+- [#2006](https://github.com/ORCID/orcid-angular/pull/2006): 8633 source icon and sorting option
+
+## v2.34.2 - 2023-07-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.34.1...v2.34.2)
+
+- [#2004](https://github.com/ORCID/orcid-angular/pull/2004): fix: Add end desc default sort to `Professional Activities`
+
+### Fix
+
+- Add end desc default sort to `Professional Activities`
+
+## v2.34.1 - 2023-07-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.34.0...v2.34.1)
+
+- [#2003](https://github.com/ORCID/orcid-angular/pull/2003): 8712 qa developer tools mobile issues
+
+## v2.34.0 - 2023-07-05
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.33.3...v2.34.0)
+
+- [#2000](https://github.com/ORCID/orcid-angular/pull/2000): Rollback fix: Temporarily remove onetrust link from footer
+- [#2002](https://github.com/ORCID/orcid-angular/pull/2002): fix: Add missing assistive text to professional activities and sort type
+- [#2001](https://github.com/ORCID/orcid-angular/pull/2001): fix: Update professional activities link section
+
+### Fix
+
+- Add missing assistive text to professional activities and sort type
+- Update professional activities link section
+- Temporarily remove onetrust link from footer
+
+## v2.33.3 - 2023-07-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.33.2...v2.33.3)
+
+- [#1999](https://github.com/ORCID/orcid-angular/pull/1999): Fix/developer tools second batch
+
+## v2.33.2 - 2023-07-02
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.33.1...v2.33.2)
+
+- [#1998](https://github.com/ORCID/orcid-angular/pull/1998): Dev tools batch of fixes
+
+## v2.33.1 - 2023-06-28
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.32.15...v2.33.1)
+
+## v2.32.15 - 2023-06-28
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.32.14...v2.32.15)
+
+### Feature
+
+- Enable language detection in onetrust (#1994)
+
+## 2.33.0 - 2023-06-26
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.32.14...2.33.0)
+
+## v2.32.14 - 2023-06-26
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.32.13...v2.32.14)
+
+## v2.32.13 - 2023-06-26
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.32.12...v2.32.13)
+
 ## v2.32.12 - 2023-06-22
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.32.11...v2.32.12)

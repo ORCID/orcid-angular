@@ -79,6 +79,13 @@
         >
           Accessibility Statement
         </a>
+      </div>
+    </div>
+    <div class="row links space-around">
+      <div
+        class="col mat-button-font url-lists"
+        [ngClass]="{ 'space-around': !platform.columns12 }"
+      >
         <a
           class="col s4 l-auto m8"
           i18n="@@footer.contactSupport"
@@ -99,6 +106,13 @@
           i18n="@@footer.branGuideLines"
         >
           Brand Guidelines
+        </a>
+        <a
+          id="ot-sdk-btn"
+          class="col s4 l-auto m8 ot-sdk-show-settings"
+          i18n="@@footer.cookieSettings"
+        >
+          Cookie Settings
         </a>
       </div>
     </div>

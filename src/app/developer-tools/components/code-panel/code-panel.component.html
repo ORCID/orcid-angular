@@ -1,0 +1,30 @@
+<div class="code-panel-container">
+  <div class="top-bar" [ngClass]="{ 'tob-bar-expand': openState }">
+    <button
+      mat-icon-button
+      (click)="swapOpenState()"
+      *ngIf="!openState"
+      class="expand_more"
+      [attr.aria-label]="
+        expandAriaLabel + ' ' + title + ' ' + exampleCodeAriaLabel
+      "
+    >
+      <mat-icon>expand_less</mat-icon>
+    </button>
+    <button
+      [attr.aria-label]="
+        collapseAriaLabel + ' ' + title + ' ' + exampleCodeAriaLabel
+      "
+      mat-icon-button
+      (click)="swapOpenState()"
+      *ngIf="openState"
+    >
+      <mat-icon>expand_more</mat-icon>
+    </button>
+
+    <strong (click)="swapOpenState()" class="pointer">{{ title }}</strong>
+  </div>
+  <div *ngIf="openState" class="code-panel-content">
+    <ng-content></ng-content>
+  </div>
+</div>

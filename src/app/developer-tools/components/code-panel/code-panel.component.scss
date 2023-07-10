@@ -1,0 +1,34 @@
+:host {
+  width: 100%;
+  margin-top: 16px;
+  word-break: break-word;
+}
+
+.top-bar {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  min-height: 56px px;
+  word-break: normal;
+  overflow-wrap: anywhere;
+  border-radius: 5px;
+}
+
+.tob-bar-expand {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom: 1px solid;
+}
+
+.code-panel-container {
+  border: 1px solid;
+  border-radius: 5px;
+}
+
+.expand_more {
+  transform: rotate(90deg);
+}
+
+.code-panel-content {
+  padding: 16px;
+}

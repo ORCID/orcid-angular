@@ -71,14 +71,13 @@ import { FundingExternalIdentifiersViewOnlyComponent } from './components/fundin
 import { WorkExternalIdentifiersViewOnlyComponent } from './components/work-external-identifiers-view-only/work-external-identifiers-view-only.component'
 import { TextFieldModule } from '@angular/cdk/text-field'
 import { WarningMessageModule } from '../cdk/warning-message/warning-message.module'
-import { TopBarVerificationEmailComponent } from './components/top-bar-verification-email/top-bar-verification-email.component'
-import { TopBarVerificationEmailModalComponent } from './components/top-bar-verification-email/modals/top-bar-verification-email-modal/top-bar-verification-email-modal.component'
 import { VerificationEmailModalService } from '../core/verification-email-modal/verification-email-modal.service'
 import { ModalCombineWorksWithSelectorComponent } from './components/work/modals/modal-combine-works-with-selector/modal-combine-works-with-selector.component'
 import { TopBarMyPublicRecordPreviewModule } from '../cdk/top-bar-my-public-record-preview/top-bar-my-public-record-preview.module'
 import { WorkContributorRolesComponent } from './components/work-contributor-role/work-contributor-roles.component'
 import { WorkContributorsComponent } from './components/work-contributors/work-contributors.component'
 import { VisibilitySelectorModule } from '../cdk/visibility-selector/visibility-selector.module'
+import { TopBarVerificationEmailModule } from '../cdk/top-bar-verification-email/top-bar-verification-email.module'
 
 @NgModule({
   declarations: [
@@ -127,8 +126,6 @@ import { VisibilitySelectorModule } from '../cdk/visibility-selector/visibility-
     FundingExternalIdentifiersViewOnlyComponent,
     WorkFormComponent,
     WorkModalComponent,
-    TopBarVerificationEmailComponent,
-    TopBarVerificationEmailModalComponent,
     ModalCombineWorksWithSelectorComponent,
     WorkContributorRolesComponent,
     WorkContributorsComponent,
@@ -166,6 +163,7 @@ import { VisibilitySelectorModule } from '../cdk/visibility-selector/visibility-
     TextFieldModule,
     WarningMessageModule,
     TopBarMyPublicRecordPreviewModule,
+    TopBarVerificationEmailModule,
   ],
   providers: [VerificationEmailModalService],
 })
