@@ -7,6 +7,8 @@ export class AppPanelsExpandAriaLabelPipe implements PipeTransform {
   transform(panelType: any, args?: any, panelTitle?: any): string {
     if (panelType === 'employment') {
       return $localize`:@@shared.employmentExpandAriaLabel:Expand the Employment section`
+    } else if (panelType === 'professional-activities') {
+      return $localize`:@@shared.professionalActivitiesExpandAriaLabel:Expand the professional activities section`
     } else if (panelType === 'education' || panelType === 'qualification') {
       return $localize`:@@shared.educationQualificationExpandAriaLabel:Expand the Education and qualifications section`
     } else if (

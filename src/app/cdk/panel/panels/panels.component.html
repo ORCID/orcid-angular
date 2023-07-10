@@ -232,7 +232,7 @@
           mat-menu-item
           (click)="sortChange(option)"
           *ngFor="let option of sortTypes"
-          [attr.aria-label]="option | appPanelsSortByAriaLabel"
+          [attr.aria-label]="option | appPanelsSortByAriaLabel: type"
         >
           {{ option | sortLabel }}
           <mat-icon
