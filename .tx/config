@@ -176,3 +176,10 @@ source_lang  = en
 type         = UNICODEPROPERTIES
 minimum_perc = 0
 
+[o:orcid-inc-1:p:orcid-angular:r:src-developer-tools]
+file_filter  = src/locale/properties/developer-tools/developer-tools.<lang>.properties
+source_file  = src/locale/properties/developer-tools/developer-tools.en.properties
+source_lang  = en
+type         = UNICODEPROPERTIES
+minimum_perc = 0
+
