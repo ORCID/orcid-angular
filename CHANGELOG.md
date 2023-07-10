@@ -1,3 +1,9 @@
+## v2.35.1 - 2023-07-10
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.35.0...v2.35.1)
+
+- [#2010](https://github.com/ORCID/orcid-angular/pull/2010): Transifex - Add developer tools
+
 ## v2.35.0 - 2023-07-10
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.34.4...v2.35.0)
