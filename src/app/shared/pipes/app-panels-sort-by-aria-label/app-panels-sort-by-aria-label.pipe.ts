@@ -8,15 +8,15 @@ export class AppPanelsSortByAriaLabelPipe implements PipeTransform {
   transform(sortBy: SortOrderType, type: string): string {
     switch (sortBy) {
       case 'title':
-        return getTitleLabelByType(type);
+        return getTitleLabelByType(type)
       case 'start':
-        return getStartDateLabelByType(type);
+        return getStartDateLabelByType(type)
       case 'end':
-        return getEndDateLabelByType(type);
+        return getEndDateLabelByType(type)
       case 'date':
-        return getDateLabelByType(type);
+        return getDateLabelByType(type)
       case 'type':
-        return getTypeLabelByType(type);
+        return getTypeLabelByType(type)
       case 'order':
         return $localize`:@@shared.peerReviewsSortOrder:Sort peer reviews by order`
     }
