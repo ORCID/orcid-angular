@@ -5,20 +5,102 @@ import { SortOrderType } from '../../../types/sort'
   name: 'appPanelsSortByAriaLabel',
 })
 export class AppPanelsSortByAriaLabelPipe implements PipeTransform {
-  transform(sortBy: SortOrderType): string {
+  transform(sortBy: SortOrderType, type: string): string {
     switch (sortBy) {
       case 'title':
-        return $localize`:@@shared.sortTitle:Sort by title`
+        return getTitleLabelByType(type)
       case 'start':
-        return $localize`:@@shared.sortStart:Sort by start date`
+        return getStartDateLabelByType(type)
       case 'end':
-        return $localize`:@@shared.sortEnd:Sort by end date`
+        return getEndDateLabelByType(type)
       case 'date':
-        return $localize`:@@shared.sortDate:Sort by type`
+        return getDateLabelByType(type)
       case 'type':
-        return $localize`:@@shared.sortType:Sort by type`
+        return getTypeLabelByType(type)
       case 'order':
-        return $localize`:@@shared.sortOrder:Sort by order`
+        return $localize`:@@shared.peerReviewsSortOrder:Sort peer reviews by order`
     }
+  }
+}
+
+const getTitleLabelByType = (type: string): string => {
+  switch (type) {
+    case 'employment':
+      return $localize`:@@shared.employmentSortTitle:Sort employment by title`
+    case 'professional-activities':
+      return $localize`:@@shared.professionalActivitiesSortTitle:Sort professional activities by title`
+    case 'education':
+    case 'qualification':
+      return $localize`:@@shared.educationSortTitle:Sort education and qualifications by title`
+    case 'distinction':
+    case 'invited-position':
+      return $localize`:@@shared.distinctionSortTitle:Sort invited positions and distinction by title`
+    case 'membership':
+    case 'service':
+      return $localize`:@@shared.membershipSortTitle:Sort membership and service by title`
+    case 'funding':
+      return $localize`:@@shared.fundingSortTitle:Sort funding by title`
+    case 'works':
+      return $localize`:@@shared.worksSortTitle:Sort works by title`
+    case 'research-resources':
+      return $localize`:@@shared.researchSortTitle:Sort research resources by title`
+  }
+}
+
+const getStartDateLabelByType = (type: string): string => {
+  switch (type) {
+    case 'employment':
+      return $localize`:@@shared.employmentSortStart:Sort employment by start date`
+    case 'professional-activities':
+      return $localize`:@@shared.professionalActivitiesSortStart:Sort professional activities by start date`
+    case 'education':
+    case 'qualification':
+      return $localize`:@@shared.educationSortStart:Sort education and qualifications by start date`
+    case 'distinction':
+    case 'invited-position':
+      return $localize`:@@shared.distinctionSortStart:Sort invited positions and distinction by start date`
+    case 'membership':
+    case 'service':
+      return $localize`:@@shared.membershipSortStart:Sort membership and service by start date`
+  }
+}
+
+const getEndDateLabelByType = (type: string): string => {
+  switch (type) {
+    case 'employment':
+      return $localize`:@@shared.employmentSortEnd:Sort employment by end date`
+    case 'professional-activities':
+      return $localize`:@@shared.professionalActivitiesSortEnd:Sort professional activities by end date`
+    case 'education':
+    case 'qualification':
+      return $localize`:@@shared.educationSortEnd:Sort education and qualifications by end date`
+    case 'distinction':
+    case 'invited-position':
+      return $localize`:@@shared.distinctionSortEnd:Sort invited positions and distinction by end date`
+    case 'membership':
+    case 'service':
+      return $localize`:@@shared.membershipSortEnd:Sort membership and service by end date`
+  }
+}
+
+const getTypeLabelByType = (type: string): string => {
+  switch (type) {
+    case 'professional-activities':
+      return $localize`:@@shared.professionalActivitiesSortType:Sort professional activities by type`
+    case 'funding':
+      return $localize`:@@shared.fundingSortType:Sort funding by type`
+    case 'works':
+      return $localize`:@@shared.worksSortType:Sort works by type`
+  }
+}
+
+const getDateLabelByType = (type: string): string => {
+  switch (type) {
+    case 'funding':
+      return $localize`:@@shared.fundingSortDate:Sort funding by date`
+    case 'works':
+      return $localize`:@@shared.worksSortDate:Sort works by date`
+    case 'research-resources':
+      return $localize`:@@shared.researchSortDate:Sort research resources by date`
   }
 }

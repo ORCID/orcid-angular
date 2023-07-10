@@ -15,7 +15,6 @@ import { first } from 'rxjs/operators'
 import { RecordPeerReviewService } from '../../../core/record-peer-review/record-peer-review.service'
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { UserRecord } from 'src/app/types/record.local'
-import { log } from 'console'
 
 @Component({
   selector: 'app-peer-review-stack',
