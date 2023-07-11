@@ -122,8 +122,14 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
           this.userInfo = userRecord?.userInfo
           this.checkLoadingState(userRecord)
           this.recordWithIssues = userRecord?.userInfo?.RECORD_WITH_ISSUES
-          this.readyForIndexing =
-            userRecord?.userInfo?.READY_FOR_INDEXING === 'true'
+
+          if (userRecord?.userInfo) {
+            this.readyForIndexing =
+              userRecord?.userInfo?.READY_FOR_INDEXING === 'true'
+            if (this.publicOrcid && !this.readyForIndexing) {
+              this._robotsMeta.disallowRobots()
+            }
+          }
 
           this.userNotFound = userRecord?.userInfo?.USER_NOT_FOUND
           this.userRecord = userRecord
@@ -133,9 +139,6 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
             this.observeSessionUpdates()
           }
 
-          if (this.publicOrcid && !this.readyForIndexing) {
-            this._robotsMeta.disallowRobots()
-          }
           this._openGraph.addOpenGraphData(userRecord, { force: true })
         }),
         switchMap(() => this._togglz.getTogglz().pipe(first())),
