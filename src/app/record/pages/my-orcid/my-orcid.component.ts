@@ -123,9 +123,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
           this.checkLoadingState(userRecord)
           this.recordWithIssues = userRecord?.userInfo?.RECORD_WITH_ISSUES
 
-          console.log('userRecord?.userInfo? ', userRecord?.userInfo)
           if (userRecord?.userInfo) {
-            console.log(userRecord?.userInfo?.READY_FOR_INDEXING)
             this.readyForIndexing =
               userRecord?.userInfo?.READY_FOR_INDEXING === 'true'
             if (this.publicOrcid && !this.readyForIndexing) {
