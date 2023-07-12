@@ -5,13 +5,10 @@ footer {
 .columns-8,
 .columns-4 {
   :host {
-
-
     footer {
       padding-bottom: 75px;
     }
   }
-
 }
 
 .url-lists {
@@ -25,7 +22,7 @@ footer {
   padding-top: 24px;
   padding-bottom: 16px;
 
-  >.col {
+  > .col {
     width: 275px;
   }
 
@@ -73,11 +70,10 @@ footer {
 }
 
 .links {
-  >.url-lists {
+  > .url-lists {
     justify-content: space-around;
 
     a {
-
       .columns-4 :host &,
       .columns-8 :host & {
         justify-content: space-around;
@@ -102,7 +98,7 @@ a:focus {
   }
 }
 
-.CC0>a:hover {
+.CC0 > a:hover {
   text-decoration: underline;
 }
 
