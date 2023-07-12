@@ -23,22 +23,26 @@ html,
 body {
   height: 100%;
 }
+
 body {
   margin: 0;
   font-family: 'Noto Sans', sans-serif;
   font-display: swap;
 }
+
 app-root {
   min-height: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
 }
+
 .router-container {
   padding-bottom: 240px; //remove footer height
+
   .columns-8 &,
   .columns-4 & {
-    padding-bottom: 410px;
+    padding-bottom: 500px;
   }
 }
 
@@ -89,12 +93,15 @@ input[type='reset'] {
   font: inherit;
   cursor: pointer;
 }
+
 html {
   overflow-y: scroll;
 }
+
 .pointer {
   cursor: pointer;
 }
+
 .sr-only {
   position: absolute;
   width: 1px;
