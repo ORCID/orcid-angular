@@ -25,7 +25,10 @@ export class FooterComponent implements OnInit {
 
   ngOnInit() {
     setTimeout(() => {
-      document.getElementById('ot-sdk-btn').innerText = $localize`:@@footer.cookieSettings:Cookie Settings`
+      const otBtn = this.window.document.getElementById('ot-sdk-btn')
+      if (otBtn) {
+        otBtn.innerText = $localize`:@@footer.cookieSettings:Cookie Settings`
+      }
     }, 200)
   }
 
