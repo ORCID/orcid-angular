@@ -1,10 +1,14 @@
 import {
+  ChangeDetectorRef,
   Component,
+  ElementRef,
   EventEmitter,
   OnDestroy,
   OnInit,
   Output,
+  ViewChild,
 } from '@angular/core'
+import { MatCheckbox } from '@angular/material/checkbox'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
@@ -23,13 +27,16 @@ import { RecordService } from 'src/app/core/record/record.service'
 export class TermsOfUseComponent implements OnInit, OnDestroy {
   checked
   dirty: boolean
+  @ViewChild('firstInput', { static: false }) firstInput: MatCheckbox
+
   @Output() developerToolsEnable = new EventEmitter<boolean>()
   $destroy = new Subject<boolean>()
   emailAlreadyVerified: boolean
 
   constructor(
     private developerToolsService: DeveloperToolsService,
-    private _record: RecordService
+    private _record: RecordService,
+    private _changeDetectorRef: ChangeDetectorRef
   ) {}
   ngOnDestroy(): void {
     this.$destroy.next(true)
@@ -46,6 +53,8 @@ export class TermsOfUseComponent implements OnInit, OnDestroy {
         )[0]
         if (primaryEmail?.verified) {
           this.emailAlreadyVerified = true
+          this._changeDetectorRef.detectChanges()
+          this.firstInput?.focus()
         }
       })
   }
