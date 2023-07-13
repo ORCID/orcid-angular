@@ -26,12 +26,6 @@ export class FundingStackComponent implements OnInit {
   set fundingStack(value: FundingGroup) {
     this.hasExternalIds = !!value.externalIdentifiers.length
     this._fundingStack = value
-    this._fundingStack.fundings = this._fundingStack.fundings.map((funding) => {
-      return {
-        ...funding,
-        userIsSource: this.userIsSource(funding),
-      }
-    })
     this.setFundingsInitialStates(value)
   }
   get fundingStack(): FundingGroup {
@@ -54,16 +48,6 @@ export class FundingStackComponent implements OnInit {
   @Input()
   set userInfo(userInfo: UserInfo) {
     this._userInfo = userInfo
-    if (this._fundingStack.fundings) {
-      this._fundingStack.fundings = this._fundingStack.fundings.map(
-        (funding) => {
-          return {
-            ...funding,
-            userIsSource: this.userIsSource(funding),
-          }
-        }
-      )
-    }
   }
   get userInfo(): UserInfo {
     return this._userInfo

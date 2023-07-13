@@ -7,7 +7,6 @@
   "
 >
   <!-- A PANEL COMPONENT FOR EACH FUNDING ON THE STACK -->
-
   <app-panel
     panelId="funding-stack"
     [userRecord]="userRecord"
@@ -20,7 +19,7 @@
     [visibility]="fundingStack.defaultFunding.visibility.visibility"
     [isPublicRecord]="isPublicRecord"
     [putCode]="funding.putCode.value"
-    [isUserSource]="funding.userIsSource"
+    [isUserSource]="userIsSource(funding)"
     [hasExternalIds]="hasExternalIds"
     [userVersionPresent]="fundingStack.userVersionPresent"
     [(displayTheStack)]="displayTheStack"

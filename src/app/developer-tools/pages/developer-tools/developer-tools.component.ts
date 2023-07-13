@@ -66,7 +66,7 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
   baseURL: string
   isMobile: boolean
 
-  @ViewChild('firstInput') firstInput: ElementRef
+  @ViewChild('firstInput', { static: false }) firstInput: ElementRef
 
   constructor(
     private fb: FormBuilder,
@@ -138,10 +138,9 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
             ])
           )
         })
+        this._changeDetectorRef.detectChanges()
+        this.firstInput.nativeElement.focus()
       })
-    this._changeDetectorRef.detectChanges()
-
-    this.firstInput.nativeElement.focus()
   }
 
   save() {
