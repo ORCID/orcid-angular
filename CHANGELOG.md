@@ -1,3 +1,11 @@
+## v2.35.6 - 2023-07-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.35.5...v2.35.6)
+
+### Fix
+
+- Temporarily remove onetrust (#2015)
+
 ## v2.35.5 - 2023-07-12
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.35.4...v2.35.5)
