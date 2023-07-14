@@ -76,7 +76,7 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
     private recordService: RecordService,
     private _changeDetectorRef: ChangeDetectorRef,
     @Inject(WINDOW) private window: Window,
-    private _platform: PlatformInfoService
+    private _platform: PlatformInfoService,
   ) {}
   ngOnDestroy(): void {
     this.destroy$.next(true)
@@ -84,6 +84,8 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.setFocusToTheMainDiv()
+
     this._platform
       .get()
       .pipe(takeUntil(this.destroy$))
@@ -138,9 +140,15 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
             ])
           )
         })
-        this._changeDetectorRef.detectChanges()
-        this.firstInput.nativeElement.focus()
       })
+  }
+
+  private setFocusToTheMainDiv() {
+    location.href = '/developer-tools' + '#main'
+    setTimeout(() => {
+      window.scrollTo(0, 0)
+      history.replaceState({}, document.title, "/developer-tools")
+    })
   }
 
   save() {
