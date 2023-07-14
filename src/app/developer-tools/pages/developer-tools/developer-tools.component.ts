@@ -147,7 +147,11 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
     this.window.location.href = '/developer-tools' + '#main'
     setTimeout(() => {
       this.window.window.scrollTo(0, 0)
-      this.window.history.replaceState({}, this.window.document.title, '/developer-tools')
+      this.window.history.replaceState(
+        {},
+        this.window.document.title,
+        '/developer-tools'
+      )
     })
   }
 

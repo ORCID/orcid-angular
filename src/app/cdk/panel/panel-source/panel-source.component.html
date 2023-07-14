@@ -14,14 +14,20 @@
         <strong i18n="@@shared.source">Source</strong>:
         <ng-container *ngIf="recordOnDisplayIsTheSource !== undefined">
           <ng-container
-            *ngIf="assertionOriginOrcid || (recordOnDisplayIsTheSource && !assertionOriginClientId)"
+            *ngIf="
+              assertionOriginOrcid ||
+              (recordOnDisplayIsTheSource && !assertionOriginClientId)
+            "
           >
             <mat-icon [attr.aria-label]="selftAssertedSource"
               ><img src="./assets/vectors/profile-not-verified.svg" />
             </mat-icon>
           </ng-container>
           <ng-container
-            *ngIf="assertionOriginClientId || (!recordOnDisplayIsTheSource && !assertionOriginOrcid)"
+            *ngIf="
+              assertionOriginClientId ||
+              (!recordOnDisplayIsTheSource && !assertionOriginOrcid)
+            "
           >
             <mat-icon
               [attr.aria-label]="validatedSourceAriaLabel"
