@@ -1,6 +1,16 @@
 footer {
   padding-bottom: 16px;
 }
+
+.columns-8,
+.columns-4 {
+  :host {
+    footer {
+      padding-bottom: 75px;
+    }
+  }
+}
+
 .url-lists {
   margin: 0;
   padding: 0;
@@ -11,20 +21,25 @@ footer {
   height: 35px;
   padding-top: 24px;
   padding-bottom: 16px;
+
   > .col {
     width: 275px;
   }
+
   a {
     margin-left: 12px;
+
     [dir] :host & {
       margin-left: auto;
       margin-right: 12px;
     }
+
     img {
       height: 41px;
       width: auto;
       object-fit: cover;
     }
+
     img.social {
       height: 24px;
     }
@@ -37,6 +52,7 @@ footer {
     width: 80px;
     height: 15px;
     margin-right: 8px;
+
     [dir] :host & {
       margin-right: auto;
       margin-left: 8px;
@@ -45,6 +61,7 @@ footer {
 
   .CC0 {
     text-align: center;
+
     .columns-4 :host &,
     .columns-8 :host & {
       padding-bottom: 15px;
@@ -55,11 +72,13 @@ footer {
 .links {
   > .url-lists {
     justify-content: space-around;
+
     a {
       .columns-4 :host &,
       .columns-8 :host & {
         justify-content: space-around;
       }
+
       button {
         padding: 0 12px;
       }
@@ -71,6 +90,7 @@ a:hover,
 a:focus {
   text-decoration: underline;
 }
+
 .links {
   a {
     cursor: pointer;
@@ -95,6 +115,7 @@ a:focus {
   font-size: inherit !important;
   font-weight: inherit !important;
 }
+
 .ot-sdk-show-settings:hover {
   color: inherit !important;
   background-color: inherit !important;
