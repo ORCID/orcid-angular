@@ -1,3 +1,9 @@
+## v2.35.8 - 2023-07-14
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.35.7...v2.35.8)
+
+- [#2018](https://github.com/ORCID/orcid-angular/pull/2018): fix/batch-fixes-14-jul-2023
+
 ## v2.35.7 - 2023-07-13
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.35.6...v2.35.7)
