@@ -7,7 +7,7 @@ import { RecordService } from 'src/app/core/record/record.service'
 import { ChangeDetectorRef } from '@angular/core'
 import { UserInfoService } from 'src/app/core/user-info/user-info.service'
 import { of } from 'rxjs'
-import { WINDOW_PROVIDERS } from 'src/app/cdk/window'
+import { WINDOW, WINDOW_PROVIDERS } from 'src/app/cdk/window'
 import { DeveloperToolsComponent } from './developer-tools.component'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 
@@ -19,7 +19,7 @@ describe('DeveloperToolsComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [DeveloperToolsComponent],
       providers: [
-        WINDOW_PROVIDERS,
+        { provide: WINDOW, useValue: {} },
         {
           provide: PlatformInfoService,
           useValue: { get: () => of({}) },

@@ -93,7 +93,9 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
         this.isMobile = platform.columns4 || platform.columns8
       })
 
-    this.baseURL = this.window.location.origin
+    if (this.window?.location) {
+      this.baseURL = this.window.location.origin
+    }
     this.getDeveloperToolsEnableState()
       .pipe(
         switchMap((developerToolsEnableState) => {
@@ -144,15 +146,17 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
   }
 
   private setFocusToTheMainDiv() {
-    this.window.location.href = '/developer-tools' + '#main'
-    setTimeout(() => {
-      this.window.window.scrollTo(0, 0)
-      this.window.history.replaceState(
-        {},
-        this.window.document.title,
-        '/developer-tools'
-      )
-    })
+    if (this.window?.location) {
+      this.window.location.href = '/developer-tools' + '#main'
+      setTimeout(() => {
+        this.window.window.scrollTo(0, 0)
+        this.window.history.replaceState(
+          {},
+          this.window.document.title,
+          '/developer-tools'
+        )
+      })
+    }
   }
 
   save() {
