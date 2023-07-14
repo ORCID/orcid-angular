@@ -84,6 +84,8 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.setFocusToTheMainDiv()
+
     this._platform
       .get()
       .pipe(takeUntil(this.destroy$))
@@ -138,9 +140,15 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
             ])
           )
         })
-        this._changeDetectorRef.detectChanges()
-        this.firstInput.nativeElement.focus()
       })
+  }
+
+  private setFocusToTheMainDiv() {
+    this.window.location.href = '/developer-tools' + '#main'
+    setTimeout(() => {
+      this.window.window.scrollTo(0, 0)
+      this.window.history.replaceState({}, this.window.document.title, '/developer-tools')
+    })
   }
 
   save() {
