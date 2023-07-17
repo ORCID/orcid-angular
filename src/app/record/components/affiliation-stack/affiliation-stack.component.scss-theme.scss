@@ -23,10 +23,8 @@
     }
   }
   .vl {
-    border-left: 2px solid mat.get-color-from-palette(
-        $background,
-        ui-background
-    );
+    border-left: 2px solid
+      mat.get-color-from-palette($background, ui-background);
   }
 }
 
