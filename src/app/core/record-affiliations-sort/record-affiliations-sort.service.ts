@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core'
 import { MonthDayYearDate } from 'src/app/types'
 import {
   AffiliationUIGroup,
-  AffiliationGroup, AffiliationType, AffiliationTypeValue,
+  AffiliationGroup,
+  AffiliationType,
+  AffiliationTypeValue,
 } from 'src/app/types/record-affiliation.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
 
@@ -30,17 +32,37 @@ export class AffiliationsSortService {
     type = null
   ): AffiliationUIGroup[] {
     if (type === 'PROFESSIONAL_ACTIVITIES' && by === 'type') {
-      const affiliations = affiliationGroups.filter(affiliationGroup => affiliationGroup.type !== 'PROFESSIONAL_ACTIVITIES')
-      const professionalActivities = affiliationGroups.filter(affiliationGroups => affiliationGroups.type === 'PROFESSIONAL_ACTIVITIES')[0]
+      const affiliations = affiliationGroups.filter(
+        (affiliationGroup) =>
+          affiliationGroup.type !== 'PROFESSIONAL_ACTIVITIES'
+      )
+      const professionalActivities = affiliationGroups.filter(
+        (affiliationGroups) =>
+          affiliationGroups.type === 'PROFESSIONAL_ACTIVITIES'
+      )[0]
 
-      const distinction = this.sortByEndDateAndType(professionalActivities.affiliationGroup, AffiliationType.distinction)
-      const invitedPositions = this.sortByEndDateAndType(professionalActivities.affiliationGroup, AffiliationType['invited-position'])
-      const membership = this.sortByEndDateAndType(professionalActivities.affiliationGroup, AffiliationType.membership)
-      const service = this.sortByEndDateAndType(professionalActivities.affiliationGroup, AffiliationType.service)
+      const distinction = this.sortByEndDateAndType(
+        professionalActivities.affiliationGroup,
+        AffiliationType.distinction
+      )
+      const invitedPositions = this.sortByEndDateAndType(
+        professionalActivities.affiliationGroup,
+        AffiliationType['invited-position']
+      )
+      const membership = this.sortByEndDateAndType(
+        professionalActivities.affiliationGroup,
+        AffiliationType.membership
+      )
+      const service = this.sortByEndDateAndType(
+        professionalActivities.affiliationGroup,
+        AffiliationType.service
+      )
 
       affiliations.push({
         type: 'PROFESSIONAL_ACTIVITIES',
-        affiliationGroup: ascending ? [...distinction, ...invitedPositions, ...membership, ...service] : [...service, ...membership, ...invitedPositions, ...distinction]
+        affiliationGroup: ascending
+          ? [...distinction, ...invitedPositions, ...membership, ...service]
+          : [...service, ...membership, ...invitedPositions, ...distinction],
       })
       return affiliations
     } else {
@@ -88,38 +110,31 @@ export class AffiliationsSortService {
     return date
   }
 
-  private sortByDate(a: AffiliationGroup, b: AffiliationGroup, ascending: boolean, by: 'start' | 'end'): number {
-    const dateStartA = this.yearMonthDaytoDate(
-      a.defaultAffiliation.startDate
-    )
-    const dateStartB = this.yearMonthDaytoDate(
-      b.defaultAffiliation.startDate
-    )
-    const dateFinishA = this.yearMonthDaytoDate(
-      a.defaultAffiliation.endDate
-    )
-    const dateFinishB = this.yearMonthDaytoDate(
-      b.defaultAffiliation.endDate
-    )
+  private sortByDate(
+    a: AffiliationGroup,
+    b: AffiliationGroup,
+    ascending: boolean,
+    by: 'start' | 'end'
+  ): number {
+    const dateStartA = this.yearMonthDaytoDate(a.defaultAffiliation.startDate)
+    const dateStartB = this.yearMonthDaytoDate(b.defaultAffiliation.startDate)
+    const dateFinishA = this.yearMonthDaytoDate(a.defaultAffiliation.endDate)
+    const dateFinishB = this.yearMonthDaytoDate(b.defaultAffiliation.endDate)
 
     if (by === 'end') {
       // If the end date is not the same use it to sort
       if (dateFinishA.getTime() !== dateFinishB.getTime()) {
         return (
-          (dateFinishB.getTime() - dateFinishA.getTime()) *
-          (ascending ? -1 : 1)
+          (dateFinishB.getTime() - dateFinishA.getTime()) * (ascending ? -1 : 1)
         )
       } else if (dateStartB.getTime() !== dateStartA.getTime()) {
         // If the end date is the same use the start date to sort
         return (
-          (dateStartB.getTime() - dateStartA.getTime()) *
-          (ascending ? -1 : 1)
+          (dateStartB.getTime() - dateStartA.getTime()) * (ascending ? -1 : 1)
         )
       } else {
         return (
-          (
-            '' + a.defaultAffiliation.affiliationName.value
-          ).localeCompare(
+          ('' + a.defaultAffiliation.affiliationName.value).localeCompare(
             '' + b.defaultAffiliation.affiliationName.value
           ) * (ascending ? 1 : -1)
         )
@@ -129,20 +144,16 @@ export class AffiliationsSortService {
       // If the start is not the same use it to sort
       if (dateStartB.getTime() !== dateStartA.getTime()) {
         return (
-          (dateStartB.getTime() - dateStartA.getTime()) *
-          (ascending ? -1 : 1)
+          (dateStartB.getTime() - dateStartA.getTime()) * (ascending ? -1 : 1)
         )
       } else if (dateFinishB.getTime() !== dateFinishA.getTime()) {
         // If the start date is the same use the end date to sort
         return (
-          (dateFinishB.getTime() - dateFinishA.getTime()) *
-          (ascending ? -1 : 1)
+          (dateFinishB.getTime() - dateFinishA.getTime()) * (ascending ? -1 : 1)
         )
       } else {
         return (
-          (
-            '' + a.defaultAffiliation.affiliationName.value
-          ).localeCompare(
+          ('' + a.defaultAffiliation.affiliationName.value).localeCompare(
             '' + b.defaultAffiliation.affiliationName.value
           ) * (ascending ? 1 : -1)
         )
@@ -150,11 +161,17 @@ export class AffiliationsSortService {
     }
   }
 
-  private sortByEndDateAndType(affiliationGroup: AffiliationGroup[], type: AffiliationType): AffiliationGroup[] {
+  private sortByEndDateAndType(
+    affiliationGroup: AffiliationGroup[],
+    type: AffiliationType
+  ): AffiliationGroup[] {
     return affiliationGroup
-      .filter(affiliationGroup => affiliationGroup.defaultAffiliation.affiliationType.value === type)
+      .filter(
+        (affiliationGroup) =>
+          affiliationGroup.defaultAffiliation.affiliationType.value === type
+      )
       .sort((a, b) => {
         return this.sortByDate(a, b, false, 'end')
-    })
+      })
   }
 }
