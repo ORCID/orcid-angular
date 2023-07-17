@@ -128,16 +128,6 @@
             professionalActivitiesTogglz && type === 'professional-activities'
           "
         >
-          <button mat-menu-item (click)="add('membership')">
-            <mat-icon class="material-icons-outlined">card_membership</mat-icon>
-            <ng-container i18n="@@shared.addMembership"
-              >Add Membership</ng-container
-            >
-          </button>
-          <button mat-menu-item (click)="add('service')">
-            <mat-icon class="material-icons-outlined">badge</mat-icon>
-            <ng-container i18n="@@shared.addService">Add Service</ng-container>
-          </button>
           <button mat-menu-item (click)="add('invited-position')">
             <mat-icon class="material-icons-outlined">join_inner</mat-icon>
             <ng-container i18n="@@shared.addInvited"
@@ -149,6 +139,16 @@
             <ng-container i18n="@@shared.addDistinction"
               >Add Distinction</ng-container
             >
+          </button>
+          <button mat-menu-item (click)="add('membership')">
+            <mat-icon class="material-icons-outlined">card_membership</mat-icon>
+            <ng-container i18n="@@shared.addMembership"
+              >Add Membership</ng-container
+            >
+          </button>
+          <button mat-menu-item (click)="add('service')">
+            <mat-icon class="material-icons-outlined">badge</mat-icon>
+            <ng-container i18n="@@shared.addService">Add Service</ng-container>
           </button>
         </ng-container>
         <ng-container
