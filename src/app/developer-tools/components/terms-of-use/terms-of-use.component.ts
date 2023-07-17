@@ -27,7 +27,6 @@ import { RecordService } from 'src/app/core/record/record.service'
 export class TermsOfUseComponent implements OnInit, OnDestroy {
   checked
   dirty: boolean
-  @ViewChild('firstInput', { static: false }) firstInput: MatCheckbox
 
   @Output() developerToolsEnable = new EventEmitter<boolean>()
   $destroy = new Subject<boolean>()
@@ -54,7 +53,6 @@ export class TermsOfUseComponent implements OnInit, OnDestroy {
         if (primaryEmail?.verified) {
           this.emailAlreadyVerified = true
           this._changeDetectorRef.detectChanges()
-          this.firstInput?.focus()
         }
       })
   }

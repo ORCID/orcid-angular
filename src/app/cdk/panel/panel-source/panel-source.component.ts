@@ -37,6 +37,7 @@ export class PanelSourceComponent implements OnInit {
   @Input() sourceName
   @Input() assertionOriginOrcid
   @Input() assertionOriginName
+  @Input() assertionOriginClientId
   @Input() stackLength
   @Input() type:
     | 'employment'
