@@ -1,3 +1,9 @@
+## v2.35.12 - 2023-07-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.35.11...v2.35.12)
+
+- [#2022](https://github.com/ORCID/orcid-angular/pull/2022): Remove affiliations h4 max width limitations
+
 ## v2.35.11 - 2023-07-17
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.35.10...v2.35.11)
