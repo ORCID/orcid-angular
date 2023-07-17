@@ -29,7 +29,7 @@
     id="{{ 'cy-affiliation-' + type + '-' + i }}"
     [panelTitle]="affiliation.affiliationName.value"
   >
-    <h4 header class="affiliation-title orc-font-body">
+    <div class="affiliation-title" header>
       <ng-container *ngIf="professionalActivitiesTogglz">
         <mat-icon
           class="material-icons-outlined"
@@ -45,19 +45,22 @@
         <mat-icon class="material-icons-outlined" *ngIf="type === 'service'"
           >badge</mat-icon
         >
+        <div class="vl"></div>
       </ng-container>
-      {{ affiliation.affiliationName.value }}:
+      <h4 class="orc-font-body">
+        {{ affiliation.affiliationName.value }}:
 
-      <ng-container *ngIf="affiliation.city.value">
-        {{ affiliation.city.value }},
-      </ng-container>
-      <ng-container *ngIf="affiliation.region.value">
-        {{ affiliation.region.value }},
-      </ng-container>
-      <ng-container *ngIf="affiliation.country.value">
-        {{ affiliation.country.value }}
-      </ng-container>
-    </h4>
+        <ng-container *ngIf="affiliation.city.value">
+          {{ affiliation.city.value }},
+        </ng-container>
+        <ng-container *ngIf="affiliation.region.value">
+          {{ affiliation.region.value }},
+        </ng-container>
+        <ng-container *ngIf="affiliation.country.value">
+          {{ affiliation.country.value }}
+        </ng-container>
+      </h4>
+    </div>
     <!-- AFFILIATION BODY -->
     <app-affiliation
       *ngIf="stackPanelsDisplay[affiliation.putCode.value].topPanelOfTheStack"
