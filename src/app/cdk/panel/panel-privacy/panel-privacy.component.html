@@ -1,17 +1,24 @@
 <div class="container">
-  <div
-    class="dot everyone"
+  <mat-icon
+    aria-hidden="false"
+    [attr.aria-label]="label"
+    class="everyone"
     *ngIf="visibility === 'PUBLIC'"
     [ngClass]="{ active: visibility === 'PUBLIC' }"
-  ></div>
-  <div
-    class="dot trusted"
+    >visibility</mat-icon
+  >
+  <mat-icon
+    class="trusted"
     *ngIf="visibility === 'LIMITED'"
+    [attr.aria-label]="label"
     [ngClass]="{ active: visibility === 'LIMITED' }"
-  ></div>
-  <div
-    class="dot private"
+    >visibility</mat-icon
+  >
+  <mat-icon
+    class="private"
+    [attr.aria-label]="label"
     *ngIf="visibility === 'PRIVATE'"
     [ngClass]="{ active: visibility === 'PRIVATE' }"
-  ></div>
+    >visibility</mat-icon
+  >
 </div>
