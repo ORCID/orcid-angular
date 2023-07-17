@@ -22,7 +22,15 @@
   display: flex;
   align-items: center;
   margin: 0;
+  h4 {
+    max-width: calc(100% - 50px);
+  }
   mat-icon {
     margin-inline-end: 4px;
+  }
+  .vl {
+    height: 28px;
+    margin-inline-start: 8px;
+    margin-inline-end: 12px;
   }
 }
