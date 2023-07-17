@@ -1,3 +1,13 @@
+## v2.35.11 - 2023-07-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.35.10...v2.35.11)
+
+- [#2021](https://github.com/ORCID/orcid-angular/pull/2021): fix: Add missing vertical align in professional activities panel and …
+
+### Fix
+
+- Add missing vertical align in professional activities panel and limit width panel title
+
 ## v2.35.10 - 2023-07-17
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.35.9...v2.35.10)
