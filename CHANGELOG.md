@@ -1,3 +1,13 @@
+## v2.35.10 - 2023-07-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.35.9...v2.35.10)
+
+- [#2020](https://github.com/ORCID/orcid-angular/pull/2020): fix: Sort professional activities by type and descending end date
+
+### Fix
+
+- Sort professional activities by type and descending end date
+
 ## v2.35.9 - 2023-07-14
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.35.8...v2.35.9)
