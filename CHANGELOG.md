@@ -1,3 +1,15 @@
+## v2.35.13 - 2023-07-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.35.12...v2.35.13)
+
+- [#2026](https://github.com/ORCID/orcid-angular/pull/2026): fix: Add width limitation to only mobile version and remove margin fr…
+- [#2025](https://github.com/ORCID/orcid-angular/pull/2025): fix: Use distinction start date as end date when affiliation sorted b…
+
+### Fix
+
+- Add width limitation to only mobile version and remove margin from professional activities title
+- Use distinction start date as end date when affiliation sorted by end date
+
 ## v2.35.12 - 2023-07-17
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.35.11...v2.35.12)
