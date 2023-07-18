@@ -1,6 +1,6 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core'
-import { combineLatest, Observable, of } from 'rxjs'
-import { first } from 'rxjs/operators'
+import { Component, HostBinding, Input, OnDestroy, OnInit } from '@angular/core'
+import { combineLatest, Observable, of, Subject } from 'rxjs'
+import { first, takeUntil } from 'rxjs/operators'
 import { OrganizationsService } from 'src/app/core'
 import { RecordAffiliationService } from 'src/app/core/record-affiliations/record-affiliations.service'
 import { OrgDisambiguated, UserInfo } from 'src/app/types'
@@ -13,6 +13,7 @@ import {
 import { UserRecord } from 'src/app/types/record.local'
 import { ModalAffiliationsComponent } from '../affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component'
 import { TogglzService } from '../../../core/togglz/togglz.service'
+import { PlatformInfoService } from '../../../cdk/platform-info'
 
 @Component({
   selector: 'app-affiliation-stack',
@@ -22,7 +23,9 @@ import { TogglzService } from '../../../core/togglz/togglz.service'
     './affiliation-stack.component.scss-theme.scss',
   ],
 })
-export class AffiliationStackComponent implements OnInit {
+export class AffiliationStackComponent implements OnInit, OnDestroy {
+  $destroy: Subject<boolean> = new Subject<boolean>()
+
   @HostBinding('class.display-the-stack') displayTheStackClass = false
   _affiliationStack: AffiliationGroup
   @Input() userRecord: UserRecord
@@ -83,11 +86,13 @@ export class AffiliationStackComponent implements OnInit {
     }
   } = {}
   modalAffiliationsComponent = ModalAffiliationsComponent
+  isMobile: boolean
 
   constructor(
     private _affiliationService: RecordAffiliationService,
     private _organizationsService: OrganizationsService,
-    private _togglz: TogglzService
+    private _togglz: TogglzService,
+    private _platform: PlatformInfoService,
   ) {}
 
   /**
@@ -216,5 +221,17 @@ export class AffiliationStackComponent implements OnInit {
     return false
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._platform
+      .get()
+      .pipe(takeUntil(this.$destroy))
+      .subscribe(
+        (platform) => (this.isMobile = platform.columns4 || platform.columns8)
+      )
+  }
+
+  ngOnDestroy() {
+    this.$destroy.next(true)
+    this.$destroy.unsubscribe()
+  }
 }
