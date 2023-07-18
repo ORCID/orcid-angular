@@ -116,10 +116,20 @@ export class AffiliationsSortService {
     ascending: boolean,
     by: 'start' | 'end'
   ): number {
-    const dateStartA = this.yearMonthDaytoDate(a.defaultAffiliation.startDate)
-    const dateStartB = this.yearMonthDaytoDate(b.defaultAffiliation.startDate)
-    const dateFinishA = this.yearMonthDaytoDate(a.defaultAffiliation.endDate)
-    const dateFinishB = this.yearMonthDaytoDate(b.defaultAffiliation.endDate)
+    let dateStartA = this.yearMonthDaytoDate(a.defaultAffiliation.startDate)
+    let dateStartB = this.yearMonthDaytoDate(b.defaultAffiliation.startDate)
+    let dateFinishA = this.yearMonthDaytoDate(a.defaultAffiliation.endDate)
+    let dateFinishB = this.yearMonthDaytoDate(b.defaultAffiliation.endDate)
+
+    if (a.defaultAffiliation.affiliationType.value === AffiliationType.distinction && by === 'end') {
+      dateStartA = this.yearMonthDaytoDate(a.defaultAffiliation.endDate)
+      dateFinishA = this.yearMonthDaytoDate(a.defaultAffiliation.startDate)
+    }
+
+    if (b.defaultAffiliation.affiliationType.value === AffiliationType.distinction && by === 'end') {
+      dateStartB = this.yearMonthDaytoDate(b.defaultAffiliation.endDate)
+      dateFinishB = this.yearMonthDaytoDate(b.defaultAffiliation.startDate)
+    }
 
     if (by === 'end') {
       // If the end date is not the same use it to sort
