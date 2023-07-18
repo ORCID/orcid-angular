@@ -22,6 +22,10 @@
         mat.get-color-from-palette($background, panel-shadow);
     }
   }
+  .vl {
+    border-left: 2px solid
+      mat.get-color-from-palette($background, ui-background);
+  }
 }
 
 @include affiliation-stack-theme($orcid-app-theme);
