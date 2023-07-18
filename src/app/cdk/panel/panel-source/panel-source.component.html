@@ -15,9 +15,8 @@
         <ng-container *ngIf="recordOnDisplayIsTheSource !== undefined">
           <ng-container
             *ngIf="
-              recordOnDisplayIsTheSource ||
-              assertionOriginName ||
-              assertionOriginOrcid
+              assertionOriginOrcid ||
+              (recordOnDisplayIsTheSource && !assertionOriginClientId)
             "
           >
             <mat-icon [attr.aria-label]="selftAssertedSource"
@@ -26,9 +25,8 @@
           </ng-container>
           <ng-container
             *ngIf="
-              !recordOnDisplayIsTheSource &&
-              !assertionOriginName &&
-              !assertionOriginOrcid
+              assertionOriginClientId ||
+              (!recordOnDisplayIsTheSource && !assertionOriginOrcid)
             "
           >
             <mat-icon

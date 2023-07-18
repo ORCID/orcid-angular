@@ -1,3 +1,47 @@
+## v2.35.12 - 2023-07-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.35.11...v2.35.12)
+
+- [#2022](https://github.com/ORCID/orcid-angular/pull/2022): Remove affiliations h4 max width limitations
+
+## v2.35.11 - 2023-07-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.35.10...v2.35.11)
+
+- [#2021](https://github.com/ORCID/orcid-angular/pull/2021): fix: Add missing vertical align in professional activities panel and …
+
+### Fix
+
+- Add missing vertical align in professional activities panel and limit width panel title
+
+## v2.35.10 - 2023-07-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.35.9...v2.35.10)
+
+- [#2020](https://github.com/ORCID/orcid-angular/pull/2020): fix: Sort professional activities by type and descending end date
+
+### Fix
+
+- Sort professional activities by type and descending end date
+
+## v2.35.9 - 2023-07-14
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.35.8...v2.35.9)
+
+- [#2019](https://github.com/ORCID/orcid-angular/pull/2019): Fix testing
+
+## v2.35.8 - 2023-07-14
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.35.7...v2.35.8)
+
+- [#2018](https://github.com/ORCID/orcid-angular/pull/2018): fix/batch-fixes-14-jul-2023
+
+## v2.35.7 - 2023-07-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.35.6...v2.35.7)
+
+- [#2016](https://github.com/ORCID/orcid-angular/pull/2016): fix/batch-of-fixes-13-jul-2023
+
 ## v2.35.6 - 2023-07-13
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.35.5...v2.35.6)
