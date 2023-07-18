@@ -1,3 +1,9 @@
+## v2.35.14 - 2023-07-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.35.13...v2.35.14)
+
+- [#2027](https://github.com/ORCID/orcid-angular/pull/2027): Format
+
 ## v2.35.13 - 2023-07-18
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.35.12...v2.35.13)
