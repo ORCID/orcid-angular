@@ -1,3 +1,9 @@
+## v2.35.15 - 2023-07-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.35.14...v2.35.15)
+
+- [#2028](https://github.com/ORCID/orcid-angular/pull/2028): Transifex
+
 ## v2.35.14 - 2023-07-18
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.35.13...v2.35.14)
