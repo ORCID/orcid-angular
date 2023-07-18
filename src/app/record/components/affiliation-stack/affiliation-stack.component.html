@@ -47,7 +47,12 @@
         >
         <div class="vl"></div>
       </ng-container>
-      <h4 class="orc-font-body">
+      <h4
+        class="orc-font-body"
+        [ngClass]="{
+          mobile: isMobile
+        }"
+      >
         {{ affiliation.affiliationName.value }}:
 
         <ng-container *ngIf="affiliation.city.value">
