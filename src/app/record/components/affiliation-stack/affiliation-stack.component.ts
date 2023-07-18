@@ -92,7 +92,7 @@ export class AffiliationStackComponent implements OnInit, OnDestroy {
     private _affiliationService: RecordAffiliationService,
     private _organizationsService: OrganizationsService,
     private _togglz: TogglzService,
-    private _platform: PlatformInfoService,
+    private _platform: PlatformInfoService
   ) {}
 
   /**
