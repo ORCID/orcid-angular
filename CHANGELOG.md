@@ -1,3 +1,25 @@
+## v2.36.1 - 2023-07-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.36.0...v2.36.1)
+
+- [#2028](https://github.com/ORCID/orcid-angular/pull/2028): Transifex
+- [#2027](https://github.com/ORCID/orcid-angular/pull/2027): Format
+- [#2026](https://github.com/ORCID/orcid-angular/pull/2026): fix: Add width limitation to only mobile version and remove margin fr…
+- [#2025](https://github.com/ORCID/orcid-angular/pull/2025): fix: Use distinction start date as end date when affiliation sorted b…
+- [#2022](https://github.com/ORCID/orcid-angular/pull/2022): Remove affiliations h4 max width limitations
+- [#2021](https://github.com/ORCID/orcid-angular/pull/2021): fix: Add missing vertical align in professional activities panel and …
+- [#2020](https://github.com/ORCID/orcid-angular/pull/2020): fix: Sort professional activities by type and descending end date
+- [#2019](https://github.com/ORCID/orcid-angular/pull/2019): Fix testing
+- [#2018](https://github.com/ORCID/orcid-angular/pull/2018): fix/batch-fixes-14-jul-2023
+
+### Fix
+
+- Override innerText set by OneTrust external script in link (#2009)
+- Add width limitation to only mobile version and remove margin from professional activities title
+- Use distinction start date as end date when affiliation sorted by end date
+- Add missing vertical align in professional activities panel and limit width panel title
+- Sort professional activities by type and descending end date
+
 ## v2.35.15 - 2023-07-18
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.35.14...v2.35.15)
