@@ -302,14 +302,16 @@ export class PanelComponent implements OnInit {
           .subscribe()
         break
       case 'top-bar':
-        this._recordBiographyService.postBiography({
-          visibility: {
-            visibility: visibility,
-          },
-          biography: {
-            value: this.userRecord.biography.biography.value,
-          }
-        }).subscribe()
+        this._recordBiographyService
+          .postBiography({
+            visibility: {
+              visibility: visibility,
+            },
+            biography: {
+              value: this.userRecord.biography.biography.value,
+            },
+          })
+          .subscribe()
     }
     this.visibilityError = false
   }
