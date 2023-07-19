@@ -24,6 +24,7 @@
 
   h4 {
     margin: 0;
+    padding-inline-end: 16px;
   }
 
   h4.mobile {
@@ -32,6 +33,7 @@
 
   mat-icon {
     margin-inline-end: 4px;
+    flex-shrink: 0;
   }
 
   .vl {
