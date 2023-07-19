@@ -8,6 +8,7 @@
     >visibility</mat-icon
   >
   <mat-icon
+    aria-hidden="false"
     class="trusted"
     *ngIf="visibility === 'LIMITED'"
     [attr.aria-label]="label"
@@ -15,6 +16,7 @@
     >visibility</mat-icon
   >
   <mat-icon
+    aria-hidden="false"
     class="private"
     [attr.aria-label]="label"
     *ngIf="visibility === 'PRIVATE'"

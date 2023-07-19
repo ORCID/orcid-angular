@@ -114,6 +114,8 @@
       [userRecord]="userRecord"
       [type]="'top-bar'"
       id="biography-panel"
+      [visibility]="userRecord.biography.visibility.visibility"
+      [editableVisibilityControl]="true"
     >
       <h2
         header
@@ -123,9 +125,7 @@
         Biography
       </h2>
       <app-panel-data *ngIf="!!userRecord.biography.biography">
-        <app-panel-element
-          [visibility]="userRecord.biography.visibility.visibility"
-        >
+        <app-panel-element>
           <span
             id="biography-value"
             class="mat-body-1"

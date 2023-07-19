@@ -110,7 +110,7 @@
         </mat-icon>
         <ng-container *ngIf="!isMobile" i18n="@@shared.add"> Add </ng-container>
       </button>
-      <mat-menu #menuAdd="matMenu">
+      <mat-menu #menuAdd="matMenu" xPosition="before">
         <ng-container *ngIf="type === 'education' || type === 'qualification'">
           <button mat-menu-item (click)="add('education')">
             <ng-container i18n="@@shared.addEducation"
@@ -227,7 +227,7 @@
           Sort
         </ng-container>
       </button>
-      <mat-menu #menu="matMenu">
+      <mat-menu #menu="matMenu" xPosition="before">
         <button
           mat-menu-item
           (click)="sortChange(option)"
