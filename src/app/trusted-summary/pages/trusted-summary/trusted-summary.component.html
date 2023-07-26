@@ -1,0 +1,120 @@
+<main
+  *ngIf="affiliation"
+  class="panel"
+  [ngClass]="{
+    mobile: mobile
+  }"
+>
+  <header class="panel-header">
+    <!-- orcid logo -->
+    <img height="40px" src="./assets/vectors/orcid.logo.icon.svg" />
+    <div class="header-name" *ngIf="affiliation">
+      <h1 class="orc-font-body-large">{{ affiliation.name }}</h1>
+      <div>
+        <caption class="orc-font-body-small">
+          {{
+            currentLocation
+          }}/<strong>{{ orcid }} </strong>
+        </caption>
+      </div>
+    </div>
+  </header>
+  <div class="panel-body">
+    <div
+      class="column"
+      [ngClass]="{
+        'column-border': !mobile
+      }"
+    >
+      <ng-container *ngIf="affiliation.employmentAffiliations?.length">
+        <h2 class="orc-font-small-print">AFFILIATIONS</h2>
+        <app-summary-panel
+          [url]="affiliation?.orcid"
+          [activitySummary]="affiliation.employmentAffiliations"
+        ></app-summary-panel>
+        <h2 class="orc-font-small-print">KEY DATES</h2>
+        <div class="card-container">
+          <ul>
+            <li>
+              <div
+                class="date-item"
+                [ngClass]="{
+                  'last-date': !affiliation.lastModified
+                }"
+              >
+                <caption class="orc-font-small-print">
+                  Record created
+                </caption>
+                <label class="orc-font-body-small">{{
+                  affiliation.creation
+                }}</label>
+              </div>
+            </li>
+            <li>
+              <div class="date-item last-date" *ngIf="affiliation.lastModified">
+                <caption class="orc-font-small-print">
+                  Record created
+                </caption>
+                <label class="orc-font-body-small">{{
+                  affiliation.lastModified
+                }}</label>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </ng-container>
+    </div>
+    <div
+      class="column column-border"
+      [ngClass]="{
+        'column-border': !mobile
+      }"
+      *ngIf="peerReviews?.length || works?.length || funds?.length"
+    >
+      <ng-container *ngIf="works?.length">
+        <h2 class="orc-font-small-print">WORKS</h2>
+        <app-summary-simple-panel
+          [simpleActivities]="works"
+        ></app-summary-simple-panel>
+      </ng-container>
+      <ng-container *ngIf="peerReviews?.length">
+        <h2 class="orc-font-small-print">PEER REVIEWS</h2>
+        <app-summary-simple-panel
+          [simpleActivities]="peerReviews"
+        ></app-summary-simple-panel>
+      </ng-container>
+      <ng-container *ngIf="funds?.length">
+        <h2 class="orc-font-small-print">FUNDING</h2>
+
+        <app-summary-simple-panel
+          [simpleActivities]="funds"
+        ></app-summary-simple-panel>
+      </ng-container>
+    </div>
+    <div
+      class="column"
+      *ngIf="
+        affiliation.professionalActivities?.length &&
+        externalIdentifiers?.length
+      "
+    >
+      <ng-container *ngIf="affiliation.professionalActivities?.length">
+        <h2 class="orc-font-small-print">PROFESSIONAL ACTIVITIES</h2>
+        <app-summary-panel
+          [url]="affiliation?.orcid"
+          [activitySummary]="affiliation.professionalActivities"
+          [count]="affiliation.professionalActivitiesCount"
+        ></app-summary-panel>
+      </ng-container>
+      <ng-container *ngIf="externalIdentifiers?.length">
+        <h2 class="orc-font-small-print">OTHER IDENTIFIERS</h2>
+        <app-summary-simple-panel
+          [simpleActivities]="externalIdentifiers"
+        ></app-summary-simple-panel>
+      </ng-container>
+    </div>
+  </div>
+</main>
+<div *ngIf="!affiliation">
+  <mat-spinner></mat-spinner>
+</div>

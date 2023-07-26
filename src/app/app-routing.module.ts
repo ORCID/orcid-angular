@@ -5,6 +5,7 @@ import {
   ApplicationRoutes,
   routerPublicPageUrl,
   routerReactivation,
+  routerSummaryPageUrl,
   routerThirdPartySignInMatch,
 } from './constants'
 import { AuthenticatedGuard } from './guards/authenticated.guard'
@@ -21,6 +22,13 @@ const routes: Routes = [
   {
     path: ApplicationRoutes.home,
     loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
+  },
+  {
+    matcher: routerSummaryPageUrl,
+    loadChildren: () =>
+      import('./trusted-summary/trusted-summary.module').then(
+        (m) => m.TrustedSummaryModule
+      ),
   },
   {
     matcher: routerPublicPageUrl,

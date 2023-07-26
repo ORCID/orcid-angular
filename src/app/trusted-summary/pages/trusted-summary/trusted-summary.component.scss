@@ -1,0 +1,164 @@
+:host {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  min-height: 100vh
+}
+
+.panel {
+  display: grid;
+  grid-template-columns: 1fr, 1fr, 1fr;
+  grid-gap: 10px;
+  border-radius: 8px 8px 0px 0px;
+  border: 2px solid var(--ui-background-ui-background-darkest, #212121);
+
+
+
+}
+
+
+.panel-header {
+  border-bottom: 2px solid #212121;
+  grid-column: 1 / -1;
+  background-color: #003449;
+  color: #FFF;
+  padding: 16px;
+  display: flex;
+  flex-direction: row;
+
+  caption {
+    text-align: initial;
+    display: inline;
+    line-height: 1;
+
+  }
+
+
+  img {
+    padding-inline-end: 10px;
+  }
+
+  .header-name {
+    display: flex;
+    flex-direction: column;
+
+    h1 {
+      margin: 0;
+      line-height: 1;
+      word-break: break-word;
+    }
+
+
+  }
+}
+
+
+.column {
+  padding-left: 20px;
+  padding-right: 20px;
+
+}
+
+.mobile {
+  .panel-body {
+    grid-template-columns: 1fr;
+  }
+}
+
+.panel-body {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 250px);
+
+  padding-bottom: 20px;
+}
+
+.column-border {
+  border-right: 2px solid #EEE;
+}
+
+h2 {
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+main {
+  width: 100%;
+  background: #FAFAFA;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.date-item {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 16px;
+
+  caption,
+  label {
+    display: block;
+  }
+}
+
+.date-item.last-date {
+  padding-bottom: 0;
+
+}
+
+ul {
+  margin: 0;
+}
+
+ul li {
+  position: relative;
+  /* so that pseudoelements are positioned relatively to their "li"s*/
+  /* use padding-bottom instead of margin-bottom.*/
+  margin-bottom: 0;
+  /* This overrides previously specified margin-bottom */
+}
+
+ul li:after {
+  /* bullets */
+  content: url('/assets/vectors/bullet-point.svg');
+  position: absolute;
+  left: -26px;
+  /*adjust manually*/
+  top: 0px;
+}
+
+ul li:before {
+  /* lines */
+  content: "";
+  position: absolute;
+  left: -16px;
+  /* adjust manually */
+  border-left: 1px dashed #D4E7A1;
+  height: 100%;
+  width: 1px;
+}
+
+ul li:first-child:before {
+  /* first li's line */
+  top: 6px;
+  /* moves the line down so that it disappears under the bullet. Adjust manually */
+}
+
+ul li:last-child:before {
+  /* last li's line */
+  height: 6px;
+  /* shorten the line so it goes only up to the bullet. Is equal to first-child:before's top */
+}
+
+
+.card-container {
+  display: flex;
+  padding: 16px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 16px;
+  border-radius: 4px;
+  border: 2px solid #EEE;
+  background: #FFF;
+}
