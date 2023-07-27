@@ -1,3 +1,9 @@
+## v2.36.5 - 2023-07-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.36.4...v2.36.5)
+
+- [#2029](https://github.com/ORCID/orcid-angular/pull/2029): leo/batch-of-changes
+
 ## v2.36.4 - 2023-07-19
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.36.3...v2.36.4)
