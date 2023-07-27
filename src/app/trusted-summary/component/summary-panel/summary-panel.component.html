@@ -1,10 +1,4 @@
-<div
-  class="card-container"
-  *ngIf="activitiesToDisplay?.length"
-  [ngClass]="{
-    mobile: mobile
-  }"
->
+<div class="card-container" *ngIf="activitiesToDisplay?.length">
   <ng-container *ngFor="let activity of activitiesToDisplay; last as isLast">
     <div
       class="activity-container"

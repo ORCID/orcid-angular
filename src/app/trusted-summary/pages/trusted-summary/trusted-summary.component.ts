@@ -16,7 +16,7 @@ import { Subject } from 'rxjs'
   ],
 })
 export class TrustedSummaryComponent implements OnInit, OnDestroy {
-  affiliation: TrustedSummary
+  trustedSummary: TrustedSummary
   currentLocation: string
   orcid: string
   works: SimpleActivityModel[] = []
@@ -43,7 +43,7 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
   oneColumn: boolean
 
   constructor(
-    private _affiliation: TrustedSummaryService,
+    private _trustedSummary: TrustedSummaryService,
     private _router: Router,
     private _platform: PlatformInfoService
   ) {}
@@ -66,67 +66,67 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
       })
     this.currentLocation = window.location.origin
     this.orcid = this._router.url.split('/')[1]
-    this._affiliation.getSummary(this.orcid).subscribe((data) => {
-      this.affiliation = data
-      if (this.affiliation.selfAssertedWorks) {
+    this._trustedSummary.getSummary(this.orcid).subscribe((data) => {
+      this.trustedSummary = data
+      if (this.trustedSummary.selfAssertedWorks) {
         this.works.push({
           verified: false,
-          countA: this.affiliation.selfAssertedWorks,
+          countA: this.trustedSummary.selfAssertedWorks,
           stringA:
-            this.affiliation.selfAssertedWorks > 1
+            this.trustedSummary.selfAssertedWorks > 1
               ? this.labelSelfAssertedWorks
               : this.labelSelfAssertedWork,
         })
       }
-      if (this.affiliation.validatedWorks) {
+      if (this.trustedSummary.validatedWorks) {
         this.works.push({
           verified: true,
-          countA: this.affiliation.validatedWorks,
+          countA: this.trustedSummary.validatedWorks,
           stringA:
-            this.affiliation.validatedWorks > 1
+            this.trustedSummary.validatedWorks > 1
               ? this.labelValidatedWorks
               : this.labelValidatedWork,
         })
       }
-      if (this.affiliation.validatedFunds) {
+      if (this.trustedSummary.validatedFunds) {
         this.funds.push({
           verified: true,
-          countA: this.affiliation.validatedFunds,
+          countA: this.trustedSummary.validatedFunds,
           stringA:
-            this.affiliation.validatedFunds > 1
+            this.trustedSummary.validatedFunds > 1
               ? this.labelValidatedFundings
               : this.labelValidatedFunding,
         })
       }
-      if (this.affiliation.selfAssertedFunds) {
+      if (this.trustedSummary.selfAssertedFunds) {
         this.funds.push({
           verified: false,
-          countA: this.affiliation.selfAssertedFunds,
+          countA: this.trustedSummary.selfAssertedFunds,
           stringA:
-            this.affiliation.selfAssertedFunds > 1
+            this.trustedSummary.selfAssertedFunds > 1
               ? this.labelSelfAssertedFundings
               : this.labelSelfAssertedFunding,
         })
       }
       if (
-        this.affiliation.reviews &&
-        this.affiliation.peerReviewPublicationGrants
+        this.trustedSummary.reviews &&
+        this.trustedSummary.peerReviewPublicationGrants
       ) {
         this.peerReviews.push({
           verified: true,
-          countA: this.affiliation.reviews,
+          countA: this.trustedSummary.reviews,
           stringA:
-            this.affiliation.reviews > 1
+            this.trustedSummary.reviews > 1
               ? this.labelReviesFor
               : this.labelReviewFor,
-          countB: this.affiliation.peerReviewPublicationGrants,
+          countB: this.trustedSummary.peerReviewPublicationGrants,
           stringB:
-            this.affiliation.peerReviewPublicationGrants > 1
+            this.trustedSummary.peerReviewPublicationGrants > 1
               ? this.labelpublicationgrants
               : this.labelpublicationgrant,
         })
       }
-      this.externalIdentifiers = this.affiliation.externalIdentifiers.map(
+      this.externalIdentifiers = this.trustedSummary.externalIdentifiers.map(
         (id) => {
           return {
             verified: id.verified,
@@ -141,8 +141,8 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
           this.funds.length > 0 ||
           this.peerReviews.length > 0) &&
         (this.externalIdentifiers.length > 0 ||
-          this.affiliation.professionalActivitiesCount > 0 ||
-          this.affiliation.externalIdentifiers.length > 0)
+          this.trustedSummary.professionalActivitiesCount > 0 ||
+          this.trustedSummary.externalIdentifiers.length > 0)
       ) {
         this.threeColumns = true
       } else if (
@@ -150,7 +150,7 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
         this.funds.length > 0 ||
         this.peerReviews.length > 0 ||
         this.externalIdentifiers.length > 0 ||
-        this.affiliation.professionalActivitiesCount > 0
+        this.trustedSummary.professionalActivitiesCount > 0
       ) {
         this.twoColumns = true
       } else {

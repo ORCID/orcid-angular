@@ -22,9 +22,6 @@ export class SummaryPanelComponent implements OnInit {
   activitiesToDisplay: ActivitySummary[]
   acitivityCountOverflow: boolean
   unsubscribe = new Subject()
-  mobile: boolean
-
-  constructor(private _platform: PlatformInfoService) {}
 
   ngOnDestroy(): void {
     this.unsubscribe.next()
@@ -32,17 +29,6 @@ export class SummaryPanelComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._platform
-      .get()
-      .pipe(takeUntil(this.unsubscribe))
-      .subscribe((platform) => {
-        if (platform.columns4 || platform.columns8) {
-          this.mobile = true
-        } else {
-          this.mobile = false
-        }
-      })
-
     if (this.activitySummary) {
       this.activitySummary = [...this.activitySummary, ...this.activitySummary]
       this.activitiesToDisplay = this.activitySummary.slice(0, 3)

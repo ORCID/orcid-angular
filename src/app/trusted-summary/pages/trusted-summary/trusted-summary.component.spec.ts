@@ -1,23 +1,36 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { TrustedSummaryComponent } from './trusted-summary.component';
+import { TrustedSummaryComponent } from './trusted-summary.component'
+import { TrustedSummaryService } from 'src/app/core/trusted-summary/trusted-summary.service'
+import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
+import { HttpClientTestingModule } from '@angular/common/http/testing'
+import { PlatformInfoService } from 'src/app/cdk/platform-info'
+import { of } from 'rxjs'
 
 describe('TrustedSummaryComponent', () => {
-  let component: TrustedSummaryComponent;
-  let fixture: ComponentFixture<TrustedSummaryComponent>;
+  let component: TrustedSummaryComponent
+  let fixture: ComponentFixture<TrustedSummaryComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TrustedSummaryComponent ]
-    })
-    .compileComponents();
+      declarations: [TrustedSummaryComponent],
+      providers: [
+        { provide: ErrorHandlerService, userValue: {} },
+        {
+          provide: TrustedSummaryService,
+          useValue: { getSummary: () => of() },
+        },
+        { provide: PlatformInfoService, useValue: { get: () => of() } },
+      ],
+      imports: [HttpClientTestingModule],
+    }).compileComponents()
 
-    fixture = TestBed.createComponent(TrustedSummaryComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(TrustedSummaryComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

@@ -1,23 +1,23 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { SummaryPanelComponent } from './summary-panel.component';
+import { SummaryPanelComponent } from './summary-panel.component'
 
 describe('SummaryPanelComponent', () => {
-  let component: SummaryPanelComponent;
-  let fixture: ComponentFixture<SummaryPanelComponent>;
+  let component: SummaryPanelComponent
+  let fixture: ComponentFixture<SummaryPanelComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SummaryPanelComponent ]
-    })
-    .compileComponents();
+      declarations: [SummaryPanelComponent],
+      providers: [],
+    }).compileComponents()
 
-    fixture = TestBed.createComponent(SummaryPanelComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(SummaryPanelComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

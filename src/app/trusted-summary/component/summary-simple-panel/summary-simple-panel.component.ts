@@ -21,7 +21,7 @@ export interface SimpleActivityModel {
     './summary-simple-panel.component.scss-theme.scss',
   ],
 })
-export class SummarySimplePanelComponent implements OnInit, OnDestroy {
+export class SummarySimplePanelComponent implements OnInit {
   validatedSourceAriaLabel = $localize`:@@record.validatedSource:Validated source`
   selftAssertedSource = $localize`:@@record.selfAssertedSource:Self-asserted source`
   @Input() simpleActivities: SimpleActivityModel[] = []
@@ -31,24 +31,8 @@ export class SummarySimplePanelComponent implements OnInit, OnDestroy {
   mobile: boolean
   acitivityCountOverflow = false
 
-  constructor(private _platform: PlatformInfoService) {}
-  ngOnDestroy(): void {
-    this.unsubscribe.next()
-    this.unsubscribe.complete()
-  }
-
   ngOnInit(): void {
     this.acitivityCountOverflow = this.simpleActivities.length > 3
     this.simpleActivities = this.simpleActivities.slice(0, 3)
-    this._platform
-      .get()
-      .pipe(takeUntil(this.unsubscribe))
-      .subscribe((platform) => {
-        if (platform.columns4 || platform.columns8) {
-          this.mobile = true
-        } else {
-          this.mobile = false
-        }
-      })
   }
 }

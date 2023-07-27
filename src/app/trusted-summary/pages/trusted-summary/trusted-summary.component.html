@@ -1,5 +1,5 @@
 <main
-  *ngIf="affiliation"
+  *ngIf="trustedSummary"
   class="panel"
   [ngClass]="{
     mobile: mobile
@@ -8,12 +8,12 @@
   <header class="panel-header">
     <!-- orcid logo -->
     <img height="40px" src="./assets/vectors/orcid.logo.icon.svg" />
-    <div *ngIf="affiliation">
+    <div *ngIf="trustedSummary">
       <a
         class="orc-font-body-small cursor-pointer header-name"
-        href="{{ affiliation.orcid }}"
+        href="{{ trustedSummary.orcid }}"
       >
-        <h1 class="orc-font-body-large">{{ affiliation.name }}</h1>
+        <h1 class="orc-font-body-large">{{ trustedSummary.name }}</h1>
 
         <div class="label-with-icon">
           <label>
@@ -61,15 +61,15 @@
       class="column"
       [ngClass]="{ 'column-border': !mobile && (twoColumns || threeColumns) }"
     >
-      <ng-container *ngIf="affiliation.employmentAffiliations?.length">
-        <a href="{{ affiliation.orcid }}">
+      <ng-container *ngIf="trustedSummary.employmentAffiliations?.length">
+        <a href="{{ trustedSummary.orcid }}">
           <h2 class="orc-font-small-print">AFFILIATIONS</h2>
         </a>
         <app-summary-panel
-          [url]="affiliation?.orcid"
-          [activitySummary]="affiliation.employmentAffiliations"
+          [url]="trustedSummary?.orcid"
+          [activitySummary]="trustedSummary.employmentAffiliations"
         ></app-summary-panel>
-        <a href="{{ affiliation.orcid }}">
+        <a href="{{ trustedSummary.orcid }}">
           <h2 class="orc-font-small-print">KEY DATES</h2>
         </a>
         <div class="card-container">
@@ -78,24 +78,27 @@
               <div
                 class="date-item"
                 [ngClass]="{
-                  'last-date': !affiliation.lastModified
+                  'last-date': !trustedSummary.lastModified
                 }"
               >
                 <caption class="orc-font-small-print">
                   Record created
                 </caption>
                 <label class="orc-font-body-small">{{
-                  affiliation.creation | date
+                  trustedSummary.creation | date
                 }}</label>
               </div>
             </li>
             <li>
-              <div class="date-item last-date" *ngIf="affiliation.lastModified">
+              <div
+                class="date-item last-date"
+                *ngIf="trustedSummary.lastModified"
+              >
                 <caption class="orc-font-small-print">
                   Record created
                 </caption>
                 <label class="orc-font-body-small">{{
-                  affiliation.lastModified| date
+                  trustedSummary.lastModified | date
                 }}</label>
               </div>
             </li>
@@ -109,7 +112,7 @@
       *ngIf="peerReviews?.length || works?.length || funds?.length"
     >
       <ng-container *ngIf="works?.length">
-        <a href="{{ affiliation.orcid }}">
+        <a href="{{ trustedSummary.orcid }}">
           <h2 class="orc-font-small-print">WORKS</h2>
         </a>
         <app-summary-simple-panel
@@ -117,7 +120,7 @@
         ></app-summary-simple-panel>
       </ng-container>
       <ng-container *ngIf="peerReviews?.length">
-        <a href="{{ affiliation.orcid }}">
+        <a href="{{ trustedSummary.orcid }}">
           <h2 class="orc-font-small-print">PEER REVIEWS</h2>
         </a>
         <app-summary-simple-panel
@@ -125,7 +128,7 @@
         ></app-summary-simple-panel>
       </ng-container>
       <ng-container *ngIf="funds?.length">
-        <a href="{{ affiliation.orcid }}">
+        <a href="{{ trustedSummary.orcid }}">
           <h2 class="orc-font-small-print">FUNDING</h2>
         </a>
 
@@ -137,33 +140,33 @@
     <div
       class="column"
       *ngIf="
-        affiliation.professionalActivities?.length ||
+        trustedSummary.professionalActivities?.length ||
         externalIdentifiers?.length
       "
     >
-      <ng-container *ngIf="affiliation.professionalActivities?.length">
-        <a href="{{ affiliation.orcid }}">
+      <ng-container *ngIf="trustedSummary.professionalActivities?.length">
+        <a href="{{ trustedSummary.orcid }}">
           <h2 class="orc-font-small-print">PROFESSIONAL ACTIVITIES</h2>
         </a>
         <app-summary-panel
-          [url]="affiliation?.orcid"
-          [activitySummary]="affiliation.professionalActivities"
-          [count]="affiliation.professionalActivitiesCount"
+          [url]="trustedSummary?.orcid"
+          [activitySummary]="trustedSummary.professionalActivities"
+          [count]="trustedSummary.professionalActivitiesCount"
         ></app-summary-panel>
       </ng-container>
       <ng-container *ngIf="externalIdentifiers?.length">
-        <a href="{{ affiliation.orcid }}">
+        <a href="{{ trustedSummary.orcid }}">
           <h2 class="orc-font-small-print">OTHER IDENTIFIERS</h2>
         </a>
         <app-summary-simple-panel
           [simpleActivities]="externalIdentifiers"
           [count]="externalIdentifiers?.length"
-          [overflowUrl]="affiliation?.orcid"
+          [overflowUrl]="trustedSummary?.orcid"
         ></app-summary-simple-panel>
       </ng-container>
     </div>
   </div>
 </main>
-<div *ngIf="!affiliation">
+<div *ngIf="!trustedSummary">
   <mat-spinner></mat-spinner>
 </div>
