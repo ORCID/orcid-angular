@@ -17,24 +17,16 @@
   }
 
   .card-container {
-
     border-color: map-get($background, 'ui-background-light');
-
   }
 
-
   .activity-container {
-
     .header {
-
       .header-title {
-
         color: map-get($foreground, 'text-dark-high');
       }
     }
   }
-
-
 
   .activity-container.with-border {
     border-color: map-get($background, 'ui-background-light');
@@ -43,8 +35,6 @@
   .body-wrapper {
     color: map-get($foreground, 'text-dark-mid');
   }
-
-
 }
 
 @include theme($orcid-app-theme);
