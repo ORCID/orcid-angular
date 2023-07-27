@@ -9,13 +9,12 @@
   display: grid;
   grid-gap: 16px;
   border-radius: 8px 8px 0px 0px;
-  border: 2px solid var(--ui-background-ui-background-darkest, #212121);
+  border: 2px solid;
 }
 
 .panel-header {
   height: 46px;
-  border-bottom: 2px solid #212121;
-  background-color: #003449;
+  border-bottom: 2px solid;
   color: #fff;
   padding: 16px;
   display: flex;
@@ -67,7 +66,7 @@
 }
 
 .column-border {
-  border-right: 2px solid #eee;
+  border-right: 2px solid;
 }
 
 h2 {
@@ -76,7 +75,6 @@ h2 {
 }
 
 main {
-  background: #fafafa;
   max-width: 100%;
   overflow: hidden;
 }
@@ -102,42 +100,31 @@ ul {
 
 ul li {
   position: relative;
-  /* so that pseudoelements are positioned relatively to their "li"s*/
-  /* use padding-bottom instead of margin-bottom.*/
   margin-bottom: 0;
-  /* This overrides previously specified margin-bottom */
 }
 
 ul li:after {
-  /* bullets */
   content: url('/assets/vectors/bullet-point.svg');
   position: absolute;
   left: -26px;
-  /*adjust manually*/
   top: 0px;
 }
 
 ul li:before {
-  /* lines */
   content: '';
   position: absolute;
   left: -16px;
-  /* adjust manually */
-  border-left: 1px dashed #d4e7a1;
+  border-left: 1px dashed;
   height: 100%;
   width: 1px;
 }
 
 ul li:first-child:before {
-  /* first li's line */
   top: 6px;
-  /* moves the line down so that it disappears under the bullet. Adjust manually */
 }
 
 ul li:last-child:before {
-  /* last li's line */
   height: 6px;
-  /* shorten the line so it goes only up to the bullet. Is equal to first-child:before's top */
 }
 
 .card-container {
@@ -148,7 +135,7 @@ ul li:last-child:before {
   align-items: flex-start;
   gap: 16px;
   border-radius: 4px;
-  border: 2px solid #eee;
+  border: 2px solid;
   background: #fff;
 }
 
@@ -162,7 +149,7 @@ a {
     color: #fff;
     text-decoration: underline;
 
-    > svg > path {
+    >svg>path {
       fill: #fff;
     }
 

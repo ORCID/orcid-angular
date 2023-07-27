@@ -5,7 +5,7 @@
   justify-content: center;
   align-items: flex-start;
   gap: 16px;
-  border: 2px solid #eee;
+  border: 2px solid;
   border-radius: 4px;
   background-color: white;
 }
@@ -37,8 +37,6 @@
       display: flex;
       align-items: center;
 
-      color: rgba(0, 0, 0, 0.9);
-
       h3 {
         font-weight: 400;
 
@@ -59,11 +57,11 @@
 }
 
 .activity-container.with-border {
-  border-bottom: 2px solid #eee;
+  border-bottom: 2px solid;
+  ;
 }
 
 .body-wrapper {
-  color: rgba(0, 0, 0, 0.6);
   margin-inline-start: 27px;
 }
 
