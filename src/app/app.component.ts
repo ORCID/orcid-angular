@@ -130,9 +130,10 @@ export class AppComponent {
   }
 
   setPlatformClasses(platformInfo: PlatformInfo, oauthSessionFound?: boolean) {
-    this.headlessMode =
+    const isOauth =
       (platformInfo.hasOauthParameters || oauthSessionFound) &&
       this.currentRouteIsHeadlessOnOauthPage
+    this.headlessMode = isOauth || platformInfo.summaryScreen
     this.ie = platformInfo.ie
     this.edge = platformInfo.edge
     this.tabletOrHandset = platformInfo.tabletOrHandset
