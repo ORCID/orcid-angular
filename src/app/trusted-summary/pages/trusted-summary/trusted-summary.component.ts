@@ -21,18 +21,18 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
   orcid: string
   works: SimpleActivityModel[] = []
   unsubscribe = new Subject()
-  labelValidatedWorks = $localize`:@@record.validatedWorks:Validated works`
-  labelValidatedWork = $localize`:@@record.validatedWork:Validated work`
-  labelSelfAssertedWorks = $localize`:@@record.selfAssertedWorks:Self-asserted works`
-  labelSelfAssertedWork = $localize`:@@record.selfAssertedWork:Self-asserted work`
-  labelValidatedFunding = $localize`:@@record.validatedFunding:Validated funding`
-  labelValidatedFundings = $localize`:@@record.validatedFundings:Validated fundings`
-  labelSelfAssertedFunding = $localize`:@@record.selfAssertedFunding:Self-asserted funding`
-  labelSelfAssertedFundings = $localize`:@@record.selfAssertedFundings:Self-asserted fundings`
-  labelReviesFor = $localize`:@@record.reviewsFor:Reviews for`
-  labelReviewFor = $localize`:@@record.reviewFor:Review for`
-  labelpublicationgrants = $localize`:@@record.publicationgrantes:publication/grants`
-  labelpublicationgrant = $localize`:@@record.publicationgrant:publication/grant`
+  labelValidatedWorks = $localize`:@@summary.validatedWorks:Validated works`
+  labelValidatedWork = $localize`:@@summary.validatedWork:Validated work`
+  labelSelfAssertedWorks = $localize`:@@summary.selfAssertedWorks:Self-asserted works`
+  labelSelfAssertedWork = $localize`:@@summary.selfAssertedWork:Self-asserted work`
+  labelValidatedFunding = $localize`:@@summary.validatedFunding:Validated funding`
+  labelValidatedFundings = $localize`:@@summary.validatedFundings:Validated fundings`
+  labelSelfAssertedFunding = $localize`:@@summary.selfAssertedFunding:Self-asserted funding`
+  labelSelfAssertedFundings = $localize`:@@summary.selfAssertedFundings:Self-asserted fundings`
+  labelReviesFor = $localize`:@@summary.reviewsFor:Reviews for`
+  labelReviewFor = $localize`:@@summary.reviewFor:Review for`
+  labelpublicationgrants = $localize`:@@summary.publicationgrantes:publication/grants`
+  labelpublicationgrant = $localize`:@@summary.publicationgrant:publication/grant`
 
   funds: SimpleActivityModel[] = []
   peerReviews: SimpleActivityModel[] = []
@@ -53,7 +53,6 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
     this._platform
       .get()
       .pipe(takeUntil(this.unsubscribe))

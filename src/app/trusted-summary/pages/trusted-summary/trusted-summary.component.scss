@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh
+  min-height: 100vh;
 }
 
 .panel {
@@ -10,17 +10,13 @@
   grid-gap: 16px;
   border-radius: 8px 8px 0px 0px;
   border: 2px solid var(--ui-background-ui-background-darkest, #212121);
-
-
-
 }
-
 
 .panel-header {
   height: 46px;
   border-bottom: 2px solid #212121;
   background-color: #003449;
-  color: #FFF;
+  color: #fff;
   padding: 16px;
   display: flex;
   flex-direction: row;
@@ -29,9 +25,7 @@
     text-align: initial;
     display: inline;
     line-height: 1;
-
   }
-
 
   img {
     padding-inline-end: 10px;
@@ -46,17 +40,13 @@
       line-height: 1;
       word-break: break-word;
     }
-
-
   }
 }
-
 
 .column {
   padding-left: 20px;
   padding-right: 20px;
 }
-
 
 .panel-body {
   grid-column: 1 / -1;
@@ -77,7 +67,7 @@
 }
 
 .column-border {
-  border-right: 2px solid #EEE;
+  border-right: 2px solid #eee;
 }
 
 h2 {
@@ -86,7 +76,7 @@ h2 {
 }
 
 main {
-  background: #FAFAFA;
+  background: #fafafa;
   max-width: 100%;
   overflow: hidden;
 }
@@ -104,7 +94,6 @@ main {
 
 .date-item.last-date {
   padding-bottom: 0;
-
 }
 
 ul {
@@ -130,11 +119,11 @@ ul li:after {
 
 ul li:before {
   /* lines */
-  content: "";
+  content: '';
   position: absolute;
   left: -16px;
   /* adjust manually */
-  border-left: 1px dashed #D4E7A1;
+  border-left: 1px dashed #d4e7a1;
   height: 100%;
   width: 1px;
 }
@@ -151,7 +140,6 @@ ul li:last-child:before {
   /* shorten the line so it goes only up to the bullet. Is equal to first-child:before's top */
 }
 
-
 .card-container {
   display: flex;
   padding: 16px;
@@ -160,8 +148,8 @@ ul li:last-child:before {
   align-items: flex-start;
   gap: 16px;
   border-radius: 4px;
-  border: 2px solid #EEE;
-  background: #FFF;
+  border: 2px solid #eee;
+  background: #fff;
 }
 
 .cursor-pointer {
@@ -171,11 +159,11 @@ ul li:last-child:before {
 a {
   .label-with-icon {
     padding-top: 2px;
-    color: #FFF;
+    color: #fff;
     text-decoration: underline;
 
-    >svg>path {
-      fill: #FFF;
+    > svg > path {
+      fill: #fff;
     }
 
     display: flex;
@@ -184,8 +172,7 @@ a {
   }
 
   h1 {
-    color: #FFF;
-
+    color: #fff;
   }
 
   h2 {

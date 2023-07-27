@@ -27,7 +27,6 @@ import {
 } from './types/record-affiliation.endpoint'
 import { WorkBibtexModalComponent } from './record/components/work-stack-group/modals/work-bibtex-modal/work-bibtex-modal.component'
 import { environment } from 'src/environments/environment'
-import { log } from 'console'
 
 export { COUNTRY_NAMES_TO_COUNTRY_CODES } from './constants-country-codes'
 
@@ -219,7 +218,6 @@ export function objectToUrlParameters(object: Object) {
 }
 
 export function routerPublicPageUrl(segments: UrlSegment[]) {
-  console.log(segments)
   if (segments[0] && isValidOrcidFormat(segments[0].path)) {
     return { consumed: [segments[0]] }
   }
@@ -229,7 +227,6 @@ export function routerPublicPageUrl(segments: UrlSegment[]) {
 }
 
 export function routerSummaryPageUrl(segments: UrlSegment[]) {
-  console.log(segments)
   if (
     segments[0] &&
     isValidOrcidFormat(segments[0].path) &&

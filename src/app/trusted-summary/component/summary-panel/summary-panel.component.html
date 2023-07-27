@@ -81,7 +81,7 @@
             {{ activity.startDate | monthDayYearDateToString }}
           </ng-container>
           <ng-container *ngIf="activity.endDate">
-            <ng-container>to</ng-container>
+            <ng-container i18n="@@summary.to">to</ng-container>
             {{ activity.endDate | monthDayYearDateToString }}
           </ng-container>
         </caption>
@@ -96,7 +96,10 @@
       class="underline orc-font-body-small"
       target="_blank"
       rel="noopener noreferrer"
-      >+ {{ count - 3 }} <ng-container>more Affiliations</ng-container></a
+      >+ {{ count - 3 }}
+      <ng-container i18n="@@summary.moreAffiliation"
+        >more Affiliations</ng-container
+      ></a
     >
   </div>
 </div>

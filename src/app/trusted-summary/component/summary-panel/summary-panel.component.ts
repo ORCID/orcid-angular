@@ -1,8 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core'
-import { log } from 'console'
 import { Subject } from 'rxjs'
-import { takeUntil } from 'rxjs/operators'
-import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { ActivitySummary } from 'src/app/types/trust-summary'
 
 @Component({
@@ -14,8 +11,8 @@ import { ActivitySummary } from 'src/app/types/trust-summary'
   ],
 })
 export class SummaryPanelComponent implements OnInit {
-  validatedSourceAriaLabel = $localize`:@@record.validatedSource:Validated source`
-  selftAssertedSource = $localize`:@@record.selfAssertedSource:Self-asserted source`
+  validatedSourceAriaLabel = $localize`:@@summary.validatedSource:Validated source`
+  selftAssertedSource = $localize`:@@summary.selfAssertedSource:Self-asserted source`
   @Input() activitySummary: ActivitySummary[]
   @Input() url: string = ''
   @Input() count: number = 0

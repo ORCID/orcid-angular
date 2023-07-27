@@ -5,20 +5,14 @@
   justify-content: center;
   align-items: flex-start;
   gap: 16px;
-  border: 2px solid #EEE;
+  border: 2px solid #eee;
   border-radius: 4px;
   background-color: white;
-
-
 }
-
-
 
 .activity-container.padding-botton {
   padding-bottom: 16px;
-
 }
-
 
 .activity-container {
   width: 100%;
@@ -35,15 +29,12 @@
       display: flex;
       align-items: center;
 
-      color: rgba(0, 0, 0, 0.90);
+      color: rgba(0, 0, 0, 0.9);
 
       h3 {
         margin: 0;
       }
-
     }
-
-
 
     display: flex;
     padding-bottom: 4px;
@@ -57,17 +48,16 @@
 }
 
 .activity-container.with-border {
-  border-bottom: 2px solid #EEE;
+  border-bottom: 2px solid #eee;
 }
 
 .body-wrapper {
-  color: rgba(0, 0, 0, 0.60);
+  color: rgba(0, 0, 0, 0.6);
   margin-inline-start: 25px;
 }
 
 mat-icon.margin-compensation {
   margin-bottom: 3px;
-
 }
 
 mat-icon {

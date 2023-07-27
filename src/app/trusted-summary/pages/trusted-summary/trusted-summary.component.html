@@ -62,15 +62,27 @@
       [ngClass]="{ 'column-border': !mobile && (twoColumns || threeColumns) }"
     >
       <ng-container *ngIf="trustedSummary.employmentAffiliations?.length">
-        <a href="{{ trustedSummary.orcid }}">
-          <h2 class="orc-font-small-print">AFFILIATIONS</h2>
+        <a
+          href="{{ trustedSummary.orcid }}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <h2 class="orc-font-small-print" i18n="@@summary.affiliations">
+            AFFILIATIONS
+          </h2>
         </a>
         <app-summary-panel
           [url]="trustedSummary?.orcid"
           [activitySummary]="trustedSummary.employmentAffiliations"
         ></app-summary-panel>
-        <a href="{{ trustedSummary.orcid }}">
-          <h2 class="orc-font-small-print">KEY DATES</h2>
+        <a
+          href="{{ trustedSummary.orcid }}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <h2 class="orc-font-small-print" i18n="@@summary.keyDates">
+            KEY DATES
+          </h2>
         </a>
         <div class="card-container">
           <ul>
@@ -81,7 +93,10 @@
                   'last-date': !trustedSummary.lastModified
                 }"
               >
-                <caption class="orc-font-small-print">
+                <caption
+                  class="orc-font-small-print"
+                  i18n="@@summary.recordCreated"
+                >
                   Record created
                 </caption>
                 <label class="orc-font-body-small">{{
@@ -94,8 +109,11 @@
                 class="date-item last-date"
                 *ngIf="trustedSummary.lastModified"
               >
-                <caption class="orc-font-small-print">
-                  Record created
+                <caption
+                  class="orc-font-small-print"
+                  i18n="@@summary.lastUpdated"
+                >
+                  Last updated
                 </caption>
                 <label class="orc-font-body-small">{{
                   trustedSummary.lastModified | date
@@ -112,24 +130,38 @@
       *ngIf="peerReviews?.length || works?.length || funds?.length"
     >
       <ng-container *ngIf="works?.length">
-        <a href="{{ trustedSummary.orcid }}">
-          <h2 class="orc-font-small-print">WORKS</h2>
+        <a
+          href="{{ trustedSummary.orcid }}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <h2 class="orc-font-small-print" i18n="@@summary.works">WORKS</h2>
         </a>
         <app-summary-simple-panel
           [simpleActivities]="works"
         ></app-summary-simple-panel>
       </ng-container>
       <ng-container *ngIf="peerReviews?.length">
-        <a href="{{ trustedSummary.orcid }}">
-          <h2 class="orc-font-small-print">PEER REVIEWS</h2>
+        <a
+          href="{{ trustedSummary.orcid }}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <h2 class="orc-font-small-print" i18n="@@summary.peerReviews">
+            PEER REVIEWS
+          </h2>
         </a>
         <app-summary-simple-panel
           [simpleActivities]="peerReviews"
         ></app-summary-simple-panel>
       </ng-container>
       <ng-container *ngIf="funds?.length">
-        <a href="{{ trustedSummary.orcid }}">
-          <h2 class="orc-font-small-print">FUNDING</h2>
+        <a
+          href="{{ trustedSummary.orcid }}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <h2 class="orc-font-small-print" i18n="@@summary.funding">FUNDING</h2>
         </a>
 
         <app-summary-simple-panel
@@ -145,8 +177,17 @@
       "
     >
       <ng-container *ngIf="trustedSummary.professionalActivities?.length">
-        <a href="{{ trustedSummary.orcid }}">
-          <h2 class="orc-font-small-print">PROFESSIONAL ACTIVITIES</h2>
+        <a
+          href="{{ trustedSummary.orcid }}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <h2
+            class="orc-font-small-print"
+            i18n="@@summary.professionalActivites"
+          >
+            PROFESSIONAL ACTIVITIES
+          </h2>
         </a>
         <app-summary-panel
           [url]="trustedSummary?.orcid"
@@ -155,8 +196,14 @@
         ></app-summary-panel>
       </ng-container>
       <ng-container *ngIf="externalIdentifiers?.length">
-        <a href="{{ trustedSummary.orcid }}">
-          <h2 class="orc-font-small-print">OTHER IDENTIFIERS</h2>
+        <a
+          href="{{ trustedSummary.orcid }}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <h2 class="orc-font-small-print" i18n="@@summary.otherids">
+            OTHER IDENTIFIERS
+          </h2>
         </a>
         <app-summary-simple-panel
           [simpleActivities]="externalIdentifiers"

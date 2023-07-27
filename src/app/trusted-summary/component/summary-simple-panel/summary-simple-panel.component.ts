@@ -22,8 +22,8 @@ export interface SimpleActivityModel {
   ],
 })
 export class SummarySimplePanelComponent implements OnInit {
-  validatedSourceAriaLabel = $localize`:@@record.validatedSource:Validated source`
-  selftAssertedSource = $localize`:@@record.selfAssertedSource:Self-asserted source`
+  validatedSourceAriaLabel = $localize`:@@summary.validatedSource:Validated source`
+  selftAssertedSource = $localize`:@@summary.selfAssertedSource:Self-asserted source`
   @Input() simpleActivities: SimpleActivityModel[] = []
   @Input() count: number = 0
   @Input() overflowUrl: string = ''
