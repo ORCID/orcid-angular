@@ -1,15 +1,13 @@
 :host {
   display: flex;
   align-items: center;
-  width: 100%;
   justify-content: center;
   min-height: 100vh
 }
 
 .panel {
   display: grid;
-  grid-template-columns: 1fr, 1fr, 1fr;
-  grid-gap: 10px;
+  grid-gap: 16px;
   border-radius: 8px 8px 0px 0px;
   border: 2px solid var(--ui-background-ui-background-darkest, #212121);
 
@@ -19,8 +17,8 @@
 
 
 .panel-header {
+  height: 46px;
   border-bottom: 2px solid #212121;
-  grid-column: 1 / -1;
   background-color: #003449;
   color: #FFF;
   padding: 16px;
@@ -57,21 +55,25 @@
 .column {
   padding-left: 20px;
   padding-right: 20px;
-
 }
 
-.mobile {
-  .panel-body {
-    grid-template-columns: 1fr;
-  }
-}
 
 .panel-body {
   grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: repeat(auto-fit, 250px);
+  padding-bottom: 16px;
+}
 
-  padding-bottom: 20px;
+.panel-body-3-cols {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.panel-body-2-cols {
+  grid-template-columns: 1fr 1fr;
+}
+
+.panel-body-1-cols {
+  grid-template-columns: 1fr;
 }
 
 .column-border {
@@ -84,7 +86,6 @@ h2 {
 }
 
 main {
-  width: 100%;
   background: #FAFAFA;
   max-width: 100%;
   overflow: hidden;
@@ -161,4 +162,33 @@ ul li:last-child:before {
   border-radius: 4px;
   border: 2px solid #EEE;
   background: #FFF;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+a {
+  .label-with-icon {
+    padding-top: 2px;
+    color: #FFF;
+    text-decoration: underline;
+
+    >svg>path {
+      fill: #FFF;
+    }
+
+    display: flex;
+    align-items: centerf;
+    gap: 8px;
+  }
+
+  h1 {
+    color: #FFF;
+
+  }
+
+  h2 {
+    color: black;
+  }
 }

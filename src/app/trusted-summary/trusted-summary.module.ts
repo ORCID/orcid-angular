@@ -10,6 +10,7 @@ import {
   MatProgressSpinner,
   MatProgressSpinnerModule,
 } from '@angular/material/progress-spinner'
+import { SharedModule } from '../shared/shared.module'
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import {
     TrustedSummaryRouting,
     MatIconModule,
     MatProgressSpinnerModule,
+    SharedModule,
   ],
 })
 export class TrustedSummaryModule {}

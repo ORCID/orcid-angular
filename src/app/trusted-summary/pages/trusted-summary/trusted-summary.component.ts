@@ -38,6 +38,9 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
   peerReviews: SimpleActivityModel[] = []
   mobile: boolean
   externalIdentifiers: SimpleActivityModel[]
+  twoColumns: boolean = false
+  threeColumns: boolean = false
+  oneColumn: boolean
 
   constructor(
     private _affiliation: TrustedSummaryService,
@@ -50,6 +53,7 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
     this._platform
       .get()
       .pipe(takeUntil(this.unsubscribe))
@@ -131,6 +135,27 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
           }
         }
       )
+
+      if (
+        (this.works.length > 0 ||
+          this.funds.length > 0 ||
+          this.peerReviews.length > 0) &&
+        (this.externalIdentifiers.length > 0 ||
+          this.affiliation.professionalActivitiesCount > 0 ||
+          this.affiliation.externalIdentifiers.length > 0)
+      ) {
+        this.threeColumns = true
+      } else if (
+        this.works.length > 0 ||
+        this.funds.length > 0 ||
+        this.peerReviews.length > 0 ||
+        this.externalIdentifiers.length > 0 ||
+        this.affiliation.professionalActivitiesCount > 0
+      ) {
+        this.twoColumns = true
+      } else {
+        this.oneColumn = true
+      }
     })
   }
 }

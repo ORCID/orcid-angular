@@ -25,8 +25,11 @@ export class SummarySimplePanelComponent implements OnInit, OnDestroy {
   validatedSourceAriaLabel = $localize`:@@record.validatedSource:Validated source`
   selftAssertedSource = $localize`:@@record.selfAssertedSource:Self-asserted source`
   @Input() simpleActivities: SimpleActivityModel[] = []
+  @Input() count: number = 0
+  @Input() overflowUrl: string = ''
   unsubscribe = new Subject()
   mobile: boolean
+  acitivityCountOverflow = false
 
   constructor(private _platform: PlatformInfoService) {}
   ngOnDestroy(): void {
@@ -35,6 +38,8 @@ export class SummarySimplePanelComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.acitivityCountOverflow = this.simpleActivities.length > 3
+    this.simpleActivities = this.simpleActivities.slice(0, 3)
     this._platform
       .get()
       .pipe(takeUntil(this.unsubscribe))

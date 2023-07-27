@@ -45,15 +45,7 @@ export class SummaryPanelComponent implements OnInit {
 
     if (this.activitySummary) {
       this.activitySummary = [...this.activitySummary, ...this.activitySummary]
-      this.activitiesToDisplay = this.activitySummary
-        .slice(0, 3)
-        .map((activity) => {
-          return {
-            ...activity,
-            organizationName: 'Hey hello',
-            validatedOrSelfAsserted: false,
-          }
-        })
+      this.activitiesToDisplay = this.activitySummary.slice(0, 3)
 
       this.acitivityCountOverflow = this.count > 3
     }

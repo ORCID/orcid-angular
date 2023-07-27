@@ -83,10 +83,16 @@
       </div>
       <div class="body-wrapper">
         <caption class="orc-font-small-print">
-          2020-02-02 to present
+          <ng-container *ngIf="activity.startDate">
+            {{ activity.startDate | monthDayYearDateToString }}
+          </ng-container>
+          <ng-container *ngIf="activity.endDate">
+            <ng-container>to</ng-container>
+            {{ activity.endDate | monthDayYearDateToString }}
+          </ng-container>
         </caption>
-        <div class="orc-font-small-print">Professor of Psychoceramic</div>
-        <div class="orc-font-small-print">Employment</div>
+        <div class="orc-font-small-print">{{ activity.role }}</div>
+        <div class="orc-font-small-print">{{ activity.type }}</div>
       </div>
     </div>
   </ng-container>

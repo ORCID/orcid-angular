@@ -5,8 +5,8 @@ import { MonthDayYearDate } from 'src/app/types'
   name: 'monthDayYearDateToString',
 })
 export class MonthDayYearDateToStringPipe implements PipeTransform {
-  transform(value: MonthDayYearDate | number): string {
-    if (typeof value === 'number') {
+  transform(value: MonthDayYearDate | number | string): string {
+    if (typeof value === 'number' || typeof value === 'string') {
       const date = new Date(value)
       value = {
         day: date.getUTCDate() + '',

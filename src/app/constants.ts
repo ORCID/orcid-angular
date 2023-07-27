@@ -233,6 +233,7 @@ export function routerSummaryPageUrl(segments: UrlSegment[]) {
   if (
     segments[0] &&
     isValidOrcidFormat(segments[0].path) &&
+    segments[1] &&
     segments[1].path === 'summary'
   ) {
     return { consumed: [segments[0], segments[1]] }
