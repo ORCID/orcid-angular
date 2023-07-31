@@ -1,8 +1,14 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
+import {
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  OnDestroy,
+  OnInit,
+} from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { ORCID_REGEXP } from 'src/app/constants'
-import { first, switchMap, takeUntil, tap } from 'rxjs/operators'
+import { first, switchMap, take, takeUntil, tap } from 'rxjs/operators'
 import { RecordService } from '../../../core/record/record.service'
 import { Subject } from 'rxjs'
 import { MainPanelsState, UserRecord } from '../../../types/record.local'
@@ -59,6 +65,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
 
   regionActivities = $localize`:@@shared.activities:Activities`
   readyForIndexing: boolean
+  fragment: string
 
   constructor(
     _userInfoService: UserInfoService,
@@ -72,7 +79,8 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     private _userSession: UserService,
     @Inject(WINDOW) private window: Window,
     private _togglz: TogglzService,
-    private _scriptService: ScriptService
+    private _scriptService: ScriptService,
+    private _changeDetectorRef: ChangeDetectorRef
   ) {}
 
   private checkIfThisIsAPublicOrcid() {
@@ -98,6 +106,14 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.checkIfThisIsAPublicOrcid()
     this.affiliations = 0
+    // Remove fragment temporally, to adding back when items have loaded
+    this.route.fragment.pipe(take(1)).subscribe((fragment) => {
+      if (fragment) {
+        this.fragment = fragment
+        this._router.navigate([], { fragment: '' })
+      }
+    })
+
     this._platform.get().subscribe((value) => (this.platform = value))
     this._record
       .getRecord({
@@ -140,6 +156,41 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
           }
 
           this._openGraph.addOpenGraphData(userRecord, { force: true })
+
+          console.log('NOT READY ', userRecord)
+
+          // Add back fragment  when items have loaded
+          if (
+            userRecord.works &&
+            userRecord.fundings &&
+            userRecord.peerReviews &&
+            userRecord.researchResources &&
+            userRecord.affiliations &&
+            userRecord.externalIdentifier &&
+            [
+              'works',
+              'affiliations',
+              'peer-reviews',
+              'funding',
+              'professional-activities',
+            ].find((x) => x === this.fragment)
+          ) {
+            console.log('READY ', JSON.stringify(userRecord))
+            setTimeout(() => {
+              document.querySelector('#' + this.fragment).scrollIntoView()
+              this._router.navigate([], { fragment: this.fragment })
+            })
+          }
+          if (
+            userRecord.externalIdentifier &&
+            this.fragment === 'other-identifiers'
+          ) {
+            console.log('READY ', JSON.stringify(userRecord))
+            setTimeout(() => {
+              document.querySelector('#' + this.fragment).scrollIntoView()
+              this._router.navigate([], { fragment: this.fragment })
+            })
+          }
         }),
         switchMap(() => this._togglz.getTogglz().pipe(first())),
         tap((togglz) => {

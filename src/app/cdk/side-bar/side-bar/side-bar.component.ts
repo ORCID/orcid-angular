@@ -18,6 +18,7 @@ import { ModalEmailComponent } from '../modals/modal-email/modal-email.component
 import { ModalKeywordComponent } from '../modals/modal-keyword/modal-keyword.component'
 import { ModalPersonIdentifiersComponent } from '../modals/modal-person-identifiers/modal-person-identifiers.component'
 import { ModalWebsitesComponent } from '../modals/modal-websites/modal-websites.component'
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'app-side-bar',
@@ -66,11 +67,13 @@ export class SideBarComponent implements OnInit, OnDestroy {
   emailsOpenState = false
 
   regionPersonalInformation = $localize`:@@shared.personalInformation:Personal information`
+  fragment: string
 
   constructor(
     _platform: PlatformInfoService,
     private _user: UserService,
-    private _record: RecordService
+    private _record: RecordService,
+    private _route: ActivatedRoute
   ) {
     _platform
       .get()
@@ -82,6 +85,8 @@ export class SideBarComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getRecord()
+    this.externalIdentifierOpenState =
+      this._route.snapshot.fragment === 'other-identifiers'
   }
 
   private getRecord() {
