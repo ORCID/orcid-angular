@@ -157,7 +157,6 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
 
           this._openGraph.addOpenGraphData(userRecord, { force: true })
 
-
           // Add back fragment  when items have loaded
           if (
             userRecord.works &&
