@@ -157,7 +157,6 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
 
           this._openGraph.addOpenGraphData(userRecord, { force: true })
 
-          console.log('NOT READY ', userRecord)
 
           // Add back fragment  when items have loaded
           if (
@@ -175,7 +174,6 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
               'professional-activities',
             ].find((x) => x === this.fragment)
           ) {
-            console.log('READY ', JSON.stringify(userRecord))
             setTimeout(() => {
               document.querySelector('#' + this.fragment).scrollIntoView()
               this._router.navigate([], { fragment: this.fragment })
@@ -185,7 +183,6 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
             userRecord.externalIdentifier &&
             this.fragment === 'other-identifiers'
           ) {
-            console.log('READY ', JSON.stringify(userRecord))
             setTimeout(() => {
               document.querySelector('#' + this.fragment).scrollIntoView()
               this._router.navigate([], { fragment: this.fragment })
