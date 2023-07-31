@@ -1,3 +1,9 @@
+## v2.36.7 - 2023-07-31
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.36.6...v2.36.7)
+
+- [#2032](https://github.com/ORCID/orcid-angular/pull/2032): Add link functionality
+
 ## v2.36.6 - 2023-07-27
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.36.5...v2.36.6)
