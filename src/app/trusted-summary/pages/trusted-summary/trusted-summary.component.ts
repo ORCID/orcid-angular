@@ -67,7 +67,6 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
     this.orcid = this._router.url.split('/')[1]
     this._trustedSummary.getSummary(this.orcid).subscribe((data) => {
       this.trustedSummary = data
-      this.trustedSummary.orcid = 'http://localhost:4200/0000-0002-6108-9550'
       if (this.trustedSummary.selfAssertedWorks) {
         this.works.push({
           verified: false,
