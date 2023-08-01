@@ -13,7 +13,6 @@ import { PlatformInfoService } from '../cdk/platform-info'
 import { WINDOW } from '../cdk/window'
 import { UserService } from '../core'
 import { ErrorHandlerService } from '../core/error-handler/error-handler.service'
-import { GoogleUniversalAnalyticsService } from '../core/google-analytics/google-universal-analytics.service'
 import { ERROR_REPORT } from '../errors'
 import { RequestInfoForm } from '../types'
 import { GoogleTagManagerService } from '../core/google-tag-manager/google-tag-manager.service'
@@ -29,7 +28,6 @@ export class AuthorizeGuard implements CanActivateChild {
     private _router: Router,
     private _platform: PlatformInfoService,
     @Inject(WINDOW) private window: Window,
-    private _gtag: GoogleUniversalAnalyticsService,
     private _googleTagManagerService: GoogleTagManagerService,
     private _errorHandler: ErrorHandlerService
   ) {}
@@ -74,9 +72,6 @@ export class AuthorizeGuard implements CanActivateChild {
 
   reportAlreadyAuthorize(request: RequestInfoForm) {
     const analyticsReports: Observable<void>[] = []
-    analyticsReports.push(
-      this._gtag.reportEvent(`Reauthorize`, 'RegGrowth', request)
-    )
     analyticsReports.push(
       this._googleTagManagerService.reportEvent(`Reauthorize`, request)
     )
