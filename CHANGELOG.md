@@ -1,3 +1,11 @@
+## v2.36.8 - 2023-08-01
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.36.7...v2.36.8)
+
+### Fix
+
+- Remove UA tracking (#2033)
+
 ## v2.36.7 - 2023-07-31
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.36.6...v2.36.7)
