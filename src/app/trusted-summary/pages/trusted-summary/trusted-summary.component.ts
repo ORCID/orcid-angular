@@ -6,6 +6,7 @@ import { SimpleActivityModel } from '../../component/summary-simple-panel/summar
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
+import { RobotsMetaTagsService } from 'src/app/core/robots-meta-tags/robots-meta-tags.service'
 
 @Component({
   selector: 'app-trusted-summary',
@@ -45,14 +46,18 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
   constructor(
     private _trustedSummary: TrustedSummaryService,
     private _router: Router,
-    private _platform: PlatformInfoService
+    private _platform: PlatformInfoService,
+    private _robotsMetaTags: RobotsMetaTagsService
   ) {}
   ngOnDestroy(): void {
     this.unsubscribe.next()
     this.unsubscribe.complete()
+    this._robotsMetaTags.restoreEnvironmentRobotsConfig()
+
   }
 
   ngOnInit(): void {
+    this._robotsMetaTags.disallowRobots()
     this._platform
       .get()
       .pipe(takeUntil(this.unsubscribe))
@@ -113,14 +118,14 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
       ) {
         this.peerReviews.push({
           verified: true,
-          countA: this.trustedSummary.reviews,
+          countA: this.trustedSummary.peerReviewPublicationGrants,
           stringA:
-            this.trustedSummary.reviews > 1
+            this.trustedSummary.peerReviewPublicationGrants > 1
               ? this.labelReviesFor
               : this.labelReviewFor,
-          countB: this.trustedSummary.peerReviewPublicationGrants,
+          countB: this.trustedSummary.reviews,
           stringB:
-            this.trustedSummary.peerReviewPublicationGrants > 1
+            this.trustedSummary.reviews > 1
               ? this.labelpublicationgrants
               : this.labelpublicationgrant,
         })
