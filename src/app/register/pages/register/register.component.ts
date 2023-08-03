@@ -9,7 +9,7 @@ import {
   ViewChild,
 } from '@angular/core'
 import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms'
-import { MatDialog } from '@angular/material/dialog'
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
 import { MatStep } from '@angular/material/stepper'
 import { Router } from '@angular/router'
 import { combineLatest, forkJoin, Observable } from 'rxjs'

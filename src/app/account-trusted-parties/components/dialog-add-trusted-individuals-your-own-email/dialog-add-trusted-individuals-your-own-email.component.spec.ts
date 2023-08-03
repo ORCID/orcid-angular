@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { DialogAddTrustedIndividualsYourOwnEmailComponent } from './dialog-add-trusted-individuals-your-own-email.component'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
+import { MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA, MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog'
 
 describe('DialogAddTrustedIndividualsComponent', () => {
   let component: DialogAddTrustedIndividualsYourOwnEmailComponent

@@ -6,9 +6,9 @@ import { TrustedSummaryComponent } from './pages/trusted-summary/trusted-summary
 import { TrustedSummaryRouting } from './trusted-summary-routing.module'
 import { MatIconModule } from '@angular/material/icon'
 import {
-  MatProgressSpinner,
-  MatProgressSpinnerModule,
-} from '@angular/material/progress-spinner'
+  MatLegacyProgressSpinner as MatProgressSpinner,
+  MatLegacyProgressSpinnerModule as MatProgressSpinnerModule,
+} from '@angular/material/legacy-progress-spinner'
 import { SharedModule } from '../shared/shared.module'
 
 @NgModule({
