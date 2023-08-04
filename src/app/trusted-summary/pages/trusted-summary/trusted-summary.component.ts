@@ -53,7 +53,6 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
     this.unsubscribe.next()
     this.unsubscribe.complete()
     this._robotsMetaTags.restoreEnvironmentRobotsConfig()
-
   }
 
   ngOnInit(): void {
