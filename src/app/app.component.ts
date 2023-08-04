@@ -7,7 +7,6 @@ import { PlatformInfoService } from './cdk/platform-info/platform-info.service'
 import { WINDOW } from './cdk/window'
 import { HeadlessOnOauthRoutes } from './constants'
 import { UserService } from './core'
-import { GoogleUniversalAnalyticsService } from './core/google-analytics/google-universal-analytics.service'
 import { ZendeskService } from './core/zendesk/zendesk.service'
 import { GoogleTagManagerService } from './core/google-tag-manager/google-tag-manager.service'
 import {
@@ -44,7 +43,6 @@ export class AppComponent {
   constructor(
     _platformInfo: PlatformInfoService,
     _router: Router,
-    _googleAnalytics: GoogleUniversalAnalyticsService,
     _googleTagManagerService: GoogleTagManagerService,
     _zendesk: ZendeskService,
     private _userService: UserService,
@@ -101,11 +99,6 @@ export class AppComponent {
           )
           .subscribe((response) => {
             if (response) {
-              _googleAnalytics
-                .reportNavigationEnd(event.url, duration)
-                .subscribe(() => {
-                  _googleAnalytics.reportPageView(event.urlAfterRedirects)
-                })
               _googleTagManagerService
                 .reportNavigationEnd(event.url, duration)
                 .subscribe(() => {
