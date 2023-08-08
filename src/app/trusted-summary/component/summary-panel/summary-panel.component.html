@@ -12,13 +12,13 @@
           <mat-icon
             [attr.aria-label]="validatedSourceAriaLabel"
             class="verified"
-            *ngIf="activity.validatedOrSelfAsserted"
+            *ngIf="activity.validated"
             >check_circle</mat-icon
           >
           <mat-icon
             class="margin-compensation"
             [attr.aria-label]="selftAssertedSource"
-            *ngIf="!activity.validatedOrSelfAsserted"
+            *ngIf="!activity.validated"
             ><img src="./assets/vectors/profile-not-verified.svg" />
           </mat-icon>
           <h3

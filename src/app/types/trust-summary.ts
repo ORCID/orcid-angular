@@ -7,7 +7,7 @@ export interface TrustedSummary {
   lastModified: string
   validatedWorks: number
   selfAssertedWorks: number
-  reviews: number
+  peerReviewsTotal: number
   peerReviewPublicationGrants: number
   validatedFunds: number
   selfAssertedFunds: number
@@ -24,5 +24,5 @@ export interface ActivitySummary {
   role?: string
   title: any
   type: string
-  validatedOrSelfAsserted: boolean
+  validated: boolean
 }
