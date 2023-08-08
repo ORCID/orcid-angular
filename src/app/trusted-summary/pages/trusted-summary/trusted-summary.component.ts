@@ -112,7 +112,7 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
         })
       }
       if (
-        this.trustedSummary.reviews &&
+        this.trustedSummary.peerReviewsTotal &&
         this.trustedSummary.peerReviewPublicationGrants
       ) {
         this.peerReviews.push({
@@ -122,9 +122,9 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
             this.trustedSummary.peerReviewPublicationGrants > 1
               ? this.labelReviesFor
               : this.labelReviewFor,
-          countB: this.trustedSummary.reviews,
+          countB: this.trustedSummary.peerReviewsTotal,
           stringB:
-            this.trustedSummary.reviews > 1
+            this.trustedSummary.peerReviewsTotal > 1
               ? this.labelpublicationgrants
               : this.labelpublicationgrant,
         })

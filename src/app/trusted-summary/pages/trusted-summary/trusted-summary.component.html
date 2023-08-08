@@ -13,7 +13,16 @@
         class="orc-font-body-small cursor-pointer header-name"
         href="{{ trustedSummary.orcid }}"
       >
-        <h1 class="orc-font-body-large">{{ trustedSummary.name }}</h1>
+        <h1 class="orc-font-body-large">
+          <ng-container
+            *ngIf="!trustedSummary?.name"
+            i18n="@@summary.nameIsPrivateOrLimited"
+            >Name is private or limited</ng-container
+          >
+          <ng-container *ngIf="trustedSummary?.name">{{
+            trustedSummary.name
+          }}</ng-container>
+        </h1>
 
         <div class="label-with-icon">
           <label>
