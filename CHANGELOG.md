@@ -1,3 +1,11 @@
+## v2.36.11 - 2023-08-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.36.10...v2.36.11)
+
+### Feature
+
+- Add production script one trust (#2036)
+
 ## v2.36.10 - 2023-08-08
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.36.9...v2.36.10)
