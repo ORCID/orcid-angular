@@ -1,3 +1,9 @@
+## v2.36.10 - 2023-08-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.36.9...v2.36.10)
+
+- [#2035](https://github.com/ORCID/orcid-angular/pull/2035): Leo/update trust summary endpoint
+
 ## v2.36.9 - 2023-08-04
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.36.8...v2.36.9)
