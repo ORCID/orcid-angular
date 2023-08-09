@@ -7,6 +7,7 @@ import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 import { RobotsMetaTagsService } from 'src/app/core/robots-meta-tags/robots-meta-tags.service'
+import { ZendeskService } from 'src/app/core/zendesk/zendesk.service'
 
 @Component({
   selector: 'app-trusted-summary',
@@ -30,8 +31,8 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
   labelValidatedFundings = $localize`:@@summary.validatedFundings:Validated fundings`
   labelSelfAssertedFunding = $localize`:@@summary.selfAssertedFunding:Self-asserted funding`
   labelSelfAssertedFundings = $localize`:@@summary.selfAssertedFundings:Self-asserted fundings`
-  labelReviesFor = $localize`:@@summary.reviewsFor:Reviews for`
-  labelReviewFor = $localize`:@@summary.reviewFor:Review for`
+  labelReviesFor = $localize`:@@summary.reviewsFor:reviews for`
+  labelReviewFor = $localize`:@@summary.reviewFor:review for`
   labelpublicationgrants = $localize`:@@summary.publicationgrantes:publication/grants`
   labelpublicationgrant = $localize`:@@summary.publicationgrant:publication/grant`
 
@@ -42,12 +43,17 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
   twoColumns: boolean = false
   threeColumns: boolean = false
   oneColumn: boolean
+  createdToday = false
+  modifiedToday: boolean
+  creationDateWithOffset: any
+  lastUpdateDate: any
 
   constructor(
     private _trustedSummary: TrustedSummaryService,
     private _router: Router,
     private _platform: PlatformInfoService,
-    private _robotsMetaTags: RobotsMetaTagsService
+    private _robotsMetaTags: RobotsMetaTagsService,
+    private _zendeskService: ZendeskService
   ) {}
   ngOnDestroy(): void {
     this.unsubscribe.next()
@@ -56,6 +62,7 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this._zendeskService.hide()
     this._robotsMetaTags.disallowRobots()
     this._platform
       .get()
@@ -69,8 +76,31 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
       })
     this.currentLocation = window.location.origin
     this.orcid = this._router.url.split('/')[1]
+
     this._trustedSummary.getSummary(this.orcid).subscribe((data) => {
       this.trustedSummary = data
+      if (this.trustedSummary.creation) {
+        this.creationDateWithOffset = this.dateWithOffset(
+          this.trustedSummary.creation
+        )
+        // if record was created today
+        if (
+          this.creationDateWithOffset.toDateString() ===
+          new Date().toDateString()
+        ) {
+          this.createdToday = true
+        }
+      }
+      if (this.trustedSummary.lastModified) {
+        this.lastUpdateDate = this.dateWithOffset(
+          this.trustedSummary.lastModified
+        )
+        // if record was modified today
+        if (this.lastUpdateDate.toDateString() === new Date().toDateString()) {
+          this.modifiedToday = true
+        }
+      }
+
       if (this.trustedSummary.selfAssertedWorks) {
         this.works.push({
           verified: false,
@@ -117,14 +147,14 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
       ) {
         this.peerReviews.push({
           verified: true,
-          countA: this.trustedSummary.peerReviewPublicationGrants,
+          countA: this.trustedSummary.peerReviewsTotal,
           stringA:
-            this.trustedSummary.peerReviewPublicationGrants > 1
+            this.trustedSummary.peerReviewsTotal > 1
               ? this.labelReviesFor
               : this.labelReviewFor,
-          countB: this.trustedSummary.peerReviewsTotal,
+          countB: this.trustedSummary.peerReviewPublicationGrants,
           stringB:
-            this.trustedSummary.peerReviewsTotal > 1
+            this.trustedSummary.peerReviewPublicationGrants > 1
               ? this.labelpublicationgrants
               : this.labelpublicationgrant,
         })
@@ -160,5 +190,11 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
         this.oneColumn = true
       }
     })
+  }
+  dateWithOffset(creation: string): any {
+    const date = new Date(creation)
+    const offset = date.getTimezoneOffset()
+    const offsettedDate = new Date(date.getTime() + offset * 60 * 1000)
+    return offsettedDate
   }
 }

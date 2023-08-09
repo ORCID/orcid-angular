@@ -6,6 +6,7 @@ import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.se
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { of } from 'rxjs'
+import { ZendeskService } from 'src/app/core/zendesk/zendesk.service'
 
 describe('TrustedSummaryComponent', () => {
   let component: TrustedSummaryComponent
@@ -21,6 +22,10 @@ describe('TrustedSummaryComponent', () => {
           useValue: { getSummary: () => of() },
         },
         { provide: PlatformInfoService, useValue: { get: () => of() } },
+        {
+          provide: ZendeskService,
+          useValue: { hide: () => of() },
+        },
       ],
       imports: [HttpClientTestingModule],
     }).compileComponents()

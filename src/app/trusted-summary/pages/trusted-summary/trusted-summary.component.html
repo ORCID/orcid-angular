@@ -12,6 +12,8 @@
       <a
         class="orc-font-body-small cursor-pointer header-name"
         href="{{ trustedSummary.orcid }}"
+        target="_blank"
+        rel="noopener noreferrer"
       >
         <h1 class="orc-font-body-large">
           <ng-container
@@ -83,6 +85,7 @@
         <app-summary-panel
           [url]="trustedSummary?.orcid"
           [activitySummary]="trustedSummary.employmentAffiliations"
+          [count]="trustedSummary.employmentAffiliationsCount"
         ></app-summary-panel>
       </ng-container>
 
@@ -93,34 +96,41 @@
             <div
               class="date-item"
               [ngClass]="{
-                'last-date': !trustedSummary.lastModified
+                'last-date': !lastUpdateDate
               }"
             >
-              <caption
-                class="orc-font-small-print"
+              <label
+                class="orc-font-small-print caption"
                 i18n="@@summary.recordCreated"
+                >Record created</label
               >
-                Record created
-              </caption>
-              <label class="orc-font-body-small">{{
-                trustedSummary.creation | date
+              <label class="orc-font-body-small" *ngIf="!createdToday">{{
+                creationDateWithOffset | date
               }}</label>
+              <label
+                class="orc-font-body-small"
+                *ngIf="createdToday"
+                i18n="@@shared.today"
+                >Today</label
+              >
             </div>
           </li>
           <li>
-            <div
-              class="date-item last-date"
-              *ngIf="trustedSummary.lastModified"
-            >
-              <caption
-                class="orc-font-small-print"
+            <div class="date-item last-date" *ngIf="lastUpdateDate">
+              <label
+                class="orc-font-small-print caption"
                 i18n="@@summary.lastUpdated"
+                >Last updated</label
               >
-                Last updated
-              </caption>
-              <label class="orc-font-body-small">{{
-                trustedSummary.lastModified | date
+              <label class="orc-font-body-small" *ngIf="!modifiedToday">{{
+                lastUpdateDate | date
               }}</label>
+              <label
+                class="orc-font-body-small"
+                *ngIf="modifiedToday"
+                i18n="@@shared.today"
+                >Today</label
+              >
             </div>
           </li>
         </ul>
