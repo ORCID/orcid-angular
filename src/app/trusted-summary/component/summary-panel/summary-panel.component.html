@@ -78,11 +78,19 @@
       <div class="body-wrapper">
         <caption class="orc-font-small-print">
           <ng-container *ngIf="activity.startDate">
-            {{ activity.startDate | monthDayYearDateToString }}
+            {{ activity.startDate }}
+            <ng-container i18n="@@summary.to" i18n="@@shared.to"
+              >to</ng-container
+            >
           </ng-container>
           <ng-container *ngIf="activity.endDate">
-            <ng-container i18n="@@summary.to">to</ng-container>
-            {{ activity.endDate | monthDayYearDateToString }}
+            {{ activity.endDate }}
+          </ng-container>
+          <ng-container
+            *ngIf="!activity.endDate && activity.startDate"
+            i18n="@@shared.present"
+          >
+            present
           </ng-container>
         </caption>
         <div class="orc-font-small-print">{{ activity.role }}</div>
@@ -97,9 +105,7 @@
       target="_blank"
       rel="noopener noreferrer"
       >+ {{ count - 3 }}
-      <ng-container i18n="@@summary.moreAffiliation"
-        >more Affiliations</ng-container
-      ></a
+      <ng-container i18n="@@share.more">more</ng-container></a
     >
   </div>
 </div>
