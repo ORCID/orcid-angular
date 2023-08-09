@@ -1,3 +1,9 @@
+## v2.36.12 - 2023-08-09
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.36.11...v2.36.12)
+
+- [#2037](https://github.com/ORCID/orcid-angular/pull/2037): leo/set-of-fixes-aug-9
+
 ## v2.36.11 - 2023-08-08
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.36.10...v2.36.11)
