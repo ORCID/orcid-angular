@@ -34,12 +34,18 @@
 //  If you don't need the default component typographies but still want the hierarchy styles,
 //  you can delete this line and instead use:
 //    `@include mat.legacy-typography-hierarchy($orcid-material-typography);`
+
+// Include the default theme styles.
+@include mat.all-component-themes($orcid-app-theme);
+@include mat.all-legacy-component-themes($orcid-app-theme);
+
+
 @include mat.all-legacy-component-typographies($orcid-material-typography);
 @include mat.legacy-core();
 // @include mat.strong-focus-indicators();
 
 // TODO: include only the CSS for the used components, instead of everything
-@include mat.all-legacy-component-themes($orcid-app-theme);
+// ??  @include mat.all-legacy-component-themes($orcid-app-theme);
 // @include mat.strong-focus-indicators-theme($orcid-app-theme);
 
 // .
