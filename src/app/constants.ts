@@ -106,7 +106,6 @@ export const ApplicationRoutes = {
 
 export const ApplicationRoutesLabels = {
   [ApplicationRoutes.home]: $localize`:@@share.titleOrcid:ORCID`,
-  [ApplicationRoutes.myOrcid]: '{dynamic}',
   [ApplicationRoutes.twoFactor]: $localize`:@@share.twoFactorSetup:2FA - ORCID`,
   [ApplicationRoutes.twoFactorSetup]: $localize`:@@share.twoFactorSetup:2FA - ORCID`,
   [ApplicationRoutes.institutionalLinking]: $localize`:@@share.institutionalLinking:Institutional linking - ORCID`,

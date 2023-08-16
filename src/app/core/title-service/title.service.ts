@@ -38,10 +38,7 @@ export class TitleService {
         Object.keys(ApplicationRoutesLabels).forEach((route) => {
           if (event.url.startsWith('/' + route)) {
             // MY ORCID
-            if (
-              ApplicationRoutesLabels[route] === '{dynamic}' &&
-              dynamicTitle
-            ) {
+            if (dynamicTitle) {
               this.setTitle(
                 `${dynamicTitle} ${ApplicationDynamicRoutesLabels.orcidMyPageTitle}`
               )

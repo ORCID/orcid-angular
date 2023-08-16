@@ -1,3 +1,23 @@
+## v2.38.1 - 2023-08-16
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.38.0...v2.38.1)
+
+## v2.38.0 - 2023-08-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.36.14...v2.38.0)
+
+## v2.36.14 - 2023-08-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.36.13...v2.36.14)
+
+## v2.36.13 - 2023-08-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.36.12...v2.36.13)
+
+### Fix
+
+- Remove unnecessary string in routing (#2039)
+
 ## v2.36.12 - 2023-08-09
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.36.11...v2.36.12)
