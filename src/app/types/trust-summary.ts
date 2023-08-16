@@ -1,3 +1,5 @@
+import { AffiliationType } from "./record-affiliation.endpoint"
+
 export interface TrustedSummary {
   name: string
   orcid: string
@@ -23,6 +25,6 @@ export interface ActivitySummary {
   endDate?: string
   role?: string
   title: any
-  type: string
+  type: AffiliationType
   validated: boolean
 }
