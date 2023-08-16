@@ -91,8 +91,11 @@
       class="underline orc-font-body-small"
       target="_blank"
       rel="noopener noreferrer"
-      >+ {{ count - 3 }} <ng-container *ngIf="count - 3 > 1">{{ moreLabel }}</ng-container>
-      <ng-container *ngIf="count - 3 === 1">{{ moreLabelSingular }}</ng-container></a
+      >+ {{ count - 3 }}
+      <ng-container *ngIf="count - 3 > 1">{{ moreLabel }}</ng-container>
+      <ng-container *ngIf="count - 3 === 1">{{
+        moreLabelSingular
+      }}</ng-container></a
     >
   </div>
 </div>

@@ -42,8 +42,7 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
   insideIframe: boolean
   labelMoreAffiliation = $localize`:@@summary.moreAffiliation:more Affiliation`
   labelMoreProfessionalActivitie = $localize`:@@summary.moreProfessionalActivitie:more Professional activity`
-  labelMoreOtherIdentifier= $localize`:@@summary.moreOtherIdentifier:more Other Identifier`
-  
+  labelMoreOtherIdentifier = $localize`:@@summary.moreOtherIdentifier:more Other Identifier`
 
   funds: SimpleActivityModel[] = []
   peerReviews: SimpleActivityModel[] = []

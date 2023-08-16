@@ -1,18 +1,14 @@
 :host {
   display: flex;
   justify-content: center;
-
-
 }
 
 main {
   margin-top: 32px;
-
 }
 
 main.inside-iframe {
   margin-top: 0px;
-
 }
 
 .panel {
@@ -20,7 +16,6 @@ main.inside-iframe {
   grid-gap: 16px;
   border-radius: 8px 8px 0px 0px;
   border: 2px solid;
-
 }
 
 .panel-header {
@@ -89,8 +84,6 @@ h2 {
 main {
   max-width: 100%;
   overflow: hidden;
-
-
 }
 
 main.panel.mobile {
@@ -173,7 +166,7 @@ a {
     color: #fff;
     text-decoration: underline;
 
-    >svg>path {
+    > svg > path {
       fill: #fff;
     }
 

@@ -1,4 +1,4 @@
-import { AffiliationType } from "./record-affiliation.endpoint"
+import { AffiliationType } from './record-affiliation.endpoint'
 
 export interface TrustedSummary {
   name: string
