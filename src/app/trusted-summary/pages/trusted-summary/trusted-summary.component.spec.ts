@@ -28,7 +28,6 @@ describe('TrustedSummaryComponent', () => {
           useValue: { hide: () => of() },
         },
         { provide: WINDOW, useValue: {} },
-
       ],
       imports: [HttpClientTestingModule],
     }).compileComponents()
