@@ -22,25 +22,26 @@ import { WINDOW } from '../../window'
 export class VisibilitySelectorComponent
   implements OnInit, ControlValueAccessor
 {
-  _privacy: VisibilityStrings
+  private _privacy: VisibilityStrings
 
   @Input() multiEdit: 'multi' | 'single' | 'selected' = 'single'
 
   @Input() editable = true
 
   @Input()
-  ariaLabelPublic = $localize`:@@share.ariaLabelPublic:set item visibility to Everyone`
+  ariaLabelPublic: string = $localize`:@@share.ariaLabelPublic:set item visibility to Everyone`
   @Input()
-  ariaLabelTrustedParty = $localize`:@@share.ariaLabelTrustedParty:set item visibility to Trusted Parties `
+  ariaLabelTrustedParty: string = $localize`:@@share.ariaLabelTrustedParty:set item visibility to Trusted Parties `
   @Input()
-  ariaLabelPrivate = $localize`:@@share.ariaLabelPrivate:set item visibility to Only Me`
-  ariaLabelCurrentlySelected = $localize`:@@share.currentSelected: (Currently selected)`
-  ariaLabelVisibility = $localize`:@@share.visibilityCurrentlySetTo:visibility is currently set to`
+  ariaLabelPrivate: string = $localize`:@@share.ariaLabelPrivate:set item visibility to Only Me`
+  ariaLabelCurrentlySelected: string = $localize`:@@share.currentSelected: (Currently selected)`
+  ariaLabelVisibility: string = $localize`:@@share.visibilityCurrentlySetTo:visibility is currently set to`
 
   @Input() itemTitle: string
 
   @Input() visibilityError
   mainButtonLabel: string
+
   @Input() set privacy(value: VisibilityStrings) {
     this._privacy = value
   }
