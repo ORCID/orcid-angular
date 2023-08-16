@@ -41,6 +41,9 @@ export class LinkAccountComponent implements OnInit {
       .subscribe((session) => {
         this.signInData = session.thirdPartyAuthData.signinData
         this.entityDisplayName = session.thirdPartyAuthData.entityDisplayName
+        if (!this.entityDisplayName) {
+          this.entityDisplayName = this.signInData.providerId;
+        }
         this.loading = false
       })
   }
