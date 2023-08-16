@@ -22,7 +22,7 @@
             ><img src="./assets/vectors/profile-not-verified.svg" />
           </mat-icon>
 
-          <div class="orc-font-body-small">
+          <div class="orc-font-body-small text-container">
             <ng-container *ngIf="element.url">
               <a
                 class="underline orc-font-body-small"
@@ -91,7 +91,11 @@
       class="underline orc-font-body-small"
       target="_blank"
       rel="noopener noreferrer"
-      >+ {{ count - 3 }} <ng-container>more Affiliations</ng-container></a
+      >+ {{ count - 3 }}
+      <ng-container *ngIf="count - 3 > 1">{{ moreLabel }}</ng-container>
+      <ng-container *ngIf="count - 3 === 1">{{
+        moreLabelSingular
+      }}</ng-container></a
     >
   </div>
 </div>
