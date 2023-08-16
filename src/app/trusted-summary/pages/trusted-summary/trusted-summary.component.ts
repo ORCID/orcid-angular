@@ -40,6 +40,10 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
   labelMoreProfessionalActivities = $localize`:@@summary.moreProfessionalActivities:more Professional activities`
   labelMoreOtherIdentifiers = $localize`:@@summary.moreOtherIdentifiers:more Other Identifiers`
   insideIframe: boolean
+  labelMoreAffiliation = $localize`:@@summary.moreAffiliation:more Affiliation`
+  labelMoreProfessionalActivitie = $localize`:@@summary.moreProfessionalActivitie:more Professional activity`
+  labelMoreOtherIdentifier= $localize`:@@summary.moreOtherIdentifier:more Other Identifier`
+  
 
   funds: SimpleActivityModel[] = []
   peerReviews: SimpleActivityModel[] = []
@@ -70,7 +74,6 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.insideIframe = this._window.self !== this._window.top
-    console.log('insideIframe' , this.insideIframe)
     this._zendeskService.hide()
     this._robotsMetaTags.disallowRobots()
     this._platform

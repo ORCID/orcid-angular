@@ -24,7 +24,6 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    height: 24px;
     max-width: 100%;
 
     .header-title {
@@ -77,4 +76,11 @@ mat-icon {
 
 a {
   font-weight: 400;
+  max-width: 100%;
+}
+
+.text-container {
+  max-width: 210px;
+  overflow: hidden  ;
+  word-wrap: break-word;
 }

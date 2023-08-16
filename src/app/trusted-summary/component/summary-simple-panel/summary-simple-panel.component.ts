@@ -27,6 +27,8 @@ export class SummarySimplePanelComponent implements OnInit {
   @Input() simpleActivities: SimpleActivityModel[] = []
   @Input() count: number = 0
   @Input() moreLabel: string = ''
+  @Input() moreLabelSingular: string = ''
+
   @Input() overflowUrl: string = ''
   unsubscribe = new Subject()
   mobile: boolean

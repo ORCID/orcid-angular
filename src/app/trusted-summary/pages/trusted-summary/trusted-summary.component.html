@@ -87,6 +87,7 @@
           [activitySummary]="trustedSummary.employmentAffiliations"
           [count]="trustedSummary.employmentAffiliationsCount"
           [moreLabel]="labelMoreAffiliations"
+          [moreLabelSingular]="labelMoreAffiliation"
         ></app-summary-panel>
       </ng-container>
 
@@ -207,6 +208,7 @@
           [activitySummary]="trustedSummary.professionalActivities"
           [count]="trustedSummary.professionalActivitiesCount"
           [moreLabel]="labelMoreProfessionalActivities"
+          moreLabelSingular="labelMoreProfessionalActivitie"
         ></app-summary-panel>
       </ng-container>
       <ng-container *ngIf="externalIdentifiers?.length">
@@ -224,6 +226,7 @@
           [count]="externalIdentifiers?.length"
           [overflowUrl]="trustedSummary?.orcid + '#other-identifiers'"
           [moreLabel]="labelMoreOtherIdentifiers"
+          [moreLabelSingular]="labelMoreOtherIdentifier"
         ></app-summary-simple-panel>
       </ng-container>
     </div>
