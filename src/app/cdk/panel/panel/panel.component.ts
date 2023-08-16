@@ -32,6 +32,7 @@ import { UserService } from 'src/app/core'
 import { WINDOW } from 'src/app/cdk/window'
 import { TogglzService } from '../../../core/togglz/togglz.service'
 import { getAriaLabel } from '../../../constants'
+import { RecordBiographyService } from 'src/app/core/record-biography/record-biography.service'
 
 @Component({
   selector: 'app-panel',
@@ -136,7 +137,8 @@ export class PanelComponent implements OnInit {
     private _peerReviewService: RecordPeerReviewService,
     private _researchResourcesService: RecordResearchResourceService,
     private _worksService: RecordWorksService,
-    private _verificationEmailModalService: VerificationEmailModalService
+    private _verificationEmailModalService: VerificationEmailModalService,
+    private _recordBiographyService: RecordBiographyService
   ) {}
 
   ngOnInit(): void {
@@ -188,7 +190,7 @@ export class PanelComponent implements OnInit {
         if (this.editModalComponent) {
           modalComponent = this._dialog.open(this.editModalComponent, {
             width: '850px',
-            maxWidth: platform.tabletOrHandset ? '99%' : '80vw',
+            maxWidth: '99%',
             data: this.userRecord,
             ariaLabel: getAriaLabel(this.editModalComponent, this.type),
           })
@@ -299,6 +301,17 @@ export class PanelComponent implements OnInit {
           )
           .subscribe()
         break
+      case 'top-bar':
+        this._recordBiographyService
+          .postBiography({
+            visibility: {
+              visibility: visibility,
+            },
+            biography: {
+              value: this.userRecord.biography.biography.value,
+            },
+          })
+          .subscribe()
     }
     this.visibilityError = false
   }

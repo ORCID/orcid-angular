@@ -14,6 +14,7 @@ import {
 import { first } from 'rxjs/operators'
 import { RecordPeerReviewService } from '../../../core/record-peer-review/record-peer-review.service'
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
+import { UserRecord } from 'src/app/types/record.local'
 
 @Component({
   selector: 'app-peer-review-stack',
@@ -28,10 +29,13 @@ export class PeerReviewStackComponent implements OnInit {
   _peerReviewStack: PeerReviewDuplicateGroup
   visibility: VisibilityStrings
   @Input() isPublicRecord: string
-  @Input() userRecord
+  @Input() userRecord: UserRecord
 
   @Input()
   set peerReviewStack(value: PeerReviewDuplicateGroup) {
+    value.peerReviews = value.peerReviews.map((peerReview) => {
+      return { ...peerReview, userIsSource: this.userIsSource(peerReview) }
+    })
     this._peerReviewStack = value
     this.putsThePreferredPeerReviewOnTop(value)
     this.setInitialStates(value)
@@ -198,5 +202,11 @@ export class PeerReviewStackComponent implements OnInit {
 
   collapse(peerReview: PeerReview) {
     peerReview.showDetails = !peerReview.showDetails
+  }
+
+  userIsSource(peerReview: PeerReview): boolean {
+    return (
+      this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID === peerReview?.source
+    )
   }
 }

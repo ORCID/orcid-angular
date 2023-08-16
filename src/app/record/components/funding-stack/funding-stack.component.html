@@ -7,7 +7,6 @@
   "
 >
   <!-- A PANEL COMPONENT FOR EACH FUNDING ON THE STACK -->
-
   <app-panel
     panelId="funding-stack"
     [userRecord]="userRecord"
@@ -46,6 +45,7 @@
       [isPreferred]="isPreferred(funding)"
       [sourceName]="funding.sourceName || funding.source"
       [assertionOriginName]="funding.assertionOriginName"
+      [assertionOriginClientId]="funding.assertionOriginClientId"
       [assertionOriginOrcid]="funding.assertionOriginOrcid"
       [stackLength]="fundingStack.fundings.length"
       [(displayTheStack)]="displayTheStack"

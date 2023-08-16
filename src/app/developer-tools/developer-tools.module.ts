@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 
 import { DeveloperToolsRoutingModule } from './developer-tools-routing.module'
-import { DeveloperToolsComponent } from './pages/developer-tools/developer-tools.component'
 import { TopBarMyPublicRecordPreviewModule } from '../cdk/top-bar-my-public-record-preview/top-bar-my-public-record-preview.module'
 import { SideBarModule } from '../cdk/side-bar/side-bar.module'
 import { MatCheckboxModule } from '@angular/material/checkbox'
@@ -22,6 +21,7 @@ import { ClientSecretModalComponent } from './components/client-secret-modal/cli
 import { ModalModule } from '../cdk/modal/modal.module'
 import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
 import { TopBarVerificationEmailModule } from '../cdk/top-bar-verification-email/top-bar-verification-email.module'
+import { DeveloperToolsComponent } from './pages/developer-tools/developer-tools.component'
 
 @NgModule({
   declarations: [

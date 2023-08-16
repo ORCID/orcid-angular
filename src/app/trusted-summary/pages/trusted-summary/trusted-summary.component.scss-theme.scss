@@ -1,0 +1,44 @@
+@use '@angular/material' as mat;
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+@mixin theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  .verified {
+    color: mat.get-color-from-palette($accent, 400);
+  }
+
+  .not-verified {
+    color: mat.get-color-from-palette($primary, 200);
+  }
+
+  .panel,
+  .panel-header {
+    border-color: mat.get-color-from-palette(
+      $background,
+      ui-background-darkest
+    );
+  }
+
+  .panel-header {
+    background-color: mat.get-color-from-palette($primary, 900);
+  }
+
+  ul li:before {
+    border-color: mat.get-color-from-palette($accent, 200) !important;
+  }
+
+  .card-container {
+    border-color: map-get($background, 'ui-background-light');
+  }
+
+  .column-border {
+    border-color: map-get($background, 'ui-background-light');
+  }
+}
+
+@include theme($orcid-app-theme);

@@ -35,3 +35,19 @@ app-panel-data {
     }
   }
 }
+
+.source-title {
+  display: flex;
+  align-items: center;
+  mat-icon {
+    padding-left: 8px;
+    padding-right: 8px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    img {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}

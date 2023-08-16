@@ -36,6 +36,7 @@ export class PlatformInfoService {
     currentRoute: '',
     reactivation: false,
     reactivationCode: '',
+    summaryScreen: false,
   }
   platformSubject = new BehaviorSubject<PlatformInfo>(this.platform)
 
@@ -231,6 +232,7 @@ export class PlatformInfoService {
         this.window.location.pathname.toLowerCase().indexOf('reactivation') >=
         0,
       reactivationCode: this.getReactivationCode(),
+      summaryScreen: this.window.location.pathname.endsWith('/summary'),
     }
     this.platformSubject.next(this.platform)
     return this.platformSubject.asObservable()

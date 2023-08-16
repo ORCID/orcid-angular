@@ -13,24 +13,32 @@ import { Work } from '../../../types/record-works.endpoint'
 import { PeerReview } from '../../../types/record-peer-review.endpoint'
 import { VerificationEmailModalService } from 'src/app/core/verification-email-modal/verification-email-modal.service'
 import { AppPanelActivityActionAriaLabelPipe } from '../../../shared/pipes/app-panel-activity-action-aria-label/app-panel-activity-action-aria-label.pipe'
+import { UserRecord } from 'src/app/types/record.local'
 
 @Component({
   selector: 'app-panel-source',
   templateUrl: './panel-source.component.html',
-  styleUrls: ['./panel-source.component.scss'],
+  styleUrls: [
+    './panel-source.component.scss',
+    './panel-source.component.scss-theme.scss',
+  ],
   preserveWhitespaces: true,
 })
 export class PanelSourceComponent implements OnInit {
   closeOtherSources = $localize`:@@record.hideAllSources:Hide all sources for`
   openOtherSources = $localize`:@@record.showAllSources:Show all sources for`
 
+  validatedSourceAriaLabel = $localize`:@@record.validatedSource:Validated source`
+  selftAssertedSource = $localize`:@@record.selfAssertedSource:Self-asserted source`
+
   @Input() isPublicRecord
   @Input() isPreferred = true
+  @Input() source: boolean
   @Input() sourceName
   @Input() assertionOriginOrcid
   @Input() assertionOriginName
+  @Input() assertionOriginClientId
   @Input() stackLength
-  @Input() item: Affiliation | Funding | ResearchResource | Work | PeerReview
   @Input() type:
     | 'employment'
     | 'education'
@@ -47,6 +55,19 @@ export class PanelSourceComponent implements OnInit {
     | 'professional-activities'
   _displayTheStack
   _displayAsMainStackCard
+  recordOnDisplayIsTheSource: boolean
+  _item: Affiliation | Funding | ResearchResource | Work | PeerReview
+  @Input()
+  set item(
+    value: Affiliation | Funding | ResearchResource | Work | PeerReview
+  ) {
+    this._item = value
+    this.calculateVerifiedStatus()
+  }
+  get item(): Affiliation | Funding | ResearchResource | Work | PeerReview {
+    return this._item
+  }
+
   @Input()
   set displayTheStack(value: boolean) {
     this._displayTheStack = value
@@ -61,7 +82,17 @@ export class PanelSourceComponent implements OnInit {
   @Output() makePrimary = new EventEmitter<void>()
   @Input() topPanelOfTheStackMode: boolean
   @Input() clickableSource = true
-  @Input() userRecord
+  private _userRecord: UserRecord
+
+  @Input()
+  public set userRecord(value: UserRecord) {
+    this._userRecord = value
+    this.calculateVerifiedStatus()
+  }
+  public get userRecord(): UserRecord {
+    return this._userRecord
+  }
+
   @Input() panelTitle: any
   @Output() topPanelOfTheStackModeChange = new EventEmitter<void>()
 
@@ -85,6 +116,16 @@ export class PanelSourceComponent implements OnInit {
     const typeAndTitle = `${itemType} ${this.panelTitle}`
     this.closeOtherSources += typeAndTitle
     this.openOtherSources += typeAndTitle
+
+    this.calculateVerifiedStatus()
+  }
+
+  private calculateVerifiedStatus() {
+    const recordOnDisplay =
+      this.isPublicRecord || this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID
+    if (typeof recordOnDisplay === 'string' && this.item?.source) {
+      this.recordOnDisplayIsTheSource = recordOnDisplay === this.item?.source
+    }
   }
 
   toggleStackMode() {

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common'
+import { CommonModule, NgOptimizedImage } from '@angular/common'
 import { NgModule } from '@angular/core'
 import { MatButtonModule } from '@angular/material/button'
 import { MatDialogModule } from '@angular/material/dialog'
@@ -53,6 +53,7 @@ import { VisibilitySelectorModule } from '../visibility-selector/visibility-sele
     SharedModule,
     A11yLinkModule,
     MatDialogModule,
+    NgOptimizedImage,
   ],
   exports: [
     PanelComponent,

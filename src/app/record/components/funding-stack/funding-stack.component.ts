@@ -43,7 +43,15 @@ export class FundingStackComponent implements OnInit {
   }
 
   @Input() isPublicRecord: string
-  @Input() userInfo: UserInfo
+  _userInfo: UserInfo
+
+  @Input()
+  set userInfo(userInfo: UserInfo) {
+    this._userInfo = userInfo
+  }
+  get userInfo(): UserInfo {
+    return this._userInfo
+  }
 
   orgDisambiguated: { [key: string]: OrgDisambiguated | null } = {}
   stackPanelsDisplay: { [key: string]: { topPanelOfTheStack: boolean } } = {}

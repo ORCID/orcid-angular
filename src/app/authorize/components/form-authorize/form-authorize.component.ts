@@ -7,7 +7,6 @@ import { WINDOW } from 'src/app/cdk/window'
 import { ApplicationRoutes } from 'src/app/constants'
 import { UserService } from 'src/app/core'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
-import { GoogleUniversalAnalyticsService } from 'src/app/core/google-analytics/google-universal-analytics.service'
 import { OauthService } from 'src/app/core/oauth/oauth.service'
 import { SignInService } from 'src/app/core/sign-in/sign-in.service'
 import { TrustedIndividualsService } from 'src/app/core/trusted-individuals/trusted-individuals.service'
@@ -42,7 +41,6 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
     @Inject(WINDOW) private window: Window,
     private _user: UserService,
     private _oauth: OauthService,
-    private _gtag: GoogleUniversalAnalyticsService,
     private _googleTagManagerService: GoogleTagManagerService,
     private _signingService: SignInService,
     private _platformInfo: PlatformInfoService,
@@ -94,9 +92,6 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
 
       if (value) {
         analyticsReports.push(
-          this._gtag.reportEvent(`Authorize`, 'RegGrowth', this.oauthRequest)
-        )
-        analyticsReports.push(
           this._googleTagManagerService.reportEvent(
             `Authorize`,
             this.oauthRequest
@@ -104,13 +99,6 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
         )
       } else {
         // Create a GA for deny access
-        analyticsReports.push(
-          this._gtag.reportEvent(
-            `Authorize_Deny`,
-            'Disengagement',
-            this.oauthRequest
-          )
-        )
         analyticsReports.push(
           this._googleTagManagerService.reportEvent(
             `Authorize_Deny`,

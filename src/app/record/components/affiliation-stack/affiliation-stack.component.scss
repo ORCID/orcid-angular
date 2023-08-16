@@ -21,8 +21,24 @@
 .affiliation-title {
   display: flex;
   align-items: center;
-  margin: 0;
+
+  h4 {
+    margin: 0;
+    padding-inline-end: 16px;
+  }
+
+  h4.mobile {
+    max-width: calc(100% - 50px);
+  }
+
   mat-icon {
     margin-inline-end: 4px;
+    flex-shrink: 0;
+  }
+
+  .vl {
+    height: 28px;
+    margin-inline-start: 8px;
+    margin-inline-end: 12px;
   }
 }

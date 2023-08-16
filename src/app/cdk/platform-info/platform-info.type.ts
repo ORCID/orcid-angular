@@ -23,4 +23,5 @@ export interface PlatformInfo {
   currentRoute: string
   reactivation: boolean
   reactivationCode: string
+  summaryScreen: boolean
 }

@@ -44,6 +44,7 @@
       [sourceName]="research.sourceName || research.source"
       [assertionOriginName]="research.assertionOriginName"
       [assertionOriginOrcid]="research.assertionOriginOrcid"
+      [assertionOriginClientId]="research.assertionOriginClientId"
       [stackLength]="researchResourceStack.researchResources.length"
       [(displayTheStack)]="displayTheStack"
       (makePrimary)="makePrimaryCard(research)"
@@ -55,6 +56,7 @@
       [type]="'research-resources'"
       [item]="research"
       [panelTitle]="research.title"
+      [userRecord]="userRecord"
     >
     </app-panel-source>
   </app-panel>

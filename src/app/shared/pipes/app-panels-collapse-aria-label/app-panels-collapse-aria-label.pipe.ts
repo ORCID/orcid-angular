@@ -7,6 +7,8 @@ export class AppPanelsCollapseAriaLabelPipe implements PipeTransform {
   transform(panelType: any, args?: any, panelTitle?: any): string {
     if (panelType === 'employment') {
       return $localize`:@@shared.employmentCollapseAriaLabel:Collapse the Employment section`
+    } else if (panelType === 'professional-activities') {
+      return $localize`:@@shared.professionalActivitiesCollapseAriaLabel:Collapse the professional activities section`
     } else if (panelType === 'education' || panelType === 'qualification') {
       return $localize`:@@shared.educationQualificationCollapseAriaLabel:Collapse the Education and qualifications section`
     } else if (

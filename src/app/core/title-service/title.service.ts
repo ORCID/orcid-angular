@@ -1,7 +1,6 @@
 import { Injectable, OnInit } from '@angular/core'
 import { Title } from '@angular/platform-browser'
 import { NavigationEnd, NavigationStart, Router } from '@angular/router'
-import { log } from 'console'
 import { ReplaySubject, combineLatest } from 'rxjs'
 import { filter, map, withLatestFrom } from 'rxjs/operators'
 import {
@@ -39,10 +38,7 @@ export class TitleService {
         Object.keys(ApplicationRoutesLabels).forEach((route) => {
           if (event.url.startsWith('/' + route)) {
             // MY ORCID
-            if (
-              ApplicationRoutesLabels[route] === '{dynamic}' &&
-              dynamicTitle
-            ) {
+            if (dynamicTitle) {
               this.setTitle(
                 `${dynamicTitle} ${ApplicationDynamicRoutesLabels.orcidMyPageTitle}`
               )

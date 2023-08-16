@@ -9,6 +9,10 @@ import { Component, Input, OnInit } from '@angular/core'
   ],
 })
 export class CodePanelComponent implements OnInit {
+  collapseAriaLabel = $localize`:@@developerTools.collapse:Collapse`
+  expandAriaLabel = $localize`:@@developerTools.expand:Expand`
+  exampleCodeAriaLabel = $localize`:@@developerTools.exampleCode2:example code`
+
   openState = false
   @Input() title: string
   constructor() {}

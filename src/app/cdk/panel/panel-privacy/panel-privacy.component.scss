@@ -1,14 +1,10 @@
 .container {
-  height: 8px;
-  border-radius: 8px;
-  display: flex;
-  padding: 4px;
-  justify-content: space-around;
-  padding: 4px;
-  box-sizing: unset;
-  .dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 100%;
-  }
+  padding: 0;
+  height: 19px;
+  top: -4px;
+  margin-top: -6px;
+}
+
+mat-icon {
+  padding-inline-start: 16px;
 }

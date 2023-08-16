@@ -120,7 +120,7 @@
       [isPublicRecord]="isPublicRecord"
       [type]="'side-bar'"
       class="side-bar"
-      id="personal-identifiers-panel"
+      id="other-identifiers"
       [(openState)]="externalIdentifierOpenState"
       [userRecord]="userRecord"
     >
@@ -228,7 +228,9 @@
             </app-panel-element>
           </ng-container>
           <ng-container *ngIf="!keywordOpenState">
-            {{ getKeywords(userRecord.keyword.keywords).join(', ') }}
+            <div class="overflow-wrap">
+              {{ getKeywords(userRecord.keyword.keywords).join(', ') }}
+            </div>
           </ng-container>
         </ng-container>
       </app-panel-data>

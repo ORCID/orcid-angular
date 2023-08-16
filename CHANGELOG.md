@@ -1,3 +1,289 @@
+## v2.38.0 - 2023-08-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.36.14...v2.38.0)
+
+## v2.36.14 - 2023-08-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.36.13...v2.36.14)
+
+## v2.36.13 - 2023-08-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.36.12...v2.36.13)
+
+### Fix
+
+- Remove unnecessary string in routing (#2039)
+
+## v2.36.12 - 2023-08-09
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.36.11...v2.36.12)
+
+- [#2037](https://github.com/ORCID/orcid-angular/pull/2037): leo/set-of-fixes-aug-9
+
+## v2.36.11 - 2023-08-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.36.10...v2.36.11)
+
+### Feature
+
+- Add production script one trust (#2036)
+
+## v2.36.10 - 2023-08-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.36.9...v2.36.10)
+
+- [#2035](https://github.com/ORCID/orcid-angular/pull/2035): Leo/update trust summary endpoint
+
+## v2.36.9 - 2023-08-04
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.36.8...v2.36.9)
+
+## v2.36.8 - 2023-08-01
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.36.7...v2.36.8)
+
+### Fix
+
+- Remove UA tracking (#2033)
+
+## v2.36.7 - 2023-07-31
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.36.6...v2.36.7)
+
+- [#2032](https://github.com/ORCID/orcid-angular/pull/2032): Add link functionality
+
+## v2.36.6 - 2023-07-27
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.36.5...v2.36.6)
+
+- [#2031](https://github.com/ORCID/orcid-angular/pull/2031): Trusted summary
+
+## v2.36.5 - 2023-07-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.36.4...v2.36.5)
+
+- [#2029](https://github.com/ORCID/orcid-angular/pull/2029): leo/batch-of-changes
+
+## v2.36.4 - 2023-07-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.36.3...v2.36.4)
+
+## v2.36.3 - 2023-07-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.36.2...v2.36.3)
+
+## v2.36.2 - 2023-07-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.36.1...v2.36.2)
+
+### Fix
+
+- Rollback ot (#2017)
+
+## v2.36.1 - 2023-07-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.36.0...v2.36.1)
+
+- [#2028](https://github.com/ORCID/orcid-angular/pull/2028): Transifex
+- [#2027](https://github.com/ORCID/orcid-angular/pull/2027): Format
+- [#2026](https://github.com/ORCID/orcid-angular/pull/2026): fix: Add width limitation to only mobile version and remove margin fr…
+- [#2025](https://github.com/ORCID/orcid-angular/pull/2025): fix: Use distinction start date as end date when affiliation sorted b…
+- [#2022](https://github.com/ORCID/orcid-angular/pull/2022): Remove affiliations h4 max width limitations
+- [#2021](https://github.com/ORCID/orcid-angular/pull/2021): fix: Add missing vertical align in professional activities panel and …
+- [#2020](https://github.com/ORCID/orcid-angular/pull/2020): fix: Sort professional activities by type and descending end date
+- [#2019](https://github.com/ORCID/orcid-angular/pull/2019): Fix testing
+- [#2018](https://github.com/ORCID/orcid-angular/pull/2018): fix/batch-fixes-14-jul-2023
+
+### Fix
+
+- Override innerText set by OneTrust external script in link (#2009)
+- Add width limitation to only mobile version and remove margin from professional activities title
+- Use distinction start date as end date when affiliation sorted by end date
+- Add missing vertical align in professional activities panel and limit width panel title
+- Sort professional activities by type and descending end date
+
+## v2.35.15 - 2023-07-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.35.14...v2.35.15)
+
+- [#2028](https://github.com/ORCID/orcid-angular/pull/2028): Transifex
+
+## v2.35.14 - 2023-07-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.35.13...v2.35.14)
+
+- [#2027](https://github.com/ORCID/orcid-angular/pull/2027): Format
+
+## v2.35.13 - 2023-07-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.35.12...v2.35.13)
+
+- [#2026](https://github.com/ORCID/orcid-angular/pull/2026): fix: Add width limitation to only mobile version and remove margin fr…
+- [#2025](https://github.com/ORCID/orcid-angular/pull/2025): fix: Use distinction start date as end date when affiliation sorted b…
+
+### Fix
+
+- Add width limitation to only mobile version and remove margin from professional activities title
+- Use distinction start date as end date when affiliation sorted by end date
+
+## v2.35.12 - 2023-07-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.35.11...v2.35.12)
+
+- [#2022](https://github.com/ORCID/orcid-angular/pull/2022): Remove affiliations h4 max width limitations
+
+## v2.35.11 - 2023-07-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.35.10...v2.35.11)
+
+- [#2021](https://github.com/ORCID/orcid-angular/pull/2021): fix: Add missing vertical align in professional activities panel and …
+
+### Fix
+
+- Add missing vertical align in professional activities panel and limit width panel title
+
+## v2.35.10 - 2023-07-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.35.9...v2.35.10)
+
+- [#2020](https://github.com/ORCID/orcid-angular/pull/2020): fix: Sort professional activities by type and descending end date
+
+### Fix
+
+- Sort professional activities by type and descending end date
+
+## v2.35.9 - 2023-07-14
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.35.8...v2.35.9)
+
+- [#2019](https://github.com/ORCID/orcid-angular/pull/2019): Fix testing
+
+## v2.35.8 - 2023-07-14
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.35.7...v2.35.8)
+
+- [#2018](https://github.com/ORCID/orcid-angular/pull/2018): fix/batch-fixes-14-jul-2023
+
+## v2.35.7 - 2023-07-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.35.6...v2.35.7)
+
+- [#2016](https://github.com/ORCID/orcid-angular/pull/2016): fix/batch-of-fixes-13-jul-2023
+
+## v2.35.6 - 2023-07-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.35.5...v2.35.6)
+
+### Fix
+
+- Temporarily remove onetrust (#2015)
+
+## v2.35.5 - 2023-07-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.35.4...v2.35.5)
+
+- [#2014](https://github.com/ORCID/orcid-angular/pull/2014): Fix/batch of fixes 12 jul 23
+
+## v2.35.4 - 2023-07-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.35.3...v2.35.4)
+
+- [#2013](https://github.com/ORCID/orcid-angular/pull/2013): Fix/batch of fixes jul week2
+
+## v2.35.3 - 2023-07-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.35.2...v2.35.3)
+
+## v2.35.2 - 2023-07-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.35.1...v2.35.2)
+
+## v2.35.1 - 2023-07-10
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.35.0...v2.35.1)
+
+- [#2010](https://github.com/ORCID/orcid-angular/pull/2010): Transifex - Add developer tools
+
+## v2.35.0 - 2023-07-10
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.34.4...v2.35.0)
+
+- [#2008](https://github.com/ORCID/orcid-angular/pull/2008): feature: Add missing aria labels to sort by different types
+
+### Fix
+
+- Add missing type in pipe
+
+### Feature
+
+- Add missing aria labels to sort by different types
+
+## v2.34.4 - 2023-07-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.34.3...v2.34.4)
+
+- [#2007](https://github.com/ORCID/orcid-angular/pull/2007): 8717 qa edit button missing from activities
+
+## v2.34.3 - 2023-07-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.34.2...v2.34.3)
+
+- [#2006](https://github.com/ORCID/orcid-angular/pull/2006): 8633 source icon and sorting option
+
+## v2.34.2 - 2023-07-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.34.1...v2.34.2)
+
+- [#2004](https://github.com/ORCID/orcid-angular/pull/2004): fix: Add end desc default sort to `Professional Activities`
+
+### Fix
+
+- Add end desc default sort to `Professional Activities`
+
+## v2.34.1 - 2023-07-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.34.0...v2.34.1)
+
+- [#2003](https://github.com/ORCID/orcid-angular/pull/2003): 8712 qa developer tools mobile issues
+
+## v2.34.0 - 2023-07-05
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.33.3...v2.34.0)
+
+- [#2000](https://github.com/ORCID/orcid-angular/pull/2000): Rollback fix: Temporarily remove onetrust link from footer
+- [#2002](https://github.com/ORCID/orcid-angular/pull/2002): fix: Add missing assistive text to professional activities and sort type
+- [#2001](https://github.com/ORCID/orcid-angular/pull/2001): fix: Update professional activities link section
+
+### Fix
+
+- Add missing assistive text to professional activities and sort type
+- Update professional activities link section
+- Temporarily remove onetrust link from footer
+
+## v2.33.3 - 2023-07-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.33.2...v2.33.3)
+
+- [#1999](https://github.com/ORCID/orcid-angular/pull/1999): Fix/developer tools second batch
+
+## v2.33.2 - 2023-07-02
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.33.1...v2.33.2)
+
+- [#1998](https://github.com/ORCID/orcid-angular/pull/1998): Dev tools batch of fixes
+
+## v2.33.1 - 2023-06-28
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.32.15...v2.33.1)
+
+## v2.32.15 - 2023-06-28
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.32.14...v2.32.15)
+
+### Feature
+
+- Enable language detection in onetrust (#1994)
+
 ## 2.33.0 - 2023-06-26
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.32.14...2.33.0)

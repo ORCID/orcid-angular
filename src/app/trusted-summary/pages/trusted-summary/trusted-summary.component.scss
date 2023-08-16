@@ -1,0 +1,168 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.panel {
+  display: grid;
+  grid-gap: 16px;
+  border-radius: 8px 8px 0px 0px;
+  border: 2px solid;
+}
+
+.panel-header {
+  height: 46px;
+  border-bottom: 2px solid;
+  color: #fff;
+  padding: 16px;
+  display: flex;
+  flex-direction: row;
+
+  label.caption {
+    text-align: initial;
+    display: inline;
+    line-height: 1;
+  }
+
+  img {
+    padding-inline-end: 10px;
+  }
+
+  .header-name {
+    display: flex;
+    flex-direction: column;
+
+    h1 {
+      margin: 0;
+      line-height: 1;
+      word-break: break-word;
+    }
+  }
+}
+
+.column {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.panel-body {
+  grid-column: 1 / -1;
+  display: grid;
+  padding-bottom: 16px;
+}
+
+.panel-body-3-cols {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.panel-body-2-cols {
+  grid-template-columns: 1fr 1fr;
+}
+
+.panel-body-1-cols {
+  grid-template-columns: 1fr;
+}
+
+.column-border {
+  border-right: 2px solid;
+}
+
+h2 {
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+main {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.date-item {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 16px;
+
+  caption,
+  label {
+    display: block;
+  }
+}
+
+.date-item.last-date {
+  padding-bottom: 0;
+}
+
+ul {
+  margin: 0;
+}
+
+ul li {
+  position: relative;
+  margin-bottom: 0;
+}
+
+ul li:after {
+  content: url('/assets/vectors/bullet-point.svg');
+  position: absolute;
+  left: -26px;
+  top: 0px;
+}
+
+ul li:before {
+  content: '';
+  position: absolute;
+  left: -16px;
+  border-left: 1px dashed;
+  height: 100%;
+  width: 1px;
+}
+
+ul li:first-child:before {
+  top: 6px;
+}
+
+ul li:last-child:before {
+  height: 6px;
+}
+
+.card-container {
+  display: flex;
+  padding: 16px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 16px;
+  border-radius: 4px;
+  border: 2px solid;
+  background: #fff;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+a {
+  .label-with-icon {
+    padding-top: 2px;
+    color: #fff;
+    text-decoration: underline;
+
+    > svg > path {
+      fill: #fff;
+    }
+
+    display: flex;
+    align-items: centerf;
+    gap: 8px;
+  }
+
+  h1 {
+    color: #fff;
+  }
+
+  h2 {
+    color: black;
+  }
+}

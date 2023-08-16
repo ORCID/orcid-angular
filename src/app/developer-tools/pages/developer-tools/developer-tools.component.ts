@@ -1,9 +1,12 @@
 import {
   ChangeDetectorRef,
   Component,
+  ElementRef,
+  Inject,
   OnDestroy,
   OnInit,
   QueryList,
+  ViewChild,
   ViewChildren,
 } from '@angular/core'
 import { FormControl } from '@angular/forms'
@@ -14,25 +17,24 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms'
-import { MatDialog, MatDialogModule } from '@angular/material/dialog'
+import { MatDialog } from '@angular/material/dialog'
 import {
   MAX_LENGTH_LESS_THAN_ONE_THOUSAND,
+  MAX_LENGTH_LESS_THAN_TWO_HUNDRED_FIFTY_FIVE,
   URL_REGEXP,
 } from 'src/app/constants'
 import { URL_REGEXP_BACKEND } from 'src/app/constants'
-import { UserService } from 'src/app/core'
 import { DeveloperToolsService } from 'src/app/core/developer-tools/developer-tools.service'
 import { UserInfoService } from 'src/app/core/user-info/user-info.service'
-import { UserInfo } from 'src/app/types'
 import { Client } from 'src/app/types/developer-tools'
 import { ClientSecretModalComponent } from '../../components/client-secret-modal/client-secret-modal.component'
 import { filter, map, switchMap, takeUntil, tap } from 'rxjs/operators'
 import { Observable, Subject, of } from 'rxjs'
-import { Empty } from '@angular-devkit/core/src/virtual-fs/host'
 import { RecordService } from 'src/app/core/record/record.service'
-import { MatSelect } from '@angular/material/select'
 import { MatInput } from '@angular/material/input'
-import { URL } from 'url'
+import { environment } from 'src/environments/environment'
+import { WINDOW } from 'src/app/cdk/window'
+import { PlatformInfoService } from 'src/app/cdk/platform-info'
 
 @Component({
   selector: 'app-developer-tools',
@@ -41,6 +43,7 @@ import { URL } from 'url'
     './developer-tools.component.scss',
     './developer-tools.component.scss-theme.scss',
   ],
+  preserveWhitespaces: true,
 })
 export class DeveloperToolsComponent implements OnInit, OnDestroy {
   @ViewChildren('websiteInput') inputs: QueryList<MatInput>
@@ -60,13 +63,20 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
   existingClient: Client
   sucessSave: boolean
   loadingUserDevTolsState: boolean
+  baseURL: string
+  isMobile: boolean
+
+  @ViewChild('firstInput', { static: false }) firstInput: ElementRef
+
   constructor(
     private fb: FormBuilder,
     private userInfo: UserInfoService,
     private developerToolsService: DeveloperToolsService,
     private matDialog: MatDialog,
     private recordService: RecordService,
-    private _changeDetectorRef: ChangeDetectorRef
+    private _changeDetectorRef: ChangeDetectorRef,
+    @Inject(WINDOW) private window: Window,
+    private _platform: PlatformInfoService
   ) {}
   ngOnDestroy(): void {
     this.destroy$.next(true)
@@ -74,6 +84,18 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.setFocusToTheMainDiv()
+
+    this._platform
+      .get()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((platform) => {
+        this.isMobile = platform.columns4 || platform.columns8
+      })
+
+    if (this.window?.location) {
+      this.baseURL = this.window.location.origin
+    }
     this.getDeveloperToolsEnableState()
       .pipe(
         switchMap((developerToolsEnableState) => {
@@ -88,7 +110,13 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
         this.loading = false
         this.existingClient = currentClient
         this.form = this.fb.group({
-          displayName: [currentClient?.displayName?.value, Validators.required],
+          displayName: [
+            currentClient?.displayName?.value,
+            [
+              Validators.required,
+              Validators.maxLength(MAX_LENGTH_LESS_THAN_TWO_HUNDRED_FIFTY_FIVE),
+            ],
+          ],
           website: [
             currentClient?.website?.value,
             [Validators.required, Validators.pattern(URL_REGEXP_BACKEND)],
@@ -117,6 +145,20 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
       })
   }
 
+  private setFocusToTheMainDiv() {
+    if (this.window?.location) {
+      this.window.location.href = '/developer-tools' + '#main'
+      setTimeout(() => {
+        this.window.window.scrollTo(0, 0)
+        this.window.history.replaceState(
+          {},
+          this.window.document.title,
+          '/developer-tools'
+        )
+      })
+    }
+  }
+
   save() {
     this.formWasSummited = true
 
@@ -124,7 +166,6 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
       this.form.get('redirectUris').value as string[]
     ).some((uri) => !uri)
     this.form.markAllAsTouched()
-
     if (this.form.invalid) {
       return
     }
@@ -172,7 +213,9 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
     } else {
       this.developerToolsService
         .postDeveloperToolsClient(devToolsClient)
-        .subscribe((res) => {})
+        .subscribe((res) => {
+          this.ngOnInit()
+        })
     }
   }
   validatorAtLeastOne(): ValidatorFn {
@@ -230,6 +273,7 @@ export class DeveloperToolsComponent implements OnInit, OnDestroy {
 
   removeRedirectUri(index: number) {
     this.redirectUris.removeAt(index)
+    this.redirectUris.markAsDirty()
   }
 
   onClientSecretUpdated() {
