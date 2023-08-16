@@ -448,7 +448,8 @@
               "src/styles.scss"
             ],
             "scripts": [],
-            "assets": ["src/favicon.ico", "src/assets", "src/manifest.json"]
+            "assets": ["src/favicon.ico", "src/assets", "src/manifest.json"],
+            "sourceMap": true
           }
         },
         "storybook": {
