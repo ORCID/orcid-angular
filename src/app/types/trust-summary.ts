@@ -15,7 +15,7 @@ export interface TrustedSummary {
   selfAssertedFunds: number
   professionalActivities: ActivitySummary[]
   professionalActivitiesCount: number
-  externalIdentifiers: any[]
+  externalIdentifiers: ExternalIdentifierSummary[]
 }
 
 export interface ActivitySummary {
@@ -26,5 +26,13 @@ export interface ActivitySummary {
   role?: string
   title: any
   type: AffiliationType
+  validated: boolean
+}
+
+export interface ExternalIdentifierSummary {
+  id: string
+  commonName: string
+  reference: string
+  url: string
   validated: boolean
 }
