@@ -173,7 +173,7 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
       this.externalIdentifiers = this.trustedSummary.externalIdentifiers.map(
         (id) => {
           return {
-            verified: id.verified,
+            verified: id.validated,
             url: id.url,
             stringA: id.id,
           }
