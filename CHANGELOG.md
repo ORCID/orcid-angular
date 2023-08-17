@@ -1,3 +1,11 @@
+## v2.38.4 - 2023-08-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.38.3...v2.38.4)
+
+### Fix
+
+- Add missing interface and fix typos in code (#2044)
+
 ## v2.38.3 - 2023-08-16
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.38.2...v2.38.3)
