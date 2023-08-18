@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { TrustedSummaryService } from 'src/app/core/trusted-summary/trusted-summary.service'
 import { TrustedSummary } from 'src/app/types/trust-summary'
@@ -8,6 +8,7 @@ import { takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 import { RobotsMetaTagsService } from 'src/app/core/robots-meta-tags/robots-meta-tags.service'
 import { ZendeskService } from 'src/app/core/zendesk/zendesk.service'
+import { WINDOW } from 'src/app/cdk/window'
 
 @Component({
   selector: 'app-trusted-summary',
@@ -33,8 +34,15 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
   labelSelfAssertedFundings = $localize`:@@summary.selfAssertedFundings:Self-asserted fundings`
   labelReviesFor = $localize`:@@summary.reviewsFor:reviews for`
   labelReviewFor = $localize`:@@summary.reviewFor:review for`
-  labelpublicationgrants = $localize`:@@summary.publicationgrantes:publication/grants`
+  labelpublicationgrants = $localize`:@@summary.publicationgrantes:publications/grants`
   labelpublicationgrant = $localize`:@@summary.publicationgrant:publication/grant`
+  labelMoreAffiliations = $localize`:@@summary.moreAffiliations:more Affiliations`
+  labelMoreProfessionalActivities = $localize`:@@summary.moreProfessionalActivities:more Professional activities`
+  labelMoreOtherIdentifiers = $localize`:@@summary.moreOtherIdentifiers:more Other Identifiers`
+  insideIframe: boolean
+  labelMoreAffiliation = $localize`:@@summary.moreAffiliation:more Affiliation`
+  labelMoreProfessionalActivitie = $localize`:@@summary.moreProfessionalActivitie:more Professional activity`
+  labelMoreOtherIdentifier = $localize`:@@summary.moreOtherIdentifier:more Other Identifier`
 
   funds: SimpleActivityModel[] = []
   peerReviews: SimpleActivityModel[] = []
@@ -53,7 +61,9 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
     private _router: Router,
     private _platform: PlatformInfoService,
     private _robotsMetaTags: RobotsMetaTagsService,
-    private _zendeskService: ZendeskService
+    private _zendeskService: ZendeskService,
+    // import window
+    @Inject(WINDOW) private _window: Window
   ) {}
   ngOnDestroy(): void {
     this.unsubscribe.next()
@@ -62,6 +72,7 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.insideIframe = this._window.self !== this._window.top
     this._zendeskService.hide()
     this._robotsMetaTags.disallowRobots()
     this._platform
@@ -162,7 +173,7 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
       this.externalIdentifiers = this.trustedSummary.externalIdentifiers.map(
         (id) => {
           return {
-            verified: id.verified,
+            verified: id.validated,
             url: id.url,
             stringA: id.id,
           }

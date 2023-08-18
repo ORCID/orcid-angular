@@ -4,6 +4,7 @@
   [ngClass]="{
     mobile: mobile
   }"
+  [ngClass]="insideIframe ? 'inside-iframe' : ''"
 >
   <header class="panel-header">
     <!-- orcid logo -->
@@ -63,9 +64,8 @@
   <div
     class="panel-body"
     [ngClass]="{
-      'panel-body-1-cols': mobile || oneColumn,
-      'panel-body-2-cols': !mobile && twoColumns,
-      'panel-body-3-cols': !mobile && threeColumns
+      'panel-body-1-cols': mobile,
+      'panel-body-3-cols': !mobile
     }"
   >
     <div
@@ -83,9 +83,11 @@
           </h2>
         </a>
         <app-summary-panel
-          [url]="trustedSummary?.orcid"
+          [url]="trustedSummary?.orcid + '#affiliations'"
           [activitySummary]="trustedSummary.employmentAffiliations"
           [count]="trustedSummary.employmentAffiliationsCount"
+          [moreLabel]="labelMoreAffiliations"
+          [moreLabelSingular]="labelMoreAffiliation"
         ></app-summary-panel>
       </ng-container>
 
@@ -137,7 +139,7 @@
       </div>
     </div>
     <div
-      class="column column-border"
+      class="column"
       [ngClass]="{ 'column-border': !mobile && threeColumns }"
       *ngIf="peerReviews?.length || works?.length || funds?.length"
     >
@@ -202,9 +204,11 @@
           </h2>
         </a>
         <app-summary-panel
-          [url]="trustedSummary?.orcid"
+          [url]="trustedSummary?.orcid + '#professional-activities'"
           [activitySummary]="trustedSummary.professionalActivities"
           [count]="trustedSummary.professionalActivitiesCount"
+          [moreLabel]="labelMoreProfessionalActivities"
+          moreLabelSingular="labelMoreProfessionalActivitie"
         ></app-summary-panel>
       </ng-container>
       <ng-container *ngIf="externalIdentifiers?.length">
@@ -220,7 +224,9 @@
         <app-summary-simple-panel
           [simpleActivities]="externalIdentifiers"
           [count]="externalIdentifiers?.length"
-          [overflowUrl]="trustedSummary?.orcid"
+          [overflowUrl]="trustedSummary?.orcid + '#other-identifiers'"
+          [moreLabel]="labelMoreOtherIdentifiers"
+          [moreLabelSingular]="labelMoreOtherIdentifier"
         ></app-summary-simple-panel>
       </ng-container>
     </div>

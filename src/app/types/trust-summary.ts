@@ -1,3 +1,5 @@
+import { AffiliationType } from './record-affiliation.endpoint'
+
 export interface TrustedSummary {
   name: string
   orcid: string
@@ -13,7 +15,7 @@ export interface TrustedSummary {
   selfAssertedFunds: number
   professionalActivities: ActivitySummary[]
   professionalActivitiesCount: number
-  externalIdentifiers: any[]
+  externalIdentifiers: ExternalIdentifierSummary[]
 }
 
 export interface ActivitySummary {
@@ -23,6 +25,14 @@ export interface ActivitySummary {
   endDate?: string
   role?: string
   title: any
-  type: string
+  type: AffiliationType
+  validated: boolean
+}
+
+export interface ExternalIdentifierSummary {
+  id: string
+  commonName: string
+  reference: string
+  url: string
   validated: boolean
 }

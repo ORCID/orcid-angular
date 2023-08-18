@@ -1,0 +1,26 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - "storybook-2023"
+    # paths: ["src/stories/**", ".storybook/**"]
+permissions:
+  contents: write
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 'v16.x'
+          cache: 'yarn'
+      - name: Install and Build
+        run: | # Install npm packages and build the Storybook files
+          yarn install
+          yarn run build:storybook
+      - name: Deploy  
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          FOLDER: dist/storybook/ng-orcid # The folder that the build-storybook script generates files.
