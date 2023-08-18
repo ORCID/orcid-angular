@@ -94,7 +94,9 @@
           </ng-container>
         </caption>
         <div class="orc-font-small-print">{{ activity.role }}</div>
-        <div class="orc-font-small-print">{{ activity.type }}</div>
+        <div class="orc-font-small-print">
+          {{ activity.type | affiliationTypeLabel | lowercase }}
+        </div>
       </div>
     </div>
   </ng-container>
@@ -105,7 +107,10 @@
       target="_blank"
       rel="noopener noreferrer"
       >+ {{ count - 3 }}
-      <ng-container i18n="@@share.more">more</ng-container></a
-    >
+      <ng-container *ngIf="count - 3 === 1">{{
+        moreLabelSingular
+      }}</ng-container>
+      <ng-container *ngIf="count - 3 > 1">{{ moreLabel }}</ng-container>
+    </a>
   </div>
 </div>

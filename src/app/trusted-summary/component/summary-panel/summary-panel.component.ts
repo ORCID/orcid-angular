@@ -9,6 +9,7 @@ import { ActivitySummary } from 'src/app/types/trust-summary'
     './summary-panel.component.scss',
     './summary-panel.component.scss-theme.scss',
   ],
+  preserveWhitespaces: true,
 })
 export class SummaryPanelComponent implements OnInit {
   validatedSourceAriaLabel = $localize`:@@summary.validatedSource:Validated source`
@@ -16,6 +17,8 @@ export class SummaryPanelComponent implements OnInit {
   @Input() activitySummary: ActivitySummary[]
   @Input() url: string = ''
   @Input() count: number = 0
+  @Input() moreLabel: string = ''
+  @Input() moreLabelSingular: string = ''
   activitiesToDisplay: ActivitySummary[]
   acitivityCountOverflow: boolean
   unsubscribe = new Subject()
@@ -27,7 +30,7 @@ export class SummaryPanelComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.activitySummary) {
-      this.activitySummary = [...this.activitySummary, ...this.activitySummary]
+      this.activitySummary = [...this.activitySummary]
       this.activitiesToDisplay = this.activitySummary.slice(0, 3)
 
       this.acitivityCountOverflow = this.count > 3

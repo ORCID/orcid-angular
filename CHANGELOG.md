@@ -1,3 +1,27 @@
+## v2.38.4 - 2023-08-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.38.3...v2.38.4)
+
+### Fix
+
+- Add missing interface and fix typos in code (#2044)
+
+## v2.38.3 - 2023-08-16
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.38.2...v2.38.3)
+
+- [#2043](https://github.com/ORCID/orcid-angular/pull/2043):
+
+## v2.38.2 - 2023-08-16
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.38.1...v2.38.2)
+
+- [#2041](https://github.com/ORCID/orcid-angular/pull/2041): Storybook (2023 re-enable)
+
+## v2.38.1 - 2023-08-16
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.38.0...v2.38.1)
+
 ## v2.38.0 - 2023-08-15
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.36.14...v2.38.0)

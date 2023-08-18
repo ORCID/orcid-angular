@@ -5,10 +5,7 @@ import { SummarySimplePanelComponent } from './component/summary-simple-panel/su
 import { TrustedSummaryComponent } from './pages/trusted-summary/trusted-summary.component'
 import { TrustedSummaryRouting } from './trusted-summary-routing.module'
 import { MatIconModule } from '@angular/material/icon'
-import {
-  MatProgressSpinner,
-  MatProgressSpinnerModule,
-} from '@angular/material/progress-spinner'
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { SharedModule } from '../shared/shared.module'
 
 @NgModule({

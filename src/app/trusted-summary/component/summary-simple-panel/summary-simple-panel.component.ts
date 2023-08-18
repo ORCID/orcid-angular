@@ -23,9 +23,12 @@ export interface SimpleActivityModel {
 })
 export class SummarySimplePanelComponent implements OnInit {
   validatedSourceAriaLabel = $localize`:@@summary.validatedSource:Validated source`
-  selftAssertedSource = $localize`:@@summary.selfAssertedSource:Self-asserted source`
+  selfAssertedSource = $localize`:@@summary.selfAssertedSource:Self-asserted source`
   @Input() simpleActivities: SimpleActivityModel[] = []
   @Input() count: number = 0
+  @Input() moreLabel: string = ''
+  @Input() moreLabelSingular: string = ''
+
   @Input() overflowUrl: string = ''
   unsubscribe = new Subject()
   mobile: boolean

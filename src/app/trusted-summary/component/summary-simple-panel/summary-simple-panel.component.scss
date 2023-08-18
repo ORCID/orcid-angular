@@ -24,13 +24,16 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    max-width: 100%;
 
     .header-title {
+      max-width: 100%;
       display: flex;
-      align-items: center;
+      align-items: initial;
 
       h3 {
         margin: 0;
+        overflow: hidden;
       }
     }
 
@@ -59,9 +62,22 @@ mat-icon.margin-compensation {
 
 mat-icon {
   min-width: 25px;
-  margin-inline-end: 8px;
+  margin-inline-end: 3px;
+  margin-top: -3px;
+
+  img {
+    margin-top: 2px;
+    display: block;
+  }
 }
 
 a {
   font-weight: 400;
+  max-width: 100%;
+}
+
+.text-container {
+  max-width: 210px;
+  overflow: hidden;
+  word-wrap: break-word;
 }

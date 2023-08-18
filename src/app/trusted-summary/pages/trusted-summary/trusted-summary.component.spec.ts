@@ -7,6 +7,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { of } from 'rxjs'
 import { ZendeskService } from 'src/app/core/zendesk/zendesk.service'
+import { WINDOW } from 'src/app/cdk/window'
 
 describe('TrustedSummaryComponent', () => {
   let component: TrustedSummaryComponent
@@ -26,6 +27,7 @@ describe('TrustedSummaryComponent', () => {
           provide: ZendeskService,
           useValue: { hide: () => of() },
         },
+        { provide: WINDOW, useValue: {} },
       ],
       imports: [HttpClientTestingModule],
     }).compileComponents()
