@@ -25,7 +25,6 @@ import { RecordPublicSideBarService } from '../record-public-side-bar/record-pub
 export class RecordEmailsService {
   headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json',
   })
   private $emailsSubject
 

@@ -20,7 +20,6 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
 export class AccountSecurityAlternateSignInService {
   headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json',
   })
   constructor(
     private _errorHandler: ErrorHandlerService,

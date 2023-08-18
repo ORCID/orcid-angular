@@ -13,7 +13,6 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
 export class AccountSecurityPasswordService {
   headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json',
   })
 
   constructor(

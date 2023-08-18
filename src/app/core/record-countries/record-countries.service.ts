@@ -18,7 +18,6 @@ export class RecordCountriesService {
   $addresses: ReplaySubject<CountriesEndpoint>
   headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json',
   })
 
   constructor(

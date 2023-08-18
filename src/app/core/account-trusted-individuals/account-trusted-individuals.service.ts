@@ -22,7 +22,6 @@ export class AccountTrustedIndividualsService {
 
   headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json',
   })
   constructor(
     private _errorHandler: ErrorHandlerService,

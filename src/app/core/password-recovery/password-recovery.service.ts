@@ -20,7 +20,6 @@ export class PasswordRecoveryService {
   ) {}
   headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json',
   })
 
   resetPassword(data) {

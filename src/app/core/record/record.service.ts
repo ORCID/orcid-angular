@@ -79,7 +79,6 @@ export class RecordService {
 
   headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json',
   })
 
   subscriptionSourceCountDebugger = 0
