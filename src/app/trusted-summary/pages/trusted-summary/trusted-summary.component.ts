@@ -94,6 +94,7 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
         this.creationDateWithOffset = this.dateWithOffset(
           this.trustedSummary.creation
         )
+        console.log('this.creationDateWithOffset', this.creationDateWithOffset)
         // if record was created today
         if (
           this.creationDateWithOffset.toDateString() ===
@@ -170,7 +171,7 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
               : this.labelpublicationgrant,
         })
       }
-      this.externalIdentifiers = this.trustedSummary.externalIdentifiers.map(
+      this.externalIdentifiers = this.trustedSummary.externalIdentifiers?.map(
         (id) => {
           return {
             verified: id.validated,
@@ -184,7 +185,7 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
         (this.works.length > 0 ||
           this.funds.length > 0 ||
           this.peerReviews.length > 0) &&
-        (this.externalIdentifiers.length > 0 ||
+        (this.externalIdentifiers?.length > 0 ||
           this.trustedSummary.professionalActivitiesCount > 0 ||
           this.trustedSummary.externalIdentifiers.length > 0)
       ) {
@@ -193,7 +194,7 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
         this.works.length > 0 ||
         this.funds.length > 0 ||
         this.peerReviews.length > 0 ||
-        this.externalIdentifiers.length > 0 ||
+        this.externalIdentifiers?.length > 0 ||
         this.trustedSummary.professionalActivitiesCount > 0
       ) {
         this.twoColumns = true
