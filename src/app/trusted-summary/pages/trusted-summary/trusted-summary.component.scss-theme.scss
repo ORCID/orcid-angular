@@ -8,7 +8,11 @@
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
 
-  .main {
+  .day-title {
+    color: map-get($foreground, 'text-dark-mid') 
+  }
+  
+  :host {
     background-color: map-get($background, 'ui-background-lightest');
   }
 
