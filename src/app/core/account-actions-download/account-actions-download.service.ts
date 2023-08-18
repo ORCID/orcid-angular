@@ -9,7 +9,6 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
   providedIn: 'root',
 })
 export class AccountActionsDownloadService {
-  
   constructor(
     private _errorHandler: ErrorHandlerService,
     private _http: HttpClient,

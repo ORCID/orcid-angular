@@ -12,7 +12,7 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
 })
 export class AccountDefaultEmailFrequenciesService {
   headers = new HttpHeaders({
-    'Access-Control-Allow-Origin': '*',    
+    'Access-Control-Allow-Origin': '*',
   })
   constructor(
     private _errorHandler: ErrorHandlerService,

@@ -27,7 +27,14 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http'
     // Environmental dependent modules
     environment.SHOW_TEST_WARNING_BANNER ? EnvironmentBannerModule : [],
   ],
-  providers: [TitleService, {provide:HTTP_INTERCEPTORS, useClass:HttpContentTypeHeaderInterceptor, multi:true}],
+  providers: [
+    TitleService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpContentTypeHeaderInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {

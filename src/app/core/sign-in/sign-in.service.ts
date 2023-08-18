@@ -16,16 +16,13 @@ import { Title } from '@angular/platform-browser'
 @Injectable({
   providedIn: 'root',
 })
-export class SignInService {  
-
+export class SignInService {
   constructor(
     private _http: HttpClient,
     private _titleService: Title,
     private _errorHandler: ErrorHandlerService,
     private _userService: UserService
-  ) {
-    
-  }
+  ) {}
   /**
    * @param  SignInLocal sign in information
    * @param  updateUserSession default true, set to true if after successfully signing Orcid Angular will still be open
@@ -57,7 +54,7 @@ export class SignInService {
     }
     body = body.set('oauthRequest', signInLocal.isOauth ? 'true' : 'false')
     return this._http
-      .post<SignIn>(environment.API_WEB + loginUrl, body, {        
+      .post<SignIn>(environment.API_WEB + loginUrl, body, {
         withCredentials: true,
       })
       .pipe(
@@ -79,7 +76,7 @@ export class SignInService {
     let body = new HttpParams({ encoder: new CustomEncoder() })
     body = body.set('email', email)
     return this._http
-      .post<Reactivation>(environment.API_WEB + `sendReactivation.json`, body, {        
+      .post<Reactivation>(environment.API_WEB + `sendReactivation.json`, body, {
         withCredentials: true,
       })
       .pipe(
@@ -96,7 +93,7 @@ export class SignInService {
   singOut() {
     this._titleService.setTitle('ORCID')
     return this._http
-      .get<SignIn>(environment.API_WEB + 'userStatus.json?logUserOut=true', {        
+      .get<SignIn>(environment.API_WEB + 'userStatus.json?logUserOut=true', {
         withCredentials: true,
       })
       .pipe(

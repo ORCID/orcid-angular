@@ -11,7 +11,7 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
 })
 export class AccountDefaultVisibilityService {
   headers = new HttpHeaders({
-    'Access-Control-Allow-Origin': '*',    
+    'Access-Control-Allow-Origin': '*',
   })
 
   constructor(

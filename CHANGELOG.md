@@ -1,3 +1,15 @@
+## v2.38.6 - 2023-08-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.38.5...v2.38.6)
+
+- [#2047](https://github.com/ORCID/orcid-angular/pull/2047): Trusted summary blocked users
+
+## v2.38.5 - 2023-08-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.38.4...v2.38.5)
+
+- [#2042](https://github.com/ORCID/orcid-angular/pull/2042): Interceptor
+
 ## v2.38.4 - 2023-08-17
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.38.3...v2.38.4)
