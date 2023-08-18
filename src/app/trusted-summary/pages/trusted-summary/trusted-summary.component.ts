@@ -176,7 +176,7 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
           return {
             verified: id.validated,
             url: id.url,
-            stringA: id.id,
+            stringA: id.commonName + ': ' + id.reference,
           }
         }
       )
