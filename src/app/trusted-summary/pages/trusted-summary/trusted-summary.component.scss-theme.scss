@@ -12,7 +12,7 @@
     color: map-get($foreground, 'text-dark-mid');
   }
 
-  :host {
+  main {
     background-color: map-get($background, 'ui-background-lightest');
   }
 

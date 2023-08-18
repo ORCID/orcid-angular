@@ -59,79 +59,77 @@
   </app-panels>
 </section>
 
+<ng-container
+  *ngIf="
+    !(
+      isPublicRecord &&
+      getAffiliationType('EDUCATION_AND_QUALIFICATION')?.affiliationGroup
+        ?.length === 0
+    )
+  "
+>
+  <!-- A PANELS COMPONENT FOR EDUCATION_AND_QUALIFICATION -->
+  <app-panels
+    [loading]="$loading | async"
+    s
+    *ngIf="
+      getAffiliationType(
+        'EDUCATION_AND_QUALIFICATION'
+      ) as profileAffiliationsGroup
+    "
+    class="row"
+    [title]="affiliationTypeLabel(profileAffiliationsGroup.type)"
+    [type]="'education'"
+    [userRecord]="userRecord"
+    [currentAmount]="profileAffiliationsGroup.affiliationGroup.length"
+    [(expandedContent)]="expandedContent['EDUCATION_AND_QUALIFICATION']"
+    (expandedContentChange)="expandedContentChange.emit(expandedContent)"
+    [isPublicRecord]="isPublicRecord"
+    [sortType]="'end'"
+    (sort)="sortEvent($event, 'EDUCATION_AND_QUALIFICATION')"
+    id="cy-affiliation-education-and-qualification"
+  >
+    <ng-container *ngIf="profileAffiliationsGroup.affiliationGroup.length > 0">
+      <app-affiliation-stack
+        [userRecord]="userRecord"
+        [isPublicRecord]="isPublicRecord"
+        *ngFor="
+          let affiliationGroup of profileAffiliationsGroup.affiliationGroup;
+          trackBy: trackByAffiliationGroup
+        "
+        [affiliationStack]="affiliationGroup"
+        [type]="affiliationGroup.affiliationType | affiliationType"
+        [userInfo]="userInfo"
+      ></app-affiliation-stack>
+    </ng-container>
+    <ng-container
+      *ngIf="profileAffiliationsGroup.affiliationGroup.length === 0"
+    >
+      <div class="orc-font-body-small">
+        <p i18n="@@shared.educationQualificationsDescription">
+          Add details about where you have studied and educational or
+          professional qualifications you have been awarded.
+        </p>
+        <a
+          class="underline"
+          rel="noopener noreferrer"
+          target="_blank"
+          href="https://support.orcid.org/hc/en-us/articles/360006973933-Add-an-education-or-qualification-to-your-ORCID-record"
+          i18n="@@shared.educationLearnMore"
+        >
+          Learn more about adding education or qualifications to your ORCID
+          record
+        </a>
+      </div>
+    </ng-container>
+  </app-panels>
+</ng-container>
+
 <section
-  id="professional-activities"
   role="region"
   [attr.aria-label]="regionProfessionalActivities"
+  id="professional-activities"
 >
-  <ng-container
-    *ngIf="
-      !(
-        isPublicRecord &&
-        getAffiliationType('EDUCATION_AND_QUALIFICATION')?.affiliationGroup
-          ?.length === 0
-      )
-    "
-  >
-    <!-- A PANELS COMPONENT FOR EDUCATION_AND_QUALIFICATION -->
-    <app-panels
-      [loading]="$loading | async"
-      s
-      *ngIf="
-        getAffiliationType(
-          'EDUCATION_AND_QUALIFICATION'
-        ) as profileAffiliationsGroup
-      "
-      class="row"
-      [title]="affiliationTypeLabel(profileAffiliationsGroup.type)"
-      [type]="'education'"
-      [userRecord]="userRecord"
-      [currentAmount]="profileAffiliationsGroup.affiliationGroup.length"
-      [(expandedContent)]="expandedContent['EDUCATION_AND_QUALIFICATION']"
-      (expandedContentChange)="expandedContentChange.emit(expandedContent)"
-      [isPublicRecord]="isPublicRecord"
-      [sortType]="'end'"
-      (sort)="sortEvent($event, 'EDUCATION_AND_QUALIFICATION')"
-      id="cy-affiliation-education-and-qualification"
-    >
-      <ng-container
-        *ngIf="profileAffiliationsGroup.affiliationGroup.length > 0"
-      >
-        <app-affiliation-stack
-          [userRecord]="userRecord"
-          [isPublicRecord]="isPublicRecord"
-          *ngFor="
-            let affiliationGroup of profileAffiliationsGroup.affiliationGroup;
-            trackBy: trackByAffiliationGroup
-          "
-          [affiliationStack]="affiliationGroup"
-          [type]="affiliationGroup.affiliationType | affiliationType"
-          [userInfo]="userInfo"
-        ></app-affiliation-stack>
-      </ng-container>
-      <ng-container
-        *ngIf="profileAffiliationsGroup.affiliationGroup.length === 0"
-      >
-        <div class="orc-font-body-small">
-          <p i18n="@@shared.educationQualificationsDescription">
-            Add details about where you have studied and educational or
-            professional qualifications you have been awarded.
-          </p>
-          <a
-            class="underline"
-            rel="noopener noreferrer"
-            target="_blank"
-            href="https://support.orcid.org/hc/en-us/articles/360006973933-Add-an-education-or-qualification-to-your-ORCID-record"
-            i18n="@@shared.educationLearnMore"
-          >
-            Learn more about adding education or qualifications to your ORCID
-            record
-          </a>
-        </div>
-      </ng-container>
-    </app-panels>
-  </ng-container>
-
   <ng-container
     *ngIf="
       !professionalActivitiesTogglz &&

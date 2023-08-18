@@ -79,7 +79,9 @@
         <caption class="orc-font-small-print">
           <ng-container *ngIf="activity.startDate">
             {{ activity.startDate }}
-            <ng-container i18n="@@summary.to" i18n="@@shared.to"
+            <ng-container
+              i18n="@@shared.to"
+              *ngIf="activity.endDate || showToPresent"
               >to</ng-container
             >
           </ng-container>
@@ -87,7 +89,7 @@
             {{ activity.endDate }}
           </ng-container>
           <ng-container
-            *ngIf="!activity.endDate && activity.startDate"
+            *ngIf="!activity.endDate && activity.startDate && showToPresent"
             i18n="@@shared.present"
           >
             present

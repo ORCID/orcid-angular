@@ -19,6 +19,7 @@ export class SummaryPanelComponent implements OnInit {
   @Input() count: number = 0
   @Input() moreLabel: string = ''
   @Input() moreLabelSingular: string = ''
+  @Input() showToPresent = true
   activitiesToDisplay: ActivitySummary[]
   acitivityCountOverflow: boolean
   unsubscribe = new Subject()
