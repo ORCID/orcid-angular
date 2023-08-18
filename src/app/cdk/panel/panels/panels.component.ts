@@ -55,7 +55,6 @@ export class PanelsComponent implements OnInit {
   @Input() sortDirection: SortOrderDirection = 'desc'
   @Input() defaultDirection: SortOrderDirection = 'asc'
   @Input() reviewsNumber: number
-  @Input() anchorUrlId: string
 
   @Output() sort: EventEmitter<SortData> = new EventEmitter()
   @Output() addEvent: EventEmitter<ADD_EVENT_ACTION> = new EventEmitter()

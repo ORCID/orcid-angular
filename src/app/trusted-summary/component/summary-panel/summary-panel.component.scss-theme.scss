@@ -8,8 +8,6 @@
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
 
-  
-
   .verified {
     color: mat.get-color-from-palette($accent, 400);
   }
