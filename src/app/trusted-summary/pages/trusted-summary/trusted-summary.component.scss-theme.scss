@@ -9,7 +9,7 @@
   $background: map-get($theme, background);
 
   .day-title {
-    color: map-get($foreground, 'text-dark-mid') 
+    color: map-get($foreground, 'text-dark-mid');
   }
   
   main {

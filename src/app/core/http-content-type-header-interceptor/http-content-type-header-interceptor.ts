@@ -18,7 +18,8 @@ export class HttpContentTypeHeaderInterceptor implements HttpInterceptor {
     // If the request contains a content type, be sure to set the encoding to utf-8
     if (['POST', 'PUT'].includes(method)) {
       var clonedRequest
-      if (this.formUrlEcondedUrls.includes(urlWithParams)) {
+      if (this.formUrlEcondedUrls.find((x) => urlWithParams.includes(x))) {
+        console.log('Si es un form')
         clonedRequest = req.clone({
           headers: req.headers.set(
             'Content-Type',
