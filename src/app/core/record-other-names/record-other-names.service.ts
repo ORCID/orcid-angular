@@ -16,7 +16,6 @@ export class RecordOtherNamesService {
   $otherNames: ReplaySubject<OtherNamesEndPoint>
   headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json',
   })
 
   constructor(

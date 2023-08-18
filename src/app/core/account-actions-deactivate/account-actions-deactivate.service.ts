@@ -12,7 +12,6 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
 export class AccountActionsDeactivateService {
   headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'text/plain charset=utf-8',
   })
   options: { headers: any; responseType: 'text' }
 

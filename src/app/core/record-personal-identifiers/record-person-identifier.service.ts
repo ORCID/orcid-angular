@@ -18,7 +18,6 @@ export class RecordPersonIdentifierService {
   $privatePersonIdentifier: ReplaySubject<PersonIdentifierEndpoint>
   headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json',
   })
 
   constructor(

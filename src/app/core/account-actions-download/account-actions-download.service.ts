@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http'
 import { Inject, Injectable } from '@angular/core'
 import { catchError, retry, tap } from 'rxjs/operators'
 import { WINDOW } from 'src/app/cdk/window'
@@ -9,10 +9,7 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
   providedIn: 'root',
 })
 export class AccountActionsDownloadService {
-  headers = new HttpHeaders({
-    'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json',
-  })
+  
   constructor(
     private _errorHandler: ErrorHandlerService,
     private _http: HttpClient,

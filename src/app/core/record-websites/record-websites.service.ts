@@ -15,7 +15,6 @@ export class RecordWebsitesService {
   $websites: ReplaySubject<WebsitesEndPoint>
   headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json',
   })
 
   constructor(

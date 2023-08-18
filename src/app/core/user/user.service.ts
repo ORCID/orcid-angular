@@ -54,7 +54,6 @@ import { UserInfoService } from '../user-info/user-info.service'
 export class UserService {
   headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json',
   })
 
   constructor(

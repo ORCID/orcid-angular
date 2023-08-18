@@ -15,7 +15,6 @@ export class RecordKeywordService {
   $keywords: ReplaySubject<KeywordEndPoint>
   headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json',
   })
 
   constructor(
