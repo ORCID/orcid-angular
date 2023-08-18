@@ -16,7 +16,7 @@ export interface TrustedSummary {
   professionalActivities: ActivitySummary[]
   professionalActivitiesCount: number
   externalIdentifiers: ExternalIdentifierSummary[]
-  status: "locked" | "deprecated" | "deactivated" | "active"
+  status: 'locked' | 'deprecated' | 'deactivated' | 'active'
 }
 
 export interface ActivitySummary {

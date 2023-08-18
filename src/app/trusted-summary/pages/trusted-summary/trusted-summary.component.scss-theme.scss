@@ -22,8 +22,10 @@
 
   .panel,
   .panel-header {
-    border-color: mat.get-color-from-palette($background,
-        ui-background-darkest);
+    border-color: mat.get-color-from-palette(
+      $background,
+      ui-background-darkest
+    );
   }
 
   .panel-header {
