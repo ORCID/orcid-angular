@@ -22,7 +22,6 @@ export class RecordResearchResourceService {
 
   headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json',
   })
 
   constructor(

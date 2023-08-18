@@ -17,7 +17,6 @@ export class RecordPeerReviewService {
   $peer: ReplaySubject<PeerReview[]> = new ReplaySubject<PeerReview[]>()
   headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json',
   })
   lastEmittedValue: PeerReview[]
 

@@ -16,8 +16,7 @@ import { RecordImportWizard } from '../../types/record-peer-review-import.endpoi
 export class RecordFundingsService {
   lastEmittedValue: FundingGroup[]
   headers = new HttpHeaders({
-    'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',    
   })
 
   $fundings: ReplaySubject<FundingGroup[]> = new ReplaySubject<FundingGroup[]>()

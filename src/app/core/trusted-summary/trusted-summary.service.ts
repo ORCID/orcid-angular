@@ -13,7 +13,6 @@ import { ERROR_REPORT } from 'src/app/errors'
 export class TrustedSummaryService {
   headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json',
   })
 
   constructor(

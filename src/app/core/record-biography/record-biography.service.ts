@@ -15,7 +15,6 @@ export class RecordBiographyService {
   $biography: ReplaySubject<BiographyEndPoint>
   headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json',
   })
 
   constructor(
