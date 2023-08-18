@@ -1,3 +1,9 @@
+## v2.38.7 - 2023-08-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.38.6...v2.38.7)
+
+- [#2048](https://github.com/ORCID/orcid-angular/pull/2048): Http header interceptor
+
 ## v2.38.6 - 2023-08-18
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.38.5...v2.38.6)
