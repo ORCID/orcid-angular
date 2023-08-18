@@ -430,7 +430,7 @@ export class RecordWorksService {
       JSON.stringify(obj),
       {
         headers: {
-          'Access-Control-Allow-Origin': '*',          
+          'Access-Control-Allow-Origin': '*',
         },
       }
     )
