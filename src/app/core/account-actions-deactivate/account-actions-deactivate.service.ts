@@ -24,7 +24,7 @@ export class AccountActionsDeactivateService {
 
   deactivateAccount(): Observable<string> {
     return this._http
-      .get(
+      .post<string>(
         environment.API_WEB + `account/send-deactivate-account.json`,
         this.options
       )
