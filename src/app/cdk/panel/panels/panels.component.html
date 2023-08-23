@@ -234,7 +234,9 @@
           *ngFor="let option of sortTypes"
           [attr.aria-label]="option | appPanelsSortByAriaLabel : type"
         >
-          {{ option | sortLabel }}
+          <div class="padding-right">
+            {{ option | sortLabel }}
+          </div>
           <mat-icon
             aria-hidden="false"
             class="sort"

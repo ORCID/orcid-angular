@@ -18,7 +18,7 @@ export class AppPanelsSortByAriaLabelPipe implements PipeTransform {
       case 'type':
         return getTypeLabelByType(type)
       case 'order':
-        return $localize`:@@shared.peerReviewsSortOrder:Sort peer reviews by order`
+        return $localize`:@@shared.peerReviewsSortOrderv2:Sort peer review by Publication/Grant title`
     }
   }
 }
