@@ -57,13 +57,13 @@
 }
 
 mat-icon.margin-compensation {
-  margin-bottom: 3px;
+  // margin-bottom: 3px;
 }
 
 mat-icon {
   min-width: 25px;
   margin-inline-end: 3px;
-  margin-top: -3px;
+  // margin-top: -3px;
 
   img {
     margin-top: 2px;
@@ -80,4 +80,8 @@ a {
   max-width: 210px;
   overflow: hidden;
   word-wrap: break-word;
+}
+
+.header {
+  line-height: 24px;
 }

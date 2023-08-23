@@ -32,6 +32,8 @@
     flex-direction: row;
     align-items: initial;
     justify-content: space-between;
+    line-height: 24px;
+
 
     .header-title {
       display: flex;
@@ -68,13 +70,13 @@
 }
 
 mat-icon.margin-compensation {
-  margin-bottom: 3px;
+  // margin-bottom: 3px;
 }
 
 mat-icon {
   min-width: 25px;
   margin-inline-end: 3px;
-  margin-top: -3px;
+  // margin-top: -3px;
 
   img {
     margin-top: 2px;
