@@ -6,6 +6,10 @@ import { environment } from 'src/environments/environment'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
+export interface DeactivateResponse {
+  email: string
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -22,9 +26,9 @@ export class AccountActionsDeactivateService {
     this.options = { headers: this.headers, responseType: 'text' as 'text' }
   }
 
-  deactivateAccount(): Observable<string> {
+  deactivateAccount(): Observable<DeactivateResponse> {
     return this._http
-      .post<string>(
+      .post<DeactivateResponse>(
         environment.API_WEB + `account/send-deactivate-account.json`,
         this.options
       )
