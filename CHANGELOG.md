@@ -1,3 +1,9 @@
+## v2.38.12 - 2023-08-30
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.38.11...v2.38.12)
+
+- [#2053](https://github.com/ORCID/orcid-angular/pull/2053): Bump @adobe/css-tools from 4.2.0 to 4.3.1
+
 ## v2.38.11 - 2023-08-30
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.38.10...v2.38.11)
