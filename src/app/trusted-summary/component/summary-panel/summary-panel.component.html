@@ -81,7 +81,10 @@
             {{ activity.startDate }}
             <ng-container
               i18n="@@shared.to"
-              *ngIf="activity.endDate || showToPresent"
+              *ngIf="
+                (activity.endDate || showToPresent) &&
+                activity.type !== 'distinction'
+              "
               >to</ng-container
             >
           </ng-container>
@@ -89,7 +92,12 @@
             {{ activity.endDate }}
           </ng-container>
           <ng-container
-            *ngIf="!activity.endDate && activity.startDate && showToPresent"
+            *ngIf="
+              !activity.endDate &&
+              activity.startDate &&
+              showToPresent &&
+              activity.type !== 'distinction'
+            "
             i18n="@@shared.present"
           >
             present

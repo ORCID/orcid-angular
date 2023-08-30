@@ -150,9 +150,15 @@
                   i18n="@@summary.recordCreated"
                   >Record created</label
                 >
-                <label class="orc-font-body-small">{{
+                <label class="orc-font-body-small" *ngIf="!createdToday">{{
                   creationDateWithOffset | date
                 }}</label>
+                <label
+                  class="orc-font-body-small"
+                  *ngIf="createdToday"
+                  i18n="@@shared.today"
+                  >Today</label
+                >
               </div>
             </li>
             <li *ngIf="lastUpdateDate">
@@ -162,15 +168,9 @@
                   i18n="@@summary.lastUpdated"
                   >Last updated</label
                 >
-                <label class="orc-font-body-small" *ngIf="!modifiedToday">{{
+                <label class="orc-font-body-small">{{
                   lastUpdateDate | date
                 }}</label>
-                <label
-                  class="orc-font-body-small"
-                  *ngIf="modifiedToday"
-                  i18n="@@shared.today"
-                  >Today</label
-                >
               </div>
             </li>
           </ul>
@@ -248,7 +248,6 @@
           [count]="trustedSummary.professionalActivitiesCount"
           [moreLabel]="labelMoreProfessionalActivities"
           [moreLabelSingular]="labelMoreProfessionalActivitie"
-          [showToPresent]="false"
         ></app-summary-panel>
       </ng-container>
       <ng-container *ngIf="externalIdentifiers?.length">
