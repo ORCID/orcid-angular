@@ -1,3 +1,9 @@
+## v2.38.11 - 2023-08-30
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.38.10...v2.38.11)
+
+- [#2054](https://github.com/ORCID/orcid-angular/pull/2054): batch-fixes-aug-30
+
 ## v2.38.10 - 2023-08-23
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.38.9...v2.38.10)
