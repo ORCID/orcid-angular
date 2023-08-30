@@ -19,7 +19,6 @@ export class HttpContentTypeHeaderInterceptor implements HttpInterceptor {
     if (['POST', 'PUT'].includes(method)) {
       var clonedRequest
       if (this.formUrlEcondedUrls.find((x) => urlWithParams.includes(x))) {
-        console.log('Si es un form')
         clonedRequest = req.clone({
           headers: req.headers.set(
             'Content-Type',
