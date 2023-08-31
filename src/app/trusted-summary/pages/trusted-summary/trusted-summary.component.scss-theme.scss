@@ -8,6 +8,20 @@
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
 
+  a {
+    h2.hover-effect {
+      color: mat.get-color-from-palette($primary, 500);
+    }
+
+    h1 {
+      color: #fff;
+    }
+
+    h2 {
+      color: black;
+    }
+  }
+
   .day-title {
     color: map-get($foreground, 'text-dark-mid');
   }

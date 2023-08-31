@@ -1,4 +1,8 @@
-<div class="card-container" *ngIf="simpleActivities?.length">
+<div
+  class="card-container"
+  *ngIf="simpleActivities?.length"
+  [ngClass]="{ hover: hoverEffect }"
+>
   <ng-container *ngFor="let element of simpleActivities; last as isLast">
     <div
       class="activity-container"
@@ -6,6 +10,7 @@
         'with-border': !isLast,
         'padding-botton': !isLast
       }"
+      (click)="goToUrl(element.url)"
     >
       <div class="header">
         <div class="header-title">

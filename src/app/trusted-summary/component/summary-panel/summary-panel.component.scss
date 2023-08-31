@@ -64,6 +64,14 @@
   border-bottom: 2px solid;
 }
 
+.activity-container:hover {
+  cursor: pointer;
+  a {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
 .body-wrapper {
   margin-inline-start: 27px;
 }
@@ -71,6 +79,7 @@
 mat-icon {
   min-width: 25px;
   margin-inline-end: 3px;
+
   img {
     margin-top: 2px;
     display: block;
