@@ -3,6 +3,8 @@
   justify-content: center;
 }
 
+
+
 main {
   margin-top: 32px;
 }
@@ -166,7 +168,7 @@ a {
     color: #fff;
     text-decoration: underline;
 
-    > svg > path {
+    >svg>path {
       fill: #fff;
     }
 
@@ -175,11 +177,9 @@ a {
     gap: 8px;
   }
 
-  h1 {
-    color: #fff;
+
+  h2.hover-effect {
+    text-decoration: underline;
   }
 
-  h2 {
-    color: black;
-  }
 }

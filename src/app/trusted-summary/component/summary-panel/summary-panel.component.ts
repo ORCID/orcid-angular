@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, Inject, Input, OnInit } from '@angular/core'
 import { Subject } from 'rxjs'
+import { WINDOW } from 'src/app/cdk/window'
 import { ActivitySummary } from 'src/app/types/trust-summary'
 
 @Component({
@@ -20,9 +21,12 @@ export class SummaryPanelComponent implements OnInit {
   @Input() moreLabel: string = ''
   @Input() moreLabelSingular: string = ''
   @Input() showToPresent = true
+  @Input() hoverEffect = false
   activitiesToDisplay: ActivitySummary[]
   acitivityCountOverflow: boolean
   unsubscribe = new Subject()
+
+  constructor(@Inject(WINDOW) private _window: Window) {}
 
   ngOnDestroy(): void {
     this.unsubscribe.next()
@@ -36,5 +40,12 @@ export class SummaryPanelComponent implements OnInit {
 
       this.acitivityCountOverflow = this.count > 3
     }
+  }
+  goToUrl(url?: string) {
+    if (!url) {
+      return
+    }
+    console.log(url)
+    this._window.open(url, '_blank')
   }
 }

@@ -1,7 +1,8 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
+import { WINDOW } from 'src/app/cdk/window'
 
 export interface SimpleActivityModel {
   verified?: boolean
@@ -28,14 +29,22 @@ export class SummarySimplePanelComponent implements OnInit {
   @Input() count: number = 0
   @Input() moreLabel: string = ''
   @Input() moreLabelSingular: string = ''
+  @Input() hoverEffect = false
 
   @Input() overflowUrl: string = ''
   unsubscribe = new Subject()
   mobile: boolean
   acitivityCountOverflow = false
+  constructor(@Inject(WINDOW) private _window: Window) {}
 
   ngOnInit(): void {
     this.acitivityCountOverflow = this.simpleActivities.length > 3
     this.simpleActivities = this.simpleActivities.slice(0, 3)
+  }
+  goToUrl(url?: string) {
+    if (!url) {
+      return
+    }
+    this._window.open(url, '_blank')
   }
 }

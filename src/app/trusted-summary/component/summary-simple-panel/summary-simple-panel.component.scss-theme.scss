@@ -8,6 +8,26 @@
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
 
+  .card-container.hover {
+    border-color: mat.get-color-from-palette($primary, 500);
+  }
+
+  .activity-container:hover {
+    a {
+      text-decoration: underline;
+      cursor: pointer;
+      color: map-get($foreground, 'brand-primary-dark');
+
+
+    }
+
+    svg {
+      path {
+        fill: map-get($foreground, 'brand-primary-dark');
+      }
+    }
+  }
+
   .verified {
     color: mat.get-color-from-palette($accent, 400);
   }

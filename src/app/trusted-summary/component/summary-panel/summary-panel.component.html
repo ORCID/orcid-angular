@@ -1,7 +1,12 @@
-<div class="card-container" *ngIf="activitiesToDisplay?.length">
+<div
+  class="card-container"
+  *ngIf="activitiesToDisplay?.length"
+  [ngClass]="{ hover: hoverEffect }"
+>
   <ng-container *ngFor="let activity of activitiesToDisplay; last as isLast">
     <div
       class="activity-container"
+      (click)="goToUrl(activity.url)"
       [ngClass]="{
         'with-border': !isLast || acitivityCountOverflow,
         'padding-botton': !isLast || acitivityCountOverflow
@@ -30,8 +35,8 @@
               target="_blank"
               rel="noopener noreferrer"
               href="{{ activity.url }}"
-              >{{ activity.organizationName }}</a
-            >
+              >{{ activity.organizationName }}
+            </a>
           </h3>
           <h3
             *ngIf="activity.organizationName && !activity.url"

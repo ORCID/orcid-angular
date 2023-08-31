@@ -10,6 +10,15 @@
   background-color: white;
 }
 
+.activity-container:hover {
+  cursor: pointer;
+  a {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
+
 .activity-container.padding-botton {
   padding-bottom: 16px;
 }

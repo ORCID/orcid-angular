@@ -118,8 +118,14 @@
           href="{{ trustedSummary.orcid }}#affiliations"
           target="_blank"
           rel="noopener noreferrer"
+          (mouseenter)="affiliationsHover = true"
+          (mouseleave)="affiliationsHover = false"
         >
-          <h2 class="orc-font-small-print" i18n="@@summary.affiliations">
+          <h2
+            class="orc-font-small-print"
+            i18n="@@summary.affiliations"
+            [ngClass]="{ 'hover-effect': affiliationsHover }"
+          >
             AFFILIATIONS
           </h2>
         </a>
@@ -129,6 +135,7 @@
           [count]="trustedSummary.employmentAffiliationsCount"
           [moreLabel]="labelMoreAffiliations"
           [moreLabelSingular]="labelMoreAffiliation"
+          [hoverEffect]="affiliationsHover"
         ></app-summary-panel>
       </ng-container>
       <ng-container *ngIf="lastUpdateDate || creationDateWithOffset">
@@ -187,10 +194,21 @@
           href="{{ trustedSummary.orcid }}#works"
           target="_blank"
           rel="noopener noreferrer"
+          (mouseenter)="worksHover = true"
+          (mouseleave)="worksHover = false"
         >
-          <h2 class="orc-font-small-print" i18n="@@summary.works">WORKS</h2>
+          <h2
+            class="orc-font-small-print"
+            i18n="@@summary.works"
+            [ngClass]="{
+              'hover-effect': worksHover
+            }"
+          >
+            WORKS
+          </h2>
         </a>
         <app-summary-simple-panel
+          [hoverEffect]="worksHover"
           [simpleActivities]="works"
         ></app-summary-simple-panel>
       </ng-container>
@@ -199,12 +217,21 @@
           href="{{ trustedSummary.orcid }}#peer-reviews"
           target="_blank"
           rel="noopener noreferrer"
+          (mouseenter)="peerReviewsHover = true"
+          (mouseleave)="peerReviewsHover = false"
         >
-          <h2 class="orc-font-small-print" i18n="@@summary.peerReviews">
+          <h2
+            [ngClass]="{
+              'hover-effect': peerReviewsHover
+            }"
+            class="orc-font-small-print"
+            i18n="@@summary.peerReviews"
+          >
             PEER REVIEWS
           </h2>
         </a>
         <app-summary-simple-panel
+          [hoverEffect]="peerReviewsHover"
           [simpleActivities]="peerReviews"
         ></app-summary-simple-panel>
       </ng-container>
@@ -213,11 +240,22 @@
           href="{{ trustedSummary.orcid }}#funding"
           target="_blank"
           rel="noopener noreferrer"
+          (mouseenter)="fundsHover = true"
+          (mouseleave)="fundsHover = false"
         >
-          <h2 class="orc-font-small-print" i18n="@@summary.funding">FUNDING</h2>
+          <h2
+            class="orc-font-small-print"
+            [ngClass]="{
+              'hover-effect': fundsHover
+            }"
+            i18n="@@summary.funding"
+          >
+            FUNDING
+          </h2>
         </a>
 
         <app-summary-simple-panel
+          [hoverEffect]="fundsHover"
           [simpleActivities]="funds"
         ></app-summary-simple-panel>
       </ng-container>
@@ -234,15 +272,21 @@
           href="{{ trustedSummary.orcid }}#professional-activities"
           target="_blank"
           rel="noopener noreferrer"
+          (mouseenter)="professionalActivitiesHover = true"
+          (mouseleave)="professionalActivitiesHover = false"
         >
           <h2
             class="orc-font-small-print"
             i18n="@@summary.professionalActivites"
+            [ngClass]="{
+              'hover-effect': professionalActivitiesHover
+            }"
           >
             PROFESSIONAL ACTIVITIES
           </h2>
         </a>
         <app-summary-panel
+          [hoverEffect]="professionalActivitiesHover"
           [url]="trustedSummary?.orcid + '#professional-activities'"
           [activitySummary]="trustedSummary.professionalActivities"
           [count]="trustedSummary.professionalActivitiesCount"
@@ -255,8 +299,14 @@
           href="{{ trustedSummary.orcid }}#other-identifiers"
           target="_blank"
           rel="noopener noreferrer"
+          (mouseenter)="externalIdentifiersHover = true"
+          (mouseleave)="externalIdentifiersHover = false"
         >
-          <h2 class="orc-font-small-print" i18n="@@summary.otherids">
+          <h2
+            class="orc-font-small-print"
+            i18n="@@summary.otherids"
+            [ngClass]="{ 'hover-effect': externalIdentifiersHover }"
+          >
             OTHER IDENTIFIERS
           </h2>
         </a>
@@ -266,6 +316,7 @@
           [overflowUrl]="trustedSummary?.orcid + '#other-identifiers'"
           [moreLabel]="labelMoreOtherIdentifiers"
           [moreLabelSingular]="labelMoreOtherIdentifier"
+          [hoverEffect]="externalIdentifiersHover"
         ></app-summary-simple-panel>
       </ng-container>
     </div>

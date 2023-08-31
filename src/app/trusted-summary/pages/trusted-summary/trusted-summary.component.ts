@@ -24,6 +24,13 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
   orcid: string
   works: SimpleActivityModel[] = []
   unsubscribe = new Subject()
+  affiliationsHover = false
+  worksHover = false
+  peerReviewsHover = false
+  fundsHover = false
+  externalIdentifiersHover = false
+  professionalActivitiesHover = false
+  
   labelValidatedWorks = $localize`:@@summary.validatedWorks:Validated works`
   labelValidatedWork = $localize`:@@summary.validatedWork:Validated work`
   labelSelfAssertedWorks = $localize`:@@summary.selfAssertedWorks:Self-asserted works`
@@ -209,4 +216,5 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
     const offsettedDate = new Date(date.getTime() + offset * 60 * 1000)
     return offsettedDate
   }
+  
 }
