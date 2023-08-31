@@ -30,7 +30,7 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
   fundsHover = false
   externalIdentifiersHover = false
   professionalActivitiesHover = false
-  
+
   labelValidatedWorks = $localize`:@@summary.validatedWorks:Validated works`
   labelValidatedWork = $localize`:@@summary.validatedWork:Validated work`
   labelSelfAssertedWorks = $localize`:@@summary.selfAssertedWorks:Self-asserted works`
@@ -101,7 +101,6 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
         this.creationDateWithOffset = this.dateWithOffset(
           this.trustedSummary.creation
         )
-        console.log('this.creationDateWithOffset', this.creationDateWithOffset)
         // if record was created today
         if (
           this.creationDateWithOffset.toDateString() ===
@@ -216,5 +215,4 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
     const offsettedDate = new Date(date.getTime() + offset * 60 * 1000)
     return offsettedDate
   }
-  
 }

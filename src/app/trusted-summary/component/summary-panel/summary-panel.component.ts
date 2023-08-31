@@ -45,7 +45,6 @@ export class SummaryPanelComponent implements OnInit {
     if (!url) {
       return
     }
-    console.log(url)
     this._window.open(url, '_blank')
   }
 }
