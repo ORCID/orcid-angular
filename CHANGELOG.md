@@ -1,3 +1,9 @@
+## v2.39.4 - 2023-08-31
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.39.3...v2.39.4)
+
+- [#2057](https://github.com/ORCID/orcid-angular/pull/2057): 8823 qa hover effects and styling in summary page not implemented
+
 ## v2.39.3 - 2023-08-31
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.39.2...v2.39.3)
