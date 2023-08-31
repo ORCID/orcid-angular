@@ -75,7 +75,6 @@ export class FundingStackComponent implements OnInit {
     value.fundings.forEach((funding) => {
       this.setDefaultPanelDetailsState(funding, force)
       this.setDefaultPanelsDisplay(funding, force)
-      this.fetchOrganizationData(funding, force)
     })
   }
 
@@ -101,8 +100,8 @@ export class FundingStackComponent implements OnInit {
     }
   }
 
-  private fetchOrganizationData(funding: Funding, force = false) {
-    if (funding.disambiguationSource) {
+  private fetchOrganizationData(funding: Funding) {
+    if (funding.disambiguationSource && !this.orgDisambiguated[funding.putCode.value]) {
       this._organizationsService
         .getOrgDisambiguated(
           funding.disambiguationSource.value,
@@ -145,6 +144,7 @@ export class FundingStackComponent implements OnInit {
           this._fundingStack.fundings[index].fullyLoaded = true
         })
     }
+    this.fetchOrganizationData(funding)
   }
 
   /**

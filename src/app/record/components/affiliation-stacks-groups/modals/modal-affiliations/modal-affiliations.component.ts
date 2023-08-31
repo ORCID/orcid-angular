@@ -342,14 +342,14 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
         } as Organization
       }
       this.organization = {
-        value: this.affiliation.affiliationName.value,
+        value: this.affiliation.affiliationName?.value,
       } as Organization
-      this.city = this.affiliation.city.value
-      this.region = this.affiliation.region.value
-      this.country = this.affiliation.country.value
-      this.department = this.affiliation.departmentName.value
-      this.title = this.affiliation.roleTitle.value
-      this.link = this.affiliation.url.value
+      this.city = this.affiliation.city?.value
+      this.region = this.affiliation.region?.value
+      this.country = this.affiliation.country?.value
+      this.department = this.affiliation.departmentName?.value
+      this.title = this.affiliation.roleTitle?.value
+      this.link = this.affiliation.url?.value
     }
   }
 
