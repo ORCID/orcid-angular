@@ -154,7 +154,10 @@ export class AffiliationStackComponent implements OnInit, OnDestroy {
     this.panelDetailsState[putCode].state =
       !this.panelDetailsState[putCode].state
 
-    if (this.panelDetailsState[putCode].state && !this.orgDisambiguated[putCode]) {
+    if (
+      this.panelDetailsState[putCode].state &&
+      !this.orgDisambiguated[putCode]
+    ) {
       this.getMoreDetailsAndOrganizationDisambiguatedFromTheServer(
         affiliation
       ).subscribe((response) => {

@@ -101,7 +101,10 @@ export class FundingStackComponent implements OnInit {
   }
 
   private fetchOrganizationData(funding: Funding) {
-    if (funding.disambiguationSource && !this.orgDisambiguated[funding.putCode.value]) {
+    if (
+      funding.disambiguationSource &&
+      !this.orgDisambiguated[funding.putCode.value]
+    ) {
       this._organizationsService
         .getOrgDisambiguated(
           funding.disambiguationSource.value,
