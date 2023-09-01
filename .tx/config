@@ -183,3 +183,10 @@ source_lang  = en
 type         = UNICODEPROPERTIES
 minimum_perc = 0
 
+
+[o:orcid-inc-1:p:orcid-angular:r:src-summary]
+file_filter  = src/locale/properties/summary/summary.<lang>.properties
+source_file  = src/locale/properties/summary/summary.en.properties
+source_lang  = en
+type         = UNICODEPROPERTIES
+minimum_perc = 0
