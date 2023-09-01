@@ -117,7 +117,7 @@ $gutter-width: 16px !default;
     flex-wrap: wrap;
     float: left;
     box-sizing: border-box;
-    padding: 0 $gutter-width / 2;
+    padding: 0 $gutter-width;
     min-height: 1px;
 
     &[class*='push-'],

@@ -15,12 +15,14 @@
       <div class="header">
         <div class="header-title">
           <mat-icon
+            aria-hidden="false"
             [attr.aria-label]="validatedSourceAriaLabel"
             class="verified"
             *ngIf="activity.validated"
             >check_circle</mat-icon
           >
           <mat-icon
+            aria-hidden="false"
             class="margin-compensation"
             [attr.aria-label]="selftAssertedSource"
             *ngIf="!activity.validated"
