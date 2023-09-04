@@ -1,3 +1,9 @@
+## v2.39.6 - 2023-09-04
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.39.5...v2.39.6)
+
+- [#2059](https://github.com/ORCID/orcid-angular/pull/2059): Set canonical url to public page
+
 ## v2.39.5 - 2023-09-01
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.39.4...v2.39.5)
