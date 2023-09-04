@@ -303,13 +303,4 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     })
     this.loadingUserRecord = !!missingValues.length
   }
-
-  removeCanonicalUrl() {
-    this.doc.head.querySelectorAll('link').forEach((link) => {
-      let attributeRel = link.getAttribute('rel')
-      if (attributeRel && attributeRel == 'canonical') {
-        link.parentNode.removeChild(link)
-      }
-    })
-  }
 }

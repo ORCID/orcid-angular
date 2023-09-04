@@ -13,7 +13,7 @@ export class CanonocalUrlService {
     this.init()
   }
 
-  init() {
+  private init() {
     this._router.events
       .pipe(
         filter((event) => event instanceof NavigationEnd),
