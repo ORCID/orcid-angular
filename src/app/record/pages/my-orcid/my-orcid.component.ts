@@ -5,7 +5,7 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core'
-import { ActivatedRoute, Router } from '@angular/router'
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { ORCID_REGEXP } from 'src/app/constants'
 import { first, switchMap, take, takeUntil, tap } from 'rxjs/operators'
@@ -21,6 +21,10 @@ import { WINDOW } from 'src/app/cdk/window'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { HelpHeroService } from 'src/app/core/help-hero/help-hero.service'
 import { ScriptService } from '../../../core/crazy-egg/script.service'
+import { DOCUMENT } from '@angular/common'
+import { environment } from 'src/environments/environment'
+import { filter, map } from 'rxjs/operators'
+import { CanonocalUrlService } from 'src/app/core/canonocal-url/canonocal-url.service'
 
 @Component({
   selector: 'app-my-orcid',
@@ -80,7 +84,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     @Inject(WINDOW) private window: Window,
     private _togglz: TogglzService,
     private _scriptService: ScriptService,
-    private _changeDetectorRef: ChangeDetectorRef
+    private _canonocalUrlService: CanonocalUrlService
   ) {}
 
   private checkIfThisIsAPublicOrcid() {
@@ -106,6 +110,11 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.checkIfThisIsAPublicOrcid()
     this.affiliations = 0
+
+    if (this.publicOrcid) {
+      this._canonocalUrlService.setCanonicalUrl(this.publicOrcid)
+    }
+
     // Remove fragment temporally, to adding back when items have loaded
     this.route.fragment.pipe(take(1)).subscribe((fragment) => {
       if (fragment) {
