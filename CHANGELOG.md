@@ -1,3 +1,9 @@
+## v2.39.7 - 2023-09-04
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.39.6...v2.39.7)
+
+- [#2060](https://github.com/ORCID/orcid-angular/pull/2060): Update support url
+
 ## v2.39.6 - 2023-09-04
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.39.5...v2.39.6)
