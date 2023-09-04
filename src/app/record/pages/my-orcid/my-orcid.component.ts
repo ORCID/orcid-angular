@@ -5,7 +5,7 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core'
-import { ActivatedRoute, Router } from '@angular/router'
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { ORCID_REGEXP } from 'src/app/constants'
 import { first, switchMap, take, takeUntil, tap } from 'rxjs/operators'
@@ -23,6 +23,7 @@ import { HelpHeroService } from 'src/app/core/help-hero/help-hero.service'
 import { ScriptService } from '../../../core/crazy-egg/script.service'
 import { DOCUMENT } from '@angular/common'
 import { environment } from 'src/environments/environment'
+import { filter, map} from 'rxjs/operators'
 
 @Component({
   selector: 'app-my-orcid',
@@ -113,10 +114,18 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     // Set the canonical URL only on public pages
     if(this.publicOrcid) {
       this.setCanonicalUrl();
-    } else {
-      // Remove the canonical URL if it is not a public page
-      this.removeCanonicalUrl();
-    }
+    } 
+
+    // Verify the canonical URL is removed on non public pages
+    this._router.events.pipe(
+      filter((event) => event instanceof NavigationEnd),
+      map((event: NavigationEnd) => event as NavigationEnd)
+    ).subscribe((event) => {
+      if(event?.url.startsWith('/my-orcid') ||
+      !ORCID_REGEXP.test(event?.url)) {
+        this.removeCanonicalUrl();
+      }
+    });
 
     // Remove fragment temporally, to adding back when items have loaded
     this.route.fragment.pipe(take(1)).subscribe((fragment) => {
