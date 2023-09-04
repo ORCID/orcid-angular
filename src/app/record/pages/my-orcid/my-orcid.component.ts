@@ -109,9 +109,15 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.checkIfThisIsAPublicOrcid()
     this.affiliations = 0
+    
+    // Set the canonical URL only on public pages
     if(this.publicOrcid) {
       this.setCanonicalUrl();
+    } else {
+      // Remove the canonical URL if it is not a public page
+      this.removeCanonicalUrl();
     }
+
     // Remove fragment temporally, to adding back when items have loaded
     this.route.fragment.pipe(take(1)).subscribe((fragment) => {
       if (fragment) {
@@ -300,10 +306,21 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   }
 
   setCanonicalUrl() {
+    // Just in case there is another canonical link already
+    this.removeCanonicalUrl();  
     let canonicalUrl = 'https:' + environment.BASE_URL + (environment.BASE_URL.endsWith('/') ? this.publicOrcid : '/' + this.publicOrcid)
     let link: HTMLLinkElement = this.doc.createElement('link');
     link.setAttribute('rel', 'canonical');    
     link.setAttribute('href', canonicalUrl);
     this.doc.head.appendChild(link);
+  }
+
+  removeCanonicalUrl() {
+    this.doc.head.querySelectorAll("link").forEach(link => {      
+      let attributeRel = link.getAttribute('rel')
+      if(attributeRel && attributeRel == 'canonical') {
+        link.parentNode.removeChild(link);        
+      }
+     })
   }
 }
