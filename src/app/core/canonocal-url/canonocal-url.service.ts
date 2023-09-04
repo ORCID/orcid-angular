@@ -39,12 +39,6 @@ export class CanonocalUrlService {
       (environment.BASE_URL.endsWith('/') ? publicOrcid : '/' + publicOrcid)
     let link: HTMLLinkElement = this.doc.createElement('link')
 
-    console.log(
-      '__________________________ canonical url __________________________'
-    )
-    console.log(environment.BASE_URL)
-    console.log(canonicalUrl)
-
     link.setAttribute('rel', 'canonical')
     link.setAttribute('href', canonicalUrl)
     this.doc.head.appendChild(link)

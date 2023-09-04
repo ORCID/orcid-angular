@@ -44,8 +44,6 @@ export class AppModule {
 
   private initializeApp() {
     environment.BASE_URL = this.getCurrentDomain()
-
-    console.log('>>>>>>>>>>>>> ', environment.BASE_URL)
   }
 
   getCurrentDomain() {
