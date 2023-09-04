@@ -110,19 +110,21 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.checkIfThisIsAPublicOrcid()
     this.affiliations = 0
-    
+        
     // Set the canonical URL only on public pages
     if(this.publicOrcid) {
       this.setCanonicalUrl();
-    } 
+    }
 
-    // Verify the canonical URL is removed on non public pages
     this._router.events.pipe(
       filter((event) => event instanceof NavigationEnd),
       map((event: NavigationEnd) => event as NavigationEnd)
     ).subscribe((event) => {
-      if(event?.url.startsWith('/my-orcid') ||
-      !ORCID_REGEXP.test(event?.url)) {
+      if(ORCID_REGEXP.test(event?.url)) {
+        // Set the canonical url on public pages
+        this.setCanonicalUrl();
+      } else {
+        // Verify the canonical url is not set on other pages
         this.removeCanonicalUrl();
       }
     });
