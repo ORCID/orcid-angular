@@ -17,7 +17,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http'
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     CoreModule,
     BrowserAnimationsModule,
@@ -44,6 +44,8 @@ export class AppModule {
 
   private initializeApp() {
     environment.BASE_URL = this.getCurrentDomain()
+
+    console.log('>>>>>>>>>>>>> ', environment.BASE_URL)
   }
 
   getCurrentDomain() {

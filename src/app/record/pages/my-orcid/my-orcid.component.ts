@@ -23,7 +23,8 @@ import { HelpHeroService } from 'src/app/core/help-hero/help-hero.service'
 import { ScriptService } from '../../../core/crazy-egg/script.service'
 import { DOCUMENT } from '@angular/common'
 import { environment } from 'src/environments/environment'
-import { filter, map} from 'rxjs/operators'
+import { filter, map } from 'rxjs/operators'
+import { CanonocalUrlService } from 'src/app/core/canonocal-url/canonocal-url.service'
 
 @Component({
   selector: 'app-my-orcid',
@@ -84,7 +85,8 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     private _togglz: TogglzService,
     private _scriptService: ScriptService,
     private _changeDetectorRef: ChangeDetectorRef,
-    @Inject(DOCUMENT) private doc: any
+    @Inject(DOCUMENT) private doc: any,
+    private _canonocalUrlService: CanonocalUrlService
   ) {}
 
   private checkIfThisIsAPublicOrcid() {
@@ -110,24 +112,10 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.checkIfThisIsAPublicOrcid()
     this.affiliations = 0
-        
-    // Set the canonical URL only on public pages
-    if(this.publicOrcid) {
-      this.setCanonicalUrl();
-    }
 
-    this._router.events.pipe(
-      filter((event) => event instanceof NavigationEnd),
-      map((event: NavigationEnd) => event as NavigationEnd)
-    ).subscribe((event) => {
-      if(ORCID_REGEXP.test(event?.url)) {
-        // Set the canonical url on public pages
-        this.setCanonicalUrl();
-      } else {
-        // Verify the canonical url is not set on other pages
-        this.removeCanonicalUrl();
-      }
-    });
+    if (this.publicOrcid) {
+      this._canonocalUrlService.setCanonicalUrl(this.publicOrcid)
+    }
 
     // Remove fragment temporally, to adding back when items have loaded
     this.route.fragment.pipe(take(1)).subscribe((fragment) => {
@@ -171,7 +159,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
           }
 
           this.userNotFound = userRecord?.userInfo?.USER_NOT_FOUND
-          this.userRecord = userRecord                    
+          this.userRecord = userRecord
 
           if (!this.publicOrcid && userRecord?.userInfo) {
             this.setMyOrcidIdQueryParameter()
@@ -316,22 +304,12 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     this.loadingUserRecord = !!missingValues.length
   }
 
-  setCanonicalUrl() {
-    // Just in case there is another canonical link already
-    this.removeCanonicalUrl();  
-    let canonicalUrl = 'https:' + environment.BASE_URL + (environment.BASE_URL.endsWith('/') ? this.publicOrcid : '/' + this.publicOrcid)
-    let link: HTMLLinkElement = this.doc.createElement('link');
-    link.setAttribute('rel', 'canonical');    
-    link.setAttribute('href', canonicalUrl);
-    this.doc.head.appendChild(link);
-  }
-
   removeCanonicalUrl() {
-    this.doc.head.querySelectorAll("link").forEach(link => {      
+    this.doc.head.querySelectorAll('link').forEach((link) => {
       let attributeRel = link.getAttribute('rel')
-      if(attributeRel && attributeRel == 'canonical') {
-        link.parentNode.removeChild(link);        
+      if (attributeRel && attributeRel == 'canonical') {
+        link.parentNode.removeChild(link)
       }
-     })
+    })
   }
 }
