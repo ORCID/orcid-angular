@@ -21,6 +21,8 @@ import { WINDOW } from 'src/app/cdk/window'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { HelpHeroService } from 'src/app/core/help-hero/help-hero.service'
 import { ScriptService } from '../../../core/crazy-egg/script.service'
+import { DOCUMENT } from '@angular/common'
+import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-my-orcid',
@@ -80,7 +82,8 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     @Inject(WINDOW) private window: Window,
     private _togglz: TogglzService,
     private _scriptService: ScriptService,
-    private _changeDetectorRef: ChangeDetectorRef
+    private _changeDetectorRef: ChangeDetectorRef,
+    @Inject(DOCUMENT) private doc: any
   ) {}
 
   private checkIfThisIsAPublicOrcid() {
@@ -106,6 +109,9 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.checkIfThisIsAPublicOrcid()
     this.affiliations = 0
+    if(this.publicOrcid) {
+      this.setCanonicalUrl();
+    }
     // Remove fragment temporally, to adding back when items have loaded
     this.route.fragment.pipe(take(1)).subscribe((fragment) => {
       if (fragment) {
@@ -148,7 +154,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
           }
 
           this.userNotFound = userRecord?.userInfo?.USER_NOT_FOUND
-          this.userRecord = userRecord
+          this.userRecord = userRecord                    
 
           if (!this.publicOrcid && userRecord?.userInfo) {
             this.setMyOrcidIdQueryParameter()
@@ -291,5 +297,13 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
       }
     })
     this.loadingUserRecord = !!missingValues.length
+  }
+
+  setCanonicalUrl() {
+    let canonicalUrl = 'https:' + environment.BASE_URL + (environment.BASE_URL.endsWith('/') ? this.publicOrcid : '/' + this.publicOrcid)
+    let link: HTMLLinkElement = this.doc.createElement('link');
+    link.setAttribute('rel', 'canonical');    
+    link.setAttribute('href', canonicalUrl);
+    this.doc.head.appendChild(link);
   }
 }
