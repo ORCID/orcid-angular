@@ -84,8 +84,6 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     @Inject(WINDOW) private window: Window,
     private _togglz: TogglzService,
     private _scriptService: ScriptService,
-    private _changeDetectorRef: ChangeDetectorRef,
-    @Inject(DOCUMENT) private doc: any,
     private _canonocalUrlService: CanonocalUrlService
   ) {}
 
