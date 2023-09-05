@@ -1,3 +1,11 @@
+## v2.39.8 - 2023-09-05
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.39.7...v2.39.8)
+
+### Fix
+
+- Add `data-nosnippet` attribute to one trust cookie consent modal (#2061)
+
 ## v2.39.7 - 2023-09-04
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.39.6...v2.39.7)
