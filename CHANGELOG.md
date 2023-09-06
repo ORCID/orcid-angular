@@ -1,3 +1,9 @@
+## v2.39.9 - 2023-09-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.39.8...v2.39.9)
+
+- [#2062](https://github.com/ORCID/orcid-angular/pull/2062): leo/fix-footer-issue
+
 ## v2.39.8 - 2023-09-05
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.39.7...v2.39.8)
