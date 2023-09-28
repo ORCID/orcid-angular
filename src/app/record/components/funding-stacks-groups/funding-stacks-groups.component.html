@@ -15,7 +15,7 @@
     [isPublicRecord]="isPublicRecord"
     [(expandedContent)]="expandedContent['FUNDING']"
     (expandedContentChange)="expandedContentChange.emit(expandedContent)"
-    [sortTypes]="['date', 'title', 'type']"
+    [sortTypes]="['date', 'title', 'type', 'source']"
     [sortType]="'date'"
     (sort)="sortEvent($event)"
   >
