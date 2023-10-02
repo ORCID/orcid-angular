@@ -89,7 +89,10 @@ export class AffiliationsSortService {
 
           if (by === 'source') {
             affiliationGroup.sort((a, b) => {
-              return Number(AffiliationsSortService.isSelfAsserted(a, orcid)) - Number(AffiliationsSortService.isSelfAsserted(b, orcid))
+              return (
+                Number(AffiliationsSortService.isSelfAsserted(a, orcid)) -
+                Number(AffiliationsSortService.isSelfAsserted(b, orcid))
+              )
             })
             if (!ascending) {
               affiliationGroup.reverse()
@@ -203,7 +206,10 @@ export class AffiliationsSortService {
       })
   }
 
-  private static isSelfAsserted(affiliationGroup: AffiliationGroup, orcid: string): boolean {
+  private static isSelfAsserted(
+    affiliationGroup: AffiliationGroup,
+    orcid: string
+  ): boolean {
     return affiliationGroup.defaultAffiliation.source === orcid
   }
 }
