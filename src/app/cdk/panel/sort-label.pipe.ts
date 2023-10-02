@@ -12,6 +12,7 @@ export class SortLabelPipe implements PipeTransform {
     date: $localize`:@@share.sortDate:Date`,
     type: $localize`:@@share.sortType:Type`,
     order: $localize`:@@share.sortOrderv2:Publication/Grant title`,
+    source: $localize`:@@shared.source:Source`,
   }
   transform(value: SortOrderType): string {
     return this.SortOrderTypeLabel[value]

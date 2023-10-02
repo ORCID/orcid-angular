@@ -1,7 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { first, takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
-import { MatDialog } from '@angular/material/dialog'
 import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
 import { RecordService } from 'src/app/core/record/record.service'
 import { PlatformInfoService } from '../platform-info'

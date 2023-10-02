@@ -7,6 +7,7 @@ export type SortOrderType =
   | 'date'
   | 'type'
   | 'order'
+  | 'source'
 
 export interface SortData {
   direction: SortOrderDirection

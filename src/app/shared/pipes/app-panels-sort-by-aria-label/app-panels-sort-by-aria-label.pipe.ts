@@ -17,6 +17,8 @@ export class AppPanelsSortByAriaLabelPipe implements PipeTransform {
         return getDateLabelByType(type)
       case 'type':
         return getTypeLabelByType(type)
+      case 'source':
+        return getSourceLabelByType(type)
       case 'order':
         return $localize`:@@shared.peerReviewsSortOrderv2:Sort peer review by Publication/Grant title`
     }
@@ -102,5 +104,21 @@ const getDateLabelByType = (type: string): string => {
       return $localize`:@@shared.worksSortDate:Sort works by date`
     case 'research-resources':
       return $localize`:@@shared.researchSortDate:Sort research resources by date`
+  }
+}
+
+const getSourceLabelByType = (type: string): string => {
+  switch (type) {
+    case 'employment':
+      return $localize`:@@shared.employmentSortSource:Sort employment by source`
+    case 'education':
+    case 'qualification':
+      return $localize`:@@shared.educationSortSource:Sort education and qualifications by source`
+    case 'professional-activities':
+      return $localize`:@@shared.professionalActivitiesSortSource:Sort professional activities by source`
+    case 'funding':
+      return $localize`:@@shared.fundingSortSource:Sort funding by source`
+    case 'works':
+      return $localize`:@@shared.worksSortSource:Sort works by source`
   }
 }

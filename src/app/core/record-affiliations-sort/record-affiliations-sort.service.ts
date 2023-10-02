@@ -4,7 +4,6 @@ import {
   AffiliationUIGroup,
   AffiliationGroup,
   AffiliationType,
-  AffiliationTypeValue,
 } from 'src/app/types/record-affiliation.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
 
@@ -21,7 +20,8 @@ export class AffiliationsSortService {
       value,
       userRecordContext?.sortAsc,
       userRecordContext?.sort,
-      type
+      type,
+      userRecordContext?.publicRecordId || userRecordContext?.privateRecordId
     )
   }
 
@@ -29,7 +29,8 @@ export class AffiliationsSortService {
     affiliationGroups: AffiliationUIGroup[],
     ascending = false,
     by = 'end',
-    type = null
+    type = null,
+    orcid: string
   ): AffiliationUIGroup[] {
     if (type === 'PROFESSIONAL_ACTIVITIES' && by === 'type') {
       const affiliations = affiliationGroups.filter(
@@ -80,6 +81,15 @@ export class AffiliationsSortService {
               return (
                 '' + a.defaultAffiliation.affiliationName.value
               ).localeCompare('' + b.defaultAffiliation.affiliationName.value)
+            })
+            if (!ascending) {
+              affiliationGroup.reverse()
+            }
+          }
+
+          if (by === 'source') {
+            affiliationGroup.sort((a, b) => {
+              return Number(AffiliationsSortService.isSelfAsserted(a, orcid)) - Number(AffiliationsSortService.isSelfAsserted(b, orcid))
             })
             if (!ascending) {
               affiliationGroup.reverse()
@@ -191,5 +201,9 @@ export class AffiliationsSortService {
       .sort((a, b) => {
         return this.sortByDate(a, b, false, 'end')
       })
+  }
+
+  private static isSelfAsserted(affiliationGroup: AffiliationGroup, orcid: string): boolean {
+    return affiliationGroup.defaultAffiliation.source === orcid
   }
 }
