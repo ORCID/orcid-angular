@@ -47,7 +47,7 @@ describe('GoogleTagManagerService', () => {
     }
   ))
 
- it('should be able to add script element and throw error because cannot connect with GTM', inject(
+  it('should be able to add script element and throw error because cannot connect with GTM', inject(
     [GoogleTagManagerService],
     (service: GoogleTagManagerService) => {
       service.addGtmToDom().subscribe(
@@ -60,7 +60,7 @@ describe('GoogleTagManagerService', () => {
         },
         (error) => {
           expect(error).toEqual({
-            name: 'GTM - Error'
+            name: 'GTM - Error',
           })
         }
       )
