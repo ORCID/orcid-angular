@@ -1,3 +1,15 @@
+## v2.40.3 - 2023-10-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.40.2...v2.40.3)
+
+## v2.40.2 - 2023-10-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.40.0...v2.40.2)
+
+### Feature
+
+- Add new source sorting option for affiliations, funding and … (#2064)
+
 ## v2.40.0 - 2023-09-07
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.39.10...v2.40.0)

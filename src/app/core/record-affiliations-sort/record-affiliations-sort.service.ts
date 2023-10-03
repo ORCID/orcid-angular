@@ -206,10 +206,8 @@ export class AffiliationsSortService {
       })
   }
 
-  private static isSelfAsserted(
-    affiliationGroup: AffiliationGroup,
-    orcid: string
-  ): boolean {
-    return affiliationGroup.defaultAffiliation.source === orcid
+  private static isSelfAsserted(affiliationGroup: AffiliationGroup, orcid: string): boolean {
+    const obo = !!(affiliationGroup.defaultAffiliation.assertionOriginName || affiliationGroup.defaultAffiliation.assertionOriginOrcid)
+    return obo ? obo : affiliationGroup.defaultAffiliation.source === orcid
   }
 }
