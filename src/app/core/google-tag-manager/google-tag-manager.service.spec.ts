@@ -47,7 +47,7 @@ describe('GoogleTagManagerService', () => {
     }
   ))
 
- it('should be able to add script element and throw error because cannot connect with GTM', inject(
+  it('should be able to add script element and throw error because cannot connect with GTM', inject(
     [GoogleTagManagerService],
     (service: GoogleTagManagerService) => {
       service.addGtmToDom().subscribe(
@@ -59,9 +59,11 @@ describe('GoogleTagManagerService', () => {
           )
         },
         (error) => {
-          expect(error).toEqual({
-            name: 'GTM - Error'
+          expect(error).toEqual(jasmine.objectContaining({
+            name: 'GTM - Error',
+            message: jasmine.any(String),
           })
+          )
         }
       )
     }
@@ -76,9 +78,11 @@ describe('GoogleTagManagerService', () => {
           expect(browserGlobals.windowRef().dataLayer[2]).toBeFalsy()
         },
         (error) => {
-          expect(error).toEqual({
+          expect(error).toEqual(jasmine.objectContaining({
             name: 'GTM - Error',
+            message: jasmine.any(String),
           })
+          )
         }
       )
     }
