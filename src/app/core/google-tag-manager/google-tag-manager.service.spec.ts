@@ -78,7 +78,6 @@ describe('GoogleTagManagerService', () => {
         (error) => {
           expect(error).toEqual({
             name: 'GTM - Error',
-            message: 'Unable to add GTM',
           })
         }
       )
