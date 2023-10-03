@@ -59,10 +59,11 @@ describe('GoogleTagManagerService', () => {
           )
         },
         (error) => {
-          expect(error).toEqual(jasmine.objectContaining({
-            name: 'GTM - Error',
-            message: jasmine.any(String),
-          })
+          expect(error).toEqual(
+            jasmine.objectContaining({
+              name: 'GTM - Error',
+              message: jasmine.any(String),
+            })
           )
         }
       )
@@ -78,10 +79,11 @@ describe('GoogleTagManagerService', () => {
           expect(browserGlobals.windowRef().dataLayer[2]).toBeFalsy()
         },
         (error) => {
-          expect(error).toEqual(jasmine.objectContaining({
-            name: 'GTM - Error',
-            message: jasmine.any(String),
-          })
+          expect(error).toEqual(
+            jasmine.objectContaining({
+              name: 'GTM - Error',
+              message: jasmine.any(String),
+            })
           )
         }
       )
