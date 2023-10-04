@@ -21,7 +21,7 @@
     [(expandedContent)]="expandedContent['EMPLOYMENT']"
     (expandedContentChange)="expandedContentChange.emit(expandedContent)"
     [isPublicRecord]="isPublicRecord"
-    [sortTypes]="['title', 'start', 'end', 'source']"
+    [sortTypes]="sortTypes"
     [sortType]="'end'"
     (sort)="sortEvent($event, 'EMPLOYMENT')"
     id="cy-affiliation-employment"

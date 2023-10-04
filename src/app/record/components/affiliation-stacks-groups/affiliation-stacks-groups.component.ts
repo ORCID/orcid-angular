@@ -15,7 +15,7 @@ import {
   UserRecord,
   UserRecordOptions,
 } from 'src/app/types/record.local'
-import { SortData } from 'src/app/types/sort'
+import { SortData, SortOrderType } from 'src/app/types/sort'
 
 import { UserInfo } from '../../../types'
 import { TogglzService } from '../../../core/togglz/togglz.service'
@@ -54,6 +54,8 @@ export class AffiliationStacksGroupsComponent implements OnInit {
   @Output()
   expandedContentChange: EventEmitter<MainPanelsState> = new EventEmitter()
   professionalActivitiesTogglz = false
+  sourceSorting = false
+  sortTypes: SortOrderType[] = ['title', 'start', 'end']
 
   constructor(
     private _record: RecordService,
@@ -66,6 +68,10 @@ export class AffiliationStacksGroupsComponent implements OnInit {
       .getStateOf('PROFESSIONAL_ACTIVITIES')
       .pipe(take(1))
       .subscribe((value) => (this.professionalActivitiesTogglz = value))
+    this._togglz
+       .getStateOf('SOURCE_SORTING')
+       .pipe(take(1))
+       .subscribe((value) => (this.sourceSorting = value))
     this.$loading = this._recordAffiliationService.$loading
     this._record
       .getRecord({
@@ -106,6 +112,9 @@ export class AffiliationStacksGroupsComponent implements OnInit {
           }
         }
       })
+      if (this.sourceSorting) {
+        this.sortTypes.push('source')
+      }
   }
 
   trackByProfileAffiliationUiGroups(index, item: AffiliationUIGroup) {
