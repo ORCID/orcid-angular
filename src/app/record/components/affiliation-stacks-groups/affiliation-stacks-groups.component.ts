@@ -54,7 +54,6 @@ export class AffiliationStacksGroupsComponent implements OnInit {
   @Output()
   expandedContentChange: EventEmitter<MainPanelsState> = new EventEmitter()
   professionalActivitiesTogglz = false
-  sourceSorting = false
   sortTypes: SortOrderType[] = ['title', 'start', 'end']
 
   constructor(
@@ -71,7 +70,11 @@ export class AffiliationStacksGroupsComponent implements OnInit {
     this._togglz
        .getStateOf('SOURCE_SORTING')
        .pipe(take(1))
-       .subscribe((value) => (this.sourceSorting = value))
+       .subscribe((sourceSortingTogglz: boolean) => {
+         if (sourceSortingTogglz) {
+           this.sortTypes.push('source')
+         }
+       })
     this.$loading = this._recordAffiliationService.$loading
     this._record
       .getRecord({
@@ -112,9 +115,6 @@ export class AffiliationStacksGroupsComponent implements OnInit {
           }
         }
       })
-      if (this.sourceSorting) {
-        this.sortTypes.push('source')
-      }
   }
 
   trackByProfileAffiliationUiGroups(index, item: AffiliationUIGroup) {

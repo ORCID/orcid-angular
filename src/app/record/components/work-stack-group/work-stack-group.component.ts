@@ -128,7 +128,6 @@ export class WorkStackGroupComponent implements OnInit {
   platform: PlatformInfo
   selectedWorks: string[] = []
   selectAll: false
-  sourceSorting = false
   sortTypes: SortOrderType[] = ['title', 'start', 'end']
 
   @ViewChildren('selectAllCheckbox') selectAllCheckbox: MatCheckbox
@@ -147,9 +146,13 @@ export class WorkStackGroupComponent implements OnInit {
 
   ngOnInit(): void {
     this._togglz
-       .getStateOf('SOURCE_SORTING')
-       .pipe(take(1))
-       .subscribe((value) => (this.sourceSorting = value))
+      .getStateOf('SOURCE_SORTING')
+      .pipe(take(1))
+      .subscribe((sourceSortingTogglz: boolean) => {
+        if (sourceSortingTogglz) {
+          this.sortTypes.push('source')
+        }
+      })
     this.$loading = this._works.$loading
     this._record
       .getRecord({ publicRecordId: this.isPublicRecord })
@@ -171,9 +174,6 @@ export class WorkStackGroupComponent implements OnInit {
     this._platform.get().subscribe((platform) => {
       this.platform = platform
     })
-    if (this.sourceSorting) {
-      this.sortTypes.push('source')
-    }
   }
 
   private getGroupingSuggestions() {
