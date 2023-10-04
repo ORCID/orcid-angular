@@ -68,13 +68,13 @@ export class AffiliationStacksGroupsComponent implements OnInit {
       .pipe(take(1))
       .subscribe((value) => (this.professionalActivitiesTogglz = value))
     this._togglz
-       .getStateOf('SOURCE_SORTING')
-       .pipe(take(1))
-       .subscribe((sourceSortingTogglz: boolean) => {
-         if (sourceSortingTogglz) {
-           this.sortTypes.push('source')
-         }
-       })
+      .getStateOf('SOURCE_SORTING')
+      .pipe(take(1))
+      .subscribe((sourceSortingTogglz: boolean) => {
+        if (sourceSortingTogglz) {
+          this.sortTypes.push('source')
+        }
+      })
     this.$loading = this._recordAffiliationService.$loading
     this._record
       .getRecord({
