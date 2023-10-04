@@ -210,7 +210,8 @@ export class AffiliationsSortService {
     affiliationGroup: AffiliationGroup,
     orcid: string
   ): boolean {
-    const obo = affiliationGroup.defaultAffiliation.assertionOriginOrcid === orcid
+    const obo =
+      affiliationGroup.defaultAffiliation.assertionOriginOrcid === orcid
     return obo ? obo : affiliationGroup.defaultAffiliation.source === orcid
   }
 }
