@@ -1,3 +1,11 @@
+## v2.40.6 - 2023-10-04
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.40.5...v2.40.6)
+
+### Fix
+
+- Only return `on behalf of` as true if assertion origin orcid its the user (#2068)
+
 ## v2.40.5 - 2023-10-03
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.40.4...v2.40.5)
