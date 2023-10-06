@@ -86,7 +86,7 @@
     [(expandedContent)]="expandedContent['EDUCATION_AND_QUALIFICATION']"
     (expandedContentChange)="expandedContentChange.emit(expandedContent)"
     [isPublicRecord]="isPublicRecord"
-    [sortTypes]="educationAndQualification"
+    [sortTypes]="educationAndQualificationSortTypes"
     [sortType]="'end'"
     (sort)="sortEvent($event, 'EDUCATION_AND_QUALIFICATION')"
     id="cy-affiliation-education-and-qualification"
