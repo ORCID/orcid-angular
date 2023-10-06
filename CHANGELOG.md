@@ -1,3 +1,11 @@
+## v2.42.2 - 2023-10-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.42.1...v2.42.2)
+
+### Fix
+
+- Remove one trust auto-blocking blocks google analytics even if config was set to ignore (#2072)
+
 ## v2.42.1 - 2023-10-06
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.42.0...v2.42.1)
