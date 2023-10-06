@@ -1,3 +1,11 @@
+## v2.42.0 - 2023-10-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.41.0...v2.42.0)
+
+### Fix
+
+- Add one trust auto-blocking script and remove unused attributes in gtag (#2070)
+
 ## v2.41.0 - 2023-10-04
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.40.6...v2.41.0)
