@@ -1,3 +1,9 @@
+## v2.42.1 - 2023-10-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.42.0...v2.42.1)
+
+- [#2071](https://github.com/ORCID/orcid-angular/pull/2071): Enable Sort Togglz For Professional & Educational activities
+
 ## v2.42.0 - 2023-10-06
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.41.0...v2.42.0)
