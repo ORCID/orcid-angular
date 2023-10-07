@@ -5,7 +5,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core'
-import { MatDialog } from '@angular/material/dialog'
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
 import { Observable, Subject } from 'rxjs'
 import { takeUntil, tap } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
