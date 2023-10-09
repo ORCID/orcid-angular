@@ -1,3 +1,11 @@
+## v2.42.4 - 2023-10-09
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.42.3...v2.42.4)
+
+### Fix
+
+- Rollback onetrust auto-blocking and remove google consent mode (#2074)
+
 ## v2.42.3 - 2023-10-09
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.42.2...v2.42.3)
