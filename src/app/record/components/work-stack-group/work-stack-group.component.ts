@@ -15,7 +15,7 @@ import { MatDialog } from '@angular/material/dialog'
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator'
 import { isEmpty } from 'lodash'
 import { Observable, Subject } from 'rxjs'
-import { first } from 'rxjs/operators'
+import { first, take } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import {
   ADD_EVENT_ACTION,
@@ -34,7 +34,7 @@ import {
   UserRecord,
   UserRecordOptions,
 } from 'src/app/types/record.local'
-import { SortData } from 'src/app/types/sort'
+import { SortData, SortOrderType } from 'src/app/types/sort'
 
 import { UserInfo } from '../../../types'
 import { ModalDeleteItemsComponent } from '../modals/modal-delete-item/modal-delete-items.component'
@@ -49,6 +49,7 @@ import { WorkBibtexModalComponent } from './modals/work-bibtex-modal/work-bibtex
 import { ModalCombineWorksWithSelectorComponent } from '../work/modals/modal-combine-works-with-selector/modal-combine-works-with-selector.component'
 import { GroupingSuggestions } from 'src/app/types/works.endpoint'
 import { AnnouncerService } from 'src/app/core/announcer/announcer.service'
+import { TogglzService } from '../../../core/togglz/togglz.service'
 
 @Component({
   selector: 'app-work-stack-group',
@@ -127,6 +128,7 @@ export class WorkStackGroupComponent implements OnInit {
   platform: PlatformInfo
   selectedWorks: string[] = []
   selectAll: false
+  sortTypes: SortOrderType[] = ['title', 'start', 'end']
 
   @ViewChildren('selectAllCheckbox') selectAllCheckbox: MatCheckbox
   @ViewChildren('appWorkStacks') appWorkStacks: QueryList<WorkStackComponent>
@@ -138,10 +140,19 @@ export class WorkStackGroupComponent implements OnInit {
     private _record: RecordService,
     private _works: RecordWorksService,
     private _matPaginatorIntl: MatPaginatorIntl,
-    private _announce: AnnouncerService
+    private _announce: AnnouncerService,
+    private _togglz: TogglzService
   ) {}
 
   ngOnInit(): void {
+    this._togglz
+      .getStateOf('SOURCE_SORTING')
+      .pipe(take(1))
+      .subscribe((sourceSortingTogglz: boolean) => {
+        if (sourceSortingTogglz) {
+          this.sortTypes.push('source')
+        }
+      })
     this.$loading = this._works.$loading
     this._record
       .getRecord({ publicRecordId: this.isPublicRecord })

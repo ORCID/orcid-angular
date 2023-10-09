@@ -1,3 +1,39 @@
+## v2.42.2 - 2023-10-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.42.1...v2.42.2)
+
+### Fix
+
+- Remove one trust auto-blocking blocks google analytics even if config was set to ignore (#2072)
+
+## v2.42.1 - 2023-10-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.42.0...v2.42.1)
+
+- [#2071](https://github.com/ORCID/orcid-angular/pull/2071): Enable Sort Togglz For Professional & Educational activities
+
+## v2.42.0 - 2023-10-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.41.0...v2.42.0)
+
+### Fix
+
+- Add one trust auto-blocking script and remove unused attributes in gtag (#2070)
+
+## v2.41.0 - 2023-10-04
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.40.6...v2.41.0)
+
+- [#2069](https://github.com/ORCID/orcid-angular/pull/2069): feature: Add `SOURCE_SORTING` togglz
+
+### Fix
+
+- Add source sorting togglz inside togglz subscribe
+
+### Feature
+
+- Add `SOURCE_SORTING` togglz
+
 ## v2.40.6 - 2023-10-04
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.40.5...v2.40.6)
