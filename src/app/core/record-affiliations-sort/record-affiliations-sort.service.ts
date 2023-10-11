@@ -94,7 +94,7 @@ export class AffiliationsSortService {
                 Number(AffiliationsSortService.isSelfAsserted(b, orcid))
               )
             })
-            if (!ascending) {
+            if (ascending) {
               affiliationGroup.reverse()
             }
           }
