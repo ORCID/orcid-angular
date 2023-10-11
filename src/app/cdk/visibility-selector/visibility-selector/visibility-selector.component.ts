@@ -88,7 +88,6 @@ export class VisibilitySelectorComponent
     this.onTouched = fn
   }
   setDisabledState?(isDisabled: boolean): void {
-    throw new Error('Method not implemented.')
   }
   navigate() {
     this.window.open(
