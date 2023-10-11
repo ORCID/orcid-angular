@@ -1,11 +1,5 @@
 import { Injectable } from '@angular/core'
-import {
-  ActivatedRouteSnapshot,
-  CanActivateChild,
-  Router,
-  RouterStateSnapshot,
-  UrlTree,
-} from '@angular/router'
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router'
 import { Observable } from 'rxjs'
 import { map, take } from 'rxjs/operators'
 import { UserService } from '../core'
@@ -15,7 +9,7 @@ import { OauthService } from '../core/oauth/oauth.service'
 @Injectable({
   providedIn: 'root',
 })
-export class TwoFactorSigninGuard implements CanActivateChild {
+export class TwoFactorSigninGuard  {
   constructor(
     private _userInfo: UserService,
     private _router: Router,

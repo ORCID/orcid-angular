@@ -1,11 +1,5 @@
 import { Injectable } from '@angular/core'
-import {
-  ActivatedRouteSnapshot,
-  CanActivateChild,
-  Router,
-  RouterStateSnapshot,
-  UrlTree,
-} from '@angular/router'
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router'
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 
@@ -15,7 +9,7 @@ import { UserService } from '../core'
 @Injectable({
   providedIn: 'root',
 })
-export class AuthenticatedGuard implements CanActivateChild {
+export class AuthenticatedGuard  {
   constructor(private _userInfo: UserService, private _router: Router) {}
   canActivateChild(
     next: ActivatedRouteSnapshot,
