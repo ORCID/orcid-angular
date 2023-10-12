@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core'
-import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router'
+import {
+  ActivatedRouteSnapshot,
+  Router,
+  RouterStateSnapshot,
+  UrlTree,
+} from '@angular/router'
 import { Observable, of } from 'rxjs'
 import { catchError, map, take } from 'rxjs/operators'
 
@@ -10,7 +15,7 @@ import { OauthService } from '../core/oauth/oauth.service'
 @Injectable({
   providedIn: 'root',
 })
-export class LinkAccountGuard  {
+export class LinkAccountGuard {
   constructor(
     private _userInfo: UserService,
     private _router: Router,

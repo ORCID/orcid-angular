@@ -1,5 +1,10 @@
 import { Inject, Injectable } from '@angular/core'
-import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router'
+import {
+  ActivatedRouteSnapshot,
+  Router,
+  RouterStateSnapshot,
+  UrlTree,
+} from '@angular/router'
 import { forkJoin, Observable } from 'rxjs'
 import { catchError, first, map } from 'rxjs/operators'
 
@@ -13,7 +18,7 @@ import { ErrorHandlerService } from '../core/error-handler/error-handler.service
 @Injectable({
   providedIn: 'root',
 })
-export class ThirdPartySigninCompletedGuard  {
+export class ThirdPartySigninCompletedGuard {
   constructor(
     private _router: Router,
     @Inject(WINDOW) private window: Window,

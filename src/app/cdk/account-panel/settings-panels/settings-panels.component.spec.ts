@@ -2,7 +2,10 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 import { SettingsPanelsComponent } from './settings-panels.component'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
-import { MatLegacyDialog as MatDialog, MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog'
+import {
+  MatLegacyDialog as MatDialog,
+  MatLegacyDialogModule as MatDialogModule,
+} from '@angular/material/legacy-dialog'
 import { WINDOW_PROVIDERS } from '../../window'
 import { PlatformInfoService } from '../../platform-info'
 import { ErrorHandlerService } from '../../../core/error-handler/error-handler.service'

@@ -10,7 +10,10 @@ import {
 } from '@angular/core'
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms'
 import { ErrorStateMatcher } from '@angular/material/core'
-import { MatLegacySelect as MatSelect, MatLegacySelectChange as MatSelectChange } from '@angular/material/legacy-select'
+import {
+  MatLegacySelect as MatSelect,
+  MatLegacySelectChange as MatSelectChange,
+} from '@angular/material/legacy-select'
 import { WorkIdType, WorkRelationships } from 'src/app/types/works.endpoint'
 
 @Component({

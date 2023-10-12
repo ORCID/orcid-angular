@@ -1,5 +1,10 @@
 import { Inject, Injectable } from '@angular/core'
-import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router'
+import {
+  ActivatedRouteSnapshot,
+  Router,
+  RouterStateSnapshot,
+  UrlTree,
+} from '@angular/router'
 import { forkJoin, NEVER, Observable, of, throwError, timer } from 'rxjs'
 import { catchError, map, switchMap, take, tap, timeout } from 'rxjs/operators'
 
@@ -14,7 +19,7 @@ import { GoogleTagManagerService } from '../core/google-tag-manager/google-tag-m
 @Injectable({
   providedIn: 'root',
 })
-export class AuthorizeGuard  {
+export class AuthorizeGuard {
   lastRedirectUrl: string
   redirectTroughGtmWasCalled: boolean
   constructor(

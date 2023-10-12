@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core'
-import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router'
+import {
+  ActivatedRouteSnapshot,
+  Router,
+  RouterStateSnapshot,
+  UrlTree,
+} from '@angular/router'
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 
@@ -8,7 +13,7 @@ import { UserService } from '../core'
 @Injectable({
   providedIn: 'root',
 })
-export class RegisterGuard  {
+export class RegisterGuard {
   constructor(private _user: UserService, private _router: Router) {}
 
   canActivateChild(

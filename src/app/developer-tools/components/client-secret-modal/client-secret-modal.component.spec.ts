@@ -1,7 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { ClientSecretModalComponent } from './client-secret-modal.component'
-import { MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/legacy-dialog'
+import {
+  MatLegacyDialogRef as MatDialogRef,
+  MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA,
+} from '@angular/material/legacy-dialog'
 
 describe('ClientSecretModalComponent', () => {
   let component: ClientSecretModalComponent

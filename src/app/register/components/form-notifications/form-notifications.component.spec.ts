@@ -3,7 +3,10 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { FormNotificationsComponent } from './form-notifications.component'
 import { RegisterService } from '../../../core/register/register.service'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
-import { MatLegacyDialog as MatDialog, MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog'
+import {
+  MatLegacyDialog as MatDialog,
+  MatLegacyDialogModule as MatDialogModule,
+} from '@angular/material/legacy-dialog'
 import { RouterTestingModule } from '@angular/router/testing'
 import { PlatformInfoService } from '../../../cdk/platform-info'
 import { ErrorHandlerService } from '../../../core/error-handler/error-handler.service'

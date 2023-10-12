@@ -15,7 +15,7 @@ const GUARD_COOKIE_CHECK = 'lang_refresh'
 @Injectable({
   providedIn: 'root',
 })
-export class LanguageGuard  {
+export class LanguageGuard {
   constructor(
     @Inject(LOCALE_ID) public locale: string,
     private _user: UserService,

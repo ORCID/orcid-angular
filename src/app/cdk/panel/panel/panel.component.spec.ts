@@ -8,7 +8,10 @@ import { PlatformInfoService } from '../../platform-info'
 import { ErrorHandlerService } from '../../../core/error-handler/error-handler.service'
 import { SnackbarService } from '../../snackbar/snackbar.service'
 import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
-import { MatLegacyDialog as MatDialog, MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog'
+import {
+  MatLegacyDialog as MatDialog,
+  MatLegacyDialogModule as MatDialogModule,
+} from '@angular/material/legacy-dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { UserService } from '../../../core'
 import { RecordAffiliationService } from '../../../core/record-affiliations/record-affiliations.service'

@@ -10,7 +10,10 @@ import { RouterTestingModule } from '@angular/router/testing'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { WINDOW_PROVIDERS } from '../../../cdk/window'
 import { UntypedFormBuilder } from '@angular/forms'
-import { MatLegacyDialog as MatDialog, MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog'
+import {
+  MatLegacyDialog as MatDialog,
+  MatLegacyDialogModule as MatDialogModule,
+} from '@angular/material/legacy-dialog'
 import { RegisterService } from '../../../core/register/register.service'
 import { UserService } from '../../../core'
 import { SearchService } from '../../../core/search/search.service'

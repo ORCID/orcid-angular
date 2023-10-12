@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core'
-import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router'
+import {
+  ActivatedRouteSnapshot,
+  Router,
+  RouterStateSnapshot,
+  UrlTree,
+} from '@angular/router'
 import { combineLatest, Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 
@@ -10,7 +15,7 @@ import { TogglzService } from '../core/togglz/togglz.service'
 @Injectable({
   providedIn: 'root',
 })
-export class AuthenticatedNoDelegatorGuard  {
+export class AuthenticatedNoDelegatorGuard {
   constructor(
     private _userInfo: UserService,
     private _router: Router,
