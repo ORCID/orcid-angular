@@ -1,3 +1,15 @@
+## v2.43.0 - 2023-10-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.42.5...v2.43.0)
+
+## v2.42.5 - 2023-10-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.42.4...v2.42.5)
+
+### Fix
+
+- Sort by source is inverse (#2076)
+
 ## v2.42.4 - 2023-10-09
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.42.3...v2.42.4)
