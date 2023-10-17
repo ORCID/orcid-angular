@@ -1,7 +1,10 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y'
 import { Component, OnDestroy, OnInit } from '@angular/core'
-import { MatDialog } from '@angular/material/dialog'
-import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator'
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
+import {
+  MatLegacyPaginatorIntl as MatPaginatorIntl,
+  LegacyPageEvent as PageEvent,
+} from '@angular/material/legacy-paginator'
 import { Observable, of, Subject } from 'rxjs'
 import {
   map,

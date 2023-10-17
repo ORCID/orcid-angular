@@ -87,9 +87,7 @@ export class VisibilitySelectorComponent
   registerOnTouched(fn: any): void {
     this.onTouched = fn
   }
-  setDisabledState?(isDisabled: boolean): void {
-    throw new Error('Method not implemented.')
-  }
+  setDisabledState?(isDisabled: boolean): void {}
   navigate() {
     this.window.open(
       'https://support.orcid.org/hc/en-us/articles/360006897614-Visibility-settings'

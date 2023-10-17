@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core'
 import {
-  MatSnackBar,
-  MatSnackBarHorizontalPosition,
-} from '@angular/material/snack-bar'
+  MatLegacySnackBar as MatSnackBar,
+  MatLegacySnackBarHorizontalPosition as MatSnackBarHorizontalPosition,
+} from '@angular/material/legacy-snack-bar'
 import { take } from 'rxjs/operators'
 import { DisplayMessage, ErrorReport, ScreenDirection } from 'src/app/types'
 

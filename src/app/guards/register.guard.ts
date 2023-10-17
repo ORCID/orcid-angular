@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core'
 import {
   ActivatedRouteSnapshot,
-  CanActivateChild,
   Router,
   RouterStateSnapshot,
   UrlTree,
@@ -14,7 +13,7 @@ import { UserService } from '../core'
 @Injectable({
   providedIn: 'root',
 })
-export class RegisterGuard implements CanActivateChild {
+export class RegisterGuard {
   constructor(private _user: UserService, private _router: Router) {}
 
   canActivateChild(

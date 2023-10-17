@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core'
 import {
   ActivatedRouteSnapshot,
-  CanActivateChild,
   Router,
   RouterStateSnapshot,
   UrlTree,
@@ -16,7 +15,7 @@ import { TogglzService } from '../core/togglz/togglz.service'
 @Injectable({
   providedIn: 'root',
 })
-export class AuthenticatedNoDelegatorGuard implements CanActivateChild {
+export class AuthenticatedNoDelegatorGuard {
   constructor(
     private _userInfo: UserService,
     private _router: Router,
