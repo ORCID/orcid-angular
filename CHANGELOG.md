@@ -1,3 +1,9 @@
+## v2.43.1 - 2023-10-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.43.0...v2.43.1)
+
+- [#2077](https://github.com/ORCID/orcid-angular/pull/2077): Angular update 15 16
+
 ## v2.43.0 - 2023-10-11
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.42.5...v2.43.0)
