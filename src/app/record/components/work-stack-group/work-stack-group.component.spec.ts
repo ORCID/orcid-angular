@@ -5,11 +5,8 @@ import { WINDOW_PROVIDERS } from '../../../cdk/window'
 import { PlatformInfoService } from '../../../cdk/platform-info'
 import { ErrorHandlerService } from '../../../core/error-handler/error-handler.service'
 import { SnackbarService } from '../../../cdk/snackbar/snackbar.service'
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
-import {
-  MatLegacyDialog as MatDialog,
-  MatLegacyDialogModule as MatDialogModule,
-} from '@angular/material/legacy-dialog'
+import { MatSnackBar } from '@angular/material/snack-bar'
+import { MatDialog, MatDialogModule } from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { RecordService } from '../../../core/record/record.service'
 import { RecordWorksService } from '../../../core/record-works/record-works.service'

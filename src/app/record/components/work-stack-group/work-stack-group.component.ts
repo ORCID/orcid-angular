@@ -10,15 +10,9 @@ import {
   ViewChildren,
 } from '@angular/core'
 import { UntypedFormGroup } from '@angular/forms'
-import {
-  MatLegacyCheckbox as MatCheckbox,
-  MatLegacyCheckboxChange as MatCheckboxChange,
-} from '@angular/material/legacy-checkbox'
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
-import {
-  MatLegacyPaginatorIntl as MatPaginatorIntl,
-  LegacyPageEvent as PageEvent,
-} from '@angular/material/legacy-paginator'
+import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox'
+import { MatDialog } from '@angular/material/dialog'
+import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator'
 import { isEmpty } from 'lodash'
 import { Observable, Subject } from 'rxjs'
 import { first, take } from 'rxjs/operators'

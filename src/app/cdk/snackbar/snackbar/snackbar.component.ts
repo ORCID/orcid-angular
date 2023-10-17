@@ -1,8 +1,5 @@
 import { Component, OnInit, Inject, HostBinding } from '@angular/core'
-import {
-  MAT_LEGACY_SNACK_BAR_DATA as MAT_SNACK_BAR_DATA,
-  MatLegacySnackBarRef as MatSnackBarRef,
-} from '@angular/material/legacy-snack-bar'
+import { MAT_SNACK_BAR_DATA, MatSnackBarRef } from '@angular/material/snack-bar'
 import { ScreenDirection, DisplayMessage } from 'src/app/types'
 import { PlatformInfoService } from '../../platform-info'
 import { take } from 'rxjs/operators'

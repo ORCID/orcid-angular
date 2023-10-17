@@ -4,7 +4,7 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms'
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
+import { MatDialog } from '@angular/material/dialog'
 import { of, throwError } from 'rxjs'
 import { switchMap, take } from 'rxjs/operators'
 import { UserService } from 'src/app/core'

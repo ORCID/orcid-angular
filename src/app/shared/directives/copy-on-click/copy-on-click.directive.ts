@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common'
 import { Directive, ElementRef, HostListener, Inject } from '@angular/core'
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
+import { MatSnackBar } from '@angular/material/snack-bar'
 import { WINDOW } from 'src/app/cdk/window'
 
 import { CopyOnClickComponent } from '../../components/copy-on-click/copy-on-click.component'

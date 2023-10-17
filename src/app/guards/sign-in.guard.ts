@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@angular/core'
 import {
   ActivatedRouteSnapshot,
+  CanActivateChild,
   Router,
   RouterStateSnapshot,
   UrlTree,
@@ -16,7 +17,7 @@ import { ErrorHandlerService } from '../core/error-handler/error-handler.service
 @Injectable({
   providedIn: 'root',
 })
-export class SignInGuard {
+export class SignInGuard implements CanActivateChild {
   constructor(
     private _user: UserService,
     private _router: Router,

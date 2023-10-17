@@ -8,7 +8,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core'
-import { MatLegacyCheckbox as MatCheckbox } from '@angular/material/legacy-checkbox'
+import { MatCheckbox } from '@angular/material/checkbox'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
