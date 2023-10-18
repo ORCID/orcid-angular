@@ -6,7 +6,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core'
-import { MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog'
+import { MatDialogRef } from '@angular/material/dialog'
 import { PlatformInfo, PlatformInfoService } from '../../platform-info'
 import { takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'

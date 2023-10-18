@@ -7,7 +7,7 @@ import {
 } from '@angular/core'
 import { Subject } from 'rxjs'
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms'
-import { MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog'
+import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../cdk/modal/modal/modal.component'
 import { PlatformInfoService } from '../../../../cdk/platform-info'
 import { RecordWorksService } from '../../../../core/record-works/record-works.service'

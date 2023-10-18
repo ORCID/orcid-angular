@@ -6,7 +6,7 @@
 // .
 // Setup Orcid typography
 // More info about material typography on https://github.com/angular/components/blob/75686e87fc8d5eb3d3e4a1bf6fa771c7467d328d/guides/typography.md
-$orcid-material-typography: mat.define-legacy-typography-config(
+$orcid-material-typography: mat.define-typography-config(
   $font-family: '"Noto Sans", sans-serif',
   $display-4:
     mat.define-typography-level(96px, 96px, 200, $letter-spacing: -1.5px),

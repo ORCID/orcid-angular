@@ -4,7 +4,7 @@ import { TogglzDirective } from './togglz/togglz.directive'
 import { PlatformInfoModule } from '../cdk/platform-info'
 import { WindowModule, WINDOW_PROVIDERS } from '../cdk/window'
 import { MatPaginatorIntlImplementation } from './paginator/matPaginator.service'
-import { MatLegacyPaginatorIntl as MatPaginatorIntl } from '@angular/material/legacy-paginator'
+import { MatPaginatorIntl } from '@angular/material/paginator'
 import { SnackbarModule } from '../cdk/snackbar/snackbar.module'
 
 @NgModule({

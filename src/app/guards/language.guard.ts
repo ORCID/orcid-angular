@@ -1,5 +1,9 @@
 import { Inject, Injectable, LOCALE_ID } from '@angular/core'
-import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router'
+import {
+  ActivatedRouteSnapshot,
+  CanActivateChild,
+  RouterStateSnapshot,
+} from '@angular/router'
 import { CookieService } from 'ngx-cookie-service'
 import { NEVER, Observable, of } from 'rxjs'
 import { catchError, switchMap, tap } from 'rxjs/operators'
@@ -15,7 +19,7 @@ const GUARD_COOKIE_CHECK = 'lang_refresh'
 @Injectable({
   providedIn: 'root',
 })
-export class LanguageGuard {
+export class LanguageGuard implements CanActivateChild {
   constructor(
     @Inject(LOCALE_ID) public locale: string,
     private _user: UserService,

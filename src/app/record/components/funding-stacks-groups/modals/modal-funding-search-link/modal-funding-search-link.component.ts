@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { RecordImportWizard } from '../../../../../types/record-peer-review-import.endpoint'
-import { MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog'
+import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import { takeUntil } from 'rxjs/operators'
 import { RecordFundingsService } from '../../../../../core/record-fundings/record-fundings.service'

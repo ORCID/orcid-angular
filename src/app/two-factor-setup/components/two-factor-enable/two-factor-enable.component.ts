@@ -7,9 +7,9 @@ import {
 } from '@angular/forms'
 import { environment } from '../../../../environments/environment'
 import {
-  MAT_LEGACY_TOOLTIP_DEFAULT_OPTIONS as MAT_TOOLTIP_DEFAULT_OPTIONS,
-  MatLegacyTooltipDefaultOptions as MatTooltipDefaultOptions,
-} from '@angular/material/legacy-tooltip'
+  MAT_TOOLTIP_DEFAULT_OPTIONS,
+  MatTooltipDefaultOptions,
+} from '@angular/material/tooltip'
 import { TwoFactorAuthenticationService } from '../../../core/two-factor-authentication/two-factor-authentication.service'
 import { TwoFactor } from '../../../types/two-factor.endpoint'
 

@@ -1,4 +1,4 @@
-import { MatLegacyPaginatorIntl as MatPaginatorIntl } from '@angular/material/legacy-paginator'
+import { MatPaginatorIntl } from '@angular/material/paginator'
 import { Injectable } from '@angular/core'
 import { BehaviorSubject, Subject } from 'rxjs'
 import { LiveAnnouncer } from '@angular/cdk/a11y'

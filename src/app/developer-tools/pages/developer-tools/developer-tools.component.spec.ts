@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { FormBuilder } from '@angular/forms'
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
+import { MatDialog } from '@angular/material/dialog'
 import { DeveloperToolsService } from 'src/app/core/developer-tools/developer-tools.service'
 import { RecordService } from 'src/app/core/record/record.service'
 import { ChangeDetectorRef } from '@angular/core'

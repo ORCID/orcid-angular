@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { TwoFactorRecoveryCodesComponent } from './two-factor-recovery-codes.component'
 import { WINDOW_PROVIDERS } from '../../../cdk/window'
-import { MatLegacyTooltipModule as MatTooltipModule } from '@angular/material/legacy-tooltip'
+import { MatTooltipModule } from '@angular/material/tooltip'
 
 describe('TwoFactorRecoveryCodesComponent', () => {
   let component: TwoFactorRecoveryCodesComponent
