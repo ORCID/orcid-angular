@@ -10,7 +10,9 @@ import { WINDOW } from '../window'
 import { BROWSERLIST_REGEXP } from './browserlist.regexp'
 import { PlatformInfo } from './platform-info.type'
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class PlatformInfoService {
   previouslyHadQueryParameters = false
   private platform: PlatformInfo = {
