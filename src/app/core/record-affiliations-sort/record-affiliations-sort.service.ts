@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core'
 import { MonthDayYearDate } from 'src/app/types'
 import {
-  AffiliationUIGroup,
   AffiliationGroup,
   AffiliationType,
+  AffiliationUIGroup,
 } from 'src/app/types/record-affiliation.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
 
@@ -88,15 +88,21 @@ export class AffiliationsSortService {
           }
 
           if (by === 'source') {
-            affiliationGroup.sort((a, b) => {
-              return (
-                Number(AffiliationsSortService.isSelfAsserted(a, orcid)) -
-                Number(AffiliationsSortService.isSelfAsserted(b, orcid))
-              )
-            })
-            if (ascending) {
-              affiliationGroup.reverse()
-            }
+            const selfAsserted = this.getSelfAssertedOrValidatedAffiliations(
+              affiliationGroup,
+              ascending,
+              orcid,
+              'self-asserted'
+            )
+            const validated = this.getSelfAssertedOrValidatedAffiliations(
+              affiliationGroup,
+              ascending,
+              orcid,
+              'validated'
+            )
+            x.affiliationGroup = ascending
+              ? [...selfAsserted, ...validated]
+              : [...validated, ...selfAsserted]
           }
         }
       })
@@ -206,7 +212,25 @@ export class AffiliationsSortService {
       })
   }
 
-  private static isSelfAsserted(
+  private getSelfAssertedOrValidatedAffiliations(
+    affiliationGroup: AffiliationGroup[],
+    ascending: boolean,
+    orcid: string,
+    type: 'self-asserted' | 'validated'
+  ): AffiliationGroup[] {
+    return affiliationGroup
+      .filter((affiliationGroup) => {
+        const selfAsserted = this.isSelfAsserted(affiliationGroup, orcid)
+        return type === 'self-asserted' ? selfAsserted : !selfAsserted
+      })
+      .sort((a, b) => {
+        return ('' + a.defaultAffiliation.affiliationName.value).localeCompare(
+          '' + b.defaultAffiliation.affiliationName.value
+        )
+      })
+  }
+
+  private isSelfAsserted(
     affiliationGroup: AffiliationGroup,
     orcid: string
   ): boolean {
