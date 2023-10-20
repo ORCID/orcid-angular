@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core'
 import { MonthDayYearDate } from 'src/app/types'
-import { AffiliationGroup, AffiliationType, AffiliationUIGroup } from 'src/app/types/record-affiliation.endpoint'
+import {
+  AffiliationGroup,
+  AffiliationType,
+  AffiliationUIGroup,
+} from 'src/app/types/record-affiliation.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
 
 @Injectable({
@@ -84,9 +88,21 @@ export class AffiliationsSortService {
           }
 
           if (by === 'source') {
-            const selfAsserted = this.getSelfAssertedOrValidatedAffiliations(affiliationGroup, ascending, orcid, 'self-asserted')
-            const validated = this.getSelfAssertedOrValidatedAffiliations(affiliationGroup, ascending, orcid, 'validated')
-            x.affiliationGroup = ascending ? [...selfAsserted, ...validated] : [...validated, ...selfAsserted]
+            const selfAsserted = this.getSelfAssertedOrValidatedAffiliations(
+              affiliationGroup,
+              ascending,
+              orcid,
+              'self-asserted'
+            )
+            const validated = this.getSelfAssertedOrValidatedAffiliations(
+              affiliationGroup,
+              ascending,
+              orcid,
+              'validated'
+            )
+            x.affiliationGroup = ascending
+              ? [...selfAsserted, ...validated]
+              : [...validated, ...selfAsserted]
           }
         }
       })
@@ -196,17 +212,21 @@ export class AffiliationsSortService {
       })
   }
 
-  private getSelfAssertedOrValidatedAffiliations(affiliationGroup: AffiliationGroup[], ascending: boolean, orcid: string, type: 'self-asserted' | 'validated'): AffiliationGroup[] {
+  private getSelfAssertedOrValidatedAffiliations(
+    affiliationGroup: AffiliationGroup[],
+    ascending: boolean,
+    orcid: string,
+    type: 'self-asserted' | 'validated'
+  ): AffiliationGroup[] {
     return affiliationGroup
-      .filter(
-        (affiliationGroup) => {
-          const selfAsserted = this.isSelfAsserted(affiliationGroup, orcid)
-          return type === 'self-asserted' ? selfAsserted : !selfAsserted
-        },
-      ).sort((a, b) => {
-        return (
-          '' + a.defaultAffiliation.affiliationName.value
-        ).localeCompare('' + b.defaultAffiliation.affiliationName.value)
+      .filter((affiliationGroup) => {
+        const selfAsserted = this.isSelfAsserted(affiliationGroup, orcid)
+        return type === 'self-asserted' ? selfAsserted : !selfAsserted
+      })
+      .sort((a, b) => {
+        return ('' + a.defaultAffiliation.affiliationName.value).localeCompare(
+          '' + b.defaultAffiliation.affiliationName.value
+        )
       })
   }
 
