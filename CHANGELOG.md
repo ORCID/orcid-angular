@@ -1,3 +1,11 @@
+## v2.43.3 - 2023-10-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.43.2...v2.43.3)
+
+### Fix
+
+- Update sort by source functionality to sort also alphabetically (#2079)
+
 ## v2.43.2 - 2023-10-18
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.43.1...v2.43.2)
