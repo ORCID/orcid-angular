@@ -25,7 +25,12 @@
   }
   .id {
     display: inline-grid;
+    max-width: 100%;
+    span {
+      overflow-wrap: anywhere;
+    }
     .orcid-id {
+      overflow-wrap: anywhere;
       margin: 0;
     }
   }

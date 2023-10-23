@@ -1,3 +1,21 @@
+## v2.43.5 - 2023-10-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.43.4...v2.43.5)
+
+- [#2082](https://github.com/ORCID/orcid-angular/pull/2082): Transifex
+
+## v2.43.4 - 2023-10-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.43.3...v2.43.4)
+
+## v2.43.3 - 2023-10-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.43.2...v2.43.3)
+
+### Fix
+
+- Update sort by source functionality to sort also alphabetically (#2079)
+
 ## v2.43.2 - 2023-10-18
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.43.1...v2.43.2)
