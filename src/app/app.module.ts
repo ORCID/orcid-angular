@@ -44,10 +44,19 @@ export class AppModule {
 
   private initializeApp() {
     environment.BASE_URL = this.getCurrentDomain()
+    environment.API_WEB = environment.API_WEB.replace(
+      '<SUBDOMAIN>',
+      this.getSubDomain()
+    )
   }
 
   getCurrentDomain() {
     const port = window.location.port ? ':' + window.location.port : ''
     return '//' + window.location.hostname + port + '/'
+  }
+
+  getSubDomain() {
+    const subdomain = window.location.hostname.split('.').slice(0, -2).join('.')
+    return subdomain ? subdomain + '.' : ''
   }
 }

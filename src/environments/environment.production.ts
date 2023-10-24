@@ -1,12 +1,10 @@
-import { getSubDomain } from "./subdomain.adapter";
-
 export const environment = {
   production: true,
   debugger: false,
   ROBOTS: 'all',
   API_NEWS: 'https://info.orcid.org/feed/',
-  API_PUB: `//pub.${getSubDomain()}orcid.org/v3.0`,
-  API_WEB: `//${getSubDomain()}orcid.org/`,
+  API_PUB: `//pub.<SUBDOMAIN>orcid.org/v3.0`,
+  API_WEB: `//<SUBDOMAIN>orcid.org/`,
   BASE_URL: '',
   INFO_SITE: 'https://info.orcid.org/',
   SHOW_TEST_WARNING_BANNER: false,
