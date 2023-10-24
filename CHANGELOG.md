@@ -1,3 +1,9 @@
+## v2.44.0 - 2023-10-24
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.43.5...v2.44.0)
+
+- [#2083](https://github.com/ORCID/orcid-angular/pull/2083): feature/dynamic-sub-domains
+
 ## v2.43.5 - 2023-10-20
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.43.4...v2.43.5)
