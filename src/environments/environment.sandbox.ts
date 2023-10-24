@@ -1,13 +1,11 @@
-import { getSubDomain } from './subdomain.adapter'
-
 export const environment = {
   production: true,
   debugger: false,
   ROBOTS: 'noindex, nofollow',
   API_NEWS: 'https://info.qa.orcid.org/feed/',
-  API_PUB: `//pub.${getSubDomain()}orcid.org/v3.0`,
-  API_WEB: `//${getSubDomain()}orcid.org/`,
-  BASE_URL: '',
+  API_PUB: `//pub.<SUBDOMAIN><DOMAIN>/v3.0`,
+  API_WEB: `//<SUBDOMAIN><DOMAIN>/`,
+  BASE_URL: '//<SUBDOMAIN><DOMAIN>/',
   INFO_SITE: 'https://info.qa.orcid.org/',
   GOOGLE_ANALYTICS_TESTING_MODE: false,
   GOOGLE_TAG_MANAGER: 'GTM-M9Z7DHS',

@@ -43,11 +43,31 @@ export class AppModule {
   }
 
   private initializeApp() {
-    environment.BASE_URL = this.getCurrentDomain()
+    environment.API_WEB = environment.API_WEB.replace(
+      '<SUBDOMAIN>',
+      this.getSubDomain()
+    )
+    environment.BASE_URL = environment.BASE_URL.replace(
+      '<SUBDOMAIN>',
+      this.getSubDomain()
+    )
+    environment.API_WEB = environment.API_WEB.replace(
+      '<DOMAIN>',
+      this.getCurrentLeanDomain()
+    )
+    environment.BASE_URL = environment.BASE_URL.replace(
+      '<DOMAIN>',
+      this.getCurrentLeanDomain()
+    )
   }
 
-  getCurrentDomain() {
+  getCurrentLeanDomain() {
     const port = window.location.port ? ':' + window.location.port : ''
-    return '//' + window.location.hostname + port + '/'
+    return window.location.hostname.split('.').slice(-2).join('.') + port
+  }
+
+  getSubDomain() {
+    const subdomain = window.location.hostname.split('.').slice(0, -2).join('.')
+    return subdomain ? subdomain + '.' : ''
   }
 }
