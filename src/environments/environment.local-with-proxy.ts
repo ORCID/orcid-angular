@@ -1,10 +1,12 @@
+import { getSubDomain } from "./subdomain.adapter";
+
 export const environment = {
   production: false,
   debugger: true,
   ROBOTS: 'all',
   API_NEWS: 'https://www.mocky.io/v2/5dced45b3000007300931ce8',
-  API_PUB: '/v3.0',
-  API_WEB: '/',
+  API_PUB: `//${getSubDomain}orcid.org/v3.0`,
+  API_WEB: `//${getSubDomain}orcid.org/`,
   BASE_URL: '',
   INFO_SITE: 'https://info.orcid.org/',
   GOOGLE_ANALYTICS_TESTING_MODE: true,
