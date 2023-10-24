@@ -1,4 +1,4 @@
-import { getSubDomain } from "./subdomain.adapter";
+import { getSubDomain } from './subdomain.adapter'
 
 export const environment = {
   production: true,
@@ -36,5 +36,3 @@ export const environment = {
   },
   proxyMode: false,
 }
-
-
