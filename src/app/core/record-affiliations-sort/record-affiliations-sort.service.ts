@@ -101,8 +101,8 @@ export class AffiliationsSortService {
               'validated'
             )
             x.affiliationGroup = ascending
-              ? [...selfAsserted, ...validated]
-              : [...validated, ...selfAsserted]
+              ? [...validated, ...selfAsserted]
+              : [...selfAsserted, ...validated]
           }
         }
       })
