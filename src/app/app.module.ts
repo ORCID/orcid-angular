@@ -52,11 +52,19 @@ export class AppModule {
       '<SUBDOMAIN>',
       this.getSubDomain()
     )
+    environment.API_PUB = environment.API_PUB.replace(
+      '<SUBDOMAIN>',
+      this.getSubDomain()
+    )
     environment.API_WEB = environment.API_WEB.replace(
       '<DOMAIN>',
       this.getCurrentLeanDomain()
     )
     environment.BASE_URL = environment.BASE_URL.replace(
+      '<DOMAIN>',
+      this.getCurrentLeanDomain()
+    )
+    environment.API_PUB = environment.API_PUB.replace(
       '<DOMAIN>',
       this.getCurrentLeanDomain()
     )
