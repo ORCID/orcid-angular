@@ -1,3 +1,11 @@
+## v2.46.0 - 2023-10-25
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.45.0...v2.46.0)
+
+### Fix
+
+- Add missing private orcid id in sorting method an invert selfAsserted and validated in sort by source (#2089)
+
 ## v2.45.0 - 2023-10-25
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.44.0...v2.45.0)
