@@ -1,7 +1,6 @@
 import { Inject, Injectable } from '@angular/core'
 import {
   ActivatedRouteSnapshot,
-  CanActivateChild,
   Router,
   RouterStateSnapshot,
   UrlTree,
@@ -20,7 +19,7 @@ import { GoogleTagManagerService } from '../core/google-tag-manager/google-tag-m
 @Injectable({
   providedIn: 'root',
 })
-export class AuthorizeGuard implements CanActivateChild {
+export class AuthorizeGuard {
   lastRedirectUrl: string
   redirectTroughGtmWasCalled: boolean
   constructor(

@@ -7,15 +7,15 @@ import { WINDOW_PROVIDERS } from '../../../../../cdk/window'
 import { PlatformInfoService } from '../../../../../cdk/platform-info'
 import { ErrorHandlerService } from '../../../../../core/error-handler/error-handler.service'
 import { SnackbarService } from '../../../../../cdk/snackbar/snackbar.service'
-import { MatSnackBar } from '@angular/material/snack-bar'
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
 import {
-  MAT_DIALOG_DATA,
-  MatDialog,
-  MatDialogRef,
-} from '@angular/material/dialog'
+  MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA,
+  MatLegacyDialog as MatDialog,
+  MatLegacyDialogRef as MatDialogRef,
+} from '@angular/material/legacy-dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { UntypedFormBuilder } from '@angular/forms'
-import { MatAutocompleteModule } from '@angular/material/autocomplete'
+import { MatLegacyAutocompleteModule as MatAutocompleteModule } from '@angular/material/legacy-autocomplete'
 import { SharedModule } from '../../../../../shared/shared.module'
 
 describe('ModalAffiliationsComponent', () => {

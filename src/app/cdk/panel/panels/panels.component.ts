@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { first } from 'rxjs/operators'
 import { ComponentType } from '@angular/cdk/portal'
-import { MatDialog } from '@angular/material/dialog'
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
 import { PlatformInfoService } from '../../platform-info'
 import { SortData, SortOrderDirection, SortOrderType } from 'src/app/types/sort'
 import {
