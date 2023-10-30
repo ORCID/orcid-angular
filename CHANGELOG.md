@@ -1,3 +1,26 @@
+## v2.46.0 - 2023-10-25
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.45.0...v2.46.0)
+
+### Fix
+
+- Add missing private orcid id in sorting method an invert selfAsserted and validated in sort by source (#2089)
+
+## v2.45.0 - 2023-10-25
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.44.0...v2.45.0)
+
+- [#2087](https://github.com/ORCID/orcid-angular/pull/2087): Feature/dynamic sub domains
+- [#2086](https://github.com/ORCID/orcid-angular/pull/2086): fix build issues
+- [#2085](https://github.com/ORCID/orcid-angular/pull/2085): Feature/dynamic sub domains
+- [#2084](https://github.com/ORCID/orcid-angular/pull/2084): Fix function issues
+
+## v2.44.0 - 2023-10-24
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.43.5...v2.44.0)
+
+- [#2083](https://github.com/ORCID/orcid-angular/pull/2083): feature/dynamic-sub-domains
+
 ## v2.43.5 - 2023-10-20
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.43.4...v2.43.5)

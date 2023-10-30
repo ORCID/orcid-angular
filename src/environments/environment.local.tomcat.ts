@@ -1,5 +1,3 @@
-import { EnvironmentBannerModule } from 'src/app/environment-banner/environment-banner.module'
-
 export const environment = {
   production: true,
   debugger: true,

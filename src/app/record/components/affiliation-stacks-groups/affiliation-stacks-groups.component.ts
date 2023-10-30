@@ -162,6 +162,8 @@ export class AffiliationStacksGroupsComponent implements OnInit {
 
   sortEvent(event: SortData, type: string) {
     this.userRecordContext.publicRecordId = this.isPublicRecord
+    this.userRecordContext.privateRecordId =
+      this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID
     this.userRecordContext.sort = event.type
     this.userRecordContext.sortAsc = event.direction === 'asc'
     this._recordAffiliationService.changeUserRecordContext(
