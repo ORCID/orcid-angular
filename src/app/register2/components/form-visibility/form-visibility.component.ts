@@ -1,9 +1,9 @@
 import { Component, DoCheck, forwardRef, OnInit } from '@angular/core'
 import {
-  UntypedFormControl,
-  UntypedFormGroup,
   NG_ASYNC_VALIDATORS,
   NG_VALUE_ACCESSOR,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms'
 import { ErrorStateMatcher } from '@angular/material/core'
@@ -15,7 +15,11 @@ import { BaseForm } from '../BaseForm'
 @Component({
   selector: 'app-form-visibility',
   templateUrl: './form-visibility.component.html',
-  styleUrls: ['./form-visibility.component.scss'],
+  styleUrls: [
+    './form-visibility.component.scss',
+    '../register2.style.scss',
+    '../register2.scss-theme.scss',
+  ],
   preserveWhitespaces: true,
   providers: [
     {

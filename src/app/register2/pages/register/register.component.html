@@ -1,7 +1,7 @@
 <main id="main">
   <div class="container">
     <div class="row space-around">
-      <div class="col l6 m8 s4" [ngClass]="{ 'no-gutters': platform.columns4 }">
+      <div class="col l7 m8 s4 max-witdth" [ngClass]="{ 'no-gutters': platform.columns4 }">
 
         <!-- DESKTOP PRESENTATION -->
         <mat-horizontal-stepper
@@ -20,29 +20,42 @@
               [reactivation]="reactivation"
               #stepComponentA
             ></app-step-a>
-          </mat-step> -->
-          <mat-step [stepControl]="FormGroupStepBPassword">
+          </mat-step>
+          <mat-step [stepControl]="FormGroupStepB">
             <ng-template matStepLabel i18n="@@register.securityAndNotifications"
               >Security and notifications</ng-template
             >
             <app-step-b
               #stepComponentB
-              [(formGroup)]="FormGroupStepBPassword"
+              [(formGroup)]="FormGroupStepB"
               [personalData]="personalData"
               [reactivation]="reactivation"
             ></app-step-b>
           </mat-step>
+
+          <mat-step [stepControl]="FormGroupStepCT">
+            <ng-template matStepLabel i18n="@@register.securityAndNotifications"
+              >Security and notifications</ng-template
+            >
+            <app-step-ct
+              #stepComponentB
+              [(formGroup)]="FormGroupStepCT"
+              (submit)="register()"
+              [loading]="loading"
+              [reactivation]="reactivation"
+            ></app-step-ct>
+          </mat-step> -->
           <mat-step [stepControl]="FormGroupStepC" #lastStep>
             <ng-template matStepLabel i18n="@@register.visibilityAndTerm"
               >Visibility and terms</ng-template
             >
-            <app-step-c
+            <app-step-d
               #stepComponentC
               [(formGroup)]="FormGroupStepC"
               (submit)="register()"
               [loading]="loading"
               [reactivation]="reactivation"
-            ></app-step-c>
+            ></app-step-d>
           </mat-step>
         </mat-horizontal-stepper>
       </div>

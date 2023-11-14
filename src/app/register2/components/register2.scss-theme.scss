@@ -14,6 +14,11 @@
   .error {
     color: map-get($foreground, 'state-warning-dark');
   }
+
+  .text-light {
+    color: map-get($foreground, 'text-dark-mid');
+
+  }
 }
 
 @include theme($orcid-app-theme);

@@ -45,7 +45,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   @ViewChild('stepComponentC', { read: ElementRef }) stepComponentC: ElementRef
   platform: PlatformInfo
   FormGroupStepA: UntypedFormGroup
-  FormGroupStepBPassword: UntypedFormGroup
+  FormGroupStepB: UntypedFormGroup
+  FormGroupStepCT: UntypedFormGroup
   FormGroupStepC: UntypedFormGroup
   isLinear = true
   personalData: RegisterForm
@@ -84,14 +85,14 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     this.FormGroupStepA = this._formBuilder.group({
       personal: [''],
     })
-    this.FormGroupStepBPassword = this._formBuilder.group({
+    this.FormGroupStepB = this._formBuilder.group({
       password: [''],
       sendOrcidNews: [''],
     })
-    // this.FormGroupStepBNotification = this._formBuilder.group({
-    //   password: [''],
-    //   sendOrcidNews: [''],
-    // })
+    this.FormGroupStepCT = this._formBuilder.group({
+      activitiesVisibilityDefault: [''],
+    })
+
     this.FormGroupStepC = this._formBuilder.group({
       activitiesVisibilityDefault: [''],
       termsOfUse: [''],
@@ -130,13 +131,13 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     this.lastStep.interacted = true
     if (
       this.FormGroupStepA.valid &&
-      this.FormGroupStepBPassword.valid &&
+      this.FormGroupStepB.valid &&
       this.FormGroupStepC.valid
     ) {
       this._register
         .backendRegisterFormValidate(
           this.FormGroupStepA,
-          this.FormGroupStepBPassword,
+          this.FormGroupStepB,
           this.FormGroupStepC
         )
         .pipe(
@@ -150,7 +151,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             }
             return this._register.register(
               this.FormGroupStepA,
-              this.FormGroupStepBPassword,
+              this.FormGroupStepB,
               this.FormGroupStepC,
               this.reactivation,
               this.requestInfoForm,
@@ -254,7 +255,6 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   }
 
   selectionChange(event: StepperSelectionEvent) {
-
     if (this.platform.columns4 || this.platform.columns8) {
       this.focusCurrentStep(event)
     }

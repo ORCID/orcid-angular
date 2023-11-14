@@ -8,7 +8,7 @@ import { FormTermsComponent } from './components/form-terms/form-terms.component
 import { FormVisibilityComponent } from './components/form-visibility/form-visibility.component'
 import { StepAComponent } from './components/step-a/step-a.component'
 import { StepBComponent } from './components/step-b/step-b.component'
-import { StepCComponent } from './components/step-c/step-c.component'
+import { StepDComponent } from './components/step-d/step-d.component'
 import { RegisterComponent } from './pages/register/register.component'
 import { RegisterRoutingModule } from './register-routing.module'
 // tslint:disable-next-line: max-line-length
@@ -31,15 +31,15 @@ import { WarningMessageModule } from '../cdk/warning-message/warning-message.mod
 import { BackendErrorComponent } from './components/backend-error/backend-error.component'
 import { FormAntiRobotsComponent } from './components/form-anti-robots/form-anti-robots.component'
 import { FormPersonalAdditionalEmailsComponent } from './components/form-personal-additional-emails/form-personal-additional-emails.component'
-import { StepBNotificationsComponent } from './components/step-b-notifications/step-b-notifications.component'
+import { StepCTComponent } from './components/step-c-t/step-c.component'
 import { TopBarRecordIssuesComponent } from './components/top-bar-record-issues/top-bar-record-issues.component'
 @NgModule({
   declarations: [
     RegisterComponent,
     StepAComponent,
     StepBComponent,
-    StepBNotificationsComponent,
-    StepCComponent,
+    StepCTComponent,
+    StepDComponent,
     FormPersonalComponent,
     FormPasswordComponent,
     FormNotificationsComponent,

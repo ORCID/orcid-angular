@@ -4,16 +4,16 @@ import { ReactivationLocal } from '../../../types/reactivation.local'
 import { BaseStepDirective } from '../BaseStep'
 
 @Component({
-  selector: 'app-step-b-notifications',
-  templateUrl: './step-b-notifications.component.html',
+  selector: 'app-step-d',
+  templateUrl: './step-d.component.html',
   styleUrls: [
-    './step-b-notifications.component.scss',
+    './step-d.component.scss',
     '../register2.style.scss',
-    '../register2.scss-theme.scss',
+    '../register2.scss-theme.scss'
   ],
 })
-export class StepBNotificationsComponent extends BaseStepDirective {
-  @Input() personalData
+export class StepDComponent extends BaseStepDirective {
+  @Input() loading
   @Input() reactivation: ReactivationLocal
 
   constructor() {

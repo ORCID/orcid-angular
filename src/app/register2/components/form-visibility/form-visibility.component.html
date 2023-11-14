@@ -1,7 +1,4 @@
 <ng-container [formGroup]="form">
-  <h3 class="mat-subheading-2" i18n="@@register.visibility">
-    Visibility settings
-  </h3>
   <p>
     <ng-container i18n="@@register.visibilityDescription1">
       Your ORCID iD connects with your ORCID record that can contain links to
@@ -9,6 +6,10 @@
       name, and more. You control this content and who can see it.
     </ng-container>
   </p>
+  <h2 class="orc-font-body mat-subheading-2" i18n="@@register.visibility">
+    Visibility settings
+  </h2>
+
   <p i18n="@@register.visibilityDescription3">
     By default, what visibility should be given to new items added to your ORCID
     Record?
@@ -24,16 +25,19 @@
         class="orcid-radio-button-with-icons"
       >
         <img
-          src="./assets/vectors/visibility-everyone.svg"
+          src="./assets/vectors/visibility-everyone2.svg"
           aria-hidden="true"
           alt=""
         />
         <div class="inlined">
-          <strong i18n="@@register.VisibilityEveryone">Everyone</strong>
+          <div>
+            <strong i18n="@@register.VisibilityEveryone">Everyone</strong>
 
-          <ng-container i18n="@@register.VisibilityEveryone2"
-            >(87% of users choose this)</ng-container
-          >
+            <ng-container i18n="@@register.VisibilityEveryone2"
+              >(87% of users choose this)</ng-container
+            >
+            <div class="text-light orc-font-small-print">Everyone can see these items</div>
+          </div>
         </div>
       </mat-radio-button>
       <mat-radio-button
@@ -42,17 +46,22 @@
         class="orcid-radio-button-with-icons"
       >
         <img
-          src="./assets/vectors/visibility-trusted-source.svg"
+          src="./assets/vectors/visibility-trusted-source2.jpg"
           aria-hidden="true"
           alt=""
         />
         <div class="inlined">
-          <strong i18n="@@register.VisibilityTrusted"
-            >Trusted Organizations</strong
-          >
-          <ng-container i18n="@@register.VisibilityTrusted2"
-            >(5% of users choose this)</ng-container
-          >
+          <div>
+            <strong i18n="@@register.VisibilityTrusted"
+              >Trusted Organizations</strong
+            >
+            <ng-container i18n="@@register.VisibilityTrusted2"
+              >(5% of users choose this)</ng-container
+            >
+            <div class="text-light orc-font-small-print">
+              Only people and organizations you’ve given permission
+            </div>
+          </div>
         </div>
       </mat-radio-button>
       <mat-radio-button
@@ -61,16 +70,21 @@
         class="orcid-radio-button-with-icons"
       >
         <img
-          src="./assets/vectors/visibility-only-me.svg"
+          src="./assets/vectors/visibility-only-me2.jpg"
           aria-hidden="true"
           alt=""
         />
         <div class="inlined">
-          <strong i18n="@@register.VisibilityPrivate">Only me</strong>
+          <div>
+            <strong i18n="@@register.VisibilityPrivate">Only me</strong>
 
-          <ng-container i18n="@@register.VisibilityPrivate2"
-            >(8% of users choose this)</ng-container
-          >
+            <ng-container i18n="@@register.VisibilityPrivate2"
+              >(8% of users choose this)</ng-container
+            >
+            <div class="text-light orc-font-small-print">
+              Items are private and only visible to you
+            </div>
+          </div>
         </div>
       </mat-radio-button>
     </mat-radio-group>

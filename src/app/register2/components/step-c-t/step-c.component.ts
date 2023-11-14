@@ -1,14 +1,18 @@
 import { Component, Input } from '@angular/core'
 
-import { BaseStepDirective } from '../BaseStep'
 import { ReactivationLocal } from '../../../types/reactivation.local'
+import { BaseStepDirective } from '../BaseStep'
 
 @Component({
-  selector: 'app-step-c',
+  selector: 'app-step-ct',
   templateUrl: './step-c.component.html',
-  styleUrls: ['./step-c.component.scss'],
+  styleUrls: [
+    './step-c.component.scss',
+    '../register2.style.scss',
+    '../register2.scss-theme.scss',
+  ],
 })
-export class StepCComponent extends BaseStepDirective {
+export class StepCTComponent extends BaseStepDirective {
   @Input() loading
   @Input() reactivation: ReactivationLocal
 
