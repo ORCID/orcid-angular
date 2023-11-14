@@ -3,7 +3,7 @@ a {
   font-weight: normal;
 }
 
-mat-card-title  img {
+mat-card-title img {
   margin-bottom: 32px;
 }
 
@@ -84,6 +84,12 @@ mat-label.orc-font-small-print {
 // MATERIAL OVERWRITES
 
 ::ng-deep {
+
+  mat-vertical-stepper.orcid-stepper-wizard mat-card p,
+  mat-horizontal-stepper.orcid-stepper-wizard mat-card p {
+    margin-bottom: 16px;
+  }
+
 
   mat-vertical-stepper.orcid-stepper-wizard mat-card mat-form-field,
   mat-vertical-stepper.orcid-stepper-wizard mat-card .input-container,

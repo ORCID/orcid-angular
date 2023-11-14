@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   @ViewChild('stepComponentC', { read: ElementRef }) stepComponentC: ElementRef
   platform: PlatformInfo
   FormGroupStepA: UntypedFormGroup
-  FormGroupStepB: UntypedFormGroup
+  FormGroupStepBPassword: UntypedFormGroup
   FormGroupStepC: UntypedFormGroup
   isLinear = true
   personalData: RegisterForm
@@ -84,10 +84,14 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     this.FormGroupStepA = this._formBuilder.group({
       personal: [''],
     })
-    this.FormGroupStepB = this._formBuilder.group({
+    this.FormGroupStepBPassword = this._formBuilder.group({
       password: [''],
       sendOrcidNews: [''],
     })
+    // this.FormGroupStepBNotification = this._formBuilder.group({
+    //   password: [''],
+    //   sendOrcidNews: [''],
+    // })
     this.FormGroupStepC = this._formBuilder.group({
       activitiesVisibilityDefault: [''],
       termsOfUse: [''],
@@ -126,13 +130,13 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     this.lastStep.interacted = true
     if (
       this.FormGroupStepA.valid &&
-      this.FormGroupStepB.valid &&
+      this.FormGroupStepBPassword.valid &&
       this.FormGroupStepC.valid
     ) {
       this._register
         .backendRegisterFormValidate(
           this.FormGroupStepA,
-          this.FormGroupStepB,
+          this.FormGroupStepBPassword,
           this.FormGroupStepC
         )
         .pipe(
@@ -146,7 +150,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             }
             return this._register.register(
               this.FormGroupStepA,
-              this.FormGroupStepB,
+              this.FormGroupStepBPassword,
               this.FormGroupStepC,
               this.reactivation,
               this.requestInfoForm,

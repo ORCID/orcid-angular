@@ -1,9 +1,9 @@
 import { Component, forwardRef, Input, OnInit, ViewChild } from '@angular/core'
 import {
-  UntypedFormControl,
-  UntypedFormGroup,
   NG_ASYNC_VALIDATORS,
   NG_VALUE_ACCESSOR,
+  UntypedFormControl,
+  UntypedFormGroup,
   ValidatorFn,
   Validators,
 } from '@angular/forms'
@@ -20,6 +20,9 @@ import { BaseForm } from '../BaseForm'
   styleUrls: [
     './form-password.component.scss-theme.scss',
     './form-password.component.scss',
+    '../register2.scss-theme.scss',
+    '../register2.style.scss',
+
   ],
   providers: [
     {

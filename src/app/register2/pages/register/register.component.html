@@ -21,13 +21,13 @@
               #stepComponentA
             ></app-step-a>
           </mat-step> -->
-          <mat-step [stepControl]="FormGroupStepB">
+          <mat-step [stepControl]="FormGroupStepBPassword">
             <ng-template matStepLabel i18n="@@register.securityAndNotifications"
               >Security and notifications</ng-template
             >
             <app-step-b
               #stepComponentB
-              [(formGroup)]="FormGroupStepB"
+              [(formGroup)]="FormGroupStepBPassword"
               [personalData]="personalData"
               [reactivation]="reactivation"
             ></app-step-b>
