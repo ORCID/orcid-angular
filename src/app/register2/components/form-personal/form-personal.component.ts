@@ -15,7 +15,7 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms'
-import { RegisterService } from 'src/app/core/register/register.service'
+import { Register2Service } from 'src/app/core/register2/register2.service'
 import { OrcidValidators } from 'src/app/validators'
 
 import { first } from 'rxjs/operators'
@@ -51,7 +51,7 @@ export class FormPersonalComponent
   labelConfirmEmail = $localize`:@@register.confirmEmail:Confirm primary email`
   labelNameYouMostCommonly = $localize`:@@register.labelNameYouMostMost:The name you most commonly go by`
   constructor(
-    private _register: RegisterService,
+    private _register: Register2Service,
     private _reactivationService: ReactivationService
   ) {
     super()

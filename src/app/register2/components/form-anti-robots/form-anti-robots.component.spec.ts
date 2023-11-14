@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { FormAntiRobotsComponent } from './form-anti-robots.component'
-import { WINDOW_PROVIDERS } from '../../../cdk/window'
-import { RegisterService } from '../../../core/register/register.service'
-import { PlatformInfoService } from '../../../cdk/platform-info'
-import { ErrorHandlerService } from '../../../core/error-handler/error-handler.service'
-import { SnackbarService } from '../../../cdk/snackbar/snackbar.service'
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
-import { RouterTestingModule } from '@angular/router/testing'
 import { ErrorStateMatcher } from '@angular/material/core'
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
+import { RouterTestingModule } from '@angular/router/testing'
+import { PlatformInfoService } from '../../../cdk/platform-info'
+import { SnackbarService } from '../../../cdk/snackbar/snackbar.service'
+import { WINDOW_PROVIDERS } from '../../../cdk/window'
+import { ErrorHandlerService } from '../../../core/error-handler/error-handler.service'
+import { Register2Service } from '../../../core/register2/register2.service'
+import { FormAntiRobotsComponent } from './form-anti-robots.component'
 
 describe('FormAntiRobotsComponent', () => {
   let component: FormAntiRobotsComponent
@@ -23,7 +23,7 @@ describe('FormAntiRobotsComponent', () => {
       declarations: [FormAntiRobotsComponent],
       providers: [
         WINDOW_PROVIDERS,
-        RegisterService,
+        Register2Service,
         ErrorStateMatcher,
         PlatformInfoService,
         ErrorHandlerService,

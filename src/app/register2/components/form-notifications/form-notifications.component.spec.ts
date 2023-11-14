@@ -1,19 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { FormNotificationsComponent } from './form-notifications.component'
-import { RegisterService } from '../../../core/register/register.service'
+import { Overlay } from '@angular/cdk/overlay'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import {
-  MatLegacyDialog as MatDialog,
-  MatLegacyDialogModule as MatDialogModule,
+  MatLegacyDialog as MatDialog
 } from '@angular/material/legacy-dialog'
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
 import { RouterTestingModule } from '@angular/router/testing'
 import { PlatformInfoService } from '../../../cdk/platform-info'
-import { ErrorHandlerService } from '../../../core/error-handler/error-handler.service'
 import { SnackbarService } from '../../../cdk/snackbar/snackbar.service'
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
-import { Overlay } from '@angular/cdk/overlay'
 import { WINDOW_PROVIDERS } from '../../../cdk/window'
+import { ErrorHandlerService } from '../../../core/error-handler/error-handler.service'
+import { Register2Service } from '../../../core/register2/register2.service'
+import { FormNotificationsComponent } from './form-notifications.component'
 
 describe('FormNotificationsComponent', () => {
   let component: FormNotificationsComponent
@@ -25,7 +24,7 @@ describe('FormNotificationsComponent', () => {
       declarations: [FormNotificationsComponent],
       providers: [
         WINDOW_PROVIDERS,
-        RegisterService,
+        Register2Service,
         PlatformInfoService,
         ErrorHandlerService,
         SnackbarService,

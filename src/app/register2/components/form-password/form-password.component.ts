@@ -8,7 +8,7 @@ import {
   Validators,
 } from '@angular/forms'
 import { HAS_LETTER_OR_SYMBOL, HAS_NUMBER } from 'src/app/constants'
-import { RegisterService } from 'src/app/core/register/register.service'
+import { Register2Service } from 'src/app/core/register2/register2.service'
 import { RegisterForm } from 'src/app/types/register.endpoint'
 import { OrcidValidators } from 'src/app/validators'
 
@@ -46,7 +46,7 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
   hasNumberPattern = HAS_NUMBER
   hasLetterOrSymbolPattern = HAS_LETTER_OR_SYMBOL
   @Input() personalData: RegisterForm
-  constructor(private _register: RegisterService) {
+  constructor(private _register: Register2Service) {
     super()
   }
   ngOnInit() {

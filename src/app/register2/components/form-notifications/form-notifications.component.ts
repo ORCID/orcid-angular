@@ -1,19 +1,23 @@
 import { Component, forwardRef, OnInit } from '@angular/core'
 import {
-  UntypedFormControl,
-  UntypedFormGroup,
   NG_ASYNC_VALIDATORS,
   NG_VALUE_ACCESSOR,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms'
-import { RegisterService } from 'src/app/core/register/register.service'
 
+import { Register2Service } from 'src/app/core/register2/register2.service'
 import { BaseForm } from '../BaseForm'
 
 @Component({
   selector: 'app-form-notifications',
   templateUrl: './form-notifications.component.html',
-  styleUrls: ['./form-notifications.component.scss'],
+  styleUrls: [
+    './form-notifications.component.scss',
+    '../register2.style.scss',
+    '../register2.scss-theme.scss',
+  ],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -28,7 +32,7 @@ import { BaseForm } from '../BaseForm'
   ],
 })
 export class FormNotificationsComponent extends BaseForm implements OnInit {
-  constructor(private _register: RegisterService) {
+  constructor(private _register: Register2Service) {
     super()
   }
   ngOnInit() {

@@ -12,27 +12,26 @@ import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms'
 import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
 import { MatStep } from '@angular/material/stepper'
 import { Router } from '@angular/router'
-import { combineLatest, forkJoin, Observable } from 'rxjs'
+import { Observable, combineLatest, forkJoin } from 'rxjs'
 import { catchError, first, map, switchMap } from 'rxjs/operators'
 import { IsThisYouComponent } from 'src/app/cdk/is-this-you'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { isRedirectToTheAuthorizationPage } from 'src/app/constants'
 import { UserService } from 'src/app/core'
-import { RegisterService } from 'src/app/core/register/register.service'
-import { RequestInfoForm } from 'src/app/types'
+import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
+import { Register2Service } from 'src/app/core/register2/register2.service'
+import { ERROR_REPORT } from 'src/app/errors'
+import { RequestInfoForm, SearchResults } from 'src/app/types'
 import {
   RegisterConfirmResponse,
   RegisterForm,
 } from 'src/app/types/register.endpoint'
-import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
-import { ERROR_REPORT } from 'src/app/errors'
 import { UserSession } from 'src/app/types/session.local'
 import { ThirdPartyAuthData } from 'src/app/types/sign-in-data.endpoint'
-import { ReactivationLocal } from '../../../types/reactivation.local'
-import { SearchService } from '../../../core/search/search.service'
-import { SearchParameters, SearchResults } from 'src/app/types'
 import { GoogleTagManagerService } from '../../../core/google-tag-manager/google-tag-manager.service'
+import { SearchService } from '../../../core/search/search.service'
+import { ReactivationLocal } from '../../../types/reactivation.local'
 
 @Component({
   selector: 'app-register-2',
@@ -44,10 +43,14 @@ export class Register2Component implements OnInit, AfterViewInit {
   @ViewChild('stepComponentA', { read: ElementRef }) stepComponentA: ElementRef
   @ViewChild('stepComponentB', { read: ElementRef }) stepComponentB: ElementRef
   @ViewChild('stepComponentC', { read: ElementRef }) stepComponentC: ElementRef
+  @ViewChild('stepComponentD', { read: ElementRef }) stepComponentD: ElementRef
+
   platform: PlatformInfo
   FormGroupStepA: UntypedFormGroup
   FormGroupStepB: UntypedFormGroup
   FormGroupStepC: UntypedFormGroup
+  FormGroupStepD: UntypedFormGroup
+
   isLinear = true
   personalData: RegisterForm
   backendForm: RegisterForm
@@ -63,7 +66,7 @@ export class Register2Component implements OnInit, AfterViewInit {
     private _cdref: ChangeDetectorRef,
     private _platformInfo: PlatformInfoService,
     private _formBuilder: UntypedFormBuilder,
-    private _register: RegisterService,
+    private _register: Register2Service,
     private _dialog: MatDialog,
     @Inject(WINDOW) private window: Window,
     private _googleTagManagerService: GoogleTagManagerService,
@@ -87,10 +90,12 @@ export class Register2Component implements OnInit, AfterViewInit {
     })
     this.FormGroupStepB = this._formBuilder.group({
       password: [''],
-      sendOrcidNews: [''],
     })
     this.FormGroupStepC = this._formBuilder.group({
       activitiesVisibilityDefault: [''],
+    })
+    this.FormGroupStepD = this._formBuilder.group({
+      sendOrcidNews: [''],
       termsOfUse: [''],
       captcha: [''],
     })
@@ -128,13 +133,15 @@ export class Register2Component implements OnInit, AfterViewInit {
     if (
       this.FormGroupStepA.valid &&
       this.FormGroupStepB.valid &&
-      this.FormGroupStepC.valid
+      this.FormGroupStepC.valid &&
+      this.FormGroupStepD.valid
     ) {
       this._register
         .backendRegisterFormValidate(
           this.FormGroupStepA,
           this.FormGroupStepB,
-          this.FormGroupStepC
+          this.FormGroupStepC,
+          this.FormGroupStepD
         )
         .pipe(
           switchMap((validator: RegisterForm) => {
@@ -149,9 +156,9 @@ export class Register2Component implements OnInit, AfterViewInit {
               this.FormGroupStepA,
               this.FormGroupStepB,
               this.FormGroupStepC,
+              this.FormGroupStepD,
               this.reactivation,
               this.requestInfoForm,
-              true
             )
           })
         )
@@ -213,28 +220,6 @@ export class Register2Component implements OnInit, AfterViewInit {
     }
   }
 
-  afterStepASubmitted() {
-    // Update the personal data object is required after submit since is an input for StepB
-
-    if (!this.reactivation?.isReactivation) {
-      if (this.FormGroupStepA.valid) {
-        this.personalData = this.FormGroupStepA.value.personal
-        const searchValue =
-          this.personalData.familyNames.value +
-          ' ' +
-          this.personalData.givenNames.value
-        const searchParams: SearchParameters = {}
-        searchParams.searchQuery = searchValue
-
-        this._searchService.search(searchParams).subscribe((value) => {
-          if (value['num-found'] > 0) {
-            this.openDialog(value)
-          }
-        })
-      }
-    }
-  }
-
   openDialog(duplicateRecordsSearchResults: SearchResults): void {
     const duplicateRecords = duplicateRecordsSearchResults['expanded-result']
     const dialogParams = {
@@ -273,9 +258,6 @@ export class Register2Component implements OnInit, AfterViewInit {
   }
 
   selectionChange(event: StepperSelectionEvent) {
-    if (event.previouslySelectedIndex === 0) {
-      this.afterStepASubmitted()
-    }
     if (this.platform.columns4 || this.platform.columns8) {
       this.focusCurrentStep(event)
     }
@@ -284,6 +266,7 @@ export class Register2Component implements OnInit, AfterViewInit {
   // Fix to material vertical stepper not focusing current header
   // related issue https://github.com/angular/components/issues/8881
   focusCurrentStep(event: StepperSelectionEvent) {
+    console.log('event', event)
     let nextStep: ElementRef
     if (event.selectedIndex === 0) {
       nextStep = this.stepComponentA
@@ -291,6 +274,8 @@ export class Register2Component implements OnInit, AfterViewInit {
       nextStep = this.stepComponentB
     } else if (event.selectedIndex === 2) {
       nextStep = this.stepComponentC
+    } else if (event.selectedIndex === 3) {
+      nextStep = this.stepComponentD
     }
     // On mobile scroll the current step component into view
     if (this.platform.columns4 || this.platform.columns8) {

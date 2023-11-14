@@ -1,15 +1,15 @@
 import { Component, DoCheck, forwardRef, OnInit } from '@angular/core'
 import {
-  UntypedFormControl,
-  UntypedFormGroup,
   NG_ASYNC_VALIDATORS,
   NG_VALUE_ACCESSOR,
+  UntypedFormControl,
+  UntypedFormGroup,
   ValidatorFn,
   Validators,
 } from '@angular/forms'
 import { ErrorStateMatcher } from '@angular/material/core'
 import { merge, Subject } from 'rxjs'
-import { RegisterService } from 'src/app/core/register/register.service'
+import { Register2Service } from 'src/app/core/register2/register2.service'
 
 import { BaseForm } from '../BaseForm'
 
@@ -48,7 +48,7 @@ export class FormAntiRobotsComponent
   }
 
   constructor(
-    private _register: RegisterService,
+    private _register: Register2Service,
     private _errorStateMatcher: ErrorStateMatcher
   ) {
     super()

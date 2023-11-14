@@ -1,13 +1,13 @@
 import { Component, DoCheck, forwardRef, OnInit } from '@angular/core'
 import {
-  UntypedFormControl,
-  UntypedFormGroup,
   NG_ASYNC_VALIDATORS,
   NG_VALUE_ACCESSOR,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms'
 import { ErrorStateMatcher } from '@angular/material/core'
-import { RegisterService } from 'src/app/core/register/register.service'
+import { Register2Service } from 'src/app/core/register2/register2.service'
 import { environment } from 'src/environments/environment'
 
 import { BaseForm } from '../BaseForm'
@@ -15,7 +15,9 @@ import { BaseForm } from '../BaseForm'
 @Component({
   selector: 'app-form-terms',
   templateUrl: './form-terms.component.html',
-  styleUrls: ['./form-terms.component.scss'],
+  styleUrls: ['./form-terms.component.scss',
+  '../register2.style.scss',
+  '../register2.scss-theme.scss',],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -34,7 +36,7 @@ import { BaseForm } from '../BaseForm'
 export class FormTermsComponent extends BaseForm implements OnInit, DoCheck {
   environment = environment
   constructor(
-    private _register: RegisterService,
+    private _register: Register2Service,
     private _errorStateMatcher: ErrorStateMatcher
   ) {
     super()

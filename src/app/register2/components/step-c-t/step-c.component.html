@@ -28,7 +28,7 @@
       </ng-container>
     </mat-card-title>
     <mat-card-subtitle role="heading" aria-level="2" i18n="@@register.step3"
-      >This is step 3 of 3</mat-card-subtitle
+      >This is step 3 of 4</mat-card-subtitle
     >
   </mat-card-header>
 
@@ -45,6 +45,7 @@
           mat-raised-button
           color="primary"
           [disabled]="loading"
+          matStepperNext
         >
           <ng-container
             *ngIf="!reactivation?.isReactivation"

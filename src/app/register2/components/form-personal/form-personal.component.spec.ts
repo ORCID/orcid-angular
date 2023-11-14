@@ -1,24 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { FormPersonalComponent } from './form-personal.component'
-import { HttpClientTestingModule } from '@angular/common/http/testing'
-import { RouterTestingModule } from '@angular/router/testing'
-import {
-  MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA,
-  MatLegacyDialog as MatDialog,
-  MatLegacyDialogRef as MatDialogRef,
-} from '@angular/material/legacy-dialog'
-import { WINDOW_PROVIDERS } from '../../../cdk/window'
-import { FormBuilder } from '@angular/forms'
-import { RecordWorksService } from '../../../core/record-works/record-works.service'
-import { PlatformInfoService } from '../../../cdk/platform-info'
-import { ErrorHandlerService } from '../../../core/error-handler/error-handler.service'
-import { SnackbarService } from '../../../cdk/snackbar/snackbar.service'
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
 import { Overlay } from '@angular/cdk/overlay'
-import { RegisterService } from '../../../core/register/register.service'
-import { ReactivationService } from '../../../core/reactivation/reactivation.service'
+import { HttpClientTestingModule } from '@angular/common/http/testing'
+import {
+  MatLegacyDialog as MatDialog
+} from '@angular/material/legacy-dialog'
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
+import { RouterTestingModule } from '@angular/router/testing'
+import { PlatformInfoService } from '../../../cdk/platform-info'
 import { MdePopoverModule } from '../../../cdk/popover'
+import { SnackbarService } from '../../../cdk/snackbar/snackbar.service'
+import { WINDOW_PROVIDERS } from '../../../cdk/window'
+import { ErrorHandlerService } from '../../../core/error-handler/error-handler.service'
+import { ReactivationService } from '../../../core/reactivation/reactivation.service'
+import { Register2Service } from '../../../core/register2/register2.service'
+import { FormPersonalComponent } from './form-personal.component'
 
 describe('FormPersonalComponent', () => {
   let component: FormPersonalComponent
@@ -31,7 +27,7 @@ describe('FormPersonalComponent', () => {
       providers: [
         WINDOW_PROVIDERS,
         ReactivationService,
-        RegisterService,
+        Register2Service,
         PlatformInfoService,
         ErrorHandlerService,
         SnackbarService,

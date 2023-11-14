@@ -7,6 +7,13 @@
 
   <mat-card-header>
     <mat-card-title role="heading" aria-level="1">
+      <div>
+        <img
+          height="64px"
+          src="assets/vectors/orcid.logo.icon.svg"
+          alt="orcid logo"
+        />
+      </div>
       <ng-container
         *ngIf="!reactivation?.isReactivation"
         i18n="@@register.create"
@@ -21,28 +28,18 @@
       </ng-container>
     </mat-card-title>
     <mat-card-subtitle role="heading" aria-level="2" i18n="@@register.step3"
-      >This is step 3 of 3</mat-card-subtitle
+      >This is step 4 of 4</mat-card-subtitle
     >
   </mat-card-header>
 
   <mat-card-content>
     <form [formGroup]="formGroup" #form>
-      <app-form-visibility
-        formControlName="activitiesVisibilityDefault"
-      ></app-form-visibility>
+      <app-form-notifications
+        formControlName="sendOrcidNews"
+      ></app-form-notifications>
       <app-form-terms formControlName="termsOfUse"></app-form-terms>
       <app-form-anti-robots formControlName="captcha"></app-form-anti-robots>
       <div class="step-actions">
-        <button
-          mat-button
-          color="primary"
-          matStepperPrevious
-          type="button"
-          i18n="@@shared.back"
-          id="step-c-back-button"
-        >
-          GO BACK
-        </button>
         <button
           id="step-c-register-button"
           mat-raised-button
@@ -62,6 +59,16 @@
             REACTIVATE
           </ng-container>
         </button>
+        <a
+          mat-button
+          color="primary"
+          matStepperPrevious
+          type="button"
+          i18n="@@shared.previousStep"
+          id="step-c-back-button"
+        >
+          Previous Step
+        </a>
       </div>
     </form>
   </mat-card-content>

@@ -8,7 +8,7 @@ import {
 } from '@angular/forms'
 import { ErrorStateMatcher } from '@angular/material/core'
 import { VISIBILITY_OPTIONS } from 'src/app/constants'
-import { RegisterService } from 'src/app/core/register/register.service'
+import { Register2Service } from 'src/app/core/register2/register2.service'
 
 import { BaseForm } from '../BaseForm'
 
@@ -42,7 +42,7 @@ export class FormVisibilityComponent
   errorState = false
   activitiesVisibilityDefault = new UntypedFormControl('', Validators.required)
   constructor(
-    private _register: RegisterService,
+    private _register: Register2Service,
     private _errorStateMatcher: ErrorStateMatcher
   ) {
     super()

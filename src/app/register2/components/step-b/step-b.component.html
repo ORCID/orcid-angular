@@ -32,28 +32,36 @@
         formControlName="password"
         [personalData]="personalData"
       ></app-form-password>
-      <app-form-notifications
-        formControlName="sendOrcidNews"
-      ></app-form-notifications>
       <div class="step-actions">
         <button
+          id="step-c-register-button"
+          mat-raised-button
+          color="primary"
+          matStepperNext
+        >
+          <ng-container
+            *ngIf="!reactivation?.isReactivation"
+            i18n="@@register.nextStep"
+          >
+            Next Step
+          </ng-container>
+          <ng-container
+            *ngIf="reactivation?.isReactivation"
+            i18n="@@register.reactivate"
+          >
+            REACTIVATE
+          </ng-container>
+        </button>
+        <a
           mat-button
           color="primary"
           matStepperPrevious
-          i18n="@@shared.back"
-          id="step-b-back-button"
+          type="button"
+          i18n="@@shared.previousStep"
+          id="step-c-back-button"
         >
-          GO BACK
-        </button>
-        <button
-          id="step-b-next"
-          mat-raised-button
-          matStepperNext
-          color="primary"
-          i18n="@@shared.next"
-        >
-          NEXT
-        </button>
+          Previous Step
+        </a>
       </div>
     </form>
   </mat-card-content>
