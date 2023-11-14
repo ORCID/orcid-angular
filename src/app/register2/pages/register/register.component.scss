@@ -1,0 +1,15 @@
+:host {
+  width: 100%;
+
+  ::ng-deep {
+    .mat-horizontal-stepper-header-container {
+      display: none;
+    }
+  }
+}
+
+mat-vertical-stepper,
+mat-horizontal-stepper {
+  max-width: 100%;
+  width: 100%;
+}

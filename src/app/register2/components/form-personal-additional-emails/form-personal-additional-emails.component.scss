@@ -1,0 +1,11 @@
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  display: flex;
+  span {
+    margin: 2px;
+  }
+}

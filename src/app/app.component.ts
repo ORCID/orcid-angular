@@ -2,21 +2,20 @@ import { Component, HostBinding, HostListener, Inject } from '@angular/core'
 import { NavigationEnd, NavigationStart, Router } from '@angular/router'
 import { catchError, tap } from 'rxjs/operators'
 
+import {
+  finishPerformanceMeasurement,
+  reportNavigationStart,
+} from './analytics-utils'
 import { PlatformInfo } from './cdk/platform-info'
 import { PlatformInfoService } from './cdk/platform-info/platform-info.service'
 import { WINDOW } from './cdk/window'
 import { HeadlessOnOauthRoutes } from './constants'
 import { UserService } from './core'
-import { ZendeskService } from './core/zendesk/zendesk.service'
-import { GoogleTagManagerService } from './core/google-tag-manager/google-tag-manager.service'
-import {
-  finishPerformanceMeasurement,
-  reportNavigationStart,
-} from './analytics-utils'
-import { ERROR_REPORT } from './errors'
 import { ErrorHandlerService } from './core/error-handler/error-handler.service'
-import { environment } from 'src/environments/environment'
+import { GoogleTagManagerService } from './core/google-tag-manager/google-tag-manager.service'
 import { TitleService } from './core/title-service/title.service'
+import { ZendeskService } from './core/zendesk/zendesk.service'
+import { ERROR_REPORT } from './errors'
 
 @Component({
   selector: 'app-root',
@@ -59,6 +58,7 @@ export class AppComponent {
           this.currentRouteIsHeadlessOnOauthPage = this.showHeadlessOnOauthPage(
             platformInfo.currentRoute
           )
+          console.log('currentRouteIsHeadlessOnOauthPage', this.currentRouteIsHeadlessOnOauthPage)
           this.setPlatformClasses(platformInfo)
           this.screenDirection = platformInfo.screenDirection
           if (
@@ -113,6 +113,8 @@ export class AppComponent {
   }
   showHeadlessOnOauthPage(currentRoute: string): boolean {
     if (currentRoute) {
+      console.log(currentRoute)
+
       const value = HeadlessOnOauthRoutes.filter(
         (url) => currentRoute.indexOf('/' + url) === 0
       )

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core'
-import { RouterModule, Routes } from '@angular/router'
+import { LoadChildrenCallback, RouterModule, Routes } from '@angular/router'
 
 import {
   ApplicationRoutes,
@@ -91,7 +91,9 @@ const routes: Routes = [
     path: ApplicationRoutes.register,
     canActivateChild: [LanguageGuard, RegisterGuard],
     loadChildren: () =>
-      import('./register/register.module').then((m) => m.RegisterModule),
+      (!localStorage.getItem('register2') &&
+       import('./register/register.module').then((m) => m.RegisterModule)) || 
+       import('./register2/register.module').then((m) => m.Register2Module),
   },
   {
     path: ApplicationRoutes.search,
@@ -179,4 +181,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, {})],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
