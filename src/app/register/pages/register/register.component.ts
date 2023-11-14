@@ -12,27 +12,26 @@ import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms'
 import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
 import { MatStep } from '@angular/material/stepper'
 import { Router } from '@angular/router'
-import { combineLatest, forkJoin, Observable } from 'rxjs'
+import { Observable, combineLatest, forkJoin } from 'rxjs'
 import { catchError, first, map, switchMap } from 'rxjs/operators'
 import { IsThisYouComponent } from 'src/app/cdk/is-this-you'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { isRedirectToTheAuthorizationPage } from 'src/app/constants'
 import { UserService } from 'src/app/core'
+import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 import { RegisterService } from 'src/app/core/register/register.service'
-import { RequestInfoForm } from 'src/app/types'
+import { ERROR_REPORT } from 'src/app/errors'
+import { RequestInfoForm, SearchParameters, SearchResults } from 'src/app/types'
 import {
   RegisterConfirmResponse,
   RegisterForm,
 } from 'src/app/types/register.endpoint'
-import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
-import { ERROR_REPORT } from 'src/app/errors'
 import { UserSession } from 'src/app/types/session.local'
 import { ThirdPartyAuthData } from 'src/app/types/sign-in-data.endpoint'
-import { ReactivationLocal } from '../../../types/reactivation.local'
-import { SearchService } from '../../../core/search/search.service'
-import { SearchParameters, SearchResults } from 'src/app/types'
 import { GoogleTagManagerService } from '../../../core/google-tag-manager/google-tag-manager.service'
+import { SearchService } from '../../../core/search/search.service'
+import { ReactivationLocal } from '../../../types/reactivation.local'
 
 @Component({
   selector: 'app-register',

@@ -9,7 +9,6 @@ import { FormVisibilityComponent } from './components/form-visibility/form-visib
 import { StepAComponent } from './components/step-a/step-a.component'
 import { StepBComponent } from './components/step-b/step-b.component'
 import { StepDComponent } from './components/step-d/step-d.component'
-import { RegisterComponent } from './pages/register/register.component'
 import { RegisterRoutingModule } from './register-routing.module'
 // tslint:disable-next-line: max-line-length
 import { MatIconModule } from '@angular/material/icon'
@@ -33,9 +32,9 @@ import { FormAntiRobotsComponent } from './components/form-anti-robots/form-anti
 import { FormPersonalAdditionalEmailsComponent } from './components/form-personal-additional-emails/form-personal-additional-emails.component'
 import { StepCTComponent } from './components/step-c-t/step-c.component'
 import { TopBarRecordIssuesComponent } from './components/top-bar-record-issues/top-bar-record-issues.component'
+import { Register2Component } from './pages/register/register2.component'
 @NgModule({
   declarations: [
-    RegisterComponent,
     StepAComponent,
     StepBComponent,
     StepCTComponent,
@@ -49,6 +48,7 @@ import { TopBarRecordIssuesComponent } from './components/top-bar-record-issues/
     FormAntiRobotsComponent,
     BackendErrorComponent,
     TopBarRecordIssuesComponent,
+    Register2Component
   ],
   imports: [
     CommonModule,
