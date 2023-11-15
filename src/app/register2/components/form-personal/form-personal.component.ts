@@ -8,8 +8,11 @@ import {
   ViewChild,
 } from '@angular/core'
 import {
+  FormControl,
+  FormGroupDirective,
   NG_ASYNC_VALIDATORS,
   NG_VALUE_ACCESSOR,
+  NgForm,
   UntypedFormControl,
   UntypedFormGroup,
   ValidatorFn,
@@ -18,10 +21,20 @@ import {
 import { Register2Service } from 'src/app/core/register2/register2.service'
 import { OrcidValidators } from 'src/app/validators'
 
-import { first } from 'rxjs/operators'
+import { debounce, debounceTime, filter, first, startWith, switchMap } from 'rxjs/operators'
 import { ReactivationService } from '../../../core/reactivation/reactivation.service'
 import { ReactivationLocal } from '../../../types/reactivation.local'
 import { BaseForm } from '../BaseForm'
+import { ErrorStateMatcher } from '@angular/material/core'
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+
+    // !((this.emails.hasError('backendError', 'email') && !nextButtonWasClicked))
+    console.log(control)
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @Component({
   selector: 'app-form-personal',
@@ -41,15 +54,24 @@ import { BaseForm } from '../BaseForm'
     },
   ],
 })
+
+
+
 export class FormPersonalComponent
   extends BaseForm
   implements OnInit, AfterViewInit {
+  matcher = new MyErrorStateMatcher;
+  @Input() nextButtonWasClicked: boolean
   @Input() reactivation: ReactivationLocal
   @ViewChild('firstInput') firstInput: ElementRef
   labelInfoAboutName = $localize`:@@register.ariaLabelInfo:info about names`
   labelClose = $localize`:@@register.ariaLabelClose:close`
   labelConfirmEmail = $localize`:@@register.confirmEmail:Confirm primary email`
   labelNameYouMostCommonly = $localize`:@@register.labelNameYouMostMost:The name you most commonly go by`
+  labelFamilyNamePlaceholder = $localize`:@@register.familyNamePlaceholder:Your family name or surname
+  `
+  professionalEmail: boolean
+  personalEmail: boolean
   constructor(
     private _register: Register2Service,
     private _reactivationService: ReactivationService
@@ -87,6 +109,22 @@ export class FormPersonalComponent
       }
     )
 
+    this.emails.controls['email'].valueChanges.pipe(debounceTime(1000),filter( () =>
+      !this.emails.controls['email'].errors
+    ), switchMap(
+      (value) => {
+        const emailDomain = value.split('@')[1]
+        return this._register.getEmailCategory(emailDomain)
+      }
+    )).subscribe(value => {
+      console.log(value)
+      this.professionalEmail = value.category === 'PROFESSIONAL'
+      this.personalEmail = value.category === 'PERSONAL'
+
+    })
+
+
+
     if (!this.reactivation?.isReactivation) {
       this.emails.addControl(
         'confirmEmail',
@@ -95,6 +133,8 @@ export class FormPersonalComponent
         })
       )
     }
+
+
 
     this.form = new UntypedFormGroup({
       givenNames: new UntypedFormControl('', {
@@ -124,8 +164,10 @@ export class FormPersonalComponent
     // Timeout used to get focus on the first input after the first step loads
     setTimeout(() => {
       this.firstInput.nativeElement.focus()
-    }, 100)
-  }
+    }), 100
+    }
+
+
 
   allEmailsAreUnique(): ValidatorFn {
     return (formGroup: UntypedFormGroup) => {

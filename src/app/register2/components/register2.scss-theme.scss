@@ -8,9 +8,15 @@
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
 
+  .step-actions {
+    border-color: mat.get-color-from-palette($background,
+        ui-background-light);
+  }
+
   ::ng-deep .valid {
     color: mat.get-color-from-palette($accent, 900);
   }
+
   .error {
     color: map-get($foreground, 'state-warning-dark');
   }
@@ -19,6 +25,20 @@
     color: map-get($foreground, 'text-dark-mid');
 
   }
+
+  .info {
+    background-color: mat.get-color-from-palette($background, state-notice-lightest);
+    border-color: mat.get-color-from-palette($foreground,
+        'state-notice-dark'
+      ) !important;
+
+    mat-icon {
+      color: mat.get-color-from-palette($foreground,
+          'state-notice-dark'
+        ) !important;
+    }
+  }
+
 }
 
 @include theme($orcid-app-theme);

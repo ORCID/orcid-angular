@@ -16,6 +16,7 @@ import { BaseStepDirective } from '../BaseStep'
 })
 export class StepAComponent extends BaseStepDirective {
   @Input() reactivation: ReactivationLocal
+  nextButtonWasClicked = false
 
   constructor(private _platform: PlatformInfoService, private _router: Router) {
     super()
@@ -47,6 +48,10 @@ export class StepAComponent extends BaseStepDirective {
           })
         }
       })
+  }
+
+  nextButton () {
+    this.nextButtonWasClicked = true
   }
 
   signIn() {

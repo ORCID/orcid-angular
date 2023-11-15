@@ -29,7 +29,7 @@
       <label i18n="@@register.optional">(Optional)</label></mat-label>
     <mat-form-field appearance="outline" [hideRequiredMarker]="true">
 
-      <input id="family-names-input" formControlName="familyNames" matInput />
+      <input id="family-names-input" formControlName="familyNames" matInput [placeholder]="labelFamilyNamePlaceholder" />
       <mat-error *ngIf="form.hasError('illegalName', 'familyNames')" i18n="@@register.invalidName">
         Invalid name characters or format
       </mat-error>
@@ -46,11 +46,11 @@
     <div class="input-container">
 
       <mat-label class="orc-font-small-print" class="orc-font-small-print"
-        [ngClass]="{error: emailFormTouched && form.hasError('required', 'emails.email')}"
+        [ngClass]="{error: emailFormTouched && form.hasError('required', 'emails.email') }"
         i18n="@@register.primaryEmail">Email</mat-label>
 
       <mat-form-field appearance="outline" [hideRequiredMarker]="true">
-        <input id="email-input" formControlName="email" matInput appTrim type="email" />
+        <input [errorStateMatcher]="matcher" id="email-input" formControlName="email" matInput appTrim type="email" />
       </mat-form-field>
       <mat-error *ngIf="emailFormTouched && form.hasError('required', 'emails.email')"
         i18n="@@register.primaryEmailRequired">
@@ -63,12 +63,68 @@
         Invalid email format
       </mat-error>
 
-      <mat-error *ngIf="this.emails.hasError('backendError', 'email')">
+      <mat-error *ngIf="this.emails.hasError('backendError', 'email') && nextButtonWasClicked">
         <div *ngFor="let error of this.emails.getError('backendError', 'email')">
           <app-backend-error [errorCode]="error" [value]="emails.get('email').value"></app-backend-error>
         </div>
       </mat-error>
     </div>
+
+<ng-container>
+    <div
+    class="announce"
+  >
+    <div>
+      <img src="/assets/vectors/personal-email-icon.svg">
+    </div>
+    <div class="content">
+      <div i18n="@@account.warningDuplicated">
+        <h3> This looks like a personal email</h3>     </div>
+      <div>
+      <ng-container> Add a </ng-container><strong>professional email</strong> <ng-container> as backup so we can better recommend affiliations and other related data to you.  </ng-container>    </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container>
+  <div
+  class="announce"
+  >
+  <div>
+   <img src="/assets/vectors/professional-email-icon.svg">
+  </div>
+  <div class="content">
+    <div i18n="@@account.warningDuplicated">
+      <h3>This looks like a professional email</h3>>
+    </div>
+    <div>
+      <ng-container>We recommend adding a </ng-container><strong>personal email</strong> <ng-container> as backup so you always have access to your ORCID account if you change jobs or roles.</ng-container>
+    </div>
+  </div>
+</div>
+</ng-container>
+
+
+<ng-container *ngIf="this.emails.hasError('backendError', 'email')">
+  <div
+  *ngFor="let error of this.emails.getError('backendError', 'email')"
+  class="info"
+
+>
+  <div>
+    <mat-icon class="large-material-icon material-symbols-outlined">error</mat-icon>
+  </div>
+  <div class="content">
+    <div i18n="@@account.warningDuplicated">
+      <p>
+      The email address <strong>{{emails.get('email').value}}</strong> is associated with an existing ORCID record.
+    </div>
+    <div>
+      <a routerLink="/signin"> Sign in to ORCID using this email address</a>
+    </div>
+  </div>
+</div>
+</ng-container>
 
     <!-- <mat-label i18n="@@register.confirmEmail"
     >Confirm primary email</mat-label
@@ -79,7 +135,7 @@
 
         <input formControlName="confirmEmail" matInput (paste)="(false)" appTrim autocomplete="off" type="email"
           id="confirm-email-input" [attr.labelConfirmEmail]="labelConfirmEmail"
-          [attr.placeholder]="labelConfirmEmail" />
+          [attr.placeholder]="labelConfirmEmail" [disabled]="this.emails.hasError('backendError', 'email') || !emailFormTouched || form.hasError('required', 'emails.email')" />
 
       </mat-form-field>
       <mat-error *ngIf="emailConfirmationFormTouched && form.hasError('required', 'emails.confirmEmail')" i18n="@@register.confirmEmailRequired">

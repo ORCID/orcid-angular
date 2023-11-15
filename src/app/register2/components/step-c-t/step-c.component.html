@@ -18,8 +18,8 @@
         *ngIf="!reactivation?.isReactivation"
         i18n="@@register.create"
       >
-        Create your ORCID iD
-      </ng-container>
+      <h1 class="orc-font-heading-small">Create your ORCID iD</h1>
+    </ng-container>
       <ng-container
         *ngIf="reactivation?.isReactivation"
         i18n="@@register.reactivation"
@@ -27,8 +27,8 @@
         Thank you for reactivating your ORCID iD.
       </ng-container>
     </mat-card-title>
-    <mat-card-subtitle role="heading" aria-level="2" i18n="@@register.step3"
-      >This is step 3 of 4</mat-card-subtitle
+    <mat-card-subtitle role="heading" aria-level="2" i18n="@@register.step3.2"
+      >Step 3 of 4 - Visibility</mat-card-subtitle
     >
   </mat-card-header>
 

@@ -19,6 +19,7 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { UserService } from '../user/user.service'
 import { Register2BackendValidatorMixin } from './register2.backend-validators'
 import { Register2FormAdapterMixin } from './register2.form-adapter'
+import { EmailCategoryEndpoint } from 'src/app/types/register.email-category'
 
 // Mixing boiler plate
 
@@ -72,6 +73,10 @@ export class Register2Service extends _RegisterServiceMixingBase {
         catchError((error) => this._errorHandler.handleError(error))
       )
       .pipe(map((form) => (this.backendRegistrationForm = form)))
+  }
+
+  getEmailCategory(email: string): Observable<EmailCategoryEndpoint> {
+    return this._http.get<any>(`${environment.API_WEB}email-domain/find-category?domain=${email}`)
   }
 
   register(
