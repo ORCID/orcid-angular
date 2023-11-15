@@ -4,20 +4,20 @@
 
   <div class="input-container">
     <mat-label i18n="@@register.givenNames" class="orc-font-small-print"
-      [ngClass]="{'error': form.controls.givenNames.touched && form.controls.givenNames.errors}">Given names</mat-label>
+      [ngClass]="{'error': givenNameFormTouched && form.controls.givenNames.errors}">Given names</mat-label>
     <mat-form-field appearance="outline" [hideRequiredMarker]="true" async>
       <input id="given-names-input" formControlName="givenNames" matInput #firstInput
         [attr.placeholder]="labelNameYouMostCommonly" />
     </mat-form-field>
 
-    <mat-error *ngIf="form.controls.givenNames.touched && form.hasError('required', 'givenNames')"
+    <mat-error *ngIf="givenNameFormTouched && form.hasError('required', 'givenNames')"
       i18n="@@register.firstNamePassword">
       Please enter your first/given name
     </mat-error>
-    <mat-error *ngIf="form.hasError('illegalName', 'givenNames')" i18n="@@register.invalidName">
+    <mat-error *ngIf=" givenNameFormTouched && form.hasError('illegalName', 'givenNames')" i18n="@@register.invalidName">
       Invalid name characters or format
     </mat-error>
-    <mat-error *ngIf="form.hasError('backendError', 'givenNames')">
+    <mat-error *ngIf="givenNameFormTouched && form.hasError('backendError', 'givenNames')">
       <div *ngFor="let error of form.getError('backendError', 'givenNames')">
         <app-backend-error [errorCode]="error"></app-backend-error>
       </div>
@@ -41,6 +41,12 @@
     </mat-form-field>
   </div>
 
+
+  <!-- EMAIL -->
+
+
+
+
   <h2 i18n="@@register.yourEmailAddresses" class="orc-font-body">Your email addresses</h2>
   <ng-container formGroupName="emails">
     <div class="input-container">
@@ -49,16 +55,18 @@
         [ngClass]="{error: emailFormTouched && form.hasError('required', 'emails.email') }"
         i18n="@@register.primaryEmail">Email</mat-label>
 
-      <mat-form-field appearance="outline" [hideRequiredMarker]="true">
-        <input [errorStateMatcher]="matcher" id="email-input" formControlName="email" matInput appTrim type="email" />
+      <mat-form-field appearance="outline" [hideRequiredMarker]="true" [ngClass]="{'valid-password-input' : emailsAreValid}">
+        <mat-icon *ngIf="emailsAreValid" matSuffix>done</mat-icon>
+
+        <input id="email-input" formControlName="email" matInput appTrim type="email" />
       </mat-form-field>
       <mat-error *ngIf="emailFormTouched && form.hasError('required', 'emails.email')"
         i18n="@@register.primaryEmailRequired">
         An email is required
       </mat-error>
       <mat-error *ngIf="
-        this.emails.hasError('email', 'email') ||
-        this.emails.hasError('pattern', 'email')
+        (this.emails.hasError('email', 'email') ||
+        this.emails.hasError('pattern', 'email')) && emailFormTouched
       " i18n="@@register.invalidEmail">
         Invalid email format
       </mat-error>
@@ -69,40 +77,6 @@
         </div>
       </mat-error>
     </div>
-
-<ng-container>
-    <div
-    class="announce"
-  >
-    <div>
-      <img src="/assets/vectors/personal-email-icon.svg">
-    </div>
-    <div class="content">
-      <div i18n="@@account.warningDuplicated">
-        <h3> This looks like a personal email</h3>     </div>
-      <div>
-      <ng-container> Add a </ng-container><strong>professional email</strong> <ng-container> as backup so we can better recommend affiliations and other related data to you.  </ng-container>    </div>
-    </div>
-  </div>
-</ng-container>
-
-<ng-container>
-  <div
-  class="announce"
-  >
-  <div>
-   <img src="/assets/vectors/professional-email-icon.svg">
-  </div>
-  <div class="content">
-    <div i18n="@@account.warningDuplicated">
-      <h3>This looks like a professional email</h3>>
-    </div>
-    <div>
-      <ng-container>We recommend adding a </ng-container><strong>personal email</strong> <ng-container> as backup so you always have access to your ORCID account if you change jobs or roles.</ng-container>
-    </div>
-  </div>
-</div>
-</ng-container>
 
 
 <ng-container *ngIf="this.emails.hasError('backendError', 'email')">
@@ -126,12 +100,16 @@
 </div>
 </ng-container>
 
+
+  <!-- EMAIL CONFIRMATION  -->
+
     <!-- <mat-label i18n="@@register.confirmEmail"
     >Confirm primary email</mat-label
   > -->
     <div class="input-container">
 
-      <mat-form-field appearance="outline" *ngIf="!reactivation?.isReactivation" [hideRequiredMarker]="true">
+      <mat-form-field appearance="outline" *ngIf="!reactivation?.isReactivation" [hideRequiredMarker]="true" [ngClass]="{'valid-password-input' : emailsAreValid}">
+        <mat-icon *ngIf="emailsAreValid"  matSuffix>done</mat-icon>
 
         <input formControlName="confirmEmail" matInput (paste)="(false)" appTrim autocomplete="off" type="email"
           id="confirm-email-input" [attr.labelConfirmEmail]="labelConfirmEmail"
@@ -142,12 +120,13 @@
         Please confirm your email
       </mat-error>
       <mat-error *ngIf="
-        this.emails.hasError('email', 'confirmEmail') ||
-        this.emails.hasError('pattern', 'confirmEmail')
+      emailConfirmationFormTouched &&
+        (this.emails.hasError('email', 'confirmEmail') ||
+        this.emails.hasError('pattern', 'confirmEmail'))
       " i18n="@@register.invalidEmail">
         Invalid email format
       </mat-error>
-      <mat-error *ngIf="this.emails.hasError('mismatch', 'confirmEmail')" i18n="@@register.confirmationEmailNotMatch">
+      <mat-error *ngIf="this.emails.hasError('mismatch', 'confirmEmail') && emailConfirmationFormTouched" i18n="@@register.confirmationEmailNotMatch">
         Email confirmation does not match
       </mat-error>
       <mat-error *ngIf="this.emails.hasError('backendError', 'emails.confirmEmail')">
@@ -158,6 +137,57 @@
         </div>
       </mat-error>
     </div>
+
+
+    <ng-container *ngIf="personalEmail && emailConfirmationValid">
+      <div
+      class="announce"
+    >
+      <div>
+        <img src="/assets/vectors/personal-email-icon.svg"  aria-hidden="true">
+      </div>
+      <div class="content">
+        <div i18n="@@account.warningDuplicated">
+          <h3 class="orc-font-body"> This looks like a personal email</h3>     </div>
+        <div>
+        <ng-container> Add a </ng-container><strong>professional email</strong> <ng-container> as backup so we can better recommend affiliations and other related data to you.  </ng-container>    </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="undefinedEmail  && emailConfirmationValid">
+    <div
+    class="announce"
+  >
+    <div>
+      <img src="/assets/vectors/undefined-email-icon.svg"  aria-hidden="true">
+    </div>
+    <div class="content">
+      <div i18n="@@account.warningDuplicated">
+        <h3 class="orc-font-body"> Add another email to secure your account</h3>     </div>
+      <div>
+      Adding an additional email as backup helps secure your account and make sure you can always sign in.  </div>
+    </div>
+  </div>
+  </ng-container>
+
+  <ng-container *ngIf="professionalEmail && emailConfirmationValid">
+    <div
+    class="announce"
+    >
+    <div>
+     <img src="/assets/vectors/professional-email-icon.svg" aria-hidden="true">
+    </div>
+    <div class="content">
+      <div i18n="@@account.warningDuplicated">
+        <h3 class="orc-font-body">This looks like a professional email</h3>
+      </div>
+      <div>
+        <ng-container>We recommend adding a </ng-container><strong>personal email</strong> <ng-container> as backup so you always have access to your ORCID account if you change jobs or roles.</ng-container>
+      </div>
+    </div>
+  </div>
+  </ng-container>
 
     <!-- ADDITIONAL EMAILS -->
     <app-form-personal-additional-emails [additionalEmails]="additionalEmails"></app-form-personal-additional-emails>

@@ -72,6 +72,7 @@ export class FormPersonalComponent
   `
   professionalEmail: boolean
   personalEmail: boolean
+  undefinedEmail: boolean
   constructor(
     private _register: Register2Service,
     private _reactivationService: ReactivationService
@@ -120,6 +121,7 @@ export class FormPersonalComponent
       console.log(value)
       this.professionalEmail = value.category === 'PROFESSIONAL'
       this.personalEmail = value.category === 'PERSONAL'
+      this.undefinedEmail = value.category === 'UNDEFINED'
 
     })
 
@@ -228,12 +230,26 @@ export class FormPersonalComponent
   }
 
   get emailFormTouched() {
-    // console.log((this.form.controls?.emails as any)?.email)
     return ((this.form.controls.emails as any).controls?.email as any)?.touched
   }
 
   get emailConfirmationFormTouched() {
-    // console.log((this.form.controls?.emails as any)?.email)
     return ((this.form.controls.emails as any).controls?.confirmEmail as any)?.touched
   }
+
+  get emailValid() {
+    return ((this.form.controls.emails as any).controls?.email as any).valid
+  }
+
+  get emailConfirmationValid() {
+    return ((this.form.controls.emails as any).controls?.confirmEmail as any).valid
+  }
+
+  get givenNameFormTouched() {
+    return this.form.controls.givenNames?.touched
 }
+
+get emailsAreValid() {
+  return this.emailConfirmationValid && this.emailValid
+}
+  }

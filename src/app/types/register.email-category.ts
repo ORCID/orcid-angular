@@ -1,4 +1,4 @@
-export type EmailCategory = 'PROFESSIONAL' | 'PERSONAL' | 'UNKNOWN'
+export type EmailCategory = 'PROFESSIONAL' | 'PERSONAL' | 'UNDEFINED'
 
 export interface EmailCategoryEndpoint {
   category: EmailCategory

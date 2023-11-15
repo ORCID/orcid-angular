@@ -96,7 +96,7 @@ mat-label.orc-font-small-print {
 }
 
 
-.info {
+.info, .announce{
   .content div:not(:last-child) {
     margin-bottom: 16px;
   }
@@ -111,8 +111,12 @@ mat-label.orc-font-small-print {
     margin: 0;
   }
 
-  mat-icon {
+  mat-icon, img{
     margin-right: 16px;
+  }
+
+  h3 {
+    margin: 0;
   }
 
 

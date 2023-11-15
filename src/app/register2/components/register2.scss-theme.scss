@@ -8,6 +8,7 @@
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
 
+
   .step-actions {
     border-color: mat.get-color-from-palette($background,
         ui-background-light);
@@ -38,6 +39,39 @@
         ) !important;
     }
   }
+
+  .announce {
+    background-color: mat.get-color-from-palette($background, state-info-lightest);
+    border-color: mat.get-color-from-palette($foreground,
+        'state-info-dark'
+      ) !important;
+
+    mat-icon {
+      color: mat.get-color-from-palette($foreground,
+          'state-info-dark'
+        ) !important;
+    }
+  }
+
+  ::ng-deep {
+    .valid-password-input {
+      mat-icon {
+        color: map-get($foreground, 'brand-primary-dark');
+      }
+      .mat-form-field-outline {
+        color: map-get($foreground, 'brand-primary-dark');
+        background-color:     mat.get-color-from-palette(
+          $background,
+          brand-primary-lightest
+        );
+
+      }
+
+
+    }
+  }
+
+
 
 }
 
