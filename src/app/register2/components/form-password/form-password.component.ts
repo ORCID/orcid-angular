@@ -41,6 +41,7 @@ import { BaseForm } from '../BaseForm'
 export class FormPasswordComponent extends BaseForm implements OnInit {
   labelInfo = $localize`:@@register.ariaLabelInfoPassword:info about password`
   labelClose = $localize`:@@register.ariaLabelClose:close`
+  labelConfirmPassword = $localize`:@@register.confirmPassword:Confirm password`
   @ViewChild(`#passwordPopover`) passwordPopover
   @ViewChild(`#passwordPopoverTrigger`) passwordPopoverTrigger
   hasNumberPattern = HAS_NUMBER
@@ -112,4 +113,12 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
       fn(registerForm)
     })
   }
+
+  get confirmPasswordTouched() {
+    return this.form.controls['passwordConfirm'].touched
+  }
+  get passwordTouched() {
+    return this.form.controls['password'].touched
+  }
+
 }
