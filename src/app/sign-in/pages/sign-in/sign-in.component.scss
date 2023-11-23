@@ -9,9 +9,9 @@
 }
 
 .mat-card-title {
+  margin-top: 32px !important;
   text-align: center;
-  margin-top: 0;
-  margin-bottom: 40px;
+  margin-bottom: 8px !important;
 }
 
 .mat-subheading-2 {
@@ -34,4 +34,12 @@
 
 .mat-card .mat-divider-horizontal {
   position: relative;
+}
+
+.icon {
+  margin-bottom: 26px;
+
+  img {
+    width: 64px;
+  }
 }

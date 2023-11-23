@@ -15,13 +15,13 @@
             mode="indeterminate"
           ></mat-progress-bar>
           <mat-card-header>
-            <mat-card-title
-              role="heading"
-              aria-level="1"
-              i18n="@@ngOrcid.signin.title"
-              *ngIf="!isOauthError"
-            >
-              Sign in
+            <mat-card-title role="heading" aria-level="1" *ngIf="!isOauthError">
+              <div class="icon">
+                <img src="assets/vectors/orcid.logo.icon.svg" alt="" />
+              </div>
+              <ng-container i18n="@@ngOrcid.signin.signInToOrcid"
+                >Sign in to ORCID</ng-container
+              >
             </mat-card-title>
           </mat-card-header>
           <mat-card-content>
