@@ -121,4 +121,12 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
     return this.form.controls['password'].touched
   }
 
+  get confirmPasswordValid() {
+    return this.form.controls['passwordConfirm'].valid
+  }
+  get passwordValid() {
+    return this.form.controls['password'].valid
+  }
+
+
 }

@@ -34,6 +34,7 @@ import { BaseForm } from '../BaseForm'
 })
 // tslint:disable-next-line: class-name
 export class FormTermsComponent extends BaseForm implements OnInit, DoCheck {
+  nextButtonWasClicked
   environment = environment
   constructor(
     private _register: Register2Service,
@@ -67,5 +68,9 @@ export class FormTermsComponent extends BaseForm implements OnInit, DoCheck {
     this.errorState =
       this._errorStateMatcher.isErrorState(this.termsOfUse, null) ||
       this._errorStateMatcher.isErrorState(this.dataProcessed, null)
+  }
+
+  termsOfUseWasTouched() {
+    return this.form.controls.termsOfUse.touched
   }
 }

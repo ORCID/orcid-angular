@@ -22,6 +22,11 @@ export class StepAComponent extends BaseStepDirective {
   }
   infoSiteBaseUrl = environment.INFO_SITE
 
+  goForward() {
+    console.log('goForward' , this.formGroup.controls.personal)
+    this.formGroup.markAllAsTouched()
+  }
+
   goBack() {
     this._platform
       .get()

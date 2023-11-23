@@ -1,0 +1,7 @@
+:host {
+  ::ng-deep {
+    div > div {
+      width: 100% !important;
+    }
+  }
+}

@@ -12,6 +12,17 @@
   .step-actions {
     border-color: mat.get-color-from-palette($background,
         ui-background-light);
+    .mat-raised-button.mat-primary {
+      background-color: mat.get-color-from-palette($primary, 700);
+      }
+      a {
+        color: mat.get-color-from-palette($primary, 700);
+      }
+  }
+
+  a > mat-icon {
+    color: mat.get-color-from-palette($primary, 200) !important;
+
   }
 
   ::ng-deep .valid {
@@ -69,6 +80,10 @@
 
 
     }
+
+
+
+
   }
 
 

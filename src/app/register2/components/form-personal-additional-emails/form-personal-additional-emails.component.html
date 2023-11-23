@@ -1,10 +1,10 @@
 <ng-container [formGroup]="additionalEmails">
-  <div class="input-container" *ngFor="
+  <div class="input-container margin-top-12" *ngFor="
       let additionalEmailControl of additionalEmails?.controls | keyvalue;
       index as i
     ">
 
-    <mat-label class="orc-font-small-print">
+    <mat-label class="orc-font-small-print ">
       <ng-container i18n="@@register.additionalEmails">Additional email</ng-container>
       {{ i !== 0 ? i : '' }}
       <label i18n="@@register.optional">(Optional)</label>

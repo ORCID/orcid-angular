@@ -6,15 +6,16 @@
       name, and more. You control this content and who can see it.
     </ng-container>
   </p>
-  <h2 class="orc-font-body mat-subheading-2" i18n="@@register.visibility">
+  <fieldset>
+  <legend class="orc-font-body mat-subheading-2" i18n="@@register.visibility">
     Visibility settings
-  </h2>
+  </legend>
 
   <p i18n="@@register.visibilityDescription3">
     By default, what visibility should be given to new items added to your ORCID
     Record?
   </p>
-  <p>
+  <div class="margin-tb-32">
     <mat-radio-group
       formControlName="activitiesVisibilityDefault"
       color="primary"
@@ -88,22 +89,29 @@
         </div>
       </mat-radio-button>
     </mat-radio-group>
-    <mat-error
+
+    <p>
+      <mat-error
       *ngIf="
         form.hasError('required', 'activitiesVisibilityDefault') && errorState
       "
       i18n="@@register.visibilityRequired"
       >Please choose a default visibility setting.</mat-error
     >
-  </p>
-  <p>
+    </p>
+  </div>
+</fieldset>
+  <p class="no-top-margin">
     <a
       class="mat-button-font"
       href="https://support.orcid.org/hc/articles/360006897614"
       target="_blank"
       rel="noopener noreferrer"
       i18n="@@register.visibilityDescription2"
-      >More information on visibility settings</a
+      >More information on visibility settings
+
+      <mat-icon>open_in_new</mat-icon>
+      </a
     >
   </p>
 </ng-container>

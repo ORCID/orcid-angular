@@ -8,7 +8,7 @@
           labelPosition="bottom"
           class="orcid-stepper-wizard"
         >
-          <!-- <mat-step [stepControl]="FormGroupStepA">
+          <mat-step [stepControl]="FormGroupStepA">
             <ng-template matStepLabel i18n="@@register.personalData"
               >Personal data</ng-template
             >
@@ -17,7 +17,7 @@
               [reactivation]="reactivation"
               #stepComponentA
             ></app-step-a>
-          </mat-step> -->
+          </mat-step>
           <mat-step [stepControl]="FormGroupStepB">
             <ng-template matStepLabel i18n="@@register.securityAndNotifications"
               >Security and notifications</ng-template
@@ -28,7 +28,7 @@
               [personalData]="personalData"
               [reactivation]="reactivation"
             ></app-step-b>
-          </mat-step>FormGroupStepD
+          </mat-step>
           <mat-step [stepControl]="FormGroupStepC">
             <ng-template matStepLabel i18n="@@register.visibilityAndTerm"
               >Visibility and terms</ng-template

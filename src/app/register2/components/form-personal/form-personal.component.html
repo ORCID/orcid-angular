@@ -1,5 +1,5 @@
 <ng-container [formGroup]="form">
-  <h2 i18n="@@register.yourNames" class="orc-font-body">Your names</h2>
+  <h2 i18n="@@register.yourNames" class="orc-font-body margin-top-12">Your names</h2>
 
 
   <div class="input-container">
@@ -47,7 +47,7 @@
 
 
 
-  <h2 i18n="@@register.yourEmailAddresses" class="orc-font-body">Your email addresses</h2>
+  <h2 i18n="@@register.yourEmailAddresses" class="orc-font-body margin-top-12">Your email addresses</h2>
   <ng-container formGroupName="emails">
     <div class="input-container">
 
@@ -66,12 +66,12 @@
       </mat-error>
       <mat-error *ngIf="
         (this.emails.hasError('email', 'email') ||
-        this.emails.hasError('pattern', 'email')) && emailFormTouched
+        this.emails.hasError('pattern', 'email'))
       " i18n="@@register.invalidEmail">
         Invalid email format
       </mat-error>
 
-      <mat-error *ngIf="this.emails.hasError('backendError', 'email') && nextButtonWasClicked">
+      <mat-error *ngIf="this.emails.hasError('backendError', 'email') && emailFormTouched">
         <div *ngFor="let error of this.emails.getError('backendError', 'email')">
           <app-backend-error [errorCode]="error" [value]="emails.get('email').value"></app-backend-error>
         </div>
@@ -113,10 +113,10 @@
 
         <input formControlName="confirmEmail" matInput (paste)="(false)" appTrim autocomplete="off" type="email"
           id="confirm-email-input" [attr.labelConfirmEmail]="labelConfirmEmail"
-          [attr.placeholder]="labelConfirmEmail" [disabled]="this.emails.hasError('backendError', 'email') || !emailFormTouched || form.hasError('required', 'emails.email')" />
+          [attr.placeholder]="labelConfirmEmail" />
 
       </mat-form-field>
-      <mat-error *ngIf="emailConfirmationFormTouched && form.hasError('required', 'emails.confirmEmail')" i18n="@@register.confirmEmailRequired">
+      <mat-error *ngIf="emailFormTouched && form.hasError('required', 'emails.confirmEmail')" i18n="@@register.confirmEmailRequired">
         Please confirm your email
       </mat-error>
       <mat-error *ngIf="

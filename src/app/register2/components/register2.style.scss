@@ -3,9 +3,35 @@ a {
   font-weight: normal;
 }
 
-h2 {
-  margin-top: 14px;
+.no-top-margin{
+  margin-top: 0;
+}
+
+h2.margin-top-12, .step-actions.margin-top-12,.margin-top-12 {
+  margin-top: 12px;
+}
+
+h2,legend {
+  margin-top: 32px;
   margin-bottom: 14px;
+  font-weight: bold;
+}
+
+fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+
+}
+
+.margin-tb-32 {
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+app-form-terms {
+  margin-bottom: 32px;
+
 }
 
 mat-card-title img {
@@ -19,6 +45,8 @@ mat-card-title img {
 
 mat-label.orc-font-small-print {
   font-weight: bold;
+  display: block;
+  margin-bottom: 4px;
 
   label {
     font-weight: normal;
@@ -27,7 +55,11 @@ mat-label.orc-font-small-print {
 
 .step-actions {
   border-top: 1px solid;
-  padding-top: 24px;
+  padding-top: 32px;
+  a {
+    font-style: italic;
+
+  }
 }
 
 :host ::ng-deep {
@@ -127,6 +159,15 @@ mat-label.orc-font-small-print {
 // MATERIAL OVERWRITES
 
 ::ng-deep {
+
+
+
+
+
+  .mat-horizontal-stepper-content {
+    max-width: 580px;
+  }
+
   .mat-horizontal-stepper-wrapper {
     .mat-horizontal-stepper-header-container {
       display: none;
@@ -138,6 +179,9 @@ mat-label.orc-font-small-print {
   mat-vertical-stepper.orcid-stepper-wizard mat-card p,
   mat-horizontal-stepper.orcid-stepper-wizard mat-card p {
     margin-bottom: 16px;
+
+
+
   }
 
 
@@ -152,7 +196,23 @@ mat-label.orc-font-small-print {
 
   mat-vertical-stepper.orcid-stepper-wizard,
   mat-horizontal-stepper.orcid-stepper-wizard {
+
+
+
     mat-card {
+      a > mat-icon {
+        margin-bottom: -11px;
+        margin-left: 4px;
+        font-size: 17px;
+      }
+
+      mat-card-content.mat-card-content {
+        margin-top: 32px !important;
+      }
+
+      mat-radio-button:not(:last-child) {
+        margin-bottom: 32px;
+      }
 
 
       .step-actions {
@@ -160,10 +220,12 @@ mat-label.orc-font-small-print {
         flex-direction: column;
         justify-content: space-between;
         width: 100%;
-        margin-top: 0px;
+        margin-top: 29px;
         gap: 12px;
       }
     }
   }
 
 }
+
+

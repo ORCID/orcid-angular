@@ -1,4 +1,4 @@
-<h3 class="orc-font-body" i18n="@@register.termsOfUse">Terms of Use</h3>
+<h2 class="orc-font-body" i18n="@@register.termsOfUse">Terms of Use</h2>
 
 <ng-container [formGroup]="form">
   <mat-checkbox
@@ -47,7 +47,7 @@
       }}"
       target="_blank"
       rel="noopener noreferrer"
-      class="mat-button-font"
+      class="mat-button-font no-margin-top"
       i18n="@@register.moreInformation"
     >
       More information on how ORCID process your data.
@@ -55,6 +55,7 @@
   </mat-checkbox>
   <mat-error
     *ngIf="
+    termsOfUseWasTouched &&
       (form.hasError('required', 'termsOfUse') ||
         form.hasError('required', 'dataProcessed')) &&
       errorState

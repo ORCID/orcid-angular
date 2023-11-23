@@ -48,17 +48,16 @@
       <app-form-personal
         formControlName="personal"
         [reactivation]="reactivation"
-        [nextButtonWasClicked]="nextButtonWasClicked"
       >
       </app-form-personal>
-      <div class="step-actions">
+      <div class="step-actions margin-top-12">
         <button
           id="step-a-next-button"
           mat-raised-button
           matStepperNext
           i18n="@@shared.next"
           color="primary"
-          (click)="nextButton()"
+          (click)="nextButton2()"
 
         >
           NEXT STEP

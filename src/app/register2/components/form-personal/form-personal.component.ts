@@ -28,9 +28,6 @@ import { BaseForm } from '../BaseForm'
 import { ErrorStateMatcher } from '@angular/material/core'
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-
-    // !((this.emails.hasError('backendError', 'email') && !nextButtonWasClicked))
-    console.log(control)
     const isSubmitted = form && form.submitted;
     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }
@@ -61,7 +58,6 @@ export class FormPersonalComponent
   extends BaseForm
   implements OnInit, AfterViewInit {
   matcher = new MyErrorStateMatcher;
-  @Input() nextButtonWasClicked: boolean
   @Input() reactivation: ReactivationLocal
   @ViewChild('firstInput') firstInput: ElementRef
   labelInfoAboutName = $localize`:@@register.ariaLabelInfo:info about names`
@@ -118,7 +114,6 @@ export class FormPersonalComponent
         return this._register.getEmailCategory(emailDomain)
       }
     )).subscribe(value => {
-      console.log(value)
       this.professionalEmail = value.category === 'PROFESSIONAL'
       this.personalEmail = value.category === 'PERSONAL'
       this.undefinedEmail = value.category === 'UNDEFINED'
