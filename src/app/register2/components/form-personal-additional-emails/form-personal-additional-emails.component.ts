@@ -19,7 +19,10 @@ import { ErrorStateMatcherForFormLevelErrors } from '../../ErrorStateMatcherForF
 @Component({
   selector: 'app-form-personal-additional-emails',
   templateUrl: './form-personal-additional-emails.component.html',
-  styleUrls: ['./form-personal-additional-emails.component.scss', '../register2.style.scss'],
+  styleUrls: [
+    './form-personal-additional-emails.component.scss',
+    '../register2.style.scss',
+  ],
 })
 export class FormPersonalAdditionalEmailsComponent implements AfterViewInit {
   labelInfoAboutEmails = $localize`:@@register.ariaLabelInfoEmails:info about emails`
@@ -34,7 +37,7 @@ export class FormPersonalAdditionalEmailsComponent implements AfterViewInit {
   constructor(
     private _ref: ChangeDetectorRef,
     private _changeDetectorRef: ChangeDetectorRef
-  ) { }
+  ) {}
 
   backendErrorsMatcher = new ErrorStateMatcherForFormLevelErrors(
     this.getControlErrorAtFormLevel,
@@ -47,7 +50,7 @@ export class FormPersonalAdditionalEmailsComponent implements AfterViewInit {
   ): string[] {
     return (
       control?.parent?.parent?.errors?.[errorGroup]?.['additionalEmails'][
-      control.value
+        control.value
       ] || []
     )
   }
@@ -90,7 +93,7 @@ export class FormPersonalAdditionalEmailsComponent implements AfterViewInit {
   public ngAfterViewInit() {
     this._ref.detectChanges()
   }
-  get additionalEmailsTouched () {
+  get additionalEmailsTouched() {
     return this.additionalEmails.touched
   }
 }

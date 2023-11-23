@@ -1,4 +1,4 @@
-import { Component, DoCheck, forwardRef, OnInit } from '@angular/core'
+import { Component, DoCheck, forwardRef, Input, OnInit } from '@angular/core'
 import {
   NG_ASYNC_VALIDATORS,
   NG_VALUE_ACCESSOR,
@@ -30,10 +30,8 @@ import { BaseForm } from '../BaseForm'
     },
   ],
 })
-export class FormAntiRobotsComponent
-  extends BaseForm
-  implements OnInit, DoCheck
-{
+export class FormAntiRobotsComponent extends BaseForm implements OnInit {
+  @Input() nextButtonWasClicked
   captchaFailState = false
   captchaLoadedWithWidgetId: number
   $widgetIdUpdated = new Subject()
@@ -77,10 +75,6 @@ export class FormAntiRobotsComponent
     this.captchaLoadedWithWidgetId = widgetId
     this.captcha.updateValueAndValidity()
     this.$widgetIdUpdated.next()
-  }
-
-  ngDoCheck(): void {
-    this.errorState = this._errorStateMatcher.isErrorState(this.captcha, null)
   }
 
   // OVERWRITE

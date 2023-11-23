@@ -15,7 +15,11 @@ import { TogglzService } from '../core/togglz/togglz.service'
   providedIn: 'root',
 })
 export class RegisterTogglGuard {
-  constructor(private _user: UserService, private _router: Router, private _togglz: TogglzService) {}
+  constructor(
+    private _user: UserService,
+    private _router: Router,
+    private _togglz: TogglzService
+  ) {}
 
   canMatch(
     next: ActivatedRouteSnapshot,
@@ -24,8 +28,8 @@ export class RegisterTogglGuard {
     return this._togglz.getStateOf('REGISTRATION_2_0').pipe(
       map((session) => {
         if (session) {
-        localStorage.setItem('REGISTRATION_2_0', 'enabled')
-        }else {
+          localStorage.setItem('REGISTRATION_2_0', 'enabled')
+        } else {
           localStorage.removeItem('REGISTRATION_2_0')
         }
 
@@ -38,9 +42,7 @@ export class RegisterTogglGuard {
         // IT JUST HELPS SETTING THE LOGIC TWO WHICH VERSION OF THE REGISTRATION MODULE SHOULD BE LOADED.
 
         return true
-      }),
-      /// wait 1 second
-      delay(1000),
+      })
     )
   }
 }

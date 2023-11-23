@@ -38,6 +38,7 @@ export class FormVisibilityComponent
   extends BaseForm
   implements OnInit, DoCheck
 {
+  ariaLabelMoreInformationOnVisibility = $localize`:@@register.ariaLabelMoreInformationOnVisibility:More information on visibility settings (Opens in new tab)`
   visibilityOptions = VISIBILITY_OPTIONS
   errorState = false
   activitiesVisibilityDefault = new UntypedFormControl('', Validators.required)

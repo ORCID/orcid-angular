@@ -93,10 +93,10 @@ const routes: Routes = [
     canMatch: [RegisterTogglGuard],
     canActivateChild: [LanguageGuard, RegisterGuard],
     loadChildren: () => {
-      return localStorage.getItem('REGISTRATION_2_0') === 'enable'?
-       import('./register/register.module').then((m) => m.RegisterModule):
-       import('./register2/register.module').then((m) => m.Register2Module)
-    }
+      return localStorage.getItem('REGISTRATION_2_0') === 'enable'
+        ? import('./register/register.module').then((m) => m.RegisterModule)
+        : import('./register2/register.module').then((m) => m.Register2Module)
+    },
   },
   {
     path: ApplicationRoutes.search,
@@ -184,4 +184,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, {})],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

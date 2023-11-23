@@ -78,7 +78,6 @@ export class HeaderComponent implements OnInit {
         path === `/${ApplicationRoutes.inbox}` ||
         path === `/${ApplicationRoutes.developerTools}` ||
         path === `/${ApplicationRoutes.register}`
-
     })
   }
 

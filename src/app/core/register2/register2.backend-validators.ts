@@ -24,8 +24,7 @@ interface HasFormAdapters {
     StepA: UntypedFormGroup,
     StepB: UntypedFormGroup,
     StepC: UntypedFormGroup,
-    StepD: UntypedFormGroup,
-
+    StepD: UntypedFormGroup
   ): RegisterForm
 }
 

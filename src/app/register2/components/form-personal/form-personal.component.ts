@@ -21,22 +21,40 @@ import {
 import { Register2Service } from 'src/app/core/register2/register2.service'
 import { OrcidValidators } from 'src/app/validators'
 
-import { debounce, debounceTime, filter, first, startWith, switchMap } from 'rxjs/operators'
+import {
+  debounce,
+  debounceTime,
+  filter,
+  first,
+  startWith,
+  switchMap,
+} from 'rxjs/operators'
 import { ReactivationService } from '../../../core/reactivation/reactivation.service'
 import { ReactivationLocal } from '../../../types/reactivation.local'
 import { BaseForm } from '../BaseForm'
 import { ErrorStateMatcher } from '@angular/material/core'
 export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  isErrorState(
+    control: FormControl | null,
+    form: FormGroupDirective | NgForm | null
+  ): boolean {
+    const isSubmitted = form && form.submitted
+    return !!(
+      control &&
+      control.invalid &&
+      (control.dirty || control.touched || isSubmitted)
+    )
   }
 }
 
 @Component({
   selector: 'app-form-personal',
   templateUrl: './form-personal.component.html',
-  styleUrls: ['./form-personal.component.scss', '../register2.style.scss', '../register2.scss-theme.scss'],
+  styleUrls: [
+    './form-personal.component.scss',
+    '../register2.style.scss',
+    '../register2.scss-theme.scss',
+  ],
   preserveWhitespaces: true,
   providers: [
     {
@@ -51,18 +69,13 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     },
   ],
 })
-
-
-
-export class FormPersonalComponent
-  extends BaseForm
-  implements OnInit, AfterViewInit {
-  matcher = new MyErrorStateMatcher;
+export class FormPersonalComponent extends BaseForm implements OnInit {
+  matcher = new MyErrorStateMatcher()
   @Input() nextButtonWasClicked: boolean
   @Input() reactivation: ReactivationLocal
-  @ViewChild('firstInput') firstInput: ElementRef
-  @ViewChild(FormGroupDirective) formGroupDir: FormGroupDirective;
+  @ViewChild(FormGroupDirective) formGroupDir: FormGroupDirective
 
+  arialabelConfirmEmail = $localize`:@@register.labelConfirmEmail:Confirm your email address`
   labelInfoAboutName = $localize`:@@register.ariaLabelInfo:info about names`
   labelClose = $localize`:@@register.ariaLabelClose:close`
   labelConfirmEmail = $localize`:@@register.confirmEmail:Confirm primary email`
@@ -109,21 +122,20 @@ export class FormPersonalComponent
       }
     )
 
-    this.emails.controls['email'].valueChanges.pipe(debounceTime(1000),filter( () =>
-      !this.emails.controls['email'].errors
-    ), switchMap(
-      (value) => {
-        const emailDomain = value.split('@')[1]
-        return this._register.getEmailCategory(emailDomain)
-      }
-    )).subscribe(value => {
-      this.professionalEmail = value.category === 'PROFESSIONAL'
-      this.personalEmail = value.category === 'PERSONAL'
-      this.undefinedEmail = value.category === 'UNDEFINED'
-
-    })
-
-
+    this.emails.controls['email'].valueChanges
+      .pipe(
+        debounceTime(1000),
+        filter(() => !this.emails.controls['email'].errors),
+        switchMap((value) => {
+          const emailDomain = value.split('@')[1]
+          return this._register.getEmailCategory(emailDomain)
+        })
+      )
+      .subscribe((value) => {
+        this.professionalEmail = value.category === 'PROFESSIONAL'
+        this.personalEmail = value.category === 'PERSONAL'
+        this.undefinedEmail = value.category === 'UNDEFINED'
+      })
 
     if (!this.reactivation?.isReactivation) {
       this.emails.addControl(
@@ -133,8 +145,6 @@ export class FormPersonalComponent
         })
       )
     }
-
-
 
     this.form = new UntypedFormGroup({
       givenNames: new UntypedFormControl('', {
@@ -159,15 +169,6 @@ export class FormPersonalComponent
         })
     }
   }
-
-  ngAfterViewInit(): void {
-    // Timeout used to get focus on the first input after the first step loads
-    setTimeout(() => {
-      this.firstInput.nativeElement.focus()
-    }), 100
-    }
-
-
 
   allEmailsAreUnique(): ValidatorFn {
     return (formGroup: UntypedFormGroup) => {
@@ -228,11 +229,17 @@ export class FormPersonalComponent
   }
 
   get emailFormTouched() {
-    return ((this.form.controls.emails as any).controls?.email as any)?.touched || this.nextButtonWasClicked
+    return (
+      ((this.form.controls.emails as any).controls?.email as any)?.touched ||
+      this.nextButtonWasClicked
+    )
   }
 
   get emailConfirmationFormTouched() {
-    return ((this.form.controls.emails as any).controls?.confirmEmail as any)?.touched || this.nextButtonWasClicked
+    return (
+      ((this.form.controls.emails as any).controls?.confirmEmail as any)
+        ?.touched || this.nextButtonWasClicked
+    )
   }
 
   get familyNamesFormTouched() {
@@ -244,14 +251,15 @@ export class FormPersonalComponent
   }
 
   get emailConfirmationValid() {
-    return ((this.form.controls.emails as any).controls?.confirmEmail as any).valid
+    return ((this.form.controls.emails as any).controls?.confirmEmail as any)
+      .valid
   }
 
   get givenNameFormTouched() {
-    return this.form.controls.givenNames?.touched
-}
-
-get emailsAreValid() {
-  return this.emailConfirmationValid && this.emailValid
-}
+    return this.form.controls.givenNames?.touched || this.nextButtonWasClicked
   }
+
+  get emailsAreValid() {
+    return this.emailConfirmationValid && this.emailValid
+  }
+}

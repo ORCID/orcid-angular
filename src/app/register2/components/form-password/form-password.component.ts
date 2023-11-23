@@ -13,6 +13,8 @@ import { RegisterForm } from 'src/app/types/register.endpoint'
 import { OrcidValidators } from 'src/app/validators'
 
 import { BaseForm } from '../BaseForm'
+import { LiveAnnouncer } from '@angular/cdk/a11y'
+import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-form-password',
@@ -22,7 +24,6 @@ import { BaseForm } from '../BaseForm'
     './form-password.component.scss',
     '../register2.scss-theme.scss',
     '../register2.style.scss',
-
   ],
   providers: [
     {
@@ -48,7 +49,13 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
   hasLetterOrSymbolPattern = HAS_LETTER_OR_SYMBOL
   @Input() personalData: RegisterForm
   @Input() nextButtonWasClicked: boolean
-  constructor(private _register: Register2Service) {
+  currentValidate8orMoreCharactersStatus: boolean
+  ccurentValidateAtLeastALetterOrSymbolStatus: boolean
+  currentValidateAtLeastANumber: boolean
+  constructor(
+    private _register: Register2Service,
+    private _liveAnnouncer: LiveAnnouncer
+  ) {
     super()
   }
   ngOnInit() {
@@ -116,10 +123,12 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
   }
 
   get confirmPasswordTouched() {
-    return this.form.controls['passwordConfirm'].touched || this.nextButtonWasClicked
+    return (
+      this.form.controls['passwordConfirm'].touched || this.nextButtonWasClicked
+    )
   }
   get passwordTouched() {
-    return this.form.controls['password'].touched ||  this.nextButtonWasClicked
+    return this.form.controls['password'].touched || this.nextButtonWasClicked
   }
 
   get confirmPasswordValid() {
@@ -129,5 +138,64 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
     return this.form.controls['password'].valid
   }
 
+  get validate8orMoreCharacters() {
+    const status =
+      this.form.hasError('required', 'password') ||
+      this.form.hasError('minlength', 'password')
 
+    if (this.currentValidate8orMoreCharactersStatus !== status) {
+      this.announce(
+        status
+          ? $localize`:@@register.passwordLengthError:Password must be 8 or more characters`
+          : $localize`:@@register.passwordLengthOk:Password is 8 or more characters`
+      )
+    }
+    this.currentValidate8orMoreCharactersStatus = status
+
+    return status
+  }
+
+  get validateAtLeastALetterOrSymbol() {
+    const status =
+      this.form.hasError('required', 'password') ||
+      this.form.getError('pattern', 'password')?.requiredPattern ==
+        this.hasLetterOrSymbolPattern
+
+    if (this.ccurentValidateAtLeastALetterOrSymbolStatus !== status) {
+      this.announce(
+        status
+          ? $localize`:@@register.passwordLetterOrSymbolError:Password must contain at least a letter or symbol`
+          : $localize`:@@register.passwordLetterOrSymbolOk:Password contains at least a letter or symbol`
+      )
+    }
+    this.ccurentValidateAtLeastALetterOrSymbolStatus = status
+
+    return status
+  }
+
+  get validateAtLeastANumber() {
+    const status =
+      this.form.hasError('required', 'password') ||
+      this.form.getError('pattern', 'password')?.requiredPattern ==
+        this.hasNumberPattern
+
+    if (this.currentValidateAtLeastANumber !== status) {
+      this.announce(
+        status
+          ? $localize`:@@register.passwordNumberError:Password must contain at least a number`
+          : $localize`:@@register.passwordNumberOk:Password contains at least a number`
+      )
+    }
+
+    this.currentValidateAtLeastANumber = status
+
+    return status
+  }
+
+  private announce(announcement: string) {
+    if (environment.debugger) {
+      console.debug('📢' + announcement)
+    }
+    this._liveAnnouncer.announce(announcement, 'assertive')
+  }
 }

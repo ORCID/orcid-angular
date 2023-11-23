@@ -1,4 +1,10 @@
-import { Component, Input } from '@angular/core'
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  ViewChild,
+} from '@angular/core'
 
 import { Router } from '@angular/router'
 import { first } from 'rxjs/operators'
@@ -11,10 +17,16 @@ import { BaseStepDirective } from '../BaseStep'
 @Component({
   selector: 'app-step-a',
   templateUrl: './step-a.component.html',
-  styleUrls: ['./step-a.component.scss', '../register2.style.scss', '../register2.scss-theme.scss'],
+  styleUrls: [
+    './step-a.component.scss',
+    '../register2.style.scss',
+    '../register2.scss-theme.scss',
+  ],
   preserveWhitespaces: true,
 })
-export class StepAComponent extends BaseStepDirective {
+export class StepAComponent extends BaseStepDirective implements AfterViewInit {
+  @ViewChild('firstInput') firstInput: ElementRef
+
   @Input() reactivation: ReactivationLocal
   nextButtonWasClicked: boolean
 
@@ -50,7 +62,15 @@ export class StepAComponent extends BaseStepDirective {
       })
   }
 
-  nextButton2 () {
+  ngAfterViewInit(): void {
+    // Timeout used to get focus on the first input after the first step loads
+    setTimeout(() => {
+      this.firstInput.nativeElement.focus()
+    }),
+      100
+  }
+
+  nextButton2() {
     this.nextButtonWasClicked = true
     // this.formGroup.controls.personal.markAsTouched()
   }

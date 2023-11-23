@@ -15,9 +15,11 @@ import { BaseForm } from '../BaseForm'
 @Component({
   selector: 'app-form-terms',
   templateUrl: './form-terms.component.html',
-  styleUrls: ['./form-terms.component.scss',
-  '../register2.style.scss',
-  '../register2.scss-theme.scss',],
+  styleUrls: [
+    './form-terms.component.scss',
+    '../register2.style.scss',
+    '../register2.scss-theme.scss',
+  ],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

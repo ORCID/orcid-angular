@@ -36,7 +36,11 @@ import { ReactivationLocal } from '../../../types/reactivation.local'
 @Component({
   selector: 'app-register-2',
   templateUrl: './register2.component.html',
-  styleUrls: ['./register2.component.scss'],
+  styleUrls: [
+    './register2.component.scss',
+    '../../components/register2.scss-theme.scss',
+    '../../components/register2.style.scss',
+  ],
 })
 export class Register2Component implements OnInit, AfterViewInit {
   @ViewChild('lastStep') lastStep: MatStep
@@ -158,7 +162,7 @@ export class Register2Component implements OnInit, AfterViewInit {
               this.FormGroupStepC,
               this.FormGroupStepD,
               this.reactivation,
-              this.requestInfoForm,
+              this.requestInfoForm
             )
           })
         )

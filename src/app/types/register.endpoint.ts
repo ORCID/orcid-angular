@@ -43,4 +43,3 @@ export interface RegisterConfirmResponse {
   errors?: any[]
   url: string
 }
-

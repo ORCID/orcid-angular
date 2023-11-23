@@ -48,7 +48,7 @@ import { Register2Component } from './pages/register/register2.component'
     FormAntiRobotsComponent,
     BackendErrorComponent,
     TopBarRecordIssuesComponent,
-    Register2Component
+    Register2Component,
   ],
   imports: [
     CommonModule,

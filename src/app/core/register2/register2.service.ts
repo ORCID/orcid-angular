@@ -76,7 +76,9 @@ export class Register2Service extends _RegisterServiceMixingBase {
   }
 
   getEmailCategory(email: string): Observable<EmailCategoryEndpoint> {
-    return this._http.get<any>(`${environment.API_WEB}email-domain/find-category?domain=${email}`)
+    return this._http.get<any>(
+      `${environment.API_WEB}email-domain/find-category?domain=${email}`
+    )
   }
 
   register(

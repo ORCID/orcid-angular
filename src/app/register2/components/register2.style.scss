@@ -3,15 +3,18 @@ a {
   font-weight: normal;
 }
 
-.no-top-margin{
+.no-top-margin {
   margin-top: 0;
 }
 
-h2.margin-top-12, .step-actions.margin-top-12,.margin-top-12 {
+h2.margin-top-12,
+.step-actions.margin-top-12,
+.margin-top-12 {
   margin-top: 12px;
 }
 
-h2,legend {
+h2,
+legend {
   margin-top: 32px;
   margin-bottom: 14px;
   font-weight: bold;
@@ -21,7 +24,6 @@ fieldset {
   border: none;
   margin: 0;
   padding: 0;
-
 }
 
 .margin-tb-32 {
@@ -29,15 +31,9 @@ fieldset {
   margin-bottom: 32px;
 }
 
-app-form-terms {
-  margin-bottom: 32px;
-
-}
-
 mat-card-title img {
   margin-bottom: 32px;
 }
-
 
 .input-container {
   padding-bottom: 20px;
@@ -58,12 +54,10 @@ mat-label.orc-font-small-print {
   padding-top: 32px;
   a {
     font-style: italic;
-
   }
 }
 
 :host ::ng-deep {
-
   mat-error {
     margin-top: 8px;
     font-size: 12px;
@@ -74,16 +68,11 @@ mat-label.orc-font-small-print {
 
     .mat-form-field-subscript-wrapper {
       padding: 0;
-
     }
 
     .mat-form-field-wrapper {
       padding-bottom: 2px;
     }
-
-
-
-
   }
 
   .mat-form-field-appearance-outline {
@@ -113,13 +102,7 @@ mat-label.orc-font-small-print {
 
   mat-form-field.mat-form-field.mat-primary.mat-form-field-type-mat-input.mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-invalid {
     margin-bottom: 0px;
-
-
   }
-
-
-
-
 }
 
 .orc-font-heading-small {
@@ -127,8 +110,8 @@ mat-label.orc-font-small-print {
   font-weight: 500;
 }
 
-
-.info, .announce{
+.info,
+.announce {
   .content div:not(:last-child) {
     margin-bottom: 16px;
   }
@@ -143,27 +126,19 @@ mat-label.orc-font-small-print {
     margin: 0;
   }
 
-  mat-icon, img{
+  mat-icon,
+  img {
     margin-right: 16px;
   }
 
   h3 {
     margin: 0;
   }
-
-
 }
-
-
 
 // MATERIAL OVERWRITES
 
 ::ng-deep {
-
-
-
-
-
   .mat-horizontal-stepper-content {
     max-width: 580px;
   }
@@ -174,31 +149,20 @@ mat-label.orc-font-small-print {
     }
   }
 
-
-
   mat-vertical-stepper.orcid-stepper-wizard mat-card p,
   mat-horizontal-stepper.orcid-stepper-wizard mat-card p {
     margin-bottom: 16px;
-
-
-
   }
-
 
   mat-vertical-stepper.orcid-stepper-wizard mat-card mat-form-field,
   mat-vertical-stepper.orcid-stepper-wizard mat-card .input-container,
   mat-horizontal-stepper.orcid-stepper-wizard mat-card mat-form-field,
   mat-horizontal-stepper.orcid-stepper-wizard mat-card .input-container {
     margin-bottom: 0px;
-
   }
-
 
   mat-vertical-stepper.orcid-stepper-wizard,
   mat-horizontal-stepper.orcid-stepper-wizard {
-
-
-
     mat-card {
       a > mat-icon {
         margin-bottom: -11px;
@@ -214,7 +178,6 @@ mat-label.orc-font-small-print {
         margin-bottom: 32px;
       }
 
-
       .step-actions {
         display: flex;
         flex-direction: column;
@@ -225,7 +188,4 @@ mat-label.orc-font-small-print {
       }
     }
   }
-
 }
-
-

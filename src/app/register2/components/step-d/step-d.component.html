@@ -18,8 +18,8 @@
         *ngIf="!reactivation?.isReactivation"
         i18n="@@register.create"
       >
-      <h1 class="orc-font-heading-small">Create your ORCID iD</h1>
-    </ng-container>
+        <h1 class="orc-font-heading-small">Create your ORCID iD</h1>
+      </ng-container>
       <ng-container
         *ngIf="reactivation?.isReactivation"
         i18n="@@register.reactivation"
@@ -37,8 +37,14 @@
       <app-form-notifications
         formControlName="sendOrcidNews"
       ></app-form-notifications>
-      <app-form-terms formControlName="termsOfUse" [nextButtonWasClicked]="nextButtonWasClicked"></app-form-terms>
-      <app-form-anti-robots formControlName="captcha"></app-form-anti-robots>
+      <app-form-terms
+        formControlName="termsOfUse"
+        [nextButtonWasClicked]="nextButtonWasClicked"
+      ></app-form-terms>
+      <app-form-anti-robots
+        formControlName="captcha"
+        [nextButtonWasClicked]="nextButtonWasClicked"
+      ></app-form-anti-robots>
       <div class="step-actions">
         <button
           id="step-c-register-button"
@@ -68,8 +74,7 @@
           i18n="@@shared.previousStep"
           id="step-c-back-button"
         >
-        <a>
-          Previous Step</a>
+          <a> Previous Step</a>
         </button>
       </div>
     </form>

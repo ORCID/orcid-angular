@@ -1,34 +1,53 @@
 <ng-container [formGroup]="additionalEmails">
-  <div class="input-container margin-top-12" *ngFor="
+  <div
+    class="input-container margin-top-12"
+    *ngFor="
       let additionalEmailControl of additionalEmails?.controls | keyvalue;
       index as i
-    ">
-
-    <mat-label class="orc-font-small-print ">
-      <ng-container i18n="@@register.additionalEmails">Additional email</ng-container>
+    "
+  >
+    <mat-label class="orc-font-small-print" id="additional-email-label">
+      <ng-container i18n="@@register.additionalEmails"
+        >Additional email</ng-container
+      >
       {{ i !== 0 ? i : '' }}
       <label i18n="@@register.optional">(Optional)</label>
     </mat-label>
     <mat-form-field appearance="outline">
-
-      <input [attr.placeholder]="labelAddAnAddionalEmail" #emailInput formControlName="{{ additionalEmailControl.key }}"
-        matInput [errorStateMatcher]="backendErrorsMatcher" appTrim [id]="additionalEmailControl.key" type="email" />
-
+      <input
+        aria-labelledby="additional-email-label"
+        [attr.placeholder]="labelAddAnAddionalEmail"
+        #emailInput
+        formControlName="{{ additionalEmailControl.key }}"
+        matInput
+        [errorStateMatcher]="backendErrorsMatcher"
+        appTrim
+        [id]="additionalEmailControl.key"
+        type="email"
+      />
     </mat-form-field>
-    <mat-error *ngIf="
-    additionalEmailsTouched &&
-    additionalEmails.hasError('email', additionalEmailControl.key) ||
-    additionalEmails.hasError('pattern', additionalEmailControl.key)
-  " i18n="@@register.invalidEmail">
+    <mat-error
+      *ngIf="
+        (additionalEmailsTouched &&
+          additionalEmails.hasError('email', additionalEmailControl.key)) ||
+        additionalEmails.hasError('pattern', additionalEmailControl.key)
+      "
+      i18n="@@register.invalidEmail"
+    >
       Invalid email format
     </mat-error>
-    <mat-error *ngFor="
-    let error of getControlErrorAtFormLevel(
-      additionalEmailControl.value,
-      'backendErrors'
-    )
-  ">
-      <app-backend-error [errorCode]="error" [value]="additionalEmailControl.value.value"></app-backend-error>
+    <mat-error
+      *ngFor="
+        let error of getControlErrorAtFormLevel(
+          additionalEmailControl.value,
+          'backendErrors'
+        )
+      "
+    >
+      <app-backend-error
+        [errorCode]="error"
+        [value]="additionalEmailControl.value.value"
+      ></app-backend-error>
     </mat-error>
 
     <!-- <button

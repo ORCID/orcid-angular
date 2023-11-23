@@ -9,7 +9,7 @@ import { BaseStepDirective } from '../BaseStep'
   styleUrls: [
     './step-d.component.scss',
     '../register2.style.scss',
-    '../register2.scss-theme.scss'
+    '../register2.scss-theme.scss',
   ],
 })
 export class StepDComponent extends BaseStepDirective {

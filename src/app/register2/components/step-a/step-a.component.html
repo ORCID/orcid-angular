@@ -35,6 +35,7 @@
         rel="noopener noreferrer"
         target="_blank"
         i18n="@@register.terms"
+        #firstInput
         >terms of use</a
       ><ng-container i18n="@@register.only"
         >, you may only register for an ORCID iD for yourself. Already have an
@@ -59,7 +60,6 @@
           i18n="@@shared.next"
           color="primary"
           (click)="nextButton2()"
-
         >
           NEXT STEP
         </button>
@@ -72,9 +72,8 @@
           i18n="@@shared.back"
           id="step-a-back-button"
         >
-        <a>
-          Cancel registration</a>
-      </button>
+          <a> Cancel registration</a>
+        </button>
       </div>
     </form>
   </mat-card-content>

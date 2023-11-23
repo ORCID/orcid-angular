@@ -8,21 +8,18 @@
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
 
-
   .step-actions {
-    border-color: mat.get-color-from-palette($background,
-        ui-background-light);
+    border-color: mat.get-color-from-palette($background, ui-background-light);
     .mat-raised-button.mat-primary {
       background-color: mat.get-color-from-palette($primary, 700);
-      }
-      a {
-        color: mat.get-color-from-palette($primary, 700);
-      }
+    }
+    a {
+      color: mat.get-color-from-palette($primary, 700);
+    }
   }
 
   a > mat-icon {
     color: mat.get-color-from-palette($primary, 200) !important;
-
   }
 
   ::ng-deep .valid {
@@ -35,32 +32,50 @@
 
   .text-light {
     color: map-get($foreground, 'text-dark-mid');
-
   }
 
   .info {
-    background-color: mat.get-color-from-palette($background, state-notice-lightest);
-    border-color: mat.get-color-from-palette($foreground,
-        'state-notice-dark'
-      ) !important;
+    background-color: mat.get-color-from-palette(
+      $background,
+      state-notice-lightest
+    );
+    border-color: mat.get-color-from-palette(
+      $foreground,
+      'state-notice-dark'
+    ) !important;
 
     mat-icon {
-      color: mat.get-color-from-palette($foreground,
-          'state-notice-dark'
-        ) !important;
+      color: mat.get-color-from-palette(
+        $foreground,
+        'state-notice-dark'
+      ) !important;
     }
   }
 
   .announce {
-    background-color: mat.get-color-from-palette($background, state-info-lightest);
-    border-color: mat.get-color-from-palette($foreground,
-        'state-info-dark'
-      ) !important;
+    background-color: mat.get-color-from-palette(
+      $background,
+      state-info-lightest
+    );
+    border-color: mat.get-color-from-palette(
+      $foreground,
+      'state-info-dark'
+    ) !important;
 
     mat-icon {
-      color: mat.get-color-from-palette($foreground,
-          'state-info-dark'
-        ) !important;
+      color: mat.get-color-from-palette(
+        $foreground,
+        'state-info-dark'
+      ) !important;
+    }
+  }
+
+  :host {
+    ::ng-deep {
+      .container .mat-horizontal-content-container,
+      .container {
+        background-color: map-get($background, 'ui-background-lightest');
+      }
     }
   }
 
@@ -71,23 +86,13 @@
       }
       .mat-form-field-outline {
         color: map-get($foreground, 'brand-primary-dark');
-        background-color:     mat.get-color-from-palette(
+        background-color: mat.get-color-from-palette(
           $background,
           brand-primary-lightest
         );
-
       }
-
-
     }
-
-
-
-
   }
-
-
-
 }
 
 @include theme($orcid-app-theme);

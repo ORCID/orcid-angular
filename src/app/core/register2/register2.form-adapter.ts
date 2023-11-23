@@ -121,7 +121,6 @@ export function Register2FormAdapterMixin<T extends Constructor<any>>(base: T) {
       StepB: UntypedFormGroup,
       StepC: UntypedFormGroup,
       StepD: UntypedFormGroup
-
     ): RegisterForm {
       return {
         ...StepA.value.personal,
