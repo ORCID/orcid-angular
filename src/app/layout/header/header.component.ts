@@ -77,7 +77,7 @@ export class HeaderComponent implements OnInit {
         path === `/${ApplicationRoutes.selfService}` ||
         path === `/${ApplicationRoutes.inbox}` ||
         path === `/${ApplicationRoutes.developerTools}` ||
-        path.indexOf( `/${ApplicationRoutes.register}`) !== -1
+        path.indexOf(`/${ApplicationRoutes.register}`) !== -1
     })
   }
 
