@@ -38,6 +38,7 @@ import { ReactivationLocal } from '../../../types/reactivation.local'
   templateUrl: './register2.component.html',
   styleUrls: [
     './register2.component.scss',
+    './register2.component.scss.theme.scss',
     '../../components/register2.scss-theme.scss',
     '../../components/register2.style.scss',
   ],
