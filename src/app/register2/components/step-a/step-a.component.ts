@@ -16,6 +16,7 @@ import { BaseStepDirective } from '../BaseStep'
 })
 export class StepAComponent extends BaseStepDirective {
   @Input() reactivation: ReactivationLocal
+  nextButtonWasClicked: boolean
 
   constructor(private _platform: PlatformInfoService, private _router: Router) {
     super()
@@ -50,8 +51,8 @@ export class StepAComponent extends BaseStepDirective {
   }
 
   nextButton2 () {
-    console.log(( this.formGroup.controls.personal as any).controls)
-    this.formGroup.controls.personal.markAllAsTouched()
+    this.nextButtonWasClicked = true
+    // this.formGroup.controls.personal.markAsTouched()
   }
 
   signIn() {

@@ -1,4 +1,4 @@
-import { Component, DoCheck, forwardRef, OnInit } from '@angular/core'
+import { Component, DoCheck, forwardRef, Input, OnInit } from '@angular/core'
 import {
   NG_ASYNC_VALIDATORS,
   NG_VALUE_ACCESSOR,
@@ -34,7 +34,7 @@ import { BaseForm } from '../BaseForm'
 })
 // tslint:disable-next-line: class-name
 export class FormTermsComponent extends BaseForm implements OnInit, DoCheck {
-  nextButtonWasClicked
+  @Input() nextButtonWasClicked: boolean
   environment = environment
   constructor(
     private _register: Register2Service,
@@ -70,7 +70,7 @@ export class FormTermsComponent extends BaseForm implements OnInit, DoCheck {
       this._errorStateMatcher.isErrorState(this.dataProcessed, null)
   }
 
-  termsOfUseWasTouched() {
-    return this.form.controls.termsOfUse.touched
+  get termsOfUseWasTouched() {
+    return this.form.controls.termsOfUse.touched || this.nextButtonWasClicked
   }
 }

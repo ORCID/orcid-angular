@@ -47,6 +47,7 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
   hasNumberPattern = HAS_NUMBER
   hasLetterOrSymbolPattern = HAS_LETTER_OR_SYMBOL
   @Input() personalData: RegisterForm
+  @Input() nextButtonWasClicked: boolean
   constructor(private _register: Register2Service) {
     super()
   }
@@ -115,10 +116,10 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
   }
 
   get confirmPasswordTouched() {
-    return this.form.controls['passwordConfirm'].touched
+    return this.form.controls['passwordConfirm'].touched || this.nextButtonWasClicked
   }
   get passwordTouched() {
-    return this.form.controls['password'].touched
+    return this.form.controls['password'].touched ||  this.nextButtonWasClicked
   }
 
   get confirmPasswordValid() {

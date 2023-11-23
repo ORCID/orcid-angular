@@ -58,8 +58,11 @@ export class FormPersonalComponent
   extends BaseForm
   implements OnInit, AfterViewInit {
   matcher = new MyErrorStateMatcher;
+  @Input() nextButtonWasClicked: boolean
   @Input() reactivation: ReactivationLocal
   @ViewChild('firstInput') firstInput: ElementRef
+  @ViewChild(FormGroupDirective) formGroupDir: FormGroupDirective;
+
   labelInfoAboutName = $localize`:@@register.ariaLabelInfo:info about names`
   labelClose = $localize`:@@register.ariaLabelClose:close`
   labelConfirmEmail = $localize`:@@register.confirmEmail:Confirm primary email`
@@ -225,11 +228,15 @@ export class FormPersonalComponent
   }
 
   get emailFormTouched() {
-    return ((this.form.controls.emails as any).controls?.email as any)?.touched
+    return ((this.form.controls.emails as any).controls?.email as any)?.touched || this.nextButtonWasClicked
   }
 
   get emailConfirmationFormTouched() {
-    return ((this.form.controls.emails as any).controls?.confirmEmail as any)?.touched
+    return ((this.form.controls.emails as any).controls?.confirmEmail as any)?.touched || this.nextButtonWasClicked
+  }
+
+  get familyNamesFormTouched() {
+    return this.form.controls.familyNames?.touched || this.nextButtonWasClicked
   }
 
   get emailValid() {

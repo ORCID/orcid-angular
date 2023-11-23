@@ -17,6 +17,7 @@ import { LanguageGuard } from './guards/language.guard'
 import { ThirdPartySigninCompletedGuard } from './guards/third-party-signin-completed.guard'
 import { TwoFactorSigninGuard } from './guards/two-factor-signin.guard'
 import { AuthenticatedNoDelegatorGuard } from './guards/authenticated-no-delagator.guard'
+import { RegisterTogglGuard } from './guards/register-toggl.guard'
 
 const routes: Routes = [
   {
@@ -89,11 +90,13 @@ const routes: Routes = [
   },
   {
     path: ApplicationRoutes.register,
+    canMatch: [RegisterTogglGuard],
     canActivateChild: [LanguageGuard, RegisterGuard],
-    loadChildren: () =>
-      (!localStorage.getItem('register2') &&
-       import('./register/register.module').then((m) => m.RegisterModule)) || 
-       import('./register2/register.module').then((m) => m.Register2Module),
+    loadChildren: () => {
+      return localStorage.getItem('REGISTRATION_2_0') === 'enable'?
+       import('./register/register.module').then((m) => m.RegisterModule):
+       import('./register2/register.module').then((m) => m.Register2Module)
+    }
   },
   {
     path: ApplicationRoutes.search,

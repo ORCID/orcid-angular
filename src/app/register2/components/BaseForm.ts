@@ -13,6 +13,7 @@ export abstract class BaseForm implements ControlValueAccessor, AsyncValidator {
   public onTouchedFunction
   constructor() {}
   writeValue(val: any): void {
+    console.log('writeValue', val)
     if (val != null && val !== undefined && val !== '') {
 
       this.form.setValue(val, { emitEvent: true })
@@ -26,6 +27,7 @@ export abstract class BaseForm implements ControlValueAccessor, AsyncValidator {
   }
   registerOnChange(fn: any): void {
     this.form.valueChanges.subscribe((value) => {
+      console.log('valueChanges', value)
       fn(value)
     })
   }

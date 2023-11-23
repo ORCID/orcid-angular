@@ -90,4 +90,7 @@ export class FormPersonalAdditionalEmailsComponent implements AfterViewInit {
   public ngAfterViewInit() {
     this._ref.detectChanges()
   }
+  get additionalEmailsTouched () {
+    return this.additionalEmails.touched
+  }
 }

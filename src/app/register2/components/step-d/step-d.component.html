@@ -37,7 +37,7 @@
       <app-form-notifications
         formControlName="sendOrcidNews"
       ></app-form-notifications>
-      <app-form-terms formControlName="termsOfUse"></app-form-terms>
+      <app-form-terms formControlName="termsOfUse" [nextButtonWasClicked]="nextButtonWasClicked"></app-form-terms>
       <app-form-anti-robots formControlName="captcha"></app-form-anti-robots>
       <div class="step-actions">
         <button
@@ -45,6 +45,7 @@
           mat-raised-button
           color="primary"
           [disabled]="loading"
+          (click)="nextButtonWasClicked = true"
         >
           <ng-container
             *ngIf="!reactivation?.isReactivation"
@@ -59,7 +60,7 @@
             REACTIVATE
           </ng-container>
         </button>
-        <a
+        <button
           mat-button
           color="primary"
           matStepperPrevious
@@ -67,8 +68,9 @@
           i18n="@@shared.previousStep"
           id="step-c-back-button"
         >
-          Previous Step
-        </a>
+        <a>
+          Previous Step</a>
+        </button>
       </div>
     </form>
   </mat-card-content>

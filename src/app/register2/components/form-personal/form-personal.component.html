@@ -30,15 +30,16 @@
     <mat-form-field appearance="outline" [hideRequiredMarker]="true">
 
       <input id="family-names-input" formControlName="familyNames" matInput [placeholder]="labelFamilyNamePlaceholder" />
-      <mat-error *ngIf="form.hasError('illegalName', 'familyNames')" i18n="@@register.invalidName">
-        Invalid name characters or format
-      </mat-error>
-      <mat-error *ngIf="form.hasError('backendError', 'familyNames')">
-        <div *ngFor="let error of form.getError('backendError', 'familyNames')">
-          <app-backend-error [errorCode]="error"></app-backend-error>
-        </div>
-      </mat-error>
+
     </mat-form-field>
+    <mat-error *ngIf="familyNamesFormTouched && form.hasError('illegalName', 'familyNames')" i18n="@@register.invalidName">
+      Invalid name characters or format
+    </mat-error>
+    <mat-error *ngIf="familyNamesFormTouched && form.hasError('backendError', 'familyNames')">
+      <div *ngFor="let error of form.getError('backendError', 'familyNames')">
+        <app-backend-error [errorCode]="error"></app-backend-error>
+      </div>
+    </mat-error>
   </div>
 
 

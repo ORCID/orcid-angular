@@ -11,6 +11,7 @@ import { BaseStepDirective } from '../BaseStep'
 export class StepBComponent extends BaseStepDirective {
   @Input() personalData
   @Input() reactivation: ReactivationLocal
+  nextButtonWasClicked = false;
 
   constructor() {
     super()

@@ -31,6 +31,7 @@
       <app-form-password
         formControlName="password"
         [personalData]="personalData"
+        [nextButtonWasClicked]="nextButtonWasClicked"
       ></app-form-password>
       <div class="step-actions">
         <button
@@ -38,6 +39,7 @@
           mat-raised-button
           color="primary"
           matStepperNext
+          (click)="nextButtonWasClicked = true"
         >
           <ng-container
             *ngIf="!reactivation?.isReactivation"
@@ -52,7 +54,7 @@
             REACTIVATE
           </ng-container>
         </button>
-        <a
+        <button
           mat-button
           color="primary"
           matStepperPrevious
@@ -60,8 +62,9 @@
           i18n="@@shared.previousStep"
           id="step-c-back-button"
         >
-          Previous Step
-        </a>
+        <a>
+          Previous Step</a>
+        </button>
       </div>
     </form>
   </mat-card-content>

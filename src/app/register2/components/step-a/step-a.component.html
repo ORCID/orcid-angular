@@ -48,6 +48,7 @@
       <app-form-personal
         formControlName="personal"
         [reactivation]="reactivation"
+        [nextButtonWasClicked]="nextButtonWasClicked"
       >
       </app-form-personal>
       <div class="step-actions margin-top-12">
@@ -62,7 +63,7 @@
         >
           NEXT STEP
         </button>
-        <a
+        <button
           mat-button
           color="primary"
           (click)="goBack()"
@@ -71,8 +72,9 @@
           i18n="@@shared.back"
           id="step-a-back-button"
         >
-          Cancel registration
-      </a>
+        <a>
+          Cancel registration</a>
+      </button>
       </div>
     </form>
   </mat-card-content>
