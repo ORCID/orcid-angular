@@ -159,16 +159,23 @@
           >
         </div>
         <div class="content">
-          <div i18n="@@account.warningDuplicated">
+          <div>
             <p>
-              The email address
-              <strong>{{ emails.get('email').value }}</strong> is associated
-              with an existing ORCID record.
+              <ng-container i18n="@@register.theEmailAddress">
+                The email address
+              </ng-container>
+              <strong>{{ emails.get('email').value }}</strong>
+              <ng-container i18n="@@register.isAssociatedWuthAnExisting"
+                >is associated with an existing ORCID record.
+              </ng-container>
             </p>
           </div>
 
           <div>
-            <a routerLink="/signin">
+            <a
+              routerLink="/signin"
+              i18n="@@register.signInToOrcidUsingThisEmail"
+            >
               Sign in to ORCID using this email address</a
             >
           </div>
@@ -251,13 +258,20 @@
           />
         </div>
         <div class="content">
-          <div i18n="@@account.warningDuplicated">
-            <h3 class="orc-font-body">This looks like a personal email</h3>
+          <div>
+            <h3
+              class="orc-font-body"
+              i18n="@@register.thisLooksLikeAPersonalEmail"
+            >
+              This looks like a personal email
+            </h3>
           </div>
           <div>
-            <ng-container> Add a </ng-container
-            ><strong>professional email</strong>
-            <ng-container>
+            <ng-container i18n="@@register.addA"> Add a </ng-container
+            ><strong i18n="@@register.professionalEmail"
+              >professional email</strong
+            >
+            <ng-container i18n="@@register.asBackupSoWeCanBetter">
               as backup so we can better recommend affiliations and other
               related data to you.
             </ng-container>
@@ -275,12 +289,12 @@
           />
         </div>
         <div class="content">
-          <div i18n="@@account.warningDuplicated">
-            <h3 class="orc-font-body">
+          <div>
+            <h3 class="orc-font-body" i18n="@@register.addAnotherEmailToSecure">
               Add another email to secure your account
             </h3>
           </div>
-          <div>
+          <div i18n="@@register.addingAnAddiotionalEmailAsBackup">
             Adding an additional email as backup helps secure your account and
             make sure you can always sign in.
           </div>
@@ -297,13 +311,19 @@
           />
         </div>
         <div class="content">
-          <div i18n="@@account.warningDuplicated">
-            <h3 class="orc-font-body">This looks like a professional email</h3>
+          <div>
+            <h3
+              class="orc-font-body"
+              i18n="@@regiser.thisLooksLikeAProffessional"
+            >
+              This looks like a professional email
+            </h3>
           </div>
           <div>
-            <ng-container>We recommend adding a </ng-container
+            <ng-container i18n="@@register.weRecommendAdding"
+              >We recommend adding a </ng-container
             ><strong>personal email</strong>
-            <ng-container>
+            <ng-container i18n="@@register.asBackupSoYouAlways">
               as backup so you always have access to your ORCID account if you
               change jobs or roles.</ng-container
             >

@@ -27,7 +27,7 @@
         Thank you for reactivating your ORCID iD.
       </ng-container>
     </mat-card-title>
-    <mat-card-subtitle role="heading" aria-level="2" i18n="@@register.step3.2"
+    <mat-card-subtitle role="heading" aria-level="2" i18n="@@register.step2.3"
       >Step 4 of 4 - Terms and conditions</mat-card-subtitle
     >
   </mat-card-header>
@@ -55,9 +55,9 @@
         >
           <ng-container
             *ngIf="!reactivation?.isReactivation"
-            i18n="@@register.register"
+            i18n="@@register.completeRegistration"
           >
-            REGISTER
+            Complete registration
           </ng-container>
           <ng-container
             *ngIf="reactivation?.isReactivation"

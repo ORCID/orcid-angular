@@ -8,11 +8,10 @@
           alt="orcid logo"
         />
       </div>
-      <ng-container
-        *ngIf="!reactivation?.isReactivation"
-        i18n="@@register.create"
-      >
-        <h1 class="orc-font-heading-small">Create your ORCID iD</h1>
+      <ng-container *ngIf="!reactivation?.isReactivation">
+        <h1 class="orc-font-heading-small" i18n="@@register.create">
+          Create your ORCID iD
+        </h1>
       </ng-container>
       <ng-container
         *ngIf="reactivation?.isReactivation"
@@ -59,10 +58,10 @@
           color="primary"
           matStepperPrevious
           type="button"
-          i18n="@@shared.previousStep"
+
           id="step-c-back-button"
         >
-          <a> Previous Step</a>
+          <a   i18n="@@register.previousStep"> Previous Step</a>
         </button>
       </div>
     </form>
