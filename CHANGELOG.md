@@ -1,3 +1,12 @@
+## v2.48.0 - 2023-11-23
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.47.0...v2.48.0)
+
+### Feature
+
+- Add missing branding to sign in page (#2093)
+- Add footer to headless pages (#2092)
+
 ## v2.47.0 - 2023-10-31
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.46.0...v2.47.0)
