@@ -26,7 +26,6 @@ export abstract class BaseForm implements ControlValueAccessor, AsyncValidator {
   }
   registerOnChange(fn: any): void {
     this.form.valueChanges.subscribe((value) => {
-      console.log('valueChanges', value)
       fn(value)
     })
   }

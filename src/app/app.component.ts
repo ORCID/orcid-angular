@@ -58,10 +58,6 @@ export class AppComponent {
           this.currentRouteIsHeadlessOnOauthPage = this.showHeadlessOnOauthPage(
             platformInfo.currentRoute
           )
-          console.log(
-            'currentRouteIsHeadlessOnOauthPage',
-            this.currentRouteIsHeadlessOnOauthPage
-          )
           this.setPlatformClasses(platformInfo)
           this.screenDirection = platformInfo.screenDirection
           if (
@@ -116,8 +112,6 @@ export class AppComponent {
   }
   showHeadlessOnOauthPage(currentRoute: string): boolean {
     if (currentRoute) {
-      console.log(currentRoute)
-
       const value = HeadlessOnOauthRoutes.filter(
         (url) => currentRoute.indexOf('/' + url) === 0
       )
