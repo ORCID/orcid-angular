@@ -3,12 +3,8 @@
   <router-outlet name="banner"></router-outlet>
   <app-banners *ngIf="!headlessMode"></app-banners>
   <app-header *ngIf="!headlessMode" currentRoute=""></app-header>
-  <div
-    [ngClass]="{
-      'router-container': !headlessMode
-    }"
-  >
+  <div class="router-container">
     <router-outlet> </router-outlet>
-    <app-footer *ngIf="!headlessMode"></app-footer>
+    <app-footer></app-footer>
   </div>
 </div>
