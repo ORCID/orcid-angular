@@ -5,7 +5,6 @@ import { filter } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { UserService } from 'src/app/core'
-import { SignInService } from 'src/app/core/sign-in/sign-in.service'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { ApplicationMenuItem, UserInfo } from 'src/app/types'
 import {
@@ -77,7 +76,8 @@ export class HeaderComponent implements OnInit {
         path === `/${ApplicationRoutes.trustedParties}` ||
         path === `/${ApplicationRoutes.selfService}` ||
         path === `/${ApplicationRoutes.inbox}` ||
-        path === `/${ApplicationRoutes.developerTools}`
+        path === `/${ApplicationRoutes.developerTools}` ||
+        path.indexOf(`/${ApplicationRoutes.register}`) !== -1
     })
   }
 

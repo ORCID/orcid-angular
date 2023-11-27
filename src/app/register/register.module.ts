@@ -71,4 +71,4 @@ import { MdePopoverModule } from '../cdk/popover'
     WarningMessageModule,
   ],
 })
-export class RegisterModule {}
+export class RegisterModuleLegacy {}

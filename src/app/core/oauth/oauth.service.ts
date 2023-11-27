@@ -96,7 +96,7 @@ export class OauthService {
       .post<RequestInfoForm>(
         environment.BASE_URL + 'oauth/custom/authorize.json',
         value,
-        { headers: this.headers }
+        { headers: this.headers, withCredentials: true }
       )
       .pipe(
         retry(3),
