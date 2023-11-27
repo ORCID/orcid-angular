@@ -93,8 +93,8 @@ const routes: Routes = [
     canMatch: [RegisterTogglGuard],
     canActivateChild: [LanguageGuard, RegisterGuard],
     loadChildren: () => {
-      return localStorage.getItem('REGISTRATION_2_0') === 'enable'
-        ? import('./register/register.module').then((m) => m.RegisterModule)
+      return localStorage.getItem('REGISTRATION_2_0') !== 'enable'
+        ? import('./register/register.module').then((m) => m.RegisterModuleLegacy)
         : import('./register2/register.module').then((m) => m.Register2Module)
     },
   },
@@ -156,7 +156,7 @@ const routes: Routes = [
     matcher: routerReactivation,
     canActivateChild: [LanguageGuard, RegisterGuard],
     loadChildren: () =>
-      import('./register/register.module').then((m) => m.RegisterModule),
+      import('./register/register.module').then((m) => m.RegisterModuleLegacy),
   },
   {
     path: ApplicationRoutes.selfService,
