@@ -225,48 +225,7 @@ export class Register2Component implements OnInit, AfterViewInit {
     }
   }
 
-  // openDialog(duplicateRecordsSearchResults: SearchResults): void {
-  //   const duplicateRecords = duplicateRecordsSearchResults['expanded-result']
-  //   const dialogParams = {
-  //     width: `1078px`,
-  //     height: `600px`,
-  //     maxWidth: `90vw`,
 
-  //     data: {
-  //       duplicateRecords,
-  //       titleLabel: $localize`:@@register.titleLabel:Could this be you?`,
-  //       // tslint:disable-next-line: max-line-length
-  //       bodyLabel: $localize`:@@register.bodyLabel:We found some accounts with your name, which means you may have already created an ORCID iD using a different email address. Before creating an account, please confirm that none of these records belong to you. Not sure if any of these are you?`,
-  //       contactLabel: $localize`:@@register.contactLabel:Contact us.`,
-  //       firstNameLabel: $localize`:@@register.firstNameLabel:First Name`,
-  //       lastNameLabel: $localize`:@@register.lastNameLabel:Last Name`,
-  //       affiliationsLabel: $localize`:@@register.affiliationsLabel:Affiliations`,
-  //       dateCreatedLabel: $localize`:@@register.dateCreatedLabel:Date Created`,
-  //       viewRecordLabel: $localize`:@@register.viewRecordLabel:View Record`,
-  //       signinLabel: $localize`:@@register.signinLabel:I ALREADY HAVE AN ID, GO BACK TO SIGN IN`,
-  //       continueLabel: $localize`:@@register.continueLabel:NONE OF THESE ARE ME, CONTINUE WITH REGISTRATION`,
-  //     },
-  //   }
-
-  //   if (this.platform.tabletOrHandset) {
-  //     dialogParams['maxWidth'] = '95vw'
-  //     dialogParams['maxHeight'] = '95vh'
-  //   }
-
-  //   const dialogRef = this._dialog.open(IsThisYouComponent, dialogParams)
-
-  //   dialogRef.afterClosed().subscribe((confirmRegistration) => {
-  //     if (!confirmRegistration) {
-  //       this._router.navigate(['signin'])
-  //     }
-  //   })
-  // }
-
-  // selectionChange(event: StepperSelectionEvent) {
-  //   if (this.platform.columns4 || this.platform.columns8) {
-  //     this.focusCurrentStep(event)
-  //   }
-  // }
 
   // Fix to material vertical stepper not focusing current header
   // related issue https://github.com/angular/components/issues/8881
