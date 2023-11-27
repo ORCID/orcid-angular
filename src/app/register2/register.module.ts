@@ -31,7 +31,6 @@ import { BackendErrorComponent } from './components/backend-error/backend-error.
 import { FormAntiRobotsComponent } from './components/form-anti-robots/form-anti-robots.component'
 import { FormPersonalAdditionalEmailsComponent } from './components/form-personal-additional-emails/form-personal-additional-emails.component'
 import { StepCTComponent } from './components/step-c-t/step-c.component'
-import { TopBarRecordIssuesComponent } from './components/top-bar-record-issues/top-bar-record-issues.component'
 import { Register2Component } from './pages/register/register2.component'
 @NgModule({
   declarations: [
@@ -47,7 +46,6 @@ import { Register2Component } from './pages/register/register2.component'
     FormPersonalAdditionalEmailsComponent,
     FormAntiRobotsComponent,
     BackendErrorComponent,
-    TopBarRecordIssuesComponent,
     Register2Component,
   ],
   imports: [
