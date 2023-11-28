@@ -93,7 +93,7 @@ const routes: Routes = [
     canMatch: [RegisterTogglGuard],
     canActivateChild: [LanguageGuard, RegisterGuard],
     loadChildren: () => {
-      return localStorage.getItem('REGISTRATION_2_0') !== 'enable'
+      return localStorage.getItem('REGISTRATION_2_0') !== 'enabled'
         ? import('./register/register.module').then(
             (m) => m.RegisterModuleLegacy
           )
