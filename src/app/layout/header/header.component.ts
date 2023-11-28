@@ -71,7 +71,7 @@ export class HeaderComponent implements OnInit {
       this.signinRegisterButton = path !== `/${ApplicationRoutes.signin}`
       this.hideMainMenu =
         ORCID_REGEXP.test(path) ||
-        path === `/${ApplicationRoutes.myOrcid}` ||
+        path.indexOf(`/${ApplicationRoutes.myOrcid}`) !== -1 ||
         path === `/${ApplicationRoutes.account}` ||
         path === `/${ApplicationRoutes.trustedParties}` ||
         path === `/${ApplicationRoutes.selfService}` ||
