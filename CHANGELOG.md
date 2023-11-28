@@ -1,3 +1,11 @@
+## v2.51.0 - 2023-11-28
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.50.0...v2.51.0)
+
+### Fix
+
+- Remove header link from `my-orcid` page (#2099)
+
 ## v2.50.0 - 2023-11-28
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.49.0...v2.50.0)
