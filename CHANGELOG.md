@@ -1,3 +1,9 @@
+## v2.50.0 - 2023-11-28
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.49.0...v2.50.0)
+
+- [#2098](https://github.com/ORCID/orcid-angular/pull/2098): Feature/register2
+
 ## v2.49.0 - 2023-11-28
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.48.0...v2.49.0)
