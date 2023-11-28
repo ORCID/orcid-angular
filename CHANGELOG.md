@@ -1,3 +1,11 @@
+## v2.49.0 - 2023-11-28
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.48.0...v2.49.0)
+
+- [#2097](https://github.com/ORCID/orcid-angular/pull/2097): Feature/register2
+- [#2096](https://github.com/ORCID/orcid-angular/pull/2096): EMPTY PR
+- [#2094](https://github.com/ORCID/orcid-angular/pull/2094): Feature/register2
+
 ## v2.48.0 - 2023-11-23
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.47.0...v2.48.0)
