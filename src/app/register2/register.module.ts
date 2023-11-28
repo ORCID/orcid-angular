@@ -32,6 +32,7 @@ import { FormAntiRobotsComponent } from './components/form-anti-robots/form-anti
 import { FormPersonalAdditionalEmailsComponent } from './components/form-personal-additional-emails/form-personal-additional-emails.component'
 import { StepCTComponent } from './components/step-c-t/step-c.component'
 import { Register2Component } from './pages/register/register2.component'
+
 @NgModule({
   declarations: [
     StepAComponent,
