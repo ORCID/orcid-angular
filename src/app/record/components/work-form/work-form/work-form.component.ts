@@ -52,7 +52,7 @@ import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { WorkIdentifiers } from 'src/app/shared/validators/work-identifiers/work-identifiers.validator'
 import { workCitationValidator } from 'src/app/shared/validators/citation/work-citation.validator'
 import { translatedTitleValidator } from 'src/app/shared/validators/translated-title/translated-title.validator'
-import { merge, Subject, of } from 'rxjs'
+import { merge, Subject, of, EMPTY } from 'rxjs'
 import { RecordService } from 'src/app/core/record/record.service'
 
 @Component({
@@ -266,21 +266,13 @@ export class WorkFormComponent implements OnInit {
     formGroup: UntypedFormGroup,
     externalIdentifierType: string
   ): AsyncValidatorFn {
-  
-    if(externalIdentifierType === 'isbn') {
-	  return (control: AbstractControl) => {
-	    of(undefined)
-		.pipe(map( () => {
-		  if(!(formGroup.controls.externalIdentifierId.value?.lenght == 10  ||  formGroup.controls.externalIdentifierId.value == 13)) 
-		    {
-			  return { validFormat: true, }
+      return (control: AbstractControl) => {     
+        if(externalIdentifierType === 'isbn') {
+          if(!(formGroup.controls.externalIdentifierId.value?.lenght === 10  ||  formGroup.controls.externalIdentifierId.value === 13)) {
+              return of({ validFormat: true, })
             }
-		  }
-		)
-      )}
-	} else {
-      return (control: AbstractControl) => {
-      return this._workService
+        } else {
+          return this._workService
         .validateWorkIdTypes(externalIdentifierType, control.value)
         .pipe(
           map((value) => {
@@ -326,7 +318,7 @@ export class WorkFormComponent implements OnInit {
           })
         )
     }
-	}
+        }      	
   }
 
   private checkWorkIdentifiersChanges(
