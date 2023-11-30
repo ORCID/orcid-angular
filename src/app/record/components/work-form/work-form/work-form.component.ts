@@ -266,59 +266,59 @@ export class WorkFormComponent implements OnInit {
     formGroup: UntypedFormGroup,
     externalIdentifierType: string
   ): AsyncValidatorFn {
-      return (control: AbstractControl) => {
-        if(externalIdentifierType === 'isbn') {
-          if(!(control.value?.length === 10  ||  control.value?.length === 13)) {
-              return of({ validFormat: true, })
-            } else {
-              return of({})
-            }
+    return (control: AbstractControl) => {
+      if (externalIdentifierType === 'isbn') {
+        if (!(control.value?.length === 10 || control.value?.length === 13)) {
+          return of({ validFormat: true })
         } else {
-          return this._workService
-        .validateWorkIdTypes(externalIdentifierType, control.value)
-        .pipe(
-          map((value) => {
-            if (
-              (formGroup.controls.externalIdentifierUrl?.value?.length > 0 &&
-                formGroup.controls.externalIdentifierUrl.value !==
-                  formGroup.controls.externalIdentifierUrlWasBackendGenerated
-                    .value) ||
-              formGroup.controls.externalIdentifierId.value ===
-                formGroup.controls.externalIdentifierIdStored.value
-            ) {
-              // do not overwrite the existing URL
-            } else if (
-              value.generatedUrl &&
-              value.generatedUrl !==
-                formGroup.controls.externalIdentifierUrl.value
-            ) {
-              formGroup.controls.externalIdentifierUrl.setValue(
-                decodeURI(value.generatedUrl)
-              )
-              formGroup.controls.externalIdentifierUrlWasBackendGenerated.setValue(
-                decodeURI(value.generatedUrl)
-              )
-            } else if (
-              !value.validFormat ||
-              (value.attemptedResolution && !value.resolved)
-            ) {
-              if (!this.work?.putCode) {
-                formGroup.controls.externalIdentifierUrl.setValue('')
+          return of({})
+        }
+      } else {
+        return this._workService
+          .validateWorkIdTypes(externalIdentifierType, control.value)
+          .pipe(
+            map((value) => {
+              if (
+                (formGroup.controls.externalIdentifierUrl?.value?.length > 0 &&
+                  formGroup.controls.externalIdentifierUrl.value !==
+                    formGroup.controls.externalIdentifierUrlWasBackendGenerated
+                      .value) ||
+                formGroup.controls.externalIdentifierId.value ===
+                  formGroup.controls.externalIdentifierIdStored.value
+              ) {
+                // do not overwrite the existing URL
+              } else if (
+                value.generatedUrl &&
+                value.generatedUrl !==
+                  formGroup.controls.externalIdentifierUrl.value
+              ) {
+                formGroup.controls.externalIdentifierUrl.setValue(
+                  decodeURI(value.generatedUrl)
+                )
+                formGroup.controls.externalIdentifierUrlWasBackendGenerated.setValue(
+                  decodeURI(value.generatedUrl)
+                )
+              } else if (
+                !value.validFormat ||
+                (value.attemptedResolution && !value.resolved)
+              ) {
+                if (!this.work?.putCode) {
+                  formGroup.controls.externalIdentifierUrl.setValue('')
+                }
               }
-            }
 
-            if (value.attemptedResolution && !value.resolved) {
-              return {
-                unResolved: true,
+              if (value.attemptedResolution && !value.resolved) {
+                return {
+                  unResolved: true,
+                }
               }
-            }
-            if (!value.validFormat) {
-              return {
-                validFormat: true,
+              if (!value.validFormat) {
+                return {
+                  validFormat: true,
+                }
               }
-            }
-          })
-        )
+            })
+          )
       }
     }
   }
