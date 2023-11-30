@@ -271,10 +271,13 @@ export class WorkFormComponent implements OnInit {
 	  return (control: AbstractControl) => {
 	    of(undefined)
 		.pipe(map( () => {
-		  if(!(formGroup.controls.externalIdentifierId.value?.lenght == 10  ||  formGroup.controls.externalIdentifierId.value == 13)) {return { validFormat: true, }}
+		  if(!(formGroup.controls.externalIdentifierId.value?.lenght == 10  ||  formGroup.controls.externalIdentifierId.value == 13)) 
+		    {
+			  return { validFormat: true, }
+            }
 		  }
-		  ))	    
-	  }
+		)
+      )}
 	} else {
       return (control: AbstractControl) => {
       return this._workService
