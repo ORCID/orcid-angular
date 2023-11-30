@@ -52,7 +52,7 @@ import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { WorkIdentifiers } from 'src/app/shared/validators/work-identifiers/work-identifiers.validator'
 import { workCitationValidator } from 'src/app/shared/validators/citation/work-citation.validator'
 import { translatedTitleValidator } from 'src/app/shared/validators/translated-title/translated-title.validator'
-import { merge, Subject, of, EMPTY } from 'rxjs'
+import { merge, Subject, of } from 'rxjs'
 import { RecordService } from 'src/app/core/record/record.service'
 
 @Component({
