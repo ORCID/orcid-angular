@@ -1,3 +1,9 @@
+## v2.51.1 - 2023-11-30
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.51.0...v2.51.1)
+
+- [#2100](https://github.com/ORCID/orcid-angular/pull/2100): Still not working
+
 ## v2.51.0 - 2023-11-28
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.50.0...v2.51.0)
