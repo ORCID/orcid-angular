@@ -266,10 +266,12 @@ export class WorkFormComponent implements OnInit {
     formGroup: UntypedFormGroup,
     externalIdentifierType: string
   ): AsyncValidatorFn {
-      return (control: AbstractControl) => {     
+      return (control: AbstractControl) => {
         if(externalIdentifierType === 'isbn') {
-          if(!(formGroup.controls.externalIdentifierId.value?.lenght === 10  ||  formGroup.controls.externalIdentifierId.value === 13)) {
+          if(!(control.value?.length === 10  ||  control.value?.length === 13)) {
               return of({ validFormat: true, })
+            } else {
+              return of({})
             }
         } else {
           return this._workService
@@ -317,8 +319,8 @@ export class WorkFormComponent implements OnInit {
             }
           })
         )
+      }
     }
-        }      	
   }
 
   private checkWorkIdentifiersChanges(
