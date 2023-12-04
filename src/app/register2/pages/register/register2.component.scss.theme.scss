@@ -8,8 +8,5 @@
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
 
-  :host {
-    // background-color: map-get($background, 'ui-background-lightest');
-  }
 }
 @include theme($orcid-app-theme);
