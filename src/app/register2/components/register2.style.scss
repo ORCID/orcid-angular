@@ -58,6 +58,12 @@ mat-label.orc-font-small-print {
 }
 
 :host ::ng-deep {
+
+
+  mat-card {
+    margin-top: 32px !important;
+  }
+
   mat-error {
     margin-top: 8px;
     font-size: 12px;
@@ -160,6 +166,7 @@ mat-label.orc-font-small-print {
   mat-horizontal-stepper.orcid-stepper-wizard mat-card .input-container {
     margin-bottom: 0px;
   }
+
 
   mat-vertical-stepper.orcid-stepper-wizard,
   mat-horizontal-stepper.orcid-stepper-wizard {

@@ -173,7 +173,7 @@
 
           <div>
             <a
-              routerLink="/signin"
+              (click)="navigateToSignin(emails.get('email').value)"
               i18n="@@register.signInToOrcidUsingThisEmail"
             >
               Sign in to ORCID using this email address</a
