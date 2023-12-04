@@ -133,6 +133,18 @@ export class Register2Component implements OnInit, AfterViewInit {
   }
 
   register() {
+    console.log('register')
+    console.log(this.FormGroupStepA)
+    console.log("______________________")
+    console.log(this.FormGroupStepB)
+    console.log("______________________")
+
+    console.log(this.FormGroupStepC)
+    console.log("______________________")
+
+    console.log(this.FormGroupStepD)
+    console.log("______________________")
+
     this.loading = true
     this.lastStep.interacted = true
     if (

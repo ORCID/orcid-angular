@@ -52,7 +52,7 @@ import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { WorkIdentifiers } from 'src/app/shared/validators/work-identifiers/work-identifiers.validator'
 import { workCitationValidator } from 'src/app/shared/validators/citation/work-citation.validator'
 import { translatedTitleValidator } from 'src/app/shared/validators/translated-title/translated-title.validator'
-import { merge, Subject, of } from 'rxjs'
+import { EMPTY, merge, of, Subject } from 'rxjs'
 import { RecordService } from 'src/app/core/record/record.service'
 
 @Component({
@@ -267,59 +267,51 @@ export class WorkFormComponent implements OnInit {
     externalIdentifierType: string
   ): AsyncValidatorFn {
     return (control: AbstractControl) => {
-      if (externalIdentifierType === 'isbn') {
-        if (!(control.value?.length === 10 || control.value?.length === 13)) {
-          return of({ validFormat: true })
-        } else {
-          return of({})
-        }
-      } else {
-        return this._workService
-          .validateWorkIdTypes(externalIdentifierType, control.value)
-          .pipe(
-            map((value) => {
-              if (
-                (formGroup.controls.externalIdentifierUrl?.value?.length > 0 &&
-                  formGroup.controls.externalIdentifierUrl.value !==
-                    formGroup.controls.externalIdentifierUrlWasBackendGenerated
-                      .value) ||
-                formGroup.controls.externalIdentifierId.value ===
-                  formGroup.controls.externalIdentifierIdStored.value
-              ) {
-                // do not overwrite the existing URL
-              } else if (
-                value.generatedUrl &&
-                value.generatedUrl !==
-                  formGroup.controls.externalIdentifierUrl.value
-              ) {
-                formGroup.controls.externalIdentifierUrl.setValue(
-                  decodeURI(value.generatedUrl)
-                )
-                formGroup.controls.externalIdentifierUrlWasBackendGenerated.setValue(
-                  decodeURI(value.generatedUrl)
-                )
-              } else if (
-                !value.validFormat ||
-                (value.attemptedResolution && !value.resolved)
-              ) {
-                if (!this.work?.putCode) {
-                  formGroup.controls.externalIdentifierUrl.setValue('')
-                }
+      return this._workService
+        .validateWorkIdTypes(externalIdentifierType, control.value)
+        .pipe(
+          map((value) => {
+            if (
+              (formGroup.controls.externalIdentifierUrl?.value?.length > 0 &&
+                formGroup.controls.externalIdentifierUrl.value !==
+                  formGroup.controls.externalIdentifierUrlWasBackendGenerated
+                    .value) ||
+              formGroup.controls.externalIdentifierId.value ===
+                formGroup.controls.externalIdentifierIdStored.value
+            ) {
+              // do not overwrite the existing URL
+            } else if (
+              value.generatedUrl &&
+              value.generatedUrl !==
+                formGroup.controls.externalIdentifierUrl.value
+            ) {
+              formGroup.controls.externalIdentifierUrl.setValue(
+                decodeURI(value.generatedUrl)
+              )
+              formGroup.controls.externalIdentifierUrlWasBackendGenerated.setValue(
+                decodeURI(value.generatedUrl)
+              )
+            } else if (
+              !value.validFormat ||
+              (value.attemptedResolution && !value.resolved)
+            ) {
+              if (!this.work?.putCode) {
+                formGroup.controls.externalIdentifierUrl.setValue('')
               }
+            }
 
-              if (value.attemptedResolution && !value.resolved) {
-                return {
-                  unResolved: true,
-                }
+            if (value.attemptedResolution && !value.resolved) {
+              return {
+                unResolved: true,
               }
-              if (!value.validFormat) {
-                return {
-                  validFormat: true,
-                }
+            }
+            if (!value.validFormat) {
+              return {
+                validFormat: true,
               }
-            })
-          )
-      }
+            }
+          })
+        )
     }
   }
 

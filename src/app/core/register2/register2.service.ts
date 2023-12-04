@@ -98,6 +98,8 @@ export class Register2Service extends _RegisterServiceMixingBase {
       StepC,
       StepD
     )
+    console.log('_______ >>>>>>>> ________')
+    console.log(registerForm)
     this.addOauthContext(registerForm, requestInfoForm)
     return this._platform.get().pipe(
       first(),

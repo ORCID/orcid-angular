@@ -70,14 +70,6 @@
     }
   }
 
-  :host {
-    ::ng-deep {
-      .container .mat-horizontal-content-container,
-      .container {
-        // background-color: map-get($background, 'ui-background-lightest');
-      }
-    }
-  }
 
   ::ng-deep {
     .valid-password-input {
