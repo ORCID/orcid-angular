@@ -1,3 +1,11 @@
+## v2.51.4 - 2023-12-05
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.51.3...v2.51.4)
+
+### Fix
+
+- Update additional email message error (#2101)
+
 ## v2.51.3 - 2023-12-05
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.51.2...v2.51.3)
