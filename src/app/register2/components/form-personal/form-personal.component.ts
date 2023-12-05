@@ -269,7 +269,6 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
     return this.emailConfirmationValid && this.emailValid
   }
 
-
   navigateToSignin(email) {
     this._platform
       .get()
@@ -282,6 +281,4 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
         })
       })
   }
-
-
 }

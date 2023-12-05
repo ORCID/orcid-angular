@@ -125,9 +125,8 @@
       <mat-error
         *ngIf="
           emailFormTouched &&
-          (
-          this.emails.hasError('email', 'email') ||
-          this.emails.hasError('pattern', 'email'))
+          (this.emails.hasError('email', 'email') ||
+            this.emails.hasError('pattern', 'email'))
         "
         i18n="@@register.invalidEmail2"
       >
