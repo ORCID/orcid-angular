@@ -7,6 +7,7 @@
           #stepper
           labelPosition="bottom"
           class="orcid-stepper-wizard"
+          (selectionChange)="selectionChange($event)"
         >
           <mat-step [stepControl]="FormGroupStepA">
             <ng-template matStepLabel i18n="@@register.personalData"
@@ -46,7 +47,7 @@
               >Visibility and terms</ng-template
             >
             <app-step-d
-              #stepComponentC
+              #stepComponentD
               [(formGroup)]="FormGroupStepD"
               (submit)="register()"
               [loading]="loading"

@@ -28,11 +28,15 @@ import {
   first,
   startWith,
   switchMap,
+  take,
 } from 'rxjs/operators'
 import { ReactivationService } from '../../../core/reactivation/reactivation.service'
 import { ReactivationLocal } from '../../../types/reactivation.local'
 import { BaseForm } from '../BaseForm'
 import { ErrorStateMatcher } from '@angular/material/core'
+import { PlatformInfoService } from 'src/app/cdk/platform-info'
+import { Router } from '@angular/router'
+import { ApplicationRoutes } from 'src/app/constants'
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
     control: FormControl | null,
@@ -87,7 +91,9 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
   undefinedEmail: boolean
   constructor(
     private _register: Register2Service,
-    private _reactivationService: ReactivationService
+    private _reactivationService: ReactivationService,
+    private _platform: PlatformInfoService,
+    private _router: Router
   ) {
     super()
   }
@@ -261,5 +267,18 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
 
   get emailsAreValid() {
     return this.emailConfirmationValid && this.emailValid
+  }
+
+  navigateToSignin(email) {
+    this._platform
+      .get()
+      .pipe(take(1))
+      .subscribe((platform) => {
+        return this._router.navigate([ApplicationRoutes.signin], {
+          // keeps all parameters to support Oauth request
+          // and set show login to true
+          queryParams: { ...platform.queryParameters, email, show_login: true },
+        })
+      })
   }
 }

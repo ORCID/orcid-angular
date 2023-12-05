@@ -58,6 +58,10 @@ mat-label.orc-font-small-print {
 }
 
 :host ::ng-deep {
+  mat-card {
+    margin-top: 32px !important;
+  }
+
   mat-error {
     margin-top: 8px;
     font-size: 12px;

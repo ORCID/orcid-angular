@@ -125,7 +125,7 @@ export function Register2FormAdapterMixin<T extends Constructor<any>>(base: T) {
       return {
         ...StepA.value.personal,
         ...StepB.value.password,
-        ...StepB.value.sendOrcidNews,
+        ...StepC.value.sendOrcidNews,
         ...StepD.value.activitiesVisibilityDefault,
         ...StepD.value.termsOfUse,
         ...StepD.value.captcha,

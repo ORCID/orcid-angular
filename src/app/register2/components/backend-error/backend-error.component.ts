@@ -29,6 +29,8 @@ enum RegisterBackendErrors {
 export class BackendErrorComponent implements OnInit {
   recognizedError = RegisterBackendErrors
   _errorCode: string
+  @Input() disableInlineAlreadyExistError = false
+
   @Input()
   set errorCode(errorCode: string) {
     // This will change the string send by the backend into a code, to handle the error trough a code
