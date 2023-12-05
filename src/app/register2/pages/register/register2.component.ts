@@ -224,6 +224,11 @@ export class Register2Component implements OnInit, AfterViewInit {
       }
     }
   }
+  selectionChange(event: StepperSelectionEvent) {
+    if (this.platform.columns4 || this.platform.columns8) {
+      this.focusCurrentStep(event)
+    }
+  }
 
   // Fix to material vertical stepper not focusing current header
   // related issue https://github.com/angular/components/issues/8881
