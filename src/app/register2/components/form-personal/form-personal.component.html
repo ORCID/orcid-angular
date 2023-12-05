@@ -92,7 +92,7 @@
         class="orc-font-small-print"
         id="email-input-input-label"
         [ngClass]="{
-          error: emailFormTouched && form.hasError('required', 'emails.email')
+          error: emailFormTouched && emails.controls.email.errors
         }"
         id="email-input-label"
         i18n="@@register.primaryEmail"
@@ -124,8 +124,10 @@
       </mat-error>
       <mat-error
         *ngIf="
+          emailFormTouched &&
+          (
           this.emails.hasError('email', 'email') ||
-          this.emails.hasError('pattern', 'email')
+          this.emails.hasError('pattern', 'email'))
         "
         i18n="@@register.invalidEmail2"
       >
@@ -141,6 +143,7 @@
           *ngFor="let error of this.emails.getError('backendError', 'email')"
         >
           <app-backend-error
+            [disableInlineAlreadyExistError]="true"
             [errorCode]="error"
             [value]="emails.get('email').value"
           ></app-backend-error>

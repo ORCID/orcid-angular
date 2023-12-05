@@ -1,4 +1,4 @@
-<ng-container *ngIf="recognizedError[errorCode] === 0">
+<ng-container *ngIf="recognizedError[errorCode] === 0 && !disableInlineAlreadyExistError">
   <ng-container i18n="@@register.emailAlreadyExists"
     >This email already exists in our system. Would you like to</ng-container
   >
