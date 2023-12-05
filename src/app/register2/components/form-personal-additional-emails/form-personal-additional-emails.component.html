@@ -29,8 +29,8 @@
     <mat-error
       *ngIf="
         additionalEmailsTouched &&
-          (additionalEmails.hasError('email', additionalEmailControl.key) ||
-        additionalEmails.hasError('pattern', additionalEmailControl.key))
+        (additionalEmails.hasError('email', additionalEmailControl.key) ||
+          additionalEmails.hasError('pattern', additionalEmailControl.key))
       "
       i18n="@@register.invalidEmail2"
     >
