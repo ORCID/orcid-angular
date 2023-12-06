@@ -18,11 +18,15 @@ h3.margin-top-12,
   margin-top: 12px;
 }
 
-h3,
 legend {
   margin-top: 32px;
   margin-bottom: 14px;
   font-weight: bold;
+  h3 {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    font-weight: bold;
+  }
 }
 
 fieldset {
