@@ -52,6 +52,7 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
   currentValidate8orMoreCharactersStatus: boolean
   ccurentValidateAtLeastALetterOrSymbolStatus: boolean
   currentValidateAtLeastANumber: boolean
+  passwordsValidAreValidAlreadyChecked: any
   constructor(
     private _register: Register2Service,
     private _liveAnnouncer: LiveAnnouncer
@@ -136,6 +137,21 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
   }
   get passwordValid() {
     return this.form.controls['password'].valid
+  }
+
+  get passwordsValid() {
+    const validStatus = this.confirmPasswordValid && this.passwordValid
+
+    if (!this.passwordsValidAreValidAlreadyChecked && validStatus) {
+      this.announce($localize`:@@register.passwordAreValid:Your password match`)
+    } else if (this.passwordsValidAreValidAlreadyChecked && !validStatus) {
+      this.announce(
+        $localize`:@@register.passwordAreNotValid:Your password do not match`
+      )
+    }
+    this.passwordsValidAreValidAlreadyChecked = validStatus
+
+    return validStatus
   }
 
   get validate8orMoreCharacters() {

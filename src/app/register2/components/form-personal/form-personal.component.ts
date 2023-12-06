@@ -37,6 +37,8 @@ import { ErrorStateMatcher } from '@angular/material/core'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { Router } from '@angular/router'
 import { ApplicationRoutes } from 'src/app/constants'
+import { LiveAnnouncer } from '@angular/cdk/a11y'
+import { environment } from 'src/environments/environment'
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
     control: FormControl | null,
@@ -89,11 +91,13 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
   professionalEmail: boolean
   personalEmail: boolean
   undefinedEmail: boolean
+  emailsAreValidAlreadyChecked: boolean
   constructor(
     private _register: Register2Service,
     private _reactivationService: ReactivationService,
     private _platform: PlatformInfoService,
-    private _router: Router
+    private _router: Router,
+    private _liveAnnouncer: LiveAnnouncer
   ) {
     super()
   }
@@ -266,7 +270,33 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
   }
 
   get emailsAreValid() {
-    return this.emailConfirmationValid && this.emailValid
+    const validStatus = this.emailConfirmationValid && this.emailValid
+    if (!this.emailsAreValidAlreadyChecked && validStatus) {
+      this.announce(
+        $localize`:@@register.emailsAreValid:Your` +
+          ' ' +
+          this.emails.controls['email'].value +
+          ' ' +
+          $localize`:@@register.emailMatch:match`
+      )
+    } else if (this.emailsAreValidAlreadyChecked && !validStatus) {
+      this.announce(
+        $localize`:@@register.emailsAreValid:Your` +
+          ' ' +
+          this.emails.controls['email'].value +
+          ' ' +
+          $localize`:@@register.emailNotMatch:not match`
+      )
+    }
+    this.emailsAreValidAlreadyChecked = validStatus
+    return validStatus
+  }
+
+  private announce(announcement: string) {
+    if (environment.debugger) {
+      console.debug('📢' + announcement)
+    }
+    this._liveAnnouncer.announce(announcement, 'assertive')
   }
 
   navigateToSignin(email) {
