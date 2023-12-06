@@ -1,3 +1,27 @@
+## v2.51.4 - 2023-12-05
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.51.3...v2.51.4)
+
+### Fix
+
+- Update additional email message error (#2101)
+
+## v2.51.3 - 2023-12-05
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.51.2...v2.51.3)
+
+## v2.51.2 - 2023-12-05
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.51.1...v2.51.2)
+
+- [#2104](https://github.com/ORCID/orcid-angular/pull/2104): batch-fixes-4-dec
+- [#2103](https://github.com/ORCID/orcid-angular/pull/2103): fix: Adding missing i18 property and translation
+- [#2102](https://github.com/ORCID/orcid-angular/pull/2102): style: Add missing class to radio buttons
+
+### Fix
+
+- Adding missing i18 property and translation
+
 ## v2.51.1 - 2023-11-30
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.51.0...v2.51.1)

@@ -28,13 +28,13 @@
     </mat-form-field>
     <mat-error
       *ngIf="
-        (additionalEmailsTouched &&
-          additionalEmails.hasError('email', additionalEmailControl.key)) ||
-        additionalEmails.hasError('pattern', additionalEmailControl.key)
+        additionalEmailsTouched &&
+        (additionalEmails.hasError('email', additionalEmailControl.key) ||
+          additionalEmails.hasError('pattern', additionalEmailControl.key))
       "
-      i18n="@@register.invalidEmail"
+      i18n="@@register.invalidEmail2"
     >
-      Invalid email format
+      Please enter a valid email address, for example joe@institution.edu
     </mat-error>
     <mat-error
       *ngFor="
