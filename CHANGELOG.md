@@ -1,3 +1,11 @@
+## v2.51.7 - 2023-12-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.51.6...v2.51.7)
+
+### Fix
+
+- Add missing class to printable button (#2109)
+
 ## v2.51.6 - 2023-12-06
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.51.5...v2.51.6)
