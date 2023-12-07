@@ -213,7 +213,7 @@
       </mat-form-field>
       <mat-error
         *ngIf="
-          emailFormTouched && form.hasError('required', 'emails.confirmEmail')
+          emailConfirmationFormTouched && form.hasError('required', 'emails.confirmEmail')
         "
         i18n="@@register.confirmEmailRequired2"
       >
