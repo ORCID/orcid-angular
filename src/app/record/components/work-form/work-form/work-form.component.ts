@@ -266,7 +266,7 @@ export class WorkFormComponent implements OnInit {
     formGroup: UntypedFormGroup,
     externalIdentifierType: string
   ): AsyncValidatorFn {
-    return (control: AbstractControl) => {      
+    return (control: AbstractControl) => {
       return this._workService
         .validateWorkIdTypes(externalIdentifierType, control.value)
         .pipe(
@@ -311,7 +311,7 @@ export class WorkFormComponent implements OnInit {
               }
             }
           })
-        )      
+        )
     }
   }
 
