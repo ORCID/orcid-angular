@@ -271,7 +271,7 @@ export class WorkFormComponent implements OnInit {
         if (!(control.value?.length === 10 || control.value?.length === 13)) {
           return of({ validFormat: true })
         } else {
-          return of({})
+          return of(null)
         }
       } else {
         return this._workService
@@ -517,9 +517,7 @@ export class WorkFormComponent implements OnInit {
   saveEvent() {
     this.workForm.markAllAsTouched()
     const formErrors = GetFormErrors(this.workForm)
-
     const allowInvalidForm = this.formHasOnlyAllowError(formErrors)
-
     if (this.workForm.valid || allowInvalidForm) {
       const work: Work = {
         visibility: {

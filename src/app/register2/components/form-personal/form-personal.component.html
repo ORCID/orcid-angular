@@ -213,7 +213,7 @@
       </mat-form-field>
       <mat-error
         *ngIf="
-          emailFormTouched && form.hasError('required', 'emails.confirmEmail')
+          emailConfirmationFormTouched && form.hasError('required', 'emails.confirmEmail')
         "
         i18n="@@register.confirmEmailRequired2"
       >
@@ -225,9 +225,9 @@
           (this.emails.hasError('email', 'confirmEmail') ||
             this.emails.hasError('pattern', 'confirmEmail'))
         "
-        i18n="@@register.invalidEmail"
+        i18n="@@register.invalidEmail2"
       >
-        Invalid email format
+        Please enter a valid email address, for example joe@institution.edu
       </mat-error>
       <mat-error
         *ngIf="
