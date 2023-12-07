@@ -8,6 +8,7 @@
           labelPosition="bottom"
           class="orcid-stepper-wizard"
           (selectionChange)="selectionChange($event)"
+          role="tablist"
         >
           <mat-step [stepControl]="FormGroupStepA">
             <ng-template matStepLabel i18n="@@register.personalData"
@@ -37,7 +38,6 @@
             <app-step-ct
               #stepComponentC
               [(formGroup)]="FormGroupStepC"
-              (submit)="register()"
               [loading]="loading"
               [reactivation]="reactivation"
             ></app-step-ct>
