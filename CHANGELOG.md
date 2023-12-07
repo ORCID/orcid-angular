@@ -1,3 +1,19 @@
+## v2.51.8 - 2023-12-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.51.7...v2.51.8)
+
+- [#2106](https://github.com/ORCID/orcid-angular/pull/2106): fix: Update accessibility headings in new register steps
+- [#2110](https://github.com/ORCID/orcid-angular/pull/2110): fix: Add missing validation in confirmation email in new register form
+- [#2111](https://github.com/ORCID/orcid-angular/pull/2111): Return null observer
+- [#2112](https://github.com/ORCID/orcid-angular/pull/2112): fix: Update confirm email field error validation error message
+
+### Fix
+
+- Update confirm email field error validation error message
+- Add h3 heading inside fieldset to improve accessibility
+- Update accessibility headings in new register steps
+- Add missing validation in confirmation email in new register form
+
 ## v2.51.7 - 2023-12-06
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.51.6...v2.51.7)
