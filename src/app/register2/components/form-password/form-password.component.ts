@@ -143,7 +143,9 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
     const validStatus = this.confirmPasswordValid && this.passwordValid
 
     if (!this.passwordsValidAreValidAlreadyChecked && validStatus) {
-      this.announce($localize`:@@register.passwordAreValid:Your passwords match`)
+      this.announce(
+        $localize`:@@register.passwordAreValid:Your passwords match`
+      )
     } else if (this.passwordsValidAreValidAlreadyChecked && !validStatus) {
       this.announce(
         $localize`:@@register.passwordAreNotValid:Your passwords do not match`
