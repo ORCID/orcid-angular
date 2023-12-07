@@ -54,6 +54,7 @@
           color="primary"
           [disabled]="loading"
           (click)="nextButtonWasClicked = true"
+          matStepperNext
         >
           <ng-container
             *ngIf="!reactivation?.isReactivation"

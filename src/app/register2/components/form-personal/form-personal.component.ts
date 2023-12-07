@@ -272,20 +272,10 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
   get emailsAreValid() {
     const validStatus = this.emailConfirmationValid && this.emailValid
     if (!this.emailsAreValidAlreadyChecked && validStatus) {
-      this.announce(
-        $localize`:@@register.emailsAreValid:Your` +
-          ' ' +
-          this.emails.controls['email'].value +
-          ' ' +
-          $localize`:@@register.emailMatch:match`
-      )
+      this.announce($localize`:@@register.emailAreValid:Your emails match`)
     } else if (this.emailsAreValidAlreadyChecked && !validStatus) {
       this.announce(
-        $localize`:@@register.emailsAreValid:Your` +
-          ' ' +
-          this.emails.controls['email'].value +
-          ' ' +
-          $localize`:@@register.emailNotMatch:not match`
+        $localize`:@@register.emailAreNotValid:Your emails do not match`
       )
     }
     this.emailsAreValidAlreadyChecked = validStatus
