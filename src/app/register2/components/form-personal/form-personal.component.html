@@ -1,7 +1,7 @@
 <ng-container [formGroup]="form">
-  <h2 i18n="@@register.yourNames" class="orc-font-body margin-top-12">
+  <h3 i18n="@@register.yourNames" class="orc-font-body margin-top-12">
     Your names
-  </h2>
+  </h3>
 
   <div class="input-container">
     <mat-label
@@ -82,9 +82,9 @@
 
   <!-- EMAIL -->
 
-  <h2 i18n="@@register.yourEmailAddresses" class="orc-font-body margin-top-12">
+  <h3 i18n="@@register.yourEmailAddresses" class="orc-font-body margin-top-12">
     Your email addresses
-  </h2>
+  </h3>
   <ng-container formGroupName="emails">
     <div class="input-container">
       <mat-label
@@ -324,7 +324,7 @@
           <div>
             <ng-container i18n="@@register.weRecommendAdding"
               >We recommend adding a </ng-container
-            ><strong i18n="@@register.personalEmail">personal email</strong>
+            >&nbsp;<strong i18n="@@register.personalEmail">personal email</strong>&nbsp;
             <ng-container i18n="@@register.asBackupSoYouAlways">
               as backup so you always have access to your ORCID account if you
               change jobs or roles.</ng-container
