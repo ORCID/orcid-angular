@@ -213,7 +213,8 @@
       </mat-form-field>
       <mat-error
         *ngIf="
-          emailConfirmationFormTouched && form.hasError('required', 'emails.confirmEmail')
+          emailConfirmationFormTouched &&
+          form.hasError('required', 'emails.confirmEmail')
         "
         i18n="@@register.confirmEmailRequired2"
       >
@@ -324,7 +325,9 @@
           <div>
             <ng-container i18n="@@register.weRecommendAdding"
               >We recommend adding a </ng-container
-            >&nbsp;<strong i18n="@@register.personalEmail">personal email</strong>&nbsp;
+            >&nbsp;<strong i18n="@@register.personalEmail"
+              >personal email</strong
+            >&nbsp;
             <ng-container i18n="@@register.asBackupSoYouAlways">
               as backup so you always have access to your ORCID account if you
               change jobs or roles.</ng-container
