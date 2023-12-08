@@ -1,3 +1,14 @@
+## v2.51.12 - 2023-12-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.51.11...v2.51.12)
+
+- [#2116](https://github.com/ORCID/orcid-angular/pull/2116): 
+
+### Fix
+
+- Use color from palette
+- Only display `email already associated` inline error if the user clicks on `next` button
+
 ## v2.51.11 - 2023-12-08
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.51.10...v2.51.11)
