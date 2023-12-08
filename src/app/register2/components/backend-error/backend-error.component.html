@@ -1,6 +1,4 @@
-<ng-container
-  *ngIf="recognizedError[errorCode] === 0"
->
+<ng-container *ngIf="recognizedError[errorCode] === 0">
   <ng-container *ngIf="!registrationTogglz">
     <ng-container i18n="@@register.emailAlreadyExists"
       >This email already exists in our system. Would you like to</ng-container
@@ -13,7 +11,8 @@
 
   <ng-container *ngIf="registrationTogglz && nextButtonWasClicked">
     <ng-container i18n="@@register.emailIsAlreadyAssociated"
-      >This email is already associated with an existing ORCID record. Please use a different email address.</ng-container
+      >This email is already associated with an existing ORCID record. Please
+      use a different email address.</ng-container
     >
   </ng-container>
 </ng-container>

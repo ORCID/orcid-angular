@@ -53,7 +53,7 @@ export class BackendErrorComponent implements OnInit {
     private _signIn: SignInService,
     private _errorHandler: ErrorHandlerService,
     private _togglz: TogglzService,
-  @Inject(WINDOW) private window: Window
+    @Inject(WINDOW) private window: Window
   ) {}
   ngOnInit() {
     this._togglz
