@@ -87,6 +87,16 @@
         );
       }
     }
+
+    .disable-error {
+      .mat-form-field-outline {
+        color: rgba(0, 0, 0, 0.12) !important;
+      }
+      .mat-input-element {
+        color: black !important;
+      }
+    }
+
   }
 }
 

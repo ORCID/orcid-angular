@@ -282,6 +282,15 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
     return validStatus
   }
 
+  get emailError(): boolean {
+    if (this.emailFormTouched && this.emails.controls.email.errors) {
+      const backendError = this.emails.controls.email.errors?.backendError
+      return !(backendError && backendError[0] === 'orcid.frontend.verify.duplicate_email' && !this.nextButtonWasClicked);
+    }
+      return false
+  }
+
+
   private announce(announcement: string) {
     if (environment.debugger) {
       console.debug('📢' + announcement)
