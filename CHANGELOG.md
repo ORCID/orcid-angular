@@ -1,3 +1,9 @@
+## v2.51.11 - 2023-12-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.51.10...v2.51.11)
+
+- [#2115](https://github.com/ORCID/orcid-angular/pull/2115): 8955-qa-registration-style-layout-and-content-issues
+
 ## v2.51.10 - 2023-12-07
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.51.9...v2.51.10)
