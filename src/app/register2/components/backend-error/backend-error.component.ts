@@ -8,6 +8,7 @@ import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.se
 import { SignInService } from 'src/app/core/sign-in/sign-in.service'
 import { ERROR_REPORT } from 'src/app/errors'
 import { WINDOW } from 'src/app/cdk/window'
+import { TogglzService } from '../../../core/togglz/togglz.service'
 
 // When the error text is not listed on the RegisterBackendErrors enum
 // the error message will be displayed as it comes from the backend
@@ -29,7 +30,8 @@ enum RegisterBackendErrors {
 export class BackendErrorComponent implements OnInit {
   recognizedError = RegisterBackendErrors
   _errorCode: string
-  @Input() disableInlineAlreadyExistError = false
+  @Input() nextButtonWasClicked = false
+  registrationTogglz = false
 
   @Input()
   set errorCode(errorCode: string) {
@@ -50,9 +52,14 @@ export class BackendErrorComponent implements OnInit {
     private _snackbar: SnackbarService,
     private _signIn: SignInService,
     private _errorHandler: ErrorHandlerService,
-    @Inject(WINDOW) private window: Window
+    private _togglz: TogglzService,
+  @Inject(WINDOW) private window: Window
   ) {}
   ngOnInit() {
+    this._togglz
+      .getStateOf('REGISTRATION_2_0')
+      .pipe(take(1))
+      .subscribe((value) => (this.registrationTogglz = value))
     if (!(this.errorCode in RegisterBackendErrors)) {
       this.unrecognizedError = true
     }

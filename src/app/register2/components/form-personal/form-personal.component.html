@@ -89,10 +89,9 @@
     <div class="input-container">
       <mat-label
         class="orc-font-small-print"
-        class="orc-font-small-print"
         id="email-input-input-label"
         [ngClass]="{
-          error: emailFormTouched && emails.controls.email.errors
+          error: emailError
         }"
         id="email-input-label"
         i18n="@@register.primaryEmail"
@@ -102,7 +101,10 @@
       <mat-form-field
         appearance="outline"
         [hideRequiredMarker]="true"
-        [ngClass]="{ 'valid-password-input': emailsAreValid }"
+        [ngClass]="{
+          'valid-password-input': emailsAreValid,
+          'disable-error': !emailError
+        }"
       >
         <mat-icon *ngIf="emailsAreValid" matSuffix>done</mat-icon>
 
@@ -143,7 +145,7 @@
           *ngFor="let error of this.emails.getError('backendError', 'email')"
         >
           <app-backend-error
-            [disableInlineAlreadyExistError]="true"
+            [nextButtonWasClicked]="nextButtonWasClicked"
             [errorCode]="error"
             [value]="emails.get('email').value"
           ></app-backend-error>
