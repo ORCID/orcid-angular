@@ -56,16 +56,6 @@ export class FormPersonalAdditionalEmailsComponent implements AfterViewInit {
     )
   }
 
-  get emailError(): boolean {
-    console.log(
-      this.additionalEmails.controls[0].touched &&
-        this.additionalEmails.controls[0].errors
-    )
-    return !!(
-      this.additionalEmails.controls[0].touched &&
-      this.additionalEmails.controls[0].errors
-    )
-  }
   // deleteEmailInput(id: string): void {
   //   this.additionalEmails.removeControl(id)
   //   this._changeDetectorRef.detectChanges()
