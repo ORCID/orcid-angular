@@ -1,5 +1,11 @@
 <ng-container *ngIf="recognizedError[errorCode] === 0">
-  <ng-container *ngIf="(showEmailAlreadyExistUntilNextButtonWasClicked && nextButtonWasClicked) || !showEmailAlreadyExistUntilNextButtonWasClicked">
+  <ng-container
+    *ngIf="
+      (showEmailAlreadyExistUntilNextButtonWasClicked &&
+        nextButtonWasClicked) ||
+      !showEmailAlreadyExistUntilNextButtonWasClicked
+    "
+  >
     <ng-container i18n="@@register.emailIsAlreadyAssociated"
       >This email is already associated with an existing ORCID record. Please
       use a different email address.</ng-container
