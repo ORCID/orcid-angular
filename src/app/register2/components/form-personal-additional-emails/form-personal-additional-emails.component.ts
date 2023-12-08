@@ -22,6 +22,7 @@ import { ErrorStateMatcherForFormLevelErrors } from '../../ErrorStateMatcherForF
   styleUrls: [
     './form-personal-additional-emails.component.scss',
     '../register2.style.scss',
+    '../register2.scss-theme.scss',
   ],
 })
 export class FormPersonalAdditionalEmailsComponent implements AfterViewInit {

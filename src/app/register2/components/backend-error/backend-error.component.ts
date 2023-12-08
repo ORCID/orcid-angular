@@ -31,6 +31,7 @@ export class BackendErrorComponent implements OnInit {
   recognizedError = RegisterBackendErrors
   _errorCode: string
   @Input() nextButtonWasClicked = false
+  @Input() showEmailAlreadyExistUntilNextButtonWasClicked = false
   registrationTogglz = false
 
   @Input()
