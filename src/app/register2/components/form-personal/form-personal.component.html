@@ -95,8 +95,8 @@
           error: emailFormTouched && emails.controls.email.errors
         }"
         id="email-input-label"
-        i18n="@@register.Email"
-        >Email</mat-label
+        i18n="@@register.primaryEmail"
+        >Primary email</mat-label
       >
 
       <mat-form-field
@@ -114,6 +114,7 @@
           matInput
           appTrim
           type="email"
+          [placeholder]="emailPlaceholder"
         />
       </mat-form-field>
       <mat-error
@@ -270,8 +271,8 @@
             </h3>
           </div>
           <div>
-            <ng-container i18n="@@register.addA"> Add a </ng-container
-            ><strong i18n="@@register.professionalEmail"
+            <ng-container i18n="@@register.addA">Add a</ng-container>
+            <strong i18n="@@register.professionalEmail"
               >professional email</strong
             >
             <ng-container i18n="@@register.asBackupSoWeCanBetter">
@@ -299,7 +300,7 @@
           </div>
           <div i18n="@@register.addingAnAddiotionalEmailAsBackup">
             Adding an additional email as backup helps secure your account and
-            make sure you can always sign in.
+            makes sure you can always sign in.
           </div>
         </div>
       </div>

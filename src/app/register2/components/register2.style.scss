@@ -20,7 +20,7 @@ h3.margin-top-12,
 
 legend {
   margin-top: 32px;
-  margin-bottom: 14px;
+  margin-bottom: 2px;
   font-weight: bold;
   h3 {
     margin-block-start: 0;
@@ -41,7 +41,7 @@ fieldset {
 }
 
 mat-card-title img {
-  margin-bottom: 32px;
+  margin-bottom: 16px;
 }
 
 .input-container {
@@ -65,10 +65,35 @@ mat-label.orc-font-small-print {
     font-style: italic;
   }
 }
+.columns-12 {
+  :host ::ng-deep {
+    .mat-card-title {
+      margin-top: 64px;
+    }
+    .mat-card.orcid-wizard {
+      margin-top: 32px !important;
+      mat-card-content {
+        margin-left: 64px;
+        margin-right: 64px;
+        margin-bottom: 64px;
+      }
+    }
+  }
+}
 
 :host ::ng-deep {
   mat-card {
     margin-top: 32px !important;
+    .mat-stepper-next {
+      height: 40px;
+      font-size: 16px;
+    }
+    button.mat-stepper-previous {
+      height: 40px;
+    }
+    p {
+      line-height: 21px;
+    }
   }
 
   mat-error {
