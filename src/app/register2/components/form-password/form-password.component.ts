@@ -42,7 +42,7 @@ import { environment } from 'src/environments/environment'
 export class FormPasswordComponent extends BaseForm implements OnInit {
   labelInfo = $localize`:@@register.ariaLabelInfoPassword:info about password`
   labelClose = $localize`:@@register.ariaLabelClose:close`
-  labelConfirmPassword = $localize`:@@register.confirmPassword:Confirm password`
+  labelConfirmPassword = $localize`:@@register.confirmYourPassword:Confirm your password`
   @ViewChild(`#passwordPopover`) passwordPopover
   @ViewChild(`#passwordPopoverTrigger`) passwordPopoverTrigger
   hasNumberPattern = HAS_NUMBER

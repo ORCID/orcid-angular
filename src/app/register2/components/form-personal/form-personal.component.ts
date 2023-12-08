@@ -80,12 +80,12 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
   @Input() nextButtonWasClicked: boolean
   @Input() reactivation: ReactivationLocal
   @ViewChild(FormGroupDirective) formGroupDir: FormGroupDirective
-
+  emailPlaceholder = $localize`:@@register.emailPlaceholder:The email address you use most`
   arialabelConfirmEmail = $localize`:@@register.labelConfirmEmail:Confirm your email address`
   labelInfoAboutName = $localize`:@@register.ariaLabelInfo:info about names`
   labelClose = $localize`:@@register.ariaLabelClose:close`
   labelConfirmEmail = $localize`:@@register.confirmEmail:Confirm primary email`
-  labelNameYouMostCommonly = $localize`:@@register.labelNameYouMostMost:The name you most commonly go by`
+  labelNameYouMostCommonly = $localize`:@@register.labelNameYouMostMost:The names you most commonly go by`
   labelFamilyNamePlaceholder = $localize`:@@register.familyNamePlaceholder:Your family name or surname
   `
   professionalEmail: boolean
