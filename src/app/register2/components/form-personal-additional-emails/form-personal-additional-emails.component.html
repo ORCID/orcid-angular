@@ -6,7 +6,11 @@
       index as i
     "
   >
-    <mat-label class="orc-font-small-print" id="additional-email-label">
+  {{additionalEmails.valid}}
+    <mat-label class="orc-font-small-print" id="additional-email-label" [ngClass]="{
+      'error': additionalEmailsTouched && additionalEmails.valid === false
+    }"
+    >
       <ng-container i18n="@@register.additionalEmails"
         >Additional email</ng-container
       >
@@ -36,6 +40,8 @@
     >
       Please enter a valid email address, for example joe@institution.edu
     </mat-error>
+    <ng-container      *ngIf="additionalEmailsTouched"
+    >
     <mat-error
       *ngFor="
         let error of getControlErrorAtFormLevel(
@@ -49,6 +55,7 @@
         [value]="additionalEmailControl.value.value"
       ></app-backend-error>
     </mat-error>
+  </ng-container>
 
     <!-- <button
       *ngIf="i == 0"

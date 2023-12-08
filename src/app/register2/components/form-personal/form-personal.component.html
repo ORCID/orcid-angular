@@ -145,6 +145,7 @@
           *ngFor="let error of this.emails.getError('backendError', 'email')"
         >
           <app-backend-error
+            [showEmailAlreadyExistUntilNextButtonWasClicked]="true"
             [nextButtonWasClicked]="nextButtonWasClicked"
             [errorCode]="error"
             [value]="emails.get('email').value"
