@@ -86,8 +86,7 @@ describe('WorkContributorsComponent', () => {
     const mockFormGroup: UntypedFormGroup = new UntypedFormGroup({})
     component['parentForm'].form = mockFormGroup
     component.userRecord = getUserRecord()
-    component.togglzAddOtherContributors = true
-
+    
     fixture.detectChanges()
     loader = TestbedHarnessEnvironment.loader(fixture)
   })
