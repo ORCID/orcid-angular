@@ -28,7 +28,6 @@ export class UserMenuComponent implements OnInit {
   isAccountDelegate: boolean
   restrictedDelegators: boolean
   inboxUnread = 0
-  newDeveloperTools: boolean
 
   constructor(
     private _router: Router,
@@ -56,9 +55,6 @@ export class UserMenuComponent implements OnInit {
 
   ngOnInit() {
     this._togglz
-      .getStateOf('NEW_DEVELOPER_TOOLS')
-      .subscribe((value) => (this.newDeveloperTools = value))
-    this._togglz
       .getStateOf('RESTRICTED_DELEGATORS')
       .subscribe((value) => (this.restrictedDelegators = value))
     this._inboxService
@@ -80,7 +76,7 @@ export class UserMenuComponent implements OnInit {
       this._router.navigate([ApplicationRoutes.trustedParties])
     } else if (url === 'trusted-parties') {
       this._router.navigate([ApplicationRoutes.trustedParties])
-    } else if (url === 'developer-tools' && this.newDeveloperTools) {
+    } else if (url === 'developer-tools') {
       this._router.navigate([ApplicationRoutes.developerTools])
     } else {
       this.window.location.href = environment.BASE_URL + url
