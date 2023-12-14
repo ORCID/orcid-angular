@@ -69,7 +69,7 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
   maxNumberOfContributors = 49
   maxNumberOfContributorsSummary = 10
   privateName = 'Name is private'
-  
+
   contributionRoles = ContributionRoles
   recordHolderContribution: Contributor
 
@@ -87,9 +87,7 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
     private platform: PlatformInfoService,
     private workService: RecordWorksService,
     private affiliationService: RecordAffiliationService
-  ) {
-    
-  }
+  ) {}
 
   get contributorsFormArray() {
     return this.parentForm.control.controls['contributors'] as UntypedFormArray

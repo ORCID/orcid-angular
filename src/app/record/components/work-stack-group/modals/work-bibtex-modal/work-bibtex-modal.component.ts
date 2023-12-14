@@ -61,74 +61,65 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
         let parsed = null
         try {
           parsed = bibtexParse.toJSON(reader.result)
-            if (
-              typeof parsed === 'string' &&
-              parsed.substring(0, 5).toLowerCase().indexOf('error') > -1
-            ) {
-              that.bibtexErrorParsingText = parsed
-              that.bibtexErrorParsing = true
-              that.loadingWorks = false
-            } else {
-              if (parsed) {
-                const newWorks = []
-                if (parsed.length === 0) {
-                  that.bibtexErrorNoEntries = true
-                  that.loadingWorks = false
-                }
-                while (parsed.length > 0) {
-                  const cur = parsed.shift()
-                  const bibtexEntry = cur.entryType.toLowerCase()
-                  if (
-                    bibtexEntry !== 'preamble' &&
-                    bibtexEntry !== 'comment'
-                  ) {
-                    newWorks.push(
-                      that.populateWork(
-                        cur
-                      )
-                    )
-                  }
-                }
-                if (newWorks.length > 0) {
-                  that._recordWorksService
-                    .worksValidate(newWorks)
-                    .pipe(first())
-                    .subscribe((data) => {
-                      that.worksFromBibtex = []
-                      data.forEach((work) => {
-                        that.worksFromBibtex.push(work)
-                        if (work.errors.length > 0 && !that.isAnInvalidWork) {
-                          that.isAnInvalidWork = true
-                          that._snackBar.showValidationError()
-                        }
-                      })
-                      that.worksFromBibtex.forEach((w) => {
-                        const newPutCode = 'new-' + that.addedWorkCount++
-                        w.putCode = {
-                          value: newPutCode,
-                        }
-                        that.group[newPutCode] = new UntypedFormGroup({
-                          checked: new UntypedFormControl(false),
-                        })
-                      })
-                      that.importForm = new UntypedFormGroup(that.group)
-                      that.loadingWorks = false
-                    })
-                }
-              }
-            }
-          } catch (e) {
-            that.bibtexErrorParsingText = e
+          if (
+            typeof parsed === 'string' &&
+            parsed.substring(0, 5).toLowerCase().indexOf('error') > -1
+          ) {
+            that.bibtexErrorParsingText = parsed
             that.bibtexErrorParsing = true
             that.loadingWorks = false
+          } else {
+            if (parsed) {
+              const newWorks = []
+              if (parsed.length === 0) {
+                that.bibtexErrorNoEntries = true
+                that.loadingWorks = false
+              }
+              while (parsed.length > 0) {
+                const cur = parsed.shift()
+                const bibtexEntry = cur.entryType.toLowerCase()
+                if (bibtexEntry !== 'preamble' && bibtexEntry !== 'comment') {
+                  newWorks.push(that.populateWork(cur))
+                }
+              }
+              if (newWorks.length > 0) {
+                that._recordWorksService
+                  .worksValidate(newWorks)
+                  .pipe(first())
+                  .subscribe((data) => {
+                    that.worksFromBibtex = []
+                    data.forEach((work) => {
+                      that.worksFromBibtex.push(work)
+                      if (work.errors.length > 0 && !that.isAnInvalidWork) {
+                        that.isAnInvalidWork = true
+                        that._snackBar.showValidationError()
+                      }
+                    })
+                    that.worksFromBibtex.forEach((w) => {
+                      const newPutCode = 'new-' + that.addedWorkCount++
+                      w.putCode = {
+                        value: newPutCode,
+                      }
+                      that.group[newPutCode] = new UntypedFormGroup({
+                        checked: new UntypedFormControl(false),
+                      })
+                    })
+                    that.importForm = new UntypedFormGroup(that.group)
+                    that.loadingWorks = false
+                  })
+              }
+            }
           }
+        } catch (e) {
+          that.bibtexErrorParsingText = e
+          that.bibtexErrorParsing = true
+          that.loadingWorks = false
         }
       }
+    }
   }
 
-  populateWork(
-    bibJSON
-  ): Work {
+  populateWork(bibJSON): Work {
     const work = {} as Work
     const bibtex = bibtexParse.toBibtex([bibJSON])
 
@@ -261,7 +252,7 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
           value: lowerKeyTags['url'],
         }
       }
-      
+
       work.contributorsGroupedByOrcid = []
       if (lowerKeyTags.hasOwnProperty('author')) {
         const authors = this.removeEndingAnd(lowerKeyTags['author'])
@@ -271,7 +262,6 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
         const editors = this.removeEndingAnd(lowerKeyTags['editor'])
         this.addContributors(editors.split(' and '), 'editor', work)
       }
-      
     }
     return work
   }

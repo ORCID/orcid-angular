@@ -31,11 +31,7 @@
         </h3>
       </label>
     </div>
-    <ng-container
-      *ngIf="
-        contributors?.length > maxNumberOfContributors + 1
-      "
-    >
+    <ng-container *ngIf="contributors?.length > maxNumberOfContributors + 1">
       <div class="contributors-summary orc-font-body-small">
         <ng-container
           *ngFor="
@@ -99,11 +95,7 @@
         </div>
       </div>
     </ng-container>
-    <ng-container
-      *ngIf="
-        !(contributors?.length > maxNumberOfContributors + 1)
-      "
-    >
+    <ng-container *ngIf="!(contributors?.length > maxNumberOfContributors + 1)">
       <ng-container formArrayName="contributors">
         <div
           class="row contributors-list"
@@ -381,9 +373,7 @@
   </ng-container>
   <div
     class="row"
-    *ngIf="
-      !(contributors?.length > maxNumberOfContributors + 1)
-    "
+    *ngIf="!(contributors?.length > maxNumberOfContributors + 1)"
   >
     <a
       class="col add-more no-gutters cy-add-another-contributor"
