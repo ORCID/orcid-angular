@@ -69,8 +69,7 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
   maxNumberOfContributors = 49
   maxNumberOfContributorsSummary = 10
   privateName = 'Name is private'
-  togglzAddOtherContributors: boolean
-
+  
   contributionRoles = ContributionRoles
   recordHolderContribution: Contributor
 
@@ -89,9 +88,7 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
     private workService: RecordWorksService,
     private affiliationService: RecordAffiliationService
   ) {
-    _togglz
-      .getStateOf('ADD_OTHER_WORK_CONTRIBUTORS')
-      .subscribe((value) => (this.togglzAddOtherContributors = value))
+    
   }
 
   get contributorsFormArray() {
@@ -220,7 +217,7 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
       'contributors'
     ) as UntypedFormArray
 
-    if (this.togglzAddOtherContributors && this.contributors?.length > 0) {
+    if (this.contributors?.length > 0) {
       if (!this.recordHolderContribution && !this.recordHolderAsContributor) {
         this.addRecordHolderAsContributor()
       }
