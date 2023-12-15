@@ -14,7 +14,7 @@ import {
 export class TitleService {
   private _displayName: ReplaySubject<string> = new ReplaySubject<string>(1)
 
-  constructor(private _titleService: Title, private _router: Router) {}
+  constructor(private _titleService: Title, private _router: Router, ) {}
 
   init() {
     this._displayName.next('')
@@ -53,7 +53,7 @@ export class TitleService {
   }
 
   setTitle(title: string) {
-    if (title) this._titleService.setTitle(title)
+    if (title) this._titleService.setTitle(title.replace(/-'/g, '−'))
   }
 
   setDisplayName(displayedNameWithId: string) {

@@ -211,6 +211,15 @@
                 }
               ]
             },
+            "local-with-proxy-localize-ar": {
+              "localize": ["ar"],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local-with-proxy.ts"
+                }
+              ]
+            },
             "local-with-proxy-localize-xx": {
               "localize": ["xx"],
               "fileReplacements": [
@@ -345,6 +354,10 @@
             },
             "local-qa-en": {
               "browserTarget": "ng-orcid:build:local-with-proxy-localize-en",
+              "proxyConfig": "src/proxy.conf.qa.mjs"
+            },
+            "local-qa-ar": {
+              "browserTarget": "ng-orcid:build:local-with-proxy-localize-ar",
               "proxyConfig": "src/proxy.conf.qa.mjs"
             },
             "local-qa-fr": {
