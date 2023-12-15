@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { SettingsActionsComponent } from './settings-actions.component'
 import { WINDOW_PROVIDERS } from 'src/app/cdk/window/window.service'
+import { ActivatedRoute } from '@angular/router'
 
 describe('SettingsActionsComponent', () => {
   let component: SettingsActionsComponent
@@ -10,7 +11,7 @@ describe('SettingsActionsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [SettingsActionsComponent],
-      providers: [WINDOW_PROVIDERS],
+      providers: [WINDOW_PROVIDERS, { provide: ActivatedRoute, useValue: {} }],
     }).compileComponents()
   })
 
