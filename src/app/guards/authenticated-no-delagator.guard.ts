@@ -30,17 +30,14 @@ export class AuthenticatedNoDelegatorGuard {
     | boolean
     | UrlTree {
     return combineLatest([
-      this._togglz.getStateOf('RESTRICTED_DELEGATORS'),
       this._userInfo.getUserSession(),
     ]).pipe(
       map((value) => {
-        const restrictedDelegators = value[0]
-        const userSession = value[1]
+        const userSession = value[0]
         if (
           (userSession.loggedIn &&
             userSession.userInfo.IN_DELEGATION_MODE === 'false') ||
-          userSession.userInfo.DELEGATED_BY_ADMIN === 'true' ||
-          !restrictedDelegators
+          userSession.userInfo.DELEGATED_BY_ADMIN === 'true'
         ) {
           return true
         } else {
