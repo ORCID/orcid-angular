@@ -29,9 +29,9 @@ export class SettingsActionsComponent implements OnInit {
     const hash = this._window.location.hash.substr(1)
     this.displayPanelByHashName(hash)
     this.activeRoute.fragment.subscribe((fragment) => {
-      if (fragment === 'remove-duplicate-record') {
+      if (fragment === 'remove-duplicate') {
         const element = this._window.document.querySelector('#cy-remove-duplicate-panel')
-        this.displayPanelByHashName('remove-duplicate')
+        this.displayPanelByHashName(fragment)
         setTimeout(() => {
           if (element) {
             element.scrollIntoView()
