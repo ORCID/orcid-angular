@@ -52,7 +52,7 @@ export class UserMenuComponent implements OnInit {
     })
   }
 
-  ngOnInit() {    
+  ngOnInit() {
     this._inboxService
       .retrieveUnreadCount()
       .pipe(first())

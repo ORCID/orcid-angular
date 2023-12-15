@@ -29,9 +29,7 @@ export class AuthenticatedNoDelegatorGuard {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    return combineLatest([
-      this._userInfo.getUserSession(),
-    ]).pipe(
+    return combineLatest([this._userInfo.getUserSession()]).pipe(
       map((value) => {
         const userSession = value[0]
         if (
