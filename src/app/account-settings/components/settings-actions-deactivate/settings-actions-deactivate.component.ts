@@ -32,7 +32,7 @@ export class SettingsActionsDeactivateComponent implements OnInit, OnDestroy {
     private _platform: PlatformInfoService,
     private _deactivate: AccountActionsDeactivateService,
     private _togglz: TogglzService,
-    private activeRoute: ActivatedRoute,
+    private activeRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
