@@ -5,6 +5,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core'
+import { ActivatedRoute, Router } from '@angular/router'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
@@ -30,7 +31,8 @@ export class SettingsActionsDeactivateComponent implements OnInit, OnDestroy {
   constructor(
     private _platform: PlatformInfoService,
     private _deactivate: AccountActionsDeactivateService,
-    private _togglz: TogglzService
+    private _togglz: TogglzService,
+    private activeRoute: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
