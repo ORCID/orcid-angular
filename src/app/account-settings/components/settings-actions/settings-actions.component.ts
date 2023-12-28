@@ -30,7 +30,9 @@ export class SettingsActionsComponent implements OnInit {
     this.displayPanelByHashName(hash)
     this.activeRoute.fragment.subscribe((fragment) => {
       if (fragment === 'remove-duplicate') {
-        const element = this._window.document.querySelector('#cy-remove-duplicate-panel')
+        const element = this._window.document.querySelector(
+          '#cy-remove-duplicate-panel'
+        )
         this.displayPanelByHashName(fragment)
         setTimeout(() => {
           if (element) {
