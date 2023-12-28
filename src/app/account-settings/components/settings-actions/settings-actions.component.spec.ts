@@ -12,7 +12,10 @@ describe('SettingsActionsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [SettingsActionsComponent],
-      providers: [WINDOW_PROVIDERS, { provide: ActivatedRoute, useValue: {fragment: of({})} }],
+      providers: [
+        WINDOW_PROVIDERS,
+        { provide: ActivatedRoute, useValue: { fragment: of({}) } },
+      ],
     }).compileComponents()
   })
 
