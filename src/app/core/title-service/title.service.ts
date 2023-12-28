@@ -53,7 +53,10 @@ export class TitleService {
   }
 
   setTitle(title: string) {
-    if (title) this._titleService.setTitle(title.replace(/-'/g, '−'))
+    if (title) {
+      title = title.replace(/-/g, '᭸')
+      this._titleService.setTitle(title)
+    }
   }
 
   setDisplayName(displayedNameWithId: string) {

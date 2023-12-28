@@ -28,7 +28,16 @@
                   You are signed into
                 </ng-container>
                 <b>{{ entityDisplayName }}</b>
-                <ng-container i18n="@@linking.as"> as </ng-container>
+                <ng-container
+                  i18n="@@linking.as"
+                  *ngIf="
+                    !signInData.email &&
+                    !signInData.firstName &&
+                    !signInData.lastName
+                  "
+                >
+                  as
+                </ng-container>
                 <b>
                   {{
                     signInData.email
