@@ -53,7 +53,12 @@ export class TitleService {
   }
 
   setTitle(title: string) {
-    if (title) this._titleService.setTitle(title.replace(/-'/g, '−'))
+    // Use a replacement of the score for arabic titles to avoid the ORCID to be show in reverse
+    const arabic = /[\u0600-\u06FF]/
+    if (arabic.test(title)) {
+      title = title.replace(/-/g, '᭸')
+    }
+    this._titleService.setTitle(title)
   }
 
   setDisplayName(displayedNameWithId: string) {
