@@ -31,9 +31,9 @@
                 <ng-container
                   i18n="@@linking.as"
                   *ngIf="
-                    !signInData.email &&
-                    !signInData.firstName &&
-                    !signInData.lastName
+                    signInData.email ||
+                    signInData.firstName ||
+                    signInData.lastName
                   "
                 >
                   as
