@@ -1,3 +1,9 @@
+## v2.52.3 - 2023-12-28
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.52.2...v2.52.3)
+
+- [#2126](https://github.com/ORCID/orcid-angular/pull/2126): fix/batch-fixes-dec-28
+
 ## v2.52.2 - 2023-12-15
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.52.1...v2.52.2)
