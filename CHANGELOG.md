@@ -1,3 +1,9 @@
+## v2.52.4 - 2023-12-29
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.52.3...v2.52.4)
+
+- [#2127](https://github.com/ORCID/orcid-angular/pull/2127): Fix logic to hide the "as"
+
 ## v2.52.3 - 2023-12-28
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.52.2...v2.52.3)
