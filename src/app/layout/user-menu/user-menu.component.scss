@@ -4,7 +4,7 @@
     cursor: pointer;
     padding-bottom: 8px;
     padding-top: 4px;
-    align-items: center;
+    align-items: start;
     width: auto;
     flex-wrap: nowrap;
     max-width: 248px;
@@ -27,7 +27,8 @@
         width: 199px;
         overflow: hidden;
         text-overflow: ellipsis;
-        text-align: left;
+        white-space: initial;
+        word-break: break-word;
       }
     }
   }
