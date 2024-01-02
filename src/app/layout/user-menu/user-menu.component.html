@@ -38,9 +38,7 @@
     id="cy-my-orcid"
   >
     <div class="row main-button-container">
-      <div class="col">
-        <img src="./assets/vectors/profile-icon.svg" alt="" />
-      </div>
+      <img src="./assets/vectors/profile-icon.svg" alt="" />
       <div class="col name-container">
         <div class="mat-title">{{ displayName }}</div>
         <div class="mat-caption" i18n="@@ngOrcid.viewMyOrcid">
@@ -61,8 +59,7 @@
     *ngIf="
       userInfo &&
       (userInfo['IN_DELEGATION_MODE'] === 'false' ||
-        userInfo['DELEGATED_BY_ADMIN'] === 'true' ||
-        !restrictedDelegators)
+        userInfo['DELEGATED_BY_ADMIN'] === 'true')
     "
   >
     <mat-icon>settings</mat-icon>

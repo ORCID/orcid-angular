@@ -1,3 +1,33 @@
+## v2.52.4 - 2023-12-29
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.52.3...v2.52.4)
+
+- [#2127](https://github.com/ORCID/orcid-angular/pull/2127): Fix logic to hide the "as"
+
+## v2.52.3 - 2023-12-28
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.52.2...v2.52.3)
+
+- [#2126](https://github.com/ORCID/orcid-angular/pull/2126): fix/batch-fixes-dec-28
+
+## v2.52.2 - 2023-12-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.52.1...v2.52.2)
+
+- [#2124](https://github.com/ORCID/orcid-angular/pull/2124): Fix/8909 prod link to remove duplicate record section not working
+
+## v2.52.1 - 2023-12-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.52.0...v2.52.1)
+
+## v2.52.0 - 2023-12-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.51.14...v2.52.0)
+
+## v2.51.14 - 2023-12-14
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.51.13...v2.51.14)
+
 ## v2.51.13 - 2023-12-08
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.51.12...v2.51.13)
