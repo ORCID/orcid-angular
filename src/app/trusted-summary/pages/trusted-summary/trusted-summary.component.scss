@@ -8,7 +8,16 @@ main {
 }
 
 main.inside-iframe {
-  margin-top: 0px;
+  margin-top: 0;
+  align-content: start;
+  grid-gap: 0;
+  height: 100vh;
+  box-sizing: border-box;
+
+  .panel-body {
+    padding-top: 16px;
+    overflow-y: auto;
+  }
 }
 
 .panel {
