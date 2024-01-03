@@ -30,14 +30,14 @@ import { WarningMessageModule } from '../cdk/warning-message/warning-message.mod
 import { BackendErrorComponent } from './components/backend-error/backend-error.component'
 import { FormAntiRobotsComponent } from './components/form-anti-robots/form-anti-robots.component'
 import { FormPersonalAdditionalEmailsComponent } from './components/form-personal-additional-emails/form-personal-additional-emails.component'
-import { StepCTComponent } from './components/step-c-t/step-c.component'
 import { Register2Component } from './pages/register/register2.component'
+import { StepCComponent } from './components/step-c/step-c.component'
 
 @NgModule({
   declarations: [
     StepAComponent,
     StepBComponent,
-    StepCTComponent,
+    StepCComponent,
     StepDComponent,
     FormPersonalComponent,
     FormPasswordComponent,

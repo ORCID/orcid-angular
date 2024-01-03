@@ -14,11 +14,10 @@
           alt="orcid logo"
         />
       </div>
-      <ng-container
-        *ngIf="!reactivation?.isReactivation"
-        i18n="@@register.create"
-      >
-        <h1 class="orc-font-heading-small">Create your ORCID iD</h1>
+      <ng-container *ngIf="!reactivation?.isReactivation">
+        <h1 class="orc-font-heading-small" i18n="@@register.create">
+          Create your ORCID iD
+        </h1>
       </ng-container>
       <ng-container
         *ngIf="reactivation?.isReactivation"
