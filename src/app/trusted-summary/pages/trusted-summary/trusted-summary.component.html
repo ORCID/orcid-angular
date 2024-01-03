@@ -2,9 +2,9 @@
   *ngIf="trustedSummary"
   class="panel"
   [ngClass]="{
-    mobile: mobile
+    mobile: mobile,
+    'inside-iframe': insideIframe
   }"
-  [ngClass]="insideIframe ? 'inside-iframe' : ''"
 >
   <header class="panel-header">
     <!-- orcid logo -->
