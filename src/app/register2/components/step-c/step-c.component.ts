@@ -12,7 +12,7 @@ import { BaseStepDirective } from '../BaseStep'
     '../register2.scss-theme.scss',
   ],
 })
-export class StepCTComponent extends BaseStepDirective {
+export class StepCComponent extends BaseStepDirective {
   @Input() loading
   @Input() reactivation: ReactivationLocal
 
