@@ -1,3 +1,11 @@
+## v2.53.2 - 2024-01-09
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.53.1...v2.53.2)
+
+### Feature
+
+- Hide cookie consent if web page its inside an iframe (#2131)
+
 ## v2.53.1 - 2024-01-03
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.53.0...v2.53.1)
