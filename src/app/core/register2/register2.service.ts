@@ -136,9 +136,7 @@ export class Register2Service extends _RegisterServiceMixingBase {
             )
           )
           .pipe(
-            tap((value) => {
-              throw 'nothing'
-            }),
+         
             retry(3),
             catchError((error) =>
               this._errorHandler.handleError(error, ERROR_REPORT.REGISTER)

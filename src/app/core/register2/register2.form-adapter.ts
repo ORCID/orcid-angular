@@ -133,7 +133,7 @@ export function Register2FormAdapterMixin<T extends Constructor<any>>(base: T) {
           },
           departmentName: { value: departmentName },
           roleTitle: { value: roleTitle },
-          affiliationType: { value: 'Employment' },
+          affiliationType: { value: 'employment' },
         }
       }
     }
