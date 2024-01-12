@@ -1,3 +1,11 @@
+## v2.53.3 - 2024-01-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.53.2...v2.53.3)
+
+### Fix
+
+- Remove unnecessary href attributes since we are redirecting with JS (#2134)
+
 ## v2.53.2 - 2024-01-09
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.53.1...v2.53.2)
