@@ -1,0 +1,197 @@
+<ng-container [formGroup]="form">
+  <h3 i18n="@@register.currentEmployment" class="orc-font-body margin-top-12">
+    Current employment
+  </h3>
+
+  <div class="announce">
+    <div>
+      <img src="/assets/vectors/personal-email-icon.svg" aria-hidden="true" />
+    </div>
+    <div class="content">
+      <div>
+        <h3 class="orc-font-body" i18n="@@register.thisLooksLikeAPersonalEmail">
+          Affiliation found
+        </h3>
+      </div>
+      <div>
+        <ng-container>
+          Based on your emails we think you are currently affiliated with
+        </ng-container>
+        <strong>The University of Bath.</strong>
+        <ng-container
+          >We’ve pre-selected this organization for you in the form
+          below.</ng-container
+        >
+
+        <div>
+          When you complete registration an employment affiliation will be
+          automatically added to your new ORCID record.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="{{ type }}-organization">
+    <div
+      id="organization"
+      class="title"
+      [ngClass]="{
+        'orc-font-body': !platform.columns12,
+        'orc-font-body-large': platform.columns12
+      }"
+    >
+      <div class="row">
+        <h2
+          [ngClass]="{
+            'orc-font-body': !platform.columns12,
+            'orc-font-body-large': platform.columns12
+          }"
+        >
+          <strong i18n="@@shared.organization"> Organization </strong>
+          <span *ngIf="!platform.columns12" class="required">*</span>
+        </h2>
+        <p *ngIf="platform.columns12" class="required-information mat-caption">
+          <span class="required">*</span>
+          <ng-container i18n="@@shared.requiredInformation"
+            >Required information
+          </ng-container>
+        </p>
+      </div>
+    </div>
+    <hr />
+
+    <div class="row">
+      <label
+        for="organization-input"
+        id="organization-label"
+        class="mat-caption"
+        [ngClass]="{
+          error: organizationIsInvalidAndTouched
+        }"
+      >
+        <strong i18n="@@shared.organization" id="organizationLabel"
+          >Organization</strong
+        >
+        <span class="required">*</span>
+      </label>
+    </div>
+
+    <div class="input-container" id="cy-org-dd-div">
+      <mat-form-field
+        appearance="outline"
+        class="mat-form-field-min"
+        id="cy-org-dd-mat-form"
+        [ngClass]="{
+          'two-line-hint': selectedOrganizationFromDatabase?.value.length > 50
+        }"
+      >
+        <input
+          aria-labelledby="organizationLabel"
+          id="organization-input"
+          matInput
+          formControlName="organization"
+          [matAutocomplete]="auto"
+          [attr.aria-invalid]="organizationIsInvalidAndTouched"
+          [placeholder]="organizationPlaceholder"
+        />
+        <mat-autocomplete
+          autoActiveFirstOption
+          #auto="matAutocomplete"
+          [displayWith]="autoCompleteDisplayOrganization"
+          id="cy-org-dd"
+        >
+          <ng-container *ngIf="filteredOptions" id="cy-org-filtered-options">
+            <mat-option
+              *ngFor="let option of filteredOptions | async"
+              [value]="option"
+            >
+              <div class="row orc-font-body-small title">
+                {{ option.value }}
+              </div>
+              <div class="row orc-font-small-print">
+                {{ option.city }} {{ option.region }} {{ option.country }}
+              </div>
+            </mat-option>
+          </ng-container>
+        </mat-autocomplete>
+        <mat-hint
+          *ngIf="selectedOrganizationFromDatabase && displayOrganizationHint"
+        >
+          <ng-container i18n="@@record.identifyAS">Identify as:</ng-container>
+          {{ selectedOrganizationFromDatabase.value }}
+        </mat-hint>
+        <mat-hint
+          *ngIf="
+            !selectedOrganizationFromDatabase &&
+            form.get('organization').value &&
+            displayOrganizationHint
+          "
+          i18n="@@record.unidentifiedOrganization"
+        >
+          Unidentified organization
+        </mat-hint>
+
+        <button
+          class="clear"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="clearForm()"
+          *ngIf="form.get('organization').value"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-error
+          role="alert"
+          aria-describedby="organization-label"
+          class="mat-caption"
+          *ngIf="organizationFormTouched"
+          i18n="@@shared.pleaseEnterAnOrganization"
+        >
+          Please enter an organization
+        </mat-error>
+        <mat-error
+          *ngIf="form.get('organization').errors?.maxlength"
+          i18n="@@shared.maxLength.less_than_one_thousand"
+        >
+          Must be less than 1000 characters
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </section>
+
+  <div class="input-container">
+    <mat-label class="orc-font-small-print"
+      ><ng-container i18n="@@register.xxxxx">Department</ng-container>
+      <label id="family-names-input-label" i18n="@@register.optional"
+        >(Optional)</label
+      ></mat-label
+    >
+    <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+      <input
+        aria-labelledby="family-names-input-label"
+        id="family-names-input"
+        formControlName="departmentName"
+        matInput
+        [placeholder]="departmentPlaceholder"
+      />
+    </mat-form-field>
+  </div>
+  <div class="input-container">
+    <mat-label class="orc-font-small-print"
+      ><ng-container i18n="@@register.xxxxx">Role/Job title</ng-container>
+      <label id="family-names-input-label" i18n="@@register.optional"
+        >(Optional)</label
+      ></mat-label
+    >
+    <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+      <input
+        aria-labelledby="family-names-input-label"
+        id="family-names-input"
+        formControlName="roleTitle"
+        matInput
+        [placeholder]="rolePlaceholder"
+      />
+    </mat-form-field>
+  </div>
+</ng-container>

@@ -54,6 +54,7 @@ export class Register2Component implements OnInit, AfterViewInit {
   FormGroupStepA: UntypedFormGroup
   FormGroupStepB: UntypedFormGroup
   FormGroupStepC: UntypedFormGroup
+  FormGroupStepC2: UntypedFormGroup
   FormGroupStepD: UntypedFormGroup
 
   isLinear = true
@@ -99,6 +100,10 @@ export class Register2Component implements OnInit, AfterViewInit {
     this.FormGroupStepC = this._formBuilder.group({
       activitiesVisibilityDefault: [''],
     })
+
+    this.FormGroupStepC2 = this._formBuilder.group({
+      affiliations: [''],
+    })
     this.FormGroupStepD = this._formBuilder.group({
       sendOrcidNews: [''],
       termsOfUse: [''],
@@ -133,12 +138,16 @@ export class Register2Component implements OnInit, AfterViewInit {
   }
 
   register() {
+    console.log('register')
+    console.log(this.FormGroupStepC2.value)
+
     this.loading = true
     this.lastStep.interacted = true
     if (
       this.FormGroupStepA.valid &&
       this.FormGroupStepB.valid &&
       this.FormGroupStepC.valid &&
+      this.FormGroupStepC2.valid &&
       this.FormGroupStepD.valid
     ) {
       this._register
@@ -146,6 +155,7 @@ export class Register2Component implements OnInit, AfterViewInit {
           this.FormGroupStepA,
           this.FormGroupStepB,
           this.FormGroupStepC,
+          this.FormGroupStepC2,
           this.FormGroupStepD
         )
         .pipe(
@@ -161,6 +171,7 @@ export class Register2Component implements OnInit, AfterViewInit {
               this.FormGroupStepA,
               this.FormGroupStepB,
               this.FormGroupStepC,
+              this.FormGroupStepC2,
               this.FormGroupStepD,
               this.reactivation,
               this.requestInfoForm

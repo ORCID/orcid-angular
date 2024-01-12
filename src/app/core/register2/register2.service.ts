@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { UntypedFormGroup } from '@angular/forms'
-import { Observable } from 'rxjs'
-import { catchError, first, map, retry, switchMap } from 'rxjs/operators'
+import { Observable, throwError } from 'rxjs'
+import { catchError, first, map, retry, switchMap, tap } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { RequestInfoForm } from 'src/app/types'
 import {
@@ -85,6 +85,7 @@ export class Register2Service extends _RegisterServiceMixingBase {
     StepA: UntypedFormGroup,
     StepB: UntypedFormGroup,
     StepC: UntypedFormGroup,
+    StepC2: UntypedFormGroup,
     StepD: UntypedFormGroup,
     reactivation: ReactivationLocal,
     requestInfoForm?: RequestInfoForm,
@@ -96,6 +97,7 @@ export class Register2Service extends _RegisterServiceMixingBase {
       StepA,
       StepB,
       StepC,
+      StepC2,
       StepD
     )
     this.addOauthContext(registerForm, requestInfoForm)
@@ -134,6 +136,9 @@ export class Register2Service extends _RegisterServiceMixingBase {
             )
           )
           .pipe(
+            tap((value) => {
+              throw 'nothing'
+            }),
             retry(3),
             catchError((error) =>
               this._errorHandler.handleError(error, ERROR_REPORT.REGISTER)

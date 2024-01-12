@@ -116,16 +116,40 @@ export function Register2FormAdapterMixin<T extends Constructor<any>>(base: T) {
       return value
     }
 
+    formGroupToAffiliationRegisterForm(formGroup: UntypedFormGroup) {
+      console.log(formGroup.value)
+
+      const value = formGroup.controls['organization'].value
+      const departmentName = formGroup.controls['departmentName'].value
+      const roleTitle = formGroup.controls['roleTitle'].value
+
+      if (typeof value === 'string') {
+        return { affiliationName: { value } }
+      } else {
+        return {
+          affiliationName: { value: value.value },
+          disambiguatedAffiliationSourceId: {
+            value: value.disambiguatedAffiliationIdentifier,
+          },
+          departmentName: { value: departmentName },
+          roleTitle: { value: roleTitle },
+          affiliationType: { value: 'Employment' },
+        }
+      }
+    }
+
     formGroupToFullRegistrationForm(
       StepA: UntypedFormGroup,
       StepB: UntypedFormGroup,
       StepC: UntypedFormGroup,
+      StepC2: UntypedFormGroup,
       StepD: UntypedFormGroup
     ): RegisterForm {
       return {
         ...StepA.value.personal,
         ...StepB.value.password,
         ...StepC.value.activitiesVisibilityDefault,
+        ...StepC2.value.affiliations,
         ...StepD.value.sendOrcidNews,
         ...StepD.value.termsOfUse,
         ...StepD.value.captcha,

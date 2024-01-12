@@ -24,6 +24,7 @@ interface HasFormAdapters {
     StepA: UntypedFormGroup,
     StepB: UntypedFormGroup,
     StepC: UntypedFormGroup,
+    StepC2: UntypedFormGroup,
     StepD: UntypedFormGroup
   ): RegisterForm
 }
@@ -161,6 +162,7 @@ export function Register2BackendValidatorMixin<
       StepA: UntypedFormGroup,
       StepB: UntypedFormGroup,
       StepC: UntypedFormGroup,
+      StepC2: UntypedFormGroup,
       StepD: UntypedFormGroup,
 
       type?: 'shibboleth'
@@ -169,6 +171,7 @@ export function Register2BackendValidatorMixin<
         StepA,
         StepB,
         StepC,
+        StepC2,
         StepD
       )
       return this._http
