@@ -33,10 +33,7 @@
             <ng-container *ngIf="element.url">
               <a
                 class="underline orc-font-body-small"
-                target="_blank"
-                rel="noopener noreferrer"
                 *ngIf="element.url"
-                href="{{ element.url }}"
                 >{{ element.stringA }}</a
               >
             </ng-container>
@@ -56,12 +53,7 @@
             </ng-container>
           </div>
         </div>
-        <a
-          *ngIf="element.url"
-          target="_blank"
-          rel="noopener noreferrer"
-          href="{{ element.url }}"
-        >
+        <a *ngIf="element.url">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
