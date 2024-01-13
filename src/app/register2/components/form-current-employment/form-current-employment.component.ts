@@ -19,7 +19,7 @@ import { ReactivationService } from '../../../core/reactivation/reactivation.ser
 import { ReactivationLocal } from '../../../types/reactivation.local'
 import { BaseForm } from '../BaseForm'
 import { ErrorStateMatcher } from '@angular/material/core'
-import { PlatformInfoService } from 'src/app/cdk/platform-info'
+import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { Router } from '@angular/router'
 import { MAX_LENGTH_LESS_THAN_ONE_THOUSAND } from 'src/app/constants'
 import { LiveAnnouncer } from '@angular/cdk/a11y'
@@ -29,11 +29,7 @@ import {
 } from 'src/app/types/record-affiliation.endpoint'
 import { EMPTY, Observable, of } from 'rxjs'
 import { RecordAffiliationService } from 'src/app/core/record-affiliations/record-affiliations.service'
-import {
-  dateMonthYearValidator,
-  dateValidator,
-  endDateMonthYearValidator,
-} from 'src/app/shared/validators/date/date.validator'
+import { dateMonthYearValidator } from 'src/app/shared/validators/date/date.validator'
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
     control: FormControl | null,
@@ -108,26 +104,12 @@ export class FormCurrentEmploymentComponent extends BaseForm implements OnInit {
     .fill(0)
     .map((i, idx) => idx + 1)
 
-  // emailPlaceholder = $localize`:@@register.emailPlaceholder:The email address you use most`
-  // arialabelConfirmEmail = $localize`:@@register.labelConfirmEmail:Confirm your email address`
-  // labelInfoAboutName = $localize`:@@register.ariaLabelInfo:info about names`
-  // labelClose = $localize`:@@register.ariaLabelClose:close`
-  // labelConfirmEmail = $localize`:@@register.confirmEmail:Confirm primary email`
-  // labelNameYouMostCommonly = $localize`:@@register.labelNameYouMostMost:The names you most commonly go by`
-  // labelFamilyNamePlaceholder = $localize`:@@register.familyNamePlaceholder:Your family name or surname
-  // `
-  professionalEmail: boolean
-  personalEmail: boolean
-  undefinedEmail: boolean
-  emailsAreValidAlreadyChecked: boolean
   organization: string | Organization = ''
-  platform: import('/Users/l.mendoza/code/orcid-angular/src/app/cdk/platform-info/platform-info.type').PlatformInfo
+  platform: PlatformInfo
   isMobile: boolean
   constructor(
     private _register: Register2Service,
-    private _reactivationService: ReactivationService,
     private _platform: PlatformInfoService,
-    private _router: Router,
     private _liveAnnouncer: LiveAnnouncer,
     private _recordAffiliationService: RecordAffiliationService,
     private _formBuilder: FormBuilder
@@ -139,13 +121,6 @@ export class FormCurrentEmploymentComponent extends BaseForm implements OnInit {
     })
   }
 
-  emails: UntypedFormGroup = new UntypedFormGroup({})
-  additionalEmails: UntypedFormGroup = new UntypedFormGroup({
-    '0': new UntypedFormControl('', {
-      validators: [OrcidValidators.email],
-    }),
-  })
-
   ngOnInit() {
     this.form = new UntypedFormGroup({
       organization: new UntypedFormControl(this.organization, {
@@ -153,7 +128,6 @@ export class FormCurrentEmploymentComponent extends BaseForm implements OnInit {
           Validators.required,
           Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
           this.mustBeOrganizationType(),
-
         ],
       }),
       departmentName: new UntypedFormControl('', {
@@ -218,9 +192,25 @@ export class FormCurrentEmploymentComponent extends BaseForm implements OnInit {
 
   get organizationIsValidAndTouched() {
     return (
-      (!this.form.hasError('required', 'organization') &&
-      !this.form.hasError('mustBeOrganizationType', 'organization') )&&
+      !this.form.hasError('required', 'organization') &&
+      !this.form.hasError('mustBeOrganizationType', 'organization') &&
       (this.form.get('organization').touched || this.nextButtonWasClicked)
+    )
+  }
+
+
+  get departmentNameIsInvalidAndTouched() {
+    return (
+      this.form.hasError('maxlength', 'departmentName') &&
+      (this.form.get('departmentName').touched || this.nextButtonWasClicked)
+    )
+  }
+
+
+  get roleTitleIsInvalidAndTouched() {
+    return (
+      this.form.hasError('maxlength', 'roleTitle') &&
+      (this.form.get('roleTitle').touched || this.nextButtonWasClicked)
     )
   }
 
@@ -238,55 +228,10 @@ export class FormCurrentEmploymentComponent extends BaseForm implements OnInit {
 
   clearForm() {
     this.form.patchValue({
-      organization: "",
+      organization: '',
     })
     this.form.controls.organization.markAsUntouched()
   }
-
-  // allEmailsAreUnique(): ValidatorFn {
-  //   return (formGroup: UntypedFormGroup) => {
-  //     let hasError = false
-  //     const registerForm =
-  //       this._register.formGroupToEmailRegisterForm(formGroup)
-
-  //     const error = { backendErrors: { additionalEmails: {} } }
-
-  //     Object.keys(registerForm.emailsAdditional).forEach((key, i) => {
-  //       const additionalEmail = registerForm.emailsAdditional[key]
-  //       if (!error.backendErrors.additionalEmails[additionalEmail.value]) {
-  //         error.backendErrors.additionalEmails[additionalEmail.value] = []
-  //       }
-  //       const additionalEmailsErrors = error.backendErrors.additionalEmails
-  //       if (
-  //         registerForm.email &&
-  //         additionalEmail.value === registerForm.email.value
-  //       ) {
-  //         hasError = true
-  //         additionalEmailsErrors[additionalEmail.value] = [
-  //           'additionalEmailCantBePrimaryEmail',
-  //         ]
-  //       } else {
-  //         Object.keys(registerForm.emailsAdditional).forEach(
-  //           (elementKey, i2) => {
-  //             const element = registerForm.emailsAdditional[elementKey]
-  //             if (i !== i2 && additionalEmail.value === element.value) {
-  //               hasError = true
-  //               additionalEmailsErrors[additionalEmail.value] = [
-  //                 'duplicatedAdditionalEmail',
-  //               ]
-  //             }
-  //           }
-  //         )
-  //       }
-  //     })
-
-  //     if (hasError) {
-  //       return error
-  //     } else {
-  //       return null
-  //     }
-  //   }
-  // }
 
   // OVERWRITE
   registerOnChange(fn: any) {
@@ -302,69 +247,6 @@ export class FormCurrentEmploymentComponent extends BaseForm implements OnInit {
     })
   }
 
-  get organizationFormTouched() {
-    return (
-      ((this.form.controls.organization as any).controls?.organization as any)
-        ?.touched || this.nextButtonWasClicked
-    )
-  }
-
-  get emailFormTouched() {
-    return (
-      ((this.form.controls.emails as any).controls?.email as any)?.touched ||
-      this.nextButtonWasClicked
-    )
-  }
-
-  get emailConfirmationFormTouched() {
-    return (
-      ((this.form.controls.emails as any).controls?.confirmEmail as any)
-        ?.touched || this.nextButtonWasClicked
-    )
-  }
-
-  get familyNamesFormTouched() {
-    return this.form.controls.familyNames?.touched || this.nextButtonWasClicked
-  }
-
-  get emailValid() {
-    return ((this.form.controls.emails as any).controls?.email as any).valid
-  }
-
-  get emailConfirmationValid() {
-    return ((this.form.controls.emails as any).controls?.confirmEmail as any)
-      .valid
-  }
-
-  get givenNameFormTouched() {
-    return this.form.controls.givenNames?.touched || this.nextButtonWasClicked
-  }
-
-  // get emailsAreValid() {
-  //   const validStatus = this.emailConfirmationValid && this.emailValid
-  //   if (!this.emailsAreValidAlreadyChecked && validStatus) {
-  //     this.announce($localize`:@@register.emailAreValid:Your emails match`)
-  //   } else if (this.emailsAreValidAlreadyChecked && !validStatus) {
-  //     this.announce(
-  //       $localize`:@@register.emailAreNotValid:Your emails do not match`
-  //     )
-  //   }
-  //   this.emailsAreValidAlreadyChecked = validStatus
-  //   return validStatus
-  // }
-
-  get emailError(): boolean {
-    if (this.emailFormTouched && this.emails.controls.email.errors) {
-      const backendError = this.emails.controls.email.errors?.backendError
-      return !(
-        backendError &&
-        backendError[0] === 'orcid.frontend.verify.duplicate_email' &&
-        !this.nextButtonWasClicked
-      )
-    }
-    return false
-  }
-
   mustBeOrganizationType(): ValidatorFn {
     return (formGroup: UntypedFormGroup) => {
       // const organization = formGroup.controls.organization.valuec
@@ -375,24 +257,4 @@ export class FormCurrentEmploymentComponent extends BaseForm implements OnInit {
       return null
     }
   }
-
-  // private announce(announcement: string) {
-  //   if (environment.debugger) {
-  //     console.debug('📢' + announcement)
-  //   }
-  //   this._liveAnnouncer.announce(announcement, 'assertive')
-  // }
-
-  // navigateToSignin(email) {
-  //   this._platform
-  //     .get()
-  //     .pipe(take(1))
-  //     .subscribe((platform) => {
-  //       return this._router.navigate([ApplicationRoutes.signin], {
-  //         // keeps all parameters to support Oauth request
-  //         // and set show login to true
-  //         queryParams: { ...platform.queryParameters, email, show_login: true },
-  //       })
-  //     })
-  // }
 }

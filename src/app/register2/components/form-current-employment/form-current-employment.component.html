@@ -148,7 +148,11 @@
   </section>
 
   <div class="input-container">
-    <mat-label class="orc-font-small-print"
+    <mat-label
+      class="orc-font-small-print"
+      [ngClass]="{
+        error: departmentNameIsInvalidAndTouched
+      }"
       ><ng-container i18n="@@register.department">Department</ng-container>
       <label id="family-names-input-label" i18n="@@register.optional"
         >(Optional)</label
@@ -163,11 +167,23 @@
         [placeholder]="departmentPlaceholder"
       />
     </mat-form-field>
+    <mat-error
+      *ngIf="departmentNameIsInvalidAndTouched"
+      i18n="@@shared.maxLength.less_than_one_thousand"
+    >
+      Must be less than 1000 characters
+    </mat-error>
   </div>
 
   <div class="input-container">
-    <mat-label class="orc-font-small-print"
-      ><ng-container i18n="@@register.roleJobTitle">Role/Job title</ng-container>
+    <mat-label
+      class="orc-font-small-print"
+      [ngClass]="{
+        error: roleTitleIsInvalidAndTouched
+      }"
+      ><ng-container i18n="@@register.roleJobTitle"
+        >Role/Job title</ng-container
+      >
       <label id="family-names-input-label" i18n="@@register.optional"
         >(Optional)</label
       ></mat-label
@@ -181,6 +197,12 @@
         [placeholder]="rolePlaceholder"
       />
     </mat-form-field>
+    <mat-error
+      *ngIf="roleTitleIsInvalidAndTouched"
+      i18n="@@shared.maxLength.less_than_one_thousand"
+    >
+      Must be less than 1000 characters
+    </mat-error>
   </div>
 
   <!-- Start date  -->
