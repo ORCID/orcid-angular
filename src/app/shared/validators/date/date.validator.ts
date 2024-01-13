@@ -69,7 +69,9 @@ export function dateMonthYearValidator(dateType: string) {
   }
 }
 
-export function endDateMonthYearValidator(): (c: AbstractControl) => { [key: string]: any } {
+export function endDateMonthYearValidator(): (c: AbstractControl) => {
+  [key: string]: any
+} {
   return (c: AbstractControl): { [key: string]: any } | null => {
     const endDateExistingErrors = Object.keys(
       c.get('endDateGroup').errors || {}

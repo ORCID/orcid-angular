@@ -198,14 +198,12 @@ export class FormCurrentEmploymentComponent extends BaseForm implements OnInit {
     )
   }
 
-
   get departmentNameIsInvalidAndTouched() {
     return (
       this.form.hasError('maxlength', 'departmentName') &&
       (this.form.get('departmentName').touched || this.nextButtonWasClicked)
     )
   }
-
 
   get roleTitleIsInvalidAndTouched() {
     return (
