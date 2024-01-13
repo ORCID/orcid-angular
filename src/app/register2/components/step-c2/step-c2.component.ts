@@ -2,13 +2,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core'
 
 import { ReactivationLocal } from '../../../types/reactivation.local'
 import { BaseStepDirective } from '../BaseStep'
-import { FormGroup, Validators } from '@angular/forms'
 
 @Component({
   selector: 'app-step-c2',
-  templateUrl: './step-c.component.html',
+  templateUrl: './step-c2.component.html',
   styleUrls: [
-    './step-c.component.scss',
+    './step-c2.component.scss',
     '../register2.style.scss',
     '../register2.scss-theme.scss',
   ],
