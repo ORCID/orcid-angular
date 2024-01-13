@@ -89,6 +89,7 @@ export class FormCurrentEmploymentComponent extends BaseForm implements OnInit {
   @Input() nextButtonWasClicked: boolean
   @Input() reactivation: ReactivationLocal
   @ViewChild(FormGroupDirective) formGroupDir: FormGroupDirective
+  ariaLabelClearOrganization = $localize`:@@register.clearOrganization:Clear organization`
   organizationPlaceholder = $localize`:@@register.organizationPlaceholder:Type your organization name`
   departmentPlaceholder = $localize`:@@register.departmentPlaceholder:School, college or department`
   rolePlaceholder = $localize`:@@register.rolePlaceholder:Your role or job in the organization`
@@ -151,6 +152,8 @@ export class FormCurrentEmploymentComponent extends BaseForm implements OnInit {
         validators: [
           Validators.required,
           Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
+          this.mustBeOrganizationType(),
+
         ],
       }),
       departmentName: new UntypedFormControl('', {
@@ -215,8 +218,8 @@ export class FormCurrentEmploymentComponent extends BaseForm implements OnInit {
 
   get organizationIsValidAndTouched() {
     return (
-      !this.form.hasError('required', 'organization') &&
-      !this.form.hasError('mustBeOrganizationType', 'organization') &&
+      (!this.form.hasError('required', 'organization') &&
+      !this.form.hasError('mustBeOrganizationType', 'organization') )&&
       (this.form.get('organization').touched || this.nextButtonWasClicked)
     )
   }
@@ -235,7 +238,7 @@ export class FormCurrentEmploymentComponent extends BaseForm implements OnInit {
 
   clearForm() {
     this.form.patchValue({
-      organization: '',
+      organization: "",
     })
     this.form.controls.organization.markAsUntouched()
   }
@@ -288,12 +291,9 @@ export class FormCurrentEmploymentComponent extends BaseForm implements OnInit {
   // OVERWRITE
   registerOnChange(fn: any) {
     this.form.valueChanges.subscribe((value) => {
-      console.log('previous value', value)
       const affiliation = this._register.formGroupToAffiliationRegisterForm(
         this.form as UntypedFormGroup
       )
-      console.log('affiliationsForm', affiliation)
-
       fn({
         affiliationForm: {
           ...affiliation,
@@ -368,7 +368,7 @@ export class FormCurrentEmploymentComponent extends BaseForm implements OnInit {
   mustBeOrganizationType(): ValidatorFn {
     return (formGroup: UntypedFormGroup) => {
       // const organization = formGroup.controls.organization.valuec
-      console.log('formGroup >', formGroup.value, '<')
+      console.log('formGroup.value', formGroup.value)
       if (formGroup.value && typeof formGroup.value === 'string') {
         return { mustBeOrganizationType: true }
       }

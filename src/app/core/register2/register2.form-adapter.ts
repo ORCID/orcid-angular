@@ -150,14 +150,22 @@ export function Register2FormAdapterMixin<T extends Constructor<any>>(base: T) {
       StepC2: UntypedFormGroup,
       StepD: UntypedFormGroup
     ): RegisterForm {
-      return {
+      const value = {
         ...StepA.value.personal,
         ...StepB.value.password,
         ...StepC.value.activitiesVisibilityDefault,
-        ...StepC2.value.affiliations,
         ...StepD.value.sendOrcidNews,
         ...StepD.value.termsOfUse,
         ...StepD.value.captcha,
+      }
+
+      if (StepC2.valid) {
+        return {
+          ...value,
+          ...StepC2.value.affiliations,
+        }
+      } else {
+        return value
       }
     }
   }

@@ -3,7 +3,7 @@
     Current employment
   </h3>
 
-  <div class="announce" *ngIf="affiliationFound">
+  <!-- <div class="announce" *ngIf="affiliationFound">
     <div>
       <img src="/assets/vectors/personal-email-icon.svg" aria-hidden="true" />
     </div>
@@ -29,7 +29,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <section id="{{ type }}-organization">
     <div
@@ -101,7 +101,7 @@
           class="clear"
           matSuffix
           mat-icon-button
-          aria-label="Clear"
+          [attr.aria-label]="ariaLabelClearOrganization"
           (click)="clearForm()"
           *ngIf="form.get('organization').value"
         >
@@ -127,7 +127,7 @@
           organizationIsInvalidAndTouched &&
           displayOrganizationHint
         "
-        i18n="@@record.unidentifiedOrganization"
+        i18n="@@register.weCantIdentifyThisOrganization"
       >
         We can’t identify this organization. Please try entering the
         organization name again.
@@ -140,7 +140,7 @@
           organizationIsInvalidAndTouched &&
           !displayOrganizationHint
         "
-        i18n="@@record.unidentifiedOrganization"
+        i18n="@@register.pleaseEnterAnOrganizationName"
       >
         Please enter an organization name
       </div>
@@ -149,7 +149,7 @@
 
   <div class="input-container">
     <mat-label class="orc-font-small-print"
-      ><ng-container i18n="@@register.xxxxx">Department</ng-container>
+      ><ng-container i18n="@@register.department">Department</ng-container>
       <label id="family-names-input-label" i18n="@@register.optional"
         >(Optional)</label
       ></mat-label
@@ -167,7 +167,7 @@
 
   <div class="input-container">
     <mat-label class="orc-font-small-print"
-      ><ng-container i18n="@@register.xxxxx">Role/Job title</ng-container>
+      ><ng-container i18n="@@register.roleJobTitle">Role/Job title</ng-container>
       <label id="family-names-input-label" i18n="@@register.optional"
         >(Optional)</label
       ></mat-label
@@ -200,7 +200,7 @@
       </mat-label>
     </div>
     <!--Start date year  -->
-    <div class="row date-group mat-form-field-wrapper">
+    <div class="row date-group">
       <div class="row date-inputs-container">
         <div class="date-input">
           <mat-form-field

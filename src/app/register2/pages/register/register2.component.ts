@@ -141,7 +141,6 @@ export class Register2Component implements OnInit, AfterViewInit {
   }
 
   formGroupStepC2Next(nextOptional: boolean) {
-    console.log(nextOptional)
     this.formGroupStepC2Optional = nextOptional
     this._cdref.detectChanges()
     this.myStepper.next()
@@ -154,7 +153,6 @@ export class Register2Component implements OnInit, AfterViewInit {
       this.FormGroupStepA.valid &&
       this.FormGroupStepB.valid &&
       this.FormGroupStepC.valid &&
-      this.FormGroupStepC2.valid &&
       this.FormGroupStepD.valid
     ) {
       this._register
