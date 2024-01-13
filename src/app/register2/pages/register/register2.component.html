@@ -10,7 +10,7 @@
           (selectionChange)="selectionChange($event)"
           role="tablist"
         >
-          <mat-step [stepControl]="FormGroupStepA">
+          <!-- <mat-step [stepControl]="FormGroupStepA">
             <ng-template matStepLabel i18n="@@register.personalData"
               >Personal data</ng-template
             >
@@ -30,8 +30,8 @@
               [personalData]="personalData"
               [reactivation]="reactivation"
             ></app-step-b>
-          </mat-step>
-          <mat-step [stepControl]="FormGroupStepC2">
+          </mat-step> -->
+          <mat-step [stepControl]="FormGroupStepC2" [optional]="formGroupStepC2Optional">
             <ng-template matStepLabel i18n="@@register.visibilityAndTerm"
               >Visibility and terms</ng-template
             >
@@ -40,6 +40,7 @@
               [(formGroup)]="FormGroupStepC2"
               [loading]="loading"
               [reactivation]="reactivation"
+              (formGroupStepC2OptionalChange)="formGroupStepC2Next($event)"
             ></app-step-c2>
           </mat-step>
           <mat-step [stepControl]="FormGroupStepD" #lastStep>

@@ -33,9 +33,10 @@ import { FormPersonalAdditionalEmailsComponent } from './components/form-persona
 import { Register2Component } from './pages/register/register2.component'
 import { StepCComponent } from './components/step-c/step-c.component'
 import { FormCurrentEmploymentComponent } from './components/form-current-employment/form-current-employment.component'
-import { MatOptionModule } from '@angular/material/core'
-import { MatAutocompleteModule } from '@angular/material/autocomplete'
+import { MatLegacyAutocompleteModule as MatAutocompleteModule } from '@angular/material/legacy-autocomplete'
 import { StepC2Component } from './components/step-c2/step-c.component'
+import { MatLegacySelectModule } from '@angular/material/legacy-select'
+import { SharedModule } from '../shared/shared.module'
 
 @NgModule({
   declarations: [
@@ -76,8 +77,9 @@ import { StepC2Component } from './components/step-c2/step-c.component'
     MatProgressBarModule,
     FormDirectivesModule,
     WarningMessageModule,
-    MatOptionModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatLegacySelectModule,
+    SharedModule,
   ],
 })
 export class Register2Module {}

@@ -10,7 +10,7 @@ import {
 } from '@angular/core'
 import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms'
 import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
-import { MatStep } from '@angular/material/stepper'
+import { MatStep, MatStepper } from '@angular/material/stepper'
 import { Router } from '@angular/router'
 import { Observable, combineLatest, forkJoin } from 'rxjs'
 import { catchError, first, map, switchMap } from 'rxjs/operators'
@@ -67,6 +67,9 @@ export class Register2Component implements OnInit, AfterViewInit {
     isReactivation: false,
     reactivationCode: '',
   } as ReactivationLocal
+  stepControlStepC2: UntypedFormGroup
+  formGroupStepC2Optional = false
+  @ViewChild('stepper') private myStepper: MatStepper
 
   constructor(
     private _cdref: ChangeDetectorRef,
@@ -137,10 +140,14 @@ export class Register2Component implements OnInit, AfterViewInit {
     this._cdref.detectChanges()
   }
 
-  register() {
-    console.log('register')
-    console.log(this.FormGroupStepC2.value)
+  formGroupStepC2Next(nextOptional: boolean) {
+    console.log(nextOptional)
+    this.formGroupStepC2Optional = nextOptional
+    this._cdref.detectChanges()
+    this.myStepper.next()
+  }
 
+  register() {
     this.loading = true
     this.lastStep.interacted = true
     if (

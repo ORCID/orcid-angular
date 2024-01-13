@@ -1,5 +1,6 @@
 import { Component, forwardRef, Input, OnInit, ViewChild } from '@angular/core'
 import {
+  FormBuilder,
   FormControl,
   FormGroupDirective,
   NG_ASYNC_VALIDATORS,
@@ -7,6 +8,7 @@ import {
   NgForm,
   UntypedFormControl,
   UntypedFormGroup,
+  ValidatorFn,
   Validators,
 } from '@angular/forms'
 import { Register2Service } from 'src/app/core/register2/register2.service'
@@ -27,6 +29,11 @@ import {
 } from 'src/app/types/record-affiliation.endpoint'
 import { EMPTY, Observable, of } from 'rxjs'
 import { RecordAffiliationService } from 'src/app/core/record-affiliations/record-affiliations.service'
+import {
+  dateMonthYearValidator,
+  dateValidator,
+  endDateMonthYearValidator,
+} from 'src/app/shared/validators/date/date.validator'
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
     control: FormControl | null,
@@ -46,6 +53,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   templateUrl: './form-current-employment.component.html',
   styleUrls: [
     './form-current-employment.component.scss',
+    './form-current-employment.component.scss-theme.scss',
     '../register2.style.scss',
     '../register2.scss-theme.scss',
   ],
@@ -69,6 +77,7 @@ export class FormCurrentEmploymentComponent extends BaseForm implements OnInit {
   displayOrganizationHint: boolean
   requireOrganizationDisambiguatedDataOnRefresh = false
   private _type: AffiliationType
+  affiliationFound = false
 
   @Input()
   public get type(): AffiliationType {
@@ -85,6 +94,19 @@ export class FormCurrentEmploymentComponent extends BaseForm implements OnInit {
   rolePlaceholder = $localize`:@@register.rolePlaceholder:Your role or job in the organization`
   yearPlaceholder = $localize`:@@register.yearPlaceholder:Year`
   monthPlaceholder = $localize`:@@register.monthPlaceholder:Month`
+  ariaLabelStartDate = $localize`:@@shared.startDate:Start date`
+  ngOrcidYear = $localize`:@@shared.year:Year`
+  ngOrcidMonth = $localize`:@@shared.month:Month`
+
+  years = Array(110)
+    .fill(0)
+    .map((i, idx) => idx + new Date().getFullYear() - 108)
+    .reverse()
+
+  months = Array(12)
+    .fill(0)
+    .map((i, idx) => idx + 1)
+
   // emailPlaceholder = $localize`:@@register.emailPlaceholder:The email address you use most`
   // arialabelConfirmEmail = $localize`:@@register.labelConfirmEmail:Confirm your email address`
   // labelInfoAboutName = $localize`:@@register.ariaLabelInfo:info about names`
@@ -106,7 +128,8 @@ export class FormCurrentEmploymentComponent extends BaseForm implements OnInit {
     private _platform: PlatformInfoService,
     private _router: Router,
     private _liveAnnouncer: LiveAnnouncer,
-    private _recordAffiliationService: RecordAffiliationService
+    private _recordAffiliationService: RecordAffiliationService,
+    private _formBuilder: FormBuilder
   ) {
     super()
     this._platform.get().subscribe((platform) => {
@@ -136,6 +159,13 @@ export class FormCurrentEmploymentComponent extends BaseForm implements OnInit {
       roleTitle: new UntypedFormControl('', {
         validators: [Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND)],
       }),
+      startDateGroup: this._formBuilder.group(
+        {
+          startDateMonth: [''],
+          startDateYear: [''],
+        },
+        dateMonthYearValidator('startDate')
+      ),
     })
 
     this.filteredOptions = this.form.get('organization').valueChanges.pipe(
@@ -150,16 +180,11 @@ export class FormCurrentEmploymentComponent extends BaseForm implements OnInit {
           this.displayOrganizationHint = true
           // this.fillForm(organization)
         }
-        // if (!organization) {
-        //   this.selectedOrganizationFromDatabase = undefined
-        //   this.requireOrganizationDisambiguatedDataOnRefresh = true
-        //   this.displayOrganizationHint = false
-        //   this.form.patchValue({
-        //     city: '',
-        //     region: '',
-        //     country: '',
-        //   })
-        // }
+        if (!organization) {
+          this.selectedOrganizationFromDatabase = undefined
+          this.requireOrganizationDisambiguatedDataOnRefresh = true
+          this.displayOrganizationHint = false
+        }
       }),
       switchMap((organization: string | Organization) => {
         if (
@@ -182,9 +207,17 @@ export class FormCurrentEmploymentComponent extends BaseForm implements OnInit {
 
   get organizationIsInvalidAndTouched() {
     return (
-      this.form.hasError('required', 'organization') &&
-      (this.form.get('organization').dirty ||
-        this.form.get('organization').touched)
+      (this.form.hasError('required', 'organization') ||
+        this.form.hasError('mustBeOrganizationType', 'organization')) &&
+      (this.form.get('organization').touched || this.nextButtonWasClicked)
+    )
+  }
+
+  get organizationIsValidAndTouched() {
+    return (
+      !this.form.hasError('required', 'organization') &&
+      !this.form.hasError('mustBeOrganizationType', 'organization') &&
+      (this.form.get('organization').touched || this.nextButtonWasClicked)
     )
   }
 
@@ -204,6 +237,7 @@ export class FormCurrentEmploymentComponent extends BaseForm implements OnInit {
     this.form.patchValue({
       organization: '',
     })
+    this.form.controls.organization.markAsUntouched()
   }
 
   // allEmailsAreUnique(): ValidatorFn {
@@ -254,7 +288,7 @@ export class FormCurrentEmploymentComponent extends BaseForm implements OnInit {
   // OVERWRITE
   registerOnChange(fn: any) {
     this.form.valueChanges.subscribe((value) => {
-      console.log('value', value)
+      console.log('previous value', value)
       const affiliation = this._register.formGroupToAffiliationRegisterForm(
         this.form as UntypedFormGroup
       )
@@ -329,6 +363,17 @@ export class FormCurrentEmploymentComponent extends BaseForm implements OnInit {
       )
     }
     return false
+  }
+
+  mustBeOrganizationType(): ValidatorFn {
+    return (formGroup: UntypedFormGroup) => {
+      // const organization = formGroup.controls.organization.valuec
+      console.log('formGroup >', formGroup.value, '<')
+      if (formGroup.value && typeof formGroup.value === 'string') {
+        return { mustBeOrganizationType: true }
+      }
+      return null
+    }
   }
 
   // private announce(announcement: string) {

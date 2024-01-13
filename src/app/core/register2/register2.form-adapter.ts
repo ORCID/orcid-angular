@@ -122,18 +122,23 @@ export function Register2FormAdapterMixin<T extends Constructor<any>>(base: T) {
       const value = formGroup.controls['organization'].value
       const departmentName = formGroup.controls['departmentName'].value
       const roleTitle = formGroup.controls['roleTitle'].value
+      const startDateGroup = formGroup.controls['startDateGroup'].value
 
       if (typeof value === 'string') {
         return { affiliationName: { value } }
       } else {
         return {
           affiliationName: { value: value.value },
-          disambiguatedAffiliationSourceId: {
+          orgDisambiguatedId: {
             value: value.disambiguatedAffiliationIdentifier,
           },
           departmentName: { value: departmentName },
           roleTitle: { value: roleTitle },
           affiliationType: { value: 'employment' },
+          startDate: {
+            month: startDateGroup.startDateMonth,
+            year: startDateGroup.startDateYear,
+          },
         }
       }
     }
