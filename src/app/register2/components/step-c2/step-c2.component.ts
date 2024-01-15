@@ -21,9 +21,7 @@ export class StepC2Component extends BaseStepDirective {
   constructor() {
     super()
   }
-  nextButton() {
-    // this.formGroup.controls.personal.markAsTouched()
-  }
+
   optionalNextStep() {
     this.formGroupStepC2OptionalChange.emit(true)
     this.nextButtonWasClicked = true
