@@ -117,8 +117,6 @@ export function Register2FormAdapterMixin<T extends Constructor<any>>(base: T) {
     }
 
     formGroupToAffiliationRegisterForm(formGroup: UntypedFormGroup) {
-      console.log(formGroup.value)
-
       const value = formGroup.controls['organization'].value
       const departmentName = formGroup.controls['departmentName'].value
       const roleTitle = formGroup.controls['roleTitle'].value

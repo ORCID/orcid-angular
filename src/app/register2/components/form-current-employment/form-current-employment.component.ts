@@ -247,8 +247,6 @@ export class FormCurrentEmploymentComponent extends BaseForm implements OnInit {
 
   mustBeOrganizationType(): ValidatorFn {
     return (formGroup: UntypedFormGroup) => {
-      // const organization = formGroup.controls.organization.valuec
-      console.log('formGroup.value', formGroup.value)
       if (formGroup.value && typeof formGroup.value === 'string') {
         return { mustBeOrganizationType: true }
       }
