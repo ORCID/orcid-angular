@@ -32,12 +32,18 @@ import { FormAntiRobotsComponent } from './components/form-anti-robots/form-anti
 import { FormPersonalAdditionalEmailsComponent } from './components/form-personal-additional-emails/form-personal-additional-emails.component'
 import { Register2Component } from './pages/register/register2.component'
 import { StepCComponent } from './components/step-c/step-c.component'
+import { FormCurrentEmploymentComponent } from './components/form-current-employment/form-current-employment.component'
+import { MatLegacyAutocompleteModule as MatAutocompleteModule } from '@angular/material/legacy-autocomplete'
+import { StepC2Component } from './components/step-c2/step-c2.component'
+import { MatLegacySelectModule } from '@angular/material/legacy-select'
+import { SharedModule } from '../shared/shared.module'
 
 @NgModule({
   declarations: [
     StepAComponent,
     StepBComponent,
     StepCComponent,
+    StepC2Component,
     StepDComponent,
     FormPersonalComponent,
     FormPasswordComponent,
@@ -48,6 +54,7 @@ import { StepCComponent } from './components/step-c/step-c.component'
     FormAntiRobotsComponent,
     BackendErrorComponent,
     Register2Component,
+    FormCurrentEmploymentComponent,
   ],
   imports: [
     CommonModule,
@@ -70,6 +77,9 @@ import { StepCComponent } from './components/step-c/step-c.component'
     MatProgressBarModule,
     FormDirectivesModule,
     WarningMessageModule,
+    MatAutocompleteModule,
+    MatLegacySelectModule,
+    SharedModule,
   ],
 })
 export class Register2Module {}

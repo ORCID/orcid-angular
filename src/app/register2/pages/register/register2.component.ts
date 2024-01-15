@@ -10,7 +10,7 @@ import {
 } from '@angular/core'
 import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms'
 import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
-import { MatStep } from '@angular/material/stepper'
+import { MatStep, MatStepper } from '@angular/material/stepper'
 import { Router } from '@angular/router'
 import { Observable, combineLatest, forkJoin } from 'rxjs'
 import { catchError, first, map, switchMap } from 'rxjs/operators'
@@ -54,6 +54,7 @@ export class Register2Component implements OnInit, AfterViewInit {
   FormGroupStepA: UntypedFormGroup
   FormGroupStepB: UntypedFormGroup
   FormGroupStepC: UntypedFormGroup
+  FormGroupStepC2: UntypedFormGroup
   FormGroupStepD: UntypedFormGroup
 
   isLinear = true
@@ -66,6 +67,9 @@ export class Register2Component implements OnInit, AfterViewInit {
     isReactivation: false,
     reactivationCode: '',
   } as ReactivationLocal
+  stepControlStepC2: UntypedFormGroup
+  formGroupStepC2Optional = false
+  @ViewChild('stepper') private myStepper: MatStepper
 
   constructor(
     private _cdref: ChangeDetectorRef,
@@ -98,6 +102,10 @@ export class Register2Component implements OnInit, AfterViewInit {
     })
     this.FormGroupStepC = this._formBuilder.group({
       activitiesVisibilityDefault: [''],
+    })
+
+    this.FormGroupStepC2 = this._formBuilder.group({
+      affiliations: [''],
     })
     this.FormGroupStepD = this._formBuilder.group({
       sendOrcidNews: [''],
@@ -132,6 +140,12 @@ export class Register2Component implements OnInit, AfterViewInit {
     this._cdref.detectChanges()
   }
 
+  formGroupStepC2Next(nextOptional: boolean) {
+    this.formGroupStepC2Optional = nextOptional
+    this._cdref.detectChanges()
+    this.myStepper.next()
+  }
+
   register() {
     this.loading = true
     this.lastStep.interacted = true
@@ -146,6 +160,7 @@ export class Register2Component implements OnInit, AfterViewInit {
           this.FormGroupStepA,
           this.FormGroupStepB,
           this.FormGroupStepC,
+          this.FormGroupStepC2,
           this.FormGroupStepD
         )
         .pipe(
@@ -161,6 +176,7 @@ export class Register2Component implements OnInit, AfterViewInit {
               this.FormGroupStepA,
               this.FormGroupStepB,
               this.FormGroupStepC,
+              this.FormGroupStepC2,
               this.FormGroupStepD,
               this.reactivation,
               this.requestInfoForm
