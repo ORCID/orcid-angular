@@ -28,6 +28,9 @@ mat-horizontal-stepper.orcid-stepper-wizard {
     .input-container {
       width: 100%;
       margin-bottom: 10px;
+      // TEMPORALLY KEEPING AS PART OF CARD 8934-registration-add-an-affiliation-with-typeahead
+      // This should be styling for legacy code, but is been kept as a comment in case it produce any side effect on the next release
+
       // button {
       //   position: absolute !important;
       //   margin-top: 10px !important;
