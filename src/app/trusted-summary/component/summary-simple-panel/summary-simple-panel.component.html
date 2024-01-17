@@ -31,9 +31,11 @@
 
           <div class="orc-font-body-small text-container">
             <ng-container *ngIf="element.url">
-              <a class="underline orc-font-body-small" *ngIf="element.url">{{
-                element.stringA
-              }}</a>
+              <a
+                class="underline orc-font-body-small"
+                *ngIf="element.url"
+                >{{ element.stringA }}</a
+              >
             </ng-container>
             <ng-container *ngIf="!element.url">
               <strong>{{ element.countA }}</strong>
