@@ -113,8 +113,7 @@
         *ngIf="selectedOrganizationFromDatabase && displayOrganizationHint"
       >
         {{ selectedOrganizationFromDatabase.value }},
-        {{ selectedOrganizationFromDatabase.city }}
-        <ng-container *ngIf="selectedOrganizationFromDatabase.city"
+        {{ selectedOrganizationFromDatabase.city }}<ng-container *ngIf="selectedOrganizationFromDatabase.city"
           >,</ng-container
         >
         {{ selectedOrganizationFromDatabase.country }}
