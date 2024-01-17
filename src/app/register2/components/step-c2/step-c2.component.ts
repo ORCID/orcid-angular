@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core'
 
 import { ReactivationLocal } from '../../../types/reactivation.local'
 import { BaseStepDirective } from '../BaseStep'
+import { FormBuilder, FormGroup } from '@angular/forms'
 
 @Component({
   selector: 'app-step-c2',
@@ -18,11 +19,23 @@ export class StepC2Component extends BaseStepDirective {
   nextButtonWasClicked: boolean
   @Output() formGroupStepC2OptionalChange = new EventEmitter<boolean>()
 
-  constructor() {
+  constructor(private _formBuilder: FormBuilder) {
     super()
   }
 
   optionalNextStep() {
+    this.formGroup.setValue({
+      affiliations: {
+        organization: '',
+        departmentName: '',
+        roleTitle: '',
+        startDateGroup: {
+          startDateMonth: '',
+          startDateYear: '',
+        },
+      },
+    })
+
     this.formGroupStepC2OptionalChange.emit(true)
     this.nextButtonWasClicked = true
   }
