@@ -32,10 +32,7 @@
             *ngIf="activity.organizationName && activity.url"
             class="orc-font-body-small"
           >
-            <a
-              class="underline"
-              >{{ activity.organizationName }}
-            </a>
+            <a class="underline">{{ activity.organizationName }} </a>
           </h3>
           <h3
             *ngIf="activity.organizationName && !activity.url"
@@ -45,9 +42,7 @@
           </h3>
         </div>
 
-        <a
-          *ngIf="activity.url"
-        >
+        <a *ngIf="activity.url">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
