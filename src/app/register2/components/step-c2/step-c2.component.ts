@@ -24,7 +24,6 @@ export class StepC2Component extends BaseStepDirective {
   }
 
   optionalNextStep() {
-    console.log(this.formGroup.value)
     this.formGroup.setValue({
       affiliations: {
         organization: '',
@@ -36,7 +35,6 @@ export class StepC2Component extends BaseStepDirective {
         },
       },
     })
-    console.log(this.formGroup.value)
 
     this.formGroupStepC2OptionalChange.emit(true)
     this.nextButtonWasClicked = true
