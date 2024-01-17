@@ -1,3 +1,13 @@
+## v2.53.7 - 2024-01-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.53.6...v2.53.7)
+
+- [#2138](https://github.com/ORCID/orcid-angular/pull/2138): fix: Remove unnecessary href attributes
+
+### Fix
+
+- Remove unnecessary href attributes
+
 ## v2.53.6 - 2024-01-17
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.53.5...v2.53.6)
