@@ -14,8 +14,6 @@ export abstract class BaseForm implements ControlValueAccessor, AsyncValidator {
   constructor() {}
   writeValue(val: any): void {
     if (val != null && val !== undefined && val !== '') {
-      console.log('ok lets go', this.form.value)
-
       this.form.setValue(val, { emitEvent: true })
       // Trigger registerOnChange custom function by calling form.updateValueAndValidity
       // require since most form controls extending this class
