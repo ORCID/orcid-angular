@@ -1,3 +1,9 @@
+## v2.53.6 - 2024-01-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.53.5...v2.53.6)
+
+- [#2137](https://github.com/ORCID/orcid-angular/pull/2137): Lmendoza/batch fixes 17 jan 2024
+
 ## v2.53.5 - 2024-01-15
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.53.4...v2.53.5)
