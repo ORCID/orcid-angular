@@ -1,3 +1,9 @@
+## v2.53.5 - 2024-01-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.53.4...v2.53.5)
+
+- [#2135](https://github.com/ORCID/orcid-angular/pull/2135): 8934 registration add an affiliation with typeahead
+
 ## v2.53.4 - 2024-01-12
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.53.3...v2.53.4)
