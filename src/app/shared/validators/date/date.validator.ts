@@ -47,7 +47,6 @@ export function dateMonthYearValidator(dateType: string, formHasDay = true) {
     const year = c.get(dateType + 'Year').value
     const month = c.get(dateType + 'Month').value
 
-
     if (!year && !month) {
       return null
     }

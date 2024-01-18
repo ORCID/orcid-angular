@@ -159,7 +159,11 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
 
     this.form = new UntypedFormGroup({
       givenNames: new UntypedFormControl('', {
-        validators: [Validators.required, OrcidValidators.illegalName, Validators.maxLength(this.maxNameLenght)],
+        validators: [
+          Validators.required,
+          OrcidValidators.illegalName,
+          Validators.maxLength(this.maxNameLenght),
+        ],
         asyncValidators: this._register.backendValueValidate('givenNames'),
       }),
       familyNames: new UntypedFormControl('', {
