@@ -9,6 +9,12 @@
         #firstInput
       />
       <mat-error
+        *ngIf="form.hasError('maxlength', 'givenNames')"
+        i18n="@@topBar.keywordMaxLength"
+      >
+        Must be less than 100 characters
+      </mat-error>
+      <mat-error
         *ngIf="form.hasError('required', 'givenNames')"
         i18n="@@register.firstNamePassword"
       >

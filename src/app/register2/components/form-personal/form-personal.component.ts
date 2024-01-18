@@ -77,6 +77,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class FormPersonalComponent extends BaseForm implements OnInit {
   matcher = new MyErrorStateMatcher()
+  maxNameLenght = 100
   @Input() nextButtonWasClicked: boolean
   @Input() reactivation: ReactivationLocal
   @ViewChild(FormGroupDirective) formGroupDir: FormGroupDirective
@@ -158,7 +159,7 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
 
     this.form = new UntypedFormGroup({
       givenNames: new UntypedFormControl('', {
-        validators: [Validators.required, OrcidValidators.illegalName],
+        validators: [Validators.required, OrcidValidators.illegalName, Validators.maxLength(this.maxNameLenght)],
         asyncValidators: this._register.backendValueValidate('givenNames'),
       }),
       familyNames: new UntypedFormControl('', {
