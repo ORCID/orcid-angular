@@ -42,10 +42,11 @@ export function dateValidator(dateType: string) {
   }
 }
 
-export function dateMonthYearValidator(dateType: string) {
+export function dateMonthYearValidator(dateType: string, formHasDay = true) {
   return (c: AbstractControl): { [key: string]: any } | null => {
     const year = c.get(dateType + 'Year').value
     const month = c.get(dateType + 'Month').value
+
 
     if (!year && !month) {
       return null

@@ -141,7 +141,7 @@ export class FormCurrentEmploymentComponent extends BaseForm implements OnInit {
           startDateMonth: [''],
           startDateYear: [''],
         },
-        dateMonthYearValidator('startDate')
+        { validator: dateMonthYearValidator('startDate') }
       ),
     })
 
