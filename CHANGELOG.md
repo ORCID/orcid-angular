@@ -1,3 +1,25 @@
+## v2.53.7 - 2024-01-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.53.6...v2.53.7)
+
+- [#2138](https://github.com/ORCID/orcid-angular/pull/2138): fix: Remove unnecessary href attributes
+
+### Fix
+
+- Remove unnecessary href attributes
+
+## v2.53.6 - 2024-01-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.53.5...v2.53.6)
+
+- [#2137](https://github.com/ORCID/orcid-angular/pull/2137): Lmendoza/batch fixes 17 jan 2024
+
+## v2.53.5 - 2024-01-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.53.4...v2.53.5)
+
+- [#2135](https://github.com/ORCID/orcid-angular/pull/2135): 8934 registration add an affiliation with typeahead
+
 ## v2.53.4 - 2024-01-12
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.53.3...v2.53.4)

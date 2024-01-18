@@ -13,7 +13,10 @@ import { ErrorHandlerService } from '../../../core/error-handler/error-handler.s
 import { ReactivationService } from '../../../core/reactivation/reactivation.service'
 import { Register2Service } from '../../../core/register2/register2.service'
 import { FormCurrentEmploymentComponent } from './form-current-employment.component'
-import { MatLegacyAutocomplete, MatLegacyAutocompleteModule } from '@angular/material/legacy-autocomplete'
+import {
+  MatLegacyAutocomplete,
+  MatLegacyAutocompleteModule,
+} from '@angular/material/legacy-autocomplete'
 import { SharedModule } from 'src/app/shared/shared.module'
 
 describe('FormPersonalComponent', () => {
@@ -22,7 +25,13 @@ describe('FormPersonalComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MdePopoverModule, RouterTestingModule, MatLegacyAutocompleteModule, SharedModule],
+      imports: [
+        HttpClientTestingModule,
+        MdePopoverModule,
+        RouterTestingModule,
+        MatLegacyAutocompleteModule,
+        SharedModule,
+      ],
       declarations: [FormCurrentEmploymentComponent],
       providers: [
         WINDOW_PROVIDERS,
