@@ -1,3 +1,9 @@
+## v2.53.8 - 2024-01-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.53.7...v2.53.8)
+
+- [#2139](https://github.com/ORCID/orcid-angular/pull/2139): Fix/batch fixes jan 18 2024
+
 ## v2.53.7 - 2024-01-17
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.53.6...v2.53.7)
