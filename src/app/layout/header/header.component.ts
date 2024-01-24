@@ -69,15 +69,7 @@ export class HeaderComponent implements OnInit {
     _router.events.subscribe(() => {
       const path = location.path()
       this.signinRegisterButton = path !== `/${ApplicationRoutes.signin}`
-      this.hideMainMenu =
-        ORCID_REGEXP.test(path) ||
-        path.indexOf(`/${ApplicationRoutes.myOrcid}`) !== -1 ||
-        path === `/${ApplicationRoutes.account}` ||
-        path === `/${ApplicationRoutes.trustedParties}` ||
-        path === `/${ApplicationRoutes.selfService}` ||
-        path === `/${ApplicationRoutes.inbox}` ||
-        path === `/${ApplicationRoutes.developerTools}` ||
-        path.indexOf(`/${ApplicationRoutes.register}`) !== -1
+      this.hideMainMenu = path.indexOf(`/${ApplicationRoutes.home}`) !== -1
     })
   }
 
