@@ -1,3 +1,14 @@
+## v2.53.9 - 2024-01-24
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.53.8...v2.53.9)
+
+- [#2142](https://github.com/ORCID/orcid-angular/pull/2142): 9028 qa registration affiliations ids must be unique
+- [#2141](https://github.com/ORCID/orcid-angular/pull/2141): fix: Remove global navigation from registry
+
+### Fix
+
+- Remove global navigation from registry
+
 ## v2.53.8 - 2024-01-19
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.53.7...v2.53.8)
