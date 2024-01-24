@@ -50,7 +50,7 @@
           error: organizationIsInvalidAndTouched,
         }"
       >
-        <strong i18n="@@shared.organization" id="organizationLabel"
+        <strong i18n="@@shared.organization"
           >Organization</strong
         >
       </label>
@@ -149,19 +149,18 @@
 
   <div class="input-container">
     <mat-label
+      id="department-input-label"
       class="orc-font-small-print"
       [ngClass]="{
         error: departmentNameIsInvalidAndTouched
       }"
       ><ng-container i18n="@@register.department">Department</ng-container>
-      <label id="family-names-input-label" i18n="@@register.optional"
-        >(Optional)</label
-      ></mat-label
+      <label i18n="@@register.optional">(Optional)</label></mat-label
     >
     <mat-form-field appearance="outline" [hideRequiredMarker]="true">
       <input
-        aria-labelledby="family-names-input-label"
-        id="family-names-input"
+        aria-labelledby="department-input-label"
+        id="department-input"
         formControlName="departmentName"
         matInput
         [placeholder]="departmentPlaceholder"
@@ -177,6 +176,7 @@
 
   <div class="input-container">
     <mat-label
+      id="role-input-label"
       class="orc-font-small-print"
       [ngClass]="{
         error: roleTitleIsInvalidAndTouched
@@ -184,14 +184,12 @@
       ><ng-container i18n="@@register.roleJobTitle"
         >Role/Job title</ng-container
       >
-      <label id="family-names-input-label" i18n="@@register.optional"
-        >(Optional)</label
-      ></mat-label
+      <label i18n="@@register.optional">(Optional)</label></mat-label
     >
     <mat-form-field appearance="outline" [hideRequiredMarker]="true">
       <input
-        aria-labelledby="family-names-input-label"
-        id="family-names-input"
+        aria-labelledby="role-input-label"
+        id="role-input"
         formControlName="roleTitle"
         matInput
         [placeholder]="rolePlaceholder"
@@ -210,15 +208,14 @@
   <div class="input-container" formGroupName="startDateGroup">
     <div class="row">
       <mat-label
+        id="start-date-input-label"
         class="orc-font-small-print"
         [ngClass]="{
           error: form.hasError('date', 'startDateGroup')
         }"
       >
         <strong i18n="@@shared.startDate">Start date</strong>
-        <label id="family-names-input-label" i18n="@@register.optional"
-          >(Optional)</label
-        >
+        <label>(Optional)</label>
       </mat-label>
     </div>
     <!--Start date year  -->
