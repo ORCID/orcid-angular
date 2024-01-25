@@ -3,6 +3,7 @@ import {
   Component,
   ElementRef,
   forwardRef,
+  Inject,
   Input,
   OnInit,
   ViewChild,
@@ -39,6 +40,12 @@ import { Router } from '@angular/router'
 import { ApplicationRoutes } from 'src/app/constants'
 import { LiveAnnouncer } from '@angular/cdk/a11y'
 import { environment } from 'src/environments/environment'
+import { RegisterBackendErrors } from 'src/app/types/register.local'
+import { WINDOW } from 'src/app/cdk/window'
+import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
+import { SignInService } from 'src/app/core/sign-in/sign-in.service'
+import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
+import { ERROR_REPORT } from 'src/app/errors'
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
     control: FormControl | null,
@@ -93,12 +100,18 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
   personalEmail: boolean
   undefinedEmail: boolean
   emailsAreValidAlreadyChecked: boolean
+  registerBackendErrors: RegisterBackendErrors
+
   constructor(
     private _register: Register2Service,
     private _reactivationService: ReactivationService,
     private _platform: PlatformInfoService,
     private _router: Router,
-    private _liveAnnouncer: LiveAnnouncer
+    private _liveAnnouncer: LiveAnnouncer,
+    private _snackbar: SnackbarService,
+    private _signIn: SignInService,
+    private _errorHandler: ErrorHandlerService,
+    @Inject(WINDOW) private window: Window
   ) {
     super()
   }
@@ -317,5 +330,34 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
           queryParams: { ...platform.queryParameters, email, show_login: true },
         })
       })
+  }
+
+  navigateToClaim(email) {
+    email = encodeURIComponent(email)
+    this.window.location.href = `/resend-claim?email=${email}`
+  }
+
+  reactivateEmail(email) {
+    const $deactivate = this._signIn.reactivation(email)
+    $deactivate.subscribe((data) => {
+      if (data.error) {
+        this._errorHandler
+          .handleError(
+            new Error(data.error),
+            ERROR_REPORT.REGISTER_REACTIVATED_EMAIL
+          )
+          .subscribe()
+      } else {
+        this._snackbar.showSuccessMessage({
+          title: $localize`:@@register.reactivating:Reactivating your account`,
+          // tslint:disable-next-line: max-line-length
+          message: $localize`:@@ngOrcid.signin.verify.reactivationSent:Thank you for reactivating your ORCID record; please complete the process by following the steps in the email we are now sending you. If you don’t receive an email from us, please`,
+          action: $localize`:@@shared.contactSupport:contact support.`,
+          actionURL: `https://support.orcid.org/`,
+          closable: true,
+        })
+        this._router.navigate([ApplicationRoutes.signin])
+      }
+    })
   }
 }
