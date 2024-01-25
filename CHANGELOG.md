@@ -1,3 +1,13 @@
+## v2.54.0 - 2024-01-25
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.53.10...v2.54.0)
+
+- [#2143](https://github.com/ORCID/orcid-angular/pull/2143): feature: Update duplicate, unclaimed and deactivated error message
+
+### Feature
+
+- Update duplicate, unclaimed and deactivated error message
+
 ## v2.53.10 - 2024-01-25
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.53.9...v2.53.10)
