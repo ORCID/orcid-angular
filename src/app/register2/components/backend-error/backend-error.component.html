@@ -1,8 +1,10 @@
-<ng-container *ngIf="
-                    recognizedError[errorCode] === 0 ||
-                    recognizedError[errorCode] === 3 ||
-                    recognizedError[errorCode] === 4
-                    ">
+<ng-container
+  *ngIf="
+    recognizedError[errorCode] === 0 ||
+    recognizedError[errorCode] === 3 ||
+    recognizedError[errorCode] === 4
+  "
+>
   <ng-container
     *ngIf="
       (showEmailAlreadyExistUntilNextButtonWasClicked &&
@@ -11,9 +13,9 @@
     "
   >
     <ng-container i18n="@@register.emailIsAlreadyAssociated"
-      >This email is already associated with an existing ORCID record. Please use a different email address to continue registering a new ORCID iD.
-      </ng-container
-    >
+      >This email is already associated with an existing ORCID record. Please
+      use a different email address to continue registering a new ORCID iD.
+    </ng-container>
   </ng-container>
 </ng-container>
 
@@ -30,6 +32,5 @@
 >
   Additional emails cannot be duplicated
 </ng-container>
-
 
 <ng-container *ngIf="unrecognizedError"> {{ errorCode }} </ng-container>

@@ -34,7 +34,7 @@ export class BackendErrorComponent implements OnInit {
   constructor(
     private _platformInfo: PlatformInfoService,
     private _router: Router,
-    private _togglz: TogglzService,
+    private _togglz: TogglzService
   ) {}
   ngOnInit() {
     this._togglz
