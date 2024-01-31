@@ -1,3 +1,9 @@
+## v2.54.1 - 2024-01-31
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.54.0...v2.54.1)
+
+- [#2140](https://github.com/ORCID/orcid-angular/pull/2140): Transifex
+
 ## v2.54.0 - 2024-01-25
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.53.10...v2.54.0)
