@@ -30,6 +30,8 @@ import {
 import { EMPTY, Observable, of } from 'rxjs'
 import { RecordAffiliationService } from 'src/app/core/record-affiliations/record-affiliations.service'
 import { dateMonthYearValidator } from 'src/app/shared/validators/date/date.validator'
+import { RegisterStateService } from '../../register-state.service'
+import { OrgDisambiguated } from 'src/app/types'
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
     control: FormControl | null,
@@ -74,6 +76,7 @@ export class FormCurrentEmploymentComponent extends BaseForm implements OnInit {
   requireOrganizationDisambiguatedDataOnRefresh = false
   private _type: AffiliationType
   affiliationFound = false
+  rorIdHasBeenMatched: boolean
 
   @Input()
   public get type(): AffiliationType {
@@ -104,15 +107,17 @@ export class FormCurrentEmploymentComponent extends BaseForm implements OnInit {
     .fill(0)
     .map((i, idx) => idx + 1)
 
-  organization: string | Organization = ''
+  organization: string | Organization | OrgDisambiguated = ''
   platform: PlatformInfo
   isMobile: boolean
+  rorId: string = 'https://ror.org/036mest28'
   constructor(
     private _register: Register2Service,
     private _platform: PlatformInfoService,
     private _liveAnnouncer: LiveAnnouncer,
     private _recordAffiliationService: RecordAffiliationService,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
+    private registerStateService: RegisterStateService
   ) {
     super()
     this._platform.get().subscribe((platform) => {
@@ -122,6 +127,19 @@ export class FormCurrentEmploymentComponent extends BaseForm implements OnInit {
   }
 
   ngOnInit() {
+    this.registerStateService.matchOrganization$.subscribe((organization) => {
+      this.organization = organization
+      this.form.patchValue({
+        organization: organization,
+      })
+      this.rorIdHasBeenMatched = !!organization
+
+      if (this.rorIdHasBeenMatched) {
+        this.form.controls.organization.markAsTouched()
+      } else {
+        this.form.controls.organization.markAsUntouched()
+      }
+    })
     this.form = new UntypedFormGroup({
       organization: new UntypedFormControl(this.organization, {
         validators: [
@@ -212,8 +230,12 @@ export class FormCurrentEmploymentComponent extends BaseForm implements OnInit {
     )
   }
 
-  autoCompleteDisplayOrganization(organization: Organization) {
-    return organization.value
+  autoCompleteDisplayOrganization(
+    organization: Organization | string | OrgDisambiguated
+  ) {
+    if (typeof organization === 'object') {
+      return organization.value
+    }
   }
 
   private _filter(value: string): Observable<Organization[]> {

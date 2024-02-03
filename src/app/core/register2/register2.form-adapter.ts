@@ -117,6 +117,7 @@ export function Register2FormAdapterMixin<T extends Constructor<any>>(base: T) {
     }
 
     formGroupToAffiliationRegisterForm(formGroup: UntypedFormGroup) {
+      console.log('formGroupToAffiliationRegisterForm', formGroup)
       const value = formGroup.controls['organization'].value
       const departmentName = formGroup.controls['departmentName'].value
       const roleTitle = formGroup.controls['roleTitle'].value
@@ -127,6 +128,9 @@ export function Register2FormAdapterMixin<T extends Constructor<any>>(base: T) {
       } else {
         return {
           affiliationName: { value: value.value },
+          disambiguatedAffiliationSourceId: {
+            value: value.disambiguatedAffiliationIdentifier,
+          },
           orgDisambiguatedId: {
             value: value.disambiguatedAffiliationIdentifier,
           },
@@ -137,6 +141,9 @@ export function Register2FormAdapterMixin<T extends Constructor<any>>(base: T) {
             month: startDateGroup.startDateMonth,
             year: startDateGroup.startDateYear,
           },
+          city: { value: value.city },
+          region: { value: value.region },
+          country: { value: value.country },
         }
       }
     }

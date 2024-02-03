@@ -64,6 +64,9 @@ mat-label.orc-font-small-print {
   a {
     font-style: italic;
   }
+  button {
+    height: 40px;
+  }
 }
 .columns-12 {
   :host ::ng-deep {
@@ -150,6 +153,9 @@ mat-label.orc-font-small-print {
 
 .info,
 .announce {
+  .main-paragraph{
+    margin-bottom: 16px;
+  }
   .content div:not(:last-child) {
     margin-bottom: 16px;
   }
