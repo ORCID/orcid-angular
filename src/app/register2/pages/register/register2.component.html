@@ -10,7 +10,7 @@
           (selectionChange)="selectionChange($event)"
           role="tablist"
         >
-          <!-- <mat-step [stepControl]="FormGroupStepA">
+          <mat-step [stepControl]="FormGroupStepA">
             <ng-template matStepLabel i18n="@@register.personalData"
               >Personal data</ng-template
             >
@@ -30,7 +30,7 @@
               [personalData]="personalData"
               [reactivation]="reactivation"
             ></app-step-b>
-          </mat-step> -->
+          </mat-step>
           <mat-step
             [stepControl]="FormGroupStepC2"
             [optional]="formGroupStepC2Optional"
