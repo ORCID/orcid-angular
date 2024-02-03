@@ -46,6 +46,7 @@ import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { SignInService } from 'src/app/core/sign-in/sign-in.service'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 import { ERROR_REPORT } from 'src/app/errors'
+import { RegisterStateService } from '../../register-state.service'
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
     control: FormControl | null,
@@ -111,6 +112,7 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
     private _snackbar: SnackbarService,
     private _signIn: SignInService,
     private _errorHandler: ErrorHandlerService,
+    private _registerStateService: RegisterStateService,
     @Inject(WINDOW) private window: Window
   ) {
     super()
@@ -146,6 +148,19 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
       }
     )
 
+    this.additionalEmails.controls[0].valueChanges
+      .pipe(
+        debounceTime(1000),
+        filter(() => !this.additionalEmails.controls[0].errors),
+        switchMap((value) => {
+          const emailDomain = value.split('@')[1]
+          return this._register.getEmailCategory(emailDomain)
+        })
+      )
+      .subscribe((value) => {
+        this._registerStateService.setRorAffiliationFound(value.rorId, true)
+      })
+
     this.emails.controls['email'].valueChanges
       .pipe(
         debounceTime(1000),
@@ -159,6 +174,7 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
         this.professionalEmail = value.category === 'PROFESSIONAL'
         this.personalEmail = value.category === 'PERSONAL'
         this.undefinedEmail = value.category === 'UNDEFINED'
+        this._registerStateService.setRorAffiliationFound(value.rorId)
       })
 
     if (!this.reactivation?.isReactivation) {
@@ -180,7 +196,10 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
         asyncValidators: this._register.backendValueValidate('givenNames'),
       }),
       familyNames: new UntypedFormControl('', {
-        validators: [OrcidValidators.illegalName],
+        validators: [
+          OrcidValidators.illegalName,
+          Validators.maxLength(this.maxNameLenght),
+        ],
       }),
       emails: this.emails,
     })

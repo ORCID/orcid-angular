@@ -61,8 +61,18 @@ mat-label.orc-font-small-print {
 .step-actions {
   border-top: 1px solid;
   padding-top: 32px;
-  a {
-    font-style: italic;
+
+  button {
+    height: 40px;
+    font-size: 16px;
+    a {
+      font-style: italic;
+      font-size: 14px;
+    }
+    a.skip-step {
+      font-style: normal;
+      font-size: 14px;
+    }
   }
 }
 .columns-12 {
@@ -150,6 +160,9 @@ mat-label.orc-font-small-print {
 
 .info,
 .announce {
+  .main-paragraph {
+    margin-bottom: 16px;
+  }
   .content div:not(:last-child) {
     margin-bottom: 16px;
   }
@@ -222,7 +235,7 @@ mat-label.orc-font-small-print {
         justify-content: space-between;
         width: 100%;
         margin-top: 29px;
-        gap: 12px;
+        gap: 16px;
       }
     }
   }
