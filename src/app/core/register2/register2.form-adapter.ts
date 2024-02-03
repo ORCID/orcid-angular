@@ -140,6 +140,7 @@ export function Register2FormAdapterMixin<T extends Constructor<any>>(base: T) {
             month: startDateGroup.startDateMonth,
             year: startDateGroup.startDateYear,
           },
+          sourceId: { value: value.sourceId },
           city: { value: value.city },
           region: { value: value.region },
           country: { value: value.country },
