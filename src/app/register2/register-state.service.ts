@@ -56,11 +56,9 @@ export class RegisterStateService {
     if (this.primaryEmailMatched) {
       this.rorIdHasBeenMatched = true
       this.matchOrganization$.next(this.primaryEmailMatched)
-      console.log('primaryEmailMatched', this.primaryEmailMatched)
     } else if (this.secondaryEmail) {
       this.rorIdHasBeenMatched = true
       this.matchOrganization$.next(this.secondaryEmail)
-      console.log('secondaryEmail', this.secondaryEmail)
     } else {
       this.rorIdHasBeenMatched = false
       this.matchOrganization$.next('')
