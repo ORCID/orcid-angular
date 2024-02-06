@@ -1,3 +1,9 @@
+## v2.55.0 - 2024-02-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.54.2...v2.55.0)
+
+- [#2145](https://github.com/ORCID/orcid-angular/pull/2145): fix-ids-buttons
+
 ## v2.54.2 - 2024-02-03
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.54.1...v2.54.2)
