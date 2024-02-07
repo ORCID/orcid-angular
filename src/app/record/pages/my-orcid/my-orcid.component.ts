@@ -70,8 +70,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   regionActivities = $localize`:@@shared.activities:Activities`
   readyForIndexing: boolean
   fragment: string
-  // @ todo
-  newRecordHeaderTogglz = true
+  newRecordHeaderTogglz = false
 
   constructor(
     _userInfoService: UserInfoService,
