@@ -1,3 +1,21 @@
+## v2.55.1 - 2024-02-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.55.0...v2.55.1)
+
+- [#2147](https://github.com/ORCID/orcid-angular/pull/2147): fix: Add missing full stop in text and add missing error codes
+- [#2146](https://github.com/ORCID/orcid-angular/pull/2146): feature: Add new public header
+
+### Fix
+
+- Add missing full stop in text and add missing error codes
+- Add missing togglz enable
+- Remove hardcoded togglz value and fix tests
+- Remove vs debugger file
+
+### Feature
+
+- Add new public header
+
 ## v2.55.0 - 2024-02-06
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.54.2...v2.55.0)
