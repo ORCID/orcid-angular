@@ -124,7 +124,7 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
   additionalEmails: UntypedFormGroup = new UntypedFormGroup({
     '0': new UntypedFormControl('', {
       validators: [OrcidValidators.email],
-      asyncValidators: this._register.backendValueValidate('email')
+      asyncValidators: this._register.backendValueValidate('email'),
     }),
   })
 
