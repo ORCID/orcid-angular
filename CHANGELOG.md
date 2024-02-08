@@ -1,3 +1,11 @@
+## v2.55.3 - 2024-02-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.55.2...v2.55.3)
+
+### Fix
+
+- Add inline error message to additional email form (#2149)
+
 ## v2.55.2 - 2024-02-08
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.55.1...v2.55.2)
