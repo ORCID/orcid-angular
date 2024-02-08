@@ -1,3 +1,11 @@
+## v2.55.4 - 2024-02-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.55.3...v2.55.4)
+
+### Fix
+
+- Add missing links and refactor some togglz conditionals (#2150)
+
 ## v2.55.3 - 2024-02-08
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.55.2...v2.55.3)
