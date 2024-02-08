@@ -11,6 +11,10 @@
   .no-public-info {
     color: mat.get-color-from-palette($background, dark-grey);
   }
+
+  .new-header {
+    background-color: transparent;
+  }
 }
 
 @include my-orcid-theme($orcid-app-theme);
