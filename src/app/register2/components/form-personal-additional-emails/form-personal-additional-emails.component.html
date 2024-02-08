@@ -52,6 +52,8 @@
         "
       >
         <app-backend-error
+          [showEmailAlreadyExistUntilNextButtonWasClicked]="true"
+          [nextButtonWasClicked]="nextButtonWasClicked"
           [errorCode]="error"
           [value]="additionalEmailControl.value.value"
         ></app-backend-error>
