@@ -32,6 +32,7 @@ export class FormPersonalAdditionalEmailsComponent implements AfterViewInit {
   labelAddAnAddionalEmail = $localize`:@@register.addAnAdditionalEmail:Add an additional email`
   @ViewChildren('emailInput') inputs: QueryList<ElementRef>
   @Input() additionalEmails: UntypedFormGroup
+  @Input() nextButtonWasClicked: boolean
   additionalEmailsPopoverTrigger
   additionalEmailsCount = 1
 
