@@ -87,7 +87,6 @@ export class Register2Component implements OnInit, AfterViewInit {
     private _userInfo: UserService,
     private _searchService: SearchService,
     private _togglz: TogglzService
-
   ) {
     _platformInfo.get().subscribe((platform) => {
       this.platform = platform
@@ -96,7 +95,7 @@ export class Register2Component implements OnInit, AfterViewInit {
     })
   }
   ngOnInit() {
-    this._togglz.getStateOf('REGISTRATION_2_0').subscribe((value)=> {
+    this._togglz.getStateOf('REGISTRATION_2_1').subscribe((value) => {
       this.registration21 = value
     })
     this._register.getRegisterForm().subscribe()

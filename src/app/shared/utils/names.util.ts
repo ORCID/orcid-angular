@@ -1,8 +1,7 @@
-import { Assertion } from "src/app/types"
-import { UserRecord } from "src/app/types/record.local"
+import { Assertion } from 'src/app/types'
+import { UserRecord } from 'src/app/types/record.local'
 
 export class NamesUtil {
-
   static getGivenNames(userRecord: UserRecord): string {
     return userRecord?.names?.givenNames
       ? userRecord.names.givenNames.value
@@ -21,19 +20,24 @@ export class NamesUtil {
       : ''
   }
 
-  static isNamePublicAndAffiliations(userRecord: UserRecord, affiliations: number): boolean {
+  static isNamePublicAndAffiliations(
+    userRecord: UserRecord,
+    affiliations: number
+  ): boolean {
     if (
-      affiliations === 0 &&
-      !!this.getGivenNames(userRecord) ||
+      (affiliations === 0 && !!this.getGivenNames(userRecord)) ||
       !!this.getFamilyName(userRecord) ||
       !!this.getCreditName(userRecord)
-      ) {
-        return true
+    ) {
+      return true
     }
     return false
   }
 
-  static getAriaLabelName(userRecord: UserRecord,ariaLabelName: string): string {
+  static getAriaLabelName(
+    userRecord: UserRecord,
+    ariaLabelName: string
+  ): string {
     if (userRecord?.names) {
       if (userRecord?.names?.creditName?.value) {
         return userRecord?.names?.creditName?.value
@@ -43,7 +47,7 @@ export class NamesUtil {
         }
         if (userRecord?.names?.familyName?.value) {
           if (ariaLabelName) {
-              return ariaLabelName + ' ' + userRecord?.names?.familyName?.value
+            return ariaLabelName + ' ' + userRecord?.names?.familyName?.value
           } else {
             return userRecord?.names?.familyName?.value
           }

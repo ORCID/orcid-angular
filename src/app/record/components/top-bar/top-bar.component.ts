@@ -97,11 +97,16 @@ export class TopBarComponent implements OnInit, OnDestroy {
           this.givenNames = NamesUtil.getGivenNames(this.userRecord)
           this.familyName = NamesUtil.getFamilyName(this.userRecord)
           this.creditName = NamesUtil.getCreditName(this.userRecord)
-          this.ariaLabelName = NamesUtil.getAriaLabelName(this.userRecord, this.ariaLabelName)
+          this.ariaLabelName = NamesUtil.getAriaLabelName(
+            this.userRecord,
+            this.ariaLabelName
+          )
         }
 
         if (!isEmpty(this.userRecord.otherNames?.otherNames)) {
-          this.otherNames = NamesUtil.getOtherNamesUnique(userRecord.otherNames?.otherNames)
+          this.otherNames = NamesUtil.getOtherNamesUnique(
+            userRecord.otherNames?.otherNames
+          )
         }
       })
   }

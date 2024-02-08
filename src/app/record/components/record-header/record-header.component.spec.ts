@@ -1,20 +1,20 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { RecordHeaderComponent } from './record-header.component';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { WINDOW_PROVIDERS } from 'src/app/cdk/window';
-import { PlatformInfoService } from 'src/app/cdk/platform-info';
-import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service';
-import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service';
+import { RecordHeaderComponent } from './record-header.component'
+import { HttpClientTestingModule } from '@angular/common/http/testing'
+import { WINDOW_PROVIDERS } from 'src/app/cdk/window'
+import { PlatformInfoService } from 'src/app/cdk/platform-info'
+import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
+import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
 import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
-import { Overlay } from '@angular/cdk/overlay';
-import { RouterTestingModule } from '@angular/router/testing';
-import { RecordService } from 'src/app/core/record/record.service';
+import { Overlay } from '@angular/cdk/overlay'
+import { RouterTestingModule } from '@angular/router/testing'
+import { RecordService } from 'src/app/core/record/record.service'
 
 describe('RecordHeaderComponent', () => {
-  let component: RecordHeaderComponent;
-  let fixture: ComponentFixture<RecordHeaderComponent>;
+  let component: RecordHeaderComponent
+  let fixture: ComponentFixture<RecordHeaderComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -22,7 +22,7 @@ describe('RecordHeaderComponent', () => {
       declarations: [RecordHeaderComponent],
       providers: [
         WINDOW_PROVIDERS,
-        RecordService ,
+        RecordService,
         PlatformInfoService,
         ErrorHandlerService,
         SnackbarService,
@@ -34,12 +34,12 @@ describe('RecordHeaderComponent', () => {
   })
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RecordHeaderComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(RecordHeaderComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

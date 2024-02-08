@@ -37,7 +37,10 @@ import { BaseForm } from '../BaseForm'
 import { ErrorStateMatcher } from '@angular/material/core'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { Router } from '@angular/router'
-import { ApplicationRoutes, MAX_LENGTH_LESS_THAN_ONE_HUNDRED } from 'src/app/constants'
+import {
+  ApplicationRoutes,
+  MAX_LENGTH_LESS_THAN_ONE_HUNDRED,
+} from 'src/app/constants'
 import { LiveAnnouncer } from '@angular/cdk/a11y'
 import { environment } from 'src/environments/environment'
 import { RegisterBackendErrors } from 'src/app/types/register.local'

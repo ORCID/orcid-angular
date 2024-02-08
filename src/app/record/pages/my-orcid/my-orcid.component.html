@@ -11,10 +11,21 @@
       [affiliations]="affiliations"
     ></app-record-header>
     <app-record-info
-      *ngIf="newRecordHeaderTogglz ? recordWithIssues || !loadingUserRecord && affiliations === 0 : false"
+      *ngIf="
+        newRecordHeaderTogglz
+          ? recordWithIssues || (!loadingUserRecord && affiliations === 0)
+          : false
+      "
       [affiliations]="affiliations"
     ></app-record-info>
-    <div class="container no-padding" *ngIf="!loadingUserRecord && newRecordHeaderTogglz ? !recordWithIssues && affiliations > 0 : true">
+    <div
+      class="container no-padding"
+      *ngIf="
+        !loadingUserRecord && newRecordHeaderTogglz
+          ? !recordWithIssues && affiliations > 0
+          : true
+      "
+    >
       <div class="row">
         <app-side-bar
           class="col l3 m8 s4"
@@ -124,7 +135,9 @@
             <ng-container *ngIf="!(recordWithIssues || loadingUserRecord)">
               <div
                 class="no-public-info"
-                *ngIf="publicOrcid && affiliations === 0 && !newRecordHeaderTogglz"
+                *ngIf="
+                  publicOrcid && affiliations === 0 && !newRecordHeaderTogglz
+                "
               >
                 <mat-icon>error</mat-icon>
                 <ng-container i18n="@@record.noPublicInfo"
@@ -133,7 +146,11 @@
               </div>
               <div
                 class="orc-font-body-small"
-                *ngIf="publicOrcid && userRecord?.lastModifiedTime && !newRecordHeaderTogglz"
+                *ngIf="
+                  publicOrcid &&
+                  userRecord?.lastModifiedTime &&
+                  !newRecordHeaderTogglz
+                "
                 [ngClass]="{ 'last-modified': affiliations === 0 }"
               >
                 <i>

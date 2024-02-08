@@ -8,7 +8,8 @@
   gap: 16px;
   word-break: break-all;
 
-  h1,p {
+  h1,
+  p {
     margin: 0;
   }
 
@@ -46,7 +47,7 @@
     align-items: center;
 
     .col {
-      padding: 0 !important
+      padding: 0 !important;
     }
 
     .orcid-logo {
