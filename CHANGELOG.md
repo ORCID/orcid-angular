@@ -1,3 +1,9 @@
+## v2.55.2 - 2024-02-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.55.1...v2.55.2)
+
+- [#2148](https://github.com/ORCID/orcid-angular/pull/2148): fix/feb-7-batch-fixes
+
 ## v2.55.1 - 2024-02-08
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.55.0...v2.55.1)
