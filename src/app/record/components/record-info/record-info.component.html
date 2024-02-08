@@ -1,35 +1,56 @@
 <section *ngIf="userInfo?.RECORD_WITH_ISSUES || affiliations === 0">
   <div class="record-info orc-font-body-small">
-    <ng-container *ngIf="userInfo.IS_LOCKED === 'true' && !(userInfo.IS_DEACTIVATED === 'true' && !userInfo.PRIMARY_RECORD)">
+    <ng-container
+      *ngIf="
+        userInfo.IS_LOCKED === 'true' &&
+        !(userInfo.IS_DEACTIVATED === 'true' && !userInfo.PRIMARY_RECORD)
+      "
+    >
       <p>
         <ng-container i18n="@@topBar.weLockRecords">
           We lock records when they violate conditions of our
         </ng-container>
-        <a class="underline" href="#" rel="noopener noreferrer" target="_blank" i18n="@@topBar.termsOfService">terms of
-          service.</a>
+        <a
+          class="underline"
+          href="#"
+          rel="noopener noreferrer"
+          target="_blank"
+          i18n="@@topBar.termsOfService"
+          >terms of service.</a
+        >
       </p>
       <p>
         <ng-container i18n="@@topBar.recordLockedInError">
           If you feel this record has been locked in error please
         </ng-container>
-        <a class="underline" href="#" rel="noopener noreferrer" target="_blank" i18n="@@topBar.contactOrcid">contact
-          ORCID
-          support for further assistance.
+        <a
+          class="underline"
+          href="#"
+          rel="noopener noreferrer"
+          target="_blank"
+          i18n="@@topBar.contactOrcid"
+          >contact ORCID support for further assistance.
         </a>
       </p>
     </ng-container>
 
-    <ng-container *ngIf="userInfo.IS_DEACTIVATED === 'true' && !userInfo.PRIMARY_RECORD">
+    <ng-container
+      *ngIf="userInfo.IS_DEACTIVATED === 'true' && !userInfo.PRIMARY_RECORD"
+    >
       <p>
         <ng-container i18n="@@topBar.whenOrcidDeactivated">
-          When an ORCID record is deactivated all information in the record is deleted. Deactivated records are not
-          shown
-          in registry searches.
+          When an ORCID record is deactivated all information in the record is
+          deleted. Deactivated records are not shown in registry searches.
         </ng-container>
       </p>
       <p>
-        <a class="underline" href="#" rel="noopener noreferrer" target="_blank" i18n="@@topBar.findOutReactivating">Find
-          out more about reactivating an ORCID account
+        <a
+          class="underline"
+          href="#"
+          rel="noopener noreferrer"
+          target="_blank"
+          i18n="@@topBar.findOutReactivating"
+          >Find out more about reactivating an ORCID account
         </a>
       </p>
     </ng-container>
@@ -37,30 +58,40 @@
     <ng-container *ngIf="userInfo.PRIMARY_RECORD">
       <p>
         <ng-container i18n="@@topBar.deprecatedRecordIsDuplicate">
-          A deprecated record is a duplicate or unwanted ORCID record that has been merged with another owned by the
-          same
-          person.
+          A deprecated record is a duplicate or unwanted ORCID record that has
+          been merged with another owned by the same person.
         </ng-container>
       </p>
       <p>
-        <a class="underline" href="#" rel="noopener noreferrer" target="_blank"
-          i18n="@@topBar.findOutMoreAboutRemoving">Find out more about removing additional or duplicate ORCID records
+        <a
+          class="underline"
+          href="#"
+          rel="noopener noreferrer"
+          target="_blank"
+          i18n="@@topBar.findOutMoreAboutRemoving"
+          >Find out more about removing additional or duplicate ORCID records
         </a>
       </p>
     </ng-container>
-    <ng-container *ngIf="affiliations === 0 && !userInfo?.RECORD_WITH_ISSUES" >
+    <ng-container *ngIf="affiliations === 0 && !userInfo?.RECORD_WITH_ISSUES">
       <p *ngIf="isNamePublic">
-        <b i18n="@@record.noPublicInfo"
-          >No public information available.</b>
+        <b i18n="@@record.noPublicInfo">No public information available.</b>
       </p>
       <p>
         <ng-container i18n="@@topBar.recordOwnerNotHaveAdded">
-          The record owner may not have added information to their record or the visibility for items on their record may be to Trusted parties or Only me.
+          The record owner may not have added information to their record or the
+          visibility for items on their record may be to Trusted parties or Only
+          me.
         </ng-container>
       </p>
       <p>
-        <a class="underline" href="#" rel="noopener noreferrer" target="_blank"
-          i18n="@@topBar.findOutVisibility">Find out more about visibility settings in ORCID
+        <a
+          class="underline"
+          href="#"
+          rel="noopener noreferrer"
+          target="_blank"
+          i18n="@@topBar.findOutVisibility"
+          >Find out more about visibility settings in ORCID
         </a>
       </p>
     </ng-container>

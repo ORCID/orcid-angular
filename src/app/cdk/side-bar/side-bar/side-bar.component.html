@@ -6,8 +6,9 @@
 >
   <h2
     class="orc-font-body-large"
-    [ngClass]="{'sr-only': isPublicRecord ? !newRecordHeaderTogglz : true }"
-    i18n="@@shared.personalInformation">
+    [ngClass]="{ 'sr-only': isPublicRecord ? !newRecordHeaderTogglz : true }"
+    i18n="@@shared.personalInformation"
+  >
     Personal information
   </h2>
   <ng-container *ngIf="!newRecordHeaderTogglz">

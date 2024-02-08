@@ -151,7 +151,9 @@
       [id]="'names'"
       role="region"
       [attr.aria-label]="regionNames"
-      *ngIf="!newRecordHeaderTogglz && (userRecord?.names || userRecord?.otherNames)"
+      *ngIf="
+        !newRecordHeaderTogglz && (userRecord?.names || userRecord?.otherNames)
+      "
     >
       <div class="row names-container">
         <div class="published-name" *ngIf="creditName">
@@ -280,7 +282,7 @@
     >
       <div
         class="biography-container"
-        [ngClass]="{ 'no-margin-top': newRecordHeaderTogglz}"
+        [ngClass]="{ 'no-margin-top': newRecordHeaderTogglz }"
       >
         <h2 class="biography-header orc-font-body" i18n="@@topBar.biography">
           Biography

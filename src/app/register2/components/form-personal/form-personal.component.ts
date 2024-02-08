@@ -325,8 +325,8 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
       return !(
         backendError &&
         (backendError[0] === 'orcid.frontend.verify.duplicate_email' ||
-        backendError[0] === 'orcid.frontend.verify.unclaimed_email' ||
-        backendError[0] === 'orcid.frontend.verify.deactivated_email') &&
+          backendError[0] === 'orcid.frontend.verify.unclaimed_email' ||
+          backendError[0] === 'orcid.frontend.verify.deactivated_email') &&
         !this.nextButtonWasClicked
       )
     }
