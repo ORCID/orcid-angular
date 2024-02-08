@@ -32,6 +32,7 @@ import { ThirdPartyAuthData } from 'src/app/types/sign-in-data.endpoint'
 import { GoogleTagManagerService } from '../../../core/google-tag-manager/google-tag-manager.service'
 import { SearchService } from '../../../core/search/search.service'
 import { ReactivationLocal } from '../../../types/reactivation.local'
+import { TogglzService } from 'src/app/core/togglz/togglz.service'
 
 @Component({
   selector: 'app-register-2',
@@ -70,6 +71,7 @@ export class Register2Component implements OnInit, AfterViewInit {
   stepControlStepC2: UntypedFormGroup
   formGroupStepC2Optional = false
   @ViewChild('stepper') private myStepper: MatStepper
+  registration21: boolean
 
   constructor(
     private _cdref: ChangeDetectorRef,
@@ -83,7 +85,8 @@ export class Register2Component implements OnInit, AfterViewInit {
     private _router: Router,
     private _errorHandler: ErrorHandlerService,
     private _userInfo: UserService,
-    private _searchService: SearchService
+    private _searchService: SearchService,
+    private _togglz: TogglzService
   ) {
     _platformInfo.get().subscribe((platform) => {
       this.platform = platform
@@ -92,6 +95,9 @@ export class Register2Component implements OnInit, AfterViewInit {
     })
   }
   ngOnInit() {
+    this._togglz.getStateOf('REGISTRATION_2_1').subscribe((value) => {
+      this.registration21 = value
+    })
     this._register.getRegisterForm().subscribe()
 
     this.FormGroupStepA = this._formBuilder.group({

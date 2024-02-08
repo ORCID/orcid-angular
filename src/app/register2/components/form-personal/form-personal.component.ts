@@ -37,7 +37,10 @@ import { BaseForm } from '../BaseForm'
 import { ErrorStateMatcher } from '@angular/material/core'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { Router } from '@angular/router'
-import { ApplicationRoutes } from 'src/app/constants'
+import {
+  ApplicationRoutes,
+  MAX_LENGTH_LESS_THAN_ONE_HUNDRED,
+} from 'src/app/constants'
 import { LiveAnnouncer } from '@angular/cdk/a11y'
 import { environment } from 'src/environments/environment'
 import { RegisterBackendErrors } from 'src/app/types/register.local'
@@ -85,7 +88,6 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class FormPersonalComponent extends BaseForm implements OnInit {
   matcher = new MyErrorStateMatcher()
-  maxNameLenght = 100
   @Input() nextButtonWasClicked: boolean
   @Input() reactivation: ReactivationLocal
   @ViewChild(FormGroupDirective) formGroupDir: FormGroupDirective
@@ -191,14 +193,14 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
         validators: [
           Validators.required,
           OrcidValidators.illegalName,
-          Validators.maxLength(this.maxNameLenght),
+          Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_HUNDRED),
         ],
         asyncValidators: this._register.backendValueValidate('givenNames'),
       }),
       familyNames: new UntypedFormControl('', {
         validators: [
           OrcidValidators.illegalName,
-          Validators.maxLength(this.maxNameLenght),
+          Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_HUNDRED),
         ],
       }),
       emails: this.emails,
