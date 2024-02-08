@@ -11,7 +11,7 @@
   >
     Personal information
   </h2>
-  <ng-container *ngIf="!newRecordHeaderTogglz">
+  <ng-container *ngIf="isPublicRecord ? !newRecordHeaderTogglz : true ">
     <app-side-bar-id
       *ngIf="!hideOrcidId"
       [ngClass]="{

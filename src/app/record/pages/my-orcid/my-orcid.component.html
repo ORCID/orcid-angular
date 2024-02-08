@@ -1,8 +1,8 @@
 <main id="main">
   <ng-container *ngIf="!userNotFound">
     <app-top-bar-my-public-record-preview
-      *ngIf="!newRecordHeaderTogglz"
       [isPublicRecord]="publicOrcid"
+      [newRecordHeaderTogglz]="newRecordHeaderTogglz"
     ></app-top-bar-my-public-record-preview>
     <app-record-header
       *ngIf="!!publicOrcid && newRecordHeaderTogglz"
