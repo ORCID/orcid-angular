@@ -13,6 +13,7 @@ import { RecordEmailsService } from '../../../core/record-emails/record-emails.s
 import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
 import { VerificationEmailModalService } from '../../../core/verification-email-modal/verification-email-modal.service'
 import { isEmpty } from 'lodash'
+import { NamesUtil } from 'src/app/shared/utils/names.util'
 
 @Component({
   selector: 'app-top-bar',
@@ -38,6 +39,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
   givenNames = ''
   familyName = ''
   creditName = ''
+  otherNames = ''
   expandedContent = false
   recordWithIssues: boolean
   justRegistered: boolean
@@ -45,6 +47,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
   checkEmailValidated: boolean
   inDelegationMode: boolean
   @Input() loadingUserRecord = true
+  @Input() newRecordHeaderTogglz: boolean
 
   regionNames = $localize`:@@topBar.names:Names`
   regionBiography = $localize`:@@topBar.biography:Biography`
@@ -91,60 +94,16 @@ export class TopBarComponent implements OnInit, OnDestroy {
         this.userInfo = userRecord?.userInfo
 
         if (!isEmpty(this.userRecord?.names)) {
-          this.setNames()
-          this.getAriaLabelName()
+          this.givenNames = NamesUtil.getGivenNames(this.userRecord)
+          this.familyName = NamesUtil.getFamilyName(this.userRecord)
+          this.creditName = NamesUtil.getCreditName(this.userRecord)
+          this.ariaLabelName = NamesUtil.getAriaLabelName(this.userRecord, this.ariaLabelName)
+        }
+
+        if (!isEmpty(this.userRecord.otherNames?.otherNames)) {
+          this.otherNames = NamesUtil.getOtherNamesUnique(userRecord.otherNames?.otherNames)
         }
       })
-  }
-
-  private setNames() {
-    this.givenNames = this.userRecord?.names?.givenNames
-      ? this.userRecord.names.givenNames.value
-      : ''
-    this.familyName = this.userRecord?.names?.familyName
-      ? this.userRecord.names.familyName.value
-      : ''
-    this.creditName = this.userRecord?.names?.creditName
-      ? this.userRecord.names.creditName.value
-      : ''
-  }
-
-  private getAriaLabelName() {
-    if (this.userRecord?.names) {
-      if (this.userRecord?.names?.creditName?.value) {
-        this.ariaLabelName = this.userRecord?.names?.creditName?.value
-      } else {
-        if (this.userRecord?.names?.givenNames?.value) {
-          this.ariaLabelName = this.userRecord?.names?.givenNames?.value
-        }
-        if (this.userRecord?.names?.familyName?.value) {
-          if (this.ariaLabelName) {
-            this.ariaLabelName =
-              this.ariaLabelName +
-              ' ' +
-              this.userRecord?.names?.familyName?.value
-          } else {
-            this.ariaLabelName = this.userRecord?.names?.familyName?.value
-          }
-        }
-      }
-    }
-    return
-  }
-
-  getOtherNamesUnique(otherNames: Assertion[]): string {
-    return otherNames
-      .map((otherName) => {
-        return otherName.content
-      })
-      .filter(function (item, pos, array) {
-        return (
-          array
-            .map((x) => x.toLowerCase().trim())
-            .indexOf(item.toLowerCase().trim()) === pos
-        )
-      })
-      .join(', ')
   }
 
   resendVerificationEmailModal(email: string) {

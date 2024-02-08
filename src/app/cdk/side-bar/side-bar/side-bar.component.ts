@@ -40,6 +40,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
   @Input() isPublicRecord: string
   @Input() orcidId = false
   @Input() hideOrcidId = false
+  @Input() newRecordHeaderTogglz: boolean
 
   modalCountryComponent = ModalCountryComponent
   modalEmailComponent = ModalEmailComponent
@@ -65,6 +66,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
   countriesOpenState = false
   externalIdentifierOpenState = false
   emailsOpenState = false
+  recordWithIssues: boolean
 
   regionPersonalInformation = $localize`:@@shared.personalInformation:Personal information`
   fragment: string
@@ -105,7 +107,8 @@ export class SideBarComponent implements OnInit, OnDestroy {
       })
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
-        if (!this.orcidId && userRecord?.userInfo?.RECORD_WITH_ISSUES) {
+        this.recordWithIssues = userRecord?.userInfo?.RECORD_WITH_ISSUES
+        if (!this.orcidId && this.recordWithIssues) {
           this.orcidId = true
         }
         this.userRecord = userRecord

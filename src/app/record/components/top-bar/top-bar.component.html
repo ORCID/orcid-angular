@@ -1,9 +1,10 @@
 <mat-progress-bar
-  *ngIf="loadingUserRecord"
+  *ngIf="!newRecordHeaderTogglz && loadingUserRecord"
   mode="indeterminate"
   color="accent"
 ></mat-progress-bar>
 <app-top-bar-record-issues
+  *ngIf="!newRecordHeaderTogglz"
   [isPublicRecord]="isPublicRecord"
 ></app-top-bar-record-issues>
 
@@ -12,7 +13,7 @@
   [userRecord]="userRecord"
   [userStatus]="userStatus"
   [isPublicRecord]="isPublicRecord"
-  *ngIf="!recordWithIssues"
+  *ngIf="!newRecordHeaderTogglz && !recordWithIssues"
   [showPrintButton]="!platform.columns12"
 ></app-top-bar-actions>
 
@@ -150,7 +151,7 @@
       [id]="'names'"
       role="region"
       [attr.aria-label]="regionNames"
-      *ngIf="userRecord?.names || userRecord?.otherNames"
+      *ngIf="!newRecordHeaderTogglz && (userRecord?.names || userRecord?.otherNames)"
     >
       <div class="row names-container">
         <div class="published-name" *ngIf="creditName">
@@ -216,7 +217,7 @@
                     Also known as
                   </div>
                   <p class="orc-font-body-small" *ngIf="!expandedContent">
-                    {{ getOtherNamesUnique(userRecord.otherNames?.otherNames) }}
+                    {{ otherNames }}
                   </p>
                   <ng-container
                     *ngFor="
@@ -267,7 +268,7 @@
       [userRecord]="userRecord"
       [userStatus]="userStatus"
       [isPublicRecord]="isPublicRecord"
-      *ngIf="!recordWithIssues && !platform.columns12"
+      *ngIf="!newRecordHeaderTogglz && !recordWithIssues && !platform.columns12"
       [showIsThisYouButton]="true"
     ></app-top-bar-actions>
 
@@ -277,7 +278,10 @@
       [attr.aria-label]="regionBiography"
       *ngIf="userRecord?.biography?.biography"
     >
-      <div class="biography-container">
+      <div
+        class="biography-container"
+        [ngClass]="{ 'no-margin-top': newRecordHeaderTogglz}"
+      >
         <h2 class="biography-header orc-font-body" i18n="@@topBar.biography">
           Biography
         </h2>
