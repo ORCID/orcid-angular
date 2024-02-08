@@ -13,7 +13,11 @@
   [userRecord]="userRecord"
   [userStatus]="userStatus"
   [isPublicRecord]="isPublicRecord"
-  *ngIf="newRecordHeaderTogglz ? !isPublicRecord && !recordWithIssues : !recordWithIssues"
+  *ngIf="
+    newRecordHeaderTogglz
+      ? !isPublicRecord && !recordWithIssues
+      : !recordWithIssues
+  "
   [showPrintButton]="!platform.columns12"
 ></app-top-bar-actions>
 
@@ -270,7 +274,11 @@
       [userRecord]="userRecord"
       [userStatus]="userStatus"
       [isPublicRecord]="isPublicRecord"
-      *ngIf="newRecordHeaderTogglz ? !isPublicRecord && !recordWithIssues && !platform.columns12 : !recordWithIssues && !platform.columns12"
+      *ngIf="
+        newRecordHeaderTogglz
+          ? !isPublicRecord && !recordWithIssues && !platform.columns12
+          : !recordWithIssues && !platform.columns12
+      "
       [showIsThisYouButton]="true"
     ></app-top-bar-actions>
 
