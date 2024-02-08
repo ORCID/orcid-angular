@@ -18,6 +18,7 @@
               [(formGroup)]="FormGroupStepA"
               [reactivation]="reactivation"
               #stepComponentA
+              [togglzregistration21]="registration21"
             ></app-step-a>
           </mat-step>
           <mat-step [stepControl]="FormGroupStepB">
@@ -29,9 +30,11 @@
               [(formGroup)]="FormGroupStepB"
               [personalData]="personalData"
               [reactivation]="reactivation"
+              [togglzregistration21]="registration21"
             ></app-step-b>
           </mat-step>
           <mat-step
+            *ngIf="registration21"
             [stepControl]="FormGroupStepC2"
             [optional]="formGroupStepC2Optional"
           >
@@ -52,6 +55,7 @@
               [(formGroup)]="FormGroupStepC"
               [loading]="loading"
               [reactivation]="reactivation"
+              [togglzregistration21]="registration21"
             ></app-step-c>
           </mat-step>
           <mat-step [stepControl]="FormGroupStepD" #lastStep>
@@ -59,6 +63,7 @@
               >Visibility and terms</ng-template
             >
             <app-step-d
+              [togglzregistration21]="registration21"
               #stepComponentD
               [(formGroup)]="FormGroupStepD"
               (submit)="register()"

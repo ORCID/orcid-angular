@@ -15,6 +15,7 @@ import { BaseStepDirective } from '../BaseStep'
 export class StepCComponent extends BaseStepDirective {
   @Input() loading
   @Input() reactivation: ReactivationLocal
+  @Input() togglzregistration21: boolean
 
   constructor() {
     super()
