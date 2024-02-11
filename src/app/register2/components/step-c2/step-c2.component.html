@@ -27,26 +27,30 @@
       </ng-container>
     </mat-card-title>
     <mat-card-subtitle role="heading" aria-level="2">
-      <h2 class="orc-font-body-small" i18n="@@register.step2.3">
-        Step 3 of 4 - Visibility
+      <h2 class="orc-font-body-small" i18n="@@register.step3.3">
+        Step 3 of 5 - Current employment
       </h2>
     </mat-card-subtitle>
   </mat-card-header>
 
   <mat-card-content>
+    <p *ngIf="!reactivation?.isReactivation">
+      Adding a current employment affiliation helps distinguish you from other
+      researchers with a similar name.
+    </p>
+
     <form [formGroup]="formGroup" #form>
-      <app-form-visibility
-        formControlName="activitiesVisibilityDefault"
-      ></app-form-visibility>
-      <!-- <app-form-terms formControlName="termsOfUse"></app-form-terms> -->
-      <!-- <app-form-anti-robots formControlName="captcha"></app-form-anti-robots> -->
-      <div class="step-actions">
+      <app-form-current-employment
+        formControlName="affiliations"
+        [nextButtonWasClicked]="nextButtonWasClicked"
+      ></app-form-current-employment>
+      <div class="step-actions margin-top-12">
         <button
-          id="step-c-register-button"
+          id="step-c2-register-button"
           mat-raised-button
           color="primary"
           [disabled]="loading"
-          matStepperNext
+          (click)="requiredNextStep()"
         >
           <ng-container
             *ngIf="!reactivation?.isReactivation"
@@ -64,9 +68,23 @@
         <button
           mat-button
           color="primary"
+          type="button"
+          id="step-c2-back-button"
+          (click)="optionalNextStep()"
+        >
+          <a
+            i18n="@@shared.skipThisStepWithoutAddingAnAffiliation"
+            class="skip-step"
+          >
+            Skip this step without adding an affiliation</a
+          >
+        </button>
+        <button
+          mat-button
+          color="primary"
           matStepperPrevious
           type="button"
-          id="step-c-back-button"
+          id="step-c2-back-button"
         >
           <a i18n="@@shared.previousStep"> Previous Step</a>
         </button>

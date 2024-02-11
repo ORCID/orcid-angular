@@ -4,7 +4,7 @@ import { ReactivationLocal } from '../../../types/reactivation.local'
 import { BaseStepDirective } from '../BaseStep'
 
 @Component({
-  selector: 'app-step-ct',
+  selector: 'app-step-c',
   templateUrl: './step-c.component.html',
   styleUrls: [
     './step-c.component.scss',
@@ -12,9 +12,10 @@ import { BaseStepDirective } from '../BaseStep'
     '../register2.scss-theme.scss',
   ],
 })
-export class StepCTComponent extends BaseStepDirective {
+export class StepCComponent extends BaseStepDirective {
   @Input() loading
   @Input() reactivation: ReactivationLocal
+  @Input() togglzregistration21: boolean
 
   constructor() {
     super()

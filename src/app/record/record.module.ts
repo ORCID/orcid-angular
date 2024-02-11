@@ -78,6 +78,8 @@ import { WorkContributorRolesComponent } from './components/work-contributor-rol
 import { WorkContributorsComponent } from './components/work-contributors/work-contributors.component'
 import { VisibilitySelectorModule } from '../cdk/visibility-selector/visibility-selector.module'
 import { TopBarVerificationEmailModule } from '../cdk/top-bar-verification-email/top-bar-verification-email.module'
+import { RecordHeaderComponent } from './components/record-header/record-header.component'
+import { RecordInfoComponent } from './components/record-info/record-info.component'
 
 @NgModule({
   declarations: [
@@ -129,6 +131,8 @@ import { TopBarVerificationEmailModule } from '../cdk/top-bar-verification-email
     ModalCombineWorksWithSelectorComponent,
     WorkContributorRolesComponent,
     WorkContributorsComponent,
+    RecordHeaderComponent,
+    RecordInfoComponent,
   ],
   imports: [
     CommonModule,

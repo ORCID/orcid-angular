@@ -1,3 +1,146 @@
+## v2.55.4 - 2024-02-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.55.3...v2.55.4)
+
+### Fix
+
+- Add missing links and refactor some togglz conditionals (#2150)
+
+## v2.55.3 - 2024-02-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.55.2...v2.55.3)
+
+### Fix
+
+- Add inline error message to additional email form (#2149)
+
+## v2.55.2 - 2024-02-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.55.1...v2.55.2)
+
+- [#2148](https://github.com/ORCID/orcid-angular/pull/2148): fix/feb-7-batch-fixes
+
+## v2.55.1 - 2024-02-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.55.0...v2.55.1)
+
+- [#2147](https://github.com/ORCID/orcid-angular/pull/2147): fix: Add missing full stop in text and add missing error codes
+- [#2146](https://github.com/ORCID/orcid-angular/pull/2146): feature: Add new public header
+
+### Fix
+
+- Add missing full stop in text and add missing error codes
+- Add missing togglz enable
+- Remove hardcoded togglz value and fix tests
+- Remove vs debugger file
+
+### Feature
+
+- Add new public header
+
+## v2.55.0 - 2024-02-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.54.2...v2.55.0)
+
+- [#2145](https://github.com/ORCID/orcid-angular/pull/2145): fix-ids-buttons
+
+## v2.54.2 - 2024-02-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.54.1...v2.54.2)
+
+- [#2144](https://github.com/ORCID/orcid-angular/pull/2144): Fix/batch of fixes 2 feb
+
+## v2.54.1 - 2024-01-31
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.54.0...v2.54.1)
+
+- [#2140](https://github.com/ORCID/orcid-angular/pull/2140): Transifex
+
+## v2.54.0 - 2024-01-25
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.53.10...v2.54.0)
+
+- [#2143](https://github.com/ORCID/orcid-angular/pull/2143): feature: Update duplicate, unclaimed and deactivated error message
+
+### Feature
+
+- Update duplicate, unclaimed and deactivated error message
+
+## v2.53.10 - 2024-01-25
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.53.9...v2.53.10)
+
+## v2.53.9 - 2024-01-24
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.53.8...v2.53.9)
+
+- [#2142](https://github.com/ORCID/orcid-angular/pull/2142): 9028 qa registration affiliations ids must be unique
+- [#2141](https://github.com/ORCID/orcid-angular/pull/2141): fix: Remove global navigation from registry
+
+### Fix
+
+- Remove global navigation from registry
+
+## v2.53.8 - 2024-01-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.53.7...v2.53.8)
+
+- [#2139](https://github.com/ORCID/orcid-angular/pull/2139): Fix/batch fixes jan 18 2024
+
+## v2.53.7 - 2024-01-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.53.6...v2.53.7)
+
+- [#2138](https://github.com/ORCID/orcid-angular/pull/2138): fix: Remove unnecessary href attributes
+
+### Fix
+
+- Remove unnecessary href attributes
+
+## v2.53.6 - 2024-01-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.53.5...v2.53.6)
+
+- [#2137](https://github.com/ORCID/orcid-angular/pull/2137): Lmendoza/batch fixes 17 jan 2024
+
+## v2.53.5 - 2024-01-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.53.4...v2.53.5)
+
+- [#2135](https://github.com/ORCID/orcid-angular/pull/2135): 8934 registration add an affiliation with typeahead
+
+## v2.53.4 - 2024-01-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.53.3...v2.53.4)
+
+## v2.53.3 - 2024-01-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.53.2...v2.53.3)
+
+### Fix
+
+- Remove unnecessary href attributes since we are redirecting with JS (#2134)
+
+## v2.53.2 - 2024-01-09
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.53.1...v2.53.2)
+
+### Feature
+
+- Hide cookie consent if web page its inside an iframe (#2131)
+
+## v2.53.1 - 2024-01-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.53.0...v2.53.1)
+
+## v2.53.0 - 2024-01-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.52.5...v2.53.0)
+
+## v2.52.5 - 2024-01-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.52.4...v2.52.5)
+
 ## v2.52.4 - 2023-12-29
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.52.3...v2.52.4)

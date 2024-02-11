@@ -3,6 +3,7 @@ import {
   Component,
   ElementRef,
   forwardRef,
+  Inject,
   Input,
   OnInit,
   ViewChild,
@@ -36,9 +37,19 @@ import { BaseForm } from '../BaseForm'
 import { ErrorStateMatcher } from '@angular/material/core'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { Router } from '@angular/router'
-import { ApplicationRoutes } from 'src/app/constants'
+import {
+  ApplicationRoutes,
+  MAX_LENGTH_LESS_THAN_ONE_HUNDRED,
+} from 'src/app/constants'
 import { LiveAnnouncer } from '@angular/cdk/a11y'
 import { environment } from 'src/environments/environment'
+import { RegisterBackendErrors } from 'src/app/types/register.local'
+import { WINDOW } from 'src/app/cdk/window'
+import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
+import { SignInService } from 'src/app/core/sign-in/sign-in.service'
+import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
+import { ERROR_REPORT } from 'src/app/errors'
+import { RegisterStateService } from '../../register-state.service'
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
     control: FormControl | null,
@@ -92,12 +103,19 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
   personalEmail: boolean
   undefinedEmail: boolean
   emailsAreValidAlreadyChecked: boolean
+  registerBackendErrors: RegisterBackendErrors
+
   constructor(
     private _register: Register2Service,
     private _reactivationService: ReactivationService,
     private _platform: PlatformInfoService,
     private _router: Router,
-    private _liveAnnouncer: LiveAnnouncer
+    private _liveAnnouncer: LiveAnnouncer,
+    private _snackbar: SnackbarService,
+    private _signIn: SignInService,
+    private _errorHandler: ErrorHandlerService,
+    private _registerStateService: RegisterStateService,
+    @Inject(WINDOW) private window: Window
   ) {
     super()
   }
@@ -106,6 +124,7 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
   additionalEmails: UntypedFormGroup = new UntypedFormGroup({
     '0': new UntypedFormControl('', {
       validators: [OrcidValidators.email],
+      asyncValidators: this._register.backendValueValidate('email'),
     }),
   })
 
@@ -132,6 +151,19 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
       }
     )
 
+    this.additionalEmails.controls[0].valueChanges
+      .pipe(
+        debounceTime(1000),
+        filter(() => !this.additionalEmails.controls[0].errors),
+        switchMap((value) => {
+          const emailDomain = value.split('@')[1]
+          return this._register.getEmailCategory(emailDomain)
+        })
+      )
+      .subscribe((value) => {
+        this._registerStateService.setRorAffiliationFound(value.rorId, true)
+      })
+
     this.emails.controls['email'].valueChanges
       .pipe(
         debounceTime(1000),
@@ -145,6 +177,7 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
         this.professionalEmail = value.category === 'PROFESSIONAL'
         this.personalEmail = value.category === 'PERSONAL'
         this.undefinedEmail = value.category === 'UNDEFINED'
+        this._registerStateService.setRorAffiliationFound(value.rorId)
       })
 
     if (!this.reactivation?.isReactivation) {
@@ -158,11 +191,18 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
 
     this.form = new UntypedFormGroup({
       givenNames: new UntypedFormControl('', {
-        validators: [Validators.required, OrcidValidators.illegalName],
+        validators: [
+          Validators.required,
+          OrcidValidators.illegalName,
+          Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_HUNDRED),
+        ],
         asyncValidators: this._register.backendValueValidate('givenNames'),
       }),
       familyNames: new UntypedFormControl('', {
-        validators: [OrcidValidators.illegalName],
+        validators: [
+          OrcidValidators.illegalName,
+          Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_HUNDRED),
+        ],
       }),
       emails: this.emails,
     })
@@ -287,7 +327,9 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
       const backendError = this.emails.controls.email.errors?.backendError
       return !(
         backendError &&
-        backendError[0] === 'orcid.frontend.verify.duplicate_email' &&
+        (backendError[0] === 'orcid.frontend.verify.duplicate_email' ||
+          backendError[0] === 'orcid.frontend.verify.unclaimed_email' ||
+          backendError[0] === 'orcid.frontend.verify.deactivated_email') &&
         !this.nextButtonWasClicked
       )
     }
@@ -312,5 +354,34 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
           queryParams: { ...platform.queryParameters, email, show_login: true },
         })
       })
+  }
+
+  navigateToClaim(email) {
+    email = encodeURIComponent(email)
+    this.window.location.href = `/resend-claim?email=${email}`
+  }
+
+  reactivateEmail(email) {
+    const $deactivate = this._signIn.reactivation(email)
+    $deactivate.subscribe((data) => {
+      if (data.error) {
+        this._errorHandler
+          .handleError(
+            new Error(data.error),
+            ERROR_REPORT.REGISTER_REACTIVATED_EMAIL
+          )
+          .subscribe()
+      } else {
+        this._snackbar.showSuccessMessage({
+          title: $localize`:@@register.reactivating:Reactivating your account`,
+          // tslint:disable-next-line: max-line-length
+          message: $localize`:@@ngOrcid.signin.verify.reactivationSent:Thank you for reactivating your ORCID record; please complete the process by following the steps in the email we are now sending you. If you don’t receive an email from us, please`,
+          action: $localize`:@@shared.contactSupport:contact support.`,
+          actionURL: `https://support.orcid.org/`,
+          closable: true,
+        })
+        this._router.navigate([ApplicationRoutes.signin])
+      }
+    })
   }
 }

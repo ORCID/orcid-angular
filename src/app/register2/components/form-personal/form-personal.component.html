@@ -24,6 +24,12 @@
     </mat-form-field>
 
     <mat-error
+      *ngIf="form.hasError('maxlength', 'givenNames')"
+      i18n="@@topBar.keywordMaxLength"
+    >
+      Must be less than 100 characters
+    </mat-error>
+    <mat-error
       *ngIf="givenNameFormTouched && form.hasError('required', 'givenNames')"
       i18n="@@register.firstNameError"
     >
@@ -61,6 +67,12 @@
         [placeholder]="labelFamilyNamePlaceholder"
       />
     </mat-form-field>
+    <mat-error
+      *ngIf="form.hasError('maxlength', 'familyNames')"
+      i18n="@@topBar.keywordMaxLength"
+    >
+      Must be less than 100 characters
+    </mat-error>
     <mat-error
       *ngIf="
         familyNamesFormTouched && form.hasError('illegalName', 'familyNames')
@@ -171,18 +183,54 @@
                 The email address
               </ng-container>
               <strong>{{ emails.get('email').value }}</strong>
-              <ng-container i18n="@@register.isAssociatedWuthAnExisting"
-                >is associated with an existing ORCID record.
+              <ng-container i18n="@@register.isAssociatedWith"
+                >is already associated with
               </ng-container>
+              <ng-container
+                *ngIf="'orcid.frontend.verify.duplicate_email' === error"
+                i18n="@@register.anExisting"
+                >an existing
+              </ng-container>
+              <ng-container
+                *ngIf="'orcid.frontend.verify.unclaimed_email' === error"
+                i18n="@@register.anUnclaimed"
+                >an unclaimed
+              </ng-container>
+              <ng-container
+                *ngIf="'orcid.frontend.verify.deactivated_email' === error"
+                i18n="@@register.aDeactivated"
+                >a deactivated
+              </ng-container>
+              <ng-container i18n="@@register.orcidRecord"
+                >ORCID record.</ng-container
+              >
+              <i i18n="@@register.youCannotUseThisEmail">
+                You cannot use this email address when creating a new ORCID iD.
+              </i>
             </p>
           </div>
 
           <div>
             <a
+              *ngIf="'orcid.frontend.verify.duplicate_email' === error"
               (click)="navigateToSignin(emails.get('email').value)"
               i18n="@@register.signInToOrcidUsingThisEmail"
             >
               Sign in to ORCID using this email address</a
+            >
+            <a
+              *ngIf="'orcid.frontend.verify.unclaimed_email' === error"
+              (click)="navigateToClaim(emails.get('email').value)"
+              i18n="@@register.resendClaimAddress"
+            >
+              Resend a claim email to this email address</a
+            >
+            <a
+              *ngIf="'orcid.frontend.verify.deactivated_email' === error"
+              (click)="reactivateEmail(emails.get('email').value)"
+              i18n="@@register.reactivateOrcidAssociated"
+            >
+              Reactivate the ORCID record associated with this email address</a
             >
           </div>
         </div>
@@ -345,6 +393,7 @@
     <!-- ADDITIONAL EMAILS -->
     <app-form-personal-additional-emails
       [additionalEmails]="additionalEmails"
+      [nextButtonWasClicked]="nextButtonWasClicked"
     ></app-form-personal-additional-emails>
   </ng-container>
 </ng-container>

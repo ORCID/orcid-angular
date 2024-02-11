@@ -4,17 +4,23 @@
   [attr.aria-label]="regionPersonalInformation"
   *ngIf="!hideOrcidId || !orcidId"
 >
-  <h2 class="sr-only" i18n="@@shared.personalInformation">
+  <h2
+    class="orc-font-body-large"
+    [ngClass]="{ 'sr-only': isPublicRecord ? !newRecordHeaderTogglz : true }"
+    i18n="@@shared.personalInformation"
+  >
     Personal information
   </h2>
-  <app-side-bar-id
-    *ngIf="!hideOrcidId"
-    [ngClass]="{
-      mobile: !platform.columns12
-    }"
-    [id]="isPublicRecord || userSession?.userInfo?.EFFECTIVE_USER_ORCID"
-    [privateView]="!isPublicRecord"
-  ></app-side-bar-id>
+  <ng-container *ngIf="isPublicRecord ? !newRecordHeaderTogglz : true">
+    <app-side-bar-id
+      *ngIf="!hideOrcidId"
+      [ngClass]="{
+        mobile: !platform.columns12
+      }"
+      [id]="isPublicRecord || userSession?.userInfo?.EFFECTIVE_USER_ORCID"
+      [privateView]="!isPublicRecord"
+    ></app-side-bar-id>
+  </ng-container>
 
   <ng-container *ngIf="!orcidId">
     <app-panel

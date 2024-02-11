@@ -42,7 +42,7 @@ export function dateValidator(dateType: string) {
   }
 }
 
-export function dateMonthYearValidator(dateType: string) {
+export function dateMonthYearValidator(dateType: string, formHasDay = true) {
   return (c: AbstractControl): { [key: string]: any } | null => {
     const year = c.get(dateType + 'Year').value
     const month = c.get(dateType + 'Month').value
@@ -69,7 +69,9 @@ export function dateMonthYearValidator(dateType: string) {
   }
 }
 
-export function endDateMonthYearValidator() {
+export function endDateMonthYearValidator(): (c: AbstractControl) => {
+  [key: string]: any
+} {
   return (c: AbstractControl): { [key: string]: any } | null => {
     const endDateExistingErrors = Object.keys(
       c.get('endDateGroup').errors || {}

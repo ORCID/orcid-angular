@@ -2,7 +2,7 @@
   [id]="'status-bar'"
   role="region"
   [attr.aria-label]="regionStatusBar"
-  *ngIf="iAmEditingThisRecord && isPublicRecord"
+  *ngIf="!newRecordHeaderTogglz && iAmEditingThisRecord && isPublicRecord"
   [ngClass]="{ 'yellow-bg': !isMyRecord }"
 >
   <div class="container">

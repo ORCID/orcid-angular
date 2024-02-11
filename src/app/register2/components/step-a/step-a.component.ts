@@ -27,6 +27,7 @@ import { BaseStepDirective } from '../BaseStep'
 export class StepAComponent extends BaseStepDirective implements AfterViewInit {
   @ViewChild('firstInput') firstInput: ElementRef
 
+  @Input() togglzregistration21: boolean
   @Input() reactivation: ReactivationLocal
   nextButtonWasClicked: boolean
 

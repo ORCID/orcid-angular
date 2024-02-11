@@ -30,14 +30,20 @@ import { WarningMessageModule } from '../cdk/warning-message/warning-message.mod
 import { BackendErrorComponent } from './components/backend-error/backend-error.component'
 import { FormAntiRobotsComponent } from './components/form-anti-robots/form-anti-robots.component'
 import { FormPersonalAdditionalEmailsComponent } from './components/form-personal-additional-emails/form-personal-additional-emails.component'
-import { StepCTComponent } from './components/step-c-t/step-c.component'
 import { Register2Component } from './pages/register/register2.component'
+import { StepCComponent } from './components/step-c/step-c.component'
+import { FormCurrentEmploymentComponent } from './components/form-current-employment/form-current-employment.component'
+import { MatLegacyAutocompleteModule as MatAutocompleteModule } from '@angular/material/legacy-autocomplete'
+import { StepC2Component } from './components/step-c2/step-c2.component'
+import { MatLegacySelectModule } from '@angular/material/legacy-select'
+import { SharedModule } from '../shared/shared.module'
 
 @NgModule({
   declarations: [
     StepAComponent,
     StepBComponent,
-    StepCTComponent,
+    StepCComponent,
+    StepC2Component,
     StepDComponent,
     FormPersonalComponent,
     FormPasswordComponent,
@@ -48,6 +54,7 @@ import { Register2Component } from './pages/register/register2.component'
     FormAntiRobotsComponent,
     BackendErrorComponent,
     Register2Component,
+    FormCurrentEmploymentComponent,
   ],
   imports: [
     CommonModule,
@@ -70,6 +77,9 @@ import { Register2Component } from './pages/register/register2.component'
     MatProgressBarModule,
     FormDirectivesModule,
     WarningMessageModule,
+    MatAutocompleteModule,
+    MatLegacySelectModule,
+    SharedModule,
   ],
 })
 export class Register2Module {}

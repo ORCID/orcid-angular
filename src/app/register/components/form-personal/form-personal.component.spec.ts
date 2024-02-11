@@ -19,6 +19,7 @@ import { Overlay } from '@angular/cdk/overlay'
 import { RegisterService } from '../../../core/register/register.service'
 import { ReactivationService } from '../../../core/reactivation/reactivation.service'
 import { MdePopoverModule } from '../../../cdk/popover'
+import { MatLegacyAutocomplete } from '@angular/material/legacy-autocomplete'
 
 describe('FormPersonalComponent', () => {
   let component: FormPersonalComponent
