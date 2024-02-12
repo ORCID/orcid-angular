@@ -69,6 +69,6 @@ export class NamesUtil {
             .indexOf(item.toLowerCase().trim()) === pos
         )
       })
-      .join(', ')
+      .join('; ')
   }
 }
