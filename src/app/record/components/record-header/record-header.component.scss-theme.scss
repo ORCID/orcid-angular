@@ -9,7 +9,7 @@
   $background: map-get($theme, background);
   $config: mat.define-legacy-typography-config();
 
-  .record-header {
+  .record-header-wrapper {
     color: $orcid-light-primary-text;
     background: mat.get-color-from-palette($primary, 900);
   }
