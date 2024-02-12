@@ -6,7 +6,10 @@
 >
   <h2
     class="orc-font-body-large"
-    [ngClass]="{ 'sr-only': !loadingUserRecord && isPublicRecord ? !newRecordHeaderTogglz : true }"
+    [ngClass]="{
+      'sr-only':
+        !loadingUserRecord && isPublicRecord ? !newRecordHeaderTogglz : true
+    }"
     i18n="@@shared.personalInformation"
   >
     Personal information

@@ -12,7 +12,7 @@
     ></app-record-header>
     <app-record-info
       *ngIf="
-          publicOrcid && newRecordHeaderTogglz
+        publicOrcid && newRecordHeaderTogglz
           ? recordWithIssues || (!loadingUserRecord && affiliations === 0)
           : false
       "
@@ -22,7 +22,9 @@
       class="container no-padding"
       *ngIf="
         !loadingUserRecord && newRecordHeaderTogglz
-          ? publicOrcid ? !recordWithIssues && affiliations > 0 : true
+          ? publicOrcid
+            ? !recordWithIssues && affiliations > 0
+            : true
           : true
       "
     >
