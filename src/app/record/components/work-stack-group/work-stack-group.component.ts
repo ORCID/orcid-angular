@@ -134,7 +134,7 @@ export class WorkStackGroupComponent implements OnInit {
   platform: PlatformInfo
   selectedWorks: string[] = []
   selectAll: false
-  sortTypes: SortOrderType[] = ['title', 'start', 'end']
+  sortTypes: SortOrderType[] = ['title', 'date', 'type']
 
   @ViewChildren('selectAllCheckbox') selectAllCheckbox: MatCheckbox
   @ViewChildren('appWorkStacks') appWorkStacks: QueryList<WorkStackComponent>
