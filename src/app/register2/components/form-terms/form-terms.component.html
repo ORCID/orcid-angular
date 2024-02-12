@@ -1,7 +1,6 @@
 <h3 class="orc-font-body" i18n="@@register.termsOfUse">Terms of Use</h3>
 <mat-error
-  *ngIf="
-    termsOfUseWasTouched &&
+  *ngIf="this.nextButtonWasClicked &&  
     (form.hasError('required', 'termsOfUse') ||
       form.hasError('required', 'dataProcessed'))
   "
