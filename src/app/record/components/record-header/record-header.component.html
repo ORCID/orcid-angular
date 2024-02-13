@@ -53,7 +53,8 @@
           <ng-container
             *ngIf="
               userInfo.IS_LOCKED === 'true' &&
-              userInfo.IS_DEACTIVATED === 'false' && !userInfo.PRIMARY_RECORD
+              userInfo.IS_DEACTIVATED === 'false' &&
+              !userInfo.PRIMARY_RECORD
             "
             i18n="@@summary.recordIsLocked"
             >This record is locked
