@@ -29,7 +29,13 @@
           "
         >
         </app-side-bar>
-        <div class="col l9 m8 s4 content">
+        <div
+          class="content"
+          [ngClass]="{'col l9 m8 s4' : !loadingUserRecord && newRecordHeaderTogglz
+          ? publicOrcid
+            ? !recordWithIssues && displaySideBar
+            : true
+          : true}">
           <app-main>
             <app-top-bar
               [isPublicRecord]="publicOrcid"

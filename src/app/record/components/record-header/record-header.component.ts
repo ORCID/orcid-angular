@@ -87,10 +87,25 @@ export class RecordHeaderComponent implements OnInit {
           }
         }
 
+        let fullName = this.givenNames;
+        if (!isEmpty(this.familyName)) {
+          fullName += ` ${this.familyName}`
+        }
+
         if (!isEmpty(this.userRecord.otherNames?.otherNames)) {
           this.otherNames = NamesUtil.getOtherNamesUnique(
             userRecord.otherNames?.otherNames
           )
+
+          if (!isEmpty(this.creditName)) {
+            if (!isEmpty(fullName)) {
+              this.otherNames = `${fullName}; ${this.otherNames}`
+            }
+          }
+        } else {
+          if (!isEmpty(this.creditName) && !isEmpty(fullName)) {
+            this.otherNames = `${fullName}`
+          }
         }
       })
   }

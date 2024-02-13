@@ -68,7 +68,7 @@
           !loadingUserRecord &&
           !recordWithIssues &&
           affiliations === 0 &&
-          !(!!!creditName && (givenNames || familyName))
+          !(creditName || givenNames || familyName || otherNames)
         "
       >
         <h1
