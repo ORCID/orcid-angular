@@ -40,6 +40,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   platform: PlatformInfo
   publicOrcid: string
   affiliations: number
+  displaySideBar: boolean
   userInfo: UserInfo
   userRecord: UserRecord
   collapseAllActivitiesArialLabel = $localize`:@@shared.collapseAllActivitiesArialLabel:Collapse all activity sections`
@@ -294,6 +295,10 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     if (type === 'RESEARCH_RESOURCE') {
       this.researchResourcePresent = !!itemsCount
     }
+  }
+
+  isSideBarEmpty(displaySideBar: boolean) {
+    this.displaySideBar = displaySideBar
   }
 
   checkLoadingState(userRecord: UserRecord) {

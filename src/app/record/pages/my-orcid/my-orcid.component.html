@@ -10,24 +10,7 @@
       [isPublicRecord]="publicOrcid"
       [affiliations]="affiliations"
     ></app-record-header>
-    <app-record-info
-      *ngIf="
-        publicOrcid && newRecordHeaderTogglz
-          ? recordWithIssues || (!loadingUserRecord && affiliations === 0)
-          : false
-      "
-      [affiliations]="affiliations"
-    ></app-record-info>
-    <div
-      class="container no-padding"
-      *ngIf="
-        !loadingUserRecord && newRecordHeaderTogglz
-          ? publicOrcid
-            ? !recordWithIssues && affiliations > 0
-            : true
-          : true
-      "
-    >
+    <div class="container no-padding">
       <div class="row">
         <app-side-bar
           class="col l3 m8 s4"
@@ -36,9 +19,23 @@
           [orcidId]="platform.columns8 || platform.columns4"
           [newRecordHeaderTogglz]="newRecordHeaderTogglz"
           [loadingUserRecord]="loadingUserRecord"
+          (isSideBarEmpty)="isSideBarEmpty($event)"
+          *ngIf="
+            !loadingUserRecord && newRecordHeaderTogglz
+              ? publicOrcid
+                ? !recordWithIssues && displaySideBar
+                : true
+              : true
+          "
         >
         </app-side-bar>
-        <div class="col l9 m8 s4 content">
+        <div
+          class="content"
+          [ngClass]="{'col l9 m8 s4' : !loadingUserRecord && newRecordHeaderTogglz
+          ? publicOrcid
+            ? !recordWithIssues && displaySideBar
+            : true
+          : true}">
           <app-main>
             <app-top-bar
               [isPublicRecord]="publicOrcid"
@@ -135,11 +132,11 @@
                 ></app-peer-reviews>
               </section>
             </ng-container>
-            <ng-container *ngIf="!(recordWithIssues || loadingUserRecord)">
+            <ng-container *ngIf="!newRecordHeaderTogglz ? !(recordWithIssues || loadingUserRecord) : false">
               <div
                 class="no-public-info"
                 *ngIf="
-                  publicOrcid && affiliations === 0 && !newRecordHeaderTogglz
+                  publicOrcid && affiliations === 0
                 "
               >
                 <mat-icon>error</mat-icon>
@@ -165,6 +162,14 @@
                 </i>
               </div>
             </ng-container>
+            <app-record-info
+              *ngIf="
+                publicOrcid && newRecordHeaderTogglz
+                  ? recordWithIssues || (!loadingUserRecord && affiliations === 0)
+                  : false
+              "
+            [affiliations]="affiliations"
+          ></app-record-info>
             <app-statistics
               [ngClass]="{ mobile: !platform.columns12 }"
             ></app-statistics>

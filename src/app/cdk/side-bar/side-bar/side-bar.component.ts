@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { UserService } from 'src/app/core'
@@ -36,6 +36,8 @@ export class SideBarComponent implements OnInit, OnDestroy {
   labelManageYourPersonalIds = $localize`:"@@record.labelManageYourPersonalIds:Manage your personalIds`
 
   $destroy: Subject<boolean> = new Subject<boolean>()
+
+  @Output() isSideBarEmpty: EventEmitter<any> = new EventEmitter()
 
   @Input() isPublicRecord: string
   @Input() orcidId = false
@@ -114,6 +116,8 @@ export class SideBarComponent implements OnInit, OnDestroy {
         }
         this.userRecord = userRecord
         this.userInfo = userRecord?.userInfo
+
+        this.onSideBarElementsDisplay(userRecord)
       })
   }
 
@@ -137,6 +141,23 @@ export class SideBarComponent implements OnInit, OnDestroy {
     return addresses.map((address) => {
       return address.countryName
     })
+  }
+
+  onSideBarElementsDisplay(userRecord: UserRecord): void {
+    if (
+      (userRecord?.emails?.emails &&
+        (!this.isPublicRecord || userRecord.emails.emails.length > 0)) ||
+      (userRecord?.website?.websites &&
+        (!this.isPublicRecord || userRecord.website.websites.length > 0)) ||
+      (userRecord?.externalIdentifier?.externalIdentifiers &&
+        userRecord?.externalIdentifier?.externalIdentifiers.length > 0) ||
+      (userRecord?.keyword?.keywords &&
+        (!this.isPublicRecord || userRecord.keyword.keywords.length > 0)) ||
+      (userRecord?.countries?.addresses &&
+        (!this.isPublicRecord || userRecord.countries.addresses.length > 0))
+    ) {
+      this.isSideBarEmpty.emit(true)
+    }
   }
 
   ngOnDestroy() {

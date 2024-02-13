@@ -65,9 +65,10 @@
       <div
         class="no-public-information"
         *ngIf="
+          !loadingUserRecord &&
           !recordWithIssues &&
           affiliations === 0 &&
-          !(!!!creditName && (givenNames || familyName))
+          !(creditName || givenNames || familyName || otherNames)
         "
       >
         <h1
@@ -76,8 +77,8 @@
             'orc-font-heading': platform.columns12
           }"
         >
-          <ng-container i18n="@@record.noPublicInfo"
-            >No public information available.
+          <ng-container i18n="@@record.noPublicInformation"
+            >No public information available
           </ng-container>
         </h1>
       </div>
