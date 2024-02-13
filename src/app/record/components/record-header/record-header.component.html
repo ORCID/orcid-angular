@@ -8,7 +8,7 @@
     <section [id]="'names'" role="region" [attr.aria-label]="regionNames">
       <div
         class="names-wrapper"
-        *ngIf="!userInfo?.RECORD_WITH_ISSUES && userRecord?.names || userRecord?.otherNames"
+        *ngIf="!userInfo?.RECORD_WITH_ISSUES && (userRecord?.names || userRecord?.otherNames)"
       >
         <div class="row names">
           <h1
