@@ -31,11 +31,15 @@
         </app-side-bar>
         <div
           class="content"
-          [ngClass]="{'col l9 m8 s4' : !loadingUserRecord && newRecordHeaderTogglz
-          ? publicOrcid
-            ? !recordWithIssues && displaySideBar
-            : true
-          : true}">
+          [ngClass]="{
+            'col l9 m8 s4':
+              !loadingUserRecord && newRecordHeaderTogglz
+                ? publicOrcid
+                  ? !recordWithIssues && displaySideBar
+                  : true
+                : true
+          }"
+        >
           <app-main>
             <app-top-bar
               [isPublicRecord]="publicOrcid"
@@ -132,12 +136,16 @@
                 ></app-peer-reviews>
               </section>
             </ng-container>
-            <ng-container *ngIf="!newRecordHeaderTogglz ? !(recordWithIssues || loadingUserRecord) : false">
+            <ng-container
+              *ngIf="
+                !newRecordHeaderTogglz
+                  ? !(recordWithIssues || loadingUserRecord)
+                  : false
+              "
+            >
               <div
                 class="no-public-info"
-                *ngIf="
-                  publicOrcid && affiliations === 0
-                "
+                *ngIf="publicOrcid && affiliations === 0"
               >
                 <mat-icon>error</mat-icon>
                 <ng-container i18n="@@record.noPublicInfo"
@@ -165,11 +173,12 @@
             <app-record-info
               *ngIf="
                 publicOrcid && newRecordHeaderTogglz
-                  ? recordWithIssues || (!loadingUserRecord && affiliations === 0)
+                  ? recordWithIssues ||
+                    (!loadingUserRecord && affiliations === 0)
                   : false
               "
-            [affiliations]="affiliations"
-          ></app-record-info>
+              [affiliations]="affiliations"
+            ></app-record-info>
             <app-statistics
               [ngClass]="{ mobile: !platform.columns12 }"
             ></app-statistics>

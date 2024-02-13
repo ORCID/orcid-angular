@@ -87,7 +87,7 @@ export class RecordHeaderComponent implements OnInit {
           }
         }
 
-        let fullName = this.givenNames;
+        let fullName = this.givenNames
         if (!isEmpty(this.familyName)) {
           fullName += ` ${this.familyName}`
         }
