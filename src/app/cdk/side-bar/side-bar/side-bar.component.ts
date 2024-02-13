@@ -26,6 +26,7 @@ import { ModalKeywordComponent } from '../modals/modal-keyword/modal-keyword.com
 import { ModalPersonIdentifiersComponent } from '../modals/modal-person-identifiers/modal-person-identifiers.component'
 import { ModalWebsitesComponent } from '../modals/modal-websites/modal-websites.component'
 import { ActivatedRoute } from '@angular/router'
+import { RecordUtil } from 'src/app/shared/utils/record.util'
 
 @Component({
   selector: 'app-side-bar',
@@ -151,20 +152,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
   }
 
   onSideBarElementsDisplay(userRecord: UserRecord): void {
-    if (
-      (userRecord?.emails?.emails &&
-        (!this.isPublicRecord || userRecord.emails.emails.length > 0)) ||
-      (userRecord?.website?.websites &&
-        (!this.isPublicRecord || userRecord.website.websites.length > 0)) ||
-      (userRecord?.externalIdentifier?.externalIdentifiers &&
-        userRecord?.externalIdentifier?.externalIdentifiers.length > 0) ||
-      (userRecord?.keyword?.keywords &&
-        (!this.isPublicRecord || userRecord.keyword.keywords.length > 0)) ||
-      (userRecord?.countries?.addresses &&
-        (!this.isPublicRecord || userRecord.countries.addresses.length > 0))
-    ) {
-      this.isSideBarEmpty.emit(true)
-    }
+    this.isSideBarEmpty.emit(RecordUtil.isSideBarEmpty(!!this.isPublicRecord, userRecord))
   }
 
   ngOnDestroy() {
