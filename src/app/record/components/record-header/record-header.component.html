@@ -8,7 +8,7 @@
     <section [id]="'names'" role="region" [attr.aria-label]="regionNames">
       <div
         class="names-wrapper"
-        *ngIf="userRecord?.names || userRecord?.otherNames"
+        *ngIf="!userInfo?.RECORD_WITH_ISSUES && userRecord?.names || userRecord?.otherNames"
       >
         <div class="row names">
           <h1
@@ -50,7 +50,7 @@
           <ng-container
             *ngIf="
               userInfo.IS_LOCKED === 'true' &&
-              !(userInfo.IS_DEACTIVATED === 'true' && !userInfo.PRIMARY_RECORD)
+              (userInfo.IS_DEACTIVATED === 'false' && !userInfo.PRIMARY_RECORD)
             "
             i18n="@@summary.recordIsLocked"
             >This record is locked

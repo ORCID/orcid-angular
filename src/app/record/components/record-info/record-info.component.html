@@ -1,15 +1,19 @@
 <section *ngIf="userInfo?.RECORD_WITH_ISSUES || affiliations === 0">
-  <div class="container record-info orc-font-body-small">
+  <div
+    class="container record-info orc-font-body-small"
+    [ngClass]="{'no-padding' : displayBiography || displaySideBar}"
+  >
     <ng-container
       *ngIf="
         userInfo.IS_LOCKED === 'true' &&
-        !(userInfo.IS_DEACTIVATED === 'true' && !userInfo.PRIMARY_RECORD)
+        (userInfo.IS_DEACTIVATED === 'false' && !userInfo.PRIMARY_RECORD)
       "
     >
       <p>
         <ng-container i18n="@@topBar.weLockRecords">
           We lock records when they violate conditions of our
         </ng-container>
+        &nbsp;
         <a
           class="underline"
           href="https://info.orcid.org/terms-of-use/"
@@ -23,6 +27,7 @@
         <ng-container i18n="@@topBar.recordLockedInError">
           If you feel this record has been locked in error please
         </ng-container>
+        &nbsp;
         <a
           class="underline"
           href="https://support.orcid.org/"
