@@ -1,12 +1,12 @@
 <section *ngIf="userInfo?.RECORD_WITH_ISSUES || affiliations === 0">
   <div
     class="container record-info orc-font-body-small"
-    [ngClass]="{'no-padding' : displayBiography || displaySideBar}"
+    [ngClass]="{ 'no-padding': displayBiography || displaySideBar }"
   >
     <ng-container
       *ngIf="
         userInfo.IS_LOCKED === 'true' &&
-        (userInfo.IS_DEACTIVATED === 'false' && !userInfo.PRIMARY_RECORD)
+        userInfo.IS_DEACTIVATED === 'false' && !userInfo.PRIMARY_RECORD
       "
     >
       <p>

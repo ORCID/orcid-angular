@@ -36,7 +36,10 @@ export class RecordInfoComponent implements OnInit {
           this.affiliations
         )
 
-        this.displaySideBar = RecordUtil.isSideBarEmpty(!!this.isPublicRecord, userRecord)
+        this.displaySideBar = RecordUtil.isSideBarEmpty(
+          !!this.isPublicRecord,
+          userRecord
+        )
         this.displayBiography = !!userRecord?.biography
       })
   }

@@ -73,7 +73,10 @@ export class RecordUtil {
       .join('; ')
   }
 
-  static isSideBarEmpty(isPublicRecord: boolean, userRecord: UserRecord): boolean {
+  static isSideBarEmpty(
+    isPublicRecord: boolean,
+    userRecord: UserRecord
+  ): boolean {
     if (
       (userRecord?.emails?.emails &&
         (!isPublicRecord || userRecord.emails.emails.length > 0)) ||

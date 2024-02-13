@@ -152,7 +152,9 @@ export class SideBarComponent implements OnInit, OnDestroy {
   }
 
   onSideBarElementsDisplay(userRecord: UserRecord): void {
-    this.isSideBarEmpty.emit(RecordUtil.isSideBarEmpty(!!this.isPublicRecord, userRecord))
+    this.isSideBarEmpty.emit(
+      RecordUtil.isSideBarEmpty(!!this.isPublicRecord, userRecord)
+    )
   }
 
   ngOnDestroy() {
