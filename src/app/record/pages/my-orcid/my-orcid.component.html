@@ -19,9 +19,6 @@
           [orcidId]="platform.columns8 || platform.columns4"
           [newRecordHeaderTogglz]="newRecordHeaderTogglz"
           [loadingUserRecord]="loadingUserRecord"
-          [displaySideBar]="displaySideBar"
-          [displayBiography]="displayBiography"
-          [affiliations]="affiliations"
           (isSideBarEmpty)="isSideBarEmpty($event)"
           *ngIf="
             !loadingUserRecord && newRecordHeaderTogglz
@@ -51,8 +48,11 @@
               [newRecordHeaderTogglz]="newRecordHeaderTogglz"
             ></app-top-bar>
             <app-side-bar
-              class="col l3 m8 s4 side-bar-mobile"
-              [ngClass]="{ 'new-header': newRecordHeaderTogglz }"
+              class="col l3 m8 s4"
+              [ngClass]="{
+                'new-header': newRecordHeaderTogglz,
+                'side-bar-mobile': newRecordHeaderTogglz
+                }"
               [isPublicRecord]="publicOrcid"
               [hideOrcidId]="true"
               *ngIf="platform.columns8 || platform.columns4"

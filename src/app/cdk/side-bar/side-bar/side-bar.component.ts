@@ -52,15 +52,14 @@ export class SideBarComponent implements OnInit, OnDestroy {
   @Input() hideOrcidId = false
   @Input() newRecordHeaderTogglz: boolean
   @Input() loadingUserRecord: boolean
-  @Input() displaySideBar: boolean
-  @Input() displayBiography: boolean
-  @Input() affiliations: number
 
   modalCountryComponent = ModalCountryComponent
   modalEmailComponent = ModalEmailComponent
   modalWebsitesComponent = ModalWebsitesComponent
   modalKeywordComponent = ModalKeywordComponent
   modalPersonalIdentifiers = ModalPersonIdentifiersComponent
+
+  displaySideBar: boolean
 
   userSession: {
     userInfo: UserInfo
@@ -155,9 +154,8 @@ export class SideBarComponent implements OnInit, OnDestroy {
   }
 
   onSideBarElementsDisplay(userRecord: UserRecord): void {
-    this.isSideBarEmpty.emit(
-      RecordUtil.isSideBarEmpty(!!this.isPublicRecord, userRecord)
-    )
+    this.displaySideBar = RecordUtil.isSideBarEmpty(!!this.isPublicRecord, userRecord)
+    this.isSideBarEmpty.emit(this.displaySideBar)
   }
 
   ngOnDestroy() {
