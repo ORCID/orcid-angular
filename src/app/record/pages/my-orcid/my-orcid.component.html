@@ -13,7 +13,7 @@
     <div class="container no-padding">
       <div class="row">
         <app-side-bar
-          class="col l3 m8 s4"
+          class="col l3 m8 s4 mobile"
           [ngClass]="{ 'new-header': newRecordHeaderTogglz }"
           [isPublicRecord]="publicOrcid"
           [orcidId]="platform.columns8 || platform.columns4"
@@ -48,10 +48,11 @@
               [newRecordHeaderTogglz]="newRecordHeaderTogglz"
             ></app-top-bar>
             <app-side-bar
-              *ngIf="platform.columns8 || platform.columns4"
-              class="col l3 m8 s4"
+              class="col l3 m8 s4 side-bar-mobile"
+              [ngClass]="{ 'new-header': newRecordHeaderTogglz }"
               [isPublicRecord]="publicOrcid"
               [hideOrcidId]="true"
+              *ngIf="platform.columns8 || platform.columns4"
             >
             </app-side-bar>
             <ng-container *ngIf="!recordWithIssues">

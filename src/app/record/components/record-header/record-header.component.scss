@@ -73,7 +73,10 @@
   }
 }
 
-.record-header.mobile {
-  justify-content: center;
-  padding: 18px;
+.record-header-wrapper.mobile {
+  padding: 32px 16px;
+  text-align: center;
+  .names {
+    justify-content: center;
+  }
 }
