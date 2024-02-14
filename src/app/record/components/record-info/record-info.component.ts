@@ -15,11 +15,11 @@ export class RecordInfoComponent implements OnInit {
 
   @Input() isPublicRecord: string
   @Input() affiliations: number
+  @Input() displaySideBar: boolean
+  @Input() displayBiography: boolean
 
   userInfo: UserInfo
   isNamePublic: boolean
-  displaySideBar: boolean
-  displayBiography: boolean
 
   constructor(private _record: RecordService) {}
 
@@ -35,12 +35,6 @@ export class RecordInfoComponent implements OnInit {
           userRecord,
           this.affiliations
         )
-
-        this.displaySideBar = RecordUtil.isSideBarEmpty(
-          !!this.isPublicRecord,
-          userRecord
-        )
-        this.displayBiography = !!userRecord?.biography
       })
   }
 }

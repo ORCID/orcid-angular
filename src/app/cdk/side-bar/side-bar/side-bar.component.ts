@@ -52,6 +52,9 @@ export class SideBarComponent implements OnInit, OnDestroy {
   @Input() hideOrcidId = false
   @Input() newRecordHeaderTogglz: boolean
   @Input() loadingUserRecord: boolean
+  @Input() displaySideBar: boolean
+  @Input() displayBiography: boolean
+  @Input() affiliations: number
 
   modalCountryComponent = ModalCountryComponent
   modalEmailComponent = ModalEmailComponent

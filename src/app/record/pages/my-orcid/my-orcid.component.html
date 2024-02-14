@@ -13,17 +13,20 @@
     <div class="container no-padding">
       <div class="row">
         <app-side-bar
-          class="col l3 m8 s4 mobile"
+          class="col l3 m8 s4"
           [ngClass]="{ 'new-header': newRecordHeaderTogglz }"
           [isPublicRecord]="publicOrcid"
           [orcidId]="platform.columns8 || platform.columns4"
           [newRecordHeaderTogglz]="newRecordHeaderTogglz"
           [loadingUserRecord]="loadingUserRecord"
+          [displaySideBar]="displaySideBar"
+          [displayBiography]="displayBiography"
+          [affiliations]="affiliations"
           (isSideBarEmpty)="isSideBarEmpty($event)"
           *ngIf="
             !loadingUserRecord && newRecordHeaderTogglz
               ? publicOrcid
-                ? !recordWithIssues && displaySideBar
+                ? !recordWithIssues && (displaySideBar || displayBiography || affiliations > 0)
                 : true
               : true
           "
@@ -35,7 +38,7 @@
             'col l9 m8 s4':
               !loadingUserRecord && newRecordHeaderTogglz
                 ? publicOrcid
-                  ? !recordWithIssues && displaySideBar
+                  ? !recordWithIssues && (displaySideBar || displayBiography || affiliations > 0)
                   : true
                 : true
           }"
@@ -178,6 +181,9 @@
                     (!loadingUserRecord && affiliations === 0)
                   : false
               "
+              [isPublicRecord]="publicOrcid"
+              [displaySideBar]="displaySideBar"
+              [displayBiography]="displayBiography"
               [affiliations]="affiliations"
             ></app-record-info>
             <app-statistics
