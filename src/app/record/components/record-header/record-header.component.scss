@@ -78,6 +78,11 @@
 .record-header-wrapper.mobile {
   padding: 32px 16px;
   text-align: center;
+
+  .record-header {
+    justify-content: center;
+  }
+
   .names {
     justify-content: center;
   }
