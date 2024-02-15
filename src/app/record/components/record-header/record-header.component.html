@@ -7,7 +7,7 @@
   <div class="row container record-header no-padding">
     <section [id]="'names'" role="region" [attr.aria-label]="regionNames">
       <div
-        class="names-wrapper"
+        class="row names-wrapper"
         *ngIf="
           !userInfo?.RECORD_WITH_ISSUES &&
           (userRecord?.names || userRecord?.otherNames)
