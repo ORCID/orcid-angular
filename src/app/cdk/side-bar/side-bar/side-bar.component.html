@@ -17,9 +17,13 @@
   <p
     i18n="@@record.noPersonalInformation"
     *ngIf="
-      !loadingUserRecord && isPublicRecord ? newRecordHeaderTogglz
-      ? !displaySideBar : false
-      : false">
+      !loadingUserRecord && isPublicRecord
+        ? newRecordHeaderTogglz
+          ? !displaySideBar
+          : false
+        : false
+    "
+  >
     No personal information available
   </p>
   <ng-container *ngIf="isPublicRecord ? !newRecordHeaderTogglz : true">

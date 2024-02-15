@@ -154,7 +154,10 @@ export class SideBarComponent implements OnInit, OnDestroy {
   }
 
   onSideBarElementsDisplay(userRecord: UserRecord): void {
-    this.displaySideBar = RecordUtil.isSideBarEmpty(!!this.isPublicRecord, userRecord)
+    this.displaySideBar = RecordUtil.isSideBarEmpty(
+      !!this.isPublicRecord,
+      userRecord
+    )
     this.isSideBarEmpty.emit(this.displaySideBar)
   }
 
