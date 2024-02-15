@@ -23,7 +23,7 @@
           *ngIf="
             !loadingUserRecord && newRecordHeaderTogglz
               ? publicOrcid
-                ? !recordWithIssues && displaySideBar
+                ? !recordWithIssues && (displaySideBar || displayBiography || affiliations > 0)
                 : true
               : true
           "
@@ -35,7 +35,7 @@
             'col l9 m8 s4':
               !loadingUserRecord && newRecordHeaderTogglz
                 ? publicOrcid
-                  ? !recordWithIssues && displaySideBar
+                  ? !recordWithIssues && (displaySideBar || displayBiography || affiliations > 0)
                   : true
                 : true
           }"
@@ -48,10 +48,14 @@
               [newRecordHeaderTogglz]="newRecordHeaderTogglz"
             ></app-top-bar>
             <app-side-bar
-              *ngIf="platform.columns8 || platform.columns4"
               class="col l3 m8 s4"
+              [ngClass]="{
+                'new-header': newRecordHeaderTogglz,
+                'side-bar-mobile': newRecordHeaderTogglz
+                }"
               [isPublicRecord]="publicOrcid"
               [hideOrcidId]="true"
+              *ngIf="platform.columns8 || platform.columns4"
             >
             </app-side-bar>
             <ng-container *ngIf="!recordWithIssues">
@@ -177,6 +181,9 @@
                     (!loadingUserRecord && affiliations === 0)
                   : false
               "
+              [isPublicRecord]="publicOrcid"
+              [displaySideBar]="displaySideBar"
+              [displayBiography]="displayBiography"
               [affiliations]="affiliations"
             ></app-record-info>
             <app-statistics
