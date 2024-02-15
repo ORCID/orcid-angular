@@ -120,6 +120,7 @@
               row: !platform.columns12,
               mobile: !platform.columns12
             }"
+            *ngIf="!userInfo?.RECORD_WITH_ISSUES"
           >
             <button
               mat-icon-button
@@ -139,7 +140,11 @@
               [attr.aria-label]="ariaLabelViewPrintable"
               (click)="printRecord()"
             >
-              <mat-icon class="material-icons" class="icon">print</mat-icon>
+              <mat-icon class="icon">
+                <span
+                  class="material-symbols-outlined"
+                >print</span>
+              </mat-icon>
             </button>
           </div>
         </div>
