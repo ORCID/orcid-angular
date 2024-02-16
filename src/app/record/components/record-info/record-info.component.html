@@ -60,8 +60,7 @@
     <ng-container *ngIf="userInfo.PRIMARY_RECORD">
       <p>
         <ng-container i18n="@@topBar.accountDeprecated">
-          This account has been deprecated, please see account
-        </ng-container
+          This account has been deprecated, please see account </ng-container
         >&nbsp;<a [href]="userInfo.PRIMARY_RECORD">{{
           'https:' + baseUrl + userInfo.PRIMARY_RECORD
         }}</a
@@ -87,7 +86,11 @@
       </p>
     </ng-container>
     <ng-container *ngIf="affiliations === 0 && !userInfo?.RECORD_WITH_ISSUES">
-      <h2 class="orc-font-body-large" *ngIf="isNamePublic" i18n="@@record.noPublicInformation">
+      <h2
+        class="orc-font-body-large"
+        *ngIf="isNamePublic"
+        i18n="@@record.noPublicInformation"
+      >
         No public information available
       </h2>
       <p>
