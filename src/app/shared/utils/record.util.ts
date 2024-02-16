@@ -1,7 +1,8 @@
+import { E } from '@angular/cdk/keycodes'
 import { Assertion } from 'src/app/types'
 import { UserRecord } from 'src/app/types/record.local'
 
-export class NamesUtil {
+export class RecordUtil {
   static getGivenNames(userRecord: UserRecord): string {
     return userRecord?.names?.givenNames
       ? userRecord.names.givenNames.value
@@ -69,6 +70,27 @@ export class NamesUtil {
             .indexOf(item.toLowerCase().trim()) === pos
         )
       })
-      .join(', ')
+      .join('; ')
+  }
+
+  static isSideBarEmpty(
+    isPublicRecord: boolean,
+    userRecord: UserRecord
+  ): boolean {
+    if (
+      (userRecord?.emails?.emails &&
+        (!isPublicRecord || userRecord.emails.emails.length > 0)) ||
+      (userRecord?.website?.websites &&
+        (!isPublicRecord || userRecord.website.websites.length > 0)) ||
+      (userRecord?.externalIdentifier?.externalIdentifiers &&
+        userRecord?.externalIdentifier?.externalIdentifiers.length > 0) ||
+      (userRecord?.keyword?.keywords &&
+        (!isPublicRecord || userRecord.keyword.keywords.length > 0)) ||
+      (userRecord?.countries?.addresses &&
+        (!isPublicRecord || userRecord.countries.addresses.length > 0))
+    ) {
+      return true
+    }
+    return false
   }
 }

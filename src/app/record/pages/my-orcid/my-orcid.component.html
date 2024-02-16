@@ -10,22 +10,7 @@
       [isPublicRecord]="publicOrcid"
       [affiliations]="affiliations"
     ></app-record-header>
-    <app-record-info
-      *ngIf="
-        newRecordHeaderTogglz
-          ? recordWithIssues || (!loadingUserRecord && affiliations === 0)
-          : false
-      "
-      [affiliations]="affiliations"
-    ></app-record-info>
-    <div
-      class="container no-padding"
-      *ngIf="
-        !loadingUserRecord && newRecordHeaderTogglz
-          ? !recordWithIssues && affiliations > 0
-          : true
-      "
-    >
+    <div class="container no-padding">
       <div class="row">
         <app-side-bar
           class="col l3 m8 s4"
@@ -33,9 +18,30 @@
           [isPublicRecord]="publicOrcid"
           [orcidId]="platform.columns8 || platform.columns4"
           [newRecordHeaderTogglz]="newRecordHeaderTogglz"
+          [loadingUserRecord]="loadingUserRecord"
+          (isSideBarEmpty)="isSideBarEmpty($event)"
+          *ngIf="
+            !loadingUserRecord && newRecordHeaderTogglz
+              ? publicOrcid
+                ? !recordWithIssues &&
+                  (displaySideBar || displayBiography || affiliations > 0)
+                : true
+              : true
+          "
         >
         </app-side-bar>
-        <div class="col l9 m8 s4 content">
+        <div
+          class="content"
+          [ngClass]="{
+            'col l9 m8 s4':
+              !loadingUserRecord && newRecordHeaderTogglz
+                ? publicOrcid
+                  ? !recordWithIssues &&
+                    (displaySideBar || displayBiography || affiliations > 0)
+                  : true
+                : true
+          }"
+        >
           <app-main>
             <app-top-bar
               [isPublicRecord]="publicOrcid"
@@ -44,10 +50,14 @@
               [newRecordHeaderTogglz]="newRecordHeaderTogglz"
             ></app-top-bar>
             <app-side-bar
-              *ngIf="platform.columns8 || platform.columns4"
               class="col l3 m8 s4"
+              [ngClass]="{
+                'new-header': newRecordHeaderTogglz,
+                'side-bar-mobile': newRecordHeaderTogglz
+              }"
               [isPublicRecord]="publicOrcid"
               [hideOrcidId]="true"
+              *ngIf="platform.columns8 || platform.columns4"
             >
             </app-side-bar>
             <ng-container *ngIf="!recordWithIssues">
@@ -132,12 +142,16 @@
                 ></app-peer-reviews>
               </section>
             </ng-container>
-            <ng-container *ngIf="!(recordWithIssues || loadingUserRecord)">
+            <ng-container
+              *ngIf="
+                !newRecordHeaderTogglz
+                  ? !(recordWithIssues || loadingUserRecord)
+                  : false
+              "
+            >
               <div
                 class="no-public-info"
-                *ngIf="
-                  publicOrcid && affiliations === 0 && !newRecordHeaderTogglz
-                "
+                *ngIf="publicOrcid && affiliations === 0"
               >
                 <mat-icon>error</mat-icon>
                 <ng-container i18n="@@record.noPublicInfo"
@@ -162,6 +176,18 @@
                 </i>
               </div>
             </ng-container>
+            <app-record-info
+              *ngIf="
+                publicOrcid && newRecordHeaderTogglz
+                  ? recordWithIssues ||
+                    (!loadingUserRecord && affiliations === 0)
+                  : false
+              "
+              [isPublicRecord]="publicOrcid"
+              [displaySideBar]="displaySideBar"
+              [displayBiography]="displayBiography"
+              [affiliations]="affiliations"
+            ></app-record-info>
             <app-statistics
               [ngClass]="{ mobile: !platform.columns12 }"
             ></app-statistics>

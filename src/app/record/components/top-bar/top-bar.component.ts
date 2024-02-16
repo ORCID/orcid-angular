@@ -13,7 +13,7 @@ import { RecordEmailsService } from '../../../core/record-emails/record-emails.s
 import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
 import { VerificationEmailModalService } from '../../../core/verification-email-modal/verification-email-modal.service'
 import { isEmpty } from 'lodash'
-import { NamesUtil } from 'src/app/shared/utils/names.util'
+import { RecordUtil } from 'src/app/shared/utils/record.util'
 
 @Component({
   selector: 'app-top-bar',
@@ -94,17 +94,17 @@ export class TopBarComponent implements OnInit, OnDestroy {
         this.userInfo = userRecord?.userInfo
 
         if (!isEmpty(this.userRecord?.names)) {
-          this.givenNames = NamesUtil.getGivenNames(this.userRecord)
-          this.familyName = NamesUtil.getFamilyName(this.userRecord)
-          this.creditName = NamesUtil.getCreditName(this.userRecord)
-          this.ariaLabelName = NamesUtil.getAriaLabelName(
+          this.givenNames = RecordUtil.getGivenNames(this.userRecord)
+          this.familyName = RecordUtil.getFamilyName(this.userRecord)
+          this.creditName = RecordUtil.getCreditName(this.userRecord)
+          this.ariaLabelName = RecordUtil.getAriaLabelName(
             this.userRecord,
             this.ariaLabelName
           )
         }
 
         if (!isEmpty(this.userRecord.otherNames?.otherNames)) {
-          this.otherNames = NamesUtil.getOtherNamesUnique(
+          this.otherNames = RecordUtil.getOtherNamesUnique(
             userRecord.otherNames?.otherNames
           )
         }

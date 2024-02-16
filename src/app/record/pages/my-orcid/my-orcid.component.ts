@@ -25,6 +25,7 @@ import { DOCUMENT } from '@angular/common'
 import { environment } from 'src/environments/environment'
 import { filter, map } from 'rxjs/operators'
 import { CanonocalUrlService } from 'src/app/core/canonocal-url/canonocal-url.service'
+import { RecordUtil } from 'src/app/shared/utils/record.util'
 
 @Component({
   selector: 'app-my-orcid',
@@ -40,6 +41,8 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   platform: PlatformInfo
   publicOrcid: string
   affiliations: number
+  displaySideBar: boolean
+  displayBiography: boolean
   userInfo: UserInfo
   userRecord: UserRecord
   collapseAllActivitiesArialLabel = $localize`:@@shared.collapseAllActivitiesArialLabel:Collapse all activity sections`
@@ -197,6 +200,12 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
               this._router.navigate([], { fragment: this.fragment })
             })
           }
+
+          this.displaySideBar = RecordUtil.isSideBarEmpty(
+            !!this.publicOrcid,
+            userRecord
+          )
+          this.displayBiography = !!userRecord?.biography
         }),
         switchMap(() => this._togglz.getTogglz().pipe(first())),
         tap((togglz) => {
@@ -294,6 +303,10 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     if (type === 'RESEARCH_RESOURCE') {
       this.researchResourcePresent = !!itemsCount
     }
+  }
+
+  isSideBarEmpty(displaySideBar: boolean) {
+    this.displaySideBar = displaySideBar
   }
 
   checkLoadingState(userRecord: UserRecord) {
