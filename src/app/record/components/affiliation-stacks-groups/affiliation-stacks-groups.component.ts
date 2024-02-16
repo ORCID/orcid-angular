@@ -54,17 +54,19 @@ export class AffiliationStacksGroupsComponent implements OnInit {
   @Output()
   expandedContentChange: EventEmitter<MainPanelsState> = new EventEmitter()
   professionalActivitiesTogglz = false
-  sortTypes: SortOrderType[] = ['title', 'start', 'end']
+  sortTypes: SortOrderType[] = ['title', 'start', 'end', 'source']
   professionalActivitiesSortTypes: SortOrderType[] = [
     'title',
     'type',
     'start',
     'end',
+	'source'
   ]
   educationAndQualificationSortTypes: SortOrderType[] = [
     'title',
     'start',
     'end',
+	'source'
   ]
   constructor(
     private _record: RecordService,
@@ -76,17 +78,7 @@ export class AffiliationStacksGroupsComponent implements OnInit {
     this._togglz
       .getStateOf('PROFESSIONAL_ACTIVITIES')
       .pipe(take(1))
-      .subscribe((value) => (this.professionalActivitiesTogglz = value))
-    this._togglz
-      .getStateOf('SOURCE_SORTING')
-      .pipe(take(1))
-      .subscribe((sourceSortingTogglz: boolean) => {
-        if (sourceSortingTogglz) {
-          this.sortTypes.push('source')
-          this.professionalActivitiesSortTypes.push('source')
-          this.educationAndQualificationSortTypes.push('source')
-        }
-      })
+      .subscribe((value) => (this.professionalActivitiesTogglz = value))    
     this.$loading = this._recordAffiliationService.$loading
     this._record
       .getRecord({

@@ -16,7 +16,7 @@
     [(expandedContent)]="expandedContent['FUNDING']"
     (expandedContentChange)="expandedContentChange.emit(expandedContent)"
     [sortTypes]="sortTypes"
-    [sortType]="'date'"
+    [sortType]="'end'"
     (sort)="sortEvent($event)"
   >
     <ng-container *ngIf="fundings.length > 0">
