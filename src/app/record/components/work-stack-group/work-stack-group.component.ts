@@ -134,7 +134,7 @@ export class WorkStackGroupComponent implements OnInit {
   platform: PlatformInfo
   selectedWorks: string[] = []
   selectAll: false
-  sortTypes: SortOrderType[] = ['title', 'date', 'type','source']
+  sortTypes: SortOrderType[] = ['title', 'date', 'type', 'source']
 
   @ViewChildren('selectAllCheckbox') selectAllCheckbox: MatCheckbox
   @ViewChildren('appWorkStacks') appWorkStacks: QueryList<WorkStackComponent>
@@ -150,7 +150,7 @@ export class WorkStackGroupComponent implements OnInit {
     private _togglz: TogglzService
   ) {}
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
     this.$loading = this._works.$loading
     this._record
       .getRecord({ publicRecordId: this.isPublicRecord })

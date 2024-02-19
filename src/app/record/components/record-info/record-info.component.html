@@ -4,10 +4,7 @@
     [ngClass]="{ 'no-padding': displayBiography || displaySideBar }"
   >
     <ng-container
-      *ngIf="
-        userInfo.IS_LOCKED === 'true' &&
-        !userInfo.PRIMARY_RECORD
-      "
+      *ngIf="userInfo.IS_LOCKED === 'true' && !userInfo.PRIMARY_RECORD"
     >
       <p>
         <ng-container i18n="@@topBar.weLockRecords">
@@ -39,7 +36,8 @@
       *ngIf="
         userInfo.IS_DEACTIVATED === 'true' &&
         userInfo.IS_LOCKED === 'false' &&
-        !userInfo.PRIMARY_RECORD"
+        !userInfo.PRIMARY_RECORD
+      "
     >
       <p>
         <ng-container i18n="@@topBar.whenOrcidDeactivated">

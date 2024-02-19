@@ -112,7 +112,9 @@
               'orc-font-body-large': platform.columns12
             }"
           >
-            <ng-container *ngIf="!platform.columns12; else elseBlock">{{ isPublicRecord }}</ng-container>
+            <ng-container *ngIf="!platform.columns12; else elseBlock">{{
+              isPublicRecord
+            }}</ng-container>
             <ng-template #elseBlock>{{ orcidId }}</ng-template>
           </h2>
           <div

@@ -60,13 +60,13 @@ export class AffiliationStacksGroupsComponent implements OnInit {
     'type',
     'start',
     'end',
-	'source'
+    'source',
   ]
   educationAndQualificationSortTypes: SortOrderType[] = [
     'title',
     'start',
     'end',
-	'source'
+    'source',
   ]
   constructor(
     private _record: RecordService,
@@ -78,7 +78,7 @@ export class AffiliationStacksGroupsComponent implements OnInit {
     this._togglz
       .getStateOf('PROFESSIONAL_ACTIVITIES')
       .pipe(take(1))
-      .subscribe((value) => (this.professionalActivitiesTogglz = value))    
+      .subscribe((value) => (this.professionalActivitiesTogglz = value))
     this.$loading = this._recordAffiliationService.$loading
     this._record
       .getRecord({
