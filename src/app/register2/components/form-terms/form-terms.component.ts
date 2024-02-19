@@ -72,7 +72,4 @@ export class FormTermsComponent extends BaseForm implements OnInit, DoCheck {
       this._errorStateMatcher.isErrorState(this.dataProcessed, null)
   }
 
-  get termsOfUseWasTouched() {
-    return this.form.controls.termsOfUse.touched || this.nextButtonWasClicked
-  }
 }
