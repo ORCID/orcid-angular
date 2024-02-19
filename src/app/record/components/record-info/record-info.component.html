@@ -6,7 +6,6 @@
     <ng-container
       *ngIf="
         userInfo.IS_LOCKED === 'true' &&
-        userInfo.IS_DEACTIVATED === 'false' &&
         !userInfo.PRIMARY_RECORD
       "
     >
@@ -37,7 +36,10 @@
     </ng-container>
 
     <ng-container
-      *ngIf="userInfo.IS_DEACTIVATED === 'true' && !userInfo.PRIMARY_RECORD"
+      *ngIf="
+        userInfo.IS_DEACTIVATED === 'true' &&
+        userInfo.IS_LOCKED === 'false' &&
+        !userInfo.PRIMARY_RECORD"
     >
       <p>
         <ng-container i18n="@@topBar.whenOrcidDeactivated">
