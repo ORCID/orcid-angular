@@ -6,7 +6,7 @@ import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { UserService } from 'src/app/core'
 import { RecordService } from 'src/app/core/record/record.service'
-import { NamesUtil } from 'src/app/shared/utils/names.util'
+import { RecordUtil } from 'src/app/shared/utils/record.util'
 import { Assertion, UserInfo } from 'src/app/types'
 import { UserRecord } from 'src/app/types/record.local'
 import { environment } from 'src/environments/environment'
@@ -74,10 +74,10 @@ export class RecordHeaderComponent implements OnInit {
         this.userInfo = userRecord?.userInfo
 
         if (!isEmpty(this.userRecord?.names)) {
-          this.givenNames = NamesUtil.getGivenNames(this.userRecord)
-          this.familyName = NamesUtil.getFamilyName(this.userRecord)
-          this.creditName = NamesUtil.getCreditName(this.userRecord)
-          this.ariaLabelName = NamesUtil.getAriaLabelName(
+          this.givenNames = RecordUtil.getGivenNames(this.userRecord)
+          this.familyName = RecordUtil.getFamilyName(this.userRecord)
+          this.creditName = RecordUtil.getCreditName(this.userRecord)
+          this.ariaLabelName = RecordUtil.getAriaLabelName(
             this.userRecord,
             this.ariaLabelName
           )
@@ -87,10 +87,25 @@ export class RecordHeaderComponent implements OnInit {
           }
         }
 
+        let fullName = this.givenNames
+        if (!isEmpty(this.familyName)) {
+          fullName += ` ${this.familyName}`
+        }
+
         if (!isEmpty(this.userRecord.otherNames?.otherNames)) {
-          this.otherNames = NamesUtil.getOtherNamesUnique(
+          this.otherNames = RecordUtil.getOtherNamesUnique(
             userRecord.otherNames?.otherNames
           )
+
+          if (!isEmpty(this.creditName)) {
+            if (!isEmpty(fullName)) {
+              this.otherNames = `${fullName}; ${this.otherNames}`
+            }
+          }
+        } else {
+          if (!isEmpty(this.creditName) && !isEmpty(fullName)) {
+            this.otherNames = `${fullName}`
+          }
         }
       })
   }

@@ -2,8 +2,9 @@ import { Component, Input, OnInit } from '@angular/core'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { RecordService } from 'src/app/core/record/record.service'
-import { NamesUtil } from 'src/app/shared/utils/names.util'
+import { RecordUtil as RecordUtil } from 'src/app/shared/utils/record.util'
 import { UserInfo } from 'src/app/types'
+import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-record-info',
@@ -15,9 +16,12 @@ export class RecordInfoComponent implements OnInit {
 
   @Input() isPublicRecord: string
   @Input() affiliations: number
+  @Input() displaySideBar: boolean
+  @Input() displayBiography: boolean
 
   userInfo: UserInfo
   isNamePublic: boolean
+  baseUrl = environment.BASE_URL
 
   constructor(private _record: RecordService) {}
 
@@ -29,7 +33,7 @@ export class RecordInfoComponent implements OnInit {
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
         this.userInfo = userRecord?.userInfo
-        this.isNamePublic = NamesUtil.isNamePublicAndAffiliations(
+        this.isNamePublic = RecordUtil.isNamePublicAndAffiliations(
           userRecord,
           this.affiliations
         )

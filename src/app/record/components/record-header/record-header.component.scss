@@ -1,76 +1,89 @@
-.record-header {
+.record-header-wrapper {
   display: flex;
   box-sizing: border-box;
   width: 100%;
-  padding: 32px;
+  padding: 32px 16px;
   margin-bottom: 32px;
   align-items: flex-start;
-  gap: 16px;
   word-break: break-all;
 
-  h1,
-  p {
-    margin: 0;
-  }
+  .record-header {
+    gap: 16px;
 
-  h2 {
-    margin: auto;
-    font-weight: normal;
-  }
-
-  .divider {
-    width: 100%;
-    height: 2px;
-  }
-
-  .names-wrapper {
-    .names {
-      line-height: 40px;
+    h1,
+    p {
+      margin: 0;
     }
 
-    .other-names {
-      line-height: 24px;
-    }
-
-    .other-names.mobile {
-      justify-content: center;
-    }
-  }
-
-  .issue {
-    h1 {
+    h2 {
+      margin: auto;
       font-weight: normal;
     }
-  }
 
-  .id-wrapper {
-    align-items: center;
-
-    .col {
-      padding: 0 !important;
+    .divider {
+      width: 100%;
+      height: 2px;
     }
 
-    .orcid-logo {
-      width: 40px;
-      margin-right: 8px;
+    .names-wrapper {
+      gap: 8px;
+
+      .names {
+        line-height: 40px;
+      }
+
+      .other-names {
+        line-height: 24px;
+      }
+
+      .other-names.mobile {
+        justify-content: center;
+      }
     }
 
-    .orcid-logo.mobile {
-      width: 32px;
+    .issue {
+      h1 {
+        font-weight: normal;
+      }
     }
 
-    .buttons-wrapper {
-      margin-left: 16px;
-    }
+    .id-wrapper {
+      align-items: center;
 
-    .buttons-wrapper.mobile {
-      justify-content: center;
-      margin-left: 0;
+      .col {
+        padding: 0 !important;
+      }
+
+      .orcid-logo {
+        width: 40px;
+        margin-right: 8px;
+      }
+
+      .orcid-logo.mobile {
+        width: 32px;
+      }
+
+      .buttons-wrapper {
+        margin-left: 16px;
+      }
+
+      .buttons-wrapper.mobile {
+        justify-content: center;
+        margin-left: 0;
+      }
     }
   }
 }
 
-.record-header.mobile {
-  justify-content: center;
-  padding: 18px;
+.record-header-wrapper.mobile {
+  padding: 32px 16px;
+  text-align: center;
+
+  .record-header {
+    justify-content: center;
+  }
+
+  .names {
+    justify-content: center;
+  }
 }

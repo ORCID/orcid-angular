@@ -6,11 +6,26 @@
 >
   <h2
     class="orc-font-body-large"
-    [ngClass]="{ 'sr-only': isPublicRecord ? !newRecordHeaderTogglz : true }"
+    [ngClass]="{
+      'sr-only':
+        !loadingUserRecord && isPublicRecord ? !newRecordHeaderTogglz : true
+    }"
     i18n="@@shared.personalInformation"
   >
     Personal information
   </h2>
+  <p
+    i18n="@@record.noPersonalInformation"
+    *ngIf="
+      !loadingUserRecord && isPublicRecord
+        ? newRecordHeaderTogglz
+          ? !displaySideBar
+          : false
+        : false
+    "
+  >
+    No personal information available
+  </p>
   <ng-container *ngIf="isPublicRecord ? !newRecordHeaderTogglz : true">
     <app-side-bar-id
       *ngIf="!hideOrcidId"

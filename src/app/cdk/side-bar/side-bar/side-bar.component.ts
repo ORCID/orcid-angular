@@ -1,4 +1,11 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { UserService } from 'src/app/core'
@@ -19,6 +26,7 @@ import { ModalKeywordComponent } from '../modals/modal-keyword/modal-keyword.com
 import { ModalPersonIdentifiersComponent } from '../modals/modal-person-identifiers/modal-person-identifiers.component'
 import { ModalWebsitesComponent } from '../modals/modal-websites/modal-websites.component'
 import { ActivatedRoute } from '@angular/router'
+import { RecordUtil } from 'src/app/shared/utils/record.util'
 
 @Component({
   selector: 'app-side-bar',
@@ -37,16 +45,21 @@ export class SideBarComponent implements OnInit, OnDestroy {
 
   $destroy: Subject<boolean> = new Subject<boolean>()
 
+  @Output() isSideBarEmpty: EventEmitter<any> = new EventEmitter()
+
   @Input() isPublicRecord: string
   @Input() orcidId = false
   @Input() hideOrcidId = false
   @Input() newRecordHeaderTogglz: boolean
+  @Input() loadingUserRecord: boolean
 
   modalCountryComponent = ModalCountryComponent
   modalEmailComponent = ModalEmailComponent
   modalWebsitesComponent = ModalWebsitesComponent
   modalKeywordComponent = ModalKeywordComponent
   modalPersonalIdentifiers = ModalPersonIdentifiersComponent
+
+  displaySideBar: boolean
 
   userSession: {
     userInfo: UserInfo
@@ -113,6 +126,8 @@ export class SideBarComponent implements OnInit, OnDestroy {
         }
         this.userRecord = userRecord
         this.userInfo = userRecord?.userInfo
+
+        this.onSideBarElementsDisplay(userRecord)
       })
   }
 
@@ -136,6 +151,14 @@ export class SideBarComponent implements OnInit, OnDestroy {
     return addresses.map((address) => {
       return address.countryName
     })
+  }
+
+  onSideBarElementsDisplay(userRecord: UserRecord): void {
+    this.displaySideBar = RecordUtil.isSideBarEmpty(
+      !!this.isPublicRecord,
+      userRecord
+    )
+    this.isSideBarEmpty.emit(this.displaySideBar)
   }
 
   ngOnDestroy() {

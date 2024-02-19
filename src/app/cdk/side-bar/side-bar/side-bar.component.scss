@@ -4,6 +4,10 @@
   > div {
     width: 100%;
   }
+
+  h2 {
+    margin: 0;
+  }
 }
 
 section {
@@ -13,10 +17,6 @@ section {
 app-panel {
   width: 100%;
   margin-top: 16px;
-}
-
-app-panel:first-of-type {
-  margin-top: 32px;
 }
 
 .orc-font-body {
