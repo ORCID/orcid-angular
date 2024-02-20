@@ -25,6 +25,7 @@ import { ERROR_REPORT } from './errors'
 export class AppComponent {
   currentlyDisplayingZendesk = true
   headlessMode = false
+  footerlessMode = false
   currentRouteIsHeadlessOnOauthPage = true
   screenDirection
   currentRoute
@@ -126,6 +127,7 @@ export class AppComponent {
       (platformInfo.hasOauthParameters || oauthSessionFound) &&
       this.currentRouteIsHeadlessOnOauthPage
     this.headlessMode = isOauth || platformInfo.summaryScreen
+    this.footerlessMode = platformInfo.summaryScreen
     this.ie = platformInfo.ie
     this.edge = platformInfo.edge
     this.tabletOrHandset = platformInfo.tabletOrHandset
