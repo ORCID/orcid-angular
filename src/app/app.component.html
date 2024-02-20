@@ -5,6 +5,6 @@
   <app-header *ngIf="!headlessMode" currentRoute=""></app-header>
   <div class="router-container">
     <router-outlet> </router-outlet>
-    <app-footer></app-footer>
+    <app-footer *ngIf="!footerlessMode"></app-footer>
   </div>
 </div>

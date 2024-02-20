@@ -41,7 +41,7 @@ export class FundingStacksGroupsComponent implements OnInit {
   ngOrcidFunding = $localize`:@@shared.funding:Funding`
   countryCodes: { key: string; value: string }[]
   loading = true
-  sortTypes: SortOrderType[] = ['title', 'start', 'end']
+  sortTypes: SortOrderType[] = ['title', 'start', 'end', 'source']
 
   constructor(
     private _userSession: UserService,
@@ -52,14 +52,6 @@ export class FundingStacksGroupsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this._togglz
-      .getStateOf('SOURCE_SORTING')
-      .pipe(take(1))
-      .subscribe((sourceSortingTogglz: boolean) => {
-        if (sourceSortingTogglz) {
-          this.sortTypes.push('source')
-        }
-      })
     this.getRecord()
   }
 
