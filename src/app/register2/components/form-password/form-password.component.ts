@@ -1,4 +1,11 @@
-import { Component, forwardRef, Input, OnInit, ViewChild } from '@angular/core'
+import {
+  ChangeDetectorRef,
+  Component,
+  forwardRef,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core'
 import {
   NG_ASYNC_VALIDATORS,
   NG_VALUE_ACCESSOR,
@@ -43,6 +50,14 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
   labelInfo = $localize`:@@register.ariaLabelInfoPassword:info about password`
   labelClose = $localize`:@@register.ariaLabelClose:close`
   labelConfirmPassword = $localize`:@@register.confirmYourPassword:Confirm your password`
+
+  accesibiltiyOnlyThe8OrMoreCharactersConstrainIsMet = $localize`:@@register.accesibiltiyOnlyThe8OrMoreCharactersConstrainIsMet:Your password must include at least 1 letter or symbol and 1 number`
+  accesibiltiyOnlyTheLetterOrSymbolConstrainIsMet = $localize`:@@register.accesibiltiyOnlyTheLetterOrSymbolConstrainIsMet:Your password must be 8 or more characters and include at least 1 number`
+  accesibiltiyOnlyTheNumberConstrainIsMet = $localize`:@@register.accesibiltiyOnlyTheNumberConstrainIsMet:Your password must be 8 or more characters and include at least 1 letter or symbol`
+  accesibilityOnlyTheNumberConstrainIsNotMet = $localize`:@@register.accesibilityOnlyTheNumberConstrainIsNotMet:Your password must include at least 1 number`
+  accesibilityOnlyTheLetterOrSymbolConstrainIsNotMet = $localize`:@@register.accesibilityOnlyTheLetterOrSymbolConstrainIsNotMet:Your password must include at least 1 letter or symbol`
+  accesibilityOnlyThe8OrMoreCharactersConstrainIsNotMet = $localize`:@@register.accesibilityOnlyThe8OrMoreCharactersConstrainIsNotMet:Your password must be 8 or more characters`
+  passwordIsRequired = $localize`:@@register.passwordRequired:A password is required`
   @ViewChild(`#passwordPopover`) passwordPopover
   @ViewChild(`#passwordPopoverTrigger`) passwordPopoverTrigger
   hasNumberPattern = HAS_NUMBER
@@ -53,9 +68,11 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
   ccurentValidateAtLeastALetterOrSymbolStatus: boolean
   currentValidateAtLeastANumber: boolean
   passwordsValidAreValidAlreadyChecked: any
+  _currentAccesibilityError: string
   constructor(
     private _register: Register2Service,
-    private _liveAnnouncer: LiveAnnouncer
+    private _liveAnnouncer: LiveAnnouncer,
+    private _changeDetectorRef: ChangeDetectorRef
   ) {
     super()
   }
@@ -80,6 +97,11 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
         asyncValidators: this._register.backendPasswordValidate(),
       }
     )
+
+    this.form.controls['password'].valueChanges.subscribe(() => {
+      this._changeDetectorRef.detectChanges()
+      this.passwordAccesbiltyError()
+    })
   }
 
   passwordDoesNotContainUserEmails(): ValidatorFn {
@@ -123,6 +145,85 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
     })
   }
 
+  passwordAccesbiltyError() {
+    if (this.form.controls['password'].pristine) {
+      return
+    }
+    if (
+      !this.currentValidate8orMoreCharactersStatus &&
+      this.ccurentValidateAtLeastALetterOrSymbolStatus &&
+      this.currentValidateAtLeastANumber
+    ) {
+      this.currentAccesibilityError =
+        this.accesibiltiyOnlyThe8OrMoreCharactersConstrainIsMet
+    } else if (
+      this.currentValidate8orMoreCharactersStatus &&
+      !this.ccurentValidateAtLeastALetterOrSymbolStatus &&
+      this.currentValidateAtLeastANumber
+    ) {
+      this.currentAccesibilityError =
+        this.accesibiltiyOnlyTheLetterOrSymbolConstrainIsMet
+    } else if (
+      this.currentValidate8orMoreCharactersStatus &&
+      this.ccurentValidateAtLeastALetterOrSymbolStatus &&
+      !this.currentValidateAtLeastANumber
+    ) {
+      this.currentAccesibilityError =
+        this.accesibiltiyOnlyTheNumberConstrainIsMet
+    } else if (
+      !this.currentValidate8orMoreCharactersStatus &&
+      this.ccurentValidateAtLeastALetterOrSymbolStatus &&
+      !this.currentValidateAtLeastANumber
+    ) {
+      this.currentAccesibilityError =
+        this.accesibilityOnlyTheLetterOrSymbolConstrainIsNotMet
+    } else if (
+      !this.currentValidate8orMoreCharactersStatus &&
+      !this.ccurentValidateAtLeastALetterOrSymbolStatus &&
+      this.currentValidateAtLeastANumber
+    ) {
+      this.currentAccesibilityError =
+        this.accesibilityOnlyTheNumberConstrainIsNotMet
+    } else if (
+      this.currentValidate8orMoreCharactersStatus &&
+      !this.ccurentValidateAtLeastALetterOrSymbolStatus &&
+      !this.currentValidateAtLeastANumber
+    ) {
+      this.currentAccesibilityError =
+        this.accesibilityOnlyThe8OrMoreCharactersConstrainIsNotMet
+    } else if (
+      !this.currentValidate8orMoreCharactersStatus &&
+      !this.ccurentValidateAtLeastALetterOrSymbolStatus &&
+      !this.currentValidateAtLeastANumber
+    ) {
+      this.currentAccesibilityError = ''
+    } else if (
+      this.currentValidate8orMoreCharactersStatus &&
+      this.ccurentValidateAtLeastALetterOrSymbolStatus &&
+      this.currentValidateAtLeastANumber
+    ) {
+      this.currentAccesibilityError = this.passwordIsRequired
+    }
+  }
+
+  set currentAccesibilityError(value: string) {
+    if (this._currentAccesibilityError === value) {
+      return
+    }
+    this._currentAccesibilityError = value
+    if (!value) {
+      this.announce(
+        $localize`:@@register.allPasswordContrainsArMet:All password constraints are met`
+      )
+    } else {
+      this.announce(value)
+    }
+  }
+
+  get currentAccesibilityError() {
+    return this._currentAccesibilityError
+  }
+
   get confirmPasswordTouched() {
     return (
       this.form.controls['passwordConfirm'].touched || this.nextButtonWasClicked
@@ -161,13 +262,6 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
       this.form.hasError('required', 'password') ||
       this.form.hasError('minlength', 'password')
 
-    if (this.currentValidate8orMoreCharactersStatus !== status) {
-      this.announce(
-        status
-          ? $localize`:@@register.passwordLengthError:Password must be 8 or more characters`
-          : $localize`:@@register.passwordLengthOk:Password is 8 or more characters`
-      )
-    }
     this.currentValidate8orMoreCharactersStatus = status
 
     return status
@@ -179,13 +273,6 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
       this.form.getError('pattern', 'password')?.requiredPattern ==
         this.hasLetterOrSymbolPattern
 
-    if (this.ccurentValidateAtLeastALetterOrSymbolStatus !== status) {
-      this.announce(
-        status
-          ? $localize`:@@register.passwordLetterOrSymbolError:Password must contain at least a letter or symbol`
-          : $localize`:@@register.passwordLetterOrSymbolOk:Password contains at least a letter or symbol`
-      )
-    }
     this.ccurentValidateAtLeastALetterOrSymbolStatus = status
 
     return status
@@ -196,14 +283,6 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
       this.form.hasError('required', 'password') ||
       this.form.getError('pattern', 'password')?.requiredPattern ==
         this.hasNumberPattern
-
-    if (this.currentValidateAtLeastANumber !== status) {
-      this.announce(
-        status
-          ? $localize`:@@register.passwordNumberError:Password must contain at least a number`
-          : $localize`:@@register.passwordNumberOk:Password contains at least a number`
-      )
-    }
 
     this.currentValidateAtLeastANumber = status
 

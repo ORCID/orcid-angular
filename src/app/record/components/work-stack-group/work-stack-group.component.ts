@@ -134,7 +134,7 @@ export class WorkStackGroupComponent implements OnInit {
   platform: PlatformInfo
   selectedWorks: string[] = []
   selectAll: false
-  sortTypes: SortOrderType[] = ['title', 'start', 'end']
+  sortTypes: SortOrderType[] = ['title', 'date', 'type', 'source']
 
   @ViewChildren('selectAllCheckbox') selectAllCheckbox: MatCheckbox
   @ViewChildren('appWorkStacks') appWorkStacks: QueryList<WorkStackComponent>
@@ -151,14 +151,6 @@ export class WorkStackGroupComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this._togglz
-      .getStateOf('SOURCE_SORTING')
-      .pipe(take(1))
-      .subscribe((sourceSortingTogglz: boolean) => {
-        if (sourceSortingTogglz) {
-          this.sortTypes.push('source')
-        }
-      })
     this.$loading = this._works.$loading
     this._record
       .getRecord({ publicRecordId: this.isPublicRecord })
