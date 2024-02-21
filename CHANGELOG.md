@@ -1,3 +1,13 @@
+## v2.56.2 - 2024-02-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.56.1...v2.56.2)
+
+- [#2163](https://github.com/ORCID/orcid-angular/pull/2163): fix: Add new translations required
+
+### Fix
+
+- Add new translations required
+
 ## v2.56.1 - 2024-02-20
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.56.0...v2.56.1)
