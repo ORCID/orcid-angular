@@ -54,6 +54,9 @@
         'state-notice-dark'
       ) !important;
     }
+    a {
+      color: mat.get-color-from-palette($primary, 700);
+    }
   }
 
   .announce {
