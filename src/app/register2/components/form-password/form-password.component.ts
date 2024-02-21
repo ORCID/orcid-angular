@@ -213,7 +213,7 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
     this._currentAccesibilityError = value
     if (!value) {
       this.announce(
-        $localize`:@@register.passwordAreValid:All password constraints are met`
+        $localize`:@@register.allPasswordContrainsArMet:All password constraints are met`
       )
     } else {
       this.announce(value)
