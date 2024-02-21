@@ -57,7 +57,7 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
   accesibilityOnlyTheNumberConstrainIsNotMet = $localize`:@@register.accesibilityOnlyTheNumberConstrainIsNotMet:Your password must include at least 1 number`
   accesibilityOnlyTheLetterOrSymbolConstrainIsNotMet = $localize`:@@register.accesibilityOnlyTheLetterOrSymbolConstrainIsNotMet:Your password must include at least 1 letter or symbol`
   accesibilityOnlyThe8OrMoreCharactersConstrainIsNotMet = $localize`:@@register.accesibilityOnlyThe8OrMoreCharactersConstrainIsNotMet:Your password must be 8 or more characters`
-  passwordIsRequired = $localize`:@@@@register.passwordRequired:A password is required`
+  passwordIsRequired = $localize`:@@register.passwordRequired:A password is required`
   @ViewChild(`#passwordPopover`) passwordPopover
   @ViewChild(`#passwordPopoverTrigger`) passwordPopoverTrigger
   hasNumberPattern = HAS_NUMBER
