@@ -1,3 +1,21 @@
+## v2.58.0 - 2024-02-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.57.0...v2.58.0)
+
+- [#2167](https://github.com/ORCID/orcid-angular/pull/2167): batch-feb-20
+
+## v2.57.0 - 2024-02-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.56.2...v2.57.0)
+
+- [#2164](https://github.com/ORCID/orcid-angular/pull/2164): feature: Add new authorize translations
+- [#2166](https://github.com/ORCID/orcid-angular/pull/2166): batch-feb-20
+- [#2165](https://github.com/ORCID/orcid-angular/pull/2165): batch-feb-20
+
+### Feature
+
+- Add new authorize translations
+
 ## v2.56.2 - 2024-02-21
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.56.1...v2.56.2)
