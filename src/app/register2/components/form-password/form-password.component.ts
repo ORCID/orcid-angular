@@ -269,6 +269,7 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
 
   get validateAtLeastALetterOrSymbol() {
     const status =
+      !(this.form.value?.password as string).trim().length ||
       this.form.hasError('required', 'password') ||
       this.form.getError('pattern', 'password')?.requiredPattern ==
         this.hasLetterOrSymbolPattern
@@ -280,12 +281,11 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
 
   get validateAtLeastANumber() {
     const status =
+      !(this.form.value?.password as string).trim().length ||
       this.form.hasError('required', 'password') ||
       this.form.getError('pattern', 'password')?.requiredPattern ==
         this.hasNumberPattern
-
     this.currentValidateAtLeastANumber = status
-
     return status
   }
 
