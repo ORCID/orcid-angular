@@ -32,7 +32,9 @@
     "storybook": "ng run ng-orcid:storybook ",
     "build:storybook": "ng run ng-orcid:build-storybook",
     "lighthouse": "ts-node -P scripts/tsconfig.json scripts/lighthouse/main.ts",
-    "build:browserslist": "ts-node -P scripts/tsconfig.json scripts/browserlist.prebuild.ts"
+    "build:browserslist": "ts-node -P scripts/tsconfig.json scripts/browserlist.prebuild.ts",
+    "build:fetchCombineWordpressCss": "ts-node -P scripts/tsconfig.json scripts/fetch-combine-wordpress-css.prebuild"
+
   },
   "private": true,
   "dependencies": {
