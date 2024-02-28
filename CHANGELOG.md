@@ -1,3 +1,9 @@
+## v2.61.1 - 2024-02-28
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.61.0...v2.61.1)
+
+- [#2171](https://github.com/ORCID/orcid-angular/pull/2171): WORDPRESS_HOME_PAGE
+
 ## v2.61.0 - 2024-02-26
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.60.0...v2.61.0)
