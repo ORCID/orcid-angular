@@ -43,3 +43,60 @@
     width: 64px;
   }
 }
+
+.sign-in-wrapper {
+  padding: 64px;
+  h1 {
+    margin-top: 0;
+  }
+
+  .orc-font-heading-small {
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  mat-card-title {
+    margin: 0 0 32px 0 !important;
+  }
+
+  mat-card-content {
+    margin: 0px;
+  }
+
+  .icon {
+    margin-bottom: 32px !important;
+  }
+
+  .forgot {
+    margin-top: 24px;
+  }
+
+  mat-divider,.separator {
+    margin: 24px 0;
+  }
+
+  .separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+  }
+
+  .separator::before,
+  .separator::after {
+    content: '';
+    flex: 1;
+  }
+
+  .separator:not(:empty)::before {
+    margin-right: .5em;
+  }
+
+  .separator:not(:empty)::after {
+    margin-left: .5em;
+  }
+
+}
+
+.sign-in-wrapper.mobile {
+  padding: 0;
+}
