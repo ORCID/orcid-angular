@@ -24,6 +24,6 @@ export class WordpressService {
     if (this.locale.includes('en')) {
       return ''
     }
-    return this.locale
+    return '/' + this.locale
   }
 }
