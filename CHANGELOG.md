@@ -1,3 +1,11 @@
+## v2.61.3 - 2024-02-29
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.61.2...v2.61.3)
+
+### Fix
+
+- Redirec to signout instead of info site website (#2175)
+
 ## v2.61.2 - 2024-02-28
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.61.1...v2.61.2)
