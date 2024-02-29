@@ -1,28 +1,31 @@
 @use '@angular/material' as mat;
 @import 'src/assets/scss/material.orcid-theme.scss';
 
-@mixin sign-in-theme($theme) {
+@mixin theme($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
-  $warn: map-get($theme, accent);
+  $warn: map-get($theme, warn);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
-  .display-1 {
-    color: mat.get-color-from-palette($primary);
+
+  a > mat-icon {
+    color: mat.get-color-from-palette($primary, 200) !important;
   }
 
-  .sign-in-to-orcid-button {
-    color: $orcid-light-primary-text;
-    background: mat.get-color-from-palette($primary, 700);
+  ::ng-deep .valid {
+    color: mat.get-color-from-palette($accent, 900);
   }
 
-  .separator::before,
-  .separator::after {
-    content: '';
-    border-bottom: 1px solid mat.get-color-from-palette($foreground, dividers);
+  .error {
+    color: map-get($foreground, 'state-warning-dark');
+  }
+
+  .text-light {
+    color: map-get($foreground, 'text-dark-mid');
   }
 
   .info {
+    margin-top: 24px;
     background-color: mat.get-color-from-palette(
       $background,
       state-notice-lightest
@@ -44,4 +47,4 @@
   }
 }
 
-@include sign-in-theme($orcid-app-theme);
+@include theme($orcid-app-theme);
