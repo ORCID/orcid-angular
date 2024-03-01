@@ -254,8 +254,11 @@ export class HeaderComponent implements OnInit {
     if (route === 'signin') {
       this._router.navigate([ApplicationRoutes.signin])
       this.mobileMenuState = false
-    } else if (route === 'signout' && environment.proxyMode) {
-      this._user.noRedirectLogout().subscribe()
+    } else if (route === 'signout') {
+      if (environment.proxyMode) {
+        this._user.noRedirectLogout().subscribe()
+      }
+      this.window.location.href = route
     } else {
       ;(this.window as any).outOfRouterNavigation(environment.INFO_SITE + route)
     }

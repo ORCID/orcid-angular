@@ -1,3 +1,35 @@
+## v2.61.4 - 2024-02-29
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.61.3...v2.61.4)
+
+## v2.61.3 - 2024-02-29
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.61.2...v2.61.3)
+
+### Fix
+
+- Redirec to signout instead of info site website (#2175)
+
+## v2.61.2 - 2024-02-28
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.61.1...v2.61.2)
+
+- [#2172](https://github.com/ORCID/orcid-angular/pull/2172): WORDPRESS_HOME_PAGE
+
+## v2.61.1 - 2024-02-28
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.61.0...v2.61.1)
+
+- [#2171](https://github.com/ORCID/orcid-angular/pull/2171): WORDPRESS_HOME_PAGE
+
+## v2.61.0 - 2024-02-26
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.60.0...v2.61.0)
+
+## v2.60.0 - 2024-02-26
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.59.0...v2.60.0)
+
 ## v2.59.0 - 2024-02-23
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.58.0...v2.59.0)
