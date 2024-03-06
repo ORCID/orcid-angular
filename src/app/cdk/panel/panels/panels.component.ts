@@ -81,7 +81,6 @@ export class PanelsComponent implements OnInit {
     private _dialog: MatDialog,
     private _platform: PlatformInfoService,
     private _verificationEmailModalService: VerificationEmailModalService,
-    private _togglz: TogglzService
   ) {}
 
   add(type: string, action?: ADD_EVENT_ACTION) {

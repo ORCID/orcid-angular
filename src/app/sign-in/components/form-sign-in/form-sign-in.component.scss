@@ -29,3 +29,30 @@ button {
 .register-now {
   display: inline;
 }
+
+mat-form-field,.input-container {
+  width: 100%;
+}
+
+mat-form-field,.input-container {
+  margin-bottom: 8px;
+}
+
+mat-label.orc-font-small-print {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 4px;
+
+  label {
+    font-weight: normal;
+  }
+}
+
+.forgot-password-button {
+  justify-content: center;
+  margin-top: 16px;
+}
+
+ mat-divider {
+  margin: 0px 0 30px 0;
+ }

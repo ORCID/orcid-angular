@@ -1,13 +1,39 @@
+@use '@angular/material' as mat;
 @import 'src/assets/scss/material.orcid-theme.scss';
 
 @mixin my-orcid-alerts-theme($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
   .mat-toolbar {
     background: map-get($foreground, 'state-notice-light');
     color: $orcid-dark-primary-text;
+  }
+
+  .verification {
+    background-color: mat.get-color-from-palette(
+      $background,
+      brand-primary-lightest
+    );
+    border-color: map-get($foreground, 'brand-primary');
+
+    mat-icon {
+      color: mat.get-color-from-palette(
+        $foreground,
+        'brand-primary'
+      ) !important;
+    }
+  }
+
+  .invalid {
+    background-color: mat.get-color-from-palette($warn, 50);
+    border-color: map-get($foreground, 'state-warning-dark');
+
+    mat-icon {
+      color: map-get($foreground, 'state-warning-dark');
+    }
   }
 }
 

@@ -19,12 +19,16 @@ import { WINDOW } from '../../window'
 @Component({
   selector: 'app-two-factor-authentication-form',
   templateUrl: './two-factor-authentication-form.component.html',
-  styleUrls: ['./two-factor-authentication-form.component.scss'],
+  styleUrls: [
+    './two-factor-authentication-form.component.scss',
+    './two-factor-authentication-form.component.scss-theme.scss'
+  ],
   preserveWhitespaces: true,
 })
 export class TwoFactorAuthenticationFormComponent implements AfterViewInit {
   @Input() showBadVerificationCode: boolean
   @Input() showBadRecoveryCode: boolean
+  @Input() signInUpdatesV1Togglz: boolean
   @Output() authenticate = new EventEmitter<{
     verificationCode?: string
     recoveryCode?: string

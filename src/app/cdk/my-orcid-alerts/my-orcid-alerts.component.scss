@@ -14,3 +14,39 @@ mat-toolbar {
     }
   }
 }
+
+.verification,
+.invalid {
+  .main-paragraph {
+    margin-bottom: 16px;
+  }
+  .content div:not(:last-child) {
+    margin-bottom: 8px;
+  }
+
+  padding: 16px;
+  border: solid 2px;
+  border-radius: 4px;
+  display: flex;
+
+  p {
+    margin: 0;
+  }
+
+  mat-icon,
+  img {
+    margin-right: 16px;
+  }
+
+  mat-form-field,.input-container {
+    width: 100%;
+  }
+
+  mat-form-field {
+    margin-bottom: 8px;
+  }
+}
+
+.invalid,.verification {
+  margin-bottom: 24px;
+}

@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core'
+import { Component, Inject, Input, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { CookieService } from 'ngx-cookie-service'
 import { first } from 'rxjs/operators'
@@ -15,6 +15,8 @@ import { SignInService } from '../../../core/sign-in/sign-in.service'
   styleUrls: ['./social.component.scss', './social.component.scss-theme.scss'],
 })
 export class SocialComponent implements OnInit {
+  @Input() signInUpdatesV1Togglz: boolean
+
   platform: PlatformInfo
   baseUri: string
   csrf: string

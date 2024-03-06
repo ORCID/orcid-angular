@@ -11,6 +11,9 @@ import { Component, Input, OnInit } from '@angular/core'
 export class MyOrcidAlertsComponent implements OnInit {
   @Input() emailVerified: boolean
   @Input() invalidVerifyUrl: boolean
+  @Input() signInUpdatesV1Togglz: boolean
+  @Input() printError: boolean
+  @Input() badCredentials: boolean
 
   constructor() {}
 
