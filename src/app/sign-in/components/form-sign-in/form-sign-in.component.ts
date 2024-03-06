@@ -18,7 +18,10 @@ import {
 } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { catchError, first, map, takeUntil, tap } from 'rxjs/operators'
-import { ApplicationRoutes, isRedirectToTheAuthorizationPage } from 'src/app/constants'
+import {
+  ApplicationRoutes,
+  isRedirectToTheAuthorizationPage,
+} from 'src/app/constants'
 import { UserService } from 'src/app/core'
 import { OauthParameters, RequestInfoForm } from 'src/app/types'
 
@@ -44,7 +47,7 @@ import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
   styleUrls: [
     './form-sign-in.component.scss',
     '../sign-in.style.scss',
-    '../sign-in.scss-theme.scss'
+    '../sign-in.scss-theme.scss',
   ],
   preserveWhitespaces: true,
 })
@@ -102,7 +105,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
     private _signInGuard: SignInGuard,
     private _userInfo: UserService,
     private cd: ChangeDetectorRef,
-    private _snackBar: SnackbarService,
+    private _snackBar: SnackbarService
   ) {
     this.signInLocal.type = this.signInType
     combineLatest([_userInfo.getUserSession(), _platformInfo.get()])
@@ -400,7 +403,9 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   navigateToClaim() {
-    this.window.location.href = `/resend-claim?email=${encodeURIComponent(this.email)}`
+    this.window.location.href = `/resend-claim?email=${encodeURIComponent(
+      this.email
+    )}`
   }
 
   signInActiveAccount() {

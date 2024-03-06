@@ -80,7 +80,7 @@ export class PanelsComponent implements OnInit {
   constructor(
     private _dialog: MatDialog,
     private _platform: PlatformInfoService,
-    private _verificationEmailModalService: VerificationEmailModalService,
+    private _verificationEmailModalService: VerificationEmailModalService
   ) {}
 
   add(type: string, action?: ADD_EVENT_ACTION) {

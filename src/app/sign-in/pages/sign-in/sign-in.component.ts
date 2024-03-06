@@ -1,4 +1,4 @@
- import { HttpParams } from '@angular/common/http'
+import { HttpParams } from '@angular/common/http'
 import {
   Component,
   HostBinding,
@@ -51,7 +51,6 @@ export class SignInComponent implements OnInit {
   signInUpdatesV1Togglz = false
   orLabel = $localize`:@@ngOrcid.signin.or:or`
 
-
   constructor(
     private _platformInfo: PlatformInfoService,
     private _router: Router,
@@ -62,9 +61,9 @@ export class SignInComponent implements OnInit {
 
   ngOnInit() {
     this._togglz
-     .getStateOf('SIGN_IN_UPDATES_V1')
-     .pipe(take(1))
-     .subscribe((value) => (this.signInUpdatesV1Togglz = value))
+      .getStateOf('SIGN_IN_UPDATES_V1')
+      .pipe(take(1))
+      .subscribe((value) => (this.signInUpdatesV1Togglz = value))
 
     combineLatest([this._userInfo.getUserSession(), this._platformInfo.get()])
       .pipe(first())

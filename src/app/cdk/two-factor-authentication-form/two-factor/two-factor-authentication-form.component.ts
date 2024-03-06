@@ -21,7 +21,7 @@ import { WINDOW } from '../../window'
   templateUrl: './two-factor-authentication-form.component.html',
   styleUrls: [
     './two-factor-authentication-form.component.scss',
-    './two-factor-authentication-form.component.scss-theme.scss'
+    './two-factor-authentication-form.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
 })

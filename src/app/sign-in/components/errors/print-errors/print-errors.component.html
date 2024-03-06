@@ -72,20 +72,21 @@
               i18n="@@ngOrcid.signin.cannotSignInToOrcid"
               *ngIf="showUnclaimedError"
             >
-              You cannot sign in to ORCID with this email address until you have claimed the record.
+              You cannot sign in to ORCID with this email address until you have
+              claimed the record.
             </i>
             <i
               i18n="@@ngOrcid.signin.needToReactivateAccount"
               *ngIf="showDeactivatedError"
             >
-              You will need to reactivate the account before you can sign in with this email address
+              You will need to reactivate the account before you can sign in
+              with this email address
             </i>
           </ng-container>
 
           <ng-container *ngIf="showDeprecatedError">
             <ng-container i18n="@@ngOrcid.signin.orcidAccountHasBeenDeprecated">
-              This ORCID account has been deprecated. The active account is
-            </ng-container
+              This ORCID account has been deprecated. The active account is </ng-container
             >&nbsp;<b>{{ orcidPrimaryDeprecated }}</b>
           </ng-container>
         </p>
@@ -107,9 +108,9 @@
           Reactivate the ORCID record associated with this email address</a
         >
         <a
-        i18n="@@ngOrcid.signin.signInToActive"
-        (click)="deprecatedAccount()"
-        *ngIf="showDeprecatedError"
+          i18n="@@ngOrcid.signin.signInToActive"
+          (click)="deprecatedAccount()"
+          *ngIf="showDeprecatedError"
         >
           Sign in to the active ORCID account</a
         >

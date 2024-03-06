@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core'
 import { WINDOW } from '../../../../cdk/window'
 
 @Component({
@@ -7,7 +14,7 @@ import { WINDOW } from '../../../../cdk/window'
   styleUrls: [
     './print-errors.component.scss',
     '../../sign-in.style.scss',
-    '../../sign-in.scss-theme.scss'
+    '../../sign-in.scss-theme.scss',
   ],
   preserveWhitespaces: true,
 })

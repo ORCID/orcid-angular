@@ -38,7 +38,8 @@ mat-toolbar {
     margin-right: 16px;
   }
 
-  mat-form-field,.input-container {
+  mat-form-field,
+  .input-container {
     width: 100%;
   }
 
@@ -47,6 +48,7 @@ mat-toolbar {
   }
 }
 
-.invalid,.verification {
+.invalid,
+.verification {
   margin-bottom: 24px;
 }

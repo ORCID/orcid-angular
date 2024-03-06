@@ -25,22 +25,19 @@
   <ng-container *ngIf="emailVerified || invalidVerifyUrl">
     <div
       [ngClass]="{
-        'verification': emailVerified,
-        'invalid': invalidVerifyUrl
-        }">
+        verification: emailVerified,
+        invalid: invalidVerifyUrl
+      }"
+    >
       <div>
-        <mat-icon class="large-material-icon material-symbols-outlined"
-          >
-            <ng-container *ngIf="emailVerified">check_circle</ng-container>
-            <ng-container *ngIf="invalidVerifyUrl">warning</ng-container>
-          </mat-icon
-        >
+        <mat-icon class="large-material-icon material-symbols-outlined">
+          <ng-container *ngIf="emailVerified">check_circle</ng-container>
+          <ng-container *ngIf="invalidVerifyUrl">warning</ng-container>
+        </mat-icon>
       </div>
       <div class="content">
         <div>
-          <b i18n="@@ngOrcid.signin.almostDone">
-            Almost done!
-          </b>
+          <b i18n="@@ngOrcid.signin.almostDone"> Almost done! </b>
         </div>
         <div>
           <ng-container
@@ -60,25 +57,24 @@
       </div>
     </div>
   </ng-container>
-  <ng-container
-      *ngIf="printError && badCredentials"
-    >
-      <div class="invalid">
+  <ng-container *ngIf="printError && badCredentials">
+    <div class="invalid">
+      <div>
+        <mat-icon class="large-material-icon material-symbols-outlined"
+          >warning</mat-icon
+        >
+      </div>
+      <div class="content">
         <div>
-          <mat-icon class="large-material-icon material-symbols-outlined"
-            >warning</mat-icon
-          >
+          <b i18n="@@ngOrcid.signin.somethingNotQuiteRight">
+            Something's not quite right...
+          </b>
         </div>
-        <div class="content">
-          <div>
-            <b i18n="@@ngOrcid.signin.somethingNotQuiteRight">
-              Something's not quite right...
-            </b>
-          </div>
-          <div i18n="@@ngOrcid.signin.checkYourSignIn">
-            Please check that your sign in details are correct and then try signing in again
-          </div>
+        <div i18n="@@ngOrcid.signin.checkYourSignIn">
+          Please check that your sign in details are correct and then try
+          signing in again
         </div>
       </div>
-    </ng-container>
+    </div>
+  </ng-container>
 </ng-container>

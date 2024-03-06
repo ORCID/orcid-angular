@@ -71,7 +71,8 @@
     margin-top: 24px;
   }
 
-  mat-divider,.separator {
+  mat-divider,
+  .separator {
     margin: 24px 0;
   }
 
@@ -88,13 +89,12 @@
   }
 
   .separator:not(:empty)::before {
-    margin-right: .5em;
+    margin-right: 0.5em;
   }
 
   .separator:not(:empty)::after {
-    margin-left: .5em;
+    margin-left: 0.5em;
   }
-
 }
 
 .sign-in-wrapper.mobile {

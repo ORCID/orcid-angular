@@ -7,10 +7,7 @@
   <div class="container">
     <div class="row space-around">
       <div class="col l6 m6 s4">
-        <mat-card
-          class="orcid-wizard"
-          *ngIf="!signInUpdatesV1Togglz"
-        >
+        <mat-card class="orcid-wizard" *ngIf="!signInUpdatesV1Togglz">
           <mat-progress-bar
             role="heading"
             aria-level="2"
@@ -73,7 +70,7 @@
           *ngIf="signInUpdatesV1Togglz"
           class="orcid-wizard sign-in-wrapper"
           [ngClass]="{
-            'mobile': !platform.columns12
+            mobile: !platform.columns12
           }"
         >
           <mat-progress-bar
@@ -87,9 +84,12 @@
               <div class="icon">
                 <img src="assets/vectors/orcid.logo.icon.svg" alt="" />
               </div>
-              <h1 class="orc-font-heading-small" i18n="@@ngOrcid.signin.signInToOrcid"
-                >Sign in to ORCID</h1
+              <h1
+                class="orc-font-heading-small"
+                i18n="@@ngOrcid.signin.signInToOrcid"
               >
+                Sign in to ORCID
+              </h1>
               <div class="row">
                 <div class="mat-body-1">
                   <ng-container i18n="@@ngOrcid.signin.dontHaveYourOrcid">
@@ -133,8 +133,12 @@
                   Sign in to ORCID
                 </button>
               </app-form-sign-in>
-              <div class="separator orc-font-body">{{ orLabel | uppercase }}</div>
-              <app-social [signInUpdatesV1Togglz]="signInUpdatesV1Togglz"></app-social>
+              <div class="separator orc-font-body">
+                {{ orLabel | uppercase }}
+              </div>
+              <app-social
+                [signInUpdatesV1Togglz]="signInUpdatesV1Togglz"
+              ></app-social>
             </ng-container>
             <app-logged-in
               *ngIf="isLoggedIn && !isForceLogin && !isOauthError"

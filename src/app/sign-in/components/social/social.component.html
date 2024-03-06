@@ -4,20 +4,31 @@
   (click)="accessThroughInstitution()"
   class="mat-button-wrap-text-with-icon mobile-fixed-width mat-elevation-z0"
   [ngClass]="{
-    'institution' : !signInUpdatesV1Togglz,
-    'institutional' : signInUpdatesV1Togglz,
-    'mobile' : signInUpdatesV1Togglz && !platform.columns12
-    }"
+    institution: !signInUpdatesV1Togglz,
+    institutional: signInUpdatesV1Togglz,
+    mobile: signInUpdatesV1Togglz && !platform.columns12
+  }"
   type="button"
   [attr.aria-label]="labelInstitutionalButton"
 >
   <img
-    [src]="signInUpdatesV1Togglz ? './assets/vectors/institutional-access.svg' : './assets/vectors/institutional-access.svg'"
-    alt="Institutional" />
-  <ng-container i18n="@@ngOrcid.signin.institutionalAccount" *ngIf="!signInUpdatesV1Togglz">
+    [src]="
+      signInUpdatesV1Togglz
+        ? './assets/vectors/institutional-access.svg'
+        : './assets/vectors/institutional-access.svg'
+    "
+    alt="Institutional"
+  />
+  <ng-container
+    i18n="@@ngOrcid.signin.institutionalAccount"
+    *ngIf="!signInUpdatesV1Togglz"
+  >
     Access through your institution
   </ng-container>
-  <ng-container i18n="@@ngOrcid.signin.signInInstitution" *ngIf="signInUpdatesV1Togglz">
+  <ng-container
+    i18n="@@ngOrcid.signin.signInInstitution"
+    *ngIf="signInUpdatesV1Togglz"
+  >
     Sign in through your institution
   </ng-container>
 </button>
@@ -29,7 +40,7 @@
     class="google mat-button-wrap-text-with-icon mobile-fixed-width mat-elevation-z0"
     type="submit"
     [attr.aria-label]="labelGoogleButton"
-    [ngClass]="{ 'google': signInUpdatesV1Togglz }"
+    [ngClass]="{ google: signInUpdatesV1Togglz }"
   >
     <img src="./assets/vectors/google.svg" alt="Google" />
     <ng-container i18n="@@ngOrcid.signin.google">
