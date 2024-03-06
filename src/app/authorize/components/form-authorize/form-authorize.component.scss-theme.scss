@@ -1,0 +1,17 @@
+@use '@angular/material' as mat;
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+@mixin form-authorize-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  .authorize-button {
+    color: $orcid-light-primary-text;
+    background: mat.get-color-from-palette($primary, 700);
+  }
+}
+
+@include form-authorize-theme($orcid-app-theme);
