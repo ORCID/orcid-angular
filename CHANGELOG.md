@@ -1,3 +1,11 @@
+## v2.62.1 - 2024-03-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.0...v2.62.1)
+
+### Fix
+
+- Return empty observable instead of null (#2183)
+
 ## v2.62.0 - 2024-03-07
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.61.9...v2.62.0)
