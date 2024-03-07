@@ -8,6 +8,7 @@ import { switchMap } from 'rxjs/operators'
 import { WordpressService } from 'src/app/core/wordpress/wordpress.service'
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 import { DOCUMENT } from '@angular/common'
+import { EMPTY } from 'rxjs'
 
 @Component({
   selector: 'app-home',
@@ -44,7 +45,7 @@ export class HomeComponent implements OnInit {
           if (state) {
             return this.wordpressService.getHomePagePost()
           } else {
-            return null
+            return EMPTY
           }
         })
       )
