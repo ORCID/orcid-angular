@@ -17,8 +17,8 @@ export class AuthorizeComponent implements OnInit {
   constructor(
     _user: UserService,
     private _platformInfo: PlatformInfoService,
-    private _togglz: TogglzService,
-    ) {
+    private _togglz: TogglzService
+  ) {
     _user.getUserSession().subscribe((session) => {
       if (session.oauthSession && session.oauthSession.error) {
         this.showAuthorizationComponent = false
@@ -32,9 +32,9 @@ export class AuthorizeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  this._togglz
-    .getStateOf('SIGN_IN_UPDATES_V1')
-    .pipe(take(1))
-    .subscribe((value) => (this.signInUpdatesV1Togglz = value))
+    this._togglz
+      .getStateOf('SIGN_IN_UPDATES_V1')
+      .pipe(take(1))
+      .subscribe((value) => (this.signInUpdatesV1Togglz = value))
   }
 }

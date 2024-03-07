@@ -102,8 +102,9 @@
 
       <p class="mat-caption m-t-0">
         <ng-container i18n="@@authorize.ifAuthorize">
-          If authorized, this organization will have access to your ORCID record,
-          as outlined above and described in further detail in</ng-container
+          If authorized, this organization will have access to your ORCID
+          record, as outlined above and described in further detail
+          in</ng-container
         >
         <a
           href="{{ environment.INFO_SITE + 'privacy-policy' }}"
@@ -152,16 +153,13 @@
   <ng-container *ngIf="signInUpdatesV1Togglz">
     <mat-card-header class="authorize-header">
       <mat-card-title role="heading" aria-level="1">
-        <mat-icon
-          class="logo-icon"
-          aria-hidden="false"
-          [attr.aria-label]=""
-        ><img src="./assets/vectors/orcid.logo.icon.svg" />
+        <mat-icon class="logo-icon" aria-hidden="false" [attr.aria-label]=""
+          ><img src="./assets/vectors/orcid.logo.icon.svg" />
         </mat-icon>
-        <h1 class="orc-font-heading-small" i18n="@@authorize.authorize"
-          >Authorize access</h1
-        >
-        </mat-card-title>
+        <h1 class="orc-font-heading-small" i18n="@@authorize.authorize">
+          Authorize access
+        </h1>
+      </mat-card-title>
     </mat-card-header>
     <mat-progress-bar
       id="loading-bar"
@@ -185,7 +183,7 @@
               class="profile-icon"
               aria-hidden="false"
               [attr.aria-label]=""
-            ><img src="./assets/vectors/profile-not-verified.svg" />
+              ><img src="./assets/vectors/profile-not-verified.svg" />
             </mat-icon>
           </div>
         </div>
@@ -223,8 +221,12 @@
         [signInUpdatesV1Togglz]="signInUpdatesV1Togglz"
       ></app-info-drop-down>
 
-      <p class="mat-body-1 m-t-16 m-b-32" i18n="@@authorize.organizationAskedFollowingAccess">
-        This organization has asked for the following access to your ORCID record
+      <p
+        class="mat-body-1 m-t-16 m-b-32"
+        i18n="@@authorize.organizationAskedFollowingAccess"
+      >
+        This organization has asked for the following access to your ORCID
+        record
       </p>
 
       <ul class="mat-body-1 m-t-base m-b-64">
