@@ -1,3 +1,11 @@
+## v2.61.9 - 2024-03-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.61.8...v2.61.9)
+
+### Feature
+
+- Add new authorize styling (#2182)
+
 ## v2.61.8 - 2024-03-06
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.61.7...v2.61.8)
