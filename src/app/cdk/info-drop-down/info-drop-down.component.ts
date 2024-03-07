@@ -11,6 +11,7 @@ import { Component, OnInit, Input } from '@angular/core'
 export class InfoDropDownComponent implements OnInit {
   @Input() name
   @Input() description
+  @Input() signInUpdatesV1Togglz: boolean
   show = false
   constructor() {}
 
