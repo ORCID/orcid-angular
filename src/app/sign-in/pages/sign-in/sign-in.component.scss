@@ -55,6 +55,10 @@
     font-weight: 500;
   }
 
+  mat-progress-bar {
+    top: 0 !important;
+  }
+
   mat-card-title {
     margin: 0 0 32px 0 !important;
   }
