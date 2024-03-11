@@ -202,7 +202,8 @@ export class RecordAffiliationService {
   }
 
   getOrganization(org: string): Observable<Organization[]> {
-    return this._http
+    if(org.length > 2) {
+	  return this._http
       .get<Organization[]>(
         environment.API_WEB +
           'affiliations/disambiguated/name/' +
@@ -216,6 +217,9 @@ export class RecordAffiliationService {
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )
+	} else {
+	  return of([])
+	}
   }
 
   getOrganizationDisambiguated(
