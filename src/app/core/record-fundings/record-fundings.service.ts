@@ -174,24 +174,24 @@ export class RecordFundingsService {
   }
 
   getOrganization(org: string): Observable<Organization[]> {
-    if(org.length > 2) {
-	   return this._http
-      .get<Organization[]>(
-        environment.API_WEB +
-          'fundings/disambiguated/name/' +
-          org +
-          '?limit=100&funders-only=true',
-        {
-          headers: this.headers,
-        }
-      )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
-	} else {
-		return of([])
-	}
+    if (org.length > 2) {
+      return this._http
+        .get<Organization[]>(
+          environment.API_WEB +
+            'fundings/disambiguated/name/' +
+            org +
+            '?limit=100&funders-only=true',
+          {
+            headers: this.headers,
+          }
+        )
+        .pipe(
+          retry(3),
+          catchError((error) => this._errorHandler.handleError(error))
+        )
+    } else {
+      return of([])
+    }
   }
 
   loadFundingImportWizardList(): Observable<RecordImportWizard[]> {
