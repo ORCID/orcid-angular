@@ -1,3 +1,31 @@
+## v2.62.1 - 2024-03-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.0...v2.62.1)
+
+### Fix
+
+- Return empty observable instead of null (#2183)
+
+## v2.62.0 - 2024-03-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.61.9...v2.62.0)
+
+## v2.61.9 - 2024-03-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.61.8...v2.61.9)
+
+### Feature
+
+- Add new authorize styling (#2182)
+
+## v2.61.8 - 2024-03-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.61.7...v2.61.8)
+
+## v2.61.7 - 2024-03-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.61.6...v2.61.7)
+
 ## v2.61.6 - 2024-03-05
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.61.5...v2.61.6)

@@ -10,3 +10,37 @@
 .logo {
   width: 130px;
 }
+
+.authorize-wrapper {
+  padding: 64px;
+  margin-top: 0 !important;
+
+  h1 {
+    margin-top: 0;
+  }
+
+  .orc-font-heading-small {
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  mat-card-title {
+    margin: 0 0 32px 0 !important;
+  }
+
+  mat-card-content {
+    margin: 0px !important;
+  }
+
+  .icon {
+    margin-bottom: 32px !important;
+  }
+
+  mat-divider {
+    margin: 24px 0;
+  }
+}
+
+.authorize-wrapper.mobile {
+  padding: 0;
+}
