@@ -174,7 +174,8 @@ export class RecordFundingsService {
   }
 
   getOrganization(org: string): Observable<Organization[]> {
-    return this._http
+    if(org.length > 2) {
+	   return this._http
       .get<Organization[]>(
         environment.API_WEB +
           'fundings/disambiguated/name/' +
@@ -188,6 +189,9 @@ export class RecordFundingsService {
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )
+	} else {
+		return of([])
+	}
   }
 
   loadFundingImportWizardList(): Observable<RecordImportWizard[]> {
