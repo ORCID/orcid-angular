@@ -93,6 +93,7 @@ mat-card-content.authorize-content {
 
   div.profile-icon-wrapper {
     padding: 0 !important;
+    margin-right: 16px;
   }
 
   div.user-wrapper {
@@ -117,5 +118,9 @@ mat-card-content.authorize-content {
 
   .user-links {
     width: 100%;
+  }
+
+  .center-content {
+    justify-content: center;
   }
 }

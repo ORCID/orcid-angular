@@ -2,7 +2,7 @@ import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { forkJoin, Observable, Subject } from 'rxjs'
 import { catchError, map, take, takeUntil } from 'rxjs/operators'
-import { PlatformInfoService } from 'src/app/cdk/platform-info'
+import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { ApplicationRoutes } from 'src/app/constants'
 import { UserService } from 'src/app/core'
@@ -42,6 +42,7 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
 
   oauthRequest: RequestInfoForm
   trustedIndividuals: TrustedIndividuals
+  platformInfo: PlatformInfo
 
   authorizeAccessFor = $localize`:@@authorize.authorizeAccessFor:Authorize access for`
   orcid = $localize`:@@authorize.dashOrcid:- ORCID`
@@ -58,6 +59,11 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
     private _trustedIndividuals: TrustedIndividualsService,
     private _titleService: Title
   ) {
+    this._platformInfo
+    .get()
+    .pipe(take(1))
+    .subscribe((platform) => this.platformInfo = platform)
+
     this._user
       .getUserSession()
       .pipe(
