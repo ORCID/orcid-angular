@@ -1,3 +1,11 @@
+## v2.62.9 - 2024-03-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.8...v2.62.9)
+
+### Fix
+
+- Add missing arialabel (#2191)
+
 ## v2.62.8 - 2024-03-13
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.7...v2.62.8)
