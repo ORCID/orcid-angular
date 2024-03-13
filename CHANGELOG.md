@@ -1,3 +1,13 @@
+## v2.62.13 - 2024-03-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.12...v2.62.13)
+
+- [#2194](https://github.com/ORCID/orcid-angular/pull/2194): Fix/9116 tech check errors on the home page
+
+### Fix
+
+- Return empty observable instead of null
+
 ## v2.62.12 - 2024-03-13
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.11...v2.62.12)
