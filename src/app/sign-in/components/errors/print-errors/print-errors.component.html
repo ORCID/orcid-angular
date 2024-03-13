@@ -80,7 +80,7 @@
               *ngIf="showDeactivatedError"
             >
               You will need to reactivate the account before you can sign in
-              with this email address
+              with this email address.
             </i>
           </ng-container>
 
@@ -94,11 +94,11 @@
 
       <div>
         <a
-          i18n="@@register.resendClaimAddress"
+          i18n="@@ngOrcid.signin.claimYourOrcidRecord"
           (click)="unclaimed()"
           *ngIf="showUnclaimedError"
         >
-          Resend a claim email to this email address</a
+          Claim your ORCID record</a
         >
         <a
           i18n="@@register.reactivateOrcidAssociated"
