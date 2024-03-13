@@ -152,6 +152,7 @@
 
   <ng-container *ngIf="signInUpdatesV1Togglz">
     <mat-progress-bar
+      class="progress-bar"
       id="loading-bar"
       *ngIf="
         loadingUserInfo || loadingTrustedIndividuals || loadingAuthorizeEndpoint
@@ -226,7 +227,7 @@
         i18n="@@authorize.organizationAskedFollowingAccess"
       >
         This organization has asked for the following access to your ORCID
-        record
+        record:
       </p>
 
       <ul class="mat-body-1 m-t-base m-b-64">
@@ -260,13 +261,8 @@
         Authorize access
       </button>
       <div class="row deny-button-wrapper">
-        <a
-          id="deny-button"
-          class="underline"
-          (click)="authorize(false)"
-          i18n="@@authorize.deny"
-        >
-          Deny access
+        <a id="deny-button" class="underline" (click)="authorize(false)">
+          <i i18n="@@authorize.deny">Deny access</i>
         </a>
       </div>
     </mat-card-content>

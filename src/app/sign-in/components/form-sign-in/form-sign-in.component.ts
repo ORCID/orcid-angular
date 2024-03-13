@@ -171,8 +171,10 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    this.firstInput.nativeElement.focus()
-    this.cd.detectChanges()
+    if (!this.signInUpdatesV1Togglz) {
+      this.firstInput.nativeElement.focus()
+      this.cd.detectChanges()
+    }
   }
 
   onSubmit() {
