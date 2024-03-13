@@ -56,7 +56,7 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
     private _router: Router,
     private _errorHandler: ErrorHandlerService,
     private _trustedIndividuals: TrustedIndividualsService,
-    private _titleService: Title,
+    private _titleService: Title
   ) {
     this._user
       .getUserSession()
@@ -92,7 +92,13 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     setTimeout(() => {
       if (this.signInUpdatesV1Togglz) {
-        this._titleService.setTitle(this.authorizeAccessFor + ' ' + this.oauthRequest.clientName + ' ' + this.orcid)
+        this._titleService.setTitle(
+          this.authorizeAccessFor +
+            ' ' +
+            this.oauthRequest.clientName +
+            ' ' +
+            this.orcid
+        )
       }
     }, 1000)
   }

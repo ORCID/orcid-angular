@@ -26,7 +26,9 @@
       class="underline"
       [ngClass]="{ 'm-b-16': show }"
       (click)="show = !show"
-      [attr.aria-label]="(!show ? ariaLabelShowDetailsFor : ariaLabelHideDetailsFor) + ' ' + name "
+      [attr.aria-label]="
+        (!show ? ariaLabelShowDetailsFor : ariaLabelHideDetailsFor) + ' ' + name
+      "
     >
       <ng-container i18n="@@shared.showDetails" *ngIf="!show"
         >Show details</ng-container
