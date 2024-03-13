@@ -19,6 +19,7 @@ import {
 } from 'src/app/types/trusted-individuals.endpoint'
 import { environment } from 'src/environments/environment'
 import { GoogleTagManagerService } from '../../../core/google-tag-manager/google-tag-manager.service'
+import { Title } from '@angular/platform-browser'
 
 @Component({
   selector: 'app-form-authorize',
@@ -41,6 +42,10 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
 
   oauthRequest: RequestInfoForm
   trustedIndividuals: TrustedIndividuals
+
+  authorizeAccessFor = $localize`:@@authorize.authorizeAccessFor:Authorize access for`
+  orcid = $localize`:@@authorize.authorize.dashOrcid:- ORCID`
+
   constructor(
     @Inject(WINDOW) private window: Window,
     private _user: UserService,
@@ -50,7 +55,8 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
     private _platformInfo: PlatformInfoService,
     private _router: Router,
     private _errorHandler: ErrorHandlerService,
-    private _trustedIndividuals: TrustedIndividualsService
+    private _trustedIndividuals: TrustedIndividualsService,
+    private _titleService: Title,
   ) {
     this._user
       .getUserSession()
@@ -83,7 +89,13 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
     })
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    setTimeout(() => {
+      if (this.signInUpdatesV1Togglz) {
+        this._titleService.setTitle(this.authorizeAccessFor + ' ' + this.oauthRequest.clientName + ' ' + this.orcid)
+      }
+    }, 1000)
+  }
 
   navigateTo(val) {
     this.window.location.href = val
