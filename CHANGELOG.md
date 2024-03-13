@@ -1,3 +1,13 @@
+## v2.62.12 - 2024-03-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.11...v2.62.12)
+
+- [#2193](https://github.com/ORCID/orcid-angular/pull/2193): fix: Add condition to wait for sign in togglz
+
+### Fix
+
+- Add condition to wait for sign in togglz
+
 ## v2.62.11 - 2024-03-13
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.10...v2.62.11)
