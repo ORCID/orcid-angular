@@ -1,3 +1,60 @@
+## v2.62.9 - 2024-03-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.8...v2.62.9)
+
+### Fix
+
+- Add missing arialabel (#2191)
+
+## v2.62.8 - 2024-03-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.7...v2.62.8)
+
+- [#2187](https://github.com/ORCID/orcid-angular/pull/2187): Fix/9127-qa-fix-position-of-loading-bar-in-oauth-screen
+
+### Fix
+
+- Set client name on authorization page (#2188)
+- Remove whitespace
+
+## v2.62.7 - 2024-03-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.6...v2.62.7)
+
+- [#2186](https://github.com/ORCID/orcid-angular/pull/2186): fix: Add full stop to sign in text and update claim link text
+
+### Fix
+
+- Add full stop to sign in text and update claim link text
+
+## v2.62.6 - 2024-03-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.5...v2.62.6)
+
+## v2.62.5 - 2024-03-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.4...v2.62.5)
+
+## v2.62.4 - 2024-03-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.3...v2.62.4)
+
+## v2.62.3 - 2024-03-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.2...v2.62.3)
+
+## v2.62.2 - 2024-03-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.1...v2.62.2)
+
+## v2.62.1 - 2024-03-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.0...v2.62.1)
+
+### Fix
+
+- Return empty observable instead of null (#2183)
+
 ## v2.62.0 - 2024-03-07
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.61.9...v2.62.0)

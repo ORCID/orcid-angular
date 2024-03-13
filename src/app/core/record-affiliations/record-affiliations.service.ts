@@ -202,20 +202,24 @@ export class RecordAffiliationService {
   }
 
   getOrganization(org: string): Observable<Organization[]> {
-    return this._http
-      .get<Organization[]>(
-        environment.API_WEB +
-          'affiliations/disambiguated/name/' +
-          org +
-          '?limit=100',
-        {
-          headers: this.headers,
-        }
-      )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+    if (org.length > 2) {
+      return this._http
+        .get<Organization[]>(
+          environment.API_WEB +
+            'affiliations/disambiguated/name/' +
+            org +
+            '?limit=100',
+          {
+            headers: this.headers,
+          }
+        )
+        .pipe(
+          retry(3),
+          catchError((error) => this._errorHandler.handleError(error))
+        )
+    } else {
+      return of([])
+    }
   }
 
   getOrganizationDisambiguated(
