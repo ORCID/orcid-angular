@@ -17,10 +17,17 @@
 
 <ng-container *ngIf="signInUpdatesV1Togglz">
   <div class="row">
-    <b class="orc-font-body m-b-16">
+    <b class="orc-font-body m-b-8">
       {{ name }}
     </b>
-    <a class="underline" [ngClass]="{ 'm-b-16': show }" (click)="show = !show">
+  </div>
+  <div class="row">
+    <a
+      class="underline"
+      [ngClass]="{ 'm-b-16': show }"
+      (click)="show = !show"
+      [attr.aria-label]="(!show ? ariaLabelShowDetailsFor : ariaLabelHideDetailsFor) + ' ' + name "
+    >
       <ng-container i18n="@@shared.showDetails" *ngIf="!show"
         >Show details</ng-container
       >
