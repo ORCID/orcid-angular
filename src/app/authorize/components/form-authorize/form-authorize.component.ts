@@ -44,7 +44,7 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
   trustedIndividuals: TrustedIndividuals
 
   authorizeAccessFor = $localize`:@@authorize.authorizeAccessFor:Authorize access for`
-  orcid = $localize`:@@authorize.authorize.dashOrcid:- ORCID`
+  orcid = $localize`:@@authorize.dashOrcid:- ORCID`
 
   constructor(
     @Inject(WINDOW) private window: Window,
