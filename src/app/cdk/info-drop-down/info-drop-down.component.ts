@@ -13,6 +13,11 @@ export class InfoDropDownComponent implements OnInit {
   @Input() description
   @Input() signInUpdatesV1Togglz: boolean
   show = false
+
+  ariaLabelShowDetailsFor = $localize`:@@shared.showDetailsFor:Show details for`
+  ariaLabelHideDetailsFor = $localize`:@@shared.hideDetailsFor:Hide details for`
+
+
   constructor() {}
 
   ngOnInit(): void {}
