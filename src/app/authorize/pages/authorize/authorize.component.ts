@@ -21,7 +21,7 @@ export class AuthorizeComponent implements OnInit {
     private _platformInfo: PlatformInfoService,
     private _togglz: TogglzService
   ) {
-_user.getUserSession().subscribe((session) => {
+    _user.getUserSession().subscribe((session) => {
       if (session.oauthSession && session.oauthSession.error) {
         this.showAuthorizationComponent = false
       } else {
@@ -38,7 +38,7 @@ _user.getUserSession().subscribe((session) => {
       .getStateOf('SIGN_IN_UPDATES_V1')
       .pipe(take(1))
       .subscribe((value) => {
-        this.loading = false;
+        this.loading = false
         this.signInUpdatesV1Togglz = value
       })
   }
