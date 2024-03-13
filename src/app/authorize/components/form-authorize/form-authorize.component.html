@@ -225,8 +225,7 @@
         class="mat-body-1 m-t-16 m-b-32"
         i18n="@@authorize.organizationAskedFollowingAccess"
       >
-        This organization has asked for the following access to your ORCID
-        record
+        This organization has asked for the following access to your ORCID record:
       </p>
 
       <ul class="mat-body-1 m-t-base m-b-64">
@@ -264,9 +263,8 @@
           id="deny-button"
           class="underline"
           (click)="authorize(false)"
-          i18n="@@authorize.deny"
         >
-          Deny access
+          <i i18n="@@authorize.deny">Deny access</i>
         </a>
       </div>
     </mat-card-content>
