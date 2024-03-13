@@ -18,7 +18,7 @@
         >
           <app-form-authorize
             [signInUpdatesV1Togglz]="signInUpdatesV1Togglz"
-            *ngIf="showAuthorizationComponent"
+            *ngIf="showAuthorizationComponent && !loading"
           ></app-form-authorize>
           <app-oauth-error
             *ngIf="!showAuthorizationComponent"

@@ -14,6 +14,7 @@ export class AuthorizeComponent implements OnInit {
   platform: PlatformInfo
   showAuthorizationComponent: boolean
   signInUpdatesV1Togglz = false
+  loading = true
 
   constructor(
     _user: UserService,
@@ -36,6 +37,9 @@ export class AuthorizeComponent implements OnInit {
     this._togglz
       .getStateOf('SIGN_IN_UPDATES_V1')
       .pipe(take(1))
-      .subscribe((value) => (this.signInUpdatesV1Togglz = value))
+      .subscribe((value) => {
+        this.loading = false
+        this.signInUpdatesV1Togglz = value
+      })
   }
 }
