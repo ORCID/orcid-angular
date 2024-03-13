@@ -1,3 +1,13 @@
+## v2.62.11 - 2024-03-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.10...v2.62.11)
+
+- [#2192](https://github.com/ORCID/orcid-angular/pull/2192): fix: Remove autofocus if new sign in togglz is enabled
+
+### Fix
+
+- Remove autofocus if new sign in togglz is enabled
+
 ## v2.62.10 - 2024-03-13
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.9...v2.62.10)
