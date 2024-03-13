@@ -1,3 +1,9 @@
+## v2.62.10 - 2024-03-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.9...v2.62.10)
+
+- [#2190](https://github.com/ORCID/orcid-angular/pull/2190): style: Add semicolon and italic style to link
+
 ## v2.62.9 - 2024-03-13
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.8...v2.62.9)
