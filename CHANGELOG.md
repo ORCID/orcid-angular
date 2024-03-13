@@ -1,3 +1,9 @@
+## v2.62.14 - 2024-03-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.13...v2.62.14)
+
+- [#2195](https://github.com/ORCID/orcid-angular/pull/2195): style: Fix text size in authorize page
+
 ## v2.62.13 - 2024-03-13
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.12...v2.62.13)
