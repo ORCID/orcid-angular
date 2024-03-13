@@ -1,3 +1,13 @@
+## v2.62.7 - 2024-03-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.6...v2.62.7)
+
+- [#2186](https://github.com/ORCID/orcid-angular/pull/2186): fix: Add full stop to sign in text and update claim link text
+
+### Fix
+
+- Add full stop to sign in text and update claim link text
+
 ## v2.62.6 - 2024-03-11
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.5...v2.62.6)
