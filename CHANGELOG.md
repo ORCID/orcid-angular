@@ -1,3 +1,14 @@
+## v2.62.8 - 2024-03-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.7...v2.62.8)
+
+- [#2187](https://github.com/ORCID/orcid-angular/pull/2187): Fix/9127-qa-fix-position-of-loading-bar-in-oauth-screen
+
+### Fix
+
+- Set client name on authorization page (#2188)
+- Remove whitespace
+
 ## v2.62.7 - 2024-03-13
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.6...v2.62.7)
