@@ -1,3 +1,9 @@
+## v2.62.15 - 2024-03-14
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.14...v2.62.15)
+
+- [#2196](https://github.com/ORCID/orcid-angular/pull/2196): style: Fix mobile version margins
+
 ## v2.62.14 - 2024-03-13
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.13...v2.62.14)
