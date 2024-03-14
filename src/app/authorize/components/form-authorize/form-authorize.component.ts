@@ -60,9 +60,9 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
     private _titleService: Title
   ) {
     this._platformInfo
-    .get()
-    .pipe(take(1))
-    .subscribe((platform) => this.platformInfo = platform)
+      .get()
+      .pipe(take(1))
+      .subscribe((platform) => (this.platformInfo = platform))
 
     this._user
       .getUserSession()
