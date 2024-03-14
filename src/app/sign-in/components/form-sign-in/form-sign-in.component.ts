@@ -56,8 +56,6 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() signInType: TypeSignIn
   @Input() signInData: SignInData
   @Input() signInUpdatesV1Togglz: boolean
-  @Input() emailVerified: boolean
-  @Input() invalidVerifyUrl: boolean
   @Output() isOauthError = new EventEmitter<boolean>()
   @Output() show2FAEmitter = new EventEmitter<object>()
   @Output() loading = new EventEmitter<boolean>()
@@ -80,6 +78,8 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
   private readonly $destroy = new Subject()
   authorizationFormSubmitted: boolean
   backendErrorsMatcher = new ErrorStateMatcherForPasswordField()
+  emailVerified: boolean
+  invalidVerifyUrl: boolean
 
   placeholderUsername = $localize`:@@ngOrcid.signin.username:Email or 16-digit ORCID iD`
   placeholderPassword = $localize`:@@ngOrcid.signin.yourOrcidPassword:Your ORCID password`
@@ -141,6 +141,14 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
                 this.signInLocal.isOauth = true
               }
             })
+        }
+
+        if (platform.queryParameters.emailVerified) {
+          this.emailVerified = platform.queryParameters.emailVerified
+        }
+
+        if (platform.queryParameters.invalidVerifyUrl) {
+          this.invalidVerifyUrl = platform.queryParameters.invalidVerifyUrl
         }
       })
   }
