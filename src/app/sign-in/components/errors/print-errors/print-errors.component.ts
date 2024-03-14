@@ -7,6 +7,7 @@ import {
   Output,
 } from '@angular/core'
 import { WINDOW } from '../../../../cdk/window'
+import { isValidOrcidFormat } from 'src/app/constants'
 
 @Component({
   selector: 'app-print-errors',
@@ -32,11 +33,15 @@ export class PrintErrorsComponent implements OnInit {
   @Output() deactivatedAccount = new EventEmitter<void>()
   @Output() unclaimedAccount = new EventEmitter<void>()
 
+  get isEmail() {
+    return !isValidOrcidFormat(this.email)
+  }
+
   constructor(@Inject(WINDOW) private window: Window) {}
 
   ngOnInit() {}
 
-  resendClaim() {
+resendClaim() {
     this.navigateTo(`resend-claim?email=` + encodeURIComponent(this.email))
   }
 

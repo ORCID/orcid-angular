@@ -21,6 +21,7 @@ import { catchError, first, map, takeUntil, tap } from 'rxjs/operators'
 import {
   ApplicationRoutes,
   isRedirectToTheAuthorizationPage,
+  isValidOrcidFormat,
 } from 'src/app/constants'
 import { UserService } from 'src/app/core'
 import { OauthParameters, RequestInfoForm } from 'src/app/types'
@@ -439,6 +440,32 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     })
   }
+
+  claimAccount() {
+    const $deactivate = this._signIn.resendClaim(this.email)
+    $deactivate.subscribe((data) => {
+      if (data.errors) {
+        this._errorHandler
+          .handleError(
+            new Error(data.errors[0]),
+            ERROR_REPORT.STANDARD_VERBOSE
+          )
+          .subscribe()
+      } else {
+        this._snackBar.showSuccessMessage({
+          title: $localize`:@@ngOrcid.signin.claiming:Claiming your account`,
+          // tslint:disable-next-line: max-line-length
+          message: $localize`:@@ngOrcid.signin.verify.claimSent:Thank you for claiming your ORCID record; please complete the process by following the steps in the email we are now sending you. If you don’t receive an email from us, please`,
+          action: $localize`:@@shared.contactSupport:contact support.`,
+          actionURL: `https://support.orcid.org/`,
+          closable: true,
+        })
+        this._router.navigate([ApplicationRoutes.signin])
+      }
+    })
+  }
+
+
 
   navigateTo(val: string): void {
     if (val.indexOf('orcid.org/my-orcid')) {
