@@ -174,8 +174,11 @@
         You are currently signed in as:
       </p>
       <mat-divider class="orcid-divider"></mat-divider>
-      <div class="row">
-        <div class="col l3 profile-icon-wrapper">
+      <div
+        class="row"
+        [ngClass]="{ 'center-content': platformInfo.columns4 }"
+      >
+        <div class="col l2 profile-icon-wrapper">
           <div class="icon">
             <mat-icon
               class="profile-icon"
@@ -186,7 +189,10 @@
           </div>
         </div>
         <div class="col l9 user-wrapper">
-          <div class="row">
+          <div
+            class="row"
+            [ngClass]="{ 'center-content': platformInfo.columns4 }"
+          >
             <div class="m-b-8">
               <div class="mat-body-2">
                 <strong id="user-name">{{ userName }}</strong>
