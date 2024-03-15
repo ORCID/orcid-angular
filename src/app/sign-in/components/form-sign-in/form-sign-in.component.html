@@ -62,7 +62,7 @@
   <ng-container *ngIf="signInUpdatesV1Togglz">
     <app-my-orcid-alerts
       *ngIf="
-        (signInUpdatesV1Togglz && (emailVerified || invalidVerifyUrl)) ||
+        (emailVerified || invalidVerifyUrl) ||
         (printError && badCredentials)
       "
       [emailVerified]="emailVerified"

@@ -33,8 +33,6 @@
                 [email]="email"
                 #formSignInComponent
                 [signInType]="signInType"
-                [emailVerified]="emailVerified"
-                [invalidVerifyUrl]="invalidVerifyUrl"
                 (show2FAEmitter)="show2FAEmitter($event)"
                 (isOauthError)="isOauthError = $event"
                 (errorDescription)="errorDescription = $event"
