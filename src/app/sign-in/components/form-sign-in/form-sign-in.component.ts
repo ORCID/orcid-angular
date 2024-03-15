@@ -446,10 +446,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
     $deactivate.subscribe((data) => {
       if (data.errors) {
         this._errorHandler
-          .handleError(
-            new Error(data.errors[0]),
-            ERROR_REPORT.STANDARD_VERBOSE
-          )
+          .handleError(new Error(data.errors[0]), ERROR_REPORT.STANDARD_VERBOSE)
           .subscribe()
       } else {
         this._snackBar.showSuccessMessage({
@@ -464,8 +461,6 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     })
   }
-
-
 
   navigateTo(val: string): void {
     if (val.indexOf('orcid.org/my-orcid')) {

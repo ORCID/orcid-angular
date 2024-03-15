@@ -93,19 +93,18 @@ export class SignInService {
 
   resendClaim(username: string) {
     let claim: Claim = {
-      "email": username,
-      "errors": [],
-      "successMessage": null
+      email: username,
+      errors: [],
+      successMessage: null,
     }
     let body = JSON.stringify(claim)
 
     return this._http
       .post<Claim>(environment.API_WEB + `resend-claim.json`, body, {
-        headers: new HttpHeaders(
-          {
-              'Access-Control-Allow-Origin':'*',
-              'Content-Type': 'application/json'
-          }),
+        headers: new HttpHeaders({
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
+        }),
         withCredentials: true,
       })
       .pipe(

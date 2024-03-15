@@ -41,7 +41,7 @@ export class PrintErrorsComponent implements OnInit {
 
   ngOnInit() {}
 
-resendClaim() {
+  resendClaim() {
     this.navigateTo(`resend-claim?email=` + encodeURIComponent(this.email))
   }
 
