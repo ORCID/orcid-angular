@@ -61,9 +61,9 @@ export class SignInComponent implements OnInit {
 
   ngOnInit() {
     this._togglz
-      .getStateOf('SIGN_IN_UPDATES_V1')
-      .pipe(take(1))
-      .subscribe((value) => (this.signInUpdatesV1Togglz = value))
+    .getStateOf('SIGN_IN_UPDATES_V1')
+    .pipe(take(1))
+    .subscribe((value) => (this.signInUpdatesV1Togglz = value))
 
     combineLatest([this._userInfo.getUserSession(), this._platformInfo.get()])
       .pipe(first())

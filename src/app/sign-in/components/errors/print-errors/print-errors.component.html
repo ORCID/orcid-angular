@@ -48,8 +48,11 @@
       <div>
         <p>
           <ng-container *ngIf="showUnclaimedError || showDeactivatedError">
-            <ng-container i18n="@@register.theEmailAddress">
+            <ng-container i18n="@@register.theEmailAddress" *ngIf="isEmail">
               The email address
+            </ng-container>
+            <ng-container i18n="@@ngOrcid.signin.theOrcidId" *ngIf="!isEmail">
+              The Orcid iD
             </ng-container>
             <strong>{{ email }}</strong>
             <ng-container i18n="@@register.isAssociatedWith"
@@ -68,19 +71,23 @@
             <ng-container i18n="@@register.orcidRecord"
               >ORCID record.</ng-container
             >
-            <i
-              i18n="@@ngOrcid.signin.cannotSignInToOrcid"
-              *ngIf="showUnclaimedError"
-            >
-              You cannot sign in to ORCID with this email address until you have
-              claimed the record.
+            <i *ngIf="showUnclaimedError">
+              <ng-container i18n="@@ngOrcid.signin.cannotSignInToOrcid" *ngIf="isEmail">
+                You cannot sign in to ORCID with this email address until you have claimed the record.
+              </ng-container>
+              <ng-container i18n="@@ngOrcid.signin.cannotSignInToOrcidWithId" *ngIf="!isEmail">
+                You cannot sign in to ORCID with this iD until you have claimed the record.
+              </ng-container>
             </i>
-            <i
-              i18n="@@ngOrcid.signin.needToReactivateAccount"
-              *ngIf="showDeactivatedError"
-            >
+            <i *ngIf="showDeactivatedError">
+            <ng-container i18n="@@ngOrcid.signin.needToReactivateAccount" *ngIf="isEmail">
               You will need to reactivate the account before you can sign in
               with this email address.
+            </ng-container>
+            <ng-container i18n="@@ngOrcid.signin.needToReactivateToSigInWithId" *ngIf="!isEmail">
+              You will need to reactivate the account before you can sign in
+              with this iD.
+            </ng-container>
             </i>
           </ng-container>
 
@@ -101,12 +108,16 @@
           Claim your ORCID record</a
         >
         <a
-          i18n="@@register.reactivateOrcidAssociated"
           (click)="deactivated()"
           *ngIf="showDeactivatedError"
         >
-          Reactivate the ORCID record associated with this email address</a
-        >
+          <ng-container i18n="@@register.reactivateOrcidAssociated" *ngIf="isEmail">
+            Reactivate the ORCID record associated with this email address
+          </ng-container>
+          <ng-container i18n="@@ngOrcid.signin.reactivateOrcidRecordWithId" *ngIf="!isEmail">
+            Reactivate the ORCID record associated with this iD
+          </ng-container>
+        </a>
         <a
           i18n="@@ngOrcid.signin.signInToActive"
           (click)="deprecatedAccount()"
