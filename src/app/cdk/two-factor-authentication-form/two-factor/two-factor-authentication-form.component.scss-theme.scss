@@ -10,6 +10,10 @@
     color: $orcid-light-primary-text;
     background: mat.get-color-from-palette($primary, 700);
   }
+
+  .error {
+    color: map-get($foreground, 'state-warning-dark');
+  }
 }
 
 @include two-factor-authentication-form-theme($orcid-app-theme);
