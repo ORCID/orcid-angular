@@ -1,3 +1,18 @@
+## v2.63.0 - 2024-03-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.15...v2.63.0)
+
+- [#2197](https://github.com/ORCID/orcid-angular/pull/2197): feature: Update reactivate and claim functionality to accept ORCID iD
+
+### Fix
+
+- Remove commented code
+- Add missing files VS
+
+### Feature
+
+- Update reactivate and claim functionality to accept ORCID iD
+
 ## v2.62.15 - 2024-03-14
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.14...v2.62.15)
