@@ -1,3 +1,16 @@
+## v2.63.1 - 2024-03-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.63.0...v2.63.1)
+
+- [#2198](https://github.com/ORCID/orcid-angular/pull/2198): fix: Display email verified notice panel
+- [#2199](https://github.com/ORCID/orcid-angular/pull/2199): fix: Add missing alt to fix accessibility issues
+
+### Fix
+
+- Update 2FA error conditions and styling (#2200)
+- Add missing alt to fix accessibility issues
+- Display email verified notice panel
+
 ## v2.63.0 - 2024-03-15
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.15...v2.63.0)
