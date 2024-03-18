@@ -1,25 +1,15 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { SummaryPanelComponent } from './component/summary-panel/summary-panel.component'
-import { SummarySimplePanelComponent } from './component/summary-simple-panel/summary-simple-panel.component'
-import { TrustedSummaryComponent } from './pages/trusted-summary/trusted-summary.component'
-import { TrustedSummaryRouting } from './trusted-summary-routing.module'
+
+import { TrustedSummaryPageRouting } from './trusted-summary-routing.module'
 import { MatIconModule } from '@angular/material/icon'
 import { MatLegacyProgressSpinnerModule as MatProgressSpinnerModule } from '@angular/material/legacy-progress-spinner'
 import { SharedModule } from '../shared/shared.module'
+import { TrustedSummaryModule } from '../cdk/trusted-summary/trusted-summary.module'
+import { TrustedSummaryPageComponent } from './pages/trusted-summary/trusted-summary.component'
 
 @NgModule({
-  declarations: [
-    SummaryPanelComponent,
-    SummarySimplePanelComponent,
-    TrustedSummaryComponent,
-  ],
-  imports: [
-    CommonModule,
-    TrustedSummaryRouting,
-    MatIconModule,
-    MatProgressSpinnerModule,
-    SharedModule,
-  ],
+  declarations: [TrustedSummaryPageComponent],
+  imports: [TrustedSummaryModule, TrustedSummaryPageRouting],
 })
-export class TrustedSummaryModule {}
+export class TrustedSummaryPageModule {}

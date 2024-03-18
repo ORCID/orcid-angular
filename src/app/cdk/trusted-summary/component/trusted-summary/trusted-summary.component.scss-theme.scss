@@ -29,6 +29,16 @@
   main {
     background-color: map-get($background, 'ui-background-lightest');
   }
+  main.loading {
+    color: mat.get-color-from-palette($primary, '50-contrast');
+  }
+
+  ::ng-deep {
+    .mat-progress-spinner circle,
+    .mat-spinner circle {
+      stroke: mat.get-color-from-palette($primary, '50-contrast');
+    }
+  }
 
   .verified {
     color: mat.get-color-from-palette($accent, 400);

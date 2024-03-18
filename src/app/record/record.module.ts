@@ -80,6 +80,7 @@ import { VisibilitySelectorModule } from '../cdk/visibility-selector/visibility-
 import { TopBarVerificationEmailModule } from '../cdk/top-bar-verification-email/top-bar-verification-email.module'
 import { RecordHeaderComponent } from './components/record-header/record-header.component'
 import { RecordInfoComponent } from './components/record-info/record-info.component'
+import { TrustedSummaryModule } from '../cdk/trusted-summary/trusted-summary.module'
 
 @NgModule({
   declarations: [
@@ -168,6 +169,8 @@ import { RecordInfoComponent } from './components/record-info/record-info.compon
     WarningMessageModule,
     TopBarMyPublicRecordPreviewModule,
     TopBarVerificationEmailModule,
+    TrustedSummaryModule,
+
   ],
   providers: [VerificationEmailModalService],
 })
