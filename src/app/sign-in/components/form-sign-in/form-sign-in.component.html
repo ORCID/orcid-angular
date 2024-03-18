@@ -62,8 +62,7 @@
   <ng-container *ngIf="signInUpdatesV1Togglz">
     <app-my-orcid-alerts
       *ngIf="
-        (emailVerified || invalidVerifyUrl) ||
-        (printError && badCredentials)
+        emailVerified || invalidVerifyUrl || (printError && badCredentials)
       "
       [emailVerified]="emailVerified"
       [invalidVerifyUrl]="invalidVerifyUrl"
@@ -114,7 +113,9 @@
       </mat-error>
 
       <app-print-errors
-        *ngIf="signInUpdatesV1Togglz && printError && !badCredentials && !show2FA"
+        *ngIf="
+          signInUpdatesV1Togglz && printError && !badCredentials && !show2FA
+        "
         [showDeprecatedError]="showDeprecatedError"
         [showUnclaimedError]="showUnclaimedError"
         [showDeactivatedError]="showDeactivatedError"

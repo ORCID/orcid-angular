@@ -7,8 +7,7 @@
       class="orc-font-small-print"
       i18n="@@ngOrcid.signin.2fa.label"
       [ngClass]="{
-        error:
-          verificationWasTouched && isVerificationCodeInvalid
+        error: verificationWasTouched && isVerificationCodeInvalid
       }"
       *ngIf="!recoveryCode && signInUpdatesV1Togglz"
       >Two-factor authentication code
@@ -72,7 +71,11 @@
         *ngIf="!isVerificationCodeInvalid"
         >{{ verificationFormControl.value?.length || 0 }}/6</mat-hint
       >
-      <mat-error *ngIf="verificationWasTouched && verificationFormControl.hasError('required')">
+      <mat-error
+        *ngIf="
+          verificationWasTouched && verificationFormControl.hasError('required')
+        "
+      >
         <p
           i18n="@@ngOrcid.signin.2fa.verificationCodeRequired"
           class="error-message"
@@ -86,10 +89,9 @@
 
       <mat-error
         *ngIf="
-          verificationWasTouched && (
-          verificationFormControl.hasError('minlength') ||
-          verificationFormControl.hasError('maxlength')
-          )
+          verificationWasTouched &&
+          (verificationFormControl.hasError('minlength') ||
+            verificationFormControl.hasError('maxlength'))
         "
       >
         <p
@@ -102,7 +104,7 @@
           {{ verificationFormControl.value?.length || 0 }}/6
         </p>
       </mat-error>
-  </ng-container>
+    </ng-container>
   </div>
   <p
     [ngClass]="{
@@ -204,8 +206,8 @@
           *ngIf="
             recoveryCodeFormControl.hasError('minlength') ||
             recoveryCodeFormControl.hasError('maxlength')
-            "
-          >
+          "
+        >
           <p
             i18n="@@ngOrcid.signin.2fa.badRecoveryCodeLength"
             class="error-message"
@@ -222,10 +224,13 @@
       <mat-hint
         class="orc-font-small-print error-message"
         *ngIf="!isRecoveryCodeInvalid"
-      >{{ recoveryCodeFormControl.value?.length || 0 }}/10</mat-hint
+        >{{ recoveryCodeFormControl.value?.length || 0 }}/10</mat-hint
       >
       <mat-error
-        *ngIf="recoveryCodeWasTouched && recoveryCodeFormControl.hasError('required')">
+        *ngIf="
+          recoveryCodeWasTouched && recoveryCodeFormControl.hasError('required')
+        "
+      >
         <p
           i18n="@@ngOrcid.signin.2fa.recoveryCodeRequired"
           class="error-message"
@@ -239,10 +244,9 @@
 
       <mat-error
         *ngIf="
-          recoveryCodeWasTouched && (
-          recoveryCodeFormControl.hasError('minlength') ||
-          recoveryCodeFormControl.hasError('maxlength')
-          )
+          recoveryCodeWasTouched &&
+          (recoveryCodeFormControl.hasError('minlength') ||
+            recoveryCodeFormControl.hasError('maxlength'))
         "
       >
         <p
