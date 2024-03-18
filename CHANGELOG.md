@@ -1,3 +1,9 @@
+## v2.65.0 - 2024-03-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.64.0...v2.65.0)
+
+- [#2203](https://github.com/ORCID/orcid-angular/pull/2203): Feature/9060 qa investigation affiliation found notice panel not announced to assistive tech users
+
 ## v2.64.0 - 2024-03-18
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.63.1...v2.64.0)
