@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { TrustedSummaryComponent } from './trusted-summary.component'
+import { TrustedSummaryPageComponent } from './trusted-summary.component'
 import { TrustedSummaryService } from 'src/app/core/trusted-summary/trusted-summary.service'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
@@ -10,12 +10,12 @@ import { ZendeskService } from 'src/app/core/zendesk/zendesk.service'
 import { WINDOW } from 'src/app/cdk/window'
 
 describe('TrustedSummaryComponent', () => {
-  let component: TrustedSummaryComponent
-  let fixture: ComponentFixture<TrustedSummaryComponent>
+  let component: TrustedSummaryPageComponent
+  let fixture: ComponentFixture<TrustedSummaryPageComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TrustedSummaryComponent],
+      declarations: [TrustedSummaryPageComponent],
       providers: [
         { provide: ErrorHandlerService, userValue: {} },
         {
@@ -32,7 +32,7 @@ describe('TrustedSummaryComponent', () => {
       imports: [HttpClientTestingModule],
     }).compileComponents()
 
-    fixture = TestBed.createComponent(TrustedSummaryComponent)
+    fixture = TestBed.createComponent(TrustedSummaryPageComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
   })
