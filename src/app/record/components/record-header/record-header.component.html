@@ -180,7 +180,7 @@
     </div>
   </div>
 </div>
-<ng-container *ngIf="recordSummaryOpen">
+<section *ngIf="recordSummaryOpen" id="summary">
   <div class="container summary-container-head">
     <h2 class="orc-font-body-large">Record summary</h2>
     <div>
@@ -223,7 +223,7 @@
     [standaloneMode]="false"
     *ngIf="recordSummaryOpen"
   ></app-trusted-summary>
-</ng-container>
+</section>
 
 <!-- <button
 mat-icon-button
