@@ -1,3 +1,9 @@
+## v2.64.0 - 2024-03-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.63.1...v2.64.0)
+
+- [#2202](https://github.com/ORCID/orcid-angular/pull/2202): Feature/9107 record summaries
+
 ## v2.63.1 - 2024-03-18
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.63.0...v2.63.1)
