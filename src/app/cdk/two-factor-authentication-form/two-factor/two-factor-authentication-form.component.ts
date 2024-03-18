@@ -41,22 +41,46 @@ export class TwoFactorAuthenticationFormComponent implements AfterViewInit {
 
   recoveryCode = false
 
-  verificationFormControl = new UntypedFormControl('', [
-    Validators.required,
-    Validators.minLength(6),
-    Validators.maxLength(6),
-  ])
-
-  recoveryCodeFormControl = new UntypedFormControl('', [
-    Validators.required,
-    Validators.maxLength(10),
-    Validators.minLength(10),
-  ])
-
   twoFactorForm = new UntypedFormGroup({
-    verificationCode: this.verificationFormControl,
-    recoveryCode: this.recoveryCodeFormControl,
+    verificationCode: new UntypedFormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+      Validators.maxLength(6),
+    ]),
+    recoveryCode: new UntypedFormControl('', [
+      Validators.required,
+      Validators.maxLength(10),
+      Validators.minLength(10),
+    ]),
   })
+
+  get verificationFormControl() {
+    return this.twoFactorForm.controls.verificationCode
+  }
+
+  get recoveryCodeFormControl() {
+    return this.twoFactorForm.controls.recoveryCode
+  }
+
+  get verificationWasTouched() {
+    return this.verificationFormControl.dirty || this.verificationFormControl.touched
+  }
+
+  get recoveryCodeWasTouched() {
+    return this.recoveryCodeFormControl.dirty || this.recoveryCodeFormControl.touched
+  }
+
+  get isVerificationCodeInvalid() {
+    return (this.verificationWasTouched && this.verificationFormControl.hasError('required'))  ||
+            this.verificationFormControl.hasError('minlength') ||
+            this.verificationFormControl.hasError('maxlength')
+  }
+
+  get isRecoveryCodeInvalid() {
+    return (this. recoveryCodeWasTouched && this.verificationFormControl.hasError('required')) ||
+            this.verificationFormControl.hasError('minlength') ||
+            this.verificationFormControl.hasError('maxlength')
+  }
 
   constructor(
     private cdref: ChangeDetectorRef,

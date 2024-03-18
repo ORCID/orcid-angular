@@ -114,7 +114,7 @@
       </mat-error>
 
       <app-print-errors
-        *ngIf="signInUpdatesV1Togglz && printError && !badCredentials"
+        *ngIf="signInUpdatesV1Togglz && printError && !badCredentials && !show2FA"
         [showDeprecatedError]="showDeprecatedError"
         [showUnclaimedError]="showUnclaimedError"
         [showDeactivatedError]="showDeactivatedError"
