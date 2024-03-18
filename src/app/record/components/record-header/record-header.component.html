@@ -169,10 +169,15 @@
           <mat-icon class="expand_more" *ngIf="!recordSummaryOpen"
             >expand_less</mat-icon
           >
-          <ng-container *ngIf="recordSummaryOpen">
+          <ng-container
+            *ngIf="recordSummaryOpen"
+            i18n="@@summary.hideRecordSummary"
+          >
             Hide record summary
           </ng-container>
-          <ng-container *ngIf="!recordSummaryOpen"
+          <ng-container
+            *ngIf="!recordSummaryOpen"
+            i18n="@@summary.showRecordSummary"
             >Show record summary</ng-container
           >
         </button>
@@ -182,13 +187,16 @@
 </div>
 <section *ngIf="recordSummaryOpen" id="summary">
   <div class="container summary-container-head">
-    <h2 class="orc-font-body-large">Record summary</h2>
+    <h2 class="orc-font-body-large" i18n="@@summary.recordSummary">
+      Record summary
+    </h2>
     <div>
       <a
         class="underline orc-font-body-small"
         href="https://support.orcid.org/hc/en-us/articles/22062298053015-ORCID-Record-Summaries"
         target="_blank"
         rel="noopener"
+        i18n="@@summary.findOutMoreAboutRecordSummaries"
         >Find out more about record summaries</a
       >
       <svg
@@ -224,25 +232,3 @@
     *ngIf="recordSummaryOpen"
   ></app-trusted-summary>
 </section>
-
-<!-- <button
-mat-icon-button
-(click)="swapOpenState()"
-*ngIf="!openState"
-class="expand_more"
-[attr.aria-label]="
-  expandAriaLabel + ' ' + title + ' ' + exampleCodeAriaLabel
-"
->
-<mat-icon>expand_less</mat-icon>
-</button>
-<button
-[attr.aria-label]="
-  collapseAriaLabel + ' ' + title + ' ' + exampleCodeAriaLabel
-"
-mat-icon-button
-(click)="swapOpenState()"
-*ngIf="openState"
->
-<mat-icon>expand_more</mat-icon>
-</button> -->
