@@ -37,7 +37,7 @@ import { RecordUtil } from 'src/app/shared/utils/record.util'
 })
 export class MyOrcidComponent implements OnInit, OnDestroy {
   private readonly $destroy = new Subject()
-  recordSummaryOpen = false;
+  recordSummaryOpen = false
 
   platform: PlatformInfo
   publicOrcid: string

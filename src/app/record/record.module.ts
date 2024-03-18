@@ -170,7 +170,6 @@ import { TrustedSummaryModule } from '../cdk/trusted-summary/trusted-summary.mod
     TopBarMyPublicRecordPreviewModule,
     TopBarVerificationEmailModule,
     TrustedSummaryModule,
-
   ],
   providers: [VerificationEmailModalService],
 })

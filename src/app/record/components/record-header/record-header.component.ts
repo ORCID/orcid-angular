@@ -37,7 +37,6 @@ export class RecordHeaderComponent implements OnInit {
   set recordSummaryOpen(value: boolean) {
     this._recordSummaryOpen = value
     this.recordSummaryOpenChange.emit(this._recordSummaryOpen)
-
   }
   get recordSummaryOpen(): boolean {
     return this._recordSummaryOpen
