@@ -52,7 +52,6 @@
 
     <div class="row">
       <label
-        for="organization-input"
         id="organization-label"
         class="mat-caption"
         [ngClass]="{
@@ -76,6 +75,11 @@
         <input
           aria-labelledby="organizationLabel"
           [readonly]="organizationIsValidAndTouched"
+          [attr.aria-label]="
+            rorIdHasBeenMatched
+              ? ariaLabelPrefilledOrganization
+              : ariaLabelOrganization
+          "
           id="organization-input"
           matInput
           formControlName="organization"

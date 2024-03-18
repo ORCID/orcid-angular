@@ -97,6 +97,8 @@ export class FormCurrentEmploymentComponent extends BaseForm implements OnInit {
   ariaLabelStartDate = $localize`:@@shared.startDate:Start date`
   ngOrcidYear = $localize`:@@shared.year:Year`
   ngOrcidMonth = $localize`:@@shared.month:Month`
+  ariaLabelOrganization = $localize`:@@register.organization:Organization`
+  ariaLabelPrefilledOrganization = $localize`:@@register.prefilledOrganization:Organization - We've added an organization based on your email domain`
 
   years = Array(110)
     .fill(0)
@@ -247,6 +249,7 @@ export class FormCurrentEmploymentComponent extends BaseForm implements OnInit {
   }
 
   clearForm() {
+    this.rorIdHasBeenMatched = false
     this.form.patchValue({
       organization: '',
     })
