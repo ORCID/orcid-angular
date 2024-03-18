@@ -9,8 +9,14 @@
       [loadingUserRecord]="loadingUserRecord"
       [isPublicRecord]="publicOrcid"
       [affiliations]="affiliations"
+      [(recordSummaryOpen)]="recordSummaryOpen"
     ></app-record-header>
-    <div class="container no-padding">
+    <div
+      class="container no-padding main-content"
+      [ngClass]="{
+        'main-content-shadow': recordSummaryOpen
+      }"
+    >
       <div class="row">
         <app-side-bar
           class="col l3 m8 s4"

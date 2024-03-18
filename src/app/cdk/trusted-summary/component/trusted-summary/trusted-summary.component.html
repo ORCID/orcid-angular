@@ -2,11 +2,12 @@
   *ngIf="trustedSummary"
   class="panel"
   [ngClass]="{
+    'stand-alone-mode': standaloneMode,
     mobile: mobile,
     'inside-iframe': insideIframe
   }"
 >
-  <header class="panel-header">
+  <header class="panel-header" *ngIf="standaloneMode">
     <!-- orcid logo -->
     <img
       *ngIf="trustedSummary?.status === 'active'"
@@ -322,6 +323,9 @@
     </div>
   </div>
 </main>
-<div *ngIf="!trustedSummary">
-  <mat-spinner></mat-spinner>
-</div>
+<main class="loading" *ngIf="!trustedSummary">
+  <div>
+    <mat-spinner></mat-spinner>
+    <p class="orc-font-body-small">Loading record summary</p>
+  </div>
+</main>

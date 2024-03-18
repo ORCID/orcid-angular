@@ -1,9 +1,20 @@
+:host {
+  display: block;
+}
+.summary-container-head {
+  max-width: 1304px;
+  min-height: 80px;
+  h2 {
+    padding: 0;
+    margin: 0;
+  }
+  padding: 16px 16px;
+}
 .record-header-wrapper {
   display: flex;
   box-sizing: border-box;
   width: 100%;
   padding: 32px 0;
-  margin-bottom: 32px;
   align-items: flex-start;
   word-break: break-all;
 
@@ -95,4 +106,36 @@
   .names {
     justify-content: center;
   }
+}
+
+.expand_more {
+  transform: rotate(90deg);
+}
+
+button.orc-font-body-small {
+  font-weight: 400;
+}
+
+.record-header > .row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mobile .record-header > .row {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.mobile  .id-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+svg {
+  margin-left: 8px;
+  position: absolute;
+  margin-top: 4px;
 }
