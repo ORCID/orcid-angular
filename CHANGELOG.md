@@ -1,3 +1,9 @@
+## v2.66.0 - 2024-03-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.65.1...v2.66.0)
+
+- [#2207](https://github.com/ORCID/orcid-angular/pull/2207): 9149-qa-add-a-record-summaries-toggle
+
 ## v2.65.1 - 2024-03-19
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.65.0...v2.65.1)
