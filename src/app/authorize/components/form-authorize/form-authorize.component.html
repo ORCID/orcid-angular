@@ -161,7 +161,7 @@
     ></mat-progress-bar>
     <mat-card-header class="authorize-header">
       <mat-card-title role="heading" aria-level="1">
-        <mat-icon class="logo-icon" aria-hidden="false"
+        <mat-icon class="logo-icon"
           ><img src="./assets/vectors/orcid.logo.icon.svg" alt="orcid logo" />
         </mat-icon>
         <h1 class="orc-font-heading-small" i18n="@@authorize.authorize">
@@ -179,8 +179,10 @@
           <div class="icon">
             <mat-icon
               class="profile-icon"
-              aria-hidden="false"
-              ><img src="./assets/vectors/profile-not-verified.svg" alt="profile icon" />
+            ><img
+                src="./assets/vectors/profile-not-verified.svg"
+                alt="profile icon"
+              />
             </mat-icon>
           </div>
         </div>
@@ -279,7 +281,7 @@
     </ng-template>
 
     <ng-template #orcidIconTemplate>
-      <mat-icon role="presentation scope">
+      <mat-icon class="scope orcid" role="presentation">
         <img src="/assets/vectors/orcid.logo.black.icon.svg" alt=""
       /></mat-icon>
     </ng-template>

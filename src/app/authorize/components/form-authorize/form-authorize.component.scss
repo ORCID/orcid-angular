@@ -116,6 +116,13 @@ mat-card-content.authorize-content {
     width: 32px;
   }
 
+  mat-icon.scope.orcid {
+    font-size: small;
+    img {
+      margin-top: 0 !important;
+    }
+  }
+
   .user-links {
     width: 100%;
   }
