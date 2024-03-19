@@ -3,6 +3,7 @@
     *ngIf="!signInUpdatesV1Togglz && (emailVerified || invalidVerifyUrl)"
     [emailVerified]="emailVerified"
     [invalidVerifyUrl]="invalidVerifyUrl"
+    [attr.aria-live]="'polite'"
   ></app-my-orcid-alerts>
   <div class="container">
     <div class="row space-around">

@@ -69,6 +69,7 @@
       [signInUpdatesV1Togglz]="signInUpdatesV1Togglz"
       [printError]="printError"
       [badCredentials]="badCredentials"
+      [attr.aria-live]="'polite'"
     ></app-my-orcid-alerts>
     <div class="input-container">
       <mat-label
@@ -148,7 +149,7 @@
           [attr.placeholder]="placeholderPassword"
         />
       </mat-form-field>
-      <div class="info" *ngIf="passwordForm.hasError('maxlength')">
+      <div class="info" *ngIf="passwordForm.hasError('maxlength')" aria-live="polite">
         <div>
           <mat-icon class="large-material-icon material-symbols-outlined"
             >error</mat-icon
@@ -190,11 +191,14 @@
     [showInvalidUser]="showInvalidUser"
     [orcidPrimaryDeprecated]="orcidPrimaryDeprecated"
     [email]="email"
+    [attr.aria-live]="'polite'"
+
   >
   </app-print-errors>
   <app-deactivated
     *ngIf="!signInUpdatesV1Togglz && showDeactivatedError"
     [email]="email"
+    [attr.aria-live]="'polite'"
   >
   </app-deactivated>
   <app-two-factor-authentication-form
