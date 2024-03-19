@@ -31,6 +31,7 @@ export class RecordHeaderComponent implements OnInit {
   @Input() loadingUserRecord = true
   @Input() isPublicRecord: string
   @Input() affiliations: number
+  @Input() newRecordHeaderWithSummaryTogglz: boolean
   _recordSummaryOpen: boolean
 
   @Input()
