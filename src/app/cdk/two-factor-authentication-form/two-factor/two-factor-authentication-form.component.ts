@@ -64,32 +64,22 @@ export class TwoFactorAuthenticationFormComponent implements AfterViewInit {
 
   get verificationWasTouched() {
     return (
-      this.verificationFormControl.dirty || this.verificationFormControl.touched
+      this.verificationFormControl.dirty && this.verificationFormControl.touched
     )
   }
 
   get recoveryCodeWasTouched() {
     return (
-      this.recoveryCodeFormControl.dirty || this.recoveryCodeFormControl.touched
+      this.recoveryCodeFormControl.dirty && this.recoveryCodeFormControl.touched
     )
   }
 
   get isVerificationCodeInvalid() {
-    return (
-      (this.verificationWasTouched &&
-        this.verificationFormControl.hasError('required')) ||
-      this.verificationFormControl.hasError('minlength') ||
-      this.verificationFormControl.hasError('maxlength')
-    )
+    return this.verificationFormControl.invalid && this.verificationWasTouched
   }
 
   get isRecoveryCodeInvalid() {
-    return (
-      (this.recoveryCodeWasTouched &&
-        this.verificationFormControl.hasError('required')) ||
-      this.verificationFormControl.hasError('minlength') ||
-      this.verificationFormControl.hasError('maxlength')
-    )
+    return this.recoveryCodeFormControl.invalid && this.recoveryCodeWasTouched
   }
 
   constructor(
