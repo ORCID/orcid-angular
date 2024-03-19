@@ -1,3 +1,15 @@
+## v2.65.1 - 2024-03-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.65.0...v2.65.1)
+
+- [#2205](https://github.com/ORCID/orcid-angular/pull/2205): style: Stack account links in mobile version of authorize page
+- [#2204](https://github.com/ORCID/orcid-angular/pull/2204): fix: Display error messages in 2FA only if user touched the inputs
+- [#2201](https://github.com/ORCID/orcid-angular/pull/2201): build(deps): bump follow-redirects from 1.15.5 to 1.15.6
+
+### Fix
+
+- Display error messages in 2FA only if user touched the inputs
+
 ## v2.65.0 - 2024-03-18
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.64.0...v2.65.0)
