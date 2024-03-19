@@ -149,7 +149,11 @@
           [attr.placeholder]="placeholderPassword"
         />
       </mat-form-field>
-      <div class="info" *ngIf="passwordForm.hasError('maxlength')" aria-live="polite">
+      <div
+        class="info"
+        *ngIf="passwordForm.hasError('maxlength')"
+        aria-live="polite"
+      >
         <div>
           <mat-icon class="large-material-icon material-symbols-outlined"
             >error</mat-icon
@@ -192,7 +196,6 @@
     [orcidPrimaryDeprecated]="orcidPrimaryDeprecated"
     [email]="email"
     [attr.aria-live]="'polite'"
-
   >
   </app-print-errors>
   <app-deactivated
