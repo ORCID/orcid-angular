@@ -7,6 +7,7 @@ import {
   Output,
 } from '@angular/core'
 import { WINDOW } from '../../../../cdk/window'
+import { isValidOrcidFormat } from 'src/app/constants'
 
 @Component({
   selector: 'app-print-errors',
@@ -31,6 +32,10 @@ export class PrintErrorsComponent implements OnInit {
   @Output() signInActiveAccount = new EventEmitter<void>()
   @Output() deactivatedAccount = new EventEmitter<void>()
   @Output() unclaimedAccount = new EventEmitter<void>()
+
+  get isEmail() {
+    return !isValidOrcidFormat(this.email)
+  }
 
   constructor(@Inject(WINDOW) private window: Window) {}
 

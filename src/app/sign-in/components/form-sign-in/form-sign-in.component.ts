@@ -21,6 +21,7 @@ import { catchError, first, map, takeUntil, tap } from 'rxjs/operators'
 import {
   ApplicationRoutes,
   isRedirectToTheAuthorizationPage,
+  isValidOrcidFormat,
 } from 'src/app/constants'
 import { UserService } from 'src/app/core'
 import { OauthParameters, RequestInfoForm } from 'src/app/types'
@@ -56,8 +57,6 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() signInType: TypeSignIn
   @Input() signInData: SignInData
   @Input() signInUpdatesV1Togglz: boolean
-  @Input() emailVerified: boolean
-  @Input() invalidVerifyUrl: boolean
   @Output() isOauthError = new EventEmitter<boolean>()
   @Output() show2FAEmitter = new EventEmitter<object>()
   @Output() loading = new EventEmitter<boolean>()
@@ -80,6 +79,8 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
   private readonly $destroy = new Subject()
   authorizationFormSubmitted: boolean
   backendErrorsMatcher = new ErrorStateMatcherForPasswordField()
+  emailVerified: boolean
+  invalidVerifyUrl: boolean
 
   placeholderUsername = $localize`:@@ngOrcid.signin.username:Email or 16-digit ORCID iD`
   placeholderPassword = $localize`:@@ngOrcid.signin.yourOrcidPassword:Your ORCID password`
@@ -141,6 +142,14 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
                 this.signInLocal.isOauth = true
               }
             })
+        }
+
+        if (platform.queryParameters.emailVerified) {
+          this.emailVerified = platform.queryParameters.emailVerified
+        }
+
+        if (platform.queryParameters.invalidVerifyUrl) {
+          this.invalidVerifyUrl = platform.queryParameters.invalidVerifyUrl
         }
       })
   }
@@ -431,6 +440,27 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
           title: $localize`:@@register.reactivating:Reactivating your account`,
           // tslint:disable-next-line: max-line-length
           message: $localize`:@@ngOrcid.signin.verify.reactivationSent:Thank you for reactivating your ORCID record; please complete the process by following the steps in the email we are now sending you. If you don’t receive an email from us, please`,
+          action: $localize`:@@shared.contactSupport:contact support.`,
+          actionURL: `https://support.orcid.org/`,
+          closable: true,
+        })
+        this._router.navigate([ApplicationRoutes.signin])
+      }
+    })
+  }
+
+  claimAccount() {
+    const $deactivate = this._signIn.resendClaim(this.email)
+    $deactivate.subscribe((data) => {
+      if (data.errors) {
+        this._errorHandler
+          .handleError(new Error(data.errors[0]), ERROR_REPORT.STANDARD_VERBOSE)
+          .subscribe()
+      } else {
+        this._snackBar.showSuccessMessage({
+          title: $localize`:@@ngOrcid.signin.claiming:Claiming your account`,
+          // tslint:disable-next-line: max-line-length
+          message: $localize`:@@ngOrcid.signin.verify.claimSent:Thank you for claiming your ORCID record; please complete the process by following the steps in the email we are now sending you. If you don’t receive an email from us, please`,
           action: $localize`:@@shared.contactSupport:contact support.`,
           actionURL: `https://support.orcid.org/`,
           closable: true,

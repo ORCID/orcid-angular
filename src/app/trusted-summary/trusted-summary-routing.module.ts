@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
-import { TrustedSummaryComponent } from './pages/trusted-summary/trusted-summary.component'
+import { TrustedSummaryPageComponent } from './pages/trusted-summary/trusted-summary.component'
 
 const routes: Routes = [
   {
     path: '',
-    component: TrustedSummaryComponent,
+    component: TrustedSummaryPageComponent,
   },
 ]
 
@@ -13,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class TrustedSummaryRouting {}
+export class TrustedSummaryPageRouting {}

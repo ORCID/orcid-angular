@@ -1,3 +1,55 @@
+## v2.65.1 - 2024-03-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.65.0...v2.65.1)
+
+- [#2205](https://github.com/ORCID/orcid-angular/pull/2205): style: Stack account links in mobile version of authorize page
+- [#2204](https://github.com/ORCID/orcid-angular/pull/2204): fix: Display error messages in 2FA only if user touched the inputs
+- [#2201](https://github.com/ORCID/orcid-angular/pull/2201): build(deps): bump follow-redirects from 1.15.5 to 1.15.6
+
+### Fix
+
+- Display error messages in 2FA only if user touched the inputs
+
+## v2.65.0 - 2024-03-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.64.0...v2.65.0)
+
+- [#2203](https://github.com/ORCID/orcid-angular/pull/2203): Feature/9060 qa investigation affiliation found notice panel not announced to assistive tech users
+
+## v2.64.0 - 2024-03-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.63.1...v2.64.0)
+
+- [#2202](https://github.com/ORCID/orcid-angular/pull/2202): Feature/9107 record summaries
+
+## v2.63.1 - 2024-03-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.63.0...v2.63.1)
+
+- [#2198](https://github.com/ORCID/orcid-angular/pull/2198): fix: Display email verified notice panel
+- [#2199](https://github.com/ORCID/orcid-angular/pull/2199): fix: Add missing alt to fix accessibility issues
+
+### Fix
+
+- Update 2FA error conditions and styling (#2200)
+- Add missing alt to fix accessibility issues
+- Display email verified notice panel
+
+## v2.63.0 - 2024-03-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.15...v2.63.0)
+
+- [#2197](https://github.com/ORCID/orcid-angular/pull/2197): feature: Update reactivate and claim functionality to accept ORCID iD
+
+### Fix
+
+- Remove commented code
+- Add missing files VS
+
+### Feature
+
+- Update reactivate and claim functionality to accept ORCID iD
+
 ## v2.62.15 - 2024-03-14
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.14...v2.62.15)

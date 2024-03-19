@@ -28,7 +28,7 @@ const routes: Routes = [
     matcher: routerSummaryPageUrl,
     loadChildren: () =>
       import('./trusted-summary/trusted-summary.module').then(
-        (m) => m.TrustedSummaryModule
+        (m) => m.TrustedSummaryPageModule
       ),
   },
   {

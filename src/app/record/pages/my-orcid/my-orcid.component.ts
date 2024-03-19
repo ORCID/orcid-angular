@@ -37,6 +37,7 @@ import { RecordUtil } from 'src/app/shared/utils/record.util'
 })
 export class MyOrcidComponent implements OnInit, OnDestroy {
   private readonly $destroy = new Subject()
+  recordSummaryOpen = false
 
   platform: PlatformInfo
   publicOrcid: string
@@ -74,6 +75,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   readyForIndexing: boolean
   fragment: string
   newRecordHeaderTogglz = false
+  newRecordHeaderWithSummaryTogglz: boolean
 
   constructor(
     _userInfoService: UserInfoService,
@@ -209,6 +211,9 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
         }),
         switchMap(() => this._togglz.getTogglz().pipe(first())),
         tap((togglz) => {
+          if (togglz.messages['NEW_RECORD_HEADER_WITH_SUMMARY'] === 'true') {
+            this.newRecordHeaderWithSummaryTogglz = true
+          }
           if (togglz.messages['ORCID_ANGULAR_HELP_HERO'] === 'true') {
             if (
               !this.publicOrcid &&
