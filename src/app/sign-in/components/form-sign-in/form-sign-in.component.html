@@ -69,7 +69,6 @@
       [signInUpdatesV1Togglz]="signInUpdatesV1Togglz"
       [printError]="printError"
       [badCredentials]="badCredentials"
-      [attr.aria-live]="'polite'"
     ></app-my-orcid-alerts>
     <div class="input-container">
       <mat-label
@@ -195,13 +194,11 @@
     [showInvalidUser]="showInvalidUser"
     [orcidPrimaryDeprecated]="orcidPrimaryDeprecated"
     [email]="email"
-    [attr.aria-live]="'polite'"
   >
   </app-print-errors>
   <app-deactivated
     *ngIf="!signInUpdatesV1Togglz && showDeactivatedError"
     [email]="email"
-    [attr.aria-live]="'polite'"
   >
   </app-deactivated>
   <app-two-factor-authentication-form

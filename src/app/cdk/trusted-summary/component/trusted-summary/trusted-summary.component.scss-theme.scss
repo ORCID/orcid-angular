@@ -9,7 +9,7 @@
   $background: map-get($theme, background);
 
   a {
-    h2.hover-effect {
+    h3.hover-effect {
       color: mat.get-color-from-palette($primary, 500);
     }
 
@@ -17,7 +17,7 @@
       color: #fff;
     }
 
-    h2 {
+    h3 {
       color: black;
     }
   }
