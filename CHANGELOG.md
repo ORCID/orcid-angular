@@ -1,3 +1,15 @@
+## v2.66.2 - 2024-03-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.66.1...v2.66.2)
+
+- [#2209](https://github.com/ORCID/orcid-angular/pull/2209): fix: Add validators to 2FA until users click `Authenticate` button
+- [#2208](https://github.com/ORCID/orcid-angular/pull/2208): style: Force padding since is not working IOS tablet devices
+
+### Fix
+
+- Enable validators again if codes were incorrect
+- Add validators to 2FA until users click `Authenticate` button
+
 ## v2.66.1 - 2024-03-19
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.66.0...v2.66.1)
