@@ -93,9 +93,9 @@ export class TwoFactorAuthenticationFormComponent implements AfterViewInit {
         verificationCode: this.twoFactorForm.value.verificationCode,
         recoveryCode: this.twoFactorForm.value.recoveryCode,
       })
-      this.enableValidators();
+      this.enableValidators()
     } else {
-      this.enableValidators();
+      this.enableValidators()
     }
   }
 
@@ -104,7 +104,7 @@ export class TwoFactorAuthenticationFormComponent implements AfterViewInit {
       this.verificationFormControl.setValidators([
         Validators.required,
         Validators.maxLength(6),
-        Validators.minLength(6)
+        Validators.minLength(6),
       ])
       this.verificationFormControl.updateValueAndValidity()
       this.verificationFormControl.markAsDirty()
@@ -114,7 +114,7 @@ export class TwoFactorAuthenticationFormComponent implements AfterViewInit {
       this.recoveryCodeFormControl.setValidators([
         Validators.required,
         Validators.maxLength(10),
-        Validators.minLength(10)
+        Validators.minLength(10),
       ])
       this.recoveryCodeFormControl.updateValueAndValidity()
       this.recoveryCodeFormControl.markAsDirty()
