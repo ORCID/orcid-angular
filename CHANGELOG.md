@@ -1,3 +1,9 @@
+## v2.66.3 - 2024-03-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.66.2...v2.66.3)
+
+- [#2210](https://github.com/ORCID/orcid-angular/pull/2210): batch-fixes-mar-20-2024
+
 ## v2.66.2 - 2024-03-20
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.66.1...v2.66.2)
