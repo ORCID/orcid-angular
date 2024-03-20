@@ -93,6 +93,9 @@ export class TwoFactorAuthenticationFormComponent implements AfterViewInit {
         verificationCode: this.twoFactorForm.value.verificationCode,
         recoveryCode: this.twoFactorForm.value.recoveryCode,
       })
+      this.enableValidators();
+    } else {
+      this.enableValidators();
     }
   }
 
@@ -106,6 +109,7 @@ export class TwoFactorAuthenticationFormComponent implements AfterViewInit {
       this.verificationFormControl.updateValueAndValidity()
       this.verificationFormControl.markAsDirty()
       this.verificationFormControl.markAsTouched()
+      this.recoveryCodeFormControl.disable()
     } else {
       this.recoveryCodeFormControl.setValidators([
         Validators.required,
@@ -115,7 +119,13 @@ export class TwoFactorAuthenticationFormComponent implements AfterViewInit {
       this.recoveryCodeFormControl.updateValueAndValidity()
       this.recoveryCodeFormControl.markAsDirty()
       this.recoveryCodeFormControl.markAsTouched()
+      this.verificationFormControl.disable()
     }
+  }
+
+  enableValidators() {
+    this.verificationFormControl.enable()
+    this.recoveryCodeFormControl.enable()
   }
 
   showRecoveryCode() {
@@ -135,7 +145,7 @@ export class TwoFactorAuthenticationFormComponent implements AfterViewInit {
   }
 
   hideErrorMessages() {
-    this.showBadRecoveryCode = false
+    this.showBadVerificationCode = false
     this.showBadRecoveryCode = false
   }
 
