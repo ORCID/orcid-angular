@@ -1,7 +1,7 @@
 <ng-container *ngIf="!signInUpdatesV1Togglz">
   <mat-toolbar>
     <mat-toolbar-row>
-      <div role="alert">
+      <div role="alert" aria-label="polite">
         <p class="mat-body-2">
           <ng-container
             i18n="@@myOrcidAlerts.invalidVerifyUrl"
@@ -24,6 +24,7 @@
 <ng-container *ngIf="signInUpdatesV1Togglz">
   <ng-container *ngIf="emailVerified || invalidVerifyUrl">
     <div
+    aria-label="polite"
       [ngClass]="{
         verification: emailVerified,
         invalid: invalidVerifyUrl
@@ -58,7 +59,7 @@
     </div>
   </ng-container>
   <ng-container *ngIf="printError && badCredentials">
-    <div class="invalid">
+    <div class="invalid" aria-label="polite">
       <div>
         <mat-icon class="large-material-icon material-symbols-outlined"
           >warning</mat-icon

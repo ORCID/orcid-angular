@@ -1,4 +1,4 @@
-<main id="main">
+<main id="main" *ngIf="!loading">
   <div class="container">
     <div class="row space-around">
       <div
@@ -18,7 +18,7 @@
         >
           <app-form-authorize
             [signInUpdatesV1Togglz]="signInUpdatesV1Togglz"
-            *ngIf="showAuthorizationComponent && !loading"
+            *ngIf="showAuthorizationComponent"
           ></app-form-authorize>
           <app-oauth-error
             *ngIf="!showAuthorizationComponent"
