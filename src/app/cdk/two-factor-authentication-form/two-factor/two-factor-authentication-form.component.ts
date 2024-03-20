@@ -42,16 +42,8 @@ export class TwoFactorAuthenticationFormComponent implements AfterViewInit {
   recoveryCode = false
 
   twoFactorForm = new UntypedFormGroup({
-    verificationCode: new UntypedFormControl('', [
-      Validators.required,
-      Validators.minLength(6),
-      Validators.maxLength(6),
-    ]),
-    recoveryCode: new UntypedFormControl('', [
-      Validators.required,
-      Validators.maxLength(10),
-      Validators.minLength(10),
-    ]),
+    verificationCode: new UntypedFormControl(''),
+    recoveryCode: new UntypedFormControl(''),
   })
 
   get verificationFormControl() {
@@ -94,29 +86,36 @@ export class TwoFactorAuthenticationFormComponent implements AfterViewInit {
 
   onSubmit() {
     this.hideErrorMessages()
-    this.disableValidators()
+    this.addValidators()
 
     if (this.twoFactorForm.valid) {
       this.authenticate.emit({
         verificationCode: this.twoFactorForm.value.verificationCode,
         recoveryCode: this.twoFactorForm.value.recoveryCode,
       })
-
-      this.enableValidators()
     }
   }
 
-  disableValidators() {
+  addValidators() {
     if (!this.recoveryCode) {
-      this.recoveryCodeFormControl.disable()
+      this.verificationFormControl.setValidators([
+        Validators.required,
+        Validators.maxLength(6),
+        Validators.minLength(6)
+      ])
+      this.verificationFormControl.updateValueAndValidity()
+      this.verificationFormControl.markAsDirty()
+      this.verificationFormControl.markAsTouched()
     } else {
-      this.verificationFormControl.disable()
+      this.recoveryCodeFormControl.setValidators([
+        Validators.required,
+        Validators.maxLength(10),
+        Validators.minLength(10)
+      ])
+      this.recoveryCodeFormControl.updateValueAndValidity()
+      this.recoveryCodeFormControl.markAsDirty()
+      this.recoveryCodeFormControl.markAsTouched()
     }
-  }
-
-  enableValidators() {
-    this.verificationFormControl.enable()
-    this.recoveryCodeFormControl.enable()
   }
 
   showRecoveryCode() {
