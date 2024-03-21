@@ -7,7 +7,10 @@
   <div class="container">
     <div class="row space-around">
       <div class="col l6 m6 s4">
-        <mat-card class="orcid-wizard" *ngIf="!signInUpdatesV1Togglz">
+        <mat-card
+          class="orcid-wizard"
+          *ngIf="!loading && !signInUpdatesV1Togglz"
+        >
           <mat-progress-bar
             role="heading"
             aria-level="2"
@@ -65,11 +68,11 @@
           </mat-card-content>
         </mat-card>
         <mat-card
-          *ngIf="signInUpdatesV1Togglz"
           class="orcid-wizard sign-in-wrapper"
           [ngClass]="{
             mobile: !platform.columns12
           }"
+          *ngIf="!loading && signInUpdatesV1Togglz"
         >
           <mat-progress-bar
             role="heading"
