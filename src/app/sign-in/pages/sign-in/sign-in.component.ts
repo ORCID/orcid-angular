@@ -34,7 +34,7 @@ export class SignInComponent implements OnInit {
 
   requestInfoForm: RequestInfoForm // deprecated
   params: HttpParams // deprecated
-  loading = false // TODO @Daniel seems like some progress bars depend on this but is never true
+  loading = true
   isLoggedIn = false
   isForceLogin = false
   isOauthError = false
@@ -63,7 +63,10 @@ export class SignInComponent implements OnInit {
     this._togglz
       .getStateOf('SIGN_IN_UPDATES_V1')
       .pipe(take(1))
-      .subscribe((value) => (this.signInUpdatesV1Togglz = value))
+      .subscribe((value) => {
+        this.loading = false
+        this.signInUpdatesV1Togglz = value
+      })
 
     combineLatest([this._userInfo.getUserSession(), this._platformInfo.get()])
       .pipe(first())
