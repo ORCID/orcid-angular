@@ -1,3 +1,11 @@
+## v2.66.6 - 2024-03-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.66.5...v2.66.6)
+
+### Fix
+
+- Add loading variable only for togglz signin (#2214)
+
 ## v2.66.5 - 2024-03-21
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.66.4...v2.66.5)
