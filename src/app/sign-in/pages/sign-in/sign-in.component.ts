@@ -7,7 +7,7 @@ import {
   ViewChild,
 } from '@angular/core'
 import { combineLatest } from 'rxjs'
-import { first } from 'rxjs/operators'
+import { first, take } from 'rxjs/operators'
 import { UserSession } from 'src/app/types/session.local'
 
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
@@ -16,6 +16,8 @@ import { UserService } from '../../../core'
 import { RequestInfoForm } from '../../../types/request-info-form.endpoint'
 import { TypeSignIn } from '../../../types/sign-in.local'
 import { FormSignInComponent } from '../../components/form-sign-in/form-sign-in.component'
+import { TogglzService } from 'src/app/core/togglz/togglz.service'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-sign-in',
@@ -45,19 +47,29 @@ export class SignInComponent implements OnInit {
   errorDescription: string
   emailVerified: boolean
   invalidVerifyUrl: boolean
+  platform: PlatformInfo
+  signInUpdatesV1Togglz = false
+  orLabel = $localize`:@@ngOrcid.signin.or:or`
 
   constructor(
     private _platformInfo: PlatformInfoService,
+    private _router: Router,
+    private _togglz: TogglzService,
     private _userInfo: UserService,
     @Inject(WINDOW) private window: Window
   ) {}
 
   ngOnInit() {
+    this._togglz
+      .getStateOf('SIGN_IN_UPDATES_V1')
+      .pipe(take(1))
+      .subscribe((value) => (this.signInUpdatesV1Togglz = value))
+
     combineLatest([this._userInfo.getUserSession(), this._platformInfo.get()])
       .pipe(first())
       .subscribe(([session, platform]) => {
         session = session as UserSession
-        platform = platform as PlatformInfo
+        this.platform = platform as PlatformInfo
 
         this.isLoggedIn = session.loggedIn
         this.isForceLogin = session.oauthSession?.forceLogin
@@ -83,6 +95,17 @@ export class SignInComponent implements OnInit {
         if (session.oauthSession && session.oauthSession.userId) {
           this.email = session.oauthSession.userId
         }
+      })
+  }
+
+  register() {
+    this._platformInfo
+      .get()
+      .pipe(first())
+      .subscribe((platform) => {
+        this._router.navigate(['/register'], {
+          queryParams: platform.queryParameters,
+        })
       })
   }
 

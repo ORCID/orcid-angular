@@ -18,7 +18,11 @@ import {
 } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { catchError, first, map, takeUntil, tap } from 'rxjs/operators'
-import { isRedirectToTheAuthorizationPage } from 'src/app/constants'
+import {
+  ApplicationRoutes,
+  isRedirectToTheAuthorizationPage,
+  isValidOrcidFormat,
+} from 'src/app/constants'
 import { UserService } from 'src/app/core'
 import { OauthParameters, RequestInfoForm } from 'src/app/types'
 
@@ -36,17 +40,23 @@ import { UserSession } from 'src/app/types/session.local'
 import { ERROR_REPORT } from 'src/app/errors'
 import { ErrorStateMatcherForPasswordField } from '../../ErrorStateMatcherForPasswordField'
 import { GoogleTagManagerService } from '../../../core/google-tag-manager/google-tag-manager.service'
+import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 
 @Component({
   selector: 'app-form-sign-in',
   templateUrl: './form-sign-in.component.html',
-  styleUrls: ['./form-sign-in.component.scss'],
+  styleUrls: [
+    './form-sign-in.component.scss',
+    '../sign-in.style.scss',
+    '../sign-in.scss-theme.scss',
+  ],
   preserveWhitespaces: true,
 })
 export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('firstInput') firstInput: ElementRef
   @Input() signInType: TypeSignIn
   @Input() signInData: SignInData
+  @Input() signInUpdatesV1Togglz: boolean
   @Output() isOauthError = new EventEmitter<boolean>()
   @Output() show2FAEmitter = new EventEmitter<object>()
   @Output() loading = new EventEmitter<boolean>()
@@ -69,6 +79,19 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
   private readonly $destroy = new Subject()
   authorizationFormSubmitted: boolean
   backendErrorsMatcher = new ErrorStateMatcherForPasswordField()
+  emailVerified: boolean
+  invalidVerifyUrl: boolean
+
+  placeholderUsername = $localize`:@@ngOrcid.signin.username:Email or 16-digit ORCID iD`
+  placeholderPassword = $localize`:@@ngOrcid.signin.yourOrcidPassword:Your ORCID password`
+
+  get passwordForm() {
+    return this.authorizationForm.controls.password
+  }
+
+  get usernameForm() {
+    return this.authorizationForm.controls.username
+  }
 
   constructor(
     private _user: UserService,
@@ -82,7 +105,8 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
     private _errorHandler: ErrorHandlerService,
     private _signInGuard: SignInGuard,
     private _userInfo: UserService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private _snackBar: SnackbarService
   ) {
     this.signInLocal.type = this.signInType
     combineLatest([_userInfo.getUserSession(), _platformInfo.get()])
@@ -119,6 +143,14 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
               }
             })
         }
+
+        if (platform.queryParameters.emailVerified) {
+          this.emailVerified = platform.queryParameters.emailVerified
+        }
+
+        if (platform.queryParameters.invalidVerifyUrl) {
+          this.invalidVerifyUrl = platform.queryParameters.invalidVerifyUrl
+        }
       })
   }
 
@@ -148,8 +180,10 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    this.firstInput.nativeElement.focus()
-    this.cd.detectChanges()
+    if (!this.signInUpdatesV1Togglz) {
+      this.firstInput.nativeElement.focus()
+      this.cd.detectChanges()
+    }
   }
 
   onSubmit() {
@@ -258,6 +292,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
     this.showBadRecoveryCode = false
     this.showInvalidUser = false
     this.badCredentials = false
+    this.printError = false
   }
 
   register() {
@@ -376,6 +411,63 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
       .get('username')
       .setValidators([Validators.required, UsernameValidator.orcidOrEmail])
     this.authorizationForm.get('username').updateValueAndValidity()
+  }
+
+  navigateToClaim() {
+    this.window.location.href = `/resend-claim?email=${encodeURIComponent(
+      this.email
+    )}`
+  }
+
+  signInActiveAccount() {
+    this.usernameForm.setValue(this.orcidPrimaryDeprecated)
+    this.showDeprecatedError = false
+    this.printError = false
+  }
+
+  reactivateEmail() {
+    const $deactivate = this._signIn.reactivation(this.email)
+    $deactivate.subscribe((data) => {
+      if (data.error) {
+        this._errorHandler
+          .handleError(
+            new Error(data.error),
+            ERROR_REPORT.REGISTER_REACTIVATED_EMAIL
+          )
+          .subscribe()
+      } else {
+        this._snackBar.showSuccessMessage({
+          title: $localize`:@@register.reactivating:Reactivating your account`,
+          // tslint:disable-next-line: max-line-length
+          message: $localize`:@@ngOrcid.signin.verify.reactivationSent:Thank you for reactivating your ORCID record; please complete the process by following the steps in the email we are now sending you. If you don’t receive an email from us, please`,
+          action: $localize`:@@shared.contactSupport:contact support.`,
+          actionURL: `https://support.orcid.org/`,
+          closable: true,
+        })
+        this._router.navigate([ApplicationRoutes.signin])
+      }
+    })
+  }
+
+  claimAccount() {
+    const $deactivate = this._signIn.resendClaim(this.email)
+    $deactivate.subscribe((data) => {
+      if (data.errors) {
+        this._errorHandler
+          .handleError(new Error(data.errors[0]), ERROR_REPORT.STANDARD_VERBOSE)
+          .subscribe()
+      } else {
+        this._snackBar.showSuccessMessage({
+          title: $localize`:@@ngOrcid.signin.claiming:Claiming your account`,
+          // tslint:disable-next-line: max-line-length
+          message: $localize`:@@ngOrcid.signin.verify.claimSent:Thank you for claiming your ORCID record; please complete the process by following the steps in the email we are now sending you. If you don’t receive an email from us, please`,
+          action: $localize`:@@shared.contactSupport:contact support.`,
+          actionURL: `https://support.orcid.org/`,
+          closable: true,
+        })
+        this._router.navigate([ApplicationRoutes.signin])
+      }
+    })
   }
 
   navigateTo(val: string): void {

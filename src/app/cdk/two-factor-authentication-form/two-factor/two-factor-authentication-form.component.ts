@@ -19,12 +19,16 @@ import { WINDOW } from '../../window'
 @Component({
   selector: 'app-two-factor-authentication-form',
   templateUrl: './two-factor-authentication-form.component.html',
-  styleUrls: ['./two-factor-authentication-form.component.scss'],
+  styleUrls: [
+    './two-factor-authentication-form.component.scss',
+    './two-factor-authentication-form.component.scss-theme.scss',
+  ],
   preserveWhitespaces: true,
 })
 export class TwoFactorAuthenticationFormComponent implements AfterViewInit {
   @Input() showBadVerificationCode: boolean
   @Input() showBadRecoveryCode: boolean
+  @Input() signInUpdatesV1Togglz: boolean
   @Output() authenticate = new EventEmitter<{
     verificationCode?: string
     recoveryCode?: string
@@ -37,22 +41,38 @@ export class TwoFactorAuthenticationFormComponent implements AfterViewInit {
 
   recoveryCode = false
 
-  verificationFormControl = new UntypedFormControl('', [
-    Validators.required,
-    Validators.minLength(6),
-    Validators.maxLength(6),
-  ])
-
-  recoveryCodeFormControl = new UntypedFormControl('', [
-    Validators.required,
-    Validators.maxLength(10),
-    Validators.minLength(10),
-  ])
-
   twoFactorForm = new UntypedFormGroup({
-    verificationCode: this.verificationFormControl,
-    recoveryCode: this.recoveryCodeFormControl,
+    verificationCode: new UntypedFormControl(''),
+    recoveryCode: new UntypedFormControl(''),
   })
+
+  get verificationFormControl() {
+    return this.twoFactorForm.controls.verificationCode
+  }
+
+  get recoveryCodeFormControl() {
+    return this.twoFactorForm.controls.recoveryCode
+  }
+
+  get verificationWasTouched() {
+    return (
+      this.verificationFormControl.dirty && this.verificationFormControl.touched
+    )
+  }
+
+  get recoveryCodeWasTouched() {
+    return (
+      this.recoveryCodeFormControl.dirty && this.recoveryCodeFormControl.touched
+    )
+  }
+
+  get isVerificationCodeInvalid() {
+    return this.verificationFormControl.invalid && this.verificationWasTouched
+  }
+
+  get isRecoveryCodeInvalid() {
+    return this.recoveryCodeFormControl.invalid && this.recoveryCodeWasTouched
+  }
 
   constructor(
     private cdref: ChangeDetectorRef,
@@ -66,22 +86,39 @@ export class TwoFactorAuthenticationFormComponent implements AfterViewInit {
 
   onSubmit() {
     this.hideErrorMessages()
-    this.disableValidators()
+    this.addValidators()
 
     if (this.twoFactorForm.valid) {
       this.authenticate.emit({
         verificationCode: this.twoFactorForm.value.verificationCode,
         recoveryCode: this.twoFactorForm.value.recoveryCode,
       })
-
+      this.enableValidators()
+    } else {
       this.enableValidators()
     }
   }
 
-  disableValidators() {
+  addValidators() {
     if (!this.recoveryCode) {
+      this.verificationFormControl.setValidators([
+        Validators.required,
+        Validators.maxLength(6),
+        Validators.minLength(6),
+      ])
+      this.verificationFormControl.updateValueAndValidity()
+      this.verificationFormControl.markAsDirty()
+      this.verificationFormControl.markAsTouched()
       this.recoveryCodeFormControl.disable()
     } else {
+      this.recoveryCodeFormControl.setValidators([
+        Validators.required,
+        Validators.maxLength(10),
+        Validators.minLength(10),
+      ])
+      this.recoveryCodeFormControl.updateValueAndValidity()
+      this.recoveryCodeFormControl.markAsDirty()
+      this.recoveryCodeFormControl.markAsTouched()
       this.verificationFormControl.disable()
     }
   }
@@ -108,7 +145,7 @@ export class TwoFactorAuthenticationFormComponent implements AfterViewInit {
   }
 
   hideErrorMessages() {
-    this.showBadRecoveryCode = false
+    this.showBadVerificationCode = false
     this.showBadRecoveryCode = false
   }
 

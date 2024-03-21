@@ -4,8 +4,14 @@
   justify-content: center;
 }
 
-main {
+main.stand-alone-mode {
   margin-top: 32px;
+}
+
+.stand-alone-mode {
+  .panel {
+    border: 2px solid;
+  }
 }
 
 main.inside-iframe {
@@ -25,7 +31,6 @@ main.inside-iframe {
   display: grid;
   grid-gap: 16px;
   border-radius: 8px 8px 0px 0px;
-  border: 2px solid;
 }
 
 .panel-header {
@@ -71,7 +76,7 @@ main.inside-iframe {
 
 .panel-body-3-cols {
   // 3 columns with a max with of 320px each
-  grid-template-columns: repeat(3, minmax(auto, 340px));
+  grid-template-columns: repeat(3, minmax(auto, 433px));
 }
 
 .panel-body-2-cols {
@@ -86,14 +91,25 @@ main.inside-iframe {
   border-right: 2px solid;
 }
 
-h2 {
+h3 {
   font-weight: 600;
   letter-spacing: 2px;
 }
 
-main {
+main.loading {
+  display: flex;
   max-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 352px;
+  width: 1304px;
   overflow: hidden;
+  div {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
 }
 
 main.panel.mobile {
@@ -185,7 +201,7 @@ a {
     gap: 8px;
   }
 
-  h2.hover-effect {
+  h3.hover-effect {
     text-decoration: underline;
   }
 }

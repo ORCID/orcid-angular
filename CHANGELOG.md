@@ -1,3 +1,214 @@
+## v2.66.3 - 2024-03-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.66.2...v2.66.3)
+
+- [#2210](https://github.com/ORCID/orcid-angular/pull/2210): batch-fixes-mar-20-2024
+
+## v2.66.2 - 2024-03-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.66.1...v2.66.2)
+
+- [#2209](https://github.com/ORCID/orcid-angular/pull/2209): fix: Add validators to 2FA until users click `Authenticate` button
+- [#2208](https://github.com/ORCID/orcid-angular/pull/2208): style: Force padding since is not working IOS tablet devices
+
+### Fix
+
+- Enable validators again if codes were incorrect
+- Add validators to 2FA until users click `Authenticate` button
+
+## v2.66.1 - 2024-03-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.66.0...v2.66.1)
+
+- [#2206](https://github.com/ORCID/orcid-angular/pull/2206): style: Fix accessibility issues in authorize form
+
+## v2.66.0 - 2024-03-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.65.1...v2.66.0)
+
+- [#2207](https://github.com/ORCID/orcid-angular/pull/2207): 9149-qa-add-a-record-summaries-toggle
+
+## v2.65.1 - 2024-03-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.65.0...v2.65.1)
+
+- [#2205](https://github.com/ORCID/orcid-angular/pull/2205): style: Stack account links in mobile version of authorize page
+- [#2204](https://github.com/ORCID/orcid-angular/pull/2204): fix: Display error messages in 2FA only if user touched the inputs
+- [#2201](https://github.com/ORCID/orcid-angular/pull/2201): build(deps): bump follow-redirects from 1.15.5 to 1.15.6
+
+### Fix
+
+- Display error messages in 2FA only if user touched the inputs
+
+## v2.65.0 - 2024-03-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.64.0...v2.65.0)
+
+- [#2203](https://github.com/ORCID/orcid-angular/pull/2203): Feature/9060 qa investigation affiliation found notice panel not announced to assistive tech users
+
+## v2.64.0 - 2024-03-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.63.1...v2.64.0)
+
+- [#2202](https://github.com/ORCID/orcid-angular/pull/2202): Feature/9107 record summaries
+
+## v2.63.1 - 2024-03-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.63.0...v2.63.1)
+
+- [#2198](https://github.com/ORCID/orcid-angular/pull/2198): fix: Display email verified notice panel
+- [#2199](https://github.com/ORCID/orcid-angular/pull/2199): fix: Add missing alt to fix accessibility issues
+
+### Fix
+
+- Update 2FA error conditions and styling (#2200)
+- Add missing alt to fix accessibility issues
+- Display email verified notice panel
+
+## v2.63.0 - 2024-03-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.15...v2.63.0)
+
+- [#2197](https://github.com/ORCID/orcid-angular/pull/2197): feature: Update reactivate and claim functionality to accept ORCID iD
+
+### Fix
+
+- Remove commented code
+- Add missing files VS
+
+### Feature
+
+- Update reactivate and claim functionality to accept ORCID iD
+
+## v2.62.15 - 2024-03-14
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.14...v2.62.15)
+
+- [#2196](https://github.com/ORCID/orcid-angular/pull/2196): style: Fix mobile version margins
+
+## v2.62.14 - 2024-03-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.13...v2.62.14)
+
+- [#2195](https://github.com/ORCID/orcid-angular/pull/2195): style: Fix text size in authorize page
+
+## v2.62.13 - 2024-03-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.12...v2.62.13)
+
+- [#2194](https://github.com/ORCID/orcid-angular/pull/2194): Fix/9116 tech check errors on the home page
+
+### Fix
+
+- Return empty observable instead of null
+
+## v2.62.12 - 2024-03-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.11...v2.62.12)
+
+- [#2193](https://github.com/ORCID/orcid-angular/pull/2193): fix: Add condition to wait for sign in togglz
+
+### Fix
+
+- Add condition to wait for sign in togglz
+
+## v2.62.11 - 2024-03-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.10...v2.62.11)
+
+- [#2192](https://github.com/ORCID/orcid-angular/pull/2192): fix: Remove autofocus if new sign in togglz is enabled
+
+### Fix
+
+- Remove autofocus if new sign in togglz is enabled
+
+## v2.62.10 - 2024-03-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.9...v2.62.10)
+
+- [#2190](https://github.com/ORCID/orcid-angular/pull/2190): style: Add semicolon and italic style to link
+
+## v2.62.9 - 2024-03-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.8...v2.62.9)
+
+### Fix
+
+- Add missing arialabel (#2191)
+
+## v2.62.8 - 2024-03-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.7...v2.62.8)
+
+- [#2187](https://github.com/ORCID/orcid-angular/pull/2187): Fix/9127-qa-fix-position-of-loading-bar-in-oauth-screen
+
+### Fix
+
+- Set client name on authorization page (#2188)
+- Remove whitespace
+
+## v2.62.7 - 2024-03-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.6...v2.62.7)
+
+- [#2186](https://github.com/ORCID/orcid-angular/pull/2186): fix: Add full stop to sign in text and update claim link text
+
+### Fix
+
+- Add full stop to sign in text and update claim link text
+
+## v2.62.6 - 2024-03-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.5...v2.62.6)
+
+## v2.62.5 - 2024-03-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.4...v2.62.5)
+
+## v2.62.4 - 2024-03-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.3...v2.62.4)
+
+## v2.62.3 - 2024-03-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.2...v2.62.3)
+
+## v2.62.2 - 2024-03-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.1...v2.62.2)
+
+## v2.62.1 - 2024-03-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.62.0...v2.62.1)
+
+### Fix
+
+- Return empty observable instead of null (#2183)
+
+## v2.62.0 - 2024-03-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.61.9...v2.62.0)
+
+## v2.61.9 - 2024-03-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.61.8...v2.61.9)
+
+### Feature
+
+- Add new authorize styling (#2182)
+
+## v2.61.8 - 2024-03-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.61.7...v2.61.8)
+
+## v2.61.7 - 2024-03-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.61.6...v2.61.7)
+
+## v2.61.6 - 2024-03-05
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.61.5...v2.61.6)
+
 ## v2.61.5 - 2024-03-04
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.61.4...v2.61.5)

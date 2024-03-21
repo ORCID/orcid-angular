@@ -1,19 +1,41 @@
-import { Component, Inject, Input, OnInit } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core'
 import { WINDOW } from '../../../../cdk/window'
+import { isValidOrcidFormat } from 'src/app/constants'
 
 @Component({
   selector: 'app-print-errors',
   templateUrl: './print-errors.component.html',
-  styleUrls: ['./print-errors.component.scss'],
+  styleUrls: [
+    './print-errors.component.scss',
+    '../../sign-in.style.scss',
+    '../../sign-in.scss-theme.scss',
+  ],
   preserveWhitespaces: true,
 })
 export class PrintErrorsComponent implements OnInit {
   @Input() badCredentials: boolean
   @Input() showDeprecatedError: boolean
+  @Input() showDeactivatedError: boolean
   @Input() showUnclaimedError: boolean
   @Input() showInvalidUser: boolean
   @Input() orcidPrimaryDeprecated: string
   @Input() email: string
+  @Input() signInUpdatesV1Togglz: boolean
+
+  @Output() signInActiveAccount = new EventEmitter<void>()
+  @Output() deactivatedAccount = new EventEmitter<void>()
+  @Output() unclaimedAccount = new EventEmitter<void>()
+
+  get isEmail() {
+    return !isValidOrcidFormat(this.email)
+  }
 
   constructor(@Inject(WINDOW) private window: Window) {}
 
@@ -21,6 +43,18 @@ export class PrintErrorsComponent implements OnInit {
 
   resendClaim() {
     this.navigateTo(`resend-claim?email=` + encodeURIComponent(this.email))
+  }
+
+  unclaimed() {
+    this.unclaimedAccount.emit()
+  }
+
+  deactivated() {
+    this.deactivatedAccount.emit()
+  }
+
+  deprecatedAccount() {
+    this.signInActiveAccount.emit()
   }
 
   navigateTo(val) {

@@ -1,0 +1,24 @@
+@use '@angular/material' as mat;
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+@mixin two-factor-authentication-form-theme($theme) {
+  $primary: map-get($theme, primary);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .authenticate-button {
+    color: $orcid-light-primary-text;
+    background: mat.get-color-from-palette($primary, 500);
+  }
+
+  .authenticate-button-new-signin {
+    color: $orcid-light-primary-text;
+    background: mat.get-color-from-palette($primary, 700);
+  }
+
+  .error {
+    color: map-get($foreground, 'state-warning-dark');
+  }
+}
+
+@include two-factor-authentication-form-theme($orcid-app-theme);

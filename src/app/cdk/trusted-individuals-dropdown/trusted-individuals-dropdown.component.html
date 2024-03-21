@@ -1,6 +1,9 @@
 <a
   *ngIf="delegators?.length || switchToMeAccount"
-  class="mat-button-font"
+  [ngClass]="{
+    'mat-button-font': !signInUpdatesV1Togglz,
+    underline: signInUpdatesV1Togglz
+  }"
   [matMenuTriggerFor]="menu"
   i18n="@@delegators.switchAccount"
   [attr.aria-label]="labelSwitchAccount"

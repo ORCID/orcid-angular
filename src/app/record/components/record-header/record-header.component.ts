@@ -1,4 +1,11 @@
-import { Component, Inject, Input, OnInit } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core'
 import { isEmpty } from 'lodash'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
@@ -24,6 +31,18 @@ export class RecordHeaderComponent implements OnInit {
   @Input() loadingUserRecord = true
   @Input() isPublicRecord: string
   @Input() affiliations: number
+  @Input() newRecordHeaderWithSummaryTogglz: boolean
+  _recordSummaryOpen: boolean
+
+  @Input()
+  set recordSummaryOpen(value: boolean) {
+    this._recordSummaryOpen = value
+    this.recordSummaryOpenChange.emit(this._recordSummaryOpen)
+  }
+  get recordSummaryOpen(): boolean {
+    return this._recordSummaryOpen
+  }
+  @Output() recordSummaryOpenChange = new EventEmitter<boolean>()
 
   platform: PlatformInfo
   recordWithIssues: boolean
@@ -120,5 +139,8 @@ export class RecordHeaderComponent implements OnInit {
         this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID +
         '/print'
     )
+  }
+  recordSummaryLinkClick() {
+    this.recordSummaryOpen = !this.recordSummaryOpen
   }
 }

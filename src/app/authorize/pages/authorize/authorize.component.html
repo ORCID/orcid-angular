@@ -1,9 +1,23 @@
-<main id="main">
+<main id="main" *ngIf="!loading">
   <div class="container">
     <div class="row space-around">
-      <div class="col l5 m6 s4">
-        <mat-card class="orcid-wizard-2">
+      <div
+        class="col m6 s4"
+        [ngClass]="{
+          'l5': !signInUpdatesV1Togglz,
+          'l6': signInUpdatesV1Togglz,
+        }"
+      >
+        <mat-card
+          [ngClass]="{
+            'orcid-wizard-2': !signInUpdatesV1Togglz,
+            'orcid-wizard': signInUpdatesV1Togglz,
+            'authorize-wrapper': signInUpdatesV1Togglz,
+            mobile: platform.columns4
+          }"
+        >
           <app-form-authorize
+            [signInUpdatesV1Togglz]="signInUpdatesV1Togglz"
             *ngIf="showAuthorizationComponent"
           ></app-form-authorize>
           <app-oauth-error

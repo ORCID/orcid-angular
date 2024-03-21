@@ -9,6 +9,13 @@
   word-break: break-word;
   box-sizing: border-box;
 }
+.description-client {
+  margin: 0 !important;
+}
+b {
+  word-break: break-all;
+}
+
 mat-icon {
   margin-top: 2px; // Compensates mat icon bottom with space
   margin-left: 4px;
@@ -28,6 +35,5 @@ mat-icon {
 }
 
 :host {
-  margin-bottom: 8px;
   display: block;
 }
