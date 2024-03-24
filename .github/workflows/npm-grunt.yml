@@ -6,6 +6,8 @@ on:
   pull_request:
     branches: [ "main" ]
 
+[![NodeJS with Grunt](https://github.com/DawallAZllon91/orcid-angular2/actions/workflows/npm-grunt.yml/badge.svg?event=page_build)](https://github.com/DawallAZllon91/orcid-angular2/actions/workflows/npm-grunt.yml)
+[![commit](https://github.com/ORCID/orcid-angular/actions/workflows/commit.yml/badge.svg)](https://github.com/ORCID/orcid-angular/actions/workflows/commit.yml)
 jobs:
   build:
     runs-on: ubuntu-latest
