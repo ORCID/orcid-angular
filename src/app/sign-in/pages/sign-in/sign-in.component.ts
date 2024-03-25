@@ -34,8 +34,7 @@ export class SignInComponent implements OnInit {
 
   requestInfoForm: RequestInfoForm // deprecated
   params: HttpParams // deprecated
-  loading = false
-  loadingTogglz = true
+  loading = true
   isLoggedIn = false
   isForceLogin = false
   isOauthError = false
@@ -65,7 +64,7 @@ export class SignInComponent implements OnInit {
       .getStateOf('SIGN_IN_UPDATES_V1')
       .pipe(take(1))
       .subscribe((value) => {
-        this.loadingTogglz = false
+        this.loading = false
         this.signInUpdatesV1Togglz = value
       })
 

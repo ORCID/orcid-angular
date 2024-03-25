@@ -9,7 +9,7 @@
       <div class="col l6 m6 s4">
         <mat-card
           class="orcid-wizard"
-          *ngIf="!!loadingTogglz && !signInUpdatesV1Togglz"
+          *ngIf="!loading && !signInUpdatesV1Togglz"
         >
           <mat-progress-bar
             role="heading"
@@ -72,7 +72,7 @@
           [ngClass]="{
             mobile: !platform.columns12
           }"
-          *ngIf="!loadingTogglz && signInUpdatesV1Togglz"
+          *ngIf="!loading && signInUpdatesV1Togglz"
         >
           <mat-progress-bar
             role="heading"
