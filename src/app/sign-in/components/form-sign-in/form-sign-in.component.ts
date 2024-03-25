@@ -452,7 +452,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
   claimAccount() {
     const $deactivate = this._signIn.resendClaim(this.email)
     $deactivate.subscribe((data) => {
-      if (data.errors) {
+      if (data.errors && data.errors.length > 0) {
         this._errorHandler
           .handleError(new Error(data.errors[0]), ERROR_REPORT.STANDARD_VERBOSE)
           .subscribe()
