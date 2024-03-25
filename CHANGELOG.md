@@ -1,3 +1,11 @@
+## v2.66.7 - 2024-03-25
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.66.6...v2.66.7)
+
+### Fix
+
+- Remove unnecessary exclamation mark/bang operator (#2216)
+
 ## v2.66.6 - 2024-03-21
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.66.5...v2.66.6)
