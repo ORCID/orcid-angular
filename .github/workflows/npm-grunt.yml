@@ -28,3 +28,15 @@ jobs:
       run: |
         npm install
         grunt
+            - nombre: turbostart-npm
+  # Puedes fijar la confirmación exacta o la versión.
+  # usos: clutchd/turbostart-npm@0911f5a9afb0c253ce7b43ab55e2ff83a48ddd45
+  usos: clutchd/turbostart-npm@v3.0.1
+                   - nombre: configuración npm
+  # Puedes fijar la confirmación exacta o la versión.
+  # usos: ng-easy/npm-setup@e5cc43439b1b38d58809e979c44bc442e2a89ac5
+  usos: ng-easy/npm-setup@v1.7.2
+  con:
+    # Caché en caché de ejecución local de NX en lugar de depender de NX Cloud, este parámetro es la clave para identificar de forma única un trabajo que ejecuta un script de NX.
+    clave nx: # opcional
+             
