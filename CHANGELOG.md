@@ -1,3 +1,35 @@
+## v2.66.9 - 2024-03-25
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.66.8...v2.66.9)
+
+## v2.66.8 - 2024-03-25
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.66.7...v2.66.8)
+
+## v2.66.7 - 2024-03-25
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.66.6...v2.66.7)
+
+### Fix
+
+- Remove unnecessary exclamation mark/bang operator (#2216)
+
+## v2.66.6 - 2024-03-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.66.5...v2.66.6)
+
+### Fix
+
+- Add loading variable only for togglz signin (#2214)
+
+## v2.66.5 - 2024-03-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.66.4...v2.66.5)
+
+## v2.66.4 - 2024-03-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.66.3...v2.66.4)
+
 ## v2.66.3 - 2024-03-20
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.66.2...v2.66.3)

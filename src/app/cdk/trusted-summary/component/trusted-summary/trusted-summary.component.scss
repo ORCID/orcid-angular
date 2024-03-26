@@ -6,19 +6,13 @@
 
 main.stand-alone-mode {
   margin-top: 32px;
-}
-
-.stand-alone-mode {
-  .panel {
-    border: 2px solid;
-  }
+  border: 2px solid;
 }
 
 main.inside-iframe {
   margin-top: 0;
   align-content: start;
   grid-gap: 0;
-  height: 100vh;
   box-sizing: border-box;
 
   .panel-body {
