@@ -216,4 +216,13 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
     const offsettedDate = new Date(date.getTime() + offset * 60 * 1000)
     return offsettedDate
   }
+  goToActivitySection(activitySection: string) {
+    this.standaloneMode ? this.navigateTo(activitySection) : this.scrollTo(activitySection)
+  }
+  scrollTo(activitySection: string) {
+    document.querySelector(`#${activitySection}`).scrollIntoView()
+  }
+  navigateTo(activitySection: string) {
+    this._window.open(`${this.trustedSummary.orcid}#${activitySection}`, '_blank')
+  }
 }
