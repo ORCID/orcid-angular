@@ -50,7 +50,9 @@ export class SummaryPanelComponent implements OnInit {
     this._window.open(url, '_blank')
   }
   goToActivitySection(activitySection: string) {
-    this.standaloneMode ? this.goToUrl(this.url) : this.scrollTo(activitySection)
+    this.standaloneMode
+      ? this.goToUrl(this.url)
+      : this.scrollTo(activitySection)
   }
   scrollTo(activitySection: string) {
     document.querySelector(`#${activitySection}`).scrollIntoView()

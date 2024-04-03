@@ -102,7 +102,6 @@ describe('MyOrcidComponent', () => {
     }
   })
 
-
   it('[PRIVATE] should have only one of each section', () => {
     validateTopBarAndActivities(fixture, 1)
   })

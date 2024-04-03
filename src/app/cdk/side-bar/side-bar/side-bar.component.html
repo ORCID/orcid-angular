@@ -7,8 +7,7 @@
   <h2
     class="orc-font-body-large"
     [ngClass]="{
-      'sr-only':
-        !loadingUserRecord && isPublicRecord ? false : true
+      'sr-only': !loadingUserRecord && isPublicRecord ? false : true
     }"
     i18n="@@shared.personalInformation"
   >
@@ -16,11 +15,7 @@
   </h2>
   <p
     i18n="@@record.noPersonalInformation"
-    *ngIf="
-      !loadingUserRecord && isPublicRecord
-        ? !displaySideBar
-        : false
-    "
+    *ngIf="!loadingUserRecord && isPublicRecord ? !displaySideBar : false"
   >
     No personal information available
   </p>

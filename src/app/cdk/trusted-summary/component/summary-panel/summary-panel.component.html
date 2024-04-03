@@ -6,7 +6,7 @@
   <ng-container *ngFor="let activity of activitiesToDisplay; last as isLast">
     <div
       class="activity-container"
-(click)="goToUrl(activity.url)"
+      (click)="goToUrl(activity.url)"
       [ngClass]="{
         'with-border': !isLast || acitivityCountOverflow,
         'padding-botton': !isLast || acitivityCountOverflow

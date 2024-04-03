@@ -225,7 +225,6 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
             }
           }
 
-  
           if (togglz.messages['CRAZY_EGG'] === 'true') {
             this._scriptService
               .load({
