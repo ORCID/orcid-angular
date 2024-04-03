@@ -8,7 +8,7 @@
     class="orc-font-body-large"
     [ngClass]="{
       'sr-only':
-        !loadingUserRecord && isPublicRecord ? !newRecordHeaderTogglz : true
+        !loadingUserRecord && isPublicRecord ? false : true
     }"
     i18n="@@shared.personalInformation"
   >
@@ -18,15 +18,13 @@
     i18n="@@record.noPersonalInformation"
     *ngIf="
       !loadingUserRecord && isPublicRecord
-        ? newRecordHeaderTogglz
-          ? !displaySideBar
-          : false
+        ? !displaySideBar
         : false
     "
   >
     No personal information available
   </p>
-  <ng-container *ngIf="isPublicRecord ? !newRecordHeaderTogglz : true">
+  <ng-container *ngIf="isPublicRecord ? false : true">
     <app-side-bar-id
       *ngIf="!hideOrcidId"
       [ngClass]="{

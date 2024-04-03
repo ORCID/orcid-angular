@@ -47,7 +47,6 @@ export class TopBarComponent implements OnInit, OnDestroy {
   checkEmailValidated: boolean
   inDelegationMode: boolean
   @Input() loadingUserRecord = true
-  @Input() newRecordHeaderTogglz: boolean
 
   regionNames = $localize`:@@topBar.names:Names`
   regionBiography = $localize`:@@topBar.biography:Biography`

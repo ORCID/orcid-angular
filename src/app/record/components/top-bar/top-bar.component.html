@@ -1,23 +1,9 @@
-<mat-progress-bar
-  *ngIf="!newRecordHeaderTogglz && loadingUserRecord"
-  mode="indeterminate"
-  color="accent"
-></mat-progress-bar>
-<app-top-bar-record-issues
-  *ngIf="!newRecordHeaderTogglz"
-  [isPublicRecord]="isPublicRecord"
-></app-top-bar-record-issues>
-
 <app-top-bar-actions
   [ariaLabelName]="ariaLabelName"
   [userRecord]="userRecord"
   [userStatus]="userStatus"
   [isPublicRecord]="isPublicRecord"
-  *ngIf="
-    newRecordHeaderTogglz
-      ? !isPublicRecord && !recordWithIssues
-      : !recordWithIssues
-  "
+  *ngIf="!isPublicRecord && !recordWithIssues"
   [showPrintButton]="!platform.columns12"
 ></app-top-bar-actions>
 
@@ -151,134 +137,12 @@
       mobile: !platform.columns12
     }"
   >
-    <section
-      [id]="'names'"
-      role="region"
-      [attr.aria-label]="regionNames"
-      *ngIf="
-        !newRecordHeaderTogglz && (userRecord?.names || userRecord?.otherNames)
-      "
-    >
-      <div class="row names-container">
-        <div class="published-name" *ngIf="creditName">
-          <div
-            class="row mat-caption description"
-            i18n="@@topBar.publishedName"
-          >
-            Published Name
-          </div>
-          <h1 class="name orc-font-heading-small">{{ creditName }}</h1>
-        </div>
-        <div
-          class="published-name"
-          *ngIf="!creditName && (givenNames || familyName)"
-        >
-          <div class="row mat-caption description" i18n="@@topBar.name">
-            Name
-          </div>
-          <h1 class="name orc-font-heading-small">
-            {{ givenNames + ' ' + familyName }}
-          </h1>
-        </div>
-        <div class="row names-wrapper">
-          <div
-            class="names"
-            [ngClass]="{
-              col: platform.columns12,
-              'row mobile': !platform.columns12,
-              'names-extended': expandedContent
-            }"
-            *ngIf="creditName"
-          >
-            <div class="names-content">
-              <div class="mat-caption description" i18n="@@topBar.name">
-                Name
-              </div>
-              <div class="orc-font-body-small">
-                <ng-container *ngIf="givenNames">
-                  {{ givenNames + ' ' }}
-                </ng-container>
-                {{ familyName }}
-              </div>
-            </div>
-          </div>
-          <div
-            class="other-names"
-            [ngClass]="{
-              col: platform.columns12,
-              'row mobile': !platform.columns12,
-              'other-names-no-border': expandedContent
-            }"
-            *ngIf="userRecord.otherNames?.otherNames.length > 0"
-          >
-            <div
-              class="row space-between"
-              [ngClass]="{
-                'other-names-extended': expandedContent
-              }"
-            >
-              <div class="col l10 mat-caption other-names-wrapper">
-                <div class="other-names-content">
-                  <div class="description" i18n="@@topBar.alsoKnowAs">
-                    Also known as
-                  </div>
-                  <p class="orc-font-body-small" *ngIf="!expandedContent">
-                    {{ otherNames }}
-                  </p>
-                  <ng-container
-                    *ngFor="
-                      let otherNames of userRecord.otherNames?.otherNames;
-                      index as i;
-                      let last = last
-                    "
-                  >
-                    <div class="row other-name" *ngIf="expandedContent">
-                      <div class="row">
-                        <b class="orc-font-body-small">
-                          {{ otherNames.content }}
-                        </b>
-                      </div>
-                      <app-panel-element-source
-                        [isLastItem]="last"
-                        *ngIf="true"
-                        [name]="otherNames.sourceName || otherNames.source"
-                        [date]="
-                          otherNames.createdDate | monthDayYearDateToString
-                        "
-                        [assertion]="
-                          otherNames.assertionOriginName ||
-                          otherNames.assertionOriginOrcid
-                        "
-                      >
-                      </app-panel-element-source>
-                    </div>
-                  </ng-container>
-                </div>
-              </div>
-              <div>
-                <app-panel-expand-buttons
-                  panelType="top-bar"
-                  panelId="also-know-as"
-                  (toggle)="collapse()"
-                  [openState]="expandedContent"
-                ></app-panel-expand-buttons>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <app-top-bar-actions
       [ariaLabelName]="ariaLabelName"
       [userRecord]="userRecord"
       [userStatus]="userStatus"
       [isPublicRecord]="isPublicRecord"
-      *ngIf="
-        newRecordHeaderTogglz
-          ? !isPublicRecord && !recordWithIssues && !platform.columns12
-          : !recordWithIssues && !platform.columns12
-      "
+      *ngIf="!isPublicRecord && !recordWithIssues && !platform.columns12"
       [showIsThisYouButton]="true"
     ></app-top-bar-actions>
 
@@ -288,10 +152,7 @@
       [attr.aria-label]="regionBiography"
       *ngIf="userRecord?.biography?.biography"
     >
-      <div
-        class="biography-container"
-        [ngClass]="{ 'no-margin-top': newRecordHeaderTogglz }"
-      >
+      <div class="biography-container no-margin-top">
         <h2 class="biography-header orc-font-body" i18n="@@topBar.biography">
           Biography
         </h2>
