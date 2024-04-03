@@ -19,7 +19,6 @@ import {
 })
 export class TopBarMyPublicRecordPreviewComponent implements OnInit {
   @Input() isPublicRecord: string
-  @Input() newRecordHeaderTogglz: boolean
   iAmEditingThisRecord = false
   isMyRecord: boolean
   effectiveRecord: string

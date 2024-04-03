@@ -74,7 +74,6 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   regionActivities = $localize`:@@shared.activities:Activities`
   readyForIndexing: boolean
   fragment: string
-  newRecordHeaderTogglz = false
   newRecordHeaderWithSummaryTogglz: boolean
 
   constructor(
@@ -226,10 +225,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
             }
           }
 
-          if (togglz.messages['NEW_RECORD_HEADER'] === 'true') {
-            this.newRecordHeaderTogglz = true
-          }
-
+  
           if (togglz.messages['CRAZY_EGG'] === 'true') {
             this._scriptService
               .load({
