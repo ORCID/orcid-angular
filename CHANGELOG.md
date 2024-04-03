@@ -1,3 +1,14 @@
+## v2.67.0 - 2024-04-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.66.10...v2.67.0)
+
+- [#2222](https://github.com/ORCID/orcid-angular/pull/2222): feature: Header summary link scroll to section on standaloneMode
+- [#2223](https://github.com/ORCID/orcid-angular/pull/2223): batch-fixes-april-3-2024
+
+### Feature
+
+- Header summary link scroll to section on standaloneMode
+
 ## v2.66.10 - 2024-03-26
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.66.9...v2.66.10)
