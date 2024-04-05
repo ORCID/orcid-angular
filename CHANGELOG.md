@@ -1,3 +1,11 @@
+## v2.70.0 - 2024-04-05
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.69.0...v2.70.0)
+
+### Fix
+
+- Add scrollTo or navigate depending on standalone on summary (#2224)
+
 ## v2.69.0 - 2024-04-05
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.68.0...v2.69.0)
