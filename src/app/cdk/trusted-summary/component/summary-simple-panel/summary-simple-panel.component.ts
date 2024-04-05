@@ -30,8 +30,10 @@ export class SummarySimplePanelComponent implements OnInit {
   @Input() moreLabel: string = ''
   @Input() moreLabelSingular: string = ''
   @Input() hoverEffect = false
-
   @Input() overflowUrl: string = ''
+  @Input() standaloneMode: boolean
+  @Input() activitySection: string
+
   unsubscribe = new Subject()
   mobile: boolean
   acitivityCountOverflow = false
@@ -46,5 +48,13 @@ export class SummarySimplePanelComponent implements OnInit {
       return
     }
     this._window.open(url, '_blank')
+  }
+  goToActivitySection(activitySection: string) {
+    this.standaloneMode
+      ? this.goToUrl(this.overflowUrl)
+      : this.scrollTo(activitySection)
+  }
+  scrollTo(activitySection: string) {
+    document.querySelector(`#${activitySection}`).scrollIntoView()
   }
 }
