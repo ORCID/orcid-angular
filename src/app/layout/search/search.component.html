@@ -6,12 +6,13 @@
     id="cy-language-comp"
   ></app-language>
 </div>
-<form role="search" class="row h-end search-box middle">
+<form
+  role="search"
+  class="row h-end search-box middle"
+  (submit)="search(whereToSearchSelected, whatToSearch)"
+>
   <div id="ariaLabelWhere" hidden>Search on</div>
-  <div
-    class="input-box-new-info"
-    (keyup.enter)="search(whereToSearchSelected, whatToSearch)"
-  >
+  <div class="input-box-new-info">
     <input
       autocomplete="off"
       name="whatToSearch"
@@ -24,10 +25,9 @@
   </div>
   <button
     [attr.aria-label]="labelSearch"
-    type="button"
+    type="submit"
     matRipple
     class="col middle search-icon"
-    (click)="search(whereToSearchSelected, whatToSearch)"
     id="cy-search-btn"
   >
     <mat-icon matSuffix>search</mat-icon>
