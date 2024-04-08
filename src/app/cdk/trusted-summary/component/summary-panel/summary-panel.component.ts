@@ -22,6 +22,8 @@ export class SummaryPanelComponent implements OnInit {
   @Input() moreLabelSingular: string = ''
   @Input() showToPresent = true
   @Input() hoverEffect = false
+  @Input() standaloneMode: boolean
+  @Input() activitySection: string
   activitiesToDisplay: ActivitySummary[]
   acitivityCountOverflow: boolean
   unsubscribe = new Subject()
@@ -46,5 +48,13 @@ export class SummaryPanelComponent implements OnInit {
       return
     }
     this._window.open(url, '_blank')
+  }
+  goToActivitySection(activitySection: string) {
+    this.standaloneMode
+      ? this.goToUrl(this.url)
+      : this.scrollTo(activitySection)
+  }
+  scrollTo(activitySection: string) {
+    document.querySelector(`#${activitySection}`).scrollIntoView()
   }
 }

@@ -116,11 +116,10 @@
     >
       <ng-container *ngIf="trustedSummary.employmentAffiliations?.length">
         <a
-          href="{{ trustedSummary.orcid }}#affiliations"
-          target="_blank"
           rel="noopener noreferrer"
           (mouseenter)="affiliationsHover = true"
           (mouseleave)="affiliationsHover = false"
+          (click)="goToActivitySection('affiliations')"
         >
           <h3
             class="orc-font-small-print"
@@ -137,6 +136,8 @@
           [moreLabel]="labelMoreAffiliations"
           [moreLabelSingular]="labelMoreAffiliation"
           [hoverEffect]="affiliationsHover"
+          [standaloneMode]="standaloneMode"
+          [activitySection]="'affiliations'"
         ></app-summary-panel>
       </ng-container>
       <ng-container *ngIf="lastUpdateDate || creationDateWithOffset">
@@ -192,11 +193,10 @@
     >
       <ng-container *ngIf="works?.length">
         <a
-          href="{{ trustedSummary.orcid }}#works"
-          target="_blank"
           rel="noopener noreferrer"
           (mouseenter)="worksHover = true"
           (mouseleave)="worksHover = false"
+          (click)="goToActivitySection('works')"
         >
           <h3
             class="orc-font-small-print"
@@ -215,11 +215,10 @@
       </ng-container>
       <ng-container *ngIf="peerReviews?.length">
         <a
-          href="{{ trustedSummary.orcid }}#peer-reviews"
-          target="_blank"
           rel="noopener noreferrer"
           (mouseenter)="peerReviewsHover = true"
           (mouseleave)="peerReviewsHover = false"
+          (click)="goToActivitySection('peer-reviews')"
         >
           <h3
             [ngClass]="{
@@ -238,11 +237,10 @@
       </ng-container>
       <ng-container *ngIf="funds?.length">
         <a
-          href="{{ trustedSummary.orcid }}#funding"
-          target="_blank"
           rel="noopener noreferrer"
           (mouseenter)="fundsHover = true"
           (mouseleave)="fundsHover = false"
+          (click)="goToActivitySection('funding')"
         >
           <h3
             class="orc-font-small-print"
@@ -270,11 +268,10 @@
     >
       <ng-container *ngIf="trustedSummary.professionalActivities?.length">
         <a
-          href="{{ trustedSummary.orcid }}#professional-activities"
-          target="_blank"
           rel="noopener noreferrer"
           (mouseenter)="professionalActivitiesHover = true"
           (mouseleave)="professionalActivitiesHover = false"
+          (click)="goToActivitySection('professional-activities')"
         >
           <h3
             class="orc-font-small-print"
@@ -293,15 +290,16 @@
           [count]="trustedSummary.professionalActivitiesCount"
           [moreLabel]="labelMoreProfessionalActivities"
           [moreLabelSingular]="labelMoreProfessionalActivitie"
+          [standaloneMode]="standaloneMode"
+          [activitySection]="'professional-activities'"
         ></app-summary-panel>
       </ng-container>
       <ng-container *ngIf="externalIdentifiers?.length">
         <a
-          href="{{ trustedSummary.orcid }}#other-identifiers"
-          target="_blank"
           rel="noopener noreferrer"
           (mouseenter)="externalIdentifiersHover = true"
           (mouseleave)="externalIdentifiersHover = false"
+          (click)="goToActivitySection('other-identifiers')"
         >
           <h3
             class="orc-font-small-print"
@@ -318,6 +316,8 @@
           [moreLabel]="labelMoreOtherIdentifiers"
           [moreLabelSingular]="labelMoreOtherIdentifier"
           [hoverEffect]="externalIdentifiersHover"
+          [standaloneMode]="standaloneMode"
+          [activitySection]="'other-identifiers'"
         ></app-summary-simple-panel>
       </ng-container>
     </div>

@@ -102,12 +102,6 @@ describe('MyOrcidComponent', () => {
     }
   })
 
-  it('[PRIVATE] should have only one section status-bar', () => {
-    addIsPublicRecord(component, fixture)
-
-    validateThatExistAndNumberOfElements(fixture, 'status-bar', 1)
-  })
-
   it('[PRIVATE] should have only one of each section', () => {
     validateTopBarAndActivities(fixture, 1)
   })
@@ -121,7 +115,6 @@ describe('MyOrcidComponent', () => {
   it('[PUBLIC] should have heading hierarchy', () => {
     addIsPublicRecord(component, fixture)
 
-    expect(fixture.debugElement.query(By.css('h1.name'))).toBeTruthy()
     expect(
       fixture.debugElement.query(By.css('h2.biography-header'))
     ).toBeTruthy()
@@ -131,7 +124,6 @@ describe('MyOrcidComponent', () => {
     expect(
       fixture.debugElement.queryAll(By.css('h3.activity-header')).length
     ).toBe(5)
-    expect(fixture.debugElement.query(By.css('h3.orcid-id'))).toBeTruthy()
   })
 })
 

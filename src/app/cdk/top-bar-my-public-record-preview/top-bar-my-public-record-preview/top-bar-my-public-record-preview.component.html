@@ -2,44 +2,6 @@
   [id]="'status-bar'"
   role="region"
   [attr.aria-label]="regionStatusBar"
-  *ngIf="!newRecordHeaderTogglz && iAmEditingThisRecord && isPublicRecord"
-  [ngClass]="{ 'yellow-bg': !isMyRecord }"
->
-  <div class="container">
-    <div class="content">
-      <div
-        class="margin-end"
-        i18n="@@topBar.youArePreviewing"
-        *ngIf="!isMyRecord"
-      >
-        You are previewing a public version of this record
-      </div>
-      <div
-        class="margin-end"
-        i18n="@@topBar.youArePreviewingSomeElse"
-        *ngIf="isMyRecord"
-      >
-        You are previewing the public version of your record
-      </div>
-      <img
-        class="margin-end"
-        src="assets/vectors/orcid.logo.icon.svg"
-        alt="orcid logo"
-      />
-      <strong class="margin-end">{{ effectiveRecord }}</strong>
-      <a class="margin-end" href="/my-orcid" i18n="@@topBar.editThisRecord"
-        >Edit this record</a
-      >
-    </div>
-  </div>
-
-  <mat-divider class="bottom-divider"></mat-divider>
-</section>
-
-<section
-  [id]="'status-bar'"
-  role="region"
-  [attr.aria-label]="regionStatusBar"
   *ngIf="
     iAmEditingThisRecord &&
     (trustedIndividuals?.delegators?.length || trustedIndividuals?.me) &&

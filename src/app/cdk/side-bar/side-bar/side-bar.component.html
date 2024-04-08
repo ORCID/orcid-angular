@@ -7,8 +7,7 @@
   <h2
     class="orc-font-body-large"
     [ngClass]="{
-      'sr-only':
-        !loadingUserRecord && isPublicRecord ? !newRecordHeaderTogglz : true
+      'sr-only': !loadingUserRecord && isPublicRecord ? false : true
     }"
     i18n="@@shared.personalInformation"
   >
@@ -16,17 +15,11 @@
   </h2>
   <p
     i18n="@@record.noPersonalInformation"
-    *ngIf="
-      !loadingUserRecord && isPublicRecord
-        ? newRecordHeaderTogglz
-          ? !displaySideBar
-          : false
-        : false
-    "
+    *ngIf="!loadingUserRecord && isPublicRecord ? !displaySideBar : false"
   >
     No personal information available
   </p>
-  <ng-container *ngIf="isPublicRecord ? !newRecordHeaderTogglz : true">
+  <ng-container *ngIf="isPublicRecord ? false : true">
     <app-side-bar-id
       *ngIf="!hideOrcidId"
       [ngClass]="{

@@ -131,3 +131,12 @@ mat-card-content.authorize-content {
     justify-content: center;
   }
 }
+
+.disclaimer-box {
+  margin: 24px 0px;
+  display: flex;
+  flex-direction: column;
+  :first-child {
+    margin-bottom: 12px;
+  }
+}

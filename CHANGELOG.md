@@ -1,3 +1,36 @@
+## v2.70.0 - 2024-04-05
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.69.0...v2.70.0)
+
+### Fix
+
+- Add scrollTo or navigate depending on standalone on summary (#2224)
+
+## v2.69.0 - 2024-04-05
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.68.0...v2.69.0)
+
+## v2.68.0 - 2024-04-04
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.67.0...v2.68.0)
+
+## v2.67.0 - 2024-04-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.66.10...v2.67.0)
+
+- [#2222](https://github.com/ORCID/orcid-angular/pull/2222): feature: Header summary link scroll to section on standaloneMode
+- [#2223](https://github.com/ORCID/orcid-angular/pull/2223): batch-fixes-april-3-2024
+
+### Feature
+
+- Header summary link scroll to section on standaloneMode
+
+## v2.66.10 - 2024-03-26
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.66.9...v2.66.10)
+
+- [#2220](https://github.com/ORCID/orcid-angular/pull/2220): Transifex
+
 ## v2.66.9 - 2024-03-25
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.66.8...v2.66.9)
