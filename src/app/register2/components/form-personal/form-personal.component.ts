@@ -195,7 +195,7 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
           Validators.required,
           OrcidValidators.illegalName,
           Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_HUNDRED),
-        ],        
+        ],
       }),
       familyNames: new UntypedFormControl('', {
         validators: [
