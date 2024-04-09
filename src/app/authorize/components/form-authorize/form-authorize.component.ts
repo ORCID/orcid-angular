@@ -175,8 +175,8 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
 
     if (scope === '/person/update') {
       return !this.signInUpdatesV1Togglz
-        ? $localize`:@@authorize.personUpdate:Add/update information about you (country, keywords, etc.)`
-        : $localize`:@@authorize.personUpdate:Add/update information about you (country, keywords, etc.)`
+        ? $localize`:@@addUpdateInformation:Add/update information about you (country, keywords, etc.)`
+        : $localize`:@@addUpdateInformation:Add/update information about you (country, keywords, etc.)`
     }
 
     if (scope === '/activities/update') {
