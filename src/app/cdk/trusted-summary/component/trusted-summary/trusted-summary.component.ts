@@ -120,16 +120,6 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
         }
       }
 
-      if (this.trustedSummary.selfAssertedWorks) {
-        this.works.push({
-          verified: false,
-          countA: this.trustedSummary.selfAssertedWorks,
-          stringA:
-            this.trustedSummary.selfAssertedWorks > 1
-              ? this.labelSelfAssertedWorks
-              : this.labelSelfAssertedWork,
-        })
-      }
       if (this.trustedSummary.validatedWorks) {
         this.works.push({
           verified: true,
@@ -138,6 +128,16 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
             this.trustedSummary.validatedWorks > 1
               ? this.labelValidatedWorks
               : this.labelValidatedWork,
+        })
+      }
+      if (this.trustedSummary.selfAssertedWorks) {
+        this.works.push({
+          verified: false,
+          countA: this.trustedSummary.selfAssertedWorks,
+          stringA:
+            this.trustedSummary.selfAssertedWorks > 1
+              ? this.labelSelfAssertedWorks
+              : this.labelSelfAssertedWork,
         })
       }
       if (this.trustedSummary.validatedFunds) {
