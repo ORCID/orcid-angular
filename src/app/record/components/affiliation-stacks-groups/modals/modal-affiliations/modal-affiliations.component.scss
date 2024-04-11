@@ -46,7 +46,6 @@ label {
   min-height: 64px;
   line-height: 32px;
   height: auto;
-  margin-bottom: 8px;
   white-space: normal;
   line-height: 1.4;
 
@@ -54,6 +53,12 @@ label {
     display: flex;
     width: 100%;
     font-weight: 500;
+  }
+}
+
+.mat-option:hover {
+  .title {
+    font-weight: 800;
   }
 }
 
@@ -119,4 +124,10 @@ button,
 
 label.mat-caption {
   margin-bottom: 8px;
+}
+
+.organization-identifiers {
+  border-top: 1px solid;
+  margin-bottom: 0px;
+  min-height: 46px;
 }
