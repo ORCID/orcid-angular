@@ -8,6 +8,8 @@
       [loadingUserRecord]="loadingUserRecord"
       [isPublicRecord]="publicOrcid"
       [affiliations]="affiliations"
+      [displaySideBar]="displaySideBar"
+      [displayBiography]="displayBiography"
       [(recordSummaryOpen)]="recordSummaryOpen"
       [newRecordHeaderWithSummaryTogglz]="newRecordHeaderWithSummaryTogglz"
     ></app-record-header>
@@ -70,6 +72,7 @@
                 >
                   <h2
                     class="activities-header orc-font-body col"
+                    [ngClass]="{ 'no-public-bio': publicOrcid ? !displayBiography : false}"
                     i18n="@@shared.activities"
                   >
                     Activities
