@@ -1,3 +1,23 @@
+## v2.75.0 - 2024-04-10
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.74.0...v2.75.0)
+
+## v2.74.0 - 2024-04-09
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.73.0...v2.74.0)
+
+## v2.73.0 - 2024-04-09
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.72.0...v2.73.0)
+
+## v2.72.0 - 2024-04-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.71.0...v2.72.0)
+
+## v2.71.0 - 2024-04-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.70.0...v2.71.0)
+
 ## v2.70.0 - 2024-04-05
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.69.0...v2.70.0)
