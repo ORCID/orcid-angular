@@ -110,6 +110,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
   ) as FundingRelationships[]
   selectedOrganizationFromDatabase: Organization
   displayOrganizationHint: boolean
+  displayOrganizationOption: boolean
 
   years = Array(110)
     .fill(0)
@@ -323,8 +324,12 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
           !this.selectedOrganizationFromDatabase
         ) {
           // Display matching organization based on the user string input
+          this.displayOrganizationOption = false
           return this._filter((organization as string) || '').pipe(
-            tap((x) => {
+            tap((organizationList) => {
+              if (organizationList.length > 0) {
+                this.displayOrganizationOption = true
+              }
               this.displayOrganizationHint = true
             })
           )

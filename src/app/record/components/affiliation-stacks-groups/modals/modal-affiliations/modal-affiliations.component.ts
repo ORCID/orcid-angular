@@ -111,6 +111,7 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
   selectedOrganizationFromDatabase: Organization
   requireOrganizationDisambiguatedDataOnRefresh = false
   displayOrganizationHint: boolean
+  displayOrganizationOption: boolean
 
   get organizationIsInvalidAndTouched() {
     return (
@@ -490,8 +491,13 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
             !this.selectedOrganizationFromDatabase
           ) {
             // Display matching organization based on the user string input
+            this.displayOrganizationOption = false
             return this._filter((organization as string) || '').pipe(
-              tap((x) => {
+              tap((organizationList) => {
+                if (organizationList.length > 0) {
+                  this.displayOrganizationOption = true
+                }
+
                 this.displayOrganizationHint = true
               })
             )
