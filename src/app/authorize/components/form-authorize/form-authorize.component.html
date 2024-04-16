@@ -228,14 +228,14 @@
       ></app-info-drop-down>
 
       <p
-        class="mat-body-1 m-t-16 m-b-32"
+        class="mat-body-1 m-t-16 m-b-16"
         i18n="@@authorize.organizationAskedFollowingAccess"
       >
         This organization has asked for the following access to your ORCID
         record:
       </p>
 
-      <ul class="mat-body-1 m-t-base m-b-64">
+      <ul class="mat-body-1 m-t-base m-b-32">
         <ng-container
           *ngFor="let scope of this.oauthRequest.scopes; let last = last"
         >
