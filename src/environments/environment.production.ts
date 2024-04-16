@@ -15,8 +15,7 @@ export const environment = {
   HELP_HERO_ID: 'oYFQMrzFHA',
   INSTITUTIONAL_AUTOCOMPLETE_DISPLAY_AMOUNT: 20,
   VERBOSE_SNACKBAR_ERRORS_REPORTS: false,
-  WORDPRESS_API: 'https://info.orcid.org',
-  WORDPRESS_API_HOME_ID: '27188',
+  WORDPRESS_S3: 'https://d3055hwma3riwo.cloudfront.net',
   LANGUAGE_MENU_OPTIONS: {
     ar: 'العربية',
     cs: 'Čeština',
