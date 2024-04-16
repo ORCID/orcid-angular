@@ -49,10 +49,8 @@ export class HomeComponent implements OnInit {
           }
         })
       )
-      .subscribe((state) => {
-        this.wordpressView = this.sanitizer.bypassSecurityTrustHtml(
-          state.content.rendered
-        )
+      .subscribe((html) => {
+        this.wordpressView = this.sanitizer.bypassSecurityTrustHtml(html)
       })
   }
 
