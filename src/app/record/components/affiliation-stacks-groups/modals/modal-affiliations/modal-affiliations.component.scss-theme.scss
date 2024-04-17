@@ -38,5 +38,13 @@
   .mat-select {
     font-size: mat.font-size($config, body-1) !important;
   }
+
+  .organization-identifiers {
+    color: $orcid-dark-primary-text;
+    border-color: mat.get-color-from-palette(
+      $background,
+      ui-background
+    ) !important;
+  }
 }
 @include model-affiliation-theme($orcid-app-theme);

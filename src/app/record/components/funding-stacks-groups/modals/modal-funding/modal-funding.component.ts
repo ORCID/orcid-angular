@@ -110,6 +110,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
   ) as FundingRelationships[]
   selectedOrganizationFromDatabase: Organization
   displayOrganizationHint: boolean
+  displayOrganizationOption: boolean
 
   years = Array(110)
     .fill(0)
@@ -290,7 +291,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
   }
 
   autoCompleteDisplayOrganization(organization: Organization) {
-    return organization.value
+    return typeof organization === 'object' ? organization.value : organization
   }
 
   private listenFormChanges() {
@@ -299,20 +300,22 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
         // Auto fill form when the user select an organization from the autocomplete list
         if (
           typeof organization === 'object' &&
-          organization.disambiguatedAffiliationIdentifier
+          organization?.disambiguatedAffiliationIdentifier
         ) {
           this.selectedOrganizationFromDatabase = organization
           this.displayOrganizationHint = true
           this.fillForm(organization)
         }
         if (!organization) {
+          if (this.selectedOrganizationFromDatabase) {
+            this.fundingForm.patchValue({
+              city: '',
+              region: '',
+              country: '',
+            })
+          }
           this.selectedOrganizationFromDatabase = undefined
           this.displayOrganizationHint = false
-          this.fundingForm.patchValue({
-            city: '',
-            region: '',
-            country: '',
-          })
         }
       }),
       switchMap((organization: string | Organization) => {
@@ -321,8 +324,12 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
           !this.selectedOrganizationFromDatabase
         ) {
           // Display matching organization based on the user string input
+          this.displayOrganizationOption = false
           return this._filter((organization as string) || '').pipe(
-            tap((x) => {
+            tap((organizationList) => {
+              if (organizationList.length > 0) {
+                this.displayOrganizationOption = true
+              }
               this.displayOrganizationHint = true
             })
           )
@@ -526,10 +533,10 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
         value: this.disambiguatedFundingSource,
       },
       city: {
-        value: this.fundingForm.value.city,
+        value: this.fundingForm.get('country').value,
       },
       region: {
-        value: this.fundingForm.value.region,
+        value: this.fundingForm.get('region').value,
       },
       country: {
         value: this.countryCodes.find(
@@ -628,6 +635,10 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       country: this.countryCodes.find((x) => x.value === organization.country)
         .key,
     })
+    this.fundingForm.get('agencyName').disable();
+    this.disable(organization?.city, 'city')
+    this.fundingForm.get('region').disable();
+    this.disable(organization?.country, 'country')
     this.disambiguatedFundingSourceId = organization.sourceId
     this.disambiguatedFundingSource = organization.sourceType
   }
@@ -641,6 +652,14 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
     })
     this.disambiguatedFundingSourceId = ''
     this.disambiguatedFundingSource = ''
+    this.enable('agencyName')
+    this.enable('city')
+    this.enable('region')
+    this.enable('country')
+    this.fundingForm.get('city').markAsUntouched()
+    this.fundingForm.get('region').markAsUntouched()
+    this.fundingForm.get('country').markAsUntouched()
+    this.listenFormChanges()
   }
 
   private _filter(value: string): Observable<Organization[]> {
@@ -649,6 +668,16 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
     }
 
     return EMPTY
+  }
+
+  private disable(value: string, element: string): void {
+    if (value) {
+      this.fundingForm.get(element).disable();
+    }
+  }
+
+  private enable(element: string): void {
+    this.fundingForm.get(element).enable();
   }
 
   private checkGrantsChanges(index: number) {
