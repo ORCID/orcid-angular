@@ -1,3 +1,11 @@
+## v2.81.0 - 2024-04-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.80.0...v2.81.0)
+
+### Fix
+
+- Update text in oauth privacy policy declaration (#2236)
+
 ## v2.80.0 - 2024-04-17
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.79.0...v2.80.0)
