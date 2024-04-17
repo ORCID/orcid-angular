@@ -1,3 +1,11 @@
+## v2.80.0 - 2024-04-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.79.0...v2.80.0)
+
+### Fix
+
+- Dont show record summary button on records with issues (#2235)
+
 ## v2.79.0 - 2024-04-17
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.78.0...v2.79.0)
