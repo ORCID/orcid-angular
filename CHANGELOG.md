@@ -1,3 +1,11 @@
+## v2.79.0 - 2024-04-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.78.0...v2.79.0)
+
+### Fix
+
+- Update public and personal information messages on public profile (#2234)
+
 ## v2.78.0 - 2024-04-17
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.77.0...v2.78.0)
