@@ -103,7 +103,11 @@ export class RecordHeaderComponent implements OnInit {
             this.ariaLabelName
           )
         } else {
-          if (this.affiliations > 0 || this.displaySideBar || this.displayBiography) {
+          if (
+            this.affiliations > 0 ||
+            this.displaySideBar ||
+            this.displayBiography
+          ) {
             this.creditName = this.privateName
           }
         }

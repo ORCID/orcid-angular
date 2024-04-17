@@ -85,7 +85,14 @@
         </a>
       </p>
     </ng-container>
-    <ng-container *ngIf="affiliations === 0 && !displaySideBar && !displayBiography && !userInfo?.RECORD_WITH_ISSUES">
+    <ng-container
+      *ngIf="
+        affiliations === 0 &&
+        !displaySideBar &&
+        !displayBiography &&
+        !userInfo?.RECORD_WITH_ISSUES
+      "
+    >
       <h2
         class="orc-font-body-large"
         *ngIf="isNamePublic"

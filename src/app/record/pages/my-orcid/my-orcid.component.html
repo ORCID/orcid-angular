@@ -72,7 +72,9 @@
                 >
                   <h2
                     class="activities-header orc-font-body col"
-                    [ngClass]="{ 'no-public-bio': publicOrcid ? !displayBiography : false}"
+                    [ngClass]="{
+                      'no-public-bio': publicOrcid ? !displayBiography : false
+                    }"
                     i18n="@@shared.activities"
                   >
                     Activities
