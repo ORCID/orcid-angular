@@ -1,3 +1,11 @@
+## v2.78.0 - 2024-04-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.77.0...v2.78.0)
+
+### Feature
+
+- Update affiliation and funding ty[eahead behaviour (#2233)
+
 ## v2.77.0 - 2024-04-17
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.76.0...v2.77.0)
