@@ -158,7 +158,7 @@
         </div>
       </section>
 
-      <div *ngIf="newRecordHeaderWithSummaryTogglz">
+      <div *ngIf="newRecordHeaderWithSummaryTogglz && !recordWithIssues">
         <button
           mat-button
           (click)="recordSummaryLinkClick()"
