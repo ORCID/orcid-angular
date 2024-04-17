@@ -71,37 +71,58 @@
                   *ngIf="!(publicOrcid && affiliations === 0)"
                 >
                   <h2
-                    class="activities-header orc-font-body col"
+                    class="activities-header col"
                     [ngClass]="{
-                      'no-public-bio': publicOrcid ? !displayBiography : false
+                      'orc-font-body-large': publicOrcid,
+                      'no-gutters': publicOrcid,
+                      'no-public-bio': publicOrcid ? !displayBiography : false,
+                      'orc-font-body': !publicOrcid
                     }"
                     i18n="@@shared.activities"
                   >
                     Activities
                   </h2>
                   <div class="expand-buttons">
-                    <button
-                      mat-button
-                      color="primary"
-                      type="button"
-                      i18n="@@shared.expandAll"
-                      (click)="switchPanelsState()"
-                      *ngIf="!globalExpandState"
-                      [attr.aria-label]="expandAllActivitiesArialLabel"
-                    >
-                      Expand all
-                    </button>
-                    <button
-                      mat-button
-                      color="primary"
-                      type="button"
-                      i18n="@@shared.collapseAll"
-                      (click)="switchPanelsState()"
-                      *ngIf="globalExpandState"
-                      [attr.aria-label]="collapseAllActivitiesArialLabel"
-                    >
-                      Collapse all
-                    </button>
+                    <ng-container *ngIf="publicOrcid">
+                      <a
+                        class="activities orc-font-body-small"
+                        (click)="switchPanelsState()"
+                        *ngIf="!globalExpandState"
+                        [attr.aria-label]="expandAllActivitiesArialLabel">
+                        <b i18n="@@shared.expandAll">Expand all</b>
+                      </a>
+                      <a
+                        class="activities orc-font-body-small"
+                        (click)="switchPanelsState()"
+                        *ngIf="globalExpandState"
+                        [attr.aria-label]="collapseAllActivitiesArialLabel">
+                        <b i18n="@@shared.collapseAll">Collapse all</b>
+                      </a>
+                    </ng-container>
+                    <ng-container *ngIf="!publicOrcid">
+                      <button
+                        mat-button
+                        color="primary"
+                        type="button"
+                        i18n="@@shared.expandAll"
+                        (click)="switchPanelsState()"
+                        *ngIf="!globalExpandState"
+                        [attr.aria-label]="expandAllActivitiesArialLabel"
+                      >
+                        Expand all
+                      </button>
+                      <button
+                        mat-button
+                        color="primary"
+                        type="button"
+                        i18n="@@shared.collapseAll"
+                        (click)="switchPanelsState()"
+                        *ngIf="globalExpandState"
+                        [attr.aria-label]="collapseAllActivitiesArialLabel"
+                      >
+                        Collapse all
+                      </button>
+                    </ng-container>
                   </div>
                 </div>
                 <app-affiliations
