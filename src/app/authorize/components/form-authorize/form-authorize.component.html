@@ -228,14 +228,14 @@
       ></app-info-drop-down>
 
       <p
-        class="mat-body-1 m-t-16 m-b-32"
+        class="mat-body-1 m-t-16 m-b-16"
         i18n="@@authorize.organizationAskedFollowingAccess"
       >
         This organization has asked for the following access to your ORCID
         record:
       </p>
 
-      <ul class="mat-body-1 m-t-base m-b-64">
+      <ul class="mat-body-1 m-t-base m-b-32">
         <ng-container
           *ngFor="let scope of this.oauthRequest.scopes; let last = last"
         >
@@ -268,17 +268,17 @@
                 >
               </p>
               <p class="mat-caption">
-                <ng-container i18n="@@authorize.youCanManage">
-                  You can manage access permissions for this and other Trusted
-                  Organizations in your
+                <ng-container i18n="@@authorize.manageAccessPersmissions">
+                  You can manage access permissions for this and other
+                  Trusted Organizations from within your list of
                 </ng-container>
                 <a
-                  href="/account#manage-permissions"
+                  routerLink="/trusted-parties"
                   target="_blank"
                   rel="noopener noreferrer"
                   class="underline"
-                  i18n="@@authorize.accountSettings"
-                  >account settings.</a
+                  i18n="@@authorize.trustedParties"
+                  >trusted parties.</a
                 >
               </p>
             </div>
