@@ -56,6 +56,13 @@
               }"
               [isPublicRecord]="publicOrcid"
               [loadingUserRecord]="loadingUserRecord"
+              *ngIf="
+                !loadingUserRecord
+                  ? publicOrcid
+                    ? !recordWithIssues &&
+                      displayBiography
+                    : true
+                  : true"
             ></app-top-bar>
             <app-side-bar
               class="col l3 m8 s4 new-header side-bar-mobile"
@@ -70,7 +77,7 @@
                         ? !platform.columns12 && !recordWithIssues &&
                           (displaySideBar || displayBiography || affiliations > 0)
                         : !platform.columns12
-                      : true
+                      : false
                   "
             >
             </app-side-bar>
