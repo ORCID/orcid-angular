@@ -1,3 +1,11 @@
+## v2.83.0 - 2024-04-23
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.82.0...v2.83.0)
+
+### Fix
+
+- Hide record summary button if there is no public information available (#2240)
+
 ## v2.82.0 - 2024-04-23
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.81.0...v2.82.0)
