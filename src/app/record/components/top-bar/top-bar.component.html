@@ -153,7 +153,14 @@
       *ngIf="userRecord?.biography?.biography"
     >
       <div class="biography-container no-margin-top">
-        <h2 class="biography-header orc-font-body" i18n="@@topBar.biography">
+        <h2
+          class="biography-header"
+          [ngClass]="{
+            'orc-font-body': !isPublicRecord,
+            'orc-font-body-large': isPublicRecord
+            }"
+          i18n="@@topBar.biography"
+        >
           Biography
         </h2>
         <p
