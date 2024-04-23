@@ -59,7 +59,7 @@ describe('MyOrcidComponent', () => {
         MatDialog,
         Overlay,
         OpenGraphService,
-        TitleService
+        TitleService,
       ],
     }).compileComponents()
   })
