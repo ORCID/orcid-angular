@@ -85,7 +85,6 @@ export class AppComponent {
       if (event instanceof NavigationStart) {
         reportNavigationStart(event.url)
         this.currentRoute = event.url
-        console.log('currentRoute', this.currentRoute)
       }
       if (event instanceof NavigationEnd) {
         const duration = finishPerformanceMeasurement(event.url)
