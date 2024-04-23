@@ -1,3 +1,11 @@
+## v2.85.0 - 2024-04-23
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.84.0...v2.85.0)
+
+### Fix
+
+- Remove disclaimer from list (#2241)
+
 ## v2.84.0 - 2024-04-23
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.83.0...v2.84.0)
