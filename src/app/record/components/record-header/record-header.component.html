@@ -37,7 +37,10 @@
           <p class="orc-font-body" *ngIf="otherNames">{{ otherNames }}</p>
         </div>
       </div>
-      <div class="issue" *ngIf="!loadingUserRecord && userInfo?.RECORD_WITH_ISSUES">
+      <div
+        class="issue"
+        *ngIf="!loadingUserRecord && userInfo?.RECORD_WITH_ISSUES"
+      >
         <h1
           [ngClass]="{
             'orc-font-heading-small': !platform.columns12,
@@ -159,11 +162,14 @@
         </div>
       </section>
 
-      <div *ngIf="
-              newRecordHeaderWithSummaryTogglz &&
-              !loadingUserRecord &&
-              !recordWithIssues &&
-              (creditName || givenNames || familyName || otherNames)">
+      <div
+        *ngIf="
+          newRecordHeaderWithSummaryTogglz &&
+          !loadingUserRecord &&
+          !recordWithIssues &&
+          (creditName || givenNames || familyName || otherNames)
+        "
+      >
         <button
           mat-button
           (click)="recordSummaryLinkClick()"
