@@ -1,3 +1,11 @@
+## v2.82.0 - 2024-04-23
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.81.0...v2.82.0)
+
+### Feature
+
+- Align activities and biographt headers in public page (#2238)
+
 ## v2.81.0 - 2024-04-17
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.80.0...v2.81.0)
