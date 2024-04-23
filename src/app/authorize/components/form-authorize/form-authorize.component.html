@@ -235,7 +235,7 @@
         record:
       </p>
 
-      <ul class="mat-body-1 m-t-base m-b-32">
+      <ul class="mat-body-1 m-t-base">
         <ng-container
           *ngFor="let scope of this.oauthRequest.scopes; let last = last"
         >
@@ -251,41 +251,42 @@
               ></ng-container>
               <div>{{ getDescription(scope) }}</div>
             </div>
-            <div class="disclaimer-box" *ngIf="last">
-              <p class="mat-caption m-t-0">
-                <ng-container i18n="@@authorize.ifAuthorize">
-                  If authorized, this organization will have access to your
-                  ORCID record, as outlined above and described in further
-                  detail in</ng-container
-                >
-                <a
-                  href="{{ environment.INFO_SITE + 'privacy-policy' }}"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="underline"
-                  i18n="@@authorize.privacyPolicy"
-                  >ORCID’s privacy policy.</a
-                >
-              </p>
-              <p class="mat-caption">
-                <ng-container i18n="@@authorize.manageAccessPersmissions">
-                  You can manage access permissions for this and other Trusted
-                  Organizations from within your list of
-                </ng-container>
-                <a
-                  routerLink="/trusted-parties"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="underline"
-                  i18n="@@authorize.trustedParties"
-                  >trusted parties.</a
-                >
-              </p>
-            </div>
-            <mat-divider *ngIf="last"></mat-divider>
           </li>
         </ng-container>
       </ul>
+
+      <div class="disclaimer-box m-b-16">
+        <p class="mat-caption m-t-0">
+          <ng-container i18n="@@authorize.ifAuthorize">
+            If authorized, this organization will have access to your
+            ORCID record, as outlined above and described in further
+            detail in</ng-container
+          >
+          <a
+            href="{{ environment.INFO_SITE + 'privacy-policy' }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="underline"
+            i18n="@@authorize.privacyPolicy"
+            >ORCID’s privacy policy.</a
+          >
+        </p>
+        <p class="mat-caption m-b-16">
+          <ng-container i18n="@@authorize.manageAccessPersmissions">
+            You can manage access permissions for this and other Trusted
+            Organizations from within your list of
+          </ng-container>
+          <a
+            routerLink="/trusted-parties"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="underline"
+            i18n="@@authorize.trustedParties"
+            >trusted parties.</a
+          >
+        </p>
+        <mat-divider></mat-divider>
+      </div>
 
       <button
         class="authorize-button"
