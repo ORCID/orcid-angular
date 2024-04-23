@@ -1,10 +1,11 @@
 <main id="main">
   <div class="container">
     <div class="row space-around">
-      <div class="col l6 m6 s4"
+      <div
+        class="col l6 m6 s4"
         [ngClass]="{
           'no-gutters': platform.columns4,
-          'mobile': platform.columns4
+          mobile: platform.columns4
         }"
       >
         <mat-horizontal-stepper
@@ -15,7 +16,7 @@
           (selectionChange)="selectionChange($event)"
           role="tablist"
           [ngClass]="{
-            'mobile': platform.columns4
+            mobile: platform.columns4
           }"
         >
           <mat-step [stepControl]="FormGroupStepA">

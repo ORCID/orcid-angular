@@ -153,10 +153,10 @@ export class AppComponent {
       case '/authorize':
       case '/search':
         this.spacing = true
-      break
+        break
       default:
         this.spacing = false
-      break
+        break
     }
   }
 }
