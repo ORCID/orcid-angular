@@ -26,6 +26,7 @@ export class AppComponent {
   currentlyDisplayingZendesk = true
   headlessMode = false
   footerlessMode = false
+  spacing: boolean
   currentRouteIsHeadlessOnOauthPage = true
   screenDirection
   currentRoute
@@ -108,6 +109,7 @@ export class AppComponent {
                 })
             }
           })
+        this.addSpacing()
       }
     })
   }
@@ -142,5 +144,19 @@ export class AppComponent {
   @HostListener('window:visibilitychange')
   onVisibilityChange(value) {
     this._userService.setTimerAsHiddenState(this._window.document.hidden)
+  }
+
+  private addSpacing() {
+    switch (this.currentRoute) {
+      case '/signin':
+      case '/register':
+      case '/authorize':
+      case '/search':
+        this.spacing = true
+      break
+      default:
+        this.spacing = false
+      break
+    }
   }
 }
