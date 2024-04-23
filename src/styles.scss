@@ -37,17 +37,9 @@ app-root {
   flex-direction: column;
 }
 
-.router-container {
-  padding-bottom: 160px; //remove footer height
-
-  .columns-8 &,
-  .columns-4 & {
-    padding-bottom: 500px;
-  }
-}
-
 app-footer {
-  position: absolute;
+  position: relative;
+  left: 0;
   bottom: 0;
   width: 100%;
 }
