@@ -14,9 +14,17 @@
   padding-top: 16px !important;
 }
 
+.container.mobile {
+  padding-top: 28px !important;
+}
+
 h2 {
-  margin-top: 32px;
-  margin-bottom: 20px;
+  margin-top: 0;
+  margin-bottom: 18px;
+}
+
+a.activities {
+  margin-bottom: 18px;
 }
 
 app-main {
@@ -24,12 +32,16 @@ app-main {
   max-width: 100%;
 }
 
+app-top-bar.mobile {
+  margin-bottom: 16px;
+}
+
 app-side-bar {
-  padding-bottom: 40px !important;
+  margin-bottom: 40px !important;
 }
 
 app-side-bar.mobile {
-  padding-bottom: 16px !important;
+  margin-bottom: 32px !important;
 }
 
 app-statistics {
