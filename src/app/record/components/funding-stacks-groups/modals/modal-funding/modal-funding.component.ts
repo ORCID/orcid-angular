@@ -223,22 +223,22 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
           },
           { validator: dateMonthYearValidator('endDate') }
         ),
-        agencyName: new UntypedFormControl(this.agencyName, {
+        agencyName: new UntypedFormControl({ value: this.agencyName, disabled: this.selectedOrganizationFromDatabase}, {
           validators: [
             Validators.required,
             Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
           ],
         }),
-        city: new UntypedFormControl(this.city, {
+        city: new UntypedFormControl({ value: this.city, disabled: this.selectedOrganizationFromDatabase}, {
           validators: [
             Validators.required,
             Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
           ],
         }),
-        region: new UntypedFormControl(this.region, {
+        region: new UntypedFormControl({ value: this.region, disabled: this.selectedOrganizationFromDatabase}, {
           validators: [Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND)],
         }),
-        country: new UntypedFormControl(this.country, {
+        country: new UntypedFormControl({ value: this.country, disabled: this.selectedOrganizationFromDatabase}, {
           validators: [
             Validators.required,
             Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
