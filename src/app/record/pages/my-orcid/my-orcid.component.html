@@ -98,6 +98,7 @@
                     [ngClass]="{
                       'orc-font-body-large': publicOrcid,
                       'no-gutters': publicOrcid,
+                      'public-info': publicOrcid,
                       'no-public-bio': publicOrcid ? !displayBiography : false,
                       'orc-font-body': !publicOrcid
                     }"
@@ -108,19 +109,12 @@
                   <div class="expand-buttons">
                     <a
                       class="activities orc-font-body-small"
+                      [ngClass]="{ 'public-info': publicOrcid }"
                       (click)="switchPanelsState()"
-                      *ngIf="!globalExpandState"
-                      [attr.aria-label]="expandAllActivitiesArialLabel"
+                      [attr.aria-label]="globalExpandState ? collapseAllActivitiesArialLabel : expandAllActivitiesArialLabel"
                     >
-                      <b i18n="@@shared.expandAll">Expand all</b>
-                    </a>
-                    <a
-                      class="activities orc-font-body-small"
-                      (click)="switchPanelsState()"
-                      *ngIf="globalExpandState"
-                      [attr.aria-label]="collapseAllActivitiesArialLabel"
-                    >
-                      <b i18n="@@shared.collapseAll">Collapse all</b>
+                      <b i18n="@@shared.collapseAll" *ngIf="globalExpandState">Collapse all</b>
+                      <b i18n="@@shared.expandAll" *ngIf="!globalExpandState">Expand all</b>
                     </a>
                   </div>
                 </div>
