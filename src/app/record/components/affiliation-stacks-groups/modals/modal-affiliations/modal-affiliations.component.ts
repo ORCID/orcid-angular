@@ -158,19 +158,19 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
 
     this.affiliationForm = this._formBuilder.group(
       {
-        organization: new UntypedFormControl(this.organization, {
+        organization: new UntypedFormControl({ value: this.organization, disabled: this.selectedOrganizationFromDatabase}, {
           validators: [
             Validators.required,
             Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
           ],
         }),
-        city: new UntypedFormControl(this.city, {
+        city: new UntypedFormControl({ value: this.city, disabled: this.selectedOrganizationFromDatabase}, {
           validators: [
             Validators.required,
             Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
           ],
         }),
-        region: new UntypedFormControl(this.region, {
+        region: new UntypedFormControl({ value: this.region, disabled: this.selectedOrganizationFromDatabase}, {
           validators: [Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND)],
         }),
         country: new UntypedFormControl('', {
@@ -279,6 +279,9 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
               (x) => x.value === this.affiliation.country.value
             ).key,
           })
+          if (this.selectedOrganizationFromDatabase) {
+            this.affiliationForm.get('country').disable()
+          }
         }
       })
 
