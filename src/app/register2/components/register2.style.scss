@@ -81,6 +81,7 @@ mat-label.orc-font-small-print {
       margin-top: 64px;
     }
     .mat-card.orcid-wizard {
+      box-sizing: border-box;
       mat-card-content {
         margin-left: 64px;
         margin-right: 64px;
@@ -188,9 +189,6 @@ mat-label.orc-font-small-print {
 // MATERIAL OVERWRITES
 
 ::ng-deep {
-  .mat-horizontal-stepper-content {
-    max-width: 580px;
-  }
 
   .mat-horizontal-content-container {
     padding: 0;
