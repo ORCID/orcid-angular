@@ -1,3 +1,11 @@
+## v2.87.0 - 2024-04-28
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.86.0...v2.87.0)
+
+### Fix
+
+- Add missing hint to country and city when a disambiguated org been has been selected (#2243)
+
 ## v2.86.0 - 2024-04-28
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.85.0...v2.86.0)
