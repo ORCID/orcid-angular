@@ -740,7 +740,7 @@
             "
             i18n="@@record.organizationAddedManually"
           >
-            This organization have been added manually
+            This organization has been added manually
           </mat-hint>
           <button
             class="clear"
@@ -790,6 +790,12 @@
             matInput
             formControlName="city"
           />
+          <mat-hint
+            *ngIf="selectedOrganizationFromDatabase && displayOrganizationHint"
+          >
+            <ng-container i18n="@@record.from">From:</ng-container>
+            {{ selectedOrganizationFromDatabase.value }}
+          </mat-hint>
           <mat-error
             class="mat-caption"
             *ngIf="
@@ -864,6 +870,12 @@
               {{ countryCode.key }}
             </mat-option>
           </mat-select>
+          <mat-hint
+            *ngIf="selectedOrganizationFromDatabase && displayOrganizationHint"
+          >
+            <ng-container i18n="@@record.from">From:</ng-container>
+            {{ selectedOrganizationFromDatabase.value }}
+          </mat-hint>
           <mat-error
             i18n="@@shared.selectCountryOrLocation"
             *ngIf="
