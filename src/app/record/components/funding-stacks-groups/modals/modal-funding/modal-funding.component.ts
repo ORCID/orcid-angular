@@ -223,27 +223,50 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
           },
           { validator: dateMonthYearValidator('endDate') }
         ),
-        agencyName: new UntypedFormControl({ value: this.agencyName, disabled: this.selectedOrganizationFromDatabase}, {
-          validators: [
-            Validators.required,
-            Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
-          ],
-        }),
-        city: new UntypedFormControl({ value: this.city, disabled: this.selectedOrganizationFromDatabase}, {
-          validators: [
-            Validators.required,
-            Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
-          ],
-        }),
-        region: new UntypedFormControl({ value: this.region, disabled: this.selectedOrganizationFromDatabase}, {
-          validators: [Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND)],
-        }),
-        country: new UntypedFormControl({ value: this.country, disabled: this.selectedOrganizationFromDatabase}, {
-          validators: [
-            Validators.required,
-            Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
-          ],
-        }),
+        agencyName: new UntypedFormControl(
+          {
+            value: this.agencyName,
+            disabled: this.selectedOrganizationFromDatabase,
+          },
+          {
+            validators: [
+              Validators.required,
+              Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
+            ],
+          }
+        ),
+        city: new UntypedFormControl(
+          { value: this.city, disabled: this.selectedOrganizationFromDatabase },
+          {
+            validators: [
+              Validators.required,
+              Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
+            ],
+          }
+        ),
+        region: new UntypedFormControl(
+          {
+            value: this.region,
+            disabled: this.selectedOrganizationFromDatabase,
+          },
+          {
+            validators: [
+              Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
+            ],
+          }
+        ),
+        country: new UntypedFormControl(
+          {
+            value: this.country,
+            disabled: this.selectedOrganizationFromDatabase,
+          },
+          {
+            validators: [
+              Validators.required,
+              Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
+            ],
+          }
+        ),
         grants: new UntypedFormArray([]),
         visibility: new UntypedFormControl(this.defaultVisibility, {
           validators: [Validators.required],

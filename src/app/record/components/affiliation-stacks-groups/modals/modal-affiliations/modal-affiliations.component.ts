@@ -158,21 +158,38 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
 
     this.affiliationForm = this._formBuilder.group(
       {
-        organization: new UntypedFormControl({ value: this.organization, disabled: this.selectedOrganizationFromDatabase}, {
-          validators: [
-            Validators.required,
-            Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
-          ],
-        }),
-        city: new UntypedFormControl({ value: this.city, disabled: this.selectedOrganizationFromDatabase}, {
-          validators: [
-            Validators.required,
-            Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
-          ],
-        }),
-        region: new UntypedFormControl({ value: this.region, disabled: this.selectedOrganizationFromDatabase}, {
-          validators: [Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND)],
-        }),
+        organization: new UntypedFormControl(
+          {
+            value: this.organization,
+            disabled: this.selectedOrganizationFromDatabase,
+          },
+          {
+            validators: [
+              Validators.required,
+              Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
+            ],
+          }
+        ),
+        city: new UntypedFormControl(
+          { value: this.city, disabled: this.selectedOrganizationFromDatabase },
+          {
+            validators: [
+              Validators.required,
+              Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
+            ],
+          }
+        ),
+        region: new UntypedFormControl(
+          {
+            value: this.region,
+            disabled: this.selectedOrganizationFromDatabase,
+          },
+          {
+            validators: [
+              Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
+            ],
+          }
+        ),
         country: new UntypedFormControl('', {
           validators: [Validators.required],
         }),
