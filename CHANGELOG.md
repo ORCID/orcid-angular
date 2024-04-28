@@ -1,3 +1,11 @@
+## v2.88.0 - 2024-04-28
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.87.0...v2.88.0)
+
+### Fix
+
+- Read only organization field when editing affiliation if selected from db
+
 ## v2.87.0 - 2024-04-28
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.86.0...v2.87.0)
