@@ -111,10 +111,18 @@
                       class="activities orc-font-body-small"
                       [ngClass]="{ 'public-info': publicOrcid }"
                       (click)="switchPanelsState()"
-                      [attr.aria-label]="globalExpandState ? collapseAllActivitiesArialLabel : expandAllActivitiesArialLabel"
+                      [attr.aria-label]="
+                        globalExpandState
+                          ? collapseAllActivitiesArialLabel
+                          : expandAllActivitiesArialLabel
+                      "
                     >
-                      <b i18n="@@shared.collapseAll" *ngIf="globalExpandState">Collapse all</b>
-                      <b i18n="@@shared.expandAll" *ngIf="!globalExpandState">Expand all</b>
+                      <b i18n="@@shared.collapseAll" *ngIf="globalExpandState"
+                        >Collapse all</b
+                      >
+                      <b i18n="@@shared.expandAll" *ngIf="!globalExpandState"
+                        >Expand all</b
+                      >
                     </a>
                   </div>
                 </div>
