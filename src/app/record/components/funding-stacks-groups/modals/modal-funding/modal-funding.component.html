@@ -715,6 +715,21 @@
               </div>
             </mat-option>
             <mat-option
+              [value]="fundingForm.get('agencyName').value"
+            >
+              <div class="row orc-font-body-small title">
+                <i i18n="@@shared.useOrganizationName">Use this organization name</i>
+              </div>
+              <div class="row orc-font-small-print">
+                <ng-container i18n="@@shared.addLocationManually">You will need to add location information manually</ng-container>
+              </div>
+            </mat-option>
+            <mat-option class="organization-identifiers" [disabled]="true" *ngIf="(filteredOptions | async)?.length > 0" >
+              <div class="row orc-font-body-large title">
+                <b i18n="@@shared.organizationWithIdentifiers">Organizations with identifiers</b>
+              </div>
+            </mat-option>
+            <mat-option
               *ngFor="let option of filteredOptions | async"
               [value]="option"
             >
@@ -740,7 +755,7 @@
             "
             i18n="@@record.organizationAddedManually"
           >
-            This organization has been added manually
+            This organization have been added manually
           </mat-hint>
           <button
             class="clear"
