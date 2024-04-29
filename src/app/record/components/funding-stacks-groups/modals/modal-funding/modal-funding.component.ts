@@ -110,7 +110,6 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
   ) as FundingRelationships[]
   selectedOrganizationFromDatabase: Organization
   displayOrganizationHint: boolean
-  displayOrganizationOption: boolean
 
   years = Array(110)
     .fill(0)
@@ -314,7 +313,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
   }
 
   autoCompleteDisplayOrganization(organization: Organization) {
-    return typeof organization === 'object' ? organization.value : organization
+    return organization.value
   }
 
   private listenFormChanges() {
@@ -323,22 +322,20 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
         // Auto fill form when the user select an organization from the autocomplete list
         if (
           typeof organization === 'object' &&
-          organization?.disambiguatedAffiliationIdentifier
+          organization.disambiguatedAffiliationIdentifier
         ) {
           this.selectedOrganizationFromDatabase = organization
           this.displayOrganizationHint = true
           this.fillForm(organization)
         }
         if (!organization) {
-          if (this.selectedOrganizationFromDatabase) {
-            this.fundingForm.patchValue({
-              city: '',
-              region: '',
-              country: '',
-            })
-          }
           this.selectedOrganizationFromDatabase = undefined
           this.displayOrganizationHint = false
+          this.fundingForm.patchValue({
+            city: '',
+            region: '',
+            country: '',
+          })
         }
       }),
       switchMap((organization: string | Organization) => {
@@ -347,12 +344,8 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
           !this.selectedOrganizationFromDatabase
         ) {
           // Display matching organization based on the user string input
-          this.displayOrganizationOption = false
           return this._filter((organization as string) || '').pipe(
-            tap((organizationList) => {
-              if (organizationList.length > 0) {
-                this.displayOrganizationOption = true
-              }
+            tap((x) => {
               this.displayOrganizationHint = true
             })
           )
@@ -556,7 +549,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
         value: this.disambiguatedFundingSource,
       },
       city: {
-        value: this.fundingForm.get('country').value,
+        value: this.fundingForm.get('city').value,
       },
       region: {
         value: this.fundingForm.get('region').value,

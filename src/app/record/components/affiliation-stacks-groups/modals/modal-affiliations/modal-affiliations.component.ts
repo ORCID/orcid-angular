@@ -111,7 +111,6 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
   selectedOrganizationFromDatabase: Organization
   requireOrganizationDisambiguatedDataOnRefresh = false
   displayOrganizationHint: boolean
-  displayOrganizationOption: boolean
 
   get organizationIsInvalidAndTouched() {
     return (
@@ -332,8 +331,8 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
     }
   }
 
-  autoCompleteDisplayOrganization(organization: Organization | string): string {
-    return typeof organization === 'object' ? organization.value : organization
+  autoCompleteDisplayOrganization(organization: Organization) {
+    return organization.value
   }
 
   formToBackendAffiliation(
