@@ -724,7 +724,7 @@
                 <ng-container i18n="@@shared.addLocationManually">You will need to add location information manually</ng-container>
               </div>
             </mat-option>
-            <mat-option class="organization-identifiers" [disabled]="true" *ngIf="displayOrganizationOption" >
+            <mat-option class="organization-identifiers" [disabled]="true" *ngIf="(filteredOptions | async)?.length > 0" >
               <div class="row orc-font-body-large title">
                 <b i18n="@@shared.organizationWithIdentifiers">Organizations with identifiers</b>
               </div>

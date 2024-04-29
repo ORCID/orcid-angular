@@ -171,22 +171,7 @@
             [displayWith]="autoCompleteDisplayOrganization"
             id="cy-org-dd"
           >
-            <ng-container id="cy-org-filtered-options">
-              <mat-option
-                [value]="affiliationForm.get('organization').value"
-              >
-                <div class="row orc-font-body-small title">
-                  <i i18n="@@shared.useOrganizationName">Use this organization name</i>
-                </div>
-                <div class="row orc-font-small-print">
-                  <ng-container i18n="@@shared.addLocationManually">You will need to add location information manually</ng-container>
-                </div>
-              </mat-option>
-              <mat-option class="organization-identifiers" [disabled]="true" *ngIf="displayOrganizationOption" >
-                <div class="row orc-font-body-large title">
-                  <b i18n="@@shared.organizationWithIdentifiers">Organizations with identifiers</b>
-                </div>
-              </mat-option>
+            <ng-container *ngIf="filteredOptions" id="cy-org-filtered-options">
               <mat-option
                 *ngFor="let option of filteredOptions | async"
                 [value]="option"
