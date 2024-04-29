@@ -167,6 +167,7 @@
             [attr.aria-invalid]="organizationIsInvalidAndTouched"
           />
           <mat-autocomplete
+            autoActiveFirstOption
             #auto="matAutocomplete"
             [displayWith]="autoCompleteDisplayOrganization"
             id="cy-org-dd"
@@ -188,7 +189,7 @@
           <mat-hint
             *ngIf="selectedOrganizationFromDatabase && displayOrganizationHint"
           >
-            <ng-container i18n="@@record.from">From:</ng-container>
+            <ng-container i18n="@@record.identifyAS">Identify as:</ng-container>
             {{ selectedOrganizationFromDatabase.value }}
           </mat-hint>
           <mat-hint
@@ -197,7 +198,7 @@
               affiliationForm.get('organization').value &&
               displayOrganizationHint
             "
-            i18n="@@record.organizationAddedManually"
+            i18n="@@record.unidentifiedOrganization"
           >
             Unidentified organization
           </mat-hint>
@@ -327,10 +328,10 @@
           <mat-error
             role="alert"
             aria-describedby="country-label"
-            i18n="@@shared.selectCountryOrLocation"
+            i18n="@@shared.countryOrLocationError"
             *ngIf="countryIsInvalidAndTouched"
           >
-            Please select a country or location
+            Please enter a country or location
           </mat-error>
         </mat-form-field>
       </div>
