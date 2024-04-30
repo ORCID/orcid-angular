@@ -477,51 +477,48 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
   }
 
   filterOrganizations(): Observable<Organization[]> {
-    return this.affiliationForm
-      .get('organization')
-      .valueChanges.pipe(
-        tap((organization: string | Organization) => {
-          // Auto fill form when the user select an organization from the autocomplete list
-          if (
-            typeof organization === 'object' &&
-            organization.disambiguatedAffiliationIdentifier
-          ) {
-            this.selectedOrganizationFromDatabase = organization
-            this.requireOrganizationDisambiguatedDataOnRefresh = true
-            this.displayOrganizationHint = true
-            this.fillForm(organization)
+    return this.affiliationForm.get('organization').valueChanges.pipe(
+      tap((organization: string | Organization) => {
+        // Auto fill form when the user select an organization from the autocomplete list
+        if (
+          typeof organization === 'object' &&
+          organization.disambiguatedAffiliationIdentifier
+        ) {
+          this.selectedOrganizationFromDatabase = organization
+          this.requireOrganizationDisambiguatedDataOnRefresh = true
+          this.displayOrganizationHint = true
+          this.fillForm(organization)
+        }
+        if (!organization) {
+          if (this.selectedOrganizationFromDatabase) {
+            this.affiliationForm.patchValue({
+              city: '',
+              region: '',
+              country: '',
+            })
           }
-          if (!organization) {
-            if (this.selectedOrganizationFromDatabase) {
-              this.affiliationForm.patchValue({
-                city: '',
-                region: '',
-                country: '',
-              })
-            }
-            this.selectedOrganizationFromDatabase = undefined
-            this.requireOrganizationDisambiguatedDataOnRefresh = true
-            this.displayOrganizationHint = false
-          }
-        }),
-        switchMap((organization: string | Organization) => {
-          if (
-            typeof organization === 'string' &&
-            !this.selectedOrganizationFromDatabase
-          ) {
-            // Display matching organization based on the user string input
-            return this._filter((organization as string) || '').pipe(
-              tap((x) => {
-                this.displayOrganizationHint = true
-              })
-            )
-          } else {
-            // Do not display options once the user has selected an Organization
-            return of([])
-          }
-        })
-      )
-
+          this.selectedOrganizationFromDatabase = undefined
+          this.requireOrganizationDisambiguatedDataOnRefresh = true
+          this.displayOrganizationHint = false
+        }
+      }),
+      switchMap((organization: string | Organization) => {
+        if (
+          typeof organization === 'string' &&
+          !this.selectedOrganizationFromDatabase
+        ) {
+          // Display matching organization based on the user string input
+          return this._filter((organization as string) || '').pipe(
+            tap((x) => {
+              this.displayOrganizationHint = true
+            })
+          )
+        } else {
+          // Do not display options once the user has selected an Organization
+          return of([])
+        }
+      })
+    )
   }
 
   fillForm(organization: Organization) {
@@ -531,9 +528,9 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
       country: this.countryCodes.find((x) => x.value === organization.country)
         .key,
     })
-    this.affiliationForm.get('organization').disable();
+    this.affiliationForm.get('organization').disable()
     this.disable(organization?.city, 'city')
-    this.affiliationForm.get('region').disable();
+    this.affiliationForm.get('region').disable()
     this.disable(organization?.country, 'country')
   }
 
@@ -542,7 +539,7 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
       organization: '',
       city: '',
       region: '',
-      country: ''
+      country: '',
     })
     this.enable('organization')
     this.enable('city')
@@ -611,12 +608,12 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
 
   private disable(value: string, element: string): void {
     if (value) {
-      this.affiliationForm.get(element).disable();
+      this.affiliationForm.get(element).disable()
     }
   }
 
   private enable(element: string): void {
-    this.affiliationForm.get(element).enable();
+    this.affiliationForm.get(element).enable()
   }
 
   closeEvent() {

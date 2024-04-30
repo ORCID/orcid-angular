@@ -651,9 +651,9 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       country: this.countryCodes.find((x) => x.value === organization.country)
         .key,
     })
-    this.fundingForm.get('agencyName').disable();
+    this.fundingForm.get('agencyName').disable()
     this.disable(organization?.city, 'city')
-    this.fundingForm.get('region').disable();
+    this.fundingForm.get('region').disable()
     this.disable(organization?.country, 'country')
     this.disambiguatedFundingSourceId = organization.sourceId
     this.disambiguatedFundingSource = organization.sourceType
@@ -688,12 +688,12 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
 
   private disable(value: string, element: string): void {
     if (value) {
-      this.fundingForm.get(element).disable();
+      this.fundingForm.get(element).disable()
     }
   }
 
   private enable(element: string): void {
-    this.fundingForm.get(element).enable();
+    this.fundingForm.get(element).enable()
   }
 
   private checkGrantsChanges(index: number) {
