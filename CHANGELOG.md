@@ -1,3 +1,17 @@
+## v2.92.0 - 2024-04-30
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.91.0...v2.92.0)
+
+### Fix
+
+- Display organization separator in organization list"
+- Display organization separator in organization list
+
+### Feature
+
+- Update affiliation and funding ty[eahead behaviour (#2233)"
+- Update affiliation and funding ty[eahead behaviour
+
 ## v2.91.0 - 2024-04-30
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.90.0...v2.91.0)
