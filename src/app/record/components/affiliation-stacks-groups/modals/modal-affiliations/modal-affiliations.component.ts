@@ -548,6 +548,7 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
     this.affiliationForm.get('city').markAsUntouched()
     this.affiliationForm.get('region').markAsUntouched()
     this.affiliationForm.get('country').markAsUntouched()
+    this.selectedOrganizationFromDatabase = undefined
     this.filteredOptions = this.filterOrganizations()
   }
 
