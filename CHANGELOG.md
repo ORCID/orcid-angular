@@ -1,3 +1,11 @@
+## v2.96.0 - 2024-05-02
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.95.0...v2.96.0)
+
+### Fix
+
+- Remove organization data while clearing form
+
 ## v2.95.0 - 2024-05-02
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.94.0...v2.95.0)
