@@ -9,7 +9,7 @@ import {
 import { PlatformInfo } from './cdk/platform-info'
 import { PlatformInfoService } from './cdk/platform-info/platform-info.service'
 import { WINDOW } from './cdk/window'
-import { HeadlessOnOauthRoutes } from './constants'
+import { ApplicationRoutes, HeadlessOnOauthRoutes } from './constants'
 import { UserService } from './core'
 import { ErrorHandlerService } from './core/error-handler/error-handler.service'
 import { GoogleTagManagerService } from './core/google-tag-manager/google-tag-manager.service'
@@ -147,11 +147,14 @@ export class AppComponent {
   }
 
   private addSpacing() {
-    switch (this.currentRoute) {
-      case '/signin':
-      case '/register':
-      case '/authorize':
-      case '/search':
+    let route = this.currentRoute.split('?')[0]
+    route = route.substring(1)
+
+    switch (route) {
+      case ApplicationRoutes.signin:
+      case ApplicationRoutes.register:
+      case ApplicationRoutes.authorize:
+      case ApplicationRoutes.search:
         this.spacing = true
         break
       default:
