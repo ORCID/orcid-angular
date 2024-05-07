@@ -14,22 +14,26 @@
   padding-top: 16px !important;
 }
 
+.container.mobile {
+  padding-top: 28px !important;
+}
+
 h2 {
   margin-top: 32px;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
+}
+
+a.activities {
+  margin-top: 32px;
+  margin-bottom: 18px;
+}
+
+a.activities.public-info {
+  margin-top: 0 !important;
 }
 
 app-main {
-  padding-bottom: 180px !important;
   max-width: 100%;
-}
-
-app-side-bar {
-  padding-bottom: 40px !important;
-}
-
-app-side-bar.mobile {
-  padding-bottom: 16px !important;
 }
 
 app-statistics {
@@ -65,10 +69,19 @@ app-statistics {
   }
 }
 
+h2.public-info {
+  margin-top: 0 !important;
+}
+
+.no-public-bio {
+  margin-top: 0 !important;
+}
+
 .last-modified {
   margin-top: 20px;
 }
 
 .side-bar-mobile {
   padding: 0;
+  margin-bottom: 1em;
 }

@@ -9,7 +9,7 @@ import {
 import { PlatformInfo } from './cdk/platform-info'
 import { PlatformInfoService } from './cdk/platform-info/platform-info.service'
 import { WINDOW } from './cdk/window'
-import { HeadlessOnOauthRoutes } from './constants'
+import { ApplicationRoutes, HeadlessOnOauthRoutes } from './constants'
 import { UserService } from './core'
 import { ErrorHandlerService } from './core/error-handler/error-handler.service'
 import { GoogleTagManagerService } from './core/google-tag-manager/google-tag-manager.service'
@@ -26,6 +26,7 @@ export class AppComponent {
   currentlyDisplayingZendesk = true
   headlessMode = false
   footerlessMode = false
+  spacing: boolean
   currentRouteIsHeadlessOnOauthPage = true
   screenDirection
   currentRoute
@@ -108,6 +109,7 @@ export class AppComponent {
                 })
             }
           })
+        this.addSpacing()
       }
     })
   }
@@ -142,5 +144,22 @@ export class AppComponent {
   @HostListener('window:visibilitychange')
   onVisibilityChange(value) {
     this._userService.setTimerAsHiddenState(this._window.document.hidden)
+  }
+
+  private addSpacing() {
+    let route = this.currentRoute.split('?')[0]
+    route = route.substring(1)
+
+    switch (route) {
+      case ApplicationRoutes.signin:
+      case ApplicationRoutes.register:
+      case ApplicationRoutes.authorize:
+      case ApplicationRoutes.search:
+        this.spacing = true
+        break
+      default:
+        this.spacing = false
+        break
+    }
   }
 }

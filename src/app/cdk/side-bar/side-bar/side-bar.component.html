@@ -19,7 +19,7 @@
   >
     No personal information available
   </p>
-  <ng-container *ngIf="isPublicRecord ? false : true">
+  <ng-container *ngIf="!isPublicRecord">
     <app-side-bar-id
       *ngIf="!hideOrcidId"
       [ngClass]="{

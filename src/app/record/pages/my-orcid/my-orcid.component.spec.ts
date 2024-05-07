@@ -24,6 +24,7 @@ import { getUserSession } from '../../../core/user/user.service.spec'
 import { RecordPublicSideBarService } from '../../../core/record-public-side-bar/record-public-side-bar.service'
 import { getSideBarPublicUserRecord } from '../../../core/record-public-side-bar/record-public-side-bar.service.spec'
 import { OpenGraphService } from 'src/app/core/open-graph/open-graph.service'
+import { TitleService } from 'src/app/core/title-service/title.service'
 
 describe('MyOrcidComponent', () => {
   let component: MyOrcidComponent
@@ -32,6 +33,7 @@ describe('MyOrcidComponent', () => {
   let fakeRecordService: RecordService
   let userService: UserService
   let recordPublicSideBarService: RecordPublicSideBarService
+  let openGraph: OpenGraphService
 
   beforeEach(() => {
     fakeRecordService = jasmine.createSpyObj<RecordService>('RecordService', {
@@ -56,10 +58,8 @@ describe('MyOrcidComponent', () => {
         MatSnackBar,
         MatDialog,
         Overlay,
-        {
-          provide: OpenGraphService,
-          useValue: {},
-        },
+        OpenGraphService,
+        TitleService,
       ],
     }).compileComponents()
   })
@@ -68,6 +68,7 @@ describe('MyOrcidComponent', () => {
     togglzService = TestBed.inject(TogglzService)
     togglzService.togglzSubject = new ReplaySubject<Config>()
     userService = TestBed.inject(UserService)
+    recordPublicSideBarService = TestBed.inject(RecordPublicSideBarService)
     recordPublicSideBarService = TestBed.inject(RecordPublicSideBarService)
 
     userService.getUserSession = jasmine

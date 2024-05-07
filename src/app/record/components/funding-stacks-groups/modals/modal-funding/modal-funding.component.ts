@@ -222,27 +222,50 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
           },
           { validator: dateMonthYearValidator('endDate') }
         ),
-        agencyName: new UntypedFormControl(this.agencyName, {
-          validators: [
-            Validators.required,
-            Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
-          ],
-        }),
-        city: new UntypedFormControl(this.city, {
-          validators: [
-            Validators.required,
-            Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
-          ],
-        }),
-        region: new UntypedFormControl(this.region, {
-          validators: [Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND)],
-        }),
-        country: new UntypedFormControl(this.country, {
-          validators: [
-            Validators.required,
-            Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
-          ],
-        }),
+        agencyName: new UntypedFormControl(
+          {
+            value: this.agencyName,
+            disabled: this.selectedOrganizationFromDatabase,
+          },
+          {
+            validators: [
+              Validators.required,
+              Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
+            ],
+          }
+        ),
+        city: new UntypedFormControl(
+          { value: this.city, disabled: this.selectedOrganizationFromDatabase },
+          {
+            validators: [
+              Validators.required,
+              Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
+            ],
+          }
+        ),
+        region: new UntypedFormControl(
+          {
+            value: this.region,
+            disabled: this.selectedOrganizationFromDatabase,
+          },
+          {
+            validators: [
+              Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
+            ],
+          }
+        ),
+        country: new UntypedFormControl(
+          {
+            value: this.country,
+            disabled: this.selectedOrganizationFromDatabase,
+          },
+          {
+            validators: [
+              Validators.required,
+              Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
+            ],
+          }
+        ),
         grants: new UntypedFormArray([]),
         visibility: new UntypedFormControl(this.defaultVisibility, {
           validators: [Validators.required],
@@ -526,10 +549,10 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
         value: this.disambiguatedFundingSource,
       },
       city: {
-        value: this.fundingForm.value.city,
+        value: this.fundingForm.get('city').value,
       },
       region: {
-        value: this.fundingForm.value.region,
+        value: this.fundingForm.get('region').value,
       },
       country: {
         value: this.countryCodes.find(
@@ -628,6 +651,10 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       country: this.countryCodes.find((x) => x.value === organization.country)
         .key,
     })
+    this.fundingForm.get('agencyName').disable()
+    this.disable(organization?.city, 'city')
+    this.fundingForm.get('region').disable()
+    this.disable(organization?.country, 'country')
     this.disambiguatedFundingSourceId = organization.sourceId
     this.disambiguatedFundingSource = organization.sourceType
   }
@@ -641,6 +668,15 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
     })
     this.disambiguatedFundingSourceId = ''
     this.disambiguatedFundingSource = ''
+    this.enable('agencyName')
+    this.enable('city')
+    this.enable('region')
+    this.enable('country')
+    this.fundingForm.get('city').markAsUntouched()
+    this.fundingForm.get('region').markAsUntouched()
+    this.fundingForm.get('country').markAsUntouched()
+    this.selectedOrganizationFromDatabase = undefined
+    this.listenFormChanges()
   }
 
   private _filter(value: string): Observable<Organization[]> {
@@ -649,6 +685,16 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
     }
 
     return EMPTY
+  }
+
+  private disable(value: string, element: string): void {
+    if (value) {
+      this.fundingForm.get(element).disable()
+    }
+  }
+
+  private enable(element: string): void {
+    this.fundingForm.get(element).enable()
   }
 
   private checkGrantsChanges(index: number) {

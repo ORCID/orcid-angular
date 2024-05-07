@@ -174,8 +174,8 @@
         You are currently signed in as:
       </p>
       <mat-divider class="orcid-divider"></mat-divider>
-      <div class="row" [ngClass]="{ 'center-content': platformInfo.columns4 }">
-        <div class="col l2 profile-icon-wrapper">
+      <div class="row">
+        <div class="col l2 profile-icon-wrapper" *ngIf="!platformInfo.columns4">
           <div class="icon">
             <mat-icon class="profile-icon"
               ><img
@@ -186,10 +186,7 @@
           </div>
         </div>
         <div class="col l9 user-wrapper">
-          <div
-            class="row"
-            [ngClass]="{ 'center-content': platformInfo.columns4 }"
-          >
+          <div class="row">
             <div class="m-b-8">
               <div class="mat-body-2">
                 <strong id="user-name">{{ userName }}</strong>
@@ -228,14 +225,14 @@
       ></app-info-drop-down>
 
       <p
-        class="mat-body-1 m-t-16 m-b-32"
+        class="mat-body-1 m-t-16 m-b-16"
         i18n="@@authorize.organizationAskedFollowingAccess"
       >
         This organization has asked for the following access to your ORCID
         record:
       </p>
 
-      <ul class="mat-body-1 m-t-base m-b-64">
+      <ul class="mat-body-1 m-t-base">
         <ng-container
           *ngFor="let scope of this.oauthRequest.scopes; let last = last"
         >
@@ -251,41 +248,42 @@
               ></ng-container>
               <div>{{ getDescription(scope) }}</div>
             </div>
-            <div class="disclaimer-box" *ngIf="last">
-              <p class="mat-caption m-t-0">
-                <ng-container i18n="@@authorize.ifAuthorize">
-                  If authorized, this organization will have access to your
-                  ORCID record, as outlined above and described in further
-                  detail in</ng-container
-                >
-                <a
-                  href="{{ environment.INFO_SITE + 'privacy-policy' }}"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="underline"
-                  i18n="@@authorize.privacyPolicy"
-                  >ORCID’s privacy policy.</a
-                >
-              </p>
-              <p class="mat-caption">
-                <ng-container i18n="@@authorize.youCanManage">
-                  You can manage access permissions for this and other Trusted
-                  Organizations in your
-                </ng-container>
-                <a
-                  href="/account#manage-permissions"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="underline"
-                  i18n="@@authorize.accountSettings"
-                  >account settings.</a
-                >
-              </p>
-            </div>
-            <mat-divider *ngIf="last"></mat-divider>
           </li>
         </ng-container>
       </ul>
+
+      <div class="disclaimer-box m-b-16">
+        <p class="mat-caption m-t-0">
+          <ng-container i18n="@@authorize.ifAuthorize">
+            If authorized, this organization will have access to your ORCID
+            record, as outlined above and described in further detail
+            in</ng-container
+          >
+          <a
+            href="{{ environment.INFO_SITE + 'privacy-policy' }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="underline"
+            i18n="@@authorize.privacyPolicy"
+            >ORCID’s privacy policy.</a
+          >
+        </p>
+        <p class="mat-caption m-b-16">
+          <ng-container i18n="@@authorize.manageAccessPersmissions">
+            You can manage access permissions for this and other Trusted
+            Organizations from within your list of
+          </ng-container>
+          <a
+            routerLink="/trusted-parties"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="underline"
+            i18n="@@authorize.trustedParties"
+            >trusted parties.</a
+          >
+        </p>
+        <mat-divider></mat-divider>
+      </div>
 
       <button
         class="authorize-button"

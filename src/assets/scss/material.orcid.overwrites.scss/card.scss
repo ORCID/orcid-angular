@@ -32,7 +32,6 @@
 
   .columns-12 &,
   .columns-8 & {
-    margin-top: $spacing-24;
     mat-card-content {
       margin: $spacing-24 12% 40px 12%; //12% to approximate the margin on designs
     }
