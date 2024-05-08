@@ -1,3 +1,12 @@
+## v2.98.0 - 2024-05-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.97.0...v2.98.0)
+
+### Fix
+
+- Search form submit on touch devices (#2226)
+- Add accessibility dialog missing attributes
+
 ## v2.97.0 - 2024-05-07
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.96.0...v2.97.0)
