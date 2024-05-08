@@ -9,6 +9,7 @@
       <div
         class="row names-wrapper"
         *ngIf="
+          !loadingUserRecord &&
           !userInfo?.RECORD_WITH_ISSUES &&
           (userRecord?.names || userRecord?.otherNames)
         "
@@ -36,7 +37,10 @@
           <p class="orc-font-body" *ngIf="otherNames">{{ otherNames }}</p>
         </div>
       </div>
-      <div class="issue" *ngIf="userInfo?.RECORD_WITH_ISSUES">
+      <div
+        class="issue"
+        *ngIf="!loadingUserRecord && userInfo?.RECORD_WITH_ISSUES"
+      >
         <h1
           [ngClass]="{
             'orc-font-heading-small': !platform.columns12,
@@ -71,7 +75,6 @@
         *ngIf="
           !loadingUserRecord &&
           !recordWithIssues &&
-          affiliations === 0 &&
           !(creditName || givenNames || familyName || otherNames)
         "
       >
@@ -159,7 +162,14 @@
         </div>
       </section>
 
-      <div *ngIf="newRecordHeaderWithSummaryTogglz">
+      <div
+        *ngIf="
+          newRecordHeaderWithSummaryTogglz &&
+          !loadingUserRecord &&
+          !recordWithIssues &&
+          (creditName || givenNames || familyName || otherNames)
+        "
+      >
         <button
           mat-button
           (click)="recordSummaryLinkClick()"

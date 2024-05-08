@@ -3,8 +3,13 @@
   <router-outlet name="banner"></router-outlet>
   <app-banners *ngIf="!headlessMode"></app-banners>
   <app-header *ngIf="!headlessMode" currentRoute=""></app-header>
-  <div class="router-container">
-    <router-outlet> </router-outlet>
-    <app-footer *ngIf="!footerlessMode"></app-footer>
+  <div
+    class="router-container"
+    [ngClass]="{
+      'spacing': spacing,
+    }"
+  >
+    <router-outlet></router-outlet>
   </div>
+  <app-footer *ngIf="!footerlessMode"></app-footer>
 </div>

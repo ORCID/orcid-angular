@@ -31,6 +31,8 @@ export class RecordHeaderComponent implements OnInit {
   @Input() loadingUserRecord = true
   @Input() isPublicRecord: string
   @Input() affiliations: number
+  @Input() displaySideBar: boolean
+  @Input() displayBiography: boolean
   @Input() newRecordHeaderWithSummaryTogglz: boolean
   _recordSummaryOpen: boolean
 
@@ -101,7 +103,11 @@ export class RecordHeaderComponent implements OnInit {
             this.ariaLabelName
           )
         } else {
-          if (this.affiliations > 0) {
+          if (
+            this.affiliations > 0 ||
+            this.displaySideBar ||
+            this.displayBiography
+          ) {
             this.creditName = this.privateName
           }
         }

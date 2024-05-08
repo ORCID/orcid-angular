@@ -8,13 +8,16 @@
       [loadingUserRecord]="loadingUserRecord"
       [isPublicRecord]="publicOrcid"
       [affiliations]="affiliations"
+      [displaySideBar]="displaySideBar"
+      [displayBiography]="displayBiography"
       [(recordSummaryOpen)]="recordSummaryOpen"
       [newRecordHeaderWithSummaryTogglz]="newRecordHeaderWithSummaryTogglz"
     ></app-record-header>
     <div
       class="container no-padding main-content"
       [ngClass]="{
-        'main-content-shadow': recordSummaryOpen
+        'main-content-shadow': recordSummaryOpen,
+        mobile: !platform.columns12
       }"
     >
       <div class="row">
@@ -27,7 +30,8 @@
           *ngIf="
             !loadingUserRecord
               ? publicOrcid
-                ? !recordWithIssues &&
+                ? platform.columns12 &&
+                  !recordWithIssues &&
                   (displaySideBar || displayBiography || affiliations > 0)
                 : true
               : true
@@ -47,15 +51,36 @@
         >
           <app-main>
             <app-top-bar
-              [isPublicRecord]="publicOrcid"
               class="row"
+              [ngClass]="{
+                mobile: !platform.columns12
+              }"
+              [isPublicRecord]="publicOrcid"
               [loadingUserRecord]="loadingUserRecord"
+              *ngIf="
+                !loadingUserRecord
+                  ? publicOrcid
+                    ? !recordWithIssues && displayBiography
+                    : true
+                  : true
+              "
             ></app-top-bar>
             <app-side-bar
               class="col l3 m8 s4 new-header side-bar-mobile"
               [isPublicRecord]="publicOrcid"
               [hideOrcidId]="true"
-              *ngIf="platform.columns8 || platform.columns4"
+              [ngClass]="{
+                mobile: !platform.columns12
+              }"
+              *ngIf="
+                !loadingUserRecord
+                  ? publicOrcid
+                    ? !platform.columns12 &&
+                      !recordWithIssues &&
+                      (displaySideBar || displayBiography || affiliations > 0)
+                    : !platform.columns12
+                  : false
+              "
             >
             </app-side-bar>
             <ng-container *ngIf="!recordWithIssues">
@@ -69,34 +94,36 @@
                   *ngIf="!(publicOrcid && affiliations === 0)"
                 >
                   <h2
-                    class="activities-header orc-font-body col"
+                    class="activities-header col"
+                    [ngClass]="{
+                      'orc-font-body-large': publicOrcid,
+                      'no-gutters': publicOrcid,
+                      'public-info': publicOrcid,
+                      'no-public-bio': publicOrcid ? !displayBiography : false,
+                      'orc-font-body': !publicOrcid
+                    }"
                     i18n="@@shared.activities"
                   >
                     Activities
                   </h2>
                   <div class="expand-buttons">
-                    <button
-                      mat-button
-                      color="primary"
-                      type="button"
-                      i18n="@@shared.expandAll"
+                    <a
+                      class="activities orc-font-body-small"
+                      [ngClass]="{ 'public-info': publicOrcid }"
                       (click)="switchPanelsState()"
-                      *ngIf="!globalExpandState"
-                      [attr.aria-label]="expandAllActivitiesArialLabel"
+                      [attr.aria-label]="
+                        globalExpandState
+                          ? collapseAllActivitiesArialLabel
+                          : expandAllActivitiesArialLabel
+                      "
                     >
-                      Expand all
-                    </button>
-                    <button
-                      mat-button
-                      color="primary"
-                      type="button"
-                      i18n="@@shared.collapseAll"
-                      (click)="switchPanelsState()"
-                      *ngIf="globalExpandState"
-                      [attr.aria-label]="collapseAllActivitiesArialLabel"
-                    >
-                      Collapse all
-                    </button>
+                      <b i18n="@@shared.collapseAll" *ngIf="globalExpandState"
+                        >Collapse all</b
+                      >
+                      <b i18n="@@shared.expandAll" *ngIf="!globalExpandState"
+                        >Expand all</b
+                      >
+                    </a>
                   </div>
                 </div>
                 <app-affiliations

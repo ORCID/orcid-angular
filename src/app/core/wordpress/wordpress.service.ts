@@ -13,17 +13,17 @@ export class WordpressService {
   ) {}
 
   getHomePagePost() {
-    return this.httpClient.get<WordpressPost>(
-      environment.WORDPRESS_API +
-        this.getWordpressLocalizationCode() +
-        '/wp-json/wp/v2/posts/' +
-        (localStorage.getItem('homeId') || environment.WORDPRESS_API_HOME_ID)
+    return this.httpClient.get(
+      `${
+        environment.WORDPRESS_S3
+      }/index${this.getWordpressLocalizationCode()}.html`,
+      { responseType: 'text' }
     )
   }
   getWordpressLocalizationCode() {
     if (this.locale.includes('en')) {
       return ''
     }
-    return '/' + this.locale
+    return '-' + this.locale
   }
 }

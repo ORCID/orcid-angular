@@ -1,3 +1,141 @@
+## v2.97.0 - 2024-05-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.96.0...v2.97.0)
+
+## v2.96.0 - 2024-05-02
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.95.0...v2.96.0)
+
+### Fix
+
+- Remove organization data while clearing form
+
+## v2.95.0 - 2024-05-02
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.94.0...v2.95.0)
+
+## v2.94.0 - 2024-05-02
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.93.0...v2.94.0)
+
+## v2.93.0 - 2024-04-30
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.92.0...v2.93.0)
+
+## v2.92.0 - 2024-04-30
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.91.0...v2.92.0)
+
+### Fix
+
+- Display organization separator in organization list"
+- Display organization separator in organization list
+
+### Feature
+
+- Update affiliation and funding ty[eahead behaviour (#2233)"
+- Update affiliation and funding ty[eahead behaviour
+
+## v2.91.0 - 2024-04-30
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.90.0...v2.91.0)
+
+## v2.90.0 - 2024-04-28
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.89.0...v2.90.0)
+
+## v2.89.0 - 2024-04-28
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.88.0...v2.89.0)
+
+## v2.88.0 - 2024-04-28
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.87.0...v2.88.0)
+
+### Fix
+
+- Read only organization field when editing affiliation if selected from db
+
+## v2.87.0 - 2024-04-28
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.86.0...v2.87.0)
+
+### Fix
+
+- Add missing hint to country and city when a disambiguated org been has been selected (#2243)
+
+## v2.86.0 - 2024-04-28
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.85.0...v2.86.0)
+
+## v2.85.0 - 2024-04-23
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.84.0...v2.85.0)
+
+### Fix
+
+- Remove disclaimer from list (#2241)
+
+## v2.84.0 - 2024-04-23
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.83.0...v2.84.0)
+
+## v2.83.0 - 2024-04-23
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.82.0...v2.83.0)
+
+### Fix
+
+- Hide record summary button if there is no public information available (#2240)
+
+## v2.82.0 - 2024-04-23
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.81.0...v2.82.0)
+
+### Feature
+
+- Align activities and biographt headers in public page (#2238)
+
+## v2.81.0 - 2024-04-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.80.0...v2.81.0)
+
+### Fix
+
+- Update text in oauth privacy policy declaration (#2236)
+
+## v2.80.0 - 2024-04-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.79.0...v2.80.0)
+
+### Fix
+
+- Dont show record summary button on records with issues (#2235)
+
+## v2.79.0 - 2024-04-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.78.0...v2.79.0)
+
+### Fix
+
+- Update public and personal information messages on public profile (#2234)
+
+## v2.78.0 - 2024-04-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.77.0...v2.78.0)
+
+### Feature
+
+- Update affiliation and funding ty[eahead behaviour (#2233)
+
+## v2.77.0 - 2024-04-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.76.0...v2.77.0)
+
+## v2.76.0 - 2024-04-16
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.75.0...v2.76.0)
+
 ## v2.75.0 - 2024-04-10
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.74.0...v2.75.0)
