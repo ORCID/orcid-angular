@@ -24,7 +24,9 @@
 <ng-container *ngIf="signInUpdatesV1Togglz">
   <ng-container *ngIf="emailVerified || invalidVerifyUrl">
     <div
-      aria-label="polite"
+      role="alert"
+      aria-labelledby="dialogTitle"
+      aria-describedby="dialogDescription"
       [ngClass]="{
         verification: emailVerified,
         invalid: invalidVerifyUrl
@@ -38,9 +40,9 @@
       </div>
       <div class="content">
         <div>
-          <b i18n="@@ngOrcid.signin.almostDone"> Almost done! </b>
+          <b id="dialogTitle" i18n="@@ngOrcid.signin.almostDone"> Almost done! </b>
         </div>
-        <div>
+        <div id="dialogDescription">
           <ng-container
             i18n="@@ngOrcid.signin.signInToComplete"
             *ngIf="emailVerified"
@@ -59,7 +61,13 @@
     </div>
   </ng-container>
   <ng-container *ngIf="printError && badCredentials">
-    <div class="invalid" aria-label="polite">
+    <div
+      class="invalid"
+      role="dialog"
+      aria-live="polite"
+      aria-labelledby="dialogTitle"
+      aria-describedby="dialogDescription"
+    >
       <div>
         <mat-icon class="large-material-icon material-symbols-outlined"
           >warning</mat-icon
@@ -67,11 +75,11 @@
       </div>
       <div class="content">
         <div>
-          <b i18n="@@ngOrcid.signin.somethingNotQuiteRight">
+          <b id="dialogTitle" i18n="@@ngOrcid.signin.somethingNotQuiteRight">
             Something's not quite right...
           </b>
         </div>
-        <div i18n="@@ngOrcid.signin.checkYourSignIn">
+        <div id="dialogDescription" i18n="@@ngOrcid.signin.checkYourSignIn">
           Please check that your sign in details are correct and then try
           signing in again.
         </div>
