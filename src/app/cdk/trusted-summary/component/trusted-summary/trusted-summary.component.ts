@@ -94,7 +94,7 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
         }
       })
     this.currentLocation = window.location.origin
-    this.orcid = this._router.url.split('/')[1]
+    this.orcid = this._router.url.split('/')[1].split('?')[0]
 
     this._trustedSummary.getSummary(this.orcid).subscribe((data) => {
       this.trustedSummary = data
