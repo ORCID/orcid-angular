@@ -1,3 +1,9 @@
+## v2.98.1 - 2024-05-09
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.98.0...v2.98.1)
+
+- [#2257](https://github.com/ORCID/orcid-angular/pull/2257): Do not include query parameters in the ORCID id
+
 ## v2.98.0 - 2024-05-08
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.97.0...v2.98.0)
