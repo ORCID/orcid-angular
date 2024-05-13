@@ -95,18 +95,18 @@ export class RecordUtil {
   }
 
   static scrollTo(activitySection: string, event?: KeyboardEvent) {
-    const targetElement = document.getElementById(activitySection);
+    const targetElement = document.getElementById(activitySection)
 
     if (targetElement) {
-      if (event && event.key === 'Enter' || event.key === ' ') {
+      if ((event && event.key === 'Enter') || event.key === ' ') {
         targetElement.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
+          behavior: 'smooth',
+          block: 'start',
         })
 
-        targetElement.setAttribute("tabindex", "-1")
+        targetElement.setAttribute('tabindex', '-1')
         targetElement.focus()
-        targetElement.removeAttribute("tabindex")
+        targetElement.removeAttribute('tabindex')
       }
     }
   }

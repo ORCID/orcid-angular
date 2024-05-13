@@ -48,14 +48,14 @@ export class SummarySimplePanelComponent implements OnInit {
     if (!url) {
       return
     }
-    if (event && event.key === 'Enter' || event.key === ' ') {
+    if ((event && event.key === 'Enter') || event.key === ' ') {
       this._window.open(url, '_blank')
     } else if (!event) {
       this._window.open(url, '_blank')
     }
   }
   goToActivitySection(activitySection: string, event?: KeyboardEvent) {
-      this.standaloneMode
+    this.standaloneMode
       ? this.goToUrl(this.overflowUrl, event)
       : RecordUtil.scrollTo(activitySection, event)
   }

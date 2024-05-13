@@ -222,12 +222,20 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
       } else {
         this.oneColumn = true
       }
-      this.ariaLabelAffiliations = this.getAriaLabelSection(this.labelViewAffiliations)
+      this.ariaLabelAffiliations = this.getAriaLabelSection(
+        this.labelViewAffiliations
+      )
       this.ariaLabelWorks = this.getAriaLabelSection(this.labelViewWorks)
       this.ariaLabelFundings = this.getAriaLabelSection(this.labelViewFundings)
-      this.ariaLabelPeerReviews = this.getAriaLabelSection(this.labelViewPeerReviews)
-      this.ariaLabelProfessionalActivities = this.getAriaLabelSection(this.labelViewProfessionalActivities)
-      this.ariaLabelIdentifiers = this.getAriaLabelSection(this.labelViewIdentifiers)
+      this.ariaLabelPeerReviews = this.getAriaLabelSection(
+        this.labelViewPeerReviews
+      )
+      this.ariaLabelProfessionalActivities = this.getAriaLabelSection(
+        this.labelViewProfessionalActivities
+      )
+      this.ariaLabelIdentifiers = this.getAriaLabelSection(
+        this.labelViewIdentifiers
+      )
     })
   }
   dateWithOffset(creation: string): any {

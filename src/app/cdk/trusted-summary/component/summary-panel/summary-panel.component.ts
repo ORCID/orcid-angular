@@ -58,8 +58,8 @@ export class SummaryPanelComponent implements OnInit {
   goToActivitySection(activitySection: string, event?: KeyboardEvent) {
     if (event && (event.key === 'Enter' || event.key === ' ')) {
       this.standaloneMode
-      ? this.goToUrl(this.url, event)
-      : RecordUtil.scrollTo(activitySection, event)
+        ? this.goToUrl(this.url, event)
+        : RecordUtil.scrollTo(activitySection, event)
     }
   }
 }
