@@ -6,7 +6,9 @@
   <ng-container *ngFor="let activity of activitiesToDisplay; last as isLast">
     <div
       class="activity-container"
+      tabindex="{{ activity.url ? 0 : -1 }}"
       (click)="goToUrl(activity.url)"
+      (keydown)="goToUrl(activity.url, $event)"
       [ngClass]="{
         'with-border': !isLast || acitivityCountOverflow,
         'padding-botton': !isLast || acitivityCountOverflow
@@ -110,7 +112,9 @@
     <a
       class="underline orc-font-body-small"
       rel="noopener noreferrer"
+      tabindex="0"
       (click)="goToActivitySection(activitySection)"
+      (keydown)="goToActivitySection(activitySection, $event)"
       >+ {{ count - 3 }}
       <ng-container *ngIf="count - 3 === 1">{{
         moreLabelSingular

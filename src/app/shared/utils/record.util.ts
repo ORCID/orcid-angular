@@ -93,4 +93,21 @@ export class RecordUtil {
     }
     return false
   }
+
+  static scrollTo(activitySection: string, event?: KeyboardEvent) {
+    const targetElement = document.getElementById(activitySection);
+
+    if (targetElement) {
+      if (event && event.key === 'Enter' || event.key === ' ') {
+        targetElement.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        })
+
+        targetElement.setAttribute("tabindex", "-1")
+        targetElement.focus()
+        targetElement.removeAttribute("tabindex")
+      }
+    }
+  }
 }
