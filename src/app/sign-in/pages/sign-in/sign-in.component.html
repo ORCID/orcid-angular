@@ -1,6 +1,6 @@
 <main id="main">
   <app-my-orcid-alerts
-    *ngIf="!signInUpdatesV1Togglz && (emailVerified || invalidVerifyUrl)"
+    *ngIf="!loadingTogglz && !signInUpdatesV1Togglz && (emailVerified || invalidVerifyUrl)"
     [emailVerified]="emailVerified"
     [invalidVerifyUrl]="invalidVerifyUrl"
   ></app-my-orcid-alerts>
