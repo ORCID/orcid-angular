@@ -1,6 +1,7 @@
 import { Component, Inject, Input, OnInit } from '@angular/core'
 import { Subject } from 'rxjs'
 import { WINDOW } from 'src/app/cdk/window'
+import { RecordUtil } from 'src/app/shared/utils/record.util'
 import { ActivitySummary } from 'src/app/types/trust-summary'
 
 @Component({
@@ -43,18 +44,22 @@ export class SummaryPanelComponent implements OnInit {
       this.acitivityCountOverflow = this.count > 3
     }
   }
-  goToUrl(url?: string) {
+  goToUrl(url: string, event?: KeyboardEvent) {
     if (!url) {
       return
     }
-    this._window.open(url, '_blank')
+
+    if (event && (event.key === 'Enter' || event.key === ' ')) {
+      this._window.open(url, '_blank')
+    } else if (!event) {
+      this._window.open(url, '_blank')
+    }
   }
-  goToActivitySection(activitySection: string) {
-    this.standaloneMode
-      ? this.goToUrl(this.url)
-      : this.scrollTo(activitySection)
-  }
-  scrollTo(activitySection: string) {
-    document.querySelector(`#${activitySection}`).scrollIntoView()
+  goToActivitySection(activitySection: string, event?: KeyboardEvent) {
+    if (event && (event.key === 'Enter' || event.key === ' ')) {
+      this.standaloneMode
+      ? this.goToUrl(this.url, event)
+      : RecordUtil.scrollTo(activitySection, event)
+    }
   }
 }

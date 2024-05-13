@@ -6,11 +6,13 @@
   <ng-container *ngFor="let element of simpleActivities; last as isLast">
     <div
       class="activity-container"
+      tabindex="{{ element.url ? 0 : -1 }}"
       [ngClass]="{
         'with-border': !isLast || acitivityCountOverflow,
         'padding-botton': !isLast || acitivityCountOverflow
       }"
       (click)="goToUrl(element.url)"
+      (keydown)="goToUrl(element.url, $event)"
     >
       <div class="header">
         <div class="header-title">
@@ -86,7 +88,9 @@
     <a
       class="underline orc-font-body-small"
       rel="noopener noreferrer"
+      tabindex="0"
       (click)="goToActivitySection(activitySection)"
+      (keydown)="goToActivitySection(activitySection, $event)"
       >+ {{ count - 3 }}
       <ng-container *ngIf="count - 3 > 1">{{ moreLabel }}</ng-container>
       <ng-container *ngIf="count - 3 === 1">{{

@@ -3,6 +3,7 @@ import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
+import { RecordUtil } from 'src/app/shared/utils/record.util'
 
 export interface SimpleActivityModel {
   verified?: boolean
@@ -43,18 +44,19 @@ export class SummarySimplePanelComponent implements OnInit {
     this.acitivityCountOverflow = this.simpleActivities.length > 3
     this.simpleActivities = this.simpleActivities.slice(0, 3)
   }
-  goToUrl(url?: string) {
+  goToUrl(url?: string, event?: KeyboardEvent) {
     if (!url) {
       return
     }
-    this._window.open(url, '_blank')
+    if (event && event.key === 'Enter' || event.key === ' ') {
+      this._window.open(url, '_blank')
+    } else if (!event) {
+      this._window.open(url, '_blank')
+    }
   }
-  goToActivitySection(activitySection: string) {
-    this.standaloneMode
-      ? this.goToUrl(this.overflowUrl)
-      : this.scrollTo(activitySection)
-  }
-  scrollTo(activitySection: string) {
-    document.querySelector(`#${activitySection}`).scrollIntoView()
+  goToActivitySection(activitySection: string, event?: KeyboardEvent) {
+      this.standaloneMode
+      ? this.goToUrl(this.overflowUrl, event)
+      : RecordUtil.scrollTo(activitySection, event)
   }
 }
