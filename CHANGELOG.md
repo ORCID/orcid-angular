@@ -1,3 +1,11 @@
+## v2.98.2 - 2024-05-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.98.1...v2.98.2)
+
+### Feature
+
+- Add accessible smooth scroll and missing aria labels in summary
+
 ## v2.98.1 - 2024-05-09
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.98.0...v2.98.1)
