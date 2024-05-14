@@ -1,3 +1,4 @@
+@use '@angular/material' as mat;
 @import 'src/assets/scss/material.orcid-theme.scss';
 
 @mixin footer-theme($theme) {
@@ -9,7 +10,8 @@
   footer {
     background-color: map-get($background, light-grey);
     a {
-      color: map-get($foreground, text);
+      color: mat.get-color-from-palette($primary, 500) !important;
+      font-weight: normal !important;
     }
   }
 }

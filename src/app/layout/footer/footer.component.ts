@@ -13,6 +13,11 @@ export class FooterComponent implements OnInit {
   platform
   labelFooter = $localize`:@@layout.ariaLabelFooter:footer`
   infoSiteBaseUrl = environment.INFO_SITE
+  isDesktop = false
+  isTablet = false
+  isMobile = false
+
+  license = $localize`:@@layout.ariaLabelLicense:license (opens in new tab)`
 
   constructor(
     _platformInfo: PlatformInfoService,
@@ -20,6 +25,9 @@ export class FooterComponent implements OnInit {
   ) {
     _platformInfo.get().subscribe((platformInfo) => {
       this.platform = platformInfo
+      this.isDesktop = platformInfo.columns12
+      this.isTablet = platformInfo.columns8
+      this.isMobile = platformInfo.columns4
     })
   }
 
