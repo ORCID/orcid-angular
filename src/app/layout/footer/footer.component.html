@@ -12,14 +12,14 @@
           'mobile': !isDesktop,
           }"
       >
-        <a [ngClass]="{
+        <a
+          [ngClass]="{
           'row orcid-logo-mobile': isMobile,
           }"
         >
           <img src="./assets/vectors/orcid.logo.svg" alt="Orcid" />
         </a>
-        <a
-          href="https://www.linkedin.com/company/orcid">
+        <a href="https://www.linkedin.com/company/orcid">
           <img
             src="./assets/vectors/social/Linkedin.svg"
             class="social"
@@ -47,7 +47,9 @@
             alt="Vimeo"
           />
         </a>
-        <a href="https://www.youtube.com/@orcid-connectingresearchan7495/videos">
+        <a
+          href="https://www.youtube.com/@orcid-connectingresearchan7495/videos"
+        >
           <img
             src="./assets/vectors/social/Youtube.svg"
             class="social"
@@ -62,11 +64,7 @@
           />
         </a>
         <a href="{{ infoSiteBaseUrl }}blog/feed" class="social">
-          <img
-            src="./assets/vectors/social/RSS.svg"
-            class="social"
-            alt="Rss"
-          />
+          <img src="./assets/vectors/social/RSS.svg" class="social" alt="Rss" />
         </a>
         <a href="https://github.com/ORCID" class="social">
           <img
@@ -81,13 +79,10 @@
     <div class="row public-domain space-around">
       <div
         class="CC0 orc-font-body-small"
-        [ngClass]="{'col desktop': isDesktop }"
-        >
+        [ngClass]="{ 'col desktop': isDesktop }"
+      >
         <div [ngClass]="{ 'row mobile': !isDesktop }">
-          <img
-            src="./assets/vectors/cc-zero.svg"
-            alt="public domain"
-          />
+          <img src="./assets/vectors/cc-zero.svg" alt="public domain" />
         </div>
         <ng-container i18n="@@footer.copyright_cc0_1"
           >The text of this website is published under a</ng-container
@@ -110,9 +105,9 @@
     <div
       class="row links space-around"
       [ngClass]="{
-        'tablet': isTablet,
-        'mobile': isMobile
-        }"
+        tablet: isTablet,
+        mobile: isMobile
+      }"
     >
       <div
         class="col mat-button-font url-lists"
@@ -144,9 +139,9 @@
           Accessibility Statement
         </a>
         <a
-        class="underline"
-        i18n="@@shared.orcidHelpCenter"
-        href="https://support.orcid.org/"
+          class="underline"
+          i18n="@@shared.orcidHelpCenter"
+          href="https://support.orcid.org/"
         >
           ORCID Help Center
         </a>
