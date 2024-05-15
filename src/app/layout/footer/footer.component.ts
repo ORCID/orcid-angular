@@ -17,7 +17,7 @@ export class FooterComponent implements OnInit {
   isTablet = false
   isMobile = false
 
-  license = $localize`:@@layout.ariaLabelLicense:license (opens in new tab)`
+  license = $localize`:@@footer.ariaLabelLicense:license (opens in new tab)`
 
   constructor(
     _platformInfo: PlatformInfoService,
