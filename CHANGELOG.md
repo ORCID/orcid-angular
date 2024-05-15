@@ -1,3 +1,12 @@
+## v2.98.3 - 2024-05-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.98.2...v2.98.3)
+
+### Fix
+
+- Update translation property name
+- Line breaks in translations properties
+
 ## v2.98.2 - 2024-05-13
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.98.1...v2.98.2)
