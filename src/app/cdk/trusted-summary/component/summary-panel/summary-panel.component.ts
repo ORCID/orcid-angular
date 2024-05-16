@@ -49,17 +49,17 @@ export class SummaryPanelComponent implements OnInit {
       return
     }
 
-    if (event && (event.key === 'Enter' || event.key === ' ')) {
-      this._window.open(url, '_blank')
-    } else if (!event) {
+    if (event) {
+      if (event.key === 'Enter' || event.key === ' ') {
+        this._window.open(url, '_blank')
+      }
+    } else {
       this._window.open(url, '_blank')
     }
   }
   goToActivitySection(activitySection: string, event?: KeyboardEvent) {
-    if (event && (event.key === 'Enter' || event.key === ' ')) {
-      this.standaloneMode
-        ? this.goToUrl(this.url, event)
-        : RecordUtil.scrollTo(activitySection, event)
-    }
+    this.standaloneMode
+      ? this.goToUrl(this.url, event)
+      : RecordUtil.scrollTo(activitySection, event)
   }
 }

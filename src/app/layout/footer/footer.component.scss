@@ -29,11 +29,11 @@ footer.mobile {
   height: auto;
 
   a {
-    margin-left: 12px;
+    margin-left: 16px;
 
     [dir] :host & {
       margin-left: auto;
-      margin-right: 12px;
+      margin-right: 16px;
     }
 
     img {
@@ -62,7 +62,6 @@ footer.mobile {
 .public-domain {
   img {
     object-fit: cover;
-    width: 80px;
     height: 32px;
     margin-right: 8px;
   }
@@ -108,7 +107,7 @@ a:focus {
 .links {
   a {
     cursor: pointer;
-    padding: 7px 18px;
+    padding: 8px 16px !important;
   }
 }
 
