@@ -98,15 +98,22 @@ export class RecordUtil {
     const targetElement = document.getElementById(activitySection)
 
     if (targetElement) {
-      if ((event && event.key === 'Enter') || event.key === ' ') {
+      if (event) {
+        if (event.key === 'Enter' || event.key === ' ') {
+          targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+          })
+
+          targetElement.setAttribute('tabindex', '-1')
+          targetElement.focus()
+          targetElement.removeAttribute('tabindex')
+        }
+      } else {
         targetElement.scrollIntoView({
           behavior: 'smooth',
           block: 'start',
         })
-
-        targetElement.setAttribute('tabindex', '-1')
-        targetElement.focus()
-        targetElement.removeAttribute('tabindex')
       }
     }
   }
