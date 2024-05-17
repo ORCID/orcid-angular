@@ -68,7 +68,9 @@ export class HeaderComponent implements OnInit {
     })
     _router.events.subscribe(() => {
       const path = location.path()
-      this.signinRegisterButton = path !== `/${ApplicationRoutes.signin}` && path !== `/${ApplicationRoutes.register}`
+      this.signinRegisterButton =
+        path !== `/${ApplicationRoutes.signin}` &&
+        path !== `/${ApplicationRoutes.register}`
       this.hideMainMenu = path.indexOf(`/${ApplicationRoutes.home}`) !== -1
     })
   }

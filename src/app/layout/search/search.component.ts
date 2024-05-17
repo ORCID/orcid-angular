@@ -68,8 +68,7 @@ export class SearchComponent implements OnInit {
       () =>
         (this.signinRegisterButton =
           this.location.path() !== `/${ApplicationRoutes.signin}` &&
-          this.location.path() !== `/${ApplicationRoutes.register}`
-        )
+          this.location.path() !== `/${ApplicationRoutes.register}`)
     )
   }
 
