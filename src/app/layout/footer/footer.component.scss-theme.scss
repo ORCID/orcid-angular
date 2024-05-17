@@ -13,6 +13,10 @@
       color: mat.get-color-from-palette($primary, 500) !important;
       font-weight: normal !important;
     }
+    .social {
+      filter: invert(9%) sepia(9%) saturate(8%) hue-rotate(323deg)
+        brightness(96%) contrast(89%);
+    }
   }
 }
 @include footer-theme($orcid-app-theme);

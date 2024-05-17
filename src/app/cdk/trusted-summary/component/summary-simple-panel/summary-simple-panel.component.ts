@@ -48,9 +48,12 @@ export class SummarySimplePanelComponent implements OnInit {
     if (!url) {
       return
     }
-    if ((event && event.key === 'Enter') || event.key === ' ') {
-      this._window.open(url, '_blank')
-    } else if (!event) {
+
+    if (event) {
+      if (event.key === 'Enter' || event.key === ' ') {
+        this._window.open(url, '_blank')
+      }
+    } else {
       this._window.open(url, '_blank')
     }
   }

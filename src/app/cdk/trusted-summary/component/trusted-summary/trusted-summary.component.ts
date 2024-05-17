@@ -246,14 +246,23 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
   }
   goToActivitySection(activitySection: string, event?: KeyboardEvent) {
     this.standaloneMode
-      ? this.navigateTo(activitySection)
+      ? this.navigateTo(activitySection, event)
       : RecordUtil.scrollTo(activitySection, event)
   }
-  navigateTo(activitySection: string) {
-    this._window.open(
-      `${this.trustedSummary.orcid}#${activitySection}`,
-      '_blank'
-    )
+  navigateTo(activitySection: string, event?: KeyboardEvent) {
+    if (event) {
+      if (event.key === 'Enter' || event.key === ' ') {
+        this._window.open(
+          `${this.trustedSummary.orcid}#${activitySection}`,
+          '_blank'
+        )
+      }
+    } else {
+      this._window.open(
+        `${this.trustedSummary.orcid}#${activitySection}`,
+        '_blank'
+      )
+    }
   }
 
   private getAriaLabelSection(section: string): string {

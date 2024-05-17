@@ -1,3 +1,11 @@
+## v2.98.4 - 2024-05-16
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.98.3...v2.98.4)
+
+### Fix
+
+- Modify scrollTo and navigateTo method to fix accesibility and fix accessibility styling footer
+
 ## v2.98.3 - 2024-05-15
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.98.2...v2.98.3)
