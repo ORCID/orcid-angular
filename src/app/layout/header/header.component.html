@@ -1,17 +1,15 @@
 <header role="presentation" class="container">
   <div class="row end">
-    <div class="col l5 m8 s4 middle logo-menu-container" role="banner">
-      <a routerLink="/" class="logo-container" [attr.aria-label]="labelLogo">
+    <div class="col l5 m8 s4 middle logo-menu-container no-gutters" role="banner">
+      <a routerLink="/" class="logo-container" [attr.aria-label]="'Orcid home' + labelLogo">
         <img
           src="./assets/vectors/orcid.logo.svg"
           alt="orcid logo"
-          role="link"
           id="home-logo"
-          aria-label="Home"
         />
         <div
           role="link"
-          class="mat-body-2"
+          class="orc-font-body-small"
           *ngIf="platform.columns12"
           i18n="
             #sentenceCase@@confirm-oauth-access.connectingresearchandresearchers"
@@ -28,7 +26,7 @@
             ></app-language>
           </div>
           <div *ngIf="!mobileMenuState" class="col no-gutters">
-            <app-user-menu></app-user-menu>
+            <!-- <app-user-menu></app-user-menu> -->
           </div>
 
           <app-menu-icon
@@ -120,7 +118,7 @@
             signinRegisterButton
           "
         >
-          <button
+          <!-- <button
             mat-stroked-button
             class="sign-in-button"
             (click)="goto('signin')"
@@ -129,7 +127,7 @@
             >/<ng-container i18n="#upperCase@@header.register"
               >REGISTER</ng-container
             >
-          </button>
+          </button> -->
         </li>
         <li
           class="col no-gutters"

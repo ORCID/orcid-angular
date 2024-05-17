@@ -38,7 +38,7 @@ export class HeaderComponent implements OnInit {
   user: UserInfo
   togglz: Config
   signinRegisterButton = true
-  labelLogo = $localize`:@@layout.ariaLabelLogo:orcid mini logo`
+  labelLogo = $localize`:@@layout.ariaLabelConnectingResearchers:Connecting research and researchers`
   labelMenu = $localize`:@@layout.ariaLabelMenu:main menu`
 
   constructor(
@@ -68,7 +68,7 @@ export class HeaderComponent implements OnInit {
     })
     _router.events.subscribe(() => {
       const path = location.path()
-      this.signinRegisterButton = path !== `/${ApplicationRoutes.signin}`
+      this.signinRegisterButton = path !== `/${ApplicationRoutes.signin}` && path !== `/${ApplicationRoutes.register}`
       this.hideMainMenu = path.indexOf(`/${ApplicationRoutes.home}`) !== -1
     })
   }

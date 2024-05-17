@@ -31,7 +31,7 @@ export class SearchComponent implements OnInit {
     $localize`:@@layout.public-layout.registry:registry`
   )
   searchPlaceHolder = this.firstLetterUppercase(
-    $localize`:@@ngOrcid.search:Search...`
+    $localize`:@@layout.ariaLabelSearchRegistry:Search the ORCID registry...`
   )
   whatToSearch: string
   constructor(
@@ -67,7 +67,9 @@ export class SearchComponent implements OnInit {
     this.router.events.subscribe(
       () =>
         (this.signinRegisterButton =
-          this.location.path() !== `/${ApplicationRoutes.signin}`)
+          this.location.path() !== `/${ApplicationRoutes.signin}` &&
+          this.location.path() !== `/${ApplicationRoutes.register}`
+        )
     )
   }
 
