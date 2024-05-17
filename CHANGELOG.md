@@ -1,3 +1,11 @@
+## v2.98.5 - 2024-05-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.98.4...v2.98.5)
+
+### Fix
+
+- Update styling and accessibility to header
+
 ## v2.98.4 - 2024-05-16
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.98.3...v2.98.4)
