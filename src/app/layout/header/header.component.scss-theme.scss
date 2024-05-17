@@ -11,7 +11,7 @@
 
   .container {
     .logo-container {
-      color: mat.get-color-from-palette($accent, '200-contrast');
+        color: map-get($foreground, 'brand-logo-grey') !important;
     }
   }
   .top-bar {
