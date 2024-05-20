@@ -4,6 +4,7 @@ import { takeUntil } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { RecordUtil } from 'src/app/shared/utils/record.util'
+import { TrustedSummary } from 'src/app/types/trust-summary'
 
 export interface SimpleActivityModel {
   verified?: boolean
@@ -24,8 +25,6 @@ export interface SimpleActivityModel {
   ],
 })
 export class SummarySimplePanelComponent implements OnInit {
-  validatedSourceAriaLabel = $localize`:@@summary.validatedSource:Validated source`
-  selfAssertedSource = $localize`:@@summary.selfAssertedSource:Self-asserted source`
   @Input() simpleActivities: SimpleActivityModel[] = []
   @Input() count: number = 0
   @Input() moreLabel: string = ''
@@ -34,15 +33,29 @@ export class SummarySimplePanelComponent implements OnInit {
   @Input() overflowUrl: string = ''
   @Input() standaloneMode: boolean
   @Input() activitySection: string
+  @Input() trustedSummary: TrustedSummary
 
   unsubscribe = new Subject()
   mobile: boolean
   acitivityCountOverflow = false
+  ariaLabelActivitySection: string
+
+  validatedSourceAriaLabel = $localize`:@@summary.validatedSource:Validated source`
+  selfAssertedSource = $localize`:@@summary.selfAssertedSource:Self-asserted source`
+
   constructor(@Inject(WINDOW) private _window: Window) {}
 
   ngOnInit(): void {
     this.acitivityCountOverflow = this.simpleActivities.length > 3
     this.simpleActivities = this.simpleActivities.slice(0, 3)
+
+    if (this.standaloneMode) {
+      if (this.count - 3 > 1) {
+        this.ariaLabelActivitySection = RecordUtil.appendOpensInNewTab(this.moreLabel)
+      } else {
+        this.ariaLabelActivitySection = RecordUtil.appendOpensInNewTab(this.moreLabelSingular)
+      }
+    }
   }
   goToUrl(url?: string, event?: KeyboardEvent) {
     if (!url) {

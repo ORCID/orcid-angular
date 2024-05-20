@@ -77,6 +77,7 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
   modifiedToday: boolean
   creationDateWithOffset: any
   lastUpdateDate: any
+  loading = false
 
   constructor(
     private _trustedSummary: TrustedSummaryService,
@@ -112,6 +113,8 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
 
     this._trustedSummary.getSummary(this.orcid).subscribe((data) => {
       this.trustedSummary = data
+      this.loading = true
+
       if (this.trustedSummary.creation) {
         this.creationDateWithOffset = this.dateWithOffset(
           this.trustedSummary.creation
@@ -266,6 +269,11 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
   }
 
   private getAriaLabelSection(section: string): string {
-    return `${section} ${this.trustedSummary.name} ${this.labelOrcidRecord}`
+    const ariaLabel = `${section} ${this.trustedSummary.name} ${this.labelOrcidRecord}`
+    if (this.standaloneMode) {
+      return RecordUtil.appendOpensInNewTab(ariaLabel)
+    }
+    return ariaLabel
   }
+
 }

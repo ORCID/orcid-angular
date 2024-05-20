@@ -334,6 +334,8 @@
           [hoverEffect]="externalIdentifiersHover"
           [standaloneMode]="standaloneMode"
           [activitySection]="'other-identifiers'"
+          [trustedSummary]="trustedSummary"
+          *ngIf="!trustedSummary"
         ></app-summary-simple-panel>
       </ng-container>
     </div>
