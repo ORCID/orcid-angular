@@ -10,7 +10,6 @@
   footer {
     background-color: map-get($background, light-grey);
     a {
-      color: mat.get-color-from-palette($primary, 500) !important;
       font-weight: normal !important;
     }
     .social {

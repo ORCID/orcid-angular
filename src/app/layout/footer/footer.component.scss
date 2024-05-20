@@ -107,19 +107,20 @@ a:focus {
 .links {
   a {
     cursor: pointer;
-    padding: 8px 16px !important;
+    padding: 0 !important;
+    margin: 8px 16px !important;
   }
 }
 
 .links.mobile {
   a {
-    padding: 7px 10px !important;
+    margin: 7px 10px !important;
   }
 }
 
 .links.tablet {
   a {
-    padding: 7px 15px !important;
+    margin: 7px 15px !important;
   }
 }
 
