@@ -33,7 +33,7 @@
             ></app-language>
           </div>
           <div *ngIf="!mobileMenuState" class="col no-gutters">
-            <!-- <app-user-menu></app-user-menu> -->
+            <app-user-menu></app-user-menu>
           </div>
 
           <app-menu-icon
@@ -125,16 +125,16 @@
             signinRegisterButton
           "
         >
-          <!-- <button
+          <button
             mat-stroked-button
             class="sign-in-button"
             (click)="goto('signin')"
           >
-            <ng-container i18n="#upperCase@@header.signin">SIGN IN</ng-container
-            >/<ng-container i18n="#upperCase@@header.register"
-              >REGISTER</ng-container
+            <ng-container i18n="@@header.signin">Sign in</ng-container
+            >&nbsp;/&nbsp;<ng-container i18n="@@header.register"
+              >Register</ng-container
             >
-          </button> -->
+          </button>
         </li>
         <li
           class="col no-gutters"
