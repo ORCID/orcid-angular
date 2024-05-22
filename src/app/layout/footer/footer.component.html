@@ -111,23 +111,27 @@
         class="CC0 orc-font-body-small"
         [ngClass]="{ 'col desktop': isDesktop }"
       >
-        <div [ngClass]="{ 'row mobile': !isDesktop }">
+        <div class='row mobile' *ngIf="!isDesktop">
           <img src="./assets/vectors/cc-zero.svg" alt="public domain" />
         </div>
-        <ng-container i18n="@@footer.copyright_cc0_1"
-          >The text of this website is published under a</ng-container
-        >&nbsp;<a
-          i18n="@@ngOrcid.copyright"
-          href="http://creativecommons.org/publicdomain/zero/1.0/"
-          rel="license noreferrer"
-          target="footer.copyright_cc0"
-          class="mat-button-font underline"
-          [attr.aria-label]="'CC0' + license"
-          >CC0 license.</a
-        >&nbsp;<ng-container i18n="@@footer.copyright_cc0_3"
-          >Images and marks are subject to copyright and trademark
-          protection</ng-container
-        ><ng-container i18n="@@common.period">.</ng-container>
+        <p>
+          <img src="./assets/vectors/cc-zero.svg" alt="public domain" *ngIf="isDesktop"/>
+
+          <ng-container i18n="@@footer.copyright_cc0_1"
+            >The text of this website is published under a</ng-container
+          >&nbsp;<a
+            i18n="@@ngOrcid.copyright"
+            href="http://creativecommons.org/publicdomain/zero/1.0/"
+            rel="license noreferrer"
+            target="footer.copyright_cc0"
+            class="mat-button-font underline"
+            [attr.aria-label]="'CC0' + license"
+            >CC0 license.</a
+          >&nbsp;<ng-container i18n="@@footer.copyright_cc0_3"
+            >Images and marks are subject to copyright and trademark
+            protection</ng-container
+          ><ng-container i18n="@@common.period">.</ng-container>
+        </p>
       </div>
     </div>
     <div

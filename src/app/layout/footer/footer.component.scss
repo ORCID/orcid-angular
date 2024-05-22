@@ -60,10 +60,15 @@ footer.mobile {
 }
 
 .public-domain {
+  p {
+    margin: 0;
+  }
+
   img {
     object-fit: cover;
     height: 32px;
     margin-right: 8px;
+    vertical-align: middle;
   }
 
   .CC0 {
@@ -73,7 +78,6 @@ footer.mobile {
   .desktop {
     display: flex;
     align-items: center;
-    height: 32px;
   }
 
   .mobile {
