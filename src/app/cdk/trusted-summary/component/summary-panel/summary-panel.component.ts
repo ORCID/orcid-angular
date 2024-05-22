@@ -19,6 +19,7 @@ export class SummaryPanelComponent implements OnInit {
   @Input() count: number = 0
   @Input() moreLabel: string = ''
   @Input() moreLabelSingular: string = ''
+  @Input() ariaLabelActivitySection: string = ''
   @Input() showToPresent = true
   @Input() hoverEffect = false
   @Input() standaloneMode: boolean
@@ -29,7 +30,6 @@ export class SummaryPanelComponent implements OnInit {
 
   validatedSourceAriaLabel = $localize`:@@summary.validatedSource:Validated source`
   selftAssertedSource = $localize`:@@summary.selfAssertedSource:Self-asserted source`
-  ariaLabelMore: string
 
   constructor(@Inject(WINDOW) private _window: Window) {}
 
@@ -44,14 +44,6 @@ export class SummaryPanelComponent implements OnInit {
       this.activitiesToDisplay = this.activitySummary.slice(0, 3)
 
       this.acitivityCountOverflow = this.count > 3
-
-      if (this.standaloneMode) {
-        if (this.count - 3 > 1) {
-          this.ariaLabelMore = RecordUtil.appendOpensInNewTab(this.moreLabel)
-        } else {
-          this.ariaLabelMore = RecordUtil.appendOpensInNewTab(this.moreLabelSingular)
-        }
-      }
     }
   }
   goToUrl(url: string, event?: KeyboardEvent) {

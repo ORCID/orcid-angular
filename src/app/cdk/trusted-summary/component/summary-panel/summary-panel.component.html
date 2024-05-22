@@ -118,7 +118,7 @@
       tabindex="0"
       (click)="goToActivitySection(activitySection)"
       (keydown)="goToActivitySection(activitySection, $event)"
-      [attr.aria-label]="ariaLabelMore"
+      [attr.aria-label]="ariaLabelActivitySection"
       >+ {{ count - 3 }}
       <ng-container *ngIf="count - 3 === 1">{{
         moreLabelSingular
