@@ -1,3 +1,15 @@
+## v2.98.6 - 2024-05-22
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.98.5...v2.98.6)
+
+- [#2262](https://github.com/ORCID/orcid-angular/pull/2262): fix: Add aria-label `opens in a new tab` to link in record summary to enhance accessibility
+- [#2263](https://github.com/ORCID/orcid-angular/pull/2263): style: Update color in footer links texts and override margin from onetrust cookie button
+
+### Fix
+
+- Improve social icons accessibility text
+- Add aria-label `opens in a new tab` to link in record summary to enhance accessibility
+
 ## v2.98.5 - 2024-05-17
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.98.4...v2.98.5)
