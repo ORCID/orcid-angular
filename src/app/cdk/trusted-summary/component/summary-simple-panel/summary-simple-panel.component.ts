@@ -29,6 +29,7 @@ export class SummarySimplePanelComponent implements OnInit {
   @Input() count: number = 0
   @Input() moreLabel: string = ''
   @Input() moreLabelSingular: string = ''
+  @Input() ariaLabelActivitySection: string = ''
   @Input() hoverEffect = false
   @Input() overflowUrl: string = ''
   @Input() standaloneMode: boolean
@@ -38,7 +39,6 @@ export class SummarySimplePanelComponent implements OnInit {
   unsubscribe = new Subject()
   mobile: boolean
   acitivityCountOverflow = false
-  ariaLabelActivitySection: string
 
   validatedSourceAriaLabel = $localize`:@@summary.validatedSource:Validated source`
   selfAssertedSource = $localize`:@@summary.selfAssertedSource:Self-asserted source`
@@ -49,13 +49,6 @@ export class SummarySimplePanelComponent implements OnInit {
     this.acitivityCountOverflow = this.simpleActivities.length > 3
     this.simpleActivities = this.simpleActivities.slice(0, 3)
 
-    if (this.standaloneMode) {
-      if (this.count - 3 > 1) {
-        this.ariaLabelActivitySection = RecordUtil.appendOpensInNewTab(this.moreLabel)
-      } else {
-        this.ariaLabelActivitySection = RecordUtil.appendOpensInNewTab(this.moreLabelSingular)
-      }
-    }
   }
   goToUrl(url?: string, event?: KeyboardEvent) {
     if (!url) {

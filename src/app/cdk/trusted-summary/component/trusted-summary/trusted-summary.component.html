@@ -138,6 +138,7 @@
           [count]="trustedSummary.employmentAffiliationsCount"
           [moreLabel]="labelMoreAffiliations"
           [moreLabelSingular]="labelMoreAffiliation"
+          [ariaLabelActivitySection]="ariaLabelAffiliations"
           [hoverEffect]="affiliationsHover"
           [standaloneMode]="standaloneMode"
           [activitySection]="'affiliations'"
@@ -305,6 +306,7 @@
           [count]="trustedSummary.professionalActivitiesCount"
           [moreLabel]="labelMoreProfessionalActivities"
           [moreLabelSingular]="labelMoreProfessionalActivitie"
+          [ariaLabelActivitySection]="ariaLabelProfessionalActivities"
           [standaloneMode]="standaloneMode"
           [activitySection]="'professional-activities'"
         ></app-summary-panel>
@@ -331,6 +333,7 @@
           [overflowUrl]="trustedSummary?.orcid + '#other-identifiers'"
           [moreLabel]="labelMoreOtherIdentifiers"
           [moreLabelSingular]="labelMoreOtherIdentifier"
+          [ariaLabelActivitySection]="ariaLabelIdentifiers"
           [hoverEffect]="externalIdentifiersHover"
           [standaloneMode]="standaloneMode"
           [activitySection]="'other-identifiers'"
