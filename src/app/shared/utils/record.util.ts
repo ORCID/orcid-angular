@@ -117,4 +117,8 @@ export class RecordUtil {
       }
     }
   }
+
+  static appendOpensInNewTab(ariaLabel: string): string {
+    return `${ariaLabel} ${$localize`:@@shared.opensInNewTab:(opens in a new tab)`}`
+  }
 }

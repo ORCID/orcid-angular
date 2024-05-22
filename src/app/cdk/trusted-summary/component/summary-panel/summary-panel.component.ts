@@ -14,8 +14,6 @@ import { ActivitySummary } from 'src/app/types/trust-summary'
   preserveWhitespaces: true,
 })
 export class SummaryPanelComponent implements OnInit {
-  validatedSourceAriaLabel = $localize`:@@summary.validatedSource:Validated source`
-  selftAssertedSource = $localize`:@@summary.selfAssertedSource:Self-asserted source`
   @Input() activitySummary: ActivitySummary[]
   @Input() url: string = ''
   @Input() count: number = 0
@@ -28,6 +26,10 @@ export class SummaryPanelComponent implements OnInit {
   activitiesToDisplay: ActivitySummary[]
   acitivityCountOverflow: boolean
   unsubscribe = new Subject()
+
+  validatedSourceAriaLabel = $localize`:@@summary.validatedSource:Validated source`
+  selftAssertedSource = $localize`:@@summary.selfAssertedSource:Self-asserted source`
+  ariaLabelMore: string
 
   constructor(@Inject(WINDOW) private _window: Window) {}
 
@@ -42,6 +44,14 @@ export class SummaryPanelComponent implements OnInit {
       this.activitiesToDisplay = this.activitySummary.slice(0, 3)
 
       this.acitivityCountOverflow = this.count > 3
+
+      if (this.standaloneMode) {
+        if (this.count - 3 > 1) {
+          this.ariaLabelMore = RecordUtil.appendOpensInNewTab(this.moreLabel)
+        } else {
+          this.ariaLabelMore = RecordUtil.appendOpensInNewTab(this.moreLabelSingular)
+        }
+      }
     }
   }
   goToUrl(url: string, event?: KeyboardEvent) {

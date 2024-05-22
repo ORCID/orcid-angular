@@ -73,7 +73,10 @@
           </svg>
         </a>
       </div>
-      <div class="body-wrapper">
+      <div
+        class="body-wrapper"
+        aria-hidden="true"
+      >
         <caption class="orc-font-small-print">
           <ng-container *ngIf="activity.startDate">
             {{ activity.startDate }}
@@ -115,6 +118,7 @@
       tabindex="0"
       (click)="goToActivitySection(activitySection)"
       (keydown)="goToActivitySection(activitySection, $event)"
+      [attr.aria-label]="ariaLabelMore"
       >+ {{ count - 3 }}
       <ng-container *ngIf="count - 3 === 1">{{
         moreLabelSingular
