@@ -77,7 +77,7 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
   modifiedToday: boolean
   creationDateWithOffset: any
   lastUpdateDate: any
-  loading = false
+  loading = true
 
   constructor(
     private _trustedSummary: TrustedSummaryService,
@@ -113,7 +113,7 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
 
     this._trustedSummary.getSummary(this.orcid).subscribe((data) => {
       this.trustedSummary = data
-      this.loading = true
+      this.loading = false
 
       if (this.trustedSummary.creation) {
         this.creationDateWithOffset = this.dateWithOffset(
