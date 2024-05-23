@@ -1,3 +1,17 @@
+## v2.98.7 - 2024-05-23
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.98.6...v2.98.7)
+
+- [#2265](https://github.com/ORCID/orcid-angular/pull/2265): fix: Update text in sign in / register button and styling in orcid logo text color
+- [#2264](https://github.com/ORCID/orcid-angular/pull/2264): Fix/9256-qa-other-identifiers-not-displayed-in-record-summary
+
+### Fix
+
+- Update text in sign in / register button and styling in orcid logo text color
+- Update aria label in summary links
+- Open social link on new tab
+- Display identifiers in trusted summary
+
 ## v2.98.6 - 2024-05-22
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.98.5...v2.98.6)
