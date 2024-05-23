@@ -36,7 +36,9 @@ export class RecordHeaderComponent implements OnInit {
   @Input() newRecordHeaderWithSummaryTogglz: boolean
   _recordSummaryOpen: boolean
 
-  ariaLabelFindoutMore = RecordUtil.appendOpensInNewTab($localize`:@@summary.findOutMoreAboutRecordSummaries:Find out more about record summaries`)
+  ariaLabelFindoutMore = RecordUtil.appendOpensInNewTab(
+    $localize`:@@summary.findOutMoreAboutRecordSummaries:Find out more about record summaries`
+  )
 
   @Input()
   set recordSummaryOpen(value: boolean) {

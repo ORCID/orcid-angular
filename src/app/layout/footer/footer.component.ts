@@ -18,7 +18,9 @@ export class FooterComponent implements OnInit {
   isTablet = false
   isMobile = false
 
-  license = RecordUtil.appendOpensInNewTab($localize`:@@footer.ariaLabelLicense:license`)
+  license = RecordUtil.appendOpensInNewTab(
+    $localize`:@@footer.ariaLabelLicense:license`
+  )
   linkedin = RecordUtil.appendOpensInNewTab('Linkedin')
   facebook = RecordUtil.appendOpensInNewTab('Facebook')
   mastodon = RecordUtil.appendOpensInNewTab('Mastodon')
@@ -27,7 +29,6 @@ export class FooterComponent implements OnInit {
   rss = RecordUtil.appendOpensInNewTab('RSS')
   github = RecordUtil.appendOpensInNewTab('Github')
   twitter = RecordUtil.appendOpensInNewTab('Twitter')
-
 
   constructor(
     _platformInfo: PlatformInfoService,

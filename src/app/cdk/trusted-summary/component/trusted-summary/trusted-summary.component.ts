@@ -275,5 +275,4 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
     }
     return ariaLabel
   }
-
 }
