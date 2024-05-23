@@ -19,52 +19,84 @@
         >
           <img src="./assets/vectors/orcid.logo.svg" alt="Orcid" />
         </a>
-        <a href="https://www.linkedin.com/company/orcid">
+        <a
+          href="https://www.linkedin.com/company/orcid"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <img
             src="./assets/vectors/social/Linkedin.svg"
             class="social"
             alt="{{linkedin}}"
           />
         </a>
-        <a href="https://www.facebook.com/ORCID.org">
+        <a
+          href="https://www.facebook.com/ORCID.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <img
             src="./assets/vectors/social/Facebook.svg"
             class="social"
             alt="{{facebook}}"
           />
         </a>
-        <a href="https://scicomm.xyz/@ORCID_Org">
+        <a
+          href="https://scicomm.xyz/@ORCID_Org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <img
             src="./assets/vectors/social/Mastodon.svg"
             class="social"
             alt="{{mastodon}}"
           />
         </a>
-        <a href="https://vimeo.com/orcidvideos">
+        <a
+          href="https://vimeo.com/orcidvideos"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <img
             src="./assets/vectors/social/Vimeo.svg"
             class="social"
             alt="{{vimeo}}"
           />
         </a>
-        <a href="https://www.youtube.com/@orcid_org">
+        <a
+          href="https://www.youtube.com/@orcid_org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <img
             src="./assets/vectors/social/Youtube.svg"
             class="social"
             alt="{{youtube}}"
           />
         </a>
-        <a href="{{ infoSiteBaseUrl }}blog/feed" class="social">
+        <a
+          href="{{ infoSiteBaseUrl }}blog/feed"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <img src="./assets/vectors/social/RSS.svg" class="social" alt="Rss" />
         </a>
-        <a href="https://github.com/ORCID" class="social">
+        <a
+          href="https://github.com/ORCID"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <img
             src="./assets/vectors/social/Github.svg"
             class="social"
             alt="{{github}}"
           />
         </a>
-        <a href="https://twitter.com/orcid_org">
+        <a
+          href="https://twitter.com/orcid_org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <img
             src="./assets/vectors/social/Twitter.svg"
             class="social"
@@ -79,23 +111,27 @@
         class="CC0 orc-font-body-small"
         [ngClass]="{ 'col desktop': isDesktop }"
       >
-        <div [ngClass]="{ 'row mobile': !isDesktop }">
+        <div class='row mobile' *ngIf="!isDesktop">
           <img src="./assets/vectors/cc-zero.svg" alt="public domain" />
         </div>
-        <ng-container i18n="@@footer.copyright_cc0_1"
-          >The text of this website is published under a</ng-container
-        >&nbsp;<a
-          i18n="@@ngOrcid.copyright"
-          href="http://creativecommons.org/publicdomain/zero/1.0/"
-          rel="license noreferrer"
-          target="footer.copyright_cc0"
-          class="mat-button-font underline"
-          [attr.aria-label]="'CC0' + license"
-          >CC0 license.</a
-        >&nbsp;<ng-container i18n="@@footer.copyright_cc0_3"
-          >Images and marks are subject to copyright and trademark
-          protection</ng-container
-        ><ng-container i18n="@@common.period">.</ng-container>
+        <p>
+          <img src="./assets/vectors/cc-zero.svg" alt="public domain" *ngIf="isDesktop"/>
+
+          <ng-container i18n="@@footer.copyright_cc0_1"
+            >The text of this website is published under a</ng-container
+          >&nbsp;<a
+            i18n="@@ngOrcid.copyright"
+            href="http://creativecommons.org/publicdomain/zero/1.0/"
+            rel="license noreferrer"
+            target="footer.copyright_cc0"
+            class="mat-button-font underline"
+            [attr.aria-label]="'CC0' + license"
+            >CC0 license.</a
+          >&nbsp;<ng-container i18n="@@footer.copyright_cc0_3"
+            >Images and marks are subject to copyright and trademark
+            protection</ng-container
+          ><ng-container i18n="@@common.period">.</ng-container>
+        </p>
       </div>
     </div>
     <div
