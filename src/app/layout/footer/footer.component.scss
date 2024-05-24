@@ -1,5 +1,13 @@
 footer {
-  padding-bottom: 16px;
+  padding: 64px 32px;
+}
+
+footer.mobile {
+  padding: 64px 16px !important;
+}
+
+.container {
+  gap: 32px;
 }
 
 .columns-8,
@@ -18,60 +26,69 @@ footer {
 }
 
 .logo.row {
-  height: 35px;
-  padding-top: 24px;
-  padding-bottom: 16px;
-
-  > .col {
-    width: 290px;
-  }
+  height: auto;
 
   a {
-    margin-left: 12px;
+    margin-left: 16px;
 
     [dir] :host & {
       margin-left: auto;
-      margin-right: 12px;
+      margin-right: 16px;
     }
 
     img {
-      height: 41px;
+      height: 40px;
       width: auto;
       object-fit: cover;
     }
 
     img.social {
-      height: 24px;
+      height: 32px;
     }
+  }
+
+  .mobile {
+    a {
+      margin-right: 8px !important;
+    }
+  }
+
+  .orcid-logo-mobile {
+    justify-content: center;
+    padding-bottom: 32px;
   }
 }
 
 .public-domain {
+  p {
+    margin: 0;
+  }
+
   img {
     object-fit: cover;
-    width: 80px;
-    height: 15px;
+    height: 32px;
     margin-right: 8px;
-
-    [dir] :host & {
-      margin-right: auto;
-      margin-left: 8px;
-    }
+    vertical-align: middle;
   }
 
   .CC0 {
     text-align: center;
+  }
 
-    .columns-4 :host &,
-    .columns-8 :host & {
-      padding-bottom: 15px;
-    }
+  .desktop {
+    display: flex;
+    align-items: center;
+  }
+
+  .mobile {
+    justify-content: center;
+    padding-bottom: 8px;
   }
 }
 
 .links {
   > .url-lists {
-    justify-content: space-around;
+    justify-content: center;
 
     a {
       .columns-4 :host &,
@@ -94,7 +111,20 @@ a:focus {
 .links {
   a {
     cursor: pointer;
-    padding: 7px 20px;
+    padding: 0 !important;
+    margin: 8px 16px !important;
+  }
+}
+
+.links.mobile {
+  a {
+    margin: 7px 10px !important;
+  }
+}
+
+.links.tablet {
+  a {
+    margin: 7px 15px !important;
   }
 }
 

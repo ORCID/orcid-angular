@@ -6,7 +6,9 @@
   <ng-container *ngFor="let activity of activitiesToDisplay; last as isLast">
     <div
       class="activity-container"
+      tabindex="{{ activity.url ? 0 : -1 }}"
       (click)="goToUrl(activity.url)"
+      (keydown)="goToUrl(activity.url, $event)"
       [ngClass]="{
         'with-border': !isLast || acitivityCountOverflow,
         'padding-botton': !isLast || acitivityCountOverflow
@@ -71,7 +73,7 @@
           </svg>
         </a>
       </div>
-      <div class="body-wrapper">
+      <div class="body-wrapper" aria-hidden="true">
         <caption class="orc-font-small-print">
           <ng-container *ngIf="activity.startDate">
             {{ activity.startDate }}
@@ -110,7 +112,10 @@
     <a
       class="underline orc-font-body-small"
       rel="noopener noreferrer"
+      tabindex="0"
       (click)="goToActivitySection(activitySection)"
+      (keydown)="goToActivitySection(activitySection, $event)"
+      [attr.aria-label]="ariaLabelActivitySection"
       >+ {{ count - 3 }}
       <ng-container *ngIf="count - 3 === 1">{{
         moreLabelSingular

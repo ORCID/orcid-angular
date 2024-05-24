@@ -116,10 +116,13 @@
     >
       <ng-container *ngIf="trustedSummary.employmentAffiliations?.length">
         <a
+          tabindex="0"
           rel="noopener noreferrer"
           (mouseenter)="affiliationsHover = true"
           (mouseleave)="affiliationsHover = false"
           (click)="goToActivitySection('affiliations')"
+          (keydown)="goToActivitySection('affiliations', $event)"
+          [attr.aria-label]="ariaLabelAffiliations"
         >
           <h3
             class="orc-font-small-print"
@@ -135,6 +138,7 @@
           [count]="trustedSummary.employmentAffiliationsCount"
           [moreLabel]="labelMoreAffiliations"
           [moreLabelSingular]="labelMoreAffiliation"
+          [ariaLabelActivitySection]="ariaLabelAffiliations"
           [hoverEffect]="affiliationsHover"
           [standaloneMode]="standaloneMode"
           [activitySection]="'affiliations'"
@@ -193,10 +197,13 @@
     >
       <ng-container *ngIf="works?.length">
         <a
+          tabindex="0"
           rel="noopener noreferrer"
           (mouseenter)="worksHover = true"
           (mouseleave)="worksHover = false"
           (click)="goToActivitySection('works')"
+          (keydown)="goToActivitySection('works', $event)"
+          [attr.aria-label]="ariaLabelWorks"
         >
           <h3
             class="orc-font-small-print"
@@ -215,16 +222,19 @@
       </ng-container>
       <ng-container *ngIf="peerReviews?.length">
         <a
+          tabindex="0"
           rel="noopener noreferrer"
           (mouseenter)="peerReviewsHover = true"
           (mouseleave)="peerReviewsHover = false"
           (click)="goToActivitySection('peer-reviews')"
+          (keydown)="goToActivitySection('peer-reviews', $event)"
+          [attr.aria-label]="ariaLabelPeerReviews"
         >
           <h3
+            class="orc-font-small-print"
             [ngClass]="{
               'hover-effect': peerReviewsHover
             }"
-            class="orc-font-small-print"
             i18n="@@summary.peerReviews"
           >
             PEER REVIEWS
@@ -237,10 +247,13 @@
       </ng-container>
       <ng-container *ngIf="funds?.length">
         <a
+          tabindex="0"
           rel="noopener noreferrer"
           (mouseenter)="fundsHover = true"
           (mouseleave)="fundsHover = false"
           (click)="goToActivitySection('funding')"
+          (keydown)="goToActivitySection('funding', $event)"
+          [attr.aria-label]="ariaLabelFundings"
         >
           <h3
             class="orc-font-small-print"
@@ -268,10 +281,12 @@
     >
       <ng-container *ngIf="trustedSummary.professionalActivities?.length">
         <a
+          tabindex="0"
           rel="noopener noreferrer"
           (mouseenter)="professionalActivitiesHover = true"
           (mouseleave)="professionalActivitiesHover = false"
           (click)="goToActivitySection('professional-activities')"
+          (keydown)="goToActivitySection('professional-activities', $event)"
         >
           <h3
             class="orc-font-small-print"
@@ -279,6 +294,7 @@
             [ngClass]="{
               'hover-effect': professionalActivitiesHover
             }"
+            [attr.aria-label]="ariaLabelProfessionalActivities"
           >
             PROFESSIONAL ACTIVITIES
           </h3>
@@ -290,16 +306,18 @@
           [count]="trustedSummary.professionalActivitiesCount"
           [moreLabel]="labelMoreProfessionalActivities"
           [moreLabelSingular]="labelMoreProfessionalActivitie"
+          [ariaLabelActivitySection]="ariaLabelProfessionalActivities"
           [standaloneMode]="standaloneMode"
           [activitySection]="'professional-activities'"
         ></app-summary-panel>
       </ng-container>
       <ng-container *ngIf="externalIdentifiers?.length">
         <a
+          tabindex="0"
           rel="noopener noreferrer"
-          (mouseenter)="externalIdentifiersHover = true"
-          (mouseleave)="externalIdentifiersHover = false"
           (click)="goToActivitySection('other-identifiers')"
+          (keydown)="goToActivitySection('other-identifiers', $event)"
+          [attr.aria-label]="ariaLabelIdentifiers + +labelOrcidRecord"
         >
           <h3
             class="orc-font-small-print"
@@ -315,9 +333,12 @@
           [overflowUrl]="trustedSummary?.orcid + '#other-identifiers'"
           [moreLabel]="labelMoreOtherIdentifiers"
           [moreLabelSingular]="labelMoreOtherIdentifier"
+          [ariaLabelActivitySection]="ariaLabelIdentifiers"
           [hoverEffect]="externalIdentifiersHover"
           [standaloneMode]="standaloneMode"
           [activitySection]="'other-identifiers'"
+          [trustedSummary]="trustedSummary"
+          *ngIf="!loading"
         ></app-summary-simple-panel>
       </ng-container>
     </div>

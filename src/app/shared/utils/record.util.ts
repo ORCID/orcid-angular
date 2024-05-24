@@ -93,4 +93,32 @@ export class RecordUtil {
     }
     return false
   }
+
+  static scrollTo(activitySection: string, event?: KeyboardEvent) {
+    const targetElement = document.getElementById(activitySection)
+
+    if (targetElement) {
+      if (event) {
+        if (event.key === 'Enter' || event.key === ' ') {
+          targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+          })
+
+          targetElement.setAttribute('tabindex', '-1')
+          targetElement.focus()
+          targetElement.removeAttribute('tabindex')
+        }
+      } else {
+        targetElement.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        })
+      }
+    }
+  }
+
+  static appendOpensInNewTab(ariaLabel: string): string {
+    return `${ariaLabel} ${$localize`:@@shared.opensInNewTab:(opens in a new tab)`}`
+  }
 }
