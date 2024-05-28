@@ -33,7 +33,7 @@ export class WordpressService {
       )
       .pipe(
         catchError((error) => {
-          console.error('Primary URL failed, trying fallback URL:', error)
+          console.log('Primary URL failed, trying fallback URL:', error)
           return this.httpClient
             .get(fallbackUrl, { responseType: 'text' })
             .pipe(
