@@ -33,7 +33,6 @@ export class WordpressService {
       )
       .pipe(
         catchError((error) => {
-          console.log('Primary URL failed, trying fallback URL:', error)
           return this.httpClient
             .get(fallbackUrl, { responseType: 'text' })
             .pipe(
@@ -49,7 +48,6 @@ export class WordpressService {
         map((data: { html: string; url: string }) => {
           const find = './assets/'
           const regex = new RegExp(find, 'g')
-          console.log('html', data.html)
           const updatedHtml = data.html.replace(regex, data.url + '/assets/')
           return updatedHtml
         })
