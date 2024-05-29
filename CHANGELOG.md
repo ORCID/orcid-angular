@@ -1,3 +1,9 @@
+## v2.98.8 - 2024-05-28
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.98.7...v2.98.8)
+
+- [#2267](https://github.com/ORCID/orcid-angular/pull/2267): Lmendoza/enable homepage dynamic environment assets. 
+
 ## v2.98.7 - 2024-05-23
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.98.6...v2.98.7)

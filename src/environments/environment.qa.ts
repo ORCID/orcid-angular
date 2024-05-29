@@ -17,6 +17,7 @@ export const environment = {
   INSTITUTIONAL_AUTOCOMPLETE_DISPLAY_AMOUNT: 20,
   VERBOSE_SNACKBAR_ERRORS_REPORTS: true,
   WORDPRESS_S3: 'https://d3055hwma3riwo.cloudfront.net',
+  WORDPRESS_S3_FALLBACK: 'https://d1kh89kum7j2ji.cloudfront.net',
   LANGUAGE_MENU_OPTIONS: {
     ar: 'العربية',
     cs: 'Čeština',

@@ -15,7 +15,8 @@ export const environment = {
   HELP_HERO_ID: 'oYFQMrzFHA',
   INSTITUTIONAL_AUTOCOMPLETE_DISPLAY_AMOUNT: 20,
   VERBOSE_SNACKBAR_ERRORS_REPORTS: false,
-  WORDPRESS_S3: 'https://d3055hwma3riwo.cloudfront.net',
+  WORDPRESS_S3: 'https://d25yxmpntoa26z.cloudfront.net',
+  WORDPRESS_S3_FALLBACK: 'https://d1kh89kum7j2ji.cloudfront.net',
   LANGUAGE_MENU_OPTIONS: {
     ar: 'العربية',
     cs: 'Čeština',
