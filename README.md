@@ -74,7 +74,7 @@ The following commands are used to build the application for non-local environme
 - `yarn build:sandbox`
 - `yarn build:qa`
 - `yarn build:int`
-
+ 
 ## Learn more
 
 Please refer to the following documentation for more information:
