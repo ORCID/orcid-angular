@@ -9,6 +9,7 @@ import { Subject } from 'rxjs'
 import { RobotsMetaTagsService } from 'src/app/core/robots-meta-tags/robots-meta-tags.service'
 import { ZendeskService } from 'src/app/core/zendesk/zendesk.service'
 import { WINDOW } from 'src/app/cdk/window'
+import { RecordUtil } from 'src/app/shared/utils/record.util'
 
 @Component({
   selector: 'app-trusted-summary',
@@ -31,6 +32,13 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
   fundsHover = false
   externalIdentifiersHover = false
   professionalActivitiesHover = false
+  insideIframe: boolean
+  ariaLabelAffiliations: string
+  ariaLabelWorks: string
+  ariaLabelFundings: string
+  ariaLabelPeerReviews: string
+  ariaLabelProfessionalActivities: string
+  ariaLabelIdentifiers: string
 
   labelValidatedWorks = $localize`:@@summary.validatedWorks:Validated works`
   labelValidatedWork = $localize`:@@summary.validatedWork:Validated work`
@@ -47,10 +55,16 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
   labelMoreAffiliations = $localize`:@@summary.moreAffiliations:more Affiliations`
   labelMoreProfessionalActivities = $localize`:@@summary.moreProfessionalActivities:more Professional activities`
   labelMoreOtherIdentifiers = $localize`:@@summary.moreOtherIdentifiers:more Other Identifiers`
-  insideIframe: boolean
   labelMoreAffiliation = $localize`:@@summary.moreAffiliation:more Affiliation`
   labelMoreProfessionalActivitie = $localize`:@@summary.moreProfessionalActivitie:more Professional activity`
   labelMoreOtherIdentifier = $localize`:@@summary.moreOtherIdentifier:more Other Identifier`
+  labelOrcidRecord = $localize`:@@public-layout.my_orcid:ORCID Record`
+  labelViewAffiliations = $localize`:@@summary.viewAffiliations:View all affiliations in`
+  labelViewWorks = $localize`:@@summary.viewWorks:View all works in`
+  labelViewFundings = $localize`:@@summary.viewFundings:View all funding in`
+  labelViewPeerReviews = $localize`:@@summary.viewPeerReviews:View all peer reviews in`
+  labelViewProfessionalActivities = $localize`:@@summary.viewProfessionalActivities:View all professional activities in`
+  labelViewIdentifiers = $localize`:@@summary.viewIdentifiers:View all identifiers in`
 
   funds: SimpleActivityModel[] = []
   peerReviews: SimpleActivityModel[] = []
@@ -63,6 +77,7 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
   modifiedToday: boolean
   creationDateWithOffset: any
   lastUpdateDate: any
+  loading = true
 
   constructor(
     private _trustedSummary: TrustedSummaryService,
@@ -94,10 +109,12 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
         }
       })
     this.currentLocation = window.location.origin
-    this.orcid = this._router.url.split('/')[1]
+    this.orcid = this._router.url.split('/')[1].split('?')[0]
 
     this._trustedSummary.getSummary(this.orcid).subscribe((data) => {
       this.trustedSummary = data
+      this.loading = false
+
       if (this.trustedSummary.creation) {
         this.creationDateWithOffset = this.dateWithOffset(
           this.trustedSummary.creation
@@ -208,6 +225,20 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
       } else {
         this.oneColumn = true
       }
+      this.ariaLabelAffiliations = this.getAriaLabelSection(
+        this.labelViewAffiliations
+      )
+      this.ariaLabelWorks = this.getAriaLabelSection(this.labelViewWorks)
+      this.ariaLabelFundings = this.getAriaLabelSection(this.labelViewFundings)
+      this.ariaLabelPeerReviews = this.getAriaLabelSection(
+        this.labelViewPeerReviews
+      )
+      this.ariaLabelProfessionalActivities = this.getAriaLabelSection(
+        this.labelViewProfessionalActivities
+      )
+      this.ariaLabelIdentifiers = this.getAriaLabelSection(
+        this.labelViewIdentifiers
+      )
     })
   }
   dateWithOffset(creation: string): any {
@@ -216,18 +247,32 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
     const offsettedDate = new Date(date.getTime() + offset * 60 * 1000)
     return offsettedDate
   }
-  goToActivitySection(activitySection: string) {
+  goToActivitySection(activitySection: string, event?: KeyboardEvent) {
     this.standaloneMode
-      ? this.navigateTo(activitySection)
-      : this.scrollTo(activitySection)
+      ? this.navigateTo(activitySection, event)
+      : RecordUtil.scrollTo(activitySection, event)
   }
-  scrollTo(activitySection: string) {
-    document.querySelector(`#${activitySection}`).scrollIntoView()
+  navigateTo(activitySection: string, event?: KeyboardEvent) {
+    if (event) {
+      if (event.key === 'Enter' || event.key === ' ') {
+        this._window.open(
+          `${this.trustedSummary.orcid}#${activitySection}`,
+          '_blank'
+        )
+      }
+    } else {
+      this._window.open(
+        `${this.trustedSummary.orcid}#${activitySection}`,
+        '_blank'
+      )
+    }
   }
-  navigateTo(activitySection: string) {
-    this._window.open(
-      `${this.trustedSummary.orcid}#${activitySection}`,
-      '_blank'
-    )
+
+  private getAriaLabelSection(section: string): string {
+    const ariaLabel = `${section} ${this.trustedSummary.name} ${this.labelOrcidRecord}`
+    if (this.standaloneMode) {
+      return RecordUtil.appendOpensInNewTab(ariaLabel)
+    }
+    return ariaLabel
   }
 }

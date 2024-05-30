@@ -62,6 +62,7 @@
       visibility-everyone: $visibility-everyone,
       visibility-private: $visibility-private,
       visibility-trusted: $visibility-trusted,
+      brand-logo-grey: $brand-logo-grey,
     )
   );
   $result: map_merge(

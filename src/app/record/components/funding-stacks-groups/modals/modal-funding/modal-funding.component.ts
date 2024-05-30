@@ -675,6 +675,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
     this.fundingForm.get('city').markAsUntouched()
     this.fundingForm.get('region').markAsUntouched()
     this.fundingForm.get('country').markAsUntouched()
+    this.selectedOrganizationFromDatabase = undefined
     this.listenFormChanges()
   }
 

@@ -1,3 +1,107 @@
+## v2.98.9 - 2024-05-29
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.98.8...v2.98.9)
+
+## v2.98.8 - 2024-05-28
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.98.7...v2.98.8)
+
+- [#2267](https://github.com/ORCID/orcid-angular/pull/2267): Lmendoza/enable homepage dynamic environment assets.
+
+## v2.98.7 - 2024-05-23
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.98.6...v2.98.7)
+
+- [#2265](https://github.com/ORCID/orcid-angular/pull/2265): fix: Update text in sign in / register button and styling in orcid logo text color
+- [#2264](https://github.com/ORCID/orcid-angular/pull/2264): Fix/9256-qa-other-identifiers-not-displayed-in-record-summary
+
+### Fix
+
+- Update text in sign in / register button and styling in orcid logo text color
+- Update aria label in summary links
+- Open social link on new tab
+- Display identifiers in trusted summary
+
+## v2.98.6 - 2024-05-22
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.98.5...v2.98.6)
+
+- [#2262](https://github.com/ORCID/orcid-angular/pull/2262): fix: Add aria-label `opens in a new tab` to link in record summary to enhance accessibility
+- [#2263](https://github.com/ORCID/orcid-angular/pull/2263): style: Update color in footer links texts and override margin from onetrust cookie button
+
+### Fix
+
+- Improve social icons accessibility text
+- Add aria-label `opens in a new tab` to link in record summary to enhance accessibility
+
+## v2.98.5 - 2024-05-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.98.4...v2.98.5)
+
+### Fix
+
+- Update styling and accessibility to header
+
+## v2.98.4 - 2024-05-16
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.98.3...v2.98.4)
+
+### Fix
+
+- Modify scrollTo and navigateTo method to fix accesibility and fix accessibility styling footer
+
+## v2.98.3 - 2024-05-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.98.2...v2.98.3)
+
+### Fix
+
+- Update translation property name
+- Line breaks in translations properties
+
+## v2.98.2 - 2024-05-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.98.1...v2.98.2)
+
+### Feature
+
+- Add accessible smooth scroll and missing aria labels in summary
+
+## v2.98.1 - 2024-05-09
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.98.0...v2.98.1)
+
+- [#2257](https://github.com/ORCID/orcid-angular/pull/2257): Do not include query parameters in the ORCID id
+
+## v2.98.0 - 2024-05-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.97.0...v2.98.0)
+
+### Fix
+
+- Search form submit on touch devices (#2226)
+- Add accessibility dialog missing attributes
+
+## v2.97.0 - 2024-05-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.96.0...v2.97.0)
+
+## v2.96.0 - 2024-05-02
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.95.0...v2.96.0)
+
+### Fix
+
+- Remove organization data while clearing form
+
+## v2.95.0 - 2024-05-02
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.94.0...v2.95.0)
+
+## v2.94.0 - 2024-05-02
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.93.0...v2.94.0)
+
 ## v2.93.0 - 2024-04-30
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.92.0...v2.93.0)

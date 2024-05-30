@@ -1,6 +1,7 @@
 import { Component, Inject, Input, OnInit } from '@angular/core'
 import { Subject } from 'rxjs'
 import { WINDOW } from 'src/app/cdk/window'
+import { RecordUtil } from 'src/app/shared/utils/record.util'
 import { ActivitySummary } from 'src/app/types/trust-summary'
 
 @Component({
@@ -13,13 +14,12 @@ import { ActivitySummary } from 'src/app/types/trust-summary'
   preserveWhitespaces: true,
 })
 export class SummaryPanelComponent implements OnInit {
-  validatedSourceAriaLabel = $localize`:@@summary.validatedSource:Validated source`
-  selftAssertedSource = $localize`:@@summary.selfAssertedSource:Self-asserted source`
   @Input() activitySummary: ActivitySummary[]
   @Input() url: string = ''
   @Input() count: number = 0
   @Input() moreLabel: string = ''
   @Input() moreLabelSingular: string = ''
+  @Input() ariaLabelActivitySection: string = ''
   @Input() showToPresent = true
   @Input() hoverEffect = false
   @Input() standaloneMode: boolean
@@ -27,6 +27,9 @@ export class SummaryPanelComponent implements OnInit {
   activitiesToDisplay: ActivitySummary[]
   acitivityCountOverflow: boolean
   unsubscribe = new Subject()
+
+  validatedSourceAriaLabel = $localize`:@@summary.validatedSource:Validated source`
+  selftAssertedSource = $localize`:@@summary.selfAssertedSource:Self-asserted source`
 
   constructor(@Inject(WINDOW) private _window: Window) {}
 
@@ -43,18 +46,22 @@ export class SummaryPanelComponent implements OnInit {
       this.acitivityCountOverflow = this.count > 3
     }
   }
-  goToUrl(url?: string) {
+  goToUrl(url: string, event?: KeyboardEvent) {
     if (!url) {
       return
     }
-    this._window.open(url, '_blank')
+
+    if (event) {
+      if (event.key === 'Enter' || event.key === ' ') {
+        this._window.open(url, '_blank')
+      }
+    } else {
+      this._window.open(url, '_blank')
+    }
   }
-  goToActivitySection(activitySection: string) {
+  goToActivitySection(activitySection: string, event?: KeyboardEvent) {
     this.standaloneMode
-      ? this.goToUrl(this.url)
-      : this.scrollTo(activitySection)
-  }
-  scrollTo(activitySection: string) {
-    document.querySelector(`#${activitySection}`).scrollIntoView()
+      ? this.goToUrl(this.url, event)
+      : RecordUtil.scrollTo(activitySection, event)
   }
 }
