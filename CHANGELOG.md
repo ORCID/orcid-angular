@@ -1,3 +1,9 @@
+## v2.99.3 - 2024-05-31
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.99.2...v2.99.3)
+
+- [#2273](https://github.com/ORCID/orcid-angular/pull/2273): Enable homepage JS
+
 ## v2.99.2 - 2024-05-31
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.99.1...v2.99.2)
