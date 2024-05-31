@@ -1,3 +1,14 @@
+## v2.99.4 - 2024-05-31
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.99.3...v2.99.4)
+
+- [#2274](https://github.com/ORCID/orcid-angular/pull/2274): fix: Implement sentence case formatting for logo label, excluding German.
+
+### Fix
+
+- Remove CRLF format
+- Implement sentence case formatting for logo label, excluding German.
+
 ## v2.99.3 - 2024-05-31
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.99.2...v2.99.3)
