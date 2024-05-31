@@ -22,10 +22,13 @@ export class WordpressService {
     }/index${this.getWordpressLocalizationCode()}.html`
     return this.fetchWithFallback(primaryUrl, fallbackUrl).pipe(
       map((data: { html: string; url: string }) => {
-        const find = './assets/';
-        const regex = new RegExp(find, 'g');
-        const updatedHtml = data.html.replace(regex, `${data.url.replace(/index\.html$/, '')}assets/`);
-        return updatedHtml;
+        const find = './assets/'
+        const regex = new RegExp(find, 'g')
+        const updatedHtml = data.html.replace(
+          regex,
+          `${data.url.replace(/index\.html$/, '')}assets/`
+        )
+        return updatedHtml
       })
     )
   }
@@ -37,7 +40,10 @@ export class WordpressService {
       map((data: { html: string; url: string }) => {
         const find = './assets/'
         const regex = new RegExp(find, 'g')
-        const updatedHtml = data.html.replace(regex, `${data.url.replace(/wordpress-homepage\.css$/, '')}assets/`);
+        const updatedHtml = data.html.replace(
+          regex,
+          `${data.url.replace(/wordpress-homepage\.css$/, '')}assets/`
+        )
         return updatedHtml
       })
     )
@@ -50,7 +56,10 @@ export class WordpressService {
       map((data: { html: string; url: string }) => {
         const find = './assets/'
         const regex = new RegExp(find, 'g')
-        const updatedHtml = data.html.replace(regex, `${data.url.replace(/wordpress-homepage\.js$/, '')}assets/`);
+        const updatedHtml = data.html.replace(
+          regex,
+          `${data.url.replace(/wordpress-homepage\.js$/, '')}assets/`
+        )
         return updatedHtml
       })
     )
