@@ -24,4 +24,5 @@ export interface PlatformInfo {
   reactivation: boolean
   reactivationCode: string
   summaryScreen: boolean
+  locale: string
 }
