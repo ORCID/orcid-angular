@@ -102,4 +102,33 @@ describe('WordpressService', () => {
     expect(fallbackReq.request.method).toBe('GET');
     fallbackReq.flush(mockJs);
   });
+  
+  it('should fetch home page post from primary URL and update asset paths', () => {
+    const mockHtml = '<html><head></head><body><img src="./assets/image.png"></body></html>';
+    const expectedHtml = `<html><head></head><body><img src="${environment.WORDPRESS_S3}/assets/image.png"></body></html>`;
+
+    service.getHomePagePost().subscribe((html) => {
+      expect(html).toBe(expectedHtml);
+    });
+
+    const req = httpMock.expectOne(`${environment.WORDPRESS_S3}/index.html`);
+    expect(req.request.method).toBe('GET');
+    req.flush(mockHtml);
+  });
+
+  it('should fetch home page post from fallback URL and update asset paths when primary fails', () => {
+    const mockHtml = '<html><head></head><body><img src="./assets/image.png"></body></html>';
+    const expectedHtml = `<html><head></head><body><img src="${environment.WORDPRESS_S3_FALLBACK}/assets/image.png"></body></html>`;
+
+    service.getHomePagePost().subscribe((html) => {
+      expect(html).toBe(expectedHtml);
+    });
+
+    const primaryReq = httpMock.expectOne(`${environment.WORDPRESS_S3}/index.html`);
+    primaryReq.flush(null, { status: 500, statusText: 'Server Error' });
+
+    const fallbackReq = httpMock.expectOne(`${environment.WORDPRESS_S3_FALLBACK}/index.html`);
+    expect(fallbackReq.request.method).toBe('GET');
+    fallbackReq.flush(mockHtml);
+  });
 });
