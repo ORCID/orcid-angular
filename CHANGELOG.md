@@ -1,3 +1,19 @@
+## v2.99.0 - 2024-05-30
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.98.11...v2.99.0)
+
+## v2.98.11 - 2024-05-30
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.98.10...v2.98.11)
+
+## v2.98.10 - 2024-05-30
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.98.9...v2.98.10)
+
+### Fix
+
+- Remove unncessary label in aria label property (#2266)
+
 ## v2.98.9 - 2024-05-29
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.98.8...v2.98.9)
