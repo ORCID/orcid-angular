@@ -1,3 +1,11 @@
+## v2.99.1 - 2024-05-31
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.99.0...v2.99.1)
+
+### Fix
+
+- Remove sentenceCase in orcid logo text property (#2271)
+
 ## v2.99.0 - 2024-05-30
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.98.11...v2.99.0)
