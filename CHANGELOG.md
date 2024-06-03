@@ -1,3 +1,9 @@
+## v2.100.1 - 2024-06-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.100.0...v2.100.1)
+
+- [#2275](https://github.com/ORCID/orcid-angular/pull/2275): add limit to manually grouping works
+
 ## v2.100.0 - 2024-06-03
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.99.4...v2.100.0)
