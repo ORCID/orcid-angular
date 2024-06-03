@@ -1,3 +1,9 @@
+## v2.100.0 - 2024-06-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.99.4...v2.100.0)
+
+- [#2276](https://github.com/ORCID/orcid-angular/pull/2276): Revert "Enable New Relic Initial Monitoring"
+
 ## v2.99.4 - 2024-05-31
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.99.3...v2.99.4)
