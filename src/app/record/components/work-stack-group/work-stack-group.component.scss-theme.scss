@@ -16,6 +16,9 @@
       ) !important;
     }
   }
+  .error-icon {
+    color: rgba($state-warning-dark, 0.38) !important;
+  }
 }
 
 @include work-stack-group-theme($orcid-app-theme);
