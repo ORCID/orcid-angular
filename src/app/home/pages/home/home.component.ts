@@ -4,7 +4,7 @@ import { WINDOW } from '../../../cdk/window'
 import { environment } from 'src/environments/environment'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
-import { switchMap } from 'rxjs/operators'
+import { switchMap, tap } from 'rxjs/operators'
 import { WordpressService } from 'src/app/core/wordpress/wordpress.service'
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 import { DOCUMENT } from '@angular/common'
@@ -43,16 +43,48 @@ export class HomeComponent implements OnInit {
         switchMap((state) => {
           this.notWordpressDisplay = !state
           if (state) {
-            return this.wordpressService.getHomePagePost()
+            return this.setupHompage()
           } else {
             return EMPTY
           }
         })
       )
-      .subscribe((html) => {
+      .subscribe()
+  }
+  private setupHompage() {
+    return this.setupCss().pipe(
+      switchMap(() => this.setupHtml()),
+      switchMap(() => this.setupJs())
+    )
+  }
+
+  setupCss() {
+    return this.wordpressService.getHomePageCSS().pipe(
+      tap((css) => {
+        const head = this.document.getElementsByTagName('head')[0]
+        const style = this.document.createElement('style')
+        style.innerHTML = css
+        head.appendChild(style)
+      })
+    )
+  }
+  setupJs() {
+    return this.wordpressService.getHomePageJS().pipe(
+      tap((js) => {
+        const script = this.document.createElement('script')
+        script.innerHTML = js
+        this.document.body.appendChild(script)
+      })
+    )
+  }
+
+  setupHtml() {
+    return this.wordpressService.getHomePagePost().pipe(
+      tap((html) => {
         this.wordpressView = this.sanitizer.bypassSecurityTrustHtml(html)
         this.wordpressView
       })
+    )
   }
 
   goto(url) {
