@@ -125,9 +125,8 @@
       </div>
 
       <div>
-        <p>
+        <p *ngIf="showDeactivatedError && !isEmail">
           <ng-container
-            *ngIf="showDeactivatedError && !isEmail"
             i18n="@@ngOrcid.signin.deactivated.UsingOrcid.2"
           >
             If you no longer have access to any of the email addresses
