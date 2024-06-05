@@ -16,7 +16,6 @@ import { Config } from 'src/app/types/togglz.endpoint'
 import { environment } from '../../../environments/environment'
 import { ApplicationRoutes, ORCID_REGEXP } from '../../constants'
 import { menu } from './menu'
-import { RecordUtil } from 'src/app/shared/utils/record.util'
 
 @Component({
   selector: 'app-header',
@@ -39,7 +38,7 @@ export class HeaderComponent implements OnInit {
   user: UserInfo
   togglz: Config
   signinRegisterButton = true
-  labelLogo = $localize`:@@confirm-oauth-access.connectingresearchandresearchers:Connecting research and researchers`
+  labelLogo = $localize`:@@layout.ariaLabelConnectingResearchers:Connecting research and researchers`
   labelMenu = $localize`:@@layout.ariaLabelMenu:main menu`
 
   constructor(
@@ -60,9 +59,6 @@ export class HeaderComponent implements OnInit {
 
     _platform.get().subscribe((data) => {
       this.platform = data
-      if (this.platform.locale !== 'de') {
-        this.labelLogo = RecordUtil.sentenceCase(this.labelLogo)
-      }
     })
     _userInfo.getUserSession().subscribe((data) => {
       this.user = data.userInfo
