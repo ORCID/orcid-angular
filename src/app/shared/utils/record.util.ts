@@ -121,8 +121,4 @@ export class RecordUtil {
   static appendOpensInNewTab(ariaLabel: string): string {
     return `${ariaLabel} ${$localize`:@@shared.opensInNewTab:(opens in a new tab)`}`
   }
-
-  static sentenceCase(label: string): string {
-    return label.charAt(0).toUpperCase() + label.slice(1)
-  }
 }

@@ -39,7 +39,6 @@ export class PlatformInfoService {
     reactivation: false,
     reactivationCode: '',
     summaryScreen: false,
-    locale: 'en',
   }
   platformSubject = new BehaviorSubject<PlatformInfo>(this.platform)
 
@@ -51,7 +50,6 @@ export class PlatformInfoService {
     _platform: Platform,
     @Inject(WINDOW) private window: Window
   ) {
-    this.platform.locale = locale
     this.platform.rtl = locale === 'ar' ? true : false
     this.platform.ltr = !this.platform.rtl
     this.platform.screenDirection = this.platform.rtl ? 'rtl' : 'ltr'
@@ -237,7 +235,6 @@ export class PlatformInfoService {
         0,
       reactivationCode: this.getReactivationCode(),
       summaryScreen: this.window.location.pathname.endsWith('/summary'),
-      locale: this.locale,
     }
     this.platformSubject.next(this.platform)
     return this.platformSubject.asObservable()
