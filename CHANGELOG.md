@@ -1,3 +1,11 @@
+## v2.100.6 - 2024-06-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.100.5...v2.100.6)
+
+### Fix
+
+- Sort grouping works by creation date (#2279)
+
 ## v2.100.5 - 2024-06-07
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.100.4...v2.100.5)
