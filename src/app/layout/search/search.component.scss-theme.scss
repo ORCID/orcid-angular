@@ -22,7 +22,7 @@
   }
   .input-box-new-info {
     input {
-      border: solid 1px mat.get-color-from-palette($background,dark-grey);
+      border: solid 1px mat.get-color-from-palette($background, dark-grey);
     }
 
     ::placeholder {
