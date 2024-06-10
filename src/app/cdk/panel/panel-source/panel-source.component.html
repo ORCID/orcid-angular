@@ -48,9 +48,11 @@
         </div>
       </div>
       <!-- OTHER SOURCES (COLLAPSED PANEL) URL -->
-      <div *ngIf="!topPanelOfTheStackMode && clickableSource" class="source-title">
-        <strong i18n="@@shared.source">Source</strong
-        >: 
+      <div
+        *ngIf="!topPanelOfTheStackMode && clickableSource"
+        class="source-title"
+      >
+        <strong i18n="@@shared.source">Source</strong>:
         <ng-container *ngIf="recordOnDisplayIsTheSource !== undefined">
           <ng-container
             *ngIf="
@@ -77,16 +79,15 @@
               >check_circle</mat-icon
             >
           </ng-container>
-        <a (click)="clickDisplayAsTopPanelOfTheStack()">
-          <ng-container *ngIf="assertionOriginName || assertionOriginOrcid">
-            {{ assertionOriginName || assertionOriginOrcid }}
-            <i i18n="@@shared.onBehalfOf">via</i>
-          </ng-container>
-          {{ sourceName }}</a
-        >
-        </ng-container
-        >
-        </div>
+          <a (click)="clickDisplayAsTopPanelOfTheStack()">
+            <ng-container *ngIf="assertionOriginName || assertionOriginOrcid">
+              {{ assertionOriginName || assertionOriginOrcid }}
+              <i i18n="@@shared.onBehalfOf">via</i>
+            </ng-container>
+            {{ sourceName }}</a
+          >
+        </ng-container>
+      </div>
     </div>
     <div class="preferred-source" *ngIf="isPreferred && stackLength > 1">
       <i class="material-icons"> grade </i>
