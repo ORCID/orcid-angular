@@ -1,21 +1,44 @@
+.description {
+  p {
+    line-height: 21px;
+    margin-top: 0px;
+  }
+  margin-bottom: 16px;
+}
+
 .info {
+  p {
+    margin-top: 0;
+    margin-bottom: 16px;
+  }
+  .col {
+    padding: 0;
+  }
+  strong {
+    line-height: 24px;
+    margin-bottom: 8px;
+  }
+  line-height: 21px;
   padding: 16px;
   margin-top: 32px;
   border: solid 2px;
   border-radius: 4px;
   display: flex;
+}
 
-  p {
-    margin: 0;
-  }
+.icon-container {
+  padding: 0;
+  margin-right: 16px;
 }
 
 .work-info {
-  margin-bottom: 16px;
-
+  h2 {
+    line-height: 21px;
+  }
   .added {
     margin-left: 16px;
   }
+  line-height: 18px;
 }
 
 .no-info {
@@ -31,4 +54,12 @@
 h2 {
   word-break: normal;
   overflow-wrap: anywhere;
+  margin-bottom: 4px;
+  margin-top: 16px;
+}
+
+h3 {
+  font-weight: normal;
+  margin-bottom: 8px;
+  margin-top: 16px;
 }
