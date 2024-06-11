@@ -101,3 +101,7 @@ button.mat-menu-item {
   display: flex;
   align-items: center;
 }
+
+::ng-deep .menu-buttons {
+  max-width: none;
+}

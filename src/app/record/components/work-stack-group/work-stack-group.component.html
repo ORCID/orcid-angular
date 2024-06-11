@@ -79,6 +79,27 @@
           <mat-menu #menu="matMenu" class="menu-buttons">
             <button
               mat-menu-item
+              (click)="export()"
+              [disabled]="selectedWorks.length === 0"
+            >
+              <mat-icon>file_download</mat-icon>
+              <span>
+                <ng-container i18n="@@works.exportSelectedWorks"
+                  >Export selected works</ng-container
+                >&nbsp;({{ selectedWorks.length }})
+              </span>
+            </button>
+            <button mat-menu-item (click)="exportAllWorks()">
+              <mat-icon>file_download</mat-icon>
+              <span>
+                <ng-container i18n="@@works.exportAllWorks"
+                  >Export ALL works</ng-container
+                >
+                ({{ this.workGroup.totalGroups }})
+              </span>
+            </button>
+            <button
+              mat-menu-item
               (click)="combine()"
               [disabled]="
                 selectedWorks.length === 0 || selectedWorks.length > 5
@@ -100,8 +121,7 @@
                 >
                   <ng-container i18n="@@shared.combineWorks"
                     >Group selected works</ng-container
-                  >
-                  ({{ selectedWorks.length }})
+                  >&nbsp;({{ selectedWorks.length }})
                 </div>
                 <div
                   class="orc-font-small-print"
@@ -117,33 +137,13 @@
             </button>
             <button
               mat-menu-item
-              (click)="export()"
-              [disabled]="selectedWorks.length === 0"
-            >
-              <mat-icon>file_download</mat-icon>
-              <span>
-                <ng-container i18n="@@shared.exportWorks"
-                  >Export works</ng-container
-                >
-                ({{ selectedWorks.length }})
-              </span>
-            </button>
-            <button mat-menu-item (click)="exportAllWorks()">
-              <mat-icon>file_download</mat-icon>
-              <span>
-                <ng-container i18n="@@shared.exportAllWorks"
-                  >Export all works</ng-container
-                >
-                ({{ this.workGroup.totalGroups }})
-              </span>
-            </button>
-            <button
-              mat-menu-item
               (click)="visibility()"
               [disabled]="selectedWorks.length === 0"
             >
               <mat-icon>visibility</mat-icon>
-              <span i18n="@@shared.setVisibility">Set visibility</span>
+              <span i18n="@@works.setVisibilityForSelectedWorks"
+                >Set visibility for selected works</span
+              >&nbsp;({{ selectedWorks.length }})
             </button>
             <button
               mat-menu-item
@@ -151,7 +151,9 @@
               [disabled]="selectedWorks.length === 0"
             >
               <mat-icon>delete</mat-icon>
-              <span i18n="@@shared.deleteWorks">Delete works</span>
+              <span i18n="@@works.deleteSelectedWorks"
+                >Delete selected works</span
+              >&nbsp;({{ selectedWorks.length }})
             </button>
           </mat-menu>
           <button
