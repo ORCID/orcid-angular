@@ -149,8 +149,12 @@
               mat-menu-item
               (click)="delete()"
               [disabled]="selectedWorks.length === 0"
+              [ngClass]="{
+                'delete-selected-works': selectedWorks.length > 0,
+                'delete-selected-works-disabled': selectedWorks.length === 0
+              }"
             >
-              <mat-icon>delete</mat-icon>
+              <mat-icon>delete_outline</mat-icon>
               <span i18n="@@works.deleteSelectedWorks"
                 >Delete selected works</span
               >&nbsp;({{ selectedWorks.length }})
