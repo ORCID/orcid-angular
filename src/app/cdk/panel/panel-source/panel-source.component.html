@@ -22,8 +22,8 @@
             <mat-icon
               aria-hidden="false"
               [attr.aria-label]="selftAssertedSource"
-              alt="Self-asserted source"
-              ><img src="./assets/vectors/profile-not-verified.svg" alt="Self-asserted source"/>
+              [attr.alt]="selftAssertedSource"
+              ><img src="./assets/vectors/profile-not-verified.svg" [attr.alt]="selftAssertedSource"/>
             </mat-icon>
           </ng-container>
           <ng-container
@@ -36,7 +36,7 @@
               aria-hidden="false"
               [attr.aria-label]="validatedSourceAriaLabel"
               class="verified"
-              alt="Validated source"
+              [attr.alt]="validatedSourceAriaLabel"
               >check_circle</mat-icon
             >
           </ng-container></ng-container
@@ -65,8 +65,8 @@
             <mat-icon
               aria-hidden="false"
               [attr.aria-label]="selftAssertedSource"
-              alt="Self-asserted source"
-              ><img src="./assets/vectors/profile-not-verified.svg" alt="Self-asserted source"/>
+              [attr.alt]="selftAssertedSource"
+              ><img src="./assets/vectors/profile-not-verified.svg" [attr.alt]="selftAssertedSource"/>
             </mat-icon>
           </ng-container>
           <ng-container
@@ -79,7 +79,7 @@
               aria-hidden="false"
               [attr.aria-label]="validatedSourceAriaLabel"
               class="verified"
-              alt="Validated source"
+              [attr.alt]="validatedSourceAriaLabel"
               >check_circle</mat-icon
             >
           </ng-container>
