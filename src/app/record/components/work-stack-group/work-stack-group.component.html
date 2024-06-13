@@ -76,15 +76,7 @@
             <span class="action" i18n="@@shared.actions"> Actions </span>
             <mat-icon class="large-material-icon">arrow_drop_down</mat-icon>
           </button>
-          <mat-menu #menu="matMenu">
-            <button
-              mat-menu-item
-              (click)="combine()"
-              [disabled]="selectedWorks.length === 0"
-            >
-              <mat-icon>merge_type</mat-icon>
-              <span i18n="@@shared.combineWorks">Combine works</span>
-            </button>
+          <mat-menu #menu="matMenu" class="menu-buttons">
             <button
               mat-menu-item
               (click)="export()"
@@ -92,20 +84,56 @@
             >
               <mat-icon>file_download</mat-icon>
               <span>
-                <ng-container i18n="@@shared.exportWorks">
-                  Export works
-                </ng-container>
-                ({{ selectedWorks.length }})
+                <ng-container i18n="@@works.exportSelectedWorks"
+                  >Export selected works</ng-container
+                >&nbsp;({{ selectedWorks.length }})
               </span>
             </button>
             <button mat-menu-item (click)="exportAllWorks()">
               <mat-icon>file_download</mat-icon>
               <span>
-                <ng-container i18n="@@shared.exportAllWorks">
-                  Export all works
-                </ng-container>
+                <ng-container i18n="@@works.exportAllWorks"
+                  >Export ALL works</ng-container
+                >
                 ({{ this.workGroup.totalGroups }})
               </span>
+            </button>
+            <button
+              mat-menu-item
+              (click)="combine()"
+              [disabled]="
+                selectedWorks.length === 0 || selectedWorks.length > 5
+              "
+            >
+              <div>
+                <mat-icon *ngIf="selectedWorks.length <= 5"
+                  >merge_type</mat-icon
+                >
+                <mat-icon class="error-icon" *ngIf="selectedWorks.length > 5"
+                  >error_outline</mat-icon
+                >
+              </div>
+              <div>
+                <div
+                  [ngClass]="{
+                    'group-selected-works-label': selectedWorks.length > 5
+                  }"
+                >
+                  <ng-container i18n="@@works.groupSelectedWorks"
+                    >Group selected works</ng-container
+                  >&nbsp;({{ selectedWorks.length }})
+                </div>
+                <div
+                  class="orc-font-small-print"
+                  *ngIf="selectedWorks.length > 5"
+                >
+                  <ng-container i18n="@@works.fiveWorksMax"
+                    >5 works maximum,</ng-container
+                  >
+                  {{ selectedWorks.length }}
+                  <ng-container i18n="@@works.selected">selected</ng-container>
+                </div>
+              </div>
             </button>
             <button
               mat-menu-item
@@ -113,15 +141,23 @@
               [disabled]="selectedWorks.length === 0"
             >
               <mat-icon>visibility</mat-icon>
-              <span i18n="@@shared.setVisibility">Set visibility</span>
+              <span i18n="@@works.setVisibilityForSelectedWorks"
+                >Set visibility for selected works</span
+              >&nbsp;({{ selectedWorks.length }})
             </button>
             <button
               mat-menu-item
               (click)="delete()"
               [disabled]="selectedWorks.length === 0"
+              [ngClass]="{
+                'delete-selected-works': selectedWorks.length > 0,
+                'delete-selected-works-disabled': selectedWorks.length === 0
+              }"
             >
-              <mat-icon>delete</mat-icon>
-              <span i18n="@@shared.deleteWorks">Delete works</span>
+              <mat-icon>delete_outline</mat-icon>
+              <span i18n="@@works.deleteSelectedWorks"
+                >Delete selected works</span
+              >&nbsp;({{ selectedWorks.length }})
             </button>
           </mat-menu>
           <button

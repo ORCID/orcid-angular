@@ -22,7 +22,11 @@
             <mat-icon
               aria-hidden="false"
               [attr.aria-label]="selftAssertedSource"
-              ><img src="./assets/vectors/profile-not-verified.svg" />
+              [attr.alt]="selftAssertedSource"
+              ><img
+                src="./assets/vectors/profile-not-verified.svg"
+                [attr.alt]="selftAssertedSource"
+              />
             </mat-icon>
           </ng-container>
           <ng-container
@@ -35,6 +39,7 @@
               aria-hidden="false"
               [attr.aria-label]="validatedSourceAriaLabel"
               class="verified"
+              [attr.alt]="validatedSourceAriaLabel"
               >check_circle</mat-icon
             >
           </ng-container></ng-container
@@ -48,17 +53,51 @@
         </div>
       </div>
       <!-- OTHER SOURCES (COLLAPSED PANEL) URL -->
-      <ng-container *ngIf="!topPanelOfTheStackMode && clickableSource">
-        <strong i18n="@@shared.source">Source</strong
-        ><ng-container>: </ng-container
-        ><a (click)="clickDisplayAsTopPanelOfTheStack()">
-          <ng-container *ngIf="assertionOriginName || assertionOriginOrcid">
-            {{ assertionOriginName || assertionOriginOrcid }}
-            <i i18n="@@shared.onBehalfOf">via</i>
+      <div
+        *ngIf="!topPanelOfTheStackMode && clickableSource"
+        class="source-title"
+      >
+        <strong i18n="@@shared.source">Source</strong>:
+        <ng-container *ngIf="recordOnDisplayIsTheSource !== undefined">
+          <ng-container
+            *ngIf="
+              assertionOriginOrcid ||
+              (recordOnDisplayIsTheSource && !assertionOriginClientId)
+            "
+          >
+            <mat-icon
+              aria-hidden="false"
+              [attr.aria-label]="selftAssertedSource"
+              [attr.alt]="selftAssertedSource"
+              ><img
+                src="./assets/vectors/profile-not-verified.svg"
+                [attr.alt]="selftAssertedSource"
+              />
+            </mat-icon>
           </ng-container>
-          {{ sourceName }}</a
-        >
-      </ng-container>
+          <ng-container
+            *ngIf="
+              assertionOriginClientId ||
+              (!recordOnDisplayIsTheSource && !assertionOriginOrcid)
+            "
+          >
+            <mat-icon
+              aria-hidden="false"
+              [attr.aria-label]="validatedSourceAriaLabel"
+              class="verified"
+              [attr.alt]="validatedSourceAriaLabel"
+              >check_circle</mat-icon
+            >
+          </ng-container>
+          <a (click)="clickDisplayAsTopPanelOfTheStack()">
+            <ng-container *ngIf="assertionOriginName || assertionOriginOrcid">
+              {{ assertionOriginName || assertionOriginOrcid }}
+              <i i18n="@@shared.onBehalfOf">via</i>
+            </ng-container>
+            {{ sourceName }}</a
+          >
+        </ng-container>
+      </div>
     </div>
     <div class="preferred-source" *ngIf="isPreferred && stackLength > 1">
       <i class="material-icons"> grade </i>

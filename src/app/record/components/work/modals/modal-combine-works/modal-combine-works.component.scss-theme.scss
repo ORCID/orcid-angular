@@ -11,8 +11,9 @@
   .info {
     border-color: mat.get-color-from-palette(
       $foreground,
-      'state-notice-dark'
+      'state-notice-light'
     ) !important;
+    background-color: rgba($state-notice-light, 0.15);
 
     mat-icon {
       color: mat.get-color-from-palette(

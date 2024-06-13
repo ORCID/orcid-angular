@@ -1,8 +1,124 @@
+## v2.100.12 - 2024-06-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.100.11...v2.100.12)
+
+## v2.100.11 - 2024-06-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.100.10...v2.100.11)
+
+- [#2287](https://github.com/ORCID/orcid-angular/pull/2287): fix group works warning icon
+- [#2286](https://github.com/ORCID/orcid-angular/pull/2286): Added the alt attribute
+
+## v2.100.10 - 2024-06-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.100.9...v2.100.10)
+
+## v2.100.9 - 2024-06-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.100.8...v2.100.9)
+
+## v2.100.8 - 2024-06-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.100.7...v2.100.8)
+
+## v2.100.7 - 2024-06-10
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.100.6...v2.100.7)
+
+## v2.100.6 - 2024-06-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.100.5...v2.100.6)
+
+### Fix
+
+- Sort grouping works by creation date (#2279)
+
+## v2.100.5 - 2024-06-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.100.4...v2.100.5)
+
+## v2.100.4 - 2024-06-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.100.3...v2.100.4)
+
+## v2.100.3 - 2024-06-05
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.100.2...v2.100.3)
+
+### Fix
+
+- Implement sentence case formatting for logo label, excluding German." (#2278)
+
+## v2.100.2 - 2024-06-04
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.100.1...v2.100.2)
+
+## v2.100.1 - 2024-06-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.100.0...v2.100.1)
+
+- [#2275](https://github.com/ORCID/orcid-angular/pull/2275): add limit to manually grouping works
+
+## v2.100.0 - 2024-06-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.99.4...v2.100.0)
+
+- [#2276](https://github.com/ORCID/orcid-angular/pull/2276): Revert "Enable New Relic Initial Monitoring"
+
+## v2.99.4 - 2024-05-31
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.99.3...v2.99.4)
+
+- [#2274](https://github.com/ORCID/orcid-angular/pull/2274): fix: Implement sentence case formatting for logo label, excluding German.
+
+### Fix
+
+- Remove CRLF format
+- Implement sentence case formatting for logo label, excluding German.
+
+## v2.99.3 - 2024-05-31
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.99.2...v2.99.3)
+
+- [#2273](https://github.com/ORCID/orcid-angular/pull/2273): Enable homepage JS
+
+## v2.99.2 - 2024-05-31
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.99.1...v2.99.2)
+
+## v2.99.1 - 2024-05-31
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.99.0...v2.99.1)
+
+### Fix
+
+- Remove sentenceCase in orcid logo text property (#2271)
+
+## v2.99.0 - 2024-05-30
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.98.11...v2.99.0)
+
+## v2.98.11 - 2024-05-30
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.98.10...v2.98.11)
+
+## v2.98.10 - 2024-05-30
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.98.9...v2.98.10)
+
+### Fix
+
+- Remove unncessary label in aria label property (#2266)
+
+## v2.98.9 - 2024-05-29
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.98.8...v2.98.9)
+
 ## v2.98.8 - 2024-05-28
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.98.7...v2.98.8)
 
-- [#2267](https://github.com/ORCID/orcid-angular/pull/2267): Lmendoza/enable homepage dynamic environment assets. 
+- [#2267](https://github.com/ORCID/orcid-angular/pull/2267): Lmendoza/enable homepage dynamic environment assets.
 
 ## v2.98.7 - 2024-05-23
 

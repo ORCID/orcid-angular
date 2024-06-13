@@ -43,7 +43,11 @@ export class ModalCombineWorksComponent implements OnInit, OnDestroy {
       this._recordWorksService
         .getWorksInfo(this.putCodes)
         .subscribe((works: Work[]) => {
-          this.works = works
+          this.works = works.sort((a, b) => {
+            const workDateA = `${a.createdDate.year}-${a.createdDate.month}-${a.createdDate.day}`
+            const workDateB = `${b.createdDate.year}-${b.createdDate.month}-${b.createdDate.day}`
+            return Date.parse(workDateA) - Date.parse(workDateB)
+          })
           this.loadingWorks = false
         })
     }

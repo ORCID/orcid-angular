@@ -104,12 +104,40 @@
               </ng-container>
             </i>
           </ng-container>
-
           <ng-container *ngIf="showDeprecatedError">
             <ng-container i18n="@@ngOrcid.signin.orcidAccountHasBeenDeprecated">
               This ORCID account has been deprecated. The active account is </ng-container
             >&nbsp;<b>{{ orcidPrimaryDeprecated }}</b>
           </ng-container>
+        </p>
+      </div>
+
+      <div>
+        <p>
+          <ng-container
+            *ngIf="showDeactivatedError && !isEmail"
+            i18n="@@ngOrcid.signin.deactivated.UsingOrcid.1"
+          >
+            To start reactivation please enter an email address associated with
+            this account in the 'Email or ORCID iD' field above.
+          </ng-container>
+        </p>
+      </div>
+
+      <div>
+        <p *ngIf="showDeactivatedError && !isEmail">
+          <ng-container i18n="@@ngOrcid.signin.deactivated.UsingOrcid.2">
+            If you no longer have access to any of the email addresses
+            associated with the deactivated account please
+          </ng-container>
+          <a
+            i18n="@@ngOrcid.signin.deactivated.UsingOrcid.3"
+            class="underline"
+            href="https://support.orcid.org/"
+            rel="noopener noreferrer"
+            target="_blank"
+            >contact the support team</a
+          >
         </p>
       </div>
 
@@ -121,7 +149,7 @@
         >
           Claim your ORCID record</a
         >
-        <a (click)="deactivated()" *ngIf="showDeactivatedError">
+        <a (click)="deactivated()" *ngIf="showDeactivatedError && isEmail">
           <ng-container
             i18n="@@register.reactivateOrcidAssociated"
             *ngIf="isEmail"

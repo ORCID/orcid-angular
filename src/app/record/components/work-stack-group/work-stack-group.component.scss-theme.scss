@@ -16,6 +16,19 @@
       ) !important;
     }
   }
+  .error-icon {
+    color: rgba($state-warning-darkest, 0.38) !important;
+  }
+
+  .delete-selected-works,
+  .delete-selected-works mat-icon {
+    color: $state-warning-darkest !important;
+  }
+
+  .delete-selected-works-disabled,
+  .delete-selected-works-disabled mat-icon {
+    color: rgba($state-warning-darkest, 0.38) !important;
+  }
 }
 
 @include work-stack-group-theme($orcid-app-theme);

@@ -9,7 +9,7 @@
   $background: map-get($theme, background);
 
   .search-where {
-    background-color: mat.get-color-from-palette($background, dark-grey);
+    background-color: mat.get-color-from-palette($background, ui-dark-grey);
     color: mat.get-contrast-color-from-palette($primary, 500);
   }
   .input-box {
@@ -17,12 +17,12 @@
       color: mat.get-color-from-palette($background, placeholder-grey);
     }
     input {
-      border-color: mat.get-color-from-palette($background, dark-grey);
+      border-color: mat.get-color-from-palette($background, ui-dark-grey);
     }
   }
   .input-box-new-info {
     input {
-      border: solid 1px mat.get-color-from-palette($background, grey);
+      border: solid 1px mat.get-color-from-palette($background, ui-dark-grey);
     }
 
     ::placeholder {
@@ -36,7 +36,7 @@
   }
 
   .search-icon {
-    background-color: mat.get-color-from-palette($background, dark-grey);
+    background-color: mat.get-color-from-palette($background, ui-dark-grey);
     color: mat.get-contrast-color-from-palette($primary, 500);
   }
   .columns-4,

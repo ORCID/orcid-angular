@@ -1,7 +1,7 @@
 <app-modal [loading]="loadingWorks" [noSidebar]="true">
   <app-modal-header>
-    <ng-container i18n="@@works.combineSelectedWorks">
-      Combine selected works
+    <ng-container i18n="@@works.groupSelectedWorks">
+      Group selected works
     </ng-container>
   </app-modal-header>
   <app-modal-footer>
@@ -11,8 +11,8 @@
       (click)="saveEvent()"
       id="combine-button"
     >
-      <ng-container i18n="@@works.combineSelectedWorks">
-        Combine selected works
+      <ng-container i18n="@@works.groupSelectedWorks">
+        Group selected works
       </ng-container>
     </button>
     <button
@@ -25,60 +25,42 @@
       Cancel
     </button>
   </app-modal-footer>
-  <div class="row">
-    <div class="orc-font-small-print">
-      <p i18n="@@works.selectedWorksGrouped">
-        The selected works will be grouped together and displayed as a single
-        group item on your record. All versions of the work will still be
-        available but one will be shown as your preferred version.
+  <div class="row description">
+    <div class="orc-font-body-small">
+      <p>
+        <ng-container i18n="@@works.groupWorksDescription"
+          >The selected works will be grouped together into a single item on
+          your record. All versions of the work will still be available, with
+          one displayed as your preferred version.</ng-container
+        >&nbsp;<em i18n="@@works.groupWorksDescriptionLimit"
+          >A maximum of 5 works can be grouped at a time.</em
+        >
       </p>
       <a
         class="underline"
         rel="noopener noreferrer"
         target="_blank"
-        href="https://support.orcid.org/hc/articles/360006894774"
-        i18n="@@works.learnMoreCombining"
+        href="https://support.orcid.org/hc/en-us/articles/360006894774-Group-multiple-versions-of-the-same-work-together"
+        i18n="@@works.learnMoreGrouping"
+        >Learn more about grouping similar works</a
       >
-        Learn more about combining works
-      </a>
-    </div>
-  </div>
-  <div
-    class="info"
-    [ngClass]="{
-      'orc-font-body-small': !isMobile,
-      'orc-font-small-print': isMobile
-    }"
-  >
-    <div class="col">
-      <mat-icon class="large-material-icon">info</mat-icon>
-    </div>
-    <div class="col l11 m6 s3">
-      <strong i18n="@@works.combiningWorks">
-        Combining works cannot be undone!
-      </strong>
-      <p i18n="@@works.checkSelectedWorks">
-        Please check the selected works are correct before combining them.
-      </p>
     </div>
   </div>
   <div class="row">
-    <h3>
-      <ng-container i18n="@@works.selectedWorksCombine">
-        Selected works to combine
-      </ng-container>
-      ({{ works.length }})
+    <h3 class="orc-font-body-large">
+      <strong i18n="@@works.selectedWorksHeader">Selected works</strong>
+      <span> ({{ works.length }})</span>
     </h3>
     <mat-divider class="row orcid-divider"></mat-divider>
     <ng-container *ngFor="let work of works">
       <div class="row work-info">
         <div class="row">
-          <h2 class="orc-font-body">
+          <h2 class="orc-font-body-small">
             {{ work.title.value }}
           </h2>
         </div>
-        <div class="orc-font-body-small">
-          <strong i18n="@@shared.source">Source</strong>:
+        <div class="orc-font-small-print">
+          <span i18n="@@shared.source">Source</span>:
           <ng-container
             *ngIf="work?.assertionOriginName || work?.assertionOriginOrcid"
           >
@@ -88,21 +70,40 @@
           {{ work.sourceName || work.source }}
           <ng-container *ngIf="work.createdDate">
             <br *ngIf="isMobile" />
-            <strong
+            <span
               class="added"
               i18n="@@shared.added"
               [ngClass]="{
                 mobile: isMobile
               }"
-            >
-              Added </strong
+              >Added</span
             >:
             {{ work.createdDate | monthDayYearDateToString }}
           </ng-container>
         </div>
       </div>
-      <mat-divider class="row"></mat-divider>
     </ng-container>
+    <div class="info">
+      <div class="col icon-container">
+        <mat-icon class="large-material-icon">error_outline</mat-icon>
+      </div>
+      <div class="col l11 m6 s3">
+        <strong i18n="@@works.groupWorksAreYouSure"
+          >Are you sure you want to group these works?</strong
+        >
+        <p i18n="@@works.groupWorksRecommendation" class="orc-font-body-small">
+          We recommend only grouping similar or related works together. Related
+          works might have differing titles, identifiers or come from different
+          sources.
+        </p>
+        <em
+          i18n="@@works.groupUnrelatedWorksWarning"
+          class="orc-font-body-small"
+          >Grouping un-related works can result in unexpected grouped items in
+          your record.</em
+        >
+      </div>
+    </div>
     <div class="no-info orc-font-body-small" *ngIf="works.length === 0">
       <mat-icon>error</mat-icon>
       <ng-container i18n="@@works.noItemsSelected"
