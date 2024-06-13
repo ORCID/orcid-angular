@@ -1,3 +1,10 @@
+## v2.100.11 - 2024-06-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.100.10...v2.100.11)
+
+- [#2287](https://github.com/ORCID/orcid-angular/pull/2287): fix group works warning icon
+- [#2286](https://github.com/ORCID/orcid-angular/pull/2286): Added the alt attribute
+
 ## v2.100.10 - 2024-06-11
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.100.9...v2.100.10)
