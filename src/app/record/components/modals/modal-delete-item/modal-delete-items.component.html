@@ -168,15 +168,12 @@
         </div>
         <mat-divider class="row"></mat-divider>
       </ng-container>
-      <div
-        class="no-info orc-font-body-small"
-        *ngIf="!item && items.length === 0"
-      >
-        <mat-icon>error</mat-icon>
-        <ng-container i18n="@@works.noItemsSelected"
-          >No items selected.
-        </ng-container>
-      </div>
     </div>
   </fieldset>
+  <div class="no-info orc-font-body-small" *ngIf="!item && items.length === 0">
+    <mat-icon>error</mat-icon>
+    <ng-container i18n="@@works.noItemsSelected"
+      >No items selected.
+    </ng-container>
+  </div>
 </app-modal>
