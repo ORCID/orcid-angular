@@ -1,3 +1,11 @@
+## v2.100.14 - 2024-06-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.100.13...v2.100.14)
+
+### Fix
+
+- Use activatedRoute to retrieve paremeters from URL (#2288)
+
 ## v2.100.13 - 2024-06-18
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.100.12...v2.100.13)
