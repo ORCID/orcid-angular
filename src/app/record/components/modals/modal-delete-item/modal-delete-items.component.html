@@ -41,13 +41,15 @@
       </p>
     </div>
   </div>
-  <div class="row">
-    <h3>
-      <ng-container i18n="@@shared.selectedItems">
-        Selected items to delete
-      </ng-container>
-      ({{ selectedItems.length }})
-    </h3>
+  <fieldset class="row">
+    <legend>
+      <h3>
+        <ng-container i18n="@@shared.selectedItems">
+          Selected items to delete
+        </ng-container>
+        ({{ selectedItems.length }})
+      </h3>
+    </legend>
     <div *ngIf="items.length > 1" class="row">
       <div class="row">
         <p>
@@ -158,7 +160,7 @@
                   mobile: isMobile
                 }"
               >
-                Added </strong
+                Added</strong
               >:
               {{ item.createdDate | monthDayYearDateToString }}
             </ng-container>
@@ -166,15 +168,12 @@
         </div>
         <mat-divider class="row"></mat-divider>
       </ng-container>
-      <div
-        class="no-info orc-font-body-small"
-        *ngIf="!item && items.length === 0"
-      >
-        <mat-icon>error</mat-icon>
-        <ng-container i18n="@@works.noItemsSelected"
-          >No items selected.
-        </ng-container>
-      </div>
     </div>
+  </fieldset>
+  <div class="no-info orc-font-body-small" *ngIf="!item && items.length === 0">
+    <mat-icon>error</mat-icon>
+    <ng-container i18n="@@works.noItemsSelected"
+      >No items selected.
+    </ng-container>
   </div>
 </app-modal>
