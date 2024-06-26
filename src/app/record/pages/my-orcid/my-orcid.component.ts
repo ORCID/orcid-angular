@@ -21,7 +21,7 @@ import { WINDOW } from 'src/app/cdk/window'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { HelpHeroService } from 'src/app/core/help-hero/help-hero.service'
 import { ScriptService } from '../../../core/crazy-egg/script.service'
-import { DOCUMENT } from '@angular/common'
+import { DOCUMENT, Location } from '@angular/common'
 import { environment } from 'src/environments/environment'
 import { filter, map } from 'rxjs/operators'
 import { CanonocalUrlService } from 'src/app/core/canonocal-url/canonocal-url.service'
@@ -89,7 +89,8 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     @Inject(WINDOW) private window: Window,
     private _togglz: TogglzService,
     private _scriptService: ScriptService,
-    private _canonocalUrlService: CanonocalUrlService
+    private _canonocalUrlService: CanonocalUrlService,
+    private location: Location
   ) {}
 
   private checkIfThisIsAPublicOrcid() {
@@ -258,21 +259,26 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
       this.initMyOrcidParameter = true
 
       this.route.queryParams.subscribe((params) => {
+        let url = null;
         if (!params['justRegistered']) {
-          this._router.navigate(['/my-orcid'], {
+          url = this._router.createUrlTree([], {
+            relativeTo: this.route,
             queryParams: {
               ...this.platform.queryParameters,
               orcid: this.userInfo.EFFECTIVE_USER_ORCID,
-            },
-          })
+            }
+          }
+          ).toString()
         } else {
-          this._router.navigate(['/my-orcid'], {
+          url = this._router.createUrlTree([], {
+            relativeTo: this.route,
             queryParams: {
               orcid: this.userInfo.EFFECTIVE_USER_ORCID,
               justRegistered: 'true',
-            },
+            }
           })
         }
+        this.location.go(url)
       })
     }
   }
