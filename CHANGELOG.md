@@ -1,3 +1,9 @@
+## v2.101.2 - 2024-06-26
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.101.1...v2.101.2)
+
+- [#2291](https://github.com/ORCID/orcid-angular/pull/2291): fix-js-loading-issues
+
 ## v2.101.1 - 2024-06-19
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.100.15...v2.101.1)
