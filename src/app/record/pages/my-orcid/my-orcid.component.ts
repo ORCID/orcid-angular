@@ -259,23 +259,24 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
       this.initMyOrcidParameter = true
 
       this.route.queryParams.subscribe((params) => {
-        let url = null;
+        let url = null
         if (!params['justRegistered']) {
-          url = this._router.createUrlTree([], {
-            relativeTo: this.route,
-            queryParams: {
-              ...this.platform.queryParameters,
-              orcid: this.userInfo.EFFECTIVE_USER_ORCID,
-            }
-          }
-          ).toString()
+          url = this._router
+            .createUrlTree([], {
+              relativeTo: this.route,
+              queryParams: {
+                ...this.platform.queryParameters,
+                orcid: this.userInfo.EFFECTIVE_USER_ORCID,
+              },
+            })
+            .toString()
         } else {
           url = this._router.createUrlTree([], {
             relativeTo: this.route,
             queryParams: {
               orcid: this.userInfo.EFFECTIVE_USER_ORCID,
               justRegistered: 'true',
-            }
+            },
           })
         }
         this.location.go(url)
