@@ -1,3 +1,11 @@
+## v2.101.3 - 2024-06-27
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.101.2...v2.101.3)
+
+### Fix
+
+- Remove nested router navigate (#2292)
+
 ## v2.101.2 - 2024-06-26
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.101.1...v2.101.2)
