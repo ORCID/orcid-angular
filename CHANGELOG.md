@@ -1,3 +1,9 @@
+## v2.101.4 - 2024-07-04
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.101.3...v2.101.4)
+
+- [#2293](https://github.com/ORCID/orcid-angular/pull/2293): 9286 home page enable assets fingerprinting
+
 ## v2.101.3 - 2024-06-27
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.101.2...v2.101.3)
