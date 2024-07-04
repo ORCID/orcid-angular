@@ -84,9 +84,9 @@ export class WordpressService {
   }
 
   private getWordpressLocalizationCode() {
-    // if (this.locale.includes('en')) {
-    //   return ''
-    // }
-    return '-' + 'fr'
+    if (this.locale.includes('en')) {
+      return ''
+    }
+    return '-' + this.locale
   }
 }
