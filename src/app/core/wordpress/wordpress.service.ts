@@ -26,7 +26,7 @@ export class WordpressService {
         const regex = new RegExp(find, 'g')
         const updatedHtml = data.html.replace(
           regex,
-          `${data.url.replace(/index\.html$/, '')}assets/`
+          `${data.url.replace(/index.*\.html$/, '')}assets/`
         )
         return updatedHtml
       })
@@ -38,11 +38,11 @@ export class WordpressService {
     const fallbackUrl = `${environment.WORDPRESS_S3_FALLBACK}/wordpress-homepage.css`
     return this.fetchWithFallback(primaryUrl, fallbackUrl).pipe(
       map((data: { html: string; url: string }) => {
-        const find = './assets/'
+        const find = 'assets/'
         const regex = new RegExp(find, 'g')
         const updatedHtml = data.html.replace(
           regex,
-          `${data.url.replace(/wordpress-homepage\.css$/, '')}assets/`
+          `${data.url.replace(/wordpress-homepage.*\.css$/, '')}assets/`
         )
         return updatedHtml
       })
@@ -58,7 +58,7 @@ export class WordpressService {
         const regex = new RegExp(find, 'g')
         let updateJs = data.html.replace(
           regex,
-          `${data.url.replace(/wordpress-homepage\.js$/, '')}assets/`
+          `${data.url.replace(/wordpress-homepage.*\.js$/, '')}assets/`
         )
         // By default the script was intented to be executed after the event `DOMContentLoaded`
         // but in Angular the event `DOMContentLoaded` is already fired, so we need to execute it
@@ -84,9 +84,9 @@ export class WordpressService {
   }
 
   private getWordpressLocalizationCode() {
-    if (this.locale.includes('en')) {
-      return ''
-    }
-    return '-' + this.locale
+    // if (this.locale.includes('en')) {
+    //   return ''
+    // }
+    return '-' + 'fr'
   }
 }
