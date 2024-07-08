@@ -68,14 +68,13 @@ export class HeaderComponent implements OnInit {
       this.togglz = data
     })
     _togglz
-    .getStateOf('WORDPRESS_HOME_PAGE')
-    .pipe(
-      tap((state) => {
-        this.notWordpressDisplay = !state
-
-      })
-    )
-    .subscribe()
+      .getStateOf('WORDPRESS_HOME_PAGE')
+      .pipe(
+        tap((state) => {
+          this.notWordpressDisplay = !state
+        })
+      )
+      .subscribe()
 
     _router.events.subscribe(() => {
       const path = location.path()
