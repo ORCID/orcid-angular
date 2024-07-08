@@ -40,8 +40,7 @@ git checkout transifex
 git pull
 
 echo "Merging transifex branch with main branch..."
-git checkout main
-git merge transifex
+git merge main
 
 # Perform tx pull operations for specified languages
 tx_operations "tr_TR" "tr"
