@@ -23,6 +23,10 @@ header.container {
     }
   }
 }
+nav.not-wordpress-display > .top-bar,
+nav.not-wordpress-display > .top-bar-new-info {
+  margin-bottom: 60px;
+}
 
 nav {
   ul {
@@ -30,6 +34,8 @@ nav {
     margin: 0;
     padding: 0;
   }
+
+ 
 
   .top-bar,
   .top-bar-new-info {
