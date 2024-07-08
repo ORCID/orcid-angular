@@ -1,3 +1,9 @@
+## v2.101.8 - 2024-07-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.101.7...v2.101.8)
+
+- [#2297](https://github.com/ORCID/orcid-angular/pull/2297): Lmendoza/104 the homepage top bar new info has a bottom margin that needs reducing to 32px 2
+
 ## v2.101.7 - 2024-07-08
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.101.6...v2.101.7)
