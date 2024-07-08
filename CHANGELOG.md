@@ -1,3 +1,9 @@
+## v2.101.7 - 2024-07-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.101.6...v2.101.7)
+
+- [#2296](https://github.com/ORCID/orcid-angular/pull/2296): lmendoza/104-the-homepage-top-bar-new-info-has-a-bottom-margin-that-n…
+
 ## v2.101.6 - 2024-07-08
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.101.5...v2.101.6)
