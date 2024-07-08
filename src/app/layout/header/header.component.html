@@ -60,6 +60,7 @@
 <nav
   (mouseleave)="mouseLeave()"
   *ngIf="(mobileMenuState || platform.columns12) && !hideMainMenu"
+  [ngClass]="{ 'not-wordpress-display': notWordpressDisplay }"
   [attr.aria-label]="labelMenu"
 >
   <!-- TODO @leomendoza123 Once the new info site is stable, remove this togglz hidden to save render time -->

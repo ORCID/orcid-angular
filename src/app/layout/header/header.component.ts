@@ -1,7 +1,7 @@
 import { Location } from '@angular/common'
 import { Component, Inject, Input, OnInit } from '@angular/core'
 import { NavigationStart, Router } from '@angular/router'
-import { filter } from 'rxjs/operators'
+import { filter, switchMap, tap } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { UserService } from 'src/app/core'
@@ -25,6 +25,7 @@ import { menu } from './menu'
 export class HeaderComponent implements OnInit {
   hideMainMenu = false
   _currentRoute: string
+  notWordpressDisplay: boolean
   @Input() set currentRoute(value) {
     this._currentRoute = value
     this.setChildOfCurrentRouteAsSecondaryMenu()
@@ -66,6 +67,16 @@ export class HeaderComponent implements OnInit {
     _togglz.getTogglz().subscribe((data) => {
       this.togglz = data
     })
+    _togglz
+    .getStateOf('WORDPRESS_HOME_PAGE')
+    .pipe(
+      tap((state) => {
+        this.notWordpressDisplay = !state
+
+      })
+    )
+    .subscribe()
+
     _router.events.subscribe(() => {
       const path = location.path()
       this.signinRegisterButton =
