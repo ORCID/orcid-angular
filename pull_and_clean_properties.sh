@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Check for pending changes
+if ! git diff-index --quiet HEAD --; then
+  echo "Error: There are pending changes. Please commit or stash them before running the script."
+  exit 1
+fi
+
 # Function to process each .properties file
 process_file() {
   local file=$1
@@ -18,11 +24,24 @@ tx_operations() {
   
   echo ">>>>>>>>>>>>>>>>>>>>>>> Pulling translations for $lang"
   tx pull --force -l "$lang"
-    wait
+  wait
   find . -type f -name "*.$ext.properties" -delete 
   find . -type f -name "*.$lang.properties" -exec sh -c 'mv "$0" "${0%.'$lang'.properties}.'$ext'.properties"' {} \;
   echo ">>>>>>>>>>>>>>>>>>>>>>> Finished processing $lang files."
 }
+
+# Perform git operations
+echo "Checking out to main and pulling latest changes..."
+git checkout main
+git pull
+
+echo "Checking out to transifex and pulling latest changes..."
+git checkout transifex
+git pull
+
+echo "Merging transifex branch with main branch..."
+git checkout main
+git merge transifex
 
 # Perform tx pull operations for specified languages
 tx_operations "tr_TR" "tr"
