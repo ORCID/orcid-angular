@@ -16,8 +16,8 @@ export const environment = {
   CAN_DISABLE_TEST_WARNING_BANNER: true,
   INSTITUTIONAL_AUTOCOMPLETE_DISPLAY_AMOUNT: 50,
   VERBOSE_SNACKBAR_ERRORS_REPORTS: true,
-  WORDPRESS_S3: 'https://d3055hwma3riwo.cloudfront.net',
-  WORDPRESS_S3_FALLBACK: 'https://d1kh89kum7j2ji.cloudfront.net',
+  WORDPRESS_S3: 'https://homepage-qa.orcid.org',
+  WORDPRESS_S3_FALLBACK: 'https://homepage-fallback.orcid.org',
   LANGUAGE_MENU_OPTIONS: {
     ar: 'العربية',
     cs: 'Čeština',
