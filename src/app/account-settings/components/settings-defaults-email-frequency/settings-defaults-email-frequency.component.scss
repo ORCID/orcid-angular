@@ -40,27 +40,3 @@ mat-checkbox {
   white-space: break-spaces;
   line-height: 1.4;
 }
-
-.email-edit-container {
-  padding: 16px 0 16px 0;
-  gap: 0px;
-  border: solid;
-  border-width: 1px 0 1px 0;
-  opacity: 0px;
-  display: flex;
-  justify-content: space-between;
-  max-width: 100%;
-  .email-container {
-    display: flex;
-    gap: 16px;
-    label {
-      font-weight: bold;
-    }
-    caption {
-      font-style: italic  ;
-      width: 100%;
-    display: flex;
-
-    }
-  }
-}

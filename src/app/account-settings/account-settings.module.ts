@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button'
 import { MatLegacyCheckboxModule as MatCheckboxModule } from '@angular/material/legacy-checkbox'
 import { MatLegacyOptionModule as MatOptionModule } from '@angular/material/legacy-core'
+import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog'
 import { MatDividerModule } from '@angular/material/divider'
 import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field'
 import { MatIconModule } from '@angular/material/icon'
@@ -45,8 +46,6 @@ import { SettingsSharingQrCodeComponent } from './components/settings-sharing-qr
 import { SettingsSharingComponent } from './components/settings-sharing/settings-sharing.component'
 import { SettingsComponent } from './components/settings/settings.component'
 import { AccountSettingsComponent } from './pages/account-settings/account-settings.component'
-import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog'
-
 
 @NgModule({
   declarations: [
@@ -72,7 +71,6 @@ import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/lega
     SettingsSharingComponent,
     SettingsSharingQrCodeComponent,
     SettingsSharingHtmlCodeComponent,
-    
   ],
   imports: [
     CommonModule,
