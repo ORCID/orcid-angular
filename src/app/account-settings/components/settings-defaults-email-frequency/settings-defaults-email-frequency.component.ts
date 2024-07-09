@@ -14,7 +14,9 @@ import {
   EmailFrequencies,
   EmailFrequenciesValues,
 } from 'src/app/types/account-default-visibility.endpoint'
-
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
+import { ModalEmailComponent } from 'src/app/cdk/side-bar/modals/modal-email/modal-email.component'
+import { UserInfoService } from 'src/app/core/user-info/user-info.service'
 @Component({
   selector: 'app-settings-defaults-email-frequency',
   templateUrl: './settings-defaults-email-frequency.component.html',
@@ -38,16 +40,24 @@ export class SettingsDefaultsEmailFrequencyComponent
   ]
   emailFrequenciesValues = EmailFrequenciesValues
   form: UntypedFormGroup
+  primaryEmail: string
+  primaryEmailVerified: string
   @Output() loading = new EventEmitter<boolean>()
 
   constructor(
     private _platform: PlatformInfoService,
     private _fb: UntypedFormBuilder,
-    private _emailFrequency: AccountDefaultEmailFrequenciesService
+    private _emailFrequency: AccountDefaultEmailFrequenciesService,
+    private _dialog: MatDialog,
+    private _userInfoService: UserInfoService
   ) {}
 
   ngOnInit(): void {
     this.loading.next(true)
+    this._userInfoService.getUserInfo().subscribe((value) => {
+      this.primaryEmail = value.PRIMARY_EMAIL
+      this.primaryEmailVerified = value.IS_PRIMARY_EMAIL_VERIFIED
+    })
     this._emailFrequency.get().subscribe((value) => {
       this.loading.next(false)
       this.form = this._fb.group({
@@ -99,6 +109,17 @@ export class SettingsDefaultsEmailFrequencyComponent
       .subscribe((platform) => {
         this.isMobile = platform.columns4 || platform.columns8
       })
+  }
+
+  openEmailModal() {
+    return this._dialog
+      .open(ModalEmailComponent, {
+        width: '850px',
+        maxWidth: '99%',
+        // data: this.userRecord,
+        // ariaLabel: getAriaLabel(this.editModalComponent, this.type),
+      })
+      .afterClosed()
   }
   ngOnDestroy() {
     this.$destroy.next(true)
