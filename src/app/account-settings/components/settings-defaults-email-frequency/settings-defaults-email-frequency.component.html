@@ -1,48 +1,90 @@
 <app-settings-panels-data *ngIf="form" [formGroup]="form">
-  <p i18n="@@account.orcidKeeps">
-    ORCID keeps you up-to-date with activity on your record with notifications
-    sent to your ORCID inbox. You can also have these notifications sent to you
-    by email. You can choose which types of notifications you wish to get by
-    email and how often you would like to receive them.
+  <p i18n="@@account.notifications">
+    Notifications keep you up-to-date with activity in your ORCID record.
+    Updates are automatically sent to your ORCID inbox but you can also have
+    them sent to you by email. You can choose the kind of notifications you wish
+    to receive by email and how often you want to receive them
+  </p>
+  <p>
+    <i i18n="@@account.inAdditionToTheOptional">
+      In addition to the optional account and record notifications, we may
+      occasionally send you emails with service messages relating to your ORCID
+      account. As the information in these emails may affect your privacy
+      settings and the functioning of your ORCID account, you cannot opt-out of
+      these service messages per our Privacy Policy
+    </i>
   </p>
 
-  <div
-    class="info margin-bottom-16"
-    [ngClass]="{
-      'orc-font-body-small': !isMobile,
-      'orc-font-small-print': isMobile
-    }"
-  >
-    <div>
-      <mat-icon class="large-material-icon">info</mat-icon>
-    </div>
-    <div class="col l11 m6 s3">
+  <h3 class="orc-font-body" i18n="@@account.notificationEmailAddress">
+    Notification email address
+  </h3>
+  <p class="margin-bottom-16" i18n="@@account.yourOrcidNotification">
+    Your ORCID notification emails will be sent to:
+  </p>
+
+  <div class="email-edit-container">
+    <div class="email-container">
+      <img
+        *ngIf="primaryEmailVerified"
+        cdkDragHandle
+        src="./assets/vectors/email-verified-icon.svg"
+        aria-labelledby="email-verified-address"
+      />
+      <img
+        *ngIf="!primaryEmailVerified"
+        cdkDragHandle
+        src="./assets/vectors/email-unverfied-icon.svg"
+        aria-labelledby="email-unverified-address"
+      />
+
       <div>
-        <ng-container i18n="@@account.settingEmailAlert1"
-          >Setting email frequency to</ng-container
+        <label class="orc-font-body-small">{{ primaryEmail }}</label>
+        <caption
+          id="email-verified-address"
+          *ngIf="primaryEmailVerified"
+          i18n="@@account.verifiedEmailAddress"
         >
-        <i i18n="@@account.settingEmailsAlert2">Never</i>
-        <ng-container i18n="@@account.settingEmailsAlert3">
-          may mean you miss out on useful or important messages about your ORCID
-          record.</ng-container
+          Verified email address
+        </caption>
+        <caption
+          id="email-unverified-address"
+          class="orc-font-small-print"
+          *ngIf="!primaryEmailVerified"
+          i18n="@@account.unverifiedEmailAddress"
         >
+          Unverified email address
+        </caption>
       </div>
+    </div>
+    <div>
+      <button
+        mat-icon-button
+        (click)="openEmailModal()"
+        aria-labelledby="manage-your-emails"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+      <a
+        (click)="openEmailModal()"
+        class="underline"
+        id="manage-your-emails"
+        i18n="@@account.manageYourEmails"
+      >
+        Manage your emails
+      </a>
     </div>
   </div>
 
-  <h3 class="orc-font-body" i18n="@@account.accountAndRecord">
-    Account and record notifications
-  </h3>
-  <p class="margin-bottom-16" i18n="@@account.howOftenWould">
-    How often would you like to receive summary emails about:
-  </p>
-
   <div class="row">
     <label class="row">
-      <strong i18n="@@account.itemsAddedOrEdited"
-        >Items added or edited in your record by a trusted party</strong
-      >
+      <strong i18n="@@account.emailFrequency">Email frequency</strong>
     </label>
+    <p class="margin-bottom-16 row" i18n="@@account.howOftenShouldWeSend">
+      How often should we send you ORCID notification emails about:
+    </p>
+    <p class="margin-bottom-16 row" i18n="@@account.itemsAddedOrEdited">
+      Items added or edited in your record by a trusted party
+    </p>
     <mat-form-field
       appearance="outline"
       class="mat-form-field-min input-container"
@@ -59,11 +101,12 @@
   </div>
 
   <div class="row">
-    <label class="row">
-      <strong i18n="@@account.administrativeChanges"
-        >Administrative changes, such as being made a trusted individual</strong
-      >
-    </label>
+    <p
+      class="margin-bottom-16 row"
+      i18n="@@account.administrativeChangesSuchAs"
+    >
+      Adminstrative changes, such as being made a trusted individual
+    </p>
     <mat-form-field
       appearance="outline"
       class="mat-form-field-min input-container"
@@ -101,8 +144,8 @@
     </mat-form-field>
   </div>
 
-  <h3 class="orc-font-body" i18n="@@account.newFeatures">
-    New features and tips
+  <h3 class="orc-font-body" i18n="@@account.tipsAndFeatures">
+    Tips & features email
   </h3>
   <p i18n="@@account.weOccasionallySend">
     We occasionally send out an email with information on new features and tips
@@ -110,26 +153,7 @@
   </p>
   <mat-checkbox formControlName="sendQuarterlyTips" class="margin-bottom-16">
     <!-- prettier-ignore -->
-    <div class="mat-checkbox-content" i18n="@@account.idLikeToReceive"
-    >I’d like to receive the ORCID new features and tips newsletter</div>
+    <div class="mat-checkbox-content" i18n="@@account.idLikeToReceiveTheOrcidTips"
+    >I’d like to receive the ORCID tips & features email</div>
   </mat-checkbox>
-  <p class="italic">
-    <ng-container i18n="@@account.inAddition">
-      In addition to the notifications selected above, we may occasionally send
-      you emails with service messages related to or affecting your ORCID
-      Account. As this information may affect your visibility (privacy) settings
-      and the functioning of your ORCID account, you may not opt-out of service
-      messages per our
-    </ng-container>
-    <a
-      class="underline"
-      i18n="@@footer.privacypolicy"
-      href="/privacy-policy"
-      target="_blank"
-      rel="noopener noreferrer"
-      id="cy-privacy-policy"
-    >
-      Privacy Policy
-    </a>
-  </p>
 </app-settings-panels-data>
