@@ -21,6 +21,9 @@
       ) !important;
     }
   }
+  .email-edit-container {
+    border-color: mat.get-color-from-palette($background, ui-background-light);
+  }
 }
 
 @include settings-defaults-email-frequency($orcid-app-theme);
