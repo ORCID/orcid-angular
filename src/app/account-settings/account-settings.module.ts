@@ -47,7 +47,6 @@ import { SettingsComponent } from './components/settings/settings.component'
 import { AccountSettingsComponent } from './pages/account-settings/account-settings.component'
 import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog'
 
-
 @NgModule({
   declarations: [
     AccountSettingsComponent,
@@ -72,7 +71,6 @@ import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/lega
     SettingsSharingComponent,
     SettingsSharingQrCodeComponent,
     SettingsSharingHtmlCodeComponent,
-    
   ],
   imports: [
     CommonModule,
