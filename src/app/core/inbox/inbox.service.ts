@@ -59,7 +59,11 @@ export class InboxService {
       | InboxNotificationPermission
     )[]
   > {
-    if (this.lastEmittedValue && getNextDepthLevel === false && !!this.currentlyIncludingArchive === includeArchived){
+    if (
+      this.lastEmittedValue &&
+      getNextDepthLevel === false &&
+      !!this.currentlyIncludingArchive === includeArchived
+    ) {
       return this.inboxSubject.asObservable()
     }
     if (this.currentlyIncludingArchive === null) {
