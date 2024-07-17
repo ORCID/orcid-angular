@@ -11,7 +11,7 @@
   [title]="titleEmailFrequency"
 >
   <app-settings-defaults-email-frequency
-    *ngIf="true"
+    *ngIf="emailFrequencyExpanded"
     (loading)="emailFrequencyLoading = $event"
   ></app-settings-defaults-email-frequency>
 </app-settings-panels>
