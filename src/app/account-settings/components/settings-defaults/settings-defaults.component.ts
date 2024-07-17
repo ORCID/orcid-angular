@@ -8,12 +8,12 @@ import { WINDOW } from 'src/app/cdk/window'
 })
 export class SettingsDefaultsComponent implements OnInit {
   emailFrequencyLoading = false
-  emailFrequencyExpanded = false
+  emailFrequencyExpanded = true
   languageFrequencyLoading = false
   visibilityFrequencyLoading = false
   visibilityExpanded = false
   languageExpanded = false
-  titleEmailFrequency = $localize`:@@account.emailFrequency:Email frequency`
+  titleEmailFrequency = $localize`:@@account.emailFrequency:Notification email frequency`
   titleLanguage = $localize`:@@account.language:Language`
   titleVisibility = $localize`:@@account.visibility:Visibility`
 
