@@ -8,7 +8,7 @@ import { WINDOW } from 'src/app/cdk/window'
 })
 export class SettingsDefaultsComponent implements OnInit {
   emailFrequencyLoading = false
-  emailFrequencyExpanded = true
+  emailFrequencyExpanded = false
   languageFrequencyLoading = false
   visibilityFrequencyLoading = false
   visibilityExpanded = false
