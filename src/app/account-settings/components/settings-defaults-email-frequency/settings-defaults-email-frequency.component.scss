@@ -53,6 +53,7 @@ mat-checkbox {
   .email-container {
     display: flex;
     gap: 16px;
+    align-items: center;
     label {
       font-weight: bold;
     }
@@ -62,4 +63,32 @@ mat-checkbox {
       display: flex;
     }
   }
+  .email-manage-emails-link {
+    padding-right: 16px;
+  }
+}
+
+h4 {
+  margin-top: 32px;
+  margin-bottom: 8px;
+}
+
+#email-verified-address {
+  margin-top: 2px;
+}
+
+.margin-top-0 {
+  margin-top: 0;
+}
+
+.margin-bottom-16 {
+  margin-bottom: 16px;
+}
+
+.margin-bottom-8 {
+  margin-bottom: 8px;
+}
+
+.margin-bottom-32 {
+  margin-bottom: 32px;
 }

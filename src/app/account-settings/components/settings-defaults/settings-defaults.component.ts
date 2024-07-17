@@ -13,7 +13,7 @@ export class SettingsDefaultsComponent implements OnInit {
   visibilityFrequencyLoading = false
   visibilityExpanded = false
   languageExpanded = false
-  titleEmailFrequency = $localize`:@@account.emailFrequency:Email frequency`
+  titleEmailFrequency = $localize`:@@account.emailFrequency:Notification email frequency`
   titleLanguage = $localize`:@@account.language:Language`
   titleVisibility = $localize`:@@account.visibility:Visibility`
 

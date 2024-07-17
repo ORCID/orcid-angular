@@ -42,6 +42,10 @@ export class SettingsDefaultsEmailFrequencyComponent
   form: UntypedFormGroup
   primaryEmail: string
   primaryEmailVerified: string
+
+  arialabelSetTheFrequency = $localize`:@@account.setTheFrequency:Set the frequency for update notifications`
+  ariaLabelSetTheFrequencyAdministrative = $localize`:@@account.setTheFrequencyAdministrative:Set the frequency for administrative change notifications`
+  ariaLabelSetTheFrequencyPermission = $localize`:@@account.setTheFrequencyMember:Set the frequency for permission request notifications`
   @Output() loading = new EventEmitter<boolean>()
 
   constructor(

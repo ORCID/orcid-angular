@@ -11,13 +11,22 @@
       occasionally send you emails with service messages relating to your ORCID
       account. As the information in these emails may affect your privacy
       settings and the functioning of your ORCID account, you cannot opt-out of
-      these service messages per our Privacy Policy
+      these service messages per our
     </i>
+    <a
+      class="underline black-url underline"
+      i18n="@@account.privacypolicy"
+      href="/privacy-policy"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Privacy Policy
+    </a>
   </p>
 
-  <h3 class="orc-font-body" i18n="@@account.notificationEmailAddress">
+  <h4 class="orc-font-body" i18n="@@account.notificationEmailAddress">
     Notification email address
-  </h3>
+  </h4>
   <p class="margin-bottom-16" i18n="@@account.yourOrcidNotification">
     Your ORCID notification emails will be sent to:
   </p>
@@ -29,6 +38,7 @@
         cdkDragHandle
         src="./assets/vectors/email-verified-icon.svg"
         aria-labelledby="email-verified-address"
+        height="32"
       />
       <img
         *ngIf="!primaryEmailVerified"
@@ -56,7 +66,7 @@
         </caption>
       </div>
     </div>
-    <div>
+    <div class="email-manage-emails-link">
       <button
         mat-icon-button
         (click)="openEmailModal()"
@@ -76,20 +86,30 @@
   </div>
 
   <div class="row">
-    <label class="row">
-      <strong i18n="@@account.emailFrequency">Email frequency</strong>
-    </label>
-    <p class="margin-bottom-16 row" i18n="@@account.howOftenShouldWeSend">
+    <h4 class="orc-font-body" i18n="@@account.emailFrequency">
+      Email frequency
+    </h4>
+    <p
+      class="margin-bottom-16 row margin-top-0"
+      i18n="@@account.howOftenShouldWeSend"
+      id="email-frequency"
+    >
       How often should we send you ORCID notification emails about:
     </p>
-    <p class="margin-bottom-16 row" i18n="@@account.itemsAddedOrEdited">
+    <p
+      class="margin-bottom-8 row margin-top-0"
+      i18n="@@account.itemsAddedOrEdited"
+    >
       Items added or edited in your record by a trusted party
     </p>
     <mat-form-field
       appearance="outline"
       class="mat-form-field-min input-container"
     >
-      <mat-select formControlName="sendChangeNotifications">
+      <mat-select
+        formControlName="sendChangeNotifications"
+        [aria-label]="arialabelSetTheFrequency"
+      >
         <mat-option
           *ngFor="let frequency of frequencyOption"
           [value]="emailFrequenciesValues[frequency]"
@@ -101,39 +121,20 @@
   </div>
 
   <div class="row">
-    <p
-      class="margin-bottom-16 row"
+    <label
+      class="margin-bottom-8 row"
       i18n="@@account.administrativeChangesSuchAs"
     >
       Adminstrative changes, such as being made a trusted individual
-    </p>
-    <mat-form-field
-      appearance="outline"
-      class="mat-form-field-min input-container"
-    >
-      <mat-select formControlName="sendAdministrativeChangeNotifications">
-        <mat-option
-          *ngFor="let frequency of frequencyOption"
-          [value]="emailFrequenciesValues[frequency]"
-        >
-          {{ frequency | emailFrequencyLabel }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-
-  <div class="row">
-    <label class="row">
-      <strong i18n="@@account.orcidMembers"
-        >ORCID members wanting your permission to automatically update your
-        record</strong
-      >
     </label>
     <mat-form-field
       appearance="outline"
       class="mat-form-field-min input-container"
     >
-      <mat-select formControlName="sendMemberUpdateRequests">
+      <mat-select
+        formControlName="sendAdministrativeChangeNotifications"
+        [aria-label]="ariaLabelSetTheFrequencyAdministrative"
+      >
         <mat-option
           *ngFor="let frequency of frequencyOption"
           [value]="emailFrequenciesValues[frequency]"
@@ -144,10 +145,35 @@
     </mat-form-field>
   </div>
 
-  <h3 class="orc-font-body" i18n="@@account.tipsAndFeatures">
+  <div class="row">
+    <label class="row" i18n="@@account.orcidMembers">
+      ORCID members wanting your permission to automatically update your record
+    </label>
+    <mat-form-field
+      appearance="outline"
+      class="mat-form-field-min input-container"
+    >
+      <mat-select
+        formControlName="sendMemberUpdateRequests"
+        [aria-label]="ariaLabelSetTheFrequencyPermission"
+      >
+        <mat-option
+          *ngFor="let frequency of frequencyOption"
+          [value]="emailFrequenciesValues[frequency]"
+        >
+          {{ frequency | emailFrequencyLabel }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <h4
+    class="orc-font-body margin-top-0 margin-bottom-16"
+    i18n="@@account.tipsAndFeatures"
+  >
     Tips & features email
-  </h3>
-  <p i18n="@@account.weOccasionallySend">
+  </h4>
+  <p i18n="@@account.weOccasionallySend" class="margin-bottom-32">
     We occasionally send out an email with information on new features and tips
     for getting the best out of your ORCID record.
   </p>
