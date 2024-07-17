@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { SettingsDefaultsEmailFrequencyComponent } from './settings-defaults-email-frequency.component'
-import { MatLegacyDialogModule  } from '@angular/material/legacy-dialog'
+import { MatLegacyDialogModule } from '@angular/material/legacy-dialog'
 import { WINDOW_PROVIDERS } from '../../../cdk/window'
 import { UntypedFormBuilder } from '@angular/forms'
 import { PlatformInfoService } from '../../../cdk/platform-info'
@@ -19,7 +19,11 @@ describe('SettingsDefaultsEmailFrequencyComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule, MatLegacyDialogModule],
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+        MatLegacyDialogModule,
+      ],
       declarations: [SettingsDefaultsEmailFrequencyComponent],
       providers: [
         WINDOW_PROVIDERS,

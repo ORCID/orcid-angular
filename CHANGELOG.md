@@ -1,3 +1,17 @@
+## v2.102.0 - 2024-07-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.101.12...v2.102.0)
+
+## v2.101.12 - 2024-07-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.101.11...v2.101.12)
+
+## v2.101.11 - 2024-07-10
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.101.10...v2.101.11)
+
+- [#2298](https://github.com/ORCID/orcid-angular/pull/2298): 9306-notification-email-frequency-account-settings
+
 ## v2.101.10 - 2024-07-10
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.101.9...v2.101.10)
