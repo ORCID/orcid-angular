@@ -62,7 +62,8 @@ export class InboxService {
     if (
       this.lastEmittedValue &&
       getNextDepthLevel === false &&
-      !!this.currentlyIncludingArchive === includeArchived
+      !!this.currentlyIncludingArchive === includeArchived &&
+      !this.nextLoadRequireAFullBackendSyncronization
     ) {
       return this.inboxSubject.asObservable()
     }
