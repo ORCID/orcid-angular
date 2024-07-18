@@ -1,3 +1,9 @@
+## v2.102.1 - 2024-07-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.102.0...v2.102.1)
+
+- [#2300](https://github.com/ORCID/orcid-angular/pull/2300): Lmendoza/9306 notification email frequency account settings v2
+
 ## v2.102.0 - 2024-07-15
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.101.12...v2.102.0)
