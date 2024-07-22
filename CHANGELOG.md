@@ -1,3 +1,9 @@
+## v2.102.3 - 2024-07-22
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.102.2...v2.102.3)
+
+- [#2302](https://github.com/ORCID/orcid-angular/pull/2302): update email modal
+
 ## v2.102.2 - 2024-07-18
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.102.1...v2.102.2)
