@@ -18,6 +18,30 @@
     color: mat.get-color-from-palette($primary, 700);
   }
 
+  .verification-icon {
+    color: mat.get-color-from-palette($background, 'ui-background-light');
+  }
+  .verified {
+    color: mat.get-color-from-palette($foreground, 'brand-primary');
+  }
+
+  .separator {
+    background: mat.get-color-from-palette($background, 'ui-background-light');
+  }
+
+  .select-notifications-email {
+    ::ng-deep .mat-select-placeholder {
+      color: black;
+    }
+    color: rgba(0, 0, 0, 0.12);
+  }
+
+  .disabled-select-notifications-email {
+    ::ng-deep .mat-select-placeholder {
+      color: rgba(black, 0.6);
+    }
+  }
+
   .info {
     border-color: mat.get-color-from-palette(
       $foreground,

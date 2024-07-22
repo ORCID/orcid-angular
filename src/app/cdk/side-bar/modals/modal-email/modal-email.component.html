@@ -26,124 +26,81 @@
   </app-modal-footer>
 
   <div [formGroup]="emailsForm">
-    <div class="row">
-      <div class="col orc-font-body-small">
-        <p class="orcid-works-best" i18n="@@side-bar.OrcidWorkBest">
-          ORCID works best when you have multiple email addresses.
-        </p>
-        <p class="terms-of-use">
-          <i>
-            <ng-container i18n="@@side-bar.perOrcid"> Per the </ng-container>
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="/content/orcid-terms-use"
-              i18n="@@side-bar.termOfUse"
-              [attr.aria-label]="ariaLabelOrcidTermsOfUseLink"
-              >ORCID terms of use</a
-            >
-            <ng-container i18n="@@side-bar.youMayOnly">
-              you may only add email addresses that you have control over. Each
-              time you add an email address we will send you an email asking you
-              to verify it.
-            </ng-container>
-          </i>
-        </p>
-      </div>
-    </div>
+    <p
+      class="orc-font-body-small description"
+      i18n="@@side-bar.havingMultipleEmails"
+    >
+      Having multiple email addresses helps you maintain access to your ORCID
+      record. A mix of personal and professional email addresses works best.
+    </p>
 
-    <!-- PRIMARY EMAIL -->
-    <section class="row" id="primary-emails">
-      <h2 class="col orc-font-body" i18n="@@side-bar.primaryEmail">
-        Primary email address
-      </h2>
-
-      <ng-container *ngFor="let email of emails">
-        <div
-          *ngIf="email.primary"
-          class="row email-input-line"
-          [formGroupName]="email.putCode"
+    <app-alert-message *ngIf="!hasVerifiedEmailAddress()">
+      <ng-container>
+        <strong class="orc-font-body" i18n="@@side-bar.pleaseVerifyWarning"
+          >Please verify your email addresses</strong
         >
-          <div class="col l12 m8 s4 email-input-container">
-            <mat-form-field
-              *ngIf="!showEmailAsVerified(email.putCode)"
-              appearance="outline"
-              class="mat-form-field-min verify-icon"
-            >
-              <input
-                matInput
-                formControlName="email"
-                type="email"
-                appTrim
-                [attr.aria-label]="ariaLabelPrimaryEmail"
-              />
-              <mat-icon matPrefix>verified</mat-icon>
-              <mat-error
-                *ngIf="
-                  emailsForm.hasError('required', [email.putCode, 'email'])
-                "
-                i18n="@@sideBar.primaryEmailRequired"
-              >
-                An email is required
-              </mat-error>
-              <mat-error
-                *ngIf="
-                  emailsForm.hasError('duplicated', [email.putCode, 'email'])
-                "
-                i18n="@@side-bar.emailCanNotBeDuplicated"
-              >
-                Email can not be duplicated
-              </mat-error>
-              <mat-error
-                *ngIf="emailsForm.hasError('email', [email.putCode, 'email'])"
-                i18n="@@side-bar.invalidEmailFormat"
-              >
-                Invalid email format
-              </mat-error>
 
-              <mat-error
-                *ngIf="
-                  emailsForm.hasError('backendError', [email.putCode, 'email'])
-                "
-                i18n="@@side-bar.alreadyAssociated"
-              >
-                This email is already associated with an ORCID record.
-              </mat-error>
-            </mat-form-field>
-
-            <strong
-              tabindex="0"
-              class="orc-font-body-large email-activated primary-email-label verify-icon"
-              *ngIf="showEmailAsVerified(email.putCode)"
+        <p class="orc-font-body-small">
+          <ng-container i18n="@@side-bar.verifyToAccessOrcidFeatures"
+            >To access all of ORCID’s editing features you must verify at least
+            one email address. Until then you will only be able to
+            manage</ng-container
+          >
+          <strong i18n="@@side-bar.names">names</strong>
+          <ng-container i18n="@@side-bar.and">and</ng-container>
+          <strong i18n="@@side-bar.emailAddresses">email addresses</strong>
+          <ng-container i18n="@@side-bar.inYourOrcidRecord"
+            >in your ORCID record.</ng-container
+          >
+        </p>
+      </ng-container>
+    </app-alert-message>
+    <!-- EMAIL LIST -->
+    <section class="row email-list">
+      <h2 class="orc-font-body-large" i18n="@@side-bar.emailAddressesUppercase">
+        Email addresses
+      </h2>
+      <hr class="separator" />
+      <ng-container *ngFor="let email of emails">
+        <div class="email-entry row">
+          <div class="row email-input-line" [formGroupName]="email.putCode">
+            <mat-icon
+              class="verification-icon"
+              [ngClass]="{
+              verified: email.verified,
+            }"
+              >check_circle</mat-icon
             >
-              <mat-icon class="title-material-icon other-names" matPrefix
-                >verified</mat-icon
+            <div class="email-input-container">
+              <mat-form-field
+                *ngIf="!showEmailAsVerified(email.putCode)"
+                appearance="outline"
+                class="mat-form-field-min orc-font-body-small"
               >
-              <span class="sr-only" i18n="@@side-bar.primaryEmail"
-                >Primary email address</span
+                <input
+                  matInput
+                  formControlName="email"
+                  type="email"
+                  appTrim
+                  [attr.aria-label]="ariaLabelPrimaryEmail"
+                />
+              </mat-form-field>
+              <div
+                *ngIf="showEmailAsVerified(email.putCode)"
+                class="verified-email"
               >
-              {{ emailsForm.value[email.putCode].email }}</strong
-            >
-          </div>
-          <div class="col actions-wrapper no-gutters">
-            <div class="actions-sub-wrapper">
-              <ng-container *ngIf="showNonVerifiedData(email.putCode)">
-                <a
-                  class="orc-font-body-small disabled underline"
-                  *ngIf="verificationEmailWasSend(email.putCode)"
-                  i18n="@@side-bar.resendVerification"
+                <strong tabindex="0" class="row orc-font-body-small">
+                  <span class="sr-only" i18n="@@side-bar.primaryEmail"
+                    >Primary email address</span
+                  >
+                  {{ emailsForm.value[email.putCode].email }}</strong
                 >
-                  Resend verification email</a
+                <em
+                  class="row orc-font-small-print"
+                  i18n="@@side-bar.verifiedEmail"
+                  >Verified email address</em
                 >
-                <a
-                  class="orc-font-body-small underline"
-                  (click)="verifyEmail(email)"
-                  *ngIf="!verificationEmailWasSend(email.putCode)"
-                  i18n="@@side-bar.resendVerification"
-                >
-                  Resend verification email</a
-                >
-              </ng-container>
+              </div>
             </div>
             <div
               class="actions-sub-wrapper"
@@ -153,291 +110,105 @@
             >
               <app-visibility-selector
                 formControlName="visibility"
-                id="cy-primary-email-visibility"
-                [ariaLabelPrivate]="ariaLabelVisibilityPrimaryEmailPrivate"
-                [ariaLabelPublic]="ariaLabelVisibilityPrimaryEmailPublic"
-                [ariaLabelTrustedParty]="
-                  ariaLabelVisibilityPrimaryEmailTrustedParty
-                "
+                id="cy-email-visibility"
+                [ariaLabelPrivate]="ariaLabelVisibilityEmailTrustedParty"
+                [ariaLabelPublic]="ariaLabelVisibilityEmailTrustedParty"
+                [ariaLabelTrustedParty]="ariaLabelVisibilityEmailTrustedParty"
                 [itemTitle]="emailsForm.value[email.putCode].email"
+                [editable]="email.verified"
+                [mobile]="isMobile"
+                [privacy]="!email.verified ? 'PUBLIC' : email.visibility"
+                [matTooltip]="
+                  isMobile && !email.verified ? visibilityTooltip : ''
+                "
               ></app-visibility-selector>
               <div></div>
             </div>
+            <button
+              (click)="deleteEmail(email.putCode)"
+              mat-icon-button
+              class="delete-button"
+              [matTooltip]="
+                hasOneEmailAddress(email.putCode) ? deleteTooltip : ''
+              "
+              [disabled]="hasOneEmailAddress(email.putCode)"
+              [attr.aria-label]="
+                ariaLabelDelete +
+                ' ' +
+                (emailsForm.value[email.putCode].email || '')
+              "
+            >
+              <mat-icon
+                class="material-icons-outlined extra-large-material-icon"
+                >delete_outline</mat-icon
+              >
+            </button>
           </div>
-          <mat-error
-            class="mat-caption only-verified"
-            i18n="@@sideBar.onlyVerifiedEmail"
-            *ngIf="
-              emailsForm.get([email.putCode, 'visibility']) &&
-              (emailsForm.get([email.putCode, 'visibility']).touched ||
-                emailsForm.get([email.putCode, 'visibility']).dirty) &&
-              emailsForm.hasError('unverified', [email.putCode, 'visibility'])
-            "
-          >
-            Only verified email addresses can be displayed publicly or shared
-            with trusted parties. Please verify your email
-          </mat-error>
-        </div>
-        <app-alert-message
-          *ngIf="email.primary && !showEmailAsVerified(email.putCode)"
-          class="orc-font-body-small"
-        >
-          <ng-container *ngIf="!verificationEmailWasSend(email.putCode)">
-            <strong class="orc-font-body" i18n="@@side-bar.pleaseVerify"
-              >Please verify your primary email address!</strong
-            >
-
-            <p>
-              <ng-container i18n="@@side-bar.youNeedToVerify">
-                You need to verify your primary email in order to access all of
-                ORCID’s editing features.
-              </ng-container>
-              <br />
-              <ng-container i18n="@@side-bar.youNeedToVerify2">
-                To verify your email, click the link in the message sent to:
-              </ng-container>
-            </p>
-            <p class="email-container">{{ email.value }}</p>
-
-            <p>
-              <strong i18n="@@side-bar.needHelp"> Need help?</strong> <br />
-              <ng-container i18n="@@side-bar.visitOur">
-                Visit our
-              </ng-container>
-              <a
-                class="underline"
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://support.orcid.org/hc/articles/360006973793"
-                i18n="@@side-bar.knowledge"
-                [attr.aria-label]="ariaLabelKnowledgeBase"
-                >knowledge base
-              </a>
-              <ng-container i18n="@@side-bar.orContact">
-                or contact
-              </ng-container>
-
-              <a
-                class="underline"
-                target="_blank"
-                rel="noopener noreferrer"
-                i18n="@@side-bar.support"
-                [attr.aria-label]="ariaLabelKnowledgeSupport"
-                href="https://support.orcid.org/"
-              >
-                support.
-              </a>
-            </p>
-          </ng-container>
-          <ng-container *ngIf="verificationEmailWasSend(email.putCode)">
-            <strong class="orc-font-body"
-              ><ng-container i18n="@@side-bar.weHaveSentAEmail"
-                >We’ve sent a verification email to</ng-container
-              >
-              {{ email.value }}</strong
-            >
-            <p i18n="@@side-bar.pleaseCheckYour">
-              Please check your email inbox (or maybe your spam folder) for an
-              email with a link to complete the process.
-            </p>
-          </ng-container>
-        </app-alert-message>
-      </ng-container>
-    </section>
-
-    <section id="my-other-emails">
-      <div class="row">
-        <h2 class="col orc-font-body" i18n="@@side-bar.otherEmails">
-          Other email addresses
-        </h2>
-      </div>
-
-      <!-- ADDITIONAL EMAILS -->
-
-      <ng-container *ngFor="let email of emails">
-        <div
-          *ngIf="!email.primary"
-          class="row email-input-line"
-          [formGroupName]="email.putCode"
-        >
-          <div class="col l12 m8 s4 email-input-container">
-            <mat-form-field
-              appearance="outline"
-              class="mat-form-field-min verify-icon additional-email"
-              [ngClass]="{
-                'email-activated': showEmailAsVerified(email.putCode)
-              }"
-              *ngIf="!showEmailAsVerified(email.putCode)"
-            >
-              <input
-                [id]="email.putCode"
-                [attr.aria-label]="ariaLabelOtherEmailAddresses"
-                #emailInput
-                matInput
-                formControlName="email"
-                type="email"
-                appTrim
-              />
-              <mat-icon matPrefix>verified</mat-icon>
-              <mat-error
-                *ngIf="
-                  emailsForm.hasError('backendErrors', [email.putCode, 'email'])
-                "
-                i18n="@@side-bar.alreadyAssociated"
-              >
-                This email already exists in our system.
-              </mat-error>
-              <mat-error
-                *ngIf="
-                  emailsForm.hasError('duplicated', [email.putCode, 'email'])
-                "
-                i18n="@@side-bar.additionalEmailsDuplicate"
-              >
-                Additional emails cannot be duplicated
-              </mat-error>
-              <mat-error
-                *ngIf="
-                  emailsForm.hasError('required', [email.putCode, 'email'])
-                "
-                i18n="@@sideBar.primaryEmailRequired"
-              >
-                An email is required
-              </mat-error>
-              <mat-error
-                *ngIf="emailsForm.hasError('email', [email.putCode, 'email'])"
-                i18n="@@side-bar.invalidEmailFormat"
-              >
-                Invalid email format
-              </mat-error>
-
-              <mat-error
-                *ngIf="
-                  emailsForm.hasError('backendError', [email.putCode, 'email'])
-                "
-                i18n="@@side-bar.alreadyAssociated"
-              >
-                This email is already associated with an ORCID record.
-              </mat-error>
-            </mat-form-field>
-
-            <strong
-              class="orc-font-body email-activated primary-email-label verify-icon"
-              *ngIf="showEmailAsVerified(email.putCode)"
-              tabindex="0"
-            >
-              <mat-icon class="large-material-icon" matPrefix
-                >verified</mat-icon
-              >
-              <span class="sr-only" i18n="@@side-bar.otherEmails"
-                >Other email addresses</span
-              >
-              {{ emailsForm.value[email.putCode].email }}</strong
-            >
-          </div>
-
-          <div class="col actions-wrapper no-gutters">
-            <div class="actions-sub-wrapper url-wrapper">
-              <a
-                class="orc-font-body-small underline"
-                *ngIf="showEmailAsVerified(email.putCode)"
-                (click)="makePrimary(email)"
-                i18n="@@side-bar.makePrimary"
-              >
-                Make primary email</a
-              >
-
-              <ng-container *ngIf="showNonVerifiedData(email.putCode, true)">
-                <a
-                  class="orc-font-body-small disabled underline"
-                  *ngIf="verificationEmailWasSend(email.putCode)"
-                  i18n="@@side-bar.resendVerification"
-                >
-                  Resend verification email</a
-                >
-                <a
-                  class="orc-font-body-small underline"
-                  (click)="verifyEmail(email)"
-                  *ngIf="!verificationEmailWasSend(email.putCode)"
-                  i18n="@@side-bar.resendVerification"
-                >
-                  Resend verification email</a
-                >
-              </ng-container>
-            </div>
-
+          <div class="row actions-wrapper">
             <div
-              class="actions-sub-wrapper visibility-wrapper"
-              [ngClass]="{
-                'visibility-hidden': !showVisibility(
-                  email.putCode,
-                  email.action
-                )
-              }"
+              class="actions-sub-wrapper"
+              *ngIf="showNonVerifiedData(email.putCode)"
             >
-              <app-visibility-selector
-                [hidden]="!showVisibility(email.putCode, email.action)"
-                formControlName="visibility"
-                [ariaLabelPrivate]="ariaLabelVisibilityOtherEmailPublic"
-                [ariaLabelPublic]="ariaLabelVisibilityOtherEmailTrustedParty"
-                [ariaLabelTrustedParty]="ariaLabelVisibilityOtherEmailPrivate"
-                [itemTitle]="emailsForm.value[email.putCode].email"
-              ></app-visibility-selector>
-              <button
-                (click)="deleteEmail(email.putCode)"
-                mat-icon-button
-                class="delete-button"
-                [attr.aria-label]="
-                  ariaLabelDelete +
-                  ' ' +
-                  (emailsForm.value[email.putCode].email || '')
-                "
+              <span
+                class="orc-font-small-print disabled underline"
+                *ngIf="verificationEmailWasSend(email.putCode)"
+                i18n="@@side-bar.verificationEmailSent"
+                >Verification email sent</span
               >
-                <mat-icon
-                  class="material-icons-outlined extra-large-material-icon"
-                  >delete</mat-icon
-                >
-              </button>
+              <a
+                class="orc-font-small-print underline"
+                (click)="verifyEmail(email)"
+                *ngIf="!verificationEmailWasSend(email.putCode)"
+                i18n="@@side-bar.resendVerification"
+              >
+                Resend verification email</a
+              >
             </div>
-          </div>
-          <hr *ngIf="isMobile" />
-          <mat-error
-            class="mat-caption only-verified"
-            i18n="@@sideBar.onlyVerifiedEmail"
-            *ngIf="
-              emailsForm.get([email.putCode, 'visibility']) &&
-              (emailsForm.get([email.putCode, 'visibility']).touched ||
-                emailsForm.get([email.putCode, 'visibility']).dirty) &&
-              emailsForm.hasError('unverified', [email.putCode, 'visibility'])
-            "
-          >
-            Only verified email addresses can be displayed publicly or shared
-            with trusted parties. Please verify your email
-          </mat-error>
-        </div>
-        <div class="col l12 m8 s4">
-          <app-alert-message
-            *ngIf="!email.primary && verificationEmailWasSend(email.putCode)"
-            class="orc-font-body-small"
-          >
-            <strong class="orc-font-body"
-              ><ng-container i18n="@@side-bar.weHaveSentAEmail"
-                >We’ve sent a verification email to</ng-container
-              >
-              {{ email.value }}</strong
+            <mat-error
+              *ngIf="
+                emailsForm.hasError('required', [email.putCode, 'email']) &&
+                emailsForm.get(email.putCode).get('email').touched
+              "
+              i18n="@@sideBar.primaryEmailRequired"
+              class="orc-font-small-print"
             >
-            <p i18n="@@side-bar.pleaseCheckYour">
-              Please check your email inbox (or maybe your spam folder) for an
-              email with a link to complete the process.
-            </p>
-          </app-alert-message>
-        </div>
-      </ng-container>
-      <ng-container *ngIf="emails.length === 1">
-        <p class="orc-font-body-small" i18n="@@side-bar.noOtherEmails">
-          You haven’t added any other email addresses yet.
-        </p>
-      </ng-container>
+              An email is required
+            </mat-error>
+            <mat-error
+              *ngIf="
+                emailsForm.hasError('duplicated', [email.putCode, 'email']) &&
+                emailsForm.get(email.putCode).get('email').touched
+              "
+              i18n="@@side-bar.emailCanNotBeDuplicated"
+              class="orc-font-small-print"
+            >
+              Email can not be duplicated
+            </mat-error>
+            <mat-error
+              *ngIf="
+                emailsForm.hasError('email', [email.putCode, 'email']) &&
+                emailsForm.get(email.putCode).get('email').touched
+              "
+              i18n="@@side-bar.invalidEmailFormat"
+              class="orc-font-small-print"
+            >
+              Invalid email format
+            </mat-error>
 
+            <mat-error
+              *ngIf="
+                emailsForm.hasError('backendError', [email.putCode, 'email']) &&
+                emailsForm.get(email.putCode).get('email').touched
+              "
+              i18n="@@side-bar.alreadyAssociated"
+              class="orc-font-small-print"
+            >
+              This email is already associated with an ORCID record.
+            </mat-error>
+          </div>
+        </div>
+        <hr class="separator" />
+      </ng-container>
       <div
         class="row orc-font-body-small"
         *ngIf="
@@ -452,41 +223,58 @@
           [attr.disabled]=""
         >
           <mat-icon class="large-material-icon">add_circle_outline </mat-icon>
-          <ng-container
-            *ngIf="emails.length === 1"
-            i18n="@@side-bar.otherEmail"
-          >
-            Add other email address
-          </ng-container>
-          <ng-container
-            *ngIf="emails.length > 1"
-            i18n="@@side-bar.anotherEmail"
-          >
+          <ng-container i18n="@@side-bar.anotherEmail">
             Add another email address
           </ng-container>
         </a>
       </div>
-
-      <div
-        *ngIf="
-          userInfo?.IN_DELEGATION_MODE === 'true' &&
-          userInfo?.DELEGATED_BY_ADMIN !== 'true'
-        "
-        class="info"
-        [ngClass]="{
-          'orc-font-body-small': !isMobile,
-          'orc-font-small-print': isMobile
-        }"
+    </section>
+    <!-- EMAIL NOTIFICATIONS -->
+    <section>
+      <h2
+        class="orc-font-body-large email-notifications-header"
+        i18n="@@side-bar.emailNotifications"
       >
-        <div class="col">
-          <mat-icon>info</mat-icon>
-        </div>
-        <div class="col l11 m6 s3">
-          <p i18n="@@record.delegatorAddEmailNotAllow">
-            Adding additional email addresses is not allowed when you are
-            managing another ORCID record.
-          </p>
-        </div>
+        Email notifications
+      </h2>
+      <p class="orc-font-body-small email-notifications-description">
+        <ng-container i18n="@@side-bar.whichVerifiedEmail">
+          Which verified email address should we send your ORCID notifications
+          to? You can change the frequency of these notification emails in
+        </ng-container>
+        <a
+          i18n="@@side-bar.yourOrcidAccountSettings"
+          href="/account"
+          target="_blank"
+          rel="noopener noreferrer"
+          >your ORCID account settings.</a
+        >
+      </p>
+      <div appearance="outline" class="mat-form-field-min">
+        <mat-select
+          outline="black"
+          [aria-label]="ariaLabelSelect"
+          [attr.disabled]="hasOneEmailAddress()"
+          (selectionChange)="makePrimary($event.value)"
+          [ngClass]="{
+            'disabled-select-notifications-email': hasOneEmailAddress()
+          }"
+          placeholder=" {{ primaryEmail.value }}"
+          [(value)]="primaryEmail"
+          class="select-notifications-email orc-font-body-small"
+        >
+          <ng-container *ngFor="let email of emails">
+            <mat-option
+              *ngIf="email.verified"
+              [ngClass]="{
+                'current-notification-email': email.value === primaryEmail.value
+              }"
+              [value]="email"
+            >
+              {{ email.value }}
+            </mat-option>
+          </ng-container>
+        </mat-select>
       </div>
     </section>
   </div>

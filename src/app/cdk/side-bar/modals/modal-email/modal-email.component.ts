@@ -46,6 +46,7 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   ariaLabelKnowledgeSupport = $localize`:@@side-bar.ariaLabelOrcidTermsSupport:ORCID support page (Opens in a new tab)`
   ariaLabelOrcidTermsOfUseLink = $localize`:@@side-bar.ariaLabelOrcidTermsOfUseLink:ORCID terms of use (Opens in a new tab)`
   ariaLabelSave = $localize`:@@side-bar.ariaLabelEmailSave:Save changes to Emails`
+  ariaLabelSelect = $localize`:@@side-bar.ariaLabelEmailSave:Select email to receive notifications`
   ariaLabelCancel = $localize`:@@side-bar.ariaLabelEmailCancel:Cancel changes and close Emails`
   ariaLabelDelete = $localize`:@@side-bar.ariaLabelEmailDelete:Delete Email`
   ariaLabelClose = $localize`:@@side-bar.ariaLabelEmailClose:Close Emails`
@@ -57,6 +58,11 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   ariaLabelVisibilityOtherEmailPublic = $localize`:@@side-bar.ariaLabelOtherEmailPublic:Set other email visibility to Everyone`
   ariaLabelVisibilityOtherEmailTrustedParty = $localize`:@@side-bar.ariaLabelOtherEmailTrustedParties:Set other email visibility to Trusted Parties`
   ariaLabelVisibilityOtherEmailPrivate = $localize`:@@side-bar.ariaLabelOtherEmailPrivate:Set other email visibility to Only Me`
+  ariaLabelVisibilityEmailPublic = $localize`:@@side-bar.ariaLabelEmailPublic:Set email visibility to Everyone`
+  ariaLabelVisibilityEmailTrustedParty = $localize`:@@side-bar.ariaLabelEmailTrustedParties:Set email visibility to Trusted Parties`
+  ariaLabelVisibilityEmailPrivate = $localize`:@@side-bar.ariaLabelEmailPrivate:Set email visibility to Only Me`
+  deleteTooltip = $localize`:@@side-bar.deleteTooltip:You can't delete the only email address in your account`
+  visibilityTooltip = $localize`:@@side-bar.visibilityTooltip:You can't change the visibility of an unverified email address`
 
   @ViewChildren('emailInput') inputs: QueryList<ElementRef>
   verificationsSend: string[] = []
@@ -64,6 +70,7 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   addedEmailsCount = 0
   emailsForm: UntypedFormGroup = new UntypedFormGroup({})
   emails: AssertionVisibilityString[] = []
+  primaryEmail: AssertionVisibilityString
   originalEmailsBackendCopy: AssertionVisibilityString[]
   defaultVisibility: VisibilityStrings = 'PRIVATE'
 
@@ -171,11 +178,16 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
 
       // Add email to the emails list
       // backend response come with no email putCode, so here we create one to be able to track those on the frontend
-      this.emails.push({
+      const emailEntry: AssertionVisibilityString = {
         putCode: newPutCode,
         action: existingEmail ? 'UPDATE' : 'ADD',
         ...existingEmail,
-      } as AssertionVisibilityString)
+      }
+      this.emails.push(emailEntry)
+
+      if (existingEmail && emailEntry.primary) {
+        this.primaryEmail = emailEntry
+      }
 
       // Add a new control to the formGroup
       this.emailsForm.addControl(
@@ -199,7 +211,9 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
             }
           ),
           visibility: new UntypedFormControl(
-            existingEmail ? existingEmail.visibility : this.defaultVisibility,
+            existingEmail && existingEmail.verified
+              ? existingEmail.visibility
+              : this.defaultVisibility,
             {
               validators: [this.emailsIsUnverified(newPutCode)],
             }
@@ -225,10 +239,21 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
    * @param newPrimaryEmail: the email to make primary
    */
   makePrimary(newPrimaryEmail: AssertionVisibilityString): void {
+    this.primaryEmail = newPrimaryEmail
     this.emails.forEach(
       (email) => (email.primary = email.putCode === newPrimaryEmail.putCode)
     )
     this.triggerGeneralFormValidation()
+  }
+
+  setNextEmailAsPrimary() {
+    const verifiedEmails = this.emails.filter((email) => email.verified)
+    const currentIndex = verifiedEmails.findIndex(
+      (value) => value.putCode === this.primaryEmail.putCode
+    )
+    const nextIndex = (currentIndex + 1) % verifiedEmails.length
+    const nextEmail = verifiedEmails[nextIndex]
+    this.makePrimary(nextEmail)
   }
 
   private triggerGeneralFormValidation() {
@@ -373,9 +398,15 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   }
 
   deleteEmail(controlKey: string) {
-    const i = this.emails.findIndex((value) => value.putCode === controlKey)
-    this.emails.splice(i, 1)
-    this.emailsForm.removeControl(controlKey)
+    if (!this.hasOneEmailAddress(controlKey)) {
+      if (controlKey === this.primaryEmail.putCode) {
+        this.setNextEmailAsPrimary()
+      }
+
+      const i = this.emails.findIndex((value) => value.putCode === controlKey)
+      this.emails.splice(i, 1)
+      this.emailsForm.removeControl(controlKey)
+    }
   }
 
   showNonVerifiedData(controlKey: string, otherEmail?: boolean): boolean {
@@ -456,6 +487,20 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
     }
 
     return result
+  }
+
+  hasOneEmailAddress(controlKey = ''): boolean {
+    if (controlKey.startsWith('new')) {
+      return false
+    }
+    return (
+      this.emails.filter((email) => !email.putCode.startsWith('newEmailInput'))
+        .length === 1
+    )
+  }
+
+  hasVerifiedEmailAddress(): boolean {
+    return this.emails.some((email) => email.verified)
   }
 
   ngOnDestroy() {

@@ -52,7 +52,11 @@
       <app-panel-data *ngIf="userRecord.emails.emails.length > 0">
         <app-panel-element
           *ngFor="let email of userRecord.emails.emails; let last = last"
-          [visibility]="!isPublicRecord && email.visibility"
+          [visibility]="
+            !isPublicRecord && email.visibility && email.verified
+              ? email.visibility
+              : 'PRIVATE'
+          "
           [bold]="email.primary"
           [isPublicRecord]="isPublicRecord"
           >{{ email.value }}

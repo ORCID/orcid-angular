@@ -2,47 +2,44 @@
   padding-inline-start: 0;
 }
 
-.orcid-works-best {
-  margin-bottom: 16px;
+.description {
+  margin: 0 0 16px 0;
+  line-height: 21px;
 }
 
-.terms-of-use {
-  margin-top: 0;
-}
-
-.add-more-email {
-  display: flex;
-  align-items: center;
-
-  mat-icon {
-    margin-inline-end: 8px;
+app-alert-message {
+  p {
+    margin: 8px 0 0 0;
+    letter-spacing: 0.25px;
   }
+  line-height: 24px;
+  margin-bottom: 16px;
+  margin-top: 32px;
 }
 
-.email-input-line {
-  justify-content: space-between;
-  align-items: center;
+.verification-icon {
+  height: 40px;
+  width: 32px;
+  font-size: 32px;
+  margin-right: 16px;
+  align-content: center;
 }
 
 mat-form-field {
   width: 100%;
-  top: 12px;
+  line-height: 20px;
+  margin: 0;
 
   mat-icon {
     line-height: 1.1;
   }
 }
 
-.visibility-wrapper {
-  width: 60%;
-}
-
-.url-wrapper {
-  width: 40%;
-}
-
 .actions-wrapper {
   width: 51%;
+  margin-left: 48px;
+  margin-top: 3px;
+  line-height: 21px;
 }
 
 .actions-wrapper,
@@ -50,7 +47,6 @@ mat-form-field {
   display: flex;
   flex-wrap: nowrap;
   flex-shrink: 0;
-  align-items: center;
   justify-content: space-between;
 
   .actions-sub-wrapper {
@@ -68,131 +64,117 @@ mat-form-field {
   }
 }
 
-.primary-email-label {
-  display: flex;
-  align-items: center;
-  word-break: break-all;
-
-  mat-icon {
-    margin-inline-start: 6px;
-    margin-inline-end: 16px;
-    width: 32px;
-  }
-
-  mat-icon,
-  .other-names {
-    margin-inline-start: 12px;
-  }
-}
-
 .email-input-line {
-  margin-top: 5px;
-  margin-bottom: 8px;
-
-  img {
-    margin-top: 6px;
-    cursor: move;
-    z-index: 1;
-    margin-inline-end: 18px;
-  }
-
-  .email-activated {
-    margin-bottom: 12px;
-    margin-top: 10px;
-  }
+  align-items: center;
+  height: 44px;
 }
 
-::ng-deep .columns-4-or-8 .mat-form-field {
-  margin-inline-end: auto;
+.email-entry {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.separator {
+  height: 1px;
+  width: 100%;
+  margin: 0;
+}
+
+.email-list {
+  margin-bottom: 32px;
+
+  ::ng-deep .mat-form-field-flex {
+    margin-top: 0;
+  }
+
+  ::ng-deep .mat-form-field-subscript-wrapper {
+    padding: 0 !important;
+    margin-top: 4px;
+  }
+
+  ::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 0;
+  }
 }
 
 .email-input-container {
-  max-width: 49%;
+  flex-grow: 1;
   padding-inline-end: 24px;
+  width: 0;
+}
+
+.select-notifications-email {
+  padding: 0 8px 0 8px;
+  align-items: center;
+  display: flex;
+  height: 38px;
+  max-width: 402px;
+  width: auto;
+  border: solid 1px;
+  border-radius: 0 5px 5px 0;
+}
+.current-notification-email {
+  font-weight: bold;
+}
+
+.disabled-select-notifications-email {
+  ::ng-deep .mat-select-trigger {
+    cursor: default;
+  }
 }
 
 .add-more {
   margin-top: 16px;
-
+  align-items: center;
+  text-decoration: underline;
   mat-icon {
     padding-inline-end: 8px;
   }
 }
 
-::ng-deep app-alert-message {
-  p {
-    margin: 0;
+.verified-email {
+  em,
+  strong {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
-
-  p.email-container {
-    margin: 16px 0 16px 0;
+  strong {
+    margin-bottom: 2px;
   }
-
-  margin-bottom: 20px;
-}
-
-::ng-deep .columns-4-or-8 {
-  .mat-form-field {
-    margin-inline-end: auto;
-  }
-
-  .email-input-container {
-    padding: 0;
-    max-width: 100%;
-    padding-inline-end: 0;
-  }
-
-  .actions-wrapper,
-  .actions-sub-wrapper {
-    width: 100%;
-    flex-wrap: wrap;
-  }
-
-  .actions-sub-wrapper {
-    justify-content: space-between !important;
-  }
-}
-
-.additional-email {
-  ::ng-deep .mat-form-field-wrapper {
-    padding-bottom: 18px !important;
-  }
-}
-
-.only-verified {
-  padding: 0 4px;
+  line-height: 21px;
+  letter-spacing: 0.25px;
 }
 
 .visibility-hidden {
   justify-content: end !important;
 }
 
-.info {
-  padding: 16px;
-  margin-top: 32px;
-  border: solid 2px;
-  border-radius: 4px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-
-  p {
-    margin: 0;
+.delete-button {
+  margin-inline-start: 16px;
+  margin-inline-end: 16px;
+  mat-icon {
+    font-size: 24px;
+    margin-top: -4px;
   }
 }
 
-.delete-button {
-  margin-inline-start: 16px;
+.email-notfications-header {
+  margin-bottom: 16px;
+}
+
+.email-notifications-description {
+  a {
+    text-decoration: underline;
+  }
+  margin-bottom: 32px;
 }
 
 app-visibility-selector {
-  margin-inline-start: 16px;
+  margin-inline-start: 8px;
 }
 
-::ng-deep .columns-4-or-8 {
-  app-visibility-selector {
-    margin-inline-start: 0;
-    margin-top: 16px;
-    margin-bottom: 16px;
-  }
+::ng-deep .main-button-container {
+  height: 100%;
 }
