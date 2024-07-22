@@ -258,7 +258,7 @@
           [ngClass]="{
             'disabled-select-notifications-email': hasOneEmailAddress()
           }"
-          placeholder=" {{ primaryEmail.value }}"
+          placeholder=" {{ primaryEmail?.value }}"
           [(value)]="primaryEmail"
           class="select-notifications-email orc-font-body-small"
         >
@@ -266,7 +266,8 @@
             <mat-option
               *ngIf="email.verified"
               [ngClass]="{
-                'current-notification-email': email.value === primaryEmail.value
+                'current-notification-email':
+                  email.value === primaryEmail?.value
               }"
               [value]="email"
             >

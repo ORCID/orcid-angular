@@ -70,7 +70,7 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   addedEmailsCount = 0
   emailsForm: UntypedFormGroup = new UntypedFormGroup({})
   emails: AssertionVisibilityString[] = []
-  primaryEmail: AssertionVisibilityString
+  primaryEmail: AssertionVisibilityString | undefined = undefined
   originalEmailsBackendCopy: AssertionVisibilityString[]
   defaultVisibility: VisibilityStrings = 'PRIVATE'
 
@@ -399,7 +399,7 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
 
   deleteEmail(controlKey: string) {
     if (!this.hasOneEmailAddress(controlKey)) {
-      if (controlKey === this.primaryEmail.putCode) {
+      if (controlKey === this.primaryEmail?.putCode) {
         this.setNextEmailAsPrimary()
       }
 
