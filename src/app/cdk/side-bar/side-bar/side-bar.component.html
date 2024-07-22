@@ -53,9 +53,7 @@
         <app-panel-element
           *ngFor="let email of userRecord.emails.emails; let last = last"
           [visibility]="
-            !isPublicRecord && email.visibility && email.verified
-              ? email.visibility
-              : 'PRIVATE'
+            isPublicRecord ? '' : email.verified ? email.visibility : 'PRIVATE'
           "
           [bold]="email.primary"
           [isPublicRecord]="isPublicRecord"
