@@ -28,6 +28,8 @@ export class VisibilitySelectorComponent
 
   @Input() editable = true
 
+  @Input() mobile = false
+
   @Input()
   ariaLabelPublic: string = $localize`:@@share.ariaLabelPublic:set item visibility to Everyone`
   @Input()

@@ -9,7 +9,6 @@ import { ModalFooterComponent } from './modal-footer/modal-footer.component'
 import { ModalHeaderComponent } from './modal-header/modal-header.component'
 import { ModalSideBarComponent } from './modal-side-bar/modal-side-bar.component'
 import { ModalComponent } from './modal/modal.component'
-import { AlertMessageComponent } from './alert-message/alert-message.component'
 
 @NgModule({
   declarations: [
@@ -17,7 +16,6 @@ import { AlertMessageComponent } from './alert-message/alert-message.component'
     ModalHeaderComponent,
     ModalFooterComponent,
     ModalSideBarComponent,
-    AlertMessageComponent,
   ],
   imports: [
     CommonModule,
@@ -31,7 +29,6 @@ import { AlertMessageComponent } from './alert-message/alert-message.component'
     ModalHeaderComponent,
     ModalFooterComponent,
     ModalSideBarComponent,
-    AlertMessageComponent,
   ],
 })
 export class ModalModule {}

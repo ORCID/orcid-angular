@@ -1,6 +1,7 @@
 <button
   [ngClass]="{
-    'not-editable': !editable
+    'not-editable': !editable,
+    mobile: mobile
   }"
   [disabled]="!editable"
   mat-button
@@ -8,7 +9,17 @@
   class="main-menu"
   [attr.aria-label]="(itemTitle || '') + ' ' + mainButtonLabel"
 >
-  <div class="main-button-container">
+  <mat-icon
+    *ngIf="mobile"
+    class="menu-icon"
+    [ngClass]="{
+      limitedIcon: privacy === 'LIMITED',
+      publicIcon: privacy === 'PUBLIC',
+      privateIcon: privacy === 'PRIVATE'
+    }"
+    >visibility</mat-icon
+  >
+  <div class="main-button-container" *ngIf="!mobile">
     <div class="icon-title-container">
       <mat-icon
         class="menu-icon"
@@ -19,7 +30,6 @@
         }"
         >visibility</mat-icon
       >
-
       <ng-container
         *ngIf="privacy === 'PUBLIC'"
         i18n="@@register.VisibilityEveryone"

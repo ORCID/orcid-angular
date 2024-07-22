@@ -61,10 +61,7 @@ export class RecordEmailsService {
         catchError((error) => this._errorHandler.handleError(error)),
         catchError((error) => of({ emails: [] })),
         map((value: EmailsEndpoint) => {
-          value.emails
-            .sort(this.sortByEmailByValue)
-            .sort(this.sortByEmailByVerifiedState)
-            .sort(this.sortByEmailPrimaryState)
+          value.emails.sort(this.sortByEmailCreationDate)
           return value
         }),
         tap((value) => {
@@ -208,5 +205,20 @@ export class RecordEmailsService {
     b: AssertionVisibilityString
   ): number {
     return a.primary === b.primary ? 0 : a.primary ? -1 : 1
+  }
+
+  sortByEmailCreationDate(
+    a: AssertionVisibilityString,
+    b: AssertionVisibilityString
+  ): number {
+    const dateA = Date.parse(
+      `${a.createdDate.year}-${a.createdDate.month}-${a.createdDate.day}`
+    )
+
+    const dateB = Date.parse(
+      `${b.createdDate.year}-${b.createdDate.month}-${b.createdDate.day}`
+    )
+
+    return dateA - dateB
   }
 }
