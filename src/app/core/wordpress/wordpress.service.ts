@@ -60,10 +60,6 @@ export class WordpressService {
           regex,
           `${data.url.replace(/wordpress-homepage.*\.js$/, '')}assets/`
         )
-        // By default the script was intented to be executed after the event `DOMContentLoaded`
-        // but in Angular the event `DOMContentLoaded` is already fired, so we need to execute it
-        // the following line of code will load the code even if the DOMContentLoaded event is already fired
-        updateJs += `if (document.readyState === 'complete') {tabtoursInit(document)}`
         return updateJs
       })
     )
