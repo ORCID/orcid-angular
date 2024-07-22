@@ -62,7 +62,7 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   ariaLabelVisibilityEmailTrustedParty = $localize`:@@side-bar.ariaLabelEmailTrustedParties:Set email visibility to Trusted Parties`
   ariaLabelVisibilityEmailPrivate = $localize`:@@side-bar.ariaLabelEmailPrivate:Set email visibility to Only Me`
   deleteTooltip = $localize`:@@side-bar.deleteTooltip:You can't delete the only email address in your account`
-  visibilityTooltip = $localize`:@@side-bar.visibilityTooltip:You can't change the visibility of an unverified email address`
+  visibilityTooltip = $localize`:@@side-bar.visibilityTooltip:Visibility set to Only me`
 
   @ViewChildren('emailInput') inputs: QueryList<ElementRef>
   verificationsSend: string[] = []
