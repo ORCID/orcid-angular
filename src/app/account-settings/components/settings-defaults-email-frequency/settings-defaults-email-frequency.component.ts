@@ -112,15 +112,18 @@ export class SettingsDefaultsEmailFrequencyComponent
         this.isMobile = platform.columns4 || platform.columns8
       })
 
-      this._record
+    this._record
       .getRecord()
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
-        this.primaryEmail = userRecord.emails.emails.find((email) => email.primary).value
-        this.primaryEmailVerified = userRecord.emails.emails.find((email) => email.primary).verified
+        this.primaryEmail = userRecord.emails.emails.find(
+          (email) => email.primary
+        ).value
+        this.primaryEmailVerified = userRecord.emails.emails.find(
+          (email) => email.primary
+        ).verified
       })
   }
-  
 
   openEmailModal() {
     return this._dialog
