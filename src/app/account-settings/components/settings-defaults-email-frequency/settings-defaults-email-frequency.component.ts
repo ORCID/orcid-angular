@@ -54,7 +54,6 @@ export class SettingsDefaultsEmailFrequencyComponent
     private _fb: UntypedFormBuilder,
     private _emailFrequency: AccountDefaultEmailFrequenciesService,
     private _dialog: MatLegacyDialog,
-    private _userInfoService: UserInfoService,
     private _record: RecordService
   ) {}
 
