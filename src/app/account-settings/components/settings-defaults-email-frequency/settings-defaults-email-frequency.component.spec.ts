@@ -12,6 +12,8 @@ import { Overlay } from '@angular/cdk/overlay'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 import { UserInfoService } from 'src/app/core/user-info/user-info.service'
+import { RecordService } from 'src/app/core/record/record.service'
+import { of } from 'rxjs'
 
 describe('SettingsDefaultsEmailFrequencyComponent', () => {
   let component: SettingsDefaultsEmailFrequencyComponent
@@ -30,10 +32,15 @@ describe('SettingsDefaultsEmailFrequencyComponent', () => {
         UntypedFormBuilder,
         PlatformInfoService,
         ErrorHandlerService,
-        UserInfoService,
         SnackbarService,
         MatSnackBar,
         Overlay,
+        {
+          provide: RecordService,
+          useValue: {
+            getRecord: () => of({}),
+          },
+        },
       ],
     }).compileComponents()
   })
