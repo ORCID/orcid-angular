@@ -61,6 +61,7 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   ariaLabelVisibilityEmailPublic = $localize`:@@side-bar.ariaLabelEmailPublic:Set email visibility to Everyone`
   ariaLabelVisibilityEmailTrustedParty = $localize`:@@side-bar.ariaLabelEmailTrustedParties:Set email visibility to Trusted Parties`
   ariaLabelVisibilityEmailPrivate = $localize`:@@side-bar.ariaLabelEmailPrivate:Set email visibility to Only Me`
+  ariaOpenAccountSettings = $localize`:@@side-bar.ariaOpenAccountSettings:Open your ORCID account settings`
   deleteTooltip = $localize`:@@side-bar.deleteTooltip:You can't delete the only email address in your account`
   visibilityTooltip = $localize`:@@side-bar.visibilityTooltip:Visibility set to Only me`
 

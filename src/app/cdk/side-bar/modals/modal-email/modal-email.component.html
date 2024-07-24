@@ -77,6 +77,7 @@
                 appearance="outline"
                 class="mat-form-field-min orc-font-body-small"
               >
+                <!-- todo: do i need the aria label here? -->
                 <input
                   matInput
                   formControlName="email"
@@ -90,9 +91,6 @@
                 class="verified-email"
               >
                 <strong tabindex="0" class="row orc-font-body-small">
-                  <span class="sr-only" i18n="@@side-bar.primaryEmail"
-                    >Primary email address</span
-                  >
                   {{ emailsForm.value[email.putCode].email }}</strong
                 >
                 <em
@@ -245,6 +243,7 @@
           i18n="@@side-bar.yourOrcidAccountSettings"
           href="/account"
           target="_blank"
+          [attr.aria-label]="ariaOpenAccountSettings"
           rel="noopener noreferrer"
           >your ORCID account settings.</a
         >
