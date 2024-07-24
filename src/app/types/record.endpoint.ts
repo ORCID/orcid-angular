@@ -119,7 +119,6 @@ export interface AssertionVisibilityString extends AssertionBase {
   visibility?: VisibilityStrings
   action?: 'ADD' | 'UPDATE'
   createdDate?: ExtendedDate
-  lastModifiedDate?: ExtendedDate
 }
 
 export interface GroupBase {
