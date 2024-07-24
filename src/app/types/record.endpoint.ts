@@ -1,6 +1,7 @@
 import {
   Address,
   Email,
+  ExtendedDate,
   Keyword,
   MonthDayYearDate,
   OtherName,
@@ -117,6 +118,8 @@ export interface Assertion extends AssertionBase {
 export interface AssertionVisibilityString extends AssertionBase {
   visibility?: VisibilityStrings
   action?: 'ADD' | 'UPDATE'
+  createdDate?: ExtendedDate
+  lastModifiedDate?: ExtendedDate
 }
 
 export interface GroupBase {
