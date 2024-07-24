@@ -189,10 +189,11 @@
                 emailsForm.hasError('email', [email.putCode, 'email']) &&
                 emailsForm.get(email.putCode).get('email').touched
               "
-              i18n="@@side-bar.invalidEmailFormat"
+              i18n="@@side-bar.invalidEmailErrorMessage"
               class="orc-font-small-print"
             >
-              Invalid email format
+              Please enter a valid email address, for example
+              joe@institution.edu
             </mat-error>
 
             <mat-error
