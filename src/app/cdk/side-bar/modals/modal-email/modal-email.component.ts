@@ -247,12 +247,16 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   }
 
   setNextEmailAsPrimary() {
-    const verifiedEmails = this.emails.filter((email) => email.verified)
-    const currentIndex = verifiedEmails.findIndex(
+    let emails = this.emails.filter((email) => email.verified)
+    // If there are no verified emails left, make any next email primary
+    if (emails.length === 0) {
+      emails = this.emails
+    }
+    const currentIndex = emails.findIndex(
       (value) => value.putCode === this.primaryEmail.putCode
     )
-    const nextIndex = (currentIndex + 1) % verifiedEmails.length
-    const nextEmail = verifiedEmails[nextIndex]
+    const nextIndex = (currentIndex + 1) % emails.length
+    const nextEmail = emails[nextIndex]
     this.makePrimary(nextEmail)
   }
 
@@ -399,13 +403,12 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
 
   deleteEmail(controlKey: string) {
     if (!this.hasOneEmailAddress(controlKey)) {
-      if (controlKey === this.primaryEmail?.putCode) {
-        this.setNextEmailAsPrimary()
-      }
-
       const i = this.emails.findIndex((value) => value.putCode === controlKey)
       this.emails.splice(i, 1)
       this.emailsForm.removeControl(controlKey)
+      if (controlKey === this.primaryEmail?.putCode) {
+        this.setNextEmailAsPrimary()
+      }
     }
   }
 
