@@ -1,3 +1,7 @@
+## v2.102.7 - 2024-07-24
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.102.6...v2.102.7)
+
 ## v2.102.6 - 2024-07-24
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.102.5...v2.102.6)
