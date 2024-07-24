@@ -20,7 +20,7 @@ mat-form-field {
 }
 
 label {
-  margin-bottom: 8px;
+  margin-bottom: 2px;
 }
 
 .italic {
@@ -51,9 +51,22 @@ mat-checkbox {
   justify-content: space-between;
   max-width: 100%;
   .email-container {
+    min-width: 0;
     display: flex;
     gap: 16px;
     align-items: center;
+    div {
+      min-width: 0;
+      line-height: 21px;
+    }
+    label,
+    caption {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      text-align: left;
+      display: block !important;
+    }
     label {
       font-weight: bold;
     }
