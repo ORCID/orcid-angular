@@ -248,7 +248,10 @@
           >your ORCID account settings.</a
         >
       </p>
-      <div appearance="outline" class="mat-form-field-min">
+      <mat-form-field
+        appearance="outline"
+        class="mat-form-field-min select-notifications-email"
+      >
         <mat-select
           outline="black"
           [aria-label]="ariaLabelSelect"
@@ -259,7 +262,7 @@
           }"
           placeholder=" {{ primaryEmail?.value }}"
           [(value)]="primaryEmail"
-          class="select-notifications-email orc-font-body-small"
+          class="orc-font-body-small"
         >
           <ng-container *ngFor="let email of emails">
             <mat-option
@@ -274,7 +277,7 @@
             </mat-option>
           </ng-container>
         </mat-select>
-      </div>
+      </mat-form-field>
     </section>
   </div>
 </app-modal>
