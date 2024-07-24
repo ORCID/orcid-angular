@@ -1,3 +1,25 @@
+## v2.102.9 - 2024-07-24
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.102.8...v2.102.9)
+
+## v2.102.8 - 2024-07-24
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.102.7...v2.102.8)
+
+## v2.102.7 - 2024-07-24
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.102.6...v2.102.7)
+
+## v2.102.6 - 2024-07-24
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.102.5...v2.102.6)
+
+## v2.102.5 - 2024-07-23
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.102.4...v2.102.5)
+
+- [#2304](https://github.com/ORCID/orcid-angular/pull/2304): Lmendoza/9313 qa notification email address in account settings doesnt update when theres a change
+
 ## v2.102.4 - 2024-07-23
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.102.3...v2.102.4)
