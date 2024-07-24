@@ -83,7 +83,7 @@
                   formControlName="email"
                   type="email"
                   appTrim
-                  [attr.aria-label]="ariaLabelPrimaryEmail"
+                  [attr.aria-label]="ariaLabelEmailAddress"
                 />
               </mat-form-field>
               <div
@@ -254,7 +254,9 @@
       >
         <mat-select
           outline="black"
-          [aria-label]="ariaLabelSelect"
+          [aria-label]="
+            ariaLabelNotificationsAreSentTo + ' ' + primaryEmail?.value
+          "
           [attr.disabled]="hasOneEmailAddress()"
           (selectionChange)="makePrimary($event.value)"
           [ngClass]="{

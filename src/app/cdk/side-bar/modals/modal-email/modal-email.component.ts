@@ -46,11 +46,11 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   ariaLabelKnowledgeSupport = $localize`:@@side-bar.ariaLabelOrcidTermsSupport:ORCID support page (Opens in a new tab)`
   ariaLabelOrcidTermsOfUseLink = $localize`:@@side-bar.ariaLabelOrcidTermsOfUseLink:ORCID terms of use (Opens in a new tab)`
   ariaLabelSave = $localize`:@@side-bar.ariaLabelEmailSave:Save changes to Emails`
-  ariaLabelSelect = $localize`:@@side-bar.ariaLabelEmailSave:Select email to receive notifications`
+  ariaLabelNotificationsAreSentTo = $localize`:@@side-bar.notificationsAreSentTo:Notifications are sent to`
   ariaLabelCancel = $localize`:@@side-bar.ariaLabelEmailCancel:Cancel changes and close Emails`
   ariaLabelDelete = $localize`:@@side-bar.ariaLabelEmailDelete:Delete Email`
   ariaLabelClose = $localize`:@@side-bar.ariaLabelEmailClose:Close Emails`
-  ariaLabelPrimaryEmail = $localize`:@@side-bar.primaryEmail:Primary email address`
+  ariaLabelEmailAddress = $localize`:@@side-bar.emailAddress:Email address`
   ariaLabelOtherEmailAddresses = $localize`:@@side-bar.otherEmails:Other email addresses`
   ariaLabelVisibilityPrimaryEmailPublic = $localize`:@@side-bar.ariaLabelPrimaryEmailPublic:Set primary email visibility to Everyone`
   ariaLabelVisibilityPrimaryEmailTrustedParty = $localize`:@@side-bar.ariaLabelPrimaryEmailTrustedParties:Set primary email visibility to Trusted Parties`
