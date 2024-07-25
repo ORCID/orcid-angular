@@ -260,7 +260,7 @@
         <mat-select
           outline="black"
           [aria-label]="
-            ariaLabelNotificationsAreSentTo + ' ' + primaryEmail?.value
+            ariaLabelNotificationsAreSentToEmail + ' ' + primaryEmail?.value
           "
           [attr.disabled]="!hasVerifiedEmailAddress()"
           (selectionChange)="makePrimary($event.value)"
