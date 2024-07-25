@@ -17,6 +17,7 @@ import { PlatformInfoService } from '../platform-info'
 export class TopBarVerificationEmailComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
   @Input() emailVerified: boolean
+  @Input() justRegistered: boolean
   @Input() messageType: 'forCredentials' | 'forManualEditing' =
     'forManualEditing'
 
