@@ -83,7 +83,11 @@
                   formControlName="email"
                   type="email"
                   appTrim
-                  [attr.aria-label]="ariaLabelPrimaryEmail"
+                  [attr.aria-label]="
+                    email.putCode.startsWith('new')
+                      ? ariaLabelNewEmailAddress
+                      : ariaLabelEmailAddress + ' ' + email.value
+                  "
                 />
               </mat-form-field>
               <div
@@ -91,9 +95,6 @@
                 class="verified-email"
               >
                 <strong tabindex="0" class="row orc-font-body-small">
-                  <span class="sr-only" i18n="@@side-bar.primaryEmail"
-                    >Primary email address</span
-                  >
                   {{ emailsForm.value[email.putCode].email }}</strong
                 >
                 <em
@@ -250,6 +251,7 @@
           i18n="@@side-bar.yourOrcidAccountSettings"
           href="/account"
           target="_blank"
+          [attr.aria-label]="ariaOpenAccountSettings"
           rel="noopener noreferrer"
           >your ORCID account settings.</a
         >
@@ -260,7 +262,9 @@
       >
         <mat-select
           outline="black"
-          [aria-label]="ariaLabelSelect"
+          [aria-label]="
+            ariaLabelNotificationsAreSentToEmail + ' ' + primaryEmail?.value
+          "
           [attr.disabled]="!hasVerifiedEmailAddress()"
           (selectionChange)="makePrimary($event.value)"
           [ngClass]="{
