@@ -1,3 +1,9 @@
+## v2.102.15 - 2024-07-25
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.102.14...v2.102.15)
+
+- [#2315](https://github.com/ORCID/orcid-angular/pull/2315): fix email modal error message wrapping
+
 ## v2.102.14 - 2024-07-24
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.102.13...v2.102.14)
