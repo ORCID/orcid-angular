@@ -1,3 +1,9 @@
+## v2.102.16 - 2024-07-25
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.102.15...v2.102.16)
+
+- [#2314](https://github.com/ORCID/orcid-angular/pull/2314): Email modal aria tweaks
+
 ## v2.102.15 - 2024-07-25
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.102.14...v2.102.15)
