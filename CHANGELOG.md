@@ -1,3 +1,10 @@
+## v2.102.17 - 2024-07-25
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.102.16...v2.102.17)
+
+- [#2316](https://github.com/ORCID/orcid-angular/pull/2316): fix disabled email notification dropdown styling
+- [#2317](https://github.com/ORCID/orcid-angular/pull/2317): Thank you for registering warning should only show after registration
+
 ## v2.102.16 - 2024-07-25
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.102.15...v2.102.16)
