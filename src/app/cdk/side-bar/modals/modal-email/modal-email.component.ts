@@ -51,6 +51,7 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   ariaLabelDelete = $localize`:@@side-bar.ariaLabelEmailDelete:Delete Email`
   ariaLabelClose = $localize`:@@side-bar.ariaLabelEmailClose:Close Emails`
   ariaLabelEmailAddress = $localize`:@@side-bar.emailAddress:Email address`
+  ariaLabelNewEmailAddress = $localize`:@@side-bar.newEmailAddress:New email address`
   ariaLabelOtherEmailAddresses = $localize`:@@side-bar.otherEmails:Other email addresses`
   ariaLabelVisibilityPrimaryEmailPublic = $localize`:@@side-bar.ariaLabelPrimaryEmailPublic:Set primary email visibility to Everyone`
   ariaLabelVisibilityPrimaryEmailTrustedParty = $localize`:@@side-bar.ariaLabelPrimaryEmailTrustedParties:Set primary email visibility to Trusted Parties`

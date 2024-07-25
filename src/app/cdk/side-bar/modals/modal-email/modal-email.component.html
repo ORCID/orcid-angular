@@ -77,14 +77,17 @@
                 appearance="outline"
                 class="mat-form-field-min orc-font-body-small"
               >
-                <!-- todo: do i need the aria label here? -->
                 <input
                   matInput
                   #emailInput
                   formControlName="email"
                   type="email"
                   appTrim
-                  [attr.aria-label]="ariaLabelEmailAddress"
+                  [attr.aria-label]="
+                    email.putCode.startsWith('new')
+                      ? ariaLabelNewEmailAddress
+                      : ariaLabelEmailAddress + ' ' + email.value
+                  "
                 />
               </mat-form-field>
               <div
