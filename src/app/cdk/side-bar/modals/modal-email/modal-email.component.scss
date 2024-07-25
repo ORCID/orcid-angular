@@ -115,12 +115,6 @@ mat-form-field {
   font-weight: bold;
 }
 
-.disabled-select-notifications-email {
-  ::ng-deep .mat-select-trigger {
-    cursor: default;
-  }
-}
-
 .add-more {
   margin-top: 16px;
   align-items: center;

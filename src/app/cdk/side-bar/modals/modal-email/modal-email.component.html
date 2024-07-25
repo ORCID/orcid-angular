@@ -259,17 +259,17 @@
       <mat-form-field
         appearance="outline"
         class="mat-form-field-min select-notifications-email"
+        [ngClass]="{
+          'disabled-select-notifications-email': !hasVerifiedEmailAddress()
+        }"
       >
         <mat-select
           outline="black"
           [aria-label]="
             ariaLabelNotificationsAreSentToEmail + ' ' + primaryEmail?.value
           "
-          [attr.disabled]="!hasVerifiedEmailAddress()"
           (selectionChange)="makePrimary($event.value)"
-          [ngClass]="{
-            'disabled-select-notifications-email': !hasVerifiedEmailAddress()
-          }"
+          [disabled]="!hasVerifiedEmailAddress()"
           placeholder=" {{ primaryEmail?.value }}"
           [(value)]="primaryEmail"
           class="orc-font-body-small"
