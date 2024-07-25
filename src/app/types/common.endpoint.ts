@@ -107,6 +107,16 @@ export interface MonthDayYearDate {
   getRequiredMessage?: any
 }
 
+export interface ExtendedDate {
+  errors?: any[]
+  day?: string
+  month?: string
+  year?: string
+  timestamp?: number
+  required?: boolean
+  getRequiredMessage?: any
+}
+
 export interface Value {
   errors?: any[] // TODO is this always empty?
   value: string

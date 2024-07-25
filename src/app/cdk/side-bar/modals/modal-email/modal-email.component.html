@@ -80,6 +80,7 @@
                 <!-- todo: do i need the aria label here? -->
                 <input
                   matInput
+                  #emailInput
                   formControlName="email"
                   type="email"
                   appTrim
@@ -187,10 +188,11 @@
                 emailsForm.hasError('email', [email.putCode, 'email']) &&
                 emailsForm.get(email.putCode).get('email').touched
               "
-              i18n="@@side-bar.invalidEmailFormat"
+              i18n="@@side-bar.invalidEmailErrorMessage"
               class="orc-font-small-print"
             >
-              Invalid email format
+              Please enter a valid email address, for example
+              joe@institution.edu
             </mat-error>
 
             <mat-error
@@ -257,10 +259,10 @@
           [aria-label]="
             ariaLabelNotificationsAreSentTo + ' ' + primaryEmail?.value
           "
-          [attr.disabled]="hasOneEmailAddress()"
+          [attr.disabled]="!hasVerifiedEmailAddress()"
           (selectionChange)="makePrimary($event.value)"
           [ngClass]="{
-            'disabled-select-notifications-email': hasOneEmailAddress()
+            'disabled-select-notifications-email': !hasVerifiedEmailAddress()
           }"
           placeholder=" {{ primaryEmail?.value }}"
           [(value)]="primaryEmail"
