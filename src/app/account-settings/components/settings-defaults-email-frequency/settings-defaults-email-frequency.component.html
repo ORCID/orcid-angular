@@ -51,6 +51,7 @@
         <label class="orc-font-body-small">{{ primaryEmail }}</label>
         <caption
           id="email-verified-address"
+          class="orc-font-small-print"
           *ngIf="primaryEmailVerified"
           i18n="@@account.verifiedEmailAddress"
         >
@@ -77,6 +78,7 @@
       <a
         (click)="openEmailModal()"
         class="underline"
+        *ngIf="!isMobile"
         id="manage-your-emails"
         i18n="@@account.manageYourEmails"
       >
