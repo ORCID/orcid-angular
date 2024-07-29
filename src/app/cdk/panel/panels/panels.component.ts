@@ -122,10 +122,13 @@ export class PanelsComponent implements OnInit {
       type?: string | AffiliationType | EXTERNAL_ID_TYPE_WORK
     }
   ) {
+    const hasVerifiedEmail = this.userRecord?.emails?.emails?.some(
+      (email) => email.verified
+    )
     const primaryEmail = this.userRecord?.emails?.emails?.find(
       (email) => email.primary
     )
-    if (primaryEmail && !primaryEmail.verified) {
+    if (!hasVerifiedEmail) {
       this._verificationEmailModalService.openVerificationEmailModal(
         primaryEmail.value
       )
