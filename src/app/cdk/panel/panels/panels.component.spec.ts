@@ -24,6 +24,7 @@ import { MatLegacyDialogHarness as MatDialogHarness } from '@angular/material/le
 import { RecordModule } from '../../../record/record.module'
 import { UntypedFormBuilder } from '@angular/forms'
 import { ModalFundingComponent } from '../../../record/components/funding-stacks-groups/modals/modal-funding/modal-funding.component'
+import { UserRecord } from 'src/app/types/record.local'
 
 describe('PanelsComponent', () => {
   let component: PanelsComponent
@@ -69,10 +70,29 @@ describe('PanelsComponent', () => {
   })
 
   it('should be able to get aria-label of dialog', async () => {
+    component.userRecord = {
+      emails: { emails: [{ verified: true }], errors: [] },
+    } as UserRecord
     component.openModal(ModalFundingComponent)
 
     const dialogs = await loader.getAllHarnesses(MatDialogHarness)
     expect(dialogs.length).toBe(1)
     expect(await dialogs[0].getAriaLabel()).toBe('Manage funding dialog')
+  })
+
+  it('should fail to open the funding dialog with an unverified email', async () => {
+    component.userRecord = {
+      emails: {
+        emails: [{ verified: false, primary: true, value: 'test@mail.com' }],
+        errors: [],
+      },
+    } as UserRecord
+    component.openModal(ModalFundingComponent)
+
+    const dialogs = await loader.getAllHarnesses(MatDialogHarness)
+    expect(dialogs.length).toBe(1)
+    expect(await dialogs[0].getText()).toContain(
+      'Please verify your primary email address'
+    )
   })
 })
