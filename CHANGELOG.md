@@ -1,3 +1,10 @@
+## v2.102.18 - 2024-07-29
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.102.17...v2.102.18)
+
+- [#2319](https://github.com/ORCID/orcid-angular/pull/2319): unwrap resend verification email link
+- [#2318](https://github.com/ORCID/orcid-angular/pull/2318): Lmendoza/9313 qa notification email address in account settings doesnt update when theres a change
+
 ## v2.102.17 - 2024-07-25
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.102.16...v2.102.17)
