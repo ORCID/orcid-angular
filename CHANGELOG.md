@@ -1,3 +1,42 @@
+## v2.102.17 - 2024-07-25
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.102.16...v2.102.17)
+
+- [#2316](https://github.com/ORCID/orcid-angular/pull/2316): fix disabled email notification dropdown styling
+- [#2317](https://github.com/ORCID/orcid-angular/pull/2317): Thank you for registering warning should only show after registration
+
+## v2.102.16 - 2024-07-25
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.102.15...v2.102.16)
+
+- [#2314](https://github.com/ORCID/orcid-angular/pull/2314): Email modal aria tweaks
+
+## v2.102.15 - 2024-07-25
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.102.14...v2.102.15)
+
+- [#2315](https://github.com/ORCID/orcid-angular/pull/2315): fix email modal error message wrapping
+
+## v2.102.14 - 2024-07-24
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.102.13...v2.102.14)
+
+## v2.102.13 - 2024-07-24
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.102.12...v2.102.13)
+
+## v2.102.12 - 2024-07-24
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.102.11...v2.102.12)
+
+## v2.102.11 - 2024-07-24
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.102.10...v2.102.11)
+
+## v2.102.10 - 2024-07-24
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.102.9...v2.102.10)
+
 ## v2.102.9 - 2024-07-24
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.102.8...v2.102.9)

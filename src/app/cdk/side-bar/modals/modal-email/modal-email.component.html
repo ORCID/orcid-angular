@@ -79,10 +79,15 @@
               >
                 <input
                   matInput
+                  #emailInput
                   formControlName="email"
                   type="email"
                   appTrim
-                  [attr.aria-label]="ariaLabelPrimaryEmail"
+                  [attr.aria-label]="
+                    email.putCode.startsWith('new')
+                      ? ariaLabelNewEmailAddress
+                      : ariaLabelEmailAddress + ' ' + email.value
+                  "
                 />
               </mat-form-field>
               <div
@@ -90,9 +95,6 @@
                 class="verified-email"
               >
                 <strong tabindex="0" class="row orc-font-body-small">
-                  <span class="sr-only" i18n="@@side-bar.primaryEmail"
-                    >Primary email address</span
-                  >
                   {{ emailsForm.value[email.putCode].email }}</strong
                 >
                 <em
@@ -144,7 +146,10 @@
               >
             </button>
           </div>
-          <div class="row actions-wrapper">
+          <div
+            class="row actions-wrapper"
+            [ngClass]="{ 'actions-wrapper-mobile': isMobile }"
+          >
             <div
               class="actions-sub-wrapper"
               *ngIf="showNonVerifiedData(email.putCode)"
@@ -189,10 +194,11 @@
                 emailsForm.hasError('email', [email.putCode, 'email']) &&
                 emailsForm.get(email.putCode).get('email').touched
               "
-              i18n="@@side-bar.invalidEmailFormat"
+              i18n="@@side-bar.invalidEmailErrorMessage"
               class="orc-font-small-print"
             >
-              Invalid email format
+              Please enter a valid email address, for example
+              joe@institution.edu
             </mat-error>
 
             <mat-error
@@ -245,6 +251,7 @@
           i18n="@@side-bar.yourOrcidAccountSettings"
           href="/account"
           target="_blank"
+          [attr.aria-label]="ariaOpenAccountSettings"
           rel="noopener noreferrer"
           >your ORCID account settings.</a
         >
@@ -252,15 +259,17 @@
       <mat-form-field
         appearance="outline"
         class="mat-form-field-min select-notifications-email"
+        [ngClass]="{
+          'disabled-select-notifications-email': !hasVerifiedEmailAddress()
+        }"
       >
         <mat-select
           outline="black"
-          [aria-label]="ariaLabelSelect"
-          [attr.disabled]="!hasVerifiedEmailAddress()"
+          [aria-label]="
+            ariaLabelNotificationsAreSentToEmail + ' ' + primaryEmail?.value
+          "
           (selectionChange)="makePrimary($event.value)"
-          [ngClass]="{
-            'disabled-select-notifications-email': !hasVerifiedEmailAddress()
-          }"
+          [disabled]="!hasVerifiedEmailAddress()"
           placeholder=" {{ primaryEmail?.value }}"
           [(value)]="primaryEmail"
           class="orc-font-body-small"

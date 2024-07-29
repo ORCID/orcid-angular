@@ -46,11 +46,12 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   ariaLabelKnowledgeSupport = $localize`:@@side-bar.ariaLabelOrcidTermsSupport:ORCID support page (Opens in a new tab)`
   ariaLabelOrcidTermsOfUseLink = $localize`:@@side-bar.ariaLabelOrcidTermsOfUseLink:ORCID terms of use (Opens in a new tab)`
   ariaLabelSave = $localize`:@@side-bar.ariaLabelEmailSave:Save changes to Emails`
-  ariaLabelSelect = $localize`:@@side-bar.ariaLabelEmailSave:Select email to receive notifications`
+  ariaLabelNotificationsAreSentToEmail = $localize`:@@side-bar.notificationsAreSentToEmail:Notifications are sent to`
   ariaLabelCancel = $localize`:@@side-bar.ariaLabelEmailCancel:Cancel changes and close Emails`
   ariaLabelDelete = $localize`:@@side-bar.ariaLabelEmailDelete:Delete Email`
   ariaLabelClose = $localize`:@@side-bar.ariaLabelEmailClose:Close Emails`
-  ariaLabelPrimaryEmail = $localize`:@@side-bar.primaryEmail:Primary email address`
+  ariaLabelEmailAddress = $localize`:@@side-bar.emailAddress:Email address`
+  ariaLabelNewEmailAddress = $localize`:@@side-bar.newEmailAddress:New email address`
   ariaLabelOtherEmailAddresses = $localize`:@@side-bar.otherEmails:Other email addresses`
   ariaLabelVisibilityPrimaryEmailPublic = $localize`:@@side-bar.ariaLabelPrimaryEmailPublic:Set primary email visibility to Everyone`
   ariaLabelVisibilityPrimaryEmailTrustedParty = $localize`:@@side-bar.ariaLabelPrimaryEmailTrustedParties:Set primary email visibility to Trusted Parties`
@@ -61,6 +62,7 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   ariaLabelVisibilityEmailPublic = $localize`:@@side-bar.ariaLabelEmailPublic:Set email visibility to Everyone`
   ariaLabelVisibilityEmailTrustedParty = $localize`:@@side-bar.ariaLabelEmailTrustedParties:Set email visibility to Trusted Parties`
   ariaLabelVisibilityEmailPrivate = $localize`:@@side-bar.ariaLabelEmailPrivate:Set email visibility to Only Me`
+  ariaOpenAccountSettings = $localize`:@@side-bar.ariaOpenAccountSettings:Open your ORCID account settings`
   deleteTooltip = $localize`:@@side-bar.deleteTooltip:You can't delete the only email address in your account`
   visibilityTooltip = $localize`:@@side-bar.visibilityTooltip:Visibility set to Only me`
 

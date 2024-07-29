@@ -36,17 +36,21 @@ mat-form-field {
 }
 
 .actions-wrapper {
-  width: 51%;
+  width: 100%;
   margin-left: 48px;
+  margin-right: 255px;
   margin-top: 3px;
   line-height: 21px;
+}
+
+.actions-wrapper-mobile {
+  margin-right: 150px !important;
 }
 
 .actions-wrapper,
 .actions-sub-wrapper {
   display: flex;
   flex-wrap: nowrap;
-  flex-shrink: 0;
   justify-content: space-between;
 
   .actions-sub-wrapper {
@@ -109,12 +113,6 @@ mat-form-field {
 }
 .current-notification-email {
   font-weight: bold;
-}
-
-.disabled-select-notifications-email {
-  ::ng-deep .mat-select-trigger {
-    cursor: default;
-  }
 }
 
 .add-more {

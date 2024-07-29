@@ -211,14 +211,6 @@ export class RecordEmailsService {
     a: AssertionVisibilityString,
     b: AssertionVisibilityString
   ): number {
-    const dateA = Date.parse(
-      `${a.createdDate.year}-${a.createdDate.month}-${a.createdDate.day}`
-    )
-
-    const dateB = Date.parse(
-      `${b.createdDate.year}-${b.createdDate.month}-${b.createdDate.day}`
-    )
-
-    return dateA - dateB
+    return a.createdDate.timestamp - b.createdDate.timestamp
   }
 }
