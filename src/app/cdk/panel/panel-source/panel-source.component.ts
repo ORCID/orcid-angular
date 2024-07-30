@@ -146,7 +146,10 @@ export class PanelSourceComponent implements OnInit {
     const primaryEmail = this.userRecord?.emails?.emails?.find(
       (email) => email.primary
     )
-    if (primaryEmail && !primaryEmail.verified) {
+    const hasVerifiedEmail = this.userRecord?.emails?.emails?.some(
+      (email) => email.verified
+    )
+    if (!hasVerifiedEmail) {
       this._verificationEmailModalService.openVerificationEmailModal(
         primaryEmail.value
       )
