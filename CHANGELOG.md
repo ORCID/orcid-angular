@@ -1,3 +1,9 @@
+## v2.102.21 - 2024-07-30
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.102.20...v2.102.21)
+
+- [#2322](https://github.com/ORCID/orcid-angular/pull/2322): tx pull
+
 ## v2.102.20 - 2024-07-30
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.102.19...v2.102.20)
