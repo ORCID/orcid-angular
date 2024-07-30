@@ -1,3 +1,9 @@
+## v2.102.19 - 2024-07-29
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.102.18...v2.102.19)
+
+- [#2320](https://github.com/ORCID/orcid-angular/pull/2320): allow editing the record with an unverified primary email
+
 ## v2.102.18 - 2024-07-29
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.102.17...v2.102.18)
