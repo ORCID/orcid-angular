@@ -12,7 +12,7 @@
 </div>
 
 <div *ngIf="isProfessionalActivity(notification)">
-  <strong>{{getProfessionalActivitiesUpdatedLabel(notification) }}</strong>
+  <strong>{{ getProfessionalActivitiesUpdatedLabel(notification) }}</strong>
 </div>
 <div *ngFor="let i of itemGroupedByType">
   <strong>{{ getAmendedTypeLabel(i.type) }}</strong>

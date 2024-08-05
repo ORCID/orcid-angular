@@ -105,18 +105,20 @@ export class NotificationYourRecordAmendedComponent implements OnInit {
     }
   }
 
-  getProfessionalActivitiesUpdatedLabel(notification: InboxNotificationAmended) {
+  getProfessionalActivitiesUpdatedLabel(
+    notification: InboxNotificationAmended
+  ) {
     switch (notification?.amendedSection) {
       case 'DISTINCTION':
-        return ($localize`:@@inbox.distinction:Distinction`).toUpperCase()
+        return $localize`:@@inbox.distinction:Distinction`.toUpperCase()
       case 'INVITED_POSITION':
-        return ($localize`:@@inbox.invitedPosition:Invited Position`).toUpperCase()
+        return $localize`:@@inbox.invitedPosition:Invited Position`.toUpperCase()
       case 'MEMBERSHIP':
-        return ($localize`:@@inbox.membership:Membership`).toUpperCase()
+        return $localize`:@@inbox.membership:Membership`.toUpperCase()
       case 'SERVICE':
-        return ($localize`:@@inbox.service:Service`).toUpperCase()
+        return $localize`:@@inbox.service:Service`.toUpperCase()
       default:
-        return ""
+        return ''
     }
   }
 }
