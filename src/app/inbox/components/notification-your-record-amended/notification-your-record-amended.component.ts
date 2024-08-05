@@ -53,6 +53,21 @@ export class NotificationYourRecordAmendedComponent implements OnInit {
     return 'Other update'
   }
 
+  isProfessionalActivity(notification: InboxNotificationAmended) {
+    switch (notification?.amendedSection) {
+      case 'DISTINCTION':
+        return true
+      case 'INVITED_POSITION':
+        return true
+      case 'MEMBERSHIP':
+        return true
+      case 'SERVICE':
+        return true
+      default:
+        return false
+    }
+  }
+
   getNotificationSectionUpdatedLabel(notification: InboxNotificationAmended) {
     switch (notification?.amendedSection) {
       case 'AFFILIATION':
@@ -60,7 +75,7 @@ export class NotificationYourRecordAmendedComponent implements OnInit {
       case 'BIO':
         return $localize`:@@inbox.bio:Bio`
       case 'DISTINCTION':
-        return $localize`:@@inbox.distinction:Distinction`
+        return $localize`:@@inbox.professionalActivities:Professional activities`
       case 'EDUCATION':
         return $localize`:@@inbox.education:Education`
       case 'EMPLOYMENT':
@@ -70,9 +85,9 @@ export class NotificationYourRecordAmendedComponent implements OnInit {
       case 'FUNDING':
         return $localize`:@@inbox.funding:Funding`
       case 'INVITED_POSITION':
-        return $localize`:@@inbox.invitedPosition:Invited Position`
+        return $localize`:@@inbox.professionalActivities:Professional activities`
       case 'MEMBERSHIP':
-        return $localize`:@@inbox.membership:Membership`
+        return $localize`:@@inbox.professionalActivities:Professional activities`
       case 'PEER_REVIEW':
         return $localize`:@@inbox.peerReview:Peer Review`
       case 'PREFERENCES':
@@ -82,11 +97,26 @@ export class NotificationYourRecordAmendedComponent implements OnInit {
       case 'RESEARCH_RESOURCE':
         return $localize`:@@inbox.researchResource:Research Resource`
       case 'SERVICE':
-        return $localize`:@@inbox.service:Service`
+        return $localize`:@@inbox.professionalActivities:Professional activities`
       case 'WORK':
         return $localize`:@@inbox.work:Work`
       default:
         return $localize`:@@inbox.unknown:unknown`
+    }
+  }
+
+  getProfessionalActivitiesUpdatedLabel(notification: InboxNotificationAmended) {
+    switch (notification?.amendedSection) {
+      case 'DISTINCTION':
+        return ($localize`:@@inbox.distinction:Distinction`).toUpperCase()
+      case 'INVITED_POSITION':
+        return ($localize`:@@inbox.invitedPosition:Invited Position`).toUpperCase()
+      case 'MEMBERSHIP':
+        return ($localize`:@@inbox.membership:Membership`).toUpperCase()
+      case 'SERVICE':
+        return ($localize`:@@inbox.service:Service`).toUpperCase()
+      default:
+        return ""
     }
   }
 }
