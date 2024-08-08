@@ -18,18 +18,22 @@ import {
 import { MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog'
 import { cloneDeep } from 'lodash'
 import { Subject } from 'rxjs'
-import { first, takeUntil, tap } from 'rxjs/operators'
+import { first, take, takeUntil, tap } from 'rxjs/operators'
 import { ModalComponent } from 'src/app/cdk/modal/modal/modal.component'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
+import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { UserInfoService } from 'src/app/core/user-info/user-info.service'
 import {
   AssertionVisibilityString,
   EmailsEndpoint,
   UserInfo,
 } from 'src/app/types'
-import { VisibilityStrings } from 'src/app/types/common.endpoint'
+import {
+  VisibilityStrings,
+  VisibilityWeightMap,
+} from 'src/app/types/common.endpoint'
 import { OrcidValidators } from 'src/app/validators'
 
 @Component({
@@ -72,9 +76,12 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   addedEmailsCount = 0
   emailsForm: UntypedFormGroup = new UntypedFormGroup({})
   emails: AssertionVisibilityString[] = []
+  verifiedDomains = []
   primaryEmail: AssertionVisibilityString | undefined = undefined
   originalEmailsBackendCopy: AssertionVisibilityString[]
   defaultVisibility: VisibilityStrings = 'PRIVATE'
+  loadingTogglz = false
+  emailDomainsTogglz = false
 
   isMobile: boolean
   userInfo: UserInfo
@@ -85,7 +92,8 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
     private _changeDetectorRef: ChangeDetectorRef,
     private _platform: PlatformInfoService,
     private _snackBar: SnackbarService,
-    private _userInfo: UserInfoService
+    private _userInfo: UserInfoService,
+    private _togglz: TogglzService
   ) {}
 
   tempPrivacyState = 'PUBLIC'
@@ -110,6 +118,14 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
         first()
       )
       .subscribe()
+
+    this._togglz
+      .getStateOf('EMAIL_DOMAIN_UI')
+      .pipe(take(1))
+      .subscribe((value) => {
+        this.loadingTogglz = false
+        this.emailDomainsTogglz = value
+      })
   }
 
   /**
@@ -128,6 +144,11 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
     emailEndpointJson.emails.map((email) => {
       this.addEmail(email)
     })
+    emailEndpointJson.emailDomains?.map((domain) => {
+      this.addEmailDomain(domain)
+    })
+
+    this.subscribeToVisibilityChanges()
   }
 
   /**
@@ -140,8 +161,9 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   private formToBackend(
     emailForm: UntypedFormGroup,
     emails: AssertionVisibilityString[]
-  ): AssertionVisibilityString[] {
+  ): [AssertionVisibilityString[], AssertionVisibilityString[]] {
     const allEmails = []
+    const domains = []
 
     emails
       .map((email) => email.putCode)
@@ -160,7 +182,22 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
           } as AssertionVisibilityString)
         }
       })
-    return allEmails
+
+    this.verifiedDomains
+      .map((domain) => domain.putCode)
+      .forEach((key) => {
+        const value = emailForm.value[key].emailDomain
+        const visibility = emailForm.value[key].visibility
+
+        if (value && visibility) {
+          domains.push({
+            value,
+            visibility,
+          } as AssertionVisibilityString)
+        }
+      })
+
+    return [allEmails, domains]
   }
 
   /**
@@ -236,6 +273,18 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
     }
   }
 
+  addEmailDomain(emailDomain: AssertionVisibilityString): void {
+    emailDomain.putCode = 'domain-' + emailDomain.value
+    this.verifiedDomains.push(emailDomain)
+    this.emailsForm.addControl(
+      emailDomain.putCode,
+      new UntypedFormGroup({
+        emailDomain: new UntypedFormControl(emailDomain.value),
+        visibility: new UntypedFormControl(emailDomain.visibility),
+      })
+    )
+  }
+
   /**
    * Mark email as primary, and trigger a validation check on every other email control
    * @param newPrimaryEmail: the email to make primary
@@ -265,9 +314,11 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
 
   private triggerGeneralFormValidation() {
     Object.keys(this.emailsForm.controls).forEach((currentControlKey) => {
-      ;(
-        this.emailsForm.controls[currentControlKey] as UntypedFormGroup
-      ).controls.email.updateValueAndValidity()
+      if (!currentControlKey.startsWith('domain-')) {
+        ;(
+          this.emailsForm.controls[currentControlKey] as UntypedFormGroup
+        ).controls.email.updateValueAndValidity()
+      }
     })
   }
 
@@ -320,16 +371,18 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
     emailsForm: UntypedFormGroup = new UntypedFormGroup({})
   ): void {
     Object.keys(emailsForm.controls).forEach((currentControlKey) => {
-      const otherEmailControl = (
-        emailsForm.controls[currentControlKey] as UntypedFormGroup
-      ).controls.email as UntypedFormControl
-      if (
-        formGroupKeysWithDuplicatedValues.indexOf(currentControlKey) === -1 &&
-        otherEmailControl.errors &&
-        otherEmailControl.errors['duplicated']
-      ) {
-        delete otherEmailControl.errors['duplicated']
-        otherEmailControl.updateValueAndValidity({ onlySelf: true })
+      if (!currentControlKey.startsWith('domain-')) {
+        const otherEmailControl = (
+          emailsForm.controls[currentControlKey] as UntypedFormGroup
+        ).controls.email as UntypedFormControl
+        if (
+          formGroupKeysWithDuplicatedValues.indexOf(currentControlKey) === -1 &&
+          otherEmailControl.errors &&
+          otherEmailControl.errors['duplicated']
+        ) {
+          delete otherEmailControl.errors['duplicated']
+          otherEmailControl.updateValueAndValidity({ onlySelf: true })
+        }
       }
     })
   }
@@ -349,14 +402,14 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
     // Add errors error on duplicated emails
     Object.keys(formGroup.controls).forEach((keyX) => {
       let emailControlX: string = (formGroup.controls[keyX] as UntypedFormGroup)
-        .controls['email'].value
-      emailControlX = emailControlX.toLowerCase().trim()
+        .controls['email']?.value
+      emailControlX = emailControlX?.toLowerCase().trim()
 
       Object.keys(formGroup.controls).forEach((keyY) => {
         let emailControlY: string = (
           formGroup.controls[keyY] as UntypedFormGroup
-        ).controls['email'].value
-        emailControlY = emailControlY.toLowerCase().trim()
+        ).controls['email']?.value
+        emailControlY = emailControlY?.toLowerCase().trim()
 
         // Only if both controls are not empty
         if (emailControlX && emailControlY) {
@@ -386,10 +439,14 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
 
   saveEvent() {
     if (this.emailsForm.valid) {
-      const data = this.formToBackend(this.emailsForm, this.emails)
+      const [emails, emailDomains] = this.formToBackend(
+        this.emailsForm,
+        this.emails
+      )
       this._recordEmails
         .postEmails({
-          emails: data,
+          emails,
+          emailDomains,
           errors: [],
         })
         .pipe(first())
@@ -410,8 +467,19 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
         this.setNextEmailAsPrimary()
       }
       const i = this.emails.findIndex((value) => value.putCode === controlKey)
+      const domain = this.emails[i].value.split('@')[1]
       this.emails.splice(i, 1)
       this.emailsForm.removeControl(controlKey)
+
+      const remainingEmailsHaveDomain = this.emails.find(
+        (email) => email.value.split('@')[1] === domain
+      )
+      if (!remainingEmailsHaveDomain) {
+        this.verifiedDomains = this.verifiedDomains.filter(
+          (d) => d.value !== domain
+        )
+        this.emailsForm.removeControl('domain-' + domain)
+      }
     }
   }
 
@@ -463,6 +531,111 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
       })
     }
     return result
+  }
+
+  private subscribeToVisibilityChanges(): void {
+    this.emails.forEach((email) => {
+      if (email.verified && email.putCode.startsWith('emailInput')) {
+        const control = this.emailsForm.get(email.putCode)
+        const domain = email.value.split('@')[1]
+        if (control) {
+          control
+            .get('visibility')
+            .valueChanges.pipe(takeUntil(this.$destroy))
+            .subscribe((visibility) =>
+              this.updateDomainVisibility(email.putCode, domain, visibility)
+            )
+        }
+      }
+    })
+  }
+
+  disableVisibilityOptions(domain: string): Record<VisibilityStrings, boolean> {
+    console.log('disableVisibilityOptions - ', domain)
+    // Default all options to true (i.e., disabled)
+    const disableVisibilitySettings = {
+      PUBLIC: true,
+      LIMITED: true,
+      PRIVATE: true,
+    }
+
+    const visibilities: VisibilityStrings[] = []
+    Object.keys(this.emailsForm.controls).forEach((controlKey) => {
+      if (controlKey.startsWith('emailInput')) {
+        const control = this.emailsForm.get(controlKey)
+
+        if (control.value.email.split('@')[1] === domain) {
+          visibilities.push(control.value.visibility)
+        }
+      }
+    })
+
+    const mostPermissiveVisibility =
+      this.getMostPermissiveVisibility(visibilities)
+
+    if (mostPermissiveVisibility === 'PUBLIC') {
+      disableVisibilitySettings.PUBLIC = false
+    } else if (mostPermissiveVisibility === 'LIMITED') {
+      disableVisibilitySettings.PUBLIC = false
+      disableVisibilitySettings.LIMITED = false
+    } else if (mostPermissiveVisibility === 'PRIVATE') {
+      disableVisibilitySettings.PUBLIC = false
+      disableVisibilitySettings.LIMITED = false
+      disableVisibilitySettings.PRIVATE = false
+    }
+
+    return disableVisibilitySettings
+  }
+
+  private updateDomainVisibility(
+    parentControlKey: string,
+    domain: string,
+    visibility: VisibilityStrings
+  ): void {
+    const visibilities: VisibilityStrings[] = []
+    const domainControl = this.emailsForm.controls['domain-' + domain]
+
+    if (domainControl) {
+      visibilities.push(visibility)
+      Object.keys(this.emailsForm.controls).forEach((controlKey) => {
+        // ignore the parent control as it hasn't been updated with the new value yet
+        if (
+          controlKey.startsWith('emailInput') &&
+          controlKey !== parentControlKey
+        ) {
+          const control = this.emailsForm.get(controlKey)
+
+          if (control.value.email.split('@')[1] === domain) {
+            visibilities.push(control.value.visibility)
+          }
+        }
+      })
+
+      const mostPermissiveVisibility =
+        this.getMostPermissiveVisibility(visibilities)
+      const domainVisibility = domainControl.get('visibility').value
+
+      if (
+        VisibilityWeightMap[mostPermissiveVisibility] <
+        VisibilityWeightMap[domainVisibility]
+      ) {
+        this.emailsForm.patchValue({
+          ['domain-' + domain]: {
+            visibility: mostPermissiveVisibility,
+          },
+        })
+      }
+
+      this._changeDetectorRef.detectChanges()
+    }
+  }
+
+  private getMostPermissiveVisibility(
+    visibilities: VisibilityStrings[]
+  ): VisibilityStrings {
+    if (visibilities.includes('PUBLIC')) return 'PUBLIC'
+    if (visibilities.includes('LIMITED')) return 'LIMITED'
+    return 'PRIVATE'
   }
 
   verificationEmailWasSend(controlKey: string) {

@@ -30,6 +30,12 @@ export class VisibilitySelectorComponent
 
   @Input() mobile = false
 
+  @Input() disableOptions: Record<VisibilityStrings, boolean> = {
+    PUBLIC: false,
+    LIMITED: false,
+    PRIVATE: false,
+  }
+
   @Input()
   ariaLabelPublic: string = $localize`:@@share.ariaLabelPublic:set item visibility to Everyone`
   @Input()
