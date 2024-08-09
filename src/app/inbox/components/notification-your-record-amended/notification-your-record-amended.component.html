@@ -11,6 +11,9 @@
   <ng-container i18n="@@inbox.sectionOf">section of your record:</ng-container>
 </div>
 
+<div *ngIf="isProfessionalActivity(notification)">
+  <strong>{{ getProfessionalActivitiesUpdatedLabel(notification) }}</strong>
+</div>
 <div *ngFor="let i of itemGroupedByType">
   <strong>{{ getAmendedTypeLabel(i.type) }}</strong>
 
