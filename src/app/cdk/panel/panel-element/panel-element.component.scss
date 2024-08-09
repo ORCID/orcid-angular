@@ -18,8 +18,14 @@ app-panel-privacy {
 
 .line {
   word-break: break-word;
+  line-height: 21px;
 }
 
 .bold {
   font-weight: bold;
+}
+
+hr {
+  margin: 8px 0 8px 0;
+  height: 1px;
 }

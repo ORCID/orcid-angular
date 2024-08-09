@@ -82,6 +82,7 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   defaultVisibility: VisibilityStrings = 'PRIVATE'
   loadingTogglz = false
   emailDomainsTogglz = false
+  disableVisibilities: { [domainPutcode: string]: VisibilityStrings[] } = {}
 
   isMobile: boolean
   userInfo: UserInfo
@@ -120,7 +121,7 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
       .subscribe()
 
     this._togglz
-      .getStateOf('EMAIL_DOMAIN_UI')
+      .getStateOf('EMAIL_DOMAINS_UI')
       .pipe(take(1))
       .subscribe((value) => {
         this.loadingTogglz = false
@@ -283,6 +284,7 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
         visibility: new UntypedFormControl(emailDomain.visibility),
       })
     )
+    this.disableDomainVisibilities(emailDomain.value)
   }
 
   /**
@@ -479,6 +481,8 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
           (d) => d.value !== domain
         )
         this.emailsForm.removeControl('domain-' + domain)
+      } else {
+        this.updateDomainVisibility(domain)
       }
     }
   }
@@ -542,71 +546,28 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
           control
             .get('visibility')
             .valueChanges.pipe(takeUntil(this.$destroy))
-            .subscribe((visibility) =>
-              this.updateDomainVisibility(email.putCode, domain, visibility)
+            .subscribe(() =>
+              // timeout is used because the subscription
+              // gets triggered before the form is updated
+              // https://github.com/angular/angular/issues/13129
+              setTimeout(() => this.updateDomainVisibility(domain))
             )
         }
       }
     })
   }
 
-  disableVisibilityOptions(domain: string): Record<VisibilityStrings, boolean> {
-    console.log('disableVisibilityOptions - ', domain)
-    // Default all options to true (i.e., disabled)
-    const disableVisibilitySettings = {
-      PUBLIC: true,
-      LIMITED: true,
-      PRIVATE: true,
-    }
-
-    const visibilities: VisibilityStrings[] = []
-    Object.keys(this.emailsForm.controls).forEach((controlKey) => {
-      if (controlKey.startsWith('emailInput')) {
-        const control = this.emailsForm.get(controlKey)
-
-        if (control.value.email.split('@')[1] === domain) {
-          visibilities.push(control.value.visibility)
-        }
-      }
-    })
-
-    const mostPermissiveVisibility =
-      this.getMostPermissiveVisibility(visibilities)
-
-    if (mostPermissiveVisibility === 'PUBLIC') {
-      disableVisibilitySettings.PUBLIC = false
-    } else if (mostPermissiveVisibility === 'LIMITED') {
-      disableVisibilitySettings.PUBLIC = false
-      disableVisibilitySettings.LIMITED = false
-    } else if (mostPermissiveVisibility === 'PRIVATE') {
-      disableVisibilitySettings.PUBLIC = false
-      disableVisibilitySettings.LIMITED = false
-      disableVisibilitySettings.PRIVATE = false
-    }
-
-    return disableVisibilitySettings
-  }
-
-  private updateDomainVisibility(
-    parentControlKey: string,
-    domain: string,
-    visibility: VisibilityStrings
-  ): void {
+  private updateDomainVisibility(domain: string): void {
     const visibilities: VisibilityStrings[] = []
     const domainControl = this.emailsForm.controls['domain-' + domain]
 
     if (domainControl) {
-      visibilities.push(visibility)
       Object.keys(this.emailsForm.controls).forEach((controlKey) => {
-        // ignore the parent control as it hasn't been updated with the new value yet
-        if (
-          controlKey.startsWith('emailInput') &&
-          controlKey !== parentControlKey
-        ) {
-          const control = this.emailsForm.get(controlKey)
+        if (controlKey.startsWith('emailInput')) {
+          const control = this.emailsForm.get(controlKey).value
 
-          if (control.value.email.split('@')[1] === domain) {
-            visibilities.push(control.value.visibility)
+          if (control.email.split('@')[1] === domain) {
+            visibilities.push(control.visibility)
           }
         }
       })
@@ -616,8 +577,8 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
       const domainVisibility = domainControl.get('visibility').value
 
       if (
-        VisibilityWeightMap[mostPermissiveVisibility] <
-        VisibilityWeightMap[domainVisibility]
+        VisibilityWeightMap[domainVisibility] <
+        VisibilityWeightMap[mostPermissiveVisibility]
       ) {
         this.emailsForm.patchValue({
           ['domain-' + domain]: {
@@ -625,17 +586,54 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
           },
         })
       }
-
+      this.disableDomainVisibilities(domain, visibilities)
       this._changeDetectorRef.detectChanges()
     }
+  }
+
+  disableDomainVisibilities(
+    domain: string,
+    visibilities: VisibilityStrings[] = []
+  ): void {
+    if (visibilities.length === 0) {
+      Object.keys(this.emailsForm.controls).forEach((controlKey) => {
+        if (controlKey.startsWith('emailInput')) {
+          const control = this.emailsForm.get(controlKey)
+          if (control.value.email.split('@')[1] === domain) {
+            visibilities.push(control.value.visibility)
+          }
+        }
+      })
+    }
+
+    const leastPermissiveVisibility =
+      this.getLeastPermissiveVisibility(visibilities)
+
+    this.disableVisibilities[`domain-${domain}`] = Object.keys(
+      VisibilityWeightMap
+    ).filter(
+      (visibility) =>
+        VisibilityWeightMap[visibility] <
+        VisibilityWeightMap[leastPermissiveVisibility]
+    ) as VisibilityStrings[]
   }
 
   private getMostPermissiveVisibility(
     visibilities: VisibilityStrings[]
   ): VisibilityStrings {
-    if (visibilities.includes('PUBLIC')) return 'PUBLIC'
-    if (visibilities.includes('LIMITED')) return 'LIMITED'
-    return 'PRIVATE'
+    return visibilities.reduce((most, current) =>
+      VisibilityWeightMap[current] > VisibilityWeightMap[most] ? current : most
+    )
+  }
+
+  private getLeastPermissiveVisibility(
+    visibilities: VisibilityStrings[]
+  ): VisibilityStrings {
+    return visibilities.reduce((least, current) =>
+      VisibilityWeightMap[current] < VisibilityWeightMap[least]
+        ? current
+        : least
+    )
   }
 
   verificationEmailWasSend(controlKey: string) {

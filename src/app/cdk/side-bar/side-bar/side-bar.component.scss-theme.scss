@@ -22,6 +22,14 @@
       brand-primary-lightest
     ) !important;
   }
+
+  hr {
+    background: mat.get-color-from-palette($background, 'ui-background-light');
+  }
+
+  .verification-icon {
+    color: mat.get-color-from-palette($foreground, 'brand-primary');
+  }
 }
 
 @include side-bar-theme($orcid-app-theme);

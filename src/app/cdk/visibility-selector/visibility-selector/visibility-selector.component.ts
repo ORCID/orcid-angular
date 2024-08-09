@@ -24,17 +24,13 @@ export class VisibilitySelectorComponent
 {
   private _privacy: VisibilityStrings
 
+  private _disableVisibilities: VisibilityStrings[]
+
   @Input() multiEdit: 'multi' | 'single' | 'selected' = 'single'
 
   @Input() editable = true
 
   @Input() mobile = false
-
-  @Input() disableOptions: Record<VisibilityStrings, boolean> = {
-    PUBLIC: false,
-    LIMITED: false,
-    PRIVATE: false,
-  }
 
   @Input()
   ariaLabelPublic: string = $localize`:@@share.ariaLabelPublic:set item visibility to Everyone`
@@ -55,6 +51,21 @@ export class VisibilitySelectorComponent
   }
   get privacy(): VisibilityStrings {
     return this._privacy
+  }
+
+  @Input()
+  set disableVisibilities(value: VisibilityStrings[]) {
+    this._disableVisibilities = value
+    this.updateDisableOptions(value)
+  }
+  get disableVisibilities(): VisibilityStrings[] {
+    return this._disableVisibilities
+  }
+
+  disableOptions: Record<VisibilityStrings, boolean> = {
+    PUBLIC: false,
+    LIMITED: false,
+    PRIVATE: false,
   }
 
   constructor(@Inject(WINDOW) private window: Window) {}
@@ -83,6 +94,16 @@ export class VisibilitySelectorComponent
     this.updateAriaLabel(this.privacy)
     this.onChange(this.privacy)
     this.onTouched(this.privacy)
+  }
+
+  updateDisableOptions(value: VisibilityStrings[]) {
+    Object.keys(this.disableOptions).forEach(
+      (visibility: VisibilityStrings) => {
+        value.includes(visibility)
+          ? (this.disableOptions[visibility] = true)
+          : (this.disableOptions[visibility] = false)
+      }
+    )
   }
 
   writeValue(visibility: VisibilityStrings): void {

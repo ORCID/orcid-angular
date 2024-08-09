@@ -4,13 +4,17 @@ import { VisibilityStrings } from 'src/app/types/common.endpoint'
 @Component({
   selector: 'app-panel-element',
   templateUrl: './panel-element.component.html',
-  styleUrls: ['./panel-element.component.scss'],
+  styleUrls: [
+    './panel-element.component.scss',
+    './panel-element.component.scss-theme.scss',
+  ],
 })
 export class PanelElementComponent implements OnInit {
   @Input() visibility: VisibilityStrings | ''
   @Input() bold: Boolean
   @Input() hideVisibility: Boolean = true
   @Input() isPublicRecord: string
+  @Input() separator: Boolean = false
 
   constructor() {}
 

@@ -30,3 +30,28 @@ app-panel {
 .overflow-wrap {
   overflow-wrap: break-word;
 }
+
+#emails-panel h4 {
+  margin-top: 0px;
+}
+
+hr {
+  margin: 8px 0 8px 0;
+  height: 1px;
+}
+
+.verification-icon {
+  height: 28px;
+  width: 28px;
+  font-size: 28px;
+  margin-right: 8px;
+}
+
+.last-public-email-or-domain {
+  margin-bottom: -8px;
+}
+.public-email-or-domain {
+  ::ng-deep hr {
+    margin: 16px 0 16px 0;
+  }
+}

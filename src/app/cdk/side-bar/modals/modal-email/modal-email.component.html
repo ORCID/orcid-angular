@@ -234,7 +234,7 @@
       </div>
     </section>
     <!-- EMAIL DOMAINS -->
-    <section id="Email domains">
+    <section id="Email domains" *ngIf="emailDomainsTogglz && !loadingTogglz">
       <h2
         class="orc-font-body-large email-notifications-header"
         i18n="@@side-bar.verifiedEmailDomains"
@@ -280,7 +280,7 @@
             </div>
             <div class="actions-sub-wrapper domain-visibility">
               <app-visibility-selector
-                [disableOptions]="disableVisibilityOptions(domain.value)"
+                [disableVisibilities]="disableVisibilities[domain.putCode]"
                 formControlName="visibility"
                 id="cy-domain-visibility"
                 [ariaLabelPrivate]="ariaLabelVisibilityEmailTrustedParty"
