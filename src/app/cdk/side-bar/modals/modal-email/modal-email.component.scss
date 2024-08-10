@@ -2,6 +2,14 @@
   padding-inline-start: 0;
 }
 
+p {
+  line-height: 21px;
+}
+
+a {
+  text-decoration: underline;
+}
+
 .description {
   margin: 0 0 16px 0;
   line-height: 21px;
@@ -83,6 +91,10 @@ mat-form-field {
   margin: 0;
 }
 
+section[id='Email domains'] {
+  margin-bottom: 32px;
+}
+
 .email-list {
   margin-bottom: 32px;
 
@@ -117,7 +129,6 @@ mat-form-field {
 .add-more {
   margin-top: 16px;
   align-items: center;
-  text-decoration: underline;
   mat-icon {
     padding-inline-end: 8px;
   }
@@ -136,10 +147,15 @@ mat-form-field {
   }
   line-height: 21px;
   letter-spacing: 0.25px;
+  flex-grow: 1;
 }
 
 .visibility-hidden {
   justify-content: end !important;
+}
+
+.domain-visibility {
+  margin-right: 16px;
 }
 
 .delete-button {
@@ -156,9 +172,6 @@ mat-form-field {
 }
 
 .email-notifications-description {
-  a {
-    text-decoration: underline;
-  }
   margin-bottom: 32px;
 }
 

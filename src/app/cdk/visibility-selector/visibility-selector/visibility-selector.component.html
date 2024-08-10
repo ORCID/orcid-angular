@@ -74,6 +74,7 @@
     </i>
   </div>
   <button
+    [disabled]="disableOptions['PUBLIC']"
     [attr.aria-label]="
       ariaLabelPublic + (privacy === 'PUBLIC' ? ariaLabelCurrentlySelected : '')
     "
@@ -111,6 +112,7 @@
     </div>
   </button>
   <button
+    [disabled]="disableOptions['LIMITED']"
     mat-menu-item
     aria-label="visibility limited"
     [attr.aria-label]="
@@ -142,6 +144,7 @@
     </div>
   </button>
   <button
+    [disabled]="disableOptions['PRIVATE']"
     aria-label="visibility private"
     [attr.aria-label]="
       ariaLabelPrivate +

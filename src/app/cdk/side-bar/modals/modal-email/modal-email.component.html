@@ -56,7 +56,7 @@
       </ng-container>
     </app-alert-message>
     <!-- EMAIL LIST -->
-    <section class="row email-list">
+    <section id="Email addresses" class="row email-list">
       <h2 class="orc-font-body-large" i18n="@@side-bar.emailAddressesUppercase">
         Email addresses
       </h2>
@@ -124,7 +124,6 @@
                   isMobile && !email.verified ? visibilityTooltip : ''
                 "
               ></app-visibility-selector>
-              <div></div>
             </div>
             <button
               (click)="deleteEmail(email.putCode)"
@@ -234,8 +233,70 @@
         </a>
       </div>
     </section>
+    <!-- EMAIL DOMAINS -->
+    <section id="Email domains" *ngIf="emailDomainsTogglz && !loadingTogglz">
+      <h2
+        class="orc-font-body-large email-notifications-header"
+        i18n="@@side-bar.verifiedEmailDomains"
+      >
+        Verified email domains
+      </h2>
+      <p class="orc-font-body-small">
+        <ng-container i18n="@@side-bar.whenYouVerifyEmail"
+          >When you verify a professional email address we will add the
+          associated domain to your record. You can choose to show an email
+          domain on your public record instead of the full email
+          address.</ng-container
+        >
+        <a
+          href=""
+          target="_blank"
+          rel="noopener noreferrer"
+          i18n="@@side-bar.findOutMoreAboutVerifiedEmailDomains"
+          >Find out more about verified email domains</a
+        >
+      </p>
+      <ng-container *ngIf="verifiedDomains.length === 0">
+        <em class="orc-font-body-small" i18n="@@side-bar.noVerifiedEmailDomains"
+          >No verified email domains</em
+        >
+      </ng-container>
+      <ng-container *ngIf="verifiedDomains.length > 0">
+        <hr class="separator" />
+        <ng-container
+          *ngFor="let domain of verifiedDomains"
+          [formGroupName]="domain.putCode"
+          ><div class="row email-entry">
+            <mat-icon class="verification-icon verified">check_circle</mat-icon>
+            <div class="verified-email">
+              <strong tabindex="0" class="row orc-font-body-small">
+                {{ domain.value }}</strong
+              >
+              <em
+                class="row orc-font-small-print"
+                i18n="@@side-bar.verifiedEmailDomain"
+                >Verified email domain</em
+              >
+            </div>
+            <div class="actions-sub-wrapper domain-visibility">
+              <app-visibility-selector
+                [disableVisibilities]="disableVisibilities[domain.putCode]"
+                formControlName="visibility"
+                id="cy-domain-visibility"
+                [ariaLabelPrivate]="ariaLabelVisibilityEmailTrustedParty"
+                [ariaLabelPublic]="ariaLabelVisibilityEmailTrustedParty"
+                [ariaLabelTrustedParty]="ariaLabelVisibilityEmailTrustedParty"
+                [mobile]="isMobile"
+                [privacy]="domain.visibility"
+              ></app-visibility-selector>
+            </div>
+          </div>
+          <hr class="separator" />
+        </ng-container>
+      </ng-container>
+    </section>
     <!-- EMAIL NOTIFICATIONS -->
-    <section>
+    <section id="Email notifications">
       <h2
         class="orc-font-body-large email-notifications-header"
         i18n="@@side-bar.emailNotifications"

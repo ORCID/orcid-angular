@@ -215,6 +215,12 @@ export type ScopesStrings =
 
 export type VisibilityStrings = 'PUBLIC' | 'LIMITED' | 'PRIVATE'
 
+export const VisibilityWeightMap: { [key in VisibilityStrings]: number } = {
+  PRIVATE: 0,
+  LIMITED: 1,
+  PUBLIC: 2,
+}
+
 export const VisibilityStringLabel = {
   PUBLIC: $localize`:@@shared.everyone:Everyone`,
   LIMITED: $localize`:@@shared.trustedParties:Trusted parties`,

@@ -7,12 +7,13 @@ import {
   Output,
 } from '@angular/core'
 import { Subject } from 'rxjs'
-import { takeUntil } from 'rxjs/operators'
+import { take, takeUntil } from 'rxjs/operators'
 import { UserService } from 'src/app/core'
 import { RecordService } from 'src/app/core/record/record.service'
 import {
   Address,
   Assertion,
+  AssertionVisibilityString,
   NameForm,
   RequestInfoForm,
   UserInfo,
@@ -27,6 +28,7 @@ import { ModalPersonIdentifiersComponent } from '../modals/modal-person-identifi
 import { ModalWebsitesComponent } from '../modals/modal-websites/modal-websites.component'
 import { ActivatedRoute } from '@angular/router'
 import { RecordUtil } from 'src/app/shared/utils/record.util'
+import { TogglzService } from 'src/app/core/togglz/togglz.service'
 
 @Component({
   selector: 'app-side-bar',
@@ -79,6 +81,11 @@ export class SideBarComponent implements OnInit, OnDestroy {
   externalIdentifierOpenState = false
   emailsOpenState = false
   recordWithIssues: boolean
+  loadingTogglz = true
+  emailDomainsTogglz = false
+  publicEmailList: AssertionVisibilityString[] = []
+  publicDomainList: AssertionVisibilityString[] = []
+  publicEmailAndDomainList: AssertionVisibilityString[] = []
 
   regionPersonalInformation = $localize`:@@shared.personalInformation:Personal information`
   fragment: string
@@ -87,7 +94,8 @@ export class SideBarComponent implements OnInit, OnDestroy {
     _platform: PlatformInfoService,
     private _user: UserService,
     private _record: RecordService,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private _togglz: TogglzService
   ) {
     _platform
       .get()
@@ -98,6 +106,13 @@ export class SideBarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this._togglz
+      .getStateOf('EMAIL_DOMAINS_UI')
+      .pipe(take(1))
+      .subscribe((value) => {
+        this.loadingTogglz = false
+        this.emailDomainsTogglz = value
+      })
     this.getRecord()
     this.externalIdentifierOpenState =
       this._route.snapshot.fragment === 'other-identifiers'
@@ -124,10 +139,53 @@ export class SideBarComponent implements OnInit, OnDestroy {
           this.orcidId = true
         }
         this.userRecord = userRecord
+
         this.userInfo = userRecord?.userInfo
 
         this.onSideBarElementsDisplay(userRecord)
+        if (this.isPublicRecord) {
+          this.generatePublicEmailList()
+        }
       })
+  }
+
+  generatePublicEmailList() {
+    if (
+      this.publicEmailList.length === 0 &&
+      this.publicDomainList.length === 0
+    ) {
+      const domainsToExclude: AssertionVisibilityString[] = []
+      this.userRecord.emails?.emails.forEach((email) => {
+        const professionalDomain = this.userRecord.emails.emailDomains?.find(
+          (emailDomain) => email.value.split('@')[1] === emailDomain.value
+        )
+
+        if (professionalDomain) {
+          if (email.visibility === 'PUBLIC') {
+            this.publicEmailList.push(email)
+            domainsToExclude.push(professionalDomain)
+          } else if (
+            professionalDomain.visibility === 'PUBLIC' &&
+            !this.publicDomainList.includes(professionalDomain)
+          ) {
+            this.publicDomainList.push(professionalDomain)
+          }
+        } else if (email.visibility === 'PUBLIC') {
+          this.publicEmailList.push(email)
+        }
+      })
+      this.userRecord.emails?.emailDomains?.forEach((emailDomain) => {
+        if (
+          emailDomain.visibility === 'PUBLIC' &&
+          !domainsToExclude.includes(emailDomain)
+        ) {
+          this.publicDomainList.push(emailDomain)
+        }
+      })
+      this.publicEmailAndDomainList = this.publicEmailList.concat(
+        this.publicDomainList
+      )
+    }
   }
 
   getWebsite(website: Assertion) {
