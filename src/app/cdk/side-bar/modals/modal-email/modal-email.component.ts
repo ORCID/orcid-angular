@@ -596,14 +596,13 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
     visibilities: VisibilityStrings[] = []
   ): void {
     if (visibilities.length === 0) {
-      Object.keys(this.emailsForm.controls).forEach((controlKey) => {
-        if (controlKey.startsWith('emailInput')) {
-          const control = this.emailsForm.get(controlKey)
-          if (control.value.email.split('@')[1] === domain) {
-            visibilities.push(control.value.visibility)
-          }
+      this.emails.forEach((email) => {
+        if(email.verified) {
+            if(email.value.split('@')[1] === domain) {
+              visibilities.push(email.visibility)
+            }
         }
-      })
+      });
     }
 
     const leastPermissiveVisibility =
