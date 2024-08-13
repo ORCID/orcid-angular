@@ -597,12 +597,12 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   ): void {
     if (visibilities.length === 0) {
       this.emails.forEach((email) => {
-        if(email.verified) {
-            if(email.value.split('@')[1] === domain) {
-              visibilities.push(email.visibility)
-            }
+        if (email.verified) {
+          if (email.value.split('@')[1] === domain) {
+            visibilities.push(email.visibility)
+          }
         }
-      });
+      })
     }
 
     const leastPermissiveVisibility =
