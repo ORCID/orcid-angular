@@ -469,20 +469,22 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
         this.setNextEmailAsPrimary()
       }
       const i = this.emails.findIndex((value) => value.putCode === controlKey)
-      const domain = this.emails[i].value.split('@')[1]
+      const domain = (this.emails[i].value && this.emails[i].value.includes('@')) ? this.emails[i].value.split('@')[1] : null
       this.emails.splice(i, 1)
       this.emailsForm.removeControl(controlKey)
 
-      const remainingEmailsHaveDomain = this.emails.find(
-        (email) => email.value.split('@')[1] === domain
-      )
-      if (!remainingEmailsHaveDomain) {
-        this.verifiedDomains = this.verifiedDomains.filter(
-          (d) => d.value !== domain
+      if(domain) {
+        const remainingEmailsHaveDomain = this.emails.find(
+          (email) => (email) ? email.value.split('@')[1] === domain : false
         )
-        this.emailsForm.removeControl('domain-' + domain)
-      } else {
-        this.updateDomainVisibility(domain)
+        if (!remainingEmailsHaveDomain) {
+          this.verifiedDomains = this.verifiedDomains.filter(
+            (d) => d.value !== domain
+          )
+          this.emailsForm.removeControl('domain-' + domain)
+        } else {
+          this.updateDomainVisibility(domain)
+        }
       }
     }
   }
