@@ -475,7 +475,7 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
 
       if(domain) {
         const remainingEmailsHaveDomain = this.emails.find(
-          (email) => (email) ? email.value.split('@')[1] === domain : false
+          (email) => (email) ? (email.verified && email.value.split('@')[1] === domain) : false
         )
         if (!remainingEmailsHaveDomain) {
           this.verifiedDomains = this.verifiedDomains.filter(
