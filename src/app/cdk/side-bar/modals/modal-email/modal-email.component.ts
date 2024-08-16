@@ -612,29 +612,29 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
         }
       })
     }
-    const mostPermissiveVisibility = this.getMostPermissiveVisibility(visibilities);
+    const mostPermissiveVisibility =
+      this.getMostPermissiveVisibility(visibilities)
 
-    this.disableVisibilities[`domain-${domain}`] = this.generateDisabledVisibilitiesMap(mostPermissiveVisibility);
+    this.disableVisibilities[`domain-${domain}`] =
+      this.generateDisabledVisibilitiesMap(mostPermissiveVisibility)
   }
 
   private generateDisabledVisibilitiesMap(mostPermissiveVisibility) {
-    return Object.keys(
-      VisibilityWeightMap
-    ).filter(
+    return Object.keys(VisibilityWeightMap).filter(
       (visibility) =>
         VisibilityWeightMap[visibility] <
         VisibilityWeightMap[mostPermissiveVisibility]
     ) as VisibilityStrings[]
   }
 
-  private isEmailVerified(emailToCheck : String) {
-    let isVerified = false;
+  private isEmailVerified(emailToCheck: String) {
+    let isVerified = false
     this.emails.forEach((email) => {
-      if(email.value === emailToCheck) {
-        isVerified = email.verified;
+      if (email.value === emailToCheck) {
+        isVerified = email.verified
       }
-    });
-    return isVerified;
+    })
+    return isVerified
   }
 
   private getMostPermissiveVisibility(
