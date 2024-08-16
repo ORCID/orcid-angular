@@ -601,25 +601,40 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
     visibilities: VisibilityStrings[] = []
   ): void {
     if (visibilities.length === 0) {
-      this.emails.forEach((email) => {
-        if (email.verified) {
-          if (email.value.split('@')[1] === domain) {
-            visibilities.push(email.visibility)
+      Object.keys(this.emailsForm.controls).forEach((controlKey) => {
+        if (controlKey.startsWith('emailInput')) {
+          const control = this.emailsForm.get(controlKey)
+          if (control.value.email.split('@')[1] === domain) {
+            if (this.isEmailVerified(control.value.email)) {
+              visibilities.push(control.value.visibility)
+            }
           }
         }
       })
     }
+    const mostPermissiveVisibility = this.getMostPermissiveVisibility(visibilities);
 
-    const leastPermissiveVisibility =
-      this.getLeastPermissiveVisibility(visibilities)
+    this.disableVisibilities[`domain-${domain}`] = this.generateDisabledVisibilitiesMap(mostPermissiveVisibility);
+  }
 
-    this.disableVisibilities[`domain-${domain}`] = Object.keys(
+  private generateDisabledVisibilitiesMap(mostPermissiveVisibility) {
+    return Object.keys(
       VisibilityWeightMap
     ).filter(
       (visibility) =>
         VisibilityWeightMap[visibility] <
-        VisibilityWeightMap[leastPermissiveVisibility]
+        VisibilityWeightMap[mostPermissiveVisibility]
     ) as VisibilityStrings[]
+  }
+
+  private isEmailVerified(emailToCheck : String) {
+    let isVerified = false;
+    this.emails.forEach((email) => {
+      if(email.value === emailToCheck) {
+        isVerified = email.verified;
+      }
+    });
+    return isVerified;
   }
 
   private getMostPermissiveVisibility(
