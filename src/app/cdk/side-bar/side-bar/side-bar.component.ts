@@ -155,7 +155,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
       this.publicDomainList.length === 0
     ) {
       this.userRecord?.emails?.emails?.forEach((email) => {
-        const professionalDomain = this.userRecord.emails.emailDomains?.find(
+        const professionalDomain = this.userRecord?.emails?.emailDomains?.find(
           (emailDomain) => email.value.split('@')[1] === emailDomain.value
         )
 
