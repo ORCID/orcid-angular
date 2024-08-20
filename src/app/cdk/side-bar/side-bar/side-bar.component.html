@@ -136,7 +136,7 @@
       </h3>
       <app-panel-data
         *ngIf="
-          userRecord.emails?.emails?.length > 0 &&
+          userRecord?.emails?.emails?.length > 0 &&
           !isPublicRecord &&
           emailDomainsTogglz &&
           !loadingTogglz
