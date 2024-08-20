@@ -45,8 +45,8 @@
       [(openState)]="emailsOpenState"
       *ngIf="
         (!isPublicRecord ||
-          (userRecord.emails?.emails && userRecord.emails?.emails?.length > 0) ||
-          (userRecord.emails?.emailDomains && userRecord.emails?.emailDomains?.length > 0)
+          (userRecord?.emails?.emails && userRecord?.emails?.emails?.length > 0) ||
+          (userRecord?.emails?.emailDomains && userRecord?.emails?.emailDomains?.length > 0)
         )
       "
       [userRecord]="userRecord"
