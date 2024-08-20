@@ -154,8 +154,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
       this.publicEmailList.length === 0 &&
       this.publicDomainList.length === 0
     ) {
-      const domainsToExclude: AssertionVisibilityString[] = []
-      this.userRecord.emails?.emails.forEach((email) => {
+      this.userRecord.emails?.emails?.forEach((email) => {
         const professionalDomain = this.userRecord.emails.emailDomains?.find(
           (emailDomain) => email.value.split('@')[1] === emailDomain.value
         )
@@ -163,7 +162,6 @@ export class SideBarComponent implements OnInit, OnDestroy {
         if (professionalDomain) {
           if (email.visibility === 'PUBLIC') {
             this.publicEmailList.push(email)
-            domainsToExclude.push(professionalDomain)
           } else if (
             professionalDomain.visibility === 'PUBLIC' &&
             !this.publicDomainList.includes(professionalDomain)
@@ -176,8 +174,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
       })
       this.userRecord.emails?.emailDomains?.forEach((emailDomain) => {
         if (
-          emailDomain.visibility === 'PUBLIC' &&
-          !domainsToExclude.includes(emailDomain)
+          emailDomain.visibility === 'PUBLIC'
         ) {
           this.publicDomainList.push(emailDomain)
         }
