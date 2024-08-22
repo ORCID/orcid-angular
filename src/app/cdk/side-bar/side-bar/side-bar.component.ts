@@ -173,9 +173,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
         }
       })
       this.userRecord.emails?.emailDomains?.forEach((emailDomain) => {
-        if (
-          emailDomain.visibility === 'PUBLIC'
-        ) {
+        if (emailDomain.visibility === 'PUBLIC') {
           this.publicDomainList.push(emailDomain)
         }
       })
