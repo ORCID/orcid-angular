@@ -1,3 +1,7 @@
+## v2.104.1 - 2024-08-22
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.104.0...v2.104.1)
+
 ## v2.104.0 - 2024-08-22
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.103.4...v2.104.0)
