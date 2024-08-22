@@ -35,7 +35,7 @@
       panelId="emails-panel"
       expandButtonsPosition="right"
       [isPublicRecord]="isPublicRecord"
-      [elements]="userRecord.emails.emails"
+      [elements]="userRecord?.emails?.emails"
       [editModalComponent]="modalEmailComponent"
       [customControls]="isPublicRecord && emailDomainsTogglz && !loadingTogglz"
       [email]="true"
@@ -44,8 +44,10 @@
       id="emails-panel"
       [(openState)]="emailsOpenState"
       *ngIf="
-        userRecord?.emails?.emails &&
-        (!isPublicRecord || userRecord.emails.emails.length > 0)
+        (!isPublicRecord ||
+          (userRecord?.emails?.emails && userRecord?.emails?.emails?.length > 0) ||
+          (userRecord?.emails?.emailDomains && userRecord?.emails?.emailDomains?.length > 0)
+        )
       "
       [userRecord]="userRecord"
     >
@@ -61,13 +63,13 @@
       </h3>
       <app-panel-data
         *ngIf="
-          userRecord.emails.emails.length > 0 &&
+          userRecord?.emails?.emails?.length > 0 &&
           !emailDomainsTogglz &&
           !loadingTogglz
         "
       >
         <app-panel-element
-          *ngFor="let email of userRecord.emails.emails; let last = last"
+          *ngFor="let email of userRecord?.emails?.emails; let last = last"
           [visibility]="
             isPublicRecord ? '' : email.verified ? email.visibility : 'PRIVATE'
           "
@@ -88,7 +90,10 @@
       </h3>
       <app-panel-data
         *ngIf="
-          userRecord.emails.emails.length > 0 &&
+          (
+            (userRecord?.emails?.emails && userRecord?.emails?.emails?.length > 0) ||
+            (userRecord?.emails?.emailDomains && userRecord?.emails?.emailDomains?.length > 0)
+          )  &&
           isPublicRecord &&
           emailDomainsTogglz &&
           !loadingTogglz
@@ -131,7 +136,7 @@
       </h3>
       <app-panel-data
         *ngIf="
-          userRecord.emails.emails.length > 0 &&
+          userRecord?.emails?.emails?.length > 0 &&
           !isPublicRecord &&
           emailDomainsTogglz &&
           !loadingTogglz
@@ -139,7 +144,7 @@
       >
         <h4 header i18n="@@side-bar.emailAddresses">Email addresses</h4>
         <app-panel-element
-          *ngFor="let email of userRecord.emails.emails; let last = last"
+          *ngFor="let email of userRecord?.emails?.emails; let last = last"
           [visibility]="email.verified ? email.visibility : 'PRIVATE'"
           [separator]="!last"
           >{{ email.value }}
@@ -147,7 +152,7 @@
       </app-panel-data>
       <app-panel-data
         *ngIf="
-          userRecord.emails?.emailDomains?.length > 0 &&
+          userRecord?.emails?.emailDomains?.length > 0 &&
           !isPublicRecord &&
           emailDomainsTogglz &&
           !loadingTogglz
@@ -158,7 +163,7 @@
         </h4>
         <app-panel-element
           *ngFor="
-            let emailDomain of userRecord.emails.emailDomains;
+            let emailDomain of userRecord?.emails.emailDomains;
             let last = last
           "
           [visibility]="isPublicRecord ? '' : emailDomain.visibility"

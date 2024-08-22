@@ -80,6 +80,8 @@ export class RecordUtil {
     if (
       (userRecord?.emails?.emails &&
         (!isPublicRecord || userRecord.emails.emails.length > 0)) ||
+      (userRecord?.emails?.emailDomains &&
+        (!isPublicRecord || userRecord.emails.emailDomains.length > 0)) ||
       (userRecord?.website?.websites &&
         (!isPublicRecord || userRecord.website.websites.length > 0)) ||
       (userRecord?.externalIdentifier?.externalIdentifiers &&
