@@ -7,8 +7,9 @@
   $warn: map-get($theme, accent);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
-  .display-1 {
-    color: mat.get-color-from-palette($primary);
+  button {
+    color: $orcid-light-primary-text;
+    background: mat.get-color-from-palette($primary, 700);
   }
 }
 

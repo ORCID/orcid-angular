@@ -8,69 +8,120 @@
             mode="indeterminate"
           ></mat-progress-bar>
           <mat-card-header>
-            <mat-card-title i18n="@@institutional.title"
-              >Access through your institution
+            <mat-card-title class="header-container">
+              <div class="icon">
+                <img
+                  src="assets/vectors/institutional-generic-logo.svg"
+                  role="presentation"
+                />
+                <img
+                  class="arrow-icon"
+                  src="assets/vectors/translucent-arrow.svg"
+                  role="presentation"
+                />
+                <img
+                  src="assets/vectors/orcid.logo.icon.svg"
+                  alt=""
+                  role="presentation"
+                />
+              </div>
+              <h1 i18n="@@institutional.title" class="orc-font-heading-small">
+                Access through your institution
+              </h1>
+              <a
+                class="mat-button-font institution-name-link underline"
+                (click)="back()"
+                i18n="@@institutional.signWithEmailid"
+              >
+                Sign in with email/iD and password
+              </a>
             </mat-card-title>
           </mat-card-header>
           <mat-card-content>
             <form [formGroup]="institutionalForm" (ngSubmit)="onSubmit()">
               <div class="form-container">
-                <p class="mat-body-1">
+                <p class="mat-body-1 first-paragrapah">
                   <ng-container i18n="@@institutional.account">
-                    You may sign into the ORCID Registry using institutional
+                    You may sign in to the ORCID Registry using institutional
                     accounts you already have, like one from your university. If
-                    you don't already have an ORCID iD, you will be prompted to
-                    create one.
+                    you don’t have an ORCID iD, you will be prompted to create
+                    one.
                   </ng-container>
-                  <a
-                    class="mat-button-font"
-                    i18n="@@institutional.learn"
-                    href="https://support.orcid.org/hc/en-us/articles/360006972693"
-                    >Learn more about different ways to sign in to ORCID.
-                  </a>
                 </p>
                 <div *ngIf="userSelectedInstitutions.length > 0">
-                  <p class="mat-body-1" i18n="@@institutional.suggested">
-                    Use a suggested selection
-                  </p>
+                  <h2 class="orc-font-body" i18n="@@institutional.suggestedOrg">
+                    Suggested organization
+                  </h2>
                   <ng-container
                     *ngFor="let institution of userSelectedInstitutions"
                   >
                     <div class="col l12 m8 s4 institutional-logo">
+                      <mat-progress-spinner
+                        *ngIf="!imageLoadingFinish"
+                        mode="indeterminate"
+                        diameter="50"
+                      >
+                      </mat-progress-spinner>
                       <img
-                        *ngIf="institution.Logos && institution.Logos[0]"
-                        src="{{ institution.Logos[0].value }}"
+                        src="assets/vectors/organization-no-logo.svg"
                         alt="institution logo"
-                        (click)="selectInstitution(institution)"
+                        *ngIf="
+                          imageLoadingFinish && imageLoadingTimeOut;
+                          else elseBlock
+                        "
+                        el
                       />
-                      <a
-                        class="mat-button-font institution-name"
+
+                      <ng-template #elseBlock>
+                        <img
+                          src="{{ institution.Logos[0].value }}"
+                          alt="institution logo"
+                          (click)="selectInstitution(institution)"
+                          (error)="handleImgError($event)"
+                          (load)="imgLoading($event)"
+                        />
+                      </ng-template>
+
+                      <p
+                        class="mat-button-font institution-name-link underline"
                         id="institutionName"
                         (click)="selectInstitution(institution)"
                       >
                         {{ getNameInstitution(institution).value }}
+                      </p>
+                      <a
+                        class="mat-button-font institution-name-link underline"
+                        (click)="selectInstitution(institution)"
+                        i18n="@@institutional.signInWithThisOrganization"
+                      >
+                        Sign in with this organization
                       </a>
+                      <div class="divider">
+                        <span class="orc-font-body" i18n="@@institutional.or"
+                          >OR</span
+                        >
+                      </div>
                     </div>
                   </ng-container>
-                  <p class="mat-body-1" i18n="@@institutional.orEnterOrgName">
-                    Or enter your organization's name
-                  </p>
                 </div>
-                <div class="col l12 m8 s4 horizontal-center">
-                  <img
-                    *ngIf="logoInstitution"
-                    src="{{ logoInstitution }}"
-                    alt="institution logo"
-                  />
-                </div>
+
+                <mat-label
+                  i18n="@@institutional.organization"
+                  class="orc-font-small-print"
+                  [ngClass]="{
+                    error:
+                      institutionFormTouched &&
+                      institutionFormEmails.valid === false
+                  }"
+                >
+                  Organization
+                </mat-label>
                 <mat-form-field
                   appearance="outline"
-                  class="row institutional-input"
+                  class="mat-form-field-min input-container row institutional-input"
                 >
-                  <mat-label i18n="@@institution.organization"
-                    >Organization's name
-                  </mat-label>
                   <input
+                    [attr.placeholder]="placeholderInstitution"
                     matInput
                     [attr.aria-label]="labelInstitution"
                     [formControl]="institutionFormControl"
@@ -81,12 +132,19 @@
                     #auto="matAutocomplete"
                     (optionSelected)="selected($event.option.value)"
                   >
-                    <mat-option
-                      *ngFor="let option of filteredOptions | async"
-                      [value]="option"
+                    <ng-container
+                      *ngIf="filteredOptions"
+                      id="cy-org-filtered-options"
                     >
-                      {{ option }}
-                    </mat-option>
+                      <mat-option
+                        *ngFor="let option of filteredOptions | async"
+                        [value]="option"
+                      >
+                        <div class="row orc-font-body-small title">
+                          {{ option }}
+                        </div>
+                      </mat-option>
+                    </ng-container>
                   </mat-autocomplete>
                   <button
                     mat-button
@@ -102,38 +160,37 @@
                   <mat-error
                     i18n="@@institution.organizationRequired"
                     *ngIf="institutionFormControl.hasError('required')"
-                    >Organization's name is required
+                    >Please enter an organization name
                   </mat-error>
                   <mat-error
                     i18n="@@institution.invalidInstitution"
                     *ngIf="
                       institutionFormControl.hasError('invalidInstitution')
                     "
-                    >Invalid Organization Name
+                    >We can’t identify this organization. Please try entering
+                    the organization name again.
                   </mat-error>
                 </mat-form-field>
-                <div class="institutional-buttons">
-                  <button
-                    mat-button
-                    color="primary"
-                    type="button"
-                    i18n="@@institutional.goBack"
-                    (click)="back()"
-                    id="go-back-button"
-                  >
-                    Go back
-                  </button>
+                <div class="step-actions">
                   <button
                     mat-raised-button
-                    (click)="onSubmit()"
-                    color="primary"
-                    class="row mat-elevation-z0"
-                    type="submit"
-                    [disabled]="loading"
+                    type="button"
                     i18n="@@institutional.continue"
+                    id="step-a-back-button"
+                    (click)="onSubmit()"
                   >
-                    CONTINUE
+                    Continue
                   </button>
+
+                  <i>
+                    <a
+                      i18n="@@institutional.cancelInstituional"
+                      class="mat-button-font institution-name-link underline"
+                      (click)="back()"
+                    >
+                      Cancel institutional sign in</a
+                    >
+                  </i>
                 </div>
               </div>
             </form>
@@ -143,3 +200,20 @@
     </div>
   </div>
 </main>
+
+<!-- THE FOLLOWING IS A PLACEHOLDE IMAGE -->
+<!-- The purpose of it is to try loading the image to know wether it loads or not -->
+<!-- With it trigger handleImgError or  imgLoading-->
+<img
+  *ngIf="
+    institution &&
+    institution.Logos &&
+    institution.Logos[0] &&
+    !imageLoadingFinish
+  "
+  src="{{ institution.Logos[0].value }}"
+  alt="institution logo"
+  (error)="handleImgError($event)"
+  (load)="imgLoading($event)"
+  class="institutional-logo-placeholder"
+/>

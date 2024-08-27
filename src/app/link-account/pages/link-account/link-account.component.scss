@@ -1,5 +1,29 @@
 :host {
   width: 100%;
+  ::ng-deep {
+    .mat-card-header {
+      width: unset !important;
+      padding: 24px 64px 0 64px !important;
+      .mat-card-title {
+        margin-bottom: 0;
+      }
+    }
+    .mat-card-content {
+      margin: 24px 64px 64px 64px !important;
+    }
+  }
+}
+.handset {
+  :host {
+    ::ng-deep {
+      .mat-card-header {
+        padding: 0 0 0 0 !important;
+      }
+      .mat-card-content {
+        margin: 0 0 0 0 !important;
+      }
+    }
+  }
 }
 
 mat-card-title {
@@ -22,4 +46,55 @@ button {
   text-align: center;
   margin-top: 24px;
   margin-bottom: 4px;
+}
+
+:host {
+  width: 100%;
+  margin-top: 64px;
+}
+
+.header-container {
+  margin-top: 64px;
+  display: flex;
+  flex-direction: column;
+}
+
+.icon {
+  margin-bottom: 32px;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+
+  img {
+    width: 64px;
+  }
+}
+
+h1 {
+  font-weight: 400;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 8px;
+}
+
+a {
+  font-weight: 400;
+}
+
+.center-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 9px;
+  a {
+    width: 100%;
+    text-align: center;
+    display: block;
+    margin-top: 24px;
+  }
+}
+
+.middle-text {
+  margin: 24px 0;
 }

@@ -13,7 +13,7 @@ import {
 import { MatLegacyAutocompleteTrigger as MatAutocompleteTrigger } from '@angular/material/legacy-autocomplete'
 import { Router } from '@angular/router'
 import { CookieService } from 'ngx-cookie-service'
-import { Observable } from 'rxjs'
+import { Observable, Subject } from 'rxjs'
 import { first, map, startWith, tap } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { ApplicationRoutes } from 'src/app/constants'
@@ -30,7 +30,10 @@ import {
 @Component({
   selector: 'app-institutional',
   templateUrl: './institutional.component.html',
-  styleUrls: ['./institutional.component.scss'],
+  styleUrls: [
+    './institutional.component.scss',
+    './institutional.component.scss-theme.scss',
+  ],
   preserveWhitespaces: true,
 })
 export class InstitutionalComponent implements OnInit {
@@ -49,6 +52,7 @@ export class InstitutionalComponent implements OnInit {
   userSelectedInstitutions = [] as Institutional[]
   labelInstitution = $localize`:@@institutional.ariaLabelInstitution:Institution`
   labelClear = $localize`:@@institutional.ariaLabelClear:Clear`
+  placeholderInstitution = $localize`:@@institutional.placeholderTypeYourOrganization:Type your organization name`
   @ViewChild(MatAutocompleteTrigger) autocomplete: MatAutocompleteTrigger
 
   institutionFormControl = new UntypedFormControl('', [Validators.required])
@@ -56,6 +60,9 @@ export class InstitutionalComponent implements OnInit {
   institutionalForm = new UntypedFormGroup({
     institution: this.institutionFormControl,
   })
+  displayDefaultImage: boolean
+  imageLoadingTimeOut: boolean
+  imageLoadingFinish: boolean
 
   constructor(
     @Inject(WINDOW) private window: Window,
@@ -194,6 +201,12 @@ export class InstitutionalComponent implements OnInit {
       for (const inst of institutions) {
         this._disco.getInstitutionBaseOnID(atob(inst)).subscribe((res) => {
           this.userSelectedInstitutions.push(res)
+          setTimeout(() => {
+            if (!this.imageLoadingFinish) {
+              this.imageLoadingFinish = true
+              this.imageLoadingTimeOut = true
+            }
+          }, 4000)
         })
       }
     }
@@ -212,5 +225,21 @@ export class InstitutionalComponent implements OnInit {
 
   navigateTo(val) {
     this.window.location.href = val
+  }
+
+  handleImgError(ev: any) {
+    this.displayDefaultImage = true
+    this.imageLoadingFinish = true
+  }
+  imgLoading(ev: any) {
+    this.imageLoadingFinish = true
+  }
+
+  get institutionFormTouched() {
+    return this.institutionalForm.controls['institution'].touched
+  }
+
+  get institutionFormEmails() {
+    return this.institutionalForm.controls['institution']
   }
 }

@@ -1,5 +1,36 @@
 :host {
   width: 100%;
+  margin-top: 64px;
+
+  ::ng-deep {
+    .mat-card-header {
+      width: unset !important;
+      padding: 24px 64px 0 64px !important;
+      .mat-card-title {
+        margin-bottom: 0;
+      }
+    }
+    .mat-card-content {
+      margin: 24px 64px 64px 64px !important;
+    }
+  }
+}
+.handset {
+  :host {
+    ::ng-deep {
+      .mat-card-header {
+        padding: 0 0 0 0 !important;
+      }
+      .mat-card-content {
+        margin: 0 0 0 0 !important;
+      }
+    }
+  }
+}
+
+mat-error {
+  margin-top: 8px;
+  font-size: 12px;
 }
 
 button {
@@ -26,13 +57,161 @@ img {
 
 .institutional-logo {
   display: block;
+  display: FLEX;
+  flex-direction: COLUMN;
+  align-items: CENTER;
   .institution-name {
     display: block;
-    padding: 10px;
-    margin-bottom: 10px;
+    padding-top: 24px;
+    margin: 0;
+  }
+  .institution-name-link {
+    display: block;
+    padding-top: 16px;
+    margin: 0;
   }
   img {
     cursor: pointer;
-    margin: 12px 0 24px 0;
+    margin: 12px 0 0px 0;
   }
+}
+
+.icon {
+  margin-bottom: 32px;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  .arrow-icon {
+    width: 32px;
+  }
+
+  img {
+    width: 64px;
+  }
+}
+
+.step-actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 32px;
+  gap: 16px;
+  border-top: 1px solid;
+  padding-top: 32px;
+  align-items: center;
+
+  button {
+    height: 40px;
+    font-size: 16px;
+    min-width: 100%;
+    a {
+      font-style: italic;
+      font-size: 14px;
+    }
+    a.skip-step {
+      font-style: normal;
+      font-size: 14px;
+    }
+  }
+}
+
+a {
+  text-decoration: underline;
+  font-weight: normal;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.header-container {
+  margin-top: 64px;
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  font-weight: 400;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 8px;
+}
+
+.first-paragrapah {
+  margin-top: 32px;
+}
+
+mat-label.orc-font-small-print {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 8px;
+
+  label {
+    font-weight: normal;
+  }
+}
+
+.input-label {
+  margin-top: 32px;
+}
+
+:host {
+  ::ng-deep .mat-form-field-suffix {
+    button {
+      height: 24px;
+      mat-icon {
+        font-size: 18px;
+        line-height: 1.5 !important;
+      }
+    }
+  }
+  ::ng-deep .mat-form-field-subscript-wrapper {
+    padding: 0 !important;
+  }
+}
+
+.mat-option {
+  min-height: 64px;
+  line-height: 32px;
+  height: auto;
+  margin-bottom: 8px;
+  white-space: normal;
+  line-height: 1.4;
+
+  .title {
+    display: flex;
+    width: 100%;
+    font-weight: 500;
+  }
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.institutional-logo {
+  padding: 0;
+  .divider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 44px;
+    margin-top: 60px;
+    width: 100%;
+    border-bottom: 1px solid;
+    span {
+      background-color: white;
+      padding: 5px 10px;
+      position: absolute;
+    }
+  }
+}
+
+h2 {
+  margin-top: 32px;
+}
+
+.institutional-logo-placeholder {
+  display: none;
 }
