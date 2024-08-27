@@ -1,5 +1,5 @@
-@import '~@angular/material/theming';
-@import '../../../../assets/scss/material.orcid-theme';
+@use '@angular/material' as mat;
+@import 'src/assets/scss/material.orcid-theme.scss';
 
 @mixin institutional-theme($theme) {
   $primary: map-get($theme, primary);
@@ -7,6 +7,24 @@
   $warn: map-get($theme, accent);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
+
+  .step-actions {
+    border-color: mat.get-color-from-palette($background, ui-background-light);
+  }
+  .institutional-logo .divider {
+    border-color: mat.get-color-from-palette($background, ui-background-light);
+  }
+  .error {
+    color: map-get($foreground, 'state-warning-dark');
+  }
+
+  .step-actions {
+    button {
+      color: $orcid-light-primary-text;
+      background: mat.get-color-from-palette($primary, 700);
+    }
+  }
+  
 }
 
 @include institutional-theme($orcid-app-theme);

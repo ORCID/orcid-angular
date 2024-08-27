@@ -60,6 +60,7 @@ export class LinkAccountComponent implements OnInit {
       .get()
       .pipe(first())
       .subscribe((platform) => {
+        console.log('platform', platform)
         this._router.navigate([ApplicationRoutes.signin], {
           queryParams: {
             ...platform.queryParameters,

@@ -10,6 +10,7 @@ import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/lega
 import { MatLegacyProgressBarModule as MatProgressBarModule } from '@angular/material/legacy-progress-bar'
 import { InstitutionalRoutingModule } from './institutional-routing.module'
 import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
+import { MatLegacyProgressSpinnerModule as MatProgressSpinnerModule } from '@angular/material/legacy-progress-spinner'
 
 @NgModule({
   declarations: [InstitutionalComponent],
@@ -25,6 +26,7 @@ import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
     MatProgressBarModule,
     InstitutionalRoutingModule,
     A11yLinkModule,
+    MatProgressSpinnerModule
   ],
 })
 export class InstitutionalModule {}
