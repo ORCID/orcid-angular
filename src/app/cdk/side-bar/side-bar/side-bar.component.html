@@ -136,6 +136,7 @@
         Emails & domains
       </h3>
       <app-panel-data
+        class="email-section"
         *ngIf="
           userRecord?.emails?.emails?.length > 0 &&
           !isPublicRecord &&
@@ -152,12 +153,7 @@
         </app-panel-element>
       </app-panel-data>
       <app-panel-data
-        *ngIf="
-          userRecord?.emails?.emailDomains?.length > 0 &&
-          !isPublicRecord &&
-          emailDomainsTogglz &&
-          !loadingTogglz
-        "
+        *ngIf="!isPublicRecord && emailDomainsTogglz && !loadingTogglz"
       >
         <h4 header i18n="@@side-bar.verifiedEmailDomains">
           Verified email domains
@@ -171,6 +167,12 @@
           [separator]="!last"
           >{{ emailDomain.value }}
         </app-panel-element>
+        <app-panel-element
+          [italic]="true"
+          *ngIf="!userRecord?.emails?.emailDomains?.length"
+          i18n="@@side-bar.noVerifiedEmailDomains"
+          >No verified email domains</app-panel-element
+        >
       </app-panel-data>
     </app-panel>
 
