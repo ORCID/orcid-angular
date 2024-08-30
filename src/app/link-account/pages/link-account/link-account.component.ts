@@ -87,7 +87,6 @@ export class LinkAccountComponent implements OnInit {
       })
   }
 
-
   register() {
     // always send the user with all query parameters
     this._platformInfo
@@ -100,23 +99,26 @@ export class LinkAccountComponent implements OnInit {
             this._user
               .getUserSession()
               .pipe(first())
-              .subscribe((userSession) => {
-                const params = platform.queryParameters
-                this._router.navigate(['/register'], {
-                  /// TODO @leomendoza123 depend only on the user session thirty party login data
-                  /// avoid taking data from the the parameters.
+              .subscribe(
+                (userSession) => {
+                  const params = platform.queryParameters
+                  this._router.navigate(['/register'], {
+                    /// TODO @leomendoza123 depend only on the user session thirty party login data
+                    /// avoid taking data from the the parameters.
 
-                  queryParams: {
-                    ...params,
-                    providerId,
-                    linkType,
-                  },
-                })
-              }, (error) => {
-                this._router.navigate(['/register'], {
-                  queryParams: platform.queryParameters,
-                })
-              })
+                    queryParams: {
+                      ...params,
+                      providerId,
+                      linkType,
+                    },
+                  })
+                },
+                (error) => {
+                  this._router.navigate(['/register'], {
+                    queryParams: platform.queryParameters,
+                  })
+                }
+              )
           } else {
             this._router.navigate(['/register'], {
               queryParams: platform.queryParameters,
@@ -130,6 +132,4 @@ export class LinkAccountComponent implements OnInit {
         }
       })
   }
-
-
 }

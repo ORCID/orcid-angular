@@ -1,3 +1,19 @@
+## v2.104.7 - 2024-08-30
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.104.6...v2.104.7)
+
+## v2.104.6 - 2024-08-30
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.104.5...v2.104.6)
+
+- [#2337](https://github.com/ORCID/orcid-angular/pull/2337): update-inst-signin
+
+## v2.104.5 - 2024-08-30
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.104.4...v2.104.5)
+
+- [#2336](https://github.com/ORCID/orcid-angular/pull/2336): Lmendoza/batch of fixes 29 aug
+
 ## v2.104.4 - 2024-08-28
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.104.3...v2.104.4)

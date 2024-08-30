@@ -144,7 +144,9 @@
           !loadingTogglz
         "
       >
-        <h4 header i18n="@@side-bar.emailAddresses">Email addresses</h4>
+        <h4 header i18n="@@side-bar.emailAddressesUppercase">
+          Email addresses
+        </h4>
         <app-panel-element
           *ngFor="let email of userRecord?.emails?.emails; let last = last"
           [visibility]="email.verified ? email.visibility : 'PRIVATE'"

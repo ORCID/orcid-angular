@@ -23,7 +23,7 @@ import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
     MatProgressBarModule,
     LinkAccountRoutingModule,
     SignInModule,
-    A11yLinkModule
+    A11yLinkModule,
   ],
 })
 export class LinkAccountModule {}
