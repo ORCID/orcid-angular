@@ -1,3 +1,9 @@
+## v2.104.6 - 2024-08-30
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.104.5...v2.104.6)
+
+- [#2337](https://github.com/ORCID/orcid-angular/pull/2337): update-inst-signin
+
 ## v2.104.5 - 2024-08-30
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.104.4...v2.104.5)
