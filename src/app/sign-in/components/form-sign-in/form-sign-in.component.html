@@ -210,6 +210,7 @@
   >
   </app-two-factor-authentication-form>
   <a
+    *ngIf="showForgotYourPassword"
     class="row forgot"
     i18n="@@ngOrcid.signin.forgotYourPassword"
     (click)="forgotPassword()"
