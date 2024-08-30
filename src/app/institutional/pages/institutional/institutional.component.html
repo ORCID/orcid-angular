@@ -57,7 +57,7 @@
                   >
                     <div class="col l12 m8 s4 institutional-logo">
                       <mat-progress-spinner
-                        *ngIf="!imageLoadingFinish"
+                        *ngIf="institution?.Logos?.[0]?.value && !imageLoadingFinish"
                         mode="indeterminate"
                         diameter="50"
                       >
@@ -66,7 +66,7 @@
                         src="assets/vectors/organization-no-logo.svg"
                         alt="institution logo"
                         *ngIf="
-                          imageLoadingFinish && imageLoadingTimeOut;
+                          !(institution?.Logos?.[0]?.value) || imageLoadingTimeOut || displayDefaultImage ;
                           else elseBlock
                         "
                         el
@@ -74,9 +74,8 @@
 
                       <ng-template #elseBlock>
                         <img
-                          src="{{ institution.Logos[0].value }}"
+                          src="{{ institution?.Logos[0]?.value }}"
                           alt="institution logo"
-                          (click)="selectInstitution(institution)"
                           (error)="handleImgError($event)"
                           (load)="imgLoading($event)"
                         />
@@ -85,7 +84,6 @@
                       <p
                         class="mat-button-font institution-name-link underline"
                         id="institutionName"
-                        (click)="selectInstitution(institution)"
                       >
                         {{ getNameInstitution(institution).value }}
                       </p>
@@ -150,6 +148,7 @@
                     mat-button
                     matSuffix
                     mat-icon-button
+                    *ngIf="institutionFormControl.value"
                     [attr.aria-label]="labelClear"
                     class="remove-border"
                     (click)="clear()"

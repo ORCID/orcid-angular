@@ -61,6 +61,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
   @Output() show2FAEmitter = new EventEmitter<object>()
   @Output() loading = new EventEmitter<boolean>()
   @Output() errorDescription = new EventEmitter<string>()
+  @Input() showForgotYourPassword = true
 
   badCredentials = false
   printError = false
