@@ -69,7 +69,7 @@ export class InstitutionalComponent implements OnInit {
     private _disco: DiscoService,
     private _router: Router,
     private _platformInfo: PlatformInfoService,
-    private _cookie: CookieService,
+    private _cookie: CookieService
   ) {
     this.loading = true
     this._disco.getDiscoFeed().subscribe((res) => {
@@ -96,7 +96,10 @@ export class InstitutionalComponent implements OnInit {
             : institutionsFiltered
         }),
         tap(() => {
-          if (!this.institutionFormControl.valid && !this.institutionFormControl.pristine) {
+          if (
+            !this.institutionFormControl.valid &&
+            !this.institutionFormControl.pristine
+          ) {
             this.userSelectedInstitutions = []
           }
         })
@@ -155,13 +158,11 @@ export class InstitutionalComponent implements OnInit {
     this.entityID = this.institution.entityID
 
     this.displayDefaultImage = false
-    this.imageLoadingTimeOut= false
-    this.imageLoadingFinish= false
+    this.imageLoadingTimeOut = false
+    this.imageLoadingFinish = false
 
     this.userSelectedInstitutions = []
     this.userSelectedInstitutions.push(institutionSelected)
-
-
   }
 
   getNameInstitution(institution: Institutional): DisplayName {
