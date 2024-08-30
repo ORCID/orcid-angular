@@ -43,6 +43,7 @@ hr {
 .verification-icon {
   height: 28px;
   width: 28px;
+  min-width: 28px;
   font-size: 28px;
   margin-right: 8px;
 }
@@ -50,9 +51,13 @@ hr {
 .last-public-email-or-domain {
   margin-bottom: -8px;
 }
+
 .public-email-or-domain {
   ::ng-deep hr {
     margin: 16px 0 16px 0;
+  }
+  div {
+    flex-wrap: nowrap !important;
   }
 }
 
