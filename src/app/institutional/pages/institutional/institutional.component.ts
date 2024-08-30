@@ -69,7 +69,7 @@ export class InstitutionalComponent implements OnInit {
     private _disco: DiscoService,
     private _router: Router,
     private _platformInfo: PlatformInfoService,
-    private _cookie: CookieService
+    private _cookie: CookieService,
   ) {
     this.loading = true
     this._disco.getDiscoFeed().subscribe((res) => {
@@ -96,12 +96,11 @@ export class InstitutionalComponent implements OnInit {
             : institutionsFiltered
         }),
         tap(() => {
-          if (!this.institutionFormControl.valid) {
-            this.logoInstitution = undefined
+          if (!this.institutionFormControl.valid && !this.institutionFormControl.pristine) {
+            this.userSelectedInstitutions = []
           }
         })
       )
-      this.clear()
     })
   }
 
@@ -119,6 +118,8 @@ export class InstitutionalComponent implements OnInit {
   ngOnInit() {}
 
   onSubmit() {
+    this.institutionFormControl.markAllAsTouched()
+    this.institutionFormControl.markAsDirty()
     if (this.institutionalForm.valid || this.entityID) {
       this.loading = true
 
@@ -138,13 +139,12 @@ export class InstitutionalComponent implements OnInit {
   }
 
   clear() {
-    this.logoInstitution = undefined
+    this.userSelectedInstitutions = []
     this.institutionalForm.controls['institution'].setValue('')
   }
 
   selected(institutionName) {
     this.loading = true
-    this.logoInstitution = undefined
     const institutionSelected = this._disco.getInstitutionBaseOnName(
       institutionName,
       this.institutions
@@ -154,12 +154,14 @@ export class InstitutionalComponent implements OnInit {
     this.institution = institutionSelected
     this.entityID = this.institution.entityID
 
-    if (
-      this.institution?.Logos &&
-      !this.isInstitutionLogoDisplayed(this.institution.Logos[0].value)
-    ) {
-      this.logoInstitution = this.institution.Logos[0].value
-    }
+    this.displayDefaultImage = false
+    this.imageLoadingTimeOut= false
+    this.imageLoadingFinish= false
+
+    this.userSelectedInstitutions = []
+    this.userSelectedInstitutions.push(institutionSelected)
+
+
   }
 
   getNameInstitution(institution: Institutional): DisplayName {
@@ -200,7 +202,7 @@ export class InstitutionalComponent implements OnInit {
       const institutions = cookieValues.split('%20')
       for (const inst of institutions) {
         this._disco.getInstitutionBaseOnID(atob(inst)).subscribe((res) => {
-          this.userSelectedInstitutions.push(res)
+          this.userSelectedInstitutions = [res]
           setTimeout(() => {
             if (!this.imageLoadingFinish) {
               this.imageLoadingFinish = true
@@ -215,12 +217,6 @@ export class InstitutionalComponent implements OnInit {
   selectInstitution(institution: Institutional) {
     this.entityID = institution.entityID
     this.onSubmit()
-  }
-
-  isInstitutionLogoDisplayed(logo): boolean {
-    return this.userSelectedInstitutions.some((institution) =>
-      institution?.Logos?.some((lo) => lo.value === logo)
-    )
   }
 
   navigateTo(val) {

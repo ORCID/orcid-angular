@@ -8,6 +8,8 @@ import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/lega
 import { MatLegacyProgressBarModule as MatProgressBarModule } from '@angular/material/legacy-progress-bar'
 import { LinkAccountRoutingModule } from './link-account-routing.module'
 import { SignInModule } from '../sign-in/sign-in.module'
+import { SharedModule } from '../shared/shared.module'
+import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
 
 @NgModule({
   declarations: [LinkAccountComponent],
@@ -21,6 +23,7 @@ import { SignInModule } from '../sign-in/sign-in.module'
     MatProgressBarModule,
     LinkAccountRoutingModule,
     SignInModule,
+    A11yLinkModule
   ],
 })
 export class LinkAccountModule {}
