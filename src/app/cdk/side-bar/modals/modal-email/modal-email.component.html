@@ -1,8 +1,15 @@
 <app-modal [noSidebar]="true">
   <app-modal-header
+    *ngIf="emailDomainsTogglz && !loadingTogglz"
     i18n="@@shared.emailsAndDomains"
     [closeLabel]="ariaLabelClose"
     >Emails & domains</app-modal-header
+  >
+  <app-modal-header
+    *ngIf="!emailDomainsTogglz && !loadingTogglz"
+    i18n="@@shared.emails"
+    [closeLabel]="ariaLabelCloseOld"
+    >Emails</app-modal-header
   >
   <app-modal-footer>
     <button
@@ -11,7 +18,9 @@
       (click)="saveEvent()"
       i18n="@@shared.saveChanges"
       id="save-emails-button"
-      [attr.aria-label]="ariaLabelSave"
+      [attr.aria-label]="
+        emailDomainsTogglz && !loadingTogglz ? ariaLabelSave : ariaLabelSaveOld
+      "
     >
       Save changes
     </button>
@@ -21,7 +30,11 @@
       (click)="closeEvent()"
       i18n="@@shared.cancel"
       id="cancel-emails-button"
-      [attr.aria-label]="ariaLabelCancel"
+      [attr.aria-label]="
+        emailDomainsTogglz && !loadingTogglz
+          ? ariaLabelCancel
+          : ariaLabelCancelOld
+      "
     >
       Cancel
     </button>
