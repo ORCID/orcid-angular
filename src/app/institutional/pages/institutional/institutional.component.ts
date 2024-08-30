@@ -1,10 +1,8 @@
 import {
-  ChangeDetectorRef,
   Component,
   HostBinding,
   Inject,
   OnInit,
-  Renderer2,
   ViewChild,
 } from '@angular/core'
 import {
@@ -72,7 +70,6 @@ export class InstitutionalComponent implements OnInit {
     private _router: Router,
     private _platformInfo: PlatformInfoService,
     private _cookie: CookieService,
-    private _changeDet: ChangeDetectorRef
   ) {
     this.loading = true
     this._disco.getDiscoFeed().subscribe((res) => {
