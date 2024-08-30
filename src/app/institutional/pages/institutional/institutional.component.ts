@@ -203,7 +203,6 @@ export class InstitutionalComponent implements OnInit {
       for (const inst of institutions) {
         this._disco.getInstitutionBaseOnID(atob(inst)).subscribe((res) => {
           this.userSelectedInstitutions = [res]
-          this._changeDet.markForCheck()
           setTimeout(() => {
             if (!this.imageLoadingFinish) {
               this.imageLoadingFinish = true
