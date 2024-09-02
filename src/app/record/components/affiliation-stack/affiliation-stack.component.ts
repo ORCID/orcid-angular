@@ -76,8 +76,6 @@ export class AffiliationStackComponent implements OnInit, OnDestroy {
     return this._userInfo
   }
 
-  @Input() professionalActivitiesTogglz = false
-
   orgDisambiguated: { [key: string]: OrgDisambiguated | null } = {}
   stackPanelsDisplay: { [key: string]: { topPanelOfTheStack: boolean } } = {}
   panelDetailsState: {

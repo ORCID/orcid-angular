@@ -15,8 +15,6 @@ import { SignInService } from '../../../core/sign-in/sign-in.service'
   styleUrls: ['./social.component.scss', './social.component.scss-theme.scss'],
 })
 export class SocialComponent implements OnInit {
-  @Input() signInUpdatesV1Togglz: boolean
-
   platform: PlatformInfo
   baseUri: string
   csrf: string

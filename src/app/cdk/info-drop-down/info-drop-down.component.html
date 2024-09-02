@@ -1,44 +1,25 @@
-<ng-container *ngIf="!signInUpdatesV1Togglz">
-  <div
-    class="university-dropdown orc-font-body-large"
-    [ngClass]="{ active: show }"
+<div class="row">
+  <b class="orc-font-body m-b-8">
+    {{ name }}
+  </b>
+</div>
+<div class="row">
+  <a
+    class="underline"
+    [ngClass]="{ 'm-b-16': show }"
     (click)="show = !show"
+    [attr.aria-label]="
+      (!show ? ariaLabelShowDetailsFor : ariaLabelHideDetailsFor) + ' ' + name
+    "
   >
-    <a class="mat-body-2 black-underline-url body-2 black-url" id="app-name">
-      {{ name }}
-    </a>
-    <mat-icon class="large-material-icon" role="presentation">help</mat-icon>
-  </div>
-
-  <div class="description-container" *ngIf="show">
-    {{ description }}
-  </div>
-</ng-container>
-
-<ng-container *ngIf="signInUpdatesV1Togglz">
-  <div class="row">
-    <b class="orc-font-body m-b-8">
-      {{ name }}
-    </b>
-  </div>
-  <div class="row">
-    <a
-      class="underline"
-      [ngClass]="{ 'm-b-16': show }"
-      (click)="show = !show"
-      [attr.aria-label]="
-        (!show ? ariaLabelShowDetailsFor : ariaLabelHideDetailsFor) + ' ' + name
-      "
+    <ng-container i18n="@@shared.showDetails" *ngIf="!show"
+      >Show details</ng-container
     >
-      <ng-container i18n="@@shared.showDetails" *ngIf="!show"
-        >Show details</ng-container
-      >
-      <ng-container i18n="@@shared.hideDetails" *ngIf="show"
-        >Hide details</ng-container
-      >
-    </a>
-  </div>
-  <div class="description-container description-client" *ngIf="show">
-    {{ description }}
-  </div>
-</ng-container>
+    <ng-container i18n="@@shared.hideDetails" *ngIf="show"
+      >Hide details</ng-container
+    >
+  </a>
+</div>
+<div class="description-container description-client" *ngIf="show">
+  {{ description }}
+</div>
