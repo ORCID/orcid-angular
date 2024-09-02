@@ -1,3 +1,10 @@
+## v2.104.9 - 2024-09-02
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.104.8...v2.104.9)
+
+- [#2331](https://github.com/ORCID/orcid-angular/pull/2331): Bump @grpc/grpc-js from 1.9.9 to 1.11.1
+- [#2340](https://github.com/ORCID/orcid-angular/pull/2340): Remove old togglz
+
 ## v2.104.8 - 2024-08-30
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.104.7...v2.104.8)
