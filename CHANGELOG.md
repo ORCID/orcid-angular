@@ -1,3 +1,9 @@
+## v2.104.8 - 2024-08-30
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.104.7...v2.104.8)
+
+- [#2339](https://github.com/ORCID/orcid-angular/pull/2339): batch-of-fixes-30-aug
+
 ## v2.104.7 - 2024-08-30
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.104.6...v2.104.7)
