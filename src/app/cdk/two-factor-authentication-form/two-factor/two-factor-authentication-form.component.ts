@@ -28,7 +28,6 @@ import { WINDOW } from '../../window'
 export class TwoFactorAuthenticationFormComponent implements AfterViewInit {
   @Input() showBadVerificationCode: boolean
   @Input() showBadRecoveryCode: boolean
-  @Input() signInUpdatesV1Togglz: boolean
   @Output() authenticate = new EventEmitter<{
     verificationCode?: string
     recoveryCode?: string

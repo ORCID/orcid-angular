@@ -26,7 +26,7 @@ import { MatLegacyProgressSpinnerModule as MatProgressSpinnerModule } from '@ang
     MatProgressBarModule,
     InstitutionalRoutingModule,
     A11yLinkModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
   ],
 })
 export class InstitutionalModule {}

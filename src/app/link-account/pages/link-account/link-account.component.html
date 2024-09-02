@@ -22,9 +22,7 @@
                   Link your
                 </ng-container>
                 {{ entityDisplayName }}
-                <ng-container i18n="@@linking.title.2">
-                  account to your ORCID record
-                </ng-container>
+                <ng-container i18n="@@linking.title.2"> account </ng-container>
               </h1>
               <p class="mat-body-1">
                 <ng-container i18n="@@linking.signed">
@@ -66,6 +64,8 @@
                   class="mat-button-font underline orc-font-body-small"
                   i18n="@@linking.knowledgebase"
                   href="https://support.orcid.org/hc/en-us/articles/360006972693"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   please visit the ORCID help centre
                 </a>
@@ -76,36 +76,52 @@
                 [email]="email"
                 #formSignInComponent
                 [signInData]="signInData"
-                [signInUpdatesV1Togglz]="true"
+                [showForgotYourPassword]="false"
                 (show2FAEmitter)="show2FAEmitter($event)"
               >
-                <div class="button-group center-content">
-                  <button
-                    mat-raised-button
-                    (click)="formSignInComponent.onSubmit()"
-                    class="mat-elevation-z0 mat-button-wrap-text"
-                    type="submit"
-                    [disabled]="loading || signingLoading"
-                    *ngIf="!show2FA"
-                  >
-                    <ng-container i18n="@@linking.button.1">
-                      Sign in and link your
-                    </ng-container>
-                    {{ entityDisplayName }}
-                    <ng-container i18n="@@linking.button.2">
-                      account
-                    </ng-container>
-                  </button>
-
-                  <a
-                    class="mat-button-font institution-name-link underline"
-                    i18n="@@linking.cancelLinking"
-                    (click)="cancel()"
-                  >
-                    Cancel linking
-                  </a>
-                </div>
               </app-form-sign-in>
+              <div class="button-group center-content">
+                <button
+                  mat-raised-button
+                  (click)="formSignInComponent.onSubmit()"
+                  class="mat-elevation-z0 mat-button-wrap-text"
+                  type="submit"
+                  [disabled]="loading || signingLoading"
+                  *ngIf="!show2FA"
+                >
+                  <ng-container i18n="@@linking.button.1">
+                    Sign in and link your
+                  </ng-container>
+                  {{ entityDisplayName }}
+                  <ng-container i18n="@@linking.button.2">
+                    account
+                  </ng-container>
+                </button>
+
+                <a
+                  class="mat-button-font institution-name-link underline"
+                  i18n="@@linking.cancelLinking"
+                  (click)="cancel()"
+                >
+                  Cancel linking
+                </a>
+
+                <a
+                  class="mat-button-font institution-name-link underline"
+                  i18n="@@ngOrcid.signin.forgotYourPassword"
+                  (click)="forgotPassword()"
+                >
+                  Forgot your password or ORCID ID?
+                </a>
+
+                <a
+                  class="mat-button-font institution-name-link underline"
+                  i18n="@@ngOrcid.signin.registerNow"
+                  (click)="register()"
+                >
+                  Register now
+                </a>
+              </div>
             </div>
           </mat-card-content>
         </mat-card>

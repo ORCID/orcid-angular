@@ -49,11 +49,14 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   ariaLabelKnowledgeBase = $localize`:@@side-bar.ariaLabelOrcidTermsOfUseBase:ORCID knowledge base (Opens in a new tab)`
   ariaLabelKnowledgeSupport = $localize`:@@side-bar.ariaLabelOrcidTermsSupport:ORCID support page (Opens in a new tab)`
   ariaLabelOrcidTermsOfUseLink = $localize`:@@side-bar.ariaLabelOrcidTermsOfUseLink:ORCID terms of use (Opens in a new tab)`
-  ariaLabelSave = $localize`:@@side-bar.ariaLabelEmailSave:Save changes to Emails`
+  ariaLabelSaveOld = $localize`:@@side-bar.ariaLabelEmailSave:Save changes to Emails`
+  ariaLabelSave = $localize`:@@side-bar.ariaLabelEmailAndDomainsSave:Save changes to Emails & domains`
   ariaLabelNotificationsAreSentToEmail = $localize`:@@side-bar.notificationsAreSentToEmail:Notifications are sent to`
-  ariaLabelCancel = $localize`:@@side-bar.ariaLabelEmailCancel:Cancel changes and close Emails`
+  ariaLabelCancelOld = $localize`:@@side-bar.ariaLabelEmailCancel:Cancel changes and close Emails`
+  ariaLabelCancel = $localize`:@@side-bar.ariaLabelEmailAndDomainsCancel:Cancel changes and close Emails & domains`
   ariaLabelDelete = $localize`:@@side-bar.ariaLabelEmailDelete:Delete Email`
-  ariaLabelClose = $localize`:@@side-bar.ariaLabelEmailClose:Close Emails`
+  ariaLabelClose = $localize`:@@side-bar.ariaLabelEmailAndDomainsClose:Close Emails & domains`
+  ariaLabelCloseOld = $localize`:@@side-bar.ariaLabelEmailClose:Close Emails`
   ariaLabelEmailAddress = $localize`:@@side-bar.emailAddress:Email address`
   ariaLabelNewEmailAddress = $localize`:@@side-bar.newEmailAddress:New email address`
   ariaLabelOtherEmailAddresses = $localize`:@@side-bar.otherEmails:Other email addresses`

@@ -1,239 +1,137 @@
 <form [formGroup]="authorizationForm" (ngSubmit)="(!show2FA)">
-  <ng-container *ngIf="!signInUpdatesV1Togglz">
-    <mat-form-field appearance="outline" class="row">
-      <mat-label i18n="@@ngOrcid.signin.username">
-        Email or 16-digit ORCID iD
-      </mat-label>
-      <input
-        matInput
-        formControlName="username"
-        appTrim
-        #firstInput
-        id="username"
-      />
-      <mat-hint i18n="@@ngOrcid.signin.usernameHint"
-        >example@email.com or 0000-0001-2345-6789
-      </mat-hint>
-
-      <mat-error
-        i18n="@@ngOrcid.signin.requiredUsername"
-        *ngIf="authorizationForm.get('username').hasError('required')"
-        >Email or 16-digit ORCID iD is required
-      </mat-error>
-
-      <mat-error
-        i18n="@@ngOrcid.signin.invalidUsername"
-        *ngIf="authorizationForm.get('username').hasError('invalidUserName')"
-        >Use the format example@email.com or 0000-0001-2345-6789
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field
-      appearance="outline"
-      class="row password"
+  <app-my-orcid-alerts
+    *ngIf="emailVerified || invalidVerifyUrl || (printError && badCredentials)"
+    [emailVerified]="emailVerified"
+    [invalidVerifyUrl]="invalidVerifyUrl"
+    [printError]="printError"
+    [badCredentials]="badCredentials"
+  ></app-my-orcid-alerts>
+  <div class="input-container">
+    <mat-label
+      class="orc-font-small-print"
+      id="username-input-label"
       [ngClass]="{
-        'two-line-hint': authorizationForm.controls.password.invalid
+        error: usernameForm?.touched && usernameForm.errors
       }"
-    >
-      <mat-label i18n="@@ngOrcid.signin.password">Password</mat-label>
+      ><ng-container i18n="@@register.Email"> Email </ng-container>&nbsp;<i
+        i18n="@@account.or"
+        >or</i
+      >&nbsp;<ng-container i18n="@@account.orcidID"> ORCID iD </ng-container>
+    </mat-label>
+    <mat-form-field appearance="outline" [hideRequiredMarker]="true" async>
       <input
+        aria-labelledby="username-input-label"
+        id="username-input"
+        formControlName="username"
         matInput
-        formControlName="password"
-        [errorStateMatcher]="backendErrorsMatcher"
-        type="password"
-        id="password"
+        [attr.placeholder]="placeholderUsername"
+        #firstInput
       />
-      <mat-error
-        *ngIf="authorizationForm.get('password').hasError('maxlength')"
-      >
-        <ng-container i18n="@@ngOrcid.signin.passwordTooLong">
-          Passwords must be 256 characters or less. Please
-        </ng-container>
-        <a i18n="@@ngOrcid.signin.needToReset" (click)="forgotPassword()">
-          reset your password
-        </a>
-        <ng-container i18n="@@ngOrcid.signin.toSignIn">
-          to sign in.
-        </ng-container>
-      </mat-error>
     </mat-form-field>
-  </ng-container>
+    <mat-hint
+      class="orc-font-small-print"
+      i18n="@@ngOrcid.signin.forExample"
+      *ngIf="!usernameForm.invalid"
+      >For example: joe@institution.edu or 0000-1234-5678-9101
+    </mat-hint>
 
-  <ng-container *ngIf="signInUpdatesV1Togglz">
-    <app-my-orcid-alerts
-      *ngIf="
-        emailVerified || invalidVerifyUrl || (printError && badCredentials)
-      "
-      [emailVerified]="emailVerified"
-      [invalidVerifyUrl]="invalidVerifyUrl"
-      [signInUpdatesV1Togglz]="signInUpdatesV1Togglz"
-      [printError]="printError"
-      [badCredentials]="badCredentials"
-    ></app-my-orcid-alerts>
-    <div class="input-container">
-      <mat-label
-        class="orc-font-small-print"
-        id="username-input-label"
-        [ngClass]="{
-          error: usernameForm?.touched && usernameForm.errors
-        }"
-        ><ng-container i18n="@@register.Email"> Email </ng-container>&nbsp;<i
-          i18n="@@account.or"
-          >or</i
-        >&nbsp;<ng-container i18n="@@account.orcidID"> ORCID iD </ng-container>
-      </mat-label>
-      <mat-form-field appearance="outline" [hideRequiredMarker]="true" async>
-        <input
-          aria-labelledby="username-input-label"
-          id="username-input"
-          formControlName="username"
-          matInput
-          [attr.placeholder]="placeholderUsername"
-          #firstInput
-        />
-      </mat-form-field>
-      <mat-hint
-        class="orc-font-small-print"
-        i18n="@@ngOrcid.signin.forExample"
-        *ngIf="!usernameForm.invalid"
-        >For example: joe@institution.edu or 0000-1234-5678-9101
-      </mat-hint>
+    <mat-error
+      i18n="@@ngOrcid.signin.pleaseEnterEmailAddress"
+      *ngIf="usernameForm.hasError('required')"
+      >Please enter your email address or your ORCID iD
+    </mat-error>
 
-      <mat-error
-        i18n="@@ngOrcid.signin.pleaseEnterEmailAddress"
-        *ngIf="usernameForm.hasError('required')"
-        >Please enter your email address or your ORCID iD
-      </mat-error>
+    <mat-error
+      i18n="@@ngOrcid.signin.enterValidEmailOrOrcidForExample"
+      *ngIf="usernameForm.hasError('invalidUserName')"
+      >Please enter a valid email address or ORCID iD, for example:
+      joe@institution.edu or 0000-1234-5678-9101
+    </mat-error>
 
-      <mat-error
-        i18n="@@ngOrcid.signin.enterValidEmailOrOrcidForExample"
-        *ngIf="usernameForm.hasError('invalidUserName')"
-        >Please enter a valid email address or ORCID iD, for example:
-        joe@institution.edu or 0000-1234-5678-9101
-      </mat-error>
-
-      <app-print-errors
-        *ngIf="
-          signInUpdatesV1Togglz && printError && !badCredentials && !show2FA
-        "
-        [showDeprecatedError]="showDeprecatedError"
-        [showUnclaimedError]="showUnclaimedError"
-        [showDeactivatedError]="showDeactivatedError"
-        [showInvalidUser]="showInvalidUser"
-        [orcidPrimaryDeprecated]="orcidPrimaryDeprecated"
-        [email]="email"
-        [signInUpdatesV1Togglz]="signInUpdatesV1Togglz"
-        (unclaimedAccount)="claimAccount()"
-        (deactivatedAccount)="reactivateEmail()"
-        (signInActiveAccount)="signInActiveAccount()"
-      >
-      </app-print-errors>
-    </div>
-    <div class="input-container">
-      <mat-label
-        class="orc-font-small-print"
-        id="password-input-label"
-        [ngClass]="{
-          error: passwordForm?.touched && passwordForm?.errors
-        }"
-        >Password
-      </mat-label>
-      <mat-form-field appearance="outline" [hideRequiredMarker]="true" async>
-        <input
-          id="password"
-          type="password"
-          aria-labelledby="password-input-label"
-          formControlName="password"
-          matInput
-          [attr.placeholder]="placeholderPassword"
-        />
-      </mat-form-field>
-      <div
-        class="info"
-        *ngIf="passwordForm.hasError('maxlength')"
-        aria-live="polite"
-      >
+    <app-print-errors
+      *ngIf="printError && !badCredentials && !show2FA"
+      [showDeprecatedError]="showDeprecatedError"
+      [showUnclaimedError]="showUnclaimedError"
+      [showDeactivatedError]="showDeactivatedError"
+      [showInvalidUser]="showInvalidUser"
+      [orcidPrimaryDeprecated]="orcidPrimaryDeprecated"
+      [email]="email"
+      (unclaimedAccount)="claimAccount()"
+      (deactivatedAccount)="reactivateEmail()"
+      (signInActiveAccount)="signInActiveAccount()"
+    >
+    </app-print-errors>
+  </div>
+  <div class="input-container">
+    <mat-label
+      class="orc-font-small-print"
+      id="password-input-label"
+      [ngClass]="{
+        error: passwordForm?.touched && passwordForm?.errors
+      }"
+      >Password
+    </mat-label>
+    <mat-form-field appearance="outline" [hideRequiredMarker]="true" async>
+      <input
+        id="password"
+        type="password"
+        aria-labelledby="password-input-label"
+        formControlName="password"
+        matInput
+        [attr.placeholder]="placeholderPassword"
+      />
+    </mat-form-field>
+    <div
+      class="info"
+      *ngIf="passwordForm.hasError('maxlength')"
+      aria-live="polite"
+    >
+      <div>
+        <mat-icon class="large-material-icon material-symbols-outlined"
+          >error</mat-icon
+        >
+      </div>
+      <div class="content">
         <div>
-          <mat-icon class="large-material-icon material-symbols-outlined"
-            >error</mat-icon
-          >
+          <p>
+            <ng-container i18n="@@ngOrcid.signin.yourPasswordMoreThan"
+              >Your password is more than 256 characters long.</ng-container
+            >
+            <i i18n="@@ngOrcid.signin.yourCannotSignIn"
+              >You cannot sign in to this ORCID account until you have reset
+              your password.</i
+            >
+          </p>
         </div>
-        <div class="content">
-          <div>
-            <p>
-              <ng-container i18n="@@ngOrcid.signin.yourPasswordMoreThan"
-                >Your password is more than 256 characters long.</ng-container
-              >
-              <i i18n="@@ngOrcid.signin.yourCannotSignIn"
-                >You cannot sign in to this ORCID account until you have reset
-                your password.</i
-              >
-            </p>
-          </div>
-          <div>
-            <a
-              (click)="forgotPassword()"
-              i18n="@@ngOrcid.signin.resetYourPassword"
-            >
-              Reset your password</a
-            >
-          </div>
+        <div>
+          <a
+            (click)="forgotPassword()"
+            i18n="@@ngOrcid.signin.resetYourPassword"
+          >
+            Reset your password</a
+          >
         </div>
       </div>
     </div>
-  </ng-container>
-  <mat-divider *ngIf="signInUpdatesV1Togglz"></mat-divider>
+  </div>
+  <mat-divider></mat-divider>
 
   <ng-content></ng-content>
 
-  <app-print-errors
-    *ngIf="!signInUpdatesV1Togglz && printError"
-    [badCredentials]="badCredentials"
-    [showDeprecatedError]="showDeprecatedError"
-    [showUnclaimedError]="showUnclaimedError"
-    [showInvalidUser]="showInvalidUser"
-    [orcidPrimaryDeprecated]="orcidPrimaryDeprecated"
-    [email]="email"
-  >
-  </app-print-errors>
-  <app-deactivated
-    *ngIf="!signInUpdatesV1Togglz && showDeactivatedError"
-    [email]="email"
-  >
-  </app-deactivated>
   <app-two-factor-authentication-form
     *ngIf="show2FA"
     [showBadVerificationCode]="showBadVerificationCode"
     [showBadRecoveryCode]="showBadRecoveryCode"
-    [signInUpdatesV1Togglz]="signInUpdatesV1Togglz"
     (authenticate)="authenticate($event)"
   >
   </app-two-factor-authentication-form>
   <a
-    class="row forgot"
+    *ngIf="showForgotYourPassword"
+    class="row forgot underline orc-font-body-small forgot-password-button"
     i18n="@@ngOrcid.signin.forgotYourPassword"
     (click)="forgotPassword()"
     id="forgot-password-button"
-    [ngClass]="{
-      'underline orc-font-body-small forgot-password-button':
-        signInUpdatesV1Togglz,
-      'mat-button-font': !signInUpdatesV1Togglz
-    }"
   >
     Forgot your password or ORCID ID?
   </a>
-  <div class="row" *ngIf="!signInUpdatesV1Togglz">
-    <div class="dontHaveOrcid mat-body-1">
-      <ng-container i18n="@@ngOrcid.signin.dontHaveOrcid">
-        Don't have an ORCID iD yet?
-      </ng-container>
-      <a
-        class="row mat-button-font register-now"
-        i18n="@@ngOrcid.signin.registerNow"
-        (click)="register()"
-        id="register-button"
-        >Register now
-      </a>
-    </div>
-  </div>
 </form>

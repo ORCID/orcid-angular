@@ -1,6 +1,7 @@
 :host {
   width: 100%;
   margin-top: 64px;
+  margin-bottom: 32px;
 
   ::ng-deep {
     .mat-card-header {
@@ -71,7 +72,6 @@ img {
     margin: 0;
   }
   img {
-    cursor: pointer;
     margin: 12px 0 0px 0;
   }
 }
