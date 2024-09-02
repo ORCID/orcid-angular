@@ -4,7 +4,6 @@ import { take } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { ApplicationRoutes } from 'src/app/constants'
 import { RegisterBackendErrors } from 'src/app/types/register.local'
-import { TogglzService } from '../../../core/togglz/togglz.service'
 @Component({
   selector: 'app-backend-error',
   templateUrl: './backend-error.component.html',
@@ -16,7 +15,6 @@ export class BackendErrorComponent implements OnInit {
   _errorCode: string
   @Input() nextButtonWasClicked = false
   @Input() showEmailAlreadyExistUntilNextButtonWasClicked = false
-  registrationTogglz = false
 
   @Input()
   set errorCode(errorCode: string) {
@@ -33,14 +31,9 @@ export class BackendErrorComponent implements OnInit {
   unrecognizedError = false
   constructor(
     private _platformInfo: PlatformInfoService,
-    private _router: Router,
-    private _togglz: TogglzService
+    private _router: Router
   ) {}
   ngOnInit() {
-    this._togglz
-      .getStateOf('REGISTRATION_2_0')
-      .pipe(take(1))
-      .subscribe((value) => (this.registrationTogglz = value))
     if (!(this.errorCode in RegisterBackendErrors)) {
       this.unrecognizedError = true
     }
