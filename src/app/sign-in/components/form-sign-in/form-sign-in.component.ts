@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   ChangeDetectorRef,
   Component,
   ElementRef,
@@ -21,7 +20,6 @@ import { catchError, first, map, takeUntil, tap } from 'rxjs/operators'
 import {
   ApplicationRoutes,
   isRedirectToTheAuthorizationPage,
-  isValidOrcidFormat,
 } from 'src/app/constants'
 import { UserService } from 'src/app/core'
 import { OauthParameters, RequestInfoForm } from 'src/app/types'
@@ -52,11 +50,10 @@ import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
   ],
   preserveWhitespaces: true,
 })
-export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
+export class FormSignInComponent implements OnInit, OnDestroy {
   @ViewChild('firstInput') firstInput: ElementRef
   @Input() signInType: TypeSignIn
   @Input() signInData: SignInData
-  @Input() signInUpdatesV1Togglz: boolean
   @Output() isOauthError = new EventEmitter<boolean>()
   @Output() show2FAEmitter = new EventEmitter<object>()
   @Output() loading = new EventEmitter<boolean>()
@@ -178,13 +175,6 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.$destroy.next(true)
     this.$destroy.complete()
-  }
-
-  ngAfterViewInit(): void {
-    if (!this.signInUpdatesV1Togglz) {
-      this.firstInput.nativeElement.focus()
-      this.cd.detectChanges()
-    }
   }
 
   onSubmit() {

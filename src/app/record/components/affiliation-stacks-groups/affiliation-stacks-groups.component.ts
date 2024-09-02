@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { isEmpty } from 'lodash'
 import { Observable, Subject } from 'rxjs'
-import { take, takeUntil } from 'rxjs/operators'
+import { takeUntil } from 'rxjs/operators'
 import { RecordAffiliationService } from 'src/app/core/record-affiliations/record-affiliations.service'
 import { RecordService } from 'src/app/core/record/record.service'
 import {
@@ -18,7 +18,6 @@ import {
 import { SortData, SortOrderType } from 'src/app/types/sort'
 
 import { UserInfo } from '../../../types'
-import { TogglzService } from '../../../core/togglz/togglz.service'
 
 @Component({
   selector: 'app-affiliations',
@@ -53,7 +52,6 @@ export class AffiliationStacksGroupsComponent implements OnInit {
   @Input() expandedContent: MainPanelsState
   @Output()
   expandedContentChange: EventEmitter<MainPanelsState> = new EventEmitter()
-  professionalActivitiesTogglz = false
   sortTypes: SortOrderType[] = ['title', 'start', 'end', 'source']
   professionalActivitiesSortTypes: SortOrderType[] = [
     'title',
@@ -70,15 +68,10 @@ export class AffiliationStacksGroupsComponent implements OnInit {
   ]
   constructor(
     private _record: RecordService,
-    private _recordAffiliationService: RecordAffiliationService,
-    private _togglz: TogglzService
+    private _recordAffiliationService: RecordAffiliationService
   ) {}
 
   ngOnInit(): void {
-    this._togglz
-      .getStateOf('PROFESSIONAL_ACTIVITIES')
-      .pipe(take(1))
-      .subscribe((value) => (this.professionalActivitiesTogglz = value))
     this.$loading = this._recordAffiliationService.$loading
     this._record
       .getRecord({

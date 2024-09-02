@@ -2,33 +2,18 @@
   mat-raised-button
   id="access-through-your-institution-button"
   (click)="accessThroughInstitution()"
-  class="mat-button-wrap-text-with-icon mobile-fixed-width mat-elevation-z0"
+  class="mat-button-wrap-text-with-icon mobile-fixed-width mat-elevation-z0 institutional"
   [ngClass]="{
-    institution: !signInUpdatesV1Togglz,
-    institutional: signInUpdatesV1Togglz,
-    mobile: signInUpdatesV1Togglz && !platform.columns12
+    mobile: !platform.columns12
   }"
   type="button"
   [attr.aria-label]="labelInstitutionalButton"
 >
   <img
-    [src]="
-      signInUpdatesV1Togglz
-        ? './assets/vectors/institutional-access-no-background.svg'
-        : './assets/vectors/institutional-access.svg'
-    "
+    [src]="'./assets/vectors/institutional-access-no-background.svg'"
     alt="Institutional"
   />
-  <ng-container
-    i18n="@@ngOrcid.signin.institutionalAccount"
-    *ngIf="!signInUpdatesV1Togglz"
-  >
-    Access through your institution
-  </ng-container>
-  <ng-container
-    i18n="@@ngOrcid.signin.signInInstitution"
-    *ngIf="signInUpdatesV1Togglz"
-  >
+  <ng-container i18n="@@ngOrcid.signin.signInInstitution">
     Sign in through your institution
   </ng-container>
 </button>
@@ -40,31 +25,10 @@
     class="google mat-button-wrap-text-with-icon mobile-fixed-width mat-elevation-z0"
     type="submit"
     [attr.aria-label]="labelGoogleButton"
-    [ngClass]="{ google: signInUpdatesV1Togglz }"
   >
     <img src="./assets/vectors/google.svg" alt="Google" />
     <ng-container i18n="@@ngOrcid.signin.google">
       Sign in with Google
-    </ng-container>
-  </button>
-</form>
-<form
-  ngNoForm
-  action="{{ baseUri }}signin/facebook"
-  method="POST"
-  *ngIf="!signInUpdatesV1Togglz"
->
-  <input type="hidden" name="_csrf" value="{{ csrf }}" />
-  <input type="hidden" name="scope" value="email" />
-  <button
-    mat-raised-button
-    class="facebook mat-button-wrap-text-with-icon mobile-fixed-width mat-elevation-z0"
-    type="submit"
-    [attr.aria-label]="labelFacebookButton"
-  >
-    <img src="./assets/vectors/facebook.svg" alt="Facebook" />
-    <ng-container i18n="@@ngOrcid.signin.facebook">
-      Sign in with Facebook
     </ng-container>
   </button>
 </form>

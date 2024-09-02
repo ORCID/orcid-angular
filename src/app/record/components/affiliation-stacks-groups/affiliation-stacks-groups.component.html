@@ -134,138 +134,6 @@
 >
   <ng-container
     *ngIf="
-      !professionalActivitiesTogglz &&
-      !(
-        isPublicRecord &&
-        getAffiliationType('INVITED_POSITION_AND_DISTINCTION')?.affiliationGroup
-          ?.length === 0
-      )
-    "
-  >
-    <!-- A PANELS COMPONENT FOR INVITED_POSITION_AND_DISTINCTION -->
-    <app-panels
-      [loading]="$loading | async"
-      *ngIf="
-        getAffiliationType(
-          'INVITED_POSITION_AND_DISTINCTION'
-        ) as profileAffiliationsGroup
-      "
-      class="row"
-      [title]="affiliationTypeLabel(profileAffiliationsGroup.type)"
-      [type]="'invited-position'"
-      [userRecord]="userRecord"
-      [currentAmount]="profileAffiliationsGroup.affiliationGroup.length"
-      [(expandedContent)]="expandedContent['INVITED_POSITION_AND_DISTINCTION']"
-      (expandedContentChange)="expandedContentChange.emit(expandedContent)"
-      [isPublicRecord]="isPublicRecord"
-      [sortType]="'end'"
-      (sort)="sortEvent($event, 'INVITED_POSITION_AND_DISTINCTION')"
-      id="cy-affiliation-invited-position-and-distinction"
-    >
-      <ng-container
-        *ngIf="profileAffiliationsGroup.affiliationGroup.length > 0"
-      >
-        <app-affiliation-stack
-          [userRecord]="userRecord"
-          [isPublicRecord]="isPublicRecord"
-          *ngFor="
-            let affiliationGroup of profileAffiliationsGroup.affiliationGroup;
-            trackBy: trackByAffiliationGroup
-          "
-          [affiliationStack]="affiliationGroup"
-          [type]="affiliationGroup.affiliationType | affiliationType"
-          [userInfo]="userInfo"
-        ></app-affiliation-stack>
-      </ng-container>
-      <ng-container
-        *ngIf="profileAffiliationsGroup.affiliationGroup.length === 0"
-      >
-        <div class="orc-font-body-small">
-          <p i18n="@@shared.invitedPositionsDescription">
-            Add details of invited positions you have held and awards or prizes
-            you have received in recognition of your achievements.
-          </p>
-          <a
-            class="underline"
-            target="_blank"
-            href="https://support.orcid.org/hc/en-us/articles/360008897654-Add-an-invited-position-or-distinction-to-your-ORCID-record"
-            i18n="@@shared.invitedPositionsLearnMore"
-          >
-            Learn more about adding invited positions or distinctions to your
-            ORCID record
-          </a>
-        </div>
-      </ng-container>
-    </app-panels>
-  </ng-container>
-
-  <ng-container
-    *ngIf="
-      !professionalActivitiesTogglz &&
-      !(
-        isPublicRecord &&
-        getAffiliationType('MEMBERSHIP_AND_SERVICE')?.affiliationGroup
-          ?.length === 0
-      )
-    "
-  >
-    <!-- A PANELS COMPONENT FOR MEMBERSHIP_AND_SERVICE -->
-    <app-panels
-      [loading]="$loading | async"
-      *ngIf="
-        getAffiliationType('MEMBERSHIP_AND_SERVICE') as profileAffiliationsGroup
-      "
-      class="row"
-      [title]="affiliationTypeLabel(profileAffiliationsGroup.type)"
-      [type]="'membership'"
-      [userRecord]="userRecord"
-      [currentAmount]="profileAffiliationsGroup.affiliationGroup.length"
-      [(expandedContent)]="expandedContent['MEMBERSHIP_AND_SERVICE']"
-      (expandedContentChange)="expandedContentChange.emit(expandedContent)"
-      [isPublicRecord]="isPublicRecord"
-      [sortType]="'end'"
-      (sort)="sortEvent($event, 'MEMBERSHIP_AND_SERVICE')"
-      id="cy-affiliation-membership-and-service"
-    >
-      <ng-container
-        *ngIf="profileAffiliationsGroup.affiliationGroup.length > 0"
-      >
-        <app-affiliation-stack
-          [userRecord]="userRecord"
-          [isPublicRecord]="isPublicRecord"
-          *ngFor="
-            let affiliationGroup of profileAffiliationsGroup.affiliationGroup;
-            trackBy: trackByAffiliationGroup
-          "
-          [affiliationStack]="affiliationGroup"
-          [type]="affiliationGroup.affiliationType | affiliationType"
-          [userInfo]="userInfo"
-        ></app-affiliation-stack>
-      </ng-container>
-      <ng-container
-        *ngIf="profileAffiliationsGroup.affiliationGroup.length === 0"
-      >
-        <div class="orc-font-body-small">
-          <p i18n="@@shared.membershipDescription">
-            Add details of society or association memberships and donations of
-            time or other resources in the service of an organization.
-          </p>
-          <a
-            class="underline"
-            target="_blank"
-            href="https://support.orcid.org/hc/en-us/articles/360008897694-Add-a-membership-or-service-to-your-ORCID-record"
-            i18n="@@shared.membershipLearnMore"
-          >
-            Learn more about adding a membership or service to your ORCID record
-          </a>
-        </div>
-      </ng-container>
-    </app-panels>
-  </ng-container>
-
-  <ng-container
-    *ngIf="
-      professionalActivitiesTogglz &&
       !(
         isPublicRecord &&
         getAffiliationType('PROFESSIONAL_ACTIVITIES')?.affiliationGroup
@@ -291,7 +159,6 @@
       [isPublicRecord]="isPublicRecord"
       [sortTypes]="professionalActivitiesSortTypes"
       (sort)="sortEvent($event, 'PROFESSIONAL_ACTIVITIES')"
-      [professionalActivitiesTogglz]="professionalActivitiesTogglz"
       id="cy-affiliation-professional-activities"
     >
       <ng-container
@@ -309,7 +176,6 @@
           [affiliationStack]="affiliationGroup"
           [type]="affiliationGroup.affiliationType | affiliationType"
           [userInfo]="userInfo"
-          [professionalActivitiesTogglz]="professionalActivitiesTogglz"
         ></app-affiliation-stack>
       </ng-container>
       <ng-container

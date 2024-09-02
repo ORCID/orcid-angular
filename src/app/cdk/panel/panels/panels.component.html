@@ -123,11 +123,7 @@
             >
           </button>
         </ng-container>
-        <ng-container
-          *ngIf="
-            professionalActivitiesTogglz && type === 'professional-activities'
-          "
-        >
+        <ng-container *ngIf="type === 'professional-activities'">
           <button mat-menu-item (click)="add('invited-position')">
             <mat-icon class="material-icons-outlined">join_inner</mat-icon>
             <ng-container i18n="@@shared.addInvited"
@@ -151,12 +147,7 @@
             <ng-container i18n="@@shared.addService">Add Service</ng-container>
           </button>
         </ng-container>
-        <ng-container
-          *ngIf="
-            (!professionalActivitiesTogglz && type === 'invited-position') ||
-            type === 'distinction'
-          "
-        >
+        <ng-container *ngIf="type === 'distinction'">
           <button mat-menu-item (click)="add('invited-position')">
             <ng-container i18n="@@shared.addInvited"
               >Add Invited Position</ng-container
@@ -168,12 +159,7 @@
             >
           </button>
         </ng-container>
-        <ng-container
-          *ngIf="
-            (!professionalActivitiesTogglz && type === 'membership') ||
-            type === 'service'
-          "
-        >
+        <ng-container *ngIf="type === 'service'">
           <button mat-menu-item (click)="add('membership')">
             <ng-container i18n="@@shared.addMembership"
               >Add Membership</ng-container

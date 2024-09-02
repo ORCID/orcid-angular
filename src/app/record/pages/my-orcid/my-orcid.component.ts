@@ -74,7 +74,6 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   regionActivities = $localize`:@@shared.activities:Activities`
   readyForIndexing: boolean
   fragment: string
-  newRecordHeaderWithSummaryTogglz: boolean
 
   constructor(
     _userInfoService: UserInfoService,
@@ -211,9 +210,6 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
         }),
         switchMap(() => this._togglz.getTogglz().pipe(first())),
         tap((togglz) => {
-          if (togglz.messages['NEW_RECORD_HEADER_WITH_SUMMARY'] === 'true') {
-            this.newRecordHeaderWithSummaryTogglz = true
-          }
           if (togglz.messages['ORCID_ANGULAR_HELP_HERO'] === 'true') {
             if (
               !this.publicOrcid &&

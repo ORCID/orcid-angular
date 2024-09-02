@@ -1,15 +1,12 @@
 <form [formGroup]="twoFactorForm" (ngSubmit)="onSubmit()">
-  <p i18n="@@ngOrcid.signin.2fa.heading" *ngIf="!signInUpdatesV1Togglz">
-    Two-factor authentication
-  </p>
-  <div [ngClass]="{ 'input-container': signInUpdatesV1Togglz }">
+  <div class="input-container">
     <mat-label
       class="orc-font-small-print"
       i18n="@@ngOrcid.signin.2fa.label"
       [ngClass]="{
         error: isVerificationCodeInvalid
       }"
-      *ngIf="!recoveryCode && signInUpdatesV1Togglz"
+      *ngIf="!recoveryCode"
       >Two-factor authentication code
     </mat-label>
     <mat-form-field
@@ -17,12 +14,6 @@
       class="row deactivate"
       *ngIf="!recoveryCode"
     >
-      <mat-label
-        i18n="@@ngOrcid.signin.2fa.label"
-        *ngIf="!signInUpdatesV1Togglz"
-      >
-        Two-factor authentication code
-      </mat-label>
       <input
         matInput
         #inputVerificationCode
@@ -31,44 +22,8 @@
         appTrim
         autocomplete="off"
       />
-      <mat-hint align="end" *ngIf="!signInUpdatesV1Togglz"
-        >{{ inputVerificationCode.value?.length || 0 }}/6</mat-hint
-      >
-      <mat-error
-        *ngIf="
-          !signInUpdatesV1Togglz && verificationFormControl.hasError('required')
-        "
-      >
-        <p
-          i18n="@@ngOrcid.signin.2fa.verificationCodeRequired"
-          class="error-message"
-        >
-          Authentication code is required
-        </p>
-        <p class="error-length">
-          {{ inputVerificationCode.value?.length || 0 }}/6
-        </p>
-      </mat-error>
-
-      <mat-error
-        *ngIf="
-          !signInUpdatesV1Togglz &&
-          (verificationFormControl.hasError('minlength') ||
-            verificationFormControl.hasError('maxlength'))
-        "
-      >
-        <p
-          i18n="@@ngOrcid.signin.2fa.badVerificationCodeLength"
-          class="error-message"
-        >
-          Invalid authentication code length
-        </p>
-        <p class="error-length">
-          {{ inputVerificationCode.value?.length || 0 }}/6
-        </p>
-      </mat-error>
     </mat-form-field>
-    <ng-container *ngIf="signInUpdatesV1Togglz && !recoveryCode">
+    <ng-container *ngIf="!recoveryCode">
       <mat-hint
         class="orc-font-small-print error-length"
         *ngIf="!isVerificationCodeInvalid"
@@ -111,15 +66,11 @@
   </div>
   <p
     [ngClass]="{
-      'enter-code': signInUpdatesV1Togglz && isVerificationCodeInvalid
+      'enter-code': isVerificationCodeInvalid
     }"
   >
     <a
-      [ngClass]="{
-        'mat-button-font': !signInUpdatesV1Togglz,
-        underline: signInUpdatesV1Togglz,
-        'orc-font-body-small': signInUpdatesV1Togglz
-      }"
+      class="underline orc-font-body-small"
       (click)="showAuthenticationCode()"
       i18n="@@ngOrcid.signin.2fa.instructionsPart1"
       >Enter a code
@@ -133,11 +84,7 @@
       Don't have your device?
     </ng-container>
     <a
-      [ngClass]="{
-        'mat-button-font': !signInUpdatesV1Togglz,
-        underline: signInUpdatesV1Togglz,
-        'orc-font-body-small': signInUpdatesV1Togglz
-      }"
+      class="underline orc-font-body-small"
       (click)="showRecoveryCode()"
       i18n="@@ngOrcid.signin.2fa.noDevice2"
       >Enter a recovery code
@@ -148,11 +95,7 @@
       Don't have your device or recovery code?
     </ng-container>
     <a
-      [ngClass]="{
-        'mat-button-font': !signInUpdatesV1Togglz,
-        underline: signInUpdatesV1Togglz,
-        'orcid-orc-font-body-small': signInUpdatesV1Togglz
-      }"
+      class="underline orc-font-body-small"
       (click)="navigateTo('https://support.orcid.org/')"
       rel="noopener noreferrer"
       target="_blank"
@@ -160,28 +103,17 @@
       >ORCID Help Center
     </a>
   </p>
-  <div [ngClass]="{ 'input-container': signInUpdatesV1Togglz }">
+  <div class="input-container">
     <mat-label
       class="orc-font-small-print"
       i18n="@@ngOrcid.signin.2fa.recoveryCode"
       [ngClass]="{
         error: isRecoveryCodeInvalid
       }"
-      *ngIf="recoveryCode && signInUpdatesV1Togglz"
+      *ngIf="recoveryCode"
       >Recovery code
     </mat-label>
-    <mat-form-field
-      appearance="outline"
-      class="row"
-      [ngClass]="{ 'two-factor': !signInUpdatesV1Togglz }"
-      *ngIf="recoveryCode"
-    >
-      <mat-label
-        i18n="@@ngOrcid.signin.2fa.recoveryCode"
-        *ngIf="!signInUpdatesV1Togglz"
-      >
-        Recovery code
-      </mat-label>
+    <mat-form-field appearance="outline" class="row" *ngIf="recoveryCode">
       <input
         matInput
         #inputRecoveryCode
@@ -189,44 +121,8 @@
         appTrim
         autocomplete="off"
       />
-      <mat-hint align="end" *ngIf="!signInUpdatesV1Togglz"
-        >{{ inputRecoveryCode.value?.length || 0 }}/10</mat-hint
-      >
-      <mat-error
-        *ngIf="
-          !signInUpdatesV1Togglz && recoveryCodeFormControl.hasError('required')
-        "
-      >
-        <p
-          i18n="@@ngOrcid.signin.2fa.recoveryCodeRequired"
-          class="error-message"
-        >
-          Recovery code is required
-        </p>
-        <p class="error-length">
-          {{ inputRecoveryCode.value?.length || 0 }}/10
-        </p>
-      </mat-error>
-
-      <mat-error
-        *ngIf="
-          !signInUpdatesV1Togglz &&
-          (recoveryCodeFormControl.hasError('minlength') ||
-            recoveryCodeFormControl.hasError('maxlength'))
-        "
-      >
-        <p
-          i18n="@@ngOrcid.signin.2fa.badRecoveryCodeLength"
-          class="error-message"
-        >
-          Invalid recovery code length
-        </p>
-        <p class="error-length">
-          {{ inputRecoveryCode.value?.length || 0 }}/10
-        </p>
-      </mat-error>
     </mat-form-field>
-    <ng-container *ngIf="signInUpdatesV1Togglz && recoveryCode">
+    <ng-container *ngIf="recoveryCode">
       <mat-hint
         class="orc-font-small-print error-length"
         *ngIf="!isRecoveryCodeInvalid"
@@ -270,14 +166,10 @@
 
   <button
     mat-raised-button
-    class="row mat-elevation-z0 two-factor"
+    class="row mat-elevation-z0 two-factor authenticate-button-new-signin"
     type="submit"
     i18n="@@ngOrcid.signin.2fa.authenticate"
     id="authenticateButton"
-    [ngClass]="{
-      'authenticate-button': !signInUpdatesV1Togglz,
-      'authenticate-button-new-signin': signInUpdatesV1Togglz
-    }"
   >
     AUTHENTICATE
   </button>
