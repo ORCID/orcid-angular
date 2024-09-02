@@ -18,7 +18,6 @@ import { ModalWorksSearchLinkComponent } from '../../../record/components/work-s
 import { VerificationEmailModalService } from '../../../core/verification-email-modal/verification-email-modal.service'
 import { UserRecord } from '../../../types/record.local'
 import { isQA } from 'src/app/shared/validators/environment-check/environment-check'
-import { TogglzService } from '../../../core/togglz/togglz.service'
 
 @Component({
   selector: 'app-panels',
@@ -70,7 +69,6 @@ export class PanelsComponent implements OnInit {
   @Input() labelAddButton = $localize`:@@shared.sortItems:Sort Items`
   @Input() labelExportButton = $localize`:@@shared.exportItems:Export Items`
   @Input() labelSortButton = $localize`:@@shared.addItem:Add Item`
-  @Input() professionalActivitiesTogglz = false
   IS_QA: boolean
   isMobile: boolean
 
