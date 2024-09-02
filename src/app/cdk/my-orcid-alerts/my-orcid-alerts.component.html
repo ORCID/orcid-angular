@@ -1,91 +1,66 @@
-<ng-container *ngIf="!signInUpdatesV1Togglz">
-  <mat-toolbar>
-    <mat-toolbar-row>
-      <div role="alert" aria-label="polite">
-        <p class="mat-body-2">
-          <ng-container
-            i18n="@@myOrcidAlerts.invalidVerifyUrl"
-            *ngIf="invalidVerifyUrl"
-          >
-            Your email couldn't be verified, please check the link you used to
-            verify it.
-          </ng-container>
-          <ng-container
-            i18n="@@myOrcidAlerts.emailVerified"
-            *ngIf="emailVerified"
-          >
-            Thank you for verifying your email
-          </ng-container>
-        </p>
-      </div>
-    </mat-toolbar-row>
-  </mat-toolbar>
-</ng-container>
-<ng-container *ngIf="signInUpdatesV1Togglz">
-  <ng-container *ngIf="emailVerified || invalidVerifyUrl">
-    <div
-      role="alert"
-      aria-labelledby="dialogTitle"
-      aria-describedby="dialogDescription"
-      [ngClass]="{
-        verification: emailVerified,
-        invalid: invalidVerifyUrl
-      }"
-    >
-      <div>
-        <mat-icon class="large-material-icon material-symbols-outlined">
-          <ng-container *ngIf="emailVerified">check_circle</ng-container>
-          <ng-container *ngIf="invalidVerifyUrl">warning</ng-container>
-        </mat-icon>
-      </div>
-      <div class="content">
-        <div>
-          <b id="dialogTitle" i18n="@@ngOrcid.signin.almostDone">
-            Almost done!
-          </b>
-        </div>
-        <div id="dialogDescription">
-          <ng-container
-            i18n="@@ngOrcid.signin.signInToComplete"
-            *ngIf="emailVerified"
-          >
-            Sign in to complete your email verification
-          </ng-container>
-          <ng-container
-            i18n="@@myOrcidAlerts.invalidVerifyUrl"
-            *ngIf="invalidVerifyUrl"
-          >
-            Your email couldn't be verified, please check the link you used to
-            verify it.
-          </ng-container>
-        </div>
-      </div>
+<ng-container *ngIf="emailVerified || invalidVerifyUrl">
+  <div
+    role="alert"
+    aria-labelledby="dialogTitle"
+    aria-describedby="dialogDescription"
+    [ngClass]="{
+      verification: emailVerified,
+      invalid: invalidVerifyUrl
+    }"
+  >
+    <div>
+      <mat-icon class="large-material-icon material-symbols-outlined">
+        <ng-container *ngIf="emailVerified">check_circle</ng-container>
+        <ng-container *ngIf="invalidVerifyUrl">warning</ng-container>
+      </mat-icon>
     </div>
-  </ng-container>
-  <ng-container *ngIf="printError && badCredentials">
-    <div
-      class="invalid"
-      role="dialog"
-      aria-live="polite"
-      aria-labelledby="dialogTitle"
-      aria-describedby="dialogDescription"
-    >
+    <div class="content">
       <div>
-        <mat-icon class="large-material-icon material-symbols-outlined"
-          >warning</mat-icon
+        <b id="dialogTitle" i18n="@@ngOrcid.signin.almostDone">
+          Almost done!
+        </b>
+      </div>
+      <div id="dialogDescription">
+        <ng-container
+          i18n="@@ngOrcid.signin.signInToComplete"
+          *ngIf="emailVerified"
         >
-      </div>
-      <div class="content">
-        <div>
-          <b id="dialogTitle" i18n="@@ngOrcid.signin.somethingNotQuiteRight">
-            Something's not quite right...
-          </b>
-        </div>
-        <div id="dialogDescription" i18n="@@ngOrcid.signin.checkYourSignIn">
-          Please check that your sign in details are correct and then try
-          signing in again.
-        </div>
+          Sign in to complete your email verification
+        </ng-container>
+        <ng-container
+          i18n="@@myOrcidAlerts.invalidVerifyUrl"
+          *ngIf="invalidVerifyUrl"
+        >
+          Your email couldn't be verified, please check the link you used to
+          verify it.
+        </ng-container>
       </div>
     </div>
-  </ng-container>
+  </div>
+</ng-container>
+<ng-container *ngIf="printError && badCredentials">
+  <div
+    class="invalid"
+    role="dialog"
+    aria-live="polite"
+    aria-labelledby="dialogTitle"
+    aria-describedby="dialogDescription"
+  >
+    <div>
+      <mat-icon class="large-material-icon material-symbols-outlined"
+        >warning</mat-icon
+      >
+    </div>
+    <div class="content">
+      <div>
+        <b id="dialogTitle" i18n="@@ngOrcid.signin.somethingNotQuiteRight">
+          Something's not quite right...
+        </b>
+      </div>
+      <div id="dialogDescription" i18n="@@ngOrcid.signin.checkYourSignIn">
+        Please check that your sign in details are correct and then try signing
+        in again.
+      </div>
+    </div>
+  </div>
 </ng-container>

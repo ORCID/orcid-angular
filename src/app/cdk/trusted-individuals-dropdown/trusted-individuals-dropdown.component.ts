@@ -28,7 +28,6 @@ export class TrustedIndividualsDropdownComponent implements OnInit {
   get trustedIndividuals() {
     return this._trustedIndividuals
   }
-  @Input() signInUpdatesV1Togglz: boolean
   @Output() changeUser = new EventEmitter<Delegator>()
   ngOnInit(): void {}
 

@@ -27,7 +27,6 @@ export class PrintErrorsComponent implements OnInit {
   @Input() showInvalidUser: boolean
   @Input() orcidPrimaryDeprecated: string
   @Input() email: string
-  @Input() signInUpdatesV1Togglz: boolean
 
   @Output() signInActiveAccount = new EventEmitter<void>()
   @Output() deactivatedAccount = new EventEmitter<void>()

@@ -31,7 +31,6 @@ import { Title } from '@angular/platform-browser'
   preserveWhitespaces: true,
 })
 export class FormAuthorizeComponent implements OnInit, OnDestroy {
-  @Input() signInUpdatesV1Togglz: boolean
   environment = environment
   $destroy: Subject<boolean> = new Subject<boolean>()
   orcidUrl: string
@@ -97,15 +96,13 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     setTimeout(() => {
-      if (this.signInUpdatesV1Togglz) {
-        this._titleService.setTitle(
-          this.authorizeAccessFor +
-            ' ' +
-            this.oauthRequest.clientName +
-            ' ' +
-            this.orcid
-        )
-      }
+      this._titleService.setTitle(
+        this.authorizeAccessFor +
+          ' ' +
+          this.oauthRequest.clientName +
+          ' ' +
+          this.orcid
+      )
     }, 1000)
   }
 
@@ -174,21 +171,15 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
     }
 
     if (scope === '/person/update') {
-      return !this.signInUpdatesV1Togglz
-        ? $localize`:@@authorize.addUpdateInformation:Add/update information about you (country, keywords, etc.)`
-        : $localize`:@@authorize.addUpdateInformation:Add/update information about you (country, keywords, etc.)`
+      return $localize`:@@authorize.addUpdateInformation:Add/update information about you (country, keywords, etc.)`
     }
 
     if (scope === '/activities/update') {
-      return !this.signInUpdatesV1Togglz
-        ? $localize`:@@authorize.activitiesUpdate:Add/update your research activities (works, affiliations, etc)`
-        : $localize`:@@authorize.addUpdateReseachActivities:Add/update your research activities (works, affiliations, etc.)`
+      return $localize`:@@authorize.addUpdateReseachActivities:Add/update your research activities (works, affiliations, etc.)`
     }
 
     if (scope === '/read-limited') {
-      return !this.signInUpdatesV1Togglz
-        ? $localize`:@@authorize.readLimited:Read your information with visibility set to Trusted Organizations`
-        : $localize`:@@authorize.readInfomationVisibilityTrustedParties:Read your information with visibility set to Trusted parties`
+      return $localize`:@@authorize.readInfomationVisibilityTrustedParties:Read your information with visibility set to Trusted parties`
     }
 
     // For any unreconized scope just use the description  from the backend
