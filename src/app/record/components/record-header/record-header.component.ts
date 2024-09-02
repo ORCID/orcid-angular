@@ -33,7 +33,6 @@ export class RecordHeaderComponent implements OnInit {
   @Input() affiliations: number
   @Input() displaySideBar: boolean
   @Input() displayBiography: boolean
-  @Input() newRecordHeaderWithSummaryTogglz: boolean
   _recordSummaryOpen: boolean
 
   ariaLabelFindoutMore = RecordUtil.appendOpensInNewTab(
