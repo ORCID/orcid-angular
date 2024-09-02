@@ -26,7 +26,6 @@ import {
   DisplayName,
   Institutional,
 } from '../../../types/institutional.endpoint'
-import { path } from '@angular-devkit/core'
 
 @Component({
   selector: 'app-institutional',
@@ -96,14 +95,6 @@ export class InstitutionalComponent implements OnInit {
             ? []
             : institutionsFiltered
         }),
-        tap(() => {
-          if (
-            !this.institutionFormControl.valid &&
-            !this.institutionFormControl.pristine
-          ) {
-            this.userSelectedInstitutions = []
-          }
-        })
       )
     })
   }
@@ -160,12 +151,13 @@ export class InstitutionalComponent implements OnInit {
     this.institution = institutionSelected
     this.entityID = this.institution.entityID
 
-    this.displayDefaultImage = false
-    this.imageLoadingTimeOut = false
-    this.imageLoadingFinish = false
-
-    this.userSelectedInstitutions = []
-    this.userSelectedInstitutions.push(institutionSelected)
+    if (!this.userSelectedInstitutions || !this.userSelectedInstitutions.length) {
+      this.displayDefaultImage = false
+      this.imageLoadingTimeOut = false
+      this.imageLoadingFinish = false
+      this.userSelectedInstitutions = []
+      this.userSelectedInstitutions.push(institutionSelected)
+    }
   }
 
   getNameInstitution(institution: Institutional): DisplayName {
