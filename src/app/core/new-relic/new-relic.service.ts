@@ -10,8 +10,8 @@ export class NewRelicService {
 ) {}
 
   public init() {
-    if ((window as any).newrelic) {
-      (window as any).newrelic.addPageAction('init')
+    if ((window as any)?.newrelic?.start && typeof (window as any).newrelic.start === 'function'  ) {
+      (window as any).newrelic.start()
     }
   }
 
