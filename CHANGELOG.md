@@ -1,3 +1,9 @@
+## v2.104.11 - 2024-09-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.104.10...v2.104.11)
+
+- [#2342](https://github.com/ORCID/orcid-angular/pull/2342): Lmendoza/new relic
+
 ## v2.104.10 - 2024-09-02
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.104.9...v2.104.10)
