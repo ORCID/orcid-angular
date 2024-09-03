@@ -94,7 +94,7 @@ export class InstitutionalComponent implements OnInit {
             environment.INSTITUTIONAL_AUTOCOMPLETE_DISPLAY_AMOUNT
             ? []
             : institutionsFiltered
-        }),
+        })
       )
     })
   }
@@ -151,7 +151,10 @@ export class InstitutionalComponent implements OnInit {
     this.institution = institutionSelected
     this.entityID = this.institution.entityID
 
-    if (!this.userSelectedInstitutions || !this.userSelectedInstitutions.length) {
+    if (
+      !this.userSelectedInstitutions ||
+      !this.userSelectedInstitutions.length
+    ) {
       this.displayDefaultImage = false
       this.imageLoadingTimeOut = false
       this.imageLoadingFinish = false

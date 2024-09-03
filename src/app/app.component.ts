@@ -85,11 +85,13 @@ export class AppComponent {
       )
       .subscribe()
 
-    _togglzService.getStateOf('NEW_RELIC_BROWSER_MONITORING').subscribe((value) => {
-      if (true) {
-        _newRelicService.init()
-      }
-    })
+    _togglzService
+      .getStateOf('NEW_RELIC_BROWSER_MONITORING')
+      .subscribe((value) => {
+        if (true) {
+          _newRelicService.init()
+        }
+      })
 
     _router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
