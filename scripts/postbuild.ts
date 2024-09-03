@@ -11,6 +11,7 @@ import { renameSync, readFileSync } from 'fs'
 import { zendeskPlugin } from './zend-desk.postbuild'
 import { createShareAssetsFolder } from './moveToShareFolder.postbuild'
 import { robotsMetadata } from './robots-metada.postbuild'
+import { newRelic } from './new-relic.postbuild'
 const glob = require('glob')
 // Run updates on index.html files across languages
 glob
@@ -20,6 +21,7 @@ glob
     let data = readFileSync(file, 'utf8')
     data = uniqueLength(data, options)
     data = buildInfo(data, options)
+    data = newRelic(data, options)
     data = zendeskPlugin(data, options)
     // Replace all the `*.js` references to match updated JS file names with the language code.
     data = addLanguageCodeToHashesOnToHTMLFiles(data, options)

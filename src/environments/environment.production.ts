@@ -17,6 +17,7 @@ export const environment = {
   VERBOSE_SNACKBAR_ERRORS_REPORTS: false,
   WORDPRESS_S3: 'https://homepage-prod.orcid.org',
   WORDPRESS_S3_FALLBACK: 'https://homepage-fallback.orcid.org',
+  NEW_RELIC_APP: '772335825',
   LANGUAGE_MENU_OPTIONS: {
     ar: 'العربية',
     cs: 'Čeština',
