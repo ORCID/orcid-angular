@@ -20,6 +20,8 @@ import { getBiographyEndPoint } from '../record-biography/record-biography.servi
 import { getUserInfo } from '../user-info/user-info.service.spec'
 import { getPeerReviews } from '../record-peer-review/record-peer-review.service.spec'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('RecordService', () => {
   let service: RecordService
 

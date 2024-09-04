@@ -19,6 +19,8 @@ import { PlatformInfoService } from '../platform-info'
 import { SnackbarService } from '../snackbar/snackbar.service'
 import { WINDOW_PROVIDERS } from '../window'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('TopBarVerificationEmailComponent', () => {
   let component: TopBarVerificationEmailComponent
   let fixture: ComponentFixture<TopBarVerificationEmailComponent>
@@ -45,6 +47,7 @@ describe('TopBarVerificationEmailComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

@@ -16,6 +16,8 @@ import { RecordWorksService } from '../../../core/record-works/record-works.serv
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('WorkStackGroupComponent', () => {
   let component: WorkStackGroupComponent
   let fixture: ComponentFixture<WorkStackGroupComponent>
@@ -35,6 +37,7 @@ describe('WorkStackGroupComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

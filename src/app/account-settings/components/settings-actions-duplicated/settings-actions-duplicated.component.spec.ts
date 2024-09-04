@@ -8,7 +8,7 @@ import {
   MatLegacyDialogModule as MatDialogModule,
 } from '@angular/material/legacy-dialog'
 import { WINDOW_PROVIDERS } from '../../../cdk/window'
-import { UntypedFormBuilder } from '@angular/forms'
+import { ReactiveFormsModule, UntypedFormBuilder } from '@angular/forms'
 import { PlatformInfoService } from '../../../cdk/platform-info'
 import { ErrorHandlerService } from '../../../core/error-handler/error-handler.service'
 import { SnackbarService } from '../../../cdk/snackbar/snackbar.service'
@@ -17,13 +17,20 @@ import { Overlay } from '@angular/cdk/overlay'
 import { UserService } from '../../../core'
 import { AccountActionsDuplicatedService } from '../../../core/account-actions-duplicated/account-actions-duplicated.service'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('SettingsActionsDuplicatedComponent', () => {
   let component: SettingsActionsDuplicatedComponent
   let fixture: ComponentFixture<SettingsActionsDuplicatedComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, RouterTestingModule],
+      imports: [
+        HttpClientTestingModule,
+        MatDialogModule,
+        RouterTestingModule,
+        ReactiveFormsModule,
+      ],
       declarations: [SettingsActionsDuplicatedComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -37,6 +44,7 @@ describe('SettingsActionsDuplicatedComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

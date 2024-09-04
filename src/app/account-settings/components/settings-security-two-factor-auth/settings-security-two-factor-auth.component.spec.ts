@@ -12,6 +12,8 @@ import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack
 import { Overlay } from '@angular/cdk/overlay'
 import { TwoFactorAuthenticationService } from '../../../core/two-factor-authentication/two-factor-authentication.service'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('SettingsSecurityTwoFactorAuthComponent', () => {
   let component: SettingsSecurityTwoFactorAuthComponent
   let fixture: ComponentFixture<SettingsSecurityTwoFactorAuthComponent>
@@ -30,6 +32,7 @@ describe('SettingsSecurityTwoFactorAuthComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

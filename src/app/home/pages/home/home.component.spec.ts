@@ -13,6 +13,8 @@ import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('HomeComponent', () => {
   let component: HomeComponent
   let fixture: ComponentFixture<HomeComponent>
@@ -34,6 +36,7 @@ describe('HomeComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

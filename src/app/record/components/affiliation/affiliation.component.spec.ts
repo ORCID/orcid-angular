@@ -3,6 +3,8 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 import { AffiliationComponent } from './affiliation.component'
 import { SharedModule } from '../../../shared/shared.module'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('AffiliationComponent', () => {
   let component: AffiliationComponent
   let fixture: ComponentFixture<AffiliationComponent>
@@ -11,6 +13,7 @@ describe('AffiliationComponent', () => {
     TestBed.configureTestingModule({
       imports: [SharedModule],
       declarations: [AffiliationComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   }))
 

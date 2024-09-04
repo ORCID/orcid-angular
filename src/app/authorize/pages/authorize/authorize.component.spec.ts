@@ -12,6 +12,8 @@ import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { UserService } from '../../../core'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('AuthorizeComponent', () => {
   let component: AuthorizeComponent
   let fixture: ComponentFixture<AuthorizeComponent>
@@ -30,6 +32,7 @@ describe('AuthorizeComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

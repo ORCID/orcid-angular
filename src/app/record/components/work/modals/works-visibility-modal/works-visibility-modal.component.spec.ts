@@ -17,14 +17,28 @@ import {
 import { Overlay } from '@angular/cdk/overlay'
 import { SharedModule } from '../../../../../shared/shared.module'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { ReactiveFormsModule } from '@angular/forms'
+import { VisibilitySelectorComponent } from 'src/app/cdk/visibility-selector/visibility-selector/visibility-selector.component'
+import { MatLegacyMenuModule } from '@angular/material/legacy-menu'
+
 describe('WorksVisibilityModalComponent', () => {
   let component: WorksVisibilityModalComponent
   let fixture: ComponentFixture<WorksVisibilityModalComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule, SharedModule],
-      declarations: [WorksVisibilityModalComponent],
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+        SharedModule,
+        ReactiveFormsModule,
+        MatLegacyMenuModule,
+      ],
+      declarations: [
+        WorksVisibilityModalComponent,
+        VisibilitySelectorComponent,
+      ],
       providers: [
         { provide: MatDialogRef, useValue: {} },
         { provide: MAT_DIALOG_DATA, useValue: {} },
@@ -35,8 +49,10 @@ describe('WorksVisibilityModalComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
+
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

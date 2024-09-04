@@ -14,6 +14,8 @@ import { Overlay } from '@angular/cdk/overlay'
 import { RecordService } from '../../../core/record/record.service'
 import { UserService } from '../../../core'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('SideBarComponent', () => {
   let component: SideBarComponent
   let fixture: ComponentFixture<SideBarComponent>
@@ -33,6 +35,7 @@ describe('SideBarComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

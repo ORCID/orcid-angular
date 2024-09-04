@@ -17,13 +17,20 @@ import { Overlay } from '@angular/cdk/overlay'
 import { UserService } from '../../../../core'
 import { RecordWebsitesService } from '../../../../core/record-websites/record-websites.service'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { ReactiveFormsModule, UntypedFormGroup } from '@angular/forms'
+
 describe('ModalWebsitesComponent', () => {
   let component: ModalWebsitesComponent
   let fixture: ComponentFixture<ModalWebsitesComponent>
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule],
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+        ReactiveFormsModule,
+      ],
       declarations: [ModalWebsitesComponent],
       providers: [
         { provide: MatDialogRef, useValue: {} },
@@ -38,12 +45,14 @@ describe('ModalWebsitesComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   }))
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ModalWebsitesComponent)
     component = fixture.componentInstance
+    component.websitesForm = new UntypedFormGroup({})
     fixture.detectChanges()
   })
 

@@ -12,6 +12,8 @@ import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { InboxService } from '../../../core/inbox/inbox.service'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('NotificationPermissionComponent', () => {
   let component: NotificationPermissionComponent
   let fixture: ComponentFixture<NotificationPermissionComponent>
@@ -30,6 +32,7 @@ describe('NotificationPermissionComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

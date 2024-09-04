@@ -12,6 +12,8 @@ import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { NewsService } from '../../../core'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('NewsComponent', () => {
   let component: NewsComponent
   let fixture: ComponentFixture<NewsComponent>
@@ -30,6 +32,7 @@ describe('NewsComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

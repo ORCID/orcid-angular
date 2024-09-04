@@ -13,6 +13,8 @@ import { Overlay } from '@angular/cdk/overlay'
 import { SignInService } from '../../../core/sign-in/sign-in.service'
 import { OauthService } from '../../../core/oauth/oauth.service'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('SocialComponent', () => {
   let component: SocialComponent
   let fixture: ComponentFixture<SocialComponent>
@@ -32,6 +34,7 @@ describe('SocialComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

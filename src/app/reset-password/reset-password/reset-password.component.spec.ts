@@ -15,6 +15,8 @@ import { RegisterService } from '../../core/register/register.service'
 import { PasswordRecoveryService } from '../../core/password-recovery/password-recovery.service'
 import { MdePopoverModule } from '../../cdk/popover'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('ResetPasswordComponent', () => {
   let component: ResetPasswordComponent
   let fixture: ComponentFixture<ResetPasswordComponent>
@@ -35,6 +37,7 @@ describe('ResetPasswordComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

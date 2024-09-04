@@ -9,6 +9,8 @@ import { RouterModule } from '@angular/router'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { EMPTY } from 'rxjs'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('LoggedInComponent', () => {
   let component: LoggedInComponent
   let fixture: ComponentFixture<LoggedInComponent>
@@ -38,6 +40,7 @@ describe('LoggedInComponent', () => {
         },
       ],
       imports: [HttpClientTestingModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

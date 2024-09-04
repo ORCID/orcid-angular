@@ -1,6 +1,8 @@
 import { RecordHolderRolesPipe } from './record-holder-roles.pipe'
 import { Contributor } from '../../../types'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('RecordHolderContributionPipe', () => {
   let pipe: RecordHolderRolesPipe
 

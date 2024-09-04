@@ -17,6 +17,8 @@ import {
   ResearchResourcesGroup,
 } from '../../types/record-research-resources.endpoint'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('RecordResearchResourceService', () => {
   let service: RecordResearchResourceService
 

@@ -13,6 +13,8 @@ import { Overlay } from '@angular/cdk/overlay'
 import { TwoFactorAuthenticationService } from '../../../core/two-factor-authentication/two-factor-authentication.service'
 import { MdePopoverModule } from '../../../cdk/popover'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('TwoFactorComponent', () => {
   let component: TwoFactorComponent
   let fixture: ComponentFixture<TwoFactorComponent>
@@ -31,6 +33,7 @@ describe('TwoFactorComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

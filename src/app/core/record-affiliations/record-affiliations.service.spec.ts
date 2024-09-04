@@ -20,6 +20,8 @@ import {
   AffiliationUIGroup,
 } from '../../types/record-affiliation.endpoint'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('AffiliationsService', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({

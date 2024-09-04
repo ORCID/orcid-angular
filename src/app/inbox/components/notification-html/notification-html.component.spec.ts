@@ -3,6 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { NotificationHtmlComponent } from './notification-html.component'
 import { SharedModule } from '../../../shared/shared.module'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('NotificationHtmlComponent', () => {
   let component: NotificationHtmlComponent
   let fixture: ComponentFixture<NotificationHtmlComponent>
@@ -11,6 +13,7 @@ describe('NotificationHtmlComponent', () => {
     TestBed.configureTestingModule({
       imports: [SharedModule],
       declarations: [NotificationHtmlComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

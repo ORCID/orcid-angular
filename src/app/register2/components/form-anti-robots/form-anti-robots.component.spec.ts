@@ -13,6 +13,8 @@ import { ErrorHandlerService } from '../../../core/error-handler/error-handler.s
 import { Register2Service } from '../../../core/register2/register2.service'
 import { FormAntiRobotsComponent } from './form-anti-robots.component'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('FormAntiRobotsComponent', () => {
   let component: FormAntiRobotsComponent
   let fixture: ComponentFixture<FormAntiRobotsComponent>
@@ -32,6 +34,7 @@ describe('FormAntiRobotsComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

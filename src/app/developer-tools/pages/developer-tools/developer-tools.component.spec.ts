@@ -11,6 +11,8 @@ import { WINDOW, WINDOW_PROVIDERS } from 'src/app/cdk/window'
 import { DeveloperToolsComponent } from './developer-tools.component'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('DeveloperToolsComponent', () => {
   let component: DeveloperToolsComponent
   let fixture: ComponentFixture<DeveloperToolsComponent>
@@ -51,6 +53,7 @@ describe('DeveloperToolsComponent', () => {
           useValue: {},
         },
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
 
     fixture = TestBed.createComponent(DeveloperToolsComponent)

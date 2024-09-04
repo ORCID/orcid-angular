@@ -32,6 +32,8 @@ import { HarnessLoader } from '@angular/cdk/testing'
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed'
 import { MatLegacyButtonHarness as MatButtonHarness } from '@angular/material/legacy-button/testing'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('ModalNameComponent', () => {
   let component: ModalNameComponent
   let fixture: ComponentFixture<ModalNameComponent>
@@ -83,6 +85,7 @@ describe('ModalNameComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   }))
 

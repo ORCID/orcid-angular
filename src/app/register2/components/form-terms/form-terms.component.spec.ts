@@ -12,6 +12,8 @@ import { ErrorHandlerService } from '../../../core/error-handler/error-handler.s
 import { Register2Service } from '../../../core/register2/register2.service'
 import { FormTermsComponent } from './form-terms.component'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('FormTermsComponent', () => {
   let component: FormTermsComponent
   let fixture: ComponentFixture<FormTermsComponent>
@@ -30,6 +32,7 @@ describe('FormTermsComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

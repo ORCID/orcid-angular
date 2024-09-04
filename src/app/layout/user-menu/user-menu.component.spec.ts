@@ -27,6 +27,8 @@ import { Config } from '../../types/togglz.endpoint'
 import { MatIconModule } from '@angular/material/icon'
 import { MatIconHarness } from '@angular/material/icon/testing'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('UserMenuComponent', () => {
   let component: UserMenuComponent
   let fixture: ComponentFixture<UserMenuComponent>
@@ -66,6 +68,7 @@ describe('UserMenuComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
     togglzService = TestBed.inject(TogglzService)
     togglzService.togglzSubject = new ReplaySubject<Config>()

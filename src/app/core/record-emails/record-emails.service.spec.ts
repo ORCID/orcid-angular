@@ -12,6 +12,8 @@ import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { RecordPublicSideBarService } from '../record-public-side-bar/record-public-side-bar.service'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('RecordEmailsService', () => {
   let service: RecordEmailsService
 

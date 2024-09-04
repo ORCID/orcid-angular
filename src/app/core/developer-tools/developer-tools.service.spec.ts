@@ -4,6 +4,8 @@ import { DeveloperToolsService } from './developer-tools.service'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('DeveloperToolsService', () => {
   let service: DeveloperToolsService
 

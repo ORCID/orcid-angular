@@ -17,6 +17,8 @@ import { Overlay } from '@angular/cdk/overlay'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('ModalWorksSearchLink.Component.HtmlComponent', () => {
   let component: ModalWorksSearchLinkComponent
   let fixture: ComponentFixture<ModalWorksSearchLinkComponent>
@@ -37,6 +39,7 @@ describe('ModalWorksSearchLink.Component.HtmlComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

@@ -16,6 +16,8 @@ import { Overlay } from '@angular/cdk/overlay'
 import { VerificationEmailModalService } from '../../../core/verification-email-modal/verification-email-modal.service'
 import { AppPanelActivityActionAriaLabelPipe } from '../../../shared/pipes/app-panel-activity-action-aria-label/app-panel-activity-action-aria-label.pipe'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('PanelSourceComponent', () => {
   let component: PanelSourceComponent
   let fixture: ComponentFixture<PanelSourceComponent>
@@ -35,6 +37,7 @@ describe('PanelSourceComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   }))
 

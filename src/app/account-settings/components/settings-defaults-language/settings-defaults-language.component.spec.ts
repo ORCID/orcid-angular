@@ -13,6 +13,8 @@ import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack
 import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
 import { Overlay } from '@angular/cdk/overlay'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('SettingsDefaultsLanguageComponent', () => {
   let component: SettingsDefaultsLanguageComponent
   let fixture: ComponentFixture<SettingsDefaultsLanguageComponent>
@@ -32,6 +34,7 @@ describe('SettingsDefaultsLanguageComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

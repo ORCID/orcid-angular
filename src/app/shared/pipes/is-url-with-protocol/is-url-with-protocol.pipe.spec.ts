@@ -1,5 +1,7 @@
 import { IsUrlWithProtocolPipe } from './is-url-with-protocol.pipe'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('IsUrlWithProtocolPipe', () => {
   let pipe: IsUrlWithProtocolPipe
 

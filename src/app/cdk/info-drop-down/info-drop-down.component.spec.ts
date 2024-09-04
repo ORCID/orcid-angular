@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { InfoDropDownComponent } from './info-drop-down.component'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('InfoDropDownComponent', () => {
   let component: InfoDropDownComponent
   let fixture: ComponentFixture<InfoDropDownComponent>
@@ -9,6 +11,7 @@ describe('InfoDropDownComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [InfoDropDownComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

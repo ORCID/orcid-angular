@@ -1,5 +1,7 @@
 import { ContributorRolesPipe } from './contributor-roles.pipe'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('ContributorRolesPipe', () => {
   let pipe: ContributorRolesPipe
 

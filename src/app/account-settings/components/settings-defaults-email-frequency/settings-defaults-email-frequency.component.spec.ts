@@ -15,6 +15,8 @@ import { UserInfoService } from 'src/app/core/user-info/user-info.service'
 import { RecordService } from 'src/app/core/record/record.service'
 import { of } from 'rxjs'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('SettingsDefaultsEmailFrequencyComponent', () => {
   let component: SettingsDefaultsEmailFrequencyComponent
   let fixture: ComponentFixture<SettingsDefaultsEmailFrequencyComponent>
@@ -42,6 +44,7 @@ describe('SettingsDefaultsEmailFrequencyComponent', () => {
           },
         },
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

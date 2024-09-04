@@ -17,13 +17,20 @@ import { Overlay } from '@angular/cdk/overlay'
 import { RecordKeywordService } from '../../../../core/record-keyword/record-keyword.service'
 import { UserService } from '../../../../core'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { ReactiveFormsModule, UntypedFormGroup } from '@angular/forms'
+
 describe('ModalKeywordComponent', () => {
   let component: ModalKeywordComponent
   let fixture: ComponentFixture<ModalKeywordComponent>
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule],
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+        ReactiveFormsModule,
+      ],
       declarations: [ModalKeywordComponent],
       providers: [
         { provide: MatDialogRef, useValue: {} },
@@ -38,16 +45,18 @@ describe('ModalKeywordComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   }))
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ModalKeywordComponent)
     component = fixture.componentInstance
+    component.keywordsForm = new UntypedFormGroup({})
     fixture.detectChanges()
   })
 
-  it('should create', () => {
+  fit('should create', () => {
     expect(component).toBeTruthy()
   })
 })

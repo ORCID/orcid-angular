@@ -6,6 +6,8 @@ import {
   MatLegacyDialogRef as MatDialogRef,
 } from '@angular/material/legacy-dialog'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('DialogAddTrustedIndividualsComponent', () => {
   let component: DialogAddTrustedIndividualsYourOwnEmailComponent
   let fixture: ComponentFixture<DialogAddTrustedIndividualsYourOwnEmailComponent>
@@ -18,6 +20,7 @@ describe('DialogAddTrustedIndividualsComponent', () => {
         { provide: MatDialogRef, useValue: {} },
         { provide: MAT_DIALOG_DATA, useValue: {} },
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

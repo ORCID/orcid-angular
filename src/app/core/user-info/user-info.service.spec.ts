@@ -12,6 +12,8 @@ import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { UserInfo } from '../../types'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('UserInfoService', () => {
   let service: UserInfoService
 

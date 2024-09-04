@@ -27,6 +27,8 @@ import { By } from '@angular/platform-browser'
 import { Contributor } from '../../../../../types'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('WorkDoiBibtexModalComponent', () => {
   let component: WorkBibtexModalComponent
   let fixture: ComponentFixture<WorkBibtexModalComponent>
@@ -75,6 +77,7 @@ describe('WorkDoiBibtexModalComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

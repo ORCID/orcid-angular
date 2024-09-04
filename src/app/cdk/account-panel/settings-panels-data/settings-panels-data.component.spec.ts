@@ -11,6 +11,8 @@ import { SnackbarService } from '../../snackbar/snackbar.service'
 import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
 import { Overlay } from '@angular/cdk/overlay'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('SettingsPanelsDataComponent', () => {
   let component: SettingsPanelsDataComponent
   let fixture: ComponentFixture<SettingsPanelsDataComponent>
@@ -28,6 +30,7 @@ describe('SettingsPanelsDataComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

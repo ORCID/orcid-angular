@@ -12,6 +12,8 @@ import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { RecordPeerReviewService } from '../../../core/record-peer-review/record-peer-review.service'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('PeerReviewStackComponent', () => {
   let component: PeerReviewStackComponent
   let fixture: ComponentFixture<PeerReviewStackComponent>
@@ -30,6 +32,7 @@ describe('PeerReviewStackComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

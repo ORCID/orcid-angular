@@ -15,6 +15,8 @@ import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { AccountDefaultVisibilityService } from '../../../core/account-default-visibility/account-default-visibility.service'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('SettingsDefaultsVisibilityComponent', () => {
   let component: SettingsDefaultsVisibilityComponent
   let fixture: ComponentFixture<SettingsDefaultsVisibilityComponent>
@@ -35,6 +37,7 @@ describe('SettingsDefaultsVisibilityComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

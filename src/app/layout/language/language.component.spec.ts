@@ -13,6 +13,8 @@ import { Overlay } from '@angular/cdk/overlay'
 import { LanguageService } from '../../core/language/language.service'
 import { MatLegacyMenuModule as MatMenuModule } from '@angular/material/legacy-menu'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('LanguageComponent', () => {
   let component: LanguageComponent
   let fixture: ComponentFixture<LanguageComponent>
@@ -31,6 +33,7 @@ describe('LanguageComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

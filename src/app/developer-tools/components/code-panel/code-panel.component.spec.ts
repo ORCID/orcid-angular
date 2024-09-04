@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { CodePanelComponent } from './code-panel.component'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('CodePanelComponent', () => {
   let component: CodePanelComponent
   let fixture: ComponentFixture<CodePanelComponent>
@@ -9,6 +11,7 @@ describe('CodePanelComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [CodePanelComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
 
     fixture = TestBed.createComponent(CodePanelComponent)

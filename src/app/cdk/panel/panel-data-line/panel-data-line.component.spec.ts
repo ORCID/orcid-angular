@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 
 import { PanelDataLineComponent } from './panel-data-line.component'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('PanelDataLineComponent', () => {
   let component: PanelDataLineComponent
   let fixture: ComponentFixture<PanelDataLineComponent>
@@ -9,6 +11,7 @@ describe('PanelDataLineComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [PanelDataLineComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   }))
 
