@@ -95,7 +95,7 @@
             <mat-checkbox
               (change)="updateCheckAll()"
               [(ngModel)]="selectAll"
-              [disabled]="isAnInvalidWork"
+              [attr.disabled]="isAnInvalidWork"
             >
               <ng-container
                 i18n="@@shared.selectAll"
@@ -123,7 +123,7 @@
               <mat-checkbox
                 (change)="updateCheck(work)"
                 formControlName="checked"
-                [disabled]="work?.errors?.length > 0"
+                [attr.disabled]="work?.errors?.length > 0"
               >
                 <h2 class="orc-font-body" *ngIf="work?.title?.value">
                   {{ work?.title?.value }}
