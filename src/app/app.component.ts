@@ -87,8 +87,8 @@ export class AppComponent {
 
     _togglzService
       .getStateOf('NEW_RELIC_BROWSER_MONITORING')
-      .subscribe((value) => {
-        if (true) {
+      .subscribe((NEW_RELIC_BROWSER_MONITORING) => {
+        if (NEW_RELIC_BROWSER_MONITORING) {
           _newRelicService.init()
         }
       })
