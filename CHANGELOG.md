@@ -1,3 +1,9 @@
+## v2.104.12 - 2024-09-04
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.104.11...v2.104.12)
+
+- [#2343](https://github.com/ORCID/orcid-angular/pull/2343): new-relic
+
 ## v2.104.11 - 2024-09-03
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.104.10...v2.104.11)
