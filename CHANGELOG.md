@@ -1,3 +1,9 @@
+## v2.104.13 - 2024-09-04
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.104.12...v2.104.13)
+
+- [#2345](https://github.com/ORCID/orcid-angular/pull/2345): new-relic-browser-monitoring
+
 ## v2.104.12 - 2024-09-04
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.104.11...v2.104.12)
