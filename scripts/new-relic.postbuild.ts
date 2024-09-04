@@ -26,7 +26,7 @@ export function newRelic(indexHtml: string, options) {
           },
           privacy: {
               cookies_enabled: true,
-          }
+          },
           ajax: {autoStart: false},
           jserrors: {autoStart: false},
           metrics: {autoStart: false},
