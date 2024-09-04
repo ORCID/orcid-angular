@@ -16,6 +16,7 @@ import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/materia
 import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 import { of } from 'rxjs'
+import { TwoFactorSetup } from 'src/app/types/two-factor.endpoint'
 
 describe('TwoFactorEnableComponent', () => {
   let component: TwoFactorEnableComponent
@@ -29,7 +30,7 @@ describe('TwoFactorEnableComponent', () => {
         'TwoFactorAuthenticationService',
         {
           getTextCode: of({ secret: '123456' }),
-          register: undefined,
+          register: of({ valid: true } as TwoFactorSetup),
         }
       )
 
@@ -102,5 +103,6 @@ describe('TwoFactorEnableComponent', () => {
     fixture.detectChanges()
 
     expect(fakeTwoFactorAuthenticationService.register).toHaveBeenCalled()
+    expect(component.showBadVerificationCode).toBeFalse()
   })
 })
