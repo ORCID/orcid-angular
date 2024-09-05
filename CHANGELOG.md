@@ -1,3 +1,10 @@
+## v2.104.14 - 2024-09-05
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.104.13...v2.104.14)
+
+- [#2346](https://github.com/ORCID/orcid-angular/pull/2346): Revert hardwire new relic changes
+- [#2344](https://github.com/ORCID/orcid-angular/pull/2344): Clean up logs in unit test
+
 ## v2.104.13 - 2024-09-04
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.104.12...v2.104.13)
