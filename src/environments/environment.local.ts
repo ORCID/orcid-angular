@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  debugger: true,
+  debugger: false,
   ROBOTS: 'all',
   API_NEWS: 'https://www.mocky.io/v2/5dced45b3000007300931ce8',
   API_PUB: `//pub.<SUBDOMAIN><DOMAIN>/v3.0`,
