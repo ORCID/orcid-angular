@@ -16,13 +16,20 @@ import {
 import { Overlay } from '@angular/cdk/overlay'
 import { RecordPersonIdentifierService } from '../../../../core/record-personal-identifiers/record-person-identifier.service'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { ReactiveFormsModule } from '@angular/forms'
+
 describe('ModalPersonIdentifiersComponent', () => {
   let component: ModalPersonIdentifiersComponent
   let fixture: ComponentFixture<ModalPersonIdentifiersComponent>
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule],
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+        ReactiveFormsModule,
+      ],
       declarations: [ModalPersonIdentifiersComponent],
       providers: [
         { provide: MatDialogRef, useValue: {} },
@@ -36,6 +43,7 @@ describe('ModalPersonIdentifiersComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   }))
 

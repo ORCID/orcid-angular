@@ -16,6 +16,8 @@ import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 import { TwoFactorAuthenticationService } from '../../../core/two-factor-authentication/two-factor-authentication.service'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('DialogActionsDuplicatedTwoFactorAuthComponent', () => {
   let component: DialogActionsDuplicatedTwoFactorAuthComponent
   let fixture: ComponentFixture<DialogActionsDuplicatedTwoFactorAuthComponent>
@@ -36,6 +38,7 @@ describe('DialogActionsDuplicatedTwoFactorAuthComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

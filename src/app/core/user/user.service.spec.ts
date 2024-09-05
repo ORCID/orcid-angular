@@ -13,6 +13,8 @@ import { Overlay } from '@angular/cdk/overlay'
 import { UserSession } from '../../types/session.local'
 import { UserInfo } from '../../types'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('UserService', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({

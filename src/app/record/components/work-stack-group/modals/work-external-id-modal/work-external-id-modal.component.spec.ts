@@ -14,7 +14,9 @@ import {
 } from '@angular/material/legacy-dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { RecordWorksService } from '../../../../../core/record-works/record-works.service'
-import { UntypedFormBuilder } from '@angular/forms'
+import { ReactiveFormsModule, UntypedFormBuilder } from '@angular/forms'
+
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 
 describe('WorkDoiModalComponent', () => {
   let component: WorkExternalIdModalComponent
@@ -22,7 +24,11 @@ describe('WorkDoiModalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule],
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+        ReactiveFormsModule,
+      ],
       declarations: [WorkExternalIdModalComponent],
       providers: [
         { provide: MatDialogRef, useValue: {} },
@@ -36,6 +42,7 @@ describe('WorkDoiModalComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

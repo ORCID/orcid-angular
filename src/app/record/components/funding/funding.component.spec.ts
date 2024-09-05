@@ -3,6 +3,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 import { FundingComponent } from './funding.component'
 import { SharedModule } from '../../../shared/shared.module'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('FundingComponent', () => {
   let component: FundingComponent
   let fixture: ComponentFixture<FundingComponent>
@@ -11,6 +13,7 @@ describe('FundingComponent', () => {
     TestBed.configureTestingModule({
       imports: [SharedModule],
       declarations: [FundingComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   }))
 

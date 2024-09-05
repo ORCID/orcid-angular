@@ -1,6 +1,8 @@
 import { SortByPipe } from './sort-by.pipe'
 import { getCountries } from '../../../core/record-countries/record-countries.service.spec'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('SortByPipe', () => {
   let pipe: SortByPipe
 

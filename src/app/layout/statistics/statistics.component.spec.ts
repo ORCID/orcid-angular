@@ -12,6 +12,8 @@ import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { WINDOW_PROVIDERS } from '../../cdk/window'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('StatisticsComponent', () => {
   let component: StatisticsComponent
   let fixture: ComponentFixture<StatisticsComponent>
@@ -30,6 +32,7 @@ describe('StatisticsComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

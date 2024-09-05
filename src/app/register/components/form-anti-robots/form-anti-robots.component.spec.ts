@@ -13,6 +13,8 @@ import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 import { ErrorStateMatcher } from '@angular/material/core'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('FormAntiRobotsComponent', () => {
   let component: FormAntiRobotsComponent
   let fixture: ComponentFixture<FormAntiRobotsComponent>
@@ -32,6 +34,7 @@ describe('FormAntiRobotsComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

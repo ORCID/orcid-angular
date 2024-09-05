@@ -17,6 +17,8 @@ import { WINDOW_PROVIDERS } from 'src/app/cdk/window'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('TopBarVerificationEmailModalComponent', () => {
   let component: TopBarVerificationEmailModalComponent
   let fixture: ComponentFixture<TopBarVerificationEmailModalComponent>
@@ -37,6 +39,7 @@ describe('TopBarVerificationEmailModalComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

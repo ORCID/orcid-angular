@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { PanelPrivacyComponent } from './panel-privacy.component'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('PanelPrivacyComponent', () => {
   let component: PanelPrivacyComponent
   let fixture: ComponentFixture<PanelPrivacyComponent>
@@ -9,6 +11,7 @@ describe('PanelPrivacyComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [PanelPrivacyComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

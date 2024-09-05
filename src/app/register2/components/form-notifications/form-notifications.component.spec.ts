@@ -12,13 +12,22 @@ import { ErrorHandlerService } from '../../../core/error-handler/error-handler.s
 import { Register2Service } from '../../../core/register2/register2.service'
 import { FormNotificationsComponent } from './form-notifications.component'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { ReactiveFormsModule } from '@angular/forms'
+import { MatLegacyCheckboxModule } from '@angular/material/legacy-checkbox'
+
 describe('FormNotificationsComponent', () => {
   let component: FormNotificationsComponent
   let fixture: ComponentFixture<FormNotificationsComponent>
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule],
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+        ReactiveFormsModule,
+        MatLegacyCheckboxModule,
+      ],
       declarations: [FormNotificationsComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -30,6 +39,7 @@ describe('FormNotificationsComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

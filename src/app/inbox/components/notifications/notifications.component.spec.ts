@@ -14,6 +14,8 @@ import { Overlay } from '@angular/cdk/overlay'
 import { UntypedFormBuilder } from '@angular/forms'
 import { InboxService } from '../../../core/inbox/inbox.service'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('NotificationsComponent', () => {
   let component: NotificationsComponent
   let fixture: ComponentFixture<NotificationsComponent>
@@ -33,6 +35,7 @@ describe('NotificationsComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

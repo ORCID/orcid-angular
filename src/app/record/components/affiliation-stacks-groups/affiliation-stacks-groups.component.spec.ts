@@ -13,6 +13,8 @@ import { Overlay } from '@angular/cdk/overlay'
 import { RecordService } from '../../../core/record/record.service'
 import { RecordAffiliationService } from '../../../core/record-affiliations/record-affiliations.service'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('AffiliationStacksGroupsComponent', () => {
   let component: AffiliationStacksGroupsComponent
   let fixture: ComponentFixture<AffiliationStacksGroupsComponent>
@@ -32,6 +34,7 @@ describe('AffiliationStacksGroupsComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   }))
 

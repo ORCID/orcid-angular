@@ -13,6 +13,8 @@ import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { OtherNamesEndPoint } from '../../types/record-other-names.endpoint'
 import { Assertion } from '../../types'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('RecordOtherNamesService', () => {
   let service: RecordOtherNamesService
 

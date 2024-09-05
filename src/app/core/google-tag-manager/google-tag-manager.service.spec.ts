@@ -10,6 +10,8 @@ import { Overlay } from '@angular/cdk/overlay'
 import { RouterTestingModule } from '@angular/router/testing'
 import { WINDOW_PROVIDERS } from '../../cdk/window'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('GoogleTagManagerService', () => {
   let service: GoogleTagManagerService
   const tag: ItemGTM = { event: 'page' }

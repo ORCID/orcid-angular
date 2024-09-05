@@ -18,6 +18,8 @@ import { RegisterService } from '../../../core/register/register.service'
 import { UserService } from '../../../core'
 import { SearchService } from '../../../core/search/search.service'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('RegisterComponent', () => {
   let component: RegisterComponent
   let fixture: ComponentFixture<RegisterComponent>
@@ -39,6 +41,7 @@ describe('RegisterComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

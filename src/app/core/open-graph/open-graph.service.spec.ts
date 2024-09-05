@@ -2,6 +2,8 @@ import { TestBed } from '@angular/core/testing'
 
 import { OpenGraphService } from './open-graph.service'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('OpenGraphService', () => {
   let service: OpenGraphService
 

@@ -16,6 +16,8 @@ import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack
 import { Overlay } from '@angular/cdk/overlay'
 import { AccountActionsDeactivateService } from '../../../core/account-actions-deactivate/account-actions-deactivate.service'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('SettingsActionsDeactivateComponent', () => {
   let component: SettingsActionsDeactivateComponent
   let fixture: ComponentFixture<SettingsActionsDeactivateComponent>
@@ -36,6 +38,7 @@ describe('SettingsActionsDeactivateComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

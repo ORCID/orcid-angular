@@ -12,13 +12,20 @@ import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { SignInService } from '../../../../core/sign-in/sign-in.service'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { ReactiveFormsModule } from '@angular/forms'
+
 describe('DeactivatedComponent', () => {
   let component: DeactivatedComponent
   let fixture: ComponentFixture<DeactivatedComponent>
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule],
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+        ReactiveFormsModule,
+      ],
       declarations: [DeactivatedComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -30,6 +37,7 @@ describe('DeactivatedComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

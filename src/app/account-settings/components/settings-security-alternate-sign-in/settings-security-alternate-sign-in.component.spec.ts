@@ -15,6 +15,8 @@ import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack
 import { Overlay } from '@angular/cdk/overlay'
 import { AccountSecurityAlternateSignInService } from '../../../core/account-security-alternate-sign-in/account-security-alternate-sign-in.service'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('SettingsSecurityAlternateSignInComponent', () => {
   let component: SettingsSecurityAlternateSignInComponent
   let fixture: ComponentFixture<SettingsSecurityAlternateSignInComponent>
@@ -33,6 +35,7 @@ describe('SettingsSecurityAlternateSignInComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

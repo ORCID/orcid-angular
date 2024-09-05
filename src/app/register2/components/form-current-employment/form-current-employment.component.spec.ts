@@ -19,6 +19,8 @@ import {
 } from '@angular/material/legacy-autocomplete'
 import { SharedModule } from 'src/app/shared/shared.module'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('FormPersonalComponent', () => {
   let component: FormCurrentEmploymentComponent
   let fixture: ComponentFixture<FormCurrentEmploymentComponent>
@@ -44,6 +46,7 @@ describe('FormPersonalComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

@@ -1,5 +1,7 @@
 import { SharedModule } from './shared.module'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('SharedModule', () => {
   let sharedModule: SharedModule
 

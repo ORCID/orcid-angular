@@ -1,5 +1,7 @@
 import { LayoutModule } from './layout.module'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('LayoutModule', () => {
   let layoutModule: LayoutModule
 

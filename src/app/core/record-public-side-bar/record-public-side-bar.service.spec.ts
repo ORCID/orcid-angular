@@ -22,6 +22,8 @@ import { KeywordEndPoint } from '../../types/record-keyword.endpoint'
 import { WebsitesEndPoint } from '../../types/record-websites.endpoint'
 import { getNamesEndPoint } from '../record-names/record-names.service.spec'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('RecordPublicSideBarService', () => {
   let service: RecordPublicSideBarService
 

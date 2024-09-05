@@ -15,6 +15,8 @@ import {
 } from '@angular/material/legacy-dialog'
 import { Overlay } from '@angular/cdk/overlay'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('IsThisYouComponent', () => {
   let component: IsThisYouComponent
   let fixture: ComponentFixture<IsThisYouComponent>
@@ -34,6 +36,7 @@ describe('IsThisYouComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

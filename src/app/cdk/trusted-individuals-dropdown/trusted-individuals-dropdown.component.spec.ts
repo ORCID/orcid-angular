@@ -5,6 +5,8 @@ import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 import { MatLegacyMenuModule as MatMenuModule } from '@angular/material/legacy-menu'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('TrustedIndividualsDropdownComponent', () => {
   let component: TrustedIndividualsDropdownComponent
   let fixture: ComponentFixture<TrustedIndividualsDropdownComponent>
@@ -13,6 +15,7 @@ describe('TrustedIndividualsDropdownComponent', () => {
     TestBed.configureTestingModule({
       imports: [MatMenuModule],
       declarations: [TrustedIndividualsDropdownComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

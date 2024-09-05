@@ -12,6 +12,8 @@ import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { RouterTestingModule } from '@angular/router/testing'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('SettingsSecurityPasswordComponent', () => {
   let component: SettingsSecurityPasswordComponent
   let fixture: ComponentFixture<SettingsSecurityPasswordComponent>
@@ -30,6 +32,7 @@ describe('SettingsSecurityPasswordComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

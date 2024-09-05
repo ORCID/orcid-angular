@@ -16,6 +16,8 @@ import {
   FundingTypes,
 } from '../../types/record-funding.endpoint'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('FundingService', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({

@@ -14,6 +14,8 @@ import { UserInfoService } from '../../../core/user-info/user-info.service'
 import { RecordWorksService } from '../../../core/record-works/record-works.service'
 import { SharedModule } from '../../../shared/shared.module'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('WorkComponent', () => {
   let component: WorkComponent
   let fixture: ComponentFixture<WorkComponent>
@@ -33,6 +35,7 @@ describe('WorkComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

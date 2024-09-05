@@ -13,6 +13,8 @@ import { Overlay } from '@angular/cdk/overlay'
 import { SharedModule } from 'src/app/shared/shared.module'
 import { ResearchResource } from 'src/app/types/record-research-resources.endpoint'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('ResearchResourceComponent', () => {
   let component: ResearchResourceComponent
   let fixture: ComponentFixture<ResearchResourceComponent>
@@ -30,6 +32,7 @@ describe('ResearchResourceComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

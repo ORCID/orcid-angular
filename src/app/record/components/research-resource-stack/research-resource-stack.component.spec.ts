@@ -12,6 +12,8 @@ import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { RecordResearchResourceService } from '../../../core/record-research-resource/record-research-resource.service'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('ResearchResourceStackComponent', () => {
   let component: ResearchResourceStackComponent
   let fixture: ComponentFixture<ResearchResourceStackComponent>
@@ -30,6 +32,7 @@ describe('ResearchResourceStackComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

@@ -25,6 +25,8 @@ import { of, ReplaySubject } from 'rxjs'
 import { UserService } from '..'
 import { Config } from '../../types/togglz.endpoint'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('RecordWorksService', () => {
   let service: RecordWorksService
   let togglzService: TogglzService

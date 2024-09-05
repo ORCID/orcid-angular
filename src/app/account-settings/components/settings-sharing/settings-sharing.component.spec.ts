@@ -7,6 +7,8 @@ import {
 } from '@angular/material/legacy-dialog'
 import { WINDOW_PROVIDERS } from '../../../cdk/window'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('SettingsSharingComponent', () => {
   let component: SettingsSharingComponent
   let fixture: ComponentFixture<SettingsSharingComponent>
@@ -15,6 +17,7 @@ describe('SettingsSharingComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [SettingsSharingComponent],
       providers: [WINDOW_PROVIDERS],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

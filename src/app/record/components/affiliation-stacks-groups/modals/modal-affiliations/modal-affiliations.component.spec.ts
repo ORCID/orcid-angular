@@ -9,14 +9,27 @@ import { ErrorHandlerService } from '../../../../../core/error-handler/error-han
 import { SnackbarService } from '../../../../../cdk/snackbar/snackbar.service'
 import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
 import {
+  MatLegacyMenuModule,
+  MatLegacyMenu as MatMenu,
+} from '@angular/material/legacy-menu'
+
+import {
   MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA,
   MatLegacyDialog as MatDialog,
   MatLegacyDialogRef as MatDialogRef,
 } from '@angular/material/legacy-dialog'
 import { Overlay } from '@angular/cdk/overlay'
-import { UntypedFormBuilder } from '@angular/forms'
+import { ReactiveFormsModule, UntypedFormBuilder } from '@angular/forms'
 import { MatLegacyAutocompleteModule as MatAutocompleteModule } from '@angular/material/legacy-autocomplete'
 import { SharedModule } from '../../../../../shared/shared.module'
+
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { MatOption } from '@angular/material/core'
+import { MatLegacySelectModule } from '@angular/material/legacy-select'
+import { VisibilitySelectorComponent } from 'src/app/cdk/visibility-selector/visibility-selector/visibility-selector.component'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { MatLegacyFormFieldModule } from '@angular/material/legacy-form-field'
+import { MatLegacyInputModule } from '@angular/material/legacy-input'
 
 describe('ModalAffiliationsComponent', () => {
   let component: ModalAffiliationsComponent
@@ -29,8 +42,14 @@ describe('ModalAffiliationsComponent', () => {
         MatAutocompleteModule,
         RouterTestingModule,
         SharedModule,
+        MatLegacySelectModule,
+        MatLegacyMenuModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        MatLegacyFormFieldModule,
+        MatLegacyInputModule,
       ],
-      declarations: [ModalAffiliationsComponent],
+      declarations: [ModalAffiliationsComponent, VisibilitySelectorComponent],
       providers: [
         { provide: MatDialogRef, useValue: {} },
         { provide: MAT_DIALOG_DATA, useValue: {} },
@@ -41,14 +60,18 @@ describe('ModalAffiliationsComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
+        MatMenu,
+        MatOption,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ModalAffiliationsComponent)
     component = fixture.componentInstance
+
     fixture.detectChanges()
   })
 

@@ -12,6 +12,8 @@ import { ErrorHandlerService } from '../../../core/error-handler/error-handler.s
 import { Register2Service } from '../../../core/register2/register2.service'
 import { FormVisibilityComponent } from './form-visibility.component'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('FormVisibilityComponent', () => {
   let component: FormVisibilityComponent
   let fixture: ComponentFixture<FormVisibilityComponent>
@@ -30,6 +32,7 @@ describe('FormVisibilityComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

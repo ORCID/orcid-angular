@@ -17,6 +17,8 @@ import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack
 import { Overlay } from '@angular/cdk/overlay'
 import { TitleService } from './core/title-service/title.service'
 import { of } from 'rxjs'
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('AppComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -37,6 +39,7 @@ describe('AppComponent', () => {
           },
         },
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
   it('should create the app', () => {

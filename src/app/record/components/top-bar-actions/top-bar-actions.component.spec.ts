@@ -12,6 +12,8 @@ import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack
 import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
 import { Overlay } from '@angular/cdk/overlay'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('TopBarActionsComponent', () => {
   let component: TopBarActionsComponent
   let fixture: ComponentFixture<TopBarActionsComponent>
@@ -29,6 +31,7 @@ describe('TopBarActionsComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

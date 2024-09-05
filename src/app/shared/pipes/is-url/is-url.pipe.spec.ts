@@ -1,5 +1,7 @@
 import { IsUrlPipe } from './is-url.pipe'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('IsUrlPipe', () => {
   let pipe: IsUrlPipe
 

@@ -35,6 +35,8 @@ import { RecordModule } from '../../../../record.module'
 import { FundingTypes } from '../../../../../types/record-funding.endpoint'
 import { VisibilitySelectorModule } from 'src/app/cdk/visibility-selector/visibility-selector.module'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('ModalFundingComponent', () => {
   let component: ModalFundingComponent
   let fixture: ComponentFixture<ModalFundingComponent>
@@ -70,6 +72,7 @@ describe('ModalFundingComponent', () => {
         PlatformInfoService,
         UserService,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   }))
 

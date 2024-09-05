@@ -13,6 +13,8 @@ import { Overlay } from '@angular/cdk/overlay'
 import { TrustedIndividualsService } from '../../../core/trusted-individuals/trusted-individuals.service'
 import { UserService } from '../../../core'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('TopBarMyPublicRecordPreviewComponent', () => {
   let component: TopBarMyPublicRecordPreviewComponent
   let fixture: ComponentFixture<TopBarMyPublicRecordPreviewComponent>
@@ -32,6 +34,7 @@ describe('TopBarMyPublicRecordPreviewComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

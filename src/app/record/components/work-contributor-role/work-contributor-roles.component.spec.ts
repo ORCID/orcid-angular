@@ -34,6 +34,8 @@ import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack
 import { Overlay } from '@angular/cdk/overlay'
 import { getUserRecord } from '../../../core/record/record.service.spec'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('WorkContributorRoleComponent', () => {
   let component: WorkContributorRolesComponent
   let fixture: ComponentFixture<WorkContributorRolesComponent>
@@ -68,6 +70,7 @@ describe('WorkContributorRoleComponent', () => {
         TogglzService,
         UserService,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

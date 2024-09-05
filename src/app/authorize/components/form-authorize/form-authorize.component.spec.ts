@@ -13,6 +13,8 @@ import { Overlay } from '@angular/cdk/overlay'
 import { UserService } from '../../../core'
 import { OauthService } from '../../../core/oauth/oauth.service'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('FormAuthorizeComponent', () => {
   let component: FormAuthorizeComponent
   let fixture: ComponentFixture<FormAuthorizeComponent>
@@ -32,6 +34,7 @@ describe('FormAuthorizeComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   }))
 

@@ -12,6 +12,8 @@ import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack
 import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { UserService } from '../../../core'
+import { AppModule } from 'src/app/app.module'
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 
 describe('SignInComponent', () => {
   let component: SignInComponent
@@ -31,6 +33,7 @@ describe('SignInComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

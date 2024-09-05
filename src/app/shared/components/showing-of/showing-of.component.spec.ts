@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 
 import { ShowingOfComponent } from './showing-of.component'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('ShowingOfComponent', () => {
   let component: ShowingOfComponent
   let fixture: ComponentFixture<ShowingOfComponent>
@@ -9,6 +11,7 @@ describe('ShowingOfComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ShowingOfComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   }))
 

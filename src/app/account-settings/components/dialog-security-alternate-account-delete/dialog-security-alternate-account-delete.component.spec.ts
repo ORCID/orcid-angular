@@ -6,6 +6,8 @@ import {
   MatLegacyDialogRef as MatDialogRef,
 } from '@angular/material/legacy-dialog'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('DialogSecurityAlternateAccountDeleteComponent', () => {
   let component: DialogSecurityAlternateAccountDeleteComponent
   let fixture: ComponentFixture<DialogSecurityAlternateAccountDeleteComponent>
@@ -17,6 +19,7 @@ describe('DialogSecurityAlternateAccountDeleteComponent', () => {
         { provide: MatDialogRef, useValue: {} },
         { provide: MAT_DIALOG_DATA, useValue: {} },
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

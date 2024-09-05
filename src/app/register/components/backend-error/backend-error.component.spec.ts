@@ -12,6 +12,8 @@ import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack
 import { Overlay } from '@angular/cdk/overlay'
 import { SignInService } from '../../../core/sign-in/sign-in.service'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('BackendErrorComponent', () => {
   let component: BackendErrorComponent
   let fixture: ComponentFixture<BackendErrorComponent>
@@ -30,6 +32,7 @@ describe('BackendErrorComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

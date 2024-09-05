@@ -12,6 +12,8 @@ import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack
 import { Overlay } from '@angular/cdk/overlay'
 import { UserService } from '../../../core'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('SettingsSharingHtmlCodeComponent', () => {
   let component: SettingsSharingHtmlCodeComponent
   let fixture: ComponentFixture<SettingsSharingHtmlCodeComponent>
@@ -30,6 +32,7 @@ describe('SettingsSharingHtmlCodeComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

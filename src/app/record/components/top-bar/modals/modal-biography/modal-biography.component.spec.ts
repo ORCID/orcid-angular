@@ -18,6 +18,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { RecordModule } from '../../../../record.module'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('ModalBiographyComponent', () => {
   let component: ModalBiographyComponent
   let fixture: ComponentFixture<ModalBiographyComponent>
@@ -44,6 +46,7 @@ describe('ModalBiographyComponent', () => {
         MatSnackBar,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   }))
 

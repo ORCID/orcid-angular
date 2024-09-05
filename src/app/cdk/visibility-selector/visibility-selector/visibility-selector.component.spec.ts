@@ -5,6 +5,8 @@ import { MatLegacyMenuModule as MatMenuModule } from '@angular/material/legacy-m
 import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button'
 import { WINDOW_PROVIDERS } from '../../window'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('VisibilitySelectorComponent', () => {
   let component: VisibilitySelectorComponent
   let fixture: ComponentFixture<VisibilitySelectorComponent>
@@ -14,6 +16,7 @@ describe('VisibilitySelectorComponent', () => {
       declarations: [VisibilitySelectorComponent],
       imports: [MatMenuModule, MatButtonModule],
       providers: [WINDOW_PROVIDERS],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
 
     fixture = TestBed.createComponent(VisibilitySelectorComponent)
