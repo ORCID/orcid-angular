@@ -16,6 +16,8 @@ import {
 import { Overlay } from '@angular/cdk/overlay'
 import { RecordPeerReviewService } from '../../../../../core/record-peer-review/record-peer-review.service'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('ModalPeerReviewsComponent', () => {
   let component: ModalPeerReviewsComponent
   let fixture: ComponentFixture<ModalPeerReviewsComponent>
@@ -36,6 +38,7 @@ describe('ModalPeerReviewsComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   }))
 

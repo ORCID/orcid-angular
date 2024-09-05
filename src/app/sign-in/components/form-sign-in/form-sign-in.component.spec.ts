@@ -14,13 +14,20 @@ import { UserService } from '../../../core'
 import { SignInService } from '../../../core/sign-in/sign-in.service'
 import { OauthService } from '../../../core/oauth/oauth.service'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { ReactiveFormsModule } from '@angular/forms'
+
 describe('FormSignInComponent', () => {
   let component: FormSignInComponent
   let fixture: ComponentFixture<FormSignInComponent>
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule],
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+        ReactiveFormsModule,
+      ],
       declarations: [FormSignInComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -34,6 +41,7 @@ describe('FormSignInComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

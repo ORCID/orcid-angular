@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { TopBarRecordIssuesComponent } from './top-bar-record-issues.component'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('TopBarRecordIssuesComponent', () => {
   let component: TopBarRecordIssuesComponent
   let fixture: ComponentFixture<TopBarRecordIssuesComponent>
@@ -9,6 +11,7 @@ describe('TopBarRecordIssuesComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TopBarRecordIssuesComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

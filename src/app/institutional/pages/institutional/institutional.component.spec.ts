@@ -12,6 +12,9 @@ import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack
 import { Overlay } from '@angular/cdk/overlay'
 import { MatLegacyAutocompleteModule as MatAutocompleteModule } from '@angular/material/legacy-autocomplete'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { ReactiveFormsModule } from '@angular/forms'
+
 describe('InstitutionalComponent', () => {
   let component: InstitutionalComponent
   let fixture: ComponentFixture<InstitutionalComponent>
@@ -22,6 +25,7 @@ describe('InstitutionalComponent', () => {
         HttpClientTestingModule,
         MatAutocompleteModule,
         RouterTestingModule,
+        ReactiveFormsModule,
       ],
       declarations: [InstitutionalComponent],
       providers: [
@@ -33,6 +37,7 @@ describe('InstitutionalComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

@@ -15,6 +15,8 @@ import {
   PeerReviewDuplicateGroup,
 } from '../../types/record-peer-review.endpoint'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('RecordPeerReviewService', () => {
   let service: RecordPeerReviewService
 

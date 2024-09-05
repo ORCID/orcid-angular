@@ -7,6 +7,8 @@ import {
 } from '@angular/material/legacy-dialog'
 import { WINDOW_PROVIDERS } from '../../../../cdk/window'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('PrintErrorsComponent', () => {
   let component: PrintErrorsComponent
   let fixture: ComponentFixture<PrintErrorsComponent>
@@ -15,6 +17,7 @@ describe('PrintErrorsComponent', () => {
     TestBed.configureTestingModule({
       declarations: [PrintErrorsComponent],
       providers: [WINDOW_PROVIDERS],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

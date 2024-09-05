@@ -12,13 +12,20 @@ import { Overlay } from '@angular/cdk/overlay'
 import { RouterTestingModule } from '@angular/router/testing'
 import { RecordService } from 'src/app/core/record/record.service'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { MatLegacyTooltipModule } from '@angular/material/legacy-tooltip'
+
 describe('RecordHeaderComponent', () => {
   let component: RecordHeaderComponent
   let fixture: ComponentFixture<RecordHeaderComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule],
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+        MatLegacyTooltipModule,
+      ],
       declarations: [RecordHeaderComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -30,6 +37,7 @@ describe('RecordHeaderComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

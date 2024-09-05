@@ -15,6 +15,8 @@ import { OrganizationsService, UserService } from '../../../core'
 import { RecordService } from '../../../core/record/record.service'
 import { RecordResearchResourceService } from '../../../core/record-research-resource/record-research-resource.service'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('ResearchResourcesComponent', () => {
   let component: ResearchResourceStacksGroupComponent
   let fixture: ComponentFixture<ResearchResourceStacksGroupComponent>
@@ -36,6 +38,7 @@ describe('ResearchResourcesComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

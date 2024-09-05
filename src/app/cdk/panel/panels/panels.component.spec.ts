@@ -26,6 +26,8 @@ import { UntypedFormBuilder } from '@angular/forms'
 import { ModalFundingComponent } from '../../../record/components/funding-stacks-groups/modals/modal-funding/modal-funding.component'
 import { UserRecord } from 'src/app/types/record.local'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('PanelsComponent', () => {
   let component: PanelsComponent
   let fixture: ComponentFixture<PanelsComponent>
@@ -55,6 +57,7 @@ describe('PanelsComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   }))
 

@@ -14,6 +14,8 @@ import { ReactivationService } from '../../../core/reactivation/reactivation.ser
 import { Register2Service } from '../../../core/register2/register2.service'
 import { FormPersonalComponent } from './form-personal.component'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('FormPersonalComponent', () => {
   let component: FormPersonalComponent
   let fixture: ComponentFixture<FormPersonalComponent>
@@ -33,6 +35,7 @@ describe('FormPersonalComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

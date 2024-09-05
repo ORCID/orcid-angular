@@ -6,6 +6,8 @@ import {
   MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA,
 } from '@angular/material/legacy-dialog'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('ClientSecretModalComponent', () => {
   let component: ClientSecretModalComponent
   let fixture: ComponentFixture<ClientSecretModalComponent>
@@ -17,6 +19,7 @@ describe('ClientSecretModalComponent', () => {
         { provide: MAT_DIALOG_DATA, useValue: {} },
         { provide: MatDialogRef, useValue: {} },
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
 
     fixture = TestBed.createComponent(ClientSecretModalComponent)

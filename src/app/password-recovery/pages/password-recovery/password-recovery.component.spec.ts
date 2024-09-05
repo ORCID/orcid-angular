@@ -13,13 +13,21 @@ import { Overlay } from '@angular/cdk/overlay'
 import { PasswordRecoveryService } from '../../../core/password-recovery/password-recovery.service'
 import { MatLegacyChipsModule as MatChipsModule } from '@angular/material/legacy-chips'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { ReactiveFormsModule } from '@angular/forms'
+
 describe('PasswordRecoveryComponent', () => {
   let component: PasswordRecoveryComponent
   let fixture: ComponentFixture<PasswordRecoveryComponent>
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatChipsModule, RouterTestingModule],
+      imports: [
+        HttpClientTestingModule,
+        MatChipsModule,
+        RouterTestingModule,
+        ReactiveFormsModule,
+      ],
       declarations: [PasswordRecoveryComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -31,6 +39,7 @@ describe('PasswordRecoveryComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

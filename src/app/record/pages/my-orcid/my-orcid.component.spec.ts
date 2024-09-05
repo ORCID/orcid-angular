@@ -26,6 +26,8 @@ import { getSideBarPublicUserRecord } from '../../../core/record-public-side-bar
 import { OpenGraphService } from 'src/app/core/open-graph/open-graph.service'
 import { TitleService } from 'src/app/core/title-service/title.service'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('MyOrcidComponent', () => {
   let component: MyOrcidComponent
   let fixture: ComponentFixture<MyOrcidComponent>
@@ -61,6 +63,7 @@ describe('MyOrcidComponent', () => {
         OpenGraphService,
         TitleService,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

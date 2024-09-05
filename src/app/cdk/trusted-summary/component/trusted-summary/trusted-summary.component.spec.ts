@@ -9,6 +9,8 @@ import { of } from 'rxjs'
 import { ZendeskService } from 'src/app/core/zendesk/zendesk.service'
 import { WINDOW } from 'src/app/cdk/window'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('TrustedSummaryComponent', () => {
   let component: TrustedSummaryComponent
   let fixture: ComponentFixture<TrustedSummaryComponent>
@@ -30,6 +32,7 @@ describe('TrustedSummaryComponent', () => {
         { provide: WINDOW, useValue: {} },
       ],
       imports: [HttpClientTestingModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
 
     fixture = TestBed.createComponent(TrustedSummaryComponent)

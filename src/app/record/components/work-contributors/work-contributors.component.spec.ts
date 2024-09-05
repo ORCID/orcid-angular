@@ -39,6 +39,8 @@ import { MatLegacyButtonHarness as MatButtonHarness } from '@angular/material/le
 import { ModalModule } from '../../../cdk/modal/modal.module'
 import { getUserRecord } from '../../../core/record/record.service.spec'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('WorkContributorsComponent', () => {
   let component: WorkContributorsComponent
   let fixture: ComponentFixture<WorkContributorsComponent>
@@ -76,6 +78,7 @@ describe('WorkContributorsComponent', () => {
         TogglzService,
         UserService,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

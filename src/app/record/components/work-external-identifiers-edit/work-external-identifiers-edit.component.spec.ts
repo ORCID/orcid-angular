@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { WorkExternalIdentifiersEditComponent } from './work-external-identifiers-edit.component'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('WorkExternalIdentifiersEditComponent', () => {
   let component: WorkExternalIdentifiersEditComponent
   let fixture: ComponentFixture<WorkExternalIdentifiersEditComponent>
@@ -9,6 +11,7 @@ describe('WorkExternalIdentifiersEditComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [WorkExternalIdentifiersEditComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

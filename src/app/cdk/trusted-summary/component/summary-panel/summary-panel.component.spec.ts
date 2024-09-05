@@ -3,6 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { SummaryPanelComponent } from './summary-panel.component'
 import { WINDOW_PROVIDERS } from 'src/app/cdk/window'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('SummaryPanelComponent', () => {
   let component: SummaryPanelComponent
   let fixture: ComponentFixture<SummaryPanelComponent>
@@ -11,6 +13,7 @@ describe('SummaryPanelComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [SummaryPanelComponent],
       providers: [WINDOW_PROVIDERS],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
 
     fixture = TestBed.createComponent(SummaryPanelComponent)

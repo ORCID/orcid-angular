@@ -29,6 +29,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 import { ModalBiographyComponent } from '../../../record/components/top-bar/modals/modal-biography/modal-biography.component'
 import { MatLegacyMenuModule as MatMenuModule } from '@angular/material/legacy-menu'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('PanelComponent', () => {
   let component: PanelComponent
   let fixture: ComponentFixture<PanelComponent>
@@ -62,6 +64,7 @@ describe('PanelComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

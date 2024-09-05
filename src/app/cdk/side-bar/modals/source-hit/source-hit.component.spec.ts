@@ -3,6 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { SourceHitComponent } from './source-hit.component'
 import { SharedModule } from '../../../../shared/shared.module'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('SourceHitComponent', () => {
   let component: SourceHitComponent
   let fixture: ComponentFixture<SourceHitComponent>
@@ -11,6 +13,7 @@ describe('SourceHitComponent', () => {
     await TestBed.configureTestingModule({
       imports: [SharedModule],
       declarations: [SourceHitComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

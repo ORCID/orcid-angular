@@ -1,6 +1,8 @@
 import { DisableRolePipe } from './disable-role.pipe'
 import { UntypedFormBuilder } from '@angular/forms'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('DisableRolePipe', () => {
   let pipe: DisableRolePipe
 

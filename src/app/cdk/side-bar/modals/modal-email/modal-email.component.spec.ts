@@ -16,6 +16,9 @@ import {
 import { Overlay } from '@angular/cdk/overlay'
 import { AlertMessageModule } from 'src/app/cdk/alert-message/alert-message.module'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { ReactiveFormsModule } from '@angular/forms'
+
 describe('ModalEmailComponent', () => {
   let component: ModalEmailComponent
   let fixture: ComponentFixture<ModalEmailComponent>
@@ -26,6 +29,7 @@ describe('ModalEmailComponent', () => {
         HttpClientTestingModule,
         RouterTestingModule,
         AlertMessageModule,
+        ReactiveFormsModule,
       ],
       declarations: [ModalEmailComponent],
       providers: [
@@ -39,6 +43,7 @@ describe('ModalEmailComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

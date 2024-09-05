@@ -17,13 +17,21 @@ import { Overlay } from '@angular/cdk/overlay'
 import { RegisterService } from '../../../core/register/register.service'
 import { MdePopoverModule } from '../../../cdk/popover'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { ReactiveFormsModule } from '@angular/forms'
+
 describe('FormPasswordComponent', () => {
   let component: FormPasswordComponent
   let fixture: ComponentFixture<FormPasswordComponent>
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MdePopoverModule, RouterTestingModule],
+      imports: [
+        HttpClientTestingModule,
+        MdePopoverModule,
+        RouterTestingModule,
+        ReactiveFormsModule,
+      ],
       declarations: [FormPasswordComponent],
       providers: [
         { provide: MatDialogRef, useValue: {} },
@@ -37,6 +45,7 @@ describe('FormPasswordComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

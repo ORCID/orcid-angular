@@ -11,13 +11,16 @@ import { SearchService } from '../../../core/search/search.service'
 import { RouterTestingModule } from '@angular/router/testing'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { FormsModule } from '@angular/forms'
+
 describe('SearchComponent', () => {
   let component: SearchComponent
   let fixture: ComponentFixture<SearchComponent>
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, HttpClientTestingModule],
+      imports: [RouterTestingModule, HttpClientTestingModule, FormsModule],
       declarations: [SearchComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -28,6 +31,7 @@ describe('SearchComponent', () => {
         MatSnackBar,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

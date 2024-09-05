@@ -6,6 +6,8 @@ import { RouterTestingModule } from '@angular/router/testing'
 import { WINDOW_PROVIDERS } from '../window'
 import { Platform } from '@angular/cdk/platform'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('PlatformInfoService', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({

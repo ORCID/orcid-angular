@@ -17,13 +17,21 @@ import { SearchService } from '../../../core/search/search.service'
 import { AccountTrustedIndividualsService } from '../../../core/account-trusted-individuals/account-trusted-individuals.service'
 import { UserService } from '../../../core'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { FormsModule } from '@angular/forms'
+
 describe('SettingsTrustedIndividualsSearchComponent', () => {
   let component: SettingsTrustedIndividualsSearchComponent
   let fixture: ComponentFixture<SettingsTrustedIndividualsSearchComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, RouterTestingModule],
+      imports: [
+        HttpClientTestingModule,
+        MatDialogModule,
+        RouterTestingModule,
+        FormsModule,
+      ],
       declarations: [SettingsTrustedIndividualsSearchComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -37,6 +45,7 @@ describe('SettingsTrustedIndividualsSearchComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

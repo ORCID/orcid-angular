@@ -1,6 +1,8 @@
 import { RoleTranslationPipe } from './role-translation.pipe'
 import { ContributionRoles, Role } from '../../../types/works.endpoint'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('RoleTranslationPipe', () => {
   let pipe: RoleTranslationPipe
   let roles: Role[]

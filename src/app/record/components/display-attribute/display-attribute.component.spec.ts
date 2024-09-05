@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 
 import { DisplayAttributeComponent } from './display-attribute.component'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('DisplayAttributeComponent', () => {
   let component: DisplayAttributeComponent
   let fixture: ComponentFixture<DisplayAttributeComponent>
@@ -9,6 +11,7 @@ describe('DisplayAttributeComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [DisplayAttributeComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   }))
 

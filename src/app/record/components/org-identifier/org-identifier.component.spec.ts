@@ -12,6 +12,8 @@ import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack
 import { Overlay } from '@angular/cdk/overlay'
 import { OrganizationsService } from '../../../core'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('OrgIdentifierComponent', () => {
   let component: OrgIdentifierComponent
   let fixture: ComponentFixture<OrgIdentifierComponent>
@@ -30,6 +32,7 @@ describe('OrgIdentifierComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

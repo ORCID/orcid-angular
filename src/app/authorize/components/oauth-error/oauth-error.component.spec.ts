@@ -13,6 +13,8 @@ import { Overlay } from '@angular/cdk/overlay'
 import { UserService } from '../../../core'
 import { ZendeskService } from '../../../core/zendesk/zendesk.service'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('OauthErrorComponent', () => {
   let component: OauthErrorComponent
   let fixture: ComponentFixture<OauthErrorComponent>
@@ -32,6 +34,7 @@ describe('OauthErrorComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

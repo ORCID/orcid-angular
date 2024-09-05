@@ -17,6 +17,8 @@ import { Overlay } from '@angular/cdk/overlay'
 import { RecordWorksService } from '../../../../../core/record-works/record-works.service'
 import { UntypedFormBuilder } from '@angular/forms'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('ModalCombineWorksWithSelectorComponent', () => {
   let component: ModalCombineWorksWithSelectorComponent
   let fixture: ComponentFixture<ModalCombineWorksWithSelectorComponent>
@@ -38,6 +40,7 @@ describe('ModalCombineWorksWithSelectorComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

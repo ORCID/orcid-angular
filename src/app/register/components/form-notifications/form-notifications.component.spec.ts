@@ -15,13 +15,22 @@ import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack
 import { Overlay } from '@angular/cdk/overlay'
 import { WINDOW_PROVIDERS } from '../../../cdk/window'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { ReactiveFormsModule } from '@angular/forms'
+import { MatLegacyCheckboxModule } from '@angular/material/legacy-checkbox'
+
 describe('FormNotificationsComponent', () => {
   let component: FormNotificationsComponent
   let fixture: ComponentFixture<FormNotificationsComponent>
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule],
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+        ReactiveFormsModule,
+        MatLegacyCheckboxModule,
+      ],
       declarations: [FormNotificationsComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -33,6 +42,7 @@ describe('FormNotificationsComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

@@ -10,6 +10,8 @@ import { WINDOW_PROVIDERS } from 'src/app/cdk/window'
 import { LOCALE_ID } from '@angular/core'
 import { environment } from 'src/environments/environment'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('WordpressService', () => {
   let service: WordpressService
   let httpMock: HttpTestingController

@@ -11,14 +11,26 @@ import { SnackbarService } from '../../../cdk/snackbar/snackbar.service'
 import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
 import { Overlay } from '@angular/cdk/overlay'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import {
+  ReactiveFormsModule,
+  UntypedFormControl,
+  UntypedFormGroup,
+} from '@angular/forms'
+import { FormPersonalComponent } from '../form-personal/form-personal.component'
+
 describe('StepAComponent', () => {
   let component: StepAComponent
   let fixture: ComponentFixture<StepAComponent>
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule],
-      declarations: [StepAComponent],
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+        ReactiveFormsModule,
+      ],
+      declarations: [StepAComponent, FormPersonalComponent],
       providers: [
         WINDOW_PROVIDERS,
         PlatformInfoService,
@@ -28,12 +40,16 @@ describe('StepAComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(StepAComponent)
     component = fixture.componentInstance
+    component.formGroup = new UntypedFormGroup({
+      personal: new UntypedFormControl(),
+    })
     fixture.detectChanges()
   })
 

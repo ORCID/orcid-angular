@@ -4,6 +4,8 @@ import { TrustedSummaryService } from './trusted-summary.service'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('TrustedSummaryService', () => {
   let service: TrustedSummaryService
 

@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { OfflineMessageComponent } from './offline-message.component'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('OfflineMessageComponent', () => {
   let component: OfflineMessageComponent
   let fixture: ComponentFixture<OfflineMessageComponent>
@@ -9,6 +11,7 @@ describe('OfflineMessageComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [OfflineMessageComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

@@ -8,10 +8,22 @@ import { ErrorHandlerService } from '../../../core/error-handler/error-handler.s
 import { SnackbarService } from '../../../cdk/snackbar/snackbar.service'
 import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
 import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
+import {
+  MatLegacyTooltipModule,
+  MatLegacyTooltip as MatTooltip,
+} from '@angular/material/legacy-tooltip'
+import {
+  MatLegacyCheckbox as MatCheckbox,
+  MatLegacyCheckboxModule,
+} from '@angular/material/legacy-checkbox'
+
 import { Overlay } from '@angular/cdk/overlay'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
+
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { ReactiveFormsModule } from '@angular/forms'
 
 describe('NotificationComponent', () => {
   let component: NotificationComponent
@@ -23,6 +35,9 @@ describe('NotificationComponent', () => {
         HttpClientTestingModule,
         NoopAnimationsModule,
         RouterTestingModule,
+        ReactiveFormsModule,
+        MatLegacyCheckboxModule,
+        MatLegacyTooltipModule,
       ],
       declarations: [NotificationComponent],
       providers: [
@@ -35,6 +50,7 @@ describe('NotificationComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

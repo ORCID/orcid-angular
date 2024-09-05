@@ -14,6 +14,8 @@ import { SnackbarService } from '../../../cdk/snackbar/snackbar.service'
 import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
 import { Overlay } from '@angular/cdk/overlay'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('SettingsUsersThatThrustYouComponent', () => {
   let component: SettingsUsersThatThrustYouComponent
   let fixture: ComponentFixture<SettingsUsersThatThrustYouComponent>
@@ -31,6 +33,7 @@ describe('SettingsUsersThatThrustYouComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

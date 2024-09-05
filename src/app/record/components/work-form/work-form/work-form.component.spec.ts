@@ -28,6 +28,8 @@ import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/materia
 import { MatLegacySelectModule as MatSelectModule } from '@angular/material/legacy-select'
 import { RecordModule } from '../../../record.module'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('WorkFormComponent', () => {
   let component: WorkFormComponent
   let fixture: ComponentFixture<WorkFormComponent>
@@ -59,6 +61,7 @@ describe('WorkFormComponent', () => {
         MatSnackBar,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

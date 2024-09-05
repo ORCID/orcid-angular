@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { ClientSecretComponent } from './client-secret.component'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('ClientSecretComponent', () => {
   let component: ClientSecretComponent
   let fixture: ComponentFixture<ClientSecretComponent>
@@ -9,6 +11,7 @@ describe('ClientSecretComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ClientSecretComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
 
     fixture = TestBed.createComponent(ClientSecretComponent)

@@ -12,6 +12,8 @@ import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { RecordWorksService } from '../../../core/record-works/record-works.service'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('WorkStackComponent', () => {
   let component: WorkStackComponent
   let fixture: ComponentFixture<WorkStackComponent>
@@ -30,6 +32,7 @@ describe('WorkStackComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

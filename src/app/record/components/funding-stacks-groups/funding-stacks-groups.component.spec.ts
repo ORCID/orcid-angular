@@ -15,6 +15,8 @@ import { RecordService } from '../../../core/record/record.service'
 import { RecordFundingsService } from '../../../core/record-fundings/record-fundings.service'
 import { RecordCountriesService } from '../../../core/record-countries/record-countries.service'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('FundingStacksGroupsComponent', () => {
   let component: FundingStacksGroupsComponent
   let fixture: ComponentFixture<FundingStacksGroupsComponent>
@@ -36,6 +38,7 @@ describe('FundingStacksGroupsComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   }))
 

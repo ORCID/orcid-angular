@@ -11,6 +11,8 @@ import { Overlay } from '@angular/cdk/overlay'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('NotificationYourRecordAmendedComponent', () => {
   let component: NotificationYourRecordAmendedComponent
   let fixture: ComponentFixture<NotificationYourRecordAmendedComponent>
@@ -28,6 +30,7 @@ describe('NotificationYourRecordAmendedComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

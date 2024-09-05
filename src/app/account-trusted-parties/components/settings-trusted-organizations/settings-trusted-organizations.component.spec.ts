@@ -15,6 +15,8 @@ import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack
 import { Overlay } from '@angular/cdk/overlay'
 import { AccountTrustedOrganizationsService } from '../../../core/account-trusted-organizations/account-trusted-organizations.service'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('SettingsTrustedOrganizationsComponent', () => {
   let component: SettingsTrustedOrganizationsComponent
   let fixture: ComponentFixture<SettingsTrustedOrganizationsComponent>
@@ -33,6 +35,7 @@ describe('SettingsTrustedOrganizationsComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

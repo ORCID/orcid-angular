@@ -32,6 +32,8 @@ import { MatLegacySelectHarness as MatSelectHarness } from '@angular/material/le
 import { MatLegacyInputHarness as MatInputHarness } from '@angular/material/legacy-input/testing'
 import { VisibilitySelectorModule } from 'src/app/cdk/visibility-selector/visibility-selector.module'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('ModalCountryComponent', () => {
   let component: ModalCountryComponent
   let fixture: ComponentFixture<ModalCountryComponent>
@@ -67,6 +69,7 @@ describe('ModalCountryComponent', () => {
         MatDialog,
         Overlay,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 

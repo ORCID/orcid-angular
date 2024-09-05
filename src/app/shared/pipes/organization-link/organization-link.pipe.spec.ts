@@ -1,5 +1,7 @@
 import { OrganizationLinkPipe } from './organization-link.pipe'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('OrganizationLinkPipe', () => {
   let pipe: OrganizationLinkPipe
 

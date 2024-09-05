@@ -15,6 +15,8 @@ import { Overlay } from '@angular/cdk/overlay'
 import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core'
 import { By } from '@angular/platform-browser'
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
 describe('Component: TwoFactorSetupComponent', () => {
   let component: TwoFactorSetupComponent
   let compiled: any
@@ -33,7 +35,7 @@ describe('Component: TwoFactorSetupComponent', () => {
         MatSnackBar,
         Overlay,
       ],
-      schemas: [NO_ERRORS_SCHEMA],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
 
