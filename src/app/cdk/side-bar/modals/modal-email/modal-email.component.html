@@ -128,8 +128,8 @@
               <app-visibility-selector
                 formControlName="visibility"
                 id="cy-email-visibility"
-                [ariaLabelPrivate]="ariaLabelVisibilityEmailTrustedParty"
-                [ariaLabelPublic]="ariaLabelVisibilityEmailTrustedParty"
+                [ariaLabelPrivate]="ariaLabelVisibilityEmailPrivate"
+                [ariaLabelPublic]="ariaLabelVisibilityEmailPublic"
                 [ariaLabelTrustedParty]="ariaLabelVisibilityEmailTrustedParty"
                 [itemTitle]="emailsForm.value[email.putCode].email"
                 [editable]="email.verified"
@@ -299,9 +299,9 @@
                 formControlName="visibility"
                 id="cy-domain-visibility"
                 [itemTitle]="domain.value"
-                [ariaLabelPrivate]="ariaLabelVisibilityEmailTrustedParty"
-                [ariaLabelPublic]="ariaLabelVisibilityEmailTrustedParty"
-                [ariaLabelTrustedParty]="ariaLabelVisibilityEmailTrustedParty"
+                [ariaLabelPrivate]="ariaLabelVisibilityDomainPrivate"
+                [ariaLabelPublic]="ariaLabelVisibilityDomainPublic"
+                [ariaLabelTrustedParty]="ariaLabelVisibilityDomainTrustedParty"
                 [mobile]="isMobile"
                 [privacy]="domain.visibility"
               ></app-visibility-selector>
