@@ -1,3 +1,9 @@
+## v2.104.16 - 2024-09-09
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.104.15...v2.104.16)
+
+- [#2347](https://github.com/ORCID/orcid-angular/pull/2347): tx pull
+
 ## v2.104.15 - 2024-09-05
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.104.14...v2.104.15)
