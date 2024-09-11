@@ -30,21 +30,23 @@
     [panelTitle]="affiliation.affiliationName.value"
   >
     <div class="affiliation-title" header>
-      <mat-icon
-        class="material-icons-outlined"
-        *ngIf="type === 'invited-position'"
-        >join_inner</mat-icon
-      >
-      <mat-icon class="material-icons-outlined" *ngIf="type === 'distinction'"
-        >stars</mat-icon
-      >
-      <mat-icon class="material-icons-outlined" *ngIf="type === 'membership'"
-        >card_membership</mat-icon
-      >
-      <mat-icon class="material-icons-outlined" *ngIf="type === 'service'"
-        >badge</mat-icon
-      >
-      <div class="vl"></div>
+      <ng-container *ngIf="professionalActivitiesTogglz">
+        <mat-icon
+          class="material-icons-outlined"
+          *ngIf="type === 'invited-position'"
+          >join_inner</mat-icon
+        >
+        <mat-icon class="material-icons-outlined" *ngIf="type === 'distinction'"
+          >stars</mat-icon
+        >
+        <mat-icon class="material-icons-outlined" *ngIf="type === 'membership'"
+          >card_membership</mat-icon
+        >
+        <mat-icon class="material-icons-outlined" *ngIf="type === 'service'"
+          >badge</mat-icon
+        >
+        <div class="vl"></div>
+      </ng-container>
       <h4
         class="orc-font-body"
         [ngClass]="{
