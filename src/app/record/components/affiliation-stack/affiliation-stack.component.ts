@@ -32,6 +32,7 @@ export class AffiliationStackComponent implements OnInit, OnDestroy {
   @Input() isPublicRecord: string = null
   @Input() type: AffiliationType
   hasExternalIdentifiers: boolean
+  @Input() professionalActivities: boolean
   @Input()
   set affiliationStack(value: AffiliationGroup) {
     this.hasExternalIdentifiers = !!value.externalIdentifiers.length
