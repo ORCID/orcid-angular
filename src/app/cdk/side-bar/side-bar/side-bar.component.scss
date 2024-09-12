@@ -33,6 +33,7 @@ app-panel {
 
 #emails-panel h4 {
   margin-top: 0px;
+  margin-bottom: 16px;
 }
 
 hr {
@@ -41,10 +42,10 @@ hr {
 }
 
 .verification-icon {
-  height: 28px;
-  width: 28px;
-  min-width: 28px;
-  font-size: 28px;
+  height: 24px;
+  width: 24px;
+  min-width: 24px;
+  font-size: 24px;
   margin-right: 8px;
 }
 
@@ -59,8 +60,15 @@ hr {
   div {
     flex-wrap: nowrap !important;
   }
+  .row {
+    align-items: center;
+  }
 }
 
 .email-section {
   padding-bottom: 0;
+}
+
+.double-app-panel-data {
+  padding-bottom: 8px;
 }

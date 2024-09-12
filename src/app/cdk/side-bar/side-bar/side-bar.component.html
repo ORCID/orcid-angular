@@ -84,24 +84,61 @@
       <h3
         header
         class="orc-font-body"
-        i18n="@@shared.verifiedEmailsAndDomains"
+        i18n="@@shared.emailsAndDomains"
         *ngIf="isPublicRecord && emailDomainsTogglz && !loadingTogglz"
       >
-        Verified emails & domains
+        Emails & domains
       </h3>
       <app-panel-data
         *ngIf="
-          ((userRecord?.emails?.emails &&
-            userRecord?.emails?.emails?.length > 0) ||
-            (userRecord?.emails?.emailDomains &&
-              userRecord?.emails?.emailDomains?.length > 0)) &&
+          userRecord?.emails?.emails &&
+          userRecord?.emails?.emails?.length > 0 &&
+          isPublicRecord &&
+          emailDomainsTogglz &&
+          !loadingTogglz
+        "
+        [ngClass]="{
+          'double-app-panel-data':
+            userRecord?.emails?.emailDomains &&
+            userRecord?.emails?.emailDomains?.length > 0
+        }"
+      >
+        <h4 header i18n="@@side-bar.verifiedEmailAddresses">
+          Verified email addresses
+        </h4>
+        <app-panel-element
+          *ngFor="let entry of userRecord?.emails?.emails; let last = last"
+          [separator]="!last"
+          class="public-email-or-domain"
+          [ngClass]="{
+            'last-public-email-or-domain': last,
+          }"
+          ><div class="row">
+            <mat-icon class="verification-icon">check_circle</mat-icon>
+            <div>
+              <span class="row orc-font-body-small"> {{ entry.value }}</span>
+            </div>
+          </div>
+        </app-panel-element>
+      </app-panel-data>
+
+      <app-panel-data
+        *ngIf="
+          userRecord?.emails?.emailDomains &&
+          userRecord?.emails?.emailDomains?.length > 0 &&
           isPublicRecord &&
           emailDomainsTogglz &&
           !loadingTogglz
         "
       >
+        <h4 header i18n="@@side-bar.verifiedEmailDomains">
+          Verified email domains
+        </h4>
         <app-panel-element
-          *ngFor="let entry of publicEmailAndDomainList; let last = last"
+          *ngFor="
+            let entry of userRecord?.emails?.emailDomains;
+            let last = last
+          "
           [separator]="!last"
           class="public-email-or-domain"
           [ngClass]="{ 'last-public-email-or-domain': last }"
@@ -109,23 +146,10 @@
             <mat-icon class="verification-icon">check_circle</mat-icon>
             <div>
               <span class="row orc-font-body-small"> {{ entry.value }}</span>
-              <em
-                class="row orc-font-small-print"
-                i18n="@@side-bar.verifiedEmail"
-                *ngIf="entry.value.includes('@')"
-                >Verified email address</em
-              >
-              <em
-                class="row orc-font-small-print"
-                i18n="@@side-bar.verifiedEmailDomain"
-                *ngIf="!entry.value.includes('@')"
-                >Verified email domain</em
-              >
             </div>
           </div>
         </app-panel-element>
       </app-panel-data>
-
       <!-- EMAIL PANEL MY ORCID -->
       <h3
         header
