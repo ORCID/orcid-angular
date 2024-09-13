@@ -1,3 +1,9 @@
+## v2.104.17 - 2024-09-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.104.16...v2.104.17)
+
+- [#2349](https://github.com/ORCID/orcid-angular/pull/2349): 9395-qa-all-activity-items-have-space-for-a-type-icon
+
 ## v2.104.16 - 2024-09-09
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.104.15...v2.104.16)
