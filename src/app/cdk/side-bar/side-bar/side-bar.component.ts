@@ -83,9 +83,6 @@ export class SideBarComponent implements OnInit, OnDestroy {
   recordWithIssues: boolean
   loadingTogglz = true
   emailDomainsTogglz = false
-  publicEmailList: AssertionVisibilityString[] = []
-  publicDomainList: AssertionVisibilityString[] = []
-  publicEmailAndDomainList: AssertionVisibilityString[] = []
 
   regionPersonalInformation = $localize`:@@shared.personalInformation:Personal information`
   fragment: string
@@ -143,49 +140,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
         this.userInfo = userRecord?.userInfo
 
         this.onSideBarElementsDisplay(userRecord)
-        if (this.isPublicRecord) {
-          this.generatePublicEmailList()
-        }
       })
-  }
-
-  generatePublicEmailList() {
-    if (
-      this.publicEmailList.length === 0 &&
-      this.publicDomainList.length === 0
-    ) {
-      const domainsToExclude: AssertionVisibilityString[] = []
-      this.userRecord.emails?.emails?.forEach((email) => {
-        const professionalDomain = this.userRecord.emails.emailDomains?.find(
-          (emailDomain) => email.value.split('@')[1] === emailDomain.value
-        )
-
-        if (professionalDomain) {
-          if (email.visibility === 'PUBLIC') {
-            this.publicEmailList.push(email)
-            domainsToExclude.push(professionalDomain)
-          } else if (
-            professionalDomain.visibility === 'PUBLIC' &&
-            !this.publicDomainList.includes(professionalDomain)
-          ) {
-            this.publicDomainList.push(professionalDomain)
-          }
-        } else if (email.visibility === 'PUBLIC') {
-          this.publicEmailList.push(email)
-        }
-      })
-      this.userRecord.emails?.emailDomains?.forEach((emailDomain) => {
-        if (
-          emailDomain.visibility === 'PUBLIC' &&
-          !domainsToExclude.includes(emailDomain)
-        ) {
-          this.publicDomainList.push(emailDomain)
-        }
-      })
-      this.publicEmailAndDomainList = this.publicEmailList.concat(
-        this.publicDomainList
-      )
-    }
   }
 
   getWebsite(website: Assertion) {
