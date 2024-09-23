@@ -14,7 +14,7 @@ import { ActivitySummary } from 'src/app/types/trust-summary'
   preserveWhitespaces: true,
 })
 export class SummaryPanelComponent implements OnInit {
-  @Input() activitySummary: ActivitySummary[]
+  @Input() activitySummary: ActivitySummary[] 
   @Input() url: string = ''
   @Input() count: number = 0
   @Input() moreLabel: string = ''
