@@ -10,6 +10,7 @@ import { RobotsMetaTagsService } from 'src/app/core/robots-meta-tags/robots-meta
 import { ZendeskService } from 'src/app/core/zendesk/zendesk.service'
 import { WINDOW } from 'src/app/cdk/window'
 import { RecordUtil } from 'src/app/shared/utils/record.util'
+import { concat } from 'lodash'
 
 @Component({
   selector: 'app-trusted-summary',
@@ -30,15 +31,22 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
   worksHover = false
   peerReviewsHover = false
   fundsHover = false
+  researchResorucesHover = false
   externalIdentifiersHover = false
   professionalActivitiesHover = false
+  educationQualificationsHover = false
+  emailDomainsHover = false
+
   insideIframe: boolean
   ariaLabelAffiliations: string
   ariaLabelWorks: string
   ariaLabelFundings: string
   ariaLabelPeerReviews: string
   ariaLabelProfessionalActivities: string
+  ariaLabelEducationQualificationsActions: string
+  ariaLabelResearchResources: string
   ariaLabelIdentifiers: string
+  ariaLabelEmailDomains: string
 
   labelValidatedWorks = $localize`:@@summary.validatedWorks:Validated works`
   labelValidatedWork = $localize`:@@summary.validatedWork:Validated work`
@@ -48,6 +56,10 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
   labelValidatedFundings = $localize`:@@summary.validatedFundings:Validated fundings`
   labelSelfAssertedFunding = $localize`:@@summary.selfAssertedFunding:Self-asserted funding`
   labelSelfAssertedFundings = $localize`:@@summary.selfAssertedFundings:Self-asserted fundings`
+  labelSelfAssertedResearchResources = $localize`:@@summary.selfAssertedResearchResources:Self-asserted research resources`
+  labelValidatedResearchResources = $localize`:@@summary.validatedResearchResources:Validated research resources`
+  labelSelfAssertedResearchResource = $localize`:@@summary.selfAssertedResearchResource:Self-asserted research resource`
+  labelValidatedResearchResource = $localize`:@@summary.validatedResearchResource:Validated research resource`
   labelReviesFor = $localize`:@@summary.reviewsFor:reviews for`
   labelReviewFor = $localize`:@@summary.reviewFor:review for`
   labelpublicationgrants = $localize`:@@summary.publicationgrantes:publications/grants`
@@ -55,21 +67,30 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
   labelMoreAffiliations = $localize`:@@summary.moreAffiliations:more Affiliations`
   labelMoreProfessionalActivities = $localize`:@@summary.moreProfessionalActivities:more Professional activities`
   labelMoreOtherIdentifiers = $localize`:@@summary.moreOtherIdentifiers:more Other Identifiers`
+  labelMoreEmailDomains = $localize`:@@summary.moreEmailDomains:more Email Domains`
+  labelMoreEmailDomain = $localize`:@@summary.moreEmailDomain:more Email Domain`
   labelMoreAffiliation = $localize`:@@summary.moreAffiliation:more Affiliation`
   labelMoreProfessionalActivitie = $localize`:@@summary.moreProfessionalActivitie:more Professional activity`
   labelMoreOtherIdentifier = $localize`:@@summary.moreOtherIdentifier:more Other Identifier`
+  labelEmailDomains = $localize`:@@summary.emailDomainsLabel:Email Domains`
   labelOrcidRecord = $localize`:@@public-layout.my_orcid:ORCID Record`
   labelViewAffiliations = $localize`:@@summary.viewAffiliations:View all affiliations in`
   labelViewWorks = $localize`:@@summary.viewWorks:View all works in`
   labelViewFundings = $localize`:@@summary.viewFundings:View all funding in`
+  labelViewResearchResources = $localize`:@@summary.viewResearchResources:View all research and resources in`
   labelViewPeerReviews = $localize`:@@summary.viewPeerReviews:View all peer reviews in`
   labelViewProfessionalActivities = $localize`:@@summary.viewProfessionalActivities:View all professional activities in`
   labelViewIdentifiers = $localize`:@@summary.viewIdentifiers:View all identifiers in`
+  labelViewEducationQualificationsActivities = $localize`:@@summary.viewEducationQualificationsActivities:More education qualification activities`
+  labelViewEducationQualificationsActivitie = $localize`:@@summary.viewEducationQualificationsActivitie:More education qualification activity`
+  labelViewDomain = $localize`:@@summary.viewDomain:View all email domains in`
 
   funds: SimpleActivityModel[] = []
+  researchResoruces: SimpleActivityModel[] = []
   peerReviews: SimpleActivityModel[] = []
   mobile: boolean
   externalIdentifiers: SimpleActivityModel[]
+  emailDomains: SimpleActivityModel[]
   twoColumns: boolean = false
   threeColumns: boolean = false
   oneColumn: boolean
@@ -167,6 +188,28 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
               : this.labelValidatedFunding,
         })
       }
+
+      if (this.trustedSummary.validatedResearchResources) {
+        this.researchResoruces.push({
+          verified: true,
+          countA: this.trustedSummary.validatedResearchResources,
+          stringA:
+            this.trustedSummary.validatedResearchResources > 1
+              ? this.labelValidatedResearchResources
+              : this.labelValidatedResearchResource,
+        })
+      }
+      if (this.trustedSummary.selfAssertedResearchResources) {
+        this.researchResoruces.push({
+          verified: false,
+          countA: this.trustedSummary.selfAssertedResearchResources,
+          stringA:
+            this.trustedSummary.selfAssertedResearchResources > 1
+              ? this.labelSelfAssertedResearchResources
+              : this.labelSelfAssertedResearchResource,
+        })
+      }
+
       if (this.trustedSummary.selfAssertedFunds) {
         this.funds.push({
           verified: false,
@@ -204,6 +247,12 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
           }
         }
       )
+      this.emailDomains = this.trustedSummary.emailDomains?.map((domain) => {
+        return {
+          verified: true,
+          stringA: domain.value,
+        }
+      })
 
       if (
         (this.works.length > 0 ||
@@ -211,7 +260,9 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
           this.peerReviews.length > 0) &&
         (this.externalIdentifiers?.length > 0 ||
           this.trustedSummary.professionalActivitiesCount > 0 ||
-          this.trustedSummary.externalIdentifiers.length > 0)
+          this.trustedSummary.externalIdentifiers.length > 0 ||
+          this.trustedSummary.externalIdentifiers.length > 0 ||
+          this.researchResoruces.length > 0)
       ) {
         this.threeColumns = true
       } else if (
@@ -219,7 +270,8 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
         this.funds.length > 0 ||
         this.peerReviews.length > 0 ||
         this.externalIdentifiers?.length > 0 ||
-        this.trustedSummary.professionalActivitiesCount > 0
+        this.trustedSummary.professionalActivitiesCount > 0 ||
+        this.researchResoruces.length > 0
       ) {
         this.twoColumns = true
       } else {
@@ -230,14 +282,26 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
       )
       this.ariaLabelWorks = this.getAriaLabelSection(this.labelViewWorks)
       this.ariaLabelFundings = this.getAriaLabelSection(this.labelViewFundings)
+      this.ariaLabelResearchResources = this.getAriaLabelSection(
+        this.labelViewResearchResources
+      )
       this.ariaLabelPeerReviews = this.getAriaLabelSection(
         this.labelViewPeerReviews
       )
       this.ariaLabelProfessionalActivities = this.getAriaLabelSection(
         this.labelViewProfessionalActivities
       )
+
+      this.ariaLabelEducationQualificationsActions = this.getAriaLabelSection(
+        this.labelViewEducationQualificationsActivities
+      )
+
       this.ariaLabelIdentifiers = this.getAriaLabelSection(
         this.labelViewIdentifiers
+      )
+
+      this.ariaLabelEmailDomains = this.getAriaLabelSection(
+        this.labelViewDomain
       )
     })
   }
