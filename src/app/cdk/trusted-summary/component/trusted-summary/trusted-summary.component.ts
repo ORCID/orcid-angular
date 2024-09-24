@@ -1,4 +1,11 @@
-import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core'
+import {
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  Input,
+  OnDestroy,
+  OnInit,
+} from '@angular/core'
 import { Router } from '@angular/router'
 import { TrustedSummaryService } from 'src/app/core/trusted-summary/trusted-summary.service'
 import { TrustedSummary } from 'src/app/types/trust-summary'
@@ -93,7 +100,7 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
   emailDomains: SimpleActivityModel[]
   twoColumns: boolean = false
   threeColumns: boolean = false
-  oneColumn: boolean
+  oneColumn: boolean = false
   createdToday = false
   modifiedToday: boolean
   creationDateWithOffset: any
@@ -106,6 +113,8 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
     private _platform: PlatformInfoService,
     private _robotsMetaTags: RobotsMetaTagsService,
     private _zendeskService: ZendeskService,
+    private _changeDetectorRef: ChangeDetectorRef,
+
     // import window
     @Inject(WINDOW) private _window: Window
   ) {}
@@ -253,30 +262,30 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
           stringA: domain.value,
         }
       })
-
       if (
         (this.works.length > 0 ||
           this.funds.length > 0 ||
-          this.peerReviews.length > 0) &&
+          this.peerReviews.length > 0 ||
+          this.researchResoruces.length) &&
         (this.externalIdentifiers?.length > 0 ||
           this.trustedSummary.professionalActivitiesCount > 0 ||
-          this.trustedSummary.externalIdentifiers.length > 0 ||
-          this.trustedSummary.externalIdentifiers.length > 0 ||
-          this.researchResoruces.length > 0)
+          this.trustedSummary.educationQualifications?.length > 0)
       ) {
         this.threeColumns = true
       } else if (
         this.works.length > 0 ||
         this.funds.length > 0 ||
         this.peerReviews.length > 0 ||
+        this.researchResoruces.length > 0 ||
         this.externalIdentifiers?.length > 0 ||
         this.trustedSummary.professionalActivitiesCount > 0 ||
-        this.researchResoruces.length > 0
+        this.trustedSummary.educationQualifications?.length > 0
       ) {
         this.twoColumns = true
       } else {
         this.oneColumn = true
       }
+      this._changeDetectorRef.markForCheck()
       this.ariaLabelAffiliations = this.getAriaLabelSection(
         this.labelViewAffiliations
       )
