@@ -21,16 +21,23 @@ export class StepC2Component extends BaseStepDirective implements OnInit {
   nextButtonWasClicked: boolean
   @Output() formGroupStepC2OptionalChange = new EventEmitter<boolean>()
 
-  constructor(
-    private _registrationStateService: RegisterStateService,
-    private _registerObservabilityService: RegisterObservabilityService
-  ) {
+  constructor(private _registrationStateService: RegisterStateService) {
     super()
   }
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   optionalNextStep() {
+    this.formGroup.setValue({
+      affiliations: {
+        organization: '',
+        departmentName: '',
+        roleTitle: '',
+        startDateGroup: {
+          startDateMonth: '',
+          startDateYear: '',
+        },
+      },
+    })
     this.formGroupStepC2OptionalChange.emit(true)
     this._registrationStateService.registerStepperButtonClicked('c2', 'skip')
   }

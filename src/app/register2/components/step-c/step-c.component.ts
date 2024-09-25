@@ -18,14 +18,10 @@ export class StepCComponent extends BaseStepDirective implements OnInit {
   @Input() loading
   @Input() reactivation: ReactivationLocal
 
-  constructor(
-    private _registrationStateService: RegisterStateService,
-    private _registerObservabilityService: RegisterObservabilityService
-  ) {
+  constructor(private _registrationStateService: RegisterStateService) {
     super()
   }
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   nextButton2() {
     this._registrationStateService.registerStepperButtonClicked('c', 'next')

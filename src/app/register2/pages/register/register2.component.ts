@@ -193,7 +193,7 @@ export class Register2Component implements OnInit, AfterViewInit {
                 ERROR_REPORT.REGISTER
               )
               this._registerObservabilityService.reportRegisterErrorEvent(
-                'register-validate-fail',
+                'register-validate',
                 {
                   errors: validator.errors,
                 }
