@@ -6,6 +6,7 @@ import { OrgDisambiguated } from '../types'
 import { CustomEventService } from '../core/observability-events/observability-events.service'
 import { UntypedFormArray, UntypedFormGroup } from '@angular/forms'
 import { RegisterStateService } from './register-state.service'
+import init from 'helphero'
 @Injectable({
   providedIn: 'root',
 })
@@ -24,6 +25,13 @@ export class RegisterObservabilityService {
         `step-${step.step}-back-button-clicked`
       )
     })
+  }
+
+  signInButtonClicked() {
+    this._observability.recordEvent(
+      'orcid_registration',
+      'step-a-sign-in-button-clicked'
+    )
   }
 
   stepANextButtonClicked(form: UntypedFormGroup) {
@@ -133,5 +141,15 @@ export class RegisterObservabilityService {
         },
       }
     )
+  }
+
+  stepLoaded(step: 'a' | 'b' | 'c' | 'c2' | 'd') {
+    this._observability.recordEvent('orcid_registration', `step-${step}-loaded`)
+  }
+
+  initializeHelpHero(reactivation) {
+    this._observability.startJourney('orcid_registration', {
+      reactivation,
+    })
   }
 }

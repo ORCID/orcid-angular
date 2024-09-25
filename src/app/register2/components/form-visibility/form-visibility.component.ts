@@ -12,7 +12,7 @@ import { Register2Service } from 'src/app/core/register2/register2.service'
 
 import { BaseForm } from '../BaseForm'
 import { RegisterStateService } from '../../register-state.service'
-import { RegisterObservabilityService } from '../../register-obserability'
+import { RegisterObservabilityService } from '../../register-observability.service'
 
 @Component({
   selector: 'app-form-visibility',

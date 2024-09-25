@@ -1,9 +1,9 @@
-import { Component, Input } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 
 import { ReactivationLocal } from '../../../types/reactivation.local'
 import { BaseStepDirective } from '../BaseStep'
-import { CustomEventService } from 'src/app/core/observability-events/observability-events.service'
 import { RegisterStateService } from '../../register-state.service'
+import { RegisterObservabilityService } from '../../register-observability.service'
 
 @Component({
   selector: 'app-step-b',
@@ -14,16 +14,18 @@ import { RegisterStateService } from '../../register-state.service'
     '../register2.scss-theme.scss',
   ],
 })
-export class StepBComponent extends BaseStepDirective {
+export class StepBComponent extends BaseStepDirective implements OnInit {
   @Input() personalData
   @Input() reactivation: ReactivationLocal
 
   constructor(
-    private _observability: CustomEventService,
-    private _registerStateService: RegisterStateService
+    private _registerStateService: RegisterStateService,
+    private _registerObservabilityService: RegisterObservabilityService
   ) {
-    _observability.recordEvent('orcid_registration', 'step-b-loaded')
     super()
+  }
+  ngOnInit(): void {
+    this._registerObservabilityService.stepLoaded('b')
   }
 
   nextButtonWasClicked = false

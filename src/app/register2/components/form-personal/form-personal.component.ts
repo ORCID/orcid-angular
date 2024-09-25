@@ -50,8 +50,7 @@ import { SignInService } from 'src/app/core/sign-in/sign-in.service'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 import { ERROR_REPORT } from 'src/app/errors'
 import { RegisterStateService } from '../../register-state.service'
-import { CustomEventService } from 'src/app/core/observability-events/observability-events.service'
-import { RegisterObservabilityService } from '../../register-obserability'
+import { RegisterObservabilityService } from '../../register-observability.service'
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
     control: FormControl | null,

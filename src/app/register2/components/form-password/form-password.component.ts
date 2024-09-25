@@ -22,7 +22,7 @@ import { OrcidValidators } from 'src/app/validators'
 import { BaseForm } from '../BaseForm'
 import { LiveAnnouncer } from '@angular/cdk/a11y'
 import { environment } from 'src/environments/environment'
-import { RegisterObservabilityService } from '../../register-obserability'
+import { RegisterObservabilityService } from '../../register-observability.service'
 import { RegisterStateService } from '../../register-state.service'
 
 @Component({

@@ -1,10 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 
 import { ReactivationLocal } from '../../../types/reactivation.local'
 import { BaseStepDirective } from '../BaseStep'
 import { FormBuilder, FormGroup } from '@angular/forms'
-import { CustomEventService } from 'src/app/core/observability-events/observability-events.service'
 import { RegisterStateService } from '../../register-state.service'
+import { RegisterObservabilityService } from '../../register-observability.service'
 
 @Component({
   selector: 'app-step-c2',
@@ -15,33 +15,33 @@ import { RegisterStateService } from '../../register-state.service'
     '../register2.scss-theme.scss',
   ],
 })
-export class StepC2Component extends BaseStepDirective {
+export class StepC2Component extends BaseStepDirective implements OnInit {
   @Input() loading
   @Input() reactivation: ReactivationLocal
   nextButtonWasClicked: boolean
   @Output() formGroupStepC2OptionalChange = new EventEmitter<boolean>()
 
   constructor(
-    private _formBuilder: FormBuilder,
-    private _observability: CustomEventService,
-    private _registerStateService: RegisterStateService
+    private _registrationStateService: RegisterStateService,
+    private _registerObservabilityService: RegisterObservabilityService
   ) {
     super()
   }
+  ngOnInit(): void {
+    this._registerObservabilityService.stepLoaded('c2')
+  }
 
   optionalNextStep() {
-
     this.formGroupStepC2OptionalChange.emit(true)
-    this._registerStateService.registerStepperButtonClicked('c2', 'skip')
+    this._registrationStateService.registerStepperButtonClicked('c2', 'skip')
   }
 
   nextButton2() {
-  
     this.formGroupStepC2OptionalChange.emit(false)
-    this._registerStateService.registerStepperButtonClicked('c2', 'next')
+    this._registrationStateService.registerStepperButtonClicked('c2', 'next')
   }
 
   backButton() {
-    this._registerStateService.registerStepperButtonClicked('c2', 'back')
+    this._registrationStateService.registerStepperButtonClicked('c2', 'back')
   }
 }

@@ -32,7 +32,7 @@ import { RecordAffiliationService } from 'src/app/core/record-affiliations/recor
 import { dateMonthYearValidator } from 'src/app/shared/validators/date/date.validator'
 import { RegisterStateService } from '../../register-state.service'
 import { OrgDisambiguated } from 'src/app/types'
-import { RegisterObservabilityService } from '../../register-obserability'
+import { RegisterObservabilityService } from '../../register-observability.service'
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
     control: FormControl | null,

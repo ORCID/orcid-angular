@@ -14,8 +14,8 @@ import { ApplicationRoutes } from 'src/app/constants'
 import { environment } from 'src/environments/environment'
 import { ReactivationLocal } from '../../../types/reactivation.local'
 import { BaseStepDirective } from '../BaseStep'
-import { CustomEventService } from 'src/app/core/observability-events/observability-events.service'
 import { RegisterStateService } from '../../register-state.service'
+import { RegisterObservabilityService } from '../../register-observability.service'
 
 @Component({
   selector: 'app-step-a',
@@ -39,16 +39,14 @@ export class StepAComponent
   constructor(
     private _platform: PlatformInfoService,
     private _router: Router,
-    private _observability: CustomEventService,
-    private _registerStateService: RegisterStateService
+    private _registerStateService: RegisterStateService,
+    private _registerObservabilityService: RegisterObservabilityService
   ) {
     super()
   }
 
   ngOnInit(): void {
-    this._observability.recordEvent('orcid_registration', 'step-a-loaded', {
-      initialFormValue: this.formGroup.controls.personal.value,
-    })
+    this._registerObservabilityService.stepLoaded('a')
   }
   infoSiteBaseUrl = environment.INFO_SITE
 
@@ -94,10 +92,7 @@ export class StepAComponent
   }
 
   signIn() {
-    this._observability.recordEvent(
-      'orcid_registration',
-      'step-a-sign-in-button-clicked'
-    )
+    this._registerObservabilityService.signInButtonClicked()
     this._platform
       .get()
       .pipe(first())
