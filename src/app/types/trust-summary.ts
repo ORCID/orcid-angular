@@ -5,6 +5,10 @@ export interface TrustedSummary {
   orcid: string
   employmentAffiliations: ActivitySummary[]
   employmentAffiliationsCount: number
+  educationQualifications: ActivitySummary[]
+  educationQualificationsCount: number
+  validatedResearchResources: number
+  selfAssertedResearchResources: number
   creation: string
   lastModified: string
   validatedWorks: number
@@ -16,6 +20,8 @@ export interface TrustedSummary {
   professionalActivities: ActivitySummary[]
   professionalActivitiesCount: number
   externalIdentifiers: ExternalIdentifierSummary[]
+  emailDomainsCount: number
+  emailDomains: EmailDomains[]
   status: 'locked' | 'deprecated' | 'deactivated' | 'active'
 }
 
@@ -28,6 +34,10 @@ export interface ActivitySummary {
   title: any
   type: AffiliationType
   validated: boolean
+}
+
+export interface EmailDomains {
+  value: string
 }
 
 export interface ExternalIdentifierSummary {

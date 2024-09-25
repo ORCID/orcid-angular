@@ -1,3 +1,19 @@
+## v2.105.5 - 2024-09-25
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.105.4...v2.105.5)
+
+- [#2353](https://github.com/ORCID/orcid-angular/pull/2353): 24-sep-bach-fixes
+
+## v2.105.4 - 2024-09-24
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.105.3...v2.105.4)
+
+- [#2352](https://github.com/ORCID/orcid-angular/pull/2352): summary-batch-update-sep
+
+## v2.105.3 - 2024-09-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.105.2...v2.105.3)
+
 ## v2.105.2 - 2024-09-13
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.105.1...v2.105.2)
