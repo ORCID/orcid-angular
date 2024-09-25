@@ -110,7 +110,6 @@
       'panel-body-3-cols': !mobile
     }"
   >
-
     <div
       class="column"
       [ngClass]="{ 'column-border': !mobile && (twoColumns || threeColumns) }"
@@ -226,7 +225,12 @@
     <div
       class="column"
       [ngClass]="{ 'column-border': !mobile && threeColumns }"
-      *ngIf="peerReviews?.length || works?.length || funds?.length || researchResoruces?.length"
+      *ngIf="
+        peerReviews?.length ||
+        works?.length ||
+        funds?.length ||
+        researchResoruces?.length
+      "
     >
       <ng-container *ngIf="works?.length">
         <a
@@ -335,7 +339,7 @@
       class="column"
       *ngIf="
         trustedSummary.professionalActivities?.length ||
-        externalIdentifiers?.length || 
+        externalIdentifiers?.length ||
         trustedSummary.educationQualifications?.length
       "
     >
@@ -396,8 +400,8 @@
           [url]="trustedSummary?.orcid + '#education-and-qualification'"
           [activitySummary]="trustedSummary.educationQualifications"
           [count]="trustedSummary.educationQualificationsCount"
-          [moreLabel]="labelViewEducationQualificationsActivities"
-          [moreLabelSingular]="labelViewEducationQualificationsActivitie"
+          [moreLabel]="labelMoreEducationQualifications"
+          [moreLabelSingular]="labelMoreEducationQualification"
           [ariaLabelActivitySection]="ariaLabelEducationQualificationsActions"
           [standaloneMode]="standaloneMode"
           [activitySection]="'education-and-qualification'"
