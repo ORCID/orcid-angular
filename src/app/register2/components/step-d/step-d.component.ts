@@ -2,6 +2,9 @@ import { Component, Input } from '@angular/core'
 
 import { ReactivationLocal } from '../../../types/reactivation.local'
 import { BaseStepDirective } from '../BaseStep'
+import { CustomEventService } from 'src/app/core/observability-events/observability-events.service'
+import { RegisterStateService } from '../../register-state.service'
+import { RegisterObservabilityService } from '../../register-obserability'
 
 @Component({
   selector: 'app-step-d',
@@ -18,7 +21,15 @@ export class StepDComponent extends BaseStepDirective {
 
   nextButtonWasClicked = false
 
-  constructor() {
+  constructor(private _registrationStateService: RegisterStateService, private _registerObservabilityService: RegisterObservabilityService) {
     super()
+  }
+
+  nextButton2() {
+    this._registrationStateService.registerStepperButtonClicked('d', 'next')
+    this._registerObservabilityService.stepDNextButtonClicked(this.formGroup)
+  }
+  backButton() {
+    this._registrationStateService.registerStepperButtonClicked('d', 'back')
   }
 }

@@ -11,6 +11,8 @@ import { VISIBILITY_OPTIONS } from 'src/app/constants'
 import { Register2Service } from 'src/app/core/register2/register2.service'
 
 import { BaseForm } from '../BaseForm'
+import { RegisterStateService } from '../../register-state.service'
+import { RegisterObservabilityService } from '../../register-obserability'
 
 @Component({
   selector: 'app-form-visibility',
@@ -44,11 +46,16 @@ export class FormVisibilityComponent
   activitiesVisibilityDefault = new UntypedFormControl('', Validators.required)
   constructor(
     private _register: Register2Service,
-    private _errorStateMatcher: ErrorStateMatcher
+    private _errorStateMatcher: ErrorStateMatcher,
+    private _registerStateService: RegisterStateService,
+    private _registerObservability: RegisterObservabilityService
   ) {
     super()
   }
   ngOnInit() {
+    this._registerStateService.getNextButtonClickFor('c').subscribe(() => {
+      this._registerObservability.stepCNextButtonClicked(this.form)
+    })
     this.form = new UntypedFormGroup({
       activitiesVisibilityDefault: this.activitiesVisibilityDefault,
     })

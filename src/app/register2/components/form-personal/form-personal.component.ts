@@ -50,6 +50,8 @@ import { SignInService } from 'src/app/core/sign-in/sign-in.service'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 import { ERROR_REPORT } from 'src/app/errors'
 import { RegisterStateService } from '../../register-state.service'
+import { CustomEventService } from 'src/app/core/observability-events/observability-events.service'
+import { RegisterObservabilityService } from '../../register-obserability'
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
     control: FormControl | null,
@@ -88,7 +90,6 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class FormPersonalComponent extends BaseForm implements OnInit {
   matcher = new MyErrorStateMatcher()
-  @Input() nextButtonWasClicked: boolean
   @Input() reactivation: ReactivationLocal
   @ViewChild(FormGroupDirective) formGroupDir: FormGroupDirective
   emailPlaceholder = $localize`:@@register.emailPlaceholder:The email address you use most`
@@ -104,6 +105,7 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
   undefinedEmail: boolean
   emailsAreValidAlreadyChecked: boolean
   registerBackendErrors: RegisterBackendErrors
+  nextButtonWasClicked: boolean
 
   constructor(
     private _register: Register2Service,
@@ -115,7 +117,8 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
     private _signIn: SignInService,
     private _errorHandler: ErrorHandlerService,
     private _registerStateService: RegisterStateService,
-    @Inject(WINDOW) private window: Window
+    @Inject(WINDOW) private window: Window,
+    private _registerObservability: RegisterObservabilityService
   ) {
     super()
   }
@@ -129,6 +132,10 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
   })
 
   ngOnInit() {
+    this._registerStateService.getNextButtonClickFor('a').subscribe((value) => {
+      this.nextButtonWasClicked = true
+      this._registerObservability.stepANextButtonClicked(this.form)
+    })
     this.emails = new UntypedFormGroup(
       {
         email: new UntypedFormControl('', {

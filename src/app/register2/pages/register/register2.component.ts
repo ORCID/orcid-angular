@@ -32,6 +32,7 @@ import { ThirdPartyAuthData } from 'src/app/types/sign-in-data.endpoint'
 import { GoogleTagManagerService } from '../../../core/google-tag-manager/google-tag-manager.service'
 import { SearchService } from '../../../core/search/search.service'
 import { ReactivationLocal } from '../../../types/reactivation.local'
+import { CustomEventService } from 'src/app/core/observability-events/observability-events.service'
 
 @Component({
   selector: 'app-register-2',
@@ -83,7 +84,8 @@ export class Register2Component implements OnInit, AfterViewInit {
     private _router: Router,
     private _errorHandler: ErrorHandlerService,
     private _userInfo: UserService,
-    private _searchService: SearchService
+    private _searchService: SearchService,
+    private _observability: CustomEventService,
   ) {
     _platformInfo.get().subscribe((platform) => {
       this.platform = platform
@@ -92,6 +94,9 @@ export class Register2Component implements OnInit, AfterViewInit {
     })
   }
   ngOnInit() {
+
+    this._observability.startJourney('orcid_registration')
+
     this._register.getRegisterForm().subscribe()
 
     this.FormGroupStepA = this._formBuilder.group({
@@ -171,6 +176,13 @@ export class Register2Component implements OnInit, AfterViewInit {
                 new Error('registerUnexpectedValidateFail'),
                 ERROR_REPORT.REGISTER
               )
+              this._observability.recordEvent(
+                'orcid_registration',
+                'register-unexpected-validate-fail',
+                {
+                  validator,
+                }
+              )
             }
             return this._register.register(
               this.FormGroupStepA,
@@ -186,6 +198,13 @@ export class Register2Component implements OnInit, AfterViewInit {
         .subscribe((response) => {
           this.loading = false
           if (response.url) {
+            this._observability.recordEvent(
+              'orcid_registration',
+              'register-success',
+              {
+                response,
+              }
+            )
             const analyticsReports: Observable<void>[] = []
 
             analyticsReports.push(
@@ -208,6 +227,13 @@ export class Register2Component implements OnInit, AfterViewInit {
                 () => this.afterRegisterRedirectionHandler(response)
               )
           } else {
+            this._observability.recordEvent(
+              'orcid_registration',
+              'register-unexpected-confirmation',
+              {
+                response,
+              }
+            )
             this._errorHandler.handleError(
               new Error('registerUnexpectedConfirmation'),
               ERROR_REPORT.REGISTER

@@ -22,6 +22,8 @@ import { OrcidValidators } from 'src/app/validators'
 import { BaseForm } from '../BaseForm'
 import { LiveAnnouncer } from '@angular/cdk/a11y'
 import { environment } from 'src/environments/environment'
+import { RegisterObservabilityService } from '../../register-obserability'
+import { RegisterStateService } from '../../register-state.service'
 
 @Component({
   selector: 'app-form-password',
@@ -63,7 +65,9 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
   hasNumberPattern = HAS_NUMBER
   hasLetterOrSymbolPattern = HAS_LETTER_OR_SYMBOL
   @Input() personalData: RegisterForm
-  @Input() nextButtonWasClicked: boolean
+  nextButtonWasClicked: boolean
+
+
   currentValidate8orMoreCharactersStatus: boolean
   ccurentValidateAtLeastALetterOrSymbolStatus: boolean
   currentValidateAtLeastANumber: boolean
@@ -72,11 +76,17 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
   constructor(
     private _register: Register2Service,
     private _liveAnnouncer: LiveAnnouncer,
-    private _changeDetectorRef: ChangeDetectorRef
+    private _changeDetectorRef: ChangeDetectorRef,
+    private _registerObservability: RegisterObservabilityService,
+    private _registerStateService: RegisterStateService
   ) {
     super()
   }
   ngOnInit() {
+    this._registerStateService.getNextButtonClickFor('b').subscribe((value) => { 
+      this.nextButtonWasClicked = true
+      this._registerObservability.stepBNextButtonClicked(this.form)
+    })
     this.form = new UntypedFormGroup(
       {
         password: new UntypedFormControl('', {

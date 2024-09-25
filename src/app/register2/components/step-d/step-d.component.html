@@ -52,7 +52,7 @@
           mat-raised-button
           color="primary"
           [disabled]="loading"
-          (click)="nextButtonWasClicked = true"
+          (click)="nextButton2()"
           matStepperNext
         >
           <ng-container
@@ -74,6 +74,7 @@
           matStepperPrevious
           type="button"
           id="step-d-back-button"
+          (click)="backButton()"
         >
           <a i18n="@@shared.previousStep"> Previous Step</a>
         </button>

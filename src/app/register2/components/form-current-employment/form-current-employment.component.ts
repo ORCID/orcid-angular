@@ -32,6 +32,7 @@ import { RecordAffiliationService } from 'src/app/core/record-affiliations/recor
 import { dateMonthYearValidator } from 'src/app/shared/validators/date/date.validator'
 import { RegisterStateService } from '../../register-state.service'
 import { OrgDisambiguated } from 'src/app/types'
+import { RegisterObservabilityService } from '../../register-obserability'
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
     control: FormControl | null,
@@ -85,7 +86,7 @@ export class FormCurrentEmploymentComponent extends BaseForm implements OnInit {
 
   filteredOptions: Observable<Organization[]>
 
-  @Input() nextButtonWasClicked: boolean
+  nextButtonWasClicked: boolean
   @Input() reactivation: ReactivationLocal
   @ViewChild(FormGroupDirective) formGroupDir: FormGroupDirective
   ariaLabelClearOrganization = $localize`:@@register.clearOrganization:Clear organization`
@@ -119,7 +120,8 @@ export class FormCurrentEmploymentComponent extends BaseForm implements OnInit {
     private _liveAnnouncer: LiveAnnouncer,
     private _recordAffiliationService: RecordAffiliationService,
     private _formBuilder: FormBuilder,
-    private registerStateService: RegisterStateService
+    private registerStateService: RegisterStateService,
+    private _registerObservabilityService: RegisterObservabilityService
   ) {
     super()
     this._platform.get().subscribe((platform) => {
@@ -129,6 +131,13 @@ export class FormCurrentEmploymentComponent extends BaseForm implements OnInit {
   }
 
   ngOnInit() {
+    this.registerStateService.getNextButtonClickFor('c2').subscribe(() => {
+      this.nextButtonWasClicked = true
+      this._registerObservabilityService.stepC2NextButtonClicked(this.form)
+    })
+    this.registerStateService.getSkipButtonClickFor('c2').subscribe(() => {
+      this._registerObservabilityService.stepC2SkipButtonClicked(this.form)
+    })
     this.registerStateService.matchOrganization$.subscribe((organization) => {
       this.organization = organization
       this.form.patchValue({

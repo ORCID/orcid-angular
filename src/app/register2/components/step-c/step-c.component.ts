@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core'
 
 import { ReactivationLocal } from '../../../types/reactivation.local'
 import { BaseStepDirective } from '../BaseStep'
+import { CustomEventService } from 'src/app/core/observability-events/observability-events.service'
+import { RegisterStateService } from '../../register-state.service'
 
 @Component({
   selector: 'app-step-c',
@@ -16,7 +18,14 @@ export class StepCComponent extends BaseStepDirective {
   @Input() loading
   @Input() reactivation: ReactivationLocal
 
-  constructor() {
+  constructor(private _registrationStateService: RegisterStateService) {
     super()
+  }
+
+  nextButton2() {
+    this._registrationStateService.registerStepperButtonClicked('c', 'next')
+  }
+  backButton() {
+    this._registrationStateService.registerStepperButtonClicked('c', 'back')
   }
 }

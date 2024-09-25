@@ -41,7 +41,7 @@ export class CustomEventService {
    * @param additionalAttributes Any additional attributes related to the event.
    */
   recordEvent(
-    journeyType: string,
+    journeyType: journeyType,
     eventName: string,
     additionalAttributes: any = {}
   ): void {
@@ -68,6 +68,7 @@ export class CustomEventService {
       console.debug(
         `-> Event "${eventName}" recorded for journey "${journeyType}" with elapsed time ${elapsedTime}ms`
       )
+      console.log(eventAttributes)
     }
   }
 
@@ -100,7 +101,8 @@ export class CustomEventService {
     delete this.journeys[journeyType]
 
     console.log(
-      `Journey "${journeyType}" finished with elapsed time ${elapsedTime}ms`
+      `Journey "${journeyType}" finished with elapsed time ${elapsedTime}ms`,
+      console.log(finalAttributes)
     )
   }
 }
