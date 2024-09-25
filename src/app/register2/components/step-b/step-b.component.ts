@@ -25,7 +25,6 @@ export class StepBComponent extends BaseStepDirective implements OnInit {
     super()
   }
   ngOnInit(): void {
-    this._registerObservabilityService.stepLoaded('b')
   }
 
   nextButtonWasClicked = false

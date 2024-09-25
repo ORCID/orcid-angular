@@ -1,4 +1,10 @@
-import { Component, DoCheck, forwardRef, OnInit } from '@angular/core'
+import {
+  Component,
+  DoCheck,
+  forwardRef,
+  OnDestroy,
+  OnInit,
+} from '@angular/core'
 import {
   NG_ASYNC_VALIDATORS,
   NG_VALUE_ACCESSOR,
@@ -13,6 +19,8 @@ import { Register2Service } from 'src/app/core/register2/register2.service'
 import { BaseForm } from '../BaseForm'
 import { RegisterStateService } from '../../register-state.service'
 import { RegisterObservabilityService } from '../../register-observability.service'
+import { Subject } from 'rxjs'
+import { takeUntil } from 'rxjs/operators'
 
 @Component({
   selector: 'app-form-visibility',
@@ -38,12 +46,13 @@ import { RegisterObservabilityService } from '../../register-observability.servi
 })
 export class FormVisibilityComponent
   extends BaseForm
-  implements OnInit, DoCheck
+  implements OnInit, DoCheck, OnDestroy
 {
   ariaLabelMoreInformationOnVisibility = $localize`:@@register.ariaLabelMoreInformationOnVisibility:More information on visibility settings (Opens in new tab)`
   visibilityOptions = VISIBILITY_OPTIONS
   errorState = false
   activitiesVisibilityDefault = new UntypedFormControl('', Validators.required)
+  destroy = new Subject()
   constructor(
     private _register: Register2Service,
     private _errorStateMatcher: ErrorStateMatcher,
@@ -52,10 +61,16 @@ export class FormVisibilityComponent
   ) {
     super()
   }
+  ngOnDestroy(): void {
+    this.destroy.next()
+  }
   ngOnInit() {
-    this._registerStateService.getNextButtonClickFor('c').subscribe(() => {
-      this._registerObservability.stepCNextButtonClicked(this.form)
-    })
+    this._registerStateService
+      .getNextButtonClickFor('c')
+      .pipe(takeUntil(this.destroy))
+      .subscribe(() => {
+        this._registerObservability.stepCNextButtonClicked(this.form)
+      })
     this.form = new UntypedFormGroup({
       activitiesVisibilityDefault: this.activitiesVisibilityDefault,
     })

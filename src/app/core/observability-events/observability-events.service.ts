@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core'
 import { WINDOW } from 'src/app/cdk/window'
 import { environment } from 'src/environments/environment'
 
-export type journeyType = 'orcid_registration' | 'orcid_update_emails'
+export type JourneyType = 'orcid_registration' | 'orcid_update_emails'
 @Injectable({
   providedIn: 'root',
 })
@@ -18,7 +18,7 @@ export class CustomEventService {
    * @param journeyType The type of the journey (e.g., 'orcid_registration', 'orcid_update_emails').
    * @param attributes Additional attributes to store with the journey
    */
-  startJourney(journeyType: journeyType, attributes: any = {}): void {
+  startJourney(journeyType: JourneyType, attributes: any = {}): void {
 
 
     // Record the start time and initial attributes
@@ -41,7 +41,7 @@ export class CustomEventService {
    * @param additionalAttributes Any additional attributes related to the event.
    */
   recordEvent(
-    journeyType: journeyType,
+    journeyType: JourneyType,
     eventName: string,
     additionalAttributes: any = {}
   ): void {

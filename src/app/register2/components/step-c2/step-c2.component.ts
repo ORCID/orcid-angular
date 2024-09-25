@@ -28,7 +28,6 @@ export class StepC2Component extends BaseStepDirective implements OnInit {
     super()
   }
   ngOnInit(): void {
-    this._registerObservabilityService.stepLoaded('c2')
   }
 
   optionalNextStep() {

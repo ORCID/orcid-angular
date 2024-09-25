@@ -46,7 +46,6 @@ export class StepAComponent
   }
 
   ngOnInit(): void {
-    this._registerObservabilityService.stepLoaded('a')
   }
   infoSiteBaseUrl = environment.INFO_SITE
 

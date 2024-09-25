@@ -3,7 +3,10 @@ import { OrganizationsService } from '../core'
 import { Organization } from 'src/app/types/record-affiliation.endpoint'
 import { Subject } from 'rxjs'
 import { OrgDisambiguated } from '../types'
-import { CustomEventService } from '../core/observability-events/observability-events.service'
+import {
+  CustomEventService,
+  JourneyType,
+} from '../core/observability-events/observability-events.service'
 import { UntypedFormArray, UntypedFormGroup } from '@angular/forms'
 import { RegisterStateService } from './register-state.service'
 import init from 'helphero'
@@ -15,6 +18,7 @@ export class RegisterObservabilityService {
   matchOrganization$ = new Subject<string | Organization>()
   primaryEmailMatched: Organization
   secondaryEmail: Organization
+  registrationJourneyStarted: any
   constructor(
     private _observability: CustomEventService,
     private _registrationStateService: RegisterStateService
@@ -143,13 +147,38 @@ export class RegisterObservabilityService {
     )
   }
 
-  stepLoaded(step: 'a' | 'b' | 'c' | 'c2' | 'd') {
+  stepLoaded(step: JourneyType) {
     this._observability.recordEvent('orcid_registration', `step-${step}-loaded`)
   }
 
-  initializeHelpHero(reactivation) {
-    this._observability.startJourney('orcid_registration', {
-      reactivation,
-    })
+  initializeJourney(reactivation) {
+    if (!this.registrationJourneyStarted) {
+      this._observability.startJourney('orcid_registration', {
+        ...reactivation,
+      })
+      this.registrationJourneyStarted = true
+    }
+  }
+
+  completeJourney(attributes: any = {}) {
+    this._observability.recordEvent(
+      'orcid_registration',
+      'journey-complete',
+      attributes
+    )
+    this._observability.finishJourney('orcid_registration')
+    this.registrationJourneyStarted = false
+  }
+
+  reportRegisterEvent(eventName: string, attributes: any = {}) {
+    this._observability.recordEvent('orcid_registration', eventName, attributes)
+  }
+
+  reportRegisterErrorEvent(eventName: string, attributes: any = {}) {
+    this._observability.recordEvent(
+      'orcid_registration',
+      `${eventName}-error`,
+      attributes
+    )
   }
 }

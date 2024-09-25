@@ -1,4 +1,11 @@
-import { Component, forwardRef, Input, OnInit, ViewChild } from '@angular/core'
+import {
+  Component,
+  forwardRef,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core'
 import {
   FormBuilder,
   FormControl,
@@ -14,7 +21,7 @@ import {
 import { Register2Service } from 'src/app/core/register2/register2.service'
 import { OrcidValidators } from 'src/app/validators'
 
-import { first, switchMap, tap } from 'rxjs/operators'
+import { first, switchMap, takeUntil, tap } from 'rxjs/operators'
 import { ReactivationService } from '../../../core/reactivation/reactivation.service'
 import { ReactivationLocal } from '../../../types/reactivation.local'
 import { BaseForm } from '../BaseForm'
@@ -27,7 +34,7 @@ import {
   AffiliationType,
   Organization,
 } from 'src/app/types/record-affiliation.endpoint'
-import { EMPTY, Observable, of } from 'rxjs'
+import { EMPTY, Observable, of, Subject } from 'rxjs'
 import { RecordAffiliationService } from 'src/app/core/record-affiliations/record-affiliations.service'
 import { dateMonthYearValidator } from 'src/app/shared/validators/date/date.validator'
 import { RegisterStateService } from '../../register-state.service'
@@ -70,7 +77,10 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     },
   ],
 })
-export class FormCurrentEmploymentComponent extends BaseForm implements OnInit {
+export class FormCurrentEmploymentComponent
+  extends BaseForm
+  implements OnInit, OnDestroy
+{
   // matcher = new MyErrorStateMatcher()
   selectedOrganizationFromDatabase: Organization
   displayOrganizationHint: boolean
@@ -78,6 +88,7 @@ export class FormCurrentEmploymentComponent extends BaseForm implements OnInit {
   private _type: AffiliationType
   affiliationFound = false
   rorIdHasBeenMatched: boolean
+  destroy = new Subject()
 
   @Input()
   public get type(): AffiliationType {
@@ -129,15 +140,24 @@ export class FormCurrentEmploymentComponent extends BaseForm implements OnInit {
       this.isMobile = platform.columns4 || platform.columns8
     })
   }
+  ngOnDestroy(): void {
+    this.destroy.next()
+  }
 
   ngOnInit() {
-    this.registerStateService.getNextButtonClickFor('c2').subscribe(() => {
-      this.nextButtonWasClicked = true
-      this._registerObservabilityService.stepC2NextButtonClicked(this.form)
-    })
-    this.registerStateService.getSkipButtonClickFor('c2').subscribe(() => {
-      this._registerObservabilityService.stepC2SkipButtonClicked(this.form)
-    })
+    this.registerStateService
+      .getNextButtonClickFor('c2')
+      .pipe(takeUntil(this.destroy))
+      .subscribe(() => {
+        this.nextButtonWasClicked = true
+        this._registerObservabilityService.stepC2NextButtonClicked(this.form)
+      })
+    this.registerStateService
+      .getSkipButtonClickFor('c2')
+      .pipe(takeUntil(this.destroy))
+      .subscribe(() => {
+        this._registerObservabilityService.stepC2SkipButtonClicked(this.form)
+      })
     this.registerStateService.matchOrganization$.subscribe((organization) => {
       this.organization = organization
       this.form.patchValue({

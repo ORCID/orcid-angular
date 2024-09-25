@@ -27,7 +27,6 @@ export class StepDComponent extends BaseStepDirective {
     super()
   }
   ngOnInit(): void {
-    this._registerObservabilityService.stepLoaded('d')
   }
 
   nextButton2() {

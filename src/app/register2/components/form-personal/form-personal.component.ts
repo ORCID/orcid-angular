@@ -5,6 +5,7 @@ import {
   forwardRef,
   Inject,
   Input,
+  OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core'
@@ -30,6 +31,7 @@ import {
   startWith,
   switchMap,
   take,
+  takeUntil,
 } from 'rxjs/operators'
 import { ReactivationService } from '../../../core/reactivation/reactivation.service'
 import { ReactivationLocal } from '../../../types/reactivation.local'
@@ -51,7 +53,8 @@ import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.se
 import { ERROR_REPORT } from 'src/app/errors'
 import { RegisterStateService } from '../../register-state.service'
 import { RegisterObservabilityService } from '../../register-observability.service'
-export class MyErrorStateMatcher implements ErrorStateMatcher {
+import { Subject } from 'rxjs'
+export class MyErrorStateMatcher implements ErrorStateMatcher{
   isErrorState(
     control: FormControl | null,
     form: FormGroupDirective | NgForm | null
@@ -87,7 +90,10 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     },
   ],
 })
-export class FormPersonalComponent extends BaseForm implements OnInit {
+export class FormPersonalComponent
+  extends BaseForm
+  implements OnInit, OnDestroy
+{
   matcher = new MyErrorStateMatcher()
   @Input() reactivation: ReactivationLocal
   @ViewChild(FormGroupDirective) formGroupDir: FormGroupDirective
@@ -105,6 +111,7 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
   emailsAreValidAlreadyChecked: boolean
   registerBackendErrors: RegisterBackendErrors
   nextButtonWasClicked: boolean
+  destroy = new Subject()
 
   constructor(
     private _register: Register2Service,
@@ -121,6 +128,9 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
   ) {
     super()
   }
+  ngOnDestroy(): void {
+    this.destroy.next()
+  }
 
   emails: UntypedFormGroup = new UntypedFormGroup({})
   additionalEmails: UntypedFormGroup = new UntypedFormGroup({
@@ -131,10 +141,13 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
   })
 
   ngOnInit() {
-    this._registerStateService.getNextButtonClickFor('a').subscribe((value) => {
-      this.nextButtonWasClicked = true
-      this._registerObservability.stepANextButtonClicked(this.form)
-    })
+    this._registerStateService
+      .getNextButtonClickFor('a')
+      .pipe(takeUntil(this.destroy))
+      .subscribe((value) => {
+        this.nextButtonWasClicked = true
+        this._registerObservability.stepANextButtonClicked(this.form)
+      })
     this.emails = new UntypedFormGroup(
       {
         email: new UntypedFormControl('', {
@@ -318,7 +331,9 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
     const validStatus = this.emailConfirmationValid && this.emailValid
     if (!this.emailsAreValidAlreadyChecked && validStatus) {
       this.announce($localize`:@@register.emailAreValid:Your emails match`)
+      this._registerObservability.reportRegisterEvent('emails_match')
     } else if (this.emailsAreValidAlreadyChecked && !validStatus) {
+      this._registerObservability.reportRegisterEvent('emails_do_not_match')
       this.announce(
         $localize`:@@register.emailAreNotValid:Your emails do not match`
       )
