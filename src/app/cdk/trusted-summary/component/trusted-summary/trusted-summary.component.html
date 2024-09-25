@@ -110,6 +110,7 @@
       'panel-body-3-cols': !mobile
     }"
   >
+
     <div
       class="column"
       [ngClass]="{ 'column-border': !mobile && (twoColumns || threeColumns) }"
@@ -144,13 +145,15 @@
           [activitySection]="'affiliations'"
         ></app-summary-panel>
       </ng-container>
-      <ng-container *ngIf="emailDomains.length > 1">
+      <ng-container *ngIf="emailDomains.length >= 1">
         <a
           tabindex="0"
           rel="noopener noreferrer"
           (click)="goToActivitySection('emails-panel')"
           (keydown)="goToActivitySection('emails-panel', $event)"
           [attr.aria-label]="ariaLabelEmailDomains"
+          (mouseenter)="emailDomainsHover = true"
+          (mouseleave)="emailDomainsHover = false"
         >
           <h3
             class="orc-font-small-print"
@@ -223,7 +226,7 @@
     <div
       class="column"
       [ngClass]="{ 'column-border': !mobile && threeColumns }"
-      *ngIf="peerReviews?.length || works?.length || funds?.length"
+      *ngIf="peerReviews?.length || works?.length || funds?.length || researchResoruces?.length"
     >
       <ng-container *ngIf="works?.length">
         <a
@@ -332,7 +335,8 @@
       class="column"
       *ngIf="
         trustedSummary.professionalActivities?.length ||
-        externalIdentifiers?.length
+        externalIdentifiers?.length || 
+        trustedSummary.educationQualifications?.length
       "
     >
       <ng-container *ngIf="trustedSummary.professionalActivities?.length">
@@ -406,6 +410,8 @@
           (click)="goToActivitySection('other-identifiers')"
           (keydown)="goToActivitySection('other-identifiers', $event)"
           [attr.aria-label]="ariaLabelIdentifiers"
+          (mouseenter)="externalIdentifiersHover = true"
+          (mouseleave)="externalIdentifiersHover = false"
         >
           <h3
             class="orc-font-small-print"
