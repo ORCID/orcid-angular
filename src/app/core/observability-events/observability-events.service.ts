@@ -19,8 +19,6 @@ export class CustomEventService {
    * @param attributes Additional attributes to store with the journey
    */
   startJourney(journeyType: journeyType, attributes: any = {}): void {
-
-
     // Record the start time and initial attributes
     this.journeys[journeyType] = {
       startTime: Date.now(),
