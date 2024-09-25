@@ -1,3 +1,9 @@
+## v2.105.5 - 2024-09-25
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.105.4...v2.105.5)
+
+- [#2353](https://github.com/ORCID/orcid-angular/pull/2353): 24-sep-bach-fixes
+
 ## v2.105.4 - 2024-09-24
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.105.3...v2.105.4)
