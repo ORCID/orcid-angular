@@ -311,8 +311,6 @@ export class Register2Component implements OnInit, AfterViewInit {
         nativeElementNextStep.scrollIntoView()
       }, 200)
     }
-
-    // Report the step change
   }
 
   /**
