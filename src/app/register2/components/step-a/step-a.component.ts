@@ -3,6 +3,7 @@ import {
   Component,
   ElementRef,
   Input,
+  OnInit,
   ViewChild,
 } from '@angular/core'
 
@@ -13,6 +14,8 @@ import { ApplicationRoutes } from 'src/app/constants'
 import { environment } from 'src/environments/environment'
 import { ReactivationLocal } from '../../../types/reactivation.local'
 import { BaseStepDirective } from '../BaseStep'
+import { RegisterStateService } from '../../register-state.service'
+import { RegisterObservabilityService } from '../../register-observability.service'
 
 @Component({
   selector: 'app-step-a',
@@ -24,18 +27,30 @@ import { BaseStepDirective } from '../BaseStep'
   ],
   preserveWhitespaces: true,
 })
-export class StepAComponent extends BaseStepDirective implements AfterViewInit {
+export class StepAComponent
+  extends BaseStepDirective
+  implements AfterViewInit, OnInit
+{
   @ViewChild('firstInput') firstInput: ElementRef
 
   @Input() reactivation: ReactivationLocal
   nextButtonWasClicked: boolean
 
-  constructor(private _platform: PlatformInfoService, private _router: Router) {
+  constructor(
+    private _platform: PlatformInfoService,
+    private _router: Router,
+    private _registerStateService: RegisterStateService,
+    private _registerObservabilityService: RegisterObservabilityService
+  ) {
     super()
+  }
+
+  ngOnInit(): void {
   }
   infoSiteBaseUrl = environment.INFO_SITE
 
   goBack() {
+    this._registerStateService.registerStepperButtonClicked('a', 'back')
     this._platform
       .get()
       .pipe(first())
@@ -72,10 +87,11 @@ export class StepAComponent extends BaseStepDirective implements AfterViewInit {
 
   nextButton2() {
     this.nextButtonWasClicked = true
-    // this.formGroup.controls.personal.markAsTouched()
+    this._registerStateService.registerStepperButtonClicked('a', 'next')
   }
 
   signIn() {
+    this._registerObservabilityService.signInButtonClicked()
     this._platform
       .get()
       .pipe(first())
@@ -98,5 +114,9 @@ export class StepAComponent extends BaseStepDirective implements AfterViewInit {
           },
         })
       })
+  }
+
+  backButton() {
+    this._registerStateService.registerStepperButtonClicked('a', 'back')
   }
 }

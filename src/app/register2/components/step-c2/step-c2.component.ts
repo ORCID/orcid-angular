@@ -1,8 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 
 import { ReactivationLocal } from '../../../types/reactivation.local'
 import { BaseStepDirective } from '../BaseStep'
 import { FormBuilder, FormGroup } from '@angular/forms'
+import { RegisterStateService } from '../../register-state.service'
+import { RegisterObservabilityService } from '../../register-observability.service'
 
 @Component({
   selector: 'app-step-c2',
@@ -13,15 +15,16 @@ import { FormBuilder, FormGroup } from '@angular/forms'
     '../register2.scss-theme.scss',
   ],
 })
-export class StepC2Component extends BaseStepDirective {
+export class StepC2Component extends BaseStepDirective implements OnInit {
   @Input() loading
   @Input() reactivation: ReactivationLocal
   nextButtonWasClicked: boolean
   @Output() formGroupStepC2OptionalChange = new EventEmitter<boolean>()
 
-  constructor(private _formBuilder: FormBuilder) {
+  constructor(private _registrationStateService: RegisterStateService) {
     super()
   }
+  ngOnInit(): void {}
 
   optionalNextStep() {
     this.formGroup.setValue({
@@ -35,13 +38,16 @@ export class StepC2Component extends BaseStepDirective {
         },
       },
     })
-
     this.formGroupStepC2OptionalChange.emit(true)
-    this.nextButtonWasClicked = true
+    this._registrationStateService.registerStepperButtonClicked('c2', 'skip')
   }
 
-  requiredNextStep() {
+  nextButton2() {
     this.formGroupStepC2OptionalChange.emit(false)
-    this.nextButtonWasClicked = true
+    this._registrationStateService.registerStepperButtonClicked('c2', 'next')
+  }
+
+  backButton() {
+    this._registrationStateService.registerStepperButtonClicked('c2', 'back')
   }
 }

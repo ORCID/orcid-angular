@@ -42,7 +42,6 @@
     <form [formGroup]="formGroup" #form>
       <app-form-current-employment
         formControlName="affiliations"
-        [nextButtonWasClicked]="nextButtonWasClicked"
       ></app-form-current-employment>
       <div class="step-actions margin-top-12">
         <button
@@ -50,7 +49,7 @@
           mat-raised-button
           color="primary"
           [disabled]="loading"
-          (click)="requiredNextStep()"
+          (click)="nextButton2()"
         >
           <ng-container
             *ngIf="!reactivation?.isReactivation"
@@ -85,6 +84,7 @@
           matStepperPrevious
           type="button"
           id="step-c2-back-button"
+          (click)="backButton()"
         >
           <a i18n="@@shared.previousStep"> Previous Step</a>
         </button>

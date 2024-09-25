@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core'
 import { WINDOW } from 'src/app/cdk/window'
 import { environment } from 'src/environments/environment'
 
-export type journeyType = 'orcid_registration' | 'orcid_update_emails'
+export type JourneyType = 'orcid_registration' | 'orcid_update_emails'
 @Injectable({
   providedIn: 'root',
 })
@@ -18,7 +18,7 @@ export class CustomEventService {
    * @param journeyType The type of the journey (e.g., 'orcid_registration', 'orcid_update_emails').
    * @param attributes Additional attributes to store with the journey
    */
-  startJourney(journeyType: journeyType, attributes: any = {}): void {
+  startJourney(journeyType: JourneyType, attributes: any = {}): void {
     // Record the start time and initial attributes
     this.journeys[journeyType] = {
       startTime: Date.now(),
@@ -27,7 +27,7 @@ export class CustomEventService {
 
     if (environment.debugger) {
       console.debug(
-        `-> Journey "${journeyType}" started at ${this.journeys[journeyType].startTime}`
+        `-> Journey "${journeyType}" started at ${this.journeys[journeyType].startTime}`, attributes
       )
     }
   }
@@ -39,7 +39,7 @@ export class CustomEventService {
    * @param additionalAttributes Any additional attributes related to the event.
    */
   recordEvent(
-    journeyType: string,
+    journeyType: JourneyType,
     eventName: string,
     additionalAttributes: any = {}
   ): void {
@@ -64,7 +64,8 @@ export class CustomEventService {
 
     if (environment.debugger) {
       console.debug(
-        `-> Event "${eventName}" recorded for journey "${journeyType}" with elapsed time ${elapsedTime}ms`
+        `-> Event "${eventName}" recorded for journey "${journeyType}" with elapsed time ${elapsedTime}ms`,
+        eventAttributes
       )
     }
   }
@@ -97,8 +98,8 @@ export class CustomEventService {
     // Clean up the journey data
     delete this.journeys[journeyType]
 
-    console.log(
-      `Journey "${journeyType}" finished with elapsed time ${elapsedTime}ms`
+    console.debug(
+      `Journey "${journeyType}" finished with elapsed time ${elapsedTime}ms`, finalAttributes
     )
   }
 }

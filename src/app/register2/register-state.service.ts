@@ -3,12 +3,17 @@ import { OrganizationsService } from '../core'
 import { Organization } from 'src/app/types/record-affiliation.endpoint'
 import { Subject } from 'rxjs'
 import { OrgDisambiguated } from '../types'
+import { filter } from 'rxjs/operators'
 @Injectable({
   providedIn: 'root',
 })
 export class RegisterStateService {
   rorIdHasBeenMatched: boolean = false
   matchOrganization$ = new Subject<string | Organization>()
+  private stepperButtonClicked = new Subject<{
+    step: 'a' | 'b' | 'c' | 'c2' | 'd'
+    direction: 'next' | 'back' | 'skip'
+  }>()
   primaryEmailMatched: Organization
   secondaryEmail: Organization
   constructor(private _organizationsService: OrganizationsService) {}
@@ -63,5 +68,33 @@ export class RegisterStateService {
       this.rorIdHasBeenMatched = false
       this.matchOrganization$.next('')
     }
+  }
+
+  registerStepperButtonClicked(
+    step: 'a' | 'b' | 'c' | 'c2' | 'd',
+    direction: 'next' | 'back' | 'skip'
+  ) {
+    this.stepperButtonClicked.next({ step, direction })
+  }
+
+  getNextButtonClickFor(step: 'a' | 'b' | 'c' | 'c2' | 'd') {
+    return this.stepperButtonClicked
+      .asObservable()
+      .pipe(
+        filter((value) => value.step === step && value.direction === 'next')
+      )
+  }
+  getBackButtonClick() {
+    return this.stepperButtonClicked
+      .asObservable()
+      .pipe(filter((value) => value.direction === 'back'))
+  }
+
+  getSkipButtonClickFor(step: 'a' | 'b' | 'c' | 'c2' | 'd') {
+    return this.stepperButtonClicked
+      .asObservable()
+      .pipe(
+        filter((value) => value.step === step && value.direction === 'skip')
+      )
   }
 }

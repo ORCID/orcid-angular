@@ -45,6 +45,7 @@
           color="primary"
           [disabled]="loading"
           matStepperNext
+          (click)="nextButton2()"
         >
           <ng-container
             *ngIf="!reactivation?.isReactivation"
@@ -65,6 +66,7 @@
           matStepperPrevious
           type="button"
           id="step-c-back-button"
+          (click)="backButton()"
         >
           <a i18n="@@shared.previousStep"> Previous Step</a>
         </button>
