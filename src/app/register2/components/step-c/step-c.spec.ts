@@ -15,6 +15,8 @@ import { RouterTestingModule } from '@angular/router/testing'
 import { WINDOW_PROVIDERS } from 'src/app/cdk/window'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { MatLegacySnackBarModule } from '@angular/material/legacy-snack-bar'
+import { RegisterStateService } from '../../register-state.service'
+import { RegisterObservabilityService } from '../../register-observability.service'
 
 @Component({
   selector: 'app-form-visibility',
@@ -46,8 +48,19 @@ describe('StepCComponent', () => {
         MatLegacySnackBarModule,
       ],
       declarations: [StepCComponent, MockFormVisibilityComponent],
-      providers: [WINDOW_PROVIDERS, SnackbarService],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      providers: [
+        WINDOW_PROVIDERS,
+        SnackbarService,
+        {
+          provide: RegisterStateService,
+          useValue: {},
+        },
+        {
+          provide: RegisterObservabilityService,
+          useValue: {},
+        },
+      ],
     }).compileComponents()
   })
 

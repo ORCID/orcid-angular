@@ -10,6 +10,8 @@ import {
   UntypedFormControl,
   UntypedFormGroup,
 } from '@angular/forms'
+import { RegisterStateService } from '../../register-state.service'
+import { RegisterObservabilityService } from '../../register-observability.service'
 
 @Component({
   selector: 'app-form-current-employment',
@@ -38,6 +40,16 @@ describe('StepCComponent', () => {
     TestBed.configureTestingModule({
       imports: [ReactiveFormsModule],
       declarations: [StepC2Component, MockFormCurrentEmploymentComponent],
+      providers: [
+        {
+          provide: RegisterStateService,
+          useValue: {},
+        },
+        {
+          provide: RegisterObservabilityService,
+          useValue: {},
+        },
+      ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   })
