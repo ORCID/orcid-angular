@@ -19,8 +19,6 @@ export class CustomEventService {
    * @param attributes Additional attributes to store with the journey
    */
   startJourney(journeyType: JourneyType, attributes: any = {}): void {
-
-
     // Record the start time and initial attributes
     this.journeys[journeyType] = {
       startTime: Date.now(),
@@ -29,7 +27,7 @@ export class CustomEventService {
 
     if (environment.debugger) {
       console.debug(
-        `-> Journey "${journeyType}" started at ${this.journeys[journeyType].startTime}`
+        `-> Journey "${journeyType}" started at ${this.journeys[journeyType].startTime}`, attributes
       )
     }
   }
@@ -66,9 +64,9 @@ export class CustomEventService {
 
     if (environment.debugger) {
       console.debug(
-        `-> Event "${eventName}" recorded for journey "${journeyType}" with elapsed time ${elapsedTime}ms`
+        `-> Event "${eventName}" recorded for journey "${journeyType}" with elapsed time ${elapsedTime}ms`,
+        eventAttributes
       )
-      console.log(eventAttributes)
     }
   }
 
@@ -100,9 +98,8 @@ export class CustomEventService {
     // Clean up the journey data
     delete this.journeys[journeyType]
 
-    console.log(
-      `Journey "${journeyType}" finished with elapsed time ${elapsedTime}ms`,
-      console.log(finalAttributes)
+    console.debug(
+      `Journey "${journeyType}" finished with elapsed time ${elapsedTime}ms`, finalAttributes
     )
   }
 }

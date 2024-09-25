@@ -77,8 +77,6 @@ export class RegisterObservabilityService {
   }
 
   stepC2NextButtonClicked(form: UntypedFormGroup) {
-    console.log(form)
-
     this._observability.recordEvent(
       'orcid_registration',
       'step-c2-next-button-clicked',
@@ -97,7 +95,6 @@ export class RegisterObservabilityService {
   }
 
   stepC2SkipButtonClicked(form: UntypedFormGroup) {
-    console.log(form)
     this._observability.recordEvent(
       'orcid_registration',
       'step-c2-skip-button-clicked',
