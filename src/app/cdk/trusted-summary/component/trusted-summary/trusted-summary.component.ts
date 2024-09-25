@@ -79,6 +79,8 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
   labelMoreAffiliation = $localize`:@@summary.moreAffiliation:more Affiliation`
   labelMoreProfessionalActivitie = $localize`:@@summary.moreProfessionalActivitie:more Professional activity`
   labelMoreOtherIdentifier = $localize`:@@summary.moreOtherIdentifier:more Other Identifier`
+  labelMoreEducationQualifications = $localize`:@@summary.moreEducationQualifications:more Education and Qualifications`
+  labelMoreEducationQualification = $localize`:@@summary.moreEducationQualification:more Education and Qualification`
   labelEmailDomains = $localize`:@@summary.emailDomainsLabel:Email Domains`
   labelOrcidRecord = $localize`:@@public-layout.my_orcid:ORCID Record`
   labelViewAffiliations = $localize`:@@summary.viewAffiliations:View all affiliations in`
@@ -88,8 +90,8 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
   labelViewPeerReviews = $localize`:@@summary.viewPeerReviews:View all peer reviews in`
   labelViewProfessionalActivities = $localize`:@@summary.viewProfessionalActivities:View all professional activities in`
   labelViewIdentifiers = $localize`:@@summary.viewIdentifiers:View all identifiers in`
-  labelViewEducationQualificationsActivities = $localize`:@@summary.viewEducationQualificationsActivities:More education qualification activities`
-  labelViewEducationQualificationsActivitie = $localize`:@@summary.viewEducationQualificationsActivitie:More education qualification activity`
+  labelViewEducationQualificationsActivities = $localize`:@@summary.viewEducationQualificationsActivities:View all education and qualifications in`
+  labelViewEducationQualificationsActivitie = $localize`:@@summary.viewEducationQualificationsActivitie:View education and qualification in`
   labelViewDomain = $localize`:@@summary.viewDomain:View all email domains in`
 
   funds: SimpleActivityModel[] = []
