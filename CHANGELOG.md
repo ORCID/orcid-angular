@@ -1,3 +1,10 @@
+## v2.105.6 - 2024-09-26
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.105.5...v2.105.6)
+
+- [#2355](https://github.com/ORCID/orcid-angular/pull/2355): Observability 
+- [#2354](https://github.com/ORCID/orcid-angular/pull/2354): lmendoza/sep-25-batch-of-fixes
+
 ## v2.105.5 - 2024-09-25
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.105.4...v2.105.5)
