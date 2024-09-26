@@ -27,7 +27,8 @@ export class CustomEventService {
 
     if (environment.debugger) {
       console.debug(
-        `-> Journey "${journeyType}" started at ${this.journeys[journeyType].startTime}`, attributes
+        `-> Journey "${journeyType}" started at ${this.journeys[journeyType].startTime}`,
+        attributes
       )
     }
   }
@@ -99,7 +100,8 @@ export class CustomEventService {
     delete this.journeys[journeyType]
 
     console.debug(
-      `Journey "${journeyType}" finished with elapsed time ${elapsedTime}ms`, finalAttributes
+      `Journey "${journeyType}" finished with elapsed time ${elapsedTime}ms`,
+      finalAttributes
     )
   }
 }

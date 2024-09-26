@@ -26,8 +26,7 @@ export class StepDComponent extends BaseStepDirective {
   ) {
     super()
   }
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   nextButton2() {
     this._registrationStateService.registerStepperButtonClicked('d', 'next')

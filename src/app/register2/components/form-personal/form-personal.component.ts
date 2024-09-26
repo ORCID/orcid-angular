@@ -54,7 +54,7 @@ import { ERROR_REPORT } from 'src/app/errors'
 import { RegisterStateService } from '../../register-state.service'
 import { RegisterObservabilityService } from '../../register-observability.service'
 import { Subject } from 'rxjs'
-export class MyErrorStateMatcher implements ErrorStateMatcher{
+export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
     control: FormControl | null,
     form: FormGroupDirective | NgForm | null

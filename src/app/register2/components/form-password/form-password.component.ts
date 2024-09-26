@@ -51,7 +51,10 @@ import { takeUntil } from 'rxjs/operators'
   ],
   preserveWhitespaces: true,
 })
-export class FormPasswordComponent extends BaseForm implements OnInit, OnDestroy {
+export class FormPasswordComponent
+  extends BaseForm
+  implements OnInit, OnDestroy
+{
   labelInfo = $localize`:@@register.ariaLabelInfoPassword:info about password`
   labelClose = $localize`:@@register.ariaLabelClose:close`
   labelConfirmPassword = $localize`:@@register.confirmYourPassword:Confirm your password`

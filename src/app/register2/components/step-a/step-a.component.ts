@@ -45,8 +45,7 @@ export class StepAComponent
     super()
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
   infoSiteBaseUrl = environment.INFO_SITE
 
   goBack() {
