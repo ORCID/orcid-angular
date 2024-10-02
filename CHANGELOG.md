@@ -1,3 +1,10 @@
+## v2.105.7 - 2024-10-02
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.105.6...v2.105.7)
+
+- [#2358](https://github.com/ORCID/orcid-angular/pull/2358): lmendoza/fixes-oct-1
+- [#2359](https://github.com/ORCID/orcid-angular/pull/2359): tx pull
+
 ## v2.105.6 - 2024-09-26
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.105.5...v2.105.6)
