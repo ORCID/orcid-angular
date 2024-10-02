@@ -11,6 +11,7 @@ import { Register2Service } from 'src/app/core/register2/register2.service'
 import { environment } from 'src/environments/environment'
 
 import { BaseForm } from '../BaseForm'
+import { RegisterStateService } from '../../register-state.service'
 
 @Component({
   selector: 'app-form-terms',
@@ -36,11 +37,12 @@ import { BaseForm } from '../BaseForm'
 })
 // tslint:disable-next-line: class-name
 export class FormTermsComponent extends BaseForm implements OnInit, DoCheck {
-  @Input() nextButtonWasClicked: boolean
+  nextButtonWasClicked: boolean
   environment = environment
   constructor(
     private _register: Register2Service,
-    private _errorStateMatcher: ErrorStateMatcher
+    private _errorStateMatcher: ErrorStateMatcher,
+    private _registerStateService: RegisterStateService
   ) {
     super()
   }
@@ -52,6 +54,9 @@ export class FormTermsComponent extends BaseForm implements OnInit, DoCheck {
     this.form = new UntypedFormGroup({
       termsOfUse: this.termsOfUse,
       dataProcessed: this.dataProcessed,
+    })
+    this._registerStateService.getNextButtonClickFor('d').subscribe(() => {
+      this.nextButtonWasClicked = true
     })
   }
 
