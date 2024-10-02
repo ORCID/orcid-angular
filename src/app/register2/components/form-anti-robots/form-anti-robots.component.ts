@@ -12,6 +12,7 @@ import { merge, Subject } from 'rxjs'
 import { Register2Service } from 'src/app/core/register2/register2.service'
 
 import { BaseForm } from '../BaseForm'
+import { RegisterStateService } from '../../register-state.service'
 
 @Component({
   selector: 'app-form-anti-robots',
@@ -31,11 +32,11 @@ import { BaseForm } from '../BaseForm'
   ],
 })
 export class FormAntiRobotsComponent extends BaseForm implements OnInit {
-  @Input() nextButtonWasClicked
   captchaFailState = false
   captchaLoadedWithWidgetId: number
   $widgetIdUpdated = new Subject()
   errorState = false
+  nextButtonWasClicked = false
   captcha = new UntypedFormControl(null, {
     validators: [this.captchaValidator()],
   })
@@ -43,11 +44,14 @@ export class FormAntiRobotsComponent extends BaseForm implements OnInit {
     this.form = new UntypedFormGroup({
       captcha: this.captcha,
     })
+    this._registerStateService.getNextButtonClickFor('d').subscribe(() => {
+      this.nextButtonWasClicked = true
+    })
   }
 
   constructor(
     private _register: Register2Service,
-    private _errorStateMatcher: ErrorStateMatcher
+    private _registerStateService: RegisterStateService
   ) {
     super()
   }

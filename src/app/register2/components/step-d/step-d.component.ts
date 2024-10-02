@@ -18,8 +18,6 @@ export class StepDComponent extends BaseStepDirective {
   @Input() loading
   @Input() reactivation: ReactivationLocal
 
-  nextButtonWasClicked = false
-
   constructor(
     private _registrationStateService: RegisterStateService,
     private _registerObservabilityService: RegisterObservabilityService

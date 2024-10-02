@@ -59,8 +59,9 @@ export class CustomEventService {
       eventName,
       elapsedTime,
     }
-    ;(this.window as any).newrelic.addPageAction(journeyType, eventAttributes)
-
+    if (typeof (this.window as any)?.addPageAction === 'function') {
+      ;(this.window as any).newrelic.addPageAction(journeyType, eventAttributes)
+    }
     // Send the custom event to New Relic
 
     if (environment.debugger) {
@@ -94,7 +95,9 @@ export class CustomEventService {
     }
 
     // Send the final custom event to New Relic
-    ;(this.window as any).addPageAction(journeyType, finalAttributes)
+    if (typeof (this.window as any)?.addPageAction === 'function') {
+      ;(this.window as any).addPageAction(journeyType, finalAttributes)
+    }
 
     // Clean up the journey data
     delete this.journeys[journeyType]
