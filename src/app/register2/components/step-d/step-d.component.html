@@ -38,21 +38,15 @@
       <app-form-notifications
         formControlName="sendOrcidNews"
       ></app-form-notifications>
-      <app-form-terms
-        formControlName="termsOfUse"
-        [nextButtonWasClicked]="nextButtonWasClicked"
-      ></app-form-terms>
-      <app-form-anti-robots
-        formControlName="captcha"
-        [nextButtonWasClicked]="nextButtonWasClicked"
-      ></app-form-anti-robots>
+      <app-form-terms formControlName="termsOfUse"></app-form-terms>
+      <app-form-anti-robots formControlName="captcha"></app-form-anti-robots>
       <div class="step-actions">
         <button
           id="step-d-register-button"
           mat-raised-button
           color="primary"
           [disabled]="loading"
-          (click)="nextButtonWasClicked = true"
+          (click)="nextButton2()"
           matStepperNext
         >
           <ng-container
@@ -74,6 +68,7 @@
           matStepperPrevious
           type="button"
           id="step-d-back-button"
+          (click)="backButton()"
         >
           <a i18n="@@shared.previousStep"> Previous Step</a>
         </button>

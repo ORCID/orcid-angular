@@ -46,7 +46,8 @@ export class SummarySimplePanelComponent implements OnInit {
   constructor(@Inject(WINDOW) private _window: Window) {}
 
   ngOnInit(): void {
-    this.acitivityCountOverflow = this.simpleActivities.length > 3
+    this.acitivityCountOverflow =
+      this.simpleActivities.length > 3 || this.count > 3
     this.simpleActivities = this.simpleActivities.slice(0, 3)
   }
   goToUrl(url?: string, event?: KeyboardEvent) {

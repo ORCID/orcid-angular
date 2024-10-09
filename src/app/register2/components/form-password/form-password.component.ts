@@ -3,6 +3,7 @@ import {
   Component,
   forwardRef,
   Input,
+  OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core'
@@ -22,6 +23,10 @@ import { OrcidValidators } from 'src/app/validators'
 import { BaseForm } from '../BaseForm'
 import { LiveAnnouncer } from '@angular/cdk/a11y'
 import { environment } from 'src/environments/environment'
+import { RegisterObservabilityService } from '../../register-observability.service'
+import { RegisterStateService } from '../../register-state.service'
+import { Subject } from 'rxjs'
+import { takeUntil } from 'rxjs/operators'
 
 @Component({
   selector: 'app-form-password',
@@ -46,7 +51,10 @@ import { environment } from 'src/environments/environment'
   ],
   preserveWhitespaces: true,
 })
-export class FormPasswordComponent extends BaseForm implements OnInit {
+export class FormPasswordComponent
+  extends BaseForm
+  implements OnInit, OnDestroy
+{
   labelInfo = $localize`:@@register.ariaLabelInfoPassword:info about password`
   labelClose = $localize`:@@register.ariaLabelClose:close`
   labelConfirmPassword = $localize`:@@register.confirmYourPassword:Confirm your password`
@@ -63,20 +71,31 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
   hasNumberPattern = HAS_NUMBER
   hasLetterOrSymbolPattern = HAS_LETTER_OR_SYMBOL
   @Input() personalData: RegisterForm
-  @Input() nextButtonWasClicked: boolean
+  nextButtonWasClicked: boolean
+
   currentValidate8orMoreCharactersStatus: boolean
   ccurentValidateAtLeastALetterOrSymbolStatus: boolean
   currentValidateAtLeastANumber: boolean
   passwordsValidAreValidAlreadyChecked: any
   _currentAccesibilityError: string
+  destroy = new Subject()
   constructor(
     private _register: Register2Service,
     private _liveAnnouncer: LiveAnnouncer,
-    private _changeDetectorRef: ChangeDetectorRef
+    private _changeDetectorRef: ChangeDetectorRef,
+    private _registerObservability: RegisterObservabilityService,
+    private _registerStateService: RegisterStateService
   ) {
     super()
   }
   ngOnInit() {
+    this._registerStateService
+      .getNextButtonClickFor('b')
+      .pipe(takeUntil(this.destroy))
+      .subscribe((value) => {
+        this.nextButtonWasClicked = true
+        this._registerObservability.stepBNextButtonClicked(this.form)
+      })
     this.form = new UntypedFormGroup(
       {
         password: new UntypedFormControl('', {
@@ -212,6 +231,7 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
     }
     this._currentAccesibilityError = value
     if (!value) {
+      this._registerObservability.reportRegisterEvent('password_valid')
       this.announce(
         $localize`:@@register.allPasswordContrainsArMet:All password constraints are met`
       )
@@ -244,6 +264,7 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
     const validStatus = this.confirmPasswordValid && this.passwordValid
 
     if (!this.passwordsValidAreValidAlreadyChecked && validStatus) {
+      this._registerObservability.reportRegisterEvent('password_match')
       this.announce(
         $localize`:@@register.passwordAreValid:Your passwords match`
       )
@@ -294,5 +315,9 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
       console.debug('📢' + announcement)
     }
     this._liveAnnouncer.announce(announcement, 'assertive')
+  }
+
+  ngOnDestroy(): void {
+    this.destroy.next()
   }
 }

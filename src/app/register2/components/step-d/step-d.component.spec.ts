@@ -10,6 +10,8 @@ import {
   UntypedFormControl,
   UntypedFormGroup,
 } from '@angular/forms'
+import { RegisterStateService } from '../../register-state.service'
+import { RegisterObservabilityService } from '../../register-observability.service'
 
 @Component({
   selector: 'app-form-notifications',
@@ -76,6 +78,16 @@ describe('StepDComponent', () => {
         MockFormAntiRobotsComponent,
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      providers: [
+        {
+          provide: RegisterStateService,
+          useValue: {},
+        },
+        {
+          provide: RegisterObservabilityService,
+          useValue: {},
+        },
+      ],
     }).compileComponents()
   })
 

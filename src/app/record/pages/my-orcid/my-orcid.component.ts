@@ -185,6 +185,9 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
               'peer-reviews',
               'funding',
               'professional-activities',
+              'research-resources',
+              'emails-panel',
+              'education-and-qualification',
             ].find((x) => x === this.fragment)
           ) {
             setTimeout(() => {

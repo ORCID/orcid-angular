@@ -1,3 +1,33 @@
+## v2.105.7 - 2024-10-02
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.105.6...v2.105.7)
+
+- [#2358](https://github.com/ORCID/orcid-angular/pull/2358): lmendoza/fixes-oct-1
+- [#2359](https://github.com/ORCID/orcid-angular/pull/2359): tx pull
+
+## v2.105.6 - 2024-09-26
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.105.5...v2.105.6)
+
+- [#2355](https://github.com/ORCID/orcid-angular/pull/2355): Observability
+- [#2354](https://github.com/ORCID/orcid-angular/pull/2354): lmendoza/sep-25-batch-of-fixes
+
+## v2.105.5 - 2024-09-25
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.105.4...v2.105.5)
+
+- [#2353](https://github.com/ORCID/orcid-angular/pull/2353): 24-sep-bach-fixes
+
+## v2.105.4 - 2024-09-24
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.105.3...v2.105.4)
+
+- [#2352](https://github.com/ORCID/orcid-angular/pull/2352): summary-batch-update-sep
+
+## v2.105.3 - 2024-09-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.105.2...v2.105.3)
+
 ## v2.105.2 - 2024-09-13
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.105.1...v2.105.2)

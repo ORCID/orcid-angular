@@ -32,6 +32,11 @@ import { ThirdPartyAuthData } from 'src/app/types/sign-in-data.endpoint'
 import { GoogleTagManagerService } from '../../../core/google-tag-manager/google-tag-manager.service'
 import { SearchService } from '../../../core/search/search.service'
 import { ReactivationLocal } from '../../../types/reactivation.local'
+import {
+  CustomEventService,
+  JourneyType,
+} from 'src/app/core/observability-events/observability-events.service'
+import { RegisterObservabilityService } from '../../register-observability.service'
 
 @Component({
   selector: 'app-register-2',
@@ -48,6 +53,8 @@ export class Register2Component implements OnInit, AfterViewInit {
   @ViewChild('stepComponentA', { read: ElementRef }) stepComponentA: ElementRef
   @ViewChild('stepComponentB', { read: ElementRef }) stepComponentB: ElementRef
   @ViewChild('stepComponentC', { read: ElementRef }) stepComponentC: ElementRef
+  @ViewChild('stepComponentC2', { read: ElementRef })
+  stepComponentC2: ElementRef
   @ViewChild('stepComponentD', { read: ElementRef }) stepComponentD: ElementRef
 
   platform: PlatformInfo
@@ -76,19 +83,24 @@ export class Register2Component implements OnInit, AfterViewInit {
     private _platformInfo: PlatformInfoService,
     private _formBuilder: UntypedFormBuilder,
     private _register: Register2Service,
-    private _dialog: MatDialog,
     @Inject(WINDOW) private window: Window,
     private _googleTagManagerService: GoogleTagManagerService,
-    private _user: UserService,
     private _router: Router,
     private _errorHandler: ErrorHandlerService,
     private _userInfo: UserService,
-    private _searchService: SearchService
+    private _registerObservabilityService: RegisterObservabilityService
   ) {
     _platformInfo.get().subscribe((platform) => {
       this.platform = platform
       this.reactivation.isReactivation = this.platform.reactivation
       this.reactivation.reactivationCode = this.platform.reactivationCode
+
+      this._registerObservabilityService.initializeJourney({
+        isReactivation: this.reactivation.isReactivation,
+        coulumn4: this.platform.columns4,
+        column8: this.platform.columns8,
+        column12: this.platform.columns12,
+      })
     })
   }
   ngOnInit() {
@@ -126,6 +138,9 @@ export class Register2Component implements OnInit, AfterViewInit {
           this.requestInfoForm = session.oauthSession
 
           if (this.thirdPartyAuthData || this.requestInfoForm) {
+            this._registerObservabilityService.reportRegisterEvent(
+              'prefill_register-form'
+            )
             this.FormGroupStepA = this.prefillRegisterForm(
               this.requestInfoForm,
               this.thirdPartyAuthData
@@ -165,11 +180,23 @@ export class Register2Component implements OnInit, AfterViewInit {
         )
         .pipe(
           switchMap((validator: RegisterForm) => {
+            this._registerObservabilityService.reportRegisterEvent(
+              'register-validate',
+              {
+                validator,
+              }
+            )
             if (validator.errors.length > 0) {
               // At this point any backend error is unexpected
               this._errorHandler.handleError(
                 new Error('registerUnexpectedValidateFail'),
                 ERROR_REPORT.REGISTER
+              )
+              this._registerObservabilityService.reportRegisterErrorEvent(
+                'register-validate',
+                {
+                  errors: validator.errors,
+                }
               )
             }
             return this._register.register(
@@ -186,6 +213,13 @@ export class Register2Component implements OnInit, AfterViewInit {
         .subscribe((response) => {
           this.loading = false
           if (response.url) {
+            this._registerObservabilityService.reportRegisterEvent(
+              'register-confirmation',
+              {
+                response,
+              }
+            )
+
             const analyticsReports: Observable<void>[] = []
 
             analyticsReports.push(
@@ -208,6 +242,13 @@ export class Register2Component implements OnInit, AfterViewInit {
                 () => this.afterRegisterRedirectionHandler(response)
               )
           } else {
+            this._registerObservabilityService.reportRegisterErrorEvent(
+              'register-confirmation',
+              {
+                response,
+              }
+            )
+
             this._errorHandler.handleError(
               new Error('registerUnexpectedConfirmation'),
               ERROR_REPORT.REGISTER
@@ -241,6 +282,8 @@ export class Register2Component implements OnInit, AfterViewInit {
     }
   }
   selectionChange(event: StepperSelectionEvent) {
+    const step = ['a', 'b', 'c2', 'c', 'd'][event.selectedIndex] as JourneyType
+    this._registerObservabilityService.stepLoaded(step)
     if (this.platform.columns4 || this.platform.columns8) {
       this.focusCurrentStep(event)
     }
@@ -255,8 +298,10 @@ export class Register2Component implements OnInit, AfterViewInit {
     } else if (event.selectedIndex === 1) {
       nextStep = this.stepComponentB
     } else if (event.selectedIndex === 2) {
-      nextStep = this.stepComponentC
+      nextStep = this.stepComponentC2
     } else if (event.selectedIndex === 3) {
+      nextStep = this.stepComponentC
+    } else if (event.selectedIndex === 4) {
       nextStep = this.stepComponentD
     }
     // On mobile scroll the current step component into view
