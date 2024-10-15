@@ -104,8 +104,10 @@ export interface AssertionBase {
   urlName?: string
   sourceName?: string
   content?: string
+  professionalEmail?: boolean
   createdDate?: MonthDayYearDate
   lastModified?: MonthDayYearDate
+  verificationDate?: MonthDayYearDate
   assertionOriginOrcid?: any
   assertionOriginClientId?: any
   assertionOriginName?: any

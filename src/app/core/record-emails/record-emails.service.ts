@@ -62,6 +62,13 @@ export class RecordEmailsService {
         catchError((error) => of({ emails: [] })),
         map((value: EmailsEndpoint) => {
           value.emails.sort(this.sortByEmailCreationDate)
+          value.emailDomains.forEach((domain) => {
+            value.emails.forEach((email) => {
+              if (email.value.includes(domain.value)) {
+                email.professionalEmail = true
+              }
+            })
+          })
           return value
         }),
         tap((value) => {
