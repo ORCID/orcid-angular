@@ -9,6 +9,7 @@ import {
 } from 'src/app/types/record.local'
 import { environment } from 'src/environments/environment'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
+import { setProfessionalEmails } from '../utils'
 
 @Injectable({
   providedIn: 'root',
@@ -54,8 +55,11 @@ export class RecordPublicSideBarService {
         .pipe(
           retry(3),
           catchError((error) => this._errorHandler.handleError(error)),
-          catchError((error) => of({} as SideBarPublicUserRecord)),
-          tap((value) => this.$SideBarPublicUserRecordSubject.next(value))
+          catchError(() => of({} as SideBarPublicUserRecord)),
+          tap((record) => {
+            record.emails = setProfessionalEmails(record.emails)
+            this.$SideBarPublicUserRecordSubject.next(record)
+          })
         )
     } else {
       of({})

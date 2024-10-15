@@ -47,6 +47,11 @@ hr {
   min-width: 24px;
   font-size: 24px;
   margin-right: 8px;
+  display: flex;
+  justify-content: center;
+  img {
+    width: 20px;
+  }
 }
 
 .last-public-email-or-domain {
@@ -69,6 +74,6 @@ hr {
   padding-bottom: 0;
 }
 
-.double-app-panel-data {
-  padding-bottom: 8px;
+.email-domain-source {
+  margin-left: 32px;
 }

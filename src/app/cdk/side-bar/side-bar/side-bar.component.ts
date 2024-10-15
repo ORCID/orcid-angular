@@ -44,6 +44,8 @@ export class SideBarComponent implements OnInit, OnDestroy {
   labelManageYourKeyword = $localize`:"@@record.labelManageYourKeyword:Manage your keywords`
   labelManageYourCountries = $localize`:"@@record.labelManageYourCountries:Manage your countries`
   labelManageYourPersonalIds = $localize`:"@@record.labelManageYourPersonalIds:Manage your personalIds`
+  selfAssertedSource = $localize`:@@record.selfAssertedSource:Self-asserted source`
+  orcidEmailValidation = $localize`:@@side-bar.orcidEmailValidation:ORCID email validation`
 
   $destroy: Subject<boolean> = new Subject<boolean>()
 

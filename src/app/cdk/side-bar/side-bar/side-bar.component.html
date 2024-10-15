@@ -37,7 +37,6 @@
       [isPublicRecord]="isPublicRecord"
       [elements]="userRecord?.emails?.emails"
       [editModalComponent]="modalEmailComponent"
-      [customControls]="isPublicRecord && emailDomainsTogglz && !loadingTogglz"
       [email]="true"
       [type]="'side-bar'"
       class="side-bar"
@@ -75,9 +74,18 @@
             isPublicRecord ? '' : email.verified ? email.visibility : 'PRIVATE'
           "
           [isPublicRecord]="isPublicRecord"
-          >{{ email.value }}</app-panel-element
-        ></app-panel-data
-      >
+          >{{ email.value }}
+          <app-panel-element-source
+            [isLastItem]="last"
+            *ngIf="emailsOpenState"
+            [name]="email.sourceName || email.source"
+            [date]="email.createdDate | monthDayYearDateToString"
+            [assertion]="
+              email.assertionOriginName || email.assertionOriginOrcid
+            "
+          >
+          </app-panel-element-source></app-panel-element
+      ></app-panel-data>
 
       <!-- NEW EMAIL PANEL (TOGGLZ ON) -->
       <!-- EMAIL PANEL PUBLIC VIEW -->
@@ -97,28 +105,53 @@
           emailDomainsTogglz &&
           !loadingTogglz
         "
-        [ngClass]="{
-          'double-app-panel-data':
-            userRecord?.emails?.emailDomains &&
-            userRecord?.emails?.emailDomains?.length > 0
-        }"
       >
         <h4 header i18n="@@side-bar.verifiedEmailAddresses">
           Verified email addresses
         </h4>
         <app-panel-element
-          *ngFor="let entry of userRecord?.emails?.emails; let last = last"
+          *ngFor="let email of userRecord?.emails?.emails; let last = last"
           [separator]="!last"
           class="public-email-or-domain"
           [ngClass]="{
             'last-public-email-or-domain': last,
           }"
-          ><div class="row">
-            <mat-icon class="verification-icon">check_circle</mat-icon>
-            <div>
-              <span class="row orc-font-body-small"> {{ entry.value }}</span>
+          ><ng-container>
+            <div class="row">
+              <mat-icon
+                *ngIf="email.professionalEmail"
+                class="verification-icon"
+                >check_circle</mat-icon
+              >
+              <mat-icon
+                *ngIf="!email.professionalEmail"
+                aria-hidden="false"
+                [attr.aria-label]="selfAssertedSource"
+                [attr.alt]="selfAssertedSource"
+                class="verification-icon"
+                ><img
+                  src="./assets/vectors/profile-not-verified.svg"
+                  [attr.alt]="selfAssertedSource"
+                />
+              </mat-icon>
+              <div>
+                <span class="row orc-font-body-small"> {{ email.value }}</span>
+              </div>
             </div>
-          </div>
+            <app-panel-element-source
+              class="orc-font-small-print email-domain-source"
+              *ngIf="emailsOpenState"
+              [name]="
+                email.professionalEmail
+                  ? orcidEmailValidation
+                  : email.sourceName
+              "
+              [isEmailOrDomain]="true"
+              [date]="email.verificationDate | monthDayYearDateToString"
+              [isLastItem]="true"
+            >
+            </app-panel-element-source>
+          </ng-container>
         </app-panel-element>
       </app-panel-data>
 
@@ -136,18 +169,29 @@
         </h4>
         <app-panel-element
           *ngFor="
-            let entry of userRecord?.emails?.emailDomains;
+            let domain of userRecord?.emails?.emailDomains;
             let last = last
           "
           [separator]="!last"
           class="public-email-or-domain"
           [ngClass]="{ 'last-public-email-or-domain': last }"
-          ><div class="row">
-            <mat-icon class="verification-icon">check_circle</mat-icon>
-            <div>
-              <span class="row orc-font-body-small"> {{ entry.value }}</span>
+          ><ng-container
+            ><div class="row">
+              <mat-icon class="verification-icon">check_circle</mat-icon>
+              <div>
+                <span class="row orc-font-body-small"> {{ domain.value }}</span>
+              </div>
             </div>
-          </div>
+            <app-panel-element-source
+              class="orc-font-small-print email-domain-source"
+              *ngIf="emailsOpenState"
+              [name]="orcidEmailValidation"
+              [isEmailOrDomain]="true"
+              [date]="domain.createdDate | monthDayYearDateToString"
+              [isLastItem]="true"
+            >
+            </app-panel-element-source>
+          </ng-container>
         </app-panel-element>
       </app-panel-data>
       <!-- EMAIL PANEL MY ORCID -->
