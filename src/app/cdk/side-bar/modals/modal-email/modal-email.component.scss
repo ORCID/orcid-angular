@@ -27,10 +27,17 @@ app-alert-message {
 
 .verification-icon {
   height: 40px;
-  width: 32px;
-  font-size: 32px;
+  width: 40px;
+  font-size: 40px;
   margin-right: 16px;
   align-content: center;
+  img {
+    height: 32px;
+    width: 32px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
 }
 
 mat-form-field {
@@ -45,7 +52,7 @@ mat-form-field {
 
 .actions-wrapper {
   width: 100%;
-  margin-left: 48px;
+  margin-left: 60px;
   margin-right: 255px;
   margin-top: 3px;
   line-height: 21px;
@@ -145,7 +152,6 @@ section[id='Email domains'] {
   strong {
     margin-bottom: 2px;
   }
-  line-height: 21px;
   letter-spacing: 0.25px;
   flex-grow: 1;
 }

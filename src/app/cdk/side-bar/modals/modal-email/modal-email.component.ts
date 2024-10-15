@@ -73,8 +73,10 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   ariaLabelVisibilityDomainTrustedParty = $localize`:@@side-bar.ariaLabelDomainVisibilityTrustedParties:Set domain visibility to Trusted Parties`
   ariaLabelVisibilityDomainPrivate = $localize`:@@side-bar.ariaLabelDomainVisibilityPrivate:Set domain visibility to Only Me`
   ariaOpenAccountSettings = $localize`:@@side-bar.ariaOpenAccountSettings:Open your ORCID account settings`
+  selfAssertedSource = $localize`:@@record.selfAssertedSource:Self-asserted source`
   deleteTooltip = $localize`:@@side-bar.deleteTooltip:You can't delete the only email address in your account`
   visibilityTooltip = $localize`:@@side-bar.visibilityTooltip:Visibility set to Only me`
+  orcidEmailValidation = $localize`:@@side-bar.orcidEmailValidation:ORCID email validation`
 
   @ViewChildren('emailInput') inputs: QueryList<ElementRef>
   verificationsSend: string[] = []
@@ -82,7 +84,7 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   addedEmailsCount = 0
   emailsForm: UntypedFormGroup = new UntypedFormGroup({})
   emails: AssertionVisibilityString[] = []
-  verifiedDomains = []
+  verifiedDomains: AssertionVisibilityString[] = []
   primaryEmail: AssertionVisibilityString | undefined = undefined
   originalEmailsBackendCopy: AssertionVisibilityString[]
   defaultVisibility: VisibilityStrings = 'PRIVATE'
