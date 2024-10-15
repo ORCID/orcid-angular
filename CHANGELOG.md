@@ -1,3 +1,12 @@
+## v2.106.5 - 2024-10-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.106.4...v2.106.5)
+
+- [#2351](https://github.com/ORCID/orcid-angular/pull/2351): Bump express from 4.18.2 to 4.21.0
+- [#2356](https://github.com/ORCID/orcid-angular/pull/2356): Bump rollup from 3.29.4 to 3.29.5
+- [#2366](https://github.com/ORCID/orcid-angular/pull/2366): Bump markdown-to-jsx from 7.3.2 to 7.5.0
+- [#2369](https://github.com/ORCID/orcid-angular/pull/2369): change email verification in the side bar
+
 ## v2.106.4 - 2024-10-15
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.106.3...v2.106.4)
