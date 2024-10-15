@@ -18,6 +18,7 @@ import { environment } from 'src/environments/environment'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { RecordPublicSideBarService } from '../record-public-side-bar/record-public-side-bar.service'
+import { setProfessionalEmails } from '../utils'
 
 @Injectable({
   providedIn: 'root',
@@ -59,9 +60,10 @@ export class RecordEmailsService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        catchError((error) => of({ emails: [] })),
+        catchError(() => of({ emails: [] })),
         map((value: EmailsEndpoint) => {
           value.emails.sort(this.sortByEmailCreationDate)
+          value = setProfessionalEmails(value)
           return value
         }),
         tap((value) => {
