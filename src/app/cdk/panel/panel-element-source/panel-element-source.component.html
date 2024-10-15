@@ -1,9 +1,19 @@
-<strong i18n="@@shared.sourceColon">Source: </strong>
-<p class="overflow-wrap">
+<p class="overflow-wrap orc-font-small-print">
+  <span i18n="@@shared.sourceColon">Source: </span>
   <ng-container *ngIf="assertion">
     {{ assertion }}
     <i i18n="@@shared.onBehalfOf">via</i>
   </ng-container>
-  {{ name }} {{ date }}
+  {{ name
+  }}<ng-container *ngIf="date"
+    >,
+    <ng-container *ngIf="isEmailOrDomain" i18n="@@shared.verified"
+      >Verified:</ng-container
+    >
+    <ng-container *ngIf="!isEmailOrDomain" i18n="@@shared.created"
+      >Created:</ng-container
+    >
+    {{ date }}</ng-container
+  >
 </p>
 <mat-divider *ngIf="!isLastItem"></mat-divider>
