@@ -1,3 +1,9 @@
+## v2.106.6 - 2024-10-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.106.5...v2.106.6)
+
+- [#2373](https://github.com/ORCID/orcid-angular/pull/2373): Fix element source line height and fix util
+
 ## v2.106.5 - 2024-10-15
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.106.4...v2.106.5)
