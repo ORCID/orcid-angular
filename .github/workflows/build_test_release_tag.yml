@@ -98,6 +98,24 @@ jobs:
       bump: ${{ inputs.bump }}
       ref: ${{ inputs.ref }}
 
+  bld_all_docker:
+    uses: ./.github/workflows/bld_all_docker.yml
+    secrets: inherit # pass all secrets for uploading assets
+    needs:
+      - lint
+      - bld_all_yarn
+      - format_i18n
+      - format_prettier
+    permissions:
+      checks: write
+      contents: read
+      issues: read
+      pull-requests: write
+    with:
+      version_tag: ${{ inputs.version_tag }}
+      bump: ${{ inputs.bump }}
+      ref: ${{ inputs.ref }}
+
 ##############################################################################
 
   rel_tag:

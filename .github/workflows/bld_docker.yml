@@ -1,0 +1,149 @@
+name: bld_docker
+run-name: ${{ inputs.docker_name }}
+
+permissions:
+  checks: write
+  contents: read
+  issues: read
+  pull-requests: write
+
+on:
+  workflow_call:
+    inputs:
+      docker_name:
+        description: 'Name of the docker image to build'
+        required: false
+        default: "orcid/version-bumping-test"
+        type: string
+      context:
+        description: 'Name of the context in the repo'
+        required: false
+        default: "."
+        type: string
+      build_args:
+        description: 'arguments'
+        required: false
+        default: ""
+        type: string
+      file:
+        description: 'specify a custom dockerfile'
+        required: false
+        default: ""
+        type: string
+      version_tag:
+        description: 'Name of the tag to build'
+        required: false
+        default: 'latest'
+        type: string
+      bump:
+        description: 'whether to bump the version number by a major minor patch amount or none'
+        required: false
+        default: 'patch'
+        type: string
+      ref:
+        description: 'git reference to use with the checkout use default_branch to have that calculated'
+        required: false
+        default: "default"
+        type: string
+
+  workflow_dispatch:
+    inputs:
+      docker_name:
+        description: 'Name of the docker image to build'
+        required: false
+        default: "orcid/version-bumping-test"
+        type: string
+      context:
+        description: 'Name of the context in the repo'
+        required: false
+        default: "."
+        type: string
+      build_args:
+        description: 'arguments'
+        required: false
+        default: ""
+        type: string
+      file:
+        description: 'specify a custom dockerfile'
+        required: false
+        default: ""
+        type: string
+      version_tag:
+        description: 'Name of the tag to build'
+        required: false
+        default: 'latest'
+        type: string
+      bump:
+        description: 'whether to bump the version number by a major minor patch amount or none'
+        required: false
+        default: 'patch'
+        type: string
+      ref:
+        description: 'git reference to use with the checkout use default_branch to have that calculated'
+        required: false
+        default: "default"
+        type: string
+
+
+jobs:
+  bld_docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: git-checkout-ref-action
+        id: ref
+        uses: ORCID/git-checkout-ref-action@main
+        with:
+          default_branch: ${{ github.event.repository.default_branch }}
+          ref: ${{ inputs.ref }}
+
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ steps.ref.outputs.ref }}
+          # checkout some history so we can scan commits for bump messages
+          # NOTE: history does not include tags!
+          fetch-depth: 100
+
+      - name: find next version
+        id: version
+        uses: ORCID/version-bump-action@main
+        with:
+          version_tag: ${{ inputs.version_tag }}
+          bump: ${{ inputs.bump }}
+
+      - uses: docker/setup-buildx-action@v2
+      - uses: actions/cache@v3
+        with:
+          path: /tmp/.buildx-cache
+          # each cache needs a unique key for the job
+          key: ${{ runner.os }}-buildx-${{ hashFiles(inputs.context) }}
+          # Alternative restore keys if no exact match is found
+          # I /think/ this means that other docker buildx jobs could help out here
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+      - name: Login to private registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ secrets.DOCKER_REG_PRIVATE }}
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: nasty hack to allow dynamic defaults
+        id: dynamic_defaults
+        run: |
+          FILE="${{ github.event.inputs.file }}"
+          echo "default_file=${FILE:-${{ inputs.context }}/Dockerfile}" >> "$GITHUB_OUTPUT"
+
+      - name: show the dynamic defaults
+        run: |
+          echo ${{ steps.dynamic_defaults.outputs.default_file }}
+
+      - uses: docker/build-push-action@v3
+        with:
+          push: true
+          tags: ${{ secrets.DOCKER_REG_PRIVATE }}/${{ inputs.docker_name}}:${{ steps.version.outputs.version_tag_numeric }}
+          context: ${{ inputs.context }}
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache
+          build-args: ${{ inputs.build_args }}
+          file: ${{ steps.dynamic_defaults.outputs.default_file }}
+

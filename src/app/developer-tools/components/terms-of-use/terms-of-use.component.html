@@ -8,48 +8,71 @@
 </h2>
 
 <p i18n="@@developerTools.orcidOffersAnApi">
-  ORCID offers an API (Application Programming Interface) that allows your
-  systems and applications to connect to the ORCID registry via
-  machine-to-machine communication. Using the Public API, your system or
-  application can:
+  ORCID offers a free Public API (Application Programming Interface) that allows
+  your systems and applications to connect to the ORCID registry for
+  non-commercial use
+</p>
+<p i18n="@@developerTools.orcidOffersAnApi2">
+  By registering for Public API Credentials, your system or application can:
 </p>
 
 <ul>
   <li i18n="@@developerTools.allowUserToSignInto">
-    Allow users to sign into your system/application with their ORCID username
-    and password
+    Allow users to sign into your system/application with their ORCID account
   </li>
   <li i18n="@@developerTools.getAUserAuthenticated">
-    Get a user's authenticated ORCID iD
+    Obtain a user's’ authenticated ORCID iDs
   </li>
   <li i18n="@@developerTools.retrieveMachineReadable">
-    Retrieve a machine-readable version of a user's public ORCID record
+    Read public information from ORCID records in machine-readable format
   </li>
   <li i18n="@@developerTools.performMachineSearch">
-    Perform a machine-generated search of the ORCID registry
+    Search public data in the ORCID Registry
+  </li>
+  <li i18n="@@developerTools.obtainHigher">
+    Obtain a higher usage quota than the ORCID Anonymous API
   </li>
 </ul>
 
 <p>
   <ng-container i18n="@@developerTools.orcidApiResful"
-    >The ORCID API is RESTful and uses</ng-container
+    >The ORCID Public API is RESTful and uses</ng-container
   >
   <a
-    href="https://oauth.net/2/"
+    href="https://oauth.net"
     rel="noopener noreferrer"
     target="_blank"
     class="underline"
     i18n="@@developerTools.oauth20"
-    >OAuth 2.0</a
+    >OAuth</a
   ><ng-container i18n="@@developerTools.wellEstablishedStandard"
-    >, a well-established, standard protocol for user-based
-    permissions.</ng-container
-  >
+    >, a well-established, standard protocol for user-based permissions.
+  </ng-container>
 </p>
 <p i18n="@@developerTools.publicClientApplicationsAreGranted">
-  Public Client Applications are granted to individuals and not organizations,
-  and your Public Client is personal to you (even if you are using it in
+  Public API Credentials are granted to individuals and not organizations, and
+  your Public API Credentials are personal to you (even if being used in
   connection with your work for an organization).
+</p>
+
+<p>
+  <ng-container i18n="@@developerTools.publicClientApplicationsAreGranted2">
+    If you need access to an ORCID API for commercial use, need a higher usage
+    quota, organizational administration of your API credentials, or the ability
+    to write data to or access Trusted Party data in ORCID records, our
+  </ng-container>
+  <a
+    class="underline"
+    href="https://info.orcid.org/documentation/features/member-api/"
+    rel="noopener noreferrer"
+    target="_blank"
+    i18n="@@developerTools.memberApi"
+  >
+    Member API
+  </a>
+  <ng-container i18n="@@developerTools.mayBeMoreAppropriate">
+    is available to ORCID member organizations.
+  </ng-container>
 </p>
 
 <h2 class="orc-font-body-large" i18n="@@developerTools.additionalResources">
@@ -60,7 +83,7 @@
   <li>
     <a
       class="underline"
-      href="https://support.orcid.org/hc/en-us/articles/360006897174"
+      href="https://info.orcid.org/documentation/integration-guide/registering-a-public-api-client/"
       rel="noopener noreferrer"
       target="_blank"
       i18n="@@developerTools.readThePublicApisDocumentation"
@@ -83,7 +106,7 @@
   class="orc-font-body-large no-margin-bottom"
   i18n="@@developerTools.orcidPublicClientTermsOfService"
 >
-  ORCID Public Client Terms of Service
+  ORCID Public APIs Terms of Service
 </h2>
 <hr />
 
@@ -91,10 +114,8 @@
   <ng-container
     i18n="@@developerTools.theOrcidPublicApiAllowsYouToRequestPermission"
   >
-    The ORCID Public API allows you to request permission to receive an
-    authenticated ORCID iD, to read public information from an ORCID record and
-    to search public data on the ORCID registry according to the conditions
-    stated in the
+    The ORCID Public API is free for non-commercial use by individuals as stated
+    in the
   </ng-container>
   <a
     href="https://info.orcid.org/public-client-terms-of-service/"
@@ -102,8 +123,13 @@
     target="_blank"
     class="underline"
     i18n="@@developerTools.publicClientTermsOfService"
-    >Public Client Terms of Service.</a
+    >Public APIs Terms of Service.</a
   >
+  <ng-container i18n="@@developerTools.byRegisteringForPublicApi">
+    By “non-commercial” we mean that you may not charge any re-use fees for the
+    Public API, and you may not make use of the Public API in connection with
+    any revenue-generating product or service
+  </ng-container>
 </p>
 
 <div class="info" *ngIf="!checked && dirty">
@@ -128,9 +154,8 @@
     [(ngModel)]="checked"
     [disabled]="!emailAlreadyVerified"
     i18n="@@developerTools.haveReadAndAgreeToTheOrcidPublicClientTermsOfService"
-    >I have read and agree to the ORCID Public Client Terms of
-    Service</mat-checkbox
-  >
+    >I have read and agree to the ORCID Public APIs Terms of Service
+  </mat-checkbox>
 </p>
 
 <p>
