@@ -11,6 +11,7 @@ import { Component, Input, OnInit } from '@angular/core'
 export class PanelElementSourceComponent implements OnInit {
   @Input() name: string
   @Input() date: string
+  @Input() isEmailOrDomain = false
   @Input() isLastItem: boolean
   @Input() assertion: string
   constructor() {}
