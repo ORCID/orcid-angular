@@ -80,12 +80,26 @@
         <div class="email-entry row">
           <div class="row email-input-line" [formGroupName]="email.putCode">
             <mat-icon
+              *ngIf="
+                !email.verified || (email.verified && email.professionalEmail)
+              "
               class="verification-icon"
               [ngClass]="{
               verified: email.verified,
             }"
               >check_circle</mat-icon
             >
+            <mat-icon
+              *ngIf="email.verified && !email.professionalEmail"
+              aria-hidden="false"
+              [attr.aria-label]="selfAssertedSource"
+              [attr.alt]="selfAssertedSource"
+              class="verification-icon"
+              ><img
+                src="./assets/vectors/profile-not-verified.svg"
+                [attr.alt]="selfAssertedSource"
+              />
+            </mat-icon>
             <div class="email-input-container">
               <mat-form-field
                 *ngIf="!showEmailAsVerified(email.putCode)"
@@ -112,11 +126,18 @@
                 <strong tabindex="0" class="row orc-font-body-small">
                   {{ emailsForm.value[email.putCode].email }}</strong
                 >
-                <em
-                  class="row orc-font-small-print"
-                  i18n="@@side-bar.verifiedEmail"
-                  >Verified email address</em
+                <app-panel-element-source
+                  class="orc-font-small-print"
+                  [name]="
+                    email.professionalEmail
+                      ? orcidEmailValidation
+                      : email.sourceName
+                  "
+                  [isEmailOrDomain]="true"
+                  [date]="email.verificationDate | monthDayYearDateToString"
+                  [isLastItem]="true"
                 >
+                </app-panel-element-source>
               </div>
             </div>
             <div
@@ -212,7 +233,7 @@
               class="orc-font-small-print"
             >
               Please enter a valid email address, for example
-              joe@institution.edu
+              joe&#64;institution.edu
             </mat-error>
 
             <mat-error
@@ -287,11 +308,14 @@
               <strong tabindex="0" class="row orc-font-body-small">
                 {{ domain.value }}</strong
               >
-              <em
-                class="row orc-font-small-print"
-                i18n="@@side-bar.verifiedEmailDomain"
-                >Verified email domain</em
+              <app-panel-element-source
+                class="orc-font-small-print"
+                [name]="orcidEmailValidation"
+                [isEmailOrDomain]="true"
+                [date]="domain.createdDate | monthDayYearDateToString"
+                [isLastItem]="true"
               >
+              </app-panel-element-source>
             </div>
             <div class="actions-sub-wrapper domain-visibility">
               <app-visibility-selector
