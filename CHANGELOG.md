@@ -1,3 +1,13 @@
+## v2.106.4 - 2024-10-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.106.3...v2.106.4)
+
+- [#2370](https://github.com/ORCID/orcid-angular/pull/2370): sidebar source changes
+- [#2371](https://github.com/ORCID/orcid-angular/pull/2371): 9165-qa-fix-layout-of-trust-summary-when-embedded
+- [#2368](https://github.com/ORCID/orcid-angular/pull/2368): Lmendoza/9417 update the public api developer tools page with new text 2
+- [#2364](https://github.com/ORCID/orcid-angular/pull/2364): email modal verification changes
+- [#2367](https://github.com/ORCID/orcid-angular/pull/2367): Update unit_tests.yml
+
 ## v2.106.3 - 2024-10-10
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.106.2...v2.106.3)
