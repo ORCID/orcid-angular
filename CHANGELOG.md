@@ -1,3 +1,9 @@
+## v2.106.9 - 2024-10-16
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.106.8...v2.106.9)
+
+- [#2376](https://github.com/ORCID/orcid-angular/pull/2376): 9417-update-the-public-api-developer-tools-page-with-new-text
+
 ## v2.106.8 - 2024-10-16
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.106.7...v2.106.8)
