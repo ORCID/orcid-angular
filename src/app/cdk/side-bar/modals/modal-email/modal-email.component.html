@@ -131,7 +131,7 @@
                   [name]="
                     email.professionalEmail
                       ? orcidEmailValidation
-                      : email.sourceName
+                      : email.sourceName || email.source
                   "
                   [isEmailOrDomain]="true"
                   [date]="email.verificationDate | monthDayYearDateToString"
