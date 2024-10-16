@@ -19,6 +19,12 @@ app-panel {
   margin-top: 18px;
 }
 
+app-panel-element {
+  a {
+    text-decoration: underline;
+  }
+}
+
 .orc-font-body {
   margin: unset;
 }
