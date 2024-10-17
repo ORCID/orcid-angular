@@ -48,7 +48,7 @@ export class AppPanelsExpandAriaLabelPipe implements PipeTransform {
       }
     } else if (panelType === 'side-bar' && args) {
       if (args === 'emails-panel') {
-        return $localize`:@@shared.emailsExpandAriaLabel:Expand Emails`
+        return $localize`:@@shared.showEmailDetailsAriaLabel:Show email details`
       } else if (args === 'websites-panel') {
         return $localize`:@@shared.websiteExpandAriaLabel:Expand Website & Social links`
       } else if (args === 'personal-identifiers-panel') {
