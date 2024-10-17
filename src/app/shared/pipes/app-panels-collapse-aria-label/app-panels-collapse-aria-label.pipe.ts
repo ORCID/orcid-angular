@@ -49,7 +49,7 @@ export class AppPanelsCollapseAriaLabelPipe implements PipeTransform {
     } else if (panelType === 'side-bar' && args) {
       // emails-panel, websites-panel, personal-identifiers-panel, keywords-panel, countries-panel
       if (args === 'emails-panel') {
-        return $localize`:@@shared.emailsCollapseAriaLabel:Collapse Emails`
+        return $localize`:@@shared.hideEmailDetailsAriaLabel:Hide email details`
       } else if (args === 'websites-panel') {
         return $localize`:@@shared.websiteCollapseAriaLabel:Collapse Website & Social links`
       } else if (args === 'personal-identifiers-panel') {
