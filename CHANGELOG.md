@@ -1,3 +1,10 @@
+## v2.106.10 - 2024-10-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.106.9...v2.106.10)
+
+- [#2377](https://github.com/ORCID/orcid-angular/pull/2377): fix public email section aria labels
+- [#2378](https://github.com/ORCID/orcid-angular/pull/2378): lmendoza/9417-update-the-public-api-developer-tools-page-with-new-text-3
+
 ## v2.106.9 - 2024-10-16
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.106.8...v2.106.9)
