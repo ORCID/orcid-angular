@@ -1,5 +1,6 @@
 import { E } from '@angular/cdk/keycodes'
 import { Assertion } from 'src/app/types'
+import { NamesEndPoint } from 'src/app/types/record-name.endpoint'
 import { UserRecord } from 'src/app/types/record.local'
 
 export class RecordUtil {
@@ -19,6 +20,22 @@ export class RecordUtil {
     return userRecord?.names?.creditName
       ? userRecord.names.creditName.value
       : ''
+  }
+
+  static getDisplayName(names: NamesEndPoint): string {
+    if (
+      names?.creditName &&
+      names?.creditName.value &&
+      names?.creditName.value.length
+    ) {
+      return names.creditName.value
+    } else {
+      return (
+        ((names?.givenNames && names?.givenNames.value) || ' ') +
+        ' ' +
+        ((names?.familyName && names?.familyName.value) || ' ')
+      )
+    }
   }
 
   static isNamePublicAndAffiliations(

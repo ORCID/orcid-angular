@@ -131,7 +131,9 @@
                   [name]="
                     email.professionalEmail
                       ? orcidEmailValidation
-                      : email.sourceName || email.source
+                      : displayName ||
+                        userInfo.EFFECTIVE_USER_ORCID ||
+                        userInfo.REAL_USER_ORCID
                   "
                   [isEmailOrDomain]="true"
                   [date]="

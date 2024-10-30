@@ -23,8 +23,10 @@ import { ModalComponent } from 'src/app/cdk/modal/modal/modal.component'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
+import { RecordNamesService } from 'src/app/core/record-names/record-names.service'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { UserInfoService } from 'src/app/core/user-info/user-info.service'
+import { RecordUtil } from 'src/app/shared/utils/record.util'
 import {
   AssertionVisibilityString,
   EmailsEndpoint,
@@ -91,6 +93,7 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   loadingTogglz = false
   emailDomainsTogglz = false
   disableVisibilities: { [domainPutcode: string]: VisibilityStrings[] } = {}
+  displayName: string
 
   isMobile: boolean
   userInfo: UserInfo
@@ -98,6 +101,7 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
     public _recordEmails: RecordEmailsService,
+    private _names: RecordNamesService,
     private _changeDetectorRef: ChangeDetectorRef,
     private _platform: PlatformInfoService,
     private _snackBar: SnackbarService,
@@ -116,6 +120,13 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
       .subscribe(
         (platform) => (this.isMobile = platform.columns4 || platform.columns8)
       )
+
+    this._names
+      .getNames()
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((names) => {
+        this.displayName = RecordUtil.getDisplayName(names)
+      })
 
     this._recordEmails
       .getEmails()

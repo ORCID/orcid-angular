@@ -13,7 +13,6 @@ import { RecordService } from 'src/app/core/record/record.service'
 import {
   Address,
   Assertion,
-  AssertionVisibilityString,
   NameForm,
   RequestInfoForm,
   UserInfo,
@@ -75,6 +74,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
   userInfo: UserInfo
   userRecord: UserRecord
   platform: PlatformInfo
+  displayName: string
 
   websiteOpenState = false
   keywordOpenState = false
@@ -138,9 +138,8 @@ export class SideBarComponent implements OnInit, OnDestroy {
           this.orcidId = true
         }
         this.userRecord = userRecord
-
         this.userInfo = userRecord?.userInfo
-
+        this.displayName = RecordUtil.getDisplayName(userRecord?.names)
         this.onSideBarElementsDisplay(userRecord)
       })
   }
