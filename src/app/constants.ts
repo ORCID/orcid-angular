@@ -80,6 +80,8 @@ export const ITEM_ACTION_SELECT = 'select'
 export const ITEM_ACTION_EXPAND = 'expand'
 export const ITEM_ACTION_COLLAPSE = 'collapse'
 
+export const VERIFICATION_DATE_CUTOFF = new Date('2024-10-28')
+
 export const ApplicationRoutes = {
   myOrcid: 'my-orcid',
   twoFactor: '2fa-signin',

@@ -134,7 +134,11 @@
                       : email.sourceName || email.source
                   "
                   [isEmailOrDomain]="true"
-                  [date]="email.verificationDate | monthDayYearDateToString"
+                  [date]="
+                    email.verificationDate
+                      | monthDayYearDateToString
+                      | verificationDateCutoff
+                  "
                   [isLastItem]="true"
                 >
                 </app-panel-element-source>
@@ -312,7 +316,11 @@
                 class="orc-font-small-print"
                 [name]="orcidEmailValidation"
                 [isEmailOrDomain]="true"
-                [date]="domain.createdDate | monthDayYearDateToString"
+                [date]="
+                  domain.createdDate
+                    | monthDayYearDateToString
+                    | verificationDateCutoff
+                "
                 [isLastItem]="true"
               >
               </app-panel-element-source>
