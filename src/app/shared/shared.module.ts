@@ -50,6 +50,7 @@ import { AffiliationLabelPipe } from './pipes/affiliation-label.pipe'
 import { AffiliationTypePipe } from './pipes/affiliation-type/affiliation-type.pipe'
 import { ScopePathTypePipe } from './pipes/scope-path-type/scope-path-type.pipe'
 import { AppPanelsSortByAriaLabelPipe } from './pipes/app-panels-sort-by-aria-label/app-panels-sort-by-aria-label.pipe'
+import { VerificationDateCutoffPipe } from './pipes/verification-date-cutoff-pipe/verification-date-cutoff.pipe'
 @NgModule({
   imports: [
     CommonModule,
@@ -60,6 +61,7 @@ import { AppPanelsSortByAriaLabelPipe } from './pipes/app-panels-sort-by-aria-la
   ],
   declarations: [
     MonthDayYearDateToStringPipe,
+    VerificationDateCutoffPipe,
     OfflineMessageComponent,
     CopyOnClickDirective,
     CopyOnClickComponent,
@@ -107,6 +109,7 @@ import { AppPanelsSortByAriaLabelPipe } from './pipes/app-panels-sort-by-aria-la
     MatProgressSpinner,
     MatExpansionModule,
     MonthDayYearDateToStringPipe,
+    VerificationDateCutoffPipe,
     OfflineMessageComponent,
     MatPaginatorModule,
     CopyOnClickDirective,
