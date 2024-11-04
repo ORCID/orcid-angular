@@ -60,9 +60,8 @@ export class ShareEmailsDomainsComponent {
 
   accept(answear: boolean) {
     this.domainToMakePublic = this.form.value.items
-    .filter((item) => item.selected)
-    .map((item) => item.email)
-
+      .filter((item) => item.selected)
+      .map((item) => item.email)
 
     if (answear && this.domainToMakePublic.length > 0) {
       this.userEmailsJson.emailDomains.forEach((domain) => {
