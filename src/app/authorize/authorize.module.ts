@@ -37,7 +37,7 @@ import { InterstitialsModule } from '../cdk/interstitials/interstitials.module'
     TrustedIndividualsDropdownModule,
     InfoDropDownModule,
     MatProgressBarModule,
-    InterstitialsModule
+    InterstitialsModule,
   ],
 })
 export class AuthorizeModule {}
