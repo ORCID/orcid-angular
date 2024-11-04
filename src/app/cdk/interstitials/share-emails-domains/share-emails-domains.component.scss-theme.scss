@@ -12,13 +12,11 @@
     background-color: mat.get-color-from-palette($primary, 700);
   }
 
-  ::ng-deep{
+  ::ng-deep {
     .mat-divider.green-divider {
       border: solid 1px mat.get-color-from-palette($foreground, brand-primary);
     }
   }
 }
-
-
 
 @include theme($orcid-app-theme);

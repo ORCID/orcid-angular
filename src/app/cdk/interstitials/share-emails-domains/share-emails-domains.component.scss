@@ -1,12 +1,10 @@
 @import '../../../../assets/scss/orcid.spacing.scss';
 
-
 h2 {
   margin-top: 16px;
   margin-bottom: 16px;
-
 }
-.published-email-container{
+.published-email-container {
   display: flex;
   align-items: center;
 }
@@ -64,7 +62,6 @@ mat-divider {
   margin-top: 16px;
   margin-bottom: 16px;
 }
-
 
 mat-divider.last {
   margin-top: 32px;

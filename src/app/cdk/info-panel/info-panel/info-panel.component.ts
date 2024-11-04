@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'app-info-panel',
   templateUrl: './info-panel.component.html',
-  styleUrls: ['./info-panel.component.scss', './info-panel.component.scss-theme.scss']
+  styleUrls: [
+    './info-panel.component.scss',
+    './info-panel.component.scss-theme.scss',
+  ],
 })
-export class InfoPanelComponent {
-
-}
+export class InfoPanelComponent {}
