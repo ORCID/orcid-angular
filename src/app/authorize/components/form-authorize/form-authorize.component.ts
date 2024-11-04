@@ -86,7 +86,6 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
         this.loadingTrustedIndividuals = false
         this.oauthRequest = userInfo.oauthSession
         this.organizationName.emit(this.oauthRequest.clientName)
-        console.log('this ', this.oauthRequest.clientName)
         if (userInfo.loggedIn) {
           this.userName = userInfo.displayName
           this.orcidUrl = userInfo.effectiveOrcidUrl

@@ -30,7 +30,6 @@ export class ShareEmailsDomainsComponent {
   @Output() finish = new EventEmitter<void>()
 
   ngOnInit() {
-    console.log(this.organizationName)
     this.userPrivateDomains = this.getTop3MostRecentPrivateDomains(
       this.userEmailsJson
     )
