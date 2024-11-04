@@ -1,3 +1,9 @@
+## v2.107.4 - 2024-11-04
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.107.3...v2.107.4)
+
+- [#2387](https://github.com/ORCID/orcid-angular/pull/2387): Lmendoza/9422 email domains interstitial oauth
+
 ## v2.107.3 - 2024-11-04
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.107.2...v2.107.3)
