@@ -1,0 +1,16 @@
+.info {
+  padding: 16px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  border: solid 2px;
+  border-radius: 4px;
+  display: flex;
+
+  p {
+    margin: 0;
+  }
+  .col {
+    align-items: start;
+    padding-left: 0;
+  }
+}

@@ -1,0 +1,23 @@
+@use '@angular/material' as mat;
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+@mixin theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  .info {
+    border-color: mat.get-color-from-palette(
+      $foreground,
+      'state-info-darkest'
+    ) !important;
+    background-color: mat.get-color-from-palette(
+      $background,
+      'state-info-lightest'
+    ) !important;
+  }
+}
+
+@include theme($orcid-app-theme);
