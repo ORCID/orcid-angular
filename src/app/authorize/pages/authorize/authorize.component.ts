@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core'
 import { cloneDeep } from 'lodash'
-import { first, tap } from 'rxjs/operators'
+import { first, take, tap } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { UserService } from 'src/app/core'
@@ -45,9 +45,12 @@ export class AuthorizeComponent {
   }
 
   ngOnInit() {
-    this._togglz.getStateOf('OAUTH_DOMAINS_INTERSTITIAL').subscribe((value) => {
-      this.oauthDomainsInterstitialEnabled = value
-    })
+    this._togglz
+      .getStateOf('OAUTH_DOMAINS_INTERSTITIAL')
+      .pipe(take(1))
+      .subscribe((value) => {
+        this.oauthDomainsInterstitialEnabled = value
+      })
     this._recordEmails
       .getEmails()
       .pipe(
@@ -61,13 +64,15 @@ export class AuthorizeComponent {
   }
 
   userHasPrivateEmails(value: EmailsEndpoint): boolean {
-    return !!value.emailDomains.find(
-      (domain) => domain.visibility !== 'PUBLIC'
-    )
+    return !!value.emailDomains.find((domain) => domain.visibility !== 'PUBLIC')
   }
 
   handleRedirect(url: string) {
-    if (url && this.userHasPrivateDomains && this.oauthDomainsInterstitialEnabled) {
+    if (
+      url &&
+      this.userHasPrivateDomains &&
+      this.oauthDomainsInterstitialEnabled
+    ) {
       this.redirectUrl = url
       this.showAuthorizationComponent = false
       this.showInterstital = true

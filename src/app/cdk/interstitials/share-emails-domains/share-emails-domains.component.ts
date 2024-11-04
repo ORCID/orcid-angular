@@ -36,7 +36,7 @@ export class ShareEmailsDomainsComponent {
     )
     this.form = this.fb.group({
       items: this.fb.array(
-        this.userPrivateDomains.map((item) => this.createItemFormGroup(item))
+        this.userPrivateDomains?.map((item) => this.createItemFormGroup(item))
       ),
     })
   }
@@ -44,7 +44,7 @@ export class ShareEmailsDomainsComponent {
   getTop3MostRecentPrivateDomains(
     value: EmailsEndpoint
   ): AssertionVisibilityString[] {
-    return value.emailDomains
+    return value?.emailDomains
       .filter((domain) => domain.visibility !== 'PUBLIC')
       .sort((a, b) => {
         return b.createdDate.timestamp - a.createdDate.timestamp
