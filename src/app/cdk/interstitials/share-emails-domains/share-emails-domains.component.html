@@ -1,0 +1,148 @@
+<ng-container *ngIf="beforeSummit">
+  <mat-card-header class="authorize-header">
+    <mat-card-title role="heading" aria-level="1">
+      <mat-icon class="logo-icon"
+        ><img src="./assets/vectors/orcid.logo.icon.svg" alt="orcid logo" />
+      </mat-icon>
+      <h1
+        class="orc-font-heading-small"
+        i18n="@@interstitial.shareYourVerified"
+      >
+        Share your verified email domains
+      </h1>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="authorize-content">
+    <app-info-panel>
+      <div i18n="@@interstitial.weFoundSomeUnshared">
+        We’ve found some unshared email domains in your ORCID record.
+      </div>
+
+      <p i18n="@@interstitial.sharingYourEmailDomains">
+        Sharing your email domains lets you prove your association with an
+        organization or institution without having to make your full email
+        address public.
+      </p>
+    </app-info-panel>
+    <div class="row">
+      <h2
+        class="orc-font-body m-b-8"
+        i18n="@@interstitial.yourVerifiedEmailDomains"
+      >
+        Your verified email domains
+      </h2>
+    </div>
+
+    <div i18n="@@interstitial.uncheckedAnyEmail">
+      Uncheck any email domains you don’t want to share on your public ORCID
+      record
+    </div>
+
+    <form [formGroup]="form">
+      <div formArrayName="items" class="items">
+        <div
+          *ngFor="
+            let item of this.form.controls.items.controls;
+            let i = index;
+            let last = last
+          "
+          [formGroupName]="i"
+        >
+          <!-- Material Checkbox with item email/value as a label -->
+          <div class="checkbox-wrapper">
+            <mat-checkbox formControlName="selected">
+              {{ item.get('email').value }}
+            </mat-checkbox>
+            <mat-divider [ngClass]="{ last: last }"></mat-divider>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <button
+      class="authorize-button"
+      mat-raised-button
+      color="primary"
+      i18n="@@interstitial.makeSelectedDomainsPublic"
+      (click)="accept(true)"
+      id="authorize-button"
+    >
+      Make selected domains public
+    </button>
+    <div class="row deny-button-wrapper">
+      <a id="deny-button" class="underline" (click)="accept(false)">
+        <i i18n="@@interstitial.continueWithoutMakingDomainsPublic"
+          >Continue without making domains public</i
+        >
+      </a>
+    </div>
+  </mat-card-content>
+
+  <ng-template #orcidIconTemplate>
+    <mat-icon class="scope orcid" role="presentation">
+      <img src="/assets/vectors/orcid.logo.black.icon.svg" alt=""
+    /></mat-icon>
+  </ng-template>
+</ng-container>
+<ng-container *ngIf="afterSummit">
+  <mat-card-header class="authorize-header">
+    <mat-card-title role="heading" aria-level="1">
+      <mat-icon class="logo-icon"
+        ><img src="./assets/vectors/orcid.logo.icon.svg" alt="orcid logo" />
+      </mat-icon>
+      <h1
+        class="orc-font-heading-small"
+        i18n="@@interstitial.emailDomainsShared"
+      >
+        Email domains shared
+      </h1>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="authorize-content">
+    <div i18n="@@interstitial.theFollowingEmailDomains">
+      The following email domains are now visible on your public ORCID record.
+    </div>
+
+    <mat-divider class="green-divider"></mat-divider>
+    <div *ngFor="let domain of domainToMakePublic; let last = last">
+      <div class="published-email-container">
+        <img
+          src="/assets/vectors/thumbs-up.svg"
+          alt="ORCID logo"
+          class="orcid-logo"
+        />
+        <strong class="orc-font-body-small published-domain">{{
+          domain
+        }}</strong>
+      </div>
+
+      <mat-divider [ngClass]="{ 'green-divider': last }"></mat-divider>
+    </div>
+
+    <div i18n="@@interstitial.visitYourOrcidRecord">
+      Visit your ORCID record to manage your email addresses, domains,
+      affiliations, works and more.
+    </div>
+
+    <mat-divider class="last"></mat-divider>
+
+    <button
+      class="authorize-button mat-button-wrap-text"
+      mat-raised-button
+      color="primary"
+      (click)="finish.emit()"
+      id="authorize-button"
+    >
+      <ng-container i18n="@@interstitial.continueTo">
+        Continue to
+      </ng-container>
+      <ng-container> {{ organizationName }} </ng-container>
+    </button>
+  </mat-card-content>
+
+  <ng-template #orcidIconTemplate>
+    <mat-icon class="scope orcid" role="presentation">
+      <img src="/assets/vectors/orcid.logo.black.icon.svg" alt=""
+    /></mat-icon>
+  </ng-template>
+</ng-container>

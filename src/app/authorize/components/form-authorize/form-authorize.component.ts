@@ -1,4 +1,12 @@
-import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core'
 import { Router } from '@angular/router'
 import { forkJoin, Observable, Subject } from 'rxjs'
 import { catchError, map, take, takeUntil } from 'rxjs/operators'
@@ -31,6 +39,8 @@ import { Title } from '@angular/platform-browser'
   preserveWhitespaces: true,
 })
 export class FormAuthorizeComponent implements OnInit, OnDestroy {
+  @Output() redirectUrl = new EventEmitter<string>()
+  @Output() organizationName = new EventEmitter<string>()
   environment = environment
   $destroy: Subject<boolean> = new Subject<boolean>()
   orcidUrl: string
@@ -57,7 +67,9 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
     private _errorHandler: ErrorHandlerService,
     private _trustedIndividuals: TrustedIndividualsService,
     private _titleService: Title
-  ) {
+  ) {}
+
+  ngOnInit(): void {
     this._platformInfo
       .get()
       .pipe(take(1))
@@ -73,6 +85,8 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
         this.loadingUserInfo = false
         this.loadingTrustedIndividuals = false
         this.oauthRequest = userInfo.oauthSession
+        this.organizationName.emit(this.oauthRequest.clientName)
+        console.log('this ', this.oauthRequest.clientName)
         if (userInfo.loggedIn) {
           this.userName = userInfo.displayName
           this.orcidUrl = userInfo.effectiveOrcidUrl
@@ -92,9 +106,7 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
     this._trustedIndividuals.getTrustedIndividuals().subscribe((value) => {
       this.trustedIndividuals = value
     })
-  }
 
-  ngOnInit(): void {
     setTimeout(() => {
       this._titleService.setTitle(
         this.authorizeAccessFor +
@@ -141,8 +153,8 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
           )
         )
         .subscribe(
-          () => (this.window as any).outOfRouterNavigation(data.redirectUrl),
-          () => (this.window as any).outOfRouterNavigation(data.redirectUrl)
+          () => this.redirectUrl.next(data.redirectUrl),
+          () => this.redirectUrl.next(data.redirectUrl)
         )
     })
   }
