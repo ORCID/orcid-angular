@@ -1,0 +1,163 @@
+@import '../../../../assets/scss/orcid.spacing.scss';
+
+h2 {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+.published-email-container {
+  display: flex;
+  align-items: center;
+}
+
+.published-domain {
+  margin-inline-start: 16px;
+}
+
+.items {
+  margin-top: 24px;
+}
+
+.logo {
+  width: 130px;
+}
+
+.user-links {
+  display: flex;
+  justify-content: space-between;
+}
+
+.university-dropdown {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+:host {
+  ul {
+    padding: 0;
+
+    li {
+      list-style-type: none;
+      flex-direction: column;
+      align-items: baseline;
+
+      div {
+        display: flex;
+        align-items: center;
+        mat-icon {
+          margin-bottom: -4px; // Compensates mat icon bottom with space
+          margin-left: $spacing-small;
+          margin-right: $spacing-small;
+        }
+      }
+    }
+  }
+}
+
+button {
+  width: 100%;
+  margin-bottom: $spacing-base;
+}
+mat-divider {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+mat-divider.last {
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+mat-icon > img {
+  height: 20px;
+  margin-top: 2px; // Fix icon component with SVG image
+}
+
+.col {
+  overflow: hidden;
+}
+
+app-info-drop-down {
+  max-width: 100%;
+  display: block;
+}
+
+.progress-bar {
+  top: 0;
+}
+
+mat-card-header.authorize-header {
+  mat-card-title {
+    margin: 0 0 32px 0 !important;
+  }
+
+  h1 {
+    margin-top: 0;
+  }
+
+  .orc-font-heading-small {
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  mat-icon.logo-icon {
+    height: 80px;
+    width: 64px;
+    img {
+      height: 64px;
+    }
+  }
+}
+
+mat-card-content.authorize-content {
+  margin: 0px !important;
+
+  div.profile-icon-wrapper {
+    padding: 0 !important;
+    margin-right: 16px;
+  }
+
+  div.user-wrapper {
+    padding: 0 !important;
+  }
+
+  div.deny-button-wrapper {
+    justify-content: center;
+  }
+
+  mat-icon.profile-icon {
+    height: 80px;
+    width: 64px;
+    img {
+      height: 64px;
+    }
+  }
+
+  mat-icon.scope {
+    width: 32px;
+  }
+
+  mat-icon.scope.orcid {
+    font-size: small;
+    img {
+      margin-top: 0 !important;
+    }
+  }
+
+  .user-links {
+    width: 100%;
+  }
+
+  .center-content {
+    justify-content: center;
+  }
+}
+
+.disclaimer-box {
+  margin: 24px 0px 20px 0px;
+  display: flex;
+  flex-direction: column;
+  :first-child {
+    margin-bottom: 12px;
+  }
+}
