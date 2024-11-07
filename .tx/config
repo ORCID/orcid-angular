@@ -245,3 +245,12 @@ replace_edited_strings = false
 keep_translations      = false
 resource_name          = summary.en.properties
 
+[o:orcid-inc-1:p:orcid-angular:r:src-interstitials]
+file_filter            = src/locale/properties/interstitials/interstitials.<lang>.properties
+source_file            = src/locale/properties/interstitials/interstitials.en.properties
+source_lang            = en
+type                   = UNICODEPROPERTIES
+minimum_perc           = 0
+replace_edited_strings = false
+keep_translations      = false
+resource_name          = interstitials.en.properties
