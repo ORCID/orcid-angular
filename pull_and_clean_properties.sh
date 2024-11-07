@@ -47,7 +47,7 @@ tx_operations "tr_TR" "tr"
 tx_operations "pl_PL" "pl"
 
 echo ">>>>>>>>>>>>>>>>>>>>>>> Pulling general translations..."
-tx pull --force
+tx pull --force --all
 wait
 
 # Find all .properties files and process them
