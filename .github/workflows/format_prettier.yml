@@ -16,7 +16,7 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: 'v16.x'
+          node-version: 'v20.x'
           cache: 'yarn'
       - run: yarn
 
