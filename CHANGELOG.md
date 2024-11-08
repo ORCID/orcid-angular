@@ -1,3 +1,9 @@
+## v2.107.7 - 2024-11-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.107.6...v2.107.7)
+
+- [#2389](https://github.com/ORCID/orcid-angular/pull/2389): Lmendoza/9474 qa email domains interstitial shown in oauth flow displayed in fixed size pop up window
+
 ## v2.107.6 - 2024-11-08
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.107.5...v2.107.6)
