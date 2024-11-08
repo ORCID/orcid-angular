@@ -57,15 +57,15 @@ export class ShareEmailsDomainsComponent {
     })
   }
 
-  get domainToMakePublic (): string[] {
-    return this.form.value.items
-      .filter((item: any) => item.selected)
-      .map((item: any) => item.email)
+  get domainToMakePublic(): string[] {
+    return (
+      this.form?.value?.items
+        ?.filter((item: any) => item.selected)
+        .map((item: any) => item.email) || []
+    )
   }
 
   accept(answear: boolean) {
-    
-
     if (answear && this.domainToMakePublic.length > 0) {
       this.userEmailsJson.emailDomains.forEach((domain) => {
         if (this.domainToMakePublic.includes(domain.value)) {
