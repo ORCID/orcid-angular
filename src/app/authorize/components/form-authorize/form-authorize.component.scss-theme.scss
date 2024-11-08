@@ -8,7 +8,7 @@
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
 
-  .authorize-button {
+  .authorize-button  {
     color: $orcid-light-primary-text;
     background: mat.get-color-from-palette($primary, 700);
   }

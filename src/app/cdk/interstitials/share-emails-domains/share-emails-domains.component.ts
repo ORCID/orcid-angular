@@ -20,7 +20,6 @@ export class ShareEmailsDomainsComponent {
   @Input() userEmailsJson: EmailsEndpoint
   @Input() organizationName: string
   form: any
-  domainToMakePublic: string[]
   constructor(
     public platformInfo: PlatformInfoService,
     private fb: FormBuilder,
@@ -58,11 +57,15 @@ export class ShareEmailsDomainsComponent {
     })
   }
 
-  accept(answear: boolean) {
-    this.domainToMakePublic = this.form.value.items
-      .filter((item) => item.selected)
-      .map((item) => item.email)
+  get domainToMakePublic(): string[] {
+    return (
+      this.form?.value?.items
+        ?.filter((item: any) => item.selected)
+        .map((item: any) => item.email) || []
+    )
+  }
 
+  accept(answear: boolean) {
     if (answear && this.domainToMakePublic.length > 0) {
       this.userEmailsJson.emailDomains.forEach((domain) => {
         if (this.domainToMakePublic.includes(domain.value)) {
