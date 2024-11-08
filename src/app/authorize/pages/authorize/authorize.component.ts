@@ -27,6 +27,7 @@ export class AuthorizeComponent {
   organizationName: string
   domainInterstitialHasBeenViewed: boolean
   userIsNotImpersonating: boolean
+  insidePopUpWindows: boolean
 
   constructor(
     _user: UserService,
@@ -50,6 +51,7 @@ export class AuthorizeComponent {
   }
 
   ngOnInit() {
+    this.insidePopUpWindows = this.window.opener !== null
     this._userInfo.getUserSession().subscribe((userInfo) => {
       this.userIsNotImpersonating =
         userInfo.userInfo.REAL_USER_ORCID ===
@@ -85,13 +87,13 @@ export class AuthorizeComponent {
 
   handleRedirect(url: string) {
     this.redirectUrl = url
-
     if (
       url &&
       this.userHasPrivateDomains &&
       this.oauthDomainsInterstitialEnabled &&
       !this.domainInterstitialHasBeenViewed &&
-      this.userIsNotImpersonating
+      this.userIsNotImpersonating &&
+      !this.insidePopUpWindows
     ) {
       this.showAuthorizationComponent = false
       this.showInterstital = true

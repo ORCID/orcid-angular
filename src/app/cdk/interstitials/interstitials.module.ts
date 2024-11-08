@@ -11,6 +11,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatLegacyCheckboxModule } from '@angular/material/legacy-checkbox'
 import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button'
 import { InfoPanelModule } from '../info-panel/info-panel.module'
+import { A11yLinkModule } from '../a11y-link/a11y-link.module'
 
 @NgModule({
   declarations: [ShareEmailsDomainsComponent],
@@ -26,6 +27,7 @@ import { InfoPanelModule } from '../info-panel/info-panel.module'
     MatLegacyCheckboxModule,
     MatButtonModule,
     InfoPanelModule,
+    A11yLinkModule,
   ],
   exports: [ShareEmailsDomainsComponent],
 })

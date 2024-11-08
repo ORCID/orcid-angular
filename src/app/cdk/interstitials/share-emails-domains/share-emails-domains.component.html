@@ -65,6 +65,7 @@
       i18n="@@interstitial.makeSelectedDomainsPublic"
       (click)="accept(true)"
       id="authorize-button"
+      [disabled]="!domainToMakePublic.length"
     >
       Make selected domains public
     </button>
