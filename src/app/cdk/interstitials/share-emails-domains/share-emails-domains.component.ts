@@ -1,9 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core'
+import { Component, EventEmitter, Inject, Input, Output } from '@angular/core'
 import { PlatformInfoService } from '../../platform-info'
 import { AssertionVisibilityString, EmailsEndpoint } from 'src/app/types'
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
 import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
 import { error } from 'console'
+import { WINDOW } from '../../window'
 
 @Component({
   selector: 'app-share-emails-domains',
@@ -23,12 +24,14 @@ export class ShareEmailsDomainsComponent {
   constructor(
     public platformInfo: PlatformInfoService,
     private fb: FormBuilder,
-    private recordEmailsService: RecordEmailsService
+    private recordEmailsService: RecordEmailsService,
+    @Inject(WINDOW) private window: Window
   ) {}
   public loadingEmails = true
   @Output() finish = new EventEmitter<void>()
 
   ngOnInit() {
+    this.window.scrollTo(0, 0)
     this.userPrivateDomains = this.getTop3MostRecentPrivateDomains(
       this.userEmailsJson
     )
