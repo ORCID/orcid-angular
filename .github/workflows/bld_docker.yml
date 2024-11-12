@@ -1,5 +1,4 @@
 name: bld_docker
-run-name: ${{ inputs.docker_name }}
 
 permissions:
   checks: write
@@ -21,7 +20,7 @@ on:
         default: "."
         type: string
       build_args:
-        description: 'arguments'
+        description: 'build_args e.g wibble=blar'
         required: false
         default: ""
         type: string
@@ -59,7 +58,7 @@ on:
         default: "."
         type: string
       build_args:
-        description: 'arguments'
+        description: 'build_args e.g wibble=blar'
         required: false
         default: ""
         type: string
@@ -87,6 +86,29 @@ on:
 
 jobs:
   bld_docker:
+    strategy:
+      matrix:
+        include:
+          - artifact_name: prod
+            docker_name: orcid/registry/orcid-web-frontend-prod
+            build_args: "build_env=prod"
+            file: Dockerfile.build
+
+          - artifact_name: sandbox
+            docker_name: orcid/registry/orcid-web-frontend-sandbox
+            build_args: "build_env=sandbox"
+            file: Dockerfile.build
+
+          - artifact_name: qa
+            docker_name: orcid/registry/orcid-web-frontend-qa
+            build_args: "build_env=qa"
+            file: Dockerfile.build
+
+          - artifact_name: int
+            docker_name: orcid/registry/orcid-web-frontend-int
+            build_args: "build_env=int"
+            file: Dockerfile.build
+
     runs-on: ubuntu-latest
     steps:
       - name: git-checkout-ref-action
@@ -96,7 +118,7 @@ jobs:
           default_branch: ${{ github.event.repository.default_branch }}
           ref: ${{ inputs.ref }}
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           ref: ${{ steps.ref.outputs.ref }}
           # checkout some history so we can scan commits for bump messages
@@ -110,8 +132,8 @@ jobs:
           version_tag: ${{ inputs.version_tag }}
           bump: ${{ inputs.bump }}
 
-      - uses: docker/setup-buildx-action@v2
-      - uses: actions/cache@v3
+      - uses: docker/setup-buildx-action@v3
+      - uses: actions/cache@v4
         with:
           path: /tmp/.buildx-cache
           # each cache needs a unique key for the job
@@ -121,7 +143,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-buildx-
       - name: Login to private registry
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           registry: ${{ secrets.DOCKER_REG_PRIVATE }}
           username: ${{ secrets.DOCKER_USER }}
@@ -130,20 +152,20 @@ jobs:
       - name: nasty hack to allow dynamic defaults
         id: dynamic_defaults
         run: |
-          FILE="${{ github.event.inputs.file }}"
+          FILE="${{ matrix.file }}"
           echo "default_file=${FILE:-${{ inputs.context }}/Dockerfile}" >> "$GITHUB_OUTPUT"
 
       - name: show the dynamic defaults
         run: |
           echo ${{ steps.dynamic_defaults.outputs.default_file }}
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v6
         with:
           push: true
-          tags: ${{ secrets.DOCKER_REG_PRIVATE }}/${{ inputs.docker_name}}:${{ steps.version.outputs.version_tag_numeric }}
+          tags: ${{ secrets.DOCKER_REG_PRIVATE }}/${{ matrix.docker_name}}:${{ steps.version.outputs.version_tag_numeric }}
           context: ${{ inputs.context }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
-          build-args: ${{ inputs.build_args }}
+          build-args: ${{ matrix.build_args }}
           file: ${{ steps.dynamic_defaults.outputs.default_file }}
 

@@ -11,8 +11,8 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 'v20.x'
           cache: 'yarn'
@@ -20,7 +20,7 @@ jobs:
         run: | # Install npm packages and build the Storybook files
           yarn install
           yarn run build:storybook
-      - name: Deploy  
+      - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           FOLDER: dist/storybook/ng-orcid # The folder that the build-storybook script generates files.
