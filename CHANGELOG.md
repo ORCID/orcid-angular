@@ -1,3 +1,9 @@
+## v2.107.9 - 2024-11-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.107.8...v2.107.9)
+
+- [#2390](https://github.com/ORCID/orcid-angular/pull/2390): lmendoza/9453-update-node-version
+
 ## v2.107.8 - 2024-11-11
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.107.7...v2.107.8)
