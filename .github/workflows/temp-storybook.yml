@@ -1,4 +1,4 @@
-name: Build and Deploy
+name: temp-storybook
 
 on:
   push:
