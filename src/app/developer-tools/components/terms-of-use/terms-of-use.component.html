@@ -132,7 +132,7 @@
   </ng-container>
 </p>
 
-<app-alert-message>
+<app-alert-message *ngIf="!hasVerifiedEmailAddress">
   <strong class="orc-font-body" i18n="@@developerTools.noVerifiedEmailAddresses"
     >No verified email addresses found</strong
   >
