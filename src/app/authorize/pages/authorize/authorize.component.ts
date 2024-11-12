@@ -28,6 +28,7 @@ export class AuthorizeComponent {
   domainInterstitialHasBeenViewed: boolean
   userIsNotImpersonating: boolean
   insidePopUpWindows: boolean
+  userHasPublicDomains: boolean
 
   constructor(
     _user: UserService,
@@ -75,10 +76,14 @@ export class AuthorizeComponent {
         tap((value) => {
           this.originalEmailsBackendCopy = cloneDeep(value)
           this.userHasPrivateDomains = this.userHasPrivateEmails(value)
+          this.userHasPublicDomains = this.userHasPublicEmails(value)
         }),
         first()
       )
       .subscribe()
+  }
+  userHasPublicEmails(value: EmailsEndpoint): any {
+    return !!value.emailDomains.find((domain) => domain.visibility === 'PUBLIC')
   }
 
   userHasPrivateEmails(value: EmailsEndpoint): boolean {
@@ -90,6 +95,7 @@ export class AuthorizeComponent {
     if (
       url &&
       this.userHasPrivateDomains &&
+      !this.userHasPublicDomains &&
       this.oauthDomainsInterstitialEnabled &&
       !this.domainInterstitialHasBeenViewed &&
       this.userIsNotImpersonating &&
