@@ -21,7 +21,10 @@ export class EnvironmentBannerComponent implements OnInit {
   ) {
     this.notInsideIframe = window.self === window.top
     this.hostUrl = window.location.host
-    if ((!this._cookieService.get('testWarningCookie') || !this.canDismiss) && this.notInsideIframe) {
+    if (
+      (!this._cookieService.get('testWarningCookie') || !this.canDismiss) &&
+      this.notInsideIframe
+    ) {
       this.display = 'auto'
     }
   }

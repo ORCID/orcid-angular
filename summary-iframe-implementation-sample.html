@@ -125,125 +125,125 @@ https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-
     <script>
       // Default URLs
       const defaultUrls = [
-        "https://orcid.org/0000-0001-9389-7387/summary",
-        "https://sandbox.orcid.org/0000-0003-3363-7801/summary",
-        "https://qa.orcid.org/0009-0006-7603-4444/summary",
-        "https://qa.orcid.org/0009-0007-9334-3617/summary",
-        "http://localhost:4200/0009-0006-7603-4444/summary",
-        "http://localhost:4200/0009-0007-9334-3617/summary",
-      ];
+        'https://orcid.org/0000-0001-9389-7387/summary',
+        'https://sandbox.orcid.org/0000-0003-3363-7801/summary',
+        'https://qa.orcid.org/0009-0006-7603-4444/summary',
+        'https://qa.orcid.org/0009-0007-9334-3617/summary',
+        'http://localhost:4200/0009-0006-7603-4444/summary',
+        'http://localhost:4200/0009-0007-9334-3617/summary',
+      ]
 
       // Validate ORCID URL
       function validateUrl(url) {
         const orcidRegex =
-          /https?:\/\/.*\/\d{4}-\d{4}-\d{4}-\d{3}[0-9X](\/summary)$/;
+          /https?:\/\/.*\/\d{4}-\d{4}-\d{4}-\d{3}[0-9X](\/summary)$/
         if (!orcidRegex.test(url)) {
           throw new Error(
             "Invalid URL. The URL must contain a valid ORCID ID and optionally end with '/summary'."
-          );
+          )
         }
       }
 
       // Initialize URLs from localStorage or defaults
       function loadUrls() {
-        let savedUrls = JSON.parse(localStorage.getItem("iframeUrls")) || [];
-        savedUrls = savedUrls.concat(defaultUrls);
+        let savedUrls = JSON.parse(localStorage.getItem('iframeUrls')) || []
+        savedUrls = savedUrls.concat(defaultUrls)
         savedUrls = savedUrls.filter(
           (url, index, self) => self.indexOf(url) === index
-        ); // Remove duplicates
-        localStorage.setItem("iframeUrls", JSON.stringify(savedUrls)); // Ensure defaults are saved
-        updateDropdown(savedUrls);
+        ) // Remove duplicates
+        localStorage.setItem('iframeUrls', JSON.stringify(savedUrls)) // Ensure defaults are saved
+        updateDropdown(savedUrls)
       }
 
       function groupUrlsByDomain(urls) {
-        const grouped = {};
+        const grouped = {}
         urls.forEach((url) => {
           try {
-            const { hostname } = new URL(url); // Extract base domain
-            if (!grouped[hostname]) grouped[hostname] = [];
-            grouped[hostname].push(url);
+            const { hostname } = new URL(url) // Extract base domain
+            if (!grouped[hostname]) grouped[hostname] = []
+            grouped[hostname].push(url)
           } catch (e) {
-            console.error(`Invalid URL skipped: ${url}`);
+            console.error(`Invalid URL skipped: ${url}`)
           }
-        });
-        return grouped;
+        })
+        return grouped
       }
 
       // Update dropdown with URLs
       function updateDropdown(urls) {
-        const urlDropdown = document.getElementById("iframe-url");
-        urlDropdown.innerHTML = '<option value="">-- Select a URL --</option>'; // Reset dropdown
+        const urlDropdown = document.getElementById('iframe-url')
+        urlDropdown.innerHTML = '<option value="">-- Select a URL --</option>' // Reset dropdown
 
         // Group URLs by domain
-        const groupedUrls = groupUrlsByDomain(urls);
+        const groupedUrls = groupUrlsByDomain(urls)
 
         // Create optgroups for each domain
         Object.keys(groupedUrls).forEach((domain) => {
-          const optgroup = document.createElement("optgroup");
-          optgroup.label = domain; // Set the group label to the domain
+          const optgroup = document.createElement('optgroup')
+          optgroup.label = domain // Set the group label to the domain
           groupedUrls[domain].forEach((url) => {
-            const option = document.createElement("option");
-            option.value = url;
-            option.textContent = url;
-            optgroup.appendChild(option);
-          });
-          urlDropdown.appendChild(optgroup); // Add the group to the dropdown
-        });
+            const option = document.createElement('option')
+            option.value = url
+            option.textContent = url
+            optgroup.appendChild(option)
+          })
+          urlDropdown.appendChild(optgroup) // Add the group to the dropdown
+        })
       }
 
       // Select a URL from the dropdown
       function selectUrl() {
-        const selectedUrl = document.getElementById("iframe-url").value;
-        document.getElementById("new-url").value = selectedUrl;
+        const selectedUrl = document.getElementById('iframe-url').value
+        document.getElementById('new-url').value = selectedUrl
       }
 
       // Open the dialog with the selected or entered URL
       function openDialog(width, height) {
-        const url = document.getElementById("new-url").value.trim();
+        const url = document.getElementById('new-url').value.trim()
         if (!url) {
-          alert("Please enter or select a URL.");
-          return;
+          alert('Please enter or select a URL.')
+          return
         }
 
         try {
-          validateUrl(url); // Validate the URL before proceeding
+          validateUrl(url) // Validate the URL before proceeding
         } catch (error) {
-          alert(error.message);
-          return;
+          alert(error.message)
+          return
         }
 
         // Save URL to "Previously Open URLs" if not already present
-        let urls = JSON.parse(localStorage.getItem("iframeUrls")) || [];
+        let urls = JSON.parse(localStorage.getItem('iframeUrls')) || []
         if (!urls.includes(url)) {
-          urls.push(url);
-          localStorage.setItem("iframeUrls", JSON.stringify(urls));
-          updateDropdown(urls);
+          urls.push(url)
+          localStorage.setItem('iframeUrls', JSON.stringify(urls))
+          updateDropdown(urls)
         }
 
-        const dialog = document.getElementById("dialog-box");
-        const iframe = document.getElementById("dialog-iframe");
+        const dialog = document.getElementById('dialog-box')
+        const iframe = document.getElementById('dialog-iframe')
 
         // Set iframe URL and dialog dimensions
-        iframe.src = url;
-        dialog.style.width = `${width}px`;
-        dialog.style.height = `${height}px`;
+        iframe.src = url
+        dialog.style.width = `${width}px`
+        dialog.style.height = `${height}px`
 
         // Display the dialog
-        dialog.style.display = "block";
+        dialog.style.display = 'block'
       }
 
       // Close the dialog
       function closeDialog() {
-        const dialog = document.getElementById("dialog-box");
-        const iframe = document.getElementById("dialog-iframe");
+        const dialog = document.getElementById('dialog-box')
+        const iframe = document.getElementById('dialog-iframe')
 
         // Hide the dialog and clear the iframe URL
-        dialog.style.display = "none";
-        iframe.src = "";
+        dialog.style.display = 'none'
+        iframe.src = ''
       }
 
       // Load URLs when the page loads
-      window.onload = loadUrls;
+      window.onload = loadUrls
     </script>
   </body>
 </html>
