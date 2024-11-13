@@ -76,7 +76,7 @@ export class AuthorizeComponent {
         tap((value) => {
           this.originalEmailsBackendCopy = cloneDeep(value)
           this.userHasPrivateDomains = this.userHasPrivateEmails(value)
-          this.userHasPublicDomains= this.userHasPublicEmails(value)
+          this.userHasPublicDomains = this.userHasPublicEmails(value)
         }),
         first()
       )
