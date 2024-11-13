@@ -1,4 +1,4 @@
-name: build_test_release
+name: bld_test_rel_tag
 
 on:
   workflow_call:
@@ -18,6 +18,11 @@ on:
         required: false
         default: "default"
         type: string
+      rel_tag:
+        description: Whether to tag the code
+        type: boolean
+        required: false
+        default: true
 
   workflow_dispatch:
     inputs:
@@ -42,7 +47,11 @@ on:
         required: false
         default: "default_branch"
         type: string
-
+      rel_tag:
+        description: Whether to tag the code
+        type: boolean
+        required: false
+        default: true
 
 # cancel running job if another commit comes in
 concurrency:
@@ -66,26 +75,27 @@ jobs:
       - format_i18n
       - format_prettier
 
-  unit_tests:
-    uses: ./.github/workflows/unit_tests.yml
+  test_yarn:
+    uses: ./.github/workflows/test_yarn.yml
     needs:
       - format_i18n
       - format_prettier
 
   # this is a test
-  bld_all_yarn:
-    uses: ./.github/workflows/bld_all_yarn.yml
+  bld_yarn:
+    uses: ./.github/workflows/bld_yarn.yml
     needs:
       - format_i18n
       - format_prettier
 
 ##############################################################################
-  bld_all:
-    uses: ./.github/workflows/bld_all.yml
+  # uses maven to build via yarn into a war file
+  bld_mvn:
+    uses: ./.github/workflows/bld_mvn.yml
     secrets: inherit # pass all secrets for uploading assets
     needs:
       - lint
-      - bld_all_yarn
+      - bld_yarn
       - format_i18n
       - format_prettier
     permissions:
@@ -98,12 +108,12 @@ jobs:
       bump: ${{ inputs.bump }}
       ref: ${{ inputs.ref }}
 
-  bld_all_docker:
-    uses: ./.github/workflows/bld_all_docker.yml
+  bld_docker:
+    uses: ./.github/workflows/bld_docker.yml
     secrets: inherit # pass all secrets for uploading assets
     needs:
       - lint
-      - bld_all_yarn
+      - bld_yarn
       - format_i18n
       - format_prettier
     permissions:
@@ -115,3 +125,20 @@ jobs:
       version_tag: ${{ inputs.version_tag }}
       bump: ${{ inputs.bump }}
       ref: ${{ inputs.ref }}
+
+##############################################################################
+
+  rel_tag:
+    uses: ./.github/workflows/rel_tag.yml
+    if: ${{ inputs.rel_tag }}
+    needs: bld_mvn
+    with:
+      version_tag: ${{ inputs.version_tag }}
+      bump: ${{ inputs.bump }}
+      ref: ${{ inputs.ref }}
+    secrets: inherit # pass all secrets
+    permissions:
+      checks: write
+      contents: write
+      issues: read
+      pull-requests: write

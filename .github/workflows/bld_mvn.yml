@@ -1,5 +1,4 @@
-name: bld_maven
-run-name: bld-{{ inputs.artifact_name }}
+name: bld_mvn
 
 permissions:
   checks: write
@@ -61,7 +60,15 @@ on:
         type: string
 
 jobs:
-  bld_maven:
+  bld_mvn:
+    strategy:
+      matrix:
+        include:
+          - artifact_name: prod
+          - artifact_name: sandbox
+          - artifact_name: qa
+          - artifact_name: int
+
     runs-on: ubuntu-latest
     steps:
       - name: git-checkout-ref-action
@@ -71,7 +78,7 @@ jobs:
           default_branch: ${{ github.event.repository.default_branch }}
           ref: ${{ inputs.ref }}
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           ref: ${{ steps.ref.outputs.ref }}
           # checkout some history so we can scan commits for bump messages
@@ -86,17 +93,11 @@ jobs:
           bump: ${{ inputs.bump }}
 
       - name: Set up Open JDK 11
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '11'
           cache: 'maven'
-
-# FIXME: think that maven somehow pulls this in, so never cached
-#       - name: setup node
-#         uses: actions/setup-node@v3
-#         with:
-#           node-version: 'v16.x'
 
       - name: show path
         run: |
@@ -109,7 +110,7 @@ jobs:
         shell: bash
         env:
           version_tag_numeric: '${{ steps.version.outputs.version_tag_numeric }}'
-          project: '${{ inputs.artifact_name }}'
+          project: '${{ matrix.artifact_name }}'
 
       - name: bump version using prod profile
         run: |
@@ -147,4 +148,4 @@ jobs:
           ARTIFACT_REPO_PATH: '${{ secrets.ARTIFACT_REPO_PATH }}'
           ARTIFACT_USER: '${{ secrets.ARTIFACT_USER }}'
           ARTIFACT_PASSWORD: '${{ secrets.ARTIFACT_PASSWORD }}'
-          build_env: '${{ inputs.artifact_name }}'
+          build_env: '${{ matrix.artifact_name }}'

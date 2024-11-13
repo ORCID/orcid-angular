@@ -1,5 +1,4 @@
 name: bld_yarn
-run-name: bld-{{ inputs.artifact_name }}
 
 permissions:
   checks: write
@@ -25,12 +24,19 @@ on:
 
 jobs:
   bld_yarn:
+    strategy:
+      matrix:
+        include:
+          - artifact_name: prod
+          - artifact_name: sandbox
+          - artifact_name: qa
+          - artifact_name: int
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 'v16.x'
+          node-version: 'v20.x'
           cache: 'yarn'
       - run: yarn
       - run: yarn build:${{ inputs.artifact_name }}
