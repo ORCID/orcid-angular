@@ -1,3 +1,14 @@
+## 2.108.0 - 2024-11-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.107.9...2.108.0)
+
+- [#2395](https://github.com/ORCID/orcid-angular/pull/2395): scroll to top on email interstitial
+- [#2394](https://github.com/ORCID/orcid-angular/pull/2394): convert to matrix format and bump all action versions for node version
+
+### Fix
+
+- bump linting action versions
+
 ## 2.107.10 - 2024-11-12
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.107.9...2.107.10)
