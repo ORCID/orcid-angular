@@ -132,6 +132,25 @@
   </ng-container>
 </p>
 
+<app-alert-message *ngIf="!hasVerifiedEmailAddress">
+  <strong class="orc-font-body" i18n="@@developerTools.noVerifiedEmailAddresses"
+    >No verified email addresses found</strong
+  >
+
+  <p class="orc-font-body-small">
+    <ng-container i18n="@@developerTools.youMustHaveAtLeastOneVerifiedEmail"
+      >You must have at least one verified email address in your ORCID account
+      to register for your Public API credentials. Manage your email addresses
+      in the</ng-container
+    >
+    <a
+      (click)="openEmailModal()"
+      i18n="@@developerTools.emailsAndDomainsSection"
+      >Emails and domains section of your ORCID record</a
+    >.
+  </p>
+</app-alert-message>
+
 <div class="info" *ngIf="!checked && dirty">
   <div class="col">
     <mat-icon class="large-material-icon outline">warning</mat-icon>

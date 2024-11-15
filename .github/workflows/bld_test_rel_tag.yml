@@ -18,6 +18,11 @@ on:
         required: false
         default: "default"
         type: string
+      rel_tag:
+        description: Whether to tag the code
+        type: boolean
+        required: false
+        default: true
 
   workflow_dispatch:
     inputs:

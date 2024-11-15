@@ -9,9 +9,11 @@ import {
   ViewChild,
 } from '@angular/core'
 import { MatLegacyCheckbox as MatCheckbox } from '@angular/material/legacy-checkbox'
+import { MatLegacyDialog } from '@angular/material/legacy-dialog'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
+import { ModalEmailComponent } from 'src/app/cdk/side-bar/modals/modal-email/modal-email.component'
 import { DeveloperToolsService } from 'src/app/core/developer-tools/developer-tools.service'
 import { RecordService } from 'src/app/core/record/record.service'
 
@@ -31,10 +33,12 @@ export class TermsOfUseComponent implements OnInit, OnDestroy {
   @Output() developerToolsEnable = new EventEmitter<boolean>()
   $destroy = new Subject<boolean>()
   emailAlreadyVerified: boolean
+  hasVerifiedEmailAddress: boolean
 
   constructor(
     private developerToolsService: DeveloperToolsService,
     private _record: RecordService,
+    private _dialog: MatLegacyDialog,
     private _changeDetectorRef: ChangeDetectorRef
   ) {}
   ngOnDestroy(): void {
@@ -50,11 +54,25 @@ export class TermsOfUseComponent implements OnInit, OnDestroy {
         const primaryEmail = userRecord?.emails?.emails?.filter(
           (email) => email.primary
         )[0]
+        this.hasVerifiedEmailAddress = userRecord.emails.emails.some(
+          (email) => email.verified
+        )
         if (primaryEmail?.verified) {
           this.emailAlreadyVerified = true
           this._changeDetectorRef.detectChanges()
         }
       })
+  }
+
+  openEmailModal() {
+    return this._dialog
+      .open(ModalEmailComponent, {
+        width: '850px',
+        maxWidth: '99%',
+        // data: this.userRecord,
+        // ariaLabel: getAriaLabel(this.editModalComponent, this.type),
+      })
+      .afterClosed()
   }
 
   registerForPublicApi() {

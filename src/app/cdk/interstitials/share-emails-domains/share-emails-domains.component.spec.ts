@@ -4,6 +4,8 @@ import { ShareEmailsDomainsComponent } from './share-emails-domains.component'
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
 import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
 import { PlatformInfoService } from '../../platform-info'
+import { WINDOW_PROVIDERS } from '../../window'
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 
 describe('ShareEmailsDomainsComponent', () => {
   let component: ShareEmailsDomainsComponent
@@ -28,7 +30,9 @@ describe('ShareEmailsDomainsComponent', () => {
           provide: RecordEmailsService,
           useValue: {},
         },
+        WINDOW_PROVIDERS,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     fixture = TestBed.createComponent(ShareEmailsDomainsComponent)
     component = fixture.componentInstance
