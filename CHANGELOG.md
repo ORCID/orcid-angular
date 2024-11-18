@@ -1,3 +1,35 @@
+## v2.107.12 - 2024-11-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.107.11...v2.107.12)
+
+## v2.107.11 - 2024-11-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.107.10...v2.107.11)
+
+## v2.107.10 - 2024-11-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.107.9...v2.107.10)
+
+- [#2396](https://github.com/ORCID/orcid-angular/pull/2396): 9497 resolve the issues integrators are having when embedding summaries into iframes
+- [#2393](https://github.com/ORCID/orcid-angular/pull/2393): Bump rollup from 3.29.4 to 3.29.5
+- [#2395](https://github.com/ORCID/orcid-angular/pull/2395): scroll to top on email interstitial
+- [#2394](https://github.com/ORCID/orcid-angular/pull/2394): convert to matrix format and bump all action versions for node version
+
+### Fix
+
+- bump linting action versions
+
+## 2.108.0 - 2024-11-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.107.9...2.108.0)
+
+- [#2395](https://github.com/ORCID/orcid-angular/pull/2395): scroll to top on email interstitial
+- [#2394](https://github.com/ORCID/orcid-angular/pull/2394): convert to matrix format and bump all action versions for node version
+
+### Fix
+
+- bump linting action versions
+
 ## 2.107.10 - 2024-11-12
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.107.9...2.107.10)

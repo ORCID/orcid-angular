@@ -7,6 +7,8 @@ import { RecordService } from 'src/app/core/record/record.service'
 import { of } from 'rxjs'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { MatLegacyDialog } from '@angular/material/legacy-dialog'
+import { useAnimation } from '@angular/animations'
 
 describe('TermsOfUseComponent', () => {
   let component: TermsOfUseComponent
@@ -19,6 +21,7 @@ describe('TermsOfUseComponent', () => {
         { provide: DeveloperToolsService, useValue: {} },
         { provide: PlatformInfoService, useValue: {} },
         { provide: RecordService, useValue: { getRecord: () => of() } },
+        { provide: MatLegacyDialog, useValue: {} },
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()

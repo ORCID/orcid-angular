@@ -14,12 +14,17 @@ export class EnvironmentBannerComponent implements OnInit {
   canDismiss = environment['CAN_DISABLE_TEST_WARNING_BANNER']
   @HostBinding('style.display') display = 'none'
   labelWarning = $localize`:@@environmentBanner.ariaLabelWarning:Warning, testing website`
+  notInsideIframe: boolean
   constructor(
     @Inject(WINDOW) private window: Window,
     private _cookieService: CookieService
   ) {
+    this.notInsideIframe = window.self === window.top
     this.hostUrl = window.location.host
-    if (!this._cookieService.get('testWarningCookie') || !this.canDismiss) {
+    if (
+      (!this._cookieService.get('testWarningCookie') || !this.canDismiss) &&
+      this.notInsideIframe
+    ) {
       this.display = 'auto'
     }
   }
