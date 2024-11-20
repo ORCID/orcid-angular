@@ -204,56 +204,47 @@
             your integration users will experience an error.
           </p>
 
-          <div class="info">
-            <div class="col">
-              <mat-icon class="material-icons-outlined large-material-icon"
-                >info</mat-icon
-              >
-            </div>
-            <div class="col l11 m6 s3">
-              <strong i18n="@@developerTools.pleaseNote">Please note</strong>
-              <ul>
-                <li>
-                  <ng-container i18n="@@developerTools.only">
-                    Only</ng-container
-                  >
-                  <strong i18n="@@developerTools.httpsURI">HTTPS URIs</strong>
-                  <ng-container i18n="@@developerTools.areAccepted">
-                    are accepted in production
-                  </ng-container>
-                </li>
-                <li>
-                  <ng-container i18n="@@developerTools.domainsRegisted"
-                    >Domains registered</ng-container
-                  >
-                  <strong i18n="@@developerTools.must">MUST</strong>
-                  <ng-container i18n="@@developerTools.exactlyMatchTheDomains"
-                    >exactly match the domains used, including
-                    subdomains</ng-container
-                  >
-                </li>
-                <li>
-                  <strong i18n="@@developerTools.registerAllRedirectURIs"
-                    >Register all redirect URIs fully where possible.</strong
-                  >
-                  <ng-container i18n="@@developerTools.thisIsTheMostSecure"
-                    >This is the most secure option and what we recommend. For
-                    more information about redirect URIs, please see
-                    our</ng-container
-                  >
+          <app-alert-message class="redirect-uri-notice">
+            <strong i18n="@@developerTools.pleaseNote">Please note</strong>
+            <ul>
+              <li>
+                <ng-container i18n="@@developerTools.only"> Only</ng-container>
+                <strong i18n="@@developerTools.httpsURI">HTTPS URIs</strong>
+                <ng-container i18n="@@developerTools.areAccepted">
+                  are accepted in production
+                </ng-container>
+              </li>
+              <li>
+                <ng-container i18n="@@developerTools.domainsRegisted"
+                  >Domains registered</ng-container
+                >
+                <strong i18n="@@developerTools.must">MUST</strong>
+                <ng-container i18n="@@developerTools.exactlyMatchTheDomains"
+                  >exactly match the domains used, including
+                  subdomains</ng-container
+                >
+              </li>
+              <li>
+                <strong i18n="@@developerTools.registerAllRedirectURIs"
+                  >Register all redirect URIs fully where possible.</strong
+                >
+                <ng-container i18n="@@developerTools.thisIsTheMostSecure"
+                  >This is the most secure option and what we recommend. For
+                  more information about redirect URIs, please see
+                  our</ng-container
+                >
 
-                  <a
-                    class="underline"
-                    i18n="@@developerTools.redirectUriFaq"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                    href="https://info.orcid.org/ufaqs/how-do-redirect-uris-work/"
-                    >redirect URI FAQ</a
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
+                <a
+                  class="underline"
+                  i18n="@@developerTools.redirectUriFaq"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  href="https://info.orcid.org/ufaqs/how-do-redirect-uris-work/"
+                  >redirect URI FAQ</a
+                >
+              </li>
+            </ul>
+          </app-alert-message>
 
           <div class="warn" *ngIf="triedToSaveWithoutUrls">
             <div class="col">
@@ -453,6 +444,27 @@
               Redirect URIs must be unique
             </mat-error>
           </p>
+          <app-alert-message class="notice-panel"
+            ><ng-container
+              i18n="
+                @@developerTools.theOrcidPublicApiAllowsYouToRequestPermission"
+              >The ORCID Public API is free for non-commercial use by
+              individuals as stated in the</ng-container
+            >
+            <a
+              href="https://info.orcid.org/public-client-terms-of-service/"
+              target="_blank"
+              class="underline"
+              i18n="@@developerTools.publicClientTermsOfService"
+              >Public APIs Terms of Service.</a
+            >
+            <ng-container i18n="@@developerTools.byRegisteringForPublicApi"
+              >By “non-commercial” we mean that you may not charge any re-use
+              fees for the Public API, and you may not make use of the Public
+              API in connection with any revenue-generating product or
+              service.</ng-container
+            ></app-alert-message
+          >
 
           <button
             mat-raised-button

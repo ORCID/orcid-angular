@@ -81,13 +81,6 @@ jobs:
       - format_i18n
       - format_prettier
 
-  # this is a test
-  bld_yarn:
-    uses: ./.github/workflows/bld_yarn.yml
-    needs:
-      - format_i18n
-      - format_prettier
-
 ##############################################################################
   # uses maven to build via yarn into a war file
   bld_mvn:
@@ -95,7 +88,6 @@ jobs:
     secrets: inherit # pass all secrets for uploading assets
     needs:
       - lint
-      - bld_yarn
       - format_i18n
       - format_prettier
     permissions:
@@ -113,7 +105,6 @@ jobs:
     secrets: inherit # pass all secrets for uploading assets
     needs:
       - lint
-      - bld_yarn
       - format_i18n
       - format_prettier
     permissions:

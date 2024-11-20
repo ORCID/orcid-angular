@@ -73,6 +73,7 @@ p {
 
 ul {
   padding-left: 16px;
+  margin-bottom: 0;
 }
 
 .add-more {
@@ -146,6 +147,19 @@ main#main {
 
 app-client-secret {
   margin-top: 16px;
+}
+
+.notice-panel {
+  line-height: 21px;
+  margin-top: 32px;
+}
+
+.redirect-uri-notice {
+  strong {
+    display: inline;
+  }
+  line-height: 21px;
+  margin-bottom: 32px;
 }
 
 .save-button {
