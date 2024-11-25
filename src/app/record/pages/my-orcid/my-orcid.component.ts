@@ -8,9 +8,9 @@ import {
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { ORCID_REGEXP } from 'src/app/constants'
-import { first, switchMap, take, takeUntil, tap } from 'rxjs/operators'
+import { first, mergeMap, switchMap, take, takeUntil, tap } from 'rxjs/operators'
 import { RecordService } from '../../../core/record/record.service'
-import { Subject } from 'rxjs'
+import { EMPTY, of, Subject } from 'rxjs'
 import { MainPanelsState, UserRecord } from '../../../types/record.local'
 import { OpenGraphService } from 'src/app/core/open-graph/open-graph.service'
 import { RobotsMetaTagsService } from 'src/app/core/robots-meta-tags/robots-meta-tags.service'
@@ -26,6 +26,7 @@ import { environment } from 'src/environments/environment'
 import { filter, map } from 'rxjs/operators'
 import { CanonocalUrlService } from 'src/app/core/canonocal-url/canonocal-url.service'
 import { RecordUtil } from 'src/app/shared/utils/record.util'
+import { LoginInterstitialsService } from 'src/app/core/login-interstitials/login-interstitials.service'
 
 @Component({
   selector: 'app-my-orcid',
@@ -74,6 +75,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   regionActivities = $localize`:@@shared.activities:Activities`
   readyForIndexing: boolean
   fragment: string
+  newlySharedDomains: string[]
 
   constructor(
     _userInfoService: UserInfoService,
@@ -89,7 +91,8 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     private _togglz: TogglzService,
     private _scriptService: ScriptService,
     private _canonocalUrlService: CanonocalUrlService,
-    private location: Location
+    private location: Location,
+    private _loginInterstitialsService: LoginInterstitialsService
   ) {}
 
   private checkIfThisIsAPublicOrcid() {
@@ -210,6 +213,19 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
             userRecord
           )
           this.displayBiography = !!userRecord?.biography
+        }),
+        mergeMap((userRecord) => {
+          const interstitialDialog =
+            this._loginInterstitialsService.checkLoginInterstitials(userRecord)
+          if (interstitialDialog) {
+            return interstitialDialog.pipe(
+              tap((newlySharedDomains) => {
+                this.newlySharedDomains = newlySharedDomains
+              })
+            )
+          } else {
+            return EMPTY
+          }
         }),
         switchMap(() => this._togglz.getTogglz().pipe(first())),
         tap((togglz) => {

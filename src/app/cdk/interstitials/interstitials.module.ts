@@ -12,9 +12,13 @@ import { MatLegacyCheckboxModule } from '@angular/material/legacy-checkbox'
 import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button'
 import { InfoPanelModule } from '../info-panel/info-panel.module'
 import { A11yLinkModule } from '../a11y-link/a11y-link.module'
+import { ShareEmailsDomainsDialogComponent } from './share-emails-domains/share-emails-domains-dialog.component'
 
 @NgModule({
-  declarations: [ShareEmailsDomainsComponent],
+  declarations: [
+    ShareEmailsDomainsComponent,
+    ShareEmailsDomainsDialogComponent,
+  ],
   imports: [
     CommonModule,
     MatLegacyCardModule,
@@ -29,6 +33,6 @@ import { A11yLinkModule } from '../a11y-link/a11y-link.module'
     InfoPanelModule,
     A11yLinkModule,
   ],
-  exports: [ShareEmailsDomainsComponent],
+  exports: [ShareEmailsDomainsComponent, ShareEmailsDomainsDialogComponent],
 })
 export class InterstitialsModule {}

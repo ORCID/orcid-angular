@@ -7,18 +7,29 @@
   $warn: map-get($theme, accent);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
-  :host {
+
+  .wrapper.warning-message {
     border-color: mat.get-color-from-palette(
       $foreground,
       'state-notice-dark'
     ) !important;
+    .container-text-and-icon {
+      mat-icon {
+        color: mat.get-color-from-palette(
+          $foreground,
+          'state-notice-dark'
+        ) !important;
+      }
+    }
   }
-  .container-text-and-icon {
-    mat-icon {
-      color: mat.get-color-from-palette(
-        $foreground,
-        'state-notice-dark'
-      ) !important;
+
+  .wrapper.success-message {
+    border-color: $brand-primary-dark;
+
+    .container-text-and-icon {
+      mat-icon {
+        color: $brand-primary-dark;
+      }
     }
   }
 }

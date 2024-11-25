@@ -14,6 +14,7 @@ import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
 import { VerificationEmailModalService } from '../../../core/verification-email-modal/verification-email-modal.service'
 import { isEmpty } from 'lodash'
 import { RecordUtil } from 'src/app/shared/utils/record.util'
+import { ModalEmailComponent } from 'src/app/cdk/side-bar/modals/modal-email/modal-email.component'
 
 @Component({
   selector: 'app-top-bar',
@@ -46,6 +47,8 @@ export class TopBarComponent implements OnInit, OnDestroy {
   emailVerified: boolean
   checkEmailValidated: boolean
   inDelegationMode: boolean
+
+  @Input() newlySharedDomains: string[] = ['test']
   @Input() loadingUserRecord = true
 
   regionNames = $localize`:@@topBar.names:Names`
@@ -53,7 +56,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
 
   ariaLabelName: string
   constructor(
-    _dialog: MatDialog,
+    private _dialog: MatDialog,
     _platform: PlatformInfoService,
     private _user: UserService,
     private _record: RecordService,
@@ -79,6 +82,15 @@ export class TopBarComponent implements OnInit, OnDestroy {
       .subscribe((data) => {
         this.userStatus = data
       })
+  }
+
+  openEmailModal() {
+    return this._dialog
+      .open(ModalEmailComponent, {
+        width: '850px',
+        maxWidth: '99%',
+      })
+      .afterClosed()
   }
 
   ngOnInit(): void {

@@ -81,6 +81,8 @@ import { TopBarVerificationEmailModule } from '../cdk/top-bar-verification-email
 import { RecordHeaderComponent } from './components/record-header/record-header.component'
 import { RecordInfoComponent } from './components/record-info/record-info.component'
 import { TrustedSummaryModule } from '../cdk/trusted-summary/trusted-summary.module'
+import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog'
+import { LoginInterstitialsService } from '../core/login-interstitials/login-interstitials.service'
 
 @NgModule({
   declarations: [
@@ -170,7 +172,8 @@ import { TrustedSummaryModule } from '../cdk/trusted-summary/trusted-summary.mod
     TopBarMyPublicRecordPreviewModule,
     TopBarVerificationEmailModule,
     TrustedSummaryModule,
+    MatDialogModule,
   ],
-  providers: [VerificationEmailModalService],
+  providers: [VerificationEmailModalService, LoginInterstitialsService],
 })
 export class RecordModule {}
