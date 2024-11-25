@@ -18,12 +18,13 @@ export class WarningMessageComponent implements OnInit, OnDestroy {
 
   @Input() set type(value: 'warning' | 'success' | 'info') {
     this._type = value
-    this.icon = value === 'warning' ? 'info' : value === 'success' ? 'thumb_up' : 'info'
+    this.icon =
+      value === 'warning' ? 'info' : value === 'success' ? 'thumb_up' : 'info'
   }
   get type(): 'warning' | 'success' | 'info' {
     return this._type
   }
-  
+
   isMobile: boolean
   $destroy: Subject<boolean> = new Subject<boolean>()
 

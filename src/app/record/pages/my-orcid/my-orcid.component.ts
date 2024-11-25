@@ -8,7 +8,14 @@ import {
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { ORCID_REGEXP } from 'src/app/constants'
-import { first, mergeMap, switchMap, take, takeUntil, tap } from 'rxjs/operators'
+import {
+  first,
+  mergeMap,
+  switchMap,
+  take,
+  takeUntil,
+  tap,
+} from 'rxjs/operators'
 import { RecordService } from '../../../core/record/record.service'
 import { EMPTY, of, Subject } from 'rxjs'
 import { MainPanelsState, UserRecord } from '../../../types/record.local'
