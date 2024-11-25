@@ -39,7 +39,6 @@ export class ShareEmailsDomainsDialogComponent extends ShareEmailsDomainsCompone
     if (this.data) {
       this.userEmailsJson = this.data.userEmailsJson
       this.organizationName = this.data.organizationName
-      this.dialogMode = true
     }
   }
 

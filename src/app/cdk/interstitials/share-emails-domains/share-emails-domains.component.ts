@@ -31,7 +31,6 @@ export class ShareEmailsDomainsComponent {
   @Input() userEmailsJson: EmailsEndpoint
   @Input() organizationName: string
   form: any
-  dialogMode: boolean
   constructor(
     public platformInfo: PlatformInfoService,
     private fb: FormBuilder,
