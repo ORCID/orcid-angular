@@ -10,8 +10,12 @@
     }
   }
 }
-:host {
-  border: 1px solid;
+.wrapper {
+  border: 2px solid;
   padding: 14px;
+}
+
+:host {
+  display: block;
   width: 100%;
 }
