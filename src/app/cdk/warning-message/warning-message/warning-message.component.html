@@ -1,33 +1,19 @@
 <div
-  class="wrapper"
+  class="container-text-and-icon"
   [ngClass]="{
-  'warning-message': type === 'warning',
-  'success-message': type === 'success',
-}"
+    'orc-font-body-small': !isMobile,
+    'orc-font-small-print': isMobile
+  }"
 >
-  <div
-    class="container-text-and-icon"
-    [ngClass]="{
-      'orc-font-body-small': !isMobile,
-      'orc-font-small-print': isMobile
-    }"
-  >
-    <div class="col">
-      <mat-icon
-        [ngClass]="{
-        'material-icons-outlined' : type === 'success',
-      }"
-      >
-        {{ icon }}</mat-icon
-      >
-    </div>
-    <div class="text-container">
-      <strong>
-        <ng-content select="[title]"> </ng-content>
-      </strong>
-      <p>
-        <ng-content select="[content]"></ng-content>
-      </p>
-    </div>
+  <div class="col">
+    <mat-icon>{{ icon }}</mat-icon>
+  </div>
+  <div class="text-container">
+    <strong>
+      <ng-content select="[title]"> </ng-content>
+    </strong>
+    <p>
+      <ng-content select="[content]"></ng-content>
+    </p>
   </div>
 </div>

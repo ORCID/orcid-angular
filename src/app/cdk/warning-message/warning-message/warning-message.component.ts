@@ -13,17 +13,7 @@ import { PlatformInfoService } from '../../platform-info'
   preserveWhitespaces: false,
 })
 export class WarningMessageComponent implements OnInit, OnDestroy {
-  private _type: 'warning' | 'success' | 'info' = 'warning'
-  icon = 'info'
-
-  @Input() set type(value: 'warning' | 'success' | 'info') {
-    this._type = value
-    this.icon = value === 'warning' ? 'info' : value === 'success' ? 'thumb_up' : 'info'
-  }
-  get type(): 'warning' | 'success' | 'info' {
-    return this._type
-  }
-  
+  @Input() icon = 'info'
   isMobile: boolean
   $destroy: Subject<boolean> = new Subject<boolean>()
 

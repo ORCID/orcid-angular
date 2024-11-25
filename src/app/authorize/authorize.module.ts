@@ -15,8 +15,8 @@ import { AuthorizeRoutingModule } from './authorize-routing.module'
 import { OauthErrorComponent } from './components/oauth-error/oauth-error.component'
 import { AuthorizeComponent } from './pages/authorize/authorize.component'
 import { FormAuthorizeComponent } from './components/form-authorize/form-authorize.component'
+import { ShareEmailsDomainsComponent } from '../cdk/interstitials/share-emails-domains/share-emails-domains.component'
 import { InterstitialsModule } from '../cdk/interstitials/interstitials.module'
-import { MatLegacyDialogModule } from '@angular/material/legacy-dialog'
 
 @NgModule({
   declarations: [
@@ -38,7 +38,6 @@ import { MatLegacyDialogModule } from '@angular/material/legacy-dialog'
     InfoDropDownModule,
     MatProgressBarModule,
     InterstitialsModule,
-    MatLegacyDialogModule,
   ],
 })
 export class AuthorizeModule {}
