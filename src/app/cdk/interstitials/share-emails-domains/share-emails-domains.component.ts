@@ -5,6 +5,16 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
 import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
 import { error } from 'console'
 import { WINDOW } from '../../window'
+import {
+  MAT_LEGACY_DIALOG_DATA,
+  MatLegacyDialogRef,
+  MatLegacyDialogState,
+} from '@angular/material/legacy-dialog'
+
+export type ShareEmailsDomainsComponentDialogInput = {
+  userEmailsJson: EmailsEndpoint
+  organizationName?: string
+}
 
 @Component({
   selector: 'app-share-emails-domains',
@@ -21,6 +31,7 @@ export class ShareEmailsDomainsComponent {
   @Input() userEmailsJson: EmailsEndpoint
   @Input() organizationName: string
   form: any
+  dialogMode: boolean
   constructor(
     public platformInfo: PlatformInfoService,
     private fb: FormBuilder,
@@ -78,16 +89,22 @@ export class ShareEmailsDomainsComponent {
 
       this.recordEmailsService.postEmails(this.userEmailsJson).subscribe(
         (response) => {
-          this.afterSummit = true
-          this.beforeSummit = false
-          setTimeout(() => {
-            this.finish.emit()
-          }, 10000)
+          if (!this.dialogMode) {
+            this.afterSummit = true
+            this.beforeSummit = false
+          } else {
+            this.finishIntertsitial(this.domainToMakePublic)
+          }
+          setTimeout(() => {}, 10000)
         },
-        (error) => this.finish.emit()
+        (error) => this.finishIntertsitial()
       )
     } else {
-      this.finish.emit()
+      this.finishIntertsitial()
     }
+  }
+
+  finishIntertsitial(emails?: string[]) {
+    this.finish.emit()
   }
 }
