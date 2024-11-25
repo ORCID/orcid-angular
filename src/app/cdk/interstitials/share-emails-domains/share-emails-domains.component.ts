@@ -89,7 +89,7 @@ export class ShareEmailsDomainsComponent {
 
       this.recordEmailsService.postEmails(this.userEmailsJson).subscribe(
         (response) => {
-          this.afterEmailUpdates()
+          this.afterEmailUpdates(this.domainToMakePublic)
         },
         (error) => this.finishIntertsitial()
       )
@@ -97,7 +97,7 @@ export class ShareEmailsDomainsComponent {
       this.finishIntertsitial()
     }
   }
-  afterEmailUpdates() {
+  afterEmailUpdates(emails: string[]) {
     this.afterSummit = true
     this.beforeSummit = false
     setTimeout(() => {

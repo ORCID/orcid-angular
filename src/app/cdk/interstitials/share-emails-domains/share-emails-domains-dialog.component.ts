@@ -47,7 +47,7 @@ export class ShareEmailsDomainsDialogComponent extends ShareEmailsDomainsCompone
     this.dialogRef.close(emails)
   }
 
-  override afterEmailUpdates() {
-    this.finishIntertsitial()
+  override afterEmailUpdates(emails: string[]) {
+    this.finishIntertsitial(emails)
   }
 }

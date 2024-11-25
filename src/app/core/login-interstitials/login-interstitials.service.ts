@@ -26,7 +26,7 @@ export class LoginInterstitialsService {
     this.interstitialService
       .getInterstitialsViewed('SIGN_IN_DOMAIN_INTERSTITIAL')
       .subscribe((viewed) => {
-        this.alreadySawSignDomainInterstitial = viewed
+        // this.alreadySawSignDomainInterstitial = viewed
       })
     this.toggleService
       .getStateOf('LOGIN_DOMAINS_INTERSTITIAL')
@@ -43,12 +43,12 @@ export class LoginInterstitialsService {
         userRecord.userInfo.EFFECTIVE_USER_ORCID
     }
     if (
-      isNotImpersonating &&
+      // isNotImpersonating &&
       userRecord.emails &&
       userRecord.emails.emailDomains &&
       !this.userHasPublicDomains(userRecord.emails) &&
       this.userHasPrivateDomains(userRecord.emails) &&
-      this.loginDomainsInterstitialEnabled &&
+      // this.loginDomainsInterstitialEnabled &&
       !this.alreadySawSignDomainInterstitial
     ) {
       this.alreadySawSignDomainInterstitial = true
