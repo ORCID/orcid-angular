@@ -18,6 +18,7 @@ import { TogglzService } from '../togglz/togglz.service'
 export class LoginInterstitialsService {
   alreadySawSignDomainInterstitial: boolean
   loginDomainsInterstitialEnabled: boolean
+  alreadyCheckLoginInterstitials: boolean
   constructor(
     private _matDialog: MatDialog,
     private interstitialService: InterstitialsService,
@@ -36,37 +37,40 @@ export class LoginInterstitialsService {
   }
 
   checkLoginInterstitials(userRecord: UserRecord): Observable<string[]> | void {
-    let isNotImpersonating
-    if (userRecord.userInfo) {
-      isNotImpersonating =
+    if (
+      userRecord?.userInfo &&
+      userRecord?.emails?.emailDomains &&
+      !this.alreadyCheckLoginInterstitials
+    ) {
+      this.alreadyCheckLoginInterstitials = true
+      const isNotImpersonating =
         userRecord.userInfo.REAL_USER_ORCID ===
         userRecord.userInfo.EFFECTIVE_USER_ORCID
-    }
-    if (
-      // isNotImpersonating &&
-      userRecord.emails &&
-      userRecord.emails.emailDomains &&
-      !this.userHasPublicDomains(userRecord.emails) &&
-      this.userHasPrivateDomains(userRecord.emails) &&
-      // this.loginDomainsInterstitialEnabled &&
-      !this.alreadySawSignDomainInterstitial
-    ) {
-      this.alreadySawSignDomainInterstitial = true
-      this.interstitialService
-        .setInterstitialsViewed('SIGN_IN_DOMAIN_INTERSTITIAL')
-        .subscribe()
-      const data: ShareEmailsDomainsComponentDialogInput = {
-        userEmailsJson: userRecord.emails,
-      }
 
-      const dialog = this._matDialog.open(ShareEmailsDomainsDialogComponent, {
-        data,
-        width: '580px',
-        disableClose: true,
-        autoFocus: false,
-        restoreFocus: false,
-      })
-      return dialog.afterClosed()
+      if (
+        // isNotImpersonating &&
+        !this.userHasPublicDomains(userRecord.emails) &&
+        this.userHasPrivateDomains(userRecord.emails) &&
+        // this.loginDomainsInterstitialEnabled &&
+        !this.alreadySawSignDomainInterstitial
+      ) {
+        this.alreadySawSignDomainInterstitial = true
+        this.interstitialService
+          .setInterstitialsViewed('SIGN_IN_DOMAIN_INTERSTITIAL')
+          .subscribe()
+        const data: ShareEmailsDomainsComponentDialogInput = {
+          userEmailsJson: userRecord.emails,
+        }
+
+        const dialog = this._matDialog.open(ShareEmailsDomainsDialogComponent, {
+          data,
+          width: '580px',
+          disableClose: true,
+          autoFocus: false,
+          restoreFocus: false,
+        })
+        return dialog.afterClosed()
+      }
     }
   }
 

@@ -95,11 +95,11 @@ export class AuthorizeComponent {
     if (
       url &&
       this.userHasPrivateDomains &&
-      !this.userHasPublicDomains 
-      // this.oauthDomainsInterstitialEnabled &&
-      // !this.domainInterstitialHasBeenViewed &&
-      // this.userIsNotImpersonating &&
-      // !this.insidePopUpWindows
+      !this.userHasPublicDomains &&
+      this.oauthDomainsInterstitialEnabled &&
+      !this.domainInterstitialHasBeenViewed &&
+      this.userIsNotImpersonating &&
+      !this.insidePopUpWindows
     ) {
       this.showAuthorizationComponent = false
       this.showInterstital = true
