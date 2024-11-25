@@ -92,22 +92,22 @@ jobs:
           - artifact_name: prod
             docker_name: orcid/registry/orcid-web-frontend-prod
             build_args: "build_env=prod"
-            file: Dockerfile.build
+            file: Dockerfile.build.yarn
 
           - artifact_name: sandbox
             docker_name: orcid/registry/orcid-web-frontend-sandbox
             build_args: "build_env=sandbox"
-            file: Dockerfile.build
+            file: Dockerfile.build.yarn
 
           - artifact_name: qa
             docker_name: orcid/registry/orcid-web-frontend-qa
             build_args: "build_env=qa"
-            file: Dockerfile.build
+            file: Dockerfile.build.yarn
 
           - artifact_name: int
             docker_name: orcid/registry/orcid-web-frontend-int
             build_args: "build_env=int"
-            file: Dockerfile.build
+            file: Dockerfile.build.yarn
 
     runs-on: ubuntu-latest
     steps:

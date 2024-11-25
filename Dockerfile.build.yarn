@@ -1,0 +1,30 @@
+FROM node:20.15.0-alpine AS build
+
+ARG build_env
+
+WORKDIR /app
+
+COPY package.json .
+
+RUN yarn install
+
+COPY *.json .
+
+COPY src/ src/
+
+COPY scripts/ scripts/
+
+RUN apk add gettext
+
+RUN yarn build:${build_env}
+
+FROM nginx:1.26.2-alpine
+
+RUN mkdir -p /usr/share/nginx/html/orcid-web-frontend
+
+COPY ./nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
+
+COPY --from=build /app/dist/ /usr/share/nginx/html/orcid-web-frontend/
+
+EXPOSE 80
+
