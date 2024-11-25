@@ -48,7 +48,7 @@ export class LoginInterstitialsService {
         userRecord.userInfo.EFFECTIVE_USER_ORCID
 
       if (
-        // isNotImpersonating &&
+        isNotImpersonating &&
         !this.userHasPublicDomains(userRecord.emails) &&
         this.userHasPrivateDomains(userRecord.emails) &&
         this.loginDomainsInterstitialEnabled &&
