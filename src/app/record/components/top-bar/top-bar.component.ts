@@ -89,8 +89,6 @@ export class TopBarComponent implements OnInit, OnDestroy {
       .open(ModalEmailComponent, {
         width: '850px',
         maxWidth: '99%',
-        // data: this.userRecord,
-        // ariaLabel: getAriaLabel(this.editModalComponent, this.type),
       })
       .afterClosed()
   }
