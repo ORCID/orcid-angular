@@ -44,6 +44,11 @@ on:
         required: false
         default: "default"
         type: string
+      push:
+        description: 'Select to push to docker registry'
+        required: false
+        default: true
+        type: boolean
 
   workflow_dispatch:
     inputs:
@@ -82,7 +87,11 @@ on:
         required: false
         default: "default"
         type: string
-
+      push:
+        description: 'Select to push to docker registry'
+        required: false
+        default: true
+        type: boolean
 
 jobs:
   bld_docker:
@@ -161,7 +170,7 @@ jobs:
 
       - uses: docker/build-push-action@v6
         with:
-          push: true
+          push: ${{ inputs.push }}
           tags: ${{ secrets.DOCKER_REG_PRIVATE }}/${{ matrix.docker_name}}:${{ steps.version.outputs.version_tag_numeric }}
           context: ${{ inputs.context }}
           cache-from: type=registry,ref=${{ secrets.DOCKER_REG_PRIVATE }}/${{ matrix.docker_name }}:cache
