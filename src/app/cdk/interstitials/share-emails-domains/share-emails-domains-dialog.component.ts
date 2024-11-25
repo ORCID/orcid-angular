@@ -44,9 +44,10 @@ export class ShareEmailsDomainsDialogComponent extends ShareEmailsDomainsCompone
   }
 
   override finishIntertsitial(emails?: string[]) {
-    this.finish.emit()
-    if (this.dialogRef.getState() === MatLegacyDialogState.OPEN) {
-      this.dialogRef.close(emails)
-    }
+    this.dialogRef.close(emails)
+  }
+
+  override afterEmailUpdates() {
+    this.finishIntertsitial()
   }
 }

@@ -89,19 +89,20 @@ export class ShareEmailsDomainsComponent {
 
       this.recordEmailsService.postEmails(this.userEmailsJson).subscribe(
         (response) => {
-          if (!this.dialogMode) {
-            this.afterSummit = true
-            this.beforeSummit = false
-          } else {
-            this.finishIntertsitial(this.domainToMakePublic)
-          }
-          setTimeout(() => {}, 10000)
+          this.afterEmailUpdates()
         },
         (error) => this.finishIntertsitial()
       )
     } else {
       this.finishIntertsitial()
     }
+  }
+  afterEmailUpdates() {
+    this.afterSummit = true
+    this.beforeSummit = false
+    setTimeout(() => {
+      this.finishIntertsitial()
+    }, 10000)
   }
 
   finishIntertsitial(emails?: string[]) {
