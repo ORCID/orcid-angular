@@ -18,7 +18,7 @@ COPY scripts/ scripts/
 
 RUN apk add gettext
 
-RUN yarn build:${build_env}
+RUN npm run build:${build_env}
 
 FROM nginx:1.26.2-alpine
 
