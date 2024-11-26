@@ -48,7 +48,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
   checkEmailValidated: boolean
   inDelegationMode: boolean
 
-  @Input() newlySharedDomains: string[] = ['test']
+  @Input() newlySharedDomains: string[] = []
   @Input() loadingUserRecord = true
 
   regionNames = $localize`:@@topBar.names:Names`

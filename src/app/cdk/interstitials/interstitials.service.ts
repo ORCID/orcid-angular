@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { userInfo } from 'os'
 import { map } from 'rxjs/operators'
 import { UserService } from 'src/app/core'
-type Interstitials = 'OAUTH_DOMAIN_INTERSTITIAL' | 'SIGN_IN_DOMAIN_INTERSTITIAL'
+type Interstitials = 'DOMAIN_INTERSTITIAL'
 
 @Injectable({
   providedIn: 'root',

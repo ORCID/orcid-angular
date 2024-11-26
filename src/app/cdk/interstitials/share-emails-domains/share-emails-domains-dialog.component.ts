@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Inject, Input, Output } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  HostBinding,
+  Inject,
+  Input,
+  Output,
+} from '@angular/core'
 import { PlatformInfoService } from '../../platform-info'
 import { AssertionVisibilityString, EmailsEndpoint } from 'src/app/types'
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
@@ -20,12 +27,13 @@ export type ShareEmailsDomainsComponentDialogInput = {
 @Component({
   templateUrl: './share-emails-domains.component.html',
   styleUrls: [
-    './share-emails-domains.component.scss',
-    './share-emails-domains.component.scss-theme.scss',
     './share-emails-domains-dialog.component.scss',
+    './share-emails-domains.component.scss-theme.scss',
   ],
 })
 export class ShareEmailsDomainsDialogComponent extends ShareEmailsDomainsComponent {
+  @HostBinding('class.columns-12') desktop: boolean = false
+
   constructor(
     platformInfo: PlatformInfoService,
     fb: FormBuilder,
@@ -40,6 +48,9 @@ export class ShareEmailsDomainsDialogComponent extends ShareEmailsDomainsCompone
       this.userEmailsJson = this.data.userEmailsJson
       this.organizationName = this.data.organizationName
     }
+    platformInfo.get().subscribe((data) => {
+      this.desktop = data.desktop
+    })
   }
 
   override finishIntertsitial(emails?: string[]) {
