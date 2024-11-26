@@ -1,5 +1,7 @@
 #FROM node:20.15.0-alpine AS build
-FROM node:19.9.0-alpine AS build
+#FROM node:18.19.1-bullseye AS build
+FROM node:22.11.0-bullseye AS build
+#FROM node:16.14.0-bullseye AS build
 
 ARG build_env
 
@@ -7,9 +9,7 @@ WORKDIR /app
 
 COPY package.json .
 
-COPY yarn.lock .
-
-RUN yarn install --frozen-lockfile
+RUN yarn
 
 COPY *.json .
 
@@ -17,11 +17,12 @@ COPY src/ src/
 
 COPY scripts/ scripts/
 
-RUN apk add gettext
+# RUN apk add gettext
 
-RUN npm run build:${build_env}
+RUN yarn build:${build_env}
 
 FROM nginx:1.26.2-alpine
+#FROM nginx:1.26.2-bookworm
 
 RUN mkdir -p /usr/share/nginx/html/orcid-web-frontend
 
