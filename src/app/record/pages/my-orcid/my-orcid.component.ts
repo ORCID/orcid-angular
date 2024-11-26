@@ -82,7 +82,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   regionActivities = $localize`:@@shared.activities:Activities`
   readyForIndexing: boolean
   fragment: string
-  newlySharedDomains: string[]= ['test']
+  newlySharedDomains: string[] = []
 
   constructor(
     _userInfoService: UserInfoService,
