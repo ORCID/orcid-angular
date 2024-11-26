@@ -1,12 +1,18 @@
+@import './share-emails-domains.component.scss';  
+
 mat-card-header.authorize-header {
   mat-card-title {
     margin: 0 0 32px 0 !important;
     display: flex;
     flex-direction: column;
     align-items: center;
+    h1 {
+      text-align: center;
+    }
   }
 }
-:host {
+
+:host.columns-12 {
   padding: 48px;
   display: block;
 }

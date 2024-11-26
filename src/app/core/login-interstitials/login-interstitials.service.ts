@@ -25,7 +25,7 @@ export class LoginInterstitialsService {
     private toggleService: TogglzService
   ) {
     this.interstitialService
-      .getInterstitialsViewed('SIGN_IN_DOMAIN_INTERSTITIAL')
+      .getInterstitialsViewed('DOMAIN_INTERSTITIAL')
       .subscribe((viewed) => {
         this.alreadySawSignDomainInterstitial = viewed
       })
@@ -56,7 +56,7 @@ export class LoginInterstitialsService {
       ) {
         this.alreadySawSignDomainInterstitial = true
         this.interstitialService
-          .setInterstitialsViewed('SIGN_IN_DOMAIN_INTERSTITIAL')
+          .setInterstitialsViewed('DOMAIN_INTERSTITIAL')
           .subscribe()
         const data: ShareEmailsDomainsComponentDialogInput = {
           userEmailsJson: userRecord.emails,

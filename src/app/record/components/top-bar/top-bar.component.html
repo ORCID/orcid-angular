@@ -13,7 +13,7 @@
 ></app-top-bar-verification-email>
 
 <ng-container *ngIf="!isPublicRecord && !recordWithIssues">
-  <app-warning-message *ngIf="userInfo?.LOCKED === 'true'">
+  <app-warning-message >
     <ng-container i18n="@@topBar.accountHasBeenLocked" title
       >Your account has been locked</ng-container
     >
