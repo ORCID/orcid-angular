@@ -65,7 +65,7 @@ export class AuthorizeComponent {
       })
 
     this._togglz
-      .getStateOf('DOMAINS_INTERSTITIAL')
+      .getStateOf('OAUTH_DOMAINS_INTERSTITIAL')
       .pipe(take(1))
       .subscribe((value) => {
         this.oauthDomainsInterstitialEnabled = value
