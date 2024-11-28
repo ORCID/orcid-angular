@@ -1,3 +1,10 @@
+## v2.108.0 - 2024-11-28
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.107.18...v2.108.0)
+
+- [#2405](https://github.com/ORCID/orcid-angular/pull/2405): feat/yarn-docker-container-registry-caching
+- [#2407](https://github.com/ORCID/orcid-angular/pull/2407): Lmendoza/singin interstitial 2
+
 ## v2.107.18 - 2024-11-27
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.107.17...v2.107.18)
