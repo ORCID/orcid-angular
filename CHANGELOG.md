@@ -1,3 +1,15 @@
+## v2.107.18 - 2024-11-27
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.107.17...v2.107.18)
+
+- [#2406](https://github.com/ORCID/orcid-angular/pull/2406): Lmendoza/singin interstitial 2
+
+## v2.107.17 - 2024-11-26
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.107.16...v2.107.17)
+
+- [#2404](https://github.com/ORCID/orcid-angular/pull/2404): Lmendoza/singin interstitial 2
+
 ## v2.107.16 - 2024-11-26
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.107.15...v2.107.16)
