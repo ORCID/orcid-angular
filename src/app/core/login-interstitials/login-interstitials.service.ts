@@ -68,6 +68,7 @@ export class LoginInterstitialsService {
           disableClose: true,
           autoFocus: false,
           restoreFocus: false,
+          maxHeight: 'calc(100vh - 20px)',
         })
         return dialog.afterClosed()
       }
