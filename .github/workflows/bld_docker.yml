@@ -44,6 +44,11 @@ on:
         required: false
         default: "default"
         type: string
+      push:
+        description: 'Select to push to docker registry'
+        required: false
+        default: true
+        type: boolean
 
   workflow_dispatch:
     inputs:
@@ -82,7 +87,11 @@ on:
         required: false
         default: "default"
         type: string
-
+      push:
+        description: 'Select to push to docker registry'
+        required: false
+        default: true
+        type: boolean
 
 jobs:
   bld_docker:
@@ -92,22 +101,22 @@ jobs:
           - artifact_name: prod
             docker_name: orcid/registry/orcid-web-frontend-prod
             build_args: "build_env=prod"
-            file: Dockerfile.build
+            file: Dockerfile.build.yarn
 
           - artifact_name: sandbox
             docker_name: orcid/registry/orcid-web-frontend-sandbox
             build_args: "build_env=sandbox"
-            file: Dockerfile.build
+            file: Dockerfile.build.yarn
 
           - artifact_name: qa
             docker_name: orcid/registry/orcid-web-frontend-qa
             build_args: "build_env=qa"
-            file: Dockerfile.build
+            file: Dockerfile.build.yarn
 
           - artifact_name: int
             docker_name: orcid/registry/orcid-web-frontend-int
             build_args: "build_env=int"
-            file: Dockerfile.build
+            file: Dockerfile.build.yarn
 
     runs-on: ubuntu-latest
     steps:
@@ -133,15 +142,7 @@ jobs:
           bump: ${{ inputs.bump }}
 
       - uses: docker/setup-buildx-action@v3
-      - uses: actions/cache@v4
-        with:
-          path: /tmp/.buildx-cache
-          # each cache needs a unique key for the job
-          key: ${{ runner.os }}-buildx-${{ hashFiles(inputs.context) }}
-          # Alternative restore keys if no exact match is found
-          # I /think/ this means that other docker buildx jobs could help out here
-          restore-keys: |
-            ${{ runner.os }}-buildx-
+
       - name: Login to private registry
         uses: docker/login-action@v3
         with:
@@ -161,11 +162,11 @@ jobs:
 
       - uses: docker/build-push-action@v6
         with:
-          push: true
+          push: ${{ inputs.push }}
           tags: ${{ secrets.DOCKER_REG_PRIVATE }}/${{ matrix.docker_name}}:${{ steps.version.outputs.version_tag_numeric }}
           context: ${{ inputs.context }}
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache
+          cache-from: type=registry,ref=${{ secrets.DOCKER_REG_PRIVATE }}/${{ matrix.docker_name }}:cache
+          cache-to: type=registry,mode=max,image-manifest=true,oci-mediatypes=true,ref=${{ secrets.DOCKER_REG_PRIVATE }}/${{ matrix.docker_name }}:cache
           build-args: ${{ matrix.build_args }}
           file: ${{ steps.dynamic_defaults.outputs.default_file }}
 
