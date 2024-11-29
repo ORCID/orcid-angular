@@ -1,3 +1,9 @@
+## v2.109.1 - 2024-11-29
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.0...v2.109.1)
+
+- [#2408](https://github.com/ORCID/orcid-angular/pull/2408): qa-localstorage-check-should-be-background-compatible-with-the-previo…
+
 ## v2.109.0 - 2024-11-28
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.108.0...v2.109.0)
