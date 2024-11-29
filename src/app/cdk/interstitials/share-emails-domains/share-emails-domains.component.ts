@@ -58,7 +58,11 @@ export class ShareEmailsDomainsComponent {
     return value?.emailDomains
       .filter((domain) => domain.visibility !== 'PUBLIC')
       .sort((a, b) => {
-        return b.createdDate.timestamp - a.createdDate.timestamp
+        if (b?.createdDate?.timestamp && a?.createdDate?.timestamp) {
+          return b.createdDate.timestamp - a.createdDate.timestamp
+        } else {
+          return 0
+        }
       })
       .slice(0, 3)
   }
