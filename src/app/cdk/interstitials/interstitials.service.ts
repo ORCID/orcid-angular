@@ -22,9 +22,21 @@ export class InterstitialsService {
     return this._userInfo.getUserSession().pipe(
       map((userInfo) => {
         const effectiveUser = userInfo.userInfo.EFFECTIVE_USER_ORCID
-        return (
-          localStorage.getItem(effectiveUser + '_' + interstitial) === 'true'
-        )
+        if (interstitial === 'DOMAIN_INTERSTITIAL') {
+          // This is a weird condition as we changed the localstorage value from OAUTH_DOMAIN_INTERSTITIAL to DOMAIN_INTERSTITIAL
+          // This is a fix so DOMAIN_INTERSTITIAL is backwards compatible with OAUTH_DOMAIN_INTERSTITIAL
+          return (
+            localStorage.getItem(effectiveUser + '_DOMAIN_INTERSTITIAL') ===
+              'true' ||
+            localStorage.getItem(
+              effectiveUser + '_OAUTH_DOMAIN_INTERSTITIAL'
+            ) === 'true'
+          )
+        } else {
+          return (
+            localStorage.getItem(effectiveUser + '_' + interstitial) === 'true'
+          )
+        }
       })
     )
   }
