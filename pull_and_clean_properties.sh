@@ -56,4 +56,8 @@ tx_operations "pl_PL" "pl"
 # Find all .properties files and process them
 find . -type f -name "*.properties" -exec bash -c 'process_file "$0"' {} \;
 
+# Delete all ca.properties and uk.properties files
+find . -type f -name "*.ca.properties" -delete
+find . -type f -name "*.uk.properties" -delete
+
 echo ">>>>>>>>>>>>>>>>>>>>>>> Finished processing general files"
