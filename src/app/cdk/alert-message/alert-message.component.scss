@@ -1,4 +1,28 @@
 :host {
+  ::ng-deep {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin: 0 0 8px 0 !important;
+    }
+  }
+  width: 100%;
+  display: inline-block;
+}
+
+.title {
+  line-height: 24px;
+}
+
+.content {
+  line-height: 21px !important;
+  letter-spacing: 0.25px !important;
+}
+
+.alert-container {
   border: solid 2px;
   border-radius: 4px;
   padding: 16px;

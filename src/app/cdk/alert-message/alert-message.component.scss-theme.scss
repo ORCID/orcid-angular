@@ -8,18 +8,72 @@
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
 
-  :host {
-    border-color: mat.get-color-from-palette(
-      $foreground,
-      'state-notice-dark'
-    ) !important;
-    background-color: rgba($state-notice-light, 0.15);
-  }
-  mat-icon {
-    color: mat.get-color-from-palette(
-      $foreground,
-      'state-notice-dark'
-    ) !important;
+  $alert-colors: (
+    'alert-notice': (
+      'border': 'state-notice-darkest',
+      'background': 'state-notice-lightest',
+      'link-darkest': 'brand-quad-darkest',
+      'link-dark': 'brand-quad-dark',
+    ),
+    'alert-info': (
+      'border': 'state-info-darkest',
+      'background': 'state-info-lightest',
+      'link-darkest': 'state-info-darkest',
+      'link-dark': 'state-info-dark',
+    ),
+    'alert-warning': (
+      'border': 'state-warning-dark',
+      'background': 'state-warning-lightest',
+      'link-darkest': 'state-warning-darkest',
+      'link-dark': 'state-warning-dark',
+    ),
+    'alert-success': (
+      'border': 'brand-primary-dark',
+      'background': 'brand-primary-lightest',
+      'link-darkest': 'brand-primary-darkest',
+      'link-dark': 'brand-primary-dark',
+    ),
+  );
+
+  @each $class, $settings in $alert-colors {
+    $border-color: map-get($settings, 'border');
+    $background-color: map-get($settings, 'background');
+    $link-darkest: map-get($settings, 'link-darkest');
+    $link-dark: map-get($settings, 'link-dark');
+
+    .#{$class} {
+      border-color: mat.get-color-from-palette(
+        $foreground,
+        $border-color
+      ) !important;
+      background-color: mat.get-color-from-palette(
+        $foreground,
+        $background-color
+      ) !important;
+
+      mat-icon {
+        color: mat.get-color-from-palette(
+          $foreground,
+          $border-color
+        ) !important;
+      }
+
+      ::ng-deep a {
+        color: mat.get-color-from-palette(
+          $foreground,
+          $link-darkest
+        ) !important;
+
+        &:visited {
+          color: black !important;
+        }
+        &:hover,
+        &:active,
+        &:focus {
+          color: mat.get-color-from-palette($foreground, $link-dark) !important;
+        }
+      }
+    }
   }
 }
 
