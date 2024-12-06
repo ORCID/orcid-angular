@@ -36,6 +36,7 @@ import { SettingsTrustedOrganizationsComponent } from './components/settings-tru
 import { SettingsUsersThatThrustYouComponent } from './components/settings-users-that-thrust-you/settings-users-that-thrust-you.component'
 import { SettingsComponent } from './components/settings/settings.component'
 import { AccountTrustedPartiesComponent } from './pages/account-trusted-parties/account-trusted-parties.component'
+import { AlertMessageModule } from '../cdk/alert-message/alert-message.module'
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import { AccountTrustedPartiesComponent } from './pages/account-trusted-parties/
     TwoFactorAuthenticationFormModule,
     AccountPanelModule,
     TopBarMyPublicRecordPreviewModule,
+    AlertMessageModule,
     MatTooltipModule,
   ],
   providers: [VerificationEmailModalService],

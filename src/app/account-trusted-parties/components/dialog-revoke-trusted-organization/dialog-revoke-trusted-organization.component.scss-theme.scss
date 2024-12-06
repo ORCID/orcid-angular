@@ -8,19 +8,6 @@
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
 
-  .info {
-    border-color: mat.get-color-from-palette(
-      $foreground,
-      'state-notice-dark'
-    ) !important;
-
-    mat-icon {
-      color: mat.get-color-from-palette(
-        $foreground,
-        'state-notice-dark'
-      ) !important;
-    }
-  }
   .permission-container.last {
     border-color: map-get($background, light-grey);
   }

@@ -22,37 +22,26 @@
     <div>{{ permissions.key | scopePathType }}</div>
   </div>
 
-  <div
-    class="info"
-    [ngClass]="{
-      'orc-font-body-small': !isMobile,
-      'orc-font-small-print': isMobile
-    }"
-  >
-    <div class="col">
-      <mat-icon class="large-material-icon">info</mat-icon>
-    </div>
-    <div class="col l11 m6 s3">
-      <p>
-        <ng-container i18n="@@account.organizationsCanStillDelete"
-          >Organizations can still delete items they added to your record even
-          after their access permissions have been revoked.
-        </ng-container>
+  <app-alert-message class="orc-font-body-small">
+    <ng-container content>
+      <ng-container i18n="@@account.organizationsCanStillDelete"
+        >Organizations can still delete items they added to your record even
+        after their access permissions have been revoked.
+      </ng-container>
 
-        <ng-container>
-          <a
-            href="https://support.orcid.org/hc/en-us/articles/360006973893-Trusted-organizations"
-            rel="noopener noreferrer"
-            target="_blank"
-            i18n="@@account.findOutMoreAboutTrusted"
-            class="underline"
-          >
-            Find out more about Trusted Organizations and access permissions
-          </a>
-        </ng-container>
-      </p>
-    </div>
-  </div>
+      <ng-container>
+        <a
+          href="https://support.orcid.org/hc/en-us/articles/360006973893-Trusted-organizations"
+          rel="noopener noreferrer"
+          target="_blank"
+          i18n="@@account.findOutMoreAboutTrusted"
+          class="underline"
+        >
+          Find out more about Trusted Organizations and access permissions
+        </a>
+      </ng-container>
+    </ng-container>
+  </app-alert-message>
 
   <app-modal-footer>
     <button
