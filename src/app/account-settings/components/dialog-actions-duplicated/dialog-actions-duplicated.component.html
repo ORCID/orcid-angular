@@ -3,24 +3,13 @@
     >Remove duplicate record
   </app-modal-header>
 
-  <div
-    class="info"
-    [ngClass]="{
-      'orc-font-body-small': !isMobile,
-      'orc-font-small-print': isMobile
-    }"
-  >
-    <div class="col">
-      <mat-icon class="large-material-icon">info</mat-icon>
-    </div>
-    <div class="col l11 m6 s3">
-      <p i18n="@@account.warningDuplicated">
-        Warning! All information will be deleted from the duplicate record. Only
-        the email addresses will be transferred to your main ORCID record.
-        Removing a duplicate record cannot be undone.
-      </p>
-    </div>
-  </div>
+  <app-alert-message type="warning" class="orc-font-body-small">
+    <ng-container content i18n="@@account.warningDuplicated">
+      Warning! All information will be deleted from the duplicate record. Only
+      the email addresses will be transferred to your main ORCID record.
+      Removing a duplicate record cannot be undone.
+    </ng-container>
+  </app-alert-message>
 
   <h2 class="remove">
     <strong class="orc-font-body-large" i18n="@@account.removeThisRecord"
