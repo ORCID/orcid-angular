@@ -70,7 +70,6 @@ import { WorkModalComponent } from './components/work-modal/work-modal.component
 import { FundingExternalIdentifiersViewOnlyComponent } from './components/funding-external-identifiers-view-only/funding-external-identifiers-view-only.component'
 import { WorkExternalIdentifiersViewOnlyComponent } from './components/work-external-identifiers-view-only/work-external-identifiers-view-only.component'
 import { TextFieldModule } from '@angular/cdk/text-field'
-import { WarningMessageModule } from '../cdk/warning-message/warning-message.module'
 import { VerificationEmailModalService } from '../core/verification-email-modal/verification-email-modal.service'
 import { ModalCombineWorksWithSelectorComponent } from './components/work/modals/modal-combine-works-with-selector/modal-combine-works-with-selector.component'
 import { TopBarMyPublicRecordPreviewModule } from '../cdk/top-bar-my-public-record-preview/top-bar-my-public-record-preview.module'
@@ -81,6 +80,7 @@ import { TopBarVerificationEmailModule } from '../cdk/top-bar-verification-email
 import { RecordHeaderComponent } from './components/record-header/record-header.component'
 import { RecordInfoComponent } from './components/record-info/record-info.component'
 import { TrustedSummaryModule } from '../cdk/trusted-summary/trusted-summary.module'
+import { AlertMessageModule } from '../cdk/alert-message/alert-message.module'
 
 @NgModule({
   declarations: [
@@ -166,7 +166,7 @@ import { TrustedSummaryModule } from '../cdk/trusted-summary/trusted-summary.mod
     MatRadioModule,
     MatCheckboxModule,
     TextFieldModule,
-    WarningMessageModule,
+    AlertMessageModule,
     TopBarMyPublicRecordPreviewModule,
     TopBarVerificationEmailModule,
     TrustedSummaryModule,
