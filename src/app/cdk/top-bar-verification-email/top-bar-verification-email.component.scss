@@ -3,22 +3,6 @@
   box-sizing: border-box;
 }
 
-.info {
-  display: flex;
-  padding: 16px;
-  border: solid 2px;
-  border-radius: 4px;
-
-  h2 {
-    margin: 0;
-  }
-  p {
-    margin-top: 0;
-  }
-  p.you-need {
-    margin: 0;
-  }
-  p.email-container {
-    margin: 16px 0 16px 0;
-  }
+button {
+  margin-top: 16px;
 }
