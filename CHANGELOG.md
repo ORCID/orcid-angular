@@ -1,3 +1,9 @@
+## v2.109.3 - 2024-12-09
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.2...v2.109.3)
+
+- [#2411](https://github.com/ORCID/orcid-angular/pull/2411): Standardize alert panels
+
 ## v2.109.2 - 2024-12-03
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.1...v2.109.2)
