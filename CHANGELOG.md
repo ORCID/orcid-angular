@@ -1,3 +1,53 @@
+## v2.109.2 - 2024-12-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.1...v2.109.2)
+
+- [#2410](https://github.com/ORCID/orcid-angular/pull/2410): tx pull
+- [#2409](https://github.com/ORCID/orcid-angular/pull/2409): Transifex
+
+## v2.109.1 - 2024-11-29
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.0...v2.109.1)
+
+- [#2408](https://github.com/ORCID/orcid-angular/pull/2408): qa-localstorage-check-should-be-background-compatible-with-the-previo…
+
+## v2.109.0 - 2024-11-28
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.108.0...v2.109.0)
+
+## v2.108.0 - 2024-11-28
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.107.18...v2.108.0)
+
+- [#2405](https://github.com/ORCID/orcid-angular/pull/2405): feat/yarn-docker-container-registry-caching
+- [#2407](https://github.com/ORCID/orcid-angular/pull/2407): Lmendoza/singin interstitial 2
+
+## v2.107.18 - 2024-11-27
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.107.17...v2.107.18)
+
+- [#2406](https://github.com/ORCID/orcid-angular/pull/2406): Lmendoza/singin interstitial 2
+
+## v2.107.17 - 2024-11-26
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.107.16...v2.107.17)
+
+- [#2404](https://github.com/ORCID/orcid-angular/pull/2404): Lmendoza/singin interstitial 2
+
+## v2.107.16 - 2024-11-26
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.107.15...v2.107.16)
+
+## v2.107.15 - 2024-11-25
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.107.14...v2.107.15)
+
+- [#2402](https://github.com/ORCID/orcid-angular/pull/2402): 9499-email-domains-interstitial-registry-sign-in
+
+## v2.107.14 - 2024-11-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.107.13...v2.107.14)
+
 ## v2.107.13 - 2024-11-18
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.107.12...v2.107.13)

@@ -1,0 +1,12 @@
+version: '2'
+services:
+  angular_yarn:
+    image: ${DOCKER_REG_PRIVATE}/orcid/registry/orcid-web-frontend-${BUILD_ENV:-qa}:${TAG:-0.0.1}
+    # entrypoint: sleep infinity
+    build:
+      context: .
+      dockerfile: Dockerfile.build.yarn
+      args:
+        build_env: ${BUILD_ENV:-qa}
+    ports:
+      - 0.0.0.0:13106:80

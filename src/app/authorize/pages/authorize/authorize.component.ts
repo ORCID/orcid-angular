@@ -59,7 +59,7 @@ export class AuthorizeComponent {
         userInfo.userInfo.EFFECTIVE_USER_ORCID
     })
     this._interstitials
-      .getInterstitialsViewed('OAUTH_DOMAIN_INTERSTITIAL')
+      .getInterstitialsViewed('DOMAIN_INTERSTITIAL')
       .subscribe((value) => {
         return (this.domainInterstitialHasBeenViewed = value)
       })
@@ -104,7 +104,7 @@ export class AuthorizeComponent {
       this.showAuthorizationComponent = false
       this.showInterstital = true
       this._interstitials
-        .setInterstitialsViewed('OAUTH_DOMAIN_INTERSTITIAL')
+        .setInterstitialsViewed('DOMAIN_INTERSTITIAL')
         .subscribe()
     } else {
       this.finishRedirect()

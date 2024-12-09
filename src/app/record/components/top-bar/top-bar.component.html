@@ -32,6 +32,64 @@
     </div>
   </app-alert-message>
 
+  <app-warning-message type="success" *ngIf="newlySharedDomains?.length">
+    <ng-container title i18n="@@topBar.emailDomainsShared"
+      >Email domains shared</ng-container
+    >
+    <ng-container content
+      ><ng-container
+        *ngIf="newlySharedDomains.length > 1"
+        i18n="@@topBar.theEmailDomains"
+        >The email domains</ng-container
+      >
+      <ng-container
+        *ngIf="newlySharedDomains.length === 1"
+        i18n="@@topBar.theEmailDomain"
+        >The email domain</ng-container
+      >
+      <!-- LIST ALL EMAILS ON ARRAY, divided by , or 'and'  -->
+      <ng-container
+        *ngFor="let email of newlySharedDomains; let last = last; let i = index"
+      >
+        <strong *ngIf="!last">{{ email }}</strong
+        ><!-- If is not the one before the last add a comma --><ng-container
+          *ngIf="!last && i < newlySharedDomains.length - 2"
+          >,
+        </ng-container>
+        <!-- If is the one before the last add an 'and' -->
+        <ng-container
+          *ngIf="i === newlySharedDomains.length - 2"
+          i18n="@@topBar.and"
+        >
+          and
+        </ng-container>
+        <strong *ngIf="last">{{ email }} </strong>
+      </ng-container>
+      <ng-container
+        *ngIf="newlySharedDomains.length > 1"
+        i18n="@@topBar.areNowVisibleOnYourPublicORCIDRecord"
+      >
+        are now visible on your public ORCID record. Manage your email addresses
+        and domains in the
+      </ng-container>
+      <ng-container
+        *ngIf="newlySharedDomains.length === 1"
+        i18n="@@topBar.isNowVisibleOnYourPublicORCIDRecord"
+      >
+        is now visible on your public ORCID record. Manage your email addresses
+        and domains in the
+      </ng-container>
+      <ng-container>
+        <a
+          class="underline green-url"
+          (click)="openEmailModal()"
+          i18n="@@topBar.emailsDomainsSection"
+          >Emails & domains section</a
+        ></ng-container
+      >.
+    </ng-container>
+  </app-warning-message>
+
   <section
     id="names"
     role="region"

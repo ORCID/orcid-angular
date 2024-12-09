@@ -81,6 +81,8 @@ import { RecordHeaderComponent } from './components/record-header/record-header.
 import { RecordInfoComponent } from './components/record-info/record-info.component'
 import { TrustedSummaryModule } from '../cdk/trusted-summary/trusted-summary.module'
 import { AlertMessageModule } from '../cdk/alert-message/alert-message.module'
+import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog'
+import { LoginInterstitialsService } from '../core/login-interstitials/login-interstitials.service'
 
 @NgModule({
   declarations: [
@@ -170,7 +172,8 @@ import { AlertMessageModule } from '../cdk/alert-message/alert-message.module'
     TopBarMyPublicRecordPreviewModule,
     TopBarVerificationEmailModule,
     TrustedSummaryModule,
+    MatDialogModule,
   ],
-  providers: [VerificationEmailModalService],
+  providers: [VerificationEmailModalService, LoginInterstitialsService],
 })
 export class RecordModule {}

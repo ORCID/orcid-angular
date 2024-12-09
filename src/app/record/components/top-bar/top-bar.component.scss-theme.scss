@@ -7,6 +7,10 @@
   $warn: map-get($theme, accent);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
+
+  .green-url {
+    color: mat.get-color-from-palette($accent, 900);
+  }
   .published-name {
     color: $text-dark-high;
   }
