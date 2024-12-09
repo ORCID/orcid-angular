@@ -15,16 +15,6 @@ a {
   line-height: 21px;
 }
 
-app-alert-message {
-  p {
-    margin: 8px 0 0 0;
-    letter-spacing: 0.25px;
-  }
-  line-height: 24px;
-  margin-bottom: 16px;
-  margin-top: 32px;
-}
-
 .verification-icon {
   height: 40px;
   width: 40px;
@@ -183,6 +173,11 @@ section[id='Email domains'] {
 
 app-visibility-selector {
   margin-inline-start: 8px;
+}
+
+app-alert-message {
+  margin-bottom: 16px;
+  margin-top: 16px;
 }
 
 ::ng-deep .main-button-container {
