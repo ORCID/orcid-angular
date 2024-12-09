@@ -119,6 +119,9 @@ app-alert-message {
     margin-top: 16px;
   }
   &.warning-panel {
+    div {
+      line-height: 24px !important;
+    }
     margin-bottom: 16px;
     margin-top: -16px;
   }

@@ -50,14 +50,11 @@
     </p>
 
     <app-alert-message *ngIf="!hasVerifiedEmailAddress()">
-      <ng-container
-        title
-        class="orc-font-body"
-        i18n="@@side-bar.pleaseVerifyWarning"
-        >Please verify your email addresses</ng-container
-      >
+      <h3 title class="orc-font-body" i18n="@@side-bar.pleaseVerifyWarning">
+        Please verify your email addresses
+      </h3>
 
-      <p class="orc-font-body-small" content>
+      <div class="orc-font-body-small" content>
         <ng-container i18n="@@side-bar.verifyToAccessOrcidFeatures"
           >To access all of ORCID’s editing features you must verify at least
           one email address. Until then you will only be able to
@@ -69,7 +66,7 @@
         <ng-container i18n="@@side-bar.inYourOrcidRecord"
           >in your ORCID record.</ng-container
         >
-      </p>
+      </div>
     </app-alert-message>
     <!-- EMAIL LIST -->
     <section id="Email addresses" class="row email-list">

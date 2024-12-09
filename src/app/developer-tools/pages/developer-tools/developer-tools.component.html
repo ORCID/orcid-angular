@@ -46,12 +46,12 @@
               You’ve registered for your ORCID Public API credentials
             </h3>
 
-            <p content i18n="@@developerTools.addYourApplicationDetails">
+            <div content i18n="@@developerTools.addYourApplicationDetails">
               Add your application details and one or more redirect URIs in the
               form below. Once these details are saved we’ll generate your
               client ID and secret so you can start using the Public API right
               away.
-            </p>
+            </div>
           </app-alert-message>
 
           <h2
@@ -244,9 +244,9 @@
             *ngIf="triedToSaveWithoutUrls"
             class="warning-panel"
           >
-            <ng-container content i18n="@@developerTools.addARedirectUriBefore">
+            <div content i18n="@@developerTools.addARedirectUriBefore">
               Please add a redirect URI before saving your application
-            </ng-container>
+            </div>
           </app-alert-message>
 
           <div class="input-container" formArrayName="redirectUris">
@@ -484,10 +484,7 @@
         </ng-container>
       </ng-container>
 
-      <app-terms-of-use
-        *ngIf="!developerToolsEnable && !this.loadingUserDevTolsState"
-        (developerToolsEnable)="ngOnInit()"
-      ></app-terms-of-use>
+      <app-terms-of-use (developerToolsEnable)="ngOnInit()"></app-terms-of-use>
     </main>
   </div>
 </div>
