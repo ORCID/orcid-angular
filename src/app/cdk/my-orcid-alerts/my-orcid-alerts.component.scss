@@ -48,7 +48,14 @@ mat-toolbar {
   }
 }
 
+app-alert-message,
 .invalid,
 .verification {
   margin-bottom: 24px;
+}
+
+app-alert-message {
+  .content > div {
+    margin-top: 8px;
+  }
 }
