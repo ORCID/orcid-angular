@@ -8,34 +8,6 @@
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
 
-  .info {
-    border-color: mat.get-color-from-palette(
-      $foreground,
-      'state-notice-dark'
-    ) !important;
-
-    mat-icon {
-      color: mat.get-color-from-palette(
-        $foreground,
-        'state-notice-dark'
-      ) !important;
-    }
-  }
-
-  .warn {
-    border-color: mat.get-color-from-palette(
-      $foreground,
-      'state-warning-dark'
-    ) !important;
-
-    mat-icon {
-      color: mat.get-color-from-palette(
-        $foreground,
-        'state-warning-dark'
-      ) !important;
-    }
-  }
-
   code {
     border-color: mat.get-color-from-palette($background, ui-background);
     background-color: mat.get-color-from-palette(
