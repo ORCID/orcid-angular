@@ -1,4 +1,25 @@
 :host {
+  width: 100%;
+  display: inline-block;
+}
+
+.title {
+  ::ng-deep * {
+    margin: 0;
+  }
+  line-height: 24px;
+}
+
+.content {
+  ::ng-deep {
+    > :first-child {
+      margin-top: 8px;
+    }
+  }
+  line-height: 21px !important;
+}
+
+.alert-container {
   border: solid 2px;
   border-radius: 4px;
   padding: 16px;

@@ -11,14 +11,13 @@
   [emailVerified]="emailVerified"
   [justRegistered]="justRegistered"
 ></app-top-bar-verification-email>
-
 <ng-container *ngIf="!isPublicRecord && !recordWithIssues">
-  <app-warning-message *ngIf="userInfo?.LOCKED === 'true'">
-    <ng-container i18n="@@topBar.accountHasBeenLocked" title
-      >Your account has been locked</ng-container
-    >
-    <ng-container content
-      ><ng-container i18n="@@topBar.pleasContact">Please contact</ng-container>
+  <app-alert-message *ngIf="userInfo?.LOCKED === 'true'">
+    <h3 title i18n="@@topBar.accountHasBeenLocked">
+      Your account has been locked
+    </h3>
+    <div content>
+      <ng-container i18n="@@topBar.pleasContact">Please contact</ng-container>
       <a
         class="underline"
         i18n="@@topBar.orcidSupport"
@@ -30,8 +29,8 @@
       <ng-container i18n="@@topBar.ifYouBelieveWasLockedInError"
         >if you believe this account was locked in error.</ng-container
       >
-    </ng-container>
-  </app-warning-message>
+    </div>
+  </app-alert-message>
 
   <app-warning-message type="success" *ngIf="newlySharedDomains?.length">
     <ng-container title i18n="@@topBar.emailDomainsShared"

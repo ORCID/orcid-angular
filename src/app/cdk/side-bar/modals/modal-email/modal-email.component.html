@@ -50,25 +50,23 @@
     </p>
 
     <app-alert-message *ngIf="!hasVerifiedEmailAddress()">
-      <ng-container>
-        <strong class="orc-font-body" i18n="@@side-bar.pleaseVerifyWarning"
-          >Please verify your email addresses</strong
-        >
+      <h3 title class="orc-font-body" i18n="@@side-bar.pleaseVerifyWarning">
+        Please verify your email addresses
+      </h3>
 
-        <p class="orc-font-body-small">
-          <ng-container i18n="@@side-bar.verifyToAccessOrcidFeatures"
-            >To access all of ORCID’s editing features you must verify at least
-            one email address. Until then you will only be able to
-            manage</ng-container
-          >
-          <strong i18n="@@side-bar.names">names</strong>
-          <ng-container i18n="@@side-bar.and">and</ng-container>
-          <strong i18n="@@side-bar.emailAddresses">email addresses</strong>
-          <ng-container i18n="@@side-bar.inYourOrcidRecord"
-            >in your ORCID record.</ng-container
-          >
-        </p>
-      </ng-container>
+      <div class="orc-font-body-small" content>
+        <ng-container i18n="@@side-bar.verifyToAccessOrcidFeatures"
+          >To access all of ORCID’s editing features you must verify at least
+          one email address. Until then you will only be able to
+          manage</ng-container
+        >
+        <strong i18n="@@side-bar.names">names</strong>
+        <ng-container i18n="@@side-bar.and">and</ng-container>
+        <strong i18n="@@side-bar.emailAddresses">email addresses</strong>
+        <ng-container i18n="@@side-bar.inYourOrcidRecord"
+          >in your ORCID record.</ng-container
+        >
+      </div>
     </app-alert-message>
     <!-- EMAIL LIST -->
     <section id="Email addresses" class="row email-list">

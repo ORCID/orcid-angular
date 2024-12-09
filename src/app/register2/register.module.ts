@@ -37,6 +37,7 @@ import { MatLegacyAutocompleteModule as MatAutocompleteModule } from '@angular/m
 import { StepC2Component } from './components/step-c2/step-c2.component'
 import { MatLegacySelectModule } from '@angular/material/legacy-select'
 import { SharedModule } from '../shared/shared.module'
+import { AlertMessageModule } from '../cdk/alert-message/alert-message.module'
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { SharedModule } from '../shared/shared.module'
     FormsModule,
     ReactiveFormsModule,
     RegisterRoutingModule,
+    AlertMessageModule,
     MatStepperModule,
     MatFormFieldModule,
     MatInputModule,

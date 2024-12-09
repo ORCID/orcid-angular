@@ -415,3 +415,5 @@ export function getAffiliationType(
     return affiliation.type === type
   })[0]
 }
+
+export type AlertType = 'notice' | 'info' | 'warning' | 'success'

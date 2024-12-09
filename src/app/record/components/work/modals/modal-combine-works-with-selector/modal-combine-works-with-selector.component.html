@@ -54,25 +54,14 @@
       </a>
     </div>
   </div>
-  <div
-    class="info"
-    [ngClass]="{
-      'orc-font-body-small': !isMobile,
-      'orc-font-small-print': isMobile
-    }"
-  >
-    <div class="col">
-      <mat-icon class="large-material-icon">info</mat-icon>
+  <app-alert-message type="warning">
+    <h3 title i18n="@@works.combiningWorks">
+      Combining works cannot be undone!
+    </h3>
+    <div content i18n="@@works.checkSelectedWorks">
+      Please check the selected works are correct before combining them.
     </div>
-    <div class="col l11 m6 s3">
-      <strong i18n="@@works.combiningWorks">
-        Combining works cannot be undone!
-      </strong>
-      <p i18n="@@works.checkSelectedWorks">
-        Please check the selected works are correct before combining them.
-      </p>
-    </div>
-  </div>
+  </app-alert-message>
   <div class="row" [formGroup]="form" *ngIf="form">
     <h3>
       <ng-container i18n="@@works.selectedWorksCombine">

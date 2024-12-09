@@ -1,23 +1,9 @@
-<div
-  *ngIf="justRegistered || verifyEmailSend || emailVerified"
-  role="alert"
-  class="info"
-  [ngClass]="{
-    'orc-font-body-small': !isMobile,
-    'orc-font-small-print': isMobile,
-    'just-registered': !emailVerified,
-    'email-verified': emailVerified
-  }"
->
-  <div class="col">
-    <mat-icon *ngIf="!emailVerified">info</mat-icon>
-    <mat-icon *ngIf="emailVerified">verified</mat-icon>
-  </div>
-  <div class="col l11 m6 s3">
-    <ng-container *ngIf="!emailVerified && !verifyEmailSend">
-      <h2 class="orc-font-body" i18n="@@topBar.thankYouForRegistering">
-        Thank you for registering with ORCID
-      </h2>
+<ng-container *ngIf="justRegistered">
+  <app-alert-message *ngIf="!emailVerified && !verifyEmailSend">
+    <h3 title class="orc-font-body" i18n="@@topBar.thankYouForRegistering">
+      Thank you for registering with ORCID
+    </h3>
+    <ng-container content>
       <p
         class="orc-font-body-small"
         i18n="@@topBar.weHaveSent"
@@ -46,11 +32,14 @@
         Resend verification email
       </button>
     </ng-container>
-    <ng-container *ngIf="!emailVerified && verifyEmailSend">
-      <h2 class="orc-font-body" i18n="@@side-bar.pleaseVerify">
-        Please verify your primary email address!
-      </h2>
-      <p class="you-need">
+  </app-alert-message>
+
+  <app-alert-message *ngIf="!emailVerified && verifyEmailSend">
+    <h3 title class="orc-font-body" i18n="@@side-bar.pleaseVerify">
+      Please verify your primary email address!
+    </h3>
+    <ng-container content>
+      <p class="orc-font-body-small">
         <ng-container i18n="@@side-bar.youNeedToVerify">
           You need to verify your primary email in order to access all of
           ORCID’s editing features.
@@ -60,9 +49,9 @@
           To verify your email, click the link in the message sent to:
         </ng-container>
       </p>
-      <div class="no-wrap">
+      <div class="no-wrap orc-font-body-small">
         <p class="email-container">{{ primaryEmail }}</p>
-        <p>
+        <p class="need-help">
           <strong i18n="@@side-bar.needHelp"> Need help?</strong> <br />
           <ng-container i18n="@@side-bar.visitOur"> Visit our </ng-container>
           <a
@@ -86,10 +75,10 @@
         </p>
       </div>
     </ng-container>
-    <ng-container *ngIf="emailVerified">
-      <h2 class="orc-font-body" i18n="@@myOrcidAlerts.emailVerified">
-        Thank you for verifying your email
-      </h2>
-    </ng-container>
-  </div>
-</div>
+  </app-alert-message>
+  <app-alert-message *ngIf="emailVerified" type="success">
+    <h3 title class="orc-font-body" i18n="@@myOrcidAlerts.emailVerified">
+      Thank you for verifying your email
+    </h3>
+  </app-alert-message>
+</ng-container>

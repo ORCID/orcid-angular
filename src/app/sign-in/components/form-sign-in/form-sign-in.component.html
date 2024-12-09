@@ -32,7 +32,7 @@
       class="orc-font-small-print"
       i18n="@@ngOrcid.signin.forExample"
       *ngIf="!usernameForm.invalid"
-      >For example: joe@institution.edu or 0000-1234-5678-9101
+      >For example: joe&#64;institution.edu or 0000-1234-5678-9101
     </mat-hint>
 
     <mat-error
@@ -45,7 +45,7 @@
       i18n="@@ngOrcid.signin.enterValidEmailOrOrcidForExample"
       *ngIf="usernameForm.hasError('invalidUserName')"
       >Please enter a valid email address or ORCID iD, for example:
-      joe@institution.edu or 0000-1234-5678-9101
+      joe&#64;institution.edu or 0000-1234-5678-9101
     </mat-error>
 
     <app-print-errors
@@ -81,38 +81,25 @@
         [attr.placeholder]="placeholderPassword"
       />
     </mat-form-field>
-    <div
-      class="info"
+    <app-alert-message
       *ngIf="passwordForm.hasError('maxlength')"
       aria-live="polite"
     >
-      <div>
-        <mat-icon class="large-material-icon material-symbols-outlined"
-          >error</mat-icon
+      <div content class="content">
+        <div>
+          <ng-container i18n="@@ngOrcid.signin.yourPasswordMoreThan"
+            >Your password is more than 256 characters long.</ng-container
+          >
+          <i i18n="@@ngOrcid.signin.yourCannotSignIn"
+            >You cannot sign in to this ORCID account until you have reset your
+            password.</i
+          >
+        </div>
+        <a (click)="forgotPassword()" i18n="@@ngOrcid.signin.resetYourPassword">
+          Reset your password</a
         >
       </div>
-      <div class="content">
-        <div>
-          <p>
-            <ng-container i18n="@@ngOrcid.signin.yourPasswordMoreThan"
-              >Your password is more than 256 characters long.</ng-container
-            >
-            <i i18n="@@ngOrcid.signin.yourCannotSignIn"
-              >You cannot sign in to this ORCID account until you have reset
-              your password.</i
-            >
-          </p>
-        </div>
-        <div>
-          <a
-            (click)="forgotPassword()"
-            i18n="@@ngOrcid.signin.resetYourPassword"
-          >
-            Reset your password</a
-          >
-        </div>
-      </div>
-    </div>
+    </app-alert-message>
   </div>
   <mat-divider></mat-divider>
 

@@ -6,24 +6,11 @@
   margin-bottom: 16px;
 }
 
-.info {
-  p {
-    margin-top: 0;
-    margin-bottom: 16px;
-  }
-  .col {
-    padding: 0;
-  }
-  strong {
-    line-height: 24px;
-    margin-bottom: 8px;
-  }
-  line-height: 21px;
-  padding: 16px;
+app-alert-message {
   margin-top: 32px;
-  border: solid 2px;
-  border-radius: 4px;
-  display: flex;
+  p {
+    margin-bottom: 16px !important;
+  }
 }
 
 .icon-container {

@@ -37,29 +37,22 @@
             (clientSecretUpdated)="onClientSecretUpdated()"
           >
           </app-client-secret>
+          <app-alert-message
+            *ngIf="!existingClient?.clientId?.value"
+            type="success"
+            class="registration-success-panel"
+          >
+            <h3 title i18n="@@developerTools.warningDuplicated">
+              You’ve registered for your ORCID Public API credentials
+            </h3>
 
-          <div class="info" *ngIf="!existingClient?.clientId?.value">
-            <div class="col">
-              <mat-icon class="material-icons-outlined large-material-icon"
-                >info</mat-icon
-              >
+            <div content i18n="@@developerTools.addYourApplicationDetails">
+              Add your application details and one or more redirect URIs in the
+              form below. Once these details are saved we’ll generate your
+              client ID and secret so you can start using the Public API right
+              away.
             </div>
-            <div class="col l11 m6 s3">
-              <strong
-                i18n="@@developerTools.warningDuplicated"
-                class="warning-title"
-              >
-                You’ve registered for your ORCID Public API credentials
-              </strong>
-
-              <p i18n="@@developerTools.addYourApplicationDetails">
-                Add your application details and one or more redirect URIs in
-                the form below. Once these details are saved we’ll generate your
-                client ID and secret so you can start using the Public API right
-                away.
-              </p>
-            </div>
-          </div>
+          </app-alert-message>
 
           <h2
             class="orc-font-body-large"
@@ -205,8 +198,14 @@
           </p>
 
           <app-alert-message class="redirect-uri-notice">
-            <strong i18n="@@developerTools.pleaseNote">Please note</strong>
-            <ul>
+            <h4
+              title
+              i18n="@@developerTools.pleaseNote"
+              class="orc-font-body-small"
+            >
+              Please note
+            </h4>
+            <ul content>
               <li>
                 <ng-container i18n="@@developerTools.only"> Only</ng-container>
                 <strong i18n="@@developerTools.httpsURI">HTTPS URIs</strong>
@@ -246,18 +245,15 @@
             </ul>
           </app-alert-message>
 
-          <div class="warn" *ngIf="triedToSaveWithoutUrls">
-            <div class="col">
-              <mat-icon class="material-icons-outlined large-material-icon"
-                >info</mat-icon
-              >
+          <app-alert-message
+            type="warning"
+            *ngIf="triedToSaveWithoutUrls"
+            class="warning-panel"
+          >
+            <div content i18n="@@developerTools.addARedirectUriBefore">
+              Please add a redirect URI before saving your application
             </div>
-            <div class="col l11 m6 s3">
-              <p i18n="@@developerTools.addARedirectUriBefore">
-                Please add a redirect URI before saving your application
-              </p>
-            </div>
-          </div>
+          </app-alert-message>
 
           <div class="input-container" formArrayName="redirectUris">
             <div
@@ -444,25 +440,27 @@
               Redirect URIs must be unique
             </mat-error>
           </p>
-          <app-alert-message class="notice-panel"
-            ><ng-container
-              i18n="
-                @@developerTools.theOrcidPublicApiAllowsYouToRequestPermission"
-              >The ORCID Public API is free for non-commercial use by
-              individuals as stated in the</ng-container
-            >
-            <a
-              href="https://info.orcid.org/public-client-terms-of-service/"
-              target="_blank"
-              class="underline"
-              i18n="@@developerTools.publicClientTermsOfService"
-              >Public APIs Terms of Service.</a
-            >
-            <ng-container i18n="@@developerTools.byRegisteringForPublicApi"
-              >By “non-commercial” we mean that you may not charge any re-use
-              fees for the Public API, and you may not make use of the Public
-              API in connection with any revenue-generating product or
-              service.</ng-container
+          <app-alert-message class="notice-panel">
+            <ng-container content>
+              <ng-container
+                i18n="
+                  @@developerTools.theOrcidPublicApiAllowsYouToRequestPermission"
+                >The ORCID Public API is free for non-commercial use by
+                individuals as stated in the</ng-container
+              >
+              <a
+                href="https://info.orcid.org/public-client-terms-of-service/"
+                target="_blank"
+                class="underline"
+                i18n="@@developerTools.publicClientTermsOfService"
+                >Public APIs Terms of Service.</a
+              >
+              <ng-container i18n="@@developerTools.byRegisteringForPublicApi"
+                >By “non-commercial” we mean that you may not charge any re-use
+                fees for the Public API, and you may not make use of the Public
+                API in connection with any revenue-generating product or
+                service.</ng-container
+              ></ng-container
             ></app-alert-message
           >
 
@@ -492,10 +490,7 @@
         </ng-container>
       </ng-container>
 
-      <app-terms-of-use
-        *ngIf="!developerToolsEnable && !this.loadingUserDevTolsState"
-        (developerToolsEnable)="ngOnInit()"
-      ></app-terms-of-use>
+      <app-terms-of-use (developerToolsEnable)="ngOnInit()"></app-terms-of-use>
     </main>
   </div>
 </div>

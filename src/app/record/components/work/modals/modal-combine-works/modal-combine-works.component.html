@@ -83,27 +83,22 @@
         </div>
       </div>
     </ng-container>
-    <div class="info">
-      <div class="col icon-container">
-        <mat-icon class="large-material-icon">error_outline</mat-icon>
-      </div>
-      <div class="col l11 m6 s3">
-        <strong i18n="@@works.groupWorksAreYouSure"
-          >Are you sure you want to group these works?</strong
-        >
-        <p i18n="@@works.groupWorksRecommendation" class="orc-font-body-small">
+    <app-alert-message type="warning">
+      <h3 title i18n="@@works.groupWorksAreYouSure">
+        Are you sure you want to group these works?
+      </h3>
+      <div content class="orc-font-body-small">
+        <p i18n="@@works.groupWorksRecommendation">
           We recommend only grouping similar or related works together. Related
           works might have differing titles, identifiers or come from different
           sources.
         </p>
-        <em
-          i18n="@@works.groupUnrelatedWorksWarning"
-          class="orc-font-body-small"
+        <em i18n="@@works.groupUnrelatedWorksWarning"
           >Grouping un-related works can result in unexpected grouped items in
           your record.</em
         >
       </div>
-    </div>
+    </app-alert-message>
     <div class="no-info orc-font-body-small" *ngIf="works.length === 0">
       <mat-icon>error</mat-icon>
       <ng-container i18n="@@works.noItemsSelected"

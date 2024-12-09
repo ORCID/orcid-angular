@@ -24,23 +24,12 @@
       Cancel
     </button>
   </app-modal-footer>
-  <div
-    class="info"
-    [ngClass]="{
-      'orc-font-body-small': !isMobile,
-      'orc-font-small-print': isMobile
-    }"
-  >
-    <div class="col">
-      <mat-icon>info</mat-icon>
-    </div>
-    <div class="col l11 m6 s3">
-      <p i18n="@@shared.deletingItems">
-        Deleting items permanently removes them from your ORCID record. Please
-        review the items selected for deletion.
-      </p>
-    </div>
-  </div>
+  <app-alert-message type="warning" class="orc-font-body-small">
+    <ng-container content i18n="@@shared.deletingItems">
+      Deleting items permanently removes them from your ORCID record. Please
+      review the items selected for deletion.
+    </ng-container>
+  </app-alert-message>
   <fieldset class="row">
     <legend>
       <h3>

@@ -58,3 +58,10 @@ mat-label.orc-font-small-print {
 mat-divider {
   margin: 0px 0 30px 0;
 }
+
+app-alert-message {
+  .content > div {
+    margin-bottom: 16px;
+  }
+  margin-top: 24px;
+}
