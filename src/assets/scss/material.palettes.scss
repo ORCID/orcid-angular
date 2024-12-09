@@ -104,7 +104,7 @@ $text-dark-mid: rgba(0, 0, 0, 0.6);
 $text-dark-high: rgba(0, 0, 0, 0.9);
 $ui-background-darkest: #212121;
 
-$brand-primary-lightest: #f5f9e8;
+$brand-primary-lightest: #fcfdf9;
 $brand-logo-grey: #a6a8ab;
 $ui-background-lightest: #fafafa;
 $ui-background-light: #eeeeee;
@@ -134,19 +134,23 @@ $seamlessaccess-blue: #216e93;
 $brand-primary: #a6ce39;
 
 $brand-primary-dark: #7faa26;
+$brand-primary-darkest: #447405;
 
 // state-notice zepling colors
 $state-notice-light: #ffdf72;
-
 $state-notice-dark: #ff9c00;
-
 $state-notice-lightest: #fffbee;
-
 $state-notice-darkest: #ff6400;
 
-$state-warning-dark: #d32f2f;
+$state-info-dark: #1565c0;
+$state-info-lightest: #f1f8fe;
+$state-info-darkest: #0d47a1;
 
+$state-warning-dark: #d32f2f;
+$state-warning-lightest: rgba(255, 235, 238, 0.25);
 $state-warning-darkest: #b71c1c;
+
+$brand-quad-darkest: #66002b;
 
 $panel-shadow: rgba(214, 214, 214, 1);
 
@@ -159,9 +163,3 @@ $ui-background-dark: #616161;
 // .
 // .
 $dark-primary-background: #f6f6f6;
-
-$state-info-dark: #1565c0;
-$state-info-lightest: #bbdefb;
-
-$state-info-darkest: #0d47a1;
-$state-info-lightest: #f1f8fe;
