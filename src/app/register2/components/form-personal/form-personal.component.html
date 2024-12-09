@@ -145,7 +145,7 @@
         "
         i18n="@@register.invalidEmail2"
       >
-        Please enter a valid email address, for example joe@institution.edu
+        Please enter a valid email address, for example joe&#64;institution.edu
       </mat-error>
 
       <mat-error
@@ -167,18 +167,12 @@
     </div>
 
     <ng-container *ngIf="this.emails.hasError('backendError', 'email')">
-      <div
+      <ng-container
         *ngFor="let error of this.emails.getError('backendError', 'email')"
-        class="info"
       >
-        <div>
-          <mat-icon class="large-material-icon material-symbols-outlined"
-            >error</mat-icon
-          >
-        </div>
-        <div class="content">
-          <div>
-            <p>
+        <app-alert-message>
+          <div content class="content">
+            <div>
               <ng-container i18n="@@register.theEmailAddress">
                 The email address
               </ng-container>
@@ -207,10 +201,8 @@
               <i i18n="@@register.youCannotUseThisEmail">
                 You cannot use this email address when creating a new ORCID iD.
               </i>
-            </p>
-          </div>
+            </div>
 
-          <div>
             <a
               *ngIf="'orcid.frontend.verify.duplicate_email' === error"
               (click)="navigateToSignin(emails.get('email').value)"
@@ -233,8 +225,8 @@
               Reactivate the ORCID record associated with this email address</a
             >
           </div>
-        </div>
-      </div>
+        </app-alert-message>
+      </ng-container>
     </ng-container>
 
     <!-- EMAIL CONFIRMATION  -->
@@ -280,7 +272,7 @@
         "
         i18n="@@register.invalidEmail2"
       >
-        Please enter a valid email address, for example joe@institution.edu
+        Please enter a valid email address, for example joe&#64;institution.edu
       </mat-error>
       <mat-error
         *ngIf="
