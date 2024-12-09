@@ -12,8 +12,8 @@ import { AlertType } from 'src/app/constants'
 /**
  * Use `title` and `content` attributes to display the message
  * Use headings (h1, h2...) for the title
- * Margin is set to `0 0 8px 0` for all headings
- * Line height is also standardized
+ * Title is stripped of any margin, has 24px line height and is bold
+ * Content has `margin-top: 8px` on its first child if it has any, line height is 21px
  */
 export class AlertMessageComponent {
   @Input() type: AlertType = 'notice'
