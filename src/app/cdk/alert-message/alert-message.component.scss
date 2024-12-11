@@ -11,12 +11,11 @@
 }
 
 .content {
-  ::ng-deep {
-    > :first-child {
-      margin-top: 8px;
-    }
-  }
   line-height: 21px !important;
+}
+
+.title:not(:empty) + .content:not(:empty) {
+  margin-top: 8px;
 }
 
 .alert-container {
