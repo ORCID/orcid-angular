@@ -1,0 +1,50 @@
+<div class="menu-container">
+  <mat-form-field
+    appearance="outline"
+    class="mat-form-field-min input-container"
+  >
+    <input
+      #clickHoverMenuTrigger="matMenuTrigger"
+      type="text"
+      [value]="selectedItem?.label || 'Select Item'"
+      readonly
+      [matMenuTriggerFor]="matMenu"
+      (keydown)="onSpaceBar($event)"
+      matInput
+    />
+  </mat-form-field>
+  <mat-menu #matMenu="matMenu" class="this-class">
+    <ng-container *ngFor="let item of menu">
+      <label *ngIf="item.isNotSelectableLabel"> a simple label</label>
+      <button
+        mat-menu-item
+        *ngIf="!item.isNotSelectableLabel && !item.content"
+        (click)="onItemSelect(item)"
+      >
+        {{ item.label }}
+      </button>
+      <button
+        mat-menu-item
+        *ngIf="!item.isNotSelectableLabel && item.content"
+        [matMenuTriggerFor]="test"
+      >
+        <div class="parentContainer">
+          <strong>
+            {{ item.label }}
+          </strong>
+          <p>
+            {{ item.description }}
+          </p>
+        </div>
+      </button>
+      <!-- Create a mat menu using the label as an identifier -->
+      <mat-menu #test="matMenu">
+        <ng-container *ngFor="let subItem of item.content">
+          <button mat-menu-item (click)="onItemSelect(subItem)">
+            {{ subItem.label }}
+          </button>
+        </ng-container>
+      </mat-menu>
+    </ng-container>
+  </mat-menu>
+</div>

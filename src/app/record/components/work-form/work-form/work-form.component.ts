@@ -15,14 +15,10 @@ import { Work } from '../../../../types/record-works.endpoint'
 import {
   CitationTypes,
   LanguageMap,
-  WorkCategories,
-  WorkConferenceTypes,
   WorkIdType,
-  WorkIntellectualPropertyTypes,
-  WorkOtherOutputTypes,
-  WorkPublicationTypes,
   WorkRelationships,
   WorksTitleName,
+  WorkTypes,
   WorkTypesTitle,
 } from '../../../../types/works.endpoint'
 import { RecordWorksService } from '../../../../core/record-works/record-works.service'
@@ -54,6 +50,8 @@ import { workCitationValidator } from 'src/app/shared/validators/citation/work-c
 import { translatedTitleValidator } from 'src/app/shared/validators/translated-title/translated-title.validator'
 import { merge, Subject, of } from 'rxjs'
 import { RecordService } from 'src/app/core/record/record.service'
+import { DeepSelectMenu } from 'src/app/cdk/deep-select-input/deep-select-input/deep-select-input.component'
+import { WorkTypeMenu } from './work-type-menu'
 
 @Component({
   selector: 'app-work-form',
@@ -112,16 +110,7 @@ export class WorkFormComponent implements OnInit {
   ngOrcidSelectACountryOrLocation = $localize`:@@shared.selectACountryOrLocation:Select a country or location`
   ngOrcidDefaultVisibilityLabel = $localize`:@@shared.visibilityDescription:Control who can see this information by setting the visibility. Your default visibility is`
   defaultVisibility: VisibilityStrings
-
-  workTypeByCategory = [
-    { category: WorkCategories.publication, types: WorkPublicationTypes },
-    { category: WorkCategories.conference, types: WorkConferenceTypes },
-    {
-      category: WorkCategories.intellectual_property,
-      types: WorkIntellectualPropertyTypes,
-    },
-    { category: WorkCategories.other_output, types: WorkOtherOutputTypes },
-  ]
+  workTypeMenu = WorkTypeMenu
   countryCodes: { key: string; value: string }[]
 
   constructor(
@@ -134,7 +123,9 @@ export class WorkFormComponent implements OnInit {
     private _record: RecordService,
     @Inject(WINDOW) private _window: Window,
     @Inject(MAT_DIALOG_DATA) public data: UserRecord
-  ) {}
+  ) {
+    console.log('data', this.workTypeMenu)
+  }
 
   ngOnInit(): void {
     this._recordCountryService
@@ -164,21 +155,13 @@ export class WorkFormComponent implements OnInit {
     this.workForm
       .get('workType')
       .valueChanges.pipe(startWith(this.workForm.value['workType']))
-      .subscribe(
-        (
-          value:
-            | WorkConferenceTypes
-            | WorkPublicationTypes
-            | WorkIntellectualPropertyTypes
-            | WorkOtherOutputTypes
-        ) => {
-          if (value) {
-            this.dynamicTitle = WorkTypesTitle[value]
-          } else {
-            this.dynamicTitle = WorksTitleName.journalTitle
-          }
+      .subscribe((value: WorkTypes) => {
+        if (value) {
+          this.dynamicTitle = WorkTypesTitle[value]
+        } else {
+          this.dynamicTitle = WorksTitleName.journalTitle
         }
-      )
+      })
   }
 
   private loadWorkForm(currentWork: Work): void {
@@ -656,12 +639,12 @@ export class WorkFormComponent implements OnInit {
     if (externalIdentifier && workType) {
       if (
         externalIdentifier === 'isbn' &&
-        workType === WorkPublicationTypes.bookChapter
+        workType === WorkTypes.bookChapter
       ) {
         workRelationship = WorkRelationships['part-of']
       } else if (
         externalIdentifier === 'isbn' &&
-        workType === WorkPublicationTypes.book
+        workType === WorkTypes.book
       ) {
         workRelationship = WorkRelationships.self
       } else if (externalIdentifier === 'issn') {
@@ -669,9 +652,9 @@ export class WorkFormComponent implements OnInit {
       } else if (
         externalIdentifier === 'isbn' &&
         [
-          WorkPublicationTypes.dictionaryEntry,
-          WorkConferenceTypes.conferencePaper,
-          WorkPublicationTypes.encyclopediaEntry,
+          WorkTypes.dictionaryEntry,
+          WorkTypes.conferencePaper,
+          WorkTypes.encyclopediaEntry,
         ].indexOf(workType) >= 0
       ) {
         workRelationship = WorkRelationships['part-of']

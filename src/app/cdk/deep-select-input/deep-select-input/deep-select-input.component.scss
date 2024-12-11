@@ -1,0 +1,22 @@
+:host {
+  display: block;
+  width: 100%;
+}
+.menu-container,
+.mat-form-field,
+input {
+  width: 100%;
+}
+
+.parentContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  line-height: 1;
+  gap: 4px;
+  white-space: normal;
+  strong,
+  p {
+    margin: 0;
+  }
+}
