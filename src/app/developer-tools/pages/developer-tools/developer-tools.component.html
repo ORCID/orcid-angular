@@ -490,7 +490,10 @@
         </ng-container>
       </ng-container>
 
-      <app-terms-of-use (developerToolsEnable)="ngOnInit()"></app-terms-of-use>
+      <app-terms-of-use
+        *ngIf="!developerToolsEnable && !this.loadingUserDevTolsState"
+        (developerToolsEnable)="ngOnInit()"
+      ></app-terms-of-use>
     </main>
   </div>
 </div>
