@@ -7,20 +7,6 @@
   $warn: map-get($theme, accent);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
-
-  .info {
-    border-color: mat.get-color-from-palette(
-      $foreground,
-      'state-notice-dark'
-    ) !important;
-
-    mat-icon {
-      color: mat.get-color-from-palette(
-        $foreground,
-        'state-notice-dark'
-      ) !important;
-    }
-  }
 }
 
 @include settings-defaults-email-frequency($orcid-app-theme);
