@@ -76,9 +76,10 @@
       </div>
     </ng-container>
   </app-alert-message>
-  <app-alert-message *ngIf="emailVerified" type="success">
-    <h3 title class="orc-font-body" i18n="@@myOrcidAlerts.emailVerified">
-      Thank you for verifying your email
-    </h3>
-  </app-alert-message>
 </ng-container>
+
+<app-alert-message *ngIf="emailVerified" type="success">
+  <h3 title class="orc-font-body" i18n="@@myOrcidAlerts.emailVerified">
+    Thank you for verifying your email
+  </h3>
+</app-alert-message>
