@@ -487,7 +487,9 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
       if (domain) {
         const remainingEmailsHaveDomain = this.emails.find((email) =>
           email
-            ? email.verified && email.value.split('@')[1].endsWith(domain)
+            ? email.verified &&
+              (email.value.split('@')[1].endsWith('.' + domain) ||
+                email.value.split('@')[1] === domain)
             : false
         )
         if (!remainingEmailsHaveDomain) {
@@ -581,7 +583,10 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
         if (controlKey.startsWith('emailInput')) {
           const control = this.emailsForm.get(controlKey).value
 
-          if (control.email.split('@')[1].endsWith(domain)) {
+          if (
+            control.email.split('@')[1].endsWith('.' + domain) ||
+            control.email.split('@')[1] === domain
+          ) {
             visibilities.push(control.visibility)
           }
         }
@@ -614,7 +619,10 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
       Object.keys(this.emailsForm.controls).forEach((controlKey) => {
         if (controlKey.startsWith('emailInput')) {
           const control = this.emailsForm.get(controlKey)
-          if (control.value.email.split('@')[1].endsWith(domain)) {
+          if (
+            control.value.email.split('@')[1].endsWith('.' + domain) ||
+            control.value.email.split('@')[1] === domain
+          ) {
             if (this.isEmailVerified(control.value.email)) {
               visibilities.push(control.value.visibility)
             }
