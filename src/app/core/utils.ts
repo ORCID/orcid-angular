@@ -5,7 +5,10 @@ export const setProfessionalEmails = (
 ): EmailsEndpoint => {
   emails?.emailDomains?.forEach((domain) => {
     emails?.emails?.forEach((email) => {
-      if (email?.value?.includes(domain?.value)) {
+      if (
+        email?.value?.split('@')[1].endsWith('.' + domain?.value) ||
+        email?.value?.split('@')[1] === domain?.value
+      ) {
         email.professionalEmail = true
       }
     })
