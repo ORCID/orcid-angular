@@ -127,7 +127,8 @@ export class RecordPeerReviewService {
           'peer-reviews/' +
           putCode +
           '/visibility/' +
-          visibility, null
+          visibility,
+        null
       )
       .pipe(
         retry(3),
