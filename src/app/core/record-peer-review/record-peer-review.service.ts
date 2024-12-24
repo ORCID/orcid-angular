@@ -122,12 +122,12 @@ export class RecordPeerReviewService {
     groupId?: any
   ): Observable<any> {
     return this._http
-      .get(
+      .post(
         environment.API_WEB +
           'peer-reviews/' +
           putCode +
           '/visibility/' +
-          visibility
+          visibility, null
       )
       .pipe(
         retry(3),

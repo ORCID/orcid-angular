@@ -290,15 +290,9 @@ export class PanelComponent implements OnInit {
           .subscribe()
         break
       case 'peer-review':
-        const peerReviewPutCodes = []
-        if (this.elements) {
-          this.elements.putCodes.forEach((putCode) => {
-            peerReviewPutCodes.push(putCode)
-          })
-        }
         this._peerReviewService
           .updateVisibility(
-            peerReviewPutCodes.join(),
+            this.elements.groupIdValue,
             visibility,
             this.elements?.groupId
           )
