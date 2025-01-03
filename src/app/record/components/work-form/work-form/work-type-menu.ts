@@ -143,7 +143,10 @@ export const WorkTypeMenu: DeepSelectMenu[] = [
         label: WorkTypesLabels[WorkTypes.newspaperArticle],
         value: WorkTypes.newspaperArticle,
       },
-      /// No value for:  Talk, interview, podcast or speech
+      {
+        label: WorkTypesLabels[WorkTypes.lectureSpeech],
+        value: WorkTypes.lectureSpeech,
+      },
       { label: WorkTypesLabels[WorkTypes.website], value: WorkTypes.website },
       {
         divider: true,
@@ -281,10 +284,7 @@ export const WorkTypeMenu: DeepSelectMenu[] = [
     value: WorkCategories.teachingAndSupervision,
     description: $localize`:@@works.teachingDescription:Working with students`,
     content: [
-      {
-        label: WorkTypesLabels[WorkTypes.lectureSpeech],
-        value: WorkTypes.lectureSpeech, /// RENAME from "lecture/speech" to "speech"
-      },
+      // No value for: Speech ??
       /// No value for: Teaching material ??
       {
         value: WorkTypes.supervisedStudentPublication,

@@ -121,6 +121,7 @@ export interface AssertionVisibilityString extends AssertionBase {
   visibility?: VisibilityStrings
   action?: 'ADD' | 'UPDATE'
   createdDate?: ExtendedDate
+  generatedByScript?: boolean
 }
 
 export interface GroupBase {

@@ -315,9 +315,8 @@
                 [name]="orcidEmailValidation"
                 [isEmailOrDomain]="true"
                 [date]="
-                  domain.createdDate
+                  !domain.generatedByScript && domain.createdDate
                     | monthDayYearDateToString
-                    | verificationDateCutoff
                 "
                 [isLastItem]="true"
               >
