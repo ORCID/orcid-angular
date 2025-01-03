@@ -2,6 +2,7 @@ import { Component, Inject, Input, OnInit } from '@angular/core'
 import {
   AbstractControl,
   AsyncValidatorFn,
+  FormControl,
   UntypedFormArray,
   UntypedFormBuilder,
   UntypedFormGroup,
@@ -720,5 +721,9 @@ export class WorkFormComponent implements OnInit {
 
   closeEvent() {
     this._dialogRef.close()
+  }
+
+  get workTypeControl() : FormControl<any> {
+    return this.workForm.get('workType') as FormControl<any>
   }
 }

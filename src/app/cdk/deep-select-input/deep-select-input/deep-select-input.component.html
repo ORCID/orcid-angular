@@ -1,50 +1,132 @@
-<div class="menu-container">
+<div class="menu-container" [formGroup]="formgroup">
   <mat-form-field
     appearance="outline"
     class="mat-form-field-min input-container"
+    (click)="clickHoverMenuTrigger.openMenu()"
+
   >
     <input
-      #clickHoverMenuTrigger="matMenuTrigger"
       type="text"
-      [value]="selectedItem?.label || 'Select Item'"
-      readonly
+      #clickHoverMenuTrigger="matMenuTrigger"
       [matMenuTriggerFor]="matMenu"
       (keydown)="onSpaceBar($event)"
+      readonly
       matInput
+      [errorStateMatcher]="getMatcher()"
+      [attr.placeholder]="selectItemLabel"
+      formControlName="formControl"
+      [value]="selectedItem?.label"
     />
+    <mat-error *ngIf="invalid" i18n="@@works.selectAWorkType">
+      Select a work type
+    </mat-error>
   </mat-form-field>
-  <mat-menu #matMenu="matMenu" class="this-class">
-    <ng-container *ngFor="let item of menu">
-      <label *ngIf="item.isNotSelectableLabel"> a simple label</label>
-      <button
-        mat-menu-item
-        *ngIf="!item.isNotSelectableLabel && !item.content"
-        (click)="onItemSelect(item)"
-      >
-        {{ item.label }}
-      </button>
-      <button
-        mat-menu-item
-        *ngIf="!item.isNotSelectableLabel && item.content"
-        [matMenuTriggerFor]="test"
-      >
-        <div class="parentContainer">
-          <strong>
+
+  <mat-menu #matMenu="matMenu" class="this-class" (closed)="onMenuClose()">
+    <div class="menu-wrapper">
+      <ng-container *ngFor="let item of menu">
+        <ng-container *ngIf="!item.divider">
+          <label class="orc-font-body strong" *ngIf="item.isNotSelectableLabel">
+            {{ item.label }}</label
+          >
+          <button
+            mat-menu-item
+            *ngIf="!item.isNotSelectableLabel && !item.content"
+            (click)="onItemSelect(item)"
+            class="orc-font-body-small"
+          >
             {{ item.label }}
-          </strong>
-          <p>
-            {{ item.description }}
-          </p>
-        </div>
-      </button>
-      <!-- Create a mat menu using the label as an identifier -->
-      <mat-menu #test="matMenu">
-        <ng-container *ngFor="let subItem of item.content">
-          <button mat-menu-item (click)="onItemSelect(subItem)">
-            {{ subItem.label }}
           </button>
+          <!-- DESKTOP VERSION USES SUBMENUS -->
+          <ng-container *ngIf="!isMobile">
+            <div class="sub-menu-container" *ngIf="item.content?.length">
+              <button
+                mat-menu-item
+                *ngIf="!item.isNotSelectableLabel"
+                [matMenuTriggerFor]="subMenuRef"
+                class="mat-button-wrap-text"
+              >
+                <div class="parentContainer">
+                  <strong class="orc-font-body">
+                    {{ item.label }}
+                  </strong>
+                  <p class="orc-font-small-print">
+                    {{ item.description }}
+                  </p>
+                </div>
+              </button>
+              <!-- Create a mat menu using the label as an identifier -->
+              <mat-menu #subMenuRef="matMenu">
+                <ng-container *ngFor="let subItem of item.content">
+                  <ng-container *ngIf="!subItem.divider">
+                    <button
+                      mat-menu-item
+                      (click)="onItemSelect(subItem)"
+                      [ngClass]="subItem.secondaryItem ? 'secondaryItem' : ''"
+                      class="mat-button-wrap-text"
+                    >
+                      {{ subItem.label }}
+
+                      <p
+                        class="orc-font-small-print"
+                        *ngIf="subItem.description"
+                      >
+                        {{ subItem.description }}
+                      </p>
+                    </button>
+                  </ng-container>
+                  <ng-container *ngIf="subItem.divider">
+                    <mat-divider></mat-divider>
+                  </ng-container>
+                </ng-container>
+              </mat-menu>
+            </div>
+          </ng-container>
+
+          <!-- MOBILE VERSIONS DISPLAY ALL ITEMS -->
+          <ng-container *ngIf="isMobile">
+            <div class="sub-menu-container mobile" *ngIf="item.content?.length">
+              <mat-divider></mat-divider>
+              <div
+                *ngIf="!item.isNotSelectableLabel"
+                class="not-selectable-label"
+              >
+                <div class="parentContainer">
+                  <strong class="orc-font-body">
+                    {{ item.label }}
+                  </strong>
+                  <p class="orc-font-small-print">
+                    {{ item.description }}
+                  </p>
+                </div>
+              </div>
+              <!-- Create a mat menu using the label as an identifier -->
+              <ng-container *ngFor="let subItem of item.content">
+                <ng-container *ngIf="!subItem.divider">
+                  <button
+                    mat-menu-item
+                    (click)="onItemSelect(subItem)"
+                    [ngClass]="subItem.secondaryItem ? 'secondaryItem' : ''"
+                    class="mobile mat-button-wrap-text"
+                  >
+                    {{ subItem.label }}
+
+                    <p class="orc-font-small-print" *ngIf="subItem.description">
+                      {{ subItem.description }}
+                    </p>
+                  </button>
+                </ng-container>
+              </ng-container>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="item.divider">
+            <mat-divider></mat-divider>
+          </ng-container>
         </ng-container>
-      </mat-menu>
-    </ng-container>
+        <ng-container *ngIf="item.divider">
+          <mat-divider></mat-divider>
+        </ng-container>
+      </ng-container>
+    </div>
   </mat-menu>
 </div>

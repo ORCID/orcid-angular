@@ -8,15 +8,99 @@ input {
   width: 100%;
 }
 
-.parentContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  line-height: 1;
-  gap: 4px;
-  white-space: normal;
-  strong,
+.strong {
+  font-weight: 700;
+}
+.menu-wrapper {
+  button {
+    padding: 16px;
+    line-height: 1;
+    max-width: 400px;
+  }
+
+  label {
+    padding-left: 16px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+  }
+  align-items: center;
+}
+
+.sub-menu-container {
+  button {
+    height: 100%;
+    width: 100%;
+    padding: 16px !important;
+    .parentContainer {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      line-height: 1;
+      gap: 4px;
+      white-space: normal;
+      strong,
+      p {
+        margin: 0;
+      }
+      strong {
+        padding-top: 16px;
+        padding-bottom: 4px;
+      }
+      p {
+        padding-bottom: 16px;
+      }
+      padding-right: 24px;
+    }
+  }
+  div {
+    height: 100%;
+    .parentContainer {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      line-height: 1;
+      gap: 4px;
+      white-space: normal;
+      strong,
+      p {
+        margin: 0;
+      }
+      strong {
+        padding-top: 16px;
+        padding-bottom: 4px;
+      }
+      p {
+        padding-bottom: 16px;
+      }
+      padding-right: 24px;
+    }
+  }
+}
+
+button.mat-button-wrap-text.secondaryItem {
+  font-style: italic;
+  height: 100%;
+  padding: 16px 16px !important;
   p {
     margin: 0;
+    padding-top: 4px;
   }
+  .orc-font-small-print {
+    font-style: normal;
+  }
+}
+
+.orc-font-small-print {
+  line-height: 18px;
+}
+
+
+button.mat-button-wrap-text:not(.mobile):not(.secondaryItem) {
+  padding: 0px 16px !important;
+}
+
+
+.not-selectable-label {
+  padding: 0 16px;
 }

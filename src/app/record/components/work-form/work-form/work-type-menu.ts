@@ -12,19 +12,19 @@ export const WorkTypeMenu: DeepSelectMenu[] = [
     isNotSelectableLabel: true,
   },
   {
-    // Journal article
-    label: WorkTypesLabels[WorkTypes.journalIssue],
+    label: WorkTypesLabels[WorkTypes.journalArticle], // Rename from "Journal issue" to "Journal issue or edition"
     value: WorkTypes.journalArticle,
   },
   {
-    // Conference paper
     label: WorkTypesLabels[WorkTypes.conferencePaper],
     value: WorkTypes.conferencePaper,
   },
   {
-    // Book chapter
     label: WorkTypesLabels[WorkTypes.bookChapter],
     value: WorkTypes.bookChapter,
+  },
+  {
+    divider: true,
   },
   {
     label: WorkCategoriesLabel[WorkCategories.academicPublication],
@@ -45,29 +45,33 @@ export const WorkTypeMenu: DeepSelectMenu[] = [
         value: WorkTypes.conferencePaper,
       },
       {
-        label: WorkTypesLabels[WorkTypes.conferenceAbstract],
-        value: WorkTypes.conferenceAbstract,
+        label: WorkTypesLabels[WorkTypes.conferenceOutput],
+        value: WorkTypes.conferenceOutput,
       },
+
       {
-        label: WorkTypesLabels[WorkTypes.lectureSpeech],
-        value: WorkTypes.lectureSpeech,
+        label: WorkTypesLabels[WorkTypes.conferencePresentation],
+        value: WorkTypes.conferencePresentation,
       },
       {
         label: WorkTypesLabels[WorkTypes.conferencePoster],
         value: WorkTypes.conferencePoster,
       },
       {
-        label: WorkTypesLabels[WorkTypes.editedBook],
-        value: WorkTypes.editedBook,
+        label: WorkTypesLabels[WorkTypes.conferenceProceedings],
+        value: WorkTypes.conferenceProceedings,
       },
       { label: WorkTypesLabels[WorkTypes.preprint], value: WorkTypes.preprint },
       {
-        label: WorkTypesLabels[WorkTypes.dissertationThesis],
+        label: WorkTypesLabels[WorkTypes.dissertationThesis], // UPDATING from "Dissertation/thesis" to "Dissertation or thesis"
         value: WorkTypes.dissertationThesis,
       },
       {
         label: WorkTypesLabels[WorkTypes.workingPaper],
         value: WorkTypes.workingPaper,
+      },
+      {
+        divider: true,
       },
       {
         label: $localize`:@@works.otherAcademicPublication:Other academic publication`,
@@ -95,13 +99,19 @@ export const WorkTypeMenu: DeepSelectMenu[] = [
         value: WorkTypes.journalIssue,
       },
       { label: WorkTypesLabels[WorkTypes.review], value: WorkTypes.review },
-      //   { label: WorkTypesLabels[WorkTypes.other], value: WorkTypes.other },
+      {
+        label: WorkTypesLabels[WorkTypes.transcriptions],
+        value: WorkTypes.transcriptions,
+      },
       {
         label: WorkTypesLabels[WorkTypes.translation],
         value: WorkTypes.translation,
       },
       {
-        label: $localize`:@@works.otherReviewAndEditing:Other review or editing`,
+        divider: true,
+      },
+      {
+        label: $localize`:@@works.otherReviewAndEditing:Other review or editing output`,
         description: $localize`:@@works.otherLabelMicrocopy:Selecting this will set the work type to ‘Other’`,
         value: WorkTypes.other,
         secondaryItem: true,
@@ -114,8 +124,8 @@ export const WorkTypeMenu: DeepSelectMenu[] = [
     description: $localize`:@@works.disseminationDescription:Blog posts, media articles, speeches and podcasts`,
     content: [
       {
-        label: WorkTypesLabels[WorkTypes.onlineResource],
-        value: WorkTypes.onlineResource,
+        label: WorkTypesLabels[WorkTypes.blogPost],
+        value: WorkTypes.blogPost,
       },
       {
         label: WorkTypesLabels[WorkTypes.dictionaryEntry],
@@ -133,11 +143,11 @@ export const WorkTypeMenu: DeepSelectMenu[] = [
         label: WorkTypesLabels[WorkTypes.newspaperArticle],
         value: WorkTypes.newspaperArticle,
       },
-      {
-        label: WorkTypesLabels[WorkTypes.lectureSpeech],
-        value: WorkTypes.lectureSpeech,
-      },
+      /// No value for:  Talk, interview, podcast or speech
       { label: WorkTypesLabels[WorkTypes.website], value: WorkTypes.website },
+      {
+        divider: true,
+      },
       {
         label: $localize`:@@works.otherDissemination:Other dissemination output`,
         value: WorkTypes.other,
@@ -155,13 +165,36 @@ export const WorkTypeMenu: DeepSelectMenu[] = [
         label: WorkTypesLabels[WorkTypes.artisticPerformance],
         value: WorkTypes.artisticPerformance,
       },
-      //   { label: WorkTypesLabels[WorkTypes.other], value: WorkTypes.other },
-      //   { label: WorkTypesLabels[WorkTypes.other], value: WorkTypes.other },
-      //   { label: WorkTypesLabels[WorkTypes.other], value: WorkTypes.other },
-      //   { label: WorkTypesLabels[WorkTypes.other], value: WorkTypes.other },
-      //   { label: WorkTypesLabels[WorkTypes.other], value: WorkTypes.other },
-      //   { label: WorkTypesLabels[WorkTypes.other], value: WorkTypes.other },
-      //   { label: WorkTypesLabels[WorkTypes.other], value: WorkTypes.other },
+      {
+        value: WorkTypes.design,
+        label: WorkTypesLabels[WorkTypes.design],
+      },
+      {
+        value: WorkTypes.image,
+        label: WorkTypesLabels[WorkTypes.image],
+      },
+      /// No value for:   Interactive resource
+      {
+        value: WorkTypes.movingImage,
+        label: WorkTypesLabels[WorkTypes.movingImage],
+      },
+      {
+        value: WorkTypes.musicalComposition,
+        label: WorkTypesLabels[WorkTypes.musicalComposition],
+      },
+      {
+        value: WorkTypes.sound,
+        label: WorkTypesLabels[WorkTypes.sound],
+      },
+      {
+        divider: true,
+      },
+      {
+        label: $localize`:@@works.otherCreativeData:Other creative output`,
+        value: WorkTypes.other,
+        secondaryItem: true,
+        description: $localize`:@@works.otherLabelMicrocopy:Selecting this will set the work type to ‘Other’`,
+      },
     ],
   },
   {
@@ -170,14 +203,20 @@ export const WorkTypeMenu: DeepSelectMenu[] = [
     description: $localize`:@@works.dataDescription:Datasets, software, plans and research tools`,
     content: [
       {
-        label: WorkTypesLabels[WorkTypes.physicalObject],
-        value: WorkTypes.physicalObject,
+        label: WorkTypesLabels[WorkTypes.cartographicMaterial],
+        value: WorkTypes.cartographicMaterial,
       },
-      { label: WorkTypesLabels[WorkTypes.dataSet], value: WorkTypes.dataSet },
-      { label: WorkTypesLabels[WorkTypes.dataSet], value: WorkTypes.dataSet },
       {
-        label: WorkTypesLabels[WorkTypes.dataManagementPlan],
+        label: WorkTypesLabels[WorkTypes.clinicalStudy],
+        value: WorkTypes.clinicalStudy,
+      },
+      {
+        value: WorkTypes.dataSet,
+        label: WorkTypesLabels[WorkTypes.dataSet], // UPDATING from "Data set" to "Dataset"
+      },
+      {
         value: WorkTypes.dataManagementPlan,
+        label: WorkTypesLabels[WorkTypes.dataManagementPlan],
       },
       {
         label: WorkTypesLabels[WorkTypes.physicalObject],
@@ -193,7 +232,10 @@ export const WorkTypeMenu: DeepSelectMenu[] = [
       },
       { label: WorkTypesLabels[WorkTypes.software], value: WorkTypes.software },
       {
-        label: $localize`:@@works.otherData:Other data output`,
+        divider: true,
+      },
+      {
+        label: $localize`:@@works.otherData:Other data or process output`,
         value: WorkTypes.other,
         secondaryItem: true,
         description: $localize`:@@works.otherLabelMicrocopy:Selecting this will set the work type to ‘Other’`,
@@ -216,12 +258,15 @@ export const WorkTypeMenu: DeepSelectMenu[] = [
         value: WorkTypes.registeredCopyright,
       },
       {
-        label: WorkTypesLabels[WorkTypes.standardsAndPolicy],
+        label: WorkTypesLabels[WorkTypes.standardsAndPolicy], // UPDATING from "Standard and policy" to "Standards or policy"
         value: WorkTypes.standardsAndPolicy,
       },
       {
         label: WorkTypesLabels[WorkTypes.trademark],
         value: WorkTypes.trademark,
+      },
+      {
+        divider: true,
       },
       {
         label: $localize`:@@works.otherLegal:Other legal or IP output`,
@@ -238,11 +283,15 @@ export const WorkTypeMenu: DeepSelectMenu[] = [
     content: [
       {
         label: WorkTypesLabels[WorkTypes.lectureSpeech],
-        value: WorkTypes.lectureSpeech,
+        value: WorkTypes.lectureSpeech, /// RENAME from "lecture/speech" to "speech"
+      },
+      /// No value for: Teaching material ??
+      {
+        value: WorkTypes.supervisedStudentPublication,
+        label: WorkTypesLabels[WorkTypes.supervisedStudentPublication],
       },
       {
-        label: WorkTypesLabels[WorkTypes.supervisedStudentPublication],
-        value: WorkTypes.supervisedStudentPublication,
+        divider: true,
       },
       {
         label: $localize`:@@works.otherTeaching:Other teaching or supervision output`,

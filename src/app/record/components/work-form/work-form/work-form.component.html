@@ -40,8 +40,12 @@
         id="cy-work-types"
         aria-labelledby="work-type-label"
         [menu]="workTypeMenu"
+        [formControlRef]="workTypeControl"
+        formControlName="workType"
+
       >
       </app-deep-select-input>
+
     </div>
     <!-- Title -->
 
