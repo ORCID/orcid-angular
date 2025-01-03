@@ -638,15 +638,9 @@ export class WorkFormComponent implements OnInit {
     const workType = this.workForm.get('workType').value
 
     if (externalIdentifier && workType) {
-      if (
-        externalIdentifier === 'isbn' &&
-        workType === WorkTypes.bookChapter
-      ) {
+      if (externalIdentifier === 'isbn' && workType === WorkTypes.bookChapter) {
         workRelationship = WorkRelationships['part-of']
-      } else if (
-        externalIdentifier === 'isbn' &&
-        workType === WorkTypes.book
-      ) {
+      } else if (externalIdentifier === 'isbn' && workType === WorkTypes.book) {
         workRelationship = WorkRelationships.self
       } else if (externalIdentifier === 'issn') {
         workRelationship = WorkRelationships['part-of']
@@ -723,7 +717,7 @@ export class WorkFormComponent implements OnInit {
     this._dialogRef.close()
   }
 
-  get workTypeControl() : FormControl<any> {
+  get workTypeControl(): FormControl<any> {
     return this.workForm.get('workType') as FormControl<any>
   }
 }

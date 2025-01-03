@@ -9,7 +9,6 @@ import {
 import { AssertionBase } from './record.endpoint'
 import { WorkTypes } from './works.endpoint'
 
-
 export interface Work extends AssertionBase {
   publicationDate: MonthDayYearDate
   shortDescription?: Value

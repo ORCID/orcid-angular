@@ -70,14 +70,13 @@ export enum WorkTypes {
   conferenceOutput = 'conference-output',
   conferencePresentation = 'conference-presentation',
   conferenceProceedings = 'conference-proceedings',
-  design="design",
-  image="image",
-  learningObject="learning-object",
-  movingImage="moving-image",
-  musicalComposition="musical-composition",
-  sound="sound",
-  transcriptions="transcriptions",
-
+  design = 'design',
+  image = 'image',
+  learningObject = 'learning-object',
+  movingImage = 'moving-image',
+  musicalComposition = 'musical-composition',
+  sound = 'sound',
+  transcriptions = 'transcriptions',
 }
 
 export const WorkCategoriesLabel = {
@@ -90,8 +89,6 @@ export const WorkCategoriesLabel = {
   [WorkCategories.legalAndIp]: $localize`:@@works.legal:Legal and IP`,
   [WorkCategories.teachingAndSupervision]: $localize`:@@works.teaching:Teaching and supervision`,
 }
-
-
 
 export const WorkTypesLabels = {
   [WorkTypes.conferenceAbstract]: $localize`:@@works.abstract:Conference abstract`,
@@ -151,7 +148,6 @@ export const WorkTypesLabels = {
   [WorkTypes.musicalComposition]: $localize`:@@works.musicalComposition:Musical composition`,
   [WorkTypes.sound]: $localize`:@@works.sound:Sound`,
   [WorkTypes.transcriptions]: $localize`:@@works.transcriptions:Transcription`,
-
 }
 
 export enum WorksTitleName {

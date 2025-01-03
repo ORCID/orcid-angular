@@ -5,7 +5,10 @@ import { MatLegacyFormFieldControl } from '@angular/material/legacy-form-field'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { MatLegacySelectModule } from '@angular/material/legacy-select'
 import { SharedModule } from 'src/app/shared/shared.module'
-import { MatLegacyMenu, MatLegacyMenuModule } from '@angular/material/legacy-menu'
+import {
+  MatLegacyMenu,
+  MatLegacyMenuModule,
+} from '@angular/material/legacy-menu'
 import { MatMenuModule } from '@angular/material/menu'
 import { MatButtonModule } from '@angular/material/button'
 import { MatLegacyInputModule } from '@angular/material/legacy-input'
@@ -19,7 +22,7 @@ import { MatLegacyInputModule } from '@angular/material/legacy-input'
     MatLegacySelectModule,
     SharedModule,
     MatLegacyMenuModule,
-    MatLegacyInputModule
+    MatLegacyInputModule,
   ],
   exports: [DeepSelectInputComponent],
 })
