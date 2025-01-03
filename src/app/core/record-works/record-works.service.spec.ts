@@ -18,7 +18,6 @@ import {
   WorkGroup,
   WorksEndpoint,
 } from '../../types/record-works.endpoint'
-import { WorkPublicationTypes } from '../../types/works.endpoint'
 import { environment } from '../../../environments/environment.local'
 import { TogglzService } from '../togglz/togglz.service'
 import { of, ReplaySubject } from 'rxjs'
@@ -139,7 +138,7 @@ export function getWork(): Work {
       value: 'Book',
     },
     workType: {
-      value: WorkPublicationTypes.book,
+      value: 'book',
     },
     putCode: {
       value: 1,

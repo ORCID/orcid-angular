@@ -138,7 +138,7 @@ export class DeepSelectInputComponent implements ControlValueAccessor {
   }
 
   get invalid() {
-    return this.formControlRef.invalid && this.formControlRef.touched
+    return this.formControlRef?.invalid && this.formControlRef?.touched
   }
 
   getMatcher(): ErrorStateMatcher {

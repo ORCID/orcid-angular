@@ -284,7 +284,7 @@ export const WorkTypeMenu: DeepSelectMenu[] = [
     value: WorkCategories.teachingAndSupervision,
     description: $localize`:@@works.teachingDescription:Working with students`,
     content: [
-      // No value for: Speech ??
+      // No value for: Lecture ??
       /// No value for: Teaching material ??
       {
         value: WorkTypes.supervisedStudentPublication,
