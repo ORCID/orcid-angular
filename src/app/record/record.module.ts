@@ -84,6 +84,7 @@ import { AlertMessageModule } from '../cdk/alert-message/alert-message.module'
 import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog'
 import { LoginInterstitialsService } from '../core/login-interstitials/login-interstitials.service'
 import { WarningMessageModule } from '../cdk/warning-message/warning-message.module'
+import { DeepSelectInputModule } from '../cdk/deep-select-input/deep-select-input.module'
 
 @NgModule({
   declarations: [
@@ -175,6 +176,7 @@ import { WarningMessageModule } from '../cdk/warning-message/warning-message.mod
     TopBarVerificationEmailModule,
     TrustedSummaryModule,
     MatDialogModule,
+    DeepSelectInputModule,
   ],
   providers: [VerificationEmailModalService, LoginInterstitialsService],
 })

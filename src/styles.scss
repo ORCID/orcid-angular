@@ -104,3 +104,7 @@ html {
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
+
+.mat-menu-panel {
+  max-width: none !important;
+}

@@ -35,37 +35,15 @@
         <strong i18n="@@works.workType">Work type</strong>
         <span class="required">*</span>
       </label>
-      <mat-form-field
-        appearance="outline"
-        class="mat-form-field-min input-container"
-        id="cy-work-types-form-field"
+
+      <app-deep-select-input
+        id="cy-work-types"
+        aria-labelledby="work-type-label"
+        [menu]="workTypeMenu"
+        [formControlRef]="workTypeControl"
+        formControlName="workType"
       >
-        <mat-select
-          id="cy-work-types"
-          aria-labelledby="work-type-label"
-          formControlName="workType"
-          (selectionChange)="$workTypeUpdateEvent.next()"
-          placeholder="{{ ngOrcidSelectWorkType }}"
-        >
-          <mat-optgroup
-            *ngFor="let workType of workTypeByCategory"
-            label="{{ workType.category | recordWorkCategoryLabel }}"
-          >
-            <mat-option
-              *ngFor="let type of workType.types | keyvalue"
-              [value]="type.value"
-            >
-              {{ type.value | recordWorkTypeLabel }}
-            </mat-option>
-          </mat-optgroup>
-        </mat-select>
-        <mat-error
-          *ngIf="workForm.get('workType').hasError('required')"
-          i18n="@@works.selectWorkType"
-        >
-          Select a work type
-        </mat-error>
-      </mat-form-field>
+      </app-deep-select-input>
     </div>
     <!-- Title -->
 

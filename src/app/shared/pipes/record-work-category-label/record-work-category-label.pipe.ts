@@ -8,7 +8,7 @@ import {
   name: 'recordWorkCategoryLabel',
 })
 export class RecordWorkCategoryLabelPipe implements PipeTransform {
-  transform(value: WorkCategories, ...args: unknown[]): unknown {
+  transform(value: WorkCategories, ...args: unknown[]): string {
     return WorkCategoriesLabel[value]
   }
 }
