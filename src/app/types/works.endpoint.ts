@@ -143,7 +143,7 @@ export const WorkTypesLabels = {
   [WorkTypes.conferenceProceedings]: $localize`:@@works.conferenceProceedings:Conference proceedings`,
   [WorkTypes.design]: $localize`:@@works.design:Design`,
   [WorkTypes.image]: $localize`:@@works.image:Image`,
-  [WorkTypes.learningObject]: $localize`:@@works.learningObject:Learning object`,
+  [WorkTypes.learningObject]: $localize`:@@works.learningObject:Teaching material`,
   [WorkTypes.movingImage]: $localize`:@@works.movingImage:Moving image or video`,
   [WorkTypes.musicalComposition]: $localize`:@@works.musicalComposition:Musical composition`,
   [WorkTypes.sound]: $localize`:@@works.sound:Sound`,
