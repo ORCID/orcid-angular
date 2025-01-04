@@ -1,3 +1,19 @@
+## v2.109.14 - 2025-01-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.13...v2.109.14)
+
+## v2.109.13 - 2025-01-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.12...v2.109.13)
+
+- [#2435](https://github.com/ORCID/orcid-angular/pull/2435): deep-worktype-menu
+
+## v2.109.12 - 2025-01-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.11...v2.109.12)
+
+- [#2434](https://github.com/ORCID/orcid-angular/pull/2434): Lmendoza/deep worktype menu
+
 ## v2.109.11 - 2024-12-24
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.10...v2.109.11)
