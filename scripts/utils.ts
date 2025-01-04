@@ -46,9 +46,13 @@ export function runtimeEnvironmentScript() {
   return `
     (function() {
       // The raw environment objects
-      var environmentProduction = ${JSON.stringify(environmentProduction.environment)};
+      var environmentProduction = ${JSON.stringify(
+        environmentProduction.environment
+      )};
       var environmentQa = ${JSON.stringify(environmentQa.environment)};
-      var environmentSandbox = ${JSON.stringify(environmentSandbox.environment)};
+      var environmentSandbox = ${JSON.stringify(
+        environmentSandbox.environment
+      )};
       var environment4200 = ${JSON.stringify(environment4200.environment)};
       var environmentDev = ${JSON.stringify(environmentDev.environment)};
 
@@ -102,5 +106,5 @@ export function runtimeEnvironmentScript() {
 
       window.runtimeEnvironment = chosenEnv;
     })();
-  `;
+  `
 }

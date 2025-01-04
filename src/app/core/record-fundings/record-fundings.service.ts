@@ -75,7 +75,8 @@ export class RecordFundingsService {
   getFundingDetails(putCode): Observable<Funding> {
     return this._http
       .get<Funding>(
-        runtimeEnvironment.API_WEB + `fundings/fundingDetails.json?id=${putCode}`
+        runtimeEnvironment.API_WEB +
+          `fundings/fundingDetails.json?id=${putCode}`
       )
       .pipe(
         retry(3),
@@ -87,7 +88,9 @@ export class RecordFundingsService {
   getPublicFundingDetails(orcid, putCode): Observable<any> {
     return this._http
       .get<Funding>(
-        runtimeEnvironment.API_WEB + orcid + `/fundingDetails.json?id=${putCode}`
+        runtimeEnvironment.API_WEB +
+          orcid +
+          `/fundingDetails.json?id=${putCode}`
       )
       .pipe(
         retry(3),
@@ -165,7 +168,10 @@ export class RecordFundingsService {
 
   save(funding: Funding) {
     return this._http
-      .post<Funding>(runtimeEnvironment.API_WEB + `fundings/funding.json`, funding)
+      .post<Funding>(
+        runtimeEnvironment.API_WEB + `fundings/funding.json`,
+        funding
+      )
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
@@ -196,7 +202,8 @@ export class RecordFundingsService {
 
   loadFundingImportWizardList(): Observable<RecordImportWizard[]> {
     return this._http.get<RecordImportWizard[]>(
-      runtimeEnvironment.API_WEB + 'workspace/retrieve-funding-import-wizards.json'
+      runtimeEnvironment.API_WEB +
+        'workspace/retrieve-funding-import-wizards.json'
     )
   }
 

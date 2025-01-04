@@ -333,12 +333,11 @@
             "local": {
               "browserTarget": "ng-orcid:build:local"
             },
-            "local-tomcat": {
-            },
+            "local-tomcat": {},
             "production": {
               "browserTarget": "ng-orcid:build:production"
             },
-          
+
             "en": {
               "browserTarget": "ng-orcid:build:en"
             },

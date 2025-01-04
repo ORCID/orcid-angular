@@ -168,7 +168,10 @@ export function RegisterBackendValidatorMixin<
         StepC
       )
       return this._http
-        .post<RegisterForm>(`${runtimeEnvironment.API_WEB}register.json`, registerForm)
+        .post<RegisterForm>(
+          `${runtimeEnvironment.API_WEB}register.json`,
+          registerForm
+        )
         .pipe(
           retry(3),
           catchError((error) => this._errorHandler.handleError(error))

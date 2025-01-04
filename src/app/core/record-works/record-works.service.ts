@@ -264,14 +264,16 @@ export class RecordWorksService {
   }
 
   getWork(): Observable<Work> {
-    return this._http.get<Work>(runtimeEnvironment.API_WEB + `works/work.json`).pipe(
-      retry(3),
-      map((x) => {
-        x.workExternalIdentifiers = []
-        return x
-      }),
-      catchError((error) => this._errorHandler.handleError(error))
-    )
+    return this._http
+      .get<Work>(runtimeEnvironment.API_WEB + `works/work.json`)
+      .pipe(
+        retry(3),
+        map((x) => {
+          x.workExternalIdentifiers = []
+          return x
+        }),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
   }
 
   set(value: any): Observable<any> {
@@ -291,7 +293,11 @@ export class RecordWorksService {
 
     return this._http
       .get(
-        runtimeEnvironment.API_WEB + 'works/' + putCode + '/visibility/' + visibility
+        runtimeEnvironment.API_WEB +
+          'works/' +
+          putCode +
+          '/visibility/' +
+          visibility
       )
       .pipe(
         retry(3),
@@ -303,7 +309,9 @@ export class RecordWorksService {
   updatePreferredSource(putCode: string): Observable<any> {
     return this._http
       .get(
-        runtimeEnvironment.API_WEB + 'works/updateToMaxDisplay.json?putCode=' + putCode
+        runtimeEnvironment.API_WEB +
+          'works/updateToMaxDisplay.json?putCode=' +
+          putCode
       )
       .pipe(
         retry(3),
@@ -316,7 +324,9 @@ export class RecordWorksService {
 
   public loadWorkIdTypes(): Observable<WorkIdType[]> {
     return this._http
-      .get<WorkIdType[]>(`${runtimeEnvironment.API_WEB}works/idTypes.json?query=`)
+      .get<WorkIdType[]>(
+        `${runtimeEnvironment.API_WEB}works/idTypes.json?query=`
+      )
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))

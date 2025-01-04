@@ -226,9 +226,12 @@ export class RecordService {
 
   getKeywords(): Observable<Keywords> {
     return this._http
-      .get<Keywords>(runtimeEnvironment.API_WEB + `my-orcid/keywordsForms.json`, {
-        headers: this.headers,
-      })
+      .get<Keywords>(
+        runtimeEnvironment.API_WEB + `my-orcid/keywordsForms.json`,
+        {
+          headers: this.headers,
+        }
+      )
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))

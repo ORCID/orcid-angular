@@ -53,10 +53,13 @@ export class Register2Service extends _RegisterServiceMixingBase {
     givenNames: string
   }) {
     return this._http
-      .get<DuplicatedName[]>(runtimeEnvironment.API_WEB + `dupicateResearcher.json`, {
-        params: names,
-        withCredentials: true,
-      })
+      .get<DuplicatedName[]>(
+        runtimeEnvironment.API_WEB + `dupicateResearcher.json`,
+        {
+          params: names,
+          withCredentials: true,
+        }
+      )
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))

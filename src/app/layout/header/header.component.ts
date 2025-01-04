@@ -13,7 +13,6 @@ import {
 } from 'src/app/types/menu.local'
 import { Config } from 'src/app/types/togglz.endpoint'
 
-
 import { ApplicationRoutes, ORCID_REGEXP } from '../../constants'
 import { menu } from './menu'
 
@@ -272,7 +271,9 @@ export class HeaderComponent implements OnInit {
       }
       this.window.location.href = route
     } else {
-      ;(this.window as any).outOfRouterNavigation(runtimeEnvironment.INFO_SITE + route)
+      ;(this.window as any).outOfRouterNavigation(
+        runtimeEnvironment.INFO_SITE + route
+      )
     }
   }
 }

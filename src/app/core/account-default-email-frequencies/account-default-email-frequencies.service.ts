@@ -34,7 +34,8 @@ export class AccountDefaultEmailFrequenciesService {
   updateAmendNotifications(frequency: number): Observable<void> {
     return this._http
       .post<void>(
-        runtimeEnvironment.API_WEB + `notifications/frequencies/update/amendUpdates`,
+        runtimeEnvironment.API_WEB +
+          `notifications/frequencies/update/amendUpdates`,
         frequency,
         { headers: this.headers }
       )
@@ -46,7 +47,8 @@ export class AccountDefaultEmailFrequenciesService {
   updateAdminNotifications(frequency: string): Observable<void> {
     return this._http
       .post<void>(
-        runtimeEnvironment.API_WEB + `notifications/frequencies/update/adminUpdates`,
+        runtimeEnvironment.API_WEB +
+          `notifications/frequencies/update/adminUpdates`,
         frequency,
         { headers: this.headers }
       )
@@ -58,7 +60,8 @@ export class AccountDefaultEmailFrequenciesService {
   updateMemberNotifications(frequency: string): Observable<void> {
     return this._http
       .post<void>(
-        runtimeEnvironment.API_WEB + `notifications/frequencies/update/memberUpdates`,
+        runtimeEnvironment.API_WEB +
+          `notifications/frequencies/update/memberUpdates`,
         frequency,
         { headers: this.headers }
       )
@@ -71,7 +74,8 @@ export class AccountDefaultEmailFrequenciesService {
   updateMemberTipsUpdates(tips: boolean): Observable<void> {
     return this._http
       .post<void>(
-        runtimeEnvironment.API_WEB + `notifications/frequencies/update/tipsUpdates`,
+        runtimeEnvironment.API_WEB +
+          `notifications/frequencies/update/tipsUpdates`,
         tips,
         { headers: this.headers }
       )

@@ -82,7 +82,9 @@ export class OpenGraphService {
           {
             property: this.imageMeta,
             content:
-              'https:' + runtimeEnvironment.BASE_URL + 'assets/img/orcid-og-image.png',
+              'https:' +
+              runtimeEnvironment.BASE_URL +
+              'assets/img/orcid-og-image.png',
           },
         ])
       } catch (e) {

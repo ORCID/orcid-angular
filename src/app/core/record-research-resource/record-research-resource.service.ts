@@ -4,7 +4,6 @@ import { Observable, of, ReplaySubject } from 'rxjs'
 import { catchError, map, retry, tap } from 'rxjs/operators'
 import { UserRecordOptions } from 'src/app/types/record.local'
 
-
 import {
   ResearchResource,
   ResearchResourcesEndpoint,
@@ -97,7 +96,10 @@ export class RecordResearchResourceService {
 
   getPublicResearchResourceById(orcid, putCode): Observable<ResearchResource> {
     return this._http.get<ResearchResource>(
-      runtimeEnvironment.API_WEB + orcid + '/researchResource.json?id=' + putCode
+      runtimeEnvironment.API_WEB +
+        orcid +
+        '/researchResource.json?id=' +
+        putCode
     )
   }
 

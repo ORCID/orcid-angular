@@ -42,9 +42,13 @@ export class PasswordRecoveryService {
 
   remindOrcidId(data) {
     return this._http
-      .post<PasswordRecovery>(runtimeEnvironment.API_WEB + `forgot-id.json`, data, {
-        withCredentials: true,
-      })
+      .post<PasswordRecovery>(
+        runtimeEnvironment.API_WEB + `forgot-id.json`,
+        data,
+        {
+          withCredentials: true,
+        }
+      )
       .pipe(
         retry(3),
         catchError((error) =>

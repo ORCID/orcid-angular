@@ -274,7 +274,11 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
       contributorOrcid: this.formBuilder.group({
         path: [orcid ? orcid : null],
         uri: [
-          uri ? uri : orcid ? `https:${runtimeEnvironment.BASE_URL}${orcid}` : null,
+          uri
+            ? uri
+            : orcid
+            ? `https:${runtimeEnvironment.BASE_URL}${orcid}`
+            : null,
         ],
       }),
       roles: new UntypedFormArray([]),

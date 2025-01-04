@@ -220,7 +220,9 @@ export class InboxService {
   }
 
   retrieveUnreadCount(): any {
-    return this._http.get(runtimeEnvironment.BASE_URL + 'inbox/unreadCount.json')
+    return this._http.get(
+      runtimeEnvironment.BASE_URL + 'inbox/unreadCount.json'
+    )
   }
 
   totalNumber() {

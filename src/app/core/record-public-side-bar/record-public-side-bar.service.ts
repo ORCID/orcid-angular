@@ -47,7 +47,9 @@ export class RecordPublicSideBarService {
 
       return this._http
         .get<UserRecord>(
-          runtimeEnvironment.API_WEB + options.publicRecordId + `/public-record.json`,
+          runtimeEnvironment.API_WEB +
+            options.publicRecordId +
+            `/public-record.json`,
           {
             headers: this.headers,
           }

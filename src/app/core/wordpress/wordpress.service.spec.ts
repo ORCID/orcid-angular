@@ -43,7 +43,9 @@ describe('WordpressService', () => {
       expect(html).toContain(mockHtml)
     })
 
-    const req = httpMock.expectOne(`${runtimeEnvironment.WORDPRESS_S3}/index.html`)
+    const req = httpMock.expectOne(
+      `${runtimeEnvironment.WORDPRESS_S3}/index.html`
+    )
     expect(req.request.method).toBe('GET')
     req.flush(mockHtml)
   })
@@ -137,7 +139,9 @@ describe('WordpressService', () => {
       expect(html).toBe(expectedHtml)
     })
 
-    const req = httpMock.expectOne(`${runtimeEnvironment.WORDPRESS_S3}/index.html`)
+    const req = httpMock.expectOne(
+      `${runtimeEnvironment.WORDPRESS_S3}/index.html`
+    )
     expect(req.request.method).toBe('GET')
     req.flush(mockHtml)
   })

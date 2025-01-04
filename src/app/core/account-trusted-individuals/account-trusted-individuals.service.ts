@@ -64,9 +64,12 @@ export class AccountTrustedIndividualsService {
 
   getPersonDetails(orcid: string) {
     return this._http
-      .get<PersonDetails>(runtimeEnvironment.API_PUB + `${orcid}/personal-details`, {
-        headers: this.headers,
-      })
+      .get<PersonDetails>(
+        runtimeEnvironment.API_PUB + `${orcid}/personal-details`,
+        {
+          headers: this.headers,
+        }
+      )
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))

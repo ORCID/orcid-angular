@@ -18,7 +18,6 @@ import { OauthParameters, RequestInfoForm } from 'src/app/types'
 import { OauthAuthorize } from 'src/app/types/authorize.endpoint'
 import { UserSessionUpdateParameters } from 'src/app/types/session.local'
 
-
 import { SignInData } from '../../types/sign-in-data.endpoint'
 import { TwoFactor } from '../../types/two-factor.endpoint'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
@@ -193,9 +192,12 @@ export class OauthService {
 
   loadShibbolethSignInData(): Observable<SignInData> {
     return this._http
-      .get<SignInData>(runtimeEnvironment.BASE_URL + 'shibboleth/signinData.json', {
-        headers: this.headers,
-      })
+      .get<SignInData>(
+        runtimeEnvironment.BASE_URL + 'shibboleth/signinData.json',
+        {
+          headers: this.headers,
+        }
+      )
       .pipe(
         retry(3),
         catchError((error) =>

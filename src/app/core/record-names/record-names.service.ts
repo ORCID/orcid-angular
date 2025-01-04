@@ -43,9 +43,12 @@ export class RecordNamesService {
     }
 
     this._http
-      .get<NamesEndPoint>(runtimeEnvironment.API_WEB + `account/nameForm.json`, {
-        headers: this.headers,
-      })
+      .get<NamesEndPoint>(
+        runtimeEnvironment.API_WEB + `account/nameForm.json`,
+        {
+          headers: this.headers,
+        }
+      )
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),

@@ -100,19 +100,25 @@ export class RecordPeerReviewService {
 
   getPeerReviewById(putCode: number): Observable<PeerReview> {
     return this._http.get<PeerReview>(
-      runtimeEnvironment.API_WEB + 'peer-reviews/peer-review.json?putCode=' + putCode
+      runtimeEnvironment.API_WEB +
+        'peer-reviews/peer-review.json?putCode=' +
+        putCode
     )
   }
 
   getPeerReviewImportWizardList(): Observable<RecordImportWizard[]> {
     return this._http.get<RecordImportWizard[]>(
-      runtimeEnvironment.API_WEB + 'workspace/retrieve-peer-review-import-wizards.json'
+      runtimeEnvironment.API_WEB +
+        'workspace/retrieve-peer-review-import-wizards.json'
     )
   }
 
   getPublicPeerReviewById(orcid: string, putCode: number): Observable<any> {
     return this._http.get(
-      runtimeEnvironment.API_WEB + orcid + '/peer-review.json?putCode=' + putCode
+      runtimeEnvironment.API_WEB +
+        orcid +
+        '/peer-review.json?putCode=' +
+        putCode
     )
   }
 

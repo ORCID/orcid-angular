@@ -1,6 +1,7 @@
 import { EnvironmentInterface } from './global-environment'
 
-export const environment: EnvironmentInterface = {  production: false,
+export const environment: EnvironmentInterface = {
+  production: false,
   debugger: true,
   ROBOTS: 'all',
   API_NEWS: 'https://www.mocky.io/v2/5dced45b3000007300931ce8',

@@ -5,7 +5,6 @@ import { catchError, retry } from 'rxjs/operators'
 import { WHITE_SPACE_REGEXP } from 'src/app/constants'
 import { OrgDisambiguated } from 'src/app/types'
 
-
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
 @Injectable({

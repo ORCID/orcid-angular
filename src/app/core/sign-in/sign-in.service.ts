@@ -2,7 +2,6 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { catchError, map, retry, switchMap, first } from 'rxjs/operators'
 
-
 import { getOrcidNumber, isValidOrcidFormat } from '../../constants'
 import { Claim } from '../../types/claim.endpoint'
 import { Reactivation } from '../../types/reactivation.endpoint'
@@ -77,9 +76,13 @@ export class SignInService {
     let body = new HttpParams({ encoder: new CustomEncoder() })
     body = body.set(isValidOrcidFormat(username) ? 'orcid' : 'email', username)
     return this._http
-      .post<Reactivation>(runtimeEnvironment.API_WEB + `sendReactivation.json`, body, {
-        withCredentials: true,
-      })
+      .post<Reactivation>(
+        runtimeEnvironment.API_WEB + `sendReactivation.json`,
+        body,
+        {
+          withCredentials: true,
+        }
+      )
       .pipe(
         retry(3),
         catchError((error) =>
@@ -121,9 +124,12 @@ export class SignInService {
   singOut() {
     this._titleService.setTitle('ORCID')
     return this._http
-      .get<SignIn>(runtimeEnvironment.API_WEB + 'userStatus.json?logUserOut=true', {
-        withCredentials: true,
-      })
+      .get<SignIn>(
+        runtimeEnvironment.API_WEB + 'userStatus.json?logUserOut=true',
+        {
+          withCredentials: true,
+        }
+      )
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),

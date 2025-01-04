@@ -36,7 +36,9 @@ export class CanonocalUrlService {
     let canonicalUrl =
       'https:' +
       runtimeEnvironment.BASE_URL +
-      (runtimeEnvironment.BASE_URL.endsWith('/') ? publicOrcid : '/' + publicOrcid)
+      (runtimeEnvironment.BASE_URL.endsWith('/')
+        ? publicOrcid
+        : '/' + publicOrcid)
     let link: HTMLLinkElement = this.doc.createElement('link')
 
     link.setAttribute('rel', 'canonical')

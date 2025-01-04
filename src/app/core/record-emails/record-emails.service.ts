@@ -126,9 +126,13 @@ export class RecordEmailsService {
     const encoded_data = JSON.stringify(email)
 
     return this._http
-      .post(runtimeEnvironment.API_WEB + `account/email/visibility`, encoded_data, {
-        headers: this.headers,
-      })
+      .post(
+        runtimeEnvironment.API_WEB + `account/email/visibility`,
+        encoded_data,
+        {
+          headers: this.headers,
+        }
+      )
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),

@@ -26,7 +26,9 @@ export class TwoFactorAuthenticationService {
   ) {}
 
   checkState(): Observable<Status> {
-    return this._http.get<Status>(runtimeEnvironment.BASE_URL + '2FA/status.json')
+    return this._http.get<Status>(
+      runtimeEnvironment.BASE_URL + '2FA/status.json'
+    )
   }
 
   disable(): Observable<Status> {
@@ -44,7 +46,9 @@ export class TwoFactorAuthenticationService {
   }
 
   startSetup(): Observable<QrCode> {
-    return this._http.get<QrCode>(runtimeEnvironment.BASE_URL + '2FA/QRCode.json')
+    return this._http.get<QrCode>(
+      runtimeEnvironment.BASE_URL + '2FA/QRCode.json'
+    )
   }
 
   register(obj): Observable<TwoFactorSetup> {
@@ -82,9 +86,13 @@ export class TwoFactorAuthenticationService {
 
   submitCodeForAnotherAccount(code: TwoFactor) {
     return this._http
-      .post<TwoFactor>(runtimeEnvironment.BASE_URL + `2FA/submitCode.json`, code, {
-        headers: this.headers,
-      })
+      .post<TwoFactor>(
+        runtimeEnvironment.BASE_URL + `2FA/submitCode.json`,
+        code,
+        {
+          headers: this.headers,
+        }
+      )
       .pipe(
         retry(3),
         catchError((error) =>
