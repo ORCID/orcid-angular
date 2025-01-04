@@ -20,7 +20,7 @@ export class StepAComponent extends BaseStepDirective {
   constructor(private _platform: PlatformInfoService, private _router: Router) {
     super()
   }
-  infoSiteBaseUrl = environment.INFO_SITE
+  infoSiteBaseUrl = runtimeEnvironment.INFO_SITE
 
   goForward() {
     this.formGroup.markAllAsTouched()

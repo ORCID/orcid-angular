@@ -243,48 +243,6 @@
                 }
               ]
             },
-            "qa": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-                }
-              ],
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.qa.ts"
-                }
-              ]
-            },
-            "sandbox": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-                }
-              ],
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.sandbox.ts"
-                }
-              ]
-            },
-            "int": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-                }
-              ],
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.int.ts"
-                }
-              ]
-            },
             "en": {
               "localize": ["en"]
             },
@@ -370,23 +328,17 @@
             },
             "local-sandbox": {
               "browserTarget": "ng-orcid:build:local-with-proxy",
-              "proxyConfig": "src/proxy.conf.sandbox..mjs"
+              "proxyConfig": "src/proxy.conf.sandbox.mjs"
             },
             "local": {
               "browserTarget": "ng-orcid:build:local"
             },
             "local-tomcat": {
-              "browserTarget": "ng-orcid:build:local-tomcat"
             },
             "production": {
               "browserTarget": "ng-orcid:build:production"
             },
-            "sandbox": {
-              "browserTarget": "ng-orcid:build:sandbox"
-            },
-            "qa": {
-              "browserTarget": "ng-orcid:build:qa"
-            },
+          
             "en": {
               "browserTarget": "ng-orcid:build:en"
             },

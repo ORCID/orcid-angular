@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment'
   preserveWhitespaces: true,
 })
 export class DialogActionsDuplicatedMergedConfirmedComponent implements OnInit {
-  baseUrl = environment.BASE_URL
+  baseUrl = runtimeEnvironment.BASE_URL
 
   constructor(
     private matRef: MatDialogRef<DialogActionsDuplicatedMergedConfirmedComponent>,

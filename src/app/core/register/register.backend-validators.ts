@@ -61,7 +61,7 @@ export function RegisterBackendValidatorMixin<
     ): Observable<RegisterForm> {
       return this._http
         .post<RegisterForm>(
-          environment.API_WEB +
+          runtimeEnvironment.API_WEB +
             `oauth/custom/register/${this.formInputs[controlName].validationEndpoint}.json`,
           value
         )
@@ -76,7 +76,7 @@ export function RegisterBackendValidatorMixin<
     ): Observable<RegisterForm> {
       return this._http
         .post(
-          `${environment.API_WEB}reactivateAdditionalEmailsValidate.json`,
+          `${runtimeEnvironment.API_WEB}reactivateAdditionalEmailsValidate.json`,
           value
         )
         .pipe(
@@ -168,7 +168,7 @@ export function RegisterBackendValidatorMixin<
         StepC
       )
       return this._http
-        .post<RegisterForm>(`${environment.API_WEB}register.json`, registerForm)
+        .post<RegisterForm>(`${runtimeEnvironment.API_WEB}register.json`, registerForm)
         .pipe(
           retry(3),
           catchError((error) => this._errorHandler.handleError(error))

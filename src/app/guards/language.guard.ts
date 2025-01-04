@@ -35,7 +35,7 @@ export class LanguageGuard {
         // get language context
         langContext = this.getLanguageContext(next.queryParams)
 
-        if (environment.debugger) {
+        if (runtimeEnvironment.debugger) {
           console.debug('language context', langContext)
         }
       }),

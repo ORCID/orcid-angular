@@ -54,7 +54,7 @@ export class RecordEmailsService {
     }
 
     this._http
-      .get<EmailsEndpoint>(environment.API_WEB + `account/emails.json`, {
+      .get<EmailsEndpoint>(runtimeEnvironment.API_WEB + `account/emails.json`, {
         headers: this.headers,
       })
       .pipe(
@@ -77,7 +77,7 @@ export class RecordEmailsService {
   postEmails(emails: EmailsEndpoint): Observable<EmailsEndpoint> {
     return this._http
       .post<EmailsEndpoint>(
-        environment.API_WEB + `account/emails.json`,
+        runtimeEnvironment.API_WEB + `account/emails.json`,
         emails,
         {
           headers: this.headers,
@@ -93,7 +93,7 @@ export class RecordEmailsService {
   editEmail(original: string, edited: string): Observable<EmailsEndpoint> {
     return this._http
       .post<Assertion>(
-        environment.API_WEB + `account/email/edit.json`,
+        runtimeEnvironment.API_WEB + `account/email/edit.json`,
         { original, edited },
         {
           headers: this.headers,
@@ -109,7 +109,7 @@ export class RecordEmailsService {
   verifyEmail(email: string): Observable<EmailsEndpoint> {
     return this._http
       .get<ErrorsListResponse>(
-        environment.API_WEB +
+        runtimeEnvironment.API_WEB +
           `account/verifyEmail.json?email=${encodeURIComponent(email)}`,
         {
           headers: this.headers,
@@ -126,7 +126,7 @@ export class RecordEmailsService {
     const encoded_data = JSON.stringify(email)
 
     return this._http
-      .post(environment.API_WEB + `account/email/visibility`, encoded_data, {
+      .post(runtimeEnvironment.API_WEB + `account/email/visibility`, encoded_data, {
         headers: this.headers,
       })
       .pipe(
@@ -141,7 +141,7 @@ export class RecordEmailsService {
   ): Observable<AssertionVisibilityString> {
     return this._http
       .post<AssertionVisibilityString>(
-        environment.API_WEB + `account/validateEmail.json`,
+        runtimeEnvironment.API_WEB + `account/validateEmail.json`,
         value
       )
       .pipe(

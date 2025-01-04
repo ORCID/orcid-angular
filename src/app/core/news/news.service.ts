@@ -19,7 +19,7 @@ export class NewsService {
   ) {}
 
   getNews() {
-    const url = environment.API_NEWS
+    const url = runtimeEnvironment.API_NEWS
     // Get the news!
     return this._http.get(url, { responseType: 'text' }).pipe(
       retry(3),

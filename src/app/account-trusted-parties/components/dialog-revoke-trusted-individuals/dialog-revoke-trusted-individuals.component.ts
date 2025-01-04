@@ -16,7 +16,7 @@ import { environment } from 'src/environments/environment'
 })
 export class DialogRevokeTrustedIndividualsComponent implements OnInit {
   isMobile: boolean
-  baseUrl = environment.BASE_URL
+  baseUrl = runtimeEnvironment.BASE_URL
   constructor(
     private matRef: MatDialogRef<DialogRevokeTrustedIndividualsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: AccountTrustedIndividual,

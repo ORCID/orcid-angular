@@ -16,7 +16,7 @@ export class TogglzService {
   constructor(private _http: HttpClient, private userService: UserService) {}
 
   private getConfig() {
-    return this._http.get<Config>(environment.API_WEB + 'config.json', {
+    return this._http.get<Config>(runtimeEnvironment.API_WEB + 'config.json', {
       withCredentials: true,
     })
   }

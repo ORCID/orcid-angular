@@ -118,7 +118,7 @@ export class InboxService {
       >(
         !this.nextLoadRequireAFullBackendSyncronization
           ? // if a complete refresh is not required only load the the new notifications
-            environment.BASE_URL +
+            runtimeEnvironment.BASE_URL +
               `inbox/notifications.json?firstResult=${
                 AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL * depthLevel
               }&maxResults=${AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL}&includeArchived=${includeArchived}`
@@ -154,7 +154,7 @@ export class InboxService {
         | InboxNotificationHtml
         | InboxNotificationInstitutional
         | InboxNotificationPermission
-      >(environment.BASE_URL + `inbox/${code}/archive.json`, code, {
+      >(runtimeEnvironment.BASE_URL + `inbox/${code}/archive.json`, code, {
         headers: this.headers,
       })
       .pipe(
@@ -202,7 +202,7 @@ export class InboxService {
         | InboxNotificationHtml
         | InboxNotificationInstitutional
         | InboxNotificationPermission
-      >(environment.BASE_URL + `inbox/${code}/read.json`, code, {
+      >(runtimeEnvironment.BASE_URL + `inbox/${code}/read.json`, code, {
         headers: this.headers,
       })
       .pipe(
@@ -220,13 +220,13 @@ export class InboxService {
   }
 
   retrieveUnreadCount(): any {
-    return this._http.get(environment.BASE_URL + 'inbox/unreadCount.json')
+    return this._http.get(runtimeEnvironment.BASE_URL + 'inbox/unreadCount.json')
   }
 
   totalNumber() {
     return this._http
       .get<TotalNotificationCount>(
-        environment.BASE_URL + `inbox/totalCount.json`,
+        runtimeEnvironment.BASE_URL + `inbox/totalCount.json`,
         {
           headers: this.headers,
         }

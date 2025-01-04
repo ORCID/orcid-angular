@@ -25,7 +25,7 @@ export class AccountActionsDuplicatedService {
   ): Observable<DuplicateRemoveEndpoint> {
     return this._http
       .post<DuplicateRemoveEndpoint>(
-        environment.API_WEB + `account/confirm-deprecate-profile.json`,
+        runtimeEnvironment.API_WEB + `account/confirm-deprecate-profile.json`,
         account,
         { headers: this.headers }
       )
@@ -42,7 +42,7 @@ export class AccountActionsDuplicatedService {
   ): Observable<DuplicateRemoveEndpoint> {
     return this._http
       .post<DuplicateRemoveEndpoint>(
-        environment.API_WEB + `account/validate-deprecate-profile.json`,
+        runtimeEnvironment.API_WEB + `account/validate-deprecate-profile.json`,
         account,
         { headers: this.headers }
       )

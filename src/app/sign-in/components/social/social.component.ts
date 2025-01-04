@@ -32,7 +32,7 @@ export class SocialComponent implements OnInit {
     _platform.get().subscribe((data) => {
       this.platform = data
     })
-    this.baseUri = environment.API_WEB
+    this.baseUri = runtimeEnvironment.API_WEB
     this.csrf = this._cookie.get('XSRF-TOKEN')
   }
 

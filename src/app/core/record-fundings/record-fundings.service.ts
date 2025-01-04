@@ -35,7 +35,7 @@ export class RecordFundingsService {
     if (options?.publicRecordId) {
       this._http
         .get<FundingGroup[]>(
-          environment.API_WEB +
+          runtimeEnvironment.API_WEB +
             options.publicRecordId +
             '/fundingGroups.json?' +
             '&sort=' +
@@ -75,7 +75,7 @@ export class RecordFundingsService {
   getFundingDetails(putCode): Observable<Funding> {
     return this._http
       .get<Funding>(
-        environment.API_WEB + `fundings/fundingDetails.json?id=${putCode}`
+        runtimeEnvironment.API_WEB + `fundings/fundingDetails.json?id=${putCode}`
       )
       .pipe(
         retry(3),
@@ -87,7 +87,7 @@ export class RecordFundingsService {
   getPublicFundingDetails(orcid, putCode): Observable<any> {
     return this._http
       .get<Funding>(
-        environment.API_WEB + orcid + `/fundingDetails.json?id=${putCode}`
+        runtimeEnvironment.API_WEB + orcid + `/fundingDetails.json?id=${putCode}`
       )
       .pipe(
         retry(3),
@@ -104,7 +104,7 @@ export class RecordFundingsService {
   ): Observable<FundingGroup[]> {
     return this._http
       .get<FundingGroup[]>(
-        environment.API_WEB +
+        runtimeEnvironment.API_WEB +
           `fundings/fundingGroups.json?` +
           '&sort=' +
           (options?.sort != null ? options.sort : 'date') +
@@ -127,7 +127,7 @@ export class RecordFundingsService {
   ): Observable<any> {
     return this._http
       .get(
-        environment.API_WEB +
+        runtimeEnvironment.API_WEB +
           'fundings/' +
           putCode +
           '/visibility/' +
@@ -143,7 +143,7 @@ export class RecordFundingsService {
   delete(putCode: string): Observable<any> {
     return this._http
       .delete(
-        environment.API_WEB +
+        runtimeEnvironment.API_WEB +
           'fundings/funding.json?id=' +
           encodeURIComponent(putCode)
       )
@@ -156,7 +156,7 @@ export class RecordFundingsService {
 
   getFunding(): Observable<Funding> {
     return this._http
-      .get<Funding>(environment.API_WEB + `fundings/funding.json`)
+      .get<Funding>(runtimeEnvironment.API_WEB + `fundings/funding.json`)
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))
@@ -165,7 +165,7 @@ export class RecordFundingsService {
 
   save(funding: Funding) {
     return this._http
-      .post<Funding>(environment.API_WEB + `fundings/funding.json`, funding)
+      .post<Funding>(runtimeEnvironment.API_WEB + `fundings/funding.json`, funding)
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
@@ -177,7 +177,7 @@ export class RecordFundingsService {
     if (org.length > 2) {
       return this._http
         .get<Organization[]>(
-          environment.API_WEB +
+          runtimeEnvironment.API_WEB +
             'fundings/disambiguated/name/' +
             org +
             '?limit=100&funders-only=true',
@@ -196,14 +196,14 @@ export class RecordFundingsService {
 
   loadFundingImportWizardList(): Observable<RecordImportWizard[]> {
     return this._http.get<RecordImportWizard[]>(
-      environment.API_WEB + 'workspace/retrieve-funding-import-wizards.json'
+      runtimeEnvironment.API_WEB + 'workspace/retrieve-funding-import-wizards.json'
     )
   }
 
   updatePreferredSource(putCode: string): Observable<any> {
     return this._http
       .get(
-        environment.API_WEB +
+        runtimeEnvironment.API_WEB +
           'fundings/updateToMaxDisplay.json?putCode=' +
           putCode
       )

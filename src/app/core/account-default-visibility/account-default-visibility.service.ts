@@ -22,7 +22,7 @@ export class AccountDefaultVisibilityService {
   update(frequency: VisibilityStrings): Observable<void> {
     return this._http
       .post<void>(
-        environment.API_WEB + `account/default_visibility.json`,
+        runtimeEnvironment.API_WEB + `account/default_visibility.json`,
         frequency,
         { headers: this.headers }
       )

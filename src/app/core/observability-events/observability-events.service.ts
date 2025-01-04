@@ -25,7 +25,7 @@ export class CustomEventService {
       attributes,
     }
 
-    if (environment.debugger) {
+    if (runtimeEnvironment.debugger) {
       console.debug(
         `-> Journey "${journeyType}" started at ${this.journeys[journeyType].startTime}`,
         attributes
@@ -64,7 +64,7 @@ export class CustomEventService {
     }
     // Send the custom event to New Relic
 
-    if (environment.debugger) {
+    if (runtimeEnvironment.debugger) {
       console.debug(
         `-> Event "${eventName}" recorded for journey "${journeyType}" with elapsed time ${elapsedTime}ms`,
         eventAttributes

@@ -55,7 +55,7 @@ export class RecordPersonIdentifierService {
 
     this._http
       .get<PersonIdentifierEndpoint>(
-        environment.API_WEB + `my-orcid/externalIdentifiers.json`,
+        runtimeEnvironment.API_WEB + `my-orcid/externalIdentifiers.json`,
         {
           headers: this.headers,
         }
@@ -81,7 +81,7 @@ export class RecordPersonIdentifierService {
   postPersonalIdentifiers(otherNames: PersonIdentifierEndpoint) {
     return this._http
       .post<PersonIdentifierEndpoint>(
-        environment.API_WEB + `my-orcid/externalIdentifiers.json`,
+        runtimeEnvironment.API_WEB + `my-orcid/externalIdentifiers.json`,
         otherNames,
         {
           headers: this.headers,

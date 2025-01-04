@@ -4,7 +4,7 @@ import { Observable, of, ReplaySubject } from 'rxjs'
 import { catchError, map, retry, tap } from 'rxjs/operators'
 import { UserRecordOptions } from 'src/app/types/record.local'
 
-import { environment } from '../../../environments/environment'
+
 import {
   ResearchResource,
   ResearchResourcesEndpoint,
@@ -51,7 +51,7 @@ export class RecordResearchResourceService {
 
     this._http
       .get<ResearchResourcesEndpoint>(
-        environment.API_WEB +
+        runtimeEnvironment.API_WEB +
           url +
           '?offset=' +
           options.offset +
@@ -89,7 +89,7 @@ export class RecordResearchResourceService {
 
   getResearchResourceById(putCode: string): Observable<ResearchResource> {
     return this._http.get<ResearchResource>(
-      environment.API_WEB +
+      runtimeEnvironment.API_WEB +
         'research-resources/researchResource.json?id=' +
         putCode
     )
@@ -97,7 +97,7 @@ export class RecordResearchResourceService {
 
   getPublicResearchResourceById(orcid, putCode): Observable<ResearchResource> {
     return this._http.get<ResearchResource>(
-      environment.API_WEB + orcid + '/researchResource.json?id=' + putCode
+      runtimeEnvironment.API_WEB + orcid + '/researchResource.json?id=' + putCode
     )
   }
 
@@ -107,7 +107,7 @@ export class RecordResearchResourceService {
   ): Observable<any> {
     return this._http
       .get(
-        environment.API_WEB +
+        runtimeEnvironment.API_WEB +
           'research-resources/' +
           putCode +
           '/visibility/' +
@@ -122,7 +122,7 @@ export class RecordResearchResourceService {
 
   delete(putCode: string): Observable<any> {
     return this._http
-      .delete(environment.API_WEB + 'research-resources/' + putCode, {
+      .delete(runtimeEnvironment.API_WEB + 'research-resources/' + putCode, {
         headers: this.headers,
       })
       .pipe(
@@ -135,7 +135,7 @@ export class RecordResearchResourceService {
   updatePreferredSource(putCode: string): Observable<any> {
     return this._http
       .get(
-        environment.API_WEB +
+        runtimeEnvironment.API_WEB +
           'research-resources/updateToMaxDisplay.json?putCode=' +
           putCode
       )

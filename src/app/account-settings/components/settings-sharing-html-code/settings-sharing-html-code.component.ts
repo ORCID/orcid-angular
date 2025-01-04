@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment'
 export class SettingsSharingHtmlCodeComponent implements OnInit {
   @Output() loading = new EventEmitter<boolean>()
   userSession: UserSession
-  baseUrl = environment.BASE_URL
+  baseUrl = runtimeEnvironment.BASE_URL
 
   constructor(private _user: UserService) {}
 

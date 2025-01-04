@@ -17,7 +17,7 @@ import { environment } from 'src/environments/environment'
 })
 export class DialogActionsDuplicatedComponent implements OnInit {
   isMobile: boolean
-  baseUrl = environment.BASE_URL
+  baseUrl = runtimeEnvironment.BASE_URL
   constructor(
     private matRef: MatDialogRef<DialogActionsDuplicatedComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DuplicateRemoveEndpoint,

@@ -15,7 +15,7 @@ export class TopBarRecordIssuesComponent implements OnInit, OnDestroy {
   @Input() isPublicRecord: string
   $destroy: Subject<boolean> = new Subject<boolean>()
   userInfo: UserInfo
-  baseUrl = environment.BASE_URL
+  baseUrl = runtimeEnvironment.BASE_URL
 
   constructor(private _record: RecordService) {}
 

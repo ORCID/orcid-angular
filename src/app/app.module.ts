@@ -37,45 +37,4 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http'
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {
-  constructor() {
-    this.initializeApp()
-  }
-
-  private initializeApp() {
-    environment.API_WEB = environment.API_WEB.replace(
-      '<SUBDOMAIN>',
-      this.getSubDomain()
-    )
-    environment.BASE_URL = environment.BASE_URL.replace(
-      '<SUBDOMAIN>',
-      this.getSubDomain()
-    )
-    environment.API_PUB = environment.API_PUB.replace(
-      '<SUBDOMAIN>',
-      this.getSubDomain()
-    )
-    environment.API_WEB = environment.API_WEB.replace(
-      '<DOMAIN>',
-      this.getCurrentLeanDomain()
-    )
-    environment.BASE_URL = environment.BASE_URL.replace(
-      '<DOMAIN>',
-      this.getCurrentLeanDomain()
-    )
-    environment.API_PUB = environment.API_PUB.replace(
-      '<DOMAIN>',
-      this.getCurrentLeanDomain()
-    )
-  }
-
-  getCurrentLeanDomain() {
-    const port = window.location.port ? ':' + window.location.port : ''
-    return window.location.hostname.split('.').slice(-2).join('.') + port
-  }
-
-  getSubDomain() {
-    const subdomain = window.location.hostname.split('.').slice(0, -2).join('.')
-    return subdomain ? subdomain + '.' : ''
-  }
-}
+export class AppModule {}

@@ -46,7 +46,7 @@ export class StepAComponent
   }
 
   ngOnInit(): void {}
-  infoSiteBaseUrl = environment.INFO_SITE
+  infoSiteBaseUrl = runtimeEnvironment.INFO_SITE
 
   goBack() {
     this._registerStateService.registerStepperButtonClicked('a', 'back')

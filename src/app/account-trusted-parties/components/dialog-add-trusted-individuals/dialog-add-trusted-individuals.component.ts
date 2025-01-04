@@ -14,7 +14,7 @@ import { environment } from 'src/environments/environment'
 })
 export class DialogAddTrustedIndividualsComponent implements OnInit {
   isMobile: boolean
-  baseUrl = environment.BASE_URL
+  baseUrl = runtimeEnvironment.BASE_URL
   addByEmailOrOrcid: string
   constructor(
     private matRef: MatDialogRef<DialogAddTrustedIndividualsComponent>,

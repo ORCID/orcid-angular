@@ -52,7 +52,7 @@ export class SettingsTrustedIndividualsSearchComponent
   pageSize: number
   ariaLabelPaginator = $localize`:@@search.paginator:paginator`
   loading: boolean
-  baseUrl = environment.BASE_URL
+  baseUrl = runtimeEnvironment.BASE_URL
   userSession: UserSession
   searchPlaceHolder = $localize`:@@account.searchIndividualsPlaceHolder:ORCID iD, email address, or names`
   trustedIndividuals: AccountTrustedIndividual[]

@@ -1,5 +1,4 @@
 import { Inject, Injectable } from '@angular/core'
-import { environment } from '../../../environments/environment'
 import { RequestInfoForm } from '../../types'
 import { BehaviorSubject, Observable } from 'rxjs'
 import {
@@ -101,7 +100,7 @@ export class GoogleTagManagerService {
       gtmScript.async = true
       gtmScript.src =
         'https://www.googletagmanager.com/gtm.js?id=' +
-        environment.GOOGLE_TAG_MANAGER
+        runtimeEnvironment.GOOGLE_TAG_MANAGER
       gtmScript.setAttributeNode(doc.createAttribute('data-ot-ignore'))
       gtmScript.addEventListener('load', () => {
         this.isLoaded = true
@@ -119,7 +118,7 @@ export class GoogleTagManagerService {
   }
 
   reportPageView(url: string) {
-    if (environment.debugger) {
+    if (runtimeEnvironment.debugger) {
       console.debug(`GTM Navigation ${url}`)
     }
     const gtmTag: ItemGTM = {
@@ -140,7 +139,7 @@ export class GoogleTagManagerService {
       redirectUrl = (label as unknown as RequestInfoForm).redirectUrl
       label = 'OAuth ' + buildClientString(label)
     }
-    if (environment.debugger) {
+    if (runtimeEnvironment.debugger) {
       console.debug(`GTM - Event /${event}/${label}/`)
     }
 
@@ -161,7 +160,7 @@ export class GoogleTagManagerService {
 
   reportNavigationEnd(url: string, duration: number | void): Observable<void> {
     if (duration) {
-      if (environment.debugger) {
+      if (runtimeEnvironment.debugger) {
         console.debug(`GTM - Took ${duration} to load ${url}`)
       }
 

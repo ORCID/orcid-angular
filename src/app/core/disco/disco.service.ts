@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core'
 import { Observable, ReplaySubject } from 'rxjs'
 import { catchError, first, map, retry, take, tap } from 'rxjs/operators'
 
-import { environment } from '../../../environments/environment'
 import { Institutional } from '../../types/institutional.endpoint'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { ERROR_REPORT } from 'src/app/errors'
@@ -29,7 +28,7 @@ export class DiscoService {
       })
       institutionNames = institutionNames.slice(
         0,
-        environment.INSTITUTIONAL_AUTOCOMPLETE_DISPLAY_AMOUNT
+        runtimeEnvironment.INSTITUTIONAL_AUTOCOMPLETE_DISPLAY_AMOUNT
       )
     } else {
       institutionNames = allInstitutionNames
@@ -87,7 +86,7 @@ export class DiscoService {
     if (!this.discoFeedSubject) {
       this.discoFeedSubject = new ReplaySubject(1)
       return this._http
-        .get<Institutional[]>(environment.BASE_URL + 'Shibboleth.sso/DiscoFeed')
+        .get<Institutional[]>(runtimeEnvironment.BASE_URL + 'Shibboleth.sso/DiscoFeed')
         .pipe(
           tap((feed) => {
             this.discoFeedSubject.next(feed)

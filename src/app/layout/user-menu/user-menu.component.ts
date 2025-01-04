@@ -75,12 +75,12 @@ export class UserMenuComponent implements OnInit {
     } else if (url === 'developer-tools') {
       this._router.navigate([ApplicationRoutes.developerTools])
     } else {
-      this.window.location.href = environment.BASE_URL + url
+      this.window.location.href = runtimeEnvironment.BASE_URL + url
     }
   }
 
   navigateTo(val) {
-    if (val === '/signout' && environment.proxyMode) {
+    if (val === '/signout' && runtimeEnvironment.proxyMode) {
       this._userInfo.noRedirectLogout().subscribe()
     } else {
       this.window.location.href = val

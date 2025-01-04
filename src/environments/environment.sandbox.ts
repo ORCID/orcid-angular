@@ -1,4 +1,6 @@
-export const environment = {
+import { EnvironmentInterface } from './global-environment'
+
+export const environment: EnvironmentInterface = {
   production: true,
   debugger: false,
   ROBOTS: 'noindex, nofollow',

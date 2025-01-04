@@ -274,7 +274,7 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
       contributorOrcid: this.formBuilder.group({
         path: [orcid ? orcid : null],
         uri: [
-          uri ? uri : orcid ? `https:${environment.BASE_URL}${orcid}` : null,
+          uri ? uri : orcid ? `https:${runtimeEnvironment.BASE_URL}${orcid}` : null,
         ],
       }),
       roles: new UntypedFormArray([]),
@@ -394,7 +394,7 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
       : this.getCreditNameFromUserRecord()
     const uri = this.recordHolderContribution?.contributorOrcid?.uri
       ? this.recordHolderContribution?.contributorOrcid?.uri
-      : `https:${environment.BASE_URL}${orcid}`
+      : `https:${runtimeEnvironment.BASE_URL}${orcid}`
     // todo validate if its necessary
     if (!this.recordHolderContribution) {
       this.recordHolderContribution = {

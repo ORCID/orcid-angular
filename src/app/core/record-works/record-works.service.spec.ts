@@ -18,7 +18,7 @@ import {
   WorkGroup,
   WorksEndpoint,
 } from '../../types/record-works.endpoint'
-import { environment } from '../../../environments/environment.local'
+import { environment } from '../../../environments/runtimeEnvironment.local'
 import { TogglzService } from '../togglz/togglz.service'
 import { of, ReplaySubject } from 'rxjs'
 import { UserService } from '..'
@@ -73,7 +73,7 @@ describe('RecordWorksService', () => {
         .subscribe((workSaved) => {
           expect(workSaved).toBeTruthy()
           requestGetWorks = httpTestingController.match(
-            environment.API_WEB +
+            runtimeEnvironment.API_WEB +
               'works/worksExtendedPage.json?offset=0&sort=date&sortAsc=false&pageSize=50'
           )
 
@@ -83,7 +83,7 @@ describe('RecordWorksService', () => {
             requestGetWorks.forEach((getWorks) => {
               getWorks.flush({})
               const requestGroupingSuggestions = httpTestingController.match(
-                environment.API_WEB + 'works/groupingSuggestions.json'
+                runtimeEnvironment.API_WEB + 'works/groupingSuggestions.json'
               )
               expect(requestGroupingSuggestions.length).toEqual(1)
               requestGroupingSuggestions.forEach((grouping) => {
@@ -95,7 +95,7 @@ describe('RecordWorksService', () => {
     })
 
     const requestsSaveWorks = httpTestingController.match(
-      environment.API_WEB + 'works/work.json'
+      runtimeEnvironment.API_WEB + 'works/work.json'
     )
 
     expect(requestsSaveWorks.length).toEqual(5)

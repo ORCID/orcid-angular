@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { Observable, of, ReplaySubject } from 'rxjs'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
-import { environment } from '../../../environments/environment'
+
 import { PeerReview } from '../../types/record-peer-review.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
 import { RecordImportWizard } from '../../types/record-peer-review-import.endpoint'
@@ -40,7 +40,7 @@ export class RecordPeerReviewService {
 
     this._http
       .get<PeerReview[]>(
-        environment.API_WEB +
+        runtimeEnvironment.API_WEB +
           url +
           (options.sortAsc != null ? options.sortAsc : true)
       )
@@ -65,7 +65,7 @@ export class RecordPeerReviewService {
     if (options?.publicRecordId) {
       return this._http
         .get<PeerReview[]>(
-          environment.API_WEB +
+          runtimeEnvironment.API_WEB +
             options.publicRecordId +
             '/peer-reviews-by-group-id.json?sortAsc=' +
             (options.sortAsc != null ? options.sortAsc : true) +
@@ -80,7 +80,7 @@ export class RecordPeerReviewService {
     } else {
       return this._http
         .get<PeerReview[]>(
-          environment.API_WEB +
+          runtimeEnvironment.API_WEB +
             'peer-reviews/peer-reviews-by-group-id.json?sortAsc=' +
             (options.sortAsc != null ? options.sortAsc : true) +
             '&groupId=' +
@@ -100,19 +100,19 @@ export class RecordPeerReviewService {
 
   getPeerReviewById(putCode: number): Observable<PeerReview> {
     return this._http.get<PeerReview>(
-      environment.API_WEB + 'peer-reviews/peer-review.json?putCode=' + putCode
+      runtimeEnvironment.API_WEB + 'peer-reviews/peer-review.json?putCode=' + putCode
     )
   }
 
   getPeerReviewImportWizardList(): Observable<RecordImportWizard[]> {
     return this._http.get<RecordImportWizard[]>(
-      environment.API_WEB + 'workspace/retrieve-peer-review-import-wizards.json'
+      runtimeEnvironment.API_WEB + 'workspace/retrieve-peer-review-import-wizards.json'
     )
   }
 
   getPublicPeerReviewById(orcid: string, putCode: number): Observable<any> {
     return this._http.get(
-      environment.API_WEB + orcid + '/peer-review.json?putCode=' + putCode
+      runtimeEnvironment.API_WEB + orcid + '/peer-review.json?putCode=' + putCode
     )
   }
 
@@ -123,7 +123,7 @@ export class RecordPeerReviewService {
   ): Observable<any> {
     return this._http
       .post(
-        environment.API_WEB +
+        runtimeEnvironment.API_WEB +
           'peer-reviews/' +
           putCode +
           '/visibility/' +
@@ -145,7 +145,7 @@ export class RecordPeerReviewService {
 
   delete(putCode: string): Observable<any> {
     return this._http
-      .delete(environment.API_WEB + 'peer-reviews/' + putCode, {
+      .delete(runtimeEnvironment.API_WEB + 'peer-reviews/' + putCode, {
         headers: this.headers,
       })
       .pipe(
@@ -158,7 +158,7 @@ export class RecordPeerReviewService {
   updatePreferredSource(putCode: string): Observable<any> {
     return this._http
       .get(
-        environment.API_WEB +
+        runtimeEnvironment.API_WEB +
           'peer-reviews/updateToMaxDisplay.json?putCode=' +
           putCode
       )

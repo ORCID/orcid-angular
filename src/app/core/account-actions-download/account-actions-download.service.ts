@@ -17,7 +17,7 @@ export class AccountActionsDownloadService {
 
   downloadUserData() {
     return this.downloadBlogFile({
-      url: environment.API_WEB + 'get-my-data',
+      url: runtimeEnvironment.API_WEB + 'get-my-data',
       dataType: 'application/octet-stream',
     })
   }

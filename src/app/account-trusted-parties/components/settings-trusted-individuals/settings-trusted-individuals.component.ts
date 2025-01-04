@@ -22,7 +22,7 @@ export class SettingsTrustedIndividualsComponent implements OnInit, OnDestroy {
   displayedColumns = ['trustedIndividuals', 'orcid', 'granted', 'actions']
   platformSubs = new Subject<void>()
   isMobile: boolean
-  baseUrl = environment.BASE_URL
+  baseUrl = runtimeEnvironment.BASE_URL
   trustedPartiesUrl = '/trusted-parties'
   constructor(
     private _trustedIndividualsService: AccountTrustedIndividualsService,

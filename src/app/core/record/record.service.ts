@@ -205,7 +205,7 @@ export class RecordService {
     return this.recordSubject$.asObservable()
   }
   attachDebugger() {
-    if (environment.debugger) {
+    if (runtimeEnvironment.debugger) {
       this.recordSubject$.subscribe((value) => {
         console.debug(value)
       })
@@ -215,7 +215,7 @@ export class RecordService {
   getExternalIdentifier(): Observable<ExternalIdentifier> {
     return this._http
       .get<ExternalIdentifier>(
-        environment.API_WEB + `my-orcid/externalIdentifiers.json`,
+        runtimeEnvironment.API_WEB + `my-orcid/externalIdentifiers.json`,
         { headers: this.headers }
       )
       .pipe(
@@ -226,7 +226,7 @@ export class RecordService {
 
   getKeywords(): Observable<Keywords> {
     return this._http
-      .get<Keywords>(environment.API_WEB + `my-orcid/keywordsForms.json`, {
+      .get<Keywords>(runtimeEnvironment.API_WEB + `my-orcid/keywordsForms.json`, {
         headers: this.headers,
       })
       .pipe(
@@ -241,7 +241,7 @@ export class RecordService {
   ): Observable<ExternalIdentifier> {
     return this._http
       .post<ExternalIdentifier>(
-        environment.API_WEB + `my-orcid/externalIdentifiers.json`,
+        runtimeEnvironment.API_WEB + `my-orcid/externalIdentifiers.json`,
         website,
         { headers: this.headers }
       )
@@ -254,7 +254,7 @@ export class RecordService {
   postKeywords(keywords: Keywords): Observable<Keywords> {
     return this._http
       .post<Keywords>(
-        environment.API_WEB + `my-orcid/keywordsForms.json`,
+        runtimeEnvironment.API_WEB + `my-orcid/keywordsForms.json`,
         keywords,
         { headers: this.headers }
       )
@@ -276,7 +276,7 @@ export class RecordService {
 
     return this._http
       .get<Preferences>(
-        environment.API_WEB + `account/preferences.json`,
+        runtimeEnvironment.API_WEB + `account/preferences.json`,
 
         { headers: this.headers }
       )
@@ -290,7 +290,7 @@ export class RecordService {
   postPreferences(names: Preferences): Observable<Preferences> {
     return this._http
       .post<Preferences>(
-        environment.API_WEB + `account/preferences.json`,
+        runtimeEnvironment.API_WEB + `account/preferences.json`,
         names,
         { headers: this.headers }
       )

@@ -29,7 +29,7 @@ export class AccountActionsDeactivateService {
   deactivateAccount(): Observable<DeactivateResponse> {
     return this._http
       .post<DeactivateResponse>(
-        environment.API_WEB + `account/send-deactivate-account.json`,
+        runtimeEnvironment.API_WEB + `account/send-deactivate-account.json`,
         this.options
       )
       .pipe(

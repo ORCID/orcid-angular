@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { catchError, map, retry, switchMap, first } from 'rxjs/operators'
 
-import { environment } from '../../../environments/environment'
+
 import { getOrcidNumber, isValidOrcidFormat } from '../../constants'
 import { Claim } from '../../types/claim.endpoint'
 import { Reactivation } from '../../types/reactivation.endpoint'
@@ -55,7 +55,7 @@ export class SignInService {
     }
     body = body.set('oauthRequest', signInLocal.isOauth ? 'true' : 'false')
     return this._http
-      .post<SignIn>(environment.API_WEB + loginUrl, body, {
+      .post<SignIn>(runtimeEnvironment.API_WEB + loginUrl, body, {
         withCredentials: true,
       })
       .pipe(
@@ -77,7 +77,7 @@ export class SignInService {
     let body = new HttpParams({ encoder: new CustomEncoder() })
     body = body.set(isValidOrcidFormat(username) ? 'orcid' : 'email', username)
     return this._http
-      .post<Reactivation>(environment.API_WEB + `sendReactivation.json`, body, {
+      .post<Reactivation>(runtimeEnvironment.API_WEB + `sendReactivation.json`, body, {
         withCredentials: true,
       })
       .pipe(
@@ -100,7 +100,7 @@ export class SignInService {
     let body = JSON.stringify(claim)
 
     return this._http
-      .post<Claim>(environment.API_WEB + `resend-claim.json`, body, {
+      .post<Claim>(runtimeEnvironment.API_WEB + `resend-claim.json`, body, {
         headers: new HttpHeaders({
           'Access-Control-Allow-Origin': '*',
           'Content-Type': 'application/json',
@@ -121,7 +121,7 @@ export class SignInService {
   singOut() {
     this._titleService.setTitle('ORCID')
     return this._http
-      .get<SignIn>(environment.API_WEB + 'userStatus.json?logUserOut=true', {
+      .get<SignIn>(runtimeEnvironment.API_WEB + 'userStatus.json?logUserOut=true', {
         withCredentials: true,
       })
       .pipe(

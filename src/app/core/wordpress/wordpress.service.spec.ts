@@ -43,7 +43,7 @@ describe('WordpressService', () => {
       expect(html).toContain(mockHtml)
     })
 
-    const req = httpMock.expectOne(`${environment.WORDPRESS_S3}/index.html`)
+    const req = httpMock.expectOne(`${runtimeEnvironment.WORDPRESS_S3}/index.html`)
     expect(req.request.method).toBe('GET')
     req.flush(mockHtml)
   })
@@ -55,12 +55,12 @@ describe('WordpressService', () => {
     })
 
     const primaryReq = httpMock.expectOne(
-      `${environment.WORDPRESS_S3}/index.html`
+      `${runtimeEnvironment.WORDPRESS_S3}/index.html`
     )
     primaryReq.flush(null, { status: 500, statusText: 'Server Error' })
 
     const fallbackReq = httpMock.expectOne(
-      `${environment.WORDPRESS_S3_FALLBACK}/index.html`
+      `${runtimeEnvironment.WORDPRESS_S3_FALLBACK}/index.html`
     )
     expect(fallbackReq.request.method).toBe('GET')
     fallbackReq.flush(mockHtml)
@@ -73,7 +73,7 @@ describe('WordpressService', () => {
     })
 
     const req = httpMock.expectOne(
-      `${environment.WORDPRESS_S3}/wordpress-homepage.css`
+      `${runtimeEnvironment.WORDPRESS_S3}/wordpress-homepage.css`
     )
     expect(req.request.method).toBe('GET')
     req.flush(mockCss)
@@ -86,12 +86,12 @@ describe('WordpressService', () => {
     })
 
     const primaryReq = httpMock.expectOne(
-      `${environment.WORDPRESS_S3}/wordpress-homepage.css`
+      `${runtimeEnvironment.WORDPRESS_S3}/wordpress-homepage.css`
     )
     primaryReq.flush(null, { status: 500, statusText: 'Server Error' })
 
     const fallbackReq = httpMock.expectOne(
-      `${environment.WORDPRESS_S3_FALLBACK}/wordpress-homepage.css`
+      `${runtimeEnvironment.WORDPRESS_S3_FALLBACK}/wordpress-homepage.css`
     )
     expect(fallbackReq.request.method).toBe('GET')
     fallbackReq.flush(mockCss)
@@ -104,7 +104,7 @@ describe('WordpressService', () => {
     })
 
     const req = httpMock.expectOne(
-      `${environment.WORDPRESS_S3}/wordpress-homepage.js`
+      `${runtimeEnvironment.WORDPRESS_S3}/wordpress-homepage.js`
     )
     expect(req.request.method).toBe('GET')
     req.flush(mockJs)
@@ -117,12 +117,12 @@ describe('WordpressService', () => {
     })
 
     const primaryReq = httpMock.expectOne(
-      `${environment.WORDPRESS_S3}/wordpress-homepage.js`
+      `${runtimeEnvironment.WORDPRESS_S3}/wordpress-homepage.js`
     )
     primaryReq.flush(null, { status: 500, statusText: 'Server Error' })
 
     const fallbackReq = httpMock.expectOne(
-      `${environment.WORDPRESS_S3_FALLBACK}/wordpress-homepage.js`
+      `${runtimeEnvironment.WORDPRESS_S3_FALLBACK}/wordpress-homepage.js`
     )
     expect(fallbackReq.request.method).toBe('GET')
     fallbackReq.flush(mockJs)
@@ -131,13 +131,13 @@ describe('WordpressService', () => {
   it('should fetch home page post from primary URL and update asset paths', () => {
     const mockHtml =
       '<html><head></head><body><img src="./assets/image.png"></body></html>'
-    const expectedHtml = `<html><head></head><body><img src="${environment.WORDPRESS_S3}/assets/image.png"></body></html>`
+    const expectedHtml = `<html><head></head><body><img src="${runtimeEnvironment.WORDPRESS_S3}/assets/image.png"></body></html>`
 
     service.getHomePagePost().subscribe((html) => {
       expect(html).toBe(expectedHtml)
     })
 
-    const req = httpMock.expectOne(`${environment.WORDPRESS_S3}/index.html`)
+    const req = httpMock.expectOne(`${runtimeEnvironment.WORDPRESS_S3}/index.html`)
     expect(req.request.method).toBe('GET')
     req.flush(mockHtml)
   })
@@ -145,19 +145,19 @@ describe('WordpressService', () => {
   it('should fetch home page post from fallback URL and update asset paths when primary fails', () => {
     const mockHtml =
       '<html><head></head><body><img src="./assets/image.png"></body></html>'
-    const expectedHtml = `<html><head></head><body><img src="${environment.WORDPRESS_S3_FALLBACK}/assets/image.png"></body></html>`
+    const expectedHtml = `<html><head></head><body><img src="${runtimeEnvironment.WORDPRESS_S3_FALLBACK}/assets/image.png"></body></html>`
 
     service.getHomePagePost().subscribe((html) => {
       expect(html).toBe(expectedHtml)
     })
 
     const primaryReq = httpMock.expectOne(
-      `${environment.WORDPRESS_S3}/index.html`
+      `${runtimeEnvironment.WORDPRESS_S3}/index.html`
     )
     primaryReq.flush(null, { status: 500, statusText: 'Server Error' })
 
     const fallbackReq = httpMock.expectOne(
-      `${environment.WORDPRESS_S3_FALLBACK}/index.html`
+      `${runtimeEnvironment.WORDPRESS_S3_FALLBACK}/index.html`
     )
     expect(fallbackReq.request.method).toBe('GET')
     fallbackReq.flush(mockHtml)
