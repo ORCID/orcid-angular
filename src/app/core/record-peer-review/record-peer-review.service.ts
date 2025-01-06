@@ -119,7 +119,7 @@ export class RecordPeerReviewService {
   updateVisibility(
     groupId: any,
     visibility: VisibilityStrings
-  ): Observable<any> {	
+  ): Observable<any> {
     return this._http
       .post(
         environment.API_WEB +
