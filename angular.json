@@ -411,7 +411,7 @@
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
-            "scripts": ["src/assets/dev-runtime-environment-setter.js"],
+            "scripts": ["src/assets/local-dev-environment.js"],
             "assets": ["src/favicon.ico", "src/assets", "src/manifest.json"],
             "sourceMap": true
           }
