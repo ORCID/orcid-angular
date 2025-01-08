@@ -123,15 +123,14 @@ export class RecordPeerReviewService {
   }
 
   updateVisibility(
-    putCode: any,
-    visibility: VisibilityStrings,
-    groupId?: any
+    groupId: any,
+    visibility: VisibilityStrings
   ): Observable<any> {
     return this._http
       .post(
         runtimeEnvironment.API_WEB +
           'peer-reviews/' +
-          putCode +
+          groupId +
           '/visibility/' +
           visibility,
         null

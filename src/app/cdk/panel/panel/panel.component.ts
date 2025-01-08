@@ -291,11 +291,7 @@ export class PanelComponent implements OnInit {
         break
       case 'peer-review':
         this._peerReviewService
-          .updateVisibility(
-            this.elements.groupIdValue,
-            visibility,
-            this.elements?.groupId
-          )
+          .updateVisibility(this.elements.groupId, visibility)
           .subscribe()
         break
       case 'top-bar':
