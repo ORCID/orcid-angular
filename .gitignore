@@ -77,5 +77,4 @@ cypress/plugins/token.json
 
 # Packages ignore package-lock to depend only on yarn
 package-lock.json
-src/assets/local-dev-environment.js.js
-
+src/assets/local-dev-environment.js
