@@ -18,7 +18,6 @@ import {
   WorkGroup,
   WorksEndpoint,
 } from '../../types/record-works.endpoint'
-import { environment } from '../../../environments/runtimeEnvironment.local'
 import { TogglzService } from '../togglz/togglz.service'
 import { of, ReplaySubject } from 'rxjs'
 import { UserService } from '..'
