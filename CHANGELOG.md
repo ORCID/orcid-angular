@@ -1,3 +1,10 @@
+## v2.109.16 - 2025-01-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.15...v2.109.16)
+
+- [#2441](https://github.com/ORCID/orcid-angular/pull/2441): Lmendoza/9571 qa unable to access work type dropdown with keyboard
+- [#2440](https://github.com/ORCID/orcid-angular/pull/2440): 9569-qa-work-type-interactive-resource-missing
+
 ## v2.109.15 - 2025-01-06
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.14...v2.109.15)
