@@ -34,8 +34,10 @@ export class SignInService {
     updateUserSession = true,
     forceSessionUpdate = false
   ) {
-    let loginUrl = 'signin/auth.json'
+    let loginUrl = 'https://auth.dev.orcid.org/login'
 
+    /*
+	UNCOMMENT THIS!!!
     if (signInLocal.type && signInLocal.type === TypeSignIn.institutional) {
       loginUrl = 'shibboleth/signin/auth.json'
     }
@@ -43,9 +45,9 @@ export class SignInService {
     if (signInLocal.type && signInLocal.type === TypeSignIn.social) {
       loginUrl = 'social/signin/auth.json'
     }
-
+    */
     let body = new HttpParams({ encoder: new CustomEncoder() })
-      .set('userId', getOrcidNumber(signInLocal.data.username))
+      .set('username', getOrcidNumber(signInLocal.data.username))
       .set('password', signInLocal.data.password)
     if (signInLocal.data.verificationCode) {
       body = body.set('verificationCode', signInLocal.data.verificationCode)
@@ -55,7 +57,11 @@ export class SignInService {
     }
     body = body.set('oauthRequest', signInLocal.isOauth ? 'true' : 'false')
     return this._http
-      .post<SignIn>(environment.API_WEB + loginUrl, body, {
+      .post<SignIn>(loginUrl, body, {
+        headers: new HttpHeaders({
+          'Access-Control-Allow-Origin': 'https://dev.orcid.org',
+		  'Content-Type': 'application/x-www-form-urlencoded'
+        }),
         withCredentials: true,
       })
       .pipe(
