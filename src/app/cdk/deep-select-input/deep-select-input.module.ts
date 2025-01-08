@@ -12,6 +12,7 @@ import {
 import { MatMenuModule } from '@angular/material/menu'
 import { MatButtonModule } from '@angular/material/button'
 import { MatLegacyInputModule } from '@angular/material/legacy-input'
+import { MatIconModule } from '@angular/material/icon'
 
 @NgModule({
   declarations: [DeepSelectInputComponent],
@@ -23,6 +24,7 @@ import { MatLegacyInputModule } from '@angular/material/legacy-input'
     SharedModule,
     MatLegacyMenuModule,
     MatLegacyInputModule,
+    MatIconModule,
   ],
   exports: [DeepSelectInputComponent],
 })

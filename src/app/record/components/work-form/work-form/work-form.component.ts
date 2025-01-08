@@ -69,6 +69,8 @@ export class WorkFormComponent implements OnInit {
   languageLabelAriaLabel = $localize`:@@shared.languageLabelAriaLabel:Select the language used in this form`
   selectCountryLocationLabel = $localize`:@@shared.selectCountryLocationLabel:Select a country or location of publication`
   ariaLabelWork = $localize`:@@shared.ariaLabelWork:Work`
+  ariaLabelWorkType = $localize`:@@works.workType:Work type`
+
 
   @Input() work: Work
   @Input() userRecord: UserRecord

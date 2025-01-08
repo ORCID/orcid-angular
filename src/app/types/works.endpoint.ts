@@ -85,7 +85,7 @@ export const WorkCategoriesLabel = {
   [WorkCategories.other_output]: $localize`:@@works.other:Other`,
   [WorkCategories.dissemination]: $localize`:@@works.dissemination:Dissemination`,
   [WorkCategories.creative]: $localize`:@@works.creative:Creative`,
-  [WorkCategories.dataAndProccesses]: $localize`:@@works.data:Data and processes`,
+  [WorkCategories.dataAndProccesses]: $localize`:@@works.data:Data and process`,
   [WorkCategories.legalAndIp]: $localize`:@@works.legal:Legal and IP`,
   [WorkCategories.teachingAndSupervision]: $localize`:@@works.teaching:Teaching and supervision`,
 }

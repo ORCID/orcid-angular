@@ -97,3 +97,11 @@ app-deep-select-input {
   width: 100%;
   max-width: 402px;
 }
+
+:host {
+  ::ng-deep {
+    .mat-form-field-appearance-outline .mat-select-arrow-wrapper {
+      transform: none;
+    }
+  }
+}
