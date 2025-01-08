@@ -76,7 +76,7 @@ export class DeepSelectInputComponent implements ControlValueAccessor {
   }
 
   onSpaceBar(event: KeyboardEvent) {
-    if (event.code === 'Space') {
+    if (event.code === 'Space' || event.code === 'Enter') {
       event.preventDefault()
       event.stopPropagation()
       this.clickHoverMenuTrigger.openMenu()
