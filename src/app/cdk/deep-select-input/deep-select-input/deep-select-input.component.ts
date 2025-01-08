@@ -50,7 +50,9 @@ export class DeepSelectInputComponent implements ControlValueAccessor {
   @Input() formControlRef: FormControl<any>
   @ViewChild('clickHoverMenuTrigger') clickHoverMenuTrigger: MatMenuTrigger
   @ViewChild('matMenu') matMenu: MatMenuTrigger
+  @Input('aria-label') ariaLabel = 'Deep select input'
   selectItemLabel = $localize`:@@works.pleaseSelectWork:Please select a work type`
+  ariaLabelWorkType = $localize`:@@works.workType:Work type`
 
   subMenus: { [key: string]: any } = {}
   selectedItem: DeepSelectMenu
@@ -76,7 +78,7 @@ export class DeepSelectInputComponent implements ControlValueAccessor {
   }
 
   onSpaceBar(event: KeyboardEvent) {
-    if (event.code === 'Space') {
+    if (event.code === 'Space' || event.code === 'Enter') {
       event.preventDefault()
       event.stopPropagation()
       this.clickHoverMenuTrigger.openMenu()
