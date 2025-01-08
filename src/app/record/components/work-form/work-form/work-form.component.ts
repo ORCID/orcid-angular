@@ -71,7 +71,6 @@ export class WorkFormComponent implements OnInit {
   ariaLabelWork = $localize`:@@shared.ariaLabelWork:Work`
   ariaLabelWorkType = $localize`:@@works.workType:Work type`
 
-
   @Input() work: Work
   @Input() userRecord: UserRecord
   @Input() externalIdentifier: boolean
