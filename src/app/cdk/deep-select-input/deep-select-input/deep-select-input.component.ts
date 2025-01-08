@@ -50,7 +50,9 @@ export class DeepSelectInputComponent implements ControlValueAccessor {
   @Input() formControlRef: FormControl<any>
   @ViewChild('clickHoverMenuTrigger') clickHoverMenuTrigger: MatMenuTrigger
   @ViewChild('matMenu') matMenu: MatMenuTrigger
+  @Input('aria-label') ariaLabel = 'Deep select input'
   selectItemLabel = $localize`:@@works.pleaseSelectWork:Please select a work type`
+  ariaLabelWorkType = $localize`:@@works.workType:Work type`
 
   subMenus: { [key: string]: any } = {}
   selectedItem: DeepSelectMenu

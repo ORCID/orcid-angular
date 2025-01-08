@@ -5,17 +5,18 @@
     (click)="clickHoverMenuTrigger.openMenu()"
   >
     <input
-      type="text"
       #clickHoverMenuTrigger="matMenuTrigger"
       [matMenuTriggerFor]="matMenu"
       (keydown)="onSpaceBar($event)"
-      readonly
-      matInput
-      [errorStateMatcher]="getMatcher()"
       [attr.placeholder]="selectItemLabel"
+      [ariaLabel]="ariaLabelWorkType"
+      readonly
       formControlName="formControl"
       [value]="selectedItem?.label"
+      matInput
+      [errorStateMatcher]="getMatcher()"
     />
+    <mat-icon matSuffix>arrow_drop_down</mat-icon>
     <mat-error *ngIf="invalid" i18n="@@works.selectAWorkType">
       Select a work type
     </mat-error>
