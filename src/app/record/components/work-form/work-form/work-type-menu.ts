@@ -176,7 +176,10 @@ export const WorkTypeMenu: DeepSelectMenu[] = [
         value: WorkTypes.image,
         label: WorkTypesLabels[WorkTypes.image],
       },
-      /// No value for:   Interactive resource
+      {
+        value: WorkTypes.onlineResource,
+        label: WorkTypesLabels[WorkTypes.onlineResource],
+      },
       {
         value: WorkTypes.movingImage,
         label: WorkTypesLabels[WorkTypes.movingImage],
