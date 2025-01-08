@@ -100,8 +100,8 @@ export const WorkTypeMenu: DeepSelectMenu[] = [
       },
       { label: WorkTypesLabels[WorkTypes.review], value: WorkTypes.review },
       {
-        label: WorkTypesLabels[WorkTypes.transcriptions],
-        value: WorkTypes.transcriptions,
+        label: WorkTypesLabels[WorkTypes.transcription],
+        value: WorkTypes.transcription,
       },
       {
         label: WorkTypesLabels[WorkTypes.translation],

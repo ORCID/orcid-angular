@@ -76,7 +76,7 @@ export enum WorkTypes {
   movingImage = 'moving-image',
   musicalComposition = 'musical-composition',
   sound = 'sound',
-  transcriptions = 'transcriptions',
+  transcription = 'transcription',
 }
 
 export const WorkCategoriesLabel = {
@@ -147,7 +147,7 @@ export const WorkTypesLabels = {
   [WorkTypes.movingImage]: $localize`:@@works.movingImage:Moving image or video`,
   [WorkTypes.musicalComposition]: $localize`:@@works.musicalComposition:Musical composition`,
   [WorkTypes.sound]: $localize`:@@works.sound:Sound`,
-  [WorkTypes.transcriptions]: $localize`:@@works.transcriptions:Transcription`,
+  [WorkTypes.transcription]: $localize`:@@works.transcription:Transcription`,
 }
 
 export enum WorksTitleName {
