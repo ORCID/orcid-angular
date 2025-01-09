@@ -233,11 +233,10 @@ export const WorkTypesTitle = {
   [WorkTypes.image]: WorksTitleName.publisher,
   [WorkTypes.learningObject]: WorksTitleName.publisher,
   [WorkTypes.movingImage]: WorksTitleName.publisher,
-  [WorkTypes.musicalComposition]: WorksTitleName.publisher, 
+  [WorkTypes.musicalComposition]: WorksTitleName.publisher,
   [WorkTypes.sound]: WorksTitleName.publisher,
   [WorkTypes.transcription]: WorksTitleName.publisher,
   [WorkTypes.publicSpeech]: WorksTitleName.publisher,
-  
 }
 
 export const LanguageMap = {
