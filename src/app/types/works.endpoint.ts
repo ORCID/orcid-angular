@@ -223,6 +223,21 @@ export const WorkTypesTitle = {
   [WorkTypes.standardsAndPolicy]: WorksTitleName.publisher,
   [WorkTypes.technicalStandard]: WorksTitleName.publisher,
   [WorkTypes.other]: WorksTitleName.publisher,
+  [WorkTypes.blogPost]: WorksTitleName.publisher,
+  [WorkTypes.clinicalStudy]: WorksTitleName.publisher,
+  [WorkTypes.cartographicMaterial]: WorksTitleName.publisher,
+  [WorkTypes.conferenceOutput]: WorksTitleName.publisher,
+  [WorkTypes.conferencePresentation]: WorksTitleName.publisher,
+  [WorkTypes.conferenceProceedings]: WorksTitleName.publisher,
+  [WorkTypes.design]: WorksTitleName.publisher,
+  [WorkTypes.image]: WorksTitleName.publisher,
+  [WorkTypes.learningObject]: WorksTitleName.publisher,
+  [WorkTypes.movingImage]: WorksTitleName.publisher,
+  [WorkTypes.musicalComposition]: WorksTitleName.publisher, 
+  [WorkTypes.sound]: WorksTitleName.publisher,
+  [WorkTypes.transcription]: WorksTitleName.publisher,
+  [WorkTypes.publicSpeech]: WorksTitleName.publisher,
+  
 }
 
 export const LanguageMap = {
