@@ -100,6 +100,8 @@ export function runtimeEnvironmentScript() {
         chosenEnv = environment4200;
       } else if (domain.includes('dev.orcid.org')) {
         chosenEnv = environmentDev;
+      } else if (domain.includes('localhost')) { // fallback to dev (e.g. karma testig)
+        chosenEnv = environmentDev;
       }
 
       replaceEnvironmentVars(chosenEnv);
