@@ -1,3 +1,9 @@
+## v2.109.17 - 2025-01-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.16...v2.109.17)
+
+- [#2442](https://github.com/ORCID/orcid-angular/pull/2442): format-fix
+
 ## v2.109.16 - 2025-01-08
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.15...v2.109.16)
