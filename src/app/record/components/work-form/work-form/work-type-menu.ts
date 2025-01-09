@@ -144,8 +144,8 @@ export const WorkTypeMenu: DeepSelectMenu[] = [
         value: WorkTypes.newspaperArticle,
       },
       {
-        label: WorkTypesLabels[WorkTypes.lectureSpeech],
-        value: WorkTypes.lectureSpeech,
+        label: WorkTypesLabels[WorkTypes.publicSpeech],
+        value: WorkTypes.publicSpeech,
       },
       { label: WorkTypesLabels[WorkTypes.website], value: WorkTypes.website },
       {
@@ -287,7 +287,10 @@ export const WorkTypeMenu: DeepSelectMenu[] = [
     value: WorkCategories.teachingAndSupervision,
     description: $localize`:@@works.teachingDescription:Working with students`,
     content: [
-      // No value for: Lecture ??
+      {
+        value: WorkTypes.lectureSpeech,
+        label: WorkTypesLabels[WorkTypes.lectureSpeech],
+      },
       {
         value: WorkTypes.learningObject,
         label: WorkTypesLabels[WorkTypes.learningObject],
