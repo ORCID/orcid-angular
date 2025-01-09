@@ -77,7 +77,7 @@ export enum WorkTypes {
   musicalComposition = 'musical-composition',
   sound = 'sound',
   transcription = 'transcription',
-  publicSpeech = 'public-speech'
+  publicSpeech = 'public-speech',
 }
 
 export const WorkCategoriesLabel = {
