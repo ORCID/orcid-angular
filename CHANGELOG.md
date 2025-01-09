@@ -1,3 +1,9 @@
+## v2.109.18 - 2025-01-09
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.17...v2.109.18)
+
+- [#2443](https://github.com/ORCID/orcid-angular/pull/2443): 9579-v3-work-types-lecture-and-public-speech
+
 ## v2.109.17 - 2025-01-08
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.16...v2.109.17)
