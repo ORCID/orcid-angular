@@ -1,3 +1,9 @@
+## v2.109.20 - 2025-01-10
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.19...v2.109.20)
+
+- [#2445](https://github.com/ORCID/orcid-angular/pull/2445): 9576-qa-dynamic-field-name-not-working-for-new-work-types
+
 ## v2.109.19 - 2025-01-09
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.18...v2.109.19)
