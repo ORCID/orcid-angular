@@ -95,7 +95,7 @@ export class UserService {
 
   public getUserStatus(): Observable<boolean> {
     return this._http
-      .get<UserStatus>(environment.API_WEB + 'userStatus.json', {
+      .get<UserStatus>('https://auth.dev.orcid.org/userInfo.json', {
         withCredentials: true,
       })
       .pipe(map((response) => !!response.loggedIn))

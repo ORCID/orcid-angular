@@ -26,9 +26,7 @@ export class UserInfoService {
   public getUserInfo(options?: UserRecordOptions): Observable<UserInfo> {
     return this._http
       .get<UserInfo>(
-        environment.API_WEB +
-          (options?.publicRecordId ? options.publicRecordId + '/' : '') +
-          'userInfo.json',
+        'https://auth.dev.orcid.org/userInfo.json',
         {
           withCredentials: true,
         }
