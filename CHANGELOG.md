@@ -1,3 +1,44 @@
+## v2.109.22 - 2025-01-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.21...v2.109.22)
+
+## v2.109.21 - 2025-01-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.20...v2.109.21)
+
+- [#2446](https://github.com/ORCID/orcid-angular/pull/2446): Update google keys
+
+## v2.109.20 - 2025-01-10
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.19...v2.109.20)
+
+- [#2445](https://github.com/ORCID/orcid-angular/pull/2445): 9576-qa-dynamic-field-name-not-working-for-new-work-types
+
+## v2.109.19 - 2025-01-09
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.18...v2.109.19)
+
+- [#2444](https://github.com/ORCID/orcid-angular/pull/2444): 9579-v3-work-types-lecture-and-public-speech
+
+## v2.109.18 - 2025-01-09
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.17...v2.109.18)
+
+- [#2443](https://github.com/ORCID/orcid-angular/pull/2443): 9579-v3-work-types-lecture-and-public-speech
+
+## v2.109.17 - 2025-01-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.16...v2.109.17)
+
+- [#2442](https://github.com/ORCID/orcid-angular/pull/2442): format-fix
+
+## v2.109.16 - 2025-01-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.15...v2.109.16)
+
+- [#2441](https://github.com/ORCID/orcid-angular/pull/2441): Lmendoza/9571 qa unable to access work type dropdown with keyboard
+- [#2440](https://github.com/ORCID/orcid-angular/pull/2440): 9569-qa-work-type-interactive-resource-missing
+
 ## v2.109.15 - 2025-01-06
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.14...v2.109.15)
