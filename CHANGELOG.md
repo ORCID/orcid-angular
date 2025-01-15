@@ -1,3 +1,9 @@
+## v2.109.24 - 2025-01-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.23...v2.109.24)
+
+- [#2449](https://github.com/ORCID/orcid-angular/pull/2449): Transifex - Update worktypes to upper case
+
 ## v2.109.23 - 2025-01-15
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.22...v2.109.23)
