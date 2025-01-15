@@ -1,3 +1,9 @@
+## v2.109.23 - 2025-01-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.22...v2.109.23)
+
+- [#2448](https://github.com/ORCID/orcid-angular/pull/2448): Tx push
+
 ## v2.109.22 - 2025-01-13
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.21...v2.109.22)
