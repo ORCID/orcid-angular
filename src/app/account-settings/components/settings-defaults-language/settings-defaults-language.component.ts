@@ -31,7 +31,7 @@ export class SettingsDefaultsLanguageComponent implements OnInit, OnDestroy {
     private _language: LanguageService,
     private _fb: UntypedFormBuilder
   ) {
-    this.languageMenuOptions = environment.LANGUAGE_MENU_OPTIONS
+    this.languageMenuOptions = runtimeEnvironment.LANGUAGE_MENU_OPTIONS
   }
 
   ngOnInit() {

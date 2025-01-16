@@ -400,7 +400,7 @@ export function getAriaLabel(
 }
 
 export function navigateTo(val, windowRef) {
-  if (val === '/signout' && environment.proxyMode) {
+  if (val === '/signout' && runtimeEnvironment.proxyMode) {
     this._user.noRedirectLogout().subscribe()
   } else {
     windowRef.location.href = val

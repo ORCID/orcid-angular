@@ -31,7 +31,7 @@ export class AccountTrustedIndividualsService {
   get(): Observable<AccountTrustedIndividual[]> {
     return this._http
       .get<AccountTrustedIndividual[]>(
-        environment.API_WEB + `account/delegates.json`,
+        runtimeEnvironment.API_WEB + `account/delegates.json`,
         { headers: this.headers }
       )
       .pipe(
@@ -51,7 +51,7 @@ export class AccountTrustedIndividualsService {
   delete(account: AccountTrustedIndividual): Observable<void> {
     return this._http
       .post<void>(
-        environment.API_WEB + `account/revokeDelegate.json`,
+        runtimeEnvironment.API_WEB + `account/revokeDelegate.json`,
         { delegateToManage: account.receiverOrcid.path },
         { headers: this.headers }
       )
@@ -64,9 +64,12 @@ export class AccountTrustedIndividualsService {
 
   getPersonDetails(orcid: string) {
     return this._http
-      .get<PersonDetails>(environment.API_PUB + `${orcid}/personal-details`, {
-        headers: this.headers,
-      })
+      .get<PersonDetails>(
+        runtimeEnvironment.API_PUB + `${orcid}/personal-details`,
+        {
+          headers: this.headers,
+        }
+      )
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))
@@ -75,7 +78,7 @@ export class AccountTrustedIndividualsService {
   add(value: ExpandedSearchResultsContent) {
     return this._http
       .post<void>(
-        environment.API_WEB + `account/addDelegate.json`,
+        runtimeEnvironment.API_WEB + `account/addDelegate.json`,
         { delegateToManage: value['orcid-id'] },
         { headers: this.headers }
       )
@@ -88,7 +91,7 @@ export class AccountTrustedIndividualsService {
   searchByEmail(email: string): Observable<SearchResultsByEmailOrOrcid> {
     return this._http
       .get<SearchResultsByEmailOrOrcid>(
-        environment.API_WEB +
+        runtimeEnvironment.API_WEB +
           `account/search-for-delegate-by-email/${encodeURIComponent(email)}/`,
         { headers: this.headers }
       )
@@ -100,7 +103,7 @@ export class AccountTrustedIndividualsService {
   addByEmail(delegateEmail: string) {
     return this._http
       .post<void>(
-        environment.API_WEB + `account/addDelegateByEmail.json/`,
+        runtimeEnvironment.API_WEB + `account/addDelegateByEmail.json/`,
         { delegateEmail },
         { headers: this.headers }
       )
@@ -114,7 +117,7 @@ export class AccountTrustedIndividualsService {
   searchByOrcid(email: string): Observable<SearchResultsByEmailOrOrcid> {
     return this._http
       .get<SearchResultsByEmailOrOrcid>(
-        environment.API_WEB +
+        runtimeEnvironment.API_WEB +
           `account/search-for-delegate-by-orcid/${encodeURIComponent(email)}/`,
         { headers: this.headers }
       )
@@ -126,7 +129,7 @@ export class AccountTrustedIndividualsService {
   addByOrcid(delegateToManage: string) {
     return this._http
       .post<void>(
-        environment.API_WEB + `account/addDelegateByOrcid.json`,
+        runtimeEnvironment.API_WEB + `account/addDelegateByOrcid.json`,
         { delegateToManage },
         { headers: this.headers }
       )

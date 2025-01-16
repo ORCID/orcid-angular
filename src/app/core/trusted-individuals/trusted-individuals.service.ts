@@ -14,7 +14,7 @@ export class TrustedIndividualsService {
   getTrustedIndividuals(): Observable<TrustedIndividuals> {
     return this._http
       .get<TrustedIndividuals>(
-        `${environment.API_WEB}delegators/delegators-and-me.json`,
+        `${runtimeEnvironment.API_WEB}delegators/delegators-and-me.json`,
         {
           withCredentials: true,
         }

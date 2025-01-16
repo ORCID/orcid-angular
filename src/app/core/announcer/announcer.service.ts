@@ -54,7 +54,7 @@ export class AnnouncerService {
   }
 
   private announce(announcement: string) {
-    if (environment.debugger) {
+    if (runtimeEnvironment.debugger) {
       console.debug('📢' + announcement)
     }
     this._liveAnnouncer.announce(announcement, 'assertive')

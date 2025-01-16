@@ -21,7 +21,7 @@ export class RecordInfoComponent implements OnInit {
 
   userInfo: UserInfo
   isNamePublic: boolean
-  baseUrl = environment.BASE_URL
+  baseUrl = runtimeEnvironment.BASE_URL
 
   constructor(private _record: RecordService) {}
 

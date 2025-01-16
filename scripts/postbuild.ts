@@ -1,6 +1,5 @@
 // This file contains some updates made right after Angular Cli
 
-import { uniqueLength } from './unique-length.postbuild'
 import { buildInfo } from './build-info.postbuild'
 import {
   addLanguageCodeToHashesOnToHTMLFiles,
@@ -8,10 +7,9 @@ import {
 } from './uniqueLanguageFilesNames'
 import { getOptionsObjet, save } from './utils'
 import { renameSync, readFileSync } from 'fs'
-import { zendeskPlugin } from './zend-desk.postbuild'
 import { createShareAssetsFolder } from './moveToShareFolder.postbuild'
-import { robotsMetadata } from './robots-metada.postbuild'
-import { newRelic } from './new-relic.postbuild'
+import { replaceEnvPlaceholder } from './runtime-environment-setter.postbuild'
+
 const glob = require('glob')
 // Run updates on index.html files across languages
 glob
@@ -19,13 +17,14 @@ glob
   .forEach((file) => {
     const options = getOptionsObjet(file)
     let data = readFileSync(file, 'utf8')
-    data = uniqueLength(data, options)
+    data = replaceEnvPlaceholder(data)
+    // data = uniqueLength(data, options) DISABLED unique leght for now, as migth not be required anymore
     data = buildInfo(data, options)
-    data = newRelic(data, options)
-    data = zendeskPlugin(data, options)
+    // data = newRelic(data, options) TEMPORALLY DISABLE NEW RELIC
+
     // Replace all the `*.js` references to match updated JS file names with the language code.
     data = addLanguageCodeToHashesOnToHTMLFiles(data, options)
-    data = robotsMetadata(data, options)
+    // data = robotsMetadata(data, options) DISABLE robots headers, as those will be handle via nginx
     save(data, options)
   })
 

@@ -23,7 +23,7 @@ export class TrustedSummaryService {
   getSummary(orcid): Observable<TrustedSummary> {
     let url = orcid + '/summary.json'
     return this._http
-      .get<TrustedSummary>(environment.BASE_URL + url, {
+      .get<TrustedSummary>(runtimeEnvironment.BASE_URL + url, {
         headers: this.headers,
       })
       .pipe(

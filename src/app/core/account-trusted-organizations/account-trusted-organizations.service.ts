@@ -22,7 +22,7 @@ export class AccountTrustedOrganizationsService {
   get(): Observable<AccountTrustedOrganization[]> {
     return this._http
       .get<AccountTrustedOrganization[]>(
-        environment.API_WEB + `account/get-trusted-orgs.json`,
+        runtimeEnvironment.API_WEB + `account/get-trusted-orgs.json`,
         { headers: this.headers }
       )
       .pipe(
@@ -36,7 +36,7 @@ export class AccountTrustedOrganizationsService {
   ): Observable<AccountTrustedOrganization[]> {
     return this._http
       .post<AccountTrustedOrganization[]>(
-        environment.API_WEB +
+        runtimeEnvironment.API_WEB +
           `account/revoke-application.json?clientId=` +
           account.clientId,
         undefined,

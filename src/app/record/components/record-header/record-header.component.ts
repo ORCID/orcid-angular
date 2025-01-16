@@ -78,7 +78,7 @@ export class RecordHeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.orcidId = 'https:' + environment.BASE_URL + this.isPublicRecord
+    this.orcidId = 'https:' + runtimeEnvironment.BASE_URL + this.isPublicRecord
 
     this._platform
       .get()
@@ -144,7 +144,7 @@ export class RecordHeaderComponent implements OnInit {
 
   printRecord() {
     this.window.open(
-      environment.BASE_URL +
+      runtimeEnvironment.BASE_URL +
         this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID +
         '/print'
     )

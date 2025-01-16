@@ -25,7 +25,7 @@ export class AccountSecurityPasswordService {
   ): Observable<AccountPasswordEndpoint> {
     return this._http
       .post<AccountPasswordEndpoint>(
-        environment.API_WEB + `account/change-password.json`,
+        runtimeEnvironment.API_WEB + `account/change-password.json`,
         accountPassword,
         { headers: this.headers }
       )

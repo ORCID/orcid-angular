@@ -65,7 +65,7 @@ export class RecaptchaDirective implements OnInit, ControlValueAccessor {
   registerReCaptchaCallback() {
     this.window.orcidReCaptchaOnLoad = () => {
       const config = {
-        sitekey: environment.GOOGLE_RECAPTCHA,
+        sitekey: runtimeEnvironment.GOOGLE_RECAPTCHA,
         callback: (response: string) => {
           this.ngZone.run(() => this.onSuccess(response))
         },

@@ -21,13 +21,13 @@ export class LanguageService {
     return of({}).pipe(
       // If the language is not listed on the current frontend environment it wont attempt to change it
       tap(() => {
-        if (!environment.production) {
+        if (!runtimeEnvironment.production) {
           {
             throw new Error(`change-language-require-production-mode`)
           }
         }
         if (
-          !Object.keys(environment.LANGUAGE_MENU_OPTIONS).find(
+          !Object.keys(runtimeEnvironment.LANGUAGE_MENU_OPTIONS).find(
             (x) => x.toLocaleLowerCase().replace('-', '_') === languageCode
           )
         ) {
@@ -36,7 +36,7 @@ export class LanguageService {
       }),
       switchMap(() =>
         this._http
-          .get(environment.API_WEB + 'lang.json?lang=' + languageCode)
+          .get(runtimeEnvironment.API_WEB + 'lang.json?lang=' + languageCode)
           .pipe(retry(3))
       ),
       catchError((error) =>

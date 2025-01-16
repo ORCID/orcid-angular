@@ -27,7 +27,7 @@ export class SearchService {
   search(querryParam: SearchParameters): Observable<SearchResults> {
     return this._http
       .get<SearchResults>(
-        `${environment.API_PUB}/expanded-search/${this.buildSearchUrl(
+        `${runtimeEnvironment.API_PUB}/expanded-search/${this.buildSearchUrl(
           querryParam
         )}`,
         {

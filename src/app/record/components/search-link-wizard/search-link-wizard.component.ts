@@ -19,7 +19,7 @@ export class SearchLinkWizardComponent implements OnInit {
       return client.clientWebsite
     } else {
       return (
-        environment.BASE_URL +
+        runtimeEnvironment.BASE_URL +
         'oauth/authorize' +
         '?client_id=' +
         client.id +

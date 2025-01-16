@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { Observable, of, ReplaySubject } from 'rxjs'
 import { catchError, map, retry, tap } from 'rxjs/operators'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { environment } from '../../../environments/environment'
+
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { BiographyEndPoint } from '../../types/record-biography.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
@@ -45,7 +45,7 @@ export class RecordBiographyService {
 
     this._http
       .get<BiographyEndPoint>(
-        environment.API_WEB + `account/biographyForm.json`,
+        runtimeEnvironment.API_WEB + `account/biographyForm.json`,
         { headers: this.headers }
       )
       .pipe(
@@ -63,7 +63,7 @@ export class RecordBiographyService {
   postBiography(biography: BiographyEndPoint): Observable<BiographyEndPoint> {
     return this._http
       .post<BiographyEndPoint>(
-        environment.API_WEB + `account/biographyForm.json`,
+        runtimeEnvironment.API_WEB + `account/biographyForm.json`,
         biography,
         { headers: this.headers }
       )

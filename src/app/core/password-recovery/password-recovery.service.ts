@@ -25,7 +25,7 @@ export class PasswordRecoveryService {
   resetPassword(data) {
     return this._http
       .post<PasswordRecovery>(
-        environment.API_WEB + `reset-password.json`,
+        runtimeEnvironment.API_WEB + `reset-password.json`,
         data,
         { withCredentials: true }
       )
@@ -42,9 +42,13 @@ export class PasswordRecoveryService {
 
   remindOrcidId(data) {
     return this._http
-      .post<PasswordRecovery>(environment.API_WEB + `forgot-id.json`, data, {
-        withCredentials: true,
-      })
+      .post<PasswordRecovery>(
+        runtimeEnvironment.API_WEB + `forgot-id.json`,
+        data,
+        {
+          withCredentials: true,
+        }
+      )
       .pipe(
         retry(3),
         catchError((error) =>
@@ -60,7 +64,7 @@ export class PasswordRecoveryService {
     let encodedData = JSON.stringify(resetPassword)
     return this._http
       .post<ResetPasswordEmailForm>(
-        environment.API_WEB + `reset-password-email-v2.json`,
+        runtimeEnvironment.API_WEB + `reset-password-email-v2.json`,
         encodedData,
         {
           headers: this.headers,
@@ -78,7 +82,7 @@ export class PasswordRecoveryService {
     let encodedData = JSON.stringify(resetPassword)
     return this._http
       .post<ResetPasswordEmailForm>(
-        environment.API_WEB + `reset-password-email-validate-token.json`,
+        runtimeEnvironment.API_WEB + `reset-password-email-validate-token.json`,
         encodedData,
         {
           headers: this.headers,

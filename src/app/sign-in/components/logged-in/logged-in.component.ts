@@ -20,7 +20,7 @@ export class LoggedInComponent implements OnInit {
   ngOnInit() {}
 
   navigateTo(val) {
-    if (val === '/signout' && environment.proxyMode) {
+    if (val === '/signout' && runtimeEnvironment.proxyMode) {
       this.user.noRedirectLogout().subscribe()
     } else {
       this.window.location.href = val

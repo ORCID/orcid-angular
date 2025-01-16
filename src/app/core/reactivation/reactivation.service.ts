@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs/internal/Observable'
-import { environment } from '../../../environments/environment'
+
 import { Reactivation } from '../../types/reactivation.endpoint'
 
 @Injectable({
@@ -12,7 +12,7 @@ export class ReactivationService {
 
   getReactivationData(resetParams): Observable<Reactivation> {
     return this._http.get<Reactivation>(
-      `${environment.API_WEB}reactivationData.json?params=${resetParams}`
+      `${runtimeEnvironment.API_WEB}reactivationData.json?params=${resetParams}`
     )
   }
 }

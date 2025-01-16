@@ -329,7 +329,7 @@ export class RecordCountriesService {
     forkJoin([
       this._http
         .get<CountriesEndpoint>(
-          environment.API_WEB + `account/countryForm.json`,
+          runtimeEnvironment.API_WEB + `account/countryForm.json`,
           {
             headers: this.headers,
           }
@@ -366,7 +366,7 @@ export class RecordCountriesService {
   postAddresses(countries: CountriesEndpoint): Observable<CountriesEndpoint> {
     return this._http
       .post<CountriesEndpoint>(
-        environment.API_WEB + `account/countryForm.json`,
+        runtimeEnvironment.API_WEB + `account/countryForm.json`,
         countries,
         { headers: this.headers }
       )

@@ -4,7 +4,7 @@ import { Observable, of, ReplaySubject } from 'rxjs'
 import { catchError, map, retry, tap } from 'rxjs/operators'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { KeywordEndPoint } from '../../types/record-keyword.endpoint'
-import { environment } from '../../../environments/environment'
+
 import { UserRecordOptions } from 'src/app/types/record.local'
 import { RecordPublicSideBarService } from '../record-public-side-bar/record-public-side-bar.service'
 
@@ -45,7 +45,7 @@ export class RecordKeywordService {
 
     this._http
       .get<KeywordEndPoint>(
-        environment.API_WEB + `my-orcid/keywordsForms.json`,
+        runtimeEnvironment.API_WEB + `my-orcid/keywordsForms.json`,
         {
           headers: this.headers,
         }
@@ -66,7 +66,7 @@ export class RecordKeywordService {
   postKeywords(keywords: KeywordEndPoint): Observable<KeywordEndPoint> {
     return this._http
       .post<KeywordEndPoint>(
-        environment.API_WEB + `my-orcid/keywordsForms.json`,
+        runtimeEnvironment.API_WEB + `my-orcid/keywordsForms.json`,
         keywords,
         { headers: this.headers }
       )

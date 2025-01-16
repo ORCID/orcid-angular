@@ -80,7 +80,7 @@ export class RecordPersonService {
 
   private getPersonHttpCall(orcid: string): Observable<Person> {
     return this._http
-      .get<Person>(environment.API_WEB + `${orcid}/person.json`)
+      .get<Person>(runtimeEnvironment.API_WEB + `${orcid}/person.json`)
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))

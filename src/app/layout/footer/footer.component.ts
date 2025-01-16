@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
-import { environment } from '../../../environments/environment'
+
 import { RecordUtil } from 'src/app/shared/utils/record.util'
 
 @Component({
@@ -13,7 +13,7 @@ import { RecordUtil } from 'src/app/shared/utils/record.util'
 export class FooterComponent implements OnInit {
   platform
   labelFooter = $localize`:@@layout.ariaLabelFooter:footer`
-  infoSiteBaseUrl = environment.INFO_SITE
+  infoSiteBaseUrl = runtimeEnvironment.INFO_SITE
   isDesktop = false
   isTablet = false
   isMobile = false

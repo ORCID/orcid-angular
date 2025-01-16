@@ -38,7 +38,7 @@ export class SnackbarService {
     if (
       errorReport?.display &&
       (!errorReport.display.displayOnlyOnVerboseEnvironment ||
-        environment.VERBOSE_SNACKBAR_ERRORS_REPORTS)
+        runtimeEnvironment.VERBOSE_SNACKBAR_ERRORS_REPORTS)
     ) {
       mappedDisplay = {
         ...errorReport.display,

@@ -91,7 +91,7 @@ export class InstitutionalComponent implements OnInit {
             filterInput
           )
           return institutionsFiltered.length >
-            environment.INSTITUTIONAL_AUTOCOMPLETE_DISPLAY_AMOUNT
+            runtimeEnvironment.INSTITUTIONAL_AUTOCOMPLETE_DISPLAY_AMOUNT
             ? []
             : institutionsFiltered
         })
@@ -123,10 +123,10 @@ export class InstitutionalComponent implements OnInit {
       this.addUserSelectedIdPs()
       const defaultReturn =
         'https:' +
-        environment.BASE_URL +
+        runtimeEnvironment.BASE_URL +
         'Shibboleth.sso/Login?SAMLDS=1&target=' +
         encodeURIComponent(
-          'https:' + environment.BASE_URL + 'shibboleth/signin'
+          'https:' + runtimeEnvironment.BASE_URL + 'shibboleth/signin'
         )
 
       this.navigateTo(

@@ -20,7 +20,7 @@ export class SettingsUsersThatThrustYouComponent implements OnInit {
   displayedColumns = ['trustedIndividuals', 'orcid', 'granted']
   platformSubs = new Subject<void>()
   isMobile: boolean
-  baseUrl = environment.BASE_URL
+  baseUrl = runtimeEnvironment.BASE_URL
   constructor(
     private _trustedIndividualsService: TrustedIndividualsService,
     private dialog: MatDialog,

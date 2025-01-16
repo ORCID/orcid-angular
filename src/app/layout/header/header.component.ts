@@ -13,7 +13,6 @@ import {
 } from 'src/app/types/menu.local'
 import { Config } from 'src/app/types/togglz.endpoint'
 
-import { environment } from '../../../environments/environment'
 import { ApplicationRoutes, ORCID_REGEXP } from '../../constants'
 import { menu } from './menu'
 
@@ -267,12 +266,14 @@ export class HeaderComponent implements OnInit {
       this._router.navigate([ApplicationRoutes.signin])
       this.mobileMenuState = false
     } else if (route === 'signout') {
-      if (environment.proxyMode) {
+      if (runtimeEnvironment.proxyMode) {
         this._user.noRedirectLogout().subscribe()
       }
       this.window.location.href = route
     } else {
-      ;(this.window as any).outOfRouterNavigation(environment.INFO_SITE + route)
+      ;(this.window as any).outOfRouterNavigation(
+        runtimeEnvironment.INFO_SITE + route
+      )
     }
   }
 }
