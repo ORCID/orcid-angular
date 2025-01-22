@@ -9,12 +9,10 @@ import {
   ViewChild,
 } from '@angular/core'
 import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms'
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
 import { MatStep, MatStepper } from '@angular/material/stepper'
 import { Router } from '@angular/router'
 import { Observable, combineLatest, forkJoin } from 'rxjs'
 import { catchError, first, map, switchMap } from 'rxjs/operators'
-import { IsThisYouComponent } from 'src/app/cdk/is-this-you'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { isRedirectToTheAuthorizationPage } from 'src/app/constants'
@@ -22,7 +20,7 @@ import { UserService } from 'src/app/core'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 import { Register2Service } from 'src/app/core/register2/register2.service'
 import { ERROR_REPORT } from 'src/app/errors'
-import { RequestInfoForm, SearchResults } from 'src/app/types'
+import { RequestInfoForm } from 'src/app/types'
 import {
   RegisterConfirmResponse,
   RegisterForm,
@@ -30,25 +28,21 @@ import {
 import { UserSession } from 'src/app/types/session.local'
 import { ThirdPartyAuthData } from 'src/app/types/sign-in-data.endpoint'
 import { GoogleTagManagerService } from '../../../core/google-tag-manager/google-tag-manager.service'
-import { SearchService } from '../../../core/search/search.service'
 import { ReactivationLocal } from '../../../types/reactivation.local'
-import {
-  CustomEventService,
-  JourneyType,
-} from 'src/app/core/observability-events/observability-events.service'
+import { JourneyType } from 'src/app/core/observability-events/observability-events.service'
 import { RegisterObservabilityService } from '../../register-observability.service'
 
 @Component({
-  selector: 'app-register-2',
-  templateUrl: './register2.component.html',
+  selector: 'app-register',
+  templateUrl: './register.component.html',
   styleUrls: [
-    './register2.component.scss',
-    './register2.component.scss.theme.scss',
-    '../../components/register2.scss-theme.scss',
-    '../../components/register2.style.scss',
+    './register.component.scss',
+    './register.component.scss.theme.scss',
+    '../../components/register.scss-theme.scss',
+    '../../components/register.style.scss',
   ],
 })
-export class Register2Component implements OnInit, AfterViewInit {
+export class RegisterComponent implements OnInit, AfterViewInit {
   @ViewChild('lastStep') lastStep: MatStep
   @ViewChild('stepComponentA', { read: ElementRef }) stepComponentA: ElementRef
   @ViewChild('stepComponentB', { read: ElementRef }) stepComponentB: ElementRef
