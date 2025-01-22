@@ -14,7 +14,7 @@ import { MdePopoverModule } from '../../../cdk/popover'
 import { SnackbarService } from '../../../cdk/snackbar/snackbar.service'
 import { WINDOW_PROVIDERS } from '../../../cdk/window'
 import { ErrorHandlerService } from '../../../core/error-handler/error-handler.service'
-import { Register2Service } from '../../../core/register2/register2.service'
+import { RegisterService } from '../../../core/register/register.service'
 import { FormPasswordComponent } from './form-password.component'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
@@ -37,7 +37,7 @@ describe('FormPasswordComponent', () => {
         { provide: MatDialogRef, useValue: {} },
         { provide: MAT_DIALOG_DATA, useValue: {} },
         WINDOW_PROVIDERS,
-        Register2Service,
+        RegisterService,
         PlatformInfoService,
         ErrorHandlerService,
         SnackbarService,

@@ -20,7 +20,7 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms'
-import { Register2Service } from 'src/app/core/register2/register2.service'
+import { RegisterService } from 'src/app/core/register/register.service'
 import { OrcidValidators } from 'src/app/validators'
 
 import {
@@ -73,8 +73,8 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   templateUrl: './form-personal.component.html',
   styleUrls: [
     './form-personal.component.scss',
-    '../register2.style.scss',
-    '../register2.scss-theme.scss',
+    '../register.style.scss',
+    '../register.scss-theme.scss',
   ],
   preserveWhitespaces: true,
   providers: [
@@ -114,7 +114,7 @@ export class FormPersonalComponent
   destroy = new Subject()
 
   constructor(
-    private _register: Register2Service,
+    private _register: RegisterService,
     private _reactivationService: ReactivationService,
     private _platform: PlatformInfoService,
     private _router: Router,

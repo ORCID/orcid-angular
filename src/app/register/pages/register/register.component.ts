@@ -18,7 +18,7 @@ import { WINDOW } from 'src/app/cdk/window'
 import { isRedirectToTheAuthorizationPage } from 'src/app/constants'
 import { UserService } from 'src/app/core'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
-import { Register2Service } from 'src/app/core/register2/register2.service'
+import { RegisterService } from 'src/app/core/register/register.service'
 import { ERROR_REPORT } from 'src/app/errors'
 import { RequestInfoForm } from 'src/app/types'
 import {
@@ -76,7 +76,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     private _cdref: ChangeDetectorRef,
     private _platformInfo: PlatformInfoService,
     private _formBuilder: UntypedFormBuilder,
-    private _register: Register2Service,
+    private _register: RegisterService,
     @Inject(WINDOW) private window: Window,
     private _googleTagManagerService: GoogleTagManagerService,
     private _router: Router,

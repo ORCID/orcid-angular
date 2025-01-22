@@ -9,7 +9,7 @@ import {
 } from '@angular/forms'
 import { ErrorStateMatcher } from '@angular/material/core'
 import { merge, Subject } from 'rxjs'
-import { Register2Service } from 'src/app/core/register2/register2.service'
+import { RegisterService } from 'src/app/core/register/register.service'
 
 import { BaseForm } from '../BaseForm'
 import { RegisterStateService } from '../../register-state.service'
@@ -50,7 +50,7 @@ export class FormAntiRobotsComponent extends BaseForm implements OnInit {
   }
 
   constructor(
-    private _register: Register2Service,
+    private _register: RegisterService,
     private _registerStateService: RegisterStateService
   ) {
     super()

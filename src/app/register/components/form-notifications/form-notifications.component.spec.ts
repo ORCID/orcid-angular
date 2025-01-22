@@ -9,7 +9,7 @@ import { PlatformInfoService } from '../../../cdk/platform-info'
 import { SnackbarService } from '../../../cdk/snackbar/snackbar.service'
 import { WINDOW_PROVIDERS } from '../../../cdk/window'
 import { ErrorHandlerService } from '../../../core/error-handler/error-handler.service'
-import { Register2Service } from '../../../core/register2/register2.service'
+import { RegisterService } from '../../../core/register/register.service'
 import { FormNotificationsComponent } from './form-notifications.component'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
@@ -31,7 +31,7 @@ describe('FormNotificationsComponent', () => {
       declarations: [FormNotificationsComponent],
       providers: [
         WINDOW_PROVIDERS,
-        Register2Service,
+        RegisterService,
         PlatformInfoService,
         ErrorHandlerService,
         SnackbarService,

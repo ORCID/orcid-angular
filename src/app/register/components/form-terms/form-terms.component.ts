@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms'
 import { ErrorStateMatcher } from '@angular/material/core'
-import { Register2Service } from 'src/app/core/register2/register2.service'
+import { RegisterService } from 'src/app/core/register/register.service'
 import { environment } from 'src/environments/environment'
 
 import { BaseForm } from '../BaseForm'
@@ -18,8 +18,8 @@ import { RegisterStateService } from '../../register-state.service'
   templateUrl: './form-terms.component.html',
   styleUrls: [
     './form-terms.component.scss',
-    '../register2.style.scss',
-    '../register2.scss-theme.scss',
+    '../register.style.scss',
+    '../register.scss-theme.scss',
   ],
   providers: [
     {
@@ -40,7 +40,7 @@ export class FormTermsComponent extends BaseForm implements OnInit, DoCheck {
   nextButtonWasClicked: boolean
   environment = environment
   constructor(
-    private _register: Register2Service,
+    private _register: RegisterService,
     private _errorStateMatcher: ErrorStateMatcher,
     private _registerStateService: RegisterStateService
   ) {

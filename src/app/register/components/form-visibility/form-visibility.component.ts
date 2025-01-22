@@ -14,7 +14,7 @@ import {
 } from '@angular/forms'
 import { ErrorStateMatcher } from '@angular/material/core'
 import { VISIBILITY_OPTIONS } from 'src/app/constants'
-import { Register2Service } from 'src/app/core/register2/register2.service'
+import { RegisterService } from 'src/app/core/register/register.service'
 
 import { BaseForm } from '../BaseForm'
 import { RegisterStateService } from '../../register-state.service'
@@ -27,8 +27,8 @@ import { takeUntil } from 'rxjs/operators'
   templateUrl: './form-visibility.component.html',
   styleUrls: [
     './form-visibility.component.scss',
-    '../register2.style.scss',
-    '../register2.scss-theme.scss',
+    '../register.style.scss',
+    '../register.scss-theme.scss',
   ],
   preserveWhitespaces: true,
   providers: [
@@ -54,7 +54,7 @@ export class FormVisibilityComponent
   activitiesVisibilityDefault = new UntypedFormControl('', Validators.required)
   destroy = new Subject()
   constructor(
-    private _register: Register2Service,
+    private _register: RegisterService,
     private _errorStateMatcher: ErrorStateMatcher,
     private _registerStateService: RegisterStateService,
     private _registerObservability: RegisterObservabilityService

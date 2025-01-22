@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms'
 
-import { Register2Service } from 'src/app/core/register2/register2.service'
+import { RegisterService } from 'src/app/core/register/register.service'
 import { BaseForm } from '../BaseForm'
 
 @Component({
@@ -15,8 +15,8 @@ import { BaseForm } from '../BaseForm'
   templateUrl: './form-notifications.component.html',
   styleUrls: [
     './form-notifications.component.scss',
-    '../register2.style.scss',
-    '../register2.scss-theme.scss',
+    '../register.style.scss',
+    '../register.scss-theme.scss',
   ],
   providers: [
     {
@@ -32,7 +32,7 @@ import { BaseForm } from '../BaseForm'
   ],
 })
 export class FormNotificationsComponent extends BaseForm implements OnInit {
-  constructor(private _register: Register2Service) {
+  constructor(private _register: RegisterService) {
     super()
   }
   ngOnInit() {

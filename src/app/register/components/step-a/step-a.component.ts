@@ -22,8 +22,8 @@ import { RegisterObservabilityService } from '../../register-observability.servi
   templateUrl: './step-a.component.html',
   styleUrls: [
     './step-a.component.scss',
-    '../register2.style.scss',
-    '../register2.scss-theme.scss',
+    '../register.style.scss',
+    '../register.scss-theme.scss',
   ],
   preserveWhitespaces: true,
 })

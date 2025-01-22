@@ -16,7 +16,7 @@ import {
   Validators,
 } from '@angular/forms'
 import { HAS_LETTER_OR_SYMBOL, HAS_NUMBER } from 'src/app/constants'
-import { Register2Service } from 'src/app/core/register2/register2.service'
+import { RegisterService } from 'src/app/core/register/register.service'
 import { RegisterForm } from 'src/app/types/register.endpoint'
 import { OrcidValidators } from 'src/app/validators'
 
@@ -34,8 +34,8 @@ import { takeUntil } from 'rxjs/operators'
   styleUrls: [
     './form-password.component.scss-theme.scss',
     './form-password.component.scss',
-    '../register2.scss-theme.scss',
-    '../register2.style.scss',
+    '../register.scss-theme.scss',
+    '../register.style.scss',
   ],
   providers: [
     {
@@ -80,7 +80,7 @@ export class FormPasswordComponent
   _currentAccesibilityError: string
   destroy = new Subject()
   constructor(
-    private _register: Register2Service,
+    private _register: RegisterService,
     private _liveAnnouncer: LiveAnnouncer,
     private _changeDetectorRef: ChangeDetectorRef,
     private _registerObservability: RegisterObservabilityService,

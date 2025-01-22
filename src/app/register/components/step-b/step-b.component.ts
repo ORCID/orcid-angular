@@ -10,8 +10,8 @@ import { RegisterObservabilityService } from '../../register-observability.servi
   templateUrl: './step-b.component.html',
   styleUrls: [
     './step-b.component.scss',
-    '../register2.style.scss',
-    '../register2.scss-theme.scss',
+    '../register.style.scss',
+    '../register.scss-theme.scss',
   ],
 })
 export class StepBComponent extends BaseStepDirective implements OnInit {
