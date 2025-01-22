@@ -30,7 +30,7 @@ import { WarningMessageModule } from '../cdk/warning-message/warning-message.mod
 import { BackendErrorComponent } from './components/backend-error/backend-error.component'
 import { FormAntiRobotsComponent } from './components/form-anti-robots/form-anti-robots.component'
 import { FormPersonalAdditionalEmailsComponent } from './components/form-personal-additional-emails/form-personal-additional-emails.component'
-import { Register2Component } from './pages/register/register2.component'
+import { RegisterComponent } from './pages/register/register.component'
 import { StepCComponent } from './components/step-c/step-c.component'
 import { FormCurrentEmploymentComponent } from './components/form-current-employment/form-current-employment.component'
 import { MatLegacyAutocompleteModule as MatAutocompleteModule } from '@angular/material/legacy-autocomplete'
@@ -54,7 +54,7 @@ import { AlertMessageModule } from '../cdk/alert-message/alert-message.module'
     FormPersonalAdditionalEmailsComponent,
     FormAntiRobotsComponent,
     BackendErrorComponent,
-    Register2Component,
+    RegisterComponent,
     FormCurrentEmploymentComponent,
   ],
   imports: [
@@ -84,4 +84,4 @@ import { AlertMessageModule } from '../cdk/alert-message/alert-message.module'
     SharedModule,
   ],
 })
-export class Register2Module {}
+export class RegisterModule {}
