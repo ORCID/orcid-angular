@@ -151,7 +151,7 @@ const routes: Routes = [
     matcher: routerReactivation,
     canActivateChild: [LanguageGuard, RegisterGuard],
     loadChildren: () =>
-      import('./register/register.module').then((m) => m.RegisterModuleLegacy),
+      import('./register2/register.module').then((m) => m.Register2Module),
   },
   {
     path: ApplicationRoutes.selfService,
