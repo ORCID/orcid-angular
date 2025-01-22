@@ -52,9 +52,9 @@ export class RegisterObservabilityService {
           emailError: (form.controls.emails as UntypedFormGroup).controls.email
             .errors,
           confirmEmailError: (form.controls.emails as UntypedFormGroup).controls
-            .confirmEmail.errors,
+            .confirmEmail?.errors,
           additionalEmailsError: (form.controls.emails as UntypedFormGroup)
-            .controls.additionalEmails.errors,
+            .controls.additionalEmails?.errors,
         },
       }
     )
