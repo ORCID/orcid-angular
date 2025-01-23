@@ -1,7 +1,7 @@
 import { UntypedFormGroup } from '@angular/forms'
-import { RegisterForm } from 'src/app/types/register.endpoint'
-import { Value, Visibility } from 'src/app/types/common.endpoint'
 import { Constructor } from 'src/app/types'
+import { Value, Visibility } from 'src/app/types/common.endpoint'
+import { RegisterForm } from 'src/app/types/register.endpoint'
 
 export function RegisterFormAdapterMixin<T extends Constructor<any>>(base: T) {
   return class RegisterFormAdapter extends base {
@@ -116,18 +116,61 @@ export function RegisterFormAdapterMixin<T extends Constructor<any>>(base: T) {
       return value
     }
 
+    formGroupToAffiliationRegisterForm(formGroup: UntypedFormGroup) {
+      const value = formGroup.controls['organization'].value
+      const departmentName = formGroup.controls['departmentName'].value
+      const roleTitle = formGroup.controls['roleTitle'].value
+      const startDateGroup = formGroup.controls['startDateGroup'].value
+
+      if (typeof value === 'string') {
+        return { affiliationName: { value } }
+      } else {
+        return {
+          affiliationName: { value: value.value },
+          disambiguatedAffiliationSourceId: {
+            value: value.disambiguatedAffiliationIdentifier,
+          },
+          orgDisambiguatedId: {
+            value: value.disambiguatedAffiliationIdentifier,
+          },
+          departmentName: { value: departmentName },
+          roleTitle: { value: roleTitle },
+          affiliationType: { value: 'employment' },
+          startDate: {
+            month: startDateGroup.startDateMonth,
+            year: startDateGroup.startDateYear,
+          },
+          sourceId: { value: value.sourceId },
+          city: { value: value.city },
+          region: { value: value.region },
+          country: { value: value.country },
+        }
+      }
+    }
+
     formGroupToFullRegistrationForm(
       StepA: UntypedFormGroup,
       StepB: UntypedFormGroup,
-      StepC: UntypedFormGroup
+      StepC: UntypedFormGroup,
+      StepC2: UntypedFormGroup,
+      StepD: UntypedFormGroup
     ): RegisterForm {
-      return {
+      const value = {
         ...StepA.value.personal,
         ...StepB.value.password,
-        ...StepB.value.sendOrcidNews,
         ...StepC.value.activitiesVisibilityDefault,
-        ...StepC.value.termsOfUse,
-        ...StepC.value.captcha,
+        ...StepD.value.sendOrcidNews,
+        ...StepD.value.termsOfUse,
+        ...StepD.value.captcha,
+      }
+
+      if (StepC2.valid) {
+        return {
+          ...value,
+          ...StepC2.value.affiliations,
+        }
+      } else {
+        return value
       }
     }
   }

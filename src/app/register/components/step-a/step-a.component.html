@@ -1,22 +1,32 @@
 <mat-card class="orcid-wizard">
   <mat-card-header>
     <mat-card-title role="heading" aria-level="1">
-      <ng-container
-        *ngIf="!reactivation?.isReactivation"
-        i18n="@@register.create"
-      >
-        Create your ORCID iD
+      <div>
+        <img
+          height="64px"
+          src="assets/vectors/orcid.logo.icon.svg"
+          alt="orcid logo"
+        />
+      </div>
+      <ng-container *ngIf="!reactivation?.isReactivation">
+        <h1 class="orc-font-heading-small" i18n="@@register.create">
+          Create your ORCID iD
+        </h1>
       </ng-container>
-      <ng-container
-        *ngIf="reactivation?.isReactivation"
-        i18n="@@register.reactivation"
-      >
-        Thank you for reactivating your ORCID iD.
+      <ng-container *ngIf="reactivation?.isReactivation">
+        <h1
+          class="orc-font-heading-small"
+          i18n="@@register.reactivateYourOrcidAccount"
+        >
+          Reactivate your ORCID account
+        </h1>
       </ng-container>
     </mat-card-title>
-    <mat-card-subtitle role="heading" aria-level="2" i18n="@@register.step1"
-      >This is step 1 of 3</mat-card-subtitle
-    >
+    <mat-card-subtitle role="heading" aria-level="2">
+      <h2 class="orc-font-body-small" i18n="@@register.step1.3">
+        Step 1 of 5 - Names and emails
+      </h2>
+    </mat-card-subtitle>
   </mat-card-header>
 
   <mat-card-content>
@@ -28,6 +38,7 @@
         rel="noopener noreferrer"
         target="_blank"
         i18n="@@register.terms"
+        #firstInput
         >terms of use</a
       ><ng-container i18n="@@register.only"
         >, you may only register for an ORCID iD for yourself. Already have an
@@ -43,27 +54,35 @@
         [reactivation]="reactivation"
       >
       </app-form-personal>
-      <div class="step-actions">
+      <div class="step-actions margin-top-12">
+        <button
+          id="step-a-next-button"
+          mat-raised-button
+          matStepperNext
+          i18n="@@register.nextStep"
+          color="primary"
+          (click)="nextButton2()"
+        >
+          Next Step
+        </button>
         <button
           mat-button
           color="primary"
           (click)="goBack()"
           matStepperPrevious
           type="button"
-          i18n="@@shared.back"
           id="step-a-back-button"
         >
-          GO BACK
-        </button>
-        <button
-          id="step-a-next-button"
-          mat-raised-button
-          matStepperNext
-          color="primary"
-          i18n="@@shared.next"
-          (click)="goForward()"
-        >
-          NEXT
+          <a
+            i18n="@@register.cancelRegistration"
+            *ngIf="!reactivation?.isReactivation"
+            >Cancel registration</a
+          >
+          <a
+            i18n="@@register.cancelReactivation"
+            *ngIf="reactivation?.isReactivation"
+            >Cancel reactivation</a
+          >
         </button>
       </div>
     </form>
