@@ -1,3 +1,9 @@
+## v2.110.1 - 2025-01-23
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.110.0...v2.110.1)
+
+- [#2450](https://github.com/ORCID/orcid-angular/pull/2450): migrate reactivation form
+
 ## v2.110.0 - 2025-01-16
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.24...v2.110.0)
