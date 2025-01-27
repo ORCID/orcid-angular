@@ -15,6 +15,7 @@
       [value]="selectedItem?.label"
       matInput
       [errorStateMatcher]="getMatcher()"
+      role="menu"
     />
     <mat-icon matSuffix>arrow_drop_down</mat-icon>
     <mat-error *ngIf="invalid" i18n="@@works.selectAWorkType">
