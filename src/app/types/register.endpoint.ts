@@ -28,6 +28,7 @@ export interface RegisterForm {
   emailAccessAllowed?: boolean
   redirectUrl?: any
   resetParams?: string
+  isReactivation?: boolean
 }
 
 export interface DuplicatedName {
