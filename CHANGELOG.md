@@ -1,3 +1,10 @@
+## v2.110.2 - 2025-01-27
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.110.1...v2.110.2)
+
+- [#2453](https://github.com/ORCID/orcid-angular/pull/2453): Lmendoza/batch of work jan 2025
+- [#2452](https://github.com/ORCID/orcid-angular/pull/2452): handle reactivation backend errors
+
 ## v2.110.1 - 2025-01-23
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.110.0...v2.110.1)
