@@ -32,7 +32,7 @@ import { BaseForm } from '../BaseForm'
 })
 // tslint:disable-next-line: class-name
 export class FormTermsComponent extends BaseForm implements OnInit, DoCheck {
-  environment = environment
+  environment = runtimeEnvironment
   constructor(
     private _register: RegisterService,
     private _errorStateMatcher: ErrorStateMatcher

@@ -1,3 +1,4 @@
+
 export interface EnvironmentInterface {
   production: boolean
   debugger: boolean
@@ -24,6 +25,7 @@ export interface EnvironmentInterface {
   }
   proxyMode: boolean
 }
-export declare global {
+
+declare global {
   const runtimeEnvironment: EnvironmentInterface
 }

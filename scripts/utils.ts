@@ -2,7 +2,7 @@ import { writeFileSync } from 'fs'
 import * as environmentProduction from '../src/environments/environment.production'
 import * as environmentQa from '../src/environments/environment.qa'
 import * as environmentSandbox from '../src/environments/environment.sandbox'
-import * as environment4200 from '../src/environments/environment.local4200'
+import * as environment4200 from '../src/environments/environment.local.4200'
 import * as environmentDev from '../src/environments/environment.local.dev.orcid.org'
 
 export function save(data, options) {

@@ -397,7 +397,6 @@
           "options": {
             "configDir": ".storybook",
             "browserTarget": "ng-orcid:build",
-            "compodoc": true,
             "compodocArgs": ["-e", "json", "-d", "."],
             "outputDir": "dist/storybook/ng-orcid"
           }
