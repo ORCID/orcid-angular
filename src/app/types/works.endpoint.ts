@@ -77,6 +77,7 @@ export enum WorkTypes {
   musicalComposition = 'musical-composition',
   sound = 'sound',
   transcription = 'transcription',
+  publicSpeech = 'public-speech',
 }
 
 export const WorkCategoriesLabel = {
@@ -127,7 +128,7 @@ export const WorkTypesLabels = {
   [WorkTypes.dataManagementPlan]: $localize`:@@works.dataManagementPlan:Data management plan`,
   [WorkTypes.dataSet]: $localize`:@@works.plan:Dataset`,
   [WorkTypes.invention]: $localize`:@@works.invention:Invention`,
-  [WorkTypes.lectureSpeech]: $localize`:@@works.speech:Talk, interview, podcast or speech`,
+  [WorkTypes.lectureSpeech]: $localize`:@@works.speech:Lecture`,
   [WorkTypes.physicalObject]: $localize`:@@works.object:Physical object`,
   [WorkTypes.researchTechnique]: $localize`:@@works.technique:Research protocol or technique`,
   [WorkTypes.software]: $localize`:@@works.software:Software`,
@@ -148,6 +149,7 @@ export const WorkTypesLabels = {
   [WorkTypes.musicalComposition]: $localize`:@@works.musicalComposition:Musical composition`,
   [WorkTypes.sound]: $localize`:@@works.sound:Sound`,
   [WorkTypes.transcription]: $localize`:@@works.transcription:Transcription`,
+  [WorkTypes.publicSpeech]: $localize`:@@works.publicSpeech:Talk, interview, podcast or speech`,
 }
 
 export enum WorksTitleName {
@@ -221,6 +223,20 @@ export const WorkTypesTitle = {
   [WorkTypes.standardsAndPolicy]: WorksTitleName.publisher,
   [WorkTypes.technicalStandard]: WorksTitleName.publisher,
   [WorkTypes.other]: WorksTitleName.publisher,
+  [WorkTypes.blogPost]: WorksTitleName.publisher,
+  [WorkTypes.clinicalStudy]: WorksTitleName.publisher,
+  [WorkTypes.cartographicMaterial]: WorksTitleName.publisher,
+  [WorkTypes.conferenceOutput]: WorksTitleName.conferenceTitle,
+  [WorkTypes.conferencePresentation]: WorksTitleName.conferenceTitle,
+  [WorkTypes.conferenceProceedings]: WorksTitleName.conferenceTitle,
+  [WorkTypes.design]: WorksTitleName.publisher,
+  [WorkTypes.image]: WorksTitleName.publisher,
+  [WorkTypes.learningObject]: WorksTitleName.publisher,
+  [WorkTypes.movingImage]: WorksTitleName.publisher,
+  [WorkTypes.musicalComposition]: WorksTitleName.publisher,
+  [WorkTypes.sound]: WorksTitleName.publisher,
+  [WorkTypes.transcription]: WorksTitleName.publisher,
+  [WorkTypes.publicSpeech]: WorksTitleName.publisher,
 }
 
 export const LanguageMap = {

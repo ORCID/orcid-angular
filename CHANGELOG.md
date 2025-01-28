@@ -1,3 +1,66 @@
+## v2.110.2 - 2025-01-27
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.110.1...v2.110.2)
+
+- [#2453](https://github.com/ORCID/orcid-angular/pull/2453): Lmendoza/batch of work jan 2025
+- [#2452](https://github.com/ORCID/orcid-angular/pull/2452): handle reactivation backend errors
+
+## v2.110.1 - 2025-01-23
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.110.0...v2.110.1)
+
+- [#2450](https://github.com/ORCID/orcid-angular/pull/2450): migrate reactivation form
+
+## v2.110.0 - 2025-01-16
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.24...v2.110.0)
+
+## v2.109.24 - 2025-01-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.23...v2.109.24)
+
+- [#2449](https://github.com/ORCID/orcid-angular/pull/2449): Transifex - Update worktypes to upper case
+
+## v2.109.23 - 2025-01-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.22...v2.109.23)
+
+- [#2448](https://github.com/ORCID/orcid-angular/pull/2448): Tx push
+
+## v2.109.22 - 2025-01-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.21...v2.109.22)
+
+## v2.109.21 - 2025-01-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.20...v2.109.21)
+
+- [#2446](https://github.com/ORCID/orcid-angular/pull/2446): Update google keys
+
+## v2.109.20 - 2025-01-10
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.19...v2.109.20)
+
+- [#2445](https://github.com/ORCID/orcid-angular/pull/2445): 9576-qa-dynamic-field-name-not-working-for-new-work-types
+
+## v2.109.19 - 2025-01-09
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.18...v2.109.19)
+
+- [#2444](https://github.com/ORCID/orcid-angular/pull/2444): 9579-v3-work-types-lecture-and-public-speech
+
+## v2.109.18 - 2025-01-09
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.17...v2.109.18)
+
+- [#2443](https://github.com/ORCID/orcid-angular/pull/2443): 9579-v3-work-types-lecture-and-public-speech
+
+## v2.109.17 - 2025-01-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.16...v2.109.17)
+
+- [#2442](https://github.com/ORCID/orcid-angular/pull/2442): format-fix
+
 ## v2.109.16 - 2025-01-08
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.15...v2.109.16)

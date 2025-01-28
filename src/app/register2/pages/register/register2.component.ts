@@ -176,7 +176,8 @@ export class Register2Component implements OnInit, AfterViewInit {
           this.FormGroupStepB,
           this.FormGroupStepC,
           this.FormGroupStepC2,
-          this.FormGroupStepD
+          this.FormGroupStepD,
+          this.reactivation?.isReactivation
         )
         .pipe(
           switchMap((validator: RegisterForm) => {

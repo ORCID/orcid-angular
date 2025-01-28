@@ -152,7 +152,9 @@ export class FormPersonalComponent
       {
         email: new UntypedFormControl('', {
           validators: [Validators.required, OrcidValidators.email],
-          asyncValidators: this._register.backendValueValidate('email'),
+          asyncValidators:
+            !this.reactivation?.isReactivation &&
+            this._register.backendValueValidate('email'),
         }),
         additionalEmails: this.additionalEmails,
       },
@@ -320,7 +322,7 @@ export class FormPersonalComponent
 
   get emailConfirmationValid() {
     return ((this.form.controls.emails as any).controls?.confirmEmail as any)
-      .valid
+      ?.valid
   }
 
   get givenNameFormTouched() {

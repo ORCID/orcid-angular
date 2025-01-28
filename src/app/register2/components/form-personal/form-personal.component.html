@@ -114,11 +114,16 @@
         appearance="outline"
         [hideRequiredMarker]="true"
         [ngClass]="{
-          'valid-password-input': emailsAreValid,
+          'valid-password-input':
+            emailsAreValid || this.reactivation?.isReactivation,
           'disable-error': !emailError
         }"
       >
-        <mat-icon *ngIf="emailsAreValid" matSuffix>done</mat-icon>
+        <mat-icon
+          *ngIf="emailsAreValid || this.reactivation?.isReactivation"
+          matSuffix
+          >done</mat-icon
+        >
 
         <input
           aria-labelledby="email-input-input-label"
@@ -234,10 +239,9 @@
     <!-- <mat-label i18n="@@register.confirmEmail"
     >Confirm primary email</mat-label
   > -->
-    <div class="input-container">
+    <div class="input-container" *ngIf="!reactivation?.isReactivation">
       <mat-form-field
         appearance="outline"
-        *ngIf="!reactivation?.isReactivation"
         [hideRequiredMarker]="true"
         [ngClass]="{ 'valid-password-input': emailsAreValid }"
       >

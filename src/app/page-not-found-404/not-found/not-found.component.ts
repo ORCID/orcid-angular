@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
-import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 import { Router } from '@angular/router'
 import { Title } from '@angular/platform-browser'
+import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 
 @Component({
   selector: 'app-not-found',

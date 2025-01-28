@@ -9,18 +9,18 @@
         i18n="@@topBar.weHaveSent"
         *ngIf="messageType === 'forManualEditing'"
       >
-        We have sent verification messages to each of your registered email
-        addresses. You will need to verify your primary email address before you
-        can begin adding information manually to your ORCID record.
+        We have sent verification emails to each of your registered email
+        addresses. You need to verify at least one email address before you can
+        begin adding information manually to your ORCID record.
       </p>
       <p
         class="orc-font-body-small"
         i18n="@@topBar.weHaveSentForCredentials"
         *ngIf="messageType === 'forCredentials'"
       >
-        We have sent verification messages to each of your registered email
-        addresses. You will need to verify your primary email address before you
-        can register your ORCID Public API credentials.
+        We have sent verification emails to each of your registered email
+        addresses. You need to verify at least one email address before you can
+        register your ORCID Public API credentials.
       </p>
       <button
         class="mat-button-wrap-text"
@@ -36,41 +36,31 @@
 
   <app-alert-message *ngIf="!emailVerified && verifyEmailSend">
     <h3 title class="orc-font-body" i18n="@@side-bar.pleaseVerify">
-      Please verify your primary email address!
+      Please verify your email addresses
     </h3>
     <ng-container content>
       <p class="orc-font-body-small">
         <ng-container i18n="@@side-bar.youNeedToVerify">
-          You need to verify your primary email in order to access all of
-          ORCID’s editing features.
+          You need to verify at least one email address in order to access all
+          of ORCID’s editing features.
         </ng-container>
         <br />
         <ng-container i18n="@@side-bar.youNeedToVerify2">
-          To verify your email, click the link in the message sent to:
+          To verify your email address, click the link in the email sent to:
         </ng-container>
       </p>
       <div class="no-wrap orc-font-body-small">
         <p class="email-container">{{ primaryEmail }}</p>
         <p class="need-help">
           <strong i18n="@@side-bar.needHelp"> Need help?</strong> <br />
-          <ng-container i18n="@@side-bar.visitOur"> Visit our </ng-container>
+          <ng-container i18n="@@side-bar.visitOur"> Visit the </ng-container>
           <a
             class="underline"
             target="_blank"
             rel="noopener noreferrer"
             href="https://support.orcid.org/hc/articles/360006973793"
             i18n="@@side-bar.knowledge"
-            >knowledge base
-          </a>
-          <ng-container i18n="@@side-bar.orContact"> or contact </ng-container>
-          <a
-            class="underline"
-            target="_blank"
-            rel="noopener noreferrer"
-            i18n="@@side-bar.support"
-            href="https://support.orcid.org/"
-          >
-            support.
+            >ORCID help centre
           </a>
         </p>
       </div>
