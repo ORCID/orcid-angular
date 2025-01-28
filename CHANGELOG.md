@@ -1,3 +1,9 @@
+## v2.110.4 - 2025-01-28
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.110.3...v2.110.4)
+
+- [#2456](https://github.com/ORCID/orcid-angular/pull/2456): revert-UpdateGoogleKeys
+
 ## v2.110.3 - 2025-01-28
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.110.2...v2.110.3)
