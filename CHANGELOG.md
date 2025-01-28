@@ -1,3 +1,9 @@
+## v2.110.3 - 2025-01-28
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.110.2...v2.110.3)
+
+- [#2455](https://github.com/ORCID/orcid-angular/pull/2455): restore report work type
+
 ## v2.110.2 - 2025-01-27
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.110.1...v2.110.2)
