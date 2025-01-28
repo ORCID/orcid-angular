@@ -8,7 +8,6 @@ import {
 import { getOptionsObjet, save } from './utils'
 import { renameSync, readFileSync } from 'fs'
 import { createShareAssetsFolder } from './moveToShareFolder.postbuild'
-import { replaceEnvPlaceholder } from './runtime-environment-setter.postbuild'
 
 const glob = require('glob')
 // Run updates on index.html files across languages
@@ -17,7 +16,6 @@ glob
   .forEach((file) => {
     const options = getOptionsObjet(file)
     let data = readFileSync(file, 'utf8')
-    data = replaceEnvPlaceholder(data)
     // data = uniqueLength(data, options) DISABLED unique leght for now, as migth not be required anymore
     data = buildInfo(data, options)
     // data = newRelic(data, options) TEMPORALLY DISABLE NEW RELIC

@@ -133,6 +133,7 @@
               "src/styles.scss",
               "src/assets/scss/grid.scss"
             ],
+            "scripts": ["src/assets/local-dev-environment.js"],
             "fileReplacements": [
               {
                 "replace": "src/environments/environment.ts",
