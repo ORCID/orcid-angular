@@ -24,7 +24,6 @@ export interface EnvironmentInterface {
   }
   proxyMode: boolean
 }
-
-declare global {
+export declare global {
   const runtimeEnvironment: EnvironmentInterface
 }

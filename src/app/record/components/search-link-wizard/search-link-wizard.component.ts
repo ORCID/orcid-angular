@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { RecordImportWizard } from '../../../types/record-peer-review-import.endpoint'
-import { environment } from '../../../../environments/environment'
 
 @Component({
   selector: 'app-search-link-wizard',

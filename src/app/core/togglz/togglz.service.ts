@@ -4,7 +4,7 @@ import { Observable, ReplaySubject } from 'rxjs'
 import { map, switchMapTo } from 'rxjs/operators'
 import { Config } from 'src/app/types/togglz.endpoint'
 import { MaintenanceMessage } from 'src/app/types/togglz.local'
-import { environment } from 'src/environments/environment'
+
 
 import { UserService } from '..'
 

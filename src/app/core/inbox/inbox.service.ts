@@ -4,7 +4,6 @@ import { Observable, ReplaySubject } from 'rxjs'
 import { catchError, map, switchMap, tap, retry } from 'rxjs/operators'
 import { AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL } from 'src/app/constants'
 import { ERROR_REPORT } from 'src/app/errors'
-import { environment } from 'src/environments/environment'
 
 import {
   InboxNotificationAmended,

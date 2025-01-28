@@ -40,7 +40,7 @@ import {
 } from 'src/app/types/session.local'
 import { ThirdPartyAuthData } from 'src/app/types/sign-in-data.endpoint'
 import { Delegator } from 'src/app/types/trusted-individuals.endpoint'
-import { environment } from 'src/environments/environment'
+
 
 import { UserStatus } from '../../types/userStatus.endpoint'
 import { DiscoService } from '../disco/disco.service'

@@ -10,7 +10,6 @@ import {
   DisambiguatedOrganization,
   EmploymentsEndpoint,
 } from 'src/app/types/record-affiliation.endpoint'
-import { environment } from 'src/environments/environment'
 
 import { AffiliationsSortService } from '../record-affiliations-sort/record-affiliations-sort.service'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'

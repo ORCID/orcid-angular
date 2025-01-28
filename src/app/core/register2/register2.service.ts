@@ -10,7 +10,7 @@ import {
   RegisterConfirmResponse,
   RegisterForm,
 } from 'src/app/types/register.endpoint'
-import { environment } from 'src/environments/environment'
+
 
 import { ERROR_REPORT } from 'src/app/errors'
 import { objectToUrlParameters } from '../../constants'

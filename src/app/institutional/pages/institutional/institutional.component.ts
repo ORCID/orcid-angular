@@ -18,7 +18,6 @@ import { first, map, startWith, tap } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { ApplicationRoutes } from 'src/app/constants'
 
-import { environment } from '../../../../environments/environment'
 import { WINDOW } from '../../../cdk/window'
 import { DiscoService } from '../../../core/disco/disco.service'
 import { InstitutionValidator } from '../../../shared/validators/institution/institution.validator'

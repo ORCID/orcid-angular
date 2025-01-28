@@ -1,6 +1,5 @@
 import { Inject, Injectable } from '@angular/core'
 import { WINDOW } from 'src/app/cdk/window'
-import { environment } from 'src/environments/environment'
 
 export type JourneyType = 'orcid_registration' | 'orcid_update_emails'
 @Injectable({

@@ -7,7 +7,6 @@ import { NamesEndPoint } from 'src/app/types/record-name.endpoint'
 import { WorksEndpoint } from 'src/app/types/record-works.endpoint'
 import { UserRecord } from 'src/app/types/record.local'
 import { UserInfo } from 'src/app/types/userInfo.endpoint'
-import { environment } from 'src/environments/environment'
 
 @Injectable({
   providedIn: 'root',

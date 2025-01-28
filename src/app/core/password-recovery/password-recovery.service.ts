@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { PasswordRecovery } from 'src/app/types'
-import { environment } from 'src/environments/environment'
 import { retry, catchError } from 'rxjs/operators'
 import { ERROR_REPORT } from 'src/app/errors'
 import {

@@ -5,7 +5,6 @@ import {
 } from '@angular/material/legacy-dialog'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { ExpandedSearchResultsContent } from 'src/app/types'
-import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-dialog-add-trusted-individuals',

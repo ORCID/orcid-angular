@@ -14,7 +14,7 @@
     "build-runtime-env": "ts-node -P scripts/tsconfig.json scripts/runtime-environment-setter.dev-runtime.ts",
     "lint": "echo 'temporally disable Angular linter to until eslint update'",
     "e2e": "ng e2e",
-    "prebuild": "rimraf dist && yarn build:i18n && yarn build:browserslist",
+    "prebuild": "rimraf dist && yarn build:i18n && yarn build:browserslist && npm run build-runtime-env",
     "build": "ng build --configuration production --localize",
     "postbuild": "ts-node -P scripts/tsconfig.json scripts/postbuild.ts",
     "build:i18n:clone": "ts-node -P scripts/tsconfig.json scripts/properties-clone.postbuild.ts",

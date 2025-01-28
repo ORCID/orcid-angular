@@ -1,1 +1,1 @@
-export { environment } from './environment.local'
+export { environment } from './environment.local.dev.orcid.org'

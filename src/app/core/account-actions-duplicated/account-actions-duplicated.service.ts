@@ -4,7 +4,6 @@ import { Observable } from 'rxjs'
 import { catchError, retry } from 'rxjs/operators'
 import { ERROR_REPORT } from 'src/app/errors'
 import { DuplicateRemoveEndpoint } from 'src/app/types/account-actions-duplicated'
-import { environment } from 'src/environments/environment'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 

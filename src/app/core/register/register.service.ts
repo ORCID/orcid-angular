@@ -10,7 +10,7 @@ import {
   RegisterConfirmResponse,
   RegisterForm,
 } from 'src/app/types/register.endpoint'
-import { environment } from 'src/environments/environment'
+
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { UserService } from '../user/user.service'

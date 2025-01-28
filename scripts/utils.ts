@@ -2,8 +2,8 @@ import { writeFileSync } from 'fs'
 import * as environmentProduction from '../src/environments/environment.production'
 import * as environmentQa from '../src/environments/environment.qa'
 import * as environmentSandbox from '../src/environments/environment.sandbox'
-import * as environment4200 from '../src/environments/environment.local-with-proxy'
-import * as environmentDev from '../src/environments/environment.local'
+import * as environment4200 from '../src/environments/environment.local4200'
+import * as environmentDev from '../src/environments/environment.local.dev.orcid.org'
 
 export function save(data, options) {
   writeFileSync(options.file, data, 'utf8')
@@ -89,8 +89,11 @@ export function runtimeEnvironmentScript() {
         }
       }
 
-      var domain = window.location.hostname + window.location.pathname;
-      var chosenEnv = environmentProduction; // default to production
+    var domain =
+      window.location.hostname +
+      (window.location.port ? ':' + window.location.port : '') +
+      window.location.pathname      
+    var chosenEnv = environmentProduction; // default to production
 
       if (domain.includes('qa.orcid.org')) {
         chosenEnv = environmentQa;

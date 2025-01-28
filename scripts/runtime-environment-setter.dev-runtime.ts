@@ -10,14 +10,13 @@ ${runtimeEnvironmentScript()}`
 
   const outputPath = path.resolve(
     __dirname,
-    '../src/assets/local-dev-environment.js'
+    '../src/assets/runtime-environment.js'
   )
 
   fs.writeFileSync(outputPath, scriptContent, { encoding: 'utf8' })
 
   console.log(`Generated: ${outputPath}`)
 }
-console.log('runtime-environment-setter.dev-runtime.ts')
 if (require.main === module) {
   main()
 }

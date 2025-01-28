@@ -9,7 +9,7 @@ import { Observable, of } from 'rxjs'
 import { catchError, map, retry } from 'rxjs/operators'
 import { Constructor } from 'src/app/types'
 import { RegisterForm } from 'src/app/types/register.endpoint'
-import { environment } from 'src/environments/environment'
+
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
 interface HasHttpClientAndErrorHandler {

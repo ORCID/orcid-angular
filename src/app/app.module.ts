@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { environment } from 'src/environments/environment'
 import { EnvironmentBannerModule } from '../app/environment-banner/environment-banner.module'
 
 import { AppRoutingModule } from './app-routing.module'
@@ -25,7 +24,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http'
     BidiModule,
     PseudoModule, // Remove on angular 10 https://bit.ly/3ezbF4v
     // Environmental dependent modules
-    environment.SHOW_TEST_WARNING_BANNER ? EnvironmentBannerModule : [],
+    EnvironmentBannerModule,
   ],
   providers: [
     TitleService,

@@ -26,7 +26,6 @@ import {
   AffiliationUIGroup,
 } from './types/record-affiliation.endpoint'
 import { WorkBibtexModalComponent } from './record/components/work-stack-group/modals/work-bibtex-modal/work-bibtex-modal.component'
-import { environment } from 'src/environments/environment'
 
 export { COUNTRY_NAMES_TO_COUNTRY_CODES } from './constants-country-codes'
 

@@ -4,10 +4,7 @@ import {
   MatLegacyDialogRef as MatDialogRef,
 } from '@angular/material/legacy-dialog'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
-import { AccountTrustedIndividualsService } from 'src/app/core/account-trusted-individuals/account-trusted-individuals.service'
 import { AccountTrustedIndividual } from 'src/app/types/account-trusted-individuals'
-import { AccountTrustedOrganization } from 'src/app/types/account-trusted-organizations'
-import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-dialog-revoke-trusted-individuals',

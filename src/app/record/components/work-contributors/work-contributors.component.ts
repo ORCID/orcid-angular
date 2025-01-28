@@ -24,7 +24,7 @@ import { takeUntil, tap } from 'rxjs/operators'
 import { PlatformInfoService } from '../../../cdk/platform-info'
 import { Subject } from 'rxjs'
 import { Contributor } from '../../../types'
-import { environment } from 'src/environments/environment'
+
 import { RecordWorksService } from '../../../core/record-works/record-works.service'
 import { RecordAffiliationService } from '../../../core/record-affiliations/record-affiliations.service'
 import { EmploymentsEndpoint } from '../../../types/record-affiliation.endpoint'

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { Observable } from 'rxjs'
 import { TrustedSummary } from 'src/app/types/trust-summary'
-import { environment } from 'src/environments/environment'
+
 import { catchError, retry } from 'rxjs/operators'
 import { ERROR_REPORT } from 'src/app/errors'
 

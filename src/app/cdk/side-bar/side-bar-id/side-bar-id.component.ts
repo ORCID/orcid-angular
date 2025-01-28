@@ -2,7 +2,6 @@ import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from '../../platform-info'
-import { environment } from '../../../../environments/environment'
 import { WINDOW } from '../../window'
 
 @Component({
@@ -17,7 +16,7 @@ export class SideBarIdComponent implements OnInit, OnDestroy {
   labelPreviewRecord = $localize`:@@record.ariaLabelPreviewPublicRecord:Preview the public version of this record (Opens in a new tab)`
   $destroy: Subject<boolean> = new Subject<boolean>()
   labelPreviewPublicRecord = $localize`:@@record.ariaLabelpreviewPublicRecord:Preview the public version of this record (Opens in a new tab)`
-  environment = environment
+  environment = runtimeEnvironment
   @Input() id: string
   @Input() privateView = true
   platform: PlatformInfo

@@ -7,7 +7,7 @@ import {
   UserRecord,
   UserRecordOptions,
 } from 'src/app/types/record.local'
-import { environment } from 'src/environments/environment'
+
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { setProfessionalEmails } from '../utils'
 

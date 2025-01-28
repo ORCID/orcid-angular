@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core'
 import { Meta, Title } from '@angular/platform-browser'
 import { NamesEndPoint } from 'src/app/types/record-name.endpoint'
 import { UserRecord } from 'src/app/types/record.local'
-import { environment } from 'src/environments/environment'
 import { TitleService } from '../title-service/title.service'
 
 @Injectable({

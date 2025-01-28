@@ -133,13 +133,7 @@
               "src/styles.scss",
               "src/assets/scss/grid.scss"
             ],
-            "scripts": ["src/assets/local-dev-environment.js"],
-            "fileReplacements": [
-              {
-                "replace": "src/environments/environment.ts",
-                "with": "src/environments/environment.local.ts"
-              }
-            ]
+            "scripts": ["src/assets/runtime-environment.js"]
           },
           "configurations": {
             "local": {
@@ -172,12 +166,6 @@
                   "type": "anyComponentStyle",
                   "maximumWarning": "6kb"
                 }
-              ],
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local-with-proxy.ts"
-                }
               ]
             },
             "local-with-proxy-localize-en": {
@@ -195,52 +183,22 @@
                   "type": "anyComponentStyle",
                   "maximumWarning": "6kb"
                 }
-              ],
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local-with-proxy.ts"
-                }
               ]
             },
             "local-with-proxy-localize-fr": {
-              "localize": ["fr"],
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local-with-proxy.ts"
-                }
-              ]
+              "localize": ["fr"]
             },
             "local-with-proxy-localize-ar": {
-              "localize": ["ar"],
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local-with-proxy.ts"
-                }
-              ]
+              "localize": ["ar"]
             },
             "local-with-proxy-localize-xx": {
-              "localize": ["xx"],
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local-with-proxy.ts"
-                }
-              ]
+              "localize": ["xx"]
             },
             "production": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "6kb"
-                }
-              ],
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.production.ts"
                 }
               ]
             },
@@ -412,7 +370,7 @@
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
-            "scripts": ["src/assets/local-dev-environment.js"],
+            "scripts": ["src/assets/runtime-environment.js"],
             "assets": ["src/favicon.ico", "src/assets", "src/manifest.json"],
             "sourceMap": true
           }

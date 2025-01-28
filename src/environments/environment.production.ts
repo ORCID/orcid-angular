@@ -1,4 +1,4 @@
-import { EnvironmentInterface } from './global-environment'
+import { EnvironmentInterface } from '.'
 
 export const environment: EnvironmentInterface = {
   production: true,

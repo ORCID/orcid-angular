@@ -1,6 +1,6 @@
 import { Component, Inject, Input, OnInit } from '@angular/core'
 import { UserService } from 'src/app/core'
-import { environment } from 'src/environments/environment'
+
 import { WINDOW } from '../../../cdk/window'
 
 @Component({

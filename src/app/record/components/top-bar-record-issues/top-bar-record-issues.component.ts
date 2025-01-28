@@ -3,7 +3,7 @@ import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { RecordService } from 'src/app/core/record/record.service'
 import { UserInfo } from 'src/app/types'
-import { environment } from 'src/environments/environment'
+
 
 @Component({
   selector: 'app-top-bar-record-issues',

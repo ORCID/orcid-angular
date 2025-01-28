@@ -2,9 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { catchError, retry } from 'rxjs/operators'
-import { ERROR_REPORT } from 'src/app/errors'
 import { AccountTrustedOrganization } from 'src/app/types/account-trusted-organizations'
-import { environment } from 'src/environments/environment'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
 @Injectable({

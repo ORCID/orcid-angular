@@ -7,7 +7,6 @@ import {
   SideBarPublicUserRecord,
   UserRecordOptions,
 } from 'src/app/types/record.local'
-import { environment } from 'src/environments/environment'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { RecordPublicSideBarService } from '../record-public-side-bar/record-public-side-bar.service'
 

@@ -16,7 +16,7 @@ import { RecordService } from 'src/app/core/record/record.service'
 import { RecordUtil } from 'src/app/shared/utils/record.util'
 import { Assertion, UserInfo } from 'src/app/types'
 import { UserRecord } from 'src/app/types/record.local'
-import { environment } from 'src/environments/environment'
+
 
 @Component({
   selector: 'app-record-header',
@@ -53,7 +53,7 @@ export class RecordHeaderComponent implements OnInit {
   recordWithIssues: boolean
   userRecord: UserRecord
   userInfo: UserInfo
-  environment = environment
+  environment = runtimeEnvironment
   givenNames = ''
   familyName = ''
   creditName = ''

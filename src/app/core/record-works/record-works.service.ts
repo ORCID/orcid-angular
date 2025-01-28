@@ -25,7 +25,7 @@ import {
   WorkIdTypeValidation,
   _LEGACY_ContributionRoles,
 } from 'src/app/types/works.endpoint'
-import { environment } from 'src/environments/environment'
+
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { VisibilityStrings } from '../../types/common.endpoint'

@@ -5,7 +5,6 @@ import { takeUntil } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { TrustedIndividualsService } from 'src/app/core/trusted-individuals/trusted-individuals.service'
 import { TrustedIndividuals } from 'src/app/types/trusted-individuals.endpoint'
-import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-settings-users-that-thrust-you',

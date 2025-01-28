@@ -2,7 +2,6 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core'
 import { take } from 'rxjs/operators'
 import { UserService } from 'src/app/core'
 import { UserSession } from 'src/app/types/session.local'
-import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-settings-sharing-html-code',

@@ -8,7 +8,7 @@ import { RouterTestingModule } from '@angular/router/testing'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW_PROVIDERS } from 'src/app/cdk/window'
 import { LOCALE_ID } from '@angular/core'
-import { environment } from 'src/environments/environment'
+
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 

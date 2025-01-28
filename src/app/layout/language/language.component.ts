@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, LOCALE_ID } from '@angular/core'
-import { environment } from 'src/environments/environment'
+
 import { WINDOW } from 'src/app/cdk/window'
 import { LanguageService } from 'src/app/core/language/language.service'
 

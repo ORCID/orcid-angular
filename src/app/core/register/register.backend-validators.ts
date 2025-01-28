@@ -7,7 +7,7 @@ import {
 import { RegisterForm } from 'src/app/types/register.endpoint'
 import { Constructor } from 'src/app/types'
 import { Observable, of } from 'rxjs'
-import { environment } from 'src/environments/environment'
+
 import { retry, catchError, map } from 'rxjs/operators'
 import { HttpClient } from '@angular/common/http'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'

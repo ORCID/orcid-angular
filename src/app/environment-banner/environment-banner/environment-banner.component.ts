@@ -22,7 +22,8 @@ export class EnvironmentBannerComponent implements OnInit {
     this.hostUrl = window.location.host
     if (
       (!this._cookieService.get('testWarningCookie') || !this.canDismiss) &&
-      this.notInsideIframe
+      this.notInsideIframe &&
+      runtimeEnvironment.SHOW_TEST_WARNING_BANNER 
     ) {
       this.display = 'auto'
     }

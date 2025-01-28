@@ -5,7 +5,7 @@ import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { UserInfo } from 'src/app/types'
 import { UserRecordOptions } from 'src/app/types/record.local'
-import { environment } from 'src/environments/environment'
+
 import { Router } from '@angular/router'
 import { PlatformInfo, PlatformInfoService } from '../../cdk/platform-info'
 

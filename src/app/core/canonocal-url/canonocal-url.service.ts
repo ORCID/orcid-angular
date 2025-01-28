@@ -3,7 +3,6 @@ import { Inject, Injectable } from '@angular/core'
 import { NavigationEnd, Router } from '@angular/router'
 import { filter, map } from 'rxjs/operators'
 import { ORCID_REGEXP } from 'src/app/constants'
-import { environment } from 'src/environments/environment'
 
 @Injectable({
   providedIn: 'root',

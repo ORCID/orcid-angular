@@ -5,7 +5,6 @@ import { Client } from 'src/app/types/developer-tools'
 import { Observable } from 'rxjs'
 import { retry, catchError } from 'rxjs/operators'
 import { ERROR_REPORT } from 'src/app/errors'
-import { environment } from 'src/environments/environment'
 
 @Injectable({
   providedIn: 'root',

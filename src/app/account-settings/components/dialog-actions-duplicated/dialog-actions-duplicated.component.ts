@@ -5,8 +5,6 @@ import {
 } from '@angular/material/legacy-dialog'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { DuplicateRemoveEndpoint } from 'src/app/types/account-actions-duplicated'
-import { environment } from 'src/environments/environment'
-
 @Component({
   selector: 'app-dialog-actions-duplicated',
   templateUrl: './dialog-actions-duplicated.component.html',

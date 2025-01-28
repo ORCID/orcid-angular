@@ -19,7 +19,6 @@ import {
 } from 'src/app/types'
 import { CountriesEndpoint } from 'src/app/types/record-country.endpoint'
 import { UserRecord, UserRecordOptions } from 'src/app/types/record.local'
-import { environment } from 'src/environments/environment'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { RecordCountriesService } from '../record-countries/record-countries.service'

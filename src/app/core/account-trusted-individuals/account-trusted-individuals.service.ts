@@ -10,7 +10,6 @@ import {
   AccountTrustedIndividual,
   PersonDetails,
 } from 'src/app/types/account-trusted-individuals'
-import { environment } from 'src/environments/environment'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
