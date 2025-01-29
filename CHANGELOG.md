@@ -1,3 +1,9 @@
+## v2.110.7 - 2025-01-29
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.110.6...v2.110.7)
+
+- [#2459](https://github.com/ORCID/orcid-angular/pull/2459): 9597-restore-report-work-type-to-work-type-menu
+
 ## v2.110.6 - 2025-01-29
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.110.5...v2.110.6)
