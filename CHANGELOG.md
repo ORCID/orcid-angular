@@ -1,3 +1,9 @@
+## v2.110.5 - 2025-01-29
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.110.4...v2.110.5)
+
+- [#2457](https://github.com/ORCID/orcid-angular/pull/2457): 9591-empty-record-message-heading
+
 ## v2.110.4 - 2025-01-28
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.110.3...v2.110.4)
