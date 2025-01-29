@@ -1,3 +1,9 @@
+## v2.110.6 - 2025-01-29
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.110.5...v2.110.6)
+
+- [#2458](https://github.com/ORCID/orcid-angular/pull/2458): 9607-qa-zooming-and-scaling-must-not-be-disabled
+
 ## v2.110.5 - 2025-01-29
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.110.4...v2.110.5)
