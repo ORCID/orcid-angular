@@ -168,6 +168,13 @@ const routes: Routes = [
       import('./developer-tools/developer-tools.module').then(
         (m) => m.DeveloperToolsModule
       ),
+  },  
+  {
+    path: '404',
+    loadChildren: () =>
+      import('./page-not-found-404/page-not-found-404.module').then(
+        (m) => m.PageNotFound404Module
+      ),
   },
   {
     path: '**',
