@@ -1,3 +1,9 @@
+## v2.110.8 - 2025-01-30
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.110.7...v2.110.8)
+
+- [#2460](https://github.com/ORCID/orcid-angular/pull/2460): 404-fixes
+
 ## v2.110.7 - 2025-01-29
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.110.6...v2.110.7)
