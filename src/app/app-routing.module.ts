@@ -168,7 +168,7 @@ const routes: Routes = [
       import('./developer-tools/developer-tools.module').then(
         (m) => m.DeveloperToolsModule
       ),
-  },  
+  },
   {
     path: '404',
     loadChildren: () =>
