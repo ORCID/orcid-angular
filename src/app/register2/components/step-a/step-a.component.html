@@ -13,11 +13,13 @@
           Create your ORCID iD
         </h1>
       </ng-container>
-      <ng-container
-        *ngIf="reactivation?.isReactivation"
-        i18n="@@register.reactivation"
-      >
-        Thank you for reactivating your ORCID iD.
+      <ng-container *ngIf="reactivation?.isReactivation">
+        <h1
+          class="orc-font-heading-small"
+          i18n="@@register.reactivateYourOrcidAccount"
+        >
+          Reactivate your ORCID account
+        </h1>
       </ng-container>
     </mat-card-title>
     <mat-card-subtitle role="heading" aria-level="2">
@@ -71,7 +73,16 @@
           type="button"
           id="step-a-back-button"
         >
-          <a i18n="@@register.cancelRegistration"> Cancel registration</a>
+          <a
+            i18n="@@register.cancelRegistration"
+            *ngIf="!reactivation?.isReactivation"
+            >Cancel registration</a
+          >
+          <a
+            i18n="@@register.cancelReactivation"
+            *ngIf="reactivation?.isReactivation"
+            >Cancel reactivation</a
+          >
         </button>
       </div>
     </form>
