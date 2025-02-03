@@ -94,8 +94,12 @@ export class UserService {
   }>()
 
   public getUserStatus(): Observable<boolean> {
-    return this._http
-      .get<UserStatus>('https://auth.dev.orcid.org/userInfo.json', {
+	// CODE TO SIGN IN WITH THE OAUTH APP
+	let url = 'https://auth.dev.orcid.org/userStatus.json'
+	// CODE TO SIGN IN WITH THE REGISTRY
+  // let url = environment.API_WEB + 'userStatus.json'
+	return this._http
+      .get<UserStatus>(url, {
         withCredentials: true,
       })
       .pipe(map((response) => !!response.loggedIn))

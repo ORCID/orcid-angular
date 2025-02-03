@@ -26,6 +26,14 @@ export class UserInfoService {
   public getUserInfo(options?: UserRecordOptions): Observable<UserInfo> {
     return this._http
       .get<UserInfo>(
+		  // CODE TO SIGN IN WITH THE REGISTRY 
+		  /*
+      environment.API_WEB +
+          (options?.publicRecordId ? options.publicRecordId + '/' : '') +
+          'userInfo.json',
+          */
+		
+		  // CODE TO SIGN IN WITH THE AUTH SERVER 
         'https://auth.dev.orcid.org/userInfo.json',
         {
           withCredentials: true,

@@ -34,20 +34,60 @@ export class SignInService {
     updateUserSession = true,
     forceSessionUpdate = false
   ) {
-    let loginUrl = 'https://auth.dev.orcid.org/login'
+  
+	// FOR AUTH SERVER SIGN IN
+  let loginUrl = 'https://auth.dev.orcid.org/login'
 
+	// FOR REGISTRY SIGN IN
+	// let loginUrl = 'signin/auth.json'
+
+    
+  if (signInLocal.type && signInLocal.type === TypeSignIn.institutional) {
+    loginUrl = 'shibboleth/signin/auth.json'
+  }
+
+  if (signInLocal.type && signInLocal.type === TypeSignIn.social) {
+    loginUrl = 'social/signin/auth.json'
+  }    
+	
+	
+	//CODE TO SIGN IN WITH THE AUTH SERVER
+  let body = new HttpParams({ encoder: new CustomEncoder() })
+    .set('username', getOrcidNumber(signInLocal.data.username))
+    .set('password', signInLocal.data.password)
+  if (signInLocal.data.verificationCode) {
+    body = body.set('verificationCode', signInLocal.data.verificationCode)
+  }
+  if (signInLocal.data.recoveryCode) {
+    body = body.set('recoveryCode', signInLocal.data.recoveryCode)
+  }
+  body = body.set('oauthRequest', signInLocal.isOauth ? 'true' : 'false')
+  return this._http
+    .post<SignIn>(loginUrl, body, {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': 'https://dev.orcid.org',
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }),
+      withCredentials: true,
+    })
+    .pipe(
+      retry(3),
+      catchError((error) => this._errorHandler.handleError(error)),
+      switchMap((response) => {
+        // call refreshUserSession with force session update to handle register actions from sessions with a logged in user
+        return this._userService
+          .refreshUserSession(forceSessionUpdate, true)
+          .pipe(
+            first(),
+            map(() => response)
+          )
+      })
+    )	  
+	  
+	  // CODE TO SIGN IN WITH THE REGISTRY
     /*
-	UNCOMMENT THIS!!!
-    if (signInLocal.type && signInLocal.type === TypeSignIn.institutional) {
-      loginUrl = 'shibboleth/signin/auth.json'
-    }
-
-    if (signInLocal.type && signInLocal.type === TypeSignIn.social) {
-      loginUrl = 'social/signin/auth.json'
-    }
-    */
     let body = new HttpParams({ encoder: new CustomEncoder() })
-      .set('username', getOrcidNumber(signInLocal.data.username))
+      .set('userId', getOrcidNumber(signInLocal.data.username))
       .set('password', signInLocal.data.password)
     if (signInLocal.data.verificationCode) {
       body = body.set('verificationCode', signInLocal.data.verificationCode)
@@ -57,11 +97,7 @@ export class SignInService {
     }
     body = body.set('oauthRequest', signInLocal.isOauth ? 'true' : 'false')
     return this._http
-      .post<SignIn>(loginUrl, body, {
-        headers: new HttpHeaders({
-          'Access-Control-Allow-Origin': 'https://dev.orcid.org',
-		  'Content-Type': 'application/x-www-form-urlencoded'
-        }),
+      .post<SignIn>(environment.API_WEB + loginUrl, body, {
         withCredentials: true,
       })
       .pipe(
@@ -77,6 +113,7 @@ export class SignInService {
             )
         })
       )
+        */
   }
 
   reactivation(username: string) {
