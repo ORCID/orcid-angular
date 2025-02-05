@@ -16,7 +16,6 @@ import {
 } from '@angular/core'
 import { WINDOW } from '../window'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
-import { environment } from 'src/environments/environment'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 
 export interface ReCaptchaConfig {
@@ -65,7 +64,7 @@ export class RecaptchaDirective implements OnInit, ControlValueAccessor {
   registerReCaptchaCallback() {
     this.window.orcidReCaptchaOnLoad = () => {
       const config = {
-        sitekey: environment.GOOGLE_RECAPTCHA,
+        sitekey: runtimeEnvironment.GOOGLE_RECAPTCHA,
         callback: (response: string) => {
           this.ngZone.run(() => this.onSuccess(response))
         },

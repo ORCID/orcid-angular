@@ -29,7 +29,7 @@ import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { HelpHeroService } from 'src/app/core/help-hero/help-hero.service'
 import { ScriptService } from '../../../core/crazy-egg/script.service'
 import { DOCUMENT, Location } from '@angular/common'
-import { environment } from 'src/environments/environment'
+
 import { filter, map } from 'rxjs/operators'
 import { CanonocalUrlService } from 'src/app/core/canonocal-url/canonocal-url.service'
 import { RecordUtil } from 'src/app/shared/utils/record.util'

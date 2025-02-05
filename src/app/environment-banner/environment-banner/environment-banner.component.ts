@@ -1,7 +1,6 @@
 import { Component, OnInit, Inject, HostBinding } from '@angular/core'
 import { CookieService } from 'ngx-cookie-service'
 import { WINDOW } from 'src/app/cdk/window'
-import { environment } from '../../../environments/environment'
 
 @Component({
   selector: 'app-environment-banner',
@@ -11,7 +10,7 @@ import { environment } from '../../../environments/environment'
 })
 export class EnvironmentBannerComponent implements OnInit {
   hostUrl
-  canDismiss = environment['CAN_DISABLE_TEST_WARNING_BANNER']
+  canDismiss = runtimeEnvironment['CAN_DISABLE_TEST_WARNING_BANNER']
   @HostBinding('style.display') display = 'none'
   labelWarning = $localize`:@@environmentBanner.ariaLabelWarning:Warning, testing website`
   notInsideIframe: boolean
@@ -23,7 +22,8 @@ export class EnvironmentBannerComponent implements OnInit {
     this.hostUrl = window.location.host
     if (
       (!this._cookieService.get('testWarningCookie') || !this.canDismiss) &&
-      this.notInsideIframe
+      this.notInsideIframe &&
+      runtimeEnvironment.SHOW_TEST_WARNING_BANNER 
     ) {
       this.display = 'auto'
     }

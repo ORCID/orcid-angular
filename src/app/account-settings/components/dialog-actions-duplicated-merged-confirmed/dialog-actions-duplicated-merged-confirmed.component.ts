@@ -4,8 +4,6 @@ import {
   MatLegacyDialogRef as MatDialogRef,
 } from '@angular/material/legacy-dialog'
 import { DuplicateRemoveEndpoint } from 'src/app/types/account-actions-duplicated'
-import { environment } from 'src/environments/environment'
-
 @Component({
   selector: 'app-dialog-actions-duplicated-merged-confirmed',
   templateUrl: './dialog-actions-duplicated-merged-confirmed.component.html',
@@ -13,7 +11,7 @@ import { environment } from 'src/environments/environment'
   preserveWhitespaces: true,
 })
 export class DialogActionsDuplicatedMergedConfirmedComponent implements OnInit {
-  baseUrl = environment.BASE_URL
+  baseUrl = runtimeEnvironment.BASE_URL
 
   constructor(
     private matRef: MatDialogRef<DialogActionsDuplicatedMergedConfirmedComponent>,

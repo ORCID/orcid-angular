@@ -1,4 +1,5 @@
-export const environment = {
+import { EnvironmentInterface } from "./interface";
+export const environment: EnvironmentInterface = {
   production: true,
   debugger: true,
   ROBOTS: 'noindex, nofollow',
@@ -42,4 +43,5 @@ export const environment = {
     ca: '** Catalan',
   },
   proxyMode: false,
+  NEW_RELIC_APP: '772335828',
 }

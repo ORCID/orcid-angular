@@ -9,7 +9,6 @@ import {
   SocialAccountId,
 } from 'src/app/types/account-alternate-sign-in.endpoint'
 import { Institutional } from 'src/app/types/institutional.endpoint'
-import { environment } from 'src/environments/environment'
 
 import { DiscoService } from '../disco/disco.service'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
@@ -30,7 +29,7 @@ export class AccountSecurityAlternateSignInService {
   get(): Observable<SocialAccount[]> {
     return this._http
       .get<SocialAccount[]>(
-        environment.API_WEB + `account/socialAccounts.json`,
+        runtimeEnvironment.API_WEB + `account/socialAccounts.json`,
         {
           headers: this.headers,
         }
@@ -69,7 +68,7 @@ export class AccountSecurityAlternateSignInService {
   delete(idToManage: SocialAccountId): Observable<SocialAccountDeleteResponse> {
     return this._http
       .post<SocialAccountDeleteResponse>(
-        environment.API_WEB + `account/revokeSocialAccount.json`,
+        runtimeEnvironment.API_WEB + `account/revokeSocialAccount.json`,
         { idToManage },
         {
           headers: this.headers,

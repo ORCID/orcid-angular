@@ -3,7 +3,7 @@ import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router'
 import { CookieService } from 'ngx-cookie-service'
 import { NEVER, Observable, of } from 'rxjs'
 import { catchError, switchMap, tap } from 'rxjs/operators'
-import { environment } from 'src/environments/environment'
+
 
 import { WINDOW } from '../cdk/window'
 import { UserService } from '../core'
@@ -35,7 +35,7 @@ export class LanguageGuard {
         // get language context
         langContext = this.getLanguageContext(next.queryParams)
 
-        if (environment.debugger) {
+        if (runtimeEnvironment.debugger) {
           console.debug('language context', langContext)
         }
       }),

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs/internal/Observable'
-import { environment } from '../../../environments/environment'
+
 import {
   QrCode,
   Status,
@@ -26,12 +26,14 @@ export class TwoFactorAuthenticationService {
   ) {}
 
   checkState(): Observable<Status> {
-    return this._http.get<Status>(environment.BASE_URL + '2FA/status.json')
+    return this._http.get<Status>(
+      runtimeEnvironment.BASE_URL + '2FA/status.json'
+    )
   }
 
   disable(): Observable<Status> {
     return this._http.post<Status>(
-      environment.BASE_URL + '2FA/disable.json',
+      runtimeEnvironment.BASE_URL + '2FA/disable.json',
       {},
       { headers: this.headers }
     )
@@ -39,17 +41,19 @@ export class TwoFactorAuthenticationService {
 
   getTextCode(): Observable<{ secret: string }> {
     return this._http.get<{ secret: string }>(
-      environment.BASE_URL + '2FA/secret.json'
+      runtimeEnvironment.BASE_URL + '2FA/secret.json'
     )
   }
 
   startSetup(): Observable<QrCode> {
-    return this._http.get<QrCode>(environment.BASE_URL + '2FA/QRCode.json')
+    return this._http.get<QrCode>(
+      runtimeEnvironment.BASE_URL + '2FA/QRCode.json'
+    )
   }
 
   register(obj): Observable<TwoFactorSetup> {
     return this._http.post<TwoFactorSetup>(
-      environment.BASE_URL + '2FA/register.json',
+      runtimeEnvironment.BASE_URL + '2FA/register.json',
       JSON.stringify(obj),
       { headers: this.headers }
     )
@@ -57,7 +61,7 @@ export class TwoFactorAuthenticationService {
 
   sendVerificationCode(obj): Observable<TwoFactor> {
     return this._http.post<TwoFactor>(
-      environment.BASE_URL + '2FA/QRCode.json',
+      runtimeEnvironment.BASE_URL + '2FA/QRCode.json',
       JSON.stringify(obj),
       { headers: this.headers }
     )
@@ -69,7 +73,7 @@ export class TwoFactorAuthenticationService {
       url = 'social/2FA/submitCode.json'
     }
     return this._http
-      .post<TwoFactor>(environment.BASE_URL + url, twoFactor, {
+      .post<TwoFactor>(runtimeEnvironment.BASE_URL + url, twoFactor, {
         headers: this.headers,
       })
       .pipe(
@@ -82,9 +86,13 @@ export class TwoFactorAuthenticationService {
 
   submitCodeForAnotherAccount(code: TwoFactor) {
     return this._http
-      .post<TwoFactor>(environment.BASE_URL + `2FA/submitCode.json`, code, {
-        headers: this.headers,
-      })
+      .post<TwoFactor>(
+        runtimeEnvironment.BASE_URL + `2FA/submitCode.json`,
+        code,
+        {
+          headers: this.headers,
+        }
+      )
       .pipe(
         retry(3),
         catchError((error) =>

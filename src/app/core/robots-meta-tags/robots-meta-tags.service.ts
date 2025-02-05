@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { Meta } from '@angular/platform-browser'
-import { environment } from 'src/environments/environment'
+
 
 @Injectable({
   providedIn: 'root',
@@ -19,8 +19,11 @@ export class RobotsMetaTagsService {
     })
   }
   restoreEnvironmentRobotsConfig() {
-    if (environment.ROBOTS) {
-      this.meta.updateTag({ name: this.robots, content: environment.ROBOTS })
+    if (runtimeEnvironment.ROBOTS) {
+      this.meta.updateTag({
+        name: this.robots,
+        content: runtimeEnvironment.ROBOTS,
+      })
     } else {
       // If not defined by the environment do not allow robots
       this.meta.updateTag({

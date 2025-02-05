@@ -27,7 +27,6 @@ import { SearchService } from 'src/app/core/search/search.service'
 import { ExpandedSearchResultsContent, SearchResults } from 'src/app/types'
 import { AccountTrustedIndividual } from 'src/app/types/account-trusted-individuals'
 import { UserSession } from 'src/app/types/session.local'
-import { environment } from 'src/environments/environment'
 import { DialogAddTrustedIndividualsYourOwnEmailComponent } from '../dialog-add-trusted-individuals-your-own-email/dialog-add-trusted-individuals-your-own-email.component'
 import { DialogAddTrustedIndividualsComponent } from '../dialog-add-trusted-individuals/dialog-add-trusted-individuals.component'
 
@@ -52,7 +51,7 @@ export class SettingsTrustedIndividualsSearchComponent
   pageSize: number
   ariaLabelPaginator = $localize`:@@search.paginator:paginator`
   loading: boolean
-  baseUrl = environment.BASE_URL
+  baseUrl = runtimeEnvironment.BASE_URL
   userSession: UserSession
   searchPlaceHolder = $localize`:@@account.searchIndividualsPlaceHolder:ORCID iD, email address, or names`
   trustedIndividuals: AccountTrustedIndividual[]

@@ -1,4 +1,6 @@
-export const environment = {
+import { EnvironmentInterface } from "./interface";
+
+export const environment: EnvironmentInterface = {
   production: true,
   debugger: false,
   ROBOTS: 'all',
@@ -35,5 +37,6 @@ export const environment = {
     'zh-CN': '简体中文',
     'zh-TW': '繁體中文',
   },
-  proxyMode: false,
+  proxyMode: null,
+  CAN_DISABLE_TEST_WARNING_BANNER: null,
 }

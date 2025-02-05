@@ -2,7 +2,6 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core'
 import { take } from 'rxjs/operators'
 import { UserService } from 'src/app/core'
 import { UserSession } from 'src/app/types/session.local'
-import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-settings-sharing-html-code',
@@ -12,7 +11,7 @@ import { environment } from 'src/environments/environment'
 export class SettingsSharingHtmlCodeComponent implements OnInit {
   @Output() loading = new EventEmitter<boolean>()
   userSession: UserSession
-  baseUrl = environment.BASE_URL
+  baseUrl = runtimeEnvironment.BASE_URL
 
   constructor(private _user: UserService) {}
 

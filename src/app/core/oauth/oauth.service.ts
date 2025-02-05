@@ -18,7 +18,6 @@ import { OauthParameters, RequestInfoForm } from 'src/app/types'
 import { OauthAuthorize } from 'src/app/types/authorize.endpoint'
 import { UserSessionUpdateParameters } from 'src/app/types/session.local'
 
-import { environment } from '../../../environments/environment'
 import { SignInData } from '../../types/sign-in-data.endpoint'
 import { TwoFactor } from '../../types/two-factor.endpoint'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
@@ -69,7 +68,7 @@ export class OauthService {
   loadRequestInfoForm(): Observable<RequestInfoForm> {
     return this._http
       .get<RequestInfoForm>(
-        environment.BASE_URL + 'oauth/custom/requestInfoForm.json',
+        runtimeEnvironment.BASE_URL + 'oauth/custom/requestInfoForm.json',
         { headers: this.headers }
       )
       .pipe(
@@ -94,7 +93,7 @@ export class OauthService {
     }
     return this._http
       .post<RequestInfoForm>(
-        environment.BASE_URL + 'oauth/custom/authorize.json',
+        runtimeEnvironment.BASE_URL + 'oauth/custom/authorize.json',
         value,
         { headers: this.headers, withCredentials: true }
       )
@@ -128,7 +127,7 @@ export class OauthService {
     ) {
       this.declareOauthSession$ = this._http
         .post<RequestInfoForm>(
-          environment.BASE_URL +
+          runtimeEnvironment.BASE_URL +
             `oauth/custom/init.json?${objectToUrlParameters(queryParameters)}`,
           queryParameters,
           { headers: this.headers }
@@ -193,9 +192,12 @@ export class OauthService {
 
   loadShibbolethSignInData(): Observable<SignInData> {
     return this._http
-      .get<SignInData>(environment.BASE_URL + 'shibboleth/signinData.json', {
-        headers: this.headers,
-      })
+      .get<SignInData>(
+        runtimeEnvironment.BASE_URL + 'shibboleth/signinData.json',
+        {
+          headers: this.headers,
+        }
+      )
       .pipe(
         retry(3),
         catchError((error) =>
@@ -206,7 +208,7 @@ export class OauthService {
 
   loadSocialSigninData(): Observable<SignInData> {
     return this._http
-      .get<SignInData>(environment.BASE_URL + 'social/signinData.json', {
+      .get<SignInData>(runtimeEnvironment.BASE_URL + 'social/signinData.json', {
         headers: this.headers,
       })
       .pipe(

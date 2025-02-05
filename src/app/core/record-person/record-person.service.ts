@@ -4,7 +4,7 @@ import { Observable, ReplaySubject } from 'rxjs'
 import { catchError, first, map, retry, switchMap, tap } from 'rxjs/operators'
 import { Person } from 'src/app/types'
 import { UserRecordOptions } from 'src/app/types/record.local'
-import { environment } from 'src/environments/environment'
+
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { UserService } from '../user/user.service'
@@ -80,7 +80,7 @@ export class RecordPersonService {
 
   private getPersonHttpCall(orcid: string): Observable<Person> {
     return this._http
-      .get<Person>(environment.API_WEB + `${orcid}/person.json`)
+      .get<Person>(runtimeEnvironment.API_WEB + `${orcid}/person.json`)
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))

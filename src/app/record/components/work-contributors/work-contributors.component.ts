@@ -24,7 +24,7 @@ import { takeUntil, tap } from 'rxjs/operators'
 import { PlatformInfoService } from '../../../cdk/platform-info'
 import { Subject } from 'rxjs'
 import { Contributor } from '../../../types'
-import { environment } from 'src/environments/environment'
+
 import { RecordWorksService } from '../../../core/record-works/record-works.service'
 import { RecordAffiliationService } from '../../../core/record-affiliations/record-affiliations.service'
 import { EmploymentsEndpoint } from '../../../types/record-affiliation.endpoint'
@@ -274,7 +274,11 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
       contributorOrcid: this.formBuilder.group({
         path: [orcid ? orcid : null],
         uri: [
-          uri ? uri : orcid ? `https:${environment.BASE_URL}${orcid}` : null,
+          uri
+            ? uri
+            : orcid
+            ? `https:${runtimeEnvironment.BASE_URL}${orcid}`
+            : null,
         ],
       }),
       roles: new UntypedFormArray([]),
@@ -394,7 +398,7 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
       : this.getCreditNameFromUserRecord()
     const uri = this.recordHolderContribution?.contributorOrcid?.uri
       ? this.recordHolderContribution?.contributorOrcid?.uri
-      : `https:${environment.BASE_URL}${orcid}`
+      : `https:${runtimeEnvironment.BASE_URL}${orcid}`
     // todo validate if its necessary
     if (!this.recordHolderContribution) {
       this.recordHolderContribution = {

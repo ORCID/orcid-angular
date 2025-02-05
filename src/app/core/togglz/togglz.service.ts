@@ -4,7 +4,7 @@ import { Observable, ReplaySubject } from 'rxjs'
 import { map, switchMapTo } from 'rxjs/operators'
 import { Config } from 'src/app/types/togglz.endpoint'
 import { MaintenanceMessage } from 'src/app/types/togglz.local'
-import { environment } from 'src/environments/environment'
+
 
 import { UserService } from '..'
 
@@ -16,7 +16,7 @@ export class TogglzService {
   constructor(private _http: HttpClient, private userService: UserService) {}
 
   private getConfig() {
-    return this._http.get<Config>(environment.API_WEB + 'config.json', {
+    return this._http.get<Config>(runtimeEnvironment.API_WEB + 'config.json', {
       withCredentials: true,
     })
   }

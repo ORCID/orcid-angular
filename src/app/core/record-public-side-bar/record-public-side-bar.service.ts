@@ -7,7 +7,7 @@ import {
   UserRecord,
   UserRecordOptions,
 } from 'src/app/types/record.local'
-import { environment } from 'src/environments/environment'
+
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { setProfessionalEmails } from '../utils'
 
@@ -47,7 +47,9 @@ export class RecordPublicSideBarService {
 
       return this._http
         .get<UserRecord>(
-          environment.API_WEB + options.publicRecordId + `/public-record.json`,
+          runtimeEnvironment.API_WEB +
+            options.publicRecordId +
+            `/public-record.json`,
           {
             headers: this.headers,
           }
