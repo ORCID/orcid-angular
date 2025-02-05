@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core'
 import { Meta } from '@angular/platform-browser'
 
-
 @Injectable({
   providedIn: 'root',
 })

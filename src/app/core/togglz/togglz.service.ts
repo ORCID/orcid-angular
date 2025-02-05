@@ -5,7 +5,6 @@ import { map, switchMapTo } from 'rxjs/operators'
 import { Config } from 'src/app/types/togglz.endpoint'
 import { MaintenanceMessage } from 'src/app/types/togglz.local'
 
-
 import { UserService } from '..'
 
 @Injectable({

@@ -5,7 +5,6 @@ import { RecordService } from 'src/app/core/record/record.service'
 import { RecordUtil as RecordUtil } from 'src/app/shared/utils/record.util'
 import { UserInfo } from 'src/app/types'
 
-
 @Component({
   selector: 'app-record-info',
   templateUrl: './record-info.component.html',

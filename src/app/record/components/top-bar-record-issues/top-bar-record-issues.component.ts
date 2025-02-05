@@ -4,7 +4,6 @@ import { takeUntil } from 'rxjs/operators'
 import { RecordService } from 'src/app/core/record/record.service'
 import { UserInfo } from 'src/app/types'
 
-
 @Component({
   selector: 'app-top-bar-record-issues',
   templateUrl: './top-bar-record-issues.component.html',

@@ -4,7 +4,6 @@ import { CookieService } from 'ngx-cookie-service'
 import { NEVER, Observable, of } from 'rxjs'
 import { catchError, switchMap, tap } from 'rxjs/operators'
 
-
 import { WINDOW } from '../cdk/window'
 import { UserService } from '../core'
 import { ErrorHandlerService } from '../core/error-handler/error-handler.service'

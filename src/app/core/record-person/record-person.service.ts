@@ -5,7 +5,6 @@ import { catchError, first, map, retry, switchMap, tap } from 'rxjs/operators'
 import { Person } from 'src/app/types'
 import { UserRecordOptions } from 'src/app/types/record.local'
 
-
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { UserService } from '../user/user.service'
 

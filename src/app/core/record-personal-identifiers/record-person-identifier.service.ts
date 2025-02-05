@@ -5,7 +5,6 @@ import { catchError, map, retry, switchMap, tap } from 'rxjs/operators'
 import { PersonIdentifierEndpoint } from 'src/app/types/record-person-identifier.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
 
-
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { RecordPersonService } from '../record-person/record-person.service'
 import { RecordPublicSideBarService } from '../record-public-side-bar/record-public-side-bar.service'

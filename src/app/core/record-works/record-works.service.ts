@@ -26,7 +26,6 @@ import {
   _LEGACY_ContributionRoles,
 } from 'src/app/types/works.endpoint'
 
-
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { VisibilityStrings } from '../../types/common.endpoint'
 import { DEFAULT_PAGE_SIZE, EXTERNAL_ID_TYPE_WORK } from 'src/app/constants'

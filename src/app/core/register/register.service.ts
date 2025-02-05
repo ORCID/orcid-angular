@@ -11,7 +11,6 @@ import {
   RegisterForm,
 } from 'src/app/types/register.endpoint'
 
-
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { UserService } from '../user/user.service'
 import { RegisterBackendValidatorMixin } from './register.backend-validators'

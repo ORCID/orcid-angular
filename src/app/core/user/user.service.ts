@@ -41,7 +41,6 @@ import {
 import { ThirdPartyAuthData } from 'src/app/types/sign-in-data.endpoint'
 import { Delegator } from 'src/app/types/trusted-individuals.endpoint'
 
-
 import { UserStatus } from '../../types/userStatus.endpoint'
 import { DiscoService } from '../disco/disco.service'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'

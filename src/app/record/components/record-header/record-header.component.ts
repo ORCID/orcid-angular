@@ -17,7 +17,6 @@ import { RecordUtil } from 'src/app/shared/utils/record.util'
 import { Assertion, UserInfo } from 'src/app/types'
 import { UserRecord } from 'src/app/types/record.local'
 
-
 @Component({
   selector: 'app-record-header',
   templateUrl: './record-header.component.html',

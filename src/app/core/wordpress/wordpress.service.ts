@@ -3,7 +3,6 @@ import { Inject, Injectable, LOCALE_ID } from '@angular/core'
 import { Observable, of } from 'rxjs'
 import { catchError, map } from 'rxjs/operators'
 
-
 @Injectable({
   providedIn: 'root',
 })

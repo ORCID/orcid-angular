@@ -9,7 +9,6 @@ import {
 import { ErrorStateMatcher } from '@angular/material/core'
 import { RegisterService } from 'src/app/core/register/register.service'
 
-
 import { BaseForm } from '../BaseForm'
 
 @Component({
