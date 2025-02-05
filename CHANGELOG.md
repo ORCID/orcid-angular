@@ -1,3 +1,9 @@
+## v2.111.2 - 2025-02-05
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.1...v2.111.2)
+
+- [#2439](https://github.com/ORCID/orcid-angular/pull/2439): 9562 implement dynamic environment variable loading for single artifact deployment
+
 ## v2.111.1 - 2025-02-05
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.0...v2.111.1)
