@@ -1,3 +1,51 @@
+## v2.111.1 - 2025-02-05
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.0...v2.111.1)
+
+## v2.111.0 - 2025-02-05
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.110.10...v2.111.0)
+
+## v2.110.10 - 2025-02-05
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.110.9...v2.110.10)
+
+## v2.110.9 - 2025-01-30
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.110.8...v2.110.9)
+
+- [#2461](https://github.com/ORCID/orcid-angular/pull/2461): 404 index
+
+## v2.110.8 - 2025-01-30
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.110.7...v2.110.8)
+
+- [#2460](https://github.com/ORCID/orcid-angular/pull/2460): 404-fixes
+
+## v2.110.7 - 2025-01-29
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.110.6...v2.110.7)
+
+- [#2459](https://github.com/ORCID/orcid-angular/pull/2459): 9597-restore-report-work-type-to-work-type-menu
+
+## v2.110.6 - 2025-01-29
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.110.5...v2.110.6)
+
+- [#2458](https://github.com/ORCID/orcid-angular/pull/2458): 9607-qa-zooming-and-scaling-must-not-be-disabled
+
+## v2.110.5 - 2025-01-29
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.110.4...v2.110.5)
+
+- [#2457](https://github.com/ORCID/orcid-angular/pull/2457): 9591-empty-record-message-heading
+
+## v2.110.4 - 2025-01-28
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.110.3...v2.110.4)
+
+- [#2456](https://github.com/ORCID/orcid-angular/pull/2456): revert-UpdateGoogleKeys
+
 ## v2.110.3 - 2025-01-28
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.110.2...v2.110.3)

@@ -170,6 +170,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: '404',
+    loadChildren: () =>
+      import('./page-not-found-404/page-not-found-404.module').then(
+        (m) => m.PageNotFound404Module
+      ),
+  },
+  {
     path: '**',
     loadChildren: () =>
       import('./page-not-found-404/page-not-found-404.module').then(
