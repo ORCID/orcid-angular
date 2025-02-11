@@ -7,8 +7,7 @@ export function buildInfo(indexHtml, options): string {
   } catch (err) {}
 
   const config = `
-<!--${options.languageCode}${
-    options.environment ? '-' + options.environment : ''
+<!--${options.languageCode} ''
   } ${new Date().toJSON()}-->
 ${
   gitInfo ? '<!--' + gitInfo.abbreviatedSha + '/' + gitInfo.lastTag + '-->' : ''
