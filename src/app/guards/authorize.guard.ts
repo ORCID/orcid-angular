@@ -46,13 +46,6 @@ export class AuthorizeGuard {
           if (oauthSession.error) {
             return of(true)
           } else if (
-            oauthSession &&
-            oauthSession.redirectUrl &&
-            oauthSession.responseType &&
-            oauthSession.redirectUrl.includes(oauthSession.responseType + '=')
-          ) {
-            return this.reportAlreadyAuthorize(oauthSession)
-          } else if (
             oauthSession.forceLogin ||
             !session.oauthSessionIsLoggedIn
           ) {
@@ -60,31 +53,6 @@ export class AuthorizeGuard {
           }
         }
         return of(true)
-      })
-    )
-  }
-
-  sendUserToRedirectURL(oauthSession: RequestInfoForm): Observable<boolean> {
-    this.window.location.href = oauthSession.redirectUrl
-    return NEVER
-  }
-
-  reportAlreadyAuthorize(request: RequestInfoForm) {
-    const analyticsReports: Observable<void>[] = []
-    analyticsReports.push(
-      this._googleTagManagerService.reportEvent(`Reauthorize`, request)
-    )
-
-    return forkJoin(analyticsReports).pipe(
-      catchError((err) => {
-        this._errorHandler.handleError(
-          err,
-          ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
-        )
-        return this.sendUserToRedirectURL(request)
-      }),
-      switchMap(() => {
-        return NEVER
       })
     )
   }
