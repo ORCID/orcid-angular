@@ -23,6 +23,7 @@ export interface EnvironmentInterface {
     [key: string]: string
   }
   proxyMode: boolean
+  ONE_TRUST: string
 }
 
 declare global {
