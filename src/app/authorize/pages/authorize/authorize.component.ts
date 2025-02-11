@@ -243,6 +243,7 @@ export class AuthorizeComponent {
     // 2. If the backend returned an error
     if (this.oauthSession && this.oauthSession.error) {
       this.showAuthorizationError = true
+      this.loading = false
       return
     }
 
