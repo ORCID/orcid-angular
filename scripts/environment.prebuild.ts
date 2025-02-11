@@ -10,7 +10,7 @@ ${runtimeEnvironmentScript()}`
 
   const outputPath = path.resolve(
     __dirname,
-    '../src/assets/runtime-environment.js'
+    '../scripts/environment.runtime.js'
   )
 
   fs.writeFileSync(outputPath, scriptContent, { encoding: 'utf8' })

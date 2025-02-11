@@ -11,7 +11,7 @@
     "start:xx": "ng serve --configuration=local-qa-xx --disable-host-check",
     "test": "npm run build-runtime-env && ng test",
     "test-headless": "npm run build-runtime-env && ng test --watch=false --browsers=ChromeHeadless",
-    "build-runtime-env": "ts-node -P scripts/tsconfig.json scripts/runtime-environment-setter.dev-runtime.ts",
+    "build-runtime-env": "ts-node -P scripts/tsconfig.json scripts/environment.prebuild.ts",
     "lint": "echo 'temporally disable Angular linter to until eslint update'",
     "e2e": "ng e2e",
     "prebuild": "rimraf dist && yarn build:i18n && yarn build:browserslist && npm run build-runtime-env",
