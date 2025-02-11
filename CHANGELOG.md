@@ -1,3 +1,9 @@
+## v2.111.4 - 2025-02-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.3...v2.111.4)
+
+- [#2464](https://github.com/ORCID/orcid-angular/pull/2464): one-trust-test
+
 ## v2.111.3 - 2025-02-10
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.2...v2.111.3)
