@@ -1,3 +1,9 @@
+## v2.111.5 - 2025-02-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.4...v2.111.5)
+
+- [#2465](https://github.com/ORCID/orcid-angular/pull/2465): Lmendoza/onetrust2
+
 ## v2.111.4 - 2025-02-11
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.3...v2.111.4)
