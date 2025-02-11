@@ -22,32 +22,44 @@ export class AuthorizeComponent {
   redirectUrl: string
 
   platform: PlatformInfo
-  showAuthorizationComponent: boolean
-  showAuthorizationError: boolean
-  showInterstital: boolean
-  originalEmailsBackendCopy: EmailsEndpoint
-  userHasPrivateDomains = false
-  oauthDomainsInterstitialEnabled: boolean
-  organizationName: string
-  domainInterstitialHasBeenViewed: boolean
-  userIsNotImpersonating: boolean
-  insidePopUpWindows: boolean
-  userHasPublicDomains: boolean
+  showAuthorizationComponent = false
+  showAuthorizationError = false
+  showInterstital = false
   loading = true
+
+  originalEmailsBackendCopy: EmailsEndpoint
+  oauthSession: any
+
+  organizationName: string
+
+  // Domain / Interstitial properties
+  hasPrivateDomains = false
+  hasPublicDomains = false
+  isOAuthDomainsInterstitialEnabled = false
+  hasDomainInterstitialBeenViewed = false
+
+  // User session properties
+  isNotImpersonating = false
+  insidePopUpWindows = false
+  redirectByReportAlreadyAuthorize = false
+
   constructor(
-    private _user: UserService,
-    private _platformInfo: PlatformInfoService,
-    private _recordEmails: RecordEmailsService,
-    private _togglz: TogglzService,
-    private _interstitials: InterstitialsService,
+    private userService: UserService,
+    private platformInfoService: PlatformInfoService,
+    private recordEmailsService: RecordEmailsService,
+    private togglzService: TogglzService,
+    private interstitialsService: InterstitialsService,
     @Inject(WINDOW) private window: Window,
-    private _googleTagManagerService: GoogleTagManagerService,
-    private _errorHandler: ErrorHandlerService
+    private googleTagManagerService: GoogleTagManagerService,
+    private errorHandlerService: ErrorHandlerService
   ) {}
 
-  ngOnInit() {
+  /**
+   * Lifecycle hook. Initiates data loading and handles session logic.
+   */
+  ngOnInit(): void {
     this.loading = true
-    this.insidePopUpWindows = this.window.opener !== null
+    this.insidePopUpWindows = !!this.window.opener
 
     forkJoin({
       userSession: this.loadUserSession(),
@@ -56,171 +68,218 @@ export class AuthorizeComponent {
       togglz: this.loadTogglzState(),
       emails: this.loadEmails(),
     }).subscribe(({ userSession }) => {
-      this.processUserSession(userSession)
+      this.handleUserSession(userSession)
     })
   }
 
-  userHasPublicEmails(value: EmailsEndpoint): any {
-    return !!value.emailDomains?.find(
-      (domain) => domain.visibility === 'PUBLIC'
-    )
-  }
-
-  userHasPrivateEmails(value: EmailsEndpoint): boolean {
-    return !!value.emailDomains?.find(
-      (domain) => domain.visibility !== 'PUBLIC'
-    )
-  }
-
-  handleRedirect(url: string) {
+  /**
+   * Called by template to handle final redirection.
+   */
+  handleRedirect(url: string): void {
     this.redirectUrl = url
-    if (url && this.userCanSeeInterstitial()) {
-      this.displayDomainInterstitial()
+    if (url && this.canShowDomainInterstitial()) {
+      this.showDomainInterstitial()
     } else {
       this.finishRedirect()
     }
   }
 
-  private displayDomainInterstitial() {
-    this.showAuthorizationComponent = false
-    this.showInterstital = true
-    this._interstitials
-      .setInterstitialsViewed('DOMAIN_INTERSTITIAL')
-      .subscribe()
-  }
+  /**
+   * Reports re-authorization to Google Tag Manager (async),
+   * then triggers a redirect after the report completes or on error.
+   */
+  reportReAuthorization(request: RequestInfoForm): void {
+    const analyticsReport: Observable<void> =
+      this.googleTagManagerService.reportEvent('Reauthorize', request)
 
-  private userCanSeeInterstitial(): boolean {
-    return (
-      this.userHasPrivateDomains &&
-      !this.userHasPublicDomains &&
-      this.oauthDomainsInterstitialEnabled &&
-      !this.domainInterstitialHasBeenViewed &&
-      this.userIsNotImpersonating &&
-      !this.insidePopUpWindows
-    )
-  }
-
-  reportAlreadyAuthorize(request: RequestInfoForm) {
-    const analyticsReports: Observable<void>[] = []
-    analyticsReports.push(
-      this._googleTagManagerService.reportEvent(`Reauthorize`, request)
-    )
-
-    return forkJoin(analyticsReports).subscribe(
-      () => {},
-      (error) => {
-        this._errorHandler.handleError(
+    forkJoin([analyticsReport]).subscribe({
+      next: () => {
+        // After successful reporting, proceed
+        this.finishRedirectObs(request)
+      },
+      error: (error) => {
+        // If error happens, handle it, then proceed
+        this.errorHandlerService.handleError(
           error,
           ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
         )
-        return this.finishRedirectObs(request)
-      }
-    )
+        this.finishRedirectObs(request)
+      },
+    })
   }
 
-  finishRedirect() {
-    ;(this.window as any).outOfRouterNavigation(this.redirectUrl)
+  /**
+   * Internal method to finalize redirection (non-observable variant).
+   */
+  finishRedirect(): void {
+    if (this.redirectByReportAlreadyAuthorize) {
+      this.reportReAuthorization(this.oauthSession)
+    } else {
+      ;(this.window as any).outOfRouterNavigation(this.redirectUrl)
+    }
   }
 
-  finishRedirectObs(oauthSession: RequestInfoForm): Observable<boolean> {
+  /*
+   * ─────────────────────────────────────────────────────────────
+   * Private methods below
+   * ─────────────────────────────────────────────────────────────
+   */
+
+  /**
+   * Finalize redirection returning an Observable (for chaining).
+   */
+  private finishRedirectObs(
+    oauthSession: RequestInfoForm
+  ): Observable<boolean> {
     ;(this.window as any).outOfRouterNavigation(oauthSession.redirectUrl)
     return NEVER
   }
 
   /**
-   * Loads the user session.
+   * Determines whether the domain interstitial should be displayed
+   * based on user domain status, togglz, impersonation, etc.
    */
-  private loadUserSession() {
-    return this._user.getUserSession().pipe(first())
+  private canShowDomainInterstitial(): boolean {
+    return (
+      this.hasPrivateDomains &&
+      !this.hasPublicDomains &&
+      this.isOAuthDomainsInterstitialEnabled &&
+      !this.hasDomainInterstitialBeenViewed &&
+      this.isNotImpersonating &&
+      !this.insidePopUpWindows
+    )
+  }
+
+  /**
+   * Displays the domain interstitial and marks it as viewed.
+   */
+  private showDomainInterstitial(): void {
+    this.showAuthorizationComponent = false
+    this.showInterstital = true
+    this.interstitialsService
+      .setInterstitialsViewed('DOMAIN_INTERSTITIAL')
+      .subscribe()
+  }
+
+  /**
+   * Loads the user session data.
+   */
+  private loadUserSession(): Observable<any> {
+    return this.userService.getUserSession().pipe(first())
   }
 
   /**
    * Loads the platform information and stores it in a component property.
    */
-  private loadPlatformInfo() {
-    return this._platformInfo.get().pipe(
+  private loadPlatformInfo(): Observable<PlatformInfo> {
+    return this.platformInfoService.get().pipe(
       first(),
-      tap((platform) => {
-        this.platform = platform
-      })
+      tap((platform) => (this.platform = platform))
     )
   }
 
   /**
-   * Loads the interstitial viewed status and assigns it to the component property.
+   * Checks if the domain interstitial was previously viewed by the user.
    */
-  private loadInterstitialViewed() {
-    return this._interstitials
+  private loadInterstitialViewed(): Observable<boolean> {
+    return this.interstitialsService
       .getInterstitialsViewed('DOMAIN_INTERSTITIAL')
       .pipe(
         first(),
-        tap((interstitial) => {
-          this.domainInterstitialHasBeenViewed = interstitial
+        tap((wasViewed) => {
+          this.hasDomainInterstitialBeenViewed = wasViewed
         })
       )
   }
 
   /**
-   * Loads the state for the OAuth domains interstitial flag.
+   * Loads togglz (feature flag) state for the OAuth domains interstitial feature.
    */
-  private loadTogglzState() {
-    return this._togglz.getStateOf('OAUTH_DOMAINS_INTERSTITIAL').pipe(
+  private loadTogglzState(): Observable<boolean> {
+    return this.togglzService.getStateOf('OAUTH_DOMAINS_INTERSTITIAL').pipe(
       take(1),
-      tap((togglz) => {
-        this.oauthDomainsInterstitialEnabled = togglz
-      })
+      tap((state) => (this.isOAuthDomainsInterstitialEnabled = state))
     )
   }
 
   /**
-   * Loads the emails and derives private/public domain flags.
+   * Loads the user emails from the backend and determines public/private domain flags.
    */
-  private loadEmails() {
-    return this._recordEmails.getEmails().pipe(
+  private loadEmails(): Observable<EmailsEndpoint> {
+    return this.recordEmailsService.getEmails().pipe(
       first(),
       tap((emails) => {
         this.originalEmailsBackendCopy = cloneDeep(emails)
-        this.userHasPrivateDomains = this.userHasPrivateEmails(emails)
-        this.userHasPublicDomains = this.userHasPublicEmails(emails)
+        this.hasPrivateDomains = this.userHasPrivateEmails(emails)
+        this.hasPublicDomains = this.userHasPublicEmails(emails)
       })
     )
   }
 
   /**
-   * Processes the user session and determines whether to display the interstitial
-   * or move directly to the authorization logic.
+   * After loading forkJoin data, decide on final flow:
+   * show error, show domain interstitial, or show authorization screen.
    */
-  private processUserSession(userSession: any) {
-    // Independent assignment: Check if the user is impersonating.
-    this.userIsNotImpersonating =
-      userSession.userInfo.REAL_USER_ORCID ===
-      userSession.userInfo.EFFECTIVE_USER_ORCID
+  private handleUserSession(userSession: any): void {
+    // Check if user is impersonating
+    this.isNotImpersonating =
+      userSession?.userInfo?.REAL_USER_ORCID ===
+      userSession?.userInfo?.EFFECTIVE_USER_ORCID
 
-    const oauthSession = userSession.oauthSession
+    this.oauthSession = userSession.oauthSession
 
-    if (this.userWasAlreadyAuthorize(oauthSession)) {
-      if (this.userCanSeeInterstitial()) {
-        this.redirectUrl = oauthSession.redirectUrl
-        this.displayDomainInterstitial()
+    // 1. If the user was already authorized, we might show domain interstitial or just redirect
+    if (this.isUserAlreadyAuthorized(this.oauthSession)) {
+      if (this.canShowDomainInterstitial()) {
+        this.redirectByReportAlreadyAuthorize = true
+        this.showDomainInterstitial()
         this.loading = false
       } else {
-        this.reportAlreadyAuthorize(oauthSession)
+        this.reportReAuthorization(this.oauthSession)
       }
-    } else if (oauthSession && oauthSession.error) {
-      this.showAuthorizationError = true
-      this.loading = false
-    } else {
-      this.showAuthorizationComponent = true
-      this.loading = false
+      return
     }
+
+    // 2. If the backend returned an error
+    if (this.oauthSession && this.oauthSession.error) {
+      this.showAuthorizationError = true
+      return
+    }
+
+    // 3. Otherwise, show the standard authorization component
+    this.showAuthorizationComponent = true
+    this.loading = false
   }
 
-  private userWasAlreadyAuthorize(oauthSession: any) {
-    return (
-      oauthSession &&
-      oauthSession.redirectUrl &&
-      oauthSession.responseType &&
-      oauthSession.redirectUrl.includes(oauthSession.responseType + '=')
+  /**
+   * Determines if the user was already authorized based on OAuth session data.
+   */
+  private isUserAlreadyAuthorized(oauthSession: any): boolean {
+    if (
+      !oauthSession ||
+      !oauthSession.redirectUrl ||
+      !oauthSession.responseType
+    ) {
+      return false
+    }
+    return oauthSession.redirectUrl.includes(oauthSession.responseType + '=')
+  }
+
+  /**
+   * Helper to check if at least one email domain is public.
+   */
+  private userHasPublicEmails(emails: EmailsEndpoint): boolean {
+    return !!emails.emailDomains?.some(
+      (domain) => domain.visibility === 'PUBLIC'
+    )
+  }
+
+  /**
+   * Helper to check if at least one email domain is private.
+   */
+  private userHasPrivateEmails(emails: EmailsEndpoint): boolean {
+    return !!emails.emailDomains?.some(
+      (domain) => domain.visibility !== 'PUBLIC'
     )
   }
 }
