@@ -14,6 +14,8 @@ import { UserService } from '../user/user.service'
 import { ERROR_REPORT } from 'src/app/errors'
 import { Title } from '@angular/platform-browser'
 
+import { CookieService } from 'ngx-cookie-service'
+
 @Injectable({
   providedIn: 'root',
 })
@@ -22,6 +24,7 @@ export class SignInService {
     private _http: HttpClient,
     private _titleService: Title,
     private _errorHandler: ErrorHandlerService,
+    private _cookie: CookieService,
     private _userService: UserService
   ) {}
   /**
@@ -35,11 +38,11 @@ export class SignInService {
     forceSessionUpdate = false
   ) {
   
-	// FOR AUTH SERVER SIGN IN
+  // FOR AUTH SERVER SIGN IN
   let loginUrl = 'https://auth.dev.orcid.org/login'
 
-	// FOR REGISTRY SIGN IN
-	// let loginUrl = 'signin/auth.json'
+  // FOR REGISTRY SIGN IN
+  // let loginUrl = 'signin/auth.json'
 
     
   if (signInLocal.type && signInLocal.type === TypeSignIn.institutional) {
@@ -48,10 +51,11 @@ export class SignInService {
 
   if (signInLocal.type && signInLocal.type === TypeSignIn.social) {
     loginUrl = 'social/signin/auth.json'
-  }    
-	
-	
-	//CODE TO SIGN IN WITH THE AUTH SERVER
+  }
+  
+  let csrf = this._cookie.get('AUTH-XSRF-TOKEN')
+  
+  //CODE TO SIGN IN WITH THE AUTH SERVER
   let body = new HttpParams({ encoder: new CustomEncoder() })
     .set('username', getOrcidNumber(signInLocal.data.username))
     .set('password', signInLocal.data.password)
@@ -66,7 +70,8 @@ export class SignInService {
     .post<SignIn>(loginUrl, body, {
       headers: new HttpHeaders({
         'Access-Control-Allow-Origin': 'https://dev.orcid.org',
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'x-xsrf-token': csrf
       }),
       withCredentials: true,
     })
