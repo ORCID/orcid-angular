@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
-import { Injectable } from '@angular/core'
-import { catchError, map, retry, switchMap, first } from 'rxjs/operators'
+import { Injectable, OnInit } from '@angular/core'
+import { catchError, map, retry, switchMap, first, take } from 'rxjs/operators'
 
 import { environment } from '../../../environments/environment'
 import { getOrcidNumber, isValidOrcidFormat } from '../../constants'
@@ -15,18 +15,37 @@ import { ERROR_REPORT } from 'src/app/errors'
 import { Title } from '@angular/platform-browser'
 
 import { CookieService } from 'ngx-cookie-service'
+import { TogglzService } from 'src/app/core/togglz/togglz.service'
 
 @Injectable({
   providedIn: 'root',
 })
 export class SignInService {
+
+  orcidLoginUrl: string 
+  usingOauthServer: boolean
+  
   constructor(
     private _http: HttpClient,
     private _titleService: Title,
     private _errorHandler: ErrorHandlerService,
     private _cookie: CookieService,
+    private _togglz: TogglzService,
     private _userService: UserService
-  ) {}
+  ) {  
+  this._togglz
+      .getStateOf('OAUTH_SIGNIN')
+      .pipe(take(1))
+      .subscribe((value) => {
+        if(value === true) {
+            this.orcidLoginUrl = environment.AUTH_SERVER  + 'login';
+            this.usingOauthServer = true
+        } else {
+            this.orcidLoginUrl = environment.API_WEB + 'signin/auth.json'
+            this.usingOauthServer = false
+      })
+  }
+  
   /**
    * @param  SignInLocal sign in information
    * @param  updateUserSession default true, set to true if after successfully signing Orcid Angular will still be open
@@ -38,24 +57,24 @@ export class SignInService {
     forceSessionUpdate = false
   ) {
   
-  // FOR AUTH SERVER SIGN IN
-  let loginUrl = 'https://auth.dev.orcid.org/login'
-
-  // FOR REGISTRY SIGN IN
-  // let loginUrl = 'signin/auth.json'
-
+  let loginUrl = this.orcidLoginUrl
     
   if (signInLocal.type && signInLocal.type === TypeSignIn.institutional) {
-    loginUrl = 'shibboleth/signin/auth.json'
+    loginUrl = environment.API_WEB + 'shibboleth/signin/auth.json'
   }
 
   if (signInLocal.type && signInLocal.type === TypeSignIn.social) {
-    loginUrl = 'social/signin/auth.json'
+    loginUrl = environment.API_WEB + 'social/signin/auth.json'
   }
   
-  let csrf = this._cookie.get('AUTH-XSRF-TOKEN')
+  let headers = new HttpHeaders()
+  if (this.usingOauthServer === true) {
+	let csrf = this._cookie.get('AUTH-XSRF-TOKEN')
+	headers = headers.set('Access-Control-Allow-Origin', environment.AUTH_SERVER)
+	headers = headers.set('Content-Type', 'application/x-www-form-urlencoded')
+	headers = headers.set('x-xsrf-token', csrf)
+  }   
   
-  //CODE TO SIGN IN WITH THE AUTH SERVER
   let body = new HttpParams({ encoder: new CustomEncoder() })
     .set('username', getOrcidNumber(signInLocal.data.username))
     .set('password', signInLocal.data.password)
@@ -68,11 +87,7 @@ export class SignInService {
   body = body.set('oauthRequest', signInLocal.isOauth ? 'true' : 'false')
   return this._http
     .post<SignIn>(loginUrl, body, {
-      headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': 'https://dev.orcid.org',
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'x-xsrf-token': csrf
-      }),
+      headers: headers,
       withCredentials: true,
     })
     .pipe(
@@ -87,38 +102,7 @@ export class SignInService {
             map(() => response)
           )
       })
-    )	  
-	  
-	  // CODE TO SIGN IN WITH THE REGISTRY
-    /*
-    let body = new HttpParams({ encoder: new CustomEncoder() })
-      .set('userId', getOrcidNumber(signInLocal.data.username))
-      .set('password', signInLocal.data.password)
-    if (signInLocal.data.verificationCode) {
-      body = body.set('verificationCode', signInLocal.data.verificationCode)
-    }
-    if (signInLocal.data.recoveryCode) {
-      body = body.set('recoveryCode', signInLocal.data.recoveryCode)
-    }
-    body = body.set('oauthRequest', signInLocal.isOauth ? 'true' : 'false')
-    return this._http
-      .post<SignIn>(environment.API_WEB + loginUrl, body, {
-        withCredentials: true,
-      })
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error)),
-        switchMap((response) => {
-          // call refreshUserSession with force session update to handle register actions from sessions with a logged in user
-          return this._userService
-            .refreshUserSession(forceSessionUpdate, true)
-            .pipe(
-              first(),
-              map(() => response)
-            )
-        })
-      )
-        */
+    )	  	  
   }
 
   reactivation(username: string) {

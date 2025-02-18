@@ -6,6 +6,7 @@ export const environment = {
   API_PUB: `//pub.<SUBDOMAIN><DOMAIN>/v3.0`,
   API_WEB: `//<SUBDOMAIN><DOMAIN>/`,
   BASE_URL: '//<SUBDOMAIN><DOMAIN>/',
+  AUTH_SERVER: 'https://auth.sandbox.orcid.org/',
   INFO_SITE: 'https://info.qa.orcid.org/',
   GOOGLE_ANALYTICS_TESTING_MODE: false,
   GOOGLE_TAG_MANAGER: 'GTM-M9Z7DHS',
