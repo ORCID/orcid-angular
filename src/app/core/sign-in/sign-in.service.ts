@@ -32,7 +32,7 @@ export class SignInService {
     private _cookie: CookieService,
     private _togglz: TogglzService,
     private _userService: UserService
-  ) {  
+  ) {
   this._togglz
       .getStateOf('OAUTH_SIGNIN')
       .pipe(take(1))
@@ -40,9 +40,11 @@ export class SignInService {
         if(value === true) {
             this.orcidLoginUrl = environment.AUTH_SERVER  + 'login';
             this.usingOauthServer = true
+            console.log(this.orcidLoginUrl)
         } else {
             this.orcidLoginUrl = environment.API_WEB + 'signin/auth.json'
             this.usingOauthServer = false
+        }
       })
   }
   
