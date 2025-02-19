@@ -1,3 +1,9 @@
+## v2.111.7 - 2025-02-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.6...v2.111.7)
+
+- [#2467](https://github.com/ORCID/orcid-angular/pull/2467): Lmendoza/9644 qa confirmation panel issue for users making domains public as part of client reauthorization
+
 ## v2.111.6 - 2025-02-11
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.5...v2.111.6)
