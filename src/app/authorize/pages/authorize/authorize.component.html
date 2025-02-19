@@ -11,13 +11,11 @@
           <app-form-authorize
             *ngIf="showAuthorizationComponent"
             (redirectUrl)="handleRedirect($event)"
-            (organizationName)="organizationName = $event"
           ></app-form-authorize>
           <app-share-emails-domains
             *ngIf="showInterstital"
             (finish)="finishRedirect()"
             [userEmailsJson]="originalEmailsBackendCopy"
-            [organizationName]="organizationName"
           ></app-share-emails-domains>
           <app-oauth-error *ngIf="showAuthorizationError"></app-oauth-error>
         </mat-card>

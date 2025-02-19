@@ -30,8 +30,6 @@ export class AuthorizeComponent {
   originalEmailsBackendCopy: EmailsEndpoint
   oauthSession: any
 
-  organizationName: string
-
   // Domain / Interstitial properties
   hasPrivateDomains = false
   hasPublicDomains = false
@@ -228,22 +226,22 @@ export class AuthorizeComponent {
 
     this.oauthSession = userSession.oauthSession
 
-    // 1. If the user was already authorized, we might show domain interstitial or just redirect
-    if (this.isUserAlreadyAuthorized(this.oauthSession)) {
-      if (this.canShowDomainInterstitial()) {
+    // // 1. If the backend returned an error
+    // if (this.oauthSession && this.oauthSession.error) {
+    //   this.showAuthorizationError = true
+    //   this.loading = false
+    //   return
+    // }
+
+    // 2. If the user was already authorized, we might show domain interstitial or just redirect
+    if (true) {
+      if (true) {
         this.redirectByReportAlreadyAuthorize = true
         this.showDomainInterstitial()
         this.loading = false
       } else {
         this.reportReAuthorization(this.oauthSession)
       }
-      return
-    }
-
-    // 2. If the backend returned an error
-    if (this.oauthSession && this.oauthSession.error) {
-      this.showAuthorizationError = true
-      this.loading = false
       return
     }
 

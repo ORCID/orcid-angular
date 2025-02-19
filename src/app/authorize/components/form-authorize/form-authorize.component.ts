@@ -39,7 +39,6 @@ import { Title } from '@angular/platform-browser'
 })
 export class FormAuthorizeComponent implements OnInit, OnDestroy {
   @Output() redirectUrl = new EventEmitter<string>()
-  @Output() organizationName = new EventEmitter<string>()
   environment = runtimeEnvironment
   $destroy: Subject<boolean> = new Subject<boolean>()
   orcidUrl: string
@@ -84,7 +83,6 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
         this.loadingUserInfo = false
         this.loadingTrustedIndividuals = false
         this.oauthRequest = userInfo.oauthSession
-        this.organizationName.emit(this.oauthRequest.clientName)
         if (userInfo.loggedIn) {
           this.userName = userInfo.displayName
           this.orcidUrl = userInfo.effectiveOrcidUrl
