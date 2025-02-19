@@ -226,16 +226,16 @@ export class AuthorizeComponent {
 
     this.oauthSession = userSession.oauthSession
 
-    // // 1. If the backend returned an error
-    // if (this.oauthSession && this.oauthSession.error) {
-    //   this.showAuthorizationError = true
-    //   this.loading = false
-    //   return
-    // }
+    // 1. If the backend returned an error
+    if (this.oauthSession && this.oauthSession.error) {
+      this.showAuthorizationError = true
+      this.loading = false
+      return
+    }
 
     // 2. If the user was already authorized, we might show domain interstitial or just redirect
-    if (true) {
-      if (true) {
+    if (this.isUserAlreadyAuthorized(this.oauthSession)) {
+      if (this.canShowDomainInterstitial()) {
         this.redirectByReportAlreadyAuthorize = true
         this.showDomainInterstitial()
         this.loading = false
