@@ -117,6 +117,12 @@ html {
   color: #085c77 !important;
 }
 
-.menu-overlay-pane-overwrite {
-  max-height: 100vh !important;
+/// FIX for mobile menu in work dialog not been visible on mobile devices
+/// https://trello.com/c/TiwqaK5w/9574-qa-unable-to-reach-the-bottom-of-the-work-type-dropdown-on-mobile-devices
+@media (hover: none) and (pointer: coarse) and (max-width: 699px) {
+  .menu-overlay-pane-overwrite {
+    height: 100vh !important;
+    position: initial;
+    top: 0 !important;
+  }
 }
