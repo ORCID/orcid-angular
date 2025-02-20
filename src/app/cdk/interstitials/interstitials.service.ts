@@ -13,7 +13,7 @@ export class InterstitialsService {
   setInterstitialsViewed(interstitial: Interstitials) {
     return this._userInfo.getUserSession().pipe(
       map((userInfo) => {
-        const effectiveUser = userInfo.userInfo.EFFECTIVE_USER_ORCID
+        const effectiveUser = userInfo?.userInfo?.EFFECTIVE_USER_ORCID
         localStorage.setItem(effectiveUser + '_' + interstitial, 'true')
       })
     )
@@ -21,7 +21,7 @@ export class InterstitialsService {
   getInterstitialsViewed(interstitial: Interstitials) {
     return this._userInfo.getUserSession().pipe(
       map((userInfo) => {
-        const effectiveUser = userInfo.userInfo.EFFECTIVE_USER_ORCID
+        const effectiveUser = userInfo?.userInfo?.EFFECTIVE_USER_ORCID
         if (interstitial === 'DOMAIN_INTERSTITIAL') {
           // This is a weird condition as we changed the localstorage value from OAUTH_DOMAIN_INTERSTITIAL to DOMAIN_INTERSTITIAL
           // This is a fix so DOMAIN_INTERSTITIAL is backwards compatible with OAUTH_DOMAIN_INTERSTITIAL
