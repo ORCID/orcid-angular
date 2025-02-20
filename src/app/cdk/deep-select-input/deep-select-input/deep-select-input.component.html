@@ -23,7 +23,7 @@
     </mat-error>
   </mat-form-field>
 
-  <mat-menu #matMenu="matMenu" class="this-class" (closed)="onMenuClose()">
+  <mat-menu #matMenu="matMenu" [yPosition]="'above'" (closed)="onMenuClose()">
     <div class="menu-wrapper">
       <ng-container *ngFor="let item of menu">
         <ng-container *ngIf="!item.divider">
