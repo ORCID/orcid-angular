@@ -1,3 +1,10 @@
+## v2.111.8 - 2025-02-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.7...v2.111.8)
+
+- [#2469](https://github.com/ORCID/orcid-angular/pull/2469): 9645-qa-oauth-failing-new-interstitial
+- [#2468](https://github.com/ORCID/orcid-angular/pull/2468): 9574-qa-unable-to-reach-the-bottom-of-the-work-type-dropdown-on-mobil…
+
 ## v2.111.7 - 2025-02-19
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.6...v2.111.7)
