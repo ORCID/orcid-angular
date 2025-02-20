@@ -208,6 +208,7 @@ export class AuthorizeComponent {
     return this.userService.getUserSession().pipe(
       take(1),
       switchMap((session) => {
+        // Load emails only if user is logged in
         if (session.oauthSessionIsLoggedIn) {
           return this.recordEmailsService.getEmails().pipe(
             first(),
@@ -216,6 +217,9 @@ export class AuthorizeComponent {
             })
           )
         } else {
+          // If user is not logged in, return empty emails object
+          // This scenario is for users who are not logged in and the OAUTH URL is invalid
+          // Those will load this component to display the error message by the component `app-oauth-error`
           this.originalEmailsBackendCopy = {
             emails: [],
             emailDomains: [],
