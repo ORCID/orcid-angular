@@ -1,7 +1,8 @@
 import { Component, Inject } from '@angular/core'
-import { cloneDeep } from 'lodash'
-import { Observable, forkJoin, NEVER } from 'rxjs'
-import { first, take, tap } from 'rxjs/operators'
+import { log } from 'console'
+import { cloneDeep, takeWhile } from 'lodash'
+import { Observable, forkJoin, NEVER, of, EMPTY } from 'rxjs'
+import { first, switchMap, take, tap } from 'rxjs/operators'
 import { InterstitialsService } from 'src/app/cdk/interstitials/interstitials.service'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
@@ -204,12 +205,28 @@ export class AuthorizeComponent {
    * Loads the user emails from the backend and determines public/private domain flags.
    */
   private loadEmails(): Observable<EmailsEndpoint> {
-    return this.recordEmailsService.getEmails().pipe(
-      first(),
-      tap((emails) => {
-        this.originalEmailsBackendCopy = cloneDeep(emails)
-        this.hasPrivateDomains = this.userHasPrivateEmails(emails)
-        this.hasPublicDomains = this.userHasPublicEmails(emails)
+    return this.userService.getUserSession().pipe(
+      take(1),
+      switchMap((session) => {
+        // Load emails only if user is logged in
+        if (session.oauthSessionIsLoggedIn) {
+          return this.recordEmailsService.getEmails().pipe(
+            first(),
+            tap((emails) => {
+              this.originalEmailsBackendCopy = cloneDeep(emails)
+            })
+          )
+        } else {
+          // If user is not logged in, return empty emails object
+          // This scenario is for users who are not logged in and the OAUTH URL is invalid
+          // Those will load this component to display the error message by the component `app-oauth-error`
+          this.originalEmailsBackendCopy = {
+            emails: [],
+            emailDomains: [],
+            errors: [],
+          }
+          return of({} as EmailsEndpoint)
+        }
       })
     )
   }

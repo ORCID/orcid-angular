@@ -109,6 +109,14 @@ html {
   max-width: none !important;
 }
 
+.ot-sdk-show-settings {
+  background-color: transparent !important;
+}
+
+#ot-sdk-btn.ot-sdk-show-settings:hover {
+  color: #085c77 !important;
+}
+
 .menu-overlay-pane-overwrite {
   max-height: 100vh !important;
 }
