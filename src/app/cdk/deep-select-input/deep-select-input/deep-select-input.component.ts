@@ -8,7 +8,10 @@ import {
   ViewChild,
   forwardRef,
 } from '@angular/core'
-import { MAT_MENU_DEFAULT_OPTIONS, MatMenuTrigger } from '@angular/material/menu'
+import {
+  MAT_MENU_DEFAULT_OPTIONS,
+  MatMenuTrigger,
+} from '@angular/material/menu'
 import {
   AbstractControl,
   ControlValueAccessor,
