@@ -1,3 +1,9 @@
+## v2.111.10 - 2025-02-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.9...v2.111.10)
+
+- [#2470](https://github.com/ORCID/orcid-angular/pull/2470): 9574-qa-unable-to-reach-the-bottom-of-the-work-type-dropdown-on-mobil…
+
 ## v2.111.9 - 2025-02-20
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.8...v2.111.9)
