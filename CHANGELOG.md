@@ -1,3 +1,9 @@
+## v2.111.11 - 2025-02-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.10...v2.111.11)
+
+- [#2471](https://github.com/ORCID/orcid-angular/pull/2471): Lmendoza/fix interstitial oauth
+
 ## v2.111.10 - 2025-02-20
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.9...v2.111.10)
