@@ -139,12 +139,6 @@ export class AuthorizeComponent {
    * based on user domain status, togglz, impersonation, etc.
    */
   private canShowDomainInterstitial(): boolean {
-    console.log('hasPrivateDomains', this.hasPrivateDomains)
-    console.log('hasPublicDomains', this.hasPublicDomains)
-    console.log('isOAuthDomainsInterstitialEnabled', this.isOAuthDomainsInterstitialEnabled)
-    console.log('hasDomainInterstitialBeenViewed', this.hasDomainInterstitialBeenViewed)
-    console.log('isNotImpersonating', this.isNotImpersonating)
-    console.log('insidePopUpWindows', this.insidePopUpWindows)  
     return (
       this.hasPrivateDomains &&
       !this.hasPublicDomains &&
@@ -259,7 +253,6 @@ export class AuthorizeComponent {
     }
 
     // 2. If the user was already authorized, we might show domain interstitial or just redirect
-    console.log(this.isUserAlreadyAuthorized(this.oauthSession))
     if (this.isUserAlreadyAuthorized(this.oauthSession)) {
       if (this.canShowDomainInterstitial()) {
         this.redirectByReportAlreadyAuthorize = true
