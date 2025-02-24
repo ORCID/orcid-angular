@@ -111,7 +111,6 @@ export class AuthorizeComponent {
    * Internal method to finalize redirection (non-observable variant).
    */
   finishRedirect(): void {
-    console.log('finishRedirect')
     if (this.redirectByReportAlreadyAuthorize) {
       this.reportReAuthorization(this.oauthSession)
     } else {
@@ -131,7 +130,6 @@ export class AuthorizeComponent {
   private finishRedirectObs(
     oauthSession: RequestInfoForm
   ): Observable<boolean> {
-    console.log('finishRedirectObs')
     ;(this.window as any).outOfRouterNavigation(oauthSession.redirectUrl)
     return NEVER
   }
