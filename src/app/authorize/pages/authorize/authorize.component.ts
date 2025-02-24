@@ -94,7 +94,7 @@ export class AuthorizeComponent {
     forkJoin([analyticsReport]).subscribe({
       next: () => {
         // After successful reporting, proceed
-        this.finishRedirectObs(request)
+        // GA will handle the redirect
       },
       error: (error) => {
         // If error happens, handle it, then proceed
