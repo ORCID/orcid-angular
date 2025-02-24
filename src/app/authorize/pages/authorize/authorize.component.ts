@@ -75,7 +75,6 @@ export class AuthorizeComponent {
    * Called by template to handle final redirection.
    */
   handleRedirect(url: string): void {
-    console.log('handleRedirect')
     this.redirectUrl = url
     if (url && this.canShowDomainInterstitial()) {
       this.showDomainInterstitial()
