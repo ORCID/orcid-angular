@@ -75,6 +75,7 @@ export class AuthorizeComponent {
    * Called by template to handle final redirection.
    */
   handleRedirect(url: string): void {
+    console.log('handleRedirect')
     this.redirectUrl = url
     if (url && this.canShowDomainInterstitial()) {
       this.showDomainInterstitial()
@@ -94,7 +95,7 @@ export class AuthorizeComponent {
     forkJoin([analyticsReport]).subscribe({
       next: () => {
         // After successful reporting, proceed
-        this.finishRedirectObs(request)
+        // GA will handle the redirect
       },
       error: (error) => {
         // If error happens, handle it, then proceed
@@ -111,6 +112,7 @@ export class AuthorizeComponent {
    * Internal method to finalize redirection (non-observable variant).
    */
   finishRedirect(): void {
+    console.log('finishRedirect')
     if (this.redirectByReportAlreadyAuthorize) {
       this.reportReAuthorization(this.oauthSession)
     } else {
@@ -130,6 +132,7 @@ export class AuthorizeComponent {
   private finishRedirectObs(
     oauthSession: RequestInfoForm
   ): Observable<boolean> {
+    console.log('finishRedirectObs')
     ;(this.window as any).outOfRouterNavigation(oauthSession.redirectUrl)
     return NEVER
   }
