@@ -1,3 +1,9 @@
+## v2.111.12 - 2025-02-25
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.11...v2.111.12)
+
+- [#2473](https://github.com/ORCID/orcid-angular/pull/2473): fix-2472
+
 ## v2.111.11 - 2025-02-21
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.10...v2.111.11)
