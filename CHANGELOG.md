@@ -1,3 +1,9 @@
+## v2.111.13 - 2025-03-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.12...v2.111.13)
+
+- [#2474](https://github.com/ORCID/orcid-angular/pull/2474): 9666-ui-updates-to-verification-validation-for-email-addresses-and-do…
+
 ## v2.111.12 - 2025-02-25
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.11...v2.111.12)
