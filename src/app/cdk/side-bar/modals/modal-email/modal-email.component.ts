@@ -717,23 +717,23 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
     this.$destroy.unsubscribe()
   }
 
-
-  private hasMatchingEmail(domain : string, domains:string[]) : boolean {
-    return domains.some(domain =>
-      this.emails.some(email =>
+  private hasMatchingEmail(domain: string, domains: string[]): boolean {
+    return domains.some((domain) =>
+      this.emails.some(
+        (email) =>
           email?.verified &&
-          (email.value.split('@')[1] === domain || email.value.split('@')[1].endsWith('.' + domain))
+          (email.value.split('@')[1] === domain ||
+            email.value.split('@')[1].endsWith('.' + domain))
       )
-    );
+    )
   }
-  
 
-  private generateSubdomains(fullDomain : string) {
-    const parts = fullDomain.split('.'); 
-    const subdomains = [];
+  private generateSubdomains(fullDomain: string) {
+    const parts = fullDomain.split('.')
+    const subdomains = []
     for (let i = 0; i < parts.length - 1; i++) {
-        subdomains.push(parts.slice(i).join('.'));
+      subdomains.push(parts.slice(i).join('.'))
     }
-    return subdomains;
+    return subdomains
   }
 }
