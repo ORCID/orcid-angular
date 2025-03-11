@@ -1,3 +1,56 @@
+## v2.111.13 - 2025-03-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.12...v2.111.13)
+
+- [#2474](https://github.com/ORCID/orcid-angular/pull/2474): 9666-ui-updates-to-verification-validation-for-email-addresses-and-do…
+
+## v2.111.12 - 2025-02-25
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.11...v2.111.12)
+
+- [#2473](https://github.com/ORCID/orcid-angular/pull/2473): fix-2472
+
+## v2.111.11 - 2025-02-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.10...v2.111.11)
+
+- [#2471](https://github.com/ORCID/orcid-angular/pull/2471): Lmendoza/fix interstitial oauth
+
+## v2.111.10 - 2025-02-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.9...v2.111.10)
+
+- [#2470](https://github.com/ORCID/orcid-angular/pull/2470): 9574-qa-unable-to-reach-the-bottom-of-the-work-type-dropdown-on-mobil…
+
+## v2.111.9 - 2025-02-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.8...v2.111.9)
+
+## v2.111.8 - 2025-02-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.7...v2.111.8)
+
+- [#2469](https://github.com/ORCID/orcid-angular/pull/2469): 9645-qa-oauth-failing-new-interstitial
+- [#2468](https://github.com/ORCID/orcid-angular/pull/2468): 9574-qa-unable-to-reach-the-bottom-of-the-work-type-dropdown-on-mobil…
+
+## v2.111.7 - 2025-02-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.6...v2.111.7)
+
+- [#2467](https://github.com/ORCID/orcid-angular/pull/2467): Lmendoza/9644 qa confirmation panel issue for users making domains public as part of client reauthorization
+
+## v2.111.6 - 2025-02-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.5...v2.111.6)
+
+- [#2466](https://github.com/ORCID/orcid-angular/pull/2466): Lmendoza/9619 show interstitial for re authorise requests
+
+## v2.111.5 - 2025-02-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.4...v2.111.5)
+
+- [#2465](https://github.com/ORCID/orcid-angular/pull/2465): Lmendoza/onetrust2
+
 ## v2.111.4 - 2025-02-11
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.3...v2.111.4)

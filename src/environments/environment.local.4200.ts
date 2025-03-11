@@ -20,6 +20,7 @@ export const environment: EnvironmentInterface = {
   VERBOSE_SNACKBAR_ERRORS_REPORTS: true,
   WORDPRESS_S3: 'https://homepage-qa.orcid.org',
   WORDPRESS_S3_FALLBACK: 'https://homepage-fallback.orcid.org',
+  ONE_TRUST: '5a6d60d3-b085-4e48-8afa-d707c7afc419-test',
   NEW_RELIC_APP: '772335827',
   LANGUAGE_MENU_OPTIONS: {
     ar: 'العربية',

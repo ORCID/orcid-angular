@@ -8,6 +8,7 @@ import {
 import { getOptionsObjet, save } from './utils'
 import { renameSync, readFileSync } from 'fs'
 import { createShareAssetsFolder } from './moveToShareFolder.postbuild'
+import { addOneTrustNotAutoBlockForAppScripts } from './onetrust.postbuild'
 
 const glob = require('glob')
 // Run updates on index.html files across languages
@@ -16,12 +17,10 @@ glob
   .forEach((file) => {
     const options = getOptionsObjet(file)
     let data = readFileSync(file, 'utf8')
-    // data = uniqueLength(data, options) DISABLED unique leght for now, as migth not be required anymore
     data = buildInfo(data, options)
-    // data = newRelic(data, options) TEMPORALLY DISABLE NEW RELIC
-
     // Replace all the `*.js` references to match updated JS file names with the language code.
     data = addLanguageCodeToHashesOnToHTMLFiles(data, options)
+    data = addOneTrustNotAutoBlockForAppScripts(data)
     // data = robotsMetadata(data, options) DISABLE robots headers, as those will be handle via nginx
     save(data, options)
   })

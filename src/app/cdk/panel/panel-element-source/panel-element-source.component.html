@@ -5,7 +5,7 @@
     <i i18n="@@shared.onBehalfOf">via</i>
   </ng-container>
   {{ name
-  }}<ng-container *ngIf="date"
+  }}<ng-container *ngIf="date; else noDate"
     >,
     <ng-container *ngIf="isEmailOrDomain" i18n="@@shared.verified"
       >Verified:</ng-container
@@ -13,7 +13,13 @@
     <ng-container *ngIf="!isEmailOrDomain" i18n="@@shared.created"
       >Created:</ng-container
     >
-    {{ date }}</ng-container
-  >
+    {{ date }}
+  </ng-container>
+
+  <ng-template #noDate>
+    <ng-container *ngIf="isEmailOrDomain"
+      >, <span i18n="@@shared.verified2">Verified</span>
+    </ng-container>
+  </ng-template>
 </p>
 <mat-divider *ngIf="!isLastItem"></mat-divider>
