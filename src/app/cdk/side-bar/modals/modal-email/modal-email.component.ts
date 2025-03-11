@@ -486,7 +486,7 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
 
       if (domain) {
         let domains = this.generateSubdomains(domain)
-        let remainingEmailsHaveDomain = this.hasMatchingEmail(domain, domains)
+        let remainingEmailsHaveDomain = this.hasMatchingEmail(domains)
         if (!remainingEmailsHaveDomain) {
           this.verifiedDomains = this.verifiedDomains.filter(
             (d) => !domains.includes(d.value)
@@ -717,7 +717,7 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
     this.$destroy.unsubscribe()
   }
 
-  private hasMatchingEmail(domain: string, domains: string[]): boolean {
+  private hasMatchingEmail(domains: string[]): boolean {
     return domains.some((domain) =>
       this.emails.some(
         (email) =>
@@ -728,7 +728,7 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
     )
   }
 
-  private generateSubdomains(fullDomain: string) {
+  private generateSubdomains(fullDomain: string): string[] {
     const parts = fullDomain.split('.')
     const subdomains = []
     for (let i = 0; i < parts.length - 1; i++) {
