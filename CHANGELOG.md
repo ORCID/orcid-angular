@@ -1,3 +1,9 @@
+## v2.111.16 - 2025-03-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.15...v2.111.16)
+
+- [#2477](https://github.com/ORCID/orcid-angular/pull/2477): Lmendoza/9666 UI updates to verification validation for email addresses and domains
+
 ## v2.111.15 - 2025-03-11
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.14...v2.111.15)
