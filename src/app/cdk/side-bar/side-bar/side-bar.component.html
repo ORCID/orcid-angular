@@ -118,17 +118,6 @@
           }"
           ><ng-container>
             <div class="row">
-              <mat-icon
-                *ngIf="!email.professionalEmail"
-                aria-hidden="false"
-                [attr.aria-label]="selfAssertedSource"
-                [attr.alt]="selfAssertedSource"
-                class="verification-icon"
-                ><img
-                  src="./assets/vectors/profile-not-verified.svg"
-                  [attr.alt]="selfAssertedSource"
-                />
-              </mat-icon>
               <div>
                 <span class="row orc-font-body-small"> {{ email.value }}</span>
               </div>
