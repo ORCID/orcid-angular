@@ -77,17 +77,6 @@
       <ng-container *ngFor="let email of emails">
         <div class="email-entry row">
           <div class="row email-input-line" [formGroupName]="email.putCode">
-            <mat-icon
-              *ngIf="email.verified && !email.professionalEmail"
-              aria-hidden="false"
-              [attr.aria-label]="selfAssertedSource"
-              [attr.alt]="selfAssertedSource"
-              class="verification-icon"
-              ><img
-                src="./assets/vectors/profile-not-verified.svg"
-                [attr.alt]="selfAssertedSource"
-              />
-            </mat-icon>
             <div class="email-input-container">
               <mat-form-field
                 *ngIf="!showEmailAsVerified(email.putCode)"
@@ -116,11 +105,7 @@
                 >
                 <app-panel-element-source
                   class="orc-font-small-print"
-                  [name]="
-                    email.professionalEmail
-                      ? orcidEmailValidation
-                      : email.sourceName || email.source
-                  "
+                  [name]="email.sourceName || email.source"
                   [isEmailOrDomain]="true"
                   [date]="
                     email.verificationDate
@@ -182,7 +167,7 @@
               *ngIf="showNonVerifiedData(email.putCode)"
             >
               <ng-container *ngIf="email.sourceName || email.source">
-                <ng-container i18n="@@shared.sourceColon">Source:</ng-container>
+                <ng-container i18n="@@shared.source">Source:</ng-container>
                 <ng-container>{{
                   email.sourceName || email.source
                 }}</ng-container
