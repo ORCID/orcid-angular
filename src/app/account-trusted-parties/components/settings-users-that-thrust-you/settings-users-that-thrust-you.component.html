@@ -82,6 +82,7 @@
         <th mat-header-cell *matHeaderCellDef>
         </th>
         <td mat-cell *matCellDef="let element">
+          <div class="actions-container orc-font-body-small">
           <mat-icon
               (click)="revokeAccess(element)"
               class="warn pointer"
@@ -98,6 +99,7 @@
             >
               Revoke access</a
             >
+          </div>
         </td>
       </ng-container>
 
