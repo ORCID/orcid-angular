@@ -17,7 +17,7 @@ import { DialogRevokeYourOwnPermissionsComponent } from '../dialog-revoke-your-o
 })
 export class SettingsUsersThatThrustYouComponent implements OnInit {
   $usersThatThrustYou: Observable<TrustedIndividuals>
-  displayedColumns = ['trustedIndividuals', 'orcid', 'granted']
+  displayedColumns = ['trustedIndividuals', 'orcid', 'granted', 'actions']
   platformSubs = new Subject<void>()
   isMobile: boolean
   baseUrl = runtimeEnvironment.BASE_URL
