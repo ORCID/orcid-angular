@@ -233,8 +233,13 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
           } else {
             return EMPTY
           }
-        }),
-        switchMap(() => this._togglz.getTogglz().pipe(first())),
+        })
+      )
+      .subscribe()
+
+    this._togglz
+      .getTogglz()
+      .pipe(
         tap((togglz) => {
           if (togglz.messages['ORCID_ANGULAR_HELP_HERO'] === 'true') {
             if (
