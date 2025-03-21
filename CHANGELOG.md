@@ -1,3 +1,9 @@
+## v2.112.1 - 2025-03-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.0...v2.112.1)
+
+- [#2480](https://github.com/ORCID/orcid-angular/pull/2480): fix-crazy-egg-not-loading
+
 ## v2.112.0 - 2025-03-19
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.16...v2.112.0)
