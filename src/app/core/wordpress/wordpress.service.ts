@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http'
 import { Inject, Injectable, LOCALE_ID } from '@angular/core'
 import { Observable, of } from 'rxjs'
 import { catchError, map } from 'rxjs/operators'
-import { environment } from 'src/environments/environment'
 
 @Injectable({
   providedIn: 'root',
@@ -15,10 +14,10 @@ export class WordpressService {
 
   getHomePagePost(): Observable<string> {
     const primaryUrl = `${
-      environment.WORDPRESS_S3
+      runtimeEnvironment.WORDPRESS_S3
     }/index${this.getWordpressLocalizationCode()}.html`
     const fallbackUrl = `${
-      environment.WORDPRESS_S3_FALLBACK
+      runtimeEnvironment.WORDPRESS_S3_FALLBACK
     }/index${this.getWordpressLocalizationCode()}.html`
     return this.fetchWithFallback(primaryUrl, fallbackUrl).pipe(
       map((data: { html: string; url: string }) => {
@@ -34,8 +33,8 @@ export class WordpressService {
   }
 
   getHomePageCSS(): Observable<string> {
-    const primaryUrl = `${environment.WORDPRESS_S3}/wordpress-homepage.css`
-    const fallbackUrl = `${environment.WORDPRESS_S3_FALLBACK}/wordpress-homepage.css`
+    const primaryUrl = `${runtimeEnvironment.WORDPRESS_S3}/wordpress-homepage.css`
+    const fallbackUrl = `${runtimeEnvironment.WORDPRESS_S3_FALLBACK}/wordpress-homepage.css`
     return this.fetchWithFallback(primaryUrl, fallbackUrl).pipe(
       map((data: { html: string; url: string }) => {
         const find = 'assets/'
@@ -50,8 +49,8 @@ export class WordpressService {
   }
 
   getHomePageJS(): Observable<string> {
-    const primaryUrl = `${environment.WORDPRESS_S3}/wordpress-homepage.js`
-    const fallbackUrl = `${environment.WORDPRESS_S3_FALLBACK}/wordpress-homepage.js`
+    const primaryUrl = `${runtimeEnvironment.WORDPRESS_S3}/wordpress-homepage.js`
+    const fallbackUrl = `${runtimeEnvironment.WORDPRESS_S3_FALLBACK}/wordpress-homepage.js`
     return this.fetchWithFallback(primaryUrl, fallbackUrl).pipe(
       map((data: { html: string; url: string }) => {
         const find = './assets/'

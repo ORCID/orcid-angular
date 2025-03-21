@@ -7,7 +7,7 @@ import {
 import { RegisterForm } from 'src/app/types/register.endpoint'
 import { Constructor } from 'src/app/types'
 import { Observable, of } from 'rxjs'
-import { environment } from 'src/environments/environment'
+
 import { retry, catchError, map } from 'rxjs/operators'
 import { HttpClient } from '@angular/common/http'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
@@ -61,7 +61,7 @@ export function RegisterBackendValidatorMixin<
     ): Observable<RegisterForm> {
       return this._http
         .post<RegisterForm>(
-          environment.API_WEB +
+          runtimeEnvironment.API_WEB +
             `oauth/custom/register/${this.formInputs[controlName].validationEndpoint}.json`,
           value
         )
@@ -76,7 +76,7 @@ export function RegisterBackendValidatorMixin<
     ): Observable<RegisterForm> {
       return this._http
         .post(
-          `${environment.API_WEB}reactivateAdditionalEmailsValidate.json`,
+          `${runtimeEnvironment.API_WEB}reactivateAdditionalEmailsValidate.json`,
           value
         )
         .pipe(
@@ -168,7 +168,10 @@ export function RegisterBackendValidatorMixin<
         StepC
       )
       return this._http
-        .post<RegisterForm>(`${environment.API_WEB}register.json`, registerForm)
+        .post<RegisterForm>(
+          `${runtimeEnvironment.API_WEB}register.json`,
+          registerForm
+        )
         .pipe(
           retry(3),
           catchError((error) => this._errorHandler.handleError(error))

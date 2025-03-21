@@ -1,6 +1,17 @@
-import { Component, EventEmitter, Inject, Input, Output } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnDestroy,
+  Output,
+} from '@angular/core'
 import { PlatformInfoService } from '../../platform-info'
-import { AssertionVisibilityString, EmailsEndpoint } from 'src/app/types'
+import {
+  AssertionVisibilityString,
+  EmailsEndpoint,
+  RequestInfoForm,
+} from 'src/app/types'
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
 import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
 import { error } from 'console'
@@ -10,10 +21,12 @@ import {
   MatLegacyDialogRef,
   MatLegacyDialogState,
 } from '@angular/material/legacy-dialog'
+import { map, takeUntil } from 'rxjs/operators'
+import { UserService } from 'src/app/core'
+import { Subject } from 'rxjs'
 
 export type ShareEmailsDomainsComponentDialogInput = {
   userEmailsJson: EmailsEndpoint
-  organizationName?: string
 }
 
 @Component({
@@ -24,19 +37,23 @@ export type ShareEmailsDomainsComponentDialogInput = {
     './share-emails-domains.component.scss-theme.scss',
   ],
 })
-export class ShareEmailsDomainsComponent {
+export class ShareEmailsDomainsComponent implements OnDestroy {
   beforeSummit = true
   afterSummit = false
   userPrivateDomains: AssertionVisibilityString[]
   @Input() userEmailsJson: EmailsEndpoint
-  @Input() organizationName: string
   form: any
+  $destroy: Subject<void> = new Subject<void>()
+  oauthRequest: RequestInfoForm
+  organizationName: string
   constructor(
     public platformInfo: PlatformInfoService,
     private fb: FormBuilder,
     private recordEmailsService: RecordEmailsService,
+    private _user: UserService,
     @Inject(WINDOW) private window: Window
   ) {}
+
   public loadingEmails = true
   @Output() finish = new EventEmitter<void>()
 
@@ -50,6 +67,15 @@ export class ShareEmailsDomainsComponent {
         this.userPrivateDomains?.map((item) => this.createItemFormGroup(item))
       ),
     })
+
+    this._user
+      .getUserSession()
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((userInfo) => {
+        console.log(userInfo)
+        this.oauthRequest = userInfo.oauthSession
+        this.organizationName = this.oauthRequest?.clientName
+      })
   }
 
   getTop3MostRecentPrivateDomains(
@@ -110,5 +136,10 @@ export class ShareEmailsDomainsComponent {
 
   finishIntertsitial(emails?: string[]) {
     this.finish.emit()
+  }
+
+  ngOnDestroy(): void {
+    this.$destroy.next()
+    this.$destroy.unsubscribe()
   }
 }

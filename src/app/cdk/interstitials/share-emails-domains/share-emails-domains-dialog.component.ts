@@ -18,6 +18,7 @@ import {
   MatLegacyDialogState,
 } from '@angular/material/legacy-dialog'
 import { ShareEmailsDomainsComponent } from './share-emails-domains.component'
+import { UserService } from 'src/app/core'
 
 export type ShareEmailsDomainsComponentDialogInput = {
   userEmailsJson: EmailsEndpoint
@@ -41,9 +42,10 @@ export class ShareEmailsDomainsDialogComponent extends ShareEmailsDomainsCompone
     @Inject(WINDOW) window: Window,
     @Inject(MAT_LEGACY_DIALOG_DATA)
     public data: ShareEmailsDomainsComponentDialogInput,
-    public dialogRef: MatLegacyDialogRef<ShareEmailsDomainsDialogComponent>
+    public dialogRef: MatLegacyDialogRef<ShareEmailsDomainsDialogComponent>,
+    user: UserService
   ) {
-    super(platformInfo, fb, recordEmailsService, window)
+    super(platformInfo, fb, recordEmailsService, user, window)
     if (this.data) {
       this.userEmailsJson = this.data.userEmailsJson
       this.organizationName = this.data.organizationName

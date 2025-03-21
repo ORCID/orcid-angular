@@ -5,7 +5,6 @@ import { takeUntil } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { TrustedIndividualsService } from 'src/app/core/trusted-individuals/trusted-individuals.service'
 import { TrustedIndividuals } from 'src/app/types/trusted-individuals.endpoint'
-import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-settings-users-that-thrust-you',
@@ -20,7 +19,7 @@ export class SettingsUsersThatThrustYouComponent implements OnInit {
   displayedColumns = ['trustedIndividuals', 'orcid', 'granted']
   platformSubs = new Subject<void>()
   isMobile: boolean
-  baseUrl = environment.BASE_URL
+  baseUrl = runtimeEnvironment.BASE_URL
   constructor(
     private _trustedIndividualsService: TrustedIndividualsService,
     private dialog: MatDialog,

@@ -1,4 +1,6 @@
-export const environment = {
+import { EnvironmentInterface } from './interface'
+
+export const environment: EnvironmentInterface = {
   production: true,
   debugger: false,
   ROBOTS: 'noindex, nofollow',
@@ -19,6 +21,7 @@ export const environment = {
   VERBOSE_SNACKBAR_ERRORS_REPORTS: false,
   WORDPRESS_S3: 'https://homepage-prod.orcid.org',
   WORDPRESS_S3_FALLBACK: 'https://homepage-fallback.orcid.org',
+  ONE_TRUST: '5a6d60d3-b085-4e48-8afa-d707c7afc419-test',
   NEW_RELIC_APP: '772335828',
   LANGUAGE_MENU_OPTIONS: {
     ar: 'العربية',

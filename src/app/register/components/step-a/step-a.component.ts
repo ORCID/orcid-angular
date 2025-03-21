@@ -5,7 +5,7 @@ import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { first } from 'rxjs/operators'
 import { Router } from '@angular/router'
 import { ApplicationRoutes } from 'src/app/constants'
-import { environment } from 'src/environments/environment'
+
 import { ReactivationLocal } from '../../../types/reactivation.local'
 
 @Component({
@@ -20,7 +20,7 @@ export class StepAComponent extends BaseStepDirective {
   constructor(private _platform: PlatformInfoService, private _router: Router) {
     super()
   }
-  infoSiteBaseUrl = environment.INFO_SITE
+  infoSiteBaseUrl = runtimeEnvironment.INFO_SITE
 
   goForward() {
     this.formGroup.markAllAsTouched()

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { environment } from 'src/environments/environment'
+
 import { HttpClient } from '@angular/common/http'
 import { Observable, of } from 'rxjs'
 import { SearchParameters, SearchResults } from 'src/app/types'
@@ -27,7 +27,7 @@ export class SearchService {
   search(querryParam: SearchParameters): Observable<SearchResults> {
     return this._http
       .get<SearchResults>(
-        `${environment.API_PUB}/expanded-search/${this.buildSearchUrl(
+        `${runtimeEnvironment.API_PUB}/expanded-search/${this.buildSearchUrl(
           querryParam
         )}`,
         {

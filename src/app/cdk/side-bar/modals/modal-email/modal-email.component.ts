@@ -485,16 +485,11 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
       this.emailsForm.removeControl(controlKey)
 
       if (domain) {
-        const remainingEmailsHaveDomain = this.emails.find((email) =>
-          email
-            ? email.verified &&
-              (email.value.split('@')[1].endsWith('.' + domain) ||
-                email.value.split('@')[1] === domain)
-            : false
-        )
+        let domains = this.generateSubdomains(domain)
+        let remainingEmailsHaveDomain = this.hasMatchingEmail(domains)
         if (!remainingEmailsHaveDomain) {
           this.verifiedDomains = this.verifiedDomains.filter(
-            (d) => d.value !== domain
+            (d) => !domains.includes(d.value)
           )
           this.emailsForm.removeControl('domain-' + domain)
         } else {
@@ -720,5 +715,25 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.$destroy.next(true)
     this.$destroy.unsubscribe()
+  }
+
+  private hasMatchingEmail(domains: string[]): boolean {
+    return domains.some((domain) =>
+      this.emails.some(
+        (email) =>
+          email?.verified &&
+          (email.value.split('@')[1] === domain ||
+            email.value.split('@')[1].endsWith('.' + domain))
+      )
+    )
+  }
+
+  private generateSubdomains(fullDomain: string): string[] {
+    const parts = fullDomain.split('.')
+    const subdomains = []
+    for (let i = 0; i < parts.length - 1; i++) {
+      subdomains.push(parts.slice(i).join('.'))
+    }
+    return subdomains
   }
 }

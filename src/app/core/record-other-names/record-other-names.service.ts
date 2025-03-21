@@ -4,7 +4,7 @@ import { Observable, of, ReplaySubject } from 'rxjs'
 import { catchError, map, retry, tap } from 'rxjs/operators'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { OtherNamesEndPoint } from '../../types/record-other-names.endpoint'
-import { environment } from '../../../environments/environment'
+
 import { UserRecordOptions } from 'src/app/types/record.local'
 import { RecordPublicSideBarService } from '../record-public-side-bar/record-public-side-bar.service'
 import { flatMap, groupBy } from 'lodash'
@@ -54,7 +54,7 @@ export class RecordOtherNamesService {
 
     this._http
       .get<OtherNamesEndPoint>(
-        environment.API_WEB + `my-orcid/otherNamesForms.json`,
+        runtimeEnvironment.API_WEB + `my-orcid/otherNamesForms.json`,
         {
           headers: this.headers,
         }
@@ -77,7 +77,7 @@ export class RecordOtherNamesService {
   ): Observable<OtherNamesEndPoint> {
     return this._http
       .post<OtherNamesEndPoint>(
-        environment.API_WEB + `my-orcid/otherNamesForms.json`,
+        runtimeEnvironment.API_WEB + `my-orcid/otherNamesForms.json`,
         otherNames,
         { headers: this.headers }
       )

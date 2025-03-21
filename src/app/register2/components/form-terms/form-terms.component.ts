@@ -8,7 +8,6 @@ import {
 } from '@angular/forms'
 import { ErrorStateMatcher } from '@angular/material/core'
 import { Register2Service } from 'src/app/core/register2/register2.service'
-import { environment } from 'src/environments/environment'
 
 import { BaseForm } from '../BaseForm'
 import { RegisterStateService } from '../../register-state.service'
@@ -38,7 +37,7 @@ import { RegisterStateService } from '../../register-state.service'
 // tslint:disable-next-line: class-name
 export class FormTermsComponent extends BaseForm implements OnInit, DoCheck {
   nextButtonWasClicked: boolean
-  environment = environment
+  environment = runtimeEnvironment
   constructor(
     private _register: Register2Service,
     private _errorStateMatcher: ErrorStateMatcher,

@@ -4,7 +4,7 @@ import { catchError, map, retry, tap } from 'rxjs/operators'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { NamesEndPoint } from '../../types/record-name.endpoint'
-import { environment } from '../../../environments/environment'
+
 import { UserRecordOptions } from 'src/app/types/record.local'
 import { RecordPublicSideBarService } from '../record-public-side-bar/record-public-side-bar.service'
 
@@ -43,9 +43,12 @@ export class RecordNamesService {
     }
 
     this._http
-      .get<NamesEndPoint>(environment.API_WEB + `account/nameForm.json`, {
-        headers: this.headers,
-      })
+      .get<NamesEndPoint>(
+        runtimeEnvironment.API_WEB + `account/nameForm.json`,
+        {
+          headers: this.headers,
+        }
+      )
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
@@ -62,7 +65,7 @@ export class RecordNamesService {
   postNames(names: NamesEndPoint): Observable<NamesEndPoint> {
     return this._http
       .post<NamesEndPoint>(
-        environment.API_WEB + `account/nameForm.json`,
+        runtimeEnvironment.API_WEB + `account/nameForm.json`,
         names,
         {
           headers: this.headers,

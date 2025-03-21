@@ -4,7 +4,6 @@ import { Observable, of, ReplaySubject } from 'rxjs'
 import { catchError, map, retry, switchMap, tap } from 'rxjs/operators'
 import { PersonIdentifierEndpoint } from 'src/app/types/record-person-identifier.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
-import { environment } from 'src/environments/environment'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { RecordPersonService } from '../record-person/record-person.service'
@@ -55,7 +54,7 @@ export class RecordPersonIdentifierService {
 
     this._http
       .get<PersonIdentifierEndpoint>(
-        environment.API_WEB + `my-orcid/externalIdentifiers.json`,
+        runtimeEnvironment.API_WEB + `my-orcid/externalIdentifiers.json`,
         {
           headers: this.headers,
         }
@@ -81,7 +80,7 @@ export class RecordPersonIdentifierService {
   postPersonalIdentifiers(otherNames: PersonIdentifierEndpoint) {
     return this._http
       .post<PersonIdentifierEndpoint>(
-        environment.API_WEB + `my-orcid/externalIdentifiers.json`,
+        runtimeEnvironment.API_WEB + `my-orcid/externalIdentifiers.json`,
         otherNames,
         {
           headers: this.headers,

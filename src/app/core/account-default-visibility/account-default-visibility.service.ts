@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { catchError, retry } from 'rxjs/operators'
 import { VisibilityStrings } from 'src/app/types/common.endpoint'
-import { environment } from 'src/environments/environment'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
 @Injectable({
@@ -22,7 +21,7 @@ export class AccountDefaultVisibilityService {
   update(frequency: VisibilityStrings): Observable<void> {
     return this._http
       .post<void>(
-        environment.API_WEB + `account/default_visibility.json`,
+        runtimeEnvironment.API_WEB + `account/default_visibility.json`,
         frequency,
         { headers: this.headers }
       )

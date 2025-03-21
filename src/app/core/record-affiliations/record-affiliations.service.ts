@@ -10,7 +10,6 @@ import {
   DisambiguatedOrganization,
   EmploymentsEndpoint,
 } from 'src/app/types/record-affiliation.endpoint'
-import { environment } from 'src/environments/environment'
 
 import { AffiliationsSortService } from '../record-affiliations-sort/record-affiliations-sort.service'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
@@ -112,7 +111,7 @@ export class RecordAffiliationService {
   ): Observable<Affiliation> {
     return this._http
       .get<Affiliation>(
-        environment.API_WEB +
+        runtimeEnvironment.API_WEB +
           `${
             options?.publicRecordId
               ? options?.publicRecordId + '/'
@@ -131,7 +130,7 @@ export class RecordAffiliationService {
     if (options.publicRecordId) {
       return this._http
         .get<AffiliationsEndpoint>(
-          environment.API_WEB +
+          runtimeEnvironment.API_WEB +
             `${options.publicRecordId}/affiliationGroups.json`
         )
         .pipe(
@@ -143,7 +142,7 @@ export class RecordAffiliationService {
     } else {
       return this._http
         .get<AffiliationsEndpoint>(
-          environment.API_WEB + `affiliations/affiliationGroups.json`
+          runtimeEnvironment.API_WEB + `affiliations/affiliationGroups.json`
         )
         .pipe(
           retry(3),
@@ -188,7 +187,7 @@ export class RecordAffiliationService {
   postAffiliation(affiliation): Observable<Affiliation> {
     return this._http
       .post<Affiliation>(
-        environment.API_WEB + 'affiliations/affiliation.json',
+        runtimeEnvironment.API_WEB + 'affiliations/affiliation.json',
         affiliation,
         {
           headers: this.headers,
@@ -205,7 +204,7 @@ export class RecordAffiliationService {
     if (org.length > 2) {
       return this._http
         .get<Organization[]>(
-          environment.API_WEB +
+          runtimeEnvironment.API_WEB +
             'affiliations/disambiguated/name/' +
             org +
             '?limit=100',
@@ -227,7 +226,7 @@ export class RecordAffiliationService {
   ): Observable<DisambiguatedOrganization> {
     return this._http
       .get<DisambiguatedOrganization>(
-        environment.API_WEB + 'affiliations/disambiguated/id/' + id,
+        runtimeEnvironment.API_WEB + 'affiliations/disambiguated/id/' + id,
         {
           headers: this.headers,
         }
@@ -244,7 +243,7 @@ export class RecordAffiliationService {
   ): Observable<any> {
     return this._http
       .get(
-        environment.API_WEB +
+        runtimeEnvironment.API_WEB +
           'affiliations/' +
           putCode +
           '/visibility/' +
@@ -260,7 +259,7 @@ export class RecordAffiliationService {
   delete(putCode: string): Observable<any> {
     return this._http
       .delete(
-        environment.API_WEB +
+        runtimeEnvironment.API_WEB +
           'affiliations/affiliation.json' +
           '?id=' +
           encodeURIComponent(putCode)
@@ -275,7 +274,7 @@ export class RecordAffiliationService {
   updatePreferredSource(putCode: string): Observable<any> {
     return this._http
       .get(
-        environment.API_WEB +
+        runtimeEnvironment.API_WEB +
           'affiliations/updateToMaxDisplay.json?putCode=' +
           putCode
       )
@@ -289,7 +288,7 @@ export class RecordAffiliationService {
   getEmployments(): Observable<EmploymentsEndpoint> {
     return this._http
       .get<EmploymentsEndpoint>(
-        environment.API_WEB + 'affiliations/employments.json',
+        runtimeEnvironment.API_WEB + 'affiliations/employments.json',
         {
           headers: this.headers,
         }

@@ -4,7 +4,6 @@ import { takeUntil } from 'rxjs/operators'
 import { RecordService } from 'src/app/core/record/record.service'
 import { RecordUtil as RecordUtil } from 'src/app/shared/utils/record.util'
 import { UserInfo } from 'src/app/types'
-import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-record-info',
@@ -21,7 +20,7 @@ export class RecordInfoComponent implements OnInit {
 
   userInfo: UserInfo
   isNamePublic: boolean
-  baseUrl = environment.BASE_URL
+  baseUrl = runtimeEnvironment.BASE_URL
 
   constructor(private _record: RecordService) {}
 

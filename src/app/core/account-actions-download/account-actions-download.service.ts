@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http'
 import { Inject, Injectable } from '@angular/core'
 import { catchError, retry, tap } from 'rxjs/operators'
 import { WINDOW } from 'src/app/cdk/window'
-import { environment } from 'src/environments/environment'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
 @Injectable({
@@ -17,7 +16,7 @@ export class AccountActionsDownloadService {
 
   downloadUserData() {
     return this.downloadBlogFile({
-      url: environment.API_WEB + 'get-my-data',
+      url: runtimeEnvironment.API_WEB + 'get-my-data',
       dataType: 'application/octet-stream',
     })
   }

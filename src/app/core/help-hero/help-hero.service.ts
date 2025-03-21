@@ -7,7 +7,6 @@ import { NamesEndPoint } from 'src/app/types/record-name.endpoint'
 import { WorksEndpoint } from 'src/app/types/record-works.endpoint'
 import { UserRecord } from 'src/app/types/record.local'
 import { UserInfo } from 'src/app/types/userInfo.endpoint'
-import { environment } from 'src/environments/environment'
 
 @Injectable({
   providedIn: 'root',
@@ -41,7 +40,7 @@ export class HelpHeroService {
       !(this.window as any).Cypress
     ) {
       this.modifyHelpHeroScriptOnCreate()
-      this.hlp = initHelpHero(environment.HELP_HERO_ID)
+      this.hlp = initHelpHero(runtimeEnvironment.HELP_HERO_ID)
       const helpHeroIdentifyObject = {
         numberOfValidatedEmails: this.getNumberOfValidatedEmails(
           userRecord?.emails?.emails

@@ -1,6 +1,5 @@
 import { Inject, Injectable } from '@angular/core'
 import { WINDOW } from 'src/app/cdk/window'
-import { environment } from 'src/environments/environment'
 
 export type JourneyType = 'orcid_registration' | 'orcid_update_emails'
 @Injectable({
@@ -25,7 +24,7 @@ export class CustomEventService {
       attributes,
     }
 
-    if (environment.debugger) {
+    if (runtimeEnvironment.debugger) {
       console.debug(
         `-> Journey "${journeyType}" started at ${this.journeys[journeyType].startTime}`,
         attributes
@@ -64,7 +63,7 @@ export class CustomEventService {
     }
     // Send the custom event to New Relic
 
-    if (environment.debugger) {
+    if (runtimeEnvironment.debugger) {
       console.debug(
         `-> Event "${eventName}" recorded for journey "${journeyType}" with elapsed time ${elapsedTime}ms`,
         eventAttributes

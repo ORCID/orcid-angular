@@ -2,7 +2,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { catchError, retry } from 'rxjs/operators'
-import { environment } from 'src/environments/environment'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
@@ -29,7 +28,7 @@ export class AccountActionsDeactivateService {
   deactivateAccount(): Observable<DeactivateResponse> {
     return this._http
       .post<DeactivateResponse>(
-        environment.API_WEB + `account/send-deactivate-account.json`,
+        runtimeEnvironment.API_WEB + `account/send-deactivate-account.json`,
         this.options
       )
       .pipe(
