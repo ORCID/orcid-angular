@@ -1,11 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { SettingsUsersThatThrustYouComponent } from './settings-users-that-thrust-you.component'
+import { DialogRevokeYourOwnPermissionsComponent } from './dialog-revoke-your-own-permissions.component'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 import {
+  MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA,
   MatLegacyDialog as MatDialog,
-  MatLegacyDialogModule as MatDialogModule,
+  MatLegacyDialogRef as MatDialogRef,
 } from '@angular/material/legacy-dialog'
 import { WINDOW_PROVIDERS } from '../../../cdk/window'
 import { PlatformInfoService } from '../../../cdk/platform-info'
@@ -13,24 +14,24 @@ import { ErrorHandlerService } from '../../../core/error-handler/error-handler.s
 import { SnackbarService } from '../../../cdk/snackbar/snackbar.service'
 import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
 import { Overlay } from '@angular/cdk/overlay'
-import { TrustedIndividualsService } from 'src/app/core/trusted-individuals/trusted-individuals.service'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 
-describe('SettingsUsersThatThrustYouComponent', () => {
-  let component: SettingsUsersThatThrustYouComponent
-  let fixture: ComponentFixture<SettingsUsersThatThrustYouComponent>
+describe('DialogRevokeYourOwnPermissionsComponent', () => {
+  let component: DialogRevokeYourOwnPermissionsComponent
+  let fixture: ComponentFixture<DialogRevokeYourOwnPermissionsComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, RouterTestingModule],
-      declarations: [SettingsUsersThatThrustYouComponent],
+      imports: [HttpClientTestingModule, RouterTestingModule],
+      declarations: [DialogRevokeYourOwnPermissionsComponent],
       providers: [
+        { provide: MatDialogRef, useValue: {} },
+        { provide: MAT_DIALOG_DATA, useValue: {} },
         WINDOW_PROVIDERS,
         PlatformInfoService,
         ErrorHandlerService,
         SnackbarService,
-        TrustedIndividualsService,
         MatSnackBar,
         MatDialog,
         Overlay,
@@ -40,7 +41,7 @@ describe('SettingsUsersThatThrustYouComponent', () => {
   })
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SettingsUsersThatThrustYouComponent)
+    fixture = TestBed.createComponent(DialogRevokeYourOwnPermissionsComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
   })

@@ -30,6 +30,7 @@ import { DialogAddTrustedIndividualsComponent } from './components/dialog-add-tr
 import { DialogRevokeTrustedIndividualsComponent } from './components/dialog-revoke-trusted-individuals/dialog-revoke-trusted-individuals.component'
 import { DialogRevokeTrustedOrganizationComponent } from './components/dialog-revoke-trusted-organization/dialog-revoke-trusted-organization.component'
 import { SettingsTrustedIndividualsSearchComponent } from './components/settings-trusted-individuals-search/settings-trusted-individuals-search.component'
+import { DialogRevokeYourOwnPermissionsComponent } from './components/dialog-revoke-your-own-permissions/dialog-revoke-your-own-permissions.component'
 import { SettingsTrustedIndividualsComponent } from './components/settings-trusted-individuals/settings-trusted-individuals.component'
 import { SettingsTrustedOrganizationComponent } from './components/settings-trusted-organization/settings-trusted-organization.component'
 import { SettingsTrustedOrganizationsComponent } from './components/settings-trusted-organizations/settings-trusted-organizations.component'
@@ -48,6 +49,7 @@ import { AlertMessageModule } from '../cdk/alert-message/alert-message.module'
     DialogRevokeTrustedOrganizationComponent,
     SettingsTrustedIndividualsComponent,
     DialogRevokeTrustedIndividualsComponent,
+    DialogRevokeYourOwnPermissionsComponent,
     SettingsTrustedIndividualsSearchComponent,
     DialogAddTrustedIndividualsComponent,
     SettingsUsersThatThrustYouComponent,
