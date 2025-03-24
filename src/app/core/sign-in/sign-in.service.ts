@@ -37,11 +37,11 @@ export class SignInService {
       .pipe(take(1))
       .subscribe((value) => {
         if(value === true) {
-            this.orcidLoginUrl = environment.AUTH_SERVER  + 'login';
+            this.orcidLoginUrl = runtimeEnvironment.AUTH_SERVER  + 'login';
             this.usingOauthServer = true
             console.log(this.orcidLoginUrl)
         } else {
-            this.orcidLoginUrl = environment.API_WEB + 'signin/auth.json'
+            this.orcidLoginUrl = runtimeEnvironment.API_WEB + 'signin/auth.json'
             this.usingOauthServer = false
         }
       })
@@ -61,17 +61,17 @@ export class SignInService {
   let loginUrl = this.orcidLoginUrl
     
   if (signInLocal.type && signInLocal.type === TypeSignIn.institutional) {
-    loginUrl = environment.API_WEB + 'shibboleth/signin/auth.json'
+    loginUrl = runtimeEnvironment.API_WEB + 'shibboleth/signin/auth.json'
   }
 
   if (signInLocal.type && signInLocal.type === TypeSignIn.social) {
-    loginUrl = environment.API_WEB + 'social/signin/auth.json'
+    loginUrl = runtimeEnvironment.API_WEB + 'social/signin/auth.json'
   }
   
   let headers = new HttpHeaders()
   if (this.usingOauthServer === true) {
 	let csrf = this._cookie.get('AUTH-XSRF-TOKEN')
-	headers = headers.set('Access-Control-Allow-Origin', environment.AUTH_SERVER)
+	headers = headers.set('Access-Control-Allow-Origin', runtimeEnvironment.AUTH_SERVER)
 	headers = headers.set('Content-Type', 'application/x-www-form-urlencoded')
 	headers = headers.set('x-xsrf-token', csrf)
   }   
