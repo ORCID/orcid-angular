@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
 import { Observable, of, Subject } from 'rxjs'
-import { switchMap, takeUntil} from 'rxjs/operators'
+import { startWith, switchMap, takeUntil} from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { TrustedIndividualsService } from 'src/app/core/trusted-individuals/trusted-individuals.service'
 import { TrustedIndividuals, Delegator } from 'src/app/types/trusted-individuals.endpoint'
@@ -29,15 +29,24 @@ export class SettingsUsersThatThrustYouComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.setupTrustedIndividualsObs()
     this._platform
       .get()
       .pipe(takeUntil(this.platformSubs))
       .subscribe((platform) => {
         this.isMobile = platform.columns4 || platform.columns8
       })
-      this.$usersThatThrustYou =
-      this._trustedIndividualsService.getTrustedIndividuals()
+      
   }
+
+
+  private setupTrustedIndividualsObs() {
+      this.$usersThatThrustYou=
+        this._trustedIndividualsService.updateDelegatorSuccess.pipe(
+          startWith(() => undefined),
+          switchMap(() => this._trustedIndividualsService.getTrustedIndividuals())
+        )
+    }
 
 
   revokeAccess(accountTrustedOrganization: Delegator) {

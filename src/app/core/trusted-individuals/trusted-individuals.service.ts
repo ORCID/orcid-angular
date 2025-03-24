@@ -44,7 +44,7 @@ export class TrustedIndividualsService {
     delete(account: Delegator): Observable<void> {
       return this._http
         .post<void>(
-          runtimeEnvironment.API_WEB + `account/revokeDelegate.json`,
+          runtimeEnvironment.API_WEB + `account/revokeOwnPermission.json`,
           { delegateToManage: account.giverOrcid.path },
           { headers: this.headers }
         )
