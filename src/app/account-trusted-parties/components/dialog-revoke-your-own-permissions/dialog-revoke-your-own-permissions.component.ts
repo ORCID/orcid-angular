@@ -11,7 +11,6 @@ import { Delegator } from 'src/app/types/trusted-individuals.endpoint'
   templateUrl: './dialog-revoke-your-own-permissions.component.html',
   styleUrls: ['./dialog-revoke-your-own-permissions.component.scss'],
 })
-
 export class DialogRevokeYourOwnPermissionsComponent implements OnInit {
   isMobile: boolean
   baseUrl = runtimeEnvironment.BASE_URL

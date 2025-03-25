@@ -16,16 +16,16 @@ describe('TrustedIndividualsService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-            imports: [HttpClientTestingModule, RouterTestingModule],
-            providers: [
-              WINDOW_PROVIDERS,
-              ErrorHandlerService,
-              PlatformInfoService,
-              SnackbarService,
-              MatSnackBar,
-              MatDialog,
-              Overlay,
-            ],
+      imports: [HttpClientTestingModule, RouterTestingModule],
+      providers: [
+        WINDOW_PROVIDERS,
+        ErrorHandlerService,
+        PlatformInfoService,
+        SnackbarService,
+        MatSnackBar,
+        MatDialog,
+        Overlay,
+      ],
     })
     service = TestBed.inject(TrustedIndividualsService)
   })

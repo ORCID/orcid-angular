@@ -4,10 +4,11 @@
   </app-modal-header>
 
   <p i18n="@@account.revokingYourOwnPermissions">
-    Revoking your Account Delegate access permissions means you will no longer be able to manage the ORCID account shown below.
+    Revoking your Account Delegate access permissions means you will no longer
+    be able to manage the ORCID account shown below.
   </p>
   <p class="orcid-id-container">
-    <strong>{{ data.giverName?.value}}</strong>
+    <strong>{{ data.giverName?.value }}</strong>
     <a
       class="underline"
       target="_blank"
@@ -19,7 +20,8 @@
 
   <app-alert-message type="warning" class="orc-font-body-small">
     <ng-container content i18n="@@account.warningRevokeAccess">
-      This user will be notified that you have revoked your account delegate access permissions for their record.
+      This user will be notified that you have revoked your account delegate
+      access permissions for their record.
     </ng-container>
   </app-alert-message>
 

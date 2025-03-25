@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable, Subject } from 'rxjs'
-import { TrustedIndividuals, Delegator } from 'src/app/types/trusted-individuals.endpoint'
+import {
+  TrustedIndividuals,
+  Delegator,
+} from 'src/app/types/trusted-individuals.endpoint'
 
 import { catchError, map, retry, tap } from 'rxjs/operators'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
@@ -11,13 +14,13 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
 })
 export class TrustedIndividualsService {
   updateDelegatorSuccess = new Subject<void>()
-    headers = new HttpHeaders({
-      'Access-Control-Allow-Origin': '*',
-    })
-    constructor(
-      private _errorHandler: ErrorHandlerService,
-      private _http: HttpClient
-    ) {}
+  headers = new HttpHeaders({
+    'Access-Control-Allow-Origin': '*',
+  })
+  constructor(
+    private _errorHandler: ErrorHandlerService,
+    private _http: HttpClient
+  ) {}
 
   getTrustedIndividuals(): Observable<TrustedIndividuals> {
     return this._http
@@ -41,17 +44,17 @@ export class TrustedIndividualsService {
       )
   }
 
-    delete(account: Delegator): Observable<void> {
-      return this._http
-        .post<void>(
-          runtimeEnvironment.API_WEB + `account/revokeOwnPermission.json`,
-          { delegateToManage: account.giverOrcid.path },
-          { headers: this.headers }
-        )
-        .pipe(
-          retry(3),
-          catchError((error) => this._errorHandler.handleError(error)),
-          tap(() => this.updateDelegatorSuccess.next())
-        )
-    }
+  delete(account: Delegator): Observable<void> {
+    return this._http
+      .post<void>(
+        runtimeEnvironment.API_WEB + `account/revokeOwnPermission.json`,
+        { delegateToManage: account.giverOrcid.path },
+        { headers: this.headers }
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() => this.updateDelegatorSuccess.next())
+      )
+  }
 }
