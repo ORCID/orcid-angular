@@ -1,3 +1,9 @@
+## v2.112.3 - 2025-03-25
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.2...v2.112.3)
+
+- [#2478](https://github.com/ORCID/orcid-angular/pull/2478): Implement revoke own permissions
+
 ## v2.112.2 - 2025-03-25
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.1...v2.112.2)
