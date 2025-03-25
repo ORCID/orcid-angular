@@ -2,40 +2,48 @@ import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { isEmpty } from 'lodash'
 import { Observable } from 'rxjs'
-import { map } from 'rxjs/operators'
+import { map, take } from 'rxjs/operators'
 import { UserInfo } from 'src/app/types'
 import { UserRecordOptions } from 'src/app/types/record.local'
 
 import { Router } from '@angular/router'
 import { PlatformInfo, PlatformInfoService } from '../../cdk/platform-info'
+import { TogglzService } from 'src/app/core/togglz/togglz.service'
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserInfoService {
-  platform: PlatformInfo
+  platform: PlatformInfo  
+  usingOauthServer: boolean
 
   constructor(
     private _http: HttpClient,
     private _router: Router,
+    private _togglz: TogglzService,
     private _platform: PlatformInfoService
   ) {
     this._platform.get().subscribe((value) => (this.platform = value))
+    this._togglz
+          .getStateOf('OAUTH_SIGNIN')
+          .pipe(take(1))
+          .subscribe((value) => {
+            if(value === true) {
+              this.usingOauthServer = true;
+            } else {
+              this.usingOauthServer = false;
+            }
+          })
   }
 
   public getUserInfo(options?: UserRecordOptions): Observable<UserInfo> {
+    let userInfoUrl = this.usingOauthServer ? 
+      runtimeEnvironment.AUTH_SERVER  + 'userInfo.json' : 
+      (runtimeEnvironment.API_WEB + (options?.publicRecordId ? options.publicRecordId + '/' : '') + 'userInfo.json');
+
     return this._http
-      .get<UserInfo>(
-		  // CODE TO SIGN IN WITH THE REGISTRY 
-		  /*
-      
-        runtimeEnvironment.API_WEB +
-          (options?.publicRecordId ? options.publicRecordId + '/' : '') +
-          'userInfo.json',
-          */
-		
-		// CODE TO SIGN IN WITH THE AUTH SERVER 
-        'https://auth.dev.orcid.org/userInfo.json',
+      .get<UserInfo>(		  
+        userInfoUrl,
         {
           withCredentials: true,
         }

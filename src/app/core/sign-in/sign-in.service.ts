@@ -102,27 +102,7 @@ export class SignInService {
             first(),
             map(() => response)
           )})
-    )	
-    
-	/* 
-	--- Registry SIGN IN
-	
-    let body = new HttpParams({ encoder: new CustomEncoder() })
-      .set('userId', getOrcidNumber(signInLocal.data.username))
-      .set('password', signInLocal.data.password)
-    if (signInLocal.data.verificationCode) {
-      body = body.set('verificationCode', signInLocal.data.verificationCode)
-    }
-    if (signInLocal.data.recoveryCode) {
-      body = body.set('recoveryCode', signInLocal.data.recoveryCode)
-    }
-    body = body.set('oauthRequest', signInLocal.isOauth ? 'true' : 'false')
-    return this._http
-      .post<SignIn>(runtimeEnvironment.API_WEB + loginUrl, body, {
-        withCredentials: true,
-      })
-    )	  	  
-	*/
+    )	    
   }
 
   reactivation(username: string) {

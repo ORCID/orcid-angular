@@ -46,11 +46,14 @@ import { DiscoService } from '../disco/disco.service'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { OauthService } from '../oauth/oauth.service'
 import { UserInfoService } from '../user-info/user-info.service'
+import { TogglzService } from 'src/app/core/togglz/togglz.service'
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
+  usingOauthServer: boolean
+
   headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
   })
@@ -62,8 +65,20 @@ export class UserService {
     private _oauth: OauthService,
     private _disco: DiscoService,
     private _userInfo: UserInfoService,
+    private _togglz: TogglzService,
     @Inject(WINDOW) private window: Window
-  ) {}
+  ) {
+    this._togglz
+          .getStateOf('OAUTH_SIGNIN')
+          .pipe(take(1))
+          .subscribe((value) => {
+            if(value === true) {
+              this.usingOauthServer = true;
+            } else {
+              this.usingOauthServer = false;
+            }
+          })
+  }
   $userStatusChecked = new ReplaySubject()
   private currentlyLoggedIn: boolean
   private loggingStateComesFromTheServer = false
@@ -93,11 +108,13 @@ export class UserService {
   }>()
 
   public getUserStatus(): Observable<boolean> {
-	// CODE TO SIGN IN WITH THE OAUTH APP
-	let url = 'https://auth.dev.orcid.org/userStatus.json'
-	// CODE TO SIGN IN WITH THE REGISTRY
-	// let url = runtimeEnvironment.API_WEB + 'userStatus.json'
-	return this._http
+    let url = runtimeEnvironment.API_WEB + 'userStatus.json';
+    
+	  if(this.usingOauthServer) {
+      url = runtimeEnvironment.AUTH_SERVER + 'userStatus.json';
+    }
+
+	  return this._http
       .get<UserStatus>(url, {
         withCredentials: true,
       })
