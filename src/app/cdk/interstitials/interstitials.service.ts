@@ -1,24 +1,31 @@
+import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { userInfo } from 'os'
-import { map } from 'rxjs/operators'
+import { Observable, of } from 'rxjs'
+import { catchError, map, retry, switchMap } from 'rxjs/operators'
 import { UserService } from 'src/app/core'
+import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 type Interstitials = 'DOMAIN_INTERSTITIAL'
 
 @Injectable({
   providedIn: 'root',
 })
 export class InterstitialsService {
-  constructor(private _userInfo: UserService) {}
+  constructor(
+    private _userInfo: UserService,
+    private _http: HttpClient,
+    private _errorHandler: ErrorHandlerService
+  ) {}
 
   setInterstitialsViewed(interstitial: Interstitials) {
     return this._userInfo.getUserSession().pipe(
       map((userInfo) => {
         const effectiveUser = userInfo?.userInfo?.EFFECTIVE_USER_ORCID
         localStorage.setItem(effectiveUser + '_' + interstitial, 'true')
-      })
+      }),
+      switchMap(() => this.addInterstitialFlag(interstitial))
     )
   }
-  getInterstitialsViewed(interstitial: Interstitials) {
+  getInterstitialsViewed(interstitial: Interstitials): Observable<boolean> {
     return this._userInfo.getUserSession().pipe(
       map((userInfo) => {
         const effectiveUser = userInfo?.userInfo?.EFFECTIVE_USER_ORCID
@@ -37,7 +44,38 @@ export class InterstitialsService {
             localStorage.getItem(effectiveUser + '_' + interstitial) === 'true'
           )
         }
+      }),
+      // if there is no flag in local storage, check the server
+      switchMap((hasFlag) => {
+        if (hasFlag) {
+          return of(true)
+        } else {
+          return this.hasInterstitialFlag(interstitial)
+        }
       })
     )
+  }
+
+  private hasInterstitialFlag(interstitialName: string): Observable<boolean> {
+    return this._http
+      .get<boolean>(
+        `${runtimeEnvironment.API_WEB}account/profileInterstitialFlag/${interstitialName}`
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
+  }
+
+  addInterstitialFlag(interstitialName: string): Observable<void> {
+    return this._http
+      .post<void>(
+        `${runtimeEnvironment.API_WEB}account/profileInterstitialFlag/add`,
+        { interstitialName }
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
   }
 }
