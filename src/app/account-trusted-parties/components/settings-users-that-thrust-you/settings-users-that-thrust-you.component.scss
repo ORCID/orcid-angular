@@ -39,4 +39,7 @@ table {
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
+  a {
+    margin-inline-start: 4px;
+  }
 }
