@@ -1,3 +1,33 @@
+## v2.112.1 - 2025-03-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.0...v2.112.1)
+
+- [#2480](https://github.com/ORCID/orcid-angular/pull/2480): fix-crazy-egg-not-loading
+
+## v2.112.0 - 2025-03-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.16...v2.112.0)
+
+## v2.111.16 - 2025-03-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.15...v2.111.16)
+
+- [#2477](https://github.com/ORCID/orcid-angular/pull/2477): Lmendoza/9666 UI updates to verification validation for email addresses and domains
+
+## v2.111.15 - 2025-03-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.14...v2.111.15)
+
+## v2.111.14 - 2025-03-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.13...v2.111.14)
+
+## v2.111.13 - 2025-03-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.12...v2.111.13)
+
+- [#2474](https://github.com/ORCID/orcid-angular/pull/2474): 9666-ui-updates-to-verification-validation-for-email-addresses-and-do…
+
 ## v2.111.12 - 2025-02-25
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.11...v2.111.12)
