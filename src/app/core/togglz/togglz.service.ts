@@ -12,17 +12,24 @@ import { UserService } from '..'
 })
 export class TogglzService {
   togglzSubject: ReplaySubject<Config>
-  constructor(private _http: HttpClient, private userService: UserService) {}
+  $userStatusChecked = new ReplaySubject()
+
+  constructor(private _http: HttpClient) {}
 
   private getConfig() {
     return this._http.get<Config>(runtimeEnvironment.API_WEB + 'config.json', {
       withCredentials: true,
     })
   }
+
+  reportUserStatusChecked(value) {
+    this.$userStatusChecked.next(value)
+  }
+
   getTogglz(): Observable<Config> {
     if (!this.togglzSubject) {
       this.togglzSubject = new ReplaySubject(1)
-      this.userService.$userStatusChecked
+      this.$userStatusChecked
         .asObservable()
         .pipe(switchMapTo(this.getConfig()))
         .subscribe((value) => {

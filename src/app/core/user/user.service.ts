@@ -68,6 +68,14 @@ export class UserService {
     private _togglz: TogglzService,
     @Inject(WINDOW) private window: Window
   ) {
+
+    this.$userStatusChecked.pipe(
+      tap((value) => {
+        this._togglz.reportUserStatusChecked(value)
+      })
+    ).subscribe()
+
+
     this._togglz
           .getStateOf('OAUTH_SIGNIN')
           .pipe(take(1))
