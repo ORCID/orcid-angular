@@ -22,6 +22,7 @@ export class FooterComponent implements OnInit {
     $localize`:@@footer.ariaLabelLicense:license`
   )
   linkedin = RecordUtil.appendOpensInNewTab('Linkedin')
+  bluesky = RecordUtil.appendOpensInNewTab('Bluesky')
   facebook = RecordUtil.appendOpensInNewTab('Facebook')
   mastodon = RecordUtil.appendOpensInNewTab('Mastodon')
   vimeo = RecordUtil.appendOpensInNewTab('Vimeo')
