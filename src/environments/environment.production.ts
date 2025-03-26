@@ -8,7 +8,7 @@ export const environment: EnvironmentInterface = {
   API_PUB: `//pub.<SUBDOMAIN><DOMAIN>/v3.0`,
   API_WEB: `//<SUBDOMAIN><DOMAIN>/`,
   BASE_URL: '//<SUBDOMAIN><DOMAIN>/',
-  AUTH_SERVER: 'https://auth.orcid.org/',
+  AUTH_SERVER: 'https://auth.<SUBDOMAIN><DOMAIN>/',
   INFO_SITE: 'https://info.orcid.org/',
   SHOW_TEST_WARNING_BANNER: false,
   GOOGLE_ANALYTICS_TESTING_MODE: false,
