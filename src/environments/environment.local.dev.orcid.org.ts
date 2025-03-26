@@ -6,7 +6,7 @@ export const environment: EnvironmentInterface = {
   ROBOTS: 'all',
   API_NEWS: 'https://www.mocky.io/v2/5dced45b3000007300931ce8',
   API_PUB: `//pub.<SUBDOMAIN><DOMAIN>/v3.0`,
-  API_WEB: `//<SUBDOMAIN><DOMAIN>/`,  
+  API_WEB: `//<SUBDOMAIN><DOMAIN>/`,
   BASE_URL: '//<SUBDOMAIN><DOMAIN>/',
   AUTH_SERVER: 'https://auth.<SUBDOMAIN><DOMAIN>/',
   INFO_SITE: 'https://info.orcid.org/',
