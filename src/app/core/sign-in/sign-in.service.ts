@@ -20,10 +20,6 @@ import { TogglzService } from 'src/app/core/togglz/togglz.service'
   providedIn: 'root',
 })
 export class SignInService {
-
-  orcidLoginUrl: string 
-  usingOauthServer: boolean
-  
   constructor(
     private _http: HttpClient,
     private _titleService: Title,
@@ -31,21 +27,8 @@ export class SignInService {
     private _cookie: CookieService,
     private _togglz: TogglzService,
     private _userService: UserService
-  ) {
-  this._togglz
-      .getStateOf('OAUTH_SIGNIN')
-      .pipe(take(1))
-      .subscribe((value) => {
-        if(value === true) {
-            this.orcidLoginUrl = runtimeEnvironment.AUTH_SERVER  + 'login';
-            this.usingOauthServer = true            
-        } else {
-            this.orcidLoginUrl = runtimeEnvironment.API_WEB + 'signin/auth.json'
-            this.usingOauthServer = false
-        }
-      })
-  }
-  
+  ) {}
+
   /**
    * @param  SignInLocal sign in information
    * @param  updateUserSession default true, set to true if after successfully signing Orcid Angular will still be open
@@ -56,52 +39,73 @@ export class SignInService {
     updateUserSession = true,
     forceSessionUpdate = false
   ) {
-  
-  let loginUrl = this.orcidLoginUrl
-    
-  if (signInLocal.type && signInLocal.type === TypeSignIn.institutional) {
-    loginUrl = runtimeEnvironment.API_WEB + 'shibboleth/signin/auth.json'
-  }
+    return this._togglz.getStateOf('OAUTH_SIGNIN').pipe(
+      take(1),
+      switchMap((outhSiginFlag) => {
+        let usingOauthServer = false
+        let orcidLoginUrl = ''
+        if (outhSiginFlag === true) {
+          orcidLoginUrl = runtimeEnvironment.AUTH_SERVER + 'login'
+          usingOauthServer = true
+        } else {
+          orcidLoginUrl = runtimeEnvironment.API_WEB + 'signin/auth.json'
+          usingOauthServer = false
+        }
 
-  if (signInLocal.type && signInLocal.type === TypeSignIn.social) {
-    loginUrl = runtimeEnvironment.API_WEB + 'social/signin/auth.json'
-  }
-  
-  let headers = new HttpHeaders()
-  if (this.usingOauthServer === true) {
-	  let csrf = this._cookie.get('AUTH-XSRF-TOKEN')
-	  headers = headers.set('Access-Control-Allow-Origin', runtimeEnvironment.AUTH_SERVER)
-	  headers = headers.set('Content-Type', 'application/x-www-form-urlencoded')
-	  headers = headers.set('x-xsrf-token', csrf)
-  }   
-  
-  let body = new HttpParams({ encoder: new CustomEncoder() })
-    .set('username', getOrcidNumber(signInLocal.data.username))
-    .set('password', signInLocal.data.password)
-  if (signInLocal.data.verificationCode) {
-    body = body.set('verificationCode', signInLocal.data.verificationCode)
-  }
-  if (signInLocal.data.recoveryCode) {
-    body = body.set('recoveryCode', signInLocal.data.recoveryCode)
-  }
-  body = body.set('oauthRequest', signInLocal.isOauth ? 'true' : 'false')
-  return this._http
-    .post<SignIn>(loginUrl, body, {
-      headers: headers,
-      withCredentials: true,
-    })
-    .pipe(
-      retry(3),
-      catchError((error) => this._errorHandler.handleError(error)),
-      switchMap((response) => {
-        // call refreshUserSession with force session update to handle register actions from sessions with a logged in user
-        return this._userService
-          .refreshUserSession(forceSessionUpdate, true)
+        let loginUrl = orcidLoginUrl
+
+        if (signInLocal.type && signInLocal.type === TypeSignIn.institutional) {
+          loginUrl = runtimeEnvironment.API_WEB + 'shibboleth/signin/auth.json'
+        }
+
+        if (signInLocal.type && signInLocal.type === TypeSignIn.social) {
+          loginUrl = runtimeEnvironment.API_WEB + 'social/signin/auth.json'
+        }
+
+        let headers = new HttpHeaders()
+        if (usingOauthServer === true) {
+          let csrf = this._cookie.get('AUTH-XSRF-TOKEN')
+          headers = headers.set(
+            'Access-Control-Allow-Origin',
+            runtimeEnvironment.AUTH_SERVER
+          )
+          headers = headers.set(
+            'Content-Type',
+            'application/x-www-form-urlencoded'
+          )
+          headers = headers.set('x-xsrf-token', csrf)
+        }
+
+        let body = new HttpParams({ encoder: new CustomEncoder() })
+          .set('username', getOrcidNumber(signInLocal.data.username))
+          .set('password', signInLocal.data.password)
+        if (signInLocal.data.verificationCode) {
+          body = body.set('verificationCode', signInLocal.data.verificationCode)
+        }
+        if (signInLocal.data.recoveryCode) {
+          body = body.set('recoveryCode', signInLocal.data.recoveryCode)
+        }
+        body = body.set('oauthRequest', signInLocal.isOauth ? 'true' : 'false')
+        return this._http
+          .post<SignIn>(loginUrl, body, {
+            headers: headers,
+            withCredentials: true,
+          })
           .pipe(
-            first(),
-            map(() => response)
-          )})
-    )	    
+            retry(3),
+            catchError((error) => this._errorHandler.handleError(error)),
+            switchMap((response) => {
+              // call refreshUserSession with force session update to handle register actions from sessions with a logged in user
+              return this._userService
+                .refreshUserSession(forceSessionUpdate, true)
+                .pipe(
+                  first(),
+                  map(() => response)
+                )
+            })
+          )
+      })
+    )
   }
 
   reactivation(username: string) {

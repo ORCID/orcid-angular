@@ -52,8 +52,6 @@ import { TogglzService } from 'src/app/core/togglz/togglz.service'
   providedIn: 'root',
 })
 export class UserService {
-  usingOauthServer: boolean
-
   headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
   })
@@ -68,24 +66,13 @@ export class UserService {
     private _togglz: TogglzService,
     @Inject(WINDOW) private window: Window
   ) {
-
-    this.$userStatusChecked.pipe(
-      tap((value) => {
-        this._togglz.reportUserStatusChecked(value)
-      })
-    ).subscribe()
-
-
-    this._togglz
-          .getStateOf('OAUTH_SIGNIN')
-          .pipe(take(1))
-          .subscribe((value) => {
-            if(value === true) {
-              this.usingOauthServer = true;
-            } else {
-              this.usingOauthServer = false;
-            }
-          })
+    this.$userStatusChecked
+      .pipe(
+        tap((value) => {
+          this._togglz.reportUserStatusChecked(value)
+        })
+      )
+      .subscribe()
   }
   $userStatusChecked = new ReplaySubject()
   private currentlyLoggedIn: boolean
@@ -116,23 +103,31 @@ export class UserService {
   }>()
 
   public getUserStatus(): Observable<boolean> {
-    let url = runtimeEnvironment.API_WEB + 'userStatus.json';
-    
-	  if(this.usingOauthServer) {
-      url = runtimeEnvironment.AUTH_SERVER + 'userStatus.json';
-    }
+    return this._togglz.getStateOf('OAUTH_SIGNIN').pipe(
+      take(1),
+      switchMap((outhSiginFlag) => {
+        let url = runtimeEnvironment.API_WEB + 'userStatus.json'
 
-	  return this._http
-      .get<UserStatus>(url, {
-        withCredentials: true,
+        if (outhSiginFlag) {
+          url = runtimeEnvironment.AUTH_SERVER + 'userStatus.json'
+        }
+
+        return this._http
+          .get<UserStatus>(url, {
+            withCredentials: true,
+          })
+          .pipe(map((response) => !!response.loggedIn))
+          .pipe(
+            retry(3),
+            catchError((error) =>
+              this._errorHandler.handleError(
+                error,
+                ERROR_REPORT.STANDARD_VERBOSE
+              )
+            )
+          )
       })
-      .pipe(map((response) => !!response.loggedIn))
-      .pipe(
-        retry(3),
-        catchError((error) =>
-          this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
-        )
-      )
+    )
   }
 
   private getNameForm(): Observable<NameForm> {

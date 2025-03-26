@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { isEmpty } from 'lodash'
 import { Observable } from 'rxjs'
-import { map, take } from 'rxjs/operators'
+import { map, switchMap, take } from 'rxjs/operators'
 import { UserInfo } from 'src/app/types'
 import { UserRecordOptions } from 'src/app/types/record.local'
 
@@ -14,7 +14,7 @@ import { TogglzService } from 'src/app/core/togglz/togglz.service'
   providedIn: 'root',
 })
 export class UserInfoService {
-  platform: PlatformInfo    
+  platform: PlatformInfo
 
   constructor(
     private _http: HttpClient,
@@ -22,49 +22,48 @@ export class UserInfoService {
     private _togglz: TogglzService,
     private _platform: PlatformInfoService
   ) {
-    this._platform.get().subscribe((value) => (this.platform = value))    
+    this._platform.get().subscribe((value) => (this.platform = value))
   }
 
   public getUserInfo(options?: UserRecordOptions): Observable<UserInfo> {
-    let userInfoUrl = runtimeEnvironment.API_WEB + (options?.publicRecordId ? options.publicRecordId + '/' : '') + 'userInfo.json';
-    
-    this._togglz
-      .getStateOf('OAUTH_SIGNIN')
-      .pipe(take(1))
-      .subscribe((value) => {
-        if(value === true) {
-          userInfoUrl = runtimeEnvironment.AUTH_SERVER  + 'userInfo.json';
+    return this._togglz.getStateOf('OAUTH_SIGNIN').pipe(
+      take(1),
+      switchMap((outhSiginFlag) => {
+        let userInfoUrl =
+          runtimeEnvironment.API_WEB +
+          (options?.publicRecordId ? options.publicRecordId + '/' : '') +
+          'userInfo.json'
+
+        if (outhSiginFlag) {
+          userInfoUrl = runtimeEnvironment.AUTH_SERVER + 'userInfo.json'
         }
-      })
 
+        return this._http
+          .get<UserInfo>(userInfoUrl, {
+            withCredentials: true,
+          })
+          .pipe(
+            map((value) => {
+              value.USER_NOT_FOUND = isEmpty(value)
+              value.RECORD_WITH_ISSUES = !!(
+                value.IS_LOCKED === 'true' ||
+                value.IS_DEACTIVATED === 'true' ||
+                value.PRIMARY_RECORD
+              )
 
-    return this._http
-      .get<UserInfo>(		  
-        userInfoUrl,
-        {
-          withCredentials: true,
-        }
-      )
-      .pipe(
-        map((value) => {
-          value.USER_NOT_FOUND = isEmpty(value)
-          value.RECORD_WITH_ISSUES = !!(
-            value.IS_LOCKED === 'true' ||
-            value.IS_DEACTIVATED === 'true' ||
-            value.PRIMARY_RECORD
-          )
+              if (
+                this.platform.queryParameters.hasOwnProperty('orcid') &&
+                !this.platform.hasOauthParameters
+              ) {
+                this._router.navigate(['/my-orcid'], {
+                  queryParams: { orcid: value.EFFECTIVE_USER_ORCID },
+                })
+              }
 
-          if (
-            this.platform.queryParameters.hasOwnProperty('orcid') &&
-            !this.platform.hasOauthParameters
-          ) {
-            this._router.navigate(['/my-orcid'], {
-              queryParams: { orcid: value.EFFECTIVE_USER_ORCID },
+              return value
             })
-          }
-
-          return value
-        })
-      )
+          )
+      })
+    )
   }
 }
