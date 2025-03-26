@@ -38,8 +38,7 @@ export class SignInService {
       .subscribe((value) => {
         if(value === true) {
             this.orcidLoginUrl = runtimeEnvironment.AUTH_SERVER  + 'login';
-            this.usingOauthServer = true
-            console.log(this.orcidLoginUrl)
+            this.usingOauthServer = true            
         } else {
             this.orcidLoginUrl = runtimeEnvironment.API_WEB + 'signin/auth.json'
             this.usingOauthServer = false
@@ -70,10 +69,10 @@ export class SignInService {
   
   let headers = new HttpHeaders()
   if (this.usingOauthServer === true) {
-	let csrf = this._cookie.get('AUTH-XSRF-TOKEN')
-	headers = headers.set('Access-Control-Allow-Origin', runtimeEnvironment.AUTH_SERVER)
-	headers = headers.set('Content-Type', 'application/x-www-form-urlencoded')
-	headers = headers.set('x-xsrf-token', csrf)
+	  let csrf = this._cookie.get('AUTH-XSRF-TOKEN')
+	  headers = headers.set('Access-Control-Allow-Origin', runtimeEnvironment.AUTH_SERVER)
+	  headers = headers.set('Content-Type', 'application/x-www-form-urlencoded')
+	  headers = headers.set('x-xsrf-token', csrf)
   }   
   
   let body = new HttpParams({ encoder: new CustomEncoder() })

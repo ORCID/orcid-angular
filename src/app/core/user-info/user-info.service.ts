@@ -14,8 +14,7 @@ import { TogglzService } from 'src/app/core/togglz/togglz.service'
   providedIn: 'root',
 })
 export class UserInfoService {
-  platform: PlatformInfo  
-  usingOauthServer: boolean
+  platform: PlatformInfo    
 
   constructor(
     private _http: HttpClient,
@@ -23,23 +22,21 @@ export class UserInfoService {
     private _togglz: TogglzService,
     private _platform: PlatformInfoService
   ) {
-    this._platform.get().subscribe((value) => (this.platform = value))
-    this._togglz
-          .getStateOf('OAUTH_SIGNIN')
-          .pipe(take(1))
-          .subscribe((value) => {
-            if(value === true) {
-              this.usingOauthServer = true;
-            } else {
-              this.usingOauthServer = false;
-            }
-          })
+    this._platform.get().subscribe((value) => (this.platform = value))    
   }
 
   public getUserInfo(options?: UserRecordOptions): Observable<UserInfo> {
-    let userInfoUrl = this.usingOauthServer ? 
-      runtimeEnvironment.AUTH_SERVER  + 'userInfo.json' : 
-      (runtimeEnvironment.API_WEB + (options?.publicRecordId ? options.publicRecordId + '/' : '') + 'userInfo.json');
+    let userInfoUrl = runtimeEnvironment.API_WEB + (options?.publicRecordId ? options.publicRecordId + '/' : '') + 'userInfo.json';
+    
+    this._togglz
+      .getStateOf('OAUTH_SIGNIN')
+      .pipe(take(1))
+      .subscribe((value) => {
+        if(value === true) {
+          userInfoUrl = runtimeEnvironment.AUTH_SERVER  + 'userInfo.json';
+        }
+      })
+
 
     return this._http
       .get<UserInfo>(		  
