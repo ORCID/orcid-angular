@@ -1,3 +1,9 @@
+## v2.112.4 - 2025-03-26
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.3...v2.112.4)
+
+- [#2483](https://github.com/ORCID/orcid-angular/pull/2483): add server interstitial logic
+
 ## v2.112.3 - 2025-03-25
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.2...v2.112.3)
