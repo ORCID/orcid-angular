@@ -59,7 +59,7 @@ export class InterstitialsService {
   private hasInterstitialFlag(interstitialName: string): Observable<boolean> {
     return this._http
       .get<boolean>(
-        `${runtimeEnvironment.API_WEB}account/profileInterstitialFlag/${interstitialName}`
+        `${runtimeEnvironment.API_WEB}account/hasInterstitialFlag/${interstitialName}`
       )
       .pipe(
         retry(3),
@@ -67,11 +67,11 @@ export class InterstitialsService {
       )
   }
 
-  addInterstitialFlag(interstitialName: string): Observable<void> {
+  private addInterstitialFlag(interstitialName: string): Observable<void> {
     return this._http
       .post<void>(
-        `${runtimeEnvironment.API_WEB}account/profileInterstitialFlag/add`,
-        { interstitialName }
+        `${runtimeEnvironment.API_WEB}account/addInterstitialFlag`,
+        interstitialName
       )
       .pipe(
         retry(3),
