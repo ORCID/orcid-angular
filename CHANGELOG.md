@@ -1,3 +1,27 @@
+## v2.112.4 - 2025-03-26
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.3...v2.112.4)
+
+- [#2483](https://github.com/ORCID/orcid-angular/pull/2483): add server interstitial logic
+
+## v2.112.3 - 2025-03-25
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.2...v2.112.3)
+
+- [#2478](https://github.com/ORCID/orcid-angular/pull/2478): Implement revoke own permissions
+
+## v2.112.2 - 2025-03-25
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.1...v2.112.2)
+
+- [#2482](https://github.com/ORCID/orcid-angular/pull/2482): 9698-re-implement-the-removal-of-cookie-consent-from-the-trust-marker…
+
+## v2.112.1 - 2025-03-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.0...v2.112.1)
+
+- [#2480](https://github.com/ORCID/orcid-angular/pull/2480): fix-crazy-egg-not-loading
+
 ## v2.112.0 - 2025-03-19
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.16...v2.112.0)
