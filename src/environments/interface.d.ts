@@ -5,6 +5,7 @@ export interface EnvironmentInterface {
   API_NEWS: string
   API_PUB: string
   API_WEB: string
+  AUTH_SERVER: string
   BASE_URL: string
   INFO_SITE: string
   GOOGLE_ANALYTICS_TESTING_MODE: boolean

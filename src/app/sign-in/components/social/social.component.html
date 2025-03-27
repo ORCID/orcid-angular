@@ -17,18 +17,3 @@
     Sign in through your institution
   </ng-container>
 </button>
-<form ngNoForm action="{{ baseUri }}signin/google" method="POST">
-  <input type="hidden" name="_csrf" value="{{ csrf }}" />
-  <input type="hidden" name="scope" value="email" />
-  <button
-    mat-raised-button
-    class="google mat-button-wrap-text-with-icon mobile-fixed-width mat-elevation-z0"
-    type="submit"
-    [attr.aria-label]="labelGoogleButton"
-  >
-    <img src="./assets/vectors/google.svg" alt="Google" />
-    <ng-container i18n="@@ngOrcid.signin.google">
-      Sign in with Google
-    </ng-container>
-  </button>
-</form>

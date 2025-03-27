@@ -46,6 +46,7 @@ import { DiscoService } from '../disco/disco.service'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { OauthService } from '../oauth/oauth.service'
 import { UserInfoService } from '../user-info/user-info.service'
+import { TogglzService } from 'src/app/core/togglz/togglz.service'
 
 @Injectable({
   providedIn: 'root',
@@ -62,8 +63,17 @@ export class UserService {
     private _oauth: OauthService,
     private _disco: DiscoService,
     private _userInfo: UserInfoService,
+    private _togglz: TogglzService,
     @Inject(WINDOW) private window: Window
-  ) {}
+  ) {
+    this.$userStatusChecked
+      .pipe(
+        tap((value) => {
+          this._togglz.reportUserStatusChecked(value)
+        })
+      )
+      .subscribe()
+  }
   $userStatusChecked = new ReplaySubject()
   private currentlyLoggedIn: boolean
   private loggingStateComesFromTheServer = false
@@ -93,17 +103,31 @@ export class UserService {
   }>()
 
   public getUserStatus(): Observable<boolean> {
-    return this._http
-      .get<UserStatus>(runtimeEnvironment.API_WEB + 'userStatus.json', {
-        withCredentials: true,
+    return this._togglz.getStateOf('OAUTH_SIGNIN').pipe(
+      take(1),
+      switchMap((outhSiginFlag) => {
+        let url = runtimeEnvironment.API_WEB + 'userStatus.json'
+
+        if (outhSiginFlag) {
+          url = runtimeEnvironment.AUTH_SERVER + 'userStatus.json'
+        }
+
+        return this._http
+          .get<UserStatus>(url, {
+            withCredentials: true,
+          })
+          .pipe(map((response) => !!response.loggedIn))
+          .pipe(
+            retry(3),
+            catchError((error) =>
+              this._errorHandler.handleError(
+                error,
+                ERROR_REPORT.STANDARD_VERBOSE
+              )
+            )
+          )
       })
-      .pipe(map((response) => !!response.loggedIn))
-      .pipe(
-        retry(3),
-        catchError((error) =>
-          this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
-        )
-      )
+    )
   }
 
   private getNameForm(): Observable<NameForm> {

@@ -6,6 +6,7 @@ export const environment: EnvironmentInterface = {
   API_NEWS: 'https://info.int.orcid.org/feed/',
   API_PUB: `//pub.<SUBDOMAIN><DOMAIN>/v3.0`,
   API_WEB: `//<SUBDOMAIN><DOMAIN>/`,
+  AUTH_SERVER: 'https://auth.<SUBDOMAIN><DOMAIN>/',
   BASE_URL: '//<SUBDOMAIN><DOMAIN>/',
   INFO_SITE: 'https://info.qa.orcid.org/',
   GOOGLE_ANALYTICS_TESTING_MODE: true,
