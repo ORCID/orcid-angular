@@ -8,9 +8,10 @@ import { EmailsEndpoint } from 'src/app/types'
 import { UserRecord } from 'src/app/types/record.local'
 import { ShareEmailsDomainsComponentDialogInput } from 'src/app/cdk/interstitials/share-emails-domains/share-emails-domains.component'
 import { InterstitialsService } from 'src/app/cdk/interstitials/interstitials.service'
-import { Observable } from 'rxjs'
+import { EMPTY, Observable, of } from 'rxjs'
 import { ShareEmailsDomainsDialogComponent } from 'src/app/cdk/interstitials/share-emails-domains/share-emails-domains-dialog.component'
 import { TogglzService } from '../togglz/togglz.service'
+import { filter, switchMap, tap } from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root',
@@ -31,47 +32,58 @@ export class LoginInterstitialsService {
       })
   }
 
-  checkLoginInterstitials(userRecord: UserRecord): Observable<string[]> | void {
+  checkLoginInterstitials(userRecord: UserRecord): Observable<string[]> {
     if (
       userRecord?.userInfo &&
       userRecord?.emails?.emailDomains &&
       !this.alreadyCheckLoginInterstitials
     ) {
-      this.interstitialService
-        .getInterstitialsViewed('DOMAIN_INTERSTITIAL')
-        .subscribe((viewed) => {
-          this.alreadySawSignDomainInterstitial = viewed
-        })
       this.alreadyCheckLoginInterstitials = true
-      const isNotImpersonating =
-        userRecord.userInfo.REAL_USER_ORCID ===
-        userRecord.userInfo.EFFECTIVE_USER_ORCID
+      return this.interstitialService
+        .getInterstitialsViewed('DOMAIN_INTERSTITIAL')
+        .pipe(
+          tap((viewed) => {
+            this.alreadySawSignDomainInterstitial = viewed
+          }),
+          filter(() => {
+            const isNotImpersonating =
+              userRecord.userInfo.REAL_USER_ORCID ===
+              userRecord.userInfo.EFFECTIVE_USER_ORCID
+            return (
+              isNotImpersonating &&
+              !this.userHasPublicDomains(userRecord.emails) &&
+              this.userHasPrivateDomains(userRecord.emails) &&
+              this.loginDomainsInterstitialEnabled &&
+              !this.alreadySawSignDomainInterstitial
+            )
+          }),
+          switchMap(() => {
+            this.alreadySawSignDomainInterstitial = true
+            return this.interstitialService.setInterstitialsViewed(
+              'DOMAIN_INTERSTITIAL'
+            )
+          }),
+          switchMap(() => {
+            const data: ShareEmailsDomainsComponentDialogInput = {
+              userEmailsJson: userRecord.emails,
+            }
 
-      if (
-        isNotImpersonating &&
-        !this.userHasPublicDomains(userRecord.emails) &&
-        this.userHasPrivateDomains(userRecord.emails) &&
-        this.loginDomainsInterstitialEnabled &&
-        !this.alreadySawSignDomainInterstitial
-      ) {
-        this.alreadySawSignDomainInterstitial = true
-        this.interstitialService
-          .setInterstitialsViewed('DOMAIN_INTERSTITIAL')
-          .subscribe()
-        const data: ShareEmailsDomainsComponentDialogInput = {
-          userEmailsJson: userRecord.emails,
-        }
-
-        const dialog = this._matDialog.open(ShareEmailsDomainsDialogComponent, {
-          data,
-          width: '580px',
-          disableClose: true,
-          autoFocus: false,
-          restoreFocus: false,
-          maxHeight: 'calc(100vh - 20px)',
-        })
-        return dialog.afterClosed()
-      }
+            const dialog = this._matDialog.open(
+              ShareEmailsDomainsDialogComponent,
+              {
+                data,
+                width: '580px',
+                disableClose: true,
+                autoFocus: false,
+                restoreFocus: false,
+                maxHeight: 'calc(100vh - 20px)',
+              }
+            )
+            return dialog.afterClosed()
+          })
+        )
+    } else {
+      return EMPTY
     }
   }
 
