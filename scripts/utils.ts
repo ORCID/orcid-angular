@@ -87,6 +87,11 @@ export function runtimeEnvironmentScript() {
             .replace('<SUBDOMAIN>', getSubDomain())
             .replace('<DOMAIN>', getCurrentLeanDomain());
         }
+        if (env.AUTH_SERVER) {
+          env.AUTH_SERVER = env.AUTH_SERVER
+            .replace('<SUBDOMAIN>', getSubDomain())
+            .replace('<DOMAIN>', getCurrentLeanDomain());
+        }
       }
 
     var domain =
