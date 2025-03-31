@@ -24,11 +24,6 @@ export class LoginInterstitialsService {
     private interstitialService: InterstitialsService,
     private toggleService: TogglzService
   ) {
-    this.interstitialService
-      .getInterstitialsViewed('DOMAIN_INTERSTITIAL')
-      .subscribe((viewed) => {
-        this.alreadySawSignDomainInterstitial = viewed
-      })
     this.toggleService
       .getStateOf('LOGIN_DOMAINS_INTERSTITIAL')
       .subscribe((state) => {
@@ -42,6 +37,11 @@ export class LoginInterstitialsService {
       userRecord?.emails?.emailDomains &&
       !this.alreadyCheckLoginInterstitials
     ) {
+      this.interstitialService
+        .getInterstitialsViewed('DOMAIN_INTERSTITIAL')
+        .subscribe((viewed) => {
+          this.alreadySawSignDomainInterstitial = viewed
+        })
       this.alreadyCheckLoginInterstitials = true
       const isNotImpersonating =
         userRecord.userInfo.REAL_USER_ORCID ===
