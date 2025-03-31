@@ -1,3 +1,9 @@
+## v2.112.7 - 2025-03-31
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.6...v2.112.7)
+
+- [#2485](https://github.com/ORCID/orcid-angular/pull/2485): view interstitials only when signed in
+
 ## v2.112.6 - 2025-03-31
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.5...v2.112.6)
