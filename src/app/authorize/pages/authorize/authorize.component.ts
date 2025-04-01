@@ -63,12 +63,13 @@ export class AuthorizeComponent {
     forkJoin({
       userSession: this.loadUserSession(),
       platform: this.loadPlatformInfo(),
-      interstitial: this.loadInterstitialViewed(),
       togglz: this.loadTogglzState(),
       emails: this.loadEmails(),
-    }).subscribe(({ userSession }) => {
-      this.handleUserSession(userSession)
     })
+      .pipe(tap(() => this.loadInterstitialViewed()))
+      .subscribe(({ userSession }) => {
+        this.handleUserSession(userSession)
+      })
   }
 
   /**
