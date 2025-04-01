@@ -66,10 +66,20 @@ export class AuthorizeComponent {
       togglz: this.loadTogglzState(),
       emails: this.loadEmails(),
     })
-      .pipe(tap(() => this.loadInterstitialViewed()))
+      .pipe(
+        tap(({ userSession }) => {
+          if (this.isUserLoggedIn(userSession)) {
+            this.loadInterstitialViewed()
+          }
+        })
+      )
       .subscribe(({ userSession }) => {
         this.handleUserSession(userSession)
       })
+  }
+
+  private isUserLoggedIn(userSession: any): boolean {
+    return !!userSession?.userSession?.userInfo
   }
 
   /**
