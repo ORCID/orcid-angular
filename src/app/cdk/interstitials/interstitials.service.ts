@@ -29,6 +29,7 @@ export class InterstitialsService {
 
   getInterstitialsViewed(interstitial: Interstitials): Observable<boolean> {
     return this._userInfo.getUserSession().pipe(
+      filter((userInfo) => !!userInfo.userInfo),
       map((userInfo) => {
         const effectiveUser = userInfo?.userInfo?.EFFECTIVE_USER_ORCID
         if (interstitial === 'DOMAIN_INTERSTITIAL') {
