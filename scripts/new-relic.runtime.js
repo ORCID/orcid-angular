@@ -3,9 +3,9 @@ const newRelicRegQaBrowser = '772335827'
 const newRelicRegSboxrowser = '772335828'
 
 var domain =
-window.location.hostname +
-(window.location.port ? ':' + window.location.port : '') +
-window.location.pathname    
+  window.location.hostname +
+  (window.location.port ? ':' + window.location.port : '') +
+  window.location.pathname
 
 newRelicKey = newRelicRegProdBrowser
 if (domain.includes('qa.orcid.org')) {

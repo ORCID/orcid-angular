@@ -7,6 +7,11 @@ const newRelicScript = readFileSync(
 )
 
 export function newRelic(indexHtml: string) {
-  return indexHtml.replace('<!-- NEW_RELIC_PLACEHOLDER -->', `<script type="text/javascript">
-` + newRelicScript + `</script>`)
+  return indexHtml.replace(
+    '<!-- NEW_RELIC_PLACEHOLDER -->',
+    `<script type="text/javascript">
+` +
+      newRelicScript +
+      `</script>`
+  )
 }
