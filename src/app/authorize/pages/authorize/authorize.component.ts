@@ -67,23 +67,13 @@ export class AuthorizeComponent {
       emails: this.loadEmails(),
     })
       .pipe(
-        tap(({ userSession }) => {
-          if (this.isUserLoggedIn(userSession)) {
-            this.loadInterstitialViewed()
-          }
+        tap(() => {
+          this.loadInterstitialViewed()
         })
       )
       .subscribe(({ userSession }) => {
         this.handleUserSession(userSession)
       })
-  }
-
-  private isUserLoggedIn(userSession: any): boolean {
-    // Users that are not logged in will not be able to load the the authorize.component page
-    // with an exception of users that have an invalid OAUTH URL
-    // Those will load this component to display the error message by the component `app-oauth-error`
-    // see this exception on src/app/guards/authorize.guard.ts
-    return !!userSession?.userSession?.userInfo
   }
 
   /**
