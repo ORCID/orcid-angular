@@ -1,3 +1,21 @@
+## v2.112.11 - 2025-04-02
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.10...v2.112.11)
+
+## v2.112.10 - 2025-04-02
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.9...v2.112.10)
+
+- [#2491](https://github.com/ORCID/orcid-angular/pull/2491): Enable New Relic with domain base dynamic environments configs
+
+## v2.112.9 - 2025-04-02
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.8...v2.112.9)
+
+## v2.112.8 - 2025-04-01
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.7...v2.112.8)
+
 ## v2.112.7 - 2025-03-31
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.6...v2.112.7)
