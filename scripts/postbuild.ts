@@ -9,6 +9,7 @@ import { getOptionsObjet, save } from './utils'
 import { renameSync, readFileSync } from 'fs'
 import { createShareAssetsFolder } from './moveToShareFolder.postbuild'
 import { addOneTrustNotAutoBlockForAppScripts } from './onetrust.postbuild'
+import { newRelic } from './new-relic.postbuild'
 
 const glob = require('glob')
 // Run updates on index.html files across languages
@@ -21,6 +22,8 @@ glob
     // Replace all the `*.js` references to match updated JS file names with the language code.
     data = addLanguageCodeToHashesOnToHTMLFiles(data, options)
     data = addOneTrustNotAutoBlockForAppScripts(data)
+    data = newRelic(data)
+
     // data = robotsMetadata(data, options) DISABLE robots headers, as those will be handle via nginx
     save(data, options)
   })
