@@ -35,6 +35,27 @@
             {{ userThatThrustYou?.approvalDate | monthDayYearDateToString }}
           </div>
         </div>
+
+        <div>
+          <div class="actions-container orc-font-body-small">
+            <mat-icon
+              (click)="revokeAccess(userThatThrustYou)"
+              class="warn pointer"
+              [routerLink]="trustedPartiesUrl"
+              >block</mat-icon
+            >
+
+            <a
+              class="underline warn"
+              (click)="revokeAccess(userThatThrustYou)"
+              i18n="@@account.revokeAccess"
+              id="cy-revoke-own-access"
+              [routerLink]="trustedPartiesUrl"
+            >
+              Revoke access</a
+            >
+          </div>
+        </div>
       </div>
 
       <mat-divider></mat-divider>
