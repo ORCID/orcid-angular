@@ -18,12 +18,17 @@ export class InterstitialsService {
 
   setInterstitialsViewed(interstitial: Interstitials, updateDatabase = true) {
     return this._userInfo.getUserSession().pipe(
-      map((userInfo) => {
+      tap((userInfo) => {
         const effectiveUser = userInfo?.userInfo?.EFFECTIVE_USER_ORCID
         localStorage.setItem(effectiveUser + '_' + interstitial, 'true')
       }),
-      filter(() => updateDatabase),
-      switchMap(() => this.addInterstitialFlag(interstitial))
+      switchMap(() => {
+        if (updateDatabase) {
+          return this.addInterstitialFlag(interstitial)
+        } else {
+          return of(null)
+        }
+      })
     )
   }
 
