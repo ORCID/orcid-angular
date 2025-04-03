@@ -1,3 +1,4 @@
+<ng-container *ngIf="$trustedIndividuals | async as trustedIndividuals">
 <section
   [id]="'status-bar'"
   role="region"
@@ -47,3 +48,4 @@
     [ngClass]="{ orange: isPublicRecord, green: !isPublicRecord && isMyRecord }"
   ></mat-divider>
 </section>
+</ng-container>
