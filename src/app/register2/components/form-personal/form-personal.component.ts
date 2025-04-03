@@ -44,7 +44,7 @@ import {
   MAX_LENGTH_LESS_THAN_ONE_HUNDRED,
 } from 'src/app/constants'
 import { LiveAnnouncer } from '@angular/cdk/a11y'
-import { environment } from 'src/environments/environment'
+
 import { RegisterBackendErrors } from 'src/app/types/register.local'
 import { WINDOW } from 'src/app/cdk/window'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
@@ -359,7 +359,7 @@ export class FormPersonalComponent
   }
 
   private announce(announcement: string) {
-    if (environment.debugger) {
+    if (runtimeEnvironment.debugger) {
       console.debug('📢' + announcement)
     }
     this._liveAnnouncer.announce(announcement, 'assertive')

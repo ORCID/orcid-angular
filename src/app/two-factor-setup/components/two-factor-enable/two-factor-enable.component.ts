@@ -5,7 +5,6 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms'
-import { environment } from '../../../../environments/environment'
 import {
   MAT_LEGACY_TOOLTIP_DEFAULT_OPTIONS as MAT_TOOLTIP_DEFAULT_OPTIONS,
   MatLegacyTooltipDefaultOptions as MatTooltipDefaultOptions,
@@ -36,7 +35,7 @@ export class TwoFactorEnableComponent implements OnInit {
     backupCodes?: string
     backupCodesClipboard?: string
   }>()
-  environment = environment
+  environment = runtimeEnvironment
   twoFactorForm: UntypedFormGroup
   showTextCode = false
   showBadVerificationCode = false

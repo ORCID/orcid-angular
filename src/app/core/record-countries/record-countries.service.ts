@@ -7,7 +7,6 @@ import {
   SideBarPublicUserRecord,
   UserRecordOptions,
 } from 'src/app/types/record.local'
-import { environment } from 'src/environments/environment'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { RecordPublicSideBarService } from '../record-public-side-bar/record-public-side-bar.service'
 
@@ -329,7 +328,7 @@ export class RecordCountriesService {
     forkJoin([
       this._http
         .get<CountriesEndpoint>(
-          environment.API_WEB + `account/countryForm.json`,
+          runtimeEnvironment.API_WEB + `account/countryForm.json`,
           {
             headers: this.headers,
           }
@@ -366,7 +365,7 @@ export class RecordCountriesService {
   postAddresses(countries: CountriesEndpoint): Observable<CountriesEndpoint> {
     return this._http
       .post<CountriesEndpoint>(
-        environment.API_WEB + `account/countryForm.json`,
+        runtimeEnvironment.API_WEB + `account/countryForm.json`,
         countries,
         { headers: this.headers }
       )

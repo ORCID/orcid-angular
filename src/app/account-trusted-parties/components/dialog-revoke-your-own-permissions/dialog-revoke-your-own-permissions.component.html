@@ -1,0 +1,48 @@
+<app-modal [noSidebar]="true">
+  <app-modal-header i18n="@@account.revokeAccessPermissions"
+    >Revoke access permissions
+  </app-modal-header>
+
+  <p i18n="@@account.revokingYourOwnPermissions">
+    Revoking your Account Delegate access permissions means you will no longer
+    be able to manage the ORCID account shown below.
+  </p>
+  <p class="orcid-id-container">
+    <strong>{{ data.giverName?.value }}</strong>
+    <a
+      class="underline"
+      target="_blank"
+      rel="noreferrer noopener"
+      href="{{ baseUrl }}{{ data.giverOrcid?.path }}"
+      >https:{{ baseUrl }}{{ data.giverOrcid?.path }}</a
+    >
+  </p>
+
+  <app-alert-message type="notice" class="orc-font-body-small">
+    <ng-container content i18n="@@account.warningRevokeAccess">
+      This user will be notified that you have revoked your account delegate
+      access permissions for their record.
+    </ng-container>
+  </app-alert-message>
+
+  <app-modal-footer>
+    <button
+      mat-raised-button
+      color="warn"
+      (click)="ok()"
+      id="cy-revoke-access"
+      i18n="@@account.revokeAccess"
+    >
+      Revoke access
+    </button>
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="cancel()"
+      id="cy-cancell"
+      i18n="@@shared.cancel"
+    >
+      Cancel
+    </button>
+  </app-modal-footer></app-modal
+>

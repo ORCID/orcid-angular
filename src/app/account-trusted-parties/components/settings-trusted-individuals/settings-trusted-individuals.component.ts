@@ -5,7 +5,6 @@ import { startWith, switchMap, takeUntil, tap } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { AccountTrustedIndividualsService } from 'src/app/core/account-trusted-individuals/account-trusted-individuals.service'
 import { AccountTrustedIndividual } from 'src/app/types/account-trusted-individuals'
-import { environment } from 'src/environments/environment'
 
 import { DialogRevokeTrustedIndividualsComponent } from '../dialog-revoke-trusted-individuals/dialog-revoke-trusted-individuals.component'
 
@@ -22,7 +21,7 @@ export class SettingsTrustedIndividualsComponent implements OnInit, OnDestroy {
   displayedColumns = ['trustedIndividuals', 'orcid', 'granted', 'actions']
   platformSubs = new Subject<void>()
   isMobile: boolean
-  baseUrl = environment.BASE_URL
+  baseUrl = runtimeEnvironment.BASE_URL
   trustedPartiesUrl = '/trusted-parties'
   constructor(
     private _trustedIndividualsService: AccountTrustedIndividualsService,

@@ -10,7 +10,6 @@ import { PlatformInfoService } from '../platform-info'
 import { SnackbarModule } from './snackbar.module'
 import { SnackbarComponent } from './snackbar/snackbar.component'
 import { HttpErrorResponse } from '@angular/common/http'
-import { environment } from 'src/environments/environment'
 
 @Injectable({
   providedIn: SnackbarModule,
@@ -38,7 +37,7 @@ export class SnackbarService {
     if (
       errorReport?.display &&
       (!errorReport.display.displayOnlyOnVerboseEnvironment ||
-        environment.VERBOSE_SNACKBAR_ERRORS_REPORTS)
+        runtimeEnvironment.VERBOSE_SNACKBAR_ERRORS_REPORTS)
     ) {
       mappedDisplay = {
         ...errorReport.display,

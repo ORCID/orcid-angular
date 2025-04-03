@@ -12,7 +12,6 @@ import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { WINDOW } from 'src/app/cdk/window'
 import { LanguageService } from 'src/app/core/language/language.service'
-import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-settings-defaults-language',
@@ -31,7 +30,7 @@ export class SettingsDefaultsLanguageComponent implements OnInit, OnDestroy {
     private _language: LanguageService,
     private _fb: UntypedFormBuilder
   ) {
-    this.languageMenuOptions = environment.LANGUAGE_MENU_OPTIONS
+    this.languageMenuOptions = runtimeEnvironment.LANGUAGE_MENU_OPTIONS
   }
 
   ngOnInit() {

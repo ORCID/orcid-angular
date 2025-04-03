@@ -16,7 +16,6 @@ import { RecordService } from 'src/app/core/record/record.service'
 import { RecordUtil } from 'src/app/shared/utils/record.util'
 import { Assertion, UserInfo } from 'src/app/types'
 import { UserRecord } from 'src/app/types/record.local'
-import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-record-header',
@@ -53,7 +52,7 @@ export class RecordHeaderComponent implements OnInit {
   recordWithIssues: boolean
   userRecord: UserRecord
   userInfo: UserInfo
-  environment = environment
+  environment = runtimeEnvironment
   givenNames = ''
   familyName = ''
   creditName = ''
@@ -78,7 +77,7 @@ export class RecordHeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.orcidId = 'https:' + environment.BASE_URL + this.isPublicRecord
+    this.orcidId = 'https:' + runtimeEnvironment.BASE_URL + this.isPublicRecord
 
     this._platform
       .get()
@@ -144,7 +143,7 @@ export class RecordHeaderComponent implements OnInit {
 
   printRecord() {
     this.window.open(
-      environment.BASE_URL +
+      runtimeEnvironment.BASE_URL +
         this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID +
         '/print'
     )

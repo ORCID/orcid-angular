@@ -42,7 +42,6 @@ mat-form-field {
 
 .actions-wrapper {
   width: 100%;
-  margin-left: 60px;
   margin-right: 255px;
   margin-top: 3px;
   line-height: 21px;
@@ -182,4 +181,8 @@ app-alert-message {
 
 ::ng-deep .main-button-container {
   height: 100%;
+}
+
+.mat-hint {
+  display: inline;
 }

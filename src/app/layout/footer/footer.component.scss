@@ -150,3 +150,10 @@ a:focus {
   color: inherit !important;
   background-color: inherit !important;
 }
+
+@media (max-width: 399px) {
+  .logo {
+    width: 200px;
+    justify-content: center;
+  }
+}

@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { catchError, retry } from 'rxjs/operators'
 import { AccountDefaultEmailFrequenciesEndpoint } from 'src/app/types/account-default-visibility.endpoint'
-import { environment } from 'src/environments/environment'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
@@ -22,7 +21,7 @@ export class AccountDefaultEmailFrequenciesService {
   get(): Observable<AccountDefaultEmailFrequenciesEndpoint> {
     return this._http
       .get<AccountDefaultEmailFrequenciesEndpoint>(
-        environment.API_WEB + `notifications/frequencies/view`,
+        runtimeEnvironment.API_WEB + `notifications/frequencies/view`,
         { headers: this.headers }
       )
       .pipe(
@@ -34,7 +33,8 @@ export class AccountDefaultEmailFrequenciesService {
   updateAmendNotifications(frequency: number): Observable<void> {
     return this._http
       .post<void>(
-        environment.API_WEB + `notifications/frequencies/update/amendUpdates`,
+        runtimeEnvironment.API_WEB +
+          `notifications/frequencies/update/amendUpdates`,
         frequency,
         { headers: this.headers }
       )
@@ -46,7 +46,8 @@ export class AccountDefaultEmailFrequenciesService {
   updateAdminNotifications(frequency: string): Observable<void> {
     return this._http
       .post<void>(
-        environment.API_WEB + `notifications/frequencies/update/adminUpdates`,
+        runtimeEnvironment.API_WEB +
+          `notifications/frequencies/update/adminUpdates`,
         frequency,
         { headers: this.headers }
       )
@@ -58,7 +59,8 @@ export class AccountDefaultEmailFrequenciesService {
   updateMemberNotifications(frequency: string): Observable<void> {
     return this._http
       .post<void>(
-        environment.API_WEB + `notifications/frequencies/update/memberUpdates`,
+        runtimeEnvironment.API_WEB +
+          `notifications/frequencies/update/memberUpdates`,
         frequency,
         { headers: this.headers }
       )
@@ -71,7 +73,8 @@ export class AccountDefaultEmailFrequenciesService {
   updateMemberTipsUpdates(tips: boolean): Observable<void> {
     return this._http
       .post<void>(
-        environment.API_WEB + `notifications/frequencies/update/tipsUpdates`,
+        runtimeEnvironment.API_WEB +
+          `notifications/frequencies/update/tipsUpdates`,
         tips,
         { headers: this.headers }
       )

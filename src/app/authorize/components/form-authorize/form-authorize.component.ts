@@ -25,7 +25,6 @@ import {
   Delegator,
   TrustedIndividuals,
 } from 'src/app/types/trusted-individuals.endpoint'
-import { environment } from 'src/environments/environment'
 import { GoogleTagManagerService } from '../../../core/google-tag-manager/google-tag-manager.service'
 import { Title } from '@angular/platform-browser'
 
@@ -40,8 +39,7 @@ import { Title } from '@angular/platform-browser'
 })
 export class FormAuthorizeComponent implements OnInit, OnDestroy {
   @Output() redirectUrl = new EventEmitter<string>()
-  @Output() organizationName = new EventEmitter<string>()
-  environment = environment
+  environment = runtimeEnvironment
   $destroy: Subject<boolean> = new Subject<boolean>()
   orcidUrl: string
   userName: string
@@ -85,7 +83,6 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
         this.loadingUserInfo = false
         this.loadingTrustedIndividuals = false
         this.oauthRequest = userInfo.oauthSession
-        this.organizationName.emit(this.oauthRequest.clientName)
         if (userInfo.loggedIn) {
           this.userName = userInfo.displayName
           this.orcidUrl = userInfo.effectiveOrcidUrl

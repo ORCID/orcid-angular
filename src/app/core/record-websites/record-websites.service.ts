@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { Observable, of, ReplaySubject } from 'rxjs'
 import { WebsitesEndPoint } from '../../types/record-websites.endpoint'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { environment } from '../../../environments/environment'
+
 import { catchError, map, retry, tap } from 'rxjs/operators'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { UserRecordOptions } from 'src/app/types/record.local'
@@ -45,7 +45,7 @@ export class RecordWebsitesService {
 
     this._http
       .get<WebsitesEndPoint>(
-        environment.API_WEB + `my-orcid/websitesForms.json`,
+        runtimeEnvironment.API_WEB + `my-orcid/websitesForms.json`,
         {
           headers: this.headers,
         }
@@ -65,7 +65,7 @@ export class RecordWebsitesService {
   postWebsites(website: WebsitesEndPoint): Observable<WebsitesEndPoint> {
     return this._http
       .post<WebsitesEndPoint>(
-        environment.API_WEB + `my-orcid/websitesForms.json`,
+        runtimeEnvironment.API_WEB + `my-orcid/websitesForms.json`,
         website,
         { headers: this.headers }
       )

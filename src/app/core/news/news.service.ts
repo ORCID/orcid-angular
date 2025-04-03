@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { catchError, flatMap, retry } from 'rxjs/operators'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
-import { environment } from 'src/environments/environment'
 import { Parser } from 'xml2js'
 
 @Injectable({
@@ -19,7 +18,7 @@ export class NewsService {
   ) {}
 
   getNews() {
-    const url = environment.API_NEWS
+    const url = runtimeEnvironment.API_NEWS
     // Get the news!
     return this._http.get(url, { responseType: 'text' }).pipe(
       retry(3),

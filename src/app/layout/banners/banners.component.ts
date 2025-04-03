@@ -3,7 +3,7 @@ import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { take, filter } from 'rxjs/operators'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { MaintenanceMessage } from 'src/app/types/togglz.local'
-import { environment } from 'src/environments/environment'
+
 import { CookieService } from 'ngx-cookie-service'
 
 @Component({
@@ -13,7 +13,7 @@ import { CookieService } from 'ngx-cookie-service'
   preserveWhitespaces: true,
 })
 export class BannersComponent implements OnInit {
-  environment = environment
+  environment = runtimeEnvironment
   maintenanceMessages: MaintenanceMessage
   showUnsupportedBrowserBanner
   closableElementAtDisplay

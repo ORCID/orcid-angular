@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core'
 import { enterAnimation } from 'src/app/animations'
 import { WINDOW } from '../../../cdk/window'
-import { environment } from 'src/environments/environment'
+
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { switchMap, tap } from 'rxjs/operators'
@@ -88,7 +88,7 @@ export class HomeComponent implements OnInit {
   }
 
   goto(url) {
-    this.window.location.href = environment.BASE_URL + url
+    this.window.location.href = runtimeEnvironment.BASE_URL + url
   }
 
   ngOnInit() {}

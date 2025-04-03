@@ -1,21 +1,28 @@
-export const environment = {
-  production: true,
+import { EnvironmentInterface } from './interface'
+
+export const environment: EnvironmentInterface = {
+  production: false,
   debugger: true,
+  ROBOTS: 'all',
   API_NEWS: 'https://www.mocky.io/v2/5dced45b3000007300931ce8',
-  API_PUB: '//pub.localhost/v3.0',
-  API_WEB: '//localhost/',
-  BASE_URL: '',
-  BLOG_NEWS: 'https://localhost/about/news',
+  API_PUB: `//<SUBDOMAIN><DOMAIN>/v3.0`,
+  API_WEB: `//<SUBDOMAIN><DOMAIN>/`,
+  AUTH_SERVER: 'https://auth.<SUBDOMAIN><DOMAIN>/',
+  BASE_URL: '//<SUBDOMAIN><DOMAIN>/',
+  INFO_SITE: 'https://info.orcid.org/',
   GOOGLE_ANALYTICS_TESTING_MODE: true,
   GOOGLE_TAG_MANAGER: 'GTM-0000000',
   GOOGLE_RECAPTCHA: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
   HELP_HERO_ID: 'oYFQMrzFHA',
   ZENDESK: null,
   SHOW_TEST_WARNING_BANNER: true,
-  INSTITUTIONAL_AUTOCOMPLETE_DISPLAY_AMOUNT: 20,
+  CAN_DISABLE_TEST_WARNING_BANNER: true,
+  INSTITUTIONAL_AUTOCOMPLETE_DISPLAY_AMOUNT: 50,
   VERBOSE_SNACKBAR_ERRORS_REPORTS: true,
   WORDPRESS_S3: 'https://homepage-qa.orcid.org',
   WORDPRESS_S3_FALLBACK: 'https://homepage-fallback.orcid.org',
+  ONE_TRUST: '5a6d60d3-b085-4e48-8afa-d707c7afc419-test',
+  NEW_RELIC_APP: '772335827',
   LANGUAGE_MENU_OPTIONS: {
     ar: 'العربية',
     cs: 'Čeština',
@@ -39,5 +46,5 @@ export const environment = {
     uk: '** Ukrainian',
     ca: '** Catalan',
   },
-  proxyMode: false,
+  proxyMode: true,
 }

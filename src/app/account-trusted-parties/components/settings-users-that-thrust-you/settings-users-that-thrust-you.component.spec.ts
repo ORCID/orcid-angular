@@ -13,6 +13,7 @@ import { ErrorHandlerService } from '../../../core/error-handler/error-handler.s
 import { SnackbarService } from '../../../cdk/snackbar/snackbar.service'
 import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
 import { Overlay } from '@angular/cdk/overlay'
+import { TrustedIndividualsService } from 'src/app/core/trusted-individuals/trusted-individuals.service'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 
@@ -29,6 +30,7 @@ describe('SettingsUsersThatThrustYouComponent', () => {
         PlatformInfoService,
         ErrorHandlerService,
         SnackbarService,
+        TrustedIndividualsService,
         MatSnackBar,
         MatDialog,
         Overlay,

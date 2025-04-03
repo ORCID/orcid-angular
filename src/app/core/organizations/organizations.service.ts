@@ -5,7 +5,6 @@ import { catchError, retry } from 'rxjs/operators'
 import { WHITE_SPACE_REGEXP } from 'src/app/constants'
 import { OrgDisambiguated } from 'src/app/types'
 
-import { environment } from '../../../environments/environment'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
 @Injectable({
@@ -21,7 +20,7 @@ export class OrganizationsService {
     if (type && value) {
       return this._http
         .get<OrgDisambiguated>(
-          environment.API_WEB +
+          runtimeEnvironment.API_WEB +
             `orgs/disambiguated/${type}?value=${encodeURIComponent(value)}`
         )
         .pipe(

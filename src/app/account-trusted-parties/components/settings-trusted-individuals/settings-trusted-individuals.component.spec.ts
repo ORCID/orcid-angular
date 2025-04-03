@@ -15,6 +15,8 @@ import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack
 import { Overlay } from '@angular/cdk/overlay'
 import { AccountTrustedIndividualsService } from '../../../core/account-trusted-individuals/account-trusted-individuals.service'
 
+import { DialogRevokeTrustedIndividualsComponent } from '../dialog-revoke-trusted-individuals/dialog-revoke-trusted-individuals.component'
+
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 
 describe('SettingsTrustedIndividualsComponent', () => {

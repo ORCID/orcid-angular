@@ -1,20 +1,31 @@
 import { Injectable } from '@angular/core'
-import { HttpClient } from '@angular/common/http'
-import { Observable } from 'rxjs'
-import { TrustedIndividuals } from 'src/app/types/trusted-individuals.endpoint'
-import { environment } from 'src/environments/environment'
-import { map } from 'rxjs/operators'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { Observable, Subject } from 'rxjs'
+import {
+  TrustedIndividuals,
+  Delegator,
+} from 'src/app/types/trusted-individuals.endpoint'
+
+import { catchError, map, retry, tap } from 'rxjs/operators'
+import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
 @Injectable({
   providedIn: 'root',
 })
 export class TrustedIndividualsService {
-  constructor(private _http: HttpClient) {}
+  updateDelegatorSuccess = new Subject<void>()
+  headers = new HttpHeaders({
+    'Access-Control-Allow-Origin': '*',
+  })
+  constructor(
+    private _errorHandler: ErrorHandlerService,
+    private _http: HttpClient
+  ) {}
 
   getTrustedIndividuals(): Observable<TrustedIndividuals> {
     return this._http
       .get<TrustedIndividuals>(
-        `${environment.API_WEB}delegators/delegators-and-me.json`,
+        `${runtimeEnvironment.API_WEB}delegators/delegators-and-me.json`,
         {
           withCredentials: true,
         }
@@ -30,6 +41,20 @@ export class TrustedIndividualsService {
           }
           return response
         })
+      )
+  }
+
+  delete(account: Delegator): Observable<void> {
+    return this._http
+      .post<void>(
+        runtimeEnvironment.API_WEB + `account/revokeOwnPermission.json`,
+        { delegateToManage: account.giverOrcid.path },
+        { headers: this.headers }
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() => this.updateDelegatorSuccess.next())
       )
   }
 }

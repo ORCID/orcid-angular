@@ -6,6 +6,7 @@ import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.se
 import { PlatformInfoService } from '../../platform-info'
 import { WINDOW_PROVIDERS } from '../../window'
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { UserService } from 'src/app/core'
 
 describe('ShareEmailsDomainsComponent', () => {
   let component: ShareEmailsDomainsComponent
@@ -29,6 +30,16 @@ describe('ShareEmailsDomainsComponent', () => {
         {
           provide: RecordEmailsService,
           useValue: {},
+        },
+        {
+          provide: UserService,
+          useValue: {
+            getUserSession: () => ({
+              pipe: () => ({
+                subscribe: () => {},
+              }),
+            }),
+          },
         },
         WINDOW_PROVIDERS,
       ],

@@ -25,7 +25,6 @@ import {
   WorkIdTypeValidation,
   _LEGACY_ContributionRoles,
 } from 'src/app/types/works.endpoint'
-import { environment } from 'src/environments/environment'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { VisibilityStrings } from '../../types/common.endpoint'
@@ -113,7 +112,7 @@ export class RecordWorksService {
 
     this._http
       .get<WorksEndpoint>(
-        environment.API_WEB +
+        runtimeEnvironment.API_WEB +
           url +
           '?offset=' +
           options.offset +
@@ -204,7 +203,7 @@ export class RecordWorksService {
   getWorkInfo(putCode: string, orcidId?: string): Observable<Work> {
     return this._http
       .get<Work>(
-        environment.API_WEB +
+        runtimeEnvironment.API_WEB +
           `${
             orcidId ? orcidId + '/' : 'works/'
           }getWorkInfo.json?workId=${putCode}`
@@ -218,7 +217,7 @@ export class RecordWorksService {
   getWorksInfo(putCodes: string[], orcidId?: string): Observable<Work[]> {
     return this._http
       .get<Work[]>(
-        environment.API_WEB + `works/worksInfo/${putCodes.join(',')}`
+        runtimeEnvironment.API_WEB + `works/worksInfo/${putCodes.join(',')}`
       )
       .pipe(
         retry(3),
@@ -234,7 +233,7 @@ export class RecordWorksService {
   ): Observable<WorksEndpoint> {
     return this._http
       .get<WorksEndpoint>(
-        environment.API_WEB +
+        runtimeEnvironment.API_WEB +
           `${
             orcidId ? orcidId + '/' : 'works/'
           }worksPage.json?offset=${offset}&sort=${sort}&sortAsc=${sortAsc}&pageSize=50`
@@ -251,7 +250,7 @@ export class RecordWorksService {
     isLastWorkElement = false
   ): Observable<Work> {
     return this._http
-      .post<Work>(environment.API_WEB + `works/work.json`, work)
+      .post<Work>(runtimeEnvironment.API_WEB + `works/work.json`, work)
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
@@ -264,14 +263,16 @@ export class RecordWorksService {
   }
 
   getWork(): Observable<Work> {
-    return this._http.get<Work>(environment.API_WEB + `works/work.json`).pipe(
-      retry(3),
-      map((x) => {
-        x.workExternalIdentifiers = []
-        return x
-      }),
-      catchError((error) => this._errorHandler.handleError(error))
-    )
+    return this._http
+      .get<Work>(runtimeEnvironment.API_WEB + `works/work.json`)
+      .pipe(
+        retry(3),
+        map((x) => {
+          x.workExternalIdentifiers = []
+          return x
+        }),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
   }
 
   set(value: any): Observable<any> {
@@ -291,7 +292,11 @@ export class RecordWorksService {
 
     return this._http
       .get(
-        environment.API_WEB + 'works/' + putCode + '/visibility/' + visibility
+        runtimeEnvironment.API_WEB +
+          'works/' +
+          putCode +
+          '/visibility/' +
+          visibility
       )
       .pipe(
         retry(3),
@@ -303,7 +308,9 @@ export class RecordWorksService {
   updatePreferredSource(putCode: string): Observable<any> {
     return this._http
       .get(
-        environment.API_WEB + 'works/updateToMaxDisplay.json?putCode=' + putCode
+        runtimeEnvironment.API_WEB +
+          'works/updateToMaxDisplay.json?putCode=' +
+          putCode
       )
       .pipe(
         retry(3),
@@ -316,7 +323,9 @@ export class RecordWorksService {
 
   public loadWorkIdTypes(): Observable<WorkIdType[]> {
     return this._http
-      .get<WorkIdType[]>(`${environment.API_WEB}works/idTypes.json?query=`)
+      .get<WorkIdType[]>(
+        `${runtimeEnvironment.API_WEB}works/idTypes.json?query=`
+      )
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))
@@ -329,7 +338,7 @@ export class RecordWorksService {
   ): Observable<WorkIdTypeValidation> {
     return this._http
       .get<WorkIdTypeValidation>(
-        `${environment.API_WEB}works/id/${idType}?value=${workId}`
+        `${runtimeEnvironment.API_WEB}works/id/${idType}?value=${workId}`
       )
       .pipe(
         retry(3),
@@ -340,7 +349,7 @@ export class RecordWorksService {
   delete(putCode: any): Observable<any> {
     return this._http
       .delete(
-        environment.API_WEB +
+        runtimeEnvironment.API_WEB +
           'works/' +
           (Array.isArray(putCode) ? putCode.join(',') : putCode)
       )
@@ -358,7 +367,7 @@ export class RecordWorksService {
   combinePutCodes(putCodes: string): Observable<WorkCombineEndpoint> {
     return this._http
       .post<WorkCombineEndpoint>(
-        environment.API_WEB + 'works/group/' + putCodes,
+        runtimeEnvironment.API_WEB + 'works/group/' + putCodes,
         {}
       )
       .pipe(
@@ -374,7 +383,7 @@ export class RecordWorksService {
   ): Observable<any> {
     return this._http
       .get(
-        environment.API_WEB +
+        runtimeEnvironment.API_WEB +
           'works/' +
           putCodes.join(',') +
           '/visibility/' +
@@ -388,14 +397,14 @@ export class RecordWorksService {
   }
 
   export(): Observable<any> {
-    return this._http.get(environment.API_WEB + 'works/works.bib', {
+    return this._http.get(runtimeEnvironment.API_WEB + 'works/works.bib', {
       responseType: 'text',
     })
   }
 
   exportSelected(putCodes: string[]): Observable<any> {
     return this._http.get(
-      environment.API_WEB +
+      runtimeEnvironment.API_WEB +
         'works/export/bibtex?workIdsStr=' +
         putCodes.join(','),
       {
@@ -406,7 +415,7 @@ export class RecordWorksService {
 
   loadWorkImportWizardList(): Observable<RecordImportWizard[]> {
     return this._http.get<RecordImportWizard[]>(
-      environment.API_WEB + 'workspace/retrieve-work-import-wizards.json'
+      runtimeEnvironment.API_WEB + 'workspace/retrieve-work-import-wizards.json'
     )
   }
 
@@ -421,12 +430,12 @@ export class RecordWorksService {
       url = result ? 'works/resolve/pmc/?value=' : 'works/resolve/pmid?value='
     }
 
-    return this._http.get<Work>(environment.API_WEB + url + externalId)
+    return this._http.get<Work>(runtimeEnvironment.API_WEB + url + externalId)
   }
 
   worksValidate(obj): Observable<any> {
     return this._http.post(
-      environment.API_WEB + 'works/worksValidate.json',
+      runtimeEnvironment.API_WEB + 'works/worksValidate.json',
       JSON.stringify(obj),
       {
         headers: {
@@ -443,7 +452,7 @@ export class RecordWorksService {
       this.groupingSuggestionsSubjectInitialized = true
       this._http
         .get<GroupingSuggestions>(
-          environment.API_WEB + 'works/groupingSuggestions.json',
+          runtimeEnvironment.API_WEB + 'works/groupingSuggestions.json',
           {
             headers: {
               'Access-Control-Allow-Origin': '*',

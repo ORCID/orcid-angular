@@ -1,10 +1,12 @@
-export const environment = {
+import { EnvironmentInterface } from './interface'
+export const environment: EnvironmentInterface = {
   production: true,
   debugger: true,
   ROBOTS: 'noindex, nofollow',
   API_NEWS: 'https://info.int.orcid.org/feed/',
   API_PUB: `//pub.<SUBDOMAIN><DOMAIN>/v3.0`,
   API_WEB: `//<SUBDOMAIN><DOMAIN>/`,
+  AUTH_SERVER: 'https://auth.<SUBDOMAIN><DOMAIN>/',
   BASE_URL: '//<SUBDOMAIN><DOMAIN>/',
   INFO_SITE: 'https://info.qa.orcid.org/',
   GOOGLE_ANALYTICS_TESTING_MODE: true,
@@ -18,6 +20,7 @@ export const environment = {
   VERBOSE_SNACKBAR_ERRORS_REPORTS: true,
   WORDPRESS_S3: 'https://homepage-prod.orcid.org',
   WORDPRESS_S3_FALLBACK: 'https://homepage-fallback.orcid.org',
+  ONE_TRUST: '5a6d60d3-b085-4e48-8afa-d707c7afc419-test',
   LANGUAGE_MENU_OPTIONS: {
     ar: 'العربية',
     cs: 'Čeština',
@@ -42,4 +45,5 @@ export const environment = {
     ca: '** Catalan',
   },
   proxyMode: false,
+  NEW_RELIC_APP: '772335828',
 }

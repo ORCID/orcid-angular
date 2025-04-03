@@ -10,7 +10,6 @@ import {
   RegisterConfirmResponse,
   RegisterForm,
 } from 'src/app/types/register.endpoint'
-import { environment } from 'src/environments/environment'
 
 import { ERROR_REPORT } from 'src/app/errors'
 import { objectToUrlParameters } from '../../constants'
@@ -53,10 +52,13 @@ export class Register2Service extends _RegisterServiceMixingBase {
     givenNames: string
   }) {
     return this._http
-      .get<DuplicatedName[]>(environment.API_WEB + `dupicateResearcher.json`, {
-        params: names,
-        withCredentials: true,
-      })
+      .get<DuplicatedName[]>(
+        runtimeEnvironment.API_WEB + `dupicateResearcher.json`,
+        {
+          params: names,
+          withCredentials: true,
+        }
+      )
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))
@@ -65,7 +67,7 @@ export class Register2Service extends _RegisterServiceMixingBase {
 
   getRegisterForm(): Observable<RegisterForm> {
     return this._http
-      .get<RegisterForm>(`${environment.API_WEB}register.json`, {
+      .get<RegisterForm>(`${runtimeEnvironment.API_WEB}register.json`, {
         withCredentials: true,
       })
       .pipe(
@@ -77,7 +79,7 @@ export class Register2Service extends _RegisterServiceMixingBase {
 
   getEmailCategory(email: string): Observable<EmailCategoryEndpoint> {
     return this._http.get<any>(
-      `${environment.API_WEB}email-domain/find-category?domain=${email}`
+      `${runtimeEnvironment.API_WEB}email-domain/find-category?domain=${email}`
     )
   }
 
@@ -104,7 +106,7 @@ export class Register2Service extends _RegisterServiceMixingBase {
     return this._platform.get().pipe(
       first(),
       switchMap((platform) => {
-        let url = `${environment.API_WEB}`
+        let url = `${runtimeEnvironment.API_WEB}`
         if (
           platform.institutional ||
           platform.queryParameters.linkType === 'shibboleth'

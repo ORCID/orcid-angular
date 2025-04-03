@@ -4,7 +4,6 @@ import { Observable } from 'rxjs'
 import { catchError, retry } from 'rxjs/operators'
 import { ERROR_REPORT } from 'src/app/errors'
 import { DuplicateRemoveEndpoint } from 'src/app/types/account-actions-duplicated'
-import { environment } from 'src/environments/environment'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
@@ -25,7 +24,7 @@ export class AccountActionsDuplicatedService {
   ): Observable<DuplicateRemoveEndpoint> {
     return this._http
       .post<DuplicateRemoveEndpoint>(
-        environment.API_WEB + `account/confirm-deprecate-profile.json`,
+        runtimeEnvironment.API_WEB + `account/confirm-deprecate-profile.json`,
         account,
         { headers: this.headers }
       )
@@ -42,7 +41,7 @@ export class AccountActionsDuplicatedService {
   ): Observable<DuplicateRemoveEndpoint> {
     return this._http
       .post<DuplicateRemoveEndpoint>(
-        environment.API_WEB + `account/validate-deprecate-profile.json`,
+        runtimeEnvironment.API_WEB + `account/validate-deprecate-profile.json`,
         account,
         { headers: this.headers }
       )

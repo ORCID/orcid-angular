@@ -1,49 +1,54 @@
-<section
-  [id]="'status-bar'"
-  role="region"
-  [attr.aria-label]="regionStatusBar"
-  *ngIf="
-    iAmEditingThisRecord &&
-    (trustedIndividuals?.delegators?.length || trustedIndividuals?.me) &&
-    !isPublicRecord
-  "
-  [ngClass]="{ 'yellow-bg': !isMyRecord }"
->
-  <mat-divider></mat-divider>
+<ng-container *ngIf="$trustedIndividuals | async as trustedIndividuals">
+  <section
+    [id]="'status-bar'"
+    role="region"
+    [attr.aria-label]="regionStatusBar"
+    *ngIf="
+      iAmEditingThisRecord &&
+      (trustedIndividuals?.delegators?.length || trustedIndividuals?.me) &&
+      !isPublicRecord
+    "
+    [ngClass]="{ 'yellow-bg': !isMyRecord }"
+  >
+    <mat-divider></mat-divider>
 
-  <div class="container">
-    <div class="content">
-      <div
-        class="margin-end"
-        i18n="@@topBar.youAreManaging"
-        *ngIf="!isMyRecord"
-      >
-        You are managing this ORCID record as a trusted individual
-      </div>
+    <div class="container">
+      <div class="content">
+        <div
+          class="margin-end"
+          i18n="@@topBar.youAreManaging"
+          *ngIf="!isMyRecord"
+        >
+          You are managing this ORCID record as a trusted individual
+        </div>
 
-      <div
-        class="margin-end"
-        i18n="@@topBar.youAreManagingSomeElse"
-        *ngIf="isMyRecord"
-      >
-        You are managing your ORCID record
+        <div
+          class="margin-end"
+          i18n="@@topBar.youAreManagingSomeElse"
+          *ngIf="isMyRecord"
+        >
+          You are managing your ORCID record
+        </div>
+        <img
+          class="margin-end"
+          src="assets/vectors/orcid.logo.icon.svg"
+          alt="orcid logo"
+        />
+        <strong class="margin-end">{{ effectiveRecord }}</strong>
+        <app-trusted-individuals-dropdown
+          *ngIf="trustedIndividuals"
+          (changeUser)="changeAccount($event)"
+          [trustedIndividuals]="trustedIndividuals"
+        ></app-trusted-individuals-dropdown>
       </div>
-      <img
-        class="margin-end"
-        src="assets/vectors/orcid.logo.icon.svg"
-        alt="orcid logo"
-      />
-      <strong class="margin-end">{{ effectiveRecord }}</strong>
-      <app-trusted-individuals-dropdown
-        *ngIf="trustedIndividuals"
-        (changeUser)="changeAccount($event)"
-        [trustedIndividuals]="trustedIndividuals"
-      ></app-trusted-individuals-dropdown>
     </div>
-  </div>
 
-  <mat-divider
-    class="bottom-divider"
-    [ngClass]="{ orange: isPublicRecord, green: !isPublicRecord && isMyRecord }"
-  ></mat-divider>
-</section>
+    <mat-divider
+      class="bottom-divider"
+      [ngClass]="{
+        orange: isPublicRecord,
+        green: !isPublicRecord && isMyRecord
+      }"
+    ></mat-divider>
+  </section>
+</ng-container>
