@@ -1,3 +1,9 @@
+## v2.112.14 - 2025-04-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.13...v2.112.14)
+
+- [#2494](https://github.com/ORCID/orcid-angular/pull/2494): do not show interstitial until a refresh is made
+
 ## v2.112.13 - 2025-04-03
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.12...v2.112.13)
