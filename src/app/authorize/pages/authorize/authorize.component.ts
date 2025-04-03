@@ -1,8 +1,7 @@
 import { Component, Inject } from '@angular/core'
-import { log } from 'console'
-import { cloneDeep, takeWhile } from 'lodash'
-import { Observable, forkJoin, NEVER, of, EMPTY } from 'rxjs'
-import { first, switchMap, take, tap } from 'rxjs/operators'
+import { cloneDeep } from 'lodash'
+import { Observable, forkJoin, NEVER, of } from 'rxjs'
+import { first, map, switchMap, take, tap } from 'rxjs/operators'
 import { InterstitialsService } from 'src/app/cdk/interstitials/interstitials.service'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
@@ -67,8 +66,12 @@ export class AuthorizeComponent {
       emails: this.loadEmails(),
     })
       .pipe(
-        tap(() => {
-          this.loadInterstitialViewed()
+        switchMap((results) => {
+          return this.loadInterstitialViewed().pipe(
+            map(() => {
+              return results
+            })
+          )
         })
       )
       .subscribe(({ userSession }) => {
@@ -189,7 +192,6 @@ export class AuthorizeComponent {
     return this.interstitialsService
       .getInterstitialsViewed('DOMAIN_INTERSTITIAL')
       .pipe(
-        first(),
         tap((wasViewed) => {
           this.hasDomainInterstitialBeenViewed = wasViewed
         })
