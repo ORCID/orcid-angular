@@ -51,18 +51,18 @@ export class TopBarMyPublicRecordPreviewComponent implements OnInit {
     })
 
     if (!this.isPublicRecord) {
-        this.setupTrustedIndividualsObs() 
+      this.setupTrustedIndividualsObs()
     }
   }
 
   private setupTrustedIndividualsObs() {
     this.$trustedIndividuals =
-        this._trustedIndividuals.updateDelegatorSuccess.pipe(
-          startWith(() => undefined),
-          switchMap(() => { 
-            return this._trustedIndividuals.getTrustedIndividuals()
-          })
-        )
+      this._trustedIndividuals.updateDelegatorSuccess.pipe(
+        startWith(() => undefined),
+        switchMap(() => {
+          return this._trustedIndividuals.getTrustedIndividuals()
+        })
+      )
   }
 
   goToMyRecord() {
