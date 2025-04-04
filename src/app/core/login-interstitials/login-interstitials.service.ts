@@ -29,20 +29,17 @@ export class LoginInterstitialsService {
   }
 
   checkLoginInterstitials(userRecord: UserRecord): Observable<string[]> {
-    if (!userRecord?.userInfo) {
+    if (!userRecord?.userInfo || !userRecord?.emails) {
       return EMPTY
     }
 
     const isNotImpersonating =
       userRecord.userInfo.REAL_USER_ORCID ===
       userRecord.userInfo.EFFECTIVE_USER_ORCID
-    if (
-      !this.alreadyCheckLoginInterstitials &&
-      isNotImpersonating &&
-      userRecord?.emails?.emailDomains
-    ) {
+    if (isNotImpersonating && !this.alreadyCheckLoginInterstitials) {
       this.alreadyCheckLoginInterstitials = true
       if (
+        userRecord?.emails?.emailDomains &&
         !this.userHasPublicDomains(userRecord.emails) &&
         this.userHasPrivateDomains(userRecord.emails)
       ) {
