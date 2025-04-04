@@ -1,3 +1,9 @@
+## v2.112.17 - 2025-04-04
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.16...v2.112.17)
+
+- [#2497](https://github.com/ORCID/orcid-angular/pull/2497): fix interstitial check race statement
+
 ## v2.112.16 - 2025-04-04
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.15...v2.112.16)
