@@ -1,3 +1,9 @@
+## v2.112.16 - 2025-04-04
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.15...v2.112.16)
+
+- [#2496](https://github.com/ORCID/orcid-angular/pull/2496): fix conditional statement order in interstitials
+
 ## v2.112.15 - 2025-04-04
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.14...v2.112.15)
