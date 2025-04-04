@@ -67,11 +67,15 @@ export class AuthorizeComponent {
     })
       .pipe(
         switchMap((results) => {
-          return this.loadInterstitialViewed().pipe(
-            map(() => {
-              return results
-            })
-          )
+          if (!results.userSession?.userInfo) {
+            return of(results)
+          } else {
+            return this.loadInterstitialViewed().pipe(
+              map(() => {
+                return results
+              })
+            )
+          }
         })
       )
       .subscribe(({ userSession }) => {
