@@ -29,7 +29,7 @@ export class LoginInterstitialsService {
   }
 
   checkLoginInterstitials(userRecord: UserRecord): Observable<string[]> {
-    if (!userRecord?.userInfo) {
+    if (!userRecord?.userInfo || !userRecord?.emails) {
       return EMPTY
     }
 
