@@ -39,9 +39,9 @@ export class LoginInterstitialsService {
     if (isNotImpersonating && !this.alreadyCheckLoginInterstitials) {
       this.alreadyCheckLoginInterstitials = true
       if (
+        userRecord?.emails?.emailDomains &&
         !this.userHasPublicDomains(userRecord.emails) &&
-        this.userHasPrivateDomains(userRecord.emails) &&
-        userRecord?.emails?.emailDomains
+        this.userHasPrivateDomains(userRecord.emails)
       ) {
         return this.interstitialService
           .getInterstitialsViewed('DOMAIN_INTERSTITIAL')
