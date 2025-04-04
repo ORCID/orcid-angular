@@ -36,10 +36,13 @@ export class LoginInterstitialsService {
     const isNotImpersonating =
       userRecord.userInfo.REAL_USER_ORCID ===
       userRecord.userInfo.EFFECTIVE_USER_ORCID
-    if (isNotImpersonating && !this.alreadyCheckLoginInterstitials) {
+    if (
+      !this.alreadyCheckLoginInterstitials &&
+      isNotImpersonating &&
+      userRecord?.emails?.emailDomains
+    ) {
       this.alreadyCheckLoginInterstitials = true
       if (
-        userRecord?.emails?.emailDomains &&
         !this.userHasPublicDomains(userRecord.emails) &&
         this.userHasPrivateDomains(userRecord.emails)
       ) {
