@@ -2,10 +2,6 @@ import { Component, HostBinding, HostListener, Inject } from '@angular/core'
 import { NavigationEnd, NavigationStart, Router } from '@angular/router'
 import { catchError, tap } from 'rxjs/operators'
 
-import {
-  finishPerformanceMeasurement,
-  reportNavigationStart,
-} from './analytics-utils'
 import { PlatformInfo } from './cdk/platform-info'
 import { PlatformInfoService } from './cdk/platform-info/platform-info.service'
 import { WINDOW } from './cdk/window'
