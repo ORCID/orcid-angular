@@ -220,28 +220,7 @@ export class Register2Component implements OnInit, AfterViewInit {
                 response,
               }
             )
-
-            const analyticsReports: Observable<void>[] = []
-
-            analyticsReports.push(
-              this._googleTagManagerService.reportEvent(
-                'New-Registration',
-                this.requestInfoForm || 'Website'
-              )
-            )
-            forkJoin(analyticsReports)
-              .pipe(
-                catchError((err) =>
-                  this._errorHandler.handleError(
-                    err,
-                    ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
-                  )
-                )
-              )
-              .subscribe(
-                () => this.afterRegisterRedirectionHandler(response),
-                () => this.afterRegisterRedirectionHandler(response)
-              )
+            this.afterRegisterRedirectionHandler(response)
           } else {
             this._registerObservabilityService.reportRegisterErrorEvent(
               'register-confirmation',
@@ -249,7 +228,6 @@ export class Register2Component implements OnInit, AfterViewInit {
                 response,
               }
             )
-
             this._errorHandler.handleError(
               new Error('registerUnexpectedConfirmation'),
               ERROR_REPORT.REGISTER

@@ -123,22 +123,6 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
     this._oauth.authorize(value).subscribe((data) => {
       const analyticsReports: Observable<void>[] = []
 
-      if (value) {
-        analyticsReports.push(
-          this._googleTagManagerService.reportEvent(
-            `Authorize`,
-            this.oauthRequest
-          )
-        )
-      } else {
-        // Create a GA for deny access
-        analyticsReports.push(
-          this._googleTagManagerService.reportEvent(
-            `Authorize_Deny`,
-            this.oauthRequest
-          )
-        )
-      }
       forkJoin(analyticsReports)
         .pipe(
           catchError((err) =>

@@ -14,7 +14,6 @@ import { AuthorizeGuard } from './guards/authorize.guard'
 import { RegisterGuard } from './guards/register.guard'
 import { LinkAccountGuard } from './guards/link-account.guard'
 import { LanguageGuard } from './guards/language.guard'
-import { ThirdPartySigninCompletedGuard } from './guards/third-party-signin-completed.guard'
 import { TwoFactorSigninGuard } from './guards/two-factor-signin.guard'
 import { AuthenticatedNoDelegatorGuard } from './guards/authenticated-no-delagator.guard'
 
@@ -140,12 +139,6 @@ const routes: Routes = [
       import('./reset-password/reset-password.module').then(
         (m) => m.ResetPasswordModule
       ),
-  },
-  {
-    matcher: routerThirdPartySignInMatch,
-    canActivateChild: [ThirdPartySigninCompletedGuard],
-    loadChildren: () =>
-      import('./record/record.module').then((m) => m.RecordModule),
   },
   {
     matcher: routerReactivation,
