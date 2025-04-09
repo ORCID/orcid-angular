@@ -12,6 +12,15 @@ import { PseudoModule } from 'src/locale/i18n.pseudo.component'
 import { TitleService } from './core/title-service/title.service'
 import { HttpContentTypeHeaderInterceptor } from './core/http-content-type-header-interceptor/http-content-type-header-interceptor'
 import { HTTP_INTERCEPTORS } from '@angular/common/http'
+import { MatLegacyDialogModule } from '@angular/material/legacy-dialog'
+import { MatAutocompleteModule } from '@angular/material/autocomplete'
+import {
+  MatLegacyAutocompleteModule,
+  MatLegacyAutocompleteSelectedEvent,
+} from '@angular/material/legacy-autocomplete'
+import { MatLegacySelectModule } from '@angular/material/legacy-select'
+import { MatLegacyFormFieldModule } from '@angular/material/legacy-form-field'
+import { MatLegacyInputModule } from '@angular/material/legacy-input'
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,6 +31,10 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http'
     BrowserAnimationsModule,
     LayoutModule,
     BidiModule,
+    MatLegacyDialogModule,
+    MatLegacyAutocompleteModule,
+    MatLegacySelectModule,
+    MatLegacyInputModule,
     PseudoModule, // Remove on angular 10 https://bit.ly/3ezbF4v
     // Environmental dependent modules
     EnvironmentBannerModule,

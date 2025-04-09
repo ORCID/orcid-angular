@@ -51,6 +51,7 @@
           <app-main>
             <app-top-bar
               [newlySharedDomains]="newlySharedDomains"
+              [newAddedAffiliation]="newAddedAffiliation"
               class="row"
               [ngClass]="{
                 mobile: !platform.columns12
@@ -65,6 +66,7 @@
                   : true
               "
             ></app-top-bar>
+            
             <app-side-bar
               class="col l3 m8 s4 new-header side-bar-mobile"
               [isPublicRecord]="publicOrcid"

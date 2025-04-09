@@ -24,6 +24,10 @@ export type ShareEmailsDomainsComponentDialogInput = {
   userEmailsJson: EmailsEndpoint
   organizationName?: string
 }
+export type ShareEmailsDomainsComponentDialogOutput = {
+  type: 'domains-interstitial'
+  newlySharedDomains: string[]
+}
 
 @Component({
   templateUrl: './share-emails-domains.component.html',
@@ -42,7 +46,10 @@ export class ShareEmailsDomainsDialogComponent extends ShareEmailsDomainsCompone
     @Inject(WINDOW) window: Window,
     @Inject(MAT_LEGACY_DIALOG_DATA)
     public data: ShareEmailsDomainsComponentDialogInput,
-    public dialogRef: MatLegacyDialogRef<ShareEmailsDomainsDialogComponent>,
+    public dialogRef: MatLegacyDialogRef<
+      ShareEmailsDomainsDialogComponent,
+      ShareEmailsDomainsComponentDialogOutput
+    >,
     user: UserService
   ) {
     super(platformInfo, fb, recordEmailsService, user, window)
@@ -56,7 +63,10 @@ export class ShareEmailsDomainsDialogComponent extends ShareEmailsDomainsCompone
   }
 
   override finishIntertsitial(emails?: string[]) {
-    this.dialogRef.close(emails)
+    this.dialogRef.close({
+      type: 'domains-interstitial',
+      newlySharedDomains: emails,
+    })
   }
 
   override afterEmailUpdates(emails: string[]) {

@@ -47,6 +47,8 @@ export function dateMonthYearValidator(dateType: string, formHasDay = true) {
     const year = c.get(dateType + 'Year').value
     const month = c.get(dateType + 'Month').value
 
+    console.log('dateMonthYearValidator', dateType)
+
     if (!year && !month) {
       return null
     }
@@ -61,9 +63,12 @@ export function dateMonthYearValidator(dateType: string, formHasDay = true) {
       date = new Date(year + '-' + (month < 10 ? '0' + month : month))
     }
 
+    console.log('dateMonthYearValidator', date)
+
     if (date && !isNaN(date.getTime())) {
       return null
     }
+
 
     return { date: true }
   }
