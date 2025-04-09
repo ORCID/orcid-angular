@@ -329,7 +329,7 @@ export class FormSignInComponent implements OnInit, OnDestroy {
           this.loading.next(false)
           this.errorDescription.next(requestInfoForm.errorDescription)
         }
-            () => this.oauthAuthorize(urlRedirect)
+           this.oauthAuthorize(urlRedirect)
       })
   }
 
