@@ -121,21 +121,7 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
   authorize(value = true) {
     this.loadingAuthorizeEndpoint = true
     this._oauth.authorize(value).subscribe((data) => {
-      const analyticsReports: Observable<void>[] = []
-
-      forkJoin(analyticsReports)
-        .pipe(
-          catchError((err) =>
-            this._errorHandler.handleError(
-              err,
-              ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
-            )
-          )
-        )
-        .subscribe(
-          () => this.redirectUrl.next(data.redirectUrl),
-          () => this.redirectUrl.next(data.redirectUrl)
-        )
+    this.redirectUrl.next(data.redirectUrl)
     })
   }
 
