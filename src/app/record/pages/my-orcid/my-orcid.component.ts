@@ -33,9 +33,9 @@ import { DOCUMENT, Location } from '@angular/common'
 import { filter, map } from 'rxjs/operators'
 import { CanonocalUrlService } from 'src/app/core/canonocal-url/canonocal-url.service'
 import { RecordUtil } from 'src/app/shared/utils/record.util'
-import { LoginInterstitialsService } from 'src/app/core/login-interstitials/login-interstitials.service'
 import { AffilationsComponentDialogOutput } from 'src/app/cdk/interstitials/affiliations-interstitial/affiliations-interstitial-dialog.component'
 import { ShareEmailsDomainsComponentDialogOutput } from 'src/app/cdk/interstitials/share-emails-domains/share-emails-domains-dialog.component'
+import { LoginInterstitialsService } from 'src/app/core/login-interstitials-manager/login-interstitials-manager.service'
 
 @Component({
   selector: 'app-my-orcid',

@@ -431,3 +431,6 @@ export function affiliationToOrganization(
     sourceId: affiliation.sourceId,
   } as Organization
 }
+
+
+export const LOCAL_SESSION_UID = 'LOCAL_SESSION_UID'

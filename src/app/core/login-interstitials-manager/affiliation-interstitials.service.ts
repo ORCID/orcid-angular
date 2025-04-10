@@ -17,6 +17,8 @@ import {
   AffilationsComponentDialogOutput,
   AffiliationsInterstitialDialogComponent,
 } from 'src/app/cdk/interstitials/affiliations-interstitial/affiliations-interstitial-dialog.component'
+import { QaFlag } from '../qa-flag/qa-flags.enum'
+import { QaFlagsService } from '../qa-flag/qa-flag.service'
 
 @Injectable({
   providedIn: 'root',
@@ -32,28 +34,27 @@ export class AffiliationInterstitialService
       AffilationsComponentDialogOutput
     >
 {
-  // Define the name and toggle for this specific interstitial
+  QA_FLAG_FOR_FORCE_INTERSTITIAL_AS_NEVER_SEEN = QaFlag.forceAffiliationInterstitialNotSeem
   INTERSTITIAL_NAME: InterstitialType = 'AFFILIATION_INTERSTITIAL'
   INTERSTITIAL_TOGGLE = 'LOGIN_AFFILIATION_INTERSTITIAL'
 
   constructor(
     matDialog: MatDialog,
     interstitialsService: InterstitialsService,
-    togglzService: TogglzService
+    togglzService: TogglzService,
+    qaFlagService: QaFlagsService
   ) {
     // Pass dependencies to the parent
-    super(matDialog, togglzService, interstitialsService)
-    this.getIntertitialToggle()
+    super(matDialog, togglzService, interstitialsService, qaFlagService)
   }
 
   /**
    * Decide if the domain interstitial should be shown.
    * Returns an Observable<boolean> that emits `true` if it *should* show, or `false` if not.
    */
-  shouldShowInterstitial(userRecord: UserRecord): Observable<boolean> {
+  userIsElegibleForInterstitial(userRecord: UserRecord): Observable<boolean> {
     // Basic checks
 
-    console.log('user has domains', userRecord?.emails?.emailDomains)
     if (!userRecord?.emails?.emailDomains?.length) return of(false)
 
     const userHasEmploymentAffiliation = userRecord?.affiliations?.some(
@@ -62,14 +63,8 @@ export class AffiliationInterstitialService
         affiliation.affiliationGroup.length > 0
     )
 
-    console.log('userHasEmploymentAffiliation', userHasEmploymentAffiliation)
-
     if (userHasEmploymentAffiliation) return of(false)
-    console.log('user has no affiliation')
-
-    // Finally return true if the interstitial toggle is enabled and the user hasn't seen it yet
-   // return this.userHasNotSeemTheInterstitialAndTogglzIsOn()
-    return of (true)
+    return of(true)
   }
 
   // Return the dialog component that we want to display
@@ -78,9 +73,7 @@ export class AffiliationInterstitialService
   }
 
   // Build the data that goes into our dialog
-  getDialogDataToShow(
-    userRecord: UserRecord
-  ): AffilationsComponentDialogInput {
+  getDialogDataToShow(userRecord: UserRecord): AffilationsComponentDialogInput {
     return { userEmailsJson: userRecord.emails }
   }
 }

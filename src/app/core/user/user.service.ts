@@ -47,6 +47,7 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { OauthService } from '../oauth/oauth.service'
 import { UserInfoService } from '../user-info/user-info.service'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
+import { LOCAL_SESSION_UID } from 'src/app/constants'
 
 @Injectable({
   providedIn: 'root',
@@ -411,11 +412,20 @@ export class UserService {
    * @param postLoginUpdate=false set to true for the `prompt` parameter to be removed from the Oauth session
    */
   refreshUserSession(forceSessionUpdate = false, postLoginUpdate = false) {
+    if (postLoginUpdate) this.createLocalUserSessionUid()
+
     this._recheck.next({ forceSessionUpdate, postLoginUpdate })
     return this.getUserSession().pipe(
       // ignore the replay value, and return the latest value
       take(2),
       last()
+    )
+  }
+
+  private createLocalUserSessionUid() {
+    this.window.sessionStorage.setItem(
+      LOCAL_SESSION_UID,
+      Math.random().toString(36).substring(2, 15)
     )
   }
 

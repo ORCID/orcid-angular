@@ -16,6 +16,8 @@ import { IInterstitialService } from './iinterstitial-service'
 import { ComponentType } from '@angular/cdk/overlay'
 import { InterstitialType } from 'src/app/cdk/interstitials/interstitial.type'
 import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
+import { QaFlag } from '../qa-flag/qa-flags.enum'
+import { QaFlagsService } from '../qa-flag/qa-flag.service'
 
 @Injectable({
   providedIn: 'root',
@@ -31,38 +33,34 @@ export class DomainInterstitialService
       ShareEmailsDomainsComponentDialogOutput
     >
 {
-  // Define the name and toggle for this specific interstitial
+  QA_FLAG_FOR_FORCE_INTERSTITIAL_AS_NEVER_SEEN = QaFlag.forceDomainInterstitialAsNeverSeem
   INTERSTITIAL_NAME: InterstitialType = 'DOMAIN_INTERSTITIAL'
   INTERSTITIAL_TOGGLE = 'LOGIN_DOMAINS_INTERSTITIAL'
 
   constructor(
     _matDialog: MatDialog,
     interstitialsService: InterstitialsService,
-    togglzService: TogglzService
+    togglzService: TogglzService,
+    qaFlagService: QaFlagsService
   ) {
     // Pass dependencies to the parent
-    super(_matDialog, togglzService, interstitialsService)
-    this.getIntertitialToggle()
+    super(_matDialog, togglzService, interstitialsService, qaFlagService)
   }
   /**
    * Decide if the affiliation interstitial should be shown.
    * Returns an Observable<boolean> that emits `true` if it *should* show, or `false` if not.
    */
-  shouldShowInterstitial(userRecord: UserRecord): Observable<boolean> {
+  userIsElegibleForInterstitial(userRecord: UserRecord): Observable<boolean> {
     // Basic checks
     if (!userRecord?.emails?.emailDomains?.length) return of(false)
 
     const hasNoPublicDomains = !this.userHasPublicDomains(userRecord.emails)
     const hasPrivateDomains = this.userHasPrivateDomains(userRecord.emails)
 
-    console.log('hasNoPublicDomains', hasNoPublicDomains)
-    console.log('hasPrivateDomains', hasPrivateDomains)
-
     if (!hasNoPublicDomains || !hasPrivateDomains) {
       return of(false)
     }
-    // Finally return true if the interstitial toggle is enabled and the user hasn't seen it yet
-    return this.userHasNotSeemTheInterstitialAndTogglzIsOn()
+    return of(true)
   }
 
   // Return the dialog component that we want to display

@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing'
 
-import { LoginInterstitialsService } from './login-interstitials.service'
+import { LoginInterstitialsService } from './login-interstitials-manager.service'
 import { MatLegacyDialog } from '@angular/material/legacy-dialog'
 import { InterstitialsService } from 'src/app/cdk/interstitials/interstitials.service'
 import { TogglzService } from '../togglz/togglz.service'
