@@ -199,25 +199,7 @@ export class FormSignInComponent implements OnInit, OnDestroy {
           if (isRedirectToTheAuthorizationPage(data)) {
             this.handleOauthLogin(data.url)
           } else {
-            const analyticsReports: Observable<void>[] = []
-
-            analyticsReports.push(
-              this._googleTagManagerService.reportEvent('Sign-In', 'Website')
-            )
-
-            forkJoin(analyticsReports)
-              .pipe(
-                catchError((err) => {
-                  return this._errorHandler.handleError(
-                    err,
-                    ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
-                  )
-                })
-              )
-              .subscribe(
-                () => this.navigateTo(data.url),
-                () => this.navigateTo(data.url)
-              )
+              this.navigateTo(data.url)
           }
         } else if (data.verificationCodeRequired && !data.badVerificationCode) {
           this.authorizationFormSubmitted = false
@@ -347,25 +329,7 @@ export class FormSignInComponent implements OnInit, OnDestroy {
           this.loading.next(false)
           this.errorDescription.next(requestInfoForm.errorDescription)
         }
-        const analyticsReports: Observable<void>[] = []
-
-        analyticsReports.push(
-          this._googleTagManagerService.reportEvent('Sign-In', requestInfoForm)
-        )
-
-        forkJoin(analyticsReports)
-          .pipe(
-            catchError((err) =>
-              this._errorHandler.handleError(
-                err,
-                ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
-              )
-            )
-          )
-          .subscribe(
-            () => this.oauthAuthorize(urlRedirect),
-            () => this.oauthAuthorize(urlRedirect)
-          )
+           this.oauthAuthorize(urlRedirect)
       })
   }
 

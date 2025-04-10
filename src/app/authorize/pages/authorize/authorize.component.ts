@@ -95,39 +95,12 @@ export class AuthorizeComponent {
     }
   }
 
-  /**
-   * Reports re-authorization to Google Tag Manager (async),
-   * then triggers a redirect after the report completes or on error.
-   */
-  reportReAuthorization(request: RequestInfoForm): void {
-    const analyticsReport: Observable<void> =
-      this.googleTagManagerService.reportEvent('Reauthorize', request)
-
-    forkJoin([analyticsReport]).subscribe({
-      next: () => {
-        // After successful reporting, proceed
-        // GA will handle the redirect
-      },
-      error: (error) => {
-        // If error happens, handle it, then proceed
-        this.errorHandlerService.handleError(
-          error,
-          ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
-        )
-        this.finishRedirectObs(request)
-      },
-    })
-  }
 
   /**
    * Internal method to finalize redirection (non-observable variant).
    */
   finishRedirect(): void {
-    if (this.redirectByReportAlreadyAuthorize) {
-      this.reportReAuthorization(this.oauthSession)
-    } else {
-      ;(this.window as any).outOfRouterNavigation(this.redirectUrl)
-    }
+      (this.window as any).outOfRouterNavigation(this.redirectUrl) 
   }
 
   /*
@@ -270,7 +243,7 @@ export class AuthorizeComponent {
         this.showDomainInterstitial()
         this.loading = false
       } else {
-        this.reportReAuthorization(this.oauthSession)
+        this.finishRedirect()
       }
       return
     }
