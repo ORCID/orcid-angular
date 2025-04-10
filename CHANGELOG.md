@@ -1,3 +1,10 @@
+## v2.112.18 - 2025-04-10
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.17...v2.112.18)
+
+- [#2499](https://github.com/ORCID/orcid-angular/pull/2499): 9694 capture affiliations during sign in
+- [#2498](https://github.com/ORCID/orcid-angular/pull/2498): Remove reportEvent for google Analytics
+
 ## v2.112.17 - 2025-04-04
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.16...v2.112.17)
