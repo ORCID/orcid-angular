@@ -214,7 +214,6 @@ describe('LoginMainInterstitialsManagerService', () => {
         } as ShareEmailsDomainsComponentDialogOutput)
       },
       complete: () => {
-        console.log('complete')
         // LoginDomainInterstitialManagerService should have been fully called
         expect(
           mockLoginDomainInterstitialManagerService.userIsElegibleForInterstitial

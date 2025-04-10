@@ -96,7 +96,6 @@ export class DeepSelectInputComponent implements ControlValueAccessor {
 
   // ControlValueAccessor implementation
   writeValue(value: string): void {
-    console.log('writeValue', value)
     this.formgroup.get('formControl').setValue(value)
     const findItem = (menu: DeepSelectMenu[], value: string) => {
       for (const item of menu) {

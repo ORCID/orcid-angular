@@ -70,7 +70,6 @@ export class ShareEmailsDomainsComponent implements OnDestroy {
       .getUserSession()
       .pipe(takeUntil(this.$destroy))
       .subscribe((userInfo) => {
-        console.log(userInfo)
         this.oauthRequest = userInfo.oauthSession
         this.organizationName = this.oauthRequest?.clientName
       })

@@ -185,8 +185,6 @@ export class RecordAffiliationService {
   }
 
   postAffiliation(affiliation): Observable<Affiliation> {
-    console.log('postAffiliation', affiliation)
-    
     return this._http
       .post<Affiliation>(
         runtimeEnvironment.API_WEB + 'affiliations/affiliation.json',

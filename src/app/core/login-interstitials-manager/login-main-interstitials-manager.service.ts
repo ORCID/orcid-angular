@@ -48,13 +48,10 @@ export class LoginMainInterstitialsManagerService {
   ): Observable<
     AffilationsComponentDialogOutput | ShareEmailsDomainsComponentDialogOutput
   > {
-    console.log('1')
-
     // Basic sanity checks
     if (!this.isValidUserRecord(userRecord)) return EMPTY
     if (this.alreadyCheckedLoginInterstitials) return EMPTY
     this.alreadyCheckedLoginInterstitials = true
-    console.log('2')
 
     if (
       this.interstitialsService.checkIfSessionAlreadyCheckedInterstitialsLogic()
@@ -109,7 +106,6 @@ export class LoginMainInterstitialsManagerService {
             '[Login Interstitial Manager] Session checked interstitials logic'
           )
         }
-        console.log(this.interstitialsService)
         this.interstitialsService.markCurrentSessionToNoCheckInterstitialsLogic()
       })
     )

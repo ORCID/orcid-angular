@@ -32,7 +32,11 @@ export abstract class LoginBaseInterstitialManagerService<TInput, TOutput>
   ): Observable<boolean>
 
   getInterstitialViewed(): Observable<boolean> {
-    if (this.qaFlag.isFlagEnabled(this.QA_FLAG_FOR_FORCE_INTERSTITIAL_AS_NEVER_SEEN)) {
+    if (
+      this.qaFlag.isFlagEnabled(
+        this.QA_FLAG_FOR_FORCE_INTERSTITIAL_AS_NEVER_SEEN
+      )
+    ) {
       return of(false)
     }
     // Check if user has already seen it
@@ -84,6 +88,7 @@ export abstract class LoginBaseInterstitialManagerService<TInput, TOutput>
     }
   }
   getInterstitialTogglz(): Observable<boolean> {
-    return this.togglzService.getStateOf(this.INTERSTITIAL_TOGGLE).pipe(take(1))
+    return of(true)
+    // return this.togglzService.getStateOf(this.INTERSTITIAL_TOGGLE).pipe(take(1))
   }
 }

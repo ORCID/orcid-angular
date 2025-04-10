@@ -272,7 +272,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   ) {
     return interstitialDialog.pipe(
       tap((dialogOutput) => {
-        console.log('dialogOutput', dialogOutput)
+        
         if (dialogOutput.type === 'domains-interstitial') {
           this.newlySharedDomains = dialogOutput.newlySharedDomains
         }
