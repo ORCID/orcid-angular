@@ -35,7 +35,7 @@ import { CanonocalUrlService } from 'src/app/core/canonocal-url/canonocal-url.se
 import { RecordUtil } from 'src/app/shared/utils/record.util'
 import { AffilationsComponentDialogOutput } from 'src/app/cdk/interstitials/affiliations-interstitial/affiliations-interstitial-dialog.component'
 import { ShareEmailsDomainsComponentDialogOutput } from 'src/app/cdk/interstitials/share-emails-domains/share-emails-domains-dialog.component'
-import { LoginInterstitialsService } from 'src/app/core/login-interstitials-manager/login-interstitials-manager.service'
+import { LoginMainInterstitialsManagerService } from 'src/app/core/login-interstitials-manager/login-main-interstitials-manager.service'
 
 @Component({
   selector: 'app-my-orcid',
@@ -102,7 +102,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     private _scriptService: ScriptService,
     private _canonocalUrlService: CanonocalUrlService,
     private location: Location,
-    private _loginInterstitialsService: LoginInterstitialsService
+    private _LoginMainInterstitialsManagerService: LoginMainInterstitialsManagerService
   ) {}
 
   private checkIfThisIsAPublicOrcid() {
@@ -226,7 +226,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
         }),
         mergeMap((userRecord) => {
           const interstitialDialog =
-            this._loginInterstitialsService.checkLoginInterstitials(userRecord)
+            this._LoginMainInterstitialsManagerService.checkLoginInterstitials(userRecord)
           if (interstitialDialog) {
             return this.handlesInterstitialOutput(interstitialDialog)
           } else {

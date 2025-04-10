@@ -3,13 +3,13 @@ import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
 import { Observable, of } from 'rxjs'
 import { map, switchMap } from 'rxjs/operators'
 
-import { BaseInterstitialService } from './base-interstitial.service'
+import { LoginBaseInterstitialManagerService } from './login-abstract-interstitial-manager.service'
 import { ShareEmailsDomainsDialogComponent } from 'src/app/cdk/interstitials/share-emails-domains/share-emails-domains-dialog.component'
 import { InterstitialsService } from 'src/app/cdk/interstitials/interstitials.service'
 import { TogglzService } from '../togglz/togglz.service'
 import { EmailsEndpoint } from 'src/app/types'
 import { UserRecord } from 'src/app/types/record.local'
-import { IInterstitialService } from './iinterstitial-service'
+import { InterstitialManagerServiceInterface } from './login-interface-interstitial-manager.service'
 import { ComponentType } from '@angular/cdk/overlay'
 import { InterstitialType } from 'src/app/cdk/interstitials/interstitial.type'
 import {
@@ -23,18 +23,19 @@ import { QaFlagsService } from '../qa-flag/qa-flag.service'
 @Injectable({
   providedIn: 'root',
 }) // or some TOutput
-export class AffiliationInterstitialService
-  extends BaseInterstitialService<
+export class LoginAffiliationInterstitialManagerService
+  extends LoginBaseInterstitialManagerService<
     AffilationsComponentDialogInput,
     AffilationsComponentDialogOutput
   >
   implements
-    IInterstitialService<
+    InterstitialManagerServiceInterface<
       AffilationsComponentDialogInput,
       AffilationsComponentDialogOutput
     >
 {
-  QA_FLAG_FOR_FORCE_INTERSTITIAL_AS_NEVER_SEEN = QaFlag.forceAffiliationInterstitialNotSeem
+  QA_FLAG_FOR_FORCE_INTERSTITIAL_AS_NEVER_SEEN =
+    QaFlag.forceAffiliationInterstitialNotSeem
   INTERSTITIAL_NAME: InterstitialType = 'AFFILIATION_INTERSTITIAL'
   INTERSTITIAL_TOGGLE = 'LOGIN_AFFILIATION_INTERSTITIAL'
 
@@ -73,7 +74,7 @@ export class AffiliationInterstitialService
   }
 
   // Build the data that goes into our dialog
-  getDialogDataToShow(userRecord: UserRecord): AffilationsComponentDialogInput {
-    return { userEmailsJson: userRecord.emails }
-  }
+  getDialogDataToShow(
+    userRecord: UserRecord
+  ): AffilationsComponentDialogInput {}
 }

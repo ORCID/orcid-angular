@@ -2,7 +2,7 @@ import { Observable, of } from 'rxjs'
 import { TogglzService } from '../togglz/togglz.service'
 import { InterstitialsService } from 'src/app/cdk/interstitials/interstitials.service'
 import { UserRecord } from 'src/app/types/record.local'
-import { IInterstitialService } from './iinterstitial-service'
+import { InterstitialManagerServiceInterface } from './login-interface-interstitial-manager.service'
 import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
 import { map, switchMap, take } from 'rxjs/operators'
 import { MatDialogConfig } from '@angular/material/dialog'
@@ -11,8 +11,8 @@ import { InterstitialType } from 'src/app/cdk/interstitials/interstitial.type'
 import { QaFlag } from '../qa-flag/qa-flags.enum'
 import { QaFlagsService } from '../qa-flag/qa-flag.service'
 
-export abstract class BaseInterstitialService<TInput, TOutput>
-  implements IInterstitialService<TInput, TOutput>
+export abstract class LoginBaseInterstitialManagerService<TInput, TOutput>
+  implements InterstitialManagerServiceInterface<TInput, TOutput>
 {
   abstract INTERSTITIAL_NAME: InterstitialType
   abstract INTERSTITIAL_TOGGLE: string

@@ -26,7 +26,7 @@ export type ShareEmailsDomainsComponentDialogInput = {
 }
 export type ShareEmailsDomainsComponentDialogOutput = {
   type: 'domains-interstitial'
-  newlySharedDomains: string[]
+  newlySharedDomains?: string[]
 }
 
 @Component({

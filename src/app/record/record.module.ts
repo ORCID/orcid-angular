@@ -84,7 +84,7 @@ import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/lega
 import { WarningMessageModule } from '../cdk/warning-message/warning-message.module'
 import { DeepSelectInputModule } from '../cdk/deep-select-input/deep-select-input.module'
 import { PageNotFound404Module } from '../page-not-found-404/page-not-found-404.module'
-import { LoginInterstitialsService } from '../core/login-interstitials-manager/login-interstitials-manager.service'
+import { LoginMainInterstitialsManagerService } from '../core/login-interstitials-manager/login-main-interstitials-manager.service'
 
 @NgModule({
   declarations: [
@@ -178,6 +178,6 @@ import { LoginInterstitialsService } from '../core/login-interstitials-manager/l
     DeepSelectInputModule,
     PageNotFound404Module,
   ],
-  providers: [VerificationEmailModalService, LoginInterstitialsService],
+  providers: [VerificationEmailModalService, LoginMainInterstitialsManagerService],
 })
 export class RecordModule {}

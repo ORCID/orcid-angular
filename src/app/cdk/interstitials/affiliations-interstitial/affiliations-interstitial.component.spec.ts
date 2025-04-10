@@ -1,23 +1,53 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { ShareEmailsDomainsComponent } from './affiliations-interstitial.component'
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
 import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
 import { PlatformInfoService } from '../../platform-info'
 import { WINDOW_PROVIDERS } from '../../window'
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
-import { UserService } from 'src/app/core'
+import { OrganizationsService, UserService } from 'src/app/core'
+import { RecordAffiliationService } from 'src/app/core/record-affiliations/record-affiliations.service'
+import { RecordService } from 'src/app/core/record/record.service'
+import { Register2Service } from 'src/app/core/register2/register2.service'
+import { AffiliationsInterstitialComponent } from './affiliations-interstitial.component'
+import { EMPTY } from 'rxjs'
 
-describe('ShareEmailsDomainsComponent', () => {
-  let component: ShareEmailsDomainsComponent
-  let fixture: ComponentFixture<ShareEmailsDomainsComponent>
+describe('AffiliationsInterstitialComponent', () => {
+  let component: AffiliationsInterstitialComponent
+  let fixture: ComponentFixture<AffiliationsInterstitialComponent>
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ShareEmailsDomainsComponent],
+      declarations: [AffiliationsInterstitialComponent],
       providers: [
         {
           provide: PlatformInfoService,
+          useValue: {
+            get: () => EMPTY,
+          },
+        },
+        {
+          provide: RecordService,
+          useValue: {
+            getRecord: () => ({
+              pipe: () => ({
+                subscribe: () => {},
+              }),
+            }),
+          },
+        },
+
+        {
+          provide: Register2Service,
+          useValue: {},
+        },
+
+        {
+          provide: OrganizationsService,
+          useValue: {},
+        },
+        {
+          provide: RecordAffiliationService,
           useValue: {},
         },
         {
@@ -45,7 +75,7 @@ describe('ShareEmailsDomainsComponent', () => {
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
-    fixture = TestBed.createComponent(ShareEmailsDomainsComponent)
+    fixture = TestBed.createComponent(AffiliationsInterstitialComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
   })

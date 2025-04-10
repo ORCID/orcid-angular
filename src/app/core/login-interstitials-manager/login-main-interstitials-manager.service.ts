@@ -9,9 +9,9 @@ import {
   tap,
 } from 'rxjs/operators'
 import { UserRecord } from 'src/app/types/record.local'
-import { DomainInterstitialService } from './domain-interstitials.service'
-import { IInterstitialService } from './iinterstitial-service'
-import { AffiliationInterstitialService } from './affiliation-interstitials.service'
+import { LoginDomainInterstitialManagerService } from './login-domain-interstitials-manager.service'
+import { InterstitialManagerServiceInterface } from './login-interface-interstitial-manager.service'
+import { LoginAffiliationInterstitialManagerService } from './login-affiliation-interstitials-manager.service'
 import { AffilationsComponentDialogOutput } from 'src/app/cdk/interstitials/affiliations-interstitial/affiliations-interstitial-dialog.component'
 import { ShareEmailsDomainsComponentDialogOutput } from 'src/app/cdk/interstitials/share-emails-domains/share-emails-domains-dialog.component'
 import { InterstitialsService } from 'src/app/cdk/interstitials/interstitials.service'
@@ -19,22 +19,22 @@ import { InterstitialsService } from 'src/app/cdk/interstitials/interstitials.se
 @Injectable({
   providedIn: 'root',
 })
-export class LoginInterstitialsService {
+export class LoginMainInterstitialsManagerService {
   private alreadyCheckedLoginInterstitials = false
 
-  private interstitialServices: IInterstitialService<
+  private interstitialServices: InterstitialManagerServiceInterface<
     any,
     AffilationsComponentDialogOutput | ShareEmailsDomainsComponentDialogOutput
   >[] = []
 
   constructor(
     private interstitialsService: InterstitialsService,
-    domainInterstitialService: DomainInterstitialService,
-    affiliationInterstitialService: AffiliationInterstitialService
+    LoginDomainInterstitialManagerService: LoginDomainInterstitialManagerService,
+    LoginAffiliationInterstitialManagerService: LoginAffiliationInterstitialManagerService
   ) {
     this.interstitialServices = [
-      domainInterstitialService,
-      affiliationInterstitialService,
+      LoginDomainInterstitialManagerService,
+      LoginAffiliationInterstitialManagerService,
     ]
   }
 
@@ -48,10 +48,13 @@ export class LoginInterstitialsService {
   ): Observable<
     AffilationsComponentDialogOutput | ShareEmailsDomainsComponentDialogOutput
   > {
+    console.log('1')
+
     // Basic sanity checks
     if (!this.isValidUserRecord(userRecord)) return EMPTY
     if (this.alreadyCheckedLoginInterstitials) return EMPTY
     this.alreadyCheckedLoginInterstitials = true
+    console.log('2')
 
     if (
       this.interstitialsService.checkIfSessionAlreadyCheckedInterstitialsLogic()
@@ -106,6 +109,7 @@ export class LoginInterstitialsService {
             '[Login Interstitial Manager] Session checked interstitials logic'
           )
         }
+        console.log(this.interstitialsService)
         this.interstitialsService.markCurrentSessionToNoCheckInterstitialsLogic()
       })
     )

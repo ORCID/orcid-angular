@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { Observable, of } from 'rxjs'
 import { map, switchMap } from 'rxjs/operators'
 
-import { BaseInterstitialService } from './base-interstitial.service'
+import { LoginBaseInterstitialManagerService } from './login-abstract-interstitial-manager.service'
 import {
   ShareEmailsDomainsComponentDialogInput,
   ShareEmailsDomainsDialogComponent,
@@ -12,7 +12,7 @@ import { InterstitialsService } from 'src/app/cdk/interstitials/interstitials.se
 import { TogglzService } from '../togglz/togglz.service'
 import { EmailsEndpoint } from 'src/app/types'
 import { UserRecord } from 'src/app/types/record.local'
-import { IInterstitialService } from './iinterstitial-service'
+import { InterstitialManagerServiceInterface } from './login-interface-interstitial-manager.service'
 import { ComponentType } from '@angular/cdk/overlay'
 import { InterstitialType } from 'src/app/cdk/interstitials/interstitial.type'
 import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
@@ -22,13 +22,13 @@ import { QaFlagsService } from '../qa-flag/qa-flag.service'
 @Injectable({
   providedIn: 'root',
 })
-export class DomainInterstitialService
-  extends BaseInterstitialService<
+export class LoginDomainInterstitialManagerService
+  extends LoginBaseInterstitialManagerService<
     ShareEmailsDomainsComponentDialogInput,
     ShareEmailsDomainsComponentDialogOutput
   >
   implements
-    IInterstitialService<
+    InterstitialManagerServiceInterface<
       ShareEmailsDomainsComponentDialogInput,
       ShareEmailsDomainsComponentDialogOutput
     >

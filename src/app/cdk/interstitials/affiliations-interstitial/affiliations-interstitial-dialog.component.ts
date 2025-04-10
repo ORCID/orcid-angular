@@ -29,10 +29,7 @@ import { RecordCountriesService } from 'src/app/core/record-countries/record-cou
 import { RecordAffiliationService } from 'src/app/core/record-affiliations/record-affiliations.service'
 import { Register2Service } from 'src/app/core/register2/register2.service'
 
-export type AffilationsComponentDialogInput = {
-  userEmailsJson: EmailsEndpoint
-  organizationName?: string
-}
+export type AffilationsComponentDialogInput = void
 export type AffilationsComponentDialogOutput = {
   type: 'affiliation-interstitial'
   addedAffiliation?: string
