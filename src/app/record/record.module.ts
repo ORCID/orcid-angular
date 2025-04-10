@@ -178,6 +178,9 @@ import { LoginMainInterstitialsManagerService } from '../core/login-interstitial
     DeepSelectInputModule,
     PageNotFound404Module,
   ],
-  providers: [VerificationEmailModalService, LoginMainInterstitialsManagerService],
+  providers: [
+    VerificationEmailModalService,
+    LoginMainInterstitialsManagerService,
+  ],
 })
 export class RecordModule {}

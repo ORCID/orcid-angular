@@ -25,8 +25,6 @@ import { map, takeUntil } from 'rxjs/operators'
 import { UserService } from 'src/app/core'
 import { Subject } from 'rxjs'
 
-
-
 @Component({
   selector: 'app-share-emails-domains',
   templateUrl: './share-emails-domains.component.html',
@@ -139,6 +137,4 @@ export class ShareEmailsDomainsComponent implements OnDestroy {
     this.$destroy.next()
     this.$destroy.unsubscribe()
   }
-
-
 }

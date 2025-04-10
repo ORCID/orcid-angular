@@ -11,7 +11,10 @@ import { InterstitialType } from 'src/app/cdk/interstitials/interstitial.type'
  * TInput: the type of data passed into the dialog.
  * TOutput: the type of data (if any) emitted from dialogRef.afterClosed().
  */
-export interface InterstitialManagerServiceInterface<TInput = any, TOutput = any> {
+export interface InterstitialManagerServiceInterface<
+  TInput = any,
+  TOutput = any
+> {
   INTERSTITIAL_NAME: InterstitialType
   INTERSTITIAL_TOGGLE: string
 

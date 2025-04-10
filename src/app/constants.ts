@@ -432,5 +432,4 @@ export function affiliationToOrganization(
   } as Organization
 }
 
-
 export const LOCAL_SESSION_UID = 'LOCAL_SESSION_UID'

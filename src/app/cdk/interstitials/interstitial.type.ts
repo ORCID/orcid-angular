@@ -1,1 +1,3 @@
-export type InterstitialType = 'DOMAIN_INTERSTITIAL' | 'AFFILIATION_INTERSTITIAL'
+export type InterstitialType =
+  | 'DOMAIN_INTERSTITIAL'
+  | 'AFFILIATION_INTERSTITIAL'

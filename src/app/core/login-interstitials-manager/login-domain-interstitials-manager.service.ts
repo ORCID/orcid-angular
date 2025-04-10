@@ -33,7 +33,8 @@ export class LoginDomainInterstitialManagerService
       ShareEmailsDomainsComponentDialogOutput
     >
 {
-  QA_FLAG_FOR_FORCE_INTERSTITIAL_AS_NEVER_SEEN = QaFlag.forceDomainInterstitialAsNeverSeem
+  QA_FLAG_FOR_FORCE_INTERSTITIAL_AS_NEVER_SEEN =
+    QaFlag.forceDomainInterstitialAsNeverSeem
   INTERSTITIAL_NAME: InterstitialType = 'DOMAIN_INTERSTITIAL'
   INTERSTITIAL_TOGGLE = 'LOGIN_DOMAINS_INTERSTITIAL'
 

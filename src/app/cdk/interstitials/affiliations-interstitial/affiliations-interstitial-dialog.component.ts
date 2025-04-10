@@ -71,7 +71,6 @@ export class AffiliationsInterstitialDialogComponent extends AffiliationsInterst
     )
   }
   override finishIntertsitial(affiliation?: string) {
-    console.log('finishIntertsitial', affiliation)
     this.dialogRef.close({
       type: 'affiliation-interstitial',
       addedAffiliation: affiliation,

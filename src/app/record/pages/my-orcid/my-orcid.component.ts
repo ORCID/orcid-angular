@@ -226,7 +226,9 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
         }),
         mergeMap((userRecord) => {
           const interstitialDialog =
-            this._LoginMainInterstitialsManagerService.checkLoginInterstitials(userRecord)
+            this._LoginMainInterstitialsManagerService.checkLoginInterstitials(
+              userRecord
+            )
           if (interstitialDialog) {
             return this.handlesInterstitialOutput(interstitialDialog)
           } else {
@@ -272,7 +274,6 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   ) {
     return interstitialDialog.pipe(
       tap((dialogOutput) => {
-        
         if (dialogOutput.type === 'domains-interstitial') {
           this.newlySharedDomains = dialogOutput.newlySharedDomains
         }
