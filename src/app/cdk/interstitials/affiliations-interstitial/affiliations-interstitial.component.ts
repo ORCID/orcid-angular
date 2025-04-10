@@ -54,15 +54,15 @@ export class AffiliationsInterstitialComponent implements OnInit, OnDestroy {
   filteredOptions$: Observable<Organization[]>
 
   /** Basic label/placeholder strings. */
-  ariaLabelClearOrganization = 'Clear organization'
-  organizationPlaceholder = 'Type your organization name'
-  departmentPlaceholder = 'School, college or department'
-  rolePlaceholder = 'Your role or job in the organization'
-  ariaLabelStartDate = 'Start date'
-  ngOrcidYear = 'Year'
-  ngOrcidMonth = 'Month'
-  ariaLabelOrganization = 'Organization'
-  ariaLabelPrefilledOrganization = 'Organization (prefilled from email)'
+  ariaLabelClearOrganization = $localize`:@@register.clearOrganization:Clear organization`
+  organizationPlaceholder = $localize`:@@register.organizationPlaceholder:Type your organization name`
+  departmentPlaceholder = $localize`:@@register.departmentPlaceholder:School, college or department`
+  rolePlaceholder = $localize`:@@register.rolePlaceholder:Your role or job in the organization`
+  ariaLabelStartDate = $localize`:@@shared.startDate:Start date`
+  ngOrcidYear = $localize`:@@shared.year:Year`
+  ngOrcidMonth = $localize`:@@shared.month:Month`
+  ariaLabelOrganization = $localize`:@@register.organization:Organization`
+  ariaLabelPrefilledOrganization = $localize`:@@register.prefilledOrganization:Organization - We've added an organization based on your email domain`
 
   /** Range of possible years. */
   years = Array(110)

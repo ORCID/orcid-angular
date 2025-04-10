@@ -6,7 +6,7 @@
       </mat-icon>
       <h1
         class="orc-font-heading-small"
-        i18n="@@interstitial.shareYourVerified"
+        i18n="@@interstitial.employmentAffiliationFound"
       >
         Employment affiliation found
       </h1>
@@ -20,19 +20,23 @@
     [ngClass]="{ 'no-padding': !platform.columns12 }"
   >
     <app-info-panel *ngIf="rorIdHasBeenMatched">
-      <ng-container> Based on the verified email </ng-container>
+      <ng-container i18n="@@interstitial.basedOnTheVerifiedEmail"
+        >Based on the verified email</ng-container
+      >
       <strong> {{ userDomainMatched }}</strong>
-      <ng-container> we think you are currently affiliated with</ng-container>
+      <ng-container i18n="@@interstitial.weThinkYouAreCurrentlyAffiliatedWith"
+        >we think you are currently affiliated with</ng-container
+      >
       <strong>
         {{ autoCompleteDisplayOrganization(organizationFromDatabase) }}.</strong
       >
 
       <ng-container
-        i18n="@@register.webePreselectedThisOrganizationForYouInTheFormBelow"
+        i18n="
+          @@interstitial.webePreselectedThisOrganizationForYouInTheFormBelow"
       >
-        We’ve pre-selected this organization for you in the form
-        below.</ng-container
-      >
+        We’ve pre-selected this organization for you in the form below.
+      </ng-container>
     </app-info-panel>
 
     <section>
@@ -50,10 +54,10 @@
           id="organization-label"
           class="mat-caption"
           [ngClass]="{
-          error: organizationIsInvalidAndTouched,
-        }"
+            error: organizationIsInvalidAndTouched
+          }"
         >
-          <strong i18n="@@shared.organization">Organization</strong>
+          <strong i18n="@@interstitial.organization">Organization</strong>
         </label>
       </div>
 
@@ -282,6 +286,7 @@
 
     <mat-divider class="last"></mat-divider>
 
+    <!-- Add i18n to the button text -->
     <button
       class="authorize-button"
       mat-raised-button
@@ -289,14 +294,23 @@
       (click)="accept(true)"
       id="authorize-button"
       [disabled]="!form.valid"
+      i18n="@@interstitial.addThisAffiliation"
     >
       Add this affiliation
     </button>
 
-    <a mat-button id="deny-button" class="underline" (click)="accept(false)">
-      Continue without making adding affiliation
+    <!-- Add i18n to the link text -->
+    <a
+      mat-button
+      id="deny-button"
+      class="underline"
+      (click)="accept(false)"
+      i18n="@@interstitial.continueWithoutAddingAffiliation"
+    >
+      Continue without adding affiliation
     </a>
   </mat-card-content>
+
   <mat-spinner
     *ngIf="!form"
     class="spinner"
