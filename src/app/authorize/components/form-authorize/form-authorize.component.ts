@@ -121,7 +121,7 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
   authorize(value = true) {
     this.loadingAuthorizeEndpoint = true
     this._oauth.authorize(value).subscribe((data) => {
-    this.redirectUrl.next(data.redirectUrl)
+      this.redirectUrl.next(data.redirectUrl)
     })
   }
 

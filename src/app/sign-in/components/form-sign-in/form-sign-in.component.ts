@@ -199,7 +199,7 @@ export class FormSignInComponent implements OnInit, OnDestroy {
           if (isRedirectToTheAuthorizationPage(data)) {
             this.handleOauthLogin(data.url)
           } else {
-              this.navigateTo(data.url)
+            this.navigateTo(data.url)
           }
         } else if (data.verificationCodeRequired && !data.badVerificationCode) {
           this.authorizationFormSubmitted = false
@@ -329,7 +329,7 @@ export class FormSignInComponent implements OnInit, OnDestroy {
           this.loading.next(false)
           this.errorDescription.next(requestInfoForm.errorDescription)
         }
-           this.oauthAuthorize(urlRedirect)
+        this.oauthAuthorize(urlRedirect)
       })
   }
 

@@ -95,12 +95,11 @@ export class AuthorizeComponent {
     }
   }
 
-
   /**
    * Internal method to finalize redirection (non-observable variant).
    */
   finishRedirect(): void {
-      (this.window as any).outOfRouterNavigation(this.redirectUrl) 
+    ;(this.window as any).outOfRouterNavigation(this.redirectUrl)
   }
 
   /*

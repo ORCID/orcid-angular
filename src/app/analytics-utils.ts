@@ -10,8 +10,6 @@ export const browserGlobals = {
   },
 }
 
-
-
 export function removeUrlParameters(url: string) {
   return url.split('?')[0]
 }
