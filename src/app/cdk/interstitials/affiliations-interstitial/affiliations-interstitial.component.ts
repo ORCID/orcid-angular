@@ -6,13 +6,11 @@ import {
   Validators,
   AbstractControl,
 } from '@angular/forms'
-import { MatDialogRef } from '@angular/material/dialog'
 import { Subject, Observable, of, EMPTY } from 'rxjs'
-import { switchMap, tap, first, takeUntil, map } from 'rxjs/operators'
+import { switchMap, first, takeUntil, map, tap } from 'rxjs/operators'
 
 import { WINDOW } from 'src/app/cdk/window'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
-import { RecordCountriesService } from 'src/app/core/record-countries/record-countries.service'
 import { RecordAffiliationService } from 'src/app/core/record-affiliations/record-affiliations.service'
 import { RecordService } from 'src/app/core/record/record.service'
 import { Organization, Value } from 'src/app/types/common.endpoint'
@@ -42,7 +40,7 @@ export class AffiliationsInterstitialComponent implements OnInit, OnDestroy {
   /** Main form group. */
   form: UntypedFormGroup
 
-  /** Some state for UI. */
+  /** Organization detected from user’s email domain, if any. */
   organizationFromDatabase: Organization | undefined
   displayOrganizationHint = false
   rorIdHasBeenMatched = false
@@ -50,10 +48,10 @@ export class AffiliationsInterstitialComponent implements OnInit, OnDestroy {
   /** For unsubscribing from streams. */
   private destroy$ = new Subject<void>()
 
-  /** Observables */
+  /** Filtered options observable for the organization autocomplete. */
   filteredOptions$: Observable<Organization[]>
 
-  /** Basic label/placeholder strings. */
+  /** Label/placeholder strings. */
   ariaLabelClearOrganization = $localize`:@@register.clearOrganization:Clear organization`
   organizationPlaceholder = $localize`:@@register.organizationPlaceholder:Type your organization name`
   departmentPlaceholder = $localize`:@@register.departmentPlaceholder:School, college or department`
@@ -73,42 +71,33 @@ export class AffiliationsInterstitialComponent implements OnInit, OnDestroy {
   months = Array(12)
     .fill(0)
     .map((_, i) => i + 1)
+
   platform: PlatformInfo
   userDomainMatched: string
 
-  /**
-   * Inject the allowed services.
-   * (Remove if not needed in your own app.)
-   */
   constructor(
     @Inject(WINDOW) private window: Window,
-    private _platform: PlatformInfoService,
-    private _recordCountryService: RecordCountriesService,
-    private _recordAffiliationService: RecordAffiliationService,
-    private _formBuilder: UntypedFormBuilder,
-    private _record: RecordService,
-    private _organizationService: OrganizationsService,
-    private registerService: Register2Service,
-    private recordAffiliation: RecordAffiliationService
+    private platformService: PlatformInfoService,
+    private recordAffiliationService: RecordAffiliationService,
+    private formBuilder: UntypedFormBuilder,
+    private recordService: RecordService,
+    private organizationService: OrganizationsService,
+    private register2Service: Register2Service
   ) {}
 
   ngOnInit(): void {
-    this._platform.get().subscribe((data) => {
+    this.platformService.get().subscribe((data) => {
       this.platform = data
     })
-
-    this._record
+    // Attempt to detect organization from user’s email domain
+    this.recordService
       .getRecord()
       .pipe(
-        map((record) => {
-          //latest domain
-          return record?.emails?.emailDomains?.[0]
-        }),
+        map((record) => record?.emails?.emailDomains?.[0]),
         switchMap((domain: AssertionVisibilityString) => {
           if (domain) {
             this.userDomainMatched = domain.value
-            // Fetch the organization name from the domain
-            return this.registerService
+            return this.register2Service
               .getEmailCategory(domain.value)
               .pipe(map((response) => response.rorId))
           }
@@ -116,7 +105,7 @@ export class AffiliationsInterstitialComponent implements OnInit, OnDestroy {
         }),
         switchMap((rorId: string) => {
           if (rorId) {
-            return this._organizationService
+            return this.organizationService
               .getOrgDisambiguated('ROR', rorId)
               .pipe(first())
           }
@@ -130,7 +119,8 @@ export class AffiliationsInterstitialComponent implements OnInit, OnDestroy {
           this.displayOrganizationHint = true
         }
 
-        this.form = this._formBuilder.group({
+        // Build the form
+        this.form = this.formBuilder.group({
           organization: new UntypedFormControl(this.organizationFromDatabase, [
             Validators.required,
             Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
@@ -142,7 +132,7 @@ export class AffiliationsInterstitialComponent implements OnInit, OnDestroy {
           roleTitle: new UntypedFormControl('', [
             Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
           ]),
-          startDateGroup: this._formBuilder.group(
+          startDateGroup: this.formBuilder.group(
             {
               startDateYear: [''],
               startDateMonth: [''],
@@ -159,17 +149,15 @@ export class AffiliationsInterstitialComponent implements OnInit, OnDestroy {
           this.form.controls.organization.markAsUntouched()
         }
 
-        // Set up autocomplete filtering
+        // Autocomplete for organization
         this.filteredOptions$ = this.form
           .get('organization')!
           .valueChanges.pipe(
             tap((val: string | Organization) => {
-              // Clear or set organization if user picks from the list
               if (typeof val === 'object') {
                 this.organizationFromDatabase = val
                 this.displayOrganizationHint = true
               } else if (!val) {
-                // If input is empty
                 this.organizationFromDatabase = undefined
                 this.displayOrganizationHint = false
                 this.rorIdHasBeenMatched = false
@@ -177,22 +165,14 @@ export class AffiliationsInterstitialComponent implements OnInit, OnDestroy {
             }),
             switchMap((val: string | Organization) => {
               if (typeof val === 'string' && val.trim()) {
-                // Filter using the real service (RecordAffiliationService)
-                return this._recordAffiliationService
+                return this.recordAffiliationService
                   .getOrganization(val)
                   .pipe(first())
               } else {
-                return of([]) // return empty
+                return of([])
               }
             })
           )
-
-        this.form.valueChanges.pipe(
-          takeUntil(this.destroy$),
-          tap((value) => {
-            console.log(value)
-          })
-        )
       })
   }
 
@@ -202,8 +182,8 @@ export class AffiliationsInterstitialComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * We'll show an error if the user typed a string but not an Organization object
-   * and left/touched the field.
+   * Validator: ensures user has selected an actual Organization object
+   * rather than simply typed text.
    */
   mustBeOrganizationType() {
     return (control: AbstractControl) => {
@@ -228,7 +208,7 @@ export class AffiliationsInterstitialComponent implements OnInit, OnDestroy {
     return (
       !this.form.hasError('required', 'organization') &&
       !this.form.hasError('mustBeOrganizationType', 'organization') &&
-      this.form.get('organization').touched
+      this.form.get('organization')!.touched
     )
   }
 
@@ -249,7 +229,7 @@ export class AffiliationsInterstitialComponent implements OnInit, OnDestroy {
     return ''
   }
 
-  /** Resets organization-related form data. */
+  /** Clear the chosen organization. */
   clearOrganization() {
     this.rorIdHasBeenMatched = false
     this.organizationFromDatabase = undefined
@@ -257,11 +237,9 @@ export class AffiliationsInterstitialComponent implements OnInit, OnDestroy {
     this.form.get('organization')?.markAsUntouched()
   }
 
-  /** Example submit method for the Save button. */
-  accept(value): void {
-    // Mark the form as touched so error messages will appear
+  /** Handle "Save" action. */
+  accept(value: any): void {
     this.form.markAllAsTouched()
-
     if (value && this.form.valid) {
       const affiliation: Affiliation = {
         orgDisambiguatedId: { value: 'ROR' },
@@ -301,33 +279,26 @@ export class AffiliationsInterstitialComponent implements OnInit, OnDestroy {
           month: '',
         },
         dateSortString: undefined,
-        url: {
-          value: '',
-        },
-        visibility: {
-          visibility: 'PUBLIC',
-        },
+        url: { value: '' },
+        visibility: { visibility: 'PUBLIC' },
         putCode: {} as Value,
       }
-      this.recordAffiliation.postAffiliation(affiliation).subscribe(
-        (response) => {
-          this.finishIntertsitial(affiliation?.affiliationName?.value) // Handle success
-        },
-        (error) => {
-          this.finishIntertsitial() // Handle error
-        }
+
+      this.recordAffiliationService.postAffiliation(affiliation).subscribe(
+        () => this.finishIntertsitial(affiliation?.affiliationName?.value),
+        () => this.finishIntertsitial()
       )
-      // Typically you'd call an API or service to save the data
-      console.log('Form data:', this.form.value)
-      // Close dialog, if you are using a dialog flow
     } else {
       this.finishIntertsitial()
     }
   }
+
   finishIntertsitial(institutionName?: string) {
-    console.log('OAUTH finishIntertsitial')
+    // PLACEHOLDER end-of-flow handling for OAUTH
+    console.warn('OAUTH finishIntertsitial')
   }
 
+  /** Ensure single-digit months are properly zero-padded. */
   addTrailingZero(date: string): string {
     if (date && Number(date) < 10) {
       return '0' + date

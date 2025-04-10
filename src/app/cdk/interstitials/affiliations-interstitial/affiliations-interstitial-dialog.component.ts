@@ -51,15 +51,12 @@ export class AffiliationsInterstitialDialogComponent extends AffiliationsInterst
 
   constructor(
     @Inject(WINDOW) window: Window,
-    _platform: PlatformInfoService,
-    _recordCountryService: RecordCountriesService,
-    _recordAffiliationService: RecordAffiliationService,
-    _formBuilder: UntypedFormBuilder,
-    _record: RecordService,
-    _organizationService: OrganizationsService,
-    registerService: Register2Service,
-    _recordAffiliation: RecordAffiliationService,
-
+    platformService: PlatformInfoService,
+    recordAffiliationService: RecordAffiliationService,
+    formBuilder: UntypedFormBuilder,
+    recordService: RecordService,
+    organizationService: OrganizationsService,
+    register2Service: Register2Service,
     private dialogRef: MatLegacyDialogRef<
       AffiliationsInterstitialDialogComponent,
       AffilationsComponentDialogOutput
@@ -68,18 +65,16 @@ export class AffiliationsInterstitialDialogComponent extends AffiliationsInterst
   ) {
     super(
       window,
-      _platform,
-      _recordCountryService,
-      _recordAffiliationService,
-      _formBuilder,
-      _record,
-      _organizationService,
-      registerService,
-      _recordAffiliation
+      platformService,
+      recordAffiliationService,
+      formBuilder,
+      recordService,
+      organizationService,
+      register2Service
     )
   }
   override finishIntertsitial(affiliation?: string) {
-    console.log ('finishIntertsitial', affiliation)
+    console.log('finishIntertsitial', affiliation)
     this.dialogRef.close({
       type: 'affiliation-interstitial',
       addedAffiliation: affiliation,
