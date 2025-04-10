@@ -17,7 +17,7 @@ import {
   tap,
 } from 'rxjs/operators'
 import { RecordService } from '../../../core/record/record.service'
-import { EMPTY, of, Subject } from 'rxjs'
+import { EMPTY, Observable, of, Subject } from 'rxjs'
 import { MainPanelsState, UserRecord } from '../../../types/record.local'
 import { OpenGraphService } from 'src/app/core/open-graph/open-graph.service'
 import { RobotsMetaTagsService } from 'src/app/core/robots-meta-tags/robots-meta-tags.service'
@@ -33,7 +33,9 @@ import { DOCUMENT, Location } from '@angular/common'
 import { filter, map } from 'rxjs/operators'
 import { CanonocalUrlService } from 'src/app/core/canonocal-url/canonocal-url.service'
 import { RecordUtil } from 'src/app/shared/utils/record.util'
-import { LoginInterstitialsService } from 'src/app/core/login-interstitials/login-interstitials.service'
+import { AffilationsComponentDialogOutput } from 'src/app/cdk/interstitials/affiliations-interstitial/affiliations-interstitial-dialog.component'
+import { ShareEmailsDomainsComponentDialogOutput } from 'src/app/cdk/interstitials/share-emails-domains/share-emails-domains-dialog.component'
+import { LoginMainInterstitialsManagerService } from 'src/app/core/login-interstitials-manager/login-main-interstitials-manager.service'
 
 @Component({
   selector: 'app-my-orcid',
@@ -83,6 +85,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   readyForIndexing: boolean
   fragment: string
   newlySharedDomains: string[] = []
+  newAddedAffiliation: string
 
   constructor(
     _userInfoService: UserInfoService,
@@ -99,7 +102,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     private _scriptService: ScriptService,
     private _canonocalUrlService: CanonocalUrlService,
     private location: Location,
-    private _loginInterstitialsService: LoginInterstitialsService
+    private _LoginMainInterstitialsManagerService: LoginMainInterstitialsManagerService
   ) {}
 
   private checkIfThisIsAPublicOrcid() {
@@ -223,13 +226,11 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
         }),
         mergeMap((userRecord) => {
           const interstitialDialog =
-            this._loginInterstitialsService.checkLoginInterstitials(userRecord)
-          if (interstitialDialog) {
-            return interstitialDialog.pipe(
-              tap((newlySharedDomains) => {
-                this.newlySharedDomains = newlySharedDomains
-              })
+            this._LoginMainInterstitialsManagerService.checkLoginInterstitials(
+              userRecord
             )
+          if (interstitialDialog) {
+            return this.handlesInterstitialOutput(interstitialDialog)
           } else {
             return EMPTY
           }
@@ -264,6 +265,23 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe()
+  }
+
+  private handlesInterstitialOutput(
+    interstitialDialog: Observable<
+      AffilationsComponentDialogOutput | ShareEmailsDomainsComponentDialogOutput
+    >
+  ) {
+    return interstitialDialog.pipe(
+      tap((dialogOutput) => {
+        if (dialogOutput.type === 'domains-interstitial') {
+          this.newlySharedDomains = dialogOutput.newlySharedDomains
+        }
+        if (dialogOutput.type === 'affiliation-interstitial') {
+          this.newAddedAffiliation = dialogOutput.addedAffiliation
+        }
+      })
+    )
   }
 
   private observeSessionUpdates() {

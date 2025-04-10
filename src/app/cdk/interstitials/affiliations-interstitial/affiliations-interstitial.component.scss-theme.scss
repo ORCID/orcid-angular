@@ -1,0 +1,36 @@
+@use '@angular/material' as mat;
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+@mixin theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  .mat-raised-button.mat-primary:not(.mat-raised-button.mat-primary) {
+    background-color: mat.get-color-from-palette($primary, 700);
+  }
+
+  ::ng-deep {
+    .mat-divider.green-divider {
+      border: solid 1px mat.get-color-from-palette($foreground, brand-primary);
+    }
+  }
+
+  ::ng-deep {
+    mat-form-field.selected-org {
+      .mat-form-field-flex {
+        background-color: mat.get-color-from-palette(
+          $background,
+          ui-background-lightest
+        );
+      }
+    }
+  }
+  .error {
+    color: map-get($foreground, 'state-warning-dark');
+  }
+}
+
+@include theme($orcid-app-theme);

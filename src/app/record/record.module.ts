@@ -81,10 +81,10 @@ import { RecordInfoComponent } from './components/record-info/record-info.compon
 import { TrustedSummaryModule } from '../cdk/trusted-summary/trusted-summary.module'
 import { AlertMessageModule } from '../cdk/alert-message/alert-message.module'
 import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog'
-import { LoginInterstitialsService } from '../core/login-interstitials/login-interstitials.service'
 import { WarningMessageModule } from '../cdk/warning-message/warning-message.module'
 import { DeepSelectInputModule } from '../cdk/deep-select-input/deep-select-input.module'
 import { PageNotFound404Module } from '../page-not-found-404/page-not-found-404.module'
+import { LoginMainInterstitialsManagerService } from '../core/login-interstitials-manager/login-main-interstitials-manager.service'
 
 @NgModule({
   declarations: [
@@ -178,6 +178,9 @@ import { PageNotFound404Module } from '../page-not-found-404/page-not-found-404.
     DeepSelectInputModule,
     PageNotFound404Module,
   ],
-  providers: [VerificationEmailModalService, LoginInterstitialsService],
+  providers: [
+    VerificationEmailModalService,
+    LoginMainInterstitialsManagerService,
+  ],
 })
 export class RecordModule {}

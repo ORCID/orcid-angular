@@ -1,4 +1,4 @@
-import { Address, MonthDayYearDate } from './types'
+import { Address, MonthDayYearDate, OrgDisambiguated } from './types'
 import { UrlMatchResult, UrlSegment } from '@angular/router'
 import {
   AbstractControl,
@@ -24,6 +24,7 @@ import { ModalPersonIdentifiersComponent } from './cdk/side-bar/modals/modal-per
 import {
   AffiliationType,
   AffiliationUIGroup,
+  Organization,
 } from './types/record-affiliation.endpoint'
 import { WorkBibtexModalComponent } from './record/components/work-stack-group/modals/work-bibtex-modal/work-bibtex-modal.component'
 
@@ -416,3 +417,19 @@ export function getAffiliationType(
 }
 
 export type AlertType = 'notice' | 'info' | 'warning' | 'success'
+
+export function affiliationToOrganization(
+  affiliation: OrgDisambiguated
+): Organization {
+  return {
+    value: affiliation.value,
+    city: affiliation.city,
+    region: affiliation.region,
+    country: affiliation.country,
+    disambiguatedAffiliationIdentifier:
+      affiliation.disambiguatedAffiliationIdentifier,
+    sourceId: affiliation.sourceId,
+  } as Organization
+}
+
+export const LOCAL_SESSION_UID = 'LOCAL_SESSION_UID'

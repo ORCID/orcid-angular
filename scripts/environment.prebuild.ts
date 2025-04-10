@@ -15,7 +15,7 @@ ${runtimeEnvironmentScript()}`
 
   fs.writeFileSync(outputPath, scriptContent, { encoding: 'utf8' })
 
-  console.log(`Generated: ${outputPath}`)
+  console.info(`Generated: ${outputPath}`)
 }
 if (require.main === module) {
   main()

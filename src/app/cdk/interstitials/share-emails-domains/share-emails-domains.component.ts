@@ -25,10 +25,6 @@ import { map, takeUntil } from 'rxjs/operators'
 import { UserService } from 'src/app/core'
 import { Subject } from 'rxjs'
 
-export type ShareEmailsDomainsComponentDialogInput = {
-  userEmailsJson: EmailsEndpoint
-}
-
 @Component({
   selector: 'app-share-emails-domains',
   templateUrl: './share-emails-domains.component.html',
@@ -72,7 +68,6 @@ export class ShareEmailsDomainsComponent implements OnDestroy {
       .getUserSession()
       .pipe(takeUntil(this.$destroy))
       .subscribe((userInfo) => {
-        console.log(userInfo)
         this.oauthRequest = userInfo.oauthSession
         this.organizationName = this.oauthRequest?.clientName
       })
