@@ -88,7 +88,6 @@ export abstract class LoginBaseInterstitialManagerService<TInput, TOutput>
     }
   }
   getInterstitialTogglz(): Observable<boolean> {
-    return of(true)
-    // return this.togglzService.getStateOf(this.INTERSTITIAL_TOGGLE).pipe(take(1))
+    return this.togglzService.getStateOf(this.INTERSTITIAL_TOGGLE).pipe(take(1))
   }
 }
