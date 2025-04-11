@@ -1,3 +1,9 @@
+## v2.113.1 - 2025-04-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.113.0...v2.113.1)
+
+- [#2500](https://github.com/ORCID/orcid-angular/pull/2500): 9694-capture-affiliations-during-sign-in
+
 ## v2.113.0 - 2025-04-11
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.18...v2.113.0)
