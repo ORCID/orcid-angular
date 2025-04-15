@@ -242,7 +242,7 @@ export class AuthorizeComponent {
         this.showDomainInterstitial()
         this.loading = false
       } else {
-        this.finishRedirect()
+        this.finishRedirectObs(this.oauthSession)
       }
       return
     }
