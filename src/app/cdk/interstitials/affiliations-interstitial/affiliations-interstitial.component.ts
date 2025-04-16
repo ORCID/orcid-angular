@@ -28,7 +28,7 @@ import {
 } from 'src/app/types/record-affiliation.endpoint'
 
 @Component({
-  selector: 'app-share-emails-domains',
+  selector: 'app-affiliation-interstitial',
   templateUrl: './affiliations-interstitial.component.html',
   styleUrls: [
     './affiliations-interstitial.component.scss',
