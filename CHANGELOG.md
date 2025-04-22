@@ -1,3 +1,32 @@
+## v2.113.4 - 2025-04-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.113.3...v2.113.4)
+
+## v2.113.3 - 2025-04-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.113.2...v2.113.3)
+
+## v2.113.2 - 2025-04-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.113.1...v2.113.2)
+
+## v2.113.1 - 2025-04-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.113.0...v2.113.1)
+
+- [#2500](https://github.com/ORCID/orcid-angular/pull/2500): 9694-capture-affiliations-during-sign-in
+
+## v2.113.0 - 2025-04-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.18...v2.113.0)
+
+## v2.112.18 - 2025-04-10
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.17...v2.112.18)
+
+- [#2499](https://github.com/ORCID/orcid-angular/pull/2499): 9694 capture affiliations during sign in
+- [#2498](https://github.com/ORCID/orcid-angular/pull/2498): Remove reportEvent for google Analytics
+
 ## v2.112.17 - 2025-04-04
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.16...v2.112.17)

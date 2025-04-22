@@ -206,7 +206,7 @@ export class RecordService {
   attachDebugger() {
     if (runtimeEnvironment.debugger) {
       this.recordSubject$.subscribe((value) => {
-        console.debug(value)
+        console.info('[Record Service] :', value)
       })
     }
   }

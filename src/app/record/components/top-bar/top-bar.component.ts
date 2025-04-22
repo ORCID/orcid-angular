@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core'
 import { UserRecord } from '../../../types/record.local'
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { ModalNameComponent } from './modals/modal-name/modal-name.component'
@@ -15,6 +15,7 @@ import { VerificationEmailModalService } from '../../../core/verification-email-
 import { isEmpty } from 'lodash'
 import { RecordUtil } from 'src/app/shared/utils/record.util'
 import { ModalEmailComponent } from 'src/app/cdk/side-bar/modals/modal-email/modal-email.component'
+import { WINDOW } from 'src/app/cdk/window'
 
 @Component({
   selector: 'app-top-bar',
@@ -49,6 +50,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
   inDelegationMode: boolean
 
   @Input() newlySharedDomains: string[] = []
+  @Input() newAddedAffiliation: string
   @Input() loadingUserRecord = true
 
   regionNames = $localize`:@@topBar.names:Names`
@@ -61,7 +63,8 @@ export class TopBarComponent implements OnInit, OnDestroy {
     private _user: UserService,
     private _record: RecordService,
     private _recordEmails: RecordEmailsService,
-    private _verificationEmailModalService: VerificationEmailModalService
+    private _verificationEmailModalService: VerificationEmailModalService,
+    @Inject(WINDOW) private window: Window
   ) {
     _platform
       .get()
@@ -91,6 +94,12 @@ export class TopBarComponent implements OnInit, OnDestroy {
         maxWidth: '99%',
       })
       .afterClosed()
+  }
+
+  goToAffiliations() {
+    this.window.document
+      .querySelector('#affiliations')
+      .scrollIntoView({ behavior: 'smooth' })
   }
 
   ngOnInit(): void {
