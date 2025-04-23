@@ -8,16 +8,16 @@ export class HttpContentTypeHeaderInterceptor implements HttpInterceptor {
     '/social/signin/auth.json',
     '/shibboleth/signin/auth.json',
     '/signin/auth.json',
-    'https://auth.dev.orcid.org/login',
+    runtimeEnvironment.AUTH_SERVER + 'login',
   ]
 
   construct() {}
 
-  intercept(req: HttpRequest<any>, next: HttpHandler) {
+  intercept(req: HttpRequest<any>, next: HttpHandler) {	
     var method = req.method
     var urlWithParams = req.urlWithParams
     // If the request contains a content type, be sure to set the encoding to utf-8
-    if (['POST', 'PUT'].includes(method)) {
+    if (['POST', 'PUT'].includes(method)) {	
       var clonedRequest
       if (this.formUrlEcondedUrls.find((x) => urlWithParams.includes(x))) {
         clonedRequest = req.clone({
