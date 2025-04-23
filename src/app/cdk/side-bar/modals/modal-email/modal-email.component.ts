@@ -479,7 +479,7 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
       const i = this.emails.findIndex((value) => value.putCode === controlKey)
       const domain =
         this.emails[i].value && this.emails[i].value.includes('@')
-          ? this.emails[i].value.split('@')[1]
+          ? this.emails[i].value.split('@')[1].toLowerCase()
           : null
       this.emails.splice(i, 1)
       this.emailsForm.removeControl(controlKey)
@@ -579,8 +579,11 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
           const control = this.emailsForm.get(controlKey).value
 
           if (
-            control.email.split('@')[1].endsWith('.' + domain) ||
-            control.email.split('@')[1] === domain
+            control.email
+              .split('@')[1]
+              .toLowerCase()
+              .endsWith('.' + domain.toLowerCase()) ||
+            control.email.split('@')[1].toLowerCase() === domain.toLowerCase()
           ) {
             visibilities.push(control.visibility)
           }
@@ -615,8 +618,12 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
         if (controlKey.startsWith('emailInput')) {
           const control = this.emailsForm.get(controlKey)
           if (
-            control.value.email.split('@')[1].endsWith('.' + domain) ||
-            control.value.email.split('@')[1] === domain
+            control.value.email
+              .split('@')[1]
+              .toLowerCase()
+              .endsWith('.' + domain.toLowerCase()) ||
+            control.value.email.split('@')[1].toLowerCase() ===
+              domain.toLowerCase()
           ) {
             if (this.isEmailVerified(control.value.email)) {
               visibilities.push(control.value.visibility)
@@ -722,8 +729,11 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
       this.emails.some(
         (email) =>
           email?.verified &&
-          (email.value.split('@')[1] === domain ||
-            email.value.split('@')[1].endsWith('.' + domain))
+          (email.value.split('@')[1].toLowerCase() === domain.toLowerCase() ||
+            email.value
+              .split('@')[1]
+              .toLowerCase()
+              .endsWith('.' + domain.toLowerCase()))
       )
     )
   }
