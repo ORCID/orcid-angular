@@ -116,4 +116,30 @@ export class GoogleTagManagerService {
       doc.head.insertBefore(gtmScript, doc.head.firstChild)
     })
   }
+
+  reportPageView(url: string) {
+    if (runtimeEnvironment.debugger) {
+      console.debug(`GTM Navigation ${url}`)
+    }
+    const gtmTag: ItemGTM = {
+      event: 'page',
+      pageName: url,
+    }
+    this.pushTag(gtmTag).subscribe()
+  }
+
+  reportNavigationEnd(url: string, duration: number | void): Observable<void> {
+    if (duration) {
+      if (runtimeEnvironment.debugger) {
+        console.debug(`GTM - Took ${duration} to load ${url}`)
+      }
+
+      return this.pushTag({
+        event: 'timing_complete',
+        orcid: removeUrlParameters(url),
+        duration: Math.round(duration),
+        pageName: url,
+      })
+    }
+  }
 }

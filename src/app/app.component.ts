@@ -1,7 +1,10 @@
 import { Component, HostBinding, HostListener, Inject } from '@angular/core'
 import { NavigationEnd, NavigationStart, Router } from '@angular/router'
 import { catchError, tap } from 'rxjs/operators'
-
+import {
+  finishPerformanceMeasurement,
+  reportNavigationStart,
+} from './analytics-utils'
 import { PlatformInfo } from './cdk/platform-info'
 import { PlatformInfoService } from './cdk/platform-info/platform-info.service'
 import { WINDOW } from './cdk/window'
@@ -88,6 +91,38 @@ export class AppComponent {
           _newRelicService.init()
         }
       })
+
+    _router.events.subscribe((event) => {
+      if (event instanceof NavigationStart) {
+        reportNavigationStart(event.url)
+        this.currentRoute = event.url
+      }
+      if (event instanceof NavigationEnd) {
+        const duration = finishPerformanceMeasurement(event.url)
+        _googleTagManagerService
+          .addGtmToDom()
+          .pipe(
+            catchError((err) =>
+              this._errorHandler.handleError(
+                err,
+                ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
+              )
+            )
+          )
+          .subscribe((response) => {
+            if (response) {
+              _googleTagManagerService
+                .reportNavigationEnd(event.url, duration)
+                .subscribe(() => {
+                  _googleTagManagerService.reportPageView(
+                    event.urlAfterRedirects
+                  )
+                })
+            }
+          })
+        this.addSpacing()
+      }
+    })
   }
   showHeadlessOnOauthPage(currentRoute: string): boolean {
     if (currentRoute) {

@@ -241,6 +241,7 @@ export class AuthorizeComponent {
         this.redirectByReportAlreadyAuthorize = true
         this.showDomainInterstitial()
         this.loading = false
+        this.redirectUrl = this.oauthSession.redirectUrl
       } else {
         this.finishRedirectObs(this.oauthSession)
       }
