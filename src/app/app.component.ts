@@ -91,7 +91,7 @@ export class AppComponent {
           _newRelicService.init()
         }
       })
-    
+
     _router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
         reportNavigationStart(event.url)

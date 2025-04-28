@@ -128,7 +128,6 @@ export class GoogleTagManagerService {
     this.pushTag(gtmTag).subscribe()
   }
 
-
   reportNavigationEnd(url: string, duration: number | void): Observable<void> {
     if (duration) {
       if (runtimeEnvironment.debugger) {
