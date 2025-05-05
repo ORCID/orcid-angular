@@ -1,3 +1,12 @@
+## v2.113.11 - 2025-05-05
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.113.10...v2.113.11)
+
+- [#2512](https://github.com/ORCID/orcid-angular/pull/2512): Changed the wording from affiliations to employment
+- [#2509](https://github.com/ORCID/orcid-angular/pull/2509): create affiliation interstitial based on newest domain
+- [#2507](https://github.com/ORCID/orcid-angular/pull/2507): Sign in params should be sent as form POST
+- [#2503](https://github.com/ORCID/orcid-angular/pull/2503): Bump http-proxy-middleware from 2.0.6 to 2.0.9
+
 ## v2.113.10 - 2025-05-05
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.113.9...v2.113.10)
