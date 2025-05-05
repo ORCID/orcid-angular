@@ -4,6 +4,7 @@ import { Organization } from 'src/app/types/record-affiliation.endpoint'
 import { Subject } from 'rxjs'
 import { OrgDisambiguated } from '../types'
 import { filter } from 'rxjs/operators'
+import { affiliationToOrganization } from '../constants'
 @Injectable({
   providedIn: 'root',
 })
@@ -25,10 +26,9 @@ export class RegisterStateService {
         .subscribe((affiliation) => {
           this.rorIdHasBeenMatched = true
           if (!additionalEmail) {
-            this.primaryEmailMatched =
-              this.affiliationToOrganization(affiliation)
+            this.primaryEmailMatched = affiliationToOrganization(affiliation)
           } else {
-            this.secondaryEmail = this.affiliationToOrganization(affiliation)
+            this.secondaryEmail = affiliationToOrganization(affiliation)
           }
 
           this.updateTheAffiliationMatch()
@@ -41,20 +41,6 @@ export class RegisterStateService {
       }
       this.updateTheAffiliationMatch()
     }
-  }
-
-  private affiliationToOrganization(
-    affiliation: OrgDisambiguated
-  ): Organization {
-    return {
-      value: affiliation.value,
-      city: affiliation.city,
-      region: affiliation.region,
-      country: affiliation.country,
-      disambiguatedAffiliationIdentifier:
-        affiliation.disambiguatedAffiliationIdentifier,
-      sourceId: affiliation.sourceId,
-    } as Organization
   }
 
   private updateTheAffiliationMatch() {

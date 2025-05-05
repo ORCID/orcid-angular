@@ -14,9 +14,9 @@ import { AuthorizeGuard } from './guards/authorize.guard'
 import { RegisterGuard } from './guards/register.guard'
 import { LinkAccountGuard } from './guards/link-account.guard'
 import { LanguageGuard } from './guards/language.guard'
-import { ThirdPartySigninCompletedGuard } from './guards/third-party-signin-completed.guard'
 import { TwoFactorSigninGuard } from './guards/two-factor-signin.guard'
 import { AuthenticatedNoDelegatorGuard } from './guards/authenticated-no-delagator.guard'
+import { ThirdPartySigninCompletedGuard } from './guards/third-party-signin-completed.guard'
 
 const routes: Routes = [
   {

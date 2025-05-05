@@ -42,7 +42,7 @@ async function fetchAndCombineCSS(urls) {
       if (err) {
         console.error('Failed to write SCSS file:', err)
       } else {
-        console.log('Successfully wrote combined.scss')
+        console.info('Successfully wrote combined.scss')
       }
     }
   )

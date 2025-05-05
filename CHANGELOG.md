@@ -1,3 +1,78 @@
+## v2.113.9 - 2025-04-28
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.113.8...v2.113.9)
+
+## v2.113.8 - 2025-04-28
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.113.7...v2.113.8)
+
+## v2.113.7 - 2025-04-24
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.113.6...v2.113.7)
+
+## v2.113.6 - 2025-04-23
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.113.5...v2.113.6)
+
+## v2.113.5 - 2025-04-23
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.113.4...v2.113.5)
+
+## v2.113.4 - 2025-04-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.113.3...v2.113.4)
+
+## v2.113.3 - 2025-04-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.113.2...v2.113.3)
+
+## v2.113.2 - 2025-04-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.113.1...v2.113.2)
+
+## v2.113.1 - 2025-04-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.113.0...v2.113.1)
+
+- [#2500](https://github.com/ORCID/orcid-angular/pull/2500): 9694-capture-affiliations-during-sign-in
+
+## v2.113.0 - 2025-04-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.18...v2.113.0)
+
+## v2.112.18 - 2025-04-10
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.17...v2.112.18)
+
+- [#2499](https://github.com/ORCID/orcid-angular/pull/2499): 9694 capture affiliations during sign in
+- [#2498](https://github.com/ORCID/orcid-angular/pull/2498): Remove reportEvent for google Analytics
+
+## v2.112.17 - 2025-04-04
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.16...v2.112.17)
+
+- [#2497](https://github.com/ORCID/orcid-angular/pull/2497): fix interstitial check race statement
+
+## v2.112.16 - 2025-04-04
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.15...v2.112.16)
+
+- [#2496](https://github.com/ORCID/orcid-angular/pull/2496): fix conditional statement order in interstitials
+
+## v2.112.15 - 2025-04-04
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.14...v2.112.15)
+
+## v2.112.14 - 2025-04-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.13...v2.112.14)
+
+- [#2494](https://github.com/ORCID/orcid-angular/pull/2494): do not show interstitial until a refresh is made
+
+## v2.112.13 - 2025-04-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.12...v2.112.13)
+
 ## v2.112.12 - 2025-04-02
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.11...v2.112.12)

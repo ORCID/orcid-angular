@@ -128,36 +128,6 @@ export class GoogleTagManagerService {
     this.pushTag(gtmTag).subscribe()
   }
 
-  public reportEvent(
-    event: string,
-    label: RequestInfoForm | string
-  ): Observable<void> {
-    let clientId
-    let redirectUrl
-    if (typeof label !== 'string') {
-      clientId = (label as unknown as RequestInfoForm).clientId
-      redirectUrl = (label as unknown as RequestInfoForm).redirectUrl
-      label = 'OAuth ' + buildClientString(label)
-    }
-    if (runtimeEnvironment.debugger) {
-      console.debug(`GTM - Event /${event}/${label}/`)
-    }
-
-    let tagItem = {
-      event,
-      label,
-    } as ItemGTM
-    if (clientId) {
-      tagItem.clientId = clientId
-    }
-
-    if (event === 'Reauthorize') {
-      tagItem.redirectUrl = redirectUrl
-    }
-
-    return this.pushTag(tagItem)
-  }
-
   reportNavigationEnd(url: string, duration: number | void): Observable<void> {
     if (duration) {
       if (runtimeEnvironment.debugger) {

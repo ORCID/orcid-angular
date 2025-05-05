@@ -90,6 +90,25 @@
     </ng-container>
   </app-warning-message>
 
+  <app-warning-message *ngIf="newAddedAffiliation" type="success">
+    <ng-container title i18n="@@topBar.employmentAffiliationAdded"
+      >Employment affiliation added</ng-container
+    >
+    <ng-container content>
+      <strong> {{ newAddedAffiliation }} </strong
+      ><ng-container i18n="@@topBar.hasBeenAddedToYourORCIDRecord">
+        has been added to your ORCID record. Manage your existing affiliations
+        or add new ones in the</ng-container
+      >
+      <a
+        class="underline green-url"
+        (click)="goToAffiliations()"
+        i18n="@@topBar.affiliationsSection"
+        >Affiliations section</a
+      >
+    </ng-container>
+  </app-warning-message>
+
   <section
     id="names"
     role="region"

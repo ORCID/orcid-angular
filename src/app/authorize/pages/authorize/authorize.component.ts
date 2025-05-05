@@ -1,8 +1,7 @@
 import { Component, Inject } from '@angular/core'
-import { log } from 'console'
-import { cloneDeep, takeWhile } from 'lodash'
-import { Observable, forkJoin, NEVER, of, EMPTY } from 'rxjs'
-import { first, switchMap, take, tap } from 'rxjs/operators'
+import { cloneDeep } from 'lodash'
+import { Observable, forkJoin, NEVER, of } from 'rxjs'
+import { first, map, switchMap, take, tap } from 'rxjs/operators'
 import { InterstitialsService } from 'src/app/cdk/interstitials/interstitials.service'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
@@ -67,8 +66,16 @@ export class AuthorizeComponent {
       emails: this.loadEmails(),
     })
       .pipe(
-        tap(() => {
-          this.loadInterstitialViewed()
+        switchMap((results) => {
+          if (!results.userSession?.userInfo) {
+            return of(results)
+          } else {
+            return this.loadInterstitialViewed().pipe(
+              map(() => {
+                return results
+              })
+            )
+          }
         })
       )
       .subscribe(({ userSession }) => {
@@ -89,38 +96,10 @@ export class AuthorizeComponent {
   }
 
   /**
-   * Reports re-authorization to Google Tag Manager (async),
-   * then triggers a redirect after the report completes or on error.
-   */
-  reportReAuthorization(request: RequestInfoForm): void {
-    const analyticsReport: Observable<void> =
-      this.googleTagManagerService.reportEvent('Reauthorize', request)
-
-    forkJoin([analyticsReport]).subscribe({
-      next: () => {
-        // After successful reporting, proceed
-        // GA will handle the redirect
-      },
-      error: (error) => {
-        // If error happens, handle it, then proceed
-        this.errorHandlerService.handleError(
-          error,
-          ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
-        )
-        this.finishRedirectObs(request)
-      },
-    })
-  }
-
-  /**
    * Internal method to finalize redirection (non-observable variant).
    */
   finishRedirect(): void {
-    if (this.redirectByReportAlreadyAuthorize) {
-      this.reportReAuthorization(this.oauthSession)
-    } else {
-      ;(this.window as any).outOfRouterNavigation(this.redirectUrl)
-    }
+    ;(this.window as any).outOfRouterNavigation(this.redirectUrl)
   }
 
   /*
@@ -189,7 +168,6 @@ export class AuthorizeComponent {
     return this.interstitialsService
       .getInterstitialsViewed('DOMAIN_INTERSTITIAL')
       .pipe(
-        first(),
         tap((wasViewed) => {
           this.hasDomainInterstitialBeenViewed = wasViewed
         })
@@ -263,8 +241,9 @@ export class AuthorizeComponent {
         this.redirectByReportAlreadyAuthorize = true
         this.showDomainInterstitial()
         this.loading = false
+        this.redirectUrl = this.oauthSession.redirectUrl
       } else {
-        this.reportReAuthorization(this.oauthSession)
+        this.finishRedirectObs(this.oauthSession)
       }
       return
     }

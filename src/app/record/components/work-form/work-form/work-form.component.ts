@@ -125,9 +125,7 @@ export class WorkFormComponent implements OnInit {
     private _record: RecordService,
     @Inject(WINDOW) private _window: Window,
     @Inject(MAT_DIALOG_DATA) public data: UserRecord
-  ) {
-    console.log('data', this.workTypeMenu)
-  }
+  ) {}
 
   ngOnInit(): void {
     this._recordCountryService
