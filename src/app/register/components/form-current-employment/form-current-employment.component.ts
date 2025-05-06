@@ -18,7 +18,7 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms'
-import { Register2Service } from 'src/app/core/register2/register2.service'
+import { RegisterService } from 'src/app/core/register/register.service'
 import { OrcidValidators } from 'src/app/validators'
 
 import { first, switchMap, takeUntil, tap } from 'rxjs/operators'
@@ -60,8 +60,8 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: [
     './form-current-employment.component.scss',
     './form-current-employment.component.scss-theme.scss',
-    '../register2.style.scss',
-    '../register2.scss-theme.scss',
+    '../register.style.scss',
+    '../register.scss-theme.scss',
   ],
   preserveWhitespaces: true,
   providers: [
@@ -126,7 +126,7 @@ export class FormCurrentEmploymentComponent
   isMobile: boolean
   rorId: string = 'https://ror.org/036mest28'
   constructor(
-    private _register: Register2Service,
+    private _register: RegisterService,
     private _platform: PlatformInfoService,
     private _liveAnnouncer: LiveAnnouncer,
     private _recordAffiliationService: RecordAffiliationService,

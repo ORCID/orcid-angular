@@ -1,18 +1,34 @@
-import { Component, Input } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 
-import { BaseStepDirective } from '../BaseStep'
 import { ReactivationLocal } from '../../../types/reactivation.local'
+import { BaseStepDirective } from '../BaseStep'
+import { RegisterStateService } from '../../register-state.service'
+import { RegisterObservabilityService } from '../../register-observability.service'
 
 @Component({
   selector: 'app-step-b',
   templateUrl: './step-b.component.html',
-  styleUrls: ['./step-b.component.scss'],
+  styleUrls: [
+    './step-b.component.scss',
+    '../register.style.scss',
+    '../register.scss-theme.scss',
+  ],
 })
-export class StepBComponent extends BaseStepDirective {
+export class StepBComponent extends BaseStepDirective implements OnInit {
   @Input() personalData
   @Input() reactivation: ReactivationLocal
 
-  constructor() {
+  constructor(private _registerStateService: RegisterStateService) {
     super()
+  }
+  ngOnInit(): void {}
+
+  nextButtonWasClicked = false
+
+  nextButton2() {
+    this._registerStateService.registerStepperButtonClicked('b', 'next')
+  }
+  backButton() {
+    this._registerStateService.registerStepperButtonClicked('b', 'back')
   }
 }

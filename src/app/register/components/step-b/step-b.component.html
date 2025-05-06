@@ -1,22 +1,32 @@
 <mat-card class="orcid-wizard">
   <mat-card-header>
     <mat-card-title role="heading" aria-level="1">
-      <ng-container
-        *ngIf="!reactivation?.isReactivation"
-        i18n="@@register.create"
-      >
-        Create your ORCID iD
+      <div>
+        <img
+          height="64px"
+          src="assets/vectors/orcid.logo.icon.svg"
+          alt="orcid logo"
+        />
+      </div>
+      <ng-container *ngIf="!reactivation?.isReactivation">
+        <h1 class="orc-font-heading-small" i18n="@@register.create">
+          Create your ORCID iD
+        </h1>
       </ng-container>
-      <ng-container
-        *ngIf="reactivation?.isReactivation"
-        i18n="@@register.reactivation"
-      >
-        Thank you for reactivating your ORCID iD.
+      <ng-container *ngIf="reactivation?.isReactivation">
+        <h1
+          class="orc-font-heading-small"
+          i18n="@@register.reactivateYourOrcidAccount"
+        >
+          Reactivate your ORCID account
+        </h1>
       </ng-container>
     </mat-card-title>
-    <mat-card-subtitle role="heading" aria-level="2" i18n="@@register.step2"
-      >This is step 2 of 3</mat-card-subtitle
-    >
+    <mat-card-subtitle role="heading" aria-level="2">
+      <h2 class="orc-font-body-small" i18n="@@register.step2.3">
+        Step 2 of 5 - Password
+      </h2>
+    </mat-card-subtitle>
   </mat-card-header>
 
   <mat-card-content>
@@ -25,27 +35,25 @@
         formControlName="password"
         [personalData]="personalData"
       ></app-form-password>
-      <app-form-notifications
-        formControlName="sendOrcidNews"
-      ></app-form-notifications>
       <div class="step-actions">
+        <button
+          id="step-b-register-button"
+          mat-raised-button
+          color="primary"
+          matStepperNext
+          (click)="nextButton2()"
+        >
+          <ng-container i18n="@@register.nextStep"> Next Step </ng-container>
+        </button>
         <button
           mat-button
           color="primary"
           matStepperPrevious
-          i18n="@@shared.back"
+          type="button"
+          (click)="backButton()"
           id="step-b-back-button"
         >
-          GO BACK
-        </button>
-        <button
-          id="step-b-next"
-          mat-raised-button
-          matStepperNext
-          color="primary"
-          i18n="@@shared.next"
-        >
-          NEXT
+          <a i18n="@@register.previousStep"> Previous Step</a>
         </button>
       </div>
     </form>

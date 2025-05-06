@@ -20,7 +20,7 @@ import {
 } from 'src/app/constants'
 import { dateMonthYearValidator } from 'src/app/shared/validators/date/date.validator'
 import { OrganizationsService } from 'src/app/core'
-import { Register2Service } from 'src/app/core/register2/register2.service'
+import { RegisterService } from 'src/app/core/register/register.service'
 import { AssertionVisibilityString } from 'src/app/types'
 import {
   Affiliation,
@@ -82,7 +82,7 @@ export class AffiliationsInterstitialComponent implements OnInit, OnDestroy {
     private formBuilder: UntypedFormBuilder,
     private recordService: RecordService,
     private organizationService: OrganizationsService,
-    private register2Service: Register2Service
+    private register2Service: RegisterService
   ) {}
 
   ngOnInit(): void {
