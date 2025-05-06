@@ -3,7 +3,6 @@ import {
   Component,
   ElementRef,
   Input,
-  OnInit,
   ViewChild,
 } from '@angular/core'
 
@@ -27,10 +26,7 @@ import { RegisterObservabilityService } from '../../register-observability.servi
   ],
   preserveWhitespaces: true,
 })
-export class StepAComponent
-  extends BaseStepDirective
-  implements AfterViewInit, OnInit
-{
+export class StepAComponent extends BaseStepDirective implements AfterViewInit {
   @ViewChild('firstInput') firstInput: ElementRef
 
   @Input() reactivation: ReactivationLocal

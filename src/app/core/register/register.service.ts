@@ -79,7 +79,7 @@ export class RegisterService extends _RegisterServiceMixingBase {
 
   getEmailCategory(email: string): Observable<EmailCategoryEndpoint> {
     return this._http.get<any>(
-      `${environment.API_WEB}email-domain/find-category?domain=${email}`
+      `${runtimeEnvironment.API_WEB}email-domain/find-category?domain=${email}`
     )
   }
 
