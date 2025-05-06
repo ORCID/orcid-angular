@@ -1,3 +1,9 @@
+## v2.113.13 - 2025-05-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.113.12...v2.113.13)
+
+- [#2514](https://github.com/ORCID/orcid-angular/pull/2514): Bump @babel/helpers from 7.23.2 to 7.27.1
+
 ## v2.113.12 - 2025-05-05
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.113.11...v2.113.12)
