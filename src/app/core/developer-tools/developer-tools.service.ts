@@ -5,7 +5,6 @@ import { Client } from 'src/app/types/developer-tools'
 import { Observable } from 'rxjs'
 import { retry, catchError } from 'rxjs/operators'
 import { ERROR_REPORT } from 'src/app/errors'
-import { environment } from 'src/environments/environment'
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +17,9 @@ export class DeveloperToolsService {
 
   getDeveloperToolsClient(): Observable<Client> {
     return this._http
-      .get<Client>(environment.BASE_URL + 'developer-tools/get-client.json')
+      .get<Client>(
+        runtimeEnvironment.BASE_URL + 'developer-tools/get-client.json'
+      )
       .pipe(
         retry(3),
         catchError((error) =>
@@ -30,7 +31,7 @@ export class DeveloperToolsService {
   postDeveloperToolsClient(client: Client): Observable<Client> {
     return this._http
       .post<Client>(
-        environment.BASE_URL + 'developer-tools/create-client.json',
+        runtimeEnvironment.BASE_URL + 'developer-tools/create-client.json',
         client
       )
       .pipe(
@@ -44,7 +45,7 @@ export class DeveloperToolsService {
   updateDeveloperToolsClient(client: Client): Observable<Client> {
     return this._http
       .post<Client>(
-        environment.BASE_URL + 'developer-tools/update-client.json',
+        runtimeEnvironment.BASE_URL + 'developer-tools/update-client.json',
         client
       )
       .pipe(
@@ -58,7 +59,8 @@ export class DeveloperToolsService {
   postResetClientSecret(client: Client): Observable<Client> {
     return this._http
       .post<Client>(
-        environment.BASE_URL + 'developer-tools/reset-client-secret.json',
+        runtimeEnvironment.BASE_URL +
+          'developer-tools/reset-client-secret.json',
         client
       )
       .pipe(
@@ -72,7 +74,8 @@ export class DeveloperToolsService {
   enableDeveloperTools() {
     return this._http
       .post<Client>(
-        environment.BASE_URL + 'developer-tools/enable-developer-tools.json',
+        runtimeEnvironment.BASE_URL +
+          'developer-tools/enable-developer-tools.json',
         {}
       )
       .pipe(
@@ -86,7 +89,8 @@ export class DeveloperToolsService {
   resetClientSecret(client: Client): Observable<Client> {
     return this._http
       .post<Client>(
-        environment.BASE_URL + 'developer-tools/reset-client-secret.json',
+        runtimeEnvironment.BASE_URL +
+          'developer-tools/reset-client-secret.json',
         client
       )
       .pipe(

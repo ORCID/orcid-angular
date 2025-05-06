@@ -13,7 +13,7 @@
       >
         <img src="assets/vectors/orcid.logo.icon.svg" alt="orcid logo" />
         <h2 class="orc-font-heading-small" i18n="@@record.notFound">
-          We’re really sorry, we can’t find the ORCID record you’re looking for.
+          We’re really sorry, we can’t find the page you’re looking for.
         </h2>
         <p class="orc-font-body-large" i18n="@@record.whatHappened">
           What happened?
@@ -21,12 +21,14 @@
         <div class="orc-font-body-small">
           <div class="if-you">
             <b i18n="@@record.ifYouTyped">
-              If you typed in the URL or ORCID iD by hand
+              If you typed in a URL or link by hand
             </b>
             <p i18n="@@record.pleaseCheck">
-              Please check that the ORCID iD - the 16-digit number at the end of
-              the URL - is correct. A correctly-formatted ORCID URL looks like
-              this: https://orcid.org/1234-5678-9101-1121
+              Please check the URL or link for typos or mistakes. If you are
+              looking for a specific ORCID record make sure the ORCID iD - the
+              16-digit number at the end of the URL - is right. A
+              correctly-formatted ORCID iD URL looks like this:
+              https://orcid.org/1234-5678-9101-1121
             </p>
           </div>
           <div class="if-you">
@@ -60,6 +62,42 @@
           >
             Try using our advanced search to find researchers by their name or
             ORCID iD
+          </a>
+        </div>
+        <div class="search">
+          <a
+            class="underline orc-font-body-small"
+            i18n="@@record.headBackToMain"
+            (click)="goto('/')"
+          >
+            Head back to the main ORCID homepage
+          </a>
+        </div>
+        <div class="search">
+          <a
+            class="underline orc-font-body-small"
+            i18n="@@record.findOutMoreAboutOrcid"
+            href="https://info.orcid.org/"
+          >
+            Find out more about ORCID on our information site
+          </a>
+        </div>
+        <div class="search">
+          <a
+            class="underline orc-font-body-small"
+            i18n="@@record.signinToOricd"
+            (click)="goto('/login')"
+          >
+            Sign in to ORCID and manage your record
+          </a>
+        </div>
+        <div class="search">
+          <a
+            class="underline orc-font-body-small"
+            i18n="@@record.registerForAnOrcid"
+            (click)="goto('/register')"
+          >
+            Register for an ORCID record
           </a>
         </div>
       </div>

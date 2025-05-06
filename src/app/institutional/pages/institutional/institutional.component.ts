@@ -18,7 +18,6 @@ import { first, map, startWith, tap } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { ApplicationRoutes } from 'src/app/constants'
 
-import { environment } from '../../../../environments/environment'
 import { WINDOW } from '../../../cdk/window'
 import { DiscoService } from '../../../core/disco/disco.service'
 import { InstitutionValidator } from '../../../shared/validators/institution/institution.validator'
@@ -91,7 +90,7 @@ export class InstitutionalComponent implements OnInit {
             filterInput
           )
           return institutionsFiltered.length >
-            environment.INSTITUTIONAL_AUTOCOMPLETE_DISPLAY_AMOUNT
+            runtimeEnvironment.INSTITUTIONAL_AUTOCOMPLETE_DISPLAY_AMOUNT
             ? []
             : institutionsFiltered
         })
@@ -123,10 +122,10 @@ export class InstitutionalComponent implements OnInit {
       this.addUserSelectedIdPs()
       const defaultReturn =
         'https:' +
-        environment.BASE_URL +
+        runtimeEnvironment.BASE_URL +
         'Shibboleth.sso/Login?SAMLDS=1&target=' +
         encodeURIComponent(
-          'https:' + environment.BASE_URL + 'shibboleth/signin'
+          'https:' + runtimeEnvironment.BASE_URL + 'shibboleth/signin'
         )
 
       this.navigateTo(

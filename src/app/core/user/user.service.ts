@@ -40,13 +40,14 @@ import {
 } from 'src/app/types/session.local'
 import { ThirdPartyAuthData } from 'src/app/types/sign-in-data.endpoint'
 import { Delegator } from 'src/app/types/trusted-individuals.endpoint'
-import { environment } from 'src/environments/environment'
 
 import { UserStatus } from '../../types/userStatus.endpoint'
 import { DiscoService } from '../disco/disco.service'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { OauthService } from '../oauth/oauth.service'
 import { UserInfoService } from '../user-info/user-info.service'
+import { TogglzService } from 'src/app/core/togglz/togglz.service'
+import { LOCAL_SESSION_UID } from 'src/app/constants'
 
 @Injectable({
   providedIn: 'root',
@@ -63,8 +64,17 @@ export class UserService {
     private _oauth: OauthService,
     private _disco: DiscoService,
     private _userInfo: UserInfoService,
+    private _togglz: TogglzService,
     @Inject(WINDOW) private window: Window
-  ) {}
+  ) {
+    this.$userStatusChecked
+      .pipe(
+        tap((value) => {
+          this._togglz.reportUserStatusChecked(value)
+        })
+      )
+      .subscribe()
+  }
   $userStatusChecked = new ReplaySubject()
   private currentlyLoggedIn: boolean
   private loggingStateComesFromTheServer = false
@@ -94,22 +104,36 @@ export class UserService {
   }>()
 
   public getUserStatus(): Observable<boolean> {
-    return this._http
-      .get<UserStatus>(environment.API_WEB + 'userStatus.json', {
-        withCredentials: true,
+    return this._togglz.getStateOf('OAUTH_SIGNIN').pipe(
+      take(1),
+      switchMap((outhSiginFlag) => {
+        let url = runtimeEnvironment.API_WEB + 'userStatus.json'
+
+        if (outhSiginFlag) {
+          url = runtimeEnvironment.AUTH_SERVER + 'userStatus.json'
+        }
+
+        return this._http
+          .get<UserStatus>(url, {
+            withCredentials: true,
+          })
+          .pipe(map((response) => !!response.loggedIn))
+          .pipe(
+            retry(3),
+            catchError((error) =>
+              this._errorHandler.handleError(
+                error,
+                ERROR_REPORT.STANDARD_VERBOSE
+              )
+            )
+          )
       })
-      .pipe(map((response) => !!response.loggedIn))
-      .pipe(
-        retry(3),
-        catchError((error) =>
-          this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
-        )
-      )
+    )
   }
 
   private getNameForm(): Observable<NameForm> {
     return this._http.get<NameForm>(
-      environment.API_WEB + 'account/nameForm.json',
+      runtimeEnvironment.API_WEB + 'account/nameForm.json',
       {
         withCredentials: true,
       }
@@ -196,7 +220,7 @@ export class UserService {
             map((data) => this.computesUpdatedUserData(data)),
             // Debugger for the user session on development time
             tap((session) =>
-              environment.debugger ? console.debug(session) : null
+              runtimeEnvironment.debugger ? console.debug(session) : null
             ),
             tap((session) => {
               this.$userSessionSubject.next(session)
@@ -260,7 +284,7 @@ export class UserService {
         ? data.userInfo.EFFECTIVE_USER_ORCID
         : data.userInfo.REAL_USER_ORCID
       if (orcidId) {
-        return 'https:' + environment.BASE_URL + orcidId
+        return 'https:' + runtimeEnvironment.BASE_URL + orcidId
       }
     }
     return undefined
@@ -322,7 +346,7 @@ export class UserService {
           return this._oauth.declareOauthSession(params, updateParameters).pipe(
             tap((session) => (this.keepRefreshingUserSession = !session.error)),
             tap(() =>
-              environment.debugger
+              runtimeEnvironment.debugger
                 ? console.debug('Oauth session declare')
                 : null
             )
@@ -388,11 +412,20 @@ export class UserService {
    * @param postLoginUpdate=false set to true for the `prompt` parameter to be removed from the Oauth session
    */
   refreshUserSession(forceSessionUpdate = false, postLoginUpdate = false) {
+    if (postLoginUpdate) this.createLocalUserSessionUid()
+
     this._recheck.next({ forceSessionUpdate, postLoginUpdate })
     return this.getUserSession().pipe(
       // ignore the replay value, and return the latest value
       take(2),
       last()
+    )
+  }
+
+  private createLocalUserSessionUid() {
+    this.window.sessionStorage.setItem(
+      LOCAL_SESSION_UID,
+      Math.random().toString(36).substring(2, 15)
     )
   }
 
@@ -457,7 +490,7 @@ export class UserService {
       delegator.giverOrcid.path
     )
     return this._http
-      .post(`${environment.API_WEB}switch-user`, '', {
+      .post(`${runtimeEnvironment.API_WEB}switch-user`, '', {
         headers: this.headers,
         params: params,
       })
@@ -498,7 +531,7 @@ export class UserService {
 
   noRedirectLogout() {
     return this._http
-      .get(`${environment.API_WEB}signout`, {
+      .get(`${runtimeEnvironment.API_WEB}signout`, {
         headers: this.headers,
         observe: 'response',
         responseType: 'text',

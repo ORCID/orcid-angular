@@ -5,7 +5,6 @@ import { Subject } from 'rxjs'
 import { RecordPeerReviewService } from '../../../../../core/record-peer-review/record-peer-review.service'
 import { first } from 'rxjs/operators'
 import { RecordImportWizard } from '../../../../../types/record-peer-review-import.endpoint'
-import { environment } from '../../../../../../environments/environment'
 
 @Component({
   selector: 'app-modal-peer-reviews',
@@ -40,7 +39,7 @@ export class ModalPeerReviewsComponent implements OnInit, OnDestroy {
       return client.clientWebsite
     } else {
       return (
-        environment.BASE_URL +
+        runtimeEnvironment.BASE_URL +
         'oauth/authorize' +
         '?client_id=' +
         client.id +

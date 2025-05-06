@@ -144,6 +144,10 @@ export const WorkTypeMenu: DeepSelectMenu[] = [
         value: WorkTypes.newspaperArticle,
       },
       {
+        label: WorkTypesLabels[WorkTypes.report],
+        value: WorkTypes.report,
+      },
+      {
         label: WorkTypesLabels[WorkTypes.publicSpeech],
         value: WorkTypes.publicSpeech,
       },

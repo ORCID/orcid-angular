@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, LOCALE_ID } from '@angular/core'
-import { environment } from 'src/environments/environment'
+
 import { WINDOW } from 'src/app/cdk/window'
 import { LanguageService } from 'src/app/core/language/language.service'
 
@@ -17,10 +17,12 @@ export class LanguageComponent implements OnInit {
     @Inject(WINDOW) private window: Window,
     private _language: LanguageService
   ) {
-    this.languageMenuOptions = environment.LANGUAGE_MENU_OPTIONS
+    this.languageMenuOptions = runtimeEnvironment.LANGUAGE_MENU_OPTIONS
     // LOCAL DEV GET'S `en-US` from locale but `en` is required
     this.locale = this.locale === 'en-US' ? 'en' : this.locale
-    this.labelLanguage += ` ${environment.LANGUAGE_MENU_OPTIONS[this.locale]}`
+    this.labelLanguage += ` ${
+      runtimeEnvironment.LANGUAGE_MENU_OPTIONS[this.locale]
+    }`
   }
 
   changeLanguage(languageKey: string) {

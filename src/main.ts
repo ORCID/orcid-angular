@@ -2,11 +2,14 @@ import { enableProdMode } from '@angular/core'
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic'
 
 import { AppModule } from './app/app.module'
-import { environment } from './environments/environment'
+import { EnvironmentInterface } from './environments/interface'
+import { defineGlobalSetQAflag } from './app/local-flags.help'
 
-if (environment.production) {
+if (runtimeEnvironment.production) {
   enableProdMode()
 }
+
+defineGlobalSetQAflag()
 
 platformBrowserDynamic()
   .bootstrapModule(AppModule)

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core'
 import { Meta, Title } from '@angular/platform-browser'
 import { NamesEndPoint } from 'src/app/types/record-name.endpoint'
 import { UserRecord } from 'src/app/types/record.local'
-import { environment } from 'src/environments/environment'
 import { TitleService } from '../title-service/title.service'
 
 @Injectable({
@@ -63,7 +62,7 @@ export class OpenGraphService {
             property: this.urlMeta,
             content:
               'https:' +
-              environment.BASE_URL +
+              runtimeEnvironment.BASE_URL +
               record.userInfo.EFFECTIVE_USER_ORCID,
           },
           {
@@ -82,7 +81,9 @@ export class OpenGraphService {
           {
             property: this.imageMeta,
             content:
-              'https:' + environment.BASE_URL + 'assets/img/orcid-og-image.png',
+              'https:' +
+              runtimeEnvironment.BASE_URL +
+              'assets/img/orcid-og-image.png',
           },
         ])
       } catch (e) {

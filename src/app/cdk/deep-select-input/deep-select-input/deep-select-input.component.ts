@@ -8,7 +8,10 @@ import {
   ViewChild,
   forwardRef,
 } from '@angular/core'
-import { MatMenuTrigger } from '@angular/material/menu'
+import {
+  MAT_MENU_DEFAULT_OPTIONS,
+  MatMenuTrigger,
+} from '@angular/material/menu'
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -41,6 +44,10 @@ export interface DeepSelectMenu {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => DeepSelectInputComponent),
       multi: true,
+    },
+    {
+      provide: MAT_MENU_DEFAULT_OPTIONS,
+      useValue: { overlayPanelClass: 'menu-overlay-pane-overwrite' },
     },
   ],
 })
@@ -89,7 +96,6 @@ export class DeepSelectInputComponent implements ControlValueAccessor {
 
   // ControlValueAccessor implementation
   writeValue(value: string): void {
-    console.log('writeValue', value)
     this.formgroup.get('formControl').setValue(value)
     const findItem = (menu: DeepSelectMenu[], value: string) => {
       for (const item of menu) {

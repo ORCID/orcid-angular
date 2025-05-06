@@ -36,7 +36,6 @@ import { ModalFundingComponent } from './components/funding-stacks-groups/modals
 import { FundingComponent } from './components/funding/funding.component'
 import { MainComponent } from './components/main/main.component'
 import { ModalDeleteItemsComponent } from './components/modals/modal-delete-item/modal-delete-items.component'
-import { NotFoundComponent } from './components/not-found/not-found.component'
 import { OrgIdentifierComponent } from './components/org-identifier/org-identifier.component'
 import { PeerReviewStackComponent } from './components/peer-review-stack/peer-review-stack.component'
 import { ModalPeerReviewsComponent } from './components/peer-review-stacks-groups/modals/modal-peer-reviews/modal-peer-reviews.component'
@@ -82,9 +81,10 @@ import { RecordInfoComponent } from './components/record-info/record-info.compon
 import { TrustedSummaryModule } from '../cdk/trusted-summary/trusted-summary.module'
 import { AlertMessageModule } from '../cdk/alert-message/alert-message.module'
 import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog'
-import { LoginInterstitialsService } from '../core/login-interstitials/login-interstitials.service'
 import { WarningMessageModule } from '../cdk/warning-message/warning-message.module'
 import { DeepSelectInputModule } from '../cdk/deep-select-input/deep-select-input.module'
+import { PageNotFound404Module } from '../page-not-found-404/page-not-found-404.module'
+import { LoginMainInterstitialsManagerService } from '../core/login-interstitials-manager/login-main-interstitials-manager.service'
 
 @NgModule({
   declarations: [
@@ -109,7 +109,6 @@ import { DeepSelectInputModule } from '../cdk/deep-select-input/deep-select-inpu
     WorkComponent,
     TopBarActionsComponent,
     TopBarRecordIssuesComponent,
-    NotFoundComponent,
     ModalAffiliationsComponent,
     OrgIdentifierComponent,
     ModalFundingComponent,
@@ -177,7 +176,11 @@ import { DeepSelectInputModule } from '../cdk/deep-select-input/deep-select-inpu
     TrustedSummaryModule,
     MatDialogModule,
     DeepSelectInputModule,
+    PageNotFound404Module,
   ],
-  providers: [VerificationEmailModalService, LoginInterstitialsService],
+  providers: [
+    VerificationEmailModalService,
+    LoginMainInterstitialsManagerService,
+  ],
 })
 export class RecordModule {}

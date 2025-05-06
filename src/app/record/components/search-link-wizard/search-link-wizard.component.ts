@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { RecordImportWizard } from '../../../types/record-peer-review-import.endpoint'
-import { environment } from '../../../../environments/environment'
 
 @Component({
   selector: 'app-search-link-wizard',
@@ -19,7 +18,7 @@ export class SearchLinkWizardComponent implements OnInit {
       return client.clientWebsite
     } else {
       return (
-        environment.BASE_URL +
+        runtimeEnvironment.BASE_URL +
         'oauth/authorize' +
         '?client_id=' +
         client.id +

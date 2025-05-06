@@ -1,3 +1,321 @@
+## v2.114.0 - 2025-05-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.113.13...v2.114.0)
+
+## v2.113.13 - 2025-05-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.113.12...v2.113.13)
+
+- [#2514](https://github.com/ORCID/orcid-angular/pull/2514): Bump @babel/helpers from 7.23.2 to 7.27.1
+
+## v2.113.12 - 2025-05-05
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.113.11...v2.113.12)
+
+## v2.113.11 - 2025-05-05
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.113.10...v2.113.11)
+
+- [#2512](https://github.com/ORCID/orcid-angular/pull/2512): Changed the wording from affiliations to employment
+- [#2509](https://github.com/ORCID/orcid-angular/pull/2509): create affiliation interstitial based on newest domain
+- [#2507](https://github.com/ORCID/orcid-angular/pull/2507): Sign in params should be sent as form POST
+- [#2503](https://github.com/ORCID/orcid-angular/pull/2503): Bump http-proxy-middleware from 2.0.6 to 2.0.9
+
+## v2.113.10 - 2025-05-05
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.113.9...v2.113.10)
+
+- [#2513](https://github.com/ORCID/orcid-angular/pull/2513): Transifex
+
+## v2.113.9 - 2025-04-28
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.113.8...v2.113.9)
+
+## v2.113.8 - 2025-04-28
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.113.7...v2.113.8)
+
+## v2.113.7 - 2025-04-24
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.113.6...v2.113.7)
+
+## v2.113.6 - 2025-04-23
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.113.5...v2.113.6)
+
+## v2.113.5 - 2025-04-23
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.113.4...v2.113.5)
+
+## v2.113.4 - 2025-04-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.113.3...v2.113.4)
+
+## v2.113.3 - 2025-04-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.113.2...v2.113.3)
+
+## v2.113.2 - 2025-04-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.113.1...v2.113.2)
+
+## v2.113.1 - 2025-04-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.113.0...v2.113.1)
+
+- [#2500](https://github.com/ORCID/orcid-angular/pull/2500): 9694-capture-affiliations-during-sign-in
+
+## v2.113.0 - 2025-04-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.18...v2.113.0)
+
+## v2.112.18 - 2025-04-10
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.17...v2.112.18)
+
+- [#2499](https://github.com/ORCID/orcid-angular/pull/2499): 9694 capture affiliations during sign in
+- [#2498](https://github.com/ORCID/orcid-angular/pull/2498): Remove reportEvent for google Analytics
+
+## v2.112.17 - 2025-04-04
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.16...v2.112.17)
+
+- [#2497](https://github.com/ORCID/orcid-angular/pull/2497): fix interstitial check race statement
+
+## v2.112.16 - 2025-04-04
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.15...v2.112.16)
+
+- [#2496](https://github.com/ORCID/orcid-angular/pull/2496): fix conditional statement order in interstitials
+
+## v2.112.15 - 2025-04-04
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.14...v2.112.15)
+
+## v2.112.14 - 2025-04-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.13...v2.112.14)
+
+- [#2494](https://github.com/ORCID/orcid-angular/pull/2494): do not show interstitial until a refresh is made
+
+## v2.112.13 - 2025-04-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.12...v2.112.13)
+
+## v2.112.12 - 2025-04-02
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.11...v2.112.12)
+
+## v2.112.11 - 2025-04-02
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.10...v2.112.11)
+
+## v2.112.10 - 2025-04-02
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.9...v2.112.10)
+
+- [#2491](https://github.com/ORCID/orcid-angular/pull/2491): Enable New Relic with domain base dynamic environments configs
+
+## v2.112.9 - 2025-04-02
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.8...v2.112.9)
+
+## v2.112.8 - 2025-04-01
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.7...v2.112.8)
+
+## v2.112.7 - 2025-03-31
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.6...v2.112.7)
+
+- [#2485](https://github.com/ORCID/orcid-angular/pull/2485): view interstitials only when signed in
+
+## v2.112.6 - 2025-03-31
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.5...v2.112.6)
+
+## v2.112.5 - 2025-03-27
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.4...v2.112.5)
+
+## v2.112.4 - 2025-03-26
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.3...v2.112.4)
+
+- [#2483](https://github.com/ORCID/orcid-angular/pull/2483): add server interstitial logic
+
+## v2.112.3 - 2025-03-25
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.2...v2.112.3)
+
+- [#2478](https://github.com/ORCID/orcid-angular/pull/2478): Implement revoke own permissions
+
+## v2.112.2 - 2025-03-25
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.1...v2.112.2)
+
+- [#2482](https://github.com/ORCID/orcid-angular/pull/2482): 9698-re-implement-the-removal-of-cookie-consent-from-the-trust-marker…
+
+## v2.112.1 - 2025-03-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.112.0...v2.112.1)
+
+- [#2480](https://github.com/ORCID/orcid-angular/pull/2480): fix-crazy-egg-not-loading
+
+## v2.112.0 - 2025-03-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.16...v2.112.0)
+
+## v2.111.16 - 2025-03-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.15...v2.111.16)
+
+- [#2477](https://github.com/ORCID/orcid-angular/pull/2477): Lmendoza/9666 UI updates to verification validation for email addresses and domains
+
+## v2.111.15 - 2025-03-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.14...v2.111.15)
+
+## v2.111.14 - 2025-03-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.13...v2.111.14)
+
+## v2.111.13 - 2025-03-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.12...v2.111.13)
+
+- [#2474](https://github.com/ORCID/orcid-angular/pull/2474): 9666-ui-updates-to-verification-validation-for-email-addresses-and-do…
+
+## v2.111.12 - 2025-02-25
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.11...v2.111.12)
+
+- [#2473](https://github.com/ORCID/orcid-angular/pull/2473): fix-2472
+
+## v2.111.11 - 2025-02-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.10...v2.111.11)
+
+- [#2471](https://github.com/ORCID/orcid-angular/pull/2471): Lmendoza/fix interstitial oauth
+
+## v2.111.10 - 2025-02-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.9...v2.111.10)
+
+- [#2470](https://github.com/ORCID/orcid-angular/pull/2470): 9574-qa-unable-to-reach-the-bottom-of-the-work-type-dropdown-on-mobil…
+
+## v2.111.9 - 2025-02-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.8...v2.111.9)
+
+## v2.111.8 - 2025-02-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.7...v2.111.8)
+
+- [#2469](https://github.com/ORCID/orcid-angular/pull/2469): 9645-qa-oauth-failing-new-interstitial
+- [#2468](https://github.com/ORCID/orcid-angular/pull/2468): 9574-qa-unable-to-reach-the-bottom-of-the-work-type-dropdown-on-mobil…
+
+## v2.111.7 - 2025-02-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.6...v2.111.7)
+
+- [#2467](https://github.com/ORCID/orcid-angular/pull/2467): Lmendoza/9644 qa confirmation panel issue for users making domains public as part of client reauthorization
+
+## v2.111.6 - 2025-02-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.5...v2.111.6)
+
+- [#2466](https://github.com/ORCID/orcid-angular/pull/2466): Lmendoza/9619 show interstitial for re authorise requests
+
+## v2.111.5 - 2025-02-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.4...v2.111.5)
+
+- [#2465](https://github.com/ORCID/orcid-angular/pull/2465): Lmendoza/onetrust2
+
+## v2.111.4 - 2025-02-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.3...v2.111.4)
+
+- [#2464](https://github.com/ORCID/orcid-angular/pull/2464): one-trust-test
+
+## v2.111.3 - 2025-02-10
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.2...v2.111.3)
+
+## v2.111.2 - 2025-02-05
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.1...v2.111.2)
+
+- [#2439](https://github.com/ORCID/orcid-angular/pull/2439): 9562 implement dynamic environment variable loading for single artifact deployment
+
+## v2.111.1 - 2025-02-05
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.111.0...v2.111.1)
+
+## v2.111.0 - 2025-02-05
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.110.10...v2.111.0)
+
+## v2.110.10 - 2025-02-05
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.110.9...v2.110.10)
+
+## v2.110.9 - 2025-01-30
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.110.8...v2.110.9)
+
+- [#2461](https://github.com/ORCID/orcid-angular/pull/2461): 404 index
+
+## v2.110.8 - 2025-01-30
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.110.7...v2.110.8)
+
+- [#2460](https://github.com/ORCID/orcid-angular/pull/2460): 404-fixes
+
+## v2.110.7 - 2025-01-29
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.110.6...v2.110.7)
+
+- [#2459](https://github.com/ORCID/orcid-angular/pull/2459): 9597-restore-report-work-type-to-work-type-menu
+
+## v2.110.6 - 2025-01-29
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.110.5...v2.110.6)
+
+- [#2458](https://github.com/ORCID/orcid-angular/pull/2458): 9607-qa-zooming-and-scaling-must-not-be-disabled
+
+## v2.110.5 - 2025-01-29
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.110.4...v2.110.5)
+
+- [#2457](https://github.com/ORCID/orcid-angular/pull/2457): 9591-empty-record-message-heading
+
+## v2.110.4 - 2025-01-28
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.110.3...v2.110.4)
+
+- [#2456](https://github.com/ORCID/orcid-angular/pull/2456): revert-UpdateGoogleKeys
+
+## v2.110.3 - 2025-01-28
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.110.2...v2.110.3)
+
+- [#2455](https://github.com/ORCID/orcid-angular/pull/2455): restore report work type
+
+## v2.110.2 - 2025-01-27
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.110.1...v2.110.2)
+
+- [#2453](https://github.com/ORCID/orcid-angular/pull/2453): Lmendoza/batch of work jan 2025
+- [#2452](https://github.com/ORCID/orcid-angular/pull/2452): handle reactivation backend errors
+
+## v2.110.1 - 2025-01-23
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.110.0...v2.110.1)
+
+- [#2450](https://github.com/ORCID/orcid-angular/pull/2450): migrate reactivation form
+
 ## v2.110.0 - 2025-01-16
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.109.24...v2.110.0)

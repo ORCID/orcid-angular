@@ -1,5 +1,7 @@
 import { Component, Inject, Input, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
+import { Observable } from 'rxjs'
+import { startWith, switchMap } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { UserService } from 'src/app/core'
@@ -22,7 +24,7 @@ export class TopBarMyPublicRecordPreviewComponent implements OnInit {
   iAmEditingThisRecord = false
   isMyRecord: boolean
   effectiveRecord: string
-  trustedIndividuals: TrustedIndividuals
+  $trustedIndividuals: Observable<TrustedIndividuals>
   loadingTrustedIndividuals: boolean
   loadingUserInfo: boolean
 
@@ -49,11 +51,20 @@ export class TopBarMyPublicRecordPreviewComponent implements OnInit {
     })
 
     if (!this.isPublicRecord) {
-      this._trustedIndividuals.getTrustedIndividuals().subscribe((value) => {
-        this.trustedIndividuals = value
-      })
+      this.setupTrustedIndividualsObs()
     }
   }
+
+  private setupTrustedIndividualsObs() {
+    this.$trustedIndividuals =
+      this._trustedIndividuals.updateDelegatorSuccess.pipe(
+        startWith(() => undefined),
+        switchMap(() => {
+          return this._trustedIndividuals.getTrustedIndividuals()
+        })
+      )
+  }
+
   goToMyRecord() {
     this.router.navigate(['/my-orcid'])
   }

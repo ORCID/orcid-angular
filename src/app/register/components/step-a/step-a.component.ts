@@ -11,7 +11,7 @@ import { Router } from '@angular/router'
 import { first } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { ApplicationRoutes } from 'src/app/constants'
-import { environment } from 'src/environments/environment'
+
 import { ReactivationLocal } from '../../../types/reactivation.local'
 import { BaseStepDirective } from '../BaseStep'
 import { RegisterStateService } from '../../register-state.service'
@@ -44,9 +44,7 @@ export class StepAComponent
   ) {
     super()
   }
-
-  ngOnInit(): void {}
-  infoSiteBaseUrl = environment.INFO_SITE
+  infoSiteBaseUrl = runtimeEnvironment.INFO_SITE
 
   goBack() {
     this._registerStateService.registerStepperButtonClicked('a', 'back')

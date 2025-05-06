@@ -95,7 +95,7 @@ describe('PanelsComponent', () => {
     const dialogs = await loader.getAllHarnesses(MatDialogHarness)
     expect(dialogs.length).toBe(1)
     expect(await dialogs[0].getText()).toContain(
-      'Please verify your primary email address'
+      'Please verify your email addresses'
     )
   })
 })

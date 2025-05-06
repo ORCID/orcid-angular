@@ -5,8 +5,6 @@ import {
 } from '@angular/material/legacy-dialog'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { DuplicateRemoveEndpoint } from 'src/app/types/account-actions-duplicated'
-import { environment } from 'src/environments/environment'
-
 @Component({
   selector: 'app-dialog-actions-duplicated',
   templateUrl: './dialog-actions-duplicated.component.html',
@@ -17,7 +15,7 @@ import { environment } from 'src/environments/environment'
 })
 export class DialogActionsDuplicatedComponent implements OnInit {
   isMobile: boolean
-  baseUrl = environment.BASE_URL
+  baseUrl = runtimeEnvironment.BASE_URL
   constructor(
     private matRef: MatDialogRef<DialogActionsDuplicatedComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DuplicateRemoveEndpoint,

@@ -2,7 +2,7 @@
   <app-modal-header>
     <mat-icon class="material-icons-outlined info">info</mat-icon>
     <ng-container i18n="@@topBar.pleaseVerifyYourPrimary">
-      Please verify your primary email address
+      Please verify your email addresses
     </ng-container>
   </app-modal-header>
   <div
@@ -11,24 +11,22 @@
       'orc-font-small-print': isMobile
     }"
   >
-    <div class="row">
-      <p i18n="@@topBar.youNeedToVerify">
-        You need to verify your primary email address in order to access all of
-        ORCID’s editing features.
+    <div class="text-content">
+      <p>
+        <ng-container i18n="@@topBar.youNeedToVerify"
+          >You need to verify at least one email address in order to access all
+          of ORCID’s editing features.</ng-container
+        >
+        <ng-container i18n="@@topBar.toVerifyYourEmail">
+          To verify your email address, click the link in the email sent to:
+        </ng-container>
       </p>
       <p>
-        <ng-container i18n="@@topBar.toVerifyYourEmail">
-          To verify your email please click the link in the message we have sent
-          to:
-        </ng-container>
-        <br />
-        <strong>
-          {{ primaryEmail }}
-        </strong>
+        {{ primaryEmail }}
       </p>
       <p>
         <strong i18n="@@topBar.iDontHave">
-          I don’t have the verification email
+          Don’t have a verification email?
         </strong>
         <br />
         <ng-container i18n="@@topBar.clickTheButton">
@@ -50,7 +48,7 @@
       <p>
         <strong i18n="@@side-bar.needHelp"> Need help?</strong>
         <br />
-        <ng-container i18n="@@topBar.visitOur"> Visit our</ng-container>
+        <ng-container i18n="@@topBar.visitOur"> Visit the</ng-container>
         <a
           class="underline"
           href="https://support.orcid.org/hc/articles/360006973793"
@@ -58,21 +56,8 @@
           target="_blank"
           i18n="@@topBar.knowledge"
           [attr.aria-label]="ariaLabelKnowledgeBase"
-          >knowledge base</a
+          >ORCID help centre</a
         >
-        <ng-container i18n="@@topBar.baseOrContact"
-          >or contact the support team at</ng-container
-        >
-        <br />
-        <a
-          class="underline"
-          href="https://support.orcid.org/"
-          rel="noopener noreferrer"
-          target="_blank"
-          [attr.aria-label]="ariaLabelKnowledgeSupport"
-        >
-          https://support.orcid.org/
-        </a>
       </p>
     </div>
   </div>

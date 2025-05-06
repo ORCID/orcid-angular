@@ -1,31 +1,20 @@
-import { Inject, Injectable } from '@angular/core'
+import { Injectable } from '@angular/core'
 import {
   ActivatedRouteSnapshot,
   Router,
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router'
-import { forkJoin, Observable } from 'rxjs'
-import { catchError, first, map } from 'rxjs/operators'
+import { Observable } from 'rxjs'
+import { first, map } from 'rxjs/operators'
 
-import { WINDOW } from '../cdk/window'
 import { UserService } from '../core'
-import { RequestInfoForm } from '../types'
-import { GoogleTagManagerService } from '../core/google-tag-manager/google-tag-manager.service'
-import { ERROR_REPORT } from '../errors'
-import { ErrorHandlerService } from '../core/error-handler/error-handler.service'
 
 @Injectable({
   providedIn: 'root',
 })
 export class ThirdPartySigninCompletedGuard {
-  constructor(
-    private _router: Router,
-    @Inject(WINDOW) private window: Window,
-    private _googleTagManagerService: GoogleTagManagerService,
-    private _errorHandler: ErrorHandlerService,
-    private _user: UserService
-  ) {}
+  constructor(private _router: Router, private _user: UserService) {}
 
   canActivateChild(
     next: ActivatedRouteSnapshot,
@@ -37,39 +26,7 @@ export class ThirdPartySigninCompletedGuard {
     | UrlTree {
     return this._user.getUserSession().pipe(
       first(),
-      map((value) => value.oauthSession),
-      map((requestInfoForm: RequestInfoForm) => {
-        const analyticsReports: Observable<void>[] = []
-        analyticsReports.push(
-          this._googleTagManagerService.reportEvent(
-            'Sign-In',
-            requestInfoForm || 'Website'
-          )
-        )
-        this._googleTagManagerService
-          .addGtmToDom()
-          .pipe(
-            catchError((err) =>
-              this._errorHandler.handleError(
-                err,
-                ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
-              )
-            )
-          )
-          .subscribe((response) => {
-            if (response) {
-              forkJoin(analyticsReports)
-                .pipe(
-                  catchError((err) =>
-                    this._errorHandler.handleError(
-                      err,
-                      ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
-                    )
-                  )
-                )
-                .subscribe()
-            }
-          })
+      map(() => {
         return this._router.parseUrl(
           state.url.replace(/\/third-party-signin-completed/, '')
         )
