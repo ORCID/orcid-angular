@@ -21,7 +21,7 @@ import { TogglzService } from 'src/app/core/togglz/togglz.service'
 })
 export class SignInService {
   constructor(
-    private _http: HttpClient,    
+    private _http: HttpClient,
     private _titleService: Title,
     private _errorHandler: ErrorHandlerService,
     private _cookie: CookieService,
