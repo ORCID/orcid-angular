@@ -21,7 +21,7 @@ import { TogglzService } from 'src/app/core/togglz/togglz.service'
 })
 export class SignInService {
   constructor(
-    private _http: HttpClient,
+    private _http: HttpClient,    
     private _titleService: Title,
     private _errorHandler: ErrorHandlerService,
     private _cookie: CookieService,
@@ -74,6 +74,8 @@ export class SignInService {
             'application/x-www-form-urlencoded'
           )
           headers = headers.set('x-xsrf-token', csrf)
+          //TODO: This is temporarly, until we move the authorization to the auth server
+          headers = headers.set('orcid-original-request', window.location.href)
         }
 
         let body = new HttpParams({ encoder: new CustomEncoder() })
