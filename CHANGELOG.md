@@ -1,3 +1,9 @@
+## v2.114.2 - 2025-05-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.114.1...v2.114.2)
+
+- [#2516](https://github.com/ORCID/orcid-angular/pull/2516): Do institutional sign in thorugh the auth server as well
+
 ## v2.114.1 - 2025-05-08
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.114.0...v2.114.1)
