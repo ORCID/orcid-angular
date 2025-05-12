@@ -50,17 +50,17 @@ export class SignInService {
         } else {
           orcidLoginUrl = runtimeEnvironment.API_WEB + 'signin/auth.json'
           usingOauthServer = false
+
+          if (signInLocal.type && signInLocal.type === TypeSignIn.institutional) {
+            orcidLoginUrl = runtimeEnvironment.API_WEB + 'shibboleth/signin/auth.json'
+          }
+
+          if (signInLocal.type && signInLocal.type === TypeSignIn.social) {
+            orcidLoginUrl = runtimeEnvironment.API_WEB + 'social/signin/auth.json'
+          }
         }
 
-        let loginUrl = orcidLoginUrl
-
-        if (signInLocal.type && signInLocal.type === TypeSignIn.institutional) {
-          loginUrl = runtimeEnvironment.API_WEB + 'shibboleth/signin/auth.json'
-        }
-
-        if (signInLocal.type && signInLocal.type === TypeSignIn.social) {
-          loginUrl = runtimeEnvironment.API_WEB + 'social/signin/auth.json'
-        }
+        let loginUrl = orcidLoginUrl        
 
         let headers = new HttpHeaders()
         if (usingOauthServer === true) {
@@ -74,7 +74,7 @@ export class SignInService {
             'application/x-www-form-urlencoded'
           )
           headers = headers.set('x-xsrf-token', csrf)
-          //TODO: This is temporarly, until we move the authorization to the auth server
+          //TODO: This is temporarly, until we permanently move the authorization to the auth server
           headers = headers.set('orcid-original-request', window.location.href)
         }
 
