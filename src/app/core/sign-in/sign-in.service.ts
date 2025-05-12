@@ -51,16 +51,21 @@ export class SignInService {
           orcidLoginUrl = runtimeEnvironment.API_WEB + 'signin/auth.json'
           usingOauthServer = false
 
-          if (signInLocal.type && signInLocal.type === TypeSignIn.institutional) {
-            orcidLoginUrl = runtimeEnvironment.API_WEB + 'shibboleth/signin/auth.json'
+          if (
+            signInLocal.type &&
+            signInLocal.type === TypeSignIn.institutional
+          ) {
+            orcidLoginUrl =
+              runtimeEnvironment.API_WEB + 'shibboleth/signin/auth.json'
           }
 
           if (signInLocal.type && signInLocal.type === TypeSignIn.social) {
-            orcidLoginUrl = runtimeEnvironment.API_WEB + 'social/signin/auth.json'
+            orcidLoginUrl =
+              runtimeEnvironment.API_WEB + 'social/signin/auth.json'
           }
         }
 
-        let loginUrl = orcidLoginUrl        
+        let loginUrl = orcidLoginUrl
 
         let headers = new HttpHeaders()
         if (usingOauthServer === true) {
