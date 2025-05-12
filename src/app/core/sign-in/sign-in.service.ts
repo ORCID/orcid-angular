@@ -60,7 +60,7 @@ export class SignInService {
 
         if (signInLocal.type && signInLocal.type === TypeSignIn.social) {
           loginUrl = runtimeEnvironment.API_WEB + 'social/signin/auth.json'
-        }                        
+        }
 
         let headers = new HttpHeaders()
         if (usingOauthServer === true) {
