@@ -26,8 +26,8 @@ NREUM.init = {
     enabled: true,
     block_selector: '',
     mask_text_selector: '*',
-    sampling_rate: 10.0,
-    error_sampling_rate: 10.0,
+    sampling_rate: 10.0, // 10% * 5% gate at new-relic.service.ts = 0.5% total sessions recorded.
+    error_sampling_rate: 100.0, // 100% * 5% gate at new-relic.service.ts = 5% errored sessions recorded.
     mask_all_inputs: true,
     collect_fonts: true,
     inline_images: false,
