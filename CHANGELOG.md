@@ -1,3 +1,25 @@
+## v2.114.5 - 2025-05-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.114.4...v2.114.5)
+
+## v2.114.4 - 2025-05-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.114.3...v2.114.4)
+
+- [#2518](https://github.com/ORCID/orcid-angular/pull/2518):
+
+## v2.114.3 - 2025-05-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.114.2...v2.114.3)
+
+- [#2517](https://github.com/ORCID/orcid-angular/pull/2517): Institutional sign in needs to be done withing the registry
+
+## v2.114.2 - 2025-05-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.114.1...v2.114.2)
+
+- [#2516](https://github.com/ORCID/orcid-angular/pull/2516): Do institutional sign in thorugh the auth server as well
+
 ## v2.114.1 - 2025-05-08
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.114.0...v2.114.1)
