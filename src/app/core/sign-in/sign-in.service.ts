@@ -66,7 +66,7 @@ export class SignInService {
         }
 
         let headers = new HttpHeaders()
-        if (usingOauthServer === true && isSocialSignIn === false) {          
+        if (usingOauthServer === true && isSocialSignIn === false) {
           headers = headers.set(
             'Access-Control-Allow-Origin',
             runtimeEnvironment.AUTH_SERVER
