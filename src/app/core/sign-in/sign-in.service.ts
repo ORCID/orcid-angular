@@ -66,13 +66,11 @@ export class SignInService {
         }
 
         let headers = new HttpHeaders()
-        if (usingOauthServer === true) {
-          if (isSocialSignIn === false) {
-            headers = headers.set(
-              'Access-Control-Allow-Origin',
-              runtimeEnvironment.AUTH_SERVER
-            )
-          }
+        if (usingOauthServer === true && isSocialSignIn === false) {          
+          headers = headers.set(
+            'Access-Control-Allow-Origin',
+            runtimeEnvironment.AUTH_SERVER
+          )
           headers = headers.set(
             'Content-Type',
             'application/x-www-form-urlencoded'
