@@ -1,3 +1,9 @@
+## v2.114.3 - 2025-05-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.114.2...v2.114.3)
+
+- [#2517](https://github.com/ORCID/orcid-angular/pull/2517): Institutional sign in needs to be done withing the registry
+
 ## v2.114.2 - 2025-05-12
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.114.1...v2.114.2)

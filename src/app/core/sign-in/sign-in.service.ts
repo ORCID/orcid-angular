@@ -49,7 +49,7 @@ export class SignInService {
           usingOauthServer = true
         } else {
           orcidLoginUrl = runtimeEnvironment.API_WEB + 'signin/auth.json'
-          usingOauthServer = false          
+          usingOauthServer = false
         }
 
         let loginUrl = orcidLoginUrl
