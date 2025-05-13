@@ -53,26 +53,26 @@ export class SignInService {
         }
 
         let loginUrl = orcidLoginUrl
-        let isSocialSignIn = false;
+        let isSocialSignIn = false
 
         if (signInLocal.type && signInLocal.type === TypeSignIn.institutional) {
           loginUrl = runtimeEnvironment.API_WEB + 'shibboleth/signin/auth.json'
-          isSocialSignIn = true;
+          isSocialSignIn = true
         }
 
         if (signInLocal.type && signInLocal.type === TypeSignIn.social) {
           loginUrl = runtimeEnvironment.API_WEB + 'social/signin/auth.json'
-          isSocialSignIn = true;
-        }                        
+          isSocialSignIn = true
+        }
 
         let headers = new HttpHeaders()
-        if (usingOauthServer === true) {          
-          if(isSocialSignIn === false) {
+        if (usingOauthServer === true) {
+          if (isSocialSignIn === false) {
             headers = headers.set(
               'Access-Control-Allow-Origin',
               runtimeEnvironment.AUTH_SERVER
             )
-          }          
+          }
           headers = headers.set(
             'Content-Type',
             'application/x-www-form-urlencoded'
