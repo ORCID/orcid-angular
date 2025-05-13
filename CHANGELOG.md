@@ -1,3 +1,9 @@
+## v2.114.6 - 2025-05-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.114.5...v2.114.6)
+
+- [#2520](https://github.com/ORCID/orcid-angular/pull/2520): Lmendoza/9792 update new relic configuration adjust sampling strategy
+
 ## v2.114.5 - 2025-05-13
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.114.4...v2.114.5)
