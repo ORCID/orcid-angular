@@ -1,3 +1,9 @@
+## v2.114.7 - 2025-05-16
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.114.6...v2.114.7)
+
+- [#2521](https://github.com/ORCID/orcid-angular/pull/2521): nr-fix-random-function
+
 ## v2.114.6 - 2025-05-13
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.114.5...v2.114.6)
