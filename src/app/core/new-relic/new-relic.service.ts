@@ -5,17 +5,25 @@ import { WINDOW } from 'src/app/cdk/window'
   providedIn: 'root',
 })
 export class NewRelicService {
-  DECISION_KEY = 'nr-sampled' // flag in sessionStorage
-  sampled: boolean
-  constructor(@Inject(WINDOW) private window: Window) {
-    let sampled = sessionStorage.getItem(this.DECISION_KEY)
+  private readonly DECISION_KEY = 'nr-sampled';
+  private sampled = false;
 
-    if (sampled === null) {
-      // first time in this tab
-      this.sampled = Math.random() < 0.05 // 5 % chance
-      sessionStorage.setItem(this.DECISION_KEY, sampled)
+  constructor(@Inject(WINDOW) private readonly window: Window) {
+    if (!this.window?.sessionStorage) {
+      return;                           
+    }
+
+    const stored = this.window.sessionStorage.getItem(this.DECISION_KEY);
+
+    if (stored === null) {
+      // First navigation in this tab: 5 % chance to enable sampling
+      this.sampled = Math.random() < 0.05;
+      this.window.sessionStorage.setItem(
+        this.DECISION_KEY,
+        JSON.stringify(this.sampled),
+      );
     } else {
-      this.sampled = sampled === 'true' // sessionStorage returns strings
+      this.sampled = stored === 'true';
     }
   }
 
