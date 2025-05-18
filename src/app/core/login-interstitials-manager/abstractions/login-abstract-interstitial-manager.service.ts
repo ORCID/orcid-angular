@@ -9,9 +9,11 @@ import { InterstitialType } from 'src/app/cdk/interstitials/interstitial.type'
 
 import { QaFlag } from '../../qa-flag/qa-flags.enum'
 import { QaFlagsService } from '../../qa-flag/qa-flag.service'
-import { BaseInterstitialDialogInput, BaseInterstitialDialogOutput } from './dialog-interface'
+import {
+  BaseInterstitialDialogInput,
+  BaseInterstitialDialogOutput,
+} from './dialog-interface'
 import { TogglzService } from '../../togglz/togglz.service'
-
 
 export abstract class LoginBaseInterstitialManagerService<
   TInput extends BaseInterstitialDialogInput,

@@ -11,14 +11,12 @@ import {
 import { UserRecord } from 'src/app/types/record.local'
 import { LoginDomainInterstitialManagerService } from './implementations/login-domain-interstitials-manager.service'
 import { LoginAffiliationInterstitialManagerService } from './implementations/login-affiliation-interstitials-manager.service'
-
 import { InterstitialsService } from 'src/app/cdk/interstitials/interstitials.service'
 import { LoginBaseInterstitialManagerService } from './abstractions/login-abstract-interstitial-manager.service'
 import {
   BaseInterstitialDialogInput,
   BaseInterstitialDialogOutput,
 } from './abstractions/dialog-interface'
-
 import { ComponentType } from '@angular/cdk/overlay'
 
 @Injectable({
