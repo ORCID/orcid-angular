@@ -1,17 +1,22 @@
+import { ComponentType } from '@angular/cdk/overlay'
 import { Component, Inject } from '@angular/core'
 import { cloneDeep } from 'lodash'
 import { Observable, forkJoin, NEVER, of } from 'rxjs'
-import { first, map, switchMap, take, tap } from 'rxjs/operators'
+import { filter, first, map, switchMap, take, tap } from 'rxjs/operators'
 import { InterstitialsService } from 'src/app/cdk/interstitials/interstitials.service'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { UserService } from 'src/app/core'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 import { GoogleTagManagerService } from 'src/app/core/google-tag-manager/google-tag-manager.service'
+import { LoginMainInterstitialsManagerService } from 'src/app/core/login-interstitials-manager/login-main-interstitials-manager.service'
 import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
+import { RecordService } from 'src/app/core/record/record.service'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { ERROR_REPORT } from 'src/app/errors'
 import { EmailsEndpoint, RequestInfoForm } from 'src/app/types'
+import { UserRecord } from 'src/app/types/record.local'
+import { UserSession } from 'src/app/types/session.local'
 
 @Component({
   templateUrl: './authorize.component.html',
@@ -39,7 +44,7 @@ export class AuthorizeComponent {
   // User session properties
   isNotImpersonating = false
   insidePopUpWindows = false
-  redirectByReportAlreadyAuthorize = false
+  interstitialComponent: ComponentType<any>
 
   constructor(
     private userService: UserService,
@@ -49,7 +54,9 @@ export class AuthorizeComponent {
     private interstitialsService: InterstitialsService,
     @Inject(WINDOW) private window: Window,
     private googleTagManagerService: GoogleTagManagerService,
-    private errorHandlerService: ErrorHandlerService
+    private errorHandlerService: ErrorHandlerService,
+    private recordService: RecordService,
+    private loginMainInterstitialsManagerService: LoginMainInterstitialsManagerService
   ) {}
 
   /**
@@ -60,25 +67,38 @@ export class AuthorizeComponent {
     this.insidePopUpWindows = !!this.window.opener
 
     forkJoin({
-      userSession: this.loadUserSession(),
       platform: this.loadPlatformInfo(),
-      togglz: this.loadTogglzState(),
-      emails: this.loadEmails(),
+      userSession: this.loadUserSession(),
+      userRecord: this.recordService.getRecord({}).pipe(
+        filter((userRecord: UserRecord) => {
+          return (
+            !!userRecord &&
+            !!userRecord?.userInfo &&
+            !!userRecord?.emails &&
+            !!userRecord?.affiliations?.length
+          )
+        }),
+        take(1)
+      ),
     })
       .pipe(
-        switchMap((results) => {
-          if (!results.userSession?.userInfo) {
-            return of(results)
-          } else {
-            return this.loadInterstitialViewed().pipe(
-              map(() => {
-                return results
+        switchMap((record) => {
+          return this.loginMainInterstitialsManagerService
+            .checkLoginInterstitials(record.userRecord, {
+              returnComponent: true,
+            })
+            .pipe(
+              take(1),
+              map((interstitial) => {
+                this.interstitialComponent = interstitial
+              }),
+              switchMap(() => {
+                return of(record.userSession)
               })
             )
-          }
         })
       )
-      .subscribe(({ userSession }) => {
+      .subscribe((userSession) => {
         this.handleUserSession(userSession)
       })
   }
@@ -88,7 +108,7 @@ export class AuthorizeComponent {
    */
   handleRedirect(url: string): void {
     this.redirectUrl = url
-    if (url && this.canShowDomainInterstitial()) {
+    if (this.redirectUrl && this.canShowDomainInterstitial()) {
       this.showDomainInterstitial()
     } else {
       this.finishRedirect()
@@ -148,34 +168,23 @@ export class AuthorizeComponent {
 
   /**
    * Determines whether the domain interstitial should be displayed
-   * based on user domain status, togglz, impersonation, etc.
    */
   private canShowDomainInterstitial(): boolean {
-    return (
-      this.hasPrivateDomains &&
-      !this.hasPublicDomains &&
-      this.isOAuthDomainsInterstitialEnabled &&
-      !this.hasDomainInterstitialBeenViewed &&
-      this.isNotImpersonating &&
-      !this.insidePopUpWindows
-    )
+    return !!this.interstitialComponent
   }
 
   /**
-   * Displays the domain interstitial and marks it as viewed.
+   * Displays the domain interstitial
    */
   private showDomainInterstitial(): void {
     this.showAuthorizationComponent = false
     this.showInterstital = true
-    this.interstitialsService
-      .setInterstitialsViewed('DOMAIN_INTERSTITIAL')
-      .subscribe()
   }
 
   /**
    * Loads the user session data.
    */
-  private loadUserSession(): Observable<any> {
+  private loadUserSession(): Observable<UserSession> {
     return this.userService.getUserSession().pipe(first())
   }
 
@@ -248,11 +257,11 @@ export class AuthorizeComponent {
    * After loading forkJoin data, decide on final flow:
    * show error, show domain interstitial, or show authorization screen.
    */
-  private handleUserSession(userSession: any): void {
+  private handleUserSession(userSession: UserSession): void {
     // Check if user is impersonating
-    this.isNotImpersonating =
-      userSession?.userInfo?.REAL_USER_ORCID ===
-      userSession?.userInfo?.EFFECTIVE_USER_ORCID
+    // this.isNotImpersonating =
+    //   userSession?.userInfo?.REAL_USER_ORCID ===
+    //   userSession?.userInfo?.EFFECTIVE_USER_ORCID
 
     this.oauthSession = userSession.oauthSession
 
@@ -266,7 +275,6 @@ export class AuthorizeComponent {
     // 2. If the user was already authorized, we might show domain interstitial or just redirect
     if (this.isUserAlreadyAuthorized(this.oauthSession)) {
       if (this.canShowDomainInterstitial()) {
-        this.redirectByReportAlreadyAuthorize = true
         this.showDomainInterstitial()
         this.loading = false
       } else {

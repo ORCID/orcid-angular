@@ -5,14 +5,15 @@ import {
 } from '@angular/material/legacy-dialog'
 import { of, Subject } from 'rxjs'
 import { InterstitialsService } from 'src/app/cdk/interstitials/interstitials.service'
-import { TogglzService } from '../togglz/togglz.service'
-import { QaFlagsService } from '../qa-flag/qa-flag.service'
+
 import { InterstitialType } from 'src/app/cdk/interstitials/interstitial.type'
-import { QaFlag } from '../qa-flag/qa-flags.enum'
 import { UserRecord } from 'src/app/types/record.local'
 import { ShareEmailsDomainsDialogComponent } from 'src/app/cdk/interstitials/share-emails-domains/share-emails-domains-dialog.component'
 import { AssertionVisibilityString, EmailsEndpoint } from 'src/app/types'
-import { LoginDomainInterstitialManagerService } from './login-domain-interstitials-manager.service'
+import { QaFlagsService } from '../../qa-flag/qa-flag.service'
+import { QaFlag } from '../../qa-flag/qa-flags.enum'
+import { TogglzService } from '../../togglz/togglz.service'
+import { LoginDomainInterstitialManagerService } from '../implementations/login-domain-interstitials-manager.service'
 
 describe('LoginDomainInterstitialManagerService', () => {
   let service: LoginDomainInterstitialManagerService
@@ -169,7 +170,10 @@ describe('LoginDomainInterstitialManagerService', () => {
       } as unknown as UserRecord
 
       const result = service.getDialogDataToShow(userRecord)
-      expect(result).toEqual({ userEmailsJson: userRecord.emails })
+      expect(result).toEqual({
+        userEmailsJson: userRecord.emails,
+        type: 'domains-interstitial',
+      })
     })
   })
 

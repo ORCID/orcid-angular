@@ -5,13 +5,14 @@ import {
 } from '@angular/material/legacy-dialog'
 import { of, Subject } from 'rxjs'
 import { InterstitialsService } from 'src/app/cdk/interstitials/interstitials.service'
-import { TogglzService } from '../togglz/togglz.service'
-import { QaFlagsService } from '../qa-flag/qa-flag.service'
+
 import { AffiliationsInterstitialDialogComponent } from 'src/app/cdk/interstitials/affiliations-interstitial/affiliations-interstitial-dialog.component'
 import { UserRecord } from 'src/app/types/record.local'
 import { InterstitialType } from 'src/app/cdk/interstitials/interstitial.type'
-import { QaFlag } from '../qa-flag/qa-flags.enum'
-import { LoginAffiliationInterstitialManagerService } from './login-affiliation-interstitials-manager.service'
+import { TogglzService } from '../../togglz/togglz.service'
+import { QaFlagsService } from '../../qa-flag/qa-flag.service'
+import { QaFlag } from '../../qa-flag/qa-flags.enum'
+import { LoginAffiliationInterstitialManagerService } from '../implementations/login-affiliation-interstitials-manager.service'
 
 describe('LoginAffiliationInterstitialManagerService', () => {
   let service: LoginAffiliationInterstitialManagerService
@@ -132,7 +133,9 @@ describe('LoginAffiliationInterstitialManagerService', () => {
       } as unknown as UserRecord
 
       const result = service.getDialogDataToShow(userRecord)
-      expect(result).toBe(undefined)
+      expect(result).toEqual({
+        type: 'affiliation-interstitial',
+      })
     })
   })
 

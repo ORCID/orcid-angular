@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core'
-import { Observable, EMPTY, from } from 'rxjs'
+import { Component, Injectable, Type } from '@angular/core'
+import { Observable, EMPTY, from, of } from 'rxjs'
 import {
   concatMap,
   filter,
@@ -9,12 +9,17 @@ import {
   tap,
 } from 'rxjs/operators'
 import { UserRecord } from 'src/app/types/record.local'
-import { LoginDomainInterstitialManagerService } from './login-domain-interstitials-manager.service'
-import { InterstitialManagerServiceInterface } from './login-interface-interstitial-manager.service'
-import { LoginAffiliationInterstitialManagerService } from './login-affiliation-interstitials-manager.service'
+import { LoginDomainInterstitialManagerService } from './implementations/login-domain-interstitials-manager.service'
+import { LoginAffiliationInterstitialManagerService } from './implementations/login-affiliation-interstitials-manager.service'
 import { AffilationsComponentDialogOutput } from 'src/app/cdk/interstitials/affiliations-interstitial/affiliations-interstitial-dialog.component'
 import { ShareEmailsDomainsComponentDialogOutput } from 'src/app/cdk/interstitials/share-emails-domains/share-emails-domains-dialog.component'
 import { InterstitialsService } from 'src/app/cdk/interstitials/interstitials.service'
+import { LoginBaseInterstitialManagerService } from './abstractions/login-abstract-interstitial-manager.service'
+import {
+  BaseInterstitialDialogInput,
+  BaseInterstitialDialogOutput,
+} from './abstractions/dialog-interface'
+import { ComponentType } from '@angular/cdk/overlay'
 
 @Injectable({
   providedIn: 'root',
@@ -22,9 +27,10 @@ import { InterstitialsService } from 'src/app/cdk/interstitials/interstitials.se
 export class LoginMainInterstitialsManagerService {
   private alreadyCheckedLoginInterstitials = false
 
-  private interstitialServices: InterstitialManagerServiceInterface<
-    any,
-    AffilationsComponentDialogOutput | ShareEmailsDomainsComponentDialogOutput
+  private interstitialServices: LoginBaseInterstitialManagerService<
+    BaseInterstitialDialogInput,
+    BaseInterstitialDialogOutput,
+    any
   >[] = []
 
   constructor(
@@ -38,16 +44,23 @@ export class LoginMainInterstitialsManagerService {
     ]
   }
 
+  checkLoginInterstitials(
+    userRecord: UserRecord
+  ): Observable<BaseInterstitialDialogOutput>
+
+  checkLoginInterstitials(
+    userRecord: UserRecord,
+    opts: { returnComponent: true }
+  ): Observable<ComponentType<any>>
   /**
    * Main entry point to check whether login interstitials should be displayed.
    * Only the first one that should be shown will be shown.
    * Returns an Observable that completes after an interstitial is shown or if none is shown.
    */
   checkLoginInterstitials(
-    userRecord: UserRecord
-  ): Observable<
-    AffilationsComponentDialogOutput | ShareEmailsDomainsComponentDialogOutput
-  > {
+    userRecord: UserRecord,
+    opts?: { returnComponent: boolean }
+  ): Observable<BaseInterstitialDialogOutput | ComponentType<any>> {
     // Basic sanity checks
     if (!this.isValidUserRecord(userRecord)) return EMPTY
     if (this.alreadyCheckedLoginInterstitials) return EMPTY
@@ -91,7 +104,9 @@ export class LoginMainInterstitialsManagerService {
           // Show the interstitial
           switchMap(() => {
             this.debugLog(service, 'showing interstitial')
-            return service.showInterstitial(userRecord)
+            return opts?.returnComponent
+              ? service.showInterstitialAsComponent()
+              : service.showInterstitial(userRecord)
           })
         )
       ),

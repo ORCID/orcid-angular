@@ -19,12 +19,19 @@ import {
 } from '@angular/material/legacy-dialog'
 import { ShareEmailsDomainsComponent } from './share-emails-domains.component'
 import { UserService } from 'src/app/core'
+import {
+  BaseInterstitialDialogInput,
+  BaseInterstitialDialogOutput,
+} from 'src/app/core/login-interstitials-manager/abstractions/dialog-interface'
 
-export type ShareEmailsDomainsComponentDialogInput = {
+export interface ShareEmailsDomainsComponentDialogInput
+  extends BaseInterstitialDialogInput {
+  type: 'domains-interstitial'
   userEmailsJson: EmailsEndpoint
   organizationName?: string
 }
-export type ShareEmailsDomainsComponentDialogOutput = {
+export interface ShareEmailsDomainsComponentDialogOutput
+  extends BaseInterstitialDialogOutput {
   type: 'domains-interstitial'
   newlySharedDomains?: string[]
 }

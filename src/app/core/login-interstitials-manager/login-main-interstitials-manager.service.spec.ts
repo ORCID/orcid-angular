@@ -1,14 +1,14 @@
 import { fakeAsync, TestBed, tick } from '@angular/core/testing'
 import { of, EMPTY, throwError } from 'rxjs'
 import { InterstitialsService } from 'src/app/cdk/interstitials/interstitials.service'
-import { LoginDomainInterstitialManagerService } from './login-domain-interstitials-manager.service'
-import { LoginAffiliationInterstitialManagerService } from './login-affiliation-interstitials-manager.service'
 import { UserRecord } from 'src/app/types/record.local'
 import { ShareEmailsDomainsComponentDialogOutput } from 'src/app/cdk/interstitials/share-emails-domains/share-emails-domains-dialog.component'
 import { AffilationsComponentDialogOutput } from 'src/app/cdk/interstitials/affiliations-interstitial/affiliations-interstitial-dialog.component'
-import { LoginMainInterstitialsManagerService } from './login-main-interstitials-manager.service'
 import { EmailsEndpoint, UserInfo } from 'src/app/types'
 import { AffiliationUIGroup } from 'src/app/types/record-affiliation.endpoint'
+import { LoginAffiliationInterstitialManagerService } from '../implementations/login-affiliation-interstitials-manager.service'
+import { LoginDomainInterstitialManagerService } from '../implementations/login-domain-interstitials-manager.service'
+import { LoginMainInterstitialsManagerService } from '../login-main-interstitials-manager.service'
 
 // Mock runtime environment for debugging logs if needed
 // (Remove or adapt if your environment differs)

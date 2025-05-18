@@ -28,9 +28,19 @@ import { RecordService } from 'src/app/core/record/record.service'
 import { RecordCountriesService } from 'src/app/core/record-countries/record-countries.service'
 import { RecordAffiliationService } from 'src/app/core/record-affiliations/record-affiliations.service'
 import { Register2Service } from 'src/app/core/register2/register2.service'
+import { extend } from 'lodash'
+import {
+  BaseInterstitialDialogInput,
+  BaseInterstitialDialogOutput,
+} from 'src/app/core/login-interstitials-manager/abstractions/dialog-interface'
 
-export type AffilationsComponentDialogInput = void
-export type AffilationsComponentDialogOutput = {
+export interface AffilationsComponentDialogInput
+  extends BaseInterstitialDialogInput {
+  type: 'affiliation-interstitial'
+}
+
+export interface AffilationsComponentDialogOutput
+  extends BaseInterstitialDialogOutput {
   type: 'affiliation-interstitial'
   addedAffiliation?: string
 }

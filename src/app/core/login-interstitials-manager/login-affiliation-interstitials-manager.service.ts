@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'
+import { Component, Injectable, Type } from '@angular/core'
 import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
 import { Observable, of } from 'rxjs'
 import { map, switchMap } from 'rxjs/operators'
@@ -9,7 +9,6 @@ import { InterstitialsService } from 'src/app/cdk/interstitials/interstitials.se
 import { TogglzService } from '../togglz/togglz.service'
 import { EmailsEndpoint } from 'src/app/types'
 import { UserRecord } from 'src/app/types/record.local'
-import { InterstitialManagerServiceInterface } from './login-interface-interstitial-manager.service'
 import { ComponentType } from '@angular/cdk/overlay'
 import { InterstitialType } from 'src/app/cdk/interstitials/interstitial.type'
 import {
@@ -17,23 +16,19 @@ import {
   AffilationsComponentDialogOutput,
   AffiliationsInterstitialDialogComponent,
 } from 'src/app/cdk/interstitials/affiliations-interstitial/affiliations-interstitial-dialog.component'
-import { QaFlag } from '../qa-flag/qa-flags.enum'
-import { QaFlagsService } from '../qa-flag/qa-flag.service'
+import { QaFlag } from '../../qa-flag/qa-flags.enum'
+import { QaFlagsService } from '../../qa-flag/qa-flag.service'
+import { AffiliationsInterstitialComponent } from 'src/app/cdk/interstitials/affiliations-interstitial/affiliations-interstitial.component'
 
 @Injectable({
   providedIn: 'root',
-}) // or some TOutput
-export class LoginAffiliationInterstitialManagerService
-  extends LoginBaseInterstitialManagerService<
-    AffilationsComponentDialogInput,
-    AffilationsComponentDialogOutput
-  >
-  implements
-    InterstitialManagerServiceInterface<
-      AffilationsComponentDialogInput,
-      AffilationsComponentDialogOutput
-    >
-{
+})
+export class LoginAffiliationInterstitialManagerService extends LoginBaseInterstitialManagerService<
+  AffilationsComponentDialogInput,
+  AffilationsComponentDialogOutput,
+  AffiliationsInterstitialComponent
+> {
+
   QA_FLAG_FOR_FORCE_INTERSTITIAL_AS_NEVER_SEEN =
     QaFlag.forceAffiliationInterstitialNotSeem
   INTERSTITIAL_NAME: InterstitialType = 'AFFILIATION_INTERSTITIAL'
@@ -73,8 +68,16 @@ export class LoginAffiliationInterstitialManagerService
     return AffiliationsInterstitialDialogComponent
   }
 
+
+
   // Build the data that goes into our dialog
-  getDialogDataToShow(
-    userRecord: UserRecord
-  ): AffilationsComponentDialogInput {}
+  getDialogDataToShow(userRecord: UserRecord): AffilationsComponentDialogInput {
+    return {
+      type: 'affiliation-interstitial',
+    }
+  }
+  
+  getComponentToShow(): ComponentType<AffiliationsInterstitialComponent> {
+    return AffiliationsInterstitialComponent
+  }
 }

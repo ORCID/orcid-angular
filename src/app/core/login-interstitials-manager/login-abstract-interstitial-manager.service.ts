@@ -2,18 +2,24 @@ import { Observable, of } from 'rxjs'
 import { TogglzService } from '../togglz/togglz.service'
 import { InterstitialsService } from 'src/app/cdk/interstitials/interstitials.service'
 import { UserRecord } from 'src/app/types/record.local'
-import { InterstitialManagerServiceInterface } from './login-interface-interstitial-manager.service'
 import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
 import { map, switchMap, take } from 'rxjs/operators'
 import { MatDialogConfig } from '@angular/material/dialog'
 import { ComponentType } from '@angular/cdk/overlay'
 import { InterstitialType } from 'src/app/cdk/interstitials/interstitial.type'
-import { QaFlag } from '../qa-flag/qa-flags.enum'
-import { QaFlagsService } from '../qa-flag/qa-flag.service'
 
-export abstract class LoginBaseInterstitialManagerService<TInput, TOutput>
-  implements InterstitialManagerServiceInterface<TInput, TOutput>
-{
+import { QaFlag } from '../../qa-flag/qa-flags.enum'
+import { QaFlagsService } from '../../qa-flag/qa-flag.service'
+import {
+  BaseInterstitialDialogInput,
+  BaseInterstitialDialogOutput,
+} from './dialog-interface'
+
+export abstract class LoginBaseInterstitialManagerService<
+  TInput extends BaseInterstitialDialogInput,
+  TOutput extends BaseInterstitialDialogOutput,
+  TComponent
+> {
   abstract INTERSTITIAL_NAME: InterstitialType
   abstract INTERSTITIAL_TOGGLE: string
   abstract QA_FLAG_FOR_FORCE_INTERSTITIAL_AS_NEVER_SEEN: QaFlag
@@ -73,6 +79,7 @@ export abstract class LoginBaseInterstitialManagerService<TInput, TOutput>
    */
   abstract getDialogComponentToShow(): ComponentType<any>
   abstract getDialogDataToShow(userRecord: UserRecord): TInput
+  abstract getComponentToShow(): ComponentType<TComponent>
 
   /**
    * Provide a default dialog config, which child classes can override if needed.
@@ -89,5 +96,15 @@ export abstract class LoginBaseInterstitialManagerService<TInput, TOutput>
   }
   getInterstitialTogglz(): Observable<boolean> {
     return this.togglzService.getStateOf(this.INTERSTITIAL_TOGGLE).pipe(take(1))
+  }
+
+  showInterstitialAsComponent(): Observable<ComponentType<TComponent>> {
+    return this.interstitialsService
+      .setInterstitialsViewed(this.INTERSTITIAL_NAME)
+      .pipe(
+        map(() => {
+          return this.getComponentToShow()
+        })
+      )
   }
 }
