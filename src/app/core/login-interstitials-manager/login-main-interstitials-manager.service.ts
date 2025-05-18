@@ -11,6 +11,8 @@ import {
 import { UserRecord } from 'src/app/types/record.local'
 import { LoginDomainInterstitialManagerService } from './implementations/login-domain-interstitials-manager.service'
 import { LoginAffiliationInterstitialManagerService } from './implementations/login-affiliation-interstitials-manager.service'
+import { AffilationsComponentDialogOutput } from 'src/app/cdk/interstitials/affiliations-interstitial/affiliations-interstitial-dialog.component'
+import { ShareEmailsDomainsComponentDialogOutput } from 'src/app/cdk/interstitials/share-emails-domains/share-emails-domains-dialog.component'
 import { InterstitialsService } from 'src/app/cdk/interstitials/interstitials.service'
 import { LoginBaseInterstitialManagerService } from './abstractions/login-abstract-interstitial-manager.service'
 import {
