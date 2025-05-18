@@ -1,5 +1,4 @@
 import { Observable, of } from 'rxjs'
-import { TogglzService } from '../togglz/togglz.service'
 import { InterstitialsService } from 'src/app/cdk/interstitials/interstitials.service'
 import { UserRecord } from 'src/app/types/record.local'
 import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
@@ -10,10 +9,9 @@ import { InterstitialType } from 'src/app/cdk/interstitials/interstitial.type'
 
 import { QaFlag } from '../../qa-flag/qa-flags.enum'
 import { QaFlagsService } from '../../qa-flag/qa-flag.service'
-import {
-  BaseInterstitialDialogInput,
-  BaseInterstitialDialogOutput,
-} from './dialog-interface'
+import { BaseInterstitialDialogInput, BaseInterstitialDialogOutput } from './dialog-interface'
+import { TogglzService } from '../../togglz/togglz.service'
+
 
 export abstract class LoginBaseInterstitialManagerService<
   TInput extends BaseInterstitialDialogInput,
