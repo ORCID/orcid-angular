@@ -58,7 +58,10 @@ describe('LoginDomainInterstitialManagerService', () => {
     })
 
     it('should have the correct INTERSTITIAL_TOGGLE', () => {
-      expect(service.INTERSTITIAL_TOGGLE).toBe('LOGIN_DOMAINS_INTERSTITIAL')
+      expect(service.INTERSTITIAL_TOGGLE).toEqual([
+        'LOGIN_DOMAINS_INTERSTITIAL',
+        'OAUTH_DOMAINS_INTERSTITIAL',
+      ])
     })
 
     it('should have the correct QA_FLAG_FOR_FORCE_INTERSTITIAL_AS_NEVER_SEEN', () => {

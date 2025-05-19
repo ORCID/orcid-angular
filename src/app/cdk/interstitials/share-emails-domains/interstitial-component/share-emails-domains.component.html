@@ -42,7 +42,7 @@
       <div formArrayName="items" class="items">
         <div
           *ngFor="
-            let item of this.form.controls?.items?.controls;
+            let item of this.form?.controls?.items?.controls;
             let i = index;
             let last = last
           "

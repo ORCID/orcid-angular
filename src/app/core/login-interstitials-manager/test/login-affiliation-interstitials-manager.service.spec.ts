@@ -58,9 +58,10 @@ describe('LoginAffiliationInterstitialManagerService', () => {
     })
 
     it('should have the correct Interstitial Toggle name', () => {
-      expect(service.INTERSTITIAL_TOGGLE).toEqual(
-        'LOGIN_AFFILIATION_INTERSTITIAL'
-      )
+      expect(service.INTERSTITIAL_TOGGLE).toEqual([
+        'LOGIN_AFFILIATION_INTERSTITIAL',
+        'OAUTH_AFFILIATION_INTERSTITIAL',
+      ] as string[])
     })
 
     it('should have the correct QA_FLAG_FOR_FORCE_INTERSTITIAL_AS_NEVER_SEEN', () => {

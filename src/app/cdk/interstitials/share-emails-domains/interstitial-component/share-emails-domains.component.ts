@@ -54,7 +54,7 @@ export class ShareEmailsDomainsComponent implements OnDestroy {
     this._recordService
       .getRecord()
       .pipe(
-        filter((record) => !!record.emails?.emailDomains),
+        filter((record) => !!record?.emails?.emailDomains),
         take(1),
         map((record) => {
           this.loadingEmails = false

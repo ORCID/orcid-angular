@@ -31,7 +31,7 @@ export class LoginAffiliationInterstitialManagerService extends LoginBaseInterst
   INTERSTITIAL_NAME: InterstitialType = 'AFFILIATION_INTERSTITIAL'
   INTERSTITIAL_TOGGLE = [
     'LOGIN_AFFILIATION_INTERSTITIAL',
-    'OAUTH_AFFILIATION_INTERSTITIAL_V2',
+    'OAUTH_AFFILIATION_INTERSTITIAL',
   ]
 
   constructor(
