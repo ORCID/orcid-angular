@@ -1,4 +1,4 @@
-<ng-container>
+<ng-container *ngIf="beforeSummit">
   <mat-card-header class="authorize-header">
     <mat-card-title role="heading" aria-level="1">
       <mat-icon class="logo-icon"
@@ -313,4 +313,78 @@
     [diameter]="80"
     [strokeWidth]="5"
   ></mat-spinner>
+</ng-container>
+<ng-container *ngIf="afterSummitStatus">
+  <mat-card-header class="authorize-header">
+    <mat-card-title role="heading" aria-level="1">
+      <mat-icon class="logo-icon"
+        ><img src="./assets/vectors/orcid.logo.icon.svg" alt="orcid logo" />
+      </mat-icon>
+      <h1
+        class="orc-font-heading-small"
+        i18n="@@interstitial.employmentAffiliationAdded"
+      >
+        Employment affiliation added
+      </h1>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="authorize-content">
+    <div i18n="@@interstitial.theFollowingAffiliation">
+      The following organization has been added to your ORCID record as an
+      employment affiliation.
+    </div>
+
+    <mat-divider class="green-divider"></mat-divider>
+    <div>
+      <div class="published-email-container">
+        <img
+          src="/assets/vectors/verified-outline-icon.svg"
+          alt="ORCID logo"
+          class="orcid-logo"
+        />
+        <div class="published-domain">
+          <strong class="$orcid-custom-typography">{{ addedAffiliation?.affiliationName?.value }}</strong>
+          <div>
+            <small> {{ addedAffiliation?.departmentName?.value }} </small>
+            <small
+              *ngIf="
+                addedAffiliation?.departmentName?.value &&
+                addedAffiliation?.roleTitle?.value
+              "
+            >
+              ,
+            </small>
+            <small> {{ addedAffiliation?.roleTitle?.value }} </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <mat-divider class="green-divider"></mat-divider>
+
+    <div i18n="@@interstitial.visitYourOrcidRecord">
+      Visit your ORCID record to manage your affiliations, works, professional
+      activities and more.
+    </div>
+
+    <mat-divider class="last"></mat-divider>
+
+    <button
+      class="authorize-button mat-button-wrap-text"
+      mat-raised-button
+      color="primary"
+      (click)="finish.emit()"
+      id="authorize-button"
+    >
+      <ng-container i18n="@@interstitial.continueTo">
+        Continue to
+      </ng-container>
+      <ng-container> {{ organizationName }} </ng-container>
+    </button>
+  </mat-card-content>
+
+  <ng-template #orcidIconTemplate>
+    <mat-icon class="scope orcid" role="presentation">
+      <img src="/assets/vectors/orcid.logo.black.icon.svg" alt=""
+    /></mat-icon>
+  </ng-template>
 </ng-container>

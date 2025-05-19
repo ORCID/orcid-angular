@@ -47,6 +47,7 @@ import { WorksEndpoint } from 'src/app/types/record-works.endpoint'
 import { RecordPersonService } from '../record-person/record-person.service'
 import { RecordPublicSideBarService } from '../record-public-side-bar/record-public-side-bar.service'
 import { UserInfoService } from '../user-info/user-info.service'
+import { O } from '@angular/cdk/keycodes'
 
 @Injectable({
   providedIn: 'root',
@@ -54,6 +55,7 @@ import { UserInfoService } from '../user-info/user-info.service'
 export class RecordService {
   recordSubject$: ReplaySubject<UserRecord>
   private readonly $destroy = new Subject()
+  getRecordPerformanceStartTime: number
 
   constructor(
     private _http: HttpClient,
@@ -92,6 +94,8 @@ export class RecordService {
    * @returns And subject with all the require data from private or public orcid record
    */
   getRecord(options?: UserRecordOptions): Observable<UserRecord> {
+    // Init a time for performance debugging
+
     if (!this.recordSubject$) {
       this.recordSubject$ = new ReplaySubject<UserRecord>(1)
       this.attachDebugger()
@@ -109,6 +113,10 @@ export class RecordService {
     // Un-subscribe from previous combineLatest subscriptions
     this.$destroy.next()
     // Subscribe to a new combineLatest http calls subscription
+
+    if (runtimeEnvironment.debugger) {
+      this.getRecordPerformanceStartTime = performance.now()
+    }
 
     combineLatest([
       this._recordEmailsService
@@ -206,7 +214,30 @@ export class RecordService {
   attachDebugger() {
     if (runtimeEnvironment.debugger) {
       this.recordSubject$.subscribe((value) => {
-        console.info('[Record Service] :', value)
+        if (value === undefined) {
+          return
+        }
+        // Once all values are loaded, we can check the time
+        const allValuesLoaded = !Object.keys(value).find(
+          (key) => value[key] === undefined
+        )
+
+        if (allValuesLoaded) {
+          if (this.getRecordPerformanceStartTime) {
+            const executionTime = performance.now() - this.getRecordPerformanceStartTime
+            this.getRecordPerformanceStartTime = undefined
+            console.info(
+              '[Record Service] :',
+              'Time to load all record data:',
+              executionTime,
+              'ms'
+            )
+
+            console.info('[Record Service] :', 'Initial data:', value)
+          } else {
+            console.info('[Record Service] Data refreshed:', value)
+          }
+        }
       })
     }
   }
@@ -312,6 +343,6 @@ export class RecordService {
         .getPublicRecordSideBar(options)
         .pipe(map((value) => value.lastModifiedTime))
     }
-    return of(undefined)
+    return of('')
   }
 }

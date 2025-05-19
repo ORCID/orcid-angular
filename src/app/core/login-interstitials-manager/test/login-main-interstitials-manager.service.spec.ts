@@ -2,13 +2,13 @@ import { fakeAsync, TestBed, tick } from '@angular/core/testing'
 import { of, EMPTY, throwError } from 'rxjs'
 import { InterstitialsService } from 'src/app/cdk/interstitials/interstitials.service'
 import { UserRecord } from 'src/app/types/record.local'
-import { ShareEmailsDomainsComponentDialogOutput } from 'src/app/cdk/interstitials/share-emails-domains/share-emails-domains-dialog.component'
-import { AffilationsComponentDialogOutput } from 'src/app/cdk/interstitials/affiliations-interstitial/affiliations-interstitial-dialog.component'
 import { EmailsEndpoint, UserInfo } from 'src/app/types'
 import { AffiliationUIGroup } from 'src/app/types/record-affiliation.endpoint'
 import { LoginAffiliationInterstitialManagerService } from '../implementations/login-affiliation-interstitials-manager.service'
 import { LoginDomainInterstitialManagerService } from '../implementations/login-domain-interstitials-manager.service'
 import { LoginMainInterstitialsManagerService } from '../login-main-interstitials-manager.service'
+import { ShareEmailsDomainsComponentDialogOutput } from 'src/app/cdk/interstitials/share-emails-domains/interstitial-dialog-extend/share-emails-domains-dialog.component'
+import { AffilationsComponentDialogOutput } from 'src/app/cdk/interstitials/affiliations-interstitial/interstitial-dialog-extend/affiliations-interstitial-dialog.component'
 
 // Mock runtime environment for debugging logs if needed
 // (Remove or adapt if your environment differs)
@@ -119,11 +119,11 @@ describe('LoginMainInterstitialsManagerService', () => {
     mockLoginDomainInterstitialManagerService.userIsElegibleForInterstitial.calls.reset()
     mockLoginDomainInterstitialManagerService.getInterstitialTogglz.calls.reset()
     mockLoginDomainInterstitialManagerService.getInterstitialViewed.calls.reset()
-    mockLoginDomainInterstitialManagerService.showInterstitial.calls.reset()
+    mockLoginDomainInterstitialManagerService.showInterstitialAsDialog.calls.reset()
     mockLoginAffiliationInterstitialManagerService.userIsElegibleForInterstitial.calls.reset()
     mockLoginAffiliationInterstitialManagerService.getInterstitialTogglz.calls.reset()
     mockLoginAffiliationInterstitialManagerService.getInterstitialViewed.calls.reset()
-    mockLoginAffiliationInterstitialManagerService.showInterstitial.calls.reset()
+    mockLoginAffiliationInterstitialManagerService.showInterstitialAsDialog.calls.reset()
   })
 
   it('should be created', () => {
@@ -186,7 +186,7 @@ describe('LoginMainInterstitialsManagerService', () => {
     mockLoginDomainInterstitialManagerService.getInterstitialViewed.and.returnValue(
       of(false)
     )
-    mockLoginDomainInterstitialManagerService.showInterstitial.and.returnValue(
+    mockLoginDomainInterstitialManagerService.showInterstitialAsDialog.and.returnValue(
       of({
         type: 'domains-interstitial',
       } as ShareEmailsDomainsComponentDialogOutput)
@@ -202,7 +202,7 @@ describe('LoginMainInterstitialsManagerService', () => {
     mockLoginAffiliationInterstitialManagerService.getInterstitialViewed.and.returnValue(
       of(false)
     )
-    mockLoginAffiliationInterstitialManagerService.showInterstitial.and.returnValue(
+    mockLoginAffiliationInterstitialManagerService.showInterstitialAsDialog.and.returnValue(
       of({} as AffilationsComponentDialogOutput)
     )
 
@@ -225,7 +225,7 @@ describe('LoginMainInterstitialsManagerService', () => {
           mockLoginDomainInterstitialManagerService.getInterstitialViewed
         ).toHaveBeenCalled()
         expect(
-          mockLoginDomainInterstitialManagerService.showInterstitial
+          mockLoginDomainInterstitialManagerService.showInterstitialAsDialog
         ).toHaveBeenCalled()
 
         // Affiliation service should NOT have been used
@@ -258,7 +258,7 @@ describe('LoginMainInterstitialsManagerService', () => {
     mockLoginDomainInterstitialManagerService.getInterstitialViewed.and.returnValue(
       of(false)
     )
-    mockLoginDomainInterstitialManagerService.showInterstitial.and.returnValue(
+    mockLoginDomainInterstitialManagerService.showInterstitialAsDialog.and.returnValue(
       of({
         type: 'domains-interstitial',
       } as ShareEmailsDomainsComponentDialogOutput)
@@ -274,7 +274,7 @@ describe('LoginMainInterstitialsManagerService', () => {
     mockLoginAffiliationInterstitialManagerService.getInterstitialViewed.and.returnValue(
       of(false)
     )
-    mockLoginAffiliationInterstitialManagerService.showInterstitial.and.returnValue(
+    mockLoginAffiliationInterstitialManagerService.showInterstitialAsDialog.and.returnValue(
       of({
         type: 'affiliation-interstitial',
       } as AffilationsComponentDialogOutput)
@@ -298,7 +298,7 @@ describe('LoginMainInterstitialsManagerService', () => {
           mockLoginDomainInterstitialManagerService.getInterstitialViewed
         ).not.toHaveBeenCalled()
         expect(
-          mockLoginDomainInterstitialManagerService.showInterstitial
+          mockLoginDomainInterstitialManagerService.showInterstitialAsDialog
         ).not.toHaveBeenCalled()
 
         // Then second service steps in
@@ -312,7 +312,7 @@ describe('LoginMainInterstitialsManagerService', () => {
           mockLoginAffiliationInterstitialManagerService.getInterstitialViewed
         ).toHaveBeenCalled()
         expect(
-          mockLoginAffiliationInterstitialManagerService.showInterstitial
+          mockLoginAffiliationInterstitialManagerService.showInterstitialAsDialog
         ).toHaveBeenCalled()
       },
     })
@@ -347,7 +347,7 @@ describe('LoginMainInterstitialsManagerService', () => {
           mockLoginDomainInterstitialManagerService.getInterstitialViewed
         ).not.toHaveBeenCalled()
         expect(
-          mockLoginDomainInterstitialManagerService.showInterstitial
+          mockLoginDomainInterstitialManagerService.showInterstitialAsDialog
         ).not.toHaveBeenCalled()
 
         expect(
@@ -357,7 +357,7 @@ describe('LoginMainInterstitialsManagerService', () => {
           mockLoginAffiliationInterstitialManagerService.getInterstitialViewed
         ).not.toHaveBeenCalled()
         expect(
-          mockLoginAffiliationInterstitialManagerService.showInterstitial
+          mockLoginAffiliationInterstitialManagerService.showInterstitialAsDialog
         ).not.toHaveBeenCalled()
       },
     })

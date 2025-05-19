@@ -21,7 +21,7 @@ export abstract class LoginBaseInterstitialManagerService<
   TComponent
 > {
   abstract INTERSTITIAL_NAME: InterstitialType
-  abstract INTERSTITIAL_TOGGLE: string
+  abstract INTERSTITIAL_TOGGLE: string[]
   abstract QA_FLAG_FOR_FORCE_INTERSTITIAL_AS_NEVER_SEEN: QaFlag
 
   // This will usually get updated on subscription to togglz
@@ -57,7 +57,7 @@ export abstract class LoginBaseInterstitialManagerService<
    *   2) Opens the dialog
    *   3) Returns whatever the dialog emits on close
    */
-  showInterstitial(userRecord: UserRecord): Observable<TOutput> {
+  showInterstitialAsDialog(userRecord: UserRecord): Observable<TOutput> {
     return this.interstitialsService
       .setInterstitialsViewed(this.INTERSTITIAL_NAME)
       .pipe(
@@ -94,8 +94,11 @@ export abstract class LoginBaseInterstitialManagerService<
       maxHeight: 'calc(100vh - 20px)',
     }
   }
-  getInterstitialTogglz(): Observable<boolean> {
-    return this.togglzService.getStateOf(this.INTERSTITIAL_TOGGLE).pipe(take(1))
+  getInterstitialTogglz(toggglzPrefix: 'OAUTH' | 'LOGIN'): Observable<boolean> {
+    const togglzName = this.INTERSTITIAL_TOGGLE.find((toggle) =>
+      toggle.startsWith(toggglzPrefix)
+    )
+    return this.togglzService.getStateOf(togglzName).pipe(take(1))
   }
 
   showInterstitialAsComponent(): Observable<ComponentType<TComponent>> {

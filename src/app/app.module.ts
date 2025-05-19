@@ -21,6 +21,7 @@ import {
 import { MatLegacySelectModule } from '@angular/material/legacy-select'
 import { MatLegacyFormFieldModule } from '@angular/material/legacy-form-field'
 import { MatLegacyInputModule } from '@angular/material/legacy-input'
+import { FormsModule } from '@angular/forms'
 
 @NgModule({
   declarations: [AppComponent],
@@ -38,6 +39,7 @@ import { MatLegacyInputModule } from '@angular/material/legacy-input'
     PseudoModule, // Remove on angular 10 https://bit.ly/3ezbF4v
     // Environmental dependent modules
     EnvironmentBannerModule,
+    FormsModule
   ],
   providers: [
     TitleService,

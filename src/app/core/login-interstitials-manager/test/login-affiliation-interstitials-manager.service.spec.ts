@@ -6,13 +6,13 @@ import {
 import { of, Subject } from 'rxjs'
 import { InterstitialsService } from 'src/app/cdk/interstitials/interstitials.service'
 
-import { AffiliationsInterstitialDialogComponent } from 'src/app/cdk/interstitials/affiliations-interstitial/affiliations-interstitial-dialog.component'
 import { UserRecord } from 'src/app/types/record.local'
 import { InterstitialType } from 'src/app/cdk/interstitials/interstitial.type'
 import { TogglzService } from '../../togglz/togglz.service'
 import { QaFlagsService } from '../../qa-flag/qa-flag.service'
 import { QaFlag } from '../../qa-flag/qa-flags.enum'
 import { LoginAffiliationInterstitialManagerService } from '../implementations/login-affiliation-interstitials-manager.service'
+import { AffiliationsInterstitialDialogComponent } from 'src/app/cdk/interstitials/affiliations-interstitial/interstitial-dialog-extend/affiliations-interstitial-dialog.component'
 
 describe('LoginAffiliationInterstitialManagerService', () => {
   let service: LoginAffiliationInterstitialManagerService
@@ -161,7 +161,7 @@ describe('LoginAffiliationInterstitialManagerService', () => {
       mockMatDialog.open.and.returnValue(mockDialogRef)
 
       // Act
-      service.showInterstitial(userRecord).subscribe((dialogResult) => {
+      service.showInterstitialAsDialog(userRecord).subscribe((dialogResult) => {
         // We expect to get the value we passed into afterClosed$.next(...) eventually.
         expect(dialogResult).toEqual({ type: 'affiliation-interstitial' })
         done()

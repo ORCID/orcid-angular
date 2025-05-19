@@ -8,12 +8,12 @@ import { InterstitialsService } from 'src/app/cdk/interstitials/interstitials.se
 
 import { InterstitialType } from 'src/app/cdk/interstitials/interstitial.type'
 import { UserRecord } from 'src/app/types/record.local'
-import { ShareEmailsDomainsDialogComponent } from 'src/app/cdk/interstitials/share-emails-domains/share-emails-domains-dialog.component'
 import { AssertionVisibilityString, EmailsEndpoint } from 'src/app/types'
 import { QaFlagsService } from '../../qa-flag/qa-flag.service'
 import { QaFlag } from '../../qa-flag/qa-flags.enum'
 import { TogglzService } from '../../togglz/togglz.service'
 import { LoginDomainInterstitialManagerService } from '../implementations/login-domain-interstitials-manager.service'
+import { ShareEmailsDomainsDialogComponent } from 'src/app/cdk/interstitials/share-emails-domains/interstitial-dialog-extend/share-emails-domains-dialog.component'
 
 describe('LoginDomainInterstitialManagerService', () => {
   let service: LoginDomainInterstitialManagerService
@@ -197,7 +197,7 @@ describe('LoginDomainInterstitialManagerService', () => {
       mockMatDialog.open.and.returnValue(mockDialogRef)
 
       // Act
-      service.showInterstitial(userRecord).subscribe((dialogResult) => {
+      service.showInterstitialAsDialog(userRecord).subscribe((dialogResult) => {
         expect(dialogResult).toEqual({ type: 'domains-interstitial' })
         done()
       })

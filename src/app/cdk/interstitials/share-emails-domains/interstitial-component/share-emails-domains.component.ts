@@ -6,7 +6,6 @@ import {
   OnDestroy,
   Output,
 } from '@angular/core'
-import { PlatformInfoService } from '../../platform-info'
 import {
   AssertionVisibilityString,
   EmailsEndpoint,
@@ -14,16 +13,13 @@ import {
 } from 'src/app/types'
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
 import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
-import { error } from 'console'
-import { WINDOW } from '../../window'
-import {
-  MAT_LEGACY_DIALOG_DATA,
-  MatLegacyDialogRef,
-  MatLegacyDialogState,
-} from '@angular/material/legacy-dialog'
-import { map, takeUntil } from 'rxjs/operators'
+
+import { filter, map, switchMap, take, takeUntil } from 'rxjs/operators'
 import { UserService } from 'src/app/core'
 import { Subject } from 'rxjs'
+import { PlatformInfoService } from 'src/app/cdk/platform-info/platform-info.service'
+import { WINDOW } from 'src/app/cdk/window/window.service'
+import { RecordService } from 'src/app/core/record/record.service'
 
 @Component({
   selector: 'app-share-emails-domains',
@@ -35,18 +31,18 @@ import { Subject } from 'rxjs'
 })
 export class ShareEmailsDomainsComponent implements OnDestroy {
   beforeSummit = true
-  afterSummit = false
+  afterSummitStatus = false
   userPrivateDomains: AssertionVisibilityString[]
-  @Input() userEmailsJson: EmailsEndpoint
   form: any
   $destroy: Subject<void> = new Subject<void>()
-  oauthRequest: RequestInfoForm
   organizationName: string
+  userEmailsJson: EmailsEndpoint
   constructor(
     public platformInfo: PlatformInfoService,
     private fb: FormBuilder,
     private recordEmailsService: RecordEmailsService,
     private _user: UserService,
+    private _recordService: RecordService,
     @Inject(WINDOW) private window: Window
   ) {}
 
@@ -55,21 +51,34 @@ export class ShareEmailsDomainsComponent implements OnDestroy {
 
   ngOnInit() {
     this.window.scrollTo(0, 0)
-    this.userPrivateDomains = this.getTop3MostRecentPrivateDomains(
-      this.userEmailsJson
-    )
-    this.form = this.fb.group({
-      items: this.fb.array(
-        this.userPrivateDomains?.map((item) => this.createItemFormGroup(item))
-      ),
-    })
+    this._recordService
+      .getRecord()
+      .pipe(
+        filter((record) => !!record.emails?.emailDomains),
+        take(1),
+        map((record) => {
+          this.loadingEmails = false
+          this.userEmailsJson = record.emails
+          this.userPrivateDomains = this.getTop3MostRecentPrivateDomains(
+            record.emails
+          )
+
+          this.form = this.fb.group({
+            items: this.fb.array(
+              this.userPrivateDomains?.map((item) =>
+                this.createItemFormGroup(item)
+              )
+            ),
+          })
+        })
+      )
+      .subscribe()
 
     this._user
       .getUserSession()
       .pipe(takeUntil(this.$destroy))
       .subscribe((userInfo) => {
-        this.oauthRequest = userInfo.oauthSession
-        this.organizationName = this.oauthRequest?.clientName
+        this.organizationName = userInfo.oauthSession?.clientName
       })
   }
 
@@ -113,7 +122,7 @@ export class ShareEmailsDomainsComponent implements OnDestroy {
 
       this.recordEmailsService.postEmails(this.userEmailsJson).subscribe(
         (response) => {
-          this.afterEmailUpdates(this.domainToMakePublic)
+          this.afterSummit(this.domainToMakePublic)
         },
         (error) => this.finishIntertsitial()
       )
@@ -121,8 +130,8 @@ export class ShareEmailsDomainsComponent implements OnDestroy {
       this.finishIntertsitial()
     }
   }
-  afterEmailUpdates(emails: string[]) {
-    this.afterSummit = true
+  afterSummit(emails: string[]) {
+    this.afterSummitStatus = true
     this.beforeSummit = false
     setTimeout(() => {
       this.finishIntertsitial()

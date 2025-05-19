@@ -6,7 +6,6 @@ import {
   Input,
   Output,
 } from '@angular/core'
-import { PlatformInfoService } from '../../platform-info'
 import { AssertionVisibilityString, EmailsEndpoint } from 'src/app/types'
 import {
   FormBuilder,
@@ -16,14 +15,12 @@ import {
 } from '@angular/forms'
 import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
 import { error } from 'console'
-import { WINDOW } from '../../window'
 import {
   MAT_LEGACY_DIALOG_DATA,
   MatLegacyDialogRef,
   MatLegacyDialogState,
 } from '@angular/material/legacy-dialog'
 import { OrganizationsService, UserService } from 'src/app/core'
-import { AffiliationsInterstitialComponent } from './affiliations-interstitial.component'
 import { RecordService } from 'src/app/core/record/record.service'
 import { RecordCountriesService } from 'src/app/core/record-countries/record-countries.service'
 import { RecordAffiliationService } from 'src/app/core/record-affiliations/record-affiliations.service'
@@ -33,6 +30,10 @@ import {
   BaseInterstitialDialogInput,
   BaseInterstitialDialogOutput,
 } from 'src/app/core/login-interstitials-manager/abstractions/dialog-interface'
+import { PlatformInfoService } from 'src/app/cdk/platform-info/platform-info.service'
+import { WINDOW } from 'src/app/cdk/window'
+import { AffiliationsInterstitialComponent } from '../interstitial-component/affiliations-interstitial.component'
+import { Affiliation } from 'src/app/types/record-affiliation.endpoint'
 
 export interface AffilationsComponentDialogInput
   extends BaseInterstitialDialogInput {
@@ -42,14 +43,16 @@ export interface AffilationsComponentDialogInput
 export interface AffilationsComponentDialogOutput
   extends BaseInterstitialDialogOutput {
   type: 'affiliation-interstitial'
-  addedAffiliation?: string
+  addedAffiliation?: Affiliation
 }
 
 @Component({
-  templateUrl: './affiliations-interstitial.component.html',
+  templateUrl:
+    '../interstitial-component/affiliations-interstitial.component.html',
   styleUrls: [
     './affiliations-interstitial-dialog.component.scss',
-    './affiliations-interstitial.component.scss-theme.scss',
+    '../interstitial-component/affiliations-interstitial.component.scss',
+    '../interstitial-component/affiliations-interstitial.component.scss-theme.scss',
   ],
 })
 export class AffiliationsInterstitialDialogComponent extends AffiliationsInterstitialComponent {
@@ -77,10 +80,15 @@ export class AffiliationsInterstitialDialogComponent extends AffiliationsInterst
       formBuilder,
       recordService,
       organizationService,
-      register2Service
+      register2Service,
+      user
     )
   }
-  override finishIntertsitial(affiliation?: string) {
+  override afterSummit(affiliation?: Affiliation) {
+    this.finishIntertsitial(affiliation)
+  }
+
+  override finishIntertsitial(affiliation?: Affiliation) {
     this.dialogRef.close({
       type: 'affiliation-interstitial',
       addedAffiliation: affiliation,

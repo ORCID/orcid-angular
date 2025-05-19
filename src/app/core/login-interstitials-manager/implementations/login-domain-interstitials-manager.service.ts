@@ -1,11 +1,6 @@
 import { Injectable, Type } from '@angular/core'
 import { Observable, of } from 'rxjs'
 
-import {
-  ShareEmailsDomainsComponentDialogInput,
-  ShareEmailsDomainsDialogComponent,
-  ShareEmailsDomainsComponentDialogOutput,
-} from 'src/app/cdk/interstitials/share-emails-domains/share-emails-domains-dialog.component'
 import { InterstitialsService } from 'src/app/cdk/interstitials/interstitials.service'
 import { EmailsEndpoint } from 'src/app/types'
 import { UserRecord } from 'src/app/types/record.local'
@@ -14,10 +9,14 @@ import { InterstitialType } from 'src/app/cdk/interstitials/interstitial.type'
 import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
 import { QaFlag } from '../../qa-flag/qa-flags.enum'
 import { QaFlagsService } from '../../qa-flag/qa-flag.service'
-import { ShareEmailsDomainsComponent } from 'src/app/cdk/interstitials/share-emails-domains/share-emails-domains.component'
 import { TogglzService } from '../../togglz/togglz.service'
 import { LoginBaseInterstitialManagerService } from '../abstractions/login-abstract-interstitial-manager.service'
-
+import { ShareEmailsDomainsComponent } from 'src/app/cdk/interstitials/share-emails-domains/interstitial-component/share-emails-domains.component'
+import {
+  ShareEmailsDomainsComponentDialogInput,
+  ShareEmailsDomainsComponentDialogOutput,
+  ShareEmailsDomainsDialogComponent,
+} from 'src/app/cdk/interstitials/share-emails-domains/interstitial-dialog-extend/share-emails-domains-dialog.component'
 
 @Injectable({
   providedIn: 'root',
@@ -27,11 +26,13 @@ export class LoginDomainInterstitialManagerService extends LoginBaseInterstitial
   ShareEmailsDomainsComponentDialogOutput,
   ShareEmailsDomainsComponent
 > {
-
   QA_FLAG_FOR_FORCE_INTERSTITIAL_AS_NEVER_SEEN =
     QaFlag.forceDomainInterstitialAsNeverSeem
   INTERSTITIAL_NAME: InterstitialType = 'DOMAIN_INTERSTITIAL'
-  INTERSTITIAL_TOGGLE = 'LOGIN_DOMAINS_INTERSTITIAL'
+  INTERSTITIAL_TOGGLE = [
+    'LOGIN_DOMAINS_INTERSTITIAL',
+    'OAUTH_DOMAINS_INTERSTITIAL',
+  ]
 
   constructor(
     _matDialog: MatDialog,
@@ -50,10 +51,15 @@ export class LoginDomainInterstitialManagerService extends LoginBaseInterstitial
     // Basic checks
     if (!userRecord?.emails?.emailDomains?.length) return of(false)
 
+    const isImpersonation = !(
+      userRecord?.userInfo?.REAL_USER_ORCID ===
+      userRecord?.userInfo?.EFFECTIVE_USER_ORCID
+    )
+
     const hasNoPublicDomains = !this.userHasPublicDomains(userRecord.emails)
     const hasPrivateDomains = this.userHasPrivateDomains(userRecord.emails)
 
-    if (!hasNoPublicDomains || !hasPrivateDomains) {
+    if (!hasNoPublicDomains || !hasPrivateDomains || isImpersonation) {
       return of(false)
     }
     return of(true)
