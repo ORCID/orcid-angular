@@ -6,34 +6,43 @@ import {
   Input,
   Output,
 } from '@angular/core'
-import { PlatformInfoService } from '../../platform-info'
 import { AssertionVisibilityString, EmailsEndpoint } from 'src/app/types'
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
 import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
 import { error } from 'console'
-import { WINDOW } from '../../window'
 import {
   MAT_LEGACY_DIALOG_DATA,
   MatLegacyDialogRef,
   MatLegacyDialogState,
 } from '@angular/material/legacy-dialog'
-import { ShareEmailsDomainsComponent } from './share-emails-domains.component'
 import { UserService } from 'src/app/core'
+import {
+  BaseInterstitialDialogInput,
+  BaseInterstitialDialogOutput,
+} from 'src/app/core/login-interstitials-manager/abstractions/dialog-interface'
+import { PlatformInfoService } from 'src/app/cdk/platform-info'
+import { WINDOW } from 'src/app/cdk/window'
+import { ShareEmailsDomainsComponent } from '../interstitial-component/share-emails-domains.component'
+import { RecordService } from 'src/app/core/record/record.service'
 
-export type ShareEmailsDomainsComponentDialogInput = {
+export interface ShareEmailsDomainsComponentDialogInput
+  extends BaseInterstitialDialogInput {
+  type: 'domains-interstitial'
   userEmailsJson: EmailsEndpoint
   organizationName?: string
 }
-export type ShareEmailsDomainsComponentDialogOutput = {
+export interface ShareEmailsDomainsComponentDialogOutput
+  extends BaseInterstitialDialogOutput {
   type: 'domains-interstitial'
   newlySharedDomains?: string[]
 }
 
 @Component({
-  templateUrl: './share-emails-domains.component.html',
+  templateUrl: '../interstitial-component/share-emails-domains.component.html',
   styleUrls: [
     './share-emails-domains-dialog.component.scss',
-    './share-emails-domains.component.scss-theme.scss',
+    '../interstitial-component/share-emails-domains.component.scss',
+    '../interstitial-component/share-emails-domains.component.scss-theme.scss',
   ],
 })
 export class ShareEmailsDomainsDialogComponent extends ShareEmailsDomainsComponent {
@@ -50,9 +59,10 @@ export class ShareEmailsDomainsDialogComponent extends ShareEmailsDomainsCompone
       ShareEmailsDomainsDialogComponent,
       ShareEmailsDomainsComponentDialogOutput
     >,
+    _recordService: RecordService,
     user: UserService
   ) {
-    super(platformInfo, fb, recordEmailsService, user, window)
+    super(platformInfo, fb, recordEmailsService, user, _recordService, window)
     if (this.data) {
       this.userEmailsJson = this.data.userEmailsJson
       this.organizationName = this.data.organizationName
@@ -69,7 +79,7 @@ export class ShareEmailsDomainsDialogComponent extends ShareEmailsDomainsCompone
     })
   }
 
-  override afterEmailUpdates(emails: string[]) {
+  override afterSummit(emails: string[]) {
     this.finishIntertsitial(emails)
   }
 }

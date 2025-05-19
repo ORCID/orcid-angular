@@ -33,9 +33,9 @@ import { DOCUMENT, Location } from '@angular/common'
 import { filter, map } from 'rxjs/operators'
 import { CanonocalUrlService } from 'src/app/core/canonocal-url/canonocal-url.service'
 import { RecordUtil } from 'src/app/shared/utils/record.util'
-import { AffilationsComponentDialogOutput } from 'src/app/cdk/interstitials/affiliations-interstitial/affiliations-interstitial-dialog.component'
-import { ShareEmailsDomainsComponentDialogOutput } from 'src/app/cdk/interstitials/share-emails-domains/share-emails-domains-dialog.component'
 import { LoginMainInterstitialsManagerService } from 'src/app/core/login-interstitials-manager/login-main-interstitials-manager.service'
+import { ShareEmailsDomainsComponentDialogOutput } from 'src/app/cdk/interstitials/share-emails-domains/interstitial-dialog-extend/share-emails-domains-dialog.component'
+import { AffilationsComponentDialogOutput } from 'src/app/cdk/interstitials/affiliations-interstitial/interstitial-dialog-extend/affiliations-interstitial-dialog.component'
 
 @Component({
   selector: 'app-my-orcid',
@@ -227,7 +227,11 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
         mergeMap((userRecord) => {
           const interstitialDialog =
             this._LoginMainInterstitialsManagerService.checkLoginInterstitials(
-              userRecord
+              userRecord,
+              {
+                returnType: 'dialog',
+                togglzPrefix: 'LOGIN',
+              }
             )
           if (interstitialDialog) {
             return this.handlesInterstitialOutput(interstitialDialog)
@@ -278,7 +282,8 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
           this.newlySharedDomains = dialogOutput.newlySharedDomains
         }
         if (dialogOutput.type === 'affiliation-interstitial') {
-          this.newAddedAffiliation = dialogOutput.addedAffiliation
+          this.newAddedAffiliation =
+            dialogOutput.addedAffiliation?.affiliationName?.value
         }
       })
     )

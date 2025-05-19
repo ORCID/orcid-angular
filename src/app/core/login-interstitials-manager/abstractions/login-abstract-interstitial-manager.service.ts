@@ -1,21 +1,27 @@
 import { Observable, of } from 'rxjs'
-import { TogglzService } from '../togglz/togglz.service'
 import { InterstitialsService } from 'src/app/cdk/interstitials/interstitials.service'
 import { UserRecord } from 'src/app/types/record.local'
-import { InterstitialManagerServiceInterface } from './login-interface-interstitial-manager.service'
 import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
 import { map, switchMap, take } from 'rxjs/operators'
 import { MatDialogConfig } from '@angular/material/dialog'
 import { ComponentType } from '@angular/cdk/overlay'
 import { InterstitialType } from 'src/app/cdk/interstitials/interstitial.type'
-import { QaFlag } from '../qa-flag/qa-flags.enum'
-import { QaFlagsService } from '../qa-flag/qa-flag.service'
 
-export abstract class LoginBaseInterstitialManagerService<TInput, TOutput>
-  implements InterstitialManagerServiceInterface<TInput, TOutput>
-{
+import { QaFlag } from '../../qa-flag/qa-flags.enum'
+import { QaFlagsService } from '../../qa-flag/qa-flag.service'
+import {
+  BaseInterstitialDialogInput,
+  BaseInterstitialDialogOutput,
+} from './dialog-interface'
+import { TogglzService } from '../../togglz/togglz.service'
+
+export abstract class LoginBaseInterstitialManagerService<
+  TInput extends BaseInterstitialDialogInput,
+  TOutput extends BaseInterstitialDialogOutput,
+  TComponent
+> {
   abstract INTERSTITIAL_NAME: InterstitialType
-  abstract INTERSTITIAL_TOGGLE: string
+  abstract INTERSTITIAL_TOGGLE: string[]
   abstract QA_FLAG_FOR_FORCE_INTERSTITIAL_AS_NEVER_SEEN: QaFlag
 
   // This will usually get updated on subscription to togglz
@@ -51,7 +57,7 @@ export abstract class LoginBaseInterstitialManagerService<TInput, TOutput>
    *   2) Opens the dialog
    *   3) Returns whatever the dialog emits on close
    */
-  showInterstitial(userRecord: UserRecord): Observable<TOutput> {
+  showInterstitialAsDialog(userRecord: UserRecord): Observable<TOutput> {
     return this.interstitialsService
       .setInterstitialsViewed(this.INTERSTITIAL_NAME)
       .pipe(
@@ -73,6 +79,7 @@ export abstract class LoginBaseInterstitialManagerService<TInput, TOutput>
    */
   abstract getDialogComponentToShow(): ComponentType<any>
   abstract getDialogDataToShow(userRecord: UserRecord): TInput
+  abstract getComponentToShow(): ComponentType<TComponent>
 
   /**
    * Provide a default dialog config, which child classes can override if needed.
@@ -87,7 +94,20 @@ export abstract class LoginBaseInterstitialManagerService<TInput, TOutput>
       maxHeight: 'calc(100vh - 20px)',
     }
   }
-  getInterstitialTogglz(): Observable<boolean> {
-    return this.togglzService.getStateOf(this.INTERSTITIAL_TOGGLE).pipe(take(1))
+  getInterstitialTogglz(toggglzPrefix: 'OAUTH' | 'LOGIN'): Observable<boolean> {
+    const togglzName = this.INTERSTITIAL_TOGGLE.find((toggle) =>
+      toggle.startsWith(toggglzPrefix)
+    )
+    return this.togglzService.getStateOf(togglzName).pipe(take(1))
+  }
+
+  showInterstitialAsComponent(): Observable<ComponentType<TComponent>> {
+    return this.interstitialsService
+      .setInterstitialsViewed(this.INTERSTITIAL_NAME)
+      .pipe(
+        map(() => {
+          return this.getComponentToShow()
+        })
+      )
   }
 }

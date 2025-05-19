@@ -2,8 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
 import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
-import { PlatformInfoService } from '../../platform-info'
-import { WINDOW_PROVIDERS } from '../../window'
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { OrganizationsService, UserService } from 'src/app/core'
 import { RecordAffiliationService } from 'src/app/core/record-affiliations/record-affiliations.service'
@@ -11,6 +9,8 @@ import { RecordService } from 'src/app/core/record/record.service'
 import { Register2Service } from 'src/app/core/register2/register2.service'
 import { AffiliationsInterstitialComponent } from './affiliations-interstitial.component'
 import { EMPTY } from 'rxjs'
+import { PlatformInfoService } from 'src/app/cdk/platform-info'
+import { WINDOW_PROVIDERS } from 'src/app/cdk/window'
 
 describe('AffiliationsInterstitialComponent', () => {
   let component: AffiliationsInterstitialComponent

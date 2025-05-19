@@ -18,7 +18,9 @@ export class QaFlagsService {
     // we only do a simple localStorage check.
     const value = localStorage.getItem(flag)
     if (runtimeEnvironment.debugger && value) {
-      console.info(`[QAFlag] Caution you have "${flag}" is set to "${value}"`)
+      console.info(
+        `[QAFlag] ⚠️ Caution you have "${flag}" is set to "${value}"`
+      )
     }
     return value === 'true'
   }

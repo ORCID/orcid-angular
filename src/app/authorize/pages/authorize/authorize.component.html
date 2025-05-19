@@ -12,11 +12,7 @@
             *ngIf="showAuthorizationComponent"
             (redirectUrl)="handleRedirect($event)"
           ></app-form-authorize>
-          <app-share-emails-domains
-            *ngIf="showInterstital"
-            (finish)="finishRedirect()"
-            [userEmailsJson]="originalEmailsBackendCopy"
-          ></app-share-emails-domains>
+          <ng-template #interstitialOutlet cdkPortalOutlet></ng-template>
           <app-oauth-error *ngIf="showAuthorizationError"></app-oauth-error>
         </mat-card>
       </div>
