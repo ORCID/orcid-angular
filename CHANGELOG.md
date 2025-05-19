@@ -1,3 +1,9 @@
+## v2.115.2 - 2025-05-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.1...v2.115.2)
+
+- [#2523](https://github.com/ORCID/orcid-angular/pull/2523): 9803-truncate-extremely-long-user-names-in-the-global-header
+
 ## v2.115.1 - 2025-05-19
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.0...v2.115.1)
