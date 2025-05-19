@@ -16,7 +16,6 @@ import { OauthErrorComponent } from './components/oauth-error/oauth-error.compon
 import { AuthorizeComponent } from './pages/authorize/authorize.component'
 import { FormAuthorizeComponent } from './components/form-authorize/form-authorize.component'
 import { InterstitialsModule } from '../cdk/interstitials/interstitials.module'
-import { DynamicHostDirective } from './components/dynamic-interstitial-host/dynamic-interstitial-host.interstitial'
 import { PortalModule } from '@angular/cdk/portal'
 
 @NgModule({
@@ -24,7 +23,6 @@ import { PortalModule } from '@angular/cdk/portal'
     AuthorizeComponent,
     OauthErrorComponent,
     FormAuthorizeComponent,
-    DynamicHostDirective,
   ],
   imports: [
     PortalModule,

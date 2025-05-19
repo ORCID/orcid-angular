@@ -25,7 +25,6 @@ import { ERROR_REPORT } from 'src/app/errors'
 import { EmailsEndpoint, RequestInfoForm } from 'src/app/types'
 import { UserRecord } from 'src/app/types/record.local'
 import { UserSession } from 'src/app/types/session.local'
-import { DynamicHostDirective } from '../../components/dynamic-interstitial-host/dynamic-interstitial-host.interstitial'
 import { CdkPortalOutlet, ComponentPortal, Portal } from '@angular/cdk/portal'
 
 @Component({
@@ -59,7 +58,6 @@ export class AuthorizeComponent {
   insidePopUpWindows = false
   interstitialComponent: ComponentType<any>
   redirectByReportAlreadyAuthorize: boolean
-  selectedInterstitialPortalOutlet: Portal<any>
 
   constructor(
     private userService: UserService,
@@ -181,14 +179,14 @@ export class AuthorizeComponent {
   }
 
   /**
-   * Determines whether the domain interstitial should be displayed
+   * Determines whether a interstitial should be displayed
    */
   private isThereInterstitialToShow(): boolean {
     return !!this.interstitialComponent
   }
 
   /**
-   * Displays the domain interstitial
+   * Displays the interstitial
    */
   private showInterstitial(): void {
     const portal = new ComponentPortal(this.interstitialComponent)
