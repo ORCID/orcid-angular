@@ -10,12 +10,27 @@ export const browserGlobals = {
   },
 }
 
-export function reportNavigationStart(url: string) {
-  startPerformanceMeasurement(url)
-}
-
 export function removeUrlParameters(url: string) {
   return url.split('?')[0]
+}
+
+export function buildClientString(request: RequestInfoForm) {
+  return request.memberName + ' - ' + request.clientName
+}
+
+export function getDataLayer(): any[] {
+  const window = browserGlobals.windowRef()
+  window.dataLayer = window.dataLayer || []
+  return window.dataLayer
+}
+
+export function pushOnDataLayer(object: Object): void {
+  const dataLayer = getDataLayer()
+  dataLayer.push(object)
+}
+
+export function reportNavigationStart(url: string) {
+  startPerformanceMeasurement(url)
 }
 
 export function startPerformanceMeasurement(url: string): void {
@@ -47,19 +62,4 @@ export function clearPerformanceMarks(url: string) {
     window.performance.clearMarks(PerformanceMarks.navigationEndPrefix + url)
     window.performance.clearMeasures(url)
   }
-}
-
-export function buildClientString(request: RequestInfoForm) {
-  return request.memberName + ' - ' + request.clientName
-}
-
-export function getDataLayer(): any[] {
-  const window = browserGlobals.windowRef()
-  window.dataLayer = window.dataLayer || []
-  return window.dataLayer
-}
-
-export function pushOnDataLayer(object: Object): void {
-  const dataLayer = getDataLayer()
-  dataLayer.push(object)
 }

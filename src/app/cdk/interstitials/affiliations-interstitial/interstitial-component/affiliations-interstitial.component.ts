@@ -35,7 +35,7 @@ import {
 } from 'src/app/types/record-affiliation.endpoint'
 
 @Component({
-  selector: 'app-add-interstitial-affiliations',
+  selector: 'app-affiliation-interstitial',
   templateUrl: './affiliations-interstitial.component.html',
   styleUrls: [
     './affiliations-interstitial.component.scss',
@@ -109,7 +109,9 @@ export class AffiliationsInterstitialComponent implements OnInit, OnDestroy {
     this.recordService
       .getRecord()
       .pipe(
-        map((record) => record?.emails?.emailDomains?.[0]),
+        map((record) =>
+          this.sortDomainsByCreatedDate(record?.emails?.emailDomains)
+        ),
         switchMap((domain: AssertionVisibilityString) => {
           if (domain) {
             this.userDomainMatched = domain.value
@@ -197,6 +199,20 @@ export class AffiliationsInterstitialComponent implements OnInit, OnDestroy {
       .subscribe((userInfo) => {
         this.organizationName = userInfo.oauthSession?.clientName
       })
+  }
+
+  sortDomainsByCreatedDate(
+    domains: AssertionVisibilityString[] | undefined
+  ): AssertionVisibilityString {
+    if (!Array.isArray(domains) || domains.length === 0) return undefined
+
+    const sorted = domains.slice().sort((a, b) => {
+      const aTimestamp = a.createdDate?.timestamp ?? 0
+      const bTimestamp = b.createdDate?.timestamp ?? 0
+      return bTimestamp - aTimestamp
+    })
+
+    return sorted[0]
   }
 
   ngOnDestroy(): void {

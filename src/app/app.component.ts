@@ -1,7 +1,6 @@
 import { Component, HostBinding, HostListener, Inject } from '@angular/core'
 import { NavigationEnd, NavigationStart, Router } from '@angular/router'
 import { catchError, tap } from 'rxjs/operators'
-
 import {
   finishPerformanceMeasurement,
   reportNavigationStart,

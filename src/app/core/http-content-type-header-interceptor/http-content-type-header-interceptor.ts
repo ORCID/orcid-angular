@@ -8,7 +8,7 @@ export class HttpContentTypeHeaderInterceptor implements HttpInterceptor {
     '/social/signin/auth.json',
     '/shibboleth/signin/auth.json',
     '/signin/auth.json',
-    'https://auth.dev.orcid.org/login',
+    runtimeEnvironment.AUTH_SERVER + 'login',
   ]
 
   construct() {}

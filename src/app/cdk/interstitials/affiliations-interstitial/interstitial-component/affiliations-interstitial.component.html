@@ -23,14 +23,14 @@
       <ng-container i18n="@@interstitial.basedOnTheVerifiedEmail"
         >Based on the verified email</ng-container
       >
-      <strong> {{ userDomainMatched }}</strong>
+      <strong> {{ userDomainMatched }}</strong
+      >,
       <ng-container i18n="@@interstitial.weThinkYouAreCurrentlyAffiliatedWith"
         >we think you are currently affiliated with</ng-container
       >
       <strong>
         {{ autoCompleteDisplayOrganization(organizationFromDatabase) }}.</strong
-      >
-
+      >&ngsp;
       <ng-container
         i18n="
           @@interstitial.webePreselectedThisOrganizationForYouInTheFormBelow"
@@ -227,7 +227,7 @@
           }"
         >
           <ng-container i18n="@@shared.startDate">Start date</ng-container>
-          <label>(Optional)</label>
+          <label i18n="@@register.optional">(Optional)</label>
         </mat-label>
       </div>
       <!--Start date year  -->

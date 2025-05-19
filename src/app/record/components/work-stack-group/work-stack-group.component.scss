@@ -74,6 +74,7 @@ button {
   margin-inline-start: 8px;
   height: 38px;
   margin-top: 6px;
+  margin-right: 6px;
 }
 
 ::ng-deep button.text-align-center {
@@ -88,9 +89,26 @@ button.mat-menu-item {
     & > mat-icon {
       display: flex;
       align-items: center;
+      font-size: 24px;
+      height: 24px;
+      width: 24px;
     }
     display: inline-block;
     vertical-align: middle;
+    line-height: 1.5;
+  }
+
+  & > span {
+    & > mat-icon {
+      display: flex;
+      align-items: center;
+      font-size: 24px;
+      height: 24px;
+      width: 24px;
+    }
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1.5;
   }
 
   max-width: 350px;
@@ -104,4 +122,12 @@ button.mat-menu-item {
 
 ::ng-deep .menu-buttons {
   max-width: none;
+}
+
+.visibilityIconSize {
+  display: flex;
+  align-items: center;
+  font-size: 20px !important;
+  height: 24px;
+  width: 26px;
 }
