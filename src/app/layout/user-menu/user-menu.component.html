@@ -11,9 +11,9 @@
     id="cy-user-info"
   >
     <img src="./assets/vectors/profile-icon.svg" alt="" />
-    <ng-container *ngIf="platform.columns12" class="name-container">{{
+    <span *ngIf="platform.columns12" class="name-text-container">{{
       displayName
-    }}</ng-container>
+    }}</span>
 
     <mat-icon *ngIf="platform.columns12">expand_more</mat-icon>
   </button>
