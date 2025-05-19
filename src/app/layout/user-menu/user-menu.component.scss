@@ -36,6 +36,7 @@
 
 :host {
   .user-menu-button {
+    max-width: 100%;
     padding: 0 32px;
     .columns-4 & {
       padding: 0;
@@ -64,4 +65,11 @@
   .small-login-icon {
     margin-right: 12px;
   }
+}
+
+span.name-text-container {
+  overflow: hidden;
+  width: calc(100% - 59px);
+  display: inline-block;
+  text-overflow: ellipsis;
 }
