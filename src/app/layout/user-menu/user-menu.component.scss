@@ -67,9 +67,8 @@
   }
 }
 
-.name-text-container {
+span.name-text-container {
   overflow: hidden;
-  max-width: calc(100% - 20);
   width: calc(100% - 59px);
   display: inline-block;
   text-overflow: ellipsis;
