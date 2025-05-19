@@ -14,6 +14,8 @@ import { QaFlag } from '../../qa-flag/qa-flags.enum'
 import { TogglzService } from '../../togglz/togglz.service'
 import { LoginDomainInterstitialManagerService } from '../implementations/login-domain-interstitials-manager.service'
 import { ShareEmailsDomainsDialogComponent } from 'src/app/cdk/interstitials/share-emails-domains/interstitial-dialog-extend/share-emails-domains-dialog.component'
+import { inject } from '@angular/core'
+import { WINDOW_PROVIDERS } from 'src/app/cdk/window'
 
 describe('LoginDomainInterstitialManagerService', () => {
   let service: LoginDomainInterstitialManagerService
@@ -44,6 +46,7 @@ describe('LoginDomainInterstitialManagerService', () => {
         { provide: InterstitialsService, useValue: mockInterstitialsService },
         { provide: TogglzService, useValue: mockTogglzService },
         { provide: QaFlagsService, useValue: mockQaFlagsService },
+        WINDOW_PROVIDERS,
       ],
     })
 

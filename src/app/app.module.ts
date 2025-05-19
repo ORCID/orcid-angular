@@ -39,7 +39,7 @@ import { FormsModule } from '@angular/forms'
     PseudoModule, // Remove on angular 10 https://bit.ly/3ezbF4v
     // Environmental dependent modules
     EnvironmentBannerModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [
     TitleService,

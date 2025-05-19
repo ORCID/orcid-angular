@@ -223,7 +223,8 @@ export class RecordService {
 
         if (allValuesLoaded) {
           if (this.getRecordPerformanceStartTime) {
-            const executionTime = performance.now() - this.getRecordPerformanceStartTime
+            const executionTime =
+              performance.now() - this.getRecordPerformanceStartTime
             this.getRecordPerformanceStartTime = undefined
             console.info(
               '[Record Service] :',

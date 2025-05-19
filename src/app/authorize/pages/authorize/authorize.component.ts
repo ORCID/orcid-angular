@@ -73,7 +73,6 @@ export class AuthorizeComponent {
    */
   ngOnInit(): void {
     this.loading = true
-    
 
     forkJoin({
       platform: this.loadPlatformInfo(),

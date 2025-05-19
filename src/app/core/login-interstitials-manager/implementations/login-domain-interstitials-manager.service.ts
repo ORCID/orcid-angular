@@ -1,4 +1,4 @@
-import { Injectable, Type } from '@angular/core'
+import { Inject, Injectable, Type } from '@angular/core'
 import { Observable, of } from 'rxjs'
 
 import { InterstitialsService } from 'src/app/cdk/interstitials/interstitials.service'
@@ -40,7 +40,7 @@ export class LoginDomainInterstitialManagerService extends LoginBaseInterstitial
     interstitialsService: InterstitialsService,
     togglzService: TogglzService,
     qaFlagService: QaFlagsService,
-    @Inject(WINDOW) private _window: Window,
+    @Inject(WINDOW) private _window: Window
   ) {
     // Pass dependencies to the parent
     super(_matDialog, togglzService, interstitialsService, qaFlagService)
@@ -63,7 +63,12 @@ export class LoginDomainInterstitialManagerService extends LoginBaseInterstitial
     const hasNoPublicDomains = !this.userHasPublicDomains(userRecord.emails)
     const hasPrivateDomains = this.userHasPrivateDomains(userRecord.emails)
 
-    if (!hasNoPublicDomains || !hasPrivateDomains || isImpersonation || insidePopUpWindows) {
+    if (
+      !hasNoPublicDomains ||
+      !hasPrivateDomains ||
+      isImpersonation ||
+      insidePopUpWindows
+    ) {
       return of(false)
     }
     return of(true)
@@ -96,7 +101,3 @@ export class LoginDomainInterstitialManagerService extends LoginBaseInterstitial
     return ShareEmailsDomainsComponent
   }
 }
-function Inject(WINDOW: any): (target: typeof LoginDomainInterstitialManagerService, propertyKey: undefined, parameterIndex: 4) => void {
-  throw new Error('Function not implemented.')
-}
-

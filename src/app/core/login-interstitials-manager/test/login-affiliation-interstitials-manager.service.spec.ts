@@ -13,6 +13,7 @@ import { QaFlagsService } from '../../qa-flag/qa-flag.service'
 import { QaFlag } from '../../qa-flag/qa-flags.enum'
 import { LoginAffiliationInterstitialManagerService } from '../implementations/login-affiliation-interstitials-manager.service'
 import { AffiliationsInterstitialDialogComponent } from 'src/app/cdk/interstitials/affiliations-interstitial/interstitial-dialog-extend/affiliations-interstitial-dialog.component'
+import { WINDOW_PROVIDERS } from 'src/app/cdk/window'
 
 describe('LoginAffiliationInterstitialManagerService', () => {
   let service: LoginAffiliationInterstitialManagerService
@@ -44,6 +45,7 @@ describe('LoginAffiliationInterstitialManagerService', () => {
         { provide: TogglzService, useValue: mockTogglzService },
         { provide: InterstitialsService, useValue: mockInterstitialsService },
         { provide: QaFlagsService, useValue: mockQaFlagsService },
+        WINDOW_PROVIDERS,
       ],
     })
 
