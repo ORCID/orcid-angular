@@ -1,4 +1,4 @@
-import { Component, Injectable, Type } from '@angular/core'
+import { Component, Inject, Injectable, Type } from '@angular/core'
 import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
 import { Observable, of } from 'rxjs'
 
@@ -17,6 +17,7 @@ import {
   AffilationsComponentDialogOutput,
   AffiliationsInterstitialDialogComponent,
 } from 'src/app/cdk/interstitials/affiliations-interstitial/interstitial-dialog-extend/affiliations-interstitial-dialog.component'
+import { WINDOW } from 'src/app/cdk/window'
 
 @Injectable({
   providedIn: 'root',
@@ -38,7 +39,8 @@ export class LoginAffiliationInterstitialManagerService extends LoginBaseInterst
     matDialog: MatDialog,
     interstitialsService: InterstitialsService,
     togglzService: TogglzService,
-    qaFlagService: QaFlagsService
+    qaFlagService: QaFlagsService,
+    @Inject(WINDOW) private _window: Window
   ) {
     // Pass dependencies to the parent
     super(matDialog, togglzService, interstitialsService, qaFlagService)
@@ -58,13 +60,16 @@ export class LoginAffiliationInterstitialManagerService extends LoginBaseInterst
       userRecord?.userInfo?.EFFECTIVE_USER_ORCID
     )
 
+    const insideAnIframe = !!this._window.opener
+
     const userHasEmploymentAffiliation = userRecord?.affiliations?.some(
       (affiliation) =>
         affiliation.type === 'EMPLOYMENT' &&
         affiliation.affiliationGroup.length > 0
     )
 
-    if (userHasEmploymentAffiliation || isImpersonation) return of(false)
+    if (userHasEmploymentAffiliation || isImpersonation || insideAnIframe)
+      return of(false)
     return of(true)
   }
 

@@ -55,7 +55,6 @@ export class AuthorizeComponent {
 
   // User session properties
   isNotImpersonating = false
-  insidePopUpWindows = false
   interstitialComponent: ComponentType<any>
   redirectByReportAlreadyAuthorize: boolean
 
@@ -74,7 +73,7 @@ export class AuthorizeComponent {
    */
   ngOnInit(): void {
     this.loading = true
-    this.insidePopUpWindows = !!this.window.opener
+    
 
     forkJoin({
       platform: this.loadPlatformInfo(),

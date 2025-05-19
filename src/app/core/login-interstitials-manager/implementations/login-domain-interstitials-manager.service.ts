@@ -17,6 +17,7 @@ import {
   ShareEmailsDomainsComponentDialogOutput,
   ShareEmailsDomainsDialogComponent,
 } from 'src/app/cdk/interstitials/share-emails-domains/interstitial-dialog-extend/share-emails-domains-dialog.component'
+import { WINDOW } from 'src/app/cdk/window'
 
 @Injectable({
   providedIn: 'root',
@@ -38,7 +39,8 @@ export class LoginDomainInterstitialManagerService extends LoginBaseInterstitial
     _matDialog: MatDialog,
     interstitialsService: InterstitialsService,
     togglzService: TogglzService,
-    qaFlagService: QaFlagsService
+    qaFlagService: QaFlagsService,
+    @Inject(WINDOW) private _window: Window,
   ) {
     // Pass dependencies to the parent
     super(_matDialog, togglzService, interstitialsService, qaFlagService)
@@ -56,10 +58,12 @@ export class LoginDomainInterstitialManagerService extends LoginBaseInterstitial
       userRecord?.userInfo?.EFFECTIVE_USER_ORCID
     )
 
+    const insidePopUpWindows = !!this._window.opener
+
     const hasNoPublicDomains = !this.userHasPublicDomains(userRecord.emails)
     const hasPrivateDomains = this.userHasPrivateDomains(userRecord.emails)
 
-    if (!hasNoPublicDomains || !hasPrivateDomains || isImpersonation) {
+    if (!hasNoPublicDomains || !hasPrivateDomains || isImpersonation || insidePopUpWindows) {
       return of(false)
     }
     return of(true)
@@ -92,3 +96,7 @@ export class LoginDomainInterstitialManagerService extends LoginBaseInterstitial
     return ShareEmailsDomainsComponent
   }
 }
+function Inject(WINDOW: any): (target: typeof LoginDomainInterstitialManagerService, propertyKey: undefined, parameterIndex: 4) => void {
+  throw new Error('Function not implemented.')
+}
+
