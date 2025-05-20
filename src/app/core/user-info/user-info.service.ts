@@ -35,7 +35,9 @@ export class UserInfoService {
           'userInfo.json'
 
         if (outhSiginFlag) {
-          userInfoUrl = runtimeEnvironment.AUTH_SERVER + 'userInfo.json'
+          userInfoUrl = runtimeEnvironment.AUTH_SERVER +
+          (options?.publicRecordId ? options.publicRecordId + '/' : '') +
+           'userInfo.json'
         }
 
         return this._http
