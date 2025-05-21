@@ -210,9 +210,9 @@ export class AuthorizeComponent {
       this.debugLog('User alreay authorized this app')
       if (this.isThereInterstitialToShow()) {
         this.redirectByReportAlreadyAuthorize = true
-        this.showInterstitial()
         this.loading = false
         this.redirectUrl = this.oauthSession.redirectUrl
+        setTimeout(() => this.showInterstitial())
       } else {
         this.finishRedirectObs(this.oauthSession)
       }
