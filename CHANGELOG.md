@@ -1,3 +1,9 @@
+## v2.115.5 - 2025-05-29
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.4...v2.115.5)
+
+- [#2524](https://github.com/ORCID/orcid-angular/pull/2524): add microdelay to interstitial for already authorized users
+
 ## v2.115.4 - 2025-05-28
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.3...v2.115.4)
