@@ -102,9 +102,8 @@ export class FormPersonalComponent
   labelInfoAboutName = $localize`:@@register.ariaLabelInfo:info about names`
   labelClose = $localize`:@@register.ariaLabelClose:close`
   labelConfirmEmail = $localize`:@@register.confirmEmail:Confirm primary email`
-  labelNameYouMostCommonly = $localize`:@@register.labelNameYouMostMost:The names you most commonly go by`
-  labelFamilyNamePlaceholder = $localize`:@@register.familyNamePlaceholder:Your family name or surname
-  `
+  labelNameYouMostCommonly = $localize`:@@register.labelNameYouMostMost:Your given names or forenames`
+  labelFamilyNamePlaceholder = $localize`:@@register.familyNamePlaceholder:Your family names or surnames`
   professionalEmail: boolean
   personalEmail: boolean
   undefinedEmail: boolean
