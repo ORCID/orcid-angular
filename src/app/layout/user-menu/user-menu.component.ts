@@ -9,6 +9,7 @@ import { ApplicationRoutes } from 'src/app/constants'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { InboxService } from '../../core/inbox/inbox.service'
 import { first } from 'rxjs/operators'
+import { CustomEventService } from 'src/app/core/observability-events/observability-events.service'
 
 @Component({
   selector: 'app-user-menu',
@@ -25,8 +26,11 @@ export class UserMenuComponent implements OnInit {
   platform: PlatformInfo
   labelSigninRegister = $localize`:@@layout.ariaLabelSigninRegister:Sign in to ORCID or register for your ORCID iD`
   labelUserMenu = $localize`:@@layout.ariaLabelUserMenu:User menu`
+  notificationTooltipActive = $localize`:@@layout.notificationTooltip:You have unread notifications`
+  notificationTooltip = $localize`:@@layout.notificationTooltipInactive:Notifications inbox`
   isAccountDelegate: boolean
   inboxUnread = 0
+  userJourney!: 'orcid_with_notifications' | 'orcid_without_notifications'
 
   constructor(
     private _router: Router,
@@ -34,7 +38,8 @@ export class UserMenuComponent implements OnInit {
     @Inject(WINDOW) private window: Window,
     _platform: PlatformInfoService,
     private _inboxService: InboxService,
-    private _togglz: TogglzService
+    private _togglz: TogglzService,
+    private observabilityEventService: CustomEventService
   ) {
     _userInfo.getUserSession().subscribe((data) => {
       if (data.loggedIn) {
@@ -56,15 +61,27 @@ export class UserMenuComponent implements OnInit {
     this._inboxService
       .retrieveUnreadCount()
       .pipe(first())
-      .subscribe((inboxUnread) => (this.inboxUnread = inboxUnread))
+      .subscribe((inboxUnread) => {
+        ;(this.userJourney =
+          inboxUnread > 0
+            ? 'orcid_with_notifications'
+            : 'orcid_without_notifications'),
+          this.observabilityEventService.startJourney(
+            this.userJourney,
+
+            { inboxUnread }
+          )
+        this.inboxUnread = inboxUnread
+      })
   }
 
-  goto(url) {
+  goto(url, from?: string) {
     if (url === 'my-orcid') {
       this._router.navigate([ApplicationRoutes.myOrcid])
     } else if (url === 'signin') {
       this._router.navigate([ApplicationRoutes.signin])
     } else if (url === 'inbox') {
+      this.observabilityEventService.recordEvent(this.userJourney, from)
       this._router.navigate([ApplicationRoutes.inbox])
     } else if (url === 'account') {
       this._router.navigate([ApplicationRoutes.account])

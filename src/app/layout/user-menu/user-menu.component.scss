@@ -1,3 +1,8 @@
+section {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
 .main-button {
   height: auto;
   .main-button-container {
@@ -37,7 +42,6 @@
 :host {
   .user-menu-button {
     max-width: 100%;
-    padding: 0 32px;
     .columns-4 & {
       padding: 0;
     }
@@ -69,7 +73,14 @@
 
 span.name-text-container {
   overflow: hidden;
-  width: calc(100% - 59px);
+  max-width: calc(102% - 55px);
   display: inline-block;
   text-overflow: ellipsis;
+  width: fit-content;
+}
+
+[mat-stroked-button] {
+  min-width: 40px;
+  padding: 0;
+  margin: 0 16px;
 }

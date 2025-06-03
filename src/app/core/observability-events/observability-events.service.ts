@@ -1,7 +1,11 @@
 import { Inject, Injectable } from '@angular/core'
 import { WINDOW } from 'src/app/cdk/window'
 
-export type JourneyType = 'orcid_registration' | 'orcid_update_emails'
+export type JourneyType =
+  | 'orcid_registration'
+  | 'orcid_update_emails'
+  | 'orcid_with_notifications'
+  | 'orcid_without_notifications'
 @Injectable({
   providedIn: 'root',
 })
@@ -26,7 +30,7 @@ export class CustomEventService {
 
     if (runtimeEnvironment.debugger) {
       console.debug(
-        `-> Journey "${journeyType}" started at ${this.journeys[journeyType].startTime}`,
+        `[RUM][journey:${journeyType}] : start`,
         attributes
       )
     }
@@ -58,14 +62,14 @@ export class CustomEventService {
       eventName,
       elapsedTime,
     }
-    if (typeof (this.window as any)?.addPageAction === 'function') {
+    if (typeof (this.window as any).newrelic?.addPageAction === 'function') {
       ;(this.window as any).newrelic.addPageAction(journeyType, eventAttributes)
     }
     // Send the custom event to New Relic
 
     if (runtimeEnvironment.debugger) {
       console.debug(
-        `-> Event "${eventName}" recorded for journey "${journeyType}" with elapsed time ${elapsedTime}ms`,
+        `[RUM][journey:${journeyType}] : event ${eventName}`,
         eventAttributes
       )
     }
@@ -94,15 +98,18 @@ export class CustomEventService {
     }
 
     // Send the final custom event to New Relic
-    if (typeof (this.window as any)?.addPageAction === 'function') {
-      ;(this.window as any).addPageAction(journeyType, finalAttributes)
+    if (typeof (this.window as any).newrelic?.addPageAction === 'function') {
+      ;(this.window as any).newrelic?.addPageAction(
+        journeyType,
+        finalAttributes
+      )
     }
 
     // Clean up the journey data
     delete this.journeys[journeyType]
 
     console.debug(
-      `Journey "${journeyType}" finished with elapsed time ${elapsedTime}ms`,
+      `[RUM][journey:${journeyType}] : finished`,
       finalAttributes
     )
   }
