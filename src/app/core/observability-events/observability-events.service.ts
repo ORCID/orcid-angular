@@ -30,7 +30,7 @@ export class CustomEventService {
 
     if (runtimeEnvironment.debugger) {
       console.debug(
-        `-> Journey "${journeyType}" started at ${this.journeys[journeyType].startTime}`,
+        `[RUM][journey:${journeyType}] : start`,
         attributes
       )
     }
@@ -69,7 +69,7 @@ export class CustomEventService {
 
     if (runtimeEnvironment.debugger) {
       console.debug(
-        `-> Event "${eventName}" recorded for journey "${journeyType}" with elapsed time ${elapsedTime}ms`,
+        `[RUM][journey:${journeyType}] : event ${eventName}`,
         eventAttributes
       )
     }
@@ -109,7 +109,7 @@ export class CustomEventService {
     delete this.journeys[journeyType]
 
     console.debug(
-      `Journey "${journeyType}" finished with elapsed time ${elapsedTime}ms`,
+      `[RUM][journey:${journeyType}] : finished`,
       finalAttributes
     )
   }
