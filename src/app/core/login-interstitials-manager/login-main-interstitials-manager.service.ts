@@ -36,6 +36,11 @@ export class LoginMainInterstitialsManagerService {
     LoginDomainInterstitialManagerService: LoginDomainInterstitialManagerService,
     LoginAffiliationInterstitialManagerService: LoginAffiliationInterstitialManagerService
   ) {
+    // Delare here all the interstitial services.
+    // This are the entry points to add new interstitials.
+    // They should be added in the order they should be checked.
+    // The first one that returns a component or a dialog subscription will be used.
+    // The rest will be ignored.
     this.interstitialServices = [
       LoginDomainInterstitialManagerService,
       LoginAffiliationInterstitialManagerService,

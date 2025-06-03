@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "start-local": "npm run build-runtime-env && ng serve --disable-host-check --host 0.0.0.0",
-    "start": "npm run build-runtime-env && ng serve --configuration=local-qa --host 0.0.0.0",
+    "start": "npm run build-runtime-env && ng serve --configuration=local-qa --host 0.0.0.0 --verbose",
     "start-sandbox": "ng serve --configuration=local-sandbox --host 0.0.0.0",
     "start:en": "ng serve --configuration=local-qa-en --disable-host-check",
     "start:ar": "ng serve --configuration=local-qa-ar --disable-host-check",

@@ -1,7 +1,11 @@
 import { Inject, Injectable } from '@angular/core'
 import { WINDOW } from 'src/app/cdk/window'
 
-export type JourneyType = 'orcid_registration' | 'orcid_update_emails'
+export type JourneyType =
+  | 'orcid_registration'
+  | 'orcid_update_emails'
+  | 'orcid_with_notifications'
+  | 'orcid_without_notifications'
 @Injectable({
   providedIn: 'root',
 })
@@ -58,7 +62,7 @@ export class CustomEventService {
       eventName,
       elapsedTime,
     }
-    if (typeof (this.window as any)?.addPageAction === 'function') {
+    if (typeof (this.window as any).newrelic?.addPageAction === 'function') {
       ;(this.window as any).newrelic.addPageAction(journeyType, eventAttributes)
     }
     // Send the custom event to New Relic
@@ -94,8 +98,8 @@ export class CustomEventService {
     }
 
     // Send the final custom event to New Relic
-    if (typeof (this.window as any)?.addPageAction === 'function') {
-      ;(this.window as any).addPageAction(journeyType, finalAttributes)
+    if (typeof (this.window as any).newrelic?.addPageAction === 'function') {
+      ;(this.window as any).newrelic?.addPageAction(journeyType, finalAttributes)
     }
 
     // Clean up the journey data
