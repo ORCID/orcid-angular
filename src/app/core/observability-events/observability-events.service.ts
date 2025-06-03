@@ -99,7 +99,10 @@ export class CustomEventService {
 
     // Send the final custom event to New Relic
     if (typeof (this.window as any).newrelic?.addPageAction === 'function') {
-      ;(this.window as any).newrelic?.addPageAction(journeyType, finalAttributes)
+      ;(this.window as any).newrelic?.addPageAction(
+        journeyType,
+        finalAttributes
+      )
     }
 
     // Clean up the journey data

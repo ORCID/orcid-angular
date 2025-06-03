@@ -8,9 +8,9 @@
  */
 function bypassHtmlOrJson(req, res) {
   if (req.headers.accept?.includes('html')) {
-    return '/index.html';
+    return '/index.html'
   }
-  req.headers['X-Dev-Header'] = 'local-host-proxy-call';
+  req.headers['X-Dev-Header'] = 'local-host-proxy-call'
 }
 
 /**
@@ -20,8 +20,8 @@ function bypassHtmlOrJson(req, res) {
  * ──────────────────────────────────────────────────────────────────────────────
  */
 function proxyReqOverrideHeaders(proxyReq /* http.ClientRequest */, req, res) {
-  proxyReq.setHeader('Origin',  'https://qa.orcid.org');
-  proxyReq.setHeader('Referer', 'https://qa.orcid.org');
+  proxyReq.setHeader('Origin', 'https://qa.orcid.org')
+  proxyReq.setHeader('Referer', 'https://qa.orcid.org')
 }
 
 /**
@@ -33,22 +33,22 @@ function proxyReqOverrideHeaders(proxyReq /* http.ClientRequest */, req, res) {
  */
 function responseOverridesAuth() {
   return (proxyRes, req, res) => {
-    const cookies = proxyRes.headers['set-cookie'];
+    const cookies = proxyRes.headers['set-cookie']
     if (Array.isArray(cookies)) {
       proxyRes.headers['set-cookie'] = cookies.map((cookie) =>
         cookie.replace(/Domain=\.?(qa\.)?orcid\.org/i, 'Domain=localhost')
-      );
+      )
     }
     if (proxyRes.statusCode >= 300 && proxyRes.statusCode < 400) {
-      let location = proxyRes.headers['location'];
+      let location = proxyRes.headers['location']
       if (typeof location === 'string') {
         proxyRes.headers['location'] = location.replace(
           'http://auth.qa.orcid.org/login',
           'http://localhost:4200/auth/login'
-        );
+        )
       }
     }
-  };
+  }
 }
 
 /**
@@ -60,22 +60,22 @@ function responseOverridesAuth() {
  */
 function responseOverridesGeneric() {
   return (proxyRes, req, res) => {
-    const cookies = proxyRes.headers['set-cookie'];
+    const cookies = proxyRes.headers['set-cookie']
     if (Array.isArray(cookies)) {
       proxyRes.headers['set-cookie'] = cookies.map((cookie) =>
         cookie.replace(/Domain=\.?(qa\.)?orcid\.org/i, 'Domain=localhost')
-      );
+      )
     }
     if (proxyRes.statusCode >= 300 && proxyRes.statusCode < 400) {
-      let location = proxyRes.headers['location'];
+      let location = proxyRes.headers['location']
       if (typeof location === 'string') {
         proxyRes.headers['location'] = location.replace(
           'https://qa.orcid.org/signin',
           'http://localhost:4200/signin'
-        );
+        )
       }
     }
-  };
+  }
 }
 
 /**
@@ -112,4 +112,4 @@ export default {
     bypass: bypassHtmlOrJson,
     onProxyRes: responseOverridesGeneric(),
   },
-};
+}

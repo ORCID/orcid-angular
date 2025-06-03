@@ -26,7 +26,6 @@ export class UserMenuComponent implements OnInit {
   platform: PlatformInfo
   labelSigninRegister = $localize`:@@layout.ariaLabelSigninRegister:Sign in to ORCID or register for your ORCID iD`
   labelUserMenu = $localize`:@@layout.ariaLabelUserMenu:User menu`
-  labelInbox = $localize`:@@layout.ariaLabelInbox:Inbox`
   notificationTooltipActive = $localize`:@@layout.notificationTooltip:You have unread notifications`
   notificationTooltip = $localize`:@@layout.notificationTooltipInactive:Notifications inbox`
   isAccountDelegate: boolean
