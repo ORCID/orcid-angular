@@ -1,3 +1,9 @@
+## v2.115.8 - 2025-06-04
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.7...v2.115.8)
+
+- [#2531](https://github.com/ORCID/orcid-angular/pull/2531): Lmendoza/jun 4 2025 multiple fixes
+
 ## v2.115.7 - 2025-06-03
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.6...v2.115.7)
