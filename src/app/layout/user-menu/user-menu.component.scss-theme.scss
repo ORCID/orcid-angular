@@ -10,6 +10,9 @@
   .main-button {
     border-bottom: 1px map-get($foreground, divider) solid;
   }
+  .mat-icon {
+    color: map-get($background, ui-background-darkest);
+  }
 }
 
 @include user-menu-theme($orcid-app-theme);

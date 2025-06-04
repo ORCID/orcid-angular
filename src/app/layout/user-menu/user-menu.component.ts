@@ -28,6 +28,8 @@ export class UserMenuComponent implements OnInit {
   labelUserMenu = $localize`:@@layout.ariaLabelUserMenu:User menu`
   notificationTooltipActive = $localize`:@@layout.notificationTooltip:You have unread notifications`
   notificationTooltip = $localize`:@@layout.notificationTooltipInactive:Notifications inbox`
+  notificationi18n = $localize`:@@layout.notifications:Open notification inbox`
+  notificationi18nActive = $localize`:@@layout.notificationsActive:You have unread notifications. Open notification inbox`
   isAccountDelegate: boolean
   inboxUnread = 0
   userJourney!: 'orcid_with_notifications' | 'orcid_without_notifications'
@@ -58,21 +60,18 @@ export class UserMenuComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._inboxService
-      .retrieveUnreadCount()
-      .pipe(first())
-      .subscribe((inboxUnread) => {
-        ;(this.userJourney =
-          inboxUnread > 0
-            ? 'orcid_with_notifications'
-            : 'orcid_without_notifications'),
-          this.observabilityEventService.startJourney(
-            this.userJourney,
+    this._inboxService.retrieveUnreadCount().subscribe((inboxUnread) => {
+      ;(this.userJourney =
+        inboxUnread > 0
+          ? 'orcid_with_notifications'
+          : 'orcid_without_notifications'),
+        this.observabilityEventService.startJourney(
+          this.userJourney,
 
-            { inboxUnread }
-          )
-        this.inboxUnread = inboxUnread
-      })
+          { inboxUnread }
+        )
+      this.inboxUnread = inboxUnread
+    })
   }
 
   goto(url, from?: string) {
