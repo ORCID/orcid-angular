@@ -251,8 +251,8 @@ export class InboxService {
   }
 
   /**
-   * Still returns Observable<TotalNotificationCount>, but now also
-   * triggers a fresh fetch of unreadCount.json so that unreadCount$ subscribers are updated.
+   * Returns Observable<TotalNotificationCount>
+   * and triggers a fresh fetch of unreadCount.json so that unreadCount$ subscribers are updated.
    */
   totalNumber(): Observable<TotalNotificationCount> {
     return this._http
