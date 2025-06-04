@@ -29,10 +29,7 @@ export class CustomEventService {
     }
 
     if (runtimeEnvironment.debugger) {
-      console.debug(
-        `[RUM][journey:${journeyType}] : start`,
-        attributes
-      )
+      console.debug(`[RUM][journey:${journeyType}] : start`, attributes)
     }
   }
 
@@ -108,9 +105,6 @@ export class CustomEventService {
     // Clean up the journey data
     delete this.journeys[journeyType]
 
-    console.debug(
-      `[RUM][journey:${journeyType}] : finished`,
-      finalAttributes
-    )
+    console.debug(`[RUM][journey:${journeyType}] : finished`, finalAttributes)
   }
 }
