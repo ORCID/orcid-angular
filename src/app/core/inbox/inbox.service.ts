@@ -222,19 +222,24 @@ export class InboxService {
       )
   }
 
-  private _fetchAndUpdateUnreadCount(): Observable<number> {
+  private _fetchAndUpdateUnreadCount(): Observable<number | null> {
     return this._http
-      .get<number>(runtimeEnvironment.BASE_URL + 'inbox/unreadCount.json', {
-        headers: this.headers,
-      })
+      .get<number>(
+        `${runtimeEnvironment.BASE_URL}inbox/unreadCount.json`,
+        { headers: this.headers, observe: 'response' } // full response
+      )
       .pipe(
-        tap((count: number) => {
-          this._unreadCountSubject.next(count)
+        map((resp) => {
+          // If the server bounced us to /login, treat as “not logged in”
+          return resp.url?.includes('/login') ? null : resp.body ?? null
         }),
-        catchError((error) => {
-          // If the user is not logged in and error is expected, we return null
-          return EMPTY
-        })
+        tap((count) => {
+          if (count !== null) {
+            // If we got a valid count, update the BehaviorSubject
+            this._unreadCountSubject.next(count)
+          }
+        }),
+        catchError(() => EMPTY) // If the request fails, we just return an empty observable
       )
   }
 
