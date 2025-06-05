@@ -222,14 +222,7 @@ export class AuthorizeComponent {
   ): Observable<UserSession> {
     return this.recordService.getRecord({}).pipe(
       // Only proceed if the record has userInfo, emails, and at least one affiliation
-      filter(
-        (rec: UserRecord) =>
-          !!rec &&
-          !!rec.userInfo &&
-          !!rec.emails &&
-          Array.isArray(rec.affiliations) &&
-          rec.affiliations.length > 0
-      ),
+      filter((rec: UserRecord) => !!rec && !!rec.userInfo),
       take(1),
       switchMap((validRecord) =>
         this.loginMainInterstitialsManagerService
