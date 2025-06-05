@@ -34,19 +34,18 @@
     "lighthouse": "ts-node -P scripts/tsconfig.json scripts/lighthouse/main.ts",
     "build:browserslist": "ts-node -P scripts/tsconfig.json scripts/browserlist.prebuild.ts",
     "build:fetchCombineWordpressCss": "ts-node -P scripts/tsconfig.json scripts/fetch-combine-wordpress-css.prebuild"
-
   },
   "private": true,
   "dependencies": {
     "@angular-devkit/core": "^16.2.6",
     "@angular/animations": "^16.2.8",
-    "@angular/cdk": "^16.2.8",
+    "@angular/cdk": "^16.2.14",
     "@angular/common": "^16.2.8",
     "@angular/compiler": "^16.2.8",
     "@angular/core": "^16.2.8",
     "@angular/forms": "^16.2.8",
     "@angular/localize": "^16.2.8",
-    "@angular/material": "^16.2.8",
+    "@angular/material": "^16.2.14",
     "@angular/platform-browser": "^16.2.8",
     "@angular/platform-browser-dynamic": "^16.2.8",
     "@angular/router": "^16.2.8",
