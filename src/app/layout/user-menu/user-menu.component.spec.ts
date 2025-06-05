@@ -98,7 +98,7 @@ describe('UserMenuComponent', () => {
     const inboxIcon = await inboxItem.getHarness(MatIconHarness)
     const inboxIconName = await inboxIcon.getName()
 
-    expect(inboxCount).toBe(inboxIconName + 'Inbox (3)')
+    expect(inboxCount).toBe(inboxIconName + 'Notifications inbox (3)')
   })
 })
 
