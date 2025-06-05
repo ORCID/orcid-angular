@@ -16,10 +16,10 @@ import {
 import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
 import { error } from 'console'
 import {
-  MAT_LEGACY_DIALOG_DATA,
-  MatLegacyDialogRef,
-  MatLegacyDialogState,
-} from '@angular/material/legacy-dialog'
+  MAT_DIALOG_DATA,
+  MatDialogRef,
+  MatDialogState,
+} from '@angular/material/dialog'
 import { OrganizationsService, UserService } from 'src/app/core'
 import { RecordService } from 'src/app/core/record/record.service'
 import { RecordCountriesService } from 'src/app/core/record-countries/record-countries.service'
@@ -67,7 +67,7 @@ export class AffiliationsInterstitialDialogComponent extends AffiliationsInterst
     recordService: RecordService,
     organizationService: OrganizationsService,
     register2Service: Register2Service,
-    private dialogRef: MatLegacyDialogRef<
+    private dialogRef: MatDialogRef<
       AffiliationsInterstitialDialogComponent,
       AffilationsComponentDialogOutput
     >,

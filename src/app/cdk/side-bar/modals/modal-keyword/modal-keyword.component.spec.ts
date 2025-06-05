@@ -7,12 +7,12 @@ import { WINDOW_PROVIDERS } from '../../../window'
 import { PlatformInfoService } from '../../../platform-info'
 import { ErrorHandlerService } from '../../../../core/error-handler/error-handler.service'
 import { SnackbarService } from '../../../snackbar/snackbar.service'
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
+import { MatSnackBar } from '@angular/material/snack-bar'
 import {
-  MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA,
-  MatLegacyDialog as MatDialog,
-  MatLegacyDialogRef as MatDialogRef,
-} from '@angular/material/legacy-dialog'
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { RecordKeywordService } from '../../../../core/record-keyword/record-keyword.service'
 import { UserService } from '../../../../core'

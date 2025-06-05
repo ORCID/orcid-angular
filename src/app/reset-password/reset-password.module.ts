@@ -5,13 +5,13 @@ import { ResetPasswordRoutingModule } from './reset-password-routing.module'
 import { ResetPasswordComponent } from './reset-password/reset-password.component'
 import { MatIconModule } from '@angular/material/icon'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input'
-import { MatLegacyCardModule as MatCardModule } from '@angular/material/legacy-card'
+import { MatInputModule } from '@angular/material/input'
+import { MatCardModule } from '@angular/material/card'
 import {
-  MatLegacyProgressBar as MatProgressBar,
-  MatLegacyProgressBarModule as MatProgressBarModule,
-} from '@angular/material/legacy-progress-bar'
-import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button'
+  MatProgressBar,
+  MatProgressBarModule,
+} from '@angular/material/progress-bar'
+import { MatButtonModule } from '@angular/material/button'
 import { MdePopoverModule } from '../cdk/popover'
 
 @NgModule({

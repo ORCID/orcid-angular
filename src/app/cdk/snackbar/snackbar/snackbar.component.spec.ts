@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { SnackbarComponent } from './snackbar.component'
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
+import { MatDialog } from '@angular/material/dialog'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 import { WINDOW_PROVIDERS } from '../../window'
@@ -9,10 +9,10 @@ import { PlatformInfoService } from '../../platform-info'
 import { ErrorHandlerService } from '../../../core/error-handler/error-handler.service'
 import { SnackbarService } from '../snackbar.service'
 import {
-  MAT_LEGACY_SNACK_BAR_DATA as MAT_SNACK_BAR_DATA,
-  MatLegacySnackBar as MatSnackBar,
-  MatLegacySnackBarRef as MatSnackBarRef,
-} from '@angular/material/legacy-snack-bar'
+  MAT_SNACK_BAR_DATA,
+  MatSnackBar,
+  MatSnackBarRef,
+} from '@angular/material/snack-bar'
 import { Overlay } from '@angular/cdk/overlay'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'

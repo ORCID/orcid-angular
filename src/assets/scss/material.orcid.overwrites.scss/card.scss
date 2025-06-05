@@ -1,64 +1,74 @@
 @import '../orcid.spacing.scss';
 
-.mat-card.orcid-wizard {
+.mat-mdc-card.orcid-wizard {
   width: 100%;
   box-shadow: none;
   padding: $spacing-0;
+  /* TODO(mdc-migration): The following rule targets internal classes of progress-bar that may no longer apply for the MDC version.*/
   mat-progress-bar {
     // Makes the progress bar take 100% of card size
     left: 0px;
     position: absolute;
   }
-  .mat-card-title {
+  .mat-mdc-card-title {
     margin-top: $spacing-40;
   }
 
-  .mat-card-header {
+  .mat-mdc-card-header {
     justify-content: center;
     display: flex;
     width: 100%;
     text-align: center;
   }
 
-  .mat-card-subtitle {
+  .mat-mdc-card-subtitle {
     justify-content: center;
     display: flex;
     width: 100%;
     text-align: center;
   }
-  .mat-card-subtitle {
+  .mat-mdc-card-subtitle {
     margin-bottom: $spacing-0;
   }
 
   .columns-12 &,
   .columns-8 & {
+    /* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version.*/
     mat-card-content {
       margin: $spacing-24 12% 40px 12%; //12% to approximate the margin on designs
     }
   }
   .columns-4 & {
+    /* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version.*/
     mat-card-content {
       margin: $spacing-24 0 40px 0;
     }
   }
 }
 
-.mat-card.orcid-wizard-2 {
+.mat-mdc-card.orcid-wizard-2 {
+  /* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version.*/
+  /* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version.*/
+  /* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version.*/
   mat-card-header {
     align-items: baseline;
     justify-content: space-between;
+    /* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version.*/
     .mat-card-logo {
       order: -1;
     }
+    /* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version.*/
+    /* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version.*/
     .mat-card-header-text {
       margin: 0;
+      /* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version.*/
       mat-card-title {
         margin: $spacing-0;
       }
     }
     margin-bottom: $spacing-base; // centralize
   }
-
+  /* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version.*/
   mat-card-content {
     margin-top: 16px; //centralize
   }

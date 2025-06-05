@@ -11,7 +11,7 @@ label {
 }
 
 :host {
-  ::ng-deep .columns-4-or-8 .mat-form-field {
+  ::ng-deep .columns-4-or-8 .mat-mdc-form-field {
     width: 100%;
     margin-inline-end: auto;
   }
@@ -38,11 +38,11 @@ label {
   flex-wrap: nowrap;
 }
 
-.mat-form-field {
+.mat-mdc-form-field {
   width: 100%;
 }
 
-.mat-option {
+.mat-mdc-option {
   min-height: 64px;
   line-height: 32px;
   height: auto;
@@ -63,7 +63,7 @@ label {
   }
 }
 
-.mat-form-field {
+.mat-mdc-form-field {
   padding: 0 !important;
 }
 
@@ -104,6 +104,7 @@ label {
   .date-group {
     padding-bottom: 1.475em;
     .date {
+      /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
       ::ng-deep .mat-form-field-wrapper {
         padding-bottom: 0 !important;
       }

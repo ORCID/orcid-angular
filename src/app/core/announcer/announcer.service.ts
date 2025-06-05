@@ -1,6 +1,6 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y'
 import { Injectable } from '@angular/core'
-import { LegacyPageEvent as PageEvent } from '@angular/material/legacy-paginator'
+import { PageEvent } from '@angular/material/paginator'
 
 @Injectable({
   providedIn: 'root',

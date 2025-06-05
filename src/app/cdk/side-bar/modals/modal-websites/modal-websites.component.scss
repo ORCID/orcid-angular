@@ -2,7 +2,7 @@
   width: 100%;
 }
 
-::ng-deep .columns-4-or-8 .mat-form-field {
+::ng-deep .columns-4-or-8 .mat-mdc-form-field {
   width: 100%;
   margin-inline-end: auto;
 }
@@ -12,6 +12,7 @@
 }
 
 .description {
+  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
   ::ng-deep .mat-form-field-wrapper {
     padding-bottom: 16px !important;
     margin-bottom: 4px;
@@ -78,11 +79,11 @@
   }
 }
 
-.mat-form-field {
+.mat-mdc-form-field {
   width: 100%;
   margin-inline-end: 16px;
 }
-::ng-deep .columns-4-or-8 .mat-form-field {
+::ng-deep .columns-4-or-8 .mat-mdc-form-field {
   margin-inline-end: 0;
 }
 
@@ -143,6 +144,6 @@ app-visibility-selector {
   margin-top: -3px;
 }
 
-button.mat-focus-indicator.delete-button.mat-icon-button {
+button.mat-focus-indicator.delete-button.mat-mdc-icon-button {
   margin-inline-start: 16px;
 }

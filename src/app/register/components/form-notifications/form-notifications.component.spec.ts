@@ -4,20 +4,20 @@ import { FormNotificationsComponent } from './form-notifications.component'
 import { RegisterService } from '../../../core/register/register.service'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import {
-  MatLegacyDialog as MatDialog,
-  MatLegacyDialogModule as MatDialogModule,
-} from '@angular/material/legacy-dialog'
+  MatDialog,
+  MatDialogModule,
+} from '@angular/material/dialog'
 import { RouterTestingModule } from '@angular/router/testing'
 import { PlatformInfoService } from '../../../cdk/platform-info'
 import { ErrorHandlerService } from '../../../core/error-handler/error-handler.service'
 import { SnackbarService } from '../../../cdk/snackbar/snackbar.service'
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
+import { MatSnackBar } from '@angular/material/snack-bar'
 import { Overlay } from '@angular/cdk/overlay'
 import { WINDOW_PROVIDERS } from '../../../cdk/window'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { ReactiveFormsModule } from '@angular/forms'
-import { MatLegacyCheckboxModule } from '@angular/material/legacy-checkbox'
+import { MatCheckboxModule } from '@angular/material/checkbox'
 
 describe('FormNotificationsComponent', () => {
   let component: FormNotificationsComponent
@@ -29,7 +29,7 @@ describe('FormNotificationsComponent', () => {
         HttpClientTestingModule,
         RouterTestingModule,
         ReactiveFormsModule,
-        MatLegacyCheckboxModule,
+        MatCheckboxModule,
       ],
       declarations: [FormNotificationsComponent],
       providers: [

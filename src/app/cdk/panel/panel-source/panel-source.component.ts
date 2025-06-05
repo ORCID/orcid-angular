@@ -5,7 +5,7 @@ import {
   Affiliation,
   AffiliationTypeLabel,
 } from '../../../types/record-affiliation.endpoint'
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
+import { MatDialog } from '@angular/material/dialog'
 import { ModalDeleteItemsComponent } from '../../../record/components/modals/modal-delete-item/modal-delete-items.component'
 import { Funding } from '../../../types/record-funding.endpoint'
 import { ResearchResource } from '../../../types/record-research-resources.endpoint'
