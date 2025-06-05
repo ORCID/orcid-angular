@@ -1,3 +1,11 @@
+## v2.115.9 - 2025-06-05
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.8...v2.115.9)
+
+- [#2534](https://github.com/ORCID/orcid-angular/pull/2534): 9832-qa-toaster-error-displayed-with-signin-error
+- [#2533](https://github.com/ORCID/orcid-angular/pull/2533): Fix testing
+- [#2532](https://github.com/ORCID/orcid-angular/pull/2532): 9824-qa-replace-inbox-icon-with-notification-icon-in-account-menu
+
 ## v2.115.8 - 2025-06-04
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.7...v2.115.8)
