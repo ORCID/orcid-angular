@@ -1,3 +1,9 @@
+## v2.115.10 - 2025-06-05
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.9...v2.115.10)
+
+- [#2536](https://github.com/ORCID/orcid-angular/pull/2536): Lmendoza/9820 qa regression oauth and openid tests fail because expected error message for negative scenarios is not displayed
+
 ## v2.115.9 - 2025-06-05
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.8...v2.115.9)
