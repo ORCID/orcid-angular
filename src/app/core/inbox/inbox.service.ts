@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs'
+import { BehaviorSubject, EMPTY, Observable, ReplaySubject } from 'rxjs'
 import { catchError, map, switchMap, tap, retry } from 'rxjs/operators'
 import { AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL } from 'src/app/constants'
 import { ERROR_REPORT } from 'src/app/errors'
@@ -222,19 +222,24 @@ export class InboxService {
       )
   }
 
-  private _fetchAndUpdateUnreadCount(): Observable<number> {
+  private _fetchAndUpdateUnreadCount(): Observable<number | null> {
     return this._http
-      .get<number>(runtimeEnvironment.BASE_URL + 'inbox/unreadCount.json', {
-        headers: this.headers,
-      })
+      .get<number>(
+        `${runtimeEnvironment.BASE_URL}inbox/unreadCount.json`,
+        { headers: this.headers, observe: 'response' } // full response
+      )
       .pipe(
-        retry(3),
-        tap((count: number) => {
-          this._unreadCountSubject.next(count)
+        map((resp) => {
+          // If the server bounced us to /login, treat as “not logged in”
+          return resp.url?.includes('/login') ? null : resp.body ?? null
         }),
-        catchError((error) =>
-          this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
-        )
+        tap((count) => {
+          if (count !== null) {
+            // If we got a valid count, update the BehaviorSubject
+            this._unreadCountSubject.next(count)
+          }
+        }),
+        catchError(() => EMPTY) // If the request fails, we just return an empty observable
       )
   }
 
