@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs'
+import { BehaviorSubject, EMPTY, Observable, ReplaySubject } from 'rxjs'
 import { catchError, map, switchMap, tap, retry } from 'rxjs/operators'
 import { AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL } from 'src/app/constants'
 import { ERROR_REPORT } from 'src/app/errors'
@@ -228,13 +228,13 @@ export class InboxService {
         headers: this.headers,
       })
       .pipe(
-        retry(3),
         tap((count: number) => {
           this._unreadCountSubject.next(count)
         }),
-        catchError((error) =>
-          this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
-        )
+        catchError((error) => {
+          // If the user is not logged in and error is expected, we return null
+          return EMPTY
+        })
       )
   }
 
