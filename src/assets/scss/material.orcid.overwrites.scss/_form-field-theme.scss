@@ -21,21 +21,23 @@
   mat-hint {
     color: map-get($foreground, 'text-dark-mid');
   }
+  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
   .mat-focused.mat-warn .mat-form-field-outline-thick,
   .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid
     .mat-form-field-outline-thick {
     color: mat.get-color-from-palette($warn, 700);
   }
-  .mat-form-field.mat-warn .mat-input-element,
+  .mat-mdc-form-field.mat-warn .mat-mdc-input-element,
   .mat-form-field-invalid .mat-input-element {
     color: mat.get-color-from-palette($warn, 700);
   }
-  .mat-form-field.mat-form-field-invalid .mat-form-field-label {
+  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
+  .mat-mdc-form-field.mat-form-field-invalid .mat-form-field-label {
     color: mat.get-color-from-palette($warn, 700);
   }
 
   .mat-select-placeholder,
-  .mat-input-element::placeholder,
+  .mat-mdc-input-element::placeholder,
   textarea.mat-input-element::placeholder {
     color: mat.get-color-from-palette($background, placeholder-grey);
   }

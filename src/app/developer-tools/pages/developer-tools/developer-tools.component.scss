@@ -34,6 +34,7 @@ mat-form-field {
 
 :host {
   ::ng-deep {
+    /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
     .mat-form-field-appearance-outline .mat-form-field-subscript-wrapper {
       padding-left: 0;
     }
@@ -160,7 +161,7 @@ app-alert-message {
     display: flex;
     flex-direction: row;
 
-    .mat-icon-button {
+    .mat-mdc-icon-button {
       top: -5px;
     }
   }

@@ -1,8 +1,10 @@
 // Overwrites for:
 // https://github.com/angular/components/blob/8.1.4/src/material/chips/chips.scss
 
+/* TODO(mdc-migration): The following rule targets internal classes of chips that may no longer apply for the MDC version.*/
+/* TODO(mdc-migration): The following rule targets internal classes of chips that may no longer apply for the MDC version.*/
 mat-chip-list {
-  .mat-standard-chip.orcid-outline-chip {
+  .mat-mdc-standard-chip.orcid-outline-chip {
     border-radius: 4px;
     border-style: solid;
     border-width: 1px;

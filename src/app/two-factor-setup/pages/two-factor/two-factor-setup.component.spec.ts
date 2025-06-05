@@ -10,7 +10,7 @@ import { ErrorHandlerService } from '../../../core/error-handler/error-handler.s
 import { PlatformInfoService } from '../../../cdk/platform-info'
 import { RouterTestingModule } from '@angular/router/testing'
 import { SnackbarService } from '../../../cdk/snackbar/snackbar.service'
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
+import { MatSnackBar } from '@angular/material/snack-bar'
 import { Overlay } from '@angular/cdk/overlay'
 import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core'
 import { By } from '@angular/platform-browser'

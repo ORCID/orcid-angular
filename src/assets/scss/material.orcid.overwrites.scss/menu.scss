@@ -1,19 +1,19 @@
 // Overwrites for:
 // https://github.com/angular/components/blob/8.2.x/src/material/menu/menu.scss
 
-.mat-menu-panel {
-  .mat-menu-item.orcid-menu-item-small {
+.mat-mdc-menu-panel {
+  .mat-mdc-menu-item.orcid-menu-item-small {
     max-height: 32px;
     line-height: 32px;
     padding: 0 8px;
     min-width: 128px;
   }
 
-  .mat-menu-item.orcid-menu-item-small .mat-icon {
+  .mat-mdc-menu-item.orcid-menu-item-small .mat-icon {
     margin: auto;
     height: auto;
   }
-
+  /* TODO(mdc-migration): The following rule targets internal classes of menu that may no longer apply for the MDC version.*/
   .orcid-mat-menu-header {
     padding: 0 0 0 33px;
     min-height: 32px;
@@ -21,10 +21,10 @@
   }
 }
 
-.mat-menu-panel.trusted-individuals {
+.mat-mdc-menu-panel.trusted-individuals {
   width: auto;
   max-width: initial;
-  .mat-menu-content:not(:empty) {
+  .mat-mdc-menu-content:not(:empty) {
     padding-top: unset;
   }
 }

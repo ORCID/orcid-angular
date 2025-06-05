@@ -8,13 +8,13 @@
   margin-right: auto;
 }
 
-.mat-card-title {
+.mat-mdc-card-title {
   margin-top: 32px !important;
   text-align: center;
   margin-bottom: 8px !important;
 }
 
-.mat-subheading-2 {
+.mat-subtitle-1 {
   text-align: center;
   margin-top: 24px;
   margin-bottom: 4px;
@@ -32,7 +32,7 @@
   display: inline;
 }
 
-.mat-card .mat-divider-horizontal {
+.mat-mdc-card .mat-divider-horizontal {
   position: relative;
 }
 
@@ -54,15 +54,15 @@
     font-style: normal;
     font-weight: 500;
   }
-
+  /* TODO(mdc-migration): The following rule targets internal classes of progress-bar that may no longer apply for the MDC version. */
   mat-progress-bar {
     top: 0 !important;
   }
-
+  /* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version. */
   mat-card-title {
     margin: 0 0 32px 0 !important;
   }
-
+  /* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version. */
   mat-card-content {
     margin: 0px;
   }

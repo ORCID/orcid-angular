@@ -3,6 +3,7 @@
     <div class="row space-around">
       <div class="col l6 m6 s4">
         <mat-card
+          appearance="outlined"
           class="orcid-wizard sign-in-wrapper"
           [ngClass]="{
             mobile: platform?.columns4
@@ -26,7 +27,7 @@
                 Sign in to ORCID
               </h1>
               <div class="row">
-                <div class="mat-body-1">
+                <div class="mat-body-2">
                   <ng-container i18n="@@ngOrcid.signin.dontHaveYourOrcid">
                     Don't have your ORCID iD yet?
                   </ng-container>

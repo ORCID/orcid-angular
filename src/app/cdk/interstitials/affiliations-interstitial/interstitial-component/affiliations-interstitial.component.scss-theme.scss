@@ -8,7 +8,7 @@
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
 
-  .mat-raised-button.mat-primary:not(.mat-raised-button.mat-primary) {
+  .mat-mdc-raised-button.mat-primary:not(.mat-raised-button.mat-primary) {
     background-color: mat.get-color-from-palette($primary, 700);
   }
 
@@ -20,6 +20,7 @@
 
   ::ng-deep {
     mat-form-field.selected-org {
+      /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
       .mat-form-field-flex {
         background-color: mat.get-color-from-palette(
           $background,

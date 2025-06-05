@@ -4,14 +4,14 @@
   margin-bottom: 32px;
 
   ::ng-deep {
-    .mat-card-header {
+    .mat-mdc-card-header {
       width: unset !important;
       padding: 24px 64px 0 64px !important;
-      .mat-card-title {
+      .mat-mdc-card-title {
         margin-bottom: 0;
       }
     }
-    .mat-card-content {
+    .mat-mdc-card-content {
       margin: 24px 64px 64px 64px !important;
     }
   }
@@ -19,10 +19,10 @@
 .handset {
   :host {
     ::ng-deep {
-      .mat-card-header {
+      .mat-mdc-card-header {
         padding: 0 0 0 0 !important;
       }
-      .mat-card-content {
+      .mat-mdc-card-content {
         margin: 0 0 0 0 !important;
       }
     }
@@ -42,7 +42,7 @@ img {
   max-width: 150px;
 }
 
-.mat-icon-button {
+.mat-mdc-icon-button {
   display: inline-block !important;
 }
 
@@ -157,6 +157,7 @@ mat-label.orc-font-small-print {
 }
 
 :host {
+  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
   ::ng-deep .mat-form-field-suffix {
     button {
       height: 24px;
@@ -166,12 +167,13 @@ mat-label.orc-font-small-print {
       }
     }
   }
+  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
   ::ng-deep .mat-form-field-subscript-wrapper {
     padding: 0 !important;
   }
 }
 
-.mat-option {
+.mat-mdc-option {
   min-height: 64px;
   line-height: 32px;
   height: auto;

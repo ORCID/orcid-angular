@@ -12,12 +12,12 @@
     color: mat.get-color-from-palette($warn, 700);
   }
 
-  .disabled a.mat-tooltip-trigger.black-url.underline {
+  .disabled a.mat-mdc-tooltip-trigger.black-url.underline {
     color: mat.get-color-from-palette($background, dark-grey);
   }
 
   .disabled
-    mat-icon.mat-icon.mat-tooltip-trigger.pointer.material-icons.mat-icon-no-color {
+    mat-icon.mat-icon.mat-mdc-tooltip-trigger.pointer.material-icons.mat-icon-no-color {
     color: mat.get-color-from-palette($background, dark-grey);
   }
 }

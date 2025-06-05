@@ -8,19 +8,19 @@ import { RegisterService } from '../../../../../core/register/register.service'
 import { PlatformInfoService } from '../../../../../cdk/platform-info'
 import { ErrorHandlerService } from '../../../../../core/error-handler/error-handler.service'
 import { SnackbarService } from '../../../../../cdk/snackbar/snackbar.service'
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
+import { MatSnackBar } from '@angular/material/snack-bar'
 import {
-  MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA,
-  MatLegacyDialog as MatDialog,
-  MatLegacyDialogRef as MatDialogRef,
-} from '@angular/material/legacy-dialog'
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { SharedModule } from '../../../../../shared/shared.module'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { ReactiveFormsModule } from '@angular/forms'
 import { VisibilitySelectorComponent } from 'src/app/cdk/visibility-selector/visibility-selector/visibility-selector.component'
-import { MatLegacyMenuModule } from '@angular/material/legacy-menu'
+import { MatMenuModule } from '@angular/material/menu'
 
 describe('WorksVisibilityModalComponent', () => {
   let component: WorksVisibilityModalComponent
@@ -33,7 +33,7 @@ describe('WorksVisibilityModalComponent', () => {
         RouterTestingModule,
         SharedModule,
         ReactiveFormsModule,
-        MatLegacyMenuModule,
+        MatMenuModule,
       ],
       declarations: [
         WorksVisibilityModalComponent,

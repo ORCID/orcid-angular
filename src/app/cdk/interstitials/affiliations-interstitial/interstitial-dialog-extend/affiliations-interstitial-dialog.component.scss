@@ -1,6 +1,9 @@
 @import '../interstitial-component/affiliations-interstitial.component.scss';
 
+/* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version. */
+/* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version. */
 mat-card-header.authorize-header {
+  /* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version. */
   mat-card-title {
     margin: 0 0 24px 0 !important;
     display: flex;

@@ -14,7 +14,7 @@
 
   .step-actions {
     border-color: mat.get-color-from-palette($background, ui-background-light);
-    .mat-raised-button.mat-primary {
+    .mat-mdc-raised-button.mat-primary {
       background-color: mat.get-color-from-palette($primary, 700);
     }
     a {
@@ -82,6 +82,7 @@
       mat-icon {
         color: map-get($foreground, 'brand-primary-dark');
       }
+      /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
       .mat-form-field-outline {
         color: map-get($foreground, 'brand-primary-dark');
         background-color: mat.get-color-from-palette(
@@ -92,10 +93,11 @@
     }
 
     .disable-error {
+      /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
       .mat-form-field-outline {
         color: rgba(0, 0, 0, 0.12) !important;
       }
-      .mat-input-element {
+      .mat-mdc-input-element {
         color: $orcid-dark-primary-text !important;
       }
     }

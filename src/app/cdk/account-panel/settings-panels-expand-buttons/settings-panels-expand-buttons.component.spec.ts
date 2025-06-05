@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { PanelExpandButtonsComponent as SettingsPanelExpandButtonsComponent } from './settings-panels-expand-buttons.component'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
-import { MatLegacyTooltipModule } from '@angular/material/legacy-tooltip'
+import { MatTooltipModule } from '@angular/material/tooltip'
 
 describe('PanelExpandButtonsComponent', () => {
   let component: SettingsPanelExpandButtonsComponent
@@ -11,7 +11,7 @@ describe('PanelExpandButtonsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MatLegacyTooltipModule],
+      imports: [MatTooltipModule],
       declarations: [SettingsPanelExpandButtonsComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()

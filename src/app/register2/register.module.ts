@@ -12,14 +12,14 @@ import { StepDComponent } from './components/step-d/step-d.component'
 import { RegisterRoutingModule } from './register-routing.module'
 // tslint:disable-next-line: max-line-length
 import { MatIconModule } from '@angular/material/icon'
-import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button'
-import { MatLegacyCardModule as MatCardModule } from '@angular/material/legacy-card'
-import { MatLegacyCheckboxModule as MatCheckboxModule } from '@angular/material/legacy-checkbox'
-import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog'
-import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field'
-import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input'
-import { MatLegacyProgressBarModule as MatProgressBarModule } from '@angular/material/legacy-progress-bar'
-import { MatLegacyRadioModule as MatRadioModule } from '@angular/material/legacy-radio'
+import { MatButtonModule } from '@angular/material/button'
+import { MatCardModule } from '@angular/material/card'
+import { MatCheckboxModule } from '@angular/material/checkbox'
+import { MatDialogModule } from '@angular/material/dialog'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatInputModule } from '@angular/material/input'
+import { MatProgressBarModule } from '@angular/material/progress-bar'
+import { MatRadioModule } from '@angular/material/radio'
 import { MatStepperModule } from '@angular/material/stepper'
 import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
 import { FormDirectivesModule } from '../cdk/form-directives/form-directives.module'
@@ -33,9 +33,9 @@ import { FormPersonalAdditionalEmailsComponent } from './components/form-persona
 import { Register2Component } from './pages/register/register2.component'
 import { StepCComponent } from './components/step-c/step-c.component'
 import { FormCurrentEmploymentComponent } from './components/form-current-employment/form-current-employment.component'
-import { MatLegacyAutocompleteModule as MatAutocompleteModule } from '@angular/material/legacy-autocomplete'
+import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import { StepC2Component } from './components/step-c2/step-c2.component'
-import { MatLegacySelectModule } from '@angular/material/legacy-select'
+import { MatSelectModule } from '@angular/material/select'
 import { SharedModule } from '../shared/shared.module'
 import { AlertMessageModule } from '../cdk/alert-message/alert-message.module'
 
@@ -80,7 +80,7 @@ import { AlertMessageModule } from '../cdk/alert-message/alert-message.module'
     FormDirectivesModule,
     WarningMessageModule,
     MatAutocompleteModule,
-    MatLegacySelectModule,
+    MatSelectModule,
     SharedModule,
   ],
 })

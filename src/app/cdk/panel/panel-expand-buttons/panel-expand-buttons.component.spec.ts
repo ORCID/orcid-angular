@@ -4,7 +4,7 @@ import { PanelExpandButtonsComponent } from './panel-expand-buttons.component'
 import { AppPanelsExpandAriaLabelPipe } from '../../../shared/pipes/app-panels-expand-aria-label/app-panels-expand-aria-label.pipe'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
-import { MatLegacyTooltipModule } from '@angular/material/legacy-tooltip'
+import { MatTooltipModule } from '@angular/material/tooltip'
 
 describe('PanelExpandButtonsComponent', () => {
   let component: PanelExpandButtonsComponent
@@ -12,7 +12,7 @@ describe('PanelExpandButtonsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MatLegacyTooltipModule],
+      imports: [MatTooltipModule],
       declarations: [PanelExpandButtonsComponent, AppPanelsExpandAriaLabelPipe],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()

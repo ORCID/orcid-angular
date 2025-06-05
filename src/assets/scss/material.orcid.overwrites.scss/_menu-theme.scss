@@ -12,10 +12,12 @@
   );
   $unselected-foreground: mat.get-color-from-palette($foreground, text);
 
-  .mat-menu-panel {
+  .mat-mdc-menu-panel {
+    /* TODO(mdc-migration): The following rule targets internal classes of menu that may no longer apply for the MDC version. */
     .orcid-mat-menu-header {
       color: map-get($foreground, text);
     }
+    /* TODO(mdc-migration): The following rule targets internal classes of menu that may no longer apply for the MDC version. */
     .orcid-mat-menu-item-active {
       background-color: rgba(0, 0, 0, 0.08);
     }

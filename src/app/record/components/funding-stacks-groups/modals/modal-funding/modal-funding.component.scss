@@ -26,11 +26,11 @@ hr {
   }
 }
 
-.mat-form-field {
+.mat-mdc-form-field {
   width: 100%;
 }
 
-.mat-option {
+.mat-mdc-option {
   height: 64px;
   line-height: 32px;
 }
@@ -39,6 +39,7 @@ hr {
   text-decoration: underline;
 }
 
+/* TODO(mdc-migration): The following rule targets internal classes of radio that may no longer apply for the MDC version. */
 mat-radio-button {
   margin-top: 16px;
   padding-left: 2px;
@@ -83,6 +84,7 @@ mat-radio-button {
   }
 }
 
+/* TODO(mdc-migration): The following rule targets internal classes of radio that may no longer apply for the MDC version. */
 mat-radio-group {
   display: flex;
   flex-direction: column;
@@ -123,7 +125,7 @@ mat-radio-group {
 
 .language {
   padding-bottom: 1.475em;
-
+  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
   ::ng-deep .mat-form-field-wrapper {
     padding-bottom: 0 !important;
   }
@@ -134,7 +136,7 @@ mat-radio-group {
   }
 }
 
-.mat-option {
+.mat-mdc-option {
   min-height: 64px;
   line-height: 32px;
   height: auto;

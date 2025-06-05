@@ -14,7 +14,7 @@
   );
   $unselected-foreground: mat.get-color-from-palette($foreground, text);
 
-  .mat-chip.mat-standard-chip.orcid-outline-chip {
+  .mat-mdc-chip.mat-mdc-standard-chip.orcid-outline-chip {
     border-color: $divider-color;
 
     // Overwrites hover and focus states to follow material definitions
@@ -29,26 +29,27 @@
         opacity: 0.12;
       }
     }
-
+    /* TODO(mdc-migration): The following rule targets internal classes of chips that may no longer apply for the MDC version.*/
+    /* TODO(mdc-migration): The following rule targets internal classes of chips that may no longer apply for the MDC version.*/
     &.mat-chip-disabled {
       &::after {
         opacity: 0;
       }
-
+      /* TODO(mdc-migration): The following rule targets internal classes of chips that may no longer apply for the MDC version.*/
       .mat-chip-remove,
       .mat-chip-trailing-icon {
         cursor: default;
       }
     }
   }
-
-  .mat-chip.mat-standard-chip.mat-chip-selected.orcid-outline-chip {
+  /* TODO(mdc-migration): The following rule targets internal classes of chips that may no longer apply for the MDC version.*/
+  .mat-mdc-chip.mat-mdc-standard-chip.mat-chip-selected.orcid-outline-chip {
     // Overwrites active states to follow material definitions
     // https://material.io/design/interaction/states.html#anatomy
 
     background-color: $unselected-background;
     color: $unselected-foreground;
-
+    /* TODO(mdc-migration): The following rule targets internal classes of chips that may no longer apply for the MDC version.*/
     .mat-chip-remove {
       color: $unselected-foreground;
       opacity: 0.4;
