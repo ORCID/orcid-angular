@@ -63,8 +63,6 @@ export class AuthorizeComponent {
     private userService: UserService,
     private platformInfoService: PlatformInfoService,
     @Inject(WINDOW) private window: Window,
-    private googleTagManagerService: GoogleTagManagerService,
-    private errorHandlerService: ErrorHandlerService,
     private recordService: RecordService,
     private loginMainInterstitialsManagerService: LoginMainInterstitialsManagerService
   ) {}
