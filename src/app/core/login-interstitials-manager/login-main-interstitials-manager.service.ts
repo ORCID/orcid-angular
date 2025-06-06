@@ -162,7 +162,7 @@ export class LoginMainInterstitialsManagerService {
   /**
    * Valid user check & ensures not impersonating
    */
-  private isValidUserRecord(userRecord: UserRecord): boolean {
+  isValidUserRecord(userRecord: UserRecord): boolean {
     if (
       !userRecord?.userInfo ||
       !userRecord?.emails ||
