@@ -1,3 +1,13 @@
+## v2.115.12 - 2025-06-09
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.11...v2.115.12)
+
+## v2.115.11 - 2025-06-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.10...v2.115.11)
+
+- [#2538](https://github.com/ORCID/orcid-angular/pull/2538): Leo/fix oauth automation
+
 ## v2.115.10 - 2025-06-05
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.9...v2.115.10)

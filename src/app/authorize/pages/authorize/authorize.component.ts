@@ -63,8 +63,6 @@ export class AuthorizeComponent {
     private userService: UserService,
     private platformInfoService: PlatformInfoService,
     @Inject(WINDOW) private window: Window,
-    private googleTagManagerService: GoogleTagManagerService,
-    private errorHandlerService: ErrorHandlerService,
     private recordService: RecordService,
     private loginMainInterstitialsManagerService: LoginMainInterstitialsManagerService
   ) {}
@@ -221,8 +219,9 @@ export class AuthorizeComponent {
     session: UserSession
   ): Observable<UserSession> {
     return this.recordService.getRecord({}).pipe(
-      // Only proceed if the record has userInfo, emails, and at least one affiliation
-      filter((rec: UserRecord) => !!rec && !!rec.userInfo),
+      filter((rec: UserRecord) =>
+        this.loginMainInterstitialsManagerService.isValidUserRecord(rec)
+      ),
       take(1),
       switchMap((validRecord) =>
         this.loginMainInterstitialsManagerService
