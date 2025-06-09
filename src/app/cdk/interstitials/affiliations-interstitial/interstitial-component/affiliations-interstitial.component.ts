@@ -1,4 +1,11 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core'
 import {
   UntypedFormGroup,
   UntypedFormControl,
@@ -62,6 +69,11 @@ export class AffiliationsInterstitialComponent implements OnInit, OnDestroy {
   ariaLabelOrganization = $localize`:@@register.organization:Organization`
   ariaLabelPrefilledOrganization = $localize`:@@register.prefilledOrganization:Organization - We've added an organization based on your email domain`
 
+  @Output() finish = new EventEmitter<void>()
+
+  afterSummitStatus = false
+  beforeSummit = true
+
   /** Range of possible years. */
   years = Array(110)
     .fill(0)
@@ -74,6 +86,9 @@ export class AffiliationsInterstitialComponent implements OnInit, OnDestroy {
 
   platform: PlatformInfo
   userDomainMatched: string
+  addedAffiliation: Affiliation
+  $destroy: Subject<void> = new Subject<void>()
+  organizationName: string
 
   constructor(
     @Inject(WINDOW) private window: Window,
@@ -176,6 +191,13 @@ export class AffiliationsInterstitialComponent implements OnInit, OnDestroy {
               }
             })
           )
+      })
+
+    this.user
+      .getUserSession()
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((userInfo) => {
+        this.organizationName = userInfo.oauthSession?.clientName
       })
   }
 
@@ -300,9 +322,8 @@ export class AffiliationsInterstitialComponent implements OnInit, OnDestroy {
         visibility: { visibility: 'PUBLIC' },
         putCode: {} as Value,
       }
-
       this.recordAffiliationService.postAffiliation(affiliation).subscribe(
-        () => this.finishIntertsitial(affiliation?.affiliationName?.value),
+        () => this.afterSummit(affiliation),
         () => this.finishIntertsitial()
       )
     } else {
@@ -310,11 +331,18 @@ export class AffiliationsInterstitialComponent implements OnInit, OnDestroy {
     }
   }
 
-  finishIntertsitial(institutionName?: string) {
-    // PLACEHOLDER end-of-flow handling for OAUTH
-    console.warn('OAUTH finishIntertsitial')
+  afterSummit(affiliation?: Affiliation) {
+    this.addedAffiliation = affiliation
+    this.afterSummitStatus = true
+    this.beforeSummit = false
+    setTimeout(() => {
+      this.finishIntertsitial()
+    }, 10000)
   }
 
+  finishIntertsitial() {
+    this.finish.emit()
+  }
   /** Ensure single-digit months are properly zero-padded. */
   addTrailingZero(date: string): string {
     if (date && Number(date) < 10) {

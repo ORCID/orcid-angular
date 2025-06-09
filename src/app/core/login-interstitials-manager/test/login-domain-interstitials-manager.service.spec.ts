@@ -5,14 +5,17 @@ import {
 } from '@angular/material/legacy-dialog'
 import { of, Subject } from 'rxjs'
 import { InterstitialsService } from 'src/app/cdk/interstitials/interstitials.service'
-import { TogglzService } from '../togglz/togglz.service'
-import { QaFlagsService } from '../qa-flag/qa-flag.service'
+
 import { InterstitialType } from 'src/app/cdk/interstitials/interstitial.type'
-import { QaFlag } from '../qa-flag/qa-flags.enum'
 import { UserRecord } from 'src/app/types/record.local'
-import { ShareEmailsDomainsDialogComponent } from 'src/app/cdk/interstitials/share-emails-domains/share-emails-domains-dialog.component'
 import { AssertionVisibilityString, EmailsEndpoint } from 'src/app/types'
-import { LoginDomainInterstitialManagerService } from './login-domain-interstitials-manager.service'
+import { QaFlagsService } from '../../qa-flag/qa-flag.service'
+import { QaFlag } from '../../qa-flag/qa-flags.enum'
+import { TogglzService } from '../../togglz/togglz.service'
+import { LoginDomainInterstitialManagerService } from '../implementations/login-domain-interstitials-manager.service'
+import { ShareEmailsDomainsDialogComponent } from 'src/app/cdk/interstitials/share-emails-domains/interstitial-dialog-extend/share-emails-domains-dialog.component'
+import { inject } from '@angular/core'
+import { WINDOW_PROVIDERS } from 'src/app/cdk/window'
 
 describe('LoginDomainInterstitialManagerService', () => {
   let service: LoginDomainInterstitialManagerService
@@ -43,6 +46,7 @@ describe('LoginDomainInterstitialManagerService', () => {
         { provide: InterstitialsService, useValue: mockInterstitialsService },
         { provide: TogglzService, useValue: mockTogglzService },
         { provide: QaFlagsService, useValue: mockQaFlagsService },
+        WINDOW_PROVIDERS,
       ],
     })
 
@@ -57,7 +61,10 @@ describe('LoginDomainInterstitialManagerService', () => {
     })
 
     it('should have the correct INTERSTITIAL_TOGGLE', () => {
-      expect(service.INTERSTITIAL_TOGGLE).toBe('LOGIN_DOMAINS_INTERSTITIAL')
+      expect(service.INTERSTITIAL_TOGGLE).toEqual([
+        'LOGIN_DOMAINS_INTERSTITIAL',
+        'OAUTH_DOMAINS_INTERSTITIAL',
+      ])
     })
 
     it('should have the correct QA_FLAG_FOR_FORCE_INTERSTITIAL_AS_NEVER_SEEN', () => {
@@ -169,7 +176,10 @@ describe('LoginDomainInterstitialManagerService', () => {
       } as unknown as UserRecord
 
       const result = service.getDialogDataToShow(userRecord)
-      expect(result).toEqual({ userEmailsJson: userRecord.emails })
+      expect(result).toEqual({
+        userEmailsJson: userRecord.emails,
+        type: 'domains-interstitial',
+      })
     })
   })
 
@@ -193,7 +203,7 @@ describe('LoginDomainInterstitialManagerService', () => {
       mockMatDialog.open.and.returnValue(mockDialogRef)
 
       // Act
-      service.showInterstitial(userRecord).subscribe((dialogResult) => {
+      service.showInterstitialAsDialog(userRecord).subscribe((dialogResult) => {
         expect(dialogResult).toEqual({ type: 'domains-interstitial' })
         done()
       })

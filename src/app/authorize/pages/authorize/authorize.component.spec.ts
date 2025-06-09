@@ -13,6 +13,8 @@ import { Overlay } from '@angular/cdk/overlay'
 import { UserService } from '../../../core'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { P } from '@angular/cdk/keycodes'
+import { LoginMainInterstitialsManagerService } from 'src/app/core/login-interstitials-manager/login-main-interstitials-manager.service'
 
 describe('AuthorizeComponent', () => {
   let component: AuthorizeComponent
@@ -31,6 +33,10 @@ describe('AuthorizeComponent', () => {
         MatSnackBar,
         MatDialog,
         Overlay,
+        {
+          provide: LoginMainInterstitialsManagerService,
+          useValue: {},
+        },
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()

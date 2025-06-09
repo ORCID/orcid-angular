@@ -1,4 +1,4 @@
-@import '../../../../assets/scss/orcid.spacing.scss';
+@import '../../../../../assets/scss/orcid.spacing.scss';
 
 h2 {
   margin-top: 16px;
@@ -7,6 +7,7 @@ h2 {
 .published-email-container {
   display: flex;
   align-items: center;
+  margin-left: 4px;
 }
 
 .published-domain {

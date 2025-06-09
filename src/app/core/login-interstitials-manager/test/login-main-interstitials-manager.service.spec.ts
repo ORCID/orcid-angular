@@ -1,14 +1,14 @@
 import { fakeAsync, TestBed, tick } from '@angular/core/testing'
 import { of, EMPTY, throwError } from 'rxjs'
 import { InterstitialsService } from 'src/app/cdk/interstitials/interstitials.service'
-import { LoginDomainInterstitialManagerService } from './login-domain-interstitials-manager.service'
-import { LoginAffiliationInterstitialManagerService } from './login-affiliation-interstitials-manager.service'
 import { UserRecord } from 'src/app/types/record.local'
-import { ShareEmailsDomainsComponentDialogOutput } from 'src/app/cdk/interstitials/share-emails-domains/share-emails-domains-dialog.component'
-import { AffilationsComponentDialogOutput } from 'src/app/cdk/interstitials/affiliations-interstitial/affiliations-interstitial-dialog.component'
-import { LoginMainInterstitialsManagerService } from './login-main-interstitials-manager.service'
 import { EmailsEndpoint, UserInfo } from 'src/app/types'
 import { AffiliationUIGroup } from 'src/app/types/record-affiliation.endpoint'
+import { LoginAffiliationInterstitialManagerService } from '../implementations/login-affiliation-interstitials-manager.service'
+import { LoginDomainInterstitialManagerService } from '../implementations/login-domain-interstitials-manager.service'
+import { LoginMainInterstitialsManagerService } from '../login-main-interstitials-manager.service'
+import { ShareEmailsDomainsComponentDialogOutput } from 'src/app/cdk/interstitials/share-emails-domains/interstitial-dialog-extend/share-emails-domains-dialog.component'
+import { AffilationsComponentDialogOutput } from 'src/app/cdk/interstitials/affiliations-interstitial/interstitial-dialog-extend/affiliations-interstitial-dialog.component'
 
 // Mock runtime environment for debugging logs if needed
 // (Remove or adapt if your environment differs)
@@ -70,7 +70,7 @@ describe('LoginMainInterstitialsManagerService', () => {
           'userIsElegibleForInterstitial',
           'getInterstitialTogglz',
           'getInterstitialViewed',
-          'showInterstitial',
+          'showInterstitialAsDialog',
         ],
         {
           // if needed, you can define read-only property stubs here
@@ -85,7 +85,7 @@ describe('LoginMainInterstitialsManagerService', () => {
           'userIsElegibleForInterstitial',
           'getInterstitialTogglz',
           'getInterstitialViewed',
-          'showInterstitial',
+          'showInterstitialAsDialog',
         ],
         {
           INTERSTITIAL_NAME: 'AFFILIATION_INTERSTITIAL',
@@ -119,11 +119,11 @@ describe('LoginMainInterstitialsManagerService', () => {
     mockLoginDomainInterstitialManagerService.userIsElegibleForInterstitial.calls.reset()
     mockLoginDomainInterstitialManagerService.getInterstitialTogglz.calls.reset()
     mockLoginDomainInterstitialManagerService.getInterstitialViewed.calls.reset()
-    mockLoginDomainInterstitialManagerService.showInterstitial.calls.reset()
+    mockLoginDomainInterstitialManagerService.showInterstitialAsDialog.calls.reset()
     mockLoginAffiliationInterstitialManagerService.userIsElegibleForInterstitial.calls.reset()
     mockLoginAffiliationInterstitialManagerService.getInterstitialTogglz.calls.reset()
     mockLoginAffiliationInterstitialManagerService.getInterstitialViewed.calls.reset()
-    mockLoginAffiliationInterstitialManagerService.showInterstitial.calls.reset()
+    mockLoginAffiliationInterstitialManagerService.showInterstitialAsDialog.calls.reset()
   })
 
   it('should be created', () => {
@@ -132,20 +132,25 @@ describe('LoginMainInterstitialsManagerService', () => {
 
   it('should return EMPTY immediately if userRecord is invalid', (done) => {
     // This user is invalid because there are no affiliations
-    service.checkLoginInterstitials(invalidUserRecord).subscribe({
-      next: () => fail('Should not emit any value'),
-      complete: () => {
-        // No calls should be made
-        expect(
-          mockLoginDomainInterstitialManagerService.userIsElegibleForInterstitial
-        ).not.toHaveBeenCalled()
-        expect(
-          mockLoginAffiliationInterstitialManagerService.userIsElegibleForInterstitial
-        ).not.toHaveBeenCalled()
+    service
+      .checkLoginInterstitials(invalidUserRecord, {
+        returnType: 'dialog',
+        togglzPrefix: 'LOGIN',
+      })
+      .subscribe({
+        next: () => fail('Should not emit any value'),
+        complete: () => {
+          // No calls should be made
+          expect(
+            mockLoginDomainInterstitialManagerService.userIsElegibleForInterstitial
+          ).not.toHaveBeenCalled()
+          expect(
+            mockLoginAffiliationInterstitialManagerService.userIsElegibleForInterstitial
+          ).not.toHaveBeenCalled()
 
-        done()
-      },
-    })
+          done()
+        },
+      })
   })
 
   it('should return EMPTY immediately if session is already checked', (done) => {
@@ -154,20 +159,25 @@ describe('LoginMainInterstitialsManagerService', () => {
       true
     )
 
-    service.checkLoginInterstitials(validUserRecord).subscribe({
-      next: () => fail('Should not emit any value'),
-      complete: () => {
-        // No calls to the interstitial services if session is already checked
-        expect(
-          mockLoginDomainInterstitialManagerService.userIsElegibleForInterstitial
-        ).not.toHaveBeenCalled()
-        expect(
-          mockLoginAffiliationInterstitialManagerService.userIsElegibleForInterstitial
-        ).not.toHaveBeenCalled()
+    service
+      .checkLoginInterstitials(validUserRecord, {
+        returnType: 'dialog',
+        togglzPrefix: 'LOGIN',
+      })
+      .subscribe({
+        next: () => fail('Should not emit any value'),
+        complete: () => {
+          // No calls to the interstitial services if session is already checked
+          expect(
+            mockLoginDomainInterstitialManagerService.userIsElegibleForInterstitial
+          ).not.toHaveBeenCalled()
+          expect(
+            mockLoginAffiliationInterstitialManagerService.userIsElegibleForInterstitial
+          ).not.toHaveBeenCalled()
 
-        done()
-      },
-    })
+          done()
+        },
+      })
   })
 
   it('should call only the first service that is eligible, togglz on, and not previously viewed', fakeAsync(() => {
@@ -186,7 +196,7 @@ describe('LoginMainInterstitialsManagerService', () => {
     mockLoginDomainInterstitialManagerService.getInterstitialViewed.and.returnValue(
       of(false)
     )
-    mockLoginDomainInterstitialManagerService.showInterstitial.and.returnValue(
+    mockLoginDomainInterstitialManagerService.showInterstitialAsDialog.and.returnValue(
       of({
         type: 'domains-interstitial',
       } as ShareEmailsDomainsComponentDialogOutput)
@@ -202,38 +212,43 @@ describe('LoginMainInterstitialsManagerService', () => {
     mockLoginAffiliationInterstitialManagerService.getInterstitialViewed.and.returnValue(
       of(false)
     )
-    mockLoginAffiliationInterstitialManagerService.showInterstitial.and.returnValue(
+    mockLoginAffiliationInterstitialManagerService.showInterstitialAsDialog.and.returnValue(
       of({} as AffilationsComponentDialogOutput)
     )
 
-    service.checkLoginInterstitials(validUserRecord).subscribe({
-      next: (result) => {
-        // Expect it to be the domain result
-        expect(result).toEqual({
-          type: 'domains-interstitial',
-        } as ShareEmailsDomainsComponentDialogOutput)
-      },
-      complete: () => {
-        // LoginDomainInterstitialManagerService should have been fully called
-        expect(
-          mockLoginDomainInterstitialManagerService.userIsElegibleForInterstitial
-        ).toHaveBeenCalled()
-        expect(
-          mockLoginDomainInterstitialManagerService.getInterstitialTogglz
-        ).toHaveBeenCalled()
-        expect(
-          mockLoginDomainInterstitialManagerService.getInterstitialViewed
-        ).toHaveBeenCalled()
-        expect(
-          mockLoginDomainInterstitialManagerService.showInterstitial
-        ).toHaveBeenCalled()
+    service
+      .checkLoginInterstitials(validUserRecord, {
+        returnType: 'dialog',
+        togglzPrefix: 'LOGIN',
+      })
+      .subscribe({
+        next: (result) => {
+          // Expect it to be the domain result
+          expect(result).toEqual({
+            type: 'domains-interstitial',
+          } as ShareEmailsDomainsComponentDialogOutput)
+        },
+        complete: () => {
+          // LoginDomainInterstitialManagerService should have been fully called
+          expect(
+            mockLoginDomainInterstitialManagerService.userIsElegibleForInterstitial
+          ).toHaveBeenCalled()
+          expect(
+            mockLoginDomainInterstitialManagerService.getInterstitialTogglz
+          ).toHaveBeenCalled()
+          expect(
+            mockLoginDomainInterstitialManagerService.getInterstitialViewed
+          ).toHaveBeenCalled()
+          expect(
+            mockLoginDomainInterstitialManagerService.showInterstitialAsDialog
+          ).toHaveBeenCalled()
 
-        // Affiliation service should NOT have been used
-        expect(
-          mockLoginAffiliationInterstitialManagerService.userIsElegibleForInterstitial
-        ).not.toHaveBeenCalled()
-      },
-    })
+          // Affiliation service should NOT have been used
+          expect(
+            mockLoginAffiliationInterstitialManagerService.userIsElegibleForInterstitial
+          ).not.toHaveBeenCalled()
+        },
+      })
     tick(1)
 
     // Finalize block
@@ -258,7 +273,7 @@ describe('LoginMainInterstitialsManagerService', () => {
     mockLoginDomainInterstitialManagerService.getInterstitialViewed.and.returnValue(
       of(false)
     )
-    mockLoginDomainInterstitialManagerService.showInterstitial.and.returnValue(
+    mockLoginDomainInterstitialManagerService.showInterstitialAsDialog.and.returnValue(
       of({
         type: 'domains-interstitial',
       } as ShareEmailsDomainsComponentDialogOutput)
@@ -274,48 +289,53 @@ describe('LoginMainInterstitialsManagerService', () => {
     mockLoginAffiliationInterstitialManagerService.getInterstitialViewed.and.returnValue(
       of(false)
     )
-    mockLoginAffiliationInterstitialManagerService.showInterstitial.and.returnValue(
+    mockLoginAffiliationInterstitialManagerService.showInterstitialAsDialog.and.returnValue(
       of({
         type: 'affiliation-interstitial',
       } as AffilationsComponentDialogOutput)
     )
 
-    service.checkLoginInterstitials(validUserRecord).subscribe({
-      next: (result) => {
-        // Expect it to come from the affiliation service
-        expect(result).toEqual({ type: 'affiliation-interstitial' })
-      },
-      complete: () => {
-        // LoginDomainInterstitialManagerService should have been called partially
-        expect(
-          mockLoginDomainInterstitialManagerService.userIsElegibleForInterstitial
-        ).toHaveBeenCalled()
-        expect(
-          mockLoginDomainInterstitialManagerService.getInterstitialTogglz
-        ).toHaveBeenCalled()
-        // But not getInterstitialViewed or showInterstitial because togglz returned false
-        expect(
-          mockLoginDomainInterstitialManagerService.getInterstitialViewed
-        ).not.toHaveBeenCalled()
-        expect(
-          mockLoginDomainInterstitialManagerService.showInterstitial
-        ).not.toHaveBeenCalled()
+    service
+      .checkLoginInterstitials(validUserRecord, {
+        returnType: 'dialog',
+        togglzPrefix: 'LOGIN',
+      })
+      .subscribe({
+        next: (result) => {
+          // Expect it to come from the affiliation service
+          expect(result).toEqual({ type: 'affiliation-interstitial' })
+        },
+        complete: () => {
+          // LoginDomainInterstitialManagerService should have been called partially
+          expect(
+            mockLoginDomainInterstitialManagerService.userIsElegibleForInterstitial
+          ).toHaveBeenCalled()
+          expect(
+            mockLoginDomainInterstitialManagerService.getInterstitialTogglz
+          ).toHaveBeenCalled()
+          // But not getInterstitialViewed or showInterstitial because togglz returned false
+          expect(
+            mockLoginDomainInterstitialManagerService.getInterstitialViewed
+          ).not.toHaveBeenCalled()
+          expect(
+            mockLoginDomainInterstitialManagerService.showInterstitialAsDialog
+          ).not.toHaveBeenCalled()
 
-        // Then second service steps in
-        expect(
-          mockLoginAffiliationInterstitialManagerService.userIsElegibleForInterstitial
-        ).toHaveBeenCalled()
-        expect(
-          mockLoginAffiliationInterstitialManagerService.getInterstitialTogglz
-        ).toHaveBeenCalled()
-        expect(
-          mockLoginAffiliationInterstitialManagerService.getInterstitialViewed
-        ).toHaveBeenCalled()
-        expect(
-          mockLoginAffiliationInterstitialManagerService.showInterstitial
-        ).toHaveBeenCalled()
-      },
-    })
+          // Then second service steps in
+          expect(
+            mockLoginAffiliationInterstitialManagerService.userIsElegibleForInterstitial
+          ).toHaveBeenCalled()
+          expect(
+            mockLoginAffiliationInterstitialManagerService.getInterstitialTogglz
+          ).toHaveBeenCalled()
+          expect(
+            mockLoginAffiliationInterstitialManagerService.getInterstitialViewed
+          ).toHaveBeenCalled()
+          expect(
+            mockLoginAffiliationInterstitialManagerService.showInterstitialAsDialog
+          ).toHaveBeenCalled()
+        },
+      })
     tick(0)
     // Finalize block
     expect(
@@ -336,31 +356,36 @@ describe('LoginMainInterstitialsManagerService', () => {
       of(false)
     )
 
-    service.checkLoginInterstitials(validUserRecord).subscribe({
-      next: () => fail('No interstitial should be shown'),
-      complete: () => {
-        // We checked both services but neither was eligible
-        expect(
-          mockLoginDomainInterstitialManagerService.getInterstitialTogglz
-        ).not.toHaveBeenCalled()
-        expect(
-          mockLoginDomainInterstitialManagerService.getInterstitialViewed
-        ).not.toHaveBeenCalled()
-        expect(
-          mockLoginDomainInterstitialManagerService.showInterstitial
-        ).not.toHaveBeenCalled()
+    service
+      .checkLoginInterstitials(validUserRecord, {
+        returnType: 'dialog',
+        togglzPrefix: 'LOGIN',
+      })
+      .subscribe({
+        next: () => fail('No interstitial should be shown'),
+        complete: () => {
+          // We checked both services but neither was eligible
+          expect(
+            mockLoginDomainInterstitialManagerService.getInterstitialTogglz
+          ).not.toHaveBeenCalled()
+          expect(
+            mockLoginDomainInterstitialManagerService.getInterstitialViewed
+          ).not.toHaveBeenCalled()
+          expect(
+            mockLoginDomainInterstitialManagerService.showInterstitialAsDialog
+          ).not.toHaveBeenCalled()
 
-        expect(
-          mockLoginAffiliationInterstitialManagerService.getInterstitialTogglz
-        ).not.toHaveBeenCalled()
-        expect(
-          mockLoginAffiliationInterstitialManagerService.getInterstitialViewed
-        ).not.toHaveBeenCalled()
-        expect(
-          mockLoginAffiliationInterstitialManagerService.showInterstitial
-        ).not.toHaveBeenCalled()
-      },
-    })
+          expect(
+            mockLoginAffiliationInterstitialManagerService.getInterstitialTogglz
+          ).not.toHaveBeenCalled()
+          expect(
+            mockLoginAffiliationInterstitialManagerService.getInterstitialViewed
+          ).not.toHaveBeenCalled()
+          expect(
+            mockLoginAffiliationInterstitialManagerService.showInterstitialAsDialog
+          ).not.toHaveBeenCalled()
+        },
+      })
     tick(1)
 
     // Finalize block still runs
@@ -384,15 +409,20 @@ describe('LoginMainInterstitialsManagerService', () => {
       of(true)
     )
 
-    service.checkLoginInterstitials(validUserRecord).subscribe({
-      next: () => fail('Should not emit a valid result due to error'),
-      error: (err) => {
-        expect(err).toBeTruthy()
-      },
-      complete: () => {
-        fail('Should not complete if there was an error thrown')
-      },
-    })
+    service
+      .checkLoginInterstitials(validUserRecord, {
+        returnType: 'dialog',
+        togglzPrefix: 'LOGIN',
+      })
+      .subscribe({
+        next: () => fail('Should not emit a valid result due to error'),
+        error: (err) => {
+          expect(err).toBeTruthy()
+        },
+        complete: () => {
+          fail('Should not complete if there was an error thrown')
+        },
+      })
 
     // Wait a tick for finalize to trigger
     setTimeout(() => {

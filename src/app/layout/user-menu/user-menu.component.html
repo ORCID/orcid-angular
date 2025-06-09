@@ -11,9 +11,9 @@
     id="cy-user-info"
   >
     <img src="./assets/vectors/profile-icon.svg" alt="" />
-    <ng-container *ngIf="platform.columns12" class="name-container">{{
+    <span *ngIf="platform.columns12" class="name-text-container">{{
       displayName
-    }}</ng-container>
+    }}</span>
 
     <mat-icon *ngIf="platform.columns12">expand_more</mat-icon>
   </button>
@@ -28,6 +28,35 @@
   >
     <ng-container i18n="@@header.signin">Sign in</ng-container
     >&nbsp;/&nbsp;<ng-container i18n="@@header.register">Register</ng-container>
+  </button>
+  <button
+    mat-stroked-button
+    class="user-menu-button"
+    (click)="goto('inbox', 'fromHeaderButton')"
+    id="cy-inbox-button"
+    *ngIf="userInfo"
+    [matTooltip]="
+      inboxUnread > 0 ? notificationTooltipActive : notificationTooltip
+    "
+    [attr.aria-label]="
+      inboxUnread > 0 ? notificationi18nActive : notificationi18n
+    "
+  >
+    <mat-icon
+      matBadgeSize="small"
+      matBadgeColor="warn"
+      class="material-icons-outlined"
+      ><img
+        *ngIf="inboxUnread === 0"
+        src="./assets/vectors/notification-button.svg"
+        alt=""
+      />
+      <img
+        *ngIf="inboxUnread > 0"
+        src="./assets/vectors/notification-button-active.svg"
+        alt=""
+      />
+    </mat-icon>
   </button>
 </section>
 <mat-menu #menu="matMenu" class="user-menu" id="cy-user-menu">
@@ -47,9 +76,18 @@
       </div>
     </div>
   </button>
-  <button mat-menu-item (click)="goto('inbox')" id="cy-inbox">
-    <mat-icon>inbox</mat-icon>
-    <span i18n="@@workspace.notifications">Inbox</span>
+  <button mat-menu-item (click)="goto('inbox', 'fromMenuButton')" id="cy-inbox">
+    <mat-icon *ngIf="inboxUnread === 0"
+      ><img
+        class="bell-icon"
+        *ngIf="inboxUnread === 0"
+        src="./assets/vectors/notification-button.svg"
+        alt=""
+    /></mat-icon>
+    <mat-icon *ngIf="inboxUnread > 0"
+      ><img src="./assets/vectors/notification-button-active.svg"
+    /></mat-icon>
+    <span i18n="@@workspace.notifications">Notifications inbox</span>
     ({{ inboxUnread }})
   </button>
   <button
@@ -133,3 +171,4 @@
     <span i18n="@@ngOrcid.logout">Logout</span>
   </button>
 </mat-menu>
+<!-- Beel for Inbox-->

@@ -1,3 +1,109 @@
+## v2.115.12 - 2025-06-09
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.11...v2.115.12)
+
+## v2.115.11 - 2025-06-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.10...v2.115.11)
+
+- [#2538](https://github.com/ORCID/orcid-angular/pull/2538): Leo/fix oauth automation
+
+## v2.115.10 - 2025-06-05
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.9...v2.115.10)
+
+- [#2536](https://github.com/ORCID/orcid-angular/pull/2536): Lmendoza/9820 qa regression oauth and openid tests fail because expected error message for negative scenarios is not displayed
+
+## v2.115.9 - 2025-06-05
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.8...v2.115.9)
+
+- [#2534](https://github.com/ORCID/orcid-angular/pull/2534): 9832-qa-toaster-error-displayed-with-signin-error
+- [#2533](https://github.com/ORCID/orcid-angular/pull/2533): Fix testing
+- [#2532](https://github.com/ORCID/orcid-angular/pull/2532): 9824-qa-replace-inbox-icon-with-notification-icon-in-account-menu
+
+## v2.115.8 - 2025-06-04
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.7...v2.115.8)
+
+- [#2531](https://github.com/ORCID/orcid-angular/pull/2531): Lmendoza/jun 4 2025 multiple fixes
+
+## v2.115.7 - 2025-06-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.6...v2.115.7)
+
+- [#2529](https://github.com/ORCID/orcid-angular/pull/2529): lmendoza/jun-2025-multiple-changes
+
+## v2.115.6 - 2025-05-29
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.5...v2.115.6)
+
+## v2.115.5 - 2025-05-29
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.4...v2.115.5)
+
+- [#2524](https://github.com/ORCID/orcid-angular/pull/2524): add microdelay to interstitial for already authorized users
+
+## v2.115.4 - 2025-05-28
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.3...v2.115.4)
+
+## v2.115.3 - 2025-05-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.2...v2.115.3)
+
+## v2.115.2 - 2025-05-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.1...v2.115.2)
+
+- [#2523](https://github.com/ORCID/orcid-angular/pull/2523): 9803-truncate-extremely-long-user-names-in-the-global-header
+
+## v2.115.1 - 2025-05-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.0...v2.115.1)
+
+## v2.115.0 - 2025-05-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.114.7...v2.115.0)
+
+## v2.114.7 - 2025-05-16
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.114.6...v2.114.7)
+
+- [#2521](https://github.com/ORCID/orcid-angular/pull/2521): nr-fix-random-function
+
+## v2.114.6 - 2025-05-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.114.5...v2.114.6)
+
+- [#2520](https://github.com/ORCID/orcid-angular/pull/2520): Lmendoza/9792 update new relic configuration adjust sampling strategy
+
+## v2.114.5 - 2025-05-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.114.4...v2.114.5)
+
+## v2.114.4 - 2025-05-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.114.3...v2.114.4)
+
+- [#2518](https://github.com/ORCID/orcid-angular/pull/2518):
+
+## v2.114.3 - 2025-05-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.114.2...v2.114.3)
+
+- [#2517](https://github.com/ORCID/orcid-angular/pull/2517): Institutional sign in needs to be done withing the registry
+
+## v2.114.2 - 2025-05-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.114.1...v2.114.2)
+
+- [#2516](https://github.com/ORCID/orcid-angular/pull/2516): Do institutional sign in thorugh the auth server as well
+
+## v2.114.1 - 2025-05-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.114.0...v2.114.1)
+
 ## v2.114.0 - 2025-05-06
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.113.13...v2.114.0)

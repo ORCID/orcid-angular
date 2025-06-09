@@ -5,13 +5,15 @@ import {
 } from '@angular/material/legacy-dialog'
 import { of, Subject } from 'rxjs'
 import { InterstitialsService } from 'src/app/cdk/interstitials/interstitials.service'
-import { TogglzService } from '../togglz/togglz.service'
-import { QaFlagsService } from '../qa-flag/qa-flag.service'
-import { AffiliationsInterstitialDialogComponent } from 'src/app/cdk/interstitials/affiliations-interstitial/affiliations-interstitial-dialog.component'
+
 import { UserRecord } from 'src/app/types/record.local'
 import { InterstitialType } from 'src/app/cdk/interstitials/interstitial.type'
-import { QaFlag } from '../qa-flag/qa-flags.enum'
-import { LoginAffiliationInterstitialManagerService } from './login-affiliation-interstitials-manager.service'
+import { TogglzService } from '../../togglz/togglz.service'
+import { QaFlagsService } from '../../qa-flag/qa-flag.service'
+import { QaFlag } from '../../qa-flag/qa-flags.enum'
+import { LoginAffiliationInterstitialManagerService } from '../implementations/login-affiliation-interstitials-manager.service'
+import { AffiliationsInterstitialDialogComponent } from 'src/app/cdk/interstitials/affiliations-interstitial/interstitial-dialog-extend/affiliations-interstitial-dialog.component'
+import { WINDOW_PROVIDERS } from 'src/app/cdk/window'
 
 describe('LoginAffiliationInterstitialManagerService', () => {
   let service: LoginAffiliationInterstitialManagerService
@@ -43,6 +45,7 @@ describe('LoginAffiliationInterstitialManagerService', () => {
         { provide: TogglzService, useValue: mockTogglzService },
         { provide: InterstitialsService, useValue: mockInterstitialsService },
         { provide: QaFlagsService, useValue: mockQaFlagsService },
+        WINDOW_PROVIDERS,
       ],
     })
 
@@ -57,9 +60,10 @@ describe('LoginAffiliationInterstitialManagerService', () => {
     })
 
     it('should have the correct Interstitial Toggle name', () => {
-      expect(service.INTERSTITIAL_TOGGLE).toEqual(
-        'LOGIN_AFFILIATION_INTERSTITIAL'
-      )
+      expect(service.INTERSTITIAL_TOGGLE).toEqual([
+        'LOGIN_AFFILIATION_INTERSTITIAL',
+        'OAUTH_AFFILIATION_INTERSTITIAL',
+      ] as string[])
     })
 
     it('should have the correct QA_FLAG_FOR_FORCE_INTERSTITIAL_AS_NEVER_SEEN', () => {
@@ -132,7 +136,9 @@ describe('LoginAffiliationInterstitialManagerService', () => {
       } as unknown as UserRecord
 
       const result = service.getDialogDataToShow(userRecord)
-      expect(result).toBe(undefined)
+      expect(result).toEqual({
+        type: 'affiliation-interstitial',
+      })
     })
   })
 
@@ -158,7 +164,7 @@ describe('LoginAffiliationInterstitialManagerService', () => {
       mockMatDialog.open.and.returnValue(mockDialogRef)
 
       // Act
-      service.showInterstitial(userRecord).subscribe((dialogResult) => {
+      service.showInterstitialAsDialog(userRecord).subscribe((dialogResult) => {
         // We expect to get the value we passed into afterClosed$.next(...) eventually.
         expect(dialogResult).toEqual({ type: 'affiliation-interstitial' })
         done()

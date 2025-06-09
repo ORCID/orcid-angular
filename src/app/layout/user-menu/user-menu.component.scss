@@ -1,3 +1,8 @@
+section {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
 .main-button {
   height: auto;
   .main-button-container {
@@ -36,7 +41,7 @@
 
 :host {
   .user-menu-button {
-    padding: 0 32px;
+    max-width: 100%;
     .columns-4 & {
       padding: 0;
     }
@@ -64,4 +69,23 @@
   .small-login-icon {
     margin-right: 12px;
   }
+}
+
+span.name-text-container {
+  overflow: hidden;
+  max-width: calc(102% - 55px);
+  display: inline-block;
+  text-overflow: ellipsis;
+  width: fit-content;
+}
+
+[mat-stroked-button] {
+  min-width: 40px;
+  padding: 0;
+  margin: 0 16px;
+}
+
+.bell-icon {
+  margin-inline-start: 3px;
+  margin-inline-end: 14px;
 }

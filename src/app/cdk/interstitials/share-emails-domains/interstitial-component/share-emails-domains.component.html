@@ -42,7 +42,7 @@
       <div formArrayName="items" class="items">
         <div
           *ngFor="
-            let item of this.form.controls?.items?.controls;
+            let item of this.form?.controls?.items?.controls;
             let i = index;
             let last = last
           "
@@ -84,7 +84,7 @@
     /></mat-icon>
   </ng-template>
 </ng-container>
-<ng-container *ngIf="afterSummit">
+<ng-container *ngIf="afterSummitStatus">
   <mat-card-header class="authorize-header">
     <mat-card-title role="heading" aria-level="1">
       <mat-icon class="logo-icon"
