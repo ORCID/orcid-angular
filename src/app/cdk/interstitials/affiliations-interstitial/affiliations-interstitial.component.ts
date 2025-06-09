@@ -19,9 +19,9 @@ import {
   MAX_LENGTH_LESS_THAN_ONE_THOUSAND,
 } from 'src/app/constants'
 import { dateMonthYearValidator } from 'src/app/shared/validators/date/date.validator'
-import { OrganizationsService } from 'src/app/core'
+import { OrganizationsService, UserService } from 'src/app/core'
 import { RegisterService } from 'src/app/core/register/register.service'
-import { AssertionVisibilityString } from 'src/app/types'
+import { AssertionVisibilityString, RequestInfoForm } from 'src/app/types'
 import {
   Affiliation,
   AffiliationType,
@@ -82,7 +82,8 @@ export class AffiliationsInterstitialComponent implements OnInit, OnDestroy {
     private formBuilder: UntypedFormBuilder,
     private recordService: RecordService,
     private organizationService: OrganizationsService,
-    private register2Service: RegisterService
+    private registerService: RegisterService,
+    private user: UserService
   ) {}
 
   ngOnInit(): void {
@@ -99,7 +100,7 @@ export class AffiliationsInterstitialComponent implements OnInit, OnDestroy {
         switchMap((domain: AssertionVisibilityString) => {
           if (domain) {
             this.userDomainMatched = domain.value
-            return this.register2Service
+            return this.registerService
               .getEmailCategory(domain.value)
               .pipe(map((response) => response.rorId))
           }

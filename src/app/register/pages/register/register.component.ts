@@ -29,7 +29,9 @@ import { UserSession } from 'src/app/types/session.local'
 import { ThirdPartyAuthData } from 'src/app/types/sign-in-data.endpoint'
 import { GoogleTagManagerService } from '../../../core/google-tag-manager/google-tag-manager.service'
 import { ReactivationLocal } from '../../../types/reactivation.local'
-import { JourneyType } from 'src/app/core/observability-events/observability-events.service'
+import {
+  JourneyType,
+} from 'src/app/core/observability-events/observability-events.service'
 import { RegisterObservabilityService } from '../../register-observability.service'
 
 @Component({
@@ -170,7 +172,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
           this.FormGroupStepB,
           this.FormGroupStepC,
           this.FormGroupStepC2,
-          this.FormGroupStepD
+          this.FormGroupStepD,
+          this.reactivation?.isReactivation
         )
         .pipe(
           switchMap((validator: RegisterForm) => {
@@ -207,6 +210,12 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         .subscribe((response) => {
           this.loading = false
           if (response.url) {
+            this._registerObservabilityService.reportRegisterEvent(
+              'register-confirmation',
+              {
+                response,
+              }
+            )
             this.afterRegisterRedirectionHandler(response)
           } else {
             this._registerObservabilityService.reportRegisterErrorEvent(
@@ -215,7 +224,6 @@ export class RegisterComponent implements OnInit, AfterViewInit {
                 response,
               }
             )
-
             this._errorHandler.handleError(
               new Error('registerUnexpectedConfirmation'),
               ERROR_REPORT.REGISTER

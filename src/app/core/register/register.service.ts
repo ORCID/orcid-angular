@@ -16,8 +16,8 @@ import { objectToUrlParameters } from '../../constants'
 import { ReactivationLocal } from '../../types/reactivation.local'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { UserService } from '../user/user.service'
-import { RegisterBackendValidatorMixin } from './register.backend-validators'
-import { RegisterFormAdapterMixin } from './register.form-adapter'
+import { RegisterBackendValidatorMixin as RegisterBackendValidatorMixin } from './register.backend-validators'
+import { RegisterFormAdapterMixin as RegisterFormAdapterMixin } from './register.form-adapter'
 import { EmailCategoryEndpoint } from 'src/app/types/register.email-category'
 
 // Mixing boiler plate

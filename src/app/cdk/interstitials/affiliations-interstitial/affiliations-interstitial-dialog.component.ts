@@ -25,9 +25,9 @@ import {
 import { OrganizationsService, UserService } from 'src/app/core'
 import { AffiliationsInterstitialComponent } from './affiliations-interstitial.component'
 import { RecordService } from 'src/app/core/record/record.service'
-import { RecordCountriesService } from 'src/app/core/record-countries/record-countries.service'
 import { RecordAffiliationService } from 'src/app/core/record-affiliations/record-affiliations.service'
 import { RegisterService } from 'src/app/core/register/register.service'
+
 
 export type AffilationsComponentDialogInput = void
 export type AffilationsComponentDialogOutput = {
@@ -67,7 +67,8 @@ export class AffiliationsInterstitialDialogComponent extends AffiliationsInterst
       formBuilder,
       recordService,
       organizationService,
-      registerService
+      registerService,
+      user
     )
   }
   override finishIntertsitial(affiliation?: string) {

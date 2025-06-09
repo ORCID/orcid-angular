@@ -24,7 +24,8 @@ interface HasFormAdapters {
     StepB: UntypedFormGroup,
     StepC: UntypedFormGroup,
     StepC2: UntypedFormGroup,
-    StepD: UntypedFormGroup
+    StepD: UntypedFormGroup,
+    isReactivation?: boolean
   ): RegisterForm
 }
 
@@ -163,7 +164,7 @@ export function RegisterBackendValidatorMixin<
       StepC: UntypedFormGroup,
       StepC2: UntypedFormGroup,
       StepD: UntypedFormGroup,
-
+      isReactivation?: boolean,
       type?: 'shibboleth'
     ): Observable<RegisterForm> {
       const registerForm = this.formGroupToFullRegistrationForm(
@@ -173,6 +174,7 @@ export function RegisterBackendValidatorMixin<
         StepC2,
         StepD
       )
+      registerForm.isReactivation = isReactivation
       return this._http
         .post<RegisterForm>(
           `${runtimeEnvironment.API_WEB}register.json`,
