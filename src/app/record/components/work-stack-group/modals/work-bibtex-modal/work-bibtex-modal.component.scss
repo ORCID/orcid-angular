@@ -26,7 +26,7 @@
     p {
       margin: 0;
     }
-
+    /* TODO(mdc-migration): The following rule targets internal classes of checkbox that may no longer apply for the MDC version. */
     ::ng-deep .mat-checkbox-inner-container {
       margin: 0 !important;
       margin-right: 8px !important;

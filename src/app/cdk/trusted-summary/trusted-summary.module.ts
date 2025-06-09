@@ -4,7 +4,7 @@ import { SummaryPanelComponent } from './component/summary-panel/summary-panel.c
 import { SummarySimplePanelComponent } from './component/summary-simple-panel/summary-simple-panel.component'
 import { TrustedSummaryComponent } from './component/trusted-summary/trusted-summary.component'
 import { MatIconModule } from '@angular/material/icon'
-import { MatLegacyProgressSpinnerModule as MatProgressSpinnerModule } from '@angular/material/legacy-progress-spinner'
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { SharedModule } from 'src/app/shared/shared.module'
 
 @NgModule({

@@ -14,7 +14,7 @@ import {
   EmailFrequencies,
   EmailFrequenciesValues,
 } from 'src/app/types/account-default-visibility.endpoint'
-import { MatLegacyDialog } from '@angular/material/legacy-dialog'
+import { MatDialog } from '@angular/material/dialog'
 import { ModalEmailComponent } from 'src/app/cdk/side-bar/modals/modal-email/modal-email.component'
 import { UserInfoService } from 'src/app/core/user-info/user-info.service'
 import { RecordService } from 'src/app/core/record/record.service'
@@ -53,7 +53,7 @@ export class SettingsDefaultsEmailFrequencyComponent
     private _platform: PlatformInfoService,
     private _fb: UntypedFormBuilder,
     private _emailFrequency: AccountDefaultEmailFrequenciesService,
-    private _dialog: MatLegacyDialog,
+    private _dialog: MatDialog,
     private _record: RecordService
   ) {}
 

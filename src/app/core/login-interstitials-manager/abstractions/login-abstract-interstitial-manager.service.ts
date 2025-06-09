@@ -1,7 +1,7 @@
 import { Observable, of } from 'rxjs'
 import { InterstitialsService } from 'src/app/cdk/interstitials/interstitials.service'
 import { UserRecord } from 'src/app/types/record.local'
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
+import { MatDialog } from '@angular/material/dialog'
 import { map, switchMap, take } from 'rxjs/operators'
 import { MatDialogConfig } from '@angular/material/dialog'
 import { ComponentType } from '@angular/cdk/overlay'

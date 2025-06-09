@@ -1,8 +1,8 @@
 import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core'
 import {
-  MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA,
-  MatLegacyDialogRef as MatDialogRef,
-} from '@angular/material/legacy-dialog'
+  MAT_DIALOG_DATA,
+  MatDialogRef,
+} from '@angular/material/dialog'
 import { Observable } from 'rxjs'
 import { ModalComponent } from 'src/app/cdk/modal/modal/modal.component'
 import { PlatformInfo } from 'src/app/cdk/platform-info'

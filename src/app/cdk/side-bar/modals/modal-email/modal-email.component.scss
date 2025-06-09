@@ -93,16 +93,16 @@ section[id='Email domains'] {
 
 .email-list {
   margin-bottom: 32px;
-
+  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
   ::ng-deep .mat-form-field-flex {
     margin-top: 0;
   }
-
+  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
   ::ng-deep .mat-form-field-subscript-wrapper {
     padding: 0 !important;
     margin-top: 4px;
   }
-
+  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
   ::ng-deep .mat-form-field-wrapper {
     padding-bottom: 0;
   }
@@ -183,6 +183,6 @@ app-alert-message {
   height: 100%;
 }
 
-.mat-hint {
+.mat-mdc-form-field-hint {
   display: inline;
 }

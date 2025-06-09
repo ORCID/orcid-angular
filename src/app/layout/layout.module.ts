@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
-import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button'
+import { MatButtonModule } from '@angular/material/button'
 import { MatRippleModule } from '@angular/material/core'
 import { MatIconModule } from '@angular/material/icon'
-import { MatLegacyMenuModule as MatMenuModule } from '@angular/material/legacy-menu'
+import { MatMenuModule } from '@angular/material/menu'
 import { RouterModule } from '@angular/router'
 
 import { FooterComponent } from './footer/footer.component'
@@ -21,7 +21,7 @@ import { BannerModule } from '../cdk/banner/banner.module'
 import { MaintenanceMessageComponent } from './maintenance-message/maintenance-message.component'
 import { MatDividerModule } from '@angular/material/divider'
 import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
-import { MatLegacyTooltipModule as MatTooltipModule } from '@angular/material/legacy-tooltip'
+import { MatTooltipModule } from '@angular/material/tooltip'
 
 @NgModule({
   imports: [

@@ -11,8 +11,8 @@ import {
   ReactiveFormsModule,
   UntypedFormGroup,
 } from '@angular/forms'
-import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field'
-import { MatLegacySelectModule as MatSelectModule } from '@angular/material/legacy-select'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatSelectModule } from '@angular/material/select'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 import { By } from '@angular/platform-browser'
 import { DebugElement } from '@angular/core'
@@ -30,7 +30,7 @@ import { PlatformInfoService } from '../../../cdk/platform-info'
 import { RouterTestingModule } from '@angular/router/testing'
 import { WINDOW_PROVIDERS } from '../../../cdk/window'
 import { SnackbarService } from '../../../cdk/snackbar/snackbar.service'
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
+import { MatSnackBar } from '@angular/material/snack-bar'
 import { Overlay } from '@angular/cdk/overlay'
 import { getUserRecord } from '../../../core/record/record.service.spec'
 

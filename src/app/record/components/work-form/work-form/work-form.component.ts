@@ -24,9 +24,9 @@ import {
 } from '../../../../types/works.endpoint'
 import { RecordWorksService } from '../../../../core/record-works/record-works.service'
 import {
-  MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA,
-  MatLegacyDialogRef as MatDialogRef,
-} from '@angular/material/legacy-dialog'
+  MAT_DIALOG_DATA,
+  MatDialogRef,
+} from '@angular/material/dialog'
 import { ModalComponent } from '../../../../cdk/modal/modal/modal.component'
 import { RecordCountriesService } from '../../../../core/record-countries/record-countries.service'
 import { WINDOW } from '../../../../cdk/window'

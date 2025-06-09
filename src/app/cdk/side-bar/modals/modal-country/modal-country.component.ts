@@ -8,8 +8,8 @@ import {
   ViewChildren,
 } from '@angular/core'
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms'
-import { MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog'
-import { MatLegacySelect as MatSelect } from '@angular/material/legacy-select'
+import { MatDialogRef } from '@angular/material/dialog'
+import { MatSelect } from '@angular/material/select'
 import { cloneDeep } from 'lodash'
 import { Subject } from 'rxjs'
 import { first, takeUntil } from 'rxjs/operators'

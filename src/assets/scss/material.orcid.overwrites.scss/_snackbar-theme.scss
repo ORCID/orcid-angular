@@ -13,11 +13,11 @@
   );
   $unselected-foreground: mat.get-color-from-palette($foreground, text);
 
-  snack-bar-container.mat-snack-bar-container.orcid-error {
+  snack-bar-container.mat-mdc-snack-bar-container.orcid-error {
     background-color: mat.get-color-from-palette($warn, 700);
   }
 
-  snack-bar-container.mat-snack-bar-container.orcid-success {
+  snack-bar-container.mat-mdc-snack-bar-container.orcid-success {
     background-color: mat.get-color-from-palette($primary, 700);
   }
 }
