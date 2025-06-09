@@ -17,7 +17,7 @@ export class NotificationPermissionComponent implements OnInit {
   @Input() notification: InboxNotificationPermission
   itemsByType: { type: string; items: Item[] }[]
   isOrcidIntegration: boolean = false
-  orcidIntegrationLink: string 
+  orcidIntegrationLink: string
   orcidIntegrationMemberName: string
 
   constructor(
@@ -26,10 +26,11 @@ export class NotificationPermissionComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if(this.notification?.notificationIntro?.includes('::')) {
-      [this.orcidIntegrationMemberName,this.orcidIntegrationLink] = this.notification.notificationIntro.split('::')
+    if (this.notification?.notificationIntro?.includes('::')) {
+      ;[this.orcidIntegrationMemberName, this.orcidIntegrationLink] =
+        this.notification.notificationIntro.split('::')
       this.isOrcidIntegration = true
-    } 
+    }
     this.itemsByType = chain(this.notification?.items.items)
       .groupBy('itemType')
       .map((value, key) => ({ type: key, items: value }))
