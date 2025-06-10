@@ -45,13 +45,12 @@ module.exports = function (config) {
       CustomChrome: {
         base: 'ChromeHeadless',
         flags: [
-          '--no-sandbox', // disable OS sandbox
-          '--disable-setuid-sandbox', // disable setuid sandbox
+          '--no-sandbox',
+          '--disable-setuid-sandbox',
           '--disable-translate',
           '--disable-extensions',
-          '--remote-debugging-port=9223',
-          '--ignore-certificate-errors', // suppress cert parse errors
-          '--enable-chrome-browser-cloud-management', // optional: silences the CBCM warning
+          '--ignore-certificate-errors',
+          '--enable-chrome-browser-cloud-management',
         ],
       },
     },
