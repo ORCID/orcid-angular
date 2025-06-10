@@ -36,7 +36,7 @@ export class FormAntiRobotsComponent
 {
   captchaFailState = false
   captchaLoadedWithWidgetId: number
-  $widgetIdUpdated = new Subject()
+  $widgetIdUpdated = new Subject<void>()
   errorState = false
   captcha = new UntypedFormControl(null, {
     validators: [this.captchaValidator()],
