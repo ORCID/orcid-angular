@@ -45,7 +45,6 @@ module.exports = function (config) {
       CustomChrome: {
         base: 'ChromeHeadless',
         flags: [
-          '--no-sandbox',
           '--disable-setuid-sandbox',
           '--disable-translate',
           '--disable-extensions',
