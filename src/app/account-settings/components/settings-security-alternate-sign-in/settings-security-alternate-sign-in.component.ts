@@ -26,7 +26,7 @@ export class SettingsSecurityAlternateSignInComponent
   accounts$: Observable<SocialAccount[]>
 
   displayedColumns = ['provider', 'email', 'granted', 'actions']
-  $destroy = new Subject()
+  $destroy = new Subject<void>()
   isMobile: any
 
   constructor(

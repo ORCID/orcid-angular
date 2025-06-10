@@ -33,7 +33,7 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
   currentLocation: string
   orcid: string
   works: SimpleActivityModel[] = []
-  unsubscribe = new Subject()
+  unsubscribe = new Subject<void>()
   affiliationsHover = false
   worksHover = false
   peerReviewsHover = false

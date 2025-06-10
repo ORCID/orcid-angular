@@ -34,7 +34,7 @@ import { RegisterStateService } from '../../register-state.service'
 export class FormAntiRobotsComponent extends BaseForm implements OnInit {
   captchaFailState = false
   captchaLoadedWithWidgetId: number
-  $widgetIdUpdated = new Subject()
+  $widgetIdUpdated = new Subject<void>()
   errorState = false
   nextButtonWasClicked = false
   captcha = new UntypedFormControl(null, {

@@ -12,7 +12,7 @@ import { PlatformInfoService } from '../../platform-info'
 export class ModalComponent implements OnInit, OnDestroy {
   columns12: boolean
   screenDirection: 'rtl' | 'ltr'
-  $destroy: Subject<boolean> = new Subject<boolean>()
+  $destroy: Subject<void> = new Subject<void>()
   @Input() loading = false
   @Input() noSidebar = false
 

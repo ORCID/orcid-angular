@@ -110,7 +110,7 @@ export class FormPersonalComponent
   emailsAreValidAlreadyChecked: boolean
   registerBackendErrors: RegisterBackendErrors
   nextButtonWasClicked: boolean
-  destroy = new Subject()
+  destroy = new Subject<void>()
 
   constructor(
     private _register: Register2Service,
