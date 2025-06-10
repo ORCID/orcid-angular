@@ -322,7 +322,9 @@ export class UserService {
         userInfo: userInfo as UserInfo | undefined,
         nameForm: nameForm as NameForm | undefined,
         oauthSession: oauthSession as RequestInfoForm | undefined,
-        thirdPartyAuthData: thirdPartyAuthData as ThirdPartyAuthData | undefined,
+        thirdPartyAuthData: thirdPartyAuthData as
+          | ThirdPartyAuthData
+          | undefined,
       }))
     )
   }
