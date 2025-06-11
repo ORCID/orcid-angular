@@ -1,3 +1,9 @@
+## v2.116.4 - 2025-06-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.116.3...v2.116.4)
+
+- [#2451](https://github.com/ORCID/orcid-angular/pull/2451): Remove legacy registration code
+
 ## v2.116.3 - 2025-06-11
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.116.2...v2.116.3)
