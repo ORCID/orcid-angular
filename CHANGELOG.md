@@ -1,3 +1,10 @@
+## v2.116.3 - 2025-06-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.116.2...v2.116.3)
+
+- [#2542](https://github.com/ORCID/orcid-angular/pull/2542): remove preferred source icon
+- [#2541](https://github.com/ORCID/orcid-angular/pull/2541): Added a new paragraph break for mvp ui notification
+
 ## v2.116.2 - 2025-06-11
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.116.1...v2.116.2)
