@@ -26,7 +26,7 @@ export class SummaryPanelComponent implements OnInit {
   @Input() activitySection: string
   activitiesToDisplay: ActivitySummary[]
   acitivityCountOverflow: boolean
-  unsubscribe = new Subject()
+  unsubscribe = new Subject<void>()
 
   validatedSourceAriaLabel = $localize`:@@summary.validatedSource:Validated source`
   selftAssertedSource = $localize`:@@summary.selfAssertedSource:Self-asserted source`

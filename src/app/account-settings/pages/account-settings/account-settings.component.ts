@@ -12,7 +12,7 @@ import { TogglzService } from 'src/app/core/togglz/togglz.service'
 })
 export class AccountSettingsComponent implements OnInit, OnDestroy {
   userInfo: any
-  $destroy = new Subject()
+  $destroy = new Subject<void>()
   constructor(
     private _togglz: TogglzService,
     private _userSession: UserService,

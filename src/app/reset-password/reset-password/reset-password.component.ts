@@ -37,7 +37,7 @@ export class ResetPasswordComponent implements OnInit {
 
   @Output() loading = new EventEmitter<boolean>()
   errors: string[]
-  $destroy = new Subject()
+  $destroy = new Subject<void>()
   emailKey: string
   expiredPasswordResetToken: boolean
   invalidPasswordResetToken: boolean

@@ -53,7 +53,7 @@ import { UserInfoService } from '../user-info/user-info.service'
 })
 export class RecordService {
   recordSubject$: ReplaySubject<UserRecord>
-  private readonly $destroy = new Subject()
+  private readonly $destroy = new Subject<void>()
   getRecordPerformanceStartTime: number
 
   constructor(

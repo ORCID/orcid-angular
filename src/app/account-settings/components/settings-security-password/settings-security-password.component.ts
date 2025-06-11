@@ -32,7 +32,7 @@ export class SettingsSecurityPasswordComponent implements OnInit, OnDestroy {
   @Output() loading = new EventEmitter<boolean>()
   errors: string[]
   success: boolean
-  $destroy = new Subject()
+  $destroy = new Subject<void>()
 
   constructor(
     private _fb: UntypedFormBuilder,

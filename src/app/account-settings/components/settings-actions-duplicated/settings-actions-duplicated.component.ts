@@ -30,7 +30,7 @@ export class SettingsActionsDuplicatedComponent implements OnInit {
     private _user: UserService
   ) {}
   @Output() loading = new EventEmitter<boolean>()
-  @Output() close = new EventEmitter()
+  @Output() close = new EventEmitter<void>()
 
   form: UntypedFormGroup
   errors: any[]
