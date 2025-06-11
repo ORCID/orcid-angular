@@ -29,9 +29,7 @@ import { UserSession } from 'src/app/types/session.local'
 import { ThirdPartyAuthData } from 'src/app/types/sign-in-data.endpoint'
 import { GoogleTagManagerService } from '../../../core/google-tag-manager/google-tag-manager.service'
 import { ReactivationLocal } from '../../../types/reactivation.local'
-import {
-  JourneyType,
-} from 'src/app/core/observability-events/observability-events.service'
+import { JourneyType } from 'src/app/core/observability-events/observability-events.service'
 import { RegisterObservabilityService } from '../../register-observability.service'
 
 @Component({
