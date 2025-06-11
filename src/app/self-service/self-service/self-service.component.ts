@@ -16,7 +16,7 @@ import { ApplicationRoutes } from 'src/app/constants'
 })
 export class SelfServiceComponent implements OnInit {
   @Output() loading = new EventEmitter<boolean>()
-  $destroy = new Subject()
+  $destroy = new Subject<void>()
   isMobile: boolean
   platform: PlatformInfo
 

@@ -52,7 +52,7 @@ export class FormVisibilityComponent
   visibilityOptions = VISIBILITY_OPTIONS
   errorState = false
   activitiesVisibilityDefault = new UntypedFormControl('', Validators.required)
-  destroy = new Subject()
+  destroy = new Subject<void>()
   constructor(
     private _register: RegisterService,
     private _errorStateMatcher: ErrorStateMatcher,

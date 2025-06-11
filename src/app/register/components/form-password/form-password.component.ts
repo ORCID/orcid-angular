@@ -77,7 +77,7 @@ export class FormPasswordComponent
   currentValidateAtLeastANumber: boolean
   passwordsValidAreValidAlreadyChecked: any
   _currentAccesibilityError: string
-  destroy = new Subject()
+  destroy = new Subject<void>()
   constructor(
     private _register: RegisterService,
     private _liveAnnouncer: LiveAnnouncer,

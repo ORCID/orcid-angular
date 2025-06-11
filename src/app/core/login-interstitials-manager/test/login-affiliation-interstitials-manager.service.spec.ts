@@ -150,7 +150,7 @@ describe('LoginAffiliationInterstitialManagerService', () => {
       } as unknown as UserRecord
 
       // Pretend the setInterstitialsViewed call completes
-      mockInterstitialsService.setInterstitialsViewed.and.returnValue(of(true))
+      mockInterstitialsService.setInterstitialsViewed.and.returnValue(of(null))
 
       // Mock for matDialog.open(...).afterClosed()
       const afterClosed$ = new Subject<any>()

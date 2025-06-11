@@ -19,7 +19,7 @@ export class TopBarActionsComponent implements OnInit, OnDestroy {
     ' ' +
     $localize`:@@topBar.signInToStart:Sign in to start editing`
 
-  $destroy: Subject<boolean> = new Subject<boolean>()
+  $destroy: Subject<void> = new Subject<void>()
   platform: PlatformInfo
   @Input() userRecord: UserRecord
   @Input() ariaLabelName: string

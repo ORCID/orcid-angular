@@ -192,7 +192,7 @@ describe('LoginDomainInterstitialManagerService', () => {
         },
       } as unknown as UserRecord
 
-      mockInterstitialsService.setInterstitialsViewed.and.returnValue(of(true))
+      mockInterstitialsService.setInterstitialsViewed.and.returnValue(of(null))
 
       const afterClosed$ = new Subject<any>()
       const mockDialogRef = jasmine.createSpyObj<MatDialogRef<any>>(
