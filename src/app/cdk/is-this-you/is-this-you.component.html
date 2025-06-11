@@ -1,5 +1,7 @@
 <div class="container" *ngIf="data && data.duplicateRecords">
-  <h1 class="mat-headline-4 modal-title">{{ data.titleLabel || titleLabel }}</h1>
+  <h1 class="mat-headline-4 modal-title">
+    {{ data.titleLabel || titleLabel }}
+  </h1>
   <div class="non-fixed">
     <p class="mat-body-2">
       {{ data.bodyLabel || bodyLabel }}
