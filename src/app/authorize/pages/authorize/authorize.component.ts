@@ -7,6 +7,7 @@ import {
   finalize,
   first,
   map,
+  mapTo,
   switchMap,
   take,
   tap,
@@ -62,8 +63,6 @@ export class AuthorizeComponent {
     private userService: UserService,
     private platformInfoService: PlatformInfoService,
     @Inject(WINDOW) private window: Window,
-    private googleTagManagerService: GoogleTagManagerService,
-    private errorHandlerService: ErrorHandlerService,
     private recordService: RecordService,
     private loginMainInterstitialsManagerService: LoginMainInterstitialsManagerService
   ) {}
@@ -73,41 +72,27 @@ export class AuthorizeComponent {
    */
   ngOnInit(): void {
     this.loading = true
+    let currentSession: UserSession | null = null
 
     forkJoin({
       platform: this.loadPlatformInfo(),
       userSession: this.loadUserSession(),
-      userRecord: this.recordService.getRecord({}).pipe(
-        filter((userRecord: UserRecord) => {
-          return (
-            !!userRecord &&
-            !!userRecord?.userInfo &&
-            !!userRecord?.emails &&
-            !!userRecord?.affiliations?.length
-          )
-        }),
-        take(1)
-      ),
     })
       .pipe(
-        switchMap((record) => {
-          return this.loginMainInterstitialsManagerService
-            .checkLoginInterstitials(record.userRecord, {
-              returnType: 'component',
-              togglzPrefix: 'OAUTH',
-            })
-            .pipe(
-              take(1),
-              map((interstitial) => {
-                this.interstitialComponent = interstitial
-              }),
-              switchMap(() => {
-                return of(record.userSession)
-              }),
-              finalize(() => {
-                this.handleUserSession(record.userSession)
-              })
-            )
+        // Keep a copy of userSession for finalize()
+        tap(({ userSession }) => (currentSession = userSession)),
+
+        // If logged in, fetch record → check interstitials; otherwise skip straight to oauth session handling
+        switchMap(({ userSession }) =>
+          userSession.loggedIn
+            ? this.loadRecordAndCheckInterstitials(userSession)
+            : of(userSession)
+        ),
+
+        // Always run this at the end, regardless of path
+        finalize(() => {
+          this.handleOauthSession(currentSession)
+          this.loading = false
         })
       )
       .subscribe()
@@ -194,7 +179,7 @@ export class AuthorizeComponent {
    * After loading forkJoin data, decide on final flow:
    * show error, show domain interstitial, or show authorization screen.
    */
-  private handleUserSession(userSession: UserSession): void {
+  private handleOauthSession(userSession: UserSession): void {
     this.oauthSession = userSession.oauthSession
 
     // 1. If the backend returned an error
@@ -224,6 +209,34 @@ export class AuthorizeComponent {
     // 3. Otherwise, show the standard authorization component
     this.showAuthorizationComponent = true
     this.loading = false
+  }
+
+  /**
+   * Fetches a valid UserRecord, then runs checkLoginInterstitials,
+   * and finally emits the original UserSession.
+   */
+  private loadRecordAndCheckInterstitials(
+    session: UserSession
+  ): Observable<UserSession> {
+    return this.recordService.getRecord({}).pipe(
+      filter((rec: UserRecord) =>
+        this.loginMainInterstitialsManagerService.isValidUserRecord(rec)
+      ),
+      take(1),
+      switchMap((validRecord) =>
+        this.loginMainInterstitialsManagerService
+          .checkLoginInterstitials(validRecord, {
+            returnType: 'component',
+            togglzPrefix: 'OAUTH',
+          })
+          .pipe(
+            take(1),
+            tap((interstitial) => (this.interstitialComponent = interstitial)),
+            // After setting up interstitials, pass the original session back downstream
+            mapTo(session)
+          )
+      )
+    )
   }
 
   /**

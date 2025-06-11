@@ -1,3 +1,33 @@
+## v2.115.12 - 2025-06-09
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.11...v2.115.12)
+
+## v2.115.11 - 2025-06-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.10...v2.115.11)
+
+- [#2538](https://github.com/ORCID/orcid-angular/pull/2538): Leo/fix oauth automation
+
+## v2.115.10 - 2025-06-05
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.9...v2.115.10)
+
+- [#2536](https://github.com/ORCID/orcid-angular/pull/2536): Lmendoza/9820 qa regression oauth and openid tests fail because expected error message for negative scenarios is not displayed
+
+## v2.115.9 - 2025-06-05
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.8...v2.115.9)
+
+- [#2534](https://github.com/ORCID/orcid-angular/pull/2534): 9832-qa-toaster-error-displayed-with-signin-error
+- [#2533](https://github.com/ORCID/orcid-angular/pull/2533): Fix testing
+- [#2532](https://github.com/ORCID/orcid-angular/pull/2532): 9824-qa-replace-inbox-icon-with-notification-icon-in-account-menu
+
+## v2.115.8 - 2025-06-04
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.7...v2.115.8)
+
+- [#2531](https://github.com/ORCID/orcid-angular/pull/2531): Lmendoza/jun 4 2025 multiple fixes
+
 ## v2.115.7 - 2025-06-03
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.6...v2.115.7)

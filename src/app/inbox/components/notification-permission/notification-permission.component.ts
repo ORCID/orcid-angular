@@ -16,6 +16,9 @@ import { InboxService } from '../../../core/inbox/inbox.service'
 export class NotificationPermissionComponent implements OnInit {
   @Input() notification: InboxNotificationPermission
   itemsByType: { type: string; items: Item[] }[]
+  isOrcidIntegration: boolean = false
+  orcidIntegrationLink: string
+  orcidIntegrationMemberName: string
 
   constructor(
     @Inject(WINDOW) private window: Window,
@@ -23,6 +26,11 @@ export class NotificationPermissionComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    if (this.notification?.notificationIntro?.includes('::')) {
+      ;[this.orcidIntegrationMemberName, this.orcidIntegrationLink] =
+        this.notification.notificationIntro.split('::')
+      this.isOrcidIntegration = true
+    }
     this.itemsByType = chain(this.notification?.items.items)
       .groupBy('itemType')
       .map((value, key) => ({ type: key, items: value }))

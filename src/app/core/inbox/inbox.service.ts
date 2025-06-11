@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, ReplaySubject } from 'rxjs'
+import { BehaviorSubject, EMPTY, Observable, ReplaySubject } from 'rxjs'
 import { catchError, map, switchMap, tap, retry } from 'rxjs/operators'
 import { AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL } from 'src/app/constants'
 import { ERROR_REPORT } from 'src/app/errors'
@@ -22,6 +22,10 @@ export class InboxService {
   private currentlyIncludingArchive: boolean
   private currentLevel = 0
   private headers: HttpHeaders
+  private _unreadCountSubject = new BehaviorSubject<number | null>(null)
+  public readonly unreadCount$: Observable<number | null> =
+    this._unreadCountSubject.asObservable()
+
   private inboxSubject = new ReplaySubject<
     (
       | InboxNotificationAmended
@@ -218,13 +222,44 @@ export class InboxService {
       )
   }
 
-  retrieveUnreadCount(): any {
-    return this._http.get(
-      runtimeEnvironment.BASE_URL + 'inbox/unreadCount.json'
-    )
+  private _fetchAndUpdateUnreadCount(): Observable<number | null> {
+    return this._http
+      .get<number>(
+        `${runtimeEnvironment.BASE_URL}inbox/unreadCount.json`,
+        { headers: this.headers, observe: 'response' } // full response
+      )
+      .pipe(
+        map((resp) => {
+          // If the server bounced us to /login, treat as “not logged in”
+          return resp.url?.includes('/login') ? null : resp.body ?? null
+        }),
+        tap((count) => {
+          if (count !== null) {
+            // If we got a valid count, update the BehaviorSubject
+            this._unreadCountSubject.next(count)
+          }
+        }),
+        catchError(() => EMPTY) // If the request fails, we just return an empty observable
+      )
   }
 
-  totalNumber() {
+  /**
+ 
+   * Calling retrieveUnreadCount() will:
+   * 1) Kick off a fresh HTTP GET to inbox/unreadCount.json
+   * 2) Push that result into _unreadCountSubject
+   * 3) Return the “hot” Observable from _unreadCountSubject, so that ANY future changes are pass through
+   */
+  retrieveUnreadCount(): Observable<number | null> {
+    this._fetchAndUpdateUnreadCount().subscribe()
+    return this.unreadCount$
+  }
+
+  /**
+   * Returns Observable<TotalNotificationCount>
+   * and triggers a fresh fetch of unreadCount.json so that unreadCount$ subscribers are updated.
+   */
+  totalNumber(): Observable<TotalNotificationCount> {
     return this._http
       .get<TotalNotificationCount>(
         runtimeEnvironment.BASE_URL + `inbox/totalCount.json`,
@@ -237,6 +272,10 @@ export class InboxService {
         map((value) => {
           value.archived = value.all - value.nonArchived
           return value
+        }),
+        // As a side‐effect, refresh the unread count whenever totalNumber() is called:
+        tap(() => {
+          this._fetchAndUpdateUnreadCount().subscribe()
         }),
         catchError((error) => this._errorHandler.handleError(error))
       )

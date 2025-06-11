@@ -39,7 +39,7 @@
       inboxUnread > 0 ? notificationTooltipActive : notificationTooltip
     "
     [attr.aria-label]="
-      inboxUnread > 0 ? notificationTooltipActive : notificationTooltip
+      inboxUnread > 0 ? notificationi18nActive : notificationi18n
     "
   >
     <mat-icon
@@ -77,11 +77,17 @@
     </div>
   </button>
   <button mat-menu-item (click)="goto('inbox', 'fromMenuButton')" id="cy-inbox">
-    <mat-icon *ngIf="inboxUnread === 0">inbox</mat-icon>
+    <mat-icon *ngIf="inboxUnread === 0"
+      ><img
+        class="bell-icon"
+        *ngIf="inboxUnread === 0"
+        src="./assets/vectors/notification-button.svg"
+        alt=""
+    /></mat-icon>
     <mat-icon *ngIf="inboxUnread > 0"
       ><img src="./assets/vectors/notification-button-active.svg"
     /></mat-icon>
-    <span i18n="@@workspace.notifications">Inbox</span>
+    <span i18n="@@workspace.notifications">Notifications inbox</span>
     ({{ inboxUnread }})
   </button>
   <button
