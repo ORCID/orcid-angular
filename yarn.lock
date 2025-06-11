@@ -164,7 +164,7 @@
   dependencies:
     tslib "^2.3.0"
 
-"@angular/cdk@^16.2.14":
+"@angular/cdk@^16.2.12":
   version "16.2.14"
   resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-16.2.14.tgz#d26f8f1e7d2466b509e60489b6acf31bfe923acf"
   integrity sha512-n6PrGdiVeSTEmM/HEiwIyg6YQUUymZrb5afaNLGFRM5YL0Y8OBqd+XhCjb0OfD/AfgCUtedVEPwNqrfW8KzgGw==
@@ -253,7 +253,7 @@
     fast-glob "3.3.0"
     yargs "^17.2.1"
 
-"@angular/material@^16.2.14":
+"@angular/material@^16.2.12":
   version "16.2.14"
   resolved "https://registry.yarnpkg.com/@angular/material/-/material-16.2.14.tgz#4db0c7d14d3d6ac6c8dac83dced0fb8a030b3b49"
   integrity sha512-zQIxUb23elPfiIvddqkIDYqQhAHa9ZwMblfbv+ug8bxr4D0Dw360jIarxCgMjAcLj7Ccl3GBqZMUnVeM6cjthw==
