@@ -1,9 +1,11 @@
 <div *ngIf="isOrcidIntegration" class="intro">
-  <ng-container i18n="@@inbox.youCanBenefitFromAutomatic"
-    >You can benefit from automatic updates to your record. Based on your
-    verified email domains we have found an ORCID integration for</ng-container
+  <p i18n="@@inbox.youCanBenefitFromAutomatic"
+    >You can benefit from automatic updates to your record.</p
   >
-  <strong>{{ orcidIntegrationMemberName }}</strong
+  <ng-container i18n="@@inbox.basedOnYourVerifiedEmailDomains"
+    >Based on your verified email domains we have found an ORCID integration for</ng-container
+  >
+  <strong> {{ orcidIntegrationMemberName }}</strong
   >.
   <ng-container i18n="@@inbox.connectingWithThisIntegrationWillAllow"
     >Connecting with this integration will allow</ng-container
