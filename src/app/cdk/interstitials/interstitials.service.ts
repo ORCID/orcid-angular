@@ -38,7 +38,7 @@ export class InterstitialsService {
   setInterstitialsViewed(
     interstitial: InterstitialType,
     updateDatabase = true
-  ) {
+  ): Observable<void> {
     return this._userInfo.getUserSession().pipe(
       filter((userInfo) => !!userInfo.userInfo),
       take(1),

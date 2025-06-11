@@ -301,10 +301,10 @@ export class UserService {
   private handleUserDataUpdate(
     updateParameters?: UserSessionUpdateParameters
   ): Observable<{
-    userInfo: UserInfo
-    nameForm: NameForm
-    oauthSession: RequestInfoForm
-    thirdPartyAuthData: ThirdPartyAuthData
+    userInfo: UserInfo | undefined
+    nameForm: NameForm | undefined
+    oauthSession: RequestInfoForm | undefined
+    thirdPartyAuthData: ThirdPartyAuthData | undefined
   }> {
     this.currentlyLoggedIn = updateParameters.loggedIn
     const $userInfo = this._userInfo.getUserInfo().pipe(this.handleErrors)
@@ -319,10 +319,12 @@ export class UserService {
       !updateParameters.loggedIn ? $thirdPartyAuthData : of(undefined),
     ]).pipe(
       map(([userInfo, nameForm, oauthSession, thirdPartyAuthData]) => ({
-        userInfo,
-        nameForm,
-        oauthSession,
-        thirdPartyAuthData,
+        userInfo: userInfo as UserInfo | undefined,
+        nameForm: nameForm as NameForm | undefined,
+        oauthSession: oauthSession as RequestInfoForm | undefined,
+        thirdPartyAuthData: thirdPartyAuthData as
+          | ThirdPartyAuthData
+          | undefined,
       }))
     )
   }
@@ -516,13 +518,13 @@ export class UserService {
     // only reset the timer when the visibility is changed
     if (hiddenTab && !this.hiddenTab) {
       this.hiddenTab = hiddenTab
-      this.reset$.next()
+      this.reset$.next(null)
       this.interval$.next(
         this.START_IN_TWENTY_FIVE_MINUTES_AND_CHECK_EVERY_TWENTY_FIVE_MINUTES
       )
     } else if (!hiddenTab && this.hiddenTab) {
       this.hiddenTab = hiddenTab
-      this.reset$.next()
+      this.reset$.next(null)
       this.interval$.next(
         this.START_IMMEDIATELY_AND_CHECK_EVERY_TWENTY_FIVE_MINUTES
       )

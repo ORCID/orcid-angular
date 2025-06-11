@@ -88,7 +88,7 @@ export class FormCurrentEmploymentComponent
   private _type: AffiliationType
   affiliationFound = false
   rorIdHasBeenMatched: boolean
-  destroy = new Subject()
+  destroy = new Subject<void>()
 
   @Input()
   public get type(): AffiliationType {

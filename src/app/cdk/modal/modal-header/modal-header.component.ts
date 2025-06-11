@@ -22,7 +22,7 @@ import { Subject } from 'rxjs'
 export class ModalHeaderComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
-  @Output() close = new EventEmitter<boolean>()
+  @Output() close = new EventEmitter<void>()
   @Input() closeLabel = $localize`:@@shared.ariaLabelClose:Close`
   platform: PlatformInfo
 
