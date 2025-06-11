@@ -1,7 +1,4 @@
 <ng-container [formGroup]="form">
-  <h3 class="mat-subtitle-1" i18n="@@register.visibility">
-    Visibility settings
-  </h3>
   <p>
     <ng-container i18n="@@register.visibilityDescription1">
       Your ORCID iD connects with your ORCID record that can contain links to
@@ -9,87 +6,127 @@
       name, and more. You control this content and who can see it.
     </ng-container>
   </p>
-  <p i18n="@@register.visibilityDescription3">
-    By default, what visibility should be given to new items added to your ORCID
-    Record?
-  </p>
-  <p>
-    <mat-radio-group
-      formControlName="activitiesVisibilityDefault"
-      color="primary"
-    >
-      <mat-radio-button
-        id="visibility-everyone-input"
-        [value]="visibilityOptions[0]"
-        class="orcid-radio-button-with-icons"
+  <fieldset>
+    <legend>
+      <h3
+        class="orc-font-body mat-subheading-2"
+        i18n="@@register.visibilityLegend"
       >
-        <img
-          src="./assets/vectors/visibility-everyone.svg"
-          aria-hidden="true"
-          alt=""
-        />
-        <div class="inlined">
-          <strong i18n="@@register.VisibilityEveryone">Everyone</strong>
+        Visibility settings
+      </h3>
+    </legend>
+    <p i18n="@@register.visibilityDescription3">
+      By default, what visibility should be given to new items added to your
+      ORCID Record?
+    </p>
+    <div class="margin-tb-32">
+      <p>
+        <mat-error
+          *ngIf="
+            form.hasError('required', 'activitiesVisibilityDefault') &&
+            errorState
+          "
+          i18n="@@register.visibilityRequired2"
+          >Please select a default visibility for new items</mat-error
+        >
+      </p>
+      <mat-radio-group
+        formControlName="activitiesVisibilityDefault"
+        color="primary"
+      >
+        <mat-radio-button
+          id="visibility-everyone-input"
+          [value]="visibilityOptions[0]"
+          class="orcid-radio-button-with-icons"
+        >
+          <img
+            src="./assets/vectors/visibility-everyone2.svg"
+            aria-hidden="true"
+            alt=""
+          />
+          <div class="inlined">
+            <div>
+              <strong i18n="@@register.VisibilityEveryone">Everyone</strong>
 
-          <ng-container i18n="@@register.VisibilityEveryone2"
-            >(87% of users choose this)</ng-container
-          >
-        </div>
-      </mat-radio-button>
-      <mat-radio-button
-        id="visibility-trusted-input"
-        [value]="visibilityOptions[1]"
-        class="orcid-radio-button-with-icons"
-      >
-        <img
-          src="./assets/vectors/visibility-trusted-source.svg"
-          aria-hidden="true"
-          alt=""
-        />
-        <div class="inlined">
-          <strong i18n="@@register.VisibilityTrusted"
-            >Trusted Organizations</strong
-          >
-          <ng-container i18n="@@register.VisibilityTrusted2"
-            >(5% of users choose this)</ng-container
-          >
-        </div>
-      </mat-radio-button>
-      <mat-radio-button
-        id="visibility-private-input"
-        [value]="visibilityOptions[2]"
-        class="orcid-radio-button-with-icons"
-      >
-        <img
-          src="./assets/vectors/visibility-only-me.svg"
-          aria-hidden="true"
-          alt=""
-        />
-        <div class="inlined">
-          <strong i18n="@@register.VisibilityPrivate">Only me</strong>
+              <ng-container i18n="@@register.VisibilityEveryone2"
+                >(87% of users choose this)</ng-container
+              >
+              <div
+                class="text-light orc-font-small-print"
+                i18n="@@register.everioneCanSeeThese"
+              >
+                Everyone can see these items
+              </div>
+            </div>
+          </div>
+        </mat-radio-button>
+        <mat-radio-button
+          id="visibility-trusted-input"
+          [value]="visibilityOptions[1]"
+          class="orcid-radio-button-with-icons"
+        >
+          <img
+            src="./assets/vectors/visibility-trusted-source2.jpg"
+            aria-hidden="true"
+            alt=""
+          />
+          <div class="inlined">
+            <div>
+              <strong i18n="@@register.VisibilityParties"
+                >Trusted parties</strong
+              >
+              <ng-container i18n="@@register.VisibilityTrusted2"
+                >(5% of users choose this)</ng-container
+              >
+              <div
+                class="text-light orc-font-small-print"
+                i18n="@@register.onlyPeopleAndOrganization"
+              >
+                Only people and organizations you’ve given permission
+              </div>
+            </div>
+          </div>
+        </mat-radio-button>
+        <mat-radio-button
+          id="visibility-private-input"
+          [value]="visibilityOptions[2]"
+          class="orcid-radio-button-with-icons"
+        >
+          <img
+            src="./assets/vectors/visibility-only-me2.jpg"
+            aria-hidden="true"
+            alt=""
+          />
+          <div class="inlined">
+            <div>
+              <strong i18n="@@register.VisibilityPrivate">Only me</strong>
 
-          <ng-container i18n="@@register.VisibilityPrivate2"
-            >(8% of users choose this)</ng-container
-          >
-        </div>
-      </mat-radio-button>
-    </mat-radio-group>
-    <mat-error
-      *ngIf="
-        form.hasError('required', 'activitiesVisibilityDefault') && errorState
-      "
-      i18n="@@register.visibilityRequired"
-      >Please choose a default visibility setting.</mat-error
-    >
-  </p>
-  <p>
+              <ng-container i18n="@@register.VisibilityPrivate2"
+                >(8% of users choose this)</ng-container
+              >
+              <div
+                class="text-light orc-font-small-print"
+                i18n="@@register.itemsArePrivateAndOnly"
+              >
+                Items are private and only visible to you
+              </div>
+            </div>
+          </div>
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+  </fieldset>
+  <p class="no-top-margin">
     <a
+      [attr.aria-label]="ariaLabelMoreInformationOnVisibility"
       class="mat-button-font"
       href="https://support.orcid.org/hc/articles/360006897614"
       target="_blank"
       rel="noopener noreferrer"
       i18n="@@register.visibilityDescription2"
-      >More information on visibility settings</a
-    >
+      >More information on visibility settings
+
+      <mat-icon>open_in_new</mat-icon>
+    </a>
   </p>
 </ng-container>

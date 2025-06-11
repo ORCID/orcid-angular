@@ -2,3 +2,10 @@
   display: flex;
   flex-direction: column;
 }
+
+app-alert-message {
+  .content > div {
+    margin-bottom: 16px;
+  }
+  margin-bottom: 16px;
+}

@@ -6,25 +6,39 @@ import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
 import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
 import { RouterTestingModule } from '@angular/router/testing'
 import { PlatformInfoService } from '../../../cdk/platform-info'
+import { MdePopoverModule } from '../../../cdk/popover'
 import { SnackbarService } from '../../../cdk/snackbar/snackbar.service'
 import { WINDOW_PROVIDERS } from '../../../cdk/window'
 import { ErrorHandlerService } from '../../../core/error-handler/error-handler.service'
-import { Register2Service } from '../../../core/register2/register2.service'
-import { FormVisibilityComponent } from './form-visibility.component'
+import { ReactivationService } from '../../../core/reactivation/reactivation.service'
+import { RegisterService } from '../../../core/register/register.service'
+import { FormCurrentEmploymentComponent } from './form-current-employment.component'
+import {
+  MatLegacyAutocomplete,
+  MatLegacyAutocompleteModule,
+} from '@angular/material/legacy-autocomplete'
+import { SharedModule } from 'src/app/shared/shared.module'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 
-describe('FormVisibilityComponent', () => {
-  let component: FormVisibilityComponent
-  let fixture: ComponentFixture<FormVisibilityComponent>
+describe('FormPersonalComponent', () => {
+  let component: FormCurrentEmploymentComponent
+  let fixture: ComponentFixture<FormCurrentEmploymentComponent>
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule],
-      declarations: [FormVisibilityComponent],
+      imports: [
+        HttpClientTestingModule,
+        MdePopoverModule,
+        RouterTestingModule,
+        MatLegacyAutocompleteModule,
+        SharedModule,
+      ],
+      declarations: [FormCurrentEmploymentComponent],
       providers: [
         WINDOW_PROVIDERS,
-        Register2Service,
+        ReactivationService,
+        RegisterService,
         PlatformInfoService,
         ErrorHandlerService,
         SnackbarService,
@@ -37,7 +51,7 @@ describe('FormVisibilityComponent', () => {
   })
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FormVisibilityComponent)
+    fixture = TestBed.createComponent(FormCurrentEmploymentComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
   })

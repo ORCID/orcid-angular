@@ -1,14 +1,17 @@
 <ng-container [formGroup]="form">
+  <mat-error
+    *ngIf="
+      captcha.hasError('captcha') &&
+      (form.controls.captcha.touched || nextButtonWasClicked)
+    "
+    i18n="@@register.recaptchaRequired"
+    >Please check the recaptcha box</mat-error
+  >
+
   <div
     appRecaptcha
     (captchaFail)="captchaFail($event)"
     (captchaLoaded)="captchaLoaded($event)"
     formControlName="captcha"
   ></div>
-
-  <mat-error
-    *ngIf="captcha.hasError('captcha') && errorState"
-    i18n="@@register.recaptchaRequired"
-    >Please check the recaptcha box</mat-error
-  >
 </ng-container>

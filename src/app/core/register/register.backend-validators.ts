@@ -1,15 +1,14 @@
+import { HttpClient } from '@angular/common/http'
 import {
-  UntypedFormGroup,
-  AsyncValidatorFn,
   AbstractControl,
+  AsyncValidatorFn,
+  UntypedFormGroup,
   ValidationErrors,
 } from '@angular/forms'
-import { RegisterForm } from 'src/app/types/register.endpoint'
-import { Constructor } from 'src/app/types'
 import { Observable, of } from 'rxjs'
-
-import { retry, catchError, map } from 'rxjs/operators'
-import { HttpClient } from '@angular/common/http'
+import { catchError, map, retry } from 'rxjs/operators'
+import { Constructor } from 'src/app/types'
+import { RegisterForm } from 'src/app/types/register.endpoint'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
 interface HasHttpClientAndErrorHandler {
@@ -23,7 +22,10 @@ interface HasFormAdapters {
   formGroupToFullRegistrationForm(
     StepA: UntypedFormGroup,
     StepB: UntypedFormGroup,
-    StepC: UntypedFormGroup
+    StepC: UntypedFormGroup,
+    StepC2: UntypedFormGroup,
+    StepD: UntypedFormGroup,
+    isReactivation?: boolean
   ): RegisterForm
 }
 
@@ -160,13 +162,19 @@ export function RegisterBackendValidatorMixin<
       StepA: UntypedFormGroup,
       StepB: UntypedFormGroup,
       StepC: UntypedFormGroup,
+      StepC2: UntypedFormGroup,
+      StepD: UntypedFormGroup,
+      isReactivation?: boolean,
       type?: 'shibboleth'
     ): Observable<RegisterForm> {
       const registerForm = this.formGroupToFullRegistrationForm(
         StepA,
         StepB,
-        StepC
+        StepC,
+        StepC2,
+        StepD
       )
+      registerForm.isReactivation = isReactivation
       return this._http
         .post<RegisterForm>(
           `${runtimeEnvironment.API_WEB}register.json`,
