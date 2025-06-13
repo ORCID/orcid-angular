@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { UntypedFormGroup } from '@angular/forms'
-import { Observable } from 'rxjs'
-import { catchError, first, map, retry, switchMap } from 'rxjs/operators'
+import { Observable, throwError } from 'rxjs'
+import { catchError, first, map, retry, switchMap, tap } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { RequestInfoForm } from 'src/app/types'
 import {
@@ -11,13 +11,14 @@ import {
   RegisterForm,
 } from 'src/app/types/register.endpoint'
 
+import { ERROR_REPORT } from 'src/app/errors'
+import { objectToUrlParameters } from '../../constants'
+import { ReactivationLocal } from '../../types/reactivation.local'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { UserService } from '../user/user.service'
 import { RegisterBackendValidatorMixin } from './register.backend-validators'
 import { RegisterFormAdapterMixin } from './register.form-adapter'
-import { ERROR_REPORT } from 'src/app/errors'
-import { objectToUrlParameters } from '../../constants'
-import { ReactivationLocal } from '../../types/reactivation.local'
+import { EmailCategoryEndpoint } from 'src/app/types/register.email-category'
 
 // Mixing boiler plate
 
@@ -76,10 +77,18 @@ export class RegisterService extends _RegisterServiceMixingBase {
       .pipe(map((form) => (this.backendRegistrationForm = form)))
   }
 
+  getEmailCategory(email: string): Observable<EmailCategoryEndpoint> {
+    return this._http.get<any>(
+      `${runtimeEnvironment.API_WEB}email-domain/find-category?domain=${email}`
+    )
+  }
+
   register(
     StepA: UntypedFormGroup,
     StepB: UntypedFormGroup,
     StepC: UntypedFormGroup,
+    StepC2: UntypedFormGroup,
+    StepD: UntypedFormGroup,
     reactivation: ReactivationLocal,
     requestInfoForm?: RequestInfoForm,
     updateUserService = true
@@ -89,7 +98,9 @@ export class RegisterService extends _RegisterServiceMixingBase {
     const registerForm = this.formGroupToFullRegistrationForm(
       StepA,
       StepB,
-      StepC
+      StepC,
+      StepC2,
+      StepD
     )
     this.addOauthContext(registerForm, requestInfoForm)
     return this._platform.get().pipe(

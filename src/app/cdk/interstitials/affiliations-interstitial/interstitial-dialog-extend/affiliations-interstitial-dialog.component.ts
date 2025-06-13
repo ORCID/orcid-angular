@@ -22,10 +22,9 @@ import {
 } from '@angular/material/legacy-dialog'
 import { OrganizationsService, UserService } from 'src/app/core'
 import { RecordService } from 'src/app/core/record/record.service'
-import { RecordCountriesService } from 'src/app/core/record-countries/record-countries.service'
 import { RecordAffiliationService } from 'src/app/core/record-affiliations/record-affiliations.service'
-import { Register2Service } from 'src/app/core/register2/register2.service'
-import { extend } from 'lodash'
+import { RegisterService } from 'src/app/core/register/register.service'
+
 import {
   BaseInterstitialDialogInput,
   BaseInterstitialDialogOutput,
@@ -66,7 +65,7 @@ export class AffiliationsInterstitialDialogComponent extends AffiliationsInterst
     formBuilder: UntypedFormBuilder,
     recordService: RecordService,
     organizationService: OrganizationsService,
-    register2Service: Register2Service,
+    registerService: RegisterService,
     private dialogRef: MatLegacyDialogRef<
       AffiliationsInterstitialDialogComponent,
       AffilationsComponentDialogOutput
@@ -80,7 +79,7 @@ export class AffiliationsInterstitialDialogComponent extends AffiliationsInterst
       formBuilder,
       recordService,
       organizationService,
-      register2Service,
+      registerService,
       user
     )
   }

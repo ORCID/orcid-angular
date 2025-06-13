@@ -1,9 +1,15 @@
-import { Component, DoCheck, forwardRef, OnInit } from '@angular/core'
 import {
-  UntypedFormControl,
-  UntypedFormGroup,
+  Component,
+  DoCheck,
+  forwardRef,
+  OnDestroy,
+  OnInit,
+} from '@angular/core'
+import {
   NG_ASYNC_VALIDATORS,
   NG_VALUE_ACCESSOR,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms'
 import { ErrorStateMatcher } from '@angular/material/core'
@@ -11,11 +17,19 @@ import { VISIBILITY_OPTIONS } from 'src/app/constants'
 import { RegisterService } from 'src/app/core/register/register.service'
 
 import { BaseForm } from '../BaseForm'
+import { RegisterStateService } from '../../register-state.service'
+import { RegisterObservabilityService } from '../../register-observability.service'
+import { Subject } from 'rxjs'
+import { takeUntil } from 'rxjs/operators'
 
 @Component({
   selector: 'app-form-visibility',
   templateUrl: './form-visibility.component.html',
-  styleUrls: ['./form-visibility.component.scss'],
+  styleUrls: [
+    './form-visibility.component.scss',
+    '../register.style.scss',
+    '../register.scss-theme.scss',
+  ],
   preserveWhitespaces: true,
   providers: [
     {
@@ -32,18 +46,31 @@ import { BaseForm } from '../BaseForm'
 })
 export class FormVisibilityComponent
   extends BaseForm
-  implements OnInit, DoCheck
+  implements OnInit, DoCheck, OnDestroy
 {
+  ariaLabelMoreInformationOnVisibility = $localize`:@@register.ariaLabelMoreInformationOnVisibility:More information on visibility settings (Opens in new tab)`
   visibilityOptions = VISIBILITY_OPTIONS
   errorState = false
   activitiesVisibilityDefault = new UntypedFormControl('', Validators.required)
+  destroy = new Subject<void>()
   constructor(
     private _register: RegisterService,
-    private _errorStateMatcher: ErrorStateMatcher
+    private _errorStateMatcher: ErrorStateMatcher,
+    private _registerStateService: RegisterStateService,
+    private _registerObservability: RegisterObservabilityService
   ) {
     super()
   }
+  ngOnDestroy(): void {
+    this.destroy.next()
+  }
   ngOnInit() {
+    this._registerStateService
+      .getNextButtonClickFor('c')
+      .pipe(takeUntil(this.destroy))
+      .subscribe(() => {
+        this._registerObservability.stepCNextButtonClicked(this.form)
+      })
     this.form = new UntypedFormGroup({
       activitiesVisibilityDefault: this.activitiesVisibilityDefault,
     })

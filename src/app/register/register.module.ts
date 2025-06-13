@@ -1,43 +1,51 @@
-import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { RegisterRoutingModule } from './register-routing.module'
-import { RegisterComponent } from './pages/register/register.component'
+import { NgModule } from '@angular/core'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { FormNotificationsComponent } from './components/form-notifications/form-notifications.component'
+import { FormPasswordComponent } from './components/form-password/form-password.component'
+import { FormPersonalComponent } from './components/form-personal/form-personal.component'
+import { FormTermsComponent } from './components/form-terms/form-terms.component'
+import { FormVisibilityComponent } from './components/form-visibility/form-visibility.component'
 import { StepAComponent } from './components/step-a/step-a.component'
 import { StepBComponent } from './components/step-b/step-b.component'
-import { StepCComponent } from './components/step-c/step-c.component'
-import { FormPersonalComponent } from './components/form-personal/form-personal.component'
-import { FormPasswordComponent } from './components/form-password/form-password.component'
-import { FormNotificationsComponent } from './components/form-notifications/form-notifications.component'
-import { FormVisibilityComponent } from './components/form-visibility/form-visibility.component'
-import { FormTermsComponent } from './components/form-terms/form-terms.component'
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { StepDComponent } from './components/step-d/step-d.component'
+import { RegisterRoutingModule } from './register-routing.module'
 // tslint:disable-next-line: max-line-length
-import { FormPersonalAdditionalEmailsComponent } from './components/form-personal-additional-emails/form-personal-additional-emails.component'
-import { IsThisYouModule } from '../cdk/is-this-you'
+import { MatIconModule } from '@angular/material/icon'
+import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button'
+import { MatLegacyCardModule as MatCardModule } from '@angular/material/legacy-card'
+import { MatLegacyCheckboxModule as MatCheckboxModule } from '@angular/material/legacy-checkbox'
+import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog'
 import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field'
 import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input'
-import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button'
-import { MatLegacyCheckboxModule as MatCheckboxModule } from '@angular/material/legacy-checkbox'
-import { MatIconModule } from '@angular/material/icon'
-import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog'
-import { MatStepperModule } from '@angular/material/stepper'
-import { MatLegacyRadioModule as MatRadioModule } from '@angular/material/legacy-radio'
-import { MatLegacyCardModule as MatCardModule } from '@angular/material/legacy-card'
-import { RecaptchaModule } from '../cdk/recaptcha/recaptcha.module'
-import { FormAntiRobotsComponent } from './components/form-anti-robots/form-anti-robots.component'
-import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
-import { BackendErrorComponent } from './components/backend-error/backend-error.component'
 import { MatLegacyProgressBarModule as MatProgressBarModule } from '@angular/material/legacy-progress-bar'
+import { MatLegacyRadioModule as MatRadioModule } from '@angular/material/legacy-radio'
+import { MatStepperModule } from '@angular/material/stepper'
+import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
 import { FormDirectivesModule } from '../cdk/form-directives/form-directives.module'
-import { TopBarRecordIssuesComponent } from './components/top-bar-record-issues/top-bar-record-issues.component'
-import { WarningMessageModule } from '../cdk/warning-message/warning-message.module'
+import { IsThisYouModule } from '../cdk/is-this-you'
 import { MdePopoverModule } from '../cdk/popover'
+import { RecaptchaModule } from '../cdk/recaptcha/recaptcha.module'
+import { WarningMessageModule } from '../cdk/warning-message/warning-message.module'
+import { BackendErrorComponent } from './components/backend-error/backend-error.component'
+import { FormAntiRobotsComponent } from './components/form-anti-robots/form-anti-robots.component'
+import { FormPersonalAdditionalEmailsComponent } from './components/form-personal-additional-emails/form-personal-additional-emails.component'
+import { RegisterComponent } from './pages/register/register.component'
+import { StepCComponent } from './components/step-c/step-c.component'
+import { FormCurrentEmploymentComponent } from './components/form-current-employment/form-current-employment.component'
+import { MatLegacyAutocompleteModule as MatAutocompleteModule } from '@angular/material/legacy-autocomplete'
+import { StepC2Component } from './components/step-c2/step-c2.component'
+import { MatLegacySelectModule } from '@angular/material/legacy-select'
+import { SharedModule } from '../shared/shared.module'
+import { AlertMessageModule } from '../cdk/alert-message/alert-message.module'
+
 @NgModule({
   declarations: [
-    RegisterComponent,
     StepAComponent,
     StepBComponent,
     StepCComponent,
+    StepC2Component,
+    StepDComponent,
     FormPersonalComponent,
     FormPasswordComponent,
     FormNotificationsComponent,
@@ -46,13 +54,15 @@ import { MdePopoverModule } from '../cdk/popover'
     FormPersonalAdditionalEmailsComponent,
     FormAntiRobotsComponent,
     BackendErrorComponent,
-    TopBarRecordIssuesComponent,
+    RegisterComponent,
+    FormCurrentEmploymentComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     RegisterRoutingModule,
+    AlertMessageModule,
     MatStepperModule,
     MatFormFieldModule,
     MatInputModule,
@@ -69,6 +79,9 @@ import { MdePopoverModule } from '../cdk/popover'
     MatProgressBarModule,
     FormDirectivesModule,
     WarningMessageModule,
+    MatAutocompleteModule,
+    MatLegacySelectModule,
+    SharedModule,
   ],
 })
-export class RegisterModuleLegacy {}
+export class RegisterModule {}
