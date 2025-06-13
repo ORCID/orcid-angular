@@ -1,4 +1,14 @@
-<h3 class="mat-subtitle-1" i18n="@@register.termsOfUse">Terms of Use</h3>
+<h3 class="orc-font-body" i18n="@@register.termsOfUse">Terms of Use</h3>
+<mat-error
+  *ngIf="
+    this.nextButtonWasClicked &&
+    (form.hasError('required', 'termsOfUse') ||
+      form.hasError('required', 'dataProcessed'))
+  "
+  i18n="@@register.youMustAccept2"
+  >You must accept the terms of use and consent to your data being processed in
+  the United States</mat-error
+>
 
 <ng-container [formGroup]="form">
   <mat-checkbox
@@ -22,11 +32,11 @@
       target="_blank"
       rel="noopener noreferrer"
       class="mat-button-font"
-      i18n="@@register.terms"
+      i18n="@@register.termsOfUse2"
     >
       terms of use
     </a>
-    <ng-container i18n="@@register.agree"
+    <ng-container i18n="@@register.agree2"
       >and agree to my data being publicly accessible where marked as “Visible
       to Everyone”.</ng-container
     >
@@ -47,20 +57,10 @@
       }}"
       target="_blank"
       rel="noopener noreferrer"
-      class="mat-button-font"
+      class="mat-button-font no-margin-top"
       i18n="@@register.moreInformation"
     >
       More information on how ORCID process your data.
     </a>
   </mat-checkbox>
-  <mat-error
-    *ngIf="
-      (form.hasError('required', 'termsOfUse') ||
-        form.hasError('required', 'dataProcessed')) &&
-      errorState
-    "
-    i18n="@@register.termsRequired"
-    >To continue creating your ORCID iD you must accept the terms of use and
-    consent to your data being processed in the United States.</mat-error
-  >
 </ng-container>

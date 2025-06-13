@@ -27,7 +27,7 @@ import {
 } from 'src/app/constants'
 import { dateMonthYearValidator } from 'src/app/shared/validators/date/date.validator'
 import { OrganizationsService, UserService } from 'src/app/core'
-import { Register2Service } from 'src/app/core/register2/register2.service'
+import { RegisterService } from 'src/app/core/register/register.service'
 import { AssertionVisibilityString, RequestInfoForm } from 'src/app/types'
 import {
   Affiliation,
@@ -97,7 +97,7 @@ export class AffiliationsInterstitialComponent implements OnInit, OnDestroy {
     private formBuilder: UntypedFormBuilder,
     private recordService: RecordService,
     private organizationService: OrganizationsService,
-    private register2Service: Register2Service,
+    private registerService: RegisterService,
     private user: UserService
   ) {}
 
@@ -115,7 +115,7 @@ export class AffiliationsInterstitialComponent implements OnInit, OnDestroy {
         switchMap((domain: AssertionVisibilityString) => {
           if (domain) {
             this.userDomainMatched = domain.value
-            return this.register2Service
+            return this.registerService
               .getEmailCategory(domain.value)
               .pipe(map((response) => response.rorId))
           }

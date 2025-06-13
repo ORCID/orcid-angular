@@ -1,9 +1,9 @@
-import { Component, DoCheck, forwardRef, OnInit } from '@angular/core'
+import { Component, DoCheck, forwardRef, Input, OnInit } from '@angular/core'
 import {
-  UntypedFormControl,
-  UntypedFormGroup,
   NG_ASYNC_VALIDATORS,
   NG_VALUE_ACCESSOR,
+  UntypedFormControl,
+  UntypedFormGroup,
   ValidatorFn,
   Validators,
 } from '@angular/forms'
@@ -12,6 +12,7 @@ import { merge, Subject } from 'rxjs'
 import { RegisterService } from 'src/app/core/register/register.service'
 
 import { BaseForm } from '../BaseForm'
+import { RegisterStateService } from '../../register-state.service'
 
 @Component({
   selector: 'app-form-anti-robots',
@@ -30,14 +31,12 @@ import { BaseForm } from '../BaseForm'
     },
   ],
 })
-export class FormAntiRobotsComponent
-  extends BaseForm
-  implements OnInit, DoCheck
-{
+export class FormAntiRobotsComponent extends BaseForm implements OnInit {
   captchaFailState = false
   captchaLoadedWithWidgetId: number
   $widgetIdUpdated = new Subject<void>()
   errorState = false
+  nextButtonWasClicked = false
   captcha = new UntypedFormControl(null, {
     validators: [this.captchaValidator()],
   })
@@ -45,11 +44,14 @@ export class FormAntiRobotsComponent
     this.form = new UntypedFormGroup({
       captcha: this.captcha,
     })
+    this._registerStateService.getNextButtonClickFor('d').subscribe(() => {
+      this.nextButtonWasClicked = true
+    })
   }
 
   constructor(
     private _register: RegisterService,
-    private _errorStateMatcher: ErrorStateMatcher
+    private _registerStateService: RegisterStateService
   ) {
     super()
   }
@@ -77,10 +79,6 @@ export class FormAntiRobotsComponent
     this.captchaLoadedWithWidgetId = widgetId
     this.captcha.updateValueAndValidity()
     this.$widgetIdUpdated.next()
-  }
-
-  ngDoCheck(): void {
-    this.errorState = this._errorStateMatcher.isErrorState(this.captcha, null)
   }
 
   // OVERWRITE

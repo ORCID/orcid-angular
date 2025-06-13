@@ -9,12 +9,10 @@ import {
   ViewChild,
 } from '@angular/core'
 import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms'
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
-import { MatStep } from '@angular/material/stepper'
+import { MatStep, MatStepper } from '@angular/material/stepper'
 import { Router } from '@angular/router'
 import { Observable, combineLatest, forkJoin } from 'rxjs'
 import { catchError, first, map, switchMap } from 'rxjs/operators'
-import { IsThisYouComponent } from 'src/app/cdk/is-this-you'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { isRedirectToTheAuthorizationPage } from 'src/app/constants'
@@ -22,7 +20,7 @@ import { UserService } from 'src/app/core'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 import { RegisterService } from 'src/app/core/register/register.service'
 import { ERROR_REPORT } from 'src/app/errors'
-import { RequestInfoForm, SearchParameters, SearchResults } from 'src/app/types'
+import { RequestInfoForm } from 'src/app/types'
 import {
   RegisterConfirmResponse,
   RegisterForm,
@@ -30,23 +28,36 @@ import {
 import { UserSession } from 'src/app/types/session.local'
 import { ThirdPartyAuthData } from 'src/app/types/sign-in-data.endpoint'
 import { GoogleTagManagerService } from '../../../core/google-tag-manager/google-tag-manager.service'
-import { SearchService } from '../../../core/search/search.service'
 import { ReactivationLocal } from '../../../types/reactivation.local'
+import { JourneyType } from 'src/app/core/observability-events/observability-events.service'
+import { RegisterObservabilityService } from '../../register-observability.service'
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
+  styleUrls: [
+    './register.component.scss',
+    './register.component.scss.theme.scss',
+    '../../components/register.scss-theme.scss',
+    '../../components/register.style.scss',
+  ],
 })
 export class RegisterComponent implements OnInit, AfterViewInit {
   @ViewChild('lastStep') lastStep: MatStep
   @ViewChild('stepComponentA', { read: ElementRef }) stepComponentA: ElementRef
   @ViewChild('stepComponentB', { read: ElementRef }) stepComponentB: ElementRef
   @ViewChild('stepComponentC', { read: ElementRef }) stepComponentC: ElementRef
+  @ViewChild('stepComponentC2', { read: ElementRef })
+  stepComponentC2: ElementRef
+  @ViewChild('stepComponentD', { read: ElementRef }) stepComponentD: ElementRef
+
   platform: PlatformInfo
   FormGroupStepA: UntypedFormGroup
   FormGroupStepB: UntypedFormGroup
   FormGroupStepC: UntypedFormGroup
+  FormGroupStepC2: UntypedFormGroup
+  FormGroupStepD: UntypedFormGroup
+
   isLinear = true
   personalData: RegisterForm
   backendForm: RegisterForm
@@ -57,25 +68,33 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     isReactivation: false,
     reactivationCode: '',
   } as ReactivationLocal
+  stepControlStepC2: UntypedFormGroup
+  formGroupStepC2Optional = false
+  @ViewChild('stepper') private myStepper: MatStepper
 
   constructor(
     private _cdref: ChangeDetectorRef,
     private _platformInfo: PlatformInfoService,
     private _formBuilder: UntypedFormBuilder,
     private _register: RegisterService,
-    private _dialog: MatDialog,
     @Inject(WINDOW) private window: Window,
     private _googleTagManagerService: GoogleTagManagerService,
-    private _user: UserService,
     private _router: Router,
     private _errorHandler: ErrorHandlerService,
     private _userInfo: UserService,
-    private _searchService: SearchService
+    private _registerObservabilityService: RegisterObservabilityService
   ) {
     _platformInfo.get().subscribe((platform) => {
       this.platform = platform
       this.reactivation.isReactivation = this.platform.reactivation
       this.reactivation.reactivationCode = this.platform.reactivationCode
+
+      this._registerObservabilityService.initializeJourney({
+        isReactivation: this.reactivation.isReactivation,
+        coulumn4: this.platform.columns4,
+        column8: this.platform.columns8,
+        column12: this.platform.columns12,
+      })
     })
   }
   ngOnInit() {
@@ -86,10 +105,16 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     })
     this.FormGroupStepB = this._formBuilder.group({
       password: [''],
-      sendOrcidNews: [''],
     })
     this.FormGroupStepC = this._formBuilder.group({
       activitiesVisibilityDefault: [''],
+    })
+
+    this.FormGroupStepC2 = this._formBuilder.group({
+      affiliations: [''],
+    })
+    this.FormGroupStepD = this._formBuilder.group({
+      sendOrcidNews: [''],
       termsOfUse: [''],
       captcha: [''],
     })
@@ -107,6 +132,9 @@ export class RegisterComponent implements OnInit, AfterViewInit {
           this.requestInfoForm = session.oauthSession
 
           if (this.thirdPartyAuthData || this.requestInfoForm) {
+            this._registerObservabilityService.reportRegisterEvent(
+              'prefill_register-form'
+            )
             this.FormGroupStepA = this.prefillRegisterForm(
               this.requestInfoForm,
               this.thirdPartyAuthData
@@ -121,44 +149,79 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     this._cdref.detectChanges()
   }
 
+  formGroupStepC2Next(nextOptional: boolean) {
+    this.formGroupStepC2Optional = nextOptional
+    this._cdref.detectChanges()
+    this.myStepper.next()
+  }
+
   register() {
     this.loading = true
     this.lastStep.interacted = true
     if (
       this.FormGroupStepA.valid &&
       this.FormGroupStepB.valid &&
-      this.FormGroupStepC.valid
+      this.FormGroupStepC.valid &&
+      this.FormGroupStepD.valid
     ) {
       this._register
         .backendRegisterFormValidate(
           this.FormGroupStepA,
           this.FormGroupStepB,
-          this.FormGroupStepC
+          this.FormGroupStepC,
+          this.FormGroupStepC2,
+          this.FormGroupStepD,
+          this.reactivation?.isReactivation
         )
         .pipe(
           switchMap((validator: RegisterForm) => {
+            this._registerObservabilityService.reportRegisterEvent(
+              'register-validate',
+              {
+                validator,
+              }
+            )
             if (validator.errors.length > 0) {
               // At this point any backend error is unexpected
               this._errorHandler.handleError(
                 new Error('registerUnexpectedValidateFail'),
                 ERROR_REPORT.REGISTER
               )
+              this._registerObservabilityService.reportRegisterErrorEvent(
+                'register-validate',
+                {
+                  errors: validator.errors,
+                }
+              )
             }
             return this._register.register(
               this.FormGroupStepA,
               this.FormGroupStepB,
               this.FormGroupStepC,
+              this.FormGroupStepC2,
+              this.FormGroupStepD,
               this.reactivation,
-              this.requestInfoForm,
-              true
+              this.requestInfoForm
             )
           })
         )
         .subscribe((response) => {
           this.loading = false
           if (response.url) {
+            this._registerObservabilityService.reportRegisterEvent(
+              'register-confirmation',
+              {
+                response,
+              }
+            )
             this.afterRegisterRedirectionHandler(response)
           } else {
+            this._registerObservabilityService.reportRegisterErrorEvent(
+              'register-confirmation',
+              {
+                response,
+              }
+            )
             this._errorHandler.handleError(
               new Error('registerUnexpectedConfirmation'),
               ERROR_REPORT.REGISTER
@@ -191,70 +254,9 @@ export class RegisterComponent implements OnInit, AfterViewInit {
       }
     }
   }
-
-  afterStepASubmitted() {
-    // Update the personal data object is required after submit since is an input for StepB
-
-    if (!this.reactivation?.isReactivation) {
-      if (this.FormGroupStepA.valid) {
-        this.personalData = this.FormGroupStepA.value.personal
-        const searchValue =
-          this.personalData.familyNames.value +
-          ' ' +
-          this.personalData.givenNames.value
-        const searchParams: SearchParameters = {}
-        searchParams.searchQuery = searchValue
-
-        this._searchService.search(searchParams).subscribe((value) => {
-          if (value['num-found'] > 0) {
-            this.openDialog(value)
-          }
-        })
-      }
-    }
-  }
-
-  openDialog(duplicateRecordsSearchResults: SearchResults): void {
-    const duplicateRecords = duplicateRecordsSearchResults['expanded-result']
-    const dialogParams = {
-      width: `1078px`,
-      height: `600px`,
-      maxWidth: `90vw`,
-
-      data: {
-        duplicateRecords,
-        titleLabel: $localize`:@@register.titleLabel:Could this be you?`,
-        // tslint:disable-next-line: max-line-length
-        bodyLabel: $localize`:@@register.bodyLabel:We found some accounts with your name, which means you may have already created an ORCID iD using a different email address. Before creating an account, please confirm that none of these records belong to you. Not sure if any of these are you?`,
-        contactLabel: $localize`:@@register.contactLabel:Contact us.`,
-        firstNameLabel: $localize`:@@register.firstNameLabel:First Name`,
-        lastNameLabel: $localize`:@@register.lastNameLabel:Last Name`,
-        affiliationsLabel: $localize`:@@register.affiliationsLabel:Affiliations`,
-        dateCreatedLabel: $localize`:@@register.dateCreatedLabel:Date Created`,
-        viewRecordLabel: $localize`:@@register.viewRecordLabel:View Record`,
-        signinLabel: $localize`:@@register.signinLabel:I ALREADY HAVE AN ID, GO BACK TO SIGN IN`,
-        continueLabel: $localize`:@@register.continueLabel:NONE OF THESE ARE ME, CONTINUE WITH REGISTRATION`,
-      },
-    }
-
-    if (this.platform.tabletOrHandset) {
-      dialogParams['maxWidth'] = '95vw'
-      dialogParams['maxHeight'] = '95vh'
-    }
-
-    const dialogRef = this._dialog.open(IsThisYouComponent, dialogParams)
-
-    dialogRef.afterClosed().subscribe((confirmRegistration) => {
-      if (!confirmRegistration) {
-        this._router.navigate(['signin'])
-      }
-    })
-  }
-
   selectionChange(event: StepperSelectionEvent) {
-    if (event.previouslySelectedIndex === 0) {
-      this.afterStepASubmitted()
-    }
+    const step = ['a', 'b', 'c2', 'c', 'd'][event.selectedIndex] as JourneyType
+    this._registerObservabilityService.stepLoaded(step)
     if (this.platform.columns4 || this.platform.columns8) {
       this.focusCurrentStep(event)
     }
@@ -269,7 +271,11 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     } else if (event.selectedIndex === 1) {
       nextStep = this.stepComponentB
     } else if (event.selectedIndex === 2) {
+      nextStep = this.stepComponentC2
+    } else if (event.selectedIndex === 3) {
       nextStep = this.stepComponentC
+    } else if (event.selectedIndex === 4) {
+      nextStep = this.stepComponentD
     }
     // On mobile scroll the current step component into view
     if (this.platform.columns4 || this.platform.columns8) {
