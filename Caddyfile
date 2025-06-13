@@ -1,9 +1,0 @@
-:80 {
-    log stdout
-    errors
-    proxy / http://web:4100 {
-        header_upstream Host {host}
-        header_upstream X-Real-IP {remote}
-    }
-    #tls ops@orcid.org
-}
