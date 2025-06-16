@@ -10,7 +10,7 @@ import { ErrorHandlerService } from '../../../core/error-handler/error-handler.s
 import { SnackbarService } from '../../../cdk/snackbar/snackbar.service'
 import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
 import { Overlay } from '@angular/cdk/overlay'
-import { MatLegacyAutocompleteModule as MatAutocompleteModule } from '@angular/material/legacy-autocomplete'
+import { MatAutocompleteModule as MatAutocompleteModule } from '@angular/material/autocomplete'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { ReactiveFormsModule } from '@angular/forms'
