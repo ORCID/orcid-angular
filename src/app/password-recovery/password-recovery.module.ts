@@ -9,7 +9,7 @@ import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy
 import { MatLegacyProgressBarModule as MatProgressBarModule } from '@angular/material/legacy-progress-bar'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { FormDirectivesModule } from '../cdk/form-directives/form-directives.module'
-import { MatCardModule } from '@angular/material/card'
+import { MatLegacyCardModule as MatCardModule } from '@angular/material/legacy-card'
 
 @NgModule({
   declarations: [PasswordRecoveryComponent],

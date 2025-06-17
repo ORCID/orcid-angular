@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { MatCardModule } from '@angular/material/card'
+import { MatLegacyCardModule } from '@angular/material/legacy-card'
 import { MatIconModule } from '@angular/material/icon'
 import { MatDividerModule } from '@angular/material/divider'
 import { InfoDropDownModule } from '../info-drop-down/info-drop-down.module'
@@ -34,7 +34,7 @@ import { ShareEmailsDomainsComponent } from './share-emails-domains/interstitial
   imports: [
     CommonModule,
     SharedModule,
-    MatCardModule,
+    MatLegacyCardModule,
     MatAutocompleteModule,
     MatLegacyFormFieldModule,
     MatLegacySelectModule,
