@@ -10,7 +10,7 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms'
-import { MatAutocompleteTrigger as MatAutocompleteTrigger } from '@angular/material/autocomplete'
+import { MatLegacyAutocompleteTrigger as MatAutocompleteTrigger } from '@angular/material/legacy-autocomplete'
 import { Router } from '@angular/router'
 import { CookieService } from 'ngx-cookie-service'
 import { Observable, Subject } from 'rxjs'
