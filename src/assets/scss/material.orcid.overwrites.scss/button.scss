@@ -1,13 +1,15 @@
 // Overwrites for:
 // https://github.com/angular/components/blob/8.2.x/src/material/button/button.scss
 
-button.mat-button:hover,
-button.mat-stroked-button:hover {
+button.mat-mdc-button:hover,
+button.mat-mdc-outlined-button:hover {
+  /* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version.*/
   .mat-button-focus-overlay {
     opacity: 0.08;
   }
 }
 
+/* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version.*/
 button.mat-button-wrap-text {
   span {
     max-width: 100%;
@@ -17,6 +19,7 @@ button.mat-button-wrap-text {
   }
 }
 
+/* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version.*/
 button.mat-button-wrap-text-with-icon {
   padding-left: 40px; // save space for the icon or image
   img,
@@ -30,6 +33,7 @@ button.mat-button-wrap-text-with-icon {
   }
 }
 
+/* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version.*/
 button.mat-button-wrap-text-with-icon.mobile-fixed-width {
   .columns-4 & {
     span {
@@ -43,6 +47,7 @@ button.mat-button-wrap-text-with-icon.mobile-fixed-width {
   }
 }
 
+/* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version.*/
 [dir='rtl'] button.mat-button-wrap-text-with-icon {
   img {
     right: 20px;
@@ -50,6 +55,7 @@ button.mat-button-wrap-text-with-icon.mobile-fixed-width {
   }
 }
 
-.no-hover-effect.mat-button .mat-button-focus-overlay {
+/* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version.*/
+.no-hover-effect.mat-mdc-button .mat-button-focus-overlay {
   background-color: transparent;
 }

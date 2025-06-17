@@ -9,10 +9,10 @@
   cursor: move !important;
   .mat-form-field-flex,
   .mat-select-trigger,
-  .mat-button,
-  .mat-icon-button,
-  .mat-stroked-button,
-  .mat-flat-button {
+  .mat-mdc-button,
+  .mat-mdc-icon-button,
+  .mat-mdc-outlined-button,
+  .mat-mdc-unelevated-button {
     cursor: move !important;
   }
 }

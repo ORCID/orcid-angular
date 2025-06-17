@@ -25,7 +25,7 @@ import { MatLegacySelectModule as MatSelectModule } from '@angular/material/lega
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 import { Address, CountriesEndpoint } from '../../../../types'
 import { SideBarModule } from '../../side-bar.module'
-import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button'
+import { MatButtonModule } from '@angular/material/button'
 import { Observable, of } from 'rxjs'
 import { ChangeDetectorRef } from '@angular/core'
 import { MatLegacySelectHarness as MatSelectHarness } from '@angular/material/legacy-select/testing'

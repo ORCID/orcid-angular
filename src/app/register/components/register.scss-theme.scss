@@ -14,7 +14,7 @@
 
   .step-actions {
     border-color: mat.get-color-from-palette($background, ui-background-light);
-    .mat-raised-button.mat-primary {
+    .mat-mdc-raised-button.mat-primary {
       background-color: mat.get-color-from-palette($primary, 700);
     }
     a {

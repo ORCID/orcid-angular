@@ -6,7 +6,7 @@ import { TopBarMyPublicRecordPreviewModule } from '../cdk/top-bar-my-public-reco
 import { SideBarModule } from '../cdk/side-bar/side-bar.module'
 import { MatLegacyCheckboxModule as MatCheckboxModule } from '@angular/material/legacy-checkbox'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button'
+import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
 import { TermsOfUseComponent } from './components/terms-of-use/terms-of-use.component'
 import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field'

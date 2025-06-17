@@ -12,7 +12,7 @@ import { StepDComponent } from './components/step-d/step-d.component'
 import { RegisterRoutingModule } from './register-routing.module'
 // tslint:disable-next-line: max-line-length
 import { MatIconModule } from '@angular/material/icon'
-import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button'
+import { MatButtonModule } from '@angular/material/button'
 import { MatLegacyCardModule as MatCardModule } from '@angular/material/legacy-card'
 import { MatLegacyCheckboxModule as MatCheckboxModule } from '@angular/material/legacy-checkbox'
 import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog'

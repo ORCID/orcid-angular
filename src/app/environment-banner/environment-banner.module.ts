@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { EnvironmentBannerComponent } from './environment-banner/environment-banner.component'
 import { EnvironmentRoutingModule } from './environment-banner-routing.module'
-import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button'
+import { MatButtonModule } from '@angular/material/button'
 
 @NgModule({
   exports: [EnvironmentBannerComponent],

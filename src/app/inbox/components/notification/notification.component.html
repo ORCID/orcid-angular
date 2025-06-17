@@ -8,13 +8,13 @@
   ></mat-checkbox>
   <button class="header" #header (click)="toggleNotificationContent()">
     <div class="notification-type notification mat-caption">
-      <span class="dot notification-background mat-body-2"></span>
+      <span class="dot notification-background mat-subtitle-2"></span>
       <ng-container *ngIf="platform.columns12">
         {{ notificationTypeLabel(notificationType) }}
       </ng-container>
     </div>
     <div
-      class="title mat-body-2"
+      class="title mat-subtitle-2"
       [id]="'notification-' + notification?.putCode"
     >
       {{ notificationTitle(notification) }}
