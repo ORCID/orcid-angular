@@ -23,7 +23,7 @@ import {
 import { ErrorHandlerService } from '../../../../../core/error-handler/error-handler.service'
 import { UserService } from '../../../../../core'
 import { SnackbarService } from '../../../../../cdk/snackbar/snackbar.service'
-import { MatLegacyAutocompleteModule as MatAutocompleteModule } from '@angular/material/legacy-autocomplete'
+import { MatAutocompleteModule as MatAutocompleteModule } from '@angular/material/autocomplete'
 import { SharedModule } from '../../../../../shared/shared.module'
 import { ModalModule } from '../../../../../cdk/modal/modal.module'
 import { MatLegacySelectModule as MatSelectModule } from '@angular/material/legacy-select'

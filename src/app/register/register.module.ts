@@ -33,7 +33,7 @@ import { FormPersonalAdditionalEmailsComponent } from './components/form-persona
 import { RegisterComponent } from './pages/register/register.component'
 import { StepCComponent } from './components/step-c/step-c.component'
 import { FormCurrentEmploymentComponent } from './components/form-current-employment/form-current-employment.component'
-import { MatLegacyAutocompleteModule as MatAutocompleteModule } from '@angular/material/legacy-autocomplete'
+import { MatAutocompleteModule as MatAutocompleteModule } from '@angular/material/autocomplete'
 import { StepC2Component } from './components/step-c2/step-c2.component'
 import { MatLegacySelectModule } from '@angular/material/legacy-select'
 import { SharedModule } from '../shared/shared.module'
