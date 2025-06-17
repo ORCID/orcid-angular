@@ -20,7 +20,7 @@ import {
 } from '@angular/material/legacy-dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { ReactiveFormsModule, UntypedFormBuilder } from '@angular/forms'
-import { MatAutocompleteModule as MatAutocompleteModule } from '@angular/material/autocomplete'
+import { MatLegacyAutocompleteModule as MatAutocompleteModule } from '@angular/material/legacy-autocomplete'
 import { SharedModule } from '../../../../../shared/shared.module'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'

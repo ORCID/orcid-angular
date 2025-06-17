@@ -13,10 +13,11 @@ import { TitleService } from './core/title-service/title.service'
 import { HttpContentTypeHeaderInterceptor } from './core/http-content-type-header-interceptor/http-content-type-header-interceptor'
 import { HTTP_INTERCEPTORS } from '@angular/common/http'
 import { MatLegacyDialogModule } from '@angular/material/legacy-dialog'
+import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import {
-  MatAutocompleteModule,
-  MatAutocompleteSelectedEvent,
-} from '@angular/material/autocomplete'
+  MatLegacyAutocompleteModule,
+  MatLegacyAutocompleteSelectedEvent,
+} from '@angular/material/legacy-autocomplete'
 import { MatLegacySelectModule } from '@angular/material/legacy-select'
 import { MatLegacyFormFieldModule } from '@angular/material/legacy-form-field'
 import { MatLegacyInputModule } from '@angular/material/legacy-input'
@@ -32,7 +33,7 @@ import { FormsModule } from '@angular/forms'
     LayoutModule,
     BidiModule,
     MatLegacyDialogModule,
-    MatAutocompleteModule,
+    MatLegacyAutocompleteModule,
     MatLegacySelectModule,
     MatLegacyInputModule,
     PseudoModule, // Remove on angular 10 https://bit.ly/3ezbF4v
