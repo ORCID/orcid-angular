@@ -69,7 +69,7 @@ export class LoginMainInterstitialsManagerService {
     }
   ): Observable<BaseInterstitialDialogOutput | ComponentType<any>> {
     // Basic sanity checks
-    if (!this.isUserFullyLoaded) return EMPTY
+    if (!this.isUserFullyLoaded(userRecord)) return EMPTY
     if (this.alreadyCheckedLoginInterstitials) return EMPTY
     this.alreadyCheckedLoginInterstitials = true
     if (!this.isAccountOwner(userRecord)) {
