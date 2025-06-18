@@ -1,5 +1,4 @@
 
-/* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version. */
 button.mat-button-wrap-text-with-icon {
   width: 100%;
   margin-top: 12px;
@@ -10,14 +9,6 @@ button.mat-button-wrap-text-with-icon {
   margin-top: 0 !important;
 }
 
-.institutional.mobile {
-  ::ng-deep {
-    /* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version. */
-    span.mat-button-wrapper {
-      width: 210px !important;
-    }
-  }
-}
 
 .google {
   font-weight: normal;

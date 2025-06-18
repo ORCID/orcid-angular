@@ -258,7 +258,7 @@ export class HeaderComponent implements OnInit {
     return this.isDesktopSecondLevelMenu(parents) ||
       this.isMobileThirdLevelMenu(parents)
       ? 'primary'
-      : null
+      : 'null'
   }
 
   goto(route: string) {

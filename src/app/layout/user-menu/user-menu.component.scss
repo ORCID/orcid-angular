@@ -89,3 +89,25 @@ span.name-text-container {
   margin-inline-start: 3px;
   margin-inline-end: 14px;
 }
+
+.user-menu-container {
+  display: flex;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+:host {
+  ::ng-deep {
+    .mdc-button__label {
+      max-width: 100%;
+    }
+  }
+  .user-menu-button-icon {
+    ::ng-deep {
+      mat-icon {
+        height: unset;
+        margin-left: 7px;
+      }
+    }
+  }
+}

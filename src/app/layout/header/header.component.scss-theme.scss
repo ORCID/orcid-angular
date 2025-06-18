@@ -30,6 +30,7 @@
           }
           &.sign-in-button {
             border-color: mat.get-color-from-palette($background, background);
+            color: mat.get-color-from-palette($primary, '500-contrast');
           }
         }
 
@@ -50,6 +51,7 @@
           }
           &.sign-in-button {
             border-color: mat.get-color-from-palette($background, background);
+            color: mat.get-color-from-palette($primary, '500-contrast');
           }
         }
         button:hover,

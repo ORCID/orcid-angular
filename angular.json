@@ -148,7 +148,12 @@
               ],
               "optimization": false,
               "outputHashing": "none",
-              "sourceMap": true,
+              "sourceMap": {
+                "scripts": true,
+                "styles": true,
+                "vendor": false,
+                "hidden": false
+              },
               "namedChunks": true,
               "extractLicenses": false,
               "vendorChunk": true,

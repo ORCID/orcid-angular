@@ -10,12 +10,14 @@
     [attr.aria-label]="labelUserMenu + ' ' + displayName"
     id="cy-user-info"
   >
-    <img src="./assets/vectors/profile-icon.svg" alt="" />
-    <span *ngIf="platform.columns12" class="name-text-container">{{
-      displayName
-    }}</span>
+    <div class="user-menu-container">
+      <img src="./assets/vectors/profile-icon.svg" alt="" />
+      <span *ngIf="platform.columns12" class="name-text-container">{{
+        displayName
+      }}</span>
 
-    <mat-icon *ngIf="platform.columns12">expand_more</mat-icon>
+      <mat-icon *ngIf="platform.columns12">expand_more</mat-icon>
+    </div>
   </button>
   <button
     (click)="goto('signin')"
@@ -31,7 +33,7 @@
   </button>
   <button
     mat-stroked-button
-    class="user-menu-button"
+    class="user-menu-button-icon"
     (click)="goto('inbox', 'fromHeaderButton')"
     id="cy-inbox-button"
     *ngIf="userInfo"
