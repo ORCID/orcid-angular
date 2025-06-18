@@ -220,7 +220,7 @@ export class AuthorizeComponent {
   ): Observable<UserSession> {
     return this.recordService.getRecord({}).pipe(
       filter((rec: UserRecord) =>
-        this.loginMainInterstitialsManagerService.isValidUserRecord(rec)
+        this.loginMainInterstitialsManagerService.isUserFullyLoaded(rec)
       ),
       take(1),
       switchMap((validRecord) =>
