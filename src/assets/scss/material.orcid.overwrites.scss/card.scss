@@ -1,6 +1,12 @@
 @import '../orcid.spacing.scss';
 
-.mat-card.orcid-wizard {
+.columns-4 {
+  .mdc-card {
+    box-sizing: initial !important;
+  }
+}
+
+.mat-mdc-card.orcid-wizard {
   width: 100%;
   box-shadow: none;
   padding: $spacing-0;
@@ -9,69 +15,48 @@
     left: 0px;
     position: absolute;
   }
-  .mat-card-title {
+  .mat-mdc-card-title {
     margin-top: $spacing-40;
   }
 
-  .mat-card-header {
+  .mat-mdc-card-header {
     justify-content: center;
     display: flex;
     width: 100%;
     text-align: center;
+    padding: 0;
   }
 
-  .mat-card-subtitle {
+  .mat-mdc-card-subtitle {
     justify-content: center;
     display: flex;
     width: 100%;
     text-align: center;
   }
-  .mat-card-subtitle {
+  .mat-mdc-card-subtitle {
     margin-bottom: $spacing-0;
+  }
+
+  .mat-mdc-card-content {
+    padding: 0;
   }
 
   .columns-12 &,
   .columns-8 & {
     mat-card-content {
+      padding: 0;
       margin: $spacing-24 12% 40px 12%; //12% to approximate the margin on designs
+    }
+
+    mat-card-header {
+      padding: 0;
     }
   }
   .columns-4 & {
     mat-card-content {
       margin: $spacing-24 0 40px 0;
     }
-  }
-}
 
-.mat-card.orcid-wizard-2 {
-  mat-card-header {
-    align-items: baseline;
-    justify-content: space-between;
-    .mat-card-logo {
-      order: -1;
-    }
-    .mat-card-header-text {
-      margin: 0;
-      mat-card-title {
-        margin: $spacing-0;
-      }
-    }
-    margin-bottom: $spacing-base; // centralize
-  }
-
-  mat-card-content {
-    margin-top: 16px; //centralize
-  }
-
-  .mat-divider-horizontal {
-    position: relative;
-  }
-
-  .columns-12 &,
-  .columns-8 & {
-    padding: $spacing-large; // centralize
-  }
-  .columns-4 & {
-    padding: $spacing-base; // centralize
+    border: none;
   }
 }
