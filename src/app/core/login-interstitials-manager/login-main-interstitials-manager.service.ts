@@ -69,9 +69,17 @@ export class LoginMainInterstitialsManagerService {
     }
   ): Observable<BaseInterstitialDialogOutput | ComponentType<any>> {
     // Basic sanity checks
-    if (!this.isValidUserRecord(userRecord)) return EMPTY
+    if (!this.isUserFullyLoaded(userRecord)) return EMPTY
     if (this.alreadyCheckedLoginInterstitials) return EMPTY
     this.alreadyCheckedLoginInterstitials = true
+    if (!this.isAccountOwner(userRecord)) {
+      if (runtimeEnvironment.debugger) {
+        console.info(
+          '[Interstitial Manager] Impersoation, not checking interstitials'
+        )
+      }
+      return EMPTY
+    }
 
     if (
       this.interstitialsService.checkIfSessionAlreadyCheckedInterstitialsLogic()
@@ -159,19 +167,19 @@ export class LoginMainInterstitialsManagerService {
     }
   }
 
-  /**
-   * Valid user check & ensures not impersonating
-   */
-  isValidUserRecord(userRecord: UserRecord): boolean {
-    if (
-      !userRecord?.userInfo ||
-      !userRecord?.emails ||
-      !userRecord?.affiliations?.length
-    )
-      return false
+  isAccountOwner(userRecord: UserRecord): boolean {
     return (
+      !!userRecord?.userInfo &&
       userRecord.userInfo.REAL_USER_ORCID ===
-      userRecord.userInfo.EFFECTIVE_USER_ORCID
+        userRecord.userInfo.EFFECTIVE_USER_ORCID
+    )
+  }
+
+  isUserFullyLoaded(userRecord: UserRecord): boolean {
+    return (
+      !!userRecord?.userInfo &&
+      !!userRecord?.emails &&
+      !!userRecord?.affiliations?.length
     )
   }
 }
