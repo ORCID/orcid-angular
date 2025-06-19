@@ -1,24 +1,6 @@
-// Overwrites for:
-// https://github.com/angular/components/blob/8.2.x/src/material/button/button.scss
 
-button.mat-button:hover,
-button.mat-stroked-button:hover {
-  .mat-button-focus-overlay {
-    opacity: 0.08;
-  }
-}
-
-button.mat-button-wrap-text {
-  span {
-    max-width: 100%;
-    text-align: center;
-    white-space: normal;
-    word-break: break-word;
-  }
-}
 
 button.mat-button-wrap-text-with-icon {
-  padding-left: 40px; // save space for the icon or image
   img,
   mat-icon {
     margin: auto;
@@ -28,28 +10,22 @@ button.mat-button-wrap-text-with-icon {
     bottom: 0;
     width: 24px;
   }
+  .mdc-button__label {
+    width: 100%;
+  }
 }
 
 button.mat-button-wrap-text-with-icon.mobile-fixed-width {
   .columns-4 & {
-    span {
+    .mdc-button__label {
       display: inline-block;
       width: 180px;
       margin: auto;
       word-break: break-word;
       white-space: normal;
       line-height: 24px;
+      width: 100%;
     }
   }
 }
 
-[dir='rtl'] button.mat-button-wrap-text-with-icon {
-  img {
-    right: 20px;
-    left: unset;
-  }
-}
-
-.no-hover-effect.mat-button .mat-button-focus-overlay {
-  background-color: transparent;
-}

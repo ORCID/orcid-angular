@@ -7,7 +7,7 @@ import {
   MatLegacyProgressSpinner as MatProgressSpinner,
   MatLegacyProgressSpinnerModule as MatProgressSpinnerModule,
 } from '@angular/material/legacy-progress-spinner'
-import { MatLegacySnackBarModule as MatSnackBarModule } from '@angular/material/legacy-snack-bar'
+import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatLegacyTooltipModule as MatTooltipModule } from '@angular/material/legacy-tooltip'
 
 import { CopyOnClickComponent } from './components/copy-on-click/copy-on-click.component'

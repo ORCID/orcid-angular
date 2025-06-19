@@ -11,13 +11,6 @@ legend {
   overflow: hidden;
 }
 
-mat-checkbox.text-wrap {
-  ::ng-deep label.mat-checkbox-layout {
-    white-space: normal;
-    word-break: normal;
-    overflow-wrap: anywhere;
-  }
-}
 
 .title.mobile {
   width: 14em;

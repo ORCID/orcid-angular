@@ -11,9 +11,6 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  mat-checkbox {
-    margin-left: 4px;
-  }
 }
 
 .header {
@@ -48,13 +45,6 @@
   }
 }
 
-mat-checkbox {
-  margin-right: $spacing-base;
-  [dir='rtl'] :host & {
-    margin-left: $spacing-base;
-    margin-right: auto;
-  }
-}
 :host:not(.archived):not(.read) {
   .title {
     font-weight: bold;

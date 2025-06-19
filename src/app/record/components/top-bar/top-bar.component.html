@@ -146,7 +146,7 @@
           <span i18n="@@topBar.name" class="mat-caption description">
             Name
           </span>
-          <div id="givenAndFamilyNames" class="mat-body-2">
+          <div id="givenAndFamilyNames" class="mat-subtitle-2">
             {{ givenNames + ' ' + familyName }}
           </div>
         </app-panel-element>
@@ -160,7 +160,7 @@
               [visibility]="otherNames.visibility.visibility"
               class="other-names"
             >
-              <p class="mat-body-2 other-names">
+              <p class="mat-subtitle-2 other-names">
                 {{ otherNames.content }}
               </p>
             </app-panel-element>
@@ -196,7 +196,7 @@
         <app-panel-element>
           <span
             id="biography-value"
-            class="mat-body-2"
+            class="mat-subtitle-2"
             [innerText]="userRecord.biography.biography.value"
           ></span>
         </app-panel-element>

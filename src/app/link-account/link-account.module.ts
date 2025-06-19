@@ -4,7 +4,7 @@ import { LinkAccountComponent } from './pages/link-account/link-account.componen
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { MatLegacyCardModule as MatCardModule } from '@angular/material/legacy-card'
 import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input'
-import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button'
+import { MatButtonModule } from '@angular/material/button'
 import { MatLegacyProgressBarModule as MatProgressBarModule } from '@angular/material/legacy-progress-bar'
 import { LinkAccountRoutingModule } from './link-account-routing.module'
 import { SignInModule } from '../sign-in/sign-in.module'

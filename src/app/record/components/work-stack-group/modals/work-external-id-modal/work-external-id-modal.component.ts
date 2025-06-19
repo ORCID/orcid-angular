@@ -10,7 +10,7 @@ import {
 } from '@angular/core'
 import { Subject } from 'rxjs'
 import { RecordImportWizard } from '../../../../../types/record-peer-review-import.endpoint'
-import { MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog'
+import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import { RecordWorksService } from '../../../../../core/record-works/record-works.service'
 import { first } from 'rxjs/operators'

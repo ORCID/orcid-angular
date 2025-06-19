@@ -6,7 +6,7 @@ import { MatLegacyAutocompleteModule as MatAutocompleteModule } from '@angular/m
 import { MatLegacyCardModule as MatCardModule } from '@angular/material/legacy-card'
 import { MatIconModule } from '@angular/material/icon'
 import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input'
-import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button'
+import { MatButtonModule } from '@angular/material/button'
 import { MatLegacyProgressBarModule as MatProgressBarModule } from '@angular/material/legacy-progress-bar'
 import { InstitutionalRoutingModule } from './institutional-routing.module'
 import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'

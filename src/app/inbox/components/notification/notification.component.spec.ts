@@ -6,16 +6,16 @@ import { InboxService } from '../../../core/inbox/inbox.service'
 import { PlatformInfoService } from '../../../cdk/platform-info'
 import { ErrorHandlerService } from '../../../core/error-handler/error-handler.service'
 import { SnackbarService } from '../../../cdk/snackbar/snackbar.service'
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
+import { MatSnackBar } from '@angular/material/snack-bar'
+import { MatDialog } from '@angular/material/dialog'
 import {
   MatLegacyTooltipModule,
   MatLegacyTooltip as MatTooltip,
 } from '@angular/material/legacy-tooltip'
 import {
-  MatLegacyCheckbox as MatCheckbox,
-  MatLegacyCheckboxModule,
-} from '@angular/material/legacy-checkbox'
+  MatCheckbox,
+  MatCheckboxModule,
+} from '@angular/material/checkbox'
 
 import { Overlay } from '@angular/cdk/overlay'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
@@ -36,7 +36,7 @@ describe('NotificationComponent', () => {
         NoopAnimationsModule,
         RouterTestingModule,
         ReactiveFormsModule,
-        MatLegacyCheckboxModule,
+        MatCheckboxModule,
         MatLegacyTooltipModule,
       ],
       declarations: [NotificationComponent],

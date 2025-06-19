@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common'
 
 import { PasswordRecoveryRoutingModule } from './password-recovery-routing.module'
 import { PasswordRecoveryComponent } from './pages/password-recovery/password-recovery.component'
-import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button'
+import { MatButtonModule } from '@angular/material/button'
 import { MatLegacyChipsModule as MatChipsModule } from '@angular/material/legacy-chips'
 import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input'
 import { MatLegacyProgressBarModule as MatProgressBarModule } from '@angular/material/legacy-progress-bar'

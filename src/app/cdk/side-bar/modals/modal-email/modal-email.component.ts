@@ -15,7 +15,7 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms'
-import { MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog'
+import { MatDialogRef } from '@angular/material/dialog'
 import { cloneDeep } from 'lodash'
 import { Subject } from 'rxjs'
 import { first, take, takeUntil, tap } from 'rxjs/operators'
