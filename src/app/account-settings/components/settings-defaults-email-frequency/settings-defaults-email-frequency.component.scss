@@ -31,18 +31,6 @@ label {
   margin-bottom: 32px;
 }
 
-/* TODO(mdc-migration): The following rule targets internal classes of checkbox that may no longer apply for the MDC version. */
-mat-checkbox {
-  display: flex;
-  width: 100%;
-}
-
-/* TODO(mdc-migration): The following rule targets internal classes of checkbox that may no longer apply for the MDC version. */
-.mat-checkbox-content {
-  white-space: break-spaces;
-  line-height: 1.4;
-}
-
 .email-edit-container {
   padding: 16px 0 16px 0;
   gap: 0px;

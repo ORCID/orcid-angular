@@ -18,11 +18,7 @@
 */
 
 // Legacy component typographies
-/* TODO(mdc-migration): Remove all-legacy-component-typographies once all legacy components are migrated*/
 @include mat.all-legacy-component-typographies(
-  $orcid-material-typography-legacy
-);
-@include mat.all-component-typographies(
   $orcid-material-typography-legacy
 );
 
@@ -32,15 +28,12 @@
 // Legacy core (to be removed after migration)
 /* TODO(mdc-migration): Remove legacy-core once all legacy components are migrated*/
 @include mat.legacy-core();
-@include mat.core();
 
 // Core Material styles
 @include mat.core();
 
 // Legacy component themes
-/* TODO(mdc-migration): Remove all-legacy-component-themes once all legacy components are migrated*/
 @include mat.all-legacy-component-themes($orcid-app-theme);
-@include mat.all-component-themes($orcid-app-theme);
 
 // New component themes
 @include mat.all-component-themes($orcid-app-theme);

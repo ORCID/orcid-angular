@@ -11,10 +11,6 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  /* TODO(mdc-migration): The following rule targets internal classes of checkbox that may no longer apply for the MDC version.*/
-  mat-checkbox {
-    margin-left: 4px;
-  }
 }
 
 .header {
@@ -49,14 +45,6 @@
   }
 }
 
-/* TODO(mdc-migration): The following rule targets internal classes of checkbox that may no longer apply for the MDC version.*/
-mat-checkbox {
-  margin-right: $spacing-base;
-  [dir='rtl'] :host & {
-    margin-left: $spacing-base;
-    margin-right: auto;
-  }
-}
 :host:not(.archived):not(.read) {
   .title {
     font-weight: bold;

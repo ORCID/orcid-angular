@@ -11,16 +11,6 @@ legend {
   overflow: hidden;
 }
 
-/* TODO(mdc-migration): The following rule targets internal classes of checkbox that may no longer apply for the MDC version. */
-/* TODO(mdc-migration): The following rule targets internal classes of checkbox that may no longer apply for the MDC version. */
-mat-checkbox.text-wrap {
-  /* TODO(mdc-migration): The following rule targets internal classes of checkbox that may no longer apply for the MDC version. */
-  ::ng-deep label.mat-checkbox-layout {
-    white-space: normal;
-    word-break: normal;
-    overflow-wrap: anywhere;
-  }
-}
 
 .title.mobile {
   width: 14em;
