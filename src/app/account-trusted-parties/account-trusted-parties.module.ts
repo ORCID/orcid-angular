@@ -14,7 +14,7 @@ import { MatLegacyMenuModule as MatMenuModule } from '@angular/material/legacy-m
 import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { MatRadioModule } from '@angular/material/radio'
 import { MatLegacySelectModule as MatSelectModule } from '@angular/material/legacy-select'
-import { MatLegacyTableModule as MatTableModule } from '@angular/material/legacy-table'
+import { MatTableModule } from '@angular/material/table'
 import { MatLegacyTooltipModule as MatTooltipModule } from '@angular/material/legacy-tooltip'
 
 import { AccountPanelModule } from '../cdk/account-panel/account-panel.module'
