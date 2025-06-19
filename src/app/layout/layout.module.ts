@@ -21,7 +21,7 @@ import { BannerModule } from '../cdk/banner/banner.module'
 import { MaintenanceMessageComponent } from './maintenance-message/maintenance-message.component'
 import { MatDividerModule } from '@angular/material/divider'
 import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
-import { MatLegacyTooltipModule as MatTooltipModule } from '@angular/material/legacy-tooltip'
+import { MatTooltipModule } from '@angular/material/tooltip'
 
 @NgModule({
   imports: [

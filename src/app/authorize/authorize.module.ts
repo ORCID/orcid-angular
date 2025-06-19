@@ -6,7 +6,7 @@ import { MatDividerModule } from '@angular/material/divider'
 import { MatIconModule } from '@angular/material/icon'
 import { MatLegacyMenuModule as MatMenuModule } from '@angular/material/legacy-menu'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
-import { MatLegacyTooltipModule as MatTooltipModule } from '@angular/material/legacy-tooltip'
+import { MatTooltipModule } from '@angular/material/tooltip'
 
 import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
 import { InfoDropDownModule } from '../cdk/info-drop-down/info-drop-down.module'

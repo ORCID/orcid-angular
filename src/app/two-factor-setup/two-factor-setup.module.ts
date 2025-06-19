@@ -15,7 +15,7 @@ import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy
 import { FormDirectivesModule } from '../cdk/form-directives/form-directives.module'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { ClipboardModule } from '@angular/cdk/clipboard'
-import { MatLegacyTooltipModule as MatTooltipModule } from '@angular/material/legacy-tooltip'
+import { MatTooltipModule } from '@angular/material/tooltip'
 import { TwoFactorRecoveryCodesComponent } from './components/two-factor-recovery-codes/two-factor-recovery-codes.component'
 import { TwoFactorEnableComponent } from './components/two-factor-enable/two-factor-enable.component'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
