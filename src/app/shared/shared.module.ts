@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 import { MatDivider, MatDividerModule } from '@angular/material/divider'
 import { MatExpansionModule } from '@angular/material/expansion'
-import { MatLegacyPaginatorModule as MatPaginatorModule } from '@angular/material/legacy-paginator'
+import { MatPaginatorModule } from '@angular/material/paginator'
 import {
   MatLegacyProgressSpinner as MatProgressSpinner,
   MatLegacyProgressSpinnerModule as MatProgressSpinnerModule,
