@@ -110,7 +110,45 @@ mat-card-header.authorize-header {
 }
 
 mat-card-content.authorize-content {
+  margin: 0px !important;
+
+  div.profile-icon-wrapper {
+    padding: 0 !important;
+    margin-right: 16px;
+  }
+
+  div.user-wrapper {
+    padding: 0 !important;
+  }
+
   div.deny-button-wrapper {
+    justify-content: center;
+  }
+
+  mat-icon.profile-icon {
+    height: 80px;
+    width: 64px;
+    img {
+      height: 64px;
+    }
+  }
+
+  mat-icon.scope {
+    width: 32px;
+  }
+
+  mat-icon.scope.orcid {
+    font-size: small;
+    img {
+      margin-top: 0 !important;
+    }
+  }
+
+  .user-links {
+    width: 100%;
+  }
+
+  .center-content {
     justify-content: center;
   }
 }
