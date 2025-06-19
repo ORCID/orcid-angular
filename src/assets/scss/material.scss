@@ -26,7 +26,6 @@
 @include mat.all-component-typographies($orcid-material-typography);
 
 // Legacy core (to be removed after migration)
-/* TODO(mdc-migration): Remove legacy-core once all legacy components are migrated*/
 @include mat.legacy-core();
 
 // Core Material styles
