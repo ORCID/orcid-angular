@@ -11,9 +11,9 @@ import {
 } from '@angular/core'
 import { UntypedFormGroup } from '@angular/forms'
 import {
-  MatLegacyCheckbox as MatCheckbox,
-  MatLegacyCheckboxChange as MatCheckboxChange,
-} from '@angular/material/legacy-checkbox'
+  MatCheckbox,
+  MatCheckboxChange,
+} from '@angular/material/checkbox'
 import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
 import {
   MatLegacyPaginatorIntl as MatPaginatorIntl,

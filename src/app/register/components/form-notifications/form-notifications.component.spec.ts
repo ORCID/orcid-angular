@@ -14,7 +14,7 @@ import { FormNotificationsComponent } from './form-notifications.component'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { ReactiveFormsModule } from '@angular/forms'
-import { MatLegacyCheckboxModule } from '@angular/material/legacy-checkbox'
+import { MatCheckboxModule } from '@angular/material/checkbox'
 
 describe('FormNotificationsComponent', () => {
   let component: FormNotificationsComponent
@@ -26,7 +26,7 @@ describe('FormNotificationsComponent', () => {
         HttpClientTestingModule,
         RouterTestingModule,
         ReactiveFormsModule,
-        MatLegacyCheckboxModule,
+        MatCheckboxModule,
       ],
       declarations: [FormNotificationsComponent],
       providers: [

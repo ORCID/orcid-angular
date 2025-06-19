@@ -26,7 +26,7 @@ import { RecordFundingsService } from '../../../core/record-fundings/record-fund
 import { RecordWorksService } from '../../../core/record-works/record-works.service'
 import { RecordPeerReviewService } from '../../../core/record-peer-review/record-peer-review.service'
 import { RecordResearchResourceService } from '../../../core/record-research-resource/record-research-resource.service'
-import { MatLegacyCheckboxChange as MatCheckboxChange } from '@angular/material/legacy-checkbox'
+import { MatCheckboxChange } from '@angular/material/checkbox'
 import { VerificationEmailModalService } from '../../../core/verification-email-modal/verification-email-modal.service'
 import { UserService } from 'src/app/core'
 import { WINDOW } from 'src/app/cdk/window'

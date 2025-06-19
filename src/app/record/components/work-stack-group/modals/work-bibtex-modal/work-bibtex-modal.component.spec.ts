@@ -16,7 +16,7 @@ import {
 import { Overlay } from '@angular/cdk/overlay'
 import { RecordWorksService } from '../../../../../core/record-works/record-works.service'
 import { SharedModule } from '../../../../../shared/shared.module'
-import { MatLegacyCheckboxModule as MatCheckboxModule } from '@angular/material/legacy-checkbox'
+import { MatCheckboxModule } from '@angular/material/checkbox'
 import { RecordModule } from '../../../../record.module'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { of } from 'rxjs'

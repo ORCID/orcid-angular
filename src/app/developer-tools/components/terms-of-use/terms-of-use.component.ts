@@ -8,7 +8,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core'
-import { MatLegacyCheckbox as MatCheckbox } from '@angular/material/legacy-checkbox'
+import { MatCheckbox } from '@angular/material/checkbox'
 import { MatLegacyDialog } from '@angular/material/legacy-dialog'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'

@@ -13,9 +13,9 @@ import {
   MatLegacyTooltip as MatTooltip,
 } from '@angular/material/legacy-tooltip'
 import {
-  MatLegacyCheckbox as MatCheckbox,
-  MatLegacyCheckboxModule,
-} from '@angular/material/legacy-checkbox'
+  MatCheckbox,
+  MatCheckboxModule,
+} from '@angular/material/checkbox'
 
 import { Overlay } from '@angular/cdk/overlay'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
@@ -36,7 +36,7 @@ describe('NotificationComponent', () => {
         NoopAnimationsModule,
         RouterTestingModule,
         ReactiveFormsModule,
-        MatLegacyCheckboxModule,
+        MatCheckboxModule,
         MatLegacyTooltipModule,
       ],
       declarations: [NotificationComponent],
