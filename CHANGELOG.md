@@ -1,3 +1,9 @@
+## v2.116.7 - 2025-06-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.116.6...v2.116.7)
+
+- [#2549](https://github.com/ORCID/orcid-angular/pull/2549): lmendoza/9847-angular-material-mdc-migration-batch-2v2
+
 ## v2.116.6 - 2025-06-19
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.116.5...v2.116.6)
