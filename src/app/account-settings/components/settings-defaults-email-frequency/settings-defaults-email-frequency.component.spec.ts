@@ -23,11 +23,7 @@ describe('SettingsDefaultsEmailFrequencyComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule,
-        MatDialogModule,
-      ],
+      imports: [HttpClientTestingModule, RouterTestingModule, MatDialogModule],
       declarations: [SettingsDefaultsEmailFrequencyComponent],
       providers: [
         WINDOW_PROVIDERS,

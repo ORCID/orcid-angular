@@ -8,10 +8,7 @@ import { PlatformInfoService } from '../../platform-info'
 import { ErrorHandlerService } from '../../../core/error-handler/error-handler.service'
 import { SnackbarService } from '../../snackbar/snackbar.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
-import {
-  MatDialog,
-  MatDialogModule,
-} from '@angular/material/dialog'
+import { MatDialog, MatDialogModule } from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { UserService } from '../../../core'
 import { RecordAffiliationService } from '../../../core/record-affiliations/record-affiliations.service'

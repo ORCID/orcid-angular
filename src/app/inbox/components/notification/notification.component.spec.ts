@@ -12,10 +12,7 @@ import {
   MatLegacyTooltipModule,
   MatLegacyTooltip as MatTooltip,
 } from '@angular/material/legacy-tooltip'
-import {
-  MatCheckbox,
-  MatCheckboxModule,
-} from '@angular/material/checkbox'
+import { MatCheckbox, MatCheckboxModule } from '@angular/material/checkbox'
 
 import { Overlay } from '@angular/cdk/overlay'
 import { HttpClientTestingModule } from '@angular/common/http/testing'

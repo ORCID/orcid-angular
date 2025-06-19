@@ -6,10 +6,7 @@ import { PlatformInfoService } from '../../../cdk/platform-info'
 import { ErrorHandlerService } from '../../../core/error-handler/error-handler.service'
 import { SnackbarService } from '../../../cdk/snackbar/snackbar.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
-import {
-  MatDialog,
-  MatDialogModule,
-} from '@angular/material/dialog'
+import { MatDialog, MatDialogModule } from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { RecordService } from '../../../core/record/record.service'
 import { RecordWorksService } from '../../../core/record-works/record-works.service'

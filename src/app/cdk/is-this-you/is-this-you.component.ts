@@ -1,9 +1,6 @@
 import { Component, OnInit, HostBinding, Inject, Optional } from '@angular/core'
 import { PlatformInfoService } from '../platform-info/platform-info.service'
-import {
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog'
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { WINDOW } from '../window'
 
 @Component({

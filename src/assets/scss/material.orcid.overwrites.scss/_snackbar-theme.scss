@@ -13,11 +13,13 @@
   );
   $unselected-foreground: mat.get-color-from-palette($foreground, text);
 
-  mat-snack-bar-container.mat-mdc-snack-bar-container.orcid-error  .mdc-snackbar__surface {
+  mat-snack-bar-container.mat-mdc-snack-bar-container.orcid-error
+    .mdc-snackbar__surface {
     background-color: mat.get-color-from-palette($warn, 700);
   }
 
-  mat-snack-bar-container.mat-mdc-snack-bar-container.orcid-success  .mdc-snackbar__surface {
+  mat-snack-bar-container.mat-mdc-snack-bar-container.orcid-success
+    .mdc-snackbar__surface {
     background-color: mat.get-color-from-palette($primary, 700);
   }
 }

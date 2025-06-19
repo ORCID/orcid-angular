@@ -10,10 +10,7 @@ import {
   ViewChildren,
 } from '@angular/core'
 import { UntypedFormGroup } from '@angular/forms'
-import {
-  MatCheckbox,
-  MatCheckboxChange,
-} from '@angular/material/checkbox'
+import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox'
 import { MatDialog } from '@angular/material/dialog'
 import {
   MatLegacyPaginatorIntl as MatPaginatorIntl,

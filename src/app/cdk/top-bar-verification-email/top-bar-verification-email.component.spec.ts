@@ -3,10 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { TopBarVerificationEmailComponent } from './top-bar-verification-email.component'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
-import {
-  MatDialog,
-  MatDialogModule,
-} from '@angular/material/dialog'
+import { MatDialog, MatDialogModule } from '@angular/material/dialog'
 
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { Overlay } from '@angular/cdk/overlay'

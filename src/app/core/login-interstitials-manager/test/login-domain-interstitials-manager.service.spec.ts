@@ -1,8 +1,5 @@
 import { TestBed } from '@angular/core/testing'
-import {
-  MatDialog,
-  MatDialogRef,
-} from '@angular/material/dialog'
+import { MatDialog, MatDialogRef } from '@angular/material/dialog'
 import { of, Subject } from 'rxjs'
 import { InterstitialsService } from 'src/app/cdk/interstitials/interstitials.service'
 

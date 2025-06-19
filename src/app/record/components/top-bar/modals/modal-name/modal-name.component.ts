@@ -14,10 +14,7 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms'
-import {
-  MAT_DIALOG_DATA,
-  MatDialogRef,
-} from '@angular/material/dialog'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { cloneDeep } from 'lodash'
 import { Subject } from 'rxjs'
 import { first, switchMap, take, takeUntil } from 'rxjs/operators'

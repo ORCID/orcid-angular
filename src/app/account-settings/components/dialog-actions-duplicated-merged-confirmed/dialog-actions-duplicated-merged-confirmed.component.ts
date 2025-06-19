@@ -1,8 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core'
-import {
-  MAT_DIALOG_DATA,
-  MatDialogRef,
-} from '@angular/material/dialog'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { DuplicateRemoveEndpoint } from 'src/app/types/account-actions-duplicated'
 @Component({
   selector: 'app-dialog-actions-duplicated-merged-confirmed',

@@ -1,10 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { DialogAddTrustedIndividualsYourOwnEmailComponent } from './dialog-add-trusted-individuals-your-own-email.component'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
-import {
-  MAT_DIALOG_DATA,
-  MatDialogRef,
-} from '@angular/material/dialog'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 

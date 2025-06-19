@@ -16,10 +16,7 @@ import { WINDOW_PROVIDERS } from '../../../../../cdk/window'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { Overlay } from '@angular/cdk/overlay'
 import { PlatformInfoService } from '../../../../../cdk/platform-info'
-import {
-  MAT_DIALOG_DATA,
-  MatDialogRef,
-} from '@angular/material/dialog'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { ErrorHandlerService } from '../../../../../core/error-handler/error-handler.service'
 import { UserService } from '../../../../../core'
 import { SnackbarService } from '../../../../../cdk/snackbar/snackbar.service'

@@ -3,7 +3,7 @@
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.116.4...v2.116.5)
 
 - [#2546](https://github.com/ORCID/orcid-angular/pull/2546): lmendoza/9866-prod-oauth-doesnt-work-when-switched-to-another-user-ac…
-- [#2544](https://github.com/ORCID/orcid-angular/pull/2544): Unused dependecies clean up 
+- [#2544](https://github.com/ORCID/orcid-angular/pull/2544): Unused dependecies clean up
 
 ## v2.116.4 - 2025-06-11
 

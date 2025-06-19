@@ -1,10 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { ClientSecretModalComponent } from './client-secret-modal.component'
-import {
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog'
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 

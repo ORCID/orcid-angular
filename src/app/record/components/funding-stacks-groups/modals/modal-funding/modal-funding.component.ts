@@ -1,8 +1,5 @@
 import { Component, Inject, OnDestroy, OnInit, Input } from '@angular/core'
-import {
-  MAT_DIALOG_DATA,
-  MatDialogRef,
-} from '@angular/material/dialog'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import {
   UntypedFormBuilder,

@@ -1,8 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core'
-import {
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog'
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { DuplicateRemoveEndpoint } from 'src/app/types/account-actions-duplicated'
 @Component({

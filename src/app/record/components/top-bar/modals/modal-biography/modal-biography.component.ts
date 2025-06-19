@@ -5,10 +5,7 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core'
-import {
-  MAT_DIALOG_DATA,
-  MatDialogRef,
-} from '@angular/material/dialog'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms'
 import { UserRecord } from '../../../../../types/record.local'
