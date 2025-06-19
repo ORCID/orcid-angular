@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core'
 import {
-  MatLegacySnackBar as MatSnackBar,
-  MatLegacySnackBarHorizontalPosition as MatSnackBarHorizontalPosition,
-} from '@angular/material/legacy-snack-bar'
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+} from '@angular/material/snack-bar'
 import { take } from 'rxjs/operators'
 import { DisplayMessage, ErrorReport, ScreenDirection } from 'src/app/types'
 
@@ -56,7 +56,7 @@ export class SnackbarService {
         horizontalPosition: this.horizontalPosition,
         verticalPosition: 'bottom',
         panelClass: 'orcid-error',
-        duration: 10 * 1000,
+        duration: 10 * 100000,
       })
     }
 
@@ -87,7 +87,7 @@ export class SnackbarService {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: 'bottom',
       panelClass: 'orcid-error',
-      duration: 15 * 1000,
+      duration: 15 * 10000,
     })
   }
 
@@ -99,7 +99,7 @@ export class SnackbarService {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: 'bottom',
       panelClass: 'orcid-success',
-      duration: (!message.closable ? 15 : 90) * 1000,
+      duration: (!message.closable ? 15 : 90) * 100000,
     })
   }
 }

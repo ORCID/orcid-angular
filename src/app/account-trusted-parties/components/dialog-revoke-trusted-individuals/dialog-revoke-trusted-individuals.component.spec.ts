@@ -12,7 +12,7 @@ import { WINDOW_PROVIDERS } from '../../../cdk/window'
 import { PlatformInfoService } from '../../../cdk/platform-info'
 import { ErrorHandlerService } from '../../../core/error-handler/error-handler.service'
 import { SnackbarService } from '../../../cdk/snackbar/snackbar.service'
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
+import { MatSnackBar } from '@angular/material/snack-bar'
 import { Overlay } from '@angular/cdk/overlay'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'

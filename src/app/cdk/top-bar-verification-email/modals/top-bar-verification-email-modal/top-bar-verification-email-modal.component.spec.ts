@@ -9,7 +9,7 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog'
 
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
+import { MatSnackBar } from '@angular/material/snack-bar'
 import { Overlay } from '@angular/cdk/overlay'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'

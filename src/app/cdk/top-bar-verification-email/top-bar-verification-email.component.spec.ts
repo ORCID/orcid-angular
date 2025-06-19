@@ -8,7 +8,7 @@ import {
   MatDialogModule,
 } from '@angular/material/dialog'
 
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
+import { MatSnackBar } from '@angular/material/snack-bar'
 import { Overlay } from '@angular/cdk/overlay'
 
 import { of } from 'rxjs'

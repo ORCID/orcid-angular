@@ -7,7 +7,7 @@ import { PlatformInfoService } from '../../cdk/platform-info'
 import { RouterTestingModule } from '@angular/router/testing'
 import { WINDOW_PROVIDERS } from '../../cdk/window'
 import { SnackbarService } from '../../cdk/snackbar/snackbar.service'
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
+import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatDialog } from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
 

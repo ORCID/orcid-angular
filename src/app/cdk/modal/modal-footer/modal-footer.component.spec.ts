@@ -7,7 +7,7 @@ import { WINDOW_PROVIDERS } from '../../window'
 import { PlatformInfoService } from '../../platform-info'
 import { ErrorHandlerService } from '../../../core/error-handler/error-handler.service'
 import { SnackbarService } from '../../snackbar/snackbar.service'
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
+import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatDialog } from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
 

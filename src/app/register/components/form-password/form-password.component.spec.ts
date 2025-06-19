@@ -7,7 +7,7 @@ import {
   MatDialog,
   MatDialogRef,
 } from '@angular/material/dialog'
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
+import { MatSnackBar } from '@angular/material/snack-bar'
 import { RouterTestingModule } from '@angular/router/testing'
 import { PlatformInfoService } from '../../../cdk/platform-info'
 import { MdePopoverModule } from '../../../cdk/popover'

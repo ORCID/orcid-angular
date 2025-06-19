@@ -9,7 +9,7 @@ import { RecordAffiliationsGroupingService } from '../record-affiliations-affili
 import { PlatformInfoService } from '../../cdk/platform-info'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { SnackbarService } from '../../cdk/snackbar/snackbar.service'
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
+import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatDialog } from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
 

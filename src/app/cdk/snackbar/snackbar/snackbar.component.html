@@ -1,7 +1,6 @@
 <mat-icon *ngIf="!isIE" class="errorGroup">error</mat-icon>
 <div class="close-button-container">
   <button
-    *ngIf="closable"
     mat-icon-button
     [attr.aria-label]="labelClose"
     (click)="snackBarRef.dismiss()"

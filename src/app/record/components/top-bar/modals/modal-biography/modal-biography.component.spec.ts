@@ -10,7 +10,7 @@ import {
 import { WINDOW_PROVIDERS } from '../../../../../cdk/window'
 import { PlatformInfoService } from '../../../../../cdk/platform-info'
 import { SnackbarService } from '../../../../../cdk/snackbar/snackbar.service'
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
+import { MatSnackBar } from '@angular/material/snack-bar'
 import { Overlay } from '@angular/cdk/overlay'
 import { RecordBiographyService } from '../../../../../core/record-biography/record-biography.service'
 import { SharedModule } from '../../../../../shared/shared.module'

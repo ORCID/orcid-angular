@@ -12,7 +12,7 @@ import { RecordWorksService } from '../../../../../core/record-works/record-work
 import { PlatformInfoService } from '../../../../../cdk/platform-info'
 import { ErrorHandlerService } from '../../../../../core/error-handler/error-handler.service'
 import { SnackbarService } from '../../../../../cdk/snackbar/snackbar.service'
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
+import { MatSnackBar } from '@angular/material/snack-bar'
 import { Overlay } from '@angular/cdk/overlay'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
