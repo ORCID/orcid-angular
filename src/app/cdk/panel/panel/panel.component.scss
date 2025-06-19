@@ -58,11 +58,6 @@
   }
 }
 
-mat-checkbox.text-wrap {
-  ::ng-deep label.mat-checkbox-layout {
-    white-space: normal;
-  }
-}
 .columns-8 :host,
 .columns-4 :host {
   .header {

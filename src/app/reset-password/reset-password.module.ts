@@ -11,7 +11,7 @@ import {
   MatProgressBar,
   MatProgressBarModule,
 } from '@angular/material/progress-bar'
-import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button'
+import { MatButtonModule } from '@angular/material/button'
 import { MdePopoverModule } from '../cdk/popover'
 
 @NgModule({

@@ -7,8 +7,7 @@ import { InfoDropDownModule } from '../info-drop-down/info-drop-down.module'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { MatCheckboxModule } from '@angular/material/checkbox'
-import { MatLegacyCheckboxModule } from '@angular/material/legacy-checkbox'
-import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button'
+import { MatButtonModule } from '@angular/material/button'
 import { InfoPanelModule } from '../info-panel/info-panel.module'
 import { A11yLinkModule } from '../a11y-link/a11y-link.module'
 import { MatLegacyAutocompleteModule as MatAutocompleteModule } from '@angular/material/legacy-autocomplete'
@@ -46,7 +45,7 @@ import { ShareEmailsDomainsComponent } from './share-emails-domains/interstitial
     MatProgressBarModule,
     ReactiveFormsModule,
     FormsModule,
-    MatLegacyCheckboxModule,
+    MatCheckboxModule,
     MatButtonModule,
     InfoPanelModule,
     A11yLinkModule,

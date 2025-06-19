@@ -11,10 +11,10 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
 import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
 import { error } from 'console'
 import {
-  MAT_LEGACY_DIALOG_DATA,
-  MatLegacyDialogRef,
-  MatLegacyDialogState,
-} from '@angular/material/legacy-dialog'
+  MAT_DIALOG_DATA,
+  MatDialogRef,
+  MatDialogState,
+} from '@angular/material/dialog'
 import { UserService } from 'src/app/core'
 import {
   BaseInterstitialDialogInput,
@@ -53,9 +53,9 @@ export class ShareEmailsDomainsDialogComponent extends ShareEmailsDomainsCompone
     fb: FormBuilder,
     recordEmailsService: RecordEmailsService,
     @Inject(WINDOW) window: Window,
-    @Inject(MAT_LEGACY_DIALOG_DATA)
+    @Inject(MAT_DIALOG_DATA)
     public data: ShareEmailsDomainsComponentDialogInput,
-    public dialogRef: MatLegacyDialogRef<
+    public dialogRef: MatDialogRef<
       ShareEmailsDomainsDialogComponent,
       ShareEmailsDomainsComponentDialogOutput
     >,

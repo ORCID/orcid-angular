@@ -13,7 +13,7 @@ import { HttpClientModule } from '@angular/common/http'
 import { RouterTestingModule } from '@angular/router/testing'
 import { WINDOW_PROVIDERS } from 'src/app/cdk/window'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
-import { MatLegacySnackBarModule } from '@angular/material/legacy-snack-bar'
+import { MatSnackBarModule } from '@angular/material/snack-bar'
 
 describe('StepBComponent', () => {
   let component: StepBComponent
@@ -25,7 +25,7 @@ describe('StepBComponent', () => {
         ReactiveFormsModule,
         HttpClientModule,
         RouterTestingModule,
-        MatLegacySnackBarModule,
+        MatSnackBarModule,
       ],
       declarations: [StepBComponent, FormPasswordComponent],
       providers: [WINDOW_PROVIDERS, SnackbarService],

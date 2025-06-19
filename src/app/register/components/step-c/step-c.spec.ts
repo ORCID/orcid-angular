@@ -14,7 +14,7 @@ import { HttpClientModule } from '@angular/common/http'
 import { RouterTestingModule } from '@angular/router/testing'
 import { WINDOW_PROVIDERS } from 'src/app/cdk/window'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
-import { MatLegacySnackBarModule } from '@angular/material/legacy-snack-bar'
+import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { RegisterStateService } from '../../register-state.service'
 import { RegisterObservabilityService } from '../../register-observability.service'
 
@@ -45,7 +45,7 @@ describe('StepCComponent', () => {
         ReactiveFormsModule,
         HttpClientModule,
         RouterTestingModule,
-        MatLegacySnackBarModule,
+        MatSnackBarModule,
       ],
       declarations: [StepCComponent, MockFormVisibilityComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -7,11 +7,8 @@ import { WINDOW_PROVIDERS } from '../../window'
 import { PlatformInfoService } from '../../platform-info'
 import { ErrorHandlerService } from '../../../core/error-handler/error-handler.service'
 import { SnackbarService } from '../../snackbar/snackbar.service'
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
-import {
-  MatLegacyDialog as MatDialog,
-  MatLegacyDialogModule as MatDialogModule,
-} from '@angular/material/legacy-dialog'
+import { MatSnackBar } from '@angular/material/snack-bar'
+import { MatDialog, MatDialogModule } from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { VerificationEmailModalService } from '../../../core/verification-email-modal/verification-email-modal.service'
 import { AppPanelActivityActionAriaLabelPipe } from '../../../shared/pipes/app-panel-activity-action-aria-label/app-panel-activity-action-aria-label.pipe'

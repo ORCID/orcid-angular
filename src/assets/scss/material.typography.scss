@@ -48,11 +48,10 @@ $orcid-material-typography: mat.define-typography-config(
   $subtitle-1:
     mat.define-typography-level(16px, 28px, 400, $letter-spacing: 0.15px),
   $body-1: mat.define-typography-level(14px, 24px, 400, $letter-spacing: 0.1px),
-  $subtitle-2: mat.define-typography-level(16px, 1.75, 400),
+  $subtitle-2: mat.define-typography-level(14px, 1.75, 400),
   $body-2: mat.define-typography-level(14px, 20px, 400),
   $caption: mat.define-typography-level(12px, 16px, 400, $letter-spacing: 0.4px),
-  $button:
-    mat.define-typography-level(14px, normal, 700, $letter-spacing: 1.3px),
+  $button: mat.define-typography-level(14px, normal, 700, $letter-spacing: 0px),
 );
 
 $orcid-custom-typography: (

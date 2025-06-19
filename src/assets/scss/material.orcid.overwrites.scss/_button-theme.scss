@@ -12,11 +12,14 @@
   );
   $unselected-foreground: mat.get-color-from-palette($foreground, text);
 
-  .mat-button.orcid-button-light-grey {
+  .mat-mdc-button.orcid-button-light-grey {
     background-color: map-get($background, light-grey);
   }
+}
 
-  button.mat-button-wrap-text-with-icon {
-    border: solid 1px mat.get-color-from-palette($foreground, dividers);
-  }
+.mat-mdc-button.mat-unthemed {
+  --mdc-text-button-label-text-color: unset;
+}
+button.mat-mdc-icon-button {
+  --mdc-icon-button-icon-size: 14px;
 }

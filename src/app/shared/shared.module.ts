@@ -7,9 +7,8 @@ import {
   MatProgressSpinner,
   MatProgressSpinnerModule,
 } from '@angular/material/progress-spinner'
-import { MatLegacySnackBarModule as MatSnackBarModule } from '@angular/material/legacy-snack-bar'
+import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatTooltipModule } from '@angular/material/tooltip'
-
 import { CopyOnClickComponent } from './components/copy-on-click/copy-on-click.component'
 import { OfflineMessageComponent } from './components/offline-message/offline-message.component'
 import { ShowingOfComponent } from './components/showing-of/showing-of.component'

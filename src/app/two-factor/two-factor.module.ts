@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
-import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button'
 import { MatCardModule } from '@angular/material/card'
+import { MatButtonModule } from '@angular/material/button'
 import { SignInModule } from '../sign-in/sign-in.module'
 import { MatIconModule } from '@angular/material/icon'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
