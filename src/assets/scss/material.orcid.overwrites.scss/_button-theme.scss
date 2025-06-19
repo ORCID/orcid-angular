@@ -15,10 +15,11 @@
   .mat-mdc-button.orcid-button-light-grey {
     background-color: map-get($background, light-grey);
   }
-
 }
-
 
 .mat-mdc-button.mat-unthemed {
   --mdc-text-button-label-text-color: unset;
+}
+button.mat-mdc-icon-button {
+  --mdc-icon-button-icon-size: 14px;
 }

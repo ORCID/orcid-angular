@@ -29,10 +29,6 @@ h2 {
   width: 100%;
 }
 
-/* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version. */
-.mat-button-wrap-text {
-  margin-bottom: 32px;
-}
 
 app-alert-message {
   line-height: 21px;

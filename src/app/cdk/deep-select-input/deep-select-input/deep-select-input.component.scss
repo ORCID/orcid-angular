@@ -78,7 +78,6 @@ input {
   }
 }
 
-/* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version. */
 button.mat-button-wrap-text.secondaryItem {
   font-style: italic;
   height: 100%;
@@ -96,7 +95,6 @@ button.mat-button-wrap-text.secondaryItem {
   line-height: 18px;
 }
 
-/* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version. */
 button.mat-button-wrap-text:not(.mobile):not(.secondaryItem) {
   padding: 0px 16px !important;
 }
