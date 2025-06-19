@@ -8,9 +8,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input'
 import { MatCardModule } from '@angular/material/card'
 import {
-  MatLegacyProgressBar as MatProgressBar,
-  MatLegacyProgressBarModule as MatProgressBarModule,
-} from '@angular/material/legacy-progress-bar'
+  MatProgressBar,
+  MatProgressBarModule,
+} from '@angular/material/progress-bar'
 import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button'
 import { MdePopoverModule } from '../cdk/popover'
 

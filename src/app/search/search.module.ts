@@ -10,7 +10,7 @@ import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/materia
 import { MatIconModule } from '@angular/material/icon'
 import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input'
 import { MatPaginatorModule } from '@angular/material/paginator'
-import { MatLegacyProgressBarModule as MatProgressBarModule } from '@angular/material/legacy-progress-bar'
+import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { MatLegacyProgressSpinnerModule as MatProgressSpinnerModule } from '@angular/material/legacy-progress-spinner'
 import { AdvanceSearchComponent } from './components/advance-search/advance-search.component'
 import { BidiModule } from '@angular/cdk/bidi'

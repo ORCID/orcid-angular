@@ -4,7 +4,7 @@ import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/lega
 import { MatCardModule } from '@angular/material/card'
 import { SignInModule } from '../sign-in/sign-in.module'
 import { MatIconModule } from '@angular/material/icon'
-import { MatLegacyProgressBarModule as MatProgressBarModule } from '@angular/material/legacy-progress-bar'
+import { MatProgressBarModule } from '@angular/material/progress-bar'
 
 import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
 import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field'

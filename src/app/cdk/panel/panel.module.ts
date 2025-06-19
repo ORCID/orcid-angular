@@ -20,7 +20,7 @@ import { MatLegacyMenuModule as MatMenuModule } from '@angular/material/legacy-m
 import { SortLabelPipe } from './sort-label.pipe'
 import { MatLegacyCheckboxModule as MatCheckboxModule } from '@angular/material/legacy-checkbox'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { MatLegacyProgressBarModule as MatProgressBarModule } from '@angular/material/legacy-progress-bar'
+import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { SharedModule } from '../../shared/shared.module'
 import { AppPanelActivityActionAriaLabelPipe } from '../../shared/pipes/app-panel-activity-action-aria-label/app-panel-activity-action-aria-label.pipe'
 import { VisibilitySelectorModule } from '../visibility-selector/visibility-selector.module'
