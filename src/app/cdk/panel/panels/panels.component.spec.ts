@@ -2,9 +2,9 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 
 import { PanelsComponent } from './panels.component'
 import {
-  MatLegacyDialog as MatDialog,
-  MatLegacyDialogModule as MatDialogModule,
-} from '@angular/material/legacy-dialog'
+  MatDialog,
+  MatDialogModule,
+} from '@angular/material/dialog'
 import { WINDOW_PROVIDERS } from '../../window'
 import { RegisterService } from '../../../core/register/register.service'
 import { PlatformInfoService } from '../../platform-info'

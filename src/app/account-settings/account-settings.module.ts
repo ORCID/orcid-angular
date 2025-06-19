@@ -45,7 +45,7 @@ import { SettingsSharingQrCodeComponent } from './components/settings-sharing-qr
 import { SettingsSharingComponent } from './components/settings-sharing/settings-sharing.component'
 import { SettingsComponent } from './components/settings/settings.component'
 import { AccountSettingsComponent } from './pages/account-settings/account-settings.component'
-import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog'
+import { MatDialogModule } from '@angular/material/dialog'
 import { AlertMessageModule } from '../cdk/alert-message/alert-message.module'
 
 @NgModule({

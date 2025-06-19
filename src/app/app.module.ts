@@ -12,7 +12,7 @@ import { PseudoModule } from 'src/locale/i18n.pseudo.component'
 import { TitleService } from './core/title-service/title.service'
 import { HttpContentTypeHeaderInterceptor } from './core/http-content-type-header-interceptor/http-content-type-header-interceptor'
 import { HTTP_INTERCEPTORS } from '@angular/common/http'
-import { MatLegacyDialogModule } from '@angular/material/legacy-dialog'
+import { MatDialogModule } from '@angular/material/dialog'
 import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import {
   MatLegacyAutocompleteModule,
@@ -32,7 +32,7 @@ import { FormsModule } from '@angular/forms'
     BrowserAnimationsModule,
     LayoutModule,
     BidiModule,
-    MatLegacyDialogModule,
+    MatDialogModule,
     MatLegacyAutocompleteModule,
     MatLegacySelectModule,
     MatLegacyInputModule,

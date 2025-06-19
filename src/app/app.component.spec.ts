@@ -3,10 +3,10 @@ import { RouterTestingModule } from '@angular/router/testing'
 import { AppComponent } from './app.component'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import {
-  MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA,
-  MatLegacyDialog as MatDialog,
-  MatLegacyDialogRef as MatDialogRef,
-} from '@angular/material/legacy-dialog'
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog'
 import { WINDOW_PROVIDERS } from './cdk/window'
 import { FormBuilder } from '@angular/forms'
 import { RecordWorksService } from './core/record-works/record-works.service'

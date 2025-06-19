@@ -8,7 +8,7 @@ import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
+import { MatDialog } from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'

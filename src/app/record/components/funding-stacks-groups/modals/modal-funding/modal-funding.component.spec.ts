@@ -17,9 +17,9 @@ import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack
 import { Overlay } from '@angular/cdk/overlay'
 import { PlatformInfoService } from '../../../../../cdk/platform-info'
 import {
-  MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA,
-  MatLegacyDialogRef as MatDialogRef,
-} from '@angular/material/legacy-dialog'
+  MAT_DIALOG_DATA,
+  MatDialogRef,
+} from '@angular/material/dialog'
 import { ErrorHandlerService } from '../../../../../core/error-handler/error-handler.service'
 import { UserService } from '../../../../../core'
 import { SnackbarService } from '../../../../../cdk/snackbar/snackbar.service'

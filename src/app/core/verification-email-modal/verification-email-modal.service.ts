@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
+import { MatDialog } from '@angular/material/dialog'
 import { PlatformInfoService } from '../../cdk/platform-info'
 import { first } from 'rxjs/operators'
 import { TopBarVerificationEmailModalComponent } from 'src/app/cdk/top-bar-verification-email/modals/top-bar-verification-email-modal/top-bar-verification-email-modal.component'

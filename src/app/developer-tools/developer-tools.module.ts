@@ -12,7 +12,7 @@ import { TermsOfUseComponent } from './components/terms-of-use/terms-of-use.comp
 import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field'
 import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input'
 import { PanelModule } from '../cdk/panel/panel.module'
-import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog'
+import { MatDialogModule } from '@angular/material/dialog'
 import { PlatformInfoModule } from '../cdk/platform-info'
 import { CodePanelComponent } from './components/code-panel/code-panel.component'
 import { MatLegacyProgressSpinnerModule as MatProgressSpinnerModule } from '@angular/material/legacy-progress-spinner'

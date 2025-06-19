@@ -3,9 +3,9 @@ import { SettingsPanelsComponent } from './settings-panels.component'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 import {
-  MatLegacyDialog as MatDialog,
-  MatLegacyDialogModule as MatDialogModule,
-} from '@angular/material/legacy-dialog'
+  MatDialog,
+  MatDialogModule,
+} from '@angular/material/dialog'
 import { WINDOW_PROVIDERS } from '../../window'
 import { PlatformInfoService } from '../../platform-info'
 import { ErrorHandlerService } from '../../../core/error-handler/error-handler.service'

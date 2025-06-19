@@ -10,10 +10,10 @@ import { ErrorHandlerService } from '../../../../../core/error-handler/error-han
 import { SnackbarService } from '../../../../../cdk/snackbar/snackbar.service'
 import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
 import {
-  MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA,
-  MatLegacyDialog as MatDialog,
-  MatLegacyDialogRef as MatDialogRef,
-} from '@angular/material/legacy-dialog'
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { SharedModule } from '../../../../../shared/shared.module'
 

@@ -9,9 +9,9 @@ import { ErrorHandlerService } from '../../../../../core/error-handler/error-han
 import { SnackbarService } from '../../../../../cdk/snackbar/snackbar.service'
 import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
 import {
-  MatLegacyDialog as MatDialog,
-  MatLegacyDialogRef as MatDialogRef,
-} from '@angular/material/legacy-dialog'
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { RecordWorksService } from '../../../../../core/record-works/record-works.service'
 import { ReactiveFormsModule, UntypedFormBuilder } from '@angular/forms'

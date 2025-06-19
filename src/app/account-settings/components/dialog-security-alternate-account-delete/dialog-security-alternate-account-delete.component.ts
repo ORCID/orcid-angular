@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core'
 import {
-  MatLegacyDialogRef as MatDialogRef,
-  MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA,
-} from '@angular/material/legacy-dialog'
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog'
 import { SocialAccount } from 'src/app/types/account-alternate-sign-in.endpoint'
 
 @Component({

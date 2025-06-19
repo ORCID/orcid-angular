@@ -17,7 +17,7 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms'
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
+import { MatDialog } from '@angular/material/dialog'
 import {
   MAX_LENGTH_LESS_THAN_ONE_THOUSAND,
   MAX_LENGTH_LESS_THAN_TWO_HUNDRED_FIFTY_FIVE,

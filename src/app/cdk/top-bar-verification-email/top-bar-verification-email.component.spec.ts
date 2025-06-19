@@ -4,9 +4,9 @@ import { TopBarVerificationEmailComponent } from './top-bar-verification-email.c
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 import {
-  MatLegacyDialog as MatDialog,
-  MatLegacyDialogModule as MatDialogModule,
-} from '@angular/material/legacy-dialog'
+  MatDialog,
+  MatDialogModule,
+} from '@angular/material/dialog'
 
 import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
 import { Overlay } from '@angular/cdk/overlay'

@@ -14,10 +14,10 @@ import {
 } from '@angular/material/legacy-menu'
 
 import {
-  MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA,
-  MatLegacyDialog as MatDialog,
-  MatLegacyDialogRef as MatDialogRef,
-} from '@angular/material/legacy-dialog'
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { ReactiveFormsModule, UntypedFormBuilder } from '@angular/forms'
 import { MatLegacyAutocompleteModule as MatAutocompleteModule } from '@angular/material/legacy-autocomplete'

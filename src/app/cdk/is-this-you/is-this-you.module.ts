@@ -4,7 +4,7 @@ import { IsThisYouComponent } from './is-this-you.component'
 import { PlatformInfoModule } from '../platform-info'
 import { WindowModule } from '../window'
 import { MatButtonModule } from '@angular/material/button'
-import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog'
+import { MatDialogModule } from '@angular/material/dialog'
 import { RouterModule } from '@angular/router'
 
 @NgModule({

@@ -80,7 +80,7 @@ import { RecordHeaderComponent } from './components/record-header/record-header.
 import { RecordInfoComponent } from './components/record-info/record-info.component'
 import { TrustedSummaryModule } from '../cdk/trusted-summary/trusted-summary.module'
 import { AlertMessageModule } from '../cdk/alert-message/alert-message.module'
-import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog'
+import { MatDialogModule } from '@angular/material/dialog'
 import { WarningMessageModule } from '../cdk/warning-message/warning-message.module'
 import { DeepSelectInputModule } from '../cdk/deep-select-input/deep-select-input.module'
 import { PageNotFound404Module } from '../page-not-found-404/page-not-found-404.module'
