@@ -4,9 +4,9 @@ import { MatDivider, MatDividerModule } from '@angular/material/divider'
 import { MatExpansionModule } from '@angular/material/expansion'
 import { MatPaginatorModule } from '@angular/material/paginator'
 import {
-  MatLegacyProgressSpinner as MatProgressSpinner,
-  MatLegacyProgressSpinnerModule as MatProgressSpinnerModule,
-} from '@angular/material/legacy-progress-spinner'
+  MatProgressSpinner,
+  MatProgressSpinnerModule,
+} from '@angular/material/progress-spinner'
 import { MatLegacySnackBarModule as MatSnackBarModule } from '@angular/material/legacy-snack-bar'
 import { MatLegacyTooltipModule as MatTooltipModule } from '@angular/material/legacy-tooltip'
 

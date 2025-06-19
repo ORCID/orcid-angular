@@ -18,7 +18,7 @@ import { SharedModule } from 'src/app/shared/shared.module'
 import { MAT_AUTOCOMPLETE_SCROLL_STRATEGY } from '@angular/material/autocomplete'
 import { MAT_SELECT_SCROLL_STRATEGY_PROVIDER } from '@angular/material/select'
 import { MatLegacyInputModule } from '@angular/material/legacy-input'
-import { MatLegacyProgressSpinnerModule } from '@angular/material/legacy-progress-spinner'
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { AffiliationsInterstitialComponent } from './affiliations-interstitial/interstitial-component/affiliations-interstitial.component'
 import { AffiliationsInterstitialDialogComponent } from './affiliations-interstitial/interstitial-dialog-extend/affiliations-interstitial-dialog.component'
 import { ShareEmailsDomainsDialogComponent } from './share-emails-domains/interstitial-dialog-extend/share-emails-domains-dialog.component'
@@ -39,7 +39,7 @@ import { ShareEmailsDomainsComponent } from './share-emails-domains/interstitial
     MatLegacyFormFieldModule,
     MatLegacySelectModule,
     MatLegacyInputModule,
-    MatLegacyProgressSpinnerModule,
+    MatProgressSpinnerModule,
     MatIconModule,
     MatDividerModule,
     InfoDropDownModule,
