@@ -1,13 +1,8 @@
 // Overwrites https://github.com/angular/components/blob/9.2.x/src/material/radio/radio.scss
 
-.mat-radio-button {
-  margin-bottom: 10px;
-}
-
-mat-radio-button.orcid-radio-button-with-icons {
-  .mat-radio-label-content {
-    display: flex;
-    align-items: center;
-    white-space: normal;
-  }
+.mdc-label {
+  user-select: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
 }

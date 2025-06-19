@@ -19,7 +19,7 @@ import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/lega
 import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field'
 import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
-import { MatLegacyRadioModule as MatRadioModule } from '@angular/material/legacy-radio'
+import { MatRadioModule } from '@angular/material/radio'
 import { MatStepperModule } from '@angular/material/stepper'
 import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
 import { FormDirectivesModule } from '../cdk/form-directives/form-directives.module'

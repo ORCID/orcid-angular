@@ -14,7 +14,7 @@ import { MatLegacyMenuModule as MatMenuModule } from '@angular/material/legacy-m
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
 
-import { MatLegacyRadioModule as MatRadioModule } from '@angular/material/legacy-radio'
+import { MatRadioModule } from '@angular/material/radio'
 import { MatLegacySelectModule as MatSelectModule } from '@angular/material/legacy-select'
 
 import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'

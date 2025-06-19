@@ -210,8 +210,7 @@ mat-label.orc-font-small-print {
       mat-card-content.mat-mdc-card-content {
         margin-top: 32px !important;
       }
-
-      mat-radio-button:not(:last-child) {
+      mat-radio-group > *:not(:last-child) > .mdc-form-field {
         margin-bottom: 32px;
       }
 
