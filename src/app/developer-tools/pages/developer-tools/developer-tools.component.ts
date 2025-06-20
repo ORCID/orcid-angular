@@ -31,7 +31,7 @@ import { ClientSecretModalComponent } from '../../components/client-secret-modal
 import { filter, map, switchMap, takeUntil, tap } from 'rxjs/operators'
 import { Observable, Subject, of } from 'rxjs'
 import { RecordService } from 'src/app/core/record/record.service'
-import { MatLegacyInput as MatInput } from '@angular/material/legacy-input'
+import { MatInput } from '@angular/material/input'
 
 import { WINDOW } from 'src/app/cdk/window'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'

@@ -14,9 +14,9 @@ import { ReactivationService } from '../../../core/reactivation/reactivation.ser
 import { RegisterService } from '../../../core/register/register.service'
 import { FormCurrentEmploymentComponent } from './form-current-employment.component'
 import {
-  MatLegacyAutocomplete,
-  MatLegacyAutocompleteModule,
-} from '@angular/material/legacy-autocomplete'
+  MatAutocomplete,
+  MatAutocompleteModule,
+} from '@angular/material/autocomplete'
 import { SharedModule } from 'src/app/shared/shared.module'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
@@ -31,7 +31,7 @@ describe('FormPersonalComponent', () => {
         HttpClientTestingModule,
         MdePopoverModule,
         RouterTestingModule,
-        MatLegacyAutocompleteModule,
+        MatAutocompleteModule,
         SharedModule,
       ],
       declarations: [FormCurrentEmploymentComponent],

@@ -30,7 +30,7 @@
     color: map-get($foreground, 'state-warning-dark');
   }
 
-  input.mat-input-element {
+  input.mat-mdc-input-element {
     border: transparent;
     font-size: mat.font-size($config, body-1) !important;
   }

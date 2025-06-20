@@ -10,7 +10,7 @@
   $background: map-get($theme, background);
   $config: mat.define-typography-config();
 
-  textarea.mat-input-element {
+  textarea.mat-mdc-input-element {
     font-size: mat.font-size($config, body-1) !important;
   }
 }

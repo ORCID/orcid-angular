@@ -2,7 +2,7 @@
   flex-wrap: nowrap;
 }
 
-::ng-deep .columns-4-or-8 .mat-form-field {
+::ng-deep .columns-4-or-8 .mat-mdc-form-field {
   width: 100%;
   margin-inline-end: auto;
 }
@@ -11,7 +11,7 @@
   margin-top: 16px;
 }
 
-::ng-deep .columns-4-or-8 .mat-form-field {
+::ng-deep .columns-4-or-8 .mat-mdc-form-field {
   width: 100%;
   margin-inline-end: auto;
 }
@@ -50,7 +50,7 @@
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-.mat-form-field {
+.mat-mdc-form-field {
   width: 100%;
 }
 

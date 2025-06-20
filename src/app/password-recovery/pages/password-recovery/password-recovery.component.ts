@@ -11,7 +11,7 @@ import {
   Validators,
 } from '@angular/forms'
 import { MatLegacyChip as MatChip } from '@angular/material/legacy-chips'
-import { matLegacyFormFieldAnimations as matFormFieldAnimations } from '@angular/material/legacy-form-field'
+import { matFormFieldAnimations } from '@angular/material/form-field'
 import { Observable } from 'rxjs'
 import { WINDOW } from 'src/app/cdk/window'
 import { PasswordRecoveryService } from 'src/app/core/password-recovery/password-recovery.service'
