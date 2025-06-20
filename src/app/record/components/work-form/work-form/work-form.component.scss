@@ -17,7 +17,7 @@ label {
   padding-bottom: 8px;
 }
 
-.mat-form-field {
+.mat-mdc-form-field {
   width: 100%;
 }
 
@@ -53,6 +53,7 @@ label {
 }
 
 .date {
+  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
   ::ng-deep .mat-form-field-wrapper {
     padding-bottom: 0px !important;
   }
@@ -82,7 +83,7 @@ label {
 
 .select-error {
   padding-bottom: 1.475em;
-
+  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
   ::ng-deep .mat-form-field-wrapper {
     padding-bottom: 0 !important;
   }
@@ -100,6 +101,7 @@ app-deep-select-input {
 
 :host {
   ::ng-deep {
+    /* TODO(mdc-migration): The following rule targets internal classes of select that may no longer apply for the MDC version. */
     .mat-form-field-appearance-outline .mat-select-arrow-wrapper {
       transform: none;
     }

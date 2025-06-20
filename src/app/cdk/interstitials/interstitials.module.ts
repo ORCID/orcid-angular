@@ -10,13 +10,13 @@ import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatButtonModule } from '@angular/material/button'
 import { InfoPanelModule } from '../info-panel/info-panel.module'
 import { A11yLinkModule } from '../a11y-link/a11y-link.module'
-import { MatLegacyAutocompleteModule as MatAutocompleteModule } from '@angular/material/legacy-autocomplete'
-import { MatLegacyFormFieldModule } from '@angular/material/legacy-form-field'
-import { MatLegacySelectModule } from '@angular/material/legacy-select'
+import { MatAutocompleteModule } from '@angular/material/autocomplete'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatSelectModule } from '@angular/material/select'
 import { SharedModule } from 'src/app/shared/shared.module'
 import { MAT_AUTOCOMPLETE_SCROLL_STRATEGY } from '@angular/material/autocomplete'
 import { MAT_SELECT_SCROLL_STRATEGY_PROVIDER } from '@angular/material/select'
-import { MatLegacyInputModule } from '@angular/material/legacy-input'
+import { MatInputModule } from '@angular/material/input'
 import { MatLegacyProgressSpinnerModule } from '@angular/material/legacy-progress-spinner'
 import { AffiliationsInterstitialComponent } from './affiliations-interstitial/interstitial-component/affiliations-interstitial.component'
 import { AffiliationsInterstitialDialogComponent } from './affiliations-interstitial/interstitial-dialog-extend/affiliations-interstitial-dialog.component'
@@ -35,9 +35,9 @@ import { ShareEmailsDomainsComponent } from './share-emails-domains/interstitial
     SharedModule,
     MatLegacyCardModule,
     MatAutocompleteModule,
-    MatLegacyFormFieldModule,
-    MatLegacySelectModule,
-    MatLegacyInputModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
     MatLegacyProgressSpinnerModule,
     MatIconModule,
     MatDividerModule,

@@ -9,6 +9,7 @@
   $background: map-get($theme, background);
 
   ::ng-deep .country-input-line {
+    /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
     .mat-form-field-flex {
       background-color: map-get($background, dialog);
     }

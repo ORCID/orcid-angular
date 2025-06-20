@@ -16,8 +16,8 @@ import { MatButtonModule } from '@angular/material/button'
 import { MatLegacyCardModule as MatCardModule } from '@angular/material/legacy-card'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatDialogModule } from '@angular/material/dialog'
-import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field'
-import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatInputModule } from '@angular/material/input'
 import { MatLegacyProgressBarModule as MatProgressBarModule } from '@angular/material/legacy-progress-bar'
 import { MatLegacyRadioModule as MatRadioModule } from '@angular/material/legacy-radio'
 import { MatStepperModule } from '@angular/material/stepper'
@@ -33,9 +33,9 @@ import { FormPersonalAdditionalEmailsComponent } from './components/form-persona
 import { RegisterComponent } from './pages/register/register.component'
 import { StepCComponent } from './components/step-c/step-c.component'
 import { FormCurrentEmploymentComponent } from './components/form-current-employment/form-current-employment.component'
-import { MatLegacyAutocompleteModule as MatAutocompleteModule } from '@angular/material/legacy-autocomplete'
+import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import { StepC2Component } from './components/step-c2/step-c2.component'
-import { MatLegacySelectModule } from '@angular/material/legacy-select'
+import { MatSelectModule } from '@angular/material/select'
 import { SharedModule } from '../shared/shared.module'
 import { AlertMessageModule } from '../cdk/alert-message/alert-message.module'
 
@@ -80,7 +80,7 @@ import { AlertMessageModule } from '../cdk/alert-message/alert-message.module'
     FormDirectivesModule,
     WarningMessageModule,
     MatAutocompleteModule,
-    MatLegacySelectModule,
+    MatSelectModule,
     SharedModule,
   ],
 })

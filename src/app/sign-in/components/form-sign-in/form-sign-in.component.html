@@ -18,7 +18,12 @@
         >or</i
       >&nbsp;<ng-container i18n="@@account.orcidID"> ORCID iD </ng-container>
     </mat-label>
-    <mat-form-field appearance="outline" [hideRequiredMarker]="true" async>
+    <mat-form-field
+      appearance="outline"
+      [hideRequiredMarker]="true"
+      async
+      class="no-hint"
+    >
       <input
         aria-labelledby="username-input-label"
         id="username-input"
