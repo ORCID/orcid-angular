@@ -1,8 +1,13 @@
 // Overwrites https://github.com/angular/components/blob/9.2.x/src/material/radio/radio.scss
 
-.mdc-label {
-  user-select: none;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
+.mat-mdc-radio-button {
+  .mdc-label {
+    user-select: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+  }
+  .mdc-radio {
+    padding: 0 !important;
+  }
 }

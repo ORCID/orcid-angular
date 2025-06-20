@@ -19,6 +19,15 @@
     margin-top: $spacing-40;
   }
 
+  .mat-mdc-card > :first-child,
+  .mat-mdc-card-content > :first-child {
+    margin-top: 0;
+  }
+
+  .mat-mdc-card-header .mat-mdc-card-subtitle:not(:first-child) {
+    margin-top: -8px;
+  }
+
   .mat-mdc-card-header {
     justify-content: center;
     display: flex;
@@ -32,13 +41,13 @@
     display: flex;
     width: 100%;
     text-align: center;
-  }
-  .mat-mdc-card-subtitle {
     margin-bottom: $spacing-0;
+    font-size: 14px;
   }
 
   .mat-mdc-card-content {
     padding: 0;
+    font-size: 14px;
   }
 
   .columns-12 &,
