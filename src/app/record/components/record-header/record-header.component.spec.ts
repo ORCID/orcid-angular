@@ -21,11 +21,7 @@ describe('RecordHeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule,
-        MatTooltipModule,
-      ],
+      imports: [HttpClientTestingModule, RouterTestingModule, MatTooltipModule],
       declarations: [RecordHeaderComponent],
       providers: [
         WINDOW_PROVIDERS,

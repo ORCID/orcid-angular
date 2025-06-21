@@ -12,10 +12,7 @@ import {
 import { UntypedFormGroup } from '@angular/forms'
 import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox'
 import { MatDialog } from '@angular/material/dialog'
-import {
-  MatPaginatorIntl,
-  PageEvent,
-} from '@angular/material/paginator'
+import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator'
 import { isEmpty } from 'lodash'
 import { Observable, Subject } from 'rxjs'
 import { first, take } from 'rxjs/operators'
