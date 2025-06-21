@@ -2,14 +2,14 @@
   width: 100%;
 
   ::ng-deep {
-    .mat-card-header {
+    .mat-mdc-card-header {
       width: unset !important;
       padding: 24px 64px 0 64px !important;
-      .mat-card-title {
+      .mat-mdc-card-title {
         margin-bottom: 0;
       }
     }
-    .mat-card-content {
+    .mat-mdc-card-content {
       margin: 24px 64px 64px 64px !important;
     }
   }
@@ -17,10 +17,10 @@
 .handset {
   :host {
     ::ng-deep {
-      .mat-card-header {
+      .mat-mdc-card-header {
         padding: 0 0 0 0 !important;
       }
-      .mat-card-content {
+      .mat-mdc-card-content {
         margin: 0 0 0 0 !important;
       }
     }

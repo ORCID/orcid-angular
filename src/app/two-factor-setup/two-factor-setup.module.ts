@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
+import { MatCardModule } from '@angular/material/card'
 import { MatButtonModule } from '@angular/material/button'
-import { MatLegacyCardModule as MatCardModule } from '@angular/material/legacy-card'
 import { MatIconModule } from '@angular/material/icon'
-import { MatLegacyProgressBarModule as MatProgressBarModule } from '@angular/material/legacy-progress-bar'
+import { MatProgressBarModule } from '@angular/material/progress-bar'
 
 import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
 import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field'
@@ -15,10 +15,10 @@ import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy
 import { FormDirectivesModule } from '../cdk/form-directives/form-directives.module'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { ClipboardModule } from '@angular/cdk/clipboard'
-import { MatLegacyTooltipModule as MatTooltipModule } from '@angular/material/legacy-tooltip'
+import { MatTooltipModule } from '@angular/material/tooltip'
 import { TwoFactorRecoveryCodesComponent } from './components/two-factor-recovery-codes/two-factor-recovery-codes.component'
 import { TwoFactorEnableComponent } from './components/two-factor-enable/two-factor-enable.component'
-import { MatLegacyProgressSpinnerModule as MatProgressSpinnerModule } from '@angular/material/legacy-progress-spinner'
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 
 @NgModule({
   declarations: [

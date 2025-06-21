@@ -8,12 +8,8 @@ import { ErrorHandlerService } from '../../../core/error-handler/error-handler.s
 import { SnackbarService } from '../../../cdk/snackbar/snackbar.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatDialog } from '@angular/material/dialog'
-import {
-  MatLegacyTooltipModule,
-  MatLegacyTooltip as MatTooltip,
-} from '@angular/material/legacy-tooltip'
+import { MatTooltipModule, MatTooltip } from '@angular/material/tooltip'
 import { MatCheckbox, MatCheckboxModule } from '@angular/material/checkbox'
-
 import { Overlay } from '@angular/cdk/overlay'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
@@ -34,7 +30,7 @@ describe('NotificationComponent', () => {
         RouterTestingModule,
         ReactiveFormsModule,
         MatCheckboxModule,
-        MatLegacyTooltipModule,
+        MatTooltipModule,
       ],
       declarations: [NotificationComponent],
       providers: [

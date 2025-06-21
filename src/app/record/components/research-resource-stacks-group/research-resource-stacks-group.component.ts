@@ -20,9 +20,9 @@ import {
   ResearchResourcesGroup,
 } from '../../../types/record-research-resources.endpoint'
 import {
-  MatLegacyPaginatorIntl as MatPaginatorIntl,
-  LegacyPageEvent as PageEvent,
-} from '@angular/material/legacy-paginator'
+  MatPaginatorIntl,
+  PageEvent,
+} from '@angular/material/paginator'
 import { DEFAULT_PAGE_SIZE } from 'src/app/constants'
 import { LiveAnnouncer } from '@angular/cdk/a11y'
 import { AnnouncerService } from 'src/app/core/announcer/announcer.service'

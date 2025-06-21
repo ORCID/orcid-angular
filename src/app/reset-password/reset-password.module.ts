@@ -6,11 +6,11 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { MatIconModule } from '@angular/material/icon'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input'
-import { MatLegacyCardModule as MatCardModule } from '@angular/material/legacy-card'
+import { MatCardModule } from '@angular/material/card'
 import {
-  MatLegacyProgressBar as MatProgressBar,
-  MatLegacyProgressBarModule as MatProgressBarModule,
-} from '@angular/material/legacy-progress-bar'
+  MatProgressBar,
+  MatProgressBarModule,
+} from '@angular/material/progress-bar'
 import { MatButtonModule } from '@angular/material/button'
 import { MdePopoverModule } from '../cdk/popover'
 

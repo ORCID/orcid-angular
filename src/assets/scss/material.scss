@@ -74,6 +74,9 @@
 @import './material.orcid.overwrites.scss/card-theme';
 @include mat-card-theme-overwrites($orcid-app-theme);
 
+// Progress Spinner
+@import './material.orcid.overwrites.scss/progress-spinner.scss';
+
 // Stepper
 @import './material.orcid.overwrites.scss/stepper.scss';
 
@@ -82,6 +85,9 @@
 
 // Radio
 @import './material.orcid.overwrites.scss/radio.scss';
+
+// Table
+@import './material.orcid.overwrites.scss/table.scss';
 
 // Form Field
 @import './material.orcid.overwrites.scss/form-field-outline.scss';

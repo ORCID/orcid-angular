@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
+import { MatCardModule } from '@angular/material/card'
 import { MatButtonModule } from '@angular/material/button'
-import { MatLegacyCardModule as MatCardModule } from '@angular/material/legacy-card'
 import { SignInModule } from '../sign-in/sign-in.module'
 import { MatIconModule } from '@angular/material/icon'
-import { MatLegacyProgressBarModule as MatProgressBarModule } from '@angular/material/legacy-progress-bar'
+import { MatProgressBarModule } from '@angular/material/progress-bar'
 
 import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
 import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field'

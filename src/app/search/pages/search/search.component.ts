@@ -3,9 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { SearchService } from '../../../core/search/search.service'
 import { tap, switchMap, retry, catchError } from 'rxjs/operators'
 import {
-  MatLegacyPaginatorIntl as MatPaginatorIntl,
-  LegacyPageEvent as PageEvent,
-} from '@angular/material/legacy-paginator'
+  MatPaginatorIntl,
+  PageEvent,
+} from '@angular/material/paginator'
 import { SearchResults } from 'src/app/types'
 import { SearchParameters } from 'src/app/types'
 import { Meta } from '@angular/platform-browser'

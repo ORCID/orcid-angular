@@ -13,7 +13,7 @@ import { RouterTestingModule } from '@angular/router/testing'
 import { RecordService } from 'src/app/core/record/record.service'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
-import { MatLegacyTooltipModule } from '@angular/material/legacy-tooltip'
+import { MatTooltipModule } from '@angular/material/tooltip'
 
 describe('RecordHeaderComponent', () => {
   let component: RecordHeaderComponent
@@ -24,7 +24,7 @@ describe('RecordHeaderComponent', () => {
       imports: [
         HttpClientTestingModule,
         RouterTestingModule,
-        MatLegacyTooltipModule,
+        MatTooltipModule,
       ],
       declarations: [RecordHeaderComponent],
       providers: [
