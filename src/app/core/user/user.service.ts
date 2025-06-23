@@ -48,6 +48,7 @@ import { OauthService } from '../oauth/oauth.service'
 import { UserInfoService } from '../user-info/user-info.service'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { LOCAL_SESSION_UID } from 'src/app/constants'
+import { Params} from '@angular/router'
 
 @Injectable({
   providedIn: 'root',
@@ -308,9 +309,28 @@ export class UserService {
   }> {
     this.currentlyLoggedIn = updateParameters.loggedIn
     const $userInfo = this._userInfo.getUserInfo().pipe(this.handleErrors)
-    const $nameForm = this.getNameForm().pipe(this.handleErrors)
-    const $oauthSession = this.getOauthSession(updateParameters)
+    const $nameForm = this.getNameForm().pipe(this.handleErrors)    
     const $thirdPartyAuthData = this.getThirdPartySignInData()
+
+
+
+
+
+    const $oauthSession = this._togglz.getStateOf('OAUTH_AUTHORIZATION').pipe(
+      take(1),
+      switchMap((useAuthServerFlag) => {
+        console.log('-------------------------');
+        console.log('handleUserDataUpdate, flag value: ' + useAuthServerFlag);
+        console.log('-------------------------');
+        if (useAuthServerFlag === true) {
+          return this.getOauthSessionFromAuthServer()
+        } else {
+          return this.getOauthSession(updateParameters)
+        }
+      }));
+    
+        
+
 
     return combineLatest([
       updateParameters.loggedIn ? $userInfo : of(undefined),
@@ -328,6 +348,68 @@ export class UserService {
       }))
     )
   }
+
+
+
+
+
+
+
+
+
+
+  private getOauthSessionFromAuthServer(updateParameters?: UserSessionUpdateParameters): Observable<any> {    
+    const params: Params = {}
+    new URLSearchParams(this.window.location.search).forEach(
+      (value, key) => (params[key] = value)
+    )
+    let clientId = params['client_id'];
+    console.log('Params on URL: ' + this.window.location.search)
+    console.log('Client id on URL: ' + clientId)
+    console.log('Auth server url to GET: ' + runtimeEnvironment.AUTH_SERVER + 'oauth2/authorize' + this.window.location.search)
+    return this._http
+          .get(
+            runtimeEnvironment.AUTH_SERVER + 'oauth2/authorize' + this.window.location.search,
+            {}
+          )
+          .pipe(
+            retry(3),
+            catchError((error) => this._errorHandler.handleError(error)),
+            switchMap((response) => 
+              { 
+                console.log('Response after authorize:' + response); 
+                return this._http.get(
+                  runtimeEnvironment.AUTH_SERVER + '/clientAndUserInfo.json?clientId=' + clientId,
+                  {
+                  withCredentials: true,
+                  }
+                ).pipe((clientAndUserInfo) => {
+                  console.log('Client and user info: ' + clientAndUserInfo);
+                  return null;
+                })
+              } 
+            )
+          )
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   /**
    * @param updateParameters login status and trigger information
    */
