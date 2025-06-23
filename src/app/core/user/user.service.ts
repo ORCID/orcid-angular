@@ -49,6 +49,7 @@ import { UserInfoService } from '../user-info/user-info.service'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { LOCAL_SESSION_UID } from 'src/app/constants'
 import { Params} from '@angular/router'
+import { CookieService } from 'ngx-cookie-service'
 
 @Injectable({
   providedIn: 'root',
@@ -66,6 +67,7 @@ export class UserService {
     private _disco: DiscoService,
     private _userInfo: UserInfoService,
     private _togglz: TogglzService,
+    private _cookie: CookieService,
     @Inject(WINDOW) private window: Window
   ) {
     this.$userStatusChecked
@@ -364,13 +366,29 @@ export class UserService {
       (value, key) => (params[key] = value)
     )
     let clientId = params['client_id'];
+    // Do not execute this call if the client_id param is not in the URL
+    if(clientId === undefined) {
+      return of(null);
+    }
     console.log('Params on URL: ' + this.window.location.search)
     console.log('Client id on URL: ' + clientId)
     console.log('Auth server url to GET: ' + runtimeEnvironment.AUTH_SERVER + 'oauth2/authorize' + this.window.location.search)
+
+    let headers = new HttpHeaders();
+    headers = headers.set(
+            'Access-Control-Allow-Origin',
+            runtimeEnvironment.AUTH_SERVER
+          )
+    let csrf = this._cookie.get('AUTH-XSRF-TOKEN')
+    headers = headers.set('x-xsrf-token', csrf)
+
+    let sessionCookie = this._cookie.get('SESSION')
+    headers = headers.set('SESSION', sessionCookie)
+
     return this._http
           .get(
             runtimeEnvironment.AUTH_SERVER + 'oauth2/authorize' + this.window.location.search,
-            {}
+            {headers: headers,}
           )
           .pipe(
             retry(3),
