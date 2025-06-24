@@ -25,6 +25,14 @@ export interface RequestInfoForm {
   forceLogin?: boolean
 }
 
+export interface AuthForm {
+  clientDescription: string
+  clientId: string
+  clientName: string
+  userName: string
+  userOrcid: string
+}
+
 export interface Scope {
   name: string
   value: ScopesStrings

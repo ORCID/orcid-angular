@@ -29,6 +29,7 @@ import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { ERROR_REPORT } from 'src/app/errors'
 import {
+  AuthForm,
   NameForm,
   OauthParameters,
   RequestInfoForm,
@@ -396,13 +397,17 @@ export class UserService {
             switchMap((response) => 
               { 
                 console.log('Response after authorize:' + response); 
-                return this._http.get(
+                return this._http.get<AuthForm>(
                   runtimeEnvironment.AUTH_SERVER + '/clientAndUserInfo.json?clientId=' + clientId,
                   {
                   withCredentials: true,
                   }
                 ).pipe((clientAndUserInfo) => {
                   console.log('Client and user info: ' + clientAndUserInfo);
+
+                  //const requestInfoForm:RequestInfoForm={clientId='',}
+
+
                   return null;
                 })
               } 
