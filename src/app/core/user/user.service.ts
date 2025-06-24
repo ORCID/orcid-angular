@@ -373,43 +373,18 @@ export class UserService {
     }
     console.log('Params on URL: ' + this.window.location.search)
     console.log('Client id on URL: ' + clientId)
-    console.log('Auth server url to GET: ' + runtimeEnvironment.AUTH_SERVER + 'oauth2/authorize' + this.window.location.search)
-
-    let headers = new HttpHeaders();
-    headers = headers.set(
-            'Access-Control-Allow-Origin',
-            runtimeEnvironment.AUTH_SERVER
-          )
-    let csrf = this._cookie.get('AUTH-XSRF-TOKEN')
-    headers = headers.set('x-xsrf-token', csrf)
-
-    let sessionCookie = this._cookie.get('SESSION')
-    headers = headers.set('SESSION', sessionCookie)
+    console.log('Auth server url to GET: ' + runtimeEnvironment.AUTH_SERVER + 'oauth2/authorize' + this.window.location.search)   
 
     return this._http
           .get(
-            runtimeEnvironment.AUTH_SERVER + 'oauth2/authorize' + this.window.location.search,
-            {headers: headers,}
+            runtimeEnvironment.AUTH_SERVER + 'oauth2/authorize' + this.window.location.search, 
+            {withCredentials: true}
           )
-          .pipe(
-            retry(3),
-            catchError((error) => this._errorHandler.handleError(error)),
+          .pipe(            
             switchMap((response) => 
               { 
-                console.log('Response after authorize:' + response); 
-                return this._http.get<AuthForm>(
-                  runtimeEnvironment.AUTH_SERVER + '/clientAndUserInfo.json?clientId=' + clientId,
-                  {
-                  withCredentials: true,
-                  }
-                ).pipe((clientAndUserInfo) => {
-                  console.log('Client and user info: ' + clientAndUserInfo);
-
-                  //const requestInfoForm:RequestInfoForm={clientId='',}
-
-
-                  return null;
-                })
+                console.log('Response after authorize2:' + JSON.stringify(response)); 
+                return of(null)
               } 
             )
           )
