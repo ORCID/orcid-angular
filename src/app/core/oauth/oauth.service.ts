@@ -112,7 +112,7 @@ export class OauthService {
       )
   }
 
-  authorizeOnAuthServer(data: RequestInfoForm): Observable<HttpResponse<any>> {
+  authorizeOnAuthServer(data: RequestInfoForm): Observable<string> {
     let headers = new HttpHeaders()
     headers = headers.set(
       'Access-Control-Allow-Origin',
@@ -134,18 +134,15 @@ export class OauthService {
     }    
 
     return this._http
-      .post<HttpResponse<any>>(
+      .post(
         runtimeEnvironment.AUTH_SERVER + 'oauth2/authorize',
         body,
         { headers: headers, withCredentials: true }
       )
-      .pipe(
-        retry(3),
-        catchError((error) =>
-          this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
-        ),
-        tap((response: HttpResponse<any>) => {
-          this.redirectUriSubject.next(response.headers.get('location'));
+      .pipe(        
+        switchMap((response: HttpResponse<any>) => {
+          console.log('Just got the response: ' + response)          
+          return of(response.headers.get('location'));
         })
       );
   }
