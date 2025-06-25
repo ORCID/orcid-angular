@@ -9,6 +9,7 @@ export class HttpContentTypeHeaderInterceptor implements HttpInterceptor {
     '/shibboleth/signin/auth.json',
     '/signin/auth.json',
     runtimeEnvironment.AUTH_SERVER + 'login',
+    runtimeEnvironment.AUTH_SERVER + 'oauth2/authorize',
   ]
 
   construct() {}

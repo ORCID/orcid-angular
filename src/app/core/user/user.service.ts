@@ -34,6 +34,7 @@ import {
   OauthParameters,
   RequestInfoForm,
   UserInfo,
+  Scope,
 } from 'src/app/types'
 import {
   UserSession,
@@ -196,7 +197,7 @@ export class UserService {
 
             // When the user lands on the Orcid app:
             // Take a eager approach:
-            // create a trigger that just assumes the user es logging.
+            // create a trigger that just assumes the user is logging.
             // So instead of waiting until `userStatus` responds, at the very beginning of the app initialization
             // calling userInfo.json, nameForm.json
             // (this avoid unnecessary extra waiting for logged in users)
@@ -361,7 +362,7 @@ export class UserService {
 
 
 
-  private getOauthSessionFromAuthServer(updateParameters?: UserSessionUpdateParameters): Observable<any> {    
+  private getOauthSessionFromAuthServer(updateParameters?: UserSessionUpdateParameters): Observable<RequestInfoForm> {    
     const params: Params = {}
     new URLSearchParams(this.window.location.search).forEach(
       (value, key) => (params[key] = value)
@@ -371,10 +372,6 @@ export class UserService {
     if(clientId === undefined) {
       return of(null);
     }
-    console.log('Params on URL: ' + this.window.location.search)
-    console.log('Client id on URL: ' + clientId)
-    console.log('Auth server url to GET: ' + runtimeEnvironment.AUTH_SERVER + 'oauth2/authorize' + this.window.location.search)   
-
     return this._http
           .get(
             runtimeEnvironment.AUTH_SERVER + 'oauth2/authorize' + this.window.location.search, 
@@ -382,31 +379,22 @@ export class UserService {
           )
           .pipe(            
             switchMap((response) => 
-              { 
-                console.log('Response after authorize2:' + JSON.stringify(response)); 
-                return of(null)
+              {                                 
+                let scopesArray: Scope[] = []
+                for(const s of response['scopes'].split(' ')) {
+                  var scope: Scope = {value:s}
+                  scopesArray.push(scope)
+                }
+                var requestInfoForm: RequestInfoForm = {scopes:scopesArray, clientId:response['clientId'], 
+                  clientName:response['clientName'], clientDescription:response['clientDescription'], userOrcid:response['userOrcid'], 
+                  oauthState:response['state'], userName:response['userName'], errors:null, clientEmailRequestReason:null, memberName:null, 
+                  responseType:null, stateParam:null, userEmail:null, userGivenNames:null, userFamilyNames:null, nonce:null,
+                  clientHavePersistentTokens:null, scopesAsString:null, error:null, errorDescription:null, redirectUrl:null} as RequestInfoForm;
+                return of(requestInfoForm)
               } 
             )
           )
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   /**
    * @param updateParameters login status and trigger information

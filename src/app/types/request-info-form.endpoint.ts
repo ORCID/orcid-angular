@@ -23,6 +23,7 @@ export interface RequestInfoForm {
   error: Errors
   errorDescription: string
   forceLogin?: boolean
+  oauthState?: string
 }
 
 export interface AuthForm {
@@ -34,10 +35,10 @@ export interface AuthForm {
 }
 
 export interface Scope {
-  name: string
+  name?: string
   value: ScopesStrings
-  description: string
-  longDescription: string
+  description?: string
+  longDescription?: string
 }
 
 type Errors =
