@@ -137,13 +137,17 @@ export class OauthService {
       .post(
         runtimeEnvironment.AUTH_SERVER + 'oauth2/authorize',
         body,
-        { headers: headers, withCredentials: true }
+        { headers, withCredentials: true }
       )
-      .pipe(        
-        switchMap((response: HttpResponse<any>) => {
-          console.log('Just got the response: ' + response)          
-          return of(response.headers.get('location'));
-        })
+      .pipe(
+        tap((res: HttpResponse<any>) => {
+          console.log('—--- Response headers —---');
+          res.headers.keys().forEach(key =>
+            console.log(`${key}: ${res.headers.get(key)}`)
+          );
+          console.log('———————————————');
+        }),
+        switchMap(res => of(res.headers.get('location')))
       );
   }
 
