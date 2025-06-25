@@ -136,12 +136,10 @@ export class OauthService {
       .post<any>(
         runtimeEnvironment.AUTH_SERVER + 'oauth2/authorize',
         body,
-        { headers: headers, withCredentials: true, observe: 'response' as const }
+        { headers: headers, withCredentials: true, observe: 'response' }
       )
       .pipe(        
-        map(res => {
-          console.log('Im here:')
-          res.headers.keys().forEach(k => console.log(`${k}: ${res.headers.get(k)}`));          
+        map((res: HttpResponse<any>) => {
           return res.headers.get('location')
         })
       );

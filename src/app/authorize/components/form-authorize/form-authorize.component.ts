@@ -120,22 +120,13 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
     this.window.location.href = val
   }
 
-  
-  
-  
-  
-  
-  
-  
-  
   authorize(value = true) {
     this.loadingAuthorizeEndpoint = true
 
     this._togglz.getStateOf('OAUTH_AUTHORIZATION').pipe(                        
           tap((useAuthServerFlag) => {        
             if (useAuthServerFlag === true) {
-              this._oauth.authorizeOnAuthServer(this.oauthRequest).subscribe((redirectUrl) => {
-                  console.log('Redirect url: ' + redirectUrl)
+              this._oauth.authorizeOnAuthServer(this.oauthRequest).subscribe((redirectUrl) => {                  
                   this.redirectUrl.next(redirectUrl)
                 })
             } else {
@@ -145,19 +136,6 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
             }
           })).subscribe();            
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   getIconName(ScopeObject: Scope): string {
     const scope = ScopeObject.value
