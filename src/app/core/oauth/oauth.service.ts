@@ -37,8 +37,7 @@ const OAUTH_SESSION_ERROR_CODES_HANDLE_BY_CLIENT_APP = [
 })
 export class OauthService {
   private headers: HttpHeaders
-  private requestInfoSubject = new ReplaySubject<RequestInfoForm>(1)
-  private redirectUriSubject = new ReplaySubject<string>(1)
+  private requestInfoSubject = new ReplaySubject<RequestInfoForm>(1)  
   private declareOauthSession$
 
   constructor(
@@ -134,15 +133,16 @@ export class OauthService {
     }    
 
     return this._http
-      .post(
+      .post<any>(
         runtimeEnvironment.AUTH_SERVER + 'oauth2/authorize',
         body,
-        { headers: headers, withCredentials: true }
+        { headers: headers, withCredentials: true, observe: 'response' as const }
       )
       .pipe(        
-        switchMap((response: HttpResponse<any>) => {
-          console.log('Just got the response: ' + response)          
-          return of(response.headers.get('location'));
+        map(res => {
+          console.log('Im here:')
+          res.headers.keys().forEach(k => console.log(`${k}: ${res.headers.get(k)}`));          
+          return res.headers.get('location')
         })
       );
   }
