@@ -133,22 +133,22 @@ export class OauthService {
       body = body.append('scope', s.value);
     }    
 
-    return this._http
-      .post(
-        runtimeEnvironment.AUTH_SERVER + 'oauth2/authorize',
-        body,
-        { headers, withCredentials: true }
-      )
-      .pipe(
-        tap((res: HttpResponse<any>) => {
-          console.log('—--- Response headers —---');
-          res.headers.keys().forEach(key =>
-            console.log(`${key}: ${res.headers.get(key)}`)
-          );
-          console.log('———————————————');
-        }),
-        switchMap(res => of(res.headers.get('location')))
-      );
+    return this._http.post<any>(
+      `${runtimeEnvironment.AUTH_SERVER}oauth2/authorize`,
+      body,
+      {
+        headers,
+        withCredentials: true,
+        observe: 'response' as const   // 👈 key line
+      }
+    ).pipe(
+      tap((res: HttpResponse<any>) => {
+        console.log('—- Response headers —-');
+        res.headers.keys().forEach(k => console.log(`${k}: ${res.headers.get(k)}`));
+        console.log('———————————————');
+      }),
+      map(res => res.headers.get('location'))   // same logic as before
+    );
   }
 
   /**
