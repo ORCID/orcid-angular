@@ -316,26 +316,17 @@ export class UserService {
     const $nameForm = this.getNameForm().pipe(this.handleErrors)    
     const $thirdPartyAuthData = this.getThirdPartySignInData()
 
-
-
-
-
     const $oauthSession = this._togglz.getStateOf('OAUTH_AUTHORIZATION').pipe(
       take(1),
-      switchMap((useAuthServerFlag) => {
-        console.log('-------------------------');
-        console.log('handleUserDataUpdate, flag value: ' + useAuthServerFlag);
-        console.log('-------------------------');
+      switchMap((useAuthServerFlag) => {        
         if (useAuthServerFlag === true) {
           return this.getOauthSessionFromAuthServer()
         } else {
           return this.getOauthSession(updateParameters)
         }
-      }));
+       }
+      ));
     
-        
-
-
     return combineLatest([
       updateParameters.loggedIn ? $userInfo : of(undefined),
       updateParameters.loggedIn ? $nameForm : of(undefined),
@@ -352,15 +343,6 @@ export class UserService {
       }))
     )
   }
-
-
-
-
-
-
-
-
-
 
   private getOauthSessionFromAuthServer(updateParameters?: UserSessionUpdateParameters): Observable<RequestInfoForm> {    
     const params: Params = {}
