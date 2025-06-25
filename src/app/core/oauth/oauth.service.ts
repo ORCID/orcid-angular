@@ -139,7 +139,7 @@ export class OauthService {
       {
         headers,
         withCredentials: true,
-        observe: 'response' as const   // 👈 key line
+        observe: 'response' as const   
       }
     ).pipe(
       tap((res: HttpResponse<any>) => {
@@ -147,7 +147,7 @@ export class OauthService {
         res.headers.keys().forEach(k => console.log(`${k}: ${res.headers.get(k)}`));
         console.log('———————————————');
       }),
-      map(res => res.headers.get('location'))   // same logic as before
+      map(res => res.headers.get('location'))   
     );
   }
 
