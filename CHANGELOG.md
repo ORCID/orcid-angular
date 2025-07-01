@@ -1,3 +1,9 @@
+## v2.116.9 - 2025-07-01
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.116.8...v2.116.9)
+
+- [#2553](https://github.com/ORCID/orcid-angular/pull/2553): jun-30-fixes
+
 ## v2.116.8 - 2025-06-21
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.116.7...v2.116.8)
