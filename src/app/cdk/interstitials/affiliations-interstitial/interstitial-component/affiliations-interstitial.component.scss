@@ -253,10 +253,6 @@ mat-label.orc-font-small-print {
 }
 
 :host ::ng-deep {
-  .mat-mdc-icon-button {
-    height: 1.6em !important;
-    width: 1.6em !important;
-  }
 
   mat-error {
     margin-top: 8px;
