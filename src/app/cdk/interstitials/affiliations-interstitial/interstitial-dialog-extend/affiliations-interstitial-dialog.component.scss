@@ -15,7 +15,11 @@ mat-card-header.authorize-header {
   }
 }
 
-:host.columns-12 {
-  padding: 40px;
-  display: block;
+::ng-deep {
+  .interstitial-dialog {
+    .mat-mdc-dialog-surface {
+      padding: 40px;
+      display: block;
+    }
+  }
 }

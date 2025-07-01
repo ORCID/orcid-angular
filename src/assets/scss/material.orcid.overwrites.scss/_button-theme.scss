@@ -15,6 +15,9 @@
   .mat-mdc-button.orcid-button-light-grey {
     background-color: map-get($background, light-grey);
   }
+  button.mat-mdc-raised-button.mat-unthemed {
+    border-color: $divider-color;
+  }
 }
 
 .mat-mdc-button.mat-unthemed {
@@ -22,4 +25,20 @@
 }
 button.mat-mdc-icon-button {
   --mdc-icon-button-icon-size: 14px;
+}
+
+mat-paginator button.mat-mdc-icon-button {
+  --mdc-icon-button-icon-size: revert;
+}
+
+button.mat-mdc-raised-button {
+  @include mat.elevation(0);
+  &:hover,
+  &:focus,
+  &:active {
+    box-shadow: none !important; // kill the shadow
+  }
+  &.mat-unthemed {
+    border: solid 1px;
+  }
 }
