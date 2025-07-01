@@ -166,6 +166,7 @@ export class AppComponent {
       case ApplicationRoutes.register:
       case ApplicationRoutes.authorize:
       case ApplicationRoutes.search:
+      case ApplicationRoutes.institutionalLinking:
         this.spacing = true
         break
       default:

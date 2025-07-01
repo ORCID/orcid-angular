@@ -23,6 +23,9 @@ label.mat-caption {
 mat-radio-group {
   display: flex;
   flex-direction: column;
+  mat-radio-button {
+    padding-top: 8px;
+  }
 }
 
 .top-bar {
