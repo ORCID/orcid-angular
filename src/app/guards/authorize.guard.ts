@@ -49,27 +49,22 @@ export class AuthorizeGuard {
             oauthSession.forceLogin ||
             !session.oauthSessionIsLoggedIn
           ) {
-            return this.redirectToLoginPage(oauthSession)
+            return this.redirectToLoginPage()
+          } else {
+            return of(true)
           }
+        } else {
+          return this.redirectToLoginPage()
         }
-        return of(true)
       })
     )
   }
 
-  private redirectToLoginPage(
-    oauthSession: RequestInfoForm
-  ): Observable<UrlTree> {
-    // TODO @leomendoza123 @danielPalafox is adding the empty oauth parameters really required?
-    // seems is never consumed or check by the frontend and it will never hit the backend on a frontend route
-
+  private redirectToLoginPage(): Observable<UrlTree> {
     return this._platform.get().pipe(
       map((platform) => {
         const newQueryParams = {
           ...platform.queryParameters,
-          // The router is removing parameters from the url it necessary reassigned from the oauth session to preserve all the parameters
-          // related to
-          redirect_uri: oauthSession.redirectUrl,
         }
         return this._router.createUrlTree(['/signin'], {
           queryParams: newQueryParams,

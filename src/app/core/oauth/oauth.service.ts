@@ -1,4 +1,5 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http'
+import { CustomEncoder } from '../custom-encoder/custom.encoder'
 import { Inject, Injectable } from '@angular/core'
 import { Router } from '@angular/router'
 import { NEVER, Observable, of, ReplaySubject } from 'rxjs'
@@ -22,6 +23,7 @@ import { SignInData } from '../../types/sign-in-data.endpoint'
 import { TwoFactor } from '../../types/two-factor.endpoint'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { objectToUrlParameters } from '../../constants'
+import { CookieService } from 'ngx-cookie-service'
 
 const OAUTH_SESSION_ERROR_CODES_HANDLE_BY_CLIENT_APP = [
   'login_required',
@@ -35,13 +37,14 @@ const OAUTH_SESSION_ERROR_CODES_HANDLE_BY_CLIENT_APP = [
 })
 export class OauthService {
   private headers: HttpHeaders
-  private requestInfoSubject = new ReplaySubject<RequestInfoForm>(1)
+  private requestInfoSubject = new ReplaySubject<RequestInfoForm>(1)  
   private declareOauthSession$
 
   constructor(
     private _http: HttpClient,
     private _errorHandler: ErrorHandlerService,
     private _router: Router,
+    private _cookie: CookieService,
     @Inject(WINDOW) private window: Window
   ) {
     this.headers = new HttpHeaders({
@@ -106,6 +109,40 @@ export class OauthService {
           this.requestInfoSubject.next(requestInfo)
         })
       )
+  }
+
+  authorizeOnAuthServer(data: RequestInfoForm): Observable<string> {
+    let headers = new HttpHeaders()
+    headers = headers.set(
+      'Access-Control-Allow-Origin',
+      runtimeEnvironment.AUTH_SERVER
+    )
+    headers = headers.set(
+      'Content-Type',
+      'application/x-www-form-urlencoded'
+    )
+    let csrf = this._cookie.get('AUTH-XSRF-TOKEN')
+    headers = headers.set('x-xsrf-token', csrf)
+    
+    let body = new HttpParams({ encoder: new CustomEncoder() })
+      .set('client_id', data.clientId)
+      .set('state', data.oauthState)
+    
+    for(var s of data.scopes) {
+      body = body.append('scope', s.value);
+    }    
+
+    return this._http
+      .post<any>(
+        runtimeEnvironment.AUTH_SERVER + 'oauth2/authorize',
+        body,
+        { headers: headers, withCredentials: true, observe: 'response' }
+      )
+      .pipe(        
+        map((res: HttpResponse<any>) => {
+          return res.headers.get('location')
+        })
+      );
   }
 
   /**
