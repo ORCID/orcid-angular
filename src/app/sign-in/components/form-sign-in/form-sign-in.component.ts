@@ -322,7 +322,6 @@ export class FormSignInComponent implements OnInit, OnDestroy {
         map((value) => value.oauthSession)
       )
       .subscribe((requestInfoForm: RequestInfoForm) => {
-        console.log('-> ', requestInfoForm)
         if (requestInfoForm.error === 'invalid_grant') {
           this.isOauthError.next(true)
           this.authorizationFormSubmitted = false
@@ -334,14 +333,12 @@ export class FormSignInComponent implements OnInit, OnDestroy {
   }
 
   oauthAuthorize(urlRedirect) {
-    console.log('oauthAuthorize', urlRedirect)
     if (
       (this.platform.social || this.platform.institutional) &&
       !isRedirectToTheAuthorizationPage({ url: urlRedirect })
     ) {
       this.navigateTo(urlRedirect)
     } else {
-      console.log('SignInLocal params', this.signInLocal.params)
       this._router.navigate(['/oauth/authorize'], {
         queryParams: { ...this.signInLocal.params, prompt: undefined },
       })
