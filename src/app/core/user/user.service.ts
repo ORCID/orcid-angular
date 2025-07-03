@@ -325,7 +325,7 @@ export class UserService {
           return this.getOauthSession(updateParameters)
         }
       }),
-      this.handleErrors
+      this.handleOauthErrors
     )
 
     return combineLatest([
@@ -363,7 +363,7 @@ export class UserService {
         runtimeEnvironment.AUTH_SERVER +
           'oauth2/authorize' +
           this.window.location.search,
-        { withCredentials: true }
+        { withCredentials: true, headers: { accept: 'application/json' } }
       )
       .pipe(
         switchMap((response) => {
@@ -523,9 +523,9 @@ export class UserService {
       return undefined
     }
   }
-  private handleErrors(gerUserInfo: Observable<any>) {
+  private handleErrors(error: Observable<any>) {
     return (
-      gerUserInfo
+      error
         .pipe(
           // If UserInfo.json or nameForm.json give an error it retries only if the user is currently logged in
           //
@@ -552,6 +552,14 @@ export class UserService {
         // TODO @angel we need to avoid sending HTTP errors back from the backend on this scenario
         // so we can better interpret real errors here
         .pipe(catchError((error) => of(null)))
+    )
+  }
+
+  private handleOauthErrors(error: Observable<any>) {
+    return error.pipe(
+      catchError((error) => {
+        return of({ error: error?.error?.text })
+      })
     )
   }
 
