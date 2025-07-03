@@ -11,7 +11,7 @@
     color: mat.get-color-from-palette($primary);
   }
 
-  .sign-in-to-orcid-button {
+  button.sign-in-to-orcid-button {
     color: $orcid-light-primary-text;
     background: mat.get-color-from-palette($primary, 700);
   }

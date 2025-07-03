@@ -92,6 +92,8 @@ export abstract class LoginBaseInterstitialManagerService<
       autoFocus: false,
       restoreFocus: false,
       maxHeight: 'calc(100vh - 20px)',
+      maxWidth: '98vw',
+      panelClass: 'interstitial-dialog',
     }
   }
   getInterstitialTogglz(toggglzPrefix: 'OAUTH' | 'LOGIN'): Observable<boolean> {
