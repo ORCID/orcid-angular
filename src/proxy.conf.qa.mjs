@@ -42,10 +42,20 @@ function responseOverridesAuth() {
     if (proxyRes.statusCode >= 300 && proxyRes.statusCode < 400) {
       let location = proxyRes.headers['location']
       if (typeof location === 'string') {
-        proxyRes.headers['location'] = location.replace(
-          'http://auth.qa.orcid.org/login',
-          'http://localhost:4200/auth/login'
-        )
+        proxyRes.headers['PROXY-ORIGINAL-location'] = location
+        proxyRes.headers['location'] = location
+          .replace(
+            'http://auth.qa.orcid.org/login',
+            'http://localhost:4200/auth/login'
+          )
+          .replace(
+            'https://auth.qa.orcid.org/generateAuthorizationInfo',
+            'http://localhost:4200/auth/generateAuthorizationInfo'
+          )
+          .replace(
+            'https://auth.qa.orcid.org/login',
+            'http://localhost:4200/auth/login'
+          )
       }
     }
   }
