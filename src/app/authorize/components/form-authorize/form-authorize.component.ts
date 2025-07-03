@@ -9,7 +9,14 @@ import {
 } from '@angular/core'
 import { Router } from '@angular/router'
 import { forkJoin, Observable, Subject } from 'rxjs'
-import { catchError, map, take, takeUntil, switchMap, tap } from 'rxjs/operators'
+import {
+  catchError,
+  map,
+  take,
+  takeUntil,
+  switchMap,
+  tap,
+} from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { ApplicationRoutes } from 'src/app/constants'
@@ -66,7 +73,7 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
     private _errorHandler: ErrorHandlerService,
     private _trustedIndividuals: TrustedIndividualsService,
     private _titleService: Title,
-    private _togglz: TogglzService,
+    private _togglz: TogglzService
   ) {}
 
   ngOnInit(): void {
@@ -123,18 +130,24 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
   authorize(value = true) {
     this.loadingAuthorizeEndpoint = true
 
-    this._togglz.getStateOf('OAUTH_AUTHORIZATION').pipe(                        
-          tap((useAuthServerFlag) => {        
-            if (useAuthServerFlag === true) {
-              this._oauth.authorizeOnAuthServer(this.oauthRequest).subscribe((redirectUrl) => {                  
-                  this.redirectUrl.next(redirectUrl)
-                })
-            } else {
-              this._oauth.authorize(value).subscribe((data) => {
-                  this.redirectUrl.next(data.redirectUrl)
-                })
-            }
-          })).subscribe();            
+    this._togglz
+      .getStateOf('OAUTH_AUTHORIZATION')
+      .pipe(
+        tap((useAuthServerFlag) => {
+          if (useAuthServerFlag === true) {
+            this._oauth
+              .authorizeOnAuthServer(this.oauthRequest)
+              .subscribe((redirectUrl) => {
+                this.redirectUrl.next(redirectUrl)
+              })
+          } else {
+            this._oauth.authorize(value).subscribe((data) => {
+              this.redirectUrl.next(data.redirectUrl)
+            })
+          }
+        })
+      )
+      .subscribe()
   }
 
   getIconName(ScopeObject: Scope): string {

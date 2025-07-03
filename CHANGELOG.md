@@ -1,3 +1,10 @@
+## v2.117.1 - 2025-07-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.117.0...v2.117.1)
+
+- [#2551](https://github.com/ORCID/orcid-angular/pull/2551): Enable implicit flow
+- [#2555](https://github.com/ORCID/orcid-angular/pull/2555): Lmendoza/pd 890
+
 ## v2.117.0 - 2025-07-01
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.116.10...v2.117.0)
