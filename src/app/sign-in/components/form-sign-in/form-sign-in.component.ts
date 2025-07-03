@@ -113,14 +113,13 @@ export class FormSignInComponent implements OnInit, OnDestroy {
         session = session as UserSession
         platform = platform as PlatformInfo
         this.platform = platform
-        if (session.oauthSession) {
-          this.signInLocal.isOauth = true
-          _route.queryParams.subscribe((params) => {
-            this.signInLocal.params = {
-              ...(params as OauthParameters),
-            }
-          })
-        }
+        this.signInLocal.isOauth = true
+        _route.queryParams.subscribe((params) => {
+          this.signInLocal.params = {
+            ...(params as OauthParameters),
+          }
+          console.log('SignInLocal params', this.signInLocal.params)
+        })
 
         if (platform.social) {
           this.signInLocal.type = TypeSignIn.social
@@ -323,6 +322,7 @@ export class FormSignInComponent implements OnInit, OnDestroy {
         map((value) => value.oauthSession)
       )
       .subscribe((requestInfoForm: RequestInfoForm) => {
+        console.log('-> ', requestInfoForm)
         if (requestInfoForm.error === 'invalid_grant') {
           this.isOauthError.next(true)
           this.authorizationFormSubmitted = false
@@ -334,12 +334,14 @@ export class FormSignInComponent implements OnInit, OnDestroy {
   }
 
   oauthAuthorize(urlRedirect) {
+    console.log('oauthAuthorize', urlRedirect)
     if (
       (this.platform.social || this.platform.institutional) &&
       !isRedirectToTheAuthorizationPage({ url: urlRedirect })
     ) {
       this.navigateTo(urlRedirect)
     } else {
+      console.log('SignInLocal params', this.signInLocal.params)
       this._router.navigate(['/oauth/authorize'], {
         queryParams: { ...this.signInLocal.params, prompt: undefined },
       })
