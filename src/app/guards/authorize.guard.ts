@@ -37,6 +37,7 @@ export class AuthorizeGuard {
     return this._user.getUserSession().pipe(
       take(1),
       switchMap((session) => {
+        console.log('GUARD', session)
         const oauthSession = session.oauthSession
         if (session.userInfo?.LOCKED === 'true') {
           return of(this._router.createUrlTree(['/my-orcid']))
@@ -49,17 +50,18 @@ export class AuthorizeGuard {
             oauthSession.forceLogin ||
             !session.oauthSessionIsLoggedIn
           ) {
-            return this.redirectToLoginPage(oauthSession)
+            return this.redirectToLoginPage()
+          } else {
+            return of(true)
           }
+        } else {
+          return this.redirectToLoginPage()
         }
-        return of(true)
       })
     )
   }
 
-  private redirectToLoginPage(
-    oauthSession: RequestInfoForm
-  ): Observable<UrlTree> {
+  private redirectToLoginPage(): Observable<UrlTree> {
     // TODO @leomendoza123 @danielPalafox is adding the empty oauth parameters really required?
     // seems is never consumed or check by the frontend and it will never hit the backend on a frontend route
 
@@ -69,7 +71,7 @@ export class AuthorizeGuard {
           ...platform.queryParameters,
           // The router is removing parameters from the url it necessary reassigned from the oauth session to preserve all the parameters
           // related to
-          redirect_uri: oauthSession.redirectUrl,
+          //redirect_uri: oauthSession.redirectUrl,
         }
         return this._router.createUrlTree(['/signin'], {
           queryParams: newQueryParams,

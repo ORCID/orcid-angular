@@ -50,7 +50,7 @@ import { OauthService } from '../oauth/oauth.service'
 import { UserInfoService } from '../user-info/user-info.service'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { LOCAL_SESSION_UID } from 'src/app/constants'
-import { Params} from '@angular/router'
+import { Params } from '@angular/router'
 import { CookieService } from 'ngx-cookie-service'
 
 @Injectable({
@@ -313,20 +313,21 @@ export class UserService {
   }> {
     this.currentlyLoggedIn = updateParameters.loggedIn
     const $userInfo = this._userInfo.getUserInfo().pipe(this.handleErrors)
-    const $nameForm = this.getNameForm().pipe(this.handleErrors)    
+    const $nameForm = this.getNameForm().pipe(this.handleErrors)
     const $thirdPartyAuthData = this.getThirdPartySignInData()
 
     const $oauthSession = this._togglz.getStateOf('OAUTH_AUTHORIZATION').pipe(
       take(1),
-      switchMap((useAuthServerFlag) => {        
+      switchMap((useAuthServerFlag) => {
         if (useAuthServerFlag === true) {
           return this.getOauthSessionFromAuthServer()
         } else {
           return this.getOauthSession(updateParameters)
         }
-       }
-      ));
-    
+      }),
+      this.handleErrors
+    )
+
     return combineLatest([
       updateParameters.loggedIn ? $userInfo : of(undefined),
       updateParameters.loggedIn ? $nameForm : of(undefined),
@@ -344,38 +345,60 @@ export class UserService {
     )
   }
 
-  private getOauthSessionFromAuthServer(updateParameters?: UserSessionUpdateParameters): Observable<RequestInfoForm> {    
+  private getOauthSessionFromAuthServer(
+    updateParameters?: UserSessionUpdateParameters
+  ): Observable<RequestInfoForm> {
+    // If the user is not logged in, do not call
     const params: Params = {}
     new URLSearchParams(this.window.location.search).forEach(
       (value, key) => (params[key] = value)
     )
-    let clientId = params['client_id'];
+    let clientId = params['client_id']
     // Do not execute this call if the client_id param is not in the URL
-    if(clientId === undefined) {
-      return of(null);
+    if (clientId === undefined) {
+      return of(null)
     }
     return this._http
-          .get(
-            runtimeEnvironment.AUTH_SERVER + 'oauth2/authorize' + this.window.location.search, 
-            {withCredentials: true}
-          )
-          .pipe(            
-            switchMap((response) => 
-              {                                 
-                let scopesArray: Scope[] = []
-                for(const s of response['scopes'].split(' ')) {
-                  var scope: Scope = {value:s}
-                  scopesArray.push(scope)
-                }
-                var requestInfoForm: RequestInfoForm = {scopes:scopesArray, clientId:response['clientId'], 
-                  clientName:response['clientName'], clientDescription:response['clientDescription'], userOrcid:response['userOrcid'], 
-                  oauthState:response['state'], userName:response['userName'], errors:null, clientEmailRequestReason:null, memberName:null, 
-                  responseType:null, stateParam:null, userEmail:null, userGivenNames:null, userFamilyNames:null, nonce:null,
-                  clientHavePersistentTokens:null, scopesAsString:null, error:null, errorDescription:null, redirectUrl:null} as RequestInfoForm;
-                return of(requestInfoForm)
-              } 
-            )
-          )
+      .get(
+        runtimeEnvironment.AUTH_SERVER +
+          'oauth2/authorize' +
+          this.window.location.search,
+        { withCredentials: true }
+      )
+      .pipe(
+        switchMap((response) => {
+          console.log('Oauth session response', response)
+          let scopesArray: Scope[] = []
+          for (const s of response['scopes'].split(' ')) {
+            var scope: Scope = { value: s }
+            scopesArray.push(scope)
+          }
+          var requestInfoForm: RequestInfoForm = {
+            scopes: scopesArray,
+            clientId: response['clientId'],
+            clientName: response['clientName'],
+            clientDescription: response['clientDescription'],
+            userOrcid: response['userOrcid'],
+            oauthState: response['state'],
+            userName: response['userName'],
+            errors: null,
+            clientEmailRequestReason: null,
+            memberName: null,
+            responseType: null,
+            stateParam: null,
+            userEmail: null,
+            userGivenNames: null,
+            userFamilyNames: null,
+            nonce: null,
+            clientHavePersistentTokens: null,
+            scopesAsString: null,
+            error: null,
+            errorDescription: null,
+            redirectUrl: null,
+          } as RequestInfoForm
+          return of(requestInfoForm)
+        })
+      )
   }
 
   /**
@@ -500,7 +523,7 @@ export class UserService {
       return undefined
     }
   }
-  private handleErrors(gerUserInfo: Observable<UserInfo | NameForm>) {
+  private handleErrors(gerUserInfo: Observable<any>) {
     return (
       gerUserInfo
         .pipe(
