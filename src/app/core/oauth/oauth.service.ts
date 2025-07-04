@@ -10,6 +10,7 @@ import { Router } from '@angular/router'
 import { NEVER, Observable, of, ReplaySubject } from 'rxjs'
 import {
   catchError,
+  first,
   last,
   map,
   retry,
@@ -29,6 +30,7 @@ import { TwoFactor } from '../../types/two-factor.endpoint'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { objectToUrlParameters } from '../../constants'
 import { CookieService } from 'ngx-cookie-service'
+import { PlatformInfoService } from 'src/app/cdk/platform-info'
 
 const OAUTH_SESSION_ERROR_CODES_HANDLE_BY_CLIENT_APP = [
   'login_required',
@@ -50,7 +52,8 @@ export class OauthService {
     private _errorHandler: ErrorHandlerService,
     private _router: Router,
     private _cookie: CookieService,
-    @Inject(WINDOW) private window: Window
+    @Inject(WINDOW) private window: Window,
+    private _platform: PlatformInfoService
   ) {
     this.headers = new HttpHeaders({
       'Access-Control-Allow-Origin': '*',
