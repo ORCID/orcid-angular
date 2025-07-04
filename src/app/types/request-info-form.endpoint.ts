@@ -21,6 +21,7 @@ export interface RequestInfoForm {
   clientHavePersistentTokens: boolean
   scopesAsString: string
   error: Errors
+  errorCode?: string
   errorDescription: string
   forceLogin?: boolean
   oauthState?: string
