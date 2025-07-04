@@ -367,36 +367,70 @@ export class UserService {
       )
       .pipe(
         switchMap((response) => {
-          console.log('Oauth session response', response)
-          let scopesArray: Scope[] = []
-          for (const s of response['scopes'].split(' ')) {
-            var scope: Scope = { value: s }
-            scopesArray.push(scope)
-          }
-          var requestInfoForm: RequestInfoForm = {
-            scopes: scopesArray,
-            clientId: response['clientId'],
-            clientName: response['clientName'],
-            clientDescription: response['clientDescription'],
-            userOrcid: response['userOrcid'],
-            oauthState: response['state'],
-            userName: response['userName'],
-            errors: null,
-            clientEmailRequestReason: null,
-            memberName: null,
-            responseType: null,
-            stateParam: null,
-            userEmail: null,
-            userGivenNames: null,
-            userFamilyNames: null,
-            nonce: null,
-            clientHavePersistentTokens: null,
-            scopesAsString: null,
-            error: null,
-            errorDescription: null,
-            redirectUrl: null,
-          } as RequestInfoForm
-          return of(requestInfoForm)
+          console.log('Oauth session response', response)                    
+          if('error' in response && response['error'] === "oauth_error") {
+            console.log('There is an error in the response', response['error'])
+            let error = response['error'] 
+            let errorCode = response['errorCode']
+            let errorDescription = response['errorDescription']   
+            
+            var requestInfoForm: RequestInfoForm = {
+              scopes: [],
+              clientId: '',
+              clientName: '',
+              clientDescription: '',
+              userOrcid: '',
+              oauthState: '',
+              userName: '',
+              errors: null,
+              clientEmailRequestReason: null,
+              memberName: null,
+              responseType: null,
+              stateParam: null,
+              userEmail: null,
+              userGivenNames: null,
+              userFamilyNames: null,
+              nonce: null,
+              clientHavePersistentTokens: null,
+              scopesAsString: null,
+              error: error,
+              errorCode: errorCode,
+              errorDescription: errorDescription,
+              redirectUrl: null,
+            } as RequestInfoForm
+            return of(requestInfoForm)
+          } else{
+            let scopesArray: Scope[] = []
+            for (const s of response['scopes'].split(' ')) {
+              var scope: Scope = { value: s }
+              scopesArray.push(scope)
+            }          
+          
+            var requestInfoForm: RequestInfoForm = {
+              scopes: scopesArray,
+              clientId: response['clientId'],
+              clientName: response['clientName'],
+              clientDescription: response['clientDescription'],
+              userOrcid: response['userOrcid'],
+              oauthState: response['state'],
+              userName: response['userName'],
+              errors: null,
+              clientEmailRequestReason: null,
+              memberName: null,
+              responseType: null,
+              stateParam: null,
+              userEmail: null,
+              userGivenNames: null,
+              userFamilyNames: null,
+              nonce: null,
+              clientHavePersistentTokens: null,
+              scopesAsString: null,
+              error: null,
+              errorDescription: null,
+              redirectUrl: null,
+            } as RequestInfoForm
+            return of(requestInfoForm)
+          }          
         })
       )
   }
