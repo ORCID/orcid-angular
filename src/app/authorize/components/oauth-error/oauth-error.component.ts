@@ -18,6 +18,7 @@ export class OauthErrorComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   error = ''
+  errorCode = ''
   errorDescription = ''
   queryParams: OauthParameters
   oauthSession: RequestInfoForm
@@ -37,6 +38,7 @@ export class OauthErrorComponent implements OnInit, OnDestroy {
         platform = platform as PlatformInfo
         this.userSession = session
         this.error = session.oauthSession.error
+        this.errorCode = session.oauthSession.errorCode
         this.errorDescription = session.oauthSession.errorDescription
         this.queryParams = platform.queryParameters as OauthParameters
         this.oauthSession = session.oauthSession
