@@ -367,11 +367,11 @@ export class UserService {
       )
       .pipe(
         switchMap((response) => {
-          if('error' in response && response['error'] === "oauth_error") {
-            let error = response['error'] 
+          if ('error' in response && response['error'] === 'oauth_error') {
+            let error = response['error']
             let errorCode = response['errorCode']
-            let errorDescription = response['errorDescription']   
-            
+            let errorDescription = response['errorDescription']
+
             var requestInfoForm: RequestInfoForm = {
               scopes: [],
               clientId: '',
@@ -397,13 +397,13 @@ export class UserService {
               redirectUrl: null,
             } as RequestInfoForm
             return of(requestInfoForm)
-          } else{
+          } else {
             let scopesArray: Scope[] = []
             for (const s of response['scopes'].split(' ')) {
               var scope: Scope = { value: s }
               scopesArray.push(scope)
-            }          
-          
+            }
+
             var requestInfoForm: RequestInfoForm = {
               scopes: scopesArray,
               clientId: response['clientId'],
@@ -428,7 +428,7 @@ export class UserService {
               redirectUrl: null,
             } as RequestInfoForm
             return of(requestInfoForm)
-          }          
+          }
         })
       )
   }
