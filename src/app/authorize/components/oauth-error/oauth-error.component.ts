@@ -36,8 +36,6 @@ export class OauthErrorComponent implements OnInit, OnDestroy {
       .subscribe(([session, platform]) => {
         session = session as UserSession
         platform = platform as PlatformInfo
-        console.log("There is an error with the oauth request: ")
-        console.log(JSON.stringify(session))
         this.userSession = session
         this.error = session.oauthSession.error
         this.errorCode = session.oauthSession.errorCode

@@ -367,9 +367,7 @@ export class UserService {
       )
       .pipe(
         switchMap((response) => {
-          console.log('Oauth session response', response)                    
           if('error' in response && response['error'] === "oauth_error") {
-            console.log('There is an error in the response', response['error'])
             let error = response['error'] 
             let errorCode = response['errorCode']
             let errorDescription = response['errorDescription']   
