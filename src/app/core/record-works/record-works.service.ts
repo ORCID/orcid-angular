@@ -121,7 +121,8 @@ export class RecordWorksService {
           '&sortAsc=' +
           (options.sortAsc != null ? options.sortAsc : false) +
           `&pageSize=` +
-          options.pageSize
+          options.pageSize +
+          '&featuredOnly=false'
       )
       .pipe(
         retry(3),
