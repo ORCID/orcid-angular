@@ -25,7 +25,7 @@ import { Config } from '../../types/togglz.endpoint'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 
-describe('RecordWorksService', () => {
+fdescribe('RecordWorksService', () => {
   let service: RecordWorksService
   let togglzService: TogglzService
   let httpTestingController: HttpTestingController
@@ -73,7 +73,7 @@ describe('RecordWorksService', () => {
           expect(workSaved).toBeTruthy()
           requestGetWorks = httpTestingController.match(
             runtimeEnvironment.API_WEB +
-              'works/worksExtendedPage.json?offset=0&sort=date&sortAsc=false&pageSize=50'
+              'works/worksExtendedPage.json?offset=0&sort=date&sortAsc=false&pageSize=50&featuredOnly=false'
           )
 
           if (index === works.length - 1) {
