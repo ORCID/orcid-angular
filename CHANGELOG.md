@@ -1,3 +1,9 @@
+## v2.118.0 - 2025-07-14
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.117.3...v2.118.0)
+
+- [#2558](https://github.com/ORCID/orcid-angular/pull/2558): add featured works arg when fetching works
+
 ## v2.117.3 - 2025-07-07
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.117.2...v2.117.3)
