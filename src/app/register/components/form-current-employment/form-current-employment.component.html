@@ -65,7 +65,7 @@
     <div class="input-container" id="cy-org-dd-div">
       <mat-form-field
         appearance="outline"
-        class="mat-form-field-min"
+        class="mat-form-field-min no-hint"
         id="cy-org-dd-mat-form"
         [ngClass]="{
           'two-line-hint': selectedOrganizationFromDatabase?.value.length > 50,
@@ -171,7 +171,7 @@
       ><ng-container i18n="@@register.department">Department</ng-container>
       <label i18n="@@register.optional">(Optional)</label></mat-label
     >
-    <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+    <mat-form-field appearance="outline" [hideRequiredMarker]="true" class="no-hint"> 
       <input
         aria-labelledby="department-input-label"
         id="department-input"
@@ -200,7 +200,7 @@
       >
       <label i18n="@@register.optional">(Optional)</label></mat-label
     >
-    <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+    <mat-form-field appearance="outline" [hideRequiredMarker]="true" class="no-hint">
       <input
         aria-labelledby="role-input-label"
         id="role-input"

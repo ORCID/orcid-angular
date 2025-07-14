@@ -30,18 +30,16 @@
     color: map-get($foreground, 'state-warning-dark');
   }
 
-  input.mat-input-element {
+  input.mat-mdc-input-element {
     border: transparent;
     font-size: mat.font-size($config, body-1) !important;
   }
 
-  textarea.mat-input-element {
+  textarea.mat-mdc-input-element {
     font-size: mat.font-size($config, body-1) !important;
   }
 
-  .mat-select {
-    font-size: mat.font-size($config, body-1) !important;
-  }
+
   .externalIdBox {
     border-bottom: dashed
       mat.get-color-from-palette($background, ui-background-light) 1px;

@@ -435,7 +435,7 @@
             <mat-form-field
               id="funding-amount-input"
               appearance="outline"
-              class="mat-form-field-min no-hint input-container"
+              class="mat-form-field-min no-hint input-container no-hint"
             >
               <mat-select
                 [placeholder]="totalFundingAmountCurrency"
@@ -476,20 +476,23 @@
           >
             Amount should be a numeric value with format 1,234,567.89
           </mat-error>
-        </div>
-        <div class="row">
-          <mat-error
-            *ngIf="fundingForm.get('currencyCode').errors?.required"
-            i18n="@@funding.selectACurrencyCode"
-            class="mat-caption error-out-input-context"
-          >
-            Please select a currency
-          </mat-error>
+          <div class="row">
+            <mat-error
+              *ngIf="fundingForm.get('currencyCode').errors?.required"
+              i18n="@@funding.selectACurrencyCode"
+              class="mat-caption error-out-input-context"
+            >
+              Please select a currency
+            </mat-error>
+          </div>
         </div>
       </div>
 
       <!-- Start date  -->
-      <div class="input-container" formGroupName="startDateGroup">
+      <div
+        class="input-container mat-form-field-wrapper"
+        formGroupName="startDateGroup"
+      >
         <div class="row">
           <label
             class="mat-caption"
@@ -556,7 +559,7 @@
       </div>
 
       <!-- End date -->
-      <div class="row" formGroupName="endDateGroup">
+      <div class="row mat-form-field-wrapper" formGroupName="endDateGroup">
         <div class="row">
           <label
             class="mat-caption"

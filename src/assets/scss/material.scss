@@ -17,10 +17,6 @@
     - Remove all-legacy-component-themes once all legacy components are migrated
 */
 
-// Legacy component typographies
-@include mat.all-legacy-component-typographies(
-  $orcid-material-typography-legacy
-);
 
 // New component typographies
 @include mat.all-component-typographies($orcid-material-typography);

@@ -18,13 +18,18 @@
         >or</i
       >&nbsp;<ng-container i18n="@@account.orcidID"> ORCID iD </ng-container>
     </mat-label>
-    <mat-form-field appearance="outline" [hideRequiredMarker]="true" async>
+    <mat-form-field
+      appearance="outline"
+      [hideRequiredMarker]="true"
+      async
+      class="no-hint"
+    >
       <input
         aria-labelledby="username-input-label"
         id="username-input"
         formControlName="username"
         matInput
-        [attr.placeholder]="placeholderUsername"
+        [placeholder]="placeholderUsername"
         #firstInput
       />
     </mat-form-field>
@@ -71,14 +76,19 @@
       }"
       >Password
     </mat-label>
-    <mat-form-field appearance="outline" [hideRequiredMarker]="true" async>
+    <mat-form-field
+      appearance="outline"
+      [hideRequiredMarker]="true"
+      async
+      class="no-hint"
+    >
       <input
         id="password"
         type="password"
         aria-labelledby="password-input-label"
         formControlName="password"
         matInput
-        [attr.placeholder]="placeholderPassword"
+        [placeholder]="placeholderPassword"
       />
     </mat-form-field>
     <app-alert-message

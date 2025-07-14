@@ -13,7 +13,7 @@
   a {
     color: mat.get-color-from-palette($primary);
   }
-  mat-form-field.read-only .mat-form-field-flex {
+  mat-form-field.read-only .mat-mdc-text-field-wrapper {
     background-color: map-get($background, 'ui-background-lightest');
     color: map-get($foreground, 'text-dark-high');
   }
@@ -26,7 +26,6 @@
 }
 
 @include global-theme($orcid-app-theme);
-@include global-theme-typography($orcid-material-typography-legacy);
 
 .mat-menu-panel {
   overflow-x: hidden !important;

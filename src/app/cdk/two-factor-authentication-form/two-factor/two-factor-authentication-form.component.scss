@@ -26,56 +26,7 @@
   margin-top: 20px !important;
 }
 
-.input-container {
-  margin-bottom: 20px;
-  ::ng-deep {
-    mat-error {
-      margin-top: 8px !important;
-      font-size: 12px;
-    }
 
-    mat-form-field {
-      padding-top: 8px;
-
-      .mat-form-field-subscript-wrapper {
-        padding: 0;
-      }
-
-      .mat-form-field-wrapper {
-        padding-bottom: 2px;
-      }
-    }
-
-    .mat-form-field-appearance-outline {
-      .mat-form-field-wrapper {
-        margin: 0;
-
-        .mat-form-field-outline {
-          top: 0px;
-        }
-
-        .mat-form-field-prefix {
-          top: 0.35em;
-
-          mat-icon {
-            margin-inline-end: 8px;
-          }
-        }
-
-        .mat-form-field-flex {
-          .mat-form-field-infix {
-            border-top: 0px;
-            padding: 10px 0 10px 0;
-          }
-        }
-      }
-    }
-
-    mat-form-field.mat-form-field.mat-primary.mat-form-field-type-mat-input.mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-invalid {
-      margin-bottom: 0px;
-    }
-  }
-}
 
 p.enter-code {
   margin-top: 28px;

@@ -5,7 +5,7 @@ import { PasswordRecoveryRoutingModule } from './password-recovery-routing.modul
 import { PasswordRecoveryComponent } from './pages/password-recovery/password-recovery.component'
 import { MatButtonModule } from '@angular/material/button'
 import { MatLegacyChipsModule as MatChipsModule } from '@angular/material/legacy-chips'
-import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input'
+import { MatInputModule } from '@angular/material/input'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { FormDirectivesModule } from '../cdk/form-directives/form-directives.module'
