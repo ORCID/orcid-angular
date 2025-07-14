@@ -25,7 +25,7 @@ import { Config } from '../../types/togglz.endpoint'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 
-fdescribe('RecordWorksService', () => {
+describe('RecordWorksService', () => {
   let service: RecordWorksService
   let togglzService: TogglzService
   let httpTestingController: HttpTestingController
