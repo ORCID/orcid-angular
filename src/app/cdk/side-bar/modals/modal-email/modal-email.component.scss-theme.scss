@@ -29,22 +29,8 @@
     background: mat.get-color-from-palette($background, 'ui-background-light');
   }
 
-  ::ng-deep .mat-option-text {
-    color: black;
-  }
-
   .select-notifications-email {
     color: rgba(0, 0, 0, 0.12);
-  }
-
-  ::ng-deep .mat-select-placeholder {
-    color: black;
-  }
-
-  .disabled-select-notifications-email {
-    ::ng-deep .mat-select-placeholder {
-      color: rgba(black, 0.6);
-    }
   }
 
   .info {

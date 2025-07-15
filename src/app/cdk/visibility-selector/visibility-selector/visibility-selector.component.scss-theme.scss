@@ -85,23 +85,23 @@
   }
 
   ::ng-deep {
-    .mat-menu-item.selectedMenu.private-button:not([disabled]) {
+    .mat-mdc-menu-item.selectedMenu.private-button:not([disabled]) {
       background: rgba(171, 22, 0, 0.05);
     }
-    .mat-menu-item.selectedMenu.limited-button:not([disabled]) {
+    .mat-mdc-menu-item.selectedMenu.limited-button:not([disabled]) {
       background: rgba(255, 189, 50, 0.05);
     }
-    .mat-menu-item.selectedMenu.public-button:not([disabled]) {
+    .mat-mdc-menu-item.selectedMenu.public-button:not([disabled]) {
       background: rgba(0, 165, 0, 0.05);
     }
 
-    .mat-menu-item.selectedMenu.private-button:hover:not([disabled]) {
+    .mat-mdc-menu-item.selectedMenu.private-button:hover:not([disabled]) {
       background: rgba(171, 22, 0, 0.05);
     }
-    .mat-menu-item.selectedMenu.limited-button:hover:not([disabled]) {
+    .mat-mdc-menu-item.selectedMenu.limited-button:hover:not([disabled]) {
       background: rgba(255, 189, 50, 0.05);
     }
-    .mat-menu-item.selectedMenu.public-button:hover:not([disabled]) {
+    .mat-mdc-menu-item.selectedMenu.public-button:hover:not([disabled]) {
       background: rgba(0, 165, 0, 0.05);
     }
   }

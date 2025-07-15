@@ -1,11 +1,8 @@
 .input-container {
   max-width: 500px;
-  ::ng-deep .mat-form-field-wrapper {
-    padding-bottom: 25px !important;
-  }
 }
 
-.mat-form-field {
+.mat-mdc-form-field {
   width: 100%;
 }
 

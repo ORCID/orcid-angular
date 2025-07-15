@@ -23,7 +23,7 @@ import { HarnessLoader } from '@angular/cdk/testing'
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 import { ModalBiographyComponent } from '../../../record/components/top-bar/modals/modal-biography/modal-biography.component'
-import { MatLegacyMenuModule as MatMenuModule } from '@angular/material/legacy-menu'
+import { MatMenuModule } from '@angular/material/menu'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { MatDialogHarness } from '@angular/material/dialog/testing'

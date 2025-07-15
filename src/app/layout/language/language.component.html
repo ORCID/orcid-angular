@@ -28,9 +28,10 @@
       class="orcid-menu-item-small"
       [attr.aria-label]="language.value"
     >
-      <mat-icon *ngIf="language.key === locale">check</mat-icon>
-      <mat-icon *ngIf="language.key !== locale"></mat-icon>
-      {{ language.value }}
+      <div class="row middle space-between">
+        {{ language.value }}
+        <mat-icon *ngIf="language.key === locale">check</mat-icon>
+      </div>
     </button>
   </div>
 </mat-menu>

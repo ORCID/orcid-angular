@@ -2,20 +2,13 @@
   width: 100%;
 }
 
-::ng-deep .columns-4-or-8 .mat-form-field {
+::ng-deep .columns-4-or-8 .mat-mdc-form-field {
   width: 100%;
   margin-inline-end: auto;
 }
 
 .websites-list.cdk-drop-list-dragging .websites-box:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-}
-
-.description {
-  ::ng-deep .mat-form-field-wrapper {
-    padding-bottom: 16px !important;
-    margin-bottom: 4px;
-  }
 }
 
 .websites-input-line {
@@ -78,11 +71,11 @@
   }
 }
 
-.mat-form-field {
+.mat-mdc-form-field {
   width: 100%;
   margin-inline-end: 16px;
 }
-::ng-deep .columns-4-or-8 .mat-form-field {
+::ng-deep .columns-4-or-8 .mat-mdc-form-field {
   margin-inline-end: 0;
 }
 

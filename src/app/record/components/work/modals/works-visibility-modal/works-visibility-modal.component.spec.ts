@@ -20,7 +20,7 @@ import { SharedModule } from '../../../../../shared/shared.module'
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { ReactiveFormsModule } from '@angular/forms'
 import { VisibilitySelectorComponent } from 'src/app/cdk/visibility-selector/visibility-selector/visibility-selector.component'
-import { MatLegacyMenuModule } from '@angular/material/legacy-menu'
+import { MatMenuModule } from '@angular/material/menu'
 
 describe('WorksVisibilityModalComponent', () => {
   let component: WorksVisibilityModalComponent
@@ -33,7 +33,7 @@ describe('WorksVisibilityModalComponent', () => {
         RouterTestingModule,
         SharedModule,
         ReactiveFormsModule,
-        MatLegacyMenuModule,
+        MatMenuModule,
       ],
       declarations: [
         WorksVisibilityModalComponent,
