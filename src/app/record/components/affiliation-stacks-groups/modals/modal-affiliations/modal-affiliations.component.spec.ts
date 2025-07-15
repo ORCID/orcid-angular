@@ -8,10 +8,7 @@ import { PlatformInfoService } from '../../../../../cdk/platform-info'
 import { ErrorHandlerService } from '../../../../../core/error-handler/error-handler.service'
 import { SnackbarService } from '../../../../../cdk/snackbar/snackbar.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
-import {
-  MatMenuModule,
-  MatMenu,
-} from '@angular/material/menu'
+import { MatMenuModule, MatMenu } from '@angular/material/menu'
 
 import {
   MAT_DIALOG_DATA,

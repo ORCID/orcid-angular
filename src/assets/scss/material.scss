@@ -10,10 +10,8 @@
 // ORCID Material Theming (SCSS)
 // ----------------------------------------------------------------------------
 
-
 // New component typographies
 @include mat.all-component-typographies($orcid-material-typography);
-
 
 // Core Material styles
 @include mat.core();
@@ -29,7 +27,6 @@
 // ----------------------------------------------------------------------------
 // Material Components Global CSS Overwrites
 // ----------------------------------------------------------------------------
-
 
 // Button
 @import './material.orcid.overwrites.scss/button.scss';

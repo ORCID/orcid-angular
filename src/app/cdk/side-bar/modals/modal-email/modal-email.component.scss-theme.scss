@@ -28,11 +28,11 @@
   .separator {
     background: mat.get-color-from-palette($background, 'ui-background-light');
   }
- 
+
   .select-notifications-email {
     color: rgba(0, 0, 0, 0.12);
   }
-  
+
   .info {
     border-color: mat.get-color-from-palette(
       $foreground,

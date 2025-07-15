@@ -10,10 +10,7 @@ import {
 } from '@angular/core'
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms'
 import { ErrorStateMatcher } from '@angular/material/core'
-import {
-  MatSelect,
-  MatSelectChange,
-} from '@angular/material/select'
+import { MatSelect, MatSelectChange } from '@angular/material/select'
 import { WorkIdType, WorkRelationships } from 'src/app/types/works.endpoint'
 
 @Component({

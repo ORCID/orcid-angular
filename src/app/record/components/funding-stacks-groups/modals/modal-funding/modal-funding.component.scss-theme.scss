@@ -39,7 +39,6 @@
     font-size: mat.font-size($config, body-1) !important;
   }
 
-
   .externalIdBox {
     border-bottom: dashed
       mat.get-color-from-palette($background, ui-background-light) 1px;
