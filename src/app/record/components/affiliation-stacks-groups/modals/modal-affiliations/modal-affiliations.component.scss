@@ -104,10 +104,6 @@ label {
   .date-group {
     padding-bottom: 1.475em;
     .date {
-      /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
-      ::ng-deep .mat-form-field-wrapper {
-        padding-bottom: 0 !important;
-      }
       padding-left: 0;
     }
   }

@@ -29,7 +29,8 @@
 
 .date-inputs-container {
   text-align: center;
-
+  display: flex;
+  align-items: center;
   gap: 8px;
   .date-divider {
     line-height: 42px;
@@ -40,18 +41,4 @@
   }
 }
 
-::ng-deep {
-  /* TODO(mdc-migration): The following rule targets internal classes of select that may no longer apply for the MDC version. */
-  /* TODO(mdc-migration): The following rule targets internal classes of select that may no longer apply for the MDC version. */
-  /* TODO(mdc-migration): The following rule targets internal classes of select that may no longer apply for the MDC version. */
-  mat-select {
-    /* TODO(mdc-migration): The following rule targets internal classes of select that may no longer apply for the MDC version. */
-    /* TODO(mdc-migration): The following rule targets internal classes of select that may no longer apply for the MDC version. */
-    .mat-select-trigger {
-      /* TODO(mdc-migration): The following rule targets internal classes of select that may no longer apply for the MDC version. */
-      .mat-select-arrow-wrapper {
-        height: 0;
-      }
-    }
-  }
-}
+

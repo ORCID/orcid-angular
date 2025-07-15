@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { VisibilitySelectorComponent } from './visibility-selector.component'
-import { MatLegacyMenuModule as MatMenuModule } from '@angular/material/legacy-menu'
+import { MatMenuModule } from '@angular/material/menu'
 import { MatButtonModule } from '@angular/material/button'
 import { WINDOW_PROVIDERS } from '../../window'
 

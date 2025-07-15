@@ -6,9 +6,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { MatSelectModule } from '@angular/material/select'
 import { SharedModule } from 'src/app/shared/shared.module'
 import {
-  MatLegacyMenu,
-  MatLegacyMenuModule,
-} from '@angular/material/legacy-menu'
+  MatMenu,
+} from '@angular/material/menu'
 import { MatMenuModule } from '@angular/material/menu'
 import { MatButtonModule } from '@angular/material/button'
 import { MatInputModule } from '@angular/material/input'
@@ -22,7 +21,7 @@ import { MatIconModule } from '@angular/material/icon'
     ReactiveFormsModule,
     MatSelectModule,
     SharedModule,
-    MatLegacyMenuModule,
+    MatMenuModule,
     MatInputModule,
     MatIconModule,
   ],

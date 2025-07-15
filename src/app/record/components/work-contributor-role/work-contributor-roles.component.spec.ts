@@ -16,7 +16,6 @@ import { MatSelectModule } from '@angular/material/select'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 import { By } from '@angular/platform-browser'
 import { DebugElement } from '@angular/core'
-import { MatLegacySelectHarness as MatSelectHarness } from '@angular/material/legacy-select/testing'
 import { Contributor } from '../../../types'
 import { MatIconModule } from '@angular/material/icon'
 import { MatIconHarness } from '@angular/material/icon/testing'
@@ -35,6 +34,7 @@ import { Overlay } from '@angular/cdk/overlay'
 import { getUserRecord } from '../../../core/record/record.service.spec'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { MatSelectHarness } from '@angular/material/select/testing'
 
 describe('WorkContributorRoleComponent', () => {
   let component: WorkContributorRolesComponent

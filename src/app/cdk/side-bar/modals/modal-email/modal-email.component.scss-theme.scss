@@ -28,26 +28,11 @@
   .separator {
     background: mat.get-color-from-palette($background, 'ui-background-light');
   }
-  /* TODO(mdc-migration): The following rule targets internal classes of option that may no longer apply for the MDC version. */
-  ::ng-deep .mat-option-text {
-    color: black;
-  }
-
+ 
   .select-notifications-email {
     color: rgba(0, 0, 0, 0.12);
   }
-  /* TODO(mdc-migration): The following rule targets internal classes of select that may no longer apply for the MDC version. */
-  ::ng-deep .mat-select-placeholder {
-    color: black;
-  }
-
-  .disabled-select-notifications-email {
-    /* TODO(mdc-migration): The following rule targets internal classes of select that may no longer apply for the MDC version. */
-    ::ng-deep .mat-select-placeholder {
-      color: rgba(black, 0.6);
-    }
-  }
-
+  
   .info {
     border-color: mat.get-color-from-palette(
       $foreground,

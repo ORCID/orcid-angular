@@ -9,9 +9,9 @@ import { ErrorHandlerService } from '../../../../../core/error-handler/error-han
 import { SnackbarService } from '../../../../../cdk/snackbar/snackbar.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import {
-  MatLegacyMenuModule,
-  MatLegacyMenu as MatMenu,
-} from '@angular/material/legacy-menu'
+  MatMenuModule,
+  MatMenu,
+} from '@angular/material/menu'
 
 import {
   MAT_DIALOG_DATA,
@@ -43,7 +43,7 @@ describe('ModalAffiliationsComponent', () => {
         RouterTestingModule,
         SharedModule,
         MatSelectModule,
-        MatLegacyMenuModule,
+        MatMenuModule,
         ReactiveFormsModule,
         BrowserAnimationsModule,
         MatFormFieldModule,

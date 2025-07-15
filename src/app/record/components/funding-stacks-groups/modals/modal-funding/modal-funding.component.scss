@@ -118,16 +118,12 @@ mat-radio-group {
   margin-bottom: 16px;
 }
 
-.mat-form-field-wrapper {
+.form-field-wrapper {
   padding-bottom: 16px;
 }
 
 .language {
   padding-bottom: 1.475em;
-  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
-  ::ng-deep .mat-form-field-wrapper {
-    padding-bottom: 0 !important;
-  }
 
   mat-error {
     padding: 0 1em;

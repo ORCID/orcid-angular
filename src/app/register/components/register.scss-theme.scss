@@ -82,8 +82,7 @@
       mat-icon {
         color: map-get($foreground, 'brand-primary-dark');
       }
-      /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
-      .mat-form-field-outline {
+      .mat-mdc-text-field-wrapper {
         color: map-get($foreground, 'brand-primary-dark');
         background-color: mat.get-color-from-palette(
           $background,
@@ -93,8 +92,7 @@
     }
 
     .disable-error {
-      /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
-      .mat-form-field-outline {
+      .mat-mdc-text-field-wrapper {
         color: rgba(0, 0, 0, 0.12) !important;
       }
       .mat-mdc-input-element {

@@ -2,27 +2,13 @@
   // This SCSS rules are part of a temporal fix for a MatFormField issue.
   // This is intended to be remove once Angular release the fix
   // More info on: src\app\search\components\advance-search\advance-search.component.ts
-  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
-  .mat-form-field-appearance-outline .mat-form-field-outline-start {
-    border-right-style: none;
-    border-left-style: solid;
-    border-radius: 5px 0 0 5px;
-  }
+
   .mat-mdc-form-field {
     text-align: left;
   }
-  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
-  .mat-form-field-appearance-outline .mat-form-field-outline-end {
-    border-left-style: none;
-    border-right-style: solid;
-    border-radius: 0 5px 5px 0;
-  }
+
 }
 
-/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
-.mat-form-field-infix {
-  border-top: 0.8em solid transparent;
-}
 
 .mat-form-field-appearance-outline.two-line-hint {
   margin-bottom: 1.6em;
@@ -33,41 +19,11 @@
 }
 
 .no-hint {
-  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
   .mat-mdc-form-field-subscript-wrapper {
     display: none;
   }
   .mat-mdc-form-field-subscript-wrapper.mat-mdc-form-field-bottom-align {
     display: none;
-  }
-}
-
-.mat-form-field-appearance-outline.mat-form-field-min {
-  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
-  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
-  /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
-  .mat-mdc-text-field-wrapper {
-    /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
-    .mat-form-field-outline {
-      top: 0px;
-    }
-    /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
-    .mat-form-field-prefix {
-      top: 0.35em;
-
-      mat-icon {
-        margin-inline-end: 8px;
-      }
-    }
-    /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
-    /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
-    .mat-form-field-flex {
-      /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
-      .mat-form-field-infix {
-        border-top: 0px;
-        padding: 10px 0 10px 0;
-      }
-    }
   }
 }
 

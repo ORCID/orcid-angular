@@ -16,7 +16,7 @@ import { PanelDataLineComponent } from './panel-data-line/panel-data-line.compon
 import { PanelElementSourceComponent } from './panel-element-source/panel-element-source.component'
 import { MatDividerModule } from '@angular/material/divider'
 import { PanelExpandButtonsComponent } from './panel-expand-buttons/panel-expand-buttons.component'
-import { MatLegacyMenuModule as MatMenuModule } from '@angular/material/legacy-menu'
+import { MatMenuModule } from '@angular/material/menu'
 import { SortLabelPipe } from './sort-label.pipe'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'

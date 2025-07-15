@@ -10,7 +10,7 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms'
-import { MatLegacyChip as MatChip } from '@angular/material/legacy-chips'
+import { MatChip } from '@angular/material/chips'
 import { matFormFieldAnimations } from '@angular/material/form-field'
 import { Observable } from 'rxjs'
 import { WINDOW } from 'src/app/cdk/window'
