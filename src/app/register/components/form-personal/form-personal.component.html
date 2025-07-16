@@ -13,13 +13,18 @@
       }"
       >Given names</mat-label
     >
-    <mat-form-field appearance="outline" [hideRequiredMarker]="true" async>
+    <mat-form-field
+      appearance="outline"
+      [hideRequiredMarker]="true"
+      async
+      class="no-hint"
+    >
       <input
         aria-labelledby="given-names-input-label"
         id="given-names-input"
         formControlName="givenNames"
         matInput
-        [attr.placeholder]="labelNameYouMostCommonly"
+        [placeholder]="labelNameYouMostCommonly"
       />
     </mat-form-field>
 
@@ -58,7 +63,11 @@
         >(Optional)</label
       ></mat-label
     >
-    <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+    <mat-form-field
+      appearance="outline"
+      [hideRequiredMarker]="true"
+      class="no-hint"
+    >
       <input
         aria-labelledby="family-names-input-label"
         id="family-names-input"
@@ -113,6 +122,7 @@
       <mat-form-field
         appearance="outline"
         [hideRequiredMarker]="true"
+        class="no-hint"
         [ngClass]="{
           'valid-password-input':
             emailsAreValid || this.reactivation?.isReactivation,
@@ -241,6 +251,7 @@
   > -->
     <div class="input-container" *ngIf="!reactivation?.isReactivation">
       <mat-form-field
+        class="no-hint"
         appearance="outline"
         [hideRequiredMarker]="true"
         [ngClass]="{ 'valid-password-input': emailsAreValid }"
@@ -255,7 +266,7 @@
           autocomplete="off"
           type="email"
           id="confirm-email-input"
-          [attr.placeholder]="labelConfirmEmail"
+          [placeholder]="labelConfirmEmail"
           [attr.aria-label]="arialabelConfirmEmail"
         />
       </mat-form-field>

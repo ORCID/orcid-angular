@@ -73,7 +73,7 @@ describe('RecordWorksService', () => {
           expect(workSaved).toBeTruthy()
           requestGetWorks = httpTestingController.match(
             runtimeEnvironment.API_WEB +
-              'works/worksExtendedPage.json?offset=0&sort=date&sortAsc=false&pageSize=50'
+              'works/worksExtendedPage.json?offset=0&sort=date&sortAsc=false&pageSize=50&featuredOnly=false'
           )
 
           if (index === works.length - 1) {

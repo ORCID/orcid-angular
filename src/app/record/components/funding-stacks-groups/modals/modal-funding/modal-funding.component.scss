@@ -26,11 +26,11 @@ hr {
   }
 }
 
-.mat-form-field {
+.mat-mdc-form-field {
   width: 100%;
 }
 
-.mat-option {
+.mat-mdc-option {
   height: 64px;
   line-height: 32px;
 }
@@ -108,10 +108,6 @@ mat-radio-group {
   justify-content: flex-end;
 }
 
-.error-out-input-context {
-  padding: 0 8px;
-}
-
 .input-container {
   max-width: 402px;
 }
@@ -121,12 +117,12 @@ mat-radio-group {
   margin-bottom: 16px;
 }
 
+.form-field-wrapper {
+  padding-bottom: 16px;
+}
+
 .language {
   padding-bottom: 1.475em;
-
-  ::ng-deep .mat-form-field-wrapper {
-    padding-bottom: 0 !important;
-  }
 
   mat-error {
     padding: 0 1em;
@@ -134,7 +130,7 @@ mat-radio-group {
   }
 }
 
-.mat-option {
+.mat-mdc-option {
   min-height: 64px;
   line-height: 32px;
   height: auto;

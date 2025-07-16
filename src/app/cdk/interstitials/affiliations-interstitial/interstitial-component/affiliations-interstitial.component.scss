@@ -111,7 +111,7 @@ mat-card-header.authorize-header {
   display: flex;
   flex-direction: column;
 }
-.mat-option {
+.mat-mdc-option {
   min-height: 64px;
   line-height: 32px;
   height: auto;
@@ -146,16 +146,6 @@ mat-card-header.authorize-header {
   }
   .date-input {
     width: 100px;
-  }
-}
-
-::ng-deep {
-  mat-select {
-    .mat-select-trigger {
-      .mat-select-arrow-wrapper {
-        height: 0;
-      }
-    }
   }
 }
 
@@ -249,54 +239,6 @@ mat-label.orc-font-small-print {
     .mat-mdc-card.orcid-wizard {
       box-sizing: border-box;
     }
-  }
-}
-
-:host ::ng-deep {
-  mat-error {
-    margin-top: 8px;
-    font-size: 12px;
-  }
-
-  mat-form-field {
-    padding-top: 8px;
-
-    .mat-form-field-subscript-wrapper {
-      padding: 0;
-    }
-
-    .mat-form-field-wrapper {
-      padding-bottom: 2px;
-    }
-  }
-
-  .mat-form-field-appearance-outline {
-    .mat-form-field-wrapper {
-      margin: 0;
-
-      .mat-form-field-outline {
-        top: 0px;
-      }
-
-      .mat-form-field-prefix {
-        top: 0.35em;
-
-        mat-icon {
-          margin-inline-end: 8px;
-        }
-      }
-
-      .mat-form-field-flex {
-        .mat-form-field-infix {
-          border-top: 0px;
-          padding: 10px 0 10px 0;
-        }
-      }
-    }
-  }
-
-  mat-form-field.mat-form-field.mat-primary.mat-form-field-type-mat-input.mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-invalid {
-    margin-bottom: 0px;
   }
 }
 

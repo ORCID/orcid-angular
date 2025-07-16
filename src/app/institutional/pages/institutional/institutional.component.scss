@@ -157,21 +157,12 @@ mat-label.orc-font-small-print {
 }
 
 :host {
-  ::ng-deep .mat-form-field-suffix {
-    button {
-      height: 24px;
-      mat-icon {
-        font-size: 18px;
-        line-height: 1.5 !important;
-      }
-    }
-  }
-  ::ng-deep .mat-form-field-subscript-wrapper {
+  ::ng-deep .mat-mdc-form-field-hint-wrapper {
     padding: 0 !important;
   }
 }
 
-.mat-option {
+.mat-mdc-option {
   min-height: 64px;
   line-height: 32px;
   height: auto;

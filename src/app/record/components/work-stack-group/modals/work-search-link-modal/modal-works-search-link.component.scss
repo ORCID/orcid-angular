@@ -16,10 +16,4 @@ h3 {
   mat-form-field {
     width: 100%;
   }
-
-  .search-link-select {
-    ::ng-deep .mat-form-field-wrapper {
-      padding-bottom: 1em !important;
-    }
-  }
 }

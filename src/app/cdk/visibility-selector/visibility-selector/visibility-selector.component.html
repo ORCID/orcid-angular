@@ -84,7 +84,7 @@
       noSelectedMenu: privacy !== 'PUBLIC' || visibilityError,
       selectedMenu: privacy === 'PUBLIC' && !visibilityError
     }"
-    class="public-button cy-visibility-public"
+    class="public-button cy-visibility-public flex-menu-item"
   >
     <div class="icon-circle icon-public">
       <svg
@@ -124,7 +124,7 @@
       noSelectedMenu: privacy !== 'LIMITED' || visibilityError,
       selectedMenu: privacy === 'LIMITED' && !visibilityError
     }"
-    class="limited-button cy-visibility-limited"
+    class="limited-button cy-visibility-limited flex-menu-item"
   >
     <div class="icon-circle icon-limited">
       <svg
@@ -152,7 +152,7 @@
     "
     mat-menu-item
     (click)="private()"
-    class="private-button cy-visibility-private"
+    class="private-button cy-visibility-private flex-menu-item"
     [ngClass]="{
       noSelectedMenu: privacy !== 'PRIVATE' || visibilityError,
       selectedMenu: privacy === 'PRIVATE' && !visibilityError

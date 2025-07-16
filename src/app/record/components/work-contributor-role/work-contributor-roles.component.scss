@@ -12,12 +12,8 @@
   .role {
     margin-bottom: 4px;
 
-    .mat-form-field {
+    .mat-mdc-form-field {
       width: 100%;
-    }
-
-    ::ng-deep .mat-form-field-wrapper {
-      padding-bottom: 1em !important;
     }
 
     .delete-button {

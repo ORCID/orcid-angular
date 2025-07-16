@@ -48,6 +48,9 @@
   .mat-mdc-card-content {
     padding: 0;
     font-size: 14px;
+    input {
+      font-size: 16px;
+    }
   }
 
   .columns-12 &,
