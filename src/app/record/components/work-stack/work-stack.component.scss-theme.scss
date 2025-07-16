@@ -23,6 +23,10 @@
         mat.get-color-from-palette($background, panel-shadow);
     }
   }
+
+  .featured {
+    background-color: transparent !important;
+  }
 }
 
 @include work-stack-theme($orcid-app-theme);

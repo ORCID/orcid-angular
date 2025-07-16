@@ -1,6 +1,6 @@
 <!-- WORK BODY -->
 <!-- GENERAL DATA DISPLAY BY DEFAULT -->
-<app-panel-data [borderBottom]="true">
+<app-panel-data [borderBottom]="!featured" [featured]="featured">
   <div>
     <div class="general-data" *ngIf="work?.journalTitle">
       {{ work.journalTitle.value }}
@@ -73,7 +73,7 @@
     </div>
   </div>
 
-  <div align-end>
+  <div align-end *ngIf="!featured">
     <a
       class="underline"
       (click)="toggleDetails.next(work)"

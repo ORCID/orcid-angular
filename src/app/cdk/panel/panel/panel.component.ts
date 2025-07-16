@@ -16,7 +16,7 @@ import {
 } from '../../../types/common.endpoint'
 import { UserRecord } from '../../../types/record.local'
 import { PlatformInfoService } from '../../platform-info'
-import { first } from 'rxjs/operators'
+import { first, tap } from 'rxjs/operators'
 import { Affiliation } from 'src/app/types/record-affiliation.endpoint'
 import { Funding } from 'src/app/types/record-funding.endpoint'
 import { PeerReview } from '../../../types/record-peer-review.endpoint'
@@ -69,6 +69,7 @@ export class PanelComponent implements OnInit {
     | 'peer-review'
     | 'main'
     | 'works'
+    | 'featured-works'
     | 'activities'
     | 'funding'
     | 'research-resources'
@@ -87,6 +88,8 @@ export class PanelComponent implements OnInit {
   @Input() selectAll = false
   @Input() checkbox = false
   @Input() panelTitle: string
+  @Input() hasFeaturedIndex: boolean = false
+  @Input() isPreferred: boolean
   _displayTheStack: boolean
   @Input()
   set displayTheStack(value: boolean) {
@@ -112,6 +115,10 @@ export class PanelComponent implements OnInit {
     return this._isPublicRecord
   }
 
+  get isFeaturedWork(): boolean {
+    return this.type === 'featured-works'
+  }
+
   @Input() isUserSource = false
   @Input() hasExternalIds: boolean
   @Input() userVersionPresent: boolean
@@ -120,6 +127,7 @@ export class PanelComponent implements OnInit {
   @Input() email = false
   @Input() names = false
   selected: boolean
+  featuredWorksTogglz: boolean = false
 
   tooltipLabelEdit = $localize`:@@shared.edit:Edit`
   tooltipLabelMakeCopy = $localize`:@@shared.makeCopy:Make a copy and edit`
@@ -138,13 +146,24 @@ export class PanelComponent implements OnInit {
     private _researchResourcesService: RecordResearchResourceService,
     private _worksService: RecordWorksService,
     private _verificationEmailModalService: VerificationEmailModalService,
-    private _recordBiographyService: RecordBiographyService
+    private _recordBiographyService: RecordBiographyService,
+    private _togglzService: TogglzService
   ) {}
 
   ngOnInit(): void {
     if (!this.panelTitle) {
       this.panelTitle = ''
     }
+    this._togglzService
+      .getTogglz()
+      .pipe(
+        tap((togglz) => {
+          if (togglz.messages['FEATURED_WORKS_UI'] === 'true') {
+            this.featuredWorksTogglz = true
+          }
+        })
+      )
+      .subscribe()
   }
 
   isArrayAndIsNotEmpty(

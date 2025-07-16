@@ -40,6 +40,7 @@ export class RecordWorksService {
   groupingSuggestionsSubjectInitialized = false
   groupingSuggestionsSubject = new ReplaySubject<GroupingSuggestions>(1)
   $workSubject = new ReplaySubject<WorksEndpoint>(1)
+  $featuredWorkSubject = new ReplaySubject<WorksEndpoint>(1)
   offset = 0
   sortOrder: SortOrderType = 'date'
   sortAsc = false
@@ -49,7 +50,13 @@ export class RecordWorksService {
   userRecordOptions: UserRecordOptions = {}
 
   private _$loading = new BehaviorSubject<boolean>(true)
+  private _$loadingFeatured = new BehaviorSubject<boolean>(true)
+
   public get $loading() {
+    return this._$loading.asObservable()
+  }
+
+  public get $loadingFeatured() {
     return this._$loading.asObservable()
   }
 
@@ -121,7 +128,8 @@ export class RecordWorksService {
           '&sortAsc=' +
           (options.sortAsc != null ? options.sortAsc : false) +
           `&pageSize=` +
-          options.pageSize
+          options.pageSize +
+          `&featuredOnly=false`
       )
       .pipe(
         retry(3),
@@ -149,6 +157,55 @@ export class RecordWorksService {
       .subscribe()
 
     return this.$workSubject.asObservable()
+  }
+
+  /**
+   * Return an observable with a list of Featured Works
+   *
+   * @param options
+   */
+  getFeaturedWorks(options: UserRecordOptions): Observable<WorksEndpoint> {
+    this._$loadingFeatured.next(true)
+    let url: string
+    if (options.publicRecordId) {
+      url = options.publicRecordId + '/worksExtendedPage.json'
+    } else {
+      url = 'works/worksExtendedPage.json'
+    }
+
+    this._http
+      .get<WorksEndpoint>(
+        runtimeEnvironment.API_WEB +
+          url +
+          '?offset=' +
+          options.offset +
+          '&sort=' +
+          (options.sort != null ? options.sort : 'date') +
+          '&sortAsc=' +
+          (options.sortAsc != null ? options.sortAsc : false) +
+          `&pageSize=` +
+          options.pageSize +
+          `&featuredOnly=true`
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        catchError(() => of({ groups: [] } as WorksEndpoint)),
+        map((data) => {
+          data.groups = this.calculateVisibilityErrors(data.groups)
+          return data
+        }),
+        tap((data) => {
+          console.log('hm')
+
+          this._$loadingFeatured.next(false)
+          this.lastEmittedValue = data
+          this.$featuredWorkSubject.next(data)
+        })
+      )
+      .subscribe()
+
+    return this.$featuredWorkSubject.asObservable()
   }
 
   private calculateVisibilityErrors(groups: WorkGroup[]): WorkGroup[] {

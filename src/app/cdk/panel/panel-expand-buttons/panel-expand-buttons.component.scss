@@ -1,3 +1,10 @@
 .expand_more {
   transform: rotate(90deg);
 }
+
+button {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  width: 24px !important;
+  margin-right: 8px;
+}

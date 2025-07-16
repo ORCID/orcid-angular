@@ -2,7 +2,8 @@
   <div
     class="header-container"
     [ngClass]="{
-      'sub-peer-review': type === 'sub-peer-review'
+      'sub-peer-review': type === 'sub-peer-review',
+      'featured-works-header-container': type === 'featured-works'
     }"
     *ngIf="
       IS_QA ||
@@ -10,7 +11,7 @@
       (type === 'peer-review' && currentAmount > 0)
     "
   >
-    <div class="inline-initial-side">
+    <div *ngIf="type !== 'featured-works'" class="inline-initial-side">
       <app-panel-expand-buttons
         (toggle)="collapse()"
         [openState]="expandedContent"
@@ -77,6 +78,15 @@
           </ng-container>
         </h3>
       </div>
+    </div>
+
+    <div *ngIf="type === 'featured-works'" class="inline-initial-side">
+      <div class="featured-works-star">
+        <mat-icon> star_filled </mat-icon>
+      </div>
+      <h3 class="activity-header orc-font-body-large">
+        {{ title }}
+      </h3>
     </div>
 
     <div class="controls" *ngIf="type !== 'sub-peer-review'">
@@ -202,6 +212,7 @@
       <button
         mat-button
         class="orc-font-body-small"
+        *ngIf="type !== 'featured-works'"
         [attr.aria-label]="
           type | appPanelsSortAriaLabel : !currentAmount && !total
         "
@@ -212,6 +223,20 @@
         <ng-container *ngIf="!isMobile" i18n="@@shared.sort">
           Sort
         </ng-container>
+      </button>
+      <button
+        mat-button
+        class="orc-font-body-small"
+        *ngIf="type === 'featured-works'"
+        [disabled]="!currentAmount && !total"
+        [attr.aria-label]="
+          type | appPanelsSortAriaLabel : !currentAmount && !total
+        "
+      >
+        <mat-icon class="large-material-icon material-symbols-outlined">
+          stars
+        </mat-icon>
+        <ng-container i18n="@@shared.manage"> Manage </ng-container>
       </button>
       <mat-menu #menu="matMenu">
         <button

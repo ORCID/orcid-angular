@@ -9,12 +9,13 @@
   <!-- A PANEL COMPONENT FOR EACH WORK ON THE STACK -->
   <app-panel
     panelId="work-stack"
-    [editableVisibilityControl]="isPreferred(work)"
+    [editableVisibilityControl]="featured ? false : isPreferred(work)"
+    [editable]="!featured"
     [stackSiblings]="workStack.works"
     [userRecord]="userRecord"
     [elements]="work"
     [ngStyle]="{ 'z-index': workStack.works.length - i }"
-    [ngClass]="{ last: last }"
+    [ngClass]="{ last: last, featured: featured }"
     [defaultPutCode]="workStack.defaultPutCode.toString()"
     [putCode]="work.putCode.value"
     [visibility]="
@@ -25,7 +26,7 @@
     *ngIf="isPreferred(work) || displayTheStack"
     [isPublicRecord]="isPublicRecord"
     [editModalComponent]="worksModal"
-    [selectable]="true"
+    [selectable]="!featured"
     [selectAll]="selectAll"
     [isUserSource]="userIsSource(work)"
     [hasExternalIds]="hasExternalIds"
@@ -34,8 +35,10 @@
     (checkboxChangePanel)="checkboxChangeWorkStack($event)"
     [visibilityError]="workStack.visibilityError"
     #panelsComponent
-    [type]="'works'"
+    [type]="featured ? 'featured-works' : 'works'"
+    [hasFeaturedIndex]="workStack.featuredDisplayIndex > 0"
     [panelTitle]="work.title.value"
+    [isPreferred]="isPreferred(work)"
   >
     <h4 header class="work-title orc-font-body">{{ work.title.value }}</h4>
     <!-- WORK BODY -->
@@ -46,10 +49,12 @@
       [id]="userInfo?.EFFECTIVE_USER_ORCID"
       [isPublicRecord]="isPublicRecord"
       (toggleDetails)="toggleDetails($event)"
+      [featured]="featured"
     >
     </app-work>
     <!-- WORK SOURCE -->
     <app-panel-source
+      *ngIf="!featured"
       [userRecord]="userRecord"
       [isPreferred]="isPreferred(work)"
       [sourceName]="work.sourceName || work.source"
