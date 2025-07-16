@@ -30,7 +30,6 @@ import { getNamesEndPoint } from '../../../../../core/record-names/record-names.
 import { getOtherNamesEndPoint } from '../../../../../core/record-other-names/record-other-names.service.spec'
 import { HarnessLoader } from '@angular/cdk/testing'
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed'
-import { MatLegacyButtonHarness as MatButtonHarness } from '@angular/material/legacy-button/testing'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 

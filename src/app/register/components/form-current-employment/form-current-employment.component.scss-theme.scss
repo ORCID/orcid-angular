@@ -10,7 +10,7 @@
 
   ::ng-deep {
     mat-form-field.selected-org {
-      .mat-form-field-flex {
+      .mat-mdc-text-field-wrapper {
         background-color: mat.get-color-from-palette(
           $background,
           ui-background-lightest

@@ -8,10 +8,7 @@ import { PlatformInfoService } from '../../../../../cdk/platform-info'
 import { ErrorHandlerService } from '../../../../../core/error-handler/error-handler.service'
 import { SnackbarService } from '../../../../../cdk/snackbar/snackbar.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
-import {
-  MatLegacyMenuModule,
-  MatLegacyMenu as MatMenu,
-} from '@angular/material/legacy-menu'
+import { MatMenuModule, MatMenu } from '@angular/material/menu'
 
 import {
   MAT_DIALOG_DATA,
@@ -20,16 +17,16 @@ import {
 } from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { ReactiveFormsModule, UntypedFormBuilder } from '@angular/forms'
-import { MatLegacyAutocompleteModule as MatAutocompleteModule } from '@angular/material/legacy-autocomplete'
+import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import { SharedModule } from '../../../../../shared/shared.module'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { MatOption } from '@angular/material/core'
-import { MatLegacySelectModule } from '@angular/material/legacy-select'
+import { MatSelectModule } from '@angular/material/select'
 import { VisibilitySelectorComponent } from 'src/app/cdk/visibility-selector/visibility-selector/visibility-selector.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { MatLegacyFormFieldModule } from '@angular/material/legacy-form-field'
-import { MatLegacyInputModule } from '@angular/material/legacy-input'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatInputModule } from '@angular/material/input'
 
 describe('ModalAffiliationsComponent', () => {
   let component: ModalAffiliationsComponent
@@ -42,12 +39,12 @@ describe('ModalAffiliationsComponent', () => {
         MatAutocompleteModule,
         RouterTestingModule,
         SharedModule,
-        MatLegacySelectModule,
-        MatLegacyMenuModule,
+        MatSelectModule,
+        MatMenuModule,
         ReactiveFormsModule,
         BrowserAnimationsModule,
-        MatLegacyFormFieldModule,
-        MatLegacyInputModule,
+        MatFormFieldModule,
+        MatInputModule,
       ],
       declarations: [ModalAffiliationsComponent, VisibilitySelectorComponent],
       providers: [

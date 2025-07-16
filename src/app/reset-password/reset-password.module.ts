@@ -5,7 +5,7 @@ import { ResetPasswordRoutingModule } from './reset-password-routing.module'
 import { ResetPasswordComponent } from './reset-password/reset-password.component'
 import { MatIconModule } from '@angular/material/icon'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input'
+import { MatInputModule } from '@angular/material/input'
 import { MatCardModule } from '@angular/material/card'
 import {
   MatProgressBar,

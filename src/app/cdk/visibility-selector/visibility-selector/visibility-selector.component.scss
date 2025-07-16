@@ -15,11 +15,6 @@
   margin-inline-end: 16px;
 }
 
-[mat-menu-item] {
-  display: flex;
-  align-items: center;
-}
-
 .main-menu {
   border: solid 1px;
   height: 40px;
@@ -95,6 +90,9 @@ h1 {
       &.not-editable {
         border: none;
       }
+    }
+    span.mat-mdc-menu-item-text {
+      display: flex;
     }
   }
 }

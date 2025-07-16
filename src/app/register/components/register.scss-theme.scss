@@ -82,7 +82,7 @@
       mat-icon {
         color: map-get($foreground, 'brand-primary-dark');
       }
-      .mat-form-field-outline {
+      .mat-mdc-text-field-wrapper {
         color: map-get($foreground, 'brand-primary-dark');
         background-color: mat.get-color-from-palette(
           $background,
@@ -92,10 +92,10 @@
     }
 
     .disable-error {
-      .mat-form-field-outline {
+      .mat-mdc-text-field-wrapper {
         color: rgba(0, 0, 0, 0.12) !important;
       }
-      .mat-input-element {
+      .mat-mdc-input-element {
         color: $orcid-dark-primary-text !important;
       }
     }

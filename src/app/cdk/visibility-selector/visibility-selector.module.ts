@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { VisibilitySelectorComponent } from './visibility-selector/visibility-selector.component'
 import { MatButtonModule } from '@angular/material/button'
-import { MatLegacyMenuModule as MatMenuModule } from '@angular/material/legacy-menu'
+import { MatMenuModule } from '@angular/material/menu'
 import { MatIconModule } from '@angular/material/icon'
 
 @NgModule({

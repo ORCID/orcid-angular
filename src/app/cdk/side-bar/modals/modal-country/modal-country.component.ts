@@ -9,7 +9,7 @@ import {
 } from '@angular/core'
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms'
 import { MatDialogRef } from '@angular/material/dialog'
-import { MatLegacySelect as MatSelect } from '@angular/material/legacy-select'
+import { MatSelect } from '@angular/material/select'
 import { cloneDeep } from 'lodash'
 import { Subject } from 'rxjs'
 import { first, takeUntil } from 'rxjs/operators'

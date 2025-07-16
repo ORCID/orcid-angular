@@ -17,7 +17,7 @@ label {
   padding-bottom: 8px;
 }
 
-.mat-form-field {
+.mat-mdc-form-field {
   width: 100%;
 }
 
@@ -52,14 +52,6 @@ label {
   }
 }
 
-.date {
-  ::ng-deep .mat-form-field-wrapper {
-    padding-bottom: 0px !important;
-  }
-  padding-bottom: 1.475em;
-  padding-left: 0;
-}
-
 .add-more {
   margin-bottom: 27px;
   padding-inline-start: 0;
@@ -80,28 +72,11 @@ label {
   margin-bottom: 16px;
 }
 
-.select-error {
-  padding-bottom: 1.475em;
-
-  ::ng-deep .mat-form-field-wrapper {
-    padding-bottom: 0 !important;
-  }
-
-  mat-error {
-    padding: 0 1em;
-    margin-top: 0.2em;
-  }
+.date {
+  padding-left: 0px;
 }
 
 app-deep-select-input {
   width: 100%;
   max-width: 402px;
-}
-
-:host {
-  ::ng-deep {
-    .mat-form-field-appearance-outline .mat-select-arrow-wrapper {
-      transform: none;
-    }
-  }
 }
