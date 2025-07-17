@@ -158,6 +158,9 @@ export class RecordService {
       this._recordWorkService
         .getWorks(options)
         .pipe(startWith(<Object>undefined)),
+      this._recordWorkService
+        .getFeaturedWorks(options)
+        .pipe(startWith(<Object>undefined)),
       this.getLastModifiedTime(options).pipe(startWith(<Object>undefined)),
       this._userInfo.getUserInfo(options).pipe(startWith(<Object>undefined)),
     ])
@@ -178,6 +181,7 @@ export class RecordService {
             peerReviews,
             researchResources,
             works,
+            featuredWorks,
             lastModifiedTime,
             userInfo,
           ]) => {
@@ -198,6 +202,7 @@ export class RecordService {
               peerReviews: peerReviews as PeerReview[],
               researchResources: researchResources as ResearchResourcesEndpoint,
               works: works as WorksEndpoint,
+              featuredWorks: featuredWorks as WorksEndpoint,
               lastModifiedTime: lastModifiedTime as any,
               userInfo: userInfo as UserInfo,
             })

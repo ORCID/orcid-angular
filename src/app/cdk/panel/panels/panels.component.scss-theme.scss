@@ -14,6 +14,22 @@
       color: mat.get-contrast-color-from-palette($accent, 900);
     }
 
+    .featured-works-star {
+      color: mat.get-color-from-palette(
+        $foreground,
+        text-light-high
+      ) !important;
+    }
+
+    .featured-works-header-container {
+      background-color: mat.get-color-from-palette(
+        $background,
+        brand-citrus-lemon
+      ) !important;
+      color: mat.get-color-from-palette($foreground, text-dark-high) !important;
+      border-color: transparent !important;
+    }
+
     .white-header-container {
       border-color: mat.get-color-from-palette(
         $background,

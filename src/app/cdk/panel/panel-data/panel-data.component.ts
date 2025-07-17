@@ -16,6 +16,10 @@ export class PanelDataComponent implements OnInit, OnDestroy {
 
   @HostBinding('class.orc-font-body-small') fontSmall = true
   @HostBinding('class.border-bottom') borderBottomClass = false
+  @HostBinding('class.featured') featuredClass = false
+  @Input() set featured(featured: boolean) {
+    this.featuredClass = featured
+  }
   @Input() set borderBottom(borderBottom: boolean) {
     this.borderBottomClass = borderBottom
   }

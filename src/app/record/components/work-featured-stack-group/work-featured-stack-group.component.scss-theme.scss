@@ -1,0 +1,34 @@
+@use '@angular/material' as mat;
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+@mixin work-stack-group-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  .controls {
+    button {
+      border-color: mat.get-color-from-palette(
+        $background,
+        ui-background
+      ) !important;
+    }
+  }
+  .error-icon {
+    color: rgba($state-warning-darkest, 0.38) !important;
+  }
+
+  .delete-selected-works,
+  .delete-selected-works mat-icon {
+    color: $state-warning-darkest !important;
+  }
+
+  .delete-selected-works-disabled,
+  .delete-selected-works-disabled mat-icon {
+    color: rgba($state-warning-darkest, 0.38) !important;
+  }
+}
+
+@include work-stack-group-theme($orcid-app-theme);

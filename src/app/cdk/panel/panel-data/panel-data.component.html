@@ -1,5 +1,8 @@
 <div class="panel-data-container">
-  <div class="data-content">
+  <div
+    class="data-content"
+    [ngClass]="{ 'featured-data-content': featuredClass }"
+  >
     <ng-content></ng-content>
   </div>
   <div

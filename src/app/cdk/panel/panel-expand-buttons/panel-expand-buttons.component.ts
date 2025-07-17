@@ -28,6 +28,7 @@ export class PanelExpandButtonsComponent implements OnInit {
     | 'sub-peer-review'
     | 'main'
     | 'works'
+    | 'featured-works'
     | 'activities'
     | 'funding'
     | 'research-resources'

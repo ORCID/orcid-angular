@@ -85,6 +85,7 @@ import { WarningMessageModule } from '../cdk/warning-message/warning-message.mod
 import { DeepSelectInputModule } from '../cdk/deep-select-input/deep-select-input.module'
 import { PageNotFound404Module } from '../page-not-found-404/page-not-found-404.module'
 import { LoginMainInterstitialsManagerService } from '../core/login-interstitials-manager/login-main-interstitials-manager.service'
+import { WorkFeaturedStackGroupComponent } from './components/work-featured-stack-group/work-featured-stack-group.component'
 
 @NgModule({
   declarations: [
@@ -107,6 +108,7 @@ import { LoginMainInterstitialsManagerService } from '../core/login-interstitial
     WorkStackGroupComponent,
     WorkStackComponent,
     WorkComponent,
+    WorkFeaturedStackGroupComponent,
     TopBarActionsComponent,
     TopBarRecordIssuesComponent,
     ModalAffiliationsComponent,

@@ -9,7 +9,7 @@
   justify-content: space-between;
   align-items: center;
   min-height: 56px;
-  padding-inline-start: 8px;
+  padding-inline-start: 16px;
   padding-inline-end: 16px;
   border-radius: 4px;
 
@@ -80,4 +80,16 @@
 
 .padding-right {
   padding-right: 40px;
+}
+
+.featured-works-star {
+  width: 24px;
+  height: 48px;
+  margin-right: 8px;
+  mat-icon {
+    left: 50%;
+    position: relative;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
 }

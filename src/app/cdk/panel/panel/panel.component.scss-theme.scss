@@ -33,8 +33,29 @@
     background-color: map-get($background, card);
   }
 
+  .featured-body {
+    background-color: mat.get-color-from-palette(
+      $background,
+      brand-citrus-lemon-lightest
+    ) !important;
+  }
+
   .error {
     color: map-get($foreground, 'state-warning-dark');
+  }
+
+  .featured-header {
+    background-color: mat.get-color-from-palette(
+      $background,
+      brand-citrus-lemon-lightest
+    ) !important;
+  }
+
+  .featured-work-star {
+    color: mat.get-color-from-palette(
+      $foreground,
+      brand-citrus-lemon
+    ) !important;
   }
 }
 @include panel-theme($orcid-app-theme);

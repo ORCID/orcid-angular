@@ -151,6 +151,13 @@
                   (total)="affiliationsCount($event, 'RESEARCH_RESOURCE')"
                   id="cy-research-resources"
                 ></app-research-resources>
+                <app-work-featured-stack-group
+                  *ngIf="featuredWorksTogglz"
+                  [userInfo]="userInfo"
+                  [isPublicRecord]="publicOrcid"
+                  id="cy-featured-works"
+                >
+                </app-work-featured-stack-group>
                 <app-work-stack-group
                   [userInfo]="userInfo"
                   [isPublicRecord]="publicOrcid"

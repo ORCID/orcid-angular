@@ -38,6 +38,7 @@ export class PanelsComponent implements OnInit {
     | 'membership'
     | 'service'
     | 'works'
+    | 'featured-works'
     | 'activities'
     | 'peer-review'
     | 'sub-peer-review'
@@ -163,8 +164,10 @@ export class PanelsComponent implements OnInit {
     })
   }
   collapse() {
-    this.expandedContent = !this.expandedContent
-    this.expandedContentChange.emit(this.expandedContent)
+    if (this.type !== 'featured-works') {
+      this.expandedContent = !this.expandedContent
+      this.expandedContentChange.emit(this.expandedContent)
+    }
   }
 
   multipleMatButton() {
