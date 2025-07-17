@@ -113,7 +113,9 @@ export class FormSignInComponent implements OnInit, OnDestroy {
         session = session as UserSession
         platform = platform as PlatformInfo
         this.platform = platform
-        this.signInLocal.isOauth = true
+        if (session.oauthSession) {
+          this.signInLocal.isOauth = true
+        }
         _route.queryParams.subscribe((params) => {
           this.signInLocal.params = {
             ...(params as OauthParameters),
