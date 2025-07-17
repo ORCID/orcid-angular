@@ -27,12 +27,12 @@ p.empty {
   margin-bottom: 0;
 }
 
+::ng-deep .works-buttons .mdc-checkbox {
+  margin-left: -17px !important;
+}
+
 .works-buttons {
   margin: 16px;
-
-  .mdc-checkbox {
-    margin-left: -17px !important;
-  }
 
   .select-all {
     margin-left: 10px;
