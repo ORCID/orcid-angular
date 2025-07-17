@@ -37,8 +37,15 @@
     color: mat.get-color-from-palette($background, placeholder-grey);
   }
 
-  .mdc-text-field--outlined .mdc-notched-outline__trailing,
-  .mdc-text-field--outlined .mdc-notched-outline__leading {
+  .mdc-text-field--outlined:not(.mdc-text-field--disabled)
+    .mdc-notched-outline
+    .mdc-notched-outline__leading,
+  .mdc-text-field--outlined:not(.mdc-text-field--disabled)
+    .mdc-notched-outline
+    .mdc-notched-outline__notch,
+  .mdc-text-field--outlined:not(.mdc-text-field--disabled)
+    .mdc-notched-outline
+    .mdc-notched-outline__trailing {
     --mdc-outlined-text-field-outline-color: rgba(0, 0, 0, 0.12);
   }
 }

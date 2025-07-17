@@ -120,7 +120,6 @@ export class FormSignInComponent implements OnInit, OnDestroy {
           this.signInLocal.params = {
             ...(params as OauthParameters),
           }
-          console.log('SignInLocal params', this.signInLocal.params)
         })
 
         if (platform.social) {
