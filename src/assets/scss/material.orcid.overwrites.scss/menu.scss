@@ -1,6 +1,5 @@
-// Overwrites for:
-// https://github.com/angular/components/blob/8.2.x/src/material/menu/menu.scss
-
+// Import material palette
+@import '../material.palettes.scss';
 .mat-mdc-menu-panel {
   .mat-mdc-menu-item.orcid-menu-item-small {
     max-height: 32px;
@@ -27,4 +26,9 @@
 .mat-mdc-menu-content .mat-mdc-menu-item .mat-mdc-menu-item-text {
   display: flex;
   align-items: center;
+}
+
+.mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled)
+  .mdc-list-item__primary-text {
+  --mat-option-selected-state-label-text-color: #{$brand-secondary-dark};
 }

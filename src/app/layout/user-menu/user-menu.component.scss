@@ -73,7 +73,7 @@ section {
 
 span.name-text-container {
   overflow: hidden;
-  max-width: calc(102% - 62px);
+  max-width: calc(102% - 60px);
   display: inline-block;
   text-overflow: ellipsis;
   width: fit-content;
@@ -107,7 +107,12 @@ span.name-text-container {
       mat-icon {
         height: unset;
         margin-left: 7px;
+        overflow: visible;
       }
     }
   }
+}
+
+.notifcation-number {
+  margin-inline-start: 4px;
 }

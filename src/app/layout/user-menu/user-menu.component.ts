@@ -18,6 +18,7 @@ import { CustomEventService } from 'src/app/core/observability-events/observabil
     './user-menu.component.scss-theme.scss',
     './user-menu.component.scss',
   ],
+  preserveWhitespaces: true,
 })
 export class UserMenuComponent implements OnInit {
   state = false
