@@ -45,6 +45,7 @@ export interface UserRecord {
   peerReviews?: PeerReview[]
   researchResources?: ResearchResourcesEndpoint
   works?: WorksEndpoint
+  featuredWorks?: WorksEndpoint
   lastModifiedTime: any
   userInfo: UserInfo
 }

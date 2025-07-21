@@ -87,6 +87,8 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   newlySharedDomains: string[] = []
   newAddedAffiliation: string
 
+  featuredWorksTogglz = false
+
   constructor(
     _userInfoService: UserInfoService,
     private _platform: PlatformInfoService,
@@ -265,6 +267,10 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
                 src: 'https://script.crazyegg.com/pages/scripts/0113/7579.js',
               })
               .subscribe()
+          }
+
+          if (togglz.messages['FEATURED_WORKS_UI'] === 'true') {
+            this.featuredWorksTogglz = true
           }
         })
       )

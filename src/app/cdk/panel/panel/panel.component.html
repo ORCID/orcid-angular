@@ -1,14 +1,22 @@
 <div
   class="header box orc-font-body cy-panel-component"
   [ngClass]="{
-    'header-bottom': isArrayAndIsNotEmpty(elements) || valueIsNotNull(elements),
-    'top-bar-or-main': type === 'top-bar' || type === 'main' || isAffiliation(),
+    'header-bottom':
+      !isFeaturedWork &&
+      (isArrayAndIsNotEmpty(elements) || valueIsNotNull(elements)),
+    'top-bar-or-main':
+      !isFeaturedWork &&
+      (type === 'top-bar' || type === 'main' || isAffiliation()),
     'side-bar': type === 'side-bar',
     'staked-header': stackedHeader,
-    'expand-button': !editable && !isPublicRecord && !customControls
+    'expand-button': !editable && !isPublicRecord && !customControls,
+    'featured-header': isFeaturedWork
   }"
   [attr.id]="'cy-panel-component-' + panelId + '-' + type + '-' + putCode"
 >
+  <div class="featured-work-star" *ngIf="isFeaturedWork">
+    <mat-icon> star_filled </mat-icon>
+  </div>
   <!-- [EXPAND BUTTONS] FOR NESTED PANELS -->
   <ng-container
     *ngIf="!editable && !customControls && expandButtonsPosition === 'left'"
@@ -31,27 +39,42 @@
       [aria-label]="
         type | appPanelActivityActionAriaLabel : 'select' : this.panelTitle
       "
-      class="text-wrap"
+      class="text-wrap panel-checkbox"
       *ngIf="(defaultPutCode === putCode || displayTheStack) && !isPublicRecord"
       (change)="checked($event)"
       [(ngModel)]="selected"
     >
       <ng-container *ngIf="expandButtonsPosition !== 'left'">
+        <div
+          class="featured-work-star"
+          *ngIf="hasFeaturedIndex && isPreferred && featuredWorksTogglz"
+        >
+          <mat-icon> star_filled </mat-icon>
+        </div>
         <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
       </ng-container>
     </mat-checkbox>
-    <ng-container *ngIf="isPublicRecord && expandButtonsPosition !== 'left'">
+    <div
+      *ngIf="isPublicRecord && expandButtonsPosition !== 'left'"
+      class="public-record-panel-header"
+    >
+      <div
+        class="featured-work-star"
+        *ngIf="hasFeaturedIndex && isPreferred && featuredWorksTogglz"
+      >
+        <mat-icon> star_filled </mat-icon>
+      </div>
       <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
-    </ng-container>
+    </div>
   </div>
   <div *ngIf="!selectable">
     <ng-container *ngIf="expandButtonsPosition !== 'left'">
       <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
     </ng-container>
   </div>
-  <div class="buttons-container cy-buttons-container">
+  <div class="buttons-container cy-buttons-container" *ngIf="!isFeaturedWork">
     <!-- [PRIVACY display] FOR `AFFILIATIONS`, `WORKS`, `FUNDINGS`  -->
-    <ng-container *ngIf="visibility && !isPublicRecord">
+    <ng-container *ngIf="visibility && !isPublicRecord && !isFeaturedWork">
       <ng-container *ngIf="visibilityError && editableVisibilityControl">
         <mat-icon
           class="large-material-icon error cy-inconsistency-issue material-icons-outlined"
@@ -147,7 +170,10 @@
   </div>
 </div>
 
-<div class="body" *ngIf="openState || type === 'side-bar'">
+<div
+  [ngClass]="{ body: !isFeaturedWork, 'featured-body': isFeaturedWork }"
+  *ngIf="openState || type === 'side-bar'"
+>
   <!-- [PANEL CONTENT] FOR EVERY PANEL IMPLEMENTATION -->
   <!-- hide the content when openState is false-->
   <!-- on `side bar` never close the content -->

@@ -31,6 +31,7 @@ export class WorkComponent implements OnInit {
   @Input() orgDisambiguated: OrgDisambiguated
   @Input() id: string
   @Input() isPublicRecord
+  @Input() featured: boolean = false
   maxNumberContributors = 10
   maxNumberContributorsWorkDetails = 50
   maxBibtexCharacters = 5000

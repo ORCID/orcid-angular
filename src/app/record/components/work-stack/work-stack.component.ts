@@ -37,6 +37,7 @@ export class WorkStackComponent implements OnInit {
   visibility: VisibilityStrings
   worksModal = WorkModalComponent
   @Input() isPublicRecord: string
+  @Input() featured: boolean = false
   hasExternalIds: boolean
 
   @Input()

@@ -27,6 +27,10 @@ p.empty {
   margin-bottom: 0;
 }
 
+::ng-deep .works-buttons .mdc-checkbox {
+  margin-left: -17px !important;
+}
+
 .works-buttons {
   margin: 16px;
 
@@ -61,6 +65,9 @@ p.empty {
 }
 .columns-4 :host {
   .works-buttons {
+    .mdc-checkbox {
+      margin-left: -23px !important;
+    }
     .controls {
       flex-direction: column;
       button {
