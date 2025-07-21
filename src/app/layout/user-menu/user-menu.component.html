@@ -89,8 +89,8 @@
     <mat-icon *ngIf="inboxUnread > 0"
       ><img src="./assets/vectors/notification-button-active.svg"
     /></mat-icon>
-    <span i18n="@@workspace.notifications">Notifications inbox</span>
-    ({{ inboxUnread }})
+    <span i18n="@@workspace.notifications">Notifications inbox</span
+    ><span class="notifcation-number"> ({{ inboxUnread }})</span>
   </button>
   <button
     mat-menu-item

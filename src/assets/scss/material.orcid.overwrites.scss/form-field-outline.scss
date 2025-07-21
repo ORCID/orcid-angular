@@ -8,6 +8,10 @@
   }
 }
 
+.mat-form-field-appearance-outline {
+  --mat-form-field-container-text-size: 16px;
+}
+
 .mat-form-field-appearance-outline.two-line-hint {
   margin-bottom: 1.6em;
 }
