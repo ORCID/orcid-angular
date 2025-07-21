@@ -196,6 +196,8 @@ export class RecordWorksService {
           return data
         }),
         tap((data) => {
+          console.log('hm')
+
           this._$loadingFeatured.next(false)
           this.lastEmittedValue = data
           this.$featuredWorkSubject.next(data)
