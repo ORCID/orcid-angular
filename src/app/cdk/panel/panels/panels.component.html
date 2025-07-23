@@ -227,7 +227,7 @@
       <button
         mat-button
         class="orc-font-body-small"
-        *ngIf="type === 'featured-works'"
+        *ngIf="type === 'featured-works' && !isPublicRecord"
         [disabled]="!currentAmount && !total"
         [attr.aria-label]="
           type | appPanelsSortAriaLabel : !currentAmount && !total
