@@ -35,7 +35,7 @@ describe('AuthorizeGuard', () => {
         { provide: UserService, useValue: user },
         { provide: Router, useValue: router },
         { provide: PlatformInfoService, useValue: platform },
-        { provide: WINDOW, useValue: {} },
+        { provide: WINDOW, useValue: { location: { href: 'href' } } },
         { provide: TogglzService, useValue: { getStateOf: () => of(false) } },
       ],
     })
