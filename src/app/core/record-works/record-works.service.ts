@@ -165,6 +165,12 @@ export class RecordWorksService {
    * @param options
    */
   getFeaturedWorks(options: UserRecordOptions): Observable<WorksEndpoint> {
+    options.pageSize = options?.pageSize || DEFAULT_PAGE_SIZE
+    options.offset = options.offset || 0
+    this.pageSize = options.pageSize
+    this.offset = options.offset
+    this.sortOrder = options.sort
+    this.sortAsc = options.sortAsc
     this._$loadingFeatured.next(true)
     let url: string
     if (options.publicRecordId) {
@@ -301,8 +307,8 @@ export class RecordWorksService {
 
   save(
     work: Work,
-    requireReload = true,
-    isLastWorkElement = false
+    reloadFeatured: boolean = false,
+    isLastWorkElement = true
   ): Observable<Work> {
     return this._http
       .post<Work>(runtimeEnvironment.API_WEB + `works/work.json`, work)
@@ -310,8 +316,11 @@ export class RecordWorksService {
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => {
-          if (!isLastWorkElement) {
+          if (isLastWorkElement) {
             this.getWorks({ forceReload: true })
+          }
+          if (reloadFeatured) {
+            this.getFeaturedWorks({ forceReload: true })
           }
         })
       )
@@ -401,7 +410,7 @@ export class RecordWorksService {
       )
   }
 
-  delete(putCode: any): Observable<any> {
+  delete(putCode: any, reloadFeatured: boolean): Observable<any> {
     return this._http
       .delete(
         runtimeEnvironment.API_WEB +
@@ -411,7 +420,12 @@ export class RecordWorksService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        tap(() => this.getWorks({ forceReload: true }))
+        tap(() => {
+          this.getWorks({ forceReload: true })
+          if (reloadFeatured) {
+            this.getFeaturedWorks({ forceReload: true })
+          }
+        })
       )
   }
 

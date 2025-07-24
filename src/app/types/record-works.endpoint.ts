@@ -28,6 +28,7 @@ export interface Work extends AssertionBase {
   workType: WorkType
   dateSortString?: MonthDayYearDate
   userSource?: boolean
+  featuredDisplayIndex?: number
   visibility?: Visibility
 }
 interface WorkType {
