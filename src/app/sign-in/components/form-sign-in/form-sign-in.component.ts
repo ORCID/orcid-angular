@@ -16,7 +16,7 @@ import {
   Validators,
 } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
-import { catchError, first, map, takeUntil, tap } from 'rxjs/operators'
+import { catchError, first, map, take, takeUntil, tap } from 'rxjs/operators'
 import {
   ApplicationRoutes,
   isRedirectToTheAuthorizationPage,
@@ -39,6 +39,7 @@ import { ERROR_REPORT } from 'src/app/errors'
 import { ErrorStateMatcherForPasswordField } from '../../ErrorStateMatcherForPasswordField'
 import { GoogleTagManagerService } from '../../../core/google-tag-manager/google-tag-manager.service'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
+import { TogglzService } from 'src/app/core/togglz/togglz.service'
 
 @Component({
   selector: 'app-form-sign-in',
@@ -82,6 +83,7 @@ export class FormSignInComponent implements OnInit, OnDestroy {
 
   placeholderUsername = $localize`:@@ngOrcid.signin.username:Email or 16-digit ORCID iD`
   placeholderPassword = $localize`:@@ngOrcid.signin.yourOrcidPassword:Your ORCID password`
+  isOauthAuthorizationTogglzEnable: boolean
 
   get passwordForm() {
     return this.authorizationForm.controls.password
@@ -104,7 +106,8 @@ export class FormSignInComponent implements OnInit, OnDestroy {
     private _signInGuard: SignInGuard,
     private _userInfo: UserService,
     private cd: ChangeDetectorRef,
-    private _snackBar: SnackbarService
+    private _snackBar: SnackbarService,
+    private _togglzService: TogglzService
   ) {
     this.signInLocal.type = this.signInType
     combineLatest([_userInfo.getUserSession(), _platformInfo.get()])
@@ -153,6 +156,13 @@ export class FormSignInComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this._togglzService
+      .getStateOf('OAUTH_AUTHORIZATION')
+      .pipe(take(1))
+      .subscribe((isOauthAuthorizationTogglzEnable) => {
+        this.isOauthAuthorizationTogglzEnable = isOauthAuthorizationTogglzEnable
+      })
+
     this.authorizationForm = new UntypedFormGroup({
       username: new UntypedFormControl(),
       password: new UntypedFormControl('', {
@@ -323,6 +333,7 @@ export class FormSignInComponent implements OnInit, OnDestroy {
         map((value) => value.oauthSession)
       )
       .subscribe((requestInfoForm: RequestInfoForm) => {
+        // TODO the following error needds to be migrated to the new Oauth Server or removed
         if (requestInfoForm.error === 'invalid_grant') {
           this.isOauthError.next(true)
           this.authorizationFormSubmitted = false
@@ -341,7 +352,11 @@ export class FormSignInComponent implements OnInit, OnDestroy {
       this.navigateTo(urlRedirect)
     } else {
       this._router.navigate(['/oauth/authorize'], {
-        queryParams: { ...this.signInLocal.params, prompt: undefined },
+        queryParams: {
+          ...this.signInLocal.params,
+          prompt: undefined,
+          show_login: undefined,
+        },
       })
     }
   }
@@ -434,18 +449,31 @@ export class FormSignInComponent implements OnInit, OnDestroy {
   }
 
   private observeSessionUpdates() {
-    this._userInfo
-      .getUserSession()
+    combineLatest([this._userInfo.getUserSession(), this._platformInfo.get()])
       .pipe(takeUntil(this.$destroy))
-      .subscribe((session) => {
+      .subscribe(([session, platformInfo]) => {
         if (
           session?.userInfo?.REAL_USER_ORCID &&
           !this.authorizationFormSubmitted
         ) {
-          if (!session?.oauthSession?.forceLogin) {
+          if (!this.isForcedSignin(session, platformInfo)) {
             this.window.location.reload()
           }
         }
       })
+  }
+
+  private isForcedSignin(
+    session: UserSession,
+    platform: PlatformInfo
+  ): boolean {
+    if (!this.isOauthAuthorizationTogglzEnable) {
+      return session.oauthSession?.forceLogin
+    } else {
+      return (
+        platform.queryParameters.show_login === 'true' ||
+        platform.queryParameters.prompt === 'login'
+      )
+    }
   }
 }

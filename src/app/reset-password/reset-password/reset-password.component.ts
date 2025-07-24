@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms'
 import { ActivatedRoute, Router, UrlTree } from '@angular/router'
-import { Subject } from 'rxjs'
+import { first, Subject } from 'rxjs'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { WINDOW } from 'src/app/cdk/window'
@@ -16,8 +16,10 @@ import {
   HAS_NUMBER,
   isRedirectToTheAuthorizationPage,
 } from 'src/app/constants'
+import { OauthURLSessionManagerService } from 'src/app/core/oauth-urlsession-manager/oauth-urlsession-manager.service'
 import { PasswordRecoveryService } from 'src/app/core/password-recovery/password-recovery.service'
 import { RegisterService } from 'src/app/core/register/register.service'
+import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { OrcidValidators } from 'src/app/validators'
 
 @Component({
@@ -42,6 +44,7 @@ export class ResetPasswordComponent implements OnInit {
   expiredPasswordResetToken: boolean
   invalidPasswordResetToken: boolean
   isMobile: boolean
+  isOauthAuthorizationTogglzEnable: boolean
 
   constructor(
     private _fb: UntypedFormBuilder,
@@ -51,10 +54,19 @@ export class ResetPasswordComponent implements OnInit {
     private _router: Router,
     private _snackBar: SnackbarService,
     private _platform: PlatformInfoService,
-    @Inject(WINDOW) private _window: Window
+    @Inject(WINDOW) private _window: Window,
+    private _togglzService: TogglzService,
+    private _oauthURLSessionManagerService: OauthURLSessionManagerService
   ) {}
 
   ngOnInit(): void {
+    this._togglzService
+      .getStateOf('OAUTH_AUTHORIZATION')
+      .pipe(first())
+      .subscribe((isOauthAuthorizationEnabled: boolean) => {
+        this.isOauthAuthorizationTogglzEnable = isOauthAuthorizationEnabled
+      })
+
     this._platform.get().subscribe((platform) => {
       this.isMobile = platform.columns4 || platform.columns8
     })
@@ -110,13 +122,22 @@ export class ResetPasswordComponent implements OnInit {
         .subscribe((value) => {
           this.loading.emit(false)
           if (!value.errors.length && !value.password.errors.length) {
+            const oauthURLFromSessionManager =
+              this._oauthURLSessionManagerService.get()
             this.form.reset()
             if (
+              !this.isOauthAuthorizationTogglzEnable &&
               isRedirectToTheAuthorizationPage({
                 url: value.successRedirectLocation,
               })
             ) {
               this._window.location.href = value.successRedirectLocation
+            } else if (
+              this.isOauthAuthorizationTogglzEnable &&
+              oauthURLFromSessionManager
+            ) {
+              this._oauthURLSessionManagerService.clear()
+              this._window.location.href = oauthURLFromSessionManager
             } else {
               this._router.navigate([ApplicationRoutes.signin])
             }
