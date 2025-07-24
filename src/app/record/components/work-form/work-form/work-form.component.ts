@@ -569,17 +569,19 @@ export class WorkFormComponent implements OnInit {
       if (this.work?.source) {
         work.source = this.work.source
       }
-      this._workService.save(work).subscribe((value) => {
-        if (value?.errors?.length > 0) {
-          this.loading = false
-          this._snackBar.showValidationError(
-            value?.errors[0],
-            $localize`:@@shared.pleaseReview:Please review and fix the issue`
-          )
-        } else {
-          this.closeEvent()
-        }
-      })
+      this._workService
+        .save(work, this.work.featuredDisplayIndex > 0)
+        .subscribe((value) => {
+          if (value?.errors?.length > 0) {
+            this.loading = false
+            this._snackBar.showValidationError(
+              value?.errors[0],
+              $localize`:@@shared.pleaseReview:Please review and fix the issue`
+            )
+          } else {
+            this.closeEvent()
+          }
+        })
     } else {
       this._snackBar.showValidationError()
     }

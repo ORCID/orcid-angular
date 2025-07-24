@@ -127,6 +127,7 @@ export class WorkStackGroupComponent implements OnInit {
   paginationPageSize: number
   platform: PlatformInfo
   selectedWorks: string[] = []
+  selectedWorksFull: Work[] = []
   selectAll: false
   sortTypes: SortOrderType[] = ['title', 'date', 'type', 'source']
 
@@ -216,6 +217,7 @@ export class WorkStackGroupComponent implements OnInit {
   }
 
   delete() {
+    this.selectedWorksFull = this.filteredWorks()
     this.openModal(ModalDeleteItemsComponent, this.selectedWorks)
   }
 
@@ -259,6 +261,7 @@ export class WorkStackGroupComponent implements OnInit {
         modalComponent.componentInstance.type = 'works'
         modalComponent.componentInstance.selectedAll = selectedAll
         modalComponent.componentInstance.totalWorks = this.workGroup.totalGroups
+        modalComponent.componentInstance.works = this.selectedWorksFull
         modalComponent.componentInstance.workGroups = this.workGroup.groups
       })
   }

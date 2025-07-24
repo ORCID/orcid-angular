@@ -1,27 +1,12 @@
 import { ComponentType } from '@angular/cdk/portal'
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  QueryList,
-  ViewChildren,
-} from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { UntypedFormGroup } from '@angular/forms'
-import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox'
 import { MatDialog } from '@angular/material/dialog'
-import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator'
 import { isEmpty } from 'lodash'
-import { Observable, Subject } from 'rxjs'
-import { first, take } from 'rxjs/operators'
+import { Subject } from 'rxjs'
+import { first } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
-import {
-  ADD_EVENT_ACTION,
-  DEFAULT_PAGE_SIZE,
-  EXTERNAL_ID_TYPE_WORK,
-} from 'src/app/constants'
+import { DEFAULT_PAGE_SIZE } from 'src/app/constants'
 import { RecordWorksService } from 'src/app/core/record-works/record-works.service'
 import { RecordService } from 'src/app/core/record/record.service'
 import {
@@ -34,16 +19,8 @@ import {
   UserRecord,
   UserRecordOptions,
 } from 'src/app/types/record.local'
-import { SortData, SortOrderType } from 'src/app/types/sort'
 
 import { UserInfo } from '../../../types'
-import { ModalDeleteItemsComponent } from '../modals/modal-delete-item/modal-delete-items.component'
-import { WorkModalComponent } from '../work-modal/work-modal.component'
-import { WorkStackComponent } from '../work-stack/work-stack.component'
-import { ModalCombineWorksComponent } from '../work/modals/modal-combine-works/modal-combine-works.component'
-import { ModalExportWorksComponent } from '../work/modals/modal-export-works/modal-export-works.component'
-import { WorksVisibilityModalComponent } from '../work/modals/works-visibility-modal/works-visibility-modal.component'
-import { ModalCombineWorksWithSelectorComponent } from '../work/modals/modal-combine-works-with-selector/modal-combine-works-with-selector.component'
 import { GroupingSuggestions } from 'src/app/types/works.endpoint'
 import { AnnouncerService } from 'src/app/core/announcer/announcer.service'
 import { TogglzService } from '../../../core/togglz/togglz.service'

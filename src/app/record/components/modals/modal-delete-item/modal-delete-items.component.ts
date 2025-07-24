@@ -47,6 +47,7 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
 
   @Input() item: any
   @Input() putCodes: string[] = []
+  @Input() works: Work[] = []
 
   isMobile: boolean
   loadingItems = false
@@ -54,6 +55,7 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
   selectedItem: boolean
   selectedItems: string[] = []
   selectAll: false
+  reloadFeaturedWorks: boolean = false
 
   deleteForm: UntypedFormGroup
 
@@ -80,7 +82,7 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
         this.isMobile = platform.columns4 || platform.columns8
       })
 
-    if (this.item && this.putCodes?.length === 0) {
+    if (this.item && this.works.length === 0) {
       this.items.push(this.item)
       this.items.forEach((i) => {
         group[i?.putCode?.value || i.putCode] = new UntypedFormGroup({
@@ -90,20 +92,17 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
       this.deleteForm = new UntypedFormGroup(group)
     }
 
-    if (this.putCodes.length > 0) {
+    if (this.works.length > 0) {
       this.loadingItems = true
-      this._recordWorksService
-        .getWorksInfo(this.putCodes)
-        .subscribe((works: Work[]) => {
-          works.forEach((w) => {
-            this.items.push(w)
-            group[w.putCode.value] = new UntypedFormGroup({
-              checked: new UntypedFormControl(false),
-            })
-          })
-          this.deleteForm = new UntypedFormGroup(group)
-          this.loadingItems = false
+
+      this.works.forEach((w) => {
+        this.items.push(w)
+        group[w.putCode.value] = new UntypedFormGroup({
+          checked: new UntypedFormControl(false),
         })
+      })
+      this.deleteForm = new UntypedFormGroup(group)
+      this.loadingItems = false
     }
   }
 
@@ -121,6 +120,9 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
         if (this.items.length > 1) {
           putCodesDelete.push(putCode)
         }
+      }
+      if (item.featuredDisplayIndex > 0) {
+        this.reloadFeaturedWorks = true
       }
     })
     if (putCode || putCodesDelete.length > 0) {
@@ -159,7 +161,7 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
         break
       case 'works':
         this._recordWorksService
-          .delete(putCode)
+          .delete(putCode, this.reloadFeaturedWorks)
           .pipe(first())
           .subscribe(() => {
             this.closeEvent()
