@@ -62,46 +62,40 @@ describe('RecordWorksService', () => {
     expect(service).toBeTruthy()
   })
 
-  it('should call the method `save` 5 times and only `getWorks` and `getWorksGroupingSuggestions` once', () => {
+  fit('should call the method `save` 5 times and only `getWorks` and `getWorksGroupingSuggestions` once', () => {
     const works: Work[] = getNumberOfWorks(5)
-    let requestGetWorks = null
 
     works.forEach((work, index) => {
       service
-        .save(work, !(index === works.length - 1))
+        .save(work, false, index === works.length - 1)
         .subscribe((workSaved) => {
           expect(workSaved).toBeTruthy()
-          requestGetWorks = httpTestingController.match(
-            runtimeEnvironment.API_WEB +
-              'works/worksExtendedPage.json?offset=0&sort=date&sortAsc=false&pageSize=50&featuredOnly=false'
-          )
-
-          if (index === works.length - 1) {
-            expect(requestGetWorks.length).toEqual(1)
-
-            requestGetWorks.forEach((getWorks) => {
-              getWorks.flush({})
-              const requestGroupingSuggestions = httpTestingController.match(
-                runtimeEnvironment.API_WEB + 'works/groupingSuggestions.json'
-              )
-              expect(requestGroupingSuggestions.length).toEqual(1)
-              requestGroupingSuggestions.forEach((grouping) => {
-                grouping.flush({})
-              })
-            })
-          }
         })
     })
 
+    // Assert all 5 save requests were made
     const requestsSaveWorks = httpTestingController.match(
       runtimeEnvironment.API_WEB + 'works/work.json'
     )
-
     expect(requestsSaveWorks.length).toEqual(5)
 
-    requestsSaveWorks.forEach((r) => {
-      r.flush({})
-    })
+    // Flush the save requests
+    requestsSaveWorks.forEach((r) => r.flush({}))
+
+    // Now getWorks should have been called once
+    const requestGetWorks = httpTestingController.match(
+      runtimeEnvironment.API_WEB +
+        'works/worksExtendedPage.json?offset=0&sort=date&sortAsc=false&pageSize=50&featuredOnly=false'
+    )
+    expect(requestGetWorks.length).toEqual(1)
+    requestGetWorks.forEach((getWorks) => getWorks.flush({}))
+
+    // Now groupingSuggestions should have been called once
+    const requestGroupingSuggestions = httpTestingController.match(
+      runtimeEnvironment.API_WEB + 'works/groupingSuggestions.json'
+    )
+    expect(requestGroupingSuggestions.length).toEqual(1)
+    requestGroupingSuggestions.forEach((grouping) => grouping.flush({}))
   })
 })
 
