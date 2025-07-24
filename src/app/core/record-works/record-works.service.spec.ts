@@ -62,7 +62,7 @@ describe('RecordWorksService', () => {
     expect(service).toBeTruthy()
   })
 
-  fit('should call the method `save` 5 times and only `getWorks` and `getWorksGroupingSuggestions` once', () => {
+  it('should call the method `save` 5 times and only `getWorks` and `getWorksGroupingSuggestions` once', () => {
     const works: Work[] = getNumberOfWorks(5)
 
     works.forEach((work, index) => {
