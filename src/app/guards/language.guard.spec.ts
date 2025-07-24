@@ -5,6 +5,8 @@ import { of } from 'rxjs'
 import { AuthorizeGuard } from './authorize.guard'
 import { UserService } from '../core'
 import { PlatformInfoService } from '../cdk/platform-info'
+import { WINDOW } from '../cdk/window'
+import { TogglzService } from '../core/togglz/togglz.service'
 
 describe('AuthorizeGuard', () => {
   let guard: AuthorizeGuard
@@ -33,6 +35,8 @@ describe('AuthorizeGuard', () => {
         { provide: UserService, useValue: user },
         { provide: Router, useValue: router },
         { provide: PlatformInfoService, useValue: platform },
+        { provide: WINDOW, useValue: { location: { href: 'href' } } },
+        { provide: TogglzService, useValue: { getStateOf: () => of(false) } },
       ],
     })
 

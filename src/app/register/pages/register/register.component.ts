@@ -10,7 +10,7 @@ import {
 } from '@angular/core'
 import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms'
 import { MatStep, MatStepper } from '@angular/material/stepper'
-import { Router } from '@angular/router'
+import { ActivatedRoute, Params, Router } from '@angular/router'
 import { Observable, combineLatest, forkJoin } from 'rxjs'
 import { catchError, first, map, switchMap } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
@@ -20,7 +20,7 @@ import { UserService } from 'src/app/core'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 import { RegisterService } from 'src/app/core/register/register.service'
 import { ERROR_REPORT } from 'src/app/errors'
-import { RequestInfoForm } from 'src/app/types'
+import { OauthParameters, RequestInfoForm } from 'src/app/types'
 import {
   RegisterConfirmResponse,
   RegisterForm,
@@ -31,6 +31,8 @@ import { GoogleTagManagerService } from '../../../core/google-tag-manager/google
 import { ReactivationLocal } from '../../../types/reactivation.local'
 import { JourneyType } from 'src/app/core/observability-events/observability-events.service'
 import { RegisterObservabilityService } from '../../register-observability.service'
+import { TogglzService } from 'src/app/core/togglz/togglz.service'
+import { OauthURLSessionManagerService } from 'src/app/core/oauth-urlsession-manager/oauth-urlsession-manager.service'
 
 @Component({
   selector: 'app-register',
@@ -71,6 +73,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   stepControlStepC2: UntypedFormGroup
   formGroupStepC2Optional = false
   @ViewChild('stepper') private myStepper: MatStepper
+  isOauthAuthorizationTogglzEnable: boolean
+  urlParams: OauthParameters
 
   constructor(
     private _cdref: ChangeDetectorRef,
@@ -82,7 +86,10 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     private _router: Router,
     private _errorHandler: ErrorHandlerService,
     private _userInfo: UserService,
-    private _registerObservabilityService: RegisterObservabilityService
+    private _route: ActivatedRoute,
+    private _registerObservabilityService: RegisterObservabilityService,
+    private _togglzService: TogglzService,
+    private _oauthURLSessionManagerService: OauthURLSessionManagerService
   ) {
     _platformInfo.get().subscribe((platform) => {
       this.platform = platform
@@ -119,25 +126,37 @@ export class RegisterComponent implements OnInit, AfterViewInit {
       captcha: [''],
     })
 
-    combineLatest([this._userInfo.getUserSession(), this._platformInfo.get()])
+    combineLatest([
+      this._userInfo.getUserSession(),
+      this._platformInfo.get(),
+      this._route.queryParams.pipe(first()),
+      this._togglzService.getStateOf('OAUTH_AUTHORIZATION').pipe(first()),
+    ])
       .pipe(
         first(),
-        map(([session, platform]) => {
+        map(([session, platform, urlParams, isOauthAuthorizationEnabled]) => {
           session = session as UserSession
           platform = platform as PlatformInfo
+          this.isOauthAuthorizationTogglzEnable = isOauthAuthorizationEnabled
 
           // TODO @leomendoza123 move the handle of social/institutional sessions to the user service
 
-          this.thirdPartyAuthData = session.thirdPartyAuthData
-          this.requestInfoForm = session.oauthSession
+          if (!this.isOauthAuthorizationTogglzEnable) {
+            this.thirdPartyAuthData = session.thirdPartyAuthData
+            this.requestInfoForm = session.oauthSession
 
-          if (this.thirdPartyAuthData || this.requestInfoForm) {
-            this._registerObservabilityService.reportRegisterEvent(
-              'prefill_register-form'
-            )
-            this.FormGroupStepA = this.prefillRegisterForm(
-              this.requestInfoForm,
-              this.thirdPartyAuthData
+            if (this.thirdPartyAuthData || this.requestInfoForm) {
+              this._registerObservabilityService.reportRegisterEvent(
+                'prefill_register-form'
+              )
+              this.FormGroupStepA = this.prefillRegisterForm(
+                this.requestInfoForm,
+                this.thirdPartyAuthData
+              )
+            }
+          } else {
+            this.FormGroupStepA = this.prefillRegisterFormWithUrlParameters(
+              urlParams as OauthParameters
             )
           }
         })
@@ -207,7 +226,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         )
         .subscribe((response) => {
           this.loading = false
-          if (response.url) {
+          if (response.url && !this.isOauthAuthorizationTogglzEnable) {
             this._registerObservabilityService.reportRegisterEvent(
               'register-confirmation',
               {
@@ -215,6 +234,19 @@ export class RegisterComponent implements OnInit, AfterViewInit {
               }
             )
             this.afterRegisterRedirectionHandler(response)
+          } else if (
+            this.isOauthAuthorizationTogglzEnable &&
+            this._oauthURLSessionManagerService.get()
+          ) {
+            this._registerObservabilityService.reportRegisterEvent(
+              'register-confirmation',
+              {
+                response,
+              }
+            )
+            this.afterRegisterRedirectionHandler({
+              url: this._oauthURLSessionManagerService.get(),
+            })
           } else {
             this._registerObservabilityService.reportRegisterErrorEvent(
               'register-confirmation',
@@ -235,6 +267,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
 
   afterRegisterRedirectionHandler(response: RegisterConfirmResponse) {
     if (isRedirectToTheAuthorizationPage(response)) {
+      this._oauthURLSessionManagerService.clear()
       this.window.location.href = response.url
     } else {
       if (
@@ -314,6 +347,24 @@ export class RegisterComponent implements OnInit, AfterViewInit {
               oauthData?.userEmail ||
               thirdPartyOauthData?.signinData?.email ||
               '',
+            confirmEmail: '',
+            additionalEmails: { '0': '' },
+          },
+        },
+      ],
+    })
+  }
+
+  prefillRegisterFormWithUrlParameters(
+    urlParams: OauthParameters
+  ): UntypedFormGroup {
+    return this._formBuilder.group({
+      personal: [
+        {
+          givenNames: urlParams?.given_names || '',
+          familyNames: urlParams?.family_names || '',
+          emails: {
+            email: urlParams?.email || '',
             confirmEmail: '',
             additionalEmails: { '0': '' },
           },

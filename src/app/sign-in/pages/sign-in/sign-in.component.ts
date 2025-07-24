@@ -7,7 +7,7 @@ import {
   ViewChild,
 } from '@angular/core'
 import { combineLatest } from 'rxjs'
-import { first, take } from 'rxjs/operators'
+import { first, map, take } from 'rxjs/operators'
 import { UserSession } from 'src/app/types/session.local'
 
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
@@ -17,7 +17,8 @@ import { RequestInfoForm } from '../../../types/request-info-form.endpoint'
 import { TypeSignIn } from '../../../types/sign-in.local'
 import { FormSignInComponent } from '../../components/form-sign-in/form-sign-in.component'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
-import { Router } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
+import { OauthParameters } from 'src/app/types'
 
 @Component({
   selector: 'app-sign-in',
@@ -53,19 +54,32 @@ export class SignInComponent implements OnInit {
   constructor(
     private _platformInfo: PlatformInfoService,
     private _router: Router,
+    private _route: ActivatedRoute,
     private _userInfo: UserService,
+    private _togglzService: TogglzService,
     @Inject(WINDOW) private window: Window
   ) {}
 
   ngOnInit() {
-    combineLatest([this._userInfo.getUserSession(), this._platformInfo.get()])
+    combineLatest([
+      this._userInfo.getUserSession(),
+      this._platformInfo.get(),
+      this._togglzService.getStateOf('OAUTH_AUTHORIZATION').pipe(take(1)),
+    ])
       .pipe(first())
-      .subscribe(([session, platform]) => {
+      .subscribe(([session, platform, isOauthAuthorizationTogglzEnable]) => {
         session = session as UserSession
         this.platform = platform as PlatformInfo
 
         this.isLoggedIn = session.loggedIn
-        this.isForceLogin = session.oauthSession?.forceLogin
+        if (!isOauthAuthorizationTogglzEnable) {
+          this.isForceLogin = session.oauthSession?.forceLogin
+        } else {
+          this.isForceLogin =
+            platform.queryParameters.show_login === 'true' ||
+            platform.queryParameters.prompt === 'login'
+        }
+
         if (this.isLoggedIn) {
           this.displayName = session.displayName
           this.realUserOrcid = session.orcidUrl
