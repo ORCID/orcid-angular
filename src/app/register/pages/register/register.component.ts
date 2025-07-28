@@ -155,9 +155,11 @@ export class RegisterComponent implements OnInit, AfterViewInit {
               )
             }
           } else {
-            this.FormGroupStepA = this.prefillRegisterFormWithUrlParameters(
-              urlParams as OauthParameters
-            )
+            if(!this.reactivation?.isReactivation) {
+              this.FormGroupStepA = this.prefillRegisterFormWithUrlParameters(
+                urlParams as OauthParameters
+              )
+            }            
           }
         })
       )
@@ -234,30 +236,36 @@ export class RegisterComponent implements OnInit, AfterViewInit {
               }
             )
             this.afterRegisterRedirectionHandler(response)
-          } else if (
-            this.isOauthAuthorizationTogglzEnable &&
-            this._oauthURLSessionManagerService.get()
-          ) {
+          } else if(this.isOauthAuthorizationTogglzEnable) {
             this._registerObservabilityService.reportRegisterEvent(
               'register-confirmation',
               {
                 response,
               }
             )
-            this.afterRegisterRedirectionHandler({
-              url: this._oauthURLSessionManagerService.get(),
-            })
+            // Verify if we have a oauth redirct url stored in local memory
+            let storedUrl = this._oauthURLSessionManagerService.get()            
+            if(storedUrl) {
+              this.afterRegisterRedirectionHandler({
+                url: this._oauthURLSessionManagerService.get(),
+              })
+            } else {
+              this.afterRegisterRedirectionHandler(response)
+            }
           } else {
-            this._registerObservabilityService.reportRegisterErrorEvent(
-              'register-confirmation',
-              {
-                response,
-              }
-            )
-            this._errorHandler.handleError(
-              new Error('registerUnexpectedConfirmation'),
-              ERROR_REPORT.REGISTER
-            )
+              // This is unexpected and will be reported as an error
+              this._registerObservabilityService.reportRegisterErrorEvent(
+                'register-confirmation',
+                {
+                  response,
+                }
+              )
+              this._errorHandler.handleError(
+                new Error('registerUnexpectedConfirmation'),
+                ERROR_REPORT.REGISTER
+              )
+              // The user will be redirected to the page suggested by the backend
+              this.afterRegisterRedirectionHandler(response)
           }
         })
     } else {

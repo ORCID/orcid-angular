@@ -113,6 +113,7 @@ export class RegisterService extends _RegisterServiceMixingBase {
         ) {
           url += `shibboleth/`
         }
+        
         if (reactivation.isReactivation) {
           url += `reactivationConfirm.json?${objectToUrlParameters(
             platform.queryParameters
@@ -127,7 +128,7 @@ export class RegisterService extends _RegisterServiceMixingBase {
         const registerFormWithTypeContext = this.addCreationTypeContext(
           platform,
           registerForm
-        )
+        )        
 
         return this._http
           .post<RegisterConfirmResponse>(
@@ -142,13 +143,12 @@ export class RegisterService extends _RegisterServiceMixingBase {
             catchError((error) =>
               this._errorHandler.handleError(error, ERROR_REPORT.REGISTER)
             ),
-            switchMap((value) => {
+            switchMap((value) => {              
               return this._userService.refreshUserSession(true, true).pipe(
                 first(),
                 map((userStatus) => {
                   if (!userStatus.loggedIn && !value.errors) {
-                    // sanity check the user should be logged
-                    // sanity check the user should be logged
+                    // sanity check the user should be logged                    
                     this._errorHandler.handleError(
                       new Error('registerSanityIssue'),
                       ERROR_REPORT.REGISTER
