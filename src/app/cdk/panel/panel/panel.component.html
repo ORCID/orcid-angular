@@ -87,6 +87,9 @@
       <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
     </ng-container>
   </div>
+  <div class="expand-featured-work" *ngIf="isFeaturedWork && isPublicRecord">
+    <mat-icon>open_in_full</mat-icon>
+  </div>
   <div class="buttons-container cy-buttons-container" *ngIf="!isFeaturedWork">
     <!-- [PRIVACY display] FOR `AFFILIATIONS`, `WORKS`, `FUNDINGS`  -->
     <ng-container *ngIf="visibility && !isPublicRecord && !isFeaturedWork">
