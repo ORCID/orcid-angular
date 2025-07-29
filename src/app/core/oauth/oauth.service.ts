@@ -2,7 +2,7 @@ import {
   HttpClient,
   HttpHeaders,
   HttpParams,
-  HttpResponse,  
+  HttpResponse,
 } from '@angular/common/http'
 import { CustomEncoder } from '../custom-encoder/custom.encoder'
 import { Inject, Injectable } from '@angular/core'
@@ -119,7 +119,10 @@ export class OauthService {
       )
   }
 
-  authorizeOnAuthServer(data: RequestInfoForm, approved: boolean): Observable<string> {
+  authorizeOnAuthServer(
+    data: RequestInfoForm,
+    approved: boolean
+  ): Observable<string> {
     let headers = new HttpHeaders()
     headers = headers.set(
       'Access-Control-Allow-Origin',
@@ -133,11 +136,11 @@ export class OauthService {
       .set('client_id', data.clientId)
       .set('state', data.oauthState)
 
-    if(approved === true) {
+    if (approved === true) {
       for (var s of data.scopes) {
         body = body.append('scope', s.value)
       }
-    }    
+    }
 
     return this._http
       .post<any>(runtimeEnvironment.AUTH_SERVER + 'oauth2/authorize', body, {
@@ -145,16 +148,19 @@ export class OauthService {
         withCredentials: true,
         observe: 'response',
       })
-      .pipe(        
+      .pipe(
         map((res: HttpResponse<any>) => {
-          if(res.body && res.body['error']) {
-            if(res.body['error'] == 'access_denied') {
+          if (res.body && res.body['error']) {
+            if (res.body['error'] == 'access_denied') {
               return res.body['uri']
             } else {
-              this._errorHandler.handleError(res.body, ERROR_REPORT.STANDARD_VERBOSE)
+              this._errorHandler.handleError(
+                res.body,
+                ERROR_REPORT.STANDARD_VERBOSE
+              )
             }
           } else {
-            return res.headers.get('location');          
+            return res.headers.get('location')
           }
         })
       )
