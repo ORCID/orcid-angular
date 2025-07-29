@@ -136,7 +136,7 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
         tap((useAuthServerFlag) => {
           if (useAuthServerFlag === true) {
             this._oauth
-              .authorizeOnAuthServer(this.oauthRequest)
+              .authorizeOnAuthServer(this.oauthRequest, value)
               .subscribe((redirectUrl) => {
                 this.redirectUrl.next(redirectUrl)
               })
