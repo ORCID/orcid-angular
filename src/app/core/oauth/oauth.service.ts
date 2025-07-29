@@ -119,7 +119,10 @@ export class OauthService {
       )
   }
 
-  authorizeOnAuthServer(data: RequestInfoForm): Observable<string> {
+  authorizeOnAuthServer(
+    data: RequestInfoForm,
+    approved: boolean
+  ): Observable<string> {
     let headers = new HttpHeaders()
     headers = headers.set(
       'Access-Control-Allow-Origin',
@@ -133,8 +136,10 @@ export class OauthService {
       .set('client_id', data.clientId)
       .set('state', data.oauthState)
 
-    for (var s of data.scopes) {
-      body = body.append('scope', s.value)
+    if (approved === true) {
+      for (var s of data.scopes) {
+        body = body.append('scope', s.value)
+      }
     }
 
     return this._http
@@ -145,7 +150,18 @@ export class OauthService {
       })
       .pipe(
         map((res: HttpResponse<any>) => {
-          return res.headers.get('location')
+          if (res.body && res.body['error']) {
+            if (res.body['error'] == 'access_denied') {
+              return res.body['uri']
+            } else {
+              this._errorHandler.handleError(
+                res.body,
+                ERROR_REPORT.STANDARD_VERBOSE
+              )
+            }
+          } else {
+            return res.headers.get('location')
+          }
         })
       )
   }
