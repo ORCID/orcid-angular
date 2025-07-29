@@ -15,7 +15,12 @@
   [attr.id]="'cy-panel-component-' + panelId + '-' + type + '-' + putCode"
 >
   <div class="featured-work-star" *ngIf="isFeaturedWork">
-    <mat-icon> star_filled </mat-icon>
+    <mat-icon>
+      <img
+        src="assets/vectors/featured-item-star-icon.svg"
+        alt="Featured item"
+      />
+    </mat-icon>
   </div>
   <!-- [EXPAND BUTTONS] FOR NESTED PANELS -->
   <ng-container
@@ -49,7 +54,12 @@
           class="featured-work-star"
           *ngIf="hasFeaturedIndex && isPreferred && featuredWorksTogglz"
         >
-          <mat-icon> star_filled </mat-icon>
+          <mat-icon>
+            <img
+              src="assets/vectors/featured-item-star-icon.svg"
+              alt="Featured item"
+            />
+          </mat-icon>
         </div>
         <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
       </ng-container>
@@ -62,7 +72,12 @@
         class="featured-work-star"
         *ngIf="hasFeaturedIndex && isPreferred && featuredWorksTogglz"
       >
-        <mat-icon> star_filled </mat-icon>
+        <mat-icon>
+          <img
+            src="assets/vectors/featured-item-star-icon.svg"
+            alt="Featured item"
+          />
+        </mat-icon>
       </div>
       <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
     </div>
