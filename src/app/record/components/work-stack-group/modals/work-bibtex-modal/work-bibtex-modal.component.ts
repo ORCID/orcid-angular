@@ -374,7 +374,7 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
         this._recordWorksService
           .save(work, false, index === this.selectedWorks.length - 1)
           .subscribe(() => {
-            if (!(index === this.selectedWorks.length - 1)) {
+            if (index === this.selectedWorks.length - 1) {
               this.loadingWorks = false
               this.worksFromBibtex = []
               this.closeEvent()
