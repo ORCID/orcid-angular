@@ -135,6 +135,8 @@ export class PanelComponent implements OnInit {
   tooltipLabelYourOwnVersion = $localize`:@@shared.youCanOnlyEditYour:You can only edit your own version`
   tooltipLabelVisibilityError = $localize`:@@peerReview.dataInconsistencyv2:This group of items has mixed visibility settings. Please select a visibility to apply to all items in the group.
   `
+  tooltipExpandItem = $localize`:@@shared.expandItem:Expand item`
+  tooltipExpandFeaturedItem = $localize`:@@shared.expandFeaturedItem:Expand featured item`
   openOtherSources = $localize`:@@record.openOtherSources:Open other sources`
 
   constructor(
