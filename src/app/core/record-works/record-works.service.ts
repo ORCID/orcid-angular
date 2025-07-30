@@ -203,7 +203,6 @@ export class RecordWorksService {
         }),
         tap((data) => {
           this._$loadingFeatured.next(false)
-          this.lastEmittedValue = data
           this.$featuredWorkSubject.next(data)
         })
       )
