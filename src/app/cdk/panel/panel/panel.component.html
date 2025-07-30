@@ -1,55 +1,76 @@
-<div
-  class="header box orc-font-body cy-panel-component"
-  [ngClass]="{
-    'header-bottom':
-      !isFeaturedWork &&
-      (isArrayAndIsNotEmpty(elements) || valueIsNotNull(elements)),
-    'top-bar-or-main':
-      !isFeaturedWork &&
-      (type === 'top-bar' || type === 'main' || isAffiliation()),
-    'side-bar': type === 'side-bar',
-    'staked-header': stackedHeader,
-    'expand-button': !editable && !isPublicRecord && !customControls,
-    'featured-header': isFeaturedWork
-  }"
-  [attr.id]="'cy-panel-component-' + panelId + '-' + type + '-' + putCode"
->
-  <div class="featured-work-star" *ngIf="isFeaturedWork">
-    <mat-icon>
-      <img
-        src="assets/vectors/featured-item-star-icon.svg"
-        alt="Featured item"
-      />
-    </mat-icon>
-  </div>
-  <!-- [EXPAND BUTTONS] FOR NESTED PANELS -->
-  <ng-container
-    *ngIf="!editable && !customControls && expandButtonsPosition === 'left'"
+<div>
+  <div
+    class="header box orc-font-body cy-panel-component"
+    [ngClass]="{
+      'header-bottom':
+        !isFeaturedWork &&
+        (isArrayAndIsNotEmpty(elements) || valueIsNotNull(elements)),
+      'top-bar-or-main':
+        !isFeaturedWork &&
+        (type === 'top-bar' || type === 'main' || isAffiliation()),
+      'side-bar': type === 'side-bar',
+      'staked-header': stackedHeader,
+      'expand-button': !editable && !isPublicRecord && !customControls,
+      'featured-header': isFeaturedWork
+    }"
+    [attr.id]="'cy-panel-component-' + panelId + '-' + type + '-' + putCode"
   >
-    <div class="expand-button-left">
-      <app-panel-expand-buttons
-        [panelId]="this.panelId"
-        [panelTitle]="this.panelTitle"
-        (toggle)="toggle()"
-        [openState]="openState"
-        [panelType]="this.type"
-        class="cy-panel-component-expand-button"
-      ></app-panel-expand-buttons>
-      <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
+    <div class="featured-work-star" *ngIf="isFeaturedWork">
+      <mat-icon>
+        <img
+          src="assets/vectors/featured-item-star-icon.svg"
+          alt="Featured item"
+        />
+      </mat-icon>
     </div>
-  </ng-container>
-
-  <div *ngIf="selectable">
-    <mat-checkbox
-      [aria-label]="
-        type | appPanelActivityActionAriaLabel : 'select' : this.panelTitle
-      "
-      class="text-wrap panel-checkbox"
-      *ngIf="(defaultPutCode === putCode || displayTheStack) && !isPublicRecord"
-      (change)="checked($event)"
-      [(ngModel)]="selected"
+    <!-- [EXPAND BUTTONS] FOR NESTED PANELS -->
+    <ng-container
+      *ngIf="!editable && !customControls && expandButtonsPosition === 'left'"
     >
-      <ng-container *ngIf="expandButtonsPosition !== 'left'">
+      <div class="expand-button-left">
+        <app-panel-expand-buttons
+          [panelId]="this.panelId"
+          [panelTitle]="this.panelTitle"
+          (toggle)="toggle()"
+          [openState]="openState"
+          [panelType]="this.type"
+          class="cy-panel-component-expand-button"
+        ></app-panel-expand-buttons>
+        <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
+      </div>
+    </ng-container>
+
+    <div *ngIf="selectable">
+      <mat-checkbox
+        [aria-label]="
+          type | appPanelActivityActionAriaLabel : 'select' : this.panelTitle
+        "
+        class="text-wrap panel-checkbox"
+        *ngIf="
+          (defaultPutCode === putCode || displayTheStack) && !isPublicRecord
+        "
+        (change)="checked($event)"
+        [(ngModel)]="selected"
+      >
+        <ng-container *ngIf="expandButtonsPosition !== 'left'">
+          <div
+            class="featured-work-star"
+            *ngIf="hasFeaturedIndex && isPreferred && featuredWorksTogglz"
+          >
+            <mat-icon>
+              <img
+                src="assets/vectors/featured-item-star-icon.svg"
+                alt="Featured item"
+              />
+            </mat-icon>
+          </div>
+          <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
+        </ng-container>
+      </mat-checkbox>
+      <div
+        *ngIf="isPublicRecord && expandButtonsPosition !== 'left'"
+        class="public-record-panel-header"
+      >
         <div
           class="featured-work-star"
           *ngIf="hasFeaturedIndex && isPreferred && featuredWorksTogglz"
@@ -62,147 +83,140 @@
           </mat-icon>
         </div>
         <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
-      </ng-container>
-    </mat-checkbox>
-    <div
-      *ngIf="isPublicRecord && expandButtonsPosition !== 'left'"
-      class="public-record-panel-header"
-    >
-      <div
-        class="featured-work-star"
-        *ngIf="hasFeaturedIndex && isPreferred && featuredWorksTogglz"
-      >
-        <mat-icon>
-          <img
-            src="assets/vectors/featured-item-star-icon.svg"
-            alt="Featured item"
-          />
-        </mat-icon>
       </div>
-      <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
     </div>
-  </div>
-  <div *ngIf="!selectable">
-    <ng-container *ngIf="expandButtonsPosition !== 'left'">
-      <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
-    </ng-container>
-  </div>
-  <div class="expand-featured-work" *ngIf="isFeaturedWork && isPublicRecord">
-    <mat-icon>open_in_full</mat-icon>
-  </div>
-  <div class="buttons-container cy-buttons-container" *ngIf="!isFeaturedWork">
-    <!-- [PRIVACY display] FOR `AFFILIATIONS`, `WORKS`, `FUNDINGS`  -->
-    <ng-container *ngIf="visibility && !isPublicRecord && !isFeaturedWork">
-      <ng-container *ngIf="visibilityError && editableVisibilityControl">
-        <mat-icon
-          class="large-material-icon error cy-inconsistency-issue material-icons-outlined"
-          [matTooltip]="tooltipLabelVisibilityError"
-          >info</mat-icon
-        >
+    <div *ngIf="!selectable">
+      <ng-container *ngIf="expandButtonsPosition !== 'left'">
+        <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
       </ng-container>
-      <app-visibility-selector
-        (ngModelChange)="updateVisibility($event)"
-        [ngModel]="visibility"
-        [multiEdit]="stackSiblings?.length > 1 ? 'multi' : 'single'"
-        [visibilityError]="visibilityError"
-        [editable]="editableVisibilityControl"
-        [itemTitle]="this.panelTitle"
-      ></app-visibility-selector>
-    </ng-container>
+    </div>
 
-    <!-- [CUSTOM CONTROLS] FOR `PEER REVIEWS` AND `RESEARCH RESOURCES` -->
-    <ng-content select="[custom-controls]"></ng-content>
-
-    <!-- [EDIT BUTTONS] FOR `AFFILIATIONS`, `WORKS`, `FUNDINGS` AND ALL SIDEBAR PANELS -->
-
-    <ng-container *ngIf="editable && !customControls">
-      <ng-container *ngIf="isAffiliation()">
-        <button
-          mat-icon-button
-          *ngIf="!isPublicRecord && isUserSource"
-          [matTooltip]="tooltipLabelEdit"
-          [attr.aria-label]="
-            type | appPanelActivityActionAriaLabel : 'edit' : this.panelTitle
-          "
-          (click)="openModal()"
-        >
-          <mat-icon class="material-icons-outlined">edit</mat-icon>
-        </button>
-        <ng-container
-          *ngIf="!isPublicRecord && !isUserSource && hasExternalIds"
-        >
-          <div
-            *ngIf="userVersionPresent"
-            [matTooltip]="
-              displayTheStack
-                ? tooltipLabelYourOwnVersion
-                : tooltipLabelOpenSources
-            "
+    <div class="buttons-container cy-buttons-container" *ngIf="!isFeaturedWork">
+      <!-- [PRIVACY display] FOR `AFFILIATIONS`, `WORKS`, `FUNDINGS`  -->
+      <ng-container *ngIf="visibility && !isPublicRecord && !isFeaturedWork">
+        <ng-container *ngIf="visibilityError && editableVisibilityControl">
+          <mat-icon
+            class="large-material-icon error cy-inconsistency-issue material-icons-outlined"
+            [matTooltip]="tooltipLabelVisibilityError"
+            >info</mat-icon
           >
-            <button
-              *ngIf="displayTheStack"
-              [disabled]="true"
-              mat-icon-button
-              [attr.aria-label]="tooltipLabelYourOwnVersion"
+        </ng-container>
+        <app-visibility-selector
+          (ngModelChange)="updateVisibility($event)"
+          [ngModel]="visibility"
+          [multiEdit]="stackSiblings?.length > 1 ? 'multi' : 'single'"
+          [visibilityError]="visibilityError"
+          [editable]="editableVisibilityControl"
+          [itemTitle]="this.panelTitle"
+        ></app-visibility-selector>
+      </ng-container>
+
+      <!-- [CUSTOM CONTROLS] FOR `PEER REVIEWS` AND `RESEARCH RESOURCES` -->
+      <ng-content select="[custom-controls]"></ng-content>
+
+      <!-- [EDIT BUTTONS] FOR `AFFILIATIONS`, `WORKS`, `FUNDINGS` AND ALL SIDEBAR PANELS -->
+
+      <ng-container *ngIf="editable && !customControls">
+        <ng-container *ngIf="isAffiliation()">
+          <button
+            mat-icon-button
+            *ngIf="!isPublicRecord && isUserSource"
+            [matTooltip]="tooltipLabelEdit"
+            [attr.aria-label]="
+              type | appPanelActivityActionAriaLabel : 'edit' : this.panelTitle
+            "
+            (click)="openModal()"
+          >
+            <mat-icon class="material-icons-outlined">edit</mat-icon>
+          </button>
+          <ng-container
+            *ngIf="!isPublicRecord && !isUserSource && hasExternalIds"
+          >
+            <div
+              *ngIf="userVersionPresent"
+              [matTooltip]="
+                displayTheStack
+                  ? tooltipLabelYourOwnVersion
+                  : tooltipLabelOpenSources
+              "
             >
-              <mat-icon class="material-icons-outlined">call_split</mat-icon>
-            </button>
-            <button
-              *ngIf="!displayTheStack"
-              [disabled]="false"
-              mat-icon-button
-              [attr.aria-label]="openOtherSources"
-              (click)="displayTheStackChange.next(true)"
-            >
-              <mat-icon class="material-icons-outlined">call_split</mat-icon>
-            </button>
-          </div>
+              <button
+                *ngIf="displayTheStack"
+                [disabled]="true"
+                mat-icon-button
+                [attr.aria-label]="tooltipLabelYourOwnVersion"
+              >
+                <mat-icon class="material-icons-outlined">call_split</mat-icon>
+              </button>
+              <button
+                *ngIf="!displayTheStack"
+                [disabled]="false"
+                mat-icon-button
+                [attr.aria-label]="openOtherSources"
+                (click)="displayTheStackChange.next(true)"
+              >
+                <mat-icon class="material-icons-outlined">call_split</mat-icon>
+              </button>
+            </div>
+          </ng-container>
+        </ng-container>
+        <ng-container *ngIf="!isAffiliation()">
+          <button
+            mat-icon-button
+            *ngIf="!isPublicRecord"
+            [matTooltip]="tooltipLabelEdit"
+            [attr.aria-label]="this.editModalComponent | editButtonAriaLabel"
+            (click)="openModal()"
+            class="cy-edit-button"
+          >
+            <mat-icon class="material-icons-outlined">edit</mat-icon>
+          </button>
         </ng-container>
       </ng-container>
-      <ng-container *ngIf="!isAffiliation()">
-        <button
-          mat-icon-button
-          *ngIf="!isPublicRecord"
-          [matTooltip]="tooltipLabelEdit"
-          [attr.aria-label]="this.editModalComponent | editButtonAriaLabel"
-          (click)="openModal()"
-          class="cy-edit-button"
-        >
-          <mat-icon class="material-icons-outlined">edit</mat-icon>
-        </button>
+      <!-- [EXPAND BUTTONS] FOR SIDEBAR PANELS -->
+      <ng-container
+        *ngIf="
+          !editable && !customControls && expandButtonsPosition === 'right'
+        "
+      >
+        <ng-container>
+          <app-panel-expand-buttons
+            (toggle)="toggle()"
+            [openState]="openState"
+            [panelType]="this.type"
+            [panelId]="panelId"
+          ></app-panel-expand-buttons>
+        </ng-container>
       </ng-container>
-    </ng-container>
-    <!-- [EXPAND BUTTONS] FOR SIDEBAR PANELS -->
-    <ng-container
-      *ngIf="!editable && !customControls && expandButtonsPosition === 'right'"
-    >
-      <ng-container>
-        <app-panel-expand-buttons
-          (toggle)="toggle()"
-          [openState]="openState"
-          [panelType]="this.type"
-          [panelId]="panelId"
-        ></app-panel-expand-buttons>
-      </ng-container>
-    </ng-container>
+    </div>
+  </div>
+
+  <div
+    [ngClass]="{ body: !isFeaturedWork, 'featured-body': isFeaturedWork }"
+    *ngIf="openState || type === 'side-bar'"
+  >
+    <!-- [PANEL CONTENT] FOR EVERY PANEL IMPLEMENTATION -->
+    <!-- hide the content when openState is false-->
+    <!-- on `side bar` never close the content -->
+
+    <ng-content></ng-content>
+
+    <!-- [NESTED PANELS] FOR PEER REVIEWS AND RESEARCH RESOURCES -->
+    <div class="nested-panels" *ngIf="hasNestedPanels">
+      <ng-content select="[nested-panels]"></ng-content>
+    </div>
   </div>
 </div>
-
-<div
-  [ngClass]="{ body: !isFeaturedWork, 'featured-body': isFeaturedWork }"
-  *ngIf="openState || type === 'side-bar'"
->
-  <!-- [PANEL CONTENT] FOR EVERY PANEL IMPLEMENTATION -->
-  <!-- hide the content when openState is false-->
-  <!-- on `side bar` never close the content -->
-
-  <ng-content></ng-content>
-
-  <!-- [NESTED PANELS] FOR PEER REVIEWS AND RESEARCH RESOURCES -->
-  <div class="nested-panels" *ngIf="hasNestedPanels">
-    <ng-content select="[nested-panels]"></ng-content>
-  </div>
+<div class="expand-featured-work" *ngIf="isFeaturedWork && isPublicRecord">
+  <button
+    mat-icon-button
+    [matTooltip]="tooltipExpandItem"
+    [attr.aria-label]="tooltipExpandFeaturedItem"
+  >
+    <mat-icon>open_in_full</mat-icon>
+  </button>
 </div>
+
 <ng-template #tempHeader>
   <ng-content select="[header]"></ng-content>
 </ng-template>

@@ -40,6 +40,13 @@
     ) !important;
   }
 
+  .expand-featured-work {
+    background-color: mat.get-color-from-palette(
+      $background,
+      brand-citrus-lemon-lightest
+    ) !important;
+  }
+
   .error {
     color: map-get($foreground, 'state-warning-dark');
   }

@@ -3,6 +3,7 @@
   display: block;
   border-radius: 4px;
 }
+
 .header {
   box-sizing: border-box;
   padding: 0 16px;
@@ -64,6 +65,9 @@
 }
 
 .featured-header {
+  .featured-work-star {
+    margin-top: 2px;
+  }
   min-height: 0;
   padding-top: 16px !important;
   padding-bottom: 4px !important;
@@ -105,11 +109,11 @@
 }
 
 .expand-featured-work {
-  margin-left: auto;
-  align-self: center;
-  margin-right: 16px;
-  padding-left: 8px;
-  height: 20px;
+  button {
+    height: 48px;
+    margin-right: 16px;
+    margin-top: 16px;
+  }
 }
 
 .columns-8 :host,
@@ -129,6 +133,9 @@
     margin-left: 1px !important;
   }
   .expand-featured-work {
-    margin-right: 8px;
+    button {
+      margin-right: 8px;
+      margin-left: 8px;
+    }
   }
 }
