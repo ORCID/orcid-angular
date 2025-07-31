@@ -86,6 +86,7 @@ import { DeepSelectInputModule } from '../cdk/deep-select-input/deep-select-inpu
 import { PageNotFound404Module } from '../page-not-found-404/page-not-found-404.module'
 import { LoginMainInterstitialsManagerService } from '../core/login-interstitials-manager/login-main-interstitials-manager.service'
 import { WorkFeaturedStackGroupComponent } from './components/work-featured-stack-group/work-featured-stack-group.component'
+import { WorkFeaturedComponent } from './components/work-featured/work-featured.component'
 
 @NgModule({
   declarations: [
@@ -108,6 +109,7 @@ import { WorkFeaturedStackGroupComponent } from './components/work-featured-stac
     WorkStackGroupComponent,
     WorkStackComponent,
     WorkComponent,
+    WorkFeaturedComponent,
     WorkFeaturedStackGroupComponent,
     TopBarActionsComponent,
     TopBarRecordIssuesComponent,

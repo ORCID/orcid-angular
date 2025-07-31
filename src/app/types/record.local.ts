@@ -10,7 +10,7 @@ import { AffiliationUIGroup } from './record-affiliation.endpoint'
 import { FundingGroup } from './record-funding.endpoint'
 import { PeerReview } from './record-peer-review.endpoint'
 import { ResearchResourcesEndpoint } from './record-research-resources.endpoint'
-import { WorksEndpoint } from './record-works.endpoint'
+import { Work, WorksEndpoint } from './record-works.endpoint'
 import { SortOrderType } from './sort'
 
 export interface SideBarPublicUserRecord {
@@ -45,7 +45,7 @@ export interface UserRecord {
   peerReviews?: PeerReview[]
   researchResources?: ResearchResourcesEndpoint
   works?: WorksEndpoint
-  featuredWorks?: WorksEndpoint
+  featuredWorks?: Work[]
   lastModifiedTime: any
   userInfo: UserInfo
 }
