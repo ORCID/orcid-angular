@@ -2,32 +2,26 @@
   id="works"
   role="region"
   [attr.aria-label]="regionWorks"
-  *ngIf="
-    workGroup?.groups && !(isPublicRecord && workGroup?.groups?.length === 0)
-  "
+  *ngIf="featuredWorks && !(isPublicRecord && featuredWorks.length === 0)"
 >
   <app-panels
     [userRecord]="userRecord"
     class="row"
-    [title]="featuredWorks"
+    [title]="featuredWorksLabel"
     [isPublicRecord]="isPublicRecord"
     [addMenuOptions]="addMenuOptions"
     [type]="'featured-works'"
     id="cy-featured-works-panels"
   >
     <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
-    <ng-container *ngIf="workGroup.groups.length > 0 && !loading">
-      <app-work-stack
+    <ng-container *ngIf="featuredWorks.length > 0 && !loading">
+      <app-work-featured
         [userRecord]="userRecord"
         [isPublicRecord]="isPublicRecord"
-        *ngFor="
-          let group of workGroup.groups | slice : 0 : 5;
-          trackBy: trackByWorkGroup
-        "
-        [workStack]="group"
+        *ngFor="let work of featuredWorks | slice : 0 : 5"
+        [work]="work"
         [userInfo]="userInfo"
-        [featured]="true"
-      ></app-work-stack>
+      ></app-work-featured>
     </ng-container>
     <app-alert-message *ngIf="noWorksAdded">
       <h3 title class="orc-font-body" i18n="@@shared.addWorksToEnableFeaturing">
@@ -48,7 +42,7 @@
       </div>
     </app-alert-message>
     <div
-      *ngIf="workGroup.groups.length === 0"
+      *ngIf="featuredWorks.length === 0"
       class="orc-font-body-small no-featured-works"
     >
       <p class="empty" i18n="@@shared.featuredWorksDescription">
