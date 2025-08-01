@@ -81,13 +81,18 @@ export class AuthorizeGuard implements CanActivateChild {
 
       // 2c. Everything looks good – allow navigation
       return of(true)
-    } else if (isOauthAuthorizationTogglzEnable && queryParams.client_id) {
+    } else if (isOauthAuthorizationTogglzEnable && (queryParams.client_id || queryParams.scope)) {
       if (
         !session.loggedIn ||
         queryParams.show_login === 'true' ||
         queryParams.prompt === 'login'
       ) {
         return this.redirectToLoginPage()
+      } else if(session.oauthSession?.redirectUrl){        
+        // Clear the local storage
+        this.oauthUrlSessionManger.clear()
+        ;(this.window as any).outOfRouterNavigation(session.oauthSession?.redirectUrl)
+        return of(true)
       } else {
         this.oauthUrlSessionManger.clear()
         return of(true)
