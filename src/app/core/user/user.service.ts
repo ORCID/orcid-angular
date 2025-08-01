@@ -367,7 +367,7 @@ export class UserService {
       )
       .pipe(
         switchMap((response) => {
-          if('skip_authorization' in response) {
+          if ('skip_authorization' in response) {
             let redirectUrl = response['redirect_url']
             var requestInfoForm: RequestInfoForm = {
               scopes: [],
@@ -394,7 +394,10 @@ export class UserService {
               redirectUrl: redirectUrl,
             } as RequestInfoForm
             return of(requestInfoForm)
-          } else if ('error' in response && response['error'] === 'oauth_error') {
+          } else if (
+            'error' in response &&
+            response['error'] === 'oauth_error'
+          ) {
             let error = response['error']
             let errorCode = response['errorCode']
             let errorDescription = response['errorDescription']
@@ -614,7 +617,7 @@ export class UserService {
     )
   }
 
-  private handleOauthErrors(error: Observable<any>) {    
+  private handleOauthErrors(error: Observable<any>) {
     return error.pipe(
       catchError((error) => {
         return of({ error: error?.error?.text })
