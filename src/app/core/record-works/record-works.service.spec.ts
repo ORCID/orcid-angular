@@ -85,7 +85,7 @@ describe('RecordWorksService', () => {
     // Now getWorks should have been called once
     const requestGetWorks = httpTestingController.match(
       runtimeEnvironment.API_WEB +
-        'works/worksExtendedPage.json?offset=0&sort=date&sortAsc=false&pageSize=50&featuredOnly=false'
+        'works/worksExtendedPage.json?offset=0&sort=date&sortAsc=false&pageSize=50'
     )
     expect(requestGetWorks.length).toEqual(1)
     requestGetWorks.forEach((getWorks) => getWorks.flush({}))
