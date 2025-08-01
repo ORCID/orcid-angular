@@ -88,7 +88,6 @@ export class PanelComponent implements OnInit {
   @Input() selectAll = false
   @Input() checkbox = false
   @Input() panelTitle: string
-  @Input() hasFeaturedIndex: boolean = false
   @Input() isPreferred: boolean
   _displayTheStack: boolean
   @Input()
@@ -115,9 +114,11 @@ export class PanelComponent implements OnInit {
     return this._isPublicRecord
   }
 
-  get isFeaturedWork(): boolean {
+  get featuredWorksSection(): boolean {
     return this.type === 'featured-works'
   }
+
+  @Input() isFeatured: boolean = false
 
   @Input() isUserSource = false
   @Input() hasExternalIds: boolean

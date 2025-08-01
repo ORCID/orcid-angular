@@ -35,7 +35,7 @@
     [visibilityError]="workStack.visibilityError"
     #panelsComponent
     [type]="'works'"
-    [hasFeaturedIndex]="workStack.featuredDisplayIndex > 0"
+    [isFeatured]="work.featuredDisplayIndex > 0"
     [panelTitle]="work.title.value"
     [isPreferred]="isPreferred(work)"
   >

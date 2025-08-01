@@ -66,7 +66,6 @@ export interface WorkGroup {
   activeVisibility: VisibilityStrings
   userVersionPresent: boolean
   externalIdentifiers: ExternalIdentifier[]
-  featuredDisplayIndex?: number
   works: Work[]
   checked: boolean
 }
