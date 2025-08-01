@@ -43,7 +43,7 @@ import { PeerReview } from '../../types/record-peer-review.endpoint'
 import { RecordResearchResourceService } from '../record-research-resource/record-research-resource.service'
 import { ResearchResourcesEndpoint } from '../../types/record-research-resources.endpoint'
 import { RecordWorksService } from '../record-works/record-works.service'
-import { WorksEndpoint } from 'src/app/types/record-works.endpoint'
+import { Work, WorksEndpoint } from 'src/app/types/record-works.endpoint'
 import { RecordPersonService } from '../record-person/record-person.service'
 import { RecordPublicSideBarService } from '../record-public-side-bar/record-public-side-bar.service'
 import { UserInfoService } from '../user-info/user-info.service'
@@ -202,7 +202,7 @@ export class RecordService {
               peerReviews: peerReviews as PeerReview[],
               researchResources: researchResources as ResearchResourcesEndpoint,
               works: works as WorksEndpoint,
-              featuredWorks: featuredWorks as WorksEndpoint,
+              featuredWorks: featuredWorks as Work[],
               lastModifiedTime: lastModifiedTime as any,
               userInfo: userInfo as UserInfo,
             })

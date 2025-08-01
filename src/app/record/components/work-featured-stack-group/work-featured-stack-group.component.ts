@@ -1,19 +1,12 @@
-import { ComponentType } from '@angular/cdk/portal'
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { UntypedFormGroup } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog'
 import { isEmpty } from 'lodash'
 import { Subject } from 'rxjs'
-import { first } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { DEFAULT_PAGE_SIZE } from 'src/app/constants'
-import { RecordWorksService } from 'src/app/core/record-works/record-works.service'
 import { RecordService } from 'src/app/core/record/record.service'
-import {
-  Work,
-  WorkGroup,
-  WorksEndpoint,
-} from 'src/app/types/record-works.endpoint'
+import { Work } from 'src/app/types/record-works.endpoint'
 import {
   MainPanelsState,
   UserRecord,
@@ -22,8 +15,6 @@ import {
 
 import { UserInfo } from '../../../types'
 import { GroupingSuggestions } from 'src/app/types/works.endpoint'
-import { AnnouncerService } from 'src/app/core/announcer/announcer.service'
-import { TogglzService } from '../../../core/togglz/togglz.service'
 
 @Component({
   selector: 'app-work-featured-stack-group',
@@ -65,10 +56,10 @@ export class WorkFeaturedStackGroupComponent implements OnInit {
   loading = true
 
   userRecord: UserRecord
-  workGroup: WorksEndpoint
+  featuredWorks: Work[]
   workStackGroupForm: UntypedFormGroup = new UntypedFormGroup({})
 
-  featuredWorks = $localize`:@@shared.featuredWorks:Featured works`
+  featuredWorksLabel = $localize`:@@shared.featuredWorks:Featured works`
   noWorksAdded: boolean = false
   labelActionsButton = $localize`:@@shared.ariaLabelActions:Choose an action to apply to selected works`
   paginationTotalAmountOfWorks: number
@@ -83,10 +74,7 @@ export class WorkFeaturedStackGroupComponent implements OnInit {
   constructor(
     private _dialog: MatDialog,
     private _platform: PlatformInfoService,
-    private _record: RecordService,
-    private _works: RecordWorksService,
-    private _announce: AnnouncerService,
-    private _togglz: TogglzService
+    private _record: RecordService
   ) {}
 
   ngOnInit(): void {
@@ -96,7 +84,7 @@ export class WorkFeaturedStackGroupComponent implements OnInit {
         this.userRecord = userRecord
         if (!isEmpty(userRecord?.featuredWorks)) {
           this.loading = false
-          this.workGroup = userRecord.featuredWorks
+          this.featuredWorks = userRecord.featuredWorks
         }
 
         if (!isEmpty(userRecord?.works)) {
@@ -111,42 +99,5 @@ export class WorkFeaturedStackGroupComponent implements OnInit {
     this._platform.get().subscribe((platform) => {
       this.platform = platform
     })
-  }
-
-  trackByWorkGroup(index, item: WorkGroup) {
-    return item.defaultPutCode
-  }
-
-  openModal(modal: ComponentType<any>, putCodes, selectedAll?: boolean) {
-    this.selectedWorks = []
-    this.selectAll = false
-    this._platform
-      .get()
-      .pipe(first())
-      .subscribe((platform) => {
-        const modalComponent = this._dialog.open(modal, {
-          width: '850px',
-          maxWidth: platform.tabletOrHandset ? '99%' : '80vw',
-        })
-        modalComponent.componentInstance.putCodes = putCodes
-        modalComponent.componentInstance.type = 'works'
-        modalComponent.componentInstance.selectedAll = selectedAll
-        modalComponent.componentInstance.totalWorks = this.workGroup.totalGroups
-        modalComponent.componentInstance.workGroups = this.workGroup.groups
-      })
-  }
-
-  filteredWorks(): Work[] {
-    const works: Work[] = []
-    this.selectedWorks.forEach((putCode) => {
-      this.workGroup.groups.forEach((workGroup) => {
-        workGroup.works.forEach((work) => {
-          if (work.putCode.value === putCode) {
-            works.push(work)
-          }
-        })
-      })
-    })
-    return works
   }
 }

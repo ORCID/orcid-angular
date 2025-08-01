@@ -3,18 +3,19 @@
   flex-direction: column;
 }
 
-:host {
+:host,
+app-panel,
+app-work {
   width: 100%;
 }
 
-:host.display-the-stack {
-  border-style: solid;
-  border-radius: 4px;
-  border-width: 2px;
-
-  app-panel:not(.last) {
+:host {
+  app-panel {
+    margin-top: 16px;
     display: block;
     position: relative;
+    border: none;
+    display: flex;
   }
 }
 
