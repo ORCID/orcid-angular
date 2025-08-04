@@ -2,7 +2,9 @@
   id="works"
   role="region"
   [attr.aria-label]="regionWorks"
-  *ngIf="featuredWorks && !(isPublicRecord && featuredWorks.length === 0)"
+  *ngIf="
+    featuredWorks?.length > 0 || (!isPublicRecord && featuredWorks.length === 0)
+  "
 >
   <app-panels
     [userRecord]="userRecord"
@@ -23,7 +25,7 @@
         [userInfo]="userInfo"
       ></app-work-featured>
     </ng-container>
-    <app-alert-message *ngIf="noWorksAdded">
+    <app-alert-message *ngIf="noWorksAdded && !isPublicRecord">
       <h3 title class="orc-font-body" i18n="@@shared.addWorksToEnableFeaturing">
         Add your works to enable featuring
       </h3>
@@ -42,7 +44,7 @@
       </div>
     </app-alert-message>
     <div
-      *ngIf="featuredWorks.length === 0"
+      *ngIf="featuredWorks.length === 0 && !isPublicRecord"
       class="orc-font-body-small no-featured-works"
     >
       <p class="empty" i18n="@@shared.featuredWorksDescription">
