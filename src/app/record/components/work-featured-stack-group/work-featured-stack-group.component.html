@@ -3,7 +3,8 @@
   role="region"
   [attr.aria-label]="regionWorks"
   *ngIf="
-    featuredWorks?.length > 0 || (!isPublicRecord && featuredWorks.length === 0)
+    featuredWorks?.length > 0 ||
+    (!isPublicRecord && featuredWorks?.length === 0)
   "
 >
   <app-panels
