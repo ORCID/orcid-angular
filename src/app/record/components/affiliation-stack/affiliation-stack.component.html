@@ -53,15 +53,29 @@
           mobile: isMobile
         }"
       >
-        {{ affiliation.affiliationName.value }}<ng-container *ngIf="affiliation.city?.value&& affiliation.country?.value">:</ng-container>
+        {{ affiliation.affiliationName.value
+        }}<ng-container
+          *ngIf="affiliation.city?.value && affiliation.country?.value"
+          >:</ng-container
+        >
 
-        <ng-container *ngIf="affiliation.city?.value&& affiliation.country?.value">
+        <ng-container
+          *ngIf="affiliation.city?.value && affiliation.country?.value"
+        >
           {{ affiliation.city.value }},
         </ng-container>
-        <ng-container *ngIf="affiliation.region?.value && affiliation.country?.value &&affiliation.city?.value">
+        <ng-container
+          *ngIf="
+            affiliation.region?.value &&
+            affiliation.country?.value &&
+            affiliation.city?.value
+          "
+        >
           {{ affiliation.region.value }},
         </ng-container>
-        <ng-container *ngIf="affiliation.country.value && affiliation.city?.value">
+        <ng-container
+          *ngIf="affiliation.country.value && affiliation.city?.value"
+        >
           {{ affiliation.country.value }}
         </ng-container>
       </h4>
