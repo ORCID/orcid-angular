@@ -82,10 +82,8 @@ export class WorkFeaturedStackGroupComponent implements OnInit {
       .getRecord({ publicRecordId: this.isPublicRecord })
       .subscribe((userRecord) => {
         this.userRecord = userRecord
-        if (!isEmpty(userRecord?.featuredWorks)) {
-          this.loading = false
-          this.featuredWorks = userRecord.featuredWorks
-        }
+        this.featuredWorks = userRecord.featuredWorks
+        this.loading = false
 
         if (!isEmpty(userRecord?.works)) {
           if (userRecord?.works.totalGroups === 0) {
