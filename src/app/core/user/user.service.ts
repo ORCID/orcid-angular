@@ -395,8 +395,7 @@ export class UserService {
             } as RequestInfoForm
             return of(requestInfoForm)
           } else if (
-            'error' in response &&
-            response['error'] === 'oauth_error'
+            'error' in response
           ) {
             let error = response['error']
             let errorCode = response['errorCode']
