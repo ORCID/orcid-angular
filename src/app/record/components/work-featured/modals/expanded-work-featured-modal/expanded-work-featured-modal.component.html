@@ -1,0 +1,53 @@
+<app-modal
+  [noPadding]="true"
+  [noSidebar]="true"
+  [loading]="loading"
+  class="orc-font-body-small"
+>
+  <app-modal-header [closeLabel]="closeLabel">
+    <div class="header">
+      <div class="featured-works-star">
+        <mat-icon> star_filled </mat-icon>
+      </div>
+      <ng-container i18n="@@shared.featuredWork">Featured work</ng-container>
+    </div>
+  </app-modal-header>
+
+  <strong class="title orc-font-body-large">{{ work?.title?.value }}</strong>
+  <div class="body">
+    <div class="summary">
+      <div *ngIf="work?.journalTitle">
+        {{ work.journalTitle.value }}
+      </div>
+      <div>
+        <ng-container *ngIf="work?.publicationDate?.year"
+          >{{ work.publicationDate | monthDayYearDateToString }}
+          |
+        </ng-container>
+        {{ work?.workType.value | recordWorkTypeLabel }}
+        <ng-container
+          *ngIf="
+            work?.contributorsGroupedByOrcid
+              | recordHolderRoles
+                : 'true'
+                : userRecord.userInfo.EFFECTIVE_USER_ORCID as roles
+          "
+        >
+          <ng-container *ngIf="roles">
+            |
+            <span class="record-holder">{{ roles }}</span>
+          </ng-container>
+        </ng-container>
+      </div>
+      <app-display-external-ids
+        [externalIdentifiers]="work?.workExternalIdentifiers"
+      ></app-display-external-ids>
+    </div>
+
+    <app-work-details
+      [work]="work"
+      [isPublicRecord]="true"
+      [id]="userRecord.userInfo.EFFECTIVE_USER_ORCID"
+    ></app-work-details>
+  </div>
+</app-modal>

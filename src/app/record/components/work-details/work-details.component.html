@@ -1,0 +1,341 @@
+<!-- TRANSLATED TITLE -->
+<app-display-attribute *ngIf="work?.translatedTitle?.content">
+  <div class="row">
+    <h3 class="orc-font-body-small">
+      <ng-container i18n="@@works.translatedTitle"
+        >Translated title</ng-container
+      >&nbsp;<span *ngIf="work?.translatedTitle?.languageCode"
+        >({{ getLanguageKey(work.translatedTitle.languageCode) }})
+      </span>
+    </h3>
+  </div>
+
+  <div>
+    {{ work.translatedTitle.content }}
+  </div>
+</app-display-attribute>
+
+<!-- LANGUAGE -->
+<app-display-attribute *ngIf="work?.languageName?.value">
+  <h3 class="orc-font-body-small">
+    <ng-container i18n="@@works.language">Language</ng-container>
+  </h3>
+
+  <div>
+    {{ getLanguageKey(work?.languageCode.value) }}
+  </div>
+</app-display-attribute>
+
+<!-- SUBTITLE -->
+<app-display-attribute *ngIf="work?.subtitle?.value">
+  <h3 class="orc-font-body-small">
+    <ng-container i18n="@@works.subtitleLabel">Subtitle</ng-container>
+  </h3>
+
+  <div>
+    {{ work?.subtitle.value }}
+  </div>
+</app-display-attribute>
+
+<!-- URL -->
+
+<app-display-attribute *ngIf="work?.url?.value">
+  <h3 class="orc-font-body-small" i18n="@@shared.url">URL</h3>
+
+  <div>
+    <a
+      class="underline"
+      *ngIf="work?.url.value | isUrl"
+      rel="noopener noreferrer"
+      target="_blank"
+      href="{{ work?.url.value }}"
+    >
+      {{ work.url.value }}
+    </a>
+
+    <ng-container *ngIf="!(work?.url.value | isUrl)">
+      {{ work.url.value }}
+    </ng-container>
+  </div>
+</app-display-attribute>
+
+<!--  CONTRIBUTORS-->
+<app-display-attribute
+  *ngIf="
+    work?.contributorsGroupedByOrcid?.length > 0 ||
+    work?.contributors?.length > 0
+  "
+>
+  <h3 class="orc-font-body-small" i18n="@@works.contributors">Contributors</h3>
+
+  <div>
+    <ng-container
+      *ngIf="work?.numberOfContributors > maxNumberContributorsWorkDetails"
+    >
+      <p>
+        <span i18n="@@works.showing">Showing the first</span>
+        <b>{{ maxNumberContributorsWorkDetails }}</b>
+        <span class="lowercase" i18n="@@works.contributors">
+          contributors
+        </span>
+      </p>
+      <p>----</p>
+    </ng-container>
+    <p
+      [ngClass]="{
+        'record-holder': contributor?.contributorOrcid?.path === id
+      }"
+      *ngFor="
+        let contributor of work?.contributorsGroupedByOrcid
+          | slice : 0 : maxNumberContributorsWorkDetails;
+        let index = index
+      "
+    >
+      <ng-container *ngIf="index < maxNumberContributorsWorkDetails">
+        <ng-container *ngIf="contributor?.creditName?.content">
+          <ng-container
+            *ngIf="
+              contributor?.creditName?.content !== privateName;
+              else elseBlock
+            "
+          >
+            {{ contributor.creditName.content }}
+          </ng-container>
+          <ng-template #elseBlock>{{ privateNameTranslation }}</ng-template>
+        </ng-container>
+        {{ contributor | contributorsPipe }}
+        <ng-container *ngIf="contributor?.contributorOrcid?.uri">
+          <span *ngIf="!(contributor | contributorsPipe)"> (</span
+          ><a
+            class="underline"
+            target="_blank"
+            rel="noreferrer noopener"
+            href="{{ contributor?.contributorOrcid?.uri }}"
+            >{{ contributor?.contributorOrcid?.path }}</a
+          >)
+        </ng-container>
+      </ng-container>
+    </p>
+    <ng-container
+      *ngIf="work?.numberOfContributors > maxNumberContributorsWorkDetails"
+    >
+      <span
+        *ngIf="work?.numberOfContributors > maxNumberContributors"
+        i18n="@@works.etAl"
+      >
+        et al.
+      </span>
+      <p>----</p>
+      <p>
+        <ng-container i18n="@@works.fullContributorList">
+          For the full contributor list
+        </ng-container>
+        <a
+          class="underline"
+          i18n="@@works.exportAsBibtex"
+          (click)="exportWork(work)"
+          *ngIf="!isPublicRecord"
+        >
+          export this work as BibTeX
+        </a>
+        <ng-container
+          i18n="@@works.or"
+          *ngIf="
+            !isPublicRecord &&
+            (work.workExternalIdentifiers[0]?.normalizedUrl?.value ||
+              work.workExternalIdentifiers[0]?.url?.value)
+          "
+        >
+          or
+        </ng-container>
+        <a
+          href="{{
+            work?.workExternalIdentifiers[0]?.normalizedUrl?.value ||
+              work?.workExternalIdentifiers[0]?.url?.value
+          }}"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="underline"
+          i18n="@@works.visitWorkSource"
+        >
+          visit the work source
+        </a>
+      </p>
+    </ng-container>
+  </div>
+</app-display-attribute>
+
+<!-- CITATION-->
+<app-display-attribute *ngIf="work.citation?.citation?.value?.length > 0">
+  <h3 class="orc-font-body-small">
+    <ng-container i18n="@@works.citation">Citation</ng-container>&nbsp;<span
+      *ngIf="work.citation?.citationType?.value"
+      class="citation-type"
+      >({{ work.citation?.citationType?.value }})</span
+    >
+  </h3>
+  <div>
+    <div>
+      <a
+        class="underline"
+        (click)="showCitation = !showCitation"
+        id="cy-citation-toggle-link"
+      >
+        <ng-container
+          i18n="@@works.showCitation"
+          *ngIf="!showCitation"
+          id="cy-show-citation"
+        >
+          Show citation
+        </ng-container>
+        <ng-container
+          i18n="@@works.hideCitation"
+          *ngIf="showCitation"
+          id="cy-hide-citation"
+        >
+          Hide citation
+        </ng-container>
+      </a>
+    </div>
+    <br *ngIf="showCitation" />
+    <ng-container>
+      <ng-container
+        *ngIf="
+          work.citation?.citation?.value?.length > maxBibtexCharacters &&
+          showCitation
+        "
+      >
+        <ng-container *ngIf="!showExpandedFormatting">
+          {{ work.citation.citation.value.substr(0, maxBibtexCharacters) }}
+        </ng-container>
+        <ng-container *ngIf="showExpandedFormatting">
+          <pre class="pre-bibtex"
+            >{{ work.citation.citation.value | formatBibtex }} </pre
+          >
+        </ng-container>
+        <ng-container *ngIf="work?.citation?.citationType?.value === 'bibtex'">
+          <br />
+          <br *ngIf="!showExpandedFormatting" />
+          <a
+            class="underline"
+            (click)="showExpandedFormatting = !showExpandedFormatting"
+            id="cy-expanded-citation-toggle-link"
+          >
+            <ng-container
+              i18n="@@works.expandedFormatBibtex"
+              *ngIf="!showExpandedFormatting"
+              id="cy-expanded-formatting"
+            >
+              Switch to expanded formatting
+            </ng-container>
+            <ng-container
+              i18n="@@works.compactFormatBibtex"
+              *ngIf="showExpandedFormatting"
+              id="cy-compact-formatting"
+            >
+              Switch to compact formatting
+            </ng-container>
+          </a>
+        </ng-container>
+        <br />
+        ----
+        <br />
+        <span i18n="@@works.fullCitation"> For full citation </span>
+        <a
+          class="underline"
+          i18n="@@works.exportAsBibtex"
+          (click)="exportWork(work)"
+          *ngIf="!isPublicRecord"
+        >
+          export this work as BibTeX
+        </a>
+        <ng-container i18n="@@works.or" *ngIf="!isPublicRecord">
+          or
+        </ng-container>
+        <a
+          href="{{
+            work.workExternalIdentifiers[0]?.normalizedUrl?.value ||
+              work.workExternalIdentifiers[0]?.url?.value
+          }}"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="underline"
+          i18n="@@works.visitWorkSource"
+        >
+          visit the work source
+        </a>
+      </ng-container>
+      <ng-container
+        *ngIf="
+          work?.citation?.citation?.value?.length < maxBibtexCharacters &&
+          showCitation
+        "
+      >
+        <ng-container *ngIf="!showExpandedFormatting">
+          {{ work.citation.citation.value }}
+        </ng-container>
+        <ng-container *ngIf="showExpandedFormatting">
+          <pre class="pre-bibtex"
+            >{{ work.citation.citation.value | formatBibtex }} </pre
+          >
+        </ng-container>
+        <ng-container *ngIf="work.citation?.citationType?.value === 'bibtex'">
+          <br />
+          <br *ngIf="!showExpandedFormatting" />
+          <a
+            class="underline"
+            (click)="showExpandedFormatting = !showExpandedFormatting"
+            id="cy-expanded-citation-toggle-link"
+          >
+            <ng-container
+              i18n="@@works.expandedFormatBibtex"
+              *ngIf="!showExpandedFormatting"
+              id="cy-expanded-formatting"
+            >
+              Switch to expanded formatting
+            </ng-container>
+
+            <ng-container
+              i18n="@@works.compactFormatBibtex"
+              *ngIf="showExpandedFormatting"
+              id="cy-compact-formatting"
+            >
+              Switch to compact formatting
+            </ng-container>
+          </a>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </div>
+</app-display-attribute>
+<!--  DESCRIPTION-->
+<app-display-attribute *ngIf="work.shortDescription?.value">
+  <h3 class="orc-font-body-small" i18n="@@works.description">Description</h3>
+  <div [innerText]="work.shortDescription.value"></div>
+</app-display-attribute>
+<!--  COUNTRY OF PUBLICATION-->
+<app-display-attribute *ngIf="work.countryCode?.value">
+  <h3 class="orc-font-body-small" i18n="@@works.countryOrLocationOfPublication">
+    Country/Location of publication
+  </h3>
+
+  <div>
+    {{ work.countryName.value }}
+  </div>
+</app-display-attribute>
+
+<!-- ADDED DATE-->
+<app-display-attribute>
+  <h3 class="orc-font-body-small" i18n="@@shared.added">Added</h3>
+  <div>
+    {{ work.createdDate | monthDayYearDateToString }}
+  </div>
+</app-display-attribute>
+
+<!-- LAST MODIFIED  DATE-->
+<app-display-attribute>
+  <h3 class="orc-font-body-small" i18n="@@shared.lastModified">
+    Last modified
+  </h3>
+  <div>{{ work.lastModified | monthDayYearDateToString }}</div>
+</app-display-attribute>
