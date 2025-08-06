@@ -2,7 +2,7 @@
 <app-display-attribute *ngIf="work?.translatedTitle?.content">
   <div class="row">
     <h3 class="orc-font-body-small">
-      <ng-container i18n="@@works.translatedTitle"
+      <ng-container i18n="@@works.translatedTitleWork"
         >Translated title</ng-container
       >&nbsp;<span *ngIf="work?.translatedTitle?.languageCode"
         >({{ getLanguageKey(work.translatedTitle.languageCode) }})
