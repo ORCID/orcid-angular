@@ -22,7 +22,10 @@ import { WINDOW } from 'src/app/cdk/window'
 import { ApplicationRoutes } from 'src/app/constants'
 import { ERROR_REPORT } from 'src/app/errors'
 import { OauthParameters, RequestInfoForm } from 'src/app/types'
-import { OauthAuthorize } from 'src/app/types/authorize.endpoint'
+import {
+  OauthAuthorize,
+  ValidateRedirectUriResponse,
+} from 'src/app/types/authorize.endpoint'
 import { UserSessionUpdateParameters } from 'src/app/types/session.local'
 
 import { SignInData } from '../../types/sign-in-data.endpoint'
@@ -131,6 +134,8 @@ export class OauthService {
     headers = headers.set('Content-Type', 'application/x-www-form-urlencoded')
     let csrf = this._cookie.get('AUTH-XSRF-TOKEN')
     headers = headers.set('x-xsrf-token', csrf)
+    console.log('>>>>>')
+    console.log(headers)
 
     let body = new HttpParams({ encoder: new CustomEncoder() })
       .set('client_id', data.clientId)
@@ -275,5 +280,30 @@ export class OauthService {
           this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
         )
       )
+  }
+
+  validateRedirectUri(
+    clientId: string,
+    redirectUri: string
+  ): Observable<ValidateRedirectUriResponse> {
+    console.log('Validating redirect URI:', redirectUri)
+    const url = `${runtimeEnvironment.AUTH_SERVER}validateRedirectUri`
+
+    // build url‐encoded body
+    let bodyParams = new HttpParams({ encoder: new CustomEncoder() })
+      .set('clientId', clientId)
+      .set('redirectUri', redirectUri)
+
+    // set headers exactly as in your other AUTH_SERVER calls
+    let headers = new HttpHeaders()
+      .set('Access-Control-Allow-Origin', runtimeEnvironment.AUTH_SERVER)
+      .set('Content-Type', 'application/x-www-form-urlencoded')
+      .set('x-xsrf-token', this._cookie.get('AUTH-XSRF-TOKEN'))
+
+    return this._http.post<ValidateRedirectUriResponse>(
+      url,
+      bodyParams.toString(),
+      { headers, withCredentials: true }
+    )
   }
 }
