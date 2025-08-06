@@ -134,8 +134,6 @@ export class OauthService {
     headers = headers.set('Content-Type', 'application/x-www-form-urlencoded')
     let csrf = this._cookie.get('AUTH-XSRF-TOKEN')
     headers = headers.set('x-xsrf-token', csrf)
-    console.log('>>>>>')
-    console.log(headers)
 
     let body = new HttpParams({ encoder: new CustomEncoder() })
       .set('client_id', data.clientId)
@@ -289,21 +287,19 @@ export class OauthService {
     console.log('Validating redirect URI:', redirectUri)
     const url = `${runtimeEnvironment.AUTH_SERVER}validateRedirectUri`
 
-    // build url‐encoded body
-    let bodyParams = new HttpParams({ encoder: new CustomEncoder() })
-      .set('clientId', clientId)
-      .set('redirectUri', redirectUri)
+    // JSON body instead of URL-encoded params
+    const body = { clientId, redirectUri }
 
-    // set headers exactly as in your other AUTH_SERVER calls
-    let headers = new HttpHeaders()
-      .set('Access-Control-Allow-Origin', runtimeEnvironment.AUTH_SERVER)
-      .set('Content-Type', 'application/x-www-form-urlencoded')
-      .set('x-xsrf-token', this._cookie.get('AUTH-XSRF-TOKEN'))
+    // set JSON headers
+    const headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': runtimeEnvironment.AUTH_SERVER,
+      'Content-Type': 'application/json',
+      'x-xsrf-token': this._cookie.get('AUTH-XSRF-TOKEN'),
+    })
 
-    return this._http.post<ValidateRedirectUriResponse>(
-      url,
-      bodyParams.toString(),
-      { headers, withCredentials: true }
-    )
+    return this._http.post<ValidateRedirectUriResponse>(url, body, {
+      headers,
+      withCredentials: true,
+    })
   }
 }
