@@ -394,9 +394,7 @@ export class UserService {
               redirectUrl: redirectUrl,
             } as RequestInfoForm
             return of(requestInfoForm)
-          } else if (
-            'error' in response
-          ) {
+          } else if ('error' in response) {
             let error = response['error']
             let errorCode = response['errorCode']
             let errorDescription = response['errorDescription']
