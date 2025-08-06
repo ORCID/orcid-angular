@@ -46,7 +46,7 @@ export class ErrorHandlerService {
         })
       )
       .pipe(
-        catchError((processedError: Error | HttpErrorResponse) => {
+        catchError((processedError: Error | HttpErrorResponse) => {          
           // Server error
           if (processedError instanceof HttpErrorResponse) {
             console.error(
