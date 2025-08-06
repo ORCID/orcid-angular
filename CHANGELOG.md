@@ -1,3 +1,9 @@
+## v2.119.16 - 2025-08-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.119.15...v2.119.16)
+
+- [#2582](https://github.com/ORCID/orcid-angular/pull/2582): ${PD-1926} lmendoza/enable-prompt-none
+
 ## v2.119.15 - 2025-08-06
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.119.14...v2.119.15)
