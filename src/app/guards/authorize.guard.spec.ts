@@ -7,6 +7,7 @@ import { UserService } from '../core'
 import { PlatformInfoService } from '../cdk/platform-info'
 import { WINDOW } from '../cdk/window'
 import { TogglzService } from '../core/togglz/togglz.service'
+import { OauthService } from '../core/oauth/oauth.service'
 
 describe('AuthorizeGuard', () => {
   let guard: AuthorizeGuard
@@ -37,6 +38,7 @@ describe('AuthorizeGuard', () => {
         { provide: PlatformInfoService, useValue: platform },
         { provide: WINDOW, useValue: { location: { href: 'href' } } },
         { provide: TogglzService, useValue: { getStateOf: () => of(false) } },
+        { provide: OauthService, useValue: {} },
       ],
     })
 

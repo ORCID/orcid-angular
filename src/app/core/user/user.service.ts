@@ -394,10 +394,7 @@ export class UserService {
               redirectUrl: redirectUrl,
             } as RequestInfoForm
             return of(requestInfoForm)
-          } else if (
-            'error' in response &&
-            response['error'] === 'oauth_error'
-          ) {
+          } else if ('error' in response) {
             let error = response['error']
             let errorCode = response['errorCode']
             let errorDescription = response['errorDescription']

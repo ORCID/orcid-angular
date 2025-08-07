@@ -22,7 +22,10 @@ import { WINDOW } from 'src/app/cdk/window'
 import { ApplicationRoutes } from 'src/app/constants'
 import { ERROR_REPORT } from 'src/app/errors'
 import { OauthParameters, RequestInfoForm } from 'src/app/types'
-import { OauthAuthorize } from 'src/app/types/authorize.endpoint'
+import {
+  OauthAuthorize,
+  ValidateRedirectUriResponse,
+} from 'src/app/types/authorize.endpoint'
 import { UserSessionUpdateParameters } from 'src/app/types/session.local'
 
 import { SignInData } from '../../types/sign-in-data.endpoint'
@@ -275,5 +278,28 @@ export class OauthService {
           this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
         )
       )
+  }
+
+  validateRedirectUri(
+    clientId: string,
+    redirectUri: string
+  ): Observable<ValidateRedirectUriResponse> {
+    console.log('Validating redirect URI:', redirectUri)
+    const url = `${runtimeEnvironment.AUTH_SERVER}validateRedirectUri`
+
+    // JSON body instead of URL-encoded params
+    const body = { clientId, redirectUri }
+
+    // set JSON headers
+    const headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': runtimeEnvironment.AUTH_SERVER,
+      'Content-Type': 'application/json',
+      'x-xsrf-token': this._cookie.get('AUTH-XSRF-TOKEN'),
+    })
+
+    return this._http.post<ValidateRedirectUriResponse>(url, body, {
+      headers,
+      withCredentials: true,
+    })
   }
 }
