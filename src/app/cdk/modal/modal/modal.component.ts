@@ -13,8 +13,10 @@ export class ModalComponent implements OnInit, OnDestroy {
   columns12: boolean
   screenDirection: 'rtl' | 'ltr'
   $destroy: Subject<void> = new Subject<void>()
+  featured = false
   @Input() loading = false
   @Input() noSidebar = false
+  @Input() noPadding = false
 
   constructor(
     private dialogRef: MatDialogRef<any>,

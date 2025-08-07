@@ -9,6 +9,7 @@ import { ModalFooterComponent } from './modal-footer/modal-footer.component'
 import { ModalHeaderComponent } from './modal-header/modal-header.component'
 import { ModalSideBarComponent } from './modal-side-bar/modal-side-bar.component'
 import { ModalComponent } from './modal/modal.component'
+import { ModalTitleComponent } from './modal-title/modal-title.component'
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { ModalComponent } from './modal/modal.component'
     ModalHeaderComponent,
     ModalFooterComponent,
     ModalSideBarComponent,
+    ModalTitleComponent,
   ],
   imports: [
     CommonModule,
@@ -29,6 +31,7 @@ import { ModalComponent } from './modal/modal.component'
     ModalHeaderComponent,
     ModalFooterComponent,
     ModalSideBarComponent,
+    ModalTitleComponent,
   ],
 })
 export class ModalModule {}
