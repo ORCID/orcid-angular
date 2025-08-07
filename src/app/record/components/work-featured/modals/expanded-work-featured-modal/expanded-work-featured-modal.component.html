@@ -13,7 +13,7 @@
     </div>
   </app-modal-header>
 
-  <strong class="title orc-font-body-large">{{ work?.title?.value }}</strong>
+  <app-modal-title [featured]="true">{{ work?.title?.value }}</app-modal-title>
   <div class="body">
     <div class="summary">
       <div *ngIf="work?.journalTitle">
