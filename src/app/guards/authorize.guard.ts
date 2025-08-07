@@ -7,7 +7,7 @@ import {
   UrlTree,
 } from '@angular/router'
 import { forkJoin, Observable, of } from 'rxjs'
-import { map, switchMap, take } from 'rxjs/operators'
+import { catchError, map, switchMap, take } from 'rxjs/operators'
 
 import { PlatformInfoService } from '../cdk/platform-info'
 import { WINDOW } from '../cdk/window'
@@ -18,6 +18,7 @@ import { OauthURLSessionManagerService } from '../core/oauth-urlsession-manager/
 import { TogglzService } from '../core/togglz/togglz.service'
 import { UserSession } from '../types/session.local'
 import { OauthParameters } from '../types'
+import { OauthService } from '../core/oauth/oauth.service'
 
 @Injectable({ providedIn: 'root' })
 export class AuthorizeGuard implements CanActivateChild {
@@ -27,7 +28,8 @@ export class AuthorizeGuard implements CanActivateChild {
     private readonly platform: PlatformInfoService,
     private readonly oauthUrlSessionManger: OauthURLSessionManagerService,
     @Inject(WINDOW) private window: Window,
-    private _togglzService: TogglzService
+    private _togglzService: TogglzService,
+    private oauthService: OauthService
   ) {}
 
   canActivateChild(
@@ -85,6 +87,9 @@ export class AuthorizeGuard implements CanActivateChild {
       isOauthAuthorizationTogglzEnable &&
       (queryParams.client_id || queryParams.scope)
     ) {
+      if (!session.loggedIn && queryParams.prompt === 'none') {
+        return this.validateRedirectUriAndRedirect(queryParams)
+      }
       if (
         !session.loggedIn ||
         queryParams.show_login === 'true' ||
@@ -106,6 +111,31 @@ export class AuthorizeGuard implements CanActivateChild {
 
     // 3. No OAuth session at all ➜ redirect
     return this.redirectToLoginPage()
+  }
+
+  private validateRedirectUriAndRedirect(
+    queryParams: OauthParameters
+  ): Observable<boolean | UrlTree> {
+    return this.oauthService
+      .validateRedirectUri(queryParams.client_id, queryParams.redirect_uri)
+      .pipe(
+        take(1),
+        map((resp) => {
+          if (resp.valid) {
+            // valid → redirect to the specified URI
+            ;(this.window as any).outOfRouterNavigation(
+              queryParams.redirect_uri
+            )
+            return false
+          }
+          // invalid → send to your 404 page
+          return this.router.createUrlTree(['/404'])
+        }),
+        catchError(() => {
+          // in case of error, redirect to 404
+          return of(this.router.createUrlTree(['/404']))
+        })
+      )
   }
 
   /**

@@ -11,3 +11,9 @@ export interface OauthAuthorize {
   persistentTokenEnabled: boolean
   emailAccessAllowed: boolean
 }
+
+export interface ValidateRedirectUriResponse {
+  clientId: string
+  redirectUri: string
+  valid: boolean
+}
