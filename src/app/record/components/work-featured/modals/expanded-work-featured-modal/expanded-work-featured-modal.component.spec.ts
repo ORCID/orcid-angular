@@ -18,6 +18,9 @@ import { RecordWorksService } from '../../../../../core/record-works/record-work
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { ExpandedWorkFeaturedModalComponent } from './expanded-work-featured-modal.component'
 import { ReactiveFormsModule } from '@angular/forms'
+import { MonthDayYearDateToStringPipe } from 'src/app/shared/pipes/month-day-year-date-to-string/month-day-year-date-to-string.pipe'
+import { RecordWorkTypeLabelPipe } from 'src/app/shared/pipes/record-work-type-label/record-work-type-label.pipe'
+import { RecordHolderRolesPipe } from 'src/app/shared/pipes/record-holder-roles/record-holder-roles.pipe'
 
 describe('ExpandedWorkFeaturedModalComponent', () => {
   let component: ExpandedWorkFeaturedModalComponent
@@ -30,7 +33,12 @@ describe('ExpandedWorkFeaturedModalComponent', () => {
         RouterTestingModule,
         ReactiveFormsModule,
       ],
-      declarations: [ExpandedWorkFeaturedModalComponent],
+      declarations: [
+        ExpandedWorkFeaturedModalComponent,
+        MonthDayYearDateToStringPipe,
+        RecordWorkTypeLabelPipe,
+        RecordHolderRolesPipe,
+      ],
       providers: [
         { provide: MatDialogRef, useValue: {} },
         { provide: MAT_DIALOG_DATA, useValue: {} },

@@ -166,7 +166,7 @@
 </app-display-attribute>
 
 <!-- CITATION-->
-<app-display-attribute *ngIf="work.citation?.citation?.value?.length > 0">
+<app-display-attribute *ngIf="work?.citation?.citation?.value?.length > 0">
   <h3 class="orc-font-body-small">
     <ng-container i18n="@@works.citation">Citation</ng-container>&nbsp;<span
       *ngIf="work.citation?.citationType?.value"
@@ -201,16 +201,16 @@
     <ng-container>
       <ng-container
         *ngIf="
-          work.citation?.citation?.value?.length > maxBibtexCharacters &&
+          work?.citation?.citation?.value?.length > maxBibtexCharacters &&
           showCitation
         "
       >
         <ng-container *ngIf="!showExpandedFormatting">
-          {{ work.citation.citation.value.substr(0, maxBibtexCharacters) }}
+          {{ work?.citation?.citation?.value?.substr(0, maxBibtexCharacters) }}
         </ng-container>
         <ng-container *ngIf="showExpandedFormatting">
           <pre class="pre-bibtex"
-            >{{ work.citation.citation.value | formatBibtex }} </pre
+            >{{ work?.citation?.citation?.value | formatBibtex }} </pre
           >
         </ng-container>
         <ng-container *ngIf="work?.citation?.citationType?.value === 'bibtex'">
@@ -272,11 +272,11 @@
         "
       >
         <ng-container *ngIf="!showExpandedFormatting">
-          {{ work.citation.citation.value }}
+          {{ work?.citation?.citation?.value }}
         </ng-container>
         <ng-container *ngIf="showExpandedFormatting">
           <pre class="pre-bibtex"
-            >{{ work.citation.citation.value | formatBibtex }} </pre
+            >{{ work?.citation?.citation?.value | formatBibtex }} </pre
           >
         </ng-container>
         <ng-container *ngIf="work.citation?.citationType?.value === 'bibtex'">
@@ -309,18 +309,18 @@
   </div>
 </app-display-attribute>
 <!--  DESCRIPTION-->
-<app-display-attribute *ngIf="work.shortDescription?.value">
+<app-display-attribute *ngIf="work?.shortDescription?.value">
   <h3 class="orc-font-body-small" i18n="@@works.description">Description</h3>
   <div [innerText]="work.shortDescription.value"></div>
 </app-display-attribute>
 <!--  COUNTRY OF PUBLICATION-->
-<app-display-attribute *ngIf="work.countryCode?.value">
+<app-display-attribute *ngIf="work?.countryCode?.value">
   <h3 class="orc-font-body-small" i18n="@@works.countryOrLocationOfPublication">
     Country/Location of publication
   </h3>
 
   <div>
-    {{ work.countryName.value }}
+    {{ work?.countryName.value }}
   </div>
 </app-display-attribute>
 
@@ -328,7 +328,7 @@
 <app-display-attribute>
   <h3 class="orc-font-body-small" i18n="@@shared.added">Added</h3>
   <div>
-    {{ work.createdDate | monthDayYearDateToString }}
+    {{ work?.createdDate | monthDayYearDateToString }}
   </div>
 </app-display-attribute>
 
@@ -337,5 +337,5 @@
   <h3 class="orc-font-body-small" i18n="@@shared.lastModified">
     Last modified
   </h3>
-  <div>{{ work.lastModified | monthDayYearDateToString }}</div>
+  <div>{{ work?.lastModified | monthDayYearDateToString }}</div>
 </app-display-attribute>

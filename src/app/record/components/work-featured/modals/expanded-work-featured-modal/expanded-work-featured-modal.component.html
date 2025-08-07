@@ -30,7 +30,7 @@
             work?.contributorsGroupedByOrcid
               | recordHolderRoles
                 : 'true'
-                : userRecord.userInfo.EFFECTIVE_USER_ORCID as roles
+                : userRecord?.userInfo?.EFFECTIVE_USER_ORCID as roles
           "
         >
           <ng-container *ngIf="roles">
@@ -47,7 +47,7 @@
     <app-work-details
       [work]="work"
       [isPublicRecord]="true"
-      [id]="userRecord.userInfo.EFFECTIVE_USER_ORCID"
+      [id]="userRecord?.userInfo?.EFFECTIVE_USER_ORCID"
     ></app-work-details>
   </div>
 </app-modal>
