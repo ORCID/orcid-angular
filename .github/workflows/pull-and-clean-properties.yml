@@ -25,6 +25,13 @@ jobs:
           fetch-depth: 0
           persist-credentials: true
 
+      - name: Configure push auth (use GH_PAT if provided)
+        if: ${{ secrets.GH_PAT != '' }}
+        run: |
+          git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/${{ github.repository }}
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
       - name: Install Transifex CLI (Go)
         run: |
           curl -sSfL https://raw.githubusercontent.com/transifex/cli/master/install.sh | bash
@@ -87,8 +94,6 @@ jobs:
 
       - name: Commit and push changes (if any)
         id: commit
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
           if [ -n "$(git status --porcelain)" ]; then
@@ -106,11 +111,45 @@ jobs:
             echo "changes=false" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Open PR to main if changes
-        if: steps.commit.outputs.changes == 'true'
+      - name: Generate outputs report
+        id: report
+        run: |
+          set -euo pipefail
+          tx_version=$(tx --version 2>/dev/null || echo "unknown")
+          echo "tx_version=${tx_version}" >> "$GITHUB_OUTPUT"
+          echo "previous_sha=${{ steps.prep.outputs.previous_sha }}" >> "$GITHUB_OUTPUT"
+          echo "branch_state=${{ steps.prep.outputs.branch_state }}" >> "$GITHUB_OUTPUT"
+          if [ "${{ steps.commit.outputs.changes }}" = "true" ]; then
+            commit_sha=$(git rev-parse HEAD)
+            files_changed=$(git diff --name-only HEAD^ HEAD | wc -l | tr -d ' ')
+            shortstat=$(git diff --shortstat HEAD^ HEAD | sed 's/^ *//')
+            echo "commit_sha=${commit_sha}" >> "$GITHUB_OUTPUT"
+            echo "files_changed=${files_changed}" >> "$GITHUB_OUTPUT"
+            echo "diffstat=${shortstat}" >> "$GITHUB_OUTPUT"
+            {
+              echo "### Transifex run report"
+              echo "- tx version: ${tx_version}"
+              echo "- previous head: ${{ steps.prep.outputs.previous_sha }} (${{ steps.prep.outputs.branch_state }})"
+              echo "- new commit: ${commit_sha}"
+              echo "- changes: ${files_changed} files (${shortstat})"
+            } >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "commit_sha=none" >> "$GITHUB_OUTPUT"
+            echo "files_changed=0" >> "$GITHUB_OUTPUT"
+            echo "diffstat=none" >> "$GITHUB_OUTPUT"
+            {
+              echo "### Transifex run report"
+              echo "- tx version: ${tx_version}"
+              echo "- previous head: ${{ steps.prep.outputs.previous_sha }} (${{ steps.prep.outputs.branch_state }})"
+              echo "- changes: none"
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Open PR to main if changes (PAT)
+        if: steps.commit.outputs.changes == 'true' && secrets.GH_PAT != ''
         uses: actions/github-script@v7
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GH_PAT }}
           script: |
             const { owner, repo } = context.repo;
             const head = 'transifex';
@@ -120,7 +159,6 @@ jobs:
               core.info('An open PR from transifex to main already exists.');
             } else {
               const prev = `${{ steps.prep.outputs.previous_sha }}`;
-              const state = `${{ steps.prep.outputs.branch_state }}`;
               const prevLine = prev && prev !== 'none' ? `Previous transifex head (before reset): ${prev}` : 'Branch was created from main (no previous head).';
               const body = [
                 'Automated update of .properties files via CI.',
