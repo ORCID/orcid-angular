@@ -2,9 +2,8 @@ name: Pull and clean properties
 
 on:
   workflow_dispatch: {}
-  # Uncomment to enable a scheduled run (e.g., every day at 02:30 UTC)
-  # schedule:
-  #   - cron: "30 2 * * *"
+  schedule:
+    - cron: "0 0,12 * * *" # every day at 00:00 and 12:00 UTC
 
 permissions:
   contents: write
