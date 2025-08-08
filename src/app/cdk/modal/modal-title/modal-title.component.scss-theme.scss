@@ -1,0 +1,15 @@
+@use '@angular/material' as mat;
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+@mixin work-stack-group-theme($theme) {
+  $background: map-get($theme, background);
+
+  .featured {
+    background-color: mat.get-color-from-palette(
+      $background,
+      brand-citrus-lemon-lightest
+    ) !important;
+  }
+}
+
+@include work-stack-group-theme($orcid-app-theme);

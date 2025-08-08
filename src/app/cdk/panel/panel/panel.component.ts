@@ -33,6 +33,7 @@ import { WINDOW } from 'src/app/cdk/window'
 import { TogglzService } from '../../../core/togglz/togglz.service'
 import { getAriaLabel } from '../../../constants'
 import { RecordBiographyService } from 'src/app/core/record-biography/record-biography.service'
+import { ExpandedWorkFeaturedModalComponent } from 'src/app/record/components/work-featured/modals/expanded-work-featured-modal/expanded-work-featured-modal.component'
 
 @Component({
     selector: 'app-panel',
@@ -258,6 +259,19 @@ export class PanelComponent implements OnInit {
   toggle() {
     this.openState = !this.openState
     this.openStateChange.next(this.openState)
+  }
+
+  expandItem() {
+    const modalComponent = this._dialog.open(
+      ExpandedWorkFeaturedModalComponent,
+      {
+        width: '850px',
+        maxWidth: '99%',
+        data: this.userRecord,
+      }
+    )
+    modalComponent.componentInstance.work = this.elements
+    modalComponent.componentInstance.userRecord = this.userRecord
   }
 
   updateVisibility(visibility: VisibilityStrings) {

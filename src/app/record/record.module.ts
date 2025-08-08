@@ -87,6 +87,8 @@ import { PageNotFound404Module } from '../page-not-found-404/page-not-found-404.
 import { LoginMainInterstitialsManagerService } from '../core/login-interstitials-manager/login-main-interstitials-manager.service'
 import { WorkFeaturedStackGroupComponent } from './components/work-featured-stack-group/work-featured-stack-group.component'
 import { WorkFeaturedComponent } from './components/work-featured/work-featured.component'
+import { ExpandedWorkFeaturedModalComponent } from './components/work-featured/modals/expanded-work-featured-modal/expanded-work-featured-modal.component'
+import { WorkDetailsComponent } from './components/work-details/work-details.component'
 
 @NgModule({
   declarations: [
@@ -109,6 +111,7 @@ import { WorkFeaturedComponent } from './components/work-featured/work-featured.
     WorkStackGroupComponent,
     WorkStackComponent,
     WorkComponent,
+    WorkDetailsComponent,
     WorkFeaturedComponent,
     WorkFeaturedStackGroupComponent,
     TopBarActionsComponent,
@@ -136,6 +139,7 @@ import { WorkFeaturedComponent } from './components/work-featured/work-featured.
     FundingExternalIdentifiersViewOnlyComponent,
     WorkFormComponent,
     WorkModalComponent,
+    ExpandedWorkFeaturedModalComponent,
     ModalCombineWorksWithSelectorComponent,
     WorkContributorRolesComponent,
     WorkContributorsComponent,
