@@ -51,6 +51,23 @@ jobs:
           chmod 600 "$HOME/.transifexrc"
           echo "Created ~/.transifexrc"
 
+      - name: Validate Transifex setup
+        run: |
+          set -euo pipefail
+          echo "tx version: $(tx --version || true)"
+          echo "Using .transifexrc located at: $HOME/.transifexrc"
+          # Show safe view of transifexrc (mask token)
+          sed -E 's/(password|token) = .+/\1 = ***MASKED***/' "$HOME/.transifexrc" | sed 's/^/  /'
+          # Basic sanity: list configured resources
+          if [ -f .tx/config ]; then
+            echo ".tx/config present. Showing first 20 lines:"; head -n 20 .tx/config | sed 's/^/  /'
+          else
+            echo "ERROR: .tx/config not found in repo root" >&2
+            exit 1
+          fi
+          # tx status will parse both files and fail fast if malformed
+          tx --traceback status || true
+
       - name: Configure Git user
         run: |
           git config user.name "github-actions[bot]"

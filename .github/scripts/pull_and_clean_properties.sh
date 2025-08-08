@@ -18,14 +18,14 @@ tx_operations() {
   local ext=$2
 
   echo ">>>>>>>>>>>>>>>>>>>>>>> Pulling translations for $lang"
-  tx pull --force -l "$lang"
+  tx --traceback pull --force -l "$lang"
   find . -type f -name "*.$ext.properties" -delete
   find . -type f -name "*.$lang.properties" -exec sh -c 'mv "$0" "${0%.'$lang'.properties}.'$ext'.properties"' {} \;
   echo ">>>>>>>>>>>>>>>>>>>>>>> Finished processing $lang files."
 }
 
 echo ">>>>>>>>>>>>>>>>>>>>>>> Pulling general translations..."
-tx pull --force --all
+tx --traceback pull --force --all
 
 # Perform tx pull operations for specified languages
 tx_operations "tr_TR" "tr"
