@@ -4,9 +4,13 @@
 $orcid-app-primary: mat.define-palette($orcid-blue);
 $orcid-app-accent: mat.define-palette($orcid-green);
 $orcid-app-warn: mat.define-palette($orcid-red);
-$orcid-app-theme: mat.define-light-theme(
-  $orcid-app-primary,
-  $orcid-app-accent,
-  $orcid-app-warn
-);
+
+$orcid-app-theme: mat.define-light-theme((
+  color: (
+    primary: $orcid-app-primary,
+    accent: $orcid-app-accent,
+    warn: $orcid-app-warn,
+  ),
+));
+
 $orcid-app-theme: light-theme-overwrites($orcid-app-theme);
