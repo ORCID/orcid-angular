@@ -7,13 +7,19 @@
     "sourceMap": true,
     "declaration": false,
     "module": "es2020",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "experimentalDecorators": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "target": "ES2022",
-    "typeRoots": ["node_modules/@types", "src/environments/interface.d.ts"],
-    "lib": ["es2017", "dom"],
+    "typeRoots": [
+      "node_modules/@types",
+      "src/environments/interface.d.ts"
+    ],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
     "skipLibCheck": true,
     "useDefineForClassFields": false
   },

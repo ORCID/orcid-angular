@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core'
+import { Component, OnInit, Inject, DOCUMENT } from '@angular/core'
 import { enterAnimation } from 'src/app/animations'
 import { WINDOW } from '../../../cdk/window'
 
@@ -7,7 +7,7 @@ import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { switchMap, tap } from 'rxjs/operators'
 import { WordpressService } from 'src/app/core/wordpress/wordpress.service'
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
-import { DOCUMENT } from '@angular/common'
+
 import { EMPTY } from 'rxjs'
 
 @Component({

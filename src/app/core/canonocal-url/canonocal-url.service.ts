@@ -1,5 +1,5 @@
-import { DOCUMENT } from '@angular/common'
-import { Inject, Injectable } from '@angular/core'
+
+import { Inject, Injectable, DOCUMENT } from '@angular/core'
 import { NavigationEnd, Router } from '@angular/router'
 import { filter, map } from 'rxjs/operators'
 import { ORCID_REGEXP } from 'src/app/constants'
