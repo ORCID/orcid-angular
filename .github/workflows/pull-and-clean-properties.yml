@@ -39,7 +39,7 @@ jobs:
           command -v tx || true
           tx --version || true
 
-      - name: Configure Transifex credentials (compat)
+      - name: Configure Transifex credentials
         run: |
           if [ -z "${TX_TOKEN:-}" ]; then
             echo "TRANSIFEX_TOKEN secret is not set" >&2
@@ -47,10 +47,10 @@ jobs:
           fi
           mkdir -p "$HOME"
           printf "%s\n" \
-            "[https://www.transifex.com]" \
-            "hostname = https://www.transifex.com" \
-            "username = api" \
-            "password = ${TX_TOKEN}" > "$HOME/.transifexrc"
+            "[https://app.transifex.com]" \
+            "hostname = https://app.transifex.com" \
+            "api_hostname = https://api.transifex.com" \
+            "token = ${TX_TOKEN}" > "$HOME/.transifexrc"
           chmod 600 "$HOME/.transifexrc"
           echo "Created ~/.transifexrc"
 
@@ -68,7 +68,7 @@ jobs:
             echo "ERROR: .tx/config not found in repo root" >&2
             exit 1
           fi
-          # tx status will parse both files and fail fast if malformed
+          # tx status will parse both files and fail fast if malformed (Go CLI supports --traceback? not needed)
           tx status || true
 
       - name: Configure Git user
