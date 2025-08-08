@@ -16,6 +16,8 @@ concurrency:
 jobs:
   pull-clean:
     runs-on: ubuntu-latest
+    env:
+      TX_TOKEN: ${{ secrets.TRANSIFEX_TOKEN }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -23,22 +25,17 @@ jobs:
           fetch-depth: 0
           persist-credentials: true
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Install Transifex client (tx)
+      - name: Install Transifex CLI (Go)
         run: |
-          python -m pip install --upgrade pip
-          pip install transifex-client
+          curl -sSfL https://raw.githubusercontent.com/transifex/cli/master/install.sh | bash
+          # Ensure common install dirs are on PATH for subsequent steps
+          echo "$HOME/bin" >> "$GITHUB_PATH"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
           tx --version || true
 
-      - name: Configure Transifex credentials
-        env:
-          TRANSIFEX_TOKEN: ${{ secrets.TRANSIFEX_TOKEN }}
+      - name: Configure Transifex credentials (compat)
         run: |
-          if [ -z "$TRANSIFEX_TOKEN" ]; then
+          if [ -z "${TX_TOKEN:-}" ]; then
             echo "TRANSIFEX_TOKEN secret is not set" >&2
             exit 1
           fi
@@ -47,7 +44,7 @@ jobs:
             "[https://www.transifex.com]" \
             "hostname = https://www.transifex.com" \
             "username = api" \
-            "password = ${TRANSIFEX_TOKEN}" > "$HOME/.transifexrc"
+            "password = ${TX_TOKEN}" > "$HOME/.transifexrc"
           chmod 600 "$HOME/.transifexrc"
           echo "Created ~/.transifexrc"
 
@@ -66,7 +63,7 @@ jobs:
             exit 1
           fi
           # tx status will parse both files and fail fast if malformed
-          tx --traceback status || true
+          tx status || true
 
       - name: Configure Git user
         run: |
