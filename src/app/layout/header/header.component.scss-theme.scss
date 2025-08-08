@@ -41,7 +41,9 @@
     }
   }
   .top-bar-new-info {
-    color: mat.get-color-from-palette($primary);
+    button {
+      color: mat.get-color-from-palette($primary);
+    }
 
     .menu-container {
       .row {

@@ -20,9 +20,11 @@
   }
 }
 
+// Keep var tied to element color so nested content inherits correctly
 .mat-mdc-button.mat-unthemed {
-  --mdc-text-button-label-text-color: unset;
+  --mdc-text-button-label-text-color: currentColor;
 }
+
 button.mat-mdc-icon-button {
   --mdc-icon-button-icon-size: 14px;
 }
