@@ -30,14 +30,9 @@ jobs:
           curl -sSfL https://raw.githubusercontent.com/transifex/cli/master/install.sh | bash
           # Move the tx binary into a directory on PATH for subsequent steps
           mkdir -p "$HOME/bin"
-          if [ -f "./tx" ]; then
-            install -m 0755 ./tx "$HOME/bin/tx"
-          elif [ -f "$GITHUB_WORKSPACE/tx" ]; then
-            install -m 0755 "$GITHUB_WORKSPACE/tx" "$HOME/bin/tx"
-          fi
-          echo "$HOME/bin" >> "$GITHUB_PATH"
-          command -v tx || true
-          tx --version || true
+
+          install -m 0755 ./tx "$HOME/bin/tx"
+       
 
       - name: Configure Transifex credentials
         run: |
@@ -54,22 +49,8 @@ jobs:
           chmod 600 "$HOME/.transifexrc"
           echo "Created ~/.transifexrc"
 
-      - name: Validate Transifex setup
-        run: |
-          set -euo pipefail
-          echo "tx version: $(tx --version || true)"
-          echo "Using .transifexrc located at: $HOME/.transifexrc"
-          # Show safe view of transifexrc (mask token)
-          sed -E 's/(password|token) = .+/\1 = ***MASKED***/' "$HOME/.transifexrc" | sed 's/^/  /'
-          # Basic sanity: list configured resources
-          if [ -f .tx/config ]; then
-            echo ".tx/config present. Showing first 20 lines:"; head -n 20 .tx/config | sed 's/^/  /'
-          else
-            echo "ERROR: .tx/config not found in repo root" >&2
-            exit 1
-          fi
-          # tx status will parse both files and fail fast if malformed (Go CLI supports --traceback? not needed)
-          tx status || true
+      - name: Verify Transifex CLI
+        run: tx --version
 
       - name: Configure Git user
         run: |
