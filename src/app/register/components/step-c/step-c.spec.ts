@@ -19,15 +19,16 @@ import { RegisterStateService } from '../../register-state.service'
 import { RegisterObservabilityService } from '../../register-observability.service'
 
 @Component({
-  selector: 'app-form-visibility',
-  template: '<div></div>',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => MockFormVisibilityComponent),
-      multi: true,
-    },
-  ],
+    selector: 'app-form-visibility',
+    template: '<div></div>',
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => MockFormVisibilityComponent),
+            multi: true,
+        },
+    ],
+    standalone: false
 })
 export class MockFormVisibilityComponent implements ControlValueAccessor {
   writeValue(): void {}

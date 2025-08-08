@@ -14,12 +14,13 @@ import { UserRecord } from '../../../../../types/record.local'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 
 @Component({
-  selector: 'app-work-doi-bibtex-modal',
-  templateUrl: './work-bibtex-modal.component.html',
-  styleUrls: [
-    './work-bibtex-modal.component.scss',
-    './work-bibtex-modal.component.scss-theme.scss',
-  ],
+    selector: 'app-work-doi-bibtex-modal',
+    templateUrl: './work-bibtex-modal.component.html',
+    styleUrls: [
+        './work-bibtex-modal.component.scss',
+        './work-bibtex-modal.component.scss-theme.scss',
+    ],
+    standalone: false
 })
 export class WorkBibtexModalComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

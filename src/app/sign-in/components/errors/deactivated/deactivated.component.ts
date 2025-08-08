@@ -9,10 +9,11 @@ import { WINDOW } from '../../../../cdk/window'
 import { OrcidValidators } from 'src/app/validators'
 
 @Component({
-  selector: 'app-deactivated',
-  templateUrl: './deactivated.component.html',
-  styleUrls: ['./deactivated.component.scss'],
-  preserveWhitespaces: true,
+    selector: 'app-deactivated',
+    templateUrl: './deactivated.component.html',
+    styleUrls: ['./deactivated.component.scss'],
+    preserveWhitespaces: true,
+    standalone: false
 })
 export class DeactivatedComponent implements OnInit {
   @Input() email: string

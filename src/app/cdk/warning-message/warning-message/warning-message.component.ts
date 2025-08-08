@@ -4,13 +4,14 @@ import { takeUntil } from 'rxjs/operators'
 import { PlatformInfoService } from '../../platform-info'
 
 @Component({
-  selector: 'app-warning-message',
-  templateUrl: './warning-message.component.html',
-  styleUrls: [
-    './warning-message.component.scss',
-    'warning-message.component.scss-theme.scss',
-  ],
-  preserveWhitespaces: false,
+    selector: 'app-warning-message',
+    templateUrl: './warning-message.component.html',
+    styleUrls: [
+        './warning-message.component.scss',
+        'warning-message.component.scss-theme.scss',
+    ],
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class WarningMessageComponent implements OnInit, OnDestroy {
   private _type: 'warning' | 'success' | 'info' = 'warning'

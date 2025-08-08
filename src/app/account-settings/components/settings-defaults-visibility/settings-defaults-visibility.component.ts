@@ -13,10 +13,11 @@ import { AccountDefaultVisibilityService } from 'src/app/core/account-default-vi
 import { RecordService } from 'src/app/core/record/record.service'
 
 @Component({
-  selector: 'app-settings-defaults-visibility',
-  templateUrl: './settings-defaults-visibility.component.html',
-  styleUrls: ['./settings-defaults-visibility.component.scss'],
-  preserveWhitespaces: true,
+    selector: 'app-settings-defaults-visibility',
+    templateUrl: './settings-defaults-visibility.component.html',
+    styleUrls: ['./settings-defaults-visibility.component.scss'],
+    preserveWhitespaces: true,
+    standalone: false
 })
 export class SettingsDefaultsVisibilityComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

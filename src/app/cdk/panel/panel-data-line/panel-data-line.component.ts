@@ -8,10 +8,11 @@ import {
 } from '@angular/core'
 
 @Component({
-  selector: 'app-panel-data-line',
-  templateUrl: './panel-data-line.component.html',
-  styleUrls: ['./panel-data-line.component.scss'],
-  preserveWhitespaces: true,
+    selector: 'app-panel-data-line',
+    templateUrl: './panel-data-line.component.html',
+    styleUrls: ['./panel-data-line.component.scss'],
+    preserveWhitespaces: true,
+    standalone: false
 })
 export class PanelDataLineComponent implements OnInit {
   @Input() noBoldTitle = false

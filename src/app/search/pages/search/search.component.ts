@@ -11,9 +11,10 @@ import { RobotsMetaTagsService } from 'src/app/core/robots-meta-tags/robots-meta
 import { AnnouncerService } from 'src/app/core/announcer/announcer.service'
 
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss'],
+    selector: 'app-search',
+    templateUrl: './search.component.html',
+    styleUrls: ['./search.component.scss'],
+    standalone: false
 })
 export class SearchComponent implements OnInit, OnDestroy {
   searchResults: SearchResults

@@ -16,10 +16,11 @@ import { DialogActionsDuplicatedTwoFactorAuthComponent } from '../dialog-actions
 import { DialogActionsDuplicatedComponent } from '../dialog-actions-duplicated/dialog-actions-duplicated.component'
 
 @Component({
-  selector: 'app-settings-actions-duplicated',
-  templateUrl: './settings-actions-duplicated.component.html',
-  styleUrls: ['./settings-actions-duplicated.component.scss'],
-  preserveWhitespaces: true,
+    selector: 'app-settings-actions-duplicated',
+    templateUrl: './settings-actions-duplicated.component.html',
+    styleUrls: ['./settings-actions-duplicated.component.scss'],
+    preserveWhitespaces: true,
+    standalone: false
 })
 export class SettingsActionsDuplicatedComponent implements OnInit {
   userSession: UserSession

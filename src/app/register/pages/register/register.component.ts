@@ -35,14 +35,15 @@ import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { OauthURLSessionManagerService } from 'src/app/core/oauth-urlsession-manager/oauth-urlsession-manager.service'
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: [
-    './register.component.scss',
-    './register.component.scss.theme.scss',
-    '../../components/register.scss-theme.scss',
-    '../../components/register.style.scss',
-  ],
+    selector: 'app-register',
+    templateUrl: './register.component.html',
+    styleUrls: [
+        './register.component.scss',
+        './register.component.scss.theme.scss',
+        '../../components/register.scss-theme.scss',
+        '../../components/register.style.scss',
+    ],
+    standalone: false
 })
 export class RegisterComponent implements OnInit, AfterViewInit {
   @ViewChild('lastStep') lastStep: MatStep

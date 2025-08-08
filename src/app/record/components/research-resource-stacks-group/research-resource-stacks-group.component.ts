@@ -25,9 +25,10 @@ import { LiveAnnouncer } from '@angular/cdk/a11y'
 import { AnnouncerService } from 'src/app/core/announcer/announcer.service'
 
 @Component({
-  selector: 'app-research-resources',
-  templateUrl: './research-resource-stacks-group.component.html',
-  styleUrls: ['./research-resource-stacks-group.component.scss'],
+    selector: 'app-research-resources',
+    templateUrl: './research-resource-stacks-group.component.html',
+    styleUrls: ['./research-resource-stacks-group.component.scss'],
+    standalone: false
 })
 export class ResearchResourceStacksGroupComponent implements OnInit {
   defaultPageSize = DEFAULT_PAGE_SIZE

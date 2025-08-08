@@ -15,9 +15,10 @@ import { SocialAccount } from 'src/app/types/account-alternate-sign-in.endpoint'
 import { DialogSecurityAlternateAccountDeleteComponent } from '../dialog-security-alternate-account-delete/dialog-security-alternate-account-delete.component'
 
 @Component({
-  selector: 'app-settings-security-alternate-sign-in',
-  templateUrl: './settings-security-alternate-sign-in.component.html',
-  styleUrls: ['./settings-security-alternate-sign-in.component.scss'],
+    selector: 'app-settings-security-alternate-sign-in',
+    templateUrl: './settings-security-alternate-sign-in.component.html',
+    styleUrls: ['./settings-security-alternate-sign-in.component.scss'],
+    standalone: false
 })
 export class SettingsSecurityAlternateSignInComponent
   implements OnInit, OnDestroy

@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core'
 
 @Pipe({
-  name: 'appPanelsExpandAriaLabel',
+    name: 'appPanelsExpandAriaLabel',
+    standalone: false
 })
 export class AppPanelsExpandAriaLabelPipe implements PipeTransform {
   transform(panelType: any, args?: any, panelTitle?: any): string {

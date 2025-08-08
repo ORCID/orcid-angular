@@ -16,12 +16,13 @@ import { TogglzService } from '../../../core/togglz/togglz.service'
 import { PlatformInfoService } from '../../../cdk/platform-info'
 
 @Component({
-  selector: 'app-affiliation-stack',
-  templateUrl: './affiliation-stack.component.html',
-  styleUrls: [
-    './affiliation-stack.component.scss',
-    './affiliation-stack.component.scss-theme.scss',
-  ],
+    selector: 'app-affiliation-stack',
+    templateUrl: './affiliation-stack.component.html',
+    styleUrls: [
+        './affiliation-stack.component.scss',
+        './affiliation-stack.component.scss-theme.scss',
+    ],
+    standalone: false
 })
 export class AffiliationStackComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

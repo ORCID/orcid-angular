@@ -35,13 +35,14 @@ import {
 } from 'src/app/types/record-affiliation.endpoint'
 
 @Component({
-  selector: 'app-affiliation-interstitial',
-  templateUrl: './affiliations-interstitial.component.html',
-  styleUrls: [
-    './affiliations-interstitial.component.scss',
-    './affiliations-interstitial.component.scss-theme.scss',
-  ],
-  preserveWhitespaces: true,
+    selector: 'app-affiliation-interstitial',
+    templateUrl: './affiliations-interstitial.component.html',
+    styleUrls: [
+        './affiliations-interstitial.component.scss',
+        './affiliations-interstitial.component.scss-theme.scss',
+    ],
+    preserveWhitespaces: true,
+    standalone: false
 })
 export class AffiliationsInterstitialComponent implements OnInit, OnDestroy {
   /** Main form group. */

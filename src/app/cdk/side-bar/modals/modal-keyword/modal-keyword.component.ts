@@ -32,12 +32,13 @@ import { Assertion } from '../../../../types'
 import { WINDOW } from '../../../window'
 
 @Component({
-  selector: 'app-modal-keyword',
-  templateUrl: './modal-keyword.component.html',
-  styleUrls: [
-    './modal-keyword.component.scss-theme.scss',
-    './modal-keyword.component.scss',
-  ],
+    selector: 'app-modal-keyword',
+    templateUrl: './modal-keyword.component.html',
+    styleUrls: [
+        './modal-keyword.component.scss-theme.scss',
+        './modal-keyword.component.scss',
+    ],
+    standalone: false
 })
 export class ModalKeywordComponent implements OnInit, OnDestroy {
   ariaLabelSave = $localize`:@@side-bar.ariaLabelKeywordSave:Save changes to Keywords`

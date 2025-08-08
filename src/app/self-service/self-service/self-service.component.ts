@@ -6,13 +6,14 @@ import { WINDOW } from 'src/app/cdk/window'
 import { ApplicationRoutes } from 'src/app/constants'
 
 @Component({
-  selector: 'app-self-service',
-  templateUrl: './self-service.component.html',
-  styleUrls: [
-    './self-service.component.scss',
-    './self-service.component.scss-theme.scss',
-  ],
-  preserveWhitespaces: true,
+    selector: 'app-self-service',
+    templateUrl: './self-service.component.html',
+    styleUrls: [
+        './self-service.component.scss',
+        './self-service.component.scss-theme.scss',
+    ],
+    preserveWhitespaces: true,
+    standalone: false
 })
 export class SelfServiceComponent implements OnInit {
   @Output() loading = new EventEmitter<boolean>()

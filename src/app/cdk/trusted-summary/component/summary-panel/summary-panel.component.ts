@@ -5,13 +5,14 @@ import { RecordUtil } from 'src/app/shared/utils/record.util'
 import { ActivitySummary } from 'src/app/types/trust-summary'
 
 @Component({
-  selector: 'app-summary-panel',
-  templateUrl: './summary-panel.component.html',
-  styleUrls: [
-    './summary-panel.component.scss',
-    './summary-panel.component.scss-theme.scss',
-  ],
-  preserveWhitespaces: true,
+    selector: 'app-summary-panel',
+    templateUrl: './summary-panel.component.html',
+    styleUrls: [
+        './summary-panel.component.scss',
+        './summary-panel.component.scss-theme.scss',
+    ],
+    preserveWhitespaces: true,
+    standalone: false
 })
 export class SummaryPanelComponent implements OnInit {
   @Input() activitySummary: ActivitySummary[]

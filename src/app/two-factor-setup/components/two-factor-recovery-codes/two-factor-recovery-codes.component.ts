@@ -4,12 +4,13 @@ import { WINDOW } from '../../../cdk/window'
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms'
 
 @Component({
-  selector: 'app-two-factor-recovery-codes',
-  templateUrl: './two-factor-recovery-codes.component.html',
-  styleUrls: [
-    './two-factor-recovery-codes.component.scss',
-    './two-factor-recovery-codes.component.scss-theme.scss',
-  ],
+    selector: 'app-two-factor-recovery-codes',
+    templateUrl: './two-factor-recovery-codes.component.html',
+    styleUrls: [
+        './two-factor-recovery-codes.component.scss',
+        './two-factor-recovery-codes.component.scss-theme.scss',
+    ],
+    standalone: false
 })
 export class TwoFactorRecoveryCodesComponent implements OnInit {
   @Input() backupCodes: string

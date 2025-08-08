@@ -8,7 +8,8 @@ import { ModalNameComponent } from 'src/app/record/components/top-bar/modals/mod
 import { ModalBiographyComponent } from 'src/app/record/components/top-bar/modals/modal-biography/modal-biography.component'
 
 @Pipe({
-  name: 'editButtonAriaLabel',
+    name: 'editButtonAriaLabel',
+    standalone: false
 })
 export class EditButtonAriaLabelPipe implements PipeTransform {
   transform(modal: any, args?: any): string {

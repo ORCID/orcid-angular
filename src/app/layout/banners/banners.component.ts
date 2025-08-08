@@ -7,10 +7,11 @@ import { MaintenanceMessage } from 'src/app/types/togglz.local'
 import { CookieService } from 'ngx-cookie-service'
 
 @Component({
-  selector: 'app-banners',
-  templateUrl: './banners.component.html',
-  styleUrls: ['./banners.component.scss'],
-  preserveWhitespaces: true,
+    selector: 'app-banners',
+    templateUrl: './banners.component.html',
+    styleUrls: ['./banners.component.scss'],
+    preserveWhitespaces: true,
+    standalone: false
 })
 export class BannersComponent implements OnInit {
   environment = runtimeEnvironment

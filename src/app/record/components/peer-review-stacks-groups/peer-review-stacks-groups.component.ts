@@ -21,13 +21,14 @@ import { VisibilityStrings } from '../../../types/common.endpoint'
 import { isQA } from 'src/app/shared/validators/environment-check/environment-check'
 
 @Component({
-  selector: 'app-peer-reviews',
-  templateUrl: './peer-review-stacks-groups.component.html',
-  styleUrls: [
-    './peer-review-stacks-groups.component.scss',
-    './peer-review-stacks-groups.component.scss-theme.scss',
-  ],
-  preserveWhitespaces: true,
+    selector: 'app-peer-reviews',
+    templateUrl: './peer-review-stacks-groups.component.html',
+    styleUrls: [
+        './peer-review-stacks-groups.component.scss',
+        './peer-review-stacks-groups.component.scss-theme.scss',
+    ],
+    preserveWhitespaces: true,
+    standalone: false
 })
 export class PeerReviewStacksGroupsComponent implements OnInit {
   regionPeerReviews = $localize`:@@peerReview.peerReviews:Peer reviews`

@@ -5,10 +5,11 @@ import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { ApplicationRoutes } from 'src/app/constants'
 import { RegisterBackendErrors } from 'src/app/types/register.local'
 @Component({
-  selector: 'app-backend-error',
-  templateUrl: './backend-error.component.html',
-  styleUrls: ['./backend-error.component.scss'],
-  preserveWhitespaces: true,
+    selector: 'app-backend-error',
+    templateUrl: './backend-error.component.html',
+    styleUrls: ['./backend-error.component.scss'],
+    preserveWhitespaces: true,
+    standalone: false
 })
 export class BackendErrorComponent implements OnInit {
   recognizedError = RegisterBackendErrors

@@ -20,12 +20,13 @@ import { RecordUtil } from 'src/app/shared/utils/record.util'
 import { concat } from 'lodash'
 
 @Component({
-  selector: 'app-trusted-summary',
-  templateUrl: './trusted-summary.component.html',
-  styleUrls: [
-    './trusted-summary.component.scss',
-    './trusted-summary.component.scss-theme.scss',
-  ],
+    selector: 'app-trusted-summary',
+    templateUrl: './trusted-summary.component.html',
+    styleUrls: [
+        './trusted-summary.component.scss',
+        './trusted-summary.component.scss-theme.scss',
+    ],
+    standalone: false
 })
 export class TrustedSummaryComponent implements OnInit, OnDestroy {
   @Input() standaloneMode: boolean = true

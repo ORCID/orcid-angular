@@ -22,12 +22,13 @@ import { WINDOW } from 'src/app/cdk/window/window.service'
 import { RecordService } from 'src/app/core/record/record.service'
 
 @Component({
-  selector: 'app-share-emails-domains',
-  templateUrl: './share-emails-domains.component.html',
-  styleUrls: [
-    './share-emails-domains.component.scss',
-    './share-emails-domains.component.scss-theme.scss',
-  ],
+    selector: 'app-share-emails-domains',
+    templateUrl: './share-emails-domains.component.html',
+    styleUrls: [
+        './share-emails-domains.component.scss',
+        './share-emails-domains.component.scss-theme.scss',
+    ],
+    standalone: false
 })
 export class ShareEmailsDomainsComponent implements OnDestroy {
   beforeSummit = true

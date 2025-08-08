@@ -8,13 +8,14 @@ import { ApplicationRoutes } from '../../../constants'
 import { Router } from '@angular/router'
 
 @Component({
-  selector: 'app-two-factor-setup-module',
-  templateUrl: './two-factor-setup.component.html',
-  styleUrls: [
-    './two-factor-setup.component.scss',
-    './two-factor-setup.component.scss-theme.scss',
-  ],
-  preserveWhitespaces: true,
+    selector: 'app-two-factor-setup-module',
+    templateUrl: './two-factor-setup.component.html',
+    styleUrls: [
+        './two-factor-setup.component.scss',
+        './two-factor-setup.component.scss-theme.scss',
+    ],
+    preserveWhitespaces: true,
+    standalone: false
 })
 export class TwoFactorSetupComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

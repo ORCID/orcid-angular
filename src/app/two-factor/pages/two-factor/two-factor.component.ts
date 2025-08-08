@@ -7,10 +7,11 @@ import { first } from 'rxjs/operators'
 import { TwoFactorAuthenticationService } from '../../../core/two-factor-authentication/two-factor-authentication.service'
 
 @Component({
-  selector: 'app-two-factor-module',
-  templateUrl: './two-factor.component.html',
-  styleUrls: ['./two-factor.component.scss'],
-  preserveWhitespaces: true,
+    selector: 'app-two-factor-module',
+    templateUrl: './two-factor.component.html',
+    styleUrls: ['./two-factor.component.scss'],
+    preserveWhitespaces: true,
+    standalone: false
 })
 export class TwoFactorComponent implements OnInit {
   loading = false

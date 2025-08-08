@@ -5,12 +5,13 @@ import { PlatformInfo, PlatformInfoService } from '../../platform-info'
 import { WINDOW } from '../../window'
 
 @Component({
-  selector: 'app-side-bar-id',
-  templateUrl: './side-bar-id.component.html',
-  styleUrls: [
-    './side-bar-id.component.scss',
-    './side-bar-id.component-scss-theme.scss',
-  ],
+    selector: 'app-side-bar-id',
+    templateUrl: './side-bar-id.component.html',
+    styleUrls: [
+        './side-bar-id.component.scss',
+        './side-bar-id.component-scss-theme.scss',
+    ],
+    standalone: false
 })
 export class SideBarIdComponent implements OnInit, OnDestroy {
   labelPreviewRecord = $localize`:@@record.ariaLabelPreviewPublicRecord:Preview the public version of this record (Opens in a new tab)`

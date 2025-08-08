@@ -7,9 +7,10 @@ import { DialogActionsDuplicatedMergedConfirmedComponent } from '../dialog-actio
 import { TwoFactorAuthenticationService } from '../../../core/two-factor-authentication/two-factor-authentication.service'
 
 @Component({
-  selector: 'app-dialog-actions-duplicated-two-factor-auth',
-  templateUrl: './dialog-actions-duplicated-two-factor-auth.component.html',
-  styleUrls: ['./dialog-actions-duplicated-two-factor-auth.component.scss'],
+    selector: 'app-dialog-actions-duplicated-two-factor-auth',
+    templateUrl: './dialog-actions-duplicated-two-factor-auth.component.html',
+    styleUrls: ['./dialog-actions-duplicated-two-factor-auth.component.scss'],
+    standalone: false
 })
 export class DialogActionsDuplicatedTwoFactorAuthComponent implements OnInit {
   showBadVerificationCode: boolean

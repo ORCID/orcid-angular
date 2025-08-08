@@ -28,27 +28,28 @@ import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 
 @Component({
-  selector: 'app-form-password',
-  templateUrl: './form-password.component.html',
-  styleUrls: [
-    './form-password.component.scss-theme.scss',
-    './form-password.component.scss',
-    '../register.scss-theme.scss',
-    '../register.style.scss',
-  ],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => FormPasswordComponent),
-      multi: true,
-    },
-    {
-      provide: NG_ASYNC_VALIDATORS,
-      useExisting: forwardRef(() => FormPasswordComponent),
-      multi: true,
-    },
-  ],
-  preserveWhitespaces: true,
+    selector: 'app-form-password',
+    templateUrl: './form-password.component.html',
+    styleUrls: [
+        './form-password.component.scss-theme.scss',
+        './form-password.component.scss',
+        '../register.scss-theme.scss',
+        '../register.style.scss',
+    ],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => FormPasswordComponent),
+            multi: true,
+        },
+        {
+            provide: NG_ASYNC_VALIDATORS,
+            useExisting: forwardRef(() => FormPasswordComponent),
+            multi: true,
+        },
+    ],
+    preserveWhitespaces: true,
+    standalone: false
 })
 export class FormPasswordComponent
   extends BaseForm

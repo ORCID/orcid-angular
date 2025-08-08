@@ -11,25 +11,26 @@ import { RegisterService } from 'src/app/core/register/register.service'
 import { BaseForm } from '../BaseForm'
 
 @Component({
-  selector: 'app-form-notifications',
-  templateUrl: './form-notifications.component.html',
-  styleUrls: [
-    './form-notifications.component.scss',
-    '../register.style.scss',
-    '../register.scss-theme.scss',
-  ],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => FormNotificationsComponent),
-      multi: true,
-    },
-    {
-      provide: NG_ASYNC_VALIDATORS,
-      useExisting: forwardRef(() => FormNotificationsComponent),
-      multi: true,
-    },
-  ],
+    selector: 'app-form-notifications',
+    templateUrl: './form-notifications.component.html',
+    styleUrls: [
+        './form-notifications.component.scss',
+        '../register.style.scss',
+        '../register.scss-theme.scss',
+    ],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => FormNotificationsComponent),
+            multi: true,
+        },
+        {
+            provide: NG_ASYNC_VALIDATORS,
+            useExisting: forwardRef(() => FormNotificationsComponent),
+            multi: true,
+        },
+    ],
+    standalone: false
 })
 export class FormNotificationsComponent extends BaseForm implements OnInit {
   constructor(private _register: RegisterService) {

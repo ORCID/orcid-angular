@@ -3,13 +3,13 @@ import { WINDOW } from 'src/app/cdk/window'
 import { InboxNotificationInstitutional } from 'src/app/types/notifications.endpoint'
 
 @Component({
-  selector: 'app-notification-permission-institutional-connection',
-  templateUrl:
-    './notification-permission-institutional-connection.component.html',
-  styleUrls: [
-    './notification-permission-institutional-connection.component.scss',
-  ],
-  preserveWhitespaces: true,
+    selector: 'app-notification-permission-institutional-connection',
+    templateUrl: './notification-permission-institutional-connection.component.html',
+    styleUrls: [
+        './notification-permission-institutional-connection.component.scss',
+    ],
+    preserveWhitespaces: true,
+    standalone: false
 })
 export class NotificationPermissionInstitutionalConnectionComponent
   implements OnInit

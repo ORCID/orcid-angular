@@ -19,16 +19,17 @@ export const clipboardTooltip: MatTooltipDefaultOptions = {
 }
 
 @Component({
-  selector: 'app-two-factor-enable',
-  templateUrl: './two-factor-enable.component.html',
-  styleUrls: [
-    './two-factor-enable.component.scss',
-    './two-factor-enable.component.scss-theme.scss',
-  ],
-  providers: [
-    { provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: clipboardTooltip },
-  ],
-  preserveWhitespaces: true,
+    selector: 'app-two-factor-enable',
+    templateUrl: './two-factor-enable.component.html',
+    styleUrls: [
+        './two-factor-enable.component.scss',
+        './two-factor-enable.component.scss-theme.scss',
+    ],
+    providers: [
+        { provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: clipboardTooltip },
+    ],
+    preserveWhitespaces: true,
+    standalone: false
 })
 export class TwoFactorEnableComponent implements OnInit {
   @Output() twoFactorEnabled = new EventEmitter<{

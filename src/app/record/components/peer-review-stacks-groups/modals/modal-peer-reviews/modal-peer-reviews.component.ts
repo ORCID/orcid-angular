@@ -7,9 +7,10 @@ import { first } from 'rxjs/operators'
 import { RecordImportWizard } from '../../../../../types/record-peer-review-import.endpoint'
 
 @Component({
-  selector: 'app-modal-peer-reviews',
-  templateUrl: './modal-peer-reviews.component.html',
-  styleUrls: ['./modal-peer-reviews.component.scss'],
+    selector: 'app-modal-peer-reviews',
+    templateUrl: './modal-peer-reviews.component.html',
+    styleUrls: ['./modal-peer-reviews.component.scss'],
+    standalone: false
 })
 export class ModalPeerReviewsComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

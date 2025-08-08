@@ -11,15 +11,16 @@ import { DOCUMENT } from '@angular/common'
 import { EMPTY } from 'rxjs'
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: [
-    './home.component.scss-theme.scss',
-    './home.component.scss',
-    './wordpress-styles.scss',
-  ],
-  animations: [enterAnimation],
-  preserveWhitespaces: true,
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: [
+        './home.component.scss-theme.scss',
+        './home.component.scss',
+        './wordpress-styles.scss',
+    ],
+    animations: [enterAnimation],
+    preserveWhitespaces: true,
+    standalone: false
 })
 export class HomeComponent implements OnInit {
   platform

@@ -9,10 +9,11 @@ import { PlatformInfoService } from '../../../../../cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 
 @Component({
-  selector: 'app-modal-export-works',
-  templateUrl: './modal-export-works.component.html',
-  styleUrls: ['./modal-export-works.component.scss'],
-  preserveWhitespaces: true,
+    selector: 'app-modal-export-works',
+    templateUrl: './modal-export-works.component.html',
+    styleUrls: ['./modal-export-works.component.scss'],
+    preserveWhitespaces: true,
+    standalone: false
 })
 export class ModalExportWorksComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

@@ -33,14 +33,15 @@ interface WindowWithCaptcha extends Window {
 }
 
 @Directive({
-  selector: '[appRecaptcha]',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: RecaptchaDirective,
-      multi: true,
-    },
-  ],
+    selector: '[appRecaptcha]',
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: RecaptchaDirective,
+            multi: true,
+        },
+    ],
+    standalone: false
 })
 export class RecaptchaDirective implements OnInit, ControlValueAccessor {
   @Output() captchaFail = new EventEmitter<boolean>()

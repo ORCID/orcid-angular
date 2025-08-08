@@ -19,9 +19,10 @@ import { TogglzService } from './core/togglz/togglz.service'
 import { NewRelicService } from './core/new-relic/new-relic.service'
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    standalone: false
 })
 export class AppComponent {
   currentlyDisplayingZendesk = true

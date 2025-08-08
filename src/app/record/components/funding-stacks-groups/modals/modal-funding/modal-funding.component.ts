@@ -54,12 +54,13 @@ import { RecordService } from 'src/app/core/record/record.service'
 import { validateFundingAmount } from 'src/app/shared/validators/funding-amount/funding-amount.validator'
 
 @Component({
-  selector: 'app-modal-funding',
-  templateUrl: './modal-funding.component.html',
-  styleUrls: [
-    './modal-funding.component.scss-theme.scss',
-    './modal-funding.component.scss',
-  ],
+    selector: 'app-modal-funding',
+    templateUrl: './modal-funding.component.html',
+    styleUrls: [
+        './modal-funding.component.scss-theme.scss',
+        './modal-funding.component.scss',
+    ],
+    standalone: false
 })
 export class ModalFundingComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

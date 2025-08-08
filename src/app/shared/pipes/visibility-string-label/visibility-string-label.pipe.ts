@@ -5,7 +5,8 @@ import {
 } from 'src/app/types/common.endpoint'
 
 @Pipe({
-  name: 'visibilityStringLabel',
+    name: 'visibilityStringLabel',
+    standalone: false
 })
 export class VisibilityStringLabelPipe implements PipeTransform {
   transform(value: VisibilityStrings): unknown {

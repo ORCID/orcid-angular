@@ -9,10 +9,11 @@ import { OauthParameters, RequestInfoForm } from 'src/app/types'
 import { UserSession } from 'src/app/types/session.local'
 
 @Component({
-  selector: 'app-oauth-error',
-  templateUrl: './oauth-error.component.html',
-  styleUrls: ['./oauth-error.component.scss'],
-  preserveWhitespaces: true,
+    selector: 'app-oauth-error',
+    templateUrl: './oauth-error.component.html',
+    styleUrls: ['./oauth-error.component.scss'],
+    preserveWhitespaces: true,
+    standalone: false
 })
 export class OauthErrorComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

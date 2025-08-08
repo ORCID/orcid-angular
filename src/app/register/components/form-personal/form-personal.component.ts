@@ -68,26 +68,27 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 }
 
 @Component({
-  selector: 'app-form-personal',
-  templateUrl: './form-personal.component.html',
-  styleUrls: [
-    './form-personal.component.scss',
-    '../register.style.scss',
-    '../register.scss-theme.scss',
-  ],
-  preserveWhitespaces: true,
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => FormPersonalComponent),
-      multi: true,
-    },
-    {
-      provide: NG_ASYNC_VALIDATORS,
-      useExisting: forwardRef(() => FormPersonalComponent),
-      multi: true,
-    },
-  ],
+    selector: 'app-form-personal',
+    templateUrl: './form-personal.component.html',
+    styleUrls: [
+        './form-personal.component.scss',
+        '../register.style.scss',
+        '../register.scss-theme.scss',
+    ],
+    preserveWhitespaces: true,
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => FormPersonalComponent),
+            multi: true,
+        },
+        {
+            provide: NG_ASYNC_VALIDATORS,
+            useExisting: forwardRef(() => FormPersonalComponent),
+            multi: true,
+        },
+    ],
+    standalone: false
 })
 export class FormPersonalComponent
   extends BaseForm

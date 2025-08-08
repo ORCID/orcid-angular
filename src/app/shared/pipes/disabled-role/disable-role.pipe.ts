@@ -6,7 +6,8 @@ import {
 } from '@angular/forms'
 
 @Pipe({
-  name: 'disableRole',
+    name: 'disableRole',
+    standalone: false
 })
 export class DisableRolePipe implements PipeTransform {
   transform(value: string, control: AbstractControl): boolean {

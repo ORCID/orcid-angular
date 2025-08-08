@@ -9,12 +9,13 @@ import { AccountTrustedIndividual } from 'src/app/types/account-trusted-individu
 import { DialogRevokeTrustedIndividualsComponent } from '../dialog-revoke-trusted-individuals/dialog-revoke-trusted-individuals.component'
 
 @Component({
-  selector: 'app-settings-trusted-individuals',
-  templateUrl: './settings-trusted-individuals.component.html',
-  styleUrls: [
-    './settings-trusted-individuals.component.scss',
-    './settings-trusted-individuals.component.scss-theme.scss',
-  ],
+    selector: 'app-settings-trusted-individuals',
+    templateUrl: './settings-trusted-individuals.component.html',
+    styleUrls: [
+        './settings-trusted-individuals.component.scss',
+        './settings-trusted-individuals.component.scss-theme.scss',
+    ],
+    standalone: false
 })
 export class SettingsTrustedIndividualsComponent implements OnInit, OnDestroy {
   $trustedIndividuals: Observable<AccountTrustedIndividual[]>

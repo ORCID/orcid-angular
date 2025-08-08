@@ -2,7 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core'
 import { VERIFICATION_DATE_CUTOFF } from 'src/app/constants'
 
 @Pipe({
-  name: 'verificationDateCutoff',
+    name: 'verificationDateCutoff',
+    standalone: false
 })
 export class VerificationDateCutoffPipe implements PipeTransform {
   transform(value: string): string | null {

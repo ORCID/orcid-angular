@@ -4,9 +4,10 @@ import { set } from 'lodash'
 import { WINDOW } from 'src/app/cdk/window'
 
 @Component({
-  selector: 'app-settings-actions',
-  templateUrl: './settings-actions.component.html',
-  styleUrls: ['./settings-actions.component.scss'],
+    selector: 'app-settings-actions',
+    templateUrl: './settings-actions.component.html',
+    styleUrls: ['./settings-actions.component.scss'],
+    standalone: false
 })
 export class SettingsActionsComponent implements OnInit {
   titleDownload = $localize`:@@account.downloadYourOrcid:Download your ORCID data`

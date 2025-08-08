@@ -38,12 +38,13 @@ import { ShareEmailsDomainsComponentDialogOutput } from 'src/app/cdk/interstitia
 import { AffilationsComponentDialogOutput } from 'src/app/cdk/interstitials/affiliations-interstitial/interstitial-dialog-extend/affiliations-interstitial-dialog.component'
 
 @Component({
-  selector: 'app-my-orcid',
-  templateUrl: './my-orcid.component.html',
-  styleUrls: [
-    './my-orcid.component.scss',
-    './my-orcid.component.scss-theme.scss',
-  ],
+    selector: 'app-my-orcid',
+    templateUrl: './my-orcid.component.html',
+    styleUrls: [
+        './my-orcid.component.scss',
+        './my-orcid.component.scss-theme.scss',
+    ],
+    standalone: false
 })
 export class MyOrcidComponent implements OnInit, OnDestroy {
   private readonly $destroy = new Subject()

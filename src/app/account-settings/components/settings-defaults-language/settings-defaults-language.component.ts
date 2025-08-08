@@ -14,9 +14,10 @@ import { WINDOW } from 'src/app/cdk/window'
 import { LanguageService } from 'src/app/core/language/language.service'
 
 @Component({
-  selector: 'app-settings-defaults-language',
-  templateUrl: './settings-defaults-language.component.html',
-  styleUrls: ['./settings-defaults-language.component.scss'],
+    selector: 'app-settings-defaults-language',
+    templateUrl: './settings-defaults-language.component.html',
+    styleUrls: ['./settings-defaults-language.component.scss'],
+    standalone: false
 })
 export class SettingsDefaultsLanguageComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

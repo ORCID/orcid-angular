@@ -44,8 +44,9 @@ import { takeUntil } from 'rxjs/operators'
  */
 
 @Directive({
-  selector: '[mdePopoverTriggerFor]',
-  exportAs: 'mdePopoverTrigger',
+    selector: '[mdePopoverTriggerFor]',
+    exportAs: 'mdePopoverTrigger',
+    standalone: false
 })
 export class MdePopoverTrigger implements AfterViewInit, OnDestroy {
   // tslint:disable-line:directive-class-suffix

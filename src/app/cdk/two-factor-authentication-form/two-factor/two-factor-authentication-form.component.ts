@@ -17,13 +17,14 @@ import {
 import { WINDOW } from '../../window'
 
 @Component({
-  selector: 'app-two-factor-authentication-form',
-  templateUrl: './two-factor-authentication-form.component.html',
-  styleUrls: [
-    './two-factor-authentication-form.component.scss',
-    './two-factor-authentication-form.component.scss-theme.scss',
-  ],
-  preserveWhitespaces: true,
+    selector: 'app-two-factor-authentication-form',
+    templateUrl: './two-factor-authentication-form.component.html',
+    styleUrls: [
+        './two-factor-authentication-form.component.scss',
+        './two-factor-authentication-form.component.scss-theme.scss',
+    ],
+    preserveWhitespaces: true,
+    standalone: false
 })
 export class TwoFactorAuthenticationFormComponent implements AfterViewInit {
   @Input() showBadVerificationCode: boolean

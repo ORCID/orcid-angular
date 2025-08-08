@@ -21,12 +21,13 @@ import { RecordWorksService } from '../../../core/record-works/record-works.serv
 import { MatSelect } from '@angular/material/select'
 
 @Component({
-  selector: 'app-work-contributor-roles',
-  templateUrl: './work-contributor-roles.component.html',
-  styleUrls: ['./work-contributor-roles.component.scss'],
-  viewProviders: [
-    { provide: ControlContainer, useExisting: FormGroupDirective },
-  ],
+    selector: 'app-work-contributor-roles',
+    templateUrl: './work-contributor-roles.component.html',
+    styleUrls: ['./work-contributor-roles.component.scss'],
+    viewProviders: [
+        { provide: ControlContainer, useExisting: FormGroupDirective },
+    ],
+    standalone: false
 })
 export class WorkContributorRolesComponent implements OnInit {
   deleteLabel = $localize`:@@shared.deleteActivityAriaLabel:Delete`

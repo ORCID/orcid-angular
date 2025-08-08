@@ -7,10 +7,11 @@ import {
 import { chain } from 'lodash'
 
 @Component({
-  selector: 'app-notification-your-record-amended',
-  templateUrl: './notification-your-record-amended.component.html',
-  styleUrls: ['./notification-your-record-amended.component.scss'],
-  preserveWhitespaces: true,
+    selector: 'app-notification-your-record-amended',
+    templateUrl: './notification-your-record-amended.component.html',
+    styleUrls: ['./notification-your-record-amended.component.scss'],
+    preserveWhitespaces: true,
+    standalone: false
 })
 export class NotificationYourRecordAmendedComponent implements OnInit {
   private _notification: InboxNotificationAmended

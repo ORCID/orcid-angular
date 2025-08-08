@@ -2,9 +2,10 @@ import { Component, Inject, OnInit } from '@angular/core'
 import { WINDOW } from 'src/app/cdk/window'
 
 @Component({
-  selector: 'app-settings-defaults',
-  templateUrl: './settings-defaults.component.html',
-  styleUrls: ['./settings-defaults.component.scss'],
+    selector: 'app-settings-defaults',
+    templateUrl: './settings-defaults.component.html',
+    styleUrls: ['./settings-defaults.component.scss'],
+    standalone: false
 })
 export class SettingsDefaultsComponent implements OnInit {
   emailFrequencyLoading = false

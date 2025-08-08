@@ -28,12 +28,13 @@ import { DialogAddTrustedIndividualsYourOwnEmailComponent } from '../dialog-add-
 import { DialogAddTrustedIndividualsComponent } from '../dialog-add-trusted-individuals/dialog-add-trusted-individuals.component'
 
 @Component({
-  selector: 'app-settings-trusted-individuals-search',
-  templateUrl: './settings-trusted-individuals-search.component.html',
-  styleUrls: [
-    './settings-trusted-individuals-search.component.scss',
-    './settings-trusted-individuals-search.component.scss-theme.scss',
-  ],
+    selector: 'app-settings-trusted-individuals-search',
+    templateUrl: './settings-trusted-individuals-search.component.html',
+    styleUrls: [
+        './settings-trusted-individuals-search.component.scss',
+        './settings-trusted-individuals-search.component.scss-theme.scss',
+    ],
+    standalone: false
 })
 export class SettingsTrustedIndividualsSearchComponent
   implements OnInit, OnDestroy

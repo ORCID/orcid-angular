@@ -23,12 +23,13 @@ import { UserInfo } from '../../../types'
 import { WorkModalComponent } from '../work-modal/work-modal.component'
 
 @Component({
-  selector: 'app-work-stack',
-  templateUrl: './work-stack.component.html',
-  styleUrls: [
-    './work-stack.component.scss',
-    './work-stack.component.scss-theme.scss',
-  ],
+    selector: 'app-work-stack',
+    templateUrl: './work-stack.component.html',
+    styleUrls: [
+        './work-stack.component.scss',
+        './work-stack.component.scss-theme.scss',
+    ],
+    standalone: false
 })
 export class WorkStackComponent implements OnInit {
   @Input() userRecord: UserRecord

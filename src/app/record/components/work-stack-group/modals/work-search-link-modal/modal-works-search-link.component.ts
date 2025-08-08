@@ -8,9 +8,10 @@ import { RecordWorksService } from '../../../../../core/record-works/record-work
 import { sortBy } from 'lodash'
 
 @Component({
-  selector: 'app-modal-works-search-link',
-  templateUrl: './modal-works-search-link.component.html',
-  styleUrls: ['./modal-works-search-link.component.scss'],
+    selector: 'app-modal-works-search-link',
+    templateUrl: './modal-works-search-link.component.html',
+    styleUrls: ['./modal-works-search-link.component.scss'],
+    standalone: false
 })
 export class ModalWorksSearchLinkComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

@@ -20,9 +20,10 @@ import { SortData, SortOrderType } from 'src/app/types/sort'
 import { UserInfo } from '../../../types'
 
 @Component({
-  selector: 'app-affiliations',
-  templateUrl: './affiliation-stacks-groups.component.html',
-  styleUrls: ['./affiliation-stacks-groups.component.scss'],
+    selector: 'app-affiliations',
+    templateUrl: './affiliation-stacks-groups.component.html',
+    styleUrls: ['./affiliation-stacks-groups.component.scss'],
+    standalone: false
 })
 export class AffiliationStacksGroupsComponent implements OnInit {
   $destroy: Subject<boolean> = new Subject<boolean>()

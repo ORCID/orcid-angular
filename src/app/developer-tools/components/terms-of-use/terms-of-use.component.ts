@@ -18,13 +18,14 @@ import { DeveloperToolsService } from 'src/app/core/developer-tools/developer-to
 import { RecordService } from 'src/app/core/record/record.service'
 
 @Component({
-  selector: 'app-terms-of-use',
-  templateUrl: './terms-of-use.component.html',
-  styleUrls: [
-    './terms-of-use.component.scss',
-    './terms-of-use.component.scss-theme.scss',
-  ],
-  preserveWhitespaces: true,
+    selector: 'app-terms-of-use',
+    templateUrl: './terms-of-use.component.html',
+    styleUrls: [
+        './terms-of-use.component.scss',
+        './terms-of-use.component.scss-theme.scss',
+    ],
+    preserveWhitespaces: true,
+    standalone: false
 })
 export class TermsOfUseComponent implements OnInit, OnDestroy {
   checked

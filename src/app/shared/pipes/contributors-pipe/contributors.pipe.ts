@@ -8,7 +8,8 @@ import {
 } from '../../../types/works.endpoint'
 
 @Pipe({
-  name: 'contributorsPipe',
+    name: 'contributorsPipe',
+    standalone: false
 })
 export class ContributorsPipe implements PipeTransform {
   transform(contributor: Contributor, args?: any): string {

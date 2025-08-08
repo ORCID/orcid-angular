@@ -27,9 +27,10 @@ import { WINDOW } from 'src/app/cdk/window'
 import { UserRecord } from '../../../../../types/record.local'
 
 @Component({
-  selector: 'app-work-doi-modal',
-  templateUrl: './work-external-id-modal.component.html',
-  styleUrls: ['./work-external-id-modal.component.scss'],
+    selector: 'app-work-doi-modal',
+    templateUrl: './work-external-id-modal.component.html',
+    styleUrls: ['./work-external-id-modal.component.scss'],
+    standalone: false
 })
 export class WorkExternalIdModalComponent
   implements OnInit, OnDestroy, AfterViewInit

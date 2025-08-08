@@ -4,12 +4,13 @@ import { takeUntil } from 'rxjs/operators'
 import { PlatformInfoService } from '../../platform-info'
 
 @Component({
-  selector: 'app-modal-footer',
-  templateUrl: './modal-footer.component.html',
-  styleUrls: [
-    './modal-footer.component.scss',
-    './modal-footer.component.scss-theme.scss',
-  ],
+    selector: 'app-modal-footer',
+    templateUrl: './modal-footer.component.html',
+    styleUrls: [
+        './modal-footer.component.scss',
+        './modal-footer.component.scss-theme.scss',
+    ],
+    standalone: false
 })
 export class ModalFooterComponent implements OnInit, OnDestroy {
   handset: boolean

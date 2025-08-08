@@ -3,9 +3,10 @@ import { Component, Inject, OnInit } from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 
 @Component({
-  selector: 'app-client-secret-modal',
-  templateUrl: './client-secret-modal.component.html',
-  styleUrls: ['./client-secret-modal.component.scss'],
+    selector: 'app-client-secret-modal',
+    templateUrl: './client-secret-modal.component.html',
+    styleUrls: ['./client-secret-modal.component.scss'],
+    standalone: false
 })
 export class ClientSecretModalComponent implements OnInit {
   secret: string

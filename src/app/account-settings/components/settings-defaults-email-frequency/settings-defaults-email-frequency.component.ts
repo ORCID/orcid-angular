@@ -19,13 +19,14 @@ import { ModalEmailComponent } from 'src/app/cdk/side-bar/modals/modal-email/mod
 import { UserInfoService } from 'src/app/core/user-info/user-info.service'
 import { RecordService } from 'src/app/core/record/record.service'
 @Component({
-  selector: 'app-settings-defaults-email-frequency',
-  templateUrl: './settings-defaults-email-frequency.component.html',
-  styleUrls: [
-    './settings-defaults-email-frequency.component.scss',
-    './settings-defaults-email-frequency.component.scss-theme.scss',
-  ],
-  preserveWhitespaces: true,
+    selector: 'app-settings-defaults-email-frequency',
+    templateUrl: './settings-defaults-email-frequency.component.html',
+    styleUrls: [
+        './settings-defaults-email-frequency.component.scss',
+        './settings-defaults-email-frequency.component.scss-theme.scss',
+    ],
+    preserveWhitespaces: true,
+    standalone: false
 })
 export class SettingsDefaultsEmailFrequencyComponent
   implements OnInit, OnDestroy

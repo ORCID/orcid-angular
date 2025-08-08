@@ -12,12 +12,13 @@ import { takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 
 @Component({
-  selector: 'app-modal-header',
-  templateUrl: './modal-header.component.html',
-  styleUrls: [
-    './modal-header.component.scss',
-    './modal-header.component.scss-theme.scss',
-  ],
+    selector: 'app-modal-header',
+    templateUrl: './modal-header.component.html',
+    styleUrls: [
+        './modal-header.component.scss',
+        './modal-header.component.scss-theme.scss',
+    ],
+    standalone: false
 })
 export class ModalHeaderComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

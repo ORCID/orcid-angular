@@ -10,9 +10,10 @@ import { UserRecord } from 'src/app/types/record.local'
 import { WorkFormComponent } from '../work-form/work-form/work-form.component'
 
 @Component({
-  selector: 'app-work-modal',
-  templateUrl: './work-modal.component.html',
-  styleUrls: ['./work-modal.component.scss'],
+    selector: 'app-work-modal',
+    templateUrl: './work-modal.component.html',
+    styleUrls: ['./work-modal.component.scss'],
+    standalone: false
 })
 export class WorkModalComponent implements OnInit {
   closeLabel = $localize`:@@shared.closeActivityAriaLabel:Close Works`

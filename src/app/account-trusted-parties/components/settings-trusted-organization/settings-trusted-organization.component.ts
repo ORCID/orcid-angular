@@ -3,9 +3,10 @@ import { AccountTrustedOrganizationsService } from 'src/app/core/account-trusted
 import { AccountTrustedOrganization } from 'src/app/types/account-trusted-organizations'
 
 @Component({
-  selector: 'app-settings-trusted-organization',
-  templateUrl: './settings-trusted-organization.component.html',
-  styleUrls: ['./settings-trusted-organization.component.scss'],
+    selector: 'app-settings-trusted-organization',
+    templateUrl: './settings-trusted-organization.component.html',
+    styleUrls: ['./settings-trusted-organization.component.scss'],
+    standalone: false
 })
 export class SettingsTrustedOrganizationComponent implements OnInit {
   @Input() trustedOrganization: AccountTrustedOrganization

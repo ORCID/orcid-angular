@@ -7,13 +7,14 @@ import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
 
 @Component({
-  selector: 'app-top-bar-verification-email-modal',
-  templateUrl: './top-bar-verification-email-modal.component.html',
-  styleUrls: [
-    './top-bar-verification-email-modal.component.scss',
-    './top-bar-verification-email-modal.component.scss-theme.scss',
-  ],
-  preserveWhitespaces: true,
+    selector: 'app-top-bar-verification-email-modal',
+    templateUrl: './top-bar-verification-email-modal.component.html',
+    styleUrls: [
+        './top-bar-verification-email-modal.component.scss',
+        './top-bar-verification-email-modal.component.scss-theme.scss',
+    ],
+    preserveWhitespaces: true,
+    standalone: false
 })
 export class TopBarVerificationEmailModalComponent
   implements OnInit, OnDestroy

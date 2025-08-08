@@ -4,9 +4,10 @@ import { UserService } from 'src/app/core'
 import { UserSession } from 'src/app/types/session.local'
 
 @Component({
-  selector: 'app-settings-sharing-html-code',
-  templateUrl: './settings-sharing-html-code.component.html',
-  styleUrls: ['./settings-sharing-html-code.component.scss'],
+    selector: 'app-settings-sharing-html-code',
+    templateUrl: './settings-sharing-html-code.component.html',
+    styleUrls: ['./settings-sharing-html-code.component.scss'],
+    standalone: false
 })
 export class SettingsSharingHtmlCodeComponent implements OnInit {
   @Output() loading = new EventEmitter<boolean>()

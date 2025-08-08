@@ -6,7 +6,8 @@ import { WINDOW } from 'src/app/cdk/window'
 import { CopyOnClickComponent } from '../../components/copy-on-click/copy-on-click.component'
 
 @Directive({
-  selector: '[appCopyOnClick]',
+    selector: '[appCopyOnClick]',
+    standalone: false
 })
 export class CopyOnClickDirective {
   constructor(

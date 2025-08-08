@@ -55,27 +55,28 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 }
 
 @Component({
-  selector: 'app-form-current-employment',
-  templateUrl: './form-current-employment.component.html',
-  styleUrls: [
-    './form-current-employment.component.scss',
-    './form-current-employment.component.scss-theme.scss',
-    '../register.style.scss',
-    '../register.scss-theme.scss',
-  ],
-  preserveWhitespaces: true,
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => FormCurrentEmploymentComponent),
-      multi: true,
-    },
-    {
-      provide: NG_ASYNC_VALIDATORS,
-      useExisting: forwardRef(() => FormCurrentEmploymentComponent),
-      multi: true,
-    },
-  ],
+    selector: 'app-form-current-employment',
+    templateUrl: './form-current-employment.component.html',
+    styleUrls: [
+        './form-current-employment.component.scss',
+        './form-current-employment.component.scss-theme.scss',
+        '../register.style.scss',
+        '../register.scss-theme.scss',
+    ],
+    preserveWhitespaces: true,
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => FormCurrentEmploymentComponent),
+            multi: true,
+        },
+        {
+            provide: NG_ASYNC_VALIDATORS,
+            useExisting: forwardRef(() => FormCurrentEmploymentComponent),
+            multi: true,
+        },
+    ],
+    standalone: false
 })
 export class FormCurrentEmploymentComponent
   extends BaseForm

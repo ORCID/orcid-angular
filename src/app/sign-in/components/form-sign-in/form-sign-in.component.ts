@@ -42,14 +42,15 @@ import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 
 @Component({
-  selector: 'app-form-sign-in',
-  templateUrl: './form-sign-in.component.html',
-  styleUrls: [
-    './form-sign-in.component.scss',
-    '../sign-in.style.scss',
-    '../sign-in.scss-theme.scss',
-  ],
-  preserveWhitespaces: true,
+    selector: 'app-form-sign-in',
+    templateUrl: './form-sign-in.component.html',
+    styleUrls: [
+        './form-sign-in.component.scss',
+        '../sign-in.style.scss',
+        '../sign-in.scss-theme.scss',
+    ],
+    preserveWhitespaces: true,
+    standalone: false
 })
 export class FormSignInComponent implements OnInit, OnDestroy {
   @ViewChild('firstInput') firstInput: ElementRef

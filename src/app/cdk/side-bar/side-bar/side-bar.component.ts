@@ -31,12 +31,13 @@ import { RecordUtil } from 'src/app/shared/utils/record.util'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 
 @Component({
-  selector: 'app-side-bar',
-  templateUrl: './side-bar.component.html',
-  styleUrls: [
-    './side-bar.component.scss-theme.scss',
-    './side-bar.component.scss',
-  ],
+    selector: 'app-side-bar',
+    templateUrl: './side-bar.component.html',
+    styleUrls: [
+        './side-bar.component.scss-theme.scss',
+        './side-bar.component.scss',
+    ],
+    standalone: false
 })
 export class SideBarComponent implements OnInit, OnDestroy {
   labelManageYourEmails = $localize`:"@@record.manageYourEmails:Manage your emails`

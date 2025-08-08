@@ -8,10 +8,11 @@ import { chain } from 'lodash'
 import { InboxService } from '../../../core/inbox/inbox.service'
 
 @Component({
-  selector: 'app-notification-permission',
-  templateUrl: './notification-permission.component.html',
-  styleUrls: ['./notification-permission.component.scss'],
-  preserveWhitespaces: true,
+    selector: 'app-notification-permission',
+    templateUrl: './notification-permission.component.html',
+    styleUrls: ['./notification-permission.component.scss'],
+    preserveWhitespaces: true,
+    standalone: false
 })
 export class NotificationPermissionComponent implements OnInit {
   @Input() notification: InboxNotificationPermission

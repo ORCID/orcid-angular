@@ -35,9 +35,10 @@ import { getAriaLabel } from '../../../constants'
 import { RecordBiographyService } from 'src/app/core/record-biography/record-biography.service'
 
 @Component({
-  selector: 'app-panel',
-  templateUrl: './panel.component.html',
-  styleUrls: ['./panel.component.scss', 'panel.component.scss-theme.scss'],
+    selector: 'app-panel',
+    templateUrl: './panel.component.html',
+    styleUrls: ['./panel.component.scss', 'panel.component.scss-theme.scss'],
+    standalone: false
 })
 export class PanelComponent implements OnInit {
   @Input() panelId: string

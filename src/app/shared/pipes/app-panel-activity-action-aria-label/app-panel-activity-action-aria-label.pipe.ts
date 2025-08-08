@@ -10,7 +10,8 @@ import {
 } from 'src/app/constants'
 
 @Pipe({
-  name: 'appPanelActivityActionAriaLabel',
+    name: 'appPanelActivityActionAriaLabel',
+    standalone: false
 })
 export class AppPanelActivityActionAriaLabelPipe implements PipeTransform {
   transform(panelType: string, activity: string, title: string): string {

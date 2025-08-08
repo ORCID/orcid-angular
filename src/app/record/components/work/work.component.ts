@@ -16,10 +16,11 @@ import { UserInfoService } from '../../../core/user-info/user-info.service'
 import { LanguageMap } from 'src/app/types/works.endpoint'
 
 @Component({
-  selector: 'app-work',
-  templateUrl: './work.component.html',
-  styleUrls: ['./work.component.scss'],
-  preserveWhitespaces: true,
+    selector: 'app-work',
+    templateUrl: './work.component.html',
+    styleUrls: ['./work.component.scss'],
+    preserveWhitespaces: true,
+    standalone: false
 })
 export class WorkComponent implements OnInit {
   @Input() work: Work

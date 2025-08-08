@@ -2,7 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core'
 import { SortOrderType } from '../../../types/sort'
 
 @Pipe({
-  name: 'appPanelsSortByAriaLabel',
+    name: 'appPanelsSortByAriaLabel',
+    standalone: false
 })
 export class AppPanelsSortByAriaLabelPipe implements PipeTransform {
   transform(sortBy: SortOrderType, type: string): string {

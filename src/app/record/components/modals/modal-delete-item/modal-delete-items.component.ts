@@ -20,12 +20,13 @@ import { SnackbarService } from '../../../../cdk/snackbar/snackbar.service'
 import { Work } from '../../../../types/record-works.endpoint'
 
 @Component({
-  selector: 'app-modal-delete-items',
-  templateUrl: './modal-delete-items.component.html',
-  styleUrls: [
-    './modal-delete-items.component.scss',
-    './modal-delete-items.component.scss-theme.scss',
-  ],
+    selector: 'app-modal-delete-items',
+    templateUrl: './modal-delete-items.component.html',
+    styleUrls: [
+        './modal-delete-items.component.scss',
+        './modal-delete-items.component.scss-theme.scss',
+    ],
+    standalone: false
 })
 export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

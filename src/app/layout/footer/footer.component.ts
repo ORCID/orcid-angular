@@ -5,10 +5,11 @@ import { WINDOW } from 'src/app/cdk/window'
 import { RecordUtil } from 'src/app/shared/utils/record.util'
 
 @Component({
-  selector: 'app-footer',
-  templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss-theme.scss', './footer.component.scss'],
-  preserveWhitespaces: true,
+    selector: 'app-footer',
+    templateUrl: './footer.component.html',
+    styleUrls: ['./footer.component.scss-theme.scss', './footer.component.scss'],
+    preserveWhitespaces: true,
+    standalone: false
 })
 export class FooterComponent implements OnInit {
   platform

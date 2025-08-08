@@ -10,12 +10,13 @@ import { ModalFundingComponent } from '../funding-stacks-groups/modals/modal-fun
 import { UserRecord } from 'src/app/types/record.local'
 
 @Component({
-  selector: 'app-funding-stack',
-  templateUrl: './funding-stack.component.html',
-  styleUrls: [
-    './funding-stack.component.scss',
-    './funding-stack.component.scss-theme.scss',
-  ],
+    selector: 'app-funding-stack',
+    templateUrl: './funding-stack.component.html',
+    styleUrls: [
+        './funding-stack.component.scss',
+        './funding-stack.component.scss-theme.scss',
+    ],
+    standalone: false
 })
 export class FundingStackComponent implements OnInit {
   @HostBinding('class.display-the-stack') displayTheStackClass = false

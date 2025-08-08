@@ -4,9 +4,10 @@ import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { ExpandedSearchResultsContent } from 'src/app/types'
 
 @Component({
-  selector: 'app-dialog-add-trusted-individuals-your-own-email',
-  templateUrl: './dialog-add-trusted-individuals-your-own-email.component.html',
-  styleUrls: ['./dialog-add-trusted-individuals-your-own-email.component.scss'],
+    selector: 'app-dialog-add-trusted-individuals-your-own-email',
+    templateUrl: './dialog-add-trusted-individuals-your-own-email.component.html',
+    styleUrls: ['./dialog-add-trusted-individuals-your-own-email.component.scss'],
+    standalone: false
 })
 export class DialogAddTrustedIndividualsYourOwnEmailComponent
   implements OnInit

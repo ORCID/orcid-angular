@@ -52,12 +52,13 @@ import { DeepSelectMenu } from 'src/app/cdk/deep-select-input/deep-select-input/
 import { WorkTypeMenu } from './work-type-menu'
 
 @Component({
-  selector: 'app-work-form',
-  templateUrl: './work-form.component.html',
-  styleUrls: [
-    './work-form.component.scss',
-    './work-form.component.scss-theme.scss',
-  ],
+    selector: 'app-work-form',
+    templateUrl: './work-form.component.html',
+    styleUrls: [
+        './work-form.component.scss',
+        './work-form.component.scss-theme.scss',
+    ],
+    standalone: false
 })
 export class WorkFormComponent implements OnInit {
   ngOrcidYear = $localize`:@@shared.year:Year`

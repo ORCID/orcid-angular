@@ -17,9 +17,10 @@ import { ApplicationRoutes, ORCID_REGEXP } from '../../constants'
 import { menu } from './menu'
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss-theme.scss', './header.component.scss'],
+    selector: 'app-header',
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.scss-theme.scss', './header.component.scss'],
+    standalone: false
 })
 export class HeaderComponent implements OnInit {
   hideMainMenu = false

@@ -1,12 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core'
 
 @Component({
-  selector: 'app-info-drop-down',
-  templateUrl: './info-drop-down.component.html',
-  styleUrls: [
-    './info-drop-down.component.scss',
-    './info-drop-down.component.scss-theme.scss',
-  ],
+    selector: 'app-info-drop-down',
+    templateUrl: './info-drop-down.component.html',
+    styleUrls: [
+        './info-drop-down.component.scss',
+        './info-drop-down.component.scss-theme.scss',
+    ],
+    standalone: false
 })
 export class InfoDropDownComponent implements OnInit {
   @Input() name

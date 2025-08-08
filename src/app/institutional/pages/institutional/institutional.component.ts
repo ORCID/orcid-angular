@@ -27,13 +27,14 @@ import {
 } from '../../../types/institutional.endpoint'
 
 @Component({
-  selector: 'app-institutional',
-  templateUrl: './institutional.component.html',
-  styleUrls: [
-    './institutional.component.scss',
-    './institutional.component.scss-theme.scss',
-  ],
-  preserveWhitespaces: true,
+    selector: 'app-institutional',
+    templateUrl: './institutional.component.html',
+    styleUrls: [
+        './institutional.component.scss',
+        './institutional.component.scss-theme.scss',
+    ],
+    preserveWhitespaces: true,
+    standalone: false
 })
 export class InstitutionalComponent implements OnInit {
   @HostBinding('class.container') containerClass = true

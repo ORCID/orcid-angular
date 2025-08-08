@@ -5,7 +5,8 @@ import {
 } from 'src/app/types/record-funding.endpoint'
 
 @Pipe({
-  name: 'recordFundingRelationshipHintLabel',
+    name: 'recordFundingRelationshipHintLabel',
+    standalone: false
 })
 export class RecordFundingRelationshipHintLabelPipe implements PipeTransform {
   transform(value: FundingRelationships): unknown {

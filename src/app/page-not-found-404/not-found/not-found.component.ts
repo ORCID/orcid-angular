@@ -6,9 +6,10 @@ import { Title } from '@angular/platform-browser'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 
 @Component({
-  selector: 'app-not-found',
-  templateUrl: './not-found.component.html',
-  styleUrls: ['./not-found.component.scss'],
+    selector: 'app-not-found',
+    templateUrl: './not-found.component.html',
+    styleUrls: ['./not-found.component.scss'],
+    standalone: false
 })
 export class NotFoundComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

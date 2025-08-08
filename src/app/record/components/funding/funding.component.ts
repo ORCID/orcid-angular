@@ -3,10 +3,11 @@ import { OrgDisambiguated } from 'src/app/types'
 import { Funding, LanguageMap } from 'src/app/types/record-funding.endpoint'
 
 @Component({
-  selector: 'app-funding',
-  templateUrl: './funding.component.html',
-  styleUrls: ['./funding.component.scss'],
-  preserveWhitespaces: true,
+    selector: 'app-funding',
+    templateUrl: './funding.component.html',
+    styleUrls: ['./funding.component.scss'],
+    preserveWhitespaces: true,
+    standalone: false
 })
 export class FundingComponent implements OnInit {
   @Input() funding: Funding

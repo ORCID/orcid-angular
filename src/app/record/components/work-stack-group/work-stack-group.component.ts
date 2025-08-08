@@ -52,12 +52,13 @@ import { AnnouncerService } from 'src/app/core/announcer/announcer.service'
 import { TogglzService } from '../../../core/togglz/togglz.service'
 
 @Component({
-  selector: 'app-work-stack-group',
-  templateUrl: './work-stack-group.component.html',
-  styleUrls: [
-    './work-stack-group.component.scss',
-    './work-stack-group.component.scss-theme.scss',
-  ],
+    selector: 'app-work-stack-group',
+    templateUrl: './work-stack-group.component.html',
+    styleUrls: [
+        './work-stack-group.component.scss',
+        './work-stack-group.component.scss-theme.scss',
+    ],
+    standalone: false
 })
 export class WorkStackGroupComponent implements OnInit {
   paginatorLabel

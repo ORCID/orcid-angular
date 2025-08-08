@@ -6,9 +6,10 @@ import { first } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { WINDOW } from '../../../cdk/window'
 @Component({
-  selector: 'app-social',
-  templateUrl: './social.component.html',
-  styleUrls: ['./social.component.scss', './social.component.scss-theme.scss'],
+    selector: 'app-social',
+    templateUrl: './social.component.html',
+    styleUrls: ['./social.component.scss', './social.component.scss-theme.scss'],
+    standalone: false
 })
 export class SocialComponent implements OnInit {
   platform: PlatformInfo

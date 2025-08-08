@@ -2,9 +2,10 @@ import { Component, Input, OnInit } from '@angular/core'
 import { PeerReview } from '../../../types/record-peer-review.endpoint'
 
 @Component({
-  selector: 'app-peer-review',
-  templateUrl: './peer-review.component.html',
-  styleUrls: ['./peer-review.component.scss'],
+    selector: 'app-peer-review',
+    templateUrl: './peer-review.component.html',
+    styleUrls: ['./peer-review.component.scss'],
+    standalone: false
 })
 export class PeerReviewComponent implements OnInit {
   @Input() isPublicRecord: string

@@ -12,13 +12,14 @@ import { first } from 'rxjs/operators'
 import { CustomEventService } from 'src/app/core/observability-events/observability-events.service'
 
 @Component({
-  selector: 'app-user-menu',
-  templateUrl: './user-menu.component.html',
-  styleUrls: [
-    './user-menu.component.scss-theme.scss',
-    './user-menu.component.scss',
-  ],
-  preserveWhitespaces: true,
+    selector: 'app-user-menu',
+    templateUrl: './user-menu.component.html',
+    styleUrls: [
+        './user-menu.component.scss-theme.scss',
+        './user-menu.component.scss',
+    ],
+    preserveWhitespaces: true,
+    standalone: false
 })
 export class UserMenuComponent implements OnInit {
   state = false

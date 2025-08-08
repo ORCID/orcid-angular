@@ -13,13 +13,14 @@ import { AccountActionsDeactivateService } from 'src/app/core/account-actions-de
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 
 @Component({
-  selector: 'app-settings-actions-deactivate',
-  templateUrl: './settings-actions-deactivate.component.html',
-  styleUrls: [
-    './settings-actions-deactivate.component.scss',
-    './settings-actions-deactivate.component.scss-theme.scss',
-  ],
-  preserveWhitespaces: true,
+    selector: 'app-settings-actions-deactivate',
+    templateUrl: './settings-actions-deactivate.component.html',
+    styleUrls: [
+        './settings-actions-deactivate.component.scss',
+        './settings-actions-deactivate.component.scss-theme.scss',
+    ],
+    preserveWhitespaces: true,
+    standalone: false
 })
 export class SettingsActionsDeactivateComponent implements OnInit, OnDestroy {
   @Output() loading = new EventEmitter<boolean>()

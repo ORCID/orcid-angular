@@ -16,13 +16,14 @@ import { AppPanelActivityActionAriaLabelPipe } from '../../../shared/pipes/app-p
 import { UserRecord } from 'src/app/types/record.local'
 
 @Component({
-  selector: 'app-panel-source',
-  templateUrl: './panel-source.component.html',
-  styleUrls: [
-    './panel-source.component.scss',
-    './panel-source.component.scss-theme.scss',
-  ],
-  preserveWhitespaces: true,
+    selector: 'app-panel-source',
+    templateUrl: './panel-source.component.html',
+    styleUrls: [
+        './panel-source.component.scss',
+        './panel-source.component.scss-theme.scss',
+    ],
+    preserveWhitespaces: true,
+    standalone: false
 })
 export class PanelSourceComponent implements OnInit {
   closeOtherSources = $localize`:@@record.hideAllSources:Hide all sources for`

@@ -6,7 +6,8 @@ import {
 } from '../../../types/works.endpoint'
 
 @Pipe({
-  name: 'contributorRoles',
+    name: 'contributorRoles',
+    standalone: false
 })
 export class ContributorRolesPipe implements PipeTransform {
   transform(roles: { role: string }[]): unknown {

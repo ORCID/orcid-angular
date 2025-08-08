@@ -37,13 +37,14 @@ import {
 import { OrcidValidators } from 'src/app/validators'
 
 @Component({
-  selector: 'app-modal-email',
-  templateUrl: './modal-email.component.html',
-  styleUrls: [
-    './modal-email.component.scss-theme.scss',
-    './modal-email.component.scss',
-  ],
-  preserveWhitespaces: true,
+    selector: 'app-modal-email',
+    templateUrl: './modal-email.component.html',
+    styleUrls: [
+        './modal-email.component.scss-theme.scss',
+        './modal-email.component.scss',
+    ],
+    preserveWhitespaces: true,
+    standalone: false
 })
 export class ModalEmailComponent implements OnInit, OnDestroy {
   ariaLabelKnowledgeBase = $localize`:@@side-bar.ariaLabelOrcidTermsOfUseBase:ORCID knowledge base (Opens in a new tab)`

@@ -21,13 +21,14 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { OauthParameters } from 'src/app/types'
 
 @Component({
-  selector: 'app-sign-in',
-  templateUrl: './sign-in.component.html',
-  styleUrls: [
-    './sign-in.component.scss-theme.scss',
-    './sign-in.component.scss',
-  ],
-  preserveWhitespaces: true,
+    selector: 'app-sign-in',
+    templateUrl: './sign-in.component.html',
+    styleUrls: [
+        './sign-in.component.scss-theme.scss',
+        './sign-in.component.scss',
+    ],
+    preserveWhitespaces: true,
+    standalone: false
 })
 export class SignInComponent implements OnInit {
   @HostBinding('class.container') containerClass = true

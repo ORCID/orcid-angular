@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 
 @Component({
-  selector: 'app-panel-expand-buttons',
-  templateUrl: './panel-expand-buttons.component.html',
-  styleUrls: ['./panel-expand-buttons.component.scss'],
+    selector: 'app-panel-expand-buttons',
+    templateUrl: './panel-expand-buttons.component.html',
+    styleUrls: ['./panel-expand-buttons.component.scss'],
+    standalone: false
 })
 export class PanelExpandButtonsComponent implements OnInit {
   tooltipLabelShowDetails = $localize`:@@shared.showDetails:Show details`

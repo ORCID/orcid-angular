@@ -4,9 +4,10 @@ import { WINDOW } from 'src/app/cdk/window'
 import { LanguageService } from 'src/app/core/language/language.service'
 
 @Component({
-  selector: 'app-language',
-  templateUrl: './language.component.html',
-  styleUrls: ['./language.component.scss'],
+    selector: 'app-language',
+    templateUrl: './language.component.html',
+    styleUrls: ['./language.component.scss'],
+    standalone: false
 })
 export class LanguageComponent implements OnInit {
   languageMenuOptions: { [key: string]: string }

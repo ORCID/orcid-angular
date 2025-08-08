@@ -14,15 +14,16 @@ import { RegisterStateService } from '../../register-state.service'
 import { RegisterObservabilityService } from '../../register-observability.service'
 
 @Component({
-  selector: 'app-form-notifications',
-  template: '<div></div>',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => MockFormNotificationsComponent),
-      multi: true,
-    },
-  ],
+    selector: 'app-form-notifications',
+    template: '<div></div>',
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => MockFormNotificationsComponent),
+            multi: true,
+        },
+    ],
+    standalone: false
 })
 export class MockFormNotificationsComponent implements ControlValueAccessor {
   writeValue(): void {}
@@ -31,15 +32,16 @@ export class MockFormNotificationsComponent implements ControlValueAccessor {
 }
 
 @Component({
-  selector: 'app-form-terms',
-  template: '<div></div>',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => MockFormTermsComponent),
-      multi: true,
-    },
-  ],
+    selector: 'app-form-terms',
+    template: '<div></div>',
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => MockFormTermsComponent),
+            multi: true,
+        },
+    ],
+    standalone: false
 })
 export class MockFormTermsComponent implements ControlValueAccessor {
   writeValue(): void {}
@@ -48,15 +50,16 @@ export class MockFormTermsComponent implements ControlValueAccessor {
 }
 
 @Component({
-  selector: 'app-form-anti-robots',
-  template: '<div></div>',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => MockFormAntiRobotsComponent),
-      multi: true,
-    },
-  ],
+    selector: 'app-form-anti-robots',
+    template: '<div></div>',
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => MockFormAntiRobotsComponent),
+            multi: true,
+        },
+    ],
+    standalone: false
 })
 export class MockFormAntiRobotsComponent implements ControlValueAccessor {
   writeValue(): void {}

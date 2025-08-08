@@ -2,7 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core'
 import { AffiliationType } from '../../../types/record-affiliation.endpoint'
 
 @Pipe({
-  name: 'affiliationType',
+    name: 'affiliationType',
+    standalone: false
 })
 export class AffiliationTypePipe implements PipeTransform {
   transform(value: string): AffiliationType {

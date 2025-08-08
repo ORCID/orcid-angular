@@ -4,12 +4,13 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { WINDOW } from '../window'
 
 @Component({
-  selector: 'app-is-this-you',
-  templateUrl: './is-this-you.component.html',
-  styleUrls: [
-    './is-this-you.component.scss.theme.scss',
-    './is-this-you.component.scss',
-  ],
+    selector: 'app-is-this-you',
+    templateUrl: './is-this-you.component.html',
+    styleUrls: [
+        './is-this-you.component.scss.theme.scss',
+        './is-this-you.component.scss',
+    ],
+    standalone: false
 })
 export class IsThisYouComponent implements OnInit {
   titleLabel = 'Could this be you?'

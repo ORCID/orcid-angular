@@ -4,9 +4,10 @@ import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { ExpandedSearchResultsContent } from 'src/app/types'
 
 @Component({
-  selector: 'app-dialog-add-trusted-individuals',
-  templateUrl: './dialog-add-trusted-individuals.component.html',
-  styleUrls: ['./dialog-add-trusted-individuals.component.scss'],
+    selector: 'app-dialog-add-trusted-individuals',
+    templateUrl: './dialog-add-trusted-individuals.component.html',
+    styleUrls: ['./dialog-add-trusted-individuals.component.scss'],
+    standalone: false
 })
 export class DialogAddTrustedIndividualsComponent implements OnInit {
   isMobile: boolean

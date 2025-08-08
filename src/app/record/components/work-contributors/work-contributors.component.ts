@@ -37,15 +37,16 @@ import { TogglzService } from '../../../core/togglz/togglz.service'
 import { MatSelect } from '@angular/material/select'
 
 @Component({
-  selector: 'app-work-contributors',
-  templateUrl: './work-contributors.component.html',
-  styleUrls: [
-    './work-contributors.component.scss',
-    './work-contributors.component.scss-theme.scss',
-  ],
-  viewProviders: [
-    { provide: ControlContainer, useExisting: FormGroupDirective },
-  ],
+    selector: 'app-work-contributors',
+    templateUrl: './work-contributors.component.html',
+    styleUrls: [
+        './work-contributors.component.scss',
+        './work-contributors.component.scss-theme.scss',
+    ],
+    viewProviders: [
+        { provide: ControlContainer, useExisting: FormGroupDirective },
+    ],
+    standalone: false
 })
 export class WorkContributorsComponent implements OnInit, OnDestroy {
   @ViewChildren('roleSelect', { read: ViewContainerRef })
