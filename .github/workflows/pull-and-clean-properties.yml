@@ -28,9 +28,15 @@ jobs:
       - name: Install Transifex CLI (Go)
         run: |
           curl -sSfL https://raw.githubusercontent.com/transifex/cli/master/install.sh | bash
-          # Ensure common install dirs are on PATH for subsequent steps
+          # Move the tx binary into a directory on PATH for subsequent steps
+          mkdir -p "$HOME/bin"
+          if [ -f "./tx" ]; then
+            install -m 0755 ./tx "$HOME/bin/tx"
+          elif [ -f "$GITHUB_WORKSPACE/tx" ]; then
+            install -m 0755 "$GITHUB_WORKSPACE/tx" "$HOME/bin/tx"
+          fi
           echo "$HOME/bin" >> "$GITHUB_PATH"
-          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+          command -v tx || true
           tx --version || true
 
       - name: Configure Transifex credentials (compat)
