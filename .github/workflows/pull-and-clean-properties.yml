@@ -74,16 +74,25 @@ jobs:
           set -euo pipefail
           git fetch origin main transifex || true
           if git ls-remote --exit-code --heads origin transifex >/dev/null 2>&1; then
-            prev_sha=$(git rev-parse origin/transifex)
-            echo "Resetting existing transifex branch to origin/main (previous head: ${prev_sha})"
-            echo "previous_sha=${prev_sha}" >> "$GITHUB_OUTPUT"
-            echo "branch_state=reset" >> "$GITHUB_OUTPUT"
             git checkout -B transifex origin/transifex
-            git reset --hard origin/main
+            prev_sha=$(git rev-parse HEAD)
+            echo "previous_sha=${prev_sha}" >> "$GITHUB_OUTPUT"
+            # Try to merge main; if conflicts, abort and hard reset to origin/main
+            if git merge --no-ff --no-edit origin/main; then
+              echo "branch_state=existing" >> "$GITHUB_OUTPUT"
+              echo "merge_strategy=merged_clean" >> "$GITHUB_OUTPUT"
+            else
+              echo "Merge had conflicts; aborting and resetting to origin/main"
+              git merge --abort || true
+              git reset --hard origin/main
+              echo "branch_state=existing" >> "$GITHUB_OUTPUT"
+              echo "merge_strategy=reset_due_to_conflicts" >> "$GITHUB_OUTPUT"
+            fi
           else
             echo "Creating transifex branch from origin/main"
             echo "previous_sha=none" >> "$GITHUB_OUTPUT"
             echo "branch_state=created" >> "$GITHUB_OUTPUT"
+            echo "merge_strategy=created_from_main" >> "$GITHUB_OUTPUT"
             git checkout -B transifex origin/main
           fi
 
@@ -103,8 +112,8 @@ jobs:
               git checkout transifex
             fi
             git add -A
-            git commit -m "chore(i18n): pull and normalize .properties via CI"
-            git push origin transifex
+            git commit -m "Transifex: pull and normalize .properties via CI"
+            git push -f origin transifex
             echo "Changes pushed to transifex branch."
             echo "changes=true" >> "$GITHUB_OUTPUT"
           else
@@ -131,6 +140,7 @@ jobs:
               echo "### Transifex run report"
               echo "- tx version: ${tx_version}"
               echo "- previous head: ${{ steps.prep.outputs.previous_sha }} (${{ steps.prep.outputs.branch_state }})"
+              echo "- merge strategy: ${{ steps.prep.outputs.merge_strategy }}"
               echo "- new commit: ${commit_sha}"
               echo "- changes: ${files_changed} files (${shortstat})"
             } >> "$GITHUB_STEP_SUMMARY"
@@ -142,6 +152,7 @@ jobs:
               echo "### Transifex run report"
               echo "- tx version: ${tx_version}"
               echo "- previous head: ${{ steps.prep.outputs.previous_sha }} (${{ steps.prep.outputs.branch_state }})"
+              echo "- merge strategy: ${{ steps.prep.outputs.merge_strategy }}"
               echo "- changes: none"
             } >> "$GITHUB_STEP_SUMMARY"
           fi
