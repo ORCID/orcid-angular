@@ -9,17 +9,17 @@
   $background: map-get($theme, background);
 
   ::ng-deep .valid {
-    color: mat.get-color-from-palette($accent, 900);
+    color: mat.m2-get-color-from-palette($accent, 900);
   }
   .error {
     color: map-get($foreground, 'state-warning-dark');
   }
 
   .info {
-    border-color: mat.get-color-from-palette($foreground, 'state-notice-dark');
+    border-color: mat.m2-get-color-from-palette($foreground, 'state-notice-dark');
 
     mat-icon {
-      color: mat.get-color-from-palette(
+      color: mat.m2-get-color-from-palette(
         $foreground,
         'state-notice-dark'
       ) !important;

@@ -9,20 +9,20 @@
   $background: map-get($theme, background);
 
   .info {
-    border-color: mat.get-color-from-palette(
+    border-color: mat.m2-get-color-from-palette(
       $foreground,
       'state-notice-dark'
     ) !important;
 
     mat-icon {
-      color: mat.get-color-from-palette(
+      color: mat.m2-get-color-from-palette(
         $foreground,
         'state-notice-dark'
       ) !important;
     }
   }
   .email-edit-container {
-    border-color: mat.get-color-from-palette($background, ui-background-light);
+    border-color: mat.m2-get-color-from-palette($background, ui-background-light);
   }
 }
 

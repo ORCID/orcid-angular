@@ -9,7 +9,7 @@
   $background: map-get($theme, background);
 
   .off {
-    color: mat.get-color-from-palette($foreground, 'state-warning-dark');
+    color: mat.m2-get-color-from-palette($foreground, 'state-warning-dark');
   }
 
   .on {

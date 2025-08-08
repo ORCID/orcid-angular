@@ -9,7 +9,7 @@
   $background: map-get($theme, background);
 
   hr {
-    background: mat.get-color-from-palette($background, 'ui-background-light');
+    background: mat.m2-get-color-from-palette($background, 'ui-background-light');
   }
 }
 @include panel-data-theme($orcid-app-theme);

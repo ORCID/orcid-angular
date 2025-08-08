@@ -11,7 +11,7 @@
     background-color: map-get($background, light-grey);
   }
   .panel.white-background {
-    background-color: mat.get-color-from-palette($foreground, text-light-high);
+    background-color: mat.m2-get-color-from-palette($foreground, text-light-high);
   }
   ::ng-deep .no-selected svg > g,
   ::ng-deep .no-selected svg > path {
@@ -37,7 +37,7 @@
 
   .privacy-selector {
     background-color: map-get($foreground, 'text-light-high');
-    border-color: mat.get-color-from-palette($background, ui-background);
+    border-color: mat.m2-get-color-from-palette($background, ui-background);
   }
 
   .limitedIcon {
@@ -110,7 +110,7 @@
   }
 
   .wrap-menu-item {
-    color: mat.get-color-from-palette($primary);
+    color: mat.m2-get-color-from-palette($primary);
   }
 }
 @include privacy-selector-theme($orcid-app-theme);

@@ -9,13 +9,13 @@
   $background: map-get($theme, background);
 
   .just-registered {
-    border-color: mat.get-color-from-palette(
+    border-color: mat.m2-get-color-from-palette(
       $foreground,
       'state-notice-dark'
     ) !important;
 
     mat-icon {
-      color: mat.get-color-from-palette(
+      color: mat.m2-get-color-from-palette(
         $foreground,
         'state-notice-dark'
       ) !important;
@@ -23,10 +23,10 @@
   }
 
   .email-verified {
-    border-color: mat.get-color-from-palette($accent, 400) !important;
+    border-color: mat.m2-get-color-from-palette($accent, 400) !important;
 
     mat-icon {
-      color: mat.get-color-from-palette($accent, 400);
+      color: mat.m2-get-color-from-palette($accent, 400);
     }
   }
 }

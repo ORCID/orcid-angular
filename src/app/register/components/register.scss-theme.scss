@@ -13,21 +13,21 @@
   }
 
   .step-actions {
-    border-color: mat.get-color-from-palette($background, ui-background-light);
+    border-color: mat.m2-get-color-from-palette($background, ui-background-light);
     .mat-mdc-raised-button.mat-primary {
-      background-color: mat.get-color-from-palette($primary, 700);
+      background-color: mat.m2-get-color-from-palette($primary, 700);
     }
     a {
-      color: mat.get-color-from-palette($primary, 700);
+      color: mat.m2-get-color-from-palette($primary, 700);
     }
   }
 
   a > mat-icon {
-    color: mat.get-color-from-palette($primary, 200) !important;
+    color: mat.m2-get-color-from-palette($primary, 200) !important;
   }
 
   ::ng-deep .valid {
-    color: mat.get-color-from-palette($accent, 900);
+    color: mat.m2-get-color-from-palette($accent, 900);
   }
 
   .error {
@@ -39,38 +39,38 @@
   }
 
   .info {
-    background-color: mat.get-color-from-palette(
+    background-color: mat.m2-get-color-from-palette(
       $background,
       state-notice-lightest
     );
-    border-color: mat.get-color-from-palette(
+    border-color: mat.m2-get-color-from-palette(
       $foreground,
       'state-notice-dark'
     ) !important;
 
     mat-icon {
-      color: mat.get-color-from-palette(
+      color: mat.m2-get-color-from-palette(
         $foreground,
         'state-notice-dark'
       ) !important;
     }
     a {
-      color: mat.get-color-from-palette($primary, 700);
+      color: mat.m2-get-color-from-palette($primary, 700);
     }
   }
 
   .announce {
-    background-color: mat.get-color-from-palette(
+    background-color: mat.m2-get-color-from-palette(
       $background,
       state-info-lightest
     );
-    border-color: mat.get-color-from-palette(
+    border-color: mat.m2-get-color-from-palette(
       $foreground,
       'state-info-dark'
     ) !important;
 
     mat-icon {
-      color: mat.get-color-from-palette(
+      color: mat.m2-get-color-from-palette(
         $foreground,
         'state-info-dark'
       ) !important;
@@ -84,7 +84,7 @@
       }
       .mat-mdc-text-field-wrapper {
         color: map-get($foreground, 'brand-primary-dark');
-        background-color: mat.get-color-from-palette(
+        background-color: mat.m2-get-color-from-palette(
           $background,
           brand-primary-lightest
         );

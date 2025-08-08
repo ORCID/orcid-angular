@@ -7,19 +7,19 @@
   $warn: map-get($theme, accent);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
-  $config: mat.define-typography-config();
+  $config: mat.m2-define-typography-config();
 
   input {
-    border: solid 1px mat.get-color-from-palette($background, grey);
+    border: solid 1px mat.m2-get-color-from-palette($background, grey);
   }
 
   ::placeholder {
-    color: mat.get-color-from-palette($background, placeholder-grey);
+    color: mat.m2-get-color-from-palette($background, placeholder-grey);
   }
 
   :-ms-input-placeholder {
     /* Internet Explorer 10-11 */
-    color: mat.get-color-from-palette($background, placeholder-grey);
+    color: mat.m2-get-color-from-palette($background, placeholder-grey);
   }
 
   .error {
@@ -32,7 +32,7 @@
 
   input.mat-mdc-input-element {
     border: transparent;
-    font-size: mat.font-size($config, body-1) !important;
+    font-size: mat.m2-font-size($config, body-1) !important;
   }
 }
 @include model-name-theme($orcid-app-theme);

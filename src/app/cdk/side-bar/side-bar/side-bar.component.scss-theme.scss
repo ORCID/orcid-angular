@@ -9,26 +9,26 @@
   $background: map-get($theme, background);
 
   :host {
-    background-color: mat.get-color-from-palette(
+    background-color: mat.m2-get-color-from-palette(
       $background,
       brand-primary-lightest
     );
   }
 
   .side-bar {
-    border-color: mat.get-color-from-palette($accent, 200) !important;
-    background-color: mat.get-color-from-palette(
+    border-color: mat.m2-get-color-from-palette($accent, 200) !important;
+    background-color: mat.m2-get-color-from-palette(
       $background,
       brand-primary-lightest
     ) !important;
   }
 
   hr {
-    background: mat.get-color-from-palette($background, 'ui-background-light');
+    background: mat.m2-get-color-from-palette($background, 'ui-background-light');
   }
 
   .verification-icon {
-    color: mat.get-color-from-palette($foreground, 'brand-primary');
+    color: mat.m2-get-color-from-palette($foreground, 'brand-primary');
   }
 }
 

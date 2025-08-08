@@ -10,37 +10,37 @@
 
   .drag-placeholder {
     min-height: 60px;
-    background-color: mat.get-color-from-palette(
+    background-color: mat.m2-get-color-from-palette(
       $background,
       brand-primary-lightest
     );
-    border: dashed 1px mat.get-color-from-palette($foreground, brand-primary);
+    border: dashed 1px mat.m2-get-color-from-palette($foreground, brand-primary);
     transition: transform 250ms cubic-bezier(0, 0, 0, 1);
   }
 
   .contributors-box {
     min-height: 60px;
-    background-color: mat.get-color-from-palette($foreground, text-light-high);
+    background-color: mat.m2-get-color-from-palette($foreground, text-light-high);
   }
 
   .contributors-box.cdk-drag-preview {
-    border: 2px solid mat.get-color-from-palette($foreground, brand-primary);
+    border: 2px solid mat.m2-get-color-from-palette($foreground, brand-primary);
   }
 
   .contributors-wrapper {
     .affiliation {
-      color: mat.get-color-from-palette($foreground, text-dark-mid);
+      color: mat.m2-get-color-from-palette($foreground, text-dark-mid);
     }
   }
 
   .notice-panel {
-    border-color: mat.get-color-from-palette(
+    border-color: mat.m2-get-color-from-palette(
       $foreground,
       'state-notice-dark'
     ) !important;
 
     mat-icon {
-      color: mat.get-color-from-palette(
+      color: mat.m2-get-color-from-palette(
         $foreground,
         'state-notice-dark'
       ) !important;

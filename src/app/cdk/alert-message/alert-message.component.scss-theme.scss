@@ -42,24 +42,24 @@
     $link-dark: map-get($settings, 'link-dark');
 
     .#{$class} {
-      border-color: mat.get-color-from-palette(
+      border-color: mat.m2-get-color-from-palette(
         $foreground,
         $border-color
       ) !important;
-      background-color: mat.get-color-from-palette(
+      background-color: mat.m2-get-color-from-palette(
         $foreground,
         $background-color
       ) !important;
 
       mat-icon {
-        color: mat.get-color-from-palette(
+        color: mat.m2-get-color-from-palette(
           $foreground,
           $border-color
         ) !important;
       }
 
       ::ng-deep a {
-        color: mat.get-color-from-palette(
+        color: mat.m2-get-color-from-palette(
           $foreground,
           $link-darkest
         ) !important;
@@ -70,7 +70,7 @@
         &:hover,
         &:active,
         &:focus {
-          color: mat.get-color-from-palette($foreground, $link-dark) !important;
+          color: mat.m2-get-color-from-palette($foreground, $link-dark) !important;
         }
       }
     }

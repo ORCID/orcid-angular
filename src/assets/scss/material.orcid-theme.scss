@@ -1,11 +1,11 @@
 @use '@angular/material' as mat;
 @import './material.light-theme.scss';
 
-$orcid-app-primary: mat.define-palette($orcid-blue);
-$orcid-app-accent: mat.define-palette($orcid-green);
-$orcid-app-warn: mat.define-palette($orcid-red);
+$orcid-app-primary: mat.m2-define-palette($orcid-blue);
+$orcid-app-accent: mat.m2-define-palette($orcid-green);
+$orcid-app-warn: mat.m2-define-palette($orcid-red);
 
-$orcid-app-theme: mat.define-light-theme((
+$orcid-app-theme: mat.m2-define-light-theme((
   color: (
     primary: $orcid-app-primary,
     accent: $orcid-app-accent,

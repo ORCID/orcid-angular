@@ -12,7 +12,7 @@
     color: map-get($background, ui-background);
   }
   :host ::ng-deep mat-form-field.email-activated mat-icon {
-    color: mat.get-color-from-palette($accent, 400);
+    color: mat.m2-get-color-from-palette($accent, 400);
   }
 }
 

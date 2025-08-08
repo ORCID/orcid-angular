@@ -5,10 +5,10 @@
   $primary: map-get($theme, primary);
 
   a.black-underline-url {
-    color: mat.get-contrast-color-from-palette($accent, 500);
+    color: mat.m2-get-contrast-color-from-palette($accent, 500);
     font-weight: 700;
   }
   a.underline {
-    color: mat.get-color-from-palette($primary, 700);
+    color: mat.m2-get-color-from-palette($primary, 700);
   }
 }
