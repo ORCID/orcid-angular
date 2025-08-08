@@ -22,15 +22,15 @@
 
 // Keep var tied to element color so nested content inherits correctly
 .mat-mdc-button.mat-unthemed {
-  --mdc-text-button-label-text-color: currentColor;
+  --mat-button-text-label-text-color: currentColor;
 }
 
 button.mat-mdc-icon-button {
-  --mdc-icon-button-icon-size: 14px;
+  --mat-icon-button-icon-size: 14px;
 }
 
 mat-paginator button.mat-mdc-icon-button {
-  --mdc-icon-button-icon-size: revert;
+  --mat-icon-button-icon-size: revert;
 }
 
 button.mat-mdc-raised-button {
