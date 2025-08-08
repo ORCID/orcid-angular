@@ -41,13 +41,12 @@ jobs:
             exit 1
           fi
           mkdir -p "$HOME"
-          cat > "$HOME/.transifexrc" <<EOF
-[https://www.transifex.com]
-hostname = https://www.transifex.com
-username = api
-password = ${TRANSIFEX_TOKEN}
-EOF
-          # Obscure token in logs
+          printf "%s\n" \
+            "[https://www.transifex.com]" \
+            "hostname = https://www.transifex.com" \
+            "username = api" \
+            "password = ${TRANSIFEX_TOKEN}" > "$HOME/.transifexrc"
+          chmod 600 "$HOME/.transifexrc"
           echo "Created ~/.transifexrc"
 
       - name: Configure Git user
