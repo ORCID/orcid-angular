@@ -11,13 +11,13 @@ import {
 import { DialogRevokeYourOwnPermissionsComponent } from '../dialog-revoke-your-own-permissions/dialog-revoke-your-own-permissions.component'
 
 @Component({
-    selector: 'app-settings-users-that-thrust-you',
-    templateUrl: './settings-users-that-thrust-you.component.html',
-    styleUrls: [
-        './settings-users-that-thrust-you.component.scss',
-        './settings-users-that-thrust-you.component.scss-theme.scss',
-    ],
-    standalone: false
+  selector: 'app-settings-users-that-thrust-you',
+  templateUrl: './settings-users-that-thrust-you.component.html',
+  styleUrls: [
+    './settings-users-that-thrust-you.component.scss',
+    './settings-users-that-thrust-you.component.scss-theme.scss',
+  ],
+  standalone: false,
 })
 export class SettingsUsersThatThrustYouComponent implements OnInit {
   $usersThatThrustYou: Observable<TrustedIndividuals>

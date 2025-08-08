@@ -18,15 +18,15 @@ import { RegisterStateService } from '../../register-state.service'
 import { RegisterObservabilityService } from '../../register-observability.service'
 
 @Component({
-    selector: 'app-step-a',
-    templateUrl: './step-a.component.html',
-    styleUrls: [
-        './step-a.component.scss',
-        '../register.style.scss',
-        '../register.scss-theme.scss',
-    ],
-    preserveWhitespaces: true,
-    standalone: false
+  selector: 'app-step-a',
+  templateUrl: './step-a.component.html',
+  styleUrls: [
+    './step-a.component.scss',
+    '../register.style.scss',
+    '../register.scss-theme.scss',
+  ],
+  preserveWhitespaces: true,
+  standalone: false,
 })
 export class StepAComponent
   extends BaseStepDirective

@@ -16,7 +16,10 @@
   }
 
   .info {
-    border-color: mat.m2-get-color-from-palette($foreground, 'state-notice-dark');
+    border-color: mat.m2-get-color-from-palette(
+      $foreground,
+      'state-notice-dark'
+    );
 
     mat-icon {
       color: mat.m2-get-color-from-palette(

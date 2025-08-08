@@ -14,13 +14,13 @@ import { UserInfo } from '../../../types'
 import { WorkModalComponent } from '../work-modal/work-modal.component'
 
 @Component({
-    selector: 'app-work-featured',
-    templateUrl: './work-featured.component.html',
-    styleUrls: [
-        './work-featured.component.scss',
-        './work-featured.component.scss-theme.scss',
-    ],
-    standalone: false
+  selector: 'app-work-featured',
+  templateUrl: './work-featured.component.html',
+  styleUrls: [
+    './work-featured.component.scss',
+    './work-featured.component.scss-theme.scss',
+  ],
+  standalone: false,
 })
 export class WorkFeaturedComponent {
   @Input() userRecord: UserRecord

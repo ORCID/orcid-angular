@@ -6,10 +6,10 @@ import { UserService } from 'src/app/core'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 
 @Component({
-    selector: 'app-account-settings',
-    templateUrl: './account-settings.component.html',
-    styleUrls: ['./account-settings.component.scss'],
-    standalone: false
+  selector: 'app-account-settings',
+  templateUrl: './account-settings.component.html',
+  styleUrls: ['./account-settings.component.scss'],
+  standalone: false,
 })
 export class AccountSettingsComponent implements OnInit, OnDestroy {
   userInfo: any

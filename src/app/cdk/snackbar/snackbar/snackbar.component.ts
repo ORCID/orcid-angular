@@ -5,13 +5,13 @@ import { PlatformInfoService } from '../../platform-info'
 import { take } from 'rxjs/operators'
 
 @Component({
-    selector: 'app-snackbar',
-    templateUrl: './snackbar.component.html',
-    styleUrls: [
-        './snackbar.component.scss.theme.scss',
-        './snackbar.component.scss',
-    ],
-    standalone: false
+  selector: 'app-snackbar',
+  templateUrl: './snackbar.component.html',
+  styleUrls: [
+    './snackbar.component.scss.theme.scss',
+    './snackbar.component.scss',
+  ],
+  standalone: false,
 })
 export class SnackbarComponent implements OnInit {
   @HostBinding('attr.dir') _contentDirection: ScreenDirection = 'ltr'

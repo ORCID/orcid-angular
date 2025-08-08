@@ -2,13 +2,13 @@ import { Component, Input } from '@angular/core'
 import { AlertType } from 'src/app/constants'
 
 @Component({
-    selector: 'app-alert-message',
-    templateUrl: './alert-message.component.html',
-    styleUrls: [
-        './alert-message.component.scss',
-        'alert-message.component.scss-theme.scss',
-    ],
-    standalone: false
+  selector: 'app-alert-message',
+  templateUrl: './alert-message.component.html',
+  styleUrls: [
+    './alert-message.component.scss',
+    'alert-message.component.scss-theme.scss',
+  ],
+  standalone: false,
 })
 /**
  * Use `title` and `content` attributes to display the message

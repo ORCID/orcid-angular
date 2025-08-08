@@ -9,10 +9,10 @@ import { Location } from '@angular/common'
 import { ApplicationRoutes } from '../../constants'
 
 @Component({
-    selector: 'app-search',
-    templateUrl: './search.component.html',
-    styleUrls: ['./search.component.scss-theme.scss', './search.component.scss'],
-    standalone: false
+  selector: 'app-search',
+  templateUrl: './search.component.html',
+  styleUrls: ['./search.component.scss-theme.scss', './search.component.scss'],
+  standalone: false,
 })
 export class SearchComponent implements OnInit {
   labelSearch = $localize`:@@layout.ariaLabelSearch:Search the ORCID registry`

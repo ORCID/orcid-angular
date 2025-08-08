@@ -4,10 +4,10 @@ import { UserService } from 'src/app/core'
 import { WINDOW } from '../../../cdk/window'
 
 @Component({
-    selector: 'app-logged-in',
-    templateUrl: './logged-in.component.html',
-    styleUrls: ['./logged-in.component.scss'],
-    standalone: false
+  selector: 'app-logged-in',
+  templateUrl: './logged-in.component.html',
+  styleUrls: ['./logged-in.component.scss'],
+  standalone: false,
 })
 export class LoggedInComponent implements OnInit {
   @Input() realUserOrcid: string

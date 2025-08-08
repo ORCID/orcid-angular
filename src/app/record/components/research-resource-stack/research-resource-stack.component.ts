@@ -9,13 +9,13 @@ import { RecordResearchResourceService } from '../../../core/record-research-res
 import { UserRecord } from 'src/app/types/record.local'
 
 @Component({
-    selector: 'app-research-resource-stack',
-    templateUrl: './research-resource-stack.component.html',
-    styleUrls: [
-        './research-resource-stack.component.scss',
-        './research-resource-stack.component.scss-theme.scss',
-    ],
-    standalone: false
+  selector: 'app-research-resource-stack',
+  templateUrl: './research-resource-stack.component.html',
+  styleUrls: [
+    './research-resource-stack.component.scss',
+    './research-resource-stack.component.scss-theme.scss',
+  ],
+  standalone: false,
 })
 export class ResearchResourceStackComponent implements OnInit {
   @HostBinding('class.display-the-stack') displayTheStackClass = false

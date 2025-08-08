@@ -6,14 +6,14 @@ import { RegisterStateService } from '../../register-state.service'
 import { RegisterObservabilityService } from '../../register-observability.service'
 
 @Component({
-    selector: 'app-step-d',
-    templateUrl: './step-d.component.html',
-    styleUrls: [
-        './step-d.component.scss',
-        '../register.style.scss',
-        '../register.scss-theme.scss',
-    ],
-    standalone: false
+  selector: 'app-step-d',
+  templateUrl: './step-d.component.html',
+  styleUrls: [
+    './step-d.component.scss',
+    '../register.style.scss',
+    '../register.scss-theme.scss',
+  ],
+  standalone: false,
 })
 export class StepDComponent extends BaseStepDirective {
   @Input() loading

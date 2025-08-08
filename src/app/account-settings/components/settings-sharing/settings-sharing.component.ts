@@ -2,10 +2,10 @@ import { Component, Inject, OnInit } from '@angular/core'
 import { WINDOW } from 'src/app/cdk/window'
 
 @Component({
-    selector: 'app-settings-sharing',
-    templateUrl: './settings-sharing.component.html',
-    styleUrls: ['./settings-sharing.component.scss'],
-    standalone: false
+  selector: 'app-settings-sharing',
+  templateUrl: './settings-sharing.component.html',
+  styleUrls: ['./settings-sharing.component.scss'],
+  standalone: false,
 })
 export class SettingsSharingComponent implements OnInit {
   titleHtmlCode = $localize`:@@account.htmlCode:Display your ORCID iD on the web`

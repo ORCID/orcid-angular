@@ -20,10 +20,10 @@ import { UserRecord } from '../../../types/record.local'
 import { isQA } from 'src/app/shared/validators/environment-check/environment-check'
 
 @Component({
-    selector: 'app-panels',
-    templateUrl: './panels.component.html',
-    styleUrls: ['./panels.component.scss', './panels.component.scss-theme.scss'],
-    standalone: false
+  selector: 'app-panels',
+  templateUrl: './panels.component.html',
+  styleUrls: ['./panels.component.scss', './panels.component.scss-theme.scss'],
+  standalone: false,
 })
 export class PanelsComponent implements OnInit {
   @Input() loading = false

@@ -13,13 +13,13 @@ import { OrganizationsService } from '../../../core'
 import { RecordResearchResourceService } from '../../../core/record-research-resource/record-research-resource.service'
 
 @Component({
-    selector: 'app-research-resource',
-    templateUrl: './research-resource.component.html',
-    styleUrls: [
-        './research-resource.component.scss',
-        './research-resource.component.scss-theme.scss',
-    ],
-    standalone: false
+  selector: 'app-research-resource',
+  templateUrl: './research-resource.component.html',
+  styleUrls: [
+    './research-resource.component.scss',
+    './research-resource.component.scss-theme.scss',
+  ],
+  standalone: false,
 })
 export class ResearchResourceComponent implements OnInit {
   $destroy: Subject<boolean> = new Subject<boolean>()

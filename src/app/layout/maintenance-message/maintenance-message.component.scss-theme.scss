@@ -11,7 +11,8 @@
 
   ::ng-deep .closable,
   .text-container {
-    border-top: mat.m2-get-color-from-palette($foreground, 'box-border') 1px solid;
+    border-top: mat.m2-get-color-from-palette($foreground, 'box-border') 1px
+      solid;
   }
 }
 

@@ -5,14 +5,14 @@ import {
 } from 'src/app/types/trusted-individuals.endpoint'
 
 @Component({
-    selector: 'app-trusted-individuals-dropdown',
-    templateUrl: './trusted-individuals-dropdown.component.html',
-    styleUrls: [
-        './trusted-individuals-dropdown.component.scss',
-        './trusted-individuals-dropdown.component.scss-theme.scss',
-    ],
-    preserveWhitespaces: true,
-    standalone: false
+  selector: 'app-trusted-individuals-dropdown',
+  templateUrl: './trusted-individuals-dropdown.component.html',
+  styleUrls: [
+    './trusted-individuals-dropdown.component.scss',
+    './trusted-individuals-dropdown.component.scss-theme.scss',
+  ],
+  preserveWhitespaces: true,
+  standalone: false,
 })
 export class TrustedIndividualsDropdownComponent implements OnInit {
   _trustedIndividuals: TrustedIndividuals

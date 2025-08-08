@@ -1,8 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core'
 
 @Pipe({
-    name: 'trailingZeros',
-    standalone: false
+  name: 'trailingZeros',
+  standalone: false,
 })
 export class TrailingZerosPipe implements PipeTransform {
   transform(date: number): string {

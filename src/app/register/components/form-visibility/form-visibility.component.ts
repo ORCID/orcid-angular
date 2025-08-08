@@ -23,27 +23,27 @@ import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 
 @Component({
-    selector: 'app-form-visibility',
-    templateUrl: './form-visibility.component.html',
-    styleUrls: [
-        './form-visibility.component.scss',
-        '../register.style.scss',
-        '../register.scss-theme.scss',
-    ],
-    preserveWhitespaces: true,
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => FormVisibilityComponent),
-            multi: true,
-        },
-        {
-            provide: NG_ASYNC_VALIDATORS,
-            useExisting: forwardRef(() => FormVisibilityComponent),
-            multi: true,
-        },
-    ],
-    standalone: false
+  selector: 'app-form-visibility',
+  templateUrl: './form-visibility.component.html',
+  styleUrls: [
+    './form-visibility.component.scss',
+    '../register.style.scss',
+    '../register.scss-theme.scss',
+  ],
+  preserveWhitespaces: true,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => FormVisibilityComponent),
+      multi: true,
+    },
+    {
+      provide: NG_ASYNC_VALIDATORS,
+      useExisting: forwardRef(() => FormVisibilityComponent),
+      multi: true,
+    },
+  ],
+  standalone: false,
 })
 export class FormVisibilityComponent
   extends BaseForm

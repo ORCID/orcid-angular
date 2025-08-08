@@ -4,11 +4,11 @@ import { OrganizationsService } from '../../../core'
 import { URL_REGEXP_BACKEND } from '../../../constants'
 
 @Component({
-    selector: 'app-org-identifier',
-    templateUrl: './org-identifier.component.html',
-    styleUrls: ['./org-identifier.component.scss'],
-    preserveWhitespaces: true,
-    standalone: false
+  selector: 'app-org-identifier',
+  templateUrl: './org-identifier.component.html',
+  styleUrls: ['./org-identifier.component.scss'],
+  preserveWhitespaces: true,
+  standalone: false,
 })
 export class OrgIdentifierComponent implements OnInit {
   @Input() orgDisambiguated: OrgDisambiguated

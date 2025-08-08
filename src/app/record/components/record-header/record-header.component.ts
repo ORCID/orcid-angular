@@ -18,13 +18,13 @@ import { Assertion, UserInfo } from 'src/app/types'
 import { UserRecord } from 'src/app/types/record.local'
 
 @Component({
-    selector: 'app-record-header',
-    templateUrl: './record-header.component.html',
-    styleUrls: [
-        './record-header.component.scss',
-        './record-header.component.scss-theme.scss',
-    ],
-    standalone: false
+  selector: 'app-record-header',
+  templateUrl: './record-header.component.html',
+  styleUrls: [
+    './record-header.component.scss',
+    './record-header.component.scss-theme.scss',
+  ],
+  standalone: false,
 })
 export class RecordHeaderComponent implements OnInit {
   $destroy: Subject<boolean> = new Subject<boolean>()

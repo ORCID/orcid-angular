@@ -2,10 +2,10 @@ import { Component, Input, OnInit } from '@angular/core'
 import { RecordImportWizard } from '../../../types/record-peer-review-import.endpoint'
 
 @Component({
-    selector: 'app-search-link-wizard',
-    templateUrl: './search-link-wizard.component.html',
-    styleUrls: ['./search-link-wizard.component.scss'],
-    standalone: false
+  selector: 'app-search-link-wizard',
+  templateUrl: './search-link-wizard.component.html',
+  styleUrls: ['./search-link-wizard.component.scss'],
+  standalone: false,
 })
 export class SearchLinkWizardComponent implements OnInit {
   @Input() recordImportWizards: RecordImportWizard[]

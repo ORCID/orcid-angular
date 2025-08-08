@@ -10,13 +10,13 @@ import { GroupingSuggestions, Suggestion } from 'src/app/types/works.endpoint'
 import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms'
 
 @Component({
-    selector: 'app-modal-combine-works-with-selector',
-    templateUrl: './modal-combine-works-with-selector.component.html',
-    styleUrls: [
-        './modal-combine-works-with-selector.component.scss',
-        './modal-combine-works-with-selector.component.scss-theme.scss',
-    ],
-    standalone: false
+  selector: 'app-modal-combine-works-with-selector',
+  templateUrl: './modal-combine-works-with-selector.component.html',
+  styleUrls: [
+    './modal-combine-works-with-selector.component.scss',
+    './modal-combine-works-with-selector.component.scss-theme.scss',
+  ],
+  standalone: false,
 })
 export class ModalCombineWorksWithSelectorComponent
   implements OnInit, OnDestroy

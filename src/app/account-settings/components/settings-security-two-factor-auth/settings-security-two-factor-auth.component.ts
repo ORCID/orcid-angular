@@ -5,13 +5,13 @@ import { first } from 'rxjs/operators'
 import { TwoFactorAuthenticationService } from '../../../core/two-factor-authentication/two-factor-authentication.service'
 
 @Component({
-    selector: 'app-settings-security-two-factor-auth',
-    templateUrl: './settings-security-two-factor-auth.component.html',
-    styleUrls: [
-        './settings-security-two-factor-auth.component.scss',
-        './settings-security-two-factor-auth.component.scss-theme.scss',
-    ],
-    standalone: false
+  selector: 'app-settings-security-two-factor-auth',
+  templateUrl: './settings-security-two-factor-auth.component.html',
+  styleUrls: [
+    './settings-security-two-factor-auth.component.scss',
+    './settings-security-two-factor-auth.component.scss-theme.scss',
+  ],
+  standalone: false,
 })
 export class SettingsSecurityTwoFactorAuthComponent implements OnInit {
   @Input() twoFactorState: boolean

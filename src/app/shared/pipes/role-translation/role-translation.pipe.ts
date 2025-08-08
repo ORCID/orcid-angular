@@ -5,8 +5,8 @@ import {
 } from '../../../types/works.endpoint'
 
 @Pipe({
-    name: 'roleTranslation',
-    standalone: false
+  name: 'roleTranslation',
+  standalone: false,
 })
 export class RoleTranslationPipe implements PipeTransform {
   transform(key: string): string {

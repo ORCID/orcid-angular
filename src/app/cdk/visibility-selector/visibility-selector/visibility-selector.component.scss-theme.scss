@@ -11,7 +11,10 @@
     background-color: map-get($background, light-grey);
   }
   .panel.white-background {
-    background-color: mat.m2-get-color-from-palette($foreground, text-light-high);
+    background-color: mat.m2-get-color-from-palette(
+      $foreground,
+      text-light-high
+    );
   }
   ::ng-deep .no-selected svg > g,
   ::ng-deep .no-selected svg > path {

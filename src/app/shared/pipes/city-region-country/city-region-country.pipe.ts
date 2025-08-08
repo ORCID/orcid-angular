@@ -2,8 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core'
 import { OrgDisambiguated } from 'src/app/types'
 
 @Pipe({
-    name: 'cityRegionCountry',
-    standalone: false
+  name: 'cityRegionCountry',
+  standalone: false,
 })
 export class CityRegionCountry implements PipeTransform {
   transform(orgDisambiguated: OrgDisambiguated, args?: any): string {

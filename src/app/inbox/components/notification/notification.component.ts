@@ -27,21 +27,21 @@ import {
 } from '@angular/forms'
 
 @Component({
-    selector: 'app-notification',
-    templateUrl: './notification.component.html',
-    styleUrls: [
-        './notification.component.scss',
-        './notification.component.scss-theme.scss',
-    ],
-    animations: heightAnimation,
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => NotificationComponent),
-            multi: true,
-        },
-    ],
-    standalone: false
+  selector: 'app-notification',
+  templateUrl: './notification.component.html',
+  styleUrls: [
+    './notification.component.scss',
+    './notification.component.scss-theme.scss',
+  ],
+  animations: heightAnimation,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => NotificationComponent),
+      multi: true,
+    },
+  ],
+  standalone: false,
 })
 export class NotificationComponent
   implements OnInit, AfterViewInit, ControlValueAccessor

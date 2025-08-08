@@ -17,13 +17,13 @@ import { UserInfo } from '../../../types'
 import { GroupingSuggestions } from 'src/app/types/works.endpoint'
 
 @Component({
-    selector: 'app-work-featured-stack-group',
-    templateUrl: './work-featured-stack-group.component.html',
-    styleUrls: [
-        './work-featured-stack-group.component.scss',
-        './work-featured-stack-group.component.scss-theme.scss',
-    ],
-    standalone: false
+  selector: 'app-work-featured-stack-group',
+  templateUrl: './work-featured-stack-group.component.html',
+  styleUrls: [
+    './work-featured-stack-group.component.scss',
+    './work-featured-stack-group.component.scss-theme.scss',
+  ],
+  standalone: false,
 })
 export class WorkFeaturedStackGroupComponent implements OnInit {
   paginatorLabel

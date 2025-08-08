@@ -70,7 +70,10 @@
         &:hover,
         &:active,
         &:focus {
-          color: mat.m2-get-color-from-palette($foreground, $link-dark) !important;
+          color: mat.m2-get-color-from-palette(
+            $foreground,
+            $link-dark
+          ) !important;
         }
       }
     }

@@ -3,10 +3,10 @@ import { AfterViewInit, Component, Inject, OnInit } from '@angular/core'
 import { WINDOW } from 'src/app/cdk/window'
 
 @Component({
-    selector: 'app-settings',
-    templateUrl: './settings.component.html',
-    styleUrls: ['./settings.component.scss'],
-    standalone: false
+  selector: 'app-settings',
+  templateUrl: './settings.component.html',
+  styleUrls: ['./settings.component.scss'],
+  standalone: false,
 })
 export class SettingsComponent implements AfterViewInit {
   constructor(

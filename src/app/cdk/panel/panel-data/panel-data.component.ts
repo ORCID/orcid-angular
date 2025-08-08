@@ -4,13 +4,13 @@ import { PlatformInfoService } from '../../platform-info'
 import { Subject } from 'rxjs'
 
 @Component({
-    selector: 'app-panel-data',
-    templateUrl: './panel-data.component.html',
-    styleUrls: [
-        './panel-data.component.scss',
-        './panel-data.component.scss-theme.scss',
-    ],
-    standalone: false
+  selector: 'app-panel-data',
+  templateUrl: './panel-data.component.html',
+  styleUrls: [
+    './panel-data.component.scss',
+    './panel-data.component.scss-theme.scss',
+  ],
+  standalone: false,
 })
 export class PanelDataComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

@@ -36,21 +36,21 @@ export interface DeepSelectMenu {
 }
 
 @Component({
-    selector: 'app-deep-select-input',
-    templateUrl: './deep-select-input.component.html',
-    styleUrls: ['./deep-select-input.component.scss'],
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => DeepSelectInputComponent),
-            multi: true,
-        },
-        {
-            provide: MAT_MENU_DEFAULT_OPTIONS,
-            useValue: { overlayPanelClass: 'menu-overlay-pane-overwrite' },
-        },
-    ],
-    standalone: false
+  selector: 'app-deep-select-input',
+  templateUrl: './deep-select-input.component.html',
+  styleUrls: ['./deep-select-input.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => DeepSelectInputComponent),
+      multi: true,
+    },
+    {
+      provide: MAT_MENU_DEFAULT_OPTIONS,
+      useValue: { overlayPanelClass: 'menu-overlay-pane-overwrite' },
+    },
+  ],
+  standalone: false,
 })
 export class DeepSelectInputComponent implements ControlValueAccessor {
   formgroup

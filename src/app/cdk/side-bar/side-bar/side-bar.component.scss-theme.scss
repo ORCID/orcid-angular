@@ -24,7 +24,10 @@
   }
 
   hr {
-    background: mat.m2-get-color-from-palette($background, 'ui-background-light');
+    background: mat.m2-get-color-from-palette(
+      $background,
+      'ui-background-light'
+    );
   }
 
   .verification-icon {

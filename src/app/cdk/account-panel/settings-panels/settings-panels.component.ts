@@ -4,14 +4,14 @@ import { PlatformInfoService } from '../../platform-info'
 import { RouterModule, Routes } from '@angular/router'
 
 @Component({
-    selector: 'app-settings-panels',
-    templateUrl: './settings-panels.component.html',
-    styleUrls: [
-        './settings-panels.component.scss',
-        './settings-panels.component.scss-theme.scss',
-    ],
-    preserveWhitespaces: true,
-    standalone: false
+  selector: 'app-settings-panels',
+  templateUrl: './settings-panels.component.html',
+  styleUrls: [
+    './settings-panels.component.scss',
+    './settings-panels.component.scss-theme.scss',
+  ],
+  preserveWhitespaces: true,
+  standalone: false,
 })
 export class SettingsPanelsComponent implements OnInit {
   @Input() loading = false

@@ -2,13 +2,13 @@ import { Component, HostBinding, Input, OnInit } from '@angular/core'
 import { VisibilityStrings } from 'src/app/types/common.endpoint'
 
 @Component({
-    selector: 'app-panel-privacy',
-    templateUrl: './panel-privacy.component.html',
-    styleUrls: [
-        './panel-privacy.component.scss',
-        './panel-privacy.component.scss-theme.scss',
-    ],
-    standalone: false
+  selector: 'app-panel-privacy',
+  templateUrl: './panel-privacy.component.html',
+  styleUrls: [
+    './panel-privacy.component.scss',
+    './panel-privacy.component.scss-theme.scss',
+  ],
+  standalone: false,
 })
 export class PanelPrivacyComponent implements OnInit {
   @HostBinding('attr.aria-label') label = ''

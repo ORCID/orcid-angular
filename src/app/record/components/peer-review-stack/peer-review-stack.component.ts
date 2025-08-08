@@ -17,13 +17,13 @@ import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { UserRecord } from 'src/app/types/record.local'
 
 @Component({
-    selector: 'app-peer-review-stack',
-    templateUrl: './peer-review-stack.component.html',
-    styleUrls: [
-        './peer-review-stack.component.scss',
-        './peer-review-stack.component.scss-theme.scss',
-    ],
-    standalone: false
+  selector: 'app-peer-review-stack',
+  templateUrl: './peer-review-stack.component.html',
+  styleUrls: [
+    './peer-review-stack.component.scss',
+    './peer-review-stack.component.scss-theme.scss',
+  ],
+  standalone: false,
 })
 export class PeerReviewStackComponent implements OnInit {
   @HostBinding('class.display-the-stack') displayTheStackClass = false

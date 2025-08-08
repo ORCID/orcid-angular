@@ -22,7 +22,10 @@
     }
   }
   .email-edit-container {
-    border-color: mat.m2-get-color-from-palette($background, ui-background-light);
+    border-color: mat.m2-get-color-from-palette(
+      $background,
+      ui-background-light
+    );
   }
 }
 

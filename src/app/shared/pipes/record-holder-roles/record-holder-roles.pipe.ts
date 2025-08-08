@@ -7,8 +7,8 @@ import {
 import { Contributor } from '../../../types'
 
 @Pipe({
-    name: 'recordHolderRoles',
-    standalone: false
+  name: 'recordHolderRoles',
+  standalone: false,
 })
 export class RecordHolderRolesPipe implements PipeTransform {
   transform(

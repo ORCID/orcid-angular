@@ -37,13 +37,13 @@ import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { RecordService } from 'src/app/core/record/record.service'
 
 @Component({
-    selector: 'app-modal-affiliations',
-    templateUrl: './modal-affiliations.component.html',
-    styleUrls: [
-        './modal-affiliations.component.scss',
-        './modal-affiliations.component.scss-theme.scss',
-    ],
-    standalone: false
+  selector: 'app-modal-affiliations',
+  templateUrl: './modal-affiliations.component.html',
+  styleUrls: [
+    './modal-affiliations.component.scss',
+    './modal-affiliations.component.scss-theme.scss',
+  ],
+  standalone: false,
 })
 export class ModalAffiliationsComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

@@ -37,14 +37,14 @@ import { Title } from '@angular/platform-browser'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 
 @Component({
-    selector: 'app-form-authorize',
-    templateUrl: './form-authorize.component.html',
-    styleUrls: [
-        './form-authorize.component.scss',
-        './form-authorize.component.scss-theme.scss',
-    ],
-    preserveWhitespaces: true,
-    standalone: false
+  selector: 'app-form-authorize',
+  templateUrl: './form-authorize.component.html',
+  styleUrls: [
+    './form-authorize.component.scss',
+    './form-authorize.component.scss-theme.scss',
+  ],
+  preserveWhitespaces: true,
+  standalone: false,
 })
 export class FormAuthorizeComponent implements OnInit, OnDestroy {
   @Output() redirectUrl = new EventEmitter<string>()

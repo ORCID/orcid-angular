@@ -4,14 +4,14 @@ import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { AccountTrustedOrganization } from 'src/app/types/account-trusted-organizations'
 
 @Component({
-    selector: 'app-dialog-revoke-trusted-organization',
-    templateUrl: './dialog-revoke-trusted-organization.component.html',
-    styleUrls: [
-        './dialog-revoke-trusted-organization.component.scss',
-        './dialog-revoke-trusted-organization.component.scss-theme.scss',
-    ],
-    preserveWhitespaces: true,
-    standalone: false
+  selector: 'app-dialog-revoke-trusted-organization',
+  templateUrl: './dialog-revoke-trusted-organization.component.html',
+  styleUrls: [
+    './dialog-revoke-trusted-organization.component.scss',
+    './dialog-revoke-trusted-organization.component.scss-theme.scss',
+  ],
+  preserveWhitespaces: true,
+  standalone: false,
 })
 export class DialogRevokeTrustedOrganizationComponent implements OnInit {
   isMobile: boolean

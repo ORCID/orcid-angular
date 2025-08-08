@@ -24,13 +24,13 @@ import {
 import { WINDOW } from '../../../../../cdk/window'
 
 @Component({
-    selector: 'app-modal-biography',
-    templateUrl: './modal-biography.component.html',
-    styleUrls: [
-        './modal-biography.component.scss-theme.scss',
-        './modal-biography.component.scss',
-    ],
-    standalone: false
+  selector: 'app-modal-biography',
+  templateUrl: './modal-biography.component.html',
+  styleUrls: [
+    './modal-biography.component.scss-theme.scss',
+    './modal-biography.component.scss',
+  ],
+  standalone: false,
 })
 export class ModalBiographyComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

@@ -10,15 +10,15 @@ import { WINDOW } from '../../../../cdk/window'
 import { isValidOrcidFormat } from 'src/app/constants'
 
 @Component({
-    selector: 'app-print-errors',
-    templateUrl: './print-errors.component.html',
-    styleUrls: [
-        './print-errors.component.scss',
-        '../../sign-in.style.scss',
-        '../../sign-in.scss-theme.scss',
-    ],
-    preserveWhitespaces: true,
-    standalone: false
+  selector: 'app-print-errors',
+  templateUrl: './print-errors.component.html',
+  styleUrls: [
+    './print-errors.component.scss',
+    '../../sign-in.style.scss',
+    '../../sign-in.scss-theme.scss',
+  ],
+  preserveWhitespaces: true,
+  standalone: false,
 })
 export class PrintErrorsComponent implements OnInit {
   @Input() badCredentials: boolean

@@ -4,7 +4,7 @@ import {
   Inject,
   OnDestroy,
   OnInit,
-  DOCUMENT
+  DOCUMENT,
 } from '@angular/core'
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
@@ -39,13 +39,13 @@ import { ShareEmailsDomainsComponentDialogOutput } from 'src/app/cdk/interstitia
 import { AffilationsComponentDialogOutput } from 'src/app/cdk/interstitials/affiliations-interstitial/interstitial-dialog-extend/affiliations-interstitial-dialog.component'
 
 @Component({
-    selector: 'app-my-orcid',
-    templateUrl: './my-orcid.component.html',
-    styleUrls: [
-        './my-orcid.component.scss',
-        './my-orcid.component.scss-theme.scss',
-    ],
-    standalone: false
+  selector: 'app-my-orcid',
+  templateUrl: './my-orcid.component.html',
+  styleUrls: [
+    './my-orcid.component.scss',
+    './my-orcid.component.scss-theme.scss',
+  ],
+  standalone: false,
 })
 export class MyOrcidComponent implements OnInit, OnDestroy {
   private readonly $destroy = new Subject()

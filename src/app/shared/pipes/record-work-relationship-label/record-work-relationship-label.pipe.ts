@@ -5,8 +5,8 @@ import {
 } from 'src/app/types/works.endpoint'
 
 @Pipe({
-    name: 'recordWorkRelationshipLabel',
-    standalone: false
+  name: 'recordWorkRelationshipLabel',
+  standalone: false,
 })
 export class RecordWorkRelationshipLabelPipe implements PipeTransform {
   transform(value: WorkRelationships): unknown {

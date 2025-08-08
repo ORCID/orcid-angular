@@ -10,8 +10,8 @@ import { map } from 'rxjs/operators'
 import { Observable } from 'rxjs'
 
 @Directive({
-    selector: '[appTogglz]',
-    standalone: false
+  selector: '[appTogglz]',
+  standalone: false,
 })
 export class TogglzDirective implements OnInit {
   @Input() appTogglz: string

@@ -37,14 +37,14 @@ import { WINDOW } from 'src/app/cdk/window'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 
 @Component({
-    selector: 'app-developer-tools',
-    templateUrl: './developer-tools.component.html',
-    styleUrls: [
-        './developer-tools.component.scss',
-        './developer-tools.component.scss-theme.scss',
-    ],
-    preserveWhitespaces: true,
-    standalone: false
+  selector: 'app-developer-tools',
+  templateUrl: './developer-tools.component.html',
+  styleUrls: [
+    './developer-tools.component.scss',
+    './developer-tools.component.scss-theme.scss',
+  ],
+  preserveWhitespaces: true,
+  standalone: false,
 })
 export class DeveloperToolsComponent implements OnInit, OnDestroy {
   @ViewChildren('websiteInput') inputs: QueryList<MatInput>

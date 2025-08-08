@@ -5,11 +5,11 @@ import { RecordService } from 'src/app/core/record/record.service'
 import { UserInfo } from 'src/app/types'
 
 @Component({
-    selector: 'app-top-bar-record-issues',
-    templateUrl: './top-bar-record-issues.component.html',
-    styleUrls: ['./top-bar-record-issues.component.scss'],
-    preserveWhitespaces: true,
-    standalone: false
+  selector: 'app-top-bar-record-issues',
+  templateUrl: './top-bar-record-issues.component.html',
+  styleUrls: ['./top-bar-record-issues.component.scss'],
+  preserveWhitespaces: true,
+  standalone: false,
 })
 export class TopBarRecordIssuesComponent implements OnInit, OnDestroy {
   @Input() isPublicRecord: string

@@ -25,13 +25,13 @@ import { ScreenDirection, SearchResults } from 'src/app/types'
 import { AtLeastOneInputHasValue } from './at-least-one-input-has-value.validator'
 
 @Component({
-    selector: 'app-advance-search',
-    templateUrl: './advance-search.component.html',
-    styleUrls: [
-        './advance-search.component.scss-theme.scss',
-        './advance-search.component.scss',
-    ],
-    standalone: false
+  selector: 'app-advance-search',
+  templateUrl: './advance-search.component.html',
+  styleUrls: [
+    './advance-search.component.scss-theme.scss',
+    './advance-search.component.scss',
+  ],
+  standalone: false,
 })
 export class AdvanceSearchComponent implements OnInit, OnChanges {
   @Input() searchValues: SearchResults

@@ -23,14 +23,14 @@ import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { OrcidValidators } from 'src/app/validators'
 
 @Component({
-    selector: 'app-reset-password',
-    templateUrl: './reset-password.component.html',
-    styleUrls: [
-        './reset-password.component.scss',
-        './reset-password.component.scss-theme.scss',
-    ],
-    preserveWhitespaces: true,
-    standalone: false
+  selector: 'app-reset-password',
+  templateUrl: './reset-password.component.html',
+  styleUrls: [
+    './reset-password.component.scss',
+    './reset-password.component.scss-theme.scss',
+  ],
+  preserveWhitespaces: true,
+  standalone: false,
 })
 export class ResetPasswordComponent implements OnInit {
   form: UntypedFormGroup

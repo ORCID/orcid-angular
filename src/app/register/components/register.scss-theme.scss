@@ -13,7 +13,10 @@
   }
 
   .step-actions {
-    border-color: mat.m2-get-color-from-palette($background, ui-background-light);
+    border-color: mat.m2-get-color-from-palette(
+      $background,
+      ui-background-light
+    );
     .mat-mdc-raised-button.mat-primary {
       background-color: mat.m2-get-color-from-palette($primary, 700);
     }

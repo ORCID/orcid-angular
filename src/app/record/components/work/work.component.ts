@@ -3,11 +3,11 @@ import { OrgDisambiguated } from 'src/app/types'
 import { Work } from 'src/app/types/record-works.endpoint'
 
 @Component({
-    selector: 'app-work',
-    templateUrl: './work.component.html',
-    styleUrls: ['./work.component.scss'],
-    preserveWhitespaces: true,
-    standalone: false
+  selector: 'app-work',
+  templateUrl: './work.component.html',
+  styleUrls: ['./work.component.scss'],
+  preserveWhitespaces: true,
+  standalone: false,
 })
 export class WorkComponent {
   @Input() work: Work

@@ -7,14 +7,14 @@ import { RegisterStateService } from '../../register-state.service'
 import { RegisterObservabilityService } from '../../register-observability.service'
 
 @Component({
-    selector: 'app-step-c2',
-    templateUrl: './step-c2.component.html',
-    styleUrls: [
-        './step-c2.component.scss',
-        '../register.style.scss',
-        '../register.scss-theme.scss',
-    ],
-    standalone: false
+  selector: 'app-step-c2',
+  templateUrl: './step-c2.component.html',
+  styleUrls: [
+    './step-c2.component.scss',
+    '../register.style.scss',
+    '../register.scss-theme.scss',
+  ],
+  standalone: false,
 })
 export class StepC2Component extends BaseStepDirective implements OnInit {
   @Input() loading

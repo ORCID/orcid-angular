@@ -18,13 +18,13 @@ import { RegisterService } from 'src/app/core/register/register.service'
 import { OrcidValidators } from 'src/app/validators'
 
 @Component({
-    selector: 'app-settings-security-password',
-    templateUrl: './settings-security-password.component.html',
-    styleUrls: [
-        './settings-security-password.component.scss',
-        './settings-security-password.component.scss-theme.scss',
-    ],
-    standalone: false
+  selector: 'app-settings-security-password',
+  templateUrl: './settings-security-password.component.html',
+  styleUrls: [
+    './settings-security-password.component.scss',
+    './settings-security-password.component.scss-theme.scss',
+  ],
+  standalone: false,
 })
 export class SettingsSecurityPasswordComponent implements OnInit, OnDestroy {
   form: UntypedFormGroup

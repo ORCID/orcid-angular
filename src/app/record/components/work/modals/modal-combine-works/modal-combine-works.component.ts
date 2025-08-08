@@ -9,13 +9,13 @@ import { takeUntil } from 'rxjs/operators'
 import { SnackbarService } from '../../../../../cdk/snackbar/snackbar.service'
 
 @Component({
-    selector: 'app-modal-combine-works',
-    templateUrl: './modal-combine-works.component.html',
-    styleUrls: [
-        './modal-combine-works.component.scss',
-        './modal-combine-works.component.scss-theme.scss',
-    ],
-    standalone: false
+  selector: 'app-modal-combine-works',
+  templateUrl: './modal-combine-works.component.html',
+  styleUrls: [
+    './modal-combine-works.component.scss',
+    './modal-combine-works.component.scss-theme.scss',
+  ],
+  standalone: false,
 })
 export class ModalCombineWorksComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

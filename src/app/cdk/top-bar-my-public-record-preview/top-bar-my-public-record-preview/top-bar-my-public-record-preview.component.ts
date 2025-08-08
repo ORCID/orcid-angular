@@ -12,13 +12,13 @@ import {
 } from 'src/app/types/trusted-individuals.endpoint'
 
 @Component({
-    selector: 'app-top-bar-my-public-record-preview',
-    templateUrl: './top-bar-my-public-record-preview.component.html',
-    styleUrls: [
-        './top-bar-my-public-record-preview.component.scss',
-        './top-bar-my-public-record-preview.component.scss-theme.scss',
-    ],
-    standalone: false
+  selector: 'app-top-bar-my-public-record-preview',
+  templateUrl: './top-bar-my-public-record-preview.component.html',
+  styleUrls: [
+    './top-bar-my-public-record-preview.component.scss',
+    './top-bar-my-public-record-preview.component.scss-theme.scss',
+  ],
+  standalone: false,
 })
 export class TopBarMyPublicRecordPreviewComponent implements OnInit {
   @Input() isPublicRecord: string

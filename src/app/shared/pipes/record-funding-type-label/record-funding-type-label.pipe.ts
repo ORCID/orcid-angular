@@ -5,8 +5,8 @@ import {
 } from 'src/app/types/record-funding.endpoint'
 
 @Pipe({
-    name: 'recordFundingTypesLabel',
-    standalone: false
+  name: 'recordFundingTypesLabel',
+  standalone: false,
 })
 export class RecordFundingTypeLabelPipe implements PipeTransform {
   transform(value: FundingTypes): unknown {

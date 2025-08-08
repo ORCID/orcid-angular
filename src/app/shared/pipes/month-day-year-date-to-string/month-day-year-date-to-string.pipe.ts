@@ -2,8 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core'
 import { MonthDayYearDate } from 'src/app/types'
 
 @Pipe({
-    name: 'monthDayYearDateToString',
-    standalone: false
+  name: 'monthDayYearDateToString',
+  standalone: false,
 })
 export class MonthDayYearDateToStringPipe implements PipeTransform {
   transform(value: MonthDayYearDate | number | string): string {

@@ -5,8 +5,8 @@ import {
 } from 'src/app/types/record-affiliation.endpoint'
 
 @Pipe({
-    name: 'affiliationTypeLabel',
-    standalone: false
+  name: 'affiliationTypeLabel',
+  standalone: false,
 })
 export class AffiliationTypeLabelPipe implements PipeTransform {
   transform(value: AffiliationType): string {

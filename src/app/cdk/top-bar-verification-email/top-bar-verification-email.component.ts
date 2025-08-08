@@ -6,14 +6,14 @@ import { RecordService } from 'src/app/core/record/record.service'
 import { PlatformInfoService } from '../platform-info'
 
 @Component({
-    selector: 'app-top-bar-verification-email',
-    templateUrl: './top-bar-verification-email.component.html',
-    styleUrls: [
-        './top-bar-verification-email.component.scss',
-        './top-bar-verification-email.component.scss-theme.scss',
-    ],
-    preserveWhitespaces: true,
-    standalone: false
+  selector: 'app-top-bar-verification-email',
+  templateUrl: './top-bar-verification-email.component.html',
+  styleUrls: [
+    './top-bar-verification-email.component.scss',
+    './top-bar-verification-email.component.scss-theme.scss',
+  ],
+  preserveWhitespaces: true,
+  standalone: false,
 })
 export class TopBarVerificationEmailComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

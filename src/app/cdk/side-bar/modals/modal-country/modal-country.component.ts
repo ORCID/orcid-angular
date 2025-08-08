@@ -23,13 +23,13 @@ import {
 } from 'src/app/types/record-country.endpoint'
 
 @Component({
-    selector: 'app-modal-country',
-    templateUrl: './modal-country.component.html',
-    styleUrls: [
-        './modal-country.component.scss-theme.scss',
-        './modal-country.component.scss',
-    ],
-    standalone: false
+  selector: 'app-modal-country',
+  templateUrl: './modal-country.component.html',
+  styleUrls: [
+    './modal-country.component.scss-theme.scss',
+    './modal-country.component.scss',
+  ],
+  standalone: false,
 })
 export class ModalCountryComponent implements OnInit, OnDestroy {
   ariaLabelSave = $localize`:@@side-bar.ariaLabelCountrySave:Save changes to Countries`

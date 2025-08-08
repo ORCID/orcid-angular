@@ -29,7 +29,10 @@
             color: mat.m2-get-contrast-color-from-palette($accent, 500);
           }
           &.sign-in-button {
-            border-color: mat.m2-get-color-from-palette($background, background);
+            border-color: mat.m2-get-color-from-palette(
+              $background,
+              background
+            );
             color: mat.m2-get-color-from-palette($primary, '500-contrast');
           }
         }
@@ -52,7 +55,10 @@
             color: mat.m2-get-color-from-palette($accent);
           }
           &.sign-in-button {
-            border-color: mat.m2-get-color-from-palette($background, background);
+            border-color: mat.m2-get-color-from-palette(
+              $background,
+              background
+            );
             color: mat.m2-get-color-from-palette($primary, '500-contrast');
           }
         }

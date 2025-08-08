@@ -3,13 +3,13 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { DuplicateRemoveEndpoint } from 'src/app/types/account-actions-duplicated'
 @Component({
-    selector: 'app-dialog-actions-duplicated',
-    templateUrl: './dialog-actions-duplicated.component.html',
-    styleUrls: [
-        './dialog-actions-duplicated.component.scss',
-        './dialog-actions-duplicated.component.scss-theme.scss',
-    ],
-    standalone: false
+  selector: 'app-dialog-actions-duplicated',
+  templateUrl: './dialog-actions-duplicated.component.html',
+  styleUrls: [
+    './dialog-actions-duplicated.component.scss',
+    './dialog-actions-duplicated.component.scss-theme.scss',
+  ],
+  standalone: false,
 })
 export class DialogActionsDuplicatedComponent implements OnInit {
   isMobile: boolean

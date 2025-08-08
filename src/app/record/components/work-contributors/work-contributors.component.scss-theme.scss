@@ -20,7 +20,10 @@
 
   .contributors-box {
     min-height: 60px;
-    background-color: mat.m2-get-color-from-palette($foreground, text-light-high);
+    background-color: mat.m2-get-color-from-palette(
+      $foreground,
+      text-light-high
+    );
   }
 
   .contributors-box.cdk-drag-preview {

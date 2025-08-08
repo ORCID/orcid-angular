@@ -1,8 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core'
 
 @Pipe({
-    name: 'formatBibtex',
-    standalone: false
+  name: 'formatBibtex',
+  standalone: false,
 })
 export class FormatBibtex implements PipeTransform {
   transform(text: string): string {

@@ -38,13 +38,13 @@ import { UserSession } from '../../../../../types/session.local'
 import { OrcidValidators } from '../../../../../validators'
 
 @Component({
-    selector: 'app-modal-name',
-    templateUrl: './modal-name.component.html',
-    styleUrls: [
-        './modal-name.component.scss-theme.scss',
-        './modal-name.component.scss',
-    ],
-    standalone: false
+  selector: 'app-modal-name',
+  templateUrl: './modal-name.component.html',
+  styleUrls: [
+    './modal-name.component.scss-theme.scss',
+    './modal-name.component.scss',
+  ],
+  standalone: false,
 })
 export class ModalNameComponent implements OnInit, OnDestroy {
   @ViewChildren('nameInput') inputs: QueryList<ElementRef>

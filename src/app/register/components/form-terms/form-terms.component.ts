@@ -13,27 +13,27 @@ import { BaseForm } from '../BaseForm'
 import { RegisterStateService } from '../../register-state.service'
 
 @Component({
-    selector: 'app-form-terms',
-    templateUrl: './form-terms.component.html',
-    styleUrls: [
-        './form-terms.component.scss',
-        '../register.style.scss',
-        '../register.scss-theme.scss',
-    ],
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => FormTermsComponent),
-            multi: true,
-        },
-        {
-            provide: NG_ASYNC_VALIDATORS,
-            useExisting: forwardRef(() => FormTermsComponent),
-            multi: true,
-        },
-    ],
-    preserveWhitespaces: true,
-    standalone: false
+  selector: 'app-form-terms',
+  templateUrl: './form-terms.component.html',
+  styleUrls: [
+    './form-terms.component.scss',
+    '../register.style.scss',
+    '../register.scss-theme.scss',
+  ],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => FormTermsComponent),
+      multi: true,
+    },
+    {
+      provide: NG_ASYNC_VALIDATORS,
+      useExisting: forwardRef(() => FormTermsComponent),
+      multi: true,
+    },
+  ],
+  preserveWhitespaces: true,
+  standalone: false,
 })
 // tslint:disable-next-line: class-name
 export class FormTermsComponent extends BaseForm implements OnInit, DoCheck {

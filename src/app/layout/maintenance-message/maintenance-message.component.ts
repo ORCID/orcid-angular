@@ -3,13 +3,13 @@ import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { MaintenanceMessage } from 'src/app/types/togglz.local'
 
 @Component({
-    selector: 'app-maintenance-message',
-    templateUrl: './maintenance-message.component.html',
-    styleUrls: [
-        './maintenance-message.component.scss-theme.scss',
-        './maintenance-message.component.scss',
-    ],
-    standalone: false
+  selector: 'app-maintenance-message',
+  templateUrl: './maintenance-message.component.html',
+  styleUrls: [
+    './maintenance-message.component.scss-theme.scss',
+    './maintenance-message.component.scss',
+  ],
+  standalone: false,
 })
 export class MaintenanceMessageComponent implements OnInit {
   maintenanceMessage: MaintenanceMessage

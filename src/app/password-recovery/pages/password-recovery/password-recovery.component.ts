@@ -18,15 +18,15 @@ import { PasswordRecoveryService } from 'src/app/core/password-recovery/password
 import { PasswordRecovery } from 'src/app/types'
 
 @Component({
-    selector: 'app-password-recovery',
-    templateUrl: './password-recovery.component.html',
-    styleUrls: [
-        './password-recovery.component.scss-theme.scss',
-        './password-recovery.component.scss',
-    ],
-    animations: [matFormFieldAnimations.transitionMessages],
-    preserveWhitespaces: true,
-    standalone: false
+  selector: 'app-password-recovery',
+  templateUrl: './password-recovery.component.html',
+  styleUrls: [
+    './password-recovery.component.scss-theme.scss',
+    './password-recovery.component.scss',
+  ],
+  animations: [matFormFieldAnimations.transitionMessages],
+  preserveWhitespaces: true,
+  standalone: false,
 })
 export class PasswordRecoveryComponent implements OnInit, AfterViewInit {
   serverError = null

@@ -12,14 +12,14 @@ import { UserService } from 'src/app/core'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 
 @Component({
-    selector: 'app-link-account',
-    templateUrl: './link-account.component.html',
-    styleUrls: [
-        './link-account.component.scss',
-        './link-account.component.scss-theme.scss',
-    ],
-    preserveWhitespaces: true,
-    standalone: false
+  selector: 'app-link-account',
+  templateUrl: './link-account.component.html',
+  styleUrls: [
+    './link-account.component.scss',
+    './link-account.component.scss-theme.scss',
+  ],
+  preserveWhitespaces: true,
+  standalone: false,
 })
 export class LinkAccountComponent implements OnInit {
   show2FA = false

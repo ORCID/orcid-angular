@@ -19,7 +19,8 @@
   .separator::before,
   .separator::after {
     content: '';
-    border-bottom: 1px solid mat.m2-get-color-from-palette($foreground, dividers);
+    border-bottom: 1px solid
+      mat.m2-get-color-from-palette($foreground, dividers);
   }
 
   .info {

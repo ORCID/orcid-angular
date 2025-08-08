@@ -4,20 +4,20 @@ import { VisibilityStrings } from 'src/app/types/common.endpoint'
 import { WINDOW } from '../../window'
 
 @Component({
-    selector: 'app-visibility-selector',
-    templateUrl: './visibility-selector.component.html',
-    styleUrls: [
-        './visibility-selector.component.scss',
-        './visibility-selector.component.scss-theme.scss',
-    ],
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => VisibilitySelectorComponent),
-            multi: true,
-        },
-    ],
-    standalone: false
+  selector: 'app-visibility-selector',
+  templateUrl: './visibility-selector.component.html',
+  styleUrls: [
+    './visibility-selector.component.scss',
+    './visibility-selector.component.scss-theme.scss',
+  ],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => VisibilitySelectorComponent),
+      multi: true,
+    },
+  ],
+  standalone: false,
 })
 export class VisibilitySelectorComponent
   implements OnInit, ControlValueAccessor

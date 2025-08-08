@@ -6,11 +6,11 @@ import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 
 @Component({
-    selector: 'app-news',
-    templateUrl: './news.component.html',
-    styleUrls: ['./news.component.scss-theme.scss', './news.component.scss'],
-    animations: [listAnimation],
-    standalone: false
+  selector: 'app-news',
+  templateUrl: './news.component.html',
+  styleUrls: ['./news.component.scss-theme.scss', './news.component.scss'],
+  animations: [listAnimation],
+  standalone: false,
 })
 export class NewsComponent implements OnInit {
   news

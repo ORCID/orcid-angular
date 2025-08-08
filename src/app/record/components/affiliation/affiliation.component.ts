@@ -7,11 +7,11 @@ import {
 import { URL_REGEXP } from '../../../constants'
 
 @Component({
-    selector: 'app-affiliation',
-    templateUrl: './affiliation.component.html',
-    styleUrls: ['./affiliation.component.scss'],
-    preserveWhitespaces: true,
-    standalone: false
+  selector: 'app-affiliation',
+  templateUrl: './affiliation.component.html',
+  styleUrls: ['./affiliation.component.scss'],
+  preserveWhitespaces: true,
+  standalone: false,
 })
 export class AffiliationComponent implements OnInit {
   affiliationValue: Affiliation

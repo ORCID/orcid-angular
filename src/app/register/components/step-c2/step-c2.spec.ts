@@ -14,16 +14,16 @@ import { RegisterStateService } from '../../register-state.service'
 import { RegisterObservabilityService } from '../../register-observability.service'
 
 @Component({
-    selector: 'app-form-current-employment',
-    template: '<div></div>',
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => MockFormCurrentEmploymentComponent),
-            multi: true,
-        },
-    ],
-    standalone: false
+  selector: 'app-form-current-employment',
+  template: '<div></div>',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => MockFormCurrentEmploymentComponent),
+      multi: true,
+    },
+  ],
+  standalone: false,
 })
 export class MockFormCurrentEmploymentComponent
   implements ControlValueAccessor

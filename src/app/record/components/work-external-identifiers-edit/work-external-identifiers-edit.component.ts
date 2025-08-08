@@ -14,13 +14,13 @@ import { MatSelect, MatSelectChange } from '@angular/material/select'
 import { WorkIdType, WorkRelationships } from 'src/app/types/works.endpoint'
 
 @Component({
-    selector: 'app-work-external-identifiers-edit',
-    templateUrl: './work-external-identifiers-edit.component.html',
-    styleUrls: [
-        './work-external-identifiers-edit.component.scss',
-        'work-external-identifiers-edit.component.scss-theme.scss',
-    ],
-    standalone: false
+  selector: 'app-work-external-identifiers-edit',
+  templateUrl: './work-external-identifiers-edit.component.html',
+  styleUrls: [
+    './work-external-identifiers-edit.component.scss',
+    'work-external-identifiers-edit.component.scss-theme.scss',
+  ],
+  standalone: false,
 })
 export class WorkExternalIdentifiersEditComponent
   implements OnInit, AfterViewInit

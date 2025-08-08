@@ -10,11 +10,11 @@ import {
 } from 'src/app/types/notifications.endpoint'
 
 @Component({
-    selector: 'app-notifications',
-    templateUrl: './notifications.component.html',
-    styleUrls: ['./notifications.component.scss'],
-    preserveWhitespaces: true,
-    standalone: false
+  selector: 'app-notifications',
+  templateUrl: './notifications.component.html',
+  styleUrls: ['./notifications.component.scss'],
+  preserveWhitespaces: true,
+  standalone: false,
 })
 export class NotificationsComponent implements OnInit, OnDestroy {
   notifications: InboxNotification[]

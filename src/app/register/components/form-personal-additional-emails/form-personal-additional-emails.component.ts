@@ -17,14 +17,14 @@ import { OrcidValidators } from 'src/app/validators'
 import { ErrorStateMatcherForFormLevelErrors } from '../../ErrorStateMatcherForFormLevelErrors'
 
 @Component({
-    selector: 'app-form-personal-additional-emails',
-    templateUrl: './form-personal-additional-emails.component.html',
-    styleUrls: [
-        './form-personal-additional-emails.component.scss',
-        '../register.style.scss',
-        '../register.scss-theme.scss',
-    ],
-    standalone: false
+  selector: 'app-form-personal-additional-emails',
+  templateUrl: './form-personal-additional-emails.component.html',
+  styleUrls: [
+    './form-personal-additional-emails.component.scss',
+    '../register.style.scss',
+    '../register.scss-theme.scss',
+  ],
+  standalone: false,
 })
 export class FormPersonalAdditionalEmailsComponent implements AfterViewInit {
   labelInfoAboutEmails = $localize`:@@register.ariaLabelInfoEmails:info about emails`

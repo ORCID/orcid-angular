@@ -36,10 +36,10 @@ import { RecordBiographyService } from 'src/app/core/record-biography/record-bio
 import { ExpandedWorkFeaturedModalComponent } from 'src/app/record/components/work-featured/modals/expanded-work-featured-modal/expanded-work-featured-modal.component'
 
 @Component({
-    selector: 'app-panel',
-    templateUrl: './panel.component.html',
-    styleUrls: ['./panel.component.scss', 'panel.component.scss-theme.scss'],
-    standalone: false
+  selector: 'app-panel',
+  templateUrl: './panel.component.html',
+  styleUrls: ['./panel.component.scss', 'panel.component.scss-theme.scss'],
+  standalone: false,
 })
 export class PanelComponent implements OnInit {
   @Input() panelId: string

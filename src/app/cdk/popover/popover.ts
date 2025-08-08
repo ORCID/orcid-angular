@@ -32,14 +32,14 @@ import { MdePopoverPanel } from './popover-interfaces'
 import { transformPopover } from './popover-animations'
 
 @Component({
-    selector: 'mde-popover',
-    templateUrl: './popover.html',
-    styleUrls: ['./popover.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None,
-    animations: [transformPopover],
-    exportAs: 'mdePopover',
-    standalone: false
+  selector: 'mde-popover',
+  templateUrl: './popover.html',
+  styleUrls: ['./popover.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
+  animations: [transformPopover],
+  exportAs: 'mdePopover',
+  standalone: false,
 })
 export class MdePopover implements MdePopoverPanel, OnDestroy {
   // tslint:disable-line:component-class-suffix

@@ -18,14 +18,14 @@ import { ModalEmailComponent } from 'src/app/cdk/side-bar/modals/modal-email/mod
 import { WINDOW } from 'src/app/cdk/window'
 
 @Component({
-    selector: 'app-top-bar',
-    templateUrl: './top-bar.component.html',
-    styleUrls: [
-        './top-bar.component.scss',
-        './top-bar.component.scss-theme.scss',
-    ],
-    preserveWhitespaces: true,
-    standalone: false
+  selector: 'app-top-bar',
+  templateUrl: './top-bar.component.html',
+  styleUrls: [
+    './top-bar.component.scss',
+    './top-bar.component.scss-theme.scss',
+  ],
+  preserveWhitespaces: true,
+  standalone: false,
 })
 export class TopBarComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

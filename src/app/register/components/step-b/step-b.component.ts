@@ -6,14 +6,14 @@ import { RegisterStateService } from '../../register-state.service'
 import { RegisterObservabilityService } from '../../register-observability.service'
 
 @Component({
-    selector: 'app-step-b',
-    templateUrl: './step-b.component.html',
-    styleUrls: [
-        './step-b.component.scss',
-        '../register.style.scss',
-        '../register.scss-theme.scss',
-    ],
-    standalone: false
+  selector: 'app-step-b',
+  templateUrl: './step-b.component.html',
+  styleUrls: [
+    './step-b.component.scss',
+    '../register.style.scss',
+    '../register.scss-theme.scss',
+  ],
+  standalone: false,
 })
 export class StepBComponent extends BaseStepDirective implements OnInit {
   @Input() personalData

@@ -17,13 +17,13 @@ export interface SimpleActivityModel {
 ;[]
 
 @Component({
-    selector: 'app-summary-simple-panel',
-    templateUrl: './summary-simple-panel.component.html',
-    styleUrls: [
-        './summary-simple-panel.component.scss',
-        './summary-simple-panel.component.scss-theme.scss',
-    ],
-    standalone: false
+  selector: 'app-summary-simple-panel',
+  templateUrl: './summary-simple-panel.component.html',
+  styleUrls: [
+    './summary-simple-panel.component.scss',
+    './summary-simple-panel.component.scss-theme.scss',
+  ],
+  standalone: false,
 })
 export class SummarySimplePanelComponent implements OnInit {
   @Input() simpleActivities: SimpleActivityModel[] = []

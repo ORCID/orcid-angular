@@ -2,10 +2,10 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { FundingRelationships } from 'src/app/types/record-funding.endpoint'
 
 @Component({
-    selector: 'app-funding-external-identifiers-view-only',
-    templateUrl: './funding-external-identifiers-view-only.component.html',
-    styleUrls: ['./funding-external-identifiers-view-only.component.scss'],
-    standalone: false
+  selector: 'app-funding-external-identifiers-view-only',
+  templateUrl: './funding-external-identifiers-view-only.component.html',
+  styleUrls: ['./funding-external-identifiers-view-only.component.scss'],
+  standalone: false,
 })
 export class FundingExternalIdentifiersViewOnlyComponent implements OnInit {
   grantNumberLabel = $localize`:@@funding.grantNumberColon:Grant number:`

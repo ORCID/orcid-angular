@@ -6,10 +6,10 @@ import { UserService } from 'src/app/core'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 
 @Component({
-    selector: 'app-account-trusted-parties',
-    templateUrl: './account-trusted-parties.component.html',
-    styleUrls: ['./account-trusted-parties.component.scss'],
-    standalone: false
+  selector: 'app-account-trusted-parties',
+  templateUrl: './account-trusted-parties.component.html',
+  styleUrls: ['./account-trusted-parties.component.scss'],
+  standalone: false,
 })
 export class AccountTrustedPartiesComponent implements OnInit, OnDestroy {
   userInfo: any

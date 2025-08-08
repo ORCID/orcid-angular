@@ -2,10 +2,10 @@ import { Component, Input, OnInit } from '@angular/core'
 import { ExternalIdentifier } from 'src/app/types/common.endpoint'
 
 @Component({
-    selector: 'app-display-external-ids',
-    templateUrl: './display-external-ids.component.html',
-    styleUrls: ['./display-external-ids.component.scss'],
-    standalone: false
+  selector: 'app-display-external-ids',
+  templateUrl: './display-external-ids.component.html',
+  styleUrls: ['./display-external-ids.component.scss'],
+  standalone: false,
 })
 export class DisplayExternalIdsComponent implements OnInit {
   @Input() externalIdentifiers: ExternalIdentifier[]

@@ -15,22 +15,22 @@ import { BaseForm } from '../BaseForm'
 import { RegisterStateService } from '../../register-state.service'
 
 @Component({
-    selector: 'app-form-anti-robots',
-    templateUrl: './form-anti-robots.component.html',
-    styleUrls: ['./form-anti-robots.component.scss'],
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => FormAntiRobotsComponent),
-            multi: true,
-        },
-        {
-            provide: NG_ASYNC_VALIDATORS,
-            useExisting: forwardRef(() => FormAntiRobotsComponent),
-            multi: true,
-        },
-    ],
-    standalone: false
+  selector: 'app-form-anti-robots',
+  templateUrl: './form-anti-robots.component.html',
+  styleUrls: ['./form-anti-robots.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => FormAntiRobotsComponent),
+      multi: true,
+    },
+    {
+      provide: NG_ASYNC_VALIDATORS,
+      useExisting: forwardRef(() => FormAntiRobotsComponent),
+      multi: true,
+    },
+  ],
+  standalone: false,
 })
 export class FormAntiRobotsComponent extends BaseForm implements OnInit {
   captchaFailState = false
