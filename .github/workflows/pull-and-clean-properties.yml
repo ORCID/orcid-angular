@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 concurrency:
   group: pull-and-clean-${{ github.ref }}
@@ -54,27 +55,40 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Ensure branches are available
+      - name: Prepare transifex branch (hard reset to main)
+        id: prep
         run: |
           set -euo pipefail
           git fetch origin main transifex || true
-          # Create transifex branch if it doesn't exist on origin
-          if ! git ls-remote --exit-code --heads origin transifex >/dev/null 2>&1; then
-            echo "transifex branch not found on origin; creating from origin/main"
+          if git ls-remote --exit-code --heads origin transifex >/dev/null 2>&1; then
+            prev_sha=$(git rev-parse origin/transifex)
+            echo "Resetting existing transifex branch to origin/main (previous head: ${prev_sha})"
+            echo "previous_sha=${prev_sha}" >> "$GITHUB_OUTPUT"
+            echo "branch_state=reset" >> "$GITHUB_OUTPUT"
+            git checkout -B transifex origin/transifex
+            git reset --hard origin/main
+            git push -f origin transifex
+          else
+            echo "Creating transifex branch from origin/main"
+            echo "previous_sha=none" >> "$GITHUB_OUTPUT"
+            echo "branch_state=created" >> "$GITHUB_OUTPUT"
             git checkout -B transifex origin/main
             git push -u origin transifex
           fi
 
+      - name: Make scripts executable
+        run: chmod +x .github/scripts/pull_and_clean_properties.sh
+
       - name: Run pull_and_clean_properties.sh
-        run: bash ./pull_and_clean_properties.sh
+        run: bash .github/scripts/pull_and_clean_properties.sh
 
       - name: Commit and push changes (if any)
+        id: commit
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
           if [ -n "$(git status --porcelain)" ]; then
-            # Ensure we are on transifex branch as the script leaves us there
             current_branch=$(git branch --show-current)
             if [ "$current_branch" != "transifex" ]; then
               git checkout transifex
@@ -83,8 +97,35 @@ jobs:
             git commit -m "chore(i18n): pull and normalize .properties via CI"
             git push origin transifex
             echo "Changes pushed to transifex branch."
+            echo "changes=true" >> "$GITHUB_OUTPUT"
           else
             echo "No changes to commit."
+            echo "changes=false" >> "$GITHUB_OUTPUT"
           fi
+
+      - name: Open PR to main if changes
+        if: steps.commit.outputs.changes == 'true'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { owner, repo } = context.repo;
+            const head = 'transifex';
+            const base = 'main';
+            const list = await github.rest.pulls.list({ owner, repo, state: 'open', base, head: `${owner}:${head}` });
+            if (list.data.length > 0) {
+              core.info('An open PR from transifex to main already exists.');
+            } else {
+              const prev = `${{ steps.prep.outputs.previous_sha }}`;
+              const state = `${{ steps.prep.outputs.branch_state }}`;
+              const prevLine = prev && prev !== 'none' ? `Previous transifex head (before reset): ${prev}` : 'Branch was created from main (no previous head).';
+              const body = [
+                'Automated update of .properties files via CI.',
+                '',
+                prevLine
+              ].join('\n');
+              await github.rest.pulls.create({ owner, repo, head, base, title: 'chore(i18n): update properties from Transifex', body });
+              core.info('Opened PR from transifex to main.');
+            }
 
 
