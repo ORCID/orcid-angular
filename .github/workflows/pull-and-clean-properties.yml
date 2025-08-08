@@ -72,13 +72,11 @@ jobs:
             echo "branch_state=reset" >> "$GITHUB_OUTPUT"
             git checkout -B transifex origin/transifex
             git reset --hard origin/main
-            git push -f origin transifex
           else
             echo "Creating transifex branch from origin/main"
             echo "previous_sha=none" >> "$GITHUB_OUTPUT"
             echo "branch_state=created" >> "$GITHUB_OUTPUT"
             git checkout -B transifex origin/main
-            git push -u origin transifex
           fi
 
       - name: Make scripts executable
@@ -129,7 +127,7 @@ jobs:
                 '',
                 prevLine
               ].join('\n');
-              await github.rest.pulls.create({ owner, repo, head, base, title: 'chore(i18n): update properties from Transifex', body });
+              await github.rest.pulls.create({ owner, repo, head, base, title: 'Transifex: update properties', body });
               core.info('Opened PR from transifex to main.');
             }
 
