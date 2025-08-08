@@ -56,7 +56,7 @@
     "helphero": "^3.6.0",
     "karma-jasmine-html-reporter": "^1.7.0",
     "lodash": "^4.17.20",
-    "ngx-cookie-service": "^16",
+    "ngx-cookie-service": "^17",
     "properties-to-json": "^0.1.4",
     "rxjs": "~7.8.0",
     "stream": "0.0.2",
