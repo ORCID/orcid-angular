@@ -18,6 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TX_TOKEN: ${{ secrets.TRANSIFEX_TOKEN }}
+      GH_PAT: ${{ secrets.GH_PAT }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -26,9 +27,9 @@ jobs:
           persist-credentials: true
 
       - name: Configure push auth (use GH_PAT if provided)
-        if: ${{ secrets.GH_PAT != '' }}
+        if: ${{ env.GH_PAT != '' }}
         run: |
-          git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/${{ github.repository }}
+          git remote set-url origin https://x-access-token:${{ env.GH_PAT }}@github.com/${{ github.repository }}
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
@@ -146,10 +147,10 @@ jobs:
           fi
 
       - name: Open PR to main if changes (PAT)
-        if: steps.commit.outputs.changes == 'true' && secrets.GH_PAT != ''
+        if: steps.commit.outputs.changes == 'true' && env.GH_PAT != ''
         uses: actions/github-script@v7
         with:
-          github-token: ${{ secrets.GH_PAT }}
+          github-token: ${{ env.GH_PAT }}
           script: |
             const { owner, repo } = context.repo;
             const head = 'transifex';
