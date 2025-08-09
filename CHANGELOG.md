@@ -4,7 +4,7 @@
 
 - [#2586](https://github.com/ORCID/orcid-angular/pull/2586): PD-0000: enable github actions translation pull
 - [#2585](https://github.com/ORCID/orcid-angular/pull/2585): PD-0000: enable github actions translation pull
-- [#2584](https://github.com/ORCID/orcid-angular/pull/2584): PD-0000: Enable 
+- [#2584](https://github.com/ORCID/orcid-angular/pull/2584): PD-0000: Enable
 
 ## v2.119.16 - 2025-08-06
 
