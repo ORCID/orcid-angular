@@ -7,6 +7,7 @@ import { Component, Input, OnInit } from '@angular/core'
     './my-orcid-alerts.component.scss',
     './my-orcid-alerts.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class MyOrcidAlertsComponent implements OnInit {
   @Input() emailVerified: boolean

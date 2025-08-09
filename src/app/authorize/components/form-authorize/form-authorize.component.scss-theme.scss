@@ -10,7 +10,7 @@
 
   .authorize-button {
     color: $orcid-light-primary-text;
-    background: mat.get-color-from-palette($primary, 700);
+    background: mat.m2-get-color-from-palette($primary, 700);
   }
 }
 

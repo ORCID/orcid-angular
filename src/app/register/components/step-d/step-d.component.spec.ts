@@ -23,6 +23,7 @@ import { RegisterObservabilityService } from '../../register-observability.servi
       multi: true,
     },
   ],
+  standalone: false,
 })
 export class MockFormNotificationsComponent implements ControlValueAccessor {
   writeValue(): void {}
@@ -40,6 +41,7 @@ export class MockFormNotificationsComponent implements ControlValueAccessor {
       multi: true,
     },
   ],
+  standalone: false,
 })
 export class MockFormTermsComponent implements ControlValueAccessor {
   writeValue(): void {}
@@ -57,6 +59,7 @@ export class MockFormTermsComponent implements ControlValueAccessor {
       multi: true,
     },
   ],
+  standalone: false,
 })
 export class MockFormAntiRobotsComponent implements ControlValueAccessor {
   writeValue(): void {}

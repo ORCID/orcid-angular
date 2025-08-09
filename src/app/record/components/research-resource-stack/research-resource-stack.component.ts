@@ -15,6 +15,7 @@ import { UserRecord } from 'src/app/types/record.local'
     './research-resource-stack.component.scss',
     './research-resource-stack.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class ResearchResourceStackComponent implements OnInit {
   @HostBinding('class.display-the-stack') displayTheStackClass = false

@@ -10,43 +10,46 @@
   $background: map-get($theme, background);
   :host {
     .header-container {
-      background-color: mat.get-color-from-palette($accent, 900);
-      color: mat.get-contrast-color-from-palette($accent, 900);
+      background-color: mat.m2-get-color-from-palette($accent, 900);
+      color: mat.m2-get-contrast-color-from-palette($accent, 900);
     }
 
     .featured-works-star {
-      color: mat.get-color-from-palette(
+      color: mat.m2-get-color-from-palette(
         $foreground,
         text-light-high
       ) !important;
     }
 
     .featured-works-header-container {
-      background-color: mat.get-color-from-palette(
+      background-color: mat.m2-get-color-from-palette(
         $background,
         brand-citrus-lemon
       ) !important;
-      color: mat.get-color-from-palette($foreground, text-dark-high) !important;
+      color: mat.m2-get-color-from-palette(
+        $foreground,
+        text-dark-high
+      ) !important;
       border-color: transparent !important;
     }
 
     .white-header-container {
-      border-color: mat.get-color-from-palette(
+      border-color: mat.m2-get-color-from-palette(
         $background,
         ui-background
       ) !important;
-      background-color: mat.get-color-from-palette(
+      background-color: mat.m2-get-color-from-palette(
         $background,
         ui-background-lightest
       );
     }
 
     .sub-peer-review {
-      border-color: mat.get-color-from-palette(
+      border-color: mat.m2-get-color-from-palette(
         $background,
         ui-background
       ) !important;
-      background-color: mat.get-color-from-palette(
+      background-color: mat.m2-get-color-from-palette(
         $background,
         ui-background
       ) !important;

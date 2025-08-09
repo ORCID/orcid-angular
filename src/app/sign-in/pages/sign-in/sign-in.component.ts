@@ -28,6 +28,7 @@ import { OauthParameters } from 'src/app/types'
     './sign-in.component.scss',
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class SignInComponent implements OnInit {
   @HostBinding('class.container') containerClass = true

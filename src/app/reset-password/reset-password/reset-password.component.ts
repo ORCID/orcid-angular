@@ -30,6 +30,7 @@ import { OrcidValidators } from 'src/app/validators'
     './reset-password.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class ResetPasswordComponent implements OnInit {
   form: UntypedFormGroup

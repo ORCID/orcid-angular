@@ -46,6 +46,7 @@ import { MatSelect } from '@angular/material/select'
   viewProviders: [
     { provide: ControlContainer, useExisting: FormGroupDirective },
   ],
+  standalone: false,
 })
 export class WorkContributorsComponent implements OnInit, OnDestroy {
   @ViewChildren('roleSelect', { read: ViewContainerRef })

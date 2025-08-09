@@ -6,8 +6,8 @@
   $background: map-get($theme, background);
 
   .drag-placeholder {
-    background: mat.get-color-from-palette($background, ui-background-light);
-    border: dotted 3px mat.get-color-from-palette($background, ui-background);
+    background: mat.m2-get-color-from-palette($background, ui-background-light);
+    border: dotted 3px mat.m2-get-color-from-palette($background, ui-background);
     min-height: 60px;
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
   }

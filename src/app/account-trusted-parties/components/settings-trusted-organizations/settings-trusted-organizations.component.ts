@@ -9,6 +9,7 @@ import { DialogRevokeTrustedOrganizationComponent } from '../dialog-revoke-trust
   selector: 'app-settings-trusted-organizations',
   templateUrl: './settings-trusted-organizations.component.html',
   styleUrls: ['./settings-trusted-organizations.component.scss'],
+  standalone: false,
 })
 export class SettingsTrustedOrganizationsComponent implements OnInit {
   $trustedOrganization: Observable<AccountTrustedOrganization[]>

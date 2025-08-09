@@ -5,6 +5,7 @@ import { Component, Input, OnInit } from '@angular/core'
   templateUrl: './showing-of.component.html',
   styleUrls: ['./showing-of.component.scss'],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class ShowingOfComponent implements OnInit {
   @Input() displaying: number

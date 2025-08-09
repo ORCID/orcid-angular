@@ -11,7 +11,7 @@
   /// GLOBAL APP CUSTOM STYLES
 
   a {
-    color: mat.get-color-from-palette($primary);
+    color: mat.m2-get-color-from-palette($primary);
   }
   mat-form-field.read-only .mat-mdc-text-field-wrapper {
     background-color: map-get($background, 'ui-background-lightest');
@@ -21,7 +21,7 @@
 
 @mixin global-theme-typography($config) {
   input {
-    @include mat.typography-level($config, input);
+    @include mat.m2-typography-level($config, input);
   }
 }
 

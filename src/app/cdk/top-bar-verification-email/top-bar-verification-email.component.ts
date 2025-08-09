@@ -13,6 +13,7 @@ import { PlatformInfoService } from '../platform-info'
     './top-bar-verification-email.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class TopBarVerificationEmailComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

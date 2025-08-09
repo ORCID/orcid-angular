@@ -18,6 +18,7 @@ import { DialogSecurityAlternateAccountDeleteComponent } from '../dialog-securit
   selector: 'app-settings-security-alternate-sign-in',
   templateUrl: './settings-security-alternate-sign-in.component.html',
   styleUrls: ['./settings-security-alternate-sign-in.component.scss'],
+  standalone: false,
 })
 export class SettingsSecurityAlternateSignInComponent
   implements OnInit, OnDestroy

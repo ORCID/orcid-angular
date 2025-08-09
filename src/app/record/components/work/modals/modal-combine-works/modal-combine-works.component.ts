@@ -15,6 +15,7 @@ import { SnackbarService } from '../../../../../cdk/snackbar/snackbar.service'
     './modal-combine-works.component.scss',
     './modal-combine-works.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class ModalCombineWorksComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

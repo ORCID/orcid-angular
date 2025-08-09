@@ -9,6 +9,7 @@ import { WINDOW } from '../../../cdk/window'
   selector: 'app-social',
   templateUrl: './social.component.html',
   styleUrls: ['./social.component.scss', './social.component.scss-theme.scss'],
+  standalone: false,
 })
 export class SocialComponent implements OnInit {
   platform: PlatformInfo

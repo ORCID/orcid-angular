@@ -11,6 +11,7 @@ import { sortBy } from 'lodash'
   selector: 'app-modal-works-search-link',
   templateUrl: './modal-works-search-link.component.html',
   styleUrls: ['./modal-works-search-link.component.scss'],
+  standalone: false,
 })
 export class ModalWorksSearchLinkComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

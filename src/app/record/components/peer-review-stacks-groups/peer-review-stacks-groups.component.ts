@@ -28,6 +28,7 @@ import { isQA } from 'src/app/shared/validators/environment-check/environment-ch
     './peer-review-stacks-groups.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class PeerReviewStacksGroupsComponent implements OnInit {
   regionPeerReviews = $localize`:@@peerReview.peerReviews:Peer reviews`

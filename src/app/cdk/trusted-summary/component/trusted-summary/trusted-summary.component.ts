@@ -26,6 +26,7 @@ import { concat } from 'lodash'
     './trusted-summary.component.scss',
     './trusted-summary.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class TrustedSummaryComponent implements OnInit, OnDestroy {
   @Input() standaloneMode: boolean = true

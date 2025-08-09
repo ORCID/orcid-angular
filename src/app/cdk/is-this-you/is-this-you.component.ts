@@ -10,6 +10,7 @@ import { WINDOW } from '../window'
     './is-this-you.component.scss.theme.scss',
     './is-this-you.component.scss',
   ],
+  standalone: false,
 })
 export class IsThisYouComponent implements OnInit {
   titleLabel = 'Could this be you?'

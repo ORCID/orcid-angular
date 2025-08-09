@@ -20,6 +20,7 @@ import { TogglzService } from 'src/app/core/togglz/togglz.service'
     './settings-actions-deactivate.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class SettingsActionsDeactivateComponent implements OnInit, OnDestroy {
   @Output() loading = new EventEmitter<boolean>()

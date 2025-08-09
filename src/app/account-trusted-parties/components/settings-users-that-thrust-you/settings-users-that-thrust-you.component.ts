@@ -17,6 +17,7 @@ import { DialogRevokeYourOwnPermissionsComponent } from '../dialog-revoke-your-o
     './settings-users-that-thrust-you.component.scss',
     './settings-users-that-thrust-you.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class SettingsUsersThatThrustYouComponent implements OnInit {
   $usersThatThrustYou: Observable<TrustedIndividuals>

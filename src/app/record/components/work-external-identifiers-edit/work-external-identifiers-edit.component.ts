@@ -20,6 +20,7 @@ import { WorkIdType, WorkRelationships } from 'src/app/types/works.endpoint'
     './work-external-identifiers-edit.component.scss',
     'work-external-identifiers-edit.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class WorkExternalIdentifiersEditComponent
   implements OnInit, AfterViewInit

@@ -7,5 +7,6 @@ import { Component } from '@angular/core'
     './info-panel.component.scss',
     './info-panel.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class InfoPanelComponent {}

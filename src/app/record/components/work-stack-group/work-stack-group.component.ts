@@ -58,6 +58,7 @@ import { TogglzService } from '../../../core/togglz/togglz.service'
     './work-stack-group.component.scss',
     './work-stack-group.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class WorkStackGroupComponent implements OnInit {
   paginatorLabel

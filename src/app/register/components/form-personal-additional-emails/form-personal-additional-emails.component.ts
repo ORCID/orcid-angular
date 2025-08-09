@@ -24,6 +24,7 @@ import { ErrorStateMatcherForFormLevelErrors } from '../../ErrorStateMatcherForF
     '../register.style.scss',
     '../register.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class FormPersonalAdditionalEmailsComponent implements AfterViewInit {
   labelInfoAboutEmails = $localize`:@@register.ariaLabelInfoEmails:info about emails`

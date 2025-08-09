@@ -10,6 +10,7 @@ import { UntypedFormControl, UntypedFormGroup } from '@angular/forms'
     './two-factor-recovery-codes.component.scss',
     './two-factor-recovery-codes.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class TwoFactorRecoveryCodesComponent implements OnInit {
   @Input() backupCodes: string

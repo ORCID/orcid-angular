@@ -6,6 +6,7 @@ import {
 
 @Pipe({
   name: 'recordWorkTitleNameLabel',
+  standalone: false,
 })
 export class RecordWorkTitleNameLabelPipe implements PipeTransform {
   transform(value: WorksTitleName): unknown {

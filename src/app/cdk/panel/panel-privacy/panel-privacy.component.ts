@@ -8,6 +8,7 @@ import { VisibilityStrings } from 'src/app/types/common.endpoint'
     './panel-privacy.component.scss',
     './panel-privacy.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class PanelPrivacyComponent implements OnInit {
   @HostBinding('attr.aria-label') label = ''

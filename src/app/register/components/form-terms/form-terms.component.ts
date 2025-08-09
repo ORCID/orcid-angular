@@ -33,6 +33,7 @@ import { RegisterStateService } from '../../register-state.service'
     },
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 // tslint:disable-next-line: class-name
 export class FormTermsComponent extends BaseForm implements OnInit, DoCheck {

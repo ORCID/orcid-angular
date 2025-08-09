@@ -5,8 +5,8 @@
   $primary: map-get($theme, primary);
   $background: map-get($theme, background);
   .header {
-    background-color: mat.get-color-from-palette($primary, 700);
-    color: mat.get-contrast-color-from-palette($primary, 700);
+    background-color: mat.m2-get-color-from-palette($primary, 700);
+    color: mat.m2-get-contrast-color-from-palette($primary, 700);
   }
 }
 

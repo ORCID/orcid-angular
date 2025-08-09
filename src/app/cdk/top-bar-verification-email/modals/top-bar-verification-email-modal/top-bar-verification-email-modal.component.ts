@@ -14,6 +14,7 @@ import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.se
     './top-bar-verification-email-modal.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class TopBarVerificationEmailModalComponent
   implements OnInit, OnDestroy

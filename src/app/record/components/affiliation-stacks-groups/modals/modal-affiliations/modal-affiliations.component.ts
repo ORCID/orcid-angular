@@ -43,6 +43,7 @@ import { RecordService } from 'src/app/core/record/record.service'
     './modal-affiliations.component.scss',
     './modal-affiliations.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class ModalAffiliationsComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

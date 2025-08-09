@@ -16,6 +16,7 @@ import { PersonIdentifierEndpoint } from 'src/app/types/record-person-identifier
   templateUrl: './modal-person-identifiers.component.html',
   styleUrls: ['./modal-person-identifiers.component.scss'],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class ModalPersonIdentifiersComponent implements OnInit, OnDestroy {
   ariaLabelSave = $localize`:@@side-bar.ariaLabelPersonalIdSave:Save changes to Other identifiers`

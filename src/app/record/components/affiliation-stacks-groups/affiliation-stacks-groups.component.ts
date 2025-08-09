@@ -23,6 +23,7 @@ import { UserInfo } from '../../../types'
   selector: 'app-affiliations',
   templateUrl: './affiliation-stacks-groups.component.html',
   styleUrls: ['./affiliation-stacks-groups.component.scss'],
+  standalone: false,
 })
 export class AffiliationStacksGroupsComponent implements OnInit {
   $destroy: Subject<boolean> = new Subject<boolean>()

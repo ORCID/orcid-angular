@@ -23,6 +23,7 @@ import { UserRecord } from 'src/app/types/record.local'
     './peer-review-stack.component.scss',
     './peer-review-stack.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class PeerReviewStackComponent implements OnInit {
   @HostBinding('class.display-the-stack') displayTheStackClass = false

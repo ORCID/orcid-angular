@@ -8,38 +8,39 @@
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
   .display-1 {
-    color: mat.get-color-from-palette($primary);
+    color: mat.m2-get-color-from-palette($primary);
   }
 
   button.sign-in-to-orcid-button {
     color: $orcid-light-primary-text;
-    background: mat.get-color-from-palette($primary, 700);
+    background: mat.m2-get-color-from-palette($primary, 700);
   }
 
   .separator::before,
   .separator::after {
     content: '';
-    border-bottom: 1px solid mat.get-color-from-palette($foreground, dividers);
+    border-bottom: 1px solid
+      mat.m2-get-color-from-palette($foreground, dividers);
   }
 
   .info {
-    background-color: mat.get-color-from-palette(
+    background-color: mat.m2-get-color-from-palette(
       $background,
       state-notice-lightest
     );
-    border-color: mat.get-color-from-palette(
+    border-color: mat.m2-get-color-from-palette(
       $foreground,
       'state-notice-dark'
     ) !important;
 
     mat-icon {
-      color: mat.get-color-from-palette(
+      color: mat.m2-get-color-from-palette(
         $foreground,
         'state-notice-dark'
       ) !important;
     }
     a {
-      color: mat.get-color-from-palette($primary, 700);
+      color: mat.m2-get-color-from-palette($primary, 700);
     }
   }
 }

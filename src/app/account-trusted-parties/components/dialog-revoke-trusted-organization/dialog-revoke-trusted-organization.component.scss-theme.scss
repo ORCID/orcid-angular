@@ -13,7 +13,7 @@
   }
   .permission-container {
     mat-icon {
-      color: mat.get-color-from-palette($warn, 700);
+      color: mat.m2-get-color-from-palette($warn, 700);
     }
     border-color: map-get($background, light-grey);
   }

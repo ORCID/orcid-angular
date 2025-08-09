@@ -5,6 +5,7 @@ import { RecordImportWizard } from '../../../types/record-peer-review-import.end
   selector: 'app-search-link-wizard',
   templateUrl: './search-link-wizard.component.html',
   styleUrls: ['./search-link-wizard.component.scss'],
+  standalone: false,
 })
 export class SearchLinkWizardComponent implements OnInit {
   @Input() recordImportWizards: RecordImportWizard[]

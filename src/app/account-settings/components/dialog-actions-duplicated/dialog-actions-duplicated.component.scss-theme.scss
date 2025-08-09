@@ -12,7 +12,7 @@
     border-color: map-get($foreground, 'state-warning-dark');
   }
   h2.keep {
-    border-color: mat.get-color-from-palette($accent, 400);
+    border-color: mat.m2-get-color-from-palette($accent, 400);
   }
 }
 

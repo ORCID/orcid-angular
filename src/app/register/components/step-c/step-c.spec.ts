@@ -28,6 +28,7 @@ import { RegisterObservabilityService } from '../../register-observability.servi
       multi: true,
     },
   ],
+  standalone: false,
 })
 export class MockFormVisibilityComponent implements ControlValueAccessor {
   writeValue(): void {}

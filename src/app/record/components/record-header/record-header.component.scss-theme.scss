@@ -7,19 +7,19 @@
   $warn: map-get($theme, accent);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
-  $config: mat.define-typography-config();
+  $config: mat.m2-define-typography-config();
 
   .record-header-wrapper {
     color: $orcid-light-primary-text;
-    background: mat.get-color-from-palette($primary, 900);
+    background: mat.m2-get-color-from-palette($primary, 900);
   }
 
   .divider {
-    background: mat.get-color-from-palette($primary, 700);
+    background: mat.m2-get-color-from-palette($primary, 700);
   }
 
   .other-names {
-    color: mat.get-color-from-palette($primary, 50);
+    color: mat.m2-get-color-from-palette($primary, 50);
   }
 }
 @include top-bar-public-names-theme($orcid-app-theme);

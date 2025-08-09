@@ -15,6 +15,7 @@ import { SearchResults, ExpandedSearchResultsContent } from 'src/app/types'
     './results.component.scss',
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class ResultsComponent implements OnInit, OnChanges {
   ngOrcidSearchResults = $localize`:@@ngOrcid.search.ariaLabelSearchResults:Search Results`

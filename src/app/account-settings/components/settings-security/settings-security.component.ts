@@ -7,6 +7,7 @@ import { WINDOW } from 'src/app/cdk/window'
   selector: 'app-settings-security',
   templateUrl: './settings-security.component.html',
   styleUrls: ['./settings-security.component.scss'],
+  standalone: false,
 })
 export class SettingsSecurityComponent implements OnInit {
   titleAccountPassword = $localize`:@@account.accountPassword:Account password`

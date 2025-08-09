@@ -6,6 +6,7 @@ import { MonthDayYearDate } from 'src/app/types'
   templateUrl: './source-hit.component.html',
   styleUrls: ['./source-hit.component.scss'],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class SourceHitComponent implements OnInit {
   @Input() createdDate: MonthDayYearDate

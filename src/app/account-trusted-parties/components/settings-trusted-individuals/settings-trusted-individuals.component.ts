@@ -15,6 +15,7 @@ import { DialogRevokeTrustedIndividualsComponent } from '../dialog-revoke-truste
     './settings-trusted-individuals.component.scss',
     './settings-trusted-individuals.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class SettingsTrustedIndividualsComponent implements OnInit, OnDestroy {
   $trustedIndividuals: Observable<AccountTrustedIndividual[]>

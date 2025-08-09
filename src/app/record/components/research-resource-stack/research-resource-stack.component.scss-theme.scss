@@ -9,14 +9,14 @@
   $background: map-get($theme, background);
 
   :host.display-the-stack {
-    border-color: mat.get-color-from-palette(
+    border-color: mat.m2-get-color-from-palette(
       $background,
       ui-background-darkest
     );
   }
 
   app-panel-data {
-    border-color: mat.get-color-from-palette(
+    border-color: mat.m2-get-color-from-palette(
       $background,
       ui-background
     ) !important;

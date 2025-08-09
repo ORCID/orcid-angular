@@ -16,6 +16,7 @@ import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms'
     './modal-combine-works-with-selector.component.scss',
     './modal-combine-works-with-selector.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class ModalCombineWorksWithSelectorComponent
   implements OnInit, OnDestroy

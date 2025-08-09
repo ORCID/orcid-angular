@@ -41,6 +41,7 @@ interface WindowWithCaptcha extends Window {
       multi: true,
     },
   ],
+  standalone: false,
 })
 export class RecaptchaDirective implements OnInit, ControlValueAccessor {
   @Output() captchaFail = new EventEmitter<boolean>()

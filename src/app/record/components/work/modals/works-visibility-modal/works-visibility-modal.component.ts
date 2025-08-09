@@ -18,6 +18,7 @@ import { RecordService } from 'src/app/core/record/record.service'
   selector: 'app-works-visibility-modal',
   templateUrl: './works-visibility-modal.component.html',
   styleUrls: ['./works-visibility-modal.component.scss'],
+  standalone: false,
 })
 export class WorksVisibilityModalComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

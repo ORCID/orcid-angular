@@ -11,13 +11,13 @@
   .hamburger__icon {
     &.open {
       span {
-        background: mat.get-color-from-palette($accent, '500-contrast');
+        background: mat.m2-get-color-from-palette($accent, '500-contrast');
       }
     }
   }
   .hamburger__icon {
     span {
-      background: mat.get-color-from-palette($accent, '500-contrast');
+      background: mat.m2-get-color-from-palette($accent, '500-contrast');
     }
   }
 }

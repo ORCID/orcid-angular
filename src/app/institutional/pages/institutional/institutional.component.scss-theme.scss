@@ -9,10 +9,16 @@
   $background: map-get($theme, background);
 
   .step-actions {
-    border-color: mat.get-color-from-palette($background, ui-background-light);
+    border-color: mat.m2-get-color-from-palette(
+      $background,
+      ui-background-light
+    );
   }
   .institutional-logo .divider {
-    border-color: mat.get-color-from-palette($background, ui-background-light);
+    border-color: mat.m2-get-color-from-palette(
+      $background,
+      ui-background-light
+    );
   }
   .error {
     color: map-get($foreground, 'state-warning-dark');
@@ -21,7 +27,7 @@
   .step-actions {
     button {
       color: $orcid-light-primary-text;
-      background: mat.get-color-from-palette($primary, 700);
+      background: mat.m2-get-color-from-palette($primary, 700);
     }
   }
 }

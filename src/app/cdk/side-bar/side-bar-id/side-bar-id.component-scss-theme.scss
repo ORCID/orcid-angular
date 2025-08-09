@@ -12,8 +12,8 @@
     width: 100%;
   }
   .container {
-    background-color: mat.get-color-from-palette($background, card);
-    border-color: mat.get-color-from-palette($accent, 400);
+    background-color: mat.m2-get-color-from-palette($background, card);
+    border-color: mat.m2-get-color-from-palette($accent, 400);
   }
 }
 

@@ -9,7 +9,7 @@
   $background: map-get($theme, background);
 
   :host {
-    border-color: mat.get-color-from-palette(
+    border-color: mat.m2-get-color-from-palette(
       $background,
       ui-background-darkest
     );

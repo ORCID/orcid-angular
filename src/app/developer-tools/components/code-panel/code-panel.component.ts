@@ -7,6 +7,7 @@ import { Component, Input, OnInit } from '@angular/core'
     './code-panel.component.scss',
     './code-panel.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class CodePanelComponent implements OnInit {
   collapseAriaLabel = $localize`:@@developerTools.collapse:Collapse`

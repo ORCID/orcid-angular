@@ -9,6 +9,7 @@ import { UserInfo } from 'src/app/types'
   templateUrl: './top-bar-record-issues.component.html',
   styleUrls: ['./top-bar-record-issues.component.scss'],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class TopBarRecordIssuesComponent implements OnInit, OnDestroy {
   @Input() isPublicRecord: string

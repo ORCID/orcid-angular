@@ -14,7 +14,8 @@
 @include mat.all-component-typographies($orcid-material-typography);
 
 // Core Material styles
-@include mat.core();
+@include mat.elevation-classes();
+@include mat.app-background();
 
 // New component themes
 @include mat.all-component-themes($orcid-app-theme);

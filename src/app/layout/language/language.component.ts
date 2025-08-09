@@ -7,6 +7,7 @@ import { LanguageService } from 'src/app/core/language/language.service'
   selector: 'app-language',
   templateUrl: './language.component.html',
   styleUrls: ['./language.component.scss'],
+  standalone: false,
 })
 export class LanguageComponent implements OnInit {
   languageMenuOptions: { [key: string]: string }

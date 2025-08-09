@@ -4,22 +4,22 @@
   $primary: map-get($theme, primary);
   $foreground: map-get($theme, foreground);
   $warn: map-get($theme, warn);
-  $divider-color: mat.get-color-from-palette($foreground, divider);
+  $divider-color: mat.m2-get-color-from-palette($foreground, divider);
 
   $background: map-get($theme, background);
-  $unselected-background: mat.get-color-from-palette(
+  $unselected-background: mat.m2-get-color-from-palette(
     $background,
     unselected-chip
   );
-  $unselected-foreground: mat.get-color-from-palette($foreground, text);
+  $unselected-foreground: mat.m2-get-color-from-palette($foreground, text);
 
   mat-snack-bar-container.mat-mdc-snack-bar-container.orcid-error
     .mdc-snackbar__surface {
-    background-color: mat.get-color-from-palette($warn, 700);
+    background-color: mat.m2-get-color-from-palette($warn, 700);
   }
 
   mat-snack-bar-container.mat-mdc-snack-bar-container.orcid-success
     .mdc-snackbar__surface {
-    background-color: mat.get-color-from-palette($primary, 700);
+    background-color: mat.m2-get-color-from-palette($primary, 700);
   }
 }

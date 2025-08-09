@@ -20,6 +20,7 @@ import { WorkModalComponent } from '../work-modal/work-modal.component'
     './work-featured.component.scss',
     './work-featured.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class WorkFeaturedComponent {
   @Input() userRecord: UserRecord

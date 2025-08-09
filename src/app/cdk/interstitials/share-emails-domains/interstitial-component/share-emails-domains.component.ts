@@ -28,6 +28,7 @@ import { RecordService } from 'src/app/core/record/record.service'
     './share-emails-domains.component.scss',
     './share-emails-domains.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class ShareEmailsDomainsComponent implements OnDestroy {
   beforeSummit = true

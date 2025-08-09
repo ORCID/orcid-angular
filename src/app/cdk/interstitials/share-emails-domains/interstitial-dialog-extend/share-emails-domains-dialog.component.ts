@@ -44,6 +44,7 @@ export interface ShareEmailsDomainsComponentDialogOutput
     '../interstitial-component/share-emails-domains.component.scss',
     '../interstitial-component/share-emails-domains.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class ShareEmailsDomainsDialogComponent extends ShareEmailsDomainsComponent {
   @HostBinding('class.columns-12') desktop: boolean = false

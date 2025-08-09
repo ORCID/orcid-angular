@@ -15,6 +15,7 @@ import { Router } from '@angular/router'
     './two-factor-setup.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class TwoFactorSetupComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

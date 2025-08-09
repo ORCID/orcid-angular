@@ -40,6 +40,7 @@ import { OrcidValidators } from 'src/app/validators'
   selector: 'app-modal-websites',
   templateUrl: './modal-websites.component.html',
   styleUrls: ['./modal-websites.component.scss'],
+  standalone: false,
 })
 export class ModalWebsitesComponent implements OnInit, OnDestroy {
   ariaLabelSave = $localize`:@@side-bar.ariaLabelWebsiteSave:Save changes to Websites & social links`

@@ -8,12 +8,12 @@
 
   .authenticate-button {
     color: $orcid-light-primary-text;
-    background: mat.get-color-from-palette($primary, 500);
+    background: mat.m2-get-color-from-palette($primary, 500);
   }
 
   .authenticate-button-new-signin {
     color: $orcid-light-primary-text;
-    background: mat.get-color-from-palette($primary, 700);
+    background: mat.m2-get-color-from-palette($primary, 700);
   }
 
   .error {

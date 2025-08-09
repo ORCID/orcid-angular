@@ -11,6 +11,7 @@ import { PlatformInfoService } from '../../platform-info'
     'warning-message.component.scss-theme.scss',
   ],
   preserveWhitespaces: false,
+  standalone: false,
 })
 export class WarningMessageComponent implements OnInit, OnDestroy {
   private _type: 'warning' | 'success' | 'info' = 'warning'

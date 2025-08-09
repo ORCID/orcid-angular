@@ -11,6 +11,7 @@ import { chain } from 'lodash'
   templateUrl: './notification-your-record-amended.component.html',
   styleUrls: ['./notification-your-record-amended.component.scss'],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class NotificationYourRecordAmendedComponent implements OnInit {
   private _notification: InboxNotificationAmended

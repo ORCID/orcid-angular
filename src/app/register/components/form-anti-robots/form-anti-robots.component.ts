@@ -30,6 +30,7 @@ import { RegisterStateService } from '../../register-state.service'
       multi: true,
     },
   ],
+  standalone: false,
 })
 export class FormAntiRobotsComponent extends BaseForm implements OnInit {
   captchaFailState = false

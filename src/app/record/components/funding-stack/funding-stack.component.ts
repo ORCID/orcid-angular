@@ -16,6 +16,7 @@ import { UserRecord } from 'src/app/types/record.local'
     './funding-stack.component.scss',
     './funding-stack.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class FundingStackComponent implements OnInit {
   @HostBinding('class.display-the-stack') displayTheStackClass = false

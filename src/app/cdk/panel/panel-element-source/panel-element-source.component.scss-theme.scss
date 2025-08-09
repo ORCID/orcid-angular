@@ -9,7 +9,7 @@
   $background: map-get($theme, background);
 
   :host {
-    color: mat.get-contrast-color-from-palette($primary, 200);
+    color: mat.m2-get-contrast-color-from-palette($primary, 200);
   }
 }
 @include panel-data-theme($orcid-app-theme);

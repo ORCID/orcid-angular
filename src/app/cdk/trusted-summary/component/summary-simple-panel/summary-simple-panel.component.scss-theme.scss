@@ -9,7 +9,7 @@
   $background: map-get($theme, background);
 
   .card-container.hover {
-    border-color: mat.get-color-from-palette($primary, 500);
+    border-color: mat.m2-get-color-from-palette($primary, 500);
   }
 
   .activity-container:hover {
@@ -27,11 +27,11 @@
   }
 
   .verified {
-    color: mat.get-color-from-palette($accent, 400);
+    color: mat.m2-get-color-from-palette($accent, 400);
   }
 
   .not-verified {
-    color: mat.get-color-from-palette($primary, 200);
+    color: mat.m2-get-color-from-palette($primary, 200);
   }
 
   .card-container {

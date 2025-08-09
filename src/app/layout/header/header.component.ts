@@ -20,6 +20,7 @@ import { menu } from './menu'
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss-theme.scss', './header.component.scss'],
+  standalone: false,
 })
 export class HeaderComponent implements OnInit {
   hideMainMenu = false

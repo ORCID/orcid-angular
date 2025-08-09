@@ -9,8 +9,8 @@
   $background: map-get($theme, background);
 
   code {
-    border-color: mat.get-color-from-palette($background, ui-background);
-    background-color: mat.get-color-from-palette(
+    border-color: mat.m2-get-color-from-palette($background, ui-background);
+    background-color: mat.m2-get-color-from-palette(
       $background,
       ui-background-lightest
     );

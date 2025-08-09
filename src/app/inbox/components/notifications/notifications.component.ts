@@ -14,6 +14,7 @@ import {
   templateUrl: './notifications.component.html',
   styleUrls: ['./notifications.component.scss'],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class NotificationsComponent implements OnInit, OnDestroy {
   notifications: InboxNotification[]

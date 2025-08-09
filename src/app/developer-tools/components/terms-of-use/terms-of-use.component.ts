@@ -25,6 +25,7 @@ import { RecordService } from 'src/app/core/record/record.service'
     './terms-of-use.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class TermsOfUseComponent implements OnInit, OnDestroy {
   checked

@@ -6,6 +6,7 @@ import { DuplicateRemoveEndpoint } from 'src/app/types/account-actions-duplicate
   templateUrl: './dialog-actions-duplicated-merged-confirmed.component.html',
   styleUrls: ['./dialog-actions-duplicated-merged-confirmed.component.scss'],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class DialogActionsDuplicatedMergedConfirmedComponent implements OnInit {
   baseUrl = runtimeEnvironment.BASE_URL

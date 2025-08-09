@@ -13,6 +13,7 @@ import { ApplicationRoutes } from 'src/app/constants'
     './self-service.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class SelfServiceComponent implements OnInit {
   @Output() loading = new EventEmitter<boolean>()

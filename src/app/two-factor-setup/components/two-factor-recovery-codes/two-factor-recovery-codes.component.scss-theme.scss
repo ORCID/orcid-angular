@@ -7,19 +7,19 @@
   $warn: map-get($theme, accent);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
-  $config: mat.define-typography-config();
+  $config: mat.m2-define-typography-config();
 
   p {
-    font-size: mat.font-size($config, body-1) !important;
+    font-size: mat.m2-font-size($config, body-1) !important;
   }
 
   a {
-    font-size: mat.font-size($config, body-1) !important;
+    font-size: mat.m2-font-size($config, body-1) !important;
   }
 
   textarea {
-    border: 1px solid mat.get-color-from-palette($background, ui-background);
-    background-color: mat.get-color-from-palette(
+    border: 1px solid mat.m2-get-color-from-palette($background, ui-background);
+    background-color: mat.m2-get-color-from-palette(
       $background,
       ui-background-light
     );

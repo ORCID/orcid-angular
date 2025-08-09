@@ -11,7 +11,7 @@
   ::ng-deep {
     mat-form-field.selected-org {
       .mat-mdc-text-field-wrapper {
-        background-color: mat.get-color-from-palette(
+        background-color: mat.m2-get-color-from-palette(
           $background,
           ui-background-lightest
         );

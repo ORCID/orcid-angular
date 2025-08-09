@@ -28,6 +28,7 @@ import { AnnouncerService } from 'src/app/core/announcer/announcer.service'
   selector: 'app-research-resources',
   templateUrl: './research-resource-stacks-group.component.html',
   styleUrls: ['./research-resource-stacks-group.component.scss'],
+  standalone: false,
 })
 export class ResearchResourceStacksGroupComponent implements OnInit {
   defaultPageSize = DEFAULT_PAGE_SIZE

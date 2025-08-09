@@ -18,6 +18,7 @@ import {
     './top-bar-my-public-record-preview.component.scss',
     './top-bar-my-public-record-preview.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class TopBarMyPublicRecordPreviewComponent implements OnInit {
   @Input() isPublicRecord: string

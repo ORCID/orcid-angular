@@ -11,6 +11,7 @@ import { RouterModule, Routes } from '@angular/router'
     './settings-panels.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class SettingsPanelsComponent implements OnInit {
   @Input() loading = false

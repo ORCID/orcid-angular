@@ -26,6 +26,7 @@ import { RegisterObservabilityService } from '../../register-observability.servi
     '../register.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class StepAComponent
   extends BaseStepDirective

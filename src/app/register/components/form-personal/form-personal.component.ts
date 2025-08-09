@@ -88,6 +88,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
       multi: true,
     },
   ],
+  standalone: false,
 })
 export class FormPersonalComponent
   extends BaseForm

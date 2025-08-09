@@ -8,6 +8,7 @@ import { AlertType } from 'src/app/constants'
     './alert-message.component.scss',
     'alert-message.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 /**
  * Use `title` and `content` attributes to display the message

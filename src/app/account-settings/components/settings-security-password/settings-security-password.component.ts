@@ -24,6 +24,7 @@ import { OrcidValidators } from 'src/app/validators'
     './settings-security-password.component.scss',
     './settings-security-password.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class SettingsSecurityPasswordComponent implements OnInit, OnDestroy {
   form: UntypedFormGroup

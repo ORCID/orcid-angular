@@ -50,6 +50,7 @@ export interface DeepSelectMenu {
       useValue: { overlayPanelClass: 'menu-overlay-pane-overwrite' },
     },
   ],
+  standalone: false,
 })
 export class DeepSelectInputComponent implements ControlValueAccessor {
   formgroup

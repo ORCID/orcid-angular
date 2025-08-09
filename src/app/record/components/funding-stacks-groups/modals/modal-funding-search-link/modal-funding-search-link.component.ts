@@ -10,6 +10,7 @@ import { Subject } from 'rxjs'
   selector: 'app-modal-funding-search-link',
   templateUrl: './modal-funding-search-link.component.html',
   styleUrls: ['./modal-funding-search-link.component.scss'],
+  standalone: false,
 })
 export class ModalFundingSearchLinkComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

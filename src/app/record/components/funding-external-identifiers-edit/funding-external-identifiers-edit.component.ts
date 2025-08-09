@@ -20,6 +20,7 @@ import { WorkRelationships } from 'src/app/types/works.endpoint'
     './funding-external-identifiers-edit.component.scss',
     './funding-external-identifiers-edit.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class FundingExternalIdentifiersEditComponent
   implements OnInit, AfterViewInit

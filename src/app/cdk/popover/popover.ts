@@ -39,6 +39,7 @@ import { transformPopover } from './popover-animations'
   encapsulation: ViewEncapsulation.None,
   animations: [transformPopover],
   exportAs: 'mdePopover',
+  standalone: false,
 })
 export class MdePopover implements MdePopoverPanel, OnDestroy {
   // tslint:disable-line:component-class-suffix

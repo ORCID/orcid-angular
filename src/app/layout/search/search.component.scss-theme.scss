@@ -9,40 +9,40 @@
   $background: map-get($theme, background);
 
   .search-where {
-    background-color: mat.get-color-from-palette($background, ui-dark-grey);
-    color: mat.get-contrast-color-from-palette($primary, 500);
+    background-color: mat.m2-get-color-from-palette($background, ui-dark-grey);
+    color: mat.m2-get-contrast-color-from-palette($primary, 500);
   }
   .input-box {
     input::placeholder {
-      color: mat.get-color-from-palette($background, placeholder-grey);
+      color: mat.m2-get-color-from-palette($background, placeholder-grey);
     }
     input {
-      border-color: mat.get-color-from-palette($background, ui-dark-grey);
+      border-color: mat.m2-get-color-from-palette($background, ui-dark-grey);
     }
   }
   .input-box-new-info {
     input {
-      border: solid 1px mat.get-color-from-palette($background, ui-dark-grey);
+      border: solid 1px mat.m2-get-color-from-palette($background, ui-dark-grey);
     }
 
     ::placeholder {
-      color: mat.get-color-from-palette($background, placeholder-grey);
+      color: mat.m2-get-color-from-palette($background, placeholder-grey);
     }
 
     :-ms-input-placeholder {
       /* Internet Explorer 10-11 */
-      color: mat.get-color-from-palette($background, placeholder-grey);
+      color: mat.m2-get-color-from-palette($background, placeholder-grey);
     }
   }
 
   .search-icon {
-    background-color: mat.get-color-from-palette($background, ui-dark-grey);
-    color: mat.get-contrast-color-from-palette($primary, 500);
+    background-color: mat.m2-get-color-from-palette($background, ui-dark-grey);
+    color: mat.m2-get-contrast-color-from-palette($primary, 500);
   }
   .columns-4,
   .columns-8 {
     .search-box & {
-      background-color: mat.get-color-from-palette($background, light-grey);
+      background-color: mat.m2-get-color-from-palette($background, light-grey);
     }
   }
 }

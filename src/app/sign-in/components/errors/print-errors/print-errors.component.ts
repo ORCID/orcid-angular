@@ -18,6 +18,7 @@ import { isValidOrcidFormat } from 'src/app/constants'
     '../../sign-in.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class PrintErrorsComponent implements OnInit {
   @Input() badCredentials: boolean

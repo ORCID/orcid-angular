@@ -38,6 +38,7 @@ import { WINDOW } from '../../../window'
     './modal-keyword.component.scss-theme.scss',
     './modal-keyword.component.scss',
   ],
+  standalone: false,
 })
 export class ModalKeywordComponent implements OnInit, OnDestroy {
   ariaLabelSave = $localize`:@@side-bar.ariaLabelKeywordSave:Save changes to Keywords`

@@ -6,6 +6,7 @@ import {
 
 @Pipe({
   name: 'scopePathType',
+  standalone: false,
 })
 export class ScopePathTypePipe implements PipeTransform {
   transform(value: string): string {

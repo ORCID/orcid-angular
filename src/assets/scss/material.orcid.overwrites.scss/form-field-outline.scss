@@ -30,7 +30,7 @@
 }
 
 .mat-mdc-form-field-infix {
-  min-height: 20px;
+  --mat-form-field-container-height: 20px;
 }
 
 .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {

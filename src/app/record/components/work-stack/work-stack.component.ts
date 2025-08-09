@@ -29,6 +29,7 @@ import { WorkModalComponent } from '../work-modal/work-modal.component'
     './work-stack.component.scss',
     './work-stack.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class WorkStackComponent implements OnInit {
   @Input() userRecord: UserRecord

@@ -11,6 +11,7 @@ import { TwoFactorAuthenticationService } from '../../../core/two-factor-authent
     './settings-security-two-factor-auth.component.scss',
     './settings-security-two-factor-auth.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class SettingsSecurityTwoFactorAuthComponent implements OnInit {
   @Input() twoFactorState: boolean

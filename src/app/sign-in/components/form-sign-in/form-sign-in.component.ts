@@ -50,6 +50,7 @@ import { TogglzService } from 'src/app/core/togglz/togglz.service'
     '../sign-in.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class FormSignInComponent implements OnInit, OnDestroy {
   @ViewChild('firstInput') firstInput: ElementRef

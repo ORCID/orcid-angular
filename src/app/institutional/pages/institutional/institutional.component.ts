@@ -34,6 +34,7 @@ import {
     './institutional.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class InstitutionalComponent implements OnInit {
   @HostBinding('class.container') containerClass = true

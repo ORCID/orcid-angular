@@ -270,101 +270,101 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ng-orcid:build:local"
+            "buildTarget": "ng-orcid:build:local"
           },
           "configurations": {
             "local-qa": {
-              "browserTarget": "ng-orcid:build:local-with-proxy",
-              "proxyConfig": "src/proxy.conf.qa.mjs"
+              "proxyConfig": "src/proxy.conf.qa.mjs",
+              "buildTarget": "ng-orcid:build:local-with-proxy"
             },
             "local-qa-en": {
-              "browserTarget": "ng-orcid:build:local-with-proxy-localize-en",
-              "proxyConfig": "src/proxy.conf.qa.mjs"
+              "proxyConfig": "src/proxy.conf.qa.mjs",
+              "buildTarget": "ng-orcid:build:local-with-proxy-localize-en"
             },
             "local-qa-ar": {
-              "browserTarget": "ng-orcid:build:local-with-proxy-localize-ar",
-              "proxyConfig": "src/proxy.conf.qa.mjs"
+              "proxyConfig": "src/proxy.conf.qa.mjs",
+              "buildTarget": "ng-orcid:build:local-with-proxy-localize-ar"
             },
             "local-qa-fr": {
-              "browserTarget": "ng-orcid:build:local-with-proxy-localize-fr",
-              "proxyConfig": "src/proxy.conf.qa.mjs"
+              "proxyConfig": "src/proxy.conf.qa.mjs",
+              "buildTarget": "ng-orcid:build:local-with-proxy-localize-fr"
             },
             "local-qa-xx": {
-              "browserTarget": "ng-orcid:build:local-with-proxy-localize-xx",
-              "proxyConfig": "src/proxy.conf.qa.mjs"
+              "proxyConfig": "src/proxy.conf.qa.mjs",
+              "buildTarget": "ng-orcid:build:local-with-proxy-localize-xx"
             },
             "local-sandbox": {
-              "browserTarget": "ng-orcid:build:local-with-proxy",
-              "proxyConfig": "src/proxy.conf.sandbox.mjs"
+              "proxyConfig": "src/proxy.conf.sandbox.mjs",
+              "buildTarget": "ng-orcid:build:local-with-proxy"
             },
             "local": {
-              "browserTarget": "ng-orcid:build:local"
+              "buildTarget": "ng-orcid:build:local"
             },
             "local-tomcat": {},
             "production": {
-              "browserTarget": "ng-orcid:build:production"
+              "buildTarget": "ng-orcid:build:production"
             },
 
             "en": {
-              "browserTarget": "ng-orcid:build:en"
+              "buildTarget": "ng-orcid:build:en"
             },
             "fr": {
-              "browserTarget": "ng-orcid:build:fr"
+              "buildTarget": "ng-orcid:build:fr"
             },
             "ar": {
-              "browserTarget": "ng-orcid:build:ar"
+              "buildTarget": "ng-orcid:build:ar"
             },
             "ca": {
-              "browserTarget": "ng-orcid:build:ca"
+              "buildTarget": "ng-orcid:build:ca"
             },
             "cs": {
-              "browserTarget": "ng-orcid:build:cs"
+              "buildTarget": "ng-orcid:build:cs"
             },
             "es": {
-              "browserTarget": "ng-orcid:build:es"
+              "buildTarget": "ng-orcid:build:es"
             },
             "it": {
-              "browserTarget": "ng-orcid:build:it"
+              "buildTarget": "ng-orcid:build:it"
             },
             "ja": {
-              "browserTarget": "ng-orcid:build:ja"
+              "buildTarget": "ng-orcid:build:ja"
             },
             "ko": {
-              "browserTarget": "ng-orcid:build:ko"
+              "buildTarget": "ng-orcid:build:ko"
             },
             "lr": {
-              "browserTarget": "ng-orcid:build:lr"
+              "buildTarget": "ng-orcid:build:lr"
             },
             "pt": {
-              "browserTarget": "ng-orcid:build:pt"
+              "buildTarget": "ng-orcid:build:pt"
             },
             "rl": {
-              "browserTarget": "ng-orcid:build:rl"
+              "buildTarget": "ng-orcid:build:rl"
             },
             "ru": {
-              "browserTarget": "ng-orcid:build:ru"
+              "buildTarget": "ng-orcid:build:ru"
             },
             "uk": {
-              "browserTarget": "ng-orcid:build:uk"
+              "buildTarget": "ng-orcid:build:uk"
             },
             "xx": {
-              "browserTarget": "ng-orcid:build:xx"
+              "buildTarget": "ng-orcid:build:xx"
             },
             "src": {
-              "browserTarget": "ng-orcid:build:src"
+              "buildTarget": "ng-orcid:build:src"
             },
             "zh-CN": {
-              "browserTarget": "ng-orcid:build:zh-CN"
+              "buildTarget": "ng-orcid:build:zh-CN"
             },
             "zh-TW": {
-              "browserTarget": "ng-orcid:build:zh-TW"
+              "buildTarget": "ng-orcid:build:zh-TW"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ng-orcid:build"
+            "buildTarget": "ng-orcid:build"
           }
         },
         "test": {
@@ -410,5 +410,31 @@
   "cli": {
     "analytics": "5a5330f1-74b5-403d-bd97-0318d391a33a",
     "packageManager": "yarn"
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "type": "component"
+    },
+    "@schematics/angular:directive": {
+      "type": "directive"
+    },
+    "@schematics/angular:service": {
+      "type": "service"
+    },
+    "@schematics/angular:guard": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:interceptor": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:module": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:pipe": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:resolver": {
+      "typeSeparator": "."
+    }
   }
 }

@@ -7,6 +7,7 @@ import { filter } from 'rxjs/operators'
   selector: 'app-skip-main-nav',
   templateUrl: './skip-main-nav.component.html',
   styleUrls: ['./skip-main-nav.component.scss'],
+  standalone: false,
 })
 export class SkipMainNavComponent implements OnInit {
   currentUrl: string

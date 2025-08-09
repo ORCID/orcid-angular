@@ -26,6 +26,7 @@ import { RecordService } from 'src/app/core/record/record.service'
     './settings-defaults-email-frequency.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class SettingsDefaultsEmailFrequencyComponent
   implements OnInit, OnDestroy

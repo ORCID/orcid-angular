@@ -7,6 +7,7 @@ import { TogglzService } from 'src/app/core/togglz/togglz.service'
   templateUrl: './statistics.component.html',
   styleUrls: ['./statistics.component.scss'],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class StatisticsComponent implements OnInit {
   labelStatistics = $localize`:@@layout.ariaLabelStatistics:statistics`

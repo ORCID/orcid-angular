@@ -23,6 +23,7 @@ import { GroupingSuggestions } from 'src/app/types/works.endpoint'
     './work-featured-stack-group.component.scss',
     './work-featured-stack-group.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class WorkFeaturedStackGroupComponent implements OnInit {
   paginatorLabel

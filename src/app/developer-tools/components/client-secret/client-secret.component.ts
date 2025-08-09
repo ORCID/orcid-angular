@@ -7,6 +7,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
     './client-secret.component.scss',
     './client-secret.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class ClientSecretComponent implements OnInit {
   @Input() clientId: string

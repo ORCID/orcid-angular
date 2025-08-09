@@ -76,6 +76,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
       multi: true,
     },
   ],
+  standalone: false,
 })
 export class FormCurrentEmploymentComponent
   extends BaseForm

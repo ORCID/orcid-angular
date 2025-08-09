@@ -10,8 +10,8 @@
 
   :host,
   .side-bar {
-    border-color: mat.get-color-from-palette($accent, 200) !important;
-    background-color: mat.get-color-from-palette(
+    border-color: mat.m2-get-color-from-palette($accent, 200) !important;
+    background-color: mat.m2-get-color-from-palette(
       $background,
       brand-primary-lightest
     ) !important;
@@ -19,11 +19,11 @@
 
   :host,
   .top-bar-or-main {
-    border-color: mat.get-color-from-palette(
+    border-color: mat.m2-get-color-from-palette(
       $background,
       ui-background
     ) !important;
-    background-color: mat.get-color-from-palette(
+    background-color: mat.m2-get-color-from-palette(
       $background,
       ui-background-light
     ) !important;
@@ -34,14 +34,14 @@
   }
 
   .featured-body {
-    background-color: mat.get-color-from-palette(
+    background-color: mat.m2-get-color-from-palette(
       $background,
       brand-citrus-lemon-lightest
     ) !important;
   }
 
   .expand-featured-work {
-    background-color: mat.get-color-from-palette(
+    background-color: mat.m2-get-color-from-palette(
       $background,
       brand-citrus-lemon-lightest
     ) !important;
@@ -52,14 +52,14 @@
   }
 
   .featured-header {
-    background-color: mat.get-color-from-palette(
+    background-color: mat.m2-get-color-from-palette(
       $background,
       brand-citrus-lemon-lightest
     ) !important;
   }
 
   .featured-work-star {
-    color: mat.get-color-from-palette(
+    color: mat.m2-get-color-from-palette(
       $foreground,
       brand-citrus-lemon
     ) !important;

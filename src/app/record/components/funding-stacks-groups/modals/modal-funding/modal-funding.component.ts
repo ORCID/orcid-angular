@@ -60,6 +60,7 @@ import { validateFundingAmount } from 'src/app/shared/validators/funding-amount/
     './modal-funding.component.scss-theme.scss',
     './modal-funding.component.scss',
   ],
+  standalone: false,
 })
 export class ModalFundingComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

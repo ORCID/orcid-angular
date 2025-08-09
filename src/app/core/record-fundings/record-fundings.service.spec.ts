@@ -35,7 +35,7 @@ describe('FundingService', () => {
   )
 
   it('should be created', () => {
-    const service: RecordFundingsService = TestBed.get(RecordFundingsService)
+    const service: RecordFundingsService = TestBed.inject(RecordFundingsService)
     expect(service).toBeTruthy()
   })
 })

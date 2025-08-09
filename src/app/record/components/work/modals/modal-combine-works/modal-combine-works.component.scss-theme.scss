@@ -9,14 +9,14 @@
   $background: map-get($theme, background);
 
   .info {
-    border-color: mat.get-color-from-palette(
+    border-color: mat.m2-get-color-from-palette(
       $foreground,
       'state-notice-light'
     ) !important;
     background-color: rgba($state-notice-light, 0.15);
 
     mat-icon {
-      color: mat.get-color-from-palette(
+      color: mat.m2-get-color-from-palette(
         $foreground,
         'state-notice-dark'
       ) !important;

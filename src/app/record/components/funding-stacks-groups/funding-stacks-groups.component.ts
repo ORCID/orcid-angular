@@ -21,6 +21,7 @@ import { TogglzService } from '../../../core/togglz/togglz.service'
   selector: 'app-fundings',
   templateUrl: './funding-stacks-groups.component.html',
   styleUrls: ['./funding-stacks-groups.component.scss'],
+  standalone: false,
 })
 export class FundingStacksGroupsComponent implements OnInit {
   $loading: Observable<boolean>
