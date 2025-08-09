@@ -76,23 +76,35 @@ jobs:
           if git ls-remote --exit-code --heads origin transifex >/dev/null 2>&1; then
             git checkout -B transifex origin/transifex
             prev_sha=$(git rev-parse HEAD)
-            echo "previous_sha=${prev_sha}" >> "$GITHUB_OUTPUT"
+            { echo "previous_sha=${prev_sha}"; } >> "$GITHUB_OUTPUT"
             # Try to merge main; if conflicts, abort and hard reset to origin/main
             if git merge --no-ff --no-edit origin/main; then
-              echo "branch_state=existing" >> "$GITHUB_OUTPUT"
-              echo "merge_strategy=merged_clean" >> "$GITHUB_OUTPUT"
+              {
+                echo "branch_state=existing"
+                echo "merge_strategy=merged_clean"
+                echo "did_merge=true"
+                echo "did_reset=false"
+              } >> "$GITHUB_OUTPUT"
             else
               echo "Merge had conflicts; aborting and resetting to origin/main"
               git merge --abort || true
               git reset --hard origin/main
-              echo "branch_state=existing" >> "$GITHUB_OUTPUT"
-              echo "merge_strategy=reset_due_to_conflicts" >> "$GITHUB_OUTPUT"
+              {
+                echo "branch_state=existing"
+                echo "merge_strategy=reset_due_to_conflicts"
+                echo "did_merge=false"
+                echo "did_reset=true"
+              } >> "$GITHUB_OUTPUT"
             fi
           else
             echo "Creating transifex branch from origin/main"
-            echo "previous_sha=none" >> "$GITHUB_OUTPUT"
-            echo "branch_state=created" >> "$GITHUB_OUTPUT"
-            echo "merge_strategy=created_from_main" >> "$GITHUB_OUTPUT"
+            {
+              echo "previous_sha=none"
+              echo "branch_state=created"
+              echo "merge_strategy=created_from_main"
+              echo "did_merge=false"
+              echo "did_reset=false"
+            } >> "$GITHUB_OUTPUT"
             git checkout -B transifex origin/main
           fi
 
@@ -126,33 +138,45 @@ jobs:
         run: |
           set -euo pipefail
           tx_version=$(tx --version 2>/dev/null || echo "unknown")
-          echo "tx_version=${tx_version}" >> "$GITHUB_OUTPUT"
-          echo "previous_sha=${{ steps.prep.outputs.previous_sha }}" >> "$GITHUB_OUTPUT"
-          echo "branch_state=${{ steps.prep.outputs.branch_state }}" >> "$GITHUB_OUTPUT"
+          {
+            echo "tx_version=${tx_version}"
+            echo "previous_sha=${{ steps.prep.outputs.previous_sha }}"
+            echo "branch_state=${{ steps.prep.outputs.branch_state }}"
+          } >> "$GITHUB_OUTPUT"
           if [ "${{ steps.commit.outputs.changes }}" = "true" ]; then
             commit_sha=$(git rev-parse HEAD)
+            short_sha=${commit_sha:0:7}
+            commit_url="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/commit/${commit_sha}"
             files_changed=$(git diff --name-only HEAD^ HEAD | wc -l | tr -d ' ')
             shortstat=$(git diff --shortstat HEAD^ HEAD | sed 's/^ *//')
-            echo "commit_sha=${commit_sha}" >> "$GITHUB_OUTPUT"
-            echo "files_changed=${files_changed}" >> "$GITHUB_OUTPUT"
-            echo "diffstat=${shortstat}" >> "$GITHUB_OUTPUT"
+            {
+              echo "commit_sha=${commit_sha}"
+              echo "files_changed=${files_changed}"
+              echo "diffstat=${shortstat}"
+            } >> "$GITHUB_OUTPUT"
             {
               echo "### Transifex run report"
               echo "- tx version: ${tx_version}"
               echo "- previous head: ${{ steps.prep.outputs.previous_sha }} (${{ steps.prep.outputs.branch_state }})"
               echo "- merge strategy: ${{ steps.prep.outputs.merge_strategy }}"
-              echo "- new commit: ${commit_sha}"
+              echo "- did merge: ${{ steps.prep.outputs.did_merge }}"
+              echo "- did reset: ${{ steps.prep.outputs.did_reset }}"
+              echo "- new commit: [${short_sha}](${commit_url})"
               echo "- changes: ${files_changed} files (${shortstat})"
             } >> "$GITHUB_STEP_SUMMARY"
           else
-            echo "commit_sha=none" >> "$GITHUB_OUTPUT"
-            echo "files_changed=0" >> "$GITHUB_OUTPUT"
-            echo "diffstat=none" >> "$GITHUB_OUTPUT"
+            {
+              echo "commit_sha=none"
+              echo "files_changed=0"
+              echo "diffstat=none"
+            } >> "$GITHUB_OUTPUT"
             {
               echo "### Transifex run report"
               echo "- tx version: ${tx_version}"
               echo "- previous head: ${{ steps.prep.outputs.previous_sha }} (${{ steps.prep.outputs.branch_state }})"
               echo "- merge strategy: ${{ steps.prep.outputs.merge_strategy }}"
+              echo "- did merge: ${{ steps.prep.outputs.did_merge }}"
+              echo "- did reset: ${{ steps.prep.outputs.did_reset }}"
               echo "- changes: none"
             } >> "$GITHUB_STEP_SUMMARY"
           fi
@@ -164,14 +188,14 @@ jobs:
           git fetch origin main transifex || true
           if git ls-remote --exit-code --heads origin transifex >/dev/null 2>&1; then
             if git diff --quiet origin/main..origin/transifex; then
-              echo "differs=false" >> "$GITHUB_OUTPUT"
+              { echo "differs=false"; } >> "$GITHUB_OUTPUT"
               echo "No differences between origin/transifex and origin/main"
             else
-              echo "differs=true" >> "$GITHUB_OUTPUT"
+              { echo "differs=true"; } >> "$GITHUB_OUTPUT"
               echo "Differences detected between origin/transifex and origin/main"
             fi
           else
-            echo "differs=false" >> "$GITHUB_OUTPUT"
+            { echo "differs=false"; } >> "$GITHUB_OUTPUT"
             echo "origin/transifex does not exist; skipping PR creation"
           fi
 
@@ -194,7 +218,16 @@ jobs:
               core.setOutput('pr_url', pr.html_url);
             } else {
               const prev = `${{ steps.prep.outputs.previous_sha }}`;
-              const prevLine = prev && prev !== 'none' ? `Previous transifex head (before reset): ${prev}` : 'Branch was created from main (no previous head).';
+              const didReset = `${{ steps.prep.outputs.did_reset }}` === 'true';
+              const didMerge = `${{ steps.prep.outputs.did_merge }}` === 'true';
+              let prevLine;
+              if (prev && prev !== 'none') {
+                if (didReset) prevLine = `Previous transifex head (before reset): ${prev}`;
+                else if (didMerge) prevLine = `Previous transifex head (before merge): ${prev}`;
+                else prevLine = `Previous transifex head: ${prev}`;
+              } else {
+                prevLine = 'Branch was created from main (no previous head).';
+              }
               const body = [
                 'Automated update of .properties files via CI.',
                 '',
