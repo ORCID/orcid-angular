@@ -1,3 +1,12 @@
+## v2.119.18 - 2025-08-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.119.17...v2.119.18)
+
+- [#2595](https://github.com/ORCID/orcid-angular/pull/2595): PD-935:Fix button height
+- [#2593](https://github.com/ORCID/orcid-angular/pull/2593): Transifex: update properties
+- [#2590](https://github.com/ORCID/orcid-angular/pull/2590): Lmendoza/pd-0000:  enable github actions translation pull
+- [#2587](https://github.com/ORCID/orcid-angular/pull/2587): Lmendoza/pd 0000
+
 ## v2.119.17 - 2025-08-08
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.119.16...v2.119.17)
