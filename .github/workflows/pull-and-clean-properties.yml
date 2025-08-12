@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 concurrency:
   group: pull-and-clean-${{ github.ref }}
@@ -15,76 +16,257 @@ concurrency:
 jobs:
   pull-clean:
     runs-on: ubuntu-latest
+    env:
+      TX_TOKEN: ${{ secrets.TRANSIFEX_TOKEN }}
+      GH_PAT: ${{ secrets.GH_PAT }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          persist-credentials: true
+          # Avoid using GITHUB_TOKEN for pushes; we'll use GH_PAT instead so downstream workflows trigger
+          persist-credentials: false
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.x'
-
-      - name: Install Transifex client (tx)
+      - name: Ensure GH_PAT is provided (required to trigger downstream workflows)
         run: |
-          python -m pip install --upgrade pip
-          pip install transifex-client
+          if [ -z "${GH_PAT:-}" ]; then
+            echo "GH_PAT secret is not set. This job requires a PAT with 'repo' and 'workflow' scopes so that pushes and PR creation trigger other workflows (like lint)." >&2
+            exit 1
+          fi
+
+      - name: Configure push auth (use GH_PAT)
+        run: |
+          git remote set-url origin https://x-access-token:${{ env.GH_PAT }}@github.com/${{ github.repository }}
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Install Transifex CLI (Go)
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/transifex/cli/master/install.sh | bash
+          # Move the tx binary into a directory on PATH for subsequent steps
+          mkdir -p "$HOME/bin"
+
+          install -m 0755 ./tx "$HOME/bin/tx"
+          echo "$HOME/bin" >> "$GITHUB_PATH"
+          command -v tx || true
+          tx --version || true
+       
 
       - name: Configure Transifex credentials
-        env:
-          TRANSIFEX_TOKEN: ${{ secrets.TRANSIFEX_TOKEN }}
         run: |
-          if [ -z "$TRANSIFEX_TOKEN" ]; then
+          if [ -z "${TX_TOKEN:-}" ]; then
             echo "TRANSIFEX_TOKEN secret is not set" >&2
             exit 1
           fi
           mkdir -p "$HOME"
           printf "%s\n" \
-            "[https://www.transifex.com]" \
-            "hostname = https://www.transifex.com" \
-            "username = api" \
-            "password = ${TRANSIFEX_TOKEN}" > "$HOME/.transifexrc"
+            "[https://app.transifex.com]" \
+            "hostname = https://app.transifex.com" \
+            "api_hostname = https://api.transifex.com" \
+            "token = ${TX_TOKEN}" > "$HOME/.transifexrc"
           chmod 600 "$HOME/.transifexrc"
           echo "Created ~/.transifexrc"
+
+      - name: Verify Transifex CLI
+        run: tx --version
 
       - name: Configure Git user
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Ensure branches are available
+      - name: Prepare transifex branch (hard reset to main)
+        id: prep
         run: |
           set -euo pipefail
           git fetch origin main transifex || true
-          # Create transifex branch if it doesn't exist on origin
-          if ! git ls-remote --exit-code --heads origin transifex >/dev/null 2>&1; then
-            echo "transifex branch not found on origin; creating from origin/main"
+          if git ls-remote --exit-code --heads origin transifex >/dev/null 2>&1; then
+            git checkout -B transifex origin/transifex
+            prev_sha=$(git rev-parse HEAD)
+            { echo "previous_sha=${prev_sha}"; } >> "$GITHUB_OUTPUT"
+            # Try to merge main; if conflicts, abort and hard reset to origin/main
+            if git merge --no-ff --no-edit origin/main; then
+              {
+                echo "branch_state=existing"
+                echo "merge_strategy=merged_clean"
+                echo "did_merge=true"
+                echo "did_reset=false"
+              } >> "$GITHUB_OUTPUT"
+            else
+              echo "Merge had conflicts; aborting and resetting to origin/main"
+              git merge --abort || true
+              git reset --hard origin/main
+              {
+                echo "branch_state=existing"
+                echo "merge_strategy=reset_due_to_conflicts"
+                echo "did_merge=false"
+                echo "did_reset=true"
+              } >> "$GITHUB_OUTPUT"
+            fi
+          else
+            echo "Creating transifex branch from origin/main"
+            {
+              echo "previous_sha=none"
+              echo "branch_state=created"
+              echo "merge_strategy=created_from_main"
+              echo "did_merge=false"
+              echo "did_reset=false"
+            } >> "$GITHUB_OUTPUT"
             git checkout -B transifex origin/main
-            git push -u origin transifex
           fi
 
+      - name: Make scripts executable
+        run: chmod +x .github/scripts/pull_and_clean_properties.sh
+
       - name: Run pull_and_clean_properties.sh
-        run: bash ./pull_and_clean_properties.sh
+        run: bash .github/scripts/pull_and_clean_properties.sh
 
       - name: Commit and push changes (if any)
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        id: commit
         run: |
           set -euo pipefail
           if [ -n "$(git status --porcelain)" ]; then
-            # Ensure we are on transifex branch as the script leaves us there
             current_branch=$(git branch --show-current)
             if [ "$current_branch" != "transifex" ]; then
               git checkout transifex
             fi
             git add -A
-            git commit -m "chore(i18n): pull and normalize .properties via CI"
-            git push origin transifex
+            git commit -m "Transifex: pull and normalize .properties via CI"
+            git push -f origin transifex
             echo "Changes pushed to transifex branch."
+            echo "changes=true" >> "$GITHUB_OUTPUT"
           else
             echo "No changes to commit."
+            echo "changes=false" >> "$GITHUB_OUTPUT"
           fi
+
+      - name: Generate outputs report
+        id: report
+        run: |
+          set -euo pipefail
+          tx_version=$(tx --version 2>/dev/null || echo "unknown")
+          {
+            echo "tx_version=${tx_version}"
+            echo "previous_sha=${{ steps.prep.outputs.previous_sha }}"
+            echo "branch_state=${{ steps.prep.outputs.branch_state }}"
+          } >> "$GITHUB_OUTPUT"
+          if [ "${{ steps.commit.outputs.changes }}" = "true" ]; then
+            commit_sha=$(git rev-parse HEAD)
+            short_sha=${commit_sha:0:7}
+            commit_url="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/commit/${commit_sha}"
+            files_changed=$(git diff --name-only HEAD^ HEAD | wc -l | tr -d ' ')
+            shortstat=$(git diff --shortstat HEAD^ HEAD | sed 's/^ *//')
+            {
+              echo "commit_sha=${commit_sha}"
+              echo "files_changed=${files_changed}"
+              echo "diffstat=${shortstat}"
+            } >> "$GITHUB_OUTPUT"
+            {
+              echo "### Transifex run report"
+              echo "- tx version: ${tx_version}"
+              echo "- previous head: ${{ steps.prep.outputs.previous_sha }} (${{ steps.prep.outputs.branch_state }})"
+              echo "- merge strategy: ${{ steps.prep.outputs.merge_strategy }}"
+              echo "- did merge: ${{ steps.prep.outputs.did_merge }}"
+              echo "- did reset: ${{ steps.prep.outputs.did_reset }}"
+              echo "- new commit: [${short_sha}](${commit_url})"
+              echo "- changes: ${files_changed} files (${shortstat})"
+            } >> "$GITHUB_STEP_SUMMARY"
+          else
+            {
+              echo "commit_sha=none"
+              echo "files_changed=0"
+              echo "diffstat=none"
+            } >> "$GITHUB_OUTPUT"
+            {
+              echo "### Transifex run report"
+              echo "- tx version: ${tx_version}"
+              echo "- previous head: ${{ steps.prep.outputs.previous_sha }} (${{ steps.prep.outputs.branch_state }})"
+              echo "- merge strategy: ${{ steps.prep.outputs.merge_strategy }}"
+              echo "- did merge: ${{ steps.prep.outputs.did_merge }}"
+              echo "- did reset: ${{ steps.prep.outputs.did_reset }}"
+              echo "- changes: none"
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Check differences between transifex and main
+        id: diff
+        run: |
+          set -euo pipefail
+          git fetch origin main transifex || true
+          if git ls-remote --exit-code --heads origin transifex >/dev/null 2>&1; then
+            if git diff --quiet origin/main..origin/transifex; then
+              { echo "differs=false"; } >> "$GITHUB_OUTPUT"
+              echo "No differences between origin/transifex and origin/main"
+            else
+              { echo "differs=true"; } >> "$GITHUB_OUTPUT"
+              echo "Differences detected between origin/transifex and origin/main"
+            fi
+          else
+            { echo "differs=false"; } >> "$GITHUB_OUTPUT"
+            echo "origin/transifex does not exist; skipping PR creation"
+          fi
+
+      - name: Open PR to main if differences (PAT)
+        if: steps.diff.outputs.differs == 'true' && env.GH_PAT != ''
+        id: openpr
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ env.GH_PAT }}
+          script: |
+            const { owner, repo } = context.repo;
+            const head = 'transifex';
+            const base = 'main';
+            const list = await github.rest.pulls.list({ owner, repo, state: 'open', base, head: `${owner}:${head}` });
+            if (list.data.length > 0) {
+              core.info('An open PR from transifex to main already exists.');
+              const pr = list.data[0];
+              core.setOutput('pr_state', 'existed');
+              core.setOutput('pr_number', String(pr.number));
+              core.setOutput('pr_url', pr.html_url);
+            } else {
+              const prev = `${{ steps.prep.outputs.previous_sha }}`;
+              const didReset = `${{ steps.prep.outputs.did_reset }}` === 'true';
+              const didMerge = `${{ steps.prep.outputs.did_merge }}` === 'true';
+              let prevLine;
+              if (prev && prev !== 'none') {
+                if (didReset) prevLine = `Previous transifex head (before reset): ${prev}`;
+                else if (didMerge) prevLine = `Previous transifex head (before merge): ${prev}`;
+                else prevLine = `Previous transifex head: ${prev}`;
+              } else {
+                prevLine = 'Branch was created from main (no previous head).';
+              }
+              const body = [
+                'Automated update of .properties files via CI.',
+                '',
+                prevLine
+              ].join('\n');
+              const created = await github.rest.pulls.create({ owner, repo, head, base, title: 'Transifex: update properties', body });
+              core.info('Opened PR from transifex to main.');
+              core.setOutput('pr_state', 'created');
+              core.setOutput('pr_number', String(created.data.number));
+              core.setOutput('pr_url', created.data.html_url);
+            }
+
+      - name: Append PR status to summary
+        if: always()
+        run: |
+          {
+            echo "### PR status";
+            if [ "${{ steps.diff.outputs.differs }}" = "true" ]; then
+              if [ "${{ steps.openpr.outputs.pr_state }}" = "created" ]; then
+                echo "- PR created: ${{ steps.openpr.outputs.pr_url }}";
+              elif [ "${{ steps.openpr.outputs.pr_state }}" = "existed" ]; then
+                echo "- PR already existed: ${{ steps.openpr.outputs.pr_url }}";
+              else
+                if [ -z "${{ env.GH_PAT }}" ]; then
+                  echo "- Differences found, but GH_PAT not set; PR not created.";
+                else
+                  echo "- Differences found, but PR was not created (step skipped or failed).";
+                fi
+              fi
+            else
+              echo "- No differences between 'transifex' and 'main'; no PR needed.";
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
 
 
