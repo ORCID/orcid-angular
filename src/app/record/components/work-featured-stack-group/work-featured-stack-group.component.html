@@ -45,7 +45,7 @@
       </div>
     </app-alert-message>
     <div
-      *ngIf="featuredWorks.length === 0 && !isPublicRecord"
+      *ngIf="featuredWorks.length === 0 && !isPublicRecord && !noWorksAdded"
       class="orc-font-body-small no-featured-works"
     >
       <p class="empty" i18n="@@shared.featuredWorksDescription">
