@@ -13,6 +13,7 @@ import { OrcidValidators } from 'src/app/validators'
   templateUrl: './deactivated.component.html',
   styleUrls: ['./deactivated.component.scss'],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class DeactivatedComponent implements OnInit {
   @Input() email: string

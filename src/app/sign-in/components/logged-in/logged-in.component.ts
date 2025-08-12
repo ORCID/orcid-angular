@@ -7,6 +7,7 @@ import { WINDOW } from '../../../cdk/window'
   selector: 'app-logged-in',
   templateUrl: './logged-in.component.html',
   styleUrls: ['./logged-in.component.scss'],
+  standalone: false,
 })
 export class LoggedInComponent implements OnInit {
   @Input() realUserOrcid: string

@@ -19,6 +19,7 @@ import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.se
     './link-account.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class LinkAccountComponent implements OnInit {
   show2FA = false

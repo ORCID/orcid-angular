@@ -26,6 +26,7 @@ import { PasswordRecovery } from 'src/app/types'
   ],
   animations: [matFormFieldAnimations.transitionMessages],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class PasswordRecoveryComponent implements OnInit, AfterViewInit {
   serverError = null

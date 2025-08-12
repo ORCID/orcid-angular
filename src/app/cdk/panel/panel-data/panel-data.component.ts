@@ -10,6 +10,7 @@ import { Subject } from 'rxjs'
     './panel-data.component.scss',
     './panel-data.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class PanelDataComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

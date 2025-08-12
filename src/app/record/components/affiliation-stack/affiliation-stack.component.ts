@@ -22,6 +22,7 @@ import { PlatformInfoService } from '../../../cdk/platform-info'
     './affiliation-stack.component.scss',
     './affiliation-stack.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class AffiliationStackComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

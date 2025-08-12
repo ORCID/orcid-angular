@@ -13,14 +13,14 @@
   }
 
   .verification {
-    background-color: mat.get-color-from-palette(
+    background-color: mat.m2-get-color-from-palette(
       $background,
       brand-primary-lightest
     );
     border-color: map-get($foreground, 'brand-primary');
 
     mat-icon {
-      color: mat.get-color-from-palette(
+      color: mat.m2-get-color-from-palette(
         $foreground,
         'brand-primary'
       ) !important;
@@ -28,7 +28,7 @@
   }
 
   .invalid {
-    background-color: mat.get-color-from-palette($warn, 50);
+    background-color: mat.m2-get-color-from-palette($warn, 50);
     border-color: map-get($foreground, 'state-warning-dark');
 
     mat-icon {

@@ -9,12 +9,13 @@
   $background: map-get($theme, background);
 
   .mat-mdc-raised-button.mat-primary:not(.mat-raised-button.mat-primary) {
-    background-color: mat.get-color-from-palette($primary, 700);
+    background-color: mat.m2-get-color-from-palette($primary, 700);
   }
 
   ::ng-deep {
     .mat-divider.green-divider {
-      border: solid 1px mat.get-color-from-palette($foreground, brand-primary);
+      border: solid 1px
+        mat.m2-get-color-from-palette($foreground, brand-primary);
     }
   }
 

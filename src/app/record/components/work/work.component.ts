@@ -7,6 +7,7 @@ import { Work } from 'src/app/types/record-works.endpoint'
   templateUrl: './work.component.html',
   styleUrls: ['./work.component.scss'],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class WorkComponent {
   @Input() work: Work

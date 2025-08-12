@@ -8,6 +8,7 @@ import { PlatformInfoService } from '../../platform-info'
   selector: 'app-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
+  standalone: false,
 })
 export class ModalComponent implements OnInit, OnDestroy {
   columns12: boolean

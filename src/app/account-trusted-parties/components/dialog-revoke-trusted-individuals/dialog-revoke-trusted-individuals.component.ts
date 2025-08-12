@@ -7,6 +7,7 @@ import { AccountTrustedIndividual } from 'src/app/types/account-trusted-individu
   selector: 'app-dialog-revoke-trusted-individuals',
   templateUrl: './dialog-revoke-trusted-individuals.component.html',
   styleUrls: ['./dialog-revoke-trusted-individuals.component.scss'],
+  standalone: false,
 })
 export class DialogRevokeTrustedIndividualsComponent implements OnInit {
   isMobile: boolean

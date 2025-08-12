@@ -42,6 +42,7 @@ import {
     './affiliations-interstitial.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class AffiliationsInterstitialComponent implements OnInit, OnDestroy {
   /** Main form group. */

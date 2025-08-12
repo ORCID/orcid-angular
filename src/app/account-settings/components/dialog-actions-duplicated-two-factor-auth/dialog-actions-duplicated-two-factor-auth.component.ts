@@ -10,6 +10,7 @@ import { TwoFactorAuthenticationService } from '../../../core/two-factor-authent
   selector: 'app-dialog-actions-duplicated-two-factor-auth',
   templateUrl: './dialog-actions-duplicated-two-factor-auth.component.html',
   styleUrls: ['./dialog-actions-duplicated-two-factor-auth.component.scss'],
+  standalone: false,
 })
 export class DialogActionsDuplicatedTwoFactorAuthComponent implements OnInit {
   showBadVerificationCode: boolean

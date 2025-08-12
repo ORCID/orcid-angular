@@ -10,6 +10,7 @@ import { WINDOW } from 'src/app/cdk/window'
   templateUrl: './news.component.html',
   styleUrls: ['./news.component.scss-theme.scss', './news.component.scss'],
   animations: [listAnimation],
+  standalone: false,
 })
 export class NewsComponent implements OnInit {
   news

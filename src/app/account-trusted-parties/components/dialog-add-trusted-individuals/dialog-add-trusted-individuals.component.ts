@@ -7,6 +7,7 @@ import { ExpandedSearchResultsContent } from 'src/app/types'
   selector: 'app-dialog-add-trusted-individuals',
   templateUrl: './dialog-add-trusted-individuals.component.html',
   styleUrls: ['./dialog-add-trusted-individuals.component.scss'],
+  standalone: false,
 })
 export class DialogAddTrustedIndividualsComponent implements OnInit {
   isMobile: boolean

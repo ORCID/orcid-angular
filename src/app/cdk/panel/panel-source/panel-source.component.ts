@@ -23,6 +23,7 @@ import { UserRecord } from 'src/app/types/record.local'
     './panel-source.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class PanelSourceComponent implements OnInit {
   closeOtherSources = $localize`:@@record.hideAllSources:Hide all sources for`

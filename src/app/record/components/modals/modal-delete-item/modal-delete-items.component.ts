@@ -26,6 +26,7 @@ import { Work } from '../../../../types/record-works.endpoint'
     './modal-delete-items.component.scss',
     './modal-delete-items.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

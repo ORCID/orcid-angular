@@ -13,6 +13,7 @@ import { RegisterObservabilityService } from '../../register-observability.servi
     '../register.style.scss',
     '../register.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class StepCComponent extends BaseStepDirective implements OnInit {
   @Input() loading

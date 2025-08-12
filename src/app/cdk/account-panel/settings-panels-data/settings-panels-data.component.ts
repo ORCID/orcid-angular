@@ -10,6 +10,7 @@ import { PlatformInfoService } from 'src/app/cdk/platform-info'
     './settings-panels-data.component.scss',
     './settings-panels-data.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class SettingsPanelsDataComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

@@ -32,6 +32,7 @@ import { CdkPortalOutlet, ComponentPortal, Portal } from '@angular/cdk/portal'
   templateUrl: './authorize.component.html',
   styleUrls: ['./authorize.component.scss'],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class AuthorizeComponent {
   @ViewChild('interstitialOutlet', { static: false, read: CdkPortalOutlet })

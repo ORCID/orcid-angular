@@ -9,6 +9,7 @@ import { UserInfo } from 'src/app/types'
   selector: 'app-record-info',
   templateUrl: './record-info.component.html',
   styleUrls: ['./record-info.component.scss'],
+  standalone: false,
 })
 export class RecordInfoComponent implements OnInit {
   $destroy: Subject<boolean> = new Subject<boolean>()

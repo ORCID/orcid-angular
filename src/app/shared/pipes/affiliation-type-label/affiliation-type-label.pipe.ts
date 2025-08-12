@@ -6,6 +6,7 @@ import {
 
 @Pipe({
   name: 'affiliationTypeLabel',
+  standalone: false,
 })
 export class AffiliationTypeLabelPipe implements PipeTransform {
   transform(value: AffiliationType): string {

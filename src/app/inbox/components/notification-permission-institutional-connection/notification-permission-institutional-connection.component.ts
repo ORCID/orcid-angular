@@ -10,6 +10,7 @@ import { InboxNotificationInstitutional } from 'src/app/types/notifications.endp
     './notification-permission-institutional-connection.component.scss',
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class NotificationPermissionInstitutionalConnectionComponent
   implements OnInit

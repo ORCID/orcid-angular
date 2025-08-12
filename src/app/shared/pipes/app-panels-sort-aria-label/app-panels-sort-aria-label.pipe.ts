@@ -2,6 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core'
 
 @Pipe({
   name: 'appPanelsSortAriaLabel',
+  standalone: false,
 })
 export class AppPanelsSortAriaLabelPipe implements PipeTransform {
   transform(panelType: any, disabled: boolean): string {

@@ -9,7 +9,7 @@ import { MatDialog } from '@angular/material/dialog'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { MonthDayYearDateToStringPipe } from 'src/app/shared/pipes/month-day-year-date-to-string/month-day-year-date-to-string.pipe'
 
-fdescribe('WorkDetailsComponent', () => {
+describe('WorkDetailsComponent', () => {
   let component: WorkDetailsComponent
   let fixture: ComponentFixture<WorkDetailsComponent>
 

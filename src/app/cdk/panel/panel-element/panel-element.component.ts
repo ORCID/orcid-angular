@@ -8,6 +8,7 @@ import { VisibilityStrings } from 'src/app/types/common.endpoint'
     './panel-element.component.scss',
     './panel-element.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class PanelElementComponent implements OnInit {
   @Input() visibility: VisibilityStrings | ''

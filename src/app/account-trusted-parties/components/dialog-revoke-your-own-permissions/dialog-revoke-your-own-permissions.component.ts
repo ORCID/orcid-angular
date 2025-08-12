@@ -7,6 +7,7 @@ import { Delegator } from 'src/app/types/trusted-individuals.endpoint'
   selector: 'app-dialog-revoke-your-own-permissions',
   templateUrl: './dialog-revoke-your-own-permissions.component.html',
   styleUrls: ['./dialog-revoke-your-own-permissions.component.scss'],
+  standalone: false,
 })
 export class DialogRevokeYourOwnPermissionsComponent implements OnInit {
   isMobile: boolean

@@ -43,6 +43,7 @@ import { OauthURLSessionManagerService } from 'src/app/core/oauth-urlsession-man
     '../../components/register.scss-theme.scss',
     '../../components/register.style.scss',
   ],
+  standalone: false,
 })
 export class RegisterComponent implements OnInit, AfterViewInit {
   @ViewChild('lastStep') lastStep: MatStep

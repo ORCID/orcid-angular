@@ -34,7 +34,6 @@ import {
     './notification.component.scss-theme.scss',
   ],
   animations: heightAnimation,
-
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -42,6 +41,7 @@ import {
       multi: true,
     },
   ],
+  standalone: false,
 })
 export class NotificationComponent
   implements OnInit, AfterViewInit, ControlValueAccessor

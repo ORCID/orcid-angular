@@ -7,6 +7,7 @@ import {
 
 @Pipe({
   name: 'contributorRoles',
+  standalone: false,
 })
 export class ContributorRolesPipe implements PipeTransform {
   transform(roles: { role: string }[]): unknown {

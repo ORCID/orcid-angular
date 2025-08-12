@@ -9,6 +9,7 @@ import { DuplicateRemoveEndpoint } from 'src/app/types/account-actions-duplicate
     './dialog-actions-duplicated.component.scss',
     './dialog-actions-duplicated.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class DialogActionsDuplicatedComponent implements OnInit {
   isMobile: boolean

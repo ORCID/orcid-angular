@@ -8,6 +8,7 @@ import { URL_REGEXP_BACKEND } from '../../../constants'
   templateUrl: './org-identifier.component.html',
   styleUrls: ['./org-identifier.component.scss'],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class OrgIdentifierComponent implements OnInit {
   @Input() orgDisambiguated: OrgDisambiguated

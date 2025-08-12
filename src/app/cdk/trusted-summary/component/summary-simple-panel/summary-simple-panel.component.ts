@@ -23,6 +23,7 @@ export interface SimpleActivityModel {
     './summary-simple-panel.component.scss',
     './summary-simple-panel.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class SummarySimplePanelComponent implements OnInit {
   @Input() simpleActivities: SimpleActivityModel[] = []

@@ -9,6 +9,7 @@ import { MaintenanceMessage } from 'src/app/types/togglz.local'
     './maintenance-message.component.scss-theme.scss',
     './maintenance-message.component.scss',
   ],
+  standalone: false,
 })
 export class MaintenanceMessageComponent implements OnInit {
   maintenanceMessage: MaintenanceMessage

@@ -53,6 +53,7 @@ export interface AffilationsComponentDialogOutput
     '../interstitial-component/affiliations-interstitial.component.scss',
     '../interstitial-component/affiliations-interstitial.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class AffiliationsInterstitialDialogComponent extends AffiliationsInterstitialComponent {
   @HostBinding('class.columns-12') desktop: boolean = false

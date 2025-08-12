@@ -13,6 +13,7 @@ import { UserSession } from 'src/app/types/session.local'
   templateUrl: './oauth-error.component.html',
   styleUrls: ['./oauth-error.component.scss'],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class OauthErrorComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

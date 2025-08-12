@@ -6,6 +6,7 @@ import { AccountTrustedOrganization } from 'src/app/types/account-trusted-organi
   selector: 'app-settings-trusted-organization',
   templateUrl: './settings-trusted-organization.component.html',
   styleUrls: ['./settings-trusted-organization.component.scss'],
+  standalone: false,
 })
 export class SettingsTrustedOrganizationComponent implements OnInit {
   @Input() trustedOrganization: AccountTrustedOrganization

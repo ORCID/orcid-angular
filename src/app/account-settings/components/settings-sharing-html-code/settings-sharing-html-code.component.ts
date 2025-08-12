@@ -7,6 +7,7 @@ import { UserSession } from 'src/app/types/session.local'
   selector: 'app-settings-sharing-html-code',
   templateUrl: './settings-sharing-html-code.component.html',
   styleUrls: ['./settings-sharing-html-code.component.scss'],
+  standalone: false,
 })
 export class SettingsSharingHtmlCodeComponent implements OnInit {
   @Output() loading = new EventEmitter<boolean>()

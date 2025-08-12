@@ -37,6 +37,7 @@ import { TogglzService } from 'src/app/core/togglz/togglz.service'
     './side-bar.component.scss-theme.scss',
     './side-bar.component.scss',
   ],
+  standalone: false,
 })
 export class SideBarComponent implements OnInit, OnDestroy {
   labelManageYourEmails = $localize`:"@@record.manageYourEmails:Manage your emails`

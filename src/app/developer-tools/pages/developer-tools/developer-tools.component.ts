@@ -44,6 +44,7 @@ import { PlatformInfoService } from 'src/app/cdk/platform-info'
     './developer-tools.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class DeveloperToolsComponent implements OnInit, OnDestroy {
   @ViewChildren('websiteInput') inputs: QueryList<MatInput>

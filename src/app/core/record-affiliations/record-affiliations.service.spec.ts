@@ -41,7 +41,7 @@ describe('AffiliationsService', () => {
   )
 
   it('should be created', () => {
-    const service: RecordAffiliationService = TestBed.get(
+    const service: RecordAffiliationService = TestBed.inject(
       RecordAffiliationService
     )
     expect(service).toBeTruthy()

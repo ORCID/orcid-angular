@@ -11,55 +11,63 @@
 
   .container {
     .logo-container {
-      color: mat.get-color-from-palette(
+      color: mat.m2-get-color-from-palette(
         $background,
         placeholder-grey
       ) !important;
     }
   }
   .top-bar {
-    color: mat.get-color-from-palette($primary, '500-contrast');
-    background-color: mat.get-color-from-palette($primary);
+    color: mat.m2-get-color-from-palette($primary, '500-contrast');
+    background-color: mat.m2-get-color-from-palette($primary);
 
     .menu-container {
       .row {
         button {
           &.active {
-            background-color: mat.get-color-from-palette($background, grey);
-            color: mat.get-contrast-color-from-palette($accent, 500);
+            background-color: mat.m2-get-color-from-palette($background, grey);
+            color: mat.m2-get-contrast-color-from-palette($accent, 500);
           }
           &.sign-in-button {
-            border-color: mat.get-color-from-palette($background, background);
-            color: mat.get-color-from-palette($primary, '500-contrast');
+            border-color: mat.m2-get-color-from-palette(
+              $background,
+              background
+            );
+            color: mat.m2-get-color-from-palette($primary, '500-contrast');
           }
         }
 
         .row {
-          color: mat.get-color-from-palette($primary, 500);
+          color: mat.m2-get-color-from-palette($primary, 500);
         }
       }
     }
   }
   .top-bar-new-info {
-    color: mat.get-color-from-palette($primary);
+    button {
+      color: mat.m2-get-color-from-palette($primary);
+    }
 
     .menu-container {
       .row {
         button {
           &.active {
-            color: mat.get-color-from-palette($accent);
+            color: mat.m2-get-color-from-palette($accent);
           }
           &.sign-in-button {
-            border-color: mat.get-color-from-palette($background, background);
-            color: mat.get-color-from-palette($primary, '500-contrast');
+            border-color: mat.m2-get-color-from-palette(
+              $background,
+              background
+            );
+            color: mat.m2-get-color-from-palette($primary, '500-contrast');
           }
         }
         button:hover,
         button:focus {
-          color: mat.get-color-from-palette($accent);
+          color: mat.m2-get-color-from-palette($accent);
         }
         .row {
-          color: mat.get-color-from-palette($primary, 500);
+          color: mat.m2-get-color-from-palette($primary, 500);
         }
       }
     }
@@ -69,29 +77,29 @@
   .columns-4 :host {
     header.container.fixed-header-mode {
       > .row {
-        background-color: mat.get-color-from-palette($background, 'card');
+        background-color: mat.m2-get-color-from-palette($background, 'card');
       }
     }
 
     .top-bar {
-      background-color: mat.get-color-from-palette($primary, 700);
+      background-color: mat.m2-get-color-from-palette($primary, 700);
       .menu-container {
         .row {
           .row {
-            background-color: mat.get-color-from-palette($primary, 600);
+            background-color: mat.m2-get-color-from-palette($primary, 600);
             button {
-              color: mat.get-color-from-palette($primary, '500-contrast');
+              color: mat.m2-get-color-from-palette($primary, '500-contrast');
             }
             .row {
               button {
-                color: mat.get-color-from-palette($primary, 500);
+                color: mat.m2-get-color-from-palette($primary, 500);
               }
-              background-color: mat.get-color-from-palette(
+              background-color: mat.m2-get-color-from-palette(
                 $background,
                 'light-grey'
               );
               .row {
-                background-color: mat.get-color-from-palette(
+                background-color: mat.m2-get-color-from-palette(
                   $background,
                   'card'
                 );
@@ -102,42 +110,42 @@
       }
     }
     .top-bar-new-info {
-      background-color: mat.get-color-from-palette($primary, 900);
-      color: mat.get-color-from-palette($primary, '500-contrast');
+      background-color: mat.m2-get-color-from-palette($primary, 900);
+      color: mat.m2-get-color-from-palette($primary, '500-contrast');
 
       .menu-container {
         .row {
           button:hover,
           button:focus {
-            background-color: mat.get-color-from-palette($accent, 200);
+            background-color: mat.m2-get-color-from-palette($accent, 200);
             color: $orcid-dark-primary-text;
           }
 
           .row {
-            background-color: mat.get-color-from-palette($primary, 600);
+            background-color: mat.m2-get-color-from-palette($primary, 600);
             button {
-              color: mat.get-color-from-palette($primary, '500-contrast');
+              color: mat.m2-get-color-from-palette($primary, '500-contrast');
             }
             button:hover,
             button:focus {
-              background-color: mat.get-color-from-palette($accent, 200);
+              background-color: mat.m2-get-color-from-palette($accent, 200);
               color: $orcid-dark-primary-text;
             }
             .row {
               button {
-                color: mat.get-color-from-palette($primary, 500);
+                color: mat.m2-get-color-from-palette($primary, 500);
               }
               button:hover,
               button:focus {
-                background-color: mat.get-color-from-palette($accent, 200);
+                background-color: mat.m2-get-color-from-palette($accent, 200);
                 color: $orcid-dark-primary-text;
               }
-              background-color: mat.get-color-from-palette(
+              background-color: mat.m2-get-color-from-palette(
                 $background,
                 'light-grey'
               );
               .row {
-                background-color: mat.get-color-from-palette(
+                background-color: mat.m2-get-color-from-palette(
                   $background,
                   'card'
                 );
@@ -157,9 +165,9 @@
   .top-bar,
   .top-bar-new-info {
     .menu-container > .row > .col > button {
-      @include mat.typography-level($orcid-custom-typography, title-alt);
+      @include mat.m2-typography-level($orcid-custom-typography, title-alt);
       &.sign-in-button {
-        @include mat.typography-level($orcid-material-typography, button);
+        @include mat.m2-typography-level($orcid-material-typography, button);
       }
     }
   }
