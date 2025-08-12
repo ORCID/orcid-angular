@@ -23,6 +23,7 @@ import { isQA } from 'src/app/shared/validators/environment-check/environment-ch
   selector: 'app-panels',
   templateUrl: './panels.component.html',
   styleUrls: ['./panels.component.scss', './panels.component.scss-theme.scss'],
+  standalone: false,
 })
 export class PanelsComponent implements OnInit {
   @Input() loading = false

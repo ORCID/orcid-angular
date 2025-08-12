@@ -8,6 +8,7 @@ import { LanguageMap } from 'src/app/types/works.endpoint'
   selector: 'app-work-details',
   templateUrl: './work-details.component.html',
   styleUrls: ['./work-details.component.scss'],
+  standalone: false,
 })
 export class WorkDetailsComponent {
   @Input() work: Work

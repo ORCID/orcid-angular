@@ -9,13 +9,13 @@
   $background: map-get($theme, background);
 
   .info {
-    color: mat.get-color-from-palette(
+    color: mat.m2-get-color-from-palette(
       $foreground,
       'state-notice-dark'
     ) !important;
   }
   :host button {
-    background: mat.get-color-from-palette($primary, 700);
+    background: mat.m2-get-color-from-palette($primary, 700);
   }
 }
 

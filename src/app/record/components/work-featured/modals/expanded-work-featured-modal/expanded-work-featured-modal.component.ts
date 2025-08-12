@@ -15,6 +15,7 @@ import { UserRecord } from 'src/app/types/record.local'
     './expanded-work-featured-modal.component.scss',
     './expanded-work-featured-modal.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class ExpandedWorkFeaturedModalComponent implements OnInit {
   closeLabel = $localize`:@@shared.closeActivityAriaLabel:Close Works`

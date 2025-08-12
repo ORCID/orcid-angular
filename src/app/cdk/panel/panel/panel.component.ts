@@ -39,6 +39,7 @@ import { ExpandedWorkFeaturedModalComponent } from 'src/app/record/components/wo
   selector: 'app-panel',
   templateUrl: './panel.component.html',
   styleUrls: ['./panel.component.scss', 'panel.component.scss-theme.scss'],
+  standalone: false,
 })
 export class PanelComponent implements OnInit {
   @Input() panelId: string

@@ -11,6 +11,7 @@ import {
 
 @Pipe({
   name: 'appPanelActivityActionAriaLabel',
+  standalone: false,
 })
 export class AppPanelActivityActionAriaLabelPipe implements PipeTransform {
   transform(panelType: string, activity: string, title: string): string {

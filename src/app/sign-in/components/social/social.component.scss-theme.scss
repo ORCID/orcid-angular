@@ -8,16 +8,16 @@
 
   .institution {
     background-color: map-get($background, 'seamlessaccess');
-    color: mat.get-color-from-palette($primary, default-contrast);
+    color: mat.m2-get-color-from-palette($primary, default-contrast);
   }
 
   .google {
-    border: 1px solid mat.get-color-from-palette($background, gray);
+    border: 1px solid mat.m2-get-color-from-palette($background, gray);
   }
 
   .facebook {
     background-color: map-get($background, 'facebook');
-    color: mat.get-color-from-palette($primary, default-contrast);
+    color: mat.m2-get-color-from-palette($primary, default-contrast);
   }
 }
 

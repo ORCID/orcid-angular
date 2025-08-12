@@ -12,6 +12,7 @@ import { InboxService } from '../../../core/inbox/inbox.service'
   templateUrl: './notification-permission.component.html',
   styleUrls: ['./notification-permission.component.scss'],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class NotificationPermissionComponent implements OnInit {
   @Input() notification: InboxNotificationPermission

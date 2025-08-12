@@ -58,6 +58,7 @@ import { WorkTypeMenu } from './work-type-menu'
     './work-form.component.scss',
     './work-form.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class WorkFormComponent implements OnInit {
   ngOrcidYear = $localize`:@@shared.year:Year`

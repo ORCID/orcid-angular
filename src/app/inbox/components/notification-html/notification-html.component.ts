@@ -5,6 +5,7 @@ import { InboxNotificationHtml } from 'src/app/types/notifications.endpoint'
   selector: 'app-notification-html',
   templateUrl: './notification-html.component.html',
   styleUrls: ['./notification-html.component.scss'],
+  standalone: false,
 })
 export class NotificationHtmlComponent implements OnInit {
   _notification: InboxNotificationHtml

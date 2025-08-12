@@ -20,10 +20,10 @@
   }
   :host.green .header {
     .notification {
-      color: mat.get-color-from-palette($accent, 900);
+      color: mat.m2-get-color-from-palette($accent, 900);
     }
     .notification-background {
-      background-color: mat.get-color-from-palette($accent, 900);
+      background-color: mat.m2-get-color-from-palette($accent, 900);
     }
   }
   :host.orange .header {
@@ -36,10 +36,10 @@
   }
   :host.blue .header {
     .notification {
-      color: mat.get-color-from-palette($primary, 900);
+      color: mat.m2-get-color-from-palette($primary, 900);
     }
     .notification-background {
-      background-color: mat.get-color-from-palette($primary, 900);
+      background-color: mat.m2-get-color-from-palette($primary, 900);
     }
   }
   .body {

@@ -44,6 +44,7 @@ import { OrcidValidators } from 'src/app/validators'
     './modal-email.component.scss',
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class ModalEmailComponent implements OnInit, OnDestroy {
   ariaLabelKnowledgeBase = $localize`:@@side-bar.ariaLabelOrcidTermsOfUseBase:ORCID knowledge base (Opens in a new tab)`

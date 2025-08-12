@@ -3,6 +3,7 @@ import { EmailFrequenciesLabels } from 'src/app/types/account-default-visibility
 
 @Pipe({
   name: 'emailFrequencyLabel',
+  standalone: false,
 })
 export class EmailFrequencyLabelPipe implements PipeTransform {
   transform(value: string): string {

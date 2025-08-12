@@ -5,6 +5,7 @@ import { ExternalIdentifier } from 'src/app/types/common.endpoint'
   selector: 'app-display-external-ids',
   templateUrl: './display-external-ids.component.html',
   styleUrls: ['./display-external-ids.component.scss'],
+  standalone: false,
 })
 export class DisplayExternalIdsComponent implements OnInit {
   @Input() externalIdentifiers: ExternalIdentifier[]

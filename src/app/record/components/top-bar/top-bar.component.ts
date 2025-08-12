@@ -25,6 +25,7 @@ import { WINDOW } from 'src/app/cdk/window'
     './top-bar.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class TopBarComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

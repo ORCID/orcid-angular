@@ -4,6 +4,6 @@
   $warn: map-get($theme, warn);
 
   mat-error {
-    color: mat.get-color-from-palette($warn, 700) !important;
+    color: mat.m2-get-color-from-palette($warn, 700) !important;
   }
 }

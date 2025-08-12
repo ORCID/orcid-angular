@@ -10,11 +10,11 @@
   }
   .university-dropdown.active > a,
   .university-dropdown.active > mat-icon {
-    color: mat.get-color-from-palette($accent, 900) !important;
+    color: mat.m2-get-color-from-palette($accent, 900) !important;
   }
   .university-dropdown > a,
   .university-dropdown > mat-icon {
-    color: mat.get-color-from-palette($primary, 500) !important;
+    color: mat.m2-get-color-from-palette($primary, 500) !important;
   }
 }
 

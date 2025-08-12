@@ -6,6 +6,7 @@ import { Directive, HostBinding, HostListener } from '@angular/core'
   // tslint:disable-next-line: directive-selector
   selector: `a[click]:not([href]):not([role]):not([tabindex]),
      a[matMenuTriggerFor]:not([href]):not([role]):not([tabindex])`,
+  standalone: false,
 })
 export class A11yLinkDirective {
   @HostBinding('attr.role') role = 'button'

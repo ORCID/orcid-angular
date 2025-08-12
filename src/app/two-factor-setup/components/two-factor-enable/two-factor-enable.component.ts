@@ -29,6 +29,7 @@ export const clipboardTooltip: MatTooltipDefaultOptions = {
     { provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: clipboardTooltip },
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class TwoFactorEnableComponent implements OnInit {
   @Output() twoFactorEnabled = new EventEmitter<{

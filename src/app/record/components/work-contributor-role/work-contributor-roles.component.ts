@@ -27,6 +27,7 @@ import { MatSelect } from '@angular/material/select'
   viewProviders: [
     { provide: ControlContainer, useExisting: FormGroupDirective },
   ],
+  standalone: false,
 })
 export class WorkContributorRolesComponent implements OnInit {
   deleteLabel = $localize`:@@shared.deleteActivityAriaLabel:Delete`

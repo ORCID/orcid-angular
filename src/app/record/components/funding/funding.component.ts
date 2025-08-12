@@ -7,6 +7,7 @@ import { Funding, LanguageMap } from 'src/app/types/record-funding.endpoint'
   templateUrl: './funding.component.html',
   styleUrls: ['./funding.component.scss'],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class FundingComponent implements OnInit {
   @Input() funding: Funding

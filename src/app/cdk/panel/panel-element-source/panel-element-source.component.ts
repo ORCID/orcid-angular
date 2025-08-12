@@ -7,6 +7,7 @@ import { Component, Input, OnInit } from '@angular/core'
     './panel-element-source.component.scss',
     './panel-element-source.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class PanelElementSourceComponent implements OnInit {
   @Input() name: string

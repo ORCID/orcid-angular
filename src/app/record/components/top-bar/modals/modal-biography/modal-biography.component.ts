@@ -30,6 +30,7 @@ import { WINDOW } from '../../../../../cdk/window'
     './modal-biography.component.scss-theme.scss',
     './modal-biography.component.scss',
   ],
+  standalone: false,
 })
 export class ModalBiographyComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

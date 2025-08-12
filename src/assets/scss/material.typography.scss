@@ -5,32 +5,35 @@
 // .
 // .
 
-$orcid-material-typography: mat.define-typography-config(
+$orcid-material-typography: mat.m2-define-typography-config(
   $font-family: '"Noto Sans", sans-serif',
   $headline-1:
-    mat.define-typography-level(96px, 96px, 200, $letter-spacing: -1.5px),
+    mat.m2-define-typography-level(96px, 96px, 200, $letter-spacing: -1.5px),
   $headline-2:
-    mat.define-typography-level(60px, normal, 300, $letter-spacing: -0.5px),
+    mat.m2-define-typography-level(60px, normal, 300, $letter-spacing: -0.5px),
   $headline-3:
-    mat.define-typography-level(48px, 48px, 400, $letter-spacing: 0px),
+    mat.m2-define-typography-level(48px, 48px, 400, $letter-spacing: 0px),
   $headline-4:
-    mat.define-typography-level(32px, normal, 500, $letter-spacing: 0.25px),
+    mat.m2-define-typography-level(32px, normal, 500, $letter-spacing: 0.25px),
   $headline-5:
-    mat.define-typography-level(24px, normal, 500, $letter-spacing: 0px),
+    mat.m2-define-typography-level(24px, normal, 500, $letter-spacing: 0px),
   $headline-6:
-    mat.define-typography-level(20px, normal, 400, $letter-spacing: 0.15px),
+    mat.m2-define-typography-level(20px, normal, 400, $letter-spacing: 0.15px),
   $subtitle-1:
-    mat.define-typography-level(16px, 28px, 400, $letter-spacing: 0.15px),
-  $body-1: mat.define-typography-level(14px, 24px, 400, $letter-spacing: 0.1px),
-  $subtitle-2: mat.define-typography-level(14px, 1.75, 400),
-  $body-2: mat.define-typography-level(16px, 20px, 400),
-  $caption: mat.define-typography-level(12px, 16px, 400, $letter-spacing: 0.4px),
-  $button: mat.define-typography-level(14px, normal, 700, $letter-spacing: 0px),
+    mat.m2-define-typography-level(16px, 28px, 400, $letter-spacing: 0.15px),
+  $body-1:
+    mat.m2-define-typography-level(14px, 24px, 400, $letter-spacing: 0.1px),
+  $subtitle-2: mat.m2-define-typography-level(14px, 1.75, 400),
+  $body-2: mat.m2-define-typography-level(16px, 20px, 400),
+  $caption:
+    mat.m2-define-typography-level(12px, 16px, 400, $letter-spacing: 0.4px),
+  $button:
+    mat.m2-define-typography-level(14px, normal, 700, $letter-spacing: 0px),
 );
 
 $orcid-custom-typography: (
   title-alt:
-    mat.define-typography-level(18px, normal, 600, $letter-spacing: 1.3px),
+    mat.m2-define-typography-level(18px, normal, 600, $letter-spacing: 1.3px),
 );
 // .
 // .
@@ -46,14 +49,14 @@ $orcid-custom-typography: (
   .mat-button-font-spaced {
     // Code from https://github.com/angular/components/blob/8.2.x/src/material/button/_button-theme.scss#L161
     font: {
-      font-family: mat.font-family($config, button);
-      size: mat.font-size($config, button);
-      weight: mat.font-weight($config, button);
+      font-family: mat.m2-font-family($config, button);
+      size: mat.m2-font-size($config, button);
+      weight: mat.m2-font-weight($config, button);
     }
   }
 
   .mat-button-font-spaced {
-    letter-spacing: mat.letter-spacing($config, button) !important;
+    letter-spacing: mat.m2-letter-spacing($config, button) !important;
   }
 
   .mat-button-wrap-text {
@@ -70,55 +73,67 @@ $orcid-custom-typography: (
 
 @mixin orcid-typography-classes-generator($config) {
   .orc-font-display-large {
-    font-family: mat.font-family($config, button);
-    size: mat.font-size($config, headline-1); // 94pxfont-style: normal;
+    font-family: mat.m2-font-family($config, button);
+    size: mat.m2-font-size($config, headline-1); // 94pxfont-style: normal;
     letter-spacing: -1.5px;
   }
   .orc-font-display {
-    font-family: mat.font-family($config, button);
-    font-size: mat.font-size($config, headline-2); // 60px;font-style: normal;
+    font-family: mat.m2-font-family($config, button);
+    font-size: mat.m2-font-size(
+      $config,
+      headline-2
+    ); // 60px;font-style: normal;
     letter-spacing: -0.5px;
   }
   .orc-font-display-small {
-    font-family: mat.font-family($config, button);
-    font-size: mat.font-size($config, headline-3); // 48px;font-style: normal;
+    font-family: mat.m2-font-family($config, button);
+    font-size: mat.m2-font-size(
+      $config,
+      headline-3
+    ); // 48px;font-style: normal;
     letter-spacing: normal;
   }
   .orc-font-heading-large {
-    font-family: mat.font-family($config, button);
+    font-family: mat.m2-font-family($config, button);
     font-size: 40px;
     font-style: normal;
     letter-spacing: 0.5px;
   }
   .orc-font-heading {
-    font-family: mat.font-family($config, button);
-    font-size: mat.font-size($config, headline-4); // 32px;font-style: normal;
+    font-family: mat.m2-font-family($config, button);
+    font-size: mat.m2-font-size(
+      $config,
+      headline-4
+    ); // 32px;font-style: normal;
     letter-spacing: 0.5px;
   }
   .orc-font-heading-small {
-    font-family: mat.font-family($config, button);
-    font-size: mat.font-size($config, headline-5); // 24px;font-style: normal;
+    font-family: mat.m2-font-family($config, button);
+    font-size: mat.m2-font-size(
+      $config,
+      headline-5
+    ); // 24px;font-style: normal;
     letter-spacing: 0.5px;
   }
   .orc-font-body-large {
-    font-family: mat.font-family($config, button);
+    font-family: mat.m2-font-family($config, button);
     font-size: 18px;
     font-style: normal;
     letter-spacing: normal;
   }
   .orc-font-body {
-    font-family: mat.font-family($config, button);
-    font-size: mat.font-size($config, body-2); // 16px;font-style: normal;
+    font-family: mat.m2-font-family($config, button);
+    font-size: mat.m2-font-size($config, body-2); // 16px;font-style: normal;
     letter-spacing: normal;
   }
   .orc-font-body-small {
-    font-family: mat.font-family($config, button);
-    font-size: mat.font-size($config, body-1); // 14pxfont-style: normal;
+    font-family: mat.m2-font-family($config, button);
+    font-size: mat.m2-font-size($config, body-1); // 14pxfont-style: normal;
     letter-spacing: 0.25px;
   }
   .orc-font-small-print {
-    font-family: mat.font-family($config, button);
-    font-size: mat.font-size($config, caption); // 12pxfont-style: normal;
+    font-family: mat.m2-font-family($config, button);
+    font-size: mat.m2-font-size($config, caption); // 12pxfont-style: normal;
     letter-spacing: 0.5px;
     font-weight: normal;
   }

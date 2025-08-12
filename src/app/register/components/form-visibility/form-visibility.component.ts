@@ -43,6 +43,7 @@ import { takeUntil } from 'rxjs/operators'
       multi: true,
     },
   ],
+  standalone: false,
 })
 export class FormVisibilityComponent
   extends BaseForm

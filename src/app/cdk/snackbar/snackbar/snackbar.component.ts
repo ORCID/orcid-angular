@@ -11,6 +11,7 @@ import { take } from 'rxjs/operators'
     './snackbar.component.scss.theme.scss',
     './snackbar.component.scss',
   ],
+  standalone: false,
 })
 export class SnackbarComponent implements OnInit {
   @HostBinding('attr.dir') _contentDirection: ScreenDirection = 'ltr'

@@ -29,6 +29,7 @@ import {
     './modal-country.component.scss-theme.scss',
     './modal-country.component.scss',
   ],
+  standalone: false,
 })
 export class ModalCountryComponent implements OnInit, OnDestroy {
   ariaLabelSave = $localize`:@@side-bar.ariaLabelCountrySave:Save changes to Countries`

@@ -12,6 +12,7 @@ import { ApplicationRoutes } from '../../constants'
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss-theme.scss', './search.component.scss'],
+  standalone: false,
 })
 export class SearchComponent implements OnInit {
   labelSearch = $localize`:@@layout.ariaLabelSearch:Search the ORCID registry`

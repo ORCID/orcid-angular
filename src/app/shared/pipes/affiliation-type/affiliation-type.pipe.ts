@@ -3,6 +3,7 @@ import { AffiliationType } from '../../../types/record-affiliation.endpoint'
 
 @Pipe({
   name: 'affiliationType',
+  standalone: false,
 })
 export class AffiliationTypePipe implements PipeTransform {
   transform(value: string): AffiliationType {

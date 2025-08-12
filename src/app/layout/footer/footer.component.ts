@@ -9,6 +9,7 @@ import { RecordUtil } from 'src/app/shared/utils/record.util'
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss-theme.scss', './footer.component.scss'],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class FooterComponent implements OnInit {
   platform

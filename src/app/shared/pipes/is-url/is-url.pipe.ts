@@ -3,6 +3,7 @@ import { URL_REGEXP } from '../../../constants'
 
 @Pipe({
   name: 'isUrl',
+  standalone: false,
 })
 export class IsUrlPipe implements PipeTransform {
   transform(value: string): boolean {

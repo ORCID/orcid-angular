@@ -30,6 +30,7 @@ import { BaseForm } from '../BaseForm'
       multi: true,
     },
   ],
+  standalone: false,
 })
 export class FormNotificationsComponent extends BaseForm implements OnInit {
   constructor(private _register: RegisterService) {

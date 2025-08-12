@@ -44,6 +44,7 @@ import { OrcidValidators } from '../../../../../validators'
     './modal-name.component.scss-theme.scss',
     './modal-name.component.scss',
   ],
+  standalone: false,
 })
 export class ModalNameComponent implements OnInit, OnDestroy {
   @ViewChildren('nameInput') inputs: QueryList<ElementRef>

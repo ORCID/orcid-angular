@@ -6,22 +6,28 @@
   $background: map-get($theme, background);
 
   .title {
-    background-color: mat.get-color-from-palette(
+    background-color: mat.m2-get-color-from-palette(
       $background,
       brand-citrus-lemon-lightest
     ) !important;
   }
 
   app-modal-header {
-    background-color: mat.get-color-from-palette(
+    background-color: mat.m2-get-color-from-palette(
       $background,
       brand-citrus-lemon
     ) !important;
-    color: mat.get-color-from-palette($foreground, text-dark-high) !important;
+    color: mat.m2-get-color-from-palette(
+      $foreground,
+      text-dark-high
+    ) !important;
   }
 
   .featured-works-star {
-    color: mat.get-color-from-palette($foreground, text-light-high) !important;
+    color: mat.m2-get-color-from-palette(
+      $foreground,
+      text-light-high
+    ) !important;
   }
 }
 

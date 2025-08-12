@@ -22,7 +22,9 @@
     <mat-form-field appearance="outline" class="row deactivate">
       <mat-label i18n="@@ngOrcid.signin.email"> Email </mat-label>
       <input matInput formControlName="email" appTrim />
-      <mat-hint i18n="@@ngOrcid.signin.emailHint">example@email.com</mat-hint>
+      <mat-hint i18n="@@ngOrcid.signin.emailHint"
+        >example&#64;email.com</mat-hint
+      >
 
       <mat-error
         i18n="@@ngOrcid.signin.requiredEmail"
@@ -36,7 +38,7 @@
           emailFormControl.hasError('email') ||
           emailFormControl.hasError('pattern')
         "
-        >Use the format example@email.com
+        >Use the format example&#64;email.com
       </mat-error>
     </mat-form-field>
     <button
