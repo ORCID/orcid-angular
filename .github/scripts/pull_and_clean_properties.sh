@@ -1,4 +1,3 @@
-
 #!/bin/bash
 # Function to process each .properties file
 process_file() {
