@@ -1,0 +1,28 @@
+@use '@angular/material' as mat;
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+@mixin work-stack-group-theme($theme) {
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  .title {
+    background-color: mat.get-color-from-palette(
+      $background,
+      brand-citrus-lemon-lightest
+    ) !important;
+  }
+
+  app-modal-header {
+    background-color: mat.get-color-from-palette(
+      $background,
+      brand-citrus-lemon
+    ) !important;
+    color: mat.get-color-from-palette($foreground, text-dark-high) !important;
+  }
+
+  .featured-works-star {
+    color: mat.get-color-from-palette($foreground, text-light-high) !important;
+  }
+}
+
+@include work-stack-group-theme($orcid-app-theme);

@@ -1,0 +1,26 @@
+:host {
+  border: solid 1px;
+  display: block;
+  border-radius: 4px;
+}
+
+app-panel-data {
+  padding: 0;
+}
+
+.header {
+  .featured-works-star {
+    margin-right: 8px;
+  }
+  line-height: 24px;
+  padding: 0;
+  display: flex;
+}
+
+.body {
+  padding: 16px;
+}
+
+.summary {
+  margin-bottom: 16px;
+}
