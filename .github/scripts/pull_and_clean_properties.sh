@@ -1,7 +1,5 @@
 
 #!/bin/bash
-
-
 # Function to process each .properties file
 process_file() {
   local file=$1
