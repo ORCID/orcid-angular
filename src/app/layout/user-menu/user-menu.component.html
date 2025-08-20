@@ -153,15 +153,6 @@
   <button
     mat-menu-item
     *ngIf="userInfo && userInfo['ADMIN_MENU']"
-    (click)="goto('manage-members')"
-    id="cy-manage-members"
-  >
-    <mat-icon>group</mat-icon>
-    <span i18n="#sentenceCase@@ngOrcid.manageMembers">Manage members</span>
-  </button>
-  <button
-    mat-menu-item
-    *ngIf="userInfo && userInfo['ADMIN_MENU']"
     (click)="goto('admin-actions')"
     id="cy-admin-actions"
   >
