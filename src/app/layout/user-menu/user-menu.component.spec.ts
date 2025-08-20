@@ -37,7 +37,7 @@ describe('UserMenuComponent', () => {
   let fixture: ComponentFixture<UserMenuComponent>
   let togglzService: TogglzService
   let fakeInboxService: InboxService
-  let fakeUserService: UserService
+  let fakeUserService: jasmine.SpyObj<UserService>
   let loader: HarnessLoader
 
   beforeEach(() => {
@@ -86,6 +86,31 @@ describe('UserMenuComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy()
+  })
+
+  it('should display user menu options when clicked', async () => {
+    const matMenu = await loader.getHarness(MatMenuHarness)
+    await matMenu.open()
+
+    fixture.detectChanges()
+
+    const isMatMenuOpen = await matMenu.isOpen()
+    const matMenuItems: MatMenuItemHarness[] = await matMenu.getItems()
+    const myOrcidItem = await matMenuItems[0].getText()
+    const notificationsItem = await matMenuItems[1].getText()
+    const accountSettingsItem = await matMenuItems[2].getText()
+    const trustedPartiesItem = await matMenuItems[3].getText()
+    const developerToolsItem = await matMenuItems[4].getText()
+    const logoutItem = await matMenuItems[5].getText()
+
+    expect(isMatMenuOpen).toBe(true)
+    expect(matMenuItems.length).toBe(6)
+    expect(myOrcidItem).toContain('View my ORCID record')
+    expect(notificationsItem).toContain('Notifications inbox')
+    expect(accountSettingsItem).toContain('Account settings')
+    expect(trustedPartiesItem).toContain('Trusted parties')
+    expect(developerToolsItem).toContain('Developer tools')
+    expect(logoutItem).toContain('Logout')
   })
 
   it('should display user admin actions option if user is admin', async () => {
