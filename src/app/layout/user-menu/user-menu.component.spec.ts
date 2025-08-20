@@ -25,7 +25,10 @@ import { of, ReplaySubject } from 'rxjs'
 import { Config } from '../../types/togglz.endpoint'
 import { MatIconModule } from '@angular/material/icon'
 import { MatIconHarness } from '@angular/material/icon/testing'
-import { MatMenuHarness, MatMenuItemHarness } from '@angular/material/menu/testing'
+import {
+  MatMenuHarness,
+  MatMenuItemHarness,
+} from '@angular/material/menu/testing'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 
@@ -86,10 +89,10 @@ describe('UserMenuComponent', () => {
   })
 
   it('should display user admin actions option if user is admin', async () => {
-    let mockUserSessionResponse: UserSession = getUserSession();
-    mockUserSessionResponse.userInfo.ADMIN_MENU = 'true';
+    let mockUserSessionResponse: UserSession = getUserSession()
+    mockUserSessionResponse.userInfo.ADMIN_MENU = 'true'
 
-    component.userInfo = mockUserSessionResponse.userInfo;
+    component.userInfo = mockUserSessionResponse.userInfo
 
     fixture.detectChanges()
 
@@ -102,7 +105,7 @@ describe('UserMenuComponent', () => {
     const matMenuItems: MatMenuItemHarness[] = await matMenu.getItems()
     const adminPageItem = await matMenuItems[5].getText()
 
-    expect(isMatMenuOpen).toBe(true)  
+    expect(isMatMenuOpen).toBe(true)
     expect(matMenuItems.length).toBe(7)
     expect(adminPageItem).toContain('Admin page')
   })

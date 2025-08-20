@@ -2,7 +2,7 @@
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.120.1...v2.120.2)
 
-- [#2600](https://github.com/ORCID/orcid-angular/pull/2600): PD-0000: Update CI node to  22
+- [#2600](https://github.com/ORCID/orcid-angular/pull/2600): PD-0000: Update CI node to 22
 
 ## v2.120.1 - 2025-08-12
 
