@@ -1,3 +1,11 @@
+## v2.120.3 - 2025-08-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.120.2...v2.120.3)
+
+### Refactor
+
+- Remove `manage members` option from user menu (#2603)
+
 ## v2.120.2 - 2025-08-12
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.120.1...v2.120.2)
