@@ -1,3 +1,11 @@
+## v2.120.4 - 2025-08-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.120.3...v2.120.4)
+
+### Refactor
+
+- Remove developer tools from the user menu for members (#2604)
+
 ## v2.120.3 - 2025-08-20
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.120.2...v2.120.3)
