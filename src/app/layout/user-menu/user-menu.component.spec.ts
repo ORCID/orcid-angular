@@ -25,7 +25,7 @@ import { of, ReplaySubject } from 'rxjs'
 import { Config } from '../../types/togglz.endpoint'
 import { MatIconModule } from '@angular/material/icon'
 import { MatIconHarness } from '@angular/material/icon/testing'
-import { MatMenuHarness } from '@angular/material/menu/testing'
+import { MatMenuHarness, MatMenuItemHarness } from '@angular/material/menu/testing'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 
@@ -85,6 +85,28 @@ describe('UserMenuComponent', () => {
     expect(component).toBeTruthy()
   })
 
+  it('should display user admin actions option if user is admin', async () => {
+    let mockUserSessionResponse: UserSession = getUserSession();
+    mockUserSessionResponse.userInfo.ADMIN_MENU = 'true';
+
+    component.userInfo = mockUserSessionResponse.userInfo;
+
+    fixture.detectChanges()
+
+    const matMenu = await loader.getHarness(MatMenuHarness)
+    await matMenu.open()
+
+    fixture.detectChanges()
+
+    const isMatMenuOpen = await matMenu.isOpen()
+    const matMenuItems: MatMenuItemHarness[] = await matMenu.getItems()
+    const adminPageItem = await matMenuItems[5].getText()
+
+    expect(isMatMenuOpen).toBe(true)  
+    expect(matMenuItems.length).toBe(7)
+    expect(adminPageItem).toContain('Admin page')
+  })
+
   it('should display 3 as unread notifications count', async () => {
     const userMenuButton = fixture.debugElement.query(By.css('#cy-user-info'))
     userMenuButton.triggerEventHandler('click', null)
@@ -107,6 +129,7 @@ function getUserSession(): UserSession {
   userSession.userInfo = {
     REAL_USER_ORCID: '0000-0000-0000-000X',
     EFFECTIVE_USER_ORCID: '0000-0000-0000-000X',
+    IN_DELEGATION_MODE: 'false',
   } as UserInfo
   userSession.loggedIn = true
   userSession.displayName = 'Test Name'
