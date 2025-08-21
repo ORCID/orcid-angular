@@ -16,7 +16,6 @@ import { OauthURLSessionManagerService } from '../core/oauth-urlsession-manager/
 import { TogglzService } from '../core/togglz/togglz.service'
 import { fork } from 'child_process'
 import { OauthParameters } from '../types'
-import {query} from "@angular/animations";
 
 @Injectable({
   providedIn: 'root',
