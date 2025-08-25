@@ -1,8 +1,24 @@
+## v2.120.4 - 2025-08-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.120.3...v2.120.4)
+
+### Refactor
+
+- Remove developer tools from the user menu for members (#2604)
+
+## v2.120.3 - 2025-08-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.120.2...v2.120.3)
+
+### Refactor
+
+- Remove `manage members` option from user menu (#2603)
+
 ## v2.120.2 - 2025-08-12
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.120.1...v2.120.2)
 
-- [#2600](https://github.com/ORCID/orcid-angular/pull/2600): PD-0000: Update CI node to  22
+- [#2600](https://github.com/ORCID/orcid-angular/pull/2600): PD-0000: Update CI node to 22
 
 ## v2.120.1 - 2025-08-12
 
