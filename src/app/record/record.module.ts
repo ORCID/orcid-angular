@@ -88,6 +88,7 @@ import { LoginMainInterstitialsManagerService } from '../core/login-interstitial
 import { WorkFeaturedStackGroupComponent } from './components/work-featured-stack-group/work-featured-stack-group.component'
 import { WorkFeaturedComponent } from './components/work-featured/work-featured.component'
 import { ExpandedWorkFeaturedModalComponent } from './components/work-featured/modals/expanded-work-featured-modal/expanded-work-featured-modal.component'
+import { ManageWorkFeaturedModalComponent } from './components/work-featured/modals/manage-work-featured-modal/manage-work-featured-modal.component'
 import { WorkDetailsComponent } from './components/work-details/work-details.component'
 
 @NgModule({
@@ -140,6 +141,7 @@ import { WorkDetailsComponent } from './components/work-details/work-details.com
     WorkFormComponent,
     WorkModalComponent,
     ExpandedWorkFeaturedModalComponent,
+    ManageWorkFeaturedModalComponent,
     ModalCombineWorksWithSelectorComponent,
     WorkContributorRolesComponent,
     WorkContributorsComponent,

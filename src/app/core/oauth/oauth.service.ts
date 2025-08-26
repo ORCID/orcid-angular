@@ -284,7 +284,6 @@ export class OauthService {
     clientId: string,
     redirectUri: string
   ): Observable<ValidateRedirectUriResponse> {
-    console.log('Validating redirect URI:', redirectUri)
     const url = `${runtimeEnvironment.AUTH_SERVER}validateRedirectUri`
 
     // JSON body instead of URL-encoded params
