@@ -196,7 +196,6 @@ export class PanelsComponent implements OnInit {
   }
 
   openFeaturedWorksManage() {
-    console.log('openFeaturedWorksManage')
     if (this.type === 'featured-works' && !this.isPublicRecord) {
       this.openModal(ManageWorkFeaturedModalComponent)
     }

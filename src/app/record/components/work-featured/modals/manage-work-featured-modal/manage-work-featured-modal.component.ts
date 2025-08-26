@@ -96,8 +96,6 @@ export class ManageWorkFeaturedModalComponent implements OnInit, OnDestroy {
       .updateFeaturedWorks(currentOrderMap, true)
       .pipe(takeUntil(this.$destroy))
       .subscribe((ok) => {
-        // eslint-disable-next-line no-console
-        console.log('Featured works updated:', ok, currentOrderMap)
         this._dialogRef.close(currentOrderMap)
       })
   }
