@@ -18,6 +18,7 @@ import { ModalWorksSearchLinkComponent } from '../../../record/components/work-s
 import { VerificationEmailModalService } from '../../../core/verification-email-modal/verification-email-modal.service'
 import { UserRecord } from '../../../types/record.local'
 import { isQA } from 'src/app/shared/validators/environment-check/environment-check'
+import { ManageWorkFeaturedModalComponent } from 'src/app/record/components/work-featured/modals/manage-work-featured-modal/manage-work-featured-modal.component'
 
 @Component({
   selector: 'app-panels',
@@ -192,5 +193,12 @@ export class PanelsComponent implements OnInit {
       this.isMobile = platform.columns4 || platform.columns8
     })
     this.IS_QA = isQA()
+  }
+
+  openFeaturedWorksManage() {
+    console.log('openFeaturedWorksManage')
+    if (this.type === 'featured-works' && !this.isPublicRecord) {
+      this.openModal(ManageWorkFeaturedModalComponent)
+    }
   }
 }

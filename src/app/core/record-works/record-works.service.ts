@@ -31,6 +31,7 @@ import { VisibilityStrings } from '../../types/common.endpoint'
 import { DEFAULT_PAGE_SIZE, EXTERNAL_ID_TYPE_WORK } from 'src/app/constants'
 import { RecordImportWizard } from '../../types/record-peer-review-import.endpoint'
 import { SortOrderType } from '../../types/sort'
+import { TogglzService } from 'src/app/core/togglz/togglz.service'
 
 @Injectable({
   providedIn: 'root',
@@ -57,12 +58,13 @@ export class RecordWorksService {
   }
 
   public get $loadingFeatured() {
-    return this._$loading.asObservable()
+    return this._$loadingFeatured.asObservable()
   }
 
   constructor(
     private _http: HttpClient,
-    private _errorHandler: ErrorHandlerService
+    private _errorHandler: ErrorHandlerService,
+    private _togglz: TogglzService
   ) {}
 
   /**
@@ -165,26 +167,63 @@ export class RecordWorksService {
    */
   getFeaturedWorks(options: UserRecordOptions): Observable<Work[]> {
     this._$loadingFeatured.next(true)
-    let url: string
-    if (options.publicRecordId) {
-      url = options.publicRecordId + '/featuredWorks.json'
-    } else {
-      url = 'works/featuredWorks.json'
-    }
 
-    this._http
-      .get<Work[]>(runtimeEnvironment.API_WEB + url)
+    this._togglz
+      .getStateOf('FEATURED_WORKS_UI')
+      .pipe(take(1))
+      .subscribe((enabled) => {
+        if (!enabled) {
+          this._$loadingFeatured.next(false)
+          this.$featuredWorkSubject.next([])
+          return
+        }
+
+        let url: string
+        if (options.publicRecordId) {
+          url = options.publicRecordId + '/featuredWorks.json'
+        } else {
+          url = 'works/featuredWorks.json'
+        }
+
+        this._http
+          .get<Work[]>(runtimeEnvironment.API_WEB + url)
+          .pipe(
+            retry(3),
+            catchError((error) => this._errorHandler.handleError(error)),
+            tap((data) => {
+              this._$loadingFeatured.next(false)
+              this.$featuredWorkSubject.next(data)
+            })
+          )
+          .subscribe()
+      })
+
+    return this.$featuredWorkSubject.asObservable()
+  }
+
+  /**
+   * Update featured works ordering
+   * Payload: map of putCode -> position index (1-based). To delete, send `undefined`.
+   */
+  updateFeaturedWorks(
+    featuredOrder: { [putCode: string]: number | undefined },
+    requireReloadAllWotks: boolean = false
+  ): Observable<boolean> {
+    return this._http
+      .put<boolean>(
+        runtimeEnvironment.API_WEB + 'works/featuredWorks.json',
+        featuredOrder
+      )
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        tap((data) => {
-          this._$loadingFeatured.next(false)
-          this.$featuredWorkSubject.next(data)
+        tap(() => {
+          this.getFeaturedWorks({ forceReload: true })
+          if (requireReloadAllWotks) {
+            this.getWorks({ forceReload: true })
+          }
         })
       )
-      .subscribe()
-
-    return this.$featuredWorkSubject.asObservable()
   }
 
   private calculateVisibilityErrors(groups: WorkGroup[]): WorkGroup[] {

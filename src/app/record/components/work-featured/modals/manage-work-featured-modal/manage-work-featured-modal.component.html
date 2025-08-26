@@ -1,0 +1,130 @@
+<app-modal [loading]="loading" [noSidebar]="true">
+  <app-modal-header [closeLabel]="closeLabel">
+    <ng-container i18n="@@shared.featuredWorks">Featured works</ng-container>
+  </app-modal-header>
+
+  <app-modal-footer>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="saveEvent()"
+      i18n="@@shared.saveChanges"
+      id="save-featured-works-button"
+      [attr.aria-label]="saveAndClose"
+    >
+      Save changes
+    </button>
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="closeEvent()"
+      i18n="@@shared.cancel"
+      id="cancel-featured-works-button"
+      [attr.aria-label]="cancelAndClose"
+    >
+      Cancel
+    </button>
+  </app-modal-footer>
+
+  <div class="intro orc-font-body-small">
+    <ng-container i18n="@@shared.featuredWorksIntro"
+      >Select up to 5 works to be featured on your ORCID record. Featured works
+      are highlighted in their own section above your other
+      outputs.</ng-container
+    >
+  </div>
+
+  <h2 class="orc-font-body">
+    <span i18n="@@shared.yourFeaturedWorks">Your featured works</span>
+    <span class="count"> ({{ works?.length || 0 }}/{{ maxFeatured }})</span>
+  </h2>
+
+  <div class="container no-padding">
+    <section id="featured-works-manage">
+      <div
+        class="row featured-works-list"
+        id="featured-works-dropList"
+        cdkDropList
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div
+          cdkDrag
+          class="row featured-work-box card"
+          *ngFor="let w of works; let i = index"
+          (cdkDragStarted)="dragStarted($event)"
+          (cdkDragEnded)="dragEnded($event)"
+        >
+          <div class="row featured-work-box card drag-placeholder" *cdkDragPlaceholder [style.height.px]="draggedItemHeight"></div>
+          <div class="row featured-work-line">
+            <!-- Drag handle container -->
+            <div class="handle">
+              <img
+                class="icon-drag"
+                cdkDragHandle
+                src="./assets/vectors/draggable.svg"
+                aria-label="drag handle"
+              />
+            </div>
+
+            <!-- Star + text container -->
+            <div class="content-wrapper">
+              <div class="row">
+                <div class="star">
+                  <mat-icon> star_filled </mat-icon>
+                </div>
+                <div class="content">
+                  <div class="title-line">
+                    <strong class="featured-title orc-font-body">
+                      {{ w?.title?.value }}
+                    </strong>
+                  </div>
+                  <div
+                    class="orc-font-body-small general-data"
+                    *ngIf="w?.journalTitle"
+                  >
+                    {{ w.journalTitle.value }}
+                  </div>
+                  <div class="orc-font-body-small general-data">
+                    <ng-container *ngIf="w?.publicationDate?.year">
+                      {{ w.publicationDate | monthDayYearDateToString }} |
+                    </ng-container>
+                    {{ w?.workType.value | recordWorkTypeLabel }}
+                    <ng-container
+                      *ngIf="
+                        w?.contributorsGroupedByOrcid
+                          | recordHolderRoles
+                            : 'true'
+                            : userRecord?.userInfo
+                                ?.EFFECTIVE_USER_ORCID as roles
+                      "
+                    >
+                      <ng-container *ngIf="roles">
+                        |
+                        <span class="record-holder">{{ roles }}</span>
+                      </ng-container>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Close button container -->
+            <div class="close-wrapper">
+              <button
+                (click)="remove(w)"
+                mat-icon-button
+                class="delete-button"
+                [attr.aria-label]="'Remove ' + (w?.title?.value || '')"
+              >
+                <mat-icon
+                  class="material-icons-outlined extra-large-material-icon"
+                  >close</mat-icon
+                >
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</app-modal>
