@@ -54,7 +54,11 @@
           (cdkDragStarted)="dragStarted($event)"
           (cdkDragEnded)="dragEnded($event)"
         >
-          <div class="row featured-work-box card drag-placeholder" *cdkDragPlaceholder [style.height.px]="draggedItemHeight"></div>
+          <div
+            class="row featured-work-box card drag-placeholder"
+            *cdkDragPlaceholder
+            [style.height.px]="draggedItemHeight"
+          ></div>
           <div class="row featured-work-line">
             <!-- Drag handle container -->
             <div class="handle">

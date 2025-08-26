@@ -1,4 +1,9 @@
-import { CdkDragDrop, CdkDragEnd, CdkDragStart, moveItemInArray } from '@angular/cdk/drag-drop'
+import {
+  CdkDragDrop,
+  CdkDragEnd,
+  CdkDragStart,
+  moveItemInArray,
+} from '@angular/cdk/drag-drop'
 import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { Subject } from 'rxjs'
@@ -62,9 +67,11 @@ export class ManageWorkFeaturedModalComponent implements OnInit, OnDestroy {
 
   dragStarted(event: CdkDragStart) {
     // Determine the height of the dragged item to apply to the placeholder
-    const rootEl: HTMLElement = (typeof (event as any).source.getRootElement === 'function'
-      ? (event as any).source.getRootElement()
-      : (event as any).source.element.nativeElement) as HTMLElement
+    const rootEl: HTMLElement = (
+      typeof (event as any).source.getRootElement === 'function'
+        ? (event as any).source.getRootElement()
+        : (event as any).source.element.nativeElement
+    ) as HTMLElement
     const rect = rootEl.getBoundingClientRect()
     this.draggedItemHeight = Math.ceil(rect.height)
   }
@@ -74,7 +81,9 @@ export class ManageWorkFeaturedModalComponent implements OnInit, OnDestroy {
   }
 
   remove(work: Work) {
-    this.works = this.works.filter((w) => w.putCode?.value !== work.putCode?.value)
+    this.works = this.works.filter(
+      (w) => w.putCode?.value !== work.putCode?.value
+    )
   }
 
   saveEvent() {
@@ -104,5 +113,3 @@ export class ManageWorkFeaturedModalComponent implements OnInit, OnDestroy {
     this._dialogRef.close()
   }
 }
-
-
