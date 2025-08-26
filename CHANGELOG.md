@@ -1,3 +1,9 @@
+## v2.120.5 - 2025-08-25
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.120.4...v2.120.5)
+
+- [#2601](https://github.com/ORCID/orcid-angular/pull/2601): PD-0000: update docker node
+
 ## v2.120.4 - 2025-08-20
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.120.3...v2.120.4)
