@@ -44,6 +44,7 @@ import { TogglzService } from 'src/app/core/togglz/togglz.service'
     './form-authorize.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class FormAuthorizeComponent implements OnInit, OnDestroy {
   @Output() redirectUrl = new EventEmitter<string>()

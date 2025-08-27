@@ -5,6 +5,7 @@ import { AccountActionsDownloadService } from 'src/app/core/account-actions-down
   selector: 'app-settings-actions-download',
   templateUrl: './settings-actions-download.component.html',
   styleUrls: ['./settings-actions-download.component.scss'],
+  standalone: false,
 })
 export class SettingsActionsDownloadComponent implements OnInit {
   @Output() loading = new EventEmitter<boolean>()

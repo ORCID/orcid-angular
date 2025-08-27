@@ -10,37 +10,37 @@
 
   .description-container,
   .show-details {
-    border-color: mat.get-color-from-palette(
+    border-color: mat.m2-get-color-from-palette(
       $background,
       ui-background
     ) !important;
   }
 
   .infrastructures {
-    color: mat.get-contrast-color-from-palette($accent, 600);
+    color: mat.m2-get-contrast-color-from-palette($accent, 600);
     .dot {
-      background-color: mat.get-contrast-color-from-palette($accent, 600);
+      background-color: mat.m2-get-contrast-color-from-palette($accent, 600);
     }
   }
 
   .equipment {
-    color: mat.get-contrast-color-from-palette($accent, 600);
+    color: mat.m2-get-contrast-color-from-palette($accent, 600);
     .dot {
-      background-color: mat.get-contrast-color-from-palette($accent, 600);
+      background-color: mat.m2-get-contrast-color-from-palette($accent, 600);
     }
   }
 
   .services {
-    color: mat.get-contrast-color-from-palette($accent, 600);
+    color: mat.m2-get-contrast-color-from-palette($accent, 600);
     .dot {
-      background-color: mat.get-contrast-color-from-palette($accent, 600);
+      background-color: mat.m2-get-contrast-color-from-palette($accent, 600);
     }
   }
 
   .collections {
-    color: mat.get-contrast-color-from-palette($accent, 600);
+    color: mat.m2-get-contrast-color-from-palette($accent, 600);
     .dot {
-      background-color: mat.get-contrast-color-from-palette($accent, 600);
+      background-color: mat.m2-get-contrast-color-from-palette($accent, 600);
     }
   }
 }

@@ -1,0 +1,20 @@
+@use '@angular/material' as mat;
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+@mixin manage-featured-works-theme($theme) {
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .featured-work-box.card {
+    background-color: mat.m2-get-color-from-palette(
+      $background,
+      brand-citrus-lemon-lightest
+    ) !important;
+  }
+
+  .star mat-icon {
+    color: map-get($foreground, visibility-trusted);
+  }
+}
+
+@include manage-featured-works-theme($orcid-app-theme);

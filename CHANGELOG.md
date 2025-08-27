@@ -1,3 +1,51 @@
+## v2.120.6 - 2025-08-26
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.120.5...v2.120.6)
+
+- [#2606](https://github.com/ORCID/orcid-angular/pull/2606): PD-1993
+
+## v2.120.5 - 2025-08-25
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.120.4...v2.120.5)
+
+- [#2601](https://github.com/ORCID/orcid-angular/pull/2601): PD-0000: update docker node
+
+## v2.120.4 - 2025-08-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.120.3...v2.120.4)
+
+### Refactor
+
+- Remove developer tools from the user menu for members (#2604)
+
+## v2.120.3 - 2025-08-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.120.2...v2.120.3)
+
+### Refactor
+
+- Remove `manage members` option from user menu (#2603)
+
+## v2.120.2 - 2025-08-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.120.1...v2.120.2)
+
+- [#2600](https://github.com/ORCID/orcid-angular/pull/2600): PD-0000: Update CI node to 22
+
+## v2.120.1 - 2025-08-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.120.0...v2.120.1)
+
+## v2.120.0 - 2025-08-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.119.19...v2.120.0)
+
+## v2.119.19 - 2025-08-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.119.18...v2.119.19)
+
+- [#2594](https://github.com/ORCID/orcid-angular/pull/2594): Transifex: update properties
+
 ## v2.119.18 - 2025-08-11
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.119.17...v2.119.18)

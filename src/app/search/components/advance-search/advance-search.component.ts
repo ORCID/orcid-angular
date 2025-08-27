@@ -31,6 +31,7 @@ import { AtLeastOneInputHasValue } from './at-least-one-input-has-value.validato
     './advance-search.component.scss-theme.scss',
     './advance-search.component.scss',
   ],
+  standalone: false,
 })
 export class AdvanceSearchComponent implements OnInit, OnChanges {
   @Input() searchValues: SearchResults

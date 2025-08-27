@@ -7,18 +7,18 @@
   $warn: map-get($theme, accent);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
-  $config: mat.define-typography-config();
+  $config: mat.m2-define-typography-config();
 
   h2 {
-    font-size: mat.font-size($config, headline-5) !important;
+    font-size: mat.m2-font-size($config, headline-5) !important;
   }
 
   p {
-    font-size: mat.font-size($config, body-2) !important;
+    font-size: mat.m2-font-size($config, body-2) !important;
   }
 
   a {
-    font-size: mat.font-size($config, body-2) !important;
+    font-size: mat.m2-font-size($config, body-2) !important;
   }
 }
 @include two-factor-setup-theme($orcid-app-theme);

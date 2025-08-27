@@ -7,13 +7,13 @@
   $warn: map-get($theme, accent);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
-  $overlay-color: mat.get-color-from-palette($background, blue-overlay);
+  $overlay-color: mat.m2-get-color-from-palette($background, blue-overlay);
 
   main {
-    color: mat.get-color-from-palette($foreground, text);
+    color: mat.m2-get-color-from-palette($foreground, text);
   }
   .hero-header {
-    color: mat.get-contrast-color-from-palette($primary, 500);
+    color: mat.m2-get-contrast-color-from-palette($primary, 500);
     height: 580px;
 
     // the following is the background image with the overlay
@@ -48,15 +48,15 @@
   .register-section {
     .number-box {
       .number-circle {
-        background: mat.get-color-from-palette($accent, 400);
+        background: mat.m2-get-color-from-palette($accent, 400);
         // ACCESSIBILITY ISSUE of color contrast
         // using the contrast of primary over accent (white over green)
-        color: mat.get-contrast-color-from-palette($primary, 400);
+        color: mat.m2-get-contrast-color-from-palette($primary, 400);
       }
     }
   }
   .organization-section {
-    background-color: mat.get-color-from-palette($background, light-grey);
+    background-color: mat.m2-get-color-from-palette($background, light-grey);
   }
 }
 

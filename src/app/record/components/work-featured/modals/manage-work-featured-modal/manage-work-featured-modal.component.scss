@@ -1,0 +1,77 @@
+.featured-works-list {
+  width: 100%;
+}
+
+.featured-work-box {
+  width: 100%;
+  background: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px; /* gap between items */
+}
+
+.featured-work-line {
+  align-items: center;
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr auto; /* handle | content | close */
+  grid-column-gap: 16px;
+}
+
+.handle {
+  display: flex;
+  align-items: center; /* center draggable icon vertically */
+  justify-content: center;
+}
+
+.icon-drag {
+  width: 24px;
+  height: 24px;
+}
+
+.featured-title {
+  font-weight: 600;
+}
+
+.close-wrapper {
+  display: flex;
+  align-items: center; /* center close icon vertically */
+  justify-content: center;
+}
+
+.intro {
+  margin: 8px 0 16px;
+}
+
+.star {
+  margin-right: 8px;
+  display: flex;
+  align-items: flex-start; /* align star to top with title */
+}
+
+.title-line {
+  display: block;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+mat-icon {
+  font-size: 16px;
+}
+
+/* Keep list height stable while dragging */
+.cdk-drag-placeholder.drag-placeholder {
+  display: block;
+  width: 100%;
+  margin-bottom: 16px; /* same gap as .featured-work-box */
+  box-sizing: border-box; /* include border and padding in height */
+}
+
+/* Optional: style preview to avoid layout jump */
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 8px;
+}

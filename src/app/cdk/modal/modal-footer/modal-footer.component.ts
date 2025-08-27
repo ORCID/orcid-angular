@@ -10,6 +10,7 @@ import { PlatformInfoService } from '../../platform-info'
     './modal-footer.component.scss',
     './modal-footer.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class ModalFooterComponent implements OnInit, OnDestroy {
   handset: boolean

@@ -3,6 +3,7 @@ import { NgControl } from '@angular/forms'
 
 @Directive({
   selector: 'input[appTrim]',
+  standalone: false,
 })
 export class TrimDirective implements OnInit {
   constructor(private ngControl: NgControl) {}

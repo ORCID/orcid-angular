@@ -12,6 +12,7 @@ import {
     './trusted-individuals-dropdown.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class TrustedIndividualsDropdownComponent implements OnInit {
   _trustedIndividuals: TrustedIndividuals

@@ -2,19 +2,6 @@
 
 /**
  * ──────────────────────────────────────────────────────────────────────────────
- * Bypass hook: if the browser is requesting HTML, serve index.html;
- * otherwise, inject a dev header so backend knows it’s from local dev.
- * ──────────────────────────────────────────────────────────────────────────────
- */
-function bypassHtmlOrJson(req, res) {
-  if (req.headers.accept?.includes('html')) {
-    return '/index.html'
-  }
-  req.headers['X-Dev-Header'] = 'local-host-proxy-call'
-}
-
-/**
- * ──────────────────────────────────────────────────────────────────────────────
  * onProxyReq for /auth: before sending to auth.qa.orcid.org,
  * force Origin/Referer to https://qa.orcid.org
  * ──────────────────────────────────────────────────────────────────────────────
@@ -119,7 +106,6 @@ export default {
     changeOrigin: true,
     logLevel: 'debug',
     cookieDomainRewrite: 'localhost',
-    bypass: bypassHtmlOrJson,
     onProxyRes: responseOverridesGeneric(),
   },
 }

@@ -3,6 +3,7 @@ import { SortOrderType } from 'src/app/types/sort'
 
 @Pipe({
   name: 'sortLabel',
+  standalone: false,
 })
 export class SortLabelPipe implements PipeTransform {
   SortOrderTypeLabel = {

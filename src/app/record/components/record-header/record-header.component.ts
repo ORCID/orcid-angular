@@ -24,6 +24,7 @@ import { UserRecord } from 'src/app/types/record.local'
     './record-header.component.scss',
     './record-header.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class RecordHeaderComponent implements OnInit {
   $destroy: Subject<boolean> = new Subject<boolean>()

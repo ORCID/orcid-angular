@@ -228,10 +228,7 @@
         mat-button
         class="orc-font-body-small"
         *ngIf="type === 'featured-works' && !isPublicRecord"
-        [disabled]="!currentAmount && !total"
-        [attr.aria-label]="
-          type | appPanelsSortAriaLabel : !currentAmount && !total
-        "
+        (click)="openFeaturedWorksManage()"
       >
         <mat-icon class="large-material-icon material-symbols-outlined">
           stars

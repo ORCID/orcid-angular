@@ -12,6 +12,7 @@ import { ActivitySummary } from 'src/app/types/trust-summary'
     './summary-panel.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class SummaryPanelComponent implements OnInit {
   @Input() activitySummary: ActivitySummary[]

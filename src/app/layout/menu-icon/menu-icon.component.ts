@@ -7,6 +7,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
     './menu-icon.component.scss',
     './menu-icon.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class MenuIconComponent implements OnInit {
   isOpenValue = false

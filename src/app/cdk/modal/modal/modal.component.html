@@ -10,10 +10,13 @@
       <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
     </div>
   </div>
+  <div>
+    <ng-content select="app-modal-title"></ng-content>
+  </div>
   <main class="row main-area no-padding">
     <div
       class="col s4 m8 no-gutters content-wrapper"
-      [ngClass]="{ l9: !noSidebar, l12: noSidebar }"
+      [ngClass]="{ l9: !noSidebar, l12: noSidebar, 'no-padding': noPadding }"
     >
       <div class="no-padding modal-content">
         <ng-content></ng-content>

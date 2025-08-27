@@ -34,6 +34,7 @@ import { DialogAddTrustedIndividualsComponent } from '../dialog-add-trusted-indi
     './settings-trusted-individuals-search.component.scss',
     './settings-trusted-individuals-search.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class SettingsTrustedIndividualsSearchComponent
   implements OnInit, OnDestroy

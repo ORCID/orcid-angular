@@ -6,6 +6,7 @@ import {
 
 @Pipe({
   name: 'recordWorkCategoryLabel',
+  standalone: false,
 })
 export class RecordWorkCategoryLabelPipe implements PipeTransform {
   transform(value: WorkCategories, ...args: unknown[]): string {

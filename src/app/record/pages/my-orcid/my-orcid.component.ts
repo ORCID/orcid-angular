@@ -4,6 +4,7 @@ import {
   Inject,
   OnDestroy,
   OnInit,
+  DOCUMENT,
 } from '@angular/core'
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
@@ -28,7 +29,7 @@ import { WINDOW } from 'src/app/cdk/window'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { HelpHeroService } from 'src/app/core/help-hero/help-hero.service'
 import { ScriptService } from '../../../core/crazy-egg/script.service'
-import { DOCUMENT, Location } from '@angular/common'
+import { Location } from '@angular/common'
 
 import { filter, map } from 'rxjs/operators'
 import { CanonocalUrlService } from 'src/app/core/canonocal-url/canonocal-url.service'
@@ -44,6 +45,7 @@ import { AffilationsComponentDialogOutput } from 'src/app/cdk/interstitials/affi
     './my-orcid.component.scss',
     './my-orcid.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class MyOrcidComponent implements OnInit, OnDestroy {
   private readonly $destroy = new Subject()

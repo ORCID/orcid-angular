@@ -17,6 +17,7 @@ import { RecordService } from 'src/app/core/record/record.service'
   templateUrl: './settings-defaults-visibility.component.html',
   styleUrls: ['./settings-defaults-visibility.component.scss'],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class SettingsDefaultsVisibilityComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

@@ -24,6 +24,7 @@ import { WINDOW } from '../../window'
     './two-factor-authentication-form.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class TwoFactorAuthenticationFormComponent implements AfterViewInit {
   @Input() showBadVerificationCode: boolean

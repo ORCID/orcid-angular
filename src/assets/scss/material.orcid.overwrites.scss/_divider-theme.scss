@@ -5,10 +5,10 @@
   $accent: map-get($theme, accent);
 
   .mat-divider.orcid-divider {
-    border-top-color: mat.get-color-from-palette($accent);
+    border-top-color: mat.m2-get-color-from-palette($accent);
   }
 
   .mat-divider-vertical.orcid-divider {
-    border-right-color: mat.get-color-from-palette($accent);
+    border-right-color: mat.m2-get-color-from-palette($accent);
   }
 }

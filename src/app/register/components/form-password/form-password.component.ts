@@ -49,6 +49,7 @@ import { takeUntil } from 'rxjs/operators'
     },
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class FormPasswordComponent
   extends BaseForm

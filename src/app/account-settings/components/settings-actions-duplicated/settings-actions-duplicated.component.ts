@@ -20,6 +20,7 @@ import { DialogActionsDuplicatedComponent } from '../dialog-actions-duplicated/d
   templateUrl: './settings-actions-duplicated.component.html',
   styleUrls: ['./settings-actions-duplicated.component.scss'],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class SettingsActionsDuplicatedComponent implements OnInit {
   userSession: UserSession

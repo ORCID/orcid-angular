@@ -11,6 +11,7 @@ import { CookieService } from 'ngx-cookie-service'
   templateUrl: './banners.component.html',
   styleUrls: ['./banners.component.scss'],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class BannersComponent implements OnInit {
   environment = runtimeEnvironment

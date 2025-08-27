@@ -18,6 +18,7 @@ import { Subject } from 'rxjs'
     './modal-header.component.scss',
     './modal-header.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class ModalHeaderComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

@@ -6,6 +6,7 @@ import { UntypedFormGroup } from '@angular/forms'
   selector: 'app-work-external-identifiers-view-only',
   templateUrl: './work-external-identifiers-view-only.component.html',
   styleUrls: ['./work-external-identifiers-view-only.component.scss'],
+  standalone: false,
 })
 export class WorkExternalIdentifiersViewOnlyComponent implements OnInit {
   typeLabel = $localize`:@@works.typeColon:Type:`

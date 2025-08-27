@@ -22,6 +22,7 @@ import { NewRelicService } from './core/new-relic/new-relic.service'
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  standalone: false,
 })
 export class AppComponent {
   currentlyDisplayingZendesk = true

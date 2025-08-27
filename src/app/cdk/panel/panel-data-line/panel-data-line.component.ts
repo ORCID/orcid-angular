@@ -12,6 +12,7 @@ import {
   templateUrl: './panel-data-line.component.html',
   styleUrls: ['./panel-data-line.component.scss'],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class PanelDataLineComponent implements OnInit {
   @Input() noBoldTitle = false

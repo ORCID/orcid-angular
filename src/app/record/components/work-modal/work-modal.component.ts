@@ -13,6 +13,7 @@ import { WorkFormComponent } from '../work-form/work-form/work-form.component'
   selector: 'app-work-modal',
   templateUrl: './work-modal.component.html',
   styleUrls: ['./work-modal.component.scss'],
+  standalone: false,
 })
 export class WorkModalComponent implements OnInit {
   closeLabel = $localize`:@@shared.closeActivityAriaLabel:Close Works`

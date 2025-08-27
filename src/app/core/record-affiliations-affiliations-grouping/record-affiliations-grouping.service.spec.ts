@@ -8,7 +8,7 @@ describe('RecordAffiliationsGroupingService', () => {
   beforeEach(() => TestBed.configureTestingModule({}))
 
   it('should be created', () => {
-    const service: RecordAffiliationsGroupingService = TestBed.get(
+    const service: RecordAffiliationsGroupingService = TestBed.inject(
       RecordAffiliationsGroupingService
     )
     expect(service).toBeTruthy()
