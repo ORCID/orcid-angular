@@ -73,9 +73,7 @@
         >
           {{ affiliation.region.value }},
         </ng-container>
-        <ng-container
-          *ngIf="affiliation.country?.value"
-        >
+        <ng-container *ngIf="affiliation.country?.value">
           {{ affiliation.country.value }}
         </ng-container>
       </h4>
