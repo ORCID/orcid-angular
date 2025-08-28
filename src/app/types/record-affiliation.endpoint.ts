@@ -55,19 +55,19 @@ export interface AffiliationGroup {
 export interface Affiliation extends AssertionBase {
   visibility: Visibility
   putCode: Value
-  affiliationName: Value
-  city: Value
-  region: Value
-  country: Value
+  affiliationName?: Value
+  city?: Value
+  region?: Value
+  country?: Value
   roleTitle: Value
   countryForDisplay?: any // TODO is this always empty?
   departmentName: Value
   affiliationType: AffiliationTypeValue
-  disambiguatedAffiliationSourceId: Value
-  disambiguationSource: Value
+  disambiguatedAffiliationSourceId?: Value
+  disambiguationSource?: Value
   orgDisambiguatedCity?: any // TODO is this always empty?
   orgDisambiguatedCountry?: any // TODO is this always empty?
-  orgDisambiguatedId: Value
+  orgDisambiguatedId?: Value
   orgDisambiguatedName?: any // TODO is this always empty?
   orgDisambiguatedRegion?: any // TODO is this always empty?
   orgDisambiguatedUrl?: any // TODO is this always empty?
