@@ -64,12 +64,13 @@ export class SignInGuard {
         } else if (isOauthAuthorizationTogglzEnable && queryParams.client_id) {
           if (
             session.loggedIn &&
-            queryParams.show_login !== 'true' &&
             queryParams.prompt !== 'login'
           ) {
             return this._router.createUrlTree(['/oauth/authorize'], {
               queryParams: queryParams,
             })
+          } else if(!session.loggedIn && queryParams.prompt !== 'login' && queryParams.show_login === 'false') {
+            return this.redirectToRegister(queryParams)
           }
         }
         return true
