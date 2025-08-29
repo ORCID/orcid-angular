@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core'
+import { Injectable } from '@angular/core'
 import {
   ActivatedRouteSnapshot,
   Router,
@@ -8,13 +8,8 @@ import {
 import { forkJoin, Observable } from 'rxjs'
 import { map, take } from 'rxjs/operators'
 
-import { PlatformInfoService } from '../cdk/platform-info'
-import { WINDOW } from '../cdk/window'
 import { UserService } from '../core'
-import { ErrorHandlerService } from '../core/error-handler/error-handler.service'
-import { OauthURLSessionManagerService } from '../core/oauth-urlsession-manager/oauth-urlsession-manager.service'
 import { TogglzService } from '../core/togglz/togglz.service'
-import { fork } from 'child_process'
 import { OauthParameters } from '../types'
 
 @Injectable({

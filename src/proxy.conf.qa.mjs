@@ -75,21 +75,37 @@ function responseOverridesGeneric() {
   }
 }
 
-/**
- * ──────────────────────────────────────────────────────────────────────────────
- * Finally, export the proxy table as an ES module default export.
- * ──────────────────────────────────────────────────────────────────────────────
- */
-export default {
-  '/v3.0': {
+const shouldProxyRootApi = (pathname, req) => {
+  const accept = req.headers.accept || ''
+
+  // Do NOT proxy SPA navigations or dev-server internals
+  if (accept.includes('text/html')) return false
+  if (
+    pathname.startsWith('/assets') ||
+    pathname.startsWith('/favicon.ico') ||
+    pathname.startsWith('/ng-cli-ws') ||
+    pathname.startsWith('/sockjs-node') ||
+    pathname === '/' ||
+    pathname === '/index.html'
+  ) {
+    return false
+  }
+
+  // Everything else at root (your API calls without a prefix) → proxy
+  return true
+}
+
+export default [
+  {
+    context: ['/v3.0'],
     target: 'https://pub.qa.orcid.org',
     secure: false,
     changeOrigin: true,
     logLevel: 'debug',
     cookieDomainRewrite: 'localhost',
   },
-
-  '/auth': {
+  {
+    context: ['/auth'],
     target: 'https://auth.qa.orcid.org',
     secure: false,
     changeOrigin: true,
@@ -99,8 +115,9 @@ export default {
     onProxyReq: proxyReqOverrideHeaders,
     onProxyRes: responseOverridesAuth(),
   },
-
-  '/': {
+  {
+    // Proxy only root-level API requests, not the app shell
+    context: shouldProxyRootApi,
     target: 'https://qa.orcid.org',
     secure: false,
     changeOrigin: true,
@@ -108,4 +125,4 @@ export default {
     cookieDomainRewrite: 'localhost',
     onProxyRes: responseOverridesGeneric(),
   },
-}
+]

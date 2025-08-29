@@ -26,7 +26,8 @@ import { OauthService } from 'src/app/core/oauth/oauth.service'
 import { SignInService } from 'src/app/core/sign-in/sign-in.service'
 import { TrustedIndividualsService } from 'src/app/core/trusted-individuals/trusted-individuals.service'
 import { ERROR_REPORT } from 'src/app/errors'
-import { RequestInfoForm, Scope } from 'src/app/types'
+import { Scope } from 'src/app/types'
+import { LegacyOauthRequestInfoForm as RequestInfoForm } from 'src/app/types/request-info-form.endpoint'
 import { UserSession } from 'src/app/types/session.local'
 import {
   Delegator,
@@ -114,10 +115,11 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
     })
 
     setTimeout(() => {
+      console.log('oauthRequest', this.oauthRequest)
       this._titleService.setTitle(
         this.authorizeAccessFor +
           ' ' +
-          this.oauthRequest.clientName +
+          this.oauthRequest?.clientName +
           ' ' +
           this.orcid
       )
@@ -234,7 +236,7 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
 
   private removeScopesWithSameDescription(userInfo: UserSession) {
     let alreadyHasAuthenticateScope = false
-    userInfo.oauthSession.scopes = userInfo.oauthSession.scopes.filter(
+    userInfo.oauthSession.scopes = userInfo.oauthSession?.scopes.filter(
       (scope) => {
         if (
           (scope.value === '/authenticate' || scope.value === 'openid') &&

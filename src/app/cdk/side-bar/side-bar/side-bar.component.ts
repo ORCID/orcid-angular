@@ -10,14 +10,8 @@ import { Subject } from 'rxjs'
 import { take, takeUntil } from 'rxjs/operators'
 import { UserService } from 'src/app/core'
 import { RecordService } from 'src/app/core/record/record.service'
-import {
-  Address,
-  Assertion,
-  AssertionVisibilityString,
-  NameForm,
-  RequestInfoForm,
-  UserInfo,
-} from 'src/app/types'
+import { Address, Assertion, AssertionVisibilityString, NameForm, UserInfo } from 'src/app/types'
+import { LegacyOauthRequestInfoForm as RequestInfoForm } from 'src/app/types/request-info-form.endpoint'
 import { UserRecord } from 'src/app/types/record.local'
 
 import { PlatformInfo, PlatformInfoService } from '../../platform-info'

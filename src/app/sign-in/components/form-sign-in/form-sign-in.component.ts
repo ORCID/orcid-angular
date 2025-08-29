@@ -22,7 +22,8 @@ import {
   isRedirectToTheAuthorizationPage,
 } from 'src/app/constants'
 import { UserService } from 'src/app/core'
-import { OauthParameters, RequestInfoForm } from 'src/app/types'
+import { OauthParameters } from 'src/app/types'
+import { LegacyOauthRequestInfoForm as RequestInfoForm } from 'src/app/types/request-info-form.endpoint'
 
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { WINDOW } from '../../../cdk/window'

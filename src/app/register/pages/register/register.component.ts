@@ -20,7 +20,8 @@ import { UserService } from 'src/app/core'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 import { RegisterService } from 'src/app/core/register/register.service'
 import { ERROR_REPORT } from 'src/app/errors'
-import { OauthParameters, RequestInfoForm } from 'src/app/types'
+import { OauthParameters } from 'src/app/types'
+import { LegacyOauthRequestInfoForm as RequestInfoForm } from 'src/app/types/request-info-form.endpoint'
 import {
   RegisterConfirmResponse,
   RegisterForm,

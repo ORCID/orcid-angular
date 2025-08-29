@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core'
-import { RequestInfoForm } from '../../types'
+import { LegacyOauthRequestInfoForm as RequestInfoForm } from '../../types/request-info-form.endpoint'
 import { BehaviorSubject, Observable } from 'rxjs'
 import {
   browserGlobals,

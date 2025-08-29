@@ -151,24 +151,6 @@ export class PlatformInfoService {
   }
 
   /**
-   * @deprecated Based on the query check if the current state is in Oauth mode
-   */
-  private updateOauthState(queryParameters: Params) {
-    const previousOauthState = this.platform.hasOauthParameters
-    this.platform.queryParameters = queryParameters
-    if (
-      queryParameters.hasOwnProperty('oauth') ||
-      queryParameters.hasOwnProperty('Oauth') ||
-      queryParameters.hasOwnProperty('client_id')
-    ) {
-      this.platform.hasOauthParameters = true
-    } else {
-      this.platform.hasOauthParameters = false
-    }
-    return previousOauthState
-  }
-
-  /**
    * Based on the query and the current router check if the platform should be handle as social linking state
    */
   private updateSocialState(queryParameters: Params) {
@@ -248,6 +230,7 @@ export class PlatformInfoService {
 
   public hasOauthParameters() {
     const params = this.platform.queryParameters
+    console.log('params', params)
     if (
       Object.keys(params).length &&
       (params.hasOwnProperty('client_id') ||

@@ -5,7 +5,8 @@ import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { UserService } from 'src/app/core'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { ZendeskService } from 'src/app/core/zendesk/zendesk.service'
-import { OauthParameters, RequestInfoForm } from 'src/app/types'
+import { OauthParameters } from 'src/app/types'
+import { LegacyOauthRequestInfoForm as RequestInfoForm } from 'src/app/types/request-info-form.endpoint'
 import { UserSession } from 'src/app/types/session.local'
 
 @Component({
@@ -47,6 +48,7 @@ export class OauthErrorComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    console.log('OauthErrorComponent')
     this._togglz
       .getStateOf('OAUTH_AUTHORIZATION')
       .pipe(
