@@ -60,50 +60,57 @@ export class AuthorizeGuard implements CanActivateChild {
     isOauthAuthorizationTogglzEnable: boolean,
     queryParams: OauthParameters
   ): Observable<boolean | UrlTree> {
-    // 1. Account is locked ➜ always redirect to the profile
-    if (session.userInfo?.LOCKED === 'true') {
+    if (this.isAccountLocked(session)) {
       return of(this.router.createUrlTree(['/my-orcid']))
     }
 
-    // 2. We have an OAuth session object – handle its states explicitly
-    if (!isOauthAuthorizationTogglzEnable && session.oauthSession) {
-      const { error, forceLogin } = session.oauthSession
+    if (session.oauthSession && !isOauthAuthorizationTogglzEnable) {
+      return this.handleLegacyAuthorization(session)
+    }
 
-      // 2a. An error exists – let the component display it
-      if (error) {
-        return of(true)
-      }
+    if (session.oauthSession && isOauthAuthorizationTogglzEnable) {
+      return this.handleOauth2Authorization(session, queryParams)
+    }
 
-      // 2b. Force-login flag or the user is not authenticated yet ➜ redirect
-      if (forceLogin || !session.oauthSessionIsLoggedIn) {
-        return this.redirectToLoginPage()
-      }
+    return this.redirectToLoginPage()
+  }
 
-      // 2c. Everything looks good – allow navigation
-      return of(true)
-    } else if (isOauthAuthorizationTogglzEnable && session.oauthSession) {
-      const scopeIsOpenId = queryParams.scope === 'openid'
-      const forceLoginByPrompt = queryParams.prompt === 'login' && scopeIsOpenId
+  private isAccountLocked(session: UserSession): boolean {
+    return session.userInfo?.LOCKED === 'true'
+  }
 
-      // For prompt=none, validate and redirect regardless of login state.
-      if (!session.oauthSessionIsLoggedIn && queryParams.prompt === 'none') {
-        return this.validateRedirectUriAndRedirect(queryParams)
-      }
+  private handleLegacyAuthorization(session: UserSession): Observable<boolean | UrlTree> {
+    const { error, forceLogin } = session.oauthSession
+    if (error) return of(true)
+    if (forceLogin || !session.oauthSessionIsLoggedIn) {
+      return this.redirectToLoginPage()
+    }
+    return of(true)
+  }
 
-      if (session.oauthSessionIsLoggedIn && queryParams.prompt === 'none') {
-        ;(this.window as any).outOfRouterNavigation(queryParams.redirect_uri)
-      }
+  private handleOauth2Authorization(
+    session: UserSession,
+    queryParams: OauthParameters
+  ): Observable<boolean | UrlTree> {
+    const scopeIsOpenId = queryParams.scope === 'openid'
+    const forceLoginByPrompt = queryParams.prompt === 'login' && scopeIsOpenId
 
-      // If not logged in or forced to login (and scope is openid), send to /signin
-      if (!session.oauthSessionIsLoggedIn || forceLoginByPrompt) {
-        return this.redirectToLoginPage()
-      }
+    if (!session.oauthSessionIsLoggedIn && queryParams.prompt === 'none') {
+      return this.validateRedirectUriAndRedirect(queryParams)
+    }
 
+    if (session.oauthSessionIsLoggedIn && queryParams.prompt === 'none') {
+      ;(this.window as any).outOfRouterNavigation(
+        (session.oauthSession as any).redirectUrl
+      )
       return of(true)
     }
 
-    // 3. No OAuth session at all ➜ redirect
-    return this.redirectToLoginPage()
+    if (!session.oauthSessionIsLoggedIn || forceLoginByPrompt) {
+      return this.redirectToLoginPage()
+    }
+
+    return of(true)
   }
 
   private validateRedirectUriAndRedirect(

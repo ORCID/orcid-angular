@@ -14,13 +14,14 @@ import { WINDOW } from '../cdk/window'
 import { TogglzService } from '../core/togglz/togglz.service'
 import { OauthService } from '../core/oauth/oauth.service'
 
-describe('AuthorizeGuard', () => {
+fdescribe('AuthorizeGuard', () => {
   let guard: AuthorizeGuard
   let user: jasmine.SpyObj<UserService>
   let router: jasmine.SpyObj<Router>
   let platform: jasmine.SpyObj<PlatformInfoService>
   let togglz: { getStateOf: jasmine.Spy }
   let oauthService: { validateRedirectUri: jasmine.Spy }
+  let win: { location: { href: string }; outOfRouterNavigation: jasmine.Spy }
   function stubUrlTree(
     path: string,
     query: Record<string, unknown> = {}
@@ -37,13 +38,18 @@ describe('AuthorizeGuard', () => {
       validateRedirectUri: jasmine.createSpy('validateRedirectUri'),
     }
 
+    win = {
+      location: { href: 'href' },
+      outOfRouterNavigation: jasmine.createSpy('outOfRouterNavigation'),
+    }
+
     TestBed.configureTestingModule({
       providers: [
         AuthorizeGuard,
         { provide: UserService, useValue: user },
         { provide: Router, useValue: router },
         { provide: PlatformInfoService, useValue: platform },
-        { provide: WINDOW, useValue: { location: { href: 'href' } } },
+        { provide: WINDOW, useValue: win },
         { provide: TogglzService, useValue: togglz },
         { provide: OauthService, useValue: oauthService },
       ],
@@ -139,7 +145,7 @@ describe('AuthorizeGuard', () => {
       expect(router.createUrlTree).not.toHaveBeenCalled()
     })
   })
-  fdescribe('OAUTH_AUTHORIZATION Enable', () => {
+  describe('OAUTH_AUTHORIZATION Enable', () => {
     it('redirects locked accounts to /my-orcid', async () => {
       router.createUrlTree.and.returnValue(stubUrlTree('/my-orcid'))
       const session = { userInfo: { LOCKED: 'true' } } as any
@@ -221,6 +227,46 @@ describe('AuthorizeGuard', () => {
       const result = await runGuard({}, session, true)
       expect(result).toBeTrue()
       expect(router.createUrlTree).not.toHaveBeenCalled()
+    })
+
+    it('validates redirect and navigates to redirect_uri#login_required when prompt=none and NOT logged-in', async () => {
+      oauthService.validateRedirectUri.and.returnValue(
+        of({ valid: true }) as any
+      )
+
+      const qp = {
+        client_id: 'client-123',
+        redirect_uri: 'https://example.org/callback',
+        prompt: 'none',
+      }
+      const session = { oauthSession: {}, oauthSessionIsLoggedIn: false } as any
+
+      const result = await runGuard(qp, session, true)
+
+      expect(oauthService.validateRedirectUri).toHaveBeenCalledWith(
+        'client-123',
+        'https://example.org/callback'
+      )
+      expect(win.outOfRouterNavigation).toHaveBeenCalledWith(
+        'https://example.org/callback#login_required'
+      )
+      expect(result).toBeFalse()
+    })
+
+    it('navigates to session redirectUrl when prompt=none and logged-in', async () => {
+      const qp = { prompt: 'none' }
+      const session = {
+        oauthSession: { redirectUrl: 'https://example.org/already' },
+        oauthSessionIsLoggedIn: true,
+      } as any
+
+      const result = await runGuard(qp, session, true)
+
+      expect(win.outOfRouterNavigation).toHaveBeenCalledWith(
+        'https://example.org/already'
+      )
+      expect(oauthService.validateRedirectUri).not.toHaveBeenCalled()
+      expect(result).toBeTrue()
     })
   })
 })

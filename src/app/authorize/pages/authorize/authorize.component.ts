@@ -61,6 +61,7 @@ export class AuthorizeComponent {
   isNotImpersonating = false
   interstitialComponent: ComponentType<any>
   redirectByReportAlreadyAuthorize: boolean
+  OAUTH2_AUTHORIZATION_ENABLE: boolean
 
   constructor(
     private userService: UserService,
@@ -80,11 +81,15 @@ export class AuthorizeComponent {
     let currentSession: UserSession | null = null
 
     forkJoin({
+      Oauth2: this.toglzService
+        .getStateOf('OAUTH_AUTHORIZATION')
+        .pipe(take(1)),
       platform: this.loadPlatformInfo(),
       userSession: this.loadUserSession(),
     })
       .pipe(
         // Keep a copy of userSession for finalize()
+        tap(({ Oauth2 }) => (this.OAUTH2_AUTHORIZATION_ENABLE = Oauth2)),
         tap(({ userSession }) => (currentSession = userSession)),
 
         // If logged in, fetch record → check interstitials; otherwise skip straight to oauth session handling
@@ -143,6 +148,9 @@ export class AuthorizeComponent {
   private alreadyAuthorizeRedirect(
     oauthSession: RequestInfoForm
   ): Observable<boolean> {
+    console.log('alreadyAuthorizeRedirect')
+    console.log(oauthSession)
+    this.redirectUrl = oauthSession.redirectUrl
     return this.finishRedirect()
   }
 
@@ -150,6 +158,8 @@ export class AuthorizeComponent {
    * Determines whether a interstitial should be displayed
    */
   private isThereInterstitialToShow(): boolean {
+    console.log('isThereInterstitialToShow')
+    console.log(this.interstitialComponent)
     return !!this.interstitialComponent
   }
 
@@ -157,6 +167,7 @@ export class AuthorizeComponent {
    * Displays the interstitial
    */
   private showInterstitial(): void {
+    console.log('showInterstitial')
     const portal = new ComponentPortal(this.interstitialComponent)
 
     const componentRef = this.outlet.attachComponentPortal(portal)
@@ -205,14 +216,13 @@ export class AuthorizeComponent {
 
     // 2. If the user was already authorized, we might show domain interstitial or just redirect
     if (this.isUserAlreadyAuthorized(this.oauthSession)) {
-      this.debugLog('User alreay authorized this app')
       if (this.isThereInterstitialToShow()) {
         this.redirectByReportAlreadyAuthorize = true
         this.loading = false
         this.redirectUrl = this.oauthSession.redirectUrl
         setTimeout(() => this.showInterstitial())
       } else {
-        this.alreadyAuthorizeRedirect(this.oauthSession)
+        this.alreadyAuthorizeRedirect(this.oauthSession).subscribe()
       }
       return
     } else {
@@ -255,7 +265,20 @@ export class AuthorizeComponent {
   /**
    * Determines if the user was already authorized based on OAuth session data.
    */
+
   private isUserAlreadyAuthorized(oauthSession: any): boolean {
+    if (this.OAUTH2_AUTHORIZATION_ENABLE) {
+      console.log('User alreay authorized this app Oauth2')
+      console.log(oauthSession)
+      return this.isUserAlreadyAuthorizedOauth2(oauthSession)
+    } else {
+      console.log('User alreay authorized this app Legazy Oauth')
+      console.log(oauthSession)
+      return this.isUserAlreadyAuthorizedLegazyOauth(oauthSession)
+    }
+  }
+
+  private isUserAlreadyAuthorizedLegazyOauth(oauthSession: any): boolean {
     if (
       !oauthSession ||
       !oauthSession.redirectUrl ||
@@ -264,6 +287,13 @@ export class AuthorizeComponent {
       return false
     }
     return oauthSession.redirectUrl.includes(oauthSession.responseType + '=')
+  }
+
+  private isUserAlreadyAuthorizedOauth2(oauthSession: any): boolean {
+    if (!oauthSession || !oauthSession.redirectUrl) {
+      return false
+    }
+    return true
   }
 
   private debugLog(message: string): void {

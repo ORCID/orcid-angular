@@ -290,14 +290,27 @@ describe('SignInGuard', () => {
       )
     })
 
-    it('returns true when oauthSessionIsLoggedIn is true but prompt = login', async () => {
-      const qp = { prompt: 'login' }
+    it('returns true when oauthSessionIsLoggedIn is true, prompt = login and scope = openid', async () => {
+      const qp = { prompt: 'login', scope: 'openid' }
       const session = {
         oauthSession: {},
         oauthSessionIsLoggedIn: true,
       }
       const result = await runGuard(qp, session, true)
       expect(result).toBeTrue()
+    })
+
+    it('redirects to /oauth/authorize when oauthSessionIsLoggedIn is true, prompt = login and scope != openid', async () => {
+      const qp = { prompt: 'login', scope: 'email' }
+      const session = {
+        oauthSession: {},
+        oauthSessionIsLoggedIn: true,
+      }
+      const result = await runGuard(qp, session, true)
+      expect(result instanceof UrlTree).toBeTrue()
+      expect(router.serializeUrl(result as UrlTree)).toBe(
+        '/oauth/authorize?prompt=login&scope=email'
+      )
     })
 
     it('redirects to /register when orcid present and show_login is false', async () => {

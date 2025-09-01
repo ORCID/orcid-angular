@@ -273,10 +273,11 @@ export class UserService {
           orcidUrl: this.getOrcidUrl(data),
           effectiveOrcidUrl: this.getOrcidUrl(data, true),
           oauthSessionIsLoggedIn:
-            (!!data.oauthSession &&
-              !!data.oauthSession.userOrcid &&
-              !!data.oauthSession.userName) ||
-            !!data.oauthSession.redirectUrl,
+            !!data.oauthSession &&
+            ((!!data.oauthSession.userOrcid && !!data.oauthSession.userName) ||
+              // The Oauth2 will return a redirectUrl when the user is logged in and nothing else
+              // when the user is logged in and a OAUTH prompt=none is present
+              !!data.oauthSession.redirectUrl),
         },
       }
     }
