@@ -230,7 +230,6 @@ export class PlatformInfoService {
 
   public hasOauthParameters() {
     const params = this.platform.queryParameters
-    console.log('params', params)
     if (
       Object.keys(params).length &&
       (params.hasOwnProperty('client_id') ||

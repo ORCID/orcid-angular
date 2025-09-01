@@ -81,30 +81,25 @@ export class AuthorizeGuard implements CanActivateChild {
 
       // 2c. Everything looks good – allow navigation
       return of(true)
-    } else if (
-      isOauthAuthorizationTogglzEnable &&
-      (queryParams.client_id || queryParams.scope)
-    ) {
-      if (!session.loggedIn && queryParams.prompt === 'none') {
+    } else if (isOauthAuthorizationTogglzEnable && session.oauthSession) {
+      const scopeIsOpenId = queryParams.scope === 'openid'
+      const forceLoginByPrompt = queryParams.prompt === 'login' && scopeIsOpenId
+
+      // For prompt=none, validate and redirect regardless of login state.
+      if (!session.oauthSessionIsLoggedIn && queryParams.prompt === 'none') {
         return this.validateRedirectUriAndRedirect(queryParams)
       }
-      if (
-        !session.loggedIn ||
-        queryParams.show_login === 'true' ||
-        queryParams.prompt === 'login'
-      ) {
-        return this.redirectToLoginPage()
-      } else if (session.oauthSession?.redirectUrl) {
-        // Clear the local storage
-        this.oauthUrlSessionManger.clear()
-        ;(this.window as any).outOfRouterNavigation(
-          session.oauthSession?.redirectUrl
-        )
-        return of(true)
-      } else {
-        this.oauthUrlSessionManger.clear()
-        return of(true)
+
+      if (session.oauthSessionIsLoggedIn && queryParams.prompt === 'none') {
+        ;(this.window as any).outOfRouterNavigation(queryParams.redirect_uri)
       }
+
+      // If not logged in or forced to login (and scope is openid), send to /signin
+      if (!session.oauthSessionIsLoggedIn || forceLoginByPrompt) {
+        return this.redirectToLoginPage()
+      }
+
+      return of(true)
     }
 
     // 3. No OAuth session at all ➜ redirect
@@ -121,9 +116,9 @@ export class AuthorizeGuard implements CanActivateChild {
         map((resp) => {
           if (resp.valid) {
             // valid → redirect to the specified URI
-            ;(this.window as any).outOfRouterNavigation(
-              queryParams.redirect_uri
-            )
+            const target = `${queryParams.redirect_uri}#login_required`
+
+            ;(this.window as any).outOfRouterNavigation(target)
             return false
           }
           // invalid → send to your 404 page
@@ -142,11 +137,11 @@ export class AuthorizeGuard implements CanActivateChild {
   private redirectToLoginPage(): Observable<UrlTree> {
     this.oauthUrlSessionManger.set(this.window.location.href)
     return this.platform.get().pipe(
-      map(({ queryParameters }) =>
-        this.router.createUrlTree(['/signin'], {
+      map(({ queryParameters }) => {
+        return this.router.createUrlTree(['/signin'], {
           queryParams: { ...queryParameters },
         })
-      )
+      })
     )
   }
 }

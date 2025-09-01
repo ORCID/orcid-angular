@@ -37,47 +37,77 @@ export class SignInGuard {
       take(1),
       map(({ isOauthAuthorizationTogglzEnable, session }) => {
         if (!isOauthAuthorizationTogglzEnable && session.oauthSession) {
-          if (queryParams.email || queryParams.orcid) {
-            // TODO at the moment user arriving with an email on the Oauth url.
-            // are not allow to go back.
-            return this.isUserLoggedInOrExist(session, queryParams)
-          } else if (
-            queryParams.show_login &&
-            (queryParams.email || queryParams.orcid)
-          ) {
-            return this.isUserLoggedInOrExist(session, queryParams)
-          } else if (queryParams.show_login === 'false') {
-            return this.isUserLoggedInOrExist(session, queryParams)
-          } else if (
-            !session.oauthSession.forceLogin &&
-            session.oauthSessionIsLoggedIn
-          ) {
-            return this._router.createUrlTree(['/oauth/authorize'], {
-              queryParams: queryParams,
-            })
-          }
-        } else if (isOauthAuthorizationTogglzEnable && queryParams.client_id) {
-          if (
-            session.loggedIn &&
-            queryParams.show_login !== 'true' &&
-            queryParams.prompt !== 'login'
-          ) {
-            return this._router.createUrlTree(['/oauth/authorize'], {
-              queryParams: queryParams,
-            })
-          }
+          return this.handleOauthLegacyAuthorization(session, queryParams)
+        } else if (isOauthAuthorizationTogglzEnable && session.oauthSession) {
+          return this.handleOauth2Authorization(session, queryParams)
         }
         return true
       })
     )
   }
 
-  private isUserLoggedInOrExist(session, queryParams) {
-    const userId = !!session.oauthSession.userId
-    if (!userId && !session.oauthSessionIsLoggedIn) {
-      return this.redirectToRegister(queryParams)
+  private handleOauthLegacyAuthorization(session, queryParams) {
+    // If there is no oauthSession, do nothing special
+    if (!session?.oauthSession) return true
+
+    const hasUserIdentifier = !!(queryParams?.email || queryParams?.orcid)
+    const showLoginIsFalse = queryParams?.show_login === 'false'
+    const userIsLoggedIn = !!session?.oauthSessionIsLoggedIn
+
+    if (!userIsLoggedIn) {
+      // When arriving with an identifier (email/orcid), or explicitly show_login === 'false',
+      // we check if the user exists or redirect to register
+      if (hasUserIdentifier) {
+        return this.allowExistingUserOrRedirectToRegister(session, queryParams)
+      }
+      if (showLoginIsFalse) {
+        return this.allowExistingUserOrRedirectToRegister(session, queryParams)
+      }
+    } else {
+      // If already logged into the oauth session and not forced to login, go straight to authorize
+      if (!session.oauthSession.forceLogin) {
+        return this.redirectToAuthorize(queryParams)
+      }
     }
+
     return true
+  }
+
+  private handleOauth2Authorization(session, queryParams) {
+    // If there is no oauthSession, do nothing special
+    if (!session?.oauthSession) return true
+
+    const showLoginIsFalse = queryParams?.show_login === 'false'
+    const userIsLoggedIn = !!session?.oauthSessionIsLoggedIn
+    const scopeIsOpenId = queryParams?.scope === 'openid'
+    const promptLogin = queryParams?.prompt === 'login'
+
+    if (!userIsLoggedIn) {
+      if (showLoginIsFalse) {
+        return this.allowExistingUserOrRedirectToRegister(session, queryParams)
+      }
+    } else {
+      // If already logged into the oauth session and not forced to login, go straight to authorize
+      // prompt=login only applies to openid scope
+      if (!(promptLogin && scopeIsOpenId)) {
+        return this.redirectToAuthorize(queryParams)
+      }
+    }
+
+    return true
+  }
+
+  private allowExistingUserOrRedirectToRegister(session, queryParams) {
+    // NOTE session?.oauthSession?.userId is not present on the Oauth2 Server
+    // This means that ones the Legacy Authorization is disabled, we will always redirect to register
+    const userExists = !!session?.oauthSession?.userId
+    return userExists ? true : this.redirectToRegister(queryParams)
+  }
+
+  private redirectToAuthorize(queryParams) {
+    return this._router.createUrlTree(['/oauth/authorize'], {
+      queryParams: queryParams,
+    })
   }
 
   private redirectToRegister(queryParams) {

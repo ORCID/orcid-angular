@@ -28,6 +28,7 @@ import { LegacyOauthRequestInfoForm as RequestInfoForm } from 'src/app/types/req
 import { UserRecord } from 'src/app/types/record.local'
 import { UserSession } from 'src/app/types/session.local'
 import { CdkPortalOutlet, ComponentPortal, Portal } from '@angular/cdk/portal'
+import { OauthURLSessionManagerService } from 'src/app/core/oauth-urlsession-manager/oauth-urlsession-manager.service'
 
 @Component({
   templateUrl: './authorize.component.html',
@@ -66,7 +67,9 @@ export class AuthorizeComponent {
     private platformInfoService: PlatformInfoService,
     @Inject(WINDOW) private window: Window,
     private recordService: RecordService,
-    private loginMainInterstitialsManagerService: LoginMainInterstitialsManagerService
+    private loginMainInterstitialsManagerService: LoginMainInterstitialsManagerService,
+    private toglzService: TogglzService,
+    private oauthUrlSessionManger: OauthURLSessionManagerService
   ) {}
 
   /**
@@ -108,15 +111,8 @@ export class AuthorizeComponent {
     if (this.redirectUrl && this.isThereInterstitialToShow()) {
       this.showInterstitial()
     } else {
-      this.finishRedirect()
+      this.finishRedirect().subscribe()
     }
-  }
-
-  /**
-   * Internal method to finalize redirection (non-observable variant).
-   */
-  finishRedirect(): void {
-    ;(this.window as any).outOfRouterNavigation(this.redirectUrl)
   }
 
   /*
@@ -126,13 +122,28 @@ export class AuthorizeComponent {
    */
 
   /**
-   * Finalize redirection returning an Observable (for chaining).
+   * Redirect after user authorization and (optionally) after interstitial
    */
-  private finishRedirectObs(
+  private finishRedirect(): Observable<boolean> {
+    return this.toglzService.getStateOf('OAUTH2_AUTHORIZATION').pipe(
+      tap((useAuthServerFlag) => {
+        if (useAuthServerFlag === true) {
+          this.oauthUrlSessionManger.clear()
+          ;(this.window as any).outOfRouterNavigation(this.redirectUrl)
+        } else {
+          ;(this.window as any).outOfRouterNavigation(this.redirectUrl)
+        }
+      })
+    )
+  }
+
+  /**
+   * Redirect the user inmidiatly (Orcid pages is not showed) when user is already authorized
+   */
+  private alreadyAuthorizeRedirect(
     oauthSession: RequestInfoForm
   ): Observable<boolean> {
-    ;(this.window as any).outOfRouterNavigation(oauthSession.redirectUrl)
-    return NEVER
+    return this.finishRedirect()
   }
 
   /**
@@ -150,9 +161,9 @@ export class AuthorizeComponent {
 
     const componentRef = this.outlet.attachComponentPortal(portal)
 
-    componentRef.instance.finish.subscribe(() => {
-      this.finishRedirect()
-    })
+    componentRef.instance.finish
+      .pipe(switchMap(() => this.finishRedirect()))
+      .subscribe()
 
     componentRef.changeDetectorRef.detectChanges()
 
@@ -201,7 +212,7 @@ export class AuthorizeComponent {
         this.redirectUrl = this.oauthSession.redirectUrl
         setTimeout(() => this.showInterstitial())
       } else {
-        this.finishRedirectObs(this.oauthSession)
+        this.alreadyAuthorizeRedirect(this.oauthSession)
       }
       return
     } else {

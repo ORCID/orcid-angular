@@ -1,6 +1,11 @@
 import { TestBed } from '@angular/core/testing'
-import { Router, UrlTree } from '@angular/router'
-import { of } from 'rxjs'
+import {
+  Router,
+  UrlTree,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+} from '@angular/router'
+import { of, firstValueFrom } from 'rxjs'
 
 import { AuthorizeGuard } from './authorize.guard'
 import { UserService } from '../core'
@@ -14,10 +19,8 @@ describe('AuthorizeGuard', () => {
   let user: jasmine.SpyObj<UserService>
   let router: jasmine.SpyObj<Router>
   let platform: jasmine.SpyObj<PlatformInfoService>
-
-  // --------------------------------------------------------------------------
-  // Helpers
-  // --------------------------------------------------------------------------
+  let togglz: { getStateOf: jasmine.Spy }
+  let oauthService: { validateRedirectUri: jasmine.Spy }
   function stubUrlTree(
     path: string,
     query: Record<string, unknown> = {}
@@ -29,6 +32,10 @@ describe('AuthorizeGuard', () => {
     user = jasmine.createSpyObj('UserService', ['getUserSession'])
     router = jasmine.createSpyObj('Router', ['createUrlTree'])
     platform = jasmine.createSpyObj('PlatformInfoService', ['get'])
+    togglz = { getStateOf: jasmine.createSpy('getStateOf') }
+    oauthService = {
+      validateRedirectUri: jasmine.createSpy('validateRedirectUri'),
+    }
 
     TestBed.configureTestingModule({
       providers: [
@@ -37,92 +44,183 @@ describe('AuthorizeGuard', () => {
         { provide: Router, useValue: router },
         { provide: PlatformInfoService, useValue: platform },
         { provide: WINDOW, useValue: { location: { href: 'href' } } },
-        { provide: TogglzService, useValue: { getStateOf: () => of(false) } },
-        { provide: OauthService, useValue: {} },
+        { provide: TogglzService, useValue: togglz },
+        { provide: OauthService, useValue: oauthService },
       ],
     })
 
     guard = TestBed.inject(AuthorizeGuard)
   })
 
-  // --------------------------------------------------------------------------
-  // Test cases
-  // --------------------------------------------------------------------------
+  function makeSnapshot(queryParams: any): ActivatedRouteSnapshot {
+    return { queryParams } as unknown as ActivatedRouteSnapshot
+  }
 
-  it('redirects locked accounts to /my-orcid', (done) => {
-    user.getUserSession.and.returnValue(
-      of({ userInfo: { LOCKED: 'true' } } as any)
-    )
-    router.createUrlTree.and.returnValue(stubUrlTree('/my-orcid'))
+  async function runGuard(qp: any, session: any, togglzValue: boolean = false) {
+    togglz.getStateOf.and.returnValue(of(togglzValue))
+    user.getUserSession.and.returnValue(of(session))
+    const result = (await firstValueFrom(
+      guard.canActivateChild(makeSnapshot(qp), {} as RouterStateSnapshot)
+    )) as boolean | UrlTree
+    return result
+  }
 
-    guard.canActivateChild({} as any, {} as any).subscribe((result) => {
+  describe('OAUTH_AUTHORIZATION Disabled', () => {
+    it('redirects locked accounts to /my-orcid', async () => {
+      router.createUrlTree.and.returnValue(stubUrlTree('/my-orcid'))
+      const session = { userInfo: { LOCKED: 'true' } } as any
+      const result = await runGuard({}, session)
       expect(router.createUrlTree).toHaveBeenCalledWith(['/my-orcid'])
       expect(result).toBe(router.createUrlTree.calls.mostRecent().returnValue)
-      done()
     })
-  })
 
-  it('allows navigation when oauthSession.error is set', (done) => {
-    user.getUserSession.and.returnValue(
-      of({ oauthSession: { error: 'anything' } } as any)
-    )
-
-    guard.canActivateChild({} as any, {} as any).subscribe((result) => {
+    it('allows navigation when oauthSession.error is set', async () => {
+      const session = { oauthSession: { error: 'anything' } } as any
+      const result = await runGuard({}, session)
       expect(result).toBeTrue()
       expect(router.createUrlTree).not.toHaveBeenCalled()
-      done()
     })
-  })
 
-  it('redirects to /signin when forceLogin is true', (done) => {
-    user.getUserSession.and.returnValue(
-      of({ oauthSession: { forceLogin: true } } as any)
-    )
-    platform.get.and.returnValue(of({ queryParameters: { foo: 'bar' } } as any))
-    router.createUrlTree.and.callFake((segments: any, opts: any) =>
-      stubUrlTree(segments[0], opts.queryParams)
-    )
-
-    guard.canActivateChild({} as any, {} as any).subscribe((result) => {
+    it('redirects to /signin when forceLogin is true', async () => {
+      platform.get.and.returnValue(
+        of({ queryParameters: { foo: 'bar' } } as any)
+      )
+      router.createUrlTree.and.callFake((segments: any, opts: any) =>
+        stubUrlTree(segments[0], opts.queryParams)
+      )
+      const session = { oauthSession: { forceLogin: true } } as any
+      const result = await runGuard({}, session)
       expect(router.createUrlTree).toHaveBeenCalledWith(['/signin'], {
         queryParams: { foo: 'bar' },
       })
       expect(result).toBe(router.createUrlTree.calls.mostRecent().returnValue)
-      done()
     })
-  })
 
-  it('redirects to /signin when NOT logged-in and no error', (done) => {
-    user.getUserSession.and.returnValue(
-      of({
-        oauthSession: {},
-        oauthSessionIsLoggedIn: false,
-      } as any)
-    )
-    platform.get.and.returnValue(of({ queryParameters: {} } as any))
-    router.createUrlTree.and.returnValue(stubUrlTree('/signin'))
+    it('redirects to /signin when NOT logged-in and no error', async () => {
+      platform.get.and.returnValue(of({ queryParameters: {} } as any))
+      router.createUrlTree.and.returnValue(stubUrlTree('/signin'))
 
-    guard.canActivateChild({} as any, {} as any).subscribe((result) => {
+      const session = { oauthSession: {}, oauthSessionIsLoggedIn: false } as any
+      const result = await runGuard({}, session, true)
       expect(router.createUrlTree).toHaveBeenCalledWith(['/signin'], {
         queryParams: {},
       })
       expect(result).toBe(router.createUrlTree.calls.mostRecent().returnValue)
-      done()
     })
-  })
 
-  it('allows navigation when logged-in and no error', (done) => {
-    user.getUserSession.and.returnValue(
-      of({
-        oauthSession: {},
-        oauthSessionIsLoggedIn: true,
-      } as any)
-    )
-
-    guard.canActivateChild({} as any, {} as any).subscribe((result) => {
+    it('allows navigation when logged-in and no error', async () => {
+      const session = { oauthSession: {}, oauthSessionIsLoggedIn: true } as any
+      const result = await runGuard({}, session)
       expect(result).toBeTrue()
       expect(router.createUrlTree).not.toHaveBeenCalled()
-      done()
+    })
+
+    it('redirects to /signin when no oauthSession present', async () => {
+      platform.get.and.returnValue(of({ queryParameters: { x: '1' } } as any))
+      router.createUrlTree.and.callFake((segments: any, opts: any) =>
+        stubUrlTree(segments[0], opts.queryParams)
+      )
+
+      const session = { oauthSession: undefined } as any
+      const result = await runGuard({ any: 'qp' }, session)
+      expect(router.createUrlTree).toHaveBeenCalledWith(['/signin'], {
+        queryParams: { x: '1' },
+      })
+      expect(result).toBe(router.createUrlTree.calls.mostRecent().returnValue)
+    })
+
+    it('allows navigation when error is set even if forceLogin is true', async () => {
+      const session = {
+        oauthSession: { error: 'err', forceLogin: true },
+        oauthSessionIsLoggedIn: false,
+      } as any
+      const result = await runGuard({}, session)
+      expect(result).toBeTrue()
+      expect(router.createUrlTree).not.toHaveBeenCalled()
+    })
+  })
+  fdescribe('OAUTH_AUTHORIZATION Enable', () => {
+    it('redirects locked accounts to /my-orcid', async () => {
+      router.createUrlTree.and.returnValue(stubUrlTree('/my-orcid'))
+      const session = { userInfo: { LOCKED: 'true' } } as any
+      const result = await runGuard({}, session, true)
+      expect(router.createUrlTree).toHaveBeenCalledWith(['/my-orcid'])
+      expect(result).toBe(router.createUrlTree.calls.mostRecent().returnValue)
+    })
+
+    it('Send the user to /signif not logged in', async () => {
+      oauthService.validateRedirectUri.and.returnValue(of(true))
+      platform.get.and.returnValue(of({ queryParameters: { x: '1' } } as any))
+      const session = {}
+      const result = await runGuard({}, session, true)
+      // `/signin` and any Object
+      expect(router.createUrlTree).toHaveBeenCalledWith(
+        ['/signin'],
+        jasmine.any(Object)
+      )
+    })
+
+    it('redirects to /signin when prompt = login', async () => {
+      platform.get.and.returnValue(
+        of({ queryParameters: { foo: 'bar' } } as any)
+      )
+      router.createUrlTree.and.callFake((segments: any, opts: any) =>
+        stubUrlTree(segments[0], opts.queryParams)
+      )
+      const session = { oauthSession: { forceLogin: true } } as any
+      const result = await runGuard(
+        { queryParams: { prompt: 'login' } },
+        session,
+        true
+      )
+      expect(router.createUrlTree).toHaveBeenCalledWith(['/signin'], {
+        queryParams: { foo: 'bar' },
+      })
+      expect(result).toBe(router.createUrlTree.calls.mostRecent().returnValue)
+    })
+
+    it('redirects to /signin when NOT logged-in', async () => {
+      platform.get.and.returnValue(of({ queryParameters: {} } as any))
+      router.createUrlTree.and.returnValue(stubUrlTree('/signin'))
+
+      const session = { oauthSession: {}, oauthSessionIsLoggedIn: false } as any
+      const result = await runGuard({}, session, true)
+      expect(router.createUrlTree).toHaveBeenCalledWith(['/signin'], {
+        queryParams: {},
+      })
+      expect(result).toBe(router.createUrlTree.calls.mostRecent().returnValue)
+    })
+
+    it('allows navigation when logged-in and no error', async () => {
+
+      const session = { oauthSession: {}, oauthSessionIsLoggedIn: true } as any
+      const result = await runGuard({}, session, true)
+      expect(result).toBeTrue()
+      expect(router.createUrlTree).not.toHaveBeenCalled()
+    })
+
+    it('redirects to /signin when no oauthSession present', async () => {
+      platform.get.and.returnValue(of({ queryParameters: { x: '1' } } as any))
+      router.createUrlTree.and.callFake((segments: any, opts: any) =>
+        stubUrlTree(segments[0], opts.queryParams)
+      )
+
+      const session = { oauthSession: undefined } as any
+      const result = await runGuard({ any: 'qp' }, session, true)
+      expect(router.createUrlTree).toHaveBeenCalledWith(['/signin'], {
+        queryParams: { x: '1' },
+      })
+      expect(result).toBe(router.createUrlTree.calls.mostRecent().returnValue)
+    })
+
+    it('allows navigation when logged-in and there is an error', async () => {
+      const session = {
+        oauthSession: { error: 'err', forceLogin: true },
+        oauthSessionIsLoggedIn: true,
+      } as any
+      const result = await runGuard({}, session, true)
+      expect(result).toBeTrue()
+      expect(router.createUrlTree).not.toHaveBeenCalled()
     })
   })
 })

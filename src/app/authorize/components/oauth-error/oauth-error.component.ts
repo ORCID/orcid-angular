@@ -48,7 +48,6 @@ export class OauthErrorComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log('OauthErrorComponent')
     this._togglz
       .getStateOf('OAUTH_AUTHORIZATION')
       .pipe(

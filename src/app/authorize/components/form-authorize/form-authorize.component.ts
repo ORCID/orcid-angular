@@ -115,7 +115,6 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
     })
 
     setTimeout(() => {
-      console.log('oauthRequest', this.oauthRequest)
       this._titleService.setTitle(
         this.authorizeAccessFor +
           ' ' +
