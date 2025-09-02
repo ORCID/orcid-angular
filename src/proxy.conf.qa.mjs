@@ -1,5 +1,3 @@
-// proxy.conf.qa.mjs  (ESM)
-
 /**
  * ──────────────────────────────────────────────────────────────────────────────
  * onProxyReq for /auth: before sending to auth.qa.orcid.org,

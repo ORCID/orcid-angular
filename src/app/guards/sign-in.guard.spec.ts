@@ -9,23 +9,18 @@ import {
   RouterStateSnapshot,
 } from '@angular/router'
 import { RouterTestingModule } from '@angular/router/testing'
-import { MatDialog } from '@angular/material/dialog'
-import { WINDOW_PROVIDERS } from '../cdk/window'
-import { PlatformInfoService } from '../cdk/platform-info'
-import { ErrorHandlerService } from '../core/error-handler/error-handler.service'
-import { SnackbarService } from '../cdk/snackbar/snackbar.service'
-import { MatSnackBar } from '@angular/material/snack-bar'
-import { Overlay } from '@angular/cdk/overlay'
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { of, firstValueFrom } from 'rxjs'
 import { UserService } from '../core/user/user.service'
 import { TogglzService } from '../core/togglz/togglz.service'
+import { AuthDecisionService } from '../core/auth-decision/auth-decision.service'
 
 describe('SignInGuard', () => {
   let guard: SignInGuard
   let router: Router
   let userServiceMock: { getUserSession: jasmine.Spy }
   let togglzServiceMock: { getStateOf: jasmine.Spy }
+  let decisionMock: { decideForSignIn: jasmine.Spy }
 
   beforeEach(() => {
     userServiceMock = {
@@ -34,18 +29,16 @@ describe('SignInGuard', () => {
     togglzServiceMock = {
       getStateOf: jasmine.createSpy('getStateOf'),
     }
+    decisionMock = {
+      decideForSignIn: jasmine.createSpy('decideForSignIn'),
+    }
+
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, RouterTestingModule],
       providers: [
-        WINDOW_PROVIDERS,
-        PlatformInfoService,
-        ErrorHandlerService,
-        SnackbarService,
-        MatSnackBar,
-        MatDialog,
-        Overlay,
         { provide: UserService, useValue: userServiceMock },
         { provide: TogglzService, useValue: togglzServiceMock },
+        { provide: AuthDecisionService, useValue: decisionMock },
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
@@ -61,7 +54,7 @@ describe('SignInGuard', () => {
     return { queryParams } as unknown as ActivatedRouteSnapshot
   }
 
-  async function runGuard(qp: any, session: any, toglz: boolean = false) {
+  async function runGuardHelper(qp: any, session: any, toglz: boolean = false) {
     togglzServiceMock.getStateOf.and.returnValue(of(toglz))
     userServiceMock.getUserSession.and.returnValue(of(session))
     const result = (await firstValueFrom(
@@ -69,261 +62,53 @@ describe('SignInGuard', () => {
     )) as boolean | UrlTree
     return result
   }
-  describe('OAUTH_AUTHORIZATION Disabled', () => {
-    it('redirects to /register when email present with no userId (User Dont Exists) and not logged in', async () => {
-      const qp = { email: 'user@example.org' }
-      const session = {
-        oauthSession: { userId: undefined, forceLogin: false },
-        oauthSessionIsLoggedIn: false,
-      }
-      const result = await runGuard(qp, session)
-      expect(result instanceof UrlTree).toBeTrue()
-      expect(router.serializeUrl(result as UrlTree)).toBe(
-        '/register?email=user@example.org'
+  describe('integration with AuthDecisionService', () => {
+    it('calls decision service with session, togglz, and queryParams', async () => {
+      const qp = { a: '1' }
+      const session = { oauthSession: {} }
+      decisionMock.decideForSignIn.and.returnValue({ action: 'allow', trace: [] })
+
+      await runGuardHelper(qp, session, true)
+
+      expect(decisionMock.decideForSignIn).toHaveBeenCalledWith(
+        session as any,
+        true,
+        qp as any
       )
     })
 
-    it("redirects to /register when show_login === 'false' with no userId (User Dont Exists) and not logged in", async () => {
-      const qp = { show_login: 'false' }
-      const session = {
-        oauthSession: { userId: undefined, forceLogin: false },
-        oauthSessionIsLoggedIn: false,
-      }
-      const result = await runGuard(qp, session)
+    it("returns UrlTree to '/oauth/authorize' when action is redirectToAuthorize", async () => {
+      const qp = { client_id: 'abc' }
+      const session = { oauthSession: {} }
+      decisionMock.decideForSignIn.and.returnValue({
+        action: 'redirectToAuthorize',
+        trace: [],
+        payload: { queryParams: qp },
+      })
+      const result = await runGuardHelper(qp, session, true)
       expect(result instanceof UrlTree).toBeTrue()
-      expect(router.serializeUrl(result as UrlTree)).toBe(
-        '/register?show_login=false'
-      )
+      expect(router.serializeUrl(result as UrlTree)).toBe('/oauth/authorize?client_id=abc')
     })
 
-    it('redirects to /oauth/authorize when oauthSessionIsLoggedIn and not forceLogin', async () => {
-      const qp = { client_id: 'abc123' }
-      const session = {
-        oauthSession: { userId: 'u1', forceLogin: false },
-        oauthSessionIsLoggedIn: true,
-      }
-      const result = await runGuard(qp, session)
+    it("returns UrlTree to '/register' when action is redirectToRegister", async () => {
+      const qp = { email: 'e@x' }
+      const session = { oauthSession: {} }
+      decisionMock.decideForSignIn.and.returnValue({
+        action: 'redirectToRegister',
+        trace: [],
+        payload: { queryParams: qp },
+      })
+      const result = await runGuardHelper(qp, session, true)
       expect(result instanceof UrlTree).toBeTrue()
-      expect(router.serializeUrl(result as UrlTree)).toBe(
-        '/oauth/authorize?client_id=abc123'
-      )
+      expect(router.serializeUrl(result as UrlTree)).toBe('/register?email=e@x')
     })
 
-    it('allos user go to login (return true) when no matching conditions', async () => {
-      const qp = { show_login: 'true' }
-      const session = {
-        oauthSession: { userId: undefined },
-        oauthSessionIsLoggedIn: false,
-      }
-      const result = await runGuard(qp, session)
-      expect(result).toBeTrue()
-    })
-
-    it('returns true when no oauthSession present', async () => {
+    it('returns true when action is allow', async () => {
       const qp = {}
-      const session = {
-        oauthSession: undefined,
-        oauthSessionIsLoggedIn: false,
-      }
-      const result = await runGuard(qp, session)
+      const session = { oauthSession: {} }
+      decisionMock.decideForSignIn.and.returnValue({ action: 'allow', trace: [] })
+      const result = await runGuardHelper(qp, session, true)
       expect(result).toBeTrue()
-    })
-
-    it('returns true when email present but user exists (userId present)', async () => {
-      const qp = { email: 'user@example.org' }
-      const session = {
-        oauthSession: { userId: 'existing-user', forceLogin: false },
-        oauthSessionIsLoggedIn: false,
-      }
-      const result = await runGuard(qp, session)
-      expect(result).toBeTrue()
-    })
-
-    it('redirect to /oauth/authorize when email present but oauthSessionIsLoggedIn is true', async () => {
-      const qp = { email: 'user@example.org' }
-      const session = {
-        oauthSession: { userId: undefined, forceLogin: false },
-        oauthSessionIsLoggedIn: true,
-      }
-      const result = await runGuard(qp, session)
-      expect(result instanceof UrlTree).toBeTrue()
-      expect(router.serializeUrl(result as UrlTree)).toBe(
-        '/oauth/authorize?email=user@example.org'
-      )
-    })
-
-    it("returns true when show_login === 'false' but user exists (userId present)", async () => {
-      const qp = { show_login: 'false' }
-      const session = {
-        oauthSession: { userId: 'existing-user', forceLogin: false },
-        oauthSessionIsLoggedIn: false,
-      }
-      const result = await runGuard(qp, session)
-      expect(result).toBeTrue()
-    })
-
-    it("redirect to /oauth/authorize when show_login === 'false' and oauthSessionIsLoggedIn is true", async () => {
-      const qp = { show_login: 'false' }
-      const session = {
-        oauthSession: { userId: undefined, forceLogin: false },
-        oauthSessionIsLoggedIn: true,
-      }
-      const result = await runGuard(qp, session)
-      expect(result instanceof UrlTree).toBeTrue()
-      expect(router.serializeUrl(result as UrlTree)).toBe(
-        '/oauth/authorize?show_login=false'
-      )
-    })
-
-    it('returns true when oauthSessionIsLoggedIn is true but forceLogin is true', async () => {
-      const qp = { client_id: 'abc123' }
-      const session = {
-        oauthSession: { userId: 'u1', forceLogin: true },
-        oauthSessionIsLoggedIn: true,
-      }
-      const result = await runGuard(qp, session)
-      expect(result).toBeTrue()
-    })
-
-    it('redirects to /register when orcid present with no userId (User Dont Exists) and not logged in', async () => {
-      const qp = { orcid: '0000-0002-1825-0097' }
-      const session = {
-        oauthSession: { userId: undefined, forceLogin: false },
-        oauthSessionIsLoggedIn: false,
-      }
-      const result = await runGuard(qp, session)
-      expect(result instanceof UrlTree).toBeTrue()
-      expect(router.serializeUrl(result as UrlTree)).toBe(
-        '/register?orcid=0000-0002-1825-0097'
-      )
-    })
-  })
-  describe('OAUTH_AUTHORIZATION Enable', () => {
-    it('redirects to /register when email present, forceLogin is true and  and not logged in **', async () => {
-      const qp = { email: 'user@example.org', show_login: 'false' }
-      const session = {
-        oauthSession: {},
-        oauthSessionIsLoggedIn: false,
-      }
-      const result = await runGuard(qp, session, true)
-      expect(result instanceof UrlTree).toBeTrue()
-      expect(router.serializeUrl(result as UrlTree)).toBe(
-        '/register?email=user@example.org&show_login=false'
-      )
-    })
-
-    it('redirects to /oauth/authorize when oauthSessionIsLoggedIn and not forceLogin (prompt !== login) **', async () => {
-      const qp = { client_id: 'abc123' }
-      const session = {
-        oauthSession: {},
-        oauthSessionIsLoggedIn: true,
-      }
-      const result = await runGuard(qp, session, true)
-      expect(result instanceof UrlTree).toBeTrue()
-      expect(router.serializeUrl(result as UrlTree)).toBe(
-        '/oauth/authorize?client_id=abc123'
-      )
-    })
-
-    it('allow the user go to login (return true) when no matching conditions', async () => {
-      const qp = { show_login: 'true' }
-      const session = {
-        oauthSession: {},
-        oauthSessionIsLoggedIn: false,
-      }
-      const result = await runGuard(qp, session, true)
-      expect(result).toBeTrue()
-    })
-
-    it('returns true when no oauthSession present', async () => {
-      const qp = {}
-      const session = {
-        oauthSession: undefined,
-        oauthSessionIsLoggedIn: false,
-      }
-      const result = await runGuard(qp, session, true)
-      expect(result).toBeTrue()
-    })
-
-    it('returns true when email present but no prompt=login', async () => {
-      const qp = { email: 'user@example.org' }
-      const session = {
-        oauthSession: {},
-        oauthSessionIsLoggedIn: false,
-      }
-      const result = await runGuard(qp, session, true)
-      expect(result).toBeTrue()
-    })
-
-    it('returns true when email present and prompt=login', async () => {
-      const qp = { email: 'user@example.org', prompt: 'login' }
-      const session = {
-        oauthSession: {},
-        oauthSessionIsLoggedIn: true,
-      }
-      const result = await runGuard(qp, session, true)
-      expect(result).toBeTrue()
-    })
-
-    it("redirect to /oauth/authorize when show_login === 'false' and oauthSessionIsLoggedIn is true", async () => {
-      const qp = { show_login: 'false' }
-      const session = {
-        oauthSession: {},
-        oauthSessionIsLoggedIn: true,
-      }
-      const result = await runGuard(qp, session, true)
-      expect(result instanceof UrlTree).toBeTrue()
-      expect(router.serializeUrl(result as UrlTree)).toBe(
-        '/oauth/authorize?show_login=false'
-      )
-    })
-    it("redirect to /register when show_login === 'false' and oauthSessionIsLoggedIn is false", async () => {
-      const qp = { show_login: 'false' }
-      const session = {
-        oauthSession: {},
-        oauthSessionIsLoggedIn: false,
-      }
-      const result = await runGuard(qp, session, true)
-      expect(result instanceof UrlTree).toBeTrue()
-      expect(router.serializeUrl(result as UrlTree)).toBe(
-        '/register?show_login=false'
-      )
-    })
-
-    it('returns true when oauthSessionIsLoggedIn is true, prompt = login and scope = openid', async () => {
-      const qp = { prompt: 'login', scope: 'openid' }
-      const session = {
-        oauthSession: {},
-        oauthSessionIsLoggedIn: true,
-      }
-      const result = await runGuard(qp, session, true)
-      expect(result).toBeTrue()
-    })
-
-    it('redirects to /oauth/authorize when oauthSessionIsLoggedIn is true, prompt = login and scope != openid', async () => {
-      const qp = { prompt: 'login', scope: 'email' }
-      const session = {
-        oauthSession: {},
-        oauthSessionIsLoggedIn: true,
-      }
-      const result = await runGuard(qp, session, true)
-      expect(result instanceof UrlTree).toBeTrue()
-      expect(router.serializeUrl(result as UrlTree)).toBe(
-        '/oauth/authorize?prompt=login&scope=email'
-      )
-    })
-
-    it('redirects to /register when orcid present and show_login is false', async () => {
-      const qp = { orcid: '0000-0002-1825-0097', show_login: 'false' }
-      const session = {
-        oauthSession: {},
-        oauthSessionIsLoggedIn: false,
-      }
-      const result = await runGuard(qp, session, true)
-      expect(result instanceof UrlTree).toBeTrue()
-      expect(router.serializeUrl(result as UrlTree)).toBe(
-        '/register?orcid=0000-0002-1825-0097&show_login=false'
-      )
     })
   })
 })
