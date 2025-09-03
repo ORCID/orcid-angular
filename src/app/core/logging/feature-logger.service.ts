@@ -9,8 +9,13 @@ export class FeatureLoggerService {
    */
   info(feature: string, ...details: unknown[]): void {
     if (this.shouldLog('info')) {
-      // Keep the same shape used across the app (separate args over string concat)
-      console.info(`[${feature}]`, ...details)
+      // Print each detail on its own line, arrays indented recursively
+      const body = this.formatDetails(details)
+      if (body) {
+        console.info(`[${feature}]`, `\n${body}`)
+      } else {
+        console.info(`[${feature}]`)
+      }
     }
   }
 
@@ -19,7 +24,12 @@ export class FeatureLoggerService {
    */
   warn(feature: string, ...details: unknown[]): void {
     if (this.shouldLog('warn')) {
-      console.warn(`[${feature}]`, ...details)
+      const body = this.formatDetails(details)
+      if (body) {
+        console.warn(`[${feature}]`, `\n${body}`)
+      } else {
+        console.warn(`[${feature}]`)
+      }
     }
   }
 
@@ -28,7 +38,12 @@ export class FeatureLoggerService {
    */
   error(feature: string, ...details: unknown[]): void {
     if (this.shouldLog('error')) {
-      console.error(`[${feature}]`, ...details)
+      const body = this.formatDetails(details)
+      if (body) {
+        console.error(`[${feature}]`, `\n${body}`)
+      } else {
+        console.error(`[${feature}]`)
+      }
     }
   }
 
@@ -37,7 +52,12 @@ export class FeatureLoggerService {
    */
   debug(feature: string, ...details: unknown[]): void {
     if (this.shouldLog('debug')) {
-      console.info(`[${feature}]`, ...details)
+      const body = this.formatDetails(details)
+      if (body) {
+        console.info(`[${feature}]`, `\n${body}`)
+      } else {
+        console.info(`[${feature}]`)
+      }
     }
   }
 
@@ -56,12 +76,43 @@ export class FeatureLoggerService {
     }
   }
 
+  private formatDetails(details: unknown[], indent = 0): string {
+    const lines: string[] = []
+    const prefix = '  '.repeat(indent)
+    for (const part of details) {
+      if (Array.isArray(part)) {
+        if (part.length === 0) {
+          // Represent empty arrays explicitly
+          lines.push(`${prefix}- []`)
+        } else {
+          const nested = this.formatDetails(part, indent + 1)
+          if (nested) {
+            lines.push(nested)
+          }
+        }
+      } else {
+        lines.push(`${prefix}- ${this.stringifyForLine(part)}`)
+      }
+    }
+    return lines.join('\n')
+  }
+
+  private stringifyForLine(value: unknown): string {
+    if (typeof value === 'string') return value
+    if (value instanceof Error) return value.stack || value.message
+    try {
+      return JSON.stringify(value)
+    } catch {
+      return String(value)
+    }
+  }
+
   private shouldLog(level: FeatureLogLevel): boolean {
-    // Align with interstitials manager behavior: only log when debugger flag is on
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const dbg = (globalThis as any)?.runtimeEnvironment?.debugger
     return !!dbg
   }
 }
+
 
 

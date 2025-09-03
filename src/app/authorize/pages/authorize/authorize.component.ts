@@ -1,34 +1,27 @@
 import { ComponentType } from '@angular/cdk/overlay'
 import { Component, Inject, ViewChild } from '@angular/core'
-import { cloneDeep } from 'lodash'
-import { Observable, forkJoin, NEVER, of } from 'rxjs'
+import { Observable, forkJoin, of } from 'rxjs'
 import {
   filter,
   finalize,
   first,
-  map,
   mapTo,
   switchMap,
   take,
   tap,
 } from 'rxjs/operators'
-import { InterstitialsService } from 'src/app/cdk/interstitials/interstitials.service'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { UserService } from 'src/app/core'
-import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
-import { GoogleTagManagerService } from 'src/app/core/google-tag-manager/google-tag-manager.service'
 import { LoginMainInterstitialsManagerService } from 'src/app/core/login-interstitials-manager/login-main-interstitials-manager.service'
-import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
 import { RecordService } from 'src/app/core/record/record.service'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
-import { ERROR_REPORT } from 'src/app/errors'
-import { EmailsEndpoint } from 'src/app/types'
 import { LegacyOauthRequestInfoForm as RequestInfoForm } from 'src/app/types/request-info-form.endpoint'
 import { UserRecord } from 'src/app/types/record.local'
 import { UserSession } from 'src/app/types/session.local'
-import { CdkPortalOutlet, ComponentPortal, Portal } from '@angular/cdk/portal'
+import { CdkPortalOutlet, ComponentPortal } from '@angular/cdk/portal'
 import { OauthURLSessionManagerService } from 'src/app/core/oauth-urlsession-manager/oauth-urlsession-manager.service'
+import { FeatureLoggerService } from 'src/app/core/logging/feature-logger.service'
 
 @Component({
   templateUrl: './authorize.component.html',
@@ -48,20 +41,12 @@ export class AuthorizeComponent {
   showInterstital = false
   loading = true
 
-  originalEmailsBackendCopy: EmailsEndpoint
   oauthSession: any
 
-  // Domain / Interstitial properties
-  hasPrivateDomains = false
-  hasPublicDomains = false
-  isOAuthDomainsInterstitialEnabled = false
-  hasDomainInterstitialBeenViewed = false
-
-  // User session properties
-  isNotImpersonating = false
   interstitialComponent: ComponentType<any>
   redirectByReportAlreadyAuthorize: boolean
   OAUTH2_AUTHORIZATION_ENABLE: boolean
+  private log: ReturnType<FeatureLoggerService['scoped']>
 
   constructor(
     private userService: UserService,
@@ -70,8 +55,11 @@ export class AuthorizeComponent {
     private recordService: RecordService,
     private loginMainInterstitialsManagerService: LoginMainInterstitialsManagerService,
     private toglzService: TogglzService,
-    private oauthUrlSessionManger: OauthURLSessionManagerService
-  ) {}
+    private oauthUrlSessionManger: OauthURLSessionManagerService,
+    private readonly featureLogger: FeatureLoggerService
+  ) {
+    this.log = this.featureLogger.scoped('Auth Component')
+  }
 
   /**
    * Lifecycle hook. Initiates data loading and handles session logic.
@@ -81,15 +69,13 @@ export class AuthorizeComponent {
     let currentSession: UserSession | null = null
 
     forkJoin({
-      Oauth2: this.toglzService
-        .getStateOf('OAUTH_AUTHORIZATION')
-        .pipe(take(1)),
+      Oauth2: this.toglzService.getStateOf('OAUTH_AUTHORIZATION').pipe(take(1)),
       platform: this.loadPlatformInfo(),
       userSession: this.loadUserSession(),
     })
       .pipe(
-        // Keep a copy of userSession for finalize()
         tap(({ Oauth2 }) => (this.OAUTH2_AUTHORIZATION_ENABLE = Oauth2)),
+        // Keep a copy of userSession for finalize()
         tap(({ userSession }) => (currentSession = userSession)),
 
         // If logged in, fetch record → check interstitials; otherwise skip straight to oauth session handling
@@ -101,7 +87,8 @@ export class AuthorizeComponent {
 
         // Always run this at the end, regardless of path
         finalize(() => {
-          this.handleOauthSession(currentSession)
+          const trace = this.handleOauthSession(currentSession)
+          this.log.info(trace)
           this.loading = false
         })
       )
@@ -113,7 +100,7 @@ export class AuthorizeComponent {
    */
   handleRedirect(url: string): void {
     this.redirectUrl = url
-    if (this.redirectUrl && this.isThereInterstitialToShow()) {
+    if (this.redirectUrl && this.hasInterstitial()) {
       this.showInterstitial()
     } else {
       this.finishRedirect().subscribe()
@@ -134,10 +121,9 @@ export class AuthorizeComponent {
       tap((useAuthServerFlag) => {
         if (useAuthServerFlag === true) {
           this.oauthUrlSessionManger.clear()
-          ;(this.window as any).outOfRouterNavigation(this.redirectUrl)
-        } else {
-          ;(this.window as any).outOfRouterNavigation(this.redirectUrl)
         }
+        this.log.info('Redirecting', this.redirectUrl)
+        ;(this.window as any).outOfRouterNavigation(this.redirectUrl)
       })
     )
   }
@@ -148,8 +134,6 @@ export class AuthorizeComponent {
   private alreadyAuthorizeRedirect(
     oauthSession: RequestInfoForm
   ): Observable<boolean> {
-    console.log('alreadyAuthorizeRedirect')
-    console.log(oauthSession)
     this.redirectUrl = oauthSession.redirectUrl
     return this.finishRedirect()
   }
@@ -157,9 +141,7 @@ export class AuthorizeComponent {
   /**
    * Determines whether a interstitial should be displayed
    */
-  private isThereInterstitialToShow(): boolean {
-    console.log('isThereInterstitialToShow')
-    console.log(this.interstitialComponent)
+  private hasInterstitial(): boolean {
     return !!this.interstitialComponent
   }
 
@@ -167,7 +149,6 @@ export class AuthorizeComponent {
    * Displays the interstitial
    */
   private showInterstitial(): void {
-    console.log('showInterstitial')
     const portal = new ComponentPortal(this.interstitialComponent)
 
     const componentRef = this.outlet.attachComponentPortal(portal)
@@ -203,35 +184,45 @@ export class AuthorizeComponent {
    * After loading forkJoin data, decide on final flow:
    * show error, show domain interstitial, or show authorization screen.
    */
-  private handleOauthSession(userSession: UserSession): void {
+  private handleOauthSession(userSession: UserSession): string[] {
     this.oauthSession = userSession.oauthSession
+    const trace = ['handleOauthSession']
 
     // 1. If the backend returned an error
     if (this.oauthSession && this.oauthSession.error) {
-      this.debugLog(`Oauth session error: ${this.oauthSession.error}`)
+      trace.push('error present → allow (show error)')
       this.showAuthorizationError = true
       this.loading = false
-      return
+      return trace
     }
 
     // 2. If the user was already authorized, we might show domain interstitial or just redirect
     if (this.isUserAlreadyAuthorized(this.oauthSession)) {
-      if (this.isThereInterstitialToShow()) {
+      if (this.hasInterstitial()) {
         this.redirectByReportAlreadyAuthorize = true
         this.loading = false
         this.redirectUrl = this.oauthSession.redirectUrl
+        trace.push('already authorized with interstitial → show interstitial')
         setTimeout(() => this.showInterstitial())
       } else {
+        trace.push('already authorized without interstitial → redirect now')
         this.alreadyAuthorizeRedirect(this.oauthSession).subscribe()
       }
-      return
+      return trace
     } else {
-      this.debugLog('User has not authorized this app')
+      trace.push('not authorized → show authorization component')
     }
 
     // 3. Otherwise, show the standard authorization component
     this.showAuthorizationComponent = true
     this.loading = false
+
+    if (this.hasInterstitial()) {
+      trace.push(
+        'with interstitial → will show interstitial after authorization component'
+      )
+    }
+    return trace
   }
 
   /**
@@ -268,17 +259,13 @@ export class AuthorizeComponent {
 
   private isUserAlreadyAuthorized(oauthSession: any): boolean {
     if (this.OAUTH2_AUTHORIZATION_ENABLE) {
-      console.log('User alreay authorized this app Oauth2')
-      console.log(oauthSession)
-      return this.isUserAlreadyAuthorizedOauth2(oauthSession)
+      return this.isUserAlreadyAuthorizedOAuth2(oauthSession)
     } else {
-      console.log('User alreay authorized this app Legazy Oauth')
-      console.log(oauthSession)
-      return this.isUserAlreadyAuthorizedLegazyOauth(oauthSession)
+      return this.isUserAlreadyAuthorizedLegacyOauth(oauthSession)
     }
   }
 
-  private isUserAlreadyAuthorizedLegazyOauth(oauthSession: any): boolean {
+  private isUserAlreadyAuthorizedLegacyOauth(oauthSession: any): boolean {
     if (
       !oauthSession ||
       !oauthSession.redirectUrl ||
@@ -289,7 +276,7 @@ export class AuthorizeComponent {
     return oauthSession.redirectUrl.includes(oauthSession.responseType + '=')
   }
 
-  private isUserAlreadyAuthorizedOauth2(oauthSession: any): boolean {
+  private isUserAlreadyAuthorizedOAuth2(oauthSession: any): boolean {
     if (!oauthSession || !oauthSession.redirectUrl) {
       return false
     }
