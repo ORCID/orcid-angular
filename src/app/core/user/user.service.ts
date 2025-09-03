@@ -279,9 +279,9 @@ export class UserService {
               // The Oauth2 will return a redirectUrl when the user is logged in and nothing else
               // when the user is logged in and a OAUTH prompt=none is present
               (data.oauthAuthorizationEnabled &&
-                !!data.oauthSession.redirectUrl ||
-                // The Oauth2 will return a error when the user is logged in and there is a issue with the session
-                (data.oauthAuthorizationEnabled && !!data.oauthSession.error))) ,
+                !!data.oauthSession.redirectUrl) ||
+              // The Oauth2 will return a error when the user is logged in and there is a issue with the session
+              (data.oauthAuthorizationEnabled && !!data.oauthSession.error)),
         },
       }
     }
@@ -349,13 +349,22 @@ export class UserService {
       !updateParameters.loggedIn ? $thirdPartyAuthData : of(undefined),
       $oauthAuthorizationEnabled,
     ]).pipe(
-      map(([userInfo, nameForm, oauthSession, thirdPartyAuthData, oauthAuthorizationEnabled]) => ({
-        userInfo: userInfo as UserInfo | undefined,
-        nameForm: nameForm as NameForm | undefined,
-        oauthSession: oauthSession as LegacyOauthRequestInfoForm | undefined,
-        thirdPartyAuthData: (thirdPartyAuthData as ThirdPartyAuthData) || undefined,
-        oauthAuthorizationEnabled: oauthAuthorizationEnabled as boolean,
-      }))
+      map(
+        ([
+          userInfo,
+          nameForm,
+          oauthSession,
+          thirdPartyAuthData,
+          oauthAuthorizationEnabled,
+        ]) => ({
+          userInfo: userInfo as UserInfo | undefined,
+          nameForm: nameForm as NameForm | undefined,
+          oauthSession: oauthSession as LegacyOauthRequestInfoForm | undefined,
+          thirdPartyAuthData:
+            (thirdPartyAuthData as ThirdPartyAuthData) || undefined,
+          oauthAuthorizationEnabled: oauthAuthorizationEnabled as boolean,
+        })
+      )
     )
   }
 
