@@ -108,7 +108,6 @@ export class AuthDecisionService {
       return { action: 'allow', trace }
     }
 
-
     // HANDLE CASES WHERE THE USER IS LOGGED IN
 
     // Prompt login and scope openid are required to show the login
@@ -192,10 +191,14 @@ export class AuthDecisionService {
       const isOpenId = queryParams?.scope === 'openid'
       const target = (session.oauthSession as any)?.redirectUrl
       if (isOpenId && target) {
-        trace.push("OAuth2: prompt='none' (openid) and logged with and backend responds with redirectUrl → outOfRouterNavigation")
+        trace.push(
+          "OAuth2: prompt='none' (openid) and logged with and backend responds with redirectUrl → outOfRouterNavigation"
+        )
         return { action: 'outOfRouterNavigation', trace, payload: { target } }
       }
-      trace.push("OAuth2: prompt='none' but not openid or missing redirectUrl → allow")
+      trace.push(
+        "OAuth2: prompt='none' but not openid or missing redirectUrl → allow"
+      )
       return { action: 'allow', trace }
     }
 

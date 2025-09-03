@@ -117,7 +117,10 @@ describe('AuthDecisionService', () => {
         oauthSession: {},
         oauthSessionIsLoggedIn: true,
       } as unknown as UserSession
-      const qp = { scope: 'openid', prompt: 'login' } as unknown as OauthParameters
+      const qp = {
+        scope: 'openid',
+        prompt: 'login',
+      } as unknown as OauthParameters
       const res = service.decideForSignIn(session, true, qp)
       expect(res.action).toBe('allow')
     })
@@ -137,7 +140,10 @@ describe('AuthDecisionService', () => {
         oauthSession: {},
         oauthSessionIsLoggedIn: true,
       } as unknown as UserSession
-      const qp = { scope: 'email', prompt: 'login' } as unknown as OauthParameters
+      const qp = {
+        scope: 'email',
+        prompt: 'login',
+      } as unknown as OauthParameters
       const res = service.decideForSignIn(session, true, qp)
       expect(res.action).toBe('redirectToAuthorize')
     })
@@ -227,7 +233,11 @@ describe('AuthDecisionService', () => {
         oauthSession: {},
         oauthSessionIsLoggedIn: false,
       } as unknown as UserSession
-      const qp = { prompt: 'none', client_id: 'c', redirect_uri: 'https://cb' } as unknown as OauthParameters
+      const qp = {
+        prompt: 'none',
+        client_id: 'c',
+        redirect_uri: 'https://cb',
+      } as unknown as OauthParameters
       const res = service.decideForAuthorize(session, true, qp)
       expect(res.action).toBe('validateRedirectUri')
       expect((res.payload as any).clientId).toBe('c')
@@ -239,7 +249,10 @@ describe('AuthDecisionService', () => {
         oauthSession: { redirectUrl: 'https://cb#something' },
         oauthSessionIsLoggedIn: true,
       } as unknown as UserSession
-      const qp = { prompt: 'none', scope: 'openid' } as unknown as OauthParameters
+      const qp = {
+        prompt: 'none',
+        scope: 'openid',
+      } as unknown as OauthParameters
       const res = service.decideForAuthorize(session, true, qp)
       expect(res.action).toBe('outOfRouterNavigation')
       expect((res.payload as any).target).toBe('https://cb#something')
@@ -250,7 +263,10 @@ describe('AuthDecisionService', () => {
         oauthSession: {},
         oauthSessionIsLoggedIn: true,
       } as unknown as UserSession
-      const qp = { prompt: 'none', scope: 'openid' } as unknown as OauthParameters
+      const qp = {
+        prompt: 'none',
+        scope: 'openid',
+      } as unknown as OauthParameters
       const res = service.decideForAuthorize(session, true, qp)
       expect(res.action).toBe('allow')
     })
@@ -260,7 +276,10 @@ describe('AuthDecisionService', () => {
         oauthSession: {},
         oauthSessionIsLoggedIn: true,
       } as unknown as UserSession
-      const qp = { prompt: 'none', scope: 'email' } as unknown as OauthParameters
+      const qp = {
+        prompt: 'none',
+        scope: 'email',
+      } as unknown as OauthParameters
       const res = service.decideForAuthorize(session, true, qp)
       expect(res.action).toBe('allow')
     })
@@ -270,7 +289,10 @@ describe('AuthDecisionService', () => {
         oauthSession: {},
         oauthSessionIsLoggedIn: false,
       } as unknown as UserSession
-      const qp = { prompt: 'login', scope: 'openid' } as unknown as OauthParameters
+      const qp = {
+        prompt: 'login',
+        scope: 'openid',
+      } as unknown as OauthParameters
       const res = service.decideForAuthorize(session, true, qp)
       expect(res.action).toBe('redirectToLogin')
     })
@@ -290,7 +312,10 @@ describe('AuthDecisionService', () => {
         oauthSession: {},
         oauthSessionIsLoggedIn: true,
       } as unknown as UserSession
-      const qp = { prompt: 'login', scope: 'openid' } as unknown as OauthParameters
+      const qp = {
+        prompt: 'login',
+        scope: 'openid',
+      } as unknown as OauthParameters
       const res = service.decideForAuthorize(session, true, qp)
       expect(res.action).toBe('redirectToLogin')
     })
@@ -306,5 +331,3 @@ describe('AuthDecisionService', () => {
     })
   })
 })
-
-

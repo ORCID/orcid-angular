@@ -1,4 +1,9 @@
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing'
+import {
+  ComponentFixture,
+  TestBed,
+  fakeAsync,
+  tick,
+} from '@angular/core/testing'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 import { CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core'
@@ -34,19 +39,22 @@ describe('AuthorizeComponent', () => {
 
   beforeEach(() => {
     userServiceSpy = jasmine.createSpyObj('UserService', ['getUserSession'])
-    platformInfoServiceSpy = jasmine.createSpyObj('PlatformInfoService', ['get'])
+    platformInfoServiceSpy = jasmine.createSpyObj('PlatformInfoService', [
+      'get',
+    ])
     recordServiceSpy = jasmine.createSpyObj('RecordService', ['getRecord'])
     loginInterstitialsSpy = jasmine.createSpyObj(
       'LoginMainInterstitialsManagerService',
       ['isUserFullyLoaded', 'checkLoginInterstitials']
     )
     togglzSpy = jasmine.createSpyObj('TogglzService', ['getStateOf'])
-    oauthUrlSessionSpy = jasmine.createSpyObj('OauthURLSessionManagerService', ['clear'])
+    oauthUrlSessionSpy = jasmine.createSpyObj('OauthURLSessionManagerService', [
+      'clear',
+    ])
 
     windowMock = {
       outOfRouterNavigation: jasmine.createSpy('outOfRouterNavigation'),
     }
-
     ;(globalThis as any).runtimeEnvironment = { debugger: false }
 
     // Default spy returns; overridden in tests when needed
@@ -60,16 +68,26 @@ describe('AuthorizeComponent', () => {
     )
 
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule, DummyInterstitialComponent],
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+        DummyInterstitialComponent,
+      ],
       declarations: [AuthorizeComponent],
       providers: [
         { provide: WINDOW, useValue: windowMock },
         { provide: UserService, useValue: userServiceSpy },
         { provide: PlatformInfoService, useValue: platformInfoServiceSpy },
         { provide: RecordService, useValue: recordServiceSpy },
-        { provide: LoginMainInterstitialsManagerService, useValue: loginInterstitialsSpy },
+        {
+          provide: LoginMainInterstitialsManagerService,
+          useValue: loginInterstitialsSpy,
+        },
         { provide: TogglzService, useValue: togglzSpy },
-        { provide: OauthURLSessionManagerService, useValue: oauthUrlSessionSpy },
+        {
+          provide: OauthURLSessionManagerService,
+          useValue: oauthUrlSessionSpy,
+        },
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
@@ -87,7 +105,9 @@ describe('AuthorizeComponent', () => {
   })
 
   it('ngOnInit: sets OAUTH2_AUTHORIZATION_ENABLE from OAUTH_AUTHORIZATION flag', () => {
-    togglzSpy.getStateOf.and.callFake((flag: string) => of(flag === 'OAUTH_AUTHORIZATION'))
+    togglzSpy.getStateOf.and.callFake((flag: string) =>
+      of(flag === 'OAUTH_AUTHORIZATION')
+    )
     createComponent()
     expect((component as any).OAUTH2_AUTHORIZATION_ENABLE).toBeTrue()
   })
@@ -112,7 +132,10 @@ describe('AuthorizeComponent', () => {
 
   it('ngOnInit: logged in -> loads record and checks interstitials', () => {
     userServiceSpy.getUserSession.and.returnValue(
-      of({ loggedIn: true, oauthSession: { redirectUrl: '/r', responseType: 'code' } } as any)
+      of({
+        loggedIn: true,
+        oauthSession: { redirectUrl: '/r', responseType: 'code' },
+      } as any)
     )
     recordServiceSpy.getRecord.and.returnValue(of({} as any))
     loginInterstitialsSpy.isUserFullyLoaded.and.returnValue(true)
@@ -133,7 +156,9 @@ describe('AuthorizeComponent', () => {
     userServiceSpy.getUserSession.and.returnValue(
       of({ loggedIn: true, oauthSession: null } as any)
     )
-    recordServiceSpy.getRecord.and.returnValue(throwError(() => new Error('boom')))
+    recordServiceSpy.getRecord.and.returnValue(
+      throwError(() => new Error('boom'))
+    )
     loginInterstitialsSpy.isUserFullyLoaded.and.returnValue(true)
 
     createComponent()
@@ -161,16 +186,22 @@ describe('AuthorizeComponent', () => {
     tick()
 
     expect(oauthUrlSessionSpy.clear).toHaveBeenCalledTimes(1) // because flag true in finishRedirect
-    expect(windowMock.outOfRouterNavigation).toHaveBeenCalledWith('/go?code=123')
+    expect(windowMock.outOfRouterNavigation).toHaveBeenCalledWith(
+      '/go?code=123'
+    )
   }))
 
   it('handleOauthSession (oauth2): already authorized without interstitial -> redirects and clears', fakeAsync(() => {
     createComponent()
-
     ;(component as any).OAUTH2_AUTHORIZATION_ENABLE = true
-    togglzSpy.getStateOf.and.callFake((flag: string) => of(flag === 'OAUTH2_AUTHORIZATION'))
+    togglzSpy.getStateOf.and.callFake((flag: string) =>
+      of(flag === 'OAUTH2_AUTHORIZATION')
+    )
 
-    const session = { loggedIn: false, oauthSession: { redirectUrl: '/ok' } } as any
+    const session = {
+      loggedIn: false,
+      oauthSession: { redirectUrl: '/ok' },
+    } as any
 
     ;(component as any).handleOauthSession(session)
     tick()
@@ -183,7 +214,8 @@ describe('AuthorizeComponent', () => {
     createComponent()
 
     // Prepare interstitial present and spy on showInterstitial
-    ;(component as any).interstitialComponent = DummyInterstitialComponent as any
+    ;(component as any).interstitialComponent =
+      DummyInterstitialComponent as any
     spyOn<any>(component as any, 'showInterstitial').and.callFake(() => {})
 
     const session = {
@@ -204,11 +236,14 @@ describe('AuthorizeComponent', () => {
 
   it('handleOauthSession (oauth2): already authorized WITH interstitial -> schedules interstitial', fakeAsync(() => {
     createComponent()
-
-    ;(component as any).interstitialComponent = DummyInterstitialComponent as any
+    ;(component as any).interstitialComponent =
+      DummyInterstitialComponent as any
     spyOn<any>(component as any, 'showInterstitial').and.callFake(() => {})
 
-    const session = { loggedIn: false, oauthSession: { redirectUrl: '/ok2' } } as any
+    const session = {
+      loggedIn: false,
+      oauthSession: { redirectUrl: '/ok2' },
+    } as any
 
     ;(component as any).OAUTH2_AUTHORIZATION_ENABLE = true
     ;(component as any).handleOauthSession(session)
@@ -231,12 +266,14 @@ describe('AuthorizeComponent', () => {
 
   it('handleOauthSession: not authorized but interstitial present -> shows authorization and does not show interstitial (legacy)', () => {
     createComponent()
-
-    ;(component as any).interstitialComponent = DummyInterstitialComponent as any
+    ;(component as any).interstitialComponent =
+      DummyInterstitialComponent as any
     spyOn<any>(component as any, 'showInterstitial')
-
     ;(component as any).OAUTH2_AUTHORIZATION_ENABLE = false
-    const session = { loggedIn: true, oauthSession: { redirectUrl: '/x?state=1', responseType: 'code' } } as any
+    const session = {
+      loggedIn: true,
+      oauthSession: { redirectUrl: '/x?state=1', responseType: 'code' },
+    } as any
 
     ;(component as any).handleOauthSession(session)
 
@@ -246,10 +283,9 @@ describe('AuthorizeComponent', () => {
 
   it('handleOauthSession: not authorized but interstitial present -> shows authorization and does not show interstitial (oauth2)', () => {
     createComponent()
-
-    ;(component as any).interstitialComponent = DummyInterstitialComponent as any
+    ;(component as any).interstitialComponent =
+      DummyInterstitialComponent as any
     spyOn<any>(component as any, 'showInterstitial')
-
     ;(component as any).OAUTH2_AUTHORIZATION_ENABLE = true
     const session = { loggedIn: true, oauthSession: {} } as any
 
@@ -261,7 +297,8 @@ describe('AuthorizeComponent', () => {
 
   it('handleRedirect: with interstitial -> finish emission triggers finishRedirect', () => {
     createComponent()
-    ;(component as any).interstitialComponent = DummyInterstitialComponent as any
+    ;(component as any).interstitialComponent =
+      DummyInterstitialComponent as any
 
     const finish$ = new Subject<void>()
     ;(component as any).outlet = {
@@ -271,7 +308,10 @@ describe('AuthorizeComponent', () => {
       }),
     }
 
-    const finishSpy = spyOn<any>(component as any, 'finishRedirect').and.returnValue(of(true))
+    const finishSpy = spyOn<any>(
+      component as any,
+      'finishRedirect'
+    ).and.returnValue(of(true))
 
     component.handleRedirect('/x')
     expect(component.showInterstital).toBeTrue()
@@ -283,7 +323,8 @@ describe('AuthorizeComponent', () => {
 
   it('handleRedirect: with interstitial -> shows interstitial instead of redirect', () => {
     createComponent()
-    ;(component as any).interstitialComponent = DummyInterstitialComponent as any
+    ;(component as any).interstitialComponent =
+      DummyInterstitialComponent as any
 
     // mock outlet to avoid CDK dependency
     const finish$ = new Subject<void>()
@@ -305,7 +346,10 @@ describe('AuthorizeComponent', () => {
   it('handleRedirect: without interstitial -> calls finishRedirect', () => {
     createComponent()
 
-    const finishSpy = spyOn<any>(component as any, 'finishRedirect').and.returnValue(of(true))
+    const finishSpy = spyOn<any>(
+      component as any,
+      'finishRedirect'
+    ).and.returnValue(of(true))
 
     component.handleRedirect('/final')
 
@@ -314,7 +358,10 @@ describe('AuthorizeComponent', () => {
 
   it('handleRedirect: empty URL still calls finishRedirect', () => {
     createComponent()
-    const finishSpy = spyOn<any>(component as any, 'finishRedirect').and.returnValue(of(true))
+    const finishSpy = spyOn<any>(
+      component as any,
+      'finishRedirect'
+    ).and.returnValue(of(true))
 
     component.handleRedirect('' as any)
 
@@ -329,7 +376,6 @@ describe('AuthorizeComponent', () => {
       if (flag === 'OAUTH2_AUTHORIZATION') return of(true)
       return of(false)
     })
-
     ;(component as any).finishRedirect().subscribe()
     tick()
 
@@ -342,7 +388,6 @@ describe('AuthorizeComponent', () => {
     ;(component as any).redirectUrl = '/final'
 
     togglzSpy.getStateOf.and.returnValue(of(false))
-
     ;(component as any).finishRedirect().subscribe()
     tick()
 
@@ -355,7 +400,6 @@ describe('AuthorizeComponent', () => {
     ;(component as any).redirectUrl = undefined as any
 
     togglzSpy.getStateOf.and.returnValue(of(false))
-
     ;(component as any).finishRedirect().subscribe()
     tick()
 
@@ -366,7 +410,10 @@ describe('AuthorizeComponent', () => {
     it('legacy oauth: true when redirectUrl contains responseType param', () => {
       createComponent()
       ;(component as any).OAUTH2_AUTHORIZATION_ENABLE = false
-      const session = { redirectUrl: 'https://a?code=123', responseType: 'code' }
+      const session = {
+        redirectUrl: 'https://a?code=123',
+        responseType: 'code',
+      }
       const result = (component as any).isUserAlreadyAuthorized(session)
       expect(result).toBeTrue()
     })

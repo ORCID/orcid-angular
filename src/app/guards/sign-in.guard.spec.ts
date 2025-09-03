@@ -66,7 +66,10 @@ describe('SignInGuard', () => {
     it('calls decision service with session, togglz, and queryParams', async () => {
       const qp = { a: '1' }
       const session = { oauthSession: {} }
-      decisionMock.decideForSignIn.and.returnValue({ action: 'allow', trace: [] })
+      decisionMock.decideForSignIn.and.returnValue({
+        action: 'allow',
+        trace: [],
+      })
 
       await runGuardHelper(qp, session, true)
 
@@ -87,7 +90,9 @@ describe('SignInGuard', () => {
       })
       const result = await runGuardHelper(qp, session, true)
       expect(result instanceof UrlTree).toBeTrue()
-      expect(router.serializeUrl(result as UrlTree)).toBe('/oauth/authorize?client_id=abc')
+      expect(router.serializeUrl(result as UrlTree)).toBe(
+        '/oauth/authorize?client_id=abc'
+      )
     })
 
     it("returns UrlTree to '/register' when action is redirectToRegister", async () => {
@@ -106,7 +111,10 @@ describe('SignInGuard', () => {
     it('returns true when action is allow', async () => {
       const qp = {}
       const session = { oauthSession: {} }
-      decisionMock.decideForSignIn.and.returnValue({ action: 'allow', trace: [] })
+      decisionMock.decideForSignIn.and.returnValue({
+        action: 'allow',
+        trace: [],
+      })
       const result = await runGuardHelper(qp, session, true)
       expect(result).toBeTrue()
     })

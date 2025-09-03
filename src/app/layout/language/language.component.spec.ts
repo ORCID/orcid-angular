@@ -20,6 +20,10 @@ describe('LanguageComponent', () => {
   let fixture: ComponentFixture<LanguageComponent>
 
   beforeEach(() => {
+    ;(globalThis as any).runtimeEnvironment = {
+      LANGUAGE_MENU_OPTIONS: { en: 'English' },
+      debugger: false,
+    }
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, MatMenuModule, RouterTestingModule],
       declarations: [LanguageComponent],

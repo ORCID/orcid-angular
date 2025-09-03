@@ -92,17 +92,27 @@ export class AuthorizeGuard implements CanActivateChild {
             // valid → redirect to the specified URI
             const target = `${queryParams.redirect_uri}#login_required`
 
-            this.featureLogger.debug('Authorize Guard', 'Redirecting out of router to', target)
+            this.featureLogger.debug(
+              'Authorize Guard',
+              'Redirecting out of router to',
+              target
+            )
             ;(this.window as any).outOfRouterNavigation(target)
             return false
           }
           // invalid → send to your 404 page
-          this.featureLogger.warn('Authorize Guard', 'Invalid redirect_uri → /404')
+          this.featureLogger.warn(
+            'Authorize Guard',
+            'Invalid redirect_uri → /404'
+          )
           return this.router.createUrlTree(['/404'])
         }),
         catchError(() => {
           // in case of error, redirect to 404
-          this.featureLogger.error('Authorize Guard', 'Error validating redirect_uri → /404')
+          this.featureLogger.error(
+            'Authorize Guard',
+            'Error validating redirect_uri → /404'
+          )
           return of(this.router.createUrlTree(['/404']))
         })
       )
@@ -115,7 +125,10 @@ export class AuthorizeGuard implements CanActivateChild {
     this.oauthUrlSessionManger.set(this.window.location.href)
     return this.platform.get().pipe(
       map(({ queryParameters }) => {
-        this.featureLogger.debug('Authorize Guard', 'Building /signin UrlTree with current query params')
+        this.featureLogger.debug(
+          'Authorize Guard',
+          'Building /signin UrlTree with current query params'
+        )
         return this.router.createUrlTree(['/signin'], {
           queryParams: { ...queryParameters },
         })
