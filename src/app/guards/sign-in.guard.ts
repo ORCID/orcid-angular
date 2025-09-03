@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core'
+import { Injectable } from '@angular/core'
 import {
   ActivatedRouteSnapshot,
   Router,
@@ -8,14 +8,11 @@ import {
 import { forkJoin, Observable } from 'rxjs'
 import { map, take } from 'rxjs/operators'
 
-import { PlatformInfoService } from '../cdk/platform-info'
-import { WINDOW } from '../cdk/window'
 import { UserService } from '../core'
-import { ErrorHandlerService } from '../core/error-handler/error-handler.service'
-import { OauthURLSessionManagerService } from '../core/oauth-urlsession-manager/oauth-urlsession-manager.service'
 import { TogglzService } from '../core/togglz/togglz.service'
-import { fork } from 'child_process'
 import { OauthParameters } from '../types'
+import { FeatureLoggerService } from '../core/logging/feature-logger.service'
+import { AuthDecisionService } from '../core/auth-decision/auth-decision.service'
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +21,9 @@ export class SignInGuard {
   constructor(
     private _user: UserService,
     private _router: Router,
-    private _togglzService: TogglzService
+    private _togglzService: TogglzService,
+    private readonly featureLogger: FeatureLoggerService,
+    private readonly authDecision: AuthDecisionService
   ) {}
 
   canActivateChild(
@@ -41,48 +40,29 @@ export class SignInGuard {
     }).pipe(
       take(1),
       map(({ isOauthAuthorizationTogglzEnable, session }) => {
-        if (!isOauthAuthorizationTogglzEnable && session.oauthSession) {
-          if (queryParams.email || queryParams.orcid) {
-            // TODO at the moment user arriving with an email on the Oauth url.
-            // are not allow to go back.
-            return this.isUserLoggedInOrExist(session, queryParams)
-          } else if (
-            queryParams.show_login &&
-            (queryParams.email || queryParams.orcid)
-          ) {
-            return this.isUserLoggedInOrExist(session, queryParams)
-          } else if (queryParams.show_login === 'false') {
-            return this.isUserLoggedInOrExist(session, queryParams)
-          } else if (
-            !session.oauthSession.forceLogin &&
-            session.oauthSessionIsLoggedIn
-          ) {
-            return this._router.createUrlTree(['/oauth/authorize'], {
-              queryParams: queryParams,
-            })
-          }
-        } else if (isOauthAuthorizationTogglzEnable && queryParams.client_id) {
-          if (
-            session.loggedIn &&
-            queryParams.show_login !== 'true' &&
-            queryParams.prompt !== 'login'
-          ) {
-            return this._router.createUrlTree(['/oauth/authorize'], {
-              queryParams: queryParams,
-            })
-          }
+        const decision = this.authDecision.decideForSignIn(
+          session as any,
+          isOauthAuthorizationTogglzEnable,
+          queryParams
+        )
+        this.featureLogger.debug('Sign-In Guard', ...decision.trace)
+        switch (decision.action) {
+          case 'redirectToAuthorize':
+            return this.redirectToAuthorize(queryParams)
+          case 'redirectToRegister':
+            return this.redirectToRegister(queryParams)
+          case 'allow':
+          default:
+            return true
         }
-        return true
       })
     )
   }
 
-  private isUserLoggedInOrExist(session, queryParams) {
-    const userId = !!session.oauthSession.userId
-    if (!userId && !session.oauthSessionIsLoggedIn) {
-      return this.redirectToRegister(queryParams)
-    }
-    return true
+  private redirectToAuthorize(queryParams) {
+    return this._router.createUrlTree(['/oauth/authorize'], {
+      queryParams: queryParams,
+    })
   }
 
   private redirectToRegister(queryParams) {

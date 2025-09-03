@@ -28,7 +28,7 @@ import {
 import { dateMonthYearValidator } from 'src/app/shared/validators/date/date.validator'
 import { OrganizationsService, UserService } from 'src/app/core'
 import { RegisterService } from 'src/app/core/register/register.service'
-import { AssertionVisibilityString, RequestInfoForm } from 'src/app/types'
+import { AssertionVisibilityString } from 'src/app/types'
 import {
   Affiliation,
   AffiliationType,
