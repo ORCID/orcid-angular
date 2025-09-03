@@ -263,6 +263,7 @@ export class UserService {
     nameForm: NameForm
     oauthSession: LegacyOauthRequestInfoForm
     thirdPartyAuthData: ThirdPartyAuthData
+    oauthAuthorizationEnabled: boolean
   }): UserSession {
     {
       return {
@@ -277,9 +278,10 @@ export class UserService {
             ((!!data.oauthSession.userOrcid && !!data.oauthSession.userName) ||
               // The Oauth2 will return a redirectUrl when the user is logged in and nothing else
               // when the user is logged in and a OAUTH prompt=none is present
-              !!data.oauthSession.redirectUrl ||
-              // The Oauth2 will return a error when the user is logged in and there is a issue with the session
-              !!data.oauthSession.error),
+              (data.oauthAuthorizationEnabled &&
+                !!data.oauthSession.redirectUrl ||
+                // The Oauth2 will return a error when the user is logged in and there is a issue with the session
+                (data.oauthAuthorizationEnabled && !!data.oauthSession.error))) ,
         },
       }
     }
@@ -318,14 +320,18 @@ export class UserService {
     nameForm: NameForm | undefined
     oauthSession: LegacyOauthRequestInfoForm | undefined
     thirdPartyAuthData: ThirdPartyAuthData | undefined
+    oauthAuthorizationEnabled: boolean
   }> {
     this.currentlyLoggedIn = updateParameters.loggedIn
     const $userInfo = this._userInfo.getUserInfo().pipe(this.handleErrors)
     const $nameForm = this.getNameForm().pipe(this.handleErrors)
     const $thirdPartyAuthData = this.getThirdPartySignInData()
 
-    const $oauthSession = this._togglz.getStateOf('OAUTH_AUTHORIZATION').pipe(
-      take(1),
+    const $oauthAuthorizationEnabled = this._togglz
+      .getStateOf('OAUTH_AUTHORIZATION')
+      .pipe(take(1))
+
+    const $oauthSession = $oauthAuthorizationEnabled.pipe(
       switchMap((useAuthServerFlag) => {
         if (useAuthServerFlag === true) {
           return this.getOuathSessionFromOauth2Server()
@@ -341,14 +347,14 @@ export class UserService {
       updateParameters.loggedIn ? $nameForm : of(undefined),
       $oauthSession,
       !updateParameters.loggedIn ? $thirdPartyAuthData : of(undefined),
+      $oauthAuthorizationEnabled,
     ]).pipe(
-      map(([userInfo, nameForm, oauthSession, thirdPartyAuthData]) => ({
+      map(([userInfo, nameForm, oauthSession, thirdPartyAuthData, oauthAuthorizationEnabled]) => ({
         userInfo: userInfo as UserInfo | undefined,
         nameForm: nameForm as NameForm | undefined,
         oauthSession: oauthSession as LegacyOauthRequestInfoForm | undefined,
-        thirdPartyAuthData: thirdPartyAuthData as
-          | ThirdPartyAuthData
-          | undefined,
+        thirdPartyAuthData: (thirdPartyAuthData as ThirdPartyAuthData) || undefined,
+        oauthAuthorizationEnabled: oauthAuthorizationEnabled as boolean,
       }))
     )
   }
