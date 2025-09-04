@@ -8,8 +8,9 @@ import { Router } from '@angular/router'
 import { ApplicationRoutes } from 'src/app/constants'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { InboxService } from '../../core/inbox/inbox.service'
-import { first } from 'rxjs/operators'
-import { CustomEventService } from 'src/app/core/observability-events/observability-events.service'
+import { filter, first } from 'rxjs/operators'
+import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
+import { JourneyType } from 'src/app/rum/journeys/types'
 
 @Component({
   selector: 'app-user-menu',
@@ -34,7 +35,7 @@ export class UserMenuComponent implements OnInit {
   notificationi18nActive = $localize`:@@layout.notificationsActive:You have unread notifications. Open notification inbox`
   isAccountDelegate: boolean
   inboxUnread = 0
-  userJourney!: 'orcid_with_notifications' | 'orcid_without_notifications'
+  userJourney!: 'orcid_notifications'
 
   constructor(
     private _router: Router,
@@ -43,7 +44,7 @@ export class UserMenuComponent implements OnInit {
     _platform: PlatformInfoService,
     private _inboxService: InboxService,
     private _togglz: TogglzService,
-    private observabilityEventService: CustomEventService
+    private observabilityEventService: RumJourneyEventService
   ) {
     _userInfo.getUserSession().subscribe((data) => {
       if (data.loggedIn) {
@@ -62,18 +63,17 @@ export class UserMenuComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._inboxService.retrieveUnreadCount().subscribe((inboxUnread) => {
-      ;(this.userJourney =
-        inboxUnread > 0
-          ? 'orcid_with_notifications'
-          : 'orcid_without_notifications'),
-        this.observabilityEventService.startJourney(
-          this.userJourney,
-
-          { inboxUnread }
-        )
-      this.inboxUnread = inboxUnread
-    })
+    this._inboxService
+      .retrieveUnreadCount()
+      .pipe(filter((inboxUnread) => inboxUnread !== null))
+      .subscribe((inboxUnread) => {
+        this.userJourney = 'orcid_notifications'
+        this.observabilityEventService.startJourney(this.userJourney, {
+          inboxUnread,
+          notificationsEnabled: inboxUnread > 0,
+        })
+        this.inboxUnread = inboxUnread
+      })
   }
 
   goto(url, from?: string) {
@@ -104,4 +104,7 @@ export class UserMenuComponent implements OnInit {
       this.window.location.href = val
     }
   }
+}
+function isNotNull(value: unknown, index: number): value is unknown {
+  throw new Error('Function not implemented.')
 }

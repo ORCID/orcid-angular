@@ -30,7 +30,7 @@ import { UserSession } from 'src/app/types/session.local'
 import { ThirdPartyAuthData } from 'src/app/types/sign-in-data.endpoint'
 import { GoogleTagManagerService } from '../../../core/google-tag-manager/google-tag-manager.service'
 import { ReactivationLocal } from '../../../types/reactivation.local'
-import { JourneyType } from 'src/app/core/observability-events/observability-events.service'
+import { JourneyType } from 'src/app/rum/journeys/types'
 import { RegisterObservabilityService } from '../../register-observability.service'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { OauthURLSessionManagerService } from 'src/app/core/oauth-urlsession-manager/oauth-urlsession-manager.service'
@@ -298,7 +298,12 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     }
   }
   selectionChange(event: StepperSelectionEvent) {
-    const step = ['a', 'b', 'c2', 'c', 'd'][event.selectedIndex] as JourneyType
+    const step = ['a', 'b', 'c2', 'c', 'd'][event.selectedIndex] as
+      | 'a'
+      | 'b'
+      | 'c2'
+      | 'c'
+      | 'd'
     this._registerObservabilityService.stepLoaded(step)
     if (this.platform.columns4 || this.platform.columns8) {
       this.focusCurrentStep(event)
