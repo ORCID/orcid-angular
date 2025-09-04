@@ -1,10 +1,6 @@
 import { Inject, Injectable } from '@angular/core'
 import { WINDOW } from 'src/app/cdk/window'
-import {
-  JourneyType,
-  JourneyContextMap,
-  EventAttrMap,
-} from '../journeys/types'
+import { JourneyType, JourneyContextMap, EventAttrMap } from '../journeys/types'
 
 type JourneyState = {
   startTime: number
@@ -12,7 +8,10 @@ type JourneyState = {
   context: Record<string, unknown>
 }
 
-function withPrefix<T extends object>(obj: T, prefix: string): Record<string, unknown> {
+function withPrefix<T extends object>(
+  obj: T,
+  prefix: string
+): Record<string, unknown> {
   const result: Record<string, unknown> = {}
   for (const key of Object.keys(obj || {})) {
     result[`${prefix}${key}`] = (obj as any)[key]
@@ -37,7 +36,10 @@ export class RumJourneyEventService {
   ): void {
     if (this.journeys[journeyType]) {
       if (runtimeEnvironment.debugger) {
-        console.debug(`[RUM][journey:${journeyType}] : start (ignored, already started)`, context)
+        console.debug(
+          `[RUM][journey:${journeyType}] : start (ignored, already started)`,
+          context
+        )
       }
       return
     }
@@ -69,7 +71,11 @@ export class RumJourneyEventService {
     const state = this.journeys[journeyType]
     if (!state) {
       if (runtimeEnvironment.debugger) {
-        console.debug(`[RUM][journey:${journeyType}] : recordEvent before start ignored`, eventName, eventAttrs)
+        console.debug(
+          `[RUM][journey:${journeyType}] : recordEvent before start ignored`,
+          eventName,
+          eventAttrs
+        )
       }
       return
     }
@@ -87,7 +93,10 @@ export class RumJourneyEventService {
       nr.addPageAction(journeyType, payload)
     }
     if (runtimeEnvironment.debugger) {
-      console.debug(`[RUM][journey:${journeyType}] : event ${eventName}`, payload)
+      console.debug(
+        `[RUM][journey:${journeyType}] : event ${eventName}`,
+        payload
+      )
     }
   }
 
@@ -116,5 +125,3 @@ export class RumJourneyEventService {
     }
   }
 }
-
-

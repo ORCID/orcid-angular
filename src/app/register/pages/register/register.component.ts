@@ -298,7 +298,12 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     }
   }
   selectionChange(event: StepperSelectionEvent) {
-    const step = ['a', 'b', 'c2', 'c', 'd'][event.selectedIndex] as 'a' | 'b' | 'c2' | 'c' | 'd'
+    const step = ['a', 'b', 'c2', 'c', 'd'][event.selectedIndex] as
+      | 'a'
+      | 'b'
+      | 'c2'
+      | 'c'
+      | 'd'
     this._registerObservabilityService.stepLoaded(step)
     if (this.platform.columns4 || this.platform.columns8) {
       this.focusCurrentStep(event)

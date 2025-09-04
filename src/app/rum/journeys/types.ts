@@ -1,6 +1,15 @@
-import { OrcidRegistrationContext, OrcidRegistrationEventAttributes } from './orcidRegistration'
-import { OauthAuthorizationContext, OauthAuthorizationEventAttributes } from './oauthAuthorization'
-import { OrcidNotificationsContext, OrcidNotificationsEventAttributes } from './orcidNotifications'
+import {
+  OrcidRegistrationContext,
+  OrcidRegistrationEventAttributes,
+} from './orcidRegistration'
+import {
+  OauthAuthorizationContext,
+  OauthAuthorizationEventAttributes,
+} from './oauthAuthorization'
+import {
+  OrcidNotificationsContext,
+  OrcidNotificationsEventAttributes,
+} from './orcidNotifications'
 export type JourneyType =
   | 'orcid_registration'
   | 'orcid_notifications'
@@ -20,8 +29,15 @@ export type EventAttrMap = {
 }
 
 // Per-journey interfaces are re-exported from individual journey files
-export { OrcidRegistrationContext, OrcidRegistrationEventAttributes } from './orcidRegistration'
-export { OauthAuthorizationContext, OauthAuthorizationEventAttributes } from './oauthAuthorization'
-export { OrcidNotificationsContext, OrcidNotificationsEventAttributes } from './orcidNotifications'
-
-
+export {
+  OrcidRegistrationContext,
+  OrcidRegistrationEventAttributes,
+} from './orcidRegistration'
+export {
+  OauthAuthorizationContext,
+  OauthAuthorizationEventAttributes,
+} from './oauthAuthorization'
+export {
+  OrcidNotificationsContext,
+  OrcidNotificationsEventAttributes,
+} from './orcidNotifications'

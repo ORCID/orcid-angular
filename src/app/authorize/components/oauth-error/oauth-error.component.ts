@@ -57,11 +57,15 @@ export class OauthErrorComponent implements OnInit, OnDestroy {
             response_type: this.queryParams?.response_type,
             scope: this.queryParams?.scope,
           })
-          this._observability.recordEvent('oauth_authorization', 'error_page_loaded', {
-            error: this.error,
-            errorCode: this.errorCode,
-            errorDescription: this.errorDescription,
-          })
+          this._observability.recordEvent(
+            'oauth_authorization',
+            'error_page_loaded',
+            {
+              error: this.error,
+              errorCode: this.errorCode,
+              errorDescription: this.errorDescription,
+            }
+          )
           this.oauthJourneyStarted = true
         }
       })

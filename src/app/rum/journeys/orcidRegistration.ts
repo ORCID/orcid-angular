@@ -28,5 +28,3 @@ export interface OrcidRegistrationEventAttributes {
   validator?: unknown
   response?: unknown
 }
-
-

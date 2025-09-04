@@ -11,5 +11,3 @@ export interface OauthAuthorizationEventAttributes {
   errorDescription?: string
   OAUTH_AUTHORIZATION?: boolean
 }
-
-

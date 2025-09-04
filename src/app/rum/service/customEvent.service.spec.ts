@@ -102,10 +102,7 @@ describe('RumJourneyEventService', () => {
     // Recreate service with no newrelic
     TestBed.resetTestingModule()
     TestBed.configureTestingModule({
-      providers: [
-        RumJourneyEventService,
-        { provide: WINDOW, useValue: {} },
-      ],
+      providers: [RumJourneyEventService, { provide: WINDOW, useValue: {} }],
     })
     const localService = TestBed.inject(RumJourneyEventService)
 
@@ -119,5 +116,3 @@ describe('RumJourneyEventService', () => {
     }).not.toThrow()
   })
 })
-
-

@@ -10,5 +10,3 @@ export interface OrcidNotificationsContext {
 export interface OrcidNotificationsEventAttributes {
   // No specific event attributes currently used
 }
-
-
