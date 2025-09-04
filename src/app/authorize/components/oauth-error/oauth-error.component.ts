@@ -8,6 +8,8 @@ import { ZendeskService } from 'src/app/core/zendesk/zendesk.service'
 import { OauthParameters } from 'src/app/types'
 import { LegacyOauthRequestInfoForm as RequestInfoForm } from 'src/app/types/request-info-form.endpoint'
 import { UserSession } from 'src/app/types/session.local'
+import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
+import { JourneyType } from 'src/app/rum/journeys/types'
 
 @Component({
   selector: 'app-oauth-error',
@@ -26,12 +28,14 @@ export class OauthErrorComponent implements OnInit, OnDestroy {
   oauthSession: RequestInfoForm
   userSession: UserSession
   TOGGLZ_OAUTH_AUTHORIZATION: boolean
+  private oauthJourneyStarted = false
 
   constructor(
     private _userInfo: UserService,
     private _platformInfo: PlatformInfoService,
     private _zendesk: ZendeskService,
-    private _togglz: TogglzService
+    private _togglz: TogglzService,
+    private _observability: RumJourneyEventService
   ) {
     combineLatest([_userInfo.getUserSession(), this._platformInfo.get()])
       .pipe(takeUntil(this.$destroy))
@@ -44,6 +48,22 @@ export class OauthErrorComponent implements OnInit, OnDestroy {
         this.errorDescription = session.oauthSession.errorDescription
         this.queryParams = platform.queryParameters as OauthParameters
         this.oauthSession = session.oauthSession
+
+        // Initialize journey and record initial error context once
+        if (!this.oauthJourneyStarted) {
+          this._observability.startJourney('oauth_authorization', {
+            client_id: this.queryParams?.client_id,
+            redirect_uri: this.queryParams?.redirect_uri,
+            response_type: this.queryParams?.response_type,
+            scope: this.queryParams?.scope,
+          })
+          this._observability.recordEvent('oauth_authorization', 'error_page_loaded', {
+            error: this.error,
+            errorCode: this.errorCode,
+            errorDescription: this.errorDescription,
+          })
+          this.oauthJourneyStarted = true
+        }
       })
   }
 
@@ -58,6 +78,14 @@ export class OauthErrorComponent implements OnInit, OnDestroy {
           } else {
             this.TOGGLZ_OAUTH_AUTHORIZATION = false
           }
+          // Report feature flag status
+          this._observability.recordEvent(
+            'oauth_authorization',
+            'flag_status',
+            {
+              OAUTH_AUTHORIZATION: this.TOGGLZ_OAUTH_AUTHORIZATION,
+            }
+          )
         })
       )
       .subscribe()
