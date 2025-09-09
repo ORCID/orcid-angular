@@ -125,6 +125,19 @@ describe('AuthDecisionService', () => {
       expect(res.action).toBe('allow')
     })
 
+    it('allows when logged in and prompt=login with openid and other scope', () => {
+      const session = {
+        oauthSession: {},
+        oauthSessionIsLoggedIn: true,
+      } as unknown as UserSession
+      const qp = {
+        scope: 'openid /read-limited',
+        prompt: 'login',
+      } as unknown as OauthParameters
+      const res = service.decideForSignIn(session, true, qp)
+      expect(res.action).toBe('allow')
+    })
+
     it('allows when not logged in and no show_login=false', () => {
       const session = {
         oauthSession: {},
@@ -141,7 +154,7 @@ describe('AuthDecisionService', () => {
         oauthSessionIsLoggedIn: true,
       } as unknown as UserSession
       const qp = {
-        scope: 'email',
+        scope: '/read-limited',
         prompt: 'login',
       } as unknown as OauthParameters
       const res = service.decideForSignIn(session, true, qp)
@@ -297,6 +310,19 @@ describe('AuthDecisionService', () => {
       expect(res.action).toBe('redirectToLogin')
     })
 
+    it('redirects to login when not logged or forced by prompt+openid', () => {
+      const session = {
+        oauthSession: {},
+        oauthSessionIsLoggedIn: false,
+      } as unknown as UserSession
+      const qp = {
+        prompt: 'login',
+        scope: 'openid /read-limited',
+      } as unknown as OauthParameters
+      const res = service.decideForAuthorize(session, true, qp)
+      expect(res.action).toBe('redirectToLogin')
+    })
+
     it('redirects to login when not logged and prompt not equal to none', () => {
       const session = {
         oauthSession: {},
@@ -315,6 +341,19 @@ describe('AuthDecisionService', () => {
       const qp = {
         prompt: 'login',
         scope: 'openid',
+      } as unknown as OauthParameters
+      const res = service.decideForAuthorize(session, true, qp)
+      expect(res.action).toBe('redirectToLogin')
+    })
+
+    it('redirects to login when logged and forced by prompt=login+openid', () => {
+      const session = {
+        oauthSession: {},
+        oauthSessionIsLoggedIn: true,
+      } as unknown as UserSession
+      const qp = {
+        prompt: 'login',
+        scope: 'openid /read-limited',
       } as unknown as OauthParameters
       const res = service.decideForAuthorize(session, true, qp)
       expect(res.action).toBe('redirectToLogin')

@@ -95,8 +95,8 @@ export class AuthDecisionService {
   ): AuthDecisionResult {
     const showLoginIsFalse = queryParams?.show_login === 'false'
     const userIsLoggedIn = !!session?.oauthSessionIsLoggedIn
-    const scopeIsOpenId = queryParams?.scope === 'openid'
-    const promptLogin = queryParams?.prompt === 'login'
+    const isOpenId = queryParams?.scope?.includes('openid')
+    const forceLoginByPrompt = queryParams?.prompt === 'login' && isOpenId
 
     if (!userIsLoggedIn) {
       trace.push('OAuth2: not logged in')
@@ -111,7 +111,7 @@ export class AuthDecisionService {
     // HANDLE CASES WHERE THE USER IS LOGGED IN
 
     // Prompt login and scope openid are required to show the login
-    if (!(promptLogin && scopeIsOpenId)) {
+    if (!forceLoginByPrompt) {
       trace.push(
         'OAuth2: logged in and not prompt=login on openid → redirectToAuthorize'
       )
@@ -172,8 +172,8 @@ export class AuthDecisionService {
     queryParams: OauthParameters,
     trace: string[]
   ): AuthDecisionResult {
-    const scopeIsOpenId = queryParams?.scope === 'openid'
-    const forceLoginByPrompt = queryParams?.prompt === 'login' && scopeIsOpenId
+    const isOpenId = queryParams?.scope?.includes('openid')
+    const forceLoginByPrompt = queryParams?.prompt === 'login' && isOpenId
 
     if (!session.oauthSessionIsLoggedIn && queryParams?.prompt === 'none') {
       trace.push("OAuth2: prompt='none' and not logged → validateRedirectUri")
@@ -188,7 +188,6 @@ export class AuthDecisionService {
     }
 
     if (session.oauthSessionIsLoggedIn && queryParams?.prompt === 'none') {
-      const isOpenId = queryParams?.scope === 'openid'
       const target = (session.oauthSession as any)?.redirectUrl
       if (isOpenId && target) {
         trace.push(
