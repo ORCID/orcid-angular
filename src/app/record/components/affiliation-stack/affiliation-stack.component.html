@@ -55,7 +55,10 @@
       >
         {{ affiliation.affiliationName.value
         }}<ng-container
-          *ngIf="affiliation.city?.value && affiliation.country?.value || affiliation.country?.value"
+          *ngIf="
+            (affiliation.city?.value && affiliation.country?.value) ||
+            affiliation.country?.value
+          "
           >:</ng-container
         >
 
@@ -66,7 +69,8 @@
         </ng-container>
         <ng-container
           *ngIf="
-            affiliation.region?.value?.trim() && affiliation.country?.value"
+            affiliation.region?.value?.trim() && affiliation.country?.value
+          "
         >
           {{ affiliation.region.value }},
         </ng-container>
