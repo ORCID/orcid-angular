@@ -95,7 +95,7 @@ export class AuthDecisionService {
   ): AuthDecisionResult {
     const showLoginIsFalse = queryParams?.show_login === 'false'
     const userIsLoggedIn = !!session?.oauthSessionIsLoggedIn
-    const isOpenId = queryParams?.scope.includes('openid')
+    const isOpenId = queryParams?.scope?.includes('openid')
     const forceLoginByPrompt = queryParams?.prompt === 'login' && isOpenId
 
     if (!userIsLoggedIn) {
@@ -172,7 +172,7 @@ export class AuthDecisionService {
     queryParams: OauthParameters,
     trace: string[]
   ): AuthDecisionResult {
-    const isOpenId = queryParams?.scope.includes('openid')
+    const isOpenId = queryParams?.scope?.includes('openid')
     const forceLoginByPrompt = queryParams?.prompt === 'login' && isOpenId
 
     if (!session.oauthSessionIsLoggedIn && queryParams?.prompt === 'none') {
