@@ -143,7 +143,6 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
             queryParams: this.platformInfo.queryParameters,
           })
         })
-      // Redirecto to
     } else {
       this.window.location.href = '/signout'
     }
