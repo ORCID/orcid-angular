@@ -36,6 +36,7 @@ import {
 import { GoogleTagManagerService } from '../../../core/google-tag-manager/google-tag-manager.service'
 import { Title } from '@angular/platform-browser'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
+import { OauthURLSessionManagerService } from 'src/app/core/oauth-urlsession-manager/oauth-urlsession-manager.service'
 
 @Component({
   selector: 'app-form-authorize',
@@ -63,22 +64,28 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
 
   authorizeAccessFor = $localize`:@@authorize.authorizeAccessFor:Authorize access for`
   orcid = $localize`:@@authorize.dashOrcid:- ORCID`
+  OAUTH_AUTHORIZATION: boolean
 
   constructor(
     @Inject(WINDOW) private window: Window,
     private _user: UserService,
     private _oauth: OauthService,
-    private _googleTagManagerService: GoogleTagManagerService,
-    private _signingService: SignInService,
     private _platformInfo: PlatformInfoService,
     private _router: Router,
-    private _errorHandler: ErrorHandlerService,
     private _trustedIndividuals: TrustedIndividualsService,
     private _titleService: Title,
-    private _togglz: TogglzService
+    private _togglz: TogglzService,
+    private _oauthURLSessionManagerService: OauthURLSessionManagerService
   ) {}
 
   ngOnInit(): void {
+    this._togglz
+      .getStateOf('OAUTH_AUTHORIZATION')
+      .pipe(take(1))
+      .subscribe((OAUTH_AUTHORIZATION) => {
+        this.OAUTH_AUTHORIZATION = OAUTH_AUTHORIZATION
+      })
+
     this._platformInfo
       .get()
       .pipe(take(1))
@@ -125,8 +132,21 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
     }, 1000)
   }
 
-  navigateTo(val) {
-    this.window.location.href = val
+  logout() {
+    if (this.OAUTH_AUTHORIZATION) {
+      this._user
+        .noRedirectLogout()
+        .pipe(take(1))
+        .subscribe(() => {
+          // Redirect to login with current url params
+          this._router.navigate(['/signin'], {
+            queryParams: this.platformInfo.queryParameters,
+          })
+        })
+      // Redirecto to
+    } else {
+      this.window.location.href = '/signout'
+    }
   }
 
   authorize(value = true) {

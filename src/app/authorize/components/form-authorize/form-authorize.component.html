@@ -47,7 +47,7 @@
             class="underline"
             [ngClass]="{ row: platformInfo.columns4 }"
             i18n="@@public-layout.sign_out"
-            (click)="navigateTo('/signout')"
+            (click)="logout()"
             >Sign out</a
           >
           <app-trusted-individuals-dropdown
