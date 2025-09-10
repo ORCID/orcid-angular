@@ -170,13 +170,13 @@
               *ngIf="showNonVerifiedData(email.putCode)"
             >
               <ng-container *ngIf="email.sourceName || email.source">
-                <ng-container i18n="@@shared.source">Source:</ng-container>
+                <ng-container i18n="@@shared.sourceColon">Source:</ng-container>
                 <ng-container>{{
                   email.sourceName || email.source
                 }}</ng-container
                 >,
               </ng-container>
-              <ng-container>Unverified</ng-container>
+              <ng-container i18n="@@side-bar.unverified">Unverified</ng-container>
               <ng-container>-</ng-container>
               <ng-container
                 class="disabled underline"
