@@ -359,7 +359,8 @@ export class RecordWorksService {
 
   updateVisibility(
     putCode: string,
-    visibility: VisibilityStrings
+    visibility: VisibilityStrings,
+    reloadFeatured: boolean = false
   ): Observable<any> {
     const options = {
       forceReload: true,
@@ -379,7 +380,7 @@ export class RecordWorksService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        tap(() => this.getWorks(options))
+        tap(() => this.getWorks(options) && (reloadFeatured && this.getFeaturedWorks({ forceReload: true })))
       )
   }
 
