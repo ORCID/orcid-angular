@@ -380,7 +380,12 @@ export class RecordWorksService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        tap(() => this.getWorks(options) && (reloadFeatured && this.getFeaturedWorks({ forceReload: true })))
+        tap(
+          () =>
+            this.getWorks(options) &&
+            reloadFeatured &&
+            this.getFeaturedWorks({ forceReload: true })
+        )
       )
   }
 

@@ -275,7 +275,7 @@ export class PanelComponent implements OnInit {
   }
 
   updateVisibility(visibility: VisibilityStrings) {
-    console.log('updateVisibility', visibility) 
+    console.log('updateVisibility', visibility)
     console.log('this.stackSiblings', this.stackSiblings)
     switch (this.type) {
       case 'employment':
@@ -314,8 +314,7 @@ export class PanelComponent implements OnInit {
               ''
             ),
             visibility,
-            this.stackSiblings.some((sibling) => sibling.featuredDisplayIndex),
-
+            this.stackSiblings.some((sibling) => sibling.featuredDisplayIndex)
           )
           .subscribe()
         break
