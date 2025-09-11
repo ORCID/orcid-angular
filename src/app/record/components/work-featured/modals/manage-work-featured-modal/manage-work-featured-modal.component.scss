@@ -101,6 +101,14 @@
   }
 }
 
+.results {
+  ::ng-deep {
+    .featured-header,
+    .featured-body {
+      background-color: transparent !important;
+    }
+  }
+}
 .results-count {
   height: 48px;
   align-content: center;
