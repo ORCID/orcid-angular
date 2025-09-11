@@ -9,9 +9,7 @@ import { Observable, forkJoin } from 'rxjs'
 import { first, map, take } from 'rxjs/operators'
 
 import { UserService } from '../core'
-import {
-  OauthURLSessionManagerService,
-} from '../core/oauth-urlsession-manager/oauth-urlsession-manager.service'
+import { OauthURLSessionManagerService } from '../core/oauth-urlsession-manager/oauth-urlsession-manager.service'
 import { WINDOW } from '../cdk/window/window.service'
 import { TogglzService } from '../core/togglz/togglz.service'
 

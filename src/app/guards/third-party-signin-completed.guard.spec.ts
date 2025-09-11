@@ -27,13 +27,18 @@ describe('ThirdPartySigninCompletedGuard', () => {
   let togglzService: jasmine.SpyObj<TogglzService>
 
   beforeEach(() => {
-    const userServiceSpy = jasmine.createSpyObj('UserService', ['getUserSession'])
-    const oauthUrlSessionManagerSpy = jasmine.createSpyObj('OauthURLSessionManagerService', ['get', 'clear'])
+    const userServiceSpy = jasmine.createSpyObj('UserService', [
+      'getUserSession',
+    ])
+    const oauthUrlSessionManagerSpy = jasmine.createSpyObj(
+      'OauthURLSessionManagerService',
+      ['get', 'clear']
+    )
     const routerSpy = jasmine.createSpyObj('Router', ['parseUrl'])
     const togglzSpy = jasmine.createSpyObj('TogglzService', ['getStateOf'])
 
     mockWindow = {
-      outOfRouterNavigation: jasmine.createSpy('outOfRouterNavigation')
+      outOfRouterNavigation: jasmine.createSpy('outOfRouterNavigation'),
     }
 
     TestBed.configureTestingModule({
@@ -47,18 +52,25 @@ describe('ThirdPartySigninCompletedGuard', () => {
         MatDialog,
         Overlay,
         { provide: UserService, useValue: userServiceSpy },
-        { provide: OauthURLSessionManagerService, useValue: oauthUrlSessionManagerSpy },
+        {
+          provide: OauthURLSessionManagerService,
+          useValue: oauthUrlSessionManagerSpy,
+        },
         { provide: Router, useValue: routerSpy },
         { provide: TogglzService, useValue: togglzSpy },
         { provide: WINDOW, useValue: mockWindow },
       ],
     })
-    
+
     guard = TestBed.inject(ThirdPartySigninCompletedGuard)
     userService = TestBed.inject(UserService) as jasmine.SpyObj<UserService>
-    oauthUrlSessionManager = TestBed.inject(OauthURLSessionManagerService) as jasmine.SpyObj<OauthURLSessionManagerService>
+    oauthUrlSessionManager = TestBed.inject(
+      OauthURLSessionManagerService
+    ) as jasmine.SpyObj<OauthURLSessionManagerService>
     router = TestBed.inject(Router) as jasmine.SpyObj<Router>
-    togglzService = TestBed.inject(TogglzService) as jasmine.SpyObj<TogglzService>
+    togglzService = TestBed.inject(
+      TogglzService
+    ) as jasmine.SpyObj<TogglzService>
   })
 
   it('should be created', () => {
@@ -80,7 +92,7 @@ describe('ThirdPartySigninCompletedGuard', () => {
       oauthUrlSessionManager.clear.and.returnValue()
 
       const result$ = guard.canActivateChild(mockRoute, mockState) as any
-      result$.subscribe(result => {
+      result$.subscribe((result) => {
         expect(oauthUrlSessionManager.get).toHaveBeenCalled()
         expect(oauthUrlSessionManager.clear).toHaveBeenCalled()
         expect(mockWindow.outOfRouterNavigation).toHaveBeenCalledWith(oauthUrl)
@@ -98,7 +110,7 @@ describe('ThirdPartySigninCompletedGuard', () => {
       router.parseUrl.and.returnValue(mockUrlTree)
 
       const result$ = guard.canActivateChild(mockRoute, mockState) as any
-      result$.subscribe(result => {
+      result$.subscribe((result) => {
         expect(oauthUrlSessionManager.get).toHaveBeenCalled()
         expect(oauthUrlSessionManager.clear).not.toHaveBeenCalled()
         expect(mockWindow.outOfRouterNavigation).not.toHaveBeenCalled()
@@ -116,7 +128,7 @@ describe('ThirdPartySigninCompletedGuard', () => {
       router.parseUrl.and.returnValue(mockUrlTree)
 
       const result$ = guard.canActivateChild(mockRoute, mockState) as any
-      result$.subscribe(result => {
+      result$.subscribe((result) => {
         expect(oauthUrlSessionManager.get).toHaveBeenCalled()
         expect(oauthUrlSessionManager.clear).not.toHaveBeenCalled()
         expect(mockWindow.outOfRouterNavigation).not.toHaveBeenCalled()
@@ -135,7 +147,7 @@ describe('ThirdPartySigninCompletedGuard', () => {
       router.parseUrl.and.returnValue(mockUrlTree)
 
       const result$ = guard.canActivateChild(mockRoute, mockState) as any
-      result$.subscribe(result => {
+      result$.subscribe((result) => {
         expect(oauthUrlSessionManager.get).not.toHaveBeenCalled()
         expect(oauthUrlSessionManager.clear).not.toHaveBeenCalled()
         expect(mockWindow.outOfRouterNavigation).not.toHaveBeenCalled()
@@ -152,7 +164,7 @@ describe('ThirdPartySigninCompletedGuard', () => {
       router.parseUrl.and.returnValue(mockUrlTree)
 
       const result$ = guard.canActivateChild(mockRoute, mockState) as any
-      result$.subscribe(result => {
+      result$.subscribe((result) => {
         expect(router.parseUrl).toHaveBeenCalledWith('/basepath')
         done()
       })
@@ -165,8 +177,11 @@ describe('ThirdPartySigninCompletedGuard', () => {
       const mockUrlTree = { url: '/basepath' } as any
       router.parseUrl.and.returnValue(mockUrlTree)
 
-      const result$ = guard.canActivateChild(mockRoute, stateWithoutSuffix) as any
-      result$.subscribe(result => {
+      const result$ = guard.canActivateChild(
+        mockRoute,
+        stateWithoutSuffix
+      ) as any
+      result$.subscribe((result) => {
         expect(router.parseUrl).toHaveBeenCalledWith('/basepath')
         done()
       })
