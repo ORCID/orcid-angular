@@ -135,7 +135,7 @@
   <h2 class="orc-font-body mb-2" i18n="@@shared.addFeaturedWorks">
     Add featured works
   </h2>
-  <div class="orc-font-body-small mb-4" i18n="searchFeaturedWorks">
+  <div class="orc-font-body-small mb-4" i18n="@@shared.searchFeaturedWorks">
     Search your public works to find items to feature on your ORCID record.
   </div>
   <form
@@ -166,26 +166,22 @@
     </div>
   </form>
   @if (searchResults && searchResults.length === 0) {
-  <em class="orc-font-body-small">
+  <em class="orc-font-body-small" i18n="@@shared.noResultsFound">
     No results found. Please edit your search terms and try again.
   </em>
   } @if (searchResults && searchResults.length > 0) {
   <div class="orc-font-body-small">
     <div class="mb-4">
-      <strong>You searched for: </strong>
+      <strong i18n="@@shared.youSearchedFor">You searched for: </strong>
       <span>{{ whatToSearch }}</span>
     </div>
     @if (searchResults.length > 10) {
     <app-alert-message>
-      <h3
-        title
-        class="orc-font-body"
-        i18n="@@manageFeaturedWorks.tooManyResults"
-      >
+      <h3 title class="orc-font-body" i18n="@@shared.tooManyResults">
         Your search returned a lot of results
       </h3>
       <ng-container content>
-        <p class="orc-font-body-small">
+        <p class="orc-font-body-small" i18n="@@shared.tooManyResultsDesc">
           If you can’t find what you are looking for try adding more detail to
           your search term and searching again.
         </p>
@@ -193,7 +189,9 @@
     </app-alert-message>
     }
     <div class="results-count">
-      Showing <strong>{{ searchResults?.length }}</strong> results
+      <span i18n="@@shared.showing">Showing</span>
+      <strong>{{ searchResults?.length }}</strong>
+      <span i18n="@@shared.results">results</span>
     </div>
     <hr />
     @for (result of searchResults; track result.putCode; let idx = $index) {
@@ -212,7 +210,7 @@
         <mat-icon class="large-material-icon material-symbols-outlined">
           stars
         </mat-icon>
-        <div>Make featured</div>
+        <div i18n="@@shared.makeFeatured">Make featured</div>
       </button>
       }
     </div>

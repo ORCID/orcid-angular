@@ -68,7 +68,7 @@
   height: 42px;
   box-sizing: border-box;
   padding-left: 12px;
-  padding-right: 45px;
+  padding-right: 40px;
   border-radius: 3px;
   border-width: 1px;
   border-style: solid;
@@ -77,7 +77,7 @@
 .search-icon-button {
   position: absolute;
   top: 50%;
-  right: 4px;
+  right: 0;
   transform: translateY(-50%);
 }
 
@@ -87,6 +87,15 @@
     .search-box {
       max-width: 100%;
     }
+  }
+}
+
+::ng-deep {
+  app-panel {
+    margin-top: 0 !important;
+  }
+  .featured-header {
+    padding-left: 0 !important;
   }
 }
 
