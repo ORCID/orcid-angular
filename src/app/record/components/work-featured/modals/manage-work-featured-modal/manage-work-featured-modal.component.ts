@@ -24,11 +24,16 @@ import { UserRecord } from 'src/app/types/record.local'
   standalone: false,
 })
 export class ManageWorkFeaturedModalComponent implements OnInit, OnDestroy {
-  closeLabel = $localize`:@@shared.closeActivityAriaLabel:Close Works`
-  cancelAndClose = $localize`:@@shared.cancelAndCloseActivityAriaLabel:Cancel changes and close Works`
+  closeLabel = $localize`:@@works.closeFeaturedWorksAriaLabel:Close featured works`
+  cancelAndCloseAriaLabel = $localize`:@@works.cancelAndCloseFeaturedWorksAriaLabel:Cancel changes and close featured works`
+  moveFeaturedWorkAriaLabel = $localize`:@@shared.moveAriaLabel:Move`
+  removeFeaturedWorkAriaLabel = $localize`:@@shared.removeAriaLabel:Remove`
+  makeAriaLabel = $localize`:@@shared.makeAriaLabel:Make`
+  featuredAriaLabel = $localize`:@@shared.featured:featured`
+  fromFeaturedWorksAriaLabel = $localize`:@@works.fromFeaturedWorksAriaLabel:from featured works`
   saveAndClose = $localize`:@@shared.saveAndCloseActivityAriaLabel:Save changes to Works`
+  labelSearch = $localize`:@@works.searchYourPublicWorksAriaLabel:Search your public works`
   placeholderSearch = $localize`:@@works.searchPublicWorkTitles:Search public work titles`
-  labelSearch = $localize`:@@layout.ariaLabelSearch:Search the ORCID registry`
 
   @Input() userRecord: UserRecord
 
