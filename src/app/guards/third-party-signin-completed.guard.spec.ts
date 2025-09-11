@@ -67,7 +67,7 @@ describe('ThirdPartySigninCompletedGuard', () => {
 
   describe('canActivateChild', () => {
     const mockRoute = {} as any
-    const mockState = { url: 'basepath/third-party-signin-completed' } as any
+    const mockState = { url: '/basepath/third-party-signin-completed' } as any
 
     beforeEach(() => {
       userService.getUserSession.and.returnValue(of({} as any))
@@ -93,7 +93,7 @@ describe('ThirdPartySigninCompletedGuard', () => {
     it('should proceed with normal navigation when no OAuth URL is stored and OAUTH_AUTHORIZATION is true', (done) => {
       togglzService.getStateOf.and.returnValue(of(true))
       oauthUrlSessionManager.get.and.returnValue(null)
-      const expectedUrl = '/some/path'
+      const expectedUrl = '/basepath'
       const mockUrlTree = { url: expectedUrl } as any
       router.parseUrl.and.returnValue(mockUrlTree)
 
@@ -111,7 +111,7 @@ describe('ThirdPartySigninCompletedGuard', () => {
     it('should proceed with normal navigation when OAuth URL is empty string and OAUTH_AUTHORIZATION is true', (done) => {
       togglzService.getStateOf.and.returnValue(of(true))
       oauthUrlSessionManager.get.and.returnValue('')
-      const expectedUrl = '/some/path'
+      const expectedUrl = '/basepath'
       const mockUrlTree = { url: expectedUrl } as any
       router.parseUrl.and.returnValue(mockUrlTree)
 
@@ -130,13 +130,13 @@ describe('ThirdPartySigninCompletedGuard', () => {
       togglzService.getStateOf.and.returnValue(of(false))
       const oauthUrl = 'https://example.com/oauth/callback?code=123'
       oauthUrlSessionManager.get.and.returnValue(oauthUrl)
-      const expectedUrl = '/some/path'
+      const expectedUrl = '/basepath'
       const mockUrlTree = { url: expectedUrl } as any
       router.parseUrl.and.returnValue(mockUrlTree)
 
       const result$ = guard.canActivateChild(mockRoute, mockState) as any
       result$.subscribe(result => {
-        expect(oauthUrlSessionManager.get).toHaveBeenCalled()
+        expect(oauthUrlSessionManager.get).not.toHaveBeenCalled()
         expect(oauthUrlSessionManager.clear).not.toHaveBeenCalled()
         expect(mockWindow.outOfRouterNavigation).not.toHaveBeenCalled()
         expect(router.parseUrl).toHaveBeenCalledWith(expectedUrl)
@@ -148,12 +148,12 @@ describe('ThirdPartySigninCompletedGuard', () => {
     it('should strip /third-party-signin-completed from URL correctly', (done) => {
       togglzService.getStateOf.and.returnValue(of(true))
       oauthUrlSessionManager.get.and.returnValue(null)
-      const mockUrlTree = { url: '/some/path' } as any
+      const mockUrlTree = { url: '/basepath' } as any
       router.parseUrl.and.returnValue(mockUrlTree)
 
       const result$ = guard.canActivateChild(mockRoute, mockState) as any
       result$.subscribe(result => {
-        expect(router.parseUrl).toHaveBeenCalledWith('/some/path')
+        expect(router.parseUrl).toHaveBeenCalledWith('/basepath')
         done()
       })
     })
@@ -161,13 +161,13 @@ describe('ThirdPartySigninCompletedGuard', () => {
     it('should handle URL without /third-party-signin-completed suffix', (done) => {
       togglzService.getStateOf.and.returnValue(of(true))
       oauthUrlSessionManager.get.and.returnValue(null)
-      const stateWithoutSuffix = { url: 'basepath' } as any
-      const mockUrlTree = { url: 'basepath' } as any
+      const stateWithoutSuffix = { url: '/basepath' } as any
+      const mockUrlTree = { url: '/basepath' } as any
       router.parseUrl.and.returnValue(mockUrlTree)
 
       const result$ = guard.canActivateChild(mockRoute, stateWithoutSuffix) as any
       result$.subscribe(result => {
-        expect(router.parseUrl).toHaveBeenCalledWith('/some/path')
+        expect(router.parseUrl).toHaveBeenCalledWith('/basepath')
         done()
       })
     })
