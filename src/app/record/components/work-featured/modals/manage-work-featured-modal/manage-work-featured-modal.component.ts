@@ -26,13 +26,17 @@ export class ManageWorkFeaturedModalComponent implements OnInit, OnDestroy {
   closeLabel = $localize`:@@shared.closeActivityAriaLabel:Close Works`
   cancelAndClose = $localize`:@@shared.cancelAndCloseActivityAriaLabel:Cancel changes and close Works`
   saveAndClose = $localize`:@@shared.saveAndCloseActivityAriaLabel:Save changes to Works`
+  placeholderSearch = $localize`:@@works.searchPublicWorkTitles:Search public work titles`
+  labelSearch = $localize`:@@layout.ariaLabelSearch:Search the ORCID registry`
 
   @Input() userRecord: UserRecord
 
   loading = true
   works: Work[] = []
+  searchResults: any[] | undefined
   initialPutCodes: string[] = []
   maxFeatured = 5
+  whatToSearch: string
 
   $destroy: Subject<void> = new Subject<void>()
 
@@ -84,6 +88,39 @@ export class ManageWorkFeaturedModalComponent implements OnInit, OnDestroy {
     this.works = this.works.filter(
       (w) => w.putCode?.value !== work.putCode?.value
     )
+    this.searchResults?.forEach((item) => {
+      if (String(item.putCode.value) === String(work.putCode.value)) {
+        item.featured = false
+      }
+    })
+  }
+
+  search(term: string) {
+    if (term) {
+      this._worksService.searchWorks(term).subscribe((results) => {
+        const featuredPutCodes = new Set(
+          this.works.map((w) => String(w.putCode?.value))
+        )
+
+        this.searchResults = results.map((result) => ({
+          ...result,
+          featured: featuredPutCodes.has(String(result.putCode?.value)),
+        }))
+      })
+    }
+  }
+
+  makeFeatured(work: Work) {
+    if (this.works.length >= this.maxFeatured) {
+      return
+    }
+    this.works.push(work)
+    const searchResult = this.searchResults.find(
+      (item) => String(item.putCode.value) === String(work.putCode.value)
+    )
+    if (searchResult) {
+      searchResult.featured = true
+    }
   }
 
   saveEvent() {
