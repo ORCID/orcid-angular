@@ -129,6 +129,108 @@
           </div>
         </div>
       </div>
+      @if (works?.length === 5) {
+      <app-alert-message>
+        <h3 title class="orc-font-body" i18n="@@works.maxFeaturedWorks">
+          You have the maximum number of featured works
+        </h3>
+        <ng-container content>
+          <div class="orc-font-body-small" i18n="@@works.maxFeaturedWorksDesc">
+            You can’t feature any more works until you have removed some from
+            the list above.
+          </div>
+        </ng-container>
+      </app-alert-message>
+      }
     </section>
   </div>
+  <hr />
+  <h2 class="orc-font-body mb-2" i18n="@@shared.addFeaturedWorks">
+    Add featured works
+  </h2>
+  <div class="orc-font-body-small mb-4" i18n="@@shared.searchFeaturedWorks">
+    Search your public works to find items to feature on your ORCID record.
+  </div>
+  <form
+    role="search"
+    class="search-box orc-font-body-small mb-4"
+    (submit)="search(whatToSearch)"
+  >
+    <div class="input-wrapper">
+      <input
+        autocomplete="off"
+        name="whatToSearch"
+        [(ngModel)]="whatToSearch"
+        [placeholder]="placeholderSearch"
+        type="text"
+        [attr.aria-label]="labelSearch"
+        id="cy-search"
+        class="orc-font-body-small"
+      />
+      <button
+        [attr.aria-label]="labelSearch"
+        type="submit"
+        mat-icon-button
+        class="search-icon-button"
+        id="cy-search-btn"
+      >
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+  </form>
+  @if (searchResults && searchResults.length === 0) {
+  <em class="orc-font-body-small" i18n="@@shared.noResultsFound">
+    No results found. Please edit your search terms and try again.
+  </em>
+  } @if (searchResults && searchResults.length > 0) {
+  <div class="orc-font-body-small">
+    <div class="mb-4">
+      <strong i18n="@@shared.youSearchedFor">You searched for: </strong>
+      <span>{{ whatToSearch }}</span>
+    </div>
+    @if (searchResults.length > 10) {
+    <app-alert-message>
+      <h3 title class="orc-font-body" i18n="@@shared.tooManyResults">
+        Your search returned a lot of results
+      </h3>
+      <ng-container content>
+        <p class="orc-font-body-small" i18n="@@shared.tooManyResultsDesc">
+          If you can’t find what you are looking for try adding more detail to
+          your search term and searching again.
+        </p>
+      </ng-container>
+    </app-alert-message>
+    }
+    <div class="results-count">
+      <span i18n="@@shared.showing">Showing</span>&nbsp;
+      <strong>{{ searchResults?.length }}</strong
+      >&nbsp;
+      <span i18n="@@shared.results">results</span>
+    </div>
+    <hr />
+    @for (result of searchResults; track result.putCode; let idx = $index) {
+    <div class="search-result-wrapper">
+      <app-work-featured
+        class="results"
+        [ngClass]="{ 'not-featured': !result.featured }"
+        [work]="result"
+      ></app-work-featured>
+      @if (!result.featured) {
+      <button
+        class="make-featured-button orc-font-body-small"
+        mat-button
+        (click)="makeFeatured(result)"
+      >
+        <mat-icon class="large-material-icon material-symbols-outlined">
+          stars
+        </mat-icon>
+        <div i18n="@@shared.makeFeatured">Make featured</div>
+      </button>
+      }
+    </div>
+    @if (idx < searchResults.length - 1) {
+    <hr />
+    } }
+  </div>
+  }
 </app-modal>

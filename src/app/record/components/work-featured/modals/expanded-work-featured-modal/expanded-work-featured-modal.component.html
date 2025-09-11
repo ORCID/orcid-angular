@@ -24,7 +24,7 @@
           >{{ work.publicationDate | monthDayYearDateToString }}
           |
         </ng-container>
-        {{ work?.workType.value | recordWorkTypeLabel }}
+        {{ work?.workType?.value | recordWorkTypeLabel }}
         <ng-container
           *ngIf="
             work?.contributorsGroupedByOrcid
