@@ -213,7 +213,9 @@ export class RecordWorksService {
     return this.$featuredWorkSubject.asObservable()
   }
 
-  searchPublicWorks(term: string): Observable<Work[]> {
+  searchPublicWorks(
+    term: string
+  ): Observable<{ results: Work[]; total: number }> {
     return this._http
       .get<PublicWorkSearchEndpoint>(
         runtimeEnvironment.API_WEB +
@@ -224,8 +226,8 @@ export class RecordWorksService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        map((works: PublicWorkSearchEndpoint) =>
-          works.results.map(
+        map((works: PublicWorkSearchEndpoint) => ({
+          results: works.results.map(
             (work) =>
               ({
                 ...work,
@@ -244,8 +246,9 @@ export class RecordWorksService {
                 } as MonthDayYearDate,
                 workExternalIdentifiers: [],
               } as Work)
-          )
-        ),
+          ),
+          total: works.totalCount,
+        })),
         tap(() => this._$loadingSearch.next(false))
       )
   }

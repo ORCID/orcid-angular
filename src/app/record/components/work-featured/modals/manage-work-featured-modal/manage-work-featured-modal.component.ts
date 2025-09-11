@@ -37,6 +37,7 @@ export class ManageWorkFeaturedModalComponent implements OnInit, OnDestroy {
   initialPutCodes: string[] = []
   maxFeatured = 5
   whatToSearch: string
+  totalWorks: number | undefined
 
   $destroy: Subject<void> = new Subject<void>()
 
@@ -97,16 +98,18 @@ export class ManageWorkFeaturedModalComponent implements OnInit, OnDestroy {
 
   search(term: string) {
     if (term) {
-      this._worksService.searchPublicWorks(term).subscribe((results) => {
-        const featuredPutCodes = new Set(
-          this.works.map((w) => String(w.putCode?.value))
-        )
-
-        this.searchResults = results.map((result) => ({
-          ...result,
-          featured: featuredPutCodes.has(String(result.putCode?.value)),
-        }))
-      })
+      this._worksService
+        .searchPublicWorks(term)
+        .subscribe((res: { results: Work[]; total: number }) => {
+          const featuredPutCodes = new Set(
+            this.works.map((w) => String(w.putCode?.value))
+          )
+          this.totalWorks = res.total
+          this.searchResults = res.results.map((result) => ({
+            ...result,
+            featured: featuredPutCodes.has(String(result.putCode?.value)),
+          }))
+        })
     }
   }
 

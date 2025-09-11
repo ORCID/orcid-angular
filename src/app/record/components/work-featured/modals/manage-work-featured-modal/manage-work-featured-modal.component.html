@@ -153,24 +153,34 @@
       <strong i18n="@@shared.youSearchedFor">You searched for: </strong>
       <span>{{ whatToSearch }}</span>
     </div>
-    @if (searchResults.length > 10) {
+    @if (totalWorks && totalWorks > 10) {
     <app-alert-message>
       <h3 title class="orc-font-body" i18n="@@shared.tooManyResults">
         Your search returned a lot of results
       </h3>
       <ng-container content>
-        <p class="orc-font-body-small" i18n="@@shared.tooManyResultsDesc">
+        <div class="orc-font-body-small" i18n="@@shared.tooManyResultsDesc">
           If you can’t find what you are looking for try adding more detail to
           your search term and searching again.
-        </p>
+        </div>
       </ng-container>
     </app-alert-message>
     }
     <div class="results-count">
-      <span i18n="@@shared.showing">Showing</span>&nbsp;
-      <strong>{{ searchResults?.length }}</strong
-      >&nbsp;
+      <span i18n="@@shared.showing">Showing</span>&nbsp;@if (totalWorks &&
+      totalWorks > 10) {
+      <strong>1</strong>&nbsp;-&nbsp;<strong>10</strong>&nbsp;<span
+        i18n="@@shared.of"
+        >of</span
+      >&nbsp;<strong>{{ totalWorks }}</strong
+      >&nbsp;<span i18n="@@shared.results">results</span>
+      } @else {
+      <strong>{{ searchResults?.length || 0 }}</strong
+      >&nbsp;@if (searchResults?.length === 1) {
+      <span i18n="@@shared.result">result</span>
+      } @else {
       <span i18n="@@shared.results">results</span>
+      } }
     </div>
     <hr />
     @for (result of searchResults; track result.putCode; let idx = $index) {
