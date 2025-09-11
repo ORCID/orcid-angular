@@ -9,6 +9,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { ModalComponent } from 'src/app/cdk/modal/modal/modal.component'
+import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { RecordWorksService } from 'src/app/core/record-works/record-works.service'
 import { Work } from 'src/app/types/record-works.endpoint'
 import { UserRecord } from 'src/app/types/record.local'
@@ -47,6 +48,7 @@ export class ManageWorkFeaturedModalComponent implements OnInit, OnDestroy {
   constructor(
     private _worksService: RecordWorksService,
     private _dialogRef: MatDialogRef<ModalComponent>,
+    private _snackbarService: SnackbarService,
     @Inject(MAT_DIALOG_DATA) public data: UserRecord
   ) {}
 
@@ -115,6 +117,10 @@ export class ManageWorkFeaturedModalComponent implements OnInit, OnDestroy {
 
   makeFeatured(work: Work) {
     if (this.works.length >= this.maxFeatured) {
+      this._snackbarService.showValidationError(
+        $localize`:@@works.maxFeaturedWorks:You can only feature up to 5 works.`,
+        $localize`:@@works.maxFeaturedWorksToastDescription:You can’t feature any more works until you have removed some of the currently featured items.`
+      )
       return
     }
     this.works.push(work)
