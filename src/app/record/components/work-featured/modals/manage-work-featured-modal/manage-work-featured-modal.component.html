@@ -129,9 +129,22 @@
           </div>
         </div>
       </div>
+      @if (works?.length === 5) {
+      <app-alert-message>
+        <h3 title class="orc-font-body" i18n="@@works.maxFeaturedWorks">
+          You have the maximum number of featured works
+        </h3>
+        <ng-container content>
+          <div class="orc-font-body-small" i18n="@@works.maxFeaturedWorksDesc">
+            You can’t feature any more works until you have removed some from
+            the list above.
+          </div>
+        </ng-container>
+      </app-alert-message>
+      }
     </section>
   </div>
-
+  <hr />
   <h2 class="orc-font-body mb-2" i18n="@@shared.addFeaturedWorks">
     Add featured works
   </h2>

@@ -26,7 +26,7 @@ export class ManageWorkFeaturedModalComponent implements OnInit, OnDestroy {
   closeLabel = $localize`:@@shared.closeActivityAriaLabel:Close Works`
   cancelAndClose = $localize`:@@shared.cancelAndCloseActivityAriaLabel:Cancel changes and close Works`
   saveAndClose = $localize`:@@shared.saveAndCloseActivityAriaLabel:Save changes to Works`
-  placeholderSearch = $localize`:@@shared.featuredWorksSearchPlaceholder:Search public work titles`
+  placeholderSearch = $localize`:@@works.searchPublicWorkTitles:Search public work titles`
   labelSearch = $localize`:@@layout.ariaLabelSearch:Search the ORCID registry`
 
   @Input() userRecord: UserRecord
