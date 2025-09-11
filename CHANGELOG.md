@@ -1,3 +1,9 @@
+## v2.121.14 - 2025-09-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.121.13...v2.121.14)
+
+- [#2621](https://github.com/ORCID/orcid-angular/pull/2621): PD-1941
+
 ## v2.121.13 - 2025-09-11
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.121.12...v2.121.13)
