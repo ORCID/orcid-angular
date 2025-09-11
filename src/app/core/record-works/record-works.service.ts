@@ -52,6 +52,7 @@ export class RecordWorksService {
 
   private _$loading = new BehaviorSubject<boolean>(true)
   private _$loadingFeatured = new BehaviorSubject<boolean>(true)
+  private _$loadingSearch = new BehaviorSubject<boolean>(false)
 
   public get $loading() {
     return this._$loading.asObservable()
@@ -59,6 +60,10 @@ export class RecordWorksService {
 
   public get $loadingFeatured() {
     return this._$loadingFeatured.asObservable()
+  }
+
+  public get $loadingSearch() {
+    return this._$loadingSearch.asObservable()
   }
 
   constructor(
@@ -199,6 +204,32 @@ export class RecordWorksService {
       })
 
     return this.$featuredWorkSubject.asObservable()
+  }
+
+  searchWorks(term: string): Observable<Work[]> {
+    return this._http
+      .get<Work[]>(
+        runtimeEnvironment.API_WEB +
+          `works/searchWorksTitleToFeature.json?term=${encodeURIComponent(
+            term
+          )}`
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        map((works) =>
+          works.map(
+            (work) =>
+              ({
+                ...work,
+                title: { value: work.title } as any,
+                workType: { value: '' } as any,
+                putCode: { value: work.putCode } as any,
+              } as Work)
+          )
+        ),
+        tap(() => this._$loadingSearch.next(false))
+      )
   }
 
   /**

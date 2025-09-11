@@ -15,6 +15,32 @@
   .star mat-icon {
     color: map-get($foreground, visibility-trusted);
   }
+
+  hr {
+    background-color: mat.m2-get-color-from-palette(
+      $background,
+      'ui-background-light'
+    );
+  }
+
+  .not-featured {
+    ::ng-deep {
+      .featured-work-star {
+        color: mat.m2-get-color-from-palette(
+          $background,
+          'ui-background-light'
+        ) !important;
+      }
+    }
+  }
+
+  .make-featured-button {
+    color: $brand-secondary-darkest !important;
+    border-color: mat.m2-get-color-from-palette(
+      $background,
+      'ui-background-light'
+    ) !important;
+  }
 }
 
 @include manage-featured-works-theme($orcid-app-theme);
