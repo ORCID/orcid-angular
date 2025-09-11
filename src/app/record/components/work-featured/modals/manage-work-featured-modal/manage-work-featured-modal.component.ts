@@ -118,8 +118,8 @@ export class ManageWorkFeaturedModalComponent implements OnInit, OnDestroy {
   makeFeatured(work: Work) {
     if (this.works.length >= this.maxFeatured) {
       this._snackbarService.showValidationError(
-        $localize`:@@works.maxFeaturedWorks:You can only feature up to 5 works.`,
-        $localize`:@@works.maxFeaturedWorksToastDescription:You can’t feature any more works until you have removed some of the currently featured items.`
+        $localize`:@@works.maxFeaturedWorksToastDescription:You can’t feature any more works until you have removed some of the currently featured items.`,
+        $localize`:@@works.maxFeaturedWorks:You can only feature up to 5 works.`
       )
       return
     }
