@@ -34,6 +34,15 @@
     }
   }
 
+  :host {
+    ::ng-deep {
+      .featured-header,
+      .featured-body {
+        background-color: transparent !important;
+      }
+    }
+  }
+
   .make-featured-button {
     color: $brand-secondary-darkest !important;
     border-color: mat.m2-get-color-from-palette(

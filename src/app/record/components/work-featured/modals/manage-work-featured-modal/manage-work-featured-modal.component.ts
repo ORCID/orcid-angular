@@ -33,7 +33,7 @@ export class ManageWorkFeaturedModalComponent implements OnInit, OnDestroy {
 
   loading = true
   works: Work[] = []
-  searchResults: any[] | undefined
+  searchResults: Work[] | undefined
   initialPutCodes: string[] = []
   maxFeatured = 5
   whatToSearch: string
@@ -90,14 +90,14 @@ export class ManageWorkFeaturedModalComponent implements OnInit, OnDestroy {
     )
     this.searchResults?.forEach((item) => {
       if (String(item.putCode.value) === String(work.putCode.value)) {
-        item.featured = false
+        item.featuredDisplayIndex = 0
       }
     })
   }
 
   search(term: string) {
     if (term) {
-      this._worksService.searchWorks(term).subscribe((results) => {
+      this._worksService.searchPublicWorks(term).subscribe((results) => {
         const featuredPutCodes = new Set(
           this.works.map((w) => String(w.putCode?.value))
         )
@@ -119,7 +119,8 @@ export class ManageWorkFeaturedModalComponent implements OnInit, OnDestroy {
       (item) => String(item.putCode.value) === String(work.putCode.value)
     )
     if (searchResult) {
-      searchResult.featured = true
+      // 1 is set to mark it as featured in the ui, actual index gets assigned in "saveEvent()"
+      searchResult.featuredDisplayIndex = 1
     }
   }
 

@@ -11,6 +11,8 @@ import {
   tap,
 } from 'rxjs/operators'
 import {
+  PublicWorkSearchResult,
+  TranslatedTitle,
   Work,
   WorkGroup,
   WorksEndpoint,
@@ -27,7 +29,11 @@ import {
 } from 'src/app/types/works.endpoint'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
-import { VisibilityStrings } from '../../types/common.endpoint'
+import {
+  MonthDayYearDate,
+  Value,
+  VisibilityStrings,
+} from '../../types/common.endpoint'
 import { DEFAULT_PAGE_SIZE, EXTERNAL_ID_TYPE_WORK } from 'src/app/constants'
 import { RecordImportWizard } from '../../types/record-peer-review-import.endpoint'
 import { SortOrderType } from '../../types/sort'
@@ -206,9 +212,9 @@ export class RecordWorksService {
     return this.$featuredWorkSubject.asObservable()
   }
 
-  searchWorks(term: string): Observable<Work[]> {
+  searchPublicWorks(term: string): Observable<Work[]> {
     return this._http
-      .get<Work[]>(
+      .get<PublicWorkSearchResult[]>(
         runtimeEnvironment.API_WEB +
           `works/searchWorksTitleToFeature.json?term=${encodeURIComponent(
             term
@@ -217,14 +223,27 @@ export class RecordWorksService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        map((works) =>
+        map((works: PublicWorkSearchResult[]) =>
           works.map(
             (work) =>
               ({
                 ...work,
-                title: { value: work.title } as any,
-                workType: { value: '' } as any,
-                putCode: { value: work.putCode } as any,
+                title: { value: work.title } as Value,
+                workType: { value: work.workType } as Value,
+                putCode: { value: work.putCode } as Value,
+                journalTitle: { value: work.journalTitle } as Value,
+                translatedTitle: {
+                  value: work.translatedTitle,
+                } as TranslatedTitle,
+                // 1 is set to mark it as featured in the "Manage featured works" modal, not used for the actual order
+                // if it needs to be used for the order, we need to update the backend
+                featuredDisplayIndex: work.featured ? 1 : 0,
+                publicationDate: {
+                  day: work.publicationDay,
+                  month: work.publicationMonth,
+                  year: work.publicationYear,
+                } as MonthDayYearDate,
+                workExternalIdentifiers: [],
               } as Work)
           )
         ),
