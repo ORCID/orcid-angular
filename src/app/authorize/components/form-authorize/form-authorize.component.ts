@@ -153,7 +153,9 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
 
   private performRedirect() {
     // Redirect to login with current url params using hard reload
-    const queryParams = this.platformInfo.queryParameters ? new URLSearchParams(this.platformInfo.queryParameters).toString() : ''
+    const queryParams = this.platformInfo.queryParameters
+      ? new URLSearchParams(this.platformInfo.queryParameters).toString()
+      : ''
     const signinUrl = queryParams ? `/signin?${queryParams}` : '/signin'
     this.window.location.href = signinUrl
   }
