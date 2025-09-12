@@ -19,6 +19,7 @@ export class WorkFeaturedComponent {
   @Input() work: Work
   @Input() isPublicRecord: string
   @Input() minimized = false
+  @Input() highlight: string = ''
 
   @Input() userInfo: UserInfo
   @ViewChildren('panelsComponent') panelsComponent: QueryList<PanelComponent>

@@ -34,6 +34,10 @@
     }
   }
 
+  :host ::ng-deep .highlight {
+    color: $state-info !important;
+  }
+
   :host {
     ::ng-deep {
       .featured-header,

@@ -199,6 +199,7 @@
           [ngClass]="{ 'not-featured': result.featuredDisplayIndex === 0 }"
           [work]="result"
           [minimized]="true"
+          [highlight]="whatToSearch"
         ></app-work-featured>
         @if (result.featuredDisplayIndex === 0) {
         <button
