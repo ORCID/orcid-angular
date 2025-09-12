@@ -3,9 +3,8 @@
 }
 .featured-work-box {
   width: 100%;
-  background: #fff;
-  border-radius: 8px;
-  padding: 16px;
+  padding-left: 16px;
+  padding-right: 16px;
   margin-bottom: 16px;
 }
 .featured-work-line {
@@ -29,7 +28,7 @@
   font-weight: 600;
 }
 .intro {
-  margin: 8px 0 16px;
+  margin-bottom: 32px;
 }
 .star {
   margin-right: 8px;
@@ -94,6 +93,9 @@
   app-panel {
     margin-top: 0 !important;
   }
+  app-panel-data {
+    padding-left: 32px !important;
+  }
   .featured-header {
     padding-left: 0 !important;
   }
@@ -131,6 +133,9 @@
 }
 .mt-2 {
   margin-top: 8px;
+}
+.mb-0 {
+  margin-bottom: 0;
 }
 hr {
   height: 1px;

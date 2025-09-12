@@ -1,3 +1,20 @@
+## v2.123.0 - 2025-09-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.122.0...v2.123.0)
+
+## v2.122.0 - 2025-09-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.121.14...v2.122.0)
+
+- [#2623](https://github.com/ORCID/orcid-angular/pull/2623): ${PD-2039} featured works modal improvements
+- [#2622](https://github.com/ORCID/orcid-angular/pull/2622): PD-2234
+
+## v2.121.14 - 2025-09-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.121.13...v2.121.14)
+
+- [#2621](https://github.com/ORCID/orcid-angular/pull/2621): PD-1941
+
 ## v2.121.13 - 2025-09-11
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.121.12...v2.121.13)

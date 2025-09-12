@@ -136,16 +136,28 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
     if (this.OAUTH_AUTHORIZATION) {
       this._user
         .noRedirectLogout()
-        .pipe(take(1))
-        .subscribe(() => {
-          // Redirect to login with current url params
-          this._router.navigate(['/signin'], {
-            queryParams: this.platformInfo.queryParameters,
+        .pipe(
+          take(1),
+          catchError((error) => {
+            this.performRedirect()
+            return []
           })
+        )
+        .subscribe(() => {
+          this.performRedirect()
         })
     } else {
       this.window.location.href = '/signout'
     }
+  }
+
+  private performRedirect() {
+    // Redirect to login with current url params using hard reload
+    const queryParams = this.platformInfo.queryParameters
+      ? new URLSearchParams(this.platformInfo.queryParameters).toString()
+      : ''
+    const signinUrl = queryParams ? `/signin?${queryParams}` : '/signin'
+    this.window.location.href = signinUrl
   }
 
   authorize(value = true) {

@@ -20,7 +20,7 @@
       (click)="closeEvent()"
       i18n="@@shared.cancel"
       id="cancel-featured-works-button"
-      [attr.aria-label]="cancelAndClose"
+      [attr.aria-label]="cancelAndCloseAriaLabel"
     >
       Cancel
     </button>
@@ -34,13 +34,13 @@
     >
   </div>
 
-  <h2 class="orc-font-body">
-    <span i18n="@@shared.yourFeaturedWorks">Your featured works</span>
-    <span class="count"> ({{ works?.length || 0 }}/{{ maxFeatured }})</span>
-  </h2>
+  <section id="your-featured-works">
+    <h2 class="orc-font-body">
+      <span i18n="@@shared.yourFeaturedWorks">Your featured works</span>
+      <span class="count"> ({{ works?.length || 0 }}/{{ maxFeatured }})</span>
+    </h2>
 
-  <div class="container no-padding">
-    <section id="featured-works-manage">
+    <div class="container no-padding">
       <div
         class="row featured-works-list"
         id="featured-works-dropList"
@@ -66,51 +66,18 @@
                 class="icon-drag"
                 cdkDragHandle
                 src="./assets/vectors/draggable.svg"
-                aria-label="drag handle"
+                [attr.aria-label]="
+                  moveFeaturedWorkAriaLabel + ' ' + (w?.title?.value || '')
+                "
               />
             </div>
 
-            <!-- Star + text container -->
-            <div class="content-wrapper">
-              <div class="row">
-                <div class="star">
-                  <mat-icon> star_filled </mat-icon>
-                </div>
-                <div class="content">
-                  <div class="title-line">
-                    <strong class="featured-title orc-font-body">
-                      {{ w?.title?.value }}
-                    </strong>
-                  </div>
-                  <div
-                    class="orc-font-body-small general-data"
-                    *ngIf="w?.journalTitle"
-                  >
-                    {{ w.journalTitle.value }}
-                  </div>
-                  <div class="orc-font-body-small general-data">
-                    <ng-container *ngIf="w?.publicationDate?.year">
-                      {{ w.publicationDate | monthDayYearDateToString }} |
-                    </ng-container>
-                    {{ w?.workType.value | recordWorkTypeLabel }}
-                    <ng-container
-                      *ngIf="
-                        w?.contributorsGroupedByOrcid
-                          | recordHolderRoles
-                            : 'true'
-                            : userRecord?.userInfo
-                                ?.EFFECTIVE_USER_ORCID as roles
-                      "
-                    >
-                      <ng-container *ngIf="roles">
-                        |
-                        <span class="record-holder">{{ roles }}</span>
-                      </ng-container>
-                    </ng-container>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <app-work-featured
+              class="featured-work"
+              [work]="w"
+              [minimized]="true"
+            >
+            </app-work-featured>
 
             <!-- Close button container -->
             <div class="close-wrapper">
@@ -118,7 +85,13 @@
                 (click)="remove(w)"
                 mat-icon-button
                 class="delete-button"
-                [attr.aria-label]="'Remove ' + (w?.title?.value || '')"
+                [attr.aria-label]="
+                  removeFeaturedWorkAriaLabel +
+                  ' ' +
+                  (w?.title?.value || '') +
+                  ' ' +
+                  fromFeaturedWorksAriaLabel
+                "
               >
                 <mat-icon
                   class="material-icons-outlined extra-large-material-icon"
@@ -130,7 +103,7 @@
         </div>
       </div>
       @if (works?.length === 5) {
-      <app-alert-message>
+      <app-alert-message class="mb-4">
         <h3 title class="orc-font-body" i18n="@@works.maxFeaturedWorks">
           You have the maximum number of featured works
         </h3>
@@ -142,95 +115,116 @@
         </ng-container>
       </app-alert-message>
       }
-    </section>
-  </div>
+    </div>
+  </section>
   <hr />
-  <h2 class="orc-font-body mb-2" i18n="@@shared.addFeaturedWorks">
-    Add featured works
-  </h2>
-  <div class="orc-font-body-small mb-4" i18n="@@shared.searchFeaturedWorks">
-    Search your public works to find items to feature on your ORCID record.
-  </div>
-  <form
-    role="search"
-    class="search-box orc-font-body-small mb-4"
-    (submit)="search(whatToSearch)"
-  >
-    <div class="input-wrapper">
-      <input
-        autocomplete="off"
-        name="whatToSearch"
-        [(ngModel)]="whatToSearch"
-        [placeholder]="placeholderSearch"
-        type="text"
-        [attr.aria-label]="labelSearch"
-        id="cy-search"
-        class="orc-font-body-small"
-      />
-      <button
-        [attr.aria-label]="labelSearch"
-        type="submit"
-        mat-icon-button
-        class="search-icon-button"
-        id="cy-search-btn"
-      >
-        <mat-icon>search</mat-icon>
-      </button>
+  <section id="add-featured-works">
+    <h3 class="orc-font-body mb-2" i18n="@@shared.addFeaturedWorks">
+      Add featured works
+    </h3>
+    <div class="orc-font-body-small mb-4" i18n="@@shared.searchFeaturedWorks">
+      Search your public works to find items to feature on your ORCID record.
     </div>
-  </form>
-  @if (searchResults && searchResults.length === 0) {
-  <em class="orc-font-body-small" i18n="@@shared.noResultsFound">
-    No results found. Please edit your search terms and try again.
-  </em>
-  } @if (searchResults && searchResults.length > 0) {
-  <div class="orc-font-body-small">
-    <div class="mb-4">
-      <strong i18n="@@shared.youSearchedFor">You searched for: </strong>
-      <span>{{ whatToSearch }}</span>
-    </div>
-    @if (searchResults.length > 10) {
-    <app-alert-message>
-      <h3 title class="orc-font-body" i18n="@@shared.tooManyResults">
-        Your search returned a lot of results
-      </h3>
-      <ng-container content>
-        <p class="orc-font-body-small" i18n="@@shared.tooManyResultsDesc">
-          If you can’t find what you are looking for try adding more detail to
-          your search term and searching again.
-        </p>
-      </ng-container>
-    </app-alert-message>
-    }
-    <div class="results-count">
-      <span i18n="@@shared.showing">Showing</span>&nbsp;
-      <strong>{{ searchResults?.length }}</strong
-      >&nbsp;
-      <span i18n="@@shared.results">results</span>
-    </div>
-    <hr />
-    @for (result of searchResults; track result.putCode; let idx = $index) {
-    <div class="search-result-wrapper">
-      <app-work-featured
-        class="results"
-        [ngClass]="{ 'not-featured': !result.featured }"
-        [work]="result"
-      ></app-work-featured>
-      @if (!result.featured) {
-      <button
-        class="make-featured-button orc-font-body-small"
-        mat-button
-        (click)="makeFeatured(result)"
-      >
-        <mat-icon class="large-material-icon material-symbols-outlined">
-          stars
-        </mat-icon>
-        <div i18n="@@shared.makeFeatured">Make featured</div>
-      </button>
+    <form
+      role="search"
+      class="search-box orc-font-body-small mb-4"
+      (submit)="search(whatToSearch)"
+    >
+      <div class="input-wrapper">
+        <input
+          autocomplete="off"
+          name="whatToSearch"
+          [(ngModel)]="whatToSearch"
+          [placeholder]="placeholderSearch"
+          type="text"
+          [attr.aria-label]="labelSearch"
+          id="cy-search-public-works"
+          class="orc-font-body-small"
+        />
+        <button
+          [attr.aria-label]="labelSearch"
+          type="submit"
+          mat-icon-button
+          class="search-icon-button"
+          id="cy-search-public-works-btn"
+        >
+          <mat-icon>search</mat-icon>
+        </button>
+      </div>
+    </form>
+    @if (searchResults && searchResults.length === 0) {
+    <em class="orc-font-body-small" i18n="@@shared.noResultsFound">
+      No results found. Please edit your search terms and try again.
+    </em>
+    } @if (searchResults && searchResults.length > 0) {
+    <div class="orc-font-body-small">
+      <div class="mb-4">
+        <strong i18n="@@shared.youSearchedFor">You searched for: </strong>
+        <span>{{ whatToSearch }}</span>
+      </div>
+      @if (totalWorks && totalWorks > 10) {
+      <app-alert-message>
+        <h3 title class="orc-font-body" i18n="@@shared.tooManyResults">
+          Your search returned a lot of results
+        </h3>
+        <ng-container content>
+          <div class="orc-font-body-small" i18n="@@shared.tooManyResultsDesc">
+            If you can’t find what you are looking for try adding more detail to
+            your search term and searching again.
+          </div>
+        </ng-container>
+      </app-alert-message>
       }
+      <div class="results-count">
+        <span i18n="@@shared.showing">Showing</span>&nbsp;@if (totalWorks &&
+        totalWorks > 10) {
+        <strong>1</strong>&nbsp;-&nbsp;<strong>10</strong>&nbsp;<span
+          i18n="@@shared.of"
+          >of</span
+        >&nbsp;<strong>{{ totalWorks }}</strong
+        >&nbsp;<span i18n="@@shared.results">results</span>
+        } @else {
+        <strong>{{ searchResults?.length || 0 }}</strong
+        >&nbsp;@if (searchResults?.length === 1) {
+        <span i18n="@@shared.result">result</span>
+        } @else {
+        <span i18n="@@shared.results">results</span>
+        } }
+      </div>
+      <hr />
+      @for (result of searchResults; track result.putCode; let idx = $index) {
+      <div class="search-result-wrapper">
+        <app-work-featured
+          class="results"
+          [ngClass]="{ 'not-featured': result.featuredDisplayIndex === 0 }"
+          [work]="result"
+          [minimized]="true"
+          [highlight]="whatToSearch"
+        ></app-work-featured>
+        @if (result.featuredDisplayIndex === 0) {
+        <button
+          class="make-featured-button orc-font-body-small"
+          mat-button
+          (click)="makeFeatured(result)"
+          [attr.aria-label]="
+            makeAriaLabel +
+            ' ' +
+            (result?.title?.value || '') +
+            ' ' +
+            featuredAriaLabel
+          "
+        >
+          <mat-icon class="large-material-icon material-symbols-outlined">
+            stars
+          </mat-icon>
+          <div i18n="@@shared.makeFeatured">Make featured</div>
+        </button>
+        }
+      </div>
+      @if (idx < searchResults.length - 1) {
+      <hr class="mb-0" />
+      } }
     </div>
-    @if (idx < searchResults.length - 1) {
-    <hr />
-    } }
-  </div>
-  }
+    }
+  </section>
 </app-modal>
