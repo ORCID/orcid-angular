@@ -1,3 +1,9 @@
+## v2.123.1 - 2025-09-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.123.0...v2.123.1)
+
+- [#2625](https://github.com/ORCID/orcid-angular/pull/2625): ${PD-2374} User is not found if userInfo.json is emtpy (from the registry endpoi…
+
 ## v2.123.0 - 2025-09-12
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.122.0...v2.123.0)
