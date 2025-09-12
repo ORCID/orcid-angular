@@ -47,7 +47,8 @@ export class UserInfoService {
           })
           .pipe(
             map((value) => {
-              value.USER_NOT_FOUND = (isEmpty(value) || value.EFFECTIVE_USER_ORCID == null)
+              value.USER_NOT_FOUND =
+                isEmpty(value) || value.EFFECTIVE_USER_ORCID == null
               value.RECORD_WITH_ISSUES = !!(
                 value.IS_LOCKED === 'true' ||
                 value.IS_DEACTIVATED === 'true' ||
