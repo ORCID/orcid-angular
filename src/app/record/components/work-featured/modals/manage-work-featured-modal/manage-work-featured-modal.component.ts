@@ -111,10 +111,15 @@ export class ManageWorkFeaturedModalComponent implements OnInit, OnDestroy {
           const featuredPutCodes = new Set(
             this.works.map((w) => String(w.putCode?.value))
           )
+
           this.totalWorks = res.total
           this.searchResults = res.results.map((result) => ({
             ...result,
-            featured: featuredPutCodes.has(String(result.putCode?.value)),
+            featuredDisplayIndex: featuredPutCodes.has(
+              String(result.putCode?.value)
+            )
+              ? 1
+              : 0,
           }))
         })
     }
