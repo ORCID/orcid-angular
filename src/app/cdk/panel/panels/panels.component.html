@@ -229,6 +229,7 @@
         class="orc-font-body-small"
         *ngIf="type === 'featured-works' && !isPublicRecord"
         (click)="openFeaturedWorksManage()"
+        [disabled]="total === 0"
       >
         <mat-icon class="large-material-icon material-symbols-outlined">
           stars
