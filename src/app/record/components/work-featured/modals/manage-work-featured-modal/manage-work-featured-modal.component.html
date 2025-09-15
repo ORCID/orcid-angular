@@ -82,6 +82,7 @@
             <!-- Close button container -->
             <div class="close-wrapper">
               <button
+                [matTooltip]="removeFeaturedItemTooltip"
                 (click)="remove(w)"
                 mat-icon-button
                 class="delete-button"
