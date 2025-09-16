@@ -147,11 +147,16 @@ mat-icon {
   font-size: 24px !important;
 }
 
-.noFeaturedWorks {
+.no-featured-works {
   height: 64px;
   border: 1px dashed;
   display: block;
   align-content: center;
   text-align: center;
   margin-bottom: 16px;
+}
+
+.you-searched-for {
+  text-overflow: ellipsis;
+  overflow-x: clip;
 }

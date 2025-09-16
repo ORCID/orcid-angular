@@ -46,6 +46,7 @@ export class ManageWorkFeaturedModalComponent implements OnInit, OnDestroy {
   searchInput: string
   searchedTerm: string
   totalWorks: number | undefined
+  searchLengthExceeded = false
 
   $destroy: Subject<void> = new Subject<void>()
 
@@ -107,10 +108,15 @@ export class ManageWorkFeaturedModalComponent implements OnInit, OnDestroy {
 
   search(term: string) {
     if (term) {
+      this.searchedTerm = term
+      if (term.length > 100) {
+        this.searchLengthExceeded = true
+        return
+      }
+      this.searchLengthExceeded = false
       this._worksService
         .searchPublicWorks(term)
         .subscribe((res: { results: Work[]; total: number }) => {
-          this.searchedTerm = term
           const featuredPutCodes = new Set(
             this.works.map((w) => String(w.putCode?.value))
           )

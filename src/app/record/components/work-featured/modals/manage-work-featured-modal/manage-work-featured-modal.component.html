@@ -41,7 +41,7 @@
     </h2>
     @if (works?.length === 0) {
     <em
-      class="noFeaturedWorks orc-font-body-small"
+      class="no-featured-works orc-font-body-small"
       i18n="@@works.youDontHaveAnyFeaturedWorksYet"
       >You don’t have any featured works yet.</em
     >
@@ -160,13 +160,27 @@
         </button>
       </div>
     </form>
-    @if (searchResults) {
-    <div class="orc-font-body-small">
+    <div class="orc-font-body-small you-searched-for">
       <div class="mb-4">
         <strong i18n="@@shared.youSearchedFor">You searched for:</strong
         >&nbsp;<span>{{ searchedTerm }}</span>
       </div>
-      @if (searchResults.length === 0) {
+      @if (searchLengthExceeded) {
+      <app-alert-message class="mb-4">
+        <h3 title class="orc-font-body" i18n="@@shared.searchTermTooLong">
+          Your search term is too long
+        </h3>
+        <div
+          content
+          class="orc-font-body-small"
+          i18n="@@shared.searchTermTooLongDesc"
+        >
+          Search terms must be less than 100 characters in length. Please make
+          your search term shorter and try searching again.
+        </div>
+      </app-alert-message>
+      } @if (searchResults) { @if (searchResults.length === 0 &&
+      !searchLengthExceeded) {
       <em class="orc-font-body-small" i18n="@@shared.noResultsFound">
         No results found. Please edit your search terms and try again.
       </em>
@@ -231,8 +245,7 @@
       </div>
       @if (idx < searchResults.length - 1) {
       <hr class="mb-0" />
-      } } }
+      } } } }
     </div>
-    }
   </section>
 </app-modal>
