@@ -34,6 +34,7 @@ export class ManageWorkFeaturedModalComponent implements OnInit, OnDestroy {
   saveAndClose = $localize`:@@shared.saveAndCloseActivityAriaLabel:Save changes to Works`
   labelSearch = $localize`:@@works.searchYourPublicWorksAriaLabel:Search your public works`
   placeholderSearch = $localize`:@@works.searchPublicWorkTitles:Search public work titles`
+  removeFeaturedItemTooltip = $localize`:@@shared.removeFeaturedItem:Remove featured item`
 
   @Input() userRecord: UserRecord
 
@@ -42,7 +43,8 @@ export class ManageWorkFeaturedModalComponent implements OnInit, OnDestroy {
   searchResults: Work[] | undefined
   initialPutCodes: string[] = []
   maxFeatured = 5
-  whatToSearch: string
+  searchInput: string
+  searchedTerm: string
   totalWorks: number | undefined
 
   $destroy: Subject<void> = new Subject<void>()
@@ -108,6 +110,7 @@ export class ManageWorkFeaturedModalComponent implements OnInit, OnDestroy {
       this._worksService
         .searchPublicWorks(term)
         .subscribe((res: { results: Work[]; total: number }) => {
+          this.searchedTerm = term
           const featuredPutCodes = new Set(
             this.works.map((w) => String(w.putCode?.value))
           )

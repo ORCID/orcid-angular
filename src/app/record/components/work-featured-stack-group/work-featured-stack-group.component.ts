@@ -43,16 +43,6 @@ export class WorkFeaturedStackGroupComponent implements OnInit {
 
   userRecordContext: UserRecordOptions = {}
 
-  addMenuOptions = [
-    // Manage featured works button to be implemented later
-    /* {
-      label: $localize`:@@shared.`,
-      action: ADD_EVENT_ACTION.,
-      modal: ,
-      id: 'cy-manage-featured-manually',
-    }, */
-  ]
-
   $destroy: Subject<boolean> = new Subject<boolean>()
   loading = true
 
@@ -73,7 +63,6 @@ export class WorkFeaturedStackGroupComponent implements OnInit {
   combineSuggestion: GroupingSuggestions
 
   constructor(
-    private _dialog: MatDialog,
     private _platform: PlatformInfoService,
     private _record: RecordService
   ) {}

@@ -230,6 +230,7 @@
         *ngIf="type === 'featured-works' && !isPublicRecord"
         (click)="openFeaturedWorksManage()"
         [attr.aria-label]="manageFeaturedWorksAriaLabel"
+        [disabled]="total === 0"
       >
         <mat-icon class="large-material-icon material-symbols-outlined">
           stars

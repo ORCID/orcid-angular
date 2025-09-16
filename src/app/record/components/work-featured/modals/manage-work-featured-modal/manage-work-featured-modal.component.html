@@ -39,7 +39,13 @@
       <span i18n="@@shared.yourFeaturedWorks">Your featured works</span>
       <span class="count"> ({{ works?.length || 0 }}/{{ maxFeatured }})</span>
     </h2>
-
+    @if (works?.length === 0) {
+    <em
+      class="noFeaturedWorks orc-font-body-small"
+      i18n="@@works.youDontHaveAnyFeaturedWorksYet"
+      >You don’t have any featured works yet.</em
+    >
+    } @else {
     <div class="container no-padding">
       <div
         class="row featured-works-list"
@@ -82,6 +88,7 @@
             <!-- Close button container -->
             <div class="close-wrapper">
               <button
+                [matTooltip]="removeFeaturedItemTooltip"
                 (click)="remove(w)"
                 mat-icon-button
                 class="delete-button"
@@ -116,6 +123,7 @@
       </app-alert-message>
       }
     </div>
+    }
   </section>
   <hr />
   <section id="add-featured-works">
@@ -128,13 +136,13 @@
     <form
       role="search"
       class="search-box orc-font-body-small mb-4"
-      (submit)="search(whatToSearch)"
+      (submit)="search(searchInput)"
     >
       <div class="input-wrapper">
         <input
           autocomplete="off"
           name="whatToSearch"
-          [(ngModel)]="whatToSearch"
+          [(ngModel)]="searchInput"
           [placeholder]="placeholderSearch"
           type="text"
           [attr.aria-label]="labelSearch"
@@ -152,17 +160,17 @@
         </button>
       </div>
     </form>
-    @if (searchResults && searchResults.length === 0) {
-    <em class="orc-font-body-small" i18n="@@shared.noResultsFound">
-      No results found. Please edit your search terms and try again.
-    </em>
-    } @if (searchResults && searchResults.length > 0) {
+    @if (searchResults) {
     <div class="orc-font-body-small">
       <div class="mb-4">
-        <strong i18n="@@shared.youSearchedFor">You searched for: </strong>
-        <span>{{ whatToSearch }}</span>
+        <strong i18n="@@shared.youSearchedFor">You searched for:</strong
+        >&nbsp;<span>{{ searchedTerm }}</span>
       </div>
-      @if (totalWorks && totalWorks > 10) {
+      @if (searchResults.length === 0) {
+      <em class="orc-font-body-small" i18n="@@shared.noResultsFound">
+        No results found. Please edit your search terms and try again.
+      </em>
+      } @if (totalWorks && totalWorks > 10) {
       <app-alert-message>
         <h3 title class="orc-font-body" i18n="@@shared.tooManyResults">
           Your search returned a lot of results
@@ -174,7 +182,7 @@
           </div>
         </ng-container>
       </app-alert-message>
-      }
+      } @if (searchResults.length > 0) {
       <div class="results-count">
         <span i18n="@@shared.showing">Showing</span>&nbsp;@if (totalWorks &&
         totalWorks > 10) {
@@ -199,7 +207,7 @@
           [ngClass]="{ 'not-featured': result.featuredDisplayIndex === 0 }"
           [work]="result"
           [minimized]="true"
-          [highlight]="whatToSearch"
+          [highlight]="searchedTerm"
         ></app-work-featured>
         @if (result.featuredDisplayIndex === 0) {
         <button
@@ -223,7 +231,7 @@
       </div>
       @if (idx < searchResults.length - 1) {
       <hr class="mb-0" />
-      } }
+      } } }
     </div>
     }
   </section>
