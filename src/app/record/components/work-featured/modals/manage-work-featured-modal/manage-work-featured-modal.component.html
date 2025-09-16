@@ -39,7 +39,13 @@
       <span i18n="@@shared.yourFeaturedWorks">Your featured works</span>
       <span class="count"> ({{ works?.length || 0 }}/{{ maxFeatured }})</span>
     </h2>
-
+    @if (works?.length === 0) {
+    <em
+      class="noFeaturedWorks orc-font-body-small"
+      i18n="@@works.youDontHaveAnyFeaturedWorksYet"
+      >You don’t have any featured works yet.</em
+    >
+    } @else {
     <div class="container no-padding">
       <div
         class="row featured-works-list"
@@ -117,6 +123,7 @@
       </app-alert-message>
       }
     </div>
+    }
   </section>
   <hr />
   <section id="add-featured-works">
