@@ -34,6 +34,7 @@ export class ManageWorkFeaturedModalComponent implements OnInit, OnDestroy {
   saveAndClose = $localize`:@@shared.saveAndCloseActivityAriaLabel:Save changes to Works`
   labelSearch = $localize`:@@works.searchYourPublicWorksAriaLabel:Search your public works`
   placeholderSearch = $localize`:@@works.searchPublicWorkTitles:Search public work titles`
+  removeFeaturedItemTooltip = $localize`:@@shared.removeFeaturedItem:Remove featured item`
 
   @Input() userRecord: UserRecord
 
