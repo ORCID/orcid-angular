@@ -21,7 +21,8 @@ import {
 import { WINDOW } from 'src/app/cdk/window'
 import { ApplicationRoutes } from 'src/app/constants'
 import { ERROR_REPORT } from 'src/app/errors'
-import { OauthParameters, RequestInfoForm } from 'src/app/types'
+import { OauthParameters } from 'src/app/types'
+import { LegacyOauthRequestInfoForm as RequestInfoForm } from 'src/app/types/request-info-form.endpoint'
 import {
   OauthAuthorize,
   ValidateRedirectUriResponse,

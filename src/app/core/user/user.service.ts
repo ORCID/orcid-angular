@@ -32,10 +32,14 @@ import {
   AuthForm,
   NameForm,
   OauthParameters,
-  RequestInfoForm,
   UserInfo,
   Scope,
 } from 'src/app/types'
+import { LegacyOauthRequestInfoForm } from 'src/app/types/request-info-form.endpoint'
+import {
+  Oauth2RequestInfoForm,
+  mapOauth2RequestToLegacy,
+} from 'src/app/types/oauth2-request-info-form.endpoint'
 import {
   UserSession,
   UserSessionUpdateParameters,
@@ -257,8 +261,9 @@ export class UserService {
   private computesUpdatedUserData(data: {
     userInfo: UserInfo
     nameForm: NameForm
-    oauthSession: RequestInfoForm
+    oauthSession: LegacyOauthRequestInfoForm
     thirdPartyAuthData: ThirdPartyAuthData
+    oauthAuthorizationEnabled: boolean
   }): UserSession {
     {
       return {
@@ -270,8 +275,13 @@ export class UserService {
           effectiveOrcidUrl: this.getOrcidUrl(data, true),
           oauthSessionIsLoggedIn:
             !!data.oauthSession &&
-            !!data.oauthSession.userOrcid &&
-            !!data.oauthSession.userName,
+            ((!!data.oauthSession.userOrcid && !!data.oauthSession.userName) ||
+              // The Oauth2 will return a redirectUrl when the user is logged in and nothing else
+              // when the user is logged in and a OAUTH prompt=none is present
+              (data.oauthAuthorizationEnabled &&
+                !!data.oauthSession.redirectUrl) ||
+              // The Oauth2 will return a error when the user is logged in and there is a issue with the session
+              (data.oauthAuthorizationEnabled && !!data.oauthSession.error)),
         },
       }
     }
@@ -280,7 +290,7 @@ export class UserService {
     data: {
       userInfo: UserInfo
       nameForm: NameForm
-      oauthSession: RequestInfoForm
+      oauthSession: LegacyOauthRequestInfoForm
     },
     effectiveId = false
   ): string {
@@ -308,21 +318,25 @@ export class UserService {
   ): Observable<{
     userInfo: UserInfo | undefined
     nameForm: NameForm | undefined
-    oauthSession: RequestInfoForm | undefined
+    oauthSession: LegacyOauthRequestInfoForm | undefined
     thirdPartyAuthData: ThirdPartyAuthData | undefined
+    oauthAuthorizationEnabled: boolean
   }> {
     this.currentlyLoggedIn = updateParameters.loggedIn
     const $userInfo = this._userInfo.getUserInfo().pipe(this.handleErrors)
     const $nameForm = this.getNameForm().pipe(this.handleErrors)
     const $thirdPartyAuthData = this.getThirdPartySignInData()
 
-    const $oauthSession = this._togglz.getStateOf('OAUTH_AUTHORIZATION').pipe(
-      take(1),
+    const $oauthAuthorizationEnabled = this._togglz
+      .getStateOf('OAUTH_AUTHORIZATION')
+      .pipe(take(1))
+
+    const $oauthSession = $oauthAuthorizationEnabled.pipe(
       switchMap((useAuthServerFlag) => {
         if (useAuthServerFlag === true) {
-          return this.getOauthSessionFromAuthServer()
+          return this.getOuathSessionFromOauth2Server()
         } else {
-          return this.getOauthSession(updateParameters)
+          return this.getOauthSessionFromLegacyOauthServer(updateParameters)
         }
       }),
       this.handleOauthErrors
@@ -333,139 +347,61 @@ export class UserService {
       updateParameters.loggedIn ? $nameForm : of(undefined),
       $oauthSession,
       !updateParameters.loggedIn ? $thirdPartyAuthData : of(undefined),
+      $oauthAuthorizationEnabled,
     ]).pipe(
-      map(([userInfo, nameForm, oauthSession, thirdPartyAuthData]) => ({
-        userInfo: userInfo as UserInfo | undefined,
-        nameForm: nameForm as NameForm | undefined,
-        oauthSession: oauthSession as RequestInfoForm | undefined,
-        thirdPartyAuthData: thirdPartyAuthData as
-          | ThirdPartyAuthData
-          | undefined,
-      }))
+      map(
+        ([
+          userInfo,
+          nameForm,
+          oauthSession,
+          thirdPartyAuthData,
+          oauthAuthorizationEnabled,
+        ]) => ({
+          userInfo: userInfo as UserInfo | undefined,
+          nameForm: nameForm as NameForm | undefined,
+          oauthSession: oauthSession as LegacyOauthRequestInfoForm | undefined,
+          thirdPartyAuthData:
+            (thirdPartyAuthData as ThirdPartyAuthData) || undefined,
+          oauthAuthorizationEnabled: oauthAuthorizationEnabled as boolean,
+        })
+      )
     )
   }
 
-  private getOauthSessionFromAuthServer(
+  private getOuathSessionFromOauth2Server(
     updateParameters?: UserSessionUpdateParameters
-  ): Observable<RequestInfoForm> {
-    // If the user is not logged in, do not call
-    const params: Params = {}
-    new URLSearchParams(this.window.location.search).forEach(
-      (value, key) => (params[key] = value)
+  ): Observable<LegacyOauthRequestInfoForm> {
+    return this._platform.get().pipe(
+      first(),
+      switchMap((platform) => {
+        if (platform.hasOauthParameters) {
+          return this._http
+            .get<Oauth2RequestInfoForm>(
+              runtimeEnvironment.AUTH_SERVER +
+                'oauth2/authorize' +
+                this.window.location.search,
+              { withCredentials: true, headers: { accept: 'application/json' } }
+            )
+            .pipe(
+              switchMap((response) => {
+                return of(mapOauth2RequestToLegacy(response))
+              })
+            )
+        }
+        return of(undefined)
+      })
     )
-    let clientId = params['client_id']
-    // Do not execute this call if the client_id param is not in the URL
-    if (clientId === undefined) {
-      return of(null)
-    }
-    return this._http
-      .get(
-        runtimeEnvironment.AUTH_SERVER +
-          'oauth2/authorize' +
-          this.window.location.search,
-        { withCredentials: true, headers: { accept: 'application/json' } }
-      )
-      .pipe(
-        switchMap((response) => {
-          if ('skip_authorization' in response) {
-            let redirectUrl = response['redirect_url']
-            var requestInfoForm: RequestInfoForm = {
-              scopes: [],
-              clientId: '',
-              clientName: '',
-              clientDescription: '',
-              userOrcid: '',
-              oauthState: '',
-              userName: '',
-              errors: null,
-              clientEmailRequestReason: null,
-              memberName: null,
-              responseType: null,
-              stateParam: null,
-              userEmail: null,
-              userGivenNames: null,
-              userFamilyNames: null,
-              nonce: null,
-              clientHavePersistentTokens: null,
-              scopesAsString: null,
-              error: null,
-              errorCode: null,
-              errorDescription: null,
-              redirectUrl: redirectUrl,
-            } as RequestInfoForm
-            return of(requestInfoForm)
-          } else if ('error' in response) {
-            let error = response['error']
-            let errorCode = response['errorCode']
-            let errorDescription = response['errorDescription']
-
-            var requestInfoForm: RequestInfoForm = {
-              scopes: [],
-              clientId: '',
-              clientName: '',
-              clientDescription: '',
-              userOrcid: '',
-              oauthState: '',
-              userName: '',
-              errors: null,
-              clientEmailRequestReason: null,
-              memberName: null,
-              responseType: null,
-              stateParam: null,
-              userEmail: null,
-              userGivenNames: null,
-              userFamilyNames: null,
-              nonce: null,
-              clientHavePersistentTokens: null,
-              scopesAsString: null,
-              error: error,
-              errorCode: errorCode,
-              errorDescription: errorDescription,
-              redirectUrl: null,
-            } as RequestInfoForm
-            return of(requestInfoForm)
-          } else {
-            let scopesArray: Scope[] = []
-            for (const s of response['scopes'].split(' ')) {
-              var scope: Scope = { value: s }
-              scopesArray.push(scope)
-            }
-
-            var requestInfoForm: RequestInfoForm = {
-              scopes: scopesArray,
-              clientId: response['clientId'],
-              clientName: response['clientName'],
-              clientDescription: response['clientDescription'],
-              userOrcid: response['userOrcid'],
-              oauthState: response['state'],
-              userName: response['userName'],
-              errors: null,
-              clientEmailRequestReason: null,
-              memberName: null,
-              responseType: null,
-              stateParam: null,
-              userEmail: null,
-              userGivenNames: null,
-              userFamilyNames: null,
-              nonce: null,
-              clientHavePersistentTokens: null,
-              scopesAsString: null,
-              error: null,
-              errorDescription: null,
-              redirectUrl: null,
-            } as RequestInfoForm
-            return of(requestInfoForm)
-          }
-        })
-      )
   }
 
   /**
    * @param updateParameters login status and trigger information
    */
-  private getOauthSession(
+  /**
+   * @deprecated Use getOauthSessionFromAuthServer (togglz OAUTH_AUTHORIZATION) and map to legacy.
+   */
+  private getOauthSessionFromLegacyOauthServer(
     updateParameters?: UserSessionUpdateParameters
-  ): Observable<RequestInfoForm> {
+  ): Observable<LegacyOauthRequestInfoForm> {
     return this._platform.get().pipe(
       first(),
       switchMap((platform) => {

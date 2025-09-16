@@ -13,7 +13,7 @@ import { UserSession } from 'src/app/types/session.local'
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { WINDOW } from '../../../cdk/window'
 import { UserService } from '../../../core'
-import { RequestInfoForm } from '../../../types/request-info-form.endpoint'
+import { LegacyOauthRequestInfoForm as RequestInfoForm } from '../../../types/request-info-form.endpoint'
 import { TypeSignIn } from '../../../types/sign-in.local'
 import { FormSignInComponent } from '../../components/form-sign-in/form-sign-in.component'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
@@ -100,6 +100,11 @@ export class SignInComponent implements OnInit {
         if (platform.queryParameters.email) {
           this.email = platform.queryParameters.email
         }
+
+        if (platform.queryParameters.orcid) {
+          this.email = platform.queryParameters.orcid
+        }
+
         if (session.oauthSession && session.oauthSession.userId) {
           this.email = session.oauthSession.userId
         }

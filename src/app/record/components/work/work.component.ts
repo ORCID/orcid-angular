@@ -20,6 +20,7 @@ export class WorkComponent {
   @Input() id: string
   @Input() isPublicRecord
   @Input() featured: boolean = false
+  @Input() minimized = false
   maxNumberContributors = 10
   privateName = 'Name is private'
 }

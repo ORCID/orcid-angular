@@ -6,11 +6,7 @@ import {
   OnDestroy,
   Output,
 } from '@angular/core'
-import {
-  AssertionVisibilityString,
-  EmailsEndpoint,
-  RequestInfoForm,
-} from 'src/app/types'
+import { AssertionVisibilityString, EmailsEndpoint } from 'src/app/types'
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
 import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
 

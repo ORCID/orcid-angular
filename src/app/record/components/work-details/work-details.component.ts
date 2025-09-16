@@ -14,6 +14,7 @@ export class WorkDetailsComponent {
   @Input() work: Work
   @Input() id: string
   @Input() isPublicRecord
+  @Input() largerHeaders: boolean = false
   maxNumberContributors = 10
   maxNumberContributorsWorkDetails = 50
   maxBibtexCharacters = 5000

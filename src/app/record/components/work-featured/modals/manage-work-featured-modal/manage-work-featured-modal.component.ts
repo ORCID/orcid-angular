@@ -9,6 +9,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { ModalComponent } from 'src/app/cdk/modal/modal/modal.component'
+import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { RecordWorksService } from 'src/app/core/record-works/record-works.service'
 import { Work } from 'src/app/types/record-works.endpoint'
 import { UserRecord } from 'src/app/types/record.local'
@@ -23,16 +24,29 @@ import { UserRecord } from 'src/app/types/record.local'
   standalone: false,
 })
 export class ManageWorkFeaturedModalComponent implements OnInit, OnDestroy {
-  closeLabel = $localize`:@@shared.closeActivityAriaLabel:Close Works`
-  cancelAndClose = $localize`:@@shared.cancelAndCloseActivityAriaLabel:Cancel changes and close Works`
+  closeLabel = $localize`:@@works.closeFeaturedWorksAriaLabel:Close featured works`
+  cancelAndCloseAriaLabel = $localize`:@@works.cancelAndCloseFeaturedWorksAriaLabel:Cancel changes and close featured works`
+  moveFeaturedWorkAriaLabel = $localize`:@@shared.moveAriaLabel:Move`
+  removeFeaturedWorkAriaLabel = $localize`:@@shared.removeAriaLabel:Remove`
+  makeAriaLabel = $localize`:@@shared.makeAriaLabel:Make`
+  featuredAriaLabel = $localize`:@@shared.featured:featured`
+  fromFeaturedWorksAriaLabel = $localize`:@@works.fromFeaturedWorksAriaLabel:from featured works`
   saveAndClose = $localize`:@@shared.saveAndCloseActivityAriaLabel:Save changes to Works`
+  labelSearch = $localize`:@@works.searchYourPublicWorksAriaLabel:Search your public works`
+  placeholderSearch = $localize`:@@works.searchPublicWorkTitles:Search public work titles`
+  removeFeaturedItemTooltip = $localize`:@@shared.removeFeaturedItem:Remove featured item`
 
   @Input() userRecord: UserRecord
 
   loading = true
   works: Work[] = []
+  searchResults: Work[] | undefined
   initialPutCodes: string[] = []
   maxFeatured = 5
+  searchInput: string
+  searchedTerm: string
+  totalWorks: number | undefined
+  searchLengthExceeded = false
 
   $destroy: Subject<void> = new Subject<void>()
 
@@ -42,6 +56,7 @@ export class ManageWorkFeaturedModalComponent implements OnInit, OnDestroy {
   constructor(
     private _worksService: RecordWorksService,
     private _dialogRef: MatDialogRef<ModalComponent>,
+    private _snackbarService: SnackbarService,
     @Inject(MAT_DIALOG_DATA) public data: UserRecord
   ) {}
 
@@ -84,6 +99,57 @@ export class ManageWorkFeaturedModalComponent implements OnInit, OnDestroy {
     this.works = this.works.filter(
       (w) => w.putCode?.value !== work.putCode?.value
     )
+    this.searchResults?.forEach((item) => {
+      if (String(item.putCode.value) === String(work.putCode.value)) {
+        item.featuredDisplayIndex = 0
+      }
+    })
+  }
+
+  search(term: string) {
+    if (term) {
+      this.searchedTerm = term
+      if (term.length > 100) {
+        this.searchLengthExceeded = true
+        return
+      }
+      this.searchLengthExceeded = false
+      this._worksService
+        .searchPublicWorks(term)
+        .subscribe((res: { results: Work[]; total: number }) => {
+          const featuredPutCodes = new Set(
+            this.works.map((w) => String(w.putCode?.value))
+          )
+
+          this.totalWorks = res.total
+          this.searchResults = res.results.map((result) => ({
+            ...result,
+            featuredDisplayIndex: featuredPutCodes.has(
+              String(result.putCode?.value)
+            )
+              ? 1
+              : 0,
+          }))
+        })
+    }
+  }
+
+  makeFeatured(work: Work) {
+    if (this.works.length >= this.maxFeatured) {
+      this._snackbarService.showValidationError(
+        $localize`:@@works.maxFeaturedWorksToastDescription:You can’t feature any more works until you have removed some of the currently featured items.`,
+        $localize`:@@works.maxFeaturedWorks:You can only feature up to 5 works.`
+      )
+      return
+    }
+    this.works.push(work)
+    const searchResult = this.searchResults.find(
+      (item) => String(item.putCode.value) === String(work.putCode.value)
+    )
+    if (searchResult) {
+      // 1 is set to mark it as featured in the ui, actual index gets assigned in "saveEvent()"
+      searchResult.featuredDisplayIndex = 1
+    }
   }
 
   saveEvent() {

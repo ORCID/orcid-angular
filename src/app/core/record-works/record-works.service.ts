@@ -11,6 +11,9 @@ import {
   tap,
 } from 'rxjs/operators'
 import {
+  PublicWorkSearchEndpoint,
+  PublicWorkSearchResult,
+  TranslatedTitle,
   Work,
   WorkGroup,
   WorksEndpoint,
@@ -27,7 +30,11 @@ import {
 } from 'src/app/types/works.endpoint'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
-import { VisibilityStrings } from '../../types/common.endpoint'
+import {
+  MonthDayYearDate,
+  Value,
+  VisibilityStrings,
+} from '../../types/common.endpoint'
 import { DEFAULT_PAGE_SIZE, EXTERNAL_ID_TYPE_WORK } from 'src/app/constants'
 import { RecordImportWizard } from '../../types/record-peer-review-import.endpoint'
 import { SortOrderType } from '../../types/sort'
@@ -52,6 +59,7 @@ export class RecordWorksService {
 
   private _$loading = new BehaviorSubject<boolean>(true)
   private _$loadingFeatured = new BehaviorSubject<boolean>(true)
+  private _$loadingSearch = new BehaviorSubject<boolean>(false)
 
   public get $loading() {
     return this._$loading.asObservable()
@@ -59,6 +67,10 @@ export class RecordWorksService {
 
   public get $loadingFeatured() {
     return this._$loadingFeatured.asObservable()
+  }
+
+  public get $loadingSearch() {
+    return this._$loadingSearch.asObservable()
   }
 
   constructor(
@@ -199,6 +211,46 @@ export class RecordWorksService {
       })
 
     return this.$featuredWorkSubject.asObservable()
+  }
+
+  searchPublicWorks(
+    term: string
+  ): Observable<{ results: Work[]; total: number }> {
+    return this._http
+      .get<PublicWorkSearchEndpoint>(
+        runtimeEnvironment.API_WEB +
+          `works/searchWorksTitleToFeature.json?term=${encodeURIComponent(
+            term
+          )}`
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        map((works: PublicWorkSearchEndpoint) => ({
+          results: works.results.map(
+            (work) =>
+              ({
+                ...work,
+                title: { value: work.title } as Value,
+                workType: { value: work.workType } as Value,
+                putCode: { value: work.putCode } as Value,
+                journalTitle: { value: work.journalTitle } as Value,
+                translatedTitle: {
+                  value: work.translatedTitle,
+                } as TranslatedTitle,
+                featuredDisplayIndex: work.featuredDisplayIndex,
+                publicationDate: {
+                  day: work.publicationDay,
+                  month: work.publicationMonth,
+                  year: work.publicationYear,
+                } as MonthDayYearDate,
+                workExternalIdentifiers: [],
+              } as Work)
+          ),
+          total: works.totalCount,
+        })),
+        tap(() => this._$loadingSearch.next(false))
+      )
   }
 
   /**
@@ -359,7 +411,8 @@ export class RecordWorksService {
 
   updateVisibility(
     putCode: string,
-    visibility: VisibilityStrings
+    visibility: VisibilityStrings,
+    reloadFeatured: boolean = false
   ): Observable<any> {
     const options = {
       forceReload: true,
@@ -379,7 +432,12 @@ export class RecordWorksService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        tap(() => this.getWorks(options))
+        tap(
+          () =>
+            this.getWorks(options) &&
+            reloadFeatured &&
+            this.getFeaturedWorks({ forceReload: true })
+        )
       )
   }
 
