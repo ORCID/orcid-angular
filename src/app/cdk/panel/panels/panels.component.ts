@@ -77,6 +77,7 @@ export class PanelsComponent implements OnInit {
 
   ariaLabelAscending = $localize`:@@shared.ariaLabelAscending:Ascending`
   ariaLabelDescending = $localize`:@@shared.ariaLabelDescending:Descending`
+  manageFeaturedWorksAriaLabel = $localize`:@@works.manageFeaturedWorksAriaLabel:Manage featured works`
 
   constructor(
     private _dialog: MatDialog,
