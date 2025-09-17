@@ -24,7 +24,7 @@
           >{{ work.publicationDate | monthDayYearDateToString }}
           |
         </ng-container>
-        {{ work?.workType.value | recordWorkTypeLabel }}
+        {{ work?.workType?.value | recordWorkTypeLabel }}
         <ng-container
           *ngIf="
             work?.contributorsGroupedByOrcid
@@ -48,6 +48,7 @@
       [work]="work"
       [isPublicRecord]="true"
       [id]="userRecord?.userInfo?.EFFECTIVE_USER_ORCID"
+      [largerHeaders]="true"
     ></app-work-details>
   </div>
 </app-modal>

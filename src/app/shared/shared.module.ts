@@ -50,6 +50,7 @@ import { AffiliationTypePipe } from './pipes/affiliation-type/affiliation-type.p
 import { ScopePathTypePipe } from './pipes/scope-path-type/scope-path-type.pipe'
 import { AppPanelsSortByAriaLabelPipe } from './pipes/app-panels-sort-by-aria-label/app-panels-sort-by-aria-label.pipe'
 import { VerificationDateCutoffPipe } from './pipes/verification-date-cutoff-pipe/verification-date-cutoff.pipe'
+import { SearchTermHighlightPipe } from './pipes/search-term-highlight/search-term-highlight.pipe'
 @NgModule({
   imports: [
     CommonModule,
@@ -100,6 +101,7 @@ import { VerificationDateCutoffPipe } from './pipes/verification-date-cutoff-pip
     AffiliationTypePipe,
     ScopePathTypePipe,
     AppPanelsSortByAriaLabelPipe,
+    SearchTermHighlightPipe,
   ],
   exports: [
     CommonModule,
@@ -148,6 +150,7 @@ import { VerificationDateCutoffPipe } from './pipes/verification-date-cutoff-pip
     AffiliationTypePipe,
     ScopePathTypePipe,
     AppPanelsSortByAriaLabelPipe,
+    SearchTermHighlightPipe,
   ],
   providers: [], // Should not provide anything
 })

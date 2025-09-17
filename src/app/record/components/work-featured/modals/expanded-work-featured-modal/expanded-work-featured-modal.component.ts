@@ -40,7 +40,10 @@ export class ExpandedWorkFeaturedModalComponent implements OnInit {
   ngOnInit(): void {
     if (this.work?.putCode) {
       this._workService
-        .getWorkInfo(this.work.putCode.value)
+        .getWorkInfo(
+          this.work.putCode.value,
+          this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID
+        )
         .subscribe((currentWork) => {
           this.work = currentWork
           this.loading = false

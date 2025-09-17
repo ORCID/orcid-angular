@@ -4,7 +4,7 @@ import { UntypedFormGroup } from '@angular/forms'
 import { Observable, throwError } from 'rxjs'
 import { catchError, first, map, retry, switchMap, tap } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
-import { RequestInfoForm } from 'src/app/types'
+import { LegacyOauthRequestInfoForm as RequestInfoForm } from 'src/app/types/request-info-form.endpoint'
 import {
   DuplicatedName,
   RegisterConfirmResponse,

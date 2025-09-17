@@ -3,10 +3,8 @@ import { OrganizationsService } from '../core'
 import { Organization } from 'src/app/types/record-affiliation.endpoint'
 import { Subject } from 'rxjs'
 import { OrgDisambiguated } from '../types'
-import {
-  CustomEventService,
-  JourneyType,
-} from '../core/observability-events/observability-events.service'
+import { RumJourneyEventService } from '../rum/service/customEvent.service'
+import { JourneyType } from '../rum/journeys/types'
 import { UntypedFormArray, UntypedFormGroup } from '@angular/forms'
 import { RegisterStateService } from './register-state.service'
 import init from 'helphero'
@@ -20,7 +18,7 @@ export class RegisterObservabilityService {
   secondaryEmail: Organization
   registrationJourneyStarted: any
   constructor(
-    private _observability: CustomEventService,
+    private _observability: RumJourneyEventService,
     private _registrationStateService: RegisterStateService
   ) {
     this._registrationStateService.getBackButtonClick().subscribe((step) => {
@@ -144,7 +142,7 @@ export class RegisterObservabilityService {
     )
   }
 
-  stepLoaded(step: JourneyType) {
+  stepLoaded(step: 'a' | 'b' | 'c2' | 'c' | 'd') {
     this._observability.recordEvent('orcid_registration', `step-${step}-loaded`)
   }
 

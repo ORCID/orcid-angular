@@ -1,4 +1,4 @@
-import { RequestInfoForm } from './types'
+import { LegacyOauthRequestInfoForm as RequestInfoForm } from './types/request-info-form.endpoint'
 import { PerformanceMarks } from './constants'
 
 export const browserGlobals = {

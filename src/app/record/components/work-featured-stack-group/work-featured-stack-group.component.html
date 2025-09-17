@@ -12,9 +12,9 @@
     class="row"
     [title]="featuredWorksLabel"
     [isPublicRecord]="isPublicRecord"
-    [addMenuOptions]="addMenuOptions"
     [type]="'featured-works'"
     id="cy-featured-works-panels"
+    [total]="noWorksAdded && 0"
   >
     <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
     <ng-container *ngIf="featuredWorks.length > 0 && !loading">
