@@ -161,11 +161,12 @@
       </div>
     </form>
     <div class="orc-font-body-small you-searched-for">
+      @if (searchResults || searchLengthExceeded) {
       <div class="mb-4">
         <strong i18n="@@shared.youSearchedFor">You searched for:</strong
         >&nbsp;<span>{{ searchedTerm }}</span>
       </div>
-      @if (searchLengthExceeded) {
+      } @if (searchLengthExceeded) {
       <app-alert-message class="mb-4">
         <h3 title class="orc-font-body" i18n="@@shared.searchTermTooLong">
           Your search term is too long
