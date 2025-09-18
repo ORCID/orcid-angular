@@ -2,7 +2,7 @@ import { DomSanitizer } from '@angular/platform-browser'
 import { SearchTermHighlightPipe } from './search-term-highlight.pipe'
 import { SecurityContext } from '@angular/core'
 
-fdescribe('HighlightPipe', () => {
+describe('HighlightPipe', () => {
   let sanitizer: DomSanitizer
   let pipe: SearchTermHighlightPipe
 
