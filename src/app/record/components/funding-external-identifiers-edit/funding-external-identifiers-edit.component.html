@@ -17,7 +17,7 @@
         [ngClass]="{
           error:
             grantForm?.hasError('required', 'grantNumber') &&
-            grantForm?.get('grantNumber').touched
+            grantForm?.get('grantNumber').touched,
         }"
       >
         <strong i18n="@@funding.grantNumber">Grant number</strong>
@@ -56,7 +56,7 @@
       [ngClass]="{
         error:
           grantForm?.hasError('pattern', 'grantUrl') &&
-          grantForm?.get('grantUrl').touched
+          grantForm?.get('grantUrl').touched,
       }"
     >
       <strong i18n="@@funding.grantUrl">Grant link </strong>
@@ -97,7 +97,7 @@
         [ngClass]="{
           error:
             grantForm?.hasError('required', 'fundingRelationship') &&
-            grantForm?.get('fundingRelationship').touched
+            grantForm?.get('fundingRelationship').touched,
         }"
       >
         <strong i18n="@@shared.relationship">Relationship</strong>

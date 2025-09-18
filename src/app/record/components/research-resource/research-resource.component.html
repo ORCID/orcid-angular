@@ -6,7 +6,7 @@
     <div
       class="description-container"
       [ngClass]="{
-        'show-details': researchResource?.showDetails
+        'show-details': researchResource?.showDetails,
       }"
     >
       <div class="description">
@@ -56,7 +56,7 @@
         class="buttons-container"
         [ngClass]="{
           'orc-font-small-print': isMobile,
-          'orc-font-body-small': !isMobile
+          'orc-font-body-small': !isMobile,
         }"
       >
         <a
@@ -66,9 +66,7 @@
           i18n="@@shared.showMoreDetail"
           [attr.aria-label]="
             'research-resource'
-              | appPanelActivityActionAriaLabel
-                : 'show'
-                : researchResource.title
+              | appPanelActivityActionAriaLabel: 'show' : researchResource.title
           "
         >
           Show more detail
@@ -81,9 +79,7 @@
           id="show-less-button"
           [attr.aria-label]="
             'research-resource'
-              | appPanelActivityActionAriaLabel
-                : 'hide'
-                : researchResource.title
+              | appPanelActivityActionAriaLabel: 'hide' : researchResource.title
           "
         >
           Show less detail
@@ -174,7 +170,7 @@
                     item.resourceType.toLocaleLowerCase() === 'collections',
                   services:
                     item.resourceType.toLocaleLowerCase() === 'services',
-                  mobile: isMobile
+                  mobile: isMobile,
                 }"
               >
                 <span class="dot"></span>
@@ -195,7 +191,7 @@
               class="show"
               [ngClass]="{
                 'orc-font-small-print': isMobile,
-                'orc-font-body-small': !isMobile
+                'orc-font-body-small': !isMobile,
               }"
             >
               <a

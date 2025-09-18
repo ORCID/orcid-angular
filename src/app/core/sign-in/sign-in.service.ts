@@ -15,6 +15,7 @@ import { Title } from '@angular/platform-browser'
 
 import { CookieService } from 'ngx-cookie-service'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
+import { OauthURLSessionManagerService } from '../oauth-urlsession-manager/oauth-urlsession-manager.service'
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +27,8 @@ export class SignInService {
     private _errorHandler: ErrorHandlerService,
     private _cookie: CookieService,
     private _togglz: TogglzService,
-    private _userService: UserService
+    private _userService: UserService,
+    private _oauthUrlSessionManager: OauthURLSessionManagerService
   ) {}
 
   /**
@@ -78,7 +80,11 @@ export class SignInService {
           let csrf = this._cookie.get('AUTH-XSRF-TOKEN')
           headers = headers.set('x-xsrf-token', csrf)
           //TODO: This is temporarly, until we permanently move the authorization to the auth server
-          headers = headers.set('orcid-original-request', window.location.href)
+          headers = headers.set(
+            'orcid-original-request',
+            this._oauthUrlSessionManager.get() || window.location.href
+          )
+          this._oauthUrlSessionManager.clear()
         }
 
         let body = new HttpParams({ encoder: new CustomEncoder() })

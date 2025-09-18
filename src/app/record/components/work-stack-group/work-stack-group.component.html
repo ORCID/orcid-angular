@@ -116,7 +116,7 @@
               <div>
                 <div
                   [ngClass]="{
-                    'group-selected-works-label': selectedWorks.length > 5
+                    'group-selected-works-label': selectedWorks.length > 5,
                   }"
                 >
                   <ng-container i18n="@@works.groupSelectedWorks"
@@ -151,7 +151,7 @@
               [disabled]="selectedWorks.length === 0"
               [ngClass]="{
                 'delete-selected-works': selectedWorks.length > 0,
-                'delete-selected-works-disabled': selectedWorks.length === 0
+                'delete-selected-works-disabled': selectedWorks.length === 0,
               }"
             >
               <mat-icon>delete_outline</mat-icon>

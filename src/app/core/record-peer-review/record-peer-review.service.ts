@@ -64,14 +64,9 @@ export class RecordPeerReviewService {
   ): Observable<PeerReview[]> {
     if (options?.publicRecordId) {
       return this._http
-        .get<PeerReview[]>(
-          runtimeEnvironment.API_WEB +
-            options.publicRecordId +
-            '/peer-reviews-by-group-id.json?sortAsc=' +
-            (options.sortAsc != null ? options.sortAsc : true) +
-            '&groupId=' +
-            encodeURIComponent(groupId)
-        )
+        .get<
+          PeerReview[]
+        >(runtimeEnvironment.API_WEB + options.publicRecordId + '/peer-reviews-by-group-id.json?sortAsc=' + (options.sortAsc != null ? options.sortAsc : true) + '&groupId=' + encodeURIComponent(groupId))
         .pipe(
           retry(3),
           catchError((error) => this._errorHandler.handleError(error)),
@@ -79,13 +74,9 @@ export class RecordPeerReviewService {
         )
     } else {
       return this._http
-        .get<PeerReview[]>(
-          runtimeEnvironment.API_WEB +
-            'peer-reviews/peer-reviews-by-group-id.json?sortAsc=' +
-            (options.sortAsc != null ? options.sortAsc : true) +
-            '&groupId=' +
-            encodeURIComponent(groupId)
-        )
+        .get<
+          PeerReview[]
+        >(runtimeEnvironment.API_WEB + 'peer-reviews/peer-reviews-by-group-id.json?sortAsc=' + (options.sortAsc != null ? options.sortAsc : true) + '&groupId=' + encodeURIComponent(groupId))
         .pipe(
           retry(3),
           catchError((error) => this._errorHandler.handleError(error)),

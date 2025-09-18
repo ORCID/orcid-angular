@@ -1,7 +1,7 @@
 <app-panel-data
   class="panel-footer"
   [ngClass]="{
-    'margin-top-2': !displayTheStack
+    'margin-top-2': !displayTheStack,
   }"
 >
   <div class="source-items">
@@ -138,7 +138,7 @@
       mat-icon-button
       [matTooltip]="labelDeleteButton"
       [attr.aria-label]="
-        type | appPanelActivityActionAriaLabel : 'delete' : this.panelTitle
+        type | appPanelActivityActionAriaLabel: 'delete' : this.panelTitle
       "
       (click)="delete()"
       *ngIf="(stackLength > 1 && displayTheStack) || stackLength === 1"

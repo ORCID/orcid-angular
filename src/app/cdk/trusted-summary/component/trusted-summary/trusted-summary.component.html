@@ -4,7 +4,7 @@
   [ngClass]="{
     'stand-alone-mode': standaloneMode,
     mobile: mobile,
-    'inside-iframe': insideIframe
+    'inside-iframe': insideIframe,
   }"
 >
   <header class="panel-header" *ngIf="standaloneMode">
@@ -107,7 +107,7 @@
     class="panel-body"
     [ngClass]="{
       'panel-body-1-cols': mobile,
-      'panel-body-3-cols': !mobile
+      'panel-body-3-cols': !mobile,
     }"
   >
     <div
@@ -187,7 +187,7 @@
                 *ngIf="creationDateWithOffset"
                 class="date-item"
                 [ngClass]="{
-                  'last-date': !lastUpdateDate
+                  'last-date': !lastUpdateDate,
                 }"
               >
                 <label
@@ -246,7 +246,7 @@
             class="orc-font-small-print"
             i18n="@@summary.works"
             [ngClass]="{
-              'hover-effect': worksHover
+              'hover-effect': worksHover,
             }"
           >
             WORKS
@@ -270,7 +270,7 @@
           <h3
             class="orc-font-small-print"
             [ngClass]="{
-              'hover-effect': peerReviewsHover
+              'hover-effect': peerReviewsHover,
             }"
             i18n="@@summary.peerReviews"
           >
@@ -295,7 +295,7 @@
           <h3
             class="orc-font-small-print"
             [ngClass]="{
-              'hover-effect': fundsHover
+              'hover-effect': fundsHover,
             }"
             i18n="@@summary.funding"
           >
@@ -321,7 +321,7 @@
           <h3
             class="orc-font-small-print"
             [ngClass]="{
-              'hover-effect': researchResorucesHover
+              'hover-effect': researchResorucesHover,
             }"
             i18n="@@summary.researchResources"
           >
@@ -356,7 +356,7 @@
             class="orc-font-small-print"
             i18n="@@summary.professionalActivites"
             [ngClass]="{
-              'hover-effect': professionalActivitiesHover
+              'hover-effect': professionalActivitiesHover,
             }"
             [attr.aria-label]="ariaLabelProfessionalActivities"
           >
@@ -388,7 +388,7 @@
             class="orc-font-small-print"
             i18n="@@summary.educationQualificationActivites"
             [ngClass]="{
-              'hover-effect': educationQualificationsHover
+              'hover-effect': educationQualificationsHover,
             }"
             [attr.aria-label]="ariaLabelEducationQualificationsActions"
           >

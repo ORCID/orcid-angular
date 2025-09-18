@@ -75,7 +75,7 @@
             >
               <button
                 [ngClass]="{
-                  active: item.activeRoute === currentRoute
+                  active: item.activeRoute === currentRoute,
                 }"
                 class="top-menu-button"
                 mat-button
@@ -101,7 +101,7 @@
                     recursiveList;
                     context: {
                       $implicit: item.buttons,
-                      parents: parents.concat(item.id)
+                      parents: parents.concat(item.id),
                     }
                   "
                 ></ng-container>

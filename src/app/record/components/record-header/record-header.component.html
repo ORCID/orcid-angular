@@ -18,7 +18,7 @@
           <h1
             [ngClass]="{
               'orc-font-heading-small': !platform.columns12,
-              'orc-font-heading': platform.columns12
+              'orc-font-heading': platform.columns12,
             }"
           >
             <ng-container *ngIf="creditName">{{ creditName }}</ng-container>
@@ -44,7 +44,7 @@
         <h1
           [ngClass]="{
             'orc-font-heading-small': !platform.columns12,
-            'orc-font-heading': platform.columns12
+            'orc-font-heading': platform.columns12,
           }"
         >
           <ng-container
@@ -81,7 +81,7 @@
         <h1
           [ngClass]="{
             'orc-font-heading-small': !platform.columns12,
-            'orc-font-heading': platform.columns12
+            'orc-font-heading': platform.columns12,
           }"
           class="thin-font-heading"
         >
@@ -104,7 +104,7 @@
             [ngClass]="{
               'orc-font-body-small': !platform.columns12,
               'orc-font-body': platform.columns12,
-              mobile: !platform.columns12
+              mobile: !platform.columns12,
             }"
             dir="ltr"
           >
@@ -120,7 +120,7 @@
               [ngClass]="{
                 'orc-font-body': !platform.columns12,
                 'orc-font-body-large': platform.columns12,
-                mobile: !platform.columns12
+                mobile: !platform.columns12,
               }"
             >
               <ng-container *ngIf="!platform.columns12; else elseBlock">{{
@@ -132,7 +132,7 @@
               class="buttons-wrapper"
               [ngClass]="{
                 row: !platform.columns12,
-                mobile: !platform.columns12
+                mobile: !platform.columns12,
               }"
               *ngIf="!userInfo?.RECORD_WITH_ISSUES"
             >

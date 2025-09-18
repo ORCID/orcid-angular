@@ -9,7 +9,7 @@
       tabindex="{{ element.url ? 0 : -1 }}"
       [ngClass]="{
         'with-border': !isLast || acitivityCountOverflow,
-        'padding-botton': !isLast || acitivityCountOverflow
+        'padding-botton': !isLast || acitivityCountOverflow,
       }"
       (click)="goToUrl(element.url)"
       (keydown)="goToUrl(element.url, $event)"

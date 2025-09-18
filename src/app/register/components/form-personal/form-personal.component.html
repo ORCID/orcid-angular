@@ -9,7 +9,7 @@
       class="orc-font-small-print"
       id="given-names-input-label"
       [ngClass]="{
-        error: givenNameFormTouched && form.controls.givenNames.errors
+        error: givenNameFormTouched && form.controls.givenNames.errors,
       }"
       >Given names</mat-label
     >
@@ -112,7 +112,7 @@
         class="orc-font-small-print"
         id="email-input-input-label"
         [ngClass]="{
-          error: emailError
+          error: emailError,
         }"
         id="email-input-label"
         i18n="@@register.primaryEmail"
@@ -126,7 +126,7 @@
         [ngClass]="{
           'valid-password-input':
             emailsAreValid || this.reactivation?.isReactivation,
-          'disable-error': !emailError
+          'disable-error': !emailError,
         }"
       >
         <mat-icon

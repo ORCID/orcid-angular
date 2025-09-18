@@ -120,7 +120,7 @@
             <div
               class="actions-sub-wrapper"
               [ngClass]="{
-                'privacy-selector': !showNonVerifiedData(email.putCode)
+                'privacy-selector': !showNonVerifiedData(email.putCode),
               }"
             >
               <app-visibility-selector
@@ -355,7 +355,7 @@
         appearance="outline"
         class="mat-form-field-min select-notifications-email"
         [ngClass]="{
-          'disabled-select-notifications-email': !hasVerifiedEmailAddress()
+          'disabled-select-notifications-email': !hasVerifiedEmailAddress(),
         }"
       >
         <mat-select
@@ -374,7 +374,7 @@
               *ngIf="email.verified"
               [ngClass]="{
                 'current-notification-email':
-                  email.value === primaryEmail?.value
+                  email.value === primaryEmail?.value,
               }"
               [value]="email"
             >

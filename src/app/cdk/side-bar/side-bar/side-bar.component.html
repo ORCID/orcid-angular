@@ -7,7 +7,7 @@
   <h2
     class="orc-font-body-large"
     [ngClass]="{
-      'sr-only': !loadingUserRecord && isPublicRecord ? false : true
+      'sr-only': !loadingUserRecord && isPublicRecord ? false : true,
     }"
     i18n="@@shared.personalInformation"
   >
@@ -23,7 +23,7 @@
     <app-side-bar-id
       *ngIf="!hideOrcidId"
       [ngClass]="{
-        mobile: !platform.columns12
+        mobile: !platform.columns12,
       }"
       [id]="isPublicRecord || userSession?.userInfo?.EFFECTIVE_USER_ORCID"
       [privateView]="!isPublicRecord"
@@ -261,7 +261,7 @@
             tabindex="-1"
             [href]="website.url.value"
             [ngClass]="{
-              'orc-font-body-small': getWebsite(website).length > 20
+              'orc-font-body-small': getWebsite(website).length > 20,
             }"
             target="_blank"
             rel="me nofollow noopener noreferrer"

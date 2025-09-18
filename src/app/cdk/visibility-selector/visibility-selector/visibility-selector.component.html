@@ -1,7 +1,7 @@
 <button
   [ngClass]="{
     'not-editable': !editable,
-    mobile: mobile
+    mobile: mobile,
   }"
   [disabled]="!editable"
   mat-button
@@ -15,7 +15,7 @@
     [ngClass]="{
       limitedIcon: privacy === 'LIMITED',
       publicIcon: privacy === 'PUBLIC',
-      privateIcon: privacy === 'PRIVATE'
+      privateIcon: privacy === 'PRIVATE',
     }"
     >visibility</mat-icon
   >
@@ -26,7 +26,7 @@
         [ngClass]="{
           limitedIcon: privacy === 'LIMITED',
           publicIcon: privacy === 'PUBLIC',
-          privateIcon: privacy === 'PRIVATE'
+          privateIcon: privacy === 'PRIVATE',
         }"
         >visibility</mat-icon
       >
@@ -82,7 +82,7 @@
     (click)="public()"
     [ngClass]="{
       noSelectedMenu: privacy !== 'PUBLIC' || visibilityError,
-      selectedMenu: privacy === 'PUBLIC' && !visibilityError
+      selectedMenu: privacy === 'PUBLIC' && !visibilityError,
     }"
     class="public-button cy-visibility-public flex-menu-item"
   >
@@ -122,7 +122,7 @@
     (click)="limited()"
     [ngClass]="{
       noSelectedMenu: privacy !== 'LIMITED' || visibilityError,
-      selectedMenu: privacy === 'LIMITED' && !visibilityError
+      selectedMenu: privacy === 'LIMITED' && !visibilityError,
     }"
     class="limited-button cy-visibility-limited flex-menu-item"
   >
@@ -155,7 +155,7 @@
     class="private-button cy-visibility-private flex-menu-item"
     [ngClass]="{
       noSelectedMenu: privacy !== 'PRIVATE' || visibilityError,
-      selectedMenu: privacy === 'PRIVATE' && !visibilityError
+      selectedMenu: privacy === 'PRIVATE' && !visibilityError,
     }"
   >
     <div class="icon-circle icon-private">

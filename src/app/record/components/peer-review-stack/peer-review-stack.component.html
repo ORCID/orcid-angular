@@ -12,7 +12,7 @@
     [elements]="subPeerReview"
     [type]="'top-bar'"
     [ngStyle]="{
-      'z-index': peerReviewStack.peerReviews.length - i
+      'z-index': peerReviewStack.peerReviews.length - i,
     }"
     [editable]="false"
     [customControls]="true"
@@ -25,7 +25,7 @@
       class="peer-review-title"
       [ngClass]="{
         'orc-font-small-print': isMobile,
-        'orc-font-body-small': !isMobile
+        'orc-font-body-small': !isMobile,
       }"
     >
       <span class="header-sub-peer-review" [ngClass]="{ mobile: isMobile }">
@@ -47,7 +47,7 @@
       custom-controls
       [ngClass]="{
         'orc-font-small-print': isMobile,
-        'orc-font-body-small': !isMobile
+        'orc-font-body-small': !isMobile,
       }"
     >
       <span

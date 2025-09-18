@@ -11,7 +11,7 @@
       'side-bar': type === 'side-bar',
       'staked-header': stackedHeader,
       'expand-button': !editable && !isPublicRecord && !customControls,
-      'featured-header': featuredWorksSection
+      'featured-header': featuredWorksSection,
     }"
     [attr.id]="'cy-panel-component-' + panelId + '-' + type + '-' + putCode"
   >
@@ -38,7 +38,7 @@
     <div *ngIf="selectable">
       <mat-checkbox
         [aria-label]="
-          type | appPanelActivityActionAriaLabel : 'select' : this.panelTitle
+          type | appPanelActivityActionAriaLabel: 'select' : this.panelTitle
         "
         class="text-wrap panel-checkbox"
         *ngIf="
@@ -123,7 +123,7 @@
             *ngIf="!isPublicRecord && isUserSource"
             [matTooltip]="tooltipLabelEdit"
             [attr.aria-label]="
-              type | appPanelActivityActionAriaLabel : 'edit' : this.panelTitle
+              type | appPanelActivityActionAriaLabel: 'edit' : this.panelTitle
             "
             (click)="openModal()"
           >
@@ -194,7 +194,7 @@
   <div
     [ngClass]="{
       body: !featuredWorksSection,
-      'featured-body': featuredWorksSection
+      'featured-body': featuredWorksSection,
     }"
     *ngIf="openState || type === 'side-bar'"
   >

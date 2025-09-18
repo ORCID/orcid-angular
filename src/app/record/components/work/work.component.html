@@ -14,7 +14,7 @@
       <ng-container
         *ngIf="
           work?.contributorsGroupedByOrcid
-            | recordHolderRoles : isPublicRecord : id as roles
+            | recordHolderRoles: isPublicRecord : id as roles
         "
       >
         <ng-container *ngIf="roles">
@@ -24,54 +24,54 @@
       </ng-container>
     </div>
     @if (!minimized) {
-    <app-display-external-ids
-      [externalIdentifiers]="work?.workExternalIdentifiers"
-    ></app-display-external-ids>
-    <div
-      class="general-data"
-      *ngIf="work?.contributorsGroupedByOrcid?.length > 0"
-    >
-      <span class="uppercase" i18n="@@works.contributors">Contributors</span>:
-      <ng-container
-        *ngFor="
-          let contributor of work?.contributorsGroupedByOrcid
-            | slice : 0 : maxNumberContributors;
-          let last = last
-        "
+      <app-display-external-ids
+        [externalIdentifiers]="work?.workExternalIdentifiers"
+      ></app-display-external-ids>
+      <div
+        class="general-data"
+        *ngIf="work?.contributorsGroupedByOrcid?.length > 0"
       >
+        <span class="uppercase" i18n="@@works.contributors">Contributors</span>:
         <ng-container
-          *ngIf="
-            contributor?.creditName &&
-            contributor?.creditName?.content !== privateName
+          *ngFor="
+            let contributor of work?.contributorsGroupedByOrcid
+              | slice: 0 : maxNumberContributors;
+            let last = last
           "
         >
-          {{ contributor?.creditName?.content + (!last ? '; ' : '') }}
-        </ng-container>
-        <ng-container
-          *ngIf="
-            (!contributor?.creditName ||
-              contributor?.creditName?.content === privateName) &&
-            contributor?.contributorOrcid?.uri
-          "
-        >
-          <ng-container *ngIf="contributor?.contributorOrcid?.uri">
-            <a
-              class="underline"
-              target="_blank"
-              rel="noreferrer noopener"
-              href="{{ contributor?.contributorOrcid?.uri }}"
-              >{{ contributor?.contributorOrcid?.path }}</a
-            >{{ !last ? '; ' : '' }}
+          <ng-container
+            *ngIf="
+              contributor?.creditName &&
+              contributor?.creditName?.content !== privateName
+            "
+          >
+            {{ contributor?.creditName?.content + (!last ? '; ' : '') }}
+          </ng-container>
+          <ng-container
+            *ngIf="
+              (!contributor?.creditName ||
+                contributor?.creditName?.content === privateName) &&
+              contributor?.contributorOrcid?.uri
+            "
+          >
+            <ng-container *ngIf="contributor?.contributorOrcid?.uri">
+              <a
+                class="underline"
+                target="_blank"
+                rel="noreferrer noopener"
+                href="{{ contributor?.contributorOrcid?.uri }}"
+                >{{ contributor?.contributorOrcid?.path }}</a
+              >{{ !last ? '; ' : '' }}
+            </ng-container>
           </ng-container>
         </ng-container>
-      </ng-container>
-      <span
-        *ngIf="work?.numberOfContributors > maxNumberContributors"
-        i18n="@@works.etAl"
-      >
-        et al.
-      </span>
-    </div>
+        <span
+          *ngIf="work?.numberOfContributors > maxNumberContributors"
+          i18n="@@works.etAl"
+        >
+          et al.
+        </span>
+      </div>
     }
   </div>
 
@@ -82,7 +82,7 @@
       *ngIf="!panelDetailsState?.state"
       i18n="@@shared.showMoreDetail"
       [attr.aria-label]="
-        'work' | appPanelActivityActionAriaLabel : 'show' : work?.title?.value
+        'work' | appPanelActivityActionAriaLabel: 'show' : work?.title?.value
       "
       >Show more detail</a
     >
@@ -92,7 +92,7 @@
       *ngIf="panelDetailsState?.state"
       i18n="@@shared.showLessDetail"
       [attr.aria-label]="
-        'work' | appPanelActivityActionAriaLabel : 'hide' : work?.title?.value
+        'work' | appPanelActivityActionAriaLabel: 'hide' : work?.title?.value
       "
       >Show less detail</a
     >

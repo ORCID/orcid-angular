@@ -3,9 +3,7 @@
   (click)="toggle.next()"
   [matTooltip]="tooltipLabelShowDetails"
   *ngIf="!openState"
-  [attr.aria-label]="
-    panelType | appPanelsExpandAriaLabel : panelId : panelTitle
-  "
+  [attr.aria-label]="panelType | appPanelsExpandAriaLabel: panelId : panelTitle"
   class="expand_more"
   tabindex="0"
 >
@@ -17,7 +15,7 @@
   [matTooltip]="tooltipLabelHideDetails"
   *ngIf="openState"
   [attr.aria-label]="
-    panelType | appPanelsCollapseAriaLabel : panelId : panelTitle
+    panelType | appPanelsCollapseAriaLabel: panelId : panelTitle
   "
   class="expand_less"
   tabindex="0"

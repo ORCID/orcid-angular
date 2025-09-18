@@ -20,7 +20,7 @@
         [ngClass]="{
           error:
             externalIdForm.get('externalIdentifierType').hasError('required') &&
-            externalIdForm.get('externalIdentifierType').touched
+            externalIdForm.get('externalIdentifierType').touched,
         }"
       >
         <label
@@ -70,7 +70,7 @@
         [ngClass]="{
           error:
             externalIdForm.get('externalIdentifierId').hasError('required') &&
-            externalIdForm.get('externalIdentifierId').touched
+            externalIdForm.get('externalIdentifierId').touched,
         }"
       >
         <strong
@@ -152,7 +152,7 @@
         [ngClass]="{
           error:
             externalIdForm.get('externalIdentifierUrl').hasError('pattern') &&
-            externalIdForm.get('externalIdentifierUrl').touched
+            externalIdForm.get('externalIdentifierUrl').touched,
         }"
       >
         <strong i18n="@@works.identifierUrl" id="{{ 'id-url-' + index }}"
@@ -192,7 +192,7 @@
         [ngClass]="{
           error:
             externalIdForm.hasError('required', 'externalRelationship') &&
-            externalIdForm.get('externalRelationship').touched
+            externalIdForm.get('externalRelationship').touched,
         }"
       >
         <label i18n="@@works.relationship" id="{{ 'id-relationship-' + index }}"

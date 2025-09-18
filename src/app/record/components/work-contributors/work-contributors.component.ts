@@ -278,8 +278,8 @@ export class WorkContributorsComponent implements OnInit, OnDestroy {
           uri
             ? uri
             : orcid
-            ? `https:${runtimeEnvironment.BASE_URL}${orcid}`
-            : null,
+              ? `https:${runtimeEnvironment.BASE_URL}${orcid}`
+              : null,
         ],
       }),
       roles: new UntypedFormArray([]),

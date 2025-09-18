@@ -108,14 +108,14 @@
         class="title"
         [ngClass]="{
           'orc-font-body': !platform.columns12,
-          'orc-font-body-large': platform.columns12
+          'orc-font-body-large': platform.columns12,
         }"
       >
         <div class="row">
           <h2
             [ngClass]="{
               'orc-font-body': !platform.columns12,
-              'orc-font-body-large': platform.columns12
+              'orc-font-body-large': platform.columns12,
             }"
           >
             <strong i18n="@@shared.organization"> Organization </strong>
@@ -140,7 +140,7 @@
           id="organization-label"
           class="mat-caption"
           [ngClass]="{
-            error: organizationIsInvalidAndTouched
+            error: organizationIsInvalidAndTouched,
           }"
         >
           <strong i18n="@@shared.organization" id="organizationLabel"
@@ -155,7 +155,8 @@
           class="mat-form-field-min"
           id="cy-org-dd-mat-form"
           [ngClass]="{
-            'two-line-hint': selectedOrganizationFromDatabase?.value.length > 50
+            'two-line-hint':
+              selectedOrganizationFromDatabase?.value.length > 50,
           }"
         >
           <input
@@ -236,7 +237,7 @@
           id="city-label"
           class="mat-caption"
           [ngClass]="{
-            error: cityIsInvalidAndTouched
+            error: cityIsInvalidAndTouched,
           }"
         >
           <strong i18n="@@shared.city" id="cityLabel">City</strong>
@@ -296,7 +297,7 @@
           id="country-label"
           class="mat-caption"
           [ngClass]="{
-            error: countryIsInvalidAndTouched
+            error: countryIsInvalidAndTouched,
           }"
         >
           <strong i18n="@@shared.countryOrLocation" id="countryLabel"
@@ -319,7 +320,7 @@
             [attr.aria-invalid]="countryIsInvalidAndTouched"
           >
             <mat-option
-              *ngFor="let countryCode of countryCodes | sortBy : 'asc' : 'key'"
+              *ngFor="let countryCode of countryCodes | sortBy: 'asc' : 'key'"
               [value]="countryCode.key"
             >
               {{ countryCode.key }}
@@ -342,14 +343,14 @@
         class="title"
         [ngClass]="{
           'orc-font-body': !platform.columns12,
-          'orc-font-body-large': platform.columns12
+          'orc-font-body-large': platform.columns12,
         }"
       >
         <div class="row">
           <h2
             [ngClass]="{
               'orc-font-body': !platform.columns12,
-              'orc-font-body-large': platform.columns12
+              'orc-font-body-large': platform.columns12,
             }"
           >
             <strong
@@ -468,7 +469,7 @@
             for="cy-start-date-year-sel"
             class="mat-caption"
             [ngClass]="{
-              error: affiliationForm.hasError('date', 'startDateGroup')
+              error: affiliationForm.hasError('date', 'startDateGroup'),
             }"
           >
             <strong>{{ dateLabel }}</strong>
@@ -551,7 +552,7 @@
             for="url-input"
             class="mat-caption"
             [ngClass]="{
-              error: affiliationForm.hasError('date', 'endDateGroup')
+              error: affiliationForm.hasError('date', 'endDateGroup'),
             }"
           >
             <strong i18n="@@shared.endDate">End date</strong>
@@ -678,7 +679,7 @@
           class="title visibility"
           [ngClass]="{
             'orc-font-body': !platform.columns12,
-            'orc-font-body-large': platform.columns12
+            'orc-font-body-large': platform.columns12,
           }"
         >
           <p>

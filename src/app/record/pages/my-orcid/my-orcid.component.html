@@ -16,7 +16,7 @@
       class="container no-padding main-content"
       [ngClass]="{
         'main-content-shadow': recordSummaryOpen,
-        mobile: !platform.columns12
+        mobile: !platform.columns12,
       }"
     >
       <div class="row">
@@ -45,7 +45,7 @@
                 ? !recordWithIssues &&
                   (displaySideBar || displayBiography || affiliations > 0)
                 : true
-              : true
+              : true,
           }"
         >
           <app-main>
@@ -54,7 +54,7 @@
               [newAddedAffiliation]="newAddedAffiliation"
               class="row"
               [ngClass]="{
-                mobile: !platform.columns12
+                mobile: !platform.columns12,
               }"
               [isPublicRecord]="publicOrcid"
               [loadingUserRecord]="loadingUserRecord"
@@ -72,7 +72,7 @@
               [isPublicRecord]="publicOrcid"
               [hideOrcidId]="true"
               [ngClass]="{
-                mobile: !platform.columns12
+                mobile: !platform.columns12,
               }"
               *ngIf="
                 !loadingUserRecord
@@ -102,7 +102,7 @@
                       'no-gutters': publicOrcid,
                       'public-info': publicOrcid,
                       'no-public-bio': publicOrcid ? !displayBiography : false,
-                      'orc-font-body': !publicOrcid
+                      'orc-font-body': !publicOrcid,
                     }"
                     i18n="@@shared.activities"
                   >

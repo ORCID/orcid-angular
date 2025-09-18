@@ -18,7 +18,7 @@ import { TogglzService } from '../../togglz/togglz.service'
 export abstract class LoginBaseInterstitialManagerService<
   TInput extends BaseInterstitialDialogInput,
   TOutput extends BaseInterstitialDialogOutput,
-  TComponent
+  TComponent,
 > {
   abstract INTERSTITIAL_NAME: InterstitialType
   abstract INTERSTITIAL_TOGGLE: string[]

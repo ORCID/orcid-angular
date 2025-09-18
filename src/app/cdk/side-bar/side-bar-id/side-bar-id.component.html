@@ -2,7 +2,7 @@
   <div>
     <img
       [ngClass]="{
-        mobile: !platform.columns12
+        mobile: !platform.columns12,
       }"
       src="assets/vectors/orcid.logo.icon.svg"
       alt="orcid logo"
@@ -13,7 +13,7 @@
       class="id"
       [ngClass]="{
         'orc-font-body-small': !platform.columns12,
-        'orc-font-body-large': platform.columns12
+        'orc-font-body-large': platform.columns12,
       }"
       dir="ltr"
     >
@@ -22,7 +22,7 @@
         class="orcid-id"
         [ngClass]="{
           'orc-font-body-large': !platform.columns12,
-          'orc-font-heading-small': platform.columns12
+          'orc-font-heading-small': platform.columns12,
         }"
       >
         {{ id }}

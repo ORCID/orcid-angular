@@ -11,7 +11,7 @@
       class="orc-font-small-print"
       id="username-input-label"
       [ngClass]="{
-        error: usernameForm?.touched && usernameForm.errors
+        error: usernameForm?.touched && usernameForm.errors,
       }"
       ><ng-container i18n="@@register.Email"> Email </ng-container>&nbsp;<i
         i18n="@@account.or"
@@ -72,7 +72,7 @@
       class="orc-font-small-print"
       id="password-input-label"
       [ngClass]="{
-        error: passwordForm?.touched && passwordForm?.errors
+        error: passwordForm?.touched && passwordForm?.errors,
       }"
       >Password
     </mat-label>

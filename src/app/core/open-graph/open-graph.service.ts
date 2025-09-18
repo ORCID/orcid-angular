@@ -19,7 +19,10 @@ export class OpenGraphService {
   private usernameMeta = 'profile:username'
   private siteNameMeta = 'og:site_name'
 
-  constructor(private meta: Meta, private _titleService: TitleService) {}
+  constructor(
+    private meta: Meta,
+    private _titleService: TitleService
+  ) {}
 
   addOpenGraphData(
     record: UserRecord,

@@ -3,7 +3,7 @@
     class="header-container"
     [ngClass]="{
       'sub-peer-review': type === 'sub-peer-review',
-      'featured-works-header-container': type === 'featured-works'
+      'featured-works-header-container': type === 'featured-works',
     }"
     *ngIf="
       IS_QA ||
@@ -214,7 +214,7 @@
         class="orc-font-body-small"
         *ngIf="type !== 'featured-works'"
         [attr.aria-label]="
-          type | appPanelsSortAriaLabel : !currentAmount && !total
+          type | appPanelsSortAriaLabel: !currentAmount && !total
         "
         [matMenuTriggerFor]="menu"
         [disabled]="!currentAmount && !total"
@@ -242,7 +242,7 @@
           mat-menu-item
           (click)="sortChange(option)"
           *ngFor="let option of sortTypes"
-          [attr.aria-label]="option | appPanelsSortByAriaLabel : type"
+          [attr.aria-label]="option | appPanelsSortByAriaLabel: type"
         >
           <div class="padding-right">
             {{ option | sortLabel }}

@@ -245,7 +245,7 @@ export class RecordWorksService {
                   year: work.publicationYear,
                 } as MonthDayYearDate,
                 workExternalIdentifiers: [],
-              } as Work)
+              }) as Work
           ),
           total: works.totalCount,
         })),
@@ -343,9 +343,9 @@ export class RecordWorksService {
 
   getWorksInfo(putCodes: string[], orcidId?: string): Observable<Work[]> {
     return this._http
-      .get<Work[]>(
-        runtimeEnvironment.API_WEB + `works/worksInfo/${putCodes.join(',')}`
-      )
+      .get<
+        Work[]
+      >(runtimeEnvironment.API_WEB + `works/worksInfo/${putCodes.join(',')}`)
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))
@@ -459,9 +459,9 @@ export class RecordWorksService {
 
   public loadWorkIdTypes(): Observable<WorkIdType[]> {
     return this._http
-      .get<WorkIdType[]>(
-        `${runtimeEnvironment.API_WEB}works/idTypes.json?query=`
-      )
+      .get<
+        WorkIdType[]
+      >(`${runtimeEnvironment.API_WEB}works/idTypes.json?query=`)
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))

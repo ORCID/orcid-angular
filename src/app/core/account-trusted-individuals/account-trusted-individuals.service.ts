@@ -29,10 +29,9 @@ export class AccountTrustedIndividualsService {
 
   get(): Observable<AccountTrustedIndividual[]> {
     return this._http
-      .get<AccountTrustedIndividual[]>(
-        runtimeEnvironment.API_WEB + `account/delegates.json`,
-        { headers: this.headers }
-      )
+      .get<
+        AccountTrustedIndividual[]
+      >(runtimeEnvironment.API_WEB + `account/delegates.json`, { headers: this.headers })
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),

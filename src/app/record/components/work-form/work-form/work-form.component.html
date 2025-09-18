@@ -4,7 +4,7 @@
       <h2
         [ngClass]="{
           'orc-font-body': !platform.columns12,
-          'orc-font-body-large': platform.columns12
+          'orc-font-body-large': platform.columns12,
         }"
         class="orc-font-body"
         i18n="@@works.workDetails"
@@ -29,7 +29,7 @@
         [ngClass]="{
           error:
             workForm.get('workType').hasError('required') &&
-            workForm.get('workType').touched
+            workForm.get('workType').touched,
         }"
       >
         <strong i18n="@@works.workType">Work type</strong>
@@ -57,7 +57,7 @@
           [ngClass]="{
             error:
               workForm.hasError('required', 'title') &&
-              workForm.get('title').touched
+              workForm.get('title').touched,
           }"
         >
           <strong i18n="@@works.worktitle">Work title</strong>
@@ -136,7 +136,7 @@
               error: workForm.hasError(
                 'invalidTranslatedTitleContent',
                 'translatedTitleGroup'
-              )
+              ),
             }"
           >
             <strong i18n="@@works.translatedTitle"
@@ -191,7 +191,7 @@
               error: workForm.hasError(
                 'invalidTranslatedTitleLanguage',
                 'translatedTitleGroup'
-              )
+              ),
             }"
           >
             <strong i18n="@@works.languageOnThisTitle"
@@ -305,7 +305,7 @@
           id="publication-date-label"
           class="mat-caption"
           [ngClass]="{
-            error: workForm.hasError('date', 'startDateGroup')
+            error: workForm.hasError('date', 'startDateGroup'),
           }"
         >
           <strong i18n="@@shared.publicationDate">Publication date</strong>
@@ -426,7 +426,8 @@
           class="mat-caption"
           [ngClass]="{
             error:
-              workForm.hasError('pattern', 'url') && workForm.get('url').touched
+              workForm.hasError('pattern', 'url') &&
+              workForm.get('url').touched,
           }"
         >
           <strong i18n="@@works.link">Link</strong>
@@ -472,13 +473,13 @@
       id="citation"
       [ngClass]="{
         'orc-font-body': !platform.columns12,
-        'orc-font-body-large': platform.columns12
+        'orc-font-body-large': platform.columns12,
       }"
     >
       <h2
         [ngClass]="{
           'orc-font-body': !platform.columns12,
-          'orc-font-body-large': platform.columns12
+          'orc-font-body-large': platform.columns12,
         }"
         class="orc-font-body"
         i18n="@@works.citation"
@@ -497,7 +498,7 @@
           for="cy-citation-type"
           class="mat-caption title"
           [ngClass]="{
-            error: workForm.hasError('citationType', 'citationGroup')
+            error: workForm.hasError('citationType', 'citationGroup'),
           }"
           id="citationType"
         >
@@ -539,7 +540,7 @@
             for="citation-input"
             class="mat-caption"
             [ngClass]="{
-              error: workForm.hasError('citation', 'citationGroup')
+              error: workForm.hasError('citation', 'citationGroup'),
             }"
             id="citation-label"
           >
@@ -619,14 +620,14 @@
       id="work-identifiers"
       [ngClass]="{
         'orc-font-body': !platform.columns12,
-        'orc-font-body-large': platform.columns12
+        'orc-font-body-large': platform.columns12,
       }"
     >
       <h2
         class="orc-font-body"
         [ngClass]="{
           'orc-font-body': !platform.columns12,
-          'orc-font-body-large': platform.columns12
+          'orc-font-body-large': platform.columns12,
         }"
         i18n="@@works.workIds"
         id="work-id-label"
@@ -703,7 +704,7 @@
       <h2
         [ngClass]="{
           'orc-font-body': !platform.columns12,
-          'orc-font-body-large': platform.columns12
+          'orc-font-body-large': platform.columns12,
         }"
         i18n="@@works.contributors"
         id="contributors-label"
@@ -734,7 +735,7 @@
       <h2
         [ngClass]="{
           'orc-font-body': !platform.columns12,
-          'orc-font-body-large': platform.columns12
+          'orc-font-body-large': platform.columns12,
         }"
         i18n="@@works.otherInformation"
         id="other-info-label"
@@ -800,7 +801,7 @@
             formControlName="countryCode"
           >
             <mat-option
-              *ngFor="let item of countryCodes | sortBy : 'asc' : 'key'"
+              *ngFor="let item of countryCodes | sortBy: 'asc' : 'key'"
               [value]="item.value"
             >
               {{ item.key }}
@@ -819,7 +820,7 @@
       <h2
         [ngClass]="{
           'orc-font-body': !platform.columns12,
-          'orc-font-body-large': platform.columns12
+          'orc-font-body-large': platform.columns12,
         }"
         i18n="@@shared.visibility"
         id="visibilityLabel"

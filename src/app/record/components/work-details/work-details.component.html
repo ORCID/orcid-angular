@@ -2,21 +2,21 @@
 <app-display-attribute *ngIf="work?.translatedTitle?.content">
   <div class="row">
     @if (largerHeaders) {
-    <h2 class="orc-font-body-small">
-      <ng-container i18n="@@works.translatedTitleWork"
-        >Translated title</ng-container
-      >&nbsp;<span *ngIf="work?.translatedTitle?.languageCode"
-        >({{ getLanguageKey(work.translatedTitle.languageCode) }})
-      </span>
-    </h2>
+      <h2 class="orc-font-body-small">
+        <ng-container i18n="@@works.translatedTitleWork"
+          >Translated title</ng-container
+        >&nbsp;<span *ngIf="work?.translatedTitle?.languageCode"
+          >({{ getLanguageKey(work.translatedTitle.languageCode) }})
+        </span>
+      </h2>
     } @else {
-    <h3 class="orc-font-body-small">
-      <ng-container i18n="@@works.translatedTitleWork"
-        >Translated title</ng-container
-      >&nbsp;<span *ngIf="work?.translatedTitle?.languageCode"
-        >({{ getLanguageKey(work.translatedTitle.languageCode) }})
-      </span>
-    </h3>
+      <h3 class="orc-font-body-small">
+        <ng-container i18n="@@works.translatedTitleWork"
+          >Translated title</ng-container
+        >&nbsp;<span *ngIf="work?.translatedTitle?.languageCode"
+          >({{ getLanguageKey(work.translatedTitle.languageCode) }})
+        </span>
+      </h3>
     }
   </div>
 
@@ -28,13 +28,13 @@
 <!-- LANGUAGE -->
 <app-display-attribute *ngIf="work?.languageName?.value">
   @if (largerHeaders) {
-  <h2 class="orc-font-body-small">
-    <ng-container i18n="@@works.language">Language</ng-container>
-  </h2>
+    <h2 class="orc-font-body-small">
+      <ng-container i18n="@@works.language">Language</ng-container>
+    </h2>
   } @else {
-  <h3 class="orc-font-body-small">
-    <ng-container i18n="@@works.language">Language</ng-container>
-  </h3>
+    <h3 class="orc-font-body-small">
+      <ng-container i18n="@@works.language">Language</ng-container>
+    </h3>
   }
 
   <div>
@@ -45,13 +45,13 @@
 <!-- SUBTITLE -->
 <app-display-attribute *ngIf="work?.subtitle?.value">
   @if (largerHeaders) {
-  <h2 class="orc-font-body-small">
-    <ng-container i18n="@@works.subtitleLabel">Subtitle</ng-container>
-  </h2>
+    <h2 class="orc-font-body-small">
+      <ng-container i18n="@@works.subtitleLabel">Subtitle</ng-container>
+    </h2>
   } @else {
-  <h3 class="orc-font-body-small">
-    <ng-container i18n="@@works.subtitleLabel">Subtitle</ng-container>
-  </h3>
+    <h3 class="orc-font-body-small">
+      <ng-container i18n="@@works.subtitleLabel">Subtitle</ng-container>
+    </h3>
   }
 
   <div>
@@ -63,9 +63,9 @@
 
 <app-display-attribute *ngIf="work?.url?.value">
   @if (largerHeaders) {
-  <h2 class="orc-font-body-small" i18n="@@shared.url">URL</h2>
+    <h2 class="orc-font-body-small" i18n="@@shared.url">URL</h2>
   } @else {
-  <h3 class="orc-font-body-small" i18n="@@shared.url">URL</h3>
+    <h3 class="orc-font-body-small" i18n="@@shared.url">URL</h3>
   }
 
   <div>
@@ -93,9 +93,13 @@
   "
 >
   @if (largerHeaders) {
-  <h2 class="orc-font-body-small" i18n="@@works.contributors">Contributors</h2>
+    <h2 class="orc-font-body-small" i18n="@@works.contributors">
+      Contributors
+    </h2>
   } @else {
-  <h3 class="orc-font-body-small" i18n="@@works.contributors">Contributors</h3>
+    <h3 class="orc-font-body-small" i18n="@@works.contributors">
+      Contributors
+    </h3>
   }
 
   <div>
@@ -113,11 +117,11 @@
     </ng-container>
     <p
       [ngClass]="{
-        'record-holder': contributor?.contributorOrcid?.path === id
+        'record-holder': contributor?.contributorOrcid?.path === id,
       }"
       *ngFor="
         let contributor of work?.contributorsGroupedByOrcid
-          | slice : 0 : maxNumberContributorsWorkDetails;
+          | slice: 0 : maxNumberContributorsWorkDetails;
         let index = index
       "
     >
@@ -198,21 +202,21 @@
 <!-- CITATION-->
 <app-display-attribute *ngIf="work?.citation?.citation?.value?.length > 0">
   @if (largerHeaders) {
-  <h2 class="orc-font-body-small">
-    <ng-container i18n="@@works.citation">Citation</ng-container>&nbsp;<span
-      *ngIf="work.citation?.citationType?.value"
-      class="citation-type"
-      >({{ work.citation?.citationType?.value }})</span
-    >
-  </h2>
+    <h2 class="orc-font-body-small">
+      <ng-container i18n="@@works.citation">Citation</ng-container>&nbsp;<span
+        *ngIf="work.citation?.citationType?.value"
+        class="citation-type"
+        >({{ work.citation?.citationType?.value }})</span
+      >
+    </h2>
   } @else {
-  <h3 class="orc-font-body-small">
-    <ng-container i18n="@@works.citation">Citation</ng-container>&nbsp;<span
-      *ngIf="work.citation?.citationType?.value"
-      class="citation-type"
-      >({{ work.citation?.citationType?.value }})</span
-    >
-  </h3>
+    <h3 class="orc-font-body-small">
+      <ng-container i18n="@@works.citation">Citation</ng-container>&nbsp;<span
+        *ngIf="work.citation?.citationType?.value"
+        class="citation-type"
+        >({{ work.citation?.citationType?.value }})</span
+      >
+    </h3>
   }
 
   <div>
@@ -352,9 +356,9 @@
 <!--  DESCRIPTION-->
 <app-display-attribute *ngIf="work?.shortDescription?.value">
   @if (largerHeaders) {
-  <h2 class="orc-font-body-small" i18n="@@works.description">Description</h2>
+    <h2 class="orc-font-body-small" i18n="@@works.description">Description</h2>
   } @else {
-  <h3 class="orc-font-body-small" i18n="@@works.description">Description</h3>
+    <h3 class="orc-font-body-small" i18n="@@works.description">Description</h3>
   }
 
   <div [innerText]="work.shortDescription.value"></div>
@@ -362,13 +366,19 @@
 <!--  COUNTRY OF PUBLICATION-->
 <app-display-attribute *ngIf="work?.countryCode?.value">
   @if (largerHeaders) {
-  <h2 class="orc-font-body-small" i18n="@@works.countryOrLocationOfPublication">
-    Country/Location of publication
-  </h2>
+    <h2
+      class="orc-font-body-small"
+      i18n="@@works.countryOrLocationOfPublication"
+    >
+      Country/Location of publication
+    </h2>
   } @else {
-  <h3 class="orc-font-body-small" i18n="@@works.countryOrLocationOfPublication">
-    Country/Location of publication
-  </h3>
+    <h3
+      class="orc-font-body-small"
+      i18n="@@works.countryOrLocationOfPublication"
+    >
+      Country/Location of publication
+    </h3>
   }
 
   <div>
@@ -379,9 +389,9 @@
 <!-- ADDED DATE-->
 <app-display-attribute>
   @if (largerHeaders) {
-  <h2 class="orc-font-body-small" i18n="@@shared.added">Added</h2>
+    <h2 class="orc-font-body-small" i18n="@@shared.added">Added</h2>
   } @else {
-  <h3 class="orc-font-body-small" i18n="@@shared.added">Added</h3>
+    <h3 class="orc-font-body-small" i18n="@@shared.added">Added</h3>
   }
 
   <div>
@@ -392,13 +402,13 @@
 <!-- LAST MODIFIED  DATE-->
 <app-display-attribute>
   @if (largerHeaders) {
-  <h2 class="orc-font-body-small" i18n="@@shared.lastModified">
-    Last modified
-  </h2>
+    <h2 class="orc-font-body-small" i18n="@@shared.lastModified">
+      Last modified
+    </h2>
   } @else {
-  <h3 class="orc-font-body-small" i18n="@@shared.lastModified">
-    Last modified
-  </h3>
+    <h3 class="orc-font-body-small" i18n="@@shared.lastModified">
+      Last modified
+    </h3>
   }
 
   <div>{{ work?.lastModified | monthDayYearDateToString }}</div>

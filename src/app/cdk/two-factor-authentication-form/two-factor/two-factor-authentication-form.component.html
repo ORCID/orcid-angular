@@ -4,7 +4,7 @@
       class="orc-font-small-print"
       i18n="@@ngOrcid.signin.2fa.label"
       [ngClass]="{
-        error: isVerificationCodeInvalid
+        error: isVerificationCodeInvalid,
       }"
       *ngIf="!recoveryCode"
       >Two-factor authentication code
@@ -66,7 +66,7 @@
   </div>
   <p
     [ngClass]="{
-      'enter-code': isVerificationCodeInvalid
+      'enter-code': isVerificationCodeInvalid,
     }"
   >
     <a
@@ -108,7 +108,7 @@
       class="orc-font-small-print"
       i18n="@@ngOrcid.signin.2fa.recoveryCode"
       [ngClass]="{
-        error: isRecoveryCodeInvalid
+        error: isRecoveryCodeInvalid,
       }"
       *ngIf="recoveryCode"
       >Recovery code

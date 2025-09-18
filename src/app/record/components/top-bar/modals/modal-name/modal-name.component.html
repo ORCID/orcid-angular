@@ -42,7 +42,7 @@
         class="title"
         [ngClass]="{
           'orc-font-body': !platform.columns12,
-          'orc-font-body-large': platform.columns12
+          'orc-font-body-large': platform.columns12,
         }"
       >
         <div class="row">
@@ -90,7 +90,7 @@
           for="given-names-input"
           class="mat-caption"
           [ngClass]="{
-            error: namesForm?.hasError('required', 'givenNames')
+            error: namesForm?.hasError('required', 'givenNames'),
           }"
         >
           <strong i18n="@@topBar.givenNames">Given names</strong>
@@ -220,7 +220,7 @@
         <h2
           [ngClass]="{
             'orc-font-body': !platform.columns12,
-            'orc-font-body-large': platform.columns12
+            'orc-font-body-large': platform.columns12,
           }"
           i18n="@@topBar.alsoKnowAs"
         >
@@ -285,7 +285,7 @@
                     *ngIf="
                       namesForm.hasError('maxlength', [
                         otherName.putCode,
-                        'otherName'
+                        'otherName',
                       ])
                     "
                     i18n="@@topBar.otherNamesMaxLenght"

@@ -46,7 +46,7 @@
       class="title"
       [ngClass]="{
         'orc-font-body': !platform.columns12,
-        'orc-font-body-large': platform.columns12
+        'orc-font-body-large': platform.columns12,
       }"
     ></div>
 
@@ -69,7 +69,7 @@
         id="cy-org-dd-mat-form"
         [ngClass]="{
           'two-line-hint': selectedOrganizationFromDatabase?.value.length > 50,
-          'selected-org': organizationIsValidAndTouched
+          'selected-org': organizationIsValidAndTouched,
         }"
       >
         <input
@@ -166,7 +166,7 @@
       id="department-input-label"
       class="orc-font-small-print"
       [ngClass]="{
-        error: departmentNameIsInvalidAndTouched
+        error: departmentNameIsInvalidAndTouched,
       }"
       ><ng-container i18n="@@register.department">Department</ng-container>
       <label i18n="@@register.optional">(Optional)</label></mat-label
@@ -197,7 +197,7 @@
       id="role-input-label"
       class="orc-font-small-print"
       [ngClass]="{
-        error: roleTitleIsInvalidAndTouched
+        error: roleTitleIsInvalidAndTouched,
       }"
       ><ng-container i18n="@@register.roleJobTitle"
         >Role/Job title</ng-container
@@ -233,7 +233,7 @@
         id="start-date-input-label"
         class="orc-font-small-print"
         [ngClass]="{
-          error: form.hasError('date', 'startDateGroup')
+          error: form.hasError('date', 'startDateGroup'),
         }"
       >
         <strong i18n="@@shared.startDate">Start date</strong>

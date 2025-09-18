@@ -25,7 +25,7 @@
             appearance="outline"
             class="mat-form-field-min"
             [ngClass]="{
-              'no-hint': role.get('role').errors
+              'no-hint': role.get('role').errors,
             }"
           >
             <mat-select
@@ -37,7 +37,7 @@
               <mat-option
                 *ngFor="let contributionRole of contributionRoles"
                 [value]="contributionRole.key"
-                [disabled]="contributionRole.key | disableRole : role"
+                [disabled]="contributionRole.key | disableRole: role"
               >
                 {{ contributionRole.translation | titlecase }}
               </mat-option>

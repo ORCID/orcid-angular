@@ -3,7 +3,7 @@
     <a
       class="col add-record-holder no-gutters"
       [ngClass]="{
-        'no-contributors': contributorsFormArray?.controls?.length === 0
+        'no-contributors': contributorsFormArray?.controls?.length === 0,
       }"
       (click)="addRecordHolderAsContributor()"
       id="cy-add-record-holder-contributor"
@@ -36,7 +36,7 @@
         <ng-container
           *ngFor="
             let contributor of contributors
-              | slice : 0 : maxNumberOfContributorsSummary;
+              | slice: 0 : maxNumberOfContributorsSummary;
             let last = last
           "
         >
@@ -151,7 +151,7 @@
                             ?.value === id,
                         'not-record-holder':
                           contributor.get(['contributorOrcid', 'path'])
-                            ?.value !== id
+                            ?.value !== id,
                       }"
                       >{{ contributor.get('creditName')?.value }}
                       <ng-container
@@ -195,7 +195,7 @@
                           'no-hint': !(
                             contributor.get('creditName').touched &&
                             contributor.get('creditName')?.errors
-                          )
+                          ),
                         }"
                       >
                         <input
@@ -253,14 +253,14 @@
                             appearance="outline"
                             class="mat-form-field-min"
                             [ngClass]="{
-                              'no-hint': !role.get('role').errors
+                              'no-hint': !role.get('role').errors,
                             }"
                           >
                             <mat-select
                               [aria-label]="ngOrcidSelectRoleAriaLabel"
                               #roleSelect
                               [ngClass]="[
-                                'contributor-role-' + contributorIndex
+                                'contributor-role-' + contributorIndex,
                               ]"
                               placeholder="{{ ngOrcidSelectRole }}"
                               formControlName="role"
@@ -271,7 +271,7 @@
                                 "
                                 [value]="contributionRole.key"
                                 [disabled]="
-                                  contributionRole.key | disableRole : role
+                                  contributionRole.key | disableRole: role
                                 "
                               >
                                 {{ contributionRole.translation | titlecase }}

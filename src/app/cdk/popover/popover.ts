@@ -290,7 +290,10 @@ export class MdePopover implements MdePopoverPanel, OnDestroy {
 
   @ViewChild(TemplateRef) templateRef: TemplateRef<any>
 
-  constructor(private _elementRef: ElementRef, public zone: NgZone) {
+  constructor(
+    private _elementRef: ElementRef,
+    public zone: NgZone
+  ) {
     this.setPositionClasses()
   }
 
