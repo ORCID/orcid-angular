@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-// Cross-platform check for focused tests (works on Windows, macOS, Linux)
 // - Scans TypeScript sources for fdescribe / fit
 // - Silent on success
 // - Prints offending locations and exits 1 on failure
@@ -45,7 +44,9 @@ function main() {
   }
 
   if (violations.length > 0) {
-    console.error('Focused tests found. Replace fdescribe → describe, fit → it:')
+    console.error(
+      'Focused tests found. Replace fdescribe → describe, fit → it:'
+    )
     for (const v of violations) {
       const rel = path.relative(process.cwd(), v.file)
       console.error(`${rel}:${v.lineNumber}: ${v.line.trim()}`)
