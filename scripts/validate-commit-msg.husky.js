@@ -28,10 +28,11 @@ try {
   const raw = fs.readFileSync(commitMsgFile, 'utf8')
 
   // Use first non-empty, non-comment line as subject
-  const firstLine = raw
-    .split(/\r?\n/)
-    .map((l) => l.trim())
-    .find((l) => l && !l.startsWith('#')) || ''
+  const firstLine =
+    raw
+      .split(/\r?\n/)
+      .map((l) => l.trim())
+      .find((l) => l && !l.startsWith('#')) || ''
 
   // Allow CI merges on main branch
   if (isCiMergeOnMain()) {
@@ -52,7 +53,9 @@ try {
   const pattern = /^[A-Z]{2}-\d{4}(?:\s.+)?$/
 
   if (!pattern.test(firstLine)) {
-    console.error('\u001b[31mCommit message must start with an issue key like "AA-0000" followed by an optional message.\u001b[0m')
+    console.error(
+      '\u001b[31mCommit message must start with an issue key like "AA-0000" followed by an optional message.\u001b[0m'
+    )
     console.error('\nExamples:')
     console.error('  PD-0000')
     console.error('  PD-0000 Fix broken tests')

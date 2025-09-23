@@ -71,7 +71,9 @@ function main() {
   const pattern = /^[a-z0-9._-]+\/[A-Z]{2}-\d{4}.*$/
 
   if (!pattern.test(branch)) {
-    console.error('\u001b[31mBranch name must follow "<developer-name>/AA-0000[anything]" or be a special allowed name (e.g., "transifex").\u001b[0m')
+    console.error(
+      '\u001b[31mBranch name must follow "<developer-name>/AA-0000[anything]" or be a special allowed name (e.g., "transifex").\u001b[0m'
+    )
     console.error('\nExamples:')
     console.error('  yourname/PD-0000')
     console.error('  yourname/PD-0000-my-feature')
