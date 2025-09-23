@@ -1,11 +1,14 @@
 #!/usr/bin/env node
 
-// Enforce branch naming: <developer-name>/AA-0000
+// Enforce branch naming: <developer-name>/AA-0000[anything]
 // - developer-name: lowercase letters, numbers, dot, underscore, hyphen (one or more)
 // - ticket: exactly 2 uppercase letters, hyphen, exactly 4 digits (e.g., PD-0000)
+// - suffix: any optional characters after the ticket (e.g., "/feature-x", "-refactor", etc.)
+// Special allowed names: transifex
 // Examples:
 //   yourname/PD-0000
-//   john_doe/AB-0123
+//   yourname/PD-0000-my-feature
+//   your.name/AB-0123/quick-fix
 
 const { execSync } = require('child_process')
 
@@ -38,16 +41,22 @@ function main() {
     process.exit(0)
   }
 
-  // developer-name / AA-0000
-  const pattern = /^[a-z0-9._-]+\/[A-Z]{2}-\d{4}$/
+  // Allowed special branch names
+  const special = new Set(['transifex'])
+  if (special.has(branch)) {
+    process.exit(0)
+  }
+
+  // developer-name / AA-0000 [anything]
+  const pattern = /^[a-z0-9._-]+\/[A-Z]{2}-\d{4}.*$/
 
   if (!pattern.test(branch)) {
-    console.error(
-      '\u001b[31mBranch name must follow "<developer-name>/AA-0000" where the ticket looks like "AA-0000".\u001b[0m'
-    )
+    console.error('\u001b[31mBranch name must follow "<developer-name>/AA-0000[anything]" or be a special allowed name (e.g., "transifex").\u001b[0m')
     console.error('\nExamples:')
     console.error('  yourname/PD-0000')
-    console.error('  john_doe/AB-0123')
+    console.error('  yourname/PD-1234v2')
+    console.error('  your.name/AB-1234/quick-fix')
+    console.error('  transifex')
     console.error('\nYour branch was:')
     console.error(`  ${branch || '(empty)'}`)
     process.exit(1)
