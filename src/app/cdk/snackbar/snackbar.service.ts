@@ -56,7 +56,7 @@ export class SnackbarService {
         horizontalPosition: this.horizontalPosition,
         verticalPosition: 'bottom',
         panelClass: 'orcid-error',
-        duration: 10 * 100000,
+        duration: 100 * 1000,
       })
     }
 
@@ -87,7 +87,7 @@ export class SnackbarService {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: 'bottom',
       panelClass: 'orcid-error',
-      duration: 15 * 10000,
+      duration: 10 * 1000,
     })
   }
 
@@ -99,7 +99,7 @@ export class SnackbarService {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: 'bottom',
       panelClass: 'orcid-success',
-      duration: (!message.closable ? 15 : 90) * 100000,
+      duration: (!message.closable ? 15 : 90) * 1000,
     })
   }
 }
