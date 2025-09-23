@@ -357,8 +357,7 @@ export class FormSignInComponent implements OnInit, OnDestroy {
         urlRedirect = `https://${urlRedirect}`
       }
       this._window.outOfRouterNavigation(urlRedirect)
-    } 
-    else {
+    } else {
       if (
         (this.platform.social || this.platform.institutional) &&
         !isRedirectToTheAuthorizationPage({ url: urlRedirect })
@@ -374,8 +373,6 @@ export class FormSignInComponent implements OnInit, OnDestroy {
         })
       }
     }
-
-
   }
 
   updateUsername(email) {
