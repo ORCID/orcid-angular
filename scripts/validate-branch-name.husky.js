@@ -12,6 +12,21 @@
 
 const { execSync } = require('child_process')
 
+function isCiOnMain() {
+  // allow actions that run on main based on GitHub refs
+  try {
+    const isCi = String(process.env.CI || '').toLowerCase() === 'true'
+    if (!isCi) return false
+
+    const refName = process.env.GITHUB_REF_NAME // e.g., 'main'
+    const ref = process.env.GITHUB_REF // e.g., 'refs/heads/main'
+
+    return refName === 'main' || ref === 'refs/heads/main'
+  } catch (_) {
+    return false
+  }
+}
+
 function getCurrentBranch() {
   try {
     // Try symbolic-ref first; fallback to rev-parse
@@ -41,6 +56,11 @@ function main() {
     process.exit(0)
   }
 
+  // Allow CI (GitHub Actions) jobs running on main
+  if (isCiOnMain()) {
+    process.exit(0)
+  }
+
   // Allowed special branch names
   const special = new Set(['transifex'])
   if (special.has(branch)) {
@@ -54,8 +74,8 @@ function main() {
     console.error('\u001b[31mBranch name must follow "<developer-name>/AA-0000[anything]" or be a special allowed name (e.g., "transifex").\u001b[0m')
     console.error('\nExamples:')
     console.error('  yourname/PD-0000')
-    console.error('  yourname/PD-1234v2')
-    console.error('  your.name/AB-1234/quick-fix')
+    console.error('  yourname/PD-0000-my-feature')
+    console.error('  your.name/AB-0123/quick-fix')
     console.error('  transifex')
     console.error('\nYour branch was:')
     console.error(`  ${branch || '(empty)'}`)
