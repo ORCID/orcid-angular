@@ -9,6 +9,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { ModalComponent } from 'src/app/cdk/modal/modal/modal.component'
+import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { RecordWorksService } from 'src/app/core/record-works/record-works.service'
 import { Work } from 'src/app/types/record-works.endpoint'
@@ -47,6 +48,7 @@ export class ManageWorkFeaturedModalComponent implements OnInit, OnDestroy {
   searchedTerm: string
   totalWorks: number | undefined
   searchLengthExceeded = false
+  isMobile = false
 
   $destroy: Subject<void> = new Subject<void>()
 
@@ -57,6 +59,7 @@ export class ManageWorkFeaturedModalComponent implements OnInit, OnDestroy {
     private _worksService: RecordWorksService,
     private _dialogRef: MatDialogRef<ModalComponent>,
     private _snackbarService: SnackbarService,
+    private _platform: PlatformInfoService,
     @Inject(MAT_DIALOG_DATA) public data: UserRecord
   ) {}
 
@@ -68,6 +71,13 @@ export class ManageWorkFeaturedModalComponent implements OnInit, OnDestroy {
         this.works = (works || []).slice(0)
         this.initialPutCodes = (works || []).map((w) => w.putCode?.value)
         this.loading = false
+      })
+
+    this._platform
+      .get()
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((platform) => {
+        this.isMobile = platform.columns4
       })
   }
 

@@ -101,7 +101,7 @@
   }
 }
 
-.results {
+.search-results app-work-featured {
   ::ng-deep {
     .featured-header,
     .featured-body {
@@ -113,9 +113,7 @@
   height: 48px;
   align-content: center;
 }
-.search-result-wrapper {
-  display: flex;
-}
+
 .make-featured-button {
   font-weight: normal;
   flex-shrink: 0;
@@ -159,4 +157,37 @@ mat-icon {
 .you-searched-for {
   text-overflow: ellipsis;
   overflow-x: clip;
+}
+
+.search-results {
+  display: grid;
+  grid-template-columns: 1fr auto;
+}
+
+.search-result-wrapper {
+  display: contents;
+}
+
+.search-results app-work-featured {
+  grid-column: 1;
+}
+
+.make-featured-button {
+  grid-column: 2;
+  justify-self: end;
+}
+
+.search-results hr {
+  grid-column: 1 / -1;
+}
+
+.mobile {
+  .search-results {
+    grid-template-columns: 1fr;
+  }
+  .make-featured-button {
+    grid-column: 1;
+    justify-self: start;
+    margin-bottom: 16px;
+  }
 }
