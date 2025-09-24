@@ -14,4 +14,4 @@ jobs:
           node-version: 'v20.x'
           cache: 'yarn'
       - run: yarn
-      - run: yarn test-headless
+      - run: yarn test-headless:ci
