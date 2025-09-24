@@ -107,6 +107,8 @@ export class RecordUtil {
             block: 'start',
           })
 
+          
+
           targetElement.setAttribute('tabindex', '-1')
           targetElement.focus()
           targetElement.removeAttribute('tabindex')
