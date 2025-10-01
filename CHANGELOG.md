@@ -1,3 +1,11 @@
+## v2.124.2 - 2025-10-01
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.124.1...v2.124.2)
+
+- [#2648](https://github.com/ORCID/orcid-angular/pull/2648): PD-1941
+- [#2647](https://github.com/ORCID/orcid-angular/pull/2647): PD-2041
+- [#2646](https://github.com/ORCID/orcid-angular/pull/2646): Lmendoza/pd 2233
+
 ## v2.124.1 - 2025-09-24
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.124.0...v2.124.1)
