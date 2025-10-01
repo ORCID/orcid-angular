@@ -125,7 +125,6 @@ export class AuthorizeGuard implements CanActivateChild {
     this.oauthUrlSessionManger.set(this.window.location.href)
     return this.platform.get().pipe(
       map(({ queryParameters }) => {
-        console.log('Current query params:', queryParameters)
         this.featureLogger.debug(
           'Authorize Guard',
           'Building /signin UrlTree with current query params'
