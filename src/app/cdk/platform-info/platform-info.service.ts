@@ -74,8 +74,9 @@ export class PlatformInfoService {
             Object.keys(value).length > 0 || this.previouslyHadQueryParameters
         )
       )
-      .subscribe((queryParameters) => {
+      .subscribe(() => {
         this.previouslyHadQueryParameters = true
+        const queryParameters = this.getQueryParams()
         this.platform.queryParameters = queryParameters
         const previousOauthState = this.hasOauthParameters()
         const previousSocialState = this.updateSocialState(queryParameters)
@@ -243,9 +244,17 @@ export class PlatformInfoService {
 
   public getQueryParams(): Params {
     const params: Params = {}
-    new URLSearchParams(this.window.location.search).forEach(
-      (value, key) => (params[key] = value)
-    )
+    const search = this.window.location.search || ''
+    const query = search.startsWith('?') ? search.substring(1) : search
+    if (!query) return params
+    for (const part of query.split('&')) {
+      if (!part) continue
+      const [rawKey, rawValue = ''] = part.split('=')
+      if (!rawKey) continue
+      const key = decodeURIComponent(rawKey)
+      const value = decodeURIComponent(rawValue)
+      params[key] = value
+    }
     return params
   }
 
