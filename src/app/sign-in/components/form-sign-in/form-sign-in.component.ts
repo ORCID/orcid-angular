@@ -211,10 +211,17 @@ export class FormSignInComponent implements OnInit, OnDestroy {
       $signIn.subscribe((data) => {
         this.printError = false
         if (data.success) {
-          if (isRedirectToTheAuthorizationPage(data)) {
+          if (
+            this.isOauthAuthorizationTogglzEnable &&
+            this._oauthUrlSessionManager.get()
+          ) {
             this.handleOauthLogin(data.url)
           } else {
-            this.navigateTo(data.url)
+            if (isRedirectToTheAuthorizationPage(data)) {
+              this.handleOauthLogin(data.url)
+            } else {
+              this.navigateTo(data.url)
+            }
           }
         } else if (data.verificationCodeRequired && !data.badVerificationCode) {
           this.authorizationFormSubmitted = false

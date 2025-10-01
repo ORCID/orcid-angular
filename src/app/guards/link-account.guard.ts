@@ -33,11 +33,12 @@ export class LinkAccountGuard {
     return this._userInfo.getUserSession().pipe(
       take(1),
       map((value) => {
-        if (value.thirdPartyAuthData?.signinData?.providerId) {
-          return true
-        } else {
-          return this._router.createUrlTree(['/signin'])
-        }
+        return true
+        // if (value.thirdPartyAuthData?.signinData?.providerId) {
+        //   return true
+        // } else {
+        //   return this._router.createUrlTree(['/signin'])
+        // }
       }),
 
       catchError(() => {
