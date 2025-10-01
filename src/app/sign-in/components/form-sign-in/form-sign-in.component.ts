@@ -351,7 +351,11 @@ export class FormSignInComponent implements OnInit, OnDestroy {
 
   oauthAuthorize(urlRedirect) {
     if (this.isOauthAuthorizationTogglzEnable) {
-      this._oauthUrlSessionManager.clear()
+
+      if (this._oauthUrlSessionManager.get()) {
+        urlRedirect = this._oauthUrlSessionManager.get()
+        this._oauthUrlSessionManager.clear()
+      }
       //add http if not present
       if (!urlRedirect.startsWith('https://')) {
         urlRedirect = `https://${urlRedirect}`
