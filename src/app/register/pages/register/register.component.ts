@@ -286,7 +286,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
       this._errorHandler.handleError(
         new Error('registerMissingRedirectUrl'),
         ERROR_REPORT.REGISTER
-      )
+      ).subscribe()
       this.window.scrollTo(0, 0)
       this._router.navigate(['/signin'])
       return
