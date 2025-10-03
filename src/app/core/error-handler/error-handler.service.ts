@@ -7,6 +7,7 @@ import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { ErrorReport } from 'src/app/types'
 import { ERROR_REPORT } from 'src/app/errors'
 import { CookieService } from 'ngx-cookie-service'
+import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,8 @@ export class ErrorHandlerService {
   constructor(
     private _cookie: CookieService,
     private _platform: PlatformInfoService,
-    private _snackBar: SnackbarService
+    private _snackBar: SnackbarService,
+    private _observability: RumJourneyEventService
   ) {
     this.checkBrowser()
   }
@@ -49,6 +51,16 @@ export class ErrorHandlerService {
         catchError((processedError: Error | HttpErrorResponse) => {
           // Server error
           if (processedError instanceof HttpErrorResponse) {
+            try {
+              this._observability.recordSimpleEvent('http_error', {
+                status: processedError.status,
+                statusText: processedError.statusText,
+                url: processedError.url,
+                name: processedError.name,
+                browserSupport: this.browserSupport,
+                csrf: this.checkCSRF(),
+              })
+            } catch (_) {}
             console.error(
               `
 __Server error__
@@ -60,6 +72,14 @@ ok: "${processedError.ok}"
             )
           } else {
             // Client side error
+            try {
+              this._observability.recordSimpleEvent('client_error', {
+                name: processedError.name,
+                message: processedError.message,
+                browserSupport: this.browserSupport,
+                csrf: this.checkCSRF(),
+              })
+            } catch (_) {}
             console.error(
               `
 __Local error__

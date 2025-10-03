@@ -54,6 +54,17 @@ export class RumJourneyEventService {
     }
   }
 
+  // Records a standalone event without requiring a journey lifecycle
+  recordSimpleEvent(eventName: string, attrs?: Record<string, unknown>): void {
+    const nr = (this.window as any).newrelic
+    if (typeof nr?.addPageAction === 'function') {
+      nr.addPageAction(eventName, attrs || {})
+    }
+    if (runtimeEnvironment.debugger) {
+      console.debug(`[RUM][simple] : event ${eventName}`, attrs || {})
+    }
+  }
+
   updateJourneyContext<T extends JourneyType>(
     journeyType: T,
     extraContext: Partial<JourneyContextMap[T]>
