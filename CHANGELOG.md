@@ -1,3 +1,9 @@
+## v2.124.6 - 2025-10-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.124.5...v2.124.6)
+
+- [#2643](https://github.com/ORCID/orcid-angular/pull/2643): Bump tar-fs from 3.1.0 to 3.1.1
+
 ## v2.124.5 - 2025-10-02
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.124.4...v2.124.5)
