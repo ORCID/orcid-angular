@@ -1,5 +1,8 @@
 import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http'
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing'
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing'
 import { TestBed, fakeAsync, flushMicrotasks } from '@angular/core/testing'
 import { CookieService } from 'ngx-cookie-service'
 import { FirefoxXsrfPreloadInterceptor } from './firefox-xsrf-preload.interceptor'
@@ -77,14 +80,18 @@ describe('FirefoxXsrfPreloadInterceptor', () => {
   it('preloads cors.json and gates request when cookie missing on Firefox', fakeAsync(() => {
     ;(TestBed.inject(Platform) as any).FIREFOX = true
     cookieGetSpy.and.returnValue('')
-    const fetchSpy = spyOn(window as any, 'fetch').and.returnValue(Promise.resolve(new Response()))
+    const fetchSpy = spyOn(window as any, 'fetch').and.returnValue(
+      Promise.resolve(new Response())
+    )
 
     http.get(apiBase + 'foo.json').subscribe()
     httpMock.expectNone(apiBase + 'foo.json')
 
     flushMicrotasks()
 
-    expect(fetchSpy).toHaveBeenCalledWith(apiBase + 'cors.json', { credentials: 'include' })
+    expect(fetchSpy).toHaveBeenCalledWith(apiBase + 'cors.json', {
+      credentials: 'include',
+    })
 
     const req = httpMock.expectOne(apiBase + 'foo.json')
     req.flush({ ok: true })
@@ -94,20 +101,23 @@ describe('FirefoxXsrfPreloadInterceptor', () => {
     ;(TestBed.inject(Platform) as any).FIREFOX = true
     // Missing before and after
     cookieGetSpy.and.returnValue('')
-    const fetchSpy = spyOn(window as any, 'fetch').and.returnValue(Promise.resolve(new Response()))
+    const fetchSpy = spyOn(window as any, 'fetch').and.returnValue(
+      Promise.resolve(new Response())
+    )
 
     http.get(apiBase + 'foo.json').subscribe()
     flushMicrotasks()
 
     expect(fetchSpy).toHaveBeenCalled()
-    expect(recordSimpleEventSpy).toHaveBeenCalledWith('xsrf_missing_after_preload', jasmine.objectContaining({
-      error: 'xsrf_missing',
-    }))
+    expect(recordSimpleEventSpy).toHaveBeenCalledWith(
+      'xsrf_missing_after_preload',
+      jasmine.objectContaining({
+        error: 'xsrf_missing',
+      })
+    )
     expect(reloadSpy).toHaveBeenCalled()
 
     const req = httpMock.expectOne(apiBase + 'foo.json')
     req.flush({ ok: true })
   }))
 })
-
-
