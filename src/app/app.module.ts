@@ -11,7 +11,8 @@ import { BidiModule } from '@angular/cdk/bidi'
 import { PseudoModule } from 'src/locale/i18n.pseudo.component'
 import { TitleService } from './core/title-service/title.service'
 import { HttpContentTypeHeaderInterceptor } from './core/http-content-type-header-interceptor/http-content-type-header-interceptor'
-import { HTTP_INTERCEPTORS } from '@angular/common/http'
+import { FirefoxXsrfPreloadInterceptor } from './core/lang-preload/firefox-xsrf-preload.interceptor'
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi, withXsrfConfiguration } from '@angular/common/http'
 import { MatDialogModule } from '@angular/material/dialog'
 import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import { MatSelectModule } from '@angular/material/select'
@@ -39,11 +40,21 @@ import { FormsModule } from '@angular/forms'
   ],
   providers: [
     TitleService,
+    // Firefox-only workaround to ensure XSRF cookie is established before backend calls
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: FirefoxXsrfPreloadInterceptor,
+      multi: true,
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpContentTypeHeaderInterceptor,
       multi: true,
     },
+    provideHttpClient(
+      withInterceptorsFromDi(),
+      withXsrfConfiguration({ cookieName: 'XSRF-TOKEN', headerName: 'x-xsrf-token' })
+    ),
   ],
   bootstrap: [AppComponent],
 })

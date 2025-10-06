@@ -1,4 +1,3 @@
-import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http'
 import { NgModule } from '@angular/core'
 import { TogglzDirective } from './togglz/togglz.directive'
 import { PlatformInfoModule } from '../cdk/platform-info'
@@ -9,9 +8,7 @@ import { SnackbarModule } from '../cdk/snackbar/snackbar.module'
 
 @NgModule({
   imports: [
-    HttpClientModule,
     PlatformInfoModule,
-    HttpClientXsrfModule,
     WindowModule,
     SnackbarModule,
   ],
