@@ -77,7 +77,7 @@ describe('FirefoxXsrfPreloadInterceptor', () => {
     expect(fetchSpy).not.toHaveBeenCalled()
   })
 
-  it('preloads cors.json and gates request when cookie missing on Firefox', fakeAsync(() => {
+  it('preloads csrf.json and gates request when cookie missing on Firefox', fakeAsync(() => {
     ;(TestBed.inject(Platform) as any).FIREFOX = true
     cookieGetSpy.and.returnValue('')
     const fetchSpy = spyOn(window as any, 'fetch').and.returnValue(
@@ -89,7 +89,7 @@ describe('FirefoxXsrfPreloadInterceptor', () => {
 
     flushMicrotasks()
 
-    expect(fetchSpy).toHaveBeenCalledWith(apiBase + 'cors.json', {
+    expect(fetchSpy).toHaveBeenCalledWith(apiBase + 'csrf.json', {
       credentials: 'include',
     })
 

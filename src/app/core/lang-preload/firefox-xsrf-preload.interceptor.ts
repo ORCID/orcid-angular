@@ -20,7 +20,7 @@ import { Platform } from '@angular/cdk/platform'
  * Other browsers work fine, so this interceptor runs ONLY on Firefox.
  *
  * Behavior:
- * - For the first backend XHR, if no XSRF-TOKEN cookie is present, issue one-time GET to cors.json
+ * - For the first backend XHR, if no XSRF-TOKEN cookie is present, issue one-time GET to csrf.json
  * - Gate subsequent requests until this completes
  * - If after preload the XSRF cookie is still missing, log a simple RUM event and hard reload the page
  */
@@ -69,14 +69,16 @@ export class FirefoxXsrfPreloadInterceptor implements HttpInterceptor {
       return next.handle(req)
     }
 
-    // Kick off a one-time cors.json preload
+    // Kick off a one-time csrf.json preload
     if (!this.isLoading) {
+      console.log('preloading csrf.json')
       this.isLoading = true
       // Use fetch to avoid re-entering HttpClient interceptors chain
-      const url = `${apiBase}cors.json`
+      const url = `${apiBase}csrf.json`
       fetch(url, { credentials: 'include' })
         .catch(() => {})
         .finally(() => {
+          console.log('csrf.json preloaded')
           this.loaded = true
           this.isLoading = false
           // If still no XSRF cookie, report and reload
@@ -87,7 +89,7 @@ export class FirefoxXsrfPreloadInterceptor implements HttpInterceptor {
                 {
                   error: 'xsrf_missing',
                   errorDescription:
-                    'XSRF-TOKEN missing after cors.json preload',
+                    'XSRF-TOKEN missing after csrf.json preload',
                   browser: 'firefox',
                 }
               )
@@ -102,7 +104,7 @@ export class FirefoxXsrfPreloadInterceptor implements HttpInterceptor {
         })
     }
 
-    // Wait until cors.json preload completes, then proceed with the original request
+    // Wait until csrf.json preload completes, then proceed with the original request
     return this.gate$.pipe(
       take(1),
       switchMap(() => next.handle(req))
