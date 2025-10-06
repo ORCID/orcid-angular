@@ -41,7 +41,10 @@ export class FirefoxXsrfPreloadInterceptor implements HttpInterceptor {
     this.isFirefox = platform.FIREFOX
   }
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
     if (!this.isFirefox) {
       return next.handle(req)
     }
@@ -79,11 +82,15 @@ export class FirefoxXsrfPreloadInterceptor implements HttpInterceptor {
           // If still no XSRF cookie, report and reload
           if (!this.hasXsrfCookie()) {
             try {
-              this._observability.recordSimpleEvent('xsrf_missing_after_preload', {
-                error: 'xsrf_missing',
-                errorDescription: 'XSRF-TOKEN missing after cors.json preload',
-                browser: 'firefox',
-              })
+              this._observability.recordSimpleEvent(
+                'xsrf_missing_after_preload',
+                {
+                  error: 'xsrf_missing',
+                  errorDescription:
+                    'XSRF-TOKEN missing after cors.json preload',
+                  browser: 'firefox',
+                }
+              )
             } catch (_) {}
             // Force full reload to retry cookie issuance
             try {
@@ -96,12 +103,13 @@ export class FirefoxXsrfPreloadInterceptor implements HttpInterceptor {
     }
 
     // Wait until cors.json preload completes, then proceed with the original request
-    return this.gate$.pipe(take(1), switchMap(() => next.handle(req)))
+    return this.gate$.pipe(
+      take(1),
+      switchMap(() => next.handle(req))
+    )
   }
 
   private hasXsrfCookie(): boolean {
     return !!this._cookie.get('XSRF-TOKEN')
   }
 }
-
-
