@@ -71,14 +71,12 @@ export class FirefoxXsrfPreloadInterceptor implements HttpInterceptor {
 
     // Kick off a one-time csrf.json preload
     if (!this.isLoading) {
-      console.log('preloading csrf.json')
       this.isLoading = true
       // Use fetch to avoid re-entering HttpClient interceptors chain
       const url = `${apiBase}csrf.json`
       fetch(url, { credentials: 'include' })
         .catch(() => {})
         .finally(() => {
-          console.log('csrf.json preloaded')
           this.loaded = true
           this.isLoading = false
           // If still no XSRF cookie, report and reload
