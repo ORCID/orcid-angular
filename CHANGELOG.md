@@ -1,3 +1,9 @@
+## v2.124.11 - 2025-10-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.124.10...v2.124.11)
+
+- [#2656](https://github.com/ORCID/orcid-angular/pull/2656): PD-2463
+
 ## v2.124.10 - 2025-10-07
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.124.9...v2.124.10)
