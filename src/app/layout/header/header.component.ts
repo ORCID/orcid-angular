@@ -102,7 +102,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
     // Subscribe to compact header feature flag
     _togglz
-      .getStateOf('COMPACT_HEADER')
+      .getStateOf('HEADER_COMPACT')
       .pipe(
         tap((state) => {
           this.compactFeatureEnabled = state
