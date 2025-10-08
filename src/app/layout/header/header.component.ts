@@ -104,7 +104,6 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     _togglz
       .getStateOf('COMPACT_HEADER')
       .pipe(
-        map((state) => true),
         tap((state) => {
           this.compactFeatureEnabled = state
           // Re-evaluate eligibility and scroll state on flag changes
