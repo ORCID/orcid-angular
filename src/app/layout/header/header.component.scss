@@ -29,7 +29,7 @@ header.container {
   .logo-menu-container {
     .logo-container {
       img {
-        margin-bottom: 22px;
+        margin-bottom: 16px;
         transition: height 0.2s ease, max-height 0.2s ease;
       }
       .mat-subtitle-2 {
@@ -59,7 +59,7 @@ header.container.compact .logo-container img {
 }
 
 header.container.compact app-search {
-  padding-top: 16px;
+  padding-top: 11px;
 }
 nav.not-wordpress-display > .top-bar,
 nav.not-wordpress-display > .top-bar-new-info {
