@@ -1,7 +1,6 @@
 header.container {
   padding: 24px 16px;
   margin: auto;
-  transition: height 0.2s ease, padding 0.2s ease;
 
   &.compact {
     position: sticky;
@@ -30,7 +29,6 @@ header.container {
     .logo-container {
       img {
         margin-bottom: 16px;
-        transition: height 0.2s ease, max-height 0.2s ease;
       }
       .mat-subtitle-2 {
         line-height: 16px;
