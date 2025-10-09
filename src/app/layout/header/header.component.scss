@@ -1,7 +1,6 @@
 header.container {
   padding: 24px 16px;
   margin: auto;
-  transition: height 0.2s ease, padding 0.2s ease;
 
   &.compact {
     position: sticky;
@@ -29,8 +28,7 @@ header.container {
   .logo-menu-container {
     .logo-container {
       img {
-        margin-bottom: 12px;
-        transition: height 0.2s ease, max-height 0.2s ease;
+        margin-bottom: 16px;
       }
       .mat-subtitle-2 {
         line-height: 16px;
@@ -51,7 +49,7 @@ header.container {
 
 // When compact, cap logo size
 header.container.compact .logo-container img {
-  max-height: 40px;
+  max-height: 30px;
   height: 40px;
   width: auto;
   position: relative;
@@ -59,7 +57,7 @@ header.container.compact .logo-container img {
 }
 
 header.container.compact app-search {
-  padding-top: 11px;
+  padding-top: 10px;
 }
 nav.not-wordpress-display > .top-bar,
 nav.not-wordpress-display > .top-bar-new-info {
@@ -103,7 +101,7 @@ nav {
 .columns-4 {
   :host {
     header.container {
-      padding: 12px 16px;
+      padding: 16px 16px;
       .logo-menu-container {
         display: flex;
         justify-content: space-between;
@@ -113,6 +111,7 @@ nav {
           }
           img {
             height: 35px;
+            margin-bottom: 0pc;
             width: auto;
           }
         }
