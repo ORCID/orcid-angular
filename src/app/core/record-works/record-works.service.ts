@@ -39,6 +39,7 @@ import { DEFAULT_PAGE_SIZE, EXTERNAL_ID_TYPE_WORK } from 'src/app/constants'
 import { RecordImportWizard } from '../../types/record-peer-review-import.endpoint'
 import { SortOrderType } from '../../types/sort'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
+import { TogglzFlag } from '../togglz/togglz-flags.enum'
 
 @Injectable({
   providedIn: 'root',
@@ -181,7 +182,7 @@ export class RecordWorksService {
     this._$loadingFeatured.next(true)
 
     this._togglz
-      .getStateOf('FEATURED_WORKS_UI')
+      .getStateOf(TogglzFlag.FEATURED_WORKS_UI)
       .pipe(take(1))
       .subscribe((enabled) => {
         if (!enabled) {

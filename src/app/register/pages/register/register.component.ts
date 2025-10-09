@@ -34,6 +34,7 @@ import { JourneyType } from 'src/app/rum/journeys/types'
 import { RegisterObservabilityService } from '../../register-observability.service'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { OauthURLSessionManagerService } from 'src/app/core/oauth-urlsession-manager/oauth-urlsession-manager.service'
+import { TogglzFlag } from 'src/app/core/togglz/togglz-flags.enum'
 
 @Component({
   selector: 'app-register',
@@ -132,7 +133,9 @@ export class RegisterComponent implements OnInit, AfterViewInit {
       this._userInfo.getUserSession(),
       this._platformInfo.get(),
       this._route.queryParams.pipe(first()),
-      this._togglzService.getStateOf('OAUTH_AUTHORIZATION').pipe(first()),
+      this._togglzService
+        .getStateOf(TogglzFlag.OAUTH_AUTHORIZATION)
+        .pipe(first()),
     ])
       .pipe(
         first(),
