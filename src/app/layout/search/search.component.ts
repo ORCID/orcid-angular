@@ -1,4 +1,10 @@
-import { Component, OnInit, Inject, ChangeDetectorRef } from '@angular/core'
+import {
+  Component,
+  OnInit,
+  Inject,
+  ChangeDetectorRef,
+  Input,
+} from '@angular/core'
 import { UntypedFormGroup } from '@angular/forms'
 import { WINDOW } from 'src/app/cdk/window'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
@@ -35,6 +41,7 @@ export class SearchComponent implements OnInit {
     $localize`:@@layout.ariaLabelSearchRegistry:Search the ORCID registry...`
   )
   whatToSearch: string
+  @Input() hideForm: boolean = false
   constructor(
     @Inject(WINDOW) private window: Window,
     private _search: SearchService,

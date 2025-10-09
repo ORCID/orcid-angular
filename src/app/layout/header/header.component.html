@@ -1,4 +1,10 @@
-<header role="presentation" class="container">
+<header
+  #headerEl
+  role="presentation"
+  class="container"
+  [class.compact-enabled]="compactEligible"
+  [class.compact]="isCompactActive"
+>
   <div class="row end">
     <div
       class="col l5 m8 s4 middle logo-menu-container no-gutters"
@@ -17,7 +23,7 @@
         <div
           role="link"
           class="orc-font-body-small"
-          *ngIf="platform.columns12"
+          *ngIf="platform.columns12 && !isCompactActive"
           i18n="@@confirm-oauth-access.connectingresearchandresearchers"
         >
           Connecting research and researchers
@@ -46,13 +52,17 @@
       class="col l6 offset-l1 m8 s4 middle no-gutters"
       *ngIf="platform.columns12"
     >
-      <app-search></app-search>
+      <app-search [hideForm]="compactEligible && isCompactActive"></app-search>
     </div>
   </div>
 </header>
+
 <mat-divider></mat-divider>
 
-<div class="col l5 offset-l3 m8 s4 middle" *ngIf="!platform.columns12">
+<div
+  class="col l5 offset-l3 m8 s4 middle"
+  *ngIf="!platform.columns12 && !(compactEligible && isCompactActive)"
+>
   <app-search></app-search>
 </div>
 
