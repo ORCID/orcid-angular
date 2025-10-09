@@ -51,7 +51,7 @@ header.container {
 
 // When compact, cap logo size
 header.container.compact .logo-container img {
-  max-height: 40px;
+  max-height: 30px;
   height: 40px;
   width: auto;
   position: relative;
@@ -59,7 +59,7 @@ header.container.compact .logo-container img {
 }
 
 header.container.compact app-search {
-  padding-top: 11px;
+  padding-top: 15px;
 }
 nav.not-wordpress-display > .top-bar,
 nav.not-wordpress-display > .top-bar-new-info {
