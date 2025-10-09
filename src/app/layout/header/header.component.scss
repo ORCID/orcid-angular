@@ -59,7 +59,7 @@ header.container.compact .logo-container img {
 }
 
 header.container.compact app-search {
-  padding-top: 11px;
+  padding-top: 10px;
 }
 nav.not-wordpress-display > .top-bar,
 nav.not-wordpress-display > .top-bar-new-info {
@@ -103,7 +103,7 @@ nav {
 .columns-4 {
   :host {
     header.container {
-      padding: 12px 16px;
+      padding: 16px 16px;
       .logo-menu-container {
         display: flex;
         justify-content: space-between;
@@ -113,6 +113,7 @@ nav {
           }
           img {
             height: 35px;
+            margin-bottom: 0pc;
             width: auto;
           }
         }
