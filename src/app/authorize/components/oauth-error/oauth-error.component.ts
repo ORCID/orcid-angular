@@ -10,6 +10,7 @@ import { LegacyOauthRequestInfoForm as RequestInfoForm } from 'src/app/types/req
 import { UserSession } from 'src/app/types/session.local'
 import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
 import { JourneyType } from 'src/app/rum/journeys/types'
+import { TogglzFlag } from 'src/app/core/togglz/togglz-flags.enum'
 
 @Component({
   selector: 'app-oauth-error',
@@ -73,7 +74,7 @@ export class OauthErrorComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this._togglz
-      .getStateOf('OAUTH_AUTHORIZATION')
+      .getStateOf(TogglzFlag.OAUTH_AUTHORIZATION)
       .pipe(
         take(1),
         tap((state) => {

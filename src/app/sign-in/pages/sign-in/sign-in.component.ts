@@ -19,6 +19,7 @@ import { FormSignInComponent } from '../../components/form-sign-in/form-sign-in.
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { ActivatedRoute, Router } from '@angular/router'
 import { OauthParameters } from 'src/app/types'
+import { TogglzFlag } from 'src/app/core/togglz/togglz-flags.enum'
 
 @Component({
   selector: 'app-sign-in',
@@ -65,7 +66,9 @@ export class SignInComponent implements OnInit {
     combineLatest([
       this._userInfo.getUserSession(),
       this._platformInfo.get(),
-      this._togglzService.getStateOf('OAUTH_AUTHORIZATION').pipe(take(1)),
+      this._togglzService
+        .getStateOf(TogglzFlag.OAUTH_AUTHORIZATION)
+        .pipe(take(1)),
     ])
       .pipe(first())
       .subscribe(([session, platform, isOauthAuthorizationTogglzEnable]) => {

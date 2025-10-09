@@ -37,6 +37,7 @@ import { GoogleTagManagerService } from '../../../core/google-tag-manager/google
 import { Title } from '@angular/platform-browser'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { OauthURLSessionManagerService } from 'src/app/core/oauth-urlsession-manager/oauth-urlsession-manager.service'
+import { TogglzFlag } from 'src/app/core/togglz/togglz-flags.enum'
 
 @Component({
   selector: 'app-form-authorize',
@@ -80,7 +81,7 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this._togglz
-      .getStateOf('OAUTH_AUTHORIZATION')
+      .getStateOf(TogglzFlag.OAUTH_AUTHORIZATION)
       .pipe(take(1))
       .subscribe((OAUTH_AUTHORIZATION) => {
         this.OAUTH_AUTHORIZATION = OAUTH_AUTHORIZATION
@@ -164,7 +165,7 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
     this.loadingAuthorizeEndpoint = true
 
     this._togglz
-      .getStateOf('OAUTH_AUTHORIZATION')
+      .getStateOf(TogglzFlag.OAUTH_AUTHORIZATION)
       .pipe(
         tap((useAuthServerFlag) => {
           if (useAuthServerFlag === true) {

@@ -14,6 +14,7 @@ import {
   BaseInterstitialDialogOutput,
 } from './dialog-interface'
 import { TogglzService } from '../../togglz/togglz.service'
+import { TogglzFlag } from '../../togglz/togglz-flags.enum'
 
 export abstract class LoginBaseInterstitialManagerService<
   TInput extends BaseInterstitialDialogInput,
@@ -21,7 +22,7 @@ export abstract class LoginBaseInterstitialManagerService<
   TComponent
 > {
   abstract INTERSTITIAL_NAME: InterstitialType
-  abstract INTERSTITIAL_TOGGLE: string[]
+  abstract INTERSTITIAL_TOGGLE: TogglzFlag[]
   abstract QA_FLAG_FOR_FORCE_INTERSTITIAL_AS_NEVER_SEEN: QaFlag
 
   // This will usually get updated on subscription to togglz
@@ -100,7 +101,7 @@ export abstract class LoginBaseInterstitialManagerService<
     const togglzName = this.INTERSTITIAL_TOGGLE.find((toggle) =>
       toggle.startsWith(toggglzPrefix)
     )
-    return this.togglzService.getStateOf(togglzName).pipe(take(1))
+    return this.togglzService.getStateOf(togglzName as TogglzFlag).pipe(take(1))
   }
 
   showInterstitialAsComponent(): Observable<ComponentType<TComponent>> {

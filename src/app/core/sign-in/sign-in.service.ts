@@ -15,6 +15,7 @@ import { Title } from '@angular/platform-browser'
 
 import { CookieService } from 'ngx-cookie-service'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
+import { TogglzFlag } from '../togglz/togglz-flags.enum'
 
 @Injectable({
   providedIn: 'root',
@@ -39,7 +40,7 @@ export class SignInService {
     updateUserSession = true,
     forceSessionUpdate = false
   ) {
-    return this._togglz.getStateOf('OAUTH_SIGNIN').pipe(
+    return this._togglz.getStateOf(TogglzFlag.OAUTH_SIGNIN).pipe(
       take(1),
       switchMap((outhSiginFlag) => {
         let usingOauthServer = false

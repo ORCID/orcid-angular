@@ -10,6 +10,7 @@ import { InterstitialType } from 'src/app/cdk/interstitials/interstitial.type'
 import { QaFlag } from '../../qa-flag/qa-flags.enum'
 import { QaFlagsService } from '../../qa-flag/qa-flag.service'
 import { TogglzService } from '../../togglz/togglz.service'
+import { TogglzFlag } from '../../togglz/togglz-flags.enum'
 import { LoginBaseInterstitialManagerService } from '../abstractions/login-abstract-interstitial-manager.service'
 import { AffiliationsInterstitialComponent } from 'src/app/cdk/interstitials/affiliations-interstitial/interstitial-component/affiliations-interstitial.component'
 import {
@@ -30,9 +31,9 @@ export class LoginAffiliationInterstitialManagerService extends LoginBaseInterst
   QA_FLAG_FOR_FORCE_INTERSTITIAL_AS_NEVER_SEEN =
     QaFlag.forceAffiliationInterstitialNotSeem
   INTERSTITIAL_NAME: InterstitialType = 'AFFILIATION_INTERSTITIAL'
-  INTERSTITIAL_TOGGLE = [
-    'LOGIN_AFFILIATION_INTERSTITIAL',
-    'OAUTH_AFFILIATION_INTERSTITIAL',
+  INTERSTITIAL_TOGGLE: TogglzFlag[] = [
+    TogglzFlag.LOGIN_AFFILIATION_INTERSTITIAL,
+    TogglzFlag.OAUTH_AFFILIATION_INTERSTITIAL,
   ]
 
   constructor(

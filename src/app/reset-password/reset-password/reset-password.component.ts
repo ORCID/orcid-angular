@@ -19,6 +19,7 @@ import {
 import { OauthURLSessionManagerService } from 'src/app/core/oauth-urlsession-manager/oauth-urlsession-manager.service'
 import { PasswordRecoveryService } from 'src/app/core/password-recovery/password-recovery.service'
 import { RegisterService } from 'src/app/core/register/register.service'
+import { TogglzFlag } from 'src/app/core/togglz/togglz-flags.enum'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { OrcidValidators } from 'src/app/validators'
 
@@ -62,7 +63,7 @@ export class ResetPasswordComponent implements OnInit {
 
   ngOnInit(): void {
     this._togglzService
-      .getStateOf('OAUTH_AUTHORIZATION')
+      .getStateOf(TogglzFlag.OAUTH_AUTHORIZATION)
       .pipe(first())
       .subscribe((isOauthAuthorizationEnabled: boolean) => {
         this.isOauthAuthorizationTogglzEnable = isOauthAuthorizationEnabled

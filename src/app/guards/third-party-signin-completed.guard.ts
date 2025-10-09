@@ -12,6 +12,7 @@ import { UserService } from '../core'
 import { OauthURLSessionManagerService } from '../core/oauth-urlsession-manager/oauth-urlsession-manager.service'
 import { WINDOW } from '../cdk/window/window.service'
 import { TogglzService } from '../core/togglz/togglz.service'
+import { TogglzFlag } from '../core/togglz/togglz-flags.enum'
 
 @Injectable({
   providedIn: 'root',
@@ -36,7 +37,7 @@ export class ThirdPartySigninCompletedGuard {
     return forkJoin({
       session: this._user.getUserSession().pipe(take(1)),
       isOauthAuthorizationTogglzEnable: this._togglzService
-        .getStateOf('OAUTH_AUTHORIZATION')
+        .getStateOf(TogglzFlag.OAUTH_AUTHORIZATION)
         .pipe(take(1)),
     }).pipe(
       first(),

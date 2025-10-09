@@ -42,6 +42,7 @@ import { GoogleTagManagerService } from '../../../core/google-tag-manager/google
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { OauthURLSessionManagerService } from 'src/app/core/oauth-urlsession-manager/oauth-urlsession-manager.service'
+import { TogglzFlag } from 'src/app/core/togglz/togglz-flags.enum'
 
 @Component({
   selector: 'app-form-sign-in',
@@ -162,7 +163,7 @@ export class FormSignInComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this._togglzService
-      .getStateOf('OAUTH_AUTHORIZATION')
+      .getStateOf(TogglzFlag.OAUTH_AUTHORIZATION)
       .pipe(take(1))
       .subscribe((isOauthAuthorizationTogglzEnable) => {
         this.isOauthAuthorizationTogglzEnable = isOauthAuthorizationTogglzEnable

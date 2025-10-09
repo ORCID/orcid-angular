@@ -9,6 +9,7 @@ import { UserRecordOptions } from 'src/app/types/record.local'
 import { Router } from '@angular/router'
 import { PlatformInfo, PlatformInfoService } from '../../cdk/platform-info'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
+import { TogglzFlag } from 'src/app/core/togglz/togglz-flags.enum'
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +27,7 @@ export class UserInfoService {
   }
 
   public getUserInfo(options?: UserRecordOptions): Observable<UserInfo> {
-    return this._togglz.getStateOf('OAUTH_SIGNIN').pipe(
+    return this._togglz.getStateOf(TogglzFlag.OAUTH_SIGNIN).pipe(
       take(1),
       switchMap((outhSiginFlag) => {
         let userInfoUrl =

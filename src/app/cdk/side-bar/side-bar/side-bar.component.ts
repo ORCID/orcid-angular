@@ -29,6 +29,7 @@ import { ModalWebsitesComponent } from '../modals/modal-websites/modal-websites.
 import { ActivatedRoute } from '@angular/router'
 import { RecordUtil } from 'src/app/shared/utils/record.util'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
+import { TogglzFlag } from 'src/app/core/togglz/togglz-flags.enum'
 
 @Component({
   selector: 'app-side-bar',
@@ -107,7 +108,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this._togglz
-      .getStateOf('EMAIL_DOMAINS_UI')
+      .getStateOf(TogglzFlag.EMAIL_DOMAINS_UI)
       .pipe(take(1))
       .subscribe((value) => {
         this.loadingTogglz = false
