@@ -11,6 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatDialog } from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { RecordWorksService } from '../../../core/record-works/record-works.service'
+import { SharedModule } from '../../../shared/shared.module'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 
@@ -20,7 +21,7 @@ describe('WorkFeaturedComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule],
+      imports: [HttpClientTestingModule, RouterTestingModule, SharedModule],
       declarations: [WorkFeaturedComponent],
       providers: [
         WINDOW_PROVIDERS,

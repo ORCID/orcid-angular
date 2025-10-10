@@ -276,6 +276,23 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   }
 
   afterRegisterRedirectionHandler(response: RegisterConfirmResponse) {
+    if (!response || !response.url || typeof response.url !== 'string') {
+      this._registerObservabilityService.reportRegisterErrorEvent(
+        'register-confirmation',
+        {
+          response,
+        }
+      )
+      this._errorHandler
+        .handleError(
+          new Error('registerMissingRedirectUrl'),
+          ERROR_REPORT.REGISTER
+        )
+        .subscribe()
+      this.window.scrollTo(0, 0)
+      this._router.navigate(['/signin'])
+      return
+    }
     if (isRedirectToTheAuthorizationPage(response)) {
       this._oauthURLSessionManagerService.clear()
       this.window.location.href = response.url

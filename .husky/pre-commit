@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+node scripts/validate-branch-name.husky.js || exit 1
+
+node scripts/check-focused-tests.husky.js || exit 1
+
+# Fast pre-commit sanity check: TypeScript type-check only
+npx tsc --noEmit
