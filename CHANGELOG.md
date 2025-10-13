@@ -1,3 +1,45 @@
+## v2.125.0 - 2025-10-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.124.14...v2.125.0)
+
+## v2.124.14 - 2025-10-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.124.13...v2.124.14)
+
+- [#2640](https://github.com/ORCID/orcid-angular/pull/2640): Transifex: update properties
+
+## v2.124.13 - 2025-10-09
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.124.12...v2.124.13)
+
+## v2.124.12 - 2025-10-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.124.11...v2.124.12)
+
+- [#2657](https://github.com/ORCID/orcid-angular/pull/2657): PD-2418
+
+## v2.124.11 - 2025-10-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.124.10...v2.124.11)
+
+- [#2656](https://github.com/ORCID/orcid-angular/pull/2656): PD-2463
+
+## v2.124.10 - 2025-10-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.124.9...v2.124.10)
+
+- [#2655](https://github.com/ORCID/orcid-angular/pull/2655): PD-2418
+
+## v2.124.9 - 2025-10-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.124.8...v2.124.9)
+
+## v2.124.8 - 2025-10-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.124.7...v2.124.8)
+
+- [#2652](https://github.com/ORCID/orcid-angular/pull/2652): Lmendoza/pd 2463
+
 ## v2.124.7 - 2025-10-06
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.124.6...v2.124.7)

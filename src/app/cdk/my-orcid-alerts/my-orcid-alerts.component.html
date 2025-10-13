@@ -30,12 +30,14 @@
     aria-describedby="dialogDescription"
   >
     <div content class="content">
-      <b id="dialogTitle" i18n="@@ngOrcid.signin.somethingNotQuiteRight">
-        Something's not quite right...
+      <b id="dialogTitle" i18n="@@ngOrcid.signin.invalidSignInDetails">
+        Invalid sign in details
       </b>
-      <div id="dialogDescription" i18n="@@ngOrcid.signin.checkYourSignIn">
-        Please check that your sign in details are correct and then try signing
-        in again.
+      <div
+        id="dialogDescription"
+        i18n="@@ngOrcid.signin.pleaseCheckYourDetails"
+      >
+        Please check your ORCID sign in details and then try signing in again.
       </div>
     </div>
   </app-alert-message>
