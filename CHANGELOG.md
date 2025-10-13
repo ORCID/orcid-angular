@@ -1,3 +1,9 @@
+## v2.124.14 - 2025-10-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.124.13...v2.124.14)
+
+- [#2640](https://github.com/ORCID/orcid-angular/pull/2640): Transifex: update properties
+
 ## v2.124.13 - 2025-10-09
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.124.12...v2.124.13)
