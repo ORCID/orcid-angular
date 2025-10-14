@@ -100,6 +100,9 @@ export class PanelsComponent implements OnInit {
         case 'service':
           this.openModal(ModalAffiliationsComponent, { type })
           break
+        case 'editorial-service':
+          this.openModal(ModalAffiliationsComponent, { type })
+          break
         case 'peer-review':
           this.openModal(ModalPeerReviewsComponent)
           break

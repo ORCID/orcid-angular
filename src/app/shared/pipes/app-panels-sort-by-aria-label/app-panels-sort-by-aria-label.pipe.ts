@@ -40,7 +40,8 @@ const getTitleLabelByType = (type: string): string => {
       return $localize`:@@shared.distinctionSortTitle:Sort invited positions and distinction by title`
     case 'membership':
     case 'service':
-      return $localize`:@@shared.membershipSortTitle:Sort membership and service by title`
+    case 'editorial-service':
+      return $localize`:@@shared.membershipSortTitle:Sort membership, service, and editorial service by title`
     case 'funding':
       return $localize`:@@shared.fundingSortTitle:Sort funding by title`
     case 'works':

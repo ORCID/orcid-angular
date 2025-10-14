@@ -156,6 +156,11 @@
             <mat-icon class="material-icons-outlined">badge</mat-icon>
             <ng-container i18n="@@shared.addService">Add Service</ng-container>
           </button>
+          <button mat-menu-item (click)="add('editorial-service')">
+            <mat-icon class="material-icons-outlined">auto_stories</mat-icon>
+            <ng-container i18n="@@shared.addEditorialService"
+              >Add Editorial Service</ng-container>
+            </button>
         </ng-container>
         <ng-container *ngIf="type === 'distinction'">
           <button mat-menu-item (click)="add('invited-position')">
@@ -177,6 +182,9 @@
           </button>
           <button mat-menu-item (click)="add('service')">
             <ng-container i18n="@@shared.addService">Add Service</ng-container>
+          </button>
+          <button mat-menu-item (click)="add('service')">
+            <ng-container i18n="@@shared.addEditorialService">Add Editorial Service</ng-container>
           </button>
         </ng-container>
         <ng-container *ngIf="type === 'funding'">

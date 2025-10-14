@@ -48,6 +48,7 @@ export class PanelSourceComponent implements OnInit {
     | 'distinction'
     | 'membership'
     | 'service'
+    | 'editorial-service'
     | 'funding'
     | 'works'
     | 'activities'

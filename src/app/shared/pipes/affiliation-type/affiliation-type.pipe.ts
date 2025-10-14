@@ -20,6 +20,8 @@ export class AffiliationTypePipe implements PipeTransform {
         return AffiliationType.distinction
       case 'INVITED_POSITION':
         return AffiliationType['invited-position']
+      case 'EDITORIAL_SERVICE':
+        return AffiliationType['editorial-service']
     }
   }
 }

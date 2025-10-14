@@ -68,6 +68,7 @@ export class PanelComponent implements OnInit {
     | 'distinction'
     | 'membership'
     | 'service'
+    | 'editorial-service'
     | 'peer-review'
     | 'main'
     | 'works'
@@ -241,6 +242,7 @@ export class PanelComponent implements OnInit {
       this.type === 'distinction' ||
       this.type === 'membership' ||
       this.type === 'service' ||
+      this.type === 'editorial-service' ||
       this.type === 'funding' ||
       this.type === 'works' ||
       this.type === 'research-resources' ||
@@ -275,8 +277,6 @@ export class PanelComponent implements OnInit {
   }
 
   updateVisibility(visibility: VisibilityStrings) {
-    console.log('updateVisibility', visibility)
-    console.log('this.stackSiblings', this.stackSiblings)
     switch (this.type) {
       case 'employment':
       case 'education':
@@ -285,6 +285,7 @@ export class PanelComponent implements OnInit {
       case 'distinction':
       case 'membership':
       case 'service':
+      case 'editorial-service':
         this._affiliationService
           .updateVisibility(
             this.stackSiblings.reduce(
