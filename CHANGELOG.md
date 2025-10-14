@@ -1,3 +1,9 @@
+## v2.125.2 - 2025-10-14
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.1...v2.125.2)
+
+- [#2658](https://github.com/ORCID/orcid-angular/pull/2658): PD-3082
+
 ## v2.125.1 - 2025-10-13
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.0...v2.125.1)
