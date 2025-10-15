@@ -1,6 +1,9 @@
 @for (
-  research of researchResourceStack?.researchResources; track trackByResearchResourceStack(i,
-  research); let i = $index; let last = $last) {
+  research of researchResourceStack?.researchResources;
+  track trackByResearchResourceStack(i, research);
+  let i = $index;
+  let last = $last
+) {
   @if (isPreferred(research) || displayTheStack) {
     <app-panel
       panelId="research-resource-stack"
@@ -9,9 +12,9 @@
       class="top-bar"
       [elements]="research"
       [type]="'research-resources'"
-    [ngStyle]="{
-      'z-index': researchResourceStack.researchResources.length - i
-    }"
+      [ngStyle]="{
+        'z-index': researchResourceStack.researchResources.length - i,
+      }"
       [ngClass]="{ last: last }"
       [editable]="false"
       [openState]="false"
@@ -22,7 +25,7 @@
       [isPublicRecord]="isPublicRecord"
       [stackedHeader]="!platform.columns12"
       [panelTitle]="research.title"
-      >
+    >
       <h4 header class="research-resources-title">
         <b>
           {{ research.title }}
@@ -32,7 +35,7 @@
         <app-research-resource
           [isPublicRecord]="isPublicRecord"
           [researchResource]="research"
-          >
+        >
         </app-research-resource>
       }
       <app-panel-source
@@ -44,16 +47,16 @@
         [stackLength]="researchResourceStack.researchResources.length"
         [(displayTheStack)]="displayTheStack"
         (makePrimary)="makePrimaryCard(research)"
-      [topPanelOfTheStackMode]="
-        stackPanelsDisplay[research.putCode].topPanelOfTheStack
-      "
+        [topPanelOfTheStackMode]="
+          stackPanelsDisplay[research.putCode].topPanelOfTheStack
+        "
         [isPublicRecord]="isPublicRecord"
         (topPanelOfTheStackModeChange)="changeTopPanelOfTheStack(research)"
         [type]="'research-resources'"
         [item]="research"
         [panelTitle]="research.title"
         [userRecord]="userRecord"
-        >
+      >
       </app-panel-source>
     </app-panel>
   }

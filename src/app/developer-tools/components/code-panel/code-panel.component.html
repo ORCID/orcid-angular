@@ -5,21 +5,21 @@
         mat-icon-button
         (click)="swapOpenState()"
         class="expand_more"
-      [attr.aria-label]="
-        expandAriaLabel + ' ' + title + ' ' + exampleCodeAriaLabel
-      "
-        >
+        [attr.aria-label]="
+          expandAriaLabel + ' ' + title + ' ' + exampleCodeAriaLabel
+        "
+      >
         <mat-icon>expand_less</mat-icon>
       </button>
     }
     @if (openState) {
       <button
-      [attr.aria-label]="
-        collapseAriaLabel + ' ' + title + ' ' + exampleCodeAriaLabel
-      "
+        [attr.aria-label]="
+          collapseAriaLabel + ' ' + title + ' ' + exampleCodeAriaLabel
+        "
         mat-icon-button
         (click)="swapOpenState()"
-        >
+      >
         <mat-icon>expand_more</mat-icon>
       </button>
     }

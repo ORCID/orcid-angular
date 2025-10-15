@@ -1,6 +1,9 @@
 @for (
-  work of workStack?.works; track trackByWorkStack(i,
-  work); let i = $index; let last = $last) {
+  work of workStack?.works;
+  track trackByWorkStack(i, work);
+  let i = $index;
+  let last = $last
+) {
   <!-- A PANEL COMPONENT FOR EACH WORK ON THE STACK -->
   @if (isPreferred(work) || displayTheStack) {
     <app-panel
@@ -13,11 +16,11 @@
       [ngClass]="{ last: last }"
       [defaultPutCode]="workStack.defaultPutCode.toString()"
       [putCode]="work.putCode.value"
-    [visibility]="
-      isPreferred(work)
-        ? workStack.activeVisibility
-        : work.visibility.visibility
-    "
+      [visibility]="
+        isPreferred(work)
+          ? workStack.activeVisibility
+          : work.visibility.visibility
+      "
       [isPublicRecord]="isPublicRecord"
       [editModalComponent]="worksModal"
       [selectable]="true"
@@ -33,7 +36,7 @@
       [isFeatured]="work.featuredDisplayIndex > 0"
       [panelTitle]="work.title.value"
       [isPreferred]="isPreferred(work)"
-      >
+    >
       <h4 header class="work-title orc-font-body">{{ work.title.value }}</h4>
       <!-- WORK BODY -->
       @if (stackPanelsDisplay[work.putCode.value].topPanelOfTheStack) {
@@ -43,7 +46,7 @@
           [id]="userInfo?.EFFECTIVE_USER_ORCID"
           [isPublicRecord]="isPublicRecord"
           (toggleDetails)="toggleDetails($event)"
-          >
+        >
         </app-work>
       }
       <!-- WORK SOURCE -->
@@ -57,15 +60,15 @@
         [stackLength]="workStack.works.length"
         [(displayTheStack)]="displayTheStack"
         (makePrimary)="makePrimaryCard(work)"
-      [topPanelOfTheStackMode]="
-        stackPanelsDisplay[work.putCode.value].topPanelOfTheStack
-      "
+        [topPanelOfTheStackMode]="
+          stackPanelsDisplay[work.putCode.value].topPanelOfTheStack
+        "
         [isPublicRecord]="isPublicRecord"
         (topPanelOfTheStackModeChange)="changeTopPanelOfTheStack(work)"
         [type]="'works'"
         [item]="work"
         [panelTitle]="work.title.value"
-        >
+      >
       </app-panel-source>
     </app-panel>
   }

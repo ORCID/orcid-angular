@@ -88,7 +88,7 @@
     "karma-chrome-launcher": "~3.2",
     "karma-coverage-istanbul-reporter": "^2.1.0",
     "karma-jasmine": "~4.0.0",
-    "prettier": "^2.0.5",
+    "prettier": "^3.6.2",
     "puppeteer": "^23.11.1",
     "rimraf": "^3.0.0",
     "ts-node": "^8.5.2",

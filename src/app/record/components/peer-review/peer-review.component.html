@@ -1,9 +1,7 @@
 @if (subPeerReview?.showDetails) {
   <app-panel-data [borderBottom]="true">
     @if (getPeerReview(subPeerReview.putCode.value); as peerReview) {
-      <app-panel-element
-        [hideVisibility]="false"
-        >
+      <app-panel-element [hideVisibility]="false">
         <div class="details">
           <div>
             <b i18n="@@peerReview.reviewIdentifiers">Review identifier(s)</b>
@@ -14,44 +12,43 @@
           ></app-display-external-ids>
         </div>
         <div class="details">
-          <b i18n="@@peerReview.conveningOrganization"> Convening organization </b>
+          <b i18n="@@peerReview.conveningOrganization">
+            Convening organization
+          </b>
           <div>
-            {{ peerReview?.orgName?.value }} ({{ peerReview?.city?.value
-            }}@if (peerReview?.city?.value && peerReview?.country?.value) {
-            <span
-              >, </span
-              >
-              }{{ peerReview?.country?.value }})
+            {{ peerReview?.orgName?.value }} ({{ peerReview?.city?.value }}
+            @if (peerReview?.city?.value && peerReview?.country?.value) {
+              <span>, </span>
+            }
+            {{ peerReview?.country?.value }})
+          </div>
+        </div>
+        @if (
+          (peerReview?.subjectName?.value && peerReview?.subjectType?.value) ||
+          peerReview?.subjectExternalIdentifier?.externalIdentifierType?.value
+        ) {
+          <div class="details">
+            <b i18n="@@peerReview.reviewSubject"> Review subject </b>
+            <div>
+              @if (peerReview?.subjectName?.value) {
+                {{ peerReview.subjectName.value }}
+              }
+              @if (peerReview?.subjectType?.value) {
+                ({{ peerReview.subjectType.value }})
+              }
+              @if (peerReview?.subjectContainerName?.value) {
+                <div>
+                  {{ peerReview.subjectContainerName.value }}
+                </div>
+              }
+              <app-display-external-ids
+                [externalIdentifier]="peerReview?.subjectExternalIdentifier"
+                [noBoldTitle]="true"
+              ></app-display-external-ids>
             </div>
           </div>
-          @if (
-            (peerReview?.subjectName?.value && peerReview?.subjectType?.value) ||
-            peerReview?.subjectExternalIdentifier?.externalIdentifierType?.value
-            ) {
-            <div
-              class="details"
-              >
-              <b i18n="@@peerReview.reviewSubject"> Review subject </b>
-              <div>
-                @if (peerReview?.subjectName?.value) {
-                  {{ peerReview.subjectName.value }}
-                }
-                @if (peerReview?.subjectType?.value) {
-                  ({{ peerReview.subjectType.value }})
-                }
-                @if (peerReview?.subjectContainerName?.value) {
-                  <div>
-                    {{ peerReview.subjectContainerName.value }}
-                  </div>
-                }
-                <app-display-external-ids
-                  [externalIdentifier]="peerReview?.subjectExternalIdentifier"
-                  [noBoldTitle]="true"
-                ></app-display-external-ids>
-              </div>
-            </div>
-          }
-        </app-panel-element>
-      }
-    </app-panel-data>
-  }
+        }
+      </app-panel-element>
+    }
+  </app-panel-data>
+}

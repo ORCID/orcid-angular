@@ -3,7 +3,7 @@
   [noSidebar]="true"
   [loading]="loading"
   class="orc-font-body-small"
-  >
+>
   <app-modal-header [closeLabel]="closeLabel">
     <div class="header">
       <div class="featured-works-star">
@@ -29,10 +29,11 @@
         {{ work?.workType?.value | recordWorkTypeLabel }}
         @if (
           work?.contributorsGroupedByOrcid
-          | recordHolderRoles
-          : 'true'
-          : userRecord?.userInfo?.EFFECTIVE_USER_ORCID; as roles
-          ) {
+            | recordHolderRoles
+              : 'true'
+              : userRecord?.userInfo?.EFFECTIVE_USER_ORCID;
+          as roles
+        ) {
           @if (roles) {
             |
             <span class="record-holder">{{ roles }}</span>

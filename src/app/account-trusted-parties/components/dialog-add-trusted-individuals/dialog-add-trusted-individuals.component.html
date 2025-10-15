@@ -9,9 +9,7 @@
   </p>
 
   @if (data['given-names'] || data['family-names']) {
-    <div
-      class="orcid-id-container"
-      >
+    <div class="orcid-id-container">
       <strong> {{ data['given-names'] }} {{ data['family-names'] }}</strong>
       @if (data?.['orcid-id']) {
         <a
@@ -20,35 +18,34 @@
           rel="noreferrer noopener"
           href="{{ baseUrl }}{{ data?.['orcid-id'] }}"
           >https:{{ baseUrl }}{{ data?.['orcid-id'] }}</a
-          >
-        }
-      </div>
-    }
-
-    @if (addByEmailOrOrcid) {
-      <div class="orcid-id-container">
-        <strong>{{ addByEmailOrOrcid }}</strong>
-      </div>
-    }
-
-    <app-modal-footer>
-      <button
-        mat-raised-button
-        color="primary"
-        (click)="ok()"
-        id="cy-add-as-trusted-individual"
-        i18n="@@account.addAsTrustedIndividuals"
         >
+      }
+    </div>
+  }
+  @if (addByEmailOrOrcid) {
+    <div class="orcid-id-container">
+      <strong>{{ addByEmailOrOrcid }}</strong>
+    </div>
+  }
+
+  <app-modal-footer>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="ok()"
+      id="cy-add-as-trusted-individual"
+      i18n="@@account.addAsTrustedIndividuals"
+    >
       Add as trusted individual
     </button>
-      <button
-        mat-stroked-button
-        color="primary"
-        (click)="cancel()"
-        id="cy-cancell"
-        i18n="@@shared.cancel"
-        >
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="cancel()"
+      id="cy-cancell"
+      i18n="@@shared.cancel"
+    >
       Cancel
     </button>
-    </app-modal-footer></app-modal
-    >
+  </app-modal-footer></app-modal
+>

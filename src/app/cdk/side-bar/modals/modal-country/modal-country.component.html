@@ -1,192 +1,194 @@
 <app-modal
   [loading]="loadingCountries || loadingCountryCodes"
   [noSidebar]="true"
-  >
+>
   <app-modal-header [closeLabel]="ariaLabelClose" i18n="@@side-bar.countries"
     >Countries</app-modal-header
+  >
+  <app-modal-footer>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="saveEvent()"
+      i18n="@@shared.saveChanges"
+      id="save-countries-button"
+      [attr.aria-label]="ariaLabelSave"
     >
-    <app-modal-footer>
-      <button
-        mat-raised-button
-        color="primary"
-        (click)="saveEvent()"
-        i18n="@@shared.saveChanges"
-        id="save-countries-button"
-        [attr.aria-label]="ariaLabelSave"
-        >
       Save changes
     </button>
-      <button
-        mat-stroked-button
-        color="primary"
-        (click)="closeEvent()"
-        i18n="@@shared.cancel"
-        id="cancel-countries-button"
-        [attr.aria-label]="ariaLabelCancel"
-        >
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="closeEvent()"
+      i18n="@@shared.cancel"
+      id="cancel-countries-button"
+      [attr.aria-label]="ariaLabelCancel"
+    >
       Cancel
     </button>
-    </app-modal-footer>
+  </app-modal-footer>
 
-    <div class="container no-padding" [formGroup]="countryForm">
-      <div class="row">
-        <div class="col no-gutters">
-          <p
-            class="orc-font-body-small"
-            i18n="@@side-bar.countriesOrLocationsDescription"
-            >
+  <div class="container no-padding" [formGroup]="countryForm">
+    <div class="row">
+      <div class="col no-gutters">
+        <p
+          class="orc-font-body-small"
+          i18n="@@side-bar.countriesOrLocationsDescription"
+        >
           Add countries or locations to your ORCID record to highlight where you
           conduct your research or where your research is focused. You can add
           as many countries or locations as you want.
         </p>
-        </div>
       </div>
-      @if (countries?.length > 0) {
-        <div class="row">
-          <h2
-            class="col no-gutters orc-font-body"
-            i18n="@@side-bar.myCountriesAndLocations"
-            >
+    </div>
+    @if (countries?.length > 0) {
+      <div class="row">
+        <h2
+          class="col no-gutters orc-font-body"
+          i18n="@@side-bar.myCountriesAndLocations"
+        >
           My countries/locations
         </h2>
-        </div>
-        <hr class="dashed-line" />
-        <section
-          id="my-countries"
-          class="row country-list"
-          id="country-dropList"
-          cdkDropList
-          (cdkDropListDropped)="drop($event)"
+      </div>
+      <hr class="dashed-line" />
+      <section
+        id="my-countries"
+        class="row country-list"
+        id="country-dropList"
+        cdkDropList
+        (cdkDropListDropped)="drop($event)"
+      >
+        @for (country of countries; track country; let i = $index) {
+          <div
+            cdkDrag
+            class="row country-box"
+            [ngStyle]="{ direction: screenDirection }"
+            [formGroupName]="country.putCode"
+            [attr.id]="'draggable-' + i"
           >
-          @for (country of countries; track country; let i = $index) {
+            <div class="row drag-placeholder" *cdkDragPlaceholder></div>
             <div
-              cdkDrag
-              class="row country-box"
-              [ngStyle]="{ direction: screenDirection }"
-              [formGroupName]="country.putCode"
-              [attr.id]="'draggable-' + i"
-              >
-              <div class="row drag-placeholder" *cdkDragPlaceholder></div>
-              <div
-                class="row country-input-line"
-                [ngClass]="{ 'no-wrap': !isMobile }"
-                >
-                <div class="col l12 m8 s4 top no-wrap no-gutters input-container">
-                  <img
-                    cdkDragHandle
-                    src="./assets/vectors/draggable.svg"
-                    aria-label="drag handle"
-                    />
-                  <!-- -->
-                  @if (!(country.source && country.source !== this.id)) {
-                    <mat-form-field
-                      appearance="outline"
-                      class="mat-form-field-min"
-                      [ngClass]="{ 'two-line-hint': isMobile }"
-                      [attr.id]="'cy-country-' + i"
-                      >
-                      <mat-select
-                        [aria-label]="ariaLabelSelect"
-                        #countrySelect
-                        id="cy-country-select-{{ i }}"
-                        formControlName="country"
-                        placeholder=" {{ ngOrcidCountry }}"
-                        >
-                        @for (
-                          countryCode of countryCodes | sortBy : 'asc' : 'key'
-                          ; track
-                          countryCode) {
-                          <mat-option [value]="countryCode.value">
-                            {{ countryCode.key }}
-                          </mat-option>
-                        }
-                      </mat-select>
-                      @if (country.putCode.indexOf('new') < 0) {
-                        <mat-hint>
-                          <app-source-hit
-                            [createdDate]="countriesMap[country.putCode].createdDate"
-                            [source]="country.sourceName || country.source"
-                    [assertion]="
-                      country.assertionOriginName ||
-                      country.assertionOriginOrcid
-                    "
-                          ></app-source-hit>
-                        </mat-hint>
-                      }
-                    </mat-form-field>
-                  }
-                  @if (country.source && country.source !== this.id) {
-                    <mat-form-field
-                      appearance="outline"
-                      class="mat-form-field-min description read-only"
-                      >
-                      <input
-                        [readonly]="true"
-                        class="cy-description-input"
-                        #descriptionInput
-                        [attr.aria-label]="ariaLabelCountryLocationReadOnly"
-                        matInput
-                        [ngClass]="{ 'website-input': screenDirection === 'rtl' }"
-                        [value]="country.countryName || ''"
-                        />
-                      @if (country.putCode.indexOf('new') < 0) {
-                        <mat-hint>
-                          <app-source-hit
-                            [createdDate]="countriesMap[country.putCode].createdDate"
-                            [source]="country.sourceName || country.source"
-                    [assertion]="
-                      country.assertionOriginName ||
-                      country.assertionOriginOrcid
-                    "
-                          ></app-source-hit>
-                        </mat-hint>
-                      }
-                    </mat-form-field>
-                  }
-                </div>
-                <div class="col no-wrap actions-wrapper no-gutters">
-                  <app-visibility-selector
-                    formControlName="visibility"
-                    [itemTitle]="country.countryName || ''"
-                  ></app-visibility-selector>
-                  <button
-                    (click)="deleteCountry(country.putCode)"
-                    mat-icon-button
-                    class="delete-button"
-                [attr.aria-label]="
-                  ariaLabelDelete + ' ' + (country.countryName || '')
-                "
-                    >
-                    <mat-icon
-                      class="material-icons-outlined extra-large-material-icon"
-                      >delete
-                    </mat-icon>
-                  </button>
-                </div>
-              </div>
-              <hr class="dashed-line" />
-            </div>
-          }
-        </section>
-      }
-      <div class="row">
-        <a class="col add-more no-gutters" (click)="addCountry()" id="add-link">
-          <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
-          <span class="mat-subtitle-2">
-            @if (countries?.length === 0) {
-              <ng-container
-                i18n="@@side-bar.addCountryOrLocation"
-                >Add a country or location</ng-container
-                >
-              }
-              @if (countries?.length !== 0) {
-                <ng-container
-                  i18n="@@side-bar.addAnotherCountryOrLocation"
-                  >Add another country or location</ng-container
+              class="row country-input-line"
+              [ngClass]="{ 'no-wrap': !isMobile }"
+            >
+              <div class="col l12 m8 s4 top no-wrap no-gutters input-container">
+                <img
+                  cdkDragHandle
+                  src="./assets/vectors/draggable.svg"
+                  aria-label="drag handle"
+                />
+                <!-- -->
+                @if (!(country.source && country.source !== this.id)) {
+                  <mat-form-field
+                    appearance="outline"
+                    class="mat-form-field-min"
+                    [ngClass]="{ 'two-line-hint': isMobile }"
+                    [attr.id]="'cy-country-' + i"
                   >
+                    <mat-select
+                      [aria-label]="ariaLabelSelect"
+                      #countrySelect
+                      id="cy-country-select-{{ i }}"
+                      formControlName="country"
+                      placeholder=" {{ ngOrcidCountry }}"
+                    >
+                      @for (
+                        countryCode of countryCodes | sortBy: 'asc' : 'key';
+                        track countryCode
+                      ) {
+                        <mat-option [value]="countryCode.value">
+                          {{ countryCode.key }}
+                        </mat-option>
+                      }
+                    </mat-select>
+                    @if (country.putCode.indexOf('new') < 0) {
+                      <mat-hint>
+                        <app-source-hit
+                          [createdDate]="
+                            countriesMap[country.putCode].createdDate
+                          "
+                          [source]="country.sourceName || country.source"
+                          [assertion]="
+                            country.assertionOriginName ||
+                            country.assertionOriginOrcid
+                          "
+                        ></app-source-hit>
+                      </mat-hint>
+                    }
+                  </mat-form-field>
                 }
-              </span>
-            </a>
+                @if (country.source && country.source !== this.id) {
+                  <mat-form-field
+                    appearance="outline"
+                    class="mat-form-field-min description read-only"
+                  >
+                    <input
+                      [readonly]="true"
+                      class="cy-description-input"
+                      #descriptionInput
+                      [attr.aria-label]="ariaLabelCountryLocationReadOnly"
+                      matInput
+                      [ngClass]="{ 'website-input': screenDirection === 'rtl' }"
+                      [value]="country.countryName || ''"
+                    />
+                    @if (country.putCode.indexOf('new') < 0) {
+                      <mat-hint>
+                        <app-source-hit
+                          [createdDate]="
+                            countriesMap[country.putCode].createdDate
+                          "
+                          [source]="country.sourceName || country.source"
+                          [assertion]="
+                            country.assertionOriginName ||
+                            country.assertionOriginOrcid
+                          "
+                        ></app-source-hit>
+                      </mat-hint>
+                    }
+                  </mat-form-field>
+                }
+              </div>
+              <div class="col no-wrap actions-wrapper no-gutters">
+                <app-visibility-selector
+                  formControlName="visibility"
+                  [itemTitle]="country.countryName || ''"
+                ></app-visibility-selector>
+                <button
+                  (click)="deleteCountry(country.putCode)"
+                  mat-icon-button
+                  class="delete-button"
+                  [attr.aria-label]="
+                    ariaLabelDelete + ' ' + (country.countryName || '')
+                  "
+                >
+                  <mat-icon
+                    class="material-icons-outlined extra-large-material-icon"
+                    >delete
+                  </mat-icon>
+                </button>
+              </div>
+            </div>
+            <hr class="dashed-line" />
           </div>
-        </div>
-      </app-modal>
+        }
+      </section>
+    }
+    <div class="row">
+      <a class="col add-more no-gutters" (click)="addCountry()" id="add-link">
+        <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
+        <span class="mat-subtitle-2">
+          @if (countries?.length === 0) {
+            <ng-container i18n="@@side-bar.addCountryOrLocation"
+              >Add a country or location</ng-container
+            >
+          }
+          @if (countries?.length !== 0) {
+            <ng-container i18n="@@side-bar.addAnotherCountryOrLocation"
+              >Add another country or location</ng-container
+            >
+          }
+        </span>
+      </a>
+    </div>
+  </div>
+</app-modal>

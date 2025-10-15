@@ -12,11 +12,11 @@
           <div
             [ngClass]="{
               'orc-font-body-small': url,
-              'orc-font-body': !url
+              'orc-font-body': !url,
             }"
             class="orc-font-body clickable row title-container"
             (click)="collapse()"
-            >
+          >
             <h3>
               {{ title }}
               @if (type?.value === 'two-factor') {
@@ -38,65 +38,58 @@
                 [href]="url"
                 rel="noopener noreferrer"
                 target="_blank"
-                >
-                {{ url }}</a
-                >
-              }
-            </div>
-
-            @if (accessGranted && !isMobile) {
-              <div class="text-container">
-                <div class="orc-font-body clickable" (click)="collapse()">
-                  <strong>
-                    <ng-container i18n="@@account.accessGrantedDate"
-                      >Access granted:
-                </ng-container> </strong
-                    >{{ accessGranted | monthDayYearDateToString }}
-                  </div>
-                </div>
-              }
-            </div>
-          </div>
-          @if (revokeAccessButton && routeUrl !== null) {
-            <div
-              class="actions-container orc-font-body-small"
               >
-              <mat-icon class="warn pointer">block</mat-icon>
-              <a
-                class="underline warn"
-                (click)="revokeAccessButtonClicked()"
-                i18n="@@account.revokeAccess"
-                [routerLink]="routeUrl"
-                >
-          Revoke access</a
-                >
-              </div>
+                {{ url }}</a
+              >
             }
-            @if (revokeAccessButton && routeUrl == null) {
-              <div
-                class="actions-container orc-font-body-small"
-                >
-                <mat-icon class="warn pointer">block</mat-icon>
-                <a
-                  class="underline warn"
-                  (click)="revokeAccessButtonClicked()"
-                  i18n="@@account.revokeAccess"
-                  >
-          Revoke access</a
-                  >
-                </div>
-              }
+          </div>
+
+          @if (accessGranted && !isMobile) {
+            <div class="text-container">
+              <div class="orc-font-body clickable" (click)="collapse()">
+                <strong>
+                  <ng-container i18n="@@account.accessGrantedDate"
+                    >Access granted:
+                  </ng-container> </strong
+                >{{ accessGranted | monthDayYearDateToString }}
+              </div>
             </div>
-          </div>
+          }
         </div>
-        @if (loading) {
-          <mat-progress-bar
-            mode="indeterminate"
-            color="accent"
-          ></mat-progress-bar>
-        }
-        @if (expandedContent) {
-          <div class="col s4 m8 l12 content no-gutters">
-            <ng-content></ng-content>
-          </div>
-        }
+      </div>
+      @if (revokeAccessButton && routeUrl !== null) {
+        <div class="actions-container orc-font-body-small">
+          <mat-icon class="warn pointer">block</mat-icon>
+          <a
+            class="underline warn"
+            (click)="revokeAccessButtonClicked()"
+            i18n="@@account.revokeAccess"
+            [routerLink]="routeUrl"
+          >
+            Revoke access</a
+          >
+        </div>
+      }
+      @if (revokeAccessButton && routeUrl == null) {
+        <div class="actions-container orc-font-body-small">
+          <mat-icon class="warn pointer">block</mat-icon>
+          <a
+            class="underline warn"
+            (click)="revokeAccessButtonClicked()"
+            i18n="@@account.revokeAccess"
+          >
+            Revoke access</a
+          >
+        </div>
+      }
+    </div>
+  </div>
+</div>
+@if (loading) {
+  <mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
+}
+@if (expandedContent) {
+  <div class="col s4 m8 l12 content no-gutters">
+    <ng-content></ng-content>
+  </div>
+}

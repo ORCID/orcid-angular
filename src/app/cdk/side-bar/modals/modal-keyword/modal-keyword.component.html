@@ -10,7 +10,7 @@
       i18n="@@shared.saveChanges"
       id="save-keywords-button"
       [attr.aria-label]="ariaLabelSave"
-      >
+    >
       Save changes
     </button>
     <button
@@ -20,7 +20,7 @@
       i18n="@@shared.cancel"
       id="cancel-keywords-button"
       [attr.aria-label]="ariaLabelCancel"
-      >
+    >
       Cancel
     </button>
   </app-modal-footer>
@@ -28,7 +28,7 @@
     class="container no-padding"
     [formGroup]="keywordsForm"
     (ngSubmit)="onSubmit()"
-    >
+  >
     <section id="my-keywords">
       <p class="orc-font-body-small" i18n="@@topBar.keywordsAre">
         Keywords are words or phrases which describe your research activities.
@@ -47,73 +47,76 @@
           id="keyword-dropList"
           cdkDropList
           (cdkDropListDropped)="drop($event)"
-          >
+        >
           @for (keyword of keywords; track keyword) {
             <div
               cdkDrag
               class="row keyword-box"
               [ngStyle]="{ direction: screenDirection }"
               [formGroupName]="keyword.putCode"
-              >
+            >
               <div class="row drag-placeholder" *cdkDragPlaceholder></div>
               <div
                 class="row keywords-input-line"
                 [ngClass]="{ 'no-wrap': !isMobile }"
+              >
+                <div
+                  class="col l12 m8 s4 top no-wrap no-gutters input-container"
                 >
-                <div class="col l12 m8 s4 top no-wrap no-gutters input-container">
                   <div class="image-container">
                     <img
                       class="icon-drag"
                       cdkDragHandle
                       src="./assets/vectors/draggable.svg"
                       aria-label="drag handle"
-                      />
+                    />
                   </div>
                   <div class="row">
                     <mat-form-field
                       appearance="outline"
                       class="mat-form-field-min"
-                    [ngClass]="{
-                      'read-only': keyword.source && keyword.source !== this.id
-                    }"
-                      >
+                      [ngClass]="{
+                        'read-only':
+                          keyword.source && keyword.source !== this.id,
+                      }"
+                    >
                       <input
-                        [readonly]="keyword.source && keyword.source !== this.id"
+                        [readonly]="
+                          keyword.source && keyword.source !== this.id
+                        "
                         class="content-input"
                         matInput
                         #keywordInput
                         formControlName="content"
                         placeholder=" {{ ngOrcidKeyword }}"
-                        [ngClass]="{ 'keyword-input': screenDirection === 'rtl' }"
-                      [attr.aria-label]="
-                        keyword.putCode.indexOf('new') < 0
-                          ? ariaLabelKeyword
-                          : ariaLabelNewKeyword
-                      "
-                        />
+                        [ngClass]="{
+                          'keyword-input': screenDirection === 'rtl',
+                        }"
+                        [attr.aria-label]="
+                          keyword.putCode.indexOf('new') < 0
+                            ? ariaLabelKeyword
+                            : ariaLabelNewKeyword
+                        "
+                      />
                       @if (keyword.putCode.indexOf('new') < 0) {
-                        <mat-hint
-                          class="mat-caption"
-                          >
+                        <mat-hint class="mat-caption">
                           <app-source-hit
                             [createdDate]="keyword.createdDate"
                             [source]="keyword.sourceName || keyword.source"
-                        [assertion]="
-                          keyword.assertionOriginName ||
-                          keyword.assertionOriginOrcid
-                        "
+                            [assertion]="
+                              keyword.assertionOriginName ||
+                              keyword.assertionOriginOrcid
+                            "
                           ></app-source-hit>
                         </mat-hint>
                       }
                       @if (
                         keywordsForm.get(keyword.putCode)?.get('content')
-                        ?.errors?.maxlength
-                        ) {
-                        <mat-error
-                          i18n="@@topBar.keywordMaxLength"
-                          >
-                      Must be less than 100 characters
-                    </mat-error>
+                          ?.errors?.maxlength
+                      ) {
+                        <mat-error i18n="@@topBar.keywordMaxLength">
+                          Must be less than 100 characters
+                        </mat-error>
                       }
                     </mat-form-field>
                   </div>
@@ -121,26 +124,26 @@
                 <div
                   class="col no-wrap actions-wrapper no-gutters"
                   [ngClass]="{ privacy: !platform.columns12 }"
-                  >
+                >
                   <app-visibility-selector
                     [ngClass]="{ selector: !platform.columns12 }"
                     formControlName="visibility"
-                  [itemTitle]="
-                    keywordsForm.get(keyword.putCode)?.get('content').value ||
-                    ''
-                  "
+                    [itemTitle]="
+                      keywordsForm.get(keyword.putCode)?.get('content').value ||
+                      ''
+                    "
                   ></app-visibility-selector>
                   <button
                     (click)="deleteKeyword(keyword.putCode)"
                     mat-icon-button
                     class="delete-button"
-                  [attr.aria-label]="
-                    ariaLabelDelete +
-                    ' ' +
-                    (keywordsForm.get(keyword.putCode)?.get('content').value ||
-                      '')
-                  "
-                    >
+                    [attr.aria-label]="
+                      ariaLabelDelete +
+                      ' ' +
+                      (keywordsForm.get(keyword.putCode)?.get('content')
+                        .value || '')
+                    "
+                  >
                     <mat-icon
                       class="material-icons-outlined extra-large-material-icon"
                       >delete
@@ -158,22 +161,18 @@
           id="add-keyword"
           class="col add-more no-gutters"
           (click)="addKeyword()"
-          >
+        >
           <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
           <span class="mat-subtitle-2">
             @if (keywords?.length === 0) {
-              <ng-container
-                i18n="@@topBar.addKeyword"
-                >
-              Add a keyword
-            </ng-container>
+              <ng-container i18n="@@topBar.addKeyword">
+                Add a keyword
+              </ng-container>
             }
             @if (keywords?.length !== 0) {
-              <ng-container
-                i18n="@@topBar.addAnotherKeyword"
-                >
-              Add another keyword
-            </ng-container>
+              <ng-container i18n="@@topBar.addAnotherKeyword">
+                Add another keyword
+              </ng-container>
             }
           </span>
         </a>

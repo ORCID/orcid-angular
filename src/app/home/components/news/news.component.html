@@ -13,9 +13,9 @@
               (click)="moreNews()"
               color="primary"
               i18n="#upperCase@@home.more_news"
-              >
-            MORE NEWS
-          </button>
+            >
+              MORE NEWS
+            </button>
           }
         </div>
       </div>
@@ -26,7 +26,11 @@
     @if (!news) {
       <div class="container">
         <div class="row horizontal-center">
-          <mat-progress-spinner color="primary" mode="indeterminate" class="col">
+          <mat-progress-spinner
+            color="primary"
+            mode="indeterminate"
+            class="col"
+          >
           </mat-progress-spinner>
         </div>
       </div>
@@ -41,7 +45,10 @@
               <div class="col mat-caption l-auto m8" dir="ltr">
                 {{ new.pubDate[0].slice(0, 22) }}
               </div>
-              <p class="col mat-headline-5 l12 m8 s4 horizontal-center" dir="ltr">
+              <p
+                class="col mat-headline-5 l12 m8 s4 horizontal-center"
+                dir="ltr"
+              >
                 {{ new.title }}
               </p>
               <button
@@ -49,10 +56,10 @@
                 mat-raised-button
                 (click)="navigate(new.link)"
                 color="primary"
-                >
+              >
                 <div class="button-text-container" i18n="@@ngOrcid.fullOrcid">
-                FULL ARTICLE
-              </div>
+                  FULL ARTICLE
+                </div>
               </button>
             </div>
           </div>
@@ -69,9 +76,9 @@
           (click)="moreNews()"
           color="primary"
           i18n="@@ngOrcid.moreNews"
-          >
-        MORE NEWS
-      </button>
+        >
+          MORE NEWS
+        </button>
       </div>
     }
   </div>

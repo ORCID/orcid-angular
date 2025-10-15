@@ -3,7 +3,7 @@
     id="peer-reviews"
     role="region"
     [attr.aria-label]="regionPeerReviews"
-    >
+  >
     <app-panels
       class="row"
       [title]="ngOrcidPeerReview"
@@ -18,7 +18,7 @@
       [sortType]="'order'"
       [sortDirection]="'asc'"
       (sort)="sortEvent($event)"
-      >
+    >
       @if (peerReviews.length > 0) {
         @for (peerReview of peerReviews; track peerReview) {
           <app-panel
@@ -38,17 +38,17 @@
             [visibilityError]="peerReview.visibilityError"
             [panelTitle]="peerReview.name"
             #peerReviewPanelComponent
-            >
+          >
             <div header>
               <ng-container i18n="@@peerReview.reviewActivity">
-            Review activity for
-          </ng-container>
+                Review activity for
+              </ng-container>
               <b>
                 {{ peerReview.name }}
               </b>
               ({{
-              peerReview?.peerReviewDuplicateGroups?.length ||
-              peerReview?.duplicated
+                peerReview?.peerReviewDuplicateGroups?.length ||
+                  peerReview?.duplicated
               }})
             </div>
             <app-panel-data class="orc-font-body-small">
@@ -58,7 +58,7 @@
                     color="primary"
                     mode="indeterminate"
                     class="col"
-                    >
+                  >
                   </mat-progress-spinner>
                 </div>
               }
@@ -67,7 +67,9 @@
                   <div class="description">
                     <p>
                       <span class="capitalize">
-                        {{ peerReview.type + (peerReview.description ? ',' : '') }}
+                        {{
+                          peerReview.type + (peerReview.description ? ',' : '')
+                        }}
                       </span>
                       {{ peerReview.description }}
                     </p>
@@ -79,23 +81,27 @@
                           href="{{ peerReview.url }}"
                           target="_blank"
                           rel="noopener noreferrer"
-                          >
+                        >
                           {{ peerReview.groupIdValue }}
                         </a>
                       </p>
                     }
                   </div>
                 </app-panel-element>
-                <app-panel-element class="nested-panels" [hideVisibility]="false">
+                <app-panel-element
+                  class="nested-panels"
+                  [hideVisibility]="false"
+                >
                   <div nested-panels>
                     @for (
-                      group of peerReview.peerReviewDuplicateGroups; track trackByPeerReviewGroup($index,
-                      group)) {
+                      group of peerReview.peerReviewDuplicateGroups;
+                      track trackByPeerReviewGroup($index, group)
+                    ) {
                       <app-peer-review-stack
                         [userRecord]="userRecord"
                         [isPublicRecord]="isPublicRecord"
                         [peerReviewStack]="group"
-                        >
+                      >
                       </app-peer-review-stack>
                     }
                   </div>
@@ -108,18 +114,18 @@
       @if (peerReviews.length === 0 && IS_QA) {
         <div class="orc-font-body-small">
           <p class="empty" i18n="@@peerReview.description">
-          Connect to trusted organizations to automatically add your peer review
-          activity to your ORCID record.
-        </p>
+            Connect to trusted organizations to automatically add your peer
+            review activity to your ORCID record.
+          </p>
           <a
             class="underline"
             rel="noopener noreferrer"
             target="_blank"
             href="https://support.orcid.org/hc/en-us/articles/360006971333-Peer-Review"
             i18n="@@peerReview.learnMore"
-            >
-          Learn more about how peer reviews are added to your ORCID record
-        </a>
+          >
+            Learn more about how peer reviews are added to your ORCID record
+          </a>
         </div>
       }
     </app-panels>

@@ -4,7 +4,7 @@
 <app-panel-data
   class="default-data-loaded orc-font-body-small"
   [borderBottom]="true"
-  >
+>
   <div>
     <div class="general-data">
       @if (affiliation?.startDate?.year) {
@@ -12,118 +12,113 @@
         @if (showEndDateRange) {
           <ng-container i18n="@@shared.to">to</ng-container>
           @if (affiliation.endDate) {
-            {{
-            affiliation.endDate | monthDayYearDateToString
-            }}
+            {{ affiliation.endDate | monthDayYearDateToString }}
           }
         }
         @if (
           !affiliation.endDate.year &&
           affiliation.affiliationType?.value !== 'distinction'
-          ) {
-          <ng-container
-            i18n="@@shared.present"
-            >present</ng-container
-            >
-          }
+        ) {
+          <ng-container i18n="@@shared.present">present</ng-container>
         }
-        @if (!affiliation?.startDate?.year && affiliation?.endDate) {
-          @if (affiliation.endDate?.year) {
-            {{ affiliation.endDate | monthDayYearDateToString }}
-          }
+      }
+      @if (!affiliation?.startDate?.year && affiliation?.endDate) {
+        @if (affiliation.endDate?.year) {
+          {{ affiliation.endDate | monthDayYearDateToString }}
         }
-        @if (
-          (affiliation?.startDate?.year || affiliation?.endDate?.year) &&
-          affiliation?.roleTitle?.value
-          ) {
-          |
-        }
-        {{ affiliation?.roleTitle?.value }}
-        @if (affiliation?.departmentName?.value) {
-          ({{ affiliation.departmentName.value }})
-        }
-      </div>
-      <div class="type">
-        {{ affiliation?.affiliationType?.value | affiliationTypeLabel }}
-      </div>
-      <app-display-external-ids
-        [externalIdentifiers]="affiliation?.affiliationExternalIdentifiers"
-      ></app-display-external-ids>
+      }
+      @if (
+        (affiliation?.startDate?.year || affiliation?.endDate?.year) &&
+        affiliation?.roleTitle?.value
+      ) {
+        |
+      }
+      {{ affiliation?.roleTitle?.value }}
+      @if (affiliation?.departmentName?.value) {
+        ({{ affiliation.departmentName.value }})
+      }
     </div>
+    <div class="type">
+      {{ affiliation?.affiliationType?.value | affiliationTypeLabel }}
+    </div>
+    <app-display-external-ids
+      [externalIdentifiers]="affiliation?.affiliationExternalIdentifiers"
+    ></app-display-external-ids>
+  </div>
 
-    <div align-end>
-      @if (!panelDetailsState?.state) {
-        <a
-          class="underline"
-          (click)="toggleDetails.next(affiliation)"
-          i18n="@@shared.showMoreDetail"
-      [attr.aria-label]="
-        affiliation?.affiliationType.value
-          | appPanelActivityActionAriaLabel
-            : 'show'
-            : affiliation?.affiliationName?.value
-      "
-          >Show more detail</a
-          >
-        }
-        @if (panelDetailsState?.state) {
-          <a
-            class="underline"
-            (click)="toggleDetails.next(affiliation)"
-            i18n="@@shared.showLessDetail"
-      [attr.aria-label]="
-        affiliation?.affiliationType.value
-          | appPanelActivityActionAriaLabel
-            : 'hide'
-            : affiliation?.affiliationName?.value
-      "
-            >Show less detail</a
+  <div align-end>
+    @if (!panelDetailsState?.state) {
+      <a
+        class="underline"
+        (click)="toggleDetails.next(affiliation)"
+        i18n="@@shared.showMoreDetail"
+        [attr.aria-label]="
+          affiliation?.affiliationType.value
+            | appPanelActivityActionAriaLabel
+              : 'show'
+              : affiliation?.affiliationName?.value
+        "
+        >Show more detail</a
+      >
+    }
+    @if (panelDetailsState?.state) {
+      <a
+        class="underline"
+        (click)="toggleDetails.next(affiliation)"
+        i18n="@@shared.showLessDetail"
+        [attr.aria-label]="
+          affiliation?.affiliationType.value
+            | appPanelActivityActionAriaLabel
+              : 'hide'
+              : affiliation?.affiliationName?.value
+        "
+        >Show less detail</a
+      >
+    }
+  </div>
+</app-panel-data>
+
+<!-- DATA DISPLAY WHEN "MORE DETAILS" IS CLICKED -->
+@if (panelDetailsState?.state) {
+  <app-panel-data [borderBottom]="true">
+    <!-- ORGANIZATION DISAMBIGUATED IDS-->
+    <app-org-identifier
+      [orgDisambiguated]="orgDisambiguated"
+    ></app-org-identifier>
+    <!-- URL -->
+    @if (affiliation?.url?.value) {
+      <app-display-attribute>
+        <h3 class="orc-font-body-small" i18n="@@shared.url">URL</h3>
+        <div>
+          @if (affiliation.url?.value | isUrl) {
+            <a
+              class="underline"
+              rel="noopener noreferrer"
+              target="_blank"
+              href="{{ affiliation.url.value }}"
             >
+              {{ affiliation.url.value }}
+            </a>
+          }
+          @if (!(affiliation.url?.value | isUrl)) {
+            {{ affiliation.url.value }}
           }
         </div>
-      </app-panel-data>
-
-      <!-- DATA DISPLAY WHEN "MORE DETAILS" IS CLICKED -->
-      @if (panelDetailsState?.state) {
-        <app-panel-data [borderBottom]="true">
-          <!-- ORGANIZATION DISAMBIGUATED IDS-->
-          <app-org-identifier
-            [orgDisambiguated]="orgDisambiguated"
-          ></app-org-identifier>
-          <!-- URL -->
-          @if (affiliation?.url?.value) {
-            <app-display-attribute>
-              <h3 class="orc-font-body-small" i18n="@@shared.url">URL</h3>
-              <div>
-                @if (affiliation.url?.value | isUrl) {
-                  <a
-                    class="underline"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                    href="{{ affiliation.url.value }}"
-                    >
-                    {{ affiliation.url.value }}
-                  </a>
-                }
-                @if (!(affiliation.url?.value | isUrl)) {
-                  {{ affiliation.url.value }}
-                }
-              </div>
-            </app-display-attribute>
-          }
-          <!-- ADDED DATE-->
-          <app-display-attribute>
-            <h3 class="orc-font-body-small" i18n="@@shared.added">Added</h3>
-            <div>
-              {{ affiliation?.createdDate | monthDayYearDateToString }}
-            </div>
-          </app-display-attribute>
-          <!-- LAST MODIFIED  DATE-->
-          <app-display-attribute>
-            <h3 class="orc-font-body-small" i18n="@@shared.lastModified">
-      Last modified
-    </h3>
-            <div>{{ affiliation?.lastModified | monthDayYearDateToString }}</div>
-          </app-display-attribute>
-        </app-panel-data>
-      }
+      </app-display-attribute>
+    }
+    <!-- ADDED DATE-->
+    <app-display-attribute>
+      <h3 class="orc-font-body-small" i18n="@@shared.added">Added</h3>
+      <div>
+        {{ affiliation?.createdDate | monthDayYearDateToString }}
+      </div>
+    </app-display-attribute>
+    <!-- LAST MODIFIED  DATE-->
+    <app-display-attribute>
+      <h3 class="orc-font-body-small" i18n="@@shared.lastModified">
+        Last modified
+      </h3>
+      <div>{{ affiliation?.lastModified | monthDayYearDateToString }}</div>
+    </app-display-attribute>
+  </app-panel-data>
+}

@@ -1,8 +1,11 @@
 <app-settings-panels-data>
   <strong i18n="@@account.accessType">Access type</strong>
-  @for (permissions of trustedOrganization?.scopePaths | keyvalue; track permissions) {
+  @for (
+    permissions of trustedOrganization?.scopePaths | keyvalue;
+    track permissions
+  ) {
     <div>
       {{ permissions.key | scopePathType }}
     </div>
-    }</app-settings-panels-data
-    >
+  }
+</app-settings-panels-data>

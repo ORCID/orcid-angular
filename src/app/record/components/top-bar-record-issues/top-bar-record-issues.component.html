@@ -2,36 +2,33 @@
   <mat-error>
     <mat-icon>error</mat-icon>
     @if (userInfo.IS_DEACTIVATED === 'true' && !userInfo.PRIMARY_RECORD) {
-      <ng-container
-        i18n="@@topBar.deactivatedRecord"
+      <ng-container i18n="@@topBar.deactivatedRecord"
         >This ORCID Record is deactivated
-  </ng-container>
+      </ng-container>
     }
     @if (
       userInfo.IS_DEACTIVATED === 'true' &&
       !userInfo.PRIMARY_RECORD &&
       userInfo.IS_LOCKED === 'true'
-      ) {
-      <br
-        />
+    ) {
+      <br />
     }
     @if (userInfo.IS_LOCKED === 'true') {
-      <ng-container
-        i18n="@@topBar.lockedRecord"
+      <ng-container i18n="@@topBar.lockedRecord"
         >This ORCID Record is locked
-  </ng-container>
+      </ng-container>
     }
     @if (userInfo.PRIMARY_RECORD) {
       <p>
         <ng-container i18n="@@topBar.accountDeprecated">
-      This account has been deprecated, please see account
-    </ng-container>
+          This account has been deprecated, please see account
+        </ng-container>
         <a [href]="userInfo.PRIMARY_RECORD">{{
           'https:' + baseUrl + userInfo.PRIMARY_RECORD
         }}</a>
         <ng-container i18n="@@topBar.accountDeprecated2"
           >for the latest information
-    </ng-container>
+        </ng-container>
       </p>
     }
   </mat-error>

@@ -2,28 +2,25 @@
   @if (!emailVerified && !verifyEmailSend) {
     <app-alert-message>
       <h3 title class="orc-font-body" i18n="@@topBar.thankYouForRegistering">
-      Thank you for registering with ORCID
-    </h3>
+        Thank you for registering with ORCID
+      </h3>
       <ng-container content>
         @if (messageType === 'forManualEditing') {
-          <p
-            class="orc-font-body-small"
-            i18n="@@topBar.weHaveSent"
-            >
-        We have sent verification emails to each of your registered email
-        addresses. You need to verify at least one email address before you can
-        begin adding information manually to your ORCID record.
-      </p>
+          <p class="orc-font-body-small" i18n="@@topBar.weHaveSent">
+            We have sent verification emails to each of your registered email
+            addresses. You need to verify at least one email address before you
+            can begin adding information manually to your ORCID record.
+          </p>
         }
         @if (messageType === 'forCredentials') {
           <p
             class="orc-font-body-small"
             i18n="@@topBar.weHaveSentForCredentials"
-            >
-        We have sent verification emails to each of your registered email
-        addresses. You need to verify at least one email address before you can
-        register your ORCID Public API credentials.
-      </p>
+          >
+            We have sent verification emails to each of your registered email
+            addresses. You need to verify at least one email address before you
+            can register your ORCID Public API credentials.
+          </p>
         }
         <button
           class="mat-button-wrap-text"
@@ -31,27 +28,27 @@
           color="primary"
           i18n="@@topBar.resendVerificationEmail"
           (click)="verifyEmail()"
-          >
-        Resend verification email
-      </button>
+        >
+          Resend verification email
+        </button>
       </ng-container>
     </app-alert-message>
   }
   @if (!emailVerified && verifyEmailSend) {
     <app-alert-message>
       <h3 title class="orc-font-body" i18n="@@side-bar.pleaseVerify">
-      Please verify your email addresses
-    </h3>
+        Please verify your email addresses
+      </h3>
       <ng-container content>
         <p class="orc-font-body-small">
           <ng-container i18n="@@side-bar.youNeedToVerify">
-          You need to verify at least one email address in order to access all
-          of ORCID’s editing features.
-        </ng-container>
+            You need to verify at least one email address in order to access all
+            of ORCID’s editing features.
+          </ng-container>
           <br />
           <ng-container i18n="@@side-bar.youNeedToVerify2">
-          To verify your email address, click the link in the email sent to:
-        </ng-container>
+            To verify your email address, click the link in the email sent to:
+          </ng-container>
         </p>
         <div class="no-wrap orc-font-body-small">
           <p class="email-container">{{ primaryEmail }}</p>
@@ -65,18 +62,17 @@
               href="https://support.orcid.org/hc/articles/360006973793"
               i18n="@@side-bar.knowledge"
               >ORCID help centre
-          </a>
+            </a>
           </p>
         </div>
       </ng-container>
     </app-alert-message>
   }
 }
-
 @if (emailVerified) {
   <app-alert-message type="success">
     <h3 title class="orc-font-body" i18n="@@myOrcidAlerts.emailVerified">
-    Thank you for verifying your email
-  </h3>
+      Thank you for verifying your email
+    </h3>
   </app-alert-message>
 }

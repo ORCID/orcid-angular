@@ -6,11 +6,9 @@
   id="cy-share-panel"
   [title]="titleHtmlCode"
   [loading]="htmlCodeLoading"
-  >
+>
   @if (htmlCode) {
-    <app-settings-sharing-html-code
-      (loading)="htmlCodeLoading = $event"
-      >
+    <app-settings-sharing-html-code (loading)="htmlCodeLoading = $event">
     </app-settings-sharing-html-code>
   }
 </app-settings-panels>
@@ -21,11 +19,9 @@
   id="cy-qr-code-panel"
   [title]="titleQrCode"
   [loading]="qrCodeLoading"
-  >
+>
   @if (qrCode) {
-    <app-settings-sharing-qr-code
-      (loading)="qrCodeLoading = $event"
-      >
+    <app-settings-sharing-qr-code (loading)="qrCodeLoading = $event">
     </app-settings-sharing-qr-code>
   }
 </app-settings-panels>

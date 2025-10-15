@@ -29,16 +29,16 @@
       color="primary"
       id="cy-two-factor-switch"
       (click)="twoFactor()"
-      >
+    >
       @if (!twoFactorState) {
         <ng-container i18n="@@account.turnOnTwoFactor">
-        Turn on two-factor authentication
-      </ng-container>
+          Turn on two-factor authentication
+        </ng-container>
       }
       @if (twoFactorState) {
         <ng-container i18n="@@account.turnOffTwoFactor">
-        Turn off two-factor authentication
-      </ng-container>
+          Turn off two-factor authentication
+        </ng-container>
       }
     </button>
   </div>

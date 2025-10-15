@@ -10,7 +10,7 @@
           rel="noopener noreferrer"
           target="_blank"
           href="https://support.orcid.org/"
-          >
+        >
           {{ data.contactLabel || contactLabel }}
         </a>
       </p>
@@ -35,7 +35,7 @@
                 mat-button
                 color="primary"
                 (click)="gotoNewTab(record['orcid-id'])"
-                >
+              >
                 {{ data.viewRecordLabel || viewRecordLabel }}
               </button>
             </td>
@@ -49,7 +49,7 @@
         color="primary"
         class="mat-button-wrap-text mat-button-font-spaced"
         (click)="denyNewRegistration()"
-        >
+      >
         {{ data.signinLabel || signinLabel }}
       </button>
       <button
@@ -57,7 +57,7 @@
         color="primary"
         class="mat-button-wrap-text mat-button-font-spaced"
         (click)="confirmRegistration()"
-        >
+      >
         {{ data.continueLabel || continueLabel }}
       </button>
     </div>

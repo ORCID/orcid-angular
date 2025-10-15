@@ -51,7 +51,7 @@ export interface PublicGroupedPersonExternalIdentifiers {
       visibility: string
       path?: any
       displayIndex: number
-    }
+    },
   ]
 }
 

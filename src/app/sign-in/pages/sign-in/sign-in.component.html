@@ -6,9 +6,9 @@
           appearance="outlined"
           class="orcid-wizard sign-in-wrapper"
           [ngClass]="{
-            mobile: platform?.columns4
+            mobile: platform?.columns4,
           }"
-          >
+        >
           @if (loading) {
             <mat-progress-bar
               role="heading"
@@ -25,21 +25,21 @@
                 <h1
                   class="orc-font-heading-small"
                   i18n="@@ngOrcid.signin.signInToOrcid"
-                  >
-                Sign in to ORCID
-              </h1>
+                >
+                  Sign in to ORCID
+                </h1>
                 <div class="row">
                   <div class="mat-subtitle-2">
                     <ng-container i18n="@@ngOrcid.signin.dontHaveYourOrcid">
-                    Don't have your ORCID iD yet?
-                  </ng-container>
+                      Don't have your ORCID iD yet?
+                    </ng-container>
                     <a
                       class="row register-now underline"
                       i18n="@@ngOrcid.signin.registerNow"
                       (click)="register()"
                       id="register-button"
                       >Register now
-                  </a>
+                    </a>
                   </div>
                 </div>
               </mat-card-title>
@@ -55,7 +55,7 @@
                 (show2FAEmitter)="show2FAEmitter($event)"
                 (isOauthError)="isOauthError = $event"
                 (errorDescription)="errorDescription = $event"
-                >
+              >
                 @if (!show2FA) {
                   <button
                     mat-raised-button
@@ -65,9 +65,9 @@
                     [disabled]="loading"
                     i18n="@@ngOrcid.signin.signInToOrcid"
                     id="signin-button"
-                    >
-                  Sign in to ORCID
-                </button>
+                  >
+                    Sign in to ORCID
+                  </button>
                 }
               </app-form-sign-in>
               <div class="separator orc-font-body">
@@ -79,7 +79,7 @@
               <app-logged-in
                 [displayName]="displayName"
                 [realUserOrcid]="realUserOrcid"
-                >
+              >
               </app-logged-in>
             }
           </mat-card-content>

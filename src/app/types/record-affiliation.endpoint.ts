@@ -133,9 +133,8 @@ export const AffiliationTypeLabel = {
   [AffiliationType.employment]: $localize`:@@shared.employment:Employment`,
   [AffiliationType.education]: $localize`:@@shared.education:Education`,
   [AffiliationType.qualification]: $localize`:@@shared.qualification:Qualification`,
-  [AffiliationType[
-    'invited-position'
-  ]]: $localize`:@@shared.invitedSentenceCase:Invited position`,
+  [AffiliationType['invited-position']]:
+    $localize`:@@shared.invitedSentenceCase:Invited position`,
   [AffiliationType.distinction]: $localize`:@@shared.distinction:Distinction`,
   [AffiliationType.membership]: $localize`:@@shared.membershipTitle:Membership`,
   [AffiliationType.service]: $localize`:@@shared.service:Service`,

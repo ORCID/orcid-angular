@@ -10,7 +10,7 @@
       color="primary"
       (click)="saveEvent()"
       id="export-button"
-      >
+    >
       <ng-container i18n="@@works.exportSelectedWorksBibtex">
         Export selected works to BibTeX
       </ng-container>
@@ -21,7 +21,7 @@
       (click)="closeEvent()"
       i18n="@@shared.cancel"
       id="cancel-button"
-      >
+    >
       Cancel
     </button>
   </app-modal-footer>
@@ -37,7 +37,7 @@
         target="_blank"
         href="https://support.orcid.org/hc/en-us/articles/360006971453"
         i18n="@@works.findOut"
-        >
+      >
         Find out more on exporting BibTeX files
       </a>
     </div>
@@ -72,26 +72,24 @@
               class="added"
               i18n="@@shared.added"
               [ngClass]="{
-                mobile: isMobile
+                mobile: isMobile,
               }"
-              >
+            >
               Added </strong
-              >:
-              {{ work.createdDate | monthDayYearDateToString }}
-            }
-          </div>
+            >:
+            {{ work.createdDate | monthDayYearDateToString }}
+          }
         </div>
-        <mat-divider class="row"></mat-divider>
-      }
-      @if (!selectedAll && putCodes?.length === 0) {
-        <div
-          class="no-info orc-font-body-small"
-          >
-          <mat-icon>error</mat-icon>
-          <ng-container i18n="@@works.noItemsSelected"
-            >No items selected.
-      </ng-container>
-        </div>
-      }
-    </div>
-  </app-modal>
+      </div>
+      <mat-divider class="row"></mat-divider>
+    }
+    @if (!selectedAll && putCodes?.length === 0) {
+      <div class="no-info orc-font-body-small">
+        <mat-icon>error</mat-icon>
+        <ng-container i18n="@@works.noItemsSelected"
+          >No items selected.
+        </ng-container>
+      </div>
+    }
+  </div>
+</app-modal>

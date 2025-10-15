@@ -7,7 +7,7 @@
         <h1
           class="orc-font-heading-small"
           i18n="@@developerTools.developerTools"
-          >
+        >
           Developer tools
         </h1>
         <a
@@ -16,477 +16,464 @@
           cdkFocusInitial
           class="underline orc-font-body-small"
           >Back to my record</a
-          >
-        </div>
+        >
+      </div>
 
-        <div class="loading-container">
-          @if (this.loading) {
-            <mat-progress-spinner
-              color="primary"
-              mode="indeterminate"
-              class="col"
+      <div class="loading-container">
+        @if (this.loading) {
+          <mat-progress-spinner
+            color="primary"
+            mode="indeterminate"
+            class="col"
+          >
+          </mat-progress-spinner>
+        }
+      </div>
+      @if (developerToolsEnable) {
+        <ng-container [formGroup]="form">
+          @if (!loading) {
+            @if (existingClient?.clientId?.value) {
+              <app-client-secret
+                [clientId]="existingClient.clientId.value"
+                [clientSecret]="existingClient.clientSecret.value"
+                (clientSecretUpdated)="onClientSecretUpdated()"
               >
-            </mat-progress-spinner>
-          }
-        </div>
-        @if (developerToolsEnable) {
-          <ng-container [formGroup]="form">
-            @if (!loading) {
-              @if (existingClient?.clientId?.value) {
-                <app-client-secret
-                  [clientId]="existingClient.clientId.value"
-                  [clientSecret]="existingClient.clientSecret.value"
-                  (clientSecretUpdated)="onClientSecretUpdated()"
-                  >
-                </app-client-secret>
-              }
-              @if (!existingClient?.clientId?.value) {
-                <app-alert-message
-                  type="success"
-                  class="registration-success-panel"
-                  >
-                  <h3 title i18n="@@developerTools.warningDuplicated">
-              You’ve registered for your ORCID Public API credentials
-            </h3>
-                  <div content i18n="@@developerTools.addYourApplicationDetails">
-              Add your application details and one or more redirect URIs in the
-              form below. Once these details are saved we’ll generate your
-              client ID and secret so you can start using the Public API right
-              away.
-            </div>
-                </app-alert-message>
-              }
-              <h2
-                class="orc-font-body-large"
-                i18n="@@developerTools.applicationDetails"
+              </app-client-secret>
+            }
+            @if (!existingClient?.clientId?.value) {
+              <app-alert-message
+                type="success"
+                class="registration-success-panel"
+              >
+                <h3 title i18n="@@developerTools.warningDuplicated">
+                  You’ve registered for your ORCID Public API credentials
+                </h3>
+                <div content i18n="@@developerTools.addYourApplicationDetails">
+                  Add your application details and one or more redirect URIs in
+                  the form below. Once these details are saved we’ll generate
+                  your client ID and secret so you can start using the Public
+                  API right away.
+                </div>
+              </app-alert-message>
+            }
+            <h2
+              class="orc-font-body-large"
+              i18n="@@developerTools.applicationDetails"
+            >
+              Application details
+            </h2>
+            <hr />
+            <div class="row">
+              <label
+                for="displayName"
+                class="row mat-caption"
+                [ngClass]="{
+                  error:
+                    form.controls.displayName?.invalid &&
+                    form.controls.displayName?.touched,
+                }"
+              >
+                <strong i18n="@@developerTools.applicationName"
+                  >Application name</strong
                 >
-            Application details
-          </h2>
-              <hr />
-              <div class="row">
-                <label
-                  for="displayName"
-                  class="row mat-caption"
-              [ngClass]="{
-                error:
-                  form.controls.displayName?.invalid &&
-                  form.controls.displayName?.touched
-              }"
+              </label>
+              <mat-form-field
+                appearance="outline"
+                class="mat-form-field-min"
+                [ngClass]="{ 'two-line-hint': isMobile }"
+              >
+                <input
+                  matInput
+                  formControlName="displayName"
+                  type="text"
+                  id="displayName"
+                />
+                @if (form.hasError('required', 'displayName')) {
+                  <mat-error
+                    i18n="@@developerTools.applicationNameCannotBeEmpty"
                   >
-                  <strong i18n="@@developerTools.applicationName"
-                    >Application name</strong
-                    >
-                  </label>
+                    Application name cannot be empty
+                  </mat-error>
+                }
+                @if (form.hasError('maxlength', 'displayName')) {
+                  <mat-error i18n="@@developerTools.applicationNameMaxLength">
+                    Application name cannot exceed 255 characters.
+                  </mat-error>
+                }
+                <mat-hint i18n="@@developerTools.nameShownToUsers"
+                  >The name shown to users on the OAuth authorization
+                  screen</mat-hint
+                >
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <label
+                for="website"
+                class="row mat-caption"
+                [ngClass]="{
+                  error:
+                    form.controls.website?.invalid &&
+                    form.controls.website?.touched,
+                }"
+              >
+                <strong i18n="@@developerTools.applicationUrl"
+                  >Application URL</strong
+                >
+              </label>
+              <mat-form-field appearance="outline" class="mat-form-field-min">
+                <input
+                  matInput
+                  formControlName="website"
+                  type="text"
+                  id="website"
+                />
+                @if (form.hasError('required', 'website')) {
+                  <mat-error i18n="@@developerTools.websiteNameCannotBeEmpty">
+                    Website name cannot be empty
+                  </mat-error>
+                }
+                @if (form.hasError('pattern', 'website')) {
+                  <mat-error i18n="@@developerTools.invalidWebsite">
+                    Invalid website
+                  </mat-error>
+                }
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <label
+                for="api-description"
+                class="row mat-caption"
+                [ngClass]="{
+                  error:
+                    form.controls.shortDescription?.invalid &&
+                    form.controls.shortDescription?.touched,
+                }"
+              >
+                <strong i18n="@@developerTools.applicationDescription"
+                  >Application description</strong
+                >
+              </label>
+              <mat-form-field appearance="outline" class="mat-form-field-min">
+                <textarea
+                  formControlName="shortDescription"
+                  maxlength="1000"
+                  id="api-description"
+                  matInput
+                  [cdkTextareaAutosize]="true"
+                  cdkAutosizeMinRows="5"
+                  cdkAutosizeMaxRows="1000"
+                >
+                </textarea>
+                @if (form.hasError('required', 'shortDescription')) {
+                  <mat-error i18n="@@developerTools.applicationDescription">
+                    Application description cannot be empty
+                  </mat-error>
+                }
+                @if (form.hasError('maxlength', 'shortDescription')) {
+                  <mat-error i18n="@@developerTools.descriptionNameMaxLength">
+                    Application description cannot exceed 1000 characters.
+                  </mat-error>
+                }
+                <mat-hint i18n="@@developerTools.theDescriptionShown"
+                  >The description shown to users on the OAuth authorization
+                  screen. Maximum 1000 characters.</mat-hint
+                >
+              </mat-form-field>
+            </div>
+            <h2
+              class="orc-font-body-large"
+              i18n="@@developerTools.redirectUris"
+            >
+              Redirect URIs
+            </h2>
+            <hr />
+            <p i18n="@@developerTools.onceTheUserHasAuthorized">
+              Once the user has authorized your application, they will be
+              returned to a URI that you specify. You must provide these URIs in
+              advance or your integration users will experience an error.
+            </p>
+            <app-alert-message class="redirect-uri-notice">
+              <h4
+                title
+                i18n="@@developerTools.pleaseNote"
+                class="orc-font-body-small"
+              >
+                Please note
+              </h4>
+              <ul content>
+                <li>
+                  <ng-container i18n="@@developerTools.only">
+                    Only</ng-container
+                  >
+                  <strong i18n="@@developerTools.httpsURI">HTTPS URIs</strong>
+                  <ng-container i18n="@@developerTools.areAccepted">
+                    are accepted in production
+                  </ng-container>
+                </li>
+                <li>
+                  <ng-container i18n="@@developerTools.domainsRegisted"
+                    >Domains registered</ng-container
+                  >
+                  <strong i18n="@@developerTools.must">MUST</strong>
+                  <ng-container i18n="@@developerTools.exactlyMatchTheDomains"
+                    >exactly match the domains used, including
+                    subdomains</ng-container
+                  >
+                </li>
+                <li>
+                  <strong i18n="@@developerTools.registerAllRedirectURIs"
+                    >Register all redirect URIs fully where possible.</strong
+                  >
+                  <ng-container i18n="@@developerTools.thisIsTheMostSecure"
+                    >This is the most secure option and what we recommend. For
+                    more information about redirect URIs, please see
+                    our</ng-container
+                  >
+                  <a
+                    class="underline"
+                    i18n="@@developerTools.redirectUriFaq"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    href="https://info.orcid.org/ufaqs/how-do-redirect-uris-work/"
+                    >redirect URI FAQ</a
+                  >
+                </li>
+              </ul>
+            </app-alert-message>
+            @if (triedToSaveWithoutUrls) {
+              <app-alert-message type="warning" class="warning-panel">
+                <div content i18n="@@developerTools.addARedirectUriBefore">
+                  Please add a redirect URI before saving your application
+                </div>
+              </app-alert-message>
+            }
+            <div class="input-container" formArrayName="redirectUris">
+              @for (
+                redirectUri of redirectUris.controls;
+                track redirectUri;
+                let i = $index
+              ) {
+                <div class="input-group">
                   <mat-form-field
                     appearance="outline"
                     class="mat-form-field-min"
-                    [ngClass]="{ 'two-line-hint': isMobile }"
-                    >
+                    [id]="i + 'url'"
+                  >
                     <input
+                      #websiteInput
                       matInput
-                      formControlName="displayName"
+                      [formControlName]="i"
                       type="text"
-                      id="displayName"
-                      />
-                    @if (form.hasError('required', 'displayName')) {
-                      <mat-error
-                        i18n="@@developerTools.applicationNameCannotBeEmpty"
-                        >
-                Application name cannot be empty
-              </mat-error>
-                    }
-                    @if (form.hasError('maxlength', 'displayName')) {
-                      <mat-error
-                        i18n="@@developerTools.applicationNameMaxLength"
-                        >
-                Application name cannot exceed 255 characters.
-              </mat-error>
-                    }
-                    <mat-hint i18n="@@developerTools.nameShownToUsers"
-                      >The name shown to users on the OAuth authorization
-                screen</mat-hint
-                      >
-                    </mat-form-field>
-                  </div>
-                  <div class="row">
-                    <label
-                      for="website"
-                      class="row mat-caption"
-              [ngClass]="{
-                error:
-                  form.controls.website?.invalid &&
-                  form.controls.website?.touched
-              }"
-                      >
-                      <strong i18n="@@developerTools.applicationUrl"
-                        >Application URL</strong
-                        >
-                      </label>
-                      <mat-form-field appearance="outline" class="mat-form-field-min">
-                        <input
-                          matInput
-                          formControlName="website"
-                          type="text"
-                          id="website"
-                          />
-                        @if (form.hasError('required', 'website')) {
-                          <mat-error
-                            i18n="@@developerTools.websiteNameCannotBeEmpty"
-                            >
-                Website name cannot be empty
-              </mat-error>
-                        }
-                        @if (form.hasError('pattern', 'website')) {
-                          <mat-error
-                            i18n="@@developerTools.invalidWebsite"
-                            >
-                Invalid website
-              </mat-error>
-                        }
-                      </mat-form-field>
-                    </div>
-                    <div class="row">
-                      <label
-                        for="api-description"
-                        class="row mat-caption"
-              [ngClass]="{
-                error:
-                  form.controls.shortDescription?.invalid &&
-                  form.controls.shortDescription?.touched
-              }"
-                        >
-                        <strong i18n="@@developerTools.applicationDescription"
-                          >Application description</strong
-                          >
-                        </label>
-                        <mat-form-field appearance="outline" class="mat-form-field-min">
-                          <textarea
-                            formControlName="shortDescription"
-                            maxlength="1000"
-                            id="api-description"
-                            matInput
-                            [cdkTextareaAutosize]="true"
-                            cdkAutosizeMinRows="5"
-                            cdkAutosizeMaxRows="1000"
-                            >
-                          </textarea>
-                          @if (form.hasError('required', 'shortDescription')) {
-                            <mat-error
-                              i18n="@@developerTools.applicationDescription"
-                              >
-                Application description cannot be empty
-              </mat-error>
-                          }
-                          @if (form.hasError('maxlength', 'shortDescription')) {
-                            <mat-error
-                              i18n="@@developerTools.descriptionNameMaxLength"
-                              >
-                Application description cannot exceed 1000 characters.
-              </mat-error>
-                          }
-                          <mat-hint i18n="@@developerTools.theDescriptionShown"
-                            >The description shown to users on the OAuth authorization
-                screen. Maximum 1000 characters.</mat-hint
-                            >
-                          </mat-form-field>
-                        </div>
-                        <h2 class="orc-font-body-large" i18n="@@developerTools.redirectUris">
-            Redirect URIs
-          </h2>
-                        <hr />
-                        <p i18n="@@developerTools.onceTheUserHasAuthorized">
-            Once the user has authorized your application, they will be returned
-            to a URI that you specify. You must provide these URIs in advance or
-            your integration users will experience an error.
-          </p>
-                        <app-alert-message class="redirect-uri-notice">
-                          <h4
-                            title
-                            i18n="@@developerTools.pleaseNote"
-                            class="orc-font-body-small"
-                            >
-              Please note
-            </h4>
-                          <ul content>
-                            <li>
-                              <ng-container i18n="@@developerTools.only"> Only</ng-container>
-                              <strong i18n="@@developerTools.httpsURI">HTTPS URIs</strong>
-                              <ng-container i18n="@@developerTools.areAccepted">
-                  are accepted in production
-                </ng-container>
-                            </li>
-                            <li>
-                              <ng-container i18n="@@developerTools.domainsRegisted"
-                                >Domains registered</ng-container
-                                >
-                                <strong i18n="@@developerTools.must">MUST</strong>
-                                <ng-container i18n="@@developerTools.exactlyMatchTheDomains"
-                                  >exactly match the domains used, including
-                  subdomains</ng-container
-                                  >
-                                </li>
-                                <li>
-                                  <strong i18n="@@developerTools.registerAllRedirectURIs"
-                                    >Register all redirect URIs fully where possible.</strong
-                                    >
-                                    <ng-container i18n="@@developerTools.thisIsTheMostSecure"
-                                      >This is the most secure option and what we recommend. For
-                  more information about redirect URIs, please see
-                  our</ng-container
-                                      >
-                                      <a
-                                        class="underline"
-                                        i18n="@@developerTools.redirectUriFaq"
-                                        rel="noopener noreferrer"
-                                        target="_blank"
-                                        href="https://info.orcid.org/ufaqs/how-do-redirect-uris-work/"
-                                        >redirect URI FAQ</a
-                                        >
-                                      </li>
-                                    </ul>
-                                  </app-alert-message>
-                                  @if (triedToSaveWithoutUrls) {
-                                    <app-alert-message
-                                      type="warning"
-                                      class="warning-panel"
-                                      >
-                                      <div content i18n="@@developerTools.addARedirectUriBefore">
-              Please add a redirect URI before saving your application
-            </div>
-                                    </app-alert-message>
-                                  }
-                                  <div class="input-container" formArrayName="redirectUris">
-                                    @for (redirectUri of redirectUris.controls; track redirectUri; let i = $index) {
-                                      <div
-                                        class="input-group"
-                                        >
-                                        <mat-form-field
-                                          appearance="outline"
-                                          class="mat-form-field-min"
-                                          [id]="i + 'url'"
-                                          >
-                                          <input
-                                            #websiteInput
-                                            matInput
-                                            [formControlName]="i"
-                                            type="text"
-                  placeholder="eg: https://orcid.org
+                      placeholder="eg: https://orcid.org
           "
-                                            />
-                                          @if (form.hasError('required', ['redirectUris', i])) {
-                                            <mat-error
-                                              i18n="@@developerTools.redirectUriCannotBeEmpty"
-                                              >
-                  Redirect URI cannot be empty
-                </mat-error>
-                                          }
-                                          @if (form.hasError('pattern', ['redirectUris', i])) {
-                                            <mat-error
-                                              i18n="@@developerTools.invalidRedirectUrl"
-                                              >
-                  Invalid redirect URL
-                </mat-error>
-                                          }
-                                        </mat-form-field>
-                                        @if (redirectUris.controls.length > 1) {
-                                          <button
-                                            class="delete-button"
-                                            (click)="removeRedirectUri(i)"
-                                            mat-icon-button
-                [attr.aria-label]="
-                  ariaLabelDelete + ' ' + (redirectUri.value || '')
-                "
-                                            >
-                                            <mat-icon
-                                              class="material-icons-outlined extra-large-material-icon"
-                                              >delete
-                                            </mat-icon>
-                                          </button>
-                                        }
-                                      </div>
-                                    }
-                                  </div>
-                                  <div class="row">
-                                    <a
-                                      id="add-link"
-                                      class="col add-more no-gutters underline"
-                                      (click)="addRedirectUri()"
-                                      >
-                                      <mat-icon class="large-material-icon"
-                                        >add_circle_outline</mat-icon
-                                        >
-                                        <span class="mat-subtitle-2">
-                                          <ng-container i18n="@@developerTools.addAnotherRedirectUri">
-                  Add another redirect URI
+                    />
+                    @if (form.hasError('required', ['redirectUris', i])) {
+                      <mat-error
+                        i18n="@@developerTools.redirectUriCannotBeEmpty"
+                      >
+                        Redirect URI cannot be empty
+                      </mat-error>
+                    }
+                    @if (form.hasError('pattern', ['redirectUris', i])) {
+                      <mat-error i18n="@@developerTools.invalidRedirectUrl">
+                        Invalid redirect URL
+                      </mat-error>
+                    }
+                  </mat-form-field>
+                  @if (redirectUris.controls.length > 1) {
+                    <button
+                      class="delete-button"
+                      (click)="removeRedirectUri(i)"
+                      mat-icon-button
+                      [attr.aria-label]="
+                        ariaLabelDelete + ' ' + (redirectUri.value || '')
+                      "
+                    >
+                      <mat-icon
+                        class="material-icons-outlined extra-large-material-icon"
+                        >delete
+                      </mat-icon>
+                    </button>
+                  }
+                </div>
+              }
+            </div>
+            <div class="row">
+              <a
+                id="add-link"
+                class="col add-more no-gutters underline"
+                (click)="addRedirectUri()"
+              >
+                <mat-icon class="large-material-icon"
+                  >add_circle_outline</mat-icon
+                >
+                <span class="mat-subtitle-2">
+                  <ng-container i18n="@@developerTools.addAnotherRedirectUri">
+                    Add another redirect URI
+                  </ng-container>
+                </span>
+              </a>
+            </div>
+            @if (existingClient?.clientId?.value) {
+              <div class="title-example-code">
+                <h3 class="orc-font-body" i18n="@@developerTools.exampleCode">
+                  Example code
+                </h3>
+              </div>
+              <app-code-panel [title]="labelAuthorizeRequest">
+                <p i18n="@@developerTools.providesAnAuthorizationCode">
+                  Provides an authorization code that can be exchanged for an
+                  access token and an authenticated ORCID iD.
+                </p>
+                <strong i18n="@@developerTools.endpoint">Endpoint</strong>
+                <p>{{ baseURL }}/oauth/authorize</p>
+                <strong i18n="@@developerTools.scope">Scope</strong>
+                <p>/authenticate</p>
+                <strong i18n="@@developerTools.responseType"
+                  >Response type</strong
+                >
+                <p i18n="@@developerTools.code">code</p>
+                <code
+                  >{{ baseURL }}/oauth/authorize?client_id={{
+                    this.existingClient.clientId.value
+                  }}&response_type=code&scope=/authenticate&redirect_uri=<ng-container
+                    i18n="@@developerTools.replaceWithRedirect"
+                    >REPLACE WITH REDIRECT URI</ng-container
+                  >
+                </code>
+              </app-code-panel>
+              <app-code-panel [title]="labelTokenRequest">
+                <p i18n="@@developerTools.providesAnAuthenticatd">
+                  Provides an authenticated ORCID iD and an access token that
+                  can be used to read public information on the record.
+                </p>
+                <strong i18n="@@developerTools.endpoint">Endpoint</strong>
+                <p>{{ baseURL }}/oauth/token</p>
+                <strong i18n="@@developerTools.responseType"
+                  >Response type</strong
+                >
+                <p i18n="@@developerTools.accessTokenAndOrcidId">
+                  access token and ORCID iD
+                </p>
+                <code
+                  >curl -i -L -k -H 'Accept: application/json' --data
+                  'client_id={{
+                    this.existingClient.clientId.value
+                  }}&client_secret={{
+                    this.existingClient.clientSecret.value
+                  }}&grant_type=authorization_code&redirect_uri=<ng-container
+                    i18n="@@developerTools.replaceWithRedirect"
+                    >REPLACE WITH REDIRECT URI</ng-container
+                  >&code=<ng-container i18n="@@developerTools.replaceWithOauth"
+                    >REPLACE WITH OAUTH CODE</ng-container
+                  >' {{ baseURL }}/oauth/token
+                </code>
+              </app-code-panel>
+              <app-code-panel [title]="labelOpenIdImplicitRequest">
+                <p>
+                  <ng-container i18n="@@developerTools.providesAnAccess">
+                    Provides an access token that can be used to read public
+                    information on the record and an id_token using OpenID
+                    Connect and client-side only implicit OAuth.</ng-container
+                  >
+                  <a
+                    class="underline"
+                    i18n="@@developerTools.moreInformation"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    href="https://github.com/ORCID/ORCID-Source/blob/main/orcid-web/ORCID_AUTH_WITH_OPENID_CONNECT.md"
+                    >More information on OpenID Connect Endpoint</a
+                  >
+                </p>
+                <strong i18n="@@developerTools.endpoint">Endpoint</strong>
+                <p>{{ baseURL }}/oauth/token</p>
+                <strong i18n="@@developerTools.scope">Scope</strong>
+                <p>openid</p>
+                <strong i18n="@@developerTools.responseType"
+                  >Response type</strong
+                >
+                <p>token</p>
+                <code
+                  >{{ baseURL }}/oauth/authorize?client_id={{
+                    this.existingClient.clientId.value
+                  }}&response_type=token&scope=openid&redirect_uri=<ng-container
+                    i18n="@@developerTools.replaceWithRedirect"
+                    >REPLACE WITH REDIRECT URI</ng-container
+                  ></code
+                >
+              </app-code-panel>
+            }
+            @if (sucessSave && form.pristine) {
+              <p class="save-message">
+                <ng-container
+                  i18n="@@developerTools.changesHaveBeenSavedSuccessfully"
+                >
+                  Changes have been saved successfully.
                 </ng-container>
-                                        </span>
-                                      </a>
-                                    </div>
-                                    @if (existingClient?.clientId?.value) {
-                                      <div class="title-example-code">
-                                        <h3 class="orc-font-body" i18n="@@developerTools.exampleCode">
-                Example code
-              </h3>
-                                      </div>
-                                      <app-code-panel [title]="labelAuthorizeRequest">
-                                        <p i18n="@@developerTools.providesAnAuthorizationCode">
-                Provides an authorization code that can be exchanged for an
-                access token and an authenticated ORCID iD.
               </p>
-                                        <strong i18n="@@developerTools.endpoint">Endpoint</strong>
-                                        <p>{{ baseURL }}/oauth/authorize</p>
-                                        <strong i18n="@@developerTools.scope">Scope</strong>
-                                        <p>/authenticate</p>
-                                        <strong i18n="@@developerTools.responseType"
-                                          >Response type</strong
-                                          >
-                                          <p i18n="@@developerTools.code">code</p>
-                                          <code
-                                            >{{ baseURL }}/oauth/authorize?client_id={{
-                                            this.existingClient.clientId.value
-                                            }}&response_type=code&scope=/authenticate&redirect_uri=<ng-container
-                                            i18n="@@developerTools.replaceWithRedirect"
-                                            >REPLACE WITH REDIRECT URI</ng-container
-                                            >
-                                          </code>
-                                        </app-code-panel>
-                                        <app-code-panel [title]="labelTokenRequest">
-                                          <p i18n="@@developerTools.providesAnAuthenticatd">
-                Provides an authenticated ORCID iD and an access token that can
-                be used to read public information on the record.
+            }
+            @if (
+              form.hasError('duplicate', 'redirectUris') && formWasSummited
+            ) {
+              <p class="save-message">
+                <mat-error i18n="@@developerTools.redirectUrisMustBeUnique">
+                  Redirect URIs must be unique
+                </mat-error>
               </p>
-                                          <strong i18n="@@developerTools.endpoint">Endpoint</strong>
-                                          <p>{{ baseURL }}/oauth/token</p>
-                                          <strong i18n="@@developerTools.responseType"
-                                            >Response type</strong
-                                            >
-                                            <p i18n="@@developerTools.accessTokenAndOrcidId">
-                access token and ORCID iD
-              </p>
-                                            <code
-                                              >curl -i -L -k -H 'Accept: application/json' --data
-                                              'client_id={{
-                                              this.existingClient.clientId.value
-                                              }}&client_secret={{
-                                              this.existingClient.clientSecret.value
-                                              }}&grant_type=authorization_code&redirect_uri=<ng-container
-                                              i18n="@@developerTools.replaceWithRedirect"
-                                              >REPLACE WITH REDIRECT URI</ng-container
-                                              >&code=<ng-container i18n="@@developerTools.replaceWithOauth"
-                                              >REPLACE WITH OAUTH CODE</ng-container
-                                              >' {{ baseURL }}/oauth/token
-                                            </code>
-                                          </app-code-panel>
-                                          <app-code-panel [title]="labelOpenIdImplicitRequest">
-                                            <p>
-                                              <ng-container i18n="@@developerTools.providesAnAccess">
-                  Provides an access token that can be used to read public
-                  information on the record and an id_token using OpenID Connect
-                  and client-side only implicit OAuth.</ng-container
-                                                >
-                                                <a
-                                                  class="underline"
-                                                  i18n="@@developerTools.moreInformation"
-                                                  rel="noopener noreferrer"
-                                                  target="_blank"
-                                                  href="https://github.com/ORCID/ORCID-Source/blob/main/orcid-web/ORCID_AUTH_WITH_OPENID_CONNECT.md"
-                                                  >More information on OpenID Connect Endpoint</a
-                                                  >
-                                                </p>
-                                                <strong i18n="@@developerTools.endpoint">Endpoint</strong>
-                                                <p>{{ baseURL }}/oauth/token</p>
-                                                <strong i18n="@@developerTools.scope">Scope</strong>
-                                                <p>openid</p>
-                                                <strong i18n="@@developerTools.responseType"
-                                                  >Response type</strong
-                                                  >
-                                                  <p>token</p>
-                                                  <code
-                                                    >{{ baseURL }}/oauth/authorize?client_id={{
-                                                    this.existingClient.clientId.value
-                                                    }}&response_type=token&scope=openid&redirect_uri=<ng-container
-                                                    i18n="@@developerTools.replaceWithRedirect"
-                                                    >REPLACE WITH REDIRECT URI</ng-container
-                                                    ></code
-                                                    >
-                                                  </app-code-panel>
-                                                }
-                                                @if (sucessSave && form.pristine) {
-                                                  <p class="save-message">
-                                                    <ng-container
-                                                      i18n="@@developerTools.changesHaveBeenSavedSuccessfully"
-                                                      >
-              Changes have been saved successfully.
-            </ng-container>
-                                                  </p>
-                                                }
-                                                @if (
-                                                  form.hasError('duplicate', 'redirectUris') && formWasSummited
-                                                  ) {
-                                                  <p
-                                                    class="save-message"
-                                                    >
-                                                    <mat-error i18n="@@developerTools.redirectUrisMustBeUnique">
-              Redirect URIs must be unique
-            </mat-error>
-                                                  </p>
-                                                }
-                                                <app-alert-message class="notice-panel">
-                                                  <ng-container content>
-                                                    <ng-container
-                i18n="
-                  @@developerTools.theOrcidPublicApiAllowsYouToRequestPermission"
-                                                      >The ORCID Public API is free for non-commercial use by
-                individuals as stated in the</ng-container
-                                                      >
-                                                      <a
-                                                        href="https://info.orcid.org/public-client-terms-of-service/"
-                                                        target="_blank"
-                                                        class="underline"
-                                                        i18n="@@developerTools.publicClientTermsOfService"
-                                                        >Public APIs Terms of Service.</a
-                                                        >
-                                                        <ng-container i18n="@@developerTools.byRegisteringForPublicApi"
-                                                          >By “non-commercial” we mean that you may not charge any re-use
-                fees for the Public API, and you may not make use of the Public
-                API in connection with any revenue-generating product or
-                service.</ng-container
-                                                          ></ng-container
-                                                          ></app-alert-message
-                                                          >
-                                                          <button
-                                                            mat-raised-button
-                                                            color="primary"
-                                                            id="cy-register-for-public-api"
-                                                            (click)="save()"
-                                                            [disabled]="form.pristine"
-                                                            class="save-button mat-button-wrap-text"
-                                                            >
-                                                            @if (!existingClient?.clientId?.value) {
-                                                              <ng-container
-                                                                i18n="@@developerTools.saveApplicationAndGenerate"
-                                                                i18n="@@developerTools.saveApplicationAndGenerate"
-                                                                >
-              Save application and generate my client ID and secret
-            </ng-container>
-                                                            }
-                                                            @if (existingClient?.clientId?.value) {
-                                                              <ng-container
-                                                                i18n="@@developerTools.saveApplication"
-                                                                >
-              Save application
-            </ng-container>
-                                                            }
-                                                          </button>
-                                                        }
-                                                      </ng-container>
-                                                    }
-
-                                                    @if (!developerToolsEnable && !this.loadingUserDevTolsState) {
-                                                      <app-terms-of-use
-                                                        (developerToolsEnable)="ngOnInit()"
-                                                      ></app-terms-of-use>
-                                                    }
-                                                  </main>
-                                                </div>
-                                              </div>
+            }
+            <app-alert-message class="notice-panel">
+              <ng-container content>
+                <ng-container
+                  i18n="
+                    @@developerTools.theOrcidPublicApiAllowsYouToRequestPermission"
+                  >The ORCID Public API is free for non-commercial use by
+                  individuals as stated in the</ng-container
+                >
+                <a
+                  href="https://info.orcid.org/public-client-terms-of-service/"
+                  target="_blank"
+                  class="underline"
+                  i18n="@@developerTools.publicClientTermsOfService"
+                  >Public APIs Terms of Service.</a
+                >
+                <ng-container i18n="@@developerTools.byRegisteringForPublicApi"
+                  >By “non-commercial” we mean that you may not charge any
+                  re-use fees for the Public API, and you may not make use of
+                  the Public API in connection with any revenue-generating
+                  product or service.</ng-container
+                ></ng-container
+              ></app-alert-message
+            >
+            <button
+              mat-raised-button
+              color="primary"
+              id="cy-register-for-public-api"
+              (click)="save()"
+              [disabled]="form.pristine"
+              class="save-button mat-button-wrap-text"
+            >
+              @if (!existingClient?.clientId?.value) {
+                <ng-container
+                  i18n="@@developerTools.saveApplicationAndGenerate"
+                  i18n="@@developerTools.saveApplicationAndGenerate"
+                >
+                  Save application and generate my client ID and secret
+                </ng-container>
+              }
+              @if (existingClient?.clientId?.value) {
+                <ng-container i18n="@@developerTools.saveApplication">
+                  Save application
+                </ng-container>
+              }
+            </button>
+          }
+        </ng-container>
+      }
+      @if (!developerToolsEnable && !this.loadingUserDevTolsState) {
+        <app-terms-of-use
+          (developerToolsEnable)="ngOnInit()"
+        ></app-terms-of-use>
+      }
+    </main>
+  </div>
+</div>

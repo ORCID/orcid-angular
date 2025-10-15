@@ -3,7 +3,7 @@
     class="orc-font-heading-small"
     i18n="@@account.trustedParties"
     id="cy-organizations"
-    >
+  >
     Trusted parties
   </h1>
   <h2 class="orc-font-body-large" i18n="@@account.trustedOrganizations">
@@ -24,26 +24,29 @@
     rel="noopener noreferrer"
     target="_blank"
     >Learn more about trusted organizations</a
+  >
+  @for (
+    trustedOrganization of trustedOrganizations;
+    track trustedOrganization
+  ) {
+    <app-settings-panels
+      [title]="trustedOrganization.name"
+      [accessGranted]="trustedOrganization.approvalDate"
+      [url]="trustedOrganization.websiteValue"
+      [revokeAccessButton]="true"
+      (revokeAccessButtonClickedEvent)="revokeAccess(trustedOrganization)"
+      [routeUrl]="trustedPartiesUrl"
     >
-    @for (trustedOrganization of trustedOrganizations; track trustedOrganization) {
-      <app-settings-panels
-        [title]="trustedOrganization.name"
-        [accessGranted]="trustedOrganization.approvalDate"
-        [url]="trustedOrganization.websiteValue"
-        [revokeAccessButton]="true"
-        (revokeAccessButtonClickedEvent)="revokeAccess(trustedOrganization)"
-        [routeUrl]="trustedPartiesUrl"
-        >
-        <app-settings-trusted-organization
-          [trustedOrganization]="trustedOrganization"
-        ></app-settings-trusted-organization>
-      </app-settings-panels>
-    }
-    @if (!trustedOrganizations.length) {
-      <p>
-        <i i18n="@@account.youHavenAddAnyOrg">
-      You haven't added any trusted organizations yet.
-    </i>
-      </p>
-    }
+      <app-settings-trusted-organization
+        [trustedOrganization]="trustedOrganization"
+      ></app-settings-trusted-organization>
+    </app-settings-panels>
   }
+  @if (!trustedOrganizations.length) {
+    <p>
+      <i i18n="@@account.youHavenAddAnyOrg">
+        You haven't added any trusted organizations yet.
+      </i>
+    </p>
+  }
+}

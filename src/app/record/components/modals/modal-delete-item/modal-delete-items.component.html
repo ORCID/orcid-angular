@@ -9,7 +9,7 @@
       (click)="saveEvent()"
       [disabled]="loadingItems"
       id="delete-button"
-      >
+    >
       <ng-container i18n="@@shared.deleteSelected">
         Delete selected items
       </ng-container>
@@ -20,7 +20,7 @@
       (click)="closeEvent()"
       i18n="@@shared.cancel"
       id="cancel-button"
-      >
+    >
       Cancel
     </button>
   </app-modal-footer>
@@ -47,13 +47,11 @@
               (change)="updateCheckAll()"
               [(ngModel)]="selectAll"
               [ngModelOptions]="{ standalone: true }"
-              >
+            >
               @if (selectedItems.length === 0) {
-                <ng-container
-                  i18n="@@shared.selectAll"
-                  >
-              Select all
-            </ng-container>
+                <ng-container i18n="@@shared.selectAll">
+                  Select all
+                </ng-container>
               }
               @if (selectedItems.length > 0) {
                 ({{ selectedItems.length }})
@@ -66,35 +64,32 @@
     }
     <mat-divider class="row"></mat-divider>
     @if (deleteForm && !loadingItems) {
-      <div
-        class="row"
-        [formGroup]="deleteForm"
-        >
+      <div class="row" [formGroup]="deleteForm">
         @for (item of items; track item) {
           <div
             class="row affiliation-info"
-          [formGroupName]="
-            type === 'research-resources' ? item.putCode : item.putCode.value
-          "
-            >
+            [formGroupName]="
+              type === 'research-resources' ? item.putCode : item.putCode.value
+            "
+          >
             <div class="row">
               <mat-checkbox
                 class="text-wrap"
-              (change)="
-                updateCheck(
-                  type === 'research-resources'
-                    ? item.putCode
-                    : item.putCode.value
-                )
-              "
+                (change)="
+                  updateCheck(
+                    type === 'research-resources'
+                      ? item.putCode
+                      : item.putCode.value
+                  )
+                "
                 formControlName="checked"
-                >
+              >
                 <h2
                   class="orc-font-body title"
-                [ngClass]="{
-                  mobile: isMobile
-                }"
-                  >
+                  [ngClass]="{
+                    mobile: isMobile,
+                  }"
+                >
                   @if (isAffiliation()) {
                     {{ item?.affiliationName?.value }}
                   }
@@ -111,20 +106,20 @@
                     <div>
                       <span class="peer-review">
                         <ng-container i18n="@@peerReview.reviewDate">
-                        Review date:
-                      </ng-container>
+                          Review date:
+                        </ng-container>
                         {{ item?.completionDate | monthDayYearDateToString }}
                       </span>
                       <span class="peer-review">
                         <ng-container i18n="@@peerReview.type">
-                        Type:
-                      </ng-container>
+                          Type:
+                        </ng-container>
                         <span class="capitalize"> {{ item.type.value }}</span>
                       </span>
                       <span>
                         <ng-container i18n="@@peerReview.role">
-                        Role:
-                      </ng-container>
+                          Role:
+                        </ng-container>
                         <span class="capitalize">
                           {{ item.role.value }}
                         </span>
@@ -148,27 +143,27 @@
                 <strong
                   class="added"
                   i18n="@@shared.added"
-                [ngClass]="{
-                  mobile: isMobile
-                }"
-                  >
-                Added</strong
-                  >:
-                  {{ item.createdDate | monthDayYearDateToString }}
-                }
-              </div>
+                  [ngClass]="{
+                    mobile: isMobile,
+                  }"
+                >
+                  Added</strong
+                >:
+                {{ item.createdDate | monthDayYearDateToString }}
+              }
             </div>
-            <mat-divider class="row"></mat-divider>
-          }
-        </div>
-      }
-    </fieldset>
-    @if (!item && items.length === 0) {
-      <div class="no-info orc-font-body-small">
-        <mat-icon>error</mat-icon>
-        <ng-container i18n="@@works.noItemsSelected"
-          >No items selected.
-    </ng-container>
+          </div>
+          <mat-divider class="row"></mat-divider>
+        }
       </div>
     }
-  </app-modal>
+  </fieldset>
+  @if (!item && items.length === 0) {
+    <div class="no-info orc-font-body-small">
+      <mat-icon>error</mat-icon>
+      <ng-container i18n="@@works.noItemsSelected"
+        >No items selected.
+      </ng-container>
+    </div>
+  }
+</app-modal>

@@ -6,24 +6,24 @@
       class="everyone"
       [ngClass]="{ active: visibility === 'PUBLIC' }"
       >visibility</mat-icon
-      >
-    }
-    @if (visibility === 'LIMITED') {
-      <mat-icon
-        aria-hidden="false"
-        class="trusted"
-        [attr.aria-label]="label"
-        [ngClass]="{ active: visibility === 'LIMITED' }"
-        >visibility</mat-icon
-        >
-      }
-      @if (visibility === 'PRIVATE') {
-        <mat-icon
-          aria-hidden="false"
-          class="private"
-          [attr.aria-label]="label"
-          [ngClass]="{ active: visibility === 'PRIVATE' }"
-          >visibility</mat-icon
-          >
-        }
-      </div>
+    >
+  }
+  @if (visibility === 'LIMITED') {
+    <mat-icon
+      aria-hidden="false"
+      class="trusted"
+      [attr.aria-label]="label"
+      [ngClass]="{ active: visibility === 'LIMITED' }"
+      >visibility</mat-icon
+    >
+  }
+  @if (visibility === 'PRIVATE') {
+    <mat-icon
+      aria-hidden="false"
+      class="private"
+      [attr.aria-label]="label"
+      [ngClass]="{ active: visibility === 'PRIVATE' }"
+      >visibility</mat-icon
+    >
+  }
+</div>

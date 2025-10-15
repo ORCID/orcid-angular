@@ -9,13 +9,11 @@
       (menuClosed)="state = false"
       [attr.aria-label]="labelUserMenu + ' ' + displayName"
       id="cy-user-info"
-      >
+    >
       <div class="user-menu-container">
         <img src="./assets/vectors/profile-icon.svg" alt="" />
         @if (platform.columns12) {
-          <span class="name-text-container">{{
-            displayName
-          }}</span>
+          <span class="name-text-container">{{ displayName }}</span>
         }
         @if (platform.columns12) {
           <mat-icon>expand_more</mat-icon>
@@ -31,39 +29,36 @@
       class="user-menu-button"
       [attr.aria-label]="labelSigninRegister"
       id="menu-signin-button"
-      >
+    >
       <ng-container i18n="@@header.signin">Sign in</ng-container
-        >&nbsp;/&nbsp;<ng-container i18n="@@header.register">Register</ng-container>
-      </button>
-    }
-    @if (userInfo) {
-      <button
-        mat-stroked-button
-        class="user-menu-button-icon"
-        (click)="goto('inbox', 'fromHeaderButton')"
-        id="cy-inbox-button"
-    [matTooltip]="
-      inboxUnread > 0 ? notificationTooltipActive : notificationTooltip
-    "
-    [attr.aria-label]="
-      inboxUnread > 0 ? notificationi18nActive : notificationi18n
-    "
-        >
-        <mat-icon
-          matBadgeSize="small"
-          matBadgeColor="warn"
-          class="material-icons-outlined"
-          >@if (inboxUnread === 0) {
-          <img
-            src="./assets/vectors/notification-button.svg"
-            alt=""
-            />
+      >&nbsp;/&nbsp;<ng-container i18n="@@header.register"
+        >Register</ng-container
+      >
+    </button>
+  }
+  @if (userInfo) {
+    <button
+      mat-stroked-button
+      class="user-menu-button-icon"
+      (click)="goto('inbox', 'fromHeaderButton')"
+      id="cy-inbox-button"
+      [matTooltip]="
+        inboxUnread > 0 ? notificationTooltipActive : notificationTooltip
+      "
+      [attr.aria-label]="
+        inboxUnread > 0 ? notificationi18nActive : notificationi18n
+      "
+    >
+      <mat-icon
+        matBadgeSize="small"
+        matBadgeColor="warn"
+        class="material-icons-outlined"
+      >
+        @if (inboxUnread === 0) {
+          <img src="./assets/vectors/notification-button.svg" alt="" />
         }
         @if (inboxUnread > 0) {
-          <img
-            src="./assets/vectors/notification-button-active.svg"
-            alt=""
-            />
+          <img src="./assets/vectors/notification-button-active.svg" alt="" />
         }
       </mat-icon>
     </button>
@@ -75,7 +70,7 @@
     (click)="goto('my-orcid')"
     mat-menu-item
     id="cy-my-orcid"
-    >
+  >
     <div class="row main-button-container">
       <img src="./assets/vectors/profile-icon.svg" alt="" />
       <div class="col name-container">
@@ -88,14 +83,15 @@
   </button>
   <button mat-menu-item (click)="goto('inbox', 'fromMenuButton')" id="cy-inbox">
     @if (inboxUnread === 0) {
-      <mat-icon
-        >@if (inboxUnread === 0) {
-        <img
-          class="bell-icon"
-          src="./assets/vectors/notification-button.svg"
-          alt=""
+      <mat-icon>
+        @if (inboxUnread === 0) {
+          <img
+            class="bell-icon"
+            src="./assets/vectors/notification-button.svg"
+            alt=""
           />
-      }</mat-icon>
+        }
+      </mat-icon>
     }
     @if (inboxUnread > 0) {
       <mat-icon
@@ -103,68 +99,56 @@
       /></mat-icon>
     }
     <span i18n="@@workspace.notifications">Notifications inbox</span
-      ><span class="notifcation-number"> ({{ inboxUnread }})</span>
-    </button>
-    @if (
-      userInfo &&
-      (userInfo['IN_DELEGATION_MODE'] === 'false' ||
+    ><span class="notifcation-number"> ({{ inboxUnread }})</span>
+  </button>
+  @if (
+    userInfo &&
+    (userInfo['IN_DELEGATION_MODE'] === 'false' ||
       userInfo['DELEGATED_BY_ADMIN'] === 'true')
-      ) {
-      <button
-        mat-menu-item
-        (click)="goto('account')"
-        id="cy-account-settings"
-        >
-        <mat-icon>settings</mat-icon>
-        <span i18n="@@ngOrcid.accountSetting">Account settings </span>
-      </button>
-    }
+  ) {
+    <button mat-menu-item (click)="goto('account')" id="cy-account-settings">
+      <mat-icon>settings</mat-icon>
+      <span i18n="@@ngOrcid.accountSetting">Account settings </span>
+    </button>
+  }
+  <button
+    mat-menu-item
+    (click)="goto('trusted-parties')"
+    id="cy-trusted-parties-panel"
+  >
+    <mat-icon>key</mat-icon>
+    <span i18n="@@layout.trustedParties">Trusted parties</span>
+  </button>
+  @if (
+    userInfo &&
+    (userInfo['IN_DELEGATION_MODE'] === 'false' ||
+      userInfo['DELEGATED_BY_ADMIN'] === 'true') &&
+    userInfo['MEMBER_MENU'] != 'true'
+  ) {
     <button
       mat-menu-item
-      (click)="goto('trusted-parties')"
-      id="cy-trusted-parties-panel"
-      >
-      <mat-icon>key</mat-icon>
-      <span i18n="@@layout.trustedParties">Trusted parties</span>
+      (click)="goto('developer-tools')"
+      id="cy-developer-tools"
+    >
+      <mat-icon>code</mat-icon>
+      <span i18n="@@workspace.developer_tools">Developer tools </span>
     </button>
-    @if (
-      userInfo &&
-      (userInfo['IN_DELEGATION_MODE'] === 'false' ||
-      userInfo['DELEGATED_BY_ADMIN'] === 'true') &&
-      userInfo['MEMBER_MENU'] != 'true'
-      ) {
-      <button
-        mat-menu-item
-        (click)="goto('developer-tools')"
-        id="cy-developer-tools"
-        >
-        <mat-icon>code</mat-icon>
-        <span i18n="@@workspace.developer_tools">Developer tools </span>
-      </button>
-    }
-    @if (userInfo && userInfo['SELF_SERVICE_MENU']) {
-      <button
-        mat-menu-item
-        (click)="goto('self-service')"
-        id="cy-self-service"
-        >
-        <mat-icon>build</mat-icon>
-        <span i18n="@@ngOrcid.selfService">Member tools </span>
-      </button>
-    }
-    @if (userInfo && userInfo['ADMIN_MENU']) {
-      <button
-        mat-menu-item
-        (click)="goto('admin-actions')"
-        id="cy-admin-actions"
-        >
-        <mat-icon>verified_user</mat-icon>
-        <span i18n="@@ngOrcid.adminPage">Admin page</span>
-      </button>
-    }
-    <button mat-menu-item (click)="navigateTo('/signout')" id="cy-signout">
-      <mat-icon>exit_to_app</mat-icon>
-      <span i18n="@@ngOrcid.logout">Logout</span>
+  }
+  @if (userInfo && userInfo['SELF_SERVICE_MENU']) {
+    <button mat-menu-item (click)="goto('self-service')" id="cy-self-service">
+      <mat-icon>build</mat-icon>
+      <span i18n="@@ngOrcid.selfService">Member tools </span>
     </button>
-  </mat-menu>
-  <!-- Beel for Inbox-->
+  }
+  @if (userInfo && userInfo['ADMIN_MENU']) {
+    <button mat-menu-item (click)="goto('admin-actions')" id="cy-admin-actions">
+      <mat-icon>verified_user</mat-icon>
+      <span i18n="@@ngOrcid.adminPage">Admin page</span>
+    </button>
+  }
+  <button mat-menu-item (click)="navigateTo('/signout')" id="cy-signout">
+    <mat-icon>exit_to_app</mat-icon>
+    <span i18n="@@ngOrcid.logout">Logout</span>
+  </button>
+</mat-menu>
+<!-- Beel for Inbox-->

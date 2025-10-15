@@ -40,7 +40,12 @@
 
     <form [formGroup]="form">
       <div formArrayName="items" class="items">
-        @for (item of this.form?.controls?.items?.controls; track $index; let i = $index; let last = $last) {
+        @for (
+          item of this.form?.controls?.items?.controls;
+          track $index;
+          let i = $index;
+          let last = $last
+        ) {
           <div [formGroupName]="i">
             <div class="checkbox-wrapper">
               <mat-checkbox formControlName="selected">

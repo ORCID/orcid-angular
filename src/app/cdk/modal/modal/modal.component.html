@@ -3,7 +3,7 @@
   [ngClass]="{ 'columns-4-or-8': !columns12 }"
   [dir]="screenDirection"
   id="modal-container"
-  >
+>
   <div class="row header-area no-padding">
     <div class="col s4 m8 l12 no-gutters header-container">
       <ng-content select="app-modal-header"></ng-content>
@@ -19,7 +19,7 @@
     <div
       class="col s4 m8 no-gutters content-wrapper"
       [ngClass]="{ l9: !noSidebar, l12: noSidebar, 'no-padding': noPadding }"
-      >
+    >
       <div class="no-padding modal-content">
         <ng-content></ng-content>
       </div>

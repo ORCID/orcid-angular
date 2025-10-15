@@ -3,37 +3,31 @@
     iAmEditingThisRecord &&
     (trustedIndividuals?.delegators?.length || trustedIndividuals?.me) &&
     !isPublicRecord
-    ) {
+  ) {
     <section
       [id]="'status-bar'"
       role="region"
       [attr.aria-label]="regionStatusBar"
       [ngClass]="{ 'yellow-bg': !isMyRecord }"
-      >
+    >
       <mat-divider></mat-divider>
       <div class="container">
         <div class="content">
           @if (!isMyRecord) {
-            <div
-              class="margin-end"
-              i18n="@@topBar.youAreManaging"
-              >
-          You are managing this ORCID record as a trusted individual
-        </div>
+            <div class="margin-end" i18n="@@topBar.youAreManaging">
+              You are managing this ORCID record as a trusted individual
+            </div>
           }
           @if (isMyRecord) {
-            <div
-              class="margin-end"
-              i18n="@@topBar.youAreManagingSomeElse"
-              >
-          You are managing your ORCID record
-        </div>
+            <div class="margin-end" i18n="@@topBar.youAreManagingSomeElse">
+              You are managing your ORCID record
+            </div>
           }
           <img
             class="margin-end"
             src="assets/vectors/orcid.logo.icon.svg"
             alt="orcid logo"
-            />
+          />
           <strong class="margin-end">{{ effectiveRecord }}</strong>
           @if (trustedIndividuals) {
             <app-trusted-individuals-dropdown
@@ -45,10 +39,10 @@
       </div>
       <mat-divider
         class="bottom-divider"
-      [ngClass]="{
-        orange: isPublicRecord,
-        green: !isPublicRecord && isMyRecord
-      }"
+        [ngClass]="{
+          orange: isPublicRecord,
+          green: !isPublicRecord && isMyRecord,
+        }"
       ></mat-divider>
     </section>
   }

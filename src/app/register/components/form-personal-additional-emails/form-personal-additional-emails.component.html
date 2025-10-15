@@ -1,67 +1,65 @@
 <ng-container [formGroup]="additionalEmails">
   @for (
-    additionalEmailControl of additionalEmails?.controls | keyvalue; track
-    additionalEmailControl; let i = $index) {
-    <div
-      class="input-container margin-top-12"
-      >
+    additionalEmailControl of additionalEmails?.controls | keyvalue;
+    track additionalEmailControl;
+    let i = $index
+  ) {
+    <div class="input-container margin-top-12">
       <mat-label
         class="orc-font-small-print"
         id="additional-email-label"
-      [ngClass]="{
-        error: additionalEmailsTouched && additionalEmails.valid === false
-      }"
-        >
+        [ngClass]="{
+          error: additionalEmailsTouched && additionalEmails.valid === false,
+        }"
+      >
         <ng-container i18n="@@register.additionalEmails"
           >Additional email</ng-container
-          >
-          {{ i !== 0 ? i : '' }}
-          <label i18n="@@register.optional">(Optional)</label>
-        </mat-label>
-        <mat-form-field appearance="outline">
-          <input
-            aria-labelledby="additional-email-label"
-            [placeholder]="labelAddAnAddionalEmail"
-            #emailInput
-            formControlName="{{ additionalEmailControl.key }}"
-            matInput
-            [errorStateMatcher]="backendErrorsMatcher"
-            appTrim
-            [id]="additionalEmailControl.key"
-            type="email"
-            />
-        </mat-form-field>
-        @if (
-          additionalEmailsTouched &&
-          (additionalEmails.hasError('email', additionalEmailControl.key) ||
+        >
+        {{ i !== 0 ? i : '' }}
+        <label i18n="@@register.optional">(Optional)</label>
+      </mat-label>
+      <mat-form-field appearance="outline">
+        <input
+          aria-labelledby="additional-email-label"
+          [placeholder]="labelAddAnAddionalEmail"
+          #emailInput
+          formControlName="{{ additionalEmailControl.key }}"
+          matInput
+          [errorStateMatcher]="backendErrorsMatcher"
+          appTrim
+          [id]="additionalEmailControl.key"
+          type="email"
+        />
+      </mat-form-field>
+      @if (
+        additionalEmailsTouched &&
+        (additionalEmails.hasError('email', additionalEmailControl.key) ||
           additionalEmails.hasError('pattern', additionalEmailControl.key))
-          ) {
-          <mat-error
-            i18n="@@register.invalidEmail2"
-            >
-      Please enter a valid email address, for example joe&#64;institution.edu
-    </mat-error>
-        }
-        @if (additionalEmailsTouched) {
-          @for (
-            error of getControlErrorAtFormLevel(
+      ) {
+        <mat-error i18n="@@register.invalidEmail2">
+          Please enter a valid email address, for example
+          joe&#64;institution.edu
+        </mat-error>
+      }
+      @if (additionalEmailsTouched) {
+        @for (
+          error of getControlErrorAtFormLevel(
             additionalEmailControl.value,
             'backendErrors'
-            )
-            ; track
-            error) {
-            <mat-error
-              >
-              <app-backend-error
-                [showEmailAlreadyExistUntilNextButtonWasClicked]="true"
-                [nextButtonWasClicked]="nextButtonWasClicked"
-                [errorCode]="error"
-                [value]="additionalEmailControl.value.value"
-              ></app-backend-error>
-            </mat-error>
-          }
+          );
+          track error
+        ) {
+          <mat-error>
+            <app-backend-error
+              [showEmailAlreadyExistUntilNextButtonWasClicked]="true"
+              [nextButtonWasClicked]="nextButtonWasClicked"
+              [errorCode]="error"
+              [value]="additionalEmailControl.value.value"
+            ></app-backend-error>
+          </mat-error>
         }
-        <!-- <button
+      }
+      <!-- <button
         *ngIf="i == 0"
         mat-icon-button
         [attr.aria-label]="labelInfoAboutEmails"
@@ -74,7 +72,7 @@
           >help_outline</mat-icon
           >
         </button> -->
-        <!-- <button
+      <!-- <button
         *ngIf="i > 0"
         mat-icon-button
         [attr.aria-label]="labelDeleteEmail"

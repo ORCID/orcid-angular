@@ -20,20 +20,20 @@
             class="col l12 m8 s4 horizontal-center hero-title"
             [ngClass]="{
               'mat-display-3': platform.columns12,
-              'mat-display-1': platform.columns8 || platform.columns4
+              'mat-display-1': platform.columns8 || platform.columns4,
             }"
-            >
+          >
             <ng-container i18n="#sentenceCase@@home.distinguish_yourself">
               Distinguish yourself in
             </ng-container>
             <ng-container i18n="#lowerCase@@home.three_easy">
               three easy steps</ng-container
-              >
-            </h1>
-            <div
-              class="col l12 m8 s4 mat-subtitle-2 horizontal-center"
-              i18n="@@ngOrcid.orcidProvides"
-              >
+            >
+          </h1>
+          <div
+            class="col l12 m8 s4 mat-subtitle-2 horizontal-center"
+            i18n="@@ngOrcid.orcidProvides"
+          >
             ORCID provides a persistent digital identifier (an ORCID iD) that
             you own and control, and that distinguishes you from every other
             researcher. You can connect your iD with your professional
@@ -42,149 +42,149 @@
             systems, ensuring you get recognition for all your contributions,
             saving you time and hassle, and reducing the risk of errors.
           </div>
-            <div class="col l12 m8 s4 horizontal-center">
-              <button
-                mat-raised-button
-                color="primary"
-                class="mat-button-wrap-text mat-button-font-spaced hero-call-to-action"
-                i18n="@@ngOrcid.findOutMore"
-                (click)="goto('about/what-is-orcid/mission')"
-                >
+          <div class="col l12 m8 s4 horizontal-center">
+            <button
+              mat-raised-button
+              color="primary"
+              class="mat-button-wrap-text mat-button-font-spaced hero-call-to-action"
+              i18n="@@ngOrcid.findOutMore"
+              (click)="goto('about/what-is-orcid/mission')"
+            >
               FIND OUT MORE ABOUT OUR MISSION AND VALUES
             </button>
-            </div>
           </div>
         </div>
       </div>
-      <div class="register-section">
-        <div class="container">
-          <div class="row">
-            <div class="col l4 m8 s4">
-              <div class="row number-box">
-                <div class="col l12 m8 s4">
-                  <div class="number-circle" i18n="@@home.one">1</div>
-                </div>
-                <h2 class="col l12 m8 s4 mat-headline-5" i18n="@@home.register">
+    </div>
+    <div class="register-section">
+      <div class="container">
+        <div class="row">
+          <div class="col l4 m8 s4">
+            <div class="row number-box">
+              <div class="col l12 m8 s4">
+                <div class="number-circle" i18n="@@home.one">1</div>
+              </div>
+              <h2 class="col l12 m8 s4 mat-headline-5" i18n="@@home.register">
                 REGISTER
               </h2>
-              </div>
-              <div
-                class="row mat-subtitle-2 row mat-subtitle-2 horizontal-center"
-                >
-                <ng-container i18n="@@ngOrcid.getYourOrcid">
+            </div>
+            <div
+              class="row mat-subtitle-2 row mat-subtitle-2 horizontal-center"
+            >
+              <ng-container i18n="@@ngOrcid.getYourOrcid">
                 Get your unique ORCID identifier. It’s free and only takes a
                 minute, so
               </ng-container>
-                <a
-                  i18n="#lowerCase@@home.register_now"
-                  (click)="goto('register')"
-                  routerLink=""
-                  >
+              <a
+                i18n="#lowerCase@@home.register_now"
+                (click)="goto('register')"
+                routerLink=""
+              >
                 register now!
               </a>
-              </div>
             </div>
-            <div class="col l4 m8 s4">
-              <div class="row number-box">
-                <div class="col l12 m8 s4">
-                  <div class="number-circle" i18n="@@home.two" id="step-two">
+          </div>
+          <div class="col l4 m8 s4">
+            <div class="row number-box">
+              <div class="col l12 m8 s4">
+                <div class="number-circle" i18n="@@home.two" id="step-two">
                   2
                 </div>
-                </div>
-                <h2
-                  class="col l12 m8 s4 mat-headline-5"
-                  id="user-your-orcid-id"
-                  aria-labelledby="user-your-orcid-id"
-                  >
-                  <ng-container i18n="@@home.user_your">USE YOUR</ng-container>
-                  <ng-container i18n="@@home.orcid_id">ORCID ID</ng-container>
-                </h2>
               </div>
-              <div
-                class="row mat-subtitle-2 horizontal-center"
-                i18n="@@ngOrcid.includeYourId"
-                >
+              <h2
+                class="col l12 m8 s4 mat-headline-5"
+                id="user-your-orcid-id"
+                aria-labelledby="user-your-orcid-id"
+              >
+                <ng-container i18n="@@home.user_your">USE YOUR</ng-container>
+                <ng-container i18n="@@home.orcid_id">ORCID ID</ng-container>
+              </h2>
+            </div>
+            <div
+              class="row mat-subtitle-2 horizontal-center"
+              i18n="@@ngOrcid.includeYourId"
+            >
               Use your iD, when prompted, in systems and platforms from grant
               application to manuscript submission and beyond, to ensure you get
               credit for your contributions.
             </div>
+          </div>
+          <div class="col l4 m8 s4">
+            <div class="row number-box">
+              <div class="col l12 m8 s4">
+                <div class="number-circle" i18n="@@home.three">3</div>
+              </div>
+              <h2
+                class="col l12 m8 s4 mat-headline-5"
+                id="share-your-orcid"
+                aria-labelledby="share-your-orcid"
+              >
+                <ng-container i18n="@@ngOrcid.shareYourOrcid"
+                  >SHARE YOUR ORCID iD</ng-container
+                >
+              </h2>
             </div>
-            <div class="col l4 m8 s4">
-              <div class="row number-box">
-                <div class="col l12 m8 s4">
-                  <div class="number-circle" i18n="@@home.three">3</div>
-                </div>
-                <h2
-                  class="col l12 m8 s4 mat-headline-5"
-                  id="share-your-orcid"
-                  aria-labelledby="share-your-orcid"
-                  >
-                  <ng-container i18n="@@ngOrcid.shareYourOrcid"
-                    >SHARE YOUR ORCID iD</ng-container
-                    >
-                  </h2>
-                </div>
-                <div
-                  class="row mat-subtitle-2 horizontal-center"
-                  i18n="@@ngOrcid.enhanceYourProfile"
-                  >
+            <div
+              class="row mat-subtitle-2 horizontal-center"
+              i18n="@@ngOrcid.enhanceYourProfile"
+            >
               The more information connected to your ORCID record, the more
               you’ll benefit from sharing your iD - so give the organizations
               you trust permission to update your record as well as adding your
               affiliations, emails, other names you’re known by, and more.
             </div>
-              </div>
-            </div>
           </div>
         </div>
-        <div class="organization-section">
-          <div class="row middle">
-            <div class="col l4 m8 s4 horizontal-center">
-              @if (platform.columns8 || platform.columns4) {
-                <img
-                  class="organization-img"
-                  src="assets/img/organizations.jpg  "
-                  aria-hidden="true"
-                  />
-              }
-            </div>
+      </div>
+    </div>
+    <div class="organization-section">
+      <div class="row middle">
+        <div class="col l4 m8 s4 horizontal-center">
+          @if (platform.columns8 || platform.columns4) {
+            <img
+              class="organization-img"
+              src="assets/img/organizations.jpg  "
+              aria-hidden="true"
+            />
+          }
+        </div>
+      </div>
+      <div class="container">
+        <div class="row middle">
+          <div class="col l4 m8 s4">
+            @if (platform.columns12) {
+              <img
+                class="organization-img"
+                aria-hidden="true"
+                src="assets/img/organizations.jpg  "
+                alt=""
+              />
+            }
           </div>
-          <div class="container">
-            <div class="row middle">
-              <div class="col l4 m8 s4">
-                @if (platform.columns12) {
-                  <img
-                    class="organization-img"
-                    aria-hidden="true"
-                    src="assets/img/organizations.jpg  "
-                    alt=""
-                    />
-                }
-              </div>
-              <div class="col l8 m8 mat-subtitle-2 text-container">
-                <h1 i18n="@@ngOrcid.membersMakeOrcid" class="mat-headline-4">
+          <div class="col l8 m8 mat-subtitle-2 text-container">
+            <h1 i18n="@@ngOrcid.membersMakeOrcid" class="mat-headline-4">
               Our organizational members make ORCID possible!
             </h1>
-                <div>
-                  <div i18n="@@ngOrcid.orcidIs">
+            <div>
+              <div i18n="@@ngOrcid.orcidIs">
                 ORCID is a non-profit organization supported by a global
                 community of member organizations, including research
                 institutions, publishers, funders, professional associations,
                 service providers, and other stakeholders in the research
                 ecosystem.
               </div>
-                  <br />
-                  <div i18n="@@home.curious_about">
+              <br />
+              <div i18n="@@home.curious_about">
                 Curious about who our members are?
               </div>
-                  <a i18n="@@home.see_our" (click)="goto('members')" routerLink="">
+              <a i18n="@@home.see_our" (click)="goto('members')" routerLink="">
                 See our complete list of member organizations
               </a>
-                </div>
-              </div>
             </div>
           </div>
         </div>
-        <app-news></app-news>
-      }
-    </main>
+      </div>
+    </div>
+    <app-news></app-news>
+  }
+</main>

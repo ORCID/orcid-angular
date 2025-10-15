@@ -4,17 +4,14 @@
       <mat-label
         class="orc-font-small-print"
         i18n="@@ngOrcid.signin.2fa.label"
-      [ngClass]="{
-        error: isVerificationCodeInvalid
-      }"
+        [ngClass]="{
+          error: isVerificationCodeInvalid,
+        }"
         >Two-factor authentication code
-    </mat-label>
+      </mat-label>
     }
     @if (!recoveryCode) {
-      <mat-form-field
-        appearance="outline"
-        class="row deactivate"
-        >
+      <mat-form-field appearance="outline" class="row deactivate">
         <input
           matInput
           #inputVerificationCode
@@ -22,180 +19,174 @@
           cdkFocusInitial
           appTrim
           autocomplete="off"
-          />
+        />
       </mat-form-field>
     }
     @if (!recoveryCode) {
       @if (!isVerificationCodeInvalid) {
-        <mat-hint
-          class="orc-font-small-print error-length"
+        <mat-hint class="orc-font-small-print error-length"
           >{{ verificationFormControl.value?.length || 0 }}/6</mat-hint
-          >
-        }
-        @if (
-          verificationWasTouched && verificationFormControl.hasError('required')
-          ) {
-          <mat-error
-            >
-            <p
-              i18n="@@ngOrcid.signin.2fa.verificationCodeRequired"
-              class="error-message"
-              >
-          Authentication code is required
-        </p>
-            <p class="error-length">
-              {{ verificationFormControl.value?.length || 0 }}/6
-            </p>
-          </mat-error>
-        }
-        @if (
-          verificationWasTouched &&
-          (verificationFormControl.hasError('minlength') ||
-          verificationFormControl.hasError('maxlength'))
-          ) {
-          <mat-error
-            >
-            <p
-              i18n="@@ngOrcid.signin.2fa.badVerificationCodeLength"
-              class="error-message"
-              >
-          Invalid authentication code length
-        </p>
-            <p class="error-length">
-              {{ verificationFormControl.value?.length || 0 }}/6
-            </p>
-          </mat-error>
-        }
+        >
       }
-    </div>
-    <p
+      @if (
+        verificationWasTouched && verificationFormControl.hasError('required')
+      ) {
+        <mat-error>
+          <p
+            i18n="@@ngOrcid.signin.2fa.verificationCodeRequired"
+            class="error-message"
+          >
+            Authentication code is required
+          </p>
+          <p class="error-length">
+            {{ verificationFormControl.value?.length || 0 }}/6
+          </p>
+        </mat-error>
+      }
+      @if (
+        verificationWasTouched &&
+        (verificationFormControl.hasError('minlength') ||
+          verificationFormControl.hasError('maxlength'))
+      ) {
+        <mat-error>
+          <p
+            i18n="@@ngOrcid.signin.2fa.badVerificationCodeLength"
+            class="error-message"
+          >
+            Invalid authentication code length
+          </p>
+          <p class="error-length">
+            {{ verificationFormControl.value?.length || 0 }}/6
+          </p>
+        </mat-error>
+      }
+    }
+  </div>
+  <p
     [ngClass]="{
-      'enter-code': isVerificationCodeInvalid
+      'enter-code': isVerificationCodeInvalid,
     }"
-      >
-      <a
-        class="underline orc-font-body-small"
-        (click)="showAuthenticationCode()"
-        i18n="@@ngOrcid.signin.2fa.instructionsPart1"
-        >Enter a code
+  >
+    <a
+      class="underline orc-font-body-small"
+      (click)="showAuthenticationCode()"
+      i18n="@@ngOrcid.signin.2fa.instructionsPart1"
+      >Enter a code
     </a>
-      <ng-container i18n="@@ngOrcid.signin.2fa.instructionsPart2">
+    <ng-container i18n="@@ngOrcid.signin.2fa.instructionsPart2">
       from your two-factor authentication app
     </ng-container>
-    </p>
-    <p>
-      <ng-container i18n="@@ngOrcid.signin.2fa.noDevice1">
+  </p>
+  <p>
+    <ng-container i18n="@@ngOrcid.signin.2fa.noDevice1">
       Don't have your device?
     </ng-container>
-      <a
-        class="underline orc-font-body-small"
-        (click)="showRecoveryCode()"
-        i18n="@@ngOrcid.signin.2fa.noDevice2"
-        >Enter a recovery code
+    <a
+      class="underline orc-font-body-small"
+      (click)="showRecoveryCode()"
+      i18n="@@ngOrcid.signin.2fa.noDevice2"
+      >Enter a recovery code
     </a>
-    </p>
-    <p>
-      <ng-container i18n="@@ngOrcid.signin.2fa.noDeviceOrRecovery">
+  </p>
+  <p>
+    <ng-container i18n="@@ngOrcid.signin.2fa.noDeviceOrRecovery">
       Don't have your device or recovery code?
     </ng-container>
-      <a
-        class="underline orc-font-body-small"
-        (click)="navigateTo('https://support.orcid.org/')"
-        rel="noopener noreferrer"
-        target="_blank"
-        i18n="@@shared.orcidHelpCenter"
-        >ORCID Help Center
+    <a
+      class="underline orc-font-body-small"
+      (click)="navigateTo('https://support.orcid.org/')"
+      rel="noopener noreferrer"
+      target="_blank"
+      i18n="@@shared.orcidHelpCenter"
+      >ORCID Help Center
     </a>
-    </p>
-    <div class="input-container">
-      @if (recoveryCode) {
-        <mat-label
-          class="orc-font-small-print"
-          i18n="@@ngOrcid.signin.2fa.recoveryCode"
-      [ngClass]="{
-        error: isRecoveryCodeInvalid
-      }"
-          >Recovery code
-    </mat-label>
-      }
-      @if (recoveryCode) {
-        <mat-form-field appearance="outline" class="row">
-          <input
-            matInput
-            #inputRecoveryCode
-            formControlName="recoveryCode"
-            appTrim
-            autocomplete="off"
-            />
-        </mat-form-field>
-      }
-      @if (recoveryCode) {
-        @if (!isRecoveryCodeInvalid) {
-          <mat-hint
-            class="orc-font-small-print error-length"
-            >{{ recoveryCodeFormControl.value?.length || 0 }}/10</mat-hint
-            >
-          }
-          @if (
-            recoveryCodeWasTouched && recoveryCodeFormControl.hasError('required')
-            ) {
-            <mat-error
-              >
-              <p
-                i18n="@@ngOrcid.signin.2fa.recoveryCodeRequired"
-                class="error-message"
-                >
-          Recovery code is required
-        </p>
-              <p class="error-length">
-                {{ recoveryCodeFormControl.value?.length || 0 }}/10
-              </p>
-            </mat-error>
-          }
-          @if (
-            recoveryCodeWasTouched &&
-            (recoveryCodeFormControl.hasError('minlength') ||
-            recoveryCodeFormControl.hasError('maxlength'))
-            ) {
-            <mat-error
-              >
-              <p
-                i18n="@@ngOrcid.signin.2fa.badRecoveryCodeLength"
-                class="error-message"
-                >
-          Invalid recovery code length
-        </p>
-              <p class="error-length">
-                {{ recoveryCodeFormControl.value?.length || 0 }}/10
-              </p>
-            </mat-error>
-          }
-        }
-      </div>
-
-      <button
-        mat-raised-button
-        class="row mat-elevation-z0 two-factor authenticate-button-new-signin"
-        type="submit"
-        i18n="@@ngOrcid.signin.2fa.authenticate"
-        id="authenticateButton"
+  </p>
+  <div class="input-container">
+    @if (recoveryCode) {
+      <mat-label
+        class="orc-font-small-print"
+        i18n="@@ngOrcid.signin.2fa.recoveryCode"
+        [ngClass]="{
+          error: isRecoveryCodeInvalid,
+        }"
+        >Recovery code
+      </mat-label>
+    }
+    @if (recoveryCode) {
+      <mat-form-field appearance="outline" class="row">
+        <input
+          matInput
+          #inputRecoveryCode
+          formControlName="recoveryCode"
+          appTrim
+          autocomplete="off"
+        />
+      </mat-form-field>
+    }
+    @if (recoveryCode) {
+      @if (!isRecoveryCodeInvalid) {
+        <mat-hint class="orc-font-small-print error-length"
+          >{{ recoveryCodeFormControl.value?.length || 0 }}/10</mat-hint
         >
+      }
+      @if (
+        recoveryCodeWasTouched && recoveryCodeFormControl.hasError('required')
+      ) {
+        <mat-error>
+          <p
+            i18n="@@ngOrcid.signin.2fa.recoveryCodeRequired"
+            class="error-message"
+          >
+            Recovery code is required
+          </p>
+          <p class="error-length">
+            {{ recoveryCodeFormControl.value?.length || 0 }}/10
+          </p>
+        </mat-error>
+      }
+      @if (
+        recoveryCodeWasTouched &&
+        (recoveryCodeFormControl.hasError('minlength') ||
+          recoveryCodeFormControl.hasError('maxlength'))
+      ) {
+        <mat-error>
+          <p
+            i18n="@@ngOrcid.signin.2fa.badRecoveryCodeLength"
+            class="error-message"
+          >
+            Invalid recovery code length
+          </p>
+          <p class="error-length">
+            {{ recoveryCodeFormControl.value?.length || 0 }}/10
+          </p>
+        </mat-error>
+      }
+    }
+  </div>
+
+  <button
+    mat-raised-button
+    class="row mat-elevation-z0 two-factor authenticate-button-new-signin"
+    type="submit"
+    i18n="@@ngOrcid.signin.2fa.authenticate"
+    id="authenticateButton"
+  >
     AUTHENTICATE
   </button>
-    </form>
-    @if (showBadVerificationCode) {
-      <mat-error class="orcid-error">
-        <mat-icon inline="true">error</mat-icon>
-        <ng-container i18n="@@ngOrcid.signin.2fa.badVerificationCode">
-    Invalid authentication code
-  </ng-container>
-      </mat-error>
-    }
-    @if (showBadRecoveryCode) {
-      <mat-error class="orcid-error">
-        <mat-icon inline="true">error</mat-icon>
-        <ng-container i18n="@@ngOrcid.signin.2fa.badRecoveryCode">
-    Invalid recovery code
-  </ng-container>
-      </mat-error>
-    }
+</form>
+@if (showBadVerificationCode) {
+  <mat-error class="orcid-error">
+    <mat-icon inline="true">error</mat-icon>
+    <ng-container i18n="@@ngOrcid.signin.2fa.badVerificationCode">
+      Invalid authentication code
+    </ng-container>
+  </mat-error>
+}
+@if (showBadRecoveryCode) {
+  <mat-error class="orcid-error">
+    <mat-icon inline="true">error</mat-icon>
+    <ng-container i18n="@@ngOrcid.signin.2fa.badRecoveryCode">
+      Invalid recovery code
+    </ng-container>
+  </mat-error>
+}

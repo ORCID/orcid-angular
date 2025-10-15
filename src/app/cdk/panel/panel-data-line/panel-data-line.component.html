@@ -1,26 +1,22 @@
 @if (title) {
   <div
     class="orc-font-body-small"
-  [ngClass]="{
-    'title-margin': titleMargin,
-    'secondary-text': secondaryText,
-    'no-bold': noBoldTitle
-  }"
-    >
+    [ngClass]="{
+      'title-margin': titleMargin,
+      'secondary-text': secondaryText,
+      'no-bold': noBoldTitle,
+    }"
+  >
     @if (prefixTitle) {
       <span class="prefixTitle">
         @if (prefixTitle === 'part-of') {
           <i i18n="@@shared.partOf"> Part of </i>
         }
         @if (prefixTitle === 'funded-by') {
-          <i i18n="@@shared.fundedBy">
-      Funded by
-    </i>
+          <i i18n="@@shared.fundedBy"> Funded by </i>
         }
         @if (prefixTitle === 'version-of') {
-          <i i18n="@@shared.versionOf">
-      Version of
-    </i>
+          <i i18n="@@shared.versionOf"> Version of </i>
         }
       </span>
     }
@@ -34,7 +30,7 @@
         appCopyOnClick
         matTooltip="Click to Copy"
         [matTooltipPosition]="'above'"
-        >
+      >
         {{ content }}
       </p>
     }
@@ -47,7 +43,7 @@
         href="{{ url }}"
         target="_blank"
         rel="noopener noreferrer"
-        >
+      >
         {{ content }}
       </a>
     }

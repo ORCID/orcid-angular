@@ -1,37 +1,34 @@
 @if (showUnsupportedBrowserBanner) {
-  <app-banner
-    [canDismiss]="false"
-    ariaLabel="Unsupported browser"
+  <app-banner [canDismiss]="false" ariaLabel="Unsupported browser"
     ><ng-container i18n="@@common.old.browser_1">
-    We notice you are using a browser that our site does not support. Some
-    features on this site may not work correctly.</ng-container
+      We notice you are using a browser that our site does not support. Some
+      features on this site may not work correctly.</ng-container
     >
     <ng-container i18n="@@common.old_browser_2">
-    We recommend that you upgrade to a
-  </ng-container>
+      We recommend that you upgrade to a
+    </ng-container>
     <a
       target="common.old_browser_3"
       href="https://support.orcid.org/hc/en-us/articles/360006895074-Technical-requirements-for-using-the-ORCID-site"
       i18n="@@common.old_browser_3"
       class="mat-button-font black-url"
       >supported browser</a
-      >.
-      <label class="closeButton" i18n="@@common.cookies.click_dismiss"
-        >Dismiss</label
-        >
-      </app-banner>
-    }
-
-    @if (closableElementAtDisplay) {
-      <app-banner
-        (dismiss)="understoodClosableMessage(closableElementAtDisplay)"
-        [canDismiss]="true"
-        [dismissCookie]=""
-        [dismissCookieTime]="365"
-        [canDismiss]="true"
-        [ariaLabel]="closableElementAtDisplay.getAttribute('aria-label')"
-        >
-        <span [innerHtml]="closableElementAtDisplay.innerHTML"></span>
-        <label class="closeButton" i18n="@@layout.understood">Understood</label>
-      </app-banner>
-    }
+    >.
+    <label class="closeButton" i18n="@@common.cookies.click_dismiss"
+      >Dismiss</label
+    >
+  </app-banner>
+}
+@if (closableElementAtDisplay) {
+  <app-banner
+    (dismiss)="understoodClosableMessage(closableElementAtDisplay)"
+    [canDismiss]="true"
+    [dismissCookie]=""
+    [dismissCookieTime]="365"
+    [canDismiss]="true"
+    [ariaLabel]="closableElementAtDisplay.getAttribute('aria-label')"
+  >
+    <span [innerHtml]="closableElementAtDisplay.innerHTML"></span>
+    <label class="closeButton" i18n="@@layout.understood">Understood</label>
+  </app-banner>
+}

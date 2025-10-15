@@ -4,27 +4,23 @@
     {{ assertion }}
     <i i18n="@@shared.onBehalfOf">via</i>
   }
-  {{ name
-  }}@if (date) {
-  ,
-  @if (isEmailOrDomain) {
-    <ng-container i18n="@@shared.verified"
-      >Verified:</ng-container
-      >
+  {{ name }}
+  @if (date) {
+    ,
+    @if (isEmailOrDomain) {
+      <ng-container i18n="@@shared.verified">Verified:</ng-container>
     }
     @if (!isEmailOrDomain) {
-      <ng-container i18n="@@shared.created"
-        >Created:</ng-container
-        >
-      }
-      {{ date }}
-    } @else {
-      @if (isEmailOrDomain) {
-        , <span i18n="@@shared.verified2">Verified</span>
-      }
+      <ng-container i18n="@@shared.created">Created:</ng-container>
     }
-
-  </p>
-  @if (!isLastItem) {
-    <mat-divider></mat-divider>
+    {{ date }}
+  } @else {
+    @if (isEmailOrDomain) {
+      ,
+      <span i18n="@@shared.verified2">Verified</span>
+    }
   }
+</p>
+@if (!isLastItem) {
+  <mat-divider></mat-divider>
+}

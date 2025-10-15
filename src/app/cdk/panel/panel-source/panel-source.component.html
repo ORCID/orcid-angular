@@ -1,42 +1,40 @@
 <app-panel-data
   class="panel-footer"
   [ngClass]="{
-    'margin-top-2': !displayTheStack
+    'margin-top-2': !displayTheStack,
   }"
-  >
+>
   <div class="source-items">
     <div>
       <!-- TOP PANEL SOURCE TITLE -->
       @if (topPanelOfTheStackMode || !clickableSource) {
-        <div
-          class="source-title"
-          >
+        <div class="source-title">
           <strong i18n="@@shared.source">Source</strong>:
           @if (recordOnDisplayIsTheSource !== undefined) {
             @if (
               assertionOriginOrcid ||
               (recordOnDisplayIsTheSource && !assertionOriginClientId)
-              ) {
+            ) {
               <mat-icon
                 aria-hidden="false"
                 [attr.aria-label]="selftAssertedSource"
                 [attr.alt]="selftAssertedSource"
                 ><img
-                src="./assets/vectors/profile-not-verified.svg"
-                [attr.alt]="selftAssertedSource"
+                  src="./assets/vectors/profile-not-verified.svg"
+                  [attr.alt]="selftAssertedSource"
                 />
-            </mat-icon>
-          }
-          @if (
-            assertionOriginClientId ||
-            (!recordOnDisplayIsTheSource && !assertionOriginOrcid)
+              </mat-icon>
+            }
+            @if (
+              assertionOriginClientId ||
+              (!recordOnDisplayIsTheSource && !assertionOriginOrcid)
             ) {
-            <mat-icon
-              aria-hidden="false"
-              [attr.aria-label]="validatedSourceAriaLabel"
-              class="verified"
-              [attr.alt]="validatedSourceAriaLabel"
-              >check_circle</mat-icon
+              <mat-icon
+                aria-hidden="false"
+                [attr.aria-label]="validatedSourceAriaLabel"
+                class="verified"
+                [attr.alt]="validatedSourceAriaLabel"
+                >check_circle</mat-icon
               >
             }
           }
@@ -51,35 +49,33 @@
       }
       <!-- OTHER SOURCES (COLLAPSED PANEL) URL -->
       @if (!topPanelOfTheStackMode && clickableSource) {
-        <div
-          class="source-title"
-          >
+        <div class="source-title">
           <strong i18n="@@shared.source">Source</strong>:
           @if (recordOnDisplayIsTheSource !== undefined) {
             @if (
               assertionOriginOrcid ||
               (recordOnDisplayIsTheSource && !assertionOriginClientId)
-              ) {
+            ) {
               <mat-icon
                 aria-hidden="false"
                 [attr.aria-label]="selftAssertedSource"
                 [attr.alt]="selftAssertedSource"
                 ><img
-                src="./assets/vectors/profile-not-verified.svg"
-                [attr.alt]="selftAssertedSource"
+                  src="./assets/vectors/profile-not-verified.svg"
+                  [attr.alt]="selftAssertedSource"
                 />
-            </mat-icon>
-          }
-          @if (
-            assertionOriginClientId ||
-            (!recordOnDisplayIsTheSource && !assertionOriginOrcid)
+              </mat-icon>
+            }
+            @if (
+              assertionOriginClientId ||
+              (!recordOnDisplayIsTheSource && !assertionOriginOrcid)
             ) {
-            <mat-icon
-              aria-hidden="false"
-              [attr.aria-label]="validatedSourceAriaLabel"
-              class="verified"
-              [attr.alt]="validatedSourceAriaLabel"
-              >check_circle</mat-icon
+              <mat-icon
+                aria-hidden="false"
+                [attr.aria-label]="validatedSourceAriaLabel"
+                class="verified"
+                [attr.alt]="validatedSourceAriaLabel"
+                >check_circle</mat-icon
               >
             }
             <a (click)="clickDisplayAsTopPanelOfTheStack()">
@@ -88,68 +84,60 @@
                 <i i18n="@@shared.onBehalfOf">via</i>
               }
               {{ sourceName }}</a
-              >
-            }
-          </div>
-        }
-      </div>
-      @if (isPreferred && stackLength > 1) {
-        <div class="preferred-source">
-          <div>
-            <ng-container i18n="@@groups.common.preferred_source"
-              >Preferred source</ng-container
-              >
-              @if (!displayTheStack && stackLength > 1) {
-                <a
-                  (click)="toggleStackMode()"
-                  [attr.aria-label]="openOtherSources"
-                  >
-                  (<ng-container i18n="@@shared.of">of</ng-container>
-                  {{ stackLength }})&#x200E;
-                </a>
-              }
-              @if (stackLength > 1 && displayTheStack) {
-                <a
-                  (click)="toggleStackMode()"
-                  [attr.aria-label]="closeOtherSources"
-                  >
-                  <ng-container i18n="@@shared.closeOtherSources"
-                    >(Close other sources)</ng-container
-                    >
-                  </a>
-                }
-              </div>
-            </div>
-          }
-
-          @if (!isPreferred && stackLength > 1 && !isPublicRecord) {
-            <div
-              class="preferred-source"
-              >
-              @if (stackLength > 1) {
-                <a (click)="clickMakePrimary()">
-                  Make preferred source
-                </a>
-              }
-            </div>
+            >
           }
         </div>
-        @if (!isPublicRecord) {
-          <div align-end>
-            @if ((stackLength > 1 && displayTheStack) || stackLength === 1) {
-              <button
-                mat-icon-button
-                [matTooltip]="labelDeleteButton"
-      [attr.aria-label]="
-        type | appPanelActivityActionAriaLabel : 'delete' : this.panelTitle
-      "
-                (click)="delete()"
-                >
-                <mat-icon class="large-material-icon delete-button">
-                  delete_outline
-                </mat-icon>
-              </button>
-            }
-          </div>
+      }
+    </div>
+    @if (isPreferred && stackLength > 1) {
+      <div class="preferred-source">
+        <div>
+          <ng-container i18n="@@groups.common.preferred_source"
+            >Preferred source</ng-container
+          >
+          @if (!displayTheStack && stackLength > 1) {
+            <a (click)="toggleStackMode()" [attr.aria-label]="openOtherSources">
+              (<ng-container i18n="@@shared.of">of</ng-container>
+              {{ stackLength }})&#x200E;
+            </a>
+          }
+          @if (stackLength > 1 && displayTheStack) {
+            <a
+              (click)="toggleStackMode()"
+              [attr.aria-label]="closeOtherSources"
+            >
+              <ng-container i18n="@@shared.closeOtherSources"
+                >(Close other sources)</ng-container
+              >
+            </a>
+          }
+        </div>
+      </div>
+    }
+    @if (!isPreferred && stackLength > 1 && !isPublicRecord) {
+      <div class="preferred-source">
+        @if (stackLength > 1) {
+          <a (click)="clickMakePrimary()"> Make preferred source </a>
         }
-      </app-panel-data>
+      </div>
+    }
+  </div>
+  @if (!isPublicRecord) {
+    <div align-end>
+      @if ((stackLength > 1 && displayTheStack) || stackLength === 1) {
+        <button
+          mat-icon-button
+          [matTooltip]="labelDeleteButton"
+          [attr.aria-label]="
+            type | appPanelActivityActionAriaLabel: 'delete' : this.panelTitle
+          "
+          (click)="delete()"
+        >
+          <mat-icon class="large-material-icon delete-button">
+            delete_outline
+          </mat-icon>
+        </button>
+      }
+    </div>
+  }
+</app-panel-data>

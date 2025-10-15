@@ -7,12 +7,10 @@
     <mat-form-field
       appearance="outline"
       class="mat-form-field-min input-container"
-      >
+    >
       <mat-select formControlName="locale">
         @for (language of languageMenuOptions | keyvalue; track language) {
-          <mat-option
-            [value]="language.key"
-            >
+          <mat-option [value]="language.key">
             {{ language.value }}
           </mat-option>
         }

@@ -3,9 +3,7 @@
     <ng-content></ng-content>
   </div>
   @if (visibility && hideVisibility) {
-    <app-panel-privacy
-      [visibility]="visibility"
-    ></app-panel-privacy>
+    <app-panel-privacy [visibility]="visibility"></app-panel-privacy>
   }
 </div>
 @if (separator) {
@@ -13,7 +11,5 @@
 }
 <!-- [PANEL ELEMENT SOURCE] display only on the public page side bar  -->
 @if (isPublicRecord) {
-  <ng-content
-    select="app-panel-element-source"
-  ></ng-content>
+  <ng-content select="app-panel-element-source"></ng-content>
 }

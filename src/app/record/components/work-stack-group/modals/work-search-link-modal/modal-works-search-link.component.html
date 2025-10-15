@@ -18,7 +18,7 @@
         target="_blank"
         rel="noopener noreferrer"
         i18n="@@works.linkWorksMoreInfo"
-        >
+      >
         More information about linking works to your ORCID record
       </a>
     </div>
@@ -27,67 +27,65 @@
     <h3>
       <ng-container i18n="@@shared.availableSearch"
         >Available Search & Link wizards</ng-container
+      >
+      ({{ total }})
+    </h3>
+    <hr />
+  </div>
+  <div class="row search-link-options">
+    <div class="select">
+      <div class="title">
+        <label class="mat-caption">
+          <strong i18n="@@works.workType">Work type</strong>
+        </label>
+      </div>
+      <mat-form-field
+        appearance="outline"
+        class="mat-form-field-min search-link-select"
+      >
+        <mat-select
+          [(value)]="workTypeSelected"
+          (selectionChange)="searchAndLink()"
         >
-        ({{ total }})
-      </h3>
-      <hr />
-    </div>
-    <div class="row search-link-options">
-      <div class="select">
-        <div class="title">
-          <label class="mat-caption">
-            <strong i18n="@@works.workType">Work type</strong>
-          </label>
-        </div>
-        <mat-form-field
-          appearance="outline"
-          class="mat-form-field-min search-link-select"
-          >
-          <mat-select
-            [(value)]="workTypeSelected"
-            (selectionChange)="searchAndLink()"
-            >
-            <mat-option value="All">
-              <ng-container i18n="@@works.all">All</ng-container>
+          <mat-option value="All">
+            <ng-container i18n="@@works.all">All</ng-container>
+          </mat-option>
+          @for (workType of workTypes; track workType) {
+            <mat-option [value]="workType">
+              {{ workType }}
             </mat-option>
-            @for (workType of workTypes; track workType) {
-              <mat-option [value]="workType">
-                {{ workType }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="select">
-        <div class="title">
-          <label class="mat-caption">
-            <strong i18n="@@works.geographicalArea">Geographical area</strong>
-          </label>
-        </div>
-        <mat-form-field
-          id="geographical-area-input"
-          appearance="outline"
-          class="mat-form-field-min search-link-select"
-          >
-          <mat-select
-            [(value)]="geographicalAreaSelected"
-            (selectionChange)="searchAndLink()"
-            >
-            <mat-option value="All">
-              <ng-container i18n="@@works.all">All</ng-container>
-            </mat-option>
-            @for (geographicalArea of geographicalAreas; track geographicalArea) {
-              <mat-option
-                [value]="geographicalArea"
-                >
-                {{ geographicalArea }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
+          }
+        </mat-select>
+      </mat-form-field>
     </div>
-    <app-search-link-wizard
-      [recordImportWizards]="recordImportWizards"
-    ></app-search-link-wizard>
-  </app-modal>
+    <div class="select">
+      <div class="title">
+        <label class="mat-caption">
+          <strong i18n="@@works.geographicalArea">Geographical area</strong>
+        </label>
+      </div>
+      <mat-form-field
+        id="geographical-area-input"
+        appearance="outline"
+        class="mat-form-field-min search-link-select"
+      >
+        <mat-select
+          [(value)]="geographicalAreaSelected"
+          (selectionChange)="searchAndLink()"
+        >
+          <mat-option value="All">
+            <ng-container i18n="@@works.all">All</ng-container>
+          </mat-option>
+          @for (geographicalArea of geographicalAreas; track geographicalArea) {
+            <mat-option [value]="geographicalArea">
+              {{ geographicalArea }}
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <app-search-link-wizard
+    [recordImportWizards]="recordImportWizards"
+  ></app-search-link-wizard>
+</app-modal>

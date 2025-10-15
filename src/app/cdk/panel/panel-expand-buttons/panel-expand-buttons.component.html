@@ -3,12 +3,12 @@
     mat-icon-button
     (click)="toggle.next()"
     [matTooltip]="tooltipLabelShowDetails"
-  [attr.aria-label]="
-    panelType | appPanelsExpandAriaLabel : panelId : panelTitle
-  "
+    [attr.aria-label]="
+      panelType | appPanelsExpandAriaLabel: panelId : panelTitle
+    "
     class="expand_more"
     tabindex="0"
-    >
+  >
     <mat-icon>expand_less</mat-icon>
   </button>
 }
@@ -17,12 +17,12 @@
     mat-icon-button
     (click)="toggle.next()"
     [matTooltip]="tooltipLabelHideDetails"
-  [attr.aria-label]="
-    panelType | appPanelsCollapseAriaLabel : panelId : panelTitle
-  "
+    [attr.aria-label]="
+      panelType | appPanelsCollapseAriaLabel: panelId : panelTitle
+    "
     class="expand_less"
     tabindex="0"
-    >
+  >
     <mat-icon>expand_more</mat-icon>
   </button>
 }

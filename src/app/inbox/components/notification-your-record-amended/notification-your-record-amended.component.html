@@ -25,33 +25,28 @@
           <ng-container>-</ng-container>
           @if (
             item.additionalInfo && item.additionalInfo['org_name'] != undefined
-            ) {
+          ) {
             <i>{{ item.additionalInfo['org_name'] }} </i>
           }
           @if (item.itemName != null) {
-            {{
-            item.itemName
-            }}
+            {{ item.itemName }}
           }
           @if (item.additionalInfo) {
             @if (
               item.itemName == null &&
               item.additionalInfo['group_name'] != undefined
-              ) {
+            ) {
               {{ item.additionalInfo['group_name'] }}
             }
             @if (item.additionalInfo['external_identifiers'] != undefined) {
               <ul>
                 @for (
                   otherId of item.additionalInfo['external_identifiers'][
-                  'externalIdentifier'
-                  ]
-                  ; track
-                  otherId) {
-                  <li
-                    >
-                    {{ otherId.type }}: {{ otherId.value }}
-                  </li>
+                    'externalIdentifier'
+                  ];
+                  track otherId
+                ) {
+                  <li>{{ otherId.type }}: {{ otherId.value }}</li>
                 }
               </ul>
             }

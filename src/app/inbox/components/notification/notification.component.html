@@ -16,7 +16,7 @@
     <div
       class="title mat-subtitle-2"
       [id]="'notification-' + notification?.putCode"
-      >
+    >
       {{ notificationTitle(notification) }}
     </div>
     <div class="date-archive-container">
@@ -28,7 +28,7 @@
         [ngClass]="{ hidden: archived }"
         [attr.aria-label]="ariaLabelArchived"
         [matTooltip]="ariaLabelArchived"
-        >
+      >
         <mat-icon class="material-icons-outlined">archived</mat-icon>
       </button>
     </div>
@@ -38,32 +38,29 @@
   class="body"
   [@heightAnimationState]="state"
   [hidden]="!showNotificationContent"
-  >
+>
   <div class="body-container">
     @if (notification?.notificationType === 'PERMISSION') {
       <app-notification-permission
         [notification]="$any(notification)"
       ></app-notification-permission>
     }
-
     @if (notification?.notificationType === 'AMENDED') {
       <app-notification-your-record-amended
         [notification]="$any(notification)"
       ></app-notification-your-record-amended>
     }
-
     @if (notification?.notificationType === 'INSTITUTIONAL_CONNECTION') {
       <app-notification-permission-institutional-connection
         [notification]="$any(notification)"
       ></app-notification-permission-institutional-connection>
     }
-
     @if (
       notification?.notificationType === 'ADMINISTRATIVE' ||
       notification?.notificationType === 'CUSTOM' ||
       notification?.notificationType === 'SERVICE_ANNOUNCEMENT' ||
       notification?.notificationType === 'TIP'
-      ) {
+    ) {
       <app-notification-html
         [notification]="$any(notification)"
       ></app-notification-html>

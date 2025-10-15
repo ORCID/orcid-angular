@@ -3,14 +3,14 @@
     IS_QA ||
     type !== 'peer-review' ||
     (type === 'peer-review' && currentAmount > 0)
-    ) {
+  ) {
     <div
       class="header-container"
-    [ngClass]="{
-      'sub-peer-review': type === 'sub-peer-review',
-      'featured-works-header-container': type === 'featured-works'
-    }"
-      >
+      [ngClass]="{
+        'sub-peer-review': type === 'sub-peer-review',
+        'featured-works-header-container': type === 'featured-works',
+      }"
+    >
       @if (type !== 'featured-works') {
         <div class="inline-initial-side">
           <app-panel-expand-buttons
@@ -23,286 +23,278 @@
               {{ title }}
               @if (type !== 'peer-review') {
                 @if (currentAmount && total && currentAmount !== total) {
-                  <span
-                    class="clickable"
-                    (click)="collapse()"
+                  <span class="clickable" (click)="collapse()"
                     >({{ currentAmount }}
                     <ng-container i18n="@@shared.of">of</ng-container>
                     {{ total }})</span
+                  >
+                }
+                @if (
+                  (currentAmount && !total) ||
+                  (currentAmount !== 0 && currentAmount === total)
+                ) {
+                  <span class="clickable" (click)="collapse()">
+                    ({{ currentAmount }})
+                  </span>
+                }
+                @if (
+                  (!currentAmount && total == 0) || (!currentAmount && !total)
+                ) {
+                  <span>(0)</span>
+                }
+                @if (!currentAmount && currentAmount !== 0) {
+                  <span></span>
+                }
+              }
+              @if (type === 'peer-review' && currentAmount !== 0) {
+                <span>
+                  ({{ reviewsNumber }}
+                  @if (reviewsNumber > 1) {
+                    <ng-container i18n="@@peerReview.reviews">
+                      reviews
+                    </ng-container>
+                  }
+                  @if (reviewsNumber === 1) {
+                    <ng-container i18n="@@peerReview.review">
+                      review
+                    </ng-container>
+                  }
+                  &nbsp;<ng-container i18n="@@peerReview.for">
+                    for
+                  </ng-container>
+                  {{ currentAmount }}
+                  @if (currentAmount > 1) {
+                    <ng-container i18n="@@peerReview.publicationsGrants"
+                      >publications/grants</ng-container
                     >
                   }
-                  @if (
-                    (currentAmount && !total) ||
-                    (currentAmount !== 0 && currentAmount === total)
-                    ) {
-                    <span
-                      class="clickable"
-                      (click)="collapse()"
-                      >
-                      ({{ currentAmount }})
-                    </span>
+                  @if (currentAmount === 1) {
+                    <ng-container i18n="@@peerReview.publicationGrant"
+                      >publication/grant</ng-container
+                    >
                   }
-                  @if (
-                    (!currentAmount && total == 0) || (!currentAmount && !total)
-                    ) {
-                    <span
-                      >(0)</span
-                      >
-                    }
-                    @if (!currentAmount && currentAmount !== 0) {
-                      <span></span>
-                    }
-                  }
-                  @if (type === 'peer-review' && currentAmount !== 0) {
-                    <span>
-                      ({{ reviewsNumber }}
-                      @if (reviewsNumber > 1) {
-                        <ng-container
-                          i18n="@@peerReview.reviews"
-                          >
-                reviews
-              </ng-container>
-                      }
-                      @if (reviewsNumber === 1) {
-                        <ng-container
-                          i18n="@@peerReview.review"
-                          >
-                review </ng-container
-                          >
-                          }&nbsp;<ng-container i18n="@@peerReview.for"> for </ng-container>
-                          {{ currentAmount }}
-                          @if (currentAmount > 1) {
-                            <ng-container
-                              i18n="@@peerReview.publicationsGrants"
-                              >publications/grants</ng-container
-                              >
-                            }
-                            @if (currentAmount === 1) {
-                              <ng-container
-                                i18n="@@peerReview.publicationGrant"
-                                >publication/grant</ng-container
-                                >
-                                })
-                              </span>
-                            }
-                          </h3>
-                        </div>
-                      </div>
-                    }
-                    @if (type === 'featured-works') {
-                      <div class="inline-initial-side">
-                        <div class="featured-works-star">
-                          <mat-icon> star_filled </mat-icon>
-                        </div>
-                        <h3 class="activity-header orc-font-body-large">
-                          {{ title }}
-                        </h3>
-                      </div>
-                    }
-                    @if (type !== 'sub-peer-review') {
-                      <div class="controls">
-                        @if (!isPublicRecord && singleAddButton()) {
-                          <button
-                            mat-button
-                            class="orc-font-body-small add"
-                            (click)="add(type)"
-                            [attr.aria-label]="type | appPanelsAddAriaLabel"
-                            id="{{ 'cy-add-btn-' + type }}"
-                            >
-                            <mat-icon class="large-material-icon" id="add-button">
-                              add_circle_outline
-                            </mat-icon>
-                            @if (!isMobile) {
-                              <ng-container i18n="@@shared.add"> Add </ng-container>
-                            }
-                          </button>
-                        }
-                        @if (
-                          !isPublicRecord &&
-                          multipleMatButton() &&
-                          (IS_QA || (!IS_QA && type !== 'peer-review'))
-                          ) {
-                          <button
-                            mat-button
-                            class="orc-font-body-small add"
-                            [attr.aria-label]="type | appPanelsAddAriaLabel"
-                            [matMenuTriggerFor]="menuAdd"
-                            id="{{ 'cy-menu-add-' + type }}"
-                            >
-                            <mat-icon class="large-material-icon add-button-multiple">
-                              add_circle_outline
-                            </mat-icon>
-                            @if (!isMobile) {
-                              <ng-container i18n="@@shared.add"> Add </ng-container>
-                            }
-                          </button>
-                        }
-                        <mat-menu #menuAdd="matMenu">
-                          @if (type === 'education' || type === 'qualification') {
-                            <button mat-menu-item (click)="add('education')">
-                              <ng-container i18n="@@shared.addEducation"
-                                >Add Education</ng-container
-                                >
-                              </button>
-                              <button mat-menu-item (click)="add('qualification')">
-                                <ng-container i18n="@@shared.addQualification"
-                                  >Add Qualification</ng-container
-                                  >
-                                </button>
-                              }
-                              @if (type === 'professional-activities') {
-                                <button mat-menu-item (click)="add('invited-position')">
-                                  <mat-icon class="material-icons-outlined">join_inner</mat-icon>
-                                  <ng-container i18n="@@shared.addInvited"
-                                    >Add Invited Position</ng-container
-                                    >
-                                  </button>
-                                  <button mat-menu-item (click)="add('distinction')">
-                                    <mat-icon class="material-icons-outlined">stars</mat-icon>
-                                    <ng-container i18n="@@shared.addDistinction"
-                                      >Add Distinction</ng-container
-                                      >
-                                    </button>
-                                    <button mat-menu-item (click)="add('membership')">
-                                      <mat-icon class="material-icons-outlined">card_membership</mat-icon>
-                                      <ng-container i18n="@@shared.addMembership"
-                                        >Add Membership</ng-container
-                                        >
-                                      </button>
-                                      <button mat-menu-item (click)="add('service')">
-                                        <mat-icon class="material-icons-outlined">badge</mat-icon>
-                                        <ng-container i18n="@@shared.addService">Add Service</ng-container>
-                                      </button>
-                                    }
-                                    @if (type === 'distinction') {
-                                      <button mat-menu-item (click)="add('invited-position')">
-                                        <ng-container i18n="@@shared.addInvited"
-                                          >Add Invited Position</ng-container
-                                          >
-                                        </button>
-                                        <button mat-menu-item (click)="add('distinction')">
-                                          <ng-container i18n="@@shared.addDistinction"
-                                            >Add Distinction</ng-container
-                                            >
-                                          </button>
-                                        }
-                                        @if (type === 'service') {
-                                          <button mat-menu-item (click)="add('membership')">
-                                            <ng-container i18n="@@shared.addMembership"
-                                              >Add Membership</ng-container
-                                              >
-                                            </button>
-                                            <button mat-menu-item (click)="add('service')">
-                                              <ng-container i18n="@@shared.addService">Add Service</ng-container>
-                                            </button>
-                                          }
-                                          @if (type === 'funding') {
-                                            <button mat-menu-item (click)="add('funding-search')">
-                                              <ng-container i18n="@@shared.searchLink"
-                                                >Search & link</ng-container
-                                                >
-                                              </button>
-                                              <button mat-menu-item (click)="add('funding')">
-                                                <ng-container i18n="@@shared.addManually"
-                                                  >Add manually</ng-container
-                                                  >
-                                                </button>
-                                              }
-                                              @if (type === 'works') {
-                                                @for (option of addMenuOptions; track option) {
-                                                  <button
-                                                    mat-menu-item
-                                                    (click)="add('works', option.action)"
-                                                    id="{{ option.id }}"
-                                                    >
-                                                    {{ option.label }}
-                                                  </button>
-                                                }
-                                              }
-                                              @if (type === 'peer-review') {
-                                                <button mat-menu-item (click)="add(type)">
-                                                  <ng-container i18n="@@shared.searchLink"
-                                                    >Search & link</ng-container
-                                                    >
-                                                  </button>
-                                                }
-                                              </mat-menu>
-                                              @if (type !== 'featured-works') {
-                                                <button
-                                                  mat-button
-                                                  class="orc-font-body-small"
-        [attr.aria-label]="
-          type | appPanelsSortAriaLabel : !currentAmount && !total
-        "
-                                                  [matMenuTriggerFor]="menu"
-                                                  [disabled]="!currentAmount && !total"
-                                                  >
-                                                  <mat-icon class="large-material-icon"> sort </mat-icon>
-                                                  @if (!isMobile) {
-                                                    <ng-container i18n="@@shared.sort">
-          Sort
-        </ng-container>
-                                                  }
-                                                </button>
-                                              }
-                                              @if (type === 'featured-works' && !isPublicRecord) {
-                                                <button
-                                                  mat-button
-                                                  class="orc-font-body-small"
-                                                  (click)="openFeaturedWorksManage()"
-                                                  [attr.aria-label]="manageFeaturedWorksAriaLabel"
-                                                  [disabled]="total === 0"
-                                                  >
-                                                  <mat-icon class="large-material-icon material-symbols-outlined">
-                                                    stars
-                                                  </mat-icon>
-                                                  <ng-container i18n="@@shared.manage"> Manage </ng-container>
-                                                </button>
-                                              }
-                                              <mat-menu #menu="matMenu">
-                                                @for (option of sortTypes; track option) {
-                                                  <button
-                                                    mat-menu-item
-                                                    (click)="sortChange(option)"
-                                                    [attr.aria-label]="option | appPanelsSortByAriaLabel : type"
-                                                    >
-                                                    <div class="padding-right">
-                                                      {{ option | sortLabel }}
-                                                    </div>
-                                                    @if (option === sortType && sortDirection === 'asc') {
-                                                      <mat-icon
-                                                        aria-hidden="false"
-                                                        class="sort"
-                                                        [attr.aria-label]="ariaLabelAscending"
-                                                        >
-                                                        north
-                                                      </mat-icon>
-                                                    }
-                                                    @if (option === sortType && sortDirection === 'desc') {
-                                                      <mat-icon
-                                                        aria-hidden="false"
-                                                        class="sort"
-                                                        [attr.aria-label]="ariaLabelDescending"
-                                                        >
-                                                        south
-                                                      </mat-icon>
-                                                    }
-                                                  </button>
-                                                }
-                                              </mat-menu>
-                                            </div>
-                                          }
-                                        </div>
-                                      }
-                                    </div>
-                                    @if (loading) {
-                                      <mat-progress-bar
-                                        mode="indeterminate"
-                                        color="accent"
-                                      ></mat-progress-bar>
-                                    }
-                                    @if (expandedContent) {
-                                      <div class="col s4 m8 l12 content no-gutters">
-                                        <ng-content></ng-content>
-                                      </div>
-                                    }
+                  )
+                </span>
+              }
+            </h3>
+          </div>
+        </div>
+      }
+      @if (type === 'featured-works') {
+        <div class="inline-initial-side">
+          <div class="featured-works-star">
+            <mat-icon> star_filled </mat-icon>
+          </div>
+          <h3 class="activity-header orc-font-body-large">
+            {{ title }}
+          </h3>
+        </div>
+      }
+      @if (type !== 'sub-peer-review') {
+        <div class="controls">
+          @if (!isPublicRecord && singleAddButton()) {
+            <button
+              mat-button
+              class="orc-font-body-small add"
+              (click)="add(type)"
+              [attr.aria-label]="type | appPanelsAddAriaLabel"
+              id="{{ 'cy-add-btn-' + type }}"
+            >
+              <mat-icon class="large-material-icon" id="add-button">
+                add_circle_outline
+              </mat-icon>
+              @if (!isMobile) {
+                <ng-container i18n="@@shared.add"> Add </ng-container>
+              }
+            </button>
+          }
+          @if (
+            !isPublicRecord &&
+            multipleMatButton() &&
+            (IS_QA || (!IS_QA && type !== 'peer-review'))
+          ) {
+            <button
+              mat-button
+              class="orc-font-body-small add"
+              [attr.aria-label]="type | appPanelsAddAriaLabel"
+              [matMenuTriggerFor]="menuAdd"
+              id="{{ 'cy-menu-add-' + type }}"
+            >
+              <mat-icon class="large-material-icon add-button-multiple">
+                add_circle_outline
+              </mat-icon>
+              @if (!isMobile) {
+                <ng-container i18n="@@shared.add"> Add </ng-container>
+              }
+            </button>
+          }
+          <mat-menu #menuAdd="matMenu">
+            @if (type === 'education' || type === 'qualification') {
+              <button mat-menu-item (click)="add('education')">
+                <ng-container i18n="@@shared.addEducation"
+                  >Add Education</ng-container
+                >
+              </button>
+              <button mat-menu-item (click)="add('qualification')">
+                <ng-container i18n="@@shared.addQualification"
+                  >Add Qualification</ng-container
+                >
+              </button>
+            }
+            @if (type === 'professional-activities') {
+              <button mat-menu-item (click)="add('invited-position')">
+                <mat-icon class="material-icons-outlined">join_inner</mat-icon>
+                <ng-container i18n="@@shared.addInvited"
+                  >Add Invited Position</ng-container
+                >
+              </button>
+              <button mat-menu-item (click)="add('distinction')">
+                <mat-icon class="material-icons-outlined">stars</mat-icon>
+                <ng-container i18n="@@shared.addDistinction"
+                  >Add Distinction</ng-container
+                >
+              </button>
+              <button mat-menu-item (click)="add('membership')">
+                <mat-icon class="material-icons-outlined"
+                  >card_membership</mat-icon
+                >
+                <ng-container i18n="@@shared.addMembership"
+                  >Add Membership</ng-container
+                >
+              </button>
+              <button mat-menu-item (click)="add('service')">
+                <mat-icon class="material-icons-outlined">badge</mat-icon>
+                <ng-container i18n="@@shared.addService"
+                  >Add Service</ng-container
+                >
+              </button>
+            }
+            @if (type === 'distinction') {
+              <button mat-menu-item (click)="add('invited-position')">
+                <ng-container i18n="@@shared.addInvited"
+                  >Add Invited Position</ng-container
+                >
+              </button>
+              <button mat-menu-item (click)="add('distinction')">
+                <ng-container i18n="@@shared.addDistinction"
+                  >Add Distinction</ng-container
+                >
+              </button>
+            }
+            @if (type === 'service') {
+              <button mat-menu-item (click)="add('membership')">
+                <ng-container i18n="@@shared.addMembership"
+                  >Add Membership</ng-container
+                >
+              </button>
+              <button mat-menu-item (click)="add('service')">
+                <ng-container i18n="@@shared.addService"
+                  >Add Service</ng-container
+                >
+              </button>
+            }
+            @if (type === 'funding') {
+              <button mat-menu-item (click)="add('funding-search')">
+                <ng-container i18n="@@shared.searchLink"
+                  >Search & link</ng-container
+                >
+              </button>
+              <button mat-menu-item (click)="add('funding')">
+                <ng-container i18n="@@shared.addManually"
+                  >Add manually</ng-container
+                >
+              </button>
+            }
+            @if (type === 'works') {
+              @for (option of addMenuOptions; track option) {
+                <button
+                  mat-menu-item
+                  (click)="add('works', option.action)"
+                  id="{{ option.id }}"
+                >
+                  {{ option.label }}
+                </button>
+              }
+            }
+            @if (type === 'peer-review') {
+              <button mat-menu-item (click)="add(type)">
+                <ng-container i18n="@@shared.searchLink"
+                  >Search & link</ng-container
+                >
+              </button>
+            }
+          </mat-menu>
+          @if (type !== 'featured-works') {
+            <button
+              mat-button
+              class="orc-font-body-small"
+              [attr.aria-label]="
+                type | appPanelsSortAriaLabel: !currentAmount && !total
+              "
+              [matMenuTriggerFor]="menu"
+              [disabled]="!currentAmount && !total"
+            >
+              <mat-icon class="large-material-icon"> sort </mat-icon>
+              @if (!isMobile) {
+                <ng-container i18n="@@shared.sort"> Sort </ng-container>
+              }
+            </button>
+          }
+          @if (type === 'featured-works' && !isPublicRecord) {
+            <button
+              mat-button
+              class="orc-font-body-small"
+              (click)="openFeaturedWorksManage()"
+              [attr.aria-label]="manageFeaturedWorksAriaLabel"
+              [disabled]="total === 0"
+            >
+              <mat-icon class="large-material-icon material-symbols-outlined">
+                stars
+              </mat-icon>
+              <ng-container i18n="@@shared.manage"> Manage </ng-container>
+            </button>
+          }
+          <mat-menu #menu="matMenu">
+            @for (option of sortTypes; track option) {
+              <button
+                mat-menu-item
+                (click)="sortChange(option)"
+                [attr.aria-label]="option | appPanelsSortByAriaLabel: type"
+              >
+                <div class="padding-right">
+                  {{ option | sortLabel }}
+                </div>
+                @if (option === sortType && sortDirection === 'asc') {
+                  <mat-icon
+                    aria-hidden="false"
+                    class="sort"
+                    [attr.aria-label]="ariaLabelAscending"
+                  >
+                    north
+                  </mat-icon>
+                }
+                @if (option === sortType && sortDirection === 'desc') {
+                  <mat-icon
+                    aria-hidden="false"
+                    class="sort"
+                    [attr.aria-label]="ariaLabelDescending"
+                  >
+                    south
+                  </mat-icon>
+                }
+              </button>
+            }
+          </mat-menu>
+        </div>
+      }
+    </div>
+  }
+</div>
+@if (loading) {
+  <mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
+}
+@if (expandedContent) {
+  <div class="col s4 m8 l12 content no-gutters">
+    <ng-content></ng-content>
+  </div>
+}

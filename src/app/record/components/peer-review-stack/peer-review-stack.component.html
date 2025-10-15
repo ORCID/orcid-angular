@@ -1,28 +1,31 @@
 @for (
-  subPeerReview of peerReviewStack?.peerReviews; track trackByPeerReviewStack(i,
-  subPeerReview); let i = $index; let last = $last) {
+  subPeerReview of peerReviewStack?.peerReviews;
+  track trackByPeerReviewStack(i, subPeerReview);
+  let i = $index;
+  let last = $last
+) {
   @if (isPreferred(subPeerReview) || displayTheStack) {
     <app-panel
       panelId="peer-review"
       [putCode]="subPeerReview.putCode.value"
       [elements]="subPeerReview"
       [type]="'top-bar'"
-    [ngStyle]="{
-      'z-index': peerReviewStack.peerReviews.length - i
-    }"
+      [ngStyle]="{
+        'z-index': peerReviewStack.peerReviews.length - i,
+      }"
       [editable]="false"
       [customControls]="true"
       class="top-bar"
       [stackedHeader]="!platform.columns12"
-      >
+    >
       <h4
         header
         class="peer-review-title"
-      [ngClass]="{
-        'orc-font-small-print': isMobile,
-        'orc-font-body-small': !isMobile
-      }"
-        >
+        [ngClass]="{
+          'orc-font-small-print': isMobile,
+          'orc-font-body-small': !isMobile,
+        }"
+      >
         <span class="header-sub-peer-review" [ngClass]="{ mobile: isMobile }">
           <b i18n="@@peerReview.reviewDate"> Review date: </b>
           {{ subPeerReview.completionDate | monthDayYearDateToString }}
@@ -40,50 +43,50 @@
       </h4>
       <div
         custom-controls
-      [ngClass]="{
-        'orc-font-small-print': isMobile,
-        'orc-font-body-small': !isMobile
-      }"
-        >
+        [ngClass]="{
+          'orc-font-small-print': isMobile,
+          'orc-font-body-small': !isMobile,
+        }"
+      >
         @if (
           !displayTheStack ||
           (displayTheStack &&
-          this.stackPanelsDisplay[subPeerReview.putCode.value]
-          .topPanelOfTheStack)
-          ) {
-          <span
-            class="show"
-            >
+            this.stackPanelsDisplay[subPeerReview.putCode.value]
+              .topPanelOfTheStack)
+        ) {
+          <span class="show">
             @if (!subPeerReview.showDetails) {
               <a
                 class="underline show-more-button"
                 (click)="getDetails(subPeerReview, subPeerReview.putCode.value)"
                 i18n="@@shared.showMoreDetail"
-          [attr.aria-label]="
-            'peer-review'
-              | appPanelActivityActionAriaLabel
-                : 'show'
-                : (subPeerReview.completionDate | monthDayYearDateToString)
-          "
-                >
-          Show more detail
-        </a>
+                [attr.aria-label]="
+                  'peer-review'
+                    | appPanelActivityActionAriaLabel
+                      : 'show'
+                      : (subPeerReview.completionDate
+                          | monthDayYearDateToString)
+                "
+              >
+                Show more detail
+              </a>
             }
             @if (subPeerReview.showDetails) {
               <a
                 class="underline"
                 (click)="collapse(subPeerReview)"
                 i18n="@@shared.showLessDetail"
-          [attr.aria-label]="
-            'peer-review'
-              | appPanelActivityActionAriaLabel
-                : 'hide'
-                : (subPeerReview.completionDate | monthDayYearDateToString)
-          "
+                [attr.aria-label]="
+                  'peer-review'
+                    | appPanelActivityActionAriaLabel
+                      : 'hide'
+                      : (subPeerReview.completionDate
+                          | monthDayYearDateToString)
+                "
                 id="show-less-button"
-                >
-          Show less detail
-        </a>
+              >
+                Show less detail
+              </a>
             }
           </span>
         }
@@ -95,14 +98,12 @@
               target="_blank"
               href="{{ subPeerReview.url.value }}"
               i18n="@@peerReview.view"
-              >
-          View
-        </a>
+            >
+              View
+            </a>
           }
           @if (!subPeerReview.url) {
-            <ng-container i18n="@@peerReview.view">
-          View
-        </ng-container>
+            <ng-container i18n="@@peerReview.view"> View </ng-container>
           }
         </span>
       </div>
@@ -111,7 +112,7 @@
           [isPublicRecord]="isPublicRecord"
           [subPeerReview]="subPeerReview"
           [detailsPeerReviews]="detailsPeerReviews"
-          >
+        >
         </app-peer-review>
       }
       <app-panel-source
@@ -124,15 +125,15 @@
         [stackLength]="peerReviewStack.peerReviews.length"
         [(displayTheStack)]="displayTheStack"
         (makePrimary)="makePrimaryCard(subPeerReview)"
-      [topPanelOfTheStackMode]="
-        stackPanelsDisplay[subPeerReview.putCode.value].topPanelOfTheStack
-      "
+        [topPanelOfTheStackMode]="
+          stackPanelsDisplay[subPeerReview.putCode.value].topPanelOfTheStack
+        "
         [isPublicRecord]="isPublicRecord"
         (topPanelOfTheStackModeChange)="changeTopPanelOfTheStack(subPeerReview)"
         [type]="'peer-review'"
         [item]="subPeerReview"
         [panelTitle]="subPeerReview.completionDate | monthDayYearDateToString"
-        >
+      >
       </app-panel-source>
     </app-panel>
   }

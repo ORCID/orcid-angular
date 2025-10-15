@@ -2,120 +2,122 @@
   <ng-container class="margin-top-1">
     <app-display-attribute>
       <h3 class="orc-font-body-small" i18n="@@shared.organizationIdentifiers">
-      Organization identifiers
-    </h3>
+        Organization identifiers
+      </h3>
       <div>
         <div>
-          {{ orgDisambiguated?.sourceType
-          }}@if (orgDisambiguated.sourceType && orgDisambiguated.sourceId) {
-          :
-        }
-        @if (
-          orgDisambiguated.sourceType
-          | organizationLink : orgDisambiguated.sourceId
-          | isUrlWithProtocol
-          ) {
-          <a
-            class="underline"
-            target="_blank"
-            rel="noopener noreferrer"
-          href="{{
-            orgDisambiguated.sourceType
-              | organizationLink : orgDisambiguated.sourceId
-          }}"
-            >
-            {{ orgDisambiguated.sourceId }}
-          </a>
-        }
-        @if (
-          !(
-          orgDisambiguated.sourceType
-          | organizationLink : orgDisambiguated.sourceId
-          | isUrlWithProtocol
-          )
-          ) {
-          {{ orgDisambiguated?.sourceId }}
-        }
-      </div>
-      <div>
-        {{ orgDisambiguated?.value
-        }}@if (orgDisambiguated?.value) {
-        :
-      }
-      {{ orgDisambiguated | cityRegionCountry }}
-    </div>
-    @if (orgDisambiguated?.url) {
-      <a
-        class="underline"
-        target="_blank"
-        rel="noreferrer noopener"
-        [href]="orgDisambiguated?.url"
-        >
-        {{ orgDisambiguated?.url }}
-      </a>
-    }
-  </div>
-</app-display-attribute>
-@if (orgDisambiguated?.orgDisambiguatedExternalIdentifiers?.length > 0) {
-  <app-display-attribute
-    >
-    <h3 class="orc-font-body-small">
-      <ng-container i18n="@@shared.otherOrganization"
-        >Other organization identifiers provided by</ng-container
-        >
-        {{ orgDisambiguated.sourceType | uppercase }}
-      </h3>
-      @for (
-        org of orgDisambiguated.orgDisambiguatedExternalIdentifiers; track
-        org; let i = $index) {
-        <div
-          class="padding-level-3"
-          >
-          {{ org.identifierType }}:
+          {{ orgDisambiguated?.sourceType }}
+          @if (orgDisambiguated.sourceType && orgDisambiguated.sourceId) {
+            :
+          }
           @if (
-            org.identifierType
-            | organizationLink : org.preferred
-            | isUrlWithProtocol
-            ) {
+            orgDisambiguated.sourceType
+              | organizationLink: orgDisambiguated.sourceId
+              | isUrlWithProtocol
+          ) {
             <a
               class="underline"
               target="_blank"
               rel="noopener noreferrer"
-              href="{{ org.identifierType | organizationLink : org.preferred }}"
-              >
-              {{ org.preferred }}
+              href="{{
+                orgDisambiguated.sourceType
+                  | organizationLink: orgDisambiguated.sourceId
+              }}"
+            >
+              {{ orgDisambiguated.sourceId }}
             </a>
           }
           @if (
             !(
-            org.identifierType
-            | organizationLink : org.preferred
-            | isUrlWithProtocol
+              orgDisambiguated.sourceType
+              | organizationLink: orgDisambiguated.sourceId
+              | isUrlWithProtocol
             )
-            ) {
-            {{ org.preferred }}
+          ) {
+            {{ orgDisambiguated?.sourceId }}
           }
-          @if (org.preferred) {
-            <span> (</span><span i18n="@@shared.preferred">preferred</span
-            ><span>)</span>
-            }@if (org.preferred && org.all.length > 1) {
-            <span>, </span
+        </div>
+        <div>
+          {{ orgDisambiguated?.value }}
+          @if (orgDisambiguated?.value) {
+            :
+          }
+          {{ orgDisambiguated | cityRegionCountry }}
+        </div>
+        @if (orgDisambiguated?.url) {
+          <a
+            class="underline"
+            target="_blank"
+            rel="noreferrer noopener"
+            [href]="orgDisambiguated?.url"
+          >
+            {{ orgDisambiguated?.url }}
+          </a>
+        }
+      </div>
+    </app-display-attribute>
+    @if (orgDisambiguated?.orgDisambiguatedExternalIdentifiers?.length > 0) {
+      <app-display-attribute>
+        <h3 class="orc-font-body-small">
+          <ng-container i18n="@@shared.otherOrganization"
+            >Other organization identifiers provided by</ng-container
+          >
+          {{ orgDisambiguated.sourceType | uppercase }}
+        </h3>
+        @for (
+          org of orgDisambiguated.orgDisambiguatedExternalIdentifiers;
+          track org;
+          let i = $index
+        ) {
+          <div class="padding-level-3">
+            {{ org.identifierType }}:
+            @if (
+              org.identifierType
+                | organizationLink: org.preferred
+                | isUrlWithProtocol
+            ) {
+              <a
+                class="underline"
+                target="_blank"
+                rel="noopener noreferrer"
+                href="{{
+                  org.identifierType | organizationLink: org.preferred
+                }}"
               >
-              }@for (id of org.all; track id; let j = $index) {
+                {{ org.preferred }}
+              </a>
+            }
+            @if (
+              !(
+                org.identifierType
+                | organizationLink: org.preferred
+                | isUrlWithProtocol
+              )
+            ) {
+              {{ org.preferred }}
+            }
+            @if (org.preferred) {
+              <span> (</span><span i18n="@@shared.preferred">preferred</span
+              ><span>)</span>
+            }
+            @if (org.preferred && org.all.length > 1) {
+              <span>, </span>
+            }
+            @for (id of org.all; track id; let j = $index) {
               @if (id != org.preferred) {
                 @if (
                   !(id | isUrlWithProtocol) &&
-                  (org.identifierType | organizationLink : id) === ''
-                  ) {
+                  (org.identifierType | organizationLink: id) === ''
+                ) {
                   {{ id }}
-                  }@if (
-                  (org.identifierType | organizationLink : id) !== '') {
+                }
+                @if ((org.identifierType | organizationLink: id) !== '') {
                   <a
                     class="underline"
                     target="_blank"
                     rel="noopener noreferrer"
-                    href="{{ org.identifierType | organizationLink : id }}"
-                    >
+                    href="{{ org.identifierType | organizationLink: id }}"
+                  >
                     {{ id }}
                   </a>
                 } @else {
@@ -125,15 +127,13 @@
                       target="_blank"
                       rel="noopener noreferrer"
                       href="{{ id }}"
-                      >
+                    >
                       {{ id }}
                     </a>
                   }
                 }
                 @if (org.all[j + 1] && org.all[j + 1] != org.preferred) {
-                  <span
-                    >,
-                  </span>
+                  <span>, </span>
                 }
               }
             }

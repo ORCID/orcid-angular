@@ -5,48 +5,39 @@
       [content]="workIdentifier.externalIdentifierType"
     ></app-panel-data-line>
   }
-
   @if (workIdentifier?.externalIdentifierId) {
     <app-panel-data-line
       [title]="valueLabel"
       [content]="workIdentifier.externalIdentifierId"
-      >
+    >
     </app-panel-data-line>
   }
-
   @if (workIdentifier?.externalIdentifierUrl) {
     <app-panel-data-line
       [title]="urlLabel"
       [content]="workIdentifier.externalIdentifierUrl"
       [url]="workIdentifier.externalIdentifierUrl"
-      >
+    >
     </app-panel-data-line>
   }
-
   @if (workIdentifier?.externalRelationship) {
     <app-panel-data-line
       [title]="relationshipLabel"
-    [content]="
-      workIdentifier.externalRelationship | recordWorkRelationshipLabel
-    "
-      >
+      [content]="
+        workIdentifier.externalRelationship | recordWorkRelationshipLabel
+      "
+    >
     </app-panel-data-line>
   }
   @if (externalIdForm?.get('externalIdentifierId').hasError('validFormat')) {
-    <mat-error
-      class="mat-caption"
-      >
+    <mat-error class="mat-caption">
       <ng-container i18n="@@works.validFormat">
-      Invalid id for the selected identifier type
-    </ng-container>
+        Invalid id for the selected identifier type
+      </ng-container>
     </mat-error>
   }
   @if (externalIdForm?.get('externalIdentifierUrl').hasError('pattern')) {
-    <mat-error
-      i18n="@@works.invalidUrl"
-      >
-    Invalid url
-  </mat-error>
+    <mat-error i18n="@@works.invalidUrl"> Invalid url </mat-error>
   }
 </div>
 <div class="controls">

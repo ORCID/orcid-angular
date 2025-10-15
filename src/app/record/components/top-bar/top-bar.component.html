@@ -16,8 +16,8 @@
   @if (userInfo?.LOCKED === 'true') {
     <app-alert-message>
       <h3 title i18n="@@topBar.accountHasBeenLocked">
-      Your account has been locked
-    </h3>
+        Your account has been locked
+      </h3>
       <div content>
         <ng-container i18n="@@topBar.pleasContact">Please contact</ng-container>
         <a
@@ -27,240 +27,231 @@
           rel="noopener noreferrer"
           href="https://support.orcid.org/"
           >ORCID support</a
+        >
+        <ng-container i18n="@@topBar.ifYouBelieveWasLockedInError"
+          >if you believe this account was locked in error.</ng-container
+        >
+      </div>
+    </app-alert-message>
+  }
+  @if (newlySharedDomains?.length) {
+    <app-warning-message type="success">
+      <ng-container title i18n="@@topBar.emailDomainsShared"
+        >Email domains shared</ng-container
+      >
+      <ng-container content>
+        @if (newlySharedDomains.length > 1) {
+          <ng-container i18n="@@topBar.theEmailDomains"
+            >The email domains</ng-container
           >
-          <ng-container i18n="@@topBar.ifYouBelieveWasLockedInError"
-            >if you believe this account was locked in error.</ng-container
-            >
-          </div>
-        </app-alert-message>
-      }
-      @if (newlySharedDomains?.length) {
-        <app-warning-message type="success">
-          <ng-container title i18n="@@topBar.emailDomainsShared"
-            >Email domains shared</ng-container
-            >
-            <ng-container content
-              >@if (newlySharedDomains.length > 1) {
-              <ng-container
-                i18n="@@topBar.theEmailDomains"
-                >The email domains</ng-container
+        }
+        @if (newlySharedDomains.length === 1) {
+          <ng-container i18n="@@topBar.theEmailDomain"
+            >The email domain</ng-container
+          >
+        }
+        <!-- LIST ALL EMAILS ON ARRAY, divided by , or 'and'  -->
+        @for (
+          email of newlySharedDomains;
+          track email;
+          let last = $last;
+          let i = $index
+        ) {
+          @if (!last) {
+            <strong>{{ email }}</strong>
+          }
+          <!-- If is not the one before the last add a comma -->
+          @if (!last && i < newlySharedDomains.length - 2) {
+            ,
+          }
+          <!-- If is the one before the last add an 'and' -->
+          @if (i === newlySharedDomains.length - 2) {
+            <ng-container i18n="@@topBar.and"> and </ng-container>
+          }
+          @if (last) {
+            <strong>{{ email }} </strong>
+          }
+        }
+        @if (newlySharedDomains.length > 1) {
+          <ng-container i18n="@@topBar.areNowVisibleOnYourPublicORCIDRecord">
+            are now visible on your public ORCID record. Manage your email
+            addresses and domains in the
+          </ng-container>
+        }
+        @if (newlySharedDomains.length === 1) {
+          <ng-container i18n="@@topBar.isNowVisibleOnYourPublicORCIDRecord">
+            is now visible on your public ORCID record. Manage your email
+            addresses and domains in the
+          </ng-container>
+        }
+        <ng-container>
+          <a
+            class="underline green-url"
+            (click)="openEmailModal()"
+            i18n="@@topBar.emailsDomainsSection"
+            >Emails & domains section</a
+          ></ng-container
+        >.
+      </ng-container>
+    </app-warning-message>
+  }
+  @if (newAddedAffiliation) {
+    <app-warning-message type="success">
+      <ng-container title i18n="@@topBar.employmentAffiliationAdded"
+        >Employment affiliation added</ng-container
+      >
+      <ng-container content>
+        <strong> {{ newAddedAffiliation }} </strong
+        ><ng-container i18n="@@topBar.hasBeenAddedToYourORCIDRecord">
+          has been added to your ORCID record. Manage your existing employment
+          affiliations or add new ones in the</ng-container
+        >
+        <a
+          class="underline green-url"
+          (click)="goToAffiliations()"
+          i18n="@@topBar.employmentSection"
+          >Employment section</a
+        >
+      </ng-container>
+    </app-warning-message>
+  }
+  @if (userRecord?.names) {
+    <section id="names" role="region" [attr.aria-label]="regionNames">
+      <app-panel
+        panelId="research-top-bar"
+        [isPublicRecord]="isPublicRecord"
+        [elements]="userRecord.names.givenNames"
+        [editModalComponent]="modalNameComponent"
+        [userRecord]="userRecord"
+        [type]="'top-bar'"
+        [id]="userInfo?.EFFECTIVE_USER_ORCID"
+        [names]="true"
+        id="names-panel"
+      >
+        <h2 header class="names-header orc-font-body" i18n="@@topBar.names">
+          Names
+        </h2>
+        <app-panel-data>
+          <app-panel-element
+            [visibility]="userRecord.names.visibility.visibility"
+          >
+            @if (creditName) {
+              <h1 class="name">
+                <span i18n="@@topBar.publishedName" class="mat-caption">
+                  Published Name
+                </span>
+                <p class="mat-card-title published-name" id="publishedName">
+                  {{ creditName }}
+                </p>
+              </h1>
+            }
+            <span i18n="@@topBar.name" class="mat-caption description">
+              Name
+            </span>
+            <div id="givenAndFamilyNames" class="mat-subtitle-2">
+              {{ givenNames + ' ' + familyName }}
+            </div>
+          </app-panel-element>
+          @if (userRecord?.otherNames?.otherNames?.length > 0) {
+            <div class="other-names-container">
+              <span i18n="@@topBar.alsoKnowAs" class="mat-caption description">
+                Also known as
+              </span>
+              @for (
+                otherNames of userRecord.otherNames.otherNames;
+                track otherNames
+              ) {
+                <app-panel-element
+                  [visibility]="otherNames.visibility.visibility"
+                  class="other-names"
                 >
+                  <p class="mat-subtitle-2 other-names">
+                    {{ otherNames.content }}
+                  </p>
+                </app-panel-element>
               }
-              @if (newlySharedDomains.length === 1) {
-                <ng-container
-                  i18n="@@topBar.theEmailDomain"
-                  >The email domain</ng-container
-                  >
-                }
-                <!-- LIST ALL EMAILS ON ARRAY, divided by , or 'and'  -->
-                @for (email of newlySharedDomains; track email; let last = $last; let i = $index) {
-                  @if (!last) {
-                    <strong>{{ email }}</strong
-                      >
-                      }<!-- If is not the one before the last add a comma -->@if (!last && i < newlySharedDomains.length - 2) {
-                      ,
-                    }
-                    <!-- If is the one before the last add an 'and' -->
-                    @if (i === newlySharedDomains.length - 2) {
-                      <ng-container
-                        i18n="@@topBar.and"
-                        >
-          and
-        </ng-container>
-                    }
-                    @if (last) {
-                      <strong>{{ email }} </strong>
-                    }
-                  }
-                  @if (newlySharedDomains.length > 1) {
-                    <ng-container
-                      i18n="@@topBar.areNowVisibleOnYourPublicORCIDRecord"
-                      >
-        are now visible on your public ORCID record. Manage your email addresses
-        and domains in the
-      </ng-container>
-                  }
-                  @if (newlySharedDomains.length === 1) {
-                    <ng-container
-                      i18n="@@topBar.isNowVisibleOnYourPublicORCIDRecord"
-                      >
-        is now visible on your public ORCID record. Manage your email addresses
-        and domains in the
-      </ng-container>
-                  }
-                  <ng-container>
-                    <a
-                      class="underline green-url"
-                      (click)="openEmailModal()"
-                      i18n="@@topBar.emailsDomainsSection"
-                      >Emails & domains section</a
-                      ></ng-container
-                      >.
-                    </ng-container>
-                  </app-warning-message>
-                }
-                @if (newAddedAffiliation) {
-                  <app-warning-message type="success">
-                    <ng-container title i18n="@@topBar.employmentAffiliationAdded"
-                      >Employment affiliation added</ng-container
-                      >
-                      <ng-container content>
-                        <strong> {{ newAddedAffiliation }} </strong
-                          ><ng-container i18n="@@topBar.hasBeenAddedToYourORCIDRecord">
-        has been added to your ORCID record. Manage your existing employment
-        affiliations or add new ones in the</ng-container
-                          >
-                          <a
-                            class="underline green-url"
-                            (click)="goToAffiliations()"
-                            i18n="@@topBar.employmentSection"
-                            >Employment section</a
-                            >
-                          </ng-container>
-                        </app-warning-message>
-                      }
-                      @if (userRecord?.names) {
-                        <section
-                          id="names"
-                          role="region"
-                          [attr.aria-label]="regionNames"
-                          >
-                          <app-panel
-                            panelId="research-top-bar"
-                            [isPublicRecord]="isPublicRecord"
-                            [elements]="userRecord.names.givenNames"
-                            [editModalComponent]="modalNameComponent"
-                            [userRecord]="userRecord"
-                            [type]="'top-bar'"
-                            [id]="userInfo?.EFFECTIVE_USER_ORCID"
-                            [names]="true"
-                            id="names-panel"
-                            >
-                            <h2 header class="names-header orc-font-body" i18n="@@topBar.names">
-        Names
-      </h2>
-                            <app-panel-data>
-                              <app-panel-element
-                                [visibility]="userRecord.names.visibility.visibility"
-                                >
-                                @if (creditName) {
-                                  <h1 class="name">
-                                    <span i18n="@@topBar.publishedName" class="mat-caption">
-              Published Name
-            </span>
-                                    <p class="mat-card-title published-name" id="publishedName">
-                                      {{ creditName }}
-                                    </p>
-                                  </h1>
-                                }
-                                <span i18n="@@topBar.name" class="mat-caption description">
-            Name
-          </span>
-                                <div id="givenAndFamilyNames" class="mat-subtitle-2">
-                                  {{ givenNames + ' ' + familyName }}
-                                </div>
-                              </app-panel-element>
-                              @if (userRecord?.otherNames?.otherNames?.length > 0) {
-                                <div class="other-names-container">
-                                  <span i18n="@@topBar.alsoKnowAs" class="mat-caption description">
-              Also known as
-            </span>
-                                  @for (otherNames of userRecord.otherNames.otherNames; track otherNames) {
-                                    <app-panel-element
-                                      [visibility]="otherNames.visibility.visibility"
-                                      class="other-names"
-                                      >
-                                      <p class="mat-subtitle-2 other-names">
-                                        {{ otherNames.content }}
-                                      </p>
-                                    </app-panel-element>
-                                  }
-                                </div>
-                              }
-                            </app-panel-data>
-                          </app-panel>
-                        </section>
-                      }
-                      @if (userRecord?.biography) {
-                        <section
-                          id="biography"
-                          role="region"
-                          [attr.aria-label]="regionBiography"
-                          >
-                          <app-panel
-                            panelId="top-bar-2"
-                            [elements]="userRecord.biography.biography"
-                            [editModalComponent]="modalBiographyComponent"
-                            [userRecord]="userRecord"
-                            [type]="'top-bar'"
-                            id="biography-panel"
-                            [visibility]="userRecord.biography.visibility.visibility"
-                            [editableVisibilityControl]="true"
-                            >
-                            <h2
-                              header
-                              class="biography-header orc-font-body"
-                              i18n="@@topBar.biography"
-                              >
-        Biography
-      </h2>
-                            @if (!!userRecord.biography.biography) {
-                              <app-panel-data>
-                                <app-panel-element>
-                                  <span
-                                    id="biography-value"
-                                    class="mat-subtitle-2"
-                                    [innerText]="userRecord.biography.biography.value"
-                                  ></span>
-                                </app-panel-element>
-                              </app-panel-data>
-                            }
-                          </app-panel>
-                        </section>
-                      }
-                    }
-
-                    <!--PUBLIC VIEWS-->
-
-                    @if (isPublicRecord && !recordWithIssues) {
-                      <div
-                        class="public-container"
-    [ngClass]="{
-      mobile: !platform.columns12
-    }"
-                        >
-                        @if (!isPublicRecord && !recordWithIssues && !platform.columns12) {
-                          <app-top-bar-actions
-                            [ariaLabelName]="ariaLabelName"
-                            [userRecord]="userRecord"
-                            [userStatus]="userStatus"
-                            [isPublicRecord]="isPublicRecord"
-                            [showIsThisYouButton]="true"
-                          ></app-top-bar-actions>
-                        }
-                        @if (userRecord?.biography?.biography) {
-                          <section
-                            [id]="'biography'"
-                            role="region"
-                            [attr.aria-label]="regionBiography"
-                            >
-                            <div class="biography-container no-margin-top">
-                              <h2
-                                class="biography-header"
-          [ngClass]="{
-            'orc-font-body': !isPublicRecord,
-            'orc-font-body-large': isPublicRecord
-          }"
-                                i18n="@@topBar.biography"
-                                >
+            </div>
+          }
+        </app-panel-data>
+      </app-panel>
+    </section>
+  }
+  @if (userRecord?.biography) {
+    <section id="biography" role="region" [attr.aria-label]="regionBiography">
+      <app-panel
+        panelId="top-bar-2"
+        [elements]="userRecord.biography.biography"
+        [editModalComponent]="modalBiographyComponent"
+        [userRecord]="userRecord"
+        [type]="'top-bar'"
+        id="biography-panel"
+        [visibility]="userRecord.biography.visibility.visibility"
+        [editableVisibilityControl]="true"
+      >
+        <h2
+          header
+          class="biography-header orc-font-body"
+          i18n="@@topBar.biography"
+        >
           Biography
         </h2>
-                              <p
-                                class="orc-font-body-small"
-                                [innerText]="userRecord.biography.biography.value"
-                              ></p>
-                            </div>
-                          </section>
-                        }
-                      </div>
-                    }
+        @if (!!userRecord.biography.biography) {
+          <app-panel-data>
+            <app-panel-element>
+              <span
+                id="biography-value"
+                class="mat-subtitle-2"
+                [innerText]="userRecord.biography.biography.value"
+              ></span>
+            </app-panel-element>
+          </app-panel-data>
+        }
+      </app-panel>
+    </section>
+  }
+}
+
+<!--PUBLIC VIEWS-->
+
+@if (isPublicRecord && !recordWithIssues) {
+  <div
+    class="public-container"
+    [ngClass]="{
+      mobile: !platform.columns12,
+    }"
+  >
+    @if (!isPublicRecord && !recordWithIssues && !platform.columns12) {
+      <app-top-bar-actions
+        [ariaLabelName]="ariaLabelName"
+        [userRecord]="userRecord"
+        [userStatus]="userStatus"
+        [isPublicRecord]="isPublicRecord"
+        [showIsThisYouButton]="true"
+      ></app-top-bar-actions>
+    }
+    @if (userRecord?.biography?.biography) {
+      <section
+        [id]="'biography'"
+        role="region"
+        [attr.aria-label]="regionBiography"
+      >
+        <div class="biography-container no-margin-top">
+          <h2
+            class="biography-header"
+            [ngClass]="{
+              'orc-font-body': !isPublicRecord,
+              'orc-font-body-large': isPublicRecord,
+            }"
+            i18n="@@topBar.biography"
+          >
+            Biography
+          </h2>
+          <p
+            class="orc-font-body-small"
+            [innerText]="userRecord.biography.biography.value"
+          ></p>
+        </div>
+      </section>
+    }
+  </div>
+}

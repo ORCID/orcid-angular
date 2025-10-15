@@ -1,7 +1,7 @@
 @if (oauthRequest && userName && orcidUrl) {
   @if (
     loadingUserInfo || loadingTrustedIndividuals || loadingAuthorizeEndpoint
-    ) {
+  ) {
     <mat-progress-bar
       class="progress-bar"
       id="loading-bar"
@@ -29,29 +29,29 @@
           <div class="icon">
             <mat-icon class="profile-icon"
               ><img
-              src="./assets/vectors/profile-not-verified.svg"
-              alt="profile icon"
+                src="./assets/vectors/profile-not-verified.svg"
+                alt="profile icon"
               />
-          </mat-icon>
-        </div>
-      </div>
-    }
-    <div class="col l9 user-wrapper">
-      <div class="row">
-        <div class="m-b-8">
-          <div class="mat-subtitle-2">
-            <strong id="user-name">{{ userName }}</strong>
+            </mat-icon>
           </div>
-          <span>{{ orcidUrl }}</span>
         </div>
-      </div>
-      <div class="m-b-8" [ngClass]="{ 'user-links': !platformInfo.columns4 }">
-        <a
-          class="underline"
-          [ngClass]="{ row: platformInfo.columns4 }"
-          i18n="@@public-layout.sign_out"
-          (click)="logout()"
-          >Sign out</a
+      }
+      <div class="col l9 user-wrapper">
+        <div class="row">
+          <div class="m-b-8">
+            <div class="mat-subtitle-2">
+              <strong id="user-name">{{ userName }}</strong>
+            </div>
+            <span>{{ orcidUrl }}</span>
+          </div>
+        </div>
+        <div class="m-b-8" [ngClass]="{ 'user-links': !platformInfo.columns4 }">
+          <a
+            class="underline"
+            [ngClass]="{ row: platformInfo.columns4 }"
+            i18n="@@public-layout.sign_out"
+            (click)="logout()"
+            >Sign out</a
           >
           @if (trustedIndividuals) {
             <app-trusted-individuals-dropdown
@@ -72,7 +72,7 @@
     <p
       class="mat-subtitle-2 m-t-16 m-b-16"
       i18n="@@authorize.organizationAskedFollowingAccess"
-      >
+    >
       This organization has asked for the following access to your ORCID record:
     </p>
     <ul class="mat-subtitle-2 m-t-base">
@@ -98,60 +98,60 @@
           If authorized, this organization will have access to your ORCID
           record, as outlined above and described in further detail
           in</ng-container
-          >
-          <a
-            href="{{ environment.INFO_SITE + 'privacy-policy' }}"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="underline"
-            i18n="@@authorize.privacyPolicy"
-            >ORCID’s privacy policy.</a
-            >
-          </p>
-          <p class="mat-caption m-b-16">
-            <ng-container i18n="@@authorize.manageAccessPersmissions">
+        >
+        <a
+          href="{{ environment.INFO_SITE + 'privacy-policy' }}"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="underline"
+          i18n="@@authorize.privacyPolicy"
+          >ORCID’s privacy policy.</a
+        >
+      </p>
+      <p class="mat-caption m-b-16">
+        <ng-container i18n="@@authorize.manageAccessPersmissions">
           You can manage access permissions for this and other Trusted
           Organizations from within your list of
         </ng-container>
-            <a
-              routerLink="/trusted-parties"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="underline"
-              i18n="@@authorize.trustedParties"
-              >trusted parties.</a
-              >
-            </p>
-            <mat-divider></mat-divider>
-          </div>
-          <button
-            class="authorize-button"
-            mat-raised-button
-            i18n="@@authorize.authorize"
-            (click)="authorize()"
-            id="authorize-button"
-            >
+        <a
+          routerLink="/trusted-parties"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="underline"
+          i18n="@@authorize.trustedParties"
+          >trusted parties.</a
+        >
+      </p>
+      <mat-divider></mat-divider>
+    </div>
+    <button
+      class="authorize-button"
+      mat-raised-button
+      i18n="@@authorize.authorize"
+      (click)="authorize()"
+      id="authorize-button"
+    >
       Authorize access
     </button>
-          <div class="row deny-button-wrapper">
-            <a id="deny-button" class="underline" (click)="authorize(false)">
-              <i i18n="@@authorize.deny">Deny access</i>
-            </a>
-          </div>
-        </mat-card-content>
-        <ng-template #updateIconTemplate>
-          <mat-icon class="material-icons-outlined scope" role="presentation"
-            >update</mat-icon
-            >
-          </ng-template>
-          <ng-template #viewIconTemplate>
-            <mat-icon class="material-icons-outlined scope" role="presentation"
-              >remove_red_eye</mat-icon
-              >
-            </ng-template>
-            <ng-template #orcidIconTemplate>
-              <mat-icon class="scope orcid" role="presentation">
-                <img src="/assets/vectors/orcid.logo.black.icon.svg" alt=""
-                /></mat-icon>
-              </ng-template>
-            }
+    <div class="row deny-button-wrapper">
+      <a id="deny-button" class="underline" (click)="authorize(false)">
+        <i i18n="@@authorize.deny">Deny access</i>
+      </a>
+    </div>
+  </mat-card-content>
+  <ng-template #updateIconTemplate>
+    <mat-icon class="material-icons-outlined scope" role="presentation"
+      >update</mat-icon
+    >
+  </ng-template>
+  <ng-template #viewIconTemplate>
+    <mat-icon class="material-icons-outlined scope" role="presentation"
+      >remove_red_eye</mat-icon
+    >
+  </ng-template>
+  <ng-template #orcidIconTemplate>
+    <mat-icon class="scope orcid" role="presentation">
+      <img src="/assets/vectors/orcid.logo.black.icon.svg" alt=""
+    /></mat-icon>
+  </ng-template>
+}

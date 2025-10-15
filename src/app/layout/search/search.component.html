@@ -15,7 +15,7 @@
     role="search"
     class="row h-end search-box middle"
     (submit)="search(whereToSearchSelected, whatToSearch)"
-    >
+  >
     <div id="ariaLabelWhere" hidden>Search on</div>
     <div class="input-box-new-info">
       <input
@@ -27,7 +27,7 @@
         [attr.aria-label]="labelSearchBy"
         id="cy-search"
         class="orc-font-body"
-        />
+      />
     </div>
     <button
       [attr.aria-label]="labelSearch"
@@ -35,7 +35,7 @@
       matRipple
       class="col middle search-icon"
       id="cy-search-btn"
-      >
+    >
       <mat-icon matSuffix>search</mat-icon>
     </button>
   </form>

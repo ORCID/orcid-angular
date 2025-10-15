@@ -24,56 +24,54 @@
       <input matInput formControlName="email" appTrim />
       <mat-hint i18n="@@ngOrcid.signin.emailHint"
         >example&#64;email.com</mat-hint
-        >
-        @if (emailFormControl.hasError('required')) {
-          <mat-error
-            i18n="@@ngOrcid.signin.requiredEmail"
-            >Email is required
-      </mat-error>
-        }
-        @if (
-          emailFormControl.hasError('email') ||
-          emailFormControl.hasError('pattern')
-          ) {
-          <mat-error
-            i18n="@@ngOrcid.signin.invalidEmail"
-            >Use the format example&#64;email.com
-      </mat-error>
-        }
-      </mat-form-field>
-      <button
-        mat-raised-button
-        (click)="onSubmit()"
-        color="primary"
-        class="row mat-elevation-z0 deactivate"
-        type="submit"
-        [disabled]="loading"
-        i18n="@@ngOrcid.signin.submit"
-        >
+      >
+      @if (emailFormControl.hasError('required')) {
+        <mat-error i18n="@@ngOrcid.signin.requiredEmail"
+          >Email is required
+        </mat-error>
+      }
+      @if (
+        emailFormControl.hasError('email') ||
+        emailFormControl.hasError('pattern')
+      ) {
+        <mat-error i18n="@@ngOrcid.signin.invalidEmail"
+          >Use the format example&#64;email.com
+        </mat-error>
+      }
+    </mat-form-field>
+    <button
+      mat-raised-button
+      (click)="onSubmit()"
+      color="primary"
+      class="row mat-elevation-z0 deactivate"
+      type="submit"
+      [disabled]="loading"
+      i18n="@@ngOrcid.signin.submit"
+    >
       SUBMIT
     </button>
-    </form>
-  }
-  @if (showReactivationSent) {
-    <mat-error class="orcid-error">
-      <ng-container i18n="@@ngOrcid.signin.verify.reactivationSent">
-    Thank you for reactivating your ORCID record; please complete the process by
-    following the steps in the email we are now sending you. If you don’t
-    receive an email from us, please
-  </ng-container>
-      <a
-        class="mat-button-font"
-        (click)="navigateTo('https://support.orcid.org/')"
-        i18n="@@ngOrcid.signin.contactSupport"
-        >contact support
-  </a>
-    </mat-error>
-  }
-  @if (showReactivationSentError) {
-    <mat-error class="orcid-error">
-      <mat-icon inline="true">error</mat-icon>
-      <ng-container>
-        {{ showReactivationSentErrorMessage }}
-      </ng-container>
-    </mat-error>
-  }
+  </form>
+}
+@if (showReactivationSent) {
+  <mat-error class="orcid-error">
+    <ng-container i18n="@@ngOrcid.signin.verify.reactivationSent">
+      Thank you for reactivating your ORCID record; please complete the process
+      by following the steps in the email we are now sending you. If you don’t
+      receive an email from us, please
+    </ng-container>
+    <a
+      class="mat-button-font"
+      (click)="navigateTo('https://support.orcid.org/')"
+      i18n="@@ngOrcid.signin.contactSupport"
+      >contact support
+    </a>
+  </mat-error>
+}
+@if (showReactivationSentError) {
+  <mat-error class="orcid-error">
+    <mat-icon inline="true">error</mat-icon>
+    <ng-container>
+      {{ showReactivationSentErrorMessage }}
+    </ng-container>
+  </mat-error>
+}

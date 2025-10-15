@@ -2,7 +2,7 @@
   <ng-container i18n="@@inbox.notifications">Notifications</ng-container>
   @if (totalNotifications) {
     ({{
-    showArchived ? totalNotifications.all : totalNotifications.nonArchived
+      showArchived ? totalNotifications.all : totalNotifications.nonArchived
     }})
   }
 </h1>
@@ -19,7 +19,7 @@
         class="archive-label mat-subtitle-2"
         id="select-all"
         i18n="@@inbox.selectAll"
-        >
+      >
         Select All
       </div>
       <button
@@ -27,107 +27,90 @@
         color="primary"
         class="mat-button-wrap-text-with-icon"
         (click)="archivedSelected()"
-        >
+      >
         <mat-icon class="material-icons-outlined">archive</mat-icon>
         <div i18n="@@inbox.archiveSelected">Archive selected</div>
       </button>
     }
   </div>
   @if (totalNotifications?.archived) {
-    <a (click)="toggleShowArchived()"
-      >@if (showArchived) {
-      <ng-container i18n="@@inbox.hideArchived"
-        >Hide archived</ng-container
-        >
+    <a (click)="toggleShowArchived()">
+      @if (showArchived) {
+        <ng-container i18n="@@inbox.hideArchived">Hide archived</ng-container>
       }
       @if (!showArchived) {
-        <ng-container i18n="@@inbox.showArchived"
-          >Show archived</ng-container
-          >
-        }
-        ({{ totalNotifications.archived }})
-      </a>
+        <ng-container i18n="@@inbox.showArchived">Show archived</ng-container>
+      }
+      ({{ totalNotifications.archived }})
+    </a>
+  }
+</div>
+@if (loading) {
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+}
+@if (form && notifications) {
+  <ng-container [formGroup]="form">
+    @for (item of notifications; track item; let i = $index) {
+      @if (!item.archivedDate) {
+        <app-notification
+          [notification]="item"
+          [formControl]="$any(form.controls[item.putCode])"
+          [archived]="!!item.archivedDate"
+          [read]="!!item.readDate"
+        ></app-notification>
+      }
+      @if (item.archivedDate && showArchived) {
+        <app-notification
+          [notification]="item"
+          [archived]="!!item.archivedDate"
+          [read]="!!item.readDate"
+        ></app-notification>
+      }
+    }
+  </ng-container>
+}
+@if (isAnEmptyInbox() && totalNotifications?.archived === 0 && !loading) {
+  <div class="no-messages orc-font-body-small">
+    <div i18n="@@inbox.youDontHave">You don’t have any notifications yet.</div>
+    <div>
+      <ng-container i18n="@@inbox.youCanManage">
+        You can manage the frequency of your ORCID notifications in
+        your</ng-container
+      >
+      <a (click)="navigateTo('/account')" i18n="@@inbox.accountSetting">
+        account settings.</a
+      >
+    </div>
+  </div>
+}
+@if (isAnEmptyInbox() && totalNotifications?.archived > 0 && !loading) {
+  <div class="no-messages orc-font-body-small">
+    <div i18n="@@inbox.youDontHaveUnarchived">
+      You don't have any unarchived notifications right now.
+    </div>
+  </div>
+}
+@if (loading && notifications && !isAnEmptyInbox()) {
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+}
+@if (!isAnEmptyInbox() && notifications) {
+  <div class="notifications-amount mat-subtitle-2">
+    <app-showing-of
+      [displaying]="notifications?.length"
+      [total]="
+        showArchived ? totalNotifications?.all : totalNotifications?.nonArchived
+      "
+    >
+    </app-showing-of>
+    @if (hasMoreNotificationsToLoad()) {
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="showMore()"
+        i18n="@@inbox.showMoreNotifications"
+      >
+        Show more notifications
+      </button>
     }
   </div>
-  @if (loading) {
-    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-  }
-
-  @if (form && notifications) {
-    <ng-container [formGroup]="form">
-      @for (item of notifications; track item; let i = $index) {
-        @if (!item.archivedDate) {
-          <app-notification
-            [notification]="item"
-            [formControl]="$any(form.controls[item.putCode])"
-            [archived]="!!item.archivedDate"
-            [read]="!!item.readDate"
-          ></app-notification>
-        }
-        @if (item.archivedDate && showArchived) {
-          <app-notification
-            [notification]="item"
-            [archived]="!!item.archivedDate"
-            [read]="!!item.readDate"
-          ></app-notification>
-        }
-      }
-    </ng-container>
-  }
-
-  @if (isAnEmptyInbox() && totalNotifications?.archived === 0 && !loading) {
-    <div
-      class="no-messages orc-font-body-small"
-      >
-      <div i18n="@@inbox.youDontHave">You don’t have any notifications yet.</div>
-      <div>
-        <ng-container i18n="@@inbox.youCanManage">
-      You can manage the frequency of your ORCID notifications in
-      your</ng-container
-          >
-          <a (click)="navigateTo('/account')" i18n="@@inbox.accountSetting">
-      account settings.</a
-            >
-          </div>
-        </div>
-      }
-
-      @if (isAnEmptyInbox() && totalNotifications?.archived > 0 && !loading) {
-        <div
-          class="no-messages orc-font-body-small"
-          >
-          <div i18n="@@inbox.youDontHaveUnarchived">
-    You don't have any unarchived notifications right now.
-  </div>
-        </div>
-      }
-
-      @if (loading && notifications && !isAnEmptyInbox()) {
-        <mat-progress-bar
-          mode="indeterminate"
-        ></mat-progress-bar>
-      }
-
-      @if (!isAnEmptyInbox() && notifications) {
-        <div
-          class="notifications-amount mat-subtitle-2"
-          >
-          <app-showing-of
-            [displaying]="notifications?.length"
-    [total]="
-      showArchived ? totalNotifications?.all : totalNotifications?.nonArchived
-    "
-            >
-          </app-showing-of>
-          @if (hasMoreNotificationsToLoad()) {
-            <button
-              mat-raised-button
-              color="primary"
-              (click)="showMore()"
-              i18n="@@inbox.showMoreNotifications"
-              >
-    Show more notifications
-  </button>
-          }
-        </div>
-      }
+}

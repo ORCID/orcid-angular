@@ -15,8 +15,9 @@
       {{ work?.workType.value | recordWorkTypeLabel }}
       @if (
         work?.contributorsGroupedByOrcid
-        | recordHolderRoles : isPublicRecord : id; as roles
-        ) {
+          | recordHolderRoles: isPublicRecord : id;
+        as roles
+      ) {
         @if (roles) {
           |
           <span class="record-holder">{{ roles }}</span>
@@ -28,25 +29,26 @@
         [externalIdentifiers]="work?.workExternalIdentifiers"
       ></app-display-external-ids>
       @if (work?.contributorsGroupedByOrcid?.length > 0) {
-        <div
-          class="general-data"
-          >
-          <span class="uppercase" i18n="@@works.contributors">Contributors</span>:
+        <div class="general-data">
+          <span class="uppercase" i18n="@@works.contributors">Contributors</span
+          >:
           @for (
             contributor of work?.contributorsGroupedByOrcid
-            | slice : 0 : maxNumberContributors; track
-            contributor; let last = $last) {
+              | slice: 0 : maxNumberContributors;
+            track contributor;
+            let last = $last
+          ) {
             @if (
               contributor?.creditName &&
               contributor?.creditName?.content !== privateName
-              ) {
+            ) {
               {{ contributor?.creditName?.content + (!last ? '; ' : '') }}
             }
             @if (
               (!contributor?.creditName ||
-              contributor?.creditName?.content === privateName) &&
+                contributor?.creditName?.content === privateName) &&
               contributor?.contributorOrcid?.uri
-              ) {
+            ) {
               @if (contributor?.contributorOrcid?.uri) {
                 <a
                   class="underline"
@@ -54,58 +56,56 @@
                   rel="noreferrer noopener"
                   href="{{ contributor?.contributorOrcid?.uri }}"
                   >{{ contributor?.contributorOrcid?.path }}</a
-                  >{{ !last ? '; ' : '' }}
-                }
+                >{{ !last ? '; ' : '' }}
               }
             }
-            @if (work?.numberOfContributors > maxNumberContributors) {
-              <span
-                i18n="@@works.etAl"
-                >
-        et al.
-      </span>
-            }
-          </div>
-        }
+          }
+          @if (work?.numberOfContributors > maxNumberContributors) {
+            <span i18n="@@works.etAl"> et al. </span>
+          }
+        </div>
+      }
+    }
+  </div>
+
+  @if (!featured) {
+    <div align-end>
+      @if (!panelDetailsState?.state) {
+        <a
+          class="underline"
+          (click)="toggleDetails.next(work)"
+          i18n="@@shared.showMoreDetail"
+          [attr.aria-label]="
+            'work'
+              | appPanelActivityActionAriaLabel: 'show' : work?.title?.value
+          "
+          >Show more detail</a
+        >
+      }
+      @if (panelDetailsState?.state) {
+        <a
+          class="underline"
+          (click)="toggleDetails.next(work)"
+          i18n="@@shared.showLessDetail"
+          [attr.aria-label]="
+            'work'
+              | appPanelActivityActionAriaLabel: 'hide' : work?.title?.value
+          "
+          >Show less detail</a
+        >
       }
     </div>
+  }
+</app-panel-data>
 
-    @if (!featured) {
-      <div align-end>
-        @if (!panelDetailsState?.state) {
-          <a
-            class="underline"
-            (click)="toggleDetails.next(work)"
-            i18n="@@shared.showMoreDetail"
-      [attr.aria-label]="
-        'work' | appPanelActivityActionAriaLabel : 'show' : work?.title?.value
-      "
-            >Show more detail</a
-            >
-          }
-          @if (panelDetailsState?.state) {
-            <a
-              class="underline"
-              (click)="toggleDetails.next(work)"
-              i18n="@@shared.showLessDetail"
-      [attr.aria-label]="
-        'work' | appPanelActivityActionAriaLabel : 'hide' : work?.title?.value
-      "
-              >Show less detail</a
-              >
-            }
-          </div>
-        }
-      </app-panel-data>
+<!-- DATA DISPLAY WHEN "MORE DETAILS" IS CLICKED -->
 
-      <!-- DATA DISPLAY WHEN "MORE DETAILS" IS CLICKED -->
-
-      @if (panelDetailsState?.state) {
-        <app-panel-data [borderBottom]="true">
-          <app-work-details
-            [work]="work"
-            [isPublicRecord]="isPublicRecord"
-            [id]="id"
-          ></app-work-details>
-        </app-panel-data>
-      }
+@if (panelDetailsState?.state) {
+  <app-panel-data [borderBottom]="true">
+    <app-work-details
+      [work]="work"
+      [isPublicRecord]="isPublicRecord"
+      [id]="id"
+    ></app-work-details>
+  </app-panel-data>
+}

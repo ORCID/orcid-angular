@@ -9,7 +9,7 @@
   [(expandedContent)]="emailFrequencyExpanded"
   class="row"
   [title]="titleEmailFrequency"
-  >
+>
   @if (emailFrequencyExpanded) {
     <app-settings-defaults-email-frequency
       (loading)="emailFrequencyLoading = $event"
@@ -23,7 +23,7 @@
   [title]="titleLanguage"
   [loading]="languageFrequencyLoading"
   [(expandedContent)]="languageExpanded"
-  >
+>
   @if (languageExpanded) {
     <app-settings-defaults-language
       (loading)="languageFrequencyLoading = $event"
@@ -37,7 +37,7 @@
   [title]="titleVisibility"
   [loading]="visibilityFrequencyLoading"
   [(expandedContent)]="visibilityExpanded"
-  >
+>
   @if (visibilityExpanded) {
     <app-settings-defaults-visibility
       (loading)="visibilityFrequencyLoading = $event"

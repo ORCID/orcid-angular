@@ -2,29 +2,29 @@
   <div>
     <img
       [ngClass]="{
-        mobile: !platform.columns12
+        mobile: !platform.columns12,
       }"
       src="assets/vectors/orcid.logo.icon.svg"
       alt="orcid logo"
-      />
+    />
   </div>
   <div class="text-container">
     <div
       class="id"
       [ngClass]="{
         'orc-font-body-small': !platform.columns12,
-        'orc-font-body-large': platform.columns12
+        'orc-font-body-large': platform.columns12,
       }"
       dir="ltr"
-      >
+    >
       <span>{{ 'https:' + environment.BASE_URL }}</span>
       <h3
         class="orcid-id"
         [ngClass]="{
           'orc-font-body-large': !platform.columns12,
-          'orc-font-heading-small': platform.columns12
+          'orc-font-heading-small': platform.columns12,
         }"
-        >
+      >
         {{ id }}
       </h3>
     </div>
@@ -39,6 +39,6 @@
       i18n="@@record.previewPublicRecord"
       [attr.aria-label]="labelPreviewPublicRecord"
       >Preview public record</a
-      >
-    }
-  </div>
+    >
+  }
+</div>

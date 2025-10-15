@@ -5,21 +5,19 @@
       [content]="grant.grantNumber"
     ></app-panel-data-line>
   }
-
   @if (grant?.grantUrl) {
     <app-panel-data-line
       [title]="grantUrlLabel"
       [content]="grant.grantUrl"
       [url]="grant.grantUrl"
-      >
+    >
     </app-panel-data-line>
   }
-
   @if (grant?.fundingRelationship) {
     <app-panel-data-line
       [title]="fundingRelationshipLabel"
       [content]="grant.fundingRelationship | recordFundingRelationshipLabel"
-      >
+    >
     </app-panel-data-line>
   }
 </div>

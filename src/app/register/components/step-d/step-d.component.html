@@ -1,9 +1,6 @@
 <mat-card appearance="outlined" class="orcid-wizard">
   @if (loading) {
-    <mat-progress-bar
-      mode="indeterminate"
-      id="loading-bar"
-    ></mat-progress-bar>
+    <mat-progress-bar mode="indeterminate" id="loading-bar"></mat-progress-bar>
   }
 
   <mat-card-header>
@@ -13,7 +10,7 @@
           height="64px"
           src="assets/vectors/orcid.logo.icon.svg"
           alt="orcid logo"
-          />
+        />
       </div>
       @if (!reactivation?.isReactivation) {
         <h1 class="orc-font-heading-small" i18n="@@register.create">
@@ -24,7 +21,7 @@
         <h1
           class="orc-font-heading-small"
           i18n="@@register.reactivateYourOrcidAccount"
-          >
+        >
           Reactivate your ORCID account
         </h1>
       }
@@ -51,20 +48,16 @@
           [disabled]="loading"
           (click)="nextButton2()"
           matStepperNext
-          >
+        >
           @if (!reactivation?.isReactivation) {
-            <ng-container
-              i18n="@@register.completeRegistration"
-              >
-            Complete registration
-          </ng-container>
+            <ng-container i18n="@@register.completeRegistration">
+              Complete registration
+            </ng-container>
           }
           @if (reactivation?.isReactivation) {
-            <ng-container
-              i18n="@@register.reactivateMyOrcidAccount"
-              >
-            Reactivate my ORCID account
-          </ng-container>
+            <ng-container i18n="@@register.reactivateMyOrcidAccount">
+              Reactivate my ORCID account
+            </ng-container>
           }
         </button>
         <button
@@ -74,7 +67,7 @@
           type="button"
           id="step-d-back-button"
           (click)="backButton()"
-          >
+        >
           <a i18n="@@shared.previousStep">Previous Step</a>
         </button>
       </div>

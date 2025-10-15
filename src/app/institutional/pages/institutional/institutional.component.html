@@ -4,9 +4,7 @@
       <div class="col l6 m6 s4">
         <mat-card appearance="outlined" class="orcid-wizard">
           @if (loading) {
-            <mat-progress-bar
-              mode="indeterminate"
-            ></mat-progress-bar>
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
           }
           <mat-card-header>
             <mat-card-title class="header-container">
@@ -14,17 +12,17 @@
                 <img
                   src="assets/vectors/institutional-generic-logo.svg"
                   role="presentation"
-                  />
+                />
                 <img
                   class="arrow-icon"
                   src="assets/vectors/translucent-arrow.svg"
                   role="presentation"
-                  />
+                />
                 <img
                   src="assets/vectors/orcid.logo.icon.svg"
                   alt=""
                   role="presentation"
-                  />
+                />
               </div>
               <h1 i18n="@@institutional.title" class="orc-font-heading-small">
                 Access through your institution
@@ -33,7 +31,7 @@
                 class="mat-button-font institution-name-link underline"
                 (click)="back()"
                 i18n="@@institutional.signWithEmailid"
-                >
+              >
                 Sign in with email/iD and password
               </a>
             </mat-card-title>
@@ -51,172 +49,175 @@
                 </p>
                 @if (userSelectedInstitutions.length > 0) {
                   <div>
-                    <h2 class="orc-font-body" i18n="@@institutional.suggestedOrg">
-                    Suggested organization
-                  </h2>
-                    @for (institution of userSelectedInstitutions; track institution) {
+                    <h2
+                      class="orc-font-body"
+                      i18n="@@institutional.suggestedOrg"
+                    >
+                      Suggested organization
+                    </h2>
+                    @for (
+                      institution of userSelectedInstitutions;
+                      track institution
+                    ) {
                       <div class="col l12 m8 s4 institutional-logo">
-                        @if (institution?.Logos?.[0]?.value && !imageLoadingFinish) {
+                        @if (
+                          institution?.Logos?.[0]?.value && !imageLoadingFinish
+                        ) {
                           <mat-progress-spinner
                             mode="indeterminate"
                             diameter="50"
-                            >
+                          >
                           </mat-progress-spinner>
                         }
                         @if (
-                          !(institution?.Logos?.[0]?.value) || imageLoadingTimeOut || displayDefaultImage ) {
+                          !institution?.Logos?.[0]?.value ||
+                          imageLoadingTimeOut ||
+                          displayDefaultImage
+                        ) {
                           <img
                             src="assets/vectors/organization-no-logo.svg"
                             alt="institution logo"
                             el
-                            />
+                          />
                         } @else {
                           <img
                             src="{{ institution?.Logos[0]?.value }}"
                             alt="institution logo"
                             (error)="handleImgError($event)"
                             (load)="imgLoading($event)"
-                            />
+                          />
                         }
                         <p
                           class="mat-button-font institution-name-link underline"
                           id="institutionName"
-                          >
+                        >
                           {{ getNameInstitution(institution).value }}
                         </p>
                         <a
                           class="mat-button-font institution-name-link underline"
                           (click)="selectInstitution(institution)"
                           i18n="@@institutional.signInWithThisOrganization"
-                          >
-                        Sign in with this organization
-                      </a>
+                        >
+                          Sign in with this organization
+                        </a>
                         <div class="divider">
                           <span class="orc-font-body" i18n="@@institutional.or"
                             >OR</span
-                            >
-                          </div>
+                          >
                         </div>
-                      }
-                    </div>
-                  }
+                      </div>
+                    }
+                  </div>
+                }
 
-                  <mat-label
-                    i18n="@@institutional.organization"
-                    class="orc-font-small-print"
+                <mat-label
+                  i18n="@@institutional.organization"
+                  class="orc-font-small-print"
                   [ngClass]="{
                     error:
                       institutionFormTouched &&
-                      institutionFormEmails.valid === false
+                      institutionFormEmails.valid === false,
                   }"
-                    >
+                >
                   Organization
                 </mat-label>
-                  <mat-form-field
-                    appearance="outline"
-                    class="mat-form-field-min input-container row institutional-input"
-                    >
-                    <input
-                      [placeholder]="placeholderInstitution"
-                      matInput
-                      [attr.aria-label]="labelInstitution"
-                      [formControl]="institutionFormControl"
-                      [matAutocomplete]="auto"
-                      />
-                    <mat-autocomplete
-                      autoActiveFirstOption
-                      #auto="matAutocomplete"
-                      (optionSelected)="selected($event.option.value)"
-                      >
-                      @if (filteredOptions) {
-                        <ng-container
-                          id="cy-org-filtered-options"
-                          >
-                          @for (option of filteredOptions | async; track option) {
-                            <mat-option
-                              [value]="option"
-                              >
-                              <div class="row orc-font-body-small title">
-                                {{ option }}
-                              </div>
-                            </mat-option>
-                          }
-                        </ng-container>
-                      }
-                    </mat-autocomplete>
-                    @if (institutionFormControl.value) {
-                      <button
-                        mat-button
-                        matSuffix
-                        mat-icon-button
-                        [attr.aria-label]="labelClear"
-                        class="remove-border"
-                        (click)="clear()"
-                        type="button"
-                        >
-                        <mat-icon>close</mat-icon>
-                      </button>
+                <mat-form-field
+                  appearance="outline"
+                  class="mat-form-field-min input-container row institutional-input"
+                >
+                  <input
+                    [placeholder]="placeholderInstitution"
+                    matInput
+                    [attr.aria-label]="labelInstitution"
+                    [formControl]="institutionFormControl"
+                    [matAutocomplete]="auto"
+                  />
+                  <mat-autocomplete
+                    autoActiveFirstOption
+                    #auto="matAutocomplete"
+                    (optionSelected)="selected($event.option.value)"
+                  >
+                    @if (filteredOptions) {
+                      <ng-container id="cy-org-filtered-options">
+                        @for (option of filteredOptions | async; track option) {
+                          <mat-option [value]="option">
+                            <div class="row orc-font-body-small title">
+                              {{ option }}
+                            </div>
+                          </mat-option>
+                        }
+                      </ng-container>
                     }
-                    @if (institutionFormControl.hasError('required')) {
-                      <mat-error
-                        i18n="@@institution.organizationRequired"
-                        >Please enter an organization name
-                  </mat-error>
-                    }
-                    @if (
-                      institutionFormControl.hasError('invalidInstitution')
-                      ) {
-                      <mat-error
-                        i18n="@@institution.invalidInstitution"
-                        >We can’t identify this organization. Please try entering
-                    the organization name again.
-                  </mat-error>
-                    }
-                  </mat-form-field>
-                  <div class="step-actions">
+                  </mat-autocomplete>
+                  @if (institutionFormControl.value) {
                     <button
-                      mat-raised-button
+                      mat-button
+                      matSuffix
+                      mat-icon-button
+                      [attr.aria-label]="labelClear"
+                      class="remove-border"
+                      (click)="clear()"
                       type="button"
-                      i18n="@@institutional.continue"
-                      id="step-a-back-button"
-                      (click)="onSubmit()"
-                      >
+                    >
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  }
+                  @if (institutionFormControl.hasError('required')) {
+                    <mat-error i18n="@@institution.organizationRequired"
+                      >Please enter an organization name
+                    </mat-error>
+                  }
+                  @if (institutionFormControl.hasError('invalidInstitution')) {
+                    <mat-error i18n="@@institution.invalidInstitution"
+                      >We can’t identify this organization. Please try entering
+                      the organization name again.
+                    </mat-error>
+                  }
+                </mat-form-field>
+                <div class="step-actions">
+                  <button
+                    mat-raised-button
+                    type="button"
+                    i18n="@@institutional.continue"
+                    id="step-a-back-button"
+                    (click)="onSubmit()"
+                  >
                     Continue
                   </button>
 
-                    <i>
-                      <a
-                        i18n="@@institutional.cancelInstituional"
-                        class="mat-button-font institution-name-link underline"
-                        (click)="back()"
-                        >
+                  <i>
+                    <a
+                      i18n="@@institutional.cancelInstituional"
+                      class="mat-button-font institution-name-link underline"
+                      (click)="back()"
+                    >
                       Cancel institutional sign in</a
-                        >
-                      </i>
-                    </div>
-                  </div>
-                </form>
-              </mat-card-content>
-            </mat-card>
-          </div>
-        </div>
+                    >
+                  </i>
+                </div>
+              </div>
+            </form>
+          </mat-card-content>
+        </mat-card>
       </div>
-    </main>
+    </div>
+  </div>
+</main>
 
-    <!-- THE FOLLOWING IS A PLACEHOLDE IMAGE -->
-    <!-- The purpose of it is to try loading the image to know wether it loads or not -->
-    <!-- With it trigger handleImgError or  imgLoading-->
-    @if (
-      institution &&
-      institution.Logos &&
-      institution.Logos[0] &&
-      !imageLoadingFinish
-      ) {
-      <img
-        src="{{ institution.Logos[0].value }}"
-        alt="institution logo"
-        (error)="handleImgError($event)"
-        (load)="imgLoading($event)"
-        class="institutional-logo-placeholder"
-        />
-    }
+<!-- THE FOLLOWING IS A PLACEHOLDE IMAGE -->
+<!-- The purpose of it is to try loading the image to know wether it loads or not -->
+<!-- With it trigger handleImgError or  imgLoading-->
+@if (
+  institution &&
+  institution.Logos &&
+  institution.Logos[0] &&
+  !imageLoadingFinish
+) {
+  <img
+    src="{{ institution.Logos[0].value }}"
+    alt="institution logo"
+    (error)="handleImgError($event)"
+    (load)="imgLoading($event)"
+    class="institutional-logo-placeholder"
+  />
+}

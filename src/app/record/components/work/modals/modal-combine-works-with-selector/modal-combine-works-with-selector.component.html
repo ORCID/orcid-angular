@@ -11,7 +11,7 @@
       (click)="saveEvent()"
       id="combine-button"
       [disabled]="selectSetOfWorksToCombine?.length === 0"
-      >
+    >
       <ng-container i18n="@@works.combineSelectedWorks">
         Combine selected works
       </ng-container>
@@ -22,7 +22,7 @@
       (click)="closeEvent()"
       i18n="@@shared.cancel"
       id="cancel-button"
-      >
+    >
       Cancel
     </button>
   </app-modal-footer>
@@ -49,7 +49,7 @@
         target="_blank"
         href="https://support.orcid.org/hc/articles/360006894774"
         i18n="@@works.learnMoreCombining"
-        >
+      >
         Learn more about combining works
       </a>
     </div>
@@ -66,8 +66,8 @@
     <div class="row" [formGroup]="form">
       <h3>
         <ng-container i18n="@@works.selectedWorksCombine">
-        Selected works to combine
-      </ng-container>
+          Selected works to combine
+        </ng-container>
         ({{ selectSetOfWorksToCombine?.length }})
       </h3>
       <mat-divider class="row orcid-divider"></mat-divider>
@@ -87,8 +87,10 @@
                   <strong i18n="@@shared.source">Source</strong>:
                   @if (
                     work?.assertionOriginName || work?.assertionOriginOrcid
-                    ) {
-                    {{ work?.assertionOriginName || work?.assertionOriginOrcid }}
+                  ) {
+                    {{
+                      work?.assertionOriginName || work?.assertionOriginOrcid
+                    }}
                     <i i18n="@@shared.onBehalfOf">via</i>
                   }
                   {{ work.sourceName || work.source }}
@@ -99,29 +101,29 @@
                     <strong
                       class="added"
                       i18n="@@shared.added"
-                    [ngClass]="{
-                      mobile: isMobile
-                    }"
-                      >
-                    Added </strong
-                      >:
-                      {{ work.createdDate | monthDayYearDateToString }}
-                    }
-                  </div>
+                      [ngClass]="{
+                        mobile: isMobile,
+                      }"
+                    >
+                      Added </strong
+                    >:
+                    {{ work.createdDate | monthDayYearDateToString }}
+                  }
                 </div>
-                <mat-divider class="row"></mat-divider>
-              }
-            </div>
+              </div>
+              <mat-divider class="row"></mat-divider>
+            }
           </div>
-        }
-        @if (suggestions?.length === 0) {
-          <div class="no-info orc-font-body-small">
-            <mat-icon>error</mat-icon>
-            <ng-container i18n="@@works.noItemsSelected"
-              >No items selected.
-      </ng-container>
-          </div>
-        }
-      </div>
-    }
-  </app-modal>
+        </div>
+      }
+      @if (suggestions?.length === 0) {
+        <div class="no-info orc-font-body-small">
+          <mat-icon>error</mat-icon>
+          <ng-container i18n="@@works.noItemsSelected"
+            >No items selected.
+          </ng-container>
+        </div>
+      }
+    </div>
+  }
+</app-modal>

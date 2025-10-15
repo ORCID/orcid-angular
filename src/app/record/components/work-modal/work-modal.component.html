@@ -23,7 +23,7 @@
         class="side-bar"
         i18n="@@works.contributors"
         (click)="toContributors()"
-        >
+      >
         Contributors
       </a>
     </ng-container>
@@ -32,7 +32,7 @@
         class="side-bar"
         i18n="@@works.otherInformation"
         (click)="toOtherInformation()"
-        >
+      >
         Other information
       </a>
     </ng-container>
@@ -51,9 +51,9 @@
         i18n="@@shared.saveChanges"
         id="save-work-button"
         [attr.aria-label]="saveAndClose"
-        >
-      Save changes
-    </button>
+      >
+        Save changes
+      </button>
     }
     <button
       mat-stroked-button
@@ -62,16 +62,12 @@
       i18n="@@shared.cancel"
       id="cancel-work-button"
       [attr.aria-label]="cancelAndClose"
-      >
+    >
       Cancel
     </button>
   </app-modal-footer>
   @if (work && !loading) {
-    <app-work-form
-      [work]="work"
-      [userRecord]="userRecord"
-      #workFormComponent
-      >
+    <app-work-form [work]="work" [userRecord]="userRecord" #workFormComponent>
     </app-work-form>
   }
 </app-modal>

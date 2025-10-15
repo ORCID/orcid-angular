@@ -1,22 +1,15 @@
 @if (maintenanceMessage && maintenanceMessage.plainHtml) {
-  <section
-    [attr.aria-label]="labelMaintenance"
-    class="container"
-    >
+  <section [attr.aria-label]="labelMaintenance" class="container">
     @for (node of maintenanceMessage.nonClosableElements; track node) {
-      <div
-        class="col l12 m8 s4 middle text-container"
-        >
+      <div class="col l12 m8 s4 middle text-container">
         <div><p [innerHtml]="node.innerHTML"></p></div>
       </div>
     }
     @if (
       maintenanceMessage.closableElements.length === 0 &&
       maintenanceMessage.nonClosableElements.length === 0
-      ) {
-      <div
-        class="col l12 m8 s4 middle text-container"
-        >
+    ) {
+      <div class="col l12 m8 s4 middle text-container">
         <p [innerHtml]="maintenanceMessage.plainHtml"></p>
       </div>
     }

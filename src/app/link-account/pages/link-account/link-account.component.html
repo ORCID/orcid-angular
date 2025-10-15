@@ -4,9 +4,7 @@
       <div class="col l6 m6 s4">
         <mat-card appearance="outlined" class="orcid-wizard">
           @if (loading || signingLoading) {
-            <mat-progress-bar
-              mode="indeterminate"
-            ></mat-progress-bar>
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
           }
 
           <!-- Header Section with Title -->
@@ -16,7 +14,7 @@
                 <img
                   src="assets/vectors/orcid.logo.icon.svg"
                   role="presentation"
-                  />
+                />
               </div>
               <h1 class="orc-font-heading-small">
                 <ng-container i18n="@@linking.title.1">
@@ -35,39 +33,36 @@
           </mat-card-header>
 
           <mat-card-content>
-            @if (
-              signInData && !signInData.unsupportedInstitution && !loading
-              ) {
-              <div
-                >
+            @if (signInData && !signInData.unsupportedInstitution && !loading) {
+              <div>
                 <p class="mat-subtitle-2">
                   <ng-container i18n="@@linking.finish">
-                  To link your
-                </ng-container>
+                    To link your
+                  </ng-container>
                   {{ entityDisplayName }}
                   <ng-container i18n="@@linking.account">
-                  account please sign in to ORCID below. You will only need to
-                  do this once. Once the accounts are linked you will be able to
-                  sign in to your ORCID record with your
-                </ng-container>
+                    account please sign in to ORCID below. You will only need to
+                    do this once. Once the accounts are linked you will be able
+                    to sign in to your ORCID record with your
+                  </ng-container>
                   {{ entityDisplayName }}
                   <ng-container i18n="@@linking.questions">
-                  account.
-                </ng-container>
+                    account.
+                  </ng-container>
                 </p>
                 <p class="middle-text">
                   <ng-container i18n="@@linking.ifYOuHaveQuestions">
-                  If you have any questions
-                </ng-container>
+                    If you have any questions
+                  </ng-container>
                   <a
                     class="mat-button-font underline orc-font-body-small"
                     i18n="@@linking.knowledgebase"
                     href="https://support.orcid.org/hc/en-us/articles/360006972693"
                     target="_blank"
                     rel="noopener noreferrer"
-                    >
-                  please visit the ORCID help centre
-                </a>
+                  >
+                    please visit the ORCID help centre
+                  </a>
                 </p>
                 <app-form-sign-in
                   (loading)="signingLoading = $event"
@@ -76,7 +71,7 @@
                   [signInData]="signInData"
                   [showForgotYourPassword]="false"
                   (show2FAEmitter)="show2FAEmitter($event)"
-                  >
+                >
                 </app-form-sign-in>
                 <div class="button-group center-content">
                   @if (!show2FA) {
@@ -86,37 +81,37 @@
                       class="mat-elevation-z0 mat-button-wrap-text"
                       type="submit"
                       [disabled]="loading || signingLoading"
-                      >
+                    >
                       <ng-container i18n="@@linking.button.1">
-                    Sign in and link your
-                  </ng-container>
+                        Sign in and link your
+                      </ng-container>
                       {{ entityDisplayName }}
                       <ng-container i18n="@@linking.button.2">
-                    account
-                  </ng-container>
+                        account
+                      </ng-container>
                     </button>
                   }
                   <a
                     class="mat-button-font institution-name-link underline"
                     i18n="@@linking.cancelLinking"
                     (click)="cancel()"
-                    >
-                  Cancel linking
-                </a>
+                  >
+                    Cancel linking
+                  </a>
                   <a
                     class="mat-button-font institution-name-link underline"
                     i18n="@@ngOrcid.signin.forgotYourPassword"
                     (click)="forgotPassword()"
-                    >
-                  Forgot your password or ORCID ID?
-                </a>
+                  >
+                    Forgot your password or ORCID ID?
+                  </a>
                   <a
                     class="mat-button-font institution-name-link underline"
                     i18n="@@ngOrcid.signin.registerNow"
                     (click)="register()"
-                    >
-                  Register now
-                </a>
+                  >
+                    Register now
+                  </a>
                 </div>
               </div>
             }

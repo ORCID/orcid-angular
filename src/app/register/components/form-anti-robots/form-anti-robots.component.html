@@ -2,17 +2,16 @@
   @if (
     captcha.hasError('captcha') &&
     (form.controls.captcha.touched || nextButtonWasClicked)
-    ) {
-    <mat-error
-      i18n="@@register.recaptchaRequired"
+  ) {
+    <mat-error i18n="@@register.recaptchaRequired"
       >Please check the recaptcha box</mat-error
-      >
-    }
+    >
+  }
 
-    <div
-      appRecaptcha
-      (captchaFail)="captchaFail($event)"
-      (captchaLoaded)="captchaLoaded($event)"
-      formControlName="captcha"
-    ></div>
-  </ng-container>
+  <div
+    appRecaptcha
+    (captchaFail)="captchaFail($event)"
+    (captchaLoaded)="captchaLoaded($event)"
+    formControlName="captcha"
+  ></div>
+</ng-container>

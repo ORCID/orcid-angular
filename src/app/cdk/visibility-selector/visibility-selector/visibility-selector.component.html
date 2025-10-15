@@ -1,197 +1,185 @@
 <button
   [ngClass]="{
     'not-editable': !editable,
-    mobile: mobile
+    mobile: mobile,
   }"
   [disabled]="!editable"
   mat-button
   [matMenuTriggerFor]="menu"
   class="main-menu"
   [attr.aria-label]="(itemTitle || '') + ' ' + mainButtonLabel"
-  >
+>
   @if (mobile) {
     <mat-icon
       class="menu-icon"
-    [ngClass]="{
-      limitedIcon: privacy === 'LIMITED',
-      publicIcon: privacy === 'PUBLIC',
-      privateIcon: privacy === 'PRIVATE'
-    }"
+      [ngClass]="{
+        limitedIcon: privacy === 'LIMITED',
+        publicIcon: privacy === 'PUBLIC',
+        privateIcon: privacy === 'PRIVATE',
+      }"
       >visibility</mat-icon
-      >
-    }
-    @if (!mobile) {
-      <div class="main-button-container">
-        <div class="icon-title-container">
-          <mat-icon
-            class="menu-icon"
-        [ngClass]="{
-          limitedIcon: privacy === 'LIMITED',
-          publicIcon: privacy === 'PUBLIC',
-          privateIcon: privacy === 'PRIVATE'
-        }"
-            >visibility</mat-icon
-            >
-            @if (privacy === 'PUBLIC') {
-              <ng-container
-                i18n="@@register.VisibilityEveryone"
-                >Everyone</ng-container
-                >
-              }
-              @if (privacy === 'LIMITED') {
-                <ng-container i18n="@@account.trusted"
-                  >Trusted</ng-container
-                  >
-                }
-                @if (privacy === 'PRIVATE') {
-                  <ng-container
-                    i18n="@@register.VisibilityPrivate"
-                    >Only me</ng-container
-                    >
-                  }
-                </div>
-                @if (editable) {
-                  <mat-icon class="arrow-drop-down"
-                    >arrow_drop_down</mat-icon
-                    >
-                  }
-                </div>
-              }
-            </button>
-            <mat-menu #menu="matMenu">
-              <div class="visibilityTitleContainer">
-                <h1 class="orc-font-body" i18n="@@shared.setVisibilityFor">
+    >
+  }
+  @if (!mobile) {
+    <div class="main-button-container">
+      <div class="icon-title-container">
+        <mat-icon
+          class="menu-icon"
+          [ngClass]="{
+            limitedIcon: privacy === 'LIMITED',
+            publicIcon: privacy === 'PUBLIC',
+            privateIcon: privacy === 'PRIVATE',
+          }"
+          >visibility</mat-icon
+        >
+        @if (privacy === 'PUBLIC') {
+          <ng-container i18n="@@register.VisibilityEveryone"
+            >Everyone</ng-container
+          >
+        }
+        @if (privacy === 'LIMITED') {
+          <ng-container i18n="@@account.trusted">Trusted</ng-container>
+        }
+        @if (privacy === 'PRIVATE') {
+          <ng-container i18n="@@register.VisibilityPrivate"
+            >Only me</ng-container
+          >
+        }
+      </div>
+      @if (editable) {
+        <mat-icon class="arrow-drop-down">arrow_drop_down</mat-icon>
+      }
+    </div>
+  }
+</button>
+<mat-menu #menu="matMenu">
+  <div class="visibilityTitleContainer">
+    <h1 class="orc-font-body" i18n="@@shared.setVisibilityFor">
       Set visibility for
     </h1>
-                @if (multiEdit === 'single') {
-                  <i
-                    class="orc-font-body-small"
-                    i18n="@@shared.thisItemOnly"
-                    >This item only</i
-                    >
-                  }
-                  @if (multiEdit === 'multi') {
-                    <i
-                      class="orc-font-body-small"
-                      i18n="@@shared.allItemsInThisGroup"
-                      >All items in this group</i
-                      >
-                    }
-                    @if (multiEdit === 'selected') {
-                      <i
-                        class="orc-font-body-small"
-                        i18n="@@shared.selectedItemsForVisibility"
-                        >Selected items
-    </i>
-                    }
-                  </div>
-                  <button
-                    [disabled]="disableOptions['PUBLIC']"
+    @if (multiEdit === 'single') {
+      <i class="orc-font-body-small" i18n="@@shared.thisItemOnly"
+        >This item only</i
+      >
+    }
+    @if (multiEdit === 'multi') {
+      <i class="orc-font-body-small" i18n="@@shared.allItemsInThisGroup"
+        >All items in this group</i
+      >
+    }
+    @if (multiEdit === 'selected') {
+      <i class="orc-font-body-small" i18n="@@shared.selectedItemsForVisibility"
+        >Selected items
+      </i>
+    }
+  </div>
+  <button
+    [disabled]="disableOptions['PUBLIC']"
     [attr.aria-label]="
       ariaLabelPublic + (privacy === 'PUBLIC' ? ariaLabelCurrentlySelected : '')
     "
-                    mat-menu-item
-                    (click)="public()"
+    mat-menu-item
+    (click)="public()"
     [ngClass]="{
       noSelectedMenu: privacy !== 'PUBLIC' || visibilityError,
-      selectedMenu: privacy === 'PUBLIC' && !visibilityError
+      selectedMenu: privacy === 'PUBLIC' && !visibilityError,
     }"
-                    class="public-button cy-visibility-public flex-menu-item"
-                    >
-                    <div class="icon-circle icon-public">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="25"
-                        height="25"
-                        viewBox="0 0 32 32"
-                        >
-                        <g fill-rule="evenodd" transform="translate(2 8)">
-                          <path
-                            d="M4.89285309,3 C6.32345505,3 7.48318708,4.198431 7.48318708,6.16476204 C7.48318708,7.39927189 7.02606362,8.48703297 6.33177897,9.12571199 L6.33192132,9.85514246 C6.93430296,9.95767004 7.48953333,10.1208324 7.99761243,10.3446296 C6.59349146,10.931755 5.4631016,11.8164312 4.6050382,13 L4.609,12.995 L-7.54951657e-15,12.9951477 L-7.54951657e-15,11.5705277 C0.76712784,10.590195 1.9183686,10.0004474 3.45372228,9.8012851 L3.45313835,9.12498602 C2.75929632,8.48620889 2.3025191,7.39880427 2.3025191,6.16476204 C2.3025191,4.198431 3.46225113,3 4.89285309,3 Z"
-                            />
-                          <path
-                            d="M24.8904655,3 C26.3210675,3 27.4807995,4.198431 27.4807995,6.16476204 C27.4807995,7.39927189 27.0236761,8.48703297 26.3293914,9.12571199 L26.3295337,9.85514246 C26.9319154,9.95767004 27.4871458,10.1208324 27.9952249,10.3446296 C26.5911039,10.931755 25.460714,11.8164312 24.6026506,13 L24.6066124,12.995 L19.9976124,12.9951477 L19.9976124,11.5705277 C20.7647403,10.590195 21.915981,10.0004474 23.4513347,9.8012851 L23.4507508,9.12498602 C22.7569087,8.48620889 22.3001315,7.39880427 22.3001315,6.16476204 C22.3001315,4.198431 23.4598636,3 24.8904655,3 Z"
-                            transform="matrix(-1 0 0 1 47.993 0)"
-                            />
-                          <path
-                            d="M13.9976124,0 C16.3766852,0 17.8888022,1.83293682 17.8888022,4.84033613 C17.8888022,6.60373271 17.3689221,8.17135716 16.4592223,9.1665201 L16.4593096,10.4940226 C18.7142116,10.8564413 20.5603125,11.6917671 21.9976124,13 L21.9976124,16 L5.99761243,16 L5.99761243,13 C7.23371328,11.5789972 9.07977703,10.7159448 11.5358037,10.4108427 L11.536008,9.18074833 C10.6617792,8.21159109 10.1619793,6.6729659 10.1064226,4.84033613 C10.0106366,1.68067227 11.6185397,0 13.9976124,0 Z"
-                            />
-                        </g>
-                      </svg>
-                    </div>
-                    <div class="title-container" i18n="@@register.VisibilityEveryone">
+    class="public-button cy-visibility-public flex-menu-item"
+  >
+    <div class="icon-circle icon-public">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="25"
+        height="25"
+        viewBox="0 0 32 32"
+      >
+        <g fill-rule="evenodd" transform="translate(2 8)">
+          <path
+            d="M4.89285309,3 C6.32345505,3 7.48318708,4.198431 7.48318708,6.16476204 C7.48318708,7.39927189 7.02606362,8.48703297 6.33177897,9.12571199 L6.33192132,9.85514246 C6.93430296,9.95767004 7.48953333,10.1208324 7.99761243,10.3446296 C6.59349146,10.931755 5.4631016,11.8164312 4.6050382,13 L4.609,12.995 L-7.54951657e-15,12.9951477 L-7.54951657e-15,11.5705277 C0.76712784,10.590195 1.9183686,10.0004474 3.45372228,9.8012851 L3.45313835,9.12498602 C2.75929632,8.48620889 2.3025191,7.39880427 2.3025191,6.16476204 C2.3025191,4.198431 3.46225113,3 4.89285309,3 Z"
+          />
+          <path
+            d="M24.8904655,3 C26.3210675,3 27.4807995,4.198431 27.4807995,6.16476204 C27.4807995,7.39927189 27.0236761,8.48703297 26.3293914,9.12571199 L26.3295337,9.85514246 C26.9319154,9.95767004 27.4871458,10.1208324 27.9952249,10.3446296 C26.5911039,10.931755 25.460714,11.8164312 24.6026506,13 L24.6066124,12.995 L19.9976124,12.9951477 L19.9976124,11.5705277 C20.7647403,10.590195 21.915981,10.0004474 23.4513347,9.8012851 L23.4507508,9.12498602 C22.7569087,8.48620889 22.3001315,7.39880427 22.3001315,6.16476204 C22.3001315,4.198431 23.4598636,3 24.8904655,3 Z"
+            transform="matrix(-1 0 0 1 47.993 0)"
+          />
+          <path
+            d="M13.9976124,0 C16.3766852,0 17.8888022,1.83293682 17.8888022,4.84033613 C17.8888022,6.60373271 17.3689221,8.17135716 16.4592223,9.1665201 L16.4593096,10.4940226 C18.7142116,10.8564413 20.5603125,11.6917671 21.9976124,13 L21.9976124,16 L5.99761243,16 L5.99761243,13 C7.23371328,11.5789972 9.07977703,10.7159448 11.5358037,10.4108427 L11.536008,9.18074833 C10.6617792,8.21159109 10.1619793,6.6729659 10.1064226,4.84033613 C10.0106366,1.68067227 11.6185397,0 13.9976124,0 Z"
+          />
+        </g>
+      </svg>
+    </div>
+    <div class="title-container" i18n="@@register.VisibilityEveryone">
       Everyone
     </div>
-                  </button>
-                  <button
-                    [disabled]="disableOptions['LIMITED']"
-                    mat-menu-item
-                    aria-label="visibility limited"
+  </button>
+  <button
+    [disabled]="disableOptions['LIMITED']"
+    mat-menu-item
+    aria-label="visibility limited"
     [attr.aria-label]="
       ariaLabelTrustedParty +
       (privacy === 'LIMITED' ? ariaLabelCurrentlySelected : '')
     "
-                    (click)="limited()"
+    (click)="limited()"
     [ngClass]="{
       noSelectedMenu: privacy !== 'LIMITED' || visibilityError,
-      selectedMenu: privacy === 'LIMITED' && !visibilityError
+      selectedMenu: privacy === 'LIMITED' && !visibilityError,
     }"
-                    class="limited-button cy-visibility-limited flex-menu-item"
-                    >
-                    <div class="icon-circle icon-limited">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="25"
-                        height="25"
-                        viewBox="0 0 32 32"
-                        >
-                        <path
-                          d="M21.3241161,1.2027958 L21.3241161,4.80204218 L16.802377,4.80204218 L16.802377,6.00179097 L21.3241161,6.00179097 L21.3241161,9.60103736 L16.802377,9.60103736 L16.8025334,13.9532859 C20.1760796,14.7070044 22.7027958,17.7951245 22.7027958,21.490125 C22.7027958,25.7497154 19.3449314,29.2027958 15.2027958,29.2027958 C11.0606602,29.2027958 7.7027958,25.7497154 7.7027958,21.490125 C7.7027958,17.8976017 10.0913034,14.8787633 13.3243619,14.0213468 L13.3241161,1.2027958 L21.3241161,1.2027958 Z M15.2027958,16.8625225 C12.7175144,16.8625225 10.7027958,18.9343707 10.7027958,21.490125 C10.7027958,24.0458793 12.7175144,26.1177275 15.2027958,26.1177275 C17.6880772,26.1177275 19.7027958,24.0458793 19.7027958,21.490125 C19.7027958,18.9343707 17.6880772,16.8625225 15.2027958,16.8625225 Z"
-                          transform="rotate(45 15.203 15.203)"
-                          />
-                      </svg>
-                    </div>
-                    <div class="title-container" i18n="@@account.trustedParties">
+    class="limited-button cy-visibility-limited flex-menu-item"
+  >
+    <div class="icon-circle icon-limited">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="25"
+        height="25"
+        viewBox="0 0 32 32"
+      >
+        <path
+          d="M21.3241161,1.2027958 L21.3241161,4.80204218 L16.802377,4.80204218 L16.802377,6.00179097 L21.3241161,6.00179097 L21.3241161,9.60103736 L16.802377,9.60103736 L16.8025334,13.9532859 C20.1760796,14.7070044 22.7027958,17.7951245 22.7027958,21.490125 C22.7027958,25.7497154 19.3449314,29.2027958 15.2027958,29.2027958 C11.0606602,29.2027958 7.7027958,25.7497154 7.7027958,21.490125 C7.7027958,17.8976017 10.0913034,14.8787633 13.3243619,14.0213468 L13.3241161,1.2027958 L21.3241161,1.2027958 Z M15.2027958,16.8625225 C12.7175144,16.8625225 10.7027958,18.9343707 10.7027958,21.490125 C10.7027958,24.0458793 12.7175144,26.1177275 15.2027958,26.1177275 C17.6880772,26.1177275 19.7027958,24.0458793 19.7027958,21.490125 C19.7027958,18.9343707 17.6880772,16.8625225 15.2027958,16.8625225 Z"
+          transform="rotate(45 15.203 15.203)"
+        />
+      </svg>
+    </div>
+    <div class="title-container" i18n="@@account.trustedParties">
       Trusted Parties
     </div>
-                  </button>
-                  <button
-                    [disabled]="disableOptions['PRIVATE']"
-                    aria-label="visibility private"
+  </button>
+  <button
+    [disabled]="disableOptions['PRIVATE']"
+    aria-label="visibility private"
     [attr.aria-label]="
       ariaLabelPrivate +
       (privacy === 'PRIVATE' ? ariaLabelCurrentlySelected : '')
     "
-                    mat-menu-item
-                    (click)="private()"
-                    class="private-button cy-visibility-private flex-menu-item"
+    mat-menu-item
+    (click)="private()"
+    class="private-button cy-visibility-private flex-menu-item"
     [ngClass]="{
       noSelectedMenu: privacy !== 'PRIVATE' || visibilityError,
-      selectedMenu: privacy === 'PRIVATE' && !visibilityError
+      selectedMenu: privacy === 'PRIVATE' && !visibilityError,
     }"
-                    >
-                    <div class="icon-circle icon-private">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="25"
-                        height="25"
-                        viewBox="0 0 32 32"
-                        >
-                        <path
-                          fill-rule="evenodd"
-                          d="M20.5833333,8.75 C20.5833333,8.23716416 20.1972931,7.81449284 19.6999545,7.75672773 L19.5833333,7.75 L12.4166667,7.75 C11.9038308,7.75 11.4811595,8.13604019 11.4233944,8.63337887 L11.4166667,8.75 L11.4166667,12.3333333 L8.66666667,12.3333333 L8.66666667,10 C8.66666667,7.23857625 10.9052429,5 13.6666667,5 L18.3333333,5 C21.0947571,5 23.3333333,7.23857625 23.3333333,10 L23.3333333,12.3333333 L25,12.3333333 C26.1045695,12.3333333 27,13.2287638 27,14.3333333 L27,25 C27,26.1045695 26.1045695,27 25,27 L7,27 C5.8954305,27 5,26.1045695 5,25 L5,14.3333333 C5,13.2287638 5.8954305,12.3333333 7,12.3333333 L20.5833333,12.3333333 L20.5833333,8.75 Z M16,16 C15.0381041,16 14.2492271,16.7407822 14.1727441,17.6829715 L14.1666667,17.8333333 L14.1666667,21.5 C14.1666667,22.512522 14.987478,23.3333333 16,23.3333333 C16.9618959,23.3333333 17.7507729,22.5925511 17.8272559,21.6503618 L17.8333333,21.5 L17.8333333,17.8333333 C17.8333333,16.8208113 17.012522,16 16,16 Z"
-                          />
-                      </svg>
-                    </div>
-                    <div class="title-container" i18n="@@shared.onlyMe">Only me</div>
-                  </button>
+  >
+    <div class="icon-circle icon-private">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="25"
+        height="25"
+        viewBox="0 0 32 32"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M20.5833333,8.75 C20.5833333,8.23716416 20.1972931,7.81449284 19.6999545,7.75672773 L19.5833333,7.75 L12.4166667,7.75 C11.9038308,7.75 11.4811595,8.13604019 11.4233944,8.63337887 L11.4166667,8.75 L11.4166667,12.3333333 L8.66666667,12.3333333 L8.66666667,10 C8.66666667,7.23857625 10.9052429,5 13.6666667,5 L18.3333333,5 C21.0947571,5 23.3333333,7.23857625 23.3333333,10 L23.3333333,12.3333333 L25,12.3333333 C26.1045695,12.3333333 27,13.2287638 27,14.3333333 L27,25 C27,26.1045695 26.1045695,27 25,27 L7,27 C5.8954305,27 5,26.1045695 5,25 L5,14.3333333 C5,13.2287638 5.8954305,12.3333333 7,12.3333333 L20.5833333,12.3333333 L20.5833333,8.75 Z M16,16 C15.0381041,16 14.2492271,16.7407822 14.1727441,17.6829715 L14.1666667,17.8333333 L14.1666667,21.5 C14.1666667,22.512522 14.987478,23.3333333 16,23.3333333 C16.9618959,23.3333333 17.7507729,22.5925511 17.8272559,21.6503618 L17.8333333,21.5 L17.8333333,17.8333333 C17.8333333,16.8208113 17.012522,16 16,16 Z"
+        />
+      </svg>
+    </div>
+    <div class="title-container" i18n="@@shared.onlyMe">Only me</div>
+  </button>
 
-                  <button
-                    mat-menu-item
-                    (click)="navigate()"
-                    class="underline wrap-menu-item"
-                    i18n="@@shared.moreInformationOnOrcidVisibility"
-                    >
+  <button
+    mat-menu-item
+    (click)="navigate()"
+    class="underline wrap-menu-item"
+    i18n="@@shared.moreInformationOnOrcidVisibility"
+  >
     More information on ORCID visibility settings
   </button>
-                </mat-menu>
+</mat-menu>

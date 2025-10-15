@@ -1,14 +1,14 @@
 <app-panel-data
   class="orc-font-body-small"
   [borderBottom]="researchResource?.showDetails"
-  >
+>
   <app-panel-element [hideVisibility]="false">
     <div
       class="description-container"
       [ngClass]="{
-        'show-details': researchResource?.showDetails
+        'show-details': researchResource?.showDetails,
       }"
-      >
+    >
       <div class="description">
         @for (host of researchResource?.hosts; track host) {
           <div>
@@ -17,331 +17,340 @@
               <span> (</span>
             }
             @if (host.city) {
-              <span>{{ host.city }}</span
-                >
-                }@if (host.region) {
-                <span>, {{ host.region }}</span>
+              <span>{{ host.city }}</span>
+            }
+            @if (host.region) {
+              <span>, {{ host.region }}</span>
+            }
+            @if (host.country) {
+              <span>, {{ host.country }}</span>
+            }
+            @if (host.city || host.region || host.country) {
+              <span>)</span>
+            }
+          </div>
+        }
+        <div>
+          @if (researchResource?.startDate) {
+            <span>
+              <span>{{
+                researchResource.startDate | monthDayYearDateToString
+              }}</span>
+              <span> to </span>
+              <span
+                [hidden]="
+                  researchResource.endDate && researchResource.endDate.year
+                "
+                i18n="@@researchResources.present"
+              >
+                present
+              </span>
+              @if (researchResource.endDate) {
+                <span>
+                  <span>{{
+                    researchResource.endDate | monthDayYearDateToString
+                  }}</span>
+                </span>
               }
-              @if (host.country) {
-                <span>, {{ host.country }}</span>
-              }
-              @if (host.city || host.region || host.country) {
-                <span>)</span>
+            </span>
+          }
+          <!--End date-->
+          @if (!researchResource?.startDate && researchResource?.endDate) {
+            <span>
+              <span>{{
+                researchResource.endDate | monthDayYearDateToString
+              }}</span>
+            </span>
+          }
+        </div>
+        <app-display-external-ids
+          [externalIdentifiers]="researchResource?.externalIdentifiers"
+          [noBoldTitle]="true"
+        ></app-display-external-ids>
+      </div>
+      <div
+        class="buttons-container"
+        [ngClass]="{
+          'orc-font-small-print': isMobile,
+          'orc-font-body-small': !isMobile,
+        }"
+      >
+        @if (!researchResource?.showDetails) {
+          <a
+            class="underline show-more-button"
+            (click)="getDetails(researchResource, researchResource.putCode)"
+            i18n="@@shared.showMoreDetail"
+            [attr.aria-label]="
+              'research-resource'
+                | appPanelActivityActionAriaLabel
+                  : 'show'
+                  : researchResource.title
+            "
+          >
+            Show more detail
+          </a>
+        }
+        @if (researchResource?.showDetails) {
+          <a
+            class="underline"
+            (click)="collapse(researchResource)"
+            i18n="@@shared.showLessDetail"
+            id="show-less-button"
+            [attr.aria-label]="
+              'research-resource'
+                | appPanelActivityActionAriaLabel
+                  : 'hide'
+                  : researchResource.title
+            "
+          >
+            Show less detail
+          </a>
+        }
+      </div>
+    </div>
+  </app-panel-element>
+  @if (researchResource?.showDetails) {
+    <app-panel-element [hideVisibility]="false">
+      @if (getResearchResource(researchResource.putCode); as researchDetail) {
+        <div class="description">
+          @for (host of researchDetail.hosts; track host) {
+            <div class="host">
+              @if (
+                getOrganizationDisambiguated(host);
+                as organizationDisambiguated
+              ) {
+                <p>
+                  <span>{{ host.name | titlecase }}</span>
+                  @if (host.city || host.region || host.country) {
+                    <span> (</span>
+                  }
+                  @if (host.city) {
+                    <span>{{ host.city }}</span>
+                  }
+                  @if (host.region) {
+                    <span>, {{ host.region }}</span>
+                  }
+                  @if (host.country) {
+                    <span>, {{ host.country }}</span>
+                  }
+                  @if (host.city || host.region || host.country) {
+                    <span>)</span>
+                  }
+                </p>
+                <app-org-identifier
+                  [orgDisambiguated]="organizationDisambiguated"
+                ></app-org-identifier>
+                @if (researchDetail.translatedTitle) {
+                  <h3
+                    class="orc-font-body-small"
+                    i18n="@@shared.translatedTitle"
+                  >
+                    Translated title
+                  </h3>
+                  <div>
+                    {{ researchDetail.translatedTitle }}
+                  </div>
+                }
+                @if (researchDetail.url) {
+                  <h3 class="orc-font-body-small" i18n="@@shared.url">URL</h3>
+                  <div>
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="{{ researchDetail.url }}"
+                    >
+                      {{ researchDetail.url }}
+                    </a>
+                  </div>
+                }
+                <h3 class="orc-font-body-small" i18n="@@shared.added">Added</h3>
+                <div>
+                  {{ researchDetail.createdDate | monthDayYearDateToString }}
+                </div>
+                @if (researchDetail.lastModifiedDate) {
+                  <h3 class="orc-font-body-small" i18n="@@shared.lastModified">
+                    Last modified
+                  </h3>
+                  <div>
+                    {{
+                      researchDetail.lastModifiedDate | monthDayYearDateToString
+                    }}
+                  </div>
+                }
               }
             </div>
           }
-          <div>
-            @if (researchResource?.startDate) {
-              <span>
-                <span>{{
-                  researchResource.startDate | monthDayYearDateToString
-                }}</span>
-                <span> to </span>
-                <span
-              [hidden]="
-                researchResource.endDate && researchResource.endDate.year
-              "
-                  i18n="@@researchResources.present"
-                  >
-              present
-            </span>
-                @if (researchResource.endDate) {
-                  <span>
-                    <span>{{
-                      researchResource.endDate | monthDayYearDateToString
-                    }}</span>
-                  </span>
-                }
-              </span>
-            }
-            <!--End date-->
-            @if (!researchResource?.startDate && researchResource?.endDate) {
-              <span
-                >
-                <span>{{
-                  researchResource.endDate | monthDayYearDateToString
-                }}</span>
-              </span>
-            }
-          </div>
-          <app-display-external-ids
-            [externalIdentifiers]="researchResource?.externalIdentifiers"
-            [noBoldTitle]="true"
-          ></app-display-external-ids>
-        </div>
-        <div
-          class="buttons-container"
-        [ngClass]="{
-          'orc-font-small-print': isMobile,
-          'orc-font-body-small': !isMobile
-        }"
-          >
-          @if (!researchResource?.showDetails) {
-            <a
-              class="underline show-more-button"
-              (click)="getDetails(researchResource, researchResource.putCode)"
-              i18n="@@shared.showMoreDetail"
-          [attr.aria-label]="
-            'research-resource'
-              | appPanelActivityActionAriaLabel
-                : 'show'
-                : researchResource.title
-          "
+          @for (item of researchDetail.items; track item; let i = $index) {
+            <div>
+              <app-panel
+                panelId="research-resource"
+                [elements]="item"
+                [type]="'top-bar'"
+                [editable]="false"
+                [customControls]="true"
+                class="top-bar"
+                [attr.id]="'research-detail-item-' + i"
+                [stackedHeader]="!platform.columns12"
               >
-          Show more detail
-        </a>
-          }
-          @if (researchResource?.showDetails) {
-            <a
-              class="underline"
-              (click)="collapse(researchResource)"
-              i18n="@@shared.showLessDetail"
-              id="show-less-button"
-          [attr.aria-label]="
-            'research-resource'
-              | appPanelActivityActionAriaLabel
-                : 'hide'
-                : researchResource.title
-          "
-              >
-          Show less detail
-        </a>
-          }
-        </div>
-      </div>
-    </app-panel-element>
-    @if (researchResource?.showDetails) {
-      <app-panel-element
-        [hideVisibility]="false"
-        >
-        @if (getResearchResource(researchResource.putCode); as researchDetail) {
-          <div
-            class="description"
-            >
-            @for (host of researchDetail.hosts; track host) {
-              <div class="host">
-                @if (
-                  getOrganizationDisambiguated(host); as organizationDisambiguated
-                  ) {
-                  <p>
-                    <span>{{ host.name | titlecase }}</span>
-                    @if (host.city || host.region || host.country) {
-                      <span> (</span>
-                    }
-                    @if (host.city) {
-                      <span>{{ host.city }}</span
-                        >
-                        }@if (host.region) {
-                        <span>, {{ host.region }}</span>
-                      }
-                      @if (host.country) {
-                        <span>, {{ host.country }}</span>
-                      }
-                      @if (host.city || host.region || host.country) {
-                        <span>)</span>
-                      }
-                    </p>
-                    <app-org-identifier
-                      [orgDisambiguated]="organizationDisambiguated"
-                    ></app-org-identifier>
-                    @if (researchDetail.translatedTitle) {
-                      <h3 class="orc-font-body-small" i18n="@@shared.translatedTitle">
-              Translated title
-            </h3>
-                      <div>
-                        {{ researchDetail.translatedTitle }}
-                      </div>
-                    }
-                    @if (researchDetail.url) {
-                      <h3 class="orc-font-body-small" i18n="@@shared.url">URL</h3>
-                      <div>
-                        <a
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          href="{{ researchDetail.url }}"
-                          >
-                          {{ researchDetail.url }}
-                        </a>
-                      </div>
-                    }
-                    <h3 class="orc-font-body-small" i18n="@@shared.added">Added</h3>
-                    <div>
-                      {{ researchDetail.createdDate | monthDayYearDateToString }}
-                    </div>
-                    @if (researchDetail.lastModifiedDate) {
-                      <h3 class="orc-font-body-small" i18n="@@shared.lastModified">
-              Last modified
-            </h3>
-                      <div>
-                        {{ researchDetail.lastModifiedDate | monthDayYearDateToString }}
-                      </div>
-                    }
-                  }
-                </div>
-              }
-              @for (item of researchDetail.items; track item; let i = $index) {
-                <div>
-                  <app-panel
-                    panelId="research-resource"
-                    [elements]="item"
-                    [type]="'top-bar'"
-                    [editable]="false"
-                    [customControls]="true"
-                    class="top-bar"
-                    [attr.id]="'research-detail-item-' + i"
-                    [stackedHeader]="!platform.columns12"
+                <div header>
+                  <div>
+                    <span
+                      class="orc-font-small-print resourceType"
+                      [ngClass]="{
+                        infrastructures:
+                          item.resourceType.toLocaleLowerCase() ===
+                          'infrastructures',
+                        equipment:
+                          item.resourceType.toLocaleLowerCase() === 'equipment',
+                        collections:
+                          item.resourceType.toLocaleLowerCase() ===
+                          'collections',
+                        services:
+                          item.resourceType.toLocaleLowerCase() === 'services',
+                        mobile: isMobile,
+                      }"
                     >
-                    <div header>
-                      <div>
-                        <span
-                          class="orc-font-small-print resourceType"
-                [ngClass]="{
-                  infrastructures:
-                    item.resourceType.toLocaleLowerCase() === 'infrastructures',
-                  equipment:
-                    item.resourceType.toLocaleLowerCase() === 'equipment',
-                  collections:
-                    item.resourceType.toLocaleLowerCase() === 'collections',
-                  services:
-                    item.resourceType.toLocaleLowerCase() === 'services',
-                  mobile: isMobile
-                }"
-                          >
-                          <span class="dot"></span>
-                          <strong>
-                            {{ item.resourceType | uppercase }}
-                          </strong>
-                        </span>
-                        @if (!isMobile) {
-                          <strong class="orc-font-body-small">
-                            {{ item.resourceName }}
-                          </strong>
-                        }
-                      </div>
-                      @if (isMobile) {
-                        <strong class="orc-font-body-small">
-                          {{ item.resourceName }}
-                        </strong>
-                      }
-                    </div>
-                    <div custom-controls>
-                      <span
-                        class="show"
-              [ngClass]="{
-                'orc-font-small-print': isMobile,
-                'orc-font-body-small': !isMobile
-              }"
-                        >
-                        @if (!item.showDetails) {
-                          <a
-                            class="underline"
-                (click)="
-                  getOrganizationDisambiguatedDetails(
-                    item,
-                    item.hosts[0].disambiguationSource,
-                    item.hosts[0].orgDisambiguatedId
-                  )
-                "
-                            i18n="@@shared.showMoreDetail"
-                            id="show-more-item-button"
-                [attr.aria-label]="
-                  'research-resource'
-                    | appPanelActivityActionAriaLabel
-                      : 'show'
-                      : item.resourceName
-                "
-                            >
-                Show more detail
-              </a>
-                        }
-                        @if (item.showDetails) {
-                          <a
-                            class="underline"
-                            (click)="collapse(item)"
-                            i18n="@@shared.showLessDetail"
-                            id="show-less-item-button"
-                [attr.aria-label]="
-                  'research-resource'
-                    | appPanelActivityActionAriaLabel
-                      : 'hide'
-                      : item.resourceName
-                "
-                            >
-                Show less detail
-              </a>
-                        }
-                      </span>
-                    </div>
-                    @if (item.showDetails) {
-                      <app-panel-data [borderBottom]="true">
-                        <app-panel-element [hideVisibility]="false">
-                          <div class="description">
-                            <app-display-external-ids
-                              [externalIdentifiers]="item.externalIdentifiers"
-                              [noBoldTitle]="true"
-                            ></app-display-external-ids>
-                            @if (item.hosts && item.hosts[0]; as itemHost) {
-                              <div>
-                                <span>{{ itemHost.name }}</span>
-                                @if (itemHost.city || itemHost.region || itemHost.country) {
-                                  <span
-                                    >
-                                    (</span
-                                    >
-                                  }
-                                  @if (itemHost.city) {
-                                    <span>{{ itemHost.city }}</span
-                                      >
-                                      }@if (itemHost.region) {
-                                      <span>, {{ itemHost.region }}</span>
-                                    }
-                                    @if (itemHost.country) {
-                                      <span>, {{ itemHost.country }}</span>
-                                    }
-                                    @if (itemHost.city || itemHost.region || itemHost.country) {
-                                      <span
-                                        >)</span
-                                        >
-                                      }
-                                    </div>
-                                  }
-                                </div>
-                                @if (item.url) {
-                                  <div class="description">
-                                    <h3 class="orc-font-body-small" i18n="@@shared.url">URL</h3>
-                                    @if (!(item.url | isUrl)) {
-                                      {{ item.url }}
-                                    }
-                                    @if (item.url | isUrl) {
-                                      <a
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        href="{{ item.url }}"
-                                        >
-                                        {{ item.url }}
-                                      </a>
-                                    }
-                                  </div>
-                                }
-                                @if (item.hosts && item.hosts[0]; as itemHost) {
-                                  <div
-                                    class="description"
-                                    >
-                                    @if (getOrganizationDisambiguated(itemHost); as nestOrg) {
-                                      <app-org-identifier
-                                        [orgDisambiguated]="nestOrg"
-                                      ></app-org-identifier>
-                                    }
-                                  </div>
-                                }
-                              </app-panel-element>
-                            </app-panel-data>
-                          }
-                        </app-panel>
-                      </div>
+                      <span class="dot"></span>
+                      <strong>
+                        {{ item.resourceType | uppercase }}
+                      </strong>
+                    </span>
+                    @if (!isMobile) {
+                      <strong class="orc-font-body-small">
+                        {{ item.resourceName }}
+                      </strong>
                     }
                   </div>
+                  @if (isMobile) {
+                    <strong class="orc-font-body-small">
+                      {{ item.resourceName }}
+                    </strong>
+                  }
+                </div>
+                <div custom-controls>
+                  <span
+                    class="show"
+                    [ngClass]="{
+                      'orc-font-small-print': isMobile,
+                      'orc-font-body-small': !isMobile,
+                    }"
+                  >
+                    @if (!item.showDetails) {
+                      <a
+                        class="underline"
+                        (click)="
+                          getOrganizationDisambiguatedDetails(
+                            item,
+                            item.hosts[0].disambiguationSource,
+                            item.hosts[0].orgDisambiguatedId
+                          )
+                        "
+                        i18n="@@shared.showMoreDetail"
+                        id="show-more-item-button"
+                        [attr.aria-label]="
+                          'research-resource'
+                            | appPanelActivityActionAriaLabel
+                              : 'show'
+                              : item.resourceName
+                        "
+                      >
+                        Show more detail
+                      </a>
+                    }
+                    @if (item.showDetails) {
+                      <a
+                        class="underline"
+                        (click)="collapse(item)"
+                        i18n="@@shared.showLessDetail"
+                        id="show-less-item-button"
+                        [attr.aria-label]="
+                          'research-resource'
+                            | appPanelActivityActionAriaLabel
+                              : 'hide'
+                              : item.resourceName
+                        "
+                      >
+                        Show less detail
+                      </a>
+                    }
+                  </span>
+                </div>
+                @if (item.showDetails) {
+                  <app-panel-data [borderBottom]="true">
+                    <app-panel-element [hideVisibility]="false">
+                      <div class="description">
+                        <app-display-external-ids
+                          [externalIdentifiers]="item.externalIdentifiers"
+                          [noBoldTitle]="true"
+                        ></app-display-external-ids>
+                        @if (item.hosts && item.hosts[0]; as itemHost) {
+                          <div>
+                            <span>{{ itemHost.name }}</span>
+                            @if (
+                              itemHost.city ||
+                              itemHost.region ||
+                              itemHost.country
+                            ) {
+                              <span> (</span>
+                            }
+                            @if (itemHost.city) {
+                              <span>{{ itemHost.city }}</span>
+                            }
+                            @if (itemHost.region) {
+                              <span>, {{ itemHost.region }}</span>
+                            }
+                            @if (itemHost.country) {
+                              <span>, {{ itemHost.country }}</span>
+                            }
+                            @if (
+                              itemHost.city ||
+                              itemHost.region ||
+                              itemHost.country
+                            ) {
+                              <span>)</span>
+                            }
+                          </div>
+                        }
+                      </div>
+                      @if (item.url) {
+                        <div class="description">
+                          <h3 class="orc-font-body-small" i18n="@@shared.url">
+                            URL
+                          </h3>
+                          @if (!(item.url | isUrl)) {
+                            {{ item.url }}
+                          }
+                          @if (item.url | isUrl) {
+                            <a
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              href="{{ item.url }}"
+                            >
+                              {{ item.url }}
+                            </a>
+                          }
+                        </div>
+                      }
+                      @if (item.hosts && item.hosts[0]; as itemHost) {
+                        <div class="description">
+                          @if (
+                            getOrganizationDisambiguated(itemHost);
+                            as nestOrg
+                          ) {
+                            <app-org-identifier
+                              [orgDisambiguated]="nestOrg"
+                            ></app-org-identifier>
+                          }
+                        </div>
+                      }
+                    </app-panel-element>
+                  </app-panel-data>
                 }
-              </app-panel-element>
-            }
-          </app-panel-data>
+              </app-panel>
+            </div>
+          }
+        </div>
+      }
+    </app-panel-element>
+  }
+</app-panel-data>

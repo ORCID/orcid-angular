@@ -1,10 +1,6 @@
 <!-- A PANELS COMPONENT FOR EACH GROUP OF FUNDING -->
 @if (!(loading || (fundings?.length === 0 && isPublicRecord))) {
-  <section
-    id="funding"
-    role="region"
-    [attr.aria-label]="ngOrcidFunding"
-    >
+  <section id="funding" role="region" [attr.aria-label]="ngOrcidFunding">
     <app-panels
       [loading]="$loading | async"
       class="row"
@@ -18,9 +14,12 @@
       [sortTypes]="sortTypes"
       [sortType]="'end'"
       (sort)="sortEvent($event)"
-      >
+    >
       @if (fundings.length > 0) {
-        @for (fundingGroup of fundings; track trackByFundingGroup($index, fundingGroup)) {
+        @for (
+          fundingGroup of fundings;
+          track trackByFundingGroup($index, fundingGroup)
+        ) {
           <app-funding-stack
             [userRecord]="userRecord"
             [fundingStack]="fundingGroup"
@@ -32,18 +31,18 @@
       @if (fundings.length === 0) {
         <div class="orc-font-body-small">
           <p class="empty" i18n="@@funding.descriptionEmpty">
-          Add grants, awards and other funding you have received to support your
-          work.
-        </p>
+            Add grants, awards and other funding you have received to support
+            your work.
+          </p>
           <a
             class="underline"
             rel="noopener noreferrer"
             target="_blank"
             href="https://support.orcid.org/hc/en-us/articles/360006897214-Add-funding-information-to-your-ORCID-record"
             i18n="@@funding.learnMore"
-            >
-          Learn more about adding funding information to your ORCID record
-        </a>
+          >
+            Learn more about adding funding information to your ORCID record
+          </a>
         </div>
       }
     </app-panels>

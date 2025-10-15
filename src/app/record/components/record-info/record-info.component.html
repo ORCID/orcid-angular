@@ -3,110 +3,110 @@
     <div
       class="container record-info orc-font-body-small no-padding"
       [ngClass]="{ 'no-padding': displayBiography || displaySideBar }"
-      >
+    >
       @if (userInfo.IS_LOCKED === 'true' && !userInfo.PRIMARY_RECORD) {
         <p>
           <ng-container i18n="@@topBar.weLockRecords">
-          We lock records when they violate conditions of our </ng-container
-            >&nbsp;<a
+            We lock records when they violate conditions of our </ng-container
+          >&nbsp;<a
             class="underline"
             href="https://info.orcid.org/terms-of-use/"
             rel="noopener noreferrer"
             target="_blank"
             i18n="@@topBar.termsOfService"
             >terms of service.</a
-            >
-          </p>
-          <p>
-            <ng-container i18n="@@topBar.recordLockedInError">
-          If you feel this record has been locked in error please </ng-container
-              >&nbsp;<a
-              class="underline"
-              href="https://support.orcid.org/"
-              rel="noopener noreferrer"
-              target="_blank"
-              i18n="@@topBar.contactOrcid"
-              >contact ORCID support for further assistance.
-        </a>
-          </p>
-        }
-        @if (
-          userInfo.IS_DEACTIVATED === 'true' &&
-          userInfo.IS_LOCKED === 'false' &&
-          !userInfo.PRIMARY_RECORD
-          ) {
-          <p>
-            <ng-container i18n="@@topBar.whenOrcidDeactivated">
-          When an ORCID record is deactivated all information in the record is
-          deleted. Deactivated records are not shown in registry searches.
-        </ng-container>
-          </p>
-          <p>
-            <a
-              class="underline"
-              href="https://support.orcid.org/hc/en-us/articles/360006894554-Reactivating-your-deactivated-ORCID-account"
-              rel="noopener noreferrer"
-              target="_blank"
-              i18n="@@topBar.findOutReactivating"
-              >Find out more about reactivating an ORCID account
-        </a>
-          </p>
-        }
-        @if (userInfo.PRIMARY_RECORD) {
-          <p>
-            <ng-container i18n="@@topBar.accountDeprecated">
-          This account has been deprecated, please see account </ng-container
-              >&nbsp;<a class="underline" [href]="userInfo.PRIMARY_RECORD">{{
-              'https:' + baseUrl + userInfo.PRIMARY_RECORD
-              }}</a
-              >&nbsp;<ng-container i18n="@@topBar.forTheLastInformation"
-              >for the latest information.
-        </ng-container>
-          </p>
-          <p>
-            <ng-container i18n="@@topBar.deprecatedRecordIsDuplicate">
-          A deprecated record is a duplicate or unwanted ORCID record that has
-          been merged with another owned by the same person.
-        </ng-container>
-          </p>
-          <p>
-            <a
-              class="underline"
-              href="https://support.orcid.org/hc/en-us/articles/360006896634-I-have-more-than-one-ORCID-ID"
-              rel="noopener noreferrer"
-              target="_blank"
-              i18n="@@topBar.findOutMoreAboutRemoving"
-              >Find out more about removing additional or duplicate ORCID records
-        </a>
-          </p>
-        }
-        @if (
-          affiliations === 0 &&
-          !displaySideBar &&
-          !displayBiography &&
-          !userInfo?.RECORD_WITH_ISSUES
-          ) {
-          <h2 class="orc-font-body-large" i18n="@@record.noPublicInformation">
-        There's no displayable data for this record
-      </h2>
-          <p>
-            <ng-container i18n="@@topBar.recordOwnerNotHaveAdded">
-          The record owner may not have added information to their record or the
-          visibility for items on their record may be set to Trusted parties or
-          Only me.
-        </ng-container>
-          </p>
-          <p>
-            <a
-              class="underline"
-              href="https://support.orcid.org/hc/en-us/articles/360006897614-Visibility-settings"
-              rel="noopener noreferrer"
-              target="_blank"
-              i18n="@@topBar.findOutVisibility"
-              >Find out more about visibility settings in ORCID
-        </a>
-          </p>
-        }
-      </div>
-    </section>
-  }
+          >
+        </p>
+        <p>
+          <ng-container i18n="@@topBar.recordLockedInError">
+            If you feel this record has been locked in error please </ng-container
+          >&nbsp;<a
+            class="underline"
+            href="https://support.orcid.org/"
+            rel="noopener noreferrer"
+            target="_blank"
+            i18n="@@topBar.contactOrcid"
+            >contact ORCID support for further assistance.
+          </a>
+        </p>
+      }
+      @if (
+        userInfo.IS_DEACTIVATED === 'true' &&
+        userInfo.IS_LOCKED === 'false' &&
+        !userInfo.PRIMARY_RECORD
+      ) {
+        <p>
+          <ng-container i18n="@@topBar.whenOrcidDeactivated">
+            When an ORCID record is deactivated all information in the record is
+            deleted. Deactivated records are not shown in registry searches.
+          </ng-container>
+        </p>
+        <p>
+          <a
+            class="underline"
+            href="https://support.orcid.org/hc/en-us/articles/360006894554-Reactivating-your-deactivated-ORCID-account"
+            rel="noopener noreferrer"
+            target="_blank"
+            i18n="@@topBar.findOutReactivating"
+            >Find out more about reactivating an ORCID account
+          </a>
+        </p>
+      }
+      @if (userInfo.PRIMARY_RECORD) {
+        <p>
+          <ng-container i18n="@@topBar.accountDeprecated">
+            This account has been deprecated, please see account </ng-container
+          >&nbsp;<a class="underline" [href]="userInfo.PRIMARY_RECORD">{{
+            'https:' + baseUrl + userInfo.PRIMARY_RECORD
+          }}</a
+          >&nbsp;<ng-container i18n="@@topBar.forTheLastInformation"
+            >for the latest information.
+          </ng-container>
+        </p>
+        <p>
+          <ng-container i18n="@@topBar.deprecatedRecordIsDuplicate">
+            A deprecated record is a duplicate or unwanted ORCID record that has
+            been merged with another owned by the same person.
+          </ng-container>
+        </p>
+        <p>
+          <a
+            class="underline"
+            href="https://support.orcid.org/hc/en-us/articles/360006896634-I-have-more-than-one-ORCID-ID"
+            rel="noopener noreferrer"
+            target="_blank"
+            i18n="@@topBar.findOutMoreAboutRemoving"
+            >Find out more about removing additional or duplicate ORCID records
+          </a>
+        </p>
+      }
+      @if (
+        affiliations === 0 &&
+        !displaySideBar &&
+        !displayBiography &&
+        !userInfo?.RECORD_WITH_ISSUES
+      ) {
+        <h2 class="orc-font-body-large" i18n="@@record.noPublicInformation">
+          There's no displayable data for this record
+        </h2>
+        <p>
+          <ng-container i18n="@@topBar.recordOwnerNotHaveAdded">
+            The record owner may not have added information to their record or
+            the visibility for items on their record may be set to Trusted
+            parties or Only me.
+          </ng-container>
+        </p>
+        <p>
+          <a
+            class="underline"
+            href="https://support.orcid.org/hc/en-us/articles/360006897614-Visibility-settings"
+            rel="noopener noreferrer"
+            target="_blank"
+            i18n="@@topBar.findOutVisibility"
+            >Find out more about visibility settings in ORCID
+          </a>
+        </p>
+      }
+    </div>
+  </section>
+}

@@ -1,6 +1,9 @@
 @for (
-  funding of fundingStack?.fundings; track trackByFundingStack(i,
-  funding); let i = $index; let last = $last) {
+  funding of fundingStack?.fundings;
+  track trackByFundingStack(i, funding);
+  let i = $index;
+  let last = $last
+) {
   <!-- A PANEL COMPONENT FOR EACH FUNDING ON THE STACK -->
   @if (isPreferred(funding) || displayTheStack) {
     <app-panel
@@ -21,7 +24,7 @@
       [(displayTheStack)]="displayTheStack"
       type="funding"
       [panelTitle]="funding.fundingTitle.title.value"
-      >
+    >
       <h4 header class="funding-title orc-font-body">
         {{ funding.fundingTitle.title.value }}
       </h4>
@@ -32,7 +35,7 @@
           [funding]="funding"
           [panelDetailsState]="panelDetailsState[funding.putCode.value]"
           (toggleDetails)="toggleDetails($event)"
-          >
+        >
         </app-funding>
       }
       <!-- FUNDING SOURCE -->
@@ -46,15 +49,15 @@
         [stackLength]="fundingStack.fundings.length"
         [(displayTheStack)]="displayTheStack"
         (makePrimary)="makePrimaryCard(funding)"
-      [topPanelOfTheStackMode]="
-        stackPanelsDisplay[funding.putCode.value].topPanelOfTheStack
-      "
+        [topPanelOfTheStackMode]="
+          stackPanelsDisplay[funding.putCode.value].topPanelOfTheStack
+        "
         [isPublicRecord]="isPublicRecord"
         (topPanelOfTheStackModeChange)="changeTopPanelOfTheStack(funding)"
         [type]="'funding'"
         [item]="funding"
         [panelTitle]="funding.fundingTitle.title.value"
-        >
+      >
       </app-panel-source>
     </app-panel>
   }

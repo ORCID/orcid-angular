@@ -5,7 +5,7 @@
       src="./assets/vectors/orcid.logo.svg"
       alt="orcid logo"
       i18n="@@authorize.authorizeAccess"
-      />
+    />
     <mat-card-content>
       <div id="error-message">
         <!----------------------------------------------------->
@@ -13,155 +13,148 @@
         <!-- MISSING REDIRECT URI -->
         <div role="heading" aria-level="1">
           @if (errorDescription.indexOf('Please specify a redirect URL') >= 0) {
-            <div
-              >
+            <div>
               <ng-container i18n="@@authorize.errorMissingRedirect"
                 >Error: Incorrect OAuth Link for client id</ng-container
-                >
-                <strong>{{ queryParams.client_id }}</strong
-                  ><ng-container i18n="@@authorize.errorMissingRedirect2"
-                  >, missing redirect uri parameter</ng-container
-                  >
-                </div>
-              }
-              <!-- INVALID REDIRECT URI -->
-              @if (errorDescription.indexOf('Redirect URI doesn\'t match') >= 0) {
-                <div
-                  >
-                  <ng-container i18n="@@authorize.errorInvalidRedirect1">
-                               Error: The provided redirect URI</ng-container
-                    >
-                    <strong>{{ queryParams.redirect_uri }}</strong>
-                    <ng-container i18n="@@authorize.errorInvalidRedirect2"
-                      >does not match the redirect URIs registered by
-          </ng-container>
-                      <strong
-                        >{{ oauthSession.clientName }} ({{
-                        queryParams.client_id
-                        }}).</strong
-                        >
-                      </div>
-                    }
-                    <!----------------------------------------------------->
-                    <!-- CLIENT_ID ERRORS -->
-                    <!-- INVALID CLIENT ID!!! -->
-                    @if (errorDescription.indexOf('Client not found') >= 0) {
-                      <div>
-                        <ng-container i18n="@@authorize.errorInvalidClientID1"
-                          >Error: The provided client id</ng-container
-                          >
-                          <strong>{{ queryParams.client_id }}</strong>
-                          <ng-container i18n="@@authorize.errorInvalidClientID2"
-                            >is invalid.</ng-container
-                            >
-                          </div>
-                        }
-                        <!--  MISSING CLIENT ID!!! -->
-                        @if (errorDescription.indexOf('Please specify a client id') >= 0) {
-                          <div
-                            i18n="@@authorize.errorMissingClientID1"
-                            >
-                                     Error: Incorrect OAuth Link, missing client id parameter.
+              >
+              <strong>{{ queryParams.client_id }}</strong
+              ><ng-container i18n="@@authorize.errorMissingRedirect2"
+                >, missing redirect uri parameter</ng-container
+              >
+            </div>
+          }
+          <!-- INVALID REDIRECT URI -->
+          @if (errorDescription.indexOf("Redirect URI doesn't match") >= 0) {
+            <div>
+              <ng-container i18n="@@authorize.errorInvalidRedirect1">
+                Error: The provided redirect URI</ng-container
+              >
+              <strong>{{ queryParams.redirect_uri }}</strong>
+              <ng-container i18n="@@authorize.errorInvalidRedirect2"
+                >does not match the redirect URIs registered by
+              </ng-container>
+              <strong
+                >{{ oauthSession.clientName }} ({{
+                  queryParams.client_id
+                }}).</strong
+              >
+            </div>
+          }
+          <!----------------------------------------------------->
+          <!-- CLIENT_ID ERRORS -->
+          <!-- INVALID CLIENT ID!!! -->
+          @if (errorDescription.indexOf('Client not found') >= 0) {
+            <div>
+              <ng-container i18n="@@authorize.errorInvalidClientID1"
+                >Error: The provided client id</ng-container
+              >
+              <strong>{{ queryParams.client_id }}</strong>
+              <ng-container i18n="@@authorize.errorInvalidClientID2"
+                >is invalid.</ng-container
+              >
+            </div>
+          }
+          <!--  MISSING CLIENT ID!!! -->
+          @if (errorDescription.indexOf('Please specify a client id') >= 0) {
+            <div i18n="@@authorize.errorMissingClientID1">
+              Error: Incorrect OAuth Link, missing client id parameter.
+            </div>
+          }
+          <!-- LOCKED Member!!! -->
+          @if (error === 'client_locked') {
+            <div>
+              <ng-container i18n="@@authorize.errorLockedMemberID1"
+                >Error: The provided request couldn't be completed because the
+                integration and hence, the client</ng-container
+              >
+              <strong>{{ queryParams.client_id }}</strong>
+              <ng-container i18n="@@authorize.errorLockedClientID2"
+                >is locked.</ng-container
+              >
+            </div>
+          }
+          <!-- Deactivated CLIENT ID!!! -->
+          @if (error === 'client_deactivated') {
+            <div>
+              <ng-container i18n="@@authorize.errorLockedClientID1"
+                >Error: The provided client id</ng-container
+              >
+              <strong>{{ queryParams.client_id }}</strong>
+              <ng-container i18n="@@authorize.errorLockedClientID2"
+                >is locked.</ng-container
+              >
+            </div>
+          }
+          <!----------------------------------------------------->
+          <!-- SCOPES ERRORS -->
+          <!-- INVALID SCOPES: Handle by the thirty party application with the code `invalid_scope` -->
+          <!-- UNAHOTURIZED SCOPES: Handle by the thirty party application with the code `invalid_scope`  -->
+          <!-- MISSING SCOPES!!! -->
+          @if (
+            errorDescription.indexOf('Please specify the desired scopes') >= 0
+          ) {
+            <div>
+              <ng-container i18n="@@authorize.errorMissingScopes1"
+                >Error: Incorrect OAuth Link for client id</ng-container
+              >
+              <strong> {{ queryParams.client_id }}</strong
+              ><ng-container i18n="@@authorize.errorMissingScopes2"
+                >, missing scope parameter.</ng-container
+              >
+            </div>
+          }
+          <!----------------------------------------------------->
+          <!-- RESPONSE TYPE ERRORS-->
+          <!-- INVALID RESPONSE TYPE Handle by the thirty party application with the code `unsupported_response_type` -->
+          <!-- MISSING RESPONSE TYPE -->
+          @if (
+            errorDescription.indexOf('Please specify a response type') >= 0
+          ) {
+            <div>
+              <ng-container i18n="@@authorize.errorMissingResponseType"
+                >Error: Incorrect OAuth Link for client id</ng-container
+              >
+              <strong> {{ queryParams.client_id }}</strong
+              ><ng-container i18n="@@authorize.errorMissingResponseType2"
+                >, missing response type parameter.</ng-container
+              >
+            </div>
+          }
         </div>
-                          }
-                          <!-- LOCKED Member!!! -->
-                          @if (error === 'client_locked') {
-                            <div>
-                              <ng-container i18n="@@authorize.errorLockedMemberID1"
-                                >Error: The provided request couldn't be completed because the
-            integration and hence, the client</ng-container
-                                >
-                                <strong>{{ queryParams.client_id }}</strong>
-                                <ng-container i18n="@@authorize.errorLockedClientID2"
-                                  >is locked.</ng-container
-                                  >
-                                </div>
-                              }
-                              <!-- Deactivated CLIENT ID!!! -->
-                              @if (error === 'client_deactivated') {
-                                <div>
-                                  <ng-container i18n="@@authorize.errorLockedClientID1"
-                                    >Error: The provided client id</ng-container
-                                    >
-                                    <strong>{{ queryParams.client_id }}</strong>
-                                    <ng-container i18n="@@authorize.errorLockedClientID2"
-                                      >is locked.</ng-container
-                                      >
-                                    </div>
-                                  }
-                                  <!----------------------------------------------------->
-                                  <!-- SCOPES ERRORS -->
-                                  <!-- INVALID SCOPES: Handle by the thirty party application with the code `invalid_scope` -->
-                                  <!-- UNAHOTURIZED SCOPES: Handle by the thirty party application with the code `invalid_scope`  -->
-                                  <!-- MISSING SCOPES!!! -->
-                                  @if (
-                                    errorDescription.indexOf('Please specify the desired scopes') >= 0
-                                    ) {
-                                    <div
-                                      >
-                                      <ng-container i18n="@@authorize.errorMissingScopes1"
-                                        >Error: Incorrect OAuth Link for client id</ng-container
-                                        >
-                                        <strong> {{ queryParams.client_id }}</strong
-                                          ><ng-container i18n="@@authorize.errorMissingScopes2"
-                                          >, missing scope parameter.</ng-container
-                                          >
-                                        </div>
-                                      }
-                                      <!----------------------------------------------------->
-                                      <!-- RESPONSE TYPE ERRORS-->
-                                      <!-- INVALID RESPONSE TYPE Handle by the thirty party application with the code `unsupported_response_type` -->
-                                      <!-- MISSING RESPONSE TYPE -->
-                                      @if (
-                                        errorDescription.indexOf('Please specify a response type') >= 0
-                                        ) {
-                                        <div
-                                          >
-                                          <ng-container i18n="@@authorize.errorMissingResponseType"
-                                            >Error: Incorrect OAuth Link for client id</ng-container
-                                            >
-                                            <strong> {{ queryParams.client_id }}</strong
-                                              ><ng-container i18n="@@authorize.errorMissingResponseType2"
-                                              >, missing response type parameter.</ng-container
-                                              >
-                                            </div>
-                                          }
-                                        </div>
-                                        <mat-divider></mat-divider>
-                                        <div i18n="@@authorize.error">
-                                                 You have reached this page due to an error with the application's
-        integration. Please report this error to the organization that is
-        requesting your ORCID iD.
+        <mat-divider></mat-divider>
+        <div i18n="@@authorize.error">
+          You have reached this page due to an error with the application's
+          integration. Please report this error to the organization that is
+          requesting your ORCID iD.
+        </div>
+        <mat-divider> </mat-divider>
       </div>
-                                          <mat-divider> </mat-divider>
-                                        </div>
-                                      </mat-card-content>
-                                      <p class="mat-subtitle-2 mat-caption">
-                                        {{ error }} /
-                                        {{ errorDescription }}
-                                      </p>
-                                    </div>
-                                  }
-
-                                  @if (TOGGLZ_OAUTH_AUTHORIZATION) {
-                                    <div class="oauth-error">
-                                      <img
-                                        class="logo"
-                                        src="./assets/vectors/orcid.logo.svg"
-                                        alt="orcid logo"
-                                        i18n="@@authorize.authorizeAccess"
-                                        />
-                                      <mat-card-content>
-                                        <div id="error-message">
-                                          <div i18n="@@authorize.error">
-                                                 You have reached this page due to an error with the application's
-        integration. Please report this error to the organization that is
-        requesting your ORCID iD.
+    </mat-card-content>
+    <p class="mat-subtitle-2 mat-caption">
+      {{ error }} /
+      {{ errorDescription }}
+    </p>
+  </div>
+}
+@if (TOGGLZ_OAUTH_AUTHORIZATION) {
+  <div class="oauth-error">
+    <img
+      class="logo"
+      src="./assets/vectors/orcid.logo.svg"
+      alt="orcid logo"
+      i18n="@@authorize.authorizeAccess"
+    />
+    <mat-card-content>
+      <div id="error-message">
+        <div i18n="@@authorize.error">
+          You have reached this page due to an error with the application's
+          integration. Please report this error to the organization that is
+          requesting your ORCID iD.
+        </div>
       </div>
-                                          </div>
-                                        </mat-card-content>
-                                        <p class="mat-subtitle-2 mat-caption">
-                                          {{ error }}: {{ errorCode }} - {{ errorDescription }}
-                                        </p>
-                                      </div>
-                                    }
+    </mat-card-content>
+    <p class="mat-subtitle-2 mat-caption">
+      {{ error }}: {{ errorCode }} - {{ errorDescription }}
+    </p>
+  </div>
+}

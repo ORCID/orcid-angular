@@ -5,7 +5,7 @@
         target="_blank"
         rel="noopener noreferrer"
         [href]="openImportWizardUrlFilter(recordImportWizard)"
-        >
+      >
         {{ recordImportWizard.name }}
       </a>
     </h2>
@@ -17,9 +17,9 @@
             class="underline"
             i18n="@@shared.showMore"
             (click)="toggle(recordImportWizard)"
-            >
-          Show more
-        </a>
+          >
+            Show more
+          </a>
         }
         @if (recordImportWizard.show) {
           {{ recordImportWizard.description }}
@@ -28,9 +28,9 @@
             class="underline"
             i18n="@@shared.showLess"
             (click)="toggle(recordImportWizard)"
-            >
-          Show less
-        </a>
+          >
+            Show less
+          </a>
         }
       }
       @if (recordImportWizard.description.length < 125) {

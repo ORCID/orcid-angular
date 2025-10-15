@@ -1,7 +1,7 @@
 <div class="top-bar">
   <strong>
     <ng-container i18n="@@shared.identifier">Identifier</ng-container> ({{
-    index + 1
+      index + 1
     }})
   </strong>
   <a i18n="@@shared.cancel" (click)="cancel()">Cancel</a>
@@ -17,35 +17,31 @@
         [ngClass]="{
           error:
             grantForm?.hasError('required', 'grantNumber') &&
-            grantForm?.get('grantNumber').touched
+            grantForm?.get('grantNumber').touched,
         }"
-        >
+      >
         <strong i18n="@@funding.grantNumber">Grant number</strong>
       </label>
     </div>
     <mat-form-field
       appearance="outline"
       class="mat-form-field-min input-container"
-      >
+    >
       <input
         [id]="'grant-number-input-' + index"
         #grantNumber
         matInput
         formControlName="grantNumber"
-        />
+      />
       @if (grantForm?.get('grantNumber').errors?.required) {
-        <mat-error
-          i18n="@@funding.grantNumberRequired"
-          >
-        Grant number is required
-      </mat-error>
+        <mat-error i18n="@@funding.grantNumberRequired">
+          Grant number is required
+        </mat-error>
       }
       @if (grantForm?.get('grantNumber').errors?.maxlength) {
-        <mat-error
-          i18n="@@shared.maxLength.less_than_two_thousand_forty_eight"
-          >
-        Must be less than 2084 characters
-      </mat-error>
+        <mat-error i18n="@@shared.maxLength.less_than_two_thousand_forty_eight">
+          Must be less than 2084 characters
+        </mat-error>
       }
     </mat-form-field>
   </div>
@@ -58,38 +54,32 @@
       [ngClass]="{
         error:
           grantForm?.hasError('pattern', 'grantUrl') &&
-          grantForm?.get('grantUrl').touched
+          grantForm?.get('grantUrl').touched,
       }"
-      >
+    >
       <strong i18n="@@funding.grantUrl">Grant link </strong>
     </label>
   </div>
   <mat-form-field
     appearance="outline"
     class="mat-form-field-min input-container"
-    >
+  >
     <input
       [id]="'grant-url-input-' + index"
       matInput
       formControlName="grantUrl"
-      />
+    />
 
     <mat-hint i18n="@@funding.grantUrlHint">
       A link to more information about the funding award
     </mat-hint>
     @if (grantForm?.get('grantUrl').hasError('pattern')) {
-      <mat-error
-        i18n="@@funding.invalidUrl"
-        >
-      Invalid URL
-    </mat-error>
+      <mat-error i18n="@@funding.invalidUrl"> Invalid URL </mat-error>
     }
     @if (grantForm?.get('grantUrl').hasError('maxlength')) {
-      <mat-error
-        i18n="@@shared.maxLength.less_than_two_thousand"
-        >
-      Must be less than 2000 characters
-    </mat-error>
+      <mat-error i18n="@@shared.maxLength.less_than_two_thousand">
+        Must be less than 2000 characters
+      </mat-error>
     }
   </mat-form-field>
 
@@ -101,9 +91,9 @@
         [ngClass]="{
           error:
             grantForm?.hasError('required', 'fundingRelationship') &&
-            grantForm?.get('fundingRelationship').touched
+            grantForm?.get('fundingRelationship').touched,
         }"
-        >
+      >
         <strong i18n="@@shared.relationship">Relationship</strong>
       </label>
     </div>
@@ -113,7 +103,7 @@
         aria-label="Select an option"
         class="mat-form-field-min"
         formControlName="fundingRelationship"
-        >
+      >
         @for (value of fundingRelationships; track value) {
           <mat-radio-button [value]="value"
             >{{ value | recordFundingRelationshipLabel }}

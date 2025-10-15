@@ -8,11 +8,9 @@
   [(expandedContent)]="settingDownload"
   class="row"
   [title]="titleDownload"
-  >
+>
   @if (titleDownload) {
-    <app-settings-actions-download
-      (loading)="settingDownloadLoading = $event"
-      >
+    <app-settings-actions-download (loading)="settingDownloadLoading = $event">
     </app-settings-actions-download>
   }
 </app-settings-panels>
@@ -23,11 +21,11 @@
   [(expandedContent)]="settingDeactivate"
   class="row"
   [title]="titleDeactivate"
-  >
+>
   @if (settingDeactivate) {
     <app-settings-actions-deactivate
       (loading)="settingDeactivateLoading = $event"
-      >
+    >
     </app-settings-actions-deactivate>
   }
 </app-settings-panels>
@@ -38,12 +36,12 @@
   [(expandedContent)]="settingDuplicatedRecord"
   class="row"
   [title]="titleDuplicatedRecord"
-  >
+>
   @if (settingDuplicatedRecord) {
     <app-settings-actions-duplicated
       (loading)="settingDuplicatedRecordLoading = $event"
       (close)="settingDuplicatedRecord = false"
-      >
+    >
     </app-settings-actions-duplicated>
   }
 </app-settings-panels>

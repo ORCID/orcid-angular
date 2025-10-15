@@ -5,7 +5,8 @@
       <h3 class="orc-font-body-small">
         <ng-container i18n="@@works.translatedTitleWork"
           >Translated title</ng-container
-          >&nbsp;@if (work?.translatedTitle?.languageCode) {
+        >&nbsp;
+        @if (work?.translatedTitle?.languageCode) {
           <span
             >({{ getLanguageKey(work.translatedTitle.languageCode) }})
           </span>
@@ -54,7 +55,7 @@
           rel="noopener noreferrer"
           target="_blank"
           href="{{ work?.url.value }}"
-          >
+        >
           {{ work.url.value }}
         </a>
       }
@@ -67,36 +68,37 @@
 
 <!--  CONTRIBUTORS-->
 @if (
-  work?.contributorsGroupedByOrcid?.length > 0 ||
-  work?.contributors?.length > 0
-  ) {
-  <app-display-attribute
-    >
-    <h3 class="orc-font-body-small" i18n="@@works.contributors">Contributors</h3>
+  work?.contributorsGroupedByOrcid?.length > 0 || work?.contributors?.length > 0
+) {
+  <app-display-attribute>
+    <h3 class="orc-font-body-small" i18n="@@works.contributors">
+      Contributors
+    </h3>
     <div>
       @if (work?.numberOfContributors > maxNumberContributorsWorkDetails) {
         <p>
           <span i18n="@@works.showing">Showing the first</span>
           <b>{{ maxNumberContributorsWorkDetails }}</b>
           <span class="lowercase" i18n="@@works.contributors">
-          contributors
-        </span>
+            contributors
+          </span>
         </p>
         <p>----</p>
       }
       @for (
         contributor of work?.contributorsGroupedByOrcid
-        | slice : 0 : maxNumberContributorsWorkDetails; track
-        contributor; let index = $index) {
+          | slice: 0 : maxNumberContributorsWorkDetails;
+        track contributor;
+        let index = $index
+      ) {
         <p
-      [ngClass]="{
-        'record-holder': contributor?.contributorOrcid?.path === id
-      }"
-          >
+          [ngClass]="{
+            'record-holder': contributor?.contributorOrcid?.path === id,
+          }"
+        >
           @if (index < maxNumberContributorsWorkDetails) {
             @if (contributor?.creditName?.content) {
-              @if (
-                contributor?.creditName?.content !== privateName) {
+              @if (contributor?.creditName?.content !== privateName) {
                 {{ contributor.creditName.content }}
               } @else {
                 {{ privateNameTranslation }}
@@ -105,257 +107,246 @@
             {{ contributor | contributorsPipe }}
             @if (contributor?.contributorOrcid?.uri) {
               @if (!(contributor | contributorsPipe)) {
-                <span> (</span
-                  >
-                  }<a
-                  class="underline"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  href="{{ contributor?.contributorOrcid?.uri }}"
-                  >{{ contributor?.contributorOrcid?.path }}</a
-                  >)
-                }
-              }
-            </p>
-          }
-          @if (work?.numberOfContributors > maxNumberContributorsWorkDetails) {
-            @if (work?.numberOfContributors > maxNumberContributors) {
-              <span
-                i18n="@@works.etAl"
-                >
-        et al.
-      </span>
-            }
-            <p>----</p>
-            <p>
-              <ng-container i18n="@@works.fullContributorList">
-          For the full contributor list
-        </ng-container>
-              @if (!isPublicRecord) {
-                <a
-                  class="underline"
-                  i18n="@@works.exportAsBibtex"
-                  (click)="exportWork(work)"
-                  >
-          export this work as BibTeX
-        </a>
-              }
-              @if (
-                !isPublicRecord &&
-                (work.workExternalIdentifiers[0]?.normalizedUrl?.value ||
-                work.workExternalIdentifiers[0]?.url?.value)
-                ) {
-                <ng-container
-                  i18n="@@works.or"
-                  >
-          or
-        </ng-container>
+                <span> (</span>
               }
               <a
-          href="{{
-            work?.workExternalIdentifiers[0]?.normalizedUrl?.value ||
-              work?.workExternalIdentifiers[0]?.url?.value
-          }}"
-                target="_blank"
-                rel="noopener noreferrer"
                 class="underline"
-                i18n="@@works.visitWorkSource"
-                >
-          visit the work source
-        </a>
-            </p>
+                target="_blank"
+                rel="noreferrer noopener"
+                href="{{ contributor?.contributorOrcid?.uri }}"
+                >{{ contributor?.contributorOrcid?.path }}</a
+              >)
+            }
           }
-        </div>
-      </app-display-attribute>
-    }
-
-    <!-- CITATION-->
-    @if (work?.citation?.citation?.value?.length > 0) {
-      <app-display-attribute>
-        <h3 class="orc-font-body-small">
-          <ng-container i18n="@@works.citation">Citation</ng-container>&nbsp;@if (work.citation?.citationType?.value) {
-          <span
-            class="citation-type"
-            >({{ work.citation?.citationType?.value }})</span
-            >
-          }
-        </h3>
-        <div>
-          <div>
+        </p>
+      }
+      @if (work?.numberOfContributors > maxNumberContributorsWorkDetails) {
+        @if (work?.numberOfContributors > maxNumberContributors) {
+          <span i18n="@@works.etAl"> et al. </span>
+        }
+        <p>----</p>
+        <p>
+          <ng-container i18n="@@works.fullContributorList">
+            For the full contributor list
+          </ng-container>
+          @if (!isPublicRecord) {
             <a
               class="underline"
-              (click)="showCitation = !showCitation"
-              id="cy-citation-toggle-link"
-              >
-              @if (!showCitation) {
-                <ng-container
-                  i18n="@@works.showCitation"
-                  id="cy-show-citation"
-                  >
-          Show citation
-        </ng-container>
-              }
-              @if (showCitation) {
-                <ng-container
-                  i18n="@@works.hideCitation"
-                  id="cy-hide-citation"
-                  >
-          Hide citation
-        </ng-container>
-              }
+              i18n="@@works.exportAsBibtex"
+              (click)="exportWork(work)"
+            >
+              export this work as BibTeX
             </a>
-          </div>
-          @if (showCitation) {
-            <br />
           }
-          <ng-container>
-            @if (
-              work?.citation?.citation?.value?.length > maxBibtexCharacters &&
-              showCitation
-              ) {
+          @if (
+            !isPublicRecord &&
+            (work.workExternalIdentifiers[0]?.normalizedUrl?.value ||
+              work.workExternalIdentifiers[0]?.url?.value)
+          ) {
+            <ng-container i18n="@@works.or"> or </ng-container>
+          }
+          <a
+            href="{{
+              work?.workExternalIdentifiers[0]?.normalizedUrl?.value ||
+                work?.workExternalIdentifiers[0]?.url?.value
+            }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="underline"
+            i18n="@@works.visitWorkSource"
+          >
+            visit the work source
+          </a>
+        </p>
+      }
+    </div>
+  </app-display-attribute>
+}
+
+<!-- CITATION-->
+@if (work?.citation?.citation?.value?.length > 0) {
+  <app-display-attribute>
+    <h3 class="orc-font-body-small">
+      <ng-container i18n="@@works.citation">Citation</ng-container>&nbsp;
+      @if (work.citation?.citationType?.value) {
+        <span class="citation-type"
+          >({{ work.citation?.citationType?.value }})</span
+        >
+      }
+    </h3>
+    <div>
+      <div>
+        <a
+          class="underline"
+          (click)="showCitation = !showCitation"
+          id="cy-citation-toggle-link"
+        >
+          @if (!showCitation) {
+            <ng-container i18n="@@works.showCitation" id="cy-show-citation">
+              Show citation
+            </ng-container>
+          }
+          @if (showCitation) {
+            <ng-container i18n="@@works.hideCitation" id="cy-hide-citation">
+              Hide citation
+            </ng-container>
+          }
+        </a>
+      </div>
+      @if (showCitation) {
+        <br />
+      }
+      <ng-container>
+        @if (
+          work?.citation?.citation?.value?.length > maxBibtexCharacters &&
+          showCitation
+        ) {
+          @if (!showExpandedFormatting) {
+            {{
+              work?.citation?.citation?.value?.substr(0, maxBibtexCharacters)
+            }}
+          }
+          @if (showExpandedFormatting) {
+            <pre class="pre-bibtex"
+              >{{ work?.citation?.citation?.value | formatBibtex }} </pre
+            >
+          }
+          @if (work?.citation?.citationType?.value === 'bibtex') {
+            <br />
+            @if (!showExpandedFormatting) {
+              <br />
+            }
+            <a
+              class="underline"
+              (click)="showExpandedFormatting = !showExpandedFormatting"
+              id="cy-expanded-citation-toggle-link"
+            >
               @if (!showExpandedFormatting) {
-                {{ work?.citation?.citation?.value?.substr(0, maxBibtexCharacters) }}
+                <ng-container
+                  i18n="@@works.expandedFormatBibtex"
+                  id="cy-expanded-formatting"
+                >
+                  Switch to expanded formatting
+                </ng-container>
               }
               @if (showExpandedFormatting) {
-                <pre class="pre-bibtex"
-                  >{{ work?.citation?.citation?.value | formatBibtex }} </pre
-                  >
-                }
-                @if (work?.citation?.citationType?.value === 'bibtex') {
-                  <br />
-                  @if (!showExpandedFormatting) {
-                    <br />
-                  }
-                  <a
-                    class="underline"
-                    (click)="showExpandedFormatting = !showExpandedFormatting"
-                    id="cy-expanded-citation-toggle-link"
-                    >
-                    @if (!showExpandedFormatting) {
-                      <ng-container
-                        i18n="@@works.expandedFormatBibtex"
-                        id="cy-expanded-formatting"
-                        >
-              Switch to expanded formatting
-            </ng-container>
-                    }
-                    @if (showExpandedFormatting) {
-                      <ng-container
-                        i18n="@@works.compactFormatBibtex"
-                        id="cy-compact-formatting"
-                        >
-              Switch to compact formatting
-            </ng-container>
-                    }
-                  </a>
-                }
-                <br />
-                ----
-                <br />
-                <span i18n="@@works.fullCitation"> For full citation </span>
-                @if (!isPublicRecord) {
-                  <a
-                    class="underline"
-                    i18n="@@works.exportAsBibtex"
-                    (click)="exportWork(work)"
-                    >
-          export this work as BibTeX
-        </a>
-                }
-                @if (!isPublicRecord) {
-                  <ng-container i18n="@@works.or">
-          or
-        </ng-container>
-                }
-                <a
-          href="{{
-            work.workExternalIdentifiers[0]?.normalizedUrl?.value ||
-              work.workExternalIdentifiers[0]?.url?.value
-          }}"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="underline"
-                  i18n="@@works.visitWorkSource"
-                  >
-          visit the work source
-        </a>
+                <ng-container
+                  i18n="@@works.compactFormatBibtex"
+                  id="cy-compact-formatting"
+                >
+                  Switch to compact formatting
+                </ng-container>
               }
-              @if (
-                work?.citation?.citation?.value?.length < maxBibtexCharacters &&
-                showCitation
-                ) {
-                @if (!showExpandedFormatting) {
-                  {{ work?.citation?.citation?.value }}
-                }
-                @if (showExpandedFormatting) {
-                  <pre class="pre-bibtex"
-                    >{{ work?.citation?.citation?.value | formatBibtex }} </pre
-                    >
-                  }
-                  @if (work.citation?.citationType?.value === 'bibtex') {
-                    <br />
-                    @if (!showExpandedFormatting) {
-                      <br />
-                    }
-                    <a
-                      class="underline"
-                      (click)="showExpandedFormatting = !showExpandedFormatting"
-                      id="cy-expanded-citation-toggle-link"
-                      >
-                      @if (!showExpandedFormatting) {
-                        <ng-container
-                          i18n="@@works.expandedFormatBibtex"
-                          id="cy-expanded-formatting"
-                          >
-              Switch to expanded formatting
-            </ng-container>
-                      }
-                      @if (showExpandedFormatting) {
-                        <ng-container
-                          i18n="@@works.compactFormatBibtex"
-                          id="cy-compact-formatting"
-                          >
-              Switch to compact formatting
-            </ng-container>
-                      }
-                    </a>
-                  }
-                }
-              </ng-container>
-            </div>
-          </app-display-attribute>
+            </a>
+          }
+          <br />
+          ----
+          <br />
+          <span i18n="@@works.fullCitation"> For full citation </span>
+          @if (!isPublicRecord) {
+            <a
+              class="underline"
+              i18n="@@works.exportAsBibtex"
+              (click)="exportWork(work)"
+            >
+              export this work as BibTeX
+            </a>
+          }
+          @if (!isPublicRecord) {
+            <ng-container i18n="@@works.or"> or </ng-container>
+          }
+          <a
+            href="{{
+              work.workExternalIdentifiers[0]?.normalizedUrl?.value ||
+                work.workExternalIdentifiers[0]?.url?.value
+            }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="underline"
+            i18n="@@works.visitWorkSource"
+          >
+            visit the work source
+          </a>
         }
-        <!--  DESCRIPTION-->
-        @if (work?.shortDescription?.value) {
-          <app-display-attribute>
-            <h3 class="orc-font-body-small" i18n="@@works.description">Description</h3>
-            <div [innerText]="work.shortDescription.value"></div>
-          </app-display-attribute>
+        @if (
+          work?.citation?.citation?.value?.length < maxBibtexCharacters &&
+          showCitation
+        ) {
+          @if (!showExpandedFormatting) {
+            {{ work?.citation?.citation?.value }}
+          }
+          @if (showExpandedFormatting) {
+            <pre class="pre-bibtex"
+              >{{ work?.citation?.citation?.value | formatBibtex }} </pre
+            >
+          }
+          @if (work.citation?.citationType?.value === 'bibtex') {
+            <br />
+            @if (!showExpandedFormatting) {
+              <br />
+            }
+            <a
+              class="underline"
+              (click)="showExpandedFormatting = !showExpandedFormatting"
+              id="cy-expanded-citation-toggle-link"
+            >
+              @if (!showExpandedFormatting) {
+                <ng-container
+                  i18n="@@works.expandedFormatBibtex"
+                  id="cy-expanded-formatting"
+                >
+                  Switch to expanded formatting
+                </ng-container>
+              }
+              @if (showExpandedFormatting) {
+                <ng-container
+                  i18n="@@works.compactFormatBibtex"
+                  id="cy-compact-formatting"
+                >
+                  Switch to compact formatting
+                </ng-container>
+              }
+            </a>
+          }
         }
-        <!--  COUNTRY OF PUBLICATION-->
-        @if (work?.countryCode?.value) {
-          <app-display-attribute>
-            <h3 class="orc-font-body-small" i18n="@@works.countryOrLocationOfPublication">
-    Country/Location of publication
-  </h3>
-            <div>
-              {{ work?.countryName.value }}
-            </div>
-          </app-display-attribute>
-        }
+      </ng-container>
+    </div>
+  </app-display-attribute>
+}
+<!--  DESCRIPTION-->
+@if (work?.shortDescription?.value) {
+  <app-display-attribute>
+    <h3 class="orc-font-body-small" i18n="@@works.description">Description</h3>
+    <div [innerText]="work.shortDescription.value"></div>
+  </app-display-attribute>
+}
+<!--  COUNTRY OF PUBLICATION-->
+@if (work?.countryCode?.value) {
+  <app-display-attribute>
+    <h3
+      class="orc-font-body-small"
+      i18n="@@works.countryOrLocationOfPublication"
+    >
+      Country/Location of publication
+    </h3>
+    <div>
+      {{ work?.countryName.value }}
+    </div>
+  </app-display-attribute>
+}
 
-        <!-- ADDED DATE-->
-        <app-display-attribute>
-          <h3 class="orc-font-body-small" i18n="@@shared.added">Added</h3>
-          <div>
-            {{ work?.createdDate | monthDayYearDateToString }}
-          </div>
-        </app-display-attribute>
+<!-- ADDED DATE-->
+<app-display-attribute>
+  <h3 class="orc-font-body-small" i18n="@@shared.added">Added</h3>
+  <div>
+    {{ work?.createdDate | monthDayYearDateToString }}
+  </div>
+</app-display-attribute>
 
-        <!-- LAST MODIFIED  DATE-->
-        <app-display-attribute>
-          <h3 class="orc-font-body-small" i18n="@@shared.lastModified">
+<!-- LAST MODIFIED  DATE-->
+<app-display-attribute>
+  <h3 class="orc-font-body-small" i18n="@@shared.lastModified">
     Last modified
   </h3>
-          <div>{{ work?.lastModified | monthDayYearDateToString }}</div>
-        </app-display-attribute>
+  <div>{{ work?.lastModified | monthDayYearDateToString }}</div>
+</app-display-attribute>

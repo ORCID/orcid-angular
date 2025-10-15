@@ -17,26 +17,26 @@
       class="container no-padding main-content"
       [ngClass]="{
         'main-content-shadow': recordSummaryOpen,
-        mobile: !platform.columns12
+        mobile: !platform.columns12,
       }"
-      >
+    >
       <div class="row">
         @if (
           !loadingUserRecord
-          ? publicOrcid
-          ? platform.columns12 &&
-          !recordWithIssues &&
-          (displaySideBar || displayBiography || affiliations > 0)
-          : true
-          : true
-          ) {
+            ? publicOrcid
+              ? platform.columns12 &&
+                !recordWithIssues &&
+                (displaySideBar || displayBiography || affiliations > 0)
+              : true
+            : true
+        ) {
           <app-side-bar
             class="col l3 m8 s4 new-header"
             [isPublicRecord]="publicOrcid"
             [orcidId]="platform.columns8 || platform.columns4"
             [loadingUserRecord]="loadingUserRecord"
             (isSideBarEmpty)="isSideBarEmpty($event)"
-            >
+          >
           </app-side-bar>
         }
         <div
@@ -47,45 +47,45 @@
                 ? !recordWithIssues &&
                   (displaySideBar || displayBiography || affiliations > 0)
                 : true
-              : true
+              : true,
           }"
-          >
+        >
           <app-main>
             @if (
               !loadingUserRecord
-              ? publicOrcid
-              ? !recordWithIssues && displayBiography
-              : true
-              : true
-              ) {
+                ? publicOrcid
+                  ? !recordWithIssues && displayBiography
+                  : true
+                : true
+            ) {
               <app-top-bar
                 [newlySharedDomains]="newlySharedDomains"
                 [newAddedAffiliation]="newAddedAffiliation"
                 class="row"
-              [ngClass]="{
-                mobile: !platform.columns12
-              }"
+                [ngClass]="{
+                  mobile: !platform.columns12,
+                }"
                 [isPublicRecord]="publicOrcid"
                 [loadingUserRecord]="loadingUserRecord"
               ></app-top-bar>
             }
             @if (
               !loadingUserRecord
-              ? publicOrcid
-              ? !platform.columns12 &&
-              !recordWithIssues &&
-              (displaySideBar || displayBiography || affiliations > 0)
-              : !platform.columns12
-              : false
-              ) {
+                ? publicOrcid
+                  ? !platform.columns12 &&
+                    !recordWithIssues &&
+                    (displaySideBar || displayBiography || affiliations > 0)
+                  : !platform.columns12
+                : false
+            ) {
               <app-side-bar
                 class="col l3 m8 s4 new-header side-bar-mobile"
                 [isPublicRecord]="publicOrcid"
                 [hideOrcidId]="true"
-              [ngClass]="{
-                mobile: !platform.columns12
-              }"
-                >
+                [ngClass]="{
+                  mobile: !platform.columns12,
+                }"
+              >
               </app-side-bar>
             }
             @if (!recordWithIssues) {
@@ -93,120 +93,115 @@
                 id="activities"
                 role="region"
                 [attr.aria-label]="regionActivities"
-                >
+              >
                 @if (!(publicOrcid && affiliations === 0)) {
-                  <div
-                    class="activities"
-                    >
+                  <div class="activities">
                     <h2
                       class="activities-header col"
-                    [ngClass]="{
-                      'orc-font-body-large': publicOrcid,
-                      'no-gutters': publicOrcid,
-                      'public-info': publicOrcid,
-                      'no-public-bio': publicOrcid ? !displayBiography : false,
-                      'orc-font-body': !publicOrcid
-                    }"
+                      [ngClass]="{
+                        'orc-font-body-large': publicOrcid,
+                        'no-gutters': publicOrcid,
+                        'public-info': publicOrcid,
+                        'no-public-bio': publicOrcid
+                          ? !displayBiography
+                          : false,
+                        'orc-font-body': !publicOrcid,
+                      }"
                       i18n="@@shared.activities"
-                      >
-                    Activities
-                  </h2>
+                    >
+                      Activities
+                    </h2>
                     <div class="expand-buttons">
                       <a
                         class="activities orc-font-body-small"
                         [ngClass]="{ 'public-info': publicOrcid }"
                         (click)="switchPanelsState()"
-                      [attr.aria-label]="
-                        globalExpandState
-                          ? collapseAllActivitiesArialLabel
-                          : expandAllActivitiesArialLabel
-                      "
-                        >
+                        [attr.aria-label]="
+                          globalExpandState
+                            ? collapseAllActivitiesArialLabel
+                            : expandAllActivitiesArialLabel
+                        "
+                      >
                         @if (globalExpandState) {
-                          <b i18n="@@shared.collapseAll"
-                            >Collapse all</b
-                            >
-                          }
-                          @if (!globalExpandState) {
-                            <b i18n="@@shared.expandAll"
-                              >Expand all</b
-                              >
-                            }
-                          </a>
-                        </div>
-                      </div>
-                    }
-                    <app-affiliations
-                      [userInfo]="userInfo"
-                      [isPublicRecord]="publicOrcid"
-                      [expandedContent]="expandedContent"
-                      (expandedContentChange)="expandedContentUpdate($event)"
-                      (total)="affiliationsCount($event)"
-                      id="cy-affiliations"
-                    ></app-affiliations>
-                    <app-fundings
-                      [userInfo]="userInfo"
-                      [isPublicRecord]="publicOrcid"
-                      [expandedContent]="expandedContent"
-                      (expandedContentChange)="expandedContentUpdate($event)"
-                      (total)="affiliationsCount($event)"
-                      id="cy-fundings"
-                    ></app-fundings>
-                    <app-research-resources
-                      [isPublicRecord]="publicOrcid"
-                      [expandedContent]="expandedContent"
-                      (expandedContentChange)="expandedContentUpdate($event)"
-                      (total)="affiliationsCount($event, 'RESEARCH_RESOURCE')"
-                      id="cy-research-resources"
-                    ></app-research-resources>
-                    @if (featuredWorksTogglz) {
-                      <app-work-featured-stack-group
-                        [userInfo]="userInfo"
-                        [isPublicRecord]="publicOrcid"
-                        id="cy-featured-works"
-                        >
-                      </app-work-featured-stack-group>
-                    }
-                    <app-work-stack-group
-                      [userInfo]="userInfo"
-                      [isPublicRecord]="publicOrcid"
-                      [expandedContent]="expandedContent"
-                      (expandedContentChange)="expandedContentUpdate($event)"
-                      (total)="affiliationsCount($event)"
-                      id="cy-works"
-                    ></app-work-stack-group>
-                    <app-peer-reviews
-                      [userInfo]="userInfo"
-                      [isPublicRecord]="publicOrcid"
-                      [expandedContent]="expandedContent"
-                      (expandedContentChange)="expandedContentUpdate($event)"
-                      (total)="affiliationsCount($event)"
-                      id="cy-peer-reviews"
-                    ></app-peer-reviews>
-                  </section>
+                          <b i18n="@@shared.collapseAll">Collapse all</b>
+                        }
+                        @if (!globalExpandState) {
+                          <b i18n="@@shared.expandAll">Expand all</b>
+                        }
+                      </a>
+                    </div>
+                  </div>
                 }
-                @if (
-                  publicOrcid
-                  ? recordWithIssues ||
-                  (!loadingUserRecord && affiliations === 0)
-                  : false
-                  ) {
-                  <app-record-info
+                <app-affiliations
+                  [userInfo]="userInfo"
+                  [isPublicRecord]="publicOrcid"
+                  [expandedContent]="expandedContent"
+                  (expandedContentChange)="expandedContentUpdate($event)"
+                  (total)="affiliationsCount($event)"
+                  id="cy-affiliations"
+                ></app-affiliations>
+                <app-fundings
+                  [userInfo]="userInfo"
+                  [isPublicRecord]="publicOrcid"
+                  [expandedContent]="expandedContent"
+                  (expandedContentChange)="expandedContentUpdate($event)"
+                  (total)="affiliationsCount($event)"
+                  id="cy-fundings"
+                ></app-fundings>
+                <app-research-resources
+                  [isPublicRecord]="publicOrcid"
+                  [expandedContent]="expandedContent"
+                  (expandedContentChange)="expandedContentUpdate($event)"
+                  (total)="affiliationsCount($event, 'RESEARCH_RESOURCE')"
+                  id="cy-research-resources"
+                ></app-research-resources>
+                @if (featuredWorksTogglz) {
+                  <app-work-featured-stack-group
+                    [userInfo]="userInfo"
                     [isPublicRecord]="publicOrcid"
-                    [displaySideBar]="displaySideBar"
-                    [displayBiography]="displayBiography"
-                    [affiliations]="affiliations"
-                  ></app-record-info>
+                    id="cy-featured-works"
+                  >
+                  </app-work-featured-stack-group>
                 }
-                <app-statistics
-                  [ngClass]="{ mobile: !platform.columns12 }"
-                ></app-statistics>
-              </app-main>
-            </div>
-          </div>
+                <app-work-stack-group
+                  [userInfo]="userInfo"
+                  [isPublicRecord]="publicOrcid"
+                  [expandedContent]="expandedContent"
+                  (expandedContentChange)="expandedContentUpdate($event)"
+                  (total)="affiliationsCount($event)"
+                  id="cy-works"
+                ></app-work-stack-group>
+                <app-peer-reviews
+                  [userInfo]="userInfo"
+                  [isPublicRecord]="publicOrcid"
+                  [expandedContent]="expandedContent"
+                  (expandedContentChange)="expandedContentUpdate($event)"
+                  (total)="affiliationsCount($event)"
+                  id="cy-peer-reviews"
+                ></app-peer-reviews>
+              </section>
+            }
+            @if (
+              publicOrcid
+                ? recordWithIssues || (!loadingUserRecord && affiliations === 0)
+                : false
+            ) {
+              <app-record-info
+                [isPublicRecord]="publicOrcid"
+                [displaySideBar]="displaySideBar"
+                [displayBiography]="displayBiography"
+                [affiliations]="affiliations"
+              ></app-record-info>
+            }
+            <app-statistics
+              [ngClass]="{ mobile: !platform.columns12 }"
+            ></app-statistics>
+          </app-main>
         </div>
-      }
-      @if (userNotFound) {
-        <app-not-found></app-not-found>
-      }
-    </main>
+      </div>
+    </div>
+  }
+  @if (userNotFound) {
+    <app-not-found></app-not-found>
+  }
+</main>

@@ -3,7 +3,7 @@
     appearance="outline"
     class="mat-form-field-min input-container"
     (click)="clickHoverMenuTrigger.openMenu()"
-    >
+  >
     <input
       #clickHoverMenuTrigger="matMenuTrigger"
       [matMenuTriggerFor]="matMenu"
@@ -16,12 +16,10 @@
       matInput
       [errorStateMatcher]="getMatcher()"
       role="menu"
-      />
+    />
     <mat-icon matSuffix>arrow_drop_down</mat-icon>
     @if (invalid) {
-      <mat-error i18n="@@works.selectAWorkType">
-      Select a work type
-    </mat-error>
+      <mat-error i18n="@@works.selectAWorkType"> Select a work type </mat-error>
     }
   </mat-form-field>
 
@@ -30,95 +28,47 @@
       @for (item of menu; track item) {
         @if (!item.divider) {
           @if (item.isNotSelectableLabel) {
-            <label class="orc-font-body strong">
-              {{ item.label }}</label
-              >
-            }
-            @if (!item.isNotSelectableLabel && !item.content) {
-              <button
-                mat-menu-item
-                (click)="onItemSelect(item)"
-                class="orc-font-body-small"
-                >
-                {{ item.label }}
-              </button>
-            }
-            <!-- DESKTOP VERSION USES SUBMENUS -->
-            @if (!isMobile) {
-              @if (item.content?.length) {
-                <div class="sub-menu-container">
-                  @if (!item.isNotSelectableLabel) {
-                    <button
-                      mat-menu-item
-                      [matMenuTriggerFor]="subMenuRef"
-                      class="mat-button-wrap-text"
-                      >
-                      <div class="parentContainer">
-                        <strong class="orc-font-body">
-                          {{ item.label }}
-                        </strong>
-                        <p class="orc-font-small-print">
-                          {{ item.description }}
-                        </p>
-                      </div>
-                    </button>
-                  }
-                  <!-- Create a mat menu using the label as an identifier -->
-                  <mat-menu #subMenuRef="matMenu">
-                    @for (subItem of item.content; track subItem) {
-                      @if (!subItem.divider) {
-                        <button
-                          mat-menu-item
-                          (click)="onItemSelect(subItem)"
-                          [ngClass]="subItem.secondaryItem ? 'secondaryItem' : ''"
-                          class="mat-button-wrap-text"
-                          >
-                          {{ subItem.label }}
-                          @if (subItem.description) {
-                            <p
-                              class="orc-font-small-print"
-                              >
-                              {{ subItem.description }}
-                            </p>
-                          }
-                        </button>
-                      }
-                      @if (subItem.divider) {
-                        <mat-divider></mat-divider>
-                      }
-                    }
-                  </mat-menu>
-                </div>
-              }
-            }
-            <!-- MOBILE VERSIONS DISPLAY ALL ITEMS -->
-            @if (isMobile) {
-              @if (item.content?.length) {
-                <div class="sub-menu-container mobile">
-                  <mat-divider></mat-divider>
-                  @if (!item.isNotSelectableLabel) {
-                    <div
-                      class="not-selectable-label"
-                      >
-                      <div class="parentContainer">
-                        <strong class="orc-font-body">
-                          {{ item.label }}
-                        </strong>
-                        <p class="orc-font-small-print">
-                          {{ item.description }}
-                        </p>
-                      </div>
+            <label class="orc-font-body strong"> {{ item.label }}</label>
+          }
+          @if (!item.isNotSelectableLabel && !item.content) {
+            <button
+              mat-menu-item
+              (click)="onItemSelect(item)"
+              class="orc-font-body-small"
+            >
+              {{ item.label }}
+            </button>
+          }
+          <!-- DESKTOP VERSION USES SUBMENUS -->
+          @if (!isMobile) {
+            @if (item.content?.length) {
+              <div class="sub-menu-container">
+                @if (!item.isNotSelectableLabel) {
+                  <button
+                    mat-menu-item
+                    [matMenuTriggerFor]="subMenuRef"
+                    class="mat-button-wrap-text"
+                  >
+                    <div class="parentContainer">
+                      <strong class="orc-font-body">
+                        {{ item.label }}
+                      </strong>
+                      <p class="orc-font-small-print">
+                        {{ item.description }}
+                      </p>
                     </div>
-                  }
-                  <!-- Create a mat menu using the label as an identifier -->
+                  </button>
+                }
+                <!-- Create a mat menu using the label as an identifier -->
+                <mat-menu #subMenuRef="matMenu">
                   @for (subItem of item.content; track subItem) {
                     @if (!subItem.divider) {
                       <button
                         mat-menu-item
                         (click)="onItemSelect(subItem)"
                         [ngClass]="subItem.secondaryItem ? 'secondaryItem' : ''"
-                        class="mobile mat-button-wrap-text"
-                        >
+                        class="mat-button-wrap-text"
+                      >
                         {{ subItem.label }}
                         @if (subItem.description) {
                           <p class="orc-font-small-print">
@@ -127,18 +77,60 @@
                         }
                       </button>
                     }
+                    @if (subItem.divider) {
+                      <mat-divider></mat-divider>
+                    }
                   }
-                </div>
-              }
+                </mat-menu>
+              </div>
             }
-            @if (item.divider) {
-              <mat-divider></mat-divider>
+          }
+          <!-- MOBILE VERSIONS DISPLAY ALL ITEMS -->
+          @if (isMobile) {
+            @if (item.content?.length) {
+              <div class="sub-menu-container mobile">
+                <mat-divider></mat-divider>
+                @if (!item.isNotSelectableLabel) {
+                  <div class="not-selectable-label">
+                    <div class="parentContainer">
+                      <strong class="orc-font-body">
+                        {{ item.label }}
+                      </strong>
+                      <p class="orc-font-small-print">
+                        {{ item.description }}
+                      </p>
+                    </div>
+                  </div>
+                }
+                <!-- Create a mat menu using the label as an identifier -->
+                @for (subItem of item.content; track subItem) {
+                  @if (!subItem.divider) {
+                    <button
+                      mat-menu-item
+                      (click)="onItemSelect(subItem)"
+                      [ngClass]="subItem.secondaryItem ? 'secondaryItem' : ''"
+                      class="mobile mat-button-wrap-text"
+                    >
+                      {{ subItem.label }}
+                      @if (subItem.description) {
+                        <p class="orc-font-small-print">
+                          {{ subItem.description }}
+                        </p>
+                      }
+                    </button>
+                  }
+                }
+              </div>
             }
           }
           @if (item.divider) {
             <mat-divider></mat-divider>
           }
         }
-      </div>
-    </mat-menu>
-  </div>
+        @if (item.divider) {
+          <mat-divider></mat-divider>
+        }
+      }
+    </div>
+  </mat-menu>
+</div>

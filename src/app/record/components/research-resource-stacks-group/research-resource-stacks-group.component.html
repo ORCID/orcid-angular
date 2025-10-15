@@ -1,11 +1,9 @@
-@if (
-  researchResources?.groups && !(researchResources?.groups?.length === 0)
-  ) {
+@if (researchResources?.groups && !(researchResources?.groups?.length === 0)) {
   <section
     id="research-resources"
     role="region"
     [attr.aria-label]="regionResearchResources"
-    >
+  >
     <app-panels
       class="row"
       [title]="ngOrcidResearchResources"
@@ -19,16 +17,14 @@
       [sortType]="'date'"
       [sortDirection]="'desc'"
       (sort)="sortEvent($event)"
-      >
+    >
       @if (paginationLoading) {
-        <mat-progress-bar
-          mode="indeterminate"
-        ></mat-progress-bar>
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
       }
       @if (
         researchResources.totalGroups > researchResources.groups.length ||
         paginationPageSize !== defaultPageSize
-        ) {
+      ) {
         <mat-paginator
           [length]="paginationTotalAmountOfResearchResources"
           [pageSize]="paginationPageSize"
@@ -36,36 +32,38 @@
           [pageIndex]="paginationIndex"
           (page)="pageEvent($event)"
           [disabled]="paginationLoading"
-          >
+        >
         </mat-paginator>
       }
       @if (researchResources.groups.length > 0) {
         @for (
-          group of researchResources.groups; track trackByResearchResourceGroup($index,
-          group)) {
+          group of researchResources.groups;
+          track trackByResearchResourceGroup($index, group)
+        ) {
           <app-research-resource-stack
             [userRecord]="userRecord"
             [isPublicRecord]="isPublicRecord"
             [researchResourceStack]="group"
-            >
+          >
           </app-research-resource-stack>
         }
       }
       @if (researchResources.groups.length === 0) {
         <div class="orc-font-body-small">
           <p class="empty" i18n="@@researchResources.description">
-          Connect to trusted organizations to automatically add the specialist
-          resources you use for your research.
-        </p>
+            Connect to trusted organizations to automatically add the specialist
+            resources you use for your research.
+          </p>
           <a href="" i18n="@@researchResources.learnMore">
-          Learn more about how research resources are added to your ORCID record
-        </a>
+            Learn more about how research resources are added to your ORCID
+            record
+          </a>
         </div>
       }
       @if (
         researchResources.totalGroups > researchResources.groups.length ||
         paginationPageSize !== defaultPageSize
-        ) {
+      ) {
         <mat-paginator
           [length]="paginationTotalAmountOfResearchResources"
           [pageSize]="paginationPageSize"
@@ -73,13 +71,11 @@
           [pageIndex]="paginationIndex"
           (page)="pageEvent($event)"
           [disabled]="paginationLoading"
-          >
+        >
         </mat-paginator>
       }
       @if (paginationLoading) {
-        <mat-progress-bar
-          mode="indeterminate"
-        ></mat-progress-bar>
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
       }
     </app-panels>
   </section>

@@ -1,9 +1,6 @@
 <mat-card appearance="outlined" class="orcid-wizard">
   @if (loading) {
-    <mat-progress-bar
-      mode="indeterminate"
-      id="loading-bar"
-    ></mat-progress-bar>
+    <mat-progress-bar mode="indeterminate" id="loading-bar"></mat-progress-bar>
   }
 
   <mat-card-header>
@@ -13,7 +10,7 @@
           height="64px"
           src="assets/vectors/orcid.logo.icon.svg"
           alt="orcid logo"
-          />
+        />
       </div>
       @if (!reactivation?.isReactivation) {
         <h1 class="orc-font-heading-small" i18n="@@register.create">
@@ -24,7 +21,7 @@
         <h1
           class="orc-font-heading-small"
           i18n="@@register.reactivateYourOrcidAccount"
-          >
+        >
           Reactivate your ORCID account
         </h1>
       }
@@ -55,7 +52,7 @@
           color="primary"
           [disabled]="loading"
           (click)="nextButton2()"
-          >
+        >
           <ng-container i18n="@@register.nextStep"> Next Step </ng-container>
         </button>
         <button
@@ -64,31 +61,31 @@
           type="button"
           id="step-c2-skip-button"
           (click)="optionalNextStep()"
-          >
+        >
           <a
             i18n="@@shared.skipThisStepWithoutAddingAnAffiliation"
             class="skip-step"
-            >
+          >
             Skip this step without adding an affiliation</a
-            >
-          </button>
-          <button
-            mat-button
-            color="primary"
-            matStepperPrevious
-            type="button"
-            id="step-c2-back-button"
-            (click)="backButton()"
-            >
-            <a i18n="@@shared.previousStep"> Previous Step</a>
-          </button>
-        </div>
-      </form>
-    </mat-card-content>
-    @if (loading) {
-      <mat-progress-bar
-        mode="indeterminate"
-        id="bottom-loading-bar"
-      ></mat-progress-bar>
-    }
-  </mat-card>
+          >
+        </button>
+        <button
+          mat-button
+          color="primary"
+          matStepperPrevious
+          type="button"
+          id="step-c2-back-button"
+          (click)="backButton()"
+        >
+          <a i18n="@@shared.previousStep"> Previous Step</a>
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+  @if (loading) {
+    <mat-progress-bar
+      mode="indeterminate"
+      id="bottom-loading-bar"
+    ></mat-progress-bar>
+  }
+</mat-card>

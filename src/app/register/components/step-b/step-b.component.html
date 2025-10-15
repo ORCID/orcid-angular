@@ -6,7 +6,7 @@
           height="64px"
           src="assets/vectors/orcid.logo.icon.svg"
           alt="orcid logo"
-          />
+        />
       </div>
       @if (!reactivation?.isReactivation) {
         <h1 class="orc-font-heading-small" i18n="@@register.create">
@@ -17,7 +17,7 @@
         <h1
           class="orc-font-heading-small"
           i18n="@@register.reactivateYourOrcidAccount"
-          >
+        >
           Reactivate your ORCID account
         </h1>
       }
@@ -42,7 +42,7 @@
           color="primary"
           matStepperNext
           (click)="nextButton2()"
-          >
+        >
           <ng-container i18n="@@register.nextStep"> Next Step </ng-container>
         </button>
         <button
@@ -52,7 +52,7 @@
           type="button"
           (click)="backButton()"
           id="step-b-back-button"
-          >
+        >
           <a i18n="@@register.previousStep"> Previous Step</a>
         </button>
       </div>
