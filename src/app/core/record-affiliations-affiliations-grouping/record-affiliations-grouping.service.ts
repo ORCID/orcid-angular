@@ -28,11 +28,15 @@ export class RecordAffiliationsGroupingService {
     ]
     this.expectedUiOrderGroups[
       AffiliationUIGroupsTypes.MEMBERSHIP_AND_SERVICE
-    ] = [AffiliationGroupsTypes.MEMBERSHIP, AffiliationGroupsTypes.SERVICE, AffiliationGroupsTypes.EDITORIAL_SERVICE]
+    ] = [
+      AffiliationGroupsTypes.MEMBERSHIP,
+      AffiliationGroupsTypes.SERVICE,
+      AffiliationGroupsTypes.EDITORIAL_SERVICE,
+    ]
   }
 
   transform(value: AffiliationsEndpoint, args?: any): AffiliationUIGroup[] {
-       // Check for the presence of affiliation groups
+    // Check for the presence of affiliation groups
     if (value?.affiliationGroups) {
       const originalServiceArray =
         value.affiliationGroups[AffiliationGroupsTypes.SERVICE]
@@ -45,17 +49,17 @@ export class RecordAffiliationsGroupingService {
         for (const group of originalServiceArray) {
           // Check if any top-level external identifier in the group is of type 'ISSN'
           const hasIssn = group.externalIdentifiers?.some(
-            (identifier) =>
-              identifier.externalIdentifierType.value === 'issn'
+            (identifier) => identifier.externalIdentifierType.value === 'issn'
           )
           if (hasIssn) {
             group.affiliationType = AffiliationGroupsTypes.EDITORIAL_SERVICE
 
             for (const affiliation of group.affiliations) {
               if (affiliation.affiliationType) {
-                affiliation.affiliationType.value = AffiliationType['editorial-service'];
+                affiliation.affiliationType.value =
+                  AffiliationType['editorial-service']
               }
-          }
+            }
             editorialServiceArray.push(group)
           } else {
             newServiceArray.push(group)

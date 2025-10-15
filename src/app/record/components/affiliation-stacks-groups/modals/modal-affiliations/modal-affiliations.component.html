@@ -135,8 +135,18 @@
               'orc-font-body-large': platform.columns12
             }"
           >
-            <strong i18n="@@shared.organization" *ngIf="type !== 'editorial-service'"> Organization </strong>
-            <strong i18n="@@shared.journal" *ngIf="type === 'editorial-service'"> Journal </strong>
+            <strong
+              i18n="@@shared.organization"
+              *ngIf="type !== 'editorial-service'"
+            >
+              Organization
+            </strong>
+            <strong
+              i18n="@@shared.journal"
+              *ngIf="type === 'editorial-service'"
+            >
+              Journal
+            </strong>
             <span *ngIf="!platform.columns12" class="required">*</span>
           </h2>
           <p
@@ -161,16 +171,23 @@
             error: organizationIsInvalidAndTouched
           }"
         >
-          <strong i18n="@@shared.organization" id="organizationLabel" *ngIf="type !== 'editorial-service'">
+          <strong
+            i18n="@@shared.organization"
+            id="organizationLabel"
+            *ngIf="type !== 'editorial-service'"
+          >
             Organization</strong
           >
-          <strong i18n="@@shared.journal" id="journalLabel" *ngIf="type === 'editorial-service'">
+          <strong
+            i18n="@@shared.journal"
+            id="journalLabel"
+            *ngIf="type === 'editorial-service'"
+          >
             Journal</strong
           >
           <span class="required">*</span>
         </label>
       </div>
-
 
       <div class="input-container" id="cy-org-dd-div">
         <mat-form-field
@@ -179,7 +196,8 @@
           id="cy-org-dd-mat-form"
           [ngClass]="{
             'two-line-hint': selectedOrganizationFromDatabase?.value.length > 50
-          }" *ngIf="type !== 'editorial-service'"
+          }"
+          *ngIf="type !== 'editorial-service'"
         >
           <input
             aria-labelledby="organizationLabel"
@@ -259,7 +277,8 @@
           id="cy-org-dd-mat-form"
           [ngClass]="{
             'two-line-hint': selectedOrganizationFromDatabase?.value.length > 50
-          }" *ngIf="type === 'editorial-service'"
+          }"
+          *ngIf="type === 'editorial-service'"
         >
           <input
             aria-labelledby="organizationLabel"
@@ -284,7 +303,6 @@
             Must be less than 1000 characters
           </mat-error>
         </mat-form-field>
-
       </div>
       <div class="row" *ngIf="type !== 'editorial-service'">
         <label
@@ -391,7 +409,7 @@
           </mat-error>
         </mat-form-field>
       </div>
-      <div class="row" *ngIf="type ==='editorial-service'">
+      <div class="row" *ngIf="type === 'editorial-service'">
         <label
           for="issn-input"
           class="mat-caption"
@@ -401,7 +419,7 @@
           <span class="required">*</span>
         </label>
       </div>
-      <div class="input-container" *ngIf="type ==='editorial-service'">
+      <div class="input-container" *ngIf="type === 'editorial-service'">
         <mat-form-field appearance="outline" class="mat-form-field-min">
           <input
             id="issn-input"
@@ -421,7 +439,7 @@
           </mat-error>
         </mat-form-field>
       </div>
-            <div class="row" *ngIf="type ==='editorial-service'">
+      <div class="row" *ngIf="type === 'editorial-service'">
         <label
           for="url-input"
           class="mat-caption"
@@ -430,7 +448,10 @@
           <strong i18n="@@shared.url">Homepage URL</strong>
         </label>
       </div>
-      <div class="input-container mat-hint" *ngIf="type === 'editorial-service'">
+      <div
+        class="input-container mat-hint"
+        *ngIf="type === 'editorial-service'"
+      >
         <mat-form-field appearance="outline" class="mat-form-field-min">
           <input
             id="url-input"
@@ -512,7 +533,10 @@
             <strong i18n="@@shared.serviceDetails" *ngIf="type === 'service'">
               Service details
             </strong>
-            <strong i18n="@@shared.editorialServiceDetails" *ngIf="type === 'editorial-service'">
+            <strong
+              i18n="@@shared.editorialServiceDetails"
+              *ngIf="type === 'editorial-service'"
+            >
               Editorial Service details
             </strong>
             <span *ngIf="!platform.columns12" class="required">*</span>
@@ -768,7 +792,10 @@
           <strong i18n="@@shared.link">Link</strong>
         </label>
       </div>
-      <div class="input-container mat-hint" *ngIf="type !== 'editorial-service'">
+      <div
+        class="input-container mat-hint"
+        *ngIf="type !== 'editorial-service'"
+      >
         <mat-form-field appearance="outline" class="mat-form-field-min">
           <input
             id="url-input"

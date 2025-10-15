@@ -142,7 +142,9 @@ export const AffiliationTypeLabel = {
   [AffiliationType.distinction]: $localize`:@@shared.distinction:Distinction`,
   [AffiliationType.membership]: $localize`:@@shared.membershipTitle:Membership`,
   [AffiliationType.service]: $localize`:@@shared.service:Service`,
-  [AffiliationType['editorial-service']]: $localize`:@@shared.editorialService:Editorial Service`,
+  [AffiliationType[
+    'editorial-service'
+  ]]: $localize`:@@shared.editorialService:Editorial Service`,
 }
 
 export interface EmploymentsEndpoint {

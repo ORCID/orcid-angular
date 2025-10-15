@@ -14,7 +14,11 @@ export class AppPanelsAddAriaLabelPipe implements PipeTransform {
       return $localize`:@@shared.educationQualificationAddAriaLabel:Add education or qualification`
     } else if (panelType == 'distinction' || panelType == 'invited-position') {
       return $localize`:@@shared.distinctionInvitedPositionAddAriaLabel:Add invited position or distinction`
-    } else if (panelType == 'membership' || panelType == 'service' || panelType == 'editorial-service') {
+    } else if (
+      panelType == 'membership' ||
+      panelType == 'service' ||
+      panelType == 'editorial-service'
+    ) {
       return $localize`:@@shared.membershipServiceAddAriaLabel:Add membership or service`
     } else if (panelType == 'funding') {
       return $localize`:@@shared.fundingServiceAddAriaLabel:Add funding`
