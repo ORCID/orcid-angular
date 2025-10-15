@@ -1,26 +1,28 @@
-<button
-  mat-icon-button
-  (click)="toggle.next()"
-  [matTooltip]="tooltipLabelShowDetails"
-  *ngIf="!openState"
+@if (!openState) {
+  <button
+    mat-icon-button
+    (click)="toggle.next()"
+    [matTooltip]="tooltipLabelShowDetails"
   [attr.aria-label]="
     panelType | appPanelsExpandAriaLabel : panelId : panelTitle
   "
-  class="expand_more"
-  tabindex="0"
->
-  <mat-icon>expand_less</mat-icon>
-</button>
-<button
-  mat-icon-button
-  (click)="toggle.next()"
-  [matTooltip]="tooltipLabelHideDetails"
-  *ngIf="openState"
+    class="expand_more"
+    tabindex="0"
+    >
+    <mat-icon>expand_less</mat-icon>
+  </button>
+}
+@if (openState) {
+  <button
+    mat-icon-button
+    (click)="toggle.next()"
+    [matTooltip]="tooltipLabelHideDetails"
   [attr.aria-label]="
     panelType | appPanelsCollapseAriaLabel : panelId : panelTitle
   "
-  class="expand_less"
-  tabindex="0"
->
-  <mat-icon>expand_more</mat-icon>
-</button>
+    class="expand_less"
+    tabindex="0"
+    >
+    <mat-icon>expand_more</mat-icon>
+  </button>
+}

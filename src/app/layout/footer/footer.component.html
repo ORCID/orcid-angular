@@ -3,7 +3,7 @@
   [ngClass]="{
     'mobile': !isDesktop,
     }"
->
+  >
   <div class="row container">
     <div class="row logo space-around">
       <div
@@ -11,101 +11,101 @@
         [ngClass]="{
           'mobile': !isDesktop,
           }"
-      >
+        >
         <a
           [ngClass]="{
           'row orcid-logo-mobile': isMobile,
           }"
-        >
+          >
           <img src="./assets/vectors/orcid.logo.svg" alt="Orcid" />
         </a>
         <a
           href="https://www.linkedin.com/company/orcid"
           target="_blank"
           rel="noopener noreferrer"
-        >
+          >
           <img
             src="./assets/vectors/social/Linkedin.svg"
             class="social"
             alt="{{ linkedin }}"
-          />
+            />
         </a>
         <a
           href="https://bsky.app/profile/orcid.org"
           target="_blank"
           rel="noopener noreferrer"
-        >
+          >
           <img
             src="./assets/vectors/social/Bluesky.svg"
             class="social"
             alt="{{ bluesky }}"
-          />
+            />
         </a>
         <a
           href="https://www.facebook.com/ORCID.org"
           target="_blank"
           rel="noopener noreferrer"
-        >
+          >
           <img
             src="./assets/vectors/social/Facebook.svg"
             class="social"
             alt="{{ facebook }}"
-          />
+            />
         </a>
         <a
           href="https://scicomm.xyz/@ORCID_Org"
           target="_blank"
           rel="noopener noreferrer"
-        >
+          >
           <img
             src="./assets/vectors/social/Mastodon.svg"
             class="social"
             alt="{{ mastodon }}"
-          />
+            />
         </a>
         <a
           href="https://www.youtube.com/@orcid_org"
           target="_blank"
           rel="noopener noreferrer"
-        >
+          >
           <img
             src="./assets/vectors/social/Youtube.svg"
             class="social"
             alt="{{ youtube }}"
-          />
+            />
         </a>
         <a
           href="https://vimeo.com/orcidvideos"
           target="_blank"
           rel="noopener noreferrer"
-        >
+          >
           <img
             src="./assets/vectors/social/Vimeo.svg"
             class="social"
             alt="{{ vimeo }}"
-          />
+            />
         </a>
         <a
           href="https://github.com/ORCID"
           target="_blank"
           rel="noopener noreferrer"
-        >
+          >
           <img
             src="./assets/vectors/social/Github.svg"
             class="social"
             alt="{{ github }}"
-          />
+            />
         </a>
         <a
           href="{{ infoSiteBaseUrl }}blog/feed"
           target="_blank"
           rel="noopener noreferrer"
-        >
+          >
           <img
             src="./assets/vectors/social/RSS.svg"
             class="social"
             alt="{{ rss }}"
-          />
+            />
         </a>
       </div>
     </div>
@@ -114,20 +114,23 @@
       <div
         class="CC0 orc-font-body-small"
         [ngClass]="{ 'col desktop': isDesktop }"
-      >
-        <div class="row mobile" *ngIf="!isDesktop">
-          <img src="./assets/vectors/cc-zero.svg" alt="public domain" />
-        </div>
+        >
+        @if (!isDesktop) {
+          <div class="row mobile">
+            <img src="./assets/vectors/cc-zero.svg" alt="public domain" />
+          </div>
+        }
         <p>
-          <img
-            src="./assets/vectors/cc-zero.svg"
-            alt="public domain"
-            *ngIf="isDesktop"
-          />
+          @if (isDesktop) {
+            <img
+              src="./assets/vectors/cc-zero.svg"
+              alt="public domain"
+              />
+          }
 
           <ng-container i18n="@@footer.copyright_cc0_1"
             >The text of this website is published under a</ng-container
-          >&nbsp;<a
+            >&nbsp;<a
             i18n="@@ngOrcid.copyright"
             href="http://creativecommons.org/publicdomain/zero/1.0/"
             rel="license noreferrer"
@@ -135,79 +138,79 @@
             class="mat-button-font underline"
             [attr.aria-label]="'CC0' + license"
             >CC0 license.</a
-          >&nbsp;ORCID™,&nbsp;<ng-container i18n="@@footer.copyright_cc0_3"
+            >&nbsp;ORCID™,&nbsp;<ng-container i18n="@@footer.copyright_cc0_3"
             >the ORCID logo, and the iD logo are trademarks of ORCID, Inc. ORCID
             is registered in the US and other jurisdictions.</ng-container
-          >
-        </p>
+            >
+          </p>
+        </div>
       </div>
-    </div>
-    <div
-      class="row links space-around"
+      <div
+        class="row links space-around"
       [ngClass]="{
         tablet: isTablet,
         mobile: isMobile
       }"
-    >
-      <div
-        class="col mat-button-font url-lists"
-        [ngClass]="{ 'space-around': !isDesktop }"
-      >
-        <a class="underline" i18n="@@footer.aboutOrcid" href="/about">
+        >
+        <div
+          class="col mat-button-font url-lists"
+          [ngClass]="{ 'space-around': !isDesktop }"
+          >
+          <a class="underline" i18n="@@footer.aboutOrcid" href="/about">
           About ORCID
         </a>
 
-        <a
-          class="underline"
-          i18n="@@footer.privacypolicy"
-          href="/privacy-policy"
-        >
+          <a
+            class="underline"
+            i18n="@@footer.privacypolicy"
+            href="/privacy-policy"
+            >
           Privacy Policy
         </a>
-        <a
-          class="underline"
-          i18n="@@footer.termsofuse"
-          href="/content/orcid-terms-use"
-        >
+          <a
+            class="underline"
+            i18n="@@footer.termsofuse"
+            href="/content/orcid-terms-use"
+            >
           Terms of Use
         </a>
-        <a
-          class="underline"
-          i18n="@@footer.accessibility"
-          href="/content/orcid-accessibility-statement"
-        >
+          <a
+            class="underline"
+            i18n="@@footer.accessibility"
+            href="/content/orcid-accessibility-statement"
+            >
           Accessibility Statement
         </a>
-        <a
-          class="underline"
-          i18n="@@shared.orcidHelpCenter"
-          href="https://support.orcid.org/"
-        >
+          <a
+            class="underline"
+            i18n="@@shared.orcidHelpCenter"
+            href="https://support.orcid.org/"
+            >
           ORCID Help Center
         </a>
-        <a
-          class="underline"
-          i18n="@@ngOrcid.disputeProcedure"
-          href="/orcid-dispute-procedures"
-        >
+          <a
+            class="underline"
+            i18n="@@ngOrcid.disputeProcedure"
+            href="/orcid-dispute-procedures"
+            >
           Dispute procedures
         </a>
-        <a
-          class="underline"
-          href="/trademark-and-id-display-guidelines/"
-          i18n="@@footer.branGuideLines"
-        >
+          <a
+            class="underline"
+            href="/trademark-and-id-display-guidelines/"
+            i18n="@@footer.branGuideLines"
+            >
           Brand Guidelines
         </a>
-        <a
-          id="ot-sdk-btn"
-          tabindex="0"
-          class="ot-sdk-show-settings underline"
-          i18n="@@footer.cookieSettings"
-        >
+          <a
+            id="ot-sdk-btn"
+            tabindex="0"
+            class="ot-sdk-show-settings underline"
+            i18n="@@footer.cookieSettings"
+            >
           Cookie Settings
         </a>
+        </div>
       </div>
     </div>
-  </div>
-</footer>
+  </footer>

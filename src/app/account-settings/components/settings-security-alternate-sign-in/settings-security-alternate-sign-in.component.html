@@ -1,96 +1,97 @@
-<app-settings-panels-data *ngIf="accounts$ | async as accounts">
-  <p i18n="@@account.youCanSignIntoOrcid">
+@if (accounts$ | async; as accounts) {
+  <app-settings-panels-data>
+    <p i18n="@@account.youCanSignIntoOrcid">
     You can sign into ORCID using any of the institutional accounts you have
     linked to your ORCID record.
   </p>
-
-  <a
-    class="row m-t-16 m-b-16 underline"
-    rel="noopener noreferrer"
-    target="_blank"
-    href="https://support.orcid.org/hc/en-us/articles/360006894354-Sign-into-ORCID-using-your-social-media-account"
-    i18n="@@account.learnMoreAboutUsing"
-    id="cy-learn-more-about-using-alternate-accounts"
-  >
+    <a
+      class="row m-t-16 m-b-16 underline"
+      rel="noopener noreferrer"
+      target="_blank"
+      href="https://support.orcid.org/hc/en-us/articles/360006894354-Sign-into-ORCID-using-your-social-media-account"
+      i18n="@@account.learnMoreAboutUsing"
+      id="cy-learn-more-about-using-alternate-accounts"
+      >
     Learn more about using alternate accounts to sign in to ORCID
   </a>
-  <ng-container *ngIf="accounts.length && this.isMobile">
-    <mat-divider></mat-divider>
-    <div *ngFor="let account of accounts">
-      <div class="mobile-elements-container">
-        <div>
-          <button (click)="delete(account)" mat-icon-button>
-            <mat-icon>delete</mat-icon>
-          </button>
-        </div>
-        <div class="mobile-ements-text-container">
-          <strong i18n="@@account.account">Account</strong>
-          <div>{{ account?.idpName }}</div>
-          <strong i18n="@@account.alternateSignInID"
-            >Alternate sign in ID</strong
-          >
-          <div>{{ account?.email }}</div>
-          <strong i18n="@@account.accessGranted">Access granted</strong>
-          <div>{{ account?.dateCreated | monthDayYearDateToString }}</div>
-        </div>
-      </div>
-
+    @if (accounts.length && this.isMobile) {
       <mat-divider></mat-divider>
-    </div>
-  </ng-container>
-  <div class="table-container">
-    <table
-      *ngIf="accounts.length && !this.isMobile"
-      mat-table
-      [dataSource]="accounts"
-      class="mat-elevation-z0"
-    >
-      <ng-container matColumnDef="provider">
-        <th mat-header-cell *matHeaderCellDef i18n="@@account.account">
+      @for (account of accounts; track account) {
+        <div>
+          <div class="mobile-elements-container">
+            <div>
+              <button (click)="delete(account)" mat-icon-button>
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+            <div class="mobile-ements-text-container">
+              <strong i18n="@@account.account">Account</strong>
+              <div>{{ account?.idpName }}</div>
+              <strong i18n="@@account.alternateSignInID"
+                >Alternate sign in ID</strong
+                >
+                <div>{{ account?.email }}</div>
+                <strong i18n="@@account.accessGranted">Access granted</strong>
+                <div>{{ account?.dateCreated | monthDayYearDateToString }}</div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+          </div>
+        }
+      }
+      <div class="table-container">
+        @if (accounts.length && !this.isMobile) {
+          <table
+            mat-table
+            [dataSource]="accounts"
+            class="mat-elevation-z0"
+            >
+            <ng-container matColumnDef="provider">
+              <th mat-header-cell *matHeaderCellDef i18n="@@account.account">
           Account
         </th>
-        <td mat-cell *matCellDef="let element">
-          {{ element?.idpName }}
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="email">
-        <th
-          mat-header-cell
-          *matHeaderCellDef
-          i18n="@@account.alternateSignInID"
-        >
+              <td mat-cell *matCellDef="let element">
+                {{ element?.idpName }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="email">
+              <th
+                mat-header-cell
+                *matHeaderCellDef
+                i18n="@@account.alternateSignInID"
+                >
           Alternate sign in ID
         </th>
-        <td mat-cell *matCellDef="let element">{{ element.email }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="granted">
-        <th mat-header-cell *matHeaderCellDef i18n="@@account.accessGranted">
+              <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+            </ng-container>
+            <ng-container matColumnDef="granted">
+              <th mat-header-cell *matHeaderCellDef i18n="@@account.accessGranted">
           Access granted
         </th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.dateCreated | monthDayYearDateToString }}
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="actions" stickyEnd>
-        <th mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let element">
-          <button (click)="delete(element)" mat-icon-button>
-            <mat-icon>delete</mat-icon>
-          </button>
-        </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>
-  </div>
-  <div *ngIf="!accounts.length" class="topBottomMargin">
-    <mat-divider class="topBottomMargin"></mat-divider>
-    <div i18n="@@account.youHaventAdded">
+              <td mat-cell *matCellDef="let element">
+                {{ element.dateCreated | monthDayYearDateToString }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="actions" stickyEnd>
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let element">
+                <button (click)="delete(element)" mat-icon-button>
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+        }
+      </div>
+      @if (!accounts.length) {
+        <div class="topBottomMargin">
+          <mat-divider class="topBottomMargin"></mat-divider>
+          <div i18n="@@account.youHaventAdded">
       You haven't added any alternate sign in accounts yet.
     </div>
-  </div>
-</app-settings-panels-data>
+        </div>
+      }
+    </app-settings-panels-data>
+  }

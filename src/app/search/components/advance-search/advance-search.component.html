@@ -8,87 +8,90 @@
       [attr.aria-label]="
         !showAdvanceSearch ? ngOrcidShowAdvanceSearch : ngOrcidHideAdvanceSearch
       "
-    >
+      >
       <ng-container i18n="@@ngOrcid.search.advanceSearch"
         >ADVANCED SEARCH</ng-container
-      >
-      <mat-icon aria-hidden="true" *ngIf="!showAdvanceSearch"
-        >expand_more</mat-icon
-      >
-      <mat-icon aria-hidden="true" *ngIf="showAdvanceSearch"
-        >expand_less</mat-icon
-      >
-    </button>
-  </div>
+        >
+        @if (!showAdvanceSearch) {
+          <mat-icon aria-hidden="true"
+            >expand_more</mat-icon
+            >
+          }
+          @if (showAdvanceSearch) {
+            <mat-icon aria-hidden="true"
+              >expand_less</mat-icon
+              >
+            }
+          </button>
+        </div>
 
-  <form
-    *ngIf="showAdvanceSearch"
-    [dir]="tempFixForOutlineFormInputCalculationIssue_Direction"
-    [formGroup]="advanceSearch"
-    (ngSubmit)="search()"
-  >
-    <div class="row firstRow">
-      <mat-form-field appearance="outline" class="col l3 m4 s4 grow">
-        <mat-label i18n="@@ngOrcid.search.firstName">First Name</mat-label>
-        <input matInput formControlName="firstName" #searchForm autofocus />
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="col l3 m4 s4 grow">
-        <mat-label i18n="@@ngOrcid.search.lastName">Last Name</mat-label>
-        <input matInput formControlName="lastName" />
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="institution col l4 m5 s4">
-        <mat-label i18n="@@ngOrcid.search.institutionName"
-          >Institution Name</mat-label
-        >
-        <mat-hint
-          i18n="@@ngOrcid.search.institutionNamePlaceholder"
-          *ngIf="isAPhoneScreen"
-          >affiliation or organization ID</mat-hint
-        >
-        <input
-          formControlName="institution"
-          matInput
+        @if (showAdvanceSearch) {
+          <form
+            [dir]="tempFixForOutlineFormInputCalculationIssue_Direction"
+            [formGroup]="advanceSearch"
+            (ngSubmit)="search()"
+            >
+            <div class="row firstRow">
+              <mat-form-field appearance="outline" class="col l3 m4 s4 grow">
+                <mat-label i18n="@@ngOrcid.search.firstName">First Name</mat-label>
+                <input matInput formControlName="firstName" #searchForm autofocus />
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="col l3 m4 s4 grow">
+                <mat-label i18n="@@ngOrcid.search.lastName">Last Name</mat-label>
+                <input matInput formControlName="lastName" />
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="institution col l4 m5 s4">
+                <mat-label i18n="@@ngOrcid.search.institutionName"
+                  >Institution Name</mat-label
+                  >
+                  @if (isAPhoneScreen) {
+                    <mat-hint
+                      i18n="@@ngOrcid.search.institutionNamePlaceholder"
+                      >affiliation or organization ID</mat-hint
+                      >
+                    }
+                    <input
+                      formControlName="institution"
+                      matInput
           placeholder="{{
             isAPhoneScreen ? null : ngOrcidSearchInstitutionNamePlaceholder
           }}"
-        />
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="keyword col l2 m3 s4 grow">
-        <mat-label i18n="@@ngOrcid.search.keyword">Keyword</mat-label>
-        <input matInput formControlName="keyword" />
-      </mat-form-field>
-    </div>
-
-    <div class="row checkbox">
-      <mat-checkbox
-        class="col"
-        color="primary"
-        i18n="@@ngOrcid.search.otherNameFields"
-        formControlName="otherFields"
-        >Also search other name fields</mat-checkbox
-      >
-    </div>
-
-    <div class="row orcidInput">
-      <mat-form-field appearance="outline" class="col l3 m4 s4 two-line-hint">
-        <mat-label i18n="@@ngOrcid.search.orcidID">ORCID ID</mat-label>
-        <input formControlName="orcid" style="width: 100%" matInput appTrim />
-        <mat-error i18n="@@ngOrcid.search.orcidIdPatterError">
+                      />
+                  </mat-form-field>
+                  <mat-form-field appearance="outline" class="keyword col l2 m3 s4 grow">
+                    <mat-label i18n="@@ngOrcid.search.keyword">Keyword</mat-label>
+                    <input matInput formControlName="keyword" />
+                  </mat-form-field>
+                </div>
+                <div class="row checkbox">
+                  <mat-checkbox
+                    class="col"
+                    color="primary"
+                    i18n="@@ngOrcid.search.otherNameFields"
+                    formControlName="otherFields"
+                    >Also search other name fields</mat-checkbox
+                    >
+                  </div>
+                  <div class="row orcidInput">
+                    <mat-form-field appearance="outline" class="col l3 m4 s4 two-line-hint">
+                      <mat-label i18n="@@ngOrcid.search.orcidID">ORCID ID</mat-label>
+                      <input formControlName="orcid" style="width: 100%" matInput appTrim />
+                      <mat-error i18n="@@ngOrcid.search.orcidIdPatterError">
           Given value doesn't match ORCID iD pattern
         </mat-error>
-      </mat-form-field>
-    </div>
-
-    <div class="row">
-      <div class="col l3 m4 s4">
-        <button
-          mat-raised-button
-          color="primary"
-          i18n="@@ngOrcid.search.search"
-        >
+                    </mat-form-field>
+                  </div>
+                  <div class="row">
+                    <div class="col l3 m4 s4">
+                      <button
+                        mat-raised-button
+                        color="primary"
+                        i18n="@@ngOrcid.search.search"
+                        >
           SEARCH
         </button>
-      </div>
-    </div>
-  </form>
-</div>
+                    </div>
+                  </div>
+                </form>
+              }
+            </div>

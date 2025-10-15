@@ -1,49 +1,51 @@
 <!-- A PANELS COMPONENT FOR EACH GROUP OF FUNDING -->
-<section
-  id="funding"
-  role="region"
-  [attr.aria-label]="ngOrcidFunding"
-  *ngIf="!(loading || (fundings?.length === 0 && isPublicRecord))"
->
-  <app-panels
-    [loading]="$loading | async"
-    class="row"
-    [title]="ngOrcidFunding"
-    [type]="'funding'"
-    [userRecord]="userRecord"
-    [currentAmount]="fundings.length"
-    [isPublicRecord]="isPublicRecord"
-    [(expandedContent)]="expandedContent['FUNDING']"
-    (expandedContentChange)="expandedContentChange.emit(expandedContent)"
-    [sortTypes]="sortTypes"
-    [sortType]="'end'"
-    (sort)="sortEvent($event)"
-  >
-    <ng-container *ngIf="fundings.length > 0">
-      <app-funding-stack
-        [userRecord]="userRecord"
-        *ngFor="let fundingGroup of fundings; trackBy: trackByFundingGroup"
-        [fundingStack]="fundingGroup"
-        [isPublicRecord]="isPublicRecord"
-        [userInfo]="userInfo"
-      ></app-funding-stack>
-    </ng-container>
-    <ng-container *ngIf="fundings.length === 0">
-      <div class="orc-font-body-small">
-        <p class="empty" i18n="@@funding.descriptionEmpty">
+@if (!(loading || (fundings?.length === 0 && isPublicRecord))) {
+  <section
+    id="funding"
+    role="region"
+    [attr.aria-label]="ngOrcidFunding"
+    >
+    <app-panels
+      [loading]="$loading | async"
+      class="row"
+      [title]="ngOrcidFunding"
+      [type]="'funding'"
+      [userRecord]="userRecord"
+      [currentAmount]="fundings.length"
+      [isPublicRecord]="isPublicRecord"
+      [(expandedContent)]="expandedContent['FUNDING']"
+      (expandedContentChange)="expandedContentChange.emit(expandedContent)"
+      [sortTypes]="sortTypes"
+      [sortType]="'end'"
+      (sort)="sortEvent($event)"
+      >
+      @if (fundings.length > 0) {
+        @for (fundingGroup of fundings; track trackByFundingGroup($index, fundingGroup)) {
+          <app-funding-stack
+            [userRecord]="userRecord"
+            [fundingStack]="fundingGroup"
+            [isPublicRecord]="isPublicRecord"
+            [userInfo]="userInfo"
+          ></app-funding-stack>
+        }
+      }
+      @if (fundings.length === 0) {
+        <div class="orc-font-body-small">
+          <p class="empty" i18n="@@funding.descriptionEmpty">
           Add grants, awards and other funding you have received to support your
           work.
         </p>
-        <a
-          class="underline"
-          rel="noopener noreferrer"
-          target="_blank"
-          href="https://support.orcid.org/hc/en-us/articles/360006897214-Add-funding-information-to-your-ORCID-record"
-          i18n="@@funding.learnMore"
-        >
+          <a
+            class="underline"
+            rel="noopener noreferrer"
+            target="_blank"
+            href="https://support.orcid.org/hc/en-us/articles/360006897214-Add-funding-information-to-your-ORCID-record"
+            i18n="@@funding.learnMore"
+            >
           Learn more about adding funding information to your ORCID record
         </a>
-      </div>
-    </ng-container>
-  </app-panels>
-</section>
+        </div>
+      }
+    </app-panels>
+  </section>
+}

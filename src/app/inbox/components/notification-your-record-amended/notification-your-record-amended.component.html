@@ -11,51 +11,53 @@
   <ng-container i18n="@@inbox.sectionOf">section of your record:</ng-container>
 </div>
 
-<div *ngIf="isProfessionalActivity(notification)">
-  <strong>{{ getProfessionalActivitiesUpdatedLabel(notification) }}</strong>
-</div>
-<div *ngFor="let i of itemGroupedByType">
-  <strong>{{ getAmendedTypeLabel(i.type) }}</strong>
-
-  <div class="item orc-font-body-small" *ngIf="item">
-    <ng-container *ngFor="let item of i.items">
-      <ng-container>-</ng-container>
-      <ng-container
-        *ngIf="
-          item.additionalInfo && item.additionalInfo['org_name'] != undefined
-        "
-      >
-        <i>{{ item.additionalInfo['org_name'] }} </i>
-      </ng-container>
-
-      <ng-container *ngIf="item.itemName != null">{{
-        item.itemName
-      }}</ng-container>
-
-      <ng-container *ngIf="item.additionalInfo">
-        <ng-container
-          *ngIf="
-            item.itemName == null &&
-            item.additionalInfo['group_name'] != undefined
-          "
-          >{{ item.additionalInfo['group_name'] }}</ng-container
-        >
-        <ng-container
-          *ngIf="item.additionalInfo['external_identifiers'] != undefined"
-        >
-          <ul>
-            <li
-              *ngFor="
-                let otherId of item.additionalInfo['external_identifiers'][
-                  'externalIdentifier'
-                ]
-              "
-            >
-              {{ otherId.type }}: {{ otherId.value }}
-            </li>
-          </ul>
-        </ng-container>
-      </ng-container>
-    </ng-container>
+@if (isProfessionalActivity(notification)) {
+  <div>
+    <strong>{{ getProfessionalActivitiesUpdatedLabel(notification) }}</strong>
   </div>
-</div>
+}
+@for (i of itemGroupedByType; track i) {
+  <div>
+    <strong>{{ getAmendedTypeLabel(i.type) }}</strong>
+    @if (item) {
+      <div class="item orc-font-body-small">
+        @for (item of i.items; track item) {
+          <ng-container>-</ng-container>
+          @if (
+            item.additionalInfo && item.additionalInfo['org_name'] != undefined
+            ) {
+            <i>{{ item.additionalInfo['org_name'] }} </i>
+          }
+          @if (item.itemName != null) {
+            {{
+            item.itemName
+            }}
+          }
+          @if (item.additionalInfo) {
+            @if (
+              item.itemName == null &&
+              item.additionalInfo['group_name'] != undefined
+              ) {
+              {{ item.additionalInfo['group_name'] }}
+            }
+            @if (item.additionalInfo['external_identifiers'] != undefined) {
+              <ul>
+                @for (
+                  otherId of item.additionalInfo['external_identifiers'][
+                  'externalIdentifier'
+                  ]
+                  ; track
+                  otherId) {
+                  <li
+                    >
+                    {{ otherId.type }}: {{ otherId.value }}
+                  </li>
+                }
+              </ul>
+            }
+          }
+        }
+      </div>
+    }
+  </div>
+}

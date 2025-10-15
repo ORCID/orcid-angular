@@ -1,34 +1,37 @@
-<ng-container *ngIf="emailVerified || invalidVerifyUrl">
+@if (emailVerified || invalidVerifyUrl) {
   <app-alert-message
     [type]="invalidVerifyUrl ? 'warning' : 'success'"
     role="alert"
     aria-labelledby="dialogTitle"
     aria-describedby="dialogDescription"
-  >
+    >
     <h3 title id="dialogTitle" i18n="@@ngOrcid.signin.almostDone">
       Almost done!
     </h3>
-    <div content i18n="@@ngOrcid.signin.signInToComplete" *ngIf="emailVerified">
+    @if (emailVerified) {
+      <div content i18n="@@ngOrcid.signin.signInToComplete">
       Sign in to complete your email verification
     </div>
-    <div
-      content
-      i18n="@@myOrcidAlerts.invalidVerifyUrl"
-      *ngIf="invalidVerifyUrl"
-    >
+    }
+    @if (invalidVerifyUrl) {
+      <div
+        content
+        i18n="@@myOrcidAlerts.invalidVerifyUrl"
+        >
       Your email couldn't be verified, please check the link you used to verify
       it.
     </div>
+    }
   </app-alert-message>
-</ng-container>
-<ng-container *ngIf="printError && badCredentials">
+}
+@if (printError && badCredentials) {
   <app-alert-message
     type="warning"
     role="dialog"
     aria-live="polite"
     aria-labelledby="dialogTitle"
     aria-describedby="dialogDescription"
-  >
+    >
     <div content class="content">
       <b id="dialogTitle" i18n="@@ngOrcid.signin.invalidSignInDetails">
         Invalid sign in details
@@ -36,9 +39,9 @@
       <div
         id="dialogDescription"
         i18n="@@ngOrcid.signin.pleaseCheckYourDetails"
-      >
+        >
         Please check your ORCID sign in details and then try signing in again.
       </div>
     </div>
   </app-alert-message>
-</ng-container>
+}

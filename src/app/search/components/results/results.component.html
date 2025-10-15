@@ -1,71 +1,76 @@
-<div
-  role="main"
-  [attr.aria-label]="ngOrcidSearchResults"
-  class="row table-container"
-  *ngIf="resultsContent && resultsContent.length"
->
-  <table [attr.aria-label]="ngOrcidSearchResults">
-    <thead>
-      <tr>
-        <th
-          class="mat-subtitle-2 orcid-id-column"
-          i18n="@@ngOrcid.search.orcidID"
-        >
+@if (resultsContent && resultsContent.length) {
+  <div
+    role="main"
+    [attr.aria-label]="ngOrcidSearchResults"
+    class="row table-container"
+    >
+    <table [attr.aria-label]="ngOrcidSearchResults">
+      <thead>
+        <tr>
+          <th
+            class="mat-subtitle-2 orcid-id-column"
+            i18n="@@ngOrcid.search.orcidID"
+            >
           ORCID ID
         </th>
-        <th class="mat-subtitle-2" i18n="@@ngOrcid.search.firstName">
+          <th class="mat-subtitle-2" i18n="@@ngOrcid.search.firstName">
           First Name
         </th>
-        <th class="mat-subtitle-2" i18n="@@ngOrcid.search.lastName">
+          <th class="mat-subtitle-2" i18n="@@ngOrcid.search.lastName">
           Last Name
         </th>
-        <th class="mat-subtitle-2" i18n="@@ngOrcid.search.otherNames">
+          <th class="mat-subtitle-2" i18n="@@ngOrcid.search.otherNames">
           Other Names
         </th>
-        <th class="mat-subtitle-2" i18n="@@ngOrcid.search.affiliations">
+          <th class="mat-subtitle-2" i18n="@@ngOrcid.search.affiliations">
           Affiliations
         </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let orcid of resultsContent">
-        <td class="orcid-id-column">
-          <a [routerLink]="['/' + orcid['orcid-id']]">
-            {{ orcid['orcid-id'] }}</a
-          >
-        </td>
-        <td>{{ orcid['given-names'] }}</td>
-        <td>{{ orcid['family-names'] }}</td>
-        <td>{{ orcid['other-name'].join(', ') }}</td>
-        <td>{{ orcid['institution-name'].join(', ') }}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+        </tr>
+      </thead>
+      <tbody>
+        @for (orcid of resultsContent; track orcid) {
+          <tr>
+            <td class="orcid-id-column">
+              <a [routerLink]="['/' + orcid['orcid-id']]">
+                {{ orcid['orcid-id'] }}</a
+                >
+              </td>
+              <td>{{ orcid['given-names'] }}</td>
+              <td>{{ orcid['family-names'] }}</td>
+              <td>{{ orcid['other-name'].join(', ') }}</td>
+              <td>{{ orcid['institution-name'].join(', ') }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
 
-<!-- Use hidden to allow image to be preloaded -->
-<section
-  role="main"
-  class="col notFoundResults"
+  <!-- Use hidden to allow image to be preloaded -->
+  <section
+    role="main"
+    class="col notFoundResults"
   [hidden]="
     !searchResults ||
     (searchResults['expanded-result'] &&
       searchResults['expanded-result'].length)
   "
->
-  <img
-    class="row space-around"
-    src="./assets/vectors/no-results.svg"
-    aria-hidden="true"
-  />
-  <p class="row space-around" i18n="@@ngOrcid.search.noResults" aria="alert">
+    >
+    <img
+      class="row space-around"
+      src="./assets/vectors/no-results.svg"
+      aria-hidden="true"
+      />
+    <p class="row space-around" i18n="@@ngOrcid.search.noResults" aria="alert">
     No results found. Please edit your search terms.
   </p>
-</section>
+  </section>
 
-<section *ngIf="!searchResults">
-  <div class="row horizontal-center">
-    <mat-progress-spinner color="primary" mode="indeterminate" class="col">
-    </mat-progress-spinner>
-  </div>
-</section>
+  @if (!searchResults) {
+    <section>
+      <div class="row horizontal-center">
+        <mat-progress-spinner color="primary" mode="indeterminate" class="col">
+        </mat-progress-spinner>
+      </div>
+    </section>
+  }

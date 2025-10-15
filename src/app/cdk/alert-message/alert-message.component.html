@@ -6,40 +6,44 @@
     'alert-warning': type == 'warning',
     'alert-success': type == 'success'
   }"
->
+  >
   <div>
-    <mat-icon
-      *ngIf="type == 'notice'"
-      class="large-material-icon"
-      role="presentation"
-      >info_outline</mat-icon
-    >
-    <mat-icon
-      *ngIf="type == 'info'"
-      class="large-material-icon"
-      role="presentation"
-      >help_outline</mat-icon
-    >
-    <mat-icon
-      *ngIf="type == 'warning'"
-      class="large-material-icon"
-      role="presentation"
-      >warning_amber</mat-icon
-    >
-    <mat-icon
-      *ngIf="type == 'success'"
-      class="large-material-icon"
-      role="presentation"
-      >thumb_up_off_alt</mat-icon
-    >
-  </div>
+    @if (type == 'notice') {
+      <mat-icon
+        class="large-material-icon"
+        role="presentation"
+        >info_outline</mat-icon
+        >
+      }
+      @if (type == 'info') {
+        <mat-icon
+          class="large-material-icon"
+          role="presentation"
+          >help_outline</mat-icon
+          >
+        }
+        @if (type == 'warning') {
+          <mat-icon
+            class="large-material-icon"
+            role="presentation"
+            >warning_amber</mat-icon
+            >
+          }
+          @if (type == 'success') {
+            <mat-icon
+              class="large-material-icon"
+              role="presentation"
+              >thumb_up_off_alt</mat-icon
+              >
+            }
+          </div>
 
-  <div>
-    <strong class="title orc-font-body">
-      <ng-content select="[title]"></ng-content>
-    </strong>
-    <div class="content orc-font-body-small">
-      <ng-content select="[content]"></ng-content>
-    </div>
-  </div>
-</div>
+          <div>
+            <strong class="title orc-font-body">
+              <ng-content select="[title]"></ng-content>
+            </strong>
+            <div class="content orc-font-body-small">
+              <ng-content select="[content]"></ng-content>
+            </div>
+          </div>
+        </div>

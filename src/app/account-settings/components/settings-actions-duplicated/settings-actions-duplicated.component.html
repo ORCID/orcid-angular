@@ -16,95 +16,97 @@
         <ng-container i18n="@@account.deprecate1">
           - The email addresses associated with the duplicate record are added
           to this record</ng-container
-        ><ng-container>
+          ><ng-container>
           ({{ userSession?.userInfo?.EFFECTIVE_USER_ORCID }})</ng-container
-        >
-      </li>
-      <li i18n="@@account.deprecate2">
+          >
+        </li>
+        <li i18n="@@account.deprecate2">
         - All other information is deleted from the duplicate record
       </li>
-    </ul>
+      </ul>
 
-    <p>
-      <a
-        id="cy-learn-more-about-removing-duplicated"
-        class="underline"
-        href="https://support.orcid.org/hc/en-us/articles/360006896634-Removing-your-additional-or-duplicate-ORCID-iD"
-        rel="noopener noreferrer"
-        target="_blank"
-        i18n="@@account.learnMoreAboutRemovingDuplicates"
-        >Learn more about removing duplicate records</a
-      >
-    </p>
+      <p>
+        <a
+          id="cy-learn-more-about-removing-duplicated"
+          class="underline"
+          href="https://support.orcid.org/hc/en-us/articles/360006896634-Removing-your-additional-or-duplicate-ORCID-iD"
+          rel="noopener noreferrer"
+          target="_blank"
+          i18n="@@account.learnMoreAboutRemovingDuplicates"
+          >Learn more about removing duplicate records</a
+          >
+        </p>
 
-    <p i18n="@@account.ifYouHaveDuplicated">
+        <p i18n="@@account.ifYouHaveDuplicated">
       If you have more than one duplicate record repeat the process for each
       record.
     </p>
 
-    <label class="row form-title">
-      <strong i18n="@@account.removeADuplicatedRecord">
+        <label class="row form-title">
+          <strong i18n="@@account.removeADuplicatedRecord">
         Remove a duplicate record
       </strong>
-    </label>
+        </label>
 
-    <label class="row mat-caption">
-      <strong i18n="@@account.duplicateRecordEmail"
-        >Duplicate record email or iD
+        <label class="row mat-caption">
+          <strong i18n="@@account.duplicateRecordEmail"
+            >Duplicate record email or iD
       </strong>
-    </label>
-    <mat-form-field
-      appearance="outline"
-      class="mat-form-field-min input-container"
-    >
-      <input
-        formControlName="deprecatingOrcidOrEmail"
-        type="text"
-        matInput
-        autocomplete="email"
-        id="cy-duplicate-rercod-email"
-      />
+        </label>
+        <mat-form-field
+          appearance="outline"
+          class="mat-form-field-min input-container"
+          >
+          <input
+            formControlName="deprecatingOrcidOrEmail"
+            type="text"
+            matInput
+            autocomplete="email"
+            id="cy-duplicate-rercod-email"
+            />
 
-      <mat-hint i18n="@@account.duplicatedEmailHint"
-        >The email or iD of the record to be removed
+          <mat-hint i18n="@@account.duplicatedEmailHint"
+            >The email or iD of the record to be removed
       </mat-hint>
-    </mat-form-field>
+        </mat-form-field>
 
-    <label class="row mat-caption">
-      <strong i18n="@@account.duplicatedRecordPassword"
-        >Duplicate record password
+        <label class="row mat-caption">
+          <strong i18n="@@account.duplicatedRecordPassword"
+            >Duplicate record password
       </strong>
-    </label>
-    <mat-form-field
-      appearance="outline"
-      class="mat-form-field-min input-container"
-    >
-      <input
-        formControlName="deprecatingPassword"
-        type="password"
-        matInput
-        autocomplete="password"
-        id="cy-duplicate-rercod-email"
-      />
+        </label>
+        <mat-form-field
+          appearance="outline"
+          class="mat-form-field-min input-container"
+          >
+          <input
+            formControlName="deprecatingPassword"
+            type="password"
+            matInput
+            autocomplete="password"
+            id="cy-duplicate-rercod-email"
+            />
 
-      <mat-hint i18n="@@account.duplicatedPasswordHint"
-        >The password for the record to be removed
+          <mat-hint i18n="@@account.duplicatedPasswordHint"
+            >The password for the record to be removed
       </mat-hint>
-    </mat-form-field>
+        </mat-form-field>
 
-    <mat-error *ngFor="let error of errors">{{ error }}</mat-error>
+        @for (error of errors; track error) {
+          <mat-error>{{ error }}</mat-error>
+        }
 
-    <div class="button-container">
-      <button
-        mat-raised-button
-        color="warn"
-        i18n="@@account.removeDuplicatedRecord"
-        type="submit"
-        [disabled]="!this.form.valid"
-        class="cy-remove-duplicated-record"
-      >
+        <div class="button-container">
+          <button
+            mat-raised-button
+            color="warn"
+            i18n="@@account.removeDuplicatedRecord"
+            type="submit"
+            [disabled]="!this.form.valid"
+            class="cy-remove-duplicated-record"
+            >
         Remove duplicate record
       </button>
-    </div>
-  </form>
-</app-settings-panels-data>
+        </div>
+      </form>
+    </app-settings-panels-data>

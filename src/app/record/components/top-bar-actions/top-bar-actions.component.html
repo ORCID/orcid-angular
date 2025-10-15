@@ -1,20 +1,20 @@
 <div class="container">
-  <div
-    class="is-this-you orc-font-body-small"
-    *ngIf="isPublicRecord && !userStatus?.loggedIn && !showPrintButton"
-  >
-    <mat-icon
-      class="large-material-icon"
-      [attr.aria-label]="this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID"
-      >account_circle</mat-icon
-    >
-    <p i18n="@@topBar.isThisYou" [attr.aria-label]="labelIsThisYou">
+  @if (isPublicRecord && !userStatus?.loggedIn && !showPrintButton) {
+    <div
+      class="is-this-you orc-font-body-small"
+      >
+      <mat-icon
+        class="large-material-icon"
+        [attr.aria-label]="this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID"
+        >account_circle</mat-icon
+        >
+        <p i18n="@@topBar.isThisYou" [attr.aria-label]="labelIsThisYou">
       Is this you?
     </p>
-    <a
-      class="underline"
-      i18n="@@topBar.signInToStart"
-      [routerLink]="['/signin']"
+        <a
+          class="underline"
+          i18n="@@topBar.signInToStart"
+          [routerLink]="['/signin']"
       [attr.aria-label]="
         (ariaLabelName
           ? ariaLabelName
@@ -22,21 +22,26 @@
         ' ' +
         labelSignInToStart
       "
-      >Sign in to start editing</a
-    >
-  </div>
-  <div class="my-orcid-icons" *ngIf="!showIsThisYouButton">
-    <button
-      mat-button
-      class="orc-font-small-print"
-      (click)="printRecord()"
-      [attr.aria-label]="labelPrintableVersion"
-    >
-      <mat-icon class="material-icons-outlined" class="icon">print</mat-icon>
-      <ng-container i18n="@@topBar.printableVersion">
+          >Sign in to start editing</a
+          >
+        </div>
+      }
+      @if (!showIsThisYouButton) {
+        <div class="my-orcid-icons">
+          <button
+            mat-button
+            class="orc-font-small-print"
+            (click)="printRecord()"
+            [attr.aria-label]="labelPrintableVersion"
+            >
+            <mat-icon class="material-icons-outlined" class="icon">print</mat-icon>
+            <ng-container i18n="@@topBar.printableVersion">
         Printable version
       </ng-container>
-    </button>
-  </div>
-</div>
-<mat-divider *ngIf="!platform.columns12"></mat-divider>
+          </button>
+        </div>
+      }
+    </div>
+    @if (!platform.columns12) {
+      <mat-divider></mat-divider>
+    }

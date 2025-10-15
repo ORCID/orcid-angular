@@ -22,7 +22,7 @@
       i18n="@@shared.saveChanges"
       id="save-names-button"
       [attr.aria-label]="saveAriaLabel"
-    >
+      >
       Save changes
     </button>
     <button
@@ -32,7 +32,7 @@
       i18n="@@shared.cancel"
       id="cancel-names-button"
       [attr.aria-label]="cancelAriaLabel"
-    >
+      >
       Cancel
     </button>
   </app-modal-footer>
@@ -44,310 +44,325 @@
           'orc-font-body': !platform.columns12,
           'orc-font-body-large': platform.columns12
         }"
-      >
+        >
         <div class="row">
           <h2 class="orc-font-body-large">
             <ng-container i18n="@@topBar.yourNames"> Your names </ng-container>
-            <span *ngIf="!platform.columns12" class="required">*</span>
+            @if (!platform.columns12) {
+              <span class="required">*</span>
+            }
           </h2>
-          <p
-            *ngIf="platform.columns12"
-            class="required-information mat-caption"
-          >
-            <span class="required">*</span>
-            <ng-container i18n="@@shared.requiredInformation"
-              >Required information</ng-container
-            >
-          </p>
+          @if (platform.columns12) {
+            <p
+              class="required-information mat-caption"
+              >
+              <span class="required">*</span>
+              <ng-container i18n="@@shared.requiredInformation"
+                >Required information</ng-container
+                >
+              </p>
+            }
+          </div>
         </div>
-      </div>
-      <hr />
-      <p
-        class="orc-font-body-small orcid-has-number"
-        i18n="@@topBar.orcidHasANumber"
-      >
+        <hr />
+        <p
+          class="orc-font-body-small orcid-has-number"
+          i18n="@@topBar.orcidHasANumber"
+          >
         ORCID has a number of options for adding and managing your names.
       </p>
-      <a
-        class="underline orc-font-body-small"
-        rel="noopener noreferrer"
-        target="_blank"
-        href="https://support.orcid.org/hc/en-us/articles/360006973853-Add-and-edit-your-name-on-your-ORCID-record"
-        i18n="@@topBar.findOutMore"
-      >
+        <a
+          class="underline orc-font-body-small"
+          rel="noopener noreferrer"
+          target="_blank"
+          href="https://support.orcid.org/hc/en-us/articles/360006973853-Add-and-edit-your-name-on-your-ORCID-record"
+          i18n="@@topBar.findOutMore"
+          >
         Find out more about managing names in your ORCID record
       </a>
-      <div class="title">
-        <h3
-          class="your-given-names orc-font-body"
-          i18n="@@topBar.yourGivenAndFamilyNames"
-        >
+        <div class="title">
+          <h3
+            class="your-given-names orc-font-body"
+            i18n="@@topBar.yourGivenAndFamilyNames"
+            >
           Your given and family names
         </h3>
-      </div>
-      <div class="row">
-        <label
-          for="given-names-input"
-          class="mat-caption"
+        </div>
+        <div class="row">
+          <label
+            for="given-names-input"
+            class="mat-caption"
           [ngClass]="{
             error: namesForm?.hasError('required', 'givenNames')
           }"
-        >
-          <strong i18n="@@topBar.givenNames">Given names</strong>
-          <span class="required">*</span>
-        </label>
-      </div>
-      <div class="input-container">
-        <mat-form-field appearance="outline" class="mat-form-field-min">
-          <input
-            id="given-names-input"
-            matInput
-            formControlName="givenNames"
-            placeholder=" {{ ngOrcidAddGivenName }}"
-            [attr.aria-label]="inputGivenNamesAriaLabel"
-          />
-          <mat-error
-            class="mat-caption"
-            *ngIf="namesForm?.get('givenNames').hasError('required')"
-            i18n="@@topBar.firstNameError"
-          >
+            >
+            <strong i18n="@@topBar.givenNames">Given names</strong>
+            <span class="required">*</span>
+          </label>
+        </div>
+        <div class="input-container">
+          <mat-form-field appearance="outline" class="mat-form-field-min">
+            <input
+              id="given-names-input"
+              matInput
+              formControlName="givenNames"
+              placeholder=" {{ ngOrcidAddGivenName }}"
+              [attr.aria-label]="inputGivenNamesAriaLabel"
+              />
+            @if (namesForm?.get('givenNames').hasError('required')) {
+              <mat-error
+                class="mat-caption"
+                i18n="@@topBar.firstNameError"
+                >
             Please enter your given names
           </mat-error>
-          <mat-error
-            *ngIf="namesForm?.get('givenNames').hasError('illegalName')"
-            i18n="@@topBar.invalidName"
-          >
+            }
+            @if (namesForm?.get('givenNames').hasError('illegalName')) {
+              <mat-error
+                i18n="@@topBar.invalidName"
+                >
             Invalid name characters or format
           </mat-error>
-          <mat-error
-            *ngIf="namesForm?.get('givenNames').hasError('maxlength')"
-            i18n="@@topBar.namesMaxLenght"
-          >
+            }
+            @if (namesForm?.get('givenNames').hasError('maxlength')) {
+              <mat-error
+                i18n="@@topBar.namesMaxLenght"
+                >
             Must be less than 100 characters
           </mat-error>
-        </mat-form-field>
-      </div>
-      <div class="row">
-        <label for="family-names-input" class="mat-caption">
-          <strong i18n="@@topBar.familyNames">Family names</strong>
-        </label>
-      </div>
-      <div class="input-container">
-        <mat-form-field appearance="outline" class="mat-form-field-min">
-          <input
-            id="family-names-input"
-            matInput
-            formControlName="familyName"
-            placeholder=" {{ ngOrcidAddFamilyName }}"
-            [attr.aria-label]="inputFamilyNamesAriaLabel"
-          />
-          <mat-error
-            class="mat-caption"
-            *ngIf="namesForm?.get('familyName').hasError('required')"
-            i18n="@@topBar.firstNameError"
-          >
+            }
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <label for="family-names-input" class="mat-caption">
+            <strong i18n="@@topBar.familyNames">Family names</strong>
+          </label>
+        </div>
+        <div class="input-container">
+          <mat-form-field appearance="outline" class="mat-form-field-min">
+            <input
+              id="family-names-input"
+              matInput
+              formControlName="familyName"
+              placeholder=" {{ ngOrcidAddFamilyName }}"
+              [attr.aria-label]="inputFamilyNamesAriaLabel"
+              />
+            @if (namesForm?.get('familyName').hasError('required')) {
+              <mat-error
+                class="mat-caption"
+                i18n="@@topBar.firstNameError"
+                >
             Please enter your given names
           </mat-error>
-          <mat-error
-            *ngIf="namesForm?.get('familyName').hasError('illegalName')"
-            i18n="@@topBar.invalidName"
-          >
+            }
+            @if (namesForm?.get('familyName').hasError('illegalName')) {
+              <mat-error
+                i18n="@@topBar.invalidName"
+                >
             Invalid name characters or format
           </mat-error>
-          <mat-error
-            *ngIf="namesForm?.get('familyName').hasError('maxlength')"
-            i18n="@@topBar.namesMaxLenght"
-          >
+            }
+            @if (namesForm?.get('familyName').hasError('maxlength')) {
+              <mat-error
+                i18n="@@topBar.namesMaxLenght"
+                >
             Must be less than 100 characters
           </mat-error>
-        </mat-form-field>
-      </div>
-      <div id="published-name" class="title">
-        <h3 class="orc-font-body" i18n="@@topBar.yourPublishedName">
+            }
+          </mat-form-field>
+        </div>
+        <div id="published-name" class="title">
+          <h3 class="orc-font-body" i18n="@@topBar.yourPublishedName">
           Your published name
         </h3>
-      </div>
-      <p class="orc-font-body-small" i18n="@@topBar.howYouPreferYourName">
+        </div>
+        <p class="orc-font-body-small" i18n="@@topBar.howYouPreferYourName">
         How you prefer your name to appear when credited. Adding a published
         name lets you control how your name is displayed in your ORCID record.
       </p>
-      <div class="row">
-        <label for="published-names-input" class="mat-caption">
-          <strong i18n="@@topBar.publishedName">Published name</strong>
-        </label>
-      </div>
-      <div class="input-container">
-        <mat-form-field appearance="outline" class="mat-form-field-min">
-          <input
-            id="published-names-input"
-            matInput
-            formControlName="publishedName"
-            placeholder=" {{ ngOrcidAddPublishedName }}"
-            [attr.aria-label]="inputPublishedNamesAriaLabel"
-          />
-          <mat-error
-            *ngIf="namesForm?.get('publishedName').hasError('maxlength')"
-            i18n="@@topBar.namesMaxLenght"
-          >
+        <div class="row">
+          <label for="published-names-input" class="mat-caption">
+            <strong i18n="@@topBar.publishedName">Published name</strong>
+          </label>
+        </div>
+        <div class="input-container">
+          <mat-form-field appearance="outline" class="mat-form-field-min">
+            <input
+              id="published-names-input"
+              matInput
+              formControlName="publishedName"
+              placeholder=" {{ ngOrcidAddPublishedName }}"
+              [attr.aria-label]="inputPublishedNamesAriaLabel"
+              />
+            @if (namesForm?.get('publishedName').hasError('maxlength')) {
+              <mat-error
+                i18n="@@topBar.namesMaxLenght"
+                >
             Must be less than 100 characters
           </mat-error>
-        </mat-form-field>
-      </div>
-      <div id="visibility" class="title">
-        <h3 class="orc-font-body" i18n="@@topBar.whoCanSeeYourNames">
+            }
+          </mat-form-field>
+        </div>
+        <div id="visibility" class="title">
+          <h3 class="orc-font-body" i18n="@@topBar.whoCanSeeYourNames">
           Who can see your names
         </h3>
-      </div>
-      <p class="orc-font-body-small">
-        {{ ngOrcidDefaultVisibilityLabel }}
-        <strong>{{ publicVisibility | visibilityStringLabel }}</strong
-        >.
-      </p>
-      <div class="row names-visibility">
-        <div class="col no-wrap actions-wrapper no-gutters">
-          <app-visibility-selector
-            formControlName="visibility"
-            [ariaLabelPrivate]="visibilityOtherNamesPrivateAriaLabel"
-            [ariaLabelPublic]="visibilityOtherNamesPublicAriaLabel"
-            [ariaLabelTrustedParty]="visibilityOtherNamesTrustedPartyAriaLabel"
-            [itemTitle]="ariaLabelYourNames"
-          ></app-visibility-selector>
         </div>
-      </div>
-    </section>
-    <section id="also-known-as">
-      <div class="title">
-        <h2
+        <p class="orc-font-body-small">
+          {{ ngOrcidDefaultVisibilityLabel }}
+          <strong>{{ publicVisibility | visibilityStringLabel }}</strong
+            >.
+          </p>
+          <div class="row names-visibility">
+            <div class="col no-wrap actions-wrapper no-gutters">
+              <app-visibility-selector
+                formControlName="visibility"
+                [ariaLabelPrivate]="visibilityOtherNamesPrivateAriaLabel"
+                [ariaLabelPublic]="visibilityOtherNamesPublicAriaLabel"
+                [ariaLabelTrustedParty]="visibilityOtherNamesTrustedPartyAriaLabel"
+                [itemTitle]="ariaLabelYourNames"
+              ></app-visibility-selector>
+            </div>
+          </div>
+        </section>
+        <section id="also-known-as">
+          <div class="title">
+            <h2
           [ngClass]="{
             'orc-font-body': !platform.columns12,
             'orc-font-body-large': platform.columns12
           }"
-          i18n="@@topBar.alsoKnowAs"
-        >
+              i18n="@@topBar.alsoKnowAs"
+              >
           Also known as
         </h2>
-      </div>
-      <hr />
-      <p class="orc-font-body-small" i18n="@@topBar.addOtherNames">
+          </div>
+          <hr />
+          <p class="orc-font-body-small" i18n="@@topBar.addOtherNames">
         Add other names you may be known by. These can include abbreviated
         names, middle names, former names or names in a different character set
         or language. Adding other names can help people find your record when
         they search the ORCID registry.
       </p>
-      <ng-container *ngIf="otherNames?.length > 0">
-        <div
-          class="row other-names-list"
-          id="otherName-dropList"
-          cdkDropList
-          (cdkDropListDropped)="drop($event)"
-        >
-          <div
-            cdkDrag
-            class="row other-names-box"
-            [formGroupName]="otherName.putCode"
-            *ngFor="let otherName of otherNames"
-          >
-            <div class="row drag-placeholder" *cdkDragPlaceholder></div>
+          @if (otherNames?.length > 0) {
             <div
-              class="row other-names-input-line"
-              [ngClass]="{ 'no-wrap': !isMobile }"
-            >
-              <div class="col l12 m8 s4 top no-wrap no-gutters input-container">
-                <img
-                  class="icon-drag"
-                  cdkDragHandle
-                  src="./assets/vectors/draggable.svg"
-                  role="none"
-                />
-                <mat-form-field appearance="outline" class="three-line-hint">
-                  <input
-                    id="alternative-names-input"
-                    #nameInput
-                    matInput
-                    formControlName="otherName"
-                    placeholder="{{ ngOrcidAddOtherName }}"
-                    [attr.aria-label]="inputAlsoKnownAsAriaLabel"
-                  />
-                  <mat-hint
-                    class="mat-caption"
-                    *ngIf="otherName.putCode.indexOf('new') < 0"
+              class="row other-names-list"
+              id="otherName-dropList"
+              cdkDropList
+              (cdkDropListDropped)="drop($event)"
+              >
+              @for (otherName of otherNames; track otherName) {
+                <div
+                  cdkDrag
+                  class="row other-names-box"
+                  [formGroupName]="otherName.putCode"
                   >
-                    <app-source-hit
-                      [createdDate]="otherName.createdDate"
-                      [source]="otherName.sourceName || otherName.source"
+                  <div class="row drag-placeholder" *cdkDragPlaceholder></div>
+                  <div
+                    class="row other-names-input-line"
+                    [ngClass]="{ 'no-wrap': !isMobile }"
+                    >
+                    <div class="col l12 m8 s4 top no-wrap no-gutters input-container">
+                      <img
+                        class="icon-drag"
+                        cdkDragHandle
+                        src="./assets/vectors/draggable.svg"
+                        role="none"
+                        />
+                      <mat-form-field appearance="outline" class="three-line-hint">
+                        <input
+                          id="alternative-names-input"
+                          #nameInput
+                          matInput
+                          formControlName="otherName"
+                          placeholder="{{ ngOrcidAddOtherName }}"
+                          [attr.aria-label]="inputAlsoKnownAsAriaLabel"
+                          />
+                        @if (otherName.putCode.indexOf('new') < 0) {
+                          <mat-hint
+                            class="mat-caption"
+                            >
+                            <app-source-hit
+                              [createdDate]="otherName.createdDate"
+                              [source]="otherName.sourceName || otherName.source"
                       [assertion]="
                         otherName.assertionOriginName ||
                         otherName.assertionOriginOrcid
                       "
-                    ></app-source-hit>
-                  </mat-hint>
-                  <mat-error
-                    *ngIf="
-                      namesForm.hasError('maxlength', [
-                        otherName.putCode,
-                        'otherName'
-                      ])
-                    "
-                    i18n="@@topBar.otherNamesMaxLenght"
-                  >
+                            ></app-source-hit>
+                          </mat-hint>
+                        }
+                        @if (
+                          namesForm.hasError('maxlength', [
+                          otherName.putCode,
+                          'otherName'
+                          ])
+                          ) {
+                          <mat-error
+                            i18n="@@topBar.otherNamesMaxLenght"
+                            >
                     Must be less than 255 characters
                   </mat-error>
-                </mat-form-field>
-              </div>
-              <div
-                class="col no-wrap actions-wrapper no-gutters actions-wrapper-last"
-                [ngClass]="{ privacy: !platform.columns12 }"
-              >
-                <app-visibility-selector
-                  [ngClass]="{ selector: !platform.columns12 }"
-                  formControlName="visibility"
-                  [ariaLabelPrivate]="visibilityNamesPrivateAriaLabel"
-                  [ariaLabelPublic]="visibilityNamesPublicAriaLabel"
-                  [ariaLabelTrustedParty]="visibilityNamesTrustedPartyAriaLabel"
-                  [itemTitle]="otherName.content"
-                ></app-visibility-selector>
-                <button
-                  id="delete-button"
-                  (click)="deleteOtherName(otherName.putCode)"
-                  mat-icon-button
-                  [attr.aria-label]="deleteOtherNameAriaLabel"
-                >
-                  <mat-icon
-                    class="material-icons-outlined extra-large-material-icon"
-                    >delete
-                  </mat-icon>
-                </button>
-              </div>
+                        }
+                      </mat-form-field>
+                    </div>
+                    <div
+                      class="col no-wrap actions-wrapper no-gutters actions-wrapper-last"
+                      [ngClass]="{ privacy: !platform.columns12 }"
+                      >
+                      <app-visibility-selector
+                        [ngClass]="{ selector: !platform.columns12 }"
+                        formControlName="visibility"
+                        [ariaLabelPrivate]="visibilityNamesPrivateAriaLabel"
+                        [ariaLabelPublic]="visibilityNamesPublicAriaLabel"
+                        [ariaLabelTrustedParty]="visibilityNamesTrustedPartyAriaLabel"
+                        [itemTitle]="otherName.content"
+                      ></app-visibility-selector>
+                      <button
+                        id="delete-button"
+                        (click)="deleteOtherName(otherName.putCode)"
+                        mat-icon-button
+                        [attr.aria-label]="deleteOtherNameAriaLabel"
+                        >
+                        <mat-icon
+                          class="material-icons-outlined extra-large-material-icon"
+                          >delete
+                        </mat-icon>
+                      </button>
+                    </div>
+                  </div>
+                  <hr class="dashed-line" />
+                </div>
+              }
             </div>
-            <hr class="dashed-line" />
-          </div>
-        </div>
-      </ng-container>
-      <div class="row">
-        <a
-          role="button"
-          id="add-link"
-          class="col add-more no-gutters"
-          (click)="addOtherName()"
-          tabindex="0"
-        >
-          <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
-          <span class="mat-subtitle-2">
-            <ng-container
-              *ngIf="otherNames?.length === 0"
-              i18n="@@topBar.addOtherName"
-            >
+          }
+          <div class="row">
+            <a
+              role="button"
+              id="add-link"
+              class="col add-more no-gutters"
+              (click)="addOtherName()"
+              tabindex="0"
+              >
+              <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
+              <span class="mat-subtitle-2">
+                @if (otherNames?.length === 0) {
+                  <ng-container
+                    i18n="@@topBar.addOtherName"
+                    >
               Add other name
             </ng-container>
-            <ng-container
-              *ngIf="otherNames?.length !== 0"
-              i18n="@@topBar.addAnotherName"
-            >
+                }
+                @if (otherNames?.length !== 0) {
+                  <ng-container
+                    i18n="@@topBar.addAnotherName"
+                    >
               Add another name
             </ng-container>
-          </span>
-        </a>
-      </div>
-    </section>
-  </form>
-</app-modal>
+                }
+              </span>
+            </a>
+          </div>
+        </section>
+      </form>
+    </app-modal>

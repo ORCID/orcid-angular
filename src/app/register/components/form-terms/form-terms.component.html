@@ -1,66 +1,67 @@
 <h3 class="orc-font-body" i18n="@@register.termsOfUse">Terms of Use</h3>
-<mat-error
-  *ngIf="
-    this.nextButtonWasClicked &&
-    (form.hasError('required', 'termsOfUse') ||
-      form.hasError('required', 'dataProcessed'))
-  "
-  i18n="@@register.youMustAccept2"
-  >You must accept the terms of use and consent to your data being processed in
+@if (
+  this.nextButtonWasClicked &&
+  (form.hasError('required', 'termsOfUse') ||
+  form.hasError('required', 'dataProcessed'))
+  ) {
+  <mat-error
+    i18n="@@register.youMustAccept2"
+    >You must accept the terms of use and consent to your data being processed in
   the United States</mat-error
->
-
-<ng-container [formGroup]="form">
-  <mat-checkbox
-    id="privacy-input"
-    class="orcid-checkbox-baseline"
-    color="primary"
-    formControlName="termsOfUse"
-    ><ng-container i18n="@@register.consentTo">I consent to the</ng-container>
-    <a
-      href="{{ environment.INFO_SITE + 'privacy-policy' }}"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="mat-button-font"
-      i18n="@@register.privacyPolicy"
     >
+  }
+
+  <ng-container [formGroup]="form">
+    <mat-checkbox
+      id="privacy-input"
+      class="orcid-checkbox-baseline"
+      color="primary"
+      formControlName="termsOfUse"
+      ><ng-container i18n="@@register.consentTo">I consent to the</ng-container>
+      <a
+        href="{{ environment.INFO_SITE + 'privacy-policy' }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mat-button-font"
+        i18n="@@register.privacyPolicy"
+        >
       privacy policy
     </a>
-    <ng-container i18n="@@register.and">and</ng-container>
-    <a
-      href="{{ environment.INFO_SITE + 'content/orcid-terms-use' }}"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="mat-button-font"
-      i18n="@@register.termsOfUse2"
-    >
+      <ng-container i18n="@@register.and">and</ng-container>
+      <a
+        href="{{ environment.INFO_SITE + 'content/orcid-terms-use' }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mat-button-font"
+        i18n="@@register.termsOfUse2"
+        >
       terms of use
     </a>
-    <ng-container i18n="@@register.agree2"
-      >and agree to my data being publicly accessible where marked as “Visible
+      <ng-container i18n="@@register.agree2"
+        >and agree to my data being publicly accessible where marked as “Visible
       to Everyone”.</ng-container
-    >
-  </mat-checkbox>
-  <mat-checkbox
-    id="data-processed-input"
-    class="orcid-checkbox-baseline"
-    color="primary"
-    formControlName="dataProcessed"
-  >
-    <ng-container i18n="@@register.dataProcessed">
+        >
+      </mat-checkbox>
+      <mat-checkbox
+        id="data-processed-input"
+        class="orcid-checkbox-baseline"
+        color="primary"
+        formControlName="dataProcessed"
+        >
+        <ng-container i18n="@@register.dataProcessed">
       I consent to my data being processed in the United States.
     </ng-container>
-    <a
+        <a
       href="{{
         environment.INFO_SITE +
           'privacy-policy/#8-data-storage-and-international-transfers'
       }}"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="mat-button-font no-margin-top"
-      i18n="@@register.moreInformation"
-    >
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mat-button-font no-margin-top"
+          i18n="@@register.moreInformation"
+          >
       More information on how ORCID process your data.
     </a>
-  </mat-checkbox>
-</ng-container>
+      </mat-checkbox>
+    </ng-container>

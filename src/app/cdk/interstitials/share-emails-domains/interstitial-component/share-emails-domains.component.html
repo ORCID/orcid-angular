@@ -1,4 +1,4 @@
-<ng-container *ngIf="beforeSummit">
+@if (beforeSummit) {
   <mat-card-header class="authorize-header">
     <mat-card-title role="heading" aria-level="1">
       <mat-icon class="logo-icon"
@@ -40,21 +40,16 @@
 
     <form [formGroup]="form">
       <div formArrayName="items" class="items">
-        <div
-          *ngFor="
-            let item of this.form?.controls?.items?.controls;
-            let i = index;
-            let last = last
-          "
-          [formGroupName]="i"
-        >
-          <div class="checkbox-wrapper">
-            <mat-checkbox formControlName="selected">
-              {{ item.get('email').value }}
-            </mat-checkbox>
-            <mat-divider [ngClass]="{ last: last }"></mat-divider>
+        @for (item of this.form?.controls?.items?.controls; track $index; let i = $index; let last = $last) {
+          <div [formGroupName]="i">
+            <div class="checkbox-wrapper">
+              <mat-checkbox formControlName="selected">
+                {{ item.get('email').value }}
+              </mat-checkbox>
+              <mat-divider [ngClass]="{ last: last }"></mat-divider>
+            </div>
           </div>
-        </div>
+        }
       </div>
     </form>
 
@@ -83,8 +78,8 @@
       <img src="/assets/vectors/orcid.logo.black.icon.svg" alt=""
     /></mat-icon>
   </ng-template>
-</ng-container>
-<ng-container *ngIf="afterSummitStatus">
+}
+@if (afterSummitStatus) {
   <mat-card-header class="authorize-header">
     <mat-card-title role="heading" aria-level="1">
       <mat-icon class="logo-icon"
@@ -145,4 +140,4 @@
       <img src="/assets/vectors/orcid.logo.black.icon.svg" alt=""
     /></mat-icon>
   </ng-template>
-</ng-container>
+}

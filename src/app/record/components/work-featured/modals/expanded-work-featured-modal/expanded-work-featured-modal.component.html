@@ -3,7 +3,7 @@
   [noSidebar]="true"
   [loading]="loading"
   class="orc-font-body-small"
->
+  >
   <app-modal-header [closeLabel]="closeLabel">
     <div class="header">
       <div class="featured-works-star">
@@ -16,28 +16,28 @@
   <app-modal-title [featured]="true">{{ work?.title?.value }}</app-modal-title>
   <div class="body">
     <div class="summary">
-      <div *ngIf="work?.journalTitle">
-        {{ work.journalTitle.value }}
-      </div>
+      @if (work?.journalTitle) {
+        <div>
+          {{ work.journalTitle.value }}
+        </div>
+      }
       <div>
-        <ng-container *ngIf="work?.publicationDate?.year"
-          >{{ work.publicationDate | monthDayYearDateToString }}
+        @if (work?.publicationDate?.year) {
+          {{ work.publicationDate | monthDayYearDateToString }}
           |
-        </ng-container>
+        }
         {{ work?.workType?.value | recordWorkTypeLabel }}
-        <ng-container
-          *ngIf="
-            work?.contributorsGroupedByOrcid
-              | recordHolderRoles
-                : 'true'
-                : userRecord?.userInfo?.EFFECTIVE_USER_ORCID as roles
-          "
-        >
-          <ng-container *ngIf="roles">
+        @if (
+          work?.contributorsGroupedByOrcid
+          | recordHolderRoles
+          : 'true'
+          : userRecord?.userInfo?.EFFECTIVE_USER_ORCID; as roles
+          ) {
+          @if (roles) {
             |
             <span class="record-holder">{{ roles }}</span>
-          </ng-container>
-        </ng-container>
+          }
+        }
       </div>
       <app-display-external-ids
         [externalIdentifiers]="work?.workExternalIdentifiers"

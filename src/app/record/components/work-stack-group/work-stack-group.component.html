@@ -1,222 +1,233 @@
-<section
-  id="works"
-  role="region"
-  [attr.aria-label]="regionWorks"
-  *ngIf="
-    workGroup?.groups && !(isPublicRecord && workGroup?.groups?.length === 0)
-  "
->
-  <app-panels
-    [userRecord]="userRecord"
-    class="row"
-    [title]="works"
-    [currentAmount]="workGroup.groups.length"
-    [total]="workGroup.totalGroups"
-    [isPublicRecord]="isPublicRecord"
-    [(expandedContent)]="expandedContent['WORK']"
-    (expandedContentChange)="expandedContentChange.emit(expandedContent)"
-    [sortTypes]="sortTypes"
-    [sortType]="'date'"
-    [addMenuOptions]="addMenuOptions"
-    (sort)="sortEvent($event)"
-    [type]="'works'"
-    id="cy-works-panels"
-  >
-    <mat-progress-bar
-      mode="indeterminate"
-      *ngIf="paginationLoading"
-    ></mat-progress-bar>
-    <mat-paginator
-      *ngIf="
+@if (
+  workGroup?.groups && !(isPublicRecord && workGroup?.groups?.length === 0)
+  ) {
+  <section
+    id="works"
+    role="region"
+    [attr.aria-label]="regionWorks"
+    >
+    <app-panels
+      [userRecord]="userRecord"
+      class="row"
+      [title]="works"
+      [currentAmount]="workGroup.groups.length"
+      [total]="workGroup.totalGroups"
+      [isPublicRecord]="isPublicRecord"
+      [(expandedContent)]="expandedContent['WORK']"
+      (expandedContentChange)="expandedContentChange.emit(expandedContent)"
+      [sortTypes]="sortTypes"
+      [sortType]="'date'"
+      [addMenuOptions]="addMenuOptions"
+      (sort)="sortEvent($event)"
+      [type]="'works'"
+      id="cy-works-panels"
+      >
+      @if (paginationLoading) {
+        <mat-progress-bar
+          mode="indeterminate"
+        ></mat-progress-bar>
+      }
+      @if (
         workGroup.totalGroups > workGroup.groups.length ||
         this.paginationPageSize != defaultPageSize
-      "
-      [length]="paginationTotalAmountOfWorks"
-      [pageSize]="paginationPageSize"
-      [pageSizeOptions]="[10, 50, 100]"
-      [pageIndex]="paginationIndex"
-      (page)="pageEvent($event)"
-      [disabled]="paginationLoading"
-    >
-    </mat-paginator>
-
-    <ng-container *ngIf="workGroup.groups.length > 0 && !paginationLoading">
-      <div
-        class="row works-buttons orc-font-body-small"
-        *ngIf="!isPublicRecord"
-      >
-        <div class="select-all">
-          <p>
-            <mat-checkbox
-              [aria-label]="labelSelectAll"
-              (change)="checked($event)"
-              [(ngModel)]="selectAll"
-              [ngModelOptions]="{ standalone: true }"
-            >
-              <ng-container i18n="@@shared.selectAll">Select all </ng-container>
-              ({{ workGroup.groups.length }})
-            </mat-checkbox>
-          </p>
-        </div>
-        <div class="items-selected">
-          <p>
-            <ng-container i18n="@@shared.itemsCurrentlySelected"
-              >Items currently selected
-            </ng-container>
-            ({{ selectedWorks.length }})
-          </p>
-        </div>
-        <div class="controls">
-          <button
-            mat-button
-            class="orc-font-body-small"
-            [attr.aria-label]="labelActionsButton"
-            [matMenuTriggerFor]="menu"
+        ) {
+        <mat-paginator
+          [length]="paginationTotalAmountOfWorks"
+          [pageSize]="paginationPageSize"
+          [pageSizeOptions]="[10, 50, 100]"
+          [pageIndex]="paginationIndex"
+          (page)="pageEvent($event)"
+          [disabled]="paginationLoading"
           >
-            <span class="action" i18n="@@shared.actions"> Actions </span>
-            <mat-icon class="large-material-icon">arrow_drop_down</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu" class="menu-buttons">
-            <button
-              mat-menu-item
-              (click)="export()"
-              [disabled]="selectedWorks.length === 0"
+        </mat-paginator>
+      }
+      @if (workGroup.groups.length > 0 && !paginationLoading) {
+        @if (!isPublicRecord) {
+          <div
+            class="row works-buttons orc-font-body-small"
             >
-              <mat-icon>file_download</mat-icon>
-              <span>
-                <ng-container i18n="@@works.exportSelectedWorks"
-                  >Export selected works</ng-container
-                >&nbsp;({{ selectedWorks.length }})
-              </span>
-            </button>
-            <button mat-menu-item (click)="exportAllWorks()">
-              <mat-icon>file_download</mat-icon>
-              <span>
-                <ng-container i18n="@@works.exportAllWorks"
-                  >Export ALL works</ng-container
+            <div class="select-all">
+              <p>
+                <mat-checkbox
+                  [aria-label]="labelSelectAll"
+                  (change)="checked($event)"
+                  [(ngModel)]="selectAll"
+                  [ngModelOptions]="{ standalone: true }"
+                  >
+                  <ng-container i18n="@@shared.selectAll">Select all </ng-container>
+                  ({{ workGroup.groups.length }})
+                </mat-checkbox>
+              </p>
+            </div>
+            <div class="items-selected">
+              <p>
+                <ng-container i18n="@@shared.itemsCurrentlySelected"
+                  >Items currently selected
+            </ng-container>
+                ({{ selectedWorks.length }})
+              </p>
+            </div>
+            <div class="controls">
+              <button
+                mat-button
+                class="orc-font-body-small"
+                [attr.aria-label]="labelActionsButton"
+                [matMenuTriggerFor]="menu"
                 >
-                ({{ this.workGroup.totalGroups }})
-              </span>
-            </button>
-            <button
-              mat-menu-item
-              (click)="combine()"
+                <span class="action" i18n="@@shared.actions"> Actions </span>
+                <mat-icon class="large-material-icon">arrow_drop_down</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu" class="menu-buttons">
+                <button
+                  mat-menu-item
+                  (click)="export()"
+                  [disabled]="selectedWorks.length === 0"
+                  >
+                  <mat-icon>file_download</mat-icon>
+                  <span>
+                    <ng-container i18n="@@works.exportSelectedWorks"
+                      >Export selected works</ng-container
+                      >&nbsp;({{ selectedWorks.length }})
+                    </span>
+                  </button>
+                  <button mat-menu-item (click)="exportAllWorks()">
+                    <mat-icon>file_download</mat-icon>
+                    <span>
+                      <ng-container i18n="@@works.exportAllWorks"
+                        >Export ALL works</ng-container
+                        >
+                        ({{ this.workGroup.totalGroups }})
+                      </span>
+                    </button>
+                    <button
+                      mat-menu-item
+                      (click)="combine()"
               [disabled]="
                 selectedWorks.length === 0 || selectedWorks.length > 5
               "
-            >
-              <div>
-                <mat-icon *ngIf="selectedWorks.length <= 5"
-                  >merge_type</mat-icon
-                >
-                <mat-icon class="error-icon" *ngIf="selectedWorks.length > 5"
-                  >error_outline</mat-icon
-                >
-              </div>
-              <div>
-                <div
+                      >
+                      <div>
+                        @if (selectedWorks.length <= 5) {
+                          <mat-icon
+                            >merge_type</mat-icon
+                            >
+                          }
+                          @if (selectedWorks.length > 5) {
+                            <mat-icon class="error-icon"
+                              >error_outline</mat-icon
+                              >
+                            }
+                          </div>
+                          <div>
+                            <div
                   [ngClass]="{
                     'group-selected-works-label': selectedWorks.length > 5
                   }"
-                >
-                  <ng-container i18n="@@works.groupSelectedWorks"
-                    >Group selected works</ng-container
-                  >&nbsp;({{ selectedWorks.length }})
-                </div>
-                <div
-                  class="orc-font-small-print"
-                  *ngIf="selectedWorks.length > 5"
-                >
-                  <ng-container i18n="@@works.fiveWorksMax"
-                    >5 works maximum,</ng-container
-                  >
-                  {{ selectedWorks.length }}
-                  <ng-container i18n="@@works.selected">selected</ng-container>
-                </div>
-              </div>
-            </button>
-            <button
-              mat-menu-item
-              (click)="visibility()"
-              [disabled]="selectedWorks.length === 0"
-            >
-              <mat-icon class="visibilityIconSize">visibility</mat-icon>
-              <span i18n="@@works.setVisibilityForSelectedWorks"
-                >Set visibility for selected works</span
-              >&nbsp;({{ selectedWorks.length }})
-            </button>
-            <button
-              mat-menu-item
-              (click)="delete()"
-              [disabled]="selectedWorks.length === 0"
+                              >
+                              <ng-container i18n="@@works.groupSelectedWorks"
+                                >Group selected works</ng-container
+                                >&nbsp;({{ selectedWorks.length }})
+                              </div>
+                              @if (selectedWorks.length > 5) {
+                                <div
+                                  class="orc-font-small-print"
+                                  >
+                                  <ng-container i18n="@@works.fiveWorksMax"
+                                    >5 works maximum,</ng-container
+                                    >
+                                    {{ selectedWorks.length }}
+                                    <ng-container i18n="@@works.selected">selected</ng-container>
+                                  </div>
+                                }
+                              </div>
+                            </button>
+                            <button
+                              mat-menu-item
+                              (click)="visibility()"
+                              [disabled]="selectedWorks.length === 0"
+                              >
+                              <mat-icon class="visibilityIconSize">visibility</mat-icon>
+                              <span i18n="@@works.setVisibilityForSelectedWorks"
+                                >Set visibility for selected works</span
+                                >&nbsp;({{ selectedWorks.length }})
+                              </button>
+                              <button
+                                mat-menu-item
+                                (click)="delete()"
+                                [disabled]="selectedWorks.length === 0"
               [ngClass]="{
                 'delete-selected-works': selectedWorks.length > 0,
                 'delete-selected-works-disabled': selectedWorks.length === 0
               }"
-            >
-              <mat-icon>delete_outline</mat-icon>
-              <span i18n="@@works.deleteSelectedWorks"
-                >Delete selected works</span
-              >&nbsp;({{ selectedWorks.length }})
-            </button>
-          </mat-menu>
-          <button
-            mat-raised-button
-            color="primary"
-            *ngIf="combineSuggestion?.suggestions?.length"
-            (click)="openManageSimilarWorksModal()"
-            class="text-align-center"
-            i18n="@@works.manageSimilarWorks"
-          >
+                                >
+                                <mat-icon>delete_outline</mat-icon>
+                                <span i18n="@@works.deleteSelectedWorks"
+                                  >Delete selected works</span
+                                  >&nbsp;({{ selectedWorks.length }})
+                                </button>
+                              </mat-menu>
+                              @if (combineSuggestion?.suggestions?.length) {
+                                <button
+                                  mat-raised-button
+                                  color="primary"
+                                  (click)="openManageSimilarWorksModal()"
+                                  class="text-align-center"
+                                  i18n="@@works.manageSimilarWorks"
+                                  >
             Manage similar works
           </button>
-        </div>
-      </div>
-
-      <app-work-stack
-        [userRecord]="userRecord"
-        [isPublicRecord]="isPublicRecord"
-        *ngFor="let group of workGroup.groups; trackBy: trackByWorkGroup"
-        [workStack]="group"
-        [userInfo]="userInfo"
-        [selectAll]="selectAll"
-        (checkboxChangeWorkStackOutput)="checkboxChangeWorkStackGroup($event)"
-        #appWorkStacks
-      ></app-work-stack>
-    </ng-container>
-    <ng-container *ngIf="workGroup.groups.length === 0">
-      <div class="orc-font-body-small">
-        <p class="empty" i18n="@@shared.worksDescription">
+                              }
+                            </div>
+                          </div>
+                        }
+                        @for (group of workGroup.groups; track trackByWorkGroup($index, group)) {
+                          <app-work-stack
+                            [userRecord]="userRecord"
+                            [isPublicRecord]="isPublicRecord"
+                            [workStack]="group"
+                            [userInfo]="userInfo"
+                            [selectAll]="selectAll"
+                            (checkboxChangeWorkStackOutput)="checkboxChangeWorkStackGroup($event)"
+                            #appWorkStacks
+                          ></app-work-stack>
+                        }
+                      }
+                      @if (workGroup.groups.length === 0) {
+                        <div class="orc-font-body-small">
+                          <p class="empty" i18n="@@shared.worksDescription">
           Add your research outputs such as publications, data sets, conference
           presentations and more.
         </p>
-        <a
-          class="underline"
-          rel="noopener noreferrer"
-          target="_blank"
-          href="https://support.orcid.org/hc/en-us/articles/360006973133"
-          i18n="@@shared.worksLearnMore"
-        >
+                          <a
+                            class="underline"
+                            rel="noopener noreferrer"
+                            target="_blank"
+                            href="https://support.orcid.org/hc/en-us/articles/360006973133"
+                            i18n="@@shared.worksLearnMore"
+                            >
           Learn more about adding works to your ORCID record
         </a>
-      </div>
-    </ng-container>
-    <mat-paginator
-      *ngIf="
-        workGroup.totalGroups > workGroup.groups.length ||
-        paginationPageSize !== defaultPageSize
-      "
-      [length]="paginationTotalAmountOfWorks"
-      [pageSize]="paginationPageSize"
-      [pageSizeOptions]="[10, 50, 100]"
-      [pageIndex]="paginationIndex"
-      (page)="pageEvent($event)"
-      [disabled]="paginationLoading"
-    >
-    </mat-paginator>
-    <mat-progress-bar
-      mode="indeterminate"
-      *ngIf="paginationLoading"
-    ></mat-progress-bar>
-  </app-panels>
-</section>
+                        </div>
+                      }
+                      @if (
+                        workGroup.totalGroups > workGroup.groups.length ||
+                        paginationPageSize !== defaultPageSize
+                        ) {
+                        <mat-paginator
+                          [length]="paginationTotalAmountOfWorks"
+                          [pageSize]="paginationPageSize"
+                          [pageSizeOptions]="[10, 50, 100]"
+                          [pageIndex]="paginationIndex"
+                          (page)="pageEvent($event)"
+                          [disabled]="paginationLoading"
+                          >
+                        </mat-paginator>
+                      }
+                      @if (paginationLoading) {
+                        <mat-progress-bar
+                          mode="indeterminate"
+                        ></mat-progress-bar>
+                      }
+                    </app-panels>
+                  </section>
+                }

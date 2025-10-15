@@ -1,75 +1,72 @@
-<ng-container
-  *ngFor="
-    let work of workStack?.works;
-    trackBy: trackByWorkStack;
-    let i = index;
-    let last = last
-  "
->
+@for (
+  work of workStack?.works; track trackByWorkStack(i,
+  work); let i = $index; let last = $last) {
   <!-- A PANEL COMPONENT FOR EACH WORK ON THE STACK -->
-  <app-panel
-    panelId="work-stack"
-    [editableVisibilityControl]="isPreferred(work)"
-    [stackSiblings]="workStack.works"
-    [userRecord]="userRecord"
-    [elements]="work"
-    [ngStyle]="{ 'z-index': workStack.works.length - i }"
-    [ngClass]="{ last: last }"
-    [defaultPutCode]="workStack.defaultPutCode.toString()"
-    [putCode]="work.putCode.value"
+  @if (isPreferred(work) || displayTheStack) {
+    <app-panel
+      panelId="work-stack"
+      [editableVisibilityControl]="isPreferred(work)"
+      [stackSiblings]="workStack.works"
+      [userRecord]="userRecord"
+      [elements]="work"
+      [ngStyle]="{ 'z-index': workStack.works.length - i }"
+      [ngClass]="{ last: last }"
+      [defaultPutCode]="workStack.defaultPutCode.toString()"
+      [putCode]="work.putCode.value"
     [visibility]="
       isPreferred(work)
         ? workStack.activeVisibility
         : work.visibility.visibility
     "
-    *ngIf="isPreferred(work) || displayTheStack"
-    [isPublicRecord]="isPublicRecord"
-    [editModalComponent]="worksModal"
-    [selectable]="true"
-    [selectAll]="selectAll"
-    [isUserSource]="userIsSource(work)"
-    [hasExternalIds]="hasExternalIds"
-    [userVersionPresent]="workStack.userVersionPresent"
-    [(displayTheStack)]="displayTheStack"
-    (checkboxChangePanel)="checkboxChangeWorkStack($event)"
-    [visibilityError]="workStack.visibilityError"
-    #panelsComponent
-    [type]="'works'"
-    [isFeatured]="work.featuredDisplayIndex > 0"
-    [panelTitle]="work.title.value"
-    [isPreferred]="isPreferred(work)"
-  >
-    <h4 header class="work-title orc-font-body">{{ work.title.value }}</h4>
-    <!-- WORK BODY -->
-    <app-work
-      *ngIf="stackPanelsDisplay[work.putCode.value].topPanelOfTheStack"
-      [work]="work"
-      [panelDetailsState]="panelDetailsState[work.putCode.value]"
-      [id]="userInfo?.EFFECTIVE_USER_ORCID"
       [isPublicRecord]="isPublicRecord"
-      (toggleDetails)="toggleDetails($event)"
-    >
-    </app-work>
-    <!-- WORK SOURCE -->
-    <app-panel-source
-      [userRecord]="userRecord"
-      [isPreferred]="isPreferred(work)"
-      [sourceName]="work.sourceName || work.source"
-      [assertionOriginName]="work.assertionOriginName"
-      [assertionOriginClientId]="work.assertionOriginClientId"
-      [assertionOriginOrcid]="work.assertionOriginOrcid"
-      [stackLength]="workStack.works.length"
+      [editModalComponent]="worksModal"
+      [selectable]="true"
+      [selectAll]="selectAll"
+      [isUserSource]="userIsSource(work)"
+      [hasExternalIds]="hasExternalIds"
+      [userVersionPresent]="workStack.userVersionPresent"
       [(displayTheStack)]="displayTheStack"
-      (makePrimary)="makePrimaryCard(work)"
+      (checkboxChangePanel)="checkboxChangeWorkStack($event)"
+      [visibilityError]="workStack.visibilityError"
+      #panelsComponent
+      [type]="'works'"
+      [isFeatured]="work.featuredDisplayIndex > 0"
+      [panelTitle]="work.title.value"
+      [isPreferred]="isPreferred(work)"
+      >
+      <h4 header class="work-title orc-font-body">{{ work.title.value }}</h4>
+      <!-- WORK BODY -->
+      @if (stackPanelsDisplay[work.putCode.value].topPanelOfTheStack) {
+        <app-work
+          [work]="work"
+          [panelDetailsState]="panelDetailsState[work.putCode.value]"
+          [id]="userInfo?.EFFECTIVE_USER_ORCID"
+          [isPublicRecord]="isPublicRecord"
+          (toggleDetails)="toggleDetails($event)"
+          >
+        </app-work>
+      }
+      <!-- WORK SOURCE -->
+      <app-panel-source
+        [userRecord]="userRecord"
+        [isPreferred]="isPreferred(work)"
+        [sourceName]="work.sourceName || work.source"
+        [assertionOriginName]="work.assertionOriginName"
+        [assertionOriginClientId]="work.assertionOriginClientId"
+        [assertionOriginOrcid]="work.assertionOriginOrcid"
+        [stackLength]="workStack.works.length"
+        [(displayTheStack)]="displayTheStack"
+        (makePrimary)="makePrimaryCard(work)"
       [topPanelOfTheStackMode]="
         stackPanelsDisplay[work.putCode.value].topPanelOfTheStack
       "
-      [isPublicRecord]="isPublicRecord"
-      (topPanelOfTheStackModeChange)="changeTopPanelOfTheStack(work)"
-      [type]="'works'"
-      [item]="work"
-      [panelTitle]="work.title.value"
-    >
-    </app-panel-source>
-  </app-panel>
-</ng-container>
+        [isPublicRecord]="isPublicRecord"
+        (topPanelOfTheStackModeChange)="changeTopPanelOfTheStack(work)"
+        [type]="'works'"
+        [item]="work"
+        [panelTitle]="work.title.value"
+        >
+      </app-panel-source>
+    </app-panel>
+  }
+}

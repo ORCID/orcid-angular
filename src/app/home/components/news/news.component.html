@@ -6,66 +6,73 @@
           <h1 i18n="@@home.latest_news" class="mat-headline-4" id="latest-news">
             LATEST NEWS
           </h1>
-          <button
-            class="col"
-            mat-button
-            (click)="moreNews()"
-            color="primary"
-            i18n="#upperCase@@home.more_news"
-            *ngIf="platform.columns12"
-          >
+          @if (platform.columns12) {
+            <button
+              class="col"
+              mat-button
+              (click)="moreNews()"
+              color="primary"
+              i18n="#upperCase@@home.more_news"
+              >
             MORE NEWS
           </button>
+          }
         </div>
       </div>
       <div class="row">
         <mat-divider class="col l4 m8 s3"></mat-divider>
       </div>
     </div>
-    <div *ngIf="!news" class="container">
-      <div class="row horizontal-center">
-        <mat-progress-spinner color="primary" mode="indeterminate" class="col">
-        </mat-progress-spinner>
-      </div>
-    </div>
-  </div>
-  <div [ngClass]="{ container: platform.columns12 }">
-    <ng-container *ngIf="news">
-      <div class="row news-box" [@listAnimation]="news.length">
-        <div class="col l4 m8 s4" *ngFor="let new of news">
-          <div class="row horizontal-center">
-            <div class="col mat-caption l-auto m8" dir="ltr">
-              {{ new.pubDate[0].slice(0, 22) }}
-            </div>
-            <p class="col mat-headline-5 l12 m8 s4 horizontal-center" dir="ltr">
-              {{ new.title }}
-            </p>
-            <button
-              class="col l-auto m-auto s-auto space-around"
-              mat-raised-button
-              (click)="navigate(new.link)"
-              color="primary"
-            >
-              <div class="button-text-container" i18n="@@ngOrcid.fullOrcid">
-                FULL ARTICLE
-              </div>
-            </button>
-          </div>
+    @if (!news) {
+      <div class="container">
+        <div class="row horizontal-center">
+          <mat-progress-spinner color="primary" mode="indeterminate" class="col">
+          </mat-progress-spinner>
         </div>
       </div>
-    </ng-container>
+    }
+  </div>
+  <div [ngClass]="{ container: platform.columns12 }">
+    @if (news) {
+      <div class="row news-box" [@listAnimation]="news.length">
+        @for (new of news; track new) {
+          <div class="col l4 m8 s4">
+            <div class="row horizontal-center">
+              <div class="col mat-caption l-auto m8" dir="ltr">
+                {{ new.pubDate[0].slice(0, 22) }}
+              </div>
+              <p class="col mat-headline-5 l12 m8 s4 horizontal-center" dir="ltr">
+                {{ new.title }}
+              </p>
+              <button
+                class="col l-auto m-auto s-auto space-around"
+                mat-raised-button
+                (click)="navigate(new.link)"
+                color="primary"
+                >
+                <div class="button-text-container" i18n="@@ngOrcid.fullOrcid">
+                FULL ARTICLE
+              </div>
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+    }
   </div>
   <div class="container mobile-more-news-box">
-    <div class="row horizontal-center" *ngIf="!platform.columns12">
-      <button
-        class="col"
-        mat-button
-        (click)="moreNews()"
-        color="primary"
-        i18n="@@ngOrcid.moreNews"
-      >
+    @if (!platform.columns12) {
+      <div class="row horizontal-center">
+        <button
+          class="col"
+          mat-button
+          (click)="moreNews()"
+          color="primary"
+          i18n="@@ngOrcid.moreNews"
+          >
         MORE NEWS
       </button>
-    </div>
+      </div>
+    }
   </div>
 </section>

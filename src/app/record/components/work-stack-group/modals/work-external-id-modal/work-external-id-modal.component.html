@@ -1,186 +1,204 @@
 <app-modal [loading]="loading" [noSidebar]="!(work && !loading)">
   <app-modal-header>
-    <ng-container
-      i18n="@@works.addFromDOI"
-      *ngIf="type === EXTERNAL_ID_TYPE_WORK.doi"
-    >
+    @if (type === EXTERNAL_ID_TYPE_WORK.doi) {
+      <ng-container
+        i18n="@@works.addFromDOI"
+        >
       Works - Add work from DOI
     </ng-container>
-    <ng-container
-      i18n="@@works.addFromPubMed"
-      *ngIf="type === EXTERNAL_ID_TYPE_WORK.pubMed"
-    >
+    }
+    @if (type === EXTERNAL_ID_TYPE_WORK.pubMed) {
+      <ng-container
+        i18n="@@works.addFromPubMed"
+        >
       Works - Add work from PubMed
     </ng-container>
+    }
   </app-modal-header>
-  <app-modal-side-bar *ngIf="work && !loading">
-    <ng-container id="side-bar-title">
-      <a
-        class="side-bar"
-        i18n="@@works.workDetails"
-        (click)="toWorkDetails()"
-        id="cy-external-id-to-work-details"
-      >
+  @if (work && !loading) {
+    <app-modal-side-bar>
+      <ng-container id="side-bar-title">
+        <a
+          class="side-bar"
+          i18n="@@works.workDetails"
+          (click)="toWorkDetails()"
+          id="cy-external-id-to-work-details"
+          >
         Work Details
       </a>
-    </ng-container>
-    <ng-container id="side-bar-url-1">
-      <a
-        class="side-bar"
-        i18n="@@works.citation"
-        (click)="toCitation()"
-        id="cy-external-id-to-citation"
-      >
+      </ng-container>
+      <ng-container id="side-bar-url-1">
+        <a
+          class="side-bar"
+          i18n="@@works.citation"
+          (click)="toCitation()"
+          id="cy-external-id-to-citation"
+          >
         Citation
       </a>
-    </ng-container>
-    <ng-container id="side-bar-url-2">
-      <a
-        class="side-bar"
-        i18n="@@works.identifiers"
-        (click)="toIdentifiers()"
-        id="cy-external-id-to-identifiers"
-      >
+      </ng-container>
+      <ng-container id="side-bar-url-2">
+        <a
+          class="side-bar"
+          i18n="@@works.identifiers"
+          (click)="toIdentifiers()"
+          id="cy-external-id-to-identifiers"
+          >
         Identifiers
       </a>
-    </ng-container>
-    <ng-container id="side-bar-url-3">
-      <a
-        class="side-bar"
-        i18n="@@works.contributors"
-        (click)="toContributors()"
-      >
+      </ng-container>
+      <ng-container id="side-bar-url-3">
+        <a
+          class="side-bar"
+          i18n="@@works.contributors"
+          (click)="toContributors()"
+          >
         Contributors
       </a>
-    </ng-container>
-    <ng-container id="side-bar-url-4">
-      <a
-        class="side-bar"
-        i18n="@@works.otherInformation"
-        (click)="toOtherInformation()"
-        id="cy-external-id-to-other-info"
-      >
+      </ng-container>
+      <ng-container id="side-bar-url-4">
+        <a
+          class="side-bar"
+          i18n="@@works.otherInformation"
+          (click)="toOtherInformation()"
+          id="cy-external-id-to-other-info"
+          >
         Other information
       </a>
-    </ng-container>
-    <ng-container id="side-bar-url-5">
-      <a class="side-bar" i18n="@@shared.visibility" (click)="toVisibility()">
+      </ng-container>
+      <ng-container id="side-bar-url-5">
+        <a class="side-bar" i18n="@@shared.visibility" (click)="toVisibility()">
         Visibility
       </a>
-    </ng-container>
-  </app-modal-side-bar>
-  <app-modal-footer *ngIf="work">
-    <button
-      mat-raised-button
-      color="primary"
-      (click)="workFormComponent.saveEvent()"
-      i18n="@@works.addWorkToOrcid"
-      id="save-work-button"
-    >
-      Add this work to your ORCID record
-    </button>
-    <button
-      mat-stroked-button
-      color="primary"
-      (click)="closeEvent()"
-      i18n="@@shared.cancel"
-      id="cancel-work-button"
-    >
-      Cancel
-    </button>
-  </app-modal-footer>
-  <form [formGroup]="externalIdentifierForm" *ngIf="!work">
-    <div class="row">
-      <div class="orc-font-small-print">
-        <p>
-          <ng-container
-            i18n="@@works.youCanUseFullDOI"
-            *ngIf="type === EXTERNAL_ID_TYPE_WORK.doi"
-          >
-            You can use the full DOI URL or just the identifier value.
-          </ng-container>
-          <ng-container
-            i18n="@@works.typeOrPastePubMed"
-            *ngIf="type === EXTERNAL_ID_TYPE_WORK.pubMed"
-          >
-            Type or paste the full PubMed URL or just the identifier value
-          </ng-container>
-        </p>
-      </div>
-    </div>
-    <div class="row">
-      <label for="external-id-input" class="mat-caption">
-        <strong>
-          <ng-container
-            i18n="@@works.doiIdentifier"
-            *ngIf="type === EXTERNAL_ID_TYPE_WORK.doi"
-          >
-            DOI identifier value or full URL
-          </ng-container>
-          <ng-container
-            i18n="@@works.pubMedIdentifier"
-            *ngIf="type === EXTERNAL_ID_TYPE_WORK.pubMed"
-          >
-            PubMed identifier value or full URL
-          </ng-container>
-        </strong>
-      </label>
-    </div>
-    <div class="input-container">
-      <mat-form-field
-        appearance="outline"
-        class="mat-form-field-min"
-        [ngClass]="{ 'two-line-hint': metadataNotFound }"
-      >
-        <input
-          id="external-id-input"
-          #externalIdRef
-          matInput
-          formControlName="externalId"
-        />
-        <mat-error
-          *ngIf="
-            type === EXTERNAL_ID_TYPE_WORK.doi &&
-            externalIdentifierForm?.get('externalId')?.errors?.pattern
-          "
-          i18n="@@works.validFormat"
-        >
-          Invalid id for the selected identifier type
-        </mat-error>
-        <mat-error *ngIf="metadataNotFound" i18n="@@works.unableToImport">
-          Unable to import using this identifier. Please add work using a
-          different option.
-        </mat-error>
-      </mat-form-field>
-    </div>
-    <div class="retrieve-work">
+      </ng-container>
+    </app-modal-side-bar>
+  }
+  @if (work) {
+    <app-modal-footer>
       <button
         mat-raised-button
         color="primary"
-        (click)="retrieveWork()"
-        [disabled]="loading"
-        id="{{ 'cy-retrieve-work-details-from-' + type }}"
-      >
-        <ng-container
-          i18n="@@works.retrieveWorkDOI"
-          *ngIf="type === EXTERNAL_ID_TYPE_WORK.doi"
+        (click)="workFormComponent.saveEvent()"
+        i18n="@@works.addWorkToOrcid"
+        id="save-work-button"
         >
+      Add this work to your ORCID record
+    </button>
+      <button
+        mat-stroked-button
+        color="primary"
+        (click)="closeEvent()"
+        i18n="@@shared.cancel"
+        id="cancel-work-button"
+        >
+      Cancel
+    </button>
+    </app-modal-footer>
+  }
+  @if (!work) {
+    <form [formGroup]="externalIdentifierForm">
+      <div class="row">
+        <div class="orc-font-small-print">
+          <p>
+            @if (type === EXTERNAL_ID_TYPE_WORK.doi) {
+              <ng-container
+                i18n="@@works.youCanUseFullDOI"
+                >
+            You can use the full DOI URL or just the identifier value.
+          </ng-container>
+            }
+            @if (type === EXTERNAL_ID_TYPE_WORK.pubMed) {
+              <ng-container
+                i18n="@@works.typeOrPastePubMed"
+                >
+            Type or paste the full PubMed URL or just the identifier value
+          </ng-container>
+            }
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <label for="external-id-input" class="mat-caption">
+          <strong>
+            @if (type === EXTERNAL_ID_TYPE_WORK.doi) {
+              <ng-container
+                i18n="@@works.doiIdentifier"
+                >
+            DOI identifier value or full URL
+          </ng-container>
+            }
+            @if (type === EXTERNAL_ID_TYPE_WORK.pubMed) {
+              <ng-container
+                i18n="@@works.pubMedIdentifier"
+                >
+            PubMed identifier value or full URL
+          </ng-container>
+            }
+          </strong>
+        </label>
+      </div>
+      <div class="input-container">
+        <mat-form-field
+          appearance="outline"
+          class="mat-form-field-min"
+          [ngClass]="{ 'two-line-hint': metadataNotFound }"
+          >
+          <input
+            id="external-id-input"
+            #externalIdRef
+            matInput
+            formControlName="externalId"
+            />
+          @if (
+            type === EXTERNAL_ID_TYPE_WORK.doi &&
+            externalIdentifierForm?.get('externalId')?.errors?.pattern
+            ) {
+            <mat-error
+              i18n="@@works.validFormat"
+              >
+          Invalid id for the selected identifier type
+        </mat-error>
+          }
+          @if (metadataNotFound) {
+            <mat-error i18n="@@works.unableToImport">
+          Unable to import using this identifier. Please add work using a
+          different option.
+        </mat-error>
+          }
+        </mat-form-field>
+      </div>
+      <div class="retrieve-work">
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="retrieveWork()"
+          [disabled]="loading"
+          id="{{ 'cy-retrieve-work-details-from-' + type }}"
+          >
+          @if (type === EXTERNAL_ID_TYPE_WORK.doi) {
+            <ng-container
+              i18n="@@works.retrieveWorkDOI"
+              >
           Retrieve work details from DOI
         </ng-container>
-        <ng-container
-          i18n="@@works.retrieveWorkPubMed"
-          *ngIf="type === EXTERNAL_ID_TYPE_WORK.pubMed"
-        >
+          }
+          @if (type === EXTERNAL_ID_TYPE_WORK.pubMed) {
+            <ng-container
+              i18n="@@works.retrieveWorkPubMed"
+              >
           Retrieve work details from PubMed
         </ng-container>
-      </button>
-    </div>
-  </form>
-  <app-work-form
-    [work]="work"
-    [userRecord]="userRecord"
-    [externalIdentifier]="true"
-    *ngIf="work && !loading"
-    #workFormComponent
-  ></app-work-form>
+          }
+        </button>
+      </div>
+    </form>
+  }
+  @if (work && !loading) {
+    <app-work-form
+      [work]="work"
+      [userRecord]="userRecord"
+      [externalIdentifier]="true"
+      #workFormComponent
+    ></app-work-form>
+  }
 </app-modal>

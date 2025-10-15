@@ -13,14 +13,15 @@
   <p class="title-detail" i18n="@@account.willNoLongerBeAble">
     will no longer be able to:
   </p>
-  <div
-    *ngFor="let permissions of data.scopePaths | keyvalue; let last = last"
-    class="permission-container"
-    [ngClass]="{ last: last }"
-  >
-    <mat-icon>block</mat-icon>
-    <div>{{ permissions.key | scopePathType }}</div>
-  </div>
+  @for (permissions of data.scopePaths | keyvalue; track permissions; let last = $last) {
+    <div
+      class="permission-container"
+      [ngClass]="{ last: last }"
+      >
+      <mat-icon>block</mat-icon>
+      <div>{{ permissions.key | scopePathType }}</div>
+    </div>
+  }
 
   <app-alert-message class="orc-font-body-small">
     <ng-container content>
@@ -36,7 +37,7 @@
           target="_blank"
           i18n="@@account.findOutMoreAboutTrusted"
           class="underline"
-        >
+          >
           Find out more about Trusted Organizations and access permissions
         </a>
       </ng-container>
@@ -50,7 +51,7 @@
       (click)="ok()"
       id="cy-revoke-access"
       i18n="@@account.revokeAccessPermissions"
-    >
+      >
       Revoke access permissions
     </button>
     <button
@@ -59,8 +60,8 @@
       (click)="cancel()"
       id="cy-cancell"
       i18n="@@shared.cancel"
-    >
+      >
       Cancel
     </button>
   </app-modal-footer></app-modal
->
+  >

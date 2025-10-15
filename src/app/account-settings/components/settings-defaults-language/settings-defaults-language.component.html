@@ -7,14 +7,15 @@
     <mat-form-field
       appearance="outline"
       class="mat-form-field-min input-container"
-    >
+      >
       <mat-select formControlName="locale">
-        <mat-option
-          *ngFor="let language of languageMenuOptions | keyvalue"
-          [value]="language.key"
-        >
-          {{ language.value }}
-        </mat-option>
+        @for (language of languageMenuOptions | keyvalue; track language) {
+          <mat-option
+            [value]="language.key"
+            >
+            {{ language.value }}
+          </mat-option>
+        }
       </mat-select>
     </mat-form-field>
   </div>

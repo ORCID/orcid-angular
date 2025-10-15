@@ -14,87 +14,91 @@
   <h2 class="remove">
     <strong class="orc-font-body-large" i18n="@@account.removeThisRecord"
       >Remove this record</strong
-    >
-  </h2>
-  <ng-container *ngIf="data.deprecatingAccountName">
-    <strong
-      >{{ data.deprecatingAccountName }}
-      <a
-        id="cy-deprecating-orcid"
-        class="underline"
-        href="{{ baseUrl }}{{ data.deprecatingOrcid }}"
-        rel="noopener noreferrer"
-        target="_blank"
-        >({{ data.deprecatingOrcid }})</a
-      ></strong
-    >
-  </ng-container>
-  <ng-container *ngIf="!data.deprecatingAccountName">
-    <strong
-      ><ng-container i18n="@@account.nameIsPri">Name is private</ng-container>
-      <a
-        id="cy-deprecating-orcid"
-        class="underline"
-        href="{{ baseUrl }}{{ data.deprecatingOrcid }}"
-        rel="noopener noreferrer"
-        target="_blank"
-        >{{ data.deprecatingOrcid }}</a
-      ></strong
-    >
-  </ng-container>
-  <div *ngFor="let email of data.deprecatingEmails">{{ email }}</div>
+      >
+    </h2>
+    @if (data.deprecatingAccountName) {
+      <strong
+        >{{ data.deprecatingAccountName }}
+        <a
+          id="cy-deprecating-orcid"
+          class="underline"
+          href="{{ baseUrl }}{{ data.deprecatingOrcid }}"
+          rel="noopener noreferrer"
+          target="_blank"
+          >({{ data.deprecatingOrcid }})</a
+          ></strong
+          >
+        }
+        @if (!data.deprecatingAccountName) {
+          <strong
+            ><ng-container i18n="@@account.nameIsPri">Name is private</ng-container>
+            <a
+              id="cy-deprecating-orcid"
+              class="underline"
+              href="{{ baseUrl }}{{ data.deprecatingOrcid }}"
+              rel="noopener noreferrer"
+              target="_blank"
+              >{{ data.deprecatingOrcid }}</a
+              ></strong
+              >
+            }
+            @for (email of data.deprecatingEmails; track email) {
+              <div>{{ email }}</div>
+            }
 
-  <h2 class="keep">
-    <strong class="orc-font-body-large" i18n="@@account.keepThisRecord"
-      >Keep this record</strong
-    >
-  </h2>
+            <h2 class="keep">
+              <strong class="orc-font-body-large" i18n="@@account.keepThisRecord"
+                >Keep this record</strong
+                >
+              </h2>
 
-  <ng-container *ngIf="data.primaryAccountName">
-    <strong
-      >{{ data.primaryAccountName }}
-      <a
-        id="cy-primary-orcid"
-        class="underline"
-        href="{{ baseUrl }}{{ data.primaryOrcid }}"
-        rel="noopener noreferrer"
-        target="_blank"
-        >({{ data.primaryOrcid }})</a
-      ></strong
-    >
-  </ng-container>
-  <ng-container *ngIf="!data.primaryAccountName">
-    <strong>
-      <a
-        id="cy-primary-orcid"
-        class="underline"
-        href="{{ baseUrl }}{{ data.primaryOrcid }}"
-        rel="noopener noreferrer"
-        target="_blank"
-        >{{ data.primaryOrcid }}</a
-      ></strong
-    >
-  </ng-container>
-  <div *ngFor="let email of data.primaryEmails">{{ email }}</div>
+              @if (data.primaryAccountName) {
+                <strong
+                  >{{ data.primaryAccountName }}
+                  <a
+                    id="cy-primary-orcid"
+                    class="underline"
+                    href="{{ baseUrl }}{{ data.primaryOrcid }}"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    >({{ data.primaryOrcid }})</a
+                    ></strong
+                    >
+                  }
+                  @if (!data.primaryAccountName) {
+                    <strong>
+                      <a
+                        id="cy-primary-orcid"
+                        class="underline"
+                        href="{{ baseUrl }}{{ data.primaryOrcid }}"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        >{{ data.primaryOrcid }}</a
+                        ></strong
+                        >
+                      }
+                      @for (email of data.primaryEmails; track email) {
+                        <div>{{ email }}</div>
+                      }
 
-  <app-modal-footer>
-    <button
-      mat-raised-button
-      color="warn"
-      (click)="ok()"
-      i18n="@@account.removeDuplicatedRecord"
-      id="cy-remove-duplicate-record"
-    >
+                      <app-modal-footer>
+                        <button
+                          mat-raised-button
+                          color="warn"
+                          (click)="ok()"
+                          i18n="@@account.removeDuplicatedRecord"
+                          id="cy-remove-duplicate-record"
+                          >
       Remove duplicate record
     </button>
-    <button
-      mat-stroked-button
-      color="primary"
-      (click)="cancel()"
-      i18n="@@shared.cancel"
-      id="cy-dialog-cancel"
-    >
+                        <button
+                          mat-stroked-button
+                          color="primary"
+                          (click)="cancel()"
+                          i18n="@@shared.cancel"
+                          id="cy-dialog-cancel"
+                          >
       Cancel
     </button>
-  </app-modal-footer></app-modal
->
+                      </app-modal-footer></app-modal
+                      >

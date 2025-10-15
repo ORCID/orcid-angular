@@ -1,89 +1,106 @@
-<div *ngIf="isOrcidIntegration" class="intro">
-  <p i18n="@@inbox.youCanBenefitFromAutomatic">
+@if (isOrcidIntegration) {
+  <div class="intro">
+    <p i18n="@@inbox.youCanBenefitFromAutomatic">
     You can benefit from automatic updates to your record.
   </p>
-  <ng-container i18n="@@inbox.basedOnYourVerifiedEmailDomains"
-    >Based on your verified email domains, we have found an ORCID integration
+    <ng-container i18n="@@inbox.basedOnYourVerifiedEmailDomains"
+      >Based on your verified email domains, we have found an ORCID integration
     for</ng-container
-  >
-  <strong> {{ orcidIntegrationMemberName }}</strong
-  >.
-  <ng-container i18n="@@inbox.connectingWithThisIntegrationWillAllow"
-    >Connecting with this integration will allow</ng-container
-  >
-  {{ orcidIntegrationMemberName }}
-  <ng-container i18n="@@inbox.toAutomaticallyAddValidatedInformation"
-    >to automatically add validated information to your ORCID record. This will
+      >
+      <strong> {{ orcidIntegrationMemberName }}</strong
+        >.
+        <ng-container i18n="@@inbox.connectingWithThisIntegrationWillAllow"
+          >Connecting with this integration will allow</ng-container
+          >
+          {{ orcidIntegrationMemberName }}
+          <ng-container i18n="@@inbox.toAutomaticallyAddValidatedInformation"
+            >to automatically add validated information to your ORCID record. This will
     save you time and effort when maintaining your record, and help make sure it
     stays up-to-date.</ng-container
-  >
-</div>
-<div *ngIf="!isOrcidIntegration" class="intro">
-  {{ notification?.notificationIntro }}
-</div>
+            >
+          </div>
+        }
+        @if (!isOrcidIntegration) {
+          <div class="intro">
+            {{ notification?.notificationIntro }}
+          </div>
+        }
 
-<div *ngIf="!isOrcidIntegration">
-  <strong>{{ notification?.source.sourceName.content }}</strong>
-  <ng-container i18n="@@inbox.likeYourPermission"
-    >would like your permission to interact with your ORCID Record as a trusted
+        @if (!isOrcidIntegration) {
+          <div>
+            <strong>{{ notification?.source.sourceName.content }}</strong>
+            <ng-container i18n="@@inbox.likeYourPermission"
+              >would like your permission to interact with your ORCID Record as a trusted
     party.</ng-container
-  >
-</div>
+              >
+            </div>
+          }
 
-<div *ngFor="let i of itemsByType">
-  <p class="type">
-    <strong>
-      {{ getNotificationType(i.type) }}
-    </strong>
-    ({{ i.items.length }})
-  </p>
-  <ul>
-    <li *ngFor="let i of i.items">
-      {{ i.itemName }}
-      <span *ngIf="i.externalIdentifier"
-        >{{ i.externalIdentifier.type }}: {{ i.externalIdentifier.value }}</span
-      >
-    </li>
-  </ul>
-</div>
-<div *ngIf="!isOrcidIntegration" class="buttons-container">
-  <button
-    *ngIf="!notification?.archivedDate"
-    (click)="archive(); $event.stopPropagation()"
-    mat-button
-    color="primary"
-    type="button"
-    i18n="@@inbox.archiveWithout"
-  >
+          @for (i of itemsByType; track i) {
+            <div>
+              <p class="type">
+                <strong>
+                  {{ getNotificationType(i.type) }}
+                </strong>
+                ({{ i.items.length }})
+              </p>
+              <ul>
+                @for (i of i.items; track i) {
+                  <li>
+                    {{ i.itemName }}
+                    @if (i.externalIdentifier) {
+                      <span
+                        >{{ i.externalIdentifier.type }}: {{ i.externalIdentifier.value }}</span
+                        >
+                      }
+                    </li>
+                  }
+                </ul>
+              </div>
+            }
+            @if (!isOrcidIntegration) {
+              <div class="buttons-container">
+                @if (!notification?.archivedDate) {
+                  <button
+                    (click)="archive(); $event.stopPropagation()"
+                    mat-button
+                    color="primary"
+                    type="button"
+                    i18n="@@inbox.archiveWithout"
+                    >
     Archive without granting permissions
   </button>
-  <a
-    target="_blank"
-    rel="noopener noreferrer"
-    [href]="notification?.authorizationUrl.uri"
-  >
-    <button
-      mat-raised-button
-      color="primary"
-      class="grant-permission"
-      i18n="@@inbox.grantPermission"
-    >
+                }
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  [href]="notification?.authorizationUrl.uri"
+                  >
+                  <button
+                    mat-raised-button
+                    color="primary"
+                    class="grant-permission"
+                    i18n="@@inbox.grantPermission"
+                    >
       Grant permission
     </button>
-  </a>
-</div>
+                </a>
+              </div>
+            }
 
-<div *ngIf="isOrcidIntegration" class="buttons-container">
-  <a target="_blank" rel="noopener noreferrer" [href]="orcidIntegrationLink">
-    <button
-      mat-raised-button
-      color="primary"
-      class="grant-permission"
-      i18n="@@inbox.connectWith"
-      [innerHTML]="'Connect with ' + orcidIntegrationMemberName"
-      i18n="@@inbox.connectWith|Connect with {orcidIntegrationMemberName}"
-    >
+            @if (isOrcidIntegration) {
+              <div class="buttons-container">
+                <a target="_blank" rel="noopener noreferrer" [href]="orcidIntegrationLink">
+                  <button
+                    mat-raised-button
+                    color="primary"
+                    class="grant-permission"
+                    i18n="@@inbox.connectWith"
+                    [innerHTML]="'Connect with ' + orcidIntegrationMemberName"
+                    i18n="@@inbox.connectWith|Connect with {orcidIntegrationMemberName}"
+                    >
       Connect with
     </button>
-  </a>
-</div>
+                </a>
+              </div>
+            }

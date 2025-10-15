@@ -1,6 +1,8 @@
 <app-settings-panels-data>
   <strong i18n="@@account.accessType">Access type</strong>
-  <div *ngFor="let permissions of trustedOrganization?.scopePaths | keyvalue">
-    {{ permissions.key | scopePathType }}
-  </div></app-settings-panels-data
->
+  @for (permissions of trustedOrganization?.scopePaths | keyvalue; track permissions) {
+    <div>
+      {{ permissions.key | scopePathType }}
+    </div>
+    }</app-settings-panels-data
+    >

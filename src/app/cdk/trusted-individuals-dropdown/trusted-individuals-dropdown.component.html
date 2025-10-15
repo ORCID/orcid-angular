@@ -1,51 +1,56 @@
-<a
-  *ngIf="delegators?.length || switchToMeAccount"
-  class="underline"
-  [matMenuTriggerFor]="menu"
-  i18n="@@delegators.switchAccount"
-  [attr.aria-label]="labelSwitchAccount"
-  >Switch to another account</a
->
+@if (delegators?.length || switchToMeAccount) {
+  <a
+    class="underline"
+    [matMenuTriggerFor]="menu"
+    i18n="@@delegators.switchAccount"
+    [attr.aria-label]="labelSwitchAccount"
+    >Switch to another account</a
+    >
+  }
 
-<mat-menu
-  #menu="matMenu"
-  class="mat-subtitle-2 trusted-individuals"
-  [attr.aria-label]="labelSwitchAccount"
->
-  <strong class="header text-container" i18n="@@delegators.switchAccount">
+  <mat-menu
+    #menu="matMenu"
+    class="mat-subtitle-2 trusted-individuals"
+    [attr.aria-label]="labelSwitchAccount"
+    >
+    <strong class="header text-container" i18n="@@delegators.switchAccount">
     Switch to another account
   </strong>
-  <div class="text-container" *ngIf="delegators?.length">
-    <ng-container i18n="@@delegators.youHave">You have</ng-container>
-    <strong>{{ delegators.length }}</strong>
-    <ng-container i18n="@@delegators.accounts">accounts</ng-container>
-  </div>
-  <button
-    mat-menu-item
-    *ngFor="let delegator of delegators"
-    (click)="changeAccount(delegator)"
-  >
-    <div class="content">
-      <div>
-        <strong>{{ delegator.giverName.value }}</strong>
+    @if (delegators?.length) {
+      <div class="text-container">
+        <ng-container i18n="@@delegators.youHave">You have</ng-container>
+        <strong>{{ delegators.length }}</strong>
+        <ng-container i18n="@@delegators.accounts">accounts</ng-container>
       </div>
-      <div>
-        {{ delegator.giverOrcid.uri }}
-      </div>
-    </div>
-  </button>
-  <button
-    mat-menu-item
-    *ngIf="switchToMeAccount"
-    (click)="changeAccount(switchToMeAccount)"
-  >
-    <div class="content">
-      <div>
-        <strong i18n="@@delegators.switchBack">Switch back to me</strong>
-      </div>
-      <div>
-        {{ switchToMeAccount.giverOrcid.uri }}
-      </div>
-    </div>
-  </button>
-</mat-menu>
+    }
+    @for (delegator of delegators; track delegator) {
+      <button
+        mat-menu-item
+        (click)="changeAccount(delegator)"
+        >
+        <div class="content">
+          <div>
+            <strong>{{ delegator.giverName.value }}</strong>
+          </div>
+          <div>
+            {{ delegator.giverOrcid.uri }}
+          </div>
+        </div>
+      </button>
+    }
+    @if (switchToMeAccount) {
+      <button
+        mat-menu-item
+        (click)="changeAccount(switchToMeAccount)"
+        >
+        <div class="content">
+          <div>
+            <strong i18n="@@delegators.switchBack">Switch back to me</strong>
+          </div>
+          <div>
+            {{ switchToMeAccount.giverOrcid.uri }}
+          </div>
+        </div>
+      </button>
+    }
+  </mat-menu>

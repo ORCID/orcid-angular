@@ -1,14 +1,15 @@
 <section
   class="alert alert-banner mat-subtitle-2"
   [attr.aria-label]="ariaLabel"
->
-  <p><ng-content></ng-content></p>
-  <button
-    *ngIf="canDismiss"
-    mat-flat-button
-    color="primary"
-    (click)="onDismiss()"
   >
-    <ng-content select="label.closeButton"></ng-content>
-  </button>
+  <p><ng-content></ng-content></p>
+  @if (canDismiss) {
+    <button
+      mat-flat-button
+      color="primary"
+      (click)="onDismiss()"
+      >
+      <ng-content select="label.closeButton"></ng-content>
+    </button>
+  }
 </section>

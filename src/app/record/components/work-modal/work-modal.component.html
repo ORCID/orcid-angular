@@ -23,7 +23,7 @@
         class="side-bar"
         i18n="@@works.contributors"
         (click)="toContributors()"
-      >
+        >
         Contributors
       </a>
     </ng-container>
@@ -32,7 +32,7 @@
         class="side-bar"
         i18n="@@works.otherInformation"
         (click)="toOtherInformation()"
-      >
+        >
         Other information
       </a>
     </ng-container>
@@ -43,17 +43,18 @@
     </ng-container>
   </app-modal-side-bar>
   <app-modal-footer>
-    <button
-      *ngIf="work"
-      mat-raised-button
-      color="primary"
-      (click)="workFormComponent.saveEvent()"
-      i18n="@@shared.saveChanges"
-      id="save-work-button"
-      [attr.aria-label]="saveAndClose"
-    >
+    @if (work) {
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="workFormComponent.saveEvent()"
+        i18n="@@shared.saveChanges"
+        id="save-work-button"
+        [attr.aria-label]="saveAndClose"
+        >
       Save changes
     </button>
+    }
     <button
       mat-stroked-button
       color="primary"
@@ -61,15 +62,16 @@
       i18n="@@shared.cancel"
       id="cancel-work-button"
       [attr.aria-label]="cancelAndClose"
-    >
+      >
       Cancel
     </button>
   </app-modal-footer>
-  <app-work-form
-    [work]="work"
-    [userRecord]="userRecord"
-    *ngIf="work && !loading"
-    #workFormComponent
-  >
-  </app-work-form>
+  @if (work && !loading) {
+    <app-work-form
+      [work]="work"
+      [userRecord]="userRecord"
+      #workFormComponent
+      >
+    </app-work-form>
+  }
 </app-modal>

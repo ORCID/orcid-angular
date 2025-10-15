@@ -1,5 +1,7 @@
-<div id="skip-link" *ngIf="this.currentUrl">
-  <a [href]="this.currentUrl + '#main'" class="a11yLinks"
-    >Skip to main content</a
-  >
-</div>
+@if (this.currentUrl) {
+  <div id="skip-link">
+    <a [href]="this.currentUrl + '#main'" class="a11yLinks"
+      >Skip to main content</a
+      >
+    </div>
+  }

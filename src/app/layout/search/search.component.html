@@ -1,37 +1,42 @@
-<div class="row h-end language-menu no-wrap" *ngIf="platform.columns12">
-  <app-user-menu *ngIf="signinRegisterButton"></app-user-menu>
-  <app-language
-    role="navigation"
-    [attr.aria-label]="labelSearch"
-    id="cy-language-comp"
-  ></app-language>
-</div>
-<form
-  role="search"
-  class="row h-end search-box middle"
-  (submit)="search(whereToSearchSelected, whatToSearch)"
-  *ngIf="!hideForm"
->
-  <div id="ariaLabelWhere" hidden>Search on</div>
-  <div class="input-box-new-info">
-    <input
-      autocomplete="off"
-      name="whatToSearch"
-      [(ngModel)]="whatToSearch"
-      [placeholder]="searchPlaceHolder"
-      type="text"
-      [attr.aria-label]="labelSearchBy"
-      id="cy-search"
-      class="orc-font-body"
-    />
+@if (platform.columns12) {
+  <div class="row h-end language-menu no-wrap">
+    @if (signinRegisterButton) {
+      <app-user-menu></app-user-menu>
+    }
+    <app-language
+      role="navigation"
+      [attr.aria-label]="labelSearch"
+      id="cy-language-comp"
+    ></app-language>
   </div>
-  <button
-    [attr.aria-label]="labelSearch"
-    type="submit"
-    matRipple
-    class="col middle search-icon"
-    id="cy-search-btn"
-  >
-    <mat-icon matSuffix>search</mat-icon>
-  </button>
-</form>
+}
+@if (!hideForm) {
+  <form
+    role="search"
+    class="row h-end search-box middle"
+    (submit)="search(whereToSearchSelected, whatToSearch)"
+    >
+    <div id="ariaLabelWhere" hidden>Search on</div>
+    <div class="input-box-new-info">
+      <input
+        autocomplete="off"
+        name="whatToSearch"
+        [(ngModel)]="whatToSearch"
+        [placeholder]="searchPlaceHolder"
+        type="text"
+        [attr.aria-label]="labelSearchBy"
+        id="cy-search"
+        class="orc-font-body"
+        />
+    </div>
+    <button
+      [attr.aria-label]="labelSearch"
+      type="submit"
+      matRipple
+      class="col middle search-icon"
+      id="cy-search-btn"
+      >
+      <mat-icon matSuffix>search</mat-icon>
+    </button>
+  </form>
+}

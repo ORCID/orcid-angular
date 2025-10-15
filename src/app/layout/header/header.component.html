@@ -4,109 +4,119 @@
   class="container"
   [class.compact-enabled]="compactEligible"
   [class.compact]="isCompactActive"
->
+  >
   <div class="row end">
     <div
       class="col l5 m8 s4 middle logo-menu-container no-gutters"
       role="banner"
-    >
+      >
       <a
         routerLink="/"
         class="logo-container"
         [attr.aria-label]="'Orcid home' + labelLogo"
-      >
+        >
         <img
           src="./assets/vectors/orcid.logo.svg"
           alt="orcid logo"
           id="home-logo"
-        />
-        <div
-          role="link"
-          class="orc-font-body-small"
-          *ngIf="platform.columns12 && !isCompactActive"
-          i18n="@@confirm-oauth-access.connectingresearchandresearchers"
-        >
+          />
+        @if (platform.columns12 && !isCompactActive) {
+          <div
+            role="link"
+            class="orc-font-body-small"
+            i18n="@@confirm-oauth-access.connectingresearchandresearchers"
+            >
           Connecting research and researchers
         </div>
+        }
       </a>
       <div class="col no-gutters" role="navigation">
-        <div *ngIf="!platform.columns12" class="row middle no-gutters">
-          <div *ngIf="mobileMenuState" class="col no-gutters">
-            <app-language
-              class="col no-gutters"
-              id="cy-language-mob"
-            ></app-language>
+        @if (!platform.columns12) {
+          <div class="row middle no-gutters">
+            @if (mobileMenuState) {
+              <div class="col no-gutters">
+                <app-language
+                  class="col no-gutters"
+                  id="cy-language-mob"
+                ></app-language>
+              </div>
+            }
+            @if (!mobileMenuState) {
+              <div class="col no-gutters">
+                <app-user-menu></app-user-menu>
+              </div>
+            }
+            <app-menu-icon
+              (click)="mobileMenuState = !mobileMenuState"
+              [isOpen]="mobileMenuState"
+            ></app-menu-icon>
           </div>
-          <div *ngIf="!mobileMenuState" class="col no-gutters">
-            <app-user-menu></app-user-menu>
-          </div>
-
-          <app-menu-icon
-            (click)="mobileMenuState = !mobileMenuState"
-            [isOpen]="mobileMenuState"
-          ></app-menu-icon>
-        </div>
+        }
       </div>
     </div>
-    <div
-      class="col l6 offset-l1 m8 s4 middle no-gutters"
-      *ngIf="platform.columns12"
-    >
-      <app-search [hideForm]="compactEligible && isCompactActive"></app-search>
-    </div>
+    @if (platform.columns12) {
+      <div
+        class="col l6 offset-l1 m8 s4 middle no-gutters"
+        >
+        <app-search [hideForm]="compactEligible && isCompactActive"></app-search>
+      </div>
+    }
   </div>
 </header>
 
 <mat-divider></mat-divider>
 
-<div
-  class="col l5 offset-l3 m8 s4 middle"
-  *ngIf="!platform.columns12 && !(compactEligible && isCompactActive)"
->
-  <app-search></app-search>
-</div>
+@if (!platform.columns12 && !(compactEligible && isCompactActive)) {
+  <div
+    class="col l5 offset-l3 m8 s4 middle"
+    >
+    <app-search></app-search>
+  </div>
+}
 
 <!-- MAIN MENU -->
-<nav
-  (mouseleave)="mouseLeave()"
-  *ngIf="(mobileMenuState || platform.columns12) && !hideMainMenu"
-  [ngClass]="{ 'not-wordpress-display': notWordpressDisplay }"
-  [attr.aria-label]="labelMenu"
->
-  <!-- TODO @leomendoza123 Once the new info site is stable, remove this togglz hidden to save render time -->
-  <div class="top-bar-new-info">
-    <div class="menu-container" [ngClass]="{ container: platform.columns12 }">
-      <ng-template #recursiveList let-list let-parents="parents">
-        <ul class="row" *ngIf="!isDesktopThirdLevelMenu(parents)">
-          <ng-container *ngFor="let item of list">
-            <li
-              class="col no-gutters button-wrapper"
-              *ngIf="checkMenuItemRequirements(item.requirements) === true"
-            >
-              <button
+@if ((mobileMenuState || platform.columns12) && !hideMainMenu) {
+  <nav
+    (mouseleave)="mouseLeave()"
+    [ngClass]="{ 'not-wordpress-display': notWordpressDisplay }"
+    [attr.aria-label]="labelMenu"
+    >
+    <!-- TODO @leomendoza123 Once the new info site is stable, remove this togglz hidden to save render time -->
+    <div class="top-bar-new-info">
+      <div class="menu-container" [ngClass]="{ container: platform.columns12 }">
+        <ng-template #recursiveList let-list let-parents="parents">
+          @if (!isDesktopThirdLevelMenu(parents)) {
+            <ul class="row">
+              @for (item of list; track item) {
+                @if (checkMenuItemRequirements(item.requirements) === true) {
+                  <li
+                    class="col no-gutters button-wrapper"
+                    >
+                    <button
                 [ngClass]="{
                   active: item.activeRoute === currentRoute
                 }"
-                class="top-menu-button"
-                mat-button
-                [color]="menuButtonColor(parents)"
-                (focus)="mouseEnter(parents.concat(item.id))"
-                (click)="click(parents.concat(item.id), item)"
-                (mouseenter)="mouseEnter(parents.concat(item.id))"
-                [id]="item.id"
-              >
-                <div class="button-box">
-                  <div>{{ item.label | uppercase }}</div>
-                  <mat-icon
-                    *ngIf="!platform.columns12 && item.buttons.length"
-                    >{{
-                      item.hover ? 'arrow_drop_up' : 'arrow_drop_down'
-                    }}</mat-icon
-                  >
-                </div>
-              </button>
-              <ng-container *ngIf="item.hover && item.buttons.length">
-                <ng-container
+                      class="top-menu-button"
+                      mat-button
+                      [color]="menuButtonColor(parents)"
+                      (focus)="mouseEnter(parents.concat(item.id))"
+                      (click)="click(parents.concat(item.id), item)"
+                      (mouseenter)="mouseEnter(parents.concat(item.id))"
+                      [id]="item.id"
+                      >
+                      <div class="button-box">
+                        <div>{{ item.label | uppercase }}</div>
+                        @if (!platform.columns12 && item.buttons.length) {
+                          <mat-icon
+                            >{{
+                            item.hover ? 'arrow_drop_up' : 'arrow_drop_down'
+                            }}</mat-icon
+                            >
+                          }
+                        </div>
+                      </button>
+                      @if (item.hover && item.buttons.length) {
+                        <ng-container
                   *ngTemplateOutlet="
                     recursiveList;
                     context: {
@@ -114,56 +124,62 @@
                       parents: parents.concat(item.id)
                     }
                   "
-                ></ng-container>
-              </ng-container>
-            </li>
-          </ng-container>
-        </ul>
-      </ng-template>
-
-      <ng-container
+                      ></ng-container>
+                    }
+                  </li>
+                }
+              }
+            </ul>
+          }
+        </ng-template>
+        <ng-container
         *ngTemplateOutlet="
           recursiveList;
           context: { $implicit: menu, parents: [] }
         "
-      ></ng-container>
-      <ul class="row" *ngIf="checkMenuItemRequirements({ desktop: false })">
-        <li
-          class="col no-gutters"
-          *ngIf="
-            checkMenuItemRequirements({ logging: false }) &&
-            signinRegisterButton
-          "
-        >
-          <button
-            mat-stroked-button
-            class="sign-in-button"
-            (click)="goto('signin')"
-          >
-            <ng-container i18n="@@header.signin">Sign in</ng-container
-            >&nbsp;/&nbsp;<ng-container i18n="@@header.register"
-              >Register</ng-container
-            >
-          </button>
-        </li>
-        <li
-          class="col no-gutters"
-          *ngIf="checkMenuItemRequirements({ logging: true })"
-        >
-          <button
-            mat-stroked-button
-            class="sign-in-button"
-            (click)="goto('signout')"
-          >
-            <ng-container i18n="#upperCase@@public-layout.sign_out"
-              >SIGN OUT</ng-container
-            >
-          </button>
-        </li>
-      </ul>
-    </div>
-    <mat-divider class="row"></mat-divider>
-  </div>
-</nav>
+        ></ng-container>
+        @if (checkMenuItemRequirements({ desktop: false })) {
+          <ul class="row">
+            @if (
+              checkMenuItemRequirements({ logging: false }) &&
+              signinRegisterButton
+              ) {
+              <li
+                class="col no-gutters"
+                >
+                <button
+                  mat-stroked-button
+                  class="sign-in-button"
+                  (click)="goto('signin')"
+                  >
+                  <ng-container i18n="@@header.signin">Sign in</ng-container
+                    >&nbsp;/&nbsp;<ng-container i18n="@@header.register"
+                    >Register</ng-container
+                    >
+                  </button>
+                </li>
+              }
+              @if (checkMenuItemRequirements({ logging: true })) {
+                <li
+                  class="col no-gutters"
+                  >
+                  <button
+                    mat-stroked-button
+                    class="sign-in-button"
+                    (click)="goto('signout')"
+                    >
+                    <ng-container i18n="#upperCase@@public-layout.sign_out"
+                      >SIGN OUT</ng-container
+                      >
+                    </button>
+                  </li>
+                }
+              </ul>
+            }
+          </div>
+          <mat-divider class="row"></mat-divider>
+        </div>
+      </nav>
+    }
 
-<app-maintenance-message></app-maintenance-message>
+    <app-maintenance-message></app-maintenance-message>

@@ -1,85 +1,93 @@
-<div class="container no-padding" *ngIf="roles?.controls?.length > 0">
-  <div class="row title">
-    <label for="cy-role" class="orc-font-body">
-      <h3
-        i18n="@@works.yourContributionsToThisWork"
-        id="your-contributors-label"
-        class="orc-font-body"
-      >
+@if (roles?.controls?.length > 0) {
+  <div class="container no-padding">
+    <div class="row title">
+      <label for="cy-role" class="orc-font-body">
+        <h3
+          i18n="@@works.yourContributionsToThisWork"
+          id="your-contributors-label"
+          class="orc-font-body"
+          >
         Your contributions to this work
       </h3>
-    </label>
-  </div>
-  <ng-container formArrayName="roles">
-    <ng-container
-      *ngFor="let role of roles?.controls; index as i"
-      [formGroupName]="i"
-    >
-      <div class="row role">
-        <div class="col l9 m8 s4 no-gutters orc-font-body-small">
-          <ng-container *ngIf="role.disabled">
-            {{ role.get('role').value | roleTranslation | titlecase }}
-          </ng-container>
-          <mat-form-field
-            *ngIf="!role.disabled"
-            appearance="outline"
-            class="mat-form-field-min"
+      </label>
+    </div>
+    <ng-container formArrayName="roles">
+      @for (role of roles?.controls; track role; let i = $index) {
+        <ng-container
+          [formGroupName]="i"
+          >
+          <div class="row role">
+            <div class="col l9 m8 s4 no-gutters orc-font-body-small">
+              @if (role.disabled) {
+                {{ role.get('role').value | roleTranslation | titlecase }}
+              }
+              @if (!role.disabled) {
+                <mat-form-field
+                  appearance="outline"
+                  class="mat-form-field-min"
             [ngClass]="{
               'no-hint': role.get('role').errors
             }"
-          >
-            <mat-select
-              #roleSelect
-              aria-label="{{ ngOrcidSelectRole }}"
-              placeholder="{{ ngOrcidSelectRole }}"
-              formControlName="role"
-            >
-              <mat-option
-                *ngFor="let contributionRole of contributionRoles"
-                [value]="contributionRole.key"
-                [disabled]="contributionRole.key | disableRole : role"
-              >
-                {{ contributionRole.translation | titlecase }}
-              </mat-option>
-            </mat-select>
-            <mat-error
-              *ngIf="role.get('role').errors?.unique"
-              i18n="@@works.roleNotDuplicated"
-            >
+                  >
+                  <mat-select
+                    #roleSelect
+                    aria-label="{{ ngOrcidSelectRole }}"
+                    placeholder="{{ ngOrcidSelectRole }}"
+                    formControlName="role"
+                    >
+                    @for (contributionRole of contributionRoles; track contributionRole) {
+                      <mat-option
+                        [value]="contributionRole.key"
+                        [disabled]="contributionRole.key | disableRole : role"
+                        >
+                        {{ contributionRole.translation | titlecase }}
+                      </mat-option>
+                    }
+                  </mat-select>
+                  @if (role.get('role').errors?.unique) {
+                    <mat-error
+                      i18n="@@works.roleNotDuplicated"
+                      >
               Role cannot be duplicated
             </mat-error>
-          </mat-form-field>
-        </div>
-        <div class="col l3 delete-button">
-          <button
-            mat-icon-button
-            *ngIf="role.disabled || (!role.disabled && i !== 0)"
-            (click)="deleteRole(i)"
+                  }
+                </mat-form-field>
+              }
+            </div>
+            <div class="col l3 delete-button">
+              @if (role.disabled || (!role.disabled && i !== 0)) {
+                <button
+                  mat-icon-button
+                  (click)="deleteRole(i)"
             [attr.aria-label]="
               deleteLabel +
               ' ' +
               (role.get('role').value | roleTranslation | titlecase)
             "
-          >
-            <mat-icon class="material-icons-outlined extra-large-material-icon"
-              >delete
-            </mat-icon>
-          </button>
-        </div>
-      </div>
-      <hr class="dashed-line" *ngIf="role.disabled" />
+                  >
+                  <mat-icon class="material-icons-outlined extra-large-material-icon"
+                    >delete
+                  </mat-icon>
+                </button>
+              }
+            </div>
+          </div>
+          @if (role.disabled) {
+            <hr class="dashed-line" />
+          }
+        </ng-container>
+      }
     </ng-container>
-  </ng-container>
-
-  <div class="row">
-    <a
-      class="underline"
-      (click)="addRole()"
-      id="cy-add-another-role-contributors"
-    >
-      <span class="mat-subtitle-2" i18n="@@works.addAnotherRole">
+    <div class="row">
+      <a
+        class="underline"
+        (click)="addRole()"
+        id="cy-add-another-role-contributors"
+        >
+        <span class="mat-subtitle-2" i18n="@@works.addAnotherRole">
         Add another role
       </span>
-    </a>
+      </a>
+    </div>
   </div>
-</div>
+}

@@ -1,47 +1,53 @@
 <div class="externalIds">
-  <app-panel-data-line
-    *ngIf="workIdentifier?.externalIdentifierType"
-    [title]="typeLabel"
-    [content]="workIdentifier.externalIdentifierType"
-  ></app-panel-data-line>
+  @if (workIdentifier?.externalIdentifierType) {
+    <app-panel-data-line
+      [title]="typeLabel"
+      [content]="workIdentifier.externalIdentifierType"
+    ></app-panel-data-line>
+  }
 
-  <app-panel-data-line
-    *ngIf="workIdentifier?.externalIdentifierId"
-    [title]="valueLabel"
-    [content]="workIdentifier.externalIdentifierId"
-  >
-  </app-panel-data-line>
+  @if (workIdentifier?.externalIdentifierId) {
+    <app-panel-data-line
+      [title]="valueLabel"
+      [content]="workIdentifier.externalIdentifierId"
+      >
+    </app-panel-data-line>
+  }
 
-  <app-panel-data-line
-    *ngIf="workIdentifier?.externalIdentifierUrl"
-    [title]="urlLabel"
-    [content]="workIdentifier.externalIdentifierUrl"
-    [url]="workIdentifier.externalIdentifierUrl"
-  >
-  </app-panel-data-line>
+  @if (workIdentifier?.externalIdentifierUrl) {
+    <app-panel-data-line
+      [title]="urlLabel"
+      [content]="workIdentifier.externalIdentifierUrl"
+      [url]="workIdentifier.externalIdentifierUrl"
+      >
+    </app-panel-data-line>
+  }
 
-  <app-panel-data-line
-    *ngIf="workIdentifier?.externalRelationship"
-    [title]="relationshipLabel"
+  @if (workIdentifier?.externalRelationship) {
+    <app-panel-data-line
+      [title]="relationshipLabel"
     [content]="
       workIdentifier.externalRelationship | recordWorkRelationshipLabel
     "
-  >
-  </app-panel-data-line>
-  <mat-error
-    class="mat-caption"
-    *ngIf="externalIdForm?.get('externalIdentifierId').hasError('validFormat')"
-  >
-    <ng-container i18n="@@works.validFormat">
+      >
+    </app-panel-data-line>
+  }
+  @if (externalIdForm?.get('externalIdentifierId').hasError('validFormat')) {
+    <mat-error
+      class="mat-caption"
+      >
+      <ng-container i18n="@@works.validFormat">
       Invalid id for the selected identifier type
     </ng-container>
-  </mat-error>
-  <mat-error
-    *ngIf="externalIdForm?.get('externalIdentifierUrl').hasError('pattern')"
-    i18n="@@works.invalidUrl"
-  >
+    </mat-error>
+  }
+  @if (externalIdForm?.get('externalIdentifierUrl').hasError('pattern')) {
+    <mat-error
+      i18n="@@works.invalidUrl"
+      >
     Invalid url
   </mat-error>
+  }
 </div>
 <div class="controls">
   <a (click)="edit.emit()" i18n="@@shared.edit">Edit</a>

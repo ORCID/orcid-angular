@@ -3,11 +3,13 @@
   [ngClass]="{ 'columns-4-or-8': !columns12 }"
   [dir]="screenDirection"
   id="modal-container"
->
+  >
   <div class="row header-area no-padding">
     <div class="col s4 m8 l12 no-gutters header-container">
       <ng-content select="app-modal-header"></ng-content>
-      <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+      @if (loading) {
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      }
     </div>
   </div>
   <div>
@@ -17,14 +19,16 @@
     <div
       class="col s4 m8 no-gutters content-wrapper"
       [ngClass]="{ l9: !noSidebar, l12: noSidebar, 'no-padding': noPadding }"
-    >
+      >
       <div class="no-padding modal-content">
         <ng-content></ng-content>
       </div>
     </div>
-    <div class="col l3 no-gutters side-bar" *ngIf="columns12 && !noSidebar">
-      <ng-content select="app-modal-side-bar"></ng-content>
-    </div>
+    @if (columns12 && !noSidebar) {
+      <div class="col l3 no-gutters side-bar">
+        <ng-content select="app-modal-side-bar"></ng-content>
+      </div>
+    }
   </main>
   <div class="row footer-area no-padding">
     <div class="col s4 l12 no-gutters">

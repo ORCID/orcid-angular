@@ -1,113 +1,110 @@
-<ng-container
-  *ngFor="
-    let affiliation of affiliationStack?.affiliations;
-    let i = index;
-    let last = last;
-    trackBy: trackByAffiliationStack
-  "
->
+@for (
+  affiliation of affiliationStack?.affiliations; track trackByAffiliationStack(i,
+  affiliation); let i = $index; let last = $last) {
   <!-- A PANEL COMPONENT FOR EACH AFFILIATION ON THE STACK -->
-
-  <app-panel
-    panelId="affiliation-stack"
-    [userRecord]="userRecord"
-    [elements]="affiliation"
-    [stackSiblings]="affiliationStack.affiliations"
-    [editableVisibilityControl]="isPreferred(affiliation)"
-    [editModalComponent]="modalAffiliationsComponent"
-    [type]="type"
-    [ngStyle]="{ 'z-index': affiliationStack.affiliations.length - i }"
-    [ngClass]="{ last: last }"
-    [putCode]="affiliation.putCode.value"
-    [visibility]="affiliationStack.defaultAffiliation.visibility.visibility"
-    [isPublicRecord]="isPublicRecord"
-    [isUserSource]="affiliation.userIsSource"
-    [userVersionPresent]="affiliationStack.userVersionPresent"
-    [(displayTheStack)]="displayTheStack"
-    [hasExternalIds]="hasExternalIdentifiers"
-    *ngIf="isPreferred(affiliation) || displayTheStack"
-    id="{{ 'cy-affiliation-' + type + '-' + i }}"
-    [panelTitle]="affiliation.affiliationName.value"
-  >
-    <div class="affiliation-title" header>
-      <ng-container *ngIf="professionalActivities">
-        <mat-icon
-          class="material-icons-outlined"
-          *ngIf="type === 'invited-position'"
-          >join_inner</mat-icon
-        >
-        <mat-icon class="material-icons-outlined" *ngIf="type === 'distinction'"
-          >stars</mat-icon
-        >
-        <mat-icon class="material-icons-outlined" *ngIf="type === 'membership'"
-          >card_membership</mat-icon
-        >
-        <mat-icon class="material-icons-outlined" *ngIf="type === 'service'"
-          >badge</mat-icon
-        >
-        <div class="vl"></div>
-      </ng-container>
-      <h4
-        class="orc-font-body"
+  @if (isPreferred(affiliation) || displayTheStack) {
+    <app-panel
+      panelId="affiliation-stack"
+      [userRecord]="userRecord"
+      [elements]="affiliation"
+      [stackSiblings]="affiliationStack.affiliations"
+      [editableVisibilityControl]="isPreferred(affiliation)"
+      [editModalComponent]="modalAffiliationsComponent"
+      [type]="type"
+      [ngStyle]="{ 'z-index': affiliationStack.affiliations.length - i }"
+      [ngClass]="{ last: last }"
+      [putCode]="affiliation.putCode.value"
+      [visibility]="affiliationStack.defaultAffiliation.visibility.visibility"
+      [isPublicRecord]="isPublicRecord"
+      [isUserSource]="affiliation.userIsSource"
+      [userVersionPresent]="affiliationStack.userVersionPresent"
+      [(displayTheStack)]="displayTheStack"
+      [hasExternalIds]="hasExternalIdentifiers"
+      id="{{ 'cy-affiliation-' + type + '-' + i }}"
+      [panelTitle]="affiliation.affiliationName.value"
+      >
+      <div class="affiliation-title" header>
+        @if (professionalActivities) {
+          @if (type === 'invited-position') {
+            <mat-icon
+              class="material-icons-outlined"
+              >join_inner</mat-icon
+              >
+            }
+            @if (type === 'distinction') {
+              <mat-icon class="material-icons-outlined"
+                >stars</mat-icon
+                >
+              }
+              @if (type === 'membership') {
+                <mat-icon class="material-icons-outlined"
+                  >card_membership</mat-icon
+                  >
+                }
+                @if (type === 'service') {
+                  <mat-icon class="material-icons-outlined"
+                    >badge</mat-icon
+                    >
+                  }
+                  <div class="vl"></div>
+                }
+                <h4
+                  class="orc-font-body"
         [ngClass]="{
           mobile: isMobile
         }"
-      >
-        {{ affiliation.affiliationName.value
-        }}<ng-container
-          *ngIf="
-            (affiliation.city?.value && affiliation.country?.value) ||
-            affiliation.country?.value
-          "
-          >:</ng-container
-        >
-
-        <ng-container
-          *ngIf="affiliation.city?.value?.trim() && affiliation.country?.value"
-        >
-          {{ affiliation.city.value }},
-        </ng-container>
-        <ng-container
-          *ngIf="
-            affiliation.region?.value?.trim() && affiliation.country?.value
-          "
-        >
-          {{ affiliation.region.value }},
-        </ng-container>
-        <ng-container *ngIf="affiliation.country?.value">
-          {{ affiliation.country.value }}
-        </ng-container>
-      </h4>
-    </div>
-    <!-- AFFILIATION BODY -->
-    <app-affiliation
-      *ngIf="stackPanelsDisplay[affiliation.putCode.value].topPanelOfTheStack"
-      [affiliation]="affiliation"
-      [panelDetailsState]="panelDetailsState[affiliation.putCode.value]"
-      (toggleDetails)="toggleDetails($event)"
-      [orgDisambiguated]="orgDisambiguated[affiliation.putCode.value]"
-    >
-    </app-affiliation>
-    <!-- AFFILIATION SOURCE -->
-    <app-panel-source
-      [userRecord]="userRecord"
-      [isPreferred]="isPreferred(affiliation)"
-      [sourceName]="affiliation.sourceName || affiliation.source"
-      [assertionOriginName]="affiliation.assertionOriginName"
-      [assertionOriginOrcid]="affiliation.assertionOriginOrcid"
-      [assertionOriginClientId]="affiliation.assertionOriginClientId"
-      [stackLength]="affiliationStack.affiliations.length"
-      [(displayTheStack)]="displayTheStack"
-      (makePrimary)="makePrimaryCard(affiliation)"
+                  >
+                  {{ affiliation.affiliationName.value
+                  }}@if (
+                  (affiliation.city?.value && affiliation.country?.value) ||
+                  affiliation.country?.value
+                  ) {
+                  :
+                }
+                @if (affiliation.city?.value?.trim() && affiliation.country?.value) {
+                  {{ affiliation.city.value }},
+                }
+                @if (
+                  affiliation.region?.value?.trim() && affiliation.country?.value
+                  ) {
+                  {{ affiliation.region.value }},
+                }
+                @if (affiliation.country?.value) {
+                  {{ affiliation.country.value }}
+                }
+              </h4>
+            </div>
+            <!-- AFFILIATION BODY -->
+            @if (stackPanelsDisplay[affiliation.putCode.value].topPanelOfTheStack) {
+              <app-affiliation
+                [affiliation]="affiliation"
+                [panelDetailsState]="panelDetailsState[affiliation.putCode.value]"
+                (toggleDetails)="toggleDetails($event)"
+                [orgDisambiguated]="orgDisambiguated[affiliation.putCode.value]"
+                >
+              </app-affiliation>
+            }
+            <!-- AFFILIATION SOURCE -->
+            <app-panel-source
+              [userRecord]="userRecord"
+              [isPreferred]="isPreferred(affiliation)"
+              [sourceName]="affiliation.sourceName || affiliation.source"
+              [assertionOriginName]="affiliation.assertionOriginName"
+              [assertionOriginOrcid]="affiliation.assertionOriginOrcid"
+              [assertionOriginClientId]="affiliation.assertionOriginClientId"
+              [stackLength]="affiliationStack.affiliations.length"
+              [(displayTheStack)]="displayTheStack"
+              (makePrimary)="makePrimaryCard(affiliation)"
       [topPanelOfTheStackMode]="
         stackPanelsDisplay[affiliation.putCode.value].topPanelOfTheStack
       "
-      [isPublicRecord]="isPublicRecord"
-      (topPanelOfTheStackModeChange)="changeTopPanelOfTheStack(affiliation)"
-      [type]="type"
-      [item]="affiliation"
-      [panelTitle]="affiliation.affiliationName.value"
-    >
-    </app-panel-source>
-  </app-panel>
-</ng-container>
+              [isPublicRecord]="isPublicRecord"
+              (topPanelOfTheStackModeChange)="changeTopPanelOfTheStack(affiliation)"
+              [type]="type"
+              [item]="affiliation"
+              [panelTitle]="affiliation.affiliationName.value"
+              >
+            </app-panel-source>
+          </app-panel>
+        }
+      }

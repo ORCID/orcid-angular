@@ -10,7 +10,7 @@
       color="primary"
       (click)="saveEvent()"
       id="export-button"
-    >
+      >
       <ng-container i18n="@@works.exportSelectedWorksBibtex">
         Export selected works to BibTeX
       </ng-container>
@@ -21,7 +21,7 @@
       (click)="closeEvent()"
       i18n="@@shared.cancel"
       id="cancel-button"
-    >
+      >
       Cancel
     </button>
   </app-modal-footer>
@@ -37,7 +37,7 @@
         target="_blank"
         href="https://support.orcid.org/hc/en-us/articles/360006971453"
         i18n="@@works.findOut"
-      >
+        >
         Find out more on exporting BibTeX files
       </a>
     </div>
@@ -50,7 +50,7 @@
       ({{ selectedAll ? totalWorks : works.length }})
     </h3>
     <mat-divider class="row orcid-divider"></mat-divider>
-    <ng-container *ngFor="let work of works">
+    @for (work of works; track work) {
       <div class="row work-info">
         <div class="row">
           <h2 class="orc-font-body">
@@ -59,38 +59,39 @@
         </div>
         <div class="orc-font-body-small">
           <strong i18n="@@shared.source">Source</strong>:
-          <ng-container
-            *ngIf="work?.assertionOriginName || work?.assertionOriginOrcid"
-          >
+          @if (work?.assertionOriginName || work?.assertionOriginOrcid) {
             {{ work?.assertionOriginName || work?.assertionOriginOrcid }}
             <i i18n="@@shared.onBehalfOf">via</i>
-          </ng-container>
+          }
           {{ work.sourceName || work.source }}
-          <ng-container *ngIf="work.createdDate">
-            <br *ngIf="isMobile" />
+          @if (work.createdDate) {
+            @if (isMobile) {
+              <br />
+            }
             <strong
               class="added"
               i18n="@@shared.added"
               [ngClass]="{
                 mobile: isMobile
               }"
-            >
+              >
               Added </strong
-            >:
-            {{ work.createdDate | monthDayYearDateToString }}
-          </ng-container>
+              >:
+              {{ work.createdDate | monthDayYearDateToString }}
+            }
+          </div>
         </div>
-      </div>
-      <mat-divider class="row"></mat-divider>
-    </ng-container>
-    <div
-      class="no-info orc-font-body-small"
-      *ngIf="!selectedAll && putCodes?.length === 0"
-    >
-      <mat-icon>error</mat-icon>
-      <ng-container i18n="@@works.noItemsSelected"
-        >No items selected.
+        <mat-divider class="row"></mat-divider>
+      }
+      @if (!selectedAll && putCodes?.length === 0) {
+        <div
+          class="no-info orc-font-body-small"
+          >
+          <mat-icon>error</mat-icon>
+          <ng-container i18n="@@works.noItemsSelected"
+            >No items selected.
       </ng-container>
+        </div>
+      }
     </div>
-  </div>
-</app-modal>
+  </app-modal>

@@ -8,44 +8,45 @@
           [ngClass]="{
             mobile: platform?.columns4
           }"
-        >
-          <mat-progress-bar
-            role="heading"
-            aria-level="2"
-            *ngIf="loading"
-            mode="indeterminate"
-          ></mat-progress-bar>
+          >
+          @if (loading) {
+            <mat-progress-bar
+              role="heading"
+              aria-level="2"
+              mode="indeterminate"
+            ></mat-progress-bar>
+          }
           <mat-card-header>
-            <mat-card-title role="heading" aria-level="1" *ngIf="!isOauthError">
-              <div class="icon">
-                <img src="assets/vectors/orcid.logo.icon.svg" alt="" />
-              </div>
-              <h1
-                class="orc-font-heading-small"
-                i18n="@@ngOrcid.signin.signInToOrcid"
-              >
+            @if (!isOauthError) {
+              <mat-card-title role="heading" aria-level="1">
+                <div class="icon">
+                  <img src="assets/vectors/orcid.logo.icon.svg" alt="" />
+                </div>
+                <h1
+                  class="orc-font-heading-small"
+                  i18n="@@ngOrcid.signin.signInToOrcid"
+                  >
                 Sign in to ORCID
               </h1>
-              <div class="row">
-                <div class="mat-subtitle-2">
-                  <ng-container i18n="@@ngOrcid.signin.dontHaveYourOrcid">
+                <div class="row">
+                  <div class="mat-subtitle-2">
+                    <ng-container i18n="@@ngOrcid.signin.dontHaveYourOrcid">
                     Don't have your ORCID iD yet?
                   </ng-container>
-                  <a
-                    class="row register-now underline"
-                    i18n="@@ngOrcid.signin.registerNow"
-                    (click)="register()"
-                    id="register-button"
-                    >Register now
+                    <a
+                      class="row register-now underline"
+                      i18n="@@ngOrcid.signin.registerNow"
+                      (click)="register()"
+                      id="register-button"
+                      >Register now
                   </a>
+                  </div>
                 </div>
-              </div>
-            </mat-card-title>
+              </mat-card-title>
+            }
           </mat-card-header>
           <mat-card-content>
-            <ng-container
-              *ngIf="(!isLoggedIn && !isOauthError) || isForceLogin"
-            >
+            @if ((!isLoggedIn && !isOauthError) || isForceLogin) {
               <app-form-sign-in
                 (loading)="loading = $event"
                 [email]="email"
@@ -54,31 +55,33 @@
                 (show2FAEmitter)="show2FAEmitter($event)"
                 (isOauthError)="isOauthError = $event"
                 (errorDescription)="errorDescription = $event"
-              >
-                <button
-                  mat-raised-button
-                  (click)="formSignInComponent.onSubmit()"
-                  class="row sign-in-button sign-in-to-orcid-button mat-elevation-z0"
-                  type="submit"
-                  [disabled]="loading"
-                  *ngIf="!show2FA"
-                  i18n="@@ngOrcid.signin.signInToOrcid"
-                  id="signin-button"
                 >
+                @if (!show2FA) {
+                  <button
+                    mat-raised-button
+                    (click)="formSignInComponent.onSubmit()"
+                    class="row sign-in-button sign-in-to-orcid-button mat-elevation-z0"
+                    type="submit"
+                    [disabled]="loading"
+                    i18n="@@ngOrcid.signin.signInToOrcid"
+                    id="signin-button"
+                    >
                   Sign in to ORCID
                 </button>
+                }
               </app-form-sign-in>
               <div class="separator orc-font-body">
                 {{ orLabel | uppercase }}
               </div>
               <app-social></app-social>
-            </ng-container>
-            <app-logged-in
-              *ngIf="isLoggedIn && !isForceLogin && !isOauthError"
-              [displayName]="displayName"
-              [realUserOrcid]="realUserOrcid"
-            >
-            </app-logged-in>
+            }
+            @if (isLoggedIn && !isForceLogin && !isOauthError) {
+              <app-logged-in
+                [displayName]="displayName"
+                [realUserOrcid]="realUserOrcid"
+                >
+              </app-logged-in>
+            }
           </mat-card-content>
         </mat-card>
       </div>

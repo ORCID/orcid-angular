@@ -1,4 +1,4 @@
-<ng-container *ngIf="!showReactivationSent || showReactivationSentError">
+@if (!showReactivationSent || showReactivationSentError) {
   <mat-error class="orcid-error">
     <mat-icon inline="true">error</mat-icon>
     <ng-container i18n="@@ngOrcid.signin.deactivated">
@@ -24,52 +24,56 @@
       <input matInput formControlName="email" appTrim />
       <mat-hint i18n="@@ngOrcid.signin.emailHint"
         >example&#64;email.com</mat-hint
-      >
-
-      <mat-error
-        i18n="@@ngOrcid.signin.requiredEmail"
-        *ngIf="emailFormControl.hasError('required')"
-        >Email is required
+        >
+        @if (emailFormControl.hasError('required')) {
+          <mat-error
+            i18n="@@ngOrcid.signin.requiredEmail"
+            >Email is required
       </mat-error>
-
-      <mat-error
-        i18n="@@ngOrcid.signin.invalidEmail"
-        *ngIf="
+        }
+        @if (
           emailFormControl.hasError('email') ||
           emailFormControl.hasError('pattern')
-        "
-        >Use the format example&#64;email.com
+          ) {
+          <mat-error
+            i18n="@@ngOrcid.signin.invalidEmail"
+            >Use the format example&#64;email.com
       </mat-error>
-    </mat-form-field>
-    <button
-      mat-raised-button
-      (click)="onSubmit()"
-      color="primary"
-      class="row mat-elevation-z0 deactivate"
-      type="submit"
-      [disabled]="loading"
-      i18n="@@ngOrcid.signin.submit"
-    >
+        }
+      </mat-form-field>
+      <button
+        mat-raised-button
+        (click)="onSubmit()"
+        color="primary"
+        class="row mat-elevation-z0 deactivate"
+        type="submit"
+        [disabled]="loading"
+        i18n="@@ngOrcid.signin.submit"
+        >
       SUBMIT
     </button>
-  </form>
-</ng-container>
-<mat-error *ngIf="showReactivationSent" class="orcid-error">
-  <ng-container i18n="@@ngOrcid.signin.verify.reactivationSent">
+    </form>
+  }
+  @if (showReactivationSent) {
+    <mat-error class="orcid-error">
+      <ng-container i18n="@@ngOrcid.signin.verify.reactivationSent">
     Thank you for reactivating your ORCID record; please complete the process by
     following the steps in the email we are now sending you. If you don’t
     receive an email from us, please
   </ng-container>
-  <a
-    class="mat-button-font"
-    (click)="navigateTo('https://support.orcid.org/')"
-    i18n="@@ngOrcid.signin.contactSupport"
-    >contact support
+      <a
+        class="mat-button-font"
+        (click)="navigateTo('https://support.orcid.org/')"
+        i18n="@@ngOrcid.signin.contactSupport"
+        >contact support
   </a>
-</mat-error>
-<mat-error *ngIf="showReactivationSentError" class="orcid-error">
-  <mat-icon inline="true">error</mat-icon>
-  <ng-container>
-    {{ showReactivationSentErrorMessage }}
-  </ng-container>
-</mat-error>
+    </mat-error>
+  }
+  @if (showReactivationSentError) {
+    <mat-error class="orcid-error">
+      <mat-icon inline="true">error</mat-icon>
+      <ng-container>
+        {{ showReactivationSentErrorMessage }}
+      </ng-container>
+    </mat-error>
+  }

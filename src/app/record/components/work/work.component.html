@@ -2,109 +2,110 @@
 <!-- GENERAL DATA DISPLAY BY DEFAULT -->
 <app-panel-data [borderBottom]="!featured" [featured]="featured">
   <div>
-    <div class="general-data" *ngIf="work?.journalTitle">
-      {{ work.journalTitle.value }}
-    </div>
+    @if (work?.journalTitle) {
+      <div class="general-data">
+        {{ work.journalTitle.value }}
+      </div>
+    }
     <div class="general-data">
-      <ng-container *ngIf="work?.publicationDate?.year"
-        >{{ work.publicationDate | monthDayYearDateToString }}
+      @if (work?.publicationDate?.year) {
+        {{ work.publicationDate | monthDayYearDateToString }}
         |
-      </ng-container>
+      }
       {{ work?.workType.value | recordWorkTypeLabel }}
-      <ng-container
-        *ngIf="
-          work?.contributorsGroupedByOrcid
-            | recordHolderRoles : isPublicRecord : id as roles
-        "
-      >
-        <ng-container *ngIf="roles">
+      @if (
+        work?.contributorsGroupedByOrcid
+        | recordHolderRoles : isPublicRecord : id; as roles
+        ) {
+        @if (roles) {
           |
           <span class="record-holder">{{ roles }}</span>
-        </ng-container>
-      </ng-container>
+        }
+      }
     </div>
     @if (!minimized) {
-    <app-display-external-ids
-      [externalIdentifiers]="work?.workExternalIdentifiers"
-    ></app-display-external-ids>
-    <div
-      class="general-data"
-      *ngIf="work?.contributorsGroupedByOrcid?.length > 0"
-    >
-      <span class="uppercase" i18n="@@works.contributors">Contributors</span>:
-      <ng-container
-        *ngFor="
-          let contributor of work?.contributorsGroupedByOrcid
-            | slice : 0 : maxNumberContributors;
-          let last = last
-        "
-      >
-        <ng-container
-          *ngIf="
-            contributor?.creditName &&
-            contributor?.creditName?.content !== privateName
-          "
-        >
-          {{ contributor?.creditName?.content + (!last ? '; ' : '') }}
-        </ng-container>
-        <ng-container
-          *ngIf="
-            (!contributor?.creditName ||
+      <app-display-external-ids
+        [externalIdentifiers]="work?.workExternalIdentifiers"
+      ></app-display-external-ids>
+      @if (work?.contributorsGroupedByOrcid?.length > 0) {
+        <div
+          class="general-data"
+          >
+          <span class="uppercase" i18n="@@works.contributors">Contributors</span>:
+          @for (
+            contributor of work?.contributorsGroupedByOrcid
+            | slice : 0 : maxNumberContributors; track
+            contributor; let last = $last) {
+            @if (
+              contributor?.creditName &&
+              contributor?.creditName?.content !== privateName
+              ) {
+              {{ contributor?.creditName?.content + (!last ? '; ' : '') }}
+            }
+            @if (
+              (!contributor?.creditName ||
               contributor?.creditName?.content === privateName) &&
-            contributor?.contributorOrcid?.uri
-          "
-        >
-          <ng-container *ngIf="contributor?.contributorOrcid?.uri">
-            <a
-              class="underline"
-              target="_blank"
-              rel="noreferrer noopener"
-              href="{{ contributor?.contributorOrcid?.uri }}"
-              >{{ contributor?.contributorOrcid?.path }}</a
-            >{{ !last ? '; ' : '' }}
-          </ng-container>
-        </ng-container>
-      </ng-container>
-      <span
-        *ngIf="work?.numberOfContributors > maxNumberContributors"
-        i18n="@@works.etAl"
-      >
+              contributor?.contributorOrcid?.uri
+              ) {
+              @if (contributor?.contributorOrcid?.uri) {
+                <a
+                  class="underline"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  href="{{ contributor?.contributorOrcid?.uri }}"
+                  >{{ contributor?.contributorOrcid?.path }}</a
+                  >{{ !last ? '; ' : '' }}
+                }
+              }
+            }
+            @if (work?.numberOfContributors > maxNumberContributors) {
+              <span
+                i18n="@@works.etAl"
+                >
         et al.
       </span>
+            }
+          </div>
+        }
+      }
     </div>
-    }
-  </div>
 
-  <div align-end *ngIf="!featured">
-    <a
-      class="underline"
-      (click)="toggleDetails.next(work)"
-      *ngIf="!panelDetailsState?.state"
-      i18n="@@shared.showMoreDetail"
+    @if (!featured) {
+      <div align-end>
+        @if (!panelDetailsState?.state) {
+          <a
+            class="underline"
+            (click)="toggleDetails.next(work)"
+            i18n="@@shared.showMoreDetail"
       [attr.aria-label]="
         'work' | appPanelActivityActionAriaLabel : 'show' : work?.title?.value
       "
-      >Show more detail</a
-    >
-    <a
-      class="underline"
-      (click)="toggleDetails.next(work)"
-      *ngIf="panelDetailsState?.state"
-      i18n="@@shared.showLessDetail"
+            >Show more detail</a
+            >
+          }
+          @if (panelDetailsState?.state) {
+            <a
+              class="underline"
+              (click)="toggleDetails.next(work)"
+              i18n="@@shared.showLessDetail"
       [attr.aria-label]="
         'work' | appPanelActivityActionAriaLabel : 'hide' : work?.title?.value
       "
-      >Show less detail</a
-    >
-  </div>
-</app-panel-data>
+              >Show less detail</a
+              >
+            }
+          </div>
+        }
+      </app-panel-data>
 
-<!-- DATA DISPLAY WHEN "MORE DETAILS" IS CLICKED -->
+      <!-- DATA DISPLAY WHEN "MORE DETAILS" IS CLICKED -->
 
-<app-panel-data [borderBottom]="true" *ngIf="panelDetailsState?.state">
-  <app-work-details
-    [work]="work"
-    [isPublicRecord]="isPublicRecord"
-    [id]="id"
-  ></app-work-details>
-</app-panel-data>
+      @if (panelDetailsState?.state) {
+        <app-panel-data [borderBottom]="true">
+          <app-work-details
+            [work]="work"
+            [isPublicRecord]="isPublicRecord"
+            [id]="id"
+          ></app-work-details>
+        </app-panel-data>
+      }

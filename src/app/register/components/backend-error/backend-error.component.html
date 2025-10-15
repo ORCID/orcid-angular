@@ -1,36 +1,36 @@
-<ng-container
-  *ngIf="
-    recognizedError[errorCode] === 0 ||
-    recognizedError[errorCode] === 3 ||
-    recognizedError[errorCode] === 4
-  "
->
-  <ng-container
-    *ngIf="
-      (showEmailAlreadyExistUntilNextButtonWasClicked &&
-        nextButtonWasClicked) ||
-      !showEmailAlreadyExistUntilNextButtonWasClicked
-    "
-  >
+@if (
+  recognizedError[errorCode] === 0 ||
+  recognizedError[errorCode] === 3 ||
+  recognizedError[errorCode] === 4
+  ) {
+  @if (
+    (showEmailAlreadyExistUntilNextButtonWasClicked &&
+    nextButtonWasClicked) ||
+    !showEmailAlreadyExistUntilNextButtonWasClicked
+    ) {
     <ng-container i18n="@@register.emailIsAlreadyAssociated"
       >This email is already associated with an existing ORCID record. Please
       use a different email address to continue registering a new ORCID iD.
     </ng-container>
-  </ng-container>
-</ng-container>
+  }
+}
 
-<ng-container
-  *ngIf="recognizedError[errorCode] === 1"
-  i18n="@@register.additionalEmailMatchPrimary"
->
+@if (recognizedError[errorCode] === 1) {
+  <ng-container
+    i18n="@@register.additionalEmailMatchPrimary"
+    >
   Additional email cannot match primary email
 </ng-container>
+}
 
-<ng-container
-  *ngIf="recognizedError[errorCode] === 2"
-  i18n="@@register.additionalEmailMatch"
->
+@if (recognizedError[errorCode] === 2) {
+  <ng-container
+    i18n="@@register.additionalEmailMatch"
+    >
   Additional emails cannot be duplicated
 </ng-container>
+}
 
-<ng-container *ngIf="unrecognizedError"> {{ errorCode }} </ng-container>
+@if (unrecognizedError) {
+  {{ errorCode }}
+}

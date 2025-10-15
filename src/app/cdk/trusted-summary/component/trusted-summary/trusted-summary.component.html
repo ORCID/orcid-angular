@@ -1,452 +1,474 @@
-<main
-  *ngIf="trustedSummary"
-  class="panel"
+@if (trustedSummary) {
+  <main
+    class="panel"
   [ngClass]="{
     'stand-alone-mode': standaloneMode,
     mobile: mobile,
     'inside-iframe': insideIframe
   }"
->
-  <header class="panel-header" *ngIf="standaloneMode">
-    <!-- orcid logo -->
-    <img
-      *ngIf="trustedSummary?.status === 'active'"
-      height="40px"
-      src="./assets/vectors/orcid.logo.icon.svg"
-    />
-    <img
-      *ngIf="trustedSummary?.status === 'deprecated'"
-      height="40px"
-      src="/assets/vectors/orcid.logo-deprecated.icon.svg"
-    />
-    <img
-      *ngIf="trustedSummary?.status === 'locked'"
-      height="40px"
-      src="./assets/vectors/orcid.logo-locked.icon.svg"
-    />
-    <img
-      *ngIf="trustedSummary?.status === 'deactivated'"
-      height="40px"
-      src="./assets/vectors/orcid.logo-deactivated.icon.svg"
-    />
-
-    <div *ngIf="trustedSummary">
-      <a
-        class="orc-font-body-small cursor-pointer header-name"
-        href="{{ trustedSummary.orcid || orcid }}"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <h1 class="orc-font-body-large">
-          <ng-container *ngIf="trustedSummary.status === 'active'">
-            <ng-container
-              *ngIf="!trustedSummary?.name"
-              i18n="@@summary.nameIsPrivateOrLimited"
-              >Name is private or limited</ng-container
-            >
-            <ng-container *ngIf="trustedSummary?.name">{{
-              trustedSummary.name
-            }}</ng-container>
-          </ng-container>
-          <ng-container
-            *ngIf="trustedSummary.status === 'locked'"
-            i18n="@@summary.recordIsLocked"
-          >
+    >
+    @if (standaloneMode) {
+      <header class="panel-header">
+        <!-- orcid logo -->
+        @if (trustedSummary?.status === 'active') {
+          <img
+            height="40px"
+            src="./assets/vectors/orcid.logo.icon.svg"
+            />
+        }
+        @if (trustedSummary?.status === 'deprecated') {
+          <img
+            height="40px"
+            src="/assets/vectors/orcid.logo-deprecated.icon.svg"
+            />
+        }
+        @if (trustedSummary?.status === 'locked') {
+          <img
+            height="40px"
+            src="./assets/vectors/orcid.logo-locked.icon.svg"
+            />
+        }
+        @if (trustedSummary?.status === 'deactivated') {
+          <img
+            height="40px"
+            src="./assets/vectors/orcid.logo-deactivated.icon.svg"
+            />
+        }
+        @if (trustedSummary) {
+          <div>
+            <a
+              class="orc-font-body-small cursor-pointer header-name"
+              href="{{ trustedSummary.orcid || orcid }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              >
+              <h1 class="orc-font-body-large">
+                @if (trustedSummary.status === 'active') {
+                  @if (!trustedSummary?.name) {
+                    <ng-container
+                      i18n="@@summary.nameIsPrivateOrLimited"
+                      >Name is private or limited</ng-container
+                      >
+                    }
+                    @if (trustedSummary?.name) {
+                      {{
+                      trustedSummary.name
+                      }}
+                    }
+                  }
+                  @if (trustedSummary.status === 'locked') {
+                    <ng-container
+                      i18n="@@summary.recordIsLocked"
+                      >
             This record is locked
           </ng-container>
-          <ng-container
-            *ngIf="trustedSummary.status === 'deprecated'"
-            i18n="@@summary.recordIsDeprecated"
-          >
+                  }
+                  @if (trustedSummary.status === 'deprecated') {
+                    <ng-container
+                      i18n="@@summary.recordIsDeprecated"
+                      >
             This record has been deprecated
           </ng-container>
-
-          <ng-container
-            *ngIf="trustedSummary.status === 'deactivated'"
-            i18n="@@summary.recordIsDeactivated"
-          >
+                  }
+                  @if (trustedSummary.status === 'deactivated') {
+                    <ng-container
+                      i18n="@@summary.recordIsDeactivated"
+                      >
             This record has been deactivated
           </ng-container>
-        </h1>
-
-        <div class="label-with-icon">
-          <label>
-            {{ currentLocation }}/<strong>{{ orcid }} </strong>
-          </label>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            fill="none"
-          >
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M12.0006 8.80024C12.0006 8.35846 12.3588 8.00026 12.8007 8.00026C13.2425 8.00026 13.6007 8.35846 13.6007 8.80024V13.6001C13.6007 14.9256 12.5262 16.0001 11.2006 16.0001H2.40012C1.07452 16.0001 0 14.9256 0 13.6001V4.80033C0 3.47483 1.07452 2.40039 2.40012 2.40039H7.20037C7.64218 2.40039 8.00041 2.75859 8.00041 3.20037C8.00041 3.64215 7.64218 4.00035 7.20037 4.00035H2.40012C1.95831 4.00035 1.60008 4.35856 1.60008 4.80033V13.6001C1.60008 14.0419 1.95831 14.4001 2.40012 14.4001H11.2006C11.6424 14.4001 12.0006 14.0419 12.0006 13.6001V8.80024Z"
-              fill="#8EC2DB"
-            />
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M14.4 1.59996H10.3998C9.95796 1.59996 9.59973 1.24176 9.59973 0.799981C9.59973 0.358204 9.95796 0 10.3998 0H15.2C15.6418 0 16.0001 0.358204 16.0001 0.799981V5.59986C16.0001 6.04164 15.6418 6.39985 15.2 6.39985C14.7582 6.39985 14.4 6.04164 14.4 5.59986V1.59996Z"
-              fill="#8EC2DB"
-            />
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M6.9634 10.1654C6.65088 10.4777 6.14443 10.4777 5.83191 10.1654C5.51957 9.85293 5.51957 9.34652 5.83191 9.03402L14.6324 0.234234C14.9449 -0.0780781 15.4513 -0.0780781 15.7638 0.234234C16.0762 0.546725 16.0762 1.05314 15.7638 1.36564L6.9634 10.1654Z"
-              fill="#8EC2DB"
-            />
-          </svg>
-        </div>
-      </a>
-    </div>
-  </header>
-  <div
-    class="panel-body"
+                  }
+                </h1>
+                <div class="label-with-icon">
+                  <label>
+                    {{ currentLocation }}/<strong>{{ orcid }} </strong>
+                  </label>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M12.0006 8.80024C12.0006 8.35846 12.3588 8.00026 12.8007 8.00026C13.2425 8.00026 13.6007 8.35846 13.6007 8.80024V13.6001C13.6007 14.9256 12.5262 16.0001 11.2006 16.0001H2.40012C1.07452 16.0001 0 14.9256 0 13.6001V4.80033C0 3.47483 1.07452 2.40039 2.40012 2.40039H7.20037C7.64218 2.40039 8.00041 2.75859 8.00041 3.20037C8.00041 3.64215 7.64218 4.00035 7.20037 4.00035H2.40012C1.95831 4.00035 1.60008 4.35856 1.60008 4.80033V13.6001C1.60008 14.0419 1.95831 14.4001 2.40012 14.4001H11.2006C11.6424 14.4001 12.0006 14.0419 12.0006 13.6001V8.80024Z"
+                      fill="#8EC2DB"
+                      />
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M14.4 1.59996H10.3998C9.95796 1.59996 9.59973 1.24176 9.59973 0.799981C9.59973 0.358204 9.95796 0 10.3998 0H15.2C15.6418 0 16.0001 0.358204 16.0001 0.799981V5.59986C16.0001 6.04164 15.6418 6.39985 15.2 6.39985C14.7582 6.39985 14.4 6.04164 14.4 5.59986V1.59996Z"
+                      fill="#8EC2DB"
+                      />
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M6.9634 10.1654C6.65088 10.4777 6.14443 10.4777 5.83191 10.1654C5.51957 9.85293 5.51957 9.34652 5.83191 9.03402L14.6324 0.234234C14.9449 -0.0780781 15.4513 -0.0780781 15.7638 0.234234C16.0762 0.546725 16.0762 1.05314 15.7638 1.36564L6.9634 10.1654Z"
+                      fill="#8EC2DB"
+                      />
+                  </svg>
+                </div>
+              </a>
+            </div>
+          }
+        </header>
+      }
+      <div
+        class="panel-body"
     [ngClass]="{
       'panel-body-1-cols': mobile,
       'panel-body-3-cols': !mobile
     }"
-  >
-    <div
-      class="column"
-      [ngClass]="{ 'column-border': !mobile && (twoColumns || threeColumns) }"
-    >
-      <ng-container *ngIf="trustedSummary.employmentAffiliations?.length">
-        <a
-          tabindex="0"
-          rel="noopener noreferrer"
-          (mouseenter)="affiliationsHover = true"
-          (mouseleave)="affiliationsHover = false"
-          (click)="goToActivitySection('affiliations')"
-          (keydown)="goToActivitySection('affiliations', $event)"
-          [attr.aria-label]="ariaLabelAffiliations"
         >
-          <h3
-            class="orc-font-small-print"
-            i18n="@@summary.affiliations"
-            [ngClass]="{ 'hover-effect': affiliationsHover }"
+        <div
+          class="column"
+          [ngClass]="{ 'column-border': !mobile && (twoColumns || threeColumns) }"
           >
+          @if (trustedSummary.employmentAffiliations?.length) {
+            <a
+              tabindex="0"
+              rel="noopener noreferrer"
+              (mouseenter)="affiliationsHover = true"
+              (mouseleave)="affiliationsHover = false"
+              (click)="goToActivitySection('affiliations')"
+              (keydown)="goToActivitySection('affiliations', $event)"
+              [attr.aria-label]="ariaLabelAffiliations"
+              >
+              <h3
+                class="orc-font-small-print"
+                i18n="@@summary.affiliations"
+                [ngClass]="{ 'hover-effect': affiliationsHover }"
+                >
             AFFILIATIONS
           </h3>
-        </a>
-        <app-summary-panel
-          [url]="trustedSummary?.orcid + '#affiliations'"
-          [activitySummary]="trustedSummary.employmentAffiliations"
-          [count]="trustedSummary.employmentAffiliationsCount"
-          [moreLabel]="labelMoreAffiliations"
-          [moreLabelSingular]="labelMoreAffiliation"
-          [ariaLabelActivitySection]="ariaLabelAffiliations"
-          [hoverEffect]="affiliationsHover"
-          [standaloneMode]="standaloneMode"
-          [activitySection]="'affiliations'"
-        ></app-summary-panel>
-      </ng-container>
-      <ng-container *ngIf="emailDomains?.length >= 1">
-        <a
-          tabindex="0"
-          rel="noopener noreferrer"
-          (click)="goToActivitySection('emails-panel')"
-          (keydown)="goToActivitySection('emails-panel', $event)"
-          [attr.aria-label]="ariaLabelEmailDomains"
-          (mouseenter)="emailDomainsHover = true"
-          (mouseleave)="emailDomainsHover = false"
-        >
-          <h3
-            class="orc-font-small-print"
-            i18n="@@summary.emailDomains"
-            [ngClass]="{ 'hover-effect': emailDomainsHover }"
-          >
+            </a>
+            <app-summary-panel
+              [url]="trustedSummary?.orcid + '#affiliations'"
+              [activitySummary]="trustedSummary.employmentAffiliations"
+              [count]="trustedSummary.employmentAffiliationsCount"
+              [moreLabel]="labelMoreAffiliations"
+              [moreLabelSingular]="labelMoreAffiliation"
+              [ariaLabelActivitySection]="ariaLabelAffiliations"
+              [hoverEffect]="affiliationsHover"
+              [standaloneMode]="standaloneMode"
+              [activitySection]="'affiliations'"
+            ></app-summary-panel>
+          }
+          @if (emailDomains?.length >= 1) {
+            <a
+              tabindex="0"
+              rel="noopener noreferrer"
+              (click)="goToActivitySection('emails-panel')"
+              (keydown)="goToActivitySection('emails-panel', $event)"
+              [attr.aria-label]="ariaLabelEmailDomains"
+              (mouseenter)="emailDomainsHover = true"
+              (mouseleave)="emailDomainsHover = false"
+              >
+              <h3
+                class="orc-font-small-print"
+                i18n="@@summary.emailDomains"
+                [ngClass]="{ 'hover-effect': emailDomainsHover }"
+                >
             EMAIL DOMAINS
           </h3>
-        </a>
-        <app-summary-simple-panel
-          [simpleActivities]="emailDomains"
-          [count]="trustedSummary.emailDomainsCount"
-          [overflowUrl]="trustedSummary?.orcid + '#emails-panel'"
-          [moreLabel]="labelMoreEmailDomains"
-          [moreLabelSingular]="labelMoreEmailDomain"
-          [ariaLabelActivitySection]="labelMoreEmailDomains"
-          [hoverEffect]="emailDomainsHover"
-          [standaloneMode]="standaloneMode"
-          [activitySection]="'emails-panel'"
-          [trustedSummary]="trustedSummary"
-          *ngIf="!loading"
-        ></app-summary-simple-panel>
-      </ng-container>
-      <ng-container *ngIf="lastUpdateDate || creationDateWithOffset">
-        <h3 class="orc-font-small-print" i18n="@@summary.keyDates">
+            </a>
+            @if (!loading) {
+              <app-summary-simple-panel
+                [simpleActivities]="emailDomains"
+                [count]="trustedSummary.emailDomainsCount"
+                [overflowUrl]="trustedSummary?.orcid + '#emails-panel'"
+                [moreLabel]="labelMoreEmailDomains"
+                [moreLabelSingular]="labelMoreEmailDomain"
+                [ariaLabelActivitySection]="labelMoreEmailDomains"
+                [hoverEffect]="emailDomainsHover"
+                [standaloneMode]="standaloneMode"
+                [activitySection]="'emails-panel'"
+                [trustedSummary]="trustedSummary"
+              ></app-summary-simple-panel>
+            }
+          }
+          @if (lastUpdateDate || creationDateWithOffset) {
+            <h3 class="orc-font-small-print" i18n="@@summary.keyDates">
           KEY DATES
         </h3>
-        <div class="card-container">
-          <ul>
-            <li>
-              <div
-                *ngIf="creationDateWithOffset"
-                class="date-item"
+            <div class="card-container">
+              <ul>
+                <li>
+                  @if (creationDateWithOffset) {
+                    <div
+                      class="date-item"
                 [ngClass]="{
                   'last-date': !lastUpdateDate
                 }"
-              >
-                <label
-                  class="orc-font-small-print caption day-title"
-                  i18n="@@summary.recordCreated"
-                  >Record created</label
-                >
-                <label class="orc-font-body-small" *ngIf="!createdToday">{{
-                  creationDateWithOffset | date
-                }}</label>
-                <label
-                  class="orc-font-body-small"
-                  *ngIf="createdToday"
-                  i18n="@@shared.today"
-                  >Today</label
-                >
+                      >
+                      <label
+                        class="orc-font-small-print caption day-title"
+                        i18n="@@summary.recordCreated"
+                        >Record created</label
+                        >
+                        @if (!createdToday) {
+                          <label class="orc-font-body-small">{{
+                            creationDateWithOffset | date
+                          }}</label>
+                        }
+                        @if (createdToday) {
+                          <label
+                            class="orc-font-body-small"
+                            i18n="@@shared.today"
+                            >Today</label
+                            >
+                          }
+                        </div>
+                      }
+                    </li>
+                    @if (lastUpdateDate) {
+                      <li>
+                        <div class="date-item last-date">
+                          <label
+                            class="orc-font-small-print caption day-title"
+                            i18n="@@summary.lastUpdated"
+                            >Last updated</label
+                            >
+                            <label class="orc-font-body-small">{{
+                              lastUpdateDate | date
+                            }}</label>
+                          </div>
+                        </li>
+                      }
+                    </ul>
+                  </div>
+                }
               </div>
-            </li>
-            <li *ngIf="lastUpdateDate">
-              <div class="date-item last-date">
-                <label
-                  class="orc-font-small-print caption day-title"
-                  i18n="@@summary.lastUpdated"
-                  >Last updated</label
-                >
-                <label class="orc-font-body-small">{{
-                  lastUpdateDate | date
-                }}</label>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </ng-container>
-    </div>
-    <div
-      class="column"
-      [ngClass]="{ 'column-border': !mobile && threeColumns }"
-      *ngIf="
-        peerReviews?.length ||
-        works?.length ||
-        funds?.length ||
-        researchResoruces?.length
-      "
-    >
-      <ng-container *ngIf="works?.length">
-        <a
-          tabindex="0"
-          rel="noopener noreferrer"
-          (mouseenter)="worksHover = true"
-          (mouseleave)="worksHover = false"
-          (click)="goToActivitySection('works')"
-          (keydown)="goToActivitySection('works', $event)"
-          [attr.aria-label]="ariaLabelWorks"
-        >
-          <h3
-            class="orc-font-small-print"
-            i18n="@@summary.works"
+              @if (
+                peerReviews?.length ||
+                works?.length ||
+                funds?.length ||
+                researchResoruces?.length
+                ) {
+                <div
+                  class="column"
+                  [ngClass]="{ 'column-border': !mobile && threeColumns }"
+                  >
+                  @if (works?.length) {
+                    <a
+                      tabindex="0"
+                      rel="noopener noreferrer"
+                      (mouseenter)="worksHover = true"
+                      (mouseleave)="worksHover = false"
+                      (click)="goToActivitySection('works')"
+                      (keydown)="goToActivitySection('works', $event)"
+                      [attr.aria-label]="ariaLabelWorks"
+                      >
+                      <h3
+                        class="orc-font-small-print"
+                        i18n="@@summary.works"
             [ngClass]="{
               'hover-effect': worksHover
             }"
-          >
+                        >
             WORKS
           </h3>
-        </a>
-        <app-summary-simple-panel
-          [hoverEffect]="worksHover"
-          [simpleActivities]="works"
-        ></app-summary-simple-panel>
-      </ng-container>
-      <ng-container *ngIf="peerReviews?.length">
-        <a
-          tabindex="0"
-          rel="noopener noreferrer"
-          (mouseenter)="peerReviewsHover = true"
-          (mouseleave)="peerReviewsHover = false"
-          (click)="goToActivitySection('peer-reviews')"
-          (keydown)="goToActivitySection('peer-reviews', $event)"
-          [attr.aria-label]="ariaLabelPeerReviews"
-        >
-          <h3
-            class="orc-font-small-print"
+                    </a>
+                    <app-summary-simple-panel
+                      [hoverEffect]="worksHover"
+                      [simpleActivities]="works"
+                    ></app-summary-simple-panel>
+                  }
+                  @if (peerReviews?.length) {
+                    <a
+                      tabindex="0"
+                      rel="noopener noreferrer"
+                      (mouseenter)="peerReviewsHover = true"
+                      (mouseleave)="peerReviewsHover = false"
+                      (click)="goToActivitySection('peer-reviews')"
+                      (keydown)="goToActivitySection('peer-reviews', $event)"
+                      [attr.aria-label]="ariaLabelPeerReviews"
+                      >
+                      <h3
+                        class="orc-font-small-print"
             [ngClass]="{
               'hover-effect': peerReviewsHover
             }"
-            i18n="@@summary.peerReviews"
-          >
+                        i18n="@@summary.peerReviews"
+                        >
             PEER REVIEWS
           </h3>
-        </a>
-        <app-summary-simple-panel
-          [hoverEffect]="peerReviewsHover"
-          [simpleActivities]="peerReviews"
-        ></app-summary-simple-panel>
-      </ng-container>
-      <ng-container *ngIf="funds?.length">
-        <a
-          tabindex="0"
-          rel="noopener noreferrer"
-          (mouseenter)="fundsHover = true"
-          (mouseleave)="fundsHover = false"
-          (click)="goToActivitySection('funding')"
-          (keydown)="goToActivitySection('funding', $event)"
-          [attr.aria-label]="ariaLabelFundings"
-        >
-          <h3
-            class="orc-font-small-print"
+                    </a>
+                    <app-summary-simple-panel
+                      [hoverEffect]="peerReviewsHover"
+                      [simpleActivities]="peerReviews"
+                    ></app-summary-simple-panel>
+                  }
+                  @if (funds?.length) {
+                    <a
+                      tabindex="0"
+                      rel="noopener noreferrer"
+                      (mouseenter)="fundsHover = true"
+                      (mouseleave)="fundsHover = false"
+                      (click)="goToActivitySection('funding')"
+                      (keydown)="goToActivitySection('funding', $event)"
+                      [attr.aria-label]="ariaLabelFundings"
+                      >
+                      <h3
+                        class="orc-font-small-print"
             [ngClass]="{
               'hover-effect': fundsHover
             }"
-            i18n="@@summary.funding"
-          >
+                        i18n="@@summary.funding"
+                        >
             FUNDING
           </h3>
-        </a>
-
-        <app-summary-simple-panel
-          [hoverEffect]="fundsHover"
-          [simpleActivities]="funds"
-        ></app-summary-simple-panel>
-      </ng-container>
-      <ng-container *ngIf="researchResoruces?.length">
-        <a
-          tabindex="0"
-          rel="noopener noreferrer"
-          (mouseenter)="researchResorucesHover = true"
-          (mouseleave)="researchResorucesHover = false"
-          (click)="goToActivitySection('research-resources')"
-          (keydown)="goToActivitySection('research-resources', $event)"
-          [attr.aria-label]="ariaLabelResearchResources"
-        >
-          <h3
-            class="orc-font-small-print"
+                    </a>
+                    <app-summary-simple-panel
+                      [hoverEffect]="fundsHover"
+                      [simpleActivities]="funds"
+                    ></app-summary-simple-panel>
+                  }
+                  @if (researchResoruces?.length) {
+                    <a
+                      tabindex="0"
+                      rel="noopener noreferrer"
+                      (mouseenter)="researchResorucesHover = true"
+                      (mouseleave)="researchResorucesHover = false"
+                      (click)="goToActivitySection('research-resources')"
+                      (keydown)="goToActivitySection('research-resources', $event)"
+                      [attr.aria-label]="ariaLabelResearchResources"
+                      >
+                      <h3
+                        class="orc-font-small-print"
             [ngClass]="{
               'hover-effect': researchResorucesHover
             }"
-            i18n="@@summary.researchResources"
-          >
+                        i18n="@@summary.researchResources"
+                        >
             RESEARCH RESOURCES
           </h3>
-        </a>
-
-        <app-summary-simple-panel
-          [hoverEffect]="researchResorucesHover"
-          [simpleActivities]="researchResoruces"
-        ></app-summary-simple-panel>
-      </ng-container>
-    </div>
-    <div
-      class="column"
-      *ngIf="
-        trustedSummary.professionalActivities?.length ||
-        externalIdentifiers?.length ||
-        trustedSummary.educationQualifications?.length
-      "
-    >
-      <ng-container *ngIf="trustedSummary.professionalActivities?.length">
-        <a
-          tabindex="0"
-          rel="noopener noreferrer"
-          (mouseenter)="professionalActivitiesHover = true"
-          (mouseleave)="professionalActivitiesHover = false"
-          (click)="goToActivitySection('professional-activities')"
-          (keydown)="goToActivitySection('professional-activities', $event)"
-        >
-          <h3
-            class="orc-font-small-print"
-            i18n="@@summary.professionalActivites"
+                    </a>
+                    <app-summary-simple-panel
+                      [hoverEffect]="researchResorucesHover"
+                      [simpleActivities]="researchResoruces"
+                    ></app-summary-simple-panel>
+                  }
+                </div>
+              }
+              @if (
+                trustedSummary.professionalActivities?.length ||
+                externalIdentifiers?.length ||
+                trustedSummary.educationQualifications?.length
+                ) {
+                <div
+                  class="column"
+                  >
+                  @if (trustedSummary.professionalActivities?.length) {
+                    <a
+                      tabindex="0"
+                      rel="noopener noreferrer"
+                      (mouseenter)="professionalActivitiesHover = true"
+                      (mouseleave)="professionalActivitiesHover = false"
+                      (click)="goToActivitySection('professional-activities')"
+                      (keydown)="goToActivitySection('professional-activities', $event)"
+                      >
+                      <h3
+                        class="orc-font-small-print"
+                        i18n="@@summary.professionalActivites"
             [ngClass]="{
               'hover-effect': professionalActivitiesHover
             }"
-            [attr.aria-label]="ariaLabelProfessionalActivities"
-          >
+                        [attr.aria-label]="ariaLabelProfessionalActivities"
+                        >
             PROFESSIONAL ACTIVITIES
           </h3>
-        </a>
-        <app-summary-panel
-          [hoverEffect]="professionalActivitiesHover"
-          [url]="trustedSummary?.orcid + '#professional-activities'"
-          [activitySummary]="trustedSummary.professionalActivities"
-          [count]="trustedSummary.professionalActivitiesCount"
-          [moreLabel]="labelMoreProfessionalActivities"
-          [moreLabelSingular]="labelMoreProfessionalActivitie"
-          [ariaLabelActivitySection]="ariaLabelProfessionalActivities"
-          [standaloneMode]="standaloneMode"
-          [activitySection]="'professional-activities'"
-        ></app-summary-panel>
-      </ng-container>
-      <ng-container *ngIf="trustedSummary.educationQualifications?.length">
-        <a
-          tabindex="0"
-          rel="noopener noreferrer"
-          (mouseenter)="educationQualificationsHover = true"
-          (mouseleave)="educationQualificationsHover = false"
-          (click)="goToActivitySection('education-and-qualification')"
-          (keydown)="goToActivitySection('education-and-qualification', $event)"
-        >
-          <h3
-            class="orc-font-small-print"
-            i18n="@@summary.educationQualificationActivites"
+                    </a>
+                    <app-summary-panel
+                      [hoverEffect]="professionalActivitiesHover"
+                      [url]="trustedSummary?.orcid + '#professional-activities'"
+                      [activitySummary]="trustedSummary.professionalActivities"
+                      [count]="trustedSummary.professionalActivitiesCount"
+                      [moreLabel]="labelMoreProfessionalActivities"
+                      [moreLabelSingular]="labelMoreProfessionalActivitie"
+                      [ariaLabelActivitySection]="ariaLabelProfessionalActivities"
+                      [standaloneMode]="standaloneMode"
+                      [activitySection]="'professional-activities'"
+                    ></app-summary-panel>
+                  }
+                  @if (trustedSummary.educationQualifications?.length) {
+                    <a
+                      tabindex="0"
+                      rel="noopener noreferrer"
+                      (mouseenter)="educationQualificationsHover = true"
+                      (mouseleave)="educationQualificationsHover = false"
+                      (click)="goToActivitySection('education-and-qualification')"
+                      (keydown)="goToActivitySection('education-and-qualification', $event)"
+                      >
+                      <h3
+                        class="orc-font-small-print"
+                        i18n="@@summary.educationQualificationActivites"
             [ngClass]="{
               'hover-effect': educationQualificationsHover
             }"
-            [attr.aria-label]="ariaLabelEducationQualificationsActions"
-          >
+                        [attr.aria-label]="ariaLabelEducationQualificationsActions"
+                        >
             EDUCATION AND QUALIFICATIONS
           </h3>
-        </a>
-        <app-summary-panel
-          [hoverEffect]="educationQualificationsHover"
-          [url]="trustedSummary?.orcid + '#education-and-qualification'"
-          [activitySummary]="trustedSummary.educationQualifications"
-          [count]="trustedSummary.educationQualificationsCount"
-          [moreLabel]="labelMoreEducationQualifications"
-          [moreLabelSingular]="labelMoreEducationQualification"
-          [ariaLabelActivitySection]="ariaLabelEducationQualificationsActions"
-          [standaloneMode]="standaloneMode"
-          [activitySection]="'education-and-qualification'"
-        ></app-summary-panel>
-      </ng-container>
-      <ng-container *ngIf="externalIdentifiers?.length">
-        <a
-          tabindex="0"
-          rel="noopener noreferrer"
-          (click)="goToActivitySection('other-identifiers')"
-          (keydown)="goToActivitySection('other-identifiers', $event)"
-          [attr.aria-label]="ariaLabelIdentifiers"
-          (mouseenter)="externalIdentifiersHover = true"
-          (mouseleave)="externalIdentifiersHover = false"
-        >
-          <h3
-            class="orc-font-small-print"
-            i18n="@@summary.otherids"
-            [ngClass]="{ 'hover-effect': externalIdentifiersHover }"
-          >
+                    </a>
+                    <app-summary-panel
+                      [hoverEffect]="educationQualificationsHover"
+                      [url]="trustedSummary?.orcid + '#education-and-qualification'"
+                      [activitySummary]="trustedSummary.educationQualifications"
+                      [count]="trustedSummary.educationQualificationsCount"
+                      [moreLabel]="labelMoreEducationQualifications"
+                      [moreLabelSingular]="labelMoreEducationQualification"
+                      [ariaLabelActivitySection]="ariaLabelEducationQualificationsActions"
+                      [standaloneMode]="standaloneMode"
+                      [activitySection]="'education-and-qualification'"
+                    ></app-summary-panel>
+                  }
+                  @if (externalIdentifiers?.length) {
+                    <a
+                      tabindex="0"
+                      rel="noopener noreferrer"
+                      (click)="goToActivitySection('other-identifiers')"
+                      (keydown)="goToActivitySection('other-identifiers', $event)"
+                      [attr.aria-label]="ariaLabelIdentifiers"
+                      (mouseenter)="externalIdentifiersHover = true"
+                      (mouseleave)="externalIdentifiersHover = false"
+                      >
+                      <h3
+                        class="orc-font-small-print"
+                        i18n="@@summary.otherids"
+                        [ngClass]="{ 'hover-effect': externalIdentifiersHover }"
+                        >
             OTHER IDENTIFIERS
           </h3>
-        </a>
-        <app-summary-simple-panel
-          [simpleActivities]="externalIdentifiers"
-          [count]="externalIdentifiers?.length"
-          [overflowUrl]="trustedSummary?.orcid + '#other-identifiers'"
-          [moreLabel]="labelMoreOtherIdentifiers"
-          [moreLabelSingular]="labelMoreOtherIdentifier"
-          [ariaLabelActivitySection]="ariaLabelIdentifiers"
-          [hoverEffect]="externalIdentifiersHover"
-          [standaloneMode]="standaloneMode"
-          [activitySection]="'other-identifiers'"
-          [trustedSummary]="trustedSummary"
-          *ngIf="!loading"
-        ></app-summary-simple-panel>
-      </ng-container>
-    </div>
-  </div>
-</main>
-<main class="loading" *ngIf="!trustedSummary">
-  <div>
-    <mat-spinner></mat-spinner>
-    <p class="orc-font-body-small" i18n="@@summary.loadingRecordSummary">
+                    </a>
+                    @if (!loading) {
+                      <app-summary-simple-panel
+                        [simpleActivities]="externalIdentifiers"
+                        [count]="externalIdentifiers?.length"
+                        [overflowUrl]="trustedSummary?.orcid + '#other-identifiers'"
+                        [moreLabel]="labelMoreOtherIdentifiers"
+                        [moreLabelSingular]="labelMoreOtherIdentifier"
+                        [ariaLabelActivitySection]="ariaLabelIdentifiers"
+                        [hoverEffect]="externalIdentifiersHover"
+                        [standaloneMode]="standaloneMode"
+                        [activitySection]="'other-identifiers'"
+                        [trustedSummary]="trustedSummary"
+                      ></app-summary-simple-panel>
+                    }
+                  }
+                </div>
+              }
+            </div>
+          </main>
+        }
+        @if (!trustedSummary) {
+          <main class="loading">
+            <div>
+              <mat-spinner></mat-spinner>
+              <p class="orc-font-body-small" i18n="@@summary.loadingRecordSummary">
       Loading record summary
     </p>
-  </div>
-</main>
+            </div>
+          </main>
+        }

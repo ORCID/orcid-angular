@@ -16,8 +16,12 @@
     </b>
   </p>
   <p class="orc-font-heading-small">
-    <b *ngIf="twoFactorState" class="on" i18n="@@account.on">ON</b>
-    <b *ngIf="!twoFactorState" class="off" i18n="@@account.off">OFF</b>
+    @if (twoFactorState) {
+      <b class="on" i18n="@@account.on">ON</b>
+    }
+    @if (!twoFactorState) {
+      <b class="off" i18n="@@account.off">OFF</b>
+    }
   </p>
   <div class="button-container">
     <button
@@ -25,13 +29,17 @@
       color="primary"
       id="cy-two-factor-switch"
       (click)="twoFactor()"
-    >
-      <ng-container *ngIf="!twoFactorState" i18n="@@account.turnOnTwoFactor">
+      >
+      @if (!twoFactorState) {
+        <ng-container i18n="@@account.turnOnTwoFactor">
         Turn on two-factor authentication
       </ng-container>
-      <ng-container *ngIf="twoFactorState" i18n="@@account.turnOffTwoFactor">
+      }
+      @if (twoFactorState) {
+        <ng-container i18n="@@account.turnOffTwoFactor">
         Turn off two-factor authentication
       </ng-container>
+      }
     </button>
   </div>
 </app-settings-panels-data>

@@ -3,63 +3,64 @@
     <div class="row space-around">
       <div class="col l6 m6 s4">
         <mat-card appearance="outlined" class="orcid-wizard">
-          <mat-progress-bar
-            role="heading"
-            aria-level="2"
-            *ngIf="loading"
-            mode="indeterminate"
-          ></mat-progress-bar>
+          @if (loading) {
+            <mat-progress-bar
+              role="heading"
+              aria-level="2"
+              mode="indeterminate"
+            ></mat-progress-bar>
+          }
           <mat-card-header>
             <mat-card-title role="heading" aria-level="1">
               <ng-container i18n="@@twoFactor.title"
                 >ORCID Two-factor authentication</ng-container
-              >
-              <button
-                mat-icon-button
-                [attr.aria-label]="labelInfo"
-                type="button"
-                [mdePopoverTriggerFor]="twoFactorPopover"
-                mdePopoverTriggerOn="click"
-                #twoFactorPopoverTrigger="mdePopoverTrigger"
-              >
-                <mat-icon>info</mat-icon>
-              </button>
-              <mde-popover
-                #twoFactorPopover="mdePopover"
-                [mdePopoverOverlapTrigger]="false"
-                [mdePopoverCloseOnClick]="true"
-              >
-                <mat-card
-                  appearance="outlined"
-                  class="mat-elevation-z3 orcid-popover"
                 >
-                  <ng-container i18n="@@twoFactor.enabled"
-                    >Two-factor authentication is currently enabled for your
+                <button
+                  mat-icon-button
+                  [attr.aria-label]="labelInfo"
+                  type="button"
+                  [mdePopoverTriggerFor]="twoFactorPopover"
+                  mdePopoverTriggerOn="click"
+                  #twoFactorPopoverTrigger="mdePopoverTrigger"
+                  >
+                  <mat-icon>info</mat-icon>
+                </button>
+                <mde-popover
+                  #twoFactorPopover="mdePopover"
+                  [mdePopoverOverlapTrigger]="false"
+                  [mdePopoverCloseOnClick]="true"
+                  >
+                  <mat-card
+                    appearance="outlined"
+                    class="mat-elevation-z3 orcid-popover"
+                    >
+                    <ng-container i18n="@@twoFactor.enabled"
+                      >Two-factor authentication is currently enabled for your
                     ORCID account, so an additional code is required even when
                     signing in with another account.
                   </ng-container>
-                  <a
-                    href="https://support.orcid.org/hc/en-us/articles/360006971673"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                    i18n="@@twoFactor.learn"
-                  >
+                    <a
+                      href="https://support.orcid.org/hc/en-us/articles/360006971673"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                      i18n="@@twoFactor.learn"
+                      >
                     Learn more
                   </a>
-                </mat-card>
-              </mde-popover>
-            </mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <app-two-factor-authentication-form
-              [showBadVerificationCode]="showBadVerificationCode"
-              [showBadRecoveryCode]="showBadRecoveryCode"
-              (authenticate)="authenticate($event)"
-            >
-            </app-two-factor-authentication-form>
-          </mat-card-content>
-        </mat-card>
+                  </mat-card>
+                </mde-popover>
+              </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <app-two-factor-authentication-form
+                [showBadVerificationCode]="showBadVerificationCode"
+                [showBadRecoveryCode]="showBadRecoveryCode"
+                (authenticate)="authenticate($event)"
+                >
+              </app-two-factor-authentication-form>
+            </mat-card-content>
+          </mat-card>
+        </div>
       </div>
     </div>
-  </div>
-</main>
+  </main>

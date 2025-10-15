@@ -1,11 +1,12 @@
 <form [formGroup]="authorizationForm" (ngSubmit)="(!show2FA)">
-  <app-my-orcid-alerts
-    *ngIf="emailVerified || invalidVerifyUrl || (printError && badCredentials)"
-    [emailVerified]="emailVerified"
-    [invalidVerifyUrl]="invalidVerifyUrl"
-    [printError]="printError"
-    [badCredentials]="badCredentials"
-  ></app-my-orcid-alerts>
+  @if (emailVerified || invalidVerifyUrl || (printError && badCredentials)) {
+    <app-my-orcid-alerts
+      [emailVerified]="emailVerified"
+      [invalidVerifyUrl]="invalidVerifyUrl"
+      [printError]="printError"
+      [badCredentials]="badCredentials"
+    ></app-my-orcid-alerts>
+  }
   <div class="input-container">
     <mat-label
       class="orc-font-small-print"
@@ -14,8 +15,8 @@
         error: usernameForm?.touched && usernameForm.errors
       }"
       ><ng-container i18n="@@register.Email"> Email </ng-container>&nbsp;<i
-        i18n="@@account.or"
-        >or</i
+      i18n="@@account.or"
+      >or</i
       >&nbsp;<ng-container i18n="@@account.orcidID"> ORCID iD </ng-container>
     </mat-label>
     <mat-form-field
@@ -23,7 +24,7 @@
       [hideRequiredMarker]="true"
       async
       class="no-hint"
-    >
+      >
       <input
         aria-labelledby="username-input-label"
         id="username-input"
@@ -31,41 +32,45 @@
         matInput
         [placeholder]="placeholderUsername"
         #firstInput
-      />
+        />
     </mat-form-field>
-    <mat-hint
-      class="orc-font-small-print"
-      i18n="@@ngOrcid.signin.forExample"
-      *ngIf="!usernameForm.invalid"
-      >For example: joe&#64;institution.edu or 0000-1234-5678-9101
+    @if (!usernameForm.invalid) {
+      <mat-hint
+        class="orc-font-small-print"
+        i18n="@@ngOrcid.signin.forExample"
+        >For example: joe&#64;institution.edu or 0000-1234-5678-9101
     </mat-hint>
+    }
 
-    <mat-error
-      i18n="@@ngOrcid.signin.pleaseEnterEmailAddress"
-      *ngIf="usernameForm.hasError('required')"
-      >Please enter your email address or your ORCID iD
+    @if (usernameForm.hasError('required')) {
+      <mat-error
+        i18n="@@ngOrcid.signin.pleaseEnterEmailAddress"
+        >Please enter your email address or your ORCID iD
     </mat-error>
+    }
 
-    <mat-error
-      i18n="@@ngOrcid.signin.enterValidEmailOrOrcidForExample"
-      *ngIf="usernameForm.hasError('invalidUserName')"
-      >Please enter a valid email address or ORCID iD, for example:
+    @if (usernameForm.hasError('invalidUserName')) {
+      <mat-error
+        i18n="@@ngOrcid.signin.enterValidEmailOrOrcidForExample"
+        >Please enter a valid email address or ORCID iD, for example:
       joe&#64;institution.edu or 0000-1234-5678-9101
     </mat-error>
+    }
 
-    <app-print-errors
-      *ngIf="printError && !badCredentials && !show2FA"
-      [showDeprecatedError]="showDeprecatedError"
-      [showUnclaimedError]="showUnclaimedError"
-      [showDeactivatedError]="showDeactivatedError"
-      [showInvalidUser]="showInvalidUser"
-      [orcidPrimaryDeprecated]="orcidPrimaryDeprecated"
-      [email]="email"
-      (unclaimedAccount)="claimAccount()"
-      (deactivatedAccount)="reactivateEmail()"
-      (signInActiveAccount)="signInActiveAccount()"
-    >
-    </app-print-errors>
+    @if (printError && !badCredentials && !show2FA) {
+      <app-print-errors
+        [showDeprecatedError]="showDeprecatedError"
+        [showUnclaimedError]="showUnclaimedError"
+        [showDeactivatedError]="showDeactivatedError"
+        [showInvalidUser]="showInvalidUser"
+        [orcidPrimaryDeprecated]="orcidPrimaryDeprecated"
+        [email]="email"
+        (unclaimedAccount)="claimAccount()"
+        (deactivatedAccount)="reactivateEmail()"
+        (signInActiveAccount)="signInActiveAccount()"
+        >
+      </app-print-errors>
+    }
   </div>
   <div class="input-container">
     <mat-label
@@ -81,7 +86,7 @@
       [hideRequiredMarker]="true"
       async
       class="no-hint"
-    >
+      >
       <input
         id="password"
         type="password"
@@ -89,46 +94,49 @@
         formControlName="password"
         matInput
         [placeholder]="placeholderPassword"
-      />
+        />
     </mat-form-field>
-    <app-alert-message
-      *ngIf="passwordForm.hasError('maxlength')"
-      aria-live="polite"
-    >
-      <div content class="content">
-        <div>
-          <ng-container i18n="@@ngOrcid.signin.yourPasswordMoreThan"
-            >Your password is more than 256 characters long.</ng-container
-          >
-          <i i18n="@@ngOrcid.signin.yourCannotSignIn"
-            >You cannot sign in to this ORCID account until you have reset your
-            password.</i
-          >
-        </div>
-        <a (click)="forgotPassword()" i18n="@@ngOrcid.signin.resetYourPassword">
-          Reset your password</a
+    @if (passwordForm.hasError('maxlength')) {
+      <app-alert-message
+        aria-live="polite"
         >
-      </div>
-    </app-alert-message>
-  </div>
-  <mat-divider></mat-divider>
+        <div content class="content">
+          <div>
+            <ng-container i18n="@@ngOrcid.signin.yourPasswordMoreThan"
+              >Your password is more than 256 characters long.</ng-container
+              >
+              <i i18n="@@ngOrcid.signin.yourCannotSignIn"
+                >You cannot sign in to this ORCID account until you have reset your
+            password.</i
+                >
+              </div>
+              <a (click)="forgotPassword()" i18n="@@ngOrcid.signin.resetYourPassword">
+          Reset your password</a
+                >
+              </div>
+            </app-alert-message>
+          }
+        </div>
+        <mat-divider></mat-divider>
 
-  <ng-content></ng-content>
+        <ng-content></ng-content>
 
-  <app-two-factor-authentication-form
-    *ngIf="show2FA"
-    [showBadVerificationCode]="showBadVerificationCode"
-    [showBadRecoveryCode]="showBadRecoveryCode"
-    (authenticate)="authenticate($event)"
-  >
-  </app-two-factor-authentication-form>
-  <a
-    *ngIf="showForgotYourPassword"
-    class="row forgot underline orc-font-body-small forgot-password-button"
-    i18n="@@ngOrcid.signin.forgotYourPassword"
-    (click)="forgotPassword()"
-    id="forgot-password-button"
-  >
+        @if (show2FA) {
+          <app-two-factor-authentication-form
+            [showBadVerificationCode]="showBadVerificationCode"
+            [showBadRecoveryCode]="showBadRecoveryCode"
+            (authenticate)="authenticate($event)"
+            >
+          </app-two-factor-authentication-form>
+        }
+        @if (showForgotYourPassword) {
+          <a
+            class="row forgot underline orc-font-body-small forgot-password-button"
+            i18n="@@ngOrcid.signin.forgotYourPassword"
+            (click)="forgotPassword()"
+            id="forgot-password-button"
+            >
     Forgot your password or ORCID ID?
   </a>
-</form>
+        }
+      </form>

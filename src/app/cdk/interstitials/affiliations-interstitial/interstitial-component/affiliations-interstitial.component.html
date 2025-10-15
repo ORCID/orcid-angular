@@ -1,4 +1,4 @@
-<ng-container *ngIf="beforeSummit">
+@if (beforeSummit) {
   <mat-card-header class="authorize-header">
     <mat-card-title role="heading" aria-level="1">
       <mat-icon class="logo-icon"
@@ -7,386 +7,390 @@
       <h1
         class="orc-font-heading-small"
         i18n="@@interstitial.employmentAffiliationFound"
-      >
+        >
         Employment affiliation found
       </h1>
     </mat-card-title>
   </mat-card-header>
-
-  <mat-card-content
-    [formGroup]="form"
-    *ngIf="form"
-    class="authorize-content"
-    [ngClass]="{ 'no-padding': !platform.columns12 }"
-  >
-    <app-info-panel *ngIf="rorIdHasBeenMatched">
-      <ng-container i18n="@@interstitial.basedOnTheVerifiedEmail"
-        >Based on the verified email</ng-container
+  @if (form) {
+    <mat-card-content
+      [formGroup]="form"
+      class="authorize-content"
+      [ngClass]="{ 'no-padding': !platform.columns12 }"
       >
-      <strong> {{ userDomainMatched }}</strong
-      >,
-      <ng-container i18n="@@interstitial.weThinkYouAreCurrentlyAffiliatedWith"
-        >we think you are currently affiliated with</ng-container
-      >
-      <strong>
-        {{ autoCompleteDisplayOrganization(organizationFromDatabase) }}.</strong
-      >&ngsp;
-      <ng-container
+      @if (rorIdHasBeenMatched) {
+        <app-info-panel>
+          <ng-container i18n="@@interstitial.basedOnTheVerifiedEmail"
+            >Based on the verified email</ng-container
+            >
+            <strong> {{ userDomainMatched }}</strong
+              >,
+              <ng-container i18n="@@interstitial.weThinkYouAreCurrentlyAffiliatedWith"
+                >we think you are currently affiliated with</ng-container
+                >
+                <strong>
+                  {{ autoCompleteDisplayOrganization(organizationFromDatabase) }}.</strong
+                  >&ngsp;
+                  <ng-container
         i18n="
           @@interstitial.webePreselectedThisOrganizationForYouInTheFormBelow"
-      >
+                    >
         We’ve pre-selected this organization for you in the form below.
       </ng-container>
-    </app-info-panel>
-
-    <section>
-      <div
-        id="organization"
-        class="title"
+                </app-info-panel>
+              }
+              <section>
+                <div
+                  id="organization"
+                  class="title"
         [ngClass]="{
           'orc-font-body': !platform.columns12,
           'orc-font-body-large': platform.columns12
         }"
-      ></div>
-
-      <div class="row">
-        <label
-          id="organization-label"
-          class="mat-caption"
+                ></div>
+                <div class="row">
+                  <label
+                    id="organization-label"
+                    class="mat-caption"
           [ngClass]="{
             error: organizationIsInvalidAndTouched
           }"
-        >
-          <strong i18n="@@interstitial.organization">Organization</strong>
-        </label>
-      </div>
-
-      <div class="input-container" id="cy-org-dd-div">
-        <mat-form-field
-          appearance="outline"
-          class="mat-form-field-min"
-          id="cy-org-dd-mat-form"
+                    >
+                    <strong i18n="@@interstitial.organization">Organization</strong>
+                  </label>
+                </div>
+                <div class="input-container" id="cy-org-dd-div">
+                  <mat-form-field
+                    appearance="outline"
+                    class="mat-form-field-min"
+                    id="cy-org-dd-mat-form"
           [ngClass]="{
             'two-line-hint': organizationFromDatabase?.value.length > 50,
             'selected-org': organizationIsValidAndTouched
           }"
-        >
-          <input
-            aria-labelledby="organizationLabel"
-            [readonly]="organizationIsValidAndTouched"
+                    >
+                    <input
+                      aria-labelledby="organizationLabel"
+                      [readonly]="organizationIsValidAndTouched"
             [attr.aria-label]="
               rorIdHasBeenMatched
                 ? ariaLabelPrefilledOrganization
                 : ariaLabelOrganization
             "
-            id="organization-input"
-            matInput
-            formControlName="organization"
-            [matAutocomplete]="auto"
-            [attr.aria-invalid]="organizationIsInvalidAndTouched"
-            [placeholder]="organizationPlaceholder"
-          />
-          <mat-autocomplete
-            autoActiveFirstOption
-            #auto="matAutocomplete"
-            [displayWith]="autoCompleteDisplayOrganization"
-            id="cy-org-dd"
-          >
-            <ng-container *ngIf="filteredOptions$" id="cy-org-filtered-options">
-              <mat-option
-                *ngFor="let option of filteredOptions$ | async"
-                [value]="option"
-              >
-                <div class="row orc-font-body-small title">
-                  {{ option.value }}
+                      id="organization-input"
+                      matInput
+                      formControlName="organization"
+                      [matAutocomplete]="auto"
+                      [attr.aria-invalid]="organizationIsInvalidAndTouched"
+                      [placeholder]="organizationPlaceholder"
+                      />
+                    <mat-autocomplete
+                      autoActiveFirstOption
+                      #auto="matAutocomplete"
+                      [displayWith]="autoCompleteDisplayOrganization"
+                      id="cy-org-dd"
+                      >
+                      @if (filteredOptions$) {
+                        <ng-container id="cy-org-filtered-options">
+                          @for (option of filteredOptions$ | async; track option) {
+                            <mat-option
+                              [value]="option"
+                              >
+                              <div class="row orc-font-body-small title">
+                                {{ option.value }}
+                              </div>
+                              <div class="row orc-font-small-print">
+                                {{ option.city }} {{ option.region }} {{ option.country }}
+                              </div>
+                            </mat-option>
+                          }
+                        </ng-container>
+                      }
+                    </mat-autocomplete>
+                    @if (form.get('organization').value) {
+                      <button
+                        class="clear"
+                        matSuffix
+                        mat-icon-button
+                        [attr.aria-label]="ariaLabelClearOrganization"
+                        (click)="clearOrganization()"
+                        >
+                        <mat-icon>close</mat-icon>
+                      </button>
+                    }
+                  </mat-form-field>
+                  @if (organizationFromDatabase && displayOrganizationHint) {
+                    <div
+                      class="selected-org orc-font-small-print"
+                      >
+                      {{ organizationFromDatabase.city
+                      }}@if (organizationFromDatabase.city) {
+                      ,
+                    }
+                    {{ organizationFromDatabase.region
+                    }}@if (organizationFromDatabase.region) {
+                    ,
+                  }
+                  {{ organizationFromDatabase.country }}
                 </div>
-                <div class="row orc-font-small-print">
-                  {{ option.city }} {{ option.region }} {{ option.country }}
-                </div>
-              </mat-option>
-            </ng-container>
-          </mat-autocomplete>
-
-          <button
-            class="clear"
-            matSuffix
-            mat-icon-button
-            [attr.aria-label]="ariaLabelClearOrganization"
-            *ngIf="form.get('organization').value"
-            (click)="clearOrganization()"
-          >
-            <mat-icon>close</mat-icon>
-          </button>
-        </mat-form-field>
-        <div
-          class="selected-org orc-font-small-print"
-          *ngIf="organizationFromDatabase && displayOrganizationHint"
-        >
-          {{ organizationFromDatabase.city
-          }}<ng-container *ngIf="organizationFromDatabase.city">,</ng-container>
-          {{ organizationFromDatabase.region
-          }}<ng-container *ngIf="organizationFromDatabase.region"
-            >,</ng-container
-          >
-          {{ organizationFromDatabase.country }}
-        </div>
-        <div
-          class="selected-org orc-font-small-print error"
-          *ngIf="
-            !organizationFromDatabase &&
-            form.get('organization').value &&
-            organizationIsInvalidAndTouched &&
-            displayOrganizationHint
-          "
-          i18n="@@register.weCantIdentifyThisOrganization"
-        >
+              }
+              @if (
+                !organizationFromDatabase &&
+                form.get('organization').value &&
+                organizationIsInvalidAndTouched &&
+                displayOrganizationHint
+                ) {
+                <div
+                  class="selected-org orc-font-small-print error"
+                  i18n="@@register.weCantIdentifyThisOrganization"
+                  >
           We can’t identify this organization. Please try entering the
           organization name again.
         </div>
-        <mat-error
-          class="selected-org orc-font-small-print error"
-          *ngIf="
-            !organizationFromDatabase &&
-            !form.get('organization').value &&
-            organizationIsInvalidAndTouched &&
-            !displayOrganizationHint
-          "
-          i18n="@@register.pleaseEnterAnOrganizationName"
-        >
+              }
+              @if (
+                !organizationFromDatabase &&
+                !form.get('organization').value &&
+                organizationIsInvalidAndTouched &&
+                !displayOrganizationHint
+                ) {
+                <mat-error
+                  class="selected-org orc-font-small-print error"
+                  i18n="@@register.pleaseEnterAnOrganizationName"
+                  >
           Please enter an organization name
         </mat-error>
-      </div>
-    </section>
-
-    <div class="input-container">
-      <mat-label
-        id="department-input-label"
-        class="orc-font-small-print strong"
+              }
+            </div>
+          </section>
+          <div class="input-container">
+            <mat-label
+              id="department-input-label"
+              class="orc-font-small-print strong"
         [ngClass]="{
           error: departmentNameIsInvalidAndTouched
         }"
-        ><ng-container i18n="@@register.department">Department</ng-container>
-
-        <label i18n="@@register.optional">(Optional)</label></mat-label
-      >
-      <mat-form-field appearance="outline" [hideRequiredMarker]="true">
-        <input
-          aria-labelledby="department-input-label"
-          id="department-input"
-          formControlName="departmentName"
-          matInput
-          [placeholder]="departmentPlaceholder"
-        />
-      </mat-form-field>
-      <mat-error
-        *ngIf="departmentNameIsInvalidAndTouched"
-        i18n="@@shared.maxLength.less_than_one_thousand"
-      >
+              ><ng-container i18n="@@register.department">Department</ng-container>
+              <label i18n="@@register.optional">(Optional)</label></mat-label
+              >
+              <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+                <input
+                  aria-labelledby="department-input-label"
+                  id="department-input"
+                  formControlName="departmentName"
+                  matInput
+                  [placeholder]="departmentPlaceholder"
+                  />
+              </mat-form-field>
+              @if (departmentNameIsInvalidAndTouched) {
+                <mat-error
+                  i18n="@@shared.maxLength.less_than_one_thousand"
+                  >
         Must be less than 1000 characters
       </mat-error>
-    </div>
-
-    <div class="input-container">
-      <mat-label
-        id="role-input-label"
-        class="orc-font-small-print"
+              }
+            </div>
+            <div class="input-container">
+              <mat-label
+                id="role-input-label"
+                class="orc-font-small-print"
         [ngClass]="{
           error: roleTitleIsInvalidAndTouched
         }"
-        ><ng-container i18n="@@register.roleJobTitle"
-          >Role/Job title</ng-container
-        >
-        <label i18n="@@register.optional">(Optional)</label></mat-label
-      >
-      <mat-form-field appearance="outline" [hideRequiredMarker]="true">
-        <input
-          aria-labelledby="role-input-label"
-          id="role-input"
-          formControlName="roleTitle"
-          matInput
-          [placeholder]="rolePlaceholder"
-        />
-      </mat-form-field>
-      <mat-error
-        *ngIf="roleTitleIsInvalidAndTouched"
-        i18n="@@shared.maxLength.less_than_one_thousand"
-      >
+                ><ng-container i18n="@@register.roleJobTitle"
+                >Role/Job title</ng-container
+                >
+                <label i18n="@@register.optional">(Optional)</label></mat-label
+                >
+                <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+                  <input
+                    aria-labelledby="role-input-label"
+                    id="role-input"
+                    formControlName="roleTitle"
+                    matInput
+                    [placeholder]="rolePlaceholder"
+                    />
+                </mat-form-field>
+                @if (roleTitleIsInvalidAndTouched) {
+                  <mat-error
+                    i18n="@@shared.maxLength.less_than_one_thousand"
+                    >
         Must be less than 1000 characters
       </mat-error>
-    </div>
-
-    <!-- Start date  -->
-
-    <div class="input-container" formGroupName="startDateGroup">
-      <div class="row">
-        <mat-label
-          id="start-date-input-label"
-          class="orc-font-small-print"
+                }
+              </div>
+              <!-- Start date  -->
+              <div class="input-container" formGroupName="startDateGroup">
+                <div class="row">
+                  <mat-label
+                    id="start-date-input-label"
+                    class="orc-font-small-print"
           [ngClass]="{
             error: form.hasError('date', 'startDateGroup')
           }"
-        >
-          <ng-container i18n="@@shared.startDate">Start date</ng-container>
-          <label i18n="@@register.optional">(Optional)</label>
-        </mat-label>
-      </div>
-      <!--Start date year  -->
-      <div class="row date-group">
-        <div class="row date-inputs-container">
-          <div class="date-input">
-            <mat-form-field
-              id="start-date-year-input"
-              appearance="outline"
-              class="mat-form-field-min no-hint"
-            >
-              <mat-select
-                aria-label="{{ ariaLabelStartDate + ' ' + ngOrcidYear }}"
-                placeholder="{{ ngOrcidYear }}"
-                formControlName="startDateYear"
-              >
-                <mat-option i18n="@@shared.year" [value]="">Year</mat-option>
-                <mat-option *ngFor="let year of years" [value]="year">
-                  {{ year }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <!-- Start date month -->
-          <div class="date-divider">/</div>
-          <div class="date-input">
-            <mat-form-field
-              id="start-date-month-input"
-              appearance="outline"
-              class="mat-form-field-min no-hint"
-            >
-              <mat-select
-                aria-label="{{ ariaLabelStartDate + ' ' + ngOrcidMonth }}"
-                placeholder="{{ ngOrcidMonth }}"
-                formControlName="startDateMonth"
-              >
-                <mat-option i18n="@@shared.month" [value]="">Month</mat-option>
-                <mat-option *ngFor="let month of months" [value]="month">
-                  {{ month | trailingZeros }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-        </div>
-        <div class="row">
-          <mat-error
-            class="mat-caption error-out-input-context"
-            i18n="@@shared.invalidDate"
-            *ngIf="form.get('startDateGroup').errors?.date"
-          >
+                    >
+                    <ng-container i18n="@@shared.startDate">Start date</ng-container>
+                    <label i18n="@@register.optional">(Optional)</label>
+                  </mat-label>
+                </div>
+                <!--Start date year  -->
+                <div class="row date-group">
+                  <div class="row date-inputs-container">
+                    <div class="date-input">
+                      <mat-form-field
+                        id="start-date-year-input"
+                        appearance="outline"
+                        class="mat-form-field-min no-hint"
+                        >
+                        <mat-select
+                          aria-label="{{ ariaLabelStartDate + ' ' + ngOrcidYear }}"
+                          placeholder="{{ ngOrcidYear }}"
+                          formControlName="startDateYear"
+                          >
+                          <mat-option i18n="@@shared.year" [value]="">Year</mat-option>
+                          @for (year of years; track year) {
+                            <mat-option [value]="year">
+                              {{ year }}
+                            </mat-option>
+                          }
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <!-- Start date month -->
+                    <div class="date-divider">/</div>
+                    <div class="date-input">
+                      <mat-form-field
+                        id="start-date-month-input"
+                        appearance="outline"
+                        class="mat-form-field-min no-hint"
+                        >
+                        <mat-select
+                          aria-label="{{ ariaLabelStartDate + ' ' + ngOrcidMonth }}"
+                          placeholder="{{ ngOrcidMonth }}"
+                          formControlName="startDateMonth"
+                          >
+                          <mat-option i18n="@@shared.month" [value]="">Month</mat-option>
+                          @for (month of months; track month) {
+                            <mat-option [value]="month">
+                              {{ month | trailingZeros }}
+                            </mat-option>
+                          }
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    @if (form.get('startDateGroup').errors?.date) {
+                      <mat-error
+                        class="mat-caption error-out-input-context"
+                        i18n="@@shared.invalidDate"
+                        >
             Invalid date
           </mat-error>
-        </div>
-      </div>
-    </div>
-
-    <mat-divider class="last"></mat-divider>
-    <button
-      class="authorize-button"
-      mat-raised-button
-      color="primary"
-      (click)="accept(true)"
-      id="authorize-button"
-      [disabled]="!form.valid"
-      i18n="@@interstitial.addThisAffiliation"
-    >
+                    }
+                  </div>
+                </div>
+              </div>
+              <mat-divider class="last"></mat-divider>
+              <button
+                class="authorize-button"
+                mat-raised-button
+                color="primary"
+                (click)="accept(true)"
+                id="authorize-button"
+                [disabled]="!form.valid"
+                i18n="@@interstitial.addThisAffiliation"
+                >
       Add this affiliation
     </button>
-    <a
-      mat-button
-      id="deny-button"
-      class="underline"
-      (click)="accept(false)"
-      i18n="@@interstitial.continueWithoutAddingAffiliation"
-    >
+              <a
+                mat-button
+                id="deny-button"
+                class="underline"
+                (click)="accept(false)"
+                i18n="@@interstitial.continueWithoutAddingAffiliation"
+                >
       Continue without adding affiliation
     </a>
-  </mat-card-content>
-
-  <mat-spinner
-    *ngIf="!form"
-    class="spinner"
-    [diameter]="80"
-    [strokeWidth]="5"
-  ></mat-spinner>
-</ng-container>
-<ng-container *ngIf="afterSummitStatus">
-  <mat-card-header class="authorize-header">
-    <mat-card-title role="heading" aria-level="1">
-      <mat-icon class="logo-icon"
-        ><img src="./assets/vectors/orcid.logo.icon.svg" alt="orcid logo" />
-      </mat-icon>
-      <h1
-        class="orc-font-heading-small"
-        i18n="@@interstitial.employmentAffiliationAdded"
-      >
+            </mat-card-content>
+          }
+          @if (!form) {
+            <mat-spinner
+              class="spinner"
+              [diameter]="80"
+              [strokeWidth]="5"
+            ></mat-spinner>
+          }
+        }
+        @if (afterSummitStatus) {
+          <mat-card-header class="authorize-header">
+            <mat-card-title role="heading" aria-level="1">
+              <mat-icon class="logo-icon"
+                ><img src="./assets/vectors/orcid.logo.icon.svg" alt="orcid logo" />
+              </mat-icon>
+              <h1
+                class="orc-font-heading-small"
+                i18n="@@interstitial.employmentAffiliationAdded"
+                >
         Employment affiliation added
       </h1>
-    </mat-card-title>
-  </mat-card-header>
-  <mat-card-content class="authorize-content">
-    <div i18n="@@interstitial.theFollowingAffiliation">
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="authorize-content">
+            <div i18n="@@interstitial.theFollowingAffiliation">
       The following organization has been added to your ORCID record as an
       employment affiliation.
     </div>
-
-    <mat-divider class="green-divider"></mat-divider>
-    <div>
-      <div class="published-email-container">
-        <img
-          src="/assets/vectors/verified-outline-icon.svg"
-          alt="ORCID logo"
-          class="orcid-logo"
-        />
-        <div class="published-domain">
-          <strong class="$orcid-custom-typography">{{
-            addedAffiliation?.affiliationName?.value
-          }}</strong>
-          <div>
-            <small> {{ addedAffiliation?.departmentName?.value }} </small>
-            <small
-              *ngIf="
-                addedAffiliation?.departmentName?.value &&
-                addedAffiliation?.roleTitle?.value
-              "
-            >
-              ,
-            </small>
-            <small> {{ addedAffiliation?.roleTitle?.value }} </small>
-          </div>
-        </div>
-      </div>
-    </div>
-    <mat-divider class="green-divider"></mat-divider>
-
-    <div i18n="@@interstitial.visitYourOrcidRecord2">
+            <mat-divider class="green-divider"></mat-divider>
+            <div>
+              <div class="published-email-container">
+                <img
+                  src="/assets/vectors/verified-outline-icon.svg"
+                  alt="ORCID logo"
+                  class="orcid-logo"
+                  />
+                <div class="published-domain">
+                  <strong class="$orcid-custom-typography">{{
+                    addedAffiliation?.affiliationName?.value
+                  }}</strong>
+                  <div>
+                    <small> {{ addedAffiliation?.departmentName?.value }} </small>
+                    @if (
+                      addedAffiliation?.departmentName?.value &&
+                      addedAffiliation?.roleTitle?.value
+                      ) {
+                      <small
+                        >
+                        ,
+                      </small>
+                    }
+                    <small> {{ addedAffiliation?.roleTitle?.value }} </small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <mat-divider class="green-divider"></mat-divider>
+            <div i18n="@@interstitial.visitYourOrcidRecord2">
       Visit your ORCID record to manage your affiliations, works, professional
       activities and more.
     </div>
-
-    <mat-divider class="last"></mat-divider>
-
-    <button
-      class="authorize-button mat-button-wrap-text"
-      mat-raised-button
-      color="primary"
-      (click)="finish.emit()"
-      id="authorize-button"
-    >
-      <ng-container i18n="@@interstitial.continueTo">
+            <mat-divider class="last"></mat-divider>
+            <button
+              class="authorize-button mat-button-wrap-text"
+              mat-raised-button
+              color="primary"
+              (click)="finish.emit()"
+              id="authorize-button"
+              >
+              <ng-container i18n="@@interstitial.continueTo">
         Continue to
       </ng-container>
-      <ng-container> {{ organizationName }} </ng-container>
-    </button>
-  </mat-card-content>
-
-  <ng-template #orcidIconTemplate>
-    <mat-icon class="scope orcid" role="presentation">
-      <img src="/assets/vectors/orcid.logo.black.icon.svg" alt=""
-    /></mat-icon>
-  </ng-template>
-</ng-container>
+              <ng-container> {{ organizationName }} </ng-container>
+            </button>
+          </mat-card-content>
+          <ng-template #orcidIconTemplate>
+            <mat-icon class="scope orcid" role="presentation">
+              <img src="/assets/vectors/orcid.logo.black.icon.svg" alt=""
+              /></mat-icon>
+            </ng-template>
+          }

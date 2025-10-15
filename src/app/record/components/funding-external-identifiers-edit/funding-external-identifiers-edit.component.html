@@ -1,7 +1,7 @@
 <div class="top-bar">
   <strong>
     <ng-container i18n="@@shared.identifier">Identifier</ng-container> ({{
-      index + 1
+    index + 1
     }})
   </strong>
   <a i18n="@@shared.cancel" (click)="cancel()">Cancel</a>
@@ -19,32 +19,34 @@
             grantForm?.hasError('required', 'grantNumber') &&
             grantForm?.get('grantNumber').touched
         }"
-      >
+        >
         <strong i18n="@@funding.grantNumber">Grant number</strong>
       </label>
     </div>
     <mat-form-field
       appearance="outline"
       class="mat-form-field-min input-container"
-    >
+      >
       <input
         [id]="'grant-number-input-' + index"
         #grantNumber
         matInput
         formControlName="grantNumber"
-      />
-      <mat-error
-        *ngIf="grantForm?.get('grantNumber').errors?.required"
-        i18n="@@funding.grantNumberRequired"
-      >
+        />
+      @if (grantForm?.get('grantNumber').errors?.required) {
+        <mat-error
+          i18n="@@funding.grantNumberRequired"
+          >
         Grant number is required
       </mat-error>
-      <mat-error
-        *ngIf="grantForm?.get('grantNumber').errors?.maxlength"
-        i18n="@@shared.maxLength.less_than_two_thousand_forty_eight"
-      >
+      }
+      @if (grantForm?.get('grantNumber').errors?.maxlength) {
+        <mat-error
+          i18n="@@shared.maxLength.less_than_two_thousand_forty_eight"
+          >
         Must be less than 2084 characters
       </mat-error>
+      }
     </mat-form-field>
   </div>
 
@@ -58,35 +60,37 @@
           grantForm?.hasError('pattern', 'grantUrl') &&
           grantForm?.get('grantUrl').touched
       }"
-    >
+      >
       <strong i18n="@@funding.grantUrl">Grant link </strong>
     </label>
   </div>
   <mat-form-field
     appearance="outline"
     class="mat-form-field-min input-container"
-  >
+    >
     <input
       [id]="'grant-url-input-' + index"
       matInput
       formControlName="grantUrl"
-    />
+      />
 
     <mat-hint i18n="@@funding.grantUrlHint">
       A link to more information about the funding award
     </mat-hint>
-    <mat-error
-      *ngIf="grantForm?.get('grantUrl').hasError('pattern')"
-      i18n="@@funding.invalidUrl"
-    >
+    @if (grantForm?.get('grantUrl').hasError('pattern')) {
+      <mat-error
+        i18n="@@funding.invalidUrl"
+        >
       Invalid URL
     </mat-error>
-    <mat-error
-      *ngIf="grantForm?.get('grantUrl').hasError('maxlength')"
-      i18n="@@shared.maxLength.less_than_two_thousand"
-    >
+    }
+    @if (grantForm?.get('grantUrl').hasError('maxlength')) {
+      <mat-error
+        i18n="@@shared.maxLength.less_than_two_thousand"
+        >
       Must be less than 2000 characters
     </mat-error>
+    }
   </mat-form-field>
 
   <!-- Funding relationship -->
@@ -99,7 +103,7 @@
             grantForm?.hasError('required', 'fundingRelationship') &&
             grantForm?.get('fundingRelationship').touched
         }"
-      >
+        >
         <strong i18n="@@shared.relationship">Relationship</strong>
       </label>
     </div>
@@ -109,15 +113,15 @@
         aria-label="Select an option"
         class="mat-form-field-min"
         formControlName="fundingRelationship"
-      >
-        <ng-container *ngFor="let value of fundingRelationships">
+        >
+        @for (value of fundingRelationships; track value) {
           <mat-radio-button [value]="value"
             >{{ value | recordFundingRelationshipLabel }}
           </mat-radio-button>
           <mat-hint class="mat-caption"
             >{{ value | recordFundingRelationshipHintLabel }}
           </mat-hint>
-        </ng-container>
+        }
       </mat-radio-group>
     </div>
   </div>

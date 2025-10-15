@@ -16,7 +16,7 @@
       target="_blank"
       i18n="@@account.knowledgeBaseEnabling"
       href="https://support.orcid.org/hc/en-us/articles/360006971673"
-    >
+      >
       See the Knowledge Base for step-by-step instructions on enabling 2FA
     </a>
   </div>
@@ -40,142 +40,149 @@
           target="_blank"
           href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2"
           >Google Authenticator</a
-        >
-        <span>,</span>
-        <a
-          class="underline"
-          rel="noopener noreferrer"
-          target="_blank"
-          href="https://freeotp.github.io/"
-          >FreeOTP</a
-        >
-        <span>,</span>
-        <ng-container i18n="@@account.or"> or </ng-container>
-        <a
-          class="underline"
-          rel="noopener noreferrer"
-          target="_blank"
-          href="https://authy.com/"
-          >Authy</a
-        >
-        <br />
-        <a
-          class="underline"
-          i18n="@@account.knowledgeBaseForList"
-          rel="noopener noreferrer"
-          target="_blank"
-          href="https://support.orcid.org/hc/en-us/articles/360006971673"
-          >See the Knowledge Base for a list of apps we've tested ourselves</a
-        >
-      </p>
-    </div>
-    <div>
-      <b i18n="@@account.scantQr"> 2. Scan the QR code with your device </b>
-      <p i18n="@@account.openYour2FA">
+          >
+          <span>,</span>
+          <a
+            class="underline"
+            rel="noopener noreferrer"
+            target="_blank"
+            href="https://freeotp.github.io/"
+            >FreeOTP</a
+            >
+            <span>,</span>
+            <ng-container i18n="@@account.or"> or </ng-container>
+            <a
+              class="underline"
+              rel="noopener noreferrer"
+              target="_blank"
+              href="https://authy.com/"
+              >Authy</a
+              >
+              <br />
+              <a
+                class="underline"
+                i18n="@@account.knowledgeBaseForList"
+                rel="noopener noreferrer"
+                target="_blank"
+                href="https://support.orcid.org/hc/en-us/articles/360006971673"
+                >See the Knowledge Base for a list of apps we've tested ourselves</a
+                >
+              </p>
+            </div>
+            <div>
+              <b i18n="@@account.scantQr"> 2. Scan the QR code with your device </b>
+              <p i18n="@@account.openYour2FA">
         Open your 2FA app and scan the QR code image below.
       </p>
-      <img src="{{ environment.API_WEB }}2FA/qr-code.png" alt="qr code" />
-      <p>
-        <ng-container i18n="@@account.cantScan">
+              <img src="{{ environment.API_WEB }}2FA/qr-code.png" alt="qr code" />
+              <p>
+                <ng-container i18n="@@account.cantScan">
           Can't scan the barcode?
         </ng-container>
-        <a
-          id="cy-text-code"
-          class="underline"
-          i18n="@@account.getTextCode"
-          (click)="textCode()"
-          >Get a text code</a
-        >
-        <ng-container i18n="@@account.enterIntoYour">
+                <a
+                  id="cy-text-code"
+                  class="underline"
+                  i18n="@@account.getTextCode"
+                  (click)="textCode()"
+                  >Get a text code</a
+                  >
+                  <ng-container i18n="@@account.enterIntoYour">
           and enter it into your 2FA app instead.
         </ng-container>
-      </p>
-    </div>
-    <div class="row">
-      <textarea
-        data-cy="textCode"
-        *ngIf="showTextCode"
-        class="text-code orc-font-body-small"
-        formControlName="textCode"
-      >
-      </textarea>
-    </div>
-    <div>
-      <b i18n="@@account.enterSixDigit">
+                </p>
+              </div>
+              <div class="row">
+                @if (showTextCode) {
+                  <textarea
+                    data-cy="textCode"
+                    class="text-code orc-font-body-small"
+                    formControlName="textCode"
+                    >
+                  </textarea>
+                }
+              </div>
+              <div>
+                <b i18n="@@account.enterSixDigit">
         3. Enter the six-digit code from your authentication app
       </b>
-      <p i18n="@@account.afterScanning">
+                <p i18n="@@account.afterScanning">
         After scanning the QR code or entering the text code your 2FA app will
         generate a six-digit code. Enter the code below.
       </p>
-    </div>
-    <div class="row">
-      <div class="col l9">
-        <mat-form-field appearance="outline" class="row mat-form-field-min">
-          <input
-            matInput
-            #inputVerificationCode
-            formControlName="verificationCode"
-            appTrim
-            autocomplete="off"
-            data-cy="verification-code-input"
-          />
-          <mat-hint align="end"
-            >{{ inputVerificationCode.value?.length || 0 }}/6
-          </mat-hint>
-          <mat-error
-            *ngIf="twoFactorForm.get('verificationCode').hasError('required')"
-          >
-            <p
-              i18n="@@ngOrcid.signin.2fa.verificationCodeRequired"
-              class="error-message"
-            >
+              </div>
+              <div class="row">
+                <div class="col l9">
+                  <mat-form-field appearance="outline" class="row mat-form-field-min">
+                    <input
+                      matInput
+                      #inputVerificationCode
+                      formControlName="verificationCode"
+                      appTrim
+                      autocomplete="off"
+                      data-cy="verification-code-input"
+                      />
+                    <mat-hint align="end"
+                      >{{ inputVerificationCode.value?.length || 0 }}/6
+                    </mat-hint>
+                    @if (twoFactorForm.get('verificationCode').hasError('required')) {
+                      <mat-error
+                        >
+                        <p
+                          i18n="@@ngOrcid.signin.2fa.verificationCodeRequired"
+                          class="error-message"
+                          >
               Authentication code is required
             </p>
-            <p class="error-length">
-              {{ inputVerificationCode.value?.length || 0 }}/6
-            </p>
-          </mat-error>
+                        <p class="error-length">
+                          {{ inputVerificationCode.value?.length || 0 }}/6
+                        </p>
+                      </mat-error>
+                    }
 
-          <mat-error
-            *ngIf="
-              twoFactorForm.get('verificationCode').hasError('minlength') ||
-              twoFactorForm.get('verificationCode').hasError('maxlength')
-            "
-          >
-            <p
-              i18n="@@ngOrcid.signin.2fa.badVerificationCodeLength"
-              class="error-message"
-            >
+                    @if (
+                      twoFactorForm.get('verificationCode').hasError('minlength') ||
+                      twoFactorForm.get('verificationCode').hasError('maxlength')
+                      ) {
+                      <mat-error
+                        >
+                        <p
+                          i18n="@@ngOrcid.signin.2fa.badVerificationCodeLength"
+                          class="error-message"
+                          >
               Invalid authentication code length
             </p>
-            <p class="error-length">
-              {{ inputVerificationCode.value?.length || 0 }}/6
-            </p>
-          </mat-error>
-        </mat-form-field>
-        <mat-error *ngIf="showBadVerificationCode">
-          <mat-icon inline="true">error</mat-icon>
-          <ng-container i18n="@@ngOrcid.signin.2fa.badVerificationCode">
+                        <p class="error-length">
+                          {{ inputVerificationCode.value?.length || 0 }}/6
+                        </p>
+                      </mat-error>
+                    }
+                  </mat-form-field>
+                  @if (showBadVerificationCode) {
+                    <mat-error>
+                      <mat-icon inline="true">error</mat-icon>
+                      <ng-container i18n="@@ngOrcid.signin.2fa.badVerificationCode">
             Invalid authentication code
           </ng-container>
-        </mat-error>
-      </div>
-    </div>
-    <div class="button-container">
-      <button
-        mat-raised-button
-        color="primary"
-        type="submit"
-        i18n="@@account.continue"
-        id="cy-continue"
-      >
+                    </mat-error>
+                  }
+                </div>
+              </div>
+              <div class="button-container">
+                <button
+                  mat-raised-button
+                  color="primary"
+                  type="submit"
+                  i18n="@@account.continue"
+                  id="cy-continue"
+                  >
         Continue
       </button>
-    </div>
-    <div class="row horizontal-center" *ngIf="loading">
-      <mat-progress-spinner color="primary" mode="indeterminate" class="col">
-      </mat-progress-spinner>
-    </div>
-  </div>
-</form>
+              </div>
+              @if (loading) {
+                <div class="row horizontal-center">
+                  <mat-progress-spinner color="primary" mode="indeterminate" class="col">
+                  </mat-progress-spinner>
+                </div>
+              }
+            </div>
+          </form>

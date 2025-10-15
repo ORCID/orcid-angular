@@ -8,12 +8,13 @@
   [(expandedContent)]="settingDownload"
   class="row"
   [title]="titleDownload"
->
-  <app-settings-actions-download
-    *ngIf="titleDownload"
-    (loading)="settingDownloadLoading = $event"
   >
-  </app-settings-actions-download>
+  @if (titleDownload) {
+    <app-settings-actions-download
+      (loading)="settingDownloadLoading = $event"
+      >
+    </app-settings-actions-download>
+  }
 </app-settings-panels>
 
 <app-settings-panels
@@ -22,12 +23,13 @@
   [(expandedContent)]="settingDeactivate"
   class="row"
   [title]="titleDeactivate"
->
-  <app-settings-actions-deactivate
-    *ngIf="settingDeactivate"
-    (loading)="settingDeactivateLoading = $event"
   >
-  </app-settings-actions-deactivate>
+  @if (settingDeactivate) {
+    <app-settings-actions-deactivate
+      (loading)="settingDeactivateLoading = $event"
+      >
+    </app-settings-actions-deactivate>
+  }
 </app-settings-panels>
 
 <app-settings-panels
@@ -36,11 +38,12 @@
   [(expandedContent)]="settingDuplicatedRecord"
   class="row"
   [title]="titleDuplicatedRecord"
->
-  <app-settings-actions-duplicated
-    *ngIf="settingDuplicatedRecord"
-    (loading)="settingDuplicatedRecordLoading = $event"
-    (close)="settingDuplicatedRecord = false"
   >
-  </app-settings-actions-duplicated>
+  @if (settingDuplicatedRecord) {
+    <app-settings-actions-duplicated
+      (loading)="settingDuplicatedRecordLoading = $event"
+      (close)="settingDuplicatedRecord = false"
+      >
+    </app-settings-actions-duplicated>
+  }
 </app-settings-panels>

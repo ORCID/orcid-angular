@@ -1,22 +1,27 @@
-<main id="main" *ngIf="!loading">
-  <div class="container">
-    <div class="row space-around">
-      <div class="col m6 s4 l6">
-        <mat-card
-          appearance="outlined"
-          class="orcid-wizard authorize-wrapper"
+@if (!loading) {
+  <main id="main">
+    <div class="container">
+      <div class="row space-around">
+        <div class="col m6 s4 l6">
+          <mat-card
+            appearance="outlined"
+            class="orcid-wizard authorize-wrapper"
           [ngClass]="{
             mobile: platform.columns4
           }"
-        >
-          <app-form-authorize
-            *ngIf="showAuthorizationComponent"
-            (redirectUrl)="handleRedirect($event)"
-          ></app-form-authorize>
-          <ng-template #interstitialOutlet cdkPortalOutlet></ng-template>
-          <app-oauth-error *ngIf="showAuthorizationError"></app-oauth-error>
-        </mat-card>
+            >
+            @if (showAuthorizationComponent) {
+              <app-form-authorize
+                (redirectUrl)="handleRedirect($event)"
+              ></app-form-authorize>
+            }
+            <ng-template #interstitialOutlet cdkPortalOutlet></ng-template>
+            @if (showAuthorizationError) {
+              <app-oauth-error></app-oauth-error>
+            }
+          </mat-card>
+        </div>
       </div>
     </div>
-  </div>
-</main>
+  </main>
+}

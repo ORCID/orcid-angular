@@ -37,158 +37,161 @@
 <p>
   <ng-container i18n="@@developerTools.orcidApiResful"
     >The ORCID Public API is RESTful and uses</ng-container
-  >
-  <a
-    href="https://oauth.net"
-    rel="noopener noreferrer"
-    target="_blank"
-    class="underline"
-    i18n="@@developerTools.oauth20"
-    >OAuth</a
-  ><ng-container i18n="@@developerTools.wellEstablishedStandard"
-    >, a well-established, standard protocol for user-based permissions.
+    >
+    <a
+      href="https://oauth.net"
+      rel="noopener noreferrer"
+      target="_blank"
+      class="underline"
+      i18n="@@developerTools.oauth20"
+      >OAuth</a
+      ><ng-container i18n="@@developerTools.wellEstablishedStandard"
+      >, a well-established, standard protocol for user-based permissions.
   </ng-container>
-</p>
-<p i18n="@@developerTools.publicClientApplicationsAreGranted">
+  </p>
+  <p i18n="@@developerTools.publicClientApplicationsAreGranted">
   Public API Credentials are granted to individuals and not organizations, and
   your Public API Credentials are personal to you (even if being used in
   connection with your work for an organization).
 </p>
 
-<p>
-  <ng-container i18n="@@developerTools.publicClientApplicationsAreGranted2">
+  <p>
+    <ng-container i18n="@@developerTools.publicClientApplicationsAreGranted2">
     If you need access to an ORCID API for commercial use, need a higher usage
     quota, organizational administration of your API credentials, or the ability
     to write data to or access Trusted Party data in ORCID records, our
   </ng-container>
-  <a
-    class="underline"
-    href="https://info.orcid.org/documentation/features/member-api/"
-    rel="noopener noreferrer"
-    target="_blank"
-    i18n="@@developerTools.memberApi"
-  >
+    <a
+      class="underline"
+      href="https://info.orcid.org/documentation/features/member-api/"
+      rel="noopener noreferrer"
+      target="_blank"
+      i18n="@@developerTools.memberApi"
+      >
     Member API
   </a>
-  <ng-container i18n="@@developerTools.mayBeMoreAppropriate">
+    <ng-container i18n="@@developerTools.mayBeMoreAppropriate">
     is available to ORCID member organizations.
   </ng-container>
-</p>
+  </p>
 
-<h2 class="orc-font-body-large" i18n="@@developerTools.additionalResources">
+  <h2 class="orc-font-body-large" i18n="@@developerTools.additionalResources">
   Additional resources
 </h2>
 
-<ul>
-  <li>
-    <a
-      class="underline"
-      href="https://info.orcid.org/documentation/integration-guide/registering-a-public-api-client/"
-      rel="noopener noreferrer"
-      target="_blank"
-      i18n="@@developerTools.readThePublicApisDocumentation"
-      >Read the Public API documentation
+  <ul>
+    <li>
+      <a
+        class="underline"
+        href="https://info.orcid.org/documentation/integration-guide/registering-a-public-api-client/"
+        rel="noopener noreferrer"
+        target="_blank"
+        i18n="@@developerTools.readThePublicApisDocumentation"
+        >Read the Public API documentation
     </a>
-  </li>
-  <li>
-    <a
-      class="underline"
-      href="https://info.orcid.org/membership/"
-      rel="noopener noreferrer"
-      target="_blank"
-      i18n="@@developerTools.fillOutMoreAobutTheDifferences"
-      >Find out more about the differences between the Public and Member APIs</a
-    >
-  </li>
-</ul>
+    </li>
+    <li>
+      <a
+        class="underline"
+        href="https://info.orcid.org/membership/"
+        rel="noopener noreferrer"
+        target="_blank"
+        i18n="@@developerTools.fillOutMoreAobutTheDifferences"
+        >Find out more about the differences between the Public and Member APIs</a
+        >
+      </li>
+    </ul>
 
-<h2
-  class="orc-font-body-large no-margin-bottom"
-  i18n="@@developerTools.orcidPublicClientTermsOfService"
->
+    <h2
+      class="orc-font-body-large no-margin-bottom"
+      i18n="@@developerTools.orcidPublicClientTermsOfService"
+      >
   ORCID Public APIs Terms of Service
 </h2>
-<hr />
+    <hr />
 
-<p>
-  <ng-container
-    i18n="@@developerTools.theOrcidPublicApiAllowsYouToRequestPermission"
-  >
+    <p>
+      <ng-container
+        i18n="@@developerTools.theOrcidPublicApiAllowsYouToRequestPermission"
+        >
     The ORCID Public API is free for non-commercial use by individuals as stated
     in the
   </ng-container>
-  <a
-    href="https://info.orcid.org/public-client-terms-of-service/"
-    rel="noopener noreferrer"
-    target="_blank"
-    class="underline"
-    i18n="@@developerTools.publicClientTermsOfService"
-    >Public APIs Terms of Service.</a
-  >
-  <ng-container i18n="@@developerTools.byRegisteringForPublicApi">
+      <a
+        href="https://info.orcid.org/public-client-terms-of-service/"
+        rel="noopener noreferrer"
+        target="_blank"
+        class="underline"
+        i18n="@@developerTools.publicClientTermsOfService"
+        >Public APIs Terms of Service.</a
+        >
+        <ng-container i18n="@@developerTools.byRegisteringForPublicApi">
     By “non-commercial” we mean that you may not charge any re-use fees for the
     Public API, and you may not make use of the Public API in connection with
     any revenue-generating product or service.
   </ng-container>
-</p>
+      </p>
 
-<app-alert-message *ngIf="!hasVerifiedEmailAddress">
-  <h3 title i18n="@@developerTools.noVerifiedEmailAddresses">
+      @if (!hasVerifiedEmailAddress) {
+        <app-alert-message>
+          <h3 title i18n="@@developerTools.noVerifiedEmailAddresses">
     No verified email addresses found
   </h3>
-
-  <div content>
-    <ng-container i18n="@@developerTools.youMustHaveAtLeastOneVerifiedEmail"
-      >You must have at least one verified email address in your ORCID account
+          <div content>
+            <ng-container i18n="@@developerTools.youMustHaveAtLeastOneVerifiedEmail"
+              >You must have at least one verified email address in your ORCID account
       to register for your Public API credentials. Manage your email addresses
       in the</ng-container
-    >
-    <a
-      (click)="openEmailModal()"
-      i18n="@@developerTools.emailsAndDomainsSection"
-      >Emails and domains section of your ORCID record</a
-    >.
-  </div>
-</app-alert-message>
+              >
+              <a
+                (click)="openEmailModal()"
+                i18n="@@developerTools.emailsAndDomainsSection"
+                >Emails and domains section of your ORCID record</a
+                >.
+              </div>
+            </app-alert-message>
+          }
 
-<app-alert-message
-  *ngIf="!checked && dirty"
-  type="warning"
-  class="alert-warning"
->
-  <div
-    content
-    i18n="@@developerTools.youMustAcceptThePublicClientTermsOfService"
-  >
+          @if (!checked && dirty) {
+            <app-alert-message
+              type="warning"
+              class="alert-warning"
+              >
+              <div
+                content
+                i18n="@@developerTools.youMustAcceptThePublicClientTermsOfService"
+                >
     You must accept the Public Client Terms of Service before you can register
     for your Public API credentials.
   </div>
-</app-alert-message>
+            </app-alert-message>
+          }
 
-<app-top-bar-verification-email
-  *ngIf="!emailAlreadyVerified"
-></app-top-bar-verification-email>
+          @if (!emailAlreadyVerified) {
+            <app-top-bar-verification-email
+            ></app-top-bar-verification-email>
+          }
 
-<p class="checkbox-container">
-  <mat-checkbox
-    class="mat-checkbox orcid-checkbox-baseline"
-    [(ngModel)]="checked"
-    [disabled]="!emailAlreadyVerified"
-    i18n="@@developerTools.haveReadAndAgreeToTheOrcidPublicClientTermsOfService"
-    >I have read and agree to the ORCID Public APIs Terms of Service
+          <p class="checkbox-container">
+            <mat-checkbox
+              class="mat-checkbox orcid-checkbox-baseline"
+              [(ngModel)]="checked"
+              [disabled]="!emailAlreadyVerified"
+              i18n="@@developerTools.haveReadAndAgreeToTheOrcidPublicClientTermsOfService"
+              >I have read and agree to the ORCID Public APIs Terms of Service
   </mat-checkbox>
-</p>
+          </p>
 
-<p>
-  <button
-    [disabled]="!emailAlreadyVerified"
-    class="mat-button-wrap-text"
-    mat-raised-button
-    color="primary"
-    id="cy-register-for-public-api"
-    (click)="registerForPublicApi()"
-    i18n="@@developerTools.registerForYourOrcidPublicApiCredentials"
-  >
+          <p>
+            <button
+              [disabled]="!emailAlreadyVerified"
+              class="mat-button-wrap-text"
+              mat-raised-button
+              color="primary"
+              id="cy-register-for-public-api"
+              (click)="registerForPublicApi()"
+              i18n="@@developerTools.registerForYourOrcidPublicApiCredentials"
+              >
     Register for your ORCID Public API credentials
   </button>
-</p>
+          </p>

@@ -1,63 +1,60 @@
-<ng-container
-  *ngFor="
-    let research of researchResourceStack?.researchResources;
-    trackBy: trackByResearchResourceStack;
-    let i = index;
-    let last = last
-  "
->
-  <app-panel
-    panelId="research-resource-stack"
-    [stackSiblings]="researchResourceStack.researchResources"
-    [editableVisibilityControl]="isPreferred(research)"
-    class="top-bar"
-    [elements]="research"
-    [type]="'research-resources'"
+@for (
+  research of researchResourceStack?.researchResources; track trackByResearchResourceStack(i,
+  research); let i = $index; let last = $last) {
+  @if (isPreferred(research) || displayTheStack) {
+    <app-panel
+      panelId="research-resource-stack"
+      [stackSiblings]="researchResourceStack.researchResources"
+      [editableVisibilityControl]="isPreferred(research)"
+      class="top-bar"
+      [elements]="research"
+      [type]="'research-resources'"
     [ngStyle]="{
       'z-index': researchResourceStack.researchResources.length - i
     }"
-    [ngClass]="{ last: last }"
-    [editable]="false"
-    [openState]="false"
-    [attr.panel-sequence]="'cy-research-resource-stack-panel-' + i"
-    [expandButtonsPosition]="'left'"
-    [putCode]="research.putCode"
-    [visibility]="researchResourceStack.activeVisibility"
-    [isPublicRecord]="isPublicRecord"
-    *ngIf="isPreferred(research) || displayTheStack"
-    [stackedHeader]="!platform.columns12"
-    [panelTitle]="research.title"
-  >
-    <h4 header class="research-resources-title">
-      <b>
-        {{ research.title }}
-      </b>
-    </h4>
-    <app-research-resource
-      *ngIf="stackPanelsDisplay[research.putCode].topPanelOfTheStack"
+      [ngClass]="{ last: last }"
+      [editable]="false"
+      [openState]="false"
+      [attr.panel-sequence]="'cy-research-resource-stack-panel-' + i"
+      [expandButtonsPosition]="'left'"
+      [putCode]="research.putCode"
+      [visibility]="researchResourceStack.activeVisibility"
       [isPublicRecord]="isPublicRecord"
-      [researchResource]="research"
-    >
-    </app-research-resource>
-    <app-panel-source
-      [isPreferred]="isPreferred(research)"
-      [sourceName]="research.sourceName || research.source"
-      [assertionOriginName]="research.assertionOriginName"
-      [assertionOriginOrcid]="research.assertionOriginOrcid"
-      [assertionOriginClientId]="research.assertionOriginClientId"
-      [stackLength]="researchResourceStack.researchResources.length"
-      [(displayTheStack)]="displayTheStack"
-      (makePrimary)="makePrimaryCard(research)"
+      [stackedHeader]="!platform.columns12"
+      [panelTitle]="research.title"
+      >
+      <h4 header class="research-resources-title">
+        <b>
+          {{ research.title }}
+        </b>
+      </h4>
+      @if (stackPanelsDisplay[research.putCode].topPanelOfTheStack) {
+        <app-research-resource
+          [isPublicRecord]="isPublicRecord"
+          [researchResource]="research"
+          >
+        </app-research-resource>
+      }
+      <app-panel-source
+        [isPreferred]="isPreferred(research)"
+        [sourceName]="research.sourceName || research.source"
+        [assertionOriginName]="research.assertionOriginName"
+        [assertionOriginOrcid]="research.assertionOriginOrcid"
+        [assertionOriginClientId]="research.assertionOriginClientId"
+        [stackLength]="researchResourceStack.researchResources.length"
+        [(displayTheStack)]="displayTheStack"
+        (makePrimary)="makePrimaryCard(research)"
       [topPanelOfTheStackMode]="
         stackPanelsDisplay[research.putCode].topPanelOfTheStack
       "
-      [isPublicRecord]="isPublicRecord"
-      (topPanelOfTheStackModeChange)="changeTopPanelOfTheStack(research)"
-      [type]="'research-resources'"
-      [item]="research"
-      [panelTitle]="research.title"
-      [userRecord]="userRecord"
-    >
-    </app-panel-source>
-  </app-panel>
-</ng-container>
+        [isPublicRecord]="isPublicRecord"
+        (topPanelOfTheStackModeChange)="changeTopPanelOfTheStack(research)"
+        [type]="'research-resources'"
+        [item]="research"
+        [panelTitle]="research.title"
+        [userRecord]="userRecord"
+        >
+      </app-panel-source>
+    </app-panel>
+  }
+}

@@ -1,124 +1,148 @@
 <app-alert-message>
   <div content class="content">
     <div>
-      <ng-container *ngIf="showUnclaimedError || showDeactivatedError">
-        <ng-container i18n="@@register.theEmailAddress" *ngIf="isEmail">
+      @if (showUnclaimedError || showDeactivatedError) {
+        @if (isEmail) {
+          <ng-container i18n="@@register.theEmailAddress">
           The email address
         </ng-container>
-        <ng-container i18n="@@ngOrcid.signin.theOrcidId" *ngIf="!isEmail">
+        }
+        @if (!isEmail) {
+          <ng-container i18n="@@ngOrcid.signin.theOrcidId">
           The Orcid iD
         </ng-container>
+        }
         <strong>{{ email }}</strong>
         <ng-container i18n="@@register.isAssociatedWith"
           >is already associated with
         </ng-container>
-        <ng-container i18n="@@register.anUnclaimed" *ngIf="showUnclaimedError"
-          >an unclaimed
+        @if (showUnclaimedError) {
+          <ng-container i18n="@@register.anUnclaimed"
+            >an unclaimed
         </ng-container>
-        <ng-container
-          i18n="@@register.aDeactivated"
-          *ngIf="showDeactivatedError"
-          >a deactivated
-        </ng-container>
-        <ng-container i18n="@@register.orcidRecord">ORCID record.</ng-container>
-        <i *ngIf="showUnclaimedError">
+        }
+        @if (showDeactivatedError) {
           <ng-container
-            i18n="@@ngOrcid.signin.cannotSignInToOrcid"
-            *ngIf="isEmail"
-          >
+            i18n="@@register.aDeactivated"
+            >a deactivated
+        </ng-container>
+        }
+        <ng-container i18n="@@register.orcidRecord">ORCID record.</ng-container>
+        @if (showUnclaimedError) {
+          <i>
+            @if (isEmail) {
+              <ng-container
+                i18n="@@ngOrcid.signin.cannotSignInToOrcid"
+                >
             You cannot sign in to ORCID with this email address until you have
             claimed the record.
           </ng-container>
-          <ng-container
-            i18n="@@ngOrcid.signin.cannotSignInToOrcidWithId"
-            *ngIf="!isEmail"
-          >
+            }
+            @if (!isEmail) {
+              <ng-container
+                i18n="@@ngOrcid.signin.cannotSignInToOrcidWithId"
+                >
             You cannot sign in to ORCID with this iD until you have claimed the
             record.
           </ng-container>
-        </i>
-        <i *ngIf="showDeactivatedError">
-          <ng-container
-            i18n="@@ngOrcid.signin.needToReactivateAccount"
-            *ngIf="isEmail"
-          >
+            }
+          </i>
+        }
+        @if (showDeactivatedError) {
+          <i>
+            @if (isEmail) {
+              <ng-container
+                i18n="@@ngOrcid.signin.needToReactivateAccount"
+                >
             You will need to reactivate the account before you can sign in with
             this email address.
           </ng-container>
-          <ng-container
-            i18n="@@ngOrcid.signin.needToReactivateToSigInWithId"
-            *ngIf="!isEmail"
-          >
+            }
+            @if (!isEmail) {
+              <ng-container
+                i18n="@@ngOrcid.signin.needToReactivateToSigInWithId"
+                >
             You will need to reactivate the account before you can sign in with
             this iD.
           </ng-container>
-        </i>
-      </ng-container>
-      <ng-container *ngIf="showDeprecatedError">
+            }
+          </i>
+        }
+      }
+      @if (showDeprecatedError) {
         <ng-container i18n="@@ngOrcid.signin.orcidAccountHasBeenDeprecated">
           This ORCID account has been deprecated. The active account is </ng-container
-        >&nbsp;<b>{{ orcidPrimaryDeprecated }}</b>
-      </ng-container>
-    </div>
+          >&nbsp;<b>{{ orcidPrimaryDeprecated }}</b>
+        }
+      </div>
 
-    <div>
-      <p>
-        <ng-container
-          *ngIf="showDeactivatedError && !isEmail"
-          i18n="@@ngOrcid.signin.deactivated.UsingOrcid.1"
-        >
+      <div>
+        <p>
+          @if (showDeactivatedError && !isEmail) {
+            <ng-container
+              i18n="@@ngOrcid.signin.deactivated.UsingOrcid.1"
+              >
           To start reactivation please enter an email address associated with
           this account in the 'Email or ORCID iD' field above.
         </ng-container>
-      </p>
-    </div>
+          }
+        </p>
+      </div>
 
-    <div>
-      <p *ngIf="showDeactivatedError && !isEmail">
-        <ng-container i18n="@@ngOrcid.signin.deactivated.UsingOrcid.2">
+      <div>
+        @if (showDeactivatedError && !isEmail) {
+          <p>
+            <ng-container i18n="@@ngOrcid.signin.deactivated.UsingOrcid.2">
           If you no longer have access to any of the email addresses associated
           with the deactivated account please
         </ng-container>
-        <a
-          i18n="@@ngOrcid.signin.deactivated.UsingOrcid.3"
-          class="underline"
-          href="https://support.orcid.org/"
-          rel="noopener noreferrer"
-          target="_blank"
-          >contact the support team</a
-        >
-      </p>
-    </div>
+            <a
+              i18n="@@ngOrcid.signin.deactivated.UsingOrcid.3"
+              class="underline"
+              href="https://support.orcid.org/"
+              rel="noopener noreferrer"
+              target="_blank"
+              >contact the support team</a
+              >
+            </p>
+          }
+        </div>
 
-    <div>
-      <a
-        i18n="@@ngOrcid.signin.claimYourOrcidRecord"
-        (click)="unclaimed()"
-        *ngIf="showUnclaimedError"
-      >
+        <div>
+          @if (showUnclaimedError) {
+            <a
+              i18n="@@ngOrcid.signin.claimYourOrcidRecord"
+              (click)="unclaimed()"
+              >
         Claim your ORCID record</a
-      >
-      <a (click)="deactivated()" *ngIf="showDeactivatedError && isEmail">
-        <ng-container
-          i18n="@@register.reactivateOrcidAssociated"
-          *ngIf="isEmail"
-        >
+              >
+            }
+            @if (showDeactivatedError && isEmail) {
+              <a (click)="deactivated()">
+                @if (isEmail) {
+                  <ng-container
+                    i18n="@@register.reactivateOrcidAssociated"
+                    >
           Reactivate the ORCID record associated with this email address
         </ng-container>
-        <ng-container
-          i18n="@@ngOrcid.signin.reactivateOrcidRecordWithId"
-          *ngIf="!isEmail"
-        >
+                }
+                @if (!isEmail) {
+                  <ng-container
+                    i18n="@@ngOrcid.signin.reactivateOrcidRecordWithId"
+                    >
           Reactivate the ORCID record associated with this iD
         </ng-container>
-      </a>
-      <a
-        i18n="@@ngOrcid.signin.signInToActive"
-        (click)="deprecatedAccount()"
-        *ngIf="showDeprecatedError"
-      >
+                }
+              </a>
+            }
+            @if (showDeprecatedError) {
+              <a
+                i18n="@@ngOrcid.signin.signInToActive"
+                (click)="deprecatedAccount()"
+                >
         Sign in to the active ORCID account</a
-      >
-    </div>
-  </div>
-</app-alert-message>
+                >
+              }
+            </div>
+          </div>
+        </app-alert-message>

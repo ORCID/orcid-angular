@@ -1,26 +1,29 @@
 <div class="container">
-  <mat-icon
-    aria-hidden="false"
-    [attr.aria-label]="label"
-    class="everyone"
-    *ngIf="visibility === 'PUBLIC'"
-    [ngClass]="{ active: visibility === 'PUBLIC' }"
-    >visibility</mat-icon
-  >
-  <mat-icon
-    aria-hidden="false"
-    class="trusted"
-    *ngIf="visibility === 'LIMITED'"
-    [attr.aria-label]="label"
-    [ngClass]="{ active: visibility === 'LIMITED' }"
-    >visibility</mat-icon
-  >
-  <mat-icon
-    aria-hidden="false"
-    class="private"
-    [attr.aria-label]="label"
-    *ngIf="visibility === 'PRIVATE'"
-    [ngClass]="{ active: visibility === 'PRIVATE' }"
-    >visibility</mat-icon
-  >
-</div>
+  @if (visibility === 'PUBLIC') {
+    <mat-icon
+      aria-hidden="false"
+      [attr.aria-label]="label"
+      class="everyone"
+      [ngClass]="{ active: visibility === 'PUBLIC' }"
+      >visibility</mat-icon
+      >
+    }
+    @if (visibility === 'LIMITED') {
+      <mat-icon
+        aria-hidden="false"
+        class="trusted"
+        [attr.aria-label]="label"
+        [ngClass]="{ active: visibility === 'LIMITED' }"
+        >visibility</mat-icon
+        >
+      }
+      @if (visibility === 'PRIVATE') {
+        <mat-icon
+          aria-hidden="false"
+          class="private"
+          [attr.aria-label]="label"
+          [ngClass]="{ active: visibility === 'PRIVATE' }"
+          >visibility</mat-icon
+          >
+        }
+      </div>

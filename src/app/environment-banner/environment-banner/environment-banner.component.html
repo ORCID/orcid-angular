@@ -1,50 +1,51 @@
 <section
   class="alert alert-banner mat-subtitle-2"
   [attr.aria-label]="labelWarning"
->
+  >
   <p>
     <ng-container i18n="@@common.js.domain.warn.warning_1"
       >Warning!</ng-container
-    >
-    <ng-container>{{ hostUrl }}</ng-container>
-    <ng-container i18n="@@common.js.domain.warn.warning_2"
-      >is a test website.
+      >
+      <ng-container>{{ hostUrl }}</ng-container>
+      <ng-container i18n="@@common.js.domain.warn.warning_2"
+        >is a test website.
     </ng-container>
-    <a
-      href="https://orcid.org"
-      target="orcid.org"
-      class="mat-button-font black-url"
-      >orcid.org</a
-    >
-    <ng-container i18n="@@common.js.domain.warn.is_the_official">
+      <a
+        href="https://orcid.org"
+        target="orcid.org"
+        class="mat-button-font black-url"
+        >orcid.org</a
+        >
+        <ng-container i18n="@@common.js.domain.warn.is_the_official">
       is the official website. Sandbox only sends email messages
       to</ng-container
-    >
-    <a
-      href="https://mailinator.com"
-      i18n="@@common.js.domain.warn.mailinator"
-      class="mat-button-font black-url"
-      >mailinator.com</a
-    >
-    <ng-container i18n="@@common.js.domain.warn.email_addresses"
-      >email addresses, see Sandbox FAQ for</ng-container
-    >
-    <a
-      href="https://support.orcid.org/hc/articles/360006972573"
-      target="common.js.domain.warn.more_information"
-      i18n="@@common.js.domain.warn.more_information"
-      class="mat-button-font black-url"
-    >
+          >
+          <a
+            href="https://mailinator.com"
+            i18n="@@common.js.domain.warn.mailinator"
+            class="mat-button-font black-url"
+            >mailinator.com</a
+            >
+            <ng-container i18n="@@common.js.domain.warn.email_addresses"
+              >email addresses, see Sandbox FAQ for</ng-container
+              >
+              <a
+                href="https://support.orcid.org/hc/articles/360006972573"
+                target="common.js.domain.warn.more_information"
+                i18n="@@common.js.domain.warn.more_information"
+                class="mat-button-font black-url"
+                >
       more information</a
-    >
-  </p>
-  <button
-    mat-flat-button
-    color="primary"
-    i18n="@@common.cookies.click_dismiss"
-    *ngIf="canDismiss"
-    (click)="onDismiss()"
-  >
+                >
+              </p>
+              @if (canDismiss) {
+                <button
+                  mat-flat-button
+                  color="primary"
+                  i18n="@@common.cookies.click_dismiss"
+                  (click)="onDismiss()"
+                  >
     Dismiss
   </button>
-</section>
+              }
+            </section>

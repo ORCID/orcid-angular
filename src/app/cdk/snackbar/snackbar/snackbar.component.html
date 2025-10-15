@@ -1,10 +1,12 @@
-<mat-icon *ngIf="!isIE" class="errorGroup">error</mat-icon>
+@if (!isIE) {
+  <mat-icon class="errorGroup">error</mat-icon>
+}
 <div class="close-button-container">
   <button
     mat-icon-button
     [attr.aria-label]="labelClose"
     (click)="snackBarRef.dismiss()"
-  >
+    >
     <mat-icon>close</mat-icon>
   </button>
 </div>
@@ -12,15 +14,16 @@
   <div class="mat-subtitle-1">{{ data.displayMessage?.title }}</div>
   <div class="error-container">
     {{ data.displayMessage?.message }}
-    <a
-      *ngIf="data.displayMessage?.action && data.displayMessage?.actionURL"
-      [href]="data.displayMessage.actionURL"
-      rel="noopener noreferrer"
-      target="_blank"
-      class="white-url"
-    >
-      {{ data.displayMessage.action }}
-    </a>
+    @if (data.displayMessage?.action && data.displayMessage?.actionURL) {
+      <a
+        [href]="data.displayMessage.actionURL"
+        rel="noopener noreferrer"
+        target="_blank"
+        class="white-url"
+        >
+        {{ data.displayMessage.action }}
+      </a>
+    }
   </div>
   <div class="mat-caption">{{ data?.caption }}</div>
 </div>

@@ -1,13 +1,15 @@
 <section class="statics container" [attr.aria-label]="labelStatistics">
   <div class="row">
-    <div class="row middle mat-caption" *ngIf="togglz">
-      <a
-        i18n="@@layout.howManyPeopleAreUsingORCID"
-        href="https://info.orcid.org/orcid-statistics/"
-        target="_blank"
-        rel="noopener noreferrer"
-        >How many people are using ORCID?</a
-      >
+    @if (togglz) {
+      <div class="row middle mat-caption">
+        <a
+          i18n="@@layout.howManyPeopleAreUsingORCID"
+          href="https://info.orcid.org/orcid-statistics/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >How many people are using ORCID?</a
+          >
+        </div>
+      }
     </div>
-  </div>
-</section>
+  </section>

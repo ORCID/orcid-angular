@@ -3,7 +3,7 @@
   [matMenuTriggerFor]="languageMenu"
   [attr.aria-label]="labelLanguage"
   class="orcid-button-light-grey"
->
+  >
   <div class="row middle space-between button-box no-wrap">
     <p class="col no-gutters">{{ languageMenuOptions[locale] }}</p>
     <mat-icon>expand_more</mat-icon>
@@ -14,24 +14,27 @@
   #languageMenu="matMenu"
   id="cy-language-menu"
   [attr.aria-label]="labelLanguage"
->
-  <div
-    *ngFor="let language of languageMenuOptions | keyvalue"
-    (click)="changeLanguage(language.key)"
-    mat-menu-item
-    [ngClass]="{ 'orcid-mat-menu-item-active': language.key === locale }"
-    class="orcid-menu-item-small"
   >
-    <button
+  @for (language of languageMenuOptions | keyvalue; track language) {
+    <div
+      (click)="changeLanguage(language.key)"
       mat-menu-item
       [ngClass]="{ 'orcid-mat-menu-item-active': language.key === locale }"
       class="orcid-menu-item-small"
-      [attr.aria-label]="language.value"
-    >
-      <div class="row middle space-between">
-        {{ language.value }}
-        <mat-icon *ngIf="language.key === locale">check</mat-icon>
-      </div>
-    </button>
-  </div>
+      >
+      <button
+        mat-menu-item
+        [ngClass]="{ 'orcid-mat-menu-item-active': language.key === locale }"
+        class="orcid-menu-item-small"
+        [attr.aria-label]="language.value"
+        >
+        <div class="row middle space-between">
+          {{ language.value }}
+          @if (language.key === locale) {
+            <mat-icon>check</mat-icon>
+          }
+        </div>
+      </button>
+    </div>
+  }
 </mat-menu>

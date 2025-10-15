@@ -1,42 +1,44 @@
 <main id="main">
-  <ng-container *ngIf="!userNotFound">
+  @if (!userNotFound) {
     <app-top-bar-my-public-record-preview
       [isPublicRecord]="publicOrcid"
     ></app-top-bar-my-public-record-preview>
-    <app-record-header
-      *ngIf="!!publicOrcid"
-      [loadingUserRecord]="loadingUserRecord"
-      [isPublicRecord]="publicOrcid"
-      [affiliations]="affiliations"
-      [displaySideBar]="displaySideBar"
-      [displayBiography]="displayBiography"
-      [(recordSummaryOpen)]="recordSummaryOpen"
-    ></app-record-header>
+    @if (!!publicOrcid) {
+      <app-record-header
+        [loadingUserRecord]="loadingUserRecord"
+        [isPublicRecord]="publicOrcid"
+        [affiliations]="affiliations"
+        [displaySideBar]="displaySideBar"
+        [displayBiography]="displayBiography"
+        [(recordSummaryOpen)]="recordSummaryOpen"
+      ></app-record-header>
+    }
     <div
       class="container no-padding main-content"
       [ngClass]="{
         'main-content-shadow': recordSummaryOpen,
         mobile: !platform.columns12
       }"
-    >
+      >
       <div class="row">
-        <app-side-bar
-          class="col l3 m8 s4 new-header"
-          [isPublicRecord]="publicOrcid"
-          [orcidId]="platform.columns8 || platform.columns4"
-          [loadingUserRecord]="loadingUserRecord"
-          (isSideBarEmpty)="isSideBarEmpty($event)"
-          *ngIf="
-            !loadingUserRecord
-              ? publicOrcid
-                ? platform.columns12 &&
-                  !recordWithIssues &&
-                  (displaySideBar || displayBiography || affiliations > 0)
-                : true
-              : true
-          "
-        >
-        </app-side-bar>
+        @if (
+          !loadingUserRecord
+          ? publicOrcid
+          ? platform.columns12 &&
+          !recordWithIssues &&
+          (displaySideBar || displayBiography || affiliations > 0)
+          : true
+          : true
+          ) {
+          <app-side-bar
+            class="col l3 m8 s4 new-header"
+            [isPublicRecord]="publicOrcid"
+            [orcidId]="platform.columns8 || platform.columns4"
+            [loadingUserRecord]="loadingUserRecord"
+            (isSideBarEmpty)="isSideBarEmpty($event)"
+            >
+          </app-side-bar>
+        }
         <div
           class="content"
           [ngClass]="{
@@ -47,56 +49,57 @@
                 : true
               : true
           }"
-        >
+          >
           <app-main>
-            <app-top-bar
-              [newlySharedDomains]="newlySharedDomains"
-              [newAddedAffiliation]="newAddedAffiliation"
-              class="row"
+            @if (
+              !loadingUserRecord
+              ? publicOrcid
+              ? !recordWithIssues && displayBiography
+              : true
+              : true
+              ) {
+              <app-top-bar
+                [newlySharedDomains]="newlySharedDomains"
+                [newAddedAffiliation]="newAddedAffiliation"
+                class="row"
               [ngClass]="{
                 mobile: !platform.columns12
               }"
-              [isPublicRecord]="publicOrcid"
-              [loadingUserRecord]="loadingUserRecord"
-              *ngIf="
-                !loadingUserRecord
-                  ? publicOrcid
-                    ? !recordWithIssues && displayBiography
-                    : true
-                  : true
-              "
-            ></app-top-bar>
-
-            <app-side-bar
-              class="col l3 m8 s4 new-header side-bar-mobile"
-              [isPublicRecord]="publicOrcid"
-              [hideOrcidId]="true"
+                [isPublicRecord]="publicOrcid"
+                [loadingUserRecord]="loadingUserRecord"
+              ></app-top-bar>
+            }
+            @if (
+              !loadingUserRecord
+              ? publicOrcid
+              ? !platform.columns12 &&
+              !recordWithIssues &&
+              (displaySideBar || displayBiography || affiliations > 0)
+              : !platform.columns12
+              : false
+              ) {
+              <app-side-bar
+                class="col l3 m8 s4 new-header side-bar-mobile"
+                [isPublicRecord]="publicOrcid"
+                [hideOrcidId]="true"
               [ngClass]="{
                 mobile: !platform.columns12
               }"
-              *ngIf="
-                !loadingUserRecord
-                  ? publicOrcid
-                    ? !platform.columns12 &&
-                      !recordWithIssues &&
-                      (displaySideBar || displayBiography || affiliations > 0)
-                    : !platform.columns12
-                  : false
-              "
-            >
-            </app-side-bar>
-            <ng-container *ngIf="!recordWithIssues">
+                >
+              </app-side-bar>
+            }
+            @if (!recordWithIssues) {
               <section
                 id="activities"
                 role="region"
                 [attr.aria-label]="regionActivities"
-              >
-                <div
-                  class="activities"
-                  *ngIf="!(publicOrcid && affiliations === 0)"
                 >
-                  <h2
-                    class="activities-header col"
+                @if (!(publicOrcid && affiliations === 0)) {
+                  <div
+                    class="activities"
+                    >
+                    <h2
+                      class="activities-header col"
                     [ngClass]="{
                       'orc-font-body-large': publicOrcid,
                       'no-gutters': publicOrcid,
@@ -104,98 +107,106 @@
                       'no-public-bio': publicOrcid ? !displayBiography : false,
                       'orc-font-body': !publicOrcid
                     }"
-                    i18n="@@shared.activities"
-                  >
+                      i18n="@@shared.activities"
+                      >
                     Activities
                   </h2>
-                  <div class="expand-buttons">
-                    <a
-                      class="activities orc-font-body-small"
-                      [ngClass]="{ 'public-info': publicOrcid }"
-                      (click)="switchPanelsState()"
+                    <div class="expand-buttons">
+                      <a
+                        class="activities orc-font-body-small"
+                        [ngClass]="{ 'public-info': publicOrcid }"
+                        (click)="switchPanelsState()"
                       [attr.aria-label]="
                         globalExpandState
                           ? collapseAllActivitiesArialLabel
                           : expandAllActivitiesArialLabel
                       "
-                    >
-                      <b i18n="@@shared.collapseAll" *ngIf="globalExpandState"
-                        >Collapse all</b
-                      >
-                      <b i18n="@@shared.expandAll" *ngIf="!globalExpandState"
-                        >Expand all</b
-                      >
-                    </a>
-                  </div>
-                </div>
-                <app-affiliations
-                  [userInfo]="userInfo"
-                  [isPublicRecord]="publicOrcid"
-                  [expandedContent]="expandedContent"
-                  (expandedContentChange)="expandedContentUpdate($event)"
-                  (total)="affiliationsCount($event)"
-                  id="cy-affiliations"
-                ></app-affiliations>
-                <app-fundings
-                  [userInfo]="userInfo"
-                  [isPublicRecord]="publicOrcid"
-                  [expandedContent]="expandedContent"
-                  (expandedContentChange)="expandedContentUpdate($event)"
-                  (total)="affiliationsCount($event)"
-                  id="cy-fundings"
-                ></app-fundings>
-                <app-research-resources
-                  [isPublicRecord]="publicOrcid"
-                  [expandedContent]="expandedContent"
-                  (expandedContentChange)="expandedContentUpdate($event)"
-                  (total)="affiliationsCount($event, 'RESEARCH_RESOURCE')"
-                  id="cy-research-resources"
-                ></app-research-resources>
-                <app-work-featured-stack-group
-                  *ngIf="featuredWorksTogglz"
-                  [userInfo]="userInfo"
-                  [isPublicRecord]="publicOrcid"
-                  id="cy-featured-works"
-                >
-                </app-work-featured-stack-group>
-                <app-work-stack-group
-                  [userInfo]="userInfo"
-                  [isPublicRecord]="publicOrcid"
-                  [expandedContent]="expandedContent"
-                  (expandedContentChange)="expandedContentUpdate($event)"
-                  (total)="affiliationsCount($event)"
-                  id="cy-works"
-                ></app-work-stack-group>
-                <app-peer-reviews
-                  [userInfo]="userInfo"
-                  [isPublicRecord]="publicOrcid"
-                  [expandedContent]="expandedContent"
-                  (expandedContentChange)="expandedContentUpdate($event)"
-                  (total)="affiliationsCount($event)"
-                  id="cy-peer-reviews"
-                ></app-peer-reviews>
-              </section>
-            </ng-container>
-
-            <app-record-info
-              *ngIf="
-                publicOrcid
+                        >
+                        @if (globalExpandState) {
+                          <b i18n="@@shared.collapseAll"
+                            >Collapse all</b
+                            >
+                          }
+                          @if (!globalExpandState) {
+                            <b i18n="@@shared.expandAll"
+                              >Expand all</b
+                              >
+                            }
+                          </a>
+                        </div>
+                      </div>
+                    }
+                    <app-affiliations
+                      [userInfo]="userInfo"
+                      [isPublicRecord]="publicOrcid"
+                      [expandedContent]="expandedContent"
+                      (expandedContentChange)="expandedContentUpdate($event)"
+                      (total)="affiliationsCount($event)"
+                      id="cy-affiliations"
+                    ></app-affiliations>
+                    <app-fundings
+                      [userInfo]="userInfo"
+                      [isPublicRecord]="publicOrcid"
+                      [expandedContent]="expandedContent"
+                      (expandedContentChange)="expandedContentUpdate($event)"
+                      (total)="affiliationsCount($event)"
+                      id="cy-fundings"
+                    ></app-fundings>
+                    <app-research-resources
+                      [isPublicRecord]="publicOrcid"
+                      [expandedContent]="expandedContent"
+                      (expandedContentChange)="expandedContentUpdate($event)"
+                      (total)="affiliationsCount($event, 'RESEARCH_RESOURCE')"
+                      id="cy-research-resources"
+                    ></app-research-resources>
+                    @if (featuredWorksTogglz) {
+                      <app-work-featured-stack-group
+                        [userInfo]="userInfo"
+                        [isPublicRecord]="publicOrcid"
+                        id="cy-featured-works"
+                        >
+                      </app-work-featured-stack-group>
+                    }
+                    <app-work-stack-group
+                      [userInfo]="userInfo"
+                      [isPublicRecord]="publicOrcid"
+                      [expandedContent]="expandedContent"
+                      (expandedContentChange)="expandedContentUpdate($event)"
+                      (total)="affiliationsCount($event)"
+                      id="cy-works"
+                    ></app-work-stack-group>
+                    <app-peer-reviews
+                      [userInfo]="userInfo"
+                      [isPublicRecord]="publicOrcid"
+                      [expandedContent]="expandedContent"
+                      (expandedContentChange)="expandedContentUpdate($event)"
+                      (total)="affiliationsCount($event)"
+                      id="cy-peer-reviews"
+                    ></app-peer-reviews>
+                  </section>
+                }
+                @if (
+                  publicOrcid
                   ? recordWithIssues ||
-                    (!loadingUserRecord && affiliations === 0)
+                  (!loadingUserRecord && affiliations === 0)
                   : false
-              "
-              [isPublicRecord]="publicOrcid"
-              [displaySideBar]="displaySideBar"
-              [displayBiography]="displayBiography"
-              [affiliations]="affiliations"
-            ></app-record-info>
-            <app-statistics
-              [ngClass]="{ mobile: !platform.columns12 }"
-            ></app-statistics>
-          </app-main>
+                  ) {
+                  <app-record-info
+                    [isPublicRecord]="publicOrcid"
+                    [displaySideBar]="displaySideBar"
+                    [displayBiography]="displayBiography"
+                    [affiliations]="affiliations"
+                  ></app-record-info>
+                }
+                <app-statistics
+                  [ngClass]="{ mobile: !platform.columns12 }"
+                ></app-statistics>
+              </app-main>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </ng-container>
-  <app-not-found *ngIf="userNotFound"></app-not-found>
-</main>
+      }
+      @if (userNotFound) {
+        <app-not-found></app-not-found>
+      }
+    </main>

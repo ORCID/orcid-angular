@@ -1,388 +1,404 @@
 <app-modal [noSidebar]="true">
-  <app-modal-header
-    *ngIf="emailDomainsTogglz && !loadingTogglz"
-    i18n="@@shared.emailsAndDomains"
-    [closeLabel]="ariaLabelClose"
-    >Emails & domains</app-modal-header
-  >
-  <app-modal-header
-    *ngIf="!emailDomainsTogglz && !loadingTogglz"
-    i18n="@@shared.emails"
-    [closeLabel]="ariaLabelCloseOld"
-    >Emails</app-modal-header
-  >
-  <app-modal-footer>
-    <button
-      mat-raised-button
-      color="primary"
-      (click)="saveEvent()"
-      i18n="@@shared.saveChanges"
-      id="save-emails-button"
+  @if (emailDomainsTogglz && !loadingTogglz) {
+    <app-modal-header
+      i18n="@@shared.emailsAndDomains"
+      [closeLabel]="ariaLabelClose"
+      >Emails & domains</app-modal-header
+      >
+    }
+    @if (!emailDomainsTogglz && !loadingTogglz) {
+      <app-modal-header
+        i18n="@@shared.emails"
+        [closeLabel]="ariaLabelCloseOld"
+        >Emails</app-modal-header
+        >
+      }
+      <app-modal-footer>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="saveEvent()"
+          i18n="@@shared.saveChanges"
+          id="save-emails-button"
       [attr.aria-label]="
         emailDomainsTogglz && !loadingTogglz ? ariaLabelSave : ariaLabelSaveOld
       "
-    >
+          >
       Save changes
     </button>
-    <button
-      mat-stroked-button
-      color="primary"
-      (click)="closeEvent()"
-      i18n="@@shared.cancel"
-      id="cancel-emails-button"
+        <button
+          mat-stroked-button
+          color="primary"
+          (click)="closeEvent()"
+          i18n="@@shared.cancel"
+          id="cancel-emails-button"
       [attr.aria-label]="
         emailDomainsTogglz && !loadingTogglz
           ? ariaLabelCancel
           : ariaLabelCancelOld
       "
-    >
+          >
       Cancel
     </button>
-  </app-modal-footer>
+      </app-modal-footer>
 
-  <div [formGroup]="emailsForm">
-    <p
-      class="orc-font-body-small description"
-      i18n="@@side-bar.havingMultipleEmails"
-    >
+      <div [formGroup]="emailsForm">
+        <p
+          class="orc-font-body-small description"
+          i18n="@@side-bar.havingMultipleEmails"
+          >
       Having multiple email addresses helps you maintain access to your ORCID
       record. A mix of personal and professional email addresses works best.
     </p>
 
-    <app-alert-message *ngIf="!hasVerifiedEmailAddress()">
-      <h3 title class="orc-font-body" i18n="@@side-bar.pleaseVerifyWarning">
+        @if (!hasVerifiedEmailAddress()) {
+          <app-alert-message>
+            <h3 title class="orc-font-body" i18n="@@side-bar.pleaseVerifyWarning">
         Please verify your email addresses
       </h3>
-
-      <div class="orc-font-body-small" content>
-        <ng-container i18n="@@side-bar.verifyToAccessOrcidFeatures"
-          >To access all of ORCID’s editing features you must verify at least
+            <div class="orc-font-body-small" content>
+              <ng-container i18n="@@side-bar.verifyToAccessOrcidFeatures"
+                >To access all of ORCID’s editing features you must verify at least
           one email address. Until then you will only be able to
           manage</ng-container
-        >
-        <strong i18n="@@side-bar.names">names</strong>
-        <ng-container i18n="@@side-bar.and">and</ng-container>
-        <strong i18n="@@side-bar.emailAddresses">email addresses</strong>
-        <ng-container i18n="@@side-bar.inYourOrcidRecord"
-          >in your ORCID record.</ng-container
-        >
-      </div>
-    </app-alert-message>
-    <!-- EMAIL LIST -->
-    <section id="Email addresses" class="row email-list">
-      <h2 class="orc-font-body-large" i18n="@@side-bar.emailAddressesUppercase">
+                >
+                <strong i18n="@@side-bar.names">names</strong>
+                <ng-container i18n="@@side-bar.and">and</ng-container>
+                <strong i18n="@@side-bar.emailAddresses">email addresses</strong>
+                <ng-container i18n="@@side-bar.inYourOrcidRecord"
+                  >in your ORCID record.</ng-container
+                  >
+                </div>
+              </app-alert-message>
+            }
+            <!-- EMAIL LIST -->
+            <section id="Email addresses" class="row email-list">
+              <h2 class="orc-font-body-large" i18n="@@side-bar.emailAddressesUppercase">
         Email addresses
       </h2>
-      <hr class="separator" />
-      <ng-container *ngFor="let email of emails">
-        <div class="email-entry row">
-          <div class="row email-input-line" [formGroupName]="email.putCode">
-            <div class="email-input-container">
-              <mat-form-field
-                *ngIf="!showEmailAsVerified(email.putCode)"
-                appearance="outline"
-                class="mat-form-field-min orc-font-body-small"
-              >
-                <input
-                  matInput
-                  #emailInput
-                  formControlName="email"
-                  type="email"
-                  appTrim
+              <hr class="separator" />
+              @for (email of emails; track email) {
+                <div class="email-entry row">
+                  <div class="row email-input-line" [formGroupName]="email.putCode">
+                    <div class="email-input-container">
+                      @if (!showEmailAsVerified(email.putCode)) {
+                        <mat-form-field
+                          appearance="outline"
+                          class="mat-form-field-min orc-font-body-small"
+                          >
+                          <input
+                            matInput
+                            #emailInput
+                            formControlName="email"
+                            type="email"
+                            appTrim
                   [attr.aria-label]="
                     email.putCode.startsWith('new')
                       ? ariaLabelNewEmailAddress
                       : ariaLabelEmailAddress + ' ' + email.value
                   "
-                />
-              </mat-form-field>
-              <div
-                *ngIf="showEmailAsVerified(email.putCode)"
-                class="verified-email"
-              >
-                <strong tabindex="0" class="row orc-font-body-small">
-                  {{ emailsForm.value[email.putCode].email }}</strong
-                >
-                <app-panel-element-source
-                  class="orc-font-small-print"
-                  [name]="email.sourceName || email.source"
-                  [isEmailOrDomain]="true"
+                            />
+                        </mat-form-field>
+                      }
+                      @if (showEmailAsVerified(email.putCode)) {
+                        <div
+                          class="verified-email"
+                          >
+                          <strong tabindex="0" class="row orc-font-body-small">
+                            {{ emailsForm.value[email.putCode].email }}</strong
+                            >
+                            <app-panel-element-source
+                              class="orc-font-small-print"
+                              [name]="email.sourceName || email.source"
+                              [isEmailOrDomain]="true"
                   [date]="
                     email.verificationDate
                       | monthDayYearDateToString
                       | verificationDateCutoff
                   "
-                  [isLastItem]="true"
-                >
-                </app-panel-element-source>
-              </div>
-            </div>
-            <div
-              class="actions-sub-wrapper"
+                              [isLastItem]="true"
+                              >
+                            </app-panel-element-source>
+                          </div>
+                        }
+                      </div>
+                      <div
+                        class="actions-sub-wrapper"
               [ngClass]="{
                 'privacy-selector': !showNonVerifiedData(email.putCode)
               }"
-            >
-              <app-visibility-selector
-                formControlName="visibility"
-                id="cy-email-visibility"
-                [ariaLabelPrivate]="ariaLabelVisibilityEmailPrivate"
-                [ariaLabelPublic]="ariaLabelVisibilityEmailPublic"
-                [ariaLabelTrustedParty]="ariaLabelVisibilityEmailTrustedParty"
-                [itemTitle]="emailsForm.value[email.putCode].email"
-                [editable]="email.verified"
-                [mobile]="isMobile"
-                [privacy]="!email.verified ? 'PUBLIC' : email.visibility"
+                        >
+                        <app-visibility-selector
+                          formControlName="visibility"
+                          id="cy-email-visibility"
+                          [ariaLabelPrivate]="ariaLabelVisibilityEmailPrivate"
+                          [ariaLabelPublic]="ariaLabelVisibilityEmailPublic"
+                          [ariaLabelTrustedParty]="ariaLabelVisibilityEmailTrustedParty"
+                          [itemTitle]="emailsForm.value[email.putCode].email"
+                          [editable]="email.verified"
+                          [mobile]="isMobile"
+                          [privacy]="!email.verified ? 'PUBLIC' : email.visibility"
                 [matTooltip]="
                   isMobile && !email.verified ? visibilityTooltip : ''
                 "
-              ></app-visibility-selector>
-            </div>
-            <div
+                        ></app-visibility-selector>
+                      </div>
+                      <div
               [matTooltip]="
                 hasOneEmailAddress(email.putCode) ? deleteTooltip : ''
               "
-            >
-              <button
-                (click)="deleteEmail(email.putCode)"
-                mat-icon-button
-                class="delete-button"
-                [disabled]="hasOneEmailAddress(email.putCode)"
+                        >
+                        <button
+                          (click)="deleteEmail(email.putCode)"
+                          mat-icon-button
+                          class="delete-button"
+                          [disabled]="hasOneEmailAddress(email.putCode)"
                 [attr.aria-label]="
                   ariaLabelDelete +
                   ' ' +
                   (emailsForm.value[email.putCode].email || '')
                 "
-              >
-                <mat-icon
-                  class="material-icons-outlined extra-large-material-icon"
-                  >delete_outline</mat-icon
-                >
-              </button>
-            </div>
-          </div>
-          <div
-            class="row actions-wrapper"
-            [ngClass]="{ 'actions-wrapper-mobile': isMobile }"
-          >
-            <mat-hint
-              class="actions-sub-wrapper orc-font-small-print"
-              *ngIf="showNonVerifiedData(email.putCode)"
-            >
-              <ng-container *ngIf="email.sourceName || email.source">
-                <ng-container i18n="@@shared.sourceColon">Source:</ng-container>
-                <ng-container>{{
-                  email.sourceName || email.source
-                }}</ng-container
-                >,
-              </ng-container>
-              <ng-container i18n="@@side-bar.unverified"
-                >Unverified</ng-container
-              >
-              <ng-container>-</ng-container>
-              <ng-container
-                class="disabled underline"
-                *ngIf="verificationEmailWasSend(email.putCode)"
-                i18n="@@side-bar.verificationEmailSent"
-                >Verification email sent</ng-container
-              >
-              <a
-                class="underline"
-                (click)="verifyEmail(email)"
-                *ngIf="!verificationEmailWasSend(email.putCode)"
-                i18n="@@side-bar.resendVerification"
-              >
+                          >
+                          <mat-icon
+                            class="material-icons-outlined extra-large-material-icon"
+                            >delete_outline</mat-icon
+                            >
+                          </button>
+                        </div>
+                      </div>
+                      <div
+                        class="row actions-wrapper"
+                        [ngClass]="{ 'actions-wrapper-mobile': isMobile }"
+                        >
+                        @if (showNonVerifiedData(email.putCode)) {
+                          <mat-hint
+                            class="actions-sub-wrapper orc-font-small-print"
+                            >
+                            @if (email.sourceName || email.source) {
+                              <ng-container i18n="@@shared.sourceColon">Source:</ng-container>
+                              <ng-container>{{
+                                email.sourceName || email.source
+                                }}</ng-container
+                                >,
+                              }
+                              <ng-container i18n="@@side-bar.unverified"
+                                >Unverified</ng-container
+                                >
+                                <ng-container>-</ng-container>
+                                @if (verificationEmailWasSend(email.putCode)) {
+                                  <ng-container
+                                    class="disabled underline"
+                                    i18n="@@side-bar.verificationEmailSent"
+                                    >Verification email sent</ng-container
+                                    >
+                                  }
+                                  @if (!verificationEmailWasSend(email.putCode)) {
+                                    <a
+                                      class="underline"
+                                      (click)="verifyEmail(email)"
+                                      i18n="@@side-bar.resendVerification"
+                                      >
                 Resend verification email</a
-              >
-            </mat-hint>
-            <mat-error
-              *ngIf="
-                emailsForm.hasError('required', [email.putCode, 'email']) &&
-                emailsForm.get(email.putCode).get('email').touched
-              "
-              i18n="@@sideBar.primaryEmailRequired"
-              class="orc-font-small-print"
-            >
+                                      >
+                                    }
+                                  </mat-hint>
+                                }
+                                @if (
+                                  emailsForm.hasError('required', [email.putCode, 'email']) &&
+                                  emailsForm.get(email.putCode).get('email').touched
+                                  ) {
+                                  <mat-error
+                                    i18n="@@sideBar.primaryEmailRequired"
+                                    class="orc-font-small-print"
+                                    >
               An email is required
             </mat-error>
-            <mat-error
-              *ngIf="
-                emailsForm.hasError('duplicated', [email.putCode, 'email']) &&
-                emailsForm.get(email.putCode).get('email').touched
-              "
-              i18n="@@side-bar.emailCanNotBeDuplicated"
-              class="orc-font-small-print"
-            >
+                                }
+                                @if (
+                                  emailsForm.hasError('duplicated', [email.putCode, 'email']) &&
+                                  emailsForm.get(email.putCode).get('email').touched
+                                  ) {
+                                  <mat-error
+                                    i18n="@@side-bar.emailCanNotBeDuplicated"
+                                    class="orc-font-small-print"
+                                    >
               Email can not be duplicated
             </mat-error>
-            <mat-error
-              *ngIf="
-                emailsForm.hasError('email', [email.putCode, 'email']) &&
-                emailsForm.get(email.putCode).get('email').touched
-              "
-              i18n="@@side-bar.invalidEmailErrorMessage"
-              class="orc-font-small-print"
-            >
+                                }
+                                @if (
+                                  emailsForm.hasError('email', [email.putCode, 'email']) &&
+                                  emailsForm.get(email.putCode).get('email').touched
+                                  ) {
+                                  <mat-error
+                                    i18n="@@side-bar.invalidEmailErrorMessage"
+                                    class="orc-font-small-print"
+                                    >
               Please enter a valid email address, for example
               joe&#64;institution.edu
             </mat-error>
-
-            <mat-error
-              *ngIf="
-                emailsForm.hasError('backendError', [email.putCode, 'email']) &&
-                emailsForm.get(email.putCode).get('email').touched
-              "
-              i18n="@@side-bar.alreadyAssociated"
-              class="orc-font-small-print"
-            >
+                                }
+                                @if (
+                                  emailsForm.hasError('backendError', [email.putCode, 'email']) &&
+                                  emailsForm.get(email.putCode).get('email').touched
+                                  ) {
+                                  <mat-error
+                                    i18n="@@side-bar.alreadyAssociated"
+                                    class="orc-font-small-print"
+                                    >
               This email is already associated with an ORCID record.
             </mat-error>
-          </div>
-        </div>
-        <hr class="separator" />
-      </ng-container>
-      <div
-        class="row orc-font-body-small"
-        *ngIf="
-          userInfo?.IN_DELEGATION_MODE !== 'true' ||
-          userInfo?.DELEGATED_BY_ADMIN === 'true'
-        "
-      >
-        <a
-          class="col add-more"
-          (click)="addEmail(null, true)"
-          [attr.disabled]=""
-        >
-          <mat-icon class="large-material-icon">add_circle_outline </mat-icon>
-          <ng-container i18n="@@side-bar.anotherEmail">
+                                }
+                              </div>
+                            </div>
+                            <hr class="separator" />
+                          }
+                          @if (
+                            userInfo?.IN_DELEGATION_MODE !== 'true' ||
+                            userInfo?.DELEGATED_BY_ADMIN === 'true'
+                            ) {
+                            <div
+                              class="row orc-font-body-small"
+                              >
+                              <a
+                                class="col add-more"
+                                (click)="addEmail(null, true)"
+                                [attr.disabled]=""
+                                >
+                                <mat-icon class="large-material-icon">add_circle_outline </mat-icon>
+                                <ng-container i18n="@@side-bar.anotherEmail">
             Add another email address
           </ng-container>
-        </a>
-      </div>
-    </section>
-    <!-- EMAIL DOMAINS -->
-    <section id="Email domains" *ngIf="emailDomainsTogglz && !loadingTogglz">
-      <h2
-        class="orc-font-body-large email-notifications-header"
-        i18n="@@side-bar.verifiedEmailDomains"
-      >
+                              </a>
+                            </div>
+                          }
+                        </section>
+                        <!-- EMAIL DOMAINS -->
+                        @if (emailDomainsTogglz && !loadingTogglz) {
+                          <section id="Email domains">
+                            <h2
+                              class="orc-font-body-large email-notifications-header"
+                              i18n="@@side-bar.verifiedEmailDomains"
+                              >
         Verified email domains
       </h2>
-      <p class="orc-font-body-small">
-        <ng-container i18n="@@side-bar.whenYouVerifyEmail"
-          >When you verify a professional email address we will add the
+                            <p class="orc-font-body-small">
+                              <ng-container i18n="@@side-bar.whenYouVerifyEmail"
+                                >When you verify a professional email address we will add the
           associated domain to your record. You can choose to show an email
           domain on your public record instead of the full email
           address.</ng-container
-        >
-        <a
-          href="https://support.orcid.org/hc/en-us/articles/25578292888215-Email-Domains"
-          target="_blank"
-          rel="noopener noreferrer"
-          i18n="@@side-bar.findOutMoreAboutVerifiedEmailDomains"
-          >Find out more about verified email domains</a
-        >
-      </p>
-      <ng-container *ngIf="verifiedDomains.length === 0">
-        <em class="orc-font-body-small" i18n="@@side-bar.noVerifiedEmailDomains"
-          >No verified email domains</em
-        >
-      </ng-container>
-      <ng-container *ngIf="verifiedDomains.length > 0">
-        <hr class="separator" />
-        <ng-container
-          *ngFor="let domain of verifiedDomains"
-          [formGroupName]="domain.putCode"
-          ><div class="row email-entry">
-            <mat-icon class="verification-icon verified">check_circle</mat-icon>
-            <div class="verified-email">
-              <strong tabindex="0" class="row orc-font-body-small">
-                {{ domain.value }}</strong
-              >
-              <app-panel-element-source
-                class="orc-font-small-print"
-                [name]="orcidEmailValidation"
-                [isEmailOrDomain]="true"
+                                >
+                                <a
+                                  href="https://support.orcid.org/hc/en-us/articles/25578292888215-Email-Domains"
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  i18n="@@side-bar.findOutMoreAboutVerifiedEmailDomains"
+                                  >Find out more about verified email domains</a
+                                  >
+                                </p>
+                                @if (verifiedDomains.length === 0) {
+                                  <em class="orc-font-body-small" i18n="@@side-bar.noVerifiedEmailDomains"
+                                    >No verified email domains</em
+                                    >
+                                  }
+                                  @if (verifiedDomains.length > 0) {
+                                    <hr class="separator" />
+                                    @for (domain of verifiedDomains; track domain) {
+                                      <ng-container
+                                        [formGroupName]="domain.putCode"
+                                        ><div class="row email-entry">
+                                        <mat-icon class="verification-icon verified">check_circle</mat-icon>
+                                        <div class="verified-email">
+                                          <strong tabindex="0" class="row orc-font-body-small">
+                                            {{ domain.value }}</strong
+                                            >
+                                            <app-panel-element-source
+                                              class="orc-font-small-print"
+                                              [name]="orcidEmailValidation"
+                                              [isEmailOrDomain]="true"
                 [date]="
                   !domain.generatedByScript && domain.createdDate
                     | monthDayYearDateToString
                 "
-                [isLastItem]="true"
-              >
-              </app-panel-element-source>
-            </div>
-            <div class="actions-sub-wrapper domain-visibility">
-              <app-visibility-selector
-                [disableVisibilities]="disableVisibilities[domain.putCode]"
-                formControlName="visibility"
-                id="cy-domain-visibility"
-                [itemTitle]="domain.value"
-                [ariaLabelPrivate]="ariaLabelVisibilityDomainPrivate"
-                [ariaLabelPublic]="ariaLabelVisibilityDomainPublic"
-                [ariaLabelTrustedParty]="ariaLabelVisibilityDomainTrustedParty"
-                [mobile]="isMobile"
-                [privacy]="domain.visibility"
-              ></app-visibility-selector>
-            </div>
-          </div>
-          <hr class="separator" />
-        </ng-container>
-      </ng-container>
-    </section>
-    <!-- EMAIL NOTIFICATIONS -->
-    <section id="Email notifications">
-      <h2
-        class="orc-font-body-large email-notifications-header"
-        i18n="@@side-bar.emailNotifications"
-      >
+                                              [isLastItem]="true"
+                                              >
+                                            </app-panel-element-source>
+                                          </div>
+                                          <div class="actions-sub-wrapper domain-visibility">
+                                            <app-visibility-selector
+                                              [disableVisibilities]="disableVisibilities[domain.putCode]"
+                                              formControlName="visibility"
+                                              id="cy-domain-visibility"
+                                              [itemTitle]="domain.value"
+                                              [ariaLabelPrivate]="ariaLabelVisibilityDomainPrivate"
+                                              [ariaLabelPublic]="ariaLabelVisibilityDomainPublic"
+                                              [ariaLabelTrustedParty]="ariaLabelVisibilityDomainTrustedParty"
+                                              [mobile]="isMobile"
+                                              [privacy]="domain.visibility"
+                                            ></app-visibility-selector>
+                                          </div>
+                                        </div>
+                                        <hr class="separator" />
+                                      </ng-container>
+                                    }
+                                  }
+                                </section>
+                              }
+                              <!-- EMAIL NOTIFICATIONS -->
+                              <section id="Email notifications">
+                                <h2
+                                  class="orc-font-body-large email-notifications-header"
+                                  i18n="@@side-bar.emailNotifications"
+                                  >
         Email notifications
       </h2>
-      <p class="orc-font-body-small email-notifications-description">
-        <ng-container i18n="@@side-bar.whichVerifiedEmail">
+                                <p class="orc-font-body-small email-notifications-description">
+                                  <ng-container i18n="@@side-bar.whichVerifiedEmail">
           Which verified email address should we send your ORCID notifications
           to? You can change the frequency of these notification emails in
         </ng-container>
-        <a
-          i18n="@@side-bar.yourOrcidAccountSettings"
-          href="/account"
-          target="_blank"
-          [attr.aria-label]="ariaOpenAccountSettings"
-          rel="noopener noreferrer"
-          >your ORCID account settings.</a
-        >
-      </p>
-      <mat-form-field
-        appearance="outline"
-        class="mat-form-field-min select-notifications-email"
+                                  <a
+                                    i18n="@@side-bar.yourOrcidAccountSettings"
+                                    href="/account"
+                                    target="_blank"
+                                    [attr.aria-label]="ariaOpenAccountSettings"
+                                    rel="noopener noreferrer"
+                                    >your ORCID account settings.</a
+                                    >
+                                  </p>
+                                  <mat-form-field
+                                    appearance="outline"
+                                    class="mat-form-field-min select-notifications-email"
         [ngClass]="{
           'disabled-select-notifications-email': !hasVerifiedEmailAddress()
         }"
-      >
-        <mat-select
-          outline="black"
+                                    >
+                                    <mat-select
+                                      outline="black"
           [aria-label]="
             ariaLabelNotificationsAreSentToEmail + ' ' + primaryEmail?.value
           "
-          (selectionChange)="makePrimary($event.value)"
-          [disabled]="!hasVerifiedEmailAddress()"
-          placeholder=" {{ primaryEmail?.value }}"
-          [(value)]="primaryEmail"
-          class="orc-font-body-small"
-        >
-          <ng-container *ngFor="let email of emails">
-            <mat-option
-              *ngIf="email.verified"
+                                      (selectionChange)="makePrimary($event.value)"
+                                      [disabled]="!hasVerifiedEmailAddress()"
+                                      placeholder=" {{ primaryEmail?.value }}"
+                                      [(value)]="primaryEmail"
+                                      class="orc-font-body-small"
+                                      >
+                                      @for (email of emails; track email) {
+                                        @if (email.verified) {
+                                          <mat-option
               [ngClass]="{
                 'current-notification-email':
                   email.value === primaryEmail?.value
               }"
-              [value]="email"
-            >
-              {{ email.value }}
-            </mat-option>
-          </ng-container>
-        </mat-select>
-      </mat-form-field>
-    </section>
-  </div>
-</app-modal>
+                                            [value]="email"
+                                            >
+                                            {{ email.value }}
+                                          </mat-option>
+                                        }
+                                      }
+                                    </mat-select>
+                                  </mat-form-field>
+                                </section>
+                              </div>
+                            </app-modal>

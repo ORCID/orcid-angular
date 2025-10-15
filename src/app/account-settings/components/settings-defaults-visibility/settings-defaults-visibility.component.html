@@ -1,79 +1,79 @@
-<app-settings-panels-data [formGroup]="form" *ngIf="form">
-  <p i18n="@@account.byDefaultVisibility">
+@if (form) {
+  <app-settings-panels-data [formGroup]="form">
+    <p i18n="@@account.byDefaultVisibility">
     By default, what visibility should be given to new items added to your ORCID
     Record?
   </p>
-  <p>
-    <mat-radio-group
-      formControlName="activitiesVisibilityDefault"
-      color="primary"
-    >
-      <mat-radio-button
-        id="cy-visibility-everyone-input"
-        [value]="visibilityOptions[0]"
-        class="orcid-radio-button-with-icons"
-      >
-        <img
-          src="./assets/vectors/visibility-everyone.svg"
-          aria-hidden="true"
-          alt=""
-        />
-        <div class="inlined">
-          <strong i18n="@@register.VisibilityEveryone">Everyone</strong>
-
-          <ng-container i18n="@@register.VisibilityEveryone2"
-            >(87% of users choose this)</ng-container
+    <p>
+      <mat-radio-group
+        formControlName="activitiesVisibilityDefault"
+        color="primary"
+        >
+        <mat-radio-button
+          id="cy-visibility-everyone-input"
+          [value]="visibilityOptions[0]"
+          class="orcid-radio-button-with-icons"
           >
-        </div>
-      </mat-radio-button>
-      <mat-radio-button
-        id="cy-visibility-trusted-input"
-        [value]="visibilityOptions[1]"
-        class="orcid-radio-button-with-icons"
-      >
-        <img
-          src="./assets/vectors/visibility-trusted-source.svg"
-          aria-hidden="true"
-          alt=""
-        />
-        <div class="inlined">
-          <strong i18n="@@register.VisibilityTrusted"
-            >Trusted Organizations</strong
-          >
-          <ng-container i18n="@@register.VisibilityTrusted2"
-            >(5% of users choose this)</ng-container
-          >
-        </div>
-      </mat-radio-button>
-      <mat-radio-button
-        id="cy-visibility-private-input"
-        [value]="visibilityOptions[2]"
-        class="orcid-radio-button-with-icons"
-      >
-        <img
-          src="./assets/vectors/visibility-only-me.svg"
-          aria-hidden="true"
-          alt=""
-        />
-        <div class="inlined">
-          <strong i18n="@@register.VisibilityPrivate">Only me</strong>
-
-          <ng-container i18n="@@register.VisibilityPrivate2"
-            >(8% of users choose this)</ng-container
-          >
-        </div>
-      </mat-radio-button>
-    </mat-radio-group>
-  </p>
-  <p>
-    <a
-      class="underline"
-      href="https://support.orcid.org/hc/articles/360006897614"
-      target="_blank"
-      rel="noopener noreferrer"
-      i18n="@@register.visibilityDescription2"
-      id="cy-more-info-on-visibility-settings"
-      >More information on visibility settings</a
-    >
-  </p>
-</app-settings-panels-data>
+          <img
+            src="./assets/vectors/visibility-everyone.svg"
+            aria-hidden="true"
+            alt=""
+            />
+          <div class="inlined">
+            <strong i18n="@@register.VisibilityEveryone">Everyone</strong>
+            <ng-container i18n="@@register.VisibilityEveryone2"
+              >(87% of users choose this)</ng-container
+              >
+            </div>
+          </mat-radio-button>
+          <mat-radio-button
+            id="cy-visibility-trusted-input"
+            [value]="visibilityOptions[1]"
+            class="orcid-radio-button-with-icons"
+            >
+            <img
+              src="./assets/vectors/visibility-trusted-source.svg"
+              aria-hidden="true"
+              alt=""
+              />
+            <div class="inlined">
+              <strong i18n="@@register.VisibilityTrusted"
+                >Trusted Organizations</strong
+                >
+                <ng-container i18n="@@register.VisibilityTrusted2"
+                  >(5% of users choose this)</ng-container
+                  >
+                </div>
+              </mat-radio-button>
+              <mat-radio-button
+                id="cy-visibility-private-input"
+                [value]="visibilityOptions[2]"
+                class="orcid-radio-button-with-icons"
+                >
+                <img
+                  src="./assets/vectors/visibility-only-me.svg"
+                  aria-hidden="true"
+                  alt=""
+                  />
+                <div class="inlined">
+                  <strong i18n="@@register.VisibilityPrivate">Only me</strong>
+                  <ng-container i18n="@@register.VisibilityPrivate2"
+                    >(8% of users choose this)</ng-container
+                    >
+                  </div>
+                </mat-radio-button>
+              </mat-radio-group>
+            </p>
+            <p>
+              <a
+                class="underline"
+                href="https://support.orcid.org/hc/articles/360006897614"
+                target="_blank"
+                rel="noopener noreferrer"
+                i18n="@@register.visibilityDescription2"
+                id="cy-more-info-on-visibility-settings"
+                >More information on visibility settings</a
+                >
+              </p>
+            </app-settings-panels-data>
+          }

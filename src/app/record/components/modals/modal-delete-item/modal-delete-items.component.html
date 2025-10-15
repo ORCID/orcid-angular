@@ -9,7 +9,7 @@
       (click)="saveEvent()"
       [disabled]="loadingItems"
       id="delete-button"
-    >
+      >
       <ng-container i18n="@@shared.deleteSelected">
         Delete selected items
       </ng-container>
@@ -20,7 +20,7 @@
       (click)="closeEvent()"
       i18n="@@shared.cancel"
       id="cancel-button"
-    >
+      >
       Cancel
     </button>
   </app-modal-footer>
@@ -39,44 +39,47 @@
         ({{ selectedItems.length }})
       </h3>
     </legend>
-    <div *ngIf="items.length > 1" class="row">
+    @if (items.length > 1) {
       <div class="row">
-        <p>
-          <mat-checkbox
-            (change)="updateCheckAll()"
-            [(ngModel)]="selectAll"
-            [ngModelOptions]="{ standalone: true }"
-          >
-            <ng-container
-              i18n="@@shared.selectAll"
-              *ngIf="selectedItems.length === 0"
-            >
+        <div class="row">
+          <p>
+            <mat-checkbox
+              (change)="updateCheckAll()"
+              [(ngModel)]="selectAll"
+              [ngModelOptions]="{ standalone: true }"
+              >
+              @if (selectedItems.length === 0) {
+                <ng-container
+                  i18n="@@shared.selectAll"
+                  >
               Select all
             </ng-container>
-            <ng-container *ngIf="selectedItems.length > 0">
-              ({{ selectedItems.length }})
-              <ng-container i18n="@@shared.selected">Selected</ng-container>
-            </ng-container>
-          </mat-checkbox>
-        </p>
+              }
+              @if (selectedItems.length > 0) {
+                ({{ selectedItems.length }})
+                <ng-container i18n="@@shared.selected">Selected</ng-container>
+              }
+            </mat-checkbox>
+          </p>
+        </div>
       </div>
-    </div>
+    }
     <mat-divider class="row"></mat-divider>
-    <div
-      class="row"
-      [formGroup]="deleteForm"
-      *ngIf="deleteForm && !loadingItems"
-    >
-      <ng-container *ngFor="let item of items">
-        <div
-          class="row affiliation-info"
+    @if (deleteForm && !loadingItems) {
+      <div
+        class="row"
+        [formGroup]="deleteForm"
+        >
+        @for (item of items; track item) {
+          <div
+            class="row affiliation-info"
           [formGroupName]="
             type === 'research-resources' ? item.putCode : item.putCode.value
           "
-        >
-          <div class="row">
-            <mat-checkbox
-              class="text-wrap"
+            >
+            <div class="row">
+              <mat-checkbox
+                class="text-wrap"
               (change)="
                 updateCheck(
                   type === 'research-resources'
@@ -84,85 +87,88 @@
                     : item.putCode.value
                 )
               "
-              formControlName="checked"
-            >
-              <h2
-                class="orc-font-body title"
+                formControlName="checked"
+                >
+                <h2
+                  class="orc-font-body title"
                 [ngClass]="{
                   mobile: isMobile
                 }"
-              >
-                <ng-container *ngIf="isAffiliation()">
-                  {{ item?.affiliationName?.value }}
-                </ng-container>
-                <ng-container *ngIf="type === 'funding'">
-                  {{ item?.fundingTitle?.title?.value }}
-                </ng-container>
-                <ng-container *ngIf="type === 'research-resources'">
-                  {{ item?.title }}
-                </ng-container>
-                <ng-container *ngIf="type === 'works'">
-                  {{ item?.title?.value }}
-                </ng-container>
-                <ng-container *ngIf="type === 'peer-review'">
-                  <div>
-                    <span class="peer-review">
-                      <ng-container i18n="@@peerReview.reviewDate">
+                  >
+                  @if (isAffiliation()) {
+                    {{ item?.affiliationName?.value }}
+                  }
+                  @if (type === 'funding') {
+                    {{ item?.fundingTitle?.title?.value }}
+                  }
+                  @if (type === 'research-resources') {
+                    {{ item?.title }}
+                  }
+                  @if (type === 'works') {
+                    {{ item?.title?.value }}
+                  }
+                  @if (type === 'peer-review') {
+                    <div>
+                      <span class="peer-review">
+                        <ng-container i18n="@@peerReview.reviewDate">
                         Review date:
                       </ng-container>
-                      {{ item?.completionDate | monthDayYearDateToString }}
-                    </span>
-                    <span class="peer-review">
-                      <ng-container i18n="@@peerReview.type">
+                        {{ item?.completionDate | monthDayYearDateToString }}
+                      </span>
+                      <span class="peer-review">
+                        <ng-container i18n="@@peerReview.type">
                         Type:
                       </ng-container>
-                      <span class="capitalize"> {{ item.type.value }}</span>
-                    </span>
-                    <span>
-                      <ng-container i18n="@@peerReview.role">
+                        <span class="capitalize"> {{ item.type.value }}</span>
+                      </span>
+                      <span>
+                        <ng-container i18n="@@peerReview.role">
                         Role:
                       </ng-container>
-                      <span class="capitalize">
-                        {{ item.role.value }}
+                        <span class="capitalize">
+                          {{ item.role.value }}
+                        </span>
                       </span>
-                    </span>
-                  </div>
-                </ng-container>
-              </h2>
-            </mat-checkbox>
-          </div>
-          <div class="details orc-font-body-small">
-            <strong i18n="@@shared.source">Source</strong>:
-            <ng-container
-              *ngIf="item?.assertionOriginName || item?.assertionOriginOrcid"
-            >
-              {{ item?.assertionOriginName || item?.assertionOriginOrcid }}
-              <i i18n="@@shared.onBehalfOf">via</i>
-            </ng-container>
-            {{ item.sourceName || item.source }}
-            <ng-container *ngIf="item.createdDate">
-              <br *ngIf="isMobile" />
-              <strong
-                class="added"
-                i18n="@@shared.added"
+                    </div>
+                  }
+                </h2>
+              </mat-checkbox>
+            </div>
+            <div class="details orc-font-body-small">
+              <strong i18n="@@shared.source">Source</strong>:
+              @if (item?.assertionOriginName || item?.assertionOriginOrcid) {
+                {{ item?.assertionOriginName || item?.assertionOriginOrcid }}
+                <i i18n="@@shared.onBehalfOf">via</i>
+              }
+              {{ item.sourceName || item.source }}
+              @if (item.createdDate) {
+                @if (isMobile) {
+                  <br />
+                }
+                <strong
+                  class="added"
+                  i18n="@@shared.added"
                 [ngClass]="{
                   mobile: isMobile
                 }"
-              >
+                  >
                 Added</strong
-              >:
-              {{ item.createdDate | monthDayYearDateToString }}
-            </ng-container>
-          </div>
+                  >:
+                  {{ item.createdDate | monthDayYearDateToString }}
+                }
+              </div>
+            </div>
+            <mat-divider class="row"></mat-divider>
+          }
         </div>
-        <mat-divider class="row"></mat-divider>
-      </ng-container>
-    </div>
-  </fieldset>
-  <div class="no-info orc-font-body-small" *ngIf="!item && items.length === 0">
-    <mat-icon>error</mat-icon>
-    <ng-container i18n="@@works.noItemsSelected"
-      >No items selected.
+      }
+    </fieldset>
+    @if (!item && items.length === 0) {
+      <div class="no-info orc-font-body-small">
+        <mat-icon>error</mat-icon>
+        <ng-container i18n="@@works.noItemsSelected"
+          >No items selected.
     </ng-container>
-  </div>
-</app-modal>
+      </div>
+    }
+  </app-modal>

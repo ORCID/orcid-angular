@@ -1,15 +1,21 @@
 <app-skip-main-nav></app-skip-main-nav>
 <div [dir]="screenDirection">
   <router-outlet name="banner"></router-outlet>
-  <app-banners *ngIf="!headlessMode"></app-banners>
-  <app-header *ngIf="!headlessMode" currentRoute=""></app-header>
+  @if (!headlessMode) {
+    <app-banners></app-banners>
+  }
+  @if (!headlessMode) {
+    <app-header currentRoute=""></app-header>
+  }
   <div
     class="router-container"
     [ngClass]="{
       'spacing': spacing,
     }"
-  >
+    >
     <router-outlet></router-outlet>
   </div>
-  <app-footer *ngIf="!footerlessMode"></app-footer>
+  @if (!footerlessMode) {
+    <app-footer></app-footer>
+  }
 </div>

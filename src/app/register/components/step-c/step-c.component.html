@@ -1,9 +1,10 @@
 <mat-card appearance="outlined" class="orcid-wizard">
-  <mat-progress-bar
-    *ngIf="loading"
-    mode="indeterminate"
-    id="loading-bar"
-  ></mat-progress-bar>
+  @if (loading) {
+    <mat-progress-bar
+      mode="indeterminate"
+      id="loading-bar"
+    ></mat-progress-bar>
+  }
 
   <mat-card-header>
     <mat-card-title role="heading" aria-level="1">
@@ -12,21 +13,21 @@
           height="64px"
           src="assets/vectors/orcid.logo.icon.svg"
           alt="orcid logo"
-        />
+          />
       </div>
-      <ng-container *ngIf="!reactivation?.isReactivation">
+      @if (!reactivation?.isReactivation) {
         <h1 class="orc-font-heading-small" i18n="@@register.create">
           Create your ORCID iD
         </h1>
-      </ng-container>
-      <ng-container *ngIf="reactivation?.isReactivation">
+      }
+      @if (reactivation?.isReactivation) {
         <h1
           class="orc-font-heading-small"
           i18n="@@register.reactivateYourOrcidAccount"
-        >
+          >
           Reactivate your ORCID account
         </h1>
-      </ng-container>
+      }
     </mat-card-title>
     <mat-card-subtitle role="heading" aria-level="2">
       <h2 class="orc-font-body-small" i18n="@@register.step4.3">
@@ -48,7 +49,7 @@
           [disabled]="loading"
           matStepperNext
           (click)="nextButton2()"
-        >
+          >
           <ng-container i18n="@@register.nextStep"> Next Step </ng-container>
         </button>
         <button
@@ -58,15 +59,16 @@
           type="button"
           id="step-c-back-button"
           (click)="backButton()"
-        >
+          >
           <a i18n="@@shared.previousStep"> Previous Step</a>
         </button>
       </div>
     </form>
   </mat-card-content>
-  <mat-progress-bar
-    *ngIf="loading"
-    mode="indeterminate"
-    id="bottom-loading-bar"
-  ></mat-progress-bar>
+  @if (loading) {
+    <mat-progress-bar
+      mode="indeterminate"
+      id="bottom-loading-bar"
+    ></mat-progress-bar>
+  }
 </mat-card>

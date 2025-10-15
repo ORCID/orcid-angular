@@ -3,7 +3,7 @@
     appearance="outline"
     class="mat-form-field-min input-container"
     (click)="clickHoverMenuTrigger.openMenu()"
-  >
+    >
     <input
       #clickHoverMenuTrigger="matMenuTrigger"
       [matMenuTriggerFor]="matMenu"
@@ -16,118 +16,129 @@
       matInput
       [errorStateMatcher]="getMatcher()"
       role="menu"
-    />
+      />
     <mat-icon matSuffix>arrow_drop_down</mat-icon>
-    <mat-error *ngIf="invalid" i18n="@@works.selectAWorkType">
+    @if (invalid) {
+      <mat-error i18n="@@works.selectAWorkType">
       Select a work type
     </mat-error>
+    }
   </mat-form-field>
 
   <mat-menu #matMenu="matMenu" [yPosition]="'above'" (closed)="onMenuClose()">
     <div class="menu-wrapper">
-      <ng-container *ngFor="let item of menu">
-        <ng-container *ngIf="!item.divider">
-          <label class="orc-font-body strong" *ngIf="item.isNotSelectableLabel">
-            {{ item.label }}</label
-          >
-          <button
-            mat-menu-item
-            *ngIf="!item.isNotSelectableLabel && !item.content"
-            (click)="onItemSelect(item)"
-            class="orc-font-body-small"
-          >
-            {{ item.label }}
-          </button>
-          <!-- DESKTOP VERSION USES SUBMENUS -->
-          <ng-container *ngIf="!isMobile">
-            <div class="sub-menu-container" *ngIf="item.content?.length">
+      @for (item of menu; track item) {
+        @if (!item.divider) {
+          @if (item.isNotSelectableLabel) {
+            <label class="orc-font-body strong">
+              {{ item.label }}</label
+              >
+            }
+            @if (!item.isNotSelectableLabel && !item.content) {
               <button
                 mat-menu-item
-                *ngIf="!item.isNotSelectableLabel"
-                [matMenuTriggerFor]="subMenuRef"
-                class="mat-button-wrap-text"
-              >
-                <div class="parentContainer">
-                  <strong class="orc-font-body">
-                    {{ item.label }}
-                  </strong>
-                  <p class="orc-font-small-print">
-                    {{ item.description }}
-                  </p>
-                </div>
+                (click)="onItemSelect(item)"
+                class="orc-font-body-small"
+                >
+                {{ item.label }}
               </button>
-              <!-- Create a mat menu using the label as an identifier -->
-              <mat-menu #subMenuRef="matMenu">
-                <ng-container *ngFor="let subItem of item.content">
-                  <ng-container *ngIf="!subItem.divider">
+            }
+            <!-- DESKTOP VERSION USES SUBMENUS -->
+            @if (!isMobile) {
+              @if (item.content?.length) {
+                <div class="sub-menu-container">
+                  @if (!item.isNotSelectableLabel) {
                     <button
                       mat-menu-item
-                      (click)="onItemSelect(subItem)"
-                      [ngClass]="subItem.secondaryItem ? 'secondaryItem' : ''"
+                      [matMenuTriggerFor]="subMenuRef"
                       class="mat-button-wrap-text"
-                    >
-                      {{ subItem.label }}
-
-                      <p
-                        class="orc-font-small-print"
-                        *ngIf="subItem.description"
                       >
-                        {{ subItem.description }}
-                      </p>
+                      <div class="parentContainer">
+                        <strong class="orc-font-body">
+                          {{ item.label }}
+                        </strong>
+                        <p class="orc-font-small-print">
+                          {{ item.description }}
+                        </p>
+                      </div>
                     </button>
-                  </ng-container>
-                  <ng-container *ngIf="subItem.divider">
-                    <mat-divider></mat-divider>
-                  </ng-container>
-                </ng-container>
-              </mat-menu>
-            </div>
-          </ng-container>
-
-          <!-- MOBILE VERSIONS DISPLAY ALL ITEMS -->
-          <ng-container *ngIf="isMobile">
-            <div class="sub-menu-container mobile" *ngIf="item.content?.length">
-              <mat-divider></mat-divider>
-              <div
-                *ngIf="!item.isNotSelectableLabel"
-                class="not-selectable-label"
-              >
-                <div class="parentContainer">
-                  <strong class="orc-font-body">
-                    {{ item.label }}
-                  </strong>
-                  <p class="orc-font-small-print">
-                    {{ item.description }}
-                  </p>
+                  }
+                  <!-- Create a mat menu using the label as an identifier -->
+                  <mat-menu #subMenuRef="matMenu">
+                    @for (subItem of item.content; track subItem) {
+                      @if (!subItem.divider) {
+                        <button
+                          mat-menu-item
+                          (click)="onItemSelect(subItem)"
+                          [ngClass]="subItem.secondaryItem ? 'secondaryItem' : ''"
+                          class="mat-button-wrap-text"
+                          >
+                          {{ subItem.label }}
+                          @if (subItem.description) {
+                            <p
+                              class="orc-font-small-print"
+                              >
+                              {{ subItem.description }}
+                            </p>
+                          }
+                        </button>
+                      }
+                      @if (subItem.divider) {
+                        <mat-divider></mat-divider>
+                      }
+                    }
+                  </mat-menu>
                 </div>
-              </div>
-              <!-- Create a mat menu using the label as an identifier -->
-              <ng-container *ngFor="let subItem of item.content">
-                <ng-container *ngIf="!subItem.divider">
-                  <button
-                    mat-menu-item
-                    (click)="onItemSelect(subItem)"
-                    [ngClass]="subItem.secondaryItem ? 'secondaryItem' : ''"
-                    class="mobile mat-button-wrap-text"
-                  >
-                    {{ subItem.label }}
-
-                    <p class="orc-font-small-print" *ngIf="subItem.description">
-                      {{ subItem.description }}
-                    </p>
-                  </button>
-                </ng-container>
-              </ng-container>
-            </div>
-          </ng-container>
-          <ng-container *ngIf="item.divider">
+              }
+            }
+            <!-- MOBILE VERSIONS DISPLAY ALL ITEMS -->
+            @if (isMobile) {
+              @if (item.content?.length) {
+                <div class="sub-menu-container mobile">
+                  <mat-divider></mat-divider>
+                  @if (!item.isNotSelectableLabel) {
+                    <div
+                      class="not-selectable-label"
+                      >
+                      <div class="parentContainer">
+                        <strong class="orc-font-body">
+                          {{ item.label }}
+                        </strong>
+                        <p class="orc-font-small-print">
+                          {{ item.description }}
+                        </p>
+                      </div>
+                    </div>
+                  }
+                  <!-- Create a mat menu using the label as an identifier -->
+                  @for (subItem of item.content; track subItem) {
+                    @if (!subItem.divider) {
+                      <button
+                        mat-menu-item
+                        (click)="onItemSelect(subItem)"
+                        [ngClass]="subItem.secondaryItem ? 'secondaryItem' : ''"
+                        class="mobile mat-button-wrap-text"
+                        >
+                        {{ subItem.label }}
+                        @if (subItem.description) {
+                          <p class="orc-font-small-print">
+                            {{ subItem.description }}
+                          </p>
+                        }
+                      </button>
+                    }
+                  }
+                </div>
+              }
+            }
+            @if (item.divider) {
+              <mat-divider></mat-divider>
+            }
+          }
+          @if (item.divider) {
             <mat-divider></mat-divider>
-          </ng-container>
-        </ng-container>
-        <ng-container *ngIf="item.divider">
-          <mat-divider></mat-divider>
-        </ng-container>
-      </ng-container>
-    </div>
-  </mat-menu>
-</div>
+          }
+        }
+      </div>
+    </mat-menu>
+  </div>

@@ -1,62 +1,65 @@
-<div class="container" *ngIf="data && data.duplicateRecords">
-  <h1 class="mat-headline-4 modal-title">
-    {{ data.titleLabel || titleLabel }}
-  </h1>
-  <div class="non-fixed">
-    <p class="mat-subtitle-2">
-      {{ data.bodyLabel || bodyLabel }}
-      <a
-        rel="noopener noreferrer"
-        target="_blank"
-        href="https://support.orcid.org/"
-      >
-        {{ data.contactLabel || contactLabel }}
-      </a>
-    </p>
-
-    <table class="mat-subtitle-1">
-      <tr>
-        <th>{{ data.firstNameLabel || firstNameLabel }}</th>
-        <th>{{ data.lastNameLabel || lastNameLabel }}</th>
-        <th class="affiliation-colum">
-          {{ data.affiliationsLabel || affiliationsLabel }}
-        </th>
-        <th class="buttonsColumn">
-          {{ data.viewRecordLabel || viewRecordLabel }}
-        </th>
-      </tr>
-      <tr *ngFor="let record of data.duplicateRecords">
-        <td>{{ record['given-names'] }}</td>
-        <td>{{ record['family-names'] }}</td>
-        <td>{{ record['institution-name'].join(', ') }}</td>
-        <td>
-          <button
-            mat-button
-            color="primary"
-            (click)="gotoNewTab(record['orcid-id'])"
+@if (data && data.duplicateRecords) {
+  <div class="container">
+    <h1 class="mat-headline-4 modal-title">
+      {{ data.titleLabel || titleLabel }}
+    </h1>
+    <div class="non-fixed">
+      <p class="mat-subtitle-2">
+        {{ data.bodyLabel || bodyLabel }}
+        <a
+          rel="noopener noreferrer"
+          target="_blank"
+          href="https://support.orcid.org/"
           >
+          {{ data.contactLabel || contactLabel }}
+        </a>
+      </p>
+      <table class="mat-subtitle-1">
+        <tr>
+          <th>{{ data.firstNameLabel || firstNameLabel }}</th>
+          <th>{{ data.lastNameLabel || lastNameLabel }}</th>
+          <th class="affiliation-colum">
+            {{ data.affiliationsLabel || affiliationsLabel }}
+          </th>
+          <th class="buttonsColumn">
             {{ data.viewRecordLabel || viewRecordLabel }}
-          </button>
-        </td>
-      </tr>
-    </table>
+          </th>
+        </tr>
+        @for (record of data.duplicateRecords; track record) {
+          <tr>
+            <td>{{ record['given-names'] }}</td>
+            <td>{{ record['family-names'] }}</td>
+            <td>{{ record['institution-name'].join(', ') }}</td>
+            <td>
+              <button
+                mat-button
+                color="primary"
+                (click)="gotoNewTab(record['orcid-id'])"
+                >
+                {{ data.viewRecordLabel || viewRecordLabel }}
+              </button>
+            </td>
+          </tr>
+        }
+      </table>
+    </div>
+    <div class="fixed">
+      <button
+        mat-button
+        color="primary"
+        class="mat-button-wrap-text mat-button-font-spaced"
+        (click)="denyNewRegistration()"
+        >
+        {{ data.signinLabel || signinLabel }}
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        class="mat-button-wrap-text mat-button-font-spaced"
+        (click)="confirmRegistration()"
+        >
+        {{ data.continueLabel || continueLabel }}
+      </button>
+    </div>
   </div>
-  <div class="fixed">
-    <button
-      mat-button
-      color="primary"
-      class="mat-button-wrap-text mat-button-font-spaced"
-      (click)="denyNewRegistration()"
-    >
-      {{ data.signinLabel || signinLabel }}
-    </button>
-    <button
-      mat-raised-button
-      color="primary"
-      class="mat-button-wrap-text mat-button-font-spaced"
-      (click)="confirmRegistration()"
-    >
-      {{ data.continueLabel || continueLabel }}
-    </button>
-  </div>
-</div>
+}

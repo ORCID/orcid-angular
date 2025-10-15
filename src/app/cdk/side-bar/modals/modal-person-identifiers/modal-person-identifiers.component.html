@@ -3,98 +3,98 @@
     i18n="@@side-bar.personalIdentifiers"
     [closeLabel]="ariaLabelClose"
     >Other IDs</app-modal-header
-  >
-  <app-modal-footer>
-    <button
-      mat-raised-button
-      color="primary"
-      (click)="saveEvent()"
-      i18n="@@shared.saveChanges"
-      id="save-personal-id-button"
-      [attr.aria-label]="ariaLabelSave"
     >
+    <app-modal-footer>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="saveEvent()"
+        i18n="@@shared.saveChanges"
+        id="save-personal-id-button"
+        [attr.aria-label]="ariaLabelSave"
+        >
       Save changes
     </button>
-    <button
-      mat-stroked-button
-      color="primary"
-      (click)="closeEvent()"
-      i18n="@@shared.cancel"
-      id="cancel-personal-id-button"
-      [attr.aria-label]="ariaLabelCancel"
-    >
+      <button
+        mat-stroked-button
+        color="primary"
+        (click)="closeEvent()"
+        i18n="@@shared.cancel"
+        id="cancel-personal-id-button"
+        [attr.aria-label]="ariaLabelCancel"
+        >
       Cancel
     </button>
-  </app-modal-footer>
+    </app-modal-footer>
 
-  <div class="container no-padding" [formGroup]="personIdentifiersForm">
-    <div class="row">
-      <div class="col no-gutters">
-        <p class="orc-font-body-small">
-          <ng-container i18n="@@side-bar.personIdentifiersDescription">
+    <div class="container no-padding" [formGroup]="personIdentifiersForm">
+      <div class="row">
+        <div class="col no-gutters">
+          <p class="orc-font-body-small">
+            <ng-container i18n="@@side-bar.personIdentifiersDescription">
             Other identifiers, also called Person identifiers, are unique IDs
             that systems such as ISNI and Scopus use to identify you. These
             identifiers can only be added to your record by trusted
             organizations you have connected to ORCID.
           </ng-container>
-        </p>
-        <p class="orc-font-body-small find-out">
-          <ng-container i18n="@@side-bar.findOutMore">
+          </p>
+          <p class="orc-font-body-small find-out">
+            <ng-container i18n="@@side-bar.findOutMore">
             Find out more on our
           </ng-container>
-          <a
+            <a
             [attr.aria-label]="
               ariaLabelIdentifier + ' ' + ariaLabelOtherIdsSupport
             "
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://support.orcid.org/hc/en-us/articles/360006894854-Add-person-identifiers-other-identifiers-to-your-ORCID-record"
-            i18n="@@side-bar.personIdentifiersSupport"
-            >Other identifiers support page.</a
-          >
-        </p>
-      </div>
-    </div>
-    <ng-container *ngIf="personIdentifiers?.length > 0">
-      <div class="row">
-        <h2
-          class="col no-gutters orc-font-body"
-          i18n="@@side-bar.myOtherIdentifiers"
-        >
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://support.orcid.org/hc/en-us/articles/360006894854-Add-person-identifiers-other-identifiers-to-your-ORCID-record"
+              i18n="@@side-bar.personIdentifiersSupport"
+              >Other identifiers support page.</a
+              >
+            </p>
+          </div>
+        </div>
+        @if (personIdentifiers?.length > 0) {
+          <div class="row">
+            <h2
+              class="col no-gutters orc-font-body"
+              i18n="@@side-bar.myOtherIdentifiers"
+              >
           My other identifiers
         </h2>
-      </div>
-      <hr class="dashed-line" />
-      <section
-        id="my-other-identifiers"
-        class="row"
-        id="ids-list"
-        cdkDropList
-        (cdkDropListDropped)="drop($event)"
-      >
-        <div
-          cdkDrag
-          class="row"
-          [ngStyle]="{ direction: screenDirection }"
-          [formGroupName]="personIdentifier.putCode"
-          *ngFor="let personIdentifier of personIdentifiers; index as i"
-          [attr.id]="'draggable-' + i"
-        >
-          <div class="row drag-placeholder" *cdkDragPlaceholder></div>
-          <div
-            class="row personal-identifier-input-line"
-            [ngClass]="{ 'no-wrap': !isMobile }"
-          >
-            <div
-              class="col l12 m8 s4 top no-wrap no-gutters personal-identifiers-wrapper"
+          </div>
+          <hr class="dashed-line" />
+          <section
+            id="my-other-identifiers"
+            class="row"
+            id="ids-list"
+            cdkDropList
+            (cdkDropListDropped)="drop($event)"
             >
-              <img
-                cdkDragHandle
-                src="./assets/vectors/draggable.svg"
-                aria-label="drag handle"
-              />
-              <div class="person-identifier">
-                <a
+            @for (personIdentifier of personIdentifiers; track personIdentifier; let i = $index) {
+              <div
+                cdkDrag
+                class="row"
+                [ngStyle]="{ direction: screenDirection }"
+                [formGroupName]="personIdentifier.putCode"
+                [attr.id]="'draggable-' + i"
+                >
+                <div class="row drag-placeholder" *cdkDragPlaceholder></div>
+                <div
+                  class="row personal-identifier-input-line"
+                  [ngClass]="{ 'no-wrap': !isMobile }"
+                  >
+                  <div
+                    class="col l12 m8 s4 top no-wrap no-gutters personal-identifiers-wrapper"
+                    >
+                    <img
+                      cdkDragHandle
+                      src="./assets/vectors/draggable.svg"
+                      aria-label="drag handle"
+                      />
+                    <div class="person-identifier">
+                      <a
                   [attr.aria-label]="
                     personIdentifier.commonName +
                     ' : ' +
@@ -102,16 +102,16 @@
                     ' ' +
                     ariaLabelIdentifierUrl
                   "
-                  class="underline"
-                  [href]="personIdentifier.url"
-                  target="_blank"
-                  rel="me nofollow noopener noreferrer"
-                  >{{ personIdentifier.commonName }}:
-                  {{ personIdentifier.reference }}</a
-                >
-                <mat-hint class="mat-caption">
-                  <app-source-hit
-                    [createdDate]="personIdentifier.createdDate"
+                        class="underline"
+                        [href]="personIdentifier.url"
+                        target="_blank"
+                        rel="me nofollow noopener noreferrer"
+                        >{{ personIdentifier.commonName }}:
+                        {{ personIdentifier.reference }}</a
+                        >
+                        <mat-hint class="mat-caption">
+                          <app-source-hit
+                            [createdDate]="personIdentifier.createdDate"
                     [source]="
                       personIdentifier.sourceName || personIdentifier.source
                     "
@@ -119,24 +119,24 @@
                       personIdentifier.assertionOriginName ||
                       personIdentifier.assertionOriginOrcid
                     "
-                  ></app-source-hit>
-                </mat-hint>
-              </div>
-            </div>
-            <div
-              class="col no-wrap actions-wrapper no-gutters personal-identifiers-controls-wrapper"
-            >
-              <app-visibility-selector
-                formControlName="visibility"
+                          ></app-source-hit>
+                        </mat-hint>
+                      </div>
+                    </div>
+                    <div
+                      class="col no-wrap actions-wrapper no-gutters personal-identifiers-controls-wrapper"
+                      >
+                      <app-visibility-selector
+                        formControlName="visibility"
                 [itemTitle]="
                   personIdentifier.commonName + ':' + personIdentifier.reference
                 "
-              >
-              </app-visibility-selector>
-              <button
-                (click)="deletePersonalIdentifier(personIdentifier.putCode)"
-                mat-icon-button
-                class="delete-button"
+                        >
+                      </app-visibility-selector>
+                      <button
+                        (click)="deletePersonalIdentifier(personIdentifier.putCode)"
+                        mat-icon-button
+                        class="delete-button"
                 [attr.aria-label]="
                   ariaLabelDelete +
                   ' ' +
@@ -144,17 +144,18 @@
                   ':' +
                   personIdentifier.reference
                 "
-              >
-                <mat-icon
-                  class="material-icons-outlined extra-large-material-icon"
-                  >delete</mat-icon
-                >
-              </button>
-            </div>
+                        >
+                        <mat-icon
+                          class="material-icons-outlined extra-large-material-icon"
+                          >delete</mat-icon
+                          >
+                        </button>
+                      </div>
+                    </div>
+                    <hr class="dashed-line" />
+                  </div>
+                }
+              </section>
+            }
           </div>
-          <hr class="dashed-line" />
-        </div>
-      </section>
-    </ng-container>
-  </div>
-</app-modal>
+        </app-modal>

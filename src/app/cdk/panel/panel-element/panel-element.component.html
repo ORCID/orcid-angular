@@ -2,14 +2,18 @@
   <div class="line" [ngClass]="{ bold: bold, italic: italic }">
     <ng-content></ng-content>
   </div>
-  <app-panel-privacy
-    *ngIf="visibility && hideVisibility"
-    [visibility]="visibility"
-  ></app-panel-privacy>
+  @if (visibility && hideVisibility) {
+    <app-panel-privacy
+      [visibility]="visibility"
+    ></app-panel-privacy>
+  }
 </div>
-<hr *ngIf="separator" />
+@if (separator) {
+  <hr />
+}
 <!-- [PANEL ELEMENT SOURCE] display only on the public page side bar  -->
-<ng-content
-  select="app-panel-element-source"
-  *ngIf="isPublicRecord"
-></ng-content>
+@if (isPublicRecord) {
+  <ng-content
+    select="app-panel-element-source"
+  ></ng-content>
+}

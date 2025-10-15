@@ -1,44 +1,46 @@
 <main class="container" id="main">
   <app-advance-search [searchValues]="searchParams"></app-advance-search>
-  <div
-    class="mat-subtitle-2"
-    *ngIf="searchResults && searchResults['num-found'] > 0"
-  >
-    <app-showing-of
-      [displaying]="searchResults['expanded-result'].length"
-      [total]="searchResults['num-found']"
-    >
-      <ng-container i18n="@@ngOrcid.search.results">results.</ng-container>
-    </app-showing-of>
-    <div class="row h-baseline">
+  @if (searchResults && searchResults['num-found'] > 0) {
+    <div
+      class="mat-subtitle-2"
+      >
+      <app-showing-of
+        [displaying]="searchResults['expanded-result'].length"
+        [total]="searchResults['num-found']"
+        >
+        <ng-container i18n="@@ngOrcid.search.results">results.</ng-container>
+      </app-showing-of>
+      <div class="row h-baseline">
+        <mat-paginator
+          [pageSizeOptions]="[50, 100, 200]"
+          [pageSize]="pageSize"
+          [pageIndex]="pageIndex"
+          [length]="searchResults['num-found']"
+          (page)="changePage($event)"
+          [attr.aria-label]="ariaLabelPaginator"
+        ></mat-paginator>
+        @if (loadingNewResults) {
+          <mat-progress-bar
+            mode="indeterminate"
+          ></mat-progress-bar>
+        }
+      </div>
+    </div>
+  }
+  <app-results [searchResults]="searchResults"></app-results>
+  @if (searchResults && searchResults['num-found'] > 0) {
+    <div
+      class="row h-baseline"
+      >
       <mat-paginator
         [pageSizeOptions]="[50, 100, 200]"
         [pageSize]="pageSize"
         [pageIndex]="pageIndex"
         [length]="searchResults['num-found']"
         (page)="changePage($event)"
-        [attr.aria-label]="ariaLabelPaginator"
+        role="navigation"
+        [attr.aria-label]="ariaLabelBottomPaginator"
       ></mat-paginator>
-
-      <mat-progress-bar
-        mode="indeterminate"
-        *ngIf="loadingNewResults"
-      ></mat-progress-bar>
     </div>
-  </div>
-  <app-results [searchResults]="searchResults"></app-results>
-  <div
-    class="row h-baseline"
-    *ngIf="searchResults && searchResults['num-found'] > 0"
-  >
-    <mat-paginator
-      [pageSizeOptions]="[50, 100, 200]"
-      [pageSize]="pageSize"
-      [pageIndex]="pageIndex"
-      [length]="searchResults['num-found']"
-      (page)="changePage($event)"
-      role="navigation"
-      [attr.aria-label]="ariaLabelBottomPaginator"
-    ></mat-paginator>
-  </div>
+  }
 </main>

@@ -1,22 +1,24 @@
-<button
-  mat-icon-button
-  (click)="toggle.next()"
-  [matTooltip]="tooltipLabelShowDetails"
-  *ngIf="!openState"
-  [attr.aria-label]="tooltipLabelShowDetails"
-  class="expand_more"
-  id="{{ id ? id + '-more' : '' }}"
->
-  <mat-icon>expand_less</mat-icon>
-</button>
-<button
-  mat-icon-button
-  (click)="toggle.next()"
-  [matTooltip]="tooltipLabelHideDetails"
-  *ngIf="openState"
-  [attr.aria-label]="tooltipLabelHideDetails"
-  class="expand_less"
-  id="{{ id ? id + '-less' : '' }}"
->
-  <mat-icon>expand_more</mat-icon>
-</button>
+@if (!openState) {
+  <button
+    mat-icon-button
+    (click)="toggle.next()"
+    [matTooltip]="tooltipLabelShowDetails"
+    [attr.aria-label]="tooltipLabelShowDetails"
+    class="expand_more"
+    id="{{ id ? id + '-more' : '' }}"
+    >
+    <mat-icon>expand_less</mat-icon>
+  </button>
+}
+@if (openState) {
+  <button
+    mat-icon-button
+    (click)="toggle.next()"
+    [matTooltip]="tooltipLabelHideDetails"
+    [attr.aria-label]="tooltipLabelHideDetails"
+    class="expand_less"
+    id="{{ id ? id + '-less' : '' }}"
+    >
+    <mat-icon>expand_more</mat-icon>
+  </button>
+}

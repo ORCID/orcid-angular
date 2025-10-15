@@ -2,7 +2,7 @@
   [loading]="loading"
   [noSidebar]="true"
   [ngClass]="{ mobile: isMobile }"
->
+  >
   <app-modal-header [closeLabel]="closeLabel">
     <ng-container i18n="@@shared.featuredWorks">Featured works</ng-container>
   </app-modal-header>
@@ -15,7 +15,7 @@
       i18n="@@shared.saveChanges"
       id="save-featured-works-button"
       [attr.aria-label]="saveAndClose"
-    >
+      >
       Save changes
     </button>
     <button
@@ -25,7 +25,7 @@
       i18n="@@shared.cancel"
       id="cancel-featured-works-button"
       [attr.aria-label]="cancelAndCloseAriaLabel"
-    >
+      >
       Cancel
     </button>
   </app-modal-footer>
@@ -35,67 +35,65 @@
       >Select up to 5 works to be featured on your ORCID record. Featured works
       are highlighted in their own section above your other
       outputs.</ng-container
-    >
-  </div>
-
-  <section id="your-featured-works">
-    <h2 class="orc-font-body">
-      <span i18n="@@shared.yourFeaturedWorks">Your featured works</span>
-      <span class="count"> ({{ works?.length || 0 }}/{{ maxFeatured }})</span>
-    </h2>
-    @if (works?.length === 0) {
-    <em
-      class="no-featured-works orc-font-body-small"
-      i18n="@@works.youDontHaveAnyFeaturedWorksYet"
-      >You don’t have any featured works yet.</em
-    >
-    } @else {
-    <div class="container no-padding">
-      <div
-        class="row featured-works-list"
-        id="featured-works-dropList"
-        cdkDropList
-        (cdkDropListDropped)="drop($event)"
       >
-        <div
-          cdkDrag
-          class="row featured-work-box card"
-          *ngFor="let w of works; let i = index"
-          (cdkDragStarted)="dragStarted($event)"
-          (cdkDragEnded)="dragEnded($event)"
-        >
-          <div
-            class="row featured-work-box card drag-placeholder"
-            *cdkDragPlaceholder
-            [style.height.px]="draggedItemHeight"
-          ></div>
-          <div class="row featured-work-line">
-            <!-- Drag handle container -->
-            <div class="handle">
-              <img
-                class="icon-drag"
-                cdkDragHandle
-                src="./assets/vectors/draggable.svg"
+    </div>
+
+    <section id="your-featured-works">
+      <h2 class="orc-font-body">
+        <span i18n="@@shared.yourFeaturedWorks">Your featured works</span>
+        <span class="count"> ({{ works?.length || 0 }}/{{ maxFeatured }})</span>
+      </h2>
+      @if (works?.length === 0) {
+        <em
+          class="no-featured-works orc-font-body-small"
+          i18n="@@works.youDontHaveAnyFeaturedWorksYet"
+          >You don’t have any featured works yet.</em
+          >
+        } @else {
+          <div class="container no-padding">
+            <div
+              class="row featured-works-list"
+              id="featured-works-dropList"
+              cdkDropList
+              (cdkDropListDropped)="drop($event)"
+              >
+              @for (w of works; track w; let i = $index) {
+                <div
+                  cdkDrag
+                  class="row featured-work-box card"
+                  (cdkDragStarted)="dragStarted($event)"
+                  (cdkDragEnded)="dragEnded($event)"
+                  >
+                  <div
+                    class="row featured-work-box card drag-placeholder"
+                    *cdkDragPlaceholder
+                    [style.height.px]="draggedItemHeight"
+                  ></div>
+                  <div class="row featured-work-line">
+                    <!-- Drag handle container -->
+                    <div class="handle">
+                      <img
+                        class="icon-drag"
+                        cdkDragHandle
+                        src="./assets/vectors/draggable.svg"
                 [attr.aria-label]="
                   moveFeaturedWorkAriaLabel + ' ' + (w?.title?.value || '')
                 "
-              />
-            </div>
-
-            <app-work-featured
-              class="featured-work"
-              [work]="w"
-              [minimized]="true"
-            >
-            </app-work-featured>
-
-            <!-- Close button container -->
-            <div class="close-wrapper">
-              <button
-                [matTooltip]="removeFeaturedItemTooltip"
-                (click)="remove(w)"
-                mat-icon-button
-                class="delete-button"
+                        />
+                    </div>
+                    <app-work-featured
+                      class="featured-work"
+                      [work]="w"
+                      [minimized]="true"
+                      >
+                    </app-work-featured>
+                    <!-- Close button container -->
+                    <div class="close-wrapper">
+                      <button
+                        [matTooltip]="removeFeaturedItemTooltip"
+                        (click)="remove(w)"
+                        mat-icon-button
+                        class="delete-button"
                 [attr.aria-label]="
                   removeFeaturedWorkAriaLabel +
                   ' ' +
@@ -103,136 +101,137 @@
                   ' ' +
                   fromFeaturedWorksAriaLabel
                 "
-              >
-                <mat-icon
-                  class="material-icons-outlined extra-large-material-icon"
-                  >close</mat-icon
-                >
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      @if (works?.length === 5) {
-      <app-alert-message class="mb-4">
-        <h3 title class="orc-font-body" i18n="@@works.maxFeaturedWorks">
+                        >
+                        <mat-icon
+                          class="material-icons-outlined extra-large-material-icon"
+                          >close</mat-icon
+                          >
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                }
+              </div>
+              @if (works?.length === 5) {
+                <app-alert-message class="mb-4">
+                  <h3 title class="orc-font-body" i18n="@@works.maxFeaturedWorks">
           You have the maximum number of featured works
         </h3>
-        <ng-container content>
-          <div class="orc-font-body-small" i18n="@@works.maxFeaturedWorksDesc">
+                  <ng-container content>
+                    <div class="orc-font-body-small" i18n="@@works.maxFeaturedWorksDesc">
             You can’t feature any more works until you have removed some from
             the list above.
           </div>
-        </ng-container>
-      </app-alert-message>
-      }
-    </div>
-    }
-  </section>
-  <hr />
-  <section id="add-featured-works">
-    <h3 class="orc-font-body mb-2" i18n="@@shared.addFeaturedWorks">
+                  </ng-container>
+                </app-alert-message>
+              }
+            </div>
+          }
+        </section>
+        <hr />
+        <section id="add-featured-works">
+          <h3 class="orc-font-body mb-2" i18n="@@shared.addFeaturedWorks">
       Add featured works
     </h3>
-    <div class="orc-font-body-small mb-4" i18n="@@shared.searchFeaturedWorks">
+          <div class="orc-font-body-small mb-4" i18n="@@shared.searchFeaturedWorks">
       Search your public works to find items to feature on your ORCID record.
     </div>
-    <form
-      role="search"
-      class="search-box orc-font-body-small mb-4"
-      (submit)="search(searchInput)"
-    >
-      <div class="input-wrapper">
-        <input
-          autocomplete="off"
-          name="whatToSearch"
-          [(ngModel)]="searchInput"
-          [placeholder]="placeholderSearch"
-          type="text"
-          [attr.aria-label]="labelSearch"
-          id="cy-search-public-works"
-          class="orc-font-body-small"
-        />
-        <button
-          [attr.aria-label]="labelSearch"
-          type="submit"
-          mat-icon-button
-          class="search-icon-button"
-          id="cy-search-public-works-btn"
-        >
-          <mat-icon>search</mat-icon>
-        </button>
-      </div>
-    </form>
-    <div class="orc-font-body-small you-searched-for">
-      @if (searchResults || searchLengthExceeded) {
-      <div class="mb-4">
-        <strong i18n="@@shared.youSearchedFor">You searched for:</strong
-        >&nbsp;<span>{{ searchedTerm }}</span>
-      </div>
-      } @if (searchLengthExceeded) {
-      <app-alert-message class="mb-4">
-        <h3 title class="orc-font-body" i18n="@@shared.searchTermTooLong">
+          <form
+            role="search"
+            class="search-box orc-font-body-small mb-4"
+            (submit)="search(searchInput)"
+            >
+            <div class="input-wrapper">
+              <input
+                autocomplete="off"
+                name="whatToSearch"
+                [(ngModel)]="searchInput"
+                [placeholder]="placeholderSearch"
+                type="text"
+                [attr.aria-label]="labelSearch"
+                id="cy-search-public-works"
+                class="orc-font-body-small"
+                />
+              <button
+                [attr.aria-label]="labelSearch"
+                type="submit"
+                mat-icon-button
+                class="search-icon-button"
+                id="cy-search-public-works-btn"
+                >
+                <mat-icon>search</mat-icon>
+              </button>
+            </div>
+          </form>
+          <div class="orc-font-body-small you-searched-for">
+            @if (searchResults || searchLengthExceeded) {
+              <div class="mb-4">
+                <strong i18n="@@shared.youSearchedFor">You searched for:</strong
+                  >&nbsp;<span>{{ searchedTerm }}</span>
+                </div>
+                } @if (searchLengthExceeded) {
+                <app-alert-message class="mb-4">
+                  <h3 title class="orc-font-body" i18n="@@shared.searchTermTooLong">
           Your search term is too long
         </h3>
-        <div
-          content
-          class="orc-font-body-small"
-          i18n="@@shared.searchTermTooLongDesc"
-        >
+                  <div
+                    content
+                    class="orc-font-body-small"
+                    i18n="@@shared.searchTermTooLongDesc"
+                    >
           Search terms must be less than 100 characters in length. Please make
           your search term shorter and try searching again.
         </div>
-      </app-alert-message>
-      } @if (searchResults) { @if (searchResults.length === 0 &&
-      !searchLengthExceeded) {
-      <em class="orc-font-body-small" i18n="@@shared.noResultsFound">
+                </app-alert-message>
+                } @if (searchResults) { @if (searchResults.length === 0 &&
+                !searchLengthExceeded) {
+                <em class="orc-font-body-small" i18n="@@shared.noResultsFound">
         No results found. Please edit your search terms and try again.
       </em>
-      } @if (totalWorks && totalWorks > 10) {
-      <app-alert-message>
-        <h3 title class="orc-font-body" i18n="@@shared.tooManyResults">
+                } @if (totalWorks && totalWorks > 10) {
+                <app-alert-message>
+                  <h3 title class="orc-font-body" i18n="@@shared.tooManyResults">
           Your search returned a lot of results
         </h3>
-        <ng-container content>
-          <div class="orc-font-body-small" i18n="@@shared.tooManyResultsDesc">
+                  <ng-container content>
+                    <div class="orc-font-body-small" i18n="@@shared.tooManyResultsDesc">
             If you can’t find what you are looking for try adding more detail to
             your search term and searching again.
           </div>
-        </ng-container>
-      </app-alert-message>
-      } @if (searchResults.length > 0) {
-      <div class="results-count">
-        <span i18n="@@shared.showing">Showing</span>&nbsp;@if (totalWorks &&
-        totalWorks > 10) {
-        <strong>1</strong>&nbsp;-&nbsp;<strong>10</strong>&nbsp;<span
-          i18n="@@shared.of"
-          >of</span
-        >&nbsp;<strong>{{ totalWorks }}</strong
-        >&nbsp;<span i18n="@@shared.results">results</span>
-        } @else {
-        <strong>{{ searchResults?.length || 0 }}</strong
-        >&nbsp;@if (searchResults?.length === 1) {
-        <span i18n="@@shared.result">result</span>
-        } @else {
-        <span i18n="@@shared.results">results</span>
-        } }
-      </div>
-      <hr />
-      <div class="search-results">
-        @for (result of searchResults; track result.putCode; let idx = $index) {
-        <div class="search-result-wrapper">
-          <app-work-featured
-            [ngClass]="{ 'not-featured': result.featuredDisplayIndex === 0 }"
-            [work]="result"
-            [minimized]="true"
-            [highlight]="searchedTerm"
-          ></app-work-featured>
-          @if (result.featuredDisplayIndex === 0) {
-          <button
-            class="make-featured-button orc-font-body-small"
-            mat-button
-            (click)="makeFeatured(result)"
+                  </ng-container>
+                </app-alert-message>
+                } @if (searchResults.length > 0) {
+                <div class="results-count">
+                  <span i18n="@@shared.showing">Showing</span>&nbsp;@if (totalWorks &&
+                  totalWorks > 10) {
+                  <strong>1</strong>&nbsp;-&nbsp;<strong>10</strong>&nbsp;<span
+                  i18n="@@shared.of"
+                  >of</span
+                  >&nbsp;<strong>{{ totalWorks }}</strong
+                  >&nbsp;<span i18n="@@shared.results">results</span>
+                } @else {
+                  <strong>{{ searchResults?.length || 0 }}</strong
+                    >&nbsp;@if (searchResults?.length === 1) {
+                    <span i18n="@@shared.result">result</span>
+                  } @else {
+                    <span i18n="@@shared.results">results</span>
+                    } }
+                  </div>
+                  <hr />
+                  <div class="search-results">
+                    @for (result of searchResults; track result.putCode; let idx = $index) {
+                      <div class="search-result-wrapper">
+                        <app-work-featured
+                          [ngClass]="{ 'not-featured': result.featuredDisplayIndex === 0 }"
+                          [work]="result"
+                          [minimized]="true"
+                          [highlight]="searchedTerm"
+                        ></app-work-featured>
+                        @if (result.featuredDisplayIndex === 0) {
+                          <button
+                            class="make-featured-button orc-font-body-small"
+                            mat-button
+                            (click)="makeFeatured(result)"
             [attr.aria-label]="
               makeAriaLabel +
               ' ' +
@@ -240,19 +239,19 @@
               ' ' +
               featuredAriaLabel
             "
-          >
-            <mat-icon class="large-material-icon material-symbols-outlined">
-              stars
-            </mat-icon>
-            <div i18n="@@shared.makeFeatured">Make featured</div>
-          </button>
-          }
-        </div>
-        @if (idx < searchResults.length - 1) {
-        <hr class="mb-0" />
-        } }
-      </div>
-      } }
-    </div>
-  </section>
-</app-modal>
+                            >
+                            <mat-icon class="large-material-icon material-symbols-outlined">
+                              stars
+                            </mat-icon>
+                            <div i18n="@@shared.makeFeatured">Make featured</div>
+                          </button>
+                        }
+                      </div>
+                      @if (idx < searchResults.length - 1) {
+                        <hr class="mb-0" />
+                        } }
+                      </div>
+                      } }
+                    </div>
+                  </section>
+                </app-modal>

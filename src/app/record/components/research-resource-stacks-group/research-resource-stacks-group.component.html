@@ -1,81 +1,86 @@
-<section
-  id="research-resources"
-  role="region"
-  [attr.aria-label]="regionResearchResources"
-  *ngIf="
-    researchResources?.groups && !(researchResources?.groups?.length === 0)
-  "
->
-  <app-panels
-    class="row"
-    [title]="ngOrcidResearchResources"
-    [type]="'research-resources'"
-    [total]="researchResources.totalGroups"
-    [currentAmount]="researchResources?.groups.length"
-    [(expandedContent)]="expandedContent['RESEARCH_RESOURCE']"
-    (expandedContentChange)="expandedContentChange.emit(expandedContent)"
-    id="research-resources-panel"
-    [sortTypes]="['date', 'title']"
-    [sortType]="'date'"
-    [sortDirection]="'desc'"
-    (sort)="sortEvent($event)"
-  >
-    <mat-progress-bar
-      mode="indeterminate"
-      *ngIf="paginationLoading"
-    ></mat-progress-bar>
-    <mat-paginator
-      *ngIf="
+@if (
+  researchResources?.groups && !(researchResources?.groups?.length === 0)
+  ) {
+  <section
+    id="research-resources"
+    role="region"
+    [attr.aria-label]="regionResearchResources"
+    >
+    <app-panels
+      class="row"
+      [title]="ngOrcidResearchResources"
+      [type]="'research-resources'"
+      [total]="researchResources.totalGroups"
+      [currentAmount]="researchResources?.groups.length"
+      [(expandedContent)]="expandedContent['RESEARCH_RESOURCE']"
+      (expandedContentChange)="expandedContentChange.emit(expandedContent)"
+      id="research-resources-panel"
+      [sortTypes]="['date', 'title']"
+      [sortType]="'date'"
+      [sortDirection]="'desc'"
+      (sort)="sortEvent($event)"
+      >
+      @if (paginationLoading) {
+        <mat-progress-bar
+          mode="indeterminate"
+        ></mat-progress-bar>
+      }
+      @if (
         researchResources.totalGroups > researchResources.groups.length ||
         paginationPageSize !== defaultPageSize
-      "
-      [length]="paginationTotalAmountOfResearchResources"
-      [pageSize]="paginationPageSize"
-      [pageSizeOptions]="[10, 50, 100]"
-      [pageIndex]="paginationIndex"
-      (page)="pageEvent($event)"
-      [disabled]="paginationLoading"
-    >
-    </mat-paginator>
-    <ng-container *ngIf="researchResources.groups.length > 0">
-      <app-research-resource-stack
-        [userRecord]="userRecord"
-        [isPublicRecord]="isPublicRecord"
-        [researchResourceStack]="group"
-        *ngFor="
-          let group of researchResources.groups;
-          trackBy: trackByResearchResourceGroup
-        "
-      >
-      </app-research-resource-stack>
-    </ng-container>
-    <ng-container *ngIf="researchResources.groups.length === 0">
-      <div class="orc-font-body-small">
-        <p class="empty" i18n="@@researchResources.description">
+        ) {
+        <mat-paginator
+          [length]="paginationTotalAmountOfResearchResources"
+          [pageSize]="paginationPageSize"
+          [pageSizeOptions]="[10, 50, 100]"
+          [pageIndex]="paginationIndex"
+          (page)="pageEvent($event)"
+          [disabled]="paginationLoading"
+          >
+        </mat-paginator>
+      }
+      @if (researchResources.groups.length > 0) {
+        @for (
+          group of researchResources.groups; track trackByResearchResourceGroup($index,
+          group)) {
+          <app-research-resource-stack
+            [userRecord]="userRecord"
+            [isPublicRecord]="isPublicRecord"
+            [researchResourceStack]="group"
+            >
+          </app-research-resource-stack>
+        }
+      }
+      @if (researchResources.groups.length === 0) {
+        <div class="orc-font-body-small">
+          <p class="empty" i18n="@@researchResources.description">
           Connect to trusted organizations to automatically add the specialist
           resources you use for your research.
         </p>
-        <a href="" i18n="@@researchResources.learnMore">
+          <a href="" i18n="@@researchResources.learnMore">
           Learn more about how research resources are added to your ORCID record
         </a>
-      </div>
-    </ng-container>
-    <mat-paginator
-      *ngIf="
+        </div>
+      }
+      @if (
         researchResources.totalGroups > researchResources.groups.length ||
         paginationPageSize !== defaultPageSize
-      "
-      [length]="paginationTotalAmountOfResearchResources"
-      [pageSize]="paginationPageSize"
-      [pageSizeOptions]="[10, 50, 100]"
-      [pageIndex]="paginationIndex"
-      (page)="pageEvent($event)"
-      [disabled]="paginationLoading"
-    >
-    </mat-paginator>
-    <mat-progress-bar
-      mode="indeterminate"
-      *ngIf="paginationLoading"
-    ></mat-progress-bar>
-  </app-panels>
-</section>
+        ) {
+        <mat-paginator
+          [length]="paginationTotalAmountOfResearchResources"
+          [pageSize]="paginationPageSize"
+          [pageSizeOptions]="[10, 50, 100]"
+          [pageIndex]="paginationIndex"
+          (page)="pageEvent($event)"
+          [disabled]="paginationLoading"
+          >
+        </mat-paginator>
+      }
+      @if (paginationLoading) {
+        <mat-progress-bar
+          mode="indeterminate"
+        ></mat-progress-bar>
+      }
+    </app-panels>
+  </section>
+}

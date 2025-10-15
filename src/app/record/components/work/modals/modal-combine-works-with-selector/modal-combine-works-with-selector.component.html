@@ -11,7 +11,7 @@
       (click)="saveEvent()"
       id="combine-button"
       [disabled]="selectSetOfWorksToCombine?.length === 0"
-    >
+      >
       <ng-container i18n="@@works.combineSelectedWorks">
         Combine selected works
       </ng-container>
@@ -22,7 +22,7 @@
       (click)="closeEvent()"
       i18n="@@shared.cancel"
       id="cancel-button"
-    >
+      >
       Cancel
     </button>
   </app-modal-footer>
@@ -49,7 +49,7 @@
         target="_blank"
         href="https://support.orcid.org/hc/articles/360006894774"
         i18n="@@works.learnMoreCombining"
-      >
+        >
         Learn more about combining works
       </a>
     </div>
@@ -62,63 +62,66 @@
       Please check the selected works are correct before combining them.
     </div>
   </app-alert-message>
-  <div class="row" [formGroup]="form" *ngIf="form">
-    <h3>
-      <ng-container i18n="@@works.selectedWorksCombine">
+  @if (form) {
+    <div class="row" [formGroup]="form">
+      <h3>
+        <ng-container i18n="@@works.selectedWorksCombine">
         Selected works to combine
       </ng-container>
-      ({{ selectSetOfWorksToCombine?.length }})
-    </h3>
-    <mat-divider class="row orcid-divider"></mat-divider>
-
-    <ng-container *ngFor="let suggestionWork of suggestionsWorks">
-      <div class="list-works-group">
-        <mat-checkbox [formControlName]="suggestionWork.putCodes">
-        </mat-checkbox>
-        <div class="list-works">
-          <ng-container *ngFor="let work of suggestionWork.works">
-            <div class="row work-info">
-              <div class="row">
-                <h2 class="orc-font-body">
-                  {{ work.title.value }}
-                </h2>
-              </div>
-              <div class="orc-font-body-small">
-                <strong i18n="@@shared.source">Source</strong>:
-                <ng-container
-                  *ngIf="
+        ({{ selectSetOfWorksToCombine?.length }})
+      </h3>
+      <mat-divider class="row orcid-divider"></mat-divider>
+      @for (suggestionWork of suggestionsWorks; track suggestionWork) {
+        <div class="list-works-group">
+          <mat-checkbox [formControlName]="suggestionWork.putCodes">
+          </mat-checkbox>
+          <div class="list-works">
+            @for (work of suggestionWork.works; track work) {
+              <div class="row work-info">
+                <div class="row">
+                  <h2 class="orc-font-body">
+                    {{ work.title.value }}
+                  </h2>
+                </div>
+                <div class="orc-font-body-small">
+                  <strong i18n="@@shared.source">Source</strong>:
+                  @if (
                     work?.assertionOriginName || work?.assertionOriginOrcid
-                  "
-                >
-                  {{ work?.assertionOriginName || work?.assertionOriginOrcid }}
-                  <i i18n="@@shared.onBehalfOf">via</i>
-                </ng-container>
-                {{ work.sourceName || work.source }}
-                <ng-container *ngIf="work.createdDate">
-                  <br *ngIf="isMobile" />
-                  <strong
-                    class="added"
-                    i18n="@@shared.added"
+                    ) {
+                    {{ work?.assertionOriginName || work?.assertionOriginOrcid }}
+                    <i i18n="@@shared.onBehalfOf">via</i>
+                  }
+                  {{ work.sourceName || work.source }}
+                  @if (work.createdDate) {
+                    @if (isMobile) {
+                      <br />
+                    }
+                    <strong
+                      class="added"
+                      i18n="@@shared.added"
                     [ngClass]="{
                       mobile: isMobile
                     }"
-                  >
+                      >
                     Added </strong
-                  >:
-                  {{ work.createdDate | monthDayYearDateToString }}
-                </ng-container>
-              </div>
+                      >:
+                      {{ work.createdDate | monthDayYearDateToString }}
+                    }
+                  </div>
+                </div>
+                <mat-divider class="row"></mat-divider>
+              }
             </div>
-            <mat-divider class="row"></mat-divider>
-          </ng-container>
-        </div>
-      </div>
-    </ng-container>
-    <div class="no-info orc-font-body-small" *ngIf="suggestions?.length === 0">
-      <mat-icon>error</mat-icon>
-      <ng-container i18n="@@works.noItemsSelected"
-        >No items selected.
+          </div>
+        }
+        @if (suggestions?.length === 0) {
+          <div class="no-info orc-font-body-small">
+            <mat-icon>error</mat-icon>
+            <ng-container i18n="@@works.noItemsSelected"
+              >No items selected.
       </ng-container>
-    </div>
-  </div>
-</app-modal>
+          </div>
+        }
+      </div>
+    }
+  </app-modal>

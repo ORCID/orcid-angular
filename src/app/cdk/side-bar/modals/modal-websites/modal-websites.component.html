@@ -2,338 +2,344 @@
   <app-modal-header [closeLabel]="ariaLabelClose">
     <ng-container i18n="@@topBar.websites">
       Websites & social links</ng-container
-    >
-  </app-modal-header>
-  <app-modal-footer>
-    <button
-      mat-raised-button
-      color="primary"
-      (click)="saveEvent()"
-      i18n="@@shared.saveChanges"
-      id="save-websites-button"
-      [attr.aria-label]="ariaLabelSave"
-    >
+      >
+    </app-modal-header>
+    <app-modal-footer>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="saveEvent()"
+        i18n="@@shared.saveChanges"
+        id="save-websites-button"
+        [attr.aria-label]="ariaLabelSave"
+        >
       Save changes
     </button>
-    <button
-      mat-stroked-button
-      color="primary"
-      (click)="closeEvent()"
-      i18n="@@shared.cancel"
-      id="cancel-websites-button"
-      [attr.aria-label]="ariaLabelCancel"
-    >
+      <button
+        mat-stroked-button
+        color="primary"
+        (click)="closeEvent()"
+        i18n="@@shared.cancel"
+        id="cancel-websites-button"
+        [attr.aria-label]="ariaLabelCancel"
+        >
       Cancel
     </button>
-  </app-modal-footer>
-  <div
-    class="container no-padding"
-    [formGroup]="websitesForm"
-    (ngSubmit)="onSubmit()"
-  >
-    <p
-      id="my-links"
-      class="orc-font-body-small"
-      i18n="@@topBar.addLinksDescription"
-    >
+    </app-modal-footer>
+    <div
+      class="container no-padding"
+      [formGroup]="websitesForm"
+      (ngSubmit)="onSubmit()"
+      >
+      <p
+        id="my-links"
+        class="orc-font-body-small"
+        i18n="@@topBar.addLinksDescription"
+        >
       Add links to personal websites, department profiles, Wikipedia pages or
       social media accounts.
     </p>
-    <ng-container *ngIf="websites?.length > 0">
-      <div class="row">
-        <h2 class="col no-gutters orc-font-body" i18n="@@topBar.myLinks">
+      @if (websites?.length > 0) {
+        <div class="row">
+          <h2 class="col no-gutters orc-font-body" i18n="@@topBar.myLinks">
           My links
         </h2>
-      </div>
-      <hr class="dashed-line" />
-      <div
-        class="row websites-list"
-        id="website-dropList"
-        cdkDropList
-        (cdkDropListDropped)="drop($event)"
-      >
+        </div>
+        <hr class="dashed-line" />
         <div
-          cdkDrag
-          class="row websites-box"
-          [ngStyle]="{ direction: screenDirection }"
-          [formGroupName]="website.putCode"
-          *ngFor="let website of websites; index as i"
-          [attr.id]="'draggable-' + i"
-        >
-          <div class="row drag-placeholder" *cdkDragPlaceholder></div>
-          <div
-            class="row websites-input-line"
-            [ngClass]="{ 'no-wrap': !isMobile }"
+          class="row websites-list"
+          id="website-dropList"
+          cdkDropList
+          (cdkDropListDropped)="drop($event)"
           >
-            <div class="col l12 m8 s4 top no-wrap no-gutters input-container">
-              <div class="image-container">
-                <img
-                  class="icon-drag"
-                  cdkDragHandle
-                  src="./assets/vectors/draggable.svg"
-                  aria-label="drag handle"
-                />
-              </div>
-              <div class="row web-site-input-container">
-                <ng-container
-                  *ngIf="!(website.source && website.source !== this.id)"
-                >
-                  <mat-form-field
-                    [ngClass]="{
-                      'read-only': website.source && website.source !== this.id
-                    }"
-                    appearance="outline"
-                    class="mat-form-field-min description"
-                  >
-                    <input
-                      [readonly]="website.source && website.source !== id"
-                      class="cy-description-input"
-                      #descriptionInput
-                      [attr.aria-label]="ariaLabelTitle"
-                      matInput
-                      formControlName="description"
-                      placeholder=" {{ ngOrcidDescription }}"
-                      [ngClass]="{ 'website-input': screenDirection === 'rtl' }"
-                    />
-                    <mat-error
-                      *ngIf="
-                        websitesForm.get(website.putCode)?.get('description')
-                          ?.errors?.maxlength
-                      "
-                      i18n="@@topBar.urlMaxLength"
-                    >
-                      Must be less than 355 characters
-                    </mat-error>
-                  </mat-form-field>
-
-                  <mat-form-field
-                    appearance="outline"
-                    class="mat-form-field-min"
-                    [ngClass]="{
-                      'read-only': website.source && website.source !== this.id
-                    }"
-                  >
-                    <input
-                      [readonly]="website.source && website.source !== id"
-                      [attr.aria-label]="ariaLabelURL"
-                      class="cy-url-input"
-                      matInput
-                      formControlName="url"
-                      placeholder="{{ ngOrcidUrl }}"
-                      [ngClass]="{ 'website-input': screenDirection === 'rtl' }"
-                    />
-                    <mat-error
-                      *ngIf="
-                        websitesForm
-                          .get(website.putCode)
-                          .hasError('required', 'url')
-                      "
-                      i18n="@@topBar.requiredURL"
-                    >
-                      An URL is required
-                    </mat-error>
-
-                    <mat-error
-                      *ngIf="
-                        websitesForm
-                          .get(website.putCode)
-                          .hasError('maxlength', 'url')
-                      "
-                      i18n="@@shared.maxLength.less_than_two_thousand"
-                    >
-                      Must be less than 2000 characters
-                    </mat-error>
-
-                    <mat-error
-                      *ngIf="
-                        websitesForm
-                          .get(website.putCode)
-                          .hasError('pattern', 'url')
-                      "
-                      i18n="@@topBar.invalidURL"
-                    >
-                      Invalid URL
-                    </mat-error>
-                    <mat-error
-                      *ngIf="
-                        websitesForm
-                          .get(website.putCode)
-                          .hasError('duplicated', 'url')
-                      "
-                      i18n="@@topBar.urlDuplicated"
-                    >
-                      URL can not be duplicated
-                    </mat-error>
-                    <mat-hint
-                      class="mat-caption"
-                      *ngIf="website.putCode.indexOf('new') < 0"
-                    >
-                      <app-source-hit
-                        [createdDate]="website.createdDate"
-                        [source]="website.sourceName || website.source"
-                        [assertion]="
-                          website.assertionOriginName ||
-                          website.assertionOriginOrcid
-                        "
-                      ></app-source-hit>
-                    </mat-hint>
-                  </mat-form-field>
-                </ng-container>
-                <ng-container
-                  *ngIf="website.source && website.source !== this.id"
-                >
-                  <mat-form-field
-                    [ngClass]="{
-                      'read-only': website.source && website.source !== this.id
-                    }"
-                    appearance="outline"
-                    class="mat-form-field-min description"
-                  >
-                    <input
-                      [readonly]="website.source && website.source !== id"
-                      class="cy-description-input"
-                      #descriptionInput
-                      [attr.aria-label]="ariaLabelTitle"
-                      matInput
-                      formControlName="description"
-                      placeholder=" {{ ngOrcidDescription }}"
-                      [ngClass]="{ 'website-input': screenDirection === 'rtl' }"
-                    />
-                    <mat-error
-                      *ngIf="
-                        websitesForm.get(website.putCode)?.get('description')
-                          ?.errors?.maxlength
-                      "
-                      i18n="@@topBar.urlMaxLength"
-                    >
-                      Must be less than 355 characters
-                    </mat-error>
-                  </mat-form-field>
-
-                  <mat-form-field
-                    appearance="outline"
-                    class="mat-form-field-min"
-                    [ngClass]="{
-                      'read-only': website.source && website.source !== this.id
-                    }"
-                  >
-                    <input
-                      [readonly]="website.source && website.source !== id"
-                      [attr.aria-label]="ariaLabelURL"
-                      class="cy-url-input"
-                      matInput
-                      formControlName="url"
-                      placeholder="{{ ngOrcidUrl }}"
-                      [ngClass]="{ 'website-input': screenDirection === 'rtl' }"
-                    />
-                    <mat-error
-                      *ngIf="
-                        websitesForm
-                          .get(website.putCode)
-                          .hasError('required', 'url')
-                      "
-                      i18n="@@topBar.requiredURL"
-                    >
-                      An URL is required
-                    </mat-error>
-
-                    <mat-error
-                      *ngIf="
-                        websitesForm
-                          .get(website.putCode)
-                          .hasError('maxlength', 'url')
-                      "
-                      i18n="@@shared.maxLength.less_than_two_thousand"
-                    >
-                      Must be less than 2000 characters
-                    </mat-error>
-
-                    <mat-error
-                      *ngIf="
-                        websitesForm
-                          .get(website.putCode)
-                          .hasError('pattern', 'url')
-                      "
-                      i18n="@@topBar.invalidURL"
-                    >
-                      Invalid URL
-                    </mat-error>
-                    <mat-error
-                      *ngIf="
-                        websitesForm
-                          .get(website.putCode)
-                          .hasError('duplicated', 'url')
-                      "
-                      i18n="@@topBar.urlDuplicated"
-                    >
-                      URL can not be duplicated
-                    </mat-error>
-                    <mat-hint
-                      class="mat-caption"
-                      *ngIf="website.putCode.indexOf('new') < 0"
-                    >
-                      <app-source-hit
-                        [createdDate]="website.createdDate"
-                        [source]="website.sourceName || website.source"
-                        [assertion]="
-                          website.assertionOriginName ||
-                          website.assertionOriginOrcid
-                        "
-                      ></app-source-hit>
-                    </mat-hint>
-                  </mat-form-field>
-                </ng-container>
-              </div>
-            </div>
+          @for (website of websites; track website; let i = $index) {
             <div
-              class="col no-wrap actions-wrapper"
-              [ngClass]="{ privacy: !platform.columns12 }"
-            >
-              <app-visibility-selector
-                [ngClass]="{ selector: !platform.columns12 }"
-                formControlName="visibility"
+              cdkDrag
+              class="row websites-box"
+              [ngStyle]="{ direction: screenDirection }"
+              [formGroupName]="website.putCode"
+              [attr.id]="'draggable-' + i"
+              >
+              <div class="row drag-placeholder" *cdkDragPlaceholder></div>
+              <div
+                class="row websites-input-line"
+                [ngClass]="{ 'no-wrap': !isMobile }"
+                >
+                <div class="col l12 m8 s4 top no-wrap no-gutters input-container">
+                  <div class="image-container">
+                    <img
+                      class="icon-drag"
+                      cdkDragHandle
+                      src="./assets/vectors/draggable.svg"
+                      aria-label="drag handle"
+                      />
+                  </div>
+                  <div class="row web-site-input-container">
+                    @if (!(website.source && website.source !== this.id)) {
+                      <mat-form-field
+                    [ngClass]="{
+                      'read-only': website.source && website.source !== this.id
+                    }"
+                        appearance="outline"
+                        class="mat-form-field-min description"
+                        >
+                        <input
+                          [readonly]="website.source && website.source !== id"
+                          class="cy-description-input"
+                          #descriptionInput
+                          [attr.aria-label]="ariaLabelTitle"
+                          matInput
+                          formControlName="description"
+                          placeholder=" {{ ngOrcidDescription }}"
+                          [ngClass]="{ 'website-input': screenDirection === 'rtl' }"
+                          />
+                        @if (
+                          websitesForm.get(website.putCode)?.get('description')
+                          ?.errors?.maxlength
+                          ) {
+                          <mat-error
+                            i18n="@@topBar.urlMaxLength"
+                            >
+                      Must be less than 355 characters
+                    </mat-error>
+                        }
+                      </mat-form-field>
+                      <mat-form-field
+                        appearance="outline"
+                        class="mat-form-field-min"
+                    [ngClass]="{
+                      'read-only': website.source && website.source !== this.id
+                    }"
+                        >
+                        <input
+                          [readonly]="website.source && website.source !== id"
+                          [attr.aria-label]="ariaLabelURL"
+                          class="cy-url-input"
+                          matInput
+                          formControlName="url"
+                          placeholder="{{ ngOrcidUrl }}"
+                          [ngClass]="{ 'website-input': screenDirection === 'rtl' }"
+                          />
+                        @if (
+                          websitesForm
+                          .get(website.putCode)
+                          .hasError('required', 'url')
+                          ) {
+                          <mat-error
+                            i18n="@@topBar.requiredURL"
+                            >
+                      An URL is required
+                    </mat-error>
+                        }
+                        @if (
+                          websitesForm
+                          .get(website.putCode)
+                          .hasError('maxlength', 'url')
+                          ) {
+                          <mat-error
+                            i18n="@@shared.maxLength.less_than_two_thousand"
+                            >
+                      Must be less than 2000 characters
+                    </mat-error>
+                        }
+                        @if (
+                          websitesForm
+                          .get(website.putCode)
+                          .hasError('pattern', 'url')
+                          ) {
+                          <mat-error
+                            i18n="@@topBar.invalidURL"
+                            >
+                      Invalid URL
+                    </mat-error>
+                        }
+                        @if (
+                          websitesForm
+                          .get(website.putCode)
+                          .hasError('duplicated', 'url')
+                          ) {
+                          <mat-error
+                            i18n="@@topBar.urlDuplicated"
+                            >
+                      URL can not be duplicated
+                    </mat-error>
+                        }
+                        @if (website.putCode.indexOf('new') < 0) {
+                          <mat-hint
+                            class="mat-caption"
+                            >
+                            <app-source-hit
+                              [createdDate]="website.createdDate"
+                              [source]="website.sourceName || website.source"
+                        [assertion]="
+                          website.assertionOriginName ||
+                          website.assertionOriginOrcid
+                        "
+                            ></app-source-hit>
+                          </mat-hint>
+                        }
+                      </mat-form-field>
+                    }
+                    @if (website.source && website.source !== this.id) {
+                      <mat-form-field
+                    [ngClass]="{
+                      'read-only': website.source && website.source !== this.id
+                    }"
+                        appearance="outline"
+                        class="mat-form-field-min description"
+                        >
+                        <input
+                          [readonly]="website.source && website.source !== id"
+                          class="cy-description-input"
+                          #descriptionInput
+                          [attr.aria-label]="ariaLabelTitle"
+                          matInput
+                          formControlName="description"
+                          placeholder=" {{ ngOrcidDescription }}"
+                          [ngClass]="{ 'website-input': screenDirection === 'rtl' }"
+                          />
+                        @if (
+                          websitesForm.get(website.putCode)?.get('description')
+                          ?.errors?.maxlength
+                          ) {
+                          <mat-error
+                            i18n="@@topBar.urlMaxLength"
+                            >
+                      Must be less than 355 characters
+                    </mat-error>
+                        }
+                      </mat-form-field>
+                      <mat-form-field
+                        appearance="outline"
+                        class="mat-form-field-min"
+                    [ngClass]="{
+                      'read-only': website.source && website.source !== this.id
+                    }"
+                        >
+                        <input
+                          [readonly]="website.source && website.source !== id"
+                          [attr.aria-label]="ariaLabelURL"
+                          class="cy-url-input"
+                          matInput
+                          formControlName="url"
+                          placeholder="{{ ngOrcidUrl }}"
+                          [ngClass]="{ 'website-input': screenDirection === 'rtl' }"
+                          />
+                        @if (
+                          websitesForm
+                          .get(website.putCode)
+                          .hasError('required', 'url')
+                          ) {
+                          <mat-error
+                            i18n="@@topBar.requiredURL"
+                            >
+                      An URL is required
+                    </mat-error>
+                        }
+                        @if (
+                          websitesForm
+                          .get(website.putCode)
+                          .hasError('maxlength', 'url')
+                          ) {
+                          <mat-error
+                            i18n="@@shared.maxLength.less_than_two_thousand"
+                            >
+                      Must be less than 2000 characters
+                    </mat-error>
+                        }
+                        @if (
+                          websitesForm
+                          .get(website.putCode)
+                          .hasError('pattern', 'url')
+                          ) {
+                          <mat-error
+                            i18n="@@topBar.invalidURL"
+                            >
+                      Invalid URL
+                    </mat-error>
+                        }
+                        @if (
+                          websitesForm
+                          .get(website.putCode)
+                          .hasError('duplicated', 'url')
+                          ) {
+                          <mat-error
+                            i18n="@@topBar.urlDuplicated"
+                            >
+                      URL can not be duplicated
+                    </mat-error>
+                        }
+                        @if (website.putCode.indexOf('new') < 0) {
+                          <mat-hint
+                            class="mat-caption"
+                            >
+                            <app-source-hit
+                              [createdDate]="website.createdDate"
+                              [source]="website.sourceName || website.source"
+                        [assertion]="
+                          website.assertionOriginName ||
+                          website.assertionOriginOrcid
+                        "
+                            ></app-source-hit>
+                          </mat-hint>
+                        }
+                      </mat-form-field>
+                    }
+                  </div>
+                </div>
+                <div
+                  class="col no-wrap actions-wrapper"
+                  [ngClass]="{ privacy: !platform.columns12 }"
+                  >
+                  <app-visibility-selector
+                    [ngClass]="{ selector: !platform.columns12 }"
+                    formControlName="visibility"
                 [itemTitle]="
                   websitesForm.get(website.putCode)?.get('description').value ||
                   ''
                 "
-              ></app-visibility-selector>
-              <button
-                class="delete-button"
-                (click)="deleteWebsite(website.putCode)"
-                mat-icon-button
+                  ></app-visibility-selector>
+                  <button
+                    class="delete-button"
+                    (click)="deleteWebsite(website.putCode)"
+                    mat-icon-button
                 [attr.aria-label]="
                   ariaLabelDelete +
                   ' ' +
                   (websitesForm.get(website.putCode)?.get('description')
                     .value || '')
                 "
-              >
-                <mat-icon
-                  class="material-icons-outlined extra-large-material-icon"
-                  >delete
-                </mat-icon>
-              </button>
+                    >
+                    <mat-icon
+                      class="material-icons-outlined extra-large-material-icon"
+                      >delete
+                    </mat-icon>
+                  </button>
+                </div>
+              </div>
+              <hr class="dashed-line" />
             </div>
-          </div>
-          <hr class="dashed-line" />
+          }
         </div>
-      </div>
-    </ng-container>
-    <div class="row">
-      <a id="add-link" class="col add-more no-gutters" (click)="addWebsite()">
-        <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
-        <span class="mat-subtitle-2">
-          <ng-container *ngIf="websites?.length === 0" i18n="@@topBar.addLink">
+      }
+      <div class="row">
+        <a id="add-link" class="col add-more no-gutters" (click)="addWebsite()">
+          <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
+          <span class="mat-subtitle-2">
+            @if (websites?.length === 0) {
+              <ng-container i18n="@@topBar.addLink">
             Add a link
           </ng-container>
-          <ng-container
-            *ngIf="websites?.length !== 0"
-            i18n="@@topBar.addAnotherLink"
-          >
+            }
+            @if (websites?.length !== 0) {
+              <ng-container
+                i18n="@@topBar.addAnotherLink"
+                >
             Add another link
           </ng-container>
-        </span>
-      </a>
+            }
+          </span>
+        </a>
+      </div>
     </div>
-  </div>
-</app-modal>
+  </app-modal>

@@ -1,24 +1,27 @@
 <div class="externalIds">
-  <app-panel-data-line
-    *ngIf="grant?.grantNumber"
-    [title]="grantNumberLabel"
-    [content]="grant.grantNumber"
-  ></app-panel-data-line>
+  @if (grant?.grantNumber) {
+    <app-panel-data-line
+      [title]="grantNumberLabel"
+      [content]="grant.grantNumber"
+    ></app-panel-data-line>
+  }
 
-  <app-panel-data-line
-    *ngIf="grant?.grantUrl"
-    [title]="grantUrlLabel"
-    [content]="grant.grantUrl"
-    [url]="grant.grantUrl"
-  >
-  </app-panel-data-line>
+  @if (grant?.grantUrl) {
+    <app-panel-data-line
+      [title]="grantUrlLabel"
+      [content]="grant.grantUrl"
+      [url]="grant.grantUrl"
+      >
+    </app-panel-data-line>
+  }
 
-  <app-panel-data-line
-    *ngIf="grant?.fundingRelationship"
-    [title]="fundingRelationshipLabel"
-    [content]="grant.fundingRelationship | recordFundingRelationshipLabel"
-  >
-  </app-panel-data-line>
+  @if (grant?.fundingRelationship) {
+    <app-panel-data-line
+      [title]="fundingRelationshipLabel"
+      [content]="grant.fundingRelationship | recordFundingRelationshipLabel"
+      >
+    </app-panel-data-line>
+  }
 </div>
 <div class="controls">
   <a i18n="@@shared.edit" (click)="edit.emit()">Edit</a>

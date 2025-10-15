@@ -1,41 +1,55 @@
-<div
-  class="orc-font-body-small"
-  *ngIf="title"
+@if (title) {
+  <div
+    class="orc-font-body-small"
   [ngClass]="{
     'title-margin': titleMargin,
     'secondary-text': secondaryText,
     'no-bold': noBoldTitle
   }"
->
-  <span class="prefixTitle" *ngIf="prefixTitle">
-    <i *ngIf="prefixTitle === 'part-of'" i18n="@@shared.partOf"> Part of </i>
-    <i *ngIf="prefixTitle === 'funded-by'" i18n="@@shared.fundedBy">
+    >
+    @if (prefixTitle) {
+      <span class="prefixTitle">
+        @if (prefixTitle === 'part-of') {
+          <i i18n="@@shared.partOf"> Part of </i>
+        }
+        @if (prefixTitle === 'funded-by') {
+          <i i18n="@@shared.fundedBy">
       Funded by
     </i>
-    <i *ngIf="prefixTitle === 'version-of'" i18n="@@shared.versionOf">
+        }
+        @if (prefixTitle === 'version-of') {
+          <i i18n="@@shared.versionOf">
       Version of
     </i>
-  </span>
-  <span>{{ title }}</span>
-  <ng-container *ngIf="detail">&#x200E;({{ detail }})&#x200E;</ng-container>
-  <p
-    class="mat-subtitle-2"
-    *ngIf="!url && copyOnClick"
-    appCopyOnClick
-    matTooltip="Click to Copy"
-    [matTooltipPosition]="'above'"
-  >
-    {{ content }}
-  </p>
-  <p class="mat-subtitle-2" *ngIf="!url && !copyOnClick">{{ content }}</p>
-
-  <a
-    class="underline mat-subtitle-2"
-    href="{{ url }}"
-    target="_blank"
-    rel="noopener noreferrer"
-    *ngIf="url"
-  >
-    {{ content }}
-  </a>
-</div>
+        }
+      </span>
+    }
+    <span>{{ title }}</span>
+    @if (detail) {
+      &#x200E;({{ detail }})&#x200E;
+    }
+    @if (!url && copyOnClick) {
+      <p
+        class="mat-subtitle-2"
+        appCopyOnClick
+        matTooltip="Click to Copy"
+        [matTooltipPosition]="'above'"
+        >
+        {{ content }}
+      </p>
+    }
+    @if (!url && !copyOnClick) {
+      <p class="mat-subtitle-2">{{ content }}</p>
+    }
+    @if (url) {
+      <a
+        class="underline mat-subtitle-2"
+        href="{{ url }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        >
+        {{ content }}
+      </a>
+    }
+  </div>
+}

@@ -6,21 +6,21 @@
           height="64px"
           src="assets/vectors/orcid.logo.icon.svg"
           alt="orcid logo"
-        />
+          />
       </div>
-      <ng-container *ngIf="!reactivation?.isReactivation">
+      @if (!reactivation?.isReactivation) {
         <h1 class="orc-font-heading-small" i18n="@@register.create">
           Create your ORCID iD
         </h1>
-      </ng-container>
-      <ng-container *ngIf="reactivation?.isReactivation">
+      }
+      @if (reactivation?.isReactivation) {
         <h1
           class="orc-font-heading-small"
           i18n="@@register.reactivateYourOrcidAccount"
-        >
+          >
           Reactivate your ORCID account
         </h1>
-      </ng-container>
+      }
     </mat-card-title>
     <mat-card-subtitle role="heading" aria-level="2">
       <h2 class="orc-font-body-small" i18n="@@register.step1.3">
@@ -30,61 +30,65 @@
   </mat-card-header>
 
   <mat-card-content>
-    <p *ngIf="!reactivation?.isReactivation">
-      <ng-container i18n="@@register.orcids">Per ORCID's</ng-container>
-      <a
-        href="{{ infoSiteBaseUrl }}content/orcid-terms-use"
-        class="mat-button-font"
-        rel="noopener noreferrer"
-        target="_blank"
-        i18n="@@register.terms"
-        #firstInput
-        >terms of use</a
-      ><ng-container i18n="@@register.only"
-        >, you may only register for an ORCID iD for yourself. Already have an
+    @if (!reactivation?.isReactivation) {
+      <p>
+        <ng-container i18n="@@register.orcids">Per ORCID's</ng-container>
+        <a
+          href="{{ infoSiteBaseUrl }}content/orcid-terms-use"
+          class="mat-button-font"
+          rel="noopener noreferrer"
+          target="_blank"
+          i18n="@@register.terms"
+          #firstInput
+          >terms of use</a
+          ><ng-container i18n="@@register.only"
+          >, you may only register for an ORCID iD for yourself. Already have an
         ORCID iD?</ng-container
-      >
-      <a class="mat-button-font" i18n="@@register.sign" (click)="signIn()"
-        >Sign In</a
-      >
-    </p>
-    <form [formGroup]="formGroup">
-      <app-form-personal
-        formControlName="personal"
-        [reactivation]="reactivation"
-      >
-      </app-form-personal>
-      <div class="step-actions margin-top-12">
-        <button
-          id="step-a-next-button"
-          mat-raised-button
-          matStepperNext
-          i18n="@@register.nextStep"
-          color="primary"
-          (click)="nextButton2()"
-        >
+          >
+          <a class="mat-button-font" i18n="@@register.sign" (click)="signIn()"
+            >Sign In</a
+            >
+          </p>
+        }
+        <form [formGroup]="formGroup">
+          <app-form-personal
+            formControlName="personal"
+            [reactivation]="reactivation"
+            >
+          </app-form-personal>
+          <div class="step-actions margin-top-12">
+            <button
+              id="step-a-next-button"
+              mat-raised-button
+              matStepperNext
+              i18n="@@register.nextStep"
+              color="primary"
+              (click)="nextButton2()"
+              >
           Next Step
         </button>
-        <button
-          mat-button
-          color="primary"
-          (click)="goBack()"
-          matStepperPrevious
-          type="button"
-          id="step-a-back-button"
-        >
-          <a
-            i18n="@@register.cancelRegistration"
-            *ngIf="!reactivation?.isReactivation"
-            >Cancel registration</a
-          >
-          <a
-            i18n="@@register.cancelReactivation"
-            *ngIf="reactivation?.isReactivation"
-            >Cancel reactivation</a
-          >
-        </button>
-      </div>
-    </form>
-  </mat-card-content>
-</mat-card>
+            <button
+              mat-button
+              color="primary"
+              (click)="goBack()"
+              matStepperPrevious
+              type="button"
+              id="step-a-back-button"
+              >
+              @if (!reactivation?.isReactivation) {
+                <a
+                  i18n="@@register.cancelRegistration"
+                  >Cancel registration</a
+                  >
+                }
+                @if (reactivation?.isReactivation) {
+                  <a
+                    i18n="@@register.cancelReactivation"
+                    >Cancel reactivation</a
+                    >
+                  }
+                </button>
+              </div>
+            </form>
+          </mat-card-content>
+        </mat-card>

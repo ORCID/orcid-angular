@@ -7,12 +7,13 @@
   [title]="titleAccountPassword"
   [(expandedContent)]="settingSecurityPasswordOpen"
   [loading]="settingSecurityPasswordLoading"
->
-  <app-settings-security-password
-    *ngIf="settingSecurityPasswordOpen"
-    (loading)="settingSecurityPasswordLoading = $event"
   >
-  </app-settings-security-password>
+  @if (settingSecurityPasswordOpen) {
+    <app-settings-security-password
+      (loading)="settingSecurityPasswordLoading = $event"
+      >
+    </app-settings-security-password>
+  }
 </app-settings-panels>
 
 <app-settings-panels
@@ -22,12 +23,12 @@
   [title]="titleTwoFactor"
   [type]="{ value: 'two-factor', enabled: twoFactorState }"
   [loading]="settingSecurityTwoFactorLoading"
->
+  >
   <app-settings-security-two-factor-auth
     [twoFactorState]="twoFactorState"
     (twoFactorStateOutput)="twoFactorStateChanges($event)"
     (loading)="settingSecurityTwoFactorLoading = $event"
-  >
+    >
   </app-settings-security-two-factor-auth>
 </app-settings-panels>
 
@@ -37,9 +38,10 @@
   id="cy-alternate-signin-panel"
   [title]="titleAlternativeSignin"
   [loading]="settingSecurityAlternateAccountsLoading"
->
-  <app-settings-security-alternate-sign-in
-    (loading)="settingSecurityAlternateAccountsLoading = $event"
-    *ngIf="settingSecurityAlternateAccounts"
-  ></app-settings-security-alternate-sign-in>
+  >
+  @if (settingSecurityAlternateAccounts) {
+    <app-settings-security-alternate-sign-in
+      (loading)="settingSecurityAlternateAccountsLoading = $event"
+    ></app-settings-security-alternate-sign-in>
+  }
 </app-settings-panels>

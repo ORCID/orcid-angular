@@ -1,15 +1,14 @@
-<ng-container *ngIf="$trustedOrganization | async as trustedOrganizations"
-  ><h1
+@if ($trustedOrganization | async; as trustedOrganizations) {
+  <h1
     class="orc-font-heading-small"
     i18n="@@account.trustedParties"
     id="cy-organizations"
-  >
+    >
     Trusted parties
   </h1>
   <h2 class="orc-font-body-large" i18n="@@account.trustedOrganizations">
     Trusted organizations
   </h2>
-
   <div>
     <p i18n="@@account.trustedOrganizationsAreThose">
       Trusted organizations are those to which you have granted permission to
@@ -18,7 +17,6 @@
       revoke it at any time.
     </p>
   </div>
-
   <a
     class="underline learn-more-url"
     i18n="@@account.learnMoreAboutTrustedOrg"
@@ -26,25 +24,26 @@
     rel="noopener noreferrer"
     target="_blank"
     >Learn more about trusted organizations</a
-  >
-
-  <app-settings-panels
-    [title]="trustedOrganization.name"
-    [accessGranted]="trustedOrganization.approvalDate"
-    [url]="trustedOrganization.websiteValue"
-    [revokeAccessButton]="true"
-    (revokeAccessButtonClickedEvent)="revokeAccess(trustedOrganization)"
-    [routeUrl]="trustedPartiesUrl"
-    *ngFor="let trustedOrganization of trustedOrganizations"
-  >
-    <app-settings-trusted-organization
-      [trustedOrganization]="trustedOrganization"
-    ></app-settings-trusted-organization>
-  </app-settings-panels>
-
-  <p *ngIf="!trustedOrganizations.length">
-    <i i18n="@@account.youHavenAddAnyOrg">
+    >
+    @for (trustedOrganization of trustedOrganizations; track trustedOrganization) {
+      <app-settings-panels
+        [title]="trustedOrganization.name"
+        [accessGranted]="trustedOrganization.approvalDate"
+        [url]="trustedOrganization.websiteValue"
+        [revokeAccessButton]="true"
+        (revokeAccessButtonClickedEvent)="revokeAccess(trustedOrganization)"
+        [routeUrl]="trustedPartiesUrl"
+        >
+        <app-settings-trusted-organization
+          [trustedOrganization]="trustedOrganization"
+        ></app-settings-trusted-organization>
+      </app-settings-panels>
+    }
+    @if (!trustedOrganizations.length) {
+      <p>
+        <i i18n="@@account.youHavenAddAnyOrg">
       You haven't added any trusted organizations yet.
     </i>
-  </p>
-</ng-container>
+      </p>
+    }
+  }

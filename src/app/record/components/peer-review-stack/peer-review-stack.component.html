@@ -1,136 +1,139 @@
-<ng-container
-  *ngFor="
-    let subPeerReview of peerReviewStack?.peerReviews;
-    trackBy: trackByPeerReviewStack;
-    let i = index;
-    let last = last
-  "
->
-  <app-panel
-    panelId="peer-review"
-    [putCode]="subPeerReview.putCode.value"
-    [elements]="subPeerReview"
-    [type]="'top-bar'"
+@for (
+  subPeerReview of peerReviewStack?.peerReviews; track trackByPeerReviewStack(i,
+  subPeerReview); let i = $index; let last = $last) {
+  @if (isPreferred(subPeerReview) || displayTheStack) {
+    <app-panel
+      panelId="peer-review"
+      [putCode]="subPeerReview.putCode.value"
+      [elements]="subPeerReview"
+      [type]="'top-bar'"
     [ngStyle]="{
       'z-index': peerReviewStack.peerReviews.length - i
     }"
-    [editable]="false"
-    [customControls]="true"
-    class="top-bar"
-    *ngIf="isPreferred(subPeerReview) || displayTheStack"
-    [stackedHeader]="!platform.columns12"
-  >
-    <h4
-      header
-      class="peer-review-title"
+      [editable]="false"
+      [customControls]="true"
+      class="top-bar"
+      [stackedHeader]="!platform.columns12"
+      >
+      <h4
+        header
+        class="peer-review-title"
       [ngClass]="{
         'orc-font-small-print': isMobile,
         'orc-font-body-small': !isMobile
       }"
-    >
-      <span class="header-sub-peer-review" [ngClass]="{ mobile: isMobile }">
-        <b i18n="@@peerReview.reviewDate"> Review date: </b>
-        {{ subPeerReview.completionDate | monthDayYearDateToString }}
-      </span>
-      <span class="header-sub-peer-review" [ngClass]="{ mobile: isMobile }">
-        <b i18n="@@peerReview.type"> Type: </b>
-        <span class="capitalize"> {{ subPeerReview.type.value }}</span>
-      </span>
-      <span class="header-sub-peer-review" [ngClass]="{ mobile: isMobile }">
-        <b i18n="@@peerReview.role"> Role: </b>
-        <span class="capitalize">
-          {{ subPeerReview.role.value }}
+        >
+        <span class="header-sub-peer-review" [ngClass]="{ mobile: isMobile }">
+          <b i18n="@@peerReview.reviewDate"> Review date: </b>
+          {{ subPeerReview.completionDate | monthDayYearDateToString }}
         </span>
-      </span>
-    </h4>
-    <div
-      custom-controls
+        <span class="header-sub-peer-review" [ngClass]="{ mobile: isMobile }">
+          <b i18n="@@peerReview.type"> Type: </b>
+          <span class="capitalize"> {{ subPeerReview.type.value }}</span>
+        </span>
+        <span class="header-sub-peer-review" [ngClass]="{ mobile: isMobile }">
+          <b i18n="@@peerReview.role"> Role: </b>
+          <span class="capitalize">
+            {{ subPeerReview.role.value }}
+          </span>
+        </span>
+      </h4>
+      <div
+        custom-controls
       [ngClass]="{
         'orc-font-small-print': isMobile,
         'orc-font-body-small': !isMobile
       }"
-    >
-      <span
-        class="show"
-        *ngIf="
+        >
+        @if (
           !displayTheStack ||
           (displayTheStack &&
-            this.stackPanelsDisplay[subPeerReview.putCode.value]
-              .topPanelOfTheStack)
-        "
-      >
-        <a
-          class="underline show-more-button"
-          *ngIf="!subPeerReview.showDetails"
-          (click)="getDetails(subPeerReview, subPeerReview.putCode.value)"
-          i18n="@@shared.showMoreDetail"
+          this.stackPanelsDisplay[subPeerReview.putCode.value]
+          .topPanelOfTheStack)
+          ) {
+          <span
+            class="show"
+            >
+            @if (!subPeerReview.showDetails) {
+              <a
+                class="underline show-more-button"
+                (click)="getDetails(subPeerReview, subPeerReview.putCode.value)"
+                i18n="@@shared.showMoreDetail"
           [attr.aria-label]="
             'peer-review'
               | appPanelActivityActionAriaLabel
                 : 'show'
                 : (subPeerReview.completionDate | monthDayYearDateToString)
           "
-        >
+                >
           Show more detail
         </a>
-        <a
-          class="underline"
-          *ngIf="subPeerReview.showDetails"
-          (click)="collapse(subPeerReview)"
-          i18n="@@shared.showLessDetail"
+            }
+            @if (subPeerReview.showDetails) {
+              <a
+                class="underline"
+                (click)="collapse(subPeerReview)"
+                i18n="@@shared.showLessDetail"
           [attr.aria-label]="
             'peer-review'
               | appPanelActivityActionAriaLabel
                 : 'hide'
                 : (subPeerReview.completionDate | monthDayYearDateToString)
           "
-          id="show-less-button"
-        >
+                id="show-less-button"
+                >
           Show less detail
         </a>
-      </span>
-      <span>
-        <a
-          class="underline"
-          rel="noopener noreferrer"
-          target="_blank"
-          href="{{ subPeerReview.url.value }}"
-          i18n="@@peerReview.view"
-          *ngIf="!!subPeerReview.url"
-        >
+            }
+          </span>
+        }
+        <span>
+          @if (!!subPeerReview.url) {
+            <a
+              class="underline"
+              rel="noopener noreferrer"
+              target="_blank"
+              href="{{ subPeerReview.url.value }}"
+              i18n="@@peerReview.view"
+              >
           View
         </a>
-        <ng-container i18n="@@peerReview.view" *ngIf="!subPeerReview.url">
+          }
+          @if (!subPeerReview.url) {
+            <ng-container i18n="@@peerReview.view">
           View
         </ng-container>
-      </span>
-    </div>
-    <app-peer-review
-      *ngIf="stackPanelsDisplay[subPeerReview.putCode.value].topPanelOfTheStack"
-      [isPublicRecord]="isPublicRecord"
-      [subPeerReview]="subPeerReview"
-      [detailsPeerReviews]="detailsPeerReviews"
-    >
-    </app-peer-review>
-    <app-panel-source
-      [userRecord]="userRecord"
-      [isPreferred]="isPreferred(subPeerReview)"
-      [sourceName]="subPeerReview.sourceName || subPeerReview.source"
-      [assertionOriginName]="subPeerReview.assertionOriginName"
-      [assertionOriginClientId]="subPeerReview.assertionOriginClientId"
-      [assertionOriginOrcid]="subPeerReview.assertionOriginOrcid"
-      [stackLength]="peerReviewStack.peerReviews.length"
-      [(displayTheStack)]="displayTheStack"
-      (makePrimary)="makePrimaryCard(subPeerReview)"
+          }
+        </span>
+      </div>
+      @if (stackPanelsDisplay[subPeerReview.putCode.value].topPanelOfTheStack) {
+        <app-peer-review
+          [isPublicRecord]="isPublicRecord"
+          [subPeerReview]="subPeerReview"
+          [detailsPeerReviews]="detailsPeerReviews"
+          >
+        </app-peer-review>
+      }
+      <app-panel-source
+        [userRecord]="userRecord"
+        [isPreferred]="isPreferred(subPeerReview)"
+        [sourceName]="subPeerReview.sourceName || subPeerReview.source"
+        [assertionOriginName]="subPeerReview.assertionOriginName"
+        [assertionOriginClientId]="subPeerReview.assertionOriginClientId"
+        [assertionOriginOrcid]="subPeerReview.assertionOriginOrcid"
+        [stackLength]="peerReviewStack.peerReviews.length"
+        [(displayTheStack)]="displayTheStack"
+        (makePrimary)="makePrimaryCard(subPeerReview)"
       [topPanelOfTheStackMode]="
         stackPanelsDisplay[subPeerReview.putCode.value].topPanelOfTheStack
       "
-      [isPublicRecord]="isPublicRecord"
-      (topPanelOfTheStackModeChange)="changeTopPanelOfTheStack(subPeerReview)"
-      [type]="'peer-review'"
-      [item]="subPeerReview"
-      [panelTitle]="subPeerReview.completionDate | monthDayYearDateToString"
-    >
-    </app-panel-source>
-  </app-panel>
-</ng-container>
+        [isPublicRecord]="isPublicRecord"
+        (topPanelOfTheStackModeChange)="changeTopPanelOfTheStack(subPeerReview)"
+        [type]="'peer-review'"
+        [item]="subPeerReview"
+        [panelTitle]="subPeerReview.completionDate | monthDayYearDateToString"
+        >
+      </app-panel-source>
+    </app-panel>
+  }
+}

@@ -4,32 +4,34 @@
     [ngClass]="{
       mobile: !platform.columns12
     }"
-  >
+    >
     <div class="row space-around">
       <div
         [ngClass]="{
           'col l5 m6 s4': !platform.columns12
         }"
-      >
+        >
         <img
           src="assets/vectors/orcid.logo.icon.svg"
           class="orcid"
           alt="orcid logo"
-        />
+          />
         <h2 i18n="@@account.enableTwoFactor">
           Enable two-factor authentication (2FA)
         </h2>
-        <app-two-factor-enable
-          *ngIf="!showBackupCodes"
-          (twoFactorEnabled)="twoFactorEnabled($event)"
-        >
-        </app-two-factor-enable>
-        <app-two-factor-recovery-codes
-          *ngIf="showBackupCodes"
-          [backupCodes]="backupCodes"
-          [backupCodesClipboard]="backupCodesClipboard"
-        >
-        </app-two-factor-recovery-codes>
+        @if (!showBackupCodes) {
+          <app-two-factor-enable
+            (twoFactorEnabled)="twoFactorEnabled($event)"
+            >
+          </app-two-factor-enable>
+        }
+        @if (showBackupCodes) {
+          <app-two-factor-recovery-codes
+            [backupCodes]="backupCodes"
+            [backupCodesClipboard]="backupCodesClipboard"
+            >
+          </app-two-factor-recovery-codes>
+        }
       </div>
     </div>
   </div>

@@ -2,173 +2,170 @@
   class="orc-font-body-small search-title"
   i18n="@@account.searchForOrcidUser"
   >Search for ORCID users to add as trusted individuals</strong
->
-<div class="search-container">
-  <mat-form-field
-    appearance="outline"
-    class="mat-form-field-min no-hint"
-    [ngClass]="{ mobile: isMobile, desktop: !isMobile }"
   >
-    <input
-      matInput
-      value="value"
-      [(ngModel)]="searchValue"
-      placeholder="{{ searchPlaceHolder }}"
-    />
-  </mat-form-field>
-  <button
-    mat-raised-button
-    id="cy-search-orcid-for-trusted-individuals"
-    (click)="search(searchValue)"
-    color="primary"
-    i18n="@@account.searchOrcidTrusted"
-    class="search-button"
-    [ngClass]="{ desktop: !isMobile, mobile: isMobile }"
-  >
+  <div class="search-container">
+    <mat-form-field
+      appearance="outline"
+      class="mat-form-field-min no-hint"
+      [ngClass]="{ mobile: isMobile, desktop: !isMobile }"
+      >
+      <input
+        matInput
+        value="value"
+        [(ngModel)]="searchValue"
+        placeholder="{{ searchPlaceHolder }}"
+        />
+    </mat-form-field>
+    <button
+      mat-raised-button
+      id="cy-search-orcid-for-trusted-individuals"
+      (click)="search(searchValue)"
+      color="primary"
+      i18n="@@account.searchOrcidTrusted"
+      class="search-button"
+      [ngClass]="{ desktop: !isMobile, mobile: isMobile }"
+      >
     Search ORCID for trusted individuals
   </button>
-</div>
-<div class="row h-baseline">
-  <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
-</div>
-<ng-container *ngIf="$search | async as searchResults">
-  <ng-container
-    *ngIf="searchResults['expanded-result']?.length && this.isMobile"
-  >
-    <mat-divider></mat-divider>
-    <div
-      *ngFor="let foundTrustedIndividual of searchResults['expanded-result']"
-    >
-      <div class="mobile-elements-container">
-        <div class="mobile-ements-text-container">
-          <strong i18n="@@account.name">Name</strong>
-          <div>
-            {{ foundTrustedIndividual?.['given-names'] }}
-            {{ foundTrustedIndividual?.['family-names'] }}
-          </div>
-          <strong i18n="@@account.orcidId">ORCID iD</strong>
-          <div>
-            <a
-              class="underline"
-              target="_blank"
-              rel="noreferrer noopener"
-              href="{{ baseUrl }}{{ foundTrustedIndividual?.['orcid-id'] }}"
-              >{{ foundTrustedIndividual?.['orcid-id'] }}
-            </a>
-          </div>
-        </div>
-        <div>
-          <div
-            class="actions-container orc-font-body-small"
-            [ngClass]="{ disabled: foundTrustedIndividual.alreadyOnRecord }"
-          >
-            <mat-icon
-              (click)="add(foundTrustedIndividual)"
-              class="pointer"
-              [matTooltip]="
-                foundTrustedIndividual.alreadyOnRecord ? alreadyAddedLabel : ''
-              "
-              >add</mat-icon
-            >
-
-            <a
-              class="black-url underline"
-              (click)="add(foundTrustedIndividual)"
-              i18n="@@account.addAsTrustedIndividuals"
-              [routerLink]="trustedPartiesUrl"
-              [matTooltip]="
-                foundTrustedIndividual.alreadyOnRecord ? alreadyAddedLabel : ''
-              "
-            >
-              Add as trusted individual</a
-            >
-          </div>
-        </div>
-      </div>
-
+  </div>
+  <div class="row h-baseline">
+    @if (loading) {
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    }
+  </div>
+  @if ($search | async; as searchResults) {
+    @if (searchResults['expanded-result']?.length && this.isMobile) {
       <mat-divider></mat-divider>
-    </div>
-  </ng-container>
-  <div class="table-container">
-    <table
-      *ngIf="searchResults?.['expanded-result']?.length && !this.isMobile"
-      mat-table
-      [dataSource]="searchResults?.['expanded-result']"
-      class="mat-elevation-z0"
-    >
-      <ng-container matColumnDef="trustedIndividuals">
-        <th mat-header-cell *matHeaderCellDef i18n="@@account.name">Name</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element?.['given-names'] }}
-          {{ element?.['family-names'] }}
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="orcid">
-        <th mat-header-cell *matHeaderCellDef i18n="@@account.orcidId">
+      @for (foundTrustedIndividual of searchResults['expanded-result']; track foundTrustedIndividual) {
+        <div
+          >
+          <div class="mobile-elements-container">
+            <div class="mobile-ements-text-container">
+              <strong i18n="@@account.name">Name</strong>
+              <div>
+                {{ foundTrustedIndividual?.['given-names'] }}
+                {{ foundTrustedIndividual?.['family-names'] }}
+              </div>
+              <strong i18n="@@account.orcidId">ORCID iD</strong>
+              <div>
+                <a
+                  class="underline"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  href="{{ baseUrl }}{{ foundTrustedIndividual?.['orcid-id'] }}"
+                  >{{ foundTrustedIndividual?.['orcid-id'] }}
+                </a>
+              </div>
+            </div>
+            <div>
+              <div
+                class="actions-container orc-font-body-small"
+                [ngClass]="{ disabled: foundTrustedIndividual.alreadyOnRecord }"
+                >
+                <mat-icon
+                  (click)="add(foundTrustedIndividual)"
+                  class="pointer"
+              [matTooltip]="
+                foundTrustedIndividual.alreadyOnRecord ? alreadyAddedLabel : ''
+              "
+                  >add</mat-icon
+                  >
+                  <a
+                    class="black-url underline"
+                    (click)="add(foundTrustedIndividual)"
+                    i18n="@@account.addAsTrustedIndividuals"
+                    [routerLink]="trustedPartiesUrl"
+              [matTooltip]="
+                foundTrustedIndividual.alreadyOnRecord ? alreadyAddedLabel : ''
+              "
+                    >
+              Add as trusted individual</a
+                    >
+                  </div>
+                </div>
+              </div>
+              <mat-divider></mat-divider>
+            </div>
+          }
+        }
+        <div class="table-container">
+          @if (searchResults?.['expanded-result']?.length && !this.isMobile) {
+            <table
+              mat-table
+              [dataSource]="searchResults?.['expanded-result']"
+              class="mat-elevation-z0"
+              >
+              <ng-container matColumnDef="trustedIndividuals">
+                <th mat-header-cell *matHeaderCellDef i18n="@@account.name">Name</th>
+                <td mat-cell *matCellDef="let element">
+                  {{ element?.['given-names'] }}
+                  {{ element?.['family-names'] }}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="orcid">
+                <th mat-header-cell *matHeaderCellDef i18n="@@account.orcidId">
           ORCID iD
         </th>
-        <td mat-cell *matCellDef="let element">
-          <a
-            class="underline"
-            target="_blank"
-            rel="noreferrer noopener"
-            href="{{ baseUrl }}{{ element?.['orcid-id'] }}"
-            >{{ element?.['orcid-id'] }}
-          </a>
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="actions" stickyEnd>
-        <th mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let element">
-          <div
-            class="actions-container orc-font-body-small"
-            [ngClass]="{ disabled: element.alreadyOnRecord }"
-          >
-            <mat-icon
-              class="pointer"
-              (click)="add(element)"
-              [matTooltip]="element.alreadyOnRecord ? alreadyAddedLabel : ''"
-              >add</mat-icon
-            >
-
-            <a
-              class="black-url underline"
-              (click)="add(element)"
-              i18n="@@account.addAsTrustedIndividuals"
-              [routerLink]="trustedPartiesUrl"
-              [matTooltip]="element.alreadyOnRecord ? alreadyAddedLabel : ''"
-            >
+                <td mat-cell *matCellDef="let element">
+                  <a
+                    class="underline"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    href="{{ baseUrl }}{{ element?.['orcid-id'] }}"
+                    >{{ element?.['orcid-id'] }}
+                  </a>
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="actions" stickyEnd>
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element">
+                  <div
+                    class="actions-container orc-font-body-small"
+                    [ngClass]="{ disabled: element.alreadyOnRecord }"
+                    >
+                    <mat-icon
+                      class="pointer"
+                      (click)="add(element)"
+                      [matTooltip]="element.alreadyOnRecord ? alreadyAddedLabel : ''"
+                      >add</mat-icon
+                      >
+                      <a
+                        class="black-url underline"
+                        (click)="add(element)"
+                        i18n="@@account.addAsTrustedIndividuals"
+                        [routerLink]="trustedPartiesUrl"
+                        [matTooltip]="element.alreadyOnRecord ? alreadyAddedLabel : ''"
+                        >
               Add as trusted individual</a
-            >
-          </div>
-        </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>
-  </div>
-
-  <div
-    class="row h-baseline"
-    *ngIf="searchResults['expanded-result']?.length && !loading"
-  >
-    <mat-paginator
-      [pageSizeOptions]="[10, 20, 50]"
-      [pageSize]="pageSize"
-      [pageIndex]="pageIndex"
-      [length]="searchResults['num-found']"
-      (page)="changePage($event)"
-      [attr.aria-label]="ariaLabelPaginator"
-      role="status"
-    ></mat-paginator>
-  </div>
-
-  <p *ngIf="!searchResults['expanded-result']?.length && !loading">
-    <i i18n="@@account.noResultFoundTrustedInd">
+                        >
+                      </div>
+                    </td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+                </table>
+              }
+            </div>
+            @if (searchResults['expanded-result']?.length && !loading) {
+              <div
+                class="row h-baseline"
+                >
+                <mat-paginator
+                  [pageSizeOptions]="[10, 20, 50]"
+                  [pageSize]="pageSize"
+                  [pageIndex]="pageIndex"
+                  [length]="searchResults['num-found']"
+                  (page)="changePage($event)"
+                  [attr.aria-label]="ariaLabelPaginator"
+                  role="status"
+                ></mat-paginator>
+              </div>
+            }
+            @if (!searchResults['expanded-result']?.length && !loading) {
+              <p>
+                <i i18n="@@account.noResultFoundTrustedInd">
       No results found. Please edit your search terms.
     </i>
-  </p>
-</ng-container>
+              </p>
+            }
+          }

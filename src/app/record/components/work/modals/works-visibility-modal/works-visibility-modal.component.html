@@ -11,7 +11,7 @@
       (click)="saveEvent()"
       i18n="@@shared.saveChanges"
       id="save-names-button"
-    >
+      >
       Save changes
     </button>
     <button
@@ -20,7 +20,7 @@
       (click)="closeEvent()"
       i18n="@@shared.cancel"
       id="cancel-names-button"
-    >
+      >
       Cancel
     </button>
   </app-modal-footer>
@@ -28,65 +28,67 @@
     <p class="orc-font-body-small">
       {{ ngOrcidDefaultVisibilityLabel }}
       <strong>{{ defaultVisibility | visibilityStringLabel }}</strong
-      >.
-    </p>
-    <div class="row">
-      <div class="col no-wrap actions-wrapper no-gutters">
-        <app-visibility-selector
-          formControlName="visibility"
-          [multiEdit]="'selected'"
-          [itemTitle]="ariaLabelWork"
-        >
-        </app-visibility-selector>
+        >.
+      </p>
+      <div class="row">
+        <div class="col no-wrap actions-wrapper no-gutters">
+          <app-visibility-selector
+            formControlName="visibility"
+            [multiEdit]="'selected'"
+            [itemTitle]="ariaLabelWork"
+            >
+          </app-visibility-selector>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <h3>
-        <ng-container i18n="@@works.selectedWorksVisibility">
+      <div class="row">
+        <h3>
+          <ng-container i18n="@@works.selectedWorksVisibility">
           Selected works to set visibility
         </ng-container>
-        ({{ works.length }})
-      </h3>
-      <mat-divider class="row orcid-divider"></mat-divider>
-      <ng-container *ngFor="let work of works">
-        <div class="row work-info">
-          <div class="row">
-            <h2 class="orc-font-body">
-              {{ work.title.value }}
-            </h2>
-          </div>
-          <div class="orc-font-body-small">
-            <strong i18n="@@shared.source">Source</strong>:
-            <ng-container
-              *ngIf="work?.assertionOriginName || work?.assertionOriginOrcid"
-            >
-              {{ work?.assertionOriginName || work?.assertionOriginOrcid }}
-              <i i18n="@@shared.onBehalfOf">via</i>
-            </ng-container>
-            {{ work.sourceName || work.source }}
-            <ng-container *ngIf="work.createdDate">
-              <br *ngIf="isMobile" />
-              <strong
-                class="added"
-                i18n="@@shared.added"
+          ({{ works.length }})
+        </h3>
+        <mat-divider class="row orcid-divider"></mat-divider>
+        @for (work of works; track work) {
+          <div class="row work-info">
+            <div class="row">
+              <h2 class="orc-font-body">
+                {{ work.title.value }}
+              </h2>
+            </div>
+            <div class="orc-font-body-small">
+              <strong i18n="@@shared.source">Source</strong>:
+              @if (work?.assertionOriginName || work?.assertionOriginOrcid) {
+                {{ work?.assertionOriginName || work?.assertionOriginOrcid }}
+                <i i18n="@@shared.onBehalfOf">via</i>
+              }
+              {{ work.sourceName || work.source }}
+              @if (work.createdDate) {
+                @if (isMobile) {
+                  <br />
+                }
+                <strong
+                  class="added"
+                  i18n="@@shared.added"
                 [ngClass]="{
                   mobile: isMobile
                 }"
-              >
+                  >
                 Added </strong
-              >:
-              {{ work.createdDate | monthDayYearDateToString }}
-            </ng-container>
-          </div>
-        </div>
-        <mat-divider class="row"></mat-divider>
-      </ng-container>
-      <div class="no-info orc-font-body-small" *ngIf="works.length === 0">
-        <mat-icon>error</mat-icon>
-        <ng-container i18n="@@works.noItemsSelected"
-          >No items selected.
+                  >:
+                  {{ work.createdDate | monthDayYearDateToString }}
+                }
+              </div>
+            </div>
+            <mat-divider class="row"></mat-divider>
+          }
+          @if (works.length === 0) {
+            <div class="no-info orc-font-body-small">
+              <mat-icon>error</mat-icon>
+              <ng-container i18n="@@works.noItemsSelected"
+                >No items selected.
         </ng-container>
-      </div>
-    </div>
-  </form>
-</app-modal>
+            </div>
+          }
+        </div>
+      </form>
+    </app-modal>

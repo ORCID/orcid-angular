@@ -1,39 +1,41 @@
-<div *ngFor="let recordImportWizard of recordImportWizards">
-  <h2 class="orc-font-body-small">
-    <a
-      target="_blank"
-      rel="noopener noreferrer"
-      [href]="openImportWizardUrlFilter(recordImportWizard)"
-    >
-      {{ recordImportWizard.name }}
-    </a>
-  </h2>
-  <p class="orc-font-body-small">
-    <ng-container *ngIf="recordImportWizard.description.length > 125">
-      <ng-container *ngIf="!recordImportWizard.show">
-        {{ recordImportWizard.description.substring(0, 125) + '...' }}
-        <a
-          class="underline"
-          i18n="@@shared.showMore"
-          (click)="toggle(recordImportWizard)"
+@for (recordImportWizard of recordImportWizards; track recordImportWizard) {
+  <div>
+    <h2 class="orc-font-body-small">
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        [href]="openImportWizardUrlFilter(recordImportWizard)"
         >
+        {{ recordImportWizard.name }}
+      </a>
+    </h2>
+    <p class="orc-font-body-small">
+      @if (recordImportWizard.description.length > 125) {
+        @if (!recordImportWizard.show) {
+          {{ recordImportWizard.description.substring(0, 125) + '...' }}
+          <a
+            class="underline"
+            i18n="@@shared.showMore"
+            (click)="toggle(recordImportWizard)"
+            >
           Show more
         </a>
-      </ng-container>
-      <ng-container *ngIf="recordImportWizard.show">
-        {{ recordImportWizard.description }}
-        <br />
-        <a
-          class="underline"
-          i18n="@@shared.showLess"
-          (click)="toggle(recordImportWizard)"
-        >
+        }
+        @if (recordImportWizard.show) {
+          {{ recordImportWizard.description }}
+          <br />
+          <a
+            class="underline"
+            i18n="@@shared.showLess"
+            (click)="toggle(recordImportWizard)"
+            >
           Show less
         </a>
-      </ng-container>
-    </ng-container>
-    <ng-container *ngIf="recordImportWizard.description.length < 125">
-      {{ recordImportWizard.description }}
-    </ng-container>
-  </p>
-</div>
+        }
+      }
+      @if (recordImportWizard.description.length < 125) {
+        {{ recordImportWizard.description }}
+      }
+    </p>
+  </div>
+}

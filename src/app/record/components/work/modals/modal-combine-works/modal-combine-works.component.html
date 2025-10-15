@@ -10,7 +10,7 @@
       color="primary"
       (click)="saveEvent()"
       id="combine-button"
-    >
+      >
       <ng-container i18n="@@works.groupSelectedWorks">
         Group selected works
       </ng-container>
@@ -21,7 +21,7 @@
       (click)="closeEvent()"
       i18n="@@shared.cancel"
       id="cancel-button"
-    >
+      >
       Cancel
     </button>
   </app-modal-footer>
@@ -32,78 +32,80 @@
           >The selected works will be grouped together into a single item on
           your record. All versions of the work will still be available, with
           one displayed as your preferred version.</ng-container
-        >&nbsp;<em i18n="@@works.groupWorksDescriptionLimit"
+          >&nbsp;<em i18n="@@works.groupWorksDescriptionLimit"
           >A maximum of 5 works can be grouped at a time.</em
-        >
-      </p>
-      <a
-        class="underline"
-        rel="noopener noreferrer"
-        target="_blank"
-        href="https://support.orcid.org/hc/en-us/articles/360006894774-Group-multiple-versions-of-the-same-work-together"
-        i18n="@@works.learnMoreGrouping"
-        >Learn more about grouping similar works</a
-      >
-    </div>
-  </div>
-  <div class="row">
-    <h3 class="orc-font-body-large">
-      <strong i18n="@@works.selectedWorksHeader">Selected works</strong>
-      <span> ({{ works.length }})</span>
-    </h3>
-    <mat-divider class="row orcid-divider"></mat-divider>
-    <ng-container *ngFor="let work of works">
-      <div class="row work-info">
-        <div class="row">
-          <h2 class="orc-font-body-small">
-            {{ work.title.value }}
-          </h2>
-        </div>
-        <div class="orc-font-small-print">
-          <span i18n="@@shared.source">Source</span>:
-          <ng-container
-            *ngIf="work?.assertionOriginName || work?.assertionOriginOrcid"
           >
-            {{ work?.assertionOriginName || work?.assertionOriginOrcid }}
-            <i i18n="@@shared.onBehalfOf">via</i>
-          </ng-container>
-          {{ work.sourceName || work.source }}
-          <ng-container *ngIf="work.createdDate">
-            <br *ngIf="isMobile" />
-            <span
-              class="added"
-              i18n="@@shared.added"
+        </p>
+        <a
+          class="underline"
+          rel="noopener noreferrer"
+          target="_blank"
+          href="https://support.orcid.org/hc/en-us/articles/360006894774-Group-multiple-versions-of-the-same-work-together"
+          i18n="@@works.learnMoreGrouping"
+          >Learn more about grouping similar works</a
+          >
+        </div>
+      </div>
+      <div class="row">
+        <h3 class="orc-font-body-large">
+          <strong i18n="@@works.selectedWorksHeader">Selected works</strong>
+          <span> ({{ works.length }})</span>
+        </h3>
+        <mat-divider class="row orcid-divider"></mat-divider>
+        @for (work of works; track work) {
+          <div class="row work-info">
+            <div class="row">
+              <h2 class="orc-font-body-small">
+                {{ work.title.value }}
+              </h2>
+            </div>
+            <div class="orc-font-small-print">
+              <span i18n="@@shared.source">Source</span>:
+              @if (work?.assertionOriginName || work?.assertionOriginOrcid) {
+                {{ work?.assertionOriginName || work?.assertionOriginOrcid }}
+                <i i18n="@@shared.onBehalfOf">via</i>
+              }
+              {{ work.sourceName || work.source }}
+              @if (work.createdDate) {
+                @if (isMobile) {
+                  <br />
+                }
+                <span
+                  class="added"
+                  i18n="@@shared.added"
               [ngClass]="{
                 mobile: isMobile
               }"
-              >Added</span
-            >:
-            {{ work.createdDate | monthDayYearDateToString }}
-          </ng-container>
-        </div>
-      </div>
-    </ng-container>
-    <app-alert-message type="warning">
-      <h3 title i18n="@@works.groupWorksAreYouSure">
+                  >Added</span
+                  >:
+                  {{ work.createdDate | monthDayYearDateToString }}
+                }
+              </div>
+            </div>
+          }
+          <app-alert-message type="warning">
+            <h3 title i18n="@@works.groupWorksAreYouSure">
         Are you sure you want to group these works?
       </h3>
-      <div content class="orc-font-body-small">
-        <p i18n="@@works.groupWorksRecommendation">
+            <div content class="orc-font-body-small">
+              <p i18n="@@works.groupWorksRecommendation">
           We recommend only grouping similar or related works together. Related
           works might have differing titles, identifiers or come from different
           sources.
         </p>
-        <em i18n="@@works.groupUnrelatedWorksWarning"
-          >Grouping un-related works can result in unexpected grouped items in
+              <em i18n="@@works.groupUnrelatedWorksWarning"
+                >Grouping un-related works can result in unexpected grouped items in
           your record.</em
-        >
-      </div>
-    </app-alert-message>
-    <div class="no-info orc-font-body-small" *ngIf="works.length === 0">
-      <mat-icon>error</mat-icon>
-      <ng-container i18n="@@works.noItemsSelected"
-        >No items selected.
+                >
+              </div>
+            </app-alert-message>
+            @if (works.length === 0) {
+              <div class="no-info orc-font-body-small">
+                <mat-icon>error</mat-icon>
+                <ng-container i18n="@@works.noItemsSelected"
+                  >No items selected.
       </ng-container>
-    </div>
-  </div>
-</app-modal>
+              </div>
+            }
+          </div>
+        </app-modal>

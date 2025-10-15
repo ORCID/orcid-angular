@@ -4,210 +4,229 @@
 <app-panel-data
   class="default-data-loaded orc-font-body-small"
   [borderBottom]="true"
->
+  >
   <div>
     <div class="general-data">
-      <ng-container *ngIf="funding?.startDate?.year"
-        >{{ funding.startDate | monthDayYearDateToString }}
+      @if (funding?.startDate?.year) {
+        {{ funding.startDate | monthDayYearDateToString }}
         <ng-container i18n="@@shared.to">to</ng-container>
-        <ng-container *ngIf="funding?.endDate">{{
+        @if (funding?.endDate) {
+          {{
           funding.endDate | monthDayYearDateToString
-        }}</ng-container>
-        <ng-container *ngIf="!funding?.endDate?.year" i18n="@@shared.present"
-          >present</ng-container
-        >
-      </ng-container>
-      <!--End date-->
-      <ng-container *ngIf="!funding?.startDate?.year && funding?.endDate">
-        <ng-container *ngIf="funding.endDate?.year">
-          {{ funding.endDate | monthDayYearDateToString }}
-        </ng-container>
-      </ng-container>
-      <ng-container
-        *ngIf="
+          }}
+        }
+        @if (!funding?.endDate?.year) {
+          <ng-container i18n="@@shared.present"
+            >present</ng-container
+            >
+          }
+        }
+        <!--End date-->
+        @if (!funding?.startDate?.year && funding?.endDate) {
+          @if (funding.endDate?.year) {
+            {{ funding.endDate | monthDayYearDateToString }}
+          }
+        }
+        @if (
           (funding?.startDate?.year || funding?.endDate?.year) &&
           funding?.fundingType?.value
-        "
-      >
-        |
-      </ng-container>
-      {{ funding?.fundingType?.value | recordFundingTypesLabel }}
-    </div>
-    <div *ngIf="funding?.fundingName?.value">
-      <div>
-        {{ funding.fundingName?.value }}
-        (<ng-container *ngIf="funding?.city?.value">{{
-          funding.city?.value
-        }}</ng-container
-        ><ng-container *ngIf="funding?.region?.value"
-          >, {{ funding.region?.value }}</ng-container
-        ><ng-container *ngIf="funding?.country?.value"
-          >, {{ funding.country?.value }}</ng-container
-        >)
+          ) {
+          |
+        }
+        {{ funding?.fundingType?.value | recordFundingTypesLabel }}
       </div>
+      @if (funding?.fundingName?.value) {
+        <div>
+          <div>
+            {{ funding.fundingName?.value }}
+            (@if (funding?.city?.value) {
+            {{
+            funding.city?.value
+            }}
+            }@if (funding?.region?.value) {
+            , {{ funding.region?.value }}
+            }@if (funding?.country?.value) {
+            , {{ funding.country?.value }}
+            })
+          </div>
+        </div>
+      }
+      @if (funding?.url?.value) {
+        <div>
+          <span> <ng-container i18n="@@shared.url">URL</ng-container>: </span>
+          <a
+            class="underline"
+            href="{{ funding.url.value }}"
+            target="_blank"
+            rel="noreferrer noopener"
+            >
+            {{ funding.url.value }}
+          </a>
+        </div>
+      }
+      <app-display-external-ids
+        [externalIdentifiers]="funding?.externalIdentifiers"
+      ></app-display-external-ids>
     </div>
-    <div *ngIf="funding?.url?.value">
-      <span> <ng-container i18n="@@shared.url">URL</ng-container>: </span>
-      <a
-        class="underline"
-        href="{{ funding.url.value }}"
-        target="_blank"
-        rel="noreferrer noopener"
-      >
-        {{ funding.url.value }}
-      </a>
-    </div>
-    <app-display-external-ids
-      [externalIdentifiers]="funding?.externalIdentifiers"
-    ></app-display-external-ids>
-  </div>
 
-  <div align-end>
-    <a
-      class="underline"
-      (click)="toggleDetails.next(funding)"
-      *ngIf="!panelDetailsState?.state"
-      i18n="@@shared.showMoreDetail"
+    <div align-end>
+      @if (!panelDetailsState?.state) {
+        <a
+          class="underline"
+          (click)="toggleDetails.next(funding)"
+          i18n="@@shared.showMoreDetail"
       [attr.aria-label]="
         'funding'
           | appPanelActivityActionAriaLabel
             : 'show'
             : funding?.fundingTitle?.title?.value
       "
-      >Show more detail</a
-    >
-    <a
-      class="underline"
-      (click)="toggleDetails.next(funding)"
-      *ngIf="panelDetailsState?.state"
-      i18n="@@shared.showLessDetail"
+          >Show more detail</a
+          >
+        }
+        @if (panelDetailsState?.state) {
+          <a
+            class="underline"
+            (click)="toggleDetails.next(funding)"
+            i18n="@@shared.showLessDetail"
       [attr.aria-label]="
         'funding'
           | appPanelActivityActionAriaLabel
             : 'hide'
             : funding?.fundingTitle?.title?.value
       "
-      >Show less detail</a
-    >
-  </div>
-</app-panel-data>
+            >Show less detail</a
+            >
+          }
+        </div>
+      </app-panel-data>
 
-<!-- DATA DISPLAY WHEN "MORE DETAILS" IS CLICKED -->
+      <!-- DATA DISPLAY WHEN "MORE DETAILS" IS CLICKED -->
 
-<app-panel-data [borderBottom]="true" *ngIf="panelDetailsState?.state">
-  <app-org-identifier
-    [orgDisambiguated]="orgDisambiguated"
-  ></app-org-identifier>
-  <!-- FUNDING SUBTYPE -->
-  <ng-container
-    class="margin-top-1"
-    *ngIf="funding?.organizationDefinedFundingSubType?.subtype?.value"
-  >
-    <app-display-attribute>
-      <h3
-        class="orc-font-body-small"
-        i18n="@@funding.organizationDefinedFundingSubType"
-      >
+      @if (panelDetailsState?.state) {
+        <app-panel-data [borderBottom]="true">
+          <app-org-identifier
+            [orgDisambiguated]="orgDisambiguated"
+          ></app-org-identifier>
+          <!-- FUNDING SUBTYPE -->
+          @if (funding?.organizationDefinedFundingSubType?.subtype?.value) {
+            <ng-container
+              class="margin-top-1"
+              >
+              <app-display-attribute>
+                <h3
+                  class="orc-font-body-small"
+                  i18n="@@funding.organizationDefinedFundingSubType"
+                  >
         Funding subtype
       </h3>
-      <div>
-        {{ funding.organizationDefinedFundingSubType.subtype.value }}
-      </div>
-    </app-display-attribute>
-  </ng-container>
-  <!-- AMOUNT -->
-  <ng-container class="margin-top-1" *ngIf="funding?.amount?.value">
-    <app-display-attribute>
-      <h3 class="orc-font-body-small" i18n="@@funding.amount">
+                <div>
+                  {{ funding.organizationDefinedFundingSubType.subtype.value }}
+                </div>
+              </app-display-attribute>
+            </ng-container>
+          }
+          <!-- AMOUNT -->
+          @if (funding?.amount?.value) {
+            <ng-container class="margin-top-1">
+              <app-display-attribute>
+                <h3 class="orc-font-body-small" i18n="@@funding.amount">
         Total funding amount
       </h3>
-      <div>
-        <ng-container *ngIf="funding?.currencyCode?.value">{{
-          funding.currencyCode.value
-        }}</ng-container>
-        {{ funding.amount.value }}
-      </div>
-    </app-display-attribute>
-  </ng-container>
-  <!-- TRANSLATED TITLE -->
-  <ng-container
-    class="margin-top-1"
-    *ngIf="funding?.fundingTitle?.translatedTitle?.content"
-  >
-    <app-display-attribute>
-      <div class="row">
-        <span class="translated-title-label orc-font-body-small">
-          <ng-container i18n="@@funding.translatedTitle"
-            >Translated title</ng-container
-          >&nbsp;</span
-        >
-        <ng-container
-          *ngIf="funding.fundingTitle.translatedTitle?.languageCode"
-        >
-          ({{
-            getLanguageValue(
-              funding.fundingTitle.translatedTitle?.languageCode
-            )
-          }})
-        </ng-container>
-      </div>
-      <div>
-        {{ funding.fundingTitle.translatedTitle.content }}
-      </div>
-    </app-display-attribute>
-  </ng-container>
-  <!-- DESCRIPTION -->
-  <ng-container class="margin-top-1" *ngIf="funding?.description?.value">
-    <app-display-attribute>
-      <h3 class="orc-font-body-small" i18n="@@funding.description">
+                <div>
+                  @if (funding?.currencyCode?.value) {
+                    {{
+                    funding.currencyCode.value
+                    }}
+                  }
+                  {{ funding.amount.value }}
+                </div>
+              </app-display-attribute>
+            </ng-container>
+          }
+          <!-- TRANSLATED TITLE -->
+          @if (funding?.fundingTitle?.translatedTitle?.content) {
+            <ng-container
+              class="margin-top-1"
+              >
+              <app-display-attribute>
+                <div class="row">
+                  <span class="translated-title-label orc-font-body-small">
+                    <ng-container i18n="@@funding.translatedTitle"
+                      >Translated title</ng-container
+                      >&nbsp;</span
+                      >
+                      @if (funding.fundingTitle.translatedTitle?.languageCode) {
+                        ({{
+                        getLanguageValue(
+                        funding.fundingTitle.translatedTitle?.languageCode
+                        )
+                        }})
+                      }
+                    </div>
+                    <div>
+                      {{ funding.fundingTitle.translatedTitle.content }}
+                    </div>
+                  </app-display-attribute>
+                </ng-container>
+              }
+              <!-- DESCRIPTION -->
+              @if (funding?.description?.value) {
+                <ng-container class="margin-top-1">
+                  <app-display-attribute>
+                    <h3 class="orc-font-body-small" i18n="@@funding.description">
         Description
       </h3>
-      <div [innerText]="funding.description.value"></div>
-    </app-display-attribute>
-  </ng-container>
-
-  <!-- CONTRIBUTORS -->
-  <ng-container class="margin-top-1" *ngIf="funding?.contributors?.length > 0">
-    <app-display-attribute>
-      <h3 class="orc-font-body-small" i18n="@@funding.contributors">
+                    <div [innerText]="funding.description.value"></div>
+                  </app-display-attribute>
+                </ng-container>
+              }
+              <!-- CONTRIBUTORS -->
+              @if (funding?.contributors?.length > 0) {
+                <ng-container class="margin-top-1">
+                  <app-display-attribute>
+                    <h3 class="orc-font-body-small" i18n="@@funding.contributors">
         Contributors
       </h3>
-      <div>
-        <div
-          *ngFor="let contributor of funding.contributors"
-          class="padding-level-3"
-        >
-          <ng-container *ngIf="contributor?.creditName?.value">{{
-            contributor.creditName.value
-          }}</ng-container>
-          {{ contributor | contributorsPipe }}
-          <ng-container *ngIf="contributor?.orcid">
-            <a
-              class="underline"
-              target="_blank"
-              rel="noreferrer noopener"
-              href="{{ contributor.uri.value }}"
-              >{{ contributor.orcid.value }}</a
-            >)
-          </ng-container>
-        </div>
-      </div>
-    </app-display-attribute>
-  </ng-container>
-
-  <!-- ADDED DATE-->
-  <app-display-attribute>
-    <h3 class="orc-font-body-small" i18n="@@shared.added">Added</h3>
-    <div>
-      {{ funding?.createdDate | monthDayYearDateToString }}
-    </div>
-  </app-display-attribute>
-
-  <!-- LAST MODIFIED  DATE-->
-  <app-display-attribute>
-    <h3 class="orc-font-body-small" i18n="@@shared.lastModified">
+                    <div>
+                      @for (contributor of funding.contributors; track contributor) {
+                        <div
+                          class="padding-level-3"
+                          >
+                          @if (contributor?.creditName?.value) {
+                            {{
+                            contributor.creditName.value
+                            }}
+                          }
+                          {{ contributor | contributorsPipe }}
+                          @if (contributor?.orcid) {
+                            <a
+                              class="underline"
+                              target="_blank"
+                              rel="noreferrer noopener"
+                              href="{{ contributor.uri.value }}"
+                              >{{ contributor.orcid.value }}</a
+                              >)
+                            }
+                          </div>
+                        }
+                      </div>
+                    </app-display-attribute>
+                  </ng-container>
+                }
+                <!-- ADDED DATE-->
+                <app-display-attribute>
+                  <h3 class="orc-font-body-small" i18n="@@shared.added">Added</h3>
+                  <div>
+                    {{ funding?.createdDate | monthDayYearDateToString }}
+                  </div>
+                </app-display-attribute>
+                <!-- LAST MODIFIED  DATE-->
+                <app-display-attribute>
+                  <h3 class="orc-font-body-small" i18n="@@shared.lastModified">
       Last modified
     </h3>
-    <div>{{ funding?.lastModified | monthDayYearDateToString }}</div>
-  </app-display-attribute>
-</app-panel-data>
+                  <div>{{ funding?.lastModified | monthDayYearDateToString }}</div>
+                </app-display-attribute>
+              </app-panel-data>
+            }

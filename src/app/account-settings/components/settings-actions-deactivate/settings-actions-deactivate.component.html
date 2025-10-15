@@ -30,7 +30,7 @@
       rel="noopener noreferrer"
       class="underline"
       id="cy-lear-more-about-deactivating"
-    >
+      >
       Learn more about deactivating an ORCID account
     </a>
   </p>
@@ -44,66 +44,68 @@
     <ng-container i18n="@@account.ifYouHaveAccidentally">
       If you have accidentally created multiple ORCID accounts you can always
       remove the duplicates instead of deactivating them.</ng-container
-    >
+      >
 
-    <a
-      i18n="@@account.accountSettings"
-      [routerLink]="removeDuplicateUrl"
-      fragment="remove-duplicate"
-      class="underline"
-      id="cy-remove-duplicated-record"
-      >Account settings > Remove duplicate record
+      <a
+        i18n="@@account.accountSettings"
+        [routerLink]="removeDuplicateUrl"
+        fragment="remove-duplicate"
+        class="underline"
+        id="cy-remove-duplicated-record"
+        >Account settings > Remove duplicate record
     </a>
-  </p>
-  <p>
-    <a
-      href="https://support.orcid.org/hc/en-us/articles/360006896634"
-      target="_blank"
-      rel="noopener noreferrer"
-      i18n="@@account.learMoreAbout"
-      class="underline"
-      id="cy-learn-more-about-removing-duplicated"
-      >Learn more about removing duplicate records</a
-    >
-  </p>
-  <label class="row">
-    <strong i18n="@@account.readtyToDeactivate">
+    </p>
+    <p>
+      <a
+        href="https://support.orcid.org/hc/en-us/articles/360006896634"
+        target="_blank"
+        rel="noopener noreferrer"
+        i18n="@@account.learMoreAbout"
+        class="underline"
+        id="cy-learn-more-about-removing-duplicated"
+        >Learn more about removing duplicate records</a
+        >
+      </p>
+      <label class="row">
+        <strong i18n="@@account.readtyToDeactivate">
       Ready to deactivate your account?
     </strong>
-  </label>
-  <ul>
-    <li i18n="@@account.deactivate1">
+      </label>
+      <ul>
+        <li i18n="@@account.deactivate1">
       1. Start the deactivation process by clicking on the "Deactivate ORCID
       account" button below
     </li>
-    <li i18n="@@account.deactivate2">
+        <li i18n="@@account.deactivate2">
       2. ORCID will send a deactivation email to the primary email address
       associated with this account
     </li>
-    <li i18n="@@account.deactivate3">
+        <li i18n="@@account.deactivate3">
       3. Click the confirmation link provided in the email to deactivate your
       ORCID account
     </li>
-  </ul>
+      </ul>
 
-  <div class="button-container">
-    <button
-      (click)="deactivateOrcidAccount()"
-      mat-raised-button
-      color="warn"
-      i18n="@@account.deactivateOrcidAcc"
-      id="cy-deactivate-account"
-      [disabled]="alreadySendedDeactivatedAccountRequest || (loading | async)"
-    >
+      <div class="button-container">
+        <button
+          (click)="deactivateOrcidAccount()"
+          mat-raised-button
+          color="warn"
+          i18n="@@account.deactivateOrcidAcc"
+          id="cy-deactivate-account"
+          [disabled]="alreadySendedDeactivatedAccountRequest || (loading | async)"
+          >
       Deactivate ORCID account
     </button>
-  </div>
-  <app-alert-message *ngIf="deactivatedEmail">
-    <div content>
-      <ng-container i18n="@@account.andEmailDeactivateWasSend">
+      </div>
+      @if (deactivatedEmail) {
+        <app-alert-message>
+          <div content>
+            <ng-container i18n="@@account.andEmailDeactivateWasSend">
         An account deactivation email has been sent to
       </ng-container>
-      <strong> {{ deactivatedEmail }} </strong>
-    </div>
-  </app-alert-message>
-</app-settings-panels-data>
+            <strong> {{ deactivatedEmail }} </strong>
+          </div>
+        </app-alert-message>
+      }
+    </app-settings-panels-data>

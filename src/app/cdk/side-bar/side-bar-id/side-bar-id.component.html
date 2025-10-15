@@ -6,7 +6,7 @@
       }"
       src="assets/vectors/orcid.logo.icon.svg"
       alt="orcid logo"
-    />
+      />
   </div>
   <div class="text-container">
     <div
@@ -16,7 +16,7 @@
         'orc-font-body-large': platform.columns12
       }"
       dir="ltr"
-    >
+      >
       <span>{{ 'https:' + environment.BASE_URL }}</span>
       <h3
         class="orcid-id"
@@ -24,20 +24,21 @@
           'orc-font-body-large': !platform.columns12,
           'orc-font-heading-small': platform.columns12
         }"
-      >
+        >
         {{ id }}
       </h3>
     </div>
   </div>
-  <a
-    [href]="id"
-    [attr.aria-label]="labelPreviewRecord"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="preview orc-font-small-print"
-    *ngIf="privateView"
-    i18n="@@record.previewPublicRecord"
-    [attr.aria-label]="labelPreviewPublicRecord"
-    >Preview public record</a
-  >
-</div>
+  @if (privateView) {
+    <a
+      [href]="id"
+      [attr.aria-label]="labelPreviewRecord"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="preview orc-font-small-print"
+      i18n="@@record.previewPublicRecord"
+      [attr.aria-label]="labelPreviewPublicRecord"
+      >Preview public record</a
+      >
+    }
+  </div>

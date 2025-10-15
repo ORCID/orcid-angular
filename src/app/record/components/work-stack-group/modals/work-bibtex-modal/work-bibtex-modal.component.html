@@ -2,158 +2,178 @@
   <app-modal-header>
     <ng-container i18n="@@works.importBibTex">
       Works - Import BibTeX</ng-container
-    >
-  </app-modal-header>
-  <app-modal-footer *ngIf="worksFromBibtex.length > 0 && !loadingWorks">
-    <button
-      mat-raised-button
-      color="primary"
-      (click)="saveEvent()"
-      id="cy-import-works"
-    >
-      <ng-container i18n="@@works.importWorks">
+      >
+    </app-modal-header>
+    @if (worksFromBibtex.length > 0 && !loadingWorks) {
+      <app-modal-footer>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="saveEvent()"
+          id="cy-import-works"
+          >
+          <ng-container i18n="@@works.importWorks">
         Import works to your record
       </ng-container>
-    </button>
-    <button
-      mat-stroked-button
-      color="primary"
-      (click)="closeEvent()"
-      i18n="@@shared.cancel"
-      id="cancel-button"
-    >
+        </button>
+        <button
+          mat-stroked-button
+          color="primary"
+          (click)="closeEvent()"
+          i18n="@@shared.cancel"
+          id="cancel-button"
+          >
       Cancel
     </button>
-  </app-modal-footer>
-  <div class="row">
-    <div class="orc-font-small-print">
-      <p i18n="@@works.importCitations">
+      </app-modal-footer>
+    }
+    <div class="row">
+      <div class="orc-font-small-print">
+        <p i18n="@@works.importCitations">
         Import citations from BibTex (.bib) files, including files exported from
         Google Scholar.
       </p>
-      <a
-        class="underline"
-        href="https://support.orcid.org/hc/en-us/articles/360006894794-Importing-works-from-a-BibTeX-file"
-        i18n="@@works.moreInformation"
-        rel="noopener noreferrer"
-        target="_blank"
-      >
+        <a
+          class="underline"
+          href="https://support.orcid.org/hc/en-us/articles/360006894794-Importing-works-from-a-BibTeX-file"
+          i18n="@@works.moreInformation"
+          rel="noopener noreferrer"
+          target="_blank"
+          >
         More information on importing BibTeX files into ORCID
       </a>
+      </div>
     </div>
-  </div>
-  <div class="col l6 choose-bibtex" *ngIf="worksFromBibtex.length === 0">
-    <input
-      #bibTexInput
-      [hidden]="true"
-      type="file"
-      onclick="this.value=null"
-      (change)="bibTexInputChange($event)"
-      accept=".bib"
-    />
-    <button
-      mat-raised-button
-      color="primary"
-      (click)="bibTexInput.click()"
-      i18n="@@works.chooseBibTex"
-    >
+    @if (worksFromBibtex.length === 0) {
+      <div class="col l6 choose-bibtex">
+        <input
+          #bibTexInput
+          [hidden]="true"
+          type="file"
+          onclick="this.value=null"
+          (change)="bibTexInputChange($event)"
+          accept=".bib"
+          />
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="bibTexInput.click()"
+          i18n="@@works.chooseBibTex"
+          >
       Choose BibTeX file to import
     </button>
-  </div>
-  <div
-    class="row bibtex-error"
-    *ngIf="bibtexErrorParsing || bibtexErrorNoEntries"
-  >
-    <mat-error class="mat-caption">
-      <ng-container
-        i18n="@@works.bibtexImporterParsingError"
-        *ngIf="bibtexErrorParsing"
-      >
+      </div>
+    }
+    @if (bibtexErrorParsing || bibtexErrorNoEntries) {
+      <div
+        class="row bibtex-error"
+        >
+        <mat-error class="mat-caption">
+          @if (bibtexErrorParsing) {
+            <ng-container
+              i18n="@@works.bibtexImporterParsingError"
+              >
         This file cannot be read. Please check the BibTeX formatting and try
         again.
       </ng-container>
-      <ng-container i18n="@@works.noBibtexEntries" *ngIf="bibtexErrorNoEntries">
+          }
+          @if (bibtexErrorNoEntries) {
+            <ng-container i18n="@@works.noBibtexEntries">
         Error parsing Bibtex. No Bibtex entries found in file
       </ng-container>
-    </mat-error>
-  </div>
-  <div class="row bibtex-error" *ngIf="bibtexErrorParsing">
-    <code>{{ bibtexErrorParsingText }}</code>
-  </div>
-  <ng-container *ngIf="worksFromBibtex.length > 0 && !loadingWorks">
-    <div class="row">
-      <h3>
-        <ng-container i18n="@@works.foundInBibTex">
+          }
+        </mat-error>
+      </div>
+    }
+    @if (bibtexErrorParsing) {
+      <div class="row bibtex-error">
+        <code>{{ bibtexErrorParsingText }}</code>
+      </div>
+    }
+    @if (worksFromBibtex.length > 0 && !loadingWorks) {
+      <div class="row">
+        <h3>
+          <ng-container i18n="@@works.foundInBibTex">
           Works found in BibTeX
         </ng-container>
-        ({{ worksFromBibtex.length }})
-      </h3>
-      <mat-divider class="row orcid-divider"></mat-divider>
-      <div class="row">
+          ({{ worksFromBibtex.length }})
+        </h3>
+        <mat-divider class="row orcid-divider"></mat-divider>
         <div class="row">
-          <p>
-            <mat-checkbox
-              (change)="updateCheckAll()"
-              [(ngModel)]="selectAll"
-              [attr.disabled]="isAnInvalidWork"
-            >
-              <ng-container
-                i18n="@@shared.selectAll"
-                *ngIf="selectedWorks.length === 0"
-              >
+          <div class="row">
+            <p>
+              <mat-checkbox
+                (change)="updateCheckAll()"
+                [(ngModel)]="selectAll"
+                [attr.disabled]="isAnInvalidWork"
+                >
+                @if (selectedWorks.length === 0) {
+                  <ng-container
+                    i18n="@@shared.selectAll"
+                    >
                 Select all
               </ng-container>
-              <ng-container *ngIf="selectedWorks.length > 0">
-                ({{ selectedWorks.length }})
-                <ng-container i18n="@@shared.selected">Selected</ng-container>
-              </ng-container>
-            </mat-checkbox>
-          </p>
-        </div>
-      </div>
-      <mat-divider class="row"></mat-divider>
-      <div
-        class="row"
-        [formGroup]="importForm"
-        *ngIf="worksFromBibtex.length > 0 && !loadingWorks"
-      >
-        <ng-container *ngFor="let work of worksFromBibtex">
-          <div class="row work-info" [formGroupName]="work.putCode.value">
-            <div class="row">
-              <mat-checkbox
-                (change)="updateCheck(work)"
-                formControlName="checked"
-                [attr.disabled]="work?.errors?.length > 0"
-              >
-                <h2 class="orc-font-body" *ngIf="work?.title?.value">
-                  {{ work?.title?.value }}
-                </h2>
-                <p class="orc-font-body-small">
-                  {{ work?.journalTitle?.value }}
-                </p>
-                <p class="orc-font-body-small">
-                  {{ work?.publicationDate | monthDayYearDateToString }}
-                  <span *ngIf="work.publicationDate"> | </span>
-                  {{ work?.workType?.value }}
-                </p>
-                <app-display-external-ids
-                  [externalIdentifiers]="work?.workExternalIdentifiers"
-                ></app-display-external-ids>
-                <p class="orc-font-body-small" *ngIf="work?.url">
-                  <span class="prefixTitle" i18n="@@works.urlColon">URL:</span>
-                  <a href="{{ work?.url?.value }}" target="_blank">
-                    {{ work?.url?.value }}</a
-                  >
-                </p>
+                }
+                @if (selectedWorks.length > 0) {
+                  ({{ selectedWorks.length }})
+                  <ng-container i18n="@@shared.selected">Selected</ng-container>
+                }
               </mat-checkbox>
-            </div>
-            <mat-error *ngIf="work?.errors" class="bibtex-error mat-caption">
-              {{ work.errors }}
-            </mat-error>
+            </p>
           </div>
-          <mat-divider class="row"></mat-divider>
-        </ng-container>
-      </div>
-    </div>
-  </ng-container>
-</app-modal>
+        </div>
+        <mat-divider class="row"></mat-divider>
+        @if (worksFromBibtex.length > 0 && !loadingWorks) {
+          <div
+            class="row"
+            [formGroup]="importForm"
+            >
+            @for (work of worksFromBibtex; track work) {
+              <div class="row work-info" [formGroupName]="work.putCode.value">
+                <div class="row">
+                  <mat-checkbox
+                    (change)="updateCheck(work)"
+                    formControlName="checked"
+                    [attr.disabled]="work?.errors?.length > 0"
+                    >
+                    @if (work?.title?.value) {
+                      <h2 class="orc-font-body">
+                        {{ work?.title?.value }}
+                      </h2>
+                    }
+                    <p class="orc-font-body-small">
+                      {{ work?.journalTitle?.value }}
+                    </p>
+                    <p class="orc-font-body-small">
+                      {{ work?.publicationDate | monthDayYearDateToString }}
+                      @if (work.publicationDate) {
+                        <span> | </span>
+                      }
+                      {{ work?.workType?.value }}
+                    </p>
+                    <app-display-external-ids
+                      [externalIdentifiers]="work?.workExternalIdentifiers"
+                    ></app-display-external-ids>
+                    @if (work?.url) {
+                      <p class="orc-font-body-small">
+                        <span class="prefixTitle" i18n="@@works.urlColon">URL:</span>
+                        <a href="{{ work?.url?.value }}" target="_blank">
+                          {{ work?.url?.value }}</a
+                          >
+                        </p>
+                      }
+                    </mat-checkbox>
+                  </div>
+                  @if (work?.errors) {
+                    <mat-error class="bibtex-error mat-caption">
+                      {{ work.errors }}
+                    </mat-error>
+                  }
+                </div>
+                <mat-divider class="row"></mat-divider>
+              }
+            </div>
+          }
+        </div>
+      }
+    </app-modal>

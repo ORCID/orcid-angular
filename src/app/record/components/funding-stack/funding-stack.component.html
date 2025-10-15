@@ -1,64 +1,61 @@
-<ng-container
-  *ngFor="
-    let funding of fundingStack?.fundings;
-    let i = index;
-    let last = last;
-    trackBy: trackByFundingStack
-  "
->
+@for (
+  funding of fundingStack?.fundings; track trackByFundingStack(i,
+  funding); let i = $index; let last = $last) {
   <!-- A PANEL COMPONENT FOR EACH FUNDING ON THE STACK -->
-  <app-panel
-    panelId="funding-stack"
-    [userRecord]="userRecord"
-    [stackSiblings]="fundingStack.fundings"
-    [editableVisibilityControl]="isPreferred(funding)"
-    [elements]="funding"
-    [editModalComponent]="modalFundingComponent"
-    [ngStyle]="{ 'z-index': fundingStack.fundings.length - i }"
-    [ngClass]="{ last: last }"
-    [visibility]="fundingStack.defaultFunding.visibility.visibility"
-    [isPublicRecord]="isPublicRecord"
-    [putCode]="funding.putCode.value"
-    [isUserSource]="userIsSource(funding)"
-    [hasExternalIds]="hasExternalIds"
-    [userVersionPresent]="fundingStack.userVersionPresent"
-    [(displayTheStack)]="displayTheStack"
-    *ngIf="isPreferred(funding) || displayTheStack"
-    type="funding"
-    [panelTitle]="funding.fundingTitle.title.value"
-  >
-    <h4 header class="funding-title orc-font-body">
-      {{ funding.fundingTitle.title.value }}
-    </h4>
-    <!-- FUNDING BODY -->
-    <app-funding
-      *ngIf="stackPanelsDisplay[funding.putCode.value].topPanelOfTheStack"
-      [orgDisambiguated]="orgDisambiguated[funding.putCode.value]"
-      [funding]="funding"
-      [panelDetailsState]="panelDetailsState[funding.putCode.value]"
-      (toggleDetails)="toggleDetails($event)"
-    >
-    </app-funding>
-    <!-- FUNDING SOURCE -->
-    <app-panel-source
+  @if (isPreferred(funding) || displayTheStack) {
+    <app-panel
+      panelId="funding-stack"
       [userRecord]="userRecord"
-      [isPreferred]="isPreferred(funding)"
-      [sourceName]="funding.sourceName || funding.source"
-      [assertionOriginName]="funding.assertionOriginName"
-      [assertionOriginClientId]="funding.assertionOriginClientId"
-      [assertionOriginOrcid]="funding.assertionOriginOrcid"
-      [stackLength]="fundingStack.fundings.length"
+      [stackSiblings]="fundingStack.fundings"
+      [editableVisibilityControl]="isPreferred(funding)"
+      [elements]="funding"
+      [editModalComponent]="modalFundingComponent"
+      [ngStyle]="{ 'z-index': fundingStack.fundings.length - i }"
+      [ngClass]="{ last: last }"
+      [visibility]="fundingStack.defaultFunding.visibility.visibility"
+      [isPublicRecord]="isPublicRecord"
+      [putCode]="funding.putCode.value"
+      [isUserSource]="userIsSource(funding)"
+      [hasExternalIds]="hasExternalIds"
+      [userVersionPresent]="fundingStack.userVersionPresent"
       [(displayTheStack)]="displayTheStack"
-      (makePrimary)="makePrimaryCard(funding)"
+      type="funding"
+      [panelTitle]="funding.fundingTitle.title.value"
+      >
+      <h4 header class="funding-title orc-font-body">
+        {{ funding.fundingTitle.title.value }}
+      </h4>
+      <!-- FUNDING BODY -->
+      @if (stackPanelsDisplay[funding.putCode.value].topPanelOfTheStack) {
+        <app-funding
+          [orgDisambiguated]="orgDisambiguated[funding.putCode.value]"
+          [funding]="funding"
+          [panelDetailsState]="panelDetailsState[funding.putCode.value]"
+          (toggleDetails)="toggleDetails($event)"
+          >
+        </app-funding>
+      }
+      <!-- FUNDING SOURCE -->
+      <app-panel-source
+        [userRecord]="userRecord"
+        [isPreferred]="isPreferred(funding)"
+        [sourceName]="funding.sourceName || funding.source"
+        [assertionOriginName]="funding.assertionOriginName"
+        [assertionOriginClientId]="funding.assertionOriginClientId"
+        [assertionOriginOrcid]="funding.assertionOriginOrcid"
+        [stackLength]="fundingStack.fundings.length"
+        [(displayTheStack)]="displayTheStack"
+        (makePrimary)="makePrimaryCard(funding)"
       [topPanelOfTheStackMode]="
         stackPanelsDisplay[funding.putCode.value].topPanelOfTheStack
       "
-      [isPublicRecord]="isPublicRecord"
-      (topPanelOfTheStackModeChange)="changeTopPanelOfTheStack(funding)"
-      [type]="'funding'"
-      [item]="funding"
-      [panelTitle]="funding.fundingTitle.title.value"
-    >
-    </app-panel-source>
-  </app-panel>
-</ng-container>
+        [isPublicRecord]="isPublicRecord"
+        (topPanelOfTheStackModeChange)="changeTopPanelOfTheStack(funding)"
+        [type]="'funding'"
+        [item]="funding"
+        [panelTitle]="funding.fundingTitle.title.value"
+        >
+      </app-panel-source>
+    </app-panel>
+  }
+}
