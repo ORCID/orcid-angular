@@ -25,6 +25,7 @@ export class PanelExpandButtonsComponent implements OnInit {
     | 'distinction'
     | 'membership'
     | 'service'
+    | 'editorial-service'
     | 'peer-review'
     | 'sub-peer-review'
     | 'main'

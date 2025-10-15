@@ -48,6 +48,8 @@ export const ORCID_URI_REGEXP =
 // https://regex101.com/r/M1fqZi/1
 export const URL_REGEXP =
   /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#%[\]@!\$&'\(\)\*\+\\,;=.>< ]+$/i
+// ISSN pattern 1234-5678
+export const ISSN_REGEXP = /^\d{4}-\d{4}$/
 /* PROTOCOL REQUIRED*/
 // https://regex101.com/r/pSnDC7/1
 export const URL_REGEXP_BACKEND =
@@ -369,6 +371,8 @@ export function getAriaLabel(
           return $localize`:@@shared.dialogAriaLabeledByMembership:Manage membership dialog`
         case 'service':
           return $localize`:@@shared.dialogAriaLabeledByService:Manage service dialog`
+        case 'editorial-service':
+          return $localize`:@@shared.dialogAriaLabeledByEditorialService:Manage editorial service dialog`
       }
     case WorkBibtexModalComponent:
       return $localize`:@@shared.dialogAriaLabeledByBibtex:Manage bibtex dialog`

@@ -33,7 +33,7 @@ export class AppPanelsSortAriaLabelPipe implements PipeTransform {
         $localize`:@@shared.distinctionInvitedPositionSortAriaLabel:Sort your invited positions and distinctions` +
         disabledStr
       )
-    } else if (panelType === 'membership' || panelType === 'service') {
+    } else if (panelType === 'membership' || panelType === 'service' || panelType === 'editorial-service') {
       return (
         $localize`:@@shared.membershipServiceSortAriaLabel:Sort your membership and services` +
         disabledStr
