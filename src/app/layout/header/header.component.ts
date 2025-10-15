@@ -1,11 +1,21 @@
 import { Location } from '@angular/common'
-import { Component, Inject, Input, OnInit } from '@angular/core'
+import {
+  Component,
+  Inject,
+  Input,
+  OnInit,
+  HostListener,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+} from '@angular/core'
 import { NavigationStart, Router } from '@angular/router'
-import { filter, switchMap, tap } from 'rxjs/operators'
+import { filter, map, switchMap, tap } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { UserService } from 'src/app/core'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
+import { TogglzFlag } from 'src/app/core/togglz/togglz-flags.enum'
 import { ApplicationMenuItem, UserInfo } from 'src/app/types'
 import {
   ApplicationMenuItemBasic,
@@ -13,8 +23,9 @@ import {
 } from 'src/app/types/menu.local'
 import { Config } from 'src/app/types/togglz.endpoint'
 
-import { ApplicationRoutes, ORCID_REGEXP } from '../../constants'
+import { ApplicationRoutes, isValidOrcidFormat } from '../../constants'
 import { menu } from './menu'
+import { of } from 'rxjs'
 
 @Component({
   selector: 'app-header',
@@ -22,7 +33,7 @@ import { menu } from './menu'
   styleUrls: ['./header.component.scss-theme.scss', './header.component.scss'],
   standalone: false,
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, AfterViewInit {
   hideMainMenu = false
   _currentRoute: string
   notWordpressDisplay: boolean
@@ -42,10 +53,18 @@ export class HeaderComponent implements OnInit {
   labelLogo = $localize`:@@layout.ariaLabelConnectingResearchers:Connecting research and researchers`
   labelMenu = $localize`:@@layout.ariaLabelMenu:main menu`
 
+  // Compact header (feature-flagged) state
+  compactFeatureEnabled = false // feature flag
+  compactEligible = false // flag + is a public page
+  isCompactActive = false // scroll-based state
+  @ViewChild('headerEl') headerEl: ElementRef<HTMLElement>
+  private expandedHeaderHeight = 0 // snapshot of header height in expanded state
+
   constructor(
     private _router: Router,
     _platform: PlatformInfoService,
     @Inject(WINDOW) private window: Window,
+    private _hostEl: ElementRef<HTMLElement>,
     _userInfo: UserService,
     _togglz: TogglzService,
     location: Location,
@@ -60,6 +79,12 @@ export class HeaderComponent implements OnInit {
 
     _platform.get().subscribe((data) => {
       this.platform = data
+      // Recalculate scroll state when platform (breakpoint) changes
+      this.updateCompactScrollState()
+      // Refresh snapshot when not compact to keep compensation accurate
+      if (!this.isCompactActive) {
+        this.measureExpandedHeaderHeight()
+      }
     })
     _userInfo.getUserSession().subscribe((data) => {
       this.user = data.userInfo
@@ -68,10 +93,23 @@ export class HeaderComponent implements OnInit {
       this.togglz = data
     })
     _togglz
-      .getStateOf('WORDPRESS_HOME_PAGE')
+      .getStateOf(TogglzFlag.WORDPRESS_HOME_PAGE)
       .pipe(
         tap((state) => {
           this.notWordpressDisplay = !state
+        })
+      )
+      .subscribe()
+
+    // Subscribe to compact header feature flag
+    _togglz
+      .getStateOf(TogglzFlag.HEADER_COMPACT)
+      .pipe(
+        tap((state) => {
+          this.compactFeatureEnabled = state
+          // Re-evaluate eligibility and scroll state on flag changes
+          this.updateCompactEligibilityFromPath(this._router.url)
+          this.updateCompactScrollState()
         })
       )
       .subscribe()
@@ -82,10 +120,23 @@ export class HeaderComponent implements OnInit {
         path !== `/${ApplicationRoutes.signin}` &&
         path !== `/${ApplicationRoutes.register}`
       this.hideMainMenu = path.indexOf(`/${ApplicationRoutes.home}`) !== -1
+      // Re-evaluate eligibility on route changes and update scroll state
+      this.updateCompactEligibilityFromPath(this._router.url)
+      this.updateCompactScrollState()
     })
   }
 
   ngOnInit() {}
+
+  ngAfterViewInit() {
+    // Snapshot the expanded header height after first render
+    Promise.resolve().then(() => this.measureExpandedHeaderHeight())
+  }
+
+  @HostListener('window:scroll')
+  onWindowScroll() {
+    this.updateCompactScrollState()
+  }
 
   mouseLeave() {
     if (this.platform.columns12) {
@@ -104,6 +155,66 @@ export class HeaderComponent implements OnInit {
         button.hover = '/' + button.route === this.currentRoute
       }
     })
+  }
+
+  private updateCompactEligibilityFromPath(path: string) {
+    // Derive first segment (base path) without query/hash
+    const clean = (path || '/').split('?')[0].split('#')[0]
+    const base = clean.split('/')[1] || ''
+    this.compactEligible =
+      this.compactFeatureEnabled && isValidOrcidFormat(base)
+  }
+
+  private updateCompactScrollState() {
+    if (!this.compactEligible) {
+      this.isCompactActive = false
+      return
+    }
+    const threshold = this.platform && this.platform.columns12 ? 142 : 138
+    const y =
+      (this.window &&
+        (this.window.scrollY || (this.window as any).pageYOffset)) ||
+      0
+    // When the header toggles compact state, its height changes which
+    // modifies the browser's scrollY.
+    // We compensate by adding the difference between the expanded and compact header heights while compact is active.
+    const adjustedY = this.getAdjustedScrollY(y)
+    // Simple hysteresis to avoid jitter
+    const buffer = 3
+    const enter = threshold + buffer
+    const exit = threshold - buffer
+    const nextState = this.isCompactActive
+      ? adjustedY > exit
+      : adjustedY >= enter
+    if (nextState !== this.isCompactActive) {
+      this.isCompactActive = nextState
+    }
+  }
+
+  private getAdjustedScrollY(rawY: number): number {
+    // If we haven't measured the expanded height yet, use rawY.
+    if (!this.expandedHeaderHeight) return rawY
+    const compactHeight = 72
+    // Delta is the constant difference between expanded and compact heights.
+    const delta = Math.max(0, this.expandedHeaderHeight - compactHeight)
+    // Only compensate while compact is active
+    return this.isCompactActive ? rawY + delta : rawY
+  }
+
+  private measureExpandedHeaderHeight() {
+    // Measure only when not compact to capture the expanded state height accurately.
+    if (this.isCompactActive) return
+    // On mobile, use the entire component host (app-header) height so the
+    // measurement includes mobile-only elements outside the inner <header>.
+    if (!this.platform || !this.platform.columns12) {
+      this.expandedHeaderHeight =
+        this._hostEl.nativeElement.getBoundingClientRect().height
+      return
+    }
+    if (this.headerEl && this.headerEl.nativeElement) {
+      this.expandedHeaderHeight =
+        this.headerEl.nativeElement.getBoundingClientRect().height
+    }
   }
 
   click(treeLocation: string[], button: ApplicationMenuItem) {

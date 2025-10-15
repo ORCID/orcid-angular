@@ -13,6 +13,7 @@ import { LoginDomainInterstitialManagerService } from '../implementations/login-
 import { ShareEmailsDomainsDialogComponent } from 'src/app/cdk/interstitials/share-emails-domains/interstitial-dialog-extend/share-emails-domains-dialog.component'
 import { inject } from '@angular/core'
 import { WINDOW_PROVIDERS } from 'src/app/cdk/window'
+import { TogglzFlag } from '../../togglz/togglz-flags.enum'
 
 describe('LoginDomainInterstitialManagerService', () => {
   let service: LoginDomainInterstitialManagerService
@@ -59,8 +60,8 @@ describe('LoginDomainInterstitialManagerService', () => {
 
     it('should have the correct INTERSTITIAL_TOGGLE', () => {
       expect(service.INTERSTITIAL_TOGGLE).toEqual([
-        'LOGIN_DOMAINS_INTERSTITIAL',
-        'OAUTH_DOMAINS_INTERSTITIAL',
+        TogglzFlag.LOGIN_DOMAINS_INTERSTITIAL,
+        TogglzFlag.OAUTH_DOMAINS_INTERSTITIAL,
       ])
     })
 

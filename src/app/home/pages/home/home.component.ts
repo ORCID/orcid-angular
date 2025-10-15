@@ -4,6 +4,7 @@ import { WINDOW } from '../../../cdk/window'
 
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
+import { TogglzFlag } from 'src/app/core/togglz/togglz-flags.enum'
 import { switchMap, tap } from 'rxjs/operators'
 import { WordpressService } from 'src/app/core/wordpress/wordpress.service'
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
@@ -39,7 +40,7 @@ export class HomeComponent implements OnInit {
       this.platform = platformInfo
     })
     this.togglzService
-      .getStateOf('WORDPRESS_HOME_PAGE')
+      .getStateOf(TogglzFlag.WORDPRESS_HOME_PAGE)
       .pipe(
         switchMap((state) => {
           this.notWordpressDisplay = !state

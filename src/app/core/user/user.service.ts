@@ -53,6 +53,7 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { OauthService } from '../oauth/oauth.service'
 import { UserInfoService } from '../user-info/user-info.service'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
+import { TogglzFlag } from 'src/app/core/togglz/togglz-flags.enum'
 import { LOCAL_SESSION_UID } from 'src/app/constants'
 import { Params } from '@angular/router'
 import { CookieService } from 'ngx-cookie-service'
@@ -113,7 +114,7 @@ export class UserService {
   }>()
 
   public getUserStatus(): Observable<boolean> {
-    return this._togglz.getStateOf('OAUTH_SIGNIN').pipe(
+    return this._togglz.getStateOf(TogglzFlag.OAUTH_SIGNIN).pipe(
       take(1),
       switchMap((outhSiginFlag) => {
         let url = runtimeEnvironment.API_WEB + 'userStatus.json'
@@ -328,7 +329,7 @@ export class UserService {
     const $thirdPartyAuthData = this.getThirdPartySignInData()
 
     const $oauthAuthorizationEnabled = this._togglz
-      .getStateOf('OAUTH_AUTHORIZATION')
+      .getStateOf(TogglzFlag.OAUTH_AUTHORIZATION)
       .pipe(take(1))
 
     const $oauthSession = $oauthAuthorizationEnabled.pipe(

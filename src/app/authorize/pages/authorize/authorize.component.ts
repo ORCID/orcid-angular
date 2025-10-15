@@ -22,6 +22,7 @@ import { UserSession } from 'src/app/types/session.local'
 import { CdkPortalOutlet, ComponentPortal } from '@angular/cdk/portal'
 import { OauthURLSessionManagerService } from 'src/app/core/oauth-urlsession-manager/oauth-urlsession-manager.service'
 import { FeatureLoggerService } from 'src/app/core/logging/feature-logger.service'
+import { TogglzFlag } from 'src/app/core/togglz/togglz-flags.enum'
 
 @Component({
   templateUrl: './authorize.component.html',
@@ -69,7 +70,9 @@ export class AuthorizeComponent {
     let currentSession: UserSession | null = null
 
     forkJoin({
-      Oauth2: this.toglzService.getStateOf('OAUTH_AUTHORIZATION').pipe(take(1)),
+      Oauth2: this.toglzService
+        .getStateOf(TogglzFlag.OAUTH_AUTHORIZATION)
+        .pipe(take(1)),
       platform: this.loadPlatformInfo(),
       userSession: this.loadUserSession(),
     })
@@ -117,7 +120,7 @@ export class AuthorizeComponent {
    * Redirect after user authorization and (optionally) after interstitial
    */
   private finishRedirect(): Observable<boolean> {
-    return this.toglzService.getStateOf('OAUTH2_AUTHORIZATION').pipe(
+    return this.toglzService.getStateOf(TogglzFlag.OAUTH2_AUTHORIZATION).pipe(
       tap((useAuthServerFlag) => {
         if (useAuthServerFlag === true) {
           this.oauthUrlSessionManger.clear()
