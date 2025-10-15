@@ -1,7 +1,7 @@
 <button
   [ngClass]="{
     'not-editable': !editable,
-    mobile: mobile
+    mobile: mobile,
   }"
   [disabled]="!editable"
   mat-button
@@ -9,69 +9,69 @@
   class="main-menu"
   [attr.aria-label]="(itemTitle || '') + ' ' + mainButtonLabel"
 >
-  <mat-icon
-    *ngIf="mobile"
-    class="menu-icon"
-    [ngClass]="{
-      limitedIcon: privacy === 'LIMITED',
-      publicIcon: privacy === 'PUBLIC',
-      privateIcon: privacy === 'PRIVATE'
-    }"
-    >visibility</mat-icon
-  >
-  <div class="main-button-container" *ngIf="!mobile">
-    <div class="icon-title-container">
-      <mat-icon
-        class="menu-icon"
-        [ngClass]="{
-          limitedIcon: privacy === 'LIMITED',
-          publicIcon: privacy === 'PUBLIC',
-          privateIcon: privacy === 'PRIVATE'
-        }"
-        >visibility</mat-icon
-      >
-      <ng-container
-        *ngIf="privacy === 'PUBLIC'"
-        i18n="@@register.VisibilityEveryone"
-        >Everyone</ng-container
-      >
-      <ng-container *ngIf="privacy === 'LIMITED'" i18n="@@account.trusted"
-        >Trusted</ng-container
-      >
-      <ng-container
-        *ngIf="privacy === 'PRIVATE'"
-        i18n="@@register.VisibilityPrivate"
-        >Only me</ng-container
-      >
-    </div>
-    <mat-icon *ngIf="editable" class="arrow-drop-down"
-      >arrow_drop_down</mat-icon
+  @if (mobile) {
+    <mat-icon
+      class="menu-icon"
+      [ngClass]="{
+        limitedIcon: privacy === 'LIMITED',
+        publicIcon: privacy === 'PUBLIC',
+        privateIcon: privacy === 'PRIVATE',
+      }"
+      >visibility</mat-icon
     >
-  </div>
+  }
+  @if (!mobile) {
+    <div class="main-button-container">
+      <div class="icon-title-container">
+        <mat-icon
+          class="menu-icon"
+          [ngClass]="{
+            limitedIcon: privacy === 'LIMITED',
+            publicIcon: privacy === 'PUBLIC',
+            privateIcon: privacy === 'PRIVATE',
+          }"
+          >visibility</mat-icon
+        >
+        @if (privacy === 'PUBLIC') {
+          <ng-container i18n="@@register.VisibilityEveryone"
+            >Everyone</ng-container
+          >
+        }
+        @if (privacy === 'LIMITED') {
+          <ng-container i18n="@@account.trusted">Trusted</ng-container>
+        }
+        @if (privacy === 'PRIVATE') {
+          <ng-container i18n="@@register.VisibilityPrivate"
+            >Only me</ng-container
+          >
+        }
+      </div>
+      @if (editable) {
+        <mat-icon class="arrow-drop-down">arrow_drop_down</mat-icon>
+      }
+    </div>
+  }
 </button>
 <mat-menu #menu="matMenu">
   <div class="visibilityTitleContainer">
     <h1 class="orc-font-body" i18n="@@shared.setVisibilityFor">
       Set visibility for
     </h1>
-    <i
-      class="orc-font-body-small"
-      *ngIf="multiEdit === 'single'"
-      i18n="@@shared.thisItemOnly"
-      >This item only</i
-    >
-    <i
-      class="orc-font-body-small"
-      *ngIf="multiEdit === 'multi'"
-      i18n="@@shared.allItemsInThisGroup"
-      >All items in this group</i
-    >
-    <i
-      class="orc-font-body-small"
-      *ngIf="multiEdit === 'selected'"
-      i18n="@@shared.selectedItemsForVisibility"
-      >Selected items
-    </i>
+    @if (multiEdit === 'single') {
+      <i class="orc-font-body-small" i18n="@@shared.thisItemOnly"
+        >This item only</i
+      >
+    }
+    @if (multiEdit === 'multi') {
+      <i class="orc-font-body-small" i18n="@@shared.allItemsInThisGroup"
+        >All items in this group</i
+      >
+    }
+    @if (multiEdit === 'selected') {
+      <i class="orc-font-body-small" i18n="@@shared.selectedItemsForVisibility"
+        >Selected items
+      </i>
+    }
   </div>
   <button
     [disabled]="disableOptions['PUBLIC']"
@@ -82,7 +82,7 @@
     (click)="public()"
     [ngClass]="{
       noSelectedMenu: privacy !== 'PUBLIC' || visibilityError,
-      selectedMenu: privacy === 'PUBLIC' && !visibilityError
+      selectedMenu: privacy === 'PUBLIC' && !visibilityError,
     }"
     class="public-button cy-visibility-public flex-menu-item"
   >
@@ -122,7 +122,7 @@
     (click)="limited()"
     [ngClass]="{
       noSelectedMenu: privacy !== 'LIMITED' || visibilityError,
-      selectedMenu: privacy === 'LIMITED' && !visibilityError
+      selectedMenu: privacy === 'LIMITED' && !visibilityError,
     }"
     class="limited-button cy-visibility-limited flex-menu-item"
   >
@@ -155,7 +155,7 @@
     class="private-button cy-visibility-private flex-menu-item"
     [ngClass]="{
       noSelectedMenu: privacy !== 'PRIVATE' || visibilityError,
-      selectedMenu: privacy === 'PRIVATE' && !visibilityError
+      selectedMenu: privacy === 'PRIVATE' && !visibilityError,
     }"
   >
     <div class="icon-circle icon-private">

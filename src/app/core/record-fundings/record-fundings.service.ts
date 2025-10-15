@@ -105,14 +105,9 @@ export class RecordFundingsService {
     options: UserRecordOptions
   ): Observable<FundingGroup[]> {
     return this._http
-      .get<FundingGroup[]>(
-        runtimeEnvironment.API_WEB +
-          `fundings/fundingGroups.json?` +
-          '&sort=' +
-          (options?.sort != null ? options.sort : 'date') +
-          '&sortAsc=' +
-          (options?.sortAsc != null ? options.sortAsc : false)
-      )
+      .get<
+        FundingGroup[]
+      >(runtimeEnvironment.API_WEB + `fundings/fundingGroups.json?` + '&sort=' + (options?.sort != null ? options.sort : 'date') + '&sortAsc=' + (options?.sortAsc != null ? options.sortAsc : false))
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))

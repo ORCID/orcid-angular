@@ -16,7 +16,7 @@
       >Remove this record</strong
     >
   </h2>
-  <ng-container *ngIf="data.deprecatingAccountName">
+  @if (data.deprecatingAccountName) {
     <strong
       >{{ data.deprecatingAccountName }}
       <a
@@ -28,8 +28,8 @@
         >({{ data.deprecatingOrcid }})</a
       ></strong
     >
-  </ng-container>
-  <ng-container *ngIf="!data.deprecatingAccountName">
+  }
+  @if (!data.deprecatingAccountName) {
     <strong
       ><ng-container i18n="@@account.nameIsPri">Name is private</ng-container>
       <a
@@ -41,8 +41,10 @@
         >{{ data.deprecatingOrcid }}</a
       ></strong
     >
-  </ng-container>
-  <div *ngFor="let email of data.deprecatingEmails">{{ email }}</div>
+  }
+  @for (email of data.deprecatingEmails; track email) {
+    <div>{{ email }}</div>
+  }
 
   <h2 class="keep">
     <strong class="orc-font-body-large" i18n="@@account.keepThisRecord"
@@ -50,7 +52,7 @@
     >
   </h2>
 
-  <ng-container *ngIf="data.primaryAccountName">
+  @if (data.primaryAccountName) {
     <strong
       >{{ data.primaryAccountName }}
       <a
@@ -62,8 +64,8 @@
         >({{ data.primaryOrcid }})</a
       ></strong
     >
-  </ng-container>
-  <ng-container *ngIf="!data.primaryAccountName">
+  }
+  @if (!data.primaryAccountName) {
     <strong>
       <a
         id="cy-primary-orcid"
@@ -74,8 +76,10 @@
         >{{ data.primaryOrcid }}</a
       ></strong
     >
-  </ng-container>
-  <div *ngFor="let email of data.primaryEmails">{{ email }}</div>
+  }
+  @for (email of data.primaryEmails; track email) {
+    <div>{{ email }}</div>
+  }
 
   <app-modal-footer>
     <button

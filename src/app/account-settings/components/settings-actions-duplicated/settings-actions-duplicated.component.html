@@ -92,7 +92,9 @@
       </mat-hint>
     </mat-form-field>
 
-    <mat-error *ngFor="let error of errors">{{ error }}</mat-error>
+    @for (error of errors; track error) {
+      <mat-error>{{ error }}</mat-error>
+    }
 
     <div class="button-container">
       <button

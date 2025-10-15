@@ -1,20 +1,20 @@
 <footer
   [attr.aria-label]="labelFooter"
   [ngClass]="{
-    'mobile': !isDesktop,
-    }"
+    mobile: !isDesktop,
+  }"
 >
   <div class="row container">
     <div class="row logo space-around">
       <div
         class="col baseline no-gutters"
         [ngClass]="{
-          'mobile': !isDesktop,
-          }"
+          mobile: !isDesktop,
+        }"
       >
         <a
           [ngClass]="{
-          'row orcid-logo-mobile': isMobile,
+            'row orcid-logo-mobile': isMobile,
           }"
         >
           <img src="./assets/vectors/orcid.logo.svg" alt="Orcid" />
@@ -115,15 +115,15 @@
         class="CC0 orc-font-body-small"
         [ngClass]="{ 'col desktop': isDesktop }"
       >
-        <div class="row mobile" *ngIf="!isDesktop">
-          <img src="./assets/vectors/cc-zero.svg" alt="public domain" />
-        </div>
+        @if (!isDesktop) {
+          <div class="row mobile">
+            <img src="./assets/vectors/cc-zero.svg" alt="public domain" />
+          </div>
+        }
         <p>
-          <img
-            src="./assets/vectors/cc-zero.svg"
-            alt="public domain"
-            *ngIf="isDesktop"
-          />
+          @if (isDesktop) {
+            <img src="./assets/vectors/cc-zero.svg" alt="public domain" />
+          }
 
           <ng-container i18n="@@footer.copyright_cc0_1"
             >The text of this website is published under a</ng-container
@@ -146,7 +146,7 @@
       class="row links space-around"
       [ngClass]="{
         tablet: isTablet,
-        mobile: isMobile
+        mobile: isMobile,
       }"
     >
       <div

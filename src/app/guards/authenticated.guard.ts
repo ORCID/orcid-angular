@@ -15,7 +15,10 @@ import { UserService } from '../core'
   providedIn: 'root',
 })
 export class AuthenticatedGuard {
-  constructor(private _userInfo: UserService, private _router: Router) {}
+  constructor(
+    private _userInfo: UserService,
+    private _router: Router
+  ) {}
   canActivateChild(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot

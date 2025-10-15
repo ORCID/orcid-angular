@@ -1,22 +1,22 @@
 <div
   class="wrapper"
   [ngClass]="{
-  'warning-message': type === 'warning',
-  'success-message': type === 'success',
-}"
+    'warning-message': type === 'warning',
+    'success-message': type === 'success',
+  }"
 >
   <div
     class="container-text-and-icon"
     [ngClass]="{
       'orc-font-body-small': !isMobile,
-      'orc-font-small-print': isMobile
+      'orc-font-small-print': isMobile,
     }"
   >
     <div class="col">
       <mat-icon
         [ngClass]="{
-        'material-icons-outlined' : type === 'success',
-      }"
+          'material-icons-outlined': type === 'success',
+        }"
       >
         {{ icon }}</mat-icon
       >

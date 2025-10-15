@@ -3,12 +3,9 @@
   [attr.aria-label]="ariaLabel"
 >
   <p><ng-content></ng-content></p>
-  <button
-    *ngIf="canDismiss"
-    mat-flat-button
-    color="primary"
-    (click)="onDismiss()"
-  >
-    <ng-content select="label.closeButton"></ng-content>
-  </button>
+  @if (canDismiss) {
+    <button mat-flat-button color="primary" (click)="onDismiss()">
+      <ng-content select="label.closeButton"></ng-content>
+    </button>
+  }
 </section>

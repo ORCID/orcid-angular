@@ -8,25 +8,25 @@
     your ORCID record.
   </p>
 
-  <div
-    class="orcid-id-container"
-    *ngIf="data['given-names'] || data['family-names']"
-  >
-    <strong> {{ data['given-names'] }} {{ data['family-names'] }}</strong>
-
-    <a
-      class="underline"
-      target="_blank"
-      rel="noreferrer noopener"
-      *ngIf="data?.['orcid-id']"
-      href="{{ baseUrl }}{{ data?.['orcid-id'] }}"
-      >https:{{ baseUrl }}{{ data?.['orcid-id'] }}</a
-    >
-  </div>
-
-  <div class="orcid-id-container" *ngIf="addByEmailOrOrcid">
-    <strong>{{ addByEmailOrOrcid }}</strong>
-  </div>
+  @if (data['given-names'] || data['family-names']) {
+    <div class="orcid-id-container">
+      <strong> {{ data['given-names'] }} {{ data['family-names'] }}</strong>
+      @if (data?.['orcid-id']) {
+        <a
+          class="underline"
+          target="_blank"
+          rel="noreferrer noopener"
+          href="{{ baseUrl }}{{ data?.['orcid-id'] }}"
+          >https:{{ baseUrl }}{{ data?.['orcid-id'] }}</a
+        >
+      }
+    </div>
+  }
+  @if (addByEmailOrOrcid) {
+    <div class="orcid-id-container">
+      <strong>{{ addByEmailOrOrcid }}</strong>
+    </div>
+  }
 
   <app-modal-footer>
     <button

@@ -30,7 +30,7 @@ interface HasFormAdapters {
 }
 
 export function RegisterBackendValidatorMixin<
-  T extends Constructor<HasHttpClientAndErrorHandler & HasFormAdapters>
+  T extends Constructor<HasHttpClientAndErrorHandler & HasFormAdapters>,
 >(base: T) {
   return class RegisterBackendValidator extends base {
     constructor(...args: any[]) {

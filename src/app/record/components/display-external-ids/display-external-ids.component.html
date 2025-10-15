@@ -1,4 +1,4 @@
-<ng-container *ngFor="let workExternal of getExternalIdentifiers()">
+@for (workExternal of getExternalIdentifiers(); track workExternal) {
   <app-panel-data-line
     [prefixTitle]="workExternal?.relationship?.value"
     title="{{ workExternal.externalIdentifierType.value + ':' | uppercase }}"
@@ -10,4 +10,4 @@
     [noBoldTitle]="noBoldTitle"
   >
   </app-panel-data-line>
-</ng-container>
+}

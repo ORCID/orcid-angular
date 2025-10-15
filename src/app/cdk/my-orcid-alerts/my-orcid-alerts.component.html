@@ -1,4 +1,4 @@
-<ng-container *ngIf="emailVerified || invalidVerifyUrl">
+@if (emailVerified || invalidVerifyUrl) {
   <app-alert-message
     [type]="invalidVerifyUrl ? 'warning' : 'success'"
     role="alert"
@@ -8,20 +8,20 @@
     <h3 title id="dialogTitle" i18n="@@ngOrcid.signin.almostDone">
       Almost done!
     </h3>
-    <div content i18n="@@ngOrcid.signin.signInToComplete" *ngIf="emailVerified">
-      Sign in to complete your email verification
-    </div>
-    <div
-      content
-      i18n="@@myOrcidAlerts.invalidVerifyUrl"
-      *ngIf="invalidVerifyUrl"
-    >
-      Your email couldn't be verified, please check the link you used to verify
-      it.
-    </div>
+    @if (emailVerified) {
+      <div content i18n="@@ngOrcid.signin.signInToComplete">
+        Sign in to complete your email verification
+      </div>
+    }
+    @if (invalidVerifyUrl) {
+      <div content i18n="@@myOrcidAlerts.invalidVerifyUrl">
+        Your email couldn't be verified, please check the link you used to
+        verify it.
+      </div>
+    }
   </app-alert-message>
-</ng-container>
-<ng-container *ngIf="printError && badCredentials">
+}
+@if (printError && badCredentials) {
   <app-alert-message
     type="warning"
     role="dialog"
@@ -41,4 +41,4 @@
       </div>
     </div>
   </app-alert-message>
-</ng-container>
+}

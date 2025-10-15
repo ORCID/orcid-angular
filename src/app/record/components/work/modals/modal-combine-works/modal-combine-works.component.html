@@ -52,7 +52,7 @@
       <span> ({{ works.length }})</span>
     </h3>
     <mat-divider class="row orcid-divider"></mat-divider>
-    <ng-container *ngFor="let work of works">
+    @for (work of works; track work) {
       <div class="row work-info">
         <div class="row">
           <h2 class="orc-font-body-small">
@@ -61,28 +61,28 @@
         </div>
         <div class="orc-font-small-print">
           <span i18n="@@shared.source">Source</span>:
-          <ng-container
-            *ngIf="work?.assertionOriginName || work?.assertionOriginOrcid"
-          >
+          @if (work?.assertionOriginName || work?.assertionOriginOrcid) {
             {{ work?.assertionOriginName || work?.assertionOriginOrcid }}
             <i i18n="@@shared.onBehalfOf">via</i>
-          </ng-container>
+          }
           {{ work.sourceName || work.source }}
-          <ng-container *ngIf="work.createdDate">
-            <br *ngIf="isMobile" />
+          @if (work.createdDate) {
+            @if (isMobile) {
+              <br />
+            }
             <span
               class="added"
               i18n="@@shared.added"
               [ngClass]="{
-                mobile: isMobile
+                mobile: isMobile,
               }"
               >Added</span
             >:
             {{ work.createdDate | monthDayYearDateToString }}
-          </ng-container>
+          }
         </div>
       </div>
-    </ng-container>
+    }
     <app-alert-message type="warning">
       <h3 title i18n="@@works.groupWorksAreYouSure">
         Are you sure you want to group these works?
@@ -99,11 +99,13 @@
         >
       </div>
     </app-alert-message>
-    <div class="no-info orc-font-body-small" *ngIf="works.length === 0">
-      <mat-icon>error</mat-icon>
-      <ng-container i18n="@@works.noItemsSelected"
-        >No items selected.
-      </ng-container>
-    </div>
+    @if (works.length === 0) {
+      <div class="no-info orc-font-body-small">
+        <mat-icon>error</mat-icon>
+        <ng-container i18n="@@works.noItemsSelected"
+          >No items selected.
+        </ng-container>
+      </div>
+    }
   </div>
 </app-modal>

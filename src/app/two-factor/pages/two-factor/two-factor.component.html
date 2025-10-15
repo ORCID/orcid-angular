@@ -3,12 +3,13 @@
     <div class="row space-around">
       <div class="col l6 m6 s4">
         <mat-card appearance="outlined" class="orcid-wizard">
-          <mat-progress-bar
-            role="heading"
-            aria-level="2"
-            *ngIf="loading"
-            mode="indeterminate"
-          ></mat-progress-bar>
+          @if (loading) {
+            <mat-progress-bar
+              role="heading"
+              aria-level="2"
+              mode="indeterminate"
+            ></mat-progress-bar>
+          }
           <mat-card-header>
             <mat-card-title role="heading" aria-level="1">
               <ng-container i18n="@@twoFactor.title"

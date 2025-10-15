@@ -14,7 +14,10 @@ import {
 export class TitleService {
   private _displayName: ReplaySubject<string> = new ReplaySubject<string>(1)
 
-  constructor(private _titleService: Title, private _router: Router) {}
+  constructor(
+    private _titleService: Title,
+    private _router: Router
+  ) {}
 
   init() {
     this._displayName.next('')

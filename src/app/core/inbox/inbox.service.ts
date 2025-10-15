@@ -231,7 +231,7 @@ export class InboxService {
       .pipe(
         map((resp) => {
           // If the server bounced us to /login, treat as “not logged in”
-          return resp.url?.includes('/login') ? null : resp.body ?? null
+          return resp.url?.includes('/login') ? null : (resp.body ?? null)
         }),
         tap((count) => {
           if (count !== null) {

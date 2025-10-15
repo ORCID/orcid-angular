@@ -39,9 +39,8 @@ export class SearchService {
         map((x) => {
           x['expanded-result'] = x['expanded-result']?.map((element) => {
             if (!element['given-names'] && !element['family-names']) {
-              element[
-                'given-names'
-              ] = $localize`:@@account.nameIsPri:Name is private`
+              element['given-names'] =
+                $localize`:@@account.nameIsPri:Name is private`
             }
 
             return element

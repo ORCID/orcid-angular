@@ -1,14 +1,14 @@
 <h3 class="orc-font-body" i18n="@@register.termsOfUse">Terms of Use</h3>
-<mat-error
-  *ngIf="
-    this.nextButtonWasClicked &&
-    (form.hasError('required', 'termsOfUse') ||
-      form.hasError('required', 'dataProcessed'))
-  "
-  i18n="@@register.youMustAccept2"
-  >You must accept the terms of use and consent to your data being processed in
-  the United States</mat-error
->
+@if (
+  this.nextButtonWasClicked &&
+  (form.hasError('required', 'termsOfUse') ||
+    form.hasError('required', 'dataProcessed'))
+) {
+  <mat-error i18n="@@register.youMustAccept2"
+    >You must accept the terms of use and consent to your data being processed
+    in the United States</mat-error
+  >
+}
 
 <ng-container [formGroup]="form">
   <mat-checkbox

@@ -86,9 +86,9 @@ export class DiscoService {
     if (!this.discoFeedSubject) {
       this.discoFeedSubject = new ReplaySubject(1)
       return this._http
-        .get<Institutional[]>(
-          runtimeEnvironment.BASE_URL + 'Shibboleth.sso/DiscoFeed'
-        )
+        .get<
+          Institutional[]
+        >(runtimeEnvironment.BASE_URL + 'Shibboleth.sso/DiscoFeed')
         .pipe(
           tap((feed) => {
             this.discoFeedSubject.next(feed)

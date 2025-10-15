@@ -69,7 +69,10 @@ export class DeepSelectInputComponent implements ControlValueAccessor {
   private onTouched: () => void = () => {}
   isMobile: boolean
 
-  constructor(fb: FormBuilder, private platformService: PlatformInfoService) {
+  constructor(
+    fb: FormBuilder,
+    private platformService: PlatformInfoService
+  ) {
     this.formgroup = fb.group({
       formControl: [''],
     })

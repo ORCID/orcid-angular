@@ -21,14 +21,13 @@
     </p>
     <div class="margin-tb-32">
       <p>
-        <mat-error
-          *ngIf="
-            form.hasError('required', 'activitiesVisibilityDefault') &&
-            errorState
-          "
-          i18n="@@register.visibilityRequired2"
-          >Please select a default visibility for new items</mat-error
-        >
+        @if (
+          form.hasError('required', 'activitiesVisibilityDefault') && errorState
+        ) {
+          <mat-error i18n="@@register.visibilityRequired2"
+            >Please select a default visibility for new items</mat-error
+          >
+        }
       </p>
       <mat-radio-group
         formControlName="activitiesVisibilityDefault"

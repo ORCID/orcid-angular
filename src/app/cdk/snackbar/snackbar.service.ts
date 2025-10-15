@@ -17,7 +17,10 @@ import { HttpErrorResponse } from '@angular/common/http'
 export class SnackbarService {
   horizontalPosition: MatSnackBarHorizontalPosition = 'right'
   contentDirection: ScreenDirection = 'ltr'
-  constructor(private _snackBar: MatSnackBar, _platform: PlatformInfoService) {
+  constructor(
+    private _snackBar: MatSnackBar,
+    _platform: PlatformInfoService
+  ) {
     _platform
       .get()
       .pipe(take(1))

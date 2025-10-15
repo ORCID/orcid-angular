@@ -7,11 +7,10 @@
   [title]="titleHtmlCode"
   [loading]="htmlCodeLoading"
 >
-  <app-settings-sharing-html-code
-    *ngIf="htmlCode"
-    (loading)="htmlCodeLoading = $event"
-  >
-  </app-settings-sharing-html-code>
+  @if (htmlCode) {
+    <app-settings-sharing-html-code (loading)="htmlCodeLoading = $event">
+    </app-settings-sharing-html-code>
+  }
 </app-settings-panels>
 
 <app-settings-panels
@@ -21,9 +20,8 @@
   [title]="titleQrCode"
   [loading]="qrCodeLoading"
 >
-  <app-settings-sharing-qr-code
-    *ngIf="qrCode"
-    (loading)="qrCodeLoading = $event"
-  >
-  </app-settings-sharing-qr-code>
+  @if (qrCode) {
+    <app-settings-sharing-qr-code (loading)="qrCodeLoading = $event">
+    </app-settings-sharing-qr-code>
+  }
 </app-settings-panels>

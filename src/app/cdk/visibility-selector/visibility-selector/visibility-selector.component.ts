@@ -33,11 +33,14 @@ export class VisibilitySelectorComponent
   @Input() mobile = false
 
   @Input()
-  ariaLabelPublic: string = $localize`:@@share.ariaLabelPublic:set item visibility to Everyone`
+  ariaLabelPublic: string =
+    $localize`:@@share.ariaLabelPublic:set item visibility to Everyone`
   @Input()
-  ariaLabelTrustedParty: string = $localize`:@@share.ariaLabelTrustedParty:set item visibility to Trusted Parties `
+  ariaLabelTrustedParty: string =
+    $localize`:@@share.ariaLabelTrustedParty:set item visibility to Trusted Parties `
   @Input()
-  ariaLabelPrivate: string = $localize`:@@share.ariaLabelPrivate:set item visibility to Only Me`
+  ariaLabelPrivate: string =
+    $localize`:@@share.ariaLabelPrivate:set item visibility to Only Me`
   ariaLabelCurrentlySelected: string = $localize`:@@share.currentSelected: (Currently selected)`
   ariaLabelVisibility: string = $localize`:@@share.visibilityCurrentlySetTo:visibility is currently set to`
 

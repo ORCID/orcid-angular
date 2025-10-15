@@ -7,7 +7,10 @@ import { ORCID_REGEXP } from 'src/app/constants'
   providedIn: 'root',
 })
 export class CanonocalUrlService {
-  constructor(@Inject(DOCUMENT) private doc: any, private _router: Router) {
+  constructor(
+    @Inject(DOCUMENT) private doc: any,
+    private _router: Router
+  ) {
     this.init()
   }
 

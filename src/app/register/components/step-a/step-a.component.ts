@@ -79,10 +79,10 @@ export class StepAComponent
 
   ngAfterViewInit(): void {
     // Timeout used to get focus on the first input after the first step loads
-    setTimeout(() => {
+    ;(setTimeout(() => {
       this.firstInput?.nativeElement.focus()
     }),
-      100
+      100)
   }
 
   nextButton2() {

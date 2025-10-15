@@ -19,7 +19,7 @@ import { TogglzFlag } from '../../togglz/togglz-flags.enum'
 export abstract class LoginBaseInterstitialManagerService<
   TInput extends BaseInterstitialDialogInput,
   TOutput extends BaseInterstitialDialogOutput,
-  TComponent
+  TComponent,
 > {
   abstract INTERSTITIAL_NAME: InterstitialType
   abstract INTERSTITIAL_TOGGLE: TogglzFlag[]

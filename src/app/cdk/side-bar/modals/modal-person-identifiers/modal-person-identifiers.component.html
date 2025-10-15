@@ -55,7 +55,7 @@
         </p>
       </div>
     </div>
-    <ng-container *ngIf="personIdentifiers?.length > 0">
+    @if (personIdentifiers?.length > 0) {
       <div class="row">
         <h2
           class="col no-gutters orc-font-body"
@@ -72,89 +72,96 @@
         cdkDropList
         (cdkDropListDropped)="drop($event)"
       >
-        <div
-          cdkDrag
-          class="row"
-          [ngStyle]="{ direction: screenDirection }"
-          [formGroupName]="personIdentifier.putCode"
-          *ngFor="let personIdentifier of personIdentifiers; index as i"
-          [attr.id]="'draggable-' + i"
-        >
-          <div class="row drag-placeholder" *cdkDragPlaceholder></div>
+        @for (
+          personIdentifier of personIdentifiers;
+          track personIdentifier;
+          let i = $index
+        ) {
           <div
-            class="row personal-identifier-input-line"
-            [ngClass]="{ 'no-wrap': !isMobile }"
+            cdkDrag
+            class="row"
+            [ngStyle]="{ direction: screenDirection }"
+            [formGroupName]="personIdentifier.putCode"
+            [attr.id]="'draggable-' + i"
           >
+            <div class="row drag-placeholder" *cdkDragPlaceholder></div>
             <div
-              class="col l12 m8 s4 top no-wrap no-gutters personal-identifiers-wrapper"
+              class="row personal-identifier-input-line"
+              [ngClass]="{ 'no-wrap': !isMobile }"
             >
-              <img
-                cdkDragHandle
-                src="./assets/vectors/draggable.svg"
-                aria-label="drag handle"
-              />
-              <div class="person-identifier">
-                <a
-                  [attr.aria-label]="
+              <div
+                class="col l12 m8 s4 top no-wrap no-gutters personal-identifiers-wrapper"
+              >
+                <img
+                  cdkDragHandle
+                  src="./assets/vectors/draggable.svg"
+                  aria-label="drag handle"
+                />
+                <div class="person-identifier">
+                  <a
+                    [attr.aria-label]="
+                      personIdentifier.commonName +
+                      ' : ' +
+                      personIdentifier.reference +
+                      ' ' +
+                      ariaLabelIdentifierUrl
+                    "
+                    class="underline"
+                    [href]="personIdentifier.url"
+                    target="_blank"
+                    rel="me nofollow noopener noreferrer"
+                    >{{ personIdentifier.commonName }}:
+                    {{ personIdentifier.reference }}</a
+                  >
+                  <mat-hint class="mat-caption">
+                    <app-source-hit
+                      [createdDate]="personIdentifier.createdDate"
+                      [source]="
+                        personIdentifier.sourceName || personIdentifier.source
+                      "
+                      [assertion]="
+                        personIdentifier.assertionOriginName ||
+                        personIdentifier.assertionOriginOrcid
+                      "
+                    ></app-source-hit>
+                  </mat-hint>
+                </div>
+              </div>
+              <div
+                class="col no-wrap actions-wrapper no-gutters personal-identifiers-controls-wrapper"
+              >
+                <app-visibility-selector
+                  formControlName="visibility"
+                  [itemTitle]="
                     personIdentifier.commonName +
-                    ' : ' +
-                    personIdentifier.reference +
-                    ' ' +
-                    ariaLabelIdentifierUrl
+                    ':' +
+                    personIdentifier.reference
                   "
-                  class="underline"
-                  [href]="personIdentifier.url"
-                  target="_blank"
-                  rel="me nofollow noopener noreferrer"
-                  >{{ personIdentifier.commonName }}:
-                  {{ personIdentifier.reference }}</a
                 >
-                <mat-hint class="mat-caption">
-                  <app-source-hit
-                    [createdDate]="personIdentifier.createdDate"
-                    [source]="
-                      personIdentifier.sourceName || personIdentifier.source
-                    "
-                    [assertion]="
-                      personIdentifier.assertionOriginName ||
-                      personIdentifier.assertionOriginOrcid
-                    "
-                  ></app-source-hit>
-                </mat-hint>
+                </app-visibility-selector>
+                <button
+                  (click)="deletePersonalIdentifier(personIdentifier.putCode)"
+                  mat-icon-button
+                  class="delete-button"
+                  [attr.aria-label]="
+                    ariaLabelDelete +
+                    ' ' +
+                    personIdentifier.commonName +
+                    ':' +
+                    personIdentifier.reference
+                  "
+                >
+                  <mat-icon
+                    class="material-icons-outlined extra-large-material-icon"
+                    >delete</mat-icon
+                  >
+                </button>
               </div>
             </div>
-            <div
-              class="col no-wrap actions-wrapper no-gutters personal-identifiers-controls-wrapper"
-            >
-              <app-visibility-selector
-                formControlName="visibility"
-                [itemTitle]="
-                  personIdentifier.commonName + ':' + personIdentifier.reference
-                "
-              >
-              </app-visibility-selector>
-              <button
-                (click)="deletePersonalIdentifier(personIdentifier.putCode)"
-                mat-icon-button
-                class="delete-button"
-                [attr.aria-label]="
-                  ariaLabelDelete +
-                  ' ' +
-                  personIdentifier.commonName +
-                  ':' +
-                  personIdentifier.reference
-                "
-              >
-                <mat-icon
-                  class="material-icons-outlined extra-large-material-icon"
-                  >delete</mat-icon
-                >
-              </button>
-            </div>
+            <hr class="dashed-line" />
           </div>
-          <hr class="dashed-line" />
-        </div>
+        }
       </section>
-    </ng-container>
+    }
   </div>
 </app-modal>

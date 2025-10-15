@@ -14,7 +14,10 @@ import { UserService } from '../core'
   providedIn: 'root',
 })
 export class RegisterGuard {
-  constructor(private _user: UserService, private _router: Router) {}
+  constructor(
+    private _user: UserService,
+    private _router: Router
+  ) {}
 
   canActivateChild(
     next: ActivatedRouteSnapshot,

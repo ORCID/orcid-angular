@@ -57,7 +57,7 @@
         class="title top-title"
         [ngClass]="{
           'orc-font-body': !platform.columns12,
-          'orc-font-body-large': platform.columns12
+          'orc-font-body-large': platform.columns12,
         }"
       >
         <!---------------------->
@@ -67,17 +67,17 @@
           <h2 class="orc-font-body" i18n="@@funding.details">
             Funding details
           </h2>
-          <span *ngIf="!platform.columns12" class="required">*</span>
-
-          <p
-            *ngIf="platform.columns12"
-            class="required-information mat-caption"
-          >
+          @if (!platform.columns12) {
             <span class="required">*</span>
-            <ng-container i18n="@@shared.requiredInformation"
-              >Required information</ng-container
-            >
-          </p>
+          }
+          @if (platform.columns12) {
+            <p class="required-information mat-caption">
+              <span class="required">*</span>
+              <ng-container i18n="@@shared.requiredInformation"
+                >Required information</ng-container
+              >
+            </p>
+          }
         </div>
       </div>
       <hr />
@@ -89,7 +89,7 @@
             [ngClass]="{
               error:
                 fundingForm.get('fundingType').hasError('required') &&
-                fundingForm.get('fundingType').touched
+                fundingForm.get('fundingType').touched,
             }"
             id="funding-type"
           >
@@ -105,19 +105,17 @@
               formControlName="fundingType"
               placeholder="{{ ngOrcidFundingType }}"
             >
-              <mat-option
-                *ngFor="let item of fundingTypes | keyvalue"
-                [value]="item.value"
-              >
-                {{ item.value | recordFundingTypesLabel }}
-              </mat-option>
+              @for (item of fundingTypes | keyvalue; track item) {
+                <mat-option [value]="item.value">
+                  {{ item.value | recordFundingTypesLabel }}
+                </mat-option>
+              }
             </mat-select>
-            <mat-error
-              *ngIf="fundingForm.get('fundingType').hasError('required')"
-              i18n="@@funding.selectAType"
-            >
-              Select a funding type
-            </mat-error>
+            @if (fundingForm.get('fundingType').hasError('required')) {
+              <mat-error i18n="@@funding.selectAType">
+                Select a funding type
+              </mat-error>
+            }
           </mat-form-field>
         </div>
       </div>
@@ -142,12 +140,13 @@
             matInput
             formControlName="fundingSubtype"
           />
-          <mat-error
-            *ngIf="fundingForm.get('fundingSubtype').errors?.maxlength"
-            i18n="@@shared.maxLength.less_than_two_hundred_fifty_five"
-          >
-            Must be less than 255 characters
-          </mat-error>
+          @if (fundingForm.get('fundingSubtype').errors?.maxlength) {
+            <mat-error
+              i18n="@@shared.maxLength.less_than_two_hundred_fifty_five"
+            >
+              Must be less than 255 characters
+            </mat-error>
+          }
         </mat-form-field>
       </div>
 
@@ -160,7 +159,7 @@
               error:
                 fundingForm.get('fundingProjectTitle').hasError('required') &&
                 (fundingForm.get('fundingProjectTitle').touched ||
-                  fundingForm.get('fundingProjectTitle').dirty)
+                  fundingForm.get('fundingProjectTitle').dirty),
             }"
             id="funding-funded-project"
           >
@@ -178,19 +177,16 @@
               matInput
               formControlName="fundingProjectTitle"
             />
-            <mat-error
-              class="mat-caption"
-              *ngIf="fundingForm.hasError('required', 'fundingProjectTitle')"
-              i18n="@@funding.projectTitleError"
-            >
-              Please enter a title
-            </mat-error>
-            <mat-error
-              *ngIf="fundingForm.get('fundingProjectTitle').errors?.maxlength"
-              i18n="@@shared.maxLength.less_than_one_thousand"
-            >
-              Must be less than 1000 characters
-            </mat-error>
+            @if (fundingForm.hasError('required', 'fundingProjectTitle')) {
+              <mat-error class="mat-caption" i18n="@@funding.projectTitleError">
+                Please enter a title
+              </mat-error>
+            }
+            @if (fundingForm.get('fundingProjectTitle').errors?.maxlength) {
+              <mat-error i18n="@@shared.maxLength.less_than_one_thousand">
+                Must be less than 1000 characters
+              </mat-error>
+            }
           </mat-form-field>
         </div>
         <!-- SHOW-HIDE translated title button  -->
@@ -199,31 +195,27 @@
             class="col add-more translate-title"
             (click)="showTranslationTitle = !showTranslationTitle"
           >
-            <mat-icon
-              class="large-material-icon"
-              *ngIf="!showTranslationTitle"
-              aria-hidden="true"
-              >add_circle_outline</mat-icon
-            >
-            <mat-icon
-              class="large-material-icon"
-              *ngIf="showTranslationTitle"
-              aria-hidden="true"
-              >remove_circle_outline</mat-icon
-            >
+            @if (!showTranslationTitle) {
+              <mat-icon class="large-material-icon" aria-hidden="true"
+                >add_circle_outline</mat-icon
+              >
+            }
+            @if (showTranslationTitle) {
+              <mat-icon class="large-material-icon" aria-hidden="true"
+                >remove_circle_outline</mat-icon
+              >
+            }
             <span class="mat-subtitle-2" id="">
-              <ng-container
-                i18n="@@works.showTranslatedTitle"
-                *ngIf="!showTranslationTitle"
-              >
-                Show translated title
-              </ng-container>
-              <ng-container
-                i18n="@@works.hideTranslatedTitle2"
-                *ngIf="showTranslationTitle"
-              >
-                Hide translated title
-              </ng-container>
+              @if (!showTranslationTitle) {
+                <ng-container i18n="@@works.showTranslatedTitle">
+                  Show translated title
+                </ng-container>
+              }
+              @if (showTranslationTitle) {
+                <ng-container i18n="@@works.hideTranslatedTitle2">
+                  Hide translated title
+                </ng-container>
+              }
             </span>
           </a>
         </div>
@@ -242,7 +234,7 @@
                 error: fundingForm.hasError(
                   'invalidTranslatedTitleContent',
                   'translatedTitleGroup'
-                )
+                ),
               }"
               id="funding-funded-project-translated-input"
             >
@@ -261,28 +253,30 @@
                 formControlName="translatedTitleContent"
               />
             </mat-form-field>
-            <mat-error
-              class="mat-caption"
-              *ngIf="
-                fundingForm.hasError(
-                  'invalidTranslatedTitleContent',
-                  'translatedTitleGroup'
-                )
-              "
-              i18n="@@shared.translatedTitleError"
-            >
-              Please enter a translated title
-            </mat-error>
-            <mat-error
-              class="mat-caption"
-              *ngIf="
-                fundingForm.get('translatedTitleGroup.translatedTitleContent')
-                  .errors?.maxlength
-              "
-              i18n="@@shared.maxLength.less_than_one_thousand"
-            >
-              Must be less than 1000 characters
-            </mat-error>
+            @if (
+              fundingForm.hasError(
+                'invalidTranslatedTitleContent',
+                'translatedTitleGroup'
+              )
+            ) {
+              <mat-error
+                class="mat-caption"
+                i18n="@@shared.translatedTitleError"
+              >
+                Please enter a translated title
+              </mat-error>
+            }
+            @if (
+              fundingForm.get('translatedTitleGroup.translatedTitleContent')
+                .errors?.maxlength
+            ) {
+              <mat-error
+                class="mat-caption"
+                i18n="@@shared.maxLength.less_than_one_thousand"
+              >
+                Must be less than 1000 characters
+              </mat-error>
+            }
           </div>
         </div>
 
@@ -296,7 +290,7 @@
                 error: fundingForm.hasError(
                   'invalidTranslatedTitleLanguage',
                   'translatedTitleGroup'
-                )
+                ),
               }"
               id="language-title"
             >
@@ -313,26 +307,26 @@
                 placeholder="{{ ngOrcidSelectLanguage }}"
                 formControlName="translatedTitleLanguage"
               >
-                <mat-option
-                  *ngFor="let item of languageMap | keyvalue"
-                  [value]="item.key"
-                >
-                  {{ item.value }}
-                </mat-option>
+                @for (item of languageMap | keyvalue; track item) {
+                  <mat-option [value]="item.key">
+                    {{ item.value }}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
-            <mat-error
-              class="mat-caption"
-              *ngIf="
-                fundingForm.hasError(
-                  'invalidTranslatedTitleLanguage',
-                  'translatedTitleGroup'
-                )
-              "
-              i18n="@@shared.translatedTitleLanguageError"
-            >
-              Please select a language
-            </mat-error>
+            @if (
+              fundingForm.hasError(
+                'invalidTranslatedTitleLanguage',
+                'translatedTitleGroup'
+              )
+            ) {
+              <mat-error
+                class="mat-caption"
+                i18n="@@shared.translatedTitleLanguageError"
+              >
+                Please select a language
+              </mat-error>
+            }
           </div>
         </div>
       </div>
@@ -346,7 +340,7 @@
             [ngClass]="{
               error:
                 fundingForm.get('fundingProjectLink').hasError('pattern') &&
-                fundingForm.get('fundingProjectLink').touched
+                fundingForm.get('fundingProjectLink').touched,
             }"
             id="funding-project-link"
           >
@@ -372,18 +366,14 @@
               A link to the project supported by this funding. Links should be
               in full URL format e.g. http://www.website.com/page.html
             </mat-hint>
-            <mat-error
-              *ngIf="fundingForm.get('fundingProjectLink').hasError('pattern')"
-              i18n="@@funding.invalidUrl"
-            >
-              Invalid URL
-            </mat-error>
-            <mat-error
-              *ngIf="fundingForm.get('fundingProjectLink').errors?.maxlength"
-              i18n="@@shared.maxLength.less_than_two_thousand"
-            >
-              Must be less than 2000 characters
-            </mat-error>
+            @if (fundingForm.get('fundingProjectLink').hasError('pattern')) {
+              <mat-error i18n="@@funding.invalidUrl"> Invalid URL </mat-error>
+            }
+            @if (fundingForm.get('fundingProjectLink').errors?.maxlength) {
+              <mat-error i18n="@@shared.maxLength.less_than_two_thousand">
+                Must be less than 2000 characters
+              </mat-error>
+            }
           </mat-form-field>
         </div>
       </div>
@@ -409,12 +399,11 @@
             [attr.aria-label]="ariaLabelDescription"
           >
           </textarea>
-          <mat-error
-            *ngIf="fundingForm.get('description').errors?.maxlength"
-            i18n="@@shared.maxLength.less_than_five_thousand"
-          >
-            Must be less than 5000 characters
-          </mat-error>
+          @if (fundingForm.get('description').errors?.maxlength) {
+            <mat-error i18n="@@shared.maxLength.less_than_five_thousand">
+              Must be less than 5000 characters
+            </mat-error>
+          }
         </mat-form-field>
       </div>
 
@@ -442,12 +431,11 @@
                 formControlName="currencyCode"
                 [aria-label]="totalFundingAmountCurrency"
               >
-                <mat-option
-                  *ngFor="let item of currencyCodeMap | keyvalue"
-                  [value]="item.key"
-                >
-                  {{ item.value }}
-                </mat-option>
+                @for (item of currencyCodeMap | keyvalue; track item) {
+                  <mat-option [value]="item.key">
+                    {{ item.value }}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
           </div>
@@ -466,24 +454,26 @@
               />
             </mat-form-field>
           </div>
-          <mat-error
-            class="mat-caption error-out-input-context"
-            *ngIf="
-              fundingForm.get('amount').hasError('pattern') &&
-              fundingForm.get('amount').touched
-            "
-            i18n="@@funding.amountError"
-          >
-            Amount should be a numeric value with format 1,234,567.89
-          </mat-error>
-          <div class="row">
+          @if (
+            fundingForm.get('amount').hasError('pattern') &&
+            fundingForm.get('amount').touched
+          ) {
             <mat-error
-              *ngIf="fundingForm.get('currencyCode').errors?.required"
-              i18n="@@funding.selectACurrencyCode"
               class="mat-caption error-out-input-context"
+              i18n="@@funding.amountError"
             >
-              Please select a currency
+              Amount should be a numeric value with format 1,234,567.89
             </mat-error>
+          }
+          <div class="row">
+            @if (fundingForm.get('currencyCode').errors?.required) {
+              <mat-error
+                i18n="@@funding.selectACurrencyCode"
+                class="mat-caption error-out-input-context"
+              >
+                Please select a currency
+              </mat-error>
+            }
           </div>
         </div>
       </div>
@@ -497,7 +487,7 @@
           <label
             class="mat-caption"
             [ngClass]="{
-              error: fundingForm.hasError('date', 'startDateGroup')
+              error: fundingForm.hasError('date', 'startDateGroup'),
             }"
           >
             <strong i18n="@@shared.startDate">Start date</strong>
@@ -518,9 +508,11 @@
                   formControlName="startDateYear"
                 >
                   <mat-option i18n="@@shared.year" [value]="">Year</mat-option>
-                  <mat-option *ngFor="let year of years" [value]="year">
-                    {{ year }}
-                  </mat-option>
+                  @for (year of years; track year) {
+                    <mat-option [value]="year">
+                      {{ year }}
+                    </mat-option>
+                  }
                 </mat-select>
               </mat-form-field>
             </div>
@@ -539,21 +531,24 @@
                   <mat-option i18n="@@shared.month" [value]=""
                     >Month</mat-option
                   >
-                  <mat-option *ngFor="let month of months" [value]="month">
-                    {{ month | trailingZeros }}
-                  </mat-option>
+                  @for (month of months; track month) {
+                    <mat-option [value]="month">
+                      {{ month | trailingZeros }}
+                    </mat-option>
+                  }
                 </mat-select>
               </mat-form-field>
             </div>
           </div>
           <div class="row">
-            <mat-error
-              class="mat-caption error-out-input-context"
-              i18n="@@shared.invalidDate"
-              *ngIf="fundingForm.get('startDateGroup').errors?.date"
-            >
-              Invalid date
-            </mat-error>
+            @if (fundingForm.get('startDateGroup').errors?.date) {
+              <mat-error
+                class="mat-caption error-out-input-context"
+                i18n="@@shared.invalidDate"
+              >
+                Invalid date
+              </mat-error>
+            }
           </div>
         </div>
       </div>
@@ -564,7 +559,7 @@
           <label
             class="mat-caption"
             [ngClass]="{
-              error: fundingForm.hasError('date', 'endDateGroup')
+              error: fundingForm.hasError('date', 'endDateGroup'),
             }"
           >
             <strong i18n="@@shared.endDate">End date</strong>
@@ -585,9 +580,11 @@
                   formControlName="endDateYear"
                 >
                   <mat-option i18n="@@shared.year" [value]="">Year</mat-option>
-                  <mat-option *ngFor="let year of yearsEndDate" [value]="year">
-                    {{ year }}
-                  </mat-option>
+                  @for (year of yearsEndDate; track year) {
+                    <mat-option [value]="year">
+                      {{ year }}
+                    </mat-option>
+                  }
                 </mat-select>
               </mat-form-field>
             </div>
@@ -606,28 +603,32 @@
                   <mat-option i18n="@@shared.month" [value]=""
                     >Month</mat-option
                   >
-                  <mat-option *ngFor="let month of months" [value]="month">
-                    {{ month | trailingZeros }}
-                  </mat-option>
+                  @for (month of months; track month) {
+                    <mat-option [value]="month">
+                      {{ month | trailingZeros }}
+                    </mat-option>
+                  }
                 </mat-select>
               </mat-form-field>
             </div>
           </div>
           <div class="row">
-            <mat-error
-              class="mat-caption error-out-input-context"
-              i18n="@@shared.invalidDate"
-              *ngIf="fundingForm.get('endDateGroup').errors?.date"
-            >
-              Invalid date
-            </mat-error>
-            <mat-error
-              class="mat-caption error-out-input-context"
-              i18n="@@shared.endDateError"
-              *ngIf="fundingForm.errors?.invalidEndDate"
-            >
-              End date must come after start date
-            </mat-error>
+            @if (fundingForm.get('endDateGroup').errors?.date) {
+              <mat-error
+                class="mat-caption error-out-input-context"
+                i18n="@@shared.invalidDate"
+              >
+                Invalid date
+              </mat-error>
+            }
+            @if (fundingForm.errors?.invalidEndDate) {
+              <mat-error
+                class="mat-caption error-out-input-context"
+                i18n="@@shared.endDateError"
+              >
+                End date must come after start date
+              </mat-error>
+            }
           </div>
         </div>
       </div>
@@ -640,22 +641,22 @@
         class="title"
         [ngClass]="{
           'orc-font-body': !platform.columns12,
-          'orc-font-body-large': platform.columns12
+          'orc-font-body-large': platform.columns12,
         }"
       >
         <div class="row">
           <h2 class="orc-font-body" i18n="@@funding.agency">Funding agency</h2>
-          <span *ngIf="!platform.columns12" class="required">*</span>
-
-          <p
-            *ngIf="platform.columns12"
-            class="required-information mat-caption"
-          >
+          @if (!platform.columns12) {
             <span class="required">*</span>
-            <ng-container i18n="@@shared.requiredInformation"
-              >Required information</ng-container
-            >
-          </p>
+          }
+          @if (platform.columns12) {
+            <p class="required-information mat-caption">
+              <span class="required">*</span>
+              <ng-container i18n="@@shared.requiredInformation"
+                >Required information</ng-container
+              >
+            </p>
+          }
         </div>
       </div>
       <hr />
@@ -667,7 +668,7 @@
             error:
               fundingForm.get('agencyName').hasError('required') &&
               (fundingForm.get('agencyName').touched ||
-                fundingForm.get('agencyName').dirty)
+                fundingForm.get('agencyName').dirty),
           }"
         >
           <strong i18n="@@funding.agencyName">Funding agency name</strong>
@@ -679,7 +680,8 @@
           appearance="outline"
           class="mat-form-field-min"
           [ngClass]="{
-            'two-line-hint': selectedOrganizationFromDatabase?.value.length > 50
+            'two-line-hint':
+              selectedOrganizationFromDatabase?.value.length > 50,
           }"
         >
           <input
@@ -694,57 +696,55 @@
             #auto="matAutocomplete"
             [displayWith]="autoCompleteDisplayOrganization"
           >
-            <mat-option
-              *ngFor="let option of filteredOptions | async"
-              [value]="option"
-            >
-              <div class="row orc-font-body-small title">
-                {{ option.value }}
-              </div>
-              <div class="row orc-font-small-print">
-                {{ option.city }} {{ option.region }} {{ option.country }}
-              </div>
-            </mat-option>
+            @for (option of filteredOptions | async; track option) {
+              <mat-option [value]="option">
+                <div class="row orc-font-body-small title">
+                  {{ option.value }}
+                </div>
+                <div class="row orc-font-small-print">
+                  {{ option.city }} {{ option.region }} {{ option.country }}
+                </div>
+              </mat-option>
+            }
           </mat-autocomplete>
-          <mat-hint
-            *ngIf="selectedOrganizationFromDatabase && displayOrganizationHint"
-          >
-            <ng-container i18n="@@record.identifyAS">Identify as:</ng-container>
-            {{ selectedOrganizationFromDatabase.value }}
-          </mat-hint>
-          <mat-hint
-            *ngIf="
-              !selectedOrganizationFromDatabase &&
-              fundingForm.get('agencyName').value &&
-              displayOrganizationHint
-            "
-            i18n="@@record.unidentifiedOrganization"
-          >
-            Unidentified organization
-          </mat-hint>
-          <button
-            class="clear"
-            matSuffix
-            mat-icon-button
-            aria-label="Clear"
-            (click)="clearForm()"
-            *ngIf="fundingForm.get('agencyName').value"
-          >
-            <mat-icon>close</mat-icon>
-          </button>
-          <mat-error
-            class="mat-caption"
-            *ngIf="fundingForm.hasError('required', 'agencyName')"
-            i18n="@@funding.agencyNameError"
-          >
-            Please enter an agency name
-          </mat-error>
-          <mat-error
-            *ngIf="fundingForm.get('agencyName').errors?.maxlength"
-            i18n="@@shared.maxLength.less_than_one_thousand"
-          >
-            Must be less than 1000 characters
-          </mat-error>
+          @if (selectedOrganizationFromDatabase && displayOrganizationHint) {
+            <mat-hint>
+              <ng-container i18n="@@record.identifyAS"
+                >Identify as:</ng-container
+              >
+              {{ selectedOrganizationFromDatabase.value }}
+            </mat-hint>
+          }
+          @if (
+            !selectedOrganizationFromDatabase &&
+            fundingForm.get('agencyName').value &&
+            displayOrganizationHint
+          ) {
+            <mat-hint i18n="@@record.unidentifiedOrganization">
+              Unidentified organization
+            </mat-hint>
+          }
+          @if (fundingForm.get('agencyName').value) {
+            <button
+              class="clear"
+              matSuffix
+              mat-icon-button
+              aria-label="Clear"
+              (click)="clearForm()"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+          }
+          @if (fundingForm.hasError('required', 'agencyName')) {
+            <mat-error class="mat-caption" i18n="@@funding.agencyNameError">
+              Please enter an agency name
+            </mat-error>
+          }
+          @if (fundingForm.get('agencyName').errors?.maxlength) {
+            <mat-error i18n="@@shared.maxLength.less_than_one_thousand">
+              Must be less than 1000 characters
+            </mat-error>
+          }
         </mat-form-field>
       </div>
       <div class="row">
@@ -755,7 +755,8 @@
           [ngClass]="{
             error:
               fundingForm.get('city').hasError('required') &&
-              (fundingForm.get('city').touched || fundingForm.get('city').dirty)
+              (fundingForm.get('city').touched ||
+                fundingForm.get('city').dirty),
           }"
         >
           <strong i18n="@@shared.city">City</strong>
@@ -770,22 +771,19 @@
             matInput
             formControlName="city"
           />
-          <mat-error
-            class="mat-caption"
-            *ngIf="
-              fundingForm.get('city').hasError('required') &&
-              fundingForm.get('city').touched
-            "
-            i18n="@@shared.cityError"
-          >
-            Please enter a city
-          </mat-error>
-          <mat-error
-            *ngIf="fundingForm.get('city').errors?.maxlength"
-            i18n="@@shared.maxLength.less_than_one_thousand"
-          >
-            Must be less than 1000 characters
-          </mat-error>
+          @if (
+            fundingForm.get('city').hasError('required') &&
+            fundingForm.get('city').touched
+          ) {
+            <mat-error class="mat-caption" i18n="@@shared.cityError">
+              Please enter a city
+            </mat-error>
+          }
+          @if (fundingForm.get('city').errors?.maxlength) {
+            <mat-error i18n="@@shared.maxLength.less_than_one_thousand">
+              Must be less than 1000 characters
+            </mat-error>
+          }
         </mat-form-field>
       </div>
       <div class="row">
@@ -801,12 +799,11 @@
             matInput
             formControlName="region"
           />
-          <mat-error
-            *ngIf="fundingForm.get('region').errors?.maxlength"
-            i18n="@@shared.maxLength.less_than_one_thousand"
-          >
-            Must be less than 1000 characters
-          </mat-error>
+          @if (fundingForm.get('region').errors?.maxlength) {
+            <mat-error i18n="@@shared.maxLength.less_than_one_thousand">
+              Must be less than 1000 characters
+            </mat-error>
+          }
         </mat-form-field>
       </div>
       <div class="row">
@@ -816,7 +813,7 @@
           [ngClass]="{
             error:
               fundingForm.get('country').hasError('required') &&
-              fundingForm.get('country').touched
+              fundingForm.get('country').touched,
           }"
           id="funding-country-location"
         >
@@ -837,22 +834,23 @@
             #countrySelect
             formControlName="country"
           >
-            <mat-option
-              *ngFor="let countryCode of countryCodes | sortBy : 'asc' : 'key'"
-              [value]="countryCode.key"
-            >
-              {{ countryCode.key }}
-            </mat-option>
+            @for (
+              countryCode of countryCodes | sortBy: 'asc' : 'key';
+              track countryCode
+            ) {
+              <mat-option [value]="countryCode.key">
+                {{ countryCode.key }}
+              </mat-option>
+            }
           </mat-select>
-          <mat-error
-            i18n="@@shared.countryOrLocationError"
-            *ngIf="
-              fundingForm.get('country').hasError('required') &&
-              fundingForm.get('country').touched
-            "
-          >
-            Please enter a country or location
-          </mat-error>
+          @if (
+            fundingForm.get('country').hasError('required') &&
+            fundingForm.get('country').touched
+          ) {
+            <mat-error i18n="@@shared.countryOrLocationError">
+              Please enter a country or location
+            </mat-error>
+          }
         </mat-form-field>
       </div>
     </section>
@@ -866,43 +864,44 @@
         class="title"
         [ngClass]="{
           'orc-font-body': !platform.columns12,
-          'orc-font-body-large': platform.columns12
+          'orc-font-body-large': platform.columns12,
         }"
       >
         <div>
           <h2 class="orc-font-body" i18n="@@funding.fundingIdentifiers">
             Funding identifiers
           </h2>
-          <span *ngIf="!platform.columns12" class="required">*</span>
+          @if (!platform.columns12) {
+            <span class="required">*</span>
+          }
         </div>
       </div>
       <hr />
       <!-- Grants group -->
       <div formArrayName="grants">
-        <div
-          class="externalIdBox"
-          *ngFor="
-            let grantsGroup of grantsArray.controls;
-            let i = index;
-            let last = last
-          "
-        >
-          <ng-container *ngIf="grantsArrayDisplayState[i]">
-            <app-funding-external-identifiers-edit
-              [grantForm]="$any(grantsGroup)"
-              (cancelEvent)="cancelExternalIdEdit(i)"
-              [index]="i"
-            ></app-funding-external-identifiers-edit>
-          </ng-container>
-
-          <ng-container *ngIf="!grantsArrayDisplayState[i]">
-            <app-funding-external-identifiers-view-only
-              [grant]="grantsGroup.value"
-              (edit)="grantsArrayDisplayState[i] = true"
-              (delete)="deleteGrant(i)"
-            ></app-funding-external-identifiers-view-only>
-          </ng-container>
-        </div>
+        @for (
+          grantsGroup of grantsArray.controls;
+          track grantsGroup;
+          let i = $index;
+          let last = $last
+        ) {
+          <div class="externalIdBox">
+            @if (grantsArrayDisplayState[i]) {
+              <app-funding-external-identifiers-edit
+                [grantForm]="$any(grantsGroup)"
+                (cancelEvent)="cancelExternalIdEdit(i)"
+                [index]="i"
+              ></app-funding-external-identifiers-edit>
+            }
+            @if (!grantsArrayDisplayState[i]) {
+              <app-funding-external-identifiers-view-only
+                [grant]="grantsGroup.value"
+                (edit)="grantsArrayDisplayState[i] = true"
+                (delete)="deleteGrant(i)"
+              ></app-funding-external-identifiers-view-only>
+            }
+          </div>
+        }
         <!-- Add another -->
         <div class="row">
           <a
@@ -914,15 +913,16 @@
               >add_circle_outline</mat-icon
             >
             <span class="mat-subtitle-2">
-              <ng-container
-                i18n="@@shared.addAnotherId"
-                *ngIf="grantsArray.length"
-              >
-                Add another identifier
-              </ng-container>
-              <ng-container i18n="@@shared.addId" *ngIf="!grantsArray.length">
-                Add an identifier
-              </ng-container>
+              @if (grantsArray.length) {
+                <ng-container i18n="@@shared.addAnotherId">
+                  Add another identifier
+                </ng-container>
+              }
+              @if (!grantsArray.length) {
+                <ng-container i18n="@@shared.addId">
+                  Add an identifier
+                </ng-container>
+              }
             </span>
           </a>
         </div>
@@ -937,7 +937,7 @@
         class="title"
         [ngClass]="{
           'orc-font-body': !platform.columns12,
-          'orc-font-body-large': platform.columns12
+          'orc-font-body-large': platform.columns12,
         }"
       >
         <h2 class="orc-font-body" i18n="@@shared.visibility">Visibility</h2>

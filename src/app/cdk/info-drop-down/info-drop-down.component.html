@@ -12,14 +12,16 @@
       (!show ? ariaLabelShowDetailsFor : ariaLabelHideDetailsFor) + ' ' + name
     "
   >
-    <ng-container i18n="@@shared.showDetails" *ngIf="!show"
-      >Show details</ng-container
-    >
-    <ng-container i18n="@@shared.hideDetails" *ngIf="show"
-      >Hide details</ng-container
-    >
+    @if (!show) {
+      <ng-container i18n="@@shared.showDetails">Show details</ng-container>
+    }
+    @if (show) {
+      <ng-container i18n="@@shared.hideDetails">Hide details</ng-container>
+    }
   </a>
 </div>
-<div class="description-container description-client" *ngIf="show">
-  {{ description }}
-</div>
+@if (show) {
+  <div class="description-container description-client">
+    {{ description }}
+  </div>
+}

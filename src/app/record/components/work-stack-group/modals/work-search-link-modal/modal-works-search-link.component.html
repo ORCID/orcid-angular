@@ -50,9 +50,11 @@
           <mat-option value="All">
             <ng-container i18n="@@works.all">All</ng-container>
           </mat-option>
-          <mat-option *ngFor="let workType of workTypes" [value]="workType">
-            {{ workType }}
-          </mat-option>
+          @for (workType of workTypes; track workType) {
+            <mat-option [value]="workType">
+              {{ workType }}
+            </mat-option>
+          }
         </mat-select>
       </mat-form-field>
     </div>
@@ -74,12 +76,11 @@
           <mat-option value="All">
             <ng-container i18n="@@works.all">All</ng-container>
           </mat-option>
-          <mat-option
-            *ngFor="let geographicalArea of geographicalAreas"
-            [value]="geographicalArea"
-          >
-            {{ geographicalArea }}
-          </mat-option>
+          @for (geographicalArea of geographicalAreas; track geographicalArea) {
+            <mat-option [value]="geographicalArea">
+              {{ geographicalArea }}
+            </mat-option>
+          }
         </mat-select>
       </mat-form-field>
     </div>

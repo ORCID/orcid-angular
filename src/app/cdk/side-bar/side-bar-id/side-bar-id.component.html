@@ -2,7 +2,7 @@
   <div>
     <img
       [ngClass]="{
-        mobile: !platform.columns12
+        mobile: !platform.columns12,
       }"
       src="assets/vectors/orcid.logo.icon.svg"
       alt="orcid logo"
@@ -13,7 +13,7 @@
       class="id"
       [ngClass]="{
         'orc-font-body-small': !platform.columns12,
-        'orc-font-body-large': platform.columns12
+        'orc-font-body-large': platform.columns12,
       }"
       dir="ltr"
     >
@@ -22,22 +22,23 @@
         class="orcid-id"
         [ngClass]="{
           'orc-font-body-large': !platform.columns12,
-          'orc-font-heading-small': platform.columns12
+          'orc-font-heading-small': platform.columns12,
         }"
       >
         {{ id }}
       </h3>
     </div>
   </div>
-  <a
-    [href]="id"
-    [attr.aria-label]="labelPreviewRecord"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="preview orc-font-small-print"
-    *ngIf="privateView"
-    i18n="@@record.previewPublicRecord"
-    [attr.aria-label]="labelPreviewPublicRecord"
-    >Preview public record</a
-  >
+  @if (privateView) {
+    <a
+      [href]="id"
+      [attr.aria-label]="labelPreviewRecord"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="preview orc-font-small-print"
+      i18n="@@record.previewPublicRecord"
+      [attr.aria-label]="labelPreviewPublicRecord"
+      >Preview public record</a
+    >
+  }
 </div>

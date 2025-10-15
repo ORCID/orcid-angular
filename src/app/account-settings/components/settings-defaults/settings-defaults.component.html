@@ -10,10 +10,11 @@
   class="row"
   [title]="titleEmailFrequency"
 >
-  <app-settings-defaults-email-frequency
-    *ngIf="emailFrequencyExpanded"
-    (loading)="emailFrequencyLoading = $event"
-  ></app-settings-defaults-email-frequency>
+  @if (emailFrequencyExpanded) {
+    <app-settings-defaults-email-frequency
+      (loading)="emailFrequencyLoading = $event"
+    ></app-settings-defaults-email-frequency>
+  }
 </app-settings-panels>
 
 <app-settings-panels
@@ -23,10 +24,11 @@
   [loading]="languageFrequencyLoading"
   [(expandedContent)]="languageExpanded"
 >
-  <app-settings-defaults-language
-    *ngIf="languageExpanded"
-    (loading)="languageFrequencyLoading = $event"
-  ></app-settings-defaults-language>
+  @if (languageExpanded) {
+    <app-settings-defaults-language
+      (loading)="languageFrequencyLoading = $event"
+    ></app-settings-defaults-language>
+  }
 </app-settings-panels>
 
 <app-settings-panels
@@ -36,8 +38,9 @@
   [loading]="visibilityFrequencyLoading"
   [(expandedContent)]="visibilityExpanded"
 >
-  <app-settings-defaults-visibility
-    *ngIf="visibilityExpanded"
-    (loading)="visibilityFrequencyLoading = $event"
-  ></app-settings-defaults-visibility>
+  @if (visibilityExpanded) {
+    <app-settings-defaults-visibility
+      (loading)="visibilityFrequencyLoading = $event"
+    ></app-settings-defaults-visibility>
+  }
 </app-settings-panels>

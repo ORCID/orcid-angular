@@ -1,9 +1,7 @@
 <mat-card appearance="outlined" class="orcid-wizard">
-  <mat-progress-bar
-    *ngIf="loading"
-    mode="indeterminate"
-    id="loading-bar"
-  ></mat-progress-bar>
+  @if (loading) {
+    <mat-progress-bar mode="indeterminate" id="loading-bar"></mat-progress-bar>
+  }
 
   <mat-card-header>
     <mat-card-title role="heading" aria-level="1">
@@ -14,19 +12,19 @@
           alt="orcid logo"
         />
       </div>
-      <ng-container *ngIf="!reactivation?.isReactivation">
+      @if (!reactivation?.isReactivation) {
         <h1 class="orc-font-heading-small" i18n="@@register.create">
           Create your ORCID iD
         </h1>
-      </ng-container>
-      <ng-container *ngIf="reactivation?.isReactivation">
+      }
+      @if (reactivation?.isReactivation) {
         <h1
           class="orc-font-heading-small"
           i18n="@@register.reactivateYourOrcidAccount"
         >
           Reactivate your ORCID account
         </h1>
-      </ng-container>
+      }
     </mat-card-title>
     <mat-card-subtitle role="heading" aria-level="2">
       <h2 class="orc-font-body-small" i18n="@@register.step3.3">
@@ -36,10 +34,12 @@
   </mat-card-header>
 
   <mat-card-content>
-    <p *ngIf="!reactivation?.isReactivation">
-      Adding a current employment affiliation helps distinguish you from other
-      researchers with a similar name.
-    </p>
+    @if (!reactivation?.isReactivation) {
+      <p>
+        Adding a current employment affiliation helps distinguish you from other
+        researchers with a similar name.
+      </p>
+    }
 
     <form [formGroup]="formGroup" #form>
       <app-form-current-employment
@@ -82,9 +82,10 @@
       </div>
     </form>
   </mat-card-content>
-  <mat-progress-bar
-    *ngIf="loading"
-    mode="indeterminate"
-    id="bottom-loading-bar"
-  ></mat-progress-bar>
+  @if (loading) {
+    <mat-progress-bar
+      mode="indeterminate"
+      id="bottom-loading-bar"
+    ></mat-progress-bar>
+  }
 </mat-card>

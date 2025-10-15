@@ -98,12 +98,14 @@
       Deactivate ORCID account
     </button>
   </div>
-  <app-alert-message *ngIf="deactivatedEmail">
-    <div content>
-      <ng-container i18n="@@account.andEmailDeactivateWasSend">
-        An account deactivation email has been sent to
-      </ng-container>
-      <strong> {{ deactivatedEmail }} </strong>
-    </div>
-  </app-alert-message>
+  @if (deactivatedEmail) {
+    <app-alert-message>
+      <div content>
+        <ng-container i18n="@@account.andEmailDeactivateWasSend">
+          An account deactivation email has been sent to
+        </ng-container>
+        <strong> {{ deactivatedEmail }} </strong>
+      </div>
+    </app-alert-message>
+  }
 </app-settings-panels-data>

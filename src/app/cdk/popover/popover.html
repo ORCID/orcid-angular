@@ -12,11 +12,12 @@
     [@.disabled]="disableAnimation"
     [@transformPopover]="'enter'"
   >
+    @if (!overlapTrigger) {
     <div
       class="mde-popover-direction-arrow"
       [ngStyle]="popoverArrowStyles"
-      *ngIf="!overlapTrigger"
     ></div>
+    }
     <div
       class="mde-popover-content"
       [ngStyle]="popoverContentStyles"
