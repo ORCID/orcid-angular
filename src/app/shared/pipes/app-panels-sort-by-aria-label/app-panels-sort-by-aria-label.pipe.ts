@@ -64,8 +64,9 @@ const getStartDateLabelByType = (type: string): string => {
     case 'invited-position':
       return $localize`:@@shared.distinctionSortStart:Sort invited positions and distinction by start date`
     case 'membership':
+    case 'editorial-service':
     case 'service':
-      return $localize`:@@shared.membershipSortStart:Sort membership and service by start date`
+      return $localize`:@@shared.membershipSortStart:Sort membership, service, and editorial service by start date`
   }
 }
 
@@ -82,8 +83,9 @@ const getEndDateLabelByType = (type: string): string => {
     case 'invited-position':
       return $localize`:@@shared.distinctionSortEnd:Sort invited positions and distinction by end date`
     case 'membership':
+    case 'editorial-service':
     case 'service':
-      return $localize`:@@shared.membershipSortEnd:Sort membership and service by end date`
+      return $localize`:@@shared.membershipSortEnd:Sort membership, service, and editorial service by end date`
   }
 }
 
