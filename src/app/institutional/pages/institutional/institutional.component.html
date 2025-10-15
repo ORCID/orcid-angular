@@ -149,30 +149,36 @@
                       </ng-container>
                     }
                   </mat-autocomplete>
-                  @if (institutionFormControl.value) {
-                    <button
-                      mat-button
-                      matSuffix
-                      mat-icon-button
-                      [attr.aria-label]="labelClear"
-                      class="remove-border"
-                      (click)="clear()"
-                      type="button"
-                    >
-                      <mat-icon>close</mat-icon>
-                    </button>
-                  }
-                  @if (institutionFormControl.hasError('required')) {
-                    <mat-error i18n="@@institution.organizationRequired"
-                      >Please enter an organization name
-                    </mat-error>
-                  }
-                  @if (institutionFormControl.hasError('invalidInstitution')) {
-                    <mat-error i18n="@@institution.invalidInstitution"
-                      >We can’t identify this organization. Please try entering
-                      the organization name again.
-                    </mat-error>
-                  }
+                  <ng-container ngProjectAs="[matSuffix]">
+                    @if (institutionFormControl.value) {
+                      <button
+                        mat-button
+                        matSuffix
+                        mat-icon-button
+                        [attr.aria-label]="labelClear"
+                        class="remove-border"
+                        (click)="clear()"
+                        type="button"
+                      >
+                        <mat-icon>close</mat-icon>
+                      </button>
+                    }
+                  </ng-container>
+                  <ng-container ngProjectAs="mat-error">
+                    @if (institutionFormControl.hasError('required')) {
+                      <mat-error i18n="@@institution.organizationRequired"
+                        >Please enter an organization name
+                      </mat-error>
+                    }
+                    @if (
+                      institutionFormControl.hasError('invalidInstitution')
+                    ) {
+                      <mat-error i18n="@@institution.invalidInstitution"
+                        >We can’t identify this organization. Please try
+                        entering the organization name again.
+                      </mat-error>
+                    }
+                  </ng-container>
                 </mat-form-field>
                 <div class="step-actions">
                   <button

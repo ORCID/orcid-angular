@@ -132,10 +132,11 @@
           'disable-error': !emailError,
         }"
       >
-        @if (emailsAreValid || this.reactivation?.isReactivation) {
-          <mat-icon matSuffix>done</mat-icon>
-        }
-
+        <ng-container ngProjectAs="[matSuffix]">
+          @if (emailsAreValid || this.reactivation?.isReactivation) {
+            <mat-icon matSuffix>done</mat-icon>
+          }
+        </ng-container>
         <input
           aria-labelledby="email-input-input-label"
           id="email-input"
@@ -261,9 +262,11 @@
           [hideRequiredMarker]="true"
           [ngClass]="{ 'valid-password-input': emailsAreValid }"
         >
-          @if (emailsAreValid) {
-            <mat-icon matSuffix>done</mat-icon>
-          }
+          <ng-container ngProjectAs="[matSuffix]">
+            @if (emailsAreValid) {
+              <mat-icon matSuffix>done</mat-icon>
+            }
+          </ng-container>
           <input
             formControlName="confirmEmail"
             matInput

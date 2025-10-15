@@ -109,17 +109,19 @@
                 </ng-container>
               }
             </mat-autocomplete>
-            @if (form.get('organization').value) {
-              <button
-                class="clear"
-                matSuffix
-                mat-icon-button
-                [attr.aria-label]="ariaLabelClearOrganization"
-                (click)="clearOrganization()"
-              >
-                <mat-icon>close</mat-icon>
-              </button>
-            }
+            <ng-container ngProjectAs="[matSuffix]">
+              @if (form.get('organization').value) {
+                <button
+                  class="clear"
+                  matSuffix
+                  mat-icon-button
+                  [attr.aria-label]="ariaLabelClearOrganization"
+                  (click)="clearOrganization()"
+                >
+                  <mat-icon>close</mat-icon>
+                </button>
+              }
+            </ng-container>
           </mat-form-field>
           @if (organizationFromDatabase && displayOrganizationHint) {
             <div class="selected-org orc-font-small-print">

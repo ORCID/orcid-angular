@@ -25,19 +25,21 @@
       <mat-hint i18n="@@ngOrcid.signin.emailHint"
         >example&#64;email.com</mat-hint
       >
-      @if (emailFormControl.hasError('required')) {
-        <mat-error i18n="@@ngOrcid.signin.requiredEmail"
-          >Email is required
-        </mat-error>
-      }
-      @if (
-        emailFormControl.hasError('email') ||
-        emailFormControl.hasError('pattern')
-      ) {
-        <mat-error i18n="@@ngOrcid.signin.invalidEmail"
-          >Use the format example&#64;email.com
-        </mat-error>
-      }
+      <ng-container ngProjectAs="mat-error">
+        @if (emailFormControl.hasError('required')) {
+          <mat-error i18n="@@ngOrcid.signin.requiredEmail"
+            >Email is required
+          </mat-error>
+        }
+        @if (
+          emailFormControl.hasError('email') ||
+          emailFormControl.hasError('pattern')
+        ) {
+          <mat-error i18n="@@ngOrcid.signin.invalidEmail"
+            >Use the format example&#64;email.com
+          </mat-error>
+        }
+      </ng-container>
     </mat-form-field>
     <button
       mat-raised-button

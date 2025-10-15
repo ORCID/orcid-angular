@@ -124,35 +124,37 @@
           <mat-hint align="end"
             >{{ inputVerificationCode.value?.length || 0 }}/6
           </mat-hint>
-          @if (twoFactorForm.get('verificationCode').hasError('required')) {
-            <mat-error>
-              <p
-                i18n="@@ngOrcid.signin.2fa.verificationCodeRequired"
-                class="error-message"
-              >
-                Authentication code is required
-              </p>
-              <p class="error-length">
-                {{ inputVerificationCode.value?.length || 0 }}/6
-              </p>
-            </mat-error>
-          }
-          @if (
-            twoFactorForm.get('verificationCode').hasError('minlength') ||
-            twoFactorForm.get('verificationCode').hasError('maxlength')
-          ) {
-            <mat-error>
-              <p
-                i18n="@@ngOrcid.signin.2fa.badVerificationCodeLength"
-                class="error-message"
-              >
-                Invalid authentication code length
-              </p>
-              <p class="error-length">
-                {{ inputVerificationCode.value?.length || 0 }}/6
-              </p>
-            </mat-error>
-          }
+          <ng-container ngProjectAs="mat-error">
+            @if (twoFactorForm.get('verificationCode').hasError('required')) {
+              <mat-error>
+                <p
+                  i18n="@@ngOrcid.signin.2fa.verificationCodeRequired"
+                  class="error-message"
+                >
+                  Authentication code is required
+                </p>
+                <p class="error-length">
+                  {{ inputVerificationCode.value?.length || 0 }}/6
+                </p>
+              </mat-error>
+            }
+            @if (
+              twoFactorForm.get('verificationCode').hasError('minlength') ||
+              twoFactorForm.get('verificationCode').hasError('maxlength')
+            ) {
+              <mat-error>
+                <p
+                  i18n="@@ngOrcid.signin.2fa.badVerificationCodeLength"
+                  class="error-message"
+                >
+                  Invalid authentication code length
+                </p>
+                <p class="error-length">
+                  {{ inputVerificationCode.value?.length || 0 }}/6
+                </p>
+              </mat-error>
+            }
+          </ng-container>
         </mat-form-field>
         @if (showBadVerificationCode) {
           <mat-error>

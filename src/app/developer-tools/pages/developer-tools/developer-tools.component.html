@@ -88,18 +88,20 @@
                   type="text"
                   id="displayName"
                 />
-                @if (form.hasError('required', 'displayName')) {
-                  <mat-error
-                    i18n="@@developerTools.applicationNameCannotBeEmpty"
-                  >
-                    Application name cannot be empty
-                  </mat-error>
-                }
-                @if (form.hasError('maxlength', 'displayName')) {
-                  <mat-error i18n="@@developerTools.applicationNameMaxLength">
-                    Application name cannot exceed 255 characters.
-                  </mat-error>
-                }
+                <ng-container ngProjectAs="mat-error">
+                  @if (form.hasError('required', 'displayName')) {
+                    <mat-error
+                      i18n="@@developerTools.applicationNameCannotBeEmpty"
+                    >
+                      Application name cannot be empty
+                    </mat-error>
+                  }
+                  @if (form.hasError('maxlength', 'displayName')) {
+                    <mat-error i18n="@@developerTools.applicationNameMaxLength">
+                      Application name cannot exceed 255 characters.
+                    </mat-error>
+                  }
+                </ng-container>
                 <mat-hint i18n="@@developerTools.nameShownToUsers"
                   >The name shown to users on the OAuth authorization
                   screen</mat-hint
@@ -127,16 +129,18 @@
                   type="text"
                   id="website"
                 />
-                @if (form.hasError('required', 'website')) {
-                  <mat-error i18n="@@developerTools.websiteNameCannotBeEmpty">
-                    Website name cannot be empty
-                  </mat-error>
-                }
-                @if (form.hasError('pattern', 'website')) {
-                  <mat-error i18n="@@developerTools.invalidWebsite">
-                    Invalid website
-                  </mat-error>
-                }
+                <ng-container ngProjectAs="mat-error">
+                  @if (form.hasError('required', 'website')) {
+                    <mat-error i18n="@@developerTools.websiteNameCannotBeEmpty">
+                      Website name cannot be empty
+                    </mat-error>
+                  }
+                  @if (form.hasError('pattern', 'website')) {
+                    <mat-error i18n="@@developerTools.invalidWebsite">
+                      Invalid website
+                    </mat-error>
+                  }
+                </ng-container>
               </mat-form-field>
             </div>
             <div class="row">
@@ -164,16 +168,18 @@
                   cdkAutosizeMaxRows="1000"
                 >
                 </textarea>
-                @if (form.hasError('required', 'shortDescription')) {
-                  <mat-error i18n="@@developerTools.applicationDescription">
-                    Application description cannot be empty
-                  </mat-error>
-                }
-                @if (form.hasError('maxlength', 'shortDescription')) {
-                  <mat-error i18n="@@developerTools.descriptionNameMaxLength">
-                    Application description cannot exceed 1000 characters.
-                  </mat-error>
-                }
+                <ng-container ngProjectAs="mat-error">
+                  @if (form.hasError('required', 'shortDescription')) {
+                    <mat-error i18n="@@developerTools.applicationDescription">
+                      Application description cannot be empty
+                    </mat-error>
+                  }
+                  @if (form.hasError('maxlength', 'shortDescription')) {
+                    <mat-error i18n="@@developerTools.descriptionNameMaxLength">
+                      Application description cannot exceed 1000 characters.
+                    </mat-error>
+                  }
+                </ng-container>
                 <mat-hint i18n="@@developerTools.theDescriptionShown"
                   >The description shown to users on the OAuth authorization
                   screen. Maximum 1000 characters.</mat-hint
@@ -267,18 +273,20 @@
                       placeholder="eg: https://orcid.org
           "
                     />
-                    @if (form.hasError('required', ['redirectUris', i])) {
-                      <mat-error
-                        i18n="@@developerTools.redirectUriCannotBeEmpty"
-                      >
-                        Redirect URI cannot be empty
-                      </mat-error>
-                    }
-                    @if (form.hasError('pattern', ['redirectUris', i])) {
-                      <mat-error i18n="@@developerTools.invalidRedirectUrl">
-                        Invalid redirect URL
-                      </mat-error>
-                    }
+                    <ng-container ngProjectAs="mat-error">
+                      @if (form.hasError('required', ['redirectUris', i])) {
+                        <mat-error
+                          i18n="@@developerTools.redirectUriCannotBeEmpty"
+                        >
+                          Redirect URI cannot be empty
+                        </mat-error>
+                      }
+                      @if (form.hasError('pattern', ['redirectUris', i])) {
+                        <mat-error i18n="@@developerTools.invalidRedirectUrl">
+                          Invalid redirect URL
+                        </mat-error>
+                      }
+                    </ng-container>
                   </mat-form-field>
                   @if (redirectUris.controls.length > 1) {
                     <button

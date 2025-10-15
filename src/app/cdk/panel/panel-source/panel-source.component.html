@@ -122,22 +122,24 @@
       </div>
     }
   </div>
-  @if (!isPublicRecord) {
-    <div align-end>
-      @if ((stackLength > 1 && displayTheStack) || stackLength === 1) {
-        <button
-          mat-icon-button
-          [matTooltip]="labelDeleteButton"
-          [attr.aria-label]="
-            type | appPanelActivityActionAriaLabel: 'delete' : this.panelTitle
-          "
-          (click)="delete()"
-        >
-          <mat-icon class="large-material-icon delete-button">
-            delete_outline
-          </mat-icon>
-        </button>
-      }
-    </div>
-  }
+  <ng-container ngProjectAs="[align-end]">
+    @if (!isPublicRecord) {
+      <div align-end>
+        @if ((stackLength > 1 && displayTheStack) || stackLength === 1) {
+          <button
+            mat-icon-button
+            [matTooltip]="labelDeleteButton"
+            [attr.aria-label]="
+              type | appPanelActivityActionAriaLabel: 'delete' : this.panelTitle
+            "
+            (click)="delete()"
+          >
+            <mat-icon class="large-material-icon delete-button">
+              delete_outline
+            </mat-icon>
+          </button>
+        }
+      </div>
+    }
+  </ng-container>
 </app-panel-data>

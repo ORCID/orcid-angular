@@ -82,22 +82,24 @@
     </div>
   </button>
   <button mat-menu-item (click)="goto('inbox', 'fromMenuButton')" id="cy-inbox">
-    @if (inboxUnread === 0) {
-      <mat-icon>
-        @if (inboxUnread === 0) {
-          <img
-            class="bell-icon"
-            src="./assets/vectors/notification-button.svg"
-            alt=""
-          />
-        }
-      </mat-icon>
-    }
-    @if (inboxUnread > 0) {
-      <mat-icon
-        ><img src="./assets/vectors/notification-button-active.svg"
-      /></mat-icon>
-    }
+    <ng-container ngProjectAs="mat-icon">
+      @if (inboxUnread === 0) {
+        <mat-icon>
+          @if (inboxUnread === 0) {
+            <img
+              class="bell-icon"
+              src="./assets/vectors/notification-button.svg"
+              alt=""
+            />
+          }
+        </mat-icon>
+      }
+      @if (inboxUnread > 0) {
+        <mat-icon
+          ><img src="./assets/vectors/notification-button-active.svg"
+        /></mat-icon>
+      }
+    </ng-container>
     <span i18n="@@workspace.notifications">Notifications inbox</span
     ><span class="notifcation-number"> ({{ inboxUnread }})</span>
   </button>

@@ -17,33 +17,35 @@
             ></mat-progress-bar>
           }
           <mat-card-header>
-            @if (!isOauthError) {
-              <mat-card-title role="heading" aria-level="1">
-                <div class="icon">
-                  <img src="assets/vectors/orcid.logo.icon.svg" alt="" />
-                </div>
-                <h1
-                  class="orc-font-heading-small"
-                  i18n="@@ngOrcid.signin.signInToOrcid"
-                >
-                  Sign in to ORCID
-                </h1>
-                <div class="row">
-                  <div class="mat-subtitle-2">
-                    <ng-container i18n="@@ngOrcid.signin.dontHaveYourOrcid">
-                      Don't have your ORCID iD yet?
-                    </ng-container>
-                    <a
-                      class="row register-now underline"
-                      i18n="@@ngOrcid.signin.registerNow"
-                      (click)="register()"
-                      id="register-button"
-                      >Register now
-                    </a>
+            <ng-container ngProjectAs="mat-card-title">
+              @if (!isOauthError) {
+                <mat-card-title role="heading" aria-level="1">
+                  <div class="icon">
+                    <img src="assets/vectors/orcid.logo.icon.svg" alt="" />
                   </div>
-                </div>
-              </mat-card-title>
-            }
+                  <h1
+                    class="orc-font-heading-small"
+                    i18n="@@ngOrcid.signin.signInToOrcid"
+                  >
+                    Sign in to ORCID
+                  </h1>
+                  <div class="row">
+                    <div class="mat-subtitle-2">
+                      <ng-container i18n="@@ngOrcid.signin.dontHaveYourOrcid">
+                        Don't have your ORCID iD yet?
+                      </ng-container>
+                      <a
+                        class="row register-now underline"
+                        i18n="@@ngOrcid.signin.registerNow"
+                        (click)="register()"
+                        id="register-button"
+                        >Register now
+                      </a>
+                    </div>
+                  </div>
+                </mat-card-title>
+              }
+            </ng-container>
           </mat-card-header>
           <mat-card-content>
             @if ((!isLoggedIn && !isOauthError) || isForceLogin) {

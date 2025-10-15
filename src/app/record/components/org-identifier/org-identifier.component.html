@@ -64,81 +64,83 @@
           >
           {{ orgDisambiguated.sourceType | uppercase }}
         </h3>
-        @for (
-          org of orgDisambiguated.orgDisambiguatedExternalIdentifiers;
-          track org;
-          let i = $index
-        ) {
-          <div class="padding-level-3">
-            {{ org.identifierType }}:
-            @if (
-              org.identifierType
-                | organizationLink: org.preferred
-                | isUrlWithProtocol
-            ) {
-              <a
-                class="underline"
-                target="_blank"
-                rel="noopener noreferrer"
-                href="{{
-                  org.identifierType | organizationLink: org.preferred
-                }}"
-              >
-                {{ org.preferred }}
-              </a>
-            }
-            @if (
-              !(
+        <ng-container ngProjectAs="div">
+          @for (
+            org of orgDisambiguated.orgDisambiguatedExternalIdentifiers;
+            track org;
+            let i = $index
+          ) {
+            <div class="padding-level-3">
+              {{ org.identifierType }}:
+              @if (
                 org.identifierType
-                | organizationLink: org.preferred
-                | isUrlWithProtocol
-              )
-            ) {
-              {{ org.preferred }}
-            }
-            @if (org.preferred) {
-              <span> (</span><span i18n="@@shared.preferred">preferred</span
-              ><span>)</span>
-            }
-            @if (org.preferred && org.all.length > 1) {
-              <span>, </span>
-            }
-            @for (id of org.all; track id; let j = $index) {
-              @if (id != org.preferred) {
-                @if (
-                  !(id | isUrlWithProtocol) &&
-                  (org.identifierType | organizationLink: id) === ''
-                ) {
-                  {{ id }}
-                }
-                @if ((org.identifierType | organizationLink: id) !== '') {
-                  <a
-                    class="underline"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href="{{ org.identifierType | organizationLink: id }}"
-                  >
+                  | organizationLink: org.preferred
+                  | isUrlWithProtocol
+              ) {
+                <a
+                  class="underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="{{
+                    org.identifierType | organizationLink: org.preferred
+                  }}"
+                >
+                  {{ org.preferred }}
+                </a>
+              }
+              @if (
+                !(
+                  org.identifierType
+                  | organizationLink: org.preferred
+                  | isUrlWithProtocol
+                )
+              ) {
+                {{ org.preferred }}
+              }
+              @if (org.preferred) {
+                <span> (</span><span i18n="@@shared.preferred">preferred</span
+                ><span>)</span>
+              }
+              @if (org.preferred && org.all.length > 1) {
+                <span>, </span>
+              }
+              @for (id of org.all; track id; let j = $index) {
+                @if (id != org.preferred) {
+                  @if (
+                    !(id | isUrlWithProtocol) &&
+                    (org.identifierType | organizationLink: id) === ''
+                  ) {
                     {{ id }}
-                  </a>
-                } @else {
-                  @if (id | isUrlWithProtocol) {
+                  }
+                  @if ((org.identifierType | organizationLink: id) !== '') {
                     <a
                       class="underline"
                       target="_blank"
                       rel="noopener noreferrer"
-                      href="{{ id }}"
+                      href="{{ org.identifierType | organizationLink: id }}"
                     >
                       {{ id }}
                     </a>
+                  } @else {
+                    @if (id | isUrlWithProtocol) {
+                      <a
+                        class="underline"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href="{{ id }}"
+                      >
+                        {{ id }}
+                      </a>
+                    }
+                  }
+                  @if (org.all[j + 1] && org.all[j + 1] != org.preferred) {
+                    <span>, </span>
                   }
                 }
-                @if (org.all[j + 1] && org.all[j + 1] != org.preferred) {
-                  <span>, </span>
-                }
               }
-            }
-          </div>
-        }
+            </div>
+          }
+        </ng-container>
       </app-display-attribute>
     }
   </ng-container>
