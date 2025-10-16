@@ -144,7 +144,7 @@ export const AffiliationTypeLabel = {
   [AffiliationType.service]: $localize`:@@shared.service:Service`,
   [AffiliationType[
     'editorial-service'
-  ]]: $localize`:@@shared.editorialService:Editorial Service`,
+  ]]: $localize`:@@shared.editorialService:Editorial service`,
 }
 
 export interface EmploymentsEndpoint {
