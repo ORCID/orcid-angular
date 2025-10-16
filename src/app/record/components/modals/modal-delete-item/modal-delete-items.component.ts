@@ -39,6 +39,7 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
     | 'distinction'
     | 'membership'
     | 'service'
+    | 'editorial-service'
     | 'works'
     | 'activities'
     | 'peer-review'
@@ -145,6 +146,7 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
       case 'distinction':
       case 'membership':
       case 'service':
+      case 'editorial-service':
         this._recordAffiliationService
           .delete(putCode)
           .pipe(first())
@@ -195,7 +197,8 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
       this.type === 'invited-position' ||
       this.type === 'distinction' ||
       this.type === 'membership' ||
-      this.type === 'service'
+      this.type === 'service' ||
+      this.type === 'editorial-service'
     )
   }
 

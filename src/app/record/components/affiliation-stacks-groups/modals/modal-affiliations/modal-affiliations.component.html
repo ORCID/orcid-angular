@@ -449,7 +449,7 @@
         </label>
       </div>
       <div
-        class="input-container mat-hint"
+        class="input-container mat-hint bottom-padding"
         *ngIf="type === 'editorial-service'"
       >
         <mat-form-field appearance="outline" class="mat-form-field-min">
@@ -829,8 +829,10 @@
           id="visibility"
           class="title visibility"
           [ngClass]="{
-            'orc-font-body': !platform.columns12,
-            'orc-font-body-large': platform.columns12
+          'orc-font-body': !platform.columns12,
+          'orc-font-body-large': platform.columns12,
+          'visibility': type !== 'editorial-service',
+          'visibility-editorial-service': type === 'editorial-service'
           }"
         >
           <p>
