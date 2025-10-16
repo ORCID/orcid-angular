@@ -185,7 +185,9 @@ export class AffiliationStackComponent implements OnInit, OnDestroy {
         )
     }
     const $affiliationDetails = this._affiliationService.getAffiliationsDetails(
-      affiliation.affiliationType.value === 'editorial-service' ? 'service' : affiliation.affiliationType.value,
+      affiliation.affiliationType.value === 'editorial-service'
+        ? 'service'
+        : affiliation.affiliationType.value,
       putCode,
       {
         publicRecordId: this.isPublicRecord,
