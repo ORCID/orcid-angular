@@ -36,7 +36,7 @@ import {
   MAX_LENGTH_LESS_THAN_ONE_THOUSAND,
   MAX_LENGTH_LESS_THAN_TWO_THOUSAND,
   URL_REGEXP,
-  isValidISBN
+  isValidISBN,
 } from '../../../../constants'
 import {
   Contributor,
@@ -250,17 +250,17 @@ export class WorkFormComponent implements OnInit {
   ): AsyncValidatorFn {
     return (control: AbstractControl) => {
       //try first the ISBN validation locally
-      if (externalIdentifierType === 'isbn' ) {
+      if (externalIdentifierType === 'isbn') {
         if (!isValidISBN(control.value)) {
           return of({
-                validFormat: true,
-                resolved:false,
-                attemptedResolution: false,
-                generatedUrl: null,
-              });
+            validFormat: true,
+            resolved: false,
+            attemptedResolution: false,
+            generatedUrl: null,
+          })
         }
       }
-        
+
       return this._workService
         .validateWorkIdTypes(externalIdentifierType, control.value)
         .pipe(

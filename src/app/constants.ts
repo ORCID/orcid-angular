@@ -440,7 +440,6 @@ export function affiliationToOrganization(
 
 export const LOCAL_SESSION_UID = 'LOCAL_SESSION_UID'
 
-
 /**
  * Validates if a given string is a valid ISBN-10 or ISBN-13 number.
  *
@@ -455,16 +454,16 @@ export const LOCAL_SESSION_UID = 'LOCAL_SESSION_UID'
  */
 export function isValidISBN(isbn: string): boolean {
   if (!isbn) {
-    return false;
+    return false
   }
-  const cleanedIsbn = isbn.replace(/[-‐]/g, '');
+  const cleanedIsbn = isbn.replace(/[-‐]/g, '')
 
   if (cleanedIsbn.length === 10) {
-    return isValidIsbn10(cleanedIsbn);
+    return isValidIsbn10(cleanedIsbn)
   } else if (cleanedIsbn.length === 13) {
-    return isValidIsbn13(cleanedIsbn);
+    return isValidIsbn13(cleanedIsbn)
   }
-  return false;
+  return false
 }
 
 /**
@@ -474,23 +473,23 @@ export function isValidISBN(isbn: string): boolean {
 function isValidIsbn10(isbn: string): boolean {
   // An ISBN-10 must be 9 digits followed by a digit or an 'X'.
   if (!/^\d{9}[\dX]$/i.test(isbn)) {
-    return false;
+    return false
   }
 
-  let checksum = 0;
+  let checksum = 0
   for (let i = 0; i < 9; i++) {
-    checksum += parseInt(isbn[i]) * (10 - i);
+    checksum += parseInt(isbn[i]) * (10 - i)
   }
 
-  const lastChar = isbn[9].toUpperCase();
+  const lastChar = isbn[9].toUpperCase()
   if (lastChar === 'X') {
-    checksum += 10;
+    checksum += 10
   } else {
-    checksum += parseInt(lastChar);
+    checksum += parseInt(lastChar)
   }
 
   // The checksum must be perfectly divisible by 11.
-  return checksum % 11 === 0;
+  return checksum % 11 === 0
 }
 
 /**
@@ -500,17 +499,17 @@ function isValidIsbn10(isbn: string): boolean {
 function isValidIsbn13(isbn: string): boolean {
   // An ISBN-13 must be 13 digits.
   if (!/^\d{13}$/.test(isbn)) {
-    return false;
+    return false
   }
 
-  let checksum = 0;
+  let checksum = 0
   for (let i = 0; i < 13; i++) {
-    const digit = parseInt(isbn[i]);
+    const digit = parseInt(isbn[i])
     // Multiply every other digit by 3, starting with the second digit.
-    const weight = i % 2 === 0 ? 1 : 3;
-    checksum += digit * weight;
+    const weight = i % 2 === 0 ? 1 : 3
+    checksum += digit * weight
   }
 
   // The checksum must be perfectly divisible by 10.
-  return checksum % 10 === 0;
+  return checksum % 10 === 0
 }
