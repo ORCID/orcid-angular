@@ -48,6 +48,8 @@ export const ORCID_URI_REGEXP =
 // https://regex101.com/r/M1fqZi/1
 export const URL_REGEXP =
   /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#%[\]@!\$&'\(\)\*\+\\,;=.>< ]+$/i
+// ISSN pattern 1234-5678
+export const ISSN_REGEXP = /^\d{4}-\d{4}$/
 /* PROTOCOL REQUIRED*/
 // https://regex101.com/r/pSnDC7/1
 export const URL_REGEXP_BACKEND =
@@ -369,6 +371,8 @@ export function getAriaLabel(
           return $localize`:@@shared.dialogAriaLabeledByMembership:Manage membership dialog`
         case 'service':
           return $localize`:@@shared.dialogAriaLabeledByService:Manage service dialog`
+        case 'editorial-service':
+          return $localize`:@@shared.dialogAriaLabeledByEditorialService:Manage editorial service dialog`
       }
     case WorkBibtexModalComponent:
       return $localize`:@@shared.dialogAriaLabeledByBibtex:Manage bibtex dialog`
@@ -435,3 +439,77 @@ export function affiliationToOrganization(
 }
 
 export const LOCAL_SESSION_UID = 'LOCAL_SESSION_UID'
+
+/**
+ * Validates if a given string is a valid ISBN-10 or ISBN-13 number.
+ *
+ * This function checks the following criteria:
+ * - The input must be a non-empty string.
+ * - After removing hyphens, the string must contain either 10 or 13 characters.
+ * - The characters must adhere to the ISBN format (digits for ISBN-13, digits and a possible 'X' for ISBN-10).
+ * - The string must pass the respective ISBN-10 or ISBN-13 checksum algorithm.
+ *
+ * @param isbn The string to validate. Can contain hyphens.
+ * @returns {boolean} True if the string is a valid ISBN, otherwise false.
+ */
+export function isValidISBN(isbn: string): boolean {
+  if (!isbn) {
+    return false
+  }
+  const cleanedIsbn = isbn.replace(/[-‐]/g, '')
+
+  if (cleanedIsbn.length === 10) {
+    return isValidIsbn10(cleanedIsbn)
+  } else if (cleanedIsbn.length === 13) {
+    return isValidIsbn13(cleanedIsbn)
+  }
+  return false
+}
+
+/**
+ * Validates an ISBN-10 checksum.
+ * @param isbn A 10-character string with no hyphens.
+ */
+function isValidIsbn10(isbn: string): boolean {
+  // An ISBN-10 must be 9 digits followed by a digit or an 'X'.
+  if (!/^\d{9}[\dX]$/i.test(isbn)) {
+    return false
+  }
+
+  let checksum = 0
+  for (let i = 0; i < 9; i++) {
+    checksum += parseInt(isbn[i]) * (10 - i)
+  }
+
+  const lastChar = isbn[9].toUpperCase()
+  if (lastChar === 'X') {
+    checksum += 10
+  } else {
+    checksum += parseInt(lastChar)
+  }
+
+  // The checksum must be perfectly divisible by 11.
+  return checksum % 11 === 0
+}
+
+/**
+ * Validates an ISBN-13 checksum.
+ * @param isbn A 13-character string with no hyphens.
+ */
+function isValidIsbn13(isbn: string): boolean {
+  // An ISBN-13 must be 13 digits.
+  if (!/^\d{13}$/.test(isbn)) {
+    return false
+  }
+
+  let checksum = 0
+  for (let i = 0; i < 13; i++) {
+    const digit = parseInt(isbn[i])
+    // Multiply every other digit by 3, starting with the second digit.
+    const weight = i % 2 === 0 ? 1 : 3
+    checksum += digit * weight
+  }
+
+  // The checksum must be perfectly divisible by 10.
+  return checksum % 10 === 0
+}

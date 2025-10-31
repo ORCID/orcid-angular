@@ -36,14 +36,21 @@
           *ngIf="type === 'invited-position'"
           >join_inner</mat-icon
         >
-        <mat-icon class="material-icons-outlined" *ngIf="type === 'distinction'"
-          >stars</mat-icon
+        <mat-icon
+          class="material-symbols-outlined"
+          *ngIf="type === 'distinction'"
+          >crown</mat-icon
         >
         <mat-icon class="material-icons-outlined" *ngIf="type === 'membership'"
           >card_membership</mat-icon
         >
         <mat-icon class="material-icons-outlined" *ngIf="type === 'service'"
           >badge</mat-icon
+        >
+        <mat-icon
+          class="material-symbols-outlined"
+          *ngIf="type === 'editorial-service'"
+          >auto_stories</mat-icon
         >
         <div class="vl"></div>
       </ng-container>

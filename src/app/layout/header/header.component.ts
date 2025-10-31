@@ -15,6 +15,7 @@ import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { UserService } from 'src/app/core'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
+import { TogglzFlag } from 'src/app/core/togglz/togglz-flags.enum'
 import { ApplicationMenuItem, UserInfo } from 'src/app/types'
 import {
   ApplicationMenuItemBasic,
@@ -92,7 +93,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
       this.togglz = data
     })
     _togglz
-      .getStateOf('WORDPRESS_HOME_PAGE')
+      .getStateOf(TogglzFlag.WORDPRESS_HOME_PAGE)
       .pipe(
         tap((state) => {
           this.notWordpressDisplay = !state
@@ -102,7 +103,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
     // Subscribe to compact header feature flag
     _togglz
-      .getStateOf('HEADER_COMPACT')
+      .getStateOf(TogglzFlag.HEADER_COMPACT)
       .pipe(
         tap((state) => {
           this.compactFeatureEnabled = state

@@ -34,5 +34,16 @@
     border: transparent;
     font-size: mat.m2-font-size($config, body-1) !important;
   }
+  .mat-mdc-form-field-underline {
+    border-bottom: solid 1px mat.m2-get-color-from-palette($background, grey);
+  }
+
+  .bottom-padding {
+    padding-bottom: 15px;
+  }
+
+  .visibility-editorial-service {
+    margin-top: 5px;
+  }
 }
 @include model-affiliation-theme($orcid-app-theme);

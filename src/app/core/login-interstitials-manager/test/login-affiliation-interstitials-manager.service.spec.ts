@@ -11,6 +11,7 @@ import { QaFlag } from '../../qa-flag/qa-flags.enum'
 import { LoginAffiliationInterstitialManagerService } from '../implementations/login-affiliation-interstitials-manager.service'
 import { AffiliationsInterstitialDialogComponent } from 'src/app/cdk/interstitials/affiliations-interstitial/interstitial-dialog-extend/affiliations-interstitial-dialog.component'
 import { WINDOW_PROVIDERS } from 'src/app/cdk/window'
+import { TogglzFlag } from '../../togglz/togglz-flags.enum'
 
 describe('LoginAffiliationInterstitialManagerService', () => {
   let service: LoginAffiliationInterstitialManagerService
@@ -58,9 +59,9 @@ describe('LoginAffiliationInterstitialManagerService', () => {
 
     it('should have the correct Interstitial Toggle name', () => {
       expect(service.INTERSTITIAL_TOGGLE).toEqual([
-        'LOGIN_AFFILIATION_INTERSTITIAL',
-        'OAUTH_AFFILIATION_INTERSTITIAL',
-      ] as string[])
+        TogglzFlag.LOGIN_AFFILIATION_INTERSTITIAL,
+        TogglzFlag.OAUTH_AFFILIATION_INTERSTITIAL,
+      ])
     })
 
     it('should have the correct QA_FLAG_FOR_FORCE_INTERSTITIAL_AS_NEVER_SEEN', () => {

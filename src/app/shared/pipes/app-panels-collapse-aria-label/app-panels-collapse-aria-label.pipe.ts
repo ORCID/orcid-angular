@@ -17,7 +17,11 @@ export class AppPanelsCollapseAriaLabelPipe implements PipeTransform {
       panelType === 'invited-position'
     ) {
       return $localize`:@@shared.distinctionInvitedPositionCollapseAriaLabel:Collapse the Invited positions and distinction section`
-    } else if (panelType === 'membership' || panelType === 'service') {
+    } else if (
+      panelType === 'membership' ||
+      panelType === 'service' ||
+      panelType === 'editorial-service'
+    ) {
       return $localize`:@@shared.membershipServiceCollapseAriaLabel:Collapse the Membership and service section`
     } else if (panelType === 'funding') {
       return $localize`:@@shared.fundingServiceCollapseAriaLabel:Collapse the Funding section`

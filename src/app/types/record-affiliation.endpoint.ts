@@ -14,6 +14,7 @@ export enum AffiliationGroupsTypes {
   DISTINCTION = 'DISTINCTION',
   MEMBERSHIP = 'MEMBERSHIP',
   SERVICE = 'SERVICE',
+  EDITORIAL_SERVICE = 'EDITORIAL_SERVICE',
 }
 
 export interface AffiliationsEndpoint {
@@ -22,6 +23,7 @@ export interface AffiliationsEndpoint {
     EMPLOYMENT?: AffiliationGroup[]
     EDUCATION?: AffiliationGroup[]
     SERVICE?: AffiliationGroup[]
+    EDITORIAL_SERVICE?: AffiliationGroup[]
     DISTINCTION?: AffiliationGroup[]
     MEMBERSHIP?: AffiliationGroup[]
     QUALIFICATION?: AffiliationGroup[]
@@ -126,6 +128,7 @@ export enum AffiliationType {
   'distinction' = 'distinction',
   'membership' = 'membership',
   'service' = 'service',
+  'editorial-service' = 'editorial-service',
   'professional-activities' = 'professional-activities',
 }
 
@@ -139,6 +142,9 @@ export const AffiliationTypeLabel = {
   [AffiliationType.distinction]: $localize`:@@shared.distinction:Distinction`,
   [AffiliationType.membership]: $localize`:@@shared.membershipTitle:Membership`,
   [AffiliationType.service]: $localize`:@@shared.service:Service`,
+  [AffiliationType[
+    'editorial-service'
+  ]]: $localize`:@@shared.editorialService:Editorial service`,
 }
 
 export interface EmploymentsEndpoint {

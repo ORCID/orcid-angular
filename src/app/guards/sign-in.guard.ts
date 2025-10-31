@@ -13,6 +13,7 @@ import { TogglzService } from '../core/togglz/togglz.service'
 import { OauthParameters } from '../types'
 import { FeatureLoggerService } from '../core/logging/feature-logger.service'
 import { AuthDecisionService } from '../core/auth-decision/auth-decision.service'
+import { TogglzFlag } from '../core/togglz/togglz-flags.enum'
 
 @Injectable({
   providedIn: 'root',
@@ -34,7 +35,7 @@ export class SignInGuard {
 
     return forkJoin({
       isOauthAuthorizationTogglzEnable: this._togglzService
-        .getStateOf('OAUTH_AUTHORIZATION')
+        .getStateOf(TogglzFlag.OAUTH_AUTHORIZATION)
         .pipe(take(1)),
       session: this._user.getUserSession().pipe(take(1)),
     }).pipe(

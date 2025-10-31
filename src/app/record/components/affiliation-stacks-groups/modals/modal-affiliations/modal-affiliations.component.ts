@@ -9,6 +9,8 @@ import {
   Validators,
 } from '@angular/forms'
 
+import { ExternalIdentifier } from 'src/app/types/common.endpoint'
+
 import {
   PlatformInfo,
   PlatformInfoService,
@@ -24,6 +26,7 @@ import { VisibilityStrings } from '../../../../../types/common.endpoint'
 import { RecordCountriesService } from '../../../../../core/record-countries/record-countries.service'
 import { first, map, switchMap, tap } from 'rxjs/operators'
 import {
+  ISSN_REGEXP,
   MAX_LENGTH_LESS_THAN_ONE_THOUSAND,
   MAX_LENGTH_LESS_THAN_TWO_THOUSAND,
   URL_REGEXP,
@@ -35,6 +38,7 @@ import {
 import { Observable } from 'rxjs/internal/Observable'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { RecordService } from 'src/app/core/record/record.service'
+import { WorkRelationships } from 'src/app/types/works.endpoint'
 
 @Component({
   selector: 'app-modal-affiliations',
@@ -55,6 +59,7 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
 
   cancelChanges = $localize`:@@shared.cancelChangesAndClose:Cancel changes and close`
   linkLabel = $localize`:@@shared.link:Link`
+  issnLabel = $localize`:@@shared.link:Link`
   endDateLabel = $localize`:@@shared.endDate:End date`
   private _type: AffiliationType
   dateLabel: string
@@ -90,6 +95,7 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
   department = ''
   title = ''
   link = ''
+  issn
 
   years = Array(110)
     .fill(0)
@@ -155,80 +161,7 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initialValues()
-
-    this.affiliationForm = this._formBuilder.group(
-      {
-        organization: new UntypedFormControl(
-          {
-            value: this.organization,
-            disabled: this.selectedOrganizationFromDatabase,
-          },
-          {
-            validators: [
-              Validators.required,
-              Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
-            ],
-          }
-        ),
-        city: new UntypedFormControl(
-          { value: this.city, disabled: this.selectedOrganizationFromDatabase },
-          {
-            validators: [
-              Validators.required,
-              Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
-            ],
-          }
-        ),
-        region: new UntypedFormControl(
-          {
-            value: this.region,
-            disabled: this.selectedOrganizationFromDatabase,
-          },
-          {
-            validators: [
-              Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
-            ],
-          }
-        ),
-        country: new UntypedFormControl('', {
-          validators: [Validators.required],
-        }),
-        department: new UntypedFormControl(this.department, {
-          validators: [Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND)],
-        }),
-        title: new UntypedFormControl(this.title, {
-          validators: [Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND)],
-        }),
-        startDateGroup: this._formBuilder.group(
-          {
-            startDateDay: ['', []],
-            startDateMonth: ['', []],
-            startDateYear: ['', []],
-          },
-          { validator: dateValidator('startDate') }
-        ),
-        endDateGroup: this._formBuilder.group(
-          {
-            endDateDay: [''],
-            endDateMonth: [''],
-            endDateYear: [''],
-          },
-          { validator: dateValidator('endDate') }
-        ),
-        link: new UntypedFormControl(this.link, {
-          validators: [
-            Validators.pattern(URL_REGEXP),
-            Validators.maxLength(MAX_LENGTH_LESS_THAN_TWO_THOUSAND),
-          ],
-        }),
-        visibility: new UntypedFormControl(this.defaultVisibility, {
-          validators: [Validators.required],
-        }),
-      },
-      {
-        validator: endDateValidator(),
-      }
-    )
+    this.getAffiliationFormForType()
 
     this._record
       .getPreferences()
@@ -290,7 +223,10 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
       .subscribe((codes) => {
         this.countryCodes = codes
         this.loadingCountryCodes = false
-        if (this.affiliation) {
+        if (
+          this.affiliation &&
+          this.affiliation.affiliationType?.value !== 'editorial-service'
+        ) {
           this.affiliationForm.patchValue({
             country: this.countryCodes.find(
               (x) => x.value === this.affiliation.country.value
@@ -329,6 +265,16 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
       this.department = this.affiliation.departmentName?.value
       this.title = this.affiliation.roleTitle?.value
       this.link = this.affiliation.url?.value
+      if (this.affiliation.affiliationType?.value === 'editorial-service') {
+        if (this.affiliation.affiliationName?.value) {
+          this.organization = this.affiliation.affiliationName?.value
+        }
+        if (this.affiliation.affiliationExternalIdentifiers?.length > 0) {
+          this.issn = this.affiliation.affiliationExternalIdentifiers.find(
+            (x) => x.externalIdentifierType.value === 'issn'
+          )?.externalIdentifierId.value
+        }
+      }
     }
   }
 
@@ -351,21 +297,21 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
           : this.affiliation?.putCode?.value,
       },
       city: {
-        value: affiliationForm.get('city').value,
+        value: affiliationForm.get('city')?.value,
       },
       region: {
-        value: affiliationForm.get('region').value,
+        value: affiliationForm.get('region')?.value,
       },
       country: {
         value: this.countryCodes.find(
-          (x) => x.key === affiliationForm.get('country').value
-        ).value,
+          (x) => x.key === affiliationForm.get('country')?.value
+        )?.value,
       },
       roleTitle: {
         value: affiliationForm.get('title').value,
       },
       departmentName: {
-        value: affiliationForm.get('department').value
+        value: affiliationForm.get('department')?.value
           ? affiliationForm.get('department').value
           : '',
       },
@@ -437,6 +383,31 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
           ? affiliationForm.get('organization').value?.value
           : affiliationForm.get('organization').value,
       }
+    }
+
+    if (this.type === 'editorial-service') {
+      affiliationToSave.affiliationType.value = AffiliationType['service']
+      const issnUrl = `https://portal.issn.org/resource/ISSN/${
+        affiliationForm.get('issn').value
+      }`
+      affiliationToSave.affiliationExternalIdentifiers = [
+        {
+          errors: [],
+          externalIdentifierId: {
+            errors: [],
+            value: affiliationForm.get('issn').value,
+            required: true,
+          },
+          externalIdentifierType: { value: 'issn' },
+          url: { value: issnUrl },
+          relationship: {
+            value: WorkRelationships.self,
+            required: true,
+          },
+          normalized: { value: affiliationForm.get('issn').value },
+          normalizedUrl: { value: issnUrl },
+        },
+      ]
     }
 
     if (this.requireOrganizationDisambiguatedDataOnRefresh) {
@@ -625,5 +596,143 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.$destroy.next(true)
     this.$destroy.unsubscribe()
+  }
+
+  getAffiliationFormForType() {
+    if (this.type === 'editorial-service') {
+      this.affiliationForm = this._formBuilder.group(
+        {
+          organization: new UntypedFormControl(
+            {
+              value: this.organization,
+              disabled: this.selectedOrganizationFromDatabase,
+            },
+            {
+              validators: [
+                Validators.required,
+                Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
+              ],
+            }
+          ),
+          title: new UntypedFormControl(this.title, {
+            validators: [
+              Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
+            ],
+          }),
+          startDateGroup: this._formBuilder.group(
+            {
+              startDateDay: ['', []],
+              startDateMonth: ['', []],
+              startDateYear: ['', []],
+            },
+            { validator: dateValidator('startDate') }
+          ),
+          endDateGroup: this._formBuilder.group(
+            {
+              endDateDay: [''],
+              endDateMonth: [''],
+              endDateYear: [''],
+            },
+            { validator: dateValidator('endDate') }
+          ),
+          link: new UntypedFormControl(this.link, {
+            validators: [
+              Validators.pattern(URL_REGEXP),
+              Validators.maxLength(MAX_LENGTH_LESS_THAN_TWO_THOUSAND),
+            ],
+          }),
+          visibility: new UntypedFormControl(this.defaultVisibility, {
+            validators: [Validators.required],
+          }),
+          issn: new UntypedFormControl(this.issn, {
+            validators: [Validators.required, Validators.pattern(ISSN_REGEXP)],
+          }),
+        },
+        {
+          validator: endDateValidator(),
+        }
+      )
+    } else {
+      this.affiliationForm = this._formBuilder.group(
+        {
+          organization: new UntypedFormControl(
+            {
+              value: this.organization,
+              disabled: this.selectedOrganizationFromDatabase,
+            },
+            {
+              validators: [
+                Validators.required,
+                Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
+              ],
+            }
+          ),
+          city: new UntypedFormControl(
+            {
+              value: this.city,
+              disabled: this.selectedOrganizationFromDatabase,
+            },
+            {
+              validators: [
+                Validators.required,
+                Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
+              ],
+            }
+          ),
+          region: new UntypedFormControl(
+            {
+              value: this.region,
+              disabled: this.selectedOrganizationFromDatabase,
+            },
+            {
+              validators: [
+                Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
+              ],
+            }
+          ),
+          country: new UntypedFormControl('', {
+            validators: [Validators.required],
+          }),
+          department: new UntypedFormControl(this.department, {
+            validators: [
+              Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
+            ],
+          }),
+          title: new UntypedFormControl(this.title, {
+            validators: [
+              Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
+            ],
+          }),
+          startDateGroup: this._formBuilder.group(
+            {
+              startDateDay: ['', []],
+              startDateMonth: ['', []],
+              startDateYear: ['', []],
+            },
+            { validator: dateValidator('startDate') }
+          ),
+          endDateGroup: this._formBuilder.group(
+            {
+              endDateDay: [''],
+              endDateMonth: [''],
+              endDateYear: [''],
+            },
+            { validator: dateValidator('endDate') }
+          ),
+          link: new UntypedFormControl(this.link, {
+            validators: [
+              Validators.pattern(URL_REGEXP),
+              Validators.maxLength(MAX_LENGTH_LESS_THAN_TWO_THOUSAND),
+            ],
+          }),
+          visibility: new UntypedFormControl(this.defaultVisibility, {
+            validators: [Validators.required],
+          }),
+        },
+        {
+          validator: endDateValidator(),
+        }
+      )
+    }
   }
 }

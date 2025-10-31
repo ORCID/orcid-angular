@@ -5,7 +5,7 @@ import { map, switchMapTo } from 'rxjs/operators'
 import { Config } from 'src/app/types/togglz.endpoint'
 import { MaintenanceMessage } from 'src/app/types/togglz.local'
 
-import { UserService } from '..'
+import { TogglzFlag } from './togglz-flags.enum'
 
 @Injectable({
   providedIn: 'root',
@@ -40,20 +40,20 @@ export class TogglzService {
     return this.togglzSubject.asObservable()
   }
 
-  getStateOf(togglzFeatureName: string): Observable<boolean> {
+  getStateOf(togglzFeatureName: TogglzFlag): Observable<boolean> {
     return this.getTogglz().pipe(
       map((data) => data.messages[togglzFeatureName] === 'true')
     )
   }
 
-  getMessageOf(togglzFeatureName: string): Observable<string> {
+  getMessageOf(togglzFeatureName: TogglzFlag): Observable<string> {
     return this.getTogglz().pipe(
       map((data) => data.messages[togglzFeatureName])
     )
   }
 
   getMaintenanceMessages(): Observable<MaintenanceMessage> {
-    return this.getMessageOf('MAINTENANCE_MESSAGE').pipe(
+    return this.getMessageOf(TogglzFlag.MAINTENANCE_MESSAGE).pipe(
       map((value) => {
         const plainHtml = value
         const parser = new DOMParser()
