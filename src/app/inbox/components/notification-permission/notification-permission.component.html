@@ -7,11 +7,13 @@
     for</ng-container
   >
   <strong> {{ orcidIntegrationMemberName }}</strong
-  >.
-  <ng-container i18n="@@inbox.connectingWithThisIntegrationWillAllow"
-    >Connecting with this integration will allow</ng-container
+  >. <ng-container i18n="@@inbox.ifYouAreAnActiveMember"
+    >If you are an active faculty or staff member at</ng-container
+  ><strong> {{ orcidIntegrationMemberName }}</strong
+  >, <ng-container i18n="@@inbox.connectingWithThisIntegrationWillAllow"
+    >connecting with this integration will allow</ng-container
   >
-  {{ orcidIntegrationMemberName }}
+  <strong>{{ orcidIntegrationMemberName }}</strong>
   <ng-container i18n="@@inbox.toAutomaticallyAddValidatedInformation"
     >to automatically add validated information to your ORCID record. This will
     save you time and effort when maintaining your record, and help make sure it
@@ -29,7 +31,6 @@
     party.</ng-container
   >
 </div>
-
 <div *ngFor="let i of itemsByType">
   <p class="type">
     <strong>
@@ -72,7 +73,6 @@
     </button>
   </a>
 </div>
-
 <div *ngIf="isOrcidIntegration" class="buttons-container">
   <a target="_blank" rel="noopener noreferrer" [href]="orcidIntegrationLink">
     <button
@@ -86,4 +86,17 @@
       Connect with
     </button>
   </a>
+</div>
+
+<div *ngIf="isOrcidIntegration" class="intro">
+<ng-container i18n="@@inbox.ifYouAreNoLongerAffiliatedWith"
+    >If you are no longer affiliated with</ng-container
+  >
+  <strong> {{ orcidIntegrationMemberName }}</strong
+  >  <ng-container i18n="@@inbox.pleaseRemove"
+    >please remove</ng-container
+  > <strong> {{ orcidIntegrationMemberName }}</strong
+  > <ng-container i18n="@@inbox.emailAddressFromYourVerifiedEmail"
+    >email address from your verified email addresses.</ng-container
+  >
 </div>
