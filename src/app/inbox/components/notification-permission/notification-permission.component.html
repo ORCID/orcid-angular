@@ -7,10 +7,12 @@
     for</ng-container
   >
   <strong> {{ orcidIntegrationMemberName }}</strong
-  >. <ng-container i18n="@@inbox.ifYouAreAnActiveMember"
+  >.
+  <ng-container i18n="@@inbox.ifYouAreAnActiveMember"
     >If you are an active faculty or staff member at</ng-container
   ><strong> {{ orcidIntegrationMemberName }}</strong
-  >, <ng-container i18n="@@inbox.connectingWithThisIntegrationWillAllow"
+  >,
+  <ng-container i18n="@@inbox.connectingWithThisIntegrationWillAllow"
     >connecting with this integration will allow</ng-container
   >
   <strong>{{ orcidIntegrationMemberName }}</strong>
@@ -89,14 +91,13 @@
 </div>
 
 <div *ngIf="isOrcidIntegration" class="intro">
-<ng-container i18n="@@inbox.ifYouAreNoLongerAffiliatedWith"
+  <ng-container i18n="@@inbox.ifYouAreNoLongerAffiliatedWith"
     >If you are no longer affiliated with</ng-container
   >
-  <strong> {{ orcidIntegrationMemberName }}</strong
-  >  <ng-container i18n="@@inbox.pleaseRemove"
-    >please remove</ng-container
-  > <strong> {{ orcidIntegrationMemberName }}</strong
-  > <ng-container i18n="@@inbox.emailAddressFromYourVerifiedEmail"
+  <strong> {{ orcidIntegrationMemberName }}</strong>
+  <ng-container i18n="@@inbox.pleaseRemove">please remove</ng-container>
+  <strong> {{ orcidIntegrationMemberName }}</strong>
+  <ng-container i18n="@@inbox.emailAddressFromYourVerifiedEmail"
     >email address from your verified email addresses.</ng-container
   >
 </div>
