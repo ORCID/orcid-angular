@@ -1,0 +1,124 @@
+:host {
+  ::ng-deep .mat-mdc-form-field-bottom-align::before {
+    display: none;
+  }
+  width: 100%;
+}
+
+.container {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  width: 580px;
+  margin-top: 32px;
+  padding: 64px 16px 64px 16px;
+  border: 1px solid;
+  border-radius: 10px;
+}
+
+h1 {
+  font-weight: normal;
+  margin: 0 0 16px 0;
+  line-height: 36px;
+}
+
+p {
+  margin: 0;
+  line-height: 24px;
+}
+
+hr {
+  height: 1px;
+}
+
+form {
+  text-align: left;
+}
+
+.sub-container {
+  margin-left: 48px;
+  margin-right: 48px;
+}
+
+.description {
+  margin-bottom: 32px;
+}
+
+.icon {
+  height: 64px;
+  width: 64px;
+  margin-bottom: 32px;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.icon-error {
+  img {
+    width: 40px;
+    height: 20px;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+}
+
+app-alert-message {
+  margin-bottom: 16px;
+}
+
+mat-label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.password-error {
+  margin-top: 8px;
+  line-height: 24px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.two-factor-description {
+  .two-factor-description-length {
+    line-height: 24px;
+    margin-top: 8px;
+    align-self: center;
+  }
+  .two-factor-description-text {
+    mat-hint {
+      line-height: 24px;
+    }
+    margin-top: 8px;
+    flex-grow: 1;
+  }
+  display: flex;
+}
+
+.input-container {
+  margin-bottom: 24px;
+}
+
+hr {
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+a {
+  text-decoration: underline;
+}
+
+.deactivate-button {
+  margin-bottom: 24px;
+}
+
+.cancel-deactivation-button {
+  width: 100%;
+}

@@ -1,0 +1,32 @@
+@use '@angular/material' as mat;
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+@mixin deactivate-account-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+  .container {
+    border-color: $ui-background-light;
+  }
+
+  .icon-error {
+    background-color: $state-warning-darkest;
+  }
+
+  .error {
+    color: $state-warning-darkest !important;
+  }
+
+  hr {
+    background: $ui-background-light;
+  }
+
+  .deactivate-button {
+    background-color: $state-warning-darkest;
+    color: white;
+  }
+}
+
+@include deactivate-account-theme($orcid-app-theme);

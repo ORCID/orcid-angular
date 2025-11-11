@@ -1,0 +1,396 @@
+<div class="container">
+  @if (tokenVerification?.status === 'VALID') { @if
+  (data.deactivationSuccessful) {
+
+  <div class="icon">
+    <img src="assets/vectors/orcid.logo.icon.svg" role="presentation" />
+  </div>
+  <div class="sub-container">
+    <h1
+      class="orc-font-heading-small"
+      i18n="@@account.yourAccountHasBeenDeactivated"
+    >
+      Your ORCID account has been deactivated
+    </h1>
+    <p class="orc-font-body-small">
+      <span i18n="@@account.youCanReactivate"
+        >You can reactivate your ORCID account at any time by entering your
+        email address in the</span
+      >
+      <a routerLink="/register" i18n="@@account.registrationForm"
+        >registration form</a
+      >.
+    </p>
+  </div>
+  } @else {
+  <div class="icon">
+    <img src="assets/vectors/orcid.logo.icon.svg" role="presentation" />
+  </div>
+  <div class="sub-container">
+    <h1
+      class="orc-font-heading-small"
+      i18n="@@account.deactivateYourOrcidAccount"
+    >
+      Deactivate your ORCID account
+    </h1>
+    <p class="orc-font-body-small description">
+      <span i18n="@@account.enterThePasswordFor">Enter the password for</span>
+      <b> {{ tokenVerification?.claims?.subject }} </b>
+      <span i18n="@@account.toCompleteAccountDeactivation"
+        >to complete account deactivation.</span
+      >
+    </p>
+
+    <form [formGroup]="deactivationForm">
+      @if (data.invalidPassword) {
+      <app-alert-message
+        type="warning"
+        role="dialog"
+        aria-live="polite"
+        aria-labelledby="dialogTitle"
+        aria-describedby="dialogDescription"
+      >
+        <div content class="content">
+          <b id="dialogTitle" i18n="@@ngOrcid.signin.invalidSignInDetails">
+            Invalid sign in details
+          </b>
+          <div
+            id="dialogDescription"
+            i18n="@@ngOrcid.signin.pleaseCheckYourDetails"
+          >
+            Please check your ORCID sign in details and then try signing in
+            again.
+          </div>
+        </div>
+      </app-alert-message>
+      }
+      <div class="input-container">
+        <mat-label
+          class="orc-font-small-print"
+          id="password-input-label"
+          i18n="@@register.password"
+          [ngClass]="{
+            error:
+              deactivationForm.get('password').touched &&
+              deactivationForm.get('password').dirty &&
+              deactivationForm.get('password').invalid
+          }"
+          >Password
+        </mat-label>
+        <mat-form-field
+          appearance="outline"
+          [hideRequiredMarker]="true"
+          class="no-hint passwordField"
+        >
+          <input
+            id="password"
+            type="password"
+            aria-labelledby="password-input-label"
+            formControlName="password"
+            matInput
+            [errorStateMatcher]="errorMatcher"
+          />
+        </mat-form-field>
+        @if (deactivationForm.get('password').hasError('required') &&
+        (deactivationForm.get('password').touched &&
+        deactivationForm.get('password').dirty)) {
+        <mat-error class="orc-font-small-print password-error">
+          <ng-container i18n="@@register.passwordRequired"
+            >A password is required.</ng-container
+          >
+        </mat-error>
+
+        }
+      </div>
+      @if (data.twoFactorEnabled) { @if (!showRecoveryCode) {
+      <div class="input-container">
+        <mat-label
+          class="orc-font-small-print"
+          id="2fa-input-label"
+          i18n="@@account.twoPassword"
+          [ngClass]="{
+            error:
+              twoFactorCodeWasTouched &&
+              deactivationForm.get('twoFactorCode').invalid
+          }"
+        >
+          Two-factor authentication
+        </mat-label>
+        <mat-form-field
+          appearance="outline"
+          [hideRequiredMarker]="true"
+          class="no-hint"
+        >
+          <input
+            id="twoFactorCode"
+            type="text"
+            inputmode="numeric"
+            aria-labelledby="2fa-input-label"
+            formControlName="twoFactorCode"
+            matInput
+            [errorStateMatcher]="errorMatcher"
+            [ngClass]="{
+              error:
+                twoFactorCodeWasTouched &&
+                deactivationForm.get('twoFactorCode').invalid
+            }"
+          />
+        </mat-form-field>
+        <div class="two-factor-description orc-font-small-print">
+          <div class="two-factor-description-text">
+            @if (!deactivationForm.get('twoFactorCode').invalid ||
+            !twoFactorCodeWasTouched) {
+            <mat-hint i18n="@@account.enterTheCode">
+              Enter the code from your two-factor authentication app
+            </mat-hint>
+            }
+            <mat-error
+              *ngIf="
+                deactivationForm.get('twoFactorCode').hasError('backendInvalid')
+              "
+            >
+              <p
+                i18n="@@ngOrcid.signin.2fa.badVerificationCode"
+                class="error-message"
+              >
+                Invalid authentication code
+              </p>
+            </mat-error>
+            <mat-error
+              *ngIf="
+                twoFactorCodeWasTouched &&
+                deactivationForm.get('twoFactorCode').hasError('required')
+              "
+            >
+              <p
+                i18n="@@ngOrcid.signin.2fa.verificationCodeRequired"
+                class="error-message"
+              >
+                Authentication code is required
+              </p>
+            </mat-error>
+            <mat-error
+              *ngIf="
+                twoFactorCodeWasTouched &&
+                (deactivationForm.get('twoFactorCode').hasError('minlength') ||
+                  deactivationForm.get('twoFactorCode').hasError('maxlength'))
+              "
+            >
+              <p
+                i18n="@@ngOrcid.signin.2fa.badVerificationCodeLength"
+                class="error-message"
+              >
+                Invalid authentication code length
+              </p>
+            </mat-error>
+          </div>
+          <mat-hint
+            [ngClass]="{
+              error:
+                twoFactorCodeWasTouched &&
+                deactivationForm.get('twoFactorCode').invalid
+            }"
+            class="two-factor-description-length"
+          >
+            {{ deactivationForm.get('twoFactorCode').value?.length || 0 }}/6
+          </mat-hint>
+        </div>
+      </div>
+      <div class="text-center orc-font-body-small">
+        <p i18n="@@ngOrcid.signin.2fa.noDevice1">Don't have your device?</p>
+        <a
+          href="#"
+          (click)="toggleRecoveryCode($event)"
+          i18n="@@account.useARecoveryCode"
+        >
+          Use a recovery code instead
+        </a>
+      </div>
+      } @else {
+      <div class="input-container">
+        <mat-label
+          class="orc-font-small-print"
+          id="recovery-input-label"
+          i18n="@@ngOrcid.signin.2fa.recoveryCode"
+          [ngClass]="{
+            error:
+              twoFactorRecoveryCodeWasTouched &&
+              deactivationForm.get('twoFactorRecoveryCode').invalid
+          }"
+        >
+          Recovery code
+        </mat-label>
+        <mat-form-field
+          appearance="outline"
+          [hideRequiredMarker]="true"
+          class="no-hint"
+        >
+          <input
+            id="twoFactorRecoveryCode"
+            type="text"
+            inputmode="numeric"
+            aria-labelledby="recovery-input-label"
+            formControlName="twoFactorRecoveryCode"
+            matInput
+            [errorStateMatcher]="errorMatcher"
+            [ngClass]="{
+              error:
+                twoFactorRecoveryCodeWasTouched &&
+                deactivationForm.get('twoFactorRecoveryCode').invalid
+            }"
+          />
+        </mat-form-field>
+        <div class="two-factor-description orc-font-small-print">
+          <div class="two-factor-description-text">
+            @if (!deactivationForm.get('twoFactorRecoveryCode').invalid ||
+            !twoFactorRecoveryCodeWasTouched) {
+            <mat-hint i18n="@@ngOrcid.signin.2fa.noDevice2"
+              >Enter a recovery code</mat-hint
+            >
+            }
+            <mat-error
+              *ngIf="
+                deactivationForm
+                  .get('twoFactorRecoveryCode')
+                  .hasError('backendInvalid')
+              "
+            >
+              <p
+                i18n="@@ngOrcid.signin.2fa.badRecoveryCode"
+                class="error-message"
+              >
+                Invalid recovery code
+              </p>
+            </mat-error>
+            <mat-error
+              *ngIf="
+                twoFactorRecoveryCodeWasTouched &&
+                deactivationForm
+                  .get('twoFactorRecoveryCode')
+                  .hasError('required')
+              "
+            >
+              <p
+                i18n="@@ngOrcid.signin.2fa.recoveryCodeRequired"
+                class="error-message"
+              >
+                Recovery code is required
+              </p>
+            </mat-error>
+            <mat-error
+              *ngIf="
+                twoFactorRecoveryCodeWasTouched &&
+                (deactivationForm
+                  .get('twoFactorRecoveryCode')
+                  .hasError('minlength') ||
+                  deactivationForm
+                    .get('twoFactorRecoveryCode')
+                    .hasError('maxlength'))
+              "
+            >
+              <p
+                i18n="@@ngOrcid.signin.2fa.badRecoveryCodeLength"
+                class="error-message"
+              >
+                Invalid recovery code length
+              </p>
+            </mat-error>
+          </div>
+          <mat-hint
+            [ngClass]="{
+              error:
+                twoFactorRecoveryCodeWasTouched &&
+                deactivationForm.get('twoFactorRecoveryCode').invalid
+            }"
+            class="two-factor-description-length"
+          >
+            {{
+              deactivationForm.get('twoFactorRecoveryCode').value?.length || 0
+            }}/10
+          </mat-hint>
+        </div>
+      </div>
+      <div class="text-center orc-font-body-small">
+        <p i18n="@@account.dontHaveYourRecoveryCodes">
+          Don't have your recovery codes?
+        </p>
+        <a
+          (click)="toggleRecoveryCode($event)"
+          i18n="@@account.useYourAuthenticationAppInstead"
+        >
+          Use your authentication app instead
+        </a>
+      </div>
+      }
+      <br />
+      <div class="text-center orc-font-body-small">
+        <p i18n="@@ngOrcid.signin.2fa.noDeviceOrRecovery">
+          Don't have your device or recovery code?
+        </p>
+        <a
+          href="https://support.orcid.org/hc/en-us/articles/360006973573-Trouble-signing-in-to-ORCID"
+          target="_blank"
+          rel="noopener noreferrer"
+          i18n="@@topBar.knowledge"
+        >
+          ORCID help centre
+        </a>
+      </div>
+      }
+      <hr />
+      <button
+        mat-raised-button
+        (click)="submit()"
+        class="row deactivate-button orc-font-body mat-elevation-z0"
+        type="submit"
+        i18n="@@account.deactivateOrcidAcc"
+      >
+        Deactivate ORCID account
+      </button>
+      <button
+        class="text-center orc-font-body-small cancel-deactivation-button"
+      >
+        <a [routerLink]="['/signin']" i18n="@@account.cancelDeactivation"
+          >Cancel deactivation and sign in to ORCID</a
+        >
+      </button>
+    </form>
+  </div>
+
+  } } @else {
+  <div class="icon icon-error">
+    <img src="assets/vectors/link-icon.svg" role="presentation" />
+  </div>
+  @if (tokenVerification?.status === 'INVALID') {
+  <h1
+    class="orc-font-heading-small"
+    i18n="@@account.thereIsAProblemWithYourDeactivationLink"
+  >
+    There is a problem with your deactivation link
+  </h1>
+  <p class="orc-font-body-small">
+    <span i18n="@@account.pleaseTryTheLinkAgain"
+      >Please try the link again. If this does not work you can request a new
+      deactivation link from your</span
+    >
+    <a [routerLink]="['/account']" i18n="@@authorize.accountSettings"
+      >account settings.</a
+    >
+  </p>
+  } @if (tokenVerification?.status === 'EXPIRED') {
+  <h1
+    class="orc-font-heading-small"
+    i18n="@@account.yourDeactivationLinkHasExpired"
+  >
+    Your deactivation link has expired
+  </h1>
+  <p class="orc-font-body-small">
+    <span i18n="@@account.youCanRequestANewDeactivationLink"
+      >You can request a new deactivation link from your</span
+    >
+    <a [routerLink]="['/account']" i18n="@@authorize.accountSettings"
+      >account settings.</a
+    >
+  </p>
+  } }
+</div>
