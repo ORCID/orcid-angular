@@ -135,6 +135,7 @@ export class ConfirmDeactivateAccountComponent {
     this.deactivationService
       .deactivateAccount(payload, this.token)
       .subscribe((response) => {
+        this.tokenVerification = response.tokenVerification
         this.data = response
         this.updateTwoFactorValidators()
         if (response.invalidPassword) {

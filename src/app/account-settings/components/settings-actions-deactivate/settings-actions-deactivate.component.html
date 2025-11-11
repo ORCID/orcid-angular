@@ -72,17 +72,15 @@
     </strong>
   </label>
   <ul>
-    <li i18n="@@account.deactivate1">
-      1. Start the deactivation process by clicking on the "Deactivate ORCID
-      account" button below
+    <li i18n="@@account.deactivationDescription1">
+      1. Click the button below to send a deactivation email to the primary
+      email address associated with this account
     </li>
-    <li i18n="@@account.deactivate2">
-      2. ORCID will send a deactivation email to the primary email address
-      associated with this account
+    <li i18n="@@account.deactivationDescription2">
+      2. Click the link in the email to confirm ownership of the email address
     </li>
-    <li i18n="@@account.deactivate3">
-      3. Click the confirmation link provided in the email to deactivate your
-      ORCID account
+    <li i18n="@@account.deactivationDescription3">
+      3. Enter your ORCID password to complete deactivation
     </li>
   </ul>
 
@@ -91,11 +89,11 @@
       (click)="deactivateOrcidAccount()"
       mat-raised-button
       color="warn"
-      i18n="@@account.deactivateOrcidAcc"
+      i18n="@@account.sendAccountDeactivationEmail"
       id="cy-deactivate-account"
       [disabled]="alreadySendedDeactivatedAccountRequest || (loading | async)"
     >
-      Deactivate ORCID account
+      Send account deactivation email
     </button>
   </div>
   <app-alert-message *ngIf="deactivatedEmail">

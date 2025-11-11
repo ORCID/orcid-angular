@@ -22,8 +22,6 @@ export class DeactivationGuard {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    console.log(next.queryParamMap.has('token'), 'deactivation guard')
-
     return (
       next.queryParamMap.has('token') ||
       this._router.createUrlTree([ApplicationRoutes.home])

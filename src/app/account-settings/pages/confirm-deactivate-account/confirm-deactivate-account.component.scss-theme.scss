@@ -27,6 +27,10 @@
     background-color: $state-warning-darkest;
     color: white;
   }
+
+  mat-hint {
+    color: $text-dark-high;
+  }
 }
 
 @include deactivate-account-theme($orcid-app-theme);

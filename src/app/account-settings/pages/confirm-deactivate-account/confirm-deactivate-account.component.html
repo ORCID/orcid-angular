@@ -16,10 +16,9 @@
       <span i18n="@@account.youCanReactivate"
         >You can reactivate your ORCID account at any time by entering your
         email address in the</span
-      >
-      <a routerLink="/register" i18n="@@account.registrationForm"
+      >&nbsp;<a routerLink="/register" i18n="@@account.registrationForm"
         >registration form.</a
-      >.
+      >
     </p>
   </div>
   } @else {
@@ -372,8 +371,7 @@
     <span i18n="@@account.pleaseTryTheLinkAgain"
       >Please try the link again. If this does not work you can request a new
       deactivation link from your</span
-    >
-    <a [routerLink]="['/account']" i18n="@@authorize.accountSettings"
+    >&nbsp;<a [routerLink]="['/account']" i18n="@@authorize.accountSettings"
       >account settings.</a
     >
   </p>
@@ -387,8 +385,7 @@
   <p class="orc-font-body-small">
     <span i18n="@@account.youCanRequestANewDeactivationLink"
       >You can request a new deactivation link from your</span
-    >
-    <a [routerLink]="['/account']" i18n="@@authorize.accountSettings"
+    >&nbsp;<a [routerLink]="['/account']" i18n="@@authorize.accountSettings"
       >account settings.</a
     >
   </p>
