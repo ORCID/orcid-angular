@@ -46,7 +46,7 @@ import { SettingsSharingComponent } from './components/settings-sharing/settings
 import { SettingsComponent } from './components/settings/settings.component'
 import { AccountSettingsComponent } from './pages/account-settings/account-settings.component'
 import { MatDialogModule } from '@angular/material/dialog'
-import { AlertMessageModule } from '../cdk/alert-message/alert-message.module';
+import { AlertMessageModule } from '../cdk/alert-message/alert-message.module'
 import { ConfirmDeactivateAccountComponent } from './pages/confirm-deactivate-account/confirm-deactivate-account.component'
 
 @NgModule({
