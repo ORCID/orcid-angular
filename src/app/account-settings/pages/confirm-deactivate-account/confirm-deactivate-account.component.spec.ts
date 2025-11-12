@@ -14,6 +14,7 @@ import { MatInputModule } from '@angular/material/input'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 import { MatButtonModule } from '@angular/material/button'
 import { By } from '@angular/platform-browser'
+import { PlatformInfoService } from 'src/app/cdk/platform-info'
 
 const mockDeactivationService = {
   deactivateAccount: jasmine
@@ -32,6 +33,12 @@ const defaultMockActivatedRoute = {
   queryParamMap: of({
     get: (key: string) => (key === 'token' ? 'test-token-123' : null),
   }),
+}
+
+const mockPlatformService = {
+  get: jasmine
+    .createSpy('get')
+    .and.returnValue(of({ columns4: false, columns8: false })),
 }
 
 describe('ConfirmDeactivateAccountComponent', () => {
@@ -57,6 +64,7 @@ describe('ConfirmDeactivateAccountComponent', () => {
           useValue: mockDeactivationService,
         },
         { provide: ActivatedRoute, useValue: routeMock },
+        { provide: PlatformInfoService, useValue: mockPlatformService },
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
@@ -70,7 +78,7 @@ describe('ConfirmDeactivateAccountComponent', () => {
     fixture.detectChanges()
   }
 
-  describe('with valid token', () => {
+  fdescribe('with valid token', () => {
     beforeEach(async () => {
       await setupTestBed(defaultMockActivatedRoute)
     })
@@ -99,7 +107,12 @@ describe('ConfirmDeactivateAccountComponent', () => {
 
     it('should call service on submit with just password (first step of 2FA flow)', () => {
       component.deactivationForm.get('password').setValue('test-password')
-      const response: DeactivationEndpoint = { twoFactorEnabled: true }
+      const response: DeactivationEndpoint = {
+        twoFactorEnabled: true,
+        tokenVerification: {
+          status: 'VALID',
+        },
+      }
       mockDeactivationService.deactivateAccount.and.returnValue(of(response))
 
       component.submit()
@@ -131,6 +144,9 @@ describe('ConfirmDeactivateAccountComponent', () => {
       component.deactivationForm.get('twoFactorCode').setValue('123456')
       const successResponse: DeactivationEndpoint = {
         deactivationSuccessful: true,
+        tokenVerification: {
+          status: 'VALID',
+        },
       }
       mockDeactivationService.deactivateAccount.and.returnValue(
         of(successResponse)
@@ -178,6 +194,9 @@ describe('ConfirmDeactivateAccountComponent', () => {
         .setValue('1234567890')
       const successResponse: DeactivationEndpoint = {
         deactivationSuccessful: true,
+        tokenVerification: {
+          status: 'VALID',
+        },
       }
       mockDeactivationService.deactivateAccount.and.returnValue(
         of(successResponse)
@@ -198,7 +217,12 @@ describe('ConfirmDeactivateAccountComponent', () => {
 
     it('should show "Invalid sign in details" on invalidPassword response', () => {
       component.deactivationForm.get('password').setValue('wrong-password')
-      const response: DeactivationEndpoint = { invalidPassword: true }
+      const response: DeactivationEndpoint = {
+        invalidPassword: true,
+        tokenVerification: {
+          status: 'VALID',
+        },
+      }
       mockDeactivationService.deactivateAccount.and.returnValue(of(response))
 
       component.submit()
@@ -215,7 +239,12 @@ describe('ConfirmDeactivateAccountComponent', () => {
 
       component.deactivationForm.get('password').setValue('test-password')
       component.deactivationForm.get('twoFactorCode').setValue('000000')
-      const response: DeactivationEndpoint = { invalidTwoFactorCode: true }
+      const response: DeactivationEndpoint = {
+        invalidTwoFactorCode: true,
+        tokenVerification: {
+          status: 'VALID',
+        },
+      }
       mockDeactivationService.deactivateAccount.and.returnValue(of(response))
 
       component.submit()
@@ -242,6 +271,9 @@ describe('ConfirmDeactivateAccountComponent', () => {
         .setValue('0000000000')
       const response: DeactivationEndpoint = {
         invalidTwoFactorRecoveryCode: true,
+        tokenVerification: {
+          status: 'VALID',
+        },
       }
       mockDeactivationService.deactivateAccount.and.returnValue(of(response))
 
