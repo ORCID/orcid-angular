@@ -1,11 +1,17 @@
 <div class="container">
-  @if (tokenVerification?.status === 'VALID') { @if
+  @if (loading) {
+  <mat-progress-bar
+    role="heading"
+    aria-level="2"
+    mode="indeterminate"
+  ></mat-progress-bar>
+  } @if (tokenVerification?.status === 'VALID') { @if
   (data.deactivationSuccessful) {
 
   <div class="icon">
     <img src="assets/vectors/orcid.logo.icon.svg" role="presentation" />
   </div>
-  <div class="sub-container">
+  <div class="sub-container" [ngClass]="{ 'mobile-container': isMobile }">
     <h1
       class="orc-font-heading-small"
       i18n="@@account.yourAccountHasBeenDeactivated"
@@ -25,7 +31,7 @@
   <div class="icon">
     <img src="assets/vectors/orcid.logo.icon.svg" role="presentation" />
   </div>
-  <div class="sub-container">
+  <div class="sub-container" [ngClass]="{ 'mobile-container': isMobile }">
     <h1
       class="orc-font-heading-small"
       i18n="@@account.deactivateYourOrcidAccount"
@@ -327,7 +333,7 @@
           Don't have your device or recovery code?
         </p>
         <a
-          href="https://support.orcid.org/hc/en-us/articles/360006973573-Trouble-signing-in-to-ORCID"
+          href="https://support.orcid.org/hc/en-us"
           target="_blank"
           rel="noopener noreferrer"
           i18n="@@topBar.knowledge"

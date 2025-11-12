@@ -9,11 +9,17 @@
   display: grid;
   justify-items: center;
   text-align: center;
-  width: 580px;
+  max-width: 580px;
   margin-top: 32px;
   padding: 64px 16px 64px 16px;
   border: 1px solid;
   border-radius: 10px;
+}
+
+mat-progress-bar {
+  margin-top: -64px;
+  position: absolute;
+  max-width: 580px;
 }
 
 h1 {
@@ -29,6 +35,8 @@ p {
 
 hr {
   height: 1px;
+  margin-top: 32px;
+  margin-bottom: 32px;
 }
 
 form {
@@ -40,8 +48,17 @@ form {
   margin-right: 48px;
 }
 
+.mobile-container {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
 .description {
   margin-bottom: 32px;
+}
+
+#dialogDescription {
+  margin-top: 8px;
 }
 
 .icon {
@@ -74,6 +91,7 @@ mat-label {
 }
 
 mat-form-field {
+  font-size: 14px !important;
   width: 100%;
 }
 
@@ -106,17 +124,14 @@ mat-form-field {
   margin-bottom: 24px;
 }
 
-hr {
-  margin-top: 32px;
-  margin-bottom: 32px;
-}
-
 a {
   text-decoration: underline;
 }
 
 .deactivate-button {
   margin-bottom: 24px;
+  font-size: 16px !important;
+  height: 40px;
 }
 
 .cancel-deactivation-button {

@@ -5,6 +5,8 @@ import {
   Validators,
 } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router' // Import Router
+import { Subject, takeUntil } from 'rxjs'
+import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { AccountActionsDeactivateService } from 'src/app/core/account-actions-deactivate/account-actions-deactivate.service'
 import { ErrorStateMatcherForTwoFactorFields } from 'src/app/sign-in/ErrorStateMatcherForTwoFactorFields'
 import {
@@ -26,6 +28,9 @@ export class ConfirmDeactivateAccountComponent {
   token: string = ''
   tokenVerification: ExpiringLinkVerification | undefined
   placeholderPassword = $localize`:@@ngOrcid.signin.yourOrcidPassword:Your ORCID password`
+  loading = false
+  isMobile = false
+  $destroy = new Subject<void>()
 
   deactivationForm: UntypedFormGroup
   showRecoveryCode = false
@@ -33,7 +38,8 @@ export class ConfirmDeactivateAccountComponent {
   errorMatcher = new ErrorStateMatcherForTwoFactorFields()
 
   constructor(
-    private deactivationService: AccountActionsDeactivateService,
+    private _deactivationService: AccountActionsDeactivateService,
+    private _platform: PlatformInfoService,
     private route: ActivatedRoute
   ) {}
 
@@ -52,6 +58,12 @@ export class ConfirmDeactivateAccountComponent {
   }
 
   ngOnInit() {
+    this._platform
+      .get()
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((platform) => {
+        this.isMobile = platform.columns4 || platform.columns8
+      })
     this.route.data.subscribe((data) => {
       this.tokenVerification = data.tokenVerification
     })
@@ -124,6 +136,7 @@ export class ConfirmDeactivateAccountComponent {
     if (this.deactivationForm.invalid) {
       return
     }
+    this.loading = true
 
     const formValues = this.deactivationForm.value
     const payload: DeactivationEndpoint = {
@@ -132,9 +145,10 @@ export class ConfirmDeactivateAccountComponent {
       twoFactorRecoveryCode: formValues.twoFactorRecoveryCode,
     }
 
-    this.deactivationService
+    this._deactivationService
       .deactivateAccount(payload, this.token)
       .subscribe((response) => {
+        this.loading = false
         this.tokenVerification = response.tokenVerification
         this.data = response
         this.updateTwoFactorValidators()
@@ -156,5 +170,10 @@ export class ConfirmDeactivateAccountComponent {
             ?.setErrors({ backendInvalid: true })
         }
       })
+  }
+
+  ngOnDestroy(): void {
+    this.$destroy.next()
+    this.$destroy.complete()
   }
 }
