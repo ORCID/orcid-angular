@@ -49,7 +49,7 @@ export class SettingsActionsDeactivateComponent implements OnInit, OnDestroy {
   deactivateOrcidAccount() {
     this.alreadySendedDeactivatedAccountRequest = true
     this.loading.next(true)
-    this._deactivate.deactivateAccount().subscribe((response) => {
+    this._deactivate.generateDeactivationLink().subscribe((response) => {
       this.deactivatedEmail = response.email
       this.loading.next(false)
     })
