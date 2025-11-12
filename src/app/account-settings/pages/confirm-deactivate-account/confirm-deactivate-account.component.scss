@@ -72,11 +72,12 @@ form {
 }
 
 .icon-error {
-  img {
+  mat-icon {
     width: 40px;
-    height: 20px;
+    height: 40px;
     margin-top: auto;
     margin-bottom: auto;
+    font-size: 40px;
   }
 }
 

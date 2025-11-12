@@ -78,7 +78,7 @@ describe('ConfirmDeactivateAccountComponent', () => {
     fixture.detectChanges()
   }
 
-  fdescribe('with valid token', () => {
+  describe('with valid token', () => {
     beforeEach(async () => {
       await setupTestBed(defaultMockActivatedRoute)
     })

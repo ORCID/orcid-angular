@@ -12,6 +12,9 @@
   }
 
   .icon-error {
+    mat-icon {
+      color: white;
+    }
     background-color: $state-warning-darkest;
   }
 
