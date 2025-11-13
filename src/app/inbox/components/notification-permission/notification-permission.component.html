@@ -21,6 +21,15 @@
     save you time and effort when maintaining your record, and help make sure it
     stays up-to-date.</ng-container
   >
+
+  <br /> <br />
+  <ng-container i18n="@@inbox.ifYouAreNoLongerAffiliatedWith"
+    >If you are no longer affiliated with</ng-container
+  >
+  <strong> {{ orcidIntegrationMemberName }}</strong>,
+  <ng-container i18n="@@inbox.emailAddressFromYourVerifiedEmail"
+    >you may disregard this notification or remove the relevant email address from your ORCID record.</ng-container
+  >
 </div>
 <div *ngIf="!isOrcidIntegration" class="intro">
   {{ notification?.notificationIntro }}
@@ -80,7 +89,7 @@
     <button
       mat-raised-button
       color="primary"
-      class="grant-permission"
+      class="grant-permission type"
       i18n="@@inbox.connectWith"
       [innerHTML]="'Connect with ' + orcidIntegrationMemberName"
       i18n="@@inbox.connectWith|Connect with {orcidIntegrationMemberName}"
@@ -88,16 +97,4 @@
       Connect with
     </button>
   </a>
-</div>
-
-<div *ngIf="isOrcidIntegration" class="intro">
-  <ng-container i18n="@@inbox.ifYouAreNoLongerAffiliatedWith"
-    >If you are no longer affiliated with</ng-container
-  >
-  <strong> {{ orcidIntegrationMemberName }}</strong>
-  <ng-container i18n="@@inbox.pleaseRemove">please remove</ng-container>
-  <strong> {{ orcidIntegrationMemberName }}</strong>
-  <ng-container i18n="@@inbox.emailAddressFromYourVerifiedEmail"
-    >email address from your verified email addresses.</ng-container
-  >
 </div>
