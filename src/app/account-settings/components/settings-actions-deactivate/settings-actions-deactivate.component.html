@@ -91,6 +91,9 @@
       color="warn"
       i18n="@@account.sendAccountDeactivationEmail"
       id="cy-deactivate-account"
+      [ngClass]="{
+        'deactivation-email-sent': alreadySendedDeactivatedAccountRequest
+      }"
       [disabled]="alreadySendedDeactivatedAccountRequest || (loading | async)"
     >
       Send account deactivation email
