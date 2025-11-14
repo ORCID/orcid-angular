@@ -2,11 +2,6 @@
 @import 'src/assets/scss/material.orcid-theme.scss';
 
 @mixin deactivate-account-theme($theme) {
-  $primary: map-get($theme, primary);
-  $accent: map-get($theme, accent);
-  $warn: map-get($theme, accent);
-  $foreground: map-get($theme, foreground);
-  $background: map-get($theme, background);
   .container {
     border-color: $ui-background-light;
   }
@@ -27,8 +22,12 @@
   }
 
   .deactivate-button {
-    background-color: $state-warning-darkest;
-    color: white;
+    background-color: $state-warning-darkest !important;
+    color: white !important;
+  }
+
+  .deactivate-button-loading {
+    opacity: 30%;
   }
 
   mat-hint {
