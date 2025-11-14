@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, ElementRef, ViewChild } from '@angular/core'
 import {
   UntypedFormControl,
   UntypedFormGroup,
@@ -31,7 +31,9 @@ export class ConfirmDeactivateAccountComponent {
   loading = false
   isMobile = false
   $destroy = new Subject<void>()
-
+  @ViewChild('twoFactorCodeInput') twoFactorCodeInput: ElementRef
+  @ViewChild('twoFactorRecoveryCodeInput')
+  twoFactorRecoveryCodeInput: ElementRef
   deactivationForm: UntypedFormGroup
   showRecoveryCode = false
 
@@ -115,9 +117,15 @@ export class ConfirmDeactivateAccountComponent {
     this.updateTwoFactorValidators()
 
     if (this.showRecoveryCode) {
+      setTimeout(() => {
+        this.twoFactorRecoveryCodeInput?.nativeElement.focus()
+      })
       this.deactivationForm.get('twoFactorCode')?.setValue(null)
       this.deactivationForm.get('twoFactorRecoveryCode')?.markAsUntouched()
     } else {
+      setTimeout(() => {
+        this.twoFactorCodeInput?.nativeElement.focus()
+      })
       this.deactivationForm.get('twoFactorRecoveryCode')?.setValue(null)
       this.deactivationForm.get('twoFactorCode')?.markAsUntouched()
     }
@@ -157,6 +165,16 @@ export class ConfirmDeactivateAccountComponent {
           this.deactivationForm.get('twoFactorRecoveryCode')?.setValue(null)
           this.deactivationForm.get('twoFactorCode')?.markAsUntouched()
           this.deactivationForm.get('twoFactorRecoveryCode')?.markAsUntouched()
+        }
+        if (
+          response.twoFactorEnabled &&
+          !response.invalidPassword &&
+          !response.invalidTwoFactorCode &&
+          !response.invalidTwoFactorRecoveryCode
+        ) {
+          setTimeout(() => {
+            this.twoFactorCodeInput?.nativeElement.focus()
+          })
         }
         if (response.invalidTwoFactorCode) {
           this.deactivationForm
