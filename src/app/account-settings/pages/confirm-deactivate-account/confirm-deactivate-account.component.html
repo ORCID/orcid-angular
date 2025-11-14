@@ -349,6 +349,7 @@
         class="row deactivate-button orc-font-body mat-elevation-z0"
         type="submit"
         i18n="@@account.deactivateOrcidAcc"
+        [ngClass]="{ 'deactivate-button-loading': loading }"
       >
         Deactivate ORCID account
       </button>
