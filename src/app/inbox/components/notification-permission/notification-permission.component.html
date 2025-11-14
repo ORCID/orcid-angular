@@ -22,13 +22,16 @@
     stays up-to-date.</ng-container
   >
 
-  <br /> <br />
+  <br />
+  <br />
   <ng-container i18n="@@inbox.ifYouAreNoLongerAffiliatedWith"
     >If you are no longer affiliated with</ng-container
   >
-  <strong> {{ orcidIntegrationMemberName }}</strong>,
+  <strong> {{ orcidIntegrationMemberName }}</strong
+  >,
   <ng-container i18n="@@inbox.emailAddressFromYourVerifiedEmail"
-    >you may disregard this notification or remove the relevant email address from your ORCID record.</ng-container
+    >you may disregard this notification or remove the relevant email address
+    from your ORCID record.</ng-container
   >
 </div>
 <div *ngIf="!isOrcidIntegration" class="intro">
