@@ -352,13 +352,12 @@
       >
         Deactivate ORCID account
       </button>
-      <button
+      <a
         class="text-center orc-font-body-small cancel-deactivation-button"
+        [routerLink]="['/signin']"
+        i18n="@@account.cancelDeactivation"
+        >Cancel deactivation and sign in to ORCID</a
       >
-        <a [routerLink]="['/signin']" i18n="@@account.cancelDeactivation"
-          >Cancel deactivation and sign in to ORCID</a
-        >
-      </button>
     </form>
   </div>
 
