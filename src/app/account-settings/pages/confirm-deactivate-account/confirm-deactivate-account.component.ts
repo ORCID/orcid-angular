@@ -118,13 +118,13 @@ export class ConfirmDeactivateAccountComponent {
 
     if (this.showRecoveryCode) {
       setTimeout(() => {
-        this.twoFactorRecoveryCodeInput.nativeElement.focus()
+        this.twoFactorRecoveryCodeInput?.nativeElement.focus()
       })
       this.deactivationForm.get('twoFactorCode')?.setValue(null)
       this.deactivationForm.get('twoFactorRecoveryCode')?.markAsUntouched()
     } else {
       setTimeout(() => {
-        this.twoFactorCodeInput.nativeElement.focus()
+        this.twoFactorCodeInput?.nativeElement.focus()
       })
       this.deactivationForm.get('twoFactorRecoveryCode')?.setValue(null)
       this.deactivationForm.get('twoFactorCode')?.markAsUntouched()
@@ -173,7 +173,7 @@ export class ConfirmDeactivateAccountComponent {
           !response.invalidTwoFactorRecoveryCode
         ) {
           setTimeout(() => {
-            this.twoFactorCodeInput.nativeElement.focus()
+            this.twoFactorCodeInput?.nativeElement.focus()
           })
         }
         if (response.invalidTwoFactorCode) {
