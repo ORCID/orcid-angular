@@ -57,8 +57,8 @@ export function mapOauth2RequestToLegacy(
     clientHavePersistentTokens: null,
     scopesAsString: null,
     error: (source.error as any) || null,
-    errorCode: source.errorCode || (source.error_code || null),
-    errorDescription: source.errorDescription || (source.error_description || ''),
+    errorCode: source.errorCode || source.error_code || null,
+    errorDescription: source.errorDescription || source.error_description || '',
     forceLogin: false,
     oauthState: source.state || '',
   }
