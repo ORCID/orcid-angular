@@ -133,6 +133,7 @@
             aria-labelledby="2fa-input-label"
             formControlName="twoFactorCode"
             matInput
+            #twoFactorCodeInput
             [errorStateMatcher]="errorMatcher"
             [ngClass]="{
               error:
@@ -236,6 +237,7 @@
             inputmode="numeric"
             aria-labelledby="recovery-input-label"
             formControlName="twoFactorRecoveryCode"
+            #twoFactorRecoveryCodeInput
             matInput
             [errorStateMatcher]="errorMatcher"
             [ngClass]="{
