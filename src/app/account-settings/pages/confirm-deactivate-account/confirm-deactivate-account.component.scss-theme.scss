@@ -27,8 +27,12 @@
   }
 
   .deactivate-button {
-    background-color: $state-warning-darkest;
-    color: white;
+    background-color: $state-warning-darkest !important;
+    color: white !important;
+  }
+
+  .deactivate-button-loading {
+    opacity: 30%;
   }
 
   mat-hint {
