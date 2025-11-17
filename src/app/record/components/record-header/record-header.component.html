@@ -5,7 +5,13 @@
 ></mat-progress-bar>
 <div class="record-header-wrapper" [ngClass]="{ mobile: !platform.columns12 }">
   <div class="row container record-header">
-    <section [id]="'names'" role="region" [attr.aria-label]="regionNames">
+    <section
+      *ngIf="!compactMode"
+      [id]="'names'"
+      role="region"
+      [attr.aria-label]="regionNames"
+      class="orcid-id-section"
+    >
       <div
         class="row names-wrapper"
         *ngIf="
@@ -29,12 +35,18 @@
               {{ familyName }}
             </ng-container>
           </h1>
+          <!-- Mobile-only: show other-names above the pencil -->
+          <div
+            class="row other-names mobile"
+            *ngIf="!platform.columns12 && otherNames"
+          >
+            <p class="orc-font-body">{{ otherNames }}</p>
+          </div>
+          <app-record-edit-button></app-record-edit-button>
         </div>
-        <div
-          class="row other-names"
-          [ngClass]="{ mobile: !platform.columns12 }"
-        >
-          <p class="orc-font-body" *ngIf="otherNames">{{ otherNames }}</p>
+        <!-- Desktop-only: other names below names row -->
+        <div class="row other-names" *ngIf="platform.columns12 && otherNames">
+          <p class="orc-font-body">{{ otherNames }}</p>
         </div>
       </div>
       <div
@@ -91,8 +103,8 @@
         </h1>
       </div>
     </section>
-    <mat-divider class="divider"></mat-divider>
-    <div class="row">
+    <mat-divider *ngIf="!compactMode" class="divider"></mat-divider>
+    <div class="row link-wrapper">
       <section
         [id]="'orcid-id'"
         role="region"
@@ -108,33 +120,65 @@
             }"
             dir="ltr"
           >
-            <div>
+            <div
+              class="row"
+              *ngIf="
+                compactMode &&
+                !loadingUserRecord &&
+                !userInfo?.RECORD_WITH_ISSUES &&
+                (creditName || givenNames || familyName)
+              "
+            >
+              <h1
+                class="orc-font-body-large"
+                style="font-weight: bold"
+                [ngClass]="{
+                  mobile: !platform.columns12
+                }"
+              >
+                <ng-container *ngIf="creditName">{{ creditName }}</ng-container>
+                <ng-container
+                  *ngIf="!!!creditName && (givenNames || familyName)"
+                >
+                  <ng-container *ngIf="givenNames">{{
+                    givenNames + ' '
+                  }}</ng-container>
+                  {{ familyName }}
+                </ng-container>
+              </h1>
+            </div>
+            <div class="orcid-link-wrapper">
               <img
                 class="orcid-logo"
-                [ngClass]="{ mobile: !platform.columns12 }"
+                [ngClass]="{
+                  mobile: !platform.columns12,
+                  compact: compactMode
+                }"
                 src="assets/vectors/orcid.logo.icon.svg"
                 alt="orcid logo"
               />
+              <h1
+                [ngClass]="{
+                  'orc-font-body-small': compactMode,
+                  'orc-font-body-large': !compactMode,
+                  mobile: !platform.columns12
+                }"
+                class="font-weight-400"
+              >
+                <ng-container *ngIf="!platform.columns12; else elseBlock">{{
+                  isPublicRecord
+                }}</ng-container>
+                <ng-template #elseBlock>{{ orcidId }}</ng-template>
+              </h1>
             </div>
-            <h2
-              [ngClass]="{
-                'orc-font-body': !platform.columns12,
-                'orc-font-body-large': platform.columns12,
-                mobile: !platform.columns12
-              }"
-            >
-              <ng-container *ngIf="!platform.columns12; else elseBlock">{{
-                isPublicRecord
-              }}</ng-container>
-              <ng-template #elseBlock>{{ orcidId }}</ng-template>
-            </h2>
+
             <div
               class="buttons-wrapper"
               [ngClass]="{
                 row: !platform.columns12,
                 mobile: !platform.columns12
               }"
-              *ngIf="!userInfo?.RECORD_WITH_ISSUES"
+              *ngIf="!userInfo?.RECORD_WITH_ISSUES && !compactMode"
             >
               <button
                 mat-icon-button
@@ -170,76 +214,41 @@
           (creditName || givenNames || familyName || otherNames)
         "
       >
-        <button
-          mat-button
-          (click)="recordSummaryLinkClick()"
-          class="orc-font-body-small"
+        <ng-container
+          *ngIf="compactMode && !recordSummaryOpen; else summaryToggle"
         >
-          <mat-icon *ngIf="recordSummaryOpen">expand_more</mat-icon>
-          <mat-icon class="expand_more" *ngIf="!recordSummaryOpen"
-            >expand_less</mat-icon
+          <app-record-edit-button></app-record-edit-button>
+        </ng-container>
+        <ng-template #summaryToggle>
+          <button
+            mat-button
+            (click)="recordSummaryLinkClick()"
+            class="orc-font-body-small"
           >
-          <ng-container
-            *ngIf="recordSummaryOpen"
-            i18n="@@summary.hideRecordSummary"
-          >
-            Hide record summary
-          </ng-container>
-          <ng-container
-            *ngIf="!recordSummaryOpen"
-            i18n="@@summary.showRecordSummary"
-            >Show record summary</ng-container
-          >
-        </button>
+            <mat-icon *ngIf="recordSummaryOpen">expand_more</mat-icon>
+            <mat-icon class="expand_more" *ngIf="!recordSummaryOpen"
+              >expand_less</mat-icon
+            >
+            <ng-container
+              *ngIf="recordSummaryOpen"
+              i18n="@@summary.hideRecordSummary"
+            >
+              Hide record summary
+            </ng-container>
+            <ng-container
+              *ngIf="!recordSummaryOpen"
+              i18n="@@summary.showRecordSummary"
+              >Show record summary</ng-container
+            >
+          </button>
+        </ng-template>
       </div>
     </div>
   </div>
 </div>
-<section *ngIf="recordSummaryOpen" id="summary">
-  <div class="container summary-container-head">
-    <h2 class="orc-font-body-large" i18n="@@summary.recordSummary">
-      Record summary
-    </h2>
-    <div>
-      <a
-        class="underline orc-font-body-small"
-        href="https://support.orcid.org/hc/en-us/articles/22062298053015-ORCID-Record-Summaries"
-        target="_blank"
-        rel="noopener"
-        i18n="@@summary.findOutMoreAboutRecordSummaries"
-        [attr.aria-label]="ariaLabelFindoutMore"
-        >Find out more about record summaries</a
-      >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        viewBox="0 0 16 16"
-        fill="none"
-      >
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M12.0006 8.80024C12.0006 8.35846 12.3588 8.00026 12.8007 8.00026C13.2425 8.00026 13.6007 8.35846 13.6007 8.80024V13.6001C13.6007 14.9256 12.5262 16.0001 11.2006 16.0001H2.40012C1.07452 16.0001 0 14.9256 0 13.6001V4.80033C0 3.47483 1.07452 2.40039 2.40012 2.40039H7.20037C7.64218 2.40039 8.00041 2.75859 8.00041 3.20037C8.00041 3.64215 7.64218 4.00035 7.20037 4.00035H2.40012C1.95831 4.00035 1.60008 4.35856 1.60008 4.80033V13.6001C1.60008 14.0419 1.95831 14.4001 2.40012 14.4001H11.2006C11.6424 14.4001 12.0006 14.0419 12.0006 13.6001V8.80024Z"
-          fill="#8EC2DB"
-        />
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M14.4 1.59996H10.3998C9.95796 1.59996 9.59973 1.24176 9.59973 0.799981C9.59973 0.358204 9.95796 0 10.3998 0H15.2C15.6418 0 16.0001 0.358204 16.0001 0.799981V5.59986C16.0001 6.04164 15.6418 6.39985 15.2 6.39985C14.7582 6.39985 14.4 6.04164 14.4 5.59986V1.59996Z"
-          fill="#8EC2DB"
-        />
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M6.9634 10.1654C6.65088 10.4777 6.14443 10.4777 5.83191 10.1654C5.51957 9.85293 5.51957 9.34652 5.83191 9.03402L14.6324 0.234234C14.9449 -0.0780781 15.4513 -0.0780781 15.7638 0.234234C16.0762 0.546725 16.0762 1.05314 15.7638 1.36564L6.9634 10.1654Z"
-          fill="#8EC2DB"
-        />
-      </svg>
-    </div>
-  </div>
-  <app-trusted-summary
-    [standaloneMode]="false"
-    *ngIf="recordSummaryOpen"
-  ></app-trusted-summary>
-</section>
+
+<!---
+On compact mode the record summary is displayed in the record header (here)
+on non-compact mode the record summary is displayed in my-orcid page.
+--->
+<app-record-summary *ngIf="compactMode"></app-record-summary>

@@ -1,3 +1,4 @@
+
 <header
   #headerEl
   role="presentation"
@@ -56,6 +57,27 @@
     </div>
   </div>
 </header>
+
+<!-- Compact-record header renders under the main header when compact mode is active -->
+<div
+  class="compact-record-header"
+  *ngIf="compactEligible && isCompactActive && (isPublicRecord$ | async) as publicId"
+>
+  <app-record-header></app-record-header>
+</div>
+<!-- Mobile/tablet spacer to offset fixed compact record header -->
+<div
+  class="compact-record-header-spacer"
+  *ngIf="
+    !platform.columns12 &&
+    compactEligible &&
+    isCompactActive &&
+    (isPublicRecord$ | async)
+  "
+></div>
+
+
+
 
 <mat-divider></mat-divider>
 
@@ -167,3 +189,10 @@
 </nav>
 
 <app-maintenance-message></app-maintenance-message>
+
+<!-- Desktop global top spacer to preserve scroll position when header compacts.
+Placed at the very bottom of the header so it sits right on top of the app. -->
+<div
+  *ngIf="compactEligible && isCompactActive && (isPublicRecord$ | async)"
+  class="header-top-spacer"
+></div>

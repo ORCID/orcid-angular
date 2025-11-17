@@ -1,0 +1,12 @@
+<button
+  *ngIf="visible"
+  mat-icon-button
+  class="edit-record-button"
+  [matTooltip]="tooltip"
+  [attr.aria-label]="tooltip"
+  (click)="onClick()"
+>
+  <mat-icon class="icon">edit</mat-icon>
+</button>
+
+

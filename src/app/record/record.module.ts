@@ -77,6 +77,7 @@ import { WorkContributorsComponent } from './components/work-contributors/work-c
 import { VisibilitySelectorModule } from '../cdk/visibility-selector/visibility-selector.module'
 import { TopBarVerificationEmailModule } from '../cdk/top-bar-verification-email/top-bar-verification-email.module'
 import { RecordHeaderComponent } from './components/record-header/record-header.component'
+import { RecordSummaryComponent } from './components/record-summary/record-summary.component'
 import { RecordInfoComponent } from './components/record-info/record-info.component'
 import { TrustedSummaryModule } from '../cdk/trusted-summary/trusted-summary.module'
 import { AlertMessageModule } from '../cdk/alert-message/alert-message.module'
@@ -145,7 +146,6 @@ import { WorkDetailsComponent } from './components/work-details/work-details.com
     ModalCombineWorksWithSelectorComponent,
     WorkContributorRolesComponent,
     WorkContributorsComponent,
-    RecordHeaderComponent,
     RecordInfoComponent,
   ],
   imports: [
@@ -187,6 +187,9 @@ import { WorkDetailsComponent } from './components/work-details/work-details.com
     MatDialogModule,
     DeepSelectInputModule,
     PageNotFound404Module,
+    // Standalone components
+    RecordHeaderComponent,
+    RecordSummaryComponent,
   ],
   providers: [
     VerificationEmailModalService,

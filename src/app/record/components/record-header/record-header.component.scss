@@ -1,15 +1,7 @@
 :host {
   display: block;
 }
-.summary-container-head {
-  max-width: 1304px;
-  min-height: 80px;
-  h2 {
-    padding: 0;
-    margin: 0;
-  }
-  padding: 16px 16px;
-}
+
 .record-header-wrapper {
   display: flex;
   box-sizing: border-box;
@@ -45,7 +37,16 @@
       gap: 8px;
 
       .names {
+        position: relative;
         line-height: 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        h1 {
+          margin: 0;
+          flex: 1 1 auto;
+        }
       }
 
       .other-names {
@@ -68,6 +69,8 @@
 
       .col {
         padding: 0 !important;
+        display: flex;
+        align-items: center;
       }
 
       .col.mobile {
@@ -80,7 +83,17 @@
       }
 
       .orcid-logo.mobile {
-        width: 32px;
+        width: 24px;
+      }
+
+      .orcid-logo.compact {
+        width: 24px;
+      }
+
+      .orcid-link-wrapper {
+        margin-top: 5.5px;
+        display: flex;
+        align-items: center;
       }
 
       .buttons-wrapper {
@@ -93,6 +106,18 @@
       }
     }
   }
+}
+
+.names-actions {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.edit-record-button {
+  height: 48px;
+  margin-right: 16px;
+  margin-top: 16px;
 }
 
 .record-header-wrapper.mobile {
@@ -127,6 +152,12 @@ button.orc-font-body-small {
   justify-content: center;
 }
 
+.mobile .record-header .names {
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
 .mobile .id-wrapper {
   display: flex;
   flex-direction: column;
@@ -134,11 +165,34 @@ button.orc-font-body-small {
   gap: 8px;
 }
 
-svg {
-  margin-left: 8px;
-  position: absolute;
-  margin-top: 4px;
-}
 .thin-font-heading {
   font-weight: 300;
+}
+
+.hidden-in-compact {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.orcid-id-section {
+  width: 100%;
+}
+
+app-record-edit-button {
+  position: absolute;
+  inset-inline-end: 0;
+  top: 0;
+}
+
+.link-wrapper {
+  position: relative;
+}
+
+h1.mobile {
+  text-align: center;
+  width: 100%;
+}
+
+.font-weight-400 {
+  font-weight: 400;
 }

@@ -1,0 +1,50 @@
+<section *ngIf="recordSummaryOpen" id="summary">
+  <div class="container summary-container-head">
+    <h2 class="orc-font-body-large" i18n="@@summary.recordSummary">
+      Record summary
+    </h2>
+    <div>
+      <a
+        class="underline orc-font-body-small"
+        href="https://support.orcid.org/hc/en-us/articles/22062298053015-ORCID-Record-Summaries"
+        target="_blank"
+        rel="noopener"
+        i18n="@@summary.findOutMoreAboutRecordSummaries"
+        [attr.aria-label]="ariaLabelFindoutMore"
+        >Find out more about record summaries</a
+      >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        fill="none"
+      >
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M12.0006 8.80024C12.0006 8.35846 12.3588 8.00026 12.8007 8.00026C13.2425 8.00026 13.6007 8.35846 13.6007 8.80024V13.6001C13.6007 14.9256 12.5262 16.0001 11.2006 16.0001H2.40012C1.07452 16.0001 0 14.9256 0 13.6001V4.80033C0 3.47483 1.07452 2.40039 2.40012 2.40039H7.20037C7.64218 2.40039 8.00041 2.75859 8.00041 3.20037C8.00041 3.64215 7.64218 4.00035 7.20037 4.00035H2.40012C1.95831 4.00035 1.60008 4.35856 1.60008 4.80033V13.6001C1.60008 14.0419 1.95831 14.4001 2.40012 14.4001H11.2006C11.6424 14.4001 12.0006 14.0419 12.0006 13.6001V8.80024Z"
+          fill="#8EC2DB"
+        />
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M14.4 1.59996H10.3998C9.95796 1.59996 9.59973 1.24176 9.59973 0.799981C9.59973 0.358204 9.95796 0 10.3998 0H15.2C15.6418 0 16.0001 0.358204 16.0001 0.799981V5.59986C16.0001 6.04164 15.6418 6.39985 15.2 6.39985C14.7582 6.39985 14.4 6.04164 14.4 5.59986V1.59996Z"
+          fill="#8EC2DB"
+        />
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M6.9634 10.1654C6.65088 10.4777 6.14443 10.4777 5.83191 10.1654C5.51957 9.85293 5.51957 9.34652 5.83191 9.03402L14.6324 0.234234C14.9449 -0.0780781 15.4513 -0.0780781 15.7638 0.234234C16.0762 0.546725 16.0762 1.05314 15.7638 1.36564L6.9634 10.1654Z"
+          fill="#8EC2DB"
+        />
+      </svg>
+    </div>
+  </div>
+  <app-trusted-summary
+    [standaloneMode]="false"
+    *ngIf="recordSummaryOpen"
+  ></app-trusted-summary>
+</section>
+
+
