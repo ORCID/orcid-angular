@@ -203,5 +203,4 @@ export class RecordHeaderComponent implements OnInit {
         }
       })
   }
-
 }

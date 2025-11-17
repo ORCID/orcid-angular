@@ -16,7 +16,9 @@ import { WINDOW } from 'src/app/cdk/window'
 @Injectable({ providedIn: 'root' })
 export class HeaderCompactService {
   private readonly _eligibleSubject = new BehaviorSubject<boolean>(false)
-  private readonly _publicOrcidSubject = new BehaviorSubject<string | null>(null)
+  private readonly _publicOrcidSubject = new BehaviorSubject<string | null>(
+    null
+  )
   private readonly _compactActiveSubject = new BehaviorSubject<boolean>(false)
   private readonly _isDesktopSubject = new BehaviorSubject<boolean>(true)
   private readonly _scrollYSubject = new BehaviorSubject<number>(0)
@@ -38,10 +40,9 @@ export class HeaderCompactService {
   ) {
     // React to router changes and the feature flag
     combineLatest([
-      this.togglz.getStateOf(TogglzFlag.HEADER_COMPACT).pipe(
-        startWith(false),
-        distinctUntilChanged()
-      ),
+      this.togglz
+        .getStateOf(TogglzFlag.HEADER_COMPACT)
+        .pipe(startWith(false), distinctUntilChanged()),
       this.router.events.pipe(
         filter((e) => e instanceof NavigationEnd),
         startWith<NavigationEnd | null>(null),
@@ -105,8 +106,9 @@ export class HeaderCompactService {
     }
     const isDesktop = this._isDesktopSubject.value
     const y = this._scrollYSubject.value
-    const threshold =
-      (isDesktop ? this.baseThresholdDesktop : this.baseThresholdMobile)
+    const threshold = isDesktop
+      ? this.baseThresholdDesktop
+      : this.baseThresholdMobile
     // Hysteresis buffer to avoid jitter
     const buffer = this.hysteresisBuffer
     const enter = threshold + buffer
@@ -126,5 +128,3 @@ export class HeaderCompactService {
     )
   }
 }
-
-

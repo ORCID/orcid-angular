@@ -49,5 +49,3 @@ export class RecordHeaderStateService {
     this._recordSummaryOpen.next(false)
   }
 }
-
-

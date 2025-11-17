@@ -1,4 +1,3 @@
-
 <header
   #headerEl
   role="presentation"
@@ -61,7 +60,9 @@
 <!-- Compact-record header renders under the main header when compact mode is active -->
 <div
   class="compact-record-header"
-  *ngIf="compactEligible && isCompactActive && (isPublicRecord$ | async) as publicId"
+  *ngIf="
+    compactEligible && isCompactActive && (isPublicRecord$ | async) as publicId
+  "
 >
   <app-record-header></app-record-header>
 </div>
@@ -75,9 +76,6 @@
     (isPublicRecord$ | async)
   "
 ></div>
-
-
-
 
 <mat-divider></mat-divider>
 

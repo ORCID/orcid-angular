@@ -42,5 +42,3 @@ export class RecordSummaryComponent implements OnInit, OnDestroy {
     this.$destroy.complete()
   }
 }
-
-

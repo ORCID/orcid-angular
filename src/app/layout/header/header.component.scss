@@ -92,11 +92,10 @@ header.container.compact app-search {
 }
 
 /* On tablet/handset, allow a bit more space for wrapped lines/buttons */
- .columns-8 :host .header-top-spacer,
- .columns-4 :host .header-top-spacer {
-    height: 170px;
-    display: block;
-  
+.columns-8 :host .header-top-spacer,
+.columns-4 :host .header-top-spacer {
+  height: 170px;
+  display: block;
 }
 
 nav.not-wordpress-display > .top-bar,

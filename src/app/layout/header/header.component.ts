@@ -60,12 +60,16 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   isCompactActive = false
 
   // Record header state consumed when compact header is active
-  loadingUserRecord$: Observable<boolean> = this._recordHeaderState.loadingUserRecord$
-  isPublicRecord$: Observable<string | null> = this._recordHeaderState.isPublicRecord$
+  loadingUserRecord$: Observable<boolean> =
+    this._recordHeaderState.loadingUserRecord$
+  isPublicRecord$: Observable<string | null> =
+    this._recordHeaderState.isPublicRecord$
   affiliations$: Observable<number> = this._recordHeaderState.affiliations$
   displaySideBar$: Observable<boolean> = this._recordHeaderState.displaySideBar$
-  displayBiography$: Observable<boolean> = this._recordHeaderState.displayBiography$
-  recordSummaryOpen$: Observable<boolean> = this._recordHeaderState.recordSummaryOpen$
+  displayBiography$: Observable<boolean> =
+    this._recordHeaderState.displayBiography$
+  recordSummaryOpen$: Observable<boolean> =
+    this._recordHeaderState.recordSummaryOpen$
 
   constructor(
     private _router: Router,
@@ -120,9 +124,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {}
 
-  ngAfterViewInit() {
-  }
-
+  ngAfterViewInit() {}
 
   mouseLeave() {
     if (this.platform.columns12) {

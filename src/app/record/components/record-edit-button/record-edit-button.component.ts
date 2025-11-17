@@ -77,5 +77,3 @@ export class RecordEditButtonComponent {
     this._router.navigate(['my-orcid'])
   }
 }
-
-
