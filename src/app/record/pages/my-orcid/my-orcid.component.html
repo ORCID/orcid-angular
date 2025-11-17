@@ -4,14 +4,16 @@
       [isPublicRecord]="publicOrcid"
     ></app-top-bar-my-public-record-preview>
     <app-record-header
-      *ngIf="!!publicOrcid"
-      [loadingUserRecord]="loadingUserRecord"
-      [isPublicRecord]="publicOrcid"
-      [affiliations]="affiliations"
-      [displaySideBar]="displaySideBar"
-      [displayBiography]="displayBiography"
-      [(recordSummaryOpen)]="recordSummaryOpen"
+      *ngIf="
+        !!publicOrcid &&
+        !((compactEligible$ | async) && (compactActive$ | async))
+      "
     ></app-record-header>
+    <!---
+    On compact mode the record summary is displayed in the record header 
+    on non-compact mode the record summary is displayed in my-orcid page (here)
+    --->
+    <app-record-summary *ngIf="compactEligible$ | async"></app-record-summary>
     <div
       class="container no-padding main-content"
       [ngClass]="{

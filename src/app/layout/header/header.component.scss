@@ -59,6 +59,45 @@ header.container.compact .logo-container img {
 header.container.compact app-search {
   padding-top: 10px;
 }
+
+/* Compact record-header: fixed below the compact header, full-width */
+.compact-record-header {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 72px; /* matches header.container.compact height */
+  width: 100vw;
+  background: #fff;
+  z-index: 499; /* just under header.container (500), above page content */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+.compact-record-header-spacer {
+  height: 136px; /* approximate compact record-header height for desktop */
+}
+
+/* On tablet/handset, allow a bit more space for wrapped lines/buttons */
+.columns-8 .compact-record-header,
+.columns-4 .compact-record-header {
+  top: 72px;
+}
+.columns-8 .compact-record-header-spacer,
+.columns-4 .compact-record-header-spacer {
+  height: 160px;
+}
+
+/* Desktop global spacer to maintain scroll position while compact */
+.header-top-spacer {
+  height: 250px;
+  display: block;
+}
+
+/* On tablet/handset, allow a bit more space for wrapped lines/buttons */
+.columns-8 :host .header-top-spacer,
+.columns-4 :host .header-top-spacer {
+  height: 170px;
+  display: block;
+}
+
 nav.not-wordpress-display > .top-bar,
 nav.not-wordpress-display > .top-bar-new-info {
   margin-bottom: 60px;
@@ -219,13 +258,6 @@ nav {
           }
         }
       }
-    }
-  }
-}
-.ie,
-.edge {
-  :host {
-    .menu-container {
     }
   }
 }

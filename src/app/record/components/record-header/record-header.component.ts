@@ -6,6 +6,14 @@ import {
   OnInit,
   Output,
 } from '@angular/core'
+import { CommonModule, NgIf } from '@angular/common'
+import { MatProgressBarModule } from '@angular/material/progress-bar'
+import { MatDividerModule } from '@angular/material/divider'
+import { MatButtonModule } from '@angular/material/button'
+import { MatIconModule } from '@angular/material/icon'
+import { MatTooltipModule } from '@angular/material/tooltip'
+import { RecordHeaderStateService } from 'src/app/core/record-header-state/record-header-state.service'
+import { HeaderCompactService } from 'src/app/core/header-compact/header-compact.service'
 import { isEmpty } from 'lodash'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
@@ -15,6 +23,8 @@ import { UserService } from 'src/app/core'
 import { RecordService } from 'src/app/core/record/record.service'
 import { RecordUtil } from 'src/app/shared/utils/record.util'
 import { Assertion, UserInfo } from 'src/app/types'
+import { RecordEditButtonComponent } from '../record-edit-button/record-edit-button.component'
+import { RecordSummaryComponent } from '../record-summary/record-summary.component'
 import { UserRecord } from 'src/app/types/record.local'
 
 @Component({
@@ -24,26 +34,29 @@ import { UserRecord } from 'src/app/types/record.local'
     './record-header.component.scss',
     './record-header.component.scss-theme.scss',
   ],
-  standalone: false,
+  standalone: true,
+  imports: [
+    CommonModule,
+    NgIf,
+    MatProgressBarModule,
+    MatDividerModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTooltipModule,
+    RecordEditButtonComponent,
+    RecordSummaryComponent,
+  ],
 })
 export class RecordHeaderComponent implements OnInit {
   $destroy: Subject<boolean> = new Subject<boolean>()
-  @Input() loadingUserRecord = true
-  @Input() isPublicRecord: string
-  @Input() affiliations: number
-  @Input() displaySideBar: boolean
-  @Input() displayBiography: boolean
+  loadingUserRecord = true
+  isPublicRecord: string
+  affiliations: number
+  displaySideBar: boolean
+  displayBiography: boolean
+  compactMode = false
   _recordSummaryOpen: boolean
 
-  ariaLabelFindoutMore = RecordUtil.appendOpensInNewTab(
-    $localize`:@@summary.findOutMoreAboutRecordSummaries:Find out more about record summaries`
-  )
-
-  @Input()
-  set recordSummaryOpen(value: boolean) {
-    this._recordSummaryOpen = value
-    this.recordSummaryOpenChange.emit(this._recordSummaryOpen)
-  }
   get recordSummaryOpen(): boolean {
     return this._recordSummaryOpen
   }
@@ -74,11 +87,45 @@ export class RecordHeaderComponent implements OnInit {
     @Inject(WINDOW) private window: Window,
     private _platform: PlatformInfoService,
     private _user: UserService,
-    private _record: RecordService
+    private _record: RecordService,
+    private _state: RecordHeaderStateService,
+    private _compact: HeaderCompactService
   ) {}
 
   ngOnInit(): void {
-    this.orcidId = 'https:' + runtimeEnvironment.BASE_URL + this.isPublicRecord
+    // Compact state
+    this._compact.compactActive$
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((active) => (this.compactMode = !!active))
+
+    // Subscribe to shared state for inputs
+    this._state.loadingUserRecord$
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((v) => (this.loadingUserRecord = !!v))
+    this._state.affiliations$
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((v) => (this.affiliations = v))
+    this._state.displaySideBar$
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((v) => (this.displaySideBar = !!v))
+    this._state.displayBiography$
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((v) => (this.displayBiography = !!v))
+    this._state.recordSummaryOpen$
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((v) => (this._recordSummaryOpen = !!v))
+
+    // When public ORCID changes, update id and load record
+    this._state.isPublicRecord$
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((publicId) => {
+        this.isPublicRecord = publicId
+        this.orcidId =
+          'https:' + runtimeEnvironment.BASE_URL + (this.isPublicRecord || '')
+        if (this.isPublicRecord) {
+          this.loadRecord(this.isPublicRecord)
+        }
+      })
 
     this._platform
       .get()
@@ -86,10 +133,29 @@ export class RecordHeaderComponent implements OnInit {
       .subscribe((data) => {
         this.platform = data
       })
+  }
 
+  clipboard() {
+    this.window.navigator.clipboard.writeText(this.orcidId)
+  }
+
+  printRecord() {
+    this.window.open(
+      runtimeEnvironment.BASE_URL +
+        this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID +
+        '/print'
+    )
+  }
+  recordSummaryLinkClick() {
+    const next = !this.recordSummaryOpen
+    this._state.setRecordSummaryOpen(next)
+    this.recordSummaryOpenChange.emit(next)
+  }
+
+  private loadRecord(publicRecordId: string) {
     this._record
       .getRecord({
-        publicRecordId: this.isPublicRecord || undefined,
+        publicRecordId,
       })
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
@@ -136,20 +202,5 @@ export class RecordHeaderComponent implements OnInit {
           }
         }
       })
-  }
-
-  clipboard() {
-    this.window.navigator.clipboard.writeText(this.orcidId)
-  }
-
-  printRecord() {
-    this.window.open(
-      runtimeEnvironment.BASE_URL +
-        this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID +
-        '/print'
-    )
-  }
-  recordSummaryLinkClick() {
-    this.recordSummaryOpen = !this.recordSummaryOpen
   }
 }
