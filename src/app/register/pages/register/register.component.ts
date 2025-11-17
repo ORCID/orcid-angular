@@ -64,8 +64,6 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   FormGroupStepD: UntypedFormGroup
 
   isLinear = true
-  personalData: RegisterForm
-  backendForm: RegisterForm
   loading = false
   requestInfoForm: RequestInfoForm | null
   thirdPartyAuthData: ThirdPartyAuthData
