@@ -42,7 +42,7 @@
           >
             <p class="orc-font-body">{{ otherNames }}</p>
           </div>
-          <app-record-edit-button></app-record-edit-button>
+          <app-record-edit-button *ngIf="headerCompactEnabled"></app-record-edit-button>
         </div>
         <!-- Desktop-only: other names below names row -->
         <div class="row other-names" *ngIf="platform.columns12 && otherNames">
@@ -157,7 +157,7 @@
                 src="assets/vectors/orcid.logo.icon.svg"
                 alt="orcid logo"
               />
-              <h1
+              <h2
                 [ngClass]="{
                   'orc-font-body-small': compactMode,
                   'orc-font-body-large': !compactMode,
@@ -169,7 +169,7 @@
                   isPublicRecord
                 }}</ng-container>
                 <ng-template #elseBlock>{{ orcidId }}</ng-template>
-              </h1>
+              </h2>
             </div>
 
             <div
@@ -217,7 +217,7 @@
         <ng-container
           *ngIf="compactMode && !recordSummaryOpen; else summaryToggle"
         >
-          <app-record-edit-button></app-record-edit-button>
+          <app-record-edit-button *ngIf="headerCompactEnabled"></app-record-edit-button>
         </ng-container>
         <ng-template #summaryToggle>
           <button

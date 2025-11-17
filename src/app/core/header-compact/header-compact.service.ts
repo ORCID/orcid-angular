@@ -23,9 +23,9 @@ export class HeaderCompactService {
   private readonly _isDesktopSubject = new BehaviorSubject<boolean>(true)
   private readonly _scrollYSubject = new BehaviorSubject<number>(0)
   // Threshold configuration
-  private readonly baseThresholdDesktop = 190
-  private readonly baseThresholdMobile = 240
-  private readonly hysteresisBuffer = 0
+  private readonly baseThresholdDesktop = 145
+  private readonly baseThresholdMobile = 200
+  private readonly hysteresisBuffer = 5
 
   readonly eligible$ = this._eligibleSubject.asObservable()
   readonly publicOrcid$ = this._publicOrcidSubject.asObservable()

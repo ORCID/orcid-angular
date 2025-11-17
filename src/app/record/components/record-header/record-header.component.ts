@@ -26,6 +26,8 @@ import { Assertion, UserInfo } from 'src/app/types'
 import { RecordEditButtonComponent } from '../record-edit-button/record-edit-button.component'
 import { RecordSummaryComponent } from '../record-summary/record-summary.component'
 import { UserRecord } from 'src/app/types/record.local'
+import { TogglzService } from 'src/app/core/togglz/togglz.service'
+import { TogglzFlag } from 'src/app/core/togglz/togglz-flags.enum'
 
 @Component({
   selector: 'app-record-header',
@@ -73,6 +75,7 @@ export class RecordHeaderComponent implements OnInit {
   otherNames = ''
   ariaLabelName = ''
   orcidId = ''
+  headerCompactEnabled = false
 
   regionNames = $localize`:@@topBar.names:Names`
   regionOrcidId = 'Orcid iD'
@@ -89,10 +92,17 @@ export class RecordHeaderComponent implements OnInit {
     private _user: UserService,
     private _record: RecordService,
     private _state: RecordHeaderStateService,
-    private _compact: HeaderCompactService
+    private _compact: HeaderCompactService,
+    private _togglz: TogglzService
   ) {}
 
   ngOnInit(): void {
+    // Subscribe to HEADER_COMPACT flag
+    this._togglz
+      .getStateOf(TogglzFlag.HEADER_COMPACT)
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((enabled) => (this.headerCompactEnabled = !!enabled))
+
     // Compact state
     this._compact.compactActive$
       .pipe(takeUntil(this.$destroy))
