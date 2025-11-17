@@ -36,7 +36,7 @@
             <app-step-b
               #stepComponentB
               [(formGroup)]="FormGroupStepB"
-              [personalData]="personalData"
+              [personalData]="FormGroupStepA?.value?.personal"
               [reactivation]="reactivation"
             ></app-step-b>
           </mat-step>
