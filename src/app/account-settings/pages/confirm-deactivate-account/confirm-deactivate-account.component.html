@@ -107,7 +107,7 @@
 
         }
       </div>
-      @if (!data.twoFactorEnabled) { @if (!showRecoveryCode) {
+      @if (data.twoFactorEnabled) { @if (!showRecoveryCode) {
       <div class="input-container">
         <mat-label
           class="orc-font-small-print"
