@@ -112,12 +112,13 @@
       >
         <div class="row id-wrapper">
           <div
-            class="col"
             [ngClass]="{
               'orc-font-body-small': !platform.columns12,
               'orc-font-body': platform.columns12,
-              mobile: !platform.columns12
+              mobile: !platform.columns12,
+              compact: compactMode
             }"
+            class="orcid-id-text-and-buttons"
             dir="ltr"
           >
             <div
@@ -170,6 +171,7 @@
                 }}</ng-container>
                 <ng-template #elseBlock>{{ orcidId }}</ng-template>
               </h2>
+              
             </div>
 
             <div

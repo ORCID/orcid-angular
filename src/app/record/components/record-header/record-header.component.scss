@@ -20,7 +20,6 @@
     }
 
     h2 {
-      margin: auto;
       font-weight: normal;
     }
 
@@ -42,10 +41,15 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        max-width: 100%;
         gap: 16px;
         h1 {
           margin: 0;
           flex: 1 1 auto;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          max-width: calc(100% - 80px);
         }
       }
 
@@ -55,6 +59,19 @@
 
       .other-names.mobile {
         justify-content: center;
+      }
+
+      .other-names,
+      .other-names.mobile {
+        width: 100%;
+        overflow: hidden;
+      }
+
+      .other-names p,
+      .other-names.mobile p {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
 
@@ -103,6 +120,14 @@
       .buttons-wrapper.mobile {
         justify-content: center;
         margin-left: 0;
+      }
+    }
+
+    .row {
+      h1 {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
     }
   }
@@ -196,3 +221,31 @@ h1.mobile {
 .font-weight-400 {
   font-weight: 400;
 }
+
+section#orcid-id {
+  max-width: 100%;
+}
+
+
+.orcid-id-text-and-buttons {
+  display: flex;
+  align-items: center;
+  &.compact {
+    flex-direction: column;
+    align-items: baseline;
+    gap: 8px;
+  }
+}
+
+//mobile
+.mobile .orcid-id-text-and-buttons {
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  &.compact {
+    flex-direction: column;
+    gap: 8px;
+    max-width: calc(100% - 80px);
+  }
+}
+

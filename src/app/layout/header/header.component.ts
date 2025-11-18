@@ -70,6 +70,8 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     this._recordHeaderState.displayBiography$
   recordSummaryOpen$: Observable<boolean> =
     this._recordHeaderState.recordSummaryOpen$
+  hasCreditOrOtherNames$: Observable<boolean> =
+    this._recordHeaderState.hasCreditOrOtherNames$
 
   constructor(
     private _router: Router,

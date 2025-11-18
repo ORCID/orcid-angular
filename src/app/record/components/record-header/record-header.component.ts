@@ -24,7 +24,6 @@ import { RecordService } from 'src/app/core/record/record.service'
 import { RecordUtil } from 'src/app/shared/utils/record.util'
 import { Assertion, UserInfo } from 'src/app/types'
 import { RecordEditButtonComponent } from '../record-edit-button/record-edit-button.component'
-import { RecordSummaryComponent } from '../record-summary/record-summary.component'
 import { UserRecord } from 'src/app/types/record.local'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { TogglzFlag } from 'src/app/core/togglz/togglz-flags.enum'
@@ -46,7 +45,6 @@ import { TogglzFlag } from 'src/app/core/togglz/togglz-flags.enum'
     MatIconModule,
     MatTooltipModule,
     RecordEditButtonComponent,
-    RecordSummaryComponent,
   ],
 })
 export class RecordHeaderComponent implements OnInit {
@@ -169,7 +167,6 @@ export class RecordHeaderComponent implements OnInit {
       })
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
-        this.recordWithIssues = userRecord?.userInfo?.RECORD_WITH_ISSUES
         this.userRecord = userRecord
         this.userInfo = userRecord?.userInfo
 
@@ -211,6 +208,12 @@ export class RecordHeaderComponent implements OnInit {
             this.otherNames = `${fullName}`
           }
         }
+
+        const hasCreditName =
+          !!this.userRecord?.names?.creditName?.value
+        const hasOtherNames =
+          !isEmpty(this.userRecord?.otherNames?.otherNames)
+        this._state.setHasCreditOrOtherNames(hasCreditName || hasOtherNames)
       })
   }
 }

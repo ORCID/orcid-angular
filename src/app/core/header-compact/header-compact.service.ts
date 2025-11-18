@@ -22,10 +22,11 @@ export class HeaderCompactService {
   private readonly _compactActiveSubject = new BehaviorSubject<boolean>(false)
   private readonly _isDesktopSubject = new BehaviorSubject<boolean>(true)
   private readonly _scrollYSubject = new BehaviorSubject<number>(0)
+  private readonly _recordRestrictedSubject = new BehaviorSubject<boolean>(false)
   // Threshold configuration
-  private readonly baseThresholdDesktop = 145
-  private readonly baseThresholdMobile = 200
-  private readonly hysteresisBuffer = 5
+  private readonly baseThresholdDesktop = 155
+  private readonly baseThresholdMobile = 220
+  private readonly hysteresisBuffer = 3
 
   readonly eligible$ = this._eligibleSubject.asObservable()
   readonly publicOrcid$ = this._publicOrcidSubject.asObservable()
@@ -83,6 +84,15 @@ export class HeaderCompactService {
     this.eligible$.subscribe(() => this.updateCompactState())
   }
 
+  setRecordRestrictions(restricted: boolean) {
+    const normalized = !!restricted
+    if (this._recordRestrictedSubject.value === normalized) {
+      return
+    }
+    this._recordRestrictedSubject.next(normalized)
+    this.updateCompactState()
+  }
+
   /**
    * Elegible only withing public Orcid pages
    */
@@ -99,6 +109,13 @@ export class HeaderCompactService {
   private updateCompactState() {
     const eligible = this._eligibleSubject.value
     if (!eligible) {
+      if (this._compactActiveSubject.value !== false) {
+        this._compactActiveSubject.next(false)
+      }
+      return
+    }
+    const restricted = this._recordRestrictedSubject.value
+    if (restricted) {
       if (this._compactActiveSubject.value !== false) {
         this._compactActiveSubject.next(false)
       }
