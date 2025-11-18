@@ -107,7 +107,7 @@
 
         }
       </div>
-      @if (data.twoFactorEnabled) { @if (!showRecoveryCode) {
+      @if (!data.twoFactorEnabled) { @if (!showRecoveryCode) {
       <div class="input-container">
         <mat-label
           class="orc-font-small-print"
@@ -322,6 +322,7 @@
           Don't have your recovery codes?
         </p>
         <a
+          href="#"
           (click)="toggleRecoveryCode($event)"
           i18n="@@account.useYourAuthenticationAppInstead"
         >
