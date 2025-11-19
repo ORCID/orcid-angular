@@ -1,0 +1,377 @@
+@import '../../themes/orcid-typography.scss';
+
+:host {
+  display: block;
+}
+
+.record-header-wrapper {
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 32px 0;
+  align-items: flex-start;
+  word-break: break-word;
+
+  color: var(--orcid-color-brand-white, #ffffff);
+  background: var(--orcid-color-brand-secondary-darkest, #003449);
+
+  .record-header {
+    gap: 16px;
+    padding: 0 16px;
+
+    h1,
+    p {
+      margin: 0;
+    }
+
+    h2 {
+      font-weight: normal;
+    }
+
+    h2.mobile {
+      margin: auto 0 !important;
+    }
+
+    .divider {
+      width: 100%;
+      height: 2px;
+      background: var(--orcid-color-brand-secondary-dark, #085c77);
+    }
+
+    .names-wrapper {
+      gap: 8px;
+
+      .names {
+        position: relative;
+        line-height: 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 100%;
+        gap: 16px;
+
+        h1 {
+          margin: 0;
+          flex: 1 1 auto;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          max-width: calc(100% - 80px);
+        }
+      }
+
+      .other-names {
+        line-height: 24px;
+        color: var(--orcid-color-brand-secondary-lightest, #d0f3ff);
+      }
+
+      .other-names.mobile {
+        justify-content: center;
+      }
+
+      .other-names,
+      .other-names.mobile {
+        width: 100%;
+        overflow: hidden;
+      }
+
+      .other-names p,
+      .other-names.mobile p {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      // Loading placeholder - invisible but reserves space
+      &.loading-placeholder {
+        visibility: hidden;
+        pointer-events: none;
+        
+        // Ensure placeholder matches actual content structure
+        .names {
+          gap: 16px;
+          line-height: 40px; // Match actual content line-height
+          
+          h1 {
+            margin: 0; // Match actual content margin
+            line-height: inherit; // Inherit from parent
+          }
+        }
+        
+        // Ensure other-names matches actual content
+        .other-names {
+          line-height: 24px; // Match actual content line-height
+        }
+      }
+    }
+
+    .issue {
+      h1 {
+        font-weight: normal;
+      }
+    }
+
+    .id-wrapper {
+      align-items: center;
+      min-width: 0; // Allow flex child to shrink below content size
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+
+      .col {
+        padding: 0 !important;
+        display: flex;
+        align-items: center;
+      }
+
+      .col.mobile {
+        justify-content: center;
+      }
+
+      .orcid-link-wrapper {
+        margin-top: 5.5px;
+        display: flex;
+        align-items: center;
+        max-height: 40px; // Desktop: constrain ORCID link row to 40px in both compact and normal modes
+      }
+
+      .buttons-wrapper {
+        margin-left: 16px;
+      }
+
+      .buttons-wrapper.mobile {
+        justify-content: center;
+        margin-left: 0;
+      }
+    }
+
+    .orc-row {
+      h1 {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+
+    // Ensure buttons on accent background use white text
+    button[mat-button] {
+      --mat-button-text-label-text-color: var(--orcid-color-brand-white, #ffffff);
+      color: var(--orcid-color-brand-white, #ffffff);
+      
+      mat-icon {
+        color: var(--orcid-color-brand-white, #ffffff);
+      }
+    }
+  }
+}
+
+/* Internal layout container for ORCID UI header components.
+   This mirrors the main app's .container behavior but is scoped to the UI library. */
+.orc-container {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1304px;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+.orc-row {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+
+
+
+.record-header-wrapper.mobile {
+  padding: 32px 16px;
+  text-align: center;
+
+  .record-header {
+    justify-content: center;
+  }
+
+  .names {
+    justify-content: center;
+  }
+}
+
+.expand_more {
+  transform: rotate(90deg);
+}
+
+button.orc-ui-font-body-small {
+  font-weight: 400;
+}
+
+.record-header > .orc-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mobile .record-header > .orc-row {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.mobile .record-header .names {
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.mobile .id-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+// Compact mode (desktop & mobile): ensure ID wrapper reserves consistent height
+// to avoid jump between loading (~57px) and loaded (~78px).
+.record-header-wrapper .id-wrapper.compact {
+  min-height: 78px;
+}
+
+// Desktop-only, non-compact: fix ID wrapper height to 48px
+.record-header-wrapper:not(.mobile) .id-wrapper:not(.compact) {
+  height: 48px;
+}
+
+.thin-font-heading {
+  font-weight: 300;
+}
+
+.orcid-id-section {
+  width: 100%;
+}
+
+.link-wrapper {
+  position: relative;
+  min-width: 0; // Allow flex child to shrink below content size
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  flex-wrap: nowrap; // Prevent children from wrapping to next line
+  
+  // Ensure button container stays on same line
+  > div:last-child {
+    flex: 0 0 auto; // Don't grow or shrink, maintain natural size
+    white-space: nowrap; // Prevent button text from wrapping
+  }
+}
+
+h1.mobile {
+  text-align: center;
+  width: 100%;
+}
+
+.font-weight-400 {
+  font-weight: 400;
+}
+
+section#orcid-id {
+  max-width: 100%;
+  min-width: 0; // Allow flex child to shrink below content size
+  width: 100%;
+  box-sizing: border-box;
+  flex: 1 1 auto; // Allow section to grow and shrink
+  min-width: 0; // Ensure it can shrink below content size
+}
+
+.orcid-id-text-and-buttons {
+  display: flex;
+  align-items: center;
+
+  &.compact {
+    flex-direction: column;
+    align-items: baseline;
+    gap: 8px;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0; // Allow flex child to shrink below content size
+    box-sizing: border-box;
+
+    .orc-row {
+      width: 100%;
+      min-width: 0; // Allow flex child to shrink below content size
+      box-sizing: border-box;
+      
+      h1 {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: 100%;
+        box-sizing: border-box;
+      }
+    }
+
+    // Loading placeholder for compact mode - invisible but reserves space
+    .loading-placeholder-compact {
+      visibility: hidden;
+      pointer-events: none;
+    }
+  }
+}
+
+// Loading placeholder for ORCID link wrapper
+.orcid-link-wrapper.loading-placeholder {
+  visibility: hidden;
+  pointer-events: none;
+  margin-top: 5.5px;
+  display: flex;
+  align-items: center;
+  
+  // Ensure h2 matches actual content height
+  h2 {
+    margin: 0;
+    line-height: inherit;
+  }
+}
+
+.mobile .orcid-id-text-and-buttons {
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+
+  &.compact {
+    flex-direction: column;
+    gap: 8px;
+    max-width: calc(100% - 80px);
+  }
+}
+
+// Mobile: allow ORCID link wrapper to grow freely
+.mobile .orcid-link-wrapper {
+  max-height: none;
+}
+
+// Shared placeholder for ID/logo area (used in names and ID sections)
+.id-logo-placeholder {
+  width: 40px;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+// Desktop-only: match placeholder height to 48px ID row by default
+.record-header-wrapper:not(.mobile) .id-logo-placeholder {
+  height: 48px;
+}
+
+// Desktop compact mode: allow ID/logo placeholder to grow naturally inside compact ID wrapper
+.record-header-wrapper:not(.mobile) .id-wrapper.compact .id-logo-placeholder {
+  height: auto;
+}
+
+// Mobile normal mode: ensure loading names-placeholder reserves space for name actions (48px)
+.record-header-wrapper.mobile .names-wrapper.loading-placeholder .id-logo-placeholder {
+  height: 48px;
+}
+
+// Mobile normal mode: reserve space for summary actions while loading
+.record-header-wrapper.mobile .summary-actions-placeholder {
+  min-height: 50px; // Approximate height of loaded summary actions area
+}
+

@@ -203,12 +203,6 @@ button.orc-font-body-small {
   width: 100%;
 }
 
-app-record-edit-button {
-  position: absolute;
-  inset-inline-end: 0;
-  top: 0;
-}
-
 .link-wrapper {
   position: relative;
 }
@@ -247,5 +241,12 @@ section#orcid-id {
     gap: 8px;
     max-width: calc(100% - 80px);
   }
+}
+
+// Logo styles for projected header-banner-logo content
+orcid-header-banner [header-banner-logo] {
+  width: 40px;
+  margin-right: 8px;
+  flex-shrink: 0;
 }
 

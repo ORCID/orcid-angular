@@ -1,0 +1,25 @@
+<div class="orcid-theme docs-shell">
+  <aside class="docs-sidebar">
+    <h1 class="docs-logo">Orcid UI</h1>
+    <nav>
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        Overview
+      </a>
+      <a routerLink="/colors" routerLinkActive="active">
+        Colors
+      </a>
+      <a routerLink="/typography" routerLinkActive="active">
+        Typography
+      </a>
+      <a routerLink="/record-header" routerLinkActive="active">
+        Record header
+      </a>
+    </nav>
+  </aside>
+
+  <main class="docs-content">
+    <router-outlet></router-outlet>
+  </main>
+</div>
+
+

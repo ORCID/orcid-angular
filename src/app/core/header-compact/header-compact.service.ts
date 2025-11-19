@@ -21,12 +21,14 @@ export class HeaderCompactService {
   )
   private readonly _compactActiveSubject = new BehaviorSubject<boolean>(false)
   private readonly _isDesktopSubject = new BehaviorSubject<boolean>(true)
-  private readonly _scrollYSubject = new BehaviorSubject<number>(0)
-  private readonly _recordRestrictedSubject = new BehaviorSubject<boolean>(false)
+  private readonly _scrollYSubject = new BehaviorSubject<number>(-1000)
+  private readonly _recordRestrictedSubject = new BehaviorSubject<boolean>(
+    false
+  )
   // Threshold configuration
-  private readonly baseThresholdDesktop = 155
-  private readonly baseThresholdMobile = 220
-  private readonly hysteresisBuffer = 3
+  private readonly baseThresholdDesktop = -205
+  private readonly baseThresholdMobile = -250
+  private readonly hysteresisBuffer = 0
 
   readonly eligible$ = this._eligibleSubject.asObservable()
   readonly publicOrcid$ = this._publicOrcidSubject.asObservable()
@@ -74,23 +76,14 @@ export class HeaderCompactService {
         distinctUntilChanged()
       )
       .subscribe((y) => {
-        console.log('Scroll Y:', y)
-        console.log('Body height:', document.body?.scrollHeight)
-        this._scrollYSubject.next(y)
-        this.updateCompactState()
+        if (y !== 0) {
+          this._scrollYSubject.next(y)
+          this.updateCompactState()
+        }
       })
 
     // Also recompute when eligibility toggles
     this.eligible$.subscribe(() => this.updateCompactState())
-  }
-
-  setRecordRestrictions(restricted: boolean) {
-    const normalized = !!restricted
-    if (this._recordRestrictedSubject.value === normalized) {
-      return
-    }
-    this._recordRestrictedSubject.next(normalized)
-    this.updateCompactState()
   }
 
   /**
@@ -131,6 +124,7 @@ export class HeaderCompactService {
     const enter = threshold + buffer
     const exit = threshold - buffer
     const current = this._compactActiveSubject.value
+
     const next = current ? y > exit : y >= enter
     if (next !== current) {
       this._compactActiveSubject.next(next)
@@ -138,10 +132,28 @@ export class HeaderCompactService {
   }
 
   private getScrollY(): number {
-    return (
-      (this.window &&
-        (this.window.scrollY || (this.window as any).pageYOffset)) ||
-      0
-    )
+    if (!this.window) {
+      return 0
+    }
+
+    const doc = this.window.document
+    const mainContainer = doc?.querySelector(
+      '.main-content'
+    ) as HTMLElement | null
+
+    // Fallback to global scroll if we can't find the main container
+    const globalScrollY =
+      this.window.scrollY || (this.window as any).pageYOffset || 0
+
+    if (!mainContainer) {
+      return globalScrollY
+    }
+
+    const rect = mainContainer.getBoundingClientRect()
+
+    // Distance scrolled relative to the top of .main-container
+    const distanceFromMainTop = -rect.top
+
+    return distanceFromMainTop
   }
 }

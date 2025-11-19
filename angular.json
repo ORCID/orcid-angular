@@ -129,6 +129,8 @@
             "styles": [
               "src/assets/scss/noto-sans.scss",
               "src/assets/scss/material.scss",
+              "projects/orcid-tokens/tokens.css",
+              "src/assets/scss/orcid-ui-theme.scss",
               "src/assets/scss/orcid.scss",
               "src/styles.scss",
               "src/assets/scss/grid.scss"
@@ -376,6 +378,8 @@
             "karmaConfig": "src/karma.conf.js",
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "projects/orcid-tokens/tokens.css",
+              "src/assets/scss/orcid-ui-theme.scss",
               "src/styles.scss"
             ],
             "scripts": [
@@ -402,6 +406,248 @@
             "production": {
               "devServerTarget": "ng-orcid:serve:production"
             }
+          }
+        }
+      }
+    },
+    "orcid-ui": {
+      "projectType": "library",
+      "root": "projects/orcid-ui",
+      "sourceRoot": "projects/orcid-ui/src",
+      "prefix": "orcid",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/orcid-ui/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/orcid-ui/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/orcid-ui/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    },
+    "orcid-tokens": {
+      "projectType": "library",
+      "root": "projects/orcid-tokens",
+      "sourceRoot": "projects/orcid-tokens/src",
+      "prefix": "orcid",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/orcid-tokens/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/orcid-tokens/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/orcid-tokens/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    },
+    "orcid-ui-docs": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/orcid-ui-docs",
+      "sourceRoot": "projects/orcid-ui-docs/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "projects/orcid-ui-docs/src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "projects/orcid-ui-docs/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/orcid-ui-docs/public"
+              }
+            ],
+            "styles": [
+              "projects/orcid-ui-docs/src/styles.scss"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "orcid-ui-docs:build:production"
+            },
+            "development": {
+              "buildTarget": "orcid-ui-docs:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular/build:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "projects/orcid-ui-docs/tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/orcid-ui-docs/public"
+              }
+            ],
+            "styles": [
+              "projects/orcid-ui-docs/src/styles.scss"
+            ]
+          }
+        }
+      }
+    },
+    "orcid-ui-elements": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/orcid-ui-elements",
+      "sourceRoot": "projects/orcid-ui-elements/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "projects/orcid-ui-elements/src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "projects/orcid-ui-elements/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/orcid-ui-elements/public"
+              }
+            ],
+            "styles": [
+              "projects/orcid-ui-elements/src/styles.scss"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "orcid-ui-elements:build:production"
+            },
+            "development": {
+              "buildTarget": "orcid-ui-elements:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular/build:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "projects/orcid-ui-elements/tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/orcid-ui-elements/public"
+              }
+            ],
+            "styles": [
+              "projects/orcid-ui-elements/src/styles.scss"
+            ]
           }
         }
       }
