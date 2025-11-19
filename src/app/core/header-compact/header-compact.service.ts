@@ -124,7 +124,6 @@ export class HeaderCompactService {
     const enter = threshold + buffer
     const exit = threshold - buffer
     const current = this._compactActiveSubject.value
-
     const next = current ? y > exit : y >= enter
     if (next !== current) {
       this._compactActiveSubject.next(next)
