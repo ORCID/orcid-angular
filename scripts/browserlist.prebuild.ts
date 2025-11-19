@@ -6,7 +6,7 @@ import * as fs from 'fs'
 // Use dynamic import for ESM module (browserslist-useragent-regexp v4+ is ESM-only)
 async function generateBrowserlistRegexp() {
   const { getUserAgentRegex } = await import('browserslist-useragent-regexp')
-  
+
   const regExp = getUserAgentRegex({
     allowHigherVersions: true,
     allowZeroSubversions: true,
@@ -27,4 +27,3 @@ generateBrowserlistRegexp().catch((err) => {
   console.error('Error generating browserlist regexp:', err)
   process.exit(1)
 })
-
