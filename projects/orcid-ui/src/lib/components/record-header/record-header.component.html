@@ -13,10 +13,7 @@
       [attr.aria-label]="regionNames"
       class="orcid-id-section"
     >
-      <div
-        class="orc-row names-wrapper"
-        *ngIf="!loading && title"
-      >
+      <div class="orc-row names-wrapper" *ngIf="!loading && title">
         <div class="orc-row names">
           <h1
             [ngClass]="{
@@ -57,10 +54,7 @@
             &nbsp;
           </h1>
           <!-- Mobile-only: show other-names placeholder above the projected actions -->
-          <div
-            class="orc-row other-names mobile"
-            *ngIf="!isDesktop"
-          >
+          <div class="orc-row other-names mobile" *ngIf="!isDesktop">
             <p class="orc-ui-font-body">&nbsp;</p>
           </div>
           <!-- Placeholder for projected name actions to maintain spacing.
@@ -84,10 +78,7 @@
         </h1>
       </div>
 
-      <div
-        class="no-public-information"
-        *ngIf="!loading"
-      >
+      <div class="no-public-information" *ngIf="!loading">
         <h1
           [ngClass]="{
             'orc-ui-font-heading-small': !isDesktop,
@@ -119,10 +110,7 @@
             class="orcid-id-text-and-buttons"
             dir="ltr"
           >
-            <div
-              class="orc-row"
-              *ngIf="compactMode && !loading && title"
-            >
+            <div class="orc-row" *ngIf="compactMode && !loading && title">
               <h1
                 class="orc-ui-font-body-large"
                 style="font-weight: bold"
@@ -153,7 +141,11 @@
 
             <!-- Placeholder for ORCID ID section during loading.
                  Height matches the desktop ID row (48px) but is flexible on mobile. -->
-            <div class="orcid-link-wrapper loading-placeholder" *ngIf="loading" aria-hidden="true">
+            <div
+              class="orcid-link-wrapper loading-placeholder"
+              *ngIf="loading"
+              aria-hidden="true"
+            >
               <div class="id-logo-placeholder"></div>
               <h2
                 [ngClass]="{
@@ -232,5 +224,3 @@
     </div>
   </div>
 </div>
-
-

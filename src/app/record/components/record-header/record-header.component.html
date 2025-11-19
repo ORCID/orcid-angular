@@ -19,10 +19,7 @@
     src="assets/vectors/orcid.logo.icon.svg"
     alt="orcid logo"
   />
-  <ng-container
-    *ngIf="userInfo?.RECORD_WITH_ISSUES"
-    header-banner-issue
-  >
+  <ng-container *ngIf="userInfo?.RECORD_WITH_ISSUES" header-banner-issue>
     <ng-container
       *ngIf="userInfo?.IS_DEACTIVATED === 'true' && !userInfo?.PRIMARY_RECORD"
     >
@@ -73,9 +70,7 @@
       [attr.aria-label]="ariaLabelCopyOrcidId"
       (click)="clipboard()"
     >
-      <mat-icon class="material-icons icon">
-        content_copy
-      </mat-icon>
+      <mat-icon class="material-icons icon"> content_copy </mat-icon>
     </button>
     <button
       mat-icon-button
@@ -96,5 +91,3 @@ On compact mode the record summary is displayed in the record header (here)
 on non-compact mode the record summary is displayed in my-orcid page.
 --->
 <app-record-summary *ngIf="compactMode"></app-record-summary>
-
- 

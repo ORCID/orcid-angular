@@ -78,8 +78,7 @@ export class RecordSummaryComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.$destroy))
       .subscribe((position) => {
         this.savedScrollPosition = position
-          this.restoreScrollPosition()
-        
+        this.restoreScrollPosition()
       })
   }
 

@@ -115,15 +115,14 @@ import { HeaderBannerComponent } from '@orcid/ui'
               alt="ORCID logo"
             />
             <button
-                mat-icon-button
-                type="button"
-                matTooltip="Copy ORCID iD"
-                aria-label="Copy ORCID iD"
-                record-header-name-actions
-
-              >
-                <mat-icon>edit</mat-icon>
-              </button>
+              mat-icon-button
+              type="button"
+              matTooltip="Copy ORCID iD"
+              aria-label="Copy ORCID iD"
+              record-header-name-actions
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
             <span header-banner-expanded-label>Hide details</span>
             <span header-banner-collapsed-label>Show details</span>
             <ng-container header-banner-id-actions>
@@ -230,15 +229,14 @@ import { HeaderBannerComponent } from '@orcid/ui'
               alt="ORCID logo"
             />
             <button
-                mat-icon-button
-                type="button"
-                matTooltip="Copy ORCID iD"
-                aria-label="Copy ORCID iD"
-                record-header-name-actions
-
-              >
-                <mat-icon>edit</mat-icon>
-              </button>
+              mat-icon-button
+              type="button"
+              matTooltip="Copy ORCID iD"
+              aria-label="Copy ORCID iD"
+              record-header-name-actions
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
             <span header-banner-expanded-label>Hide details</span>
             <span header-banner-collapsed-label>Show details</span>
             <ng-container header-banner-id-actions>
@@ -286,17 +284,16 @@ import { HeaderBannerComponent } from '@orcid/ui'
               src="https://qa.orcid.org/assets/vectors/orcid.logo.icon.svg"
               alt="ORCID logo"
             />
-        
-            <button
-                mat-icon-button
-                type="button"
-                matTooltip="Copy ORCID iD"
-                aria-label="Copy ORCID iD"
-                record-header-name-actions
 
-              >
-                <mat-icon>edit</mat-icon>
-              </button>
+            <button
+              mat-icon-button
+              type="button"
+              matTooltip="Copy ORCID iD"
+              aria-label="Copy ORCID iD"
+              record-header-name-actions
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
             <span header-banner-expanded-label>Hide details</span>
             <span header-banner-collapsed-label>Show details</span>
             <ng-container header-banner-id-actions>
@@ -345,14 +342,14 @@ import { HeaderBannerComponent } from '@orcid/ui'
               alt="ORCID logo"
             />
             <button
-                mat-icon-button
-                type="button"
-                matTooltip="Copy ORCID iD"
-                aria-label="Copy ORCID iD"
-                record-header-name-actions
-              >
-                <mat-icon>edit</mat-icon>
-              </button>
+              mat-icon-button
+              type="button"
+              matTooltip="Copy ORCID iD"
+              aria-label="Copy ORCID iD"
+              record-header-name-actions
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
             <span header-banner-expanded-label>Hide details</span>
             <span header-banner-collapsed-label>Show details</span>
             <ng-container header-banner-id-actions>
@@ -401,14 +398,14 @@ import { HeaderBannerComponent } from '@orcid/ui'
               alt="ORCID logo"
             />
             <button
-                mat-icon-button
-                type="button"
-                matTooltip="Copy ORCID iD"
-                aria-label="Copy ORCID iD"
-                record-header-name-actions
-              >
-                <mat-icon>edit</mat-icon>
-              </button>
+              mat-icon-button
+              type="button"
+              matTooltip="Copy ORCID iD"
+              aria-label="Copy ORCID iD"
+              record-header-name-actions
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
             <span header-banner-expanded-label>Hide details</span>
             <span header-banner-collapsed-label>Show details</span>
             <ng-container header-banner-id-actions>
@@ -457,14 +454,14 @@ import { HeaderBannerComponent } from '@orcid/ui'
               alt="ORCID logo"
             />
             <button
-                mat-icon-button
-                type="button"
-                matTooltip="Copy ORCID iD"
-                aria-label="Copy ORCID iD"
-                record-header-name-actions
-              >
-                <mat-icon>edit</mat-icon>
-              </button>
+              mat-icon-button
+              type="button"
+              matTooltip="Copy ORCID iD"
+              aria-label="Copy ORCID iD"
+              record-header-name-actions
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
             <span header-banner-expanded-label>Hide details</span>
             <span header-banner-collapsed-label>Show details</span>
             <ng-container header-banner-id-actions>
@@ -513,14 +510,14 @@ import { HeaderBannerComponent } from '@orcid/ui'
               alt="ORCID logo"
             />
             <button
-                mat-icon-button
-                type="button"
-                matTooltip="Copy ORCID iD"
-                aria-label="Copy ORCID iD"
-                record-header-name-actions
-              >
-                <mat-icon>edit</mat-icon>
-              </button>
+              mat-icon-button
+              type="button"
+              matTooltip="Copy ORCID iD"
+              aria-label="Copy ORCID iD"
+              record-header-name-actions
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
             <span header-banner-expanded-label>Hide details</span>
             <span header-banner-collapsed-label>Show details</span>
             <ng-container header-banner-id-actions>
@@ -555,7 +552,10 @@ import { HeaderBannerComponent } from '@orcid/ui'
           <code>compactMode</code>, <code>isDesktop</code>,
           <code>expanded</code>, <code>canToggleExpanded</code>
         </li>
-        <li><code>loading</code>: shows a progress bar and hides content while loading</li>
+        <li>
+          <code>loading</code>: shows a progress bar and hides content while
+          loading
+        </li>
         <li><code>regionNames</code>, <code>regionOrcidId</code></li>
       </ul>
 

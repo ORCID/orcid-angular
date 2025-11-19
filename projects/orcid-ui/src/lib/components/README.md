@@ -10,5 +10,3 @@ Orcid UI library components live here.
   color: var(--orcid-color-text, #000);
 }
 ```
-
-

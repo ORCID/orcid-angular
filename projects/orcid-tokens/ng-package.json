@@ -4,9 +4,5 @@
   "lib": {
     "entryFile": "src/public-api.ts"
   },
-  "assets": [
-    "tokens.css",
-    "tokens.scss",
-    "tokens.json"
-  ]
+  "assets": ["tokens.css", "tokens.scss", "tokens.json"]
 }

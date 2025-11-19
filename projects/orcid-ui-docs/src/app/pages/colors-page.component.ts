@@ -6,10 +6,9 @@ import { Component } from '@angular/core'
   template: `
     <h2>Colors</h2>
     <p>
-      This page will showcase Orcid color tokens from <code>@orcid/tokens</code>.
+      This page will showcase Orcid color tokens from
+      <code>@orcid/tokens</code>.
     </p>
   `,
 })
 export class ColorsPageComponent {}
-
-

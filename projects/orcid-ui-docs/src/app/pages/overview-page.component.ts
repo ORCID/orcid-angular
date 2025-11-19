@@ -23,5 +23,3 @@ import { OrcidUi } from '@orcid/ui'
   `,
 })
 export class OverviewPageComponent {}
-
-

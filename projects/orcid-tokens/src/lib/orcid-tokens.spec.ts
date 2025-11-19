@@ -1,23 +1,22 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { OrcidTokens } from './orcid-tokens';
+import { OrcidTokens } from './orcid-tokens'
 
 describe('OrcidTokens', () => {
-  let component: OrcidTokens;
-  let fixture: ComponentFixture<OrcidTokens>;
+  let component: OrcidTokens
+  let fixture: ComponentFixture<OrcidTokens>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [OrcidTokens]
-    })
-    .compileComponents();
+      imports: [OrcidTokens],
+    }).compileComponents()
 
-    fixture = TestBed.createComponent(OrcidTokens);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(OrcidTokens)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

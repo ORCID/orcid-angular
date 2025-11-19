@@ -57,5 +57,3 @@ export class HeaderBannerComponent {
     this.expandedChange.emit(next)
   }
 }
-
-

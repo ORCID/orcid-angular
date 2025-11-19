@@ -9,5 +9,3 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router'
   styleUrl: './docs-shell.component.scss',
 })
 export class DocsShellComponent {}
-
-

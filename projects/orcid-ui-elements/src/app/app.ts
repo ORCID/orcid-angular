@@ -5,7 +5,10 @@ import {
   DoBootstrap,
   Injector,
 } from '@angular/core'
-import { bootstrapApplication, provideClientHydration } from '@angular/platform-browser'
+import {
+  bootstrapApplication,
+  provideClientHydration,
+} from '@angular/platform-browser'
 import { createCustomElement } from '@angular/elements'
 import { OrcidUi } from '@orcid/ui'
 

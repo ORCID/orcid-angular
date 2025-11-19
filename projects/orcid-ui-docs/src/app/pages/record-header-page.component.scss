@@ -51,7 +51,9 @@ orcid-header-banner [header-banner-logo] {
 }
 
 // Reduce padding for mobile compact mode to make it more compact
-.example-container.mobile orcid-header-banner .record-header-wrapper.mobile:has(.compact) {
+.example-container.mobile
+  orcid-header-banner
+  .record-header-wrapper.mobile:has(.compact) {
   padding: 16px 16px;
 }
 
@@ -60,11 +62,11 @@ orcid-header-banner [header-banner-logo] {
   .id-wrapper {
     gap: 4px;
   }
-  
+
   .orcid-id-text-and-buttons.compact {
     gap: 4px;
   }
-  
+
   .orcid-link-wrapper {
     margin-top: 0;
   }
@@ -115,4 +117,3 @@ orcid-header-banner [header-banner-logo] {
   font-size: 0.9em;
   color: var(--orcid-color-text, #222);
 }
-

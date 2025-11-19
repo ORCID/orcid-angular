@@ -432,10 +432,7 @@
           "builder": "@angular/build:karma",
           "options": {
             "tsConfig": "projects/orcid-ui/tsconfig.spec.json",
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ]
+            "polyfills": ["zone.js", "zone.js/testing"]
           }
         }
       }
@@ -462,10 +459,7 @@
           "builder": "@angular/build:karma",
           "options": {
             "tsConfig": "projects/orcid-tokens/tsconfig.spec.json",
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ]
+            "polyfills": ["zone.js", "zone.js/testing"]
           }
         }
       }
@@ -485,9 +479,7 @@
           "builder": "@angular/build:application",
           "options": {
             "browser": "projects/orcid-ui-docs/src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "projects/orcid-ui-docs/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -496,9 +488,7 @@
                 "input": "projects/orcid-ui-docs/public"
               }
             ],
-            "styles": [
-              "projects/orcid-ui-docs/src/styles.scss"
-            ]
+            "styles": ["projects/orcid-ui-docs/src/styles.scss"]
           },
           "configurations": {
             "production": {
@@ -542,10 +532,7 @@
         "test": {
           "builder": "@angular/build:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "projects/orcid-ui-docs/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -554,9 +541,7 @@
                 "input": "projects/orcid-ui-docs/public"
               }
             ],
-            "styles": [
-              "projects/orcid-ui-docs/src/styles.scss"
-            ]
+            "styles": ["projects/orcid-ui-docs/src/styles.scss"]
           }
         }
       }
@@ -576,9 +561,7 @@
           "builder": "@angular/build:application",
           "options": {
             "browser": "projects/orcid-ui-elements/src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "projects/orcid-ui-elements/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -587,9 +570,7 @@
                 "input": "projects/orcid-ui-elements/public"
               }
             ],
-            "styles": [
-              "projects/orcid-ui-elements/src/styles.scss"
-            ]
+            "styles": ["projects/orcid-ui-elements/src/styles.scss"]
           },
           "configurations": {
             "production": {
@@ -633,10 +614,7 @@
         "test": {
           "builder": "@angular/build:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "projects/orcid-ui-elements/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -645,9 +623,7 @@
                 "input": "projects/orcid-ui-elements/public"
               }
             ],
-            "styles": [
-              "projects/orcid-ui-elements/src/styles.scss"
-            ]
+            "styles": ["projects/orcid-ui-elements/src/styles.scss"]
           }
         }
       }

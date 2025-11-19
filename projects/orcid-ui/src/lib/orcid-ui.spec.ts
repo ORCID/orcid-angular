@@ -1,23 +1,22 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { OrcidUi } from './orcid-ui';
+import { OrcidUi } from './orcid-ui'
 
 describe('OrcidUi', () => {
-  let component: OrcidUi;
-  let fixture: ComponentFixture<OrcidUi>;
+  let component: OrcidUi
+  let fixture: ComponentFixture<OrcidUi>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [OrcidUi]
-    })
-    .compileComponents();
+      imports: [OrcidUi],
+    }).compileComponents()
 
-    fixture = TestBed.createComponent(OrcidUi);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(OrcidUi)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

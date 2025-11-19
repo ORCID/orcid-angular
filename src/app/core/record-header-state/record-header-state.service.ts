@@ -22,7 +22,8 @@ export class RecordHeaderStateService {
   readonly displaySideBar$ = this._displaySideBar.asObservable()
   readonly displayBiography$ = this._displayBiography.asObservable()
   readonly recordSummaryOpen$ = this._recordSummaryOpen.asObservable()
-  readonly recordSummaryScrollPosition$ = this._recordSummaryScrollPosition.asObservable()
+  readonly recordSummaryScrollPosition$ =
+    this._recordSummaryScrollPosition.asObservable()
   readonly hasCreditOrOtherNames$ = this._hasCreditOrOtherNames.asObservable()
 
   setLoadingUserRecord(val: boolean) {

@@ -5,15 +5,9 @@
   "compilerOptions": {
     "outDir": "../../out-tsc/spec/orcid-ui-docs",
     "declaration": false,
-    "types": [
-      "jasmine"
-    ],
+    "types": ["jasmine"],
     "composite": true
   },
-  "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "../../out-tsc"
-  ]
+  "include": ["src/**/*.ts"],
+  "exclude": ["../../out-tsc"]
 }

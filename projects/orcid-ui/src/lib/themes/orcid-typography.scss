@@ -69,16 +69,18 @@ $orcid-ui-material-typography: mat.m2-define-typography-config(
       $orcid-font-weight-normal,
       $letter-spacing: $orcid-letter-spacing-body-1
     ),
-  $subtitle-2: mat.m2-define-typography-level(
-    $orcid-font-size-body-small,
-    $orcid-line-height-subtitle-2,
-    $orcid-font-weight-normal
-  ),
-  $body-2: mat.m2-define-typography-level(
-    $orcid-font-size-body,
-    $orcid-line-height-body,
-    $orcid-font-weight-normal
-  ),
+  $subtitle-2:
+    mat.m2-define-typography-level(
+      $orcid-font-size-body-small,
+      $orcid-line-height-subtitle-2,
+      $orcid-font-weight-normal
+    ),
+  $body-2:
+    mat.m2-define-typography-level(
+      $orcid-font-size-body,
+      $orcid-line-height-body,
+      $orcid-font-weight-normal
+    ),
   $caption:
     mat.m2-define-typography-level(
       $orcid-font-size-small-print,
@@ -163,4 +165,3 @@ $orcid-ui-material-typography: mat.m2-define-typography-config(
 
 // Generate the classes
 @include orcid-ui-typography-classes-generator($orcid-ui-material-typography);
-

@@ -86,18 +86,18 @@
       &.loading-placeholder {
         visibility: hidden;
         pointer-events: none;
-        
+
         // Ensure placeholder matches actual content structure
         .names {
           gap: 16px;
           line-height: 40px; // Match actual content line-height
-          
+
           h1 {
             margin: 0; // Match actual content margin
             line-height: inherit; // Inherit from parent
           }
         }
-        
+
         // Ensure other-names matches actual content
         .other-names {
           line-height: 24px; // Match actual content line-height
@@ -155,9 +155,12 @@
 
     // Ensure buttons on accent background use white text
     button[mat-button] {
-      --mat-button-text-label-text-color: var(--orcid-color-brand-white, #ffffff);
+      --mat-button-text-label-text-color: var(
+        --orcid-color-brand-white,
+        #ffffff
+      );
       color: var(--orcid-color-brand-white, #ffffff);
-      
+
       mat-icon {
         color: var(--orcid-color-brand-white, #ffffff);
       }
@@ -180,9 +183,6 @@
   flex-wrap: wrap;
   width: 100%;
 }
-
-
-
 
 .record-header-wrapper.mobile {
   padding: 32px 16px;
@@ -255,7 +255,7 @@ button.orc-ui-font-body-small {
   max-width: 100%;
   box-sizing: border-box;
   flex-wrap: nowrap; // Prevent children from wrapping to next line
-  
+
   // Ensure button container stays on same line
   > div:last-child {
     flex: 0 0 auto; // Don't grow or shrink, maintain natural size
@@ -298,7 +298,7 @@ section#orcid-id {
       width: 100%;
       min-width: 0; // Allow flex child to shrink below content size
       box-sizing: border-box;
-      
+
       h1 {
         overflow: hidden;
         white-space: nowrap;
@@ -323,7 +323,7 @@ section#orcid-id {
   margin-top: 5.5px;
   display: flex;
   align-items: center;
-  
+
   // Ensure h2 matches actual content height
   h2 {
     margin: 0;
@@ -366,7 +366,9 @@ section#orcid-id {
 }
 
 // Mobile normal mode: ensure loading names-placeholder reserves space for name actions (48px)
-.record-header-wrapper.mobile .names-wrapper.loading-placeholder .id-logo-placeholder {
+.record-header-wrapper.mobile
+  .names-wrapper.loading-placeholder
+  .id-logo-placeholder {
   height: 48px;
 }
 
@@ -374,4 +376,3 @@ section#orcid-id {
 .record-header-wrapper.mobile .summary-actions-placeholder {
   min-height: 50px; // Approximate height of loaded summary actions area
 }
-

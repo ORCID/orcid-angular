@@ -220,10 +220,8 @@ export class RecordHeaderComponent implements OnInit {
         this.bannerTitle = this.creditName || fullName || ''
         this.bannerSubtitle = this.otherNames || ''
 
-        const hasCreditName =
-          !!this.userRecord?.names?.creditName?.value
-        const hasOtherNames =
-          !isEmpty(this.userRecord?.otherNames?.otherNames)
+        const hasCreditName = !!this.userRecord?.names?.creditName?.value
+        const hasOtherNames = !isEmpty(this.userRecord?.otherNames?.otherNames)
         this._state.setHasCreditOrOtherNames(hasCreditName || hasOtherNames)
       })
   }
