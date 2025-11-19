@@ -26,6 +26,14 @@
     "strictTemplates": true,
     "strictInjectionParameters": true
   },
+  "files": [],
+  "include": [],
+  "exclude": [
+    "out-tsc",
+    "dist",
+    "node_modules",
+    "**/out-tsc/**"
+  ],
   "references": [
     {
       "path": "./projects/orcid-ui/tsconfig.lib.json"

@@ -3,7 +3,8 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "../../out-tsc/spec",
+    "outDir": "../../out-tsc/spec/orcid-tokens",
+    "declaration": false,
     "types": [
       "jasmine"
     ],
@@ -11,5 +12,8 @@
   },
   "include": [
     "src/**/*.ts"
+  ],
+  "exclude": [
+    "../../out-tsc"
   ]
 }
