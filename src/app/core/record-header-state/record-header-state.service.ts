@@ -13,6 +13,8 @@ export class RecordHeaderStateService {
   private readonly _displaySideBar = new BehaviorSubject<boolean>(false)
   private readonly _displayBiography = new BehaviorSubject<boolean>(false)
   private readonly _recordSummaryOpen = new BehaviorSubject<boolean>(false)
+  private readonly _recordSummaryScrollPosition = new BehaviorSubject<number>(0)
+  private readonly _hasCreditOrOtherNames = new BehaviorSubject<boolean>(false)
 
   readonly loadingUserRecord$ = this._loadingUserRecord.asObservable()
   readonly isPublicRecord$ = this._isPublicRecord.asObservable()
@@ -20,6 +22,9 @@ export class RecordHeaderStateService {
   readonly displaySideBar$ = this._displaySideBar.asObservable()
   readonly displayBiography$ = this._displayBiography.asObservable()
   readonly recordSummaryOpen$ = this._recordSummaryOpen.asObservable()
+  readonly recordSummaryScrollPosition$ =
+    this._recordSummaryScrollPosition.asObservable()
+  readonly hasCreditOrOtherNames$ = this._hasCreditOrOtherNames.asObservable()
 
   setLoadingUserRecord(val: boolean) {
     this._loadingUserRecord.next(val)
@@ -36,8 +41,14 @@ export class RecordHeaderStateService {
   setDisplayBiography(val: boolean) {
     this._displayBiography.next(val)
   }
+  setHasCreditOrOtherNames(val: boolean) {
+    this._hasCreditOrOtherNames.next(!!val)
+  }
   setRecordSummaryOpen(val: boolean) {
     this._recordSummaryOpen.next(val)
+  }
+  setRecordSummaryScrollPosition(val: number) {
+    this._recordSummaryScrollPosition.next(val)
   }
 
   reset() {
@@ -47,5 +58,7 @@ export class RecordHeaderStateService {
     this._displaySideBar.next(false)
     this._displayBiography.next(false)
     this._recordSummaryOpen.next(false)
+    this._recordSummaryScrollPosition.next(0)
+    this._hasCreditOrOtherNames.next(false)
   }
 }

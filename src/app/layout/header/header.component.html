@@ -193,4 +193,5 @@ Placed at the very bottom of the header so it sits right on top of the app. -->
 <div
   *ngIf="compactEligible && isCompactActive && (isPublicRecord$ | async)"
   class="header-top-spacer"
+  [class.header-top-spacer--tall]="hasCreditOrOtherNames$ | async"
 ></div>

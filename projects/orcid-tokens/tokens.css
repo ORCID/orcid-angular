@@ -1,0 +1,82 @@
+:root {
+  /* Colors */
+  --orcid-color-primary: #a6ce39;
+  --orcid-color-primary-contrast: #ffffff;
+  --orcid-surface: #ffffff;
+  --orcid-surface-subtle: #f5f5f5;
+  --orcid-color-text: #222222;
+  --orcid-color-text-muted: #555555;
+  --orcid-color-border-subtle: #dddddd;
+
+  /* Brand secondary palette (blue) */
+  --orcid-color-brand-secondary-darkest: #003449;
+  --orcid-color-brand-secondary-dark: #085c77;
+  --orcid-color-brand-secondary-lightest: #d0f3ff;
+  --orcid-color-brand-white: #ffffff;
+
+  /* Spacing (4px base scale) */
+  --orcid-space-1: 4px;
+  --orcid-space-2: 8px;
+  --orcid-space-3: 12px;
+  --orcid-space-4: 16px;
+  --orcid-space-5: 24px;
+  --orcid-space-6: 32px;
+
+  /* Typography */
+  --orcid-font-family-sans: 'Noto Sans', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', sans-serif;
+
+  /* Font weights */
+  --orcid-font-weight-light: 200;
+  --orcid-font-weight-regular: 300;
+  --orcid-font-weight-normal: 400;
+  --orcid-font-weight-medium: 500;
+  --orcid-font-weight-semibold: 600;
+  --orcid-font-weight-bold: 700;
+
+  /* Font sizes */
+  --orcid-font-size-display-large: 96px;
+  --orcid-font-size-display: 60px;
+  --orcid-font-size-display-small: 48px;
+  --orcid-font-size-heading-large: 40px;
+  --orcid-font-size-heading: 32px;
+  --orcid-font-size-heading-small: 24px;
+  --orcid-font-size-heading-6: 20px;
+  --orcid-font-size-body-large: 18px;
+  --orcid-font-size-body: 16px;
+  --orcid-font-size-body-small: 14px;
+  --orcid-font-size-small-print: 12px;
+
+  /* Line heights */
+  --orcid-line-height-display-large: 96px;
+  --orcid-line-height-display: normal;
+  --orcid-line-height-display-small: 48px;
+  --orcid-line-height-heading-large: normal;
+  --orcid-line-height-heading: normal;
+  --orcid-line-height-heading-small: normal;
+  --orcid-line-height-heading-6: normal;
+  --orcid-line-height-body-large: normal;
+  --orcid-line-height-body: 20px;
+  --orcid-line-height-body-small: 24px;
+  --orcid-line-height-subtitle-1: 28px;
+  --orcid-line-height-subtitle-2: 1.75;
+  --orcid-line-height-small-print: 16px;
+
+  /* Letter spacing */
+  --orcid-letter-spacing-display-large: -1.5px;
+  --orcid-letter-spacing-display: -0.5px;
+  --orcid-letter-spacing-display-small: 0px;
+  --orcid-letter-spacing-heading-large: 0.5px;
+  --orcid-letter-spacing-heading: 0.5px;
+  --orcid-letter-spacing-heading-small: 0.5px;
+  --orcid-letter-spacing-heading-6: 0.15px;
+  --orcid-letter-spacing-body-large: normal;
+  --orcid-letter-spacing-body: normal;
+  --orcid-letter-spacing-body-small: 0.25px;
+  --orcid-letter-spacing-subtitle-1: 0.15px;
+  --orcid-letter-spacing-subtitle-2: 0px;
+  --orcid-letter-spacing-body-1: 0.1px;
+  --orcid-letter-spacing-small-print: 0.5px;
+  --orcid-letter-spacing-button: 0px;
+  --orcid-letter-spacing-title-alt: 1.3px;
+}

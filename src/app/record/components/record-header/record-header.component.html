@@ -1,251 +1,90 @@
-<mat-progress-bar
-  *ngIf="loadingUserRecord"
-  mode="indeterminate"
-  color="accent"
-></mat-progress-bar>
-<div class="record-header-wrapper" [ngClass]="{ mobile: !platform.columns12 }">
-  <div class="row container record-header">
-    <section
-      *ngIf="!compactMode"
-      [id]="'names'"
-      role="region"
-      [attr.aria-label]="regionNames"
-      class="orcid-id-section"
+<orcid-header-banner
+  class="orcid-theme"
+  [loading]="loadingUserRecord"
+  [compactMode]="compactMode"
+  [isDesktop]="platform?.columns12"
+  [title]="bannerTitle"
+  [subtitle]="bannerSubtitle"
+  [primaryIdText]="bannerPrimaryIdText"
+  [secondaryIdText]="bannerSecondaryIdText"
+  [expanded]="recordSummaryOpen"
+  [canToggleExpanded]="true"
+  (expandedChange)="recordSummaryLinkClick()"
+  [regionNames]="regionNames"
+  [regionOrcidId]="regionOrcidId"
+>
+  <img
+    header-banner-logo
+    class="orcid-logo"
+    src="assets/vectors/orcid.logo.icon.svg"
+    alt="orcid logo"
+  />
+  <ng-container *ngIf="userInfo?.RECORD_WITH_ISSUES" header-banner-issue>
+    <ng-container
+      *ngIf="userInfo?.IS_DEACTIVATED === 'true' && !userInfo?.PRIMARY_RECORD"
     >
-      <div
-        class="row names-wrapper"
-        *ngIf="
-          !loadingUserRecord &&
-          !userInfo?.RECORD_WITH_ISSUES &&
-          (userRecord?.names || userRecord?.otherNames)
-        "
-      >
-        <div class="row names">
-          <h1
-            [ngClass]="{
-              'orc-font-heading-small': !platform.columns12,
-              'orc-font-heading': platform.columns12
-            }"
-          >
-            <ng-container *ngIf="creditName">{{ creditName }}</ng-container>
-            <ng-container *ngIf="!!!creditName && (givenNames || familyName)">
-              <ng-container *ngIf="givenNames">{{
-                givenNames + ' '
-              }}</ng-container>
-              {{ familyName }}
-            </ng-container>
-          </h1>
-          <!-- Mobile-only: show other-names above the pencil -->
-          <div
-            class="row other-names mobile"
-            *ngIf="!platform.columns12 && otherNames"
-          >
-            <p class="orc-font-body">{{ otherNames }}</p>
-          </div>
-          <app-record-edit-button></app-record-edit-button>
-        </div>
-        <!-- Desktop-only: other names below names row -->
-        <div class="row other-names" *ngIf="platform.columns12 && otherNames">
-          <p class="orc-font-body">{{ otherNames }}</p>
-        </div>
-      </div>
-      <div
-        class="issue"
-        *ngIf="!loadingUserRecord && userInfo?.RECORD_WITH_ISSUES"
-      >
-        <h1
-          [ngClass]="{
-            'orc-font-heading-small': !platform.columns12,
-            'orc-font-heading': platform.columns12
-          }"
-        >
-          <ng-container
-            *ngIf="
-              userInfo.IS_DEACTIVATED === 'true' && !userInfo.PRIMARY_RECORD
-            "
-            i18n="@@summary.recordIsDeactivated"
-            >This record has been deactivated
-          </ng-container>
-          <ng-container
-            *ngIf="
-              userInfo.IS_LOCKED === 'true' &&
-              userInfo.IS_DEACTIVATED === 'false' &&
-              !userInfo.PRIMARY_RECORD
-            "
-            i18n="@@summary.recordIsLocked"
-            >This record is locked
-          </ng-container>
-          <ng-container
-            *ngIf="userInfo.PRIMARY_RECORD"
-            i18n="@@summary.recordIsDeprecated"
-            >This record has been deprecated</ng-container
-          >
-        </h1>
-      </div>
-      <div
-        class="no-public-information"
-        *ngIf="
-          !loadingUserRecord &&
-          !recordWithIssues &&
-          !(creditName || givenNames || familyName || otherNames)
-        "
-      >
-        <h1
-          [ngClass]="{
-            'orc-font-heading-small': !platform.columns12,
-            'orc-font-heading': platform.columns12
-          }"
-          class="thin-font-heading"
-        >
-          <ng-container i18n="@@record.nameIsPrivate"
-            >Name is private
-          </ng-container>
-        </h1>
-      </div>
-    </section>
-    <mat-divider *ngIf="!compactMode" class="divider"></mat-divider>
-    <div class="row link-wrapper">
-      <section
-        [id]="'orcid-id'"
-        role="region"
-        [attr.aria-label]="regionOrcidId"
-      >
-        <div class="row id-wrapper">
-          <div
-            class="col"
-            [ngClass]="{
-              'orc-font-body-small': !platform.columns12,
-              'orc-font-body': platform.columns12,
-              mobile: !platform.columns12
-            }"
-            dir="ltr"
-          >
-            <div
-              class="row"
-              *ngIf="
-                compactMode &&
-                !loadingUserRecord &&
-                !userInfo?.RECORD_WITH_ISSUES &&
-                (creditName || givenNames || familyName)
-              "
-            >
-              <h1
-                class="orc-font-body-large"
-                style="font-weight: bold"
-                [ngClass]="{
-                  mobile: !platform.columns12
-                }"
-              >
-                <ng-container *ngIf="creditName">{{ creditName }}</ng-container>
-                <ng-container
-                  *ngIf="!!!creditName && (givenNames || familyName)"
-                >
-                  <ng-container *ngIf="givenNames">{{
-                    givenNames + ' '
-                  }}</ng-container>
-                  {{ familyName }}
-                </ng-container>
-              </h1>
-            </div>
-            <div class="orcid-link-wrapper">
-              <img
-                class="orcid-logo"
-                [ngClass]="{
-                  mobile: !platform.columns12,
-                  compact: compactMode
-                }"
-                src="assets/vectors/orcid.logo.icon.svg"
-                alt="orcid logo"
-              />
-              <h1
-                [ngClass]="{
-                  'orc-font-body-small': compactMode,
-                  'orc-font-body-large': !compactMode,
-                  mobile: !platform.columns12
-                }"
-                class="font-weight-400"
-              >
-                <ng-container *ngIf="!platform.columns12; else elseBlock">{{
-                  isPublicRecord
-                }}</ng-container>
-                <ng-template #elseBlock>{{ orcidId }}</ng-template>
-              </h1>
-            </div>
+      {{ deactivatedMessage }}
+    </ng-container>
+    <ng-container
+      *ngIf="
+        userInfo?.IS_LOCKED === 'true' &&
+        userInfo?.IS_DEACTIVATED === 'false' &&
+        !userInfo?.PRIMARY_RECORD
+      "
+    >
+      {{ lockedMessage }}
+    </ng-container>
+    <ng-container *ngIf="!!userInfo?.PRIMARY_RECORD">
+      {{ deprecatedMessage }}
+    </ng-container>
+  </ng-container>
 
-            <div
-              class="buttons-wrapper"
-              [ngClass]="{
-                row: !platform.columns12,
-                mobile: !platform.columns12
-              }"
-              *ngIf="!userInfo?.RECORD_WITH_ISSUES && !compactMode"
-            >
-              <button
-                mat-icon-button
-                class="orc-font-small-print"
-                [matTooltip]="tooltipCopy"
-                [attr.aria-label]="ariaLabelCopyOrcidId"
-                (click)="clipboard()"
-              >
-                <mat-icon class="material-icons" class="icon"
-                  >content_copy</mat-icon
-                >
-              </button>
-              <button
-                mat-icon-button
-                class="orc-font-small-print"
-                [matTooltip]="tooltipPrintableVersion"
-                [attr.aria-label]="ariaLabelViewPrintable"
-                (click)="printRecord()"
-              >
-                <mat-icon class="icon">
-                  <span class="material-symbols-outlined">print</span>
-                </mat-icon>
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
+  <span
+    *ngIf="!userInfo?.RECORD_WITH_ISSUES && !bannerTitle && !bannerSubtitle"
+    header-banner-name-private
+  >
+    {{ privateName }}
+  </span>
 
-      <div
-        *ngIf="
-          !loadingUserRecord &&
-          !recordWithIssues &&
-          (creditName || givenNames || familyName || otherNames)
-        "
-      >
-        <ng-container
-          *ngIf="compactMode && !recordSummaryOpen; else summaryToggle"
-        >
-          <app-record-edit-button></app-record-edit-button>
-        </ng-container>
-        <ng-template #summaryToggle>
-          <button
-            mat-button
-            (click)="recordSummaryLinkClick()"
-            class="orc-font-body-small"
-          >
-            <mat-icon *ngIf="recordSummaryOpen">expand_more</mat-icon>
-            <mat-icon class="expand_more" *ngIf="!recordSummaryOpen"
-              >expand_less</mat-icon
-            >
-            <ng-container
-              *ngIf="recordSummaryOpen"
-              i18n="@@summary.hideRecordSummary"
-            >
-              Hide record summary
-            </ng-container>
-            <ng-container
-              *ngIf="!recordSummaryOpen"
-              i18n="@@summary.showRecordSummary"
-              >Show record summary</ng-container
-            >
-          </button>
-        </ng-template>
-      </div>
-    </div>
-  </div>
-</div>
+  <app-record-edit-button
+    *ngIf="headerCompactEnabled"
+    record-header-name-actions
+  ></app-record-edit-button>
+  <app-record-edit-button
+    *ngIf="headerCompactEnabled"
+    record-header-summary-actions
+  ></app-record-edit-button>
+
+  <span header-banner-expanded-label>
+    {{ hideSummaryLabel }}
+  </span>
+  <span header-banner-collapsed-label>
+    {{ showSummaryLabel }}
+  </span>
+
+  <ng-container header-banner-id-actions>
+    <button
+      mat-icon-button
+      class="orc-font-small-print"
+      [matTooltip]="tooltipCopy"
+      [attr.aria-label]="ariaLabelCopyOrcidId"
+      (click)="clipboard()"
+    >
+      <mat-icon class="material-icons icon"> content_copy </mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      class="orc-font-small-print"
+      [matTooltip]="tooltipPrintableVersion"
+      [attr.aria-label]="ariaLabelViewPrintable"
+      (click)="printRecord()"
+    >
+      <mat-icon class="icon">
+        <span class="material-symbols-outlined">print</span>
+      </mat-icon>
+    </button>
+  </ng-container>
+</orcid-header-banner>
 
 <!---
 On compact mode the record summary is displayed in the record header (here)

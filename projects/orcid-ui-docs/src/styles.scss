@@ -1,0 +1,46 @@
+/* Global styles for Orcid UI docs */
+
+/* Angular Material Core Styles */
+@use '@angular/material' as mat;
+@use '@angular/material/core/m2/palette' as palette;
+
+/* Include Material core styles */
+@include mat.core();
+
+/* Design tokens (provides --orcid-font-family-sans, colors, spacing, etc.) */
+@import '../../../projects/orcid-tokens/tokens.css';
+
+/* Angular Material Theme Configuration for Docs */
+/* Using a simple, clean theme independent from the main app */
+
+// Define a custom color palette for the docs using M2 API
+$docs-primary-palette: mat.m2-define-palette(palette.$blue-palette);
+$docs-accent-palette: mat.m2-define-palette(palette.$green-palette);
+$docs-warn-palette: mat.m2-define-palette(palette.$red-palette);
+
+// Create the theme using M2 API
+$docs-theme: mat.m2-define-light-theme(
+  $docs-primary-palette,
+  $docs-accent-palette,
+  $docs-warn-palette
+);
+
+// Include theme styles for all Material components
+@include mat.all-component-themes($docs-theme);
+@include mat.all-component-typographies($docs-theme);
+
+/* Base typography hook for ORCID UI areas, matching the library's .orcid-theme */
+.orcid-theme {
+  font-family: var(
+    --orcid-font-family-sans,
+    'Noto Sans',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif
+  );
+}
+
+body {
+  margin: 0;
+}

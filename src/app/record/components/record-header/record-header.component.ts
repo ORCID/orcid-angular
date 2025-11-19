@@ -1,17 +1,5 @@
-import {
-  Component,
-  EventEmitter,
-  Inject,
-  Input,
-  OnInit,
-  Output,
-} from '@angular/core'
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core'
 import { CommonModule, NgIf } from '@angular/common'
-import { MatProgressBarModule } from '@angular/material/progress-bar'
-import { MatDividerModule } from '@angular/material/divider'
-import { MatButtonModule } from '@angular/material/button'
-import { MatIconModule } from '@angular/material/icon'
-import { MatTooltipModule } from '@angular/material/tooltip'
 import { RecordHeaderStateService } from 'src/app/core/record-header-state/record-header-state.service'
 import { HeaderCompactService } from 'src/app/core/header-compact/header-compact.service'
 import { isEmpty } from 'lodash'
@@ -26,6 +14,12 @@ import { Assertion, UserInfo } from 'src/app/types'
 import { RecordEditButtonComponent } from '../record-edit-button/record-edit-button.component'
 import { RecordSummaryComponent } from '../record-summary/record-summary.component'
 import { UserRecord } from 'src/app/types/record.local'
+import { HeaderBannerComponent } from '@orcid/ui'
+import { MatIconModule } from '@angular/material/icon'
+import { MatTooltipModule } from '@angular/material/tooltip'
+import { MatButtonModule } from '@angular/material/button'
+import { TogglzService } from 'src/app/core/togglz/togglz.service'
+import { TogglzFlag } from 'src/app/core/togglz/togglz-flags.enum'
 
 @Component({
   selector: 'app-record-header',
@@ -38,13 +32,12 @@ import { UserRecord } from 'src/app/types/record.local'
   imports: [
     CommonModule,
     NgIf,
-    MatProgressBarModule,
-    MatDividerModule,
-    MatButtonModule,
-    MatIconModule,
-    MatTooltipModule,
     RecordEditButtonComponent,
     RecordSummaryComponent,
+    HeaderBannerComponent,
+    MatIconModule,
+    MatTooltipModule,
+    MatButtonModule,
   ],
 })
 export class RecordHeaderComponent implements OnInit {
@@ -73,12 +66,25 @@ export class RecordHeaderComponent implements OnInit {
   otherNames = ''
   ariaLabelName = ''
   orcidId = ''
+  headerCompactEnabled = false
+
+  // Generic banner view-model properties used by the UI layer
+  bannerTitle = ''
+  bannerSubtitle = ''
+  bannerPrimaryIdText = ''
+  bannerSecondaryIdText = ''
 
   regionNames = $localize`:@@topBar.names:Names`
   regionOrcidId = 'Orcid iD'
   tooltipPrintableVersion = $localize`:@@topBar.printableRecord:Printable record`
   tooltipCopy = $localize`:@@topBar.copyId:Copy iD`
   privateName = $localize`:@@account.nameIsPri:Name is private`
+
+  deactivatedMessage = $localize`:@@summary.recordIsDeactivated:This record has been deactivated`
+  lockedMessage = $localize`:@@summary.recordIsLocked:This record is locked`
+  deprecatedMessage = $localize`:@@summary.recordIsDeprecated:This record has been deprecated`
+  hideSummaryLabel = $localize`:@@summary.hideRecordSummary:Hide record summary`
+  showSummaryLabel = $localize`:@@summary.showRecordSummary:Show record summary`
 
   ariaLabelCopyOrcidId = $localize`:@@topBar.ariaLabelCopyOrcidId:Copy your ORCID iD to the clipboard`
   ariaLabelViewPrintable = $localize`:@@topBar.ariaLabelViewPrintable:View a printable version of your ORCID record (Opens in new tab)`
@@ -89,10 +95,17 @@ export class RecordHeaderComponent implements OnInit {
     private _user: UserService,
     private _record: RecordService,
     private _state: RecordHeaderStateService,
-    private _compact: HeaderCompactService
+    private _compact: HeaderCompactService,
+    private _togglz: TogglzService
   ) {}
 
   ngOnInit(): void {
+    // Subscribe to HEADER_COMPACT flag
+    this._togglz
+      .getStateOf(TogglzFlag.HEADER_COMPACT)
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((enabled) => (this.headerCompactEnabled = !!enabled))
+
     // Compact state
     this._compact.compactActive$
       .pipe(takeUntil(this.$destroy))
@@ -122,6 +135,8 @@ export class RecordHeaderComponent implements OnInit {
         this.isPublicRecord = publicId
         this.orcidId =
           'https:' + runtimeEnvironment.BASE_URL + (this.isPublicRecord || '')
+        this.bannerPrimaryIdText = this.isPublicRecord || ''
+        this.bannerSecondaryIdText = this.orcidId || ''
         if (this.isPublicRecord) {
           this.loadRecord(this.isPublicRecord)
         }
@@ -159,7 +174,6 @@ export class RecordHeaderComponent implements OnInit {
       })
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
-        this.recordWithIssues = userRecord?.userInfo?.RECORD_WITH_ISSUES
         this.userRecord = userRecord
         this.userInfo = userRecord?.userInfo
 
@@ -201,6 +215,14 @@ export class RecordHeaderComponent implements OnInit {
             this.otherNames = `${fullName}`
           }
         }
+
+        // Compose UI-only title/subtitle that the header banner consumes
+        this.bannerTitle = this.creditName || fullName || ''
+        this.bannerSubtitle = this.otherNames || ''
+
+        const hasCreditName = !!this.userRecord?.names?.creditName?.value
+        const hasOtherNames = !isEmpty(this.userRecord?.otherNames?.otherNames)
+        this._state.setHasCreditOrOtherNames(hasCreditName || hasOtherNames)
       })
   }
 }
