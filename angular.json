@@ -493,6 +493,7 @@
           },
           "configurations": {
             "production": {
+              "baseHref": "/orcid-angular/",
               "budgets": [
                 {
                   "type": "initial",

@@ -53,6 +53,16 @@ jobs:
             exit 1
           fi
       
+      - name: Setup SPA support for GitHub Pages
+        run: |
+          BUILD_DIR="${{ steps.set-output.outputs.directory }}"
+          # Copy index.html to 404.html for SPA routing support
+          # GitHub Pages will serve 404.html for all missing routes
+          cp "$BUILD_DIR/index.html" "$BUILD_DIR/404.html"
+          # Ensure .nojekyll exists to disable Jekyll processing
+          touch "$BUILD_DIR/.nojekyll"
+          echo "✅ SPA support configured: 404.html and .nojekyll created"
+      
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
