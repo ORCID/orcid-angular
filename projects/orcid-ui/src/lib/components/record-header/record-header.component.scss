@@ -605,7 +605,6 @@ section#orcid-id {
   height: 40px; // Match names row line-height (40px)
 }
 
-
 // Mobile non-compact: ensure loading placeholder matches loaded state height
 // Mobile structure: names row (h1 + other-names.mobile + edit button) with gap: 8px
 // names row height = max(h1 line-height, other-names.mobile 30px, edit button ~48px) ≈ 48px

@@ -24,7 +24,7 @@ import { AccentButtonDirective, HeaderBannerComponent } from '@orcid/ui'
     MatCheckboxModule,
     MatSelectModule,
     MatTooltipModule,
-    AccentButtonDirective
+    AccentButtonDirective,
   ],
   styleUrls: ['./record-header-page.component.scss'],
   templateUrl: './record-header-page.component.html',
