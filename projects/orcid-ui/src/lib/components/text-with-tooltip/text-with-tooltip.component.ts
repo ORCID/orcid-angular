@@ -81,6 +81,7 @@ import { CommonModule, NgIf } from '@angular/common'
         pointer-events: none;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         transform: translate(10px, 10px);
+        line-height: normal;
       }
     `,
   ],

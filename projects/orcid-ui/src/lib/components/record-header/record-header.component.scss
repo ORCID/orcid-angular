@@ -81,6 +81,7 @@
         }
       }
 
+
       .other-names {
         line-height: 24px;
         color: var(--orcid-color-brand-secondary-lightest, #d0f3ff);
@@ -200,6 +201,32 @@
 
       mat-icon {
         color: var(--orcid-color-brand-white, #ffffff);
+      }
+    }
+
+    // Ensure icon buttons on accent background use white text and proper hover state
+    button[mat-icon-button] {
+      color: var(--orcid-color-brand-white, #ffffff);
+      --mat-icon-button-icon-color: var(--orcid-color-brand-white, #ffffff);
+      --mat-icon-button-hover-state-layer-color: var(
+        --brand-secondary-dark,
+        #085c77
+      );
+
+      mat-icon {
+        color: var(--orcid-color-brand-white, #ffffff);
+      }
+
+      &:hover,
+      &:focus,
+      &:active {
+        color: var(--orcid-color-brand-white, #ffffff);
+        --mat-icon-button-icon-color: var(--orcid-color-brand-white, #ffffff);
+        background: var(--brand-secondary-dark, #085c77);
+
+        mat-icon {
+          color: var(--orcid-color-brand-white, #ffffff);
+        }
       }
     }
   }
