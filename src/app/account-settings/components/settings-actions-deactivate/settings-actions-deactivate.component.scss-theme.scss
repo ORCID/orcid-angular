@@ -7,6 +7,15 @@
   $warn: map-get($theme, accent);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
+
+  #cy-deactivate-account {
+    background-color: $state-warning-darkest;
+    color: white;
+  }
+
+  .deactivation-email-sent {
+    opacity: 30%;
+  }
 }
 
 @include settings-defaults-email-frequency($orcid-app-theme);

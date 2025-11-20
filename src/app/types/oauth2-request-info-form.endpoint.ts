@@ -11,6 +11,10 @@ export interface Oauth2RequestInfoForm {
   error?: string
   errorCode?: string
   errorDescription?: string
+  // New auth server error code
+  error_code?: string
+  // New auth server error description
+  error_description?: string
   scopes?: string
   clientId?: string
   clientName?: string
@@ -53,8 +57,8 @@ export function mapOauth2RequestToLegacy(
     clientHavePersistentTokens: null,
     scopesAsString: null,
     error: (source.error as any) || null,
-    errorCode: source.errorCode || null,
-    errorDescription: source.errorDescription || '',
+    errorCode: source.errorCode || source.error_code || null,
+    errorDescription: source.errorDescription || source.error_description || '',
     forceLogin: false,
     oauthState: source.state || '',
   }

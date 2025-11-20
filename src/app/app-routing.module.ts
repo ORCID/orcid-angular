@@ -106,7 +106,6 @@ const routes: Routes = [
   },
   {
     path: ApplicationRoutes.account,
-    canActivateChild: [AuthenticatedGuard, AuthenticatedNoDelegatorGuard],
     loadChildren: () =>
       import('./account-settings/account-settings.module').then(
         (m) => m.AccountSettingsModule

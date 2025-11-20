@@ -37,6 +37,8 @@ import { RecordUtil } from 'src/app/shared/utils/record.util'
 import { LoginMainInterstitialsManagerService } from 'src/app/core/login-interstitials-manager/login-main-interstitials-manager.service'
 import { ShareEmailsDomainsComponentDialogOutput } from 'src/app/cdk/interstitials/share-emails-domains/interstitial-dialog-extend/share-emails-domains-dialog.component'
 import { AffilationsComponentDialogOutput } from 'src/app/cdk/interstitials/affiliations-interstitial/interstitial-dialog-extend/affiliations-interstitial-dialog.component'
+import { HeaderCompactService } from 'src/app/core/header-compact/header-compact.service'
+import { RecordHeaderStateService } from 'src/app/core/record-header-state/record-header-state.service'
 
 @Component({
   selector: 'app-my-orcid',
@@ -90,6 +92,9 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   newAddedAffiliation: string
 
   featuredWorksTogglz = false
+  // Compact header shared state
+  compactEligible$ = this._compactService.eligible$
+  compactActive$ = this._compactService.compactActive$
 
   constructor(
     _userInfoService: UserInfoService,
@@ -106,7 +111,9 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     private _scriptService: ScriptService,
     private _canonocalUrlService: CanonocalUrlService,
     private location: Location,
-    private _LoginMainInterstitialsManagerService: LoginMainInterstitialsManagerService
+    private _LoginMainInterstitialsManagerService: LoginMainInterstitialsManagerService,
+    private _compactService: HeaderCompactService,
+    private _recordHeaderState: RecordHeaderStateService
   ) {}
 
   private checkIfThisIsAPublicOrcid() {
@@ -132,6 +139,13 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.checkIfThisIsAPublicOrcid()
     this.affiliations = 0
+    // initialize shared record header state
+    this._recordHeaderState.setIsPublicRecord(this.publicOrcid || null)
+    this._recordHeaderState.setLoadingUserRecord(true)
+    this._recordHeaderState.setAffiliations(0)
+    this._recordHeaderState.setDisplayBiography(false)
+    this._recordHeaderState.setDisplaySideBar(false)
+    this._recordHeaderState.setRecordSummaryOpen(this.recordSummaryOpen)
 
     if (this.publicOrcid) {
       this._canonocalUrlService.setCanonicalUrl(this.publicOrcid)
@@ -168,6 +182,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
         tap((userRecord) => {
           this.userInfo = userRecord?.userInfo
           this.checkLoadingState(userRecord)
+          this._recordHeaderState.setLoadingUserRecord(this.loadingUserRecord)
           this.recordWithIssues = userRecord?.userInfo?.RECORD_WITH_ISSUES
 
           if (userRecord?.userInfo) {
@@ -227,6 +242,10 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
             userRecord
           )
           this.displayBiography = !!userRecord?.biography
+          // update shared state
+          this._recordHeaderState.setIsPublicRecord(this.publicOrcid || null)
+          this._recordHeaderState.setDisplaySideBar(this.displaySideBar)
+          this._recordHeaderState.setDisplayBiography(this.displayBiography)
         }),
         mergeMap((userRecord) => {
           const interstitialDialog =
@@ -370,10 +389,12 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     if (type === 'RESEARCH_RESOURCE') {
       this.researchResourcePresent = !!itemsCount
     }
+    this._recordHeaderState.setAffiliations(this.affiliations)
   }
 
   isSideBarEmpty(displaySideBar: boolean) {
     this.displaySideBar = displaySideBar
+    this._recordHeaderState.setDisplaySideBar(this.displaySideBar)
   }
 
   checkLoadingState(userRecord: UserRecord) {
@@ -385,5 +406,11 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
       }
     })
     this.loadingUserRecord = !!missingValues.length
+    this._recordHeaderState.setLoadingUserRecord(this.loadingUserRecord)
+  }
+
+  onRecordSummaryOpenChange(open: boolean) {
+    this.recordSummaryOpen = open
+    this._recordHeaderState.setRecordSummaryOpen(open)
   }
 }

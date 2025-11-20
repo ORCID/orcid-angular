@@ -1,25 +1,29 @@
 import * as fs from 'fs'
-import { getUserAgentRegExp } from 'browserslist-useragent-regexp'
 
 // Using browserslist-useragent-regexp a browserslist REGEXP is generated to be used on the application run time
 // This will decide wether show or hide the unsupported browser version banner
 
-const regExp = getUserAgentRegExp({
-  allowHigherVersions: true,
-  allowZeroSubversions: true,
-})
+// Use dynamic import for ESM module (browserslist-useragent-regexp v4+ is ESM-only)
+async function generateBrowserlistRegexp() {
+  const { getUserAgentRegex } = await import('browserslist-useragent-regexp')
 
-const fileText = `// tslint:disable-next-line: max-line-length
+  const regExp = getUserAgentRegex({
+    allowHigherVersions: true,
+    allowZeroSubversions: true,
+  })
+
+  const fileText = `// tslint:disable-next-line: max-line-length
 export const BROWSERLIST_REGEXP = ${regExp}
 `
 
-fs.writeFile(
-  './src/app/cdk/platform-info/browserlist.regexp.ts',
-  fileText,
-  (err) => {
-    if (err) {
-      throw new Error('Error creating browserlist regexp ' + err)
-    }
-    console.debug('Browserlist regexp created')
-  }
-)
+  fs.writeFileSync(
+    './src/app/cdk/platform-info/browserlist.regexp.ts',
+    fileText
+  )
+  console.debug('Browserlist regexp created')
+}
+
+generateBrowserlistRegexp().catch((err) => {
+  console.error('Error generating browserlist regexp:', err)
+  process.exit(1)
+})

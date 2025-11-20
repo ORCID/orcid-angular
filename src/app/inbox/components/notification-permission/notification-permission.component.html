@@ -1,21 +1,37 @@
 <div *ngIf="isOrcidIntegration" class="intro">
   <p i18n="@@inbox.youCanBenefitFromAutomatic">
-    You can benefit from automatic updates to your record.
+    You may benefit from automatic updates to your record.
   </p>
   <ng-container i18n="@@inbox.basedOnYourVerifiedEmailDomains"
-    >Based on your verified email domains, we have found an ORCID integration
+    >Based on your verified email domain, we have found an ORCID integration
     for</ng-container
   >
   <strong> {{ orcidIntegrationMemberName }}</strong
   >.
+  <ng-container i18n="@@inbox.ifYouAreAnActiveMember"
+    >If you are a current faculty or staff member at</ng-container
+  ><strong> {{ orcidIntegrationMemberName }}</strong
+  >,
   <ng-container i18n="@@inbox.connectingWithThisIntegrationWillAllow"
-    >Connecting with this integration will allow</ng-container
+    >connecting with this integration will allow</ng-container
   >
-  {{ orcidIntegrationMemberName }}
+  <strong>{{ orcidIntegrationMemberName }}</strong>
   <ng-container i18n="@@inbox.toAutomaticallyAddValidatedInformation"
     >to automatically add validated information to your ORCID record. This will
-    save you time and effort when maintaining your record, and help make sure it
-    stays up-to-date.</ng-container
+    save you time and effort when maintaining your ORCID record, and help make
+    sure it stays up-to-date.</ng-container
+  >
+
+  <br />
+  <br />
+  <ng-container i18n="@@inbox.ifYouAreNoLongerAffiliatedWith"
+    >If you are no longer affiliated with</ng-container
+  >
+  <strong> {{ orcidIntegrationMemberName }}</strong
+  >,
+  <ng-container i18n="@@inbox.emailAddressFromYourVerifiedEmail"
+    >you may disregard this notification or remove the relevant email address
+    from your ORCID record.</ng-container
   >
 </div>
 <div *ngIf="!isOrcidIntegration" class="intro">
@@ -29,7 +45,6 @@
     party.</ng-container
   >
 </div>
-
 <div *ngFor="let i of itemsByType">
   <p class="type">
     <strong>
@@ -72,7 +87,6 @@
     </button>
   </a>
 </div>
-
 <div *ngIf="isOrcidIntegration" class="buttons-container">
   <a target="_blank" rel="noopener noreferrer" [href]="orcidIntegrationLink">
     <button

@@ -21,7 +21,7 @@ export class AuthenticatedNoDelegatorGuard {
     private _router: Router,
     private _togglz: TogglzService
   ) {}
-  canActivateChild(
+  canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ):

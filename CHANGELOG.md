@@ -1,3 +1,61 @@
+## v2.125.21 - 2025-11-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.20...v2.125.21)
+
+- [#2681](https://github.com/ORCID/orcid-angular/pull/2681): Lmendoza/pd 2418v2
+
+## v2.125.20 - 2025-11-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.19...v2.125.20)
+
+## v2.125.19 - 2025-11-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.18...v2.125.19)
+
+## v2.125.18 - 2025-11-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.17...v2.125.18)
+
+## v2.125.17 - 2025-11-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.16...v2.125.17)
+
+## v2.125.16 - 2025-11-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.15...v2.125.16)
+
+## v2.125.15 - 2025-11-14
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.14...v2.125.15)
+
+## v2.125.14 - 2025-11-14
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.13...v2.125.14)
+
+## v2.125.13 - 2025-11-14
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.12...v2.125.13)
+
+## v2.125.12 - 2025-11-14
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.11...v2.125.12)
+
+## v2.125.11 - 2025-11-14
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.10...v2.125.11)
+
+## v2.125.10 - 2025-11-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.9...v2.125.10)
+
+## v2.125.9 - 2025-11-10
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.8...v2.125.9)
+
+## v2.125.8 - 2025-11-10
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.7...v2.125.8)
+
 ## v2.125.7 - 2025-11-03
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.6...v2.125.7)

@@ -16,6 +16,17 @@ import { UserService } from '../core'
 })
 export class AuthenticatedGuard {
   constructor(private _userInfo: UserService, private _router: Router) {}
+  canActivate(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ):
+    | Observable<boolean | UrlTree>
+    | Promise<boolean | UrlTree>
+    | boolean
+    | UrlTree {
+    return this.isLoggedIn()
+  }
+
   canActivateChild(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -24,6 +35,10 @@ export class AuthenticatedGuard {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
+    return this.isLoggedIn()
+  }
+
+  private isLoggedIn(): Observable<boolean | UrlTree> | boolean {
     return this._userInfo.getUserSession().pipe(
       map((value) => {
         return (

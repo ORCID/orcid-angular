@@ -22,6 +22,7 @@ import { MaintenanceMessageComponent } from './maintenance-message/maintenance-m
 import { MatDividerModule } from '@angular/material/divider'
 import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
 import { MatTooltipModule } from '@angular/material/tooltip'
+import { RecordHeaderComponent } from '../record/components/record-header/record-header.component'
 
 @NgModule({
   imports: [
@@ -39,6 +40,8 @@ import { MatTooltipModule } from '@angular/material/tooltip'
     MatDividerModule,
     A11yLinkModule,
     MatTooltipModule,
+    // Standalone components
+    RecordHeaderComponent,
   ],
   declarations: [
     HeaderComponent,

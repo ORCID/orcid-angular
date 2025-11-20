@@ -96,6 +96,12 @@ export class FormPasswordComponent
         this.nextButtonWasClicked = true
         this._registerObservability.stepBNextButtonClicked(this.form)
       })
+    this._registerStateService
+      .getNextButtonClickFor('a')
+      .pipe(takeUntil(this.destroy))
+      .subscribe((value) => {
+        this.form.get('password')?.updateValueAndValidity()
+      })
     this.form = new UntypedFormGroup(
       {
         password: new UntypedFormControl('', {
@@ -144,7 +150,6 @@ export class FormPasswordComponent
       ) {
         hasError = true
       }
-
       if (hasError) {
         return { passwordIsEqualToTheEmail: true }
       } else {
