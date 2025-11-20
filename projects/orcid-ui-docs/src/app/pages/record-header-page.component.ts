@@ -40,5 +40,6 @@ export class RecordHeaderPageComponent {
     loading: false,
     regionNames: 'Names',
     regionOrcidId: 'Orcid iD',
+    issueBannerText: 'This record has been deactivated',
   }
 }

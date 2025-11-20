@@ -9,6 +9,7 @@ import {
   OnDestroy,
   HostListener,
   ChangeDetectorRef,
+  HostBinding,
 } from '@angular/core'
 import { CommonModule, NgIf } from '@angular/common'
 
@@ -214,6 +215,18 @@ export class TextWithTooltipComponent
 
   get shouldShowTooltip(): boolean {
     return this.overflows && !!this.tooltipText
+  }
+
+  @HostBinding('style.display')
+  get hostDisplay(): string {
+    // Hide the host entirely when there is no text content,
+    // so containers like header banners don't reserve empty space.
+    return this.tooltipText ? 'inline-block' : 'none'
+  }
+
+  @HostBinding('class.has-text')
+  get hasTextClass(): boolean {
+    return !!this.tooltipText
   }
 
   onMouseEnter(event: MouseEvent) {

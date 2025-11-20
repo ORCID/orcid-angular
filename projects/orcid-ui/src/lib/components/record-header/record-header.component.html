@@ -15,32 +15,26 @@
     >
       <div class="orc-row names-wrapper" *ngIf="!loading && title">
         <div class="orc-row names">
-          <orcid-text-with-tooltip [text]="title">
-            <h1
-              [ngClass]="{
-                'orc-ui-font-heading-small': !isDesktop,
-                'orc-ui-font-heading': isDesktop
-              }"
-            >
-              {{ title }}
-            </h1>
-          </orcid-text-with-tooltip>
+          <h1
+            [ngClass]="{
+              'orc-ui-font-heading-small': !isDesktop,
+              'orc-ui-font-heading': isDesktop
+            }"
+          >
+            {{ title }}
+          </h1>
           <!-- Mobile-only: show other-names above the projected actions -->
           <div
             class="orc-row other-names mobile"
             *ngIf="!isDesktop && subtitle"
           >
-            <orcid-text-with-tooltip [text]="subtitle">
-              <p class="orc-ui-font-body">{{ subtitle }}</p>
-            </orcid-text-with-tooltip>
+            <p class="orc-ui-font-body">{{ subtitle }}</p>
           </div>
           <ng-content select="[record-header-name-actions]"></ng-content>
         </div>
         <!-- Desktop-only: other names below names row -->
         <div class="orc-row other-names" *ngIf="isDesktop && subtitle">
-          <orcid-text-with-tooltip [text]="subtitle">
-            <p class="orc-ui-font-body">{{ subtitle }}</p>
-          </orcid-text-with-tooltip>
+          <p class="orc-ui-font-body">{{ subtitle }}</p>
         </div>
       </div>
 
@@ -74,26 +68,16 @@
       </div>
 
       <div class="issue" *ngIf="!loading">
-        <h1
-          [ngClass]="{
-            'orc-ui-font-heading-small': !isDesktop,
-            'orc-ui-font-heading': isDesktop
-          }"
-        >
-          <ng-content select="[header-banner-issue]"></ng-content>
-        </h1>
-      </div>
-
-      <div class="no-public-information" *ngIf="!loading">
-        <h1
-          [ngClass]="{
-            'orc-ui-font-heading-small': !isDesktop,
-            'orc-ui-font-heading': isDesktop
-          }"
-          class="thin-font-heading"
-        >
-          <ng-content select="[header-banner-name-private]"></ng-content>
-        </h1>
+        <orcid-text-with-tooltip>
+          <h1
+            [ngClass]="{
+              'orc-ui-font-heading-small': !isDesktop,
+              'orc-ui-font-heading': isDesktop
+            }"
+          >
+            <ng-content select="[header-banner-issue]"></ng-content>
+          </h1>
+        </orcid-text-with-tooltip>
       </div>
     </section>
 
@@ -117,17 +101,15 @@
             dir="ltr"
           >
             <div class="orc-row" *ngIf="compactMode && !loading && title">
-              <orcid-text-with-tooltip [text]="title">
-                <h1
-                  class="orc-ui-font-body-large"
-                  style="font-weight: bold"
-                  [ngClass]="{
-                    mobile: !isDesktop
-                  }"
-                >
-                  {{ title }}
-                </h1>
-              </orcid-text-with-tooltip>
+              <h1
+                class="orc-ui-font-body-large"
+                style="font-weight: bold"
+                [ngClass]="{
+                  mobile: !isDesktop
+                }"
+              >
+                {{ title }}
+              </h1>
             </div>
 
             <!-- Placeholder to reserve title height during loading in compact mode -->
@@ -239,3 +221,5 @@
     </div>
   </div>
 </div>
+
+
