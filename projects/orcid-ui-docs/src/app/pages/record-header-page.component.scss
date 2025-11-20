@@ -1,6 +1,6 @@
 // Logo styles for projected header-banner-logo content in docs
 orcid-header-banner [header-banner-logo] {
-  width: 40px;
+  width: 24px;
   margin-right: 8px;
   flex-shrink: 0;
 }
@@ -30,6 +30,43 @@ orcid-header-banner [header-banner-logo] {
   color: var(--orcid-color-text, #222);
   font-size: 1.125rem;
   font-weight: 500;
+}
+
+.example-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+
+  // Stack vertically on smaller screens
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.example-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.example-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  h5 {
+    margin: 0;
+    color: var(--orcid-color-text-secondary, #666);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  // For mobile examples, ensure containers are centered in grid
+  .example-container.mobile {
+    margin: 0 auto;
+  }
 }
 
 .example-container {

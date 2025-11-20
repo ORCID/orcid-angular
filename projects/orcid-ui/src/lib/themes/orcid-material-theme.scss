@@ -11,3 +11,8 @@
     sans-serif
   );
 }
+
+// Accent button directive styles
+.accent-button:hover {
+  background: var(--brand-secondary-dark, #085c77) !important;
+}

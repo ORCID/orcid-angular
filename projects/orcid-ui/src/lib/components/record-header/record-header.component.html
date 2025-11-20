@@ -15,26 +15,32 @@
     >
       <div class="orc-row names-wrapper" *ngIf="!loading && title">
         <div class="orc-row names">
-          <h1
-            [ngClass]="{
-              'orc-ui-font-heading-small': !isDesktop,
-              'orc-ui-font-heading': isDesktop
-            }"
-          >
-            {{ title }}
-          </h1>
+          <orcid-text-with-tooltip [text]="title">
+            <h1
+              [ngClass]="{
+                'orc-ui-font-heading-small': !isDesktop,
+                'orc-ui-font-heading': isDesktop
+              }"
+            >
+              {{ title }}
+            </h1>
+          </orcid-text-with-tooltip>
           <!-- Mobile-only: show other-names above the projected actions -->
           <div
             class="orc-row other-names mobile"
             *ngIf="!isDesktop && subtitle"
           >
-            <p class="orc-ui-font-body">{{ subtitle }}</p>
+            <orcid-text-with-tooltip [text]="subtitle">
+              <p class="orc-ui-font-body">{{ subtitle }}</p>
+            </orcid-text-with-tooltip>
           </div>
           <ng-content select="[record-header-name-actions]"></ng-content>
         </div>
         <!-- Desktop-only: other names below names row -->
         <div class="orc-row other-names" *ngIf="isDesktop && subtitle">
-          <p class="orc-ui-font-body">{{ subtitle }}</p>
+          <orcid-text-with-tooltip [text]="subtitle">
+            <p class="orc-ui-font-body">{{ subtitle }}</p>
+          </orcid-text-with-tooltip>
         </div>
       </div>
 
@@ -58,7 +64,7 @@
             <p class="orc-ui-font-body">&nbsp;</p>
           </div>
           <!-- Placeholder for projected name actions to maintain spacing.
-               Height matches the projected edit button (48px) on desktop, but is flexible on mobile. -->
+               Height matches the projected edit button (40px) on desktop, but is flexible on mobile. -->
           <div class="id-logo-placeholder"></div>
         </div>
         <!-- Desktop-only: other names placeholder - always show to match max height -->
@@ -111,15 +117,17 @@
             dir="ltr"
           >
             <div class="orc-row" *ngIf="compactMode && !loading && title">
-              <h1
-                class="orc-ui-font-body-large"
-                style="font-weight: bold"
-                [ngClass]="{
-                  mobile: !isDesktop
-                }"
-              >
-                {{ title }}
-              </h1>
+              <orcid-text-with-tooltip [text]="title">
+                <h1
+                  class="orc-ui-font-body-large"
+                  style="font-weight: bold"
+                  [ngClass]="{
+                    mobile: !isDesktop
+                  }"
+                >
+                  {{ title }}
+                </h1>
+              </orcid-text-with-tooltip>
             </div>
 
             <!-- Placeholder to reserve title height during loading in compact mode -->
@@ -182,7 +190,7 @@
                 'orc-row': !isDesktop,
                 mobile: !isDesktop
               }"
-              *ngIf="!compactMode"
+              *ngIf="!compactMode && !loading"
             >
               <ng-content select="[header-banner-id-actions]"></ng-content>
             </div>
@@ -194,6 +202,13 @@
       <div
         class="summary-actions-placeholder"
         *ngIf="!isDesktop && loading && !compactMode"
+        aria-hidden="true"
+      ></div>
+
+      <!-- Mobile compact mode placeholder to reserve summary actions height during loading -->
+      <div
+        class="summary-actions-placeholder compact"
+        *ngIf="!isDesktop && loading && compactMode"
         aria-hidden="true"
       ></div>
 
