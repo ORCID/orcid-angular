@@ -44,9 +44,9 @@ jobs:
         id: set-output
         run: |
           if [ -d "dist/orcid-ui-docs/browser" ]; then
-            echo "directory=dist/orcid-ui-docs/browser" >> $GITHUB_OUTPUT
+            echo "directory=dist/orcid-ui-docs/browser" >> "$GITHUB_OUTPUT"
           elif [ -d "dist/orcid-ui-docs" ]; then
-            echo "directory=dist/orcid-ui-docs" >> $GITHUB_OUTPUT
+            echo "directory=dist/orcid-ui-docs" >> "$GITHUB_OUTPUT"
           else
             echo "ERROR: Build output directory not found" >&2
             ls -la dist/ >&2
