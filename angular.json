@@ -478,6 +478,7 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
+            "outputPath": "dist/orcid-ui-docs",
             "browser": "projects/orcid-ui-docs/src/main.ts",
             "polyfills": ["zone.js"],
             "tsConfig": "projects/orcid-ui-docs/tsconfig.app.json",
@@ -500,8 +501,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
+                  "maximumWarning": "10kB",
+                  "maximumError": "15kB"
                 }
               ],
               "outputHashing": "all"

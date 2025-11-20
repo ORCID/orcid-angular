@@ -30,4 +30,18 @@ export const routes: Routes = [
         (m) => m.RecordHeaderPageComponent
       ),
   },
+  {
+    path: 'text-with-tooltip',
+    loadComponent: () =>
+      import('./pages/text-with-tooltip-page.component').then(
+        (m) => m.TextWithTooltipPageComponent
+      ),
+  },
+  {
+    path: 'accent-button',
+    loadComponent: () =>
+      import('./pages/accent-button-page.component').then(
+        (m) => m.AccentButtonPageComponent
+      ),
+  },
 ]

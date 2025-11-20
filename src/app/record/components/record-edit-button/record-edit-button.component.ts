@@ -9,11 +9,18 @@ import { Subject } from 'rxjs'
 import { UserService } from 'src/app/core'
 import { RecordHeaderStateService } from 'src/app/core/record-header-state/record-header-state.service'
 import { WINDOW } from 'src/app/cdk/window'
+import { AccentButtonDirective } from '@orcid/ui'
 
 @Component({
   selector: 'app-record-edit-button',
   standalone: true,
-  imports: [CommonModule, MatIconModule, MatButtonModule, MatTooltipModule],
+  imports: [
+    CommonModule,
+    MatIconModule,
+    MatButtonModule,
+    MatTooltipModule,
+    AccentButtonDirective,
+  ],
   templateUrl: 'record-edit-button.component.html',
   styleUrls: ['record-edit-button.component.scss'],
 })
