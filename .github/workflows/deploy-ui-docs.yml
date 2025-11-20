@@ -1,0 +1,63 @@
+name: Build and Deploy UI Docs
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'projects/orcid-ui-docs/**'
+      - 'projects/orcid-ui/**'
+      - 'projects/orcid-tokens/**'
+      - 'package.json'
+      - 'angular.json'
+      - '.github/workflows/deploy-ui-docs.yml'
+  workflow_dispatch:
+    # Allows manual triggering via GitHub CLI or GitHub UI
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'yarn'
+      
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      
+      - name: Build orcid-ui-docs
+        run: yarn build:ui-docs
+        continue-on-error: false
+      
+      - name: Determine build output directory
+        id: set-output
+        run: |
+          if [ -d "dist/orcid-ui-docs/browser" ]; then
+            echo "directory=dist/orcid-ui-docs/browser" >> $GITHUB_OUTPUT
+          elif [ -d "dist/orcid-ui-docs" ]; then
+            echo "directory=dist/orcid-ui-docs" >> $GITHUB_OUTPUT
+          else
+            echo "ERROR: Build output directory not found" >&2
+            ls -la dist/ >&2
+            exit 1
+          fi
+      
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ${{ steps.set-output.outputs.directory }}
+          cname: false
+

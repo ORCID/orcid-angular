@@ -14,7 +14,7 @@ import { Assertion, UserInfo } from 'src/app/types'
 import { RecordEditButtonComponent } from '../record-edit-button/record-edit-button.component'
 import { RecordSummaryComponent } from '../record-summary/record-summary.component'
 import { UserRecord } from 'src/app/types/record.local'
-import { HeaderBannerComponent } from '@orcid/ui'
+import { HeaderBannerComponent, AccentButtonDirective } from '@orcid/ui'
 import { MatIconModule } from '@angular/material/icon'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { MatButtonModule } from '@angular/material/button'
@@ -38,6 +38,7 @@ import { TogglzFlag } from 'src/app/core/togglz/togglz-flags.enum'
     MatIconModule,
     MatTooltipModule,
     MatButtonModule,
+    AccentButtonDirective,
   ],
 })
 export class RecordHeaderComponent implements OnInit {
