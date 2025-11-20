@@ -39,12 +39,6 @@
     </ng-container>
   </ng-container>
 
-  <span
-    *ngIf="!userInfo?.RECORD_WITH_ISSUES && !bannerTitle && !bannerSubtitle"
-    header-banner-name-private
-  >
-    {{ privateName }}
-  </span>
 
   <app-record-edit-button
     *ngIf="headerCompactEnabled"
@@ -87,9 +81,3 @@
     </button>
   </ng-container>
 </orcid-header-banner>
-
-<!---
-On compact mode the record summary is displayed in the record header (here)
-on non-compact mode the record summary is displayed in my-orcid page.
---->
-<app-record-summary *ngIf="compactMode"></app-record-summary>

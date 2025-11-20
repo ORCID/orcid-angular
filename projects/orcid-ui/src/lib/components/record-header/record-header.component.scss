@@ -18,6 +18,16 @@
 
     .record-header {
       gap: 32px; // Desktop non-compact: 32px gap
+
+      // Desktop non-compact: fix heights for issue and no-public-information banners
+      // only when there is actual text content (text-with-tooltip.has-text)
+      .issue:has(orcid-text-with-tooltip.has-text) {
+        min-height: 72px;
+      }
+
+      .no-public-information:has(orcid-text-with-tooltip.has-text) {
+        min-height: 72px;
+      }
     }
   }
 
@@ -134,9 +144,7 @@
           line-height: 24px; // Match actual content line-height
         }
 
-        // Mobile non-compact: ensure other-names.mobile is 30px during loading (matches loaded state)
         .other-names.mobile {
-          height: 30px; // Match loaded state height (30px) for mobile non-compact mode
           display: flex;
           align-items: center;
         }
@@ -247,6 +255,18 @@
   }
 }
 
+// Desktop non-compact: keep the last 48px free so title text doesn't sit under the name-actions button
+.record-header-wrapper:not(.mobile) .orcid-id-section .names-wrapper {
+  padding-right: 48px;
+  box-sizing: border-box;
+}
+
+// Mobile compact: keep the last 48px free so title/ID text doesn't sit under the summary/edit button
+.record-header-wrapper.mobile .orcid-id-text-and-buttons.compact {
+  padding-right: 48px;
+  box-sizing: border-box;
+}
+
 /* Internal layout container for ORCID UI header components.
    This mirrors the main app's .container behavior but is scoped to the UI library. */
 .orc-container {
@@ -281,6 +301,17 @@
     height: 40px; // Match names row line-height (40px) on mobile non-compact mode
     display: flex;
     align-items: center;
+  }
+
+  // Mobile non-compact: fix heights for issue and no-public-information banners
+  // only when there is actual text content (text-with-tooltip.has-text)
+  &:has(.orcid-id-section) {
+    .record-header {
+      .issue:has(orcid-text-with-tooltip.has-text),
+      .no-public-information:has(orcid-text-with-tooltip.has-text) {
+        min-height: 144px;
+      }
+    }
   }
 }
 
@@ -574,13 +605,6 @@ section#orcid-id {
   height: 40px; // Match names row line-height (40px)
 }
 
-// Desktop non-compact: ensure orcid-id-section loading placeholder matches loaded state height (92px)
-// Only apply to desktop non-compact mode (not mobile)
-.record-header-wrapper:not(.mobile)
-  .orcid-id-section
-  .names-wrapper.loading-placeholder {
-  min-height: 92px; // Match loaded state height (92px) for desktop non-compact mode
-}
 
 // Mobile non-compact: ensure loading placeholder matches loaded state height
 // Mobile structure: names row (h1 + other-names.mobile + edit button) with gap: 8px
@@ -605,8 +629,13 @@ section#orcid-id {
   height: 48px;
 }
 
-// Mobile normal mode: ensure link-wrapper height matches between loading and loaded states
-.record-header-wrapper.mobile .link-wrapper {
+// Mobile normal (non-compact) mode: ensure link-wrapper height matches between loading and loaded states
+// Scope to non-compact by requiring an .id-wrapper without the .compact class.
+.record-header-wrapper.mobile:has(.id-wrapper:not(.compact)) .link-wrapper {
+  // Ensure this row matches the overall mobile header height (ID row + summary/actions)
+  // Total height target: 116px
+  min-height: 116px;
+
   // During loading: ensure orcid-id-text-and-buttons reserves space for buttons-wrapper
   section#orcid-id .id-wrapper:not(.compact) {
     .orcid-id-text-and-buttons {

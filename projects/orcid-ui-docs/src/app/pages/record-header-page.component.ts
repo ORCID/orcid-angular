@@ -8,7 +8,7 @@ import { MatInputModule } from '@angular/material/input'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatSelectModule } from '@angular/material/select'
 import { MatTooltipModule } from '@angular/material/tooltip'
-import { HeaderBannerComponent } from '@orcid/ui'
+import { AccentButtonDirective, HeaderBannerComponent } from '@orcid/ui'
 
 @Component({
   selector: 'orcid-record-header-page',
@@ -24,6 +24,7 @@ import { HeaderBannerComponent } from '@orcid/ui'
     MatCheckboxModule,
     MatSelectModule,
     MatTooltipModule,
+    AccentButtonDirective
   ],
   styleUrls: ['./record-header-page.component.scss'],
   templateUrl: './record-header-page.component.html',
@@ -40,5 +41,6 @@ export class RecordHeaderPageComponent {
     loading: false,
     regionNames: 'Names',
     regionOrcidId: 'Orcid iD',
+    issueBannerText: 'This record has been deactivated',
   }
 }
