@@ -16,13 +16,18 @@
     <div
       class="container no-padding main-content"
       [ngClass]="{
-        'main-content-shadow': recordSummaryOpen,
         mobile: !platform.columns12
       }"
     >
       <app-record-summary></app-record-summary>
 
-      <div class="row">
+      <div
+        class="row"
+        [ngClass]="{
+          'main-content-shadow': recordSummaryOpen,
+
+        }"
+      >
         <app-side-bar
           class="col l3 m8 s4 new-header"
           [isPublicRecord]="publicOrcid"
