@@ -2,18 +2,24 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
 import { Platform } from '@angular/cdk/platform'
 import { Inject, Injectable, LOCALE_ID } from '@angular/core'
 import { ActivatedRoute, NavigationEnd, Params, Router } from '@angular/router'
+import Bowser from 'bowser'
 import { BehaviorSubject, Observable } from 'rxjs'
 import { filter } from 'rxjs/operators'
 import { ApplicationRoutes } from 'src/app/constants'
 
 import { WINDOW } from '../window'
-import { BROWSERLIST_REGEXP } from './browserlist.regexp'
+import supportedBrowsersJson from './supported-browsers.json'
 import { PlatformInfo } from './platform-info.type'
 
 @Injectable({
   providedIn: 'root',
 })
 export class PlatformInfoService {
+  private readonly supportedBrowsers: Record<string, { major: number; minor: number }> =
+    (supportedBrowsersJson as unknown) as Record<
+      string,
+      { major: number; minor: number }
+    >
   previouslyHadQueryParameters = false
   private platform: PlatformInfo = {
     unsupportedBrowser: false,
@@ -30,7 +36,7 @@ export class PlatformInfoService {
     columns12: false,
     rtl: false,
     ltr: true,
-    queryParameters: this.getQueryParams(),
+    queryParameters: {},
     screenDirection: 'ltr',
     hasOauthParameters: false,
     social: false,
@@ -53,10 +59,11 @@ export class PlatformInfoService {
     this.platform.rtl = locale === 'ar' ? true : false
     this.platform.ltr = !this.platform.rtl
     this.platform.screenDirection = this.platform.rtl ? 'rtl' : 'ltr'
+    this.platform.queryParameters = this.getQueryParams()
 
-    if (!BROWSERLIST_REGEXP.test(navigator.userAgent)) {
-      this.platform.unsupportedBrowser = true
-    }
+    this.platform.unsupportedBrowser = this.isUnsupportedBrowser(
+      this.window.navigator.userAgent
+    )
 
     this.platform.firefox = _platform.FIREFOX
     this.platform.safary = _platform.SAFARI
@@ -149,6 +156,85 @@ export class PlatformInfoService {
         }
         this.platformSubject.next(this.platform)
       })
+  }
+
+  private getBrowserKeyFromName(name: string | undefined): string | null {
+    if (!name) {
+      return null
+    }
+
+    const lowered = name.toLowerCase()
+
+    if (lowered.includes('edge')) {
+      return 'edge'
+    }
+    if (lowered.includes('firefox')) {
+      return 'firefox'
+    }
+    if (lowered.includes('opera') || lowered.includes('opr')) {
+      return 'opera'
+    }
+    if (lowered.includes('samsung')) {
+      return 'samsung'
+    }
+    if (lowered.includes('chrome') && !lowered.includes('edge')) {
+      // Treat Chrome and Chromium (desktop + Android) as "chrome"
+      return 'chrome'
+    }
+    if (lowered.includes('safari') && !lowered.includes('chrome')) {
+      // Desktop + iOS Safari
+      return 'safari'
+    }
+    if (lowered.includes('trident') || lowered.includes('msie')) {
+      return 'ie'
+    }
+
+    return null
+  }
+
+  private isUnsupportedBrowser(userAgent: string): boolean {
+    try {
+      const parser = Bowser.getParser(userAgent)
+      const browser = parser.getBrowser()
+      const browserKey = this.getBrowserKeyFromName(browser.name)
+
+      if (!browserKey) {
+        // If we cannot determine the browser family, treat it as unsupported
+        return true
+      }
+
+      const minSupportedVersion = this.supportedBrowsers[browserKey]
+      if (!minSupportedVersion) {
+        // If we have no data for this browser family, treat it as unsupported
+        return true
+      }
+
+      const version = browser.version || ''
+      const [majorPart, minorPart = '0'] = version.split('.')
+      const major = parseInt(majorPart || '', 10)
+      const minor = parseInt(minorPart || '0', 10)
+
+      if (Number.isNaN(major)) {
+        return true
+      }
+
+      const minMajor = minSupportedVersion.major
+      const minMinor = minSupportedVersion.minor ?? 0
+
+      if (major > minMajor) {
+        return false
+      }
+      if (major < minMajor) {
+        return true
+      }
+
+      // Same major, compare minor versions
+      const safeMinor = Number.isNaN(minor) ? 0 : minor
+      return safeMinor < minMinor
+    } catch {
+      // On any parsing error, fall back to unsupported to be safe
+      return true
+    }
   }
 
   /**
