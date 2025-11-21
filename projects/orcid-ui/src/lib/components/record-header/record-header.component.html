@@ -195,7 +195,13 @@
       ></div>
 
       <div *ngIf="!loading && title">
-        <ng-container *ngIf="compactMode && !expanded; else summaryToggle">
+        <ng-container
+          *ngIf="
+            (compactMode && isDesktop && !expanded) ||
+              (compactMode && !isDesktop);
+            else summaryToggle
+          "
+        >
           <ng-content select="[record-header-summary-actions]"></ng-content>
         </ng-container>
         <ng-template #summaryToggle>

@@ -1,7 +1,7 @@
 @import 'src/assets/scss/orcid.spacing.scss';
 
 .main-content-shadow {
-  box-shadow: 0px -6px 6px -4px #dddddd;
+  box-shadow: 0px 6px 6px -4px #dddddd;
 }
 
 :host {
@@ -47,6 +47,13 @@ app-statistics {
   flex-direction: column;
   margin-bottom: $spacing-large;
   padding-inline-start: 16px;
+}
+
+app-record-summary {
+  margin-top: -22px;
+  margin-bottom: 16px;
+
+  box-shadow: 0px 6px 6px -4px #dddddd;
 }
 
 .mobile {

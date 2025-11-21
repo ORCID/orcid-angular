@@ -15,11 +15,13 @@ import { PlatformInfo } from './platform-info.type'
   providedIn: 'root',
 })
 export class PlatformInfoService {
-  private readonly supportedBrowsers: Record<string, { major: number; minor: number }> =
-    (supportedBrowsersJson as unknown) as Record<
-      string,
-      { major: number; minor: number }
-    >
+  private readonly supportedBrowsers: Record<
+    string,
+    { major: number; minor: number }
+  > = supportedBrowsersJson as unknown as Record<
+    string,
+    { major: number; minor: number }
+  >
   previouslyHadQueryParameters = false
   private platform: PlatformInfo = {
     unsupportedBrowser: false,

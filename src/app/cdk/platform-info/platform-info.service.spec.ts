@@ -22,10 +22,7 @@ function createServiceWithUserAgent(userAgent: string): PlatformInfoService {
 
   TestBed.configureTestingModule({
     imports: [HttpClientTestingModule, RouterTestingModule],
-    providers: [
-      { provide: WINDOW, useValue: mockWindow },
-      PlatformInfoService,
-    ],
+    providers: [{ provide: WINDOW, useValue: mockWindow }, PlatformInfoService],
   })
 
   const service = TestBed.inject(PlatformInfoService) as any

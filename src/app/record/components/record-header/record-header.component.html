@@ -15,7 +15,10 @@
 >
   <img
     header-banner-logo
-    class="orcid-logo"
+    [ngClass]="{
+      'orcid-logo': true,
+      'orcid-logo--desktop-large': platform?.columns12 && !compactMode
+    }"
     src="assets/vectors/orcid.logo.icon.svg"
     alt="orcid logo"
   />
