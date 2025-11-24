@@ -18,7 +18,7 @@ import { FormDirectivesModule } from '../cdk/form-directives/form-directives.mod
 import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
 import { MyOrcidAlertsModule } from '../cdk/my-orcid-alerts/my-orcid-alerts.module'
 import { TwoFactorAuthenticationFormModule } from '../cdk/two-factor-authentication-form/two-factor-authentication-form.module'
-import { AlertMessageModule } from '../cdk/alert-message/alert-message.module'
+import { AlertMessageComponent } from '@orcid/ui'
 
 @NgModule({
   declarations: [
@@ -33,7 +33,7 @@ import { AlertMessageModule } from '../cdk/alert-message/alert-message.module'
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    AlertMessageModule,
+    AlertMessageComponent,
     MatCardModule,
     MatIconModule,
     MatInputModule,

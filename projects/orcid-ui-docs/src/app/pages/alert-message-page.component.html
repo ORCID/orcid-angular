@@ -1,0 +1,46 @@
+<section>
+  <h2>Alert Message</h2>
+  <p>
+    The <code>&lt;app-alert-message&gt;</code> component displays contextual
+    notices, informational messages, warnings, and success confirmations with a
+    consistent layout and iconography.
+  </p>
+
+  <h3>Variants</h3>
+  <p>Select a variant to preview:</p>
+  <mat-form-field appearance="outline" style="max-width: 220px">
+    <mat-select [(ngModel)]="type" aria-label="Alert type">
+      <mat-option value="notice">Notice</mat-option>
+      <mat-option value="info">Info</mat-option>
+      <mat-option value="warning">Warning</mat-option>
+      <mat-option value="success">Success</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <app-alert-message [type]="type">
+    <span title>{{ type | titlecase }} example</span>
+    <span content>
+      This is a <strong>{{ type }}</strong> alert. Use it to communicate
+      contextual feedback to the user.
+    </span>
+  </app-alert-message>
+
+  <h3>Usage</h3>
+  <p>Project templates provide two projected slots: <code>[title]</code> and <code>[content]</code>.</p>
+  <pre><code class="language-html">&lt;app-alert-message type="warning"&gt;
+  &lt;h2 title&gt;API limit approaching&lt;/h2&gt;
+  &lt;p content&gt;You have used 85% of your monthly allocation.&lt;/p&gt;
+&lt;/app-alert-message&gt;
+</code></pre>
+
+  <h3>Inputs</h3>
+  <ul>
+    <li><code>type</code>: <code>'notice' | 'info' | 'warning' | 'success'</code> (default <code>'notice'</code>)</li>
+  </ul>
+
+  <h3>Accessibility</h3>
+  <p>
+    Icons are presentational. Provide semantic structure in the projected
+    <code>[title]</code> and <code>[content]</code> nodes (e.g. headings, lists).
+  </p>
+</section>
