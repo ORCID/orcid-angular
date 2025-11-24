@@ -4,7 +4,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { MatDividerModule } from '@angular/material/divider'
 import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
-import { MatTooltipModule } from '@angular/material/tooltip'
+import { TextWithTooltipComponent } from '../text-with-tooltip/text-with-tooltip.component'
+import { AccentButtonDirective } from '../../directives/accent-button.directive'
 
 @Component({
   selector: 'orcid-header-banner',
@@ -16,7 +17,8 @@ import { MatTooltipModule } from '@angular/material/tooltip'
     MatDividerModule,
     MatButtonModule,
     MatIconModule,
-    MatTooltipModule,
+    TextWithTooltipComponent,
+    AccentButtonDirective,
   ],
   templateUrl: './record-header.component.html',
   styleUrls: ['./record-header.component.scss'],

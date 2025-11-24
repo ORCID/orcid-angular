@@ -94,19 +94,6 @@
         justify-content: center;
       }
 
-      .orcid-logo {
-        width: 40px;
-        margin-right: 8px;
-      }
-
-      .orcid-logo.mobile {
-        width: 24px;
-      }
-
-      .orcid-logo.compact {
-        width: 24px;
-      }
-
       .orcid-link-wrapper {
         margin-top: 5.5px;
         display: flex;
@@ -131,6 +118,20 @@
       }
     }
   }
+}
+
+// ORCID logo sizing for projected logo in header banner
+.orcid-logo {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+// 40px variant used only on desktop non-compact mode (controlled via template ngClass)
+.orcid-logo--desktop-large {
+  width: 40px;
+  height: 40px;
 }
 
 .names-actions {
@@ -240,11 +241,4 @@ section#orcid-id {
     gap: 8px;
     max-width: calc(100% - 80px);
   }
-}
-
-// Logo styles for projected header-banner-logo content
-orcid-header-banner [header-banner-logo] {
-  width: 40px;
-  margin-right: 8px;
-  flex-shrink: 0;
 }

@@ -8,9 +8,28 @@
   display: flex;
   box-sizing: border-box;
   width: 100%;
-  padding: 32px 0;
+  padding: 16px 0;
   align-items: flex-start;
   word-break: break-word;
+
+  // Desktop non-compact only: 32px padding (orcid-id-section only exists in non-compact mode)
+  &:not(.mobile):has(.orcid-id-section) {
+    padding: 32px 0;
+
+    .record-header {
+      gap: 16px; // Desktop non-compact: 32px gap
+
+      // Desktop non-compact: fix heights for issue and no-public-information banners
+      // only when there is actual text content (text-with-tooltip.has-text)
+      .issue:has(orcid-text-with-tooltip.has-text) {
+        min-height: 72px;
+      }
+
+      .no-public-information:has(orcid-text-with-tooltip.has-text) {
+        min-height: 72px;
+      }
+    }
+  }
 
   color: var(--orcid-color-brand-white, #ffffff);
   background: var(--orcid-color-brand-secondary-darkest, #003449);
@@ -26,10 +45,11 @@
 
     h2 {
       font-weight: normal;
+      margin: 0;
     }
 
     h2.mobile {
-      margin: auto 0 !important;
+      margin: 0 !important;
     }
 
     .divider {
@@ -40,9 +60,10 @@
 
     .names-wrapper {
       gap: 8px;
+      display: flex;
+      flex-direction: column;
 
       .names {
-        position: relative;
         line-height: 40px;
         display: flex;
         justify-content: space-between;
@@ -50,13 +71,23 @@
         max-width: 100%;
         gap: 16px;
 
+        orcid-text-with-tooltip {
+          flex: 1 1 auto;
+          max-width: calc(100% - 80px);
+          min-width: 0;
+        }
+
         h1 {
           margin: 0;
-          flex: 1 1 auto;
           overflow: hidden;
           white-space: nowrap;
           text-overflow: ellipsis;
-          max-width: calc(100% - 80px);
+          max-width: 100%;
+        }
+
+        ::ng-deep [record-header-name-actions] {
+          display: flex;
+          align-items: center;
         }
       }
 
@@ -73,6 +104,12 @@
       .other-names.mobile {
         width: 100%;
         overflow: hidden;
+
+        orcid-text-with-tooltip {
+          width: 100%;
+          max-width: 100%;
+          min-width: 0;
+        }
       }
 
       .other-names p,
@@ -96,11 +133,20 @@
             margin: 0; // Match actual content margin
             line-height: inherit; // Inherit from parent
           }
+
+          // id-logo-placeholder height is set per viewport:
+          // - Desktop: 40px (handled in desktop-specific rule below)
+          // - Mobile: 48px (handled in mobile-specific rule below)
         }
 
         // Ensure other-names matches actual content
         .other-names {
           line-height: 24px; // Match actual content line-height
+        }
+
+        .other-names.mobile {
+          display: flex;
+          align-items: center;
         }
       }
     }
@@ -129,7 +175,6 @@
       }
 
       .orcid-link-wrapper {
-        margin-top: 5.5px;
         display: flex;
         align-items: center;
         max-height: 40px; // Desktop: constrain ORCID link row to 40px in both compact and normal modes
@@ -165,7 +210,61 @@
         color: var(--orcid-color-brand-white, #ffffff);
       }
     }
+
+    // Ensure icon buttons on accent background use white text and proper hover state
+    button[mat-icon-button] {
+      color: var(--orcid-color-brand-white, #ffffff);
+      --mat-icon-button-icon-color: var(--orcid-color-brand-white, #ffffff);
+      --mat-icon-button-hover-state-layer-color: var(
+        --brand-secondary-dark,
+        #085c77
+      );
+
+      mat-icon {
+        color: var(--orcid-color-brand-white, #ffffff);
+      }
+
+      &:hover,
+      &:focus,
+      &:active {
+        color: var(--orcid-color-brand-white, #ffffff);
+        --mat-icon-button-icon-color: var(--orcid-color-brand-white, #ffffff);
+        background: var(--brand-secondary-dark, #085c77);
+
+        mat-icon {
+          color: var(--orcid-color-brand-white, #ffffff);
+        }
+      }
+    }
   }
+}
+
+// Desktop non-compact: vertically center record-header-name-actions relative to orcid-id-section
+.record-header-wrapper:not(.mobile) .orcid-id-section {
+  position: relative;
+
+  .names {
+    position: static; // Ensure names doesn't create a positioning context
+  }
+
+  ::ng-deep [record-header-name-actions] {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+  }
+}
+
+// Desktop non-compact: keep the last 48px free so title text doesn't sit under the name-actions button
+.record-header-wrapper:not(.mobile) .orcid-id-section .names-wrapper {
+  padding-right: 64px;
+  box-sizing: border-box;
+}
+
+// Mobile compact: keep the last 48px free so title/ID text doesn't sit under the summary/edit button
+.record-header-wrapper.mobile .orcid-id-text-and-buttons.compact {
+  padding-right: 64px;
+  box-sizing: border-box;
 }
 
 /* Internal layout container for ORCID UI header components.
@@ -185,7 +284,7 @@
 }
 
 .record-header-wrapper.mobile {
-  padding: 32px 16px;
+  padding: 16px 16px;
   text-align: center;
 
   .record-header {
@@ -194,6 +293,25 @@
 
   .names {
     justify-content: center;
+  }
+
+  // Mobile non-compact: ensure orcid-text-with-tooltip height matches names row line-height (40px)
+  // Only target the direct child (title), not the one inside other-names
+  .names-wrapper .names > orcid-text-with-tooltip {
+    height: 40px; // Match names row line-height (40px) on mobile non-compact mode
+    display: flex;
+    align-items: center;
+  }
+
+  // Mobile non-compact: fix heights for issue and no-public-information banners
+  // only when there is actual text content (text-with-tooltip.has-text)
+  &:has(.orcid-id-section) {
+    .record-header {
+      .issue:has(orcid-text-with-tooltip.has-text),
+      .no-public-information:has(orcid-text-with-tooltip.has-text) {
+        min-height: 144px;
+      }
+    }
   }
 }
 
@@ -227,12 +345,16 @@ button.orc-ui-font-body-small {
   flex-direction: column;
   align-items: center;
   gap: 8px;
+
+  &.compact {
+    align-items: flex-start; // Left align in compact mode
+  }
 }
 
-// Compact mode (desktop & mobile): ensure ID wrapper reserves consistent height
+// Desktop compact mode only: ensure ID wrapper reserves consistent height
 // to avoid jump between loading (~57px) and loaded (~78px).
-.record-header-wrapper .id-wrapper.compact {
-  min-height: 78px;
+.record-header-wrapper:not(.mobile) .id-wrapper.compact {
+  min-height: 56px;
 }
 
 // Desktop-only, non-compact: fix ID wrapper height to 48px
@@ -255,6 +377,8 @@ button.orc-ui-font-body-small {
   max-width: 100%;
   box-sizing: border-box;
   flex-wrap: nowrap; // Prevent children from wrapping to next line
+  display: flex;
+  align-items: center;
 
   // Ensure button container stays on same line
   > div:last-child {
@@ -263,9 +387,22 @@ button.orc-ui-font-body-small {
   }
 }
 
+// Desktop compact: vertically center record-header-summary-actions relative to link-wrapper
+.record-header-wrapper:not(.mobile) .link-wrapper {
+  ::ng-deep [record-header-summary-actions] {
+    display: flex;
+    align-items: center;
+  }
+}
+
 h1.mobile {
   text-align: center;
   width: 100%;
+
+  // Left align in compact mode
+  .orcid-id-text-and-buttons.compact & {
+    text-align: left;
+  }
 }
 
 .font-weight-400 {
@@ -288,7 +425,7 @@ section#orcid-id {
   &.compact {
     flex-direction: column;
     align-items: baseline;
-    gap: 8px;
+    gap: 4px;
     width: 100%;
     max-width: 100%;
     min-width: 0; // Allow flex child to shrink below content size
@@ -298,6 +435,12 @@ section#orcid-id {
       width: 100%;
       min-width: 0; // Allow flex child to shrink below content size
       box-sizing: border-box;
+
+      orcid-text-with-tooltip {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+      }
 
       h1 {
         overflow: hidden;
@@ -316,11 +459,31 @@ section#orcid-id {
   }
 }
 
+// Mobile compact: ensure loading state matches loaded state structure and height
+.record-header-wrapper.mobile .orcid-id-text-and-buttons.compact {
+  // Ensure loading placeholders match actual content structure
+  .loading-placeholder-compact {
+    margin: 0;
+    padding: 0;
+    line-height: 1.5; // Match font-size * line-height for orc-ui-font-body-large
+
+    h1 {
+      margin: 0;
+      line-height: inherit;
+    }
+  }
+
+  .orcid-link-wrapper.loading-placeholder {
+    margin: 0;
+    padding: 0;
+    line-height: 1.5; // Match font-size * line-height for orc-ui-font-body-small (compact mode)
+  }
+}
+
 // Loading placeholder for ORCID link wrapper
 .orcid-link-wrapper.loading-placeholder {
   visibility: hidden;
   pointer-events: none;
-  margin-top: 5.5px;
   display: flex;
   align-items: center;
 
@@ -331,6 +494,22 @@ section#orcid-id {
   }
 }
 
+// Desktop non-compact: ensure loading state matches loaded state height (48px)
+.record-header-wrapper:not(.mobile) .id-wrapper:not(.compact) {
+  .orcid-link-wrapper.loading-placeholder {
+    max-height: 48px; // Match the fixed id-wrapper height
+    height: 48px;
+  }
+}
+
+// Desktop non-compact: ensure loading state matches loaded state height (48px)
+.record-header-wrapper:not(.mobile) .id-wrapper:not(.compact) {
+  .orcid-link-wrapper.loading-placeholder {
+    max-height: 48px; // Match the fixed id-wrapper height
+    height: 48px;
+  }
+}
+
 .mobile .orcid-id-text-and-buttons {
   flex-direction: column;
   align-items: center;
@@ -338,8 +517,67 @@ section#orcid-id {
 
   &.compact {
     flex-direction: column;
+    align-items: flex-start; // Left align in compact mode
     gap: 8px;
-    max-width: calc(100% - 80px);
+    position: relative;
+    text-align: left;
+
+    .orc-row {
+      width: 100%;
+      text-align: left;
+
+      h1 {
+        text-align: left;
+      }
+    }
+
+    .orcid-link-wrapper {
+      text-align: left;
+      justify-content: flex-start;
+
+      h2 {
+        text-align: left;
+      }
+    }
+  }
+}
+
+// Mobile non-compact: wrap action icons and horizontally center them
+.record-header-wrapper.mobile .link-wrapper > div:last-child {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  ::ng-deep [record-header-summary-actions],
+  ::ng-deep button {
+    display: flex;
+    align-items: center;
+  }
+}
+
+// Mobile compact: position record-header-summary-actions to the right of title area, vertically centered
+.record-header-wrapper.mobile .link-wrapper {
+  position: relative;
+
+  section#orcid-id {
+    flex: 1; // Allow section to take available space
+  }
+
+  // In compact mode (when id-wrapper has compact class), override non-compact styles and position absolutely
+  &:has(section#orcid-id .id-wrapper.compact) > div:last-child {
+    position: absolute;
+    width: auto;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    z-index: 1;
+    flex-wrap: nowrap;
+
+    ::ng-deep [record-header-summary-actions] {
+      display: flex;
+      align-items: center;
+    }
   }
 }
 
@@ -355,14 +593,35 @@ section#orcid-id {
   flex-shrink: 0;
 }
 
-// Desktop-only: match placeholder height to 48px ID row by default
-.record-header-wrapper:not(.mobile) .id-logo-placeholder {
-  height: 48px;
+// Desktop-only: match placeholder height to ID row
+// - Non-compact: 40px logo
+// - Compact: 24px logo
+.record-header-wrapper:not(.mobile)
+  .id-wrapper:not(.compact)
+  .id-logo-placeholder {
+  height: 40px;
 }
 
-// Desktop compact mode: allow ID/logo placeholder to grow naturally inside compact ID wrapper
 .record-header-wrapper:not(.mobile) .id-wrapper.compact .id-logo-placeholder {
-  height: auto;
+  height: 24px;
+}
+
+// Desktop normal mode: ensure loading names-placeholder reserves space for name actions (40px to match names row line-height)
+.record-header-wrapper:not(.mobile)
+  .names-wrapper.loading-placeholder
+  .id-logo-placeholder {
+  height: 40px; // Match names row line-height (40px)
+}
+
+// Mobile non-compact: ensure loading placeholder matches loaded state height
+// Mobile structure: names row (h1 + other-names.mobile + edit button) with gap: 8px
+// names row height = max(h1 line-height, other-names.mobile 30px, edit button ~48px) ≈ 48px
+// total = names row (48px) = 48px (mobile non-compact doesn't have separate other-names below)
+.record-header-wrapper.mobile
+  .orcid-id-section
+  .names-wrapper.loading-placeholder {
+  min-height: 0; // Reset desktop min-height, allow natural sizing based on children
+  height: auto; // Let content determine height naturally
 }
 
 // Mobile normal mode: ensure loading names-placeholder reserves space for name actions (48px)
@@ -372,7 +631,29 @@ section#orcid-id {
   height: 48px;
 }
 
+// Mobile normal (non-compact) mode: ensure link-wrapper height matches between loading and loaded states
+// Scope to non-compact by requiring an .id-wrapper without the .compact class.
+.record-header-wrapper.mobile:has(.id-wrapper:not(.compact)) .link-wrapper {
+  // Ensure this row matches the overall mobile header height (ID row + summary/actions)
+  // Total height target: 116px
+  min-height: 116px;
+
+  // During loading: ensure orcid-id-text-and-buttons reserves space for buttons-wrapper
+  section#orcid-id .id-wrapper:not(.compact) {
+    .orcid-id-text-and-buttons {
+      // Reserve space for buttons-wrapper which is hidden during loading (*ngIf="!compactMode && !loading")
+      min-height: 80px; // orcid-link-wrapper (~40px) + buttons-wrapper (48px) - adjust to match loaded height
+    }
+  }
+}
+
 // Mobile normal mode: reserve space for summary actions while loading
+// Total: orcid-id-text-and-buttons (80px) + summary toggle (36px) = 116px
 .record-header-wrapper.mobile .summary-actions-placeholder {
-  min-height: 50px; // Approximate height of loaded summary actions area
+  min-height: 36px; // Match the summary toggle button area height (36px)
+
+  // Mobile compact mode: reserve space for edit button (36px) during loading
+  &.compact {
+    min-height: 36px; // Match the edit button height in compact mode
+  }
 }

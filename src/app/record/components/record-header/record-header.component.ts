@@ -12,9 +12,8 @@ import { RecordService } from 'src/app/core/record/record.service'
 import { RecordUtil } from 'src/app/shared/utils/record.util'
 import { Assertion, UserInfo } from 'src/app/types'
 import { RecordEditButtonComponent } from '../record-edit-button/record-edit-button.component'
-import { RecordSummaryComponent } from '../record-summary/record-summary.component'
 import { UserRecord } from 'src/app/types/record.local'
-import { HeaderBannerComponent } from '@orcid/ui'
+import { HeaderBannerComponent, AccentButtonDirective } from '@orcid/ui'
 import { MatIconModule } from '@angular/material/icon'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { MatButtonModule } from '@angular/material/button'
@@ -33,11 +32,11 @@ import { TogglzFlag } from 'src/app/core/togglz/togglz-flags.enum'
     CommonModule,
     NgIf,
     RecordEditButtonComponent,
-    RecordSummaryComponent,
     HeaderBannerComponent,
     MatIconModule,
     MatTooltipModule,
     MatButtonModule,
+    AccentButtonDirective,
   ],
 })
 export class RecordHeaderComponent implements OnInit {
@@ -177,48 +176,62 @@ export class RecordHeaderComponent implements OnInit {
         this.userRecord = userRecord
         this.userInfo = userRecord?.userInfo
 
-        if (!isEmpty(this.userRecord?.names)) {
-          this.givenNames = RecordUtil.getGivenNames(this.userRecord)
-          this.familyName = RecordUtil.getFamilyName(this.userRecord)
-          this.creditName = RecordUtil.getCreditName(this.userRecord)
-          this.ariaLabelName = RecordUtil.getAriaLabelName(
-            this.userRecord,
-            this.ariaLabelName
-          )
+        if (!!this.userInfo?.PRIMARY_RECORD) {
+          // If this record is deprecated and has a primary record,
+          // do not expose any of the primary names in the header.
+          this.givenNames = ''
+          this.familyName = ''
+          this.creditName = ''
+          this.otherNames = ''
+          this.ariaLabelName = ''
+
+          // Compose UI-only title/subtitle that the header banner consumes
+          this.bannerTitle = ''
+          this.bannerSubtitle = ''
         } else {
-          if (
-            this.affiliations > 0 ||
-            this.displaySideBar ||
-            this.displayBiography
-          ) {
-            this.creditName = this.privateName
-          }
-        }
-
-        let fullName = this.givenNames
-        if (!isEmpty(this.familyName)) {
-          fullName += ` ${this.familyName}`
-        }
-
-        if (!isEmpty(this.userRecord.otherNames?.otherNames)) {
-          this.otherNames = RecordUtil.getOtherNamesUnique(
-            userRecord.otherNames?.otherNames
-          )
-
-          if (!isEmpty(this.creditName)) {
-            if (!isEmpty(fullName)) {
-              this.otherNames = `${fullName}; ${this.otherNames}`
+          if (!isEmpty(this.userRecord?.names)) {
+            this.givenNames = RecordUtil.getGivenNames(this.userRecord)
+            this.familyName = RecordUtil.getFamilyName(this.userRecord)
+            this.creditName = RecordUtil.getCreditName(this.userRecord)
+            this.ariaLabelName = RecordUtil.getAriaLabelName(
+              this.userRecord,
+              this.ariaLabelName
+            )
+          } else {
+            if (
+              this.affiliations > 0 ||
+              this.displaySideBar ||
+              this.displayBiography
+            ) {
+              this.creditName = this.privateName
             }
           }
-        } else {
-          if (!isEmpty(this.creditName) && !isEmpty(fullName)) {
-            this.otherNames = `${fullName}`
-          }
-        }
 
-        // Compose UI-only title/subtitle that the header banner consumes
-        this.bannerTitle = this.creditName || fullName || ''
-        this.bannerSubtitle = this.otherNames || ''
+          let fullName = this.givenNames
+          if (!isEmpty(this.familyName)) {
+            fullName += ` ${this.familyName}`
+          }
+
+          if (!isEmpty(this.userRecord.otherNames?.otherNames)) {
+            this.otherNames = RecordUtil.getOtherNamesUnique(
+              userRecord.otherNames?.otherNames
+            )
+
+            if (!isEmpty(this.creditName)) {
+              if (!isEmpty(fullName)) {
+                this.otherNames = `${fullName}; ${this.otherNames}`
+              }
+            }
+          } else {
+            if (!isEmpty(this.creditName) && !isEmpty(fullName)) {
+              this.otherNames = `${fullName}`
+            }
+          }
+
+          // Compose UI-only title/subtitle that the header banner consumes
+          this.bannerTitle = this.creditName || fullName || ''
+          this.bannerSubtitle = this.otherNames || ''
+        }
 
         const hasCreditName = !!this.userRecord?.names?.creditName?.value
         const hasOtherNames = !isEmpty(this.userRecord?.otherNames?.otherNames)

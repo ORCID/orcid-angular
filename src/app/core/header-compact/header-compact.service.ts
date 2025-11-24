@@ -26,8 +26,8 @@ export class HeaderCompactService {
     false
   )
   // Threshold configuration
-  private readonly baseThresholdDesktop = -205
-  private readonly baseThresholdMobile = -250
+  private readonly baseThresholdDesktop = -200
+  private readonly baseThresholdMobile = -170
   private readonly hysteresisBuffer = 0
 
   readonly eligible$ = this._eligibleSubject.asObservable()
