@@ -11,7 +11,14 @@ import { MatIconModule } from '@angular/material/icon'
 })
 export class OrcidPanelComponent {
   @Input() panelId!: string
-  @Input() type: 'affiliations' | 'professional-activities' | 'invited-position' | 'distinction' | 'membership' | 'service' | 'editorial-service' = 'affiliations'
+  @Input() type:
+    | 'affiliations'
+    | 'professional-activities'
+    | 'invited-position'
+    | 'distinction'
+    | 'membership'
+    | 'service'
+    | 'editorial-service' = 'affiliations'
   @Input() openState = true
   @Input() isPreferred = false
   @Input() isPublicRecord = false
@@ -36,6 +43,8 @@ export class OrcidPanelComponent {
   }
 
   showStackToggle(): boolean {
-    return this.hasExternalIds && this.userVersionPresent && !this.isPublicRecord
+    return (
+      this.hasExternalIds && this.userVersionPresent && !this.isPublicRecord
+    )
   }
 }

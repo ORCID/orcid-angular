@@ -237,7 +237,11 @@
               </a>
             </span>
           </div>
-          <app-panel-data [borderBottom]="true" *ngIf="item.showDetails" [deprecatedPadding]="true">
+          <app-panel-data
+            [borderBottom]="true"
+            *ngIf="item.showDetails"
+            [deprecatedPadding]="true"
+          >
             <app-panel-element [hideVisibility]="false">
               <div class="description">
                 <app-display-external-ids

@@ -19,7 +19,7 @@ export class PanelDataComponent implements OnInit, OnDestroy {
   @HostBinding('class.border-bottom') borderBottomClass = false
   @HostBinding('class.featured') featuredClass = false
   @HostBinding('class.no-padding') noPaddingClass = true
-  
+
   @Input() set featured(featured: boolean) {
     this.featuredClass = featured
   }
@@ -31,7 +31,7 @@ export class PanelDataComponent implements OnInit, OnDestroy {
     this.borderBottomClass = borderBottom
   }
   /**
-   * @deprecated This attribute enables legacy padding (16px). 
+   * @deprecated This attribute enables legacy padding (16px).
    * Defaults to false (no padding) for new implementations.
    * Set to true to enable the deprecated 16px padding for backward compatibility.
    */

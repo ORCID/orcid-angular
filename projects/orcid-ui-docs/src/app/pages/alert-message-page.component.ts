@@ -29,5 +29,6 @@ import { DocumentationPageComponent } from '../components/documentation-page/doc
 export class AlertMessagePageComponent {
   type: 'notice' | 'info' | 'warning' | 'success' = 'notice'
   title = 'Notice example'
-  content = 'This is a <strong>notice</strong> alert. Use it to communicate <em>contextual feedback</em> to the user.'
+  content =
+    'This is a <strong>notice</strong> alert. Use it to communicate <em>contextual feedback</em> to the user.'
 }

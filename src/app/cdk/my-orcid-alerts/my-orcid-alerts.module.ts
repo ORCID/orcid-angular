@@ -7,7 +7,12 @@ import { AlertMessageComponent } from '@orcid/ui'
 
 @NgModule({
   declarations: [MyOrcidAlertsComponent],
-  imports: [CommonModule, MatToolbarModule, MatIconModule, AlertMessageComponent],
+  imports: [
+    CommonModule,
+    MatToolbarModule,
+    MatIconModule,
+    AlertMessageComponent,
+  ],
   exports: [MyOrcidAlertsComponent],
 })
 export class MyOrcidAlertsModule {}

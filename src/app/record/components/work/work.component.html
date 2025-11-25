@@ -1,6 +1,10 @@
 <!-- WORK BODY -->
 <!-- GENERAL DATA DISPLAY BY DEFAULT -->
-<app-panel-data [borderBottom]="!featured" [featured]="featured" [deprecatedPadding]="true">
+<app-panel-data
+  [borderBottom]="!featured"
+  [featured]="featured"
+  [deprecatedPadding]="true"
+>
   <div>
     <div class="general-data" *ngIf="work?.journalTitle">
       {{ work.journalTitle.value }}
@@ -101,7 +105,11 @@
 
 <!-- DATA DISPLAY WHEN "MORE DETAILS" IS CLICKED -->
 
-<app-panel-data [borderBottom]="true" *ngIf="panelDetailsState?.state" [deprecatedPadding]="true">
+<app-panel-data
+  [borderBottom]="true"
+  *ngIf="panelDetailsState?.state"
+  [deprecatedPadding]="true"
+>
   <app-work-details
     [work]="work"
     [isPublicRecord]="isPublicRecord"

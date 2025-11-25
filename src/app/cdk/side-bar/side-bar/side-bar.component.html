@@ -257,7 +257,10 @@
       <h3 header class="orc-font-body" i18n="@@record.websitesAndSocialLinks">
         Websites & social links
       </h3>
-      <app-panel-data *ngIf="userRecord.website.websites.length > 0" [deprecatedPadding]="true">
+      <app-panel-data
+        *ngIf="userRecord.website.websites.length > 0"
+        [deprecatedPadding]="true"
+      >
         <app-panel-element
           [isPublicRecord]="isPublicRecord"
           *ngFor="let website of userRecord.website.websites; let last = last"
@@ -362,7 +365,10 @@
       [userRecord]="userRecord"
     >
       <h3 header class="orc-font-body" i18n="@@record.keywords">Keywords</h3>
-      <app-panel-data *ngIf="userRecord.keyword.keywords.length > 0" [deprecatedPadding]="true">
+      <app-panel-data
+        *ngIf="userRecord.keyword.keywords.length > 0"
+        [deprecatedPadding]="true"
+      >
         <ng-container *ngIf="!isPublicRecord">
           <app-panel-element
             [isPublicRecord]="isPublicRecord"
@@ -435,7 +441,10 @@
       <h3 header class="orc-font-body" i18n="@@side-bar.countries">
         Countries
       </h3>
-      <app-panel-data *ngIf="userRecord.countries.addresses.length > 0" [deprecatedPadding]="true">
+      <app-panel-data
+        *ngIf="userRecord.countries.addresses.length > 0"
+        [deprecatedPadding]="true"
+      >
         <ng-container *ngIf="!isPublicRecord">
           <app-panel-element
             [isPublicRecord]="isPublicRecord"

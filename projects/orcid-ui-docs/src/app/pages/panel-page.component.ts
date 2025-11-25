@@ -32,7 +32,8 @@ export class PanelPageComponent {
   config = {
     title: 'Employment',
     icon: 'work',
-    content: '<div>University of Example, Research Scientist</div>\n<div>2020 - Present</div>',
+    content:
+      '<div>University of Example, Research Scientist</div>\n<div>2020 - Present</div>',
     footerText: 'Source: Self-asserted',
     openState: true,
     isMobile: false,
@@ -48,6 +49,5 @@ export class PanelPageComponent {
     { value: 'military_tech', label: 'military_tech' },
     { value: 'fitness_center', label: 'fitness_center' },
     { value: 'local_hospital', label: 'local_hospital' },
-    
   ]
 }

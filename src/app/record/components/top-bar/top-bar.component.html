@@ -190,7 +190,10 @@
       >
         Biography
       </h2>
-      <app-panel-data *ngIf="!!userRecord.biography.biography" [deprecatedPadding]="true">
+      <app-panel-data
+        *ngIf="!!userRecord.biography.biography"
+        [deprecatedPadding]="true"
+      >
         <app-panel-element>
           <span
             id="biography-value"

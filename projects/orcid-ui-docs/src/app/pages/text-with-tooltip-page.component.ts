@@ -23,6 +23,7 @@ import { DocumentationPageComponent } from '../components/documentation-page/doc
   styleUrls: ['./text-with-tooltip-page.component.scss'],
 })
 export class TextWithTooltipPageComponent {
-  customText = 'This is a very long text that will definitely overflow its container and show a tooltip when you hover over it'
+  customText =
+    'This is a very long text that will definitely overflow its container and show a tooltip when you hover over it'
   containerWidth = 300
 }

@@ -247,10 +247,10 @@ export class AffiliationStackComponent implements OnInit, OnDestroy {
 
     const iconMap: Record<string, string> = {
       'invited-position': 'join_inner',
-      'distinction': 'crown',
-      'membership': 'card_membership',
-      'service': 'badge',
-      'editorial-service': 'auto_stories'
+      distinction: 'crown',
+      membership: 'card_membership',
+      service: 'badge',
+      'editorial-service': 'auto_stories',
     }
 
     return iconMap[type]
@@ -269,25 +269,25 @@ export class AffiliationStackComponent implements OnInit, OnDestroy {
 
   getAffiliationTitle(affiliation: Affiliation): string {
     const parts: string[] = [affiliation.affiliationName.value]
-    
+
     const locationParts: string[] = []
-    
+
     if (affiliation.city?.value?.trim()) {
       locationParts.push(affiliation.city.value)
     }
-    
+
     if (affiliation.region?.value?.trim()) {
       locationParts.push(affiliation.region.value)
     }
-    
+
     if (affiliation.country?.value) {
       locationParts.push(affiliation.country.value)
     }
-    
+
     if (locationParts.length > 0) {
       parts.push(': ' + locationParts.join(', '))
     }
-    
+
     return parts.join('')
   }
 

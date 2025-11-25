@@ -95,7 +95,11 @@
 
 <!-- DATA DISPLAY WHEN "MORE DETAILS" IS CLICKED -->
 
-<app-panel-data [borderBottom]="true" *ngIf="panelDetailsState?.state" [deprecatedPadding]="true">
+<app-panel-data
+  [borderBottom]="true"
+  *ngIf="panelDetailsState?.state"
+  [deprecatedPadding]="true"
+>
   <app-org-identifier
     [orgDisambiguated]="orgDisambiguated"
   ></app-org-identifier>

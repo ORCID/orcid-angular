@@ -4,39 +4,49 @@
 >
   <div controls>
     <p>Customize the alert to preview different configurations:</p>
-    
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px;">
-    <mat-form-field appearance="outline">
-      <mat-label>Alert Type</mat-label>
-      <mat-select [(ngModel)]="type" aria-label="Alert type">
-        <mat-option value="notice">Notice</mat-option>
-        <mat-option value="info">Info</mat-option>
-        <mat-option value="warning">Warning</mat-option>
-        <mat-option value="success">Success</mat-option>
-      </mat-select>
-    </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Title</mat-label>
-      <input matInput [(ngModel)]="title" />
-    </mat-form-field>
+    <div
+      style="
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+        margin-bottom: 24px;
+      "
+    >
+      <mat-form-field appearance="outline">
+        <mat-label>Alert Type</mat-label>
+        <mat-select [(ngModel)]="type" aria-label="Alert type">
+          <mat-option value="notice">Notice</mat-option>
+          <mat-option value="info">Info</mat-option>
+          <mat-option value="warning">Warning</mat-option>
+          <mat-option value="success">Success</mat-option>
+        </mat-select>
+      </mat-form-field>
 
-    <mat-form-field appearance="outline" style="grid-column: 1 / -1;">
-      <mat-label>Content</mat-label>
-      <textarea matInput [(ngModel)]="content" rows="3"></textarea>
-    </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Title</mat-label>
+        <input matInput [(ngModel)]="title" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" style="grid-column: 1 / -1">
+        <mat-label>Content</mat-label>
+        <textarea matInput [(ngModel)]="content" rows="3"></textarea>
+      </mat-form-field>
     </div>
   </div>
 
   <div examples>
     <app-alert-message [type]="type">
-    <span title>{{ title }}</span>
-    <span content [innerHTML]="content"></span>
+      <span title>{{ title }}</span>
+      <span content [innerHTML]="content"></span>
     </app-alert-message>
   </div>
 
   <div usage>
-    <p>Project templates provide two projected slots: <code>[title]</code> and <code>[content]</code>.</p>
+    <p>
+      Project templates provide two projected slots: <code>[title]</code> and
+      <code>[content]</code>.
+    </p>
     <pre><code class="language-html">&lt;app-alert-message type="warning"&gt;
   &lt;h2 title&gt;API limit approaching&lt;/h2&gt;
   &lt;p content&gt;You have used 85% of your monthly allocation.&lt;/p&gt;
@@ -46,13 +56,18 @@
 
   <div inputs>
     <ul>
-      <li><code>type</code>: <code>'notice' | 'info' | 'warning' | 'success'</code> (default <code>'notice'</code>)</li>
+      <li>
+        <code>type</code>:
+        <code>'notice' | 'info' | 'warning' | 'success'</code> (default
+        <code>'notice'</code>)
+      </li>
     </ul>
 
     <h4>Accessibility</h4>
     <p>
       Icons are presentational. Provide semantic structure in the projected
-      <code>[title]</code> and <code>[content]</code> nodes (e.g. headings, lists).
+      <code>[title]</code> and <code>[content]</code> nodes (e.g. headings,
+      lists).
     </p>
   </div>
 </app-documentation-page>

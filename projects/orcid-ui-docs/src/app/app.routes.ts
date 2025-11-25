@@ -54,8 +54,6 @@ export const routes: Routes = [
   {
     path: 'panel',
     loadComponent: () =>
-      import('./pages/panel-page.component').then(
-        (m) => m.PanelPageComponent
-      ),
+      import('./pages/panel-page.component').then((m) => m.PanelPageComponent),
   },
 ]
