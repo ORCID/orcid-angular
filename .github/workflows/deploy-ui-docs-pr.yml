@@ -58,7 +58,7 @@ jobs:
       - name: Build orcid-ui-docs with dynamic base-href
         run: |
           TICKET_ID="${{ steps.extract-ticket.outputs.ticket_id }}"
-          BASE_HREF="/runway/$TICKET_ID/orcid-angular/"
+          BASE_HREF="/orcid-angular/runway/$TICKET_ID/"
           echo "Building with base-href: $BASE_HREF"
           yarn build:ui-docs --base-href "$BASE_HREF"
         continue-on-error: false
@@ -90,7 +90,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ${{ steps.set-output.outputs.directory }}
-          destination_dir: runway/${{ steps.extract-ticket.outputs.ticket_id }}/orcid-angular
+          destination_dir: runway/${{ steps.extract-ticket.outputs.ticket_id }}
           keep_files: true  # Keep other PR previews and main deployment
           cname: false
       
@@ -100,7 +100,7 @@ jobs:
         with:
           script: |
             const ticketId = '${{ steps.extract-ticket.outputs.ticket_id }}';
-            const previewUrl = `https://orcid.github.io/runway/${ticketId}/orcid-angular/`;
+            const previewUrl = `https://orcid.github.io/orcid-angular/runway/${ticketId}/`;
             
             const comment = `## 🚀 Preview Deployment
             
