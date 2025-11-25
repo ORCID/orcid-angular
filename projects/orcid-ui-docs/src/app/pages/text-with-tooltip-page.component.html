@@ -1,0 +1,66 @@
+<app-documentation-page
+  title="Text with Tooltip"
+  description="The TextWithTooltipComponent displays text with a tooltip that only appears when the text overflows its container. The tooltip follows the cursor and shows the full text content."
+>
+  <div controls>
+    <p>
+      Enter text below and adjust the container width to see the tooltip
+      behavior:
+    </p>
+    <div class="controls-grid">
+      <mat-form-field appearance="outline">
+        <mat-label>Text Content</mat-label>
+        <input matInput [(ngModel)]="customText" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Container Width (px)</mat-label>
+        <input matInput type="number" [(ngModel)]="containerWidth" />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div examples>
+    <div class="example-group">
+      <div
+        class="example-container"
+        [style.width.px]="containerWidth"
+        style="border: 1px solid #ddd; padding: 16px;"
+      >
+        <orcid-text-with-tooltip [text]="customText">
+          <h2 style="margin: 0;">{{ customText || 'Enter some text...' }}</h2>
+        </orcid-text-with-tooltip>
+      </div>
+    </div>
+  </div>
+
+  <div usage>
+    <pre><code>&lt;orcid-text-with-tooltip [text]="myText"&gt;
+  &lt;h1&gt;{{ '{{' }} myText {{ '}}' }}&lt;/h1&gt;
+&lt;/orcid-text-with-tooltip&gt;</code></pre>
+  </div>
+
+  <div inputs>
+    <ul>
+      <li>
+        <code>text</code>: The text content to display in the tooltip when
+        overflow occurs. If not provided, the component will extract text from
+        the projected content.
+      </li>
+    </ul>
+
+    <h3>Behavior</h3>
+    <ul>
+      <li>
+        The tooltip only appears when the text content overflows its container
+      </li>
+      <li>The tooltip follows the cursor as you move the mouse</li>
+      <li>
+        The tooltip automatically positions itself to stay within the viewport
+      </li>
+      <li>
+        The component uses ResizeObserver to detect when overflow state
+        changes
+      </li>
+    </ul>
+  </div>
+</app-documentation-page>

@@ -12,6 +12,7 @@ import {
 } from 'src/app/types/record-affiliation.endpoint'
 import { UserRecord } from 'src/app/types/record.local'
 import { ModalAffiliationsComponent } from '../affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component'
+import { OrcidPanelComponent } from '@orcid/ui'
 import { TogglzService } from '../../../core/togglz/togglz.service'
 import { PlatformInfoService } from '../../../cdk/platform-info'
 
@@ -87,6 +88,11 @@ export class AffiliationStackComponent implements OnInit, OnDestroy {
   } = {}
   modalAffiliationsComponent = ModalAffiliationsComponent
   isMobile: boolean
+
+  // Panel header visibility/edit helpers
+  tooltipLabelEdit = $localize`:@@shared.edit:Edit`
+  visibilityError = false
+  editableVisibilityControl = true
 
   constructor(
     private _affiliationService: RecordAffiliationService,
@@ -207,6 +213,15 @@ export class AffiliationStackComponent implements OnInit, OnDestroy {
       .subscribe()
   }
 
+  updateVisibility(visibility: any) {
+    // Apply visibility change to all affiliations in this stack
+    const putCodes = this.affiliationStack.affiliations
+      .map((a) => a.putCode.value)
+      .join(',')
+    this._affiliationService.updateVisibility(putCodes, visibility).subscribe()
+    this.visibilityError = false
+  }
+
   changeTopPanelOfTheStack(affiliation: Affiliation) {
     Object.keys(this.stackPanelsDisplay).forEach((key) => {
       this.stackPanelsDisplay[key].topPanelOfTheStack = false
@@ -223,6 +238,57 @@ export class AffiliationStackComponent implements OnInit, OnDestroy {
       return affiliation.source === this.userInfo.EFFECTIVE_USER_ORCID
     }
     return false
+  }
+
+  getAffiliationIcon(type: AffiliationType): string | undefined {
+    if (!this.professionalActivities) {
+      return undefined
+    }
+
+    const iconMap: Record<string, string> = {
+      'invited-position': 'join_inner',
+      'distinction': 'crown',
+      'membership': 'card_membership',
+      'service': 'badge',
+      'editorial-service': 'auto_stories'
+    }
+
+    return iconMap[type]
+  }
+
+  getAffiliationIconClass(type: AffiliationType): string | undefined {
+    if (!this.professionalActivities) {
+      return undefined
+    }
+
+    if (type === 'distinction' || type === 'editorial-service') {
+      return 'material-symbols-outlined'
+    }
+    return 'material-icons-outlined'
+  }
+
+  getAffiliationTitle(affiliation: Affiliation): string {
+    const parts: string[] = [affiliation.affiliationName.value]
+    
+    const locationParts: string[] = []
+    
+    if (affiliation.city?.value?.trim()) {
+      locationParts.push(affiliation.city.value)
+    }
+    
+    if (affiliation.region?.value?.trim()) {
+      locationParts.push(affiliation.region.value)
+    }
+    
+    if (affiliation.country?.value) {
+      locationParts.push(affiliation.country.value)
+    }
+    
+    if (locationParts.length > 0) {
+      parts.push(': ' + locationParts.join(', '))
+    }
+    
+    return parts.join('')
   }
 
   ngOnInit(): void {

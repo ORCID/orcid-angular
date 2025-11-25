@@ -80,7 +80,7 @@ import { RecordHeaderComponent } from './components/record-header/record-header.
 import { RecordSummaryComponent } from './components/record-summary/record-summary.component'
 import { RecordInfoComponent } from './components/record-info/record-info.component'
 import { TrustedSummaryModule } from '../cdk/trusted-summary/trusted-summary.module'
-import { AlertMessageComponent } from '@orcid/ui'
+import { AlertMessageComponent, OrcidPanelComponent } from '@orcid/ui'
 import { MatDialogModule } from '@angular/material/dialog'
 import { WarningMessageModule } from '../cdk/warning-message/warning-message.module'
 import { DeepSelectInputModule } from '../cdk/deep-select-input/deep-select-input.module'
@@ -181,6 +181,7 @@ import { WorkDetailsComponent } from './components/work-details/work-details.com
     TextFieldModule,
     WarningMessageModule,
     AlertMessageComponent,
+    OrcidPanelComponent,
     TopBarMyPublicRecordPreviewModule,
     TopBarVerificationEmailModule,
     TrustedSummaryModule,

@@ -4,6 +4,7 @@
 <app-panel-data
   class="default-data-loaded orc-font-body-small"
   [borderBottom]="true"
+  [deprecatedPadding]="true"
 >
   <div>
     <div class="general-data">
@@ -94,7 +95,7 @@
 
 <!-- DATA DISPLAY WHEN "MORE DETAILS" IS CLICKED -->
 
-<app-panel-data [borderBottom]="true" *ngIf="panelDetailsState?.state">
+<app-panel-data [borderBottom]="true" *ngIf="panelDetailsState?.state" [deprecatedPadding]="true">
   <app-org-identifier
     [orgDisambiguated]="orgDisambiguated"
   ></app-org-identifier>

@@ -69,5 +69,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ${{ steps.set-output.outputs.directory }}
+          destination_dir: .  # Deploy to root for main branch
+          keep_files: true  # Keep PR preview deployments in /runway/*
           cname: false
 

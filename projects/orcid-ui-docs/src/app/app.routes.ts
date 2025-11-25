@@ -51,4 +51,11 @@ export const routes: Routes = [
         (m) => m.AlertMessagePageComponent
       ),
   },
+  {
+    path: 'panel',
+    loadComponent: () =>
+      import('./pages/panel-page.component').then(
+        (m) => m.PanelPageComponent
+      ),
+  },
 ]

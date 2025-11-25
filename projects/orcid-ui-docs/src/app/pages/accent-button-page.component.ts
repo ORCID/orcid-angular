@@ -30,7 +30,7 @@ import { AccentButtonDirective } from '@orcid/ui'
       <div class="example-group">
         <h4>Icon Buttons with Accent Hover</h4>
         <div class="example-container">
-          <div class="button-group">
+          <div class="button-group accent-bg">
             <button
               mat-icon-button
               accentButton
@@ -106,9 +106,13 @@ import { AccentButtonDirective } from '@orcid/ui'
       <h3>Styling</h3>
       <p>
         The directive applies the class <code>accent-button</code> to the host
-        element, which adds the following hover style:
+        element, which adds the following styles:
       </p>
-      <pre><code>.accent-button:hover {{ '{' }}
+      <pre><code>.accent-button {{ '{' }}
+  color: white !important;
+{{ '}' }}
+
+.accent-button:hover {{ '{' }}
   background: var(--brand-secondary-dark, #085C77) !important;
 {{ '}' }}</code></pre>
 
@@ -224,6 +228,10 @@ import { AccentButtonDirective } from '@orcid/ui'
         border: 1px solid var(--orcid-color-border-subtle, #ddd);
         border-radius: 8px;
         background: var(--orcid-surface, #fff);
+      }
+
+      .button-group.accent-bg {
+        background: var(--orcid-color-brand-secondary-darkest);
       }
     `,
   ],

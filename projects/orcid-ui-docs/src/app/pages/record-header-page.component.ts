@@ -9,6 +9,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatSelectModule } from '@angular/material/select'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { AccentButtonDirective, HeaderBannerComponent } from '@orcid/ui'
+import { DocumentationPageComponent } from '../components/documentation-page/documentation-page.component'
 
 @Component({
   selector: 'orcid-record-header-page',
@@ -25,6 +26,7 @@ import { AccentButtonDirective, HeaderBannerComponent } from '@orcid/ui'
     MatSelectModule,
     MatTooltipModule,
     AccentButtonDirective,
+    DocumentationPageComponent,
   ],
   styleUrls: ['./record-header-page.component.scss'],
   templateUrl: './record-header-page.component.html',
