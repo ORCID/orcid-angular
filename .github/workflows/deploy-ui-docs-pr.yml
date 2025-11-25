@@ -80,10 +80,10 @@ jobs:
         run: |
           BUILD_DIR="${{ steps.set-output.outputs.directory }}"
           # Copy index.html to 404.html for SPA routing support
+          # This 404.html will handle routes within THIS specific PR preview SPA
           cp "$BUILD_DIR/index.html" "$BUILD_DIR/404.html"
-          # Ensure .nojekyll exists to disable Jekyll processing
-          touch "$BUILD_DIR/.nojekyll"
-          echo "✅ SPA support configured: 404.html and .nojekyll created"
+          # Note: .nojekyll is already in the repo root and applies to all subdirectories
+          echo "✅ SPA support configured: 404.html created for PR preview"
       
       - name: Deploy to GitHub Pages (PR Preview)
         uses: peaceiris/actions-gh-pages@v3

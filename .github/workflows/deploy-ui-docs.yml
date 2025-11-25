@@ -57,11 +57,10 @@ jobs:
         run: |
           BUILD_DIR="${{ steps.set-output.outputs.directory }}"
           # Copy index.html to 404.html for SPA routing support
-          # GitHub Pages will serve 404.html for all missing routes
+          # This 404.html will handle routes within THIS specific SPA
           cp "$BUILD_DIR/index.html" "$BUILD_DIR/404.html"
-          # Ensure .nojekyll exists to disable Jekyll processing
-          touch "$BUILD_DIR/.nojekyll"
-          echo "✅ SPA support configured: 404.html and .nojekyll created"
+          # Note: .nojekyll is already in the repo root and will be preserved
+          echo "✅ SPA support configured: 404.html created for root deployment"
       
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
@@ -70,6 +69,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ${{ steps.set-output.outputs.directory }}
           destination_dir: .  # Deploy to root for main branch
-          keep_files: true  # Keep PR preview deployments in /runway/*
+          keep_files: true  # Keep PR preview deployments in /runway/* and .nojekyll
+          exclude_assets: '.nojekyll'  # Don't delete the .nojekyll file
           cname: false
 
