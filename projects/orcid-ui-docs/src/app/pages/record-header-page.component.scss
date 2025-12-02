@@ -1,8 +1,15 @@
-// Logo styles for projected header-banner-logo content in docs
-orcid-header-banner [header-banner-logo] {
+// Logo styles for projected ORCID logo content in docs
+.orcid-logo {
   width: 24px;
+  height: 24px;
   margin-right: 8px;
   flex-shrink: 0;
+}
+
+// Desktop compact examples: larger 40px logo
+.orcid-logo--desktop-large {
+  width: 40px;
+  height: 40px;
 }
 
 // Controls panel styles
