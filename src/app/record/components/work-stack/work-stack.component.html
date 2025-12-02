@@ -35,7 +35,9 @@
     [visibilityError]="workStack.visibilityError"
     #panelsComponent
     [type]="'works'"
+    [isFeatured]="work.featuredDisplayIndex > 0"
     [panelTitle]="work.title.value"
+    [isPreferred]="isPreferred(work)"
   >
     <h4 header class="work-title orc-font-body">{{ work.title.value }}</h4>
     <!-- WORK BODY -->

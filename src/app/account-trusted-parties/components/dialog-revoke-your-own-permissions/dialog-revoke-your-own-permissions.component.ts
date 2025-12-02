@@ -1,8 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core'
-import {
-  MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA,
-  MatLegacyDialogRef as MatDialogRef,
-} from '@angular/material/legacy-dialog'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { Delegator } from 'src/app/types/trusted-individuals.endpoint'
 
@@ -10,6 +7,7 @@ import { Delegator } from 'src/app/types/trusted-individuals.endpoint'
   selector: 'app-dialog-revoke-your-own-permissions',
   templateUrl: './dialog-revoke-your-own-permissions.component.html',
   styleUrls: ['./dialog-revoke-your-own-permissions.component.scss'],
+  standalone: false,
 })
 export class DialogRevokeYourOwnPermissionsComponent implements OnInit {
   isMobile: boolean

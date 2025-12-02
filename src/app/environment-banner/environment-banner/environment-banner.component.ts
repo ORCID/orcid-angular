@@ -7,6 +7,7 @@ import { WINDOW } from 'src/app/cdk/window'
   templateUrl: './environment-banner.component.html',
   styleUrls: ['./environment-banner.component.scss'],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class EnvironmentBannerComponent implements OnInit {
   hostUrl

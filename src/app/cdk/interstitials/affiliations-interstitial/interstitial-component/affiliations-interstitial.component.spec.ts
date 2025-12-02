@@ -6,7 +6,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { OrganizationsService, UserService } from 'src/app/core'
 import { RecordAffiliationService } from 'src/app/core/record-affiliations/record-affiliations.service'
 import { RecordService } from 'src/app/core/record/record.service'
-import { Register2Service } from 'src/app/core/register2/register2.service'
+import { RegisterService } from 'src/app/core/register/register.service'
 import { AffiliationsInterstitialComponent } from './affiliations-interstitial.component'
 import { EMPTY } from 'rxjs'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
@@ -38,7 +38,7 @@ describe('AffiliationsInterstitialComponent', () => {
         },
 
         {
-          provide: Register2Service,
+          provide: RegisterService,
           useValue: {},
         },
 

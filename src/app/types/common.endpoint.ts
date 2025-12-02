@@ -244,3 +244,23 @@ export type DeprecatedScopesStrings =
   | '/affiliations/update'
   | '/funding/update'
   | '/orcid-bio/external-identifiers/update'
+
+export interface DeactivationEndpoint {
+  errors?: any[]
+  password?: string
+  invalidPassword?: boolean
+  invalidTwoFactorCode?: boolean
+  invalidTwoFactorRecoveryCode?: boolean
+  twoFactorCode?: string
+  twoFactorRecoveryCode?: string
+  twoFactorEnabled?: boolean
+  tokenVerification?: ExpiringLinkVerification
+  deactivationSuccessful?: boolean
+}
+
+export type TokenStatus = 'VALID' | 'INVALID' | 'EXPIRED'
+export interface ExpiringLinkVerification {
+  status: TokenStatus
+  // subject is the orcid id
+  claims?: { subject?: string }
+}

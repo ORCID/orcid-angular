@@ -26,6 +26,7 @@ import { concat } from 'lodash'
     './trusted-summary.component.scss',
     './trusted-summary.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class TrustedSummaryComponent implements OnInit, OnDestroy {
   @Input() standaloneMode: boolean = true
@@ -33,7 +34,7 @@ export class TrustedSummaryComponent implements OnInit, OnDestroy {
   currentLocation: string
   orcid: string
   works: SimpleActivityModel[] = []
-  unsubscribe = new Subject()
+  unsubscribe = new Subject<void>()
   affiliationsHover = false
   worksHover = false
   peerReviewsHover = false

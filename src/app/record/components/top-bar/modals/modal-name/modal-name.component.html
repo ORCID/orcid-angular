@@ -111,7 +111,7 @@
             *ngIf="namesForm?.get('givenNames').hasError('required')"
             i18n="@@topBar.firstNameError"
           >
-            Please enter your first/given name
+            Please enter your given names
           </mat-error>
           <mat-error
             *ngIf="namesForm?.get('givenNames').hasError('illegalName')"
@@ -146,7 +146,7 @@
             *ngIf="namesForm?.get('familyName').hasError('required')"
             i18n="@@topBar.firstNameError"
           >
-            Please enter your first/given name
+            Please enter your given names
           </mat-error>
           <mat-error
             *ngIf="namesForm?.get('familyName').hasError('illegalName')"
@@ -259,7 +259,7 @@
                   src="./assets/vectors/draggable.svg"
                   role="none"
                 />
-                <mat-form-field appearance="outline" class="mat-form-field-min">
+                <mat-form-field appearance="outline" class="three-line-hint">
                   <input
                     id="alternative-names-input"
                     #nameInput
@@ -332,7 +332,7 @@
           tabindex="0"
         >
           <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
-          <span class="mat-body-1">
+          <span class="mat-subtitle-2">
             <ng-container
               *ngIf="otherNames?.length === 0"
               i18n="@@topBar.addOtherName"

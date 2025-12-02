@@ -10,6 +10,7 @@
   role="search"
   class="row h-end search-box middle"
   (submit)="search(whereToSearchSelected, whatToSearch)"
+  *ngIf="!hideForm"
 >
   <div id="ariaLabelWhere" hidden>Search on</div>
   <div class="input-box-new-info">
@@ -21,6 +22,7 @@
       type="text"
       [attr.aria-label]="labelSearchBy"
       id="cy-search"
+      class="orc-font-body"
     />
   </div>
   <button

@@ -105,7 +105,7 @@ html {
   border: 0;
 }
 
-.mat-menu-panel {
+.mat-mdc-menu-panel {
   max-width: none !important;
 }
 
@@ -115,6 +115,11 @@ html {
 
 #ot-sdk-btn.ot-sdk-show-settings:hover {
   color: #085c77 !important;
+}
+
+// Accent button directive styles (from orcid-ui)
+.accent-button:hover {
+  background: var(--brand-secondary-dark, #085c77) !important;
 }
 
 /// FIX for mobile menu in work dialog not been visible on mobile devices

@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core'
-import { MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog'
+import { MatDialogRef } from '@angular/material/dialog'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { PlatformInfoService } from '../../platform-info'
@@ -8,13 +8,16 @@ import { PlatformInfoService } from '../../platform-info'
   selector: 'app-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
+  standalone: false,
 })
 export class ModalComponent implements OnInit, OnDestroy {
   columns12: boolean
   screenDirection: 'rtl' | 'ltr'
-  $destroy: Subject<boolean> = new Subject<boolean>()
+  $destroy: Subject<void> = new Subject<void>()
+  featured = false
   @Input() loading = false
   @Input() noSidebar = false
+  @Input() noPadding = false
 
   constructor(
     private dialogRef: MatDialogRef<any>,

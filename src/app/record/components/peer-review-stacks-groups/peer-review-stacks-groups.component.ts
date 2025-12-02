@@ -5,7 +5,8 @@ import { UserService } from '../../../core'
 import { RecordService } from '../../../core/record/record.service'
 import { RecordPeerReviewService } from '../../../core/record-peer-review/record-peer-review.service'
 import { Subject } from 'rxjs'
-import { NameForm, RequestInfoForm, UserInfo } from '../../../types'
+import { NameForm, UserInfo } from '../../../types'
+import { LegacyOauthRequestInfoForm as RequestInfoForm } from '../../../types/request-info-form.endpoint'
 import {
   PeerReview,
   PeerReviewDuplicateGroup,
@@ -28,6 +29,7 @@ import { isQA } from 'src/app/shared/validators/environment-check/environment-ch
     './peer-review-stacks-groups.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class PeerReviewStacksGroupsComponent implements OnInit {
   regionPeerReviews = $localize`:@@peerReview.peerReviews:Peer reviews`

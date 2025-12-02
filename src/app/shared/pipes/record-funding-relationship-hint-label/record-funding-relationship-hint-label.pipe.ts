@@ -6,6 +6,7 @@ import {
 
 @Pipe({
   name: 'recordFundingRelationshipHintLabel',
+  standalone: false,
 })
 export class RecordFundingRelationshipHintLabelPipe implements PipeTransform {
   transform(value: FundingRelationships): unknown {

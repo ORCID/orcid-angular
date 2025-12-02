@@ -1,4 +1,4 @@
-<mat-card class="orcid-wizard">
+<mat-card appearance="outlined" class="orcid-wizard">
   <mat-progress-bar
     *ngIf="loading"
     mode="indeterminate"
@@ -7,22 +7,32 @@
 
   <mat-card-header>
     <mat-card-title role="heading" aria-level="1">
-      <ng-container
-        *ngIf="!reactivation?.isReactivation"
-        i18n="@@register.create"
-      >
-        Create your ORCID iD
+      <div>
+        <img
+          height="64px"
+          src="assets/vectors/orcid.logo.icon.svg"
+          alt="orcid logo"
+        />
+      </div>
+      <ng-container *ngIf="!reactivation?.isReactivation">
+        <h1 class="orc-font-heading-small" i18n="@@register.create">
+          Create your ORCID iD
+        </h1>
       </ng-container>
-      <ng-container
-        *ngIf="reactivation?.isReactivation"
-        i18n="@@register.reactivation"
-      >
-        Thank you for reactivating your ORCID iD.
+      <ng-container *ngIf="reactivation?.isReactivation">
+        <h1
+          class="orc-font-heading-small"
+          i18n="@@register.reactivateYourOrcidAccount"
+        >
+          Reactivate your ORCID account
+        </h1>
       </ng-container>
     </mat-card-title>
-    <mat-card-subtitle role="heading" aria-level="2" i18n="@@register.step3"
-      >This is step 3 of 3</mat-card-subtitle
-    >
+    <mat-card-subtitle role="heading" aria-level="2">
+      <h2 class="orc-font-body-small" i18n="@@register.step4.3">
+        Step 4 of 5 - Visibility
+      </h2>
+    </mat-card-subtitle>
   </mat-card-header>
 
   <mat-card-content>
@@ -30,37 +40,26 @@
       <app-form-visibility
         formControlName="activitiesVisibilityDefault"
       ></app-form-visibility>
-      <app-form-terms formControlName="termsOfUse"></app-form-terms>
-      <app-form-anti-robots formControlName="captcha"></app-form-anti-robots>
       <div class="step-actions">
-        <button
-          mat-button
-          color="primary"
-          matStepperPrevious
-          type="button"
-          i18n="@@shared.back"
-          id="step-c-back-button"
-        >
-          GO BACK
-        </button>
         <button
           id="step-c-register-button"
           mat-raised-button
           color="primary"
           [disabled]="loading"
+          matStepperNext
+          (click)="nextButton2()"
         >
-          <ng-container
-            *ngIf="!reactivation?.isReactivation"
-            i18n="@@register.register"
-          >
-            REGISTER
-          </ng-container>
-          <ng-container
-            *ngIf="reactivation?.isReactivation"
-            i18n="@@register.reactivate"
-          >
-            REACTIVATE
-          </ng-container>
+          <ng-container i18n="@@register.nextStep"> Next Step </ng-container>
+        </button>
+        <button
+          mat-button
+          color="primary"
+          matStepperPrevious
+          type="button"
+          id="step-c-back-button"
+          (click)="backButton()"
+        >
+          <a i18n="@@shared.previousStep"> Previous Step</a>
         </button>
       </div>
     </form>

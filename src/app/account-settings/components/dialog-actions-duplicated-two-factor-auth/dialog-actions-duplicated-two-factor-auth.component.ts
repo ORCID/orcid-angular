@@ -1,8 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core'
-import {
-  MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA,
-  MatLegacyDialogRef as MatDialogRef,
-} from '@angular/material/legacy-dialog'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { OauthService } from 'src/app/core/oauth/oauth.service'
 import { DuplicateRemoveEndpoint } from 'src/app/types/account-actions-duplicated'
 
@@ -13,6 +10,7 @@ import { TwoFactorAuthenticationService } from '../../../core/two-factor-authent
   selector: 'app-dialog-actions-duplicated-two-factor-auth',
   templateUrl: './dialog-actions-duplicated-two-factor-auth.component.html',
   styleUrls: ['./dialog-actions-duplicated-two-factor-auth.component.scss'],
+  standalone: false,
 })
 export class DialogActionsDuplicatedTwoFactorAuthComponent implements OnInit {
   showBadVerificationCode: boolean

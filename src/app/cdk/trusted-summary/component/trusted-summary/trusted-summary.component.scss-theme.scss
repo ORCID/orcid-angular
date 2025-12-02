@@ -10,7 +10,7 @@
 
   a {
     h3.hover-effect {
-      color: mat.get-color-from-palette($primary, 500);
+      color: mat.m2-get-color-from-palette($primary, 500);
     }
 
     h1 {
@@ -30,38 +30,38 @@
     background-color: map-get($background, 'ui-background-lightest');
   }
   main.loading {
-    color: mat.get-color-from-palette($primary, '50-contrast');
+    color: mat.m2-get-color-from-palette($primary, '50-contrast');
   }
 
   ::ng-deep {
-    .mat-progress-spinner circle,
-    .mat-spinner circle {
-      stroke: mat.get-color-from-palette($primary, '50-contrast');
+    .mat-mdc-progress-spinner circle,
+    .mat-mdc-progress-spinner circle {
+      stroke: mat.m2-get-color-from-palette($primary, '50-contrast');
     }
   }
 
   .verified {
-    color: mat.get-color-from-palette($accent, 400);
+    color: mat.m2-get-color-from-palette($accent, 400);
   }
 
   .not-verified {
-    color: mat.get-color-from-palette($primary, 200);
+    color: mat.m2-get-color-from-palette($primary, 200);
   }
 
   .panel,
   .panel-header {
-    border-color: mat.get-color-from-palette(
+    border-color: mat.m2-get-color-from-palette(
       $background,
       ui-background-darkest
     );
   }
 
   .panel-header {
-    background-color: mat.get-color-from-palette($primary, 900);
+    background-color: mat.m2-get-color-from-palette($primary, 900);
   }
 
   ul li:before {
-    border-color: mat.get-color-from-palette($accent, 200) !important;
+    border-color: mat.m2-get-color-from-palette($accent, 200) !important;
   }
 
   .card-container {

@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core'
     './info-drop-down.component.scss',
     './info-drop-down.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class InfoDropDownComponent implements OnInit {
   @Input() name

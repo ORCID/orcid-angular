@@ -32,14 +32,6 @@ mat-form-field {
   max-width: 646px;
 }
 
-:host {
-  ::ng-deep {
-    .mat-form-field-appearance-outline .mat-form-field-subscript-wrapper {
-      padding-left: 0;
-    }
-  }
-}
-
 p {
   padding: 0;
   margin: 0;
@@ -160,7 +152,7 @@ app-alert-message {
     display: flex;
     flex-direction: row;
 
-    .mat-icon-button {
+    .mat-mdc-icon-button {
       top: -5px;
     }
   }

@@ -5,6 +5,7 @@ import { FundingRelationships } from 'src/app/types/record-funding.endpoint'
   selector: 'app-funding-external-identifiers-view-only',
   templateUrl: './funding-external-identifiers-view-only.component.html',
   styleUrls: ['./funding-external-identifiers-view-only.component.scss'],
+  standalone: false,
 })
 export class FundingExternalIdentifiersViewOnlyComponent implements OnInit {
   grantNumberLabel = $localize`:@@funding.grantNumberColon:Grant number:`

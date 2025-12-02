@@ -14,10 +14,7 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms'
-import {
-  MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA,
-  MatLegacyDialogRef as MatDialogRef,
-} from '@angular/material/legacy-dialog'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { cloneDeep } from 'lodash'
 import { Subject } from 'rxjs'
 import { first, switchMap, take, takeUntil } from 'rxjs/operators'
@@ -47,6 +44,7 @@ import { OrcidValidators } from '../../../../../validators'
     './modal-name.component.scss-theme.scss',
     './modal-name.component.scss',
   ],
+  standalone: false,
 })
 export class ModalNameComponent implements OnInit, OnDestroy {
   @ViewChildren('nameInput') inputs: QueryList<ElementRef>
@@ -69,8 +67,8 @@ export class ModalNameComponent implements OnInit, OnDestroy {
   nameMaxLength = 99
   otherNameMaxLength = 254
 
-  ngOrcidAddGivenName = $localize`:@@topBar.addGivenName:Add given name`
-  ngOrcidAddFamilyName = $localize`:@@topBar.addFamilyName:Add family name`
+  ngOrcidAddGivenName = $localize`:@@topBar.addGivenName:Your given names or forenames`
+  ngOrcidAddFamilyName = $localize`:@@topBar.addFamilyName:Your family names or surnames`
   ngOrcidAddPublishedName = $localize`:@@topBar.addPublishedName:Add a published or credit name`
   ngOrcidAddOtherName = $localize`:@@topBar.addOtherName:Add other name`
   ngOrcidDefaultVisibilityLabel = $localize`:@@topBar.manageWhoCanSee:Control who can see your given, family and published names by setting the visibility. The default visibility for your names is`

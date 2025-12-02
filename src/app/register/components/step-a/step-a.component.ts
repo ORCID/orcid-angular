@@ -1,32 +1,56 @@
-import { Component, Input } from '@angular/core'
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core'
 
-import { BaseStepDirective } from '../BaseStep'
-import { PlatformInfoService } from 'src/app/cdk/platform-info'
-import { first } from 'rxjs/operators'
 import { Router } from '@angular/router'
+import { first } from 'rxjs/operators'
+import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { ApplicationRoutes } from 'src/app/constants'
 
 import { ReactivationLocal } from '../../../types/reactivation.local'
+import { BaseStepDirective } from '../BaseStep'
+import { RegisterStateService } from '../../register-state.service'
+import { RegisterObservabilityService } from '../../register-observability.service'
 
 @Component({
   selector: 'app-step-a',
   templateUrl: './step-a.component.html',
-  styleUrls: ['./step-a.component.scss'],
+  styleUrls: [
+    './step-a.component.scss',
+    '../register.style.scss',
+    '../register.scss-theme.scss',
+  ],
   preserveWhitespaces: true,
+  standalone: false,
 })
-export class StepAComponent extends BaseStepDirective {
-  @Input() reactivation: ReactivationLocal
+export class StepAComponent
+  extends BaseStepDirective
+  implements AfterViewInit, OnInit
+{
+  @ViewChild('firstInput') firstInput: ElementRef
 
-  constructor(private _platform: PlatformInfoService, private _router: Router) {
+  @Input() reactivation: ReactivationLocal
+  nextButtonWasClicked: boolean
+
+  constructor(
+    private _platform: PlatformInfoService,
+    private _router: Router,
+    private _registerStateService: RegisterStateService,
+    private _registerObservabilityService: RegisterObservabilityService
+  ) {
     super()
   }
+
+  ngOnInit(): void {}
   infoSiteBaseUrl = runtimeEnvironment.INFO_SITE
 
-  goForward() {
-    this.formGroup.markAllAsTouched()
-  }
-
   goBack() {
+    this._registerStateService.registerStepperButtonClicked('a', 'back')
     this._platform
       .get()
       .pipe(first())
@@ -53,7 +77,21 @@ export class StepAComponent extends BaseStepDirective {
       })
   }
 
+  ngAfterViewInit(): void {
+    // Timeout used to get focus on the first input after the first step loads
+    setTimeout(() => {
+      this.firstInput?.nativeElement.focus()
+    }),
+      100
+  }
+
+  nextButton2() {
+    this.nextButtonWasClicked = true
+    this._registerStateService.registerStepperButtonClicked('a', 'next')
+  }
+
   signIn() {
+    this._registerObservabilityService.signInButtonClicked()
     this._platform
       .get()
       .pipe(first())
@@ -76,5 +114,9 @@ export class StepAComponent extends BaseStepDirective {
           },
         })
       })
+  }
+
+  backButton() {
+    this._registerStateService.registerStepperButtonClicked('a', 'back')
   }
 }

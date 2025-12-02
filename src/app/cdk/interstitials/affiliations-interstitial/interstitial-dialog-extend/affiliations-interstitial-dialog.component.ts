@@ -16,16 +16,15 @@ import {
 import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
 import { error } from 'console'
 import {
-  MAT_LEGACY_DIALOG_DATA,
-  MatLegacyDialogRef,
-  MatLegacyDialogState,
-} from '@angular/material/legacy-dialog'
+  MAT_DIALOG_DATA,
+  MatDialogRef,
+  MatDialogState,
+} from '@angular/material/dialog'
 import { OrganizationsService, UserService } from 'src/app/core'
 import { RecordService } from 'src/app/core/record/record.service'
-import { RecordCountriesService } from 'src/app/core/record-countries/record-countries.service'
 import { RecordAffiliationService } from 'src/app/core/record-affiliations/record-affiliations.service'
-import { Register2Service } from 'src/app/core/register2/register2.service'
-import { extend } from 'lodash'
+import { RegisterService } from 'src/app/core/register/register.service'
+
 import {
   BaseInterstitialDialogInput,
   BaseInterstitialDialogOutput,
@@ -54,6 +53,7 @@ export interface AffilationsComponentDialogOutput
     '../interstitial-component/affiliations-interstitial.component.scss',
     '../interstitial-component/affiliations-interstitial.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class AffiliationsInterstitialDialogComponent extends AffiliationsInterstitialComponent {
   @HostBinding('class.columns-12') desktop: boolean = false
@@ -66,8 +66,8 @@ export class AffiliationsInterstitialDialogComponent extends AffiliationsInterst
     formBuilder: UntypedFormBuilder,
     recordService: RecordService,
     organizationService: OrganizationsService,
-    register2Service: Register2Service,
-    private dialogRef: MatLegacyDialogRef<
+    registerService: RegisterService,
+    private dialogRef: MatDialogRef<
       AffiliationsInterstitialDialogComponent,
       AffilationsComponentDialogOutput
     >,
@@ -80,7 +80,7 @@ export class AffiliationsInterstitialDialogComponent extends AffiliationsInterst
       formBuilder,
       recordService,
       organizationService,
-      register2Service,
+      registerService,
       user
     )
   }

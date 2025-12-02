@@ -3,6 +3,7 @@ import { VERIFICATION_DATE_CUTOFF } from 'src/app/constants'
 
 @Pipe({
   name: 'verificationDateCutoff',
+  standalone: false,
 })
 export class VerificationDateCutoffPipe implements PipeTransform {
   transform(value: string): string | null {

@@ -11,6 +11,7 @@ import {
 
 @Pipe({
   name: 'appPanelActivityActionAriaLabel',
+  standalone: false,
 })
 export class AppPanelActivityActionAriaLabelPipe implements PipeTransform {
   transform(panelType: string, activity: string, title: string): string {
@@ -52,6 +53,9 @@ export class AppPanelActivityActionAriaLabelPipe implements PipeTransform {
     } else if (panelType === 'service') {
       translationForAction +=
         ' ' + $localize`:@@shared.serviceAriaLabel:service`
+    } else if (panelType === 'editorial-service') {
+      translationForAction +=
+        ' ' + $localize`:@@shared.editorialServiceAriaLabel:editorial service`
     } else if (panelType === 'funding') {
       translationForAction +=
         ' ' + $localize`:@@shared.fundingAriaLabel:funding`

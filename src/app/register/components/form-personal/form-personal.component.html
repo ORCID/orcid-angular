@@ -1,146 +1,302 @@
 <ng-container [formGroup]="form">
+  <h3 i18n="@@register.yourNames" class="orc-font-body margin-top-12">
+    Your names
+  </h3>
+
   <div class="input-container">
-    <mat-form-field appearance="outline" [hideRequiredMarker]="true">
-      <mat-label i18n="@@register.firstName">First name</mat-label>
+    <mat-label
+      i18n="@@register.givenNames"
+      class="orc-font-small-print"
+      id="given-names-input-label"
+      [ngClass]="{
+        error: givenNameFormTouched && form.controls.givenNames.errors
+      }"
+      >Given names</mat-label
+    >
+    <mat-form-field
+      appearance="outline"
+      [hideRequiredMarker]="true"
+      async
+      class="no-hint"
+    >
       <input
+        aria-labelledby="given-names-input-label"
         id="given-names-input"
         formControlName="givenNames"
         matInput
-        #firstInput
+        [placeholder]="labelNameYouMostCommonly"
       />
-      <mat-error
-        *ngIf="form.hasError('maxlength', 'givenNames')"
-        i18n="@@topBar.keywordMaxLength"
-      >
-        Must be less than 100 characters
-      </mat-error>
-      <mat-error
-        *ngIf="form.hasError('required', 'givenNames')"
-        i18n="@@register.firstNamePassword"
-      >
-        Please enter your first/given name
-      </mat-error>
-      <mat-error
-        *ngIf="form.hasError('illegalName', 'givenNames')"
-        i18n="@@register.invalidName"
-      >
-        Invalid name characters or format
-      </mat-error>
-      <mat-error *ngIf="form.hasError('backendError', 'givenNames')">
-        <div *ngFor="let error of form.getError('backendError', 'givenNames')">
-          <app-backend-error [errorCode]="error"></app-backend-error>
-        </div>
-      </mat-error>
     </mat-form-field>
 
-    <button
-      mat-icon-button
-      [attr.aria-label]="labelInfoAboutName"
-      type="button"
-      [mdePopoverTriggerFor]="namesPopover"
-      mdePopoverTriggerOn="click"
-      #namesPopoverTrigger="mdePopoverTrigger"
-    >
-      <mat-icon class="material-icons-outlined large-material-icon"
-        >help_outline</mat-icon
-      >
-    </button>
-  </div>
-  <mat-form-field appearance="outline" [hideRequiredMarker]="true">
-    <mat-label
-      ><ng-container i18n="@@register.lastName">Last name</ng-container>
-      <ng-container i18n="@@register.optional"
-        >(Optional)</ng-container
-      ></mat-label
-    >
-    <input id="family-names-input" formControlName="familyNames" matInput />
     <mat-error
-      *ngIf="form.hasError('illegalName', 'familyNames')"
+      *ngIf="form.hasError('maxlength', 'givenNames')"
+      i18n="@@topBar.keywordMaxLength"
+    >
+      Must be less than 100 characters
+    </mat-error>
+    <mat-error
+      *ngIf="givenNameFormTouched && form.hasError('required', 'givenNames')"
+      i18n="@@register.firstNameError"
+    >
+      Please enter your given names
+    </mat-error>
+    <mat-error
+      *ngIf="givenNameFormTouched && form.hasError('illegalName', 'givenNames')"
       i18n="@@register.invalidName"
     >
       Invalid name characters or format
     </mat-error>
-    <mat-error *ngIf="form.hasError('backendError', 'familyNames')">
+    <mat-error
+      *ngIf="
+        givenNameFormTouched && form.hasError('backendError', 'givenNames')
+      "
+    >
+      <div *ngFor="let error of form.getError('backendError', 'givenNames')">
+        <app-backend-error [errorCode]="error"></app-backend-error>
+      </div>
+    </mat-error>
+  </div>
+  <div class="input-container">
+    <mat-label class="orc-font-small-print"
+      ><ng-container i18n="@@register.familyName">Family names</ng-container>
+      <label id="family-names-input-label" i18n="@@register.optional"
+        >(Optional)</label
+      ></mat-label
+    >
+    <mat-form-field
+      appearance="outline"
+      [hideRequiredMarker]="true"
+      class="no-hint"
+    >
+      <input
+        aria-labelledby="family-names-input-label"
+        id="family-names-input"
+        formControlName="familyNames"
+        matInput
+        [placeholder]="labelFamilyNamePlaceholder"
+      />
+    </mat-form-field>
+    <mat-error
+      *ngIf="form.hasError('maxlength', 'familyNames')"
+      i18n="@@topBar.keywordMaxLength"
+    >
+      Must be less than 100 characters
+    </mat-error>
+    <mat-error
+      *ngIf="
+        familyNamesFormTouched && form.hasError('illegalName', 'familyNames')
+      "
+      i18n="@@register.invalidName"
+    >
+      Invalid name characters or format
+    </mat-error>
+    <mat-error
+      *ngIf="
+        familyNamesFormTouched && form.hasError('backendError', 'familyNames')
+      "
+    >
       <div *ngFor="let error of form.getError('backendError', 'familyNames')">
         <app-backend-error [errorCode]="error"></app-backend-error>
       </div>
     </mat-error>
-  </mat-form-field>
+  </div>
 
+  <!-- EMAIL -->
+
+  <h3 i18n="@@register.yourEmailAddresses" class="orc-font-body margin-top-12">
+    Your email addresses
+  </h3>
   <ng-container formGroupName="emails">
-    <mat-form-field appearance="outline" [hideRequiredMarker]="true">
-      <mat-label i18n="@@register.primaryEmail">Primary email</mat-label>
-      <input
-        id="email-input"
-        formControlName="email"
-        matInput
-        appTrim
-        type="email"
-      />
-      <mat-error
-        *ngIf="form.hasError('required', 'emails.email')"
-        i18n="@@register.primaryEmailRequired"
+    <div class="input-container">
+      <mat-label
+        class="orc-font-small-print"
+        id="email-input-input-label"
+        [ngClass]="{
+          error: emailError
+        }"
+        id="email-input-label"
+        i18n="@@register.primaryEmail"
+        >Primary email</mat-label
       >
-        An email is required
+
+      <mat-form-field
+        appearance="outline"
+        [hideRequiredMarker]="true"
+        class="no-hint"
+        [ngClass]="{
+          'valid-password-input':
+            emailsAreValid || this.reactivation?.isReactivation,
+          'disable-error': !emailError
+        }"
+      >
+        <mat-icon
+          *ngIf="emailsAreValid || this.reactivation?.isReactivation"
+          matSuffix
+          >done</mat-icon
+        >
+
+        <input
+          aria-labelledby="email-input-input-label"
+          id="email-input"
+          aria-labelledby="email-input-label"
+          formControlName="email"
+          matInput
+          appTrim
+          type="email"
+          [placeholder]="emailPlaceholder"
+        />
+      </mat-form-field>
+      <mat-error
+        *ngIf="emailFormTouched && form.hasError('required', 'emails.email')"
+        i18n="@@register.primaryEmailRequired2"
+      >
+        Please enter your email
       </mat-error>
       <mat-error
         *ngIf="
-          this.emails.hasError('email', 'email') ||
-          this.emails.hasError('pattern', 'email')
+          emailFormTouched &&
+          (this.emails.hasError('email', 'email') ||
+            this.emails.hasError('pattern', 'email'))
         "
-        i18n="@@register.invalidEmail"
+        i18n="@@register.invalidEmail2"
       >
-        Invalid email format
+        Please enter a valid email address, for example joe&#64;institution.edu
       </mat-error>
 
-      <mat-error *ngIf="this.emails.hasError('backendError', 'email')">
+      <mat-error
+        *ngIf="
+          this.emails.hasError('backendError', 'email') && emailFormTouched
+        "
+      >
         <div
           *ngFor="let error of this.emails.getError('backendError', 'email')"
         >
           <app-backend-error
+            [showEmailAlreadyExistUntilNextButtonWasClicked]="true"
+            [nextButtonWasClicked]="nextButtonWasClicked"
             [errorCode]="error"
             [value]="emails.get('email').value"
           ></app-backend-error>
         </div>
       </mat-error>
-    </mat-form-field>
-    <mat-form-field
-      appearance="outline"
-      *ngIf="!reactivation?.isReactivation"
-      [hideRequiredMarker]="true"
-    >
-      <mat-label i18n="@@register.confirmEmail"
-        >Confirm primary email</mat-label
+    </div>
+
+    <ng-container *ngIf="this.emails.hasError('backendError', 'email')">
+      <ng-container
+        *ngFor="let error of this.emails.getError('backendError', 'email')"
       >
-      <input
-        formControlName="confirmEmail"
-        matInput
-        (paste)="(false)"
-        appTrim
-        autocomplete="off"
-        type="email"
-        id="confirm-email-input"
-      />
+        <app-alert-message>
+          <div content class="content">
+            <div>
+              <ng-container i18n="@@register.theEmailAddress">
+                The email address
+              </ng-container>
+              <strong>{{ emails.get('email').value }}</strong>
+              <ng-container i18n="@@register.isAssociatedWith"
+                >is already associated with
+              </ng-container>
+              <ng-container
+                *ngIf="'orcid.frontend.verify.duplicate_email' === error"
+                i18n="@@register.anExisting"
+                >an existing
+              </ng-container>
+              <ng-container
+                *ngIf="'orcid.frontend.verify.unclaimed_email' === error"
+                i18n="@@register.anUnclaimed"
+                >an unclaimed
+              </ng-container>
+              <ng-container
+                *ngIf="'orcid.frontend.verify.deactivated_email' === error"
+                i18n="@@register.aDeactivated"
+                >a deactivated
+              </ng-container>
+              <ng-container i18n="@@register.orcidRecord"
+                >ORCID record.</ng-container
+              >
+              <i i18n="@@register.youCannotUseThisEmail">
+                You cannot use this email address when creating a new ORCID iD.
+              </i>
+            </div>
+
+            <a
+              *ngIf="'orcid.frontend.verify.duplicate_email' === error"
+              (click)="navigateToSignin(emails.get('email').value)"
+              i18n="@@register.signInToOrcidUsingThisEmail"
+            >
+              Sign in to ORCID using this email address</a
+            >
+            <a
+              *ngIf="'orcid.frontend.verify.unclaimed_email' === error"
+              (click)="navigateToClaim(emails.get('email').value)"
+              i18n="@@register.resendClaimAddress"
+            >
+              Resend a claim email to this email address</a
+            >
+            <a
+              *ngIf="'orcid.frontend.verify.deactivated_email' === error"
+              (click)="reactivateEmail(emails.get('email').value)"
+              i18n="@@register.reactivateOrcidAssociated"
+            >
+              Reactivate the ORCID record associated with this email address</a
+            >
+          </div>
+        </app-alert-message>
+      </ng-container>
+    </ng-container>
+
+    <!-- EMAIL CONFIRMATION  -->
+
+    <!-- <mat-label i18n="@@register.confirmEmail"
+    >Confirm primary email</mat-label
+  > -->
+    <div class="input-container" *ngIf="!reactivation?.isReactivation">
+      <mat-form-field
+        class="no-hint"
+        appearance="outline"
+        [hideRequiredMarker]="true"
+        [ngClass]="{ 'valid-password-input': emailsAreValid }"
+      >
+        <mat-icon *ngIf="emailsAreValid" matSuffix>done</mat-icon>
+
+        <input
+          formControlName="confirmEmail"
+          matInput
+          (paste)="(false)"
+          appTrim
+          autocomplete="off"
+          type="email"
+          id="confirm-email-input"
+          [placeholder]="labelConfirmEmail"
+          [attr.aria-label]="arialabelConfirmEmail"
+        />
+      </mat-form-field>
       <mat-error
-        *ngIf="form.hasError('required', 'emails.confirmEmail')"
-        i18n="@@register.confirmEmailRequired"
+        *ngIf="
+          emailConfirmationFormTouched &&
+          form.hasError('required', 'emails.confirmEmail')
+        "
+        i18n="@@register.confirmEmailRequired2"
       >
-        Please confirm your email
+        Please confirm your email address
       </mat-error>
       <mat-error
         *ngIf="
-          this.emails.hasError('email', 'confirmEmail') ||
-          this.emails.hasError('pattern', 'confirmEmail')
+          emailConfirmationFormTouched &&
+          (this.emails.hasError('email', 'confirmEmail') ||
+            this.emails.hasError('pattern', 'confirmEmail'))
         "
-        i18n="@@register.invalidEmail"
+        i18n="@@register.invalidEmail2"
       >
-        Invalid email format
+        Please enter a valid email address, for example joe&#64;institution.edu
       </mat-error>
       <mat-error
-        *ngIf="this.emails.hasError('mismatch', 'confirmEmail')"
-        i18n="@@register.confirmationEmailNotMatch"
+        *ngIf="
+          this.emails.hasError('mismatch', 'confirmEmail') &&
+          emailConfirmationFormTouched
+        "
+        i18n="@@register.confirmationEmailNotMatch2"
       >
-        Email confirmation does not match
+        Email addresses do not match
       </mat-error>
       <mat-error
         *ngIf="this.emails.hasError('backendError', 'emails.confirmEmail')"
@@ -153,34 +309,98 @@
           <app-backend-error [errorCode]="error"></app-backend-error>
         </div>
       </mat-error>
-    </mat-form-field>
+    </div>
+
+    <ng-container *ngIf="personalEmail && emailConfirmationValid">
+      <div class="announce">
+        <div>
+          <img
+            src="/assets/vectors/personal-email-icon.svg"
+            aria-hidden="true"
+          />
+        </div>
+        <div class="content">
+          <div>
+            <h3
+              class="orc-font-body"
+              i18n="@@register.thisLooksLikeAPersonalEmail"
+            >
+              This looks like a personal email
+            </h3>
+          </div>
+          <div>
+            <ng-container i18n="@@register.addA"
+              >Add an additional</ng-container
+            >
+            <strong i18n="@@register.professionalEmail"
+              >professional email</strong
+            >
+            <ng-container i18n="@@register.asBackupSoWeCanBetter">
+              as backup so we can better recommend affiliations and other
+              related data to you.
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="undefinedEmail && emailConfirmationValid">
+      <div class="announce">
+        <div>
+          <img
+            src="/assets/vectors/undefined-email-icon.svg"
+            aria-hidden="true"
+          />
+        </div>
+        <div class="content">
+          <div>
+            <h3 class="orc-font-body" i18n="@@register.addAnotherEmailToSecure">
+              Add an additional email to secure your account
+            </h3>
+          </div>
+          <div i18n="@@register.addingAnAddiotionalEmailAsBackup">
+            Adding an additional email as backup helps secure your account and
+            makes sure you can always sign in.
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="professionalEmail && emailConfirmationValid">
+      <div class="announce">
+        <div>
+          <img
+            src="/assets/vectors/professional-email-icon.svg"
+            aria-hidden="true"
+          />
+        </div>
+        <div class="content">
+          <div>
+            <h3
+              class="orc-font-body"
+              i18n="@@regiser.thisLooksLikeAProffessional"
+            >
+              This looks like a professional email
+            </h3>
+          </div>
+          <div>
+            <ng-container i18n="@@register.weRecommendAdding"
+              >We recommend adding an additional</ng-container
+            >
+            <strong i18n="@@register.personalEmail">personal email</strong>
+            <ng-container i18n="@@register.asBackupSoYouAlways"
+              >as backup so you always have access to your ORCID account if you
+              change jobs or roles.</ng-container
+            >
+          </div>
+        </div>
+      </div>
+    </ng-container>
 
     <!-- ADDITIONAL EMAILS -->
     <app-form-personal-additional-emails
       [additionalEmails]="additionalEmails"
+      [nextButtonWasClicked]="nextButtonWasClicked"
     ></app-form-personal-additional-emails>
   </ng-container>
 </ng-container>
-
-<mde-popover
-  #namesPopover="mdePopover"
-  [mdePopoverOverlapTrigger]="false"
-  [mdePopoverCloseOnClick]="true"
->
-  <mat-card class="mat-elevation-z3 orcid-popover">
-    <p i18n="@@register.firstNameDetail">
-      First name is your given name or the name you most commonly go by.
-    </p>
-    <p i18n="@@register.lastNameDetail">Last name is your family name.</p>
-    <p i18n="@@register.youWillHaveAChance">
-      You will have a chance to add additional names after you have created your
-      account.
-    </p>
-    <a
-      href="https://support.orcid.org/hc/articles/360006973853"
-      target="orcid.frontend.register.help.more_info.link.text"
-      i18n="@@register.moreInfoOnNames"
-      >More information on names</a
-    >
-  </mat-card>
-</mde-popover>

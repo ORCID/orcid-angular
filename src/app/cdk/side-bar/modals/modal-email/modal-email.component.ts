@@ -15,7 +15,7 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms'
-import { MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog'
+import { MatDialogRef } from '@angular/material/dialog'
 import { cloneDeep } from 'lodash'
 import { Subject } from 'rxjs'
 import { first, take, takeUntil, tap } from 'rxjs/operators'
@@ -23,6 +23,7 @@ import { ModalComponent } from 'src/app/cdk/modal/modal/modal.component'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
+import { TogglzFlag } from 'src/app/core/togglz/togglz-flags.enum'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { UserInfoService } from 'src/app/core/user-info/user-info.service'
 import {
@@ -44,6 +45,7 @@ import { OrcidValidators } from 'src/app/validators'
     './modal-email.component.scss',
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class ModalEmailComponent implements OnInit, OnDestroy {
   ariaLabelKnowledgeBase = $localize`:@@side-bar.ariaLabelOrcidTermsOfUseBase:ORCID knowledge base (Opens in a new tab)`
@@ -129,7 +131,7 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
       .subscribe()
 
     this._togglz
-      .getStateOf('EMAIL_DOMAINS_UI')
+      .getStateOf(TogglzFlag.EMAIL_DOMAINS_UI)
       .pipe(take(1))
       .subscribe((value) => {
         this.loadingTogglz = false

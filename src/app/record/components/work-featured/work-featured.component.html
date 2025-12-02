@@ -1,0 +1,30 @@
+<!-- A PANEL COMPONENT FOR EACH WORK ON THE STACK -->
+<app-panel
+  panelId="work-stack"
+  [editableVisibilityControl]="false"
+  [editable]="false"
+  [userRecord]="userRecord"
+  [elements]="work"
+  [putCode]="work?.putCode?.value"
+  [isPublicRecord]="isPublicRecord"
+  #panelsComponent
+  [type]="'featured-works'"
+  [isFeatured]="true"
+  [panelTitle]="work?.title?.value"
+>
+  <h4
+    header
+    class="work-title orc-font-body"
+    [innerHTML]="work?.title?.value | searchTermHighlight : highlight"
+  ></h4>
+  <!-- WORK BODY -->
+  <app-work
+    [work]="work"
+    [panelDetailsState]="panelDetailsState[work?.putCode?.value]"
+    [id]="userInfo?.EFFECTIVE_USER_ORCID"
+    [isPublicRecord]="isPublicRecord"
+    [featured]="true"
+    [minimized]="minimized"
+  >
+  </app-work>
+</app-panel>

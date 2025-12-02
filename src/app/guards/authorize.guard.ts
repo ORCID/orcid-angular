@@ -1,78 +1,137 @@
 import { Inject, Injectable } from '@angular/core'
 import {
   ActivatedRouteSnapshot,
+  CanActivateChild,
   Router,
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router'
-import { forkJoin, NEVER, Observable, of, throwError, timer } from 'rxjs'
-import { catchError, map, switchMap, take, tap, timeout } from 'rxjs/operators'
+import { forkJoin, NEVER, Observable, of } from 'rxjs'
+import { catchError, map, switchMap, take } from 'rxjs/operators'
 
 import { PlatformInfoService } from '../cdk/platform-info'
 import { WINDOW } from '../cdk/window'
 import { UserService } from '../core'
-import { ErrorHandlerService } from '../core/error-handler/error-handler.service'
-import { ERROR_REPORT } from '../errors'
-import { RequestInfoForm } from '../types'
-import { GoogleTagManagerService } from '../core/google-tag-manager/google-tag-manager.service'
+import { OauthURLSessionManagerService } from '../core/oauth-urlsession-manager/oauth-urlsession-manager.service'
+import { TogglzService } from '../core/togglz/togglz.service'
+import { UserSession } from '../types/session.local'
+import { OauthParameters } from '../types'
+import { OauthService } from '../core/oauth/oauth.service'
+import { FeatureLoggerService } from '../core/logging/feature-logger.service'
+import { AuthDecisionService } from '../core/auth-decision/auth-decision.service'
+import { TogglzFlag } from '../core/togglz/togglz-flags.enum'
 
-@Injectable({
-  providedIn: 'root',
-})
-export class AuthorizeGuard {
-  lastRedirectUrl: string
-  redirectTroughGtmWasCalled: boolean
+@Injectable({ providedIn: 'root' })
+export class AuthorizeGuard implements CanActivateChild {
   constructor(
     private _user: UserService,
-    private _router: Router,
-    private _platform: PlatformInfoService,
+    private readonly router: Router,
+    private readonly platform: PlatformInfoService,
+    private readonly oauthUrlSessionManger: OauthURLSessionManagerService,
     @Inject(WINDOW) private window: Window,
-    private _googleTagManagerService: GoogleTagManagerService,
-    private _errorHandler: ErrorHandlerService
+    private _togglzService: TogglzService,
+    private oauthService: OauthService,
+    private readonly featureLogger: FeatureLoggerService,
+    private readonly authDecision: AuthDecisionService
   ) {}
+
   canActivateChild(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Observable<boolean | UrlTree> | UrlTree | boolean {
-    return this._user.getUserSession().pipe(
+    _: ActivatedRouteSnapshot,
+    __: RouterStateSnapshot
+  ): Observable<boolean | UrlTree> {
+    const queryParams = _.queryParams
+
+    return forkJoin({
+      session: this._user.getUserSession().pipe(take(1)),
+      isOauthAuthorizationTogglzEnable: this._togglzService
+        .getStateOf(TogglzFlag.OAUTH_AUTHORIZATION)
+        .pipe(take(1)),
+    }).pipe(
       take(1),
-      switchMap((session) => {
-        const oauthSession = session.oauthSession
-        if (session.userInfo?.LOCKED === 'true') {
-          return of(this._router.createUrlTree(['/my-orcid']))
-        }
-        if (oauthSession) {
-          // Session errors are allow to be displayed
-          if (oauthSession.error) {
-            return of(true)
-          } else if (
-            oauthSession.forceLogin ||
-            !session.oauthSessionIsLoggedIn
-          ) {
-            return this.redirectToLoginPage(oauthSession)
+      switchMap(({ session, isOauthAuthorizationTogglzEnable }) => {
+        const decision = this.authDecision.decideForAuthorize(
+          session,
+          isOauthAuthorizationTogglzEnable,
+          queryParams as OauthParameters
+        )
+        this.featureLogger.debug('Authorize Guard', ...decision.trace)
+        switch (decision.action) {
+          case 'redirectToMyOrcid':
+            return of(this.router.createUrlTree(['/my-orcid']))
+          case 'redirectToLogin':
+            return this.redirectToLoginPage()
+          case 'validateRedirectUri': {
+            const { clientId, redirectUri } = (decision.payload || {}) as any
+            return this.validateRedirectUriAndRedirect({
+              ...(queryParams as any),
+              client_id: clientId,
+              redirect_uri: redirectUri,
+            })
           }
+          case 'outOfRouterNavigation': {
+            const { target } = (decision.payload || {}) as any
+            ;(this.window as any).outOfRouterNavigation(target)
+            return NEVER
+          }
+          case 'allow':
+          default:
+            return of(true)
         }
-        return of(true)
       })
     )
   }
 
-  private redirectToLoginPage(
-    oauthSession: RequestInfoForm
-  ): Observable<UrlTree> {
-    // TODO @leomendoza123 @danielPalafox is adding the empty oauth parameters really required?
-    // seems is never consumed or check by the frontend and it will never hit the backend on a frontend route
+  private validateRedirectUriAndRedirect(
+    queryParams: OauthParameters
+  ): Observable<boolean | UrlTree> {
+    return this.oauthService
+      .validateRedirectUri(queryParams.client_id, queryParams.redirect_uri)
+      .pipe(
+        take(1),
+        map((resp) => {
+          if (resp.valid) {
+            // valid → redirect to the specified URI
+            const target = `${queryParams.redirect_uri}#login_required`
 
-    return this._platform.get().pipe(
-      map((platform) => {
-        const newQueryParams = {
-          ...platform.queryParameters,
-          // The router is removing parameters from the url it necessary reassigned from the oauth session to preserve all the parameters
-          // related to
-          redirect_uri: oauthSession.redirectUrl,
-        }
-        return this._router.createUrlTree(['/signin'], {
-          queryParams: newQueryParams,
+            this.featureLogger.debug(
+              'Authorize Guard',
+              'Redirecting out of router to',
+              target
+            )
+            ;(this.window as any).outOfRouterNavigation(target)
+            return false
+          }
+          // invalid → send to your 404 page
+          this.featureLogger.warn(
+            'Authorize Guard',
+            'Invalid redirect_uri → /404'
+          )
+          return this.router.createUrlTree(['/404'])
+        }),
+        catchError(() => {
+          // in case of error, redirect to 404
+          this.featureLogger.error(
+            'Authorize Guard',
+            'Error validating redirect_uri → /404'
+          )
+          return of(this.router.createUrlTree(['/404']))
+        })
+      )
+  }
+
+  /**
+   * Builds a UrlTree pointing at /signin while preserving current query params.
+   */
+  private redirectToLoginPage(): Observable<UrlTree> {
+    this.oauthUrlSessionManger.set(this.window.location.href)
+    return this.platform.get().pipe(
+      map(({ queryParameters }) => {
+        this.featureLogger.debug(
+          'Authorize Guard',
+          'Building /signin UrlTree with current query params'
+        )
+        return this.router.createUrlTree(['/signin'], {
+          queryParams: { ...queryParameters },
         })
       })
     )

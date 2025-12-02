@@ -3,6 +3,7 @@ import { AffiliationType } from '../../../types/record-affiliation.endpoint'
 
 @Pipe({
   name: 'affiliationType',
+  standalone: false,
 })
 export class AffiliationTypePipe implements PipeTransform {
   transform(value: string): AffiliationType {
@@ -19,6 +20,8 @@ export class AffiliationTypePipe implements PipeTransform {
         return AffiliationType.distinction
       case 'INVITED_POSITION':
         return AffiliationType['invited-position']
+      case 'EDITORIAL_SERVICE':
+        return AffiliationType['editorial-service']
     }
   }
 }

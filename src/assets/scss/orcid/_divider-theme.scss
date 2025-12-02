@@ -7,7 +7,7 @@
   $warn: map-get($theme, accent);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
-  $config: mat.define-legacy-typography-config();
+  $config: mat.m2-define-typography-config();
 
   hr {
     border-color: map-get($foreground, 'brand-primary');
@@ -18,8 +18,8 @@
   hr.dashed-line {
     background: repeating-linear-gradient(
       90deg,
-      mat.get-color-from-palette($background, light-grey),
-      mat.get-color-from-palette($background, light-grey) 6px,
+      mat.m2-get-color-from-palette($background, light-grey),
+      mat.m2-get-color-from-palette($background, light-grey) 6px,
       transparent 6px,
       transparent 12px
     );

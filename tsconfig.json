@@ -7,8 +7,12 @@
     "sourceMap": true,
     "declaration": false,
     "module": "es2020",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "experimentalDecorators": true,
+    "paths": {
+      "@orcid/tokens": ["projects/orcid-tokens/src/public-api.ts"],
+      "@orcid/ui": ["projects/orcid-ui/src/public-api.ts"]
+    },
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "target": "ES2022",
@@ -21,5 +25,34 @@
   "angularCompilerOptions": {
     "strictTemplates": true,
     "strictInjectionParameters": true
-  }
+  },
+  "files": [],
+  "include": [],
+  "exclude": ["out-tsc", "dist", "node_modules", "**/out-tsc/**"],
+  "references": [
+    {
+      "path": "./projects/orcid-ui/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/orcid-ui/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/orcid-tokens/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/orcid-tokens/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/orcid-ui-docs/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/orcid-ui-docs/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/orcid-ui-elements/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/orcid-ui-elements/tsconfig.spec.json"
+    }
+  ]
 }

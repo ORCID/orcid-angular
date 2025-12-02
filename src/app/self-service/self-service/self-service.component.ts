@@ -13,10 +13,11 @@ import { ApplicationRoutes } from 'src/app/constants'
     './self-service.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class SelfServiceComponent implements OnInit {
   @Output() loading = new EventEmitter<boolean>()
-  $destroy = new Subject()
+  $destroy = new Subject<void>()
   isMobile: boolean
   platform: PlatformInfo
 

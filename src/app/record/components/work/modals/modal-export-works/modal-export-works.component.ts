@@ -1,6 +1,6 @@
 import { Component, ElementRef, Inject, OnDestroy, OnInit } from '@angular/core'
 import { Subject } from 'rxjs'
-import { MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog'
+import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import { Work, WorkGroup } from '../../../../../types/record-works.endpoint'
 import { RecordWorksService } from '../../../../../core/record-works/record-works.service'
@@ -13,6 +13,7 @@ import { WINDOW } from 'src/app/cdk/window'
   templateUrl: './modal-export-works.component.html',
   styleUrls: ['./modal-export-works.component.scss'],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class ModalExportWorksComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

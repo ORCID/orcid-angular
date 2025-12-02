@@ -19,6 +19,7 @@ import { RecordResearchResourceService } from '../../../core/record-research-res
     './research-resource.component.scss',
     './research-resource.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class ResearchResourceComponent implements OnInit {
   $destroy: Subject<boolean> = new Subject<boolean>()

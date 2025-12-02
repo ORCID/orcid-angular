@@ -10,7 +10,7 @@ import { RecordService } from '../../../core/record/record.service'
 import { Assertion, UserInfo } from '../../../types'
 import { UserStatus } from '../../../types/userStatus.endpoint'
 import { RecordEmailsService } from '../../../core/record-emails/record-emails.service'
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
+import { MatDialog } from '@angular/material/dialog'
 import { VerificationEmailModalService } from '../../../core/verification-email-modal/verification-email-modal.service'
 import { isEmpty } from 'lodash'
 import { RecordUtil } from 'src/app/shared/utils/record.util'
@@ -25,6 +25,7 @@ import { WINDOW } from 'src/app/cdk/window'
     './top-bar.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class TopBarComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

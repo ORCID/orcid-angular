@@ -34,10 +34,6 @@ fieldset {
   margin-bottom: 32px;
 }
 
-mat-card-title img {
-  margin-bottom: 16px;
-}
-
 .input-container {
   padding-bottom: 20px;
 }
@@ -54,15 +50,8 @@ mat-label.orc-font-small-print {
 
 .columns-12 {
   :host ::ng-deep {
-    .mat-card-title {
+    .mat-mdc-card-title {
       margin-top: 64px;
-    }
-    .mat-card.orcid-wizard {
-      mat-card-content {
-        margin-left: 64px;
-        margin-right: 64px;
-        margin-bottom: 64px;
-      }
     }
   }
 }
@@ -76,43 +65,9 @@ mat-label.orc-font-small-print {
 
     mat-form-field {
       padding-top: 8px;
-
-      .mat-form-field-subscript-wrapper {
+      .mat-mdc-form-field-hint-wrapper {
         padding: 0;
       }
-
-      .mat-form-field-wrapper {
-        padding-bottom: 2px;
-      }
-    }
-
-    .mat-form-field-appearance-outline {
-      .mat-form-field-wrapper {
-        margin: 0;
-
-        .mat-form-field-outline {
-          top: 0px;
-        }
-
-        .mat-form-field-prefix {
-          top: 0.35em;
-
-          mat-icon {
-            margin-inline-end: 8px;
-          }
-        }
-
-        .mat-form-field-flex {
-          .mat-form-field-infix {
-            border-top: 0px;
-            padding: 10px 0 10px 0;
-          }
-        }
-      }
-    }
-
-    mat-form-field.mat-form-field.mat-primary.mat-form-field-type-mat-input.mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-invalid {
-      margin-bottom: 0px;
     }
   }
 }

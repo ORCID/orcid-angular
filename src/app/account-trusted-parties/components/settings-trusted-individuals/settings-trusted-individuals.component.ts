@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
+import { MatDialog } from '@angular/material/dialog'
 import { Observable, of, Subject } from 'rxjs'
 import { startWith, switchMap, takeUntil, tap } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
@@ -15,6 +15,7 @@ import { DialogRevokeTrustedIndividualsComponent } from '../dialog-revoke-truste
     './settings-trusted-individuals.component.scss',
     './settings-trusted-individuals.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class SettingsTrustedIndividualsComponent implements OnInit, OnDestroy {
   $trustedIndividuals: Observable<AccountTrustedIndividual[]>

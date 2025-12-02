@@ -4,6 +4,7 @@ import { Component, Input, OnInit } from '@angular/core'
   selector: 'app-display-attribute',
   templateUrl: './display-attribute.component.html',
   styleUrls: ['./display-attribute.component.scss'],
+  standalone: false,
 })
 export class DisplayAttributeComponent implements OnInit {
   @Input() title

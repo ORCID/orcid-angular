@@ -1,9 +1,6 @@
 import { Component, OnInit, HostBinding, Inject, Optional } from '@angular/core'
 import { PlatformInfoService } from '../platform-info/platform-info.service'
-import {
-  MatLegacyDialogRef as MatDialogRef,
-  MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA,
-} from '@angular/material/legacy-dialog'
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { WINDOW } from '../window'
 
 @Component({
@@ -13,6 +10,7 @@ import { WINDOW } from '../window'
     './is-this-you.component.scss.theme.scss',
     './is-this-you.component.scss',
   ],
+  standalone: false,
 })
 export class IsThisYouComponent implements OnInit {
   titleLabel = 'Could this be you?'

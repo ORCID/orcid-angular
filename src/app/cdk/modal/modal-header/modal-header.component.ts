@@ -6,7 +6,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core'
-import { MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog'
+import { MatDialogRef } from '@angular/material/dialog'
 import { PlatformInfo, PlatformInfoService } from '../../platform-info'
 import { takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
@@ -18,11 +18,12 @@ import { Subject } from 'rxjs'
     './modal-header.component.scss',
     './modal-header.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class ModalHeaderComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
-  @Output() close = new EventEmitter<boolean>()
+  @Output() close = new EventEmitter<void>()
   @Input() closeLabel = $localize`:@@shared.ariaLabelClose:Close`
   platform: PlatformInfo
 

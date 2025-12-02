@@ -7,7 +7,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core'
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
+import { MatDialog } from '@angular/material/dialog'
 import { Assertion } from '../../../types'
 import {
   Address,
@@ -16,7 +16,7 @@ import {
 } from '../../../types/common.endpoint'
 import { UserRecord } from '../../../types/record.local'
 import { PlatformInfoService } from '../../platform-info'
-import { first } from 'rxjs/operators'
+import { first, tap } from 'rxjs/operators'
 import { Affiliation } from 'src/app/types/record-affiliation.endpoint'
 import { Funding } from 'src/app/types/record-funding.endpoint'
 import { PeerReview } from '../../../types/record-peer-review.endpoint'
@@ -26,18 +26,20 @@ import { RecordFundingsService } from '../../../core/record-fundings/record-fund
 import { RecordWorksService } from '../../../core/record-works/record-works.service'
 import { RecordPeerReviewService } from '../../../core/record-peer-review/record-peer-review.service'
 import { RecordResearchResourceService } from '../../../core/record-research-resource/record-research-resource.service'
-import { MatLegacyCheckboxChange as MatCheckboxChange } from '@angular/material/legacy-checkbox'
+import { MatCheckboxChange } from '@angular/material/checkbox'
 import { VerificationEmailModalService } from '../../../core/verification-email-modal/verification-email-modal.service'
 import { UserService } from 'src/app/core'
 import { WINDOW } from 'src/app/cdk/window'
 import { TogglzService } from '../../../core/togglz/togglz.service'
 import { getAriaLabel } from '../../../constants'
 import { RecordBiographyService } from 'src/app/core/record-biography/record-biography.service'
+import { ExpandedWorkFeaturedModalComponent } from 'src/app/record/components/work-featured/modals/expanded-work-featured-modal/expanded-work-featured-modal.component'
 
 @Component({
   selector: 'app-panel',
   templateUrl: './panel.component.html',
   styleUrls: ['./panel.component.scss', 'panel.component.scss-theme.scss'],
+  standalone: false,
 })
 export class PanelComponent implements OnInit {
   @Input() panelId: string
@@ -66,9 +68,11 @@ export class PanelComponent implements OnInit {
     | 'distinction'
     | 'membership'
     | 'service'
+    | 'editorial-service'
     | 'peer-review'
     | 'main'
     | 'works'
+    | 'featured-works'
     | 'activities'
     | 'funding'
     | 'research-resources'
@@ -87,6 +91,7 @@ export class PanelComponent implements OnInit {
   @Input() selectAll = false
   @Input() checkbox = false
   @Input() panelTitle: string
+  @Input() isPreferred: boolean
   _displayTheStack: boolean
   @Input()
   set displayTheStack(value: boolean) {
@@ -112,6 +117,12 @@ export class PanelComponent implements OnInit {
     return this._isPublicRecord
   }
 
+  get featuredWorksSection(): boolean {
+    return this.type === 'featured-works'
+  }
+
+  @Input() isFeatured: boolean = false
+
   @Input() isUserSource = false
   @Input() hasExternalIds: boolean
   @Input() userVersionPresent: boolean
@@ -120,6 +131,7 @@ export class PanelComponent implements OnInit {
   @Input() email = false
   @Input() names = false
   selected: boolean
+  featuredWorksTogglz: boolean = false
 
   tooltipLabelEdit = $localize`:@@shared.edit:Edit`
   tooltipLabelMakeCopy = $localize`:@@shared.makeCopy:Make a copy and edit`
@@ -127,6 +139,8 @@ export class PanelComponent implements OnInit {
   tooltipLabelYourOwnVersion = $localize`:@@shared.youCanOnlyEditYour:You can only edit your own version`
   tooltipLabelVisibilityError = $localize`:@@peerReview.dataInconsistencyv2:This group of items has mixed visibility settings. Please select a visibility to apply to all items in the group.
   `
+  tooltipExpandItem = $localize`:@@shared.expandItem:Expand item`
+  tooltipExpandFeaturedItem = $localize`:@@shared.expandFeaturedItem:Expand featured item`
   openOtherSources = $localize`:@@record.openOtherSources:Open other sources`
 
   constructor(
@@ -138,13 +152,24 @@ export class PanelComponent implements OnInit {
     private _researchResourcesService: RecordResearchResourceService,
     private _worksService: RecordWorksService,
     private _verificationEmailModalService: VerificationEmailModalService,
-    private _recordBiographyService: RecordBiographyService
+    private _recordBiographyService: RecordBiographyService,
+    private _togglzService: TogglzService
   ) {}
 
   ngOnInit(): void {
     if (!this.panelTitle) {
       this.panelTitle = ''
     }
+    this._togglzService
+      .getTogglz()
+      .pipe(
+        tap((togglz) => {
+          if (togglz.messages['FEATURED_WORKS_UI'] === 'true') {
+            this.featuredWorksTogglz = true
+          }
+        })
+      )
+      .subscribe()
   }
 
   isArrayAndIsNotEmpty(
@@ -217,6 +242,7 @@ export class PanelComponent implements OnInit {
       this.type === 'distinction' ||
       this.type === 'membership' ||
       this.type === 'service' ||
+      this.type === 'editorial-service' ||
       this.type === 'funding' ||
       this.type === 'works' ||
       this.type === 'research-resources' ||
@@ -237,6 +263,19 @@ export class PanelComponent implements OnInit {
     this.openStateChange.next(this.openState)
   }
 
+  expandItem() {
+    const modalComponent = this._dialog.open(
+      ExpandedWorkFeaturedModalComponent,
+      {
+        width: '850px',
+        maxWidth: '99%',
+        data: this.userRecord,
+      }
+    )
+    modalComponent.componentInstance.work = this.elements
+    modalComponent.componentInstance.userRecord = this.userRecord
+  }
+
   updateVisibility(visibility: VisibilityStrings) {
     switch (this.type) {
       case 'employment':
@@ -246,6 +285,7 @@ export class PanelComponent implements OnInit {
       case 'distinction':
       case 'membership':
       case 'service':
+      case 'editorial-service':
         this._affiliationService
           .updateVisibility(
             this.stackSiblings.reduce(
@@ -274,7 +314,8 @@ export class PanelComponent implements OnInit {
               (p, c) => p + (c.putCode as Value).value + `,`,
               ''
             ),
-            visibility
+            visibility,
+            this.stackSiblings.some((sibling) => sibling.featuredDisplayIndex)
           )
           .subscribe()
         break

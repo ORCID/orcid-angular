@@ -10,10 +10,7 @@ import {
 } from '@angular/core'
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms'
 import { ErrorStateMatcher } from '@angular/material/core'
-import {
-  MatLegacySelect as MatSelect,
-  MatLegacySelectChange as MatSelectChange,
-} from '@angular/material/legacy-select'
+import { MatSelect, MatSelectChange } from '@angular/material/select'
 import { WorkIdType, WorkRelationships } from 'src/app/types/works.endpoint'
 
 @Component({
@@ -23,6 +20,7 @@ import { WorkIdType, WorkRelationships } from 'src/app/types/works.endpoint'
     './work-external-identifiers-edit.component.scss',
     'work-external-identifiers-edit.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class WorkExternalIdentifiersEditComponent
   implements OnInit, AfterViewInit

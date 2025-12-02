@@ -1,4 +1,4 @@
-<h1 class="mat-headline">
+<h1 class="mat-headline-5">
   <ng-container i18n="@@inbox.notifications">Notifications</ng-container>
   <ng-container *ngIf="totalNotifications"
     >({{
@@ -16,7 +16,7 @@
         aria-label="select-all"
       ></mat-checkbox>
       <div
-        class="archive-label mat-body-1"
+        class="archive-label mat-subtitle-2"
         id="select-all"
         i18n="@@inbox.selectAll"
       >
@@ -95,7 +95,7 @@
 ></mat-progress-bar>
 
 <div
-  class="notifications-amount mat-body-1"
+  class="notifications-amount mat-subtitle-2"
   *ngIf="!isAnEmptyInbox() && notifications"
 >
   <app-showing-of

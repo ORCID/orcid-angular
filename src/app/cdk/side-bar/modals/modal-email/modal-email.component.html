@@ -138,25 +138,28 @@
                 "
               ></app-visibility-selector>
             </div>
-            <button
-              (click)="deleteEmail(email.putCode)"
-              mat-icon-button
-              class="delete-button"
+            <div
               [matTooltip]="
                 hasOneEmailAddress(email.putCode) ? deleteTooltip : ''
               "
-              [disabled]="hasOneEmailAddress(email.putCode)"
-              [attr.aria-label]="
-                ariaLabelDelete +
-                ' ' +
-                (emailsForm.value[email.putCode].email || '')
-              "
             >
-              <mat-icon
-                class="material-icons-outlined extra-large-material-icon"
-                >delete_outline</mat-icon
+              <button
+                (click)="deleteEmail(email.putCode)"
+                mat-icon-button
+                class="delete-button"
+                [disabled]="hasOneEmailAddress(email.putCode)"
+                [attr.aria-label]="
+                  ariaLabelDelete +
+                  ' ' +
+                  (emailsForm.value[email.putCode].email || '')
+                "
               >
-            </button>
+                <mat-icon
+                  class="material-icons-outlined extra-large-material-icon"
+                  >delete_outline</mat-icon
+                >
+              </button>
+            </div>
           </div>
           <div
             class="row actions-wrapper"
@@ -167,13 +170,15 @@
               *ngIf="showNonVerifiedData(email.putCode)"
             >
               <ng-container *ngIf="email.sourceName || email.source">
-                <ng-container i18n="@@shared.source">Source:</ng-container>
+                <ng-container i18n="@@shared.sourceColon">Source:</ng-container>
                 <ng-container>{{
                   email.sourceName || email.source
                 }}</ng-container
                 >,
               </ng-container>
-              <ng-container>Unverfied</ng-container>
+              <ng-container i18n="@@side-bar.unverified"
+                >Unverified</ng-container
+              >
               <ng-container>-</ng-container>
               <ng-container
                 class="disabled underline"

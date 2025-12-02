@@ -1,8 +1,5 @@
 import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core'
-import {
-  MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA,
-  MatLegacyDialogRef as MatDialogRef,
-} from '@angular/material/legacy-dialog'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { Observable } from 'rxjs'
 import { ModalComponent } from 'src/app/cdk/modal/modal/modal.component'
 import { PlatformInfo } from 'src/app/cdk/platform-info'
@@ -16,6 +13,7 @@ import { WorkFormComponent } from '../work-form/work-form/work-form.component'
   selector: 'app-work-modal',
   templateUrl: './work-modal.component.html',
   styleUrls: ['./work-modal.component.scss'],
+  standalone: false,
 })
 export class WorkModalComponent implements OnInit {
   closeLabel = $localize`:@@shared.closeActivityAriaLabel:Close Works`

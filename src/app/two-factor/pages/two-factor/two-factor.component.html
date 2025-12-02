@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row space-around">
       <div class="col l6 m6 s4">
-        <mat-card class="orcid-wizard">
+        <mat-card appearance="outlined" class="orcid-wizard">
           <mat-progress-bar
             role="heading"
             aria-level="2"
@@ -29,7 +29,10 @@
                 [mdePopoverOverlapTrigger]="false"
                 [mdePopoverCloseOnClick]="true"
               >
-                <mat-card class="mat-elevation-z3 orcid-popover">
+                <mat-card
+                  appearance="outlined"
+                  class="mat-elevation-z3 orcid-popover"
+                >
                   <ng-container i18n="@@twoFactor.enabled"
                     >Two-factor authentication is currently enabled for your
                     ORCID account, so an additional code is required even when

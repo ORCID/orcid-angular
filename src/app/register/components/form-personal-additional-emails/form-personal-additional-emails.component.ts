@@ -19,14 +19,21 @@ import { ErrorStateMatcherForFormLevelErrors } from '../../ErrorStateMatcherForF
 @Component({
   selector: 'app-form-personal-additional-emails',
   templateUrl: './form-personal-additional-emails.component.html',
-  styleUrls: ['./form-personal-additional-emails.component.scss'],
+  styleUrls: [
+    './form-personal-additional-emails.component.scss',
+    '../register.style.scss',
+    '../register.scss-theme.scss',
+  ],
+  standalone: false,
 })
 export class FormPersonalAdditionalEmailsComponent implements AfterViewInit {
   labelInfoAboutEmails = $localize`:@@register.ariaLabelInfoEmails:info about emails`
   labelDeleteEmail = $localize`:@@register.ariaLabelDeleteEmail:delete email`
   labelClose = $localize`:@@register.ariaLabelClose:close`
+  labelAddAnAddionalEmail = $localize`:@@register.addAnAdditionalEmail:Add an additional email`
   @ViewChildren('emailInput') inputs: QueryList<ElementRef>
   @Input() additionalEmails: UntypedFormGroup
+  @Input() nextButtonWasClicked: boolean
   additionalEmailsPopoverTrigger
   additionalEmailsCount = 1
 
@@ -51,32 +58,32 @@ export class FormPersonalAdditionalEmailsComponent implements AfterViewInit {
     )
   }
 
-  deleteEmailInput(id: string): void {
-    this.additionalEmails.removeControl(id)
-    this._changeDetectorRef.detectChanges()
+  // deleteEmailInput(id: string): void {
+  //   this.additionalEmails.removeControl(id)
+  //   this._changeDetectorRef.detectChanges()
 
-    const input = this.inputs.filter(
-      (x) => this.parseInt(x.nativeElement.id) > this.parseInt(id)
-    )?.[0]
-    if (input) {
-      input.nativeElement.focus()
-    } else if (this.inputs.last) {
-      this.inputs.last.nativeElement.focus()
-    }
-  }
+  //   const input = this.inputs.filter(
+  //     (x) => this.parseInt(x.nativeElement.id) > this.parseInt(id)
+  //   )?.[0]
+  //   if (input) {
+  //     input.nativeElement.focus()
+  //   } else if (this.inputs.last) {
+  //     this.inputs.last.nativeElement.focus()
+  //   }
+  // }
 
-  addAdditionalEmail(): void {
-    const controlName = ++this.additionalEmailsCount
-    this.additionalEmails.addControl(
-      this.zeroPad(controlName, 2),
-      new UntypedFormControl('', {
-        validators: [OrcidValidators.email],
-      })
-    )
-    this._changeDetectorRef.detectChanges()
-    const input = this.inputs.last.nativeElement as HTMLInputElement
-    input.focus()
-  }
+  // addAdditionalEmail(): void {
+  //   const controlName = ++this.additionalEmailsCount
+  //   this.additionalEmails.addControl(
+  //     this.zeroPad(controlName, 2),
+  //     new UntypedFormControl('', {
+  //       validators: [OrcidValidators.email],
+  //     })
+  //   )
+  //   this._changeDetectorRef.detectChanges()
+  //   const input = this.inputs.last.nativeElement as HTMLInputElement
+  //   input.focus()
+  // }
 
   parseInt(number: string) {
     return parseInt(number, 10)
@@ -88,5 +95,8 @@ export class FormPersonalAdditionalEmailsComponent implements AfterViewInit {
 
   public ngAfterViewInit() {
     this._ref.detectChanges()
+  }
+  get additionalEmailsTouched() {
+    return this.additionalEmails.touched
   }
 }

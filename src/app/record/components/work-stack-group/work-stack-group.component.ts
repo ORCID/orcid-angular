@@ -10,15 +10,9 @@ import {
   ViewChildren,
 } from '@angular/core'
 import { UntypedFormGroup } from '@angular/forms'
-import {
-  MatLegacyCheckbox as MatCheckbox,
-  MatLegacyCheckboxChange as MatCheckboxChange,
-} from '@angular/material/legacy-checkbox'
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
-import {
-  MatLegacyPaginatorIntl as MatPaginatorIntl,
-  LegacyPageEvent as PageEvent,
-} from '@angular/material/legacy-paginator'
+import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox'
+import { MatDialog } from '@angular/material/dialog'
+import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator'
 import { isEmpty } from 'lodash'
 import { Observable, Subject } from 'rxjs'
 import { first, take } from 'rxjs/operators'
@@ -64,6 +58,7 @@ import { TogglzService } from '../../../core/togglz/togglz.service'
     './work-stack-group.component.scss',
     './work-stack-group.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class WorkStackGroupComponent implements OnInit {
   paginatorLabel
@@ -133,6 +128,7 @@ export class WorkStackGroupComponent implements OnInit {
   paginationPageSize: number
   platform: PlatformInfo
   selectedWorks: string[] = []
+  selectedWorksFull: Work[] = []
   selectAll: false
   sortTypes: SortOrderType[] = ['title', 'date', 'type', 'source']
 
@@ -222,6 +218,7 @@ export class WorkStackGroupComponent implements OnInit {
   }
 
   delete() {
+    this.selectedWorksFull = this.filteredWorks()
     this.openModal(ModalDeleteItemsComponent, this.selectedWorks)
   }
 
@@ -265,6 +262,7 @@ export class WorkStackGroupComponent implements OnInit {
         modalComponent.componentInstance.type = 'works'
         modalComponent.componentInstance.selectedAll = selectedAll
         modalComponent.componentInstance.totalWorks = this.workGroup.totalGroups
+        modalComponent.componentInstance.works = this.selectedWorksFull
         modalComponent.componentInstance.workGroups = this.workGroup.groups
       })
   }

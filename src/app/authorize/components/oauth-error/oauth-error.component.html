@@ -1,4 +1,4 @@
-<div class="oauth-error">
+<div class="oauth-error" *ngIf="!TOGGLZ_OAUTH_AUTHORIZATION">
   <img
     class="logo"
     src="./assets/vectors/orcid.logo.svg"
@@ -130,8 +130,30 @@
     </div>
   </mat-card-content>
 
-  <p class="mat-body-1 mat-caption">
+  <p class="mat-subtitle-2 mat-caption">
     {{ error }} /
     {{ errorDescription }}
+  </p>
+</div>
+
+<div class="oauth-error" *ngIf="TOGGLZ_OAUTH_AUTHORIZATION">
+  <img
+    class="logo"
+    src="./assets/vectors/orcid.logo.svg"
+    alt="orcid logo"
+    i18n="@@authorize.authorizeAccess"
+  />
+
+  <mat-card-content>
+    <div id="error-message">
+      <div i18n="@@authorize.error">
+        You have reached this page due to an error with the application's
+        integration. Please report this error to the organization that is
+        requesting your ORCID iD.
+      </div>
+    </div>
+  </mat-card-content>
+  <p class="mat-subtitle-2 mat-caption">
+    {{ error }}: {{ errorCode }} - {{ errorDescription }}
   </p>
 </div>

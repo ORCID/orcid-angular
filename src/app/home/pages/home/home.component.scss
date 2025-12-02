@@ -25,7 +25,7 @@
     margin-top: 30px;
   }
 
-  .mat-body-2,
+  .mat-subtitle-2,
   .hero-title {
     div {
       max-width: 1024px;
@@ -33,7 +33,7 @@
     text-align: center;
   }
 
-  .mat-body-2 {
+  .mat-subtitle-2 {
     margin-top: 8px;
   }
 
@@ -67,18 +67,18 @@
     }
   }
 
-  .mat-body-1 {
+  .mat-subtitle-2 {
     height: 100%;
     text-align: center;
     max-width: 344px;
     display: block;
   }
-  .mat-headline {
+  .mat-headline-5 {
     text-align: center;
   }
 }
 .organization-section {
-  .mat-display-1 {
+  .mat-headline-4 {
     margin-bottom: 20px;
   }
   background-image: url('../../../../assets/vectors/orcid.logo.background.svg');
@@ -95,7 +95,7 @@
     height: 100%;
     .row {
       height: 100%;
-      .mat-headline {
+      .mat-headline-5 {
         margin-bottom: 24px;
       }
       .organization-img {
@@ -129,7 +129,7 @@
 
     .register-section {
       height: auto;
-      .mat-body-1 {
+      .mat-subtitle-2 {
         height: auto;
       }
       > .container > .row > .col {
@@ -150,7 +150,7 @@
       .container {
       }
 
-      .mat-display-1 {
+      .mat-headline-4 {
         margin-top: 40px;
         margin-bottom: 7px;
       }
@@ -171,7 +171,7 @@
       img {
         min-height: 350px;
       }
-      .mat-display-1 {
+      .mat-headline-4 {
         margin-top: 40px;
         margin-bottom: 7px;
       }

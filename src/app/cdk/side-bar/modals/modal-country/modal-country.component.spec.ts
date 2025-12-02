@@ -7,12 +7,12 @@ import { WINDOW_PROVIDERS } from '../../../window'
 import { PlatformInfoService } from '../../../platform-info'
 import { ErrorHandlerService } from '../../../../core/error-handler/error-handler.service'
 import { SnackbarService } from '../../../snackbar/snackbar.service'
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
+import { MatSnackBar } from '@angular/material/snack-bar'
 import {
-  MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA,
-  MatLegacyDialog as MatDialog,
-  MatLegacyDialogRef as MatDialogRef,
-} from '@angular/material/legacy-dialog'
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { RecordCountriesService } from '../../../../core/record-countries/record-countries.service'
 import { HarnessLoader, parallel } from '@angular/cdk/testing'
@@ -21,18 +21,18 @@ import { ModalModule } from '../../../modal/modal.module'
 import { MatIconModule } from '@angular/material/icon'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { By } from '@angular/platform-browser'
-import { MatLegacySelectModule as MatSelectModule } from '@angular/material/legacy-select'
+import { MatSelectModule } from '@angular/material/select'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 import { Address, CountriesEndpoint } from '../../../../types'
 import { SideBarModule } from '../../side-bar.module'
-import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button'
+import { MatButtonModule } from '@angular/material/button'
 import { Observable, of } from 'rxjs'
 import { ChangeDetectorRef } from '@angular/core'
-import { MatLegacySelectHarness as MatSelectHarness } from '@angular/material/legacy-select/testing'
-import { MatLegacyInputHarness as MatInputHarness } from '@angular/material/legacy-input/testing'
 import { VisibilitySelectorModule } from 'src/app/cdk/visibility-selector/visibility-selector.module'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { MatSelectHarness } from '@angular/material/select/testing'
+import { MatInputHarness } from '@angular/material/input/testing'
 
 describe('ModalCountryComponent', () => {
   let component: ModalCountryComponent

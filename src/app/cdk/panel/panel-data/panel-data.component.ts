@@ -10,12 +10,17 @@ import { Subject } from 'rxjs'
     './panel-data.component.scss',
     './panel-data.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class PanelDataComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   @HostBinding('class.orc-font-body-small') fontSmall = true
   @HostBinding('class.border-bottom') borderBottomClass = false
+  @HostBinding('class.featured') featuredClass = false
+  @Input() set featured(featured: boolean) {
+    this.featuredClass = featured
+  }
   @Input() set borderBottom(borderBottom: boolean) {
     this.borderBottomClass = borderBottom
   }

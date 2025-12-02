@@ -8,7 +8,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 import { WINDOW_PROVIDERS } from '../window'
 import { SnackbarService } from '../snackbar/snackbar.service'
-import { MatLegacySnackBar } from '@angular/material/legacy-snack-bar'
+import { MatSnackBar } from '@angular/material/snack-bar'
 
 describe('InterstitialsService', () => {
   let service: InterstitialsService
@@ -19,7 +19,7 @@ describe('InterstitialsService', () => {
       providers: [
         WINDOW_PROVIDERS,
         SnackbarService,
-        MatLegacySnackBar,
+        MatSnackBar,
         {
           provide: UserService,
           useValue: {},

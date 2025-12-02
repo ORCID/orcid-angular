@@ -2,60 +2,47 @@
   // This SCSS rules are part of a temporal fix for a MatFormField issue.
   // This is intended to be remove once Angular release the fix
   // More info on: src\app\search\components\advance-search\advance-search.component.ts
-  .mat-form-field-appearance-outline .mat-form-field-outline-start {
-    border-right-style: none;
-    border-left-style: solid;
-    border-radius: 5px 0 0 5px;
-  }
-  .mat-form-field {
+
+  .mat-mdc-form-field {
     text-align: left;
-  }
-  .mat-form-field-appearance-outline .mat-form-field-outline-end {
-    border-left-style: none;
-    border-right-style: solid;
-    border-radius: 0 5px 5px 0;
   }
 }
 
-.mat-form-field-infix {
-  border-top: 0.8em solid transparent;
+.mat-form-field-appearance-outline {
+  --mat-form-field-container-text-size: 16px;
 }
 
 .mat-form-field-appearance-outline.two-line-hint {
-  .mat-form-field-wrapper {
-    margin-bottom: 1.6em;
-  }
+  margin-bottom: 1.6em;
 }
 
 .mat-form-field-appearance-outline.three-line-hint {
-  .mat-form-field-wrapper {
-    margin-bottom: 2.4em;
-  }
+  margin-bottom: 2.4em;
 }
 
 .no-hint {
-  .mat-form-field-wrapper {
-    padding-bottom: 0 !important;
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+  }
+  .mat-mdc-form-field-subscript-wrapper.mat-mdc-form-field-bottom-align {
+    display: none;
   }
 }
 
-.mat-form-field-appearance-outline.mat-form-field-min {
-  .mat-form-field-wrapper {
-    .mat-form-field-outline {
-      top: 0px;
-    }
-    .mat-form-field-prefix {
-      top: 0.35em;
+.mat-mdc-form-field-infix {
+  --mat-form-field-container-height: 20px;
+}
 
-      mat-icon {
-        margin-inline-end: 8px;
-      }
-    }
-    .mat-form-field-flex {
-      .mat-form-field-infix {
-        border-top: 0px;
-        padding: 10px 0 10px 0;
-      }
-    }
-  }
+.mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.mat-form-field-appearance-outline .mat-select-arrow-wrapper {
+  transform: none !important;
+}
+
+.mat-form-field-appearance-outline .mat-mdc-form-field-hint-wrapper,
+.mat-form-field-appearance-outline .mat-mdc-form-field-error-wrapper {
+  padding-left: 0;
 }

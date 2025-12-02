@@ -10,8 +10,17 @@
         class="side-bar"
         i18n="@@shared.organization"
         (click)="toOrganization()"
+        *ngIf="type !== 'editorial-service'"
       >
         Organization
+      </a>
+      <a
+        class="side-bar"
+        i18n="@@shared.journal"
+        (click)="toOrganization()"
+        *ngIf="type === 'editorial-service'"
+      >
+        Journal
       </a>
     </ng-container>
     <ng-container id="side-bar-url-1">
@@ -71,6 +80,14 @@
       >
         Service details
       </a>
+      <a
+        class="side-bar"
+        i18n="@@shared.serviceDetails"
+        (click)="toAffiliationDetails()"
+        *ngIf="type === 'editorial-service'"
+      >
+        EditorialService details
+      </a>
     </ng-container>
     <ng-container id="side-bar-url-2">
       <a class="side-bar" i18n="@@shared.visibility" (click)="toVisibility()">
@@ -118,7 +135,18 @@
               'orc-font-body-large': platform.columns12
             }"
           >
-            <strong i18n="@@shared.organization"> Organization </strong>
+            <strong
+              i18n="@@shared.organization"
+              *ngIf="type !== 'editorial-service'"
+            >
+              Organization
+            </strong>
+            <strong
+              i18n="@@shared.journal"
+              *ngIf="type === 'editorial-service'"
+            >
+              Journal
+            </strong>
             <span *ngIf="!platform.columns12" class="required">*</span>
           </h2>
           <p
@@ -143,12 +171,24 @@
             error: organizationIsInvalidAndTouched
           }"
         >
-          <strong i18n="@@shared.organization" id="organizationLabel"
-            >Organization</strong
+          <strong
+            i18n="@@shared.organization"
+            id="organizationLabel"
+            *ngIf="type !== 'editorial-service'"
+          >
+            Organization</strong
+          >
+          <strong
+            i18n="@@shared.journal"
+            id="journalLabel"
+            *ngIf="type === 'editorial-service'"
+          >
+            Journal</strong
           >
           <span class="required">*</span>
         </label>
       </div>
+
       <div class="input-container" id="cy-org-dd-div">
         <mat-form-field
           appearance="outline"
@@ -157,6 +197,7 @@
           [ngClass]="{
             'two-line-hint': selectedOrganizationFromDatabase?.value.length > 50
           }"
+          *ngIf="type !== 'editorial-service'"
         >
           <input
             aria-labelledby="organizationLabel"
@@ -229,8 +270,41 @@
             Must be less than 1000 characters
           </mat-error>
         </mat-form-field>
+
+        <mat-form-field
+          appearance="outline"
+          class="mat-form-field-min"
+          id="cy-org-dd-mat-form"
+          [ngClass]="{
+            'two-line-hint': selectedOrganizationFromDatabase?.value.length > 50
+          }"
+          *ngIf="type === 'editorial-service'"
+        >
+          <input
+            aria-labelledby="organizationLabel"
+            id="organization-input"
+            matInput
+            formControlName="organization"
+            [attr.aria-invalid]="organizationIsInvalidAndTouched"
+          />
+          <mat-error
+            role="alert"
+            aria-describedby="organization-label"
+            class="mat-caption"
+            *ngIf="organizationIsInvalidAndTouched"
+            i18n="@@shared.pleaseEnterAnOrganization"
+          >
+            Please enter an organization
+          </mat-error>
+          <mat-error
+            *ngIf="affiliationForm.get('organization').errors?.maxlength"
+            i18n="@@shared.maxLength.less_than_one_thousand"
+          >
+            Must be less than 1000 characters
+          </mat-error>
+        </mat-form-field>
       </div>
-      <div class="row">
+      <div class="row" *ngIf="type !== 'editorial-service'">
         <label
           for="city-input"
           id="city-label"
@@ -243,7 +317,7 @@
           <span class="required">*</span>
         </label>
       </div>
-      <div class="input-container">
+      <div class="input-container" *ngIf="type !== 'editorial-service'">
         <mat-form-field appearance="outline" class="mat-form-field-min">
           <input
             id="city-input"
@@ -269,12 +343,12 @@
           </mat-error>
         </mat-form-field>
       </div>
-      <div class="row">
+      <div class="row" *ngIf="type !== 'editorial-service'">
         <label for="region-input" class="mat-caption">
           <strong i18n="@@shared.region">Region, State or County</strong>
         </label>
       </div>
-      <div class="input-container">
+      <div class="input-container" *ngIf="type !== 'editorial-service'">
         <mat-form-field appearance="outline" class="mat-form-field-min">
           <input
             id="region-input"
@@ -290,7 +364,7 @@
           </mat-error>
         </mat-form-field>
       </div>
-      <div class="row">
+      <div class="row" *ngIf="type !== 'editorial-service'">
         <label
           for="country-input"
           id="country-label"
@@ -305,7 +379,7 @@
           <span class="required">*</span>
         </label>
       </div>
-      <div class="input-container">
+      <div class="input-container" *ngIf="type !== 'editorial-service'">
         <mat-form-field
           appearance="outline"
           class="mat-form-field-min"
@@ -332,6 +406,77 @@
             *ngIf="countryIsInvalidAndTouched"
           >
             Please enter a country or location
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="row" *ngIf="type === 'editorial-service'">
+        <label
+          for="issn-input"
+          class="mat-caption"
+          [ngClass]="{ error: affiliationForm.hasError('pattern', 'issn') }"
+        >
+          <strong i18n="@@shared.issn">ISSN</strong>
+          <span class="required">*</span>
+        </label>
+      </div>
+      <div
+        class="input-container bottom-padding"
+        *ngIf="type === 'editorial-service'"
+      >
+        <mat-form-field appearance="outline" class="mat-form-field-min">
+          <input
+            id="issn-input"
+            matInput
+            formControlName="issn"
+            [attr.aria-label]="(type | affiliationTypeLabel) + ' ' + issnLabel"
+          />
+          <mat-hint class="mat-caption" i18n="@@shared.issnDescription">
+            ISSN identifier for the journal. Use the 1234-5678 format.
+          </mat-hint>
+          <mat-error
+            class="mat-caption"
+            *ngIf="affiliationForm.get('issn').hasError('pattern')"
+            i18n="@@shared.invalidIssn"
+          >
+            Invalid ISSN
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="row" *ngIf="type === 'editorial-service'">
+        <label
+          for="url-input"
+          class="mat-caption"
+          [ngClass]="{ error: affiliationForm.hasError('pattern', 'link') }"
+        >
+          <strong i18n="@@shared.url">Homepage URL</strong>
+        </label>
+      </div>
+      <div
+        class="input-container mat-hint bottom-padding"
+        *ngIf="type === 'editorial-service'"
+      >
+        <mat-form-field appearance="outline" class="mat-form-field-min">
+          <input
+            id="url-input"
+            matInput
+            formControlName="link"
+            [attr.aria-label]="(type | affiliationTypeLabel) + ' ' + linkLabel"
+          />
+          <mat-hint class="mat-caption" i18n="@@shared.urlDescription">
+            Use the full URL format e.g. http://www.website.com/page.html
+          </mat-hint>
+          <mat-error
+            class="mat-caption"
+            *ngIf="affiliationForm.get('link').hasError('pattern')"
+            i18n="@@shared.invalidUrl"
+          >
+            Invalid URL
+          </mat-error>
+          <mat-error
+            *ngIf="affiliationForm.get('link').errors?.maxlength"
+            i18n="@@shared.maxLength.less_than_two_thousand"
+          >
+            Must be less than 2000 characters
           </mat-error>
         </mat-form-field>
       </div>
@@ -391,19 +536,25 @@
             <strong i18n="@@shared.serviceDetails" *ngIf="type === 'service'">
               Service details
             </strong>
+            <strong
+              i18n="@@shared.editorialServiceDetails"
+              *ngIf="type === 'editorial-service'"
+            >
+              Editorial Service details
+            </strong>
             <span *ngIf="!platform.columns12" class="required">*</span>
           </h2>
         </div>
       </div>
       <hr />
-      <div class="row">
+      <div class="row" *ngIf="type !== 'editorial-service'">
         <label for="department-input" class="mat-caption">
           <strong i18n="@@shared.department" id="deparmentLabel"
             >Department</strong
           >
         </label>
       </div>
-      <div class="input-container">
+      <div class="input-container" *ngIf="type !== 'editorial-service'">
         <mat-form-field appearance="outline" class="mat-form-field-min">
           <input
             id="department-input"
@@ -430,7 +581,8 @@
               type === 'employment' ||
               type === 'qualification' ||
               type === 'invited-position' ||
-              type === 'service'
+              type === 'service' ||
+              type === 'editorial-service'
             "
           >
             Role/title
@@ -479,7 +631,7 @@
             <mat-form-field
               id="start-date-year-input"
               appearance="outline"
-              class="mat-form-field-min"
+              class="mat-form-field-min no-hint"
             >
               <mat-select
                 aria-label="{{ dateLabel + ' ' + ngOrcidYear }}"
@@ -498,7 +650,7 @@
             <mat-form-field
               id="start-date-month-input"
               appearance="outline"
-              class="mat-form-field-min"
+              class="mat-form-field-min no-hint"
             >
               <mat-select
                 aria-label="{{ dateLabel + ' ' + ngOrcidMonth }}"
@@ -517,7 +669,7 @@
             <mat-form-field
               id="start-date-day-input"
               appearance="outline"
-              class="mat-form-field-min"
+              class="mat-form-field-min no-hint"
             >
               <mat-select
                 aria-label="{{ dateLabel + ' ' + ngOrcidDay }}"
@@ -562,7 +714,7 @@
             <mat-form-field
               id="end-date-year-input"
               appearance="outline"
-              class="mat-form-field-min"
+              class="mat-form-field-min no-hint"
             >
               <mat-select
                 aria-label="{{ dateLabel + ' ' + ngOrcidYear }}"
@@ -581,7 +733,7 @@
             <mat-form-field
               id="end-date-month-input"
               appearance="outline"
-              class="mat-form-field-min"
+              class="mat-form-field-min no-hint"
             >
               <mat-select
                 aria-label="{{ dateLabel + ' ' + ngOrcidMonth }}"
@@ -600,7 +752,7 @@
             <mat-form-field
               id="end-date-day-input"
               appearance="outline"
-              class="mat-form-field-min"
+              class="mat-form-field-min no-hint"
             >
               <mat-select
                 aria-label="{{ dateLabel + ' ' + ngOrcidDay }}"
@@ -634,7 +786,7 @@
           </div>
         </div>
       </ng-container>
-      <div class="row">
+      <div class="row" *ngIf="type !== 'editorial-service'">
         <label
           for="url-input"
           class="mat-caption"
@@ -643,7 +795,10 @@
           <strong i18n="@@shared.link">Link</strong>
         </label>
       </div>
-      <div class="input-container">
+      <div
+        class="input-container mat-hint"
+        *ngIf="type !== 'editorial-service'"
+      >
         <mat-form-field appearance="outline" class="mat-form-field-min">
           <input
             id="url-input"
@@ -678,7 +833,9 @@
           class="title visibility"
           [ngClass]="{
             'orc-font-body': !platform.columns12,
-            'orc-font-body-large': platform.columns12
+            'orc-font-body-large': platform.columns12,
+            visibility: type !== 'editorial-service',
+            'visibility-editorial-service': type === 'editorial-service'
           }"
         >
           <p>

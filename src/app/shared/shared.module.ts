@@ -2,14 +2,13 @@ import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 import { MatDivider, MatDividerModule } from '@angular/material/divider'
 import { MatExpansionModule } from '@angular/material/expansion'
-import { MatLegacyPaginatorModule as MatPaginatorModule } from '@angular/material/legacy-paginator'
+import { MatPaginatorModule } from '@angular/material/paginator'
 import {
-  MatLegacyProgressSpinner as MatProgressSpinner,
-  MatLegacyProgressSpinnerModule as MatProgressSpinnerModule,
-} from '@angular/material/legacy-progress-spinner'
-import { MatLegacySnackBarModule as MatSnackBarModule } from '@angular/material/legacy-snack-bar'
-import { MatLegacyTooltipModule as MatTooltipModule } from '@angular/material/legacy-tooltip'
-
+  MatProgressSpinner,
+  MatProgressSpinnerModule,
+} from '@angular/material/progress-spinner'
+import { MatSnackBarModule } from '@angular/material/snack-bar'
+import { MatTooltipModule } from '@angular/material/tooltip'
 import { CopyOnClickComponent } from './components/copy-on-click/copy-on-click.component'
 import { OfflineMessageComponent } from './components/offline-message/offline-message.component'
 import { ShowingOfComponent } from './components/showing-of/showing-of.component'
@@ -51,6 +50,7 @@ import { AffiliationTypePipe } from './pipes/affiliation-type/affiliation-type.p
 import { ScopePathTypePipe } from './pipes/scope-path-type/scope-path-type.pipe'
 import { AppPanelsSortByAriaLabelPipe } from './pipes/app-panels-sort-by-aria-label/app-panels-sort-by-aria-label.pipe'
 import { VerificationDateCutoffPipe } from './pipes/verification-date-cutoff-pipe/verification-date-cutoff.pipe'
+import { SearchTermHighlightPipe } from './pipes/search-term-highlight/search-term-highlight.pipe'
 @NgModule({
   imports: [
     CommonModule,
@@ -101,6 +101,7 @@ import { VerificationDateCutoffPipe } from './pipes/verification-date-cutoff-pip
     AffiliationTypePipe,
     ScopePathTypePipe,
     AppPanelsSortByAriaLabelPipe,
+    SearchTermHighlightPipe,
   ],
   exports: [
     CommonModule,
@@ -149,6 +150,7 @@ import { VerificationDateCutoffPipe } from './pipes/verification-date-cutoff-pip
     AffiliationTypePipe,
     ScopePathTypePipe,
     AppPanelsSortByAriaLabelPipe,
+    SearchTermHighlightPipe,
   ],
   providers: [], // Should not provide anything
 })

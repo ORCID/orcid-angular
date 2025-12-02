@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { RecordImportWizard } from '../../../../../types/record-peer-review-import.endpoint'
-import { MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog'
+import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import { takeUntil } from 'rxjs/operators'
 import { RecordFundingsService } from '../../../../../core/record-fundings/record-fundings.service'
@@ -10,6 +10,7 @@ import { Subject } from 'rxjs'
   selector: 'app-modal-funding-search-link',
   templateUrl: './modal-funding-search-link.component.html',
   styleUrls: ['./modal-funding-search-link.component.scss'],
+  standalone: false,
 })
 export class ModalFundingSearchLinkComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

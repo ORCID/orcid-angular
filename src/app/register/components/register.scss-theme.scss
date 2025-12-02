@@ -1,0 +1,108 @@
+@use '@angular/material' as mat;
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+@mixin theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  h2 {
+    font-weight: normal;
+  }
+
+  .step-actions {
+    border-color: mat.m2-get-color-from-palette(
+      $background,
+      ui-background-light
+    );
+    .mat-mdc-raised-button.mat-primary {
+      background-color: mat.m2-get-color-from-palette($primary, 700);
+    }
+    a {
+      color: mat.m2-get-color-from-palette($primary, 700);
+    }
+  }
+
+  a > mat-icon {
+    color: mat.m2-get-color-from-palette($primary, 200) !important;
+  }
+
+  ::ng-deep .valid {
+    color: mat.m2-get-color-from-palette($accent, 900);
+  }
+
+  .error {
+    color: map-get($foreground, 'state-warning-dark');
+  }
+
+  .text-light {
+    color: map-get($foreground, 'text-dark-mid');
+  }
+
+  .info {
+    background-color: mat.m2-get-color-from-palette(
+      $background,
+      state-notice-lightest
+    );
+    border-color: mat.m2-get-color-from-palette(
+      $foreground,
+      'state-notice-dark'
+    ) !important;
+
+    mat-icon {
+      color: mat.m2-get-color-from-palette(
+        $foreground,
+        'state-notice-dark'
+      ) !important;
+    }
+    a {
+      color: mat.m2-get-color-from-palette($primary, 700);
+    }
+  }
+
+  .announce {
+    background-color: mat.m2-get-color-from-palette(
+      $background,
+      state-info-lightest
+    );
+    border-color: mat.m2-get-color-from-palette(
+      $foreground,
+      'state-info-dark'
+    ) !important;
+
+    mat-icon {
+      color: mat.m2-get-color-from-palette(
+        $foreground,
+        'state-info-dark'
+      ) !important;
+    }
+  }
+
+  ::ng-deep {
+    .valid-password-input {
+      mat-icon {
+        color: map-get($foreground, 'brand-primary-dark');
+      }
+      .mat-mdc-text-field-wrapper {
+        color: map-get($foreground, 'brand-primary-dark');
+        background-color: mat.m2-get-color-from-palette(
+          $background,
+          brand-primary-lightest
+        );
+      }
+    }
+
+    .disable-error {
+      .mat-mdc-text-field-wrapper {
+        color: rgba(0, 0, 0, 0.12) !important;
+      }
+      .mat-mdc-input-element {
+        color: $orcid-dark-primary-text !important;
+      }
+    }
+  }
+}
+
+@include theme($orcid-app-theme);

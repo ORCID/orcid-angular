@@ -8,7 +8,9 @@ import { Router } from '@angular/router'
 import { ApplicationRoutes } from 'src/app/constants'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { InboxService } from '../../core/inbox/inbox.service'
-import { first } from 'rxjs/operators'
+import { filter, first } from 'rxjs/operators'
+import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
+import { JourneyType } from 'src/app/rum/journeys/types'
 
 @Component({
   selector: 'app-user-menu',
@@ -17,6 +19,8 @@ import { first } from 'rxjs/operators'
     './user-menu.component.scss-theme.scss',
     './user-menu.component.scss',
   ],
+  preserveWhitespaces: true,
+  standalone: false,
 })
 export class UserMenuComponent implements OnInit {
   state = false
@@ -25,8 +29,13 @@ export class UserMenuComponent implements OnInit {
   platform: PlatformInfo
   labelSigninRegister = $localize`:@@layout.ariaLabelSigninRegister:Sign in to ORCID or register for your ORCID iD`
   labelUserMenu = $localize`:@@layout.ariaLabelUserMenu:User menu`
+  notificationTooltipActive = $localize`:@@layout.notificationTooltip:You have unread notifications`
+  notificationTooltip = $localize`:@@layout.notificationTooltipInactive:Notifications inbox`
+  notificationi18n = $localize`:@@layout.notifications:Open notification inbox`
+  notificationi18nActive = $localize`:@@layout.notificationsActive:You have unread notifications. Open notification inbox`
   isAccountDelegate: boolean
   inboxUnread = 0
+  userJourney!: 'orcid_notifications'
 
   constructor(
     private _router: Router,
@@ -34,7 +43,8 @@ export class UserMenuComponent implements OnInit {
     @Inject(WINDOW) private window: Window,
     _platform: PlatformInfoService,
     private _inboxService: InboxService,
-    private _togglz: TogglzService
+    private _togglz: TogglzService,
+    private observabilityEventService: RumJourneyEventService
   ) {
     _userInfo.getUserSession().subscribe((data) => {
       if (data.loggedIn) {
@@ -55,16 +65,24 @@ export class UserMenuComponent implements OnInit {
   ngOnInit() {
     this._inboxService
       .retrieveUnreadCount()
-      .pipe(first())
-      .subscribe((inboxUnread) => (this.inboxUnread = inboxUnread))
+      .pipe(filter((inboxUnread) => inboxUnread !== null))
+      .subscribe((inboxUnread) => {
+        this.userJourney = 'orcid_notifications'
+        this.observabilityEventService.startJourney(this.userJourney, {
+          inboxUnread,
+          notificationsEnabled: inboxUnread > 0,
+        })
+        this.inboxUnread = inboxUnread
+      })
   }
 
-  goto(url) {
+  goto(url, from?: string) {
     if (url === 'my-orcid') {
       this._router.navigate([ApplicationRoutes.myOrcid])
     } else if (url === 'signin') {
       this._router.navigate([ApplicationRoutes.signin])
     } else if (url === 'inbox') {
+      this.observabilityEventService.recordEvent(this.userJourney, from)
       this._router.navigate([ApplicationRoutes.inbox])
     } else if (url === 'account') {
       this._router.navigate([ApplicationRoutes.account])
@@ -86,4 +104,7 @@ export class UserMenuComponent implements OnInit {
       this.window.location.href = val
     }
   }
+}
+function isNotNull(value: unknown, index: number): value is unknown {
+  throw new Error('Function not implemented.')
 }

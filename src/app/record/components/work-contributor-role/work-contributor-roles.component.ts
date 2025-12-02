@@ -18,7 +18,7 @@ import { Contributor } from '../../../types'
 import { UserRecord } from '../../../types/record.local'
 import { unique } from '../../../shared/validators/unique/unique.validator'
 import { RecordWorksService } from '../../../core/record-works/record-works.service'
-import { MatLegacySelect as MatSelect } from '@angular/material/legacy-select'
+import { MatSelect } from '@angular/material/select'
 
 @Component({
   selector: 'app-work-contributor-roles',
@@ -27,6 +27,7 @@ import { MatLegacySelect as MatSelect } from '@angular/material/legacy-select'
   viewProviders: [
     { provide: ControlContainer, useExisting: FormGroupDirective },
   ],
+  standalone: false,
 })
 export class WorkContributorRolesComponent implements OnInit {
   deleteLabel = $localize`:@@shared.deleteActivityAriaLabel:Delete`

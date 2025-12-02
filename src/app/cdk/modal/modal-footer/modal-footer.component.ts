@@ -10,12 +10,13 @@ import { PlatformInfoService } from '../../platform-info'
     './modal-footer.component.scss',
     './modal-footer.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class ModalFooterComponent implements OnInit, OnDestroy {
   handset: boolean
   screenDirection: string
   constructor(private _platform: PlatformInfoService) {}
-  $destroy: Subject<boolean> = new Subject<boolean>()
+  $destroy: Subject<void> = new Subject<void>()
 
   ngOnInit(): void {
     this._platform

@@ -34,7 +34,7 @@ import { MAX_LENGTH_LESS_THAN_ONE_HUNDRED } from '../../../constants'
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
 import { WINDOW } from '../../../cdk/window'
 import { TogglzService } from '../../../core/togglz/togglz.service'
-import { MatLegacySelect as MatSelect } from '@angular/material/legacy-select'
+import { MatSelect } from '@angular/material/select'
 
 @Component({
   selector: 'app-work-contributors',
@@ -46,6 +46,7 @@ import { MatLegacySelect as MatSelect } from '@angular/material/legacy-select'
   viewProviders: [
     { provide: ControlContainer, useExisting: FormGroupDirective },
   ],
+  standalone: false,
 })
 export class WorkContributorsComponent implements OnInit, OnDestroy {
   @ViewChildren('roleSelect', { read: ViewContainerRef })

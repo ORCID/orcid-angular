@@ -1,8 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core'
-import {
-  MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA,
-  MatLegacyDialogRef as MatDialogRef,
-} from '@angular/material/legacy-dialog'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { AccountTrustedIndividual } from 'src/app/types/account-trusted-individuals'
 
@@ -10,6 +7,7 @@ import { AccountTrustedIndividual } from 'src/app/types/account-trusted-individu
   selector: 'app-dialog-revoke-trusted-individuals',
   templateUrl: './dialog-revoke-trusted-individuals.component.html',
   styleUrls: ['./dialog-revoke-trusted-individuals.component.scss'],
+  standalone: false,
 })
 export class DialogRevokeTrustedIndividualsComponent implements OnInit {
   isMobile: boolean

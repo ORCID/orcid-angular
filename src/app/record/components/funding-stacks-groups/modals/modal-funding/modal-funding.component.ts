@@ -1,8 +1,5 @@
 import { Component, Inject, OnDestroy, OnInit, Input } from '@angular/core'
-import {
-  MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA,
-  MatLegacyDialogRef as MatDialogRef,
-} from '@angular/material/legacy-dialog'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import {
   UntypedFormBuilder,
@@ -63,6 +60,7 @@ import { validateFundingAmount } from 'src/app/shared/validators/funding-amount/
     './modal-funding.component.scss-theme.scss',
     './modal-funding.component.scss',
   ],
+  standalone: false,
 })
 export class ModalFundingComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

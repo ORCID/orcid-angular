@@ -1,6 +1,6 @@
 import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core'
 import { Subject } from 'rxjs'
-import { MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog'
+import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import { RecordWorksService } from '../../../../../core/record-works/record-works.service'
 import { Work } from '../../../../../types/record-works.endpoint'
@@ -20,6 +20,7 @@ import { TogglzService } from 'src/app/core/togglz/togglz.service'
     './work-bibtex-modal.component.scss',
     './work-bibtex-modal.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class WorkBibtexModalComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
@@ -372,7 +373,7 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
       this.selectedWorks.forEach((work, index) => {
         work.putCode = null
         this._recordWorksService
-          .save(work, !(index === this.selectedWorks.length - 1))
+          .save(work, false, index === this.selectedWorks.length - 1)
           .subscribe(() => {
             if (index === this.selectedWorks.length - 1) {
               this.loadingWorks = false

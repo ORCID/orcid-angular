@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { first } from 'rxjs/operators'
 import { ComponentType } from '@angular/cdk/portal'
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
+import { MatDialog } from '@angular/material/dialog'
 import { PlatformInfoService } from '../../platform-info'
 import { SortData, SortOrderDirection, SortOrderType } from 'src/app/types/sort'
 import {
@@ -18,11 +18,13 @@ import { ModalWorksSearchLinkComponent } from '../../../record/components/work-s
 import { VerificationEmailModalService } from '../../../core/verification-email-modal/verification-email-modal.service'
 import { UserRecord } from '../../../types/record.local'
 import { isQA } from 'src/app/shared/validators/environment-check/environment-check'
+import { ManageWorkFeaturedModalComponent } from 'src/app/record/components/work-featured/modals/manage-work-featured-modal/manage-work-featured-modal.component'
 
 @Component({
   selector: 'app-panels',
   templateUrl: './panels.component.html',
   styleUrls: ['./panels.component.scss', './panels.component.scss-theme.scss'],
+  standalone: false,
 })
 export class PanelsComponent implements OnInit {
   @Input() loading = false
@@ -38,6 +40,7 @@ export class PanelsComponent implements OnInit {
     | 'membership'
     | 'service'
     | 'works'
+    | 'featured-works'
     | 'activities'
     | 'peer-review'
     | 'sub-peer-review'
@@ -74,6 +77,7 @@ export class PanelsComponent implements OnInit {
 
   ariaLabelAscending = $localize`:@@shared.ariaLabelAscending:Ascending`
   ariaLabelDescending = $localize`:@@shared.ariaLabelDescending:Descending`
+  manageFeaturedWorksAriaLabel = $localize`:@@works.manageFeaturedWorksAriaLabel:Manage featured works`
 
   constructor(
     private _dialog: MatDialog,
@@ -94,6 +98,9 @@ export class PanelsComponent implements OnInit {
         case 'distinction':
         case 'membership':
         case 'service':
+          this.openModal(ModalAffiliationsComponent, { type })
+          break
+        case 'editorial-service':
           this.openModal(ModalAffiliationsComponent, { type })
           break
         case 'peer-review':
@@ -163,8 +170,10 @@ export class PanelsComponent implements OnInit {
     })
   }
   collapse() {
-    this.expandedContent = !this.expandedContent
-    this.expandedContentChange.emit(this.expandedContent)
+    if (this.type !== 'featured-works') {
+      this.expandedContent = !this.expandedContent
+      this.expandedContentChange.emit(this.expandedContent)
+    }
   }
 
   multipleMatButton() {
@@ -188,5 +197,11 @@ export class PanelsComponent implements OnInit {
       this.isMobile = platform.columns4 || platform.columns8
     })
     this.IS_QA = isQA()
+  }
+
+  openFeaturedWorksManage() {
+    if (this.type === 'featured-works' && !this.isPublicRecord) {
+      this.openModal(ManageWorkFeaturedModalComponent)
+    }
   }
 }

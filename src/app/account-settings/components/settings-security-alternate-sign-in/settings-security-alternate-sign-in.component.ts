@@ -5,7 +5,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core'
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
+import { MatDialog } from '@angular/material/dialog'
 import { Observable, Subject } from 'rxjs'
 import { takeUntil, tap } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
@@ -18,6 +18,7 @@ import { DialogSecurityAlternateAccountDeleteComponent } from '../dialog-securit
   selector: 'app-settings-security-alternate-sign-in',
   templateUrl: './settings-security-alternate-sign-in.component.html',
   styleUrls: ['./settings-security-alternate-sign-in.component.scss'],
+  standalone: false,
 })
 export class SettingsSecurityAlternateSignInComponent
   implements OnInit, OnDestroy
@@ -26,7 +27,7 @@ export class SettingsSecurityAlternateSignInComponent
   accounts$: Observable<SocialAccount[]>
 
   displayedColumns = ['provider', 'email', 'granted', 'actions']
-  $destroy = new Subject()
+  $destroy = new Subject<void>()
   isMobile: any
 
   constructor(

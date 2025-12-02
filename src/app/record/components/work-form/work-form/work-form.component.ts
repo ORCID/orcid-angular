@@ -23,10 +23,7 @@ import {
   WorkTypesTitle,
 } from '../../../../types/works.endpoint'
 import { RecordWorksService } from '../../../../core/record-works/record-works.service'
-import {
-  MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA,
-  MatLegacyDialogRef as MatDialogRef,
-} from '@angular/material/legacy-dialog'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../cdk/modal/modal/modal.component'
 import { RecordCountriesService } from '../../../../core/record-countries/record-countries.service'
 import { WINDOW } from '../../../../cdk/window'
@@ -39,6 +36,7 @@ import {
   MAX_LENGTH_LESS_THAN_ONE_THOUSAND,
   MAX_LENGTH_LESS_THAN_TWO_THOUSAND,
   URL_REGEXP,
+  isValidISBN,
 } from '../../../../constants'
 import {
   Contributor,
@@ -61,6 +59,7 @@ import { WorkTypeMenu } from './work-type-menu'
     './work-form.component.scss',
     './work-form.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class WorkFormComponent implements OnInit {
   ngOrcidYear = $localize`:@@shared.year:Year`
@@ -250,6 +249,18 @@ export class WorkFormComponent implements OnInit {
     externalIdentifierType: string
   ): AsyncValidatorFn {
     return (control: AbstractControl) => {
+      //try first the ISBN validation locally
+      if (externalIdentifierType === 'isbn') {
+        if (!isValidISBN(control.value)) {
+          return of({
+            validFormat: true,
+            resolved: false,
+            attemptedResolution: false,
+            generatedUrl: null,
+          })
+        }
+      }
+
       return this._workService
         .validateWorkIdTypes(externalIdentifierType, control.value)
         .pipe(
@@ -572,17 +583,19 @@ export class WorkFormComponent implements OnInit {
       if (this.work?.source) {
         work.source = this.work.source
       }
-      this._workService.save(work).subscribe((value) => {
-        if (value?.errors?.length > 0) {
-          this.loading = false
-          this._snackBar.showValidationError(
-            value?.errors[0],
-            $localize`:@@shared.pleaseReview:Please review and fix the issue`
-          )
-        } else {
-          this.closeEvent()
-        }
-      })
+      this._workService
+        .save(work, this.work.featuredDisplayIndex > 0)
+        .subscribe((value) => {
+          if (value?.errors?.length > 0) {
+            this.loading = false
+            this._snackBar.showValidationError(
+              value?.errors[0],
+              $localize`:@@shared.pleaseReview:Please review and fix the issue`
+            )
+          } else {
+            this.closeEvent()
+          }
+        })
     } else {
       this._snackBar.showValidationError()
     }

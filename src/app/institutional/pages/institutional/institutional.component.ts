@@ -10,7 +10,7 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms'
-import { MatLegacyAutocompleteTrigger as MatAutocompleteTrigger } from '@angular/material/legacy-autocomplete'
+import { MatAutocompleteTrigger } from '@angular/material/autocomplete'
 import { Router } from '@angular/router'
 import { CookieService } from 'ngx-cookie-service'
 import { Observable, Subject } from 'rxjs'
@@ -34,6 +34,7 @@ import {
     './institutional.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class InstitutionalComponent implements OnInit {
   @HostBinding('class.container') containerClass = true

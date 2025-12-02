@@ -24,6 +24,7 @@ import { OrcidValidators } from 'src/app/validators'
     './settings-security-password.component.scss',
     './settings-security-password.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class SettingsSecurityPasswordComponent implements OnInit, OnDestroy {
   form: UntypedFormGroup
@@ -32,7 +33,7 @@ export class SettingsSecurityPasswordComponent implements OnInit, OnDestroy {
   @Output() loading = new EventEmitter<boolean>()
   errors: string[]
   success: boolean
-  $destroy = new Subject()
+  $destroy = new Subject<void>()
 
   constructor(
     private _fb: UntypedFormBuilder,

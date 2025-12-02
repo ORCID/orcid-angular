@@ -10,6 +10,7 @@ import { UserStatus } from '../../../types/userStatus.endpoint'
   selector: 'app-top-bar-actions',
   templateUrl: './top-bar-actions.component.html',
   styleUrls: ['./top-bar-actions.component.scss'],
+  standalone: false,
 })
 export class TopBarActionsComponent implements OnInit, OnDestroy {
   labelPrintableVersion = $localize`:@@topBar.ariaLabelPrintableVersion:View printable version (Opens of a different tab)`
@@ -19,7 +20,7 @@ export class TopBarActionsComponent implements OnInit, OnDestroy {
     ' ' +
     $localize`:@@topBar.signInToStart:Sign in to start editing`
 
-  $destroy: Subject<boolean> = new Subject<boolean>()
+  $destroy: Subject<void> = new Subject<void>()
   platform: PlatformInfo
   @Input() userRecord: UserRecord
   @Input() ariaLabelName: string

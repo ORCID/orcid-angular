@@ -9,13 +9,13 @@
   $background: map-get($theme, background);
 
   .info {
-    border-color: mat.get-color-from-palette(
+    border-color: mat.m2-get-color-from-palette(
       $foreground,
       'state-notice-dark'
     ) !important;
 
     mat-icon {
-      color: mat.get-color-from-palette(
+      color: mat.m2-get-color-from-palette(
         $foreground,
         'state-notice-dark'
       ) !important;
@@ -23,7 +23,7 @@
   }
   .permission-container {
     mat-icon {
-      color: mat.get-color-from-palette($warn, 700);
+      color: mat.m2-get-color-from-palette($warn, 700);
     }
     border-color: map-get($background, light-grey);
   }

@@ -1,11 +1,21 @@
 import { Location } from '@angular/common'
-import { Component, Inject, Input, OnInit } from '@angular/core'
+import {
+  Component,
+  Inject,
+  Input,
+  OnInit,
+  HostListener,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+} from '@angular/core'
 import { NavigationStart, Router } from '@angular/router'
-import { filter, switchMap, tap } from 'rxjs/operators'
+import { filter, map, switchMap, tap } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { UserService } from 'src/app/core'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
+import { TogglzFlag } from 'src/app/core/togglz/togglz-flags.enum'
 import { ApplicationMenuItem, UserInfo } from 'src/app/types'
 import {
   ApplicationMenuItemBasic,
@@ -13,15 +23,19 @@ import {
 } from 'src/app/types/menu.local'
 import { Config } from 'src/app/types/togglz.endpoint'
 
-import { ApplicationRoutes, ORCID_REGEXP } from '../../constants'
+import { ApplicationRoutes } from '../../constants'
 import { menu } from './menu'
+import { of, Observable } from 'rxjs'
+import { HeaderCompactService } from 'src/app/core/header-compact/header-compact.service'
+import { RecordHeaderStateService } from 'src/app/core/record-header-state/record-header-state.service'
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss-theme.scss', './header.component.scss'],
+  standalone: false,
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, AfterViewInit {
   hideMainMenu = false
   _currentRoute: string
   notWordpressDisplay: boolean
@@ -41,6 +55,24 @@ export class HeaderComponent implements OnInit {
   labelLogo = $localize`:@@layout.ariaLabelConnectingResearchers:Connecting research and researchers`
   labelMenu = $localize`:@@layout.ariaLabelMenu:main menu`
 
+  // Compact header (feature-flagged) state
+  compactEligible = false
+  isCompactActive = false
+
+  // Record header state consumed when compact header is active
+  loadingUserRecord$: Observable<boolean> =
+    this._recordHeaderState.loadingUserRecord$
+  isPublicRecord$: Observable<string | null> =
+    this._recordHeaderState.isPublicRecord$
+  affiliations$: Observable<number> = this._recordHeaderState.affiliations$
+  displaySideBar$: Observable<boolean> = this._recordHeaderState.displaySideBar$
+  displayBiography$: Observable<boolean> =
+    this._recordHeaderState.displayBiography$
+  recordSummaryOpen$: Observable<boolean> =
+    this._recordHeaderState.recordSummaryOpen$
+  hasCreditOrOtherNames$: Observable<boolean> =
+    this._recordHeaderState.hasCreditOrOtherNames$
+
   constructor(
     private _router: Router,
     _platform: PlatformInfoService,
@@ -48,7 +80,9 @@ export class HeaderComponent implements OnInit {
     _userInfo: UserService,
     _togglz: TogglzService,
     location: Location,
-    private _user: UserService
+    private _user: UserService,
+    private _compactService: HeaderCompactService,
+    private _recordHeaderState: RecordHeaderStateService
   ) {
     _router.events
       .pipe(filter((event: any) => event instanceof NavigationStart))
@@ -57,9 +91,7 @@ export class HeaderComponent implements OnInit {
         this.setChildOfCurrentRouteAsSecondaryMenu()
       })
 
-    _platform.get().subscribe((data) => {
-      this.platform = data
-    })
+    _platform.get().subscribe((data) => (this.platform = data))
     _userInfo.getUserSession().subscribe((data) => {
       this.user = data.userInfo
     })
@@ -67,13 +99,21 @@ export class HeaderComponent implements OnInit {
       this.togglz = data
     })
     _togglz
-      .getStateOf('WORDPRESS_HOME_PAGE')
+      .getStateOf(TogglzFlag.WORDPRESS_HOME_PAGE)
       .pipe(
         tap((state) => {
           this.notWordpressDisplay = !state
         })
       )
       .subscribe()
+
+    // Subscribe to compact header eligibility (shared service)
+    this._compactService.eligible$.subscribe((eligible) => {
+      this.compactEligible = eligible
+    })
+    this._compactService.compactActive$.subscribe(
+      (active) => (this.isCompactActive = active)
+    )
 
     _router.events.subscribe(() => {
       const path = location.path()
@@ -85,6 +125,8 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  ngAfterViewInit() {}
 
   mouseLeave() {
     if (this.platform.columns12) {
@@ -118,6 +160,10 @@ export class HeaderComponent implements OnInit {
     } else if (button.route !== undefined) {
       this.goto(button.route)
     }
+  }
+
+  onRecordSummaryOpenChange(val: boolean) {
+    this._recordHeaderState.setRecordSummaryOpen(val)
   }
 
   mouseEnter(treeLocation: string[]) {
@@ -258,7 +304,7 @@ export class HeaderComponent implements OnInit {
     return this.isDesktopSecondLevelMenu(parents) ||
       this.isMobileThirdLevelMenu(parents)
       ? 'primary'
-      : null
+      : 'null'
   }
 
   goto(route: string) {

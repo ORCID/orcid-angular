@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+node scripts/validate-commit-msg.husky.js "$1"

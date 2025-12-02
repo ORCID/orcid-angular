@@ -129,6 +129,8 @@
             "styles": [
               "src/assets/scss/noto-sans.scss",
               "src/assets/scss/material.scss",
+              "projects/orcid-tokens/tokens.css",
+              "src/assets/scss/orcid-ui-theme.scss",
               "src/assets/scss/orcid.scss",
               "src/styles.scss",
               "src/assets/scss/grid.scss"
@@ -148,7 +150,12 @@
               ],
               "optimization": false,
               "outputHashing": "none",
-              "sourceMap": true,
+              "sourceMap": {
+                "scripts": true,
+                "styles": true,
+                "vendor": false,
+                "hidden": false
+              },
               "namedChunks": true,
               "extractLicenses": false,
               "vendorChunk": true,
@@ -265,101 +272,101 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ng-orcid:build:local"
+            "buildTarget": "ng-orcid:build:local"
           },
           "configurations": {
             "local-qa": {
-              "browserTarget": "ng-orcid:build:local-with-proxy",
-              "proxyConfig": "src/proxy.conf.qa.mjs"
+              "proxyConfig": "src/proxy.conf.qa.mjs",
+              "buildTarget": "ng-orcid:build:local-with-proxy"
             },
             "local-qa-en": {
-              "browserTarget": "ng-orcid:build:local-with-proxy-localize-en",
-              "proxyConfig": "src/proxy.conf.qa.mjs"
+              "proxyConfig": "src/proxy.conf.qa.mjs",
+              "buildTarget": "ng-orcid:build:local-with-proxy-localize-en"
             },
             "local-qa-ar": {
-              "browserTarget": "ng-orcid:build:local-with-proxy-localize-ar",
-              "proxyConfig": "src/proxy.conf.qa.mjs"
+              "proxyConfig": "src/proxy.conf.qa.mjs",
+              "buildTarget": "ng-orcid:build:local-with-proxy-localize-ar"
             },
             "local-qa-fr": {
-              "browserTarget": "ng-orcid:build:local-with-proxy-localize-fr",
-              "proxyConfig": "src/proxy.conf.qa.mjs"
+              "proxyConfig": "src/proxy.conf.qa.mjs",
+              "buildTarget": "ng-orcid:build:local-with-proxy-localize-fr"
             },
             "local-qa-xx": {
-              "browserTarget": "ng-orcid:build:local-with-proxy-localize-xx",
-              "proxyConfig": "src/proxy.conf.qa.mjs"
+              "proxyConfig": "src/proxy.conf.qa.mjs",
+              "buildTarget": "ng-orcid:build:local-with-proxy-localize-xx"
             },
             "local-sandbox": {
-              "browserTarget": "ng-orcid:build:local-with-proxy",
-              "proxyConfig": "src/proxy.conf.sandbox.mjs"
+              "proxyConfig": "src/proxy.conf.sandbox.mjs",
+              "buildTarget": "ng-orcid:build:local-with-proxy"
             },
             "local": {
-              "browserTarget": "ng-orcid:build:local"
+              "buildTarget": "ng-orcid:build:local"
             },
             "local-tomcat": {},
             "production": {
-              "browserTarget": "ng-orcid:build:production"
+              "buildTarget": "ng-orcid:build:production"
             },
 
             "en": {
-              "browserTarget": "ng-orcid:build:en"
+              "buildTarget": "ng-orcid:build:en"
             },
             "fr": {
-              "browserTarget": "ng-orcid:build:fr"
+              "buildTarget": "ng-orcid:build:fr"
             },
             "ar": {
-              "browserTarget": "ng-orcid:build:ar"
+              "buildTarget": "ng-orcid:build:ar"
             },
             "ca": {
-              "browserTarget": "ng-orcid:build:ca"
+              "buildTarget": "ng-orcid:build:ca"
             },
             "cs": {
-              "browserTarget": "ng-orcid:build:cs"
+              "buildTarget": "ng-orcid:build:cs"
             },
             "es": {
-              "browserTarget": "ng-orcid:build:es"
+              "buildTarget": "ng-orcid:build:es"
             },
             "it": {
-              "browserTarget": "ng-orcid:build:it"
+              "buildTarget": "ng-orcid:build:it"
             },
             "ja": {
-              "browserTarget": "ng-orcid:build:ja"
+              "buildTarget": "ng-orcid:build:ja"
             },
             "ko": {
-              "browserTarget": "ng-orcid:build:ko"
+              "buildTarget": "ng-orcid:build:ko"
             },
             "lr": {
-              "browserTarget": "ng-orcid:build:lr"
+              "buildTarget": "ng-orcid:build:lr"
             },
             "pt": {
-              "browserTarget": "ng-orcid:build:pt"
+              "buildTarget": "ng-orcid:build:pt"
             },
             "rl": {
-              "browserTarget": "ng-orcid:build:rl"
+              "buildTarget": "ng-orcid:build:rl"
             },
             "ru": {
-              "browserTarget": "ng-orcid:build:ru"
+              "buildTarget": "ng-orcid:build:ru"
             },
             "uk": {
-              "browserTarget": "ng-orcid:build:uk"
+              "buildTarget": "ng-orcid:build:uk"
             },
             "xx": {
-              "browserTarget": "ng-orcid:build:xx"
+              "buildTarget": "ng-orcid:build:xx"
             },
             "src": {
-              "browserTarget": "ng-orcid:build:src"
+              "buildTarget": "ng-orcid:build:src"
             },
             "zh-CN": {
-              "browserTarget": "ng-orcid:build:zh-CN"
+              "buildTarget": "ng-orcid:build:zh-CN"
             },
             "zh-TW": {
-              "browserTarget": "ng-orcid:build:zh-TW"
+              "buildTarget": "ng-orcid:build:zh-TW"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ng-orcid:build"
+            "buildTarget": "ng-orcid:build"
           }
         },
         "test": {
@@ -371,6 +378,8 @@
             "karmaConfig": "src/karma.conf.js",
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "projects/orcid-tokens/tokens.css",
+              "src/assets/scss/orcid-ui-theme.scss",
               "src/styles.scss"
             ],
             "scripts": [
@@ -379,32 +388,6 @@
             ],
             "assets": ["src/favicon.ico", "src/assets", "src/manifest.json"],
             "sourceMap": true
-          }
-        },
-        "storybook": {
-          "builder": "@storybook/angular:start-storybook",
-          "options": {
-            "configDir": ".storybook",
-            "browserTarget": "ng-orcid:build",
-            "compodoc": true,
-            "compodocArgs": ["-e", "json", "-d", "."],
-            "port": 6006
-          },
-          "styles": [
-            "src/assets/scss/noto-sans.scss",
-            "src/assets/scss/material.scss",
-            "src/assets/scss/orcid.scss",
-            "src/styles.scss",
-            "src/assets/scss/grid.scss"
-          ]
-        },
-        "build-storybook": {
-          "builder": "@storybook/angular:build-storybook",
-          "options": {
-            "configDir": ".storybook",
-            "browserTarget": "ng-orcid:build",
-            "compodocArgs": ["-e", "json", "-d", "."],
-            "outputDir": "dist/storybook/ng-orcid"
           }
         }
       }
@@ -426,10 +409,255 @@
           }
         }
       }
+    },
+    "orcid-ui": {
+      "projectType": "library",
+      "root": "projects/orcid-ui",
+      "sourceRoot": "projects/orcid-ui/src",
+      "prefix": "orcid",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/orcid-ui/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/orcid-ui/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/orcid-ui/tsconfig.spec.json",
+            "polyfills": ["zone.js", "zone.js/testing"]
+          }
+        }
+      }
+    },
+    "orcid-tokens": {
+      "projectType": "library",
+      "root": "projects/orcid-tokens",
+      "sourceRoot": "projects/orcid-tokens/src",
+      "prefix": "orcid",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/orcid-tokens/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/orcid-tokens/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/orcid-tokens/tsconfig.spec.json",
+            "polyfills": ["zone.js", "zone.js/testing"]
+          }
+        }
+      }
+    },
+    "orcid-ui-docs": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/orcid-ui-docs",
+      "sourceRoot": "projects/orcid-ui-docs/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "outputPath": "dist/orcid-ui-docs",
+            "browser": "projects/orcid-ui-docs/src/main.ts",
+            "polyfills": ["zone.js"],
+            "tsConfig": "projects/orcid-ui-docs/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/orcid-ui-docs/public"
+              }
+            ],
+            "styles": ["projects/orcid-ui-docs/src/styles.scss"]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "10kB",
+                  "maximumError": "15kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "orcid-ui-docs:build:production"
+            },
+            "development": {
+              "buildTarget": "orcid-ui-docs:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular/build:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "polyfills": ["zone.js", "zone.js/testing"],
+            "tsConfig": "projects/orcid-ui-docs/tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/orcid-ui-docs/public"
+              }
+            ],
+            "styles": ["projects/orcid-ui-docs/src/styles.scss"]
+          }
+        }
+      }
+    },
+    "orcid-ui-elements": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/orcid-ui-elements",
+      "sourceRoot": "projects/orcid-ui-elements/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "projects/orcid-ui-elements/src/main.ts",
+            "polyfills": ["zone.js"],
+            "tsConfig": "projects/orcid-ui-elements/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/orcid-ui-elements/public"
+              }
+            ],
+            "styles": ["projects/orcid-ui-elements/src/styles.scss"]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "orcid-ui-elements:build:production"
+            },
+            "development": {
+              "buildTarget": "orcid-ui-elements:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular/build:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "polyfills": ["zone.js", "zone.js/testing"],
+            "tsConfig": "projects/orcid-ui-elements/tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/orcid-ui-elements/public"
+              }
+            ],
+            "styles": ["projects/orcid-ui-elements/src/styles.scss"]
+          }
+        }
+      }
     }
   },
   "cli": {
     "analytics": "5a5330f1-74b5-403d-bd97-0318d391a33a",
     "packageManager": "yarn"
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "type": "component"
+    },
+    "@schematics/angular:directive": {
+      "type": "directive"
+    },
+    "@schematics/angular:service": {
+      "type": "service"
+    },
+    "@schematics/angular:guard": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:interceptor": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:module": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:pipe": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:resolver": {
+      "typeSeparator": "."
+    }
   }
 }

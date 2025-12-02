@@ -2,10 +2,7 @@ import { Component, OnDestroy, OnInit, Optional } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { SearchService } from '../../../core/search/search.service'
 import { tap, switchMap, retry, catchError } from 'rxjs/operators'
-import {
-  MatLegacyPaginatorIntl as MatPaginatorIntl,
-  LegacyPageEvent as PageEvent,
-} from '@angular/material/legacy-paginator'
+import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator'
 import { SearchResults } from 'src/app/types'
 import { SearchParameters } from 'src/app/types'
 import { Meta } from '@angular/platform-browser'
@@ -17,6 +14,7 @@ import { AnnouncerService } from 'src/app/core/announcer/announcer.service'
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
+  standalone: false,
 })
 export class SearchComponent implements OnInit, OnDestroy {
   searchResults: SearchResults

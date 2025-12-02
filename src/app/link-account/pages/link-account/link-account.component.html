@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row space-around">
       <div class="col l6 m6 s4">
-        <mat-card class="orcid-wizard">
+        <mat-card appearance="outlined" class="orcid-wizard">
           <mat-progress-bar
             *ngIf="loading || signingLoading"
             mode="indeterminate"
@@ -24,7 +24,7 @@
                 {{ entityDisplayName }}
                 <ng-container i18n="@@linking.title.2"> account </ng-container>
               </h1>
-              <p class="mat-body-1">
+              <p class="mat-subtitle-2">
                 <ng-container i18n="@@linking.signed">
                   You are signed into
                 </ng-container>
@@ -39,7 +39,7 @@
                 signInData && !signInData.unsupportedInstitution && !loading
               "
             >
-              <p class="mat-body-1">
+              <p class="mat-subtitle-2">
                 <ng-container i18n="@@linking.finish">
                   To link your
                 </ng-container>

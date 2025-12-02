@@ -2,18 +2,26 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
 import { Platform } from '@angular/cdk/platform'
 import { Inject, Injectable, LOCALE_ID } from '@angular/core'
 import { ActivatedRoute, NavigationEnd, Params, Router } from '@angular/router'
+import Bowser from 'bowser'
 import { BehaviorSubject, Observable } from 'rxjs'
 import { filter } from 'rxjs/operators'
 import { ApplicationRoutes } from 'src/app/constants'
 
 import { WINDOW } from '../window'
-import { BROWSERLIST_REGEXP } from './browserlist.regexp'
+import supportedBrowsersJson from './supported-browsers.json'
 import { PlatformInfo } from './platform-info.type'
 
 @Injectable({
   providedIn: 'root',
 })
 export class PlatformInfoService {
+  private readonly supportedBrowsers: Record<
+    string,
+    { major: number; minor: number }
+  > = supportedBrowsersJson as unknown as Record<
+    string,
+    { major: number; minor: number }
+  >
   previouslyHadQueryParameters = false
   private platform: PlatformInfo = {
     unsupportedBrowser: false,
@@ -30,7 +38,7 @@ export class PlatformInfoService {
     columns12: false,
     rtl: false,
     ltr: true,
-    queryParameters: this.getQueryParams(),
+    queryParameters: {},
     screenDirection: 'ltr',
     hasOauthParameters: false,
     social: false,
@@ -53,10 +61,11 @@ export class PlatformInfoService {
     this.platform.rtl = locale === 'ar' ? true : false
     this.platform.ltr = !this.platform.rtl
     this.platform.screenDirection = this.platform.rtl ? 'rtl' : 'ltr'
+    this.platform.queryParameters = this.getQueryParams()
 
-    if (!BROWSERLIST_REGEXP.test(navigator.userAgent)) {
-      this.platform.unsupportedBrowser = true
-    }
+    this.platform.unsupportedBrowser = this.isUnsupportedBrowser(
+      this.window.navigator.userAgent
+    )
 
     this.platform.firefox = _platform.FIREFOX
     this.platform.safary = _platform.SAFARI
@@ -74,8 +83,9 @@ export class PlatformInfoService {
             Object.keys(value).length > 0 || this.previouslyHadQueryParameters
         )
       )
-      .subscribe((queryParameters) => {
+      .subscribe(() => {
         this.previouslyHadQueryParameters = true
+        const queryParameters = this.getQueryParams()
         this.platform.queryParameters = queryParameters
         const previousOauthState = this.hasOauthParameters()
         const previousSocialState = this.updateSocialState(queryParameters)
@@ -150,22 +160,83 @@ export class PlatformInfoService {
       })
   }
 
-  /**
-   * @deprecated Based on the query check if the current state is in Oauth mode
-   */
-  private updateOauthState(queryParameters: Params) {
-    const previousOauthState = this.platform.hasOauthParameters
-    this.platform.queryParameters = queryParameters
-    if (
-      queryParameters.hasOwnProperty('oauth') ||
-      queryParameters.hasOwnProperty('Oauth') ||
-      queryParameters.hasOwnProperty('client_id')
-    ) {
-      this.platform.hasOauthParameters = true
-    } else {
-      this.platform.hasOauthParameters = false
+  private getBrowserKeyFromName(name: string | undefined): string | null {
+    if (!name) {
+      return null
     }
-    return previousOauthState
+
+    const lowered = name.toLowerCase()
+
+    if (lowered.includes('edge')) {
+      return 'edge'
+    }
+    if (lowered.includes('firefox')) {
+      return 'firefox'
+    }
+    if (lowered.includes('opera') || lowered.includes('opr')) {
+      return 'opera'
+    }
+    if (lowered.includes('samsung')) {
+      return 'samsung'
+    }
+    if (lowered.includes('chrome') && !lowered.includes('edge')) {
+      // Treat Chrome and Chromium (desktop + Android) as "chrome"
+      return 'chrome'
+    }
+    if (lowered.includes('safari') && !lowered.includes('chrome')) {
+      // Desktop + iOS Safari
+      return 'safari'
+    }
+    if (lowered.includes('trident') || lowered.includes('msie')) {
+      return 'ie'
+    }
+
+    return null
+  }
+
+  private isUnsupportedBrowser(userAgent: string): boolean {
+    try {
+      const parser = Bowser.getParser(userAgent)
+      const browser = parser.getBrowser()
+      const browserKey = this.getBrowserKeyFromName(browser.name)
+
+      if (!browserKey) {
+        // If we cannot determine the browser family, treat it as unsupported
+        return true
+      }
+
+      const minSupportedVersion = this.supportedBrowsers[browserKey]
+      if (!minSupportedVersion) {
+        // If we have no data for this browser family, treat it as unsupported
+        return true
+      }
+
+      const version = browser.version || ''
+      const [majorPart, minorPart = '0'] = version.split('.')
+      const major = parseInt(majorPart || '', 10)
+      const minor = parseInt(minorPart || '0', 10)
+
+      if (Number.isNaN(major)) {
+        return true
+      }
+
+      const minMajor = minSupportedVersion.major
+      const minMinor = minSupportedVersion.minor ?? 0
+
+      if (major > minMajor) {
+        return false
+      }
+      if (major < minMajor) {
+        return true
+      }
+
+      // Same major, compare minor versions
+      const safeMinor = Number.isNaN(minor) ? 0 : minor
+      return safeMinor < minMinor
+    } catch {
+      // On any parsing error, fall back to unsupported to be safe
+      return true
+    }
   }
 
   /**
@@ -261,9 +332,17 @@ export class PlatformInfoService {
 
   public getQueryParams(): Params {
     const params: Params = {}
-    new URLSearchParams(this.window.location.search).forEach(
-      (value, key) => (params[key] = value)
-    )
+    const search = this.window.location.search || ''
+    const query = search.startsWith('?') ? search.substring(1) : search
+    if (!query) return params
+    for (const part of query.split('&')) {
+      if (!part) continue
+      const [rawKey, rawValue = ''] = part.split('=')
+      if (!rawKey) continue
+      const key = decodeURIComponent(rawKey)
+      const value = decodeURIComponent(rawValue)
+      params[key] = value
+    }
     return params
   }
 

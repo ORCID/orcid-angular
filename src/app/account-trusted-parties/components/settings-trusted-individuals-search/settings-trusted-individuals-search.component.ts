@@ -1,10 +1,7 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y'
 import { Component, OnDestroy, OnInit } from '@angular/core'
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
-import {
-  MatLegacyPaginatorIntl as MatPaginatorIntl,
-  LegacyPageEvent as PageEvent,
-} from '@angular/material/legacy-paginator'
+import { MatDialog } from '@angular/material/dialog'
+import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator'
 import { Observable, of, Subject } from 'rxjs'
 import {
   map,
@@ -37,11 +34,12 @@ import { DialogAddTrustedIndividualsComponent } from '../dialog-add-trusted-indi
     './settings-trusted-individuals-search.component.scss',
     './settings-trusted-individuals-search.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class SettingsTrustedIndividualsSearchComponent
   implements OnInit, OnDestroy
 {
-  $destroy = new Subject()
+  $destroy = new Subject<void>()
   searchDone = false
   displayedColumns = ['trustedIndividuals', 'orcid', 'actions']
   isMobile: boolean

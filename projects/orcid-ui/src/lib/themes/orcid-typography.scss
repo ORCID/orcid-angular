@@ -1,0 +1,167 @@
+@use '@angular/material' as mat;
+@import '../../../../orcid-tokens/tokens.scss';
+
+// .
+// .
+// ORCID UI TYPOGRAPHY
+// .
+// .
+// Typography classes for the orcid-ui library.
+// These classes are prefixed with "orc-ui-font-" to avoid collisions
+// with the main app's "orc-font-" classes.
+
+// Define typography config using tokens from @orcid/tokens
+$orcid-ui-material-typography: mat.m2-define-typography-config(
+  $font-family: $orcid-font-family-sans,
+  $headline-1:
+    mat.m2-define-typography-level(
+      $orcid-font-size-display-large,
+      $orcid-line-height-display-large,
+      $orcid-font-weight-light,
+      $letter-spacing: $orcid-letter-spacing-display-large
+    ),
+  $headline-2:
+    mat.m2-define-typography-level(
+      $orcid-font-size-display,
+      $orcid-line-height-display,
+      $orcid-font-weight-regular,
+      $letter-spacing: $orcid-letter-spacing-display
+    ),
+  $headline-3:
+    mat.m2-define-typography-level(
+      $orcid-font-size-display-small,
+      $orcid-line-height-display-small,
+      $orcid-font-weight-normal,
+      $letter-spacing: $orcid-letter-spacing-display-small
+    ),
+  $headline-4:
+    mat.m2-define-typography-level(
+      $orcid-font-size-heading,
+      $orcid-line-height-heading,
+      $orcid-font-weight-medium,
+      $letter-spacing: $orcid-letter-spacing-heading
+    ),
+  $headline-5:
+    mat.m2-define-typography-level(
+      $orcid-font-size-heading-small,
+      $orcid-line-height-heading-small,
+      $orcid-font-weight-medium,
+      $letter-spacing: $orcid-letter-spacing-heading-small
+    ),
+  $headline-6:
+    mat.m2-define-typography-level(
+      $orcid-font-size-heading-6,
+      $orcid-line-height-heading-6,
+      $orcid-font-weight-normal,
+      $letter-spacing: $orcid-letter-spacing-heading-6
+    ),
+  $subtitle-1:
+    mat.m2-define-typography-level(
+      $orcid-font-size-body,
+      $orcid-line-height-subtitle-1,
+      $orcid-font-weight-normal,
+      $letter-spacing: $orcid-letter-spacing-subtitle-1
+    ),
+  $body-1:
+    mat.m2-define-typography-level(
+      $orcid-font-size-body-small,
+      $orcid-line-height-body-small,
+      $orcid-font-weight-normal,
+      $letter-spacing: $orcid-letter-spacing-body-1
+    ),
+  $subtitle-2:
+    mat.m2-define-typography-level(
+      $orcid-font-size-body-small,
+      $orcid-line-height-subtitle-2,
+      $orcid-font-weight-normal
+    ),
+  $body-2:
+    mat.m2-define-typography-level(
+      $orcid-font-size-body,
+      $orcid-line-height-body,
+      $orcid-font-weight-normal
+    ),
+  $caption:
+    mat.m2-define-typography-level(
+      $orcid-font-size-small-print,
+      $orcid-line-height-small-print,
+      $orcid-font-weight-normal,
+      $letter-spacing: $orcid-letter-spacing-small-print
+    ),
+  $button:
+    mat.m2-define-typography-level(
+      $orcid-font-size-body-small,
+      $orcid-line-height-body-small,
+      $orcid-font-weight-bold,
+      $letter-spacing: $orcid-letter-spacing-button
+    ),
+);
+
+// Generate typography classes with orc-ui-font- prefix
+// Uses tokens from @orcid/tokens
+@mixin orcid-ui-typography-classes-generator($config) {
+  .orc-ui-font-display-large {
+    font-family: $orcid-font-family-sans;
+    font-size: $orcid-font-size-display-large;
+    font-style: normal;
+    letter-spacing: $orcid-letter-spacing-display-large;
+  }
+  .orc-ui-font-display {
+    font-family: $orcid-font-family-sans;
+    font-size: $orcid-font-size-display;
+    font-style: normal;
+    letter-spacing: $orcid-letter-spacing-display;
+  }
+  .orc-ui-font-display-small {
+    font-family: $orcid-font-family-sans;
+    font-size: $orcid-font-size-display-small;
+    font-style: normal;
+    letter-spacing: $orcid-letter-spacing-display-small;
+  }
+  .orc-ui-font-heading-large {
+    font-family: $orcid-font-family-sans;
+    font-size: $orcid-font-size-heading-large;
+    font-style: normal;
+    letter-spacing: $orcid-letter-spacing-heading-large;
+  }
+  .orc-ui-font-heading {
+    font-family: $orcid-font-family-sans;
+    font-size: $orcid-font-size-heading;
+    font-style: normal;
+    letter-spacing: $orcid-letter-spacing-heading;
+  }
+  .orc-ui-font-heading-small {
+    font-family: $orcid-font-family-sans;
+    font-size: $orcid-font-size-heading-small;
+    font-style: normal;
+    letter-spacing: $orcid-letter-spacing-heading-small;
+  }
+  .orc-ui-font-body-large {
+    font-family: $orcid-font-family-sans;
+    font-size: $orcid-font-size-body-large;
+    font-style: normal;
+    letter-spacing: $orcid-letter-spacing-body-large;
+  }
+  .orc-ui-font-body {
+    font-family: $orcid-font-family-sans;
+    font-size: $orcid-font-size-body;
+    font-style: normal;
+    letter-spacing: $orcid-letter-spacing-body;
+  }
+  .orc-ui-font-body-small {
+    font-family: $orcid-font-family-sans;
+    font-size: $orcid-font-size-body-small;
+    font-style: normal;
+    letter-spacing: $orcid-letter-spacing-body-small;
+  }
+  .orc-ui-font-small-print {
+    font-family: $orcid-font-family-sans;
+    font-size: $orcid-font-size-small-print;
+    font-style: normal;
+    letter-spacing: $orcid-letter-spacing-small-print;
+    font-weight: $orcid-font-weight-normal;
+  }
+}
+
+// Generate the classes
+@include orcid-ui-typography-classes-generator($orcid-ui-material-typography);

@@ -1,5 +1,5 @@
 :host {
-  margin: -24px;
+  // margin: -24px;
   display: flex;
   border: 2px solid;
 
@@ -54,4 +54,8 @@ mat-progress-bar {
 }
 .modal-content {
   width: 100%;
+}
+
+.no-padding {
+  padding: 0 !important;
 }

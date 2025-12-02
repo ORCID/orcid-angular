@@ -29,11 +29,17 @@ import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { ERROR_REPORT } from 'src/app/errors'
 import {
+  AuthForm,
   NameForm,
   OauthParameters,
-  RequestInfoForm,
   UserInfo,
+  Scope,
 } from 'src/app/types'
+import { LegacyOauthRequestInfoForm } from 'src/app/types/request-info-form.endpoint'
+import {
+  Oauth2RequestInfoForm,
+  mapOauth2RequestToLegacy,
+} from 'src/app/types/oauth2-request-info-form.endpoint'
 import {
   UserSession,
   UserSessionUpdateParameters,
@@ -47,7 +53,10 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { OauthService } from '../oauth/oauth.service'
 import { UserInfoService } from '../user-info/user-info.service'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
+import { TogglzFlag } from 'src/app/core/togglz/togglz-flags.enum'
 import { LOCAL_SESSION_UID } from 'src/app/constants'
+import { Params } from '@angular/router'
+import { CookieService } from 'ngx-cookie-service'
 
 @Injectable({
   providedIn: 'root',
@@ -65,6 +74,7 @@ export class UserService {
     private _disco: DiscoService,
     private _userInfo: UserInfoService,
     private _togglz: TogglzService,
+    private _cookie: CookieService,
     @Inject(WINDOW) private window: Window
   ) {
     this.$userStatusChecked
@@ -104,7 +114,7 @@ export class UserService {
   }>()
 
   public getUserStatus(): Observable<boolean> {
-    return this._togglz.getStateOf('OAUTH_SIGNIN').pipe(
+    return this._togglz.getStateOf(TogglzFlag.OAUTH_SIGNIN).pipe(
       take(1),
       switchMap((outhSiginFlag) => {
         let url = runtimeEnvironment.API_WEB + 'userStatus.json'
@@ -192,7 +202,7 @@ export class UserService {
 
             // When the user lands on the Orcid app:
             // Take a eager approach:
-            // create a trigger that just assumes the user es logging.
+            // create a trigger that just assumes the user is logging.
             // So instead of waiting until `userStatus` responds, at the very beginning of the app initialization
             // calling userInfo.json, nameForm.json
             // (this avoid unnecessary extra waiting for logged in users)
@@ -252,8 +262,9 @@ export class UserService {
   private computesUpdatedUserData(data: {
     userInfo: UserInfo
     nameForm: NameForm
-    oauthSession: RequestInfoForm
+    oauthSession: LegacyOauthRequestInfoForm
     thirdPartyAuthData: ThirdPartyAuthData
+    oauthAuthorizationEnabled: boolean
   }): UserSession {
     {
       return {
@@ -265,8 +276,13 @@ export class UserService {
           effectiveOrcidUrl: this.getOrcidUrl(data, true),
           oauthSessionIsLoggedIn:
             !!data.oauthSession &&
-            !!data.oauthSession.userOrcid &&
-            !!data.oauthSession.userName,
+            ((!!data.oauthSession.userOrcid && !!data.oauthSession.userName) ||
+              // The Oauth2 will return a redirectUrl when the user is logged in and nothing else
+              // when the user is logged in and a OAUTH prompt=none is present
+              (data.oauthAuthorizationEnabled &&
+                !!data.oauthSession.redirectUrl) ||
+              // The Oauth2 will return a error when the user is logged in and there is a issue with the session
+              (data.oauthAuthorizationEnabled && !!data.oauthSession.error)),
         },
       }
     }
@@ -275,7 +291,7 @@ export class UserService {
     data: {
       userInfo: UserInfo
       nameForm: NameForm
-      oauthSession: RequestInfoForm
+      oauthSession: LegacyOauthRequestInfoForm
     },
     effectiveId = false
   ): string {
@@ -301,37 +317,92 @@ export class UserService {
   private handleUserDataUpdate(
     updateParameters?: UserSessionUpdateParameters
   ): Observable<{
-    userInfo: UserInfo
-    nameForm: NameForm
-    oauthSession: RequestInfoForm
-    thirdPartyAuthData: ThirdPartyAuthData
+    userInfo: UserInfo | undefined
+    nameForm: NameForm | undefined
+    oauthSession: LegacyOauthRequestInfoForm | undefined
+    thirdPartyAuthData: ThirdPartyAuthData | undefined
+    oauthAuthorizationEnabled: boolean
   }> {
     this.currentlyLoggedIn = updateParameters.loggedIn
     const $userInfo = this._userInfo.getUserInfo().pipe(this.handleErrors)
     const $nameForm = this.getNameForm().pipe(this.handleErrors)
-    const $oauthSession = this.getOauthSession(updateParameters)
     const $thirdPartyAuthData = this.getThirdPartySignInData()
+
+    const $oauthAuthorizationEnabled = this._togglz
+      .getStateOf(TogglzFlag.OAUTH_AUTHORIZATION)
+      .pipe(take(1))
+
+    const $oauthSession = $oauthAuthorizationEnabled.pipe(
+      switchMap((useAuthServerFlag) => {
+        if (useAuthServerFlag === true) {
+          return this.getOuathSessionFromOauth2Server()
+        } else {
+          return this.getOauthSessionFromLegacyOauthServer(updateParameters)
+        }
+      }),
+      this.handleOauthErrors
+    )
 
     return combineLatest([
       updateParameters.loggedIn ? $userInfo : of(undefined),
       updateParameters.loggedIn ? $nameForm : of(undefined),
       $oauthSession,
       !updateParameters.loggedIn ? $thirdPartyAuthData : of(undefined),
+      $oauthAuthorizationEnabled,
     ]).pipe(
-      map(([userInfo, nameForm, oauthSession, thirdPartyAuthData]) => ({
-        userInfo,
-        nameForm,
-        oauthSession,
-        thirdPartyAuthData,
-      }))
+      map(
+        ([
+          userInfo,
+          nameForm,
+          oauthSession,
+          thirdPartyAuthData,
+          oauthAuthorizationEnabled,
+        ]) => ({
+          userInfo: userInfo as UserInfo | undefined,
+          nameForm: nameForm as NameForm | undefined,
+          oauthSession: oauthSession as LegacyOauthRequestInfoForm | undefined,
+          thirdPartyAuthData:
+            (thirdPartyAuthData as ThirdPartyAuthData) || undefined,
+          oauthAuthorizationEnabled: oauthAuthorizationEnabled as boolean,
+        })
+      )
     )
   }
+
+  private getOuathSessionFromOauth2Server(
+    updateParameters?: UserSessionUpdateParameters
+  ): Observable<LegacyOauthRequestInfoForm> {
+    return this._platform.get().pipe(
+      first(),
+      switchMap((platform) => {
+        if (platform.hasOauthParameters) {
+          return this._http
+            .get<Oauth2RequestInfoForm>(
+              runtimeEnvironment.AUTH_SERVER +
+                'oauth2/authorize' +
+                this.window.location.search,
+              { withCredentials: true, headers: { accept: 'application/json' } }
+            )
+            .pipe(
+              switchMap((response) => {
+                return of(mapOauth2RequestToLegacy(response))
+              })
+            )
+        }
+        return of(undefined)
+      })
+    )
+  }
+
   /**
    * @param updateParameters login status and trigger information
    */
-  private getOauthSession(
+  /**
+   * @deprecated Use getOauthSessionFromAuthServer (togglz OAUTH_AUTHORIZATION) and map to legacy.
+   */
+  private getOauthSessionFromLegacyOauthServer(
     updateParameters?: UserSessionUpdateParameters
-  ): Observable<RequestInfoForm> {
+  ): Observable<LegacyOauthRequestInfoForm> {
     return this._platform.get().pipe(
       first(),
       switchMap((platform) => {
@@ -448,9 +519,9 @@ export class UserService {
       return undefined
     }
   }
-  private handleErrors(gerUserInfo: Observable<UserInfo | NameForm>) {
+  private handleErrors(error: Observable<any>) {
     return (
-      gerUserInfo
+      error
         .pipe(
           // If UserInfo.json or nameForm.json give an error it retries only if the user is currently logged in
           //
@@ -477,6 +548,14 @@ export class UserService {
         // TODO @angel we need to avoid sending HTTP errors back from the backend on this scenario
         // so we can better interpret real errors here
         .pipe(catchError((error) => of(null)))
+    )
+  }
+
+  private handleOauthErrors(error: Observable<any>) {
+    return error.pipe(
+      catchError((error) => {
+        return of({ error: error?.error?.text })
+      })
     )
   }
 
@@ -516,13 +595,13 @@ export class UserService {
     // only reset the timer when the visibility is changed
     if (hiddenTab && !this.hiddenTab) {
       this.hiddenTab = hiddenTab
-      this.reset$.next()
+      this.reset$.next(null)
       this.interval$.next(
         this.START_IN_TWENTY_FIVE_MINUTES_AND_CHECK_EVERY_TWENTY_FIVE_MINUTES
       )
     } else if (!hiddenTab && this.hiddenTab) {
       this.hiddenTab = hiddenTab
-      this.reset$.next()
+      this.reset$.next(null)
       this.interval$.next(
         this.START_IMMEDIATELY_AND_CHECK_EVERY_TWENTY_FIVE_MINUTES
       )

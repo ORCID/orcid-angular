@@ -1,9 +1,16 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http'
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpParams,
+  HttpResponse,
+} from '@angular/common/http'
+import { CustomEncoder } from '../custom-encoder/custom.encoder'
 import { Inject, Injectable } from '@angular/core'
 import { Router } from '@angular/router'
 import { NEVER, Observable, of, ReplaySubject } from 'rxjs'
 import {
   catchError,
+  first,
   last,
   map,
   retry,
@@ -14,14 +21,20 @@ import {
 import { WINDOW } from 'src/app/cdk/window'
 import { ApplicationRoutes } from 'src/app/constants'
 import { ERROR_REPORT } from 'src/app/errors'
-import { OauthParameters, RequestInfoForm } from 'src/app/types'
-import { OauthAuthorize } from 'src/app/types/authorize.endpoint'
+import { OauthParameters } from 'src/app/types'
+import { LegacyOauthRequestInfoForm as RequestInfoForm } from 'src/app/types/request-info-form.endpoint'
+import {
+  OauthAuthorize,
+  ValidateRedirectUriResponse,
+} from 'src/app/types/authorize.endpoint'
 import { UserSessionUpdateParameters } from 'src/app/types/session.local'
 
 import { SignInData } from '../../types/sign-in-data.endpoint'
 import { TwoFactor } from '../../types/two-factor.endpoint'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { objectToUrlParameters } from '../../constants'
+import { CookieService } from 'ngx-cookie-service'
+import { PlatformInfoService } from 'src/app/cdk/platform-info'
 
 const OAUTH_SESSION_ERROR_CODES_HANDLE_BY_CLIENT_APP = [
   'login_required',
@@ -42,7 +55,9 @@ export class OauthService {
     private _http: HttpClient,
     private _errorHandler: ErrorHandlerService,
     private _router: Router,
-    @Inject(WINDOW) private window: Window
+    private _cookie: CookieService,
+    @Inject(WINDOW) private window: Window,
+    private _platform: PlatformInfoService
   ) {
     this.headers = new HttpHeaders({
       'Access-Control-Allow-Origin': '*',
@@ -104,6 +119,53 @@ export class OauthService {
         ),
         tap((requestInfo) => {
           this.requestInfoSubject.next(requestInfo)
+        })
+      )
+  }
+
+  authorizeOnAuthServer(
+    data: RequestInfoForm,
+    approved: boolean
+  ): Observable<string> {
+    let headers = new HttpHeaders()
+    headers = headers.set(
+      'Access-Control-Allow-Origin',
+      runtimeEnvironment.AUTH_SERVER
+    )
+    headers = headers.set('Content-Type', 'application/x-www-form-urlencoded')
+    let csrf = this._cookie.get('AUTH-XSRF-TOKEN')
+    headers = headers.set('x-xsrf-token', csrf)
+
+    let body = new HttpParams({ encoder: new CustomEncoder() })
+      .set('client_id', data.clientId)
+      .set('state', data.oauthState)
+
+    if (approved === true) {
+      for (var s of data.scopes) {
+        body = body.append('scope', s.value)
+      }
+    }
+
+    return this._http
+      .post<any>(runtimeEnvironment.AUTH_SERVER + 'oauth2/authorize', body, {
+        headers: headers,
+        withCredentials: true,
+        observe: 'response',
+      })
+      .pipe(
+        map((res: HttpResponse<any>) => {
+          if (res.body && res.body['error']) {
+            if (res.body['error'] == 'access_denied') {
+              return res.body['uri']
+            } else {
+              this._errorHandler.handleError(
+                res.body,
+                ERROR_REPORT.STANDARD_VERBOSE
+              )
+            }
+          } else {
+            return res.headers.get('location')
+          }
         })
       )
   }
@@ -217,5 +279,27 @@ export class OauthService {
           this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
         )
       )
+  }
+
+  validateRedirectUri(
+    clientId: string,
+    redirectUri: string
+  ): Observable<ValidateRedirectUriResponse> {
+    const url = `${runtimeEnvironment.AUTH_SERVER}validateRedirectUri`
+
+    // JSON body instead of URL-encoded params
+    const body = { clientId, redirectUri }
+
+    // set JSON headers
+    const headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': runtimeEnvironment.AUTH_SERVER,
+      'Content-Type': 'application/json',
+      'x-xsrf-token': this._cookie.get('AUTH-XSRF-TOKEN'),
+    })
+
+    return this._http.post<ValidateRedirectUriResponse>(url, body, {
+      headers,
+      withCredentials: true,
+    })
   }
 }

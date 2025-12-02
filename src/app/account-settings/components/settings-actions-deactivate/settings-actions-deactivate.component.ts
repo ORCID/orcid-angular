@@ -20,6 +20,7 @@ import { TogglzService } from 'src/app/core/togglz/togglz.service'
     './settings-actions-deactivate.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class SettingsActionsDeactivateComponent implements OnInit, OnDestroy {
   @Output() loading = new EventEmitter<boolean>()
@@ -48,7 +49,7 @@ export class SettingsActionsDeactivateComponent implements OnInit, OnDestroy {
   deactivateOrcidAccount() {
     this.alreadySendedDeactivatedAccountRequest = true
     this.loading.next(true)
-    this._deactivate.deactivateAccount().subscribe((response) => {
+    this._deactivate.generateDeactivationLink().subscribe((response) => {
       this.deactivatedEmail = response.email
       this.loading.next(false)
     })

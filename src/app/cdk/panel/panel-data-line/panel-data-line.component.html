@@ -19,7 +19,7 @@
   <span>{{ title }}</span>
   <ng-container *ngIf="detail">&#x200E;({{ detail }})&#x200E;</ng-container>
   <p
-    class="mat-body-1"
+    class="mat-subtitle-2"
     *ngIf="!url && copyOnClick"
     appCopyOnClick
     matTooltip="Click to Copy"
@@ -27,10 +27,10 @@
   >
     {{ content }}
   </p>
-  <p class="mat-body-1" *ngIf="!url && !copyOnClick">{{ content }}</p>
+  <p class="mat-subtitle-2" *ngIf="!url && !copyOnClick">{{ content }}</p>
 
   <a
-    class="underline mat-body-1"
+    class="underline mat-subtitle-2"
     href="{{ url }}"
     target="_blank"
     rel="noopener noreferrer"

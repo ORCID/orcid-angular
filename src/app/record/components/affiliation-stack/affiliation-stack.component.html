@@ -36,14 +36,21 @@
           *ngIf="type === 'invited-position'"
           >join_inner</mat-icon
         >
-        <mat-icon class="material-icons-outlined" *ngIf="type === 'distinction'"
-          >stars</mat-icon
+        <mat-icon
+          class="material-symbols-outlined"
+          *ngIf="type === 'distinction'"
+          >crown</mat-icon
         >
         <mat-icon class="material-icons-outlined" *ngIf="type === 'membership'"
           >card_membership</mat-icon
         >
         <mat-icon class="material-icons-outlined" *ngIf="type === 'service'"
           >badge</mat-icon
+        >
+        <mat-icon
+          class="material-symbols-outlined"
+          *ngIf="type === 'editorial-service'"
+          >auto_stories</mat-icon
         >
         <div class="vl"></div>
       </ng-container>
@@ -53,15 +60,28 @@
           mobile: isMobile
         }"
       >
-        {{ affiliation.affiliationName.value }}:
+        {{ affiliation.affiliationName.value
+        }}<ng-container
+          *ngIf="
+            (affiliation.city?.value && affiliation.country?.value) ||
+            affiliation.country?.value
+          "
+          >:</ng-container
+        >
 
-        <ng-container *ngIf="affiliation.city.value">
+        <ng-container
+          *ngIf="affiliation.city?.value?.trim() && affiliation.country?.value"
+        >
           {{ affiliation.city.value }},
         </ng-container>
-        <ng-container *ngIf="affiliation.region.value">
+        <ng-container
+          *ngIf="
+            affiliation.region?.value?.trim() && affiliation.country?.value
+          "
+        >
           {{ affiliation.region.value }},
         </ng-container>
-        <ng-container *ngIf="affiliation.country.value">
+        <ng-container *ngIf="affiliation.country?.value">
           {{ affiliation.country.value }}
         </ng-container>
       </h4>

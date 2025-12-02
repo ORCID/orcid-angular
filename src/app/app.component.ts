@@ -16,12 +16,14 @@ import { TitleService } from './core/title-service/title.service'
 import { ZendeskService } from './core/zendesk/zendesk.service'
 import { ERROR_REPORT } from './errors'
 import { TogglzService } from './core/togglz/togglz.service'
+import { TogglzFlag } from './core/togglz/togglz-flags.enum'
 import { NewRelicService } from './core/new-relic/new-relic.service'
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  standalone: false,
 })
 export class AppComponent {
   currentlyDisplayingZendesk = true
@@ -85,7 +87,7 @@ export class AppComponent {
       .subscribe()
 
     _togglzService
-      .getStateOf('NEW_RELIC_BROWSER_MONITORING')
+      .getStateOf(TogglzFlag.NEW_RELIC_BROWSER_MONITORING)
       .subscribe((NEW_RELIC_BROWSER_MONITORING) => {
         if (NEW_RELIC_BROWSER_MONITORING) {
           _newRelicService.init()
@@ -166,6 +168,7 @@ export class AppComponent {
       case ApplicationRoutes.register:
       case ApplicationRoutes.authorize:
       case ApplicationRoutes.search:
+      case ApplicationRoutes.institutionalLinking:
         this.spacing = true
         break
       default:

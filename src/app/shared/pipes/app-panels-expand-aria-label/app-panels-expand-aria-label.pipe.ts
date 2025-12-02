@@ -2,6 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core'
 
 @Pipe({
   name: 'appPanelsExpandAriaLabel',
+  standalone: false,
 })
 export class AppPanelsExpandAriaLabelPipe implements PipeTransform {
   transform(panelType: any, args?: any, panelTitle?: any): string {
@@ -16,7 +17,11 @@ export class AppPanelsExpandAriaLabelPipe implements PipeTransform {
       panelType === 'invited-position'
     ) {
       return $localize`:@@shared.distinctionInvitedPositionExpandAriaLabel:Expand the Invited positions and distinction section`
-    } else if (panelType === 'membership' || panelType === 'service') {
+    } else if (
+      panelType === 'membership' ||
+      panelType === 'service' ||
+      panelType === 'editorial-service'
+    ) {
       return $localize`:@@shared.membershipServiceExpandAriaLabel:Expand the Membership and service section`
     } else if (panelType === 'funding') {
       return $localize`:@@shared.fundingServiceExpandAriaLabel:Expand the Funding section`

@@ -17,7 +17,7 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms'
-import { MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog'
+import { MatDialogRef } from '@angular/material/dialog'
 import { cloneDeep } from 'lodash'
 import * as _ from 'lodash'
 import { Subject } from 'rxjs'
@@ -40,6 +40,7 @@ import { OrcidValidators } from 'src/app/validators'
   selector: 'app-modal-websites',
   templateUrl: './modal-websites.component.html',
   styleUrls: ['./modal-websites.component.scss'],
+  standalone: false,
 })
 export class ModalWebsitesComponent implements OnInit, OnDestroy {
   ariaLabelSave = $localize`:@@side-bar.ariaLabelWebsiteSave:Save changes to Websites & social links`

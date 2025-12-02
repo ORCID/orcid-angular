@@ -1,77 +1,110 @@
+// ----------------------------------------------------------------------------
+// Base Angular Material Imports
+// ----------------------------------------------------------------------------
 @use '@angular/material' as mat;
 @import './material.typography.scss';
 @import './material.light-theme.scss';
 @import './material.orcid-theme.scss';
 
-@import './material.orcid.overwrites.scss/button-theme';
-@import './material.orcid.overwrites.scss/chips-theme';
-@import './material.orcid.overwrites.scss/menu-theme';
-@import './material.orcid.overwrites.scss/snackbar-theme';
-@import './material.orcid.overwrites.scss/paginator.scss';
-@import './material.orcid.overwrites.scss/card-theme';
-@import './material.orcid.overwrites.scss/form-field-theme';
-@import './material.orcid.overwrites.scss/_divider-theme.scss';
-@import './material.orcid.overwrites.scss/_mat-error-theme.scss';
-@import './material.orcid.overwrites.scss/_cdk-drag-drop-theme.scss';
+// ----------------------------------------------------------------------------
+// ORCID Material Theming (SCSS)
+// ----------------------------------------------------------------------------
 
-@import './orcid/_urls-theme.scss';
+// New component typographies
+@include mat.all-component-typographies($orcid-material-typography);
+
+// Core Material styles
+@include mat.elevation-classes();
+@include mat.app-background();
+
+// New component themes
+@include mat.all-component-themes($orcid-app-theme);
+
+// ----------------------------------------------------------------------------
+// Fonts Global CSS Overwrites
+// ----------------------------------------------------------------------------
+@include mat-base-typography-overwrites($orcid-material-typography);
+
+// ----------------------------------------------------------------------------
+// Material Components Global CSS Overwrites
+// ----------------------------------------------------------------------------
+
+// Button
+@import './material.orcid.overwrites.scss/button.scss';
+@import './material.orcid.overwrites.scss/button-theme';
+@include mat-button-theme-overwrites($orcid-app-theme);
+
+// Menu
+@import './material.orcid.overwrites.scss/menu.scss';
+
+// Checkbox
+@import './material.orcid.overwrites.scss/checkbox.scss';
+
+// Snackbar
+@import './material.orcid.overwrites.scss/snackbar.scss';
+@import './material.orcid.overwrites.scss/snackbar-theme';
+@include mat-snackbar-overwrites($orcid-app-theme);
+
+// Card
+@import './material.orcid.overwrites.scss/card.scss';
+@import './material.orcid.overwrites.scss/card-theme';
+@include mat-card-theme-overwrites($orcid-app-theme);
+
+// Progress Spinner
+@import './material.orcid.overwrites.scss/progress-spinner.scss';
+
+// Stepper
+@import './material.orcid.overwrites.scss/stepper.scss';
+
+// MDE Popover
+@import './material.orcid.overwrites.scss/mde-popover.scss';
+
+// Radio
+@import './material.orcid.overwrites.scss/radio.scss';
+
+// Table
+@import './material.orcid.overwrites.scss/table.scss';
+
+// Form Field
+@import './material.orcid.overwrites.scss/form-field-outline.scss';
+@import './material.orcid.overwrites.scss/form-field-theme';
+@include mat-form-field-theme-overwrites($orcid-app-theme);
+@include angular-material-form-field-typography($orcid-material-typography);
+
+// Divider
+@import './material.orcid.overwrites.scss/divider.scss';
+@import './material.orcid.overwrites.scss/_divider-theme.scss';
+@include mat-divider-theme-overwrites($orcid-app-theme);
+
+// CDK Drag & Drop
+@import './material.orcid.overwrites.scss/cdk-drag-drop.scss';
+@import './material.orcid.overwrites.scss/_cdk-drag-drop-theme.scss';
+@include mat-drag-drop-theme($orcid-app-theme);
+
+// Mat-Error
+@import './material.orcid.overwrites.scss/_mat-error-theme.scss';
+@include mat-error-theme-overwrites($orcid-app-theme);
+
+// ----------------------------------------------------------------------------
+// HTML Global CSS Overwrites
+// ----------------------------------------------------------------------------
+
+// HR Divider
 @import './orcid/_divider-theme.scss';
 @import './orcid/divider.scss';
+
+// URLs
+@import './orcid/urls.scss';
+@import './orcid/_urls-theme.scss';
+@include urls-theme-overwrites($orcid-app-theme);
+
+// ----------------------------------------------------------------------------
+// App Component Globals CSS Overwrites
+// ----------------------------------------------------------------------------
 @import './orcid/app-settings-panels-data.scss';
 
-// @import './material.orcid.overwrites.scss/form-field-theme';
-// .
-// .
-// MATERIAL THEMING
-// .
-// .
-// Style material components more info on  https://github.com/angular/components/blob/8.1.4/guides/theming.md
-// TODO(v15): As of v15 mat.legacy-core no longer includes default typography styles.
-//  The following line adds:
-//    1. Default typography styles for all components
-//    2. Styles for typography hierarchy classes (e.g. .mat-headline-1)
-//  If you specify typography styles for the components you use elsewhere, you should delete this line.
-//  If you don't need the default component typographies but still want the hierarchy styles,
-//  you can delete this line and instead use:
-//    `@include mat.legacy-typography-hierarchy($orcid-material-typography);`
-@include mat.all-legacy-component-typographies($orcid-material-typography);
-@include mat.legacy-core();
-// @include mat.strong-focus-indicators();
+// ----------------------------------------------------------------------------
+// Font Classes Generator
+// ----------------------------------------------------------------------------
 
-// TODO: include only the CSS for the used components, instead of everything
-@include mat.all-legacy-component-themes($orcid-app-theme);
-// @include mat.strong-focus-indicators-theme($orcid-app-theme);
-
-// .
-// .
-// MATERIAL OVERWRITES
-// .
-// .
-// More info about this on https://github.com/angular/components/blob/8.1.4/guides/customizing-component-styles.md
-// The following mixings and styles overwrite or extend material styles
-@include orcid-typography($orcid-material-typography);
-@include mat-base-typography-overwrites($orcid-material-typography);
-@include angular-material-form-field-typography($orcid-material-typography);
-@import './material.orcid.overwrites.scss/chips.scss';
-@include mat-chips-theme-overwrites($orcid-app-theme);
-@import './material.orcid.overwrites.scss/button.scss';
-@include mat-button-theme-overwrites($orcid-app-theme);
-@import './material.orcid.overwrites.scss/menu.scss';
-@include mat-menu-theme-overwrites($orcid-app-theme);
-@import './material.orcid.overwrites.scss/form-field-outline.scss';
-@import './material.orcid.overwrites.scss/checkbox.scss';
-@include mat-snackbar-overwrites($orcid-app-theme);
-@include mat-card-theme-overwrites($orcid-app-theme);
-@import './material.orcid.overwrites.scss/card.scss';
-@import './material.orcid.overwrites.scss/stepper.scss';
-@import './material.orcid.overwrites.scss/mde-popover.scss';
-@import './material.orcid.overwrites.scss/radio.scss';
-@import './material.orcid.overwrites.scss/snackbar.scss';
-@include mat-form-field-theme-overwrites($orcid-app-theme);
-@include mat-divider-theme-overwrites($orcid-app-theme);
-@import './material.orcid.overwrites.scss/divider.scss';
-@import './material.orcid.overwrites.scss/cdk-drag-drop.scss';
-@include mat-error-theme-overwrites($orcid-app-theme);
-@import './orcid/urls.scss';
-@include mat-drag-drop-theme($orcid-app-theme);
-@include urls-theme-overwrites($orcid-app-theme);
+@include orcid-typography-classes-generator($orcid-material-typography);

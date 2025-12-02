@@ -8,8 +8,8 @@ import {
   Output,
   ViewChild,
 } from '@angular/core'
-import { MatLegacyCheckbox as MatCheckbox } from '@angular/material/legacy-checkbox'
-import { MatLegacyDialog } from '@angular/material/legacy-dialog'
+import { MatCheckbox } from '@angular/material/checkbox'
+import { MatDialog } from '@angular/material/dialog'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
@@ -25,6 +25,7 @@ import { RecordService } from 'src/app/core/record/record.service'
     './terms-of-use.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class TermsOfUseComponent implements OnInit, OnDestroy {
   checked
@@ -38,7 +39,7 @@ export class TermsOfUseComponent implements OnInit, OnDestroy {
   constructor(
     private developerToolsService: DeveloperToolsService,
     private _record: RecordService,
-    private _dialog: MatLegacyDialog,
+    private _dialog: MatDialog,
     private _changeDetectorRef: ChangeDetectorRef
   ) {}
   ngOnDestroy(): void {

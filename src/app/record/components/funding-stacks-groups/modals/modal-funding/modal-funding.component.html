@@ -211,7 +211,7 @@
               aria-hidden="true"
               >remove_circle_outline</mat-icon
             >
-            <span class="mat-body-1" id="">
+            <span class="mat-subtitle-2" id="">
               <ng-container
                 i18n="@@works.showTranslatedTitle"
                 *ngIf="!showTranslationTitle"
@@ -430,12 +430,12 @@
           </label>
         </div>
         <!-- Currency  -->
-        <div class="date-group mat-form-field-wrapper input-container">
+        <div class="date-group form-field-wrapper input-container">
           <div class="col l4 date-input">
             <mat-form-field
               id="funding-amount-input"
               appearance="outline"
-              class="mat-form-field-min no-hint input-container"
+              class="mat-form-field-min no-hint input-container no-hint"
             >
               <mat-select
                 [placeholder]="totalFundingAmountCurrency"
@@ -476,20 +476,23 @@
           >
             Amount should be a numeric value with format 1,234,567.89
           </mat-error>
-        </div>
-        <div class="row">
-          <mat-error
-            *ngIf="fundingForm.get('currencyCode').errors?.required"
-            i18n="@@funding.selectACurrencyCode"
-            class="mat-caption error-out-input-context"
-          >
-            Please select a currency
-          </mat-error>
+          <div class="row">
+            <mat-error
+              *ngIf="fundingForm.get('currencyCode').errors?.required"
+              i18n="@@funding.selectACurrencyCode"
+              class="mat-caption error-out-input-context"
+            >
+              Please select a currency
+            </mat-error>
+          </div>
         </div>
       </div>
 
       <!-- Start date  -->
-      <div class="input-container" formGroupName="startDateGroup">
+      <div
+        class="input-container form-field-wrapper"
+        formGroupName="startDateGroup"
+      >
         <div class="row">
           <label
             class="mat-caption"
@@ -501,7 +504,7 @@
           </label>
         </div>
         <!--Start date year  -->
-        <div class="row date-group mat-form-field-wrapper">
+        <div class="row date-group form-field-wrapper">
           <div class="row">
             <div class="col l4 date-input">
               <mat-form-field
@@ -556,7 +559,7 @@
       </div>
 
       <!-- End date -->
-      <div class="row" formGroupName="endDateGroup">
+      <div class="row form-field-wrapper" formGroupName="endDateGroup">
         <div class="row">
           <label
             class="mat-caption"
@@ -568,7 +571,7 @@
           </label>
         </div>
         <!-- End date year  -->
-        <div class="input-container date-group mat-form-field-wrapper">
+        <div class="input-container date-group form-field-wrapper">
           <div class="row">
             <div class="col l4 date-input">
               <mat-form-field
@@ -910,7 +913,7 @@
             <mat-icon class="large-material-icon" aria-hidden="true"
               >add_circle_outline</mat-icon
             >
-            <span class="mat-body-1">
+            <span class="mat-subtitle-2">
               <ng-container
                 i18n="@@shared.addAnotherId"
                 *ngIf="grantsArray.length"

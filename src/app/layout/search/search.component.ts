@@ -1,4 +1,10 @@
-import { Component, OnInit, Inject, ChangeDetectorRef } from '@angular/core'
+import {
+  Component,
+  OnInit,
+  Inject,
+  ChangeDetectorRef,
+  Input,
+} from '@angular/core'
 import { UntypedFormGroup } from '@angular/forms'
 import { WINDOW } from 'src/app/cdk/window'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
@@ -12,6 +18,7 @@ import { ApplicationRoutes } from '../../constants'
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss-theme.scss', './search.component.scss'],
+  standalone: false,
 })
 export class SearchComponent implements OnInit {
   labelSearch = $localize`:@@layout.ariaLabelSearch:Search the ORCID registry`
@@ -34,6 +41,7 @@ export class SearchComponent implements OnInit {
     $localize`:@@layout.ariaLabelSearchRegistry:Search the ORCID registry...`
   )
   whatToSearch: string
+  @Input() hideForm: boolean = false
   constructor(
     @Inject(WINDOW) private window: Window,
     private _search: SearchService,

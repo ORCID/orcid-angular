@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { first, takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
-import { MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog'
+import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from 'src/app/cdk/modal/modal/modal.component'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
@@ -14,6 +14,7 @@ import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.se
     './top-bar-verification-email-modal.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class TopBarVerificationEmailModalComponent
   implements OnInit, OnDestroy

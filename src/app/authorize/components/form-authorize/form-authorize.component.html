@@ -36,7 +36,7 @@
       <div class="col l9 user-wrapper">
         <div class="row">
           <div class="m-b-8">
-            <div class="mat-body-2">
+            <div class="mat-subtitle-2">
               <strong id="user-name">{{ userName }}</strong>
             </div>
             <span>{{ orcidUrl }}</span>
@@ -47,7 +47,7 @@
             class="underline"
             [ngClass]="{ row: platformInfo.columns4 }"
             i18n="@@public-layout.sign_out"
-            (click)="navigateTo('/signout')"
+            (click)="logout()"
             >Sign out</a
           >
           <app-trusted-individuals-dropdown
@@ -68,13 +68,13 @@
     ></app-info-drop-down>
 
     <p
-      class="mat-body-1 m-t-16 m-b-16"
+      class="mat-subtitle-2 m-t-16 m-b-16"
       i18n="@@authorize.organizationAskedFollowingAccess"
     >
       This organization has asked for the following access to your ORCID record:
     </p>
 
-    <ul class="mat-body-1 m-t-base">
+    <ul class="mat-subtitle-2 m-t-base">
       <ng-container
         *ngFor="let scope of this.oauthRequest.scopes; let last = last"
       >

@@ -30,3 +30,8 @@ export interface EnvironmentInterface {
 declare global {
   const runtimeEnvironment: EnvironmentInterface
 }
+
+declare module 'bowser' {
+  const Bowser: any
+  export default Bowser
+}

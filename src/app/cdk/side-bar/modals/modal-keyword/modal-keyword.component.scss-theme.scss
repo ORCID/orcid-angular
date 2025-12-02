@@ -8,16 +8,11 @@
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
 
-  ::ng-deep .keyword-input-line {
-    .mat-form-field-flex {
-      background-color: map-get($background, dialog);
-    }
-  }
   :host ::ng-deep mat-form-field mat-icon {
     color: map-get($background, ui-background);
   }
   :host ::ng-deep mat-form-field.email-activated mat-icon {
-    color: mat.get-color-from-palette($accent, 400);
+    color: mat.m2-get-color-from-palette($accent, 400);
   }
 }
 

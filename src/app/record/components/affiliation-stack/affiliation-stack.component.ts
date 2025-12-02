@@ -22,6 +22,7 @@ import { PlatformInfoService } from '../../../cdk/platform-info'
     './affiliation-stack.component.scss',
     './affiliation-stack.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class AffiliationStackComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
@@ -184,7 +185,9 @@ export class AffiliationStackComponent implements OnInit, OnDestroy {
         )
     }
     const $affiliationDetails = this._affiliationService.getAffiliationsDetails(
-      affiliation.affiliationType.value,
+      affiliation.affiliationType.value === 'editorial-service'
+        ? 'service'
+        : affiliation.affiliationType.value,
       putCode,
       {
         publicRecordId: this.isPublicRecord,

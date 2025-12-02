@@ -3,20 +3,44 @@
 @mixin mat-button-theme-overwrites($theme) {
   $primary: map-get($theme, primary);
   $foreground: map-get($theme, foreground);
-  $divider-color: mat.get-color-from-palette($foreground, divider);
+  $divider-color: mat.m2-get-color-from-palette($foreground, divider);
 
   $background: map-get($theme, background);
-  $unselected-background: mat.get-color-from-palette(
+  $unselected-background: mat.m2-get-color-from-palette(
     $background,
     unselected-chip
   );
-  $unselected-foreground: mat.get-color-from-palette($foreground, text);
+  $unselected-foreground: mat.m2-get-color-from-palette($foreground, text);
 
-  .mat-button.orcid-button-light-grey {
+  .mat-mdc-button.orcid-button-light-grey {
     background-color: map-get($background, light-grey);
   }
+  button.mat-mdc-raised-button.mat-unthemed {
+    border-color: $divider-color;
+  }
+}
 
-  button.mat-button-wrap-text-with-icon {
-    border: solid 1px mat.get-color-from-palette($foreground, dividers);
+// Keep var tied to element color so nested content inherits correctly
+.mat-mdc-button.mat-unthemed {
+  --mat-button-text-label-text-color: currentColor;
+}
+
+button.mat-mdc-icon-button {
+  --mat-icon-button-icon-size: 14px;
+}
+
+mat-paginator button.mat-mdc-icon-button {
+  --mat-icon-button-icon-size: revert;
+}
+
+button.mat-mdc-raised-button {
+  @include mat.elevation(0);
+  &:hover,
+  &:focus,
+  &:active {
+    box-shadow: none !important; // kill the shadow
+  }
+  &.mat-unthemed {
+    border: solid 1px;
   }
 }

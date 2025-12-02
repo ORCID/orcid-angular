@@ -9,10 +9,11 @@ import { TogglzService } from 'src/app/core/togglz/togglz.service'
   selector: 'app-account-settings',
   templateUrl: './account-settings.component.html',
   styleUrls: ['./account-settings.component.scss'],
+  standalone: false,
 })
 export class AccountSettingsComponent implements OnInit, OnDestroy {
   userInfo: any
-  $destroy = new Subject()
+  $destroy = new Subject<void>()
   constructor(
     private _togglz: TogglzService,
     private _userSession: UserService,

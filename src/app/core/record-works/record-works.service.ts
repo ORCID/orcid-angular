@@ -11,6 +11,9 @@ import {
   tap,
 } from 'rxjs/operators'
 import {
+  PublicWorkSearchEndpoint,
+  PublicWorkSearchResult,
+  TranslatedTitle,
   Work,
   WorkGroup,
   WorksEndpoint,
@@ -27,10 +30,16 @@ import {
 } from 'src/app/types/works.endpoint'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
-import { VisibilityStrings } from '../../types/common.endpoint'
+import {
+  MonthDayYearDate,
+  Value,
+  VisibilityStrings,
+} from '../../types/common.endpoint'
 import { DEFAULT_PAGE_SIZE, EXTERNAL_ID_TYPE_WORK } from 'src/app/constants'
 import { RecordImportWizard } from '../../types/record-peer-review-import.endpoint'
 import { SortOrderType } from '../../types/sort'
+import { TogglzService } from 'src/app/core/togglz/togglz.service'
+import { TogglzFlag } from '../togglz/togglz-flags.enum'
 
 @Injectable({
   providedIn: 'root',
@@ -40,6 +49,7 @@ export class RecordWorksService {
   groupingSuggestionsSubjectInitialized = false
   groupingSuggestionsSubject = new ReplaySubject<GroupingSuggestions>(1)
   $workSubject = new ReplaySubject<WorksEndpoint>(1)
+  $featuredWorkSubject = new ReplaySubject<Work[]>(1)
   offset = 0
   sortOrder: SortOrderType = 'date'
   sortAsc = false
@@ -49,13 +59,25 @@ export class RecordWorksService {
   userRecordOptions: UserRecordOptions = {}
 
   private _$loading = new BehaviorSubject<boolean>(true)
+  private _$loadingFeatured = new BehaviorSubject<boolean>(true)
+  private _$loadingSearch = new BehaviorSubject<boolean>(false)
+
   public get $loading() {
     return this._$loading.asObservable()
   }
 
+  public get $loadingFeatured() {
+    return this._$loadingFeatured.asObservable()
+  }
+
+  public get $loadingSearch() {
+    return this._$loadingSearch.asObservable()
+  }
+
   constructor(
     private _http: HttpClient,
-    private _errorHandler: ErrorHandlerService
+    private _errorHandler: ErrorHandlerService,
+    private _togglz: TogglzService
   ) {}
 
   /**
@@ -149,6 +171,112 @@ export class RecordWorksService {
       .subscribe()
 
     return this.$workSubject.asObservable()
+  }
+
+  /**
+   * Return an observable with a list of Featured Works
+   *
+   * @param options
+   */
+  getFeaturedWorks(options: UserRecordOptions): Observable<Work[]> {
+    this._$loadingFeatured.next(true)
+
+    this._togglz
+      .getStateOf(TogglzFlag.FEATURED_WORKS_UI)
+      .pipe(take(1))
+      .subscribe((enabled) => {
+        if (!enabled) {
+          this._$loadingFeatured.next(false)
+          this.$featuredWorkSubject.next([])
+          return
+        }
+
+        let url: string
+        if (options.publicRecordId) {
+          url = options.publicRecordId + '/featuredWorks.json'
+        } else {
+          url = 'works/featuredWorks.json'
+        }
+
+        this._http
+          .get<Work[]>(runtimeEnvironment.API_WEB + url)
+          .pipe(
+            retry(3),
+            catchError((error) => this._errorHandler.handleError(error)),
+            tap((data) => {
+              this._$loadingFeatured.next(false)
+              this.$featuredWorkSubject.next(data)
+            })
+          )
+          .subscribe()
+      })
+
+    return this.$featuredWorkSubject.asObservable()
+  }
+
+  searchPublicWorks(
+    term: string
+  ): Observable<{ results: Work[]; total: number }> {
+    return this._http
+      .get<PublicWorkSearchEndpoint>(
+        runtimeEnvironment.API_WEB +
+          `works/searchWorksTitleToFeature.json?term=${encodeURIComponent(
+            term
+          )}`
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        map((works: PublicWorkSearchEndpoint) => ({
+          results: works.results.map(
+            (work) =>
+              ({
+                ...work,
+                title: { value: work.title } as Value,
+                workType: { value: work.workType } as Value,
+                putCode: { value: work.putCode } as Value,
+                journalTitle: { value: work.journalTitle } as Value,
+                translatedTitle: {
+                  value: work.translatedTitle,
+                } as TranslatedTitle,
+                featuredDisplayIndex: work.featuredDisplayIndex,
+                publicationDate: {
+                  day: work.publicationDay,
+                  month: work.publicationMonth,
+                  year: work.publicationYear,
+                } as MonthDayYearDate,
+                workExternalIdentifiers: [],
+              } as Work)
+          ),
+          total: works.totalCount,
+        })),
+        tap(() => this._$loadingSearch.next(false))
+      )
+  }
+
+  /**
+   * Update featured works ordering
+   * Payload: map of putCode -> position index (1-based). To delete, send `undefined`.
+   */
+  updateFeaturedWorks(
+    featuredOrder: { [putCode: string]: number | undefined },
+    requireReloadAllWotks: boolean = false
+  ): Observable<boolean> {
+    return this._http
+      .put<boolean>(
+        runtimeEnvironment.API_WEB + 'works/featuredWorks.json',
+        featuredOrder
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() => {
+          this.getFeaturedWorks({ forceReload: true })
+          if (requireReloadAllWotks) {
+            this.getWorks({ forceReload: true })
+          }
+        })
+      )
   }
 
   private calculateVisibilityErrors(groups: WorkGroup[]): WorkGroup[] {
@@ -246,8 +374,8 @@ export class RecordWorksService {
 
   save(
     work: Work,
-    requireReload = true,
-    isLastWorkElement = false
+    reloadFeatured: boolean = false,
+    isLastWorkElement = true
   ): Observable<Work> {
     return this._http
       .post<Work>(runtimeEnvironment.API_WEB + `works/work.json`, work)
@@ -255,8 +383,11 @@ export class RecordWorksService {
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => {
-          if (!isLastWorkElement) {
+          if (isLastWorkElement) {
             this.getWorks({ forceReload: true })
+          }
+          if (reloadFeatured) {
+            this.getFeaturedWorks({ forceReload: true })
           }
         })
       )
@@ -281,7 +412,8 @@ export class RecordWorksService {
 
   updateVisibility(
     putCode: string,
-    visibility: VisibilityStrings
+    visibility: VisibilityStrings,
+    reloadFeatured: boolean = false
   ): Observable<any> {
     const options = {
       forceReload: true,
@@ -301,7 +433,12 @@ export class RecordWorksService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        tap(() => this.getWorks(options))
+        tap(
+          () =>
+            this.getWorks(options) &&
+            reloadFeatured &&
+            this.getFeaturedWorks({ forceReload: true })
+        )
       )
   }
 
@@ -346,7 +483,7 @@ export class RecordWorksService {
       )
   }
 
-  delete(putCode: any): Observable<any> {
+  delete(putCode: any, reloadFeatured: boolean): Observable<any> {
     return this._http
       .delete(
         runtimeEnvironment.API_WEB +
@@ -356,7 +493,12 @@ export class RecordWorksService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        tap(() => this.getWorks({ forceReload: true }))
+        tap(() => {
+          this.getWorks({ forceReload: true })
+          if (reloadFeatured) {
+            this.getFeaturedWorks({ forceReload: true })
+          }
+        })
       )
   }
 

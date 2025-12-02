@@ -24,14 +24,6 @@ app-notification {
     flex-direction: row;
     align-items: center;
 
-    mat-checkbox {
-      margin-right: $spacing-small;
-      [dir='rtl'] :host & {
-        margin-right: auto;
-        margin-left: $spacing-small;
-      }
-      margin-bottom: 4px; // Fix misalignment
-    }
     .archive-label {
       margin-right: $spacing-base;
       [dir='rtl'] :host & {

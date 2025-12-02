@@ -6,6 +6,11 @@
   border-bottom: solid 1px;
 }
 
+:host.featured {
+  padding-top: 0;
+  padding-left: 48px;
+}
+
 h3 {
   margin: 0;
 }
@@ -31,5 +36,8 @@ h3 {
     .data-content {
       margin-bottom: 12px;
     }
+  }
+  .featured-data-content {
+    margin-bottom: 0 !important;
   }
 }

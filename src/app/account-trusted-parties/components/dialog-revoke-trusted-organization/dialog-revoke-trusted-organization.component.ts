@@ -1,8 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core'
-import {
-  MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA,
-  MatLegacyDialogRef as MatDialogRef,
-} from '@angular/material/legacy-dialog'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { AccountTrustedOrganization } from 'src/app/types/account-trusted-organizations'
 
@@ -14,6 +11,7 @@ import { AccountTrustedOrganization } from 'src/app/types/account-trusted-organi
     './dialog-revoke-trusted-organization.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class DialogRevokeTrustedOrganizationComponent implements OnInit {
   isMobile: boolean

@@ -7,7 +7,7 @@
   $warn: map-get($theme, accent);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
-  $config: mat.define-legacy-typography-config();
+  $config: mat.m2-define-typography-config();
 
   .error {
     color: map-get($foreground, 'state-warning-dark');

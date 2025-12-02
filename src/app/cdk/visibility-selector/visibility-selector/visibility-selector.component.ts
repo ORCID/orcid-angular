@@ -10,7 +10,6 @@ import { WINDOW } from '../../window'
     './visibility-selector.component.scss',
     './visibility-selector.component.scss-theme.scss',
   ],
-
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -18,6 +17,7 @@ import { WINDOW } from '../../window'
       multi: true,
     },
   ],
+  standalone: false,
 })
 export class VisibilitySelectorComponent
   implements OnInit, ControlValueAccessor

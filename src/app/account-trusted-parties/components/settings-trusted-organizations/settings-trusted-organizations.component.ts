@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
+import { MatDialog } from '@angular/material/dialog'
 import { Observable } from 'rxjs'
 import { AccountTrustedOrganizationsService } from 'src/app/core/account-trusted-organizations/account-trusted-organizations.service'
 import { AccountTrustedOrganization } from 'src/app/types/account-trusted-organizations'
@@ -9,6 +9,7 @@ import { DialogRevokeTrustedOrganizationComponent } from '../dialog-revoke-trust
   selector: 'app-settings-trusted-organizations',
   templateUrl: './settings-trusted-organizations.component.html',
   styleUrls: ['./settings-trusted-organizations.component.scss'],
+  standalone: false,
 })
 export class SettingsTrustedOrganizationsComponent implements OnInit {
   $trustedOrganization: Observable<AccountTrustedOrganization[]>

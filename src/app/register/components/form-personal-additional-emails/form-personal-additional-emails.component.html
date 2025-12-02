@@ -1,20 +1,28 @@
 <ng-container [formGroup]="additionalEmails">
   <div
-    class="input-container"
+    class="input-container margin-top-12"
     *ngFor="
       let additionalEmailControl of additionalEmails?.controls | keyvalue;
       index as i
     "
   >
+    <mat-label
+      class="orc-font-small-print"
+      id="additional-email-label"
+      [ngClass]="{
+        error: additionalEmailsTouched && additionalEmails.valid === false
+      }"
+    >
+      <ng-container i18n="@@register.additionalEmails"
+        >Additional email</ng-container
+      >
+      {{ i !== 0 ? i : '' }}
+      <label i18n="@@register.optional">(Optional)</label>
+    </mat-label>
     <mat-form-field appearance="outline">
-      <mat-label>
-        <ng-container i18n="@@register.additionalEmails"
-          >Additional email</ng-container
-        >
-        {{ i !== 0 ? i : '' }}
-        <ng-container i18n="@@register.optional">(Optional)</ng-container>
-      </mat-label>
       <input
+        aria-labelledby="additional-email-label"
+        [placeholder]="labelAddAnAddionalEmail"
         #emailInput
         formControlName="{{ additionalEmailControl.key }}"
         matInput
@@ -23,15 +31,18 @@
         [id]="additionalEmailControl.key"
         type="email"
       />
-      <mat-error
-        *ngIf="
-          additionalEmails.hasError('email', additionalEmailControl.key) ||
-          additionalEmails.hasError('pattern', additionalEmailControl.key)
-        "
-        i18n="@@register.invalidEmail"
-      >
-        Invalid email format
-      </mat-error>
+    </mat-form-field>
+    <mat-error
+      *ngIf="
+        additionalEmailsTouched &&
+        (additionalEmails.hasError('email', additionalEmailControl.key) ||
+          additionalEmails.hasError('pattern', additionalEmailControl.key))
+      "
+      i18n="@@register.invalidEmail2"
+    >
+      Please enter a valid email address, for example joe&#64;institution.edu
+    </mat-error>
+    <ng-container *ngIf="additionalEmailsTouched">
       <mat-error
         *ngFor="
           let error of getControlErrorAtFormLevel(
@@ -41,13 +52,15 @@
         "
       >
         <app-backend-error
+          [showEmailAlreadyExistUntilNextButtonWasClicked]="true"
+          [nextButtonWasClicked]="nextButtonWasClicked"
           [errorCode]="error"
           [value]="additionalEmailControl.value.value"
         ></app-backend-error>
       </mat-error>
-    </mat-form-field>
+    </ng-container>
 
-    <button
+    <!-- <button
       *ngIf="i == 0"
       mat-icon-button
       [attr.aria-label]="labelInfoAboutEmails"
@@ -59,8 +72,8 @@
       <mat-icon class="material-icons-outlined large-material-icon"
         >help_outline</mat-icon
       >
-    </button>
-    <button
+    </button> -->
+    <!-- <button
       *ngIf="i > 0"
       mat-icon-button
       [attr.aria-label]="labelDeleteEmail"
@@ -68,36 +81,6 @@
       (click)="deleteEmailInput(additionalEmailControl.key)"
     >
       <mat-icon>remove_circle_outline</mat-icon>
-    </button>
+    </button> -->
   </div>
 </ng-container>
-
-<a (click)="addAdditionalEmail()" class="mat-button-font">
-  <mat-icon>add</mat-icon>
-  <span i18n="@@register.additionalEmailAdd">Add another email</span>
-</a>
-
-<mde-popover
-  #namesPopover="mdePopover"
-  [mdePopoverOverlapTrigger]="false"
-  [mdePopoverCloseOnClick]="true"
->
-  <mat-card class="mat-elevation-z3 orcid-popover">
-    <ng-container i18n="@@register.additionalEmailInfo"
-      >Ensure that you never lose access to your ORCID record by registering
-      additional email addresses on your account.</ng-container
-    >
-
-    <button
-      mat-button
-      color="primary"
-      [attr.aria-label]="labelClose"
-      (click)="additionalEmailsPopoverTrigger.closePopover()"
-      cdkFocusInitial
-      i18n="@@shared.ok"
-      type="button"
-    >
-      Ok
-    </button>
-  </mat-card>
-</mde-popover>

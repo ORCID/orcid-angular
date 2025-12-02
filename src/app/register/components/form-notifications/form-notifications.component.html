@@ -1,35 +1,19 @@
-<h3 class="mat-subheading-2" i18n="@@register.notificationSettings">
-  Notification settings
-</h3>
-
-<p i18n="@@register.notificationsDescription1">
-  ORCID sends email notifications about items related to your account, security,
-  and privacy, including requests from ORCID member organizations for permission
-  to update your record, and changes made to your record by those organizations.
-</p>
-
-<p i18n="@@register.notificationsDescription2">
-  You can also choose to receive emails from us about new features and tips for
-  making the most of your ORCID record.
-</p>
-
-<ng-container [formGroup]="form">
+<div [formGroup]="form">
+  <h3 class="orc-font-body no-top-margin" i18n="@@register.tipsFeaturesEmail">
+    Tips & features email
+  </h3>
+  <p i18n="@@register.weOccasionallySend">
+    We occasionally send out an email with information on new features and tips
+    for getting the best out of your ORCID record.
+  </p>
   <mat-checkbox
-    color="primary"
     formControlName="sendOrcidNews"
-    class="orcid-checkbox-baseline"
-    ><ng-container i18n="@@register.quarterlyEmail"
-      >Please send me quarterly emails about new ORCID features and
-      tips.</ng-container
-    >
-    <i i18n="@@register.quarterlyEmailVerified"
-      >To receive these emails, you will also need to verify your primary email
-      address.</i
-    >
+    class="margin-bottom-16"
+    color="primary"
+  >
+    <!-- prettier-ignore -->
+    <div class="mat-checkbox-content" i18n="@@register.idLikeToReceiveTipsFeatures"
+  >I’d like to receive the ORCID tips & features email
+</div>
   </mat-checkbox>
-</ng-container>
-
-<p i18n="@@register.reviewAfterRegistered">
-  After you've registered, you can change your notification settings at any time
-  in the account settings section of your ORCID record.
-</p>
+</div>

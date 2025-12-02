@@ -10,8 +10,8 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms'
-import { MatLegacyChip as MatChip } from '@angular/material/legacy-chips'
-import { matLegacyFormFieldAnimations as matFormFieldAnimations } from '@angular/material/legacy-form-field'
+import { MatChip } from '@angular/material/chips'
+import { matFormFieldAnimations } from '@angular/material/form-field'
 import { Observable } from 'rxjs'
 import { WINDOW } from 'src/app/cdk/window'
 import { PasswordRecoveryService } from 'src/app/core/password-recovery/password-recovery.service'
@@ -26,6 +26,7 @@ import { PasswordRecovery } from 'src/app/types'
   ],
   animations: [matFormFieldAnimations.transitionMessages],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class PasswordRecoveryComponent implements OnInit, AfterViewInit {
   serverError = null

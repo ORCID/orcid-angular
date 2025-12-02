@@ -3,6 +3,7 @@ import { MonthDayYearDate } from 'src/app/types'
 
 @Pipe({
   name: 'monthDayYearDateToString',
+  standalone: false,
 })
 export class MonthDayYearDateToStringPipe implements PipeTransform {
   transform(value: MonthDayYearDate | number | string): string {

@@ -1,8 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core'
-import {
-  MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA,
-  MatLegacyDialogRef as MatDialogRef,
-} from '@angular/material/legacy-dialog'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { ExpandedSearchResultsContent } from 'src/app/types'
 
@@ -10,6 +7,7 @@ import { ExpandedSearchResultsContent } from 'src/app/types'
   selector: 'app-dialog-add-trusted-individuals-your-own-email',
   templateUrl: './dialog-add-trusted-individuals-your-own-email.component.html',
   styleUrls: ['./dialog-add-trusted-individuals-your-own-email.component.scss'],
+  standalone: false,
 })
 export class DialogAddTrustedIndividualsYourOwnEmailComponent
   implements OnInit

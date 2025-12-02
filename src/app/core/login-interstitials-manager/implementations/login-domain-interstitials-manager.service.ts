@@ -6,10 +6,11 @@ import { EmailsEndpoint } from 'src/app/types'
 import { UserRecord } from 'src/app/types/record.local'
 import { ComponentType } from '@angular/cdk/overlay'
 import { InterstitialType } from 'src/app/cdk/interstitials/interstitial.type'
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
+import { MatDialog } from '@angular/material/dialog'
 import { QaFlag } from '../../qa-flag/qa-flags.enum'
 import { QaFlagsService } from '../../qa-flag/qa-flag.service'
 import { TogglzService } from '../../togglz/togglz.service'
+import { TogglzFlag } from '../../togglz/togglz-flags.enum'
 import { LoginBaseInterstitialManagerService } from '../abstractions/login-abstract-interstitial-manager.service'
 import { ShareEmailsDomainsComponent } from 'src/app/cdk/interstitials/share-emails-domains/interstitial-component/share-emails-domains.component'
 import {
@@ -30,9 +31,9 @@ export class LoginDomainInterstitialManagerService extends LoginBaseInterstitial
   QA_FLAG_FOR_FORCE_INTERSTITIAL_AS_NEVER_SEEN =
     QaFlag.forceDomainInterstitialAsNeverSeem
   INTERSTITIAL_NAME: InterstitialType = 'DOMAIN_INTERSTITIAL'
-  INTERSTITIAL_TOGGLE = [
-    'LOGIN_DOMAINS_INTERSTITIAL',
-    'OAUTH_DOMAINS_INTERSTITIAL',
+  INTERSTITIAL_TOGGLE: TogglzFlag[] = [
+    TogglzFlag.LOGIN_DOMAINS_INTERSTITIAL,
+    TogglzFlag.OAUTH_DOMAINS_INTERSTITIAL,
   ]
 
   constructor(

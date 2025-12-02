@@ -4,7 +4,7 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms'
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
+import { MatDialog } from '@angular/material/dialog'
 import { of, throwError } from 'rxjs'
 import { switchMap, take } from 'rxjs/operators'
 import { UserService } from 'src/app/core'
@@ -20,6 +20,7 @@ import { DialogActionsDuplicatedComponent } from '../dialog-actions-duplicated/d
   templateUrl: './settings-actions-duplicated.component.html',
   styleUrls: ['./settings-actions-duplicated.component.scss'],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class SettingsActionsDuplicatedComponent implements OnInit {
   userSession: UserSession
@@ -30,7 +31,7 @@ export class SettingsActionsDuplicatedComponent implements OnInit {
     private _user: UserService
   ) {}
   @Output() loading = new EventEmitter<boolean>()
-  @Output() close = new EventEmitter()
+  @Output() close = new EventEmitter<void>()
 
   form: UntypedFormGroup
   errors: any[]

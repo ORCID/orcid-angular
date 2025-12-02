@@ -1,13 +1,50 @@
-<div class="intro">{{ notification?.notificationIntro }}</div>
+<div *ngIf="isOrcidIntegration" class="intro">
+  <p i18n="@@inbox.youCanBenefitFromAutomatic">
+    You may benefit from automatic updates to your record.
+  </p>
+  <ng-container i18n="@@inbox.basedOnYourVerifiedEmailDomains"
+    >Based on your verified email domain, we have found an ORCID integration
+    for</ng-container
+  >
+  <strong> {{ orcidIntegrationMemberName }}</strong
+  >.
+  <ng-container i18n="@@inbox.ifYouAreAnActiveMember"
+    >If you are a current faculty or staff member at</ng-container
+  ><strong> {{ orcidIntegrationMemberName }}</strong
+  >,
+  <ng-container i18n="@@inbox.connectingWithThisIntegrationWillAllow"
+    >connecting with this integration will allow</ng-container
+  >
+  <strong>{{ orcidIntegrationMemberName }}</strong>
+  <ng-container i18n="@@inbox.toAutomaticallyAddValidatedInformation"
+    >to automatically add validated information to your ORCID record. This will
+    save you time and effort when maintaining your ORCID record, and help make
+    sure it stays up-to-date.</ng-container
+  >
 
-<div>
+  <br />
+  <br />
+  <ng-container i18n="@@inbox.ifYouAreNoLongerAffiliatedWith"
+    >If you are no longer affiliated with</ng-container
+  >
+  <strong> {{ orcidIntegrationMemberName }}</strong
+  >,
+  <ng-container i18n="@@inbox.emailAddressFromYourVerifiedEmail"
+    >you may disregard this notification or remove the relevant email address
+    from your ORCID record.</ng-container
+  >
+</div>
+<div *ngIf="!isOrcidIntegration" class="intro">
+  {{ notification?.notificationIntro }}
+</div>
+
+<div *ngIf="!isOrcidIntegration">
   <strong>{{ notification?.source.sourceName.content }}</strong>
   <ng-container i18n="@@inbox.likeYourPermission"
     >would like your permission to interact with your ORCID Record as a trusted
     party.</ng-container
   >
 </div>
-
 <div *ngFor="let i of itemsByType">
   <p class="type">
     <strong>
@@ -24,7 +61,7 @@
     </li>
   </ul>
 </div>
-<div class="buttons-container">
+<div *ngIf="!isOrcidIntegration" class="buttons-container">
   <button
     *ngIf="!notification?.archivedDate"
     (click)="archive(); $event.stopPropagation()"
@@ -47,6 +84,20 @@
       i18n="@@inbox.grantPermission"
     >
       Grant permission
+    </button>
+  </a>
+</div>
+<div *ngIf="isOrcidIntegration" class="buttons-container">
+  <a target="_blank" rel="noopener noreferrer" [href]="orcidIntegrationLink">
+    <button
+      mat-raised-button
+      color="primary"
+      class="grant-permission"
+      i18n="@@inbox.connectWith"
+      [innerHTML]="'Connect with ' + orcidIntegrationMemberName"
+      i18n="@@inbox.connectWith|Connect with {orcidIntegrationMemberName}"
+    >
+      Connect with
     </button>
   </a>
 </div>

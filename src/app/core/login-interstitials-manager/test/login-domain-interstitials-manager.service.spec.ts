@@ -1,8 +1,5 @@
 import { TestBed } from '@angular/core/testing'
-import {
-  MatLegacyDialog as MatDialog,
-  MatLegacyDialogRef as MatDialogRef,
-} from '@angular/material/legacy-dialog'
+import { MatDialog, MatDialogRef } from '@angular/material/dialog'
 import { of, Subject } from 'rxjs'
 import { InterstitialsService } from 'src/app/cdk/interstitials/interstitials.service'
 
@@ -16,6 +13,7 @@ import { LoginDomainInterstitialManagerService } from '../implementations/login-
 import { ShareEmailsDomainsDialogComponent } from 'src/app/cdk/interstitials/share-emails-domains/interstitial-dialog-extend/share-emails-domains-dialog.component'
 import { inject } from '@angular/core'
 import { WINDOW_PROVIDERS } from 'src/app/cdk/window'
+import { TogglzFlag } from '../../togglz/togglz-flags.enum'
 
 describe('LoginDomainInterstitialManagerService', () => {
   let service: LoginDomainInterstitialManagerService
@@ -62,8 +60,8 @@ describe('LoginDomainInterstitialManagerService', () => {
 
     it('should have the correct INTERSTITIAL_TOGGLE', () => {
       expect(service.INTERSTITIAL_TOGGLE).toEqual([
-        'LOGIN_DOMAINS_INTERSTITIAL',
-        'OAUTH_DOMAINS_INTERSTITIAL',
+        TogglzFlag.LOGIN_DOMAINS_INTERSTITIAL,
+        TogglzFlag.OAUTH_DOMAINS_INTERSTITIAL,
       ])
     })
 
@@ -192,7 +190,7 @@ describe('LoginDomainInterstitialManagerService', () => {
         },
       } as unknown as UserRecord
 
-      mockInterstitialsService.setInterstitialsViewed.and.returnValue(of(true))
+      mockInterstitialsService.setInterstitialsViewed.and.returnValue(of(null))
 
       const afterClosed$ = new Subject<any>()
       const mockDialogRef = jasmine.createSpyObj<MatDialogRef<any>>(

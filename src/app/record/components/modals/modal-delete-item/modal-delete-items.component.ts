@@ -7,7 +7,7 @@ import {
 } from '@angular/core'
 import { Subject } from 'rxjs'
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms'
-import { MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog'
+import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../cdk/modal/modal/modal.component'
 import { PlatformInfoService } from '../../../../cdk/platform-info'
 import { RecordWorksService } from '../../../../core/record-works/record-works.service'
@@ -26,6 +26,7 @@ import { Work } from '../../../../types/record-works.endpoint'
     './modal-delete-items.component.scss',
     './modal-delete-items.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
@@ -38,6 +39,7 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
     | 'distinction'
     | 'membership'
     | 'service'
+    | 'editorial-service'
     | 'works'
     | 'activities'
     | 'peer-review'
@@ -47,6 +49,7 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
 
   @Input() item: any
   @Input() putCodes: string[] = []
+  @Input() works: Work[] = []
 
   isMobile: boolean
   loadingItems = false
@@ -54,6 +57,7 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
   selectedItem: boolean
   selectedItems: string[] = []
   selectAll: false
+  reloadFeaturedWorks: boolean = false
 
   deleteForm: UntypedFormGroup
 
@@ -80,7 +84,7 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
         this.isMobile = platform.columns4 || platform.columns8
       })
 
-    if (this.item && this.putCodes?.length === 0) {
+    if (this.item && this.works.length === 0) {
       this.items.push(this.item)
       this.items.forEach((i) => {
         group[i?.putCode?.value || i.putCode] = new UntypedFormGroup({
@@ -90,20 +94,17 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
       this.deleteForm = new UntypedFormGroup(group)
     }
 
-    if (this.putCodes.length > 0) {
+    if (this.works.length > 0) {
       this.loadingItems = true
-      this._recordWorksService
-        .getWorksInfo(this.putCodes)
-        .subscribe((works: Work[]) => {
-          works.forEach((w) => {
-            this.items.push(w)
-            group[w.putCode.value] = new UntypedFormGroup({
-              checked: new UntypedFormControl(false),
-            })
-          })
-          this.deleteForm = new UntypedFormGroup(group)
-          this.loadingItems = false
+
+      this.works.forEach((w) => {
+        this.items.push(w)
+        group[w.putCode.value] = new UntypedFormGroup({
+          checked: new UntypedFormControl(false),
         })
+      })
+      this.deleteForm = new UntypedFormGroup(group)
+      this.loadingItems = false
     }
   }
 
@@ -121,6 +122,9 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
         if (this.items.length > 1) {
           putCodesDelete.push(putCode)
         }
+      }
+      if (item.featuredDisplayIndex > 0) {
+        this.reloadFeaturedWorks = true
       }
     })
     if (putCode || putCodesDelete.length > 0) {
@@ -142,6 +146,7 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
       case 'distinction':
       case 'membership':
       case 'service':
+      case 'editorial-service':
         this._recordAffiliationService
           .delete(putCode)
           .pipe(first())
@@ -159,7 +164,7 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
         break
       case 'works':
         this._recordWorksService
-          .delete(putCode)
+          .delete(putCode, this.reloadFeaturedWorks)
           .pipe(first())
           .subscribe(() => {
             this.closeEvent()
@@ -192,7 +197,8 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
       this.type === 'invited-position' ||
       this.type === 'distinction' ||
       this.type === 'membership' ||
-      this.type === 'service'
+      this.type === 'service' ||
+      this.type === 'editorial-service'
     )
   }
 

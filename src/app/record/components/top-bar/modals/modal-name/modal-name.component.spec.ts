@@ -4,15 +4,15 @@ import { ModalNameComponent } from './modal-name.component'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 import {
-  MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA,
-  MatLegacyDialog as MatDialog,
-  MatLegacyDialogRef as MatDialogRef,
-} from '@angular/material/legacy-dialog'
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog'
 import { WINDOW_PROVIDERS } from '../../../../../cdk/window'
 import { PlatformInfoService } from '../../../../../cdk/platform-info'
 import { ErrorHandlerService } from '../../../../../core/error-handler/error-handler.service'
 import { SnackbarService } from '../../../../../cdk/snackbar/snackbar.service'
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
+import { MatSnackBar } from '@angular/material/snack-bar'
 import { Overlay } from '@angular/cdk/overlay'
 import { UserService } from '../../../../../core'
 import { RecordNamesService } from '../../../../../core/record-names/record-names.service'
@@ -30,7 +30,6 @@ import { getNamesEndPoint } from '../../../../../core/record-names/record-names.
 import { getOtherNamesEndPoint } from '../../../../../core/record-other-names/record-other-names.service.spec'
 import { HarnessLoader } from '@angular/cdk/testing'
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed'
-import { MatLegacyButtonHarness as MatButtonHarness } from '@angular/material/legacy-button/testing'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 

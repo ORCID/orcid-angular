@@ -7,6 +7,7 @@ import { Component, Input, OnInit } from '@angular/core'
     './offline-message.component.scss-theme.scss',
     './offline-message.component.scss',
   ],
+  standalone: false,
 })
 export class OfflineMessageComponent implements OnInit {
   @Input() canBeRetry

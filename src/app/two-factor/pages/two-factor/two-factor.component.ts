@@ -11,6 +11,7 @@ import { TwoFactorAuthenticationService } from '../../../core/two-factor-authent
   templateUrl: './two-factor.component.html',
   styleUrls: ['./two-factor.component.scss'],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class TwoFactorComponent implements OnInit {
   loading = false

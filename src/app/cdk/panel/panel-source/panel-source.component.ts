@@ -5,7 +5,7 @@ import {
   Affiliation,
   AffiliationTypeLabel,
 } from '../../../types/record-affiliation.endpoint'
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
+import { MatDialog } from '@angular/material/dialog'
 import { ModalDeleteItemsComponent } from '../../../record/components/modals/modal-delete-item/modal-delete-items.component'
 import { Funding } from '../../../types/record-funding.endpoint'
 import { ResearchResource } from '../../../types/record-research-resources.endpoint'
@@ -23,6 +23,7 @@ import { UserRecord } from 'src/app/types/record.local'
     './panel-source.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class PanelSourceComponent implements OnInit {
   closeOtherSources = $localize`:@@record.hideAllSources:Hide all sources for`
@@ -47,6 +48,7 @@ export class PanelSourceComponent implements OnInit {
     | 'distinction'
     | 'membership'
     | 'service'
+    | 'editorial-service'
     | 'funding'
     | 'works'
     | 'activities'

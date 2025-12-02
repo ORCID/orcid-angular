@@ -4,22 +4,30 @@
       [isPublicRecord]="publicOrcid"
     ></app-top-bar-my-public-record-preview>
     <app-record-header
-      *ngIf="!!publicOrcid"
-      [loadingUserRecord]="loadingUserRecord"
-      [isPublicRecord]="publicOrcid"
-      [affiliations]="affiliations"
-      [displaySideBar]="displaySideBar"
-      [displayBiography]="displayBiography"
-      [(recordSummaryOpen)]="recordSummaryOpen"
+      *ngIf="
+        !!publicOrcid &&
+        !((compactEligible$ | async) && (compactActive$ | async))
+      "
     ></app-record-header>
+    <!---
+    On compact mode the record summary is displayed in the record header 
+    on non-compact mode the record summary is displayed in my-orcid page (here)
+    --->
     <div
       class="container no-padding main-content"
       [ngClass]="{
-        'main-content-shadow': recordSummaryOpen,
         mobile: !platform.columns12
       }"
     >
-      <div class="row">
+      <app-record-summary></app-record-summary>
+
+      <div
+        class="row"
+        [ngClass]="{
+          'main-content-shadow': recordSummaryOpen,
+
+        }"
+      >
         <app-side-bar
           class="col l3 m8 s4 new-header"
           [isPublicRecord]="publicOrcid"
@@ -151,6 +159,13 @@
                   (total)="affiliationsCount($event, 'RESEARCH_RESOURCE')"
                   id="cy-research-resources"
                 ></app-research-resources>
+                <app-work-featured-stack-group
+                  *ngIf="featuredWorksTogglz"
+                  [userInfo]="userInfo"
+                  [isPublicRecord]="publicOrcid"
+                  id="cy-featured-works"
+                >
+                </app-work-featured-stack-group>
                 <app-work-stack-group
                   [userInfo]="userInfo"
                   [isPublicRecord]="publicOrcid"

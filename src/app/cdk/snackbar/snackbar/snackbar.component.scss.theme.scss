@@ -7,11 +7,11 @@
   $warn: map-get($theme, warn);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
-  $overlay-color: mat.get-color-from-palette($background, blue-overlay);
+  $overlay-color: mat.m2-get-color-from-palette($background, blue-overlay);
 
   mat-icon,
   div {
-    color: mat.get-contrast-color-from-palette($warn, 900);
+    color: mat.m2-get-contrast-color-from-palette($warn, 900);
   }
 }
 

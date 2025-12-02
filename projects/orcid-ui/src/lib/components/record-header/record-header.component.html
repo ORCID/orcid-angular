@@ -1,0 +1,230 @@
+<mat-progress-bar
+  *ngIf="loading"
+  mode="indeterminate"
+  color="accent"
+></mat-progress-bar>
+
+<div class="record-header-wrapper" [ngClass]="{ mobile: !isDesktop }">
+  <div class="orc-row orc-container record-header">
+    <section
+      *ngIf="!compactMode"
+      [id]="'names'"
+      role="region"
+      [attr.aria-label]="regionNames"
+      class="orcid-id-section"
+    >
+      <div class="orc-row names-wrapper" *ngIf="!loading && title">
+        <div class="orc-row names">
+          <h1
+            [ngClass]="{
+              'orc-ui-font-heading-small': !isDesktop,
+              'orc-ui-font-heading': isDesktop
+            }"
+          >
+            {{ title }}
+          </h1>
+          <!-- Mobile-only: show other-names above the projected actions -->
+          <div
+            class="orc-row other-names mobile"
+            *ngIf="!isDesktop && subtitle"
+          >
+            <p class="orc-ui-font-body">{{ subtitle }}</p>
+          </div>
+          <ng-content select="[record-header-name-actions]"></ng-content>
+        </div>
+        <!-- Desktop-only: other names below names row -->
+        <div class="orc-row other-names" *ngIf="isDesktop && subtitle">
+          <p class="orc-ui-font-body">{{ subtitle }}</p>
+        </div>
+      </div>
+
+      <!-- Placeholder to reserve title height during loading -->
+      <div
+        class="orc-row names-wrapper loading-placeholder"
+        *ngIf="loading"
+        aria-hidden="true"
+      >
+        <div class="orc-row names">
+          <h1
+            [ngClass]="{
+              'orc-ui-font-heading-small': !isDesktop,
+              'orc-ui-font-heading': isDesktop
+            }"
+          >
+            &nbsp;
+          </h1>
+          <!-- Mobile-only: show other-names placeholder above the projected actions -->
+          <div class="orc-row other-names mobile" *ngIf="!isDesktop">
+            <p class="orc-ui-font-body">&nbsp;</p>
+          </div>
+          <!-- Placeholder for projected name actions to maintain spacing.
+               Height matches the projected edit button (40px) on desktop, but is flexible on mobile. -->
+          <div class="id-logo-placeholder"></div>
+        </div>
+        <!-- Desktop-only: other names placeholder - always show to match max height -->
+        <div class="orc-row other-names" *ngIf="isDesktop">
+          <p class="orc-ui-font-body">&nbsp;</p>
+        </div>
+      </div>
+
+      <div class="issue" *ngIf="!loading">
+        <orcid-text-with-tooltip>
+          <h1
+            [ngClass]="{
+              'orc-ui-font-heading-small': !isDesktop,
+              'orc-ui-font-heading': isDesktop
+            }"
+          >
+            <ng-content select="[header-banner-issue]"></ng-content>
+          </h1>
+        </orcid-text-with-tooltip>
+      </div>
+    </section>
+
+    <mat-divider *ngIf="!compactMode" class="divider"></mat-divider>
+
+    <div class="orc-row link-wrapper">
+      <section
+        [id]="'orcid-id'"
+        role="region"
+        [attr.aria-label]="regionOrcidId"
+      >
+        <div class="orc-row id-wrapper" [ngClass]="{ compact: compactMode }">
+          <div
+            [ngClass]="{
+              'orc-ui-font-body-small': !isDesktop,
+              'orc-ui-font-body': isDesktop,
+              mobile: !isDesktop,
+              compact: compactMode
+            }"
+            class="orcid-id-text-and-buttons"
+            dir="ltr"
+          >
+            <div class="orc-row" *ngIf="compactMode && !loading && title">
+              <h1
+                class="orc-ui-font-body-large"
+                style="font-weight: bold"
+                [ngClass]="{
+                  mobile: !isDesktop
+                }"
+              >
+                {{ title }}
+              </h1>
+            </div>
+
+            <!-- Placeholder to reserve title height during loading in compact mode -->
+            <div
+              class="orc-row loading-placeholder-compact"
+              *ngIf="compactMode && loading"
+              aria-hidden="true"
+            >
+              <h1
+                class="orc-ui-font-body-large"
+                style="font-weight: bold"
+                [ngClass]="{
+                  mobile: !isDesktop
+                }"
+              >
+                &nbsp;
+              </h1>
+            </div>
+
+            <!-- Placeholder for ORCID ID section during loading.
+                 Height matches the desktop ID row (48px) but is flexible on mobile. -->
+            <div
+              class="orcid-link-wrapper loading-placeholder"
+              *ngIf="loading"
+              aria-hidden="true"
+            >
+              <div class="id-logo-placeholder"></div>
+              <h2
+                [ngClass]="{
+                  'orc-ui-font-body-small': compactMode,
+                  'orc-ui-font-body-large': !compactMode,
+                  mobile: !isDesktop
+                }"
+                class="font-weight-400"
+              >
+                &nbsp;
+              </h2>
+            </div>
+
+            <div class="orcid-link-wrapper" *ngIf="!loading">
+              <ng-content select="[header-banner-logo]"></ng-content>
+              <h2
+                [ngClass]="{
+                  'orc-ui-font-body-small': compactMode,
+                  'orc-ui-font-body-large': !compactMode,
+                  mobile: !isDesktop
+                }"
+                class="font-weight-400"
+              >
+                <ng-container *ngIf="!isDesktop; else elseBlock">
+                  {{ primaryIdText }}
+                </ng-container>
+                <ng-template #elseBlock>{{ secondaryIdText }}</ng-template>
+              </h2>
+            </div>
+
+            <div
+              class="buttons-wrapper"
+              [ngClass]="{
+                'orc-row': !isDesktop,
+                mobile: !isDesktop
+              }"
+              *ngIf="!compactMode && !loading"
+            >
+              <ng-content select="[header-banner-id-actions]"></ng-content>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Mobile-only placeholder to reserve summary actions height during loading -->
+      <div
+        class="summary-actions-placeholder"
+        *ngIf="!isDesktop && loading && !compactMode"
+        aria-hidden="true"
+      ></div>
+
+      <!-- Mobile compact mode placeholder to reserve summary actions height during loading -->
+      <div
+        class="summary-actions-placeholder compact"
+        *ngIf="!isDesktop && loading && compactMode"
+        aria-hidden="true"
+      ></div>
+
+      <div *ngIf="!loading && title">
+        <ng-container
+          *ngIf="
+            (compactMode && isDesktop && !expanded) ||
+              (compactMode && !isDesktop);
+            else summaryToggle
+          "
+        >
+          <ng-content select="[record-header-summary-actions]"></ng-content>
+        </ng-container>
+        <ng-template #summaryToggle>
+          <button
+            *ngIf="canToggleExpanded"
+            mat-button
+            accentButton
+            (click)="onToggleExpanded()"
+            class="orc-ui-font-body-small"
+          >
+            <mat-icon *ngIf="expanded">expand_more</mat-icon>
+            <mat-icon class="expand_more" *ngIf="!expanded">
+              expand_less
+            </mat-icon>
+            <ng-container *ngIf="expanded">
+              <ng-content select="[header-banner-expanded-label]"></ng-content>
+            </ng-container>
+            <ng-container *ngIf="!expanded">
+              <ng-content select="[header-banner-collapsed-label]"></ng-content>
+            </ng-container>
+          </button>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

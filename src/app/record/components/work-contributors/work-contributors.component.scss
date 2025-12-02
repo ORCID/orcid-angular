@@ -59,7 +59,7 @@
     padding: 0 8px;
   }
 
-  .mat-form-field {
+  .mat-mdc-form-field {
     width: 100%;
   }
 
@@ -125,4 +125,8 @@
 
 ::ng-deep .columns-4-or-8 .contributors-wrapper {
   margin: 16px 0 16px 0;
+}
+
+mat-form-field {
+  margin-bottom: 8px;
 }

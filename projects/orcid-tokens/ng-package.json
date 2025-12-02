@@ -1,0 +1,8 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/orcid-tokens",
+  "lib": {
+    "entryFile": "src/public-api.ts"
+  },
+  "assets": ["tokens.css", "tokens.scss", "tokens.json"]
+}

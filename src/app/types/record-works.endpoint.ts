@@ -28,6 +28,7 @@ export interface Work extends AssertionBase {
   workType: WorkType
   dateSortString?: MonthDayYearDate
   userSource?: boolean
+  featuredDisplayIndex?: number
   visibility?: Visibility
 }
 interface WorkType {
@@ -75,4 +76,25 @@ export interface WorksEndpoint {
   groups: WorkGroup[]
   pageIndex: number // THIS DATA FIELD IS ATTACHED ON THE FRONTEND
   pageSize: number // THIS DATA FIELD IS ATTACHED ON THE FRONTEND
+}
+
+export interface PublicWorkSearchEndpoint {
+  results: PublicWorkSearchResult[]
+  offset: number
+  totalCount: number
+  errors?: any[]
+}
+
+export interface PublicWorkSearchResult {
+  putCode: string
+  title: string
+  translatedTitle: string
+  publicationYear: string
+  publicationMonth: string
+  publicationDay: string
+  workType: string
+  journalTitle: string
+  default: boolean
+  public: boolean
+  featuredDisplayIndex: number
 }

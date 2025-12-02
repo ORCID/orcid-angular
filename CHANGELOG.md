@@ -1,3 +1,659 @@
+## v2.126.1 - 2025-12-02
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.126.0...v2.126.1)
+
+## v2.126.0 - 2025-12-02
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.27...v2.126.0)
+
+## v2.125.27 - 2025-12-02
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.26...v2.125.27)
+
+## v2.125.26 - 2025-11-24
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.25...v2.125.26)
+
+## v2.125.25 - 2025-11-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.24...v2.125.25)
+
+- [#2688](https://github.com/ORCID/orcid-angular/pull/2688): Lmendoza/pd 3696
+
+## v2.125.24 - 2025-11-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.23...v2.125.24)
+
+- [#2685](https://github.com/ORCID/orcid-angular/pull/2685): PD-3696
+
+## v2.125.23 - 2025-11-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.22...v2.125.23)
+
+- [#2684](https://github.com/ORCID/orcid-angular/pull/2684): PD-3696
+
+## v2.125.22 - 2025-11-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.21...v2.125.22)
+
+- [#2683](https://github.com/ORCID/orcid-angular/pull/2683): PD-3696
+- [#2682](https://github.com/ORCID/orcid-angular/pull/2682): PD-3696
+
+## v2.125.21 - 2025-11-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.20...v2.125.21)
+
+- [#2681](https://github.com/ORCID/orcid-angular/pull/2681): Lmendoza/pd 2418v2
+
+## v2.125.20 - 2025-11-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.19...v2.125.20)
+
+## v2.125.19 - 2025-11-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.18...v2.125.19)
+
+## v2.125.18 - 2025-11-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.17...v2.125.18)
+
+## v2.125.17 - 2025-11-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.16...v2.125.17)
+
+## v2.125.16 - 2025-11-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.15...v2.125.16)
+
+## v2.125.15 - 2025-11-14
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.14...v2.125.15)
+
+## v2.125.14 - 2025-11-14
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.13...v2.125.14)
+
+## v2.125.13 - 2025-11-14
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.12...v2.125.13)
+
+## v2.125.12 - 2025-11-14
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.11...v2.125.12)
+
+## v2.125.11 - 2025-11-14
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.10...v2.125.11)
+
+## v2.125.10 - 2025-11-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.9...v2.125.10)
+
+## v2.125.9 - 2025-11-10
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.8...v2.125.9)
+
+## v2.125.8 - 2025-11-10
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.7...v2.125.8)
+
+## v2.125.7 - 2025-11-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.6...v2.125.7)
+
+## v2.125.6 - 2025-10-29
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.5...v2.125.6)
+
+## v2.125.5 - 2025-10-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.4...v2.125.5)
+
+## v2.125.4 - 2025-10-16
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.3...v2.125.4)
+
+## v2.125.3 - 2025-10-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.2...v2.125.3)
+
+## v2.125.2 - 2025-10-14
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.1...v2.125.2)
+
+- [#2658](https://github.com/ORCID/orcid-angular/pull/2658): PD-3082
+
+## v2.125.1 - 2025-10-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.0...v2.125.1)
+
+## v2.125.0 - 2025-10-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.124.14...v2.125.0)
+
+## v2.124.14 - 2025-10-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.124.13...v2.124.14)
+
+- [#2640](https://github.com/ORCID/orcid-angular/pull/2640): Transifex: update properties
+
+## v2.124.13 - 2025-10-09
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.124.12...v2.124.13)
+
+## v2.124.12 - 2025-10-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.124.11...v2.124.12)
+
+- [#2657](https://github.com/ORCID/orcid-angular/pull/2657): PD-2418
+
+## v2.124.11 - 2025-10-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.124.10...v2.124.11)
+
+- [#2656](https://github.com/ORCID/orcid-angular/pull/2656): PD-2463
+
+## v2.124.10 - 2025-10-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.124.9...v2.124.10)
+
+- [#2655](https://github.com/ORCID/orcid-angular/pull/2655): PD-2418
+
+## v2.124.9 - 2025-10-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.124.8...v2.124.9)
+
+## v2.124.8 - 2025-10-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.124.7...v2.124.8)
+
+- [#2652](https://github.com/ORCID/orcid-angular/pull/2652): Lmendoza/pd 2463
+
+## v2.124.7 - 2025-10-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.124.6...v2.124.7)
+
+## v2.124.6 - 2025-10-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.124.5...v2.124.6)
+
+- [#2643](https://github.com/ORCID/orcid-angular/pull/2643): Bump tar-fs from 3.1.0 to 3.1.1
+
+## v2.124.5 - 2025-10-02
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.124.4...v2.124.5)
+
+- [#2650](https://github.com/ORCID/orcid-angular/pull/2650): PD-2443
+
+## v2.124.4 - 2025-10-01
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.124.3...v2.124.4)
+
+- [#2649](https://github.com/ORCID/orcid-angular/pull/2649): Lmendoza/pd 1941 v5
+
+## v2.124.3 - 2025-10-01
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.124.2...v2.124.3)
+
+- [#2644](https://github.com/ORCID/orcid-angular/pull/2644): Lmendoza/pd 2443
+
+## v2.124.2 - 2025-10-01
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.124.1...v2.124.2)
+
+- [#2648](https://github.com/ORCID/orcid-angular/pull/2648): PD-1941
+- [#2647](https://github.com/ORCID/orcid-angular/pull/2647): PD-2041
+- [#2646](https://github.com/ORCID/orcid-angular/pull/2646): Lmendoza/pd 2233
+
+## v2.124.1 - 2025-09-24
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.124.0...v2.124.1)
+
+## v2.124.0 - 2025-09-23
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.123.12...v2.124.0)
+
+## v2.123.12 - 2025-09-23
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.123.11...v2.123.12)
+
+## v2.123.11 - 2025-09-23
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.123.10...v2.123.11)
+
+## v2.123.10 - 2025-09-22
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.123.9...v2.123.10)
+
+- [#2602](https://github.com/ORCID/orcid-angular/pull/2602): Transifex: update properties
+
+## v2.123.9 - 2025-09-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.123.8...v2.123.9)
+
+## v2.123.8 - 2025-09-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.123.7...v2.123.8)
+
+## v2.123.7 - 2025-09-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.123.6...v2.123.7)
+
+## v2.123.6 - 2025-09-16
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.123.5...v2.123.6)
+
+## v2.123.5 - 2025-09-16
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.123.4...v2.123.5)
+
+## v2.123.4 - 2025-09-16
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.123.3...v2.123.4)
+
+## v2.123.3 - 2025-09-16
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.123.2...v2.123.3)
+
+## v2.123.2 - 2025-09-16
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.123.1...v2.123.2)
+
+## v2.123.1 - 2025-09-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.123.0...v2.123.1)
+
+- [#2625](https://github.com/ORCID/orcid-angular/pull/2625): ${PD-2374} User is not found if userInfo.json is emtpy (from the registry endpoi…
+
+## v2.123.0 - 2025-09-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.122.0...v2.123.0)
+
+## v2.122.0 - 2025-09-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.121.14...v2.122.0)
+
+- [#2623](https://github.com/ORCID/orcid-angular/pull/2623): ${PD-2039} featured works modal improvements
+- [#2622](https://github.com/ORCID/orcid-angular/pull/2622): PD-2234
+
+## v2.121.14 - 2025-09-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.121.13...v2.121.14)
+
+- [#2621](https://github.com/ORCID/orcid-angular/pull/2621): PD-1941
+
+## v2.121.13 - 2025-09-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.121.12...v2.121.13)
+
+## v2.121.12 - 2025-09-10
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.121.11...v2.121.12)
+
+- [#2619](https://github.com/ORCID/orcid-angular/pull/2619): PD-2042
+
+## v2.121.11 - 2025-09-10
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.121.10...v2.121.11)
+
+## v2.121.10 - 2025-09-10
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.121.9...v2.121.10)
+
+## v2.121.9 - 2025-09-09
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.121.8...v2.121.9)
+
+## v2.121.8 - 2025-09-09
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.121.7...v2.121.8)
+
+- [#2616](https://github.com/ORCID/orcid-angular/pull/2616): PD-2055
+
+## v2.121.7 - 2025-09-09
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.121.6...v2.121.7)
+
+## v2.121.6 - 2025-09-09
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.121.5...v2.121.6)
+
+## v2.121.5 - 2025-09-04
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.121.4...v2.121.5)
+
+- [#2613](https://github.com/ORCID/orcid-angular/pull/2613): PD-2191
+
+## v2.121.4 - 2025-09-04
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.121.3...v2.121.4)
+
+- [#2612](https://github.com/ORCID/orcid-angular/pull/2612): Lmendoza/pd-935
+
+## v2.121.3 - 2025-09-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.121.2...v2.121.3)
+
+## v2.121.2 - 2025-09-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.121.1...v2.121.2)
+
+## v2.121.1 - 2025-09-02
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.121.0...v2.121.1)
+
+## v2.121.0 - 2025-09-01
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.120.7...v2.121.0)
+
+## v2.120.7 - 2025-08-28
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.120.6...v2.120.7)
+
+## v2.120.6 - 2025-08-26
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.120.5...v2.120.6)
+
+- [#2606](https://github.com/ORCID/orcid-angular/pull/2606): PD-1993
+
+## v2.120.5 - 2025-08-25
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.120.4...v2.120.5)
+
+- [#2601](https://github.com/ORCID/orcid-angular/pull/2601): PD-0000: update docker node
+
+## v2.120.4 - 2025-08-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.120.3...v2.120.4)
+
+### Refactor
+
+- Remove developer tools from the user menu for members (#2604)
+
+## v2.120.3 - 2025-08-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.120.2...v2.120.3)
+
+### Refactor
+
+- Remove `manage members` option from user menu (#2603)
+
+## v2.120.2 - 2025-08-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.120.1...v2.120.2)
+
+- [#2600](https://github.com/ORCID/orcid-angular/pull/2600): PD-0000: Update CI node to 22
+
+## v2.120.1 - 2025-08-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.120.0...v2.120.1)
+
+## v2.120.0 - 2025-08-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.119.19...v2.120.0)
+
+## v2.119.19 - 2025-08-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.119.18...v2.119.19)
+
+- [#2594](https://github.com/ORCID/orcid-angular/pull/2594): Transifex: update properties
+
+## v2.119.18 - 2025-08-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.119.17...v2.119.18)
+
+- [#2595](https://github.com/ORCID/orcid-angular/pull/2595): PD-935:Fix button height
+- [#2593](https://github.com/ORCID/orcid-angular/pull/2593): Transifex: update properties
+- [#2590](https://github.com/ORCID/orcid-angular/pull/2590): Lmendoza/pd-0000: enable github actions translation pull
+- [#2587](https://github.com/ORCID/orcid-angular/pull/2587): Lmendoza/pd 0000
+
+## v2.119.17 - 2025-08-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.119.16...v2.119.17)
+
+- [#2586](https://github.com/ORCID/orcid-angular/pull/2586): PD-0000: enable github actions translation pull
+- [#2585](https://github.com/ORCID/orcid-angular/pull/2585): PD-0000: enable github actions translation pull
+- [#2584](https://github.com/ORCID/orcid-angular/pull/2584): PD-0000: Enable
+
+## v2.119.16 - 2025-08-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.119.15...v2.119.16)
+
+- [#2582](https://github.com/ORCID/orcid-angular/pull/2582): ${PD-1926} lmendoza/enable-prompt-none
+
+## v2.119.15 - 2025-08-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.119.14...v2.119.15)
+
+## v2.119.14 - 2025-08-05
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.119.13...v2.119.14)
+
+## v2.119.13 - 2025-08-04
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.119.12...v2.119.13)
+
+## v2.119.12 - 2025-08-01
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.119.11...v2.119.12)
+
+## v2.119.11 - 2025-08-01
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.119.10...v2.119.11)
+
+## v2.119.10 - 2025-07-30
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.119.9...v2.119.10)
+
+## v2.119.9 - 2025-07-30
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.119.8...v2.119.9)
+
+## v2.119.8 - 2025-07-30
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.119.7...v2.119.8)
+
+## v2.119.7 - 2025-07-29
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.119.6...v2.119.7)
+
+## v2.119.6 - 2025-07-29
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.119.5...v2.119.6)
+
+## v2.119.5 - 2025-07-28
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.119.4...v2.119.5)
+
+## v2.119.4 - 2025-07-24
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.119.3...v2.119.4)
+
+## v2.119.3 - 2025-07-24
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.119.2...v2.119.3)
+
+- [#2567](https://github.com/ORCID/orcid-angular/pull/2567): PD-1059
+
+## v2.119.2 - 2025-07-23
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.119.1...v2.119.2)
+
+## v2.119.1 - 2025-07-22
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.119.0...v2.119.1)
+
+## v2.119.0 - 2025-07-22
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.118.5...v2.119.0)
+
+## v2.118.5 - 2025-07-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.118.4...v2.118.5)
+
+## v2.118.4 - 2025-07-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.118.3...v2.118.4)
+
+## v2.118.3 - 2025-07-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.118.2...v2.118.3)
+
+- [#2563](https://github.com/ORCID/orcid-angular/pull/2563): pd-1849
+
+## v2.118.2 - 2025-07-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.118.1...v2.118.2)
+
+## v2.118.1 - 2025-07-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.118.0...v2.118.1)
+
+- [#2559](https://github.com/ORCID/orcid-angular/pull/2559): Lmendoza/pd 393
+
+## v2.118.0 - 2025-07-14
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.117.3...v2.118.0)
+
+- [#2558](https://github.com/ORCID/orcid-angular/pull/2558): add featured works arg when fetching works
+
+## v2.117.3 - 2025-07-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.117.2...v2.117.3)
+
+## v2.117.2 - 2025-07-04
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.117.1...v2.117.2)
+
+## v2.117.1 - 2025-07-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.117.0...v2.117.1)
+
+- [#2551](https://github.com/ORCID/orcid-angular/pull/2551): Enable implicit flow
+- [#2555](https://github.com/ORCID/orcid-angular/pull/2555): Lmendoza/pd 890
+
+## v2.117.0 - 2025-07-01
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.116.10...v2.117.0)
+
+## v2.116.10 - 2025-07-01
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.116.9...v2.116.10)
+
+- [#2554](https://github.com/ORCID/orcid-angular/pull/2554): jul-1-2025
+
+## v2.116.9 - 2025-07-01
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.116.8...v2.116.9)
+
+- [#2553](https://github.com/ORCID/orcid-angular/pull/2553): jun-30-fixes
+
+## v2.116.8 - 2025-06-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.116.7...v2.116.8)
+
+- [#2548](https://github.com/ORCID/orcid-angular/pull/2548):
+
+## v2.116.7 - 2025-06-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.116.6...v2.116.7)
+
+- [#2549](https://github.com/ORCID/orcid-angular/pull/2549): lmendoza/9847-angular-material-mdc-migration-batch-2v2
+
+## v2.116.6 - 2025-06-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.116.5...v2.116.6)
+
+- [#2547](https://github.com/ORCID/orcid-angular/pull/2547): Lmendoza/9847 angular material mdc migration batch 2
+
+## v2.116.5 - 2025-06-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.116.4...v2.116.5)
+
+- [#2546](https://github.com/ORCID/orcid-angular/pull/2546): lmendoza/9866-prod-oauth-doesnt-work-when-switched-to-another-user-ac…
+- [#2544](https://github.com/ORCID/orcid-angular/pull/2544): Unused dependecies clean up
+
+## v2.116.4 - 2025-06-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.116.3...v2.116.4)
+
+- [#2451](https://github.com/ORCID/orcid-angular/pull/2451): Remove legacy registration code
+
+## v2.116.3 - 2025-06-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.116.2...v2.116.3)
+
+- [#2542](https://github.com/ORCID/orcid-angular/pull/2542): remove preferred source icon
+- [#2541](https://github.com/ORCID/orcid-angular/pull/2541): Added a new paragraph break for mvp ui notification
+
+## v2.116.2 - 2025-06-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.116.1...v2.116.2)
+
+## v2.116.1 - 2025-06-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.116.0...v2.116.1)
+
+## v2.116.0 - 2025-06-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.13...v2.116.0)
+
+## v2.115.13 - 2025-06-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.12...v2.115.13)
+
+- [#2543](https://github.com/ORCID/orcid-angular/pull/2543): transifex pull
+
+## v2.115.12 - 2025-06-09
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.11...v2.115.12)
+
+## v2.115.11 - 2025-06-06
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.10...v2.115.11)
+
+- [#2538](https://github.com/ORCID/orcid-angular/pull/2538): Leo/fix oauth automation
+
+## v2.115.10 - 2025-06-05
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.9...v2.115.10)
+
+- [#2536](https://github.com/ORCID/orcid-angular/pull/2536): Lmendoza/9820 qa regression oauth and openid tests fail because expected error message for negative scenarios is not displayed
+
+## v2.115.9 - 2025-06-05
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.8...v2.115.9)
+
+- [#2534](https://github.com/ORCID/orcid-angular/pull/2534): 9832-qa-toaster-error-displayed-with-signin-error
+- [#2533](https://github.com/ORCID/orcid-angular/pull/2533): Fix testing
+- [#2532](https://github.com/ORCID/orcid-angular/pull/2532): 9824-qa-replace-inbox-icon-with-notification-icon-in-account-menu
+
+## v2.115.8 - 2025-06-04
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.7...v2.115.8)
+
+- [#2531](https://github.com/ORCID/orcid-angular/pull/2531): Lmendoza/jun 4 2025 multiple fixes
+
+## v2.115.7 - 2025-06-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.6...v2.115.7)
+
+- [#2529](https://github.com/ORCID/orcid-angular/pull/2529): lmendoza/jun-2025-multiple-changes
+
+## v2.115.6 - 2025-05-29
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.5...v2.115.6)
+
+## v2.115.5 - 2025-05-29
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.4...v2.115.5)
+
+- [#2524](https://github.com/ORCID/orcid-angular/pull/2524): add microdelay to interstitial for already authorized users
+
+## v2.115.4 - 2025-05-28
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.3...v2.115.4)
+
 ## v2.115.3 - 2025-05-20
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.115.2...v2.115.3)

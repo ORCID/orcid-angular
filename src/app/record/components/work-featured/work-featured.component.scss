@@ -1,0 +1,24 @@
+[body] {
+  display: flex;
+  flex-direction: column;
+}
+
+:host,
+app-panel,
+app-work {
+  width: 100%;
+}
+
+:host {
+  app-panel {
+    margin-top: 16px;
+    display: block;
+    position: relative;
+    border: none;
+    display: flex;
+  }
+}
+
+.work-title {
+  margin: 0;
+}

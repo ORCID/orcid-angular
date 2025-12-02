@@ -1,0 +1,44 @@
+:host {
+  width: 100%;
+}
+
+app-work-stack {
+  margin-bottom: 24px;
+}
+
+app-work-stack:first-child {
+  margin-top: 24px;
+}
+
+app-work-stack:last-child {
+  margin-bottom: 0;
+}
+
+p.empty {
+  margin-bottom: 0;
+}
+
+.columns-4 :host {
+  .works-buttons {
+    .controls {
+      flex-direction: column;
+      button {
+        width: 100%;
+      }
+    }
+  }
+}
+
+::ng-deep button.text-align-center {
+  text-align: center !important;
+  white-space: normal;
+  width: auto !important;
+}
+
+app-alert-message {
+  margin-top: 16px;
+}
+
+.no-featured-works {
+  line-height: 21px;
+}

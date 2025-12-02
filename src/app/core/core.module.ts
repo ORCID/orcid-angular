@@ -1,20 +1,13 @@
-import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http'
 import { NgModule } from '@angular/core'
 import { TogglzDirective } from './togglz/togglz.directive'
 import { PlatformInfoModule } from '../cdk/platform-info'
 import { WindowModule, WINDOW_PROVIDERS } from '../cdk/window'
 import { MatPaginatorIntlImplementation } from './paginator/matPaginator.service'
-import { MatLegacyPaginatorIntl as MatPaginatorIntl } from '@angular/material/legacy-paginator'
+import { MatPaginatorIntl } from '@angular/material/paginator'
 import { SnackbarModule } from '../cdk/snackbar/snackbar.module'
 
 @NgModule({
-  imports: [
-    HttpClientModule,
-    PlatformInfoModule,
-    HttpClientXsrfModule,
-    WindowModule,
-    SnackbarModule,
-  ],
+  imports: [PlatformInfoModule, WindowModule, SnackbarModule],
   declarations: [TogglzDirective], // Should only export globally used directives.
   providers: [
     WINDOW_PROVIDERS,

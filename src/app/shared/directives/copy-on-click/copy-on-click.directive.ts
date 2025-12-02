@@ -1,12 +1,18 @@
-import { DOCUMENT } from '@angular/common'
-import { Directive, ElementRef, HostListener, Inject } from '@angular/core'
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
+import {
+  Directive,
+  ElementRef,
+  HostListener,
+  Inject,
+  DOCUMENT,
+} from '@angular/core'
+import { MatSnackBar } from '@angular/material/snack-bar'
 import { WINDOW } from 'src/app/cdk/window'
 
 import { CopyOnClickComponent } from '../../components/copy-on-click/copy-on-click.component'
 
 @Directive({
   selector: '[appCopyOnClick]',
+  standalone: false,
 })
 export class CopyOnClickDirective {
   constructor(

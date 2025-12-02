@@ -4,6 +4,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
   selector: 'app-panel-expand-buttons',
   templateUrl: './panel-expand-buttons.component.html',
   styleUrls: ['./panel-expand-buttons.component.scss'],
+  standalone: false,
 })
 export class PanelExpandButtonsComponent implements OnInit {
   tooltipLabelShowDetails = $localize`:@@shared.showDetails:Show details`
@@ -24,10 +25,12 @@ export class PanelExpandButtonsComponent implements OnInit {
     | 'distinction'
     | 'membership'
     | 'service'
+    | 'editorial-service'
     | 'peer-review'
     | 'sub-peer-review'
     | 'main'
     | 'works'
+    | 'featured-works'
     | 'activities'
     | 'funding'
     | 'research-resources'

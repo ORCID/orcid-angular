@@ -7,16 +7,15 @@ import { WINDOW_PROVIDERS } from '../../cdk/window'
 import { PlatformInfoService } from '../../cdk/platform-info'
 import { ErrorHandlerService } from '../../core/error-handler/error-handler.service'
 import { SnackbarService } from '../../cdk/snackbar/snackbar.service'
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar'
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
+import { MatSnackBar } from '@angular/material/snack-bar'
+import { MatDialog } from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { SignInService } from '../../core/sign-in/sign-in.service'
-import { MatLegacyMenuModule as MatMenuModule } from '@angular/material/legacy-menu'
+import { MatMenuModule } from '@angular/material/menu'
 import { InboxService } from '../../core/inbox/inbox.service'
 import { By } from '@angular/platform-browser'
 import { HarnessLoader } from '@angular/cdk/testing'
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed'
-import { MatLegacyMenuHarness as MatMenuHarness } from '@angular/material/legacy-menu/testing'
 import { UserInfo } from '../../types'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 import { UserSession } from '../../types/session.local'
@@ -26,6 +25,10 @@ import { of, ReplaySubject } from 'rxjs'
 import { Config } from '../../types/togglz.endpoint'
 import { MatIconModule } from '@angular/material/icon'
 import { MatIconHarness } from '@angular/material/icon/testing'
+import {
+  MatMenuHarness,
+  MatMenuItemHarness,
+} from '@angular/material/menu/testing'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 
@@ -34,7 +37,7 @@ describe('UserMenuComponent', () => {
   let fixture: ComponentFixture<UserMenuComponent>
   let togglzService: TogglzService
   let fakeInboxService: InboxService
-  let fakeUserService: UserService
+  let fakeUserService: jasmine.SpyObj<UserService>
   let loader: HarnessLoader
 
   beforeEach(() => {
@@ -85,6 +88,53 @@ describe('UserMenuComponent', () => {
     expect(component).toBeTruthy()
   })
 
+  it('should display user menu options when clicked', async () => {
+    const matMenu = await loader.getHarness(MatMenuHarness)
+    await matMenu.open()
+
+    fixture.detectChanges()
+
+    const isMatMenuOpen = await matMenu.isOpen()
+    const matMenuItems: MatMenuItemHarness[] = await matMenu.getItems()
+    const myOrcidItem = await matMenuItems[0].getText()
+    const notificationsItem = await matMenuItems[1].getText()
+    const accountSettingsItem = await matMenuItems[2].getText()
+    const trustedPartiesItem = await matMenuItems[3].getText()
+    const developerToolsItem = await matMenuItems[4].getText()
+    const logoutItem = await matMenuItems[5].getText()
+
+    expect(isMatMenuOpen).toBe(true)
+    expect(matMenuItems.length).toBe(6)
+    expect(myOrcidItem).toContain('View my ORCID record')
+    expect(notificationsItem).toContain('Notifications inbox')
+    expect(accountSettingsItem).toContain('Account settings')
+    expect(trustedPartiesItem).toContain('Trusted parties')
+    expect(developerToolsItem).toContain('Developer tools')
+    expect(logoutItem).toContain('Logout')
+  })
+
+  it('should display user admin actions option if user is admin', async () => {
+    let mockUserSessionResponse: UserSession = getUserSession()
+    mockUserSessionResponse.userInfo.ADMIN_MENU = 'true'
+
+    component.userInfo = mockUserSessionResponse.userInfo
+
+    fixture.detectChanges()
+
+    const matMenu = await loader.getHarness(MatMenuHarness)
+    await matMenu.open()
+
+    fixture.detectChanges()
+
+    const isMatMenuOpen = await matMenu.isOpen()
+    const matMenuItems: MatMenuItemHarness[] = await matMenu.getItems()
+    const adminPageItem = await matMenuItems[5].getText()
+
+    expect(isMatMenuOpen).toBe(true)
+    expect(matMenuItems.length).toBe(7)
+    expect(adminPageItem).toContain('Admin page')
+  })
+
   it('should display 3 as unread notifications count', async () => {
     const userMenuButton = fixture.debugElement.query(By.css('#cy-user-info'))
     userMenuButton.triggerEventHandler('click', null)
@@ -98,7 +148,7 @@ describe('UserMenuComponent', () => {
     const inboxIcon = await inboxItem.getHarness(MatIconHarness)
     const inboxIconName = await inboxIcon.getName()
 
-    expect(inboxCount).toBe(inboxIconName + 'Inbox (3)')
+    expect(inboxCount).toBe(inboxIconName + 'Notifications inbox (3)')
   })
 })
 
@@ -107,6 +157,7 @@ function getUserSession(): UserSession {
   userSession.userInfo = {
     REAL_USER_ORCID: '0000-0000-0000-000X',
     EFFECTIVE_USER_ORCID: '0000-0000-0000-000X',
+    IN_DELEGATION_MODE: 'false',
   } as UserInfo
   userSession.loggedIn = true
   userSession.displayName = 'Test Name'

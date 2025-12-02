@@ -3,6 +3,11 @@
   display: block;
   border-radius: 4px;
 }
+
+.panel-main {
+  width: 100%;
+}
+
 .header {
   box-sizing: border-box;
   padding: 0 16px;
@@ -13,6 +18,7 @@
   padding-right: 8px;
   word-break: normal;
   overflow-wrap: anywhere;
+  line-height: 24px;
   h2 {
     margin: 0;
   }
@@ -58,11 +64,62 @@
   }
 }
 
-mat-checkbox.text-wrap {
-  ::ng-deep label.mat-checkbox-layout {
-    white-space: normal;
+[mat-icon-button] {
+  margin-inline-start: 16px;
+}
+
+.featured-header {
+  .featured-work-star {
+    margin-top: 2px;
+  }
+  min-height: 0;
+  padding-top: 16px !important;
+  padding-bottom: 4px !important;
+  justify-content: start;
+  flex-wrap: nowrap !important;
+  align-items: start;
+}
+
+.featured-work-star {
+  mat-icon {
+    img {
+      width: 20px;
+    }
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-content: center;
+  }
+  margin-right: 10px;
+  margin-left: 3px;
+}
+
+::ng-deep .panel-checkbox .mdc-checkbox {
+  margin-left: -8px !important;
+}
+
+::ng-deep .panel-checkbox .mdc-label {
+  display: flex;
+  align-items: center;
+  .featured-work-star {
+    margin-right: 8px;
+    margin-left: -4px;
   }
 }
+
+.public-record-panel-header {
+  display: flex;
+  align-items: center;
+}
+
+.expand-featured-work {
+  button {
+    height: 48px;
+    margin-right: 16px;
+    margin-top: 16px;
+  }
+}
+
 .columns-8 :host,
 .columns-4 :host {
   .header {
@@ -73,8 +130,16 @@ mat-checkbox.text-wrap {
   .buttons-container {
     width: 100%;
   }
-}
-
-[mat-icon-button] {
-  margin-inline-start: 16px;
+  .featured-header {
+    margin-left: 8px;
+  }
+  .featured-work-star {
+    margin-left: 1px !important;
+  }
+  .expand-featured-work {
+    button {
+      margin-right: 8px;
+      margin-left: 8px;
+    }
+  }
 }

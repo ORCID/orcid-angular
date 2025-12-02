@@ -12,6 +12,7 @@ import { ActivitySummary } from 'src/app/types/trust-summary'
     './summary-panel.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
+  standalone: false,
 })
 export class SummaryPanelComponent implements OnInit {
   @Input() activitySummary: ActivitySummary[]
@@ -26,7 +27,7 @@ export class SummaryPanelComponent implements OnInit {
   @Input() activitySection: string
   activitiesToDisplay: ActivitySummary[]
   acitivityCountOverflow: boolean
-  unsubscribe = new Subject()
+  unsubscribe = new Subject<void>()
 
   validatedSourceAriaLabel = $localize`:@@summary.validatedSource:Validated source`
   selftAssertedSource = $localize`:@@summary.selfAssertedSource:Self-asserted source`

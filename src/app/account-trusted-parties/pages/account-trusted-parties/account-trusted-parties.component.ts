@@ -9,10 +9,11 @@ import { TogglzService } from 'src/app/core/togglz/togglz.service'
   selector: 'app-account-trusted-parties',
   templateUrl: './account-trusted-parties.component.html',
   styleUrls: ['./account-trusted-parties.component.scss'],
+  standalone: false,
 })
 export class AccountTrustedPartiesComponent implements OnInit, OnDestroy {
   userInfo: any
-  $destroy = new Subject()
+  $destroy = new Subject<void>()
   constructor(
     private _togglz: TogglzService,
     private _userSession: UserService,

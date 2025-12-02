@@ -1,5 +1,6 @@
-p {
-  margin: 6px 0;
+:host,
+::ng-deep .mat-subtitle-2 {
+  line-height: 21px !important;
 }
 
 .translated-title-label {

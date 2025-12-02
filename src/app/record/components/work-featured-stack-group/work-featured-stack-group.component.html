@@ -1,0 +1,66 @@
+<section
+  id="works"
+  role="region"
+  [attr.aria-label]="regionWorks"
+  *ngIf="
+    featuredWorks?.length > 0 ||
+    (!isPublicRecord && featuredWorks?.length === 0)
+  "
+>
+  <app-panels
+    [userRecord]="userRecord"
+    class="row"
+    [title]="featuredWorksLabel"
+    [isPublicRecord]="isPublicRecord"
+    [type]="'featured-works'"
+    id="cy-featured-works-panels"
+    [total]="noWorksAdded && 0"
+  >
+    <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+    <ng-container *ngIf="featuredWorks.length > 0 && !loading">
+      <app-work-featured
+        [userRecord]="userRecord"
+        [isPublicRecord]="isPublicRecord"
+        *ngFor="let work of featuredWorks | slice : 0 : 5"
+        [work]="work"
+        [userInfo]="userInfo"
+      ></app-work-featured>
+    </ng-container>
+    <app-alert-message *ngIf="noWorksAdded && !isPublicRecord">
+      <h3 title class="orc-font-body" i18n="@@shared.addWorksToEnableFeaturing">
+        Add your works to enable featuring
+      </h3>
+
+      <div class="orc-font-body-small" content>
+        <ng-container i18n="@@shared.youNeedToAdd">You need to add</ng-container
+        >&nbsp;<em i18n="@@shared.atLeastOneWork">at least one work</em
+        >&nbsp;<ng-container i18n="@@shared.toEnableFeaturing"
+          >to your ORCID record to enable featuring. Click the ‘Add’ button in
+          the</ng-container
+        >&nbsp;<strong i18n="@@shared.works">Works</strong>&nbsp;<ng-container
+          i18n="@@shared.sectionBelowToStartAdding"
+          >section below to start adding research outputs to your
+          record.</ng-container
+        >
+      </div>
+    </app-alert-message>
+    <div
+      *ngIf="featuredWorks.length === 0 && !isPublicRecord && !noWorksAdded"
+      class="orc-font-body-small no-featured-works"
+    >
+      <p class="empty" i18n="@@shared.featuredWorksDescription">
+        You can feature up to 5 works in your ORCID record.
+      </p>
+      <a
+        class="underline"
+        rel="noopener noreferrer"
+        target="_blank"
+        href="https://support.orcid.org/hc/en-us/articles/33530872634263-Featuring-works-on-your-record"
+        i18n="@@shared.featuredWorksLearnMore"
+      >
+        Learn more about featuring works in your ORCID record
+      </a>
+    </div>
+    <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+  </app-panels>
+</section>

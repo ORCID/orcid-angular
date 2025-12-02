@@ -1,7 +1,7 @@
 import { Observable, of } from 'rxjs'
 import { InterstitialsService } from 'src/app/cdk/interstitials/interstitials.service'
 import { UserRecord } from 'src/app/types/record.local'
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
+import { MatDialog } from '@angular/material/dialog'
 import { map, switchMap, take } from 'rxjs/operators'
 import { MatDialogConfig } from '@angular/material/dialog'
 import { ComponentType } from '@angular/cdk/overlay'
@@ -14,6 +14,7 @@ import {
   BaseInterstitialDialogOutput,
 } from './dialog-interface'
 import { TogglzService } from '../../togglz/togglz.service'
+import { TogglzFlag } from '../../togglz/togglz-flags.enum'
 
 export abstract class LoginBaseInterstitialManagerService<
   TInput extends BaseInterstitialDialogInput,
@@ -21,7 +22,7 @@ export abstract class LoginBaseInterstitialManagerService<
   TComponent
 > {
   abstract INTERSTITIAL_NAME: InterstitialType
-  abstract INTERSTITIAL_TOGGLE: string[]
+  abstract INTERSTITIAL_TOGGLE: TogglzFlag[]
   abstract QA_FLAG_FOR_FORCE_INTERSTITIAL_AS_NEVER_SEEN: QaFlag
 
   // This will usually get updated on subscription to togglz
@@ -92,13 +93,15 @@ export abstract class LoginBaseInterstitialManagerService<
       autoFocus: false,
       restoreFocus: false,
       maxHeight: 'calc(100vh - 20px)',
+      maxWidth: '98vw',
+      panelClass: 'interstitial-dialog',
     }
   }
   getInterstitialTogglz(toggglzPrefix: 'OAUTH' | 'LOGIN'): Observable<boolean> {
     const togglzName = this.INTERSTITIAL_TOGGLE.find((toggle) =>
       toggle.startsWith(toggglzPrefix)
     )
-    return this.togglzService.getStateOf(togglzName).pipe(take(1))
+    return this.togglzService.getStateOf(togglzName as TogglzFlag).pipe(take(1))
   }
 
   showInterstitialAsComponent(): Observable<ComponentType<TComponent>> {

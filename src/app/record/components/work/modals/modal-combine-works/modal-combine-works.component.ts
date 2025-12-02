@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { Subject } from 'rxjs'
 import { Work } from '../../../../../types/record-works.endpoint'
-import { MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog'
+import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import { RecordWorksService } from '../../../../../core/record-works/record-works.service'
 import { PlatformInfoService } from '../../../../../cdk/platform-info'
@@ -15,6 +15,7 @@ import { SnackbarService } from '../../../../../cdk/snackbar/snackbar.service'
     './modal-combine-works.component.scss',
     './modal-combine-works.component.scss-theme.scss',
   ],
+  standalone: false,
 })
 export class ModalCombineWorksComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

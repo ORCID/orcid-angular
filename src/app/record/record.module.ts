@@ -2,20 +2,20 @@ import { DragDropModule } from '@angular/cdk/drag-drop'
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { MatLegacyAutocompleteModule as MatAutocompleteModule } from '@angular/material/legacy-autocomplete'
-import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button'
-import { MatLegacyCardModule as MatCardModule } from '@angular/material/legacy-card'
-import { MatLegacyCheckboxModule as MatCheckboxModule } from '@angular/material/legacy-checkbox'
+import { MatAutocompleteModule } from '@angular/material/autocomplete'
+import { MatCardModule } from '@angular/material/card'
+import { MatButtonModule } from '@angular/material/button'
+import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatDividerModule } from '@angular/material/divider'
-import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field'
+import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatIconModule } from '@angular/material/icon'
-import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input'
-import { MatLegacyMenuModule as MatMenuModule } from '@angular/material/legacy-menu'
-import { MatLegacyPaginatorModule as MatPaginatorModule } from '@angular/material/legacy-paginator'
-import { MatLegacyProgressBarModule as MatProgressBarModule } from '@angular/material/legacy-progress-bar'
+import { MatInputModule } from '@angular/material/input'
+import { MatMenuModule } from '@angular/material/menu'
+import { MatPaginatorModule } from '@angular/material/paginator'
+import { MatProgressBarModule } from '@angular/material/progress-bar'
 
-import { MatLegacyRadioModule as MatRadioModule } from '@angular/material/legacy-radio'
-import { MatLegacySelectModule as MatSelectModule } from '@angular/material/legacy-select'
+import { MatRadioModule } from '@angular/material/radio'
+import { MatSelectModule } from '@angular/material/select'
 
 import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
 import { ModalModule } from '../cdk/modal/modal.module'
@@ -77,14 +77,20 @@ import { WorkContributorsComponent } from './components/work-contributors/work-c
 import { VisibilitySelectorModule } from '../cdk/visibility-selector/visibility-selector.module'
 import { TopBarVerificationEmailModule } from '../cdk/top-bar-verification-email/top-bar-verification-email.module'
 import { RecordHeaderComponent } from './components/record-header/record-header.component'
+import { RecordSummaryComponent } from './components/record-summary/record-summary.component'
 import { RecordInfoComponent } from './components/record-info/record-info.component'
 import { TrustedSummaryModule } from '../cdk/trusted-summary/trusted-summary.module'
 import { AlertMessageModule } from '../cdk/alert-message/alert-message.module'
-import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog'
+import { MatDialogModule } from '@angular/material/dialog'
 import { WarningMessageModule } from '../cdk/warning-message/warning-message.module'
 import { DeepSelectInputModule } from '../cdk/deep-select-input/deep-select-input.module'
 import { PageNotFound404Module } from '../page-not-found-404/page-not-found-404.module'
 import { LoginMainInterstitialsManagerService } from '../core/login-interstitials-manager/login-main-interstitials-manager.service'
+import { WorkFeaturedStackGroupComponent } from './components/work-featured-stack-group/work-featured-stack-group.component'
+import { WorkFeaturedComponent } from './components/work-featured/work-featured.component'
+import { ExpandedWorkFeaturedModalComponent } from './components/work-featured/modals/expanded-work-featured-modal/expanded-work-featured-modal.component'
+import { ManageWorkFeaturedModalComponent } from './components/work-featured/modals/manage-work-featured-modal/manage-work-featured-modal.component'
+import { WorkDetailsComponent } from './components/work-details/work-details.component'
 
 @NgModule({
   declarations: [
@@ -107,6 +113,9 @@ import { LoginMainInterstitialsManagerService } from '../core/login-interstitial
     WorkStackGroupComponent,
     WorkStackComponent,
     WorkComponent,
+    WorkDetailsComponent,
+    WorkFeaturedComponent,
+    WorkFeaturedStackGroupComponent,
     TopBarActionsComponent,
     TopBarRecordIssuesComponent,
     ModalAffiliationsComponent,
@@ -132,10 +141,11 @@ import { LoginMainInterstitialsManagerService } from '../core/login-interstitial
     FundingExternalIdentifiersViewOnlyComponent,
     WorkFormComponent,
     WorkModalComponent,
+    ExpandedWorkFeaturedModalComponent,
+    ManageWorkFeaturedModalComponent,
     ModalCombineWorksWithSelectorComponent,
     WorkContributorRolesComponent,
     WorkContributorsComponent,
-    RecordHeaderComponent,
     RecordInfoComponent,
   ],
   imports: [
@@ -177,6 +187,9 @@ import { LoginMainInterstitialsManagerService } from '../core/login-interstitial
     MatDialogModule,
     DeepSelectInputModule,
     PageNotFound404Module,
+    // Standalone components
+    RecordHeaderComponent,
+    RecordSummaryComponent,
   ],
   providers: [
     VerificationEmailModalService,

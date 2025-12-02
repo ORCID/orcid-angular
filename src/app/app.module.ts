@@ -11,16 +11,18 @@ import { BidiModule } from '@angular/cdk/bidi'
 import { PseudoModule } from 'src/locale/i18n.pseudo.component'
 import { TitleService } from './core/title-service/title.service'
 import { HttpContentTypeHeaderInterceptor } from './core/http-content-type-header-interceptor/http-content-type-header-interceptor'
-import { HTTP_INTERCEPTORS } from '@angular/common/http'
-import { MatLegacyDialogModule } from '@angular/material/legacy-dialog'
-import { MatAutocompleteModule } from '@angular/material/autocomplete'
+import { FirefoxXsrfPreloadInterceptor } from './core/lang-preload/firefox-xsrf-preload.interceptor'
 import {
-  MatLegacyAutocompleteModule,
-  MatLegacyAutocompleteSelectedEvent,
-} from '@angular/material/legacy-autocomplete'
-import { MatLegacySelectModule } from '@angular/material/legacy-select'
-import { MatLegacyFormFieldModule } from '@angular/material/legacy-form-field'
-import { MatLegacyInputModule } from '@angular/material/legacy-input'
+  HTTP_INTERCEPTORS,
+  provideHttpClient,
+  withInterceptorsFromDi,
+  withXsrfConfiguration,
+} from '@angular/common/http'
+import { MatDialogModule } from '@angular/material/dialog'
+import { MatAutocompleteModule } from '@angular/material/autocomplete'
+import { MatSelectModule } from '@angular/material/select'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatInputModule } from '@angular/material/input'
 import { FormsModule } from '@angular/forms'
 
 @NgModule({
@@ -32,10 +34,10 @@ import { FormsModule } from '@angular/forms'
     BrowserAnimationsModule,
     LayoutModule,
     BidiModule,
-    MatLegacyDialogModule,
-    MatLegacyAutocompleteModule,
-    MatLegacySelectModule,
-    MatLegacyInputModule,
+    MatDialogModule,
+    MatAutocompleteModule,
+    MatSelectModule,
+    MatInputModule,
     PseudoModule, // Remove on angular 10 https://bit.ly/3ezbF4v
     // Environmental dependent modules
     EnvironmentBannerModule,
@@ -43,11 +45,24 @@ import { FormsModule } from '@angular/forms'
   ],
   providers: [
     TitleService,
+    // Firefox-only workaround to ensure XSRF cookie is established before backend calls
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: FirefoxXsrfPreloadInterceptor,
+      multi: true,
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpContentTypeHeaderInterceptor,
       multi: true,
     },
+    provideHttpClient(
+      withInterceptorsFromDi(),
+      withXsrfConfiguration({
+        cookieName: 'XSRF-TOKEN',
+        headerName: 'x-xsrf-token',
+      })
+    ),
   ],
   bootstrap: [AppComponent],
 })

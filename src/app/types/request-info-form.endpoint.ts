@@ -1,6 +1,10 @@
 import { ScopesStrings } from './common.endpoint'
 
-export interface RequestInfoForm {
+/**
+ * Legacy OAuth request info model used across the UI.
+ * Kept for backward compatibility with older endpoints and components.
+ */
+export interface LegacyOauthRequestInfoForm {
   errors: any[]
   scopes: Scope[]
   clientDescription: string
@@ -21,15 +25,25 @@ export interface RequestInfoForm {
   clientHavePersistentTokens: boolean
   scopesAsString: string
   error: Errors
+  errorCode?: string
   errorDescription: string
   forceLogin?: boolean
+  oauthState?: string
+}
+
+export interface AuthForm {
+  clientDescription: string
+  clientId: string
+  clientName: string
+  userName: string
+  userOrcid: string
 }
 
 export interface Scope {
-  name: string
+  name?: string
   value: ScopesStrings
-  description: string
-  longDescription: string
+  description?: string
+  longDescription?: string
 }
 
 type Errors =
