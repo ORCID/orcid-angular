@@ -35,19 +35,19 @@ export class TitleService {
           `${dynamicTitle} ${ApplicationDynamicRoutesLabels.orcidPageTitle}`
         )
       } else {
-        Object.keys(ApplicationRoutesLabels).forEach((route) => {
-          if (event.url.startsWith('/' + route)) {
-            // MY ORCID
-            if (dynamicTitle) {
-              this.setTitle(
-                `${dynamicTitle} ${ApplicationDynamicRoutesLabels.orcidMyPageTitle}`
-              )
-            } else {
-              // OTHER PAGES
-              this.setTitle(ApplicationRoutesLabels[route])
-            }
-          }
-        })
+        const route = Object.keys(ApplicationRoutesLabels).find(
+          (route) => event.url?.split('?')[0] == '/' + route
+        )
+        // MY ORCID
+        if (dynamicTitle) {
+          this.setTitle(
+            `${dynamicTitle} ${ApplicationDynamicRoutesLabels.orcidMyPageTitle}`
+          )
+        }
+        if (route !== null && route !== undefined) {
+          // OTHER PAGES
+          this.setTitle(ApplicationRoutesLabels[route])
+        }
       }
     })
   }
