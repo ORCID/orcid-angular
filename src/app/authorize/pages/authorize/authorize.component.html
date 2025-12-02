@@ -3,6 +3,7 @@
     <div class="row space-around">
       <div class="col m6 s4 l6">
         <mat-card
+          *ngIf="showAuthorizationComponent || showAuthorizationError"
           appearance="outlined"
           class="orcid-wizard authorize-wrapper"
           [ngClass]="{

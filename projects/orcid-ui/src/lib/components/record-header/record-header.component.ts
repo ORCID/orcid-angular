@@ -5,6 +5,7 @@ import { MatDividerModule } from '@angular/material/divider'
 import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
 import { TextWithTooltipComponent } from '../text-with-tooltip/text-with-tooltip.component'
+import { AccentButtonDirective } from '../../directives/accent-button.directive'
 
 @Component({
   selector: 'orcid-header-banner',
@@ -17,6 +18,7 @@ import { TextWithTooltipComponent } from '../text-with-tooltip/text-with-tooltip
     MatButtonModule,
     MatIconModule,
     TextWithTooltipComponent,
+    AccentButtonDirective,
   ],
   templateUrl: './record-header.component.html',
   styleUrls: ['./record-header.component.scss'],

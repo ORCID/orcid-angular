@@ -1,12 +1,3 @@
-:host {
-  display: block;
-  max-height: 50vh;
-  overflow-y: auto;
-  &.compact-mode {
-    max-height: 50vh;
-  }
-}
-
 .summary-container-head {
   max-width: 1304px;
   min-height: 80px;
@@ -22,8 +13,4 @@
     position: absolute;
     margin-top: 4px;
   }
-}
-
-.summary-container-head-actions {
-  position: relative;
 }
