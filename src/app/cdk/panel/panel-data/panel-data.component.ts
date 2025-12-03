@@ -18,11 +18,25 @@ export class PanelDataComponent implements OnInit, OnDestroy {
   @HostBinding('class.orc-font-body-small') fontSmall = true
   @HostBinding('class.border-bottom') borderBottomClass = false
   @HostBinding('class.featured') featuredClass = false
+  @HostBinding('class.no-padding') noPaddingClass = true
+
   @Input() set featured(featured: boolean) {
     this.featuredClass = featured
   }
+  /**
+   * @deprecated The borderBottom input is deprecated. The divider is now applied to the orcid-panel__footer.
+   * This input will be removed in a future version.
+   */
   @Input() set borderBottom(borderBottom: boolean) {
     this.borderBottomClass = borderBottom
+  }
+  /**
+   * @deprecated This attribute enables legacy padding (16px).
+   * Defaults to false (no padding) for new implementations.
+   * Set to true to enable the deprecated 16px padding for backward compatibility.
+   */
+  @Input() set deprecatedPadding(enablePadding: boolean) {
+    this.noPaddingClass = !enablePadding
   }
 
   state = false

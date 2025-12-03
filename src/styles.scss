@@ -118,6 +118,10 @@ html {
 }
 
 // Accent button directive styles (from orcid-ui)
+.accent-button {
+  color: white !important;
+}
+
 .accent-button:hover {
   background: var(--brand-secondary-dark, #085c77) !important;
 }

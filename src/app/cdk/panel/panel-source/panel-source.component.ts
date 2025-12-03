@@ -36,6 +36,7 @@ export class PanelSourceComponent implements OnInit {
   @Input() isPreferred = true
   @Input() source: boolean
   @Input() sourceName
+  @Input() disablePadding = false
   @Input() assertionOriginOrcid
   @Input() assertionOriginName
   @Input() assertionOriginClientId

@@ -3,7 +3,7 @@
 <!-- GENERAL DATA DISPLAY BY DEFAULT -->
 <app-panel-data
   class="default-data-loaded orc-font-body-small"
-  [borderBottom]="true"
+  [borderBottom]="false"
 >
   <div>
     <div class="general-data">
@@ -83,7 +83,7 @@
 </app-panel-data>
 
 <!-- DATA DISPLAY WHEN "MORE DETAILS" IS CLICKED -->
-<app-panel-data [borderBottom]="true" *ngIf="panelDetailsState?.state">
+<app-panel-data [borderBottom]="false" *ngIf="panelDetailsState?.state">
   <!-- ORGANIZATION DISAMBIGUATED IDS-->
   <app-org-identifier
     [orgDisambiguated]="orgDisambiguated"

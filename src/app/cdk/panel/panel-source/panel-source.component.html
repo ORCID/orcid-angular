@@ -1,8 +1,11 @@
 <app-panel-data
   class="panel-footer"
   [ngClass]="{
-    'margin-top-2': !displayTheStack
+    'margin-top-2': !displayTheStack,
+    'no-padding': disablePadding,
+    'max-height-31': disablePadding
   }"
+  [deprecatedPadding]="!disablePadding"
 >
   <div class="source-items">
     <div>

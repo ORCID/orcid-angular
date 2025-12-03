@@ -37,7 +37,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import { StepC2Component } from './components/step-c2/step-c2.component'
 import { MatSelectModule } from '@angular/material/select'
 import { SharedModule } from '../shared/shared.module'
-import { AlertMessageModule } from '../cdk/alert-message/alert-message.module'
+import { AlertMessageComponent } from '@orcid/ui'
 
 @NgModule({
   declarations: [
@@ -62,7 +62,7 @@ import { AlertMessageModule } from '../cdk/alert-message/alert-message.module'
     FormsModule,
     ReactiveFormsModule,
     RegisterRoutingModule,
-    AlertMessageModule,
+    AlertMessageComponent,
     MatStepperModule,
     MatFormFieldModule,
     MatInputModule,

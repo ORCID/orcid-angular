@@ -13,6 +13,10 @@
 }
 
 // Accent button directive styles
+.accent-button {
+  color: white !important;
+}
+
 .accent-button:hover {
   background: var(--brand-secondary-dark, #085c77) !important;
 }

@@ -13,6 +13,15 @@ app-panel-data {
   padding-right: 8px;
 }
 
+.panel-footer.no-padding,
+.panel-footer.no-padding > div {
+  padding: 0;
+}
+
+.panel-footer.max-height-31 {
+  max-height: 31px;
+}
+
 .preferred-source {
   display: flex;
   flex-direction: row;

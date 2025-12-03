@@ -5,7 +5,7 @@ import { ModalModule } from '../modal/modal.module'
 import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
 import { TopBarVerificationEmailModalComponent } from './modals/top-bar-verification-email-modal/top-bar-verification-email-modal.component'
-import { AlertMessageModule } from '../alert-message/alert-message.module'
+import { AlertMessageComponent } from '@orcid/ui'
 
 @NgModule({
   declarations: [
@@ -14,7 +14,7 @@ import { AlertMessageModule } from '../alert-message/alert-message.module'
   ],
   imports: [
     CommonModule,
-    AlertMessageModule,
+    AlertMessageComponent,
     ModalModule,
     MatButtonModule,
     MatIconModule,

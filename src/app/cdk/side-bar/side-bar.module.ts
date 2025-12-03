@@ -21,7 +21,7 @@ import { SharedModule } from 'src/app/shared/shared.module'
 import { FormDirectivesModule } from '../form-directives/form-directives.module'
 import { SourceHitComponent } from './modals/source-hit/source-hit.component'
 import { VisibilitySelectorModule } from '../visibility-selector/visibility-selector.module'
-import { AlertMessageModule } from '../alert-message/alert-message.module'
+import { AlertMessageComponent } from '@orcid/ui'
 
 @NgModule({
   declarations: [
@@ -39,7 +39,7 @@ import { AlertMessageModule } from '../alert-message/alert-message.module'
     PanelModule,
     SharedModule,
     ModalModule,
-    AlertMessageModule,
+    AlertMessageComponent,
     MatDialogModule,
     MatButtonModule,
     MatInputModule,

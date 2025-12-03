@@ -44,4 +44,16 @@ export const routes: Routes = [
         (m) => m.AccentButtonPageComponent
       ),
   },
+  {
+    path: 'alert-message',
+    loadComponent: () =>
+      import('./pages/alert-message-page.component').then(
+        (m) => m.AlertMessagePageComponent
+      ),
+  },
+  {
+    path: 'panel',
+    loadComponent: () =>
+      import('./pages/panel-page.component').then((m) => m.PanelPageComponent),
+  },
 ]

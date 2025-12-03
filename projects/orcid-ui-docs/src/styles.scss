@@ -42,10 +42,15 @@ $docs-theme: mat.m2-define-light-theme(
 }
 
 /* Accent button directive styles */
+.accent-button {
+  color: white !important;
+}
+
 .accent-button:hover {
   background: var(--brand-secondary-dark, #085c77) !important;
 }
 
 body {
   margin: 0;
+  background: #ffffff;
 }

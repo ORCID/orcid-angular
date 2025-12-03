@@ -1,0 +1,158 @@
+// Controls panel styles
+.controls-panel {
+  background: var(--orcid-surface-subtle, #f5f5f5);
+  padding: 24px;
+  border-radius: 8px;
+  margin-bottom: 32px;
+}
+
+.controls-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+
+  .full-width {
+    grid-column: 1 / -1;
+  }
+}
+
+// Example section styles
+.example-group {
+  margin-bottom: 48px;
+}
+
+.example-group h4 {
+  margin-bottom: 16px;
+  color: var(--orcid-color-text, #222);
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+
+.example-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+
+  // Stack vertically on smaller screens
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.example-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.example-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  h5 {
+    margin: 0;
+    color: var(--orcid-color-text-secondary, #666);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  // For mobile examples, ensure containers are centered in grid
+  .example-container.mobile {
+    margin: 0 auto;
+  }
+}
+
+.example-container {
+  border: 1px solid var(--orcid-color-border-subtle, #ddd);
+  border-radius: 8px;
+  padding: 24px;
+  background: var(--orcid-surface, #ffffff);
+  overflow-x: auto;
+}
+
+.example-container.desktop {
+  min-width: 800px;
+  max-width: 100%;
+}
+
+.example-container.mobile {
+  max-width: 375px;
+  min-width: 320px;
+}
+
+// Docs section spacing
+.docs-section {
+  margin-bottom: 48px;
+}
+
+.docs-section h3 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  color: var(--orcid-color-text, #222);
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.docs-section h4 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: var(--orcid-color-text, #222);
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+
+.docs-section p {
+  margin-bottom: 16px;
+  color: var(--orcid-color-text-secondary, #666);
+  line-height: 1.6;
+}
+
+.docs-section ul {
+  margin: 16px 0;
+  padding-left: 24px;
+}
+
+.docs-section li {
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
+.docs-section code {
+  background: var(--orcid-surface-subtle, #f5f5f5);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+  color: var(--orcid-color-text, #222);
+}
+
+orcid-panel {
+  display: block;
+  margin-bottom: 16px;
+}
+
+.panel-action-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  background: transparent;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+
+  &:hover {
+    background: #f5f5f5;
+    border-color: #999;
+  }
+
+  &:active {
+    background: #e0e0e0;
+  }
+}
