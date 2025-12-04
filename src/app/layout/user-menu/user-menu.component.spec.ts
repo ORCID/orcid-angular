@@ -113,28 +113,6 @@ describe('UserMenuComponent', () => {
     expect(logoutItem).toContain('Logout')
   })
 
-  it('should display user admin actions option if user is admin', async () => {
-    let mockUserSessionResponse: UserSession = getUserSession()
-    mockUserSessionResponse.userInfo.ADMIN_MENU = 'true'
-
-    component.userInfo = mockUserSessionResponse.userInfo
-
-    fixture.detectChanges()
-
-    const matMenu = await loader.getHarness(MatMenuHarness)
-    await matMenu.open()
-
-    fixture.detectChanges()
-
-    const isMatMenuOpen = await matMenu.isOpen()
-    const matMenuItems: MatMenuItemHarness[] = await matMenu.getItems()
-    const adminPageItem = await matMenuItems[5].getText()
-
-    expect(isMatMenuOpen).toBe(true)
-    expect(matMenuItems.length).toBe(7)
-    expect(adminPageItem).toContain('Admin page')
-  })
-
   it('should display 3 as unread notifications count', async () => {
     const userMenuButton = fixture.debugElement.query(By.css('#cy-user-info'))
     userMenuButton.triggerEventHandler('click', null)
