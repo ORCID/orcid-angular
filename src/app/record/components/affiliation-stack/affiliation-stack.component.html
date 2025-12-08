@@ -49,7 +49,7 @@
         mat-icon-button
         *ngIf="isPreferred(affiliation) && isPublicRecord !== 'true'"
         [matTooltip]="tooltipLabelEdit"
-        (click)="modalAffiliationsComponent && makePrimaryCard(affiliation)"
+        (click)="editAffiliation(affiliation)"
       >
         <mat-icon class="material-icons-outlined">edit</mat-icon>
       </button>

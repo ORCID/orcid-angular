@@ -15,6 +15,9 @@ import { ModalAffiliationsComponent } from '../affiliation-stacks-groups/modals/
 import { OrcidPanelComponent } from '@orcid/ui'
 import { TogglzService } from '../../../core/togglz/togglz.service'
 import { PlatformInfoService } from '../../../cdk/platform-info'
+import { MatDialog } from '@angular/material/dialog'
+import { VerificationEmailModalService } from 'src/app/core/verification-email-modal/verification-email-modal.service'
+import { getAriaLabel } from 'src/app/constants'
 
 @Component({
   selector: 'app-affiliation-stack',
@@ -98,7 +101,9 @@ export class AffiliationStackComponent implements OnInit, OnDestroy {
     private _affiliationService: RecordAffiliationService,
     private _organizationsService: OrganizationsService,
     private _togglz: TogglzService,
-    private _platform: PlatformInfoService
+    private _platform: PlatformInfoService,
+    private _dialog: MatDialog,
+    private _verificationEmailModalService: VerificationEmailModalService
   ) {}
 
   /**
@@ -211,6 +216,38 @@ export class AffiliationStackComponent implements OnInit, OnDestroy {
     this._affiliationService
       .updatePreferredSource(affiliation.putCode.value)
       .subscribe()
+  }
+
+  editAffiliation(affiliation: Affiliation) {
+    const hasVerifiedEmail = this.userRecord?.emails?.emails?.some(
+      (email) => email.verified
+    )
+    const primaryEmail = this.userRecord?.emails?.emails?.find(
+      (email) => email.primary
+    )
+
+    if (!hasVerifiedEmail) {
+      if (primaryEmail?.value) {
+        this._verificationEmailModalService.openVerificationEmailModal(
+          primaryEmail.value
+        )
+      }
+      return
+    }
+
+    this._platform
+      .get()
+      .pipe(first())
+      .subscribe((platform) => {
+        const dialogRef = this._dialog.open(ModalAffiliationsComponent, {
+          width: '850px',
+          maxWidth: platform.tabletOrHandset ? '99%' : '80vw',
+          ariaLabel: getAriaLabel(ModalAffiliationsComponent, this.type),
+        })
+
+        dialogRef.componentInstance.type = this.type
+        dialogRef.componentInstance.affiliation = affiliation
+      })
   }
 
   updateVisibility(visibility: any) {
