@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core'
 import { CommonModule, NgIf } from '@angular/common'
+import { Router } from '@angular/router'
 import { RecordHeaderStateService } from 'src/app/core/record-header-state/record-header-state.service'
 import { HeaderCompactService } from 'src/app/core/header-compact/header-compact.service'
 import { isEmpty } from 'lodash'
@@ -73,6 +74,32 @@ export class RecordHeaderComponent implements OnInit {
   bannerPrimaryIdText = ''
   bannerSecondaryIdText = ''
 
+  // Main action button properties
+  mainActionName = ''
+  private isLoggedIn = false
+  private loggedUserOrcid: string | undefined
+
+  // Issue banner property
+  get issueTitle(): string {
+    if (!this.userInfo?.RECORD_WITH_ISSUES) {
+      return ''
+    }
+    if (this.userInfo?.IS_DEACTIVATED === 'true' && !this.userInfo?.PRIMARY_RECORD) {
+      return this.deactivatedMessage
+    }
+    if (
+      this.userInfo?.IS_LOCKED === 'true' &&
+      this.userInfo?.IS_DEACTIVATED === 'false' &&
+      !this.userInfo?.PRIMARY_RECORD
+    ) {
+      return this.lockedMessage
+    }
+    if (!!this.userInfo?.PRIMARY_RECORD) {
+      return this.deprecatedMessage
+    }
+    return ''
+  }
+
   regionNames = $localize`:@@topBar.names:Names`
   regionOrcidId = 'Orcid iD'
   tooltipPrintableVersion = $localize`:@@topBar.printableRecord:Printable record`
@@ -95,7 +122,8 @@ export class RecordHeaderComponent implements OnInit {
     private _record: RecordService,
     private _state: RecordHeaderStateService,
     private _compact: HeaderCompactService,
-    private _togglz: TogglzService
+    private _togglz: TogglzService,
+    private _router: Router
   ) {}
 
   ngOnInit(): void {
@@ -103,7 +131,10 @@ export class RecordHeaderComponent implements OnInit {
     this._togglz
       .getStateOf(TogglzFlag.HEADER_COMPACT)
       .pipe(takeUntil(this.$destroy))
-      .subscribe((enabled) => (this.headerCompactEnabled = !!enabled))
+      .subscribe((enabled) => {
+        this.headerCompactEnabled = !!enabled
+        this.computeMainActionState()
+      })
 
     // Compact state
     this._compact.compactActive$
@@ -136,9 +167,20 @@ export class RecordHeaderComponent implements OnInit {
           'https:' + runtimeEnvironment.BASE_URL + (this.isPublicRecord || '')
         this.bannerPrimaryIdText = this.isPublicRecord || ''
         this.bannerSecondaryIdText = this.orcidId || ''
+        this.computeMainActionState()
         if (this.isPublicRecord) {
           this.loadRecord(this.isPublicRecord)
         }
+      })
+
+    this._user
+      .getUserSession()
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((session) => {
+        const info = session?.userInfo
+        this.isLoggedIn = !!info
+        this.loggedUserOrcid = info?.EFFECTIVE_USER_ORCID
+        this.computeMainActionState()
       })
 
     this._platform
@@ -164,6 +206,37 @@ export class RecordHeaderComponent implements OnInit {
     const next = !this.recordSummaryOpen
     this._state.setRecordSummaryOpen(next)
     this.recordSummaryOpenChange.emit(next)
+  }
+
+  private computeMainActionState() {
+    if (!this.headerCompactEnabled) {
+      this.mainActionName = ''
+      return
+    }
+
+    const isOwner =
+      !!this.isPublicRecord &&
+      !!this.loggedUserOrcid &&
+      this.isPublicRecord === this.loggedUserOrcid
+
+    if (!this.isLoggedIn) {
+      this.mainActionName = $localize`:@@record.editTooltipSignIn:Is this you? Sign in to start editing your ORCID record`
+      return
+    }
+    if (isOwner) {
+      this.mainActionName = $localize`:@@record.editYourOrcidRecord:Edit your ORCID record`
+      return
+    }
+    this.mainActionName = ''
+  }
+
+  onMainActionClick() {
+    if (!this.isLoggedIn) {
+      this._router.navigate(['signin'])
+      return
+    }
+    // If owner, go to my-orcid
+    this._router.navigate(['my-orcid'])
   }
 
   private loadRecord(publicRecordId: string) {

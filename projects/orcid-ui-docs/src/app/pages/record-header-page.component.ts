@@ -46,5 +46,14 @@ export class RecordHeaderPageComponent {
     regionNames: 'Names',
     regionOrcidId: 'Orcid iD',
     issueBannerText: 'This record has been deactivated',
+    showIssue: false,
+  }
+
+  get mainActionName(): string {
+    return this.config.showEditButton ? 'Edit record' : ''
+  }
+
+  onMainActionClick() {
+    console.log('Main action clicked')
   }
 }

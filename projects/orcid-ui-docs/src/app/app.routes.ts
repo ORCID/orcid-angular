@@ -56,4 +56,11 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/panel-page.component').then((m) => m.PanelPageComponent),
   },
+  {
+    path: 'skeleton-placeholder',
+    loadComponent: () =>
+      import('./pages/skeleton-placeholder-page.component').then(
+        (m) => m.SkeletonPlaceholderPageComponent
+      ),
+  },
 ]

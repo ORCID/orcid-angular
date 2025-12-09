@@ -4,8 +4,10 @@ import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { MatDividerModule } from '@angular/material/divider'
 import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
+import { MatTooltipModule } from '@angular/material/tooltip'
 import { TextWithTooltipComponent } from '../text-with-tooltip/text-with-tooltip.component'
 import { AccentButtonDirective } from '../../directives/accent-button.directive'
+import { SkeletonPlaceholderComponent } from '../skeleton-placeholder/skeleton-placeholder.component'
 
 @Component({
   selector: 'orcid-header-banner',
@@ -17,8 +19,10 @@ import { AccentButtonDirective } from '../../directives/accent-button.directive'
     MatDividerModule,
     MatButtonModule,
     MatIconModule,
+    MatTooltipModule,
     TextWithTooltipComponent,
     AccentButtonDirective,
+    SkeletonPlaceholderComponent,
   ],
   templateUrl: './record-header.component.html',
   styleUrls: ['./record-header.component.scss'],
@@ -39,6 +43,8 @@ export class HeaderBannerComponent {
    * Optional caption text displayed under the subtitle.
    */
   @Input() caption = ''
+  @Input() showIssue = false
+  @Input() issueTitle = ''
 
   /**
    * Generic text inputs for the identifier line (e.g. ORCID iD).
@@ -58,8 +64,18 @@ export class HeaderBannerComponent {
   @Input() regionNames = ''
   @Input() regionOrcidId = ''
 
+  /**
+   * Main action button configuration
+   */
+  @Input() mainActionName = ''
+  @Output() mainActionClicked = new EventEmitter<void>()
+
   onToggleExpanded() {
     const next = !this.expanded
     this.expandedChange.emit(next)
+  }
+
+  onMainActionClick() {
+    this.mainActionClicked.emit()
   }
 }
