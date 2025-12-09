@@ -299,6 +299,10 @@
               "proxyConfig": "src/proxy.conf.sandbox.mjs",
               "buildTarget": "ng-orcid:build:local-with-proxy"
             },
+            "local-orcid-web": {
+              "proxyConfig": "src/proxy.conf.orcid-web.mjs",
+              "buildTarget": "ng-orcid:build:local-with-proxy"
+            },
             "local": {
               "buildTarget": "ng-orcid:build:local"
             },
