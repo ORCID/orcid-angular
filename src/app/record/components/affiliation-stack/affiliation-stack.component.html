@@ -1,90 +1,54 @@
-<ng-container
-  *ngFor="
+<ng-container *ngFor="
     let affiliation of affiliationStack?.affiliations;
     let i = index;
     let last = last;
     trackBy: trackByAffiliationStack
-  "
->
+  ">
   <!-- A PANEL COMPONENT FOR EACH AFFILIATION ON THE STACK -->
 
-  <orcid-panel
-    panelId="affiliation-stack-{{ i }}"
-    [isPreferred]="isPreferred(affiliation)"
-    [isPublicRecord]="isPublicRecord === 'true'"
-    [hasExternalIds]="hasExternalIdentifiers"
-    [userVersionPresent]="affiliationStack.userVersionPresent"
-    [icon]="getAffiliationIcon(type)"
-    [iconClass]="getAffiliationIconClass(type)"
-    [title]="getAffiliationTitle(affiliation)"
-    [isMobile]="isMobile"
-    *ngIf="isPreferred(affiliation) || displayTheStack"
-    id="{{ 'cy-affiliation-' + type + '-' + i }}"
-  >
+  <orcid-panel panelId="affiliation-stack-{{ i }}" [isPreferred]="isPreferred(affiliation)"
+    [isPublicRecord]="isPublicRecord === 'true'" [hasExternalIds]="hasExternalIdentifiers"
+    [userVersionPresent]="affiliationStack.userVersionPresent" [icon]="getAffiliationIcon(type)"
+    [iconClass]="getAffiliationIconClass(type)" [title]="getAffiliationTitle(affiliation)" [isMobile]="isMobile"
+    [isFeatured]="affiliation.featured" (toggleFeatured)="toggleFeatured(affiliation)"
+    *ngIf="isPreferred(affiliation) || displayTheStack" id="{{ 'cy-affiliation-' + type + '-' + i }}">
     <!-- HEADER ACTIONS: visibility selector, etc. -->
     <div panel-actions>
-      <ng-container
-        *ngIf="
+      <ng-container *ngIf="
           affiliationStack.defaultAffiliation.visibility?.visibility &&
           isPreferred(affiliation) &&
           isPublicRecord !== 'true'
-        "
-      >
-        <app-visibility-selector
-          (ngModelChange)="updateVisibility($event)"
-          [ngModel]="affiliationStack.defaultAffiliation.visibility.visibility"
-          [multiEdit]="
+        ">
+        <app-visibility-selector (ngModelChange)="updateVisibility($event)"
+          [ngModel]="affiliationStack.defaultAffiliation.visibility.visibility" [multiEdit]="
             affiliationStack.affiliations.length > 1 ? 'multi' : 'single'
-          "
-          [visibilityError]="visibilityError"
-          [editable]="editableVisibilityControl"
-          [itemTitle]="affiliation.affiliationName.value"
-        ></app-visibility-selector>
+          " [visibilityError]="visibilityError" [editable]="editableVisibilityControl"
+          [itemTitle]="affiliation.affiliationName.value"></app-visibility-selector>
       </ng-container>
     </div>
 
     <!-- HEADER EDIT BUTTON -->
     <div panel-edit>
-      <button
-        mat-icon-button
-        *ngIf="isPreferred(affiliation) && isPublicRecord !== 'true'"
-        [matTooltip]="tooltipLabelEdit"
-        (click)="editAffiliation(affiliation)"
-      >
+      <button mat-icon-button *ngIf="isPreferred(affiliation) && isPublicRecord !== 'true'"
+        [matTooltip]="tooltipLabelEdit" (click)="editAffiliation(affiliation)">
         <mat-icon class="material-icons-outlined">edit</mat-icon>
       </button>
     </div>
     <!-- AFFILIATION BODY -->
-    <app-affiliation
-      *ngIf="stackPanelsDisplay[affiliation.putCode.value].topPanelOfTheStack"
-      [affiliation]="affiliation"
-      [panelDetailsState]="panelDetailsState[affiliation.putCode.value]"
-      (toggleDetails)="toggleDetails($event)"
-      [orgDisambiguated]="orgDisambiguated[affiliation.putCode.value]"
-    >
+    <app-affiliation *ngIf="stackPanelsDisplay[affiliation.putCode.value].topPanelOfTheStack"
+      [affiliation]="affiliation" [panelDetailsState]="panelDetailsState[affiliation.putCode.value]"
+      (toggleDetails)="toggleDetails($event)" [orgDisambiguated]="orgDisambiguated[affiliation.putCode.value]">
     </app-affiliation>
     <!-- AFFILIATION SOURCE -->
-    <app-panel-source
-      panel-footer
-      [disablePadding]="true"
-      [userRecord]="userRecord"
-      [isPreferred]="isPreferred(affiliation)"
-      [sourceName]="affiliation.sourceName || affiliation.source"
-      [assertionOriginName]="affiliation.assertionOriginName"
-      [assertionOriginOrcid]="affiliation.assertionOriginOrcid"
+    <app-panel-source panel-footer [disablePadding]="true" [userRecord]="userRecord"
+      [isPreferred]="isPreferred(affiliation)" [sourceName]="affiliation.sourceName || affiliation.source"
+      [assertionOriginName]="affiliation.assertionOriginName" [assertionOriginOrcid]="affiliation.assertionOriginOrcid"
       [assertionOriginClientId]="affiliation.assertionOriginClientId"
-      [stackLength]="affiliationStack.affiliations.length"
-      [(displayTheStack)]="displayTheStack"
-      (makePrimary)="makePrimaryCard(affiliation)"
-      [topPanelOfTheStackMode]="
+      [stackLength]="affiliationStack.affiliations.length" [(displayTheStack)]="displayTheStack"
+      (makePrimary)="makePrimaryCard(affiliation)" [topPanelOfTheStackMode]="
         stackPanelsDisplay[affiliation.putCode.value].topPanelOfTheStack
-      "
-      [isPublicRecord]="isPublicRecord"
-      (topPanelOfTheStackModeChange)="changeTopPanelOfTheStack(affiliation)"
-      [type]="type"
-      [item]="affiliation"
-      [panelTitle]="affiliation.affiliationName.value"
-    >
+      " [isPublicRecord]="isPublicRecord" (topPanelOfTheStackModeChange)="changeTopPanelOfTheStack(affiliation)"
+      [type]="type" [item]="affiliation" [panelTitle]="affiliation.affiliationName.value">
     </app-panel-source>
   </orcid-panel>
 </ng-container>

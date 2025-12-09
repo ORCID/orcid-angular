@@ -80,3 +80,16 @@
   cursor: pointer;
   font: inherit;
 }
+
+.featured-affiliation-star {
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
+  cursor: pointer;
+
+  mat-icon {
+    &.star-filled {
+      color: #ffc814;
+    }
+  }
+}

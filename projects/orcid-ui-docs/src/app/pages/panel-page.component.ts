@@ -38,6 +38,7 @@ export class PanelPageComponent {
     openState: true,
     isMobile: false,
     isPreferred: false,
+    isFeatured: false,
   }
 
   iconOptions = [

@@ -104,7 +104,7 @@ export class AffiliationStackComponent implements OnInit, OnDestroy {
     private _platform: PlatformInfoService,
     private _dialog: MatDialog,
     private _verificationEmailModalService: VerificationEmailModalService
-  ) {}
+  ) { }
 
   /**
    * Set the panelDetails and top of the stack card to default mode
@@ -152,7 +152,7 @@ export class AffiliationStackComponent implements OnInit, OnDestroy {
     const response =
       affiliation && this.affiliationStack
         ? this.affiliationStack.defaultAffiliation.putCode.value ===
-          affiliation.putCode.value
+        affiliation.putCode.value
         : false
     return response
   }
@@ -248,6 +248,14 @@ export class AffiliationStackComponent implements OnInit, OnDestroy {
         dialogRef.componentInstance.type = this.type
         dialogRef.componentInstance.affiliation = affiliation
       })
+  }
+
+
+
+  toggleFeatured(affiliation: Affiliation) {
+    this._affiliationService
+      .updateFeatured(affiliation.putCode.value)
+      .subscribe()
   }
 
   updateVisibility(visibility: any) {

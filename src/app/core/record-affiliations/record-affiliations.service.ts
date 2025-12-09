@@ -39,7 +39,7 @@ export class RecordAffiliationService {
     private _errorHandler: ErrorHandlerService,
     private _affiliationsGroupingService: RecordAffiliationsGroupingService,
     private _affiliationsSortService: AffiliationsSortService
-  ) {}
+  ) { }
 
   getAffiliations(
     options: UserRecordOptions = {
@@ -112,11 +112,10 @@ export class RecordAffiliationService {
     return this._http
       .get<Affiliation>(
         runtimeEnvironment.API_WEB +
-          `${
-            options?.publicRecordId
-              ? options?.publicRecordId + '/'
-              : 'affiliations/'
-          }affiliationDetails.json?id=${putCode}&type=${type}`
+        `${options?.publicRecordId
+          ? options?.publicRecordId + '/'
+          : 'affiliations/'
+        }affiliationDetails.json?id=${putCode}&type=${type}`
       )
       .pipe(
         retry(3),
@@ -131,7 +130,7 @@ export class RecordAffiliationService {
       return this._http
         .get<AffiliationsEndpoint>(
           runtimeEnvironment.API_WEB +
-            `${options.publicRecordId}/affiliationGroups.json`
+          `${options.publicRecordId}/affiliationGroups.json`
         )
         .pipe(
           retry(3),
@@ -205,9 +204,9 @@ export class RecordAffiliationService {
       return this._http
         .get<Organization[]>(
           runtimeEnvironment.API_WEB +
-            'affiliations/disambiguated/name/' +
-            org +
-            '?limit=100',
+          'affiliations/disambiguated/name/' +
+          org +
+          '?limit=100',
           {
             headers: this.headers,
           }
@@ -244,10 +243,10 @@ export class RecordAffiliationService {
     return this._http
       .get(
         runtimeEnvironment.API_WEB +
-          'affiliations/' +
-          putCode +
-          '/visibility/' +
-          visibility
+        'affiliations/' +
+        putCode +
+        '/visibility/' +
+        visibility
       )
       .pipe(
         retry(3),
@@ -260,9 +259,9 @@ export class RecordAffiliationService {
     return this._http
       .delete(
         runtimeEnvironment.API_WEB +
-          'affiliations/affiliation.json' +
-          '?id=' +
-          encodeURIComponent(putCode)
+        'affiliations/affiliation.json' +
+        '?id=' +
+        encodeURIComponent(putCode)
       )
       .pipe(
         retry(3),
@@ -275,8 +274,27 @@ export class RecordAffiliationService {
     return this._http
       .get(
         runtimeEnvironment.API_WEB +
-          'affiliations/updateToMaxDisplay.json?putCode=' +
-          putCode
+        'affiliations/updateToMaxDisplay.json?putCode=' +
+        putCode
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() => this.getAffiliations({ forceReload: true }))
+      )
+  }
+
+  updateFeatured(putCode: string): Observable<any> {
+    return this._http
+      .put(
+        runtimeEnvironment.API_WEB +
+        'affiliations/featuredAffiliation.json',
+        {
+          putCode: putCode,
+        },
+        {
+          headers: this.headers,
+        }
       )
       .pipe(
         retry(3),

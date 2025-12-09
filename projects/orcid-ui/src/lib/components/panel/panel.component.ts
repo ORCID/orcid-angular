@@ -13,6 +13,7 @@ export class OrcidPanelComponent {
   @Input() panelId!: string
   @Input() type:
     | 'affiliations'
+    | 'employment'
     | 'professional-activities'
     | 'invited-position'
     | 'distinction'
@@ -21,6 +22,7 @@ export class OrcidPanelComponent {
     | 'editorial-service' = 'affiliations'
   @Input() openState = true
   @Input() isPreferred = false
+  @Input() isFeatured = false
   @Input() isPublicRecord = false
   @Input() hasExternalIds = false
   @Input() userVersionPresent = false
@@ -30,8 +32,22 @@ export class OrcidPanelComponent {
   @Input() title?: string
   @Input() isMobile = false
 
+  get isAffiliation(): boolean {
+    return (
+      this.type === 'employment' ||
+      this.type === 'affiliations' ||
+      this.type === 'invited-position' ||
+      this.type === 'distinction' ||
+      this.type === 'membership' ||
+      this.type === 'service' ||
+      this.type === 'editorial-service' ||
+      this.type === 'professional-activities'
+    )
+  }
+
   @Output() displayTheStackChange = new EventEmitter<boolean>()
   @Output() openStateChange = new EventEmitter<boolean>()
+  @Output() toggleFeatured = new EventEmitter<void>()
 
   get showIcon(): boolean {
     return !!this.icon

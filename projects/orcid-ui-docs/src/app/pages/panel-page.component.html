@@ -1,7 +1,5 @@
-<app-documentation-page
-  title="Panel"
-  description="The orcid-panel component is a versatile container used in the ORCID record UI to render affiliation stacks, professional activities, and other collapsible content. It supports multiple content projection slots, optional icon and title display, and provides built-in expand/collapse functionality. Key Features: Icon support, customizable title, content projection slots, preferred styling, collapsible body, and stack management."
->
+<app-documentation-page title="Panel"
+  description="The orcid-panel component is a versatile container used in the ORCID record UI to render affiliation stacks, professional activities, and other collapsible content. It supports multiple content projection slots, optional icon and title display, and provides built-in expand/collapse functionality. Key Features: Icon support, customizable title, content projection slots, preferred styling, collapsible body, and stack management.">
   <div controls>
     <p>Modify these values to see how they affect all examples below:</p>
     <div class="controls-grid">
@@ -21,12 +19,7 @@
 
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Content (HTML)</mat-label>
-        <textarea
-          matInput
-          [(ngModel)]="config.content"
-          rows="4"
-          placeholder="<div>Line 1</div>"
-        ></textarea>
+        <textarea matInput [(ngModel)]="config.content" rows="4" placeholder="<div>Line 1</div>"></textarea>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
@@ -44,6 +37,9 @@
       <mat-checkbox [(ngModel)]="config.isPreferred">
         Is Preferred
       </mat-checkbox>
+      <mat-checkbox [(ngModel)]="config.isFeatured">
+        Is Featured
+      </mat-checkbox>
     </div>
   </div>
 
@@ -55,15 +51,9 @@
       <div class="example-stack">
         <div class="example-item">
           <div class="example-container desktop">
-            <orcid-panel
-              panelId="desktop-panel"
-              [openState]="config.openState"
-              (openStateChange)="config.openState = $event"
-              [title]="config.title"
-              [icon]="config.icon || undefined"
-              [isPreferred]="config.isPreferred"
-              [isMobile]="false"
-            >
+            <orcid-panel panelId="desktop-panel" [openState]="config.openState"
+              (openStateChange)="config.openState = $event" [title]="config.title" [icon]="config.icon || undefined"
+              [isPreferred]="config.isPreferred" [isFeatured]="config.isFeatured" [isMobile]="false" type="employment">
               <div [innerHTML]="config.content"></div>
               <div panel-footer>{{ config.footerText }}</div>
             </orcid-panel>
@@ -77,15 +67,9 @@
       <div class="example-stack">
         <div class="example-item">
           <div class="example-container mobile">
-            <orcid-panel
-              panelId="mobile-panel"
-              [openState]="config.openState"
-              (openStateChange)="config.openState = $event"
-              [title]="config.title"
-              [icon]="config.icon || undefined"
-              [isPreferred]="config.isPreferred"
-              [isMobile]="true"
-            >
+            <orcid-panel panelId="mobile-panel" [openState]="config.openState"
+              (openStateChange)="config.openState = $event" [title]="config.title" [icon]="config.icon || undefined"
+              [isPreferred]="config.isPreferred" [isFeatured]="config.isFeatured" [isMobile]="true" type="employment">
               <div [innerHTML]="config.content"></div>
               <div panel-footer>{{ config.footerText }}</div>
             </orcid-panel>
