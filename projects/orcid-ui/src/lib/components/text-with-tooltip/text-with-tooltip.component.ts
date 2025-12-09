@@ -99,7 +99,8 @@ import { SkeletonPlaceholderComponent } from '../skeleton-placeholder/skeleton-p
   ],
 })
 export class TextWithTooltipComponent
-  implements AfterViewInit, OnChanges, OnDestroy {
+  implements AfterViewInit, OnChanges, OnDestroy
+{
   /**
    * The text content to display in the tooltip when overflow occurs.
    * If not provided, the component will attempt to extract text from
@@ -122,7 +123,7 @@ export class TextWithTooltipComponent
   tooltipX = 0
   tooltipY = 0
 
-  constructor(private cdr: ChangeDetectorRef) { }
+  constructor(private cdr: ChangeDetectorRef) {}
 
   ngAfterViewInit() {
     // Use requestAnimationFrame to ensure DOM is fully rendered

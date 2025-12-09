@@ -41,8 +41,8 @@
     // Use minmax(0, 1fr) to allow the title to shrink below its content size (for truncation)
     grid-template-columns: minmax(0, 1fr) auto;
     grid-template-areas:
-      "title actions"
-      "other-names other-names";
+      'title actions'
+      'other-names other-names';
     justify-items: start;
     gap: 0;
     align-items: center;
@@ -390,7 +390,6 @@
   position: relative;
 }
 
-
 // ==========================================================================
 // Loading Placeholders
 // ==========================================================================
@@ -496,7 +495,6 @@ orcid-skeleton-placeholder.id-text-placeholder {
 
 // Ensure loading placeholders for actions are positioned correctly
 .summary-actions-area.loading-placeholder {
-
   // Mobile Compact: Absolute positioning to match loaded state
   .mobile.compact & {
     position: absolute;
@@ -532,7 +530,10 @@ button[mat-icon-button] {
 
 button[mat-icon-button] {
   --mat-icon-button-icon-color: var(--orcid-color-brand-white, #ffffff);
-  --mat-icon-button-hover-state-layer-color: var(--brand-secondary-dark, #085c77);
+  --mat-icon-button-hover-state-layer-color: var(
+    --brand-secondary-dark,
+    #085c77
+  );
 
   &:hover,
   &:focus,

@@ -1,5 +1,7 @@
-<app-documentation-page title="Header banner"
-  description="The HeaderBannerComponent renders a responsive header layout given a generic title, identifier text and expansion state. The app container is responsible for fetching data, composing feature strings, and wiring state from services.">
+<app-documentation-page
+  title="Header banner"
+  description="The HeaderBannerComponent renders a responsive header layout given a generic title, identifier text and expansion state. The app container is responsible for fetching data, composing feature strings, and wiring state from services."
+>
   <div controls>
     <p>Modify these values to see how they affect all examples below:</p>
     <div class="controls-grid">
@@ -10,7 +12,11 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Subtitle</mat-label>
-        <input matInput [(ngModel)]="config.subtitle" [disabled]="!config.showSubtitle" />
+        <input
+          matInput
+          [(ngModel)]="config.subtitle"
+          [disabled]="!config.showSubtitle"
+        />
       </mat-form-field>
 
       <mat-form-field appearance="outline">
@@ -69,24 +75,50 @@
         <div class="example-item">
           <h5>Loading</h5>
           <div class="example-container desktop">
-            <orcid-header-banner class="orcid-theme" [loading]="true" [compactMode]="false" [isDesktop]="true"
-              [title]="config.title" [showIssue]="config.showIssue"
-              [subtitle]="config.showSubtitle ? config.subtitle : ''" [caption]="config.caption"
-              [primaryIdText]="config.primaryIdText" [secondaryIdText]="config.secondaryIdText"
-              [expanded]="config.expanded" [canToggleExpanded]="config.canToggleExpanded"
-              (expandedChange)="config.expanded = $event" [regionNames]="config.regionNames"
-              [regionOrcidId]="config.regionOrcidId" [mainActionName]="mainActionName"
-              (mainActionClicked)="onMainActionClick()">
-              <img header-banner-logo class="orcid-logo orcid-logo--desktop-large"
-                src="https://qa.orcid.org/assets/vectors/orcid.logo.icon.svg" alt="ORCID logo" />
+            <orcid-header-banner
+              class="orcid-theme"
+              [loading]="true"
+              [compactMode]="false"
+              [isDesktop]="true"
+              [title]="config.title"
+              [showIssue]="config.showIssue"
+              [subtitle]="config.showSubtitle ? config.subtitle : ''"
+              [caption]="config.caption"
+              [primaryIdText]="config.primaryIdText"
+              [secondaryIdText]="config.secondaryIdText"
+              [expanded]="config.expanded"
+              [canToggleExpanded]="config.canToggleExpanded"
+              (expandedChange)="config.expanded = $event"
+              [regionNames]="config.regionNames"
+              [regionOrcidId]="config.regionOrcidId"
+              [mainActionName]="mainActionName"
+              (mainActionClicked)="onMainActionClick()"
+            >
+              <img
+                header-banner-logo
+                class="orcid-logo orcid-logo--desktop-large"
+                src="https://qa.orcid.org/assets/vectors/orcid.logo.icon.svg"
+                alt="ORCID logo"
+              />
               <span header-banner-expanded-label>Hide details</span>
               <span header-banner-collapsed-label>Show details</span>
               <ng-container header-banner-id-actions>
-                <button mat-icon-button accentButton type="button" matTooltip="Copy ORCID iD"
-                  aria-label="Copy ORCID iD">
+                <button
+                  mat-icon-button
+                  accentButton
+                  type="button"
+                  matTooltip="Copy ORCID iD"
+                  aria-label="Copy ORCID iD"
+                >
                   <mat-icon>content_copy</mat-icon>
                 </button>
-                <button mat-icon-button accentButton type="button" matTooltip="Print record" aria-label="Print record">
+                <button
+                  mat-icon-button
+                  accentButton
+                  type="button"
+                  matTooltip="Print record"
+                  aria-label="Print record"
+                >
                   <mat-icon>print</mat-icon>
                 </button>
               </ng-container>
@@ -96,24 +128,50 @@
         <div class="example-item">
           <h5>Loaded</h5>
           <div class="example-container desktop">
-            <orcid-header-banner class="orcid-theme" [loading]="false" [compactMode]="false" [isDesktop]="true"
-              [title]="config.title" [showIssue]="config.showIssue"
-              [subtitle]="config.showSubtitle ? config.subtitle : ''" [caption]="config.caption"
-              [primaryIdText]="config.primaryIdText" [secondaryIdText]="config.secondaryIdText"
-              [expanded]="config.expanded" [canToggleExpanded]="config.canToggleExpanded"
-              (expandedChange)="config.expanded = $event" [regionNames]="config.regionNames"
-              [regionOrcidId]="config.regionOrcidId" [mainActionName]="mainActionName"
-              (mainActionClicked)="onMainActionClick()">
-              <img header-banner-logo class="orcid-logo orcid-logo--desktop-large"
-                src="https://qa.orcid.org/assets/vectors/orcid.logo.icon.svg" alt="ORCID logo" />
+            <orcid-header-banner
+              class="orcid-theme"
+              [loading]="false"
+              [compactMode]="false"
+              [isDesktop]="true"
+              [title]="config.title"
+              [showIssue]="config.showIssue"
+              [subtitle]="config.showSubtitle ? config.subtitle : ''"
+              [caption]="config.caption"
+              [primaryIdText]="config.primaryIdText"
+              [secondaryIdText]="config.secondaryIdText"
+              [expanded]="config.expanded"
+              [canToggleExpanded]="config.canToggleExpanded"
+              (expandedChange)="config.expanded = $event"
+              [regionNames]="config.regionNames"
+              [regionOrcidId]="config.regionOrcidId"
+              [mainActionName]="mainActionName"
+              (mainActionClicked)="onMainActionClick()"
+            >
+              <img
+                header-banner-logo
+                class="orcid-logo orcid-logo--desktop-large"
+                src="https://qa.orcid.org/assets/vectors/orcid.logo.icon.svg"
+                alt="ORCID logo"
+              />
               <span header-banner-expanded-label>Hide details</span>
               <span header-banner-collapsed-label>Show details</span>
               <ng-container header-banner-id-actions>
-                <button mat-icon-button accentButton type="button" matTooltip="Copy ORCID iD"
-                  aria-label="Copy ORCID iD">
+                <button
+                  mat-icon-button
+                  accentButton
+                  type="button"
+                  matTooltip="Copy ORCID iD"
+                  aria-label="Copy ORCID iD"
+                >
                   <mat-icon>content_copy</mat-icon>
                 </button>
-                <button mat-icon-button accentButton type="button" matTooltip="Print record" aria-label="Print record">
+                <button
+                  mat-icon-button
+                  accentButton
+                  type="button"
+                  matTooltip="Print record"
+                  aria-label="Print record"
+                >
                   <mat-icon>print</mat-icon>
                 </button>
               </ng-container>
@@ -129,27 +187,59 @@
         <div class="example-item">
           <h5>Loading</h5>
           <div class="example-container desktop">
-            <orcid-header-banner class="orcid-theme" [loading]="true" [compactMode]="true" [isDesktop]="true"
-              [title]="config.title" [showIssue]="config.showIssue"
-              [subtitle]="config.showSubtitle ? config.subtitle : ''" [caption]="config.caption"
-              [primaryIdText]="config.primaryIdText" [secondaryIdText]="config.secondaryIdText"
-              [expanded]="config.expanded" [canToggleExpanded]="config.canToggleExpanded"
-              (expandedChange)="config.expanded = $event" [regionNames]="config.regionNames"
-              [regionOrcidId]="config.regionOrcidId">
-              <img header-banner-logo class="orcid-logo" src="https://qa.orcid.org/assets/vectors/orcid.logo.icon.svg"
-                alt="ORCID logo" />
-              <button *ngIf="config.showEditButton" mat-icon-button accentButton type="button" matTooltip="Edit record"
-                aria-label="Edit record" record-header-summary-actions>
+            <orcid-header-banner
+              class="orcid-theme"
+              [loading]="true"
+              [compactMode]="true"
+              [isDesktop]="true"
+              [title]="config.title"
+              [showIssue]="config.showIssue"
+              [subtitle]="config.showSubtitle ? config.subtitle : ''"
+              [caption]="config.caption"
+              [primaryIdText]="config.primaryIdText"
+              [secondaryIdText]="config.secondaryIdText"
+              [expanded]="config.expanded"
+              [canToggleExpanded]="config.canToggleExpanded"
+              (expandedChange)="config.expanded = $event"
+              [regionNames]="config.regionNames"
+              [regionOrcidId]="config.regionOrcidId"
+            >
+              <img
+                header-banner-logo
+                class="orcid-logo"
+                src="https://qa.orcid.org/assets/vectors/orcid.logo.icon.svg"
+                alt="ORCID logo"
+              />
+              <button
+                *ngIf="config.showEditButton"
+                mat-icon-button
+                accentButton
+                type="button"
+                matTooltip="Edit record"
+                aria-label="Edit record"
+                record-header-summary-actions
+              >
                 <mat-icon>edit</mat-icon>
               </button>
               <span header-banner-expanded-label>Hide details</span>
               <span header-banner-collapsed-label>Show details</span>
               <ng-container header-banner-id-actions>
-                <button mat-icon-button accentButton type="button" matTooltip="Copy ORCID iD"
-                  aria-label="Copy ORCID iD">
+                <button
+                  mat-icon-button
+                  accentButton
+                  type="button"
+                  matTooltip="Copy ORCID iD"
+                  aria-label="Copy ORCID iD"
+                >
                   <mat-icon>content_copy</mat-icon>
                 </button>
-                <button mat-icon-button accentButton type="button" matTooltip="Print record" aria-label="Print record">
+                <button
+                  mat-icon-button
+                  accentButton
+                  type="button"
+                  matTooltip="Print record"
+                  aria-label="Print record"
+                >
                   <mat-icon>print</mat-icon>
                 </button>
               </ng-container>
@@ -159,27 +249,59 @@
         <div class="example-item">
           <h5>Loaded</h5>
           <div class="example-container desktop">
-            <orcid-header-banner class="orcid-theme" [loading]="false" [compactMode]="true" [isDesktop]="true"
-              [title]="config.title" [showIssue]="config.showIssue"
-              [subtitle]="config.showSubtitle ? config.subtitle : ''" [caption]="config.caption"
-              [primaryIdText]="config.primaryIdText" [secondaryIdText]="config.secondaryIdText"
-              [expanded]="config.expanded" [canToggleExpanded]="config.canToggleExpanded"
-              (expandedChange)="config.expanded = $event" [regionNames]="config.regionNames"
-              [regionOrcidId]="config.regionOrcidId">
-              <img header-banner-logo class="orcid-logo" src="https://qa.orcid.org/assets/vectors/orcid.logo.icon.svg"
-                alt="ORCID logo" />
-              <button *ngIf="config.showEditButton" mat-icon-button accentButton type="button" matTooltip="Edit record"
-                aria-label="Edit record" record-header-summary-actions>
+            <orcid-header-banner
+              class="orcid-theme"
+              [loading]="false"
+              [compactMode]="true"
+              [isDesktop]="true"
+              [title]="config.title"
+              [showIssue]="config.showIssue"
+              [subtitle]="config.showSubtitle ? config.subtitle : ''"
+              [caption]="config.caption"
+              [primaryIdText]="config.primaryIdText"
+              [secondaryIdText]="config.secondaryIdText"
+              [expanded]="config.expanded"
+              [canToggleExpanded]="config.canToggleExpanded"
+              (expandedChange)="config.expanded = $event"
+              [regionNames]="config.regionNames"
+              [regionOrcidId]="config.regionOrcidId"
+            >
+              <img
+                header-banner-logo
+                class="orcid-logo"
+                src="https://qa.orcid.org/assets/vectors/orcid.logo.icon.svg"
+                alt="ORCID logo"
+              />
+              <button
+                *ngIf="config.showEditButton"
+                mat-icon-button
+                accentButton
+                type="button"
+                matTooltip="Edit record"
+                aria-label="Edit record"
+                record-header-summary-actions
+              >
                 <mat-icon>edit</mat-icon>
               </button>
               <span header-banner-expanded-label>Hide details</span>
               <span header-banner-collapsed-label>Show details</span>
               <ng-container header-banner-id-actions>
-                <button mat-icon-button accentButton type="button" matTooltip="Copy ORCID iD"
-                  aria-label="Copy ORCID iD">
+                <button
+                  mat-icon-button
+                  accentButton
+                  type="button"
+                  matTooltip="Copy ORCID iD"
+                  aria-label="Copy ORCID iD"
+                >
                   <mat-icon>content_copy</mat-icon>
                 </button>
-                <button mat-icon-button accentButton type="button" matTooltip="Print record" aria-label="Print record">
+                <button
+                  mat-icon-button
+                  accentButton
+                  type="button"
+                  matTooltip="Print record"
+                  aria-label="Print record"
+                >
                   <mat-icon>print</mat-icon>
                 </button>
               </ng-container>
@@ -195,24 +317,50 @@
         <div class="example-item">
           <h5>Loading</h5>
           <div class="example-container mobile">
-            <orcid-header-banner class="orcid-theme" [loading]="true" [compactMode]="false" [isDesktop]="false"
-              [title]="config.title" [showIssue]="config.showIssue"
-              [subtitle]="config.showSubtitle ? config.subtitle : ''" [caption]="config.caption"
-              [primaryIdText]="config.primaryIdText" [secondaryIdText]="config.secondaryIdText"
-              [expanded]="config.expanded" [canToggleExpanded]="config.canToggleExpanded"
-              (expandedChange)="config.expanded = $event" [regionNames]="config.regionNames"
-              [regionOrcidId]="config.regionOrcidId" [mainActionName]="mainActionName"
-              (mainActionClicked)="onMainActionClick()">
-              <img header-banner-logo class="orcid-logo" src="https://qa.orcid.org/assets/vectors/orcid.logo.icon.svg"
-                alt="ORCID logo" />
+            <orcid-header-banner
+              class="orcid-theme"
+              [loading]="true"
+              [compactMode]="false"
+              [isDesktop]="false"
+              [title]="config.title"
+              [showIssue]="config.showIssue"
+              [subtitle]="config.showSubtitle ? config.subtitle : ''"
+              [caption]="config.caption"
+              [primaryIdText]="config.primaryIdText"
+              [secondaryIdText]="config.secondaryIdText"
+              [expanded]="config.expanded"
+              [canToggleExpanded]="config.canToggleExpanded"
+              (expandedChange)="config.expanded = $event"
+              [regionNames]="config.regionNames"
+              [regionOrcidId]="config.regionOrcidId"
+              [mainActionName]="mainActionName"
+              (mainActionClicked)="onMainActionClick()"
+            >
+              <img
+                header-banner-logo
+                class="orcid-logo"
+                src="https://qa.orcid.org/assets/vectors/orcid.logo.icon.svg"
+                alt="ORCID logo"
+              />
               <span header-banner-expanded-label>Hide details</span>
               <span header-banner-collapsed-label>Show details</span>
               <ng-container header-banner-id-actions>
-                <button mat-icon-button accentButton type="button" matTooltip="Copy ORCID iD"
-                  aria-label="Copy ORCID iD">
+                <button
+                  mat-icon-button
+                  accentButton
+                  type="button"
+                  matTooltip="Copy ORCID iD"
+                  aria-label="Copy ORCID iD"
+                >
                   <mat-icon>content_copy</mat-icon>
                 </button>
-                <button mat-icon-button accentButton type="button" matTooltip="Print record" aria-label="Print record">
+                <button
+                  mat-icon-button
+                  accentButton
+                  type="button"
+                  matTooltip="Print record"
+                  aria-label="Print record"
+                >
                   <mat-icon>print</mat-icon>
                 </button>
               </ng-container>
@@ -222,23 +370,48 @@
         <div class="example-item">
           <h5>Loaded</h5>
           <div class="example-container mobile">
-            <orcid-header-banner class="orcid-theme" [loading]="false" [compactMode]="false" [isDesktop]="false"
-              [title]="config.title" [showIssue]="config.showIssue"
-              [subtitle]="config.showSubtitle ? config.subtitle : ''" [caption]="config.caption"
-              [primaryIdText]="config.primaryIdText" [secondaryIdText]="config.secondaryIdText"
-              [expanded]="config.expanded" [canToggleExpanded]="config.canToggleExpanded"
-              (expandedChange)="config.expanded = $event" [regionNames]="config.regionNames"
-              [regionOrcidId]="config.regionOrcidId" [mainActionName]="mainActionName"
-              (mainActionClicked)="onMainActionClick()">
-              <img header-banner-logo class="orcid-logo" src="https://qa.orcid.org/assets/vectors/orcid.logo.icon.svg"
-                alt="ORCID logo" />
+            <orcid-header-banner
+              class="orcid-theme"
+              [loading]="false"
+              [compactMode]="false"
+              [isDesktop]="false"
+              [title]="config.title"
+              [showIssue]="config.showIssue"
+              [subtitle]="config.showSubtitle ? config.subtitle : ''"
+              [caption]="config.caption"
+              [primaryIdText]="config.primaryIdText"
+              [secondaryIdText]="config.secondaryIdText"
+              [expanded]="config.expanded"
+              [canToggleExpanded]="config.canToggleExpanded"
+              (expandedChange)="config.expanded = $event"
+              [regionNames]="config.regionNames"
+              [regionOrcidId]="config.regionOrcidId"
+              [mainActionName]="mainActionName"
+              (mainActionClicked)="onMainActionClick()"
+            >
+              <img
+                header-banner-logo
+                class="orcid-logo"
+                src="https://qa.orcid.org/assets/vectors/orcid.logo.icon.svg"
+                alt="ORCID logo"
+              />
               <span header-banner-expanded-label>Hide details</span>
               <span header-banner-collapsed-label>Show details</span>
               <ng-container header-banner-id-actions>
-                <button mat-icon-button type="button" matTooltip="Copy ORCID iD" aria-label="Copy ORCID iD">
+                <button
+                  mat-icon-button
+                  type="button"
+                  matTooltip="Copy ORCID iD"
+                  aria-label="Copy ORCID iD"
+                >
                   <mat-icon>content_copy</mat-icon>
                 </button>
-                <button mat-icon-button type="button" matTooltip="Print record" aria-label="Print record">
+                <button
+                  mat-icon-button
+                  type="button"
+                  matTooltip="Print record"
+                  aria-label="Print record"
+                >
                   <mat-icon>print</mat-icon>
                 </button>
               </ng-container>
@@ -254,28 +427,60 @@
         <div class="example-item">
           <h5>Loading</h5>
           <div class="example-container mobile">
-            <orcid-header-banner class="orcid-theme" [loading]="true" [compactMode]="true" [isDesktop]="false"
-              [title]="config.title" [showIssue]="config.showIssue"
-              [subtitle]="config.showSubtitle ? config.subtitle : ''" [caption]="config.caption"
-              [primaryIdText]="config.primaryIdText" [secondaryIdText]="config.secondaryIdText"
-              [expanded]="config.expanded" [canToggleExpanded]="config.canToggleExpanded"
-              (expandedChange)="config.expanded = $event" [regionNames]="config.regionNames"
-              [regionOrcidId]="config.regionOrcidId">
-              <img header-banner-logo class="orcid-logo" src="https://qa.orcid.org/assets/vectors/orcid.logo.icon.svg"
-                alt="ORCID logo" />
+            <orcid-header-banner
+              class="orcid-theme"
+              [loading]="true"
+              [compactMode]="true"
+              [isDesktop]="false"
+              [title]="config.title"
+              [showIssue]="config.showIssue"
+              [subtitle]="config.showSubtitle ? config.subtitle : ''"
+              [caption]="config.caption"
+              [primaryIdText]="config.primaryIdText"
+              [secondaryIdText]="config.secondaryIdText"
+              [expanded]="config.expanded"
+              [canToggleExpanded]="config.canToggleExpanded"
+              (expandedChange)="config.expanded = $event"
+              [regionNames]="config.regionNames"
+              [regionOrcidId]="config.regionOrcidId"
+            >
+              <img
+                header-banner-logo
+                class="orcid-logo"
+                src="https://qa.orcid.org/assets/vectors/orcid.logo.icon.svg"
+                alt="ORCID logo"
+              />
 
-              <button *ngIf="config.showEditButton" mat-icon-button accentButton type="button" matTooltip="Edit record"
-                aria-label="Edit record" record-header-summary-actions>
+              <button
+                *ngIf="config.showEditButton"
+                mat-icon-button
+                accentButton
+                type="button"
+                matTooltip="Edit record"
+                aria-label="Edit record"
+                record-header-summary-actions
+              >
                 <mat-icon>edit</mat-icon>
               </button>
               <span header-banner-expanded-label>Hide details</span>
               <span header-banner-collapsed-label>Show details</span>
               <ng-container header-banner-id-actions>
-                <button mat-icon-button accentButton type="button" matTooltip="Copy ORCID iD"
-                  aria-label="Copy ORCID iD">
+                <button
+                  mat-icon-button
+                  accentButton
+                  type="button"
+                  matTooltip="Copy ORCID iD"
+                  aria-label="Copy ORCID iD"
+                >
                   <mat-icon>content_copy</mat-icon>
                 </button>
-                <button mat-icon-button accentButton type="button" matTooltip="Print record" aria-label="Print record">
+                <button
+                  mat-icon-button
+                  accentButton
+                  type="button"
+                  matTooltip="Print record"
+                  aria-label="Print record"
+                >
                   <mat-icon>print</mat-icon>
                 </button>
               </ng-container>
@@ -285,28 +490,60 @@
         <div class="example-item">
           <h5>Loaded</h5>
           <div class="example-container mobile">
-            <orcid-header-banner class="orcid-theme" [loading]="false" [compactMode]="true" [isDesktop]="false"
-              [title]="config.title" [showIssue]="config.showIssue"
-              [subtitle]="config.showSubtitle ? config.subtitle : ''" [caption]="config.caption"
-              [primaryIdText]="config.primaryIdText" [secondaryIdText]="config.secondaryIdText"
-              [expanded]="config.expanded" [canToggleExpanded]="config.canToggleExpanded"
-              (expandedChange)="config.expanded = $event" [regionNames]="config.regionNames"
-              [regionOrcidId]="config.regionOrcidId">
-              <img header-banner-logo class="orcid-logo" src="https://qa.orcid.org/assets/vectors/orcid.logo.icon.svg"
-                alt="ORCID logo" />
+            <orcid-header-banner
+              class="orcid-theme"
+              [loading]="false"
+              [compactMode]="true"
+              [isDesktop]="false"
+              [title]="config.title"
+              [showIssue]="config.showIssue"
+              [subtitle]="config.showSubtitle ? config.subtitle : ''"
+              [caption]="config.caption"
+              [primaryIdText]="config.primaryIdText"
+              [secondaryIdText]="config.secondaryIdText"
+              [expanded]="config.expanded"
+              [canToggleExpanded]="config.canToggleExpanded"
+              (expandedChange)="config.expanded = $event"
+              [regionNames]="config.regionNames"
+              [regionOrcidId]="config.regionOrcidId"
+            >
+              <img
+                header-banner-logo
+                class="orcid-logo"
+                src="https://qa.orcid.org/assets/vectors/orcid.logo.icon.svg"
+                alt="ORCID logo"
+              />
 
-              <button *ngIf="config.showEditButton" mat-icon-button accentButton type="button" matTooltip="Edit record"
-                aria-label="Edit record" record-header-summary-actions>
+              <button
+                *ngIf="config.showEditButton"
+                mat-icon-button
+                accentButton
+                type="button"
+                matTooltip="Edit record"
+                aria-label="Edit record"
+                record-header-summary-actions
+              >
                 <mat-icon>edit</mat-icon>
               </button>
               <span header-banner-expanded-label>Hide details</span>
               <span header-banner-collapsed-label>Show details</span>
               <ng-container header-banner-id-actions>
-                <button mat-icon-button accentButton type="button" matTooltip="Copy ORCID iD"
-                  aria-label="Copy ORCID iD">
+                <button
+                  mat-icon-button
+                  accentButton
+                  type="button"
+                  matTooltip="Copy ORCID iD"
+                  aria-label="Copy ORCID iD"
+                >
                   <mat-icon>content_copy</mat-icon>
                 </button>
-                <button mat-icon-button accentButton type="button" matTooltip="Print record" aria-label="Print record">
+                <button
+                  mat-icon-button
+                  accentButton
+                  type="button"
+                  matTooltip="Print record"
+                  aria-label="Print record"
+                >
                   <mat-icon>print</mat-icon>
                 </button>
               </ng-container>
@@ -322,28 +559,58 @@
         <div class="example-item">
           <h5>Desktop View - Normal Mode (no names)</h5>
           <div class="example-container desktop">
-            <orcid-header-banner class="orcid-theme" [loading]="false" [compactMode]="false" [isDesktop]="true"
-              [title]="''" [showIssue]="true" [subtitle]="''" [primaryIdText]="config.primaryIdText"
-              [secondaryIdText]="config.secondaryIdText" [expanded]="config.expanded"
-              [canToggleExpanded]="config.canToggleExpanded" (expandedChange)="config.expanded = $event"
-              [regionNames]="config.regionNames" [regionOrcidId]="config.regionOrcidId"
-              [issueTitle]="config.issueBannerText">
-              <img header-banner-logo class="orcid-logo" src="https://qa.orcid.org/assets/vectors/orcid.logo.icon.svg"
-                alt="ORCID logo" />
+            <orcid-header-banner
+              class="orcid-theme"
+              [loading]="false"
+              [compactMode]="false"
+              [isDesktop]="true"
+              [title]="''"
+              [showIssue]="true"
+              [subtitle]="''"
+              [primaryIdText]="config.primaryIdText"
+              [secondaryIdText]="config.secondaryIdText"
+              [expanded]="config.expanded"
+              [canToggleExpanded]="config.canToggleExpanded"
+              (expandedChange)="config.expanded = $event"
+              [regionNames]="config.regionNames"
+              [regionOrcidId]="config.regionOrcidId"
+              [issueTitle]="config.issueBannerText"
+            >
+              <img
+                header-banner-logo
+                class="orcid-logo"
+                src="https://qa.orcid.org/assets/vectors/orcid.logo.icon.svg"
+                alt="ORCID logo"
+              />
             </orcid-header-banner>
           </div>
         </div>
         <div class="example-item">
           <h5>Desktop View - Compact Mode (no names)</h5>
           <div class="example-container desktop">
-            <orcid-header-banner class="orcid-theme" [loading]="false" [compactMode]="true" [isDesktop]="true"
-              [title]="''" [showIssue]="true" [subtitle]="''" [primaryIdText]="config.primaryIdText"
-              [secondaryIdText]="config.secondaryIdText" [expanded]="config.expanded"
-              [canToggleExpanded]="config.canToggleExpanded" (expandedChange)="config.expanded = $event"
-              [regionNames]="config.regionNames" [regionOrcidId]="config.regionOrcidId"
-              [issueTitle]="config.issueBannerText">
-              <img header-banner-logo class="orcid-logo" src="https://qa.orcid.org/assets/vectors/orcid.logo.icon.svg"
-                alt="ORCID logo" />
+            <orcid-header-banner
+              class="orcid-theme"
+              [loading]="false"
+              [compactMode]="true"
+              [isDesktop]="true"
+              [title]="''"
+              [showIssue]="true"
+              [subtitle]="''"
+              [primaryIdText]="config.primaryIdText"
+              [secondaryIdText]="config.secondaryIdText"
+              [expanded]="config.expanded"
+              [canToggleExpanded]="config.canToggleExpanded"
+              (expandedChange)="config.expanded = $event"
+              [regionNames]="config.regionNames"
+              [regionOrcidId]="config.regionOrcidId"
+              [issueTitle]="config.issueBannerText"
+            >
+              <img
+                header-banner-logo
+                class="orcid-logo"
+                src="https://qa.orcid.org/assets/vectors/orcid.logo.icon.svg"
+                alt="ORCID logo"
+              />
             </orcid-header-banner>
           </div>
         </div>
@@ -356,14 +623,29 @@
         <div class="example-item">
           <h5>Mobile issue banner - Normal Mode</h5>
           <div class="example-container mobile">
-            <orcid-header-banner class="orcid-theme" [loading]="false" [compactMode]="false" [isDesktop]="false"
-              [title]="''" [showIssue]="true" [subtitle]="''" [primaryIdText]="config.primaryIdText"
-              [secondaryIdText]="config.secondaryIdText" [expanded]="config.expanded"
-              [canToggleExpanded]="config.canToggleExpanded" (expandedChange)="config.expanded = $event"
-              [regionNames]="config.regionNames" [regionOrcidId]="config.regionOrcidId"
-              [issueTitle]="config.issueBannerText">
-              <img header-banner-logo class="orcid-logo" src="https://qa.orcid.org/assets/vectors/orcid.logo.icon.svg"
-                alt="ORCID logo" />
+            <orcid-header-banner
+              class="orcid-theme"
+              [loading]="false"
+              [compactMode]="false"
+              [isDesktop]="false"
+              [title]="''"
+              [showIssue]="true"
+              [subtitle]="''"
+              [primaryIdText]="config.primaryIdText"
+              [secondaryIdText]="config.secondaryIdText"
+              [expanded]="config.expanded"
+              [canToggleExpanded]="config.canToggleExpanded"
+              (expandedChange)="config.expanded = $event"
+              [regionNames]="config.regionNames"
+              [regionOrcidId]="config.regionOrcidId"
+              [issueTitle]="config.issueBannerText"
+            >
+              <img
+                header-banner-logo
+                class="orcid-logo"
+                src="https://qa.orcid.org/assets/vectors/orcid.logo.icon.svg"
+                alt="ORCID logo"
+              />
             </orcid-header-banner>
           </div>
         </div>
@@ -371,14 +653,29 @@
         <div class="example-item">
           <h5>Mobile issue banner - Compact Mode</h5>
           <div class="example-container mobile">
-            <orcid-header-banner class="orcid-theme" [loading]="false" [compactMode]="true" [isDesktop]="false"
-              [title]="''" [showIssue]="true" [subtitle]="''" [primaryIdText]="config.primaryIdText"
-              [secondaryIdText]="config.secondaryIdText" [expanded]="config.expanded"
-              [canToggleExpanded]="config.canToggleExpanded" (expandedChange)="config.expanded = $event"
-              [regionNames]="config.regionNames" [regionOrcidId]="config.regionOrcidId"
-              [issueTitle]="config.issueBannerText">
-              <img header-banner-logo class="orcid-logo" src="https://qa.orcid.org/assets/vectors/orcid.logo.icon.svg"
-                alt="ORCID logo" />
+            <orcid-header-banner
+              class="orcid-theme"
+              [loading]="false"
+              [compactMode]="true"
+              [isDesktop]="false"
+              [title]="''"
+              [showIssue]="true"
+              [subtitle]="''"
+              [primaryIdText]="config.primaryIdText"
+              [secondaryIdText]="config.secondaryIdText"
+              [expanded]="config.expanded"
+              [canToggleExpanded]="config.canToggleExpanded"
+              (expandedChange)="config.expanded = $event"
+              [regionNames]="config.regionNames"
+              [regionOrcidId]="config.regionOrcidId"
+              [issueTitle]="config.issueBannerText"
+            >
+              <img
+                header-banner-logo
+                class="orcid-logo"
+                src="https://qa.orcid.org/assets/vectors/orcid.logo.icon.svg"
+                alt="ORCID logo"
+              />
             </orcid-header-banner>
           </div>
         </div>
@@ -398,7 +695,10 @@
         <code>loading</code>: shows a progress bar and hides content while
         loading
       </li>
-      <li><code>regionNames</code>, <code>regionOrcidId</code>, <code>showIssue</code></li>
+      <li>
+        <code>regionNames</code>, <code>regionOrcidId</code>,
+        <code>showIssue</code>
+      </li>
     </ul>
 
     <h3>Outputs</h3>

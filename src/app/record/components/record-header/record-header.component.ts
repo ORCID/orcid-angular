@@ -84,7 +84,10 @@ export class RecordHeaderComponent implements OnInit {
     if (!this.userInfo?.RECORD_WITH_ISSUES) {
       return ''
     }
-    if (this.userInfo?.IS_DEACTIVATED === 'true' && !this.userInfo?.PRIMARY_RECORD) {
+    if (
+      this.userInfo?.IS_DEACTIVATED === 'true' &&
+      !this.userInfo?.PRIMARY_RECORD
+    ) {
       return this.deactivatedMessage
     }
     if (

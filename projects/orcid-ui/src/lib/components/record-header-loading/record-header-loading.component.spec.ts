@@ -1,23 +1,22 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { RecordHeaderLoadingComponent } from './record-header-loading.component';
+import { RecordHeaderLoadingComponent } from './record-header-loading.component'
 
 describe('RecordHeaderLoadingComponent', () => {
-  let component: RecordHeaderLoadingComponent;
-  let fixture: ComponentFixture<RecordHeaderLoadingComponent>;
+  let component: RecordHeaderLoadingComponent
+  let fixture: ComponentFixture<RecordHeaderLoadingComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RecordHeaderLoadingComponent]
-    })
-    .compileComponents();
+      imports: [RecordHeaderLoadingComponent],
+    }).compileComponents()
 
-    fixture = TestBed.createComponent(RecordHeaderLoadingComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(RecordHeaderLoadingComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

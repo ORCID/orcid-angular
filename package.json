@@ -5,7 +5,7 @@
     "start-local": "npm run build-runtime-env && ng serve --disable-host-check --host 0.0.0.0",
     "start": "npm run build-runtime-env && (ng serve --configuration=local-qa --host 0.0.0.0 & npm run start:ui-docs)",
     "start-sandbox": "ng serve --configuration=local-sandbox --host 0.0.0.0",
-    "start:orcid-web": "npm run build-runtime-env && ng serve --configuration=local-orcid-web --host 0.0.0.0",
+    "start:orcid-web": "npm run build-runtime-env && ng serve --configuration=local-orcid-web --host 0.0.0.0 & npm run start:ui-docs",
     "start:en": "ng serve --configuration=local-qa-en --disable-host-check",
     "start:ar": "ng serve --configuration=local-qa-ar --disable-host-check",
     "start:fr": "ng serve --configuration=local-qa-fr --disable-host-check",
@@ -37,7 +37,7 @@
     "build:ui:watch": "ng build orcid-ui --watch",
     "build:tokens": "ng build orcid-tokens",
     "build:ui-docs": "ng build orcid-ui-docs",
-    "start:ui-docs": "ng serve orcid-ui-docs --port 8080",
+    "start:ui-docs": "ng serve orcid-ui-docs --port 4201",
     "prepare": "husky"
   },
   "private": true,
