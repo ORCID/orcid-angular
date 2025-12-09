@@ -35,9 +35,11 @@ export class RecordHeaderPageComponent {
   config = {
     title: 'Dr. Jane Doe',
     subtitle: 'Jane D.; J. Doe',
+    caption: 'Senior Researcher, Example University',
     primaryIdText: '0000-0001-2345-6789',
     secondaryIdText: 'https://orcid.org/0000-0001-2345-6789',
     showSubtitle: true,
+    showEditButton: true,
     canToggleExpanded: true,
     expanded: false,
     loading: false,

@@ -20,6 +20,14 @@
       </mat-form-field>
 
       <mat-form-field appearance="outline">
+        <mat-label>Caption</mat-label>
+        <input
+          matInput
+          [(ngModel)]="config.caption"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
         <mat-label>Primary ID Text</mat-label>
         <input matInput [(ngModel)]="config.primaryIdText" />
       </mat-form-field>
@@ -31,6 +39,10 @@
 
       <mat-checkbox [(ngModel)]="config.showSubtitle">
         Show Subtitle
+      </mat-checkbox>
+
+      <mat-checkbox [(ngModel)]="config.showEditButton">
+        Show Edit Button
       </mat-checkbox>
 
       <mat-checkbox [(ngModel)]="config.canToggleExpanded">
@@ -69,6 +81,7 @@
               [isDesktop]="true"
               [title]="config.title"
               [subtitle]="config.showSubtitle ? config.subtitle : ''"
+              [caption]="config.caption"
               [primaryIdText]="config.primaryIdText"
               [secondaryIdText]="config.secondaryIdText"
               [expanded]="config.expanded"
@@ -84,6 +97,7 @@
                 alt="ORCID logo"
               />
               <button
+                *ngIf="config.showEditButton"
                 mat-icon-button
                 accentButton
                 type="button"
@@ -128,6 +142,7 @@
               [isDesktop]="true"
               [title]="config.title"
               [subtitle]="config.showSubtitle ? config.subtitle : ''"
+              [caption]="config.caption"
               [primaryIdText]="config.primaryIdText"
               [secondaryIdText]="config.secondaryIdText"
               [expanded]="config.expanded"
@@ -143,6 +158,7 @@
                 alt="ORCID logo"
               />
               <button
+                *ngIf="config.showEditButton"
                 mat-icon-button
                 accentButton
                 type="button"
@@ -193,6 +209,7 @@
               [isDesktop]="true"
               [title]="config.title"
               [subtitle]="config.showSubtitle ? config.subtitle : ''"
+              [caption]="config.caption"
               [primaryIdText]="config.primaryIdText"
               [secondaryIdText]="config.secondaryIdText"
               [expanded]="config.expanded"
@@ -208,6 +225,7 @@
                 alt="ORCID logo"
               />
               <button
+                *ngIf="config.showEditButton"
                 mat-icon-button
                 accentButton
                 type="button"
@@ -252,6 +270,7 @@
               [isDesktop]="true"
               [title]="config.title"
               [subtitle]="config.showSubtitle ? config.subtitle : ''"
+              [caption]="config.caption"
               [primaryIdText]="config.primaryIdText"
               [secondaryIdText]="config.secondaryIdText"
               [expanded]="config.expanded"
@@ -267,6 +286,7 @@
                 alt="ORCID logo"
               />
               <button
+                *ngIf="config.showEditButton"
                 mat-icon-button
                 accentButton
                 type="button"
@@ -317,6 +337,7 @@
               [isDesktop]="false"
               [title]="config.title"
               [subtitle]="config.showSubtitle ? config.subtitle : ''"
+              [caption]="config.caption"
               [primaryIdText]="config.primaryIdText"
               [secondaryIdText]="config.secondaryIdText"
               [expanded]="config.expanded"
@@ -332,6 +353,7 @@
                 alt="ORCID logo"
               />
               <button
+                *ngIf="config.showEditButton"
                 mat-icon-button
                 accentButton
                 type="button"
@@ -376,6 +398,7 @@
               [isDesktop]="false"
               [title]="config.title"
               [subtitle]="config.showSubtitle ? config.subtitle : ''"
+              [caption]="config.caption"
               [primaryIdText]="config.primaryIdText"
               [secondaryIdText]="config.secondaryIdText"
               [expanded]="config.expanded"
@@ -391,6 +414,7 @@
                 alt="ORCID logo"
               />
               <button
+                *ngIf="config.showEditButton"
                 mat-icon-button
                 type="button"
                 matTooltip="Edit record"
@@ -438,6 +462,7 @@
               [isDesktop]="false"
               [title]="config.title"
               [subtitle]="config.showSubtitle ? config.subtitle : ''"
+              [caption]="config.caption"
               [primaryIdText]="config.primaryIdText"
               [secondaryIdText]="config.secondaryIdText"
               [expanded]="config.expanded"
@@ -454,6 +479,7 @@
               />
 
               <button
+                *ngIf="config.showEditButton"
                 mat-icon-button
                 accentButton
                 type="button"
@@ -498,6 +524,7 @@
               [isDesktop]="false"
               [title]="config.title"
               [subtitle]="config.showSubtitle ? config.subtitle : ''"
+              [caption]="config.caption"
               [primaryIdText]="config.primaryIdText"
               [secondaryIdText]="config.secondaryIdText"
               [expanded]="config.expanded"
@@ -514,6 +541,7 @@
               />
 
               <button
+                *ngIf="config.showEditButton"
                 mat-icon-button
                 accentButton
                 type="button"
@@ -687,7 +715,7 @@
 
   <div inputs>
     <ul>
-      <li><code>title</code>, <code>subtitle</code></li>
+      <li><code>title</code>, <code>subtitle</code>, <code>caption</code></li>
       <li><code>primaryIdText</code>, <code>secondaryIdText</code></li>
       <li>
         <code>compactMode</code>, <code>isDesktop</code>, <code>expanded</code>,

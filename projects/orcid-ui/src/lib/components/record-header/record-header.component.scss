@@ -14,7 +14,7 @@
 
   // Desktop non-compact only: 32px padding (orcid-id-section only exists in non-compact mode)
   &:not(.mobile):has(.orcid-id-section) {
-    padding: 32px 0;
+    padding: 16px 0;
 
     .record-header {
       gap: 16px; // Desktop non-compact: 32px gap
@@ -59,17 +59,15 @@
     }
 
     .names-wrapper {
-      gap: 8px;
+      gap: 2px;
       display: flex;
       flex-direction: column;
 
       .names {
-        line-height: 40px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         max-width: 100%;
-        gap: 16px;
 
         orcid-text-with-tooltip {
           flex: 1 1 auto;
@@ -93,11 +91,28 @@
 
       .other-names {
         line-height: 24px;
-        color: var(--orcid-color-brand-secondary-lightest, #d0f3ff);
+        // Stack subtitle and caption vertically under the title
+        flex-direction: column;
+        align-items: flex-start;
       }
 
       .other-names.mobile {
         justify-content: center;
+        align-items: center;
+      }
+
+      // Subtitle: brand-secondary-light, 21px line-height
+      .other-names .subtitle-text,
+      .other-names.mobile .subtitle-text {
+        line-height: 21px;
+        color: #8ec2db;
+      }
+
+      // Caption: white, 24px line-height
+      .other-names .caption-text,
+      .other-names.mobile .caption-text {
+        line-height: 24px;
+        color: var(--orcid-color-brand-white, #ffffff);
       }
 
       .other-names,
@@ -106,9 +121,24 @@
         overflow: hidden;
 
         orcid-text-with-tooltip {
+          display: flex;
+          align-items: center;
           width: 100%;
           max-width: 100%;
           min-width: 0;
+        }
+
+        // Subtitle wrapper: clamp to 21px
+        orcid-text-with-tooltip:has(.subtitle-text) {
+          height: 21px;
+          line-height: 21px;
+        }
+
+        // Caption wrapper: clamp to 24px and add spacing from subtitle
+        orcid-text-with-tooltip:has(.caption-text) {
+          height: 24px;
+          line-height: 24px;
+          margin-top: 8px;
         }
       }
 
@@ -127,7 +157,7 @@
         // Ensure placeholder matches actual content structure
         .names {
           gap: 16px;
-          line-height: 40px; // Match actual content line-height
+          line-height: 36px; // Match actual content line-height
 
           h1 {
             margin: 0; // Match actual content margin
@@ -141,7 +171,7 @@
 
         // Ensure other-names matches actual content
         .other-names {
-          line-height: 24px; // Match actual content line-height
+          line-height: 24px; // Match caption line-height (max of subtitle/caption)
         }
 
         .other-names.mobile {
@@ -255,6 +285,12 @@
   }
 }
 
+// Desktop-only: fix title row height/line-height to 36px
+.record-header-wrapper:not(.mobile) .names-wrapper .names {
+  line-height: 36px;
+  height: 36px;
+}
+
 // Desktop non-compact: keep the last 48px free so title text doesn't sit under the name-actions button
 .record-header-wrapper:not(.mobile) .orcid-id-section .names-wrapper {
   padding-right: 64px;
@@ -295,10 +331,10 @@
     justify-content: center;
   }
 
-  // Mobile non-compact: ensure orcid-text-with-tooltip height matches names row line-height (40px)
+  // Mobile non-compact: ensure orcid-text-with-tooltip height matches title line-height (27px)
   // Only target the direct child (title), not the one inside other-names
   .names-wrapper .names > orcid-text-with-tooltip {
-    height: 40px; // Match names row line-height (40px) on mobile non-compact mode
+    height: 27px;
     display: flex;
     align-items: center;
   }
@@ -337,7 +373,6 @@ button.orc-ui-font-body-small {
 .mobile .record-header .names {
   flex-direction: column;
   align-items: center;
-  gap: 8px;
 }
 
 .mobile .id-wrapper {
@@ -359,7 +394,7 @@ button.orc-ui-font-body-small {
 
 // Desktop-only, non-compact: fix ID wrapper height to 48px
 .record-header-wrapper:not(.mobile) .id-wrapper:not(.compact) {
-  height: 48px;
+  height: 40px;
 }
 
 .thin-font-heading {
@@ -497,18 +532,11 @@ section#orcid-id {
 // Desktop non-compact: ensure loading state matches loaded state height (48px)
 .record-header-wrapper:not(.mobile) .id-wrapper:not(.compact) {
   .orcid-link-wrapper.loading-placeholder {
-    max-height: 48px; // Match the fixed id-wrapper height
-    height: 48px;
+    height: 40px;
   }
 }
 
-// Desktop non-compact: ensure loading state matches loaded state height (48px)
-.record-header-wrapper:not(.mobile) .id-wrapper:not(.compact) {
-  .orcid-link-wrapper.loading-placeholder {
-    max-height: 48px; // Match the fixed id-wrapper height
-    height: 48px;
-  }
-}
+
 
 .mobile .orcid-id-text-and-buttons {
   flex-direction: column;
@@ -588,7 +616,7 @@ section#orcid-id {
 
 // Shared placeholder for ID/logo area (used in names and ID sections)
 .id-logo-placeholder {
-  width: 40px;
+  width: 36px;
   margin-right: 8px;
   flex-shrink: 0;
 }
@@ -599,7 +627,7 @@ section#orcid-id {
 .record-header-wrapper:not(.mobile)
   .id-wrapper:not(.compact)
   .id-logo-placeholder {
-  height: 40px;
+  height: 36px;
 }
 
 .record-header-wrapper:not(.mobile) .id-wrapper.compact .id-logo-placeholder {

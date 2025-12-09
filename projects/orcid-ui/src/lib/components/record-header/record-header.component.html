@@ -15,26 +15,61 @@
     >
       <div class="orc-row names-wrapper" *ngIf="!loading && title">
         <div class="orc-row names">
-          <h1
-            [ngClass]="{
-              'orc-ui-font-heading-small': !isDesktop,
-              'orc-ui-font-heading': isDesktop
-            }"
-          >
-            {{ title }}
-          </h1>
+          <orcid-text-with-tooltip [text]="title">
+            <h1
+              [ngClass]="{
+                'orc-ui-font-body-large': !isDesktop,
+                'orc-ui-font-heading-small': isDesktop
+              }"
+            >
+              {{ title }}
+            </h1>
+          </orcid-text-with-tooltip>
           <!-- Mobile-only: show other-names above the projected actions -->
           <div
             class="orc-row other-names mobile"
-            *ngIf="!isDesktop && subtitle"
+            *ngIf="!isDesktop && (subtitle || caption)"
           >
-            <p class="orc-ui-font-body">{{ subtitle }}</p>
+            <orcid-text-with-tooltip
+              *ngIf="subtitle"
+              [text]="subtitle"
+            >
+              <p class="orc-ui-font-body-small subtitle-text">
+                {{ subtitle }}
+              </p>
+            </orcid-text-with-tooltip>
+            <orcid-text-with-tooltip
+              *ngIf="caption"
+              [text]="caption"
+            >
+              <p class="orc-ui-font-body-small caption-text">
+                {{ caption }}
+              </p>
+            </orcid-text-with-tooltip>
           </div>
           <ng-content select="[record-header-name-actions]"></ng-content>
         </div>
         <!-- Desktop-only: other names below names row -->
-        <div class="orc-row other-names" *ngIf="isDesktop && subtitle">
-          <p class="orc-ui-font-body">{{ subtitle }}</p>
+        <div
+          class="orc-row other-names"
+          *ngIf="isDesktop && (subtitle || caption)"
+        >
+          <orcid-text-with-tooltip
+            *ngIf="subtitle"
+            [text]="subtitle"
+          >
+            <p class="orc-ui-font-body-small subtitle-text">
+              {{ subtitle }}
+            </p>
+          </orcid-text-with-tooltip>
+          <orcid-text-with-tooltip
+            *ngIf="caption"
+            [text]="caption"
+          >
+            <p class="orc-ui-font-body caption-text">
+              {{ caption }}
+            </p>
+          </orcid-text-with-tooltip>
         </div>
       </div>
 
@@ -47,7 +82,7 @@
         <div class="orc-row names">
           <h1
             [ngClass]="{
-              'orc-ui-font-heading-small': !isDesktop,
+              'orc-ui-font-body-large': !isDesktop,
               'orc-ui-font-heading': isDesktop
             }"
           >
@@ -55,7 +90,8 @@
           </h1>
           <!-- Mobile-only: show other-names placeholder above the projected actions -->
           <div class="orc-row other-names mobile" *ngIf="!isDesktop">
-            <p class="orc-ui-font-body">&nbsp;</p>
+            <p class="orc-ui-font-body-small subtitle-text">&nbsp;</p>
+            <p class="orc-ui-font-body-small caption-text">&nbsp;</p>
           </div>
           <!-- Placeholder for projected name actions to maintain spacing.
                Height matches the projected edit button (40px) on desktop, but is flexible on mobile. -->
@@ -63,7 +99,8 @@
         </div>
         <!-- Desktop-only: other names placeholder - always show to match max height -->
         <div class="orc-row other-names" *ngIf="isDesktop">
-          <p class="orc-ui-font-body">&nbsp;</p>
+          <p class="orc-ui-font-body-small subtitle-text">&nbsp;</p>
+          <p class="orc-ui-font-body caption-text">&nbsp;</p>
         </div>
       </div>
 
@@ -154,7 +191,7 @@
               <h2
                 [ngClass]="{
                   'orc-ui-font-body-small': compactMode,
-                  'orc-ui-font-body-large': !compactMode,
+                  'orc-ui-font-body': !compactMode,
                   mobile: !isDesktop
                 }"
                 class="font-weight-400"

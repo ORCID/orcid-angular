@@ -35,6 +35,10 @@ export class HeaderBannerComponent {
    */
   @Input() title = ''
   @Input() subtitle = ''
+  /**
+   * Optional caption text displayed under the subtitle.
+   */
+  @Input() caption = ''
 
   /**
    * Generic text inputs for the identifier line (e.g. ORCID iD).
