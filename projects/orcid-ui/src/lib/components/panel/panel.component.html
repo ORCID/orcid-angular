@@ -1,0 +1,43 @@
+<div class="orcid-panel" [class.orcid-panel--preferred]="isPreferred">
+  <div class="orcid-panel__header">
+    <div class="orcid-panel__header-main">
+      <div
+        *ngIf="enableStartToggl"
+        [matTooltip]="startToggleTooltip"
+        class="featured-affiliation-star-wrapper"
+      >
+        <button
+          mat-icon-button
+          class="featured-affiliation-star"
+          [disabled]="startToggleDisabled"
+          (click)="!startToggleDisabled && toggleFeatured.emit()"
+        >
+          <mat-icon *ngIf="startToggleOn" class="star-filled">star</mat-icon>
+          <mat-icon *ngIf="!startToggleOn" class="star-outline"
+            >star_outline</mat-icon
+          >
+        </button>
+      </div>
+      <ng-container *ngIf="showIcon">
+        <mat-icon [class]="iconClass">{{ icon }}</mat-icon>
+        <div class="vl"></div>
+      </ng-container>
+      <h4 *ngIf="title" class="orc-font-body" [ngClass]="{ mobile: isMobile }">
+        {{ title }}
+      </h4>
+    </div>
+
+    <div class="orcid-panel__header-actions">
+      <ng-content select="[panel-actions]"></ng-content>
+      <ng-content select="[panel-edit]"></ng-content>
+    </div>
+  </div>
+
+  <div class="orcid-panel__body" [id]="panelId + '-body'">
+    <ng-content></ng-content>
+  </div>
+
+  <div class="orcid-panel__footer">
+    <ng-content select="[panel-footer]"></ng-content>
+  </div>
+</div>

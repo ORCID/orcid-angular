@@ -1,10 +1,18 @@
-import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core'
 import { CommonModule, NgIf } from '@angular/common'
+import { Router } from '@angular/router'
 import { RecordHeaderStateService } from 'src/app/core/record-header-state/record-header-state.service'
 import { HeaderCompactService } from 'src/app/core/header-compact/header-compact.service'
 import { isEmpty } from 'lodash'
 import { Subject } from 'rxjs'
-import { takeUntil } from 'rxjs/operators'
+import { takeUntil, switchMap } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { UserService } from 'src/app/core'
@@ -19,6 +27,11 @@ import { MatTooltipModule } from '@angular/material/tooltip'
 import { MatButtonModule } from '@angular/material/button'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { TogglzFlag } from 'src/app/core/togglz/togglz-flags.enum'
+import { RecordAffiliationService } from 'src/app/core/record-affiliations/record-affiliations.service'
+import {
+  AffiliationUIGroup,
+  Affiliation,
+} from 'src/app/types/record-affiliation.endpoint'
 
 @Component({
   selector: 'app-record-header',
@@ -47,6 +60,7 @@ export class RecordHeaderComponent implements OnInit {
   displaySideBar: boolean
   displayBiography: boolean
   compactMode = false
+  @Input() disableCompactMode = false
   _recordSummaryOpen: boolean
 
   get recordSummaryOpen(): boolean {
@@ -70,8 +84,39 @@ export class RecordHeaderComponent implements OnInit {
   // Generic banner view-model properties used by the UI layer
   bannerTitle = ''
   bannerSubtitle = ''
+  bannerCaption = ''
   bannerPrimaryIdText = ''
   bannerSecondaryIdText = ''
+  bannerCaptionEnabled = false
+
+  // Main action button properties
+  mainActionName = ''
+  private isLoggedIn = false
+  private loggedUserOrcid: string | undefined
+
+  // Issue banner property
+  get issueTitle(): string {
+    if (!this.userInfo?.RECORD_WITH_ISSUES) {
+      return ''
+    }
+    if (
+      this.userInfo?.IS_DEACTIVATED === 'true' &&
+      !this.userInfo?.PRIMARY_RECORD
+    ) {
+      return this.deactivatedMessage
+    }
+    if (
+      this.userInfo?.IS_LOCKED === 'true' &&
+      this.userInfo?.IS_DEACTIVATED === 'false' &&
+      !this.userInfo?.PRIMARY_RECORD
+    ) {
+      return this.lockedMessage
+    }
+    if (!!this.userInfo?.PRIMARY_RECORD) {
+      return this.deprecatedMessage
+    }
+    return ''
+  }
 
   regionNames = $localize`:@@topBar.names:Names`
   regionOrcidId = 'Orcid iD'
@@ -95,7 +140,9 @@ export class RecordHeaderComponent implements OnInit {
     private _record: RecordService,
     private _state: RecordHeaderStateService,
     private _compact: HeaderCompactService,
-    private _togglz: TogglzService
+    private _togglz: TogglzService,
+    private _router: Router,
+    private _affiliations: RecordAffiliationService
   ) {}
 
   ngOnInit(): void {
@@ -103,12 +150,32 @@ export class RecordHeaderComponent implements OnInit {
     this._togglz
       .getStateOf(TogglzFlag.HEADER_COMPACT)
       .pipe(takeUntil(this.$destroy))
-      .subscribe((enabled) => (this.headerCompactEnabled = !!enabled))
+      .subscribe((enabled) => {
+        this.headerCompactEnabled = !!enabled
+        this.computeMainActionState()
+      })
+
+    this._togglz
+      .getStateOf(TogglzFlag.FEATURED_AFFILIATIONS)
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((enabled) => {
+        this.bannerCaptionEnabled = !!enabled
+        if (!enabled) {
+          this.bannerCaption = ''
+        } else {
+          // Reload featured employment if flag is enabled
+          this.loadFeaturedEmployment(this.isPublicRecord)
+        }
+      })
 
     // Compact state
     this._compact.compactActive$
       .pipe(takeUntil(this.$destroy))
-      .subscribe((active) => (this.compactMode = !!active))
+      .subscribe((active) =>
+        this.disableCompactMode
+          ? (this.compactMode = false)
+          : (this.compactMode = !!active)
+      )
 
     // Subscribe to shared state for inputs
     this._state.loadingUserRecord$
@@ -136,9 +203,22 @@ export class RecordHeaderComponent implements OnInit {
           'https:' + runtimeEnvironment.BASE_URL + (this.isPublicRecord || '')
         this.bannerPrimaryIdText = this.isPublicRecord || ''
         this.bannerSecondaryIdText = this.orcidId || ''
+        this.computeMainActionState()
         if (this.isPublicRecord) {
           this.loadRecord(this.isPublicRecord)
         }
+        // Load affiliations (for public record or current user)
+        this.loadFeaturedEmployment(this.isPublicRecord)
+      })
+
+    this._user
+      .getUserSession()
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((session) => {
+        const info = session?.userInfo
+        this.isLoggedIn = !!info
+        this.loggedUserOrcid = info?.EFFECTIVE_USER_ORCID
+        this.computeMainActionState()
       })
 
     this._platform
@@ -164,6 +244,37 @@ export class RecordHeaderComponent implements OnInit {
     const next = !this.recordSummaryOpen
     this._state.setRecordSummaryOpen(next)
     this.recordSummaryOpenChange.emit(next)
+  }
+
+  private computeMainActionState() {
+    if (!this.headerCompactEnabled) {
+      this.mainActionName = ''
+      return
+    }
+
+    const isOwner =
+      !!this.isPublicRecord &&
+      !!this.loggedUserOrcid &&
+      this.isPublicRecord === this.loggedUserOrcid
+
+    if (!this.isLoggedIn) {
+      this.mainActionName = $localize`:@@record.editTooltipSignIn:Is this you? Sign in to start editing your ORCID record`
+      return
+    }
+    if (isOwner) {
+      this.mainActionName = $localize`:@@record.editYourOrcidRecord:Edit your ORCID record`
+      return
+    }
+    this.mainActionName = ''
+  }
+
+  onMainActionClick() {
+    if (!this.isLoggedIn) {
+      this._router.navigate(['signin'])
+      return
+    }
+    // If owner, go to my-orcid
+    this._router.navigate(['my-orcid'])
   }
 
   private loadRecord(publicRecordId: string) {
@@ -237,5 +348,107 @@ export class RecordHeaderComponent implements OnInit {
         const hasOtherNames = !isEmpty(this.userRecord?.otherNames?.otherNames)
         this._state.setHasCreditOrOtherNames(hasCreditName || hasOtherNames)
       })
+  }
+
+  private loadFeaturedEmployment(publicRecordId?: string): void {
+    if (!this.bannerCaptionEnabled) {
+      this.bannerCaption = ''
+      return
+    }
+    this._affiliations
+      .getAffiliations({
+        publicRecordId: publicRecordId || undefined,
+        forceReload: false,
+      })
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((affiliations) => {
+        if (affiliations) {
+          this.bannerCaption = this.formatFeaturedEmployment(affiliations)
+        } else {
+          this.bannerCaption = ''
+        }
+      })
+  }
+
+  private formatFeaturedEmployment(affiliations: AffiliationUIGroup[]): string {
+    if (!affiliations || affiliations.length === 0) {
+      return ''
+    }
+
+    // Find the EMPLOYMENT group
+    const employmentGroup = affiliations.find(
+      (group) => group.type === 'EMPLOYMENT'
+    )
+
+    if (!employmentGroup || !employmentGroup.affiliationGroup) {
+      return ''
+    }
+
+    // Find featured employment in all affiliation groups
+    for (const group of employmentGroup.affiliationGroup) {
+      if (group.affiliations) {
+        const featuredAffiliation = group.affiliations.find(
+          (affiliation) =>
+            affiliation.featured === true &&
+            affiliation.affiliationType?.value === 'employment'
+        )
+
+        if (featuredAffiliation) {
+          return this.formatAffiliationCaption(featuredAffiliation)
+        }
+      }
+    }
+
+    return ''
+  }
+
+  private formatAffiliationCaption(affiliation: Affiliation): string {
+    const parts: string[] = []
+
+    // Organization name
+    const orgName = affiliation.affiliationName?.value
+    if (orgName) {
+      parts.push(orgName)
+    }
+
+    // Location: city, region, country
+    const locationParts: string[] = []
+    if (affiliation.city?.value) {
+      locationParts.push(affiliation.city.value)
+    }
+    if (affiliation.region?.value) {
+      locationParts.push(affiliation.region.value)
+    }
+    if (affiliation.countryForDisplay) {
+      locationParts.push(affiliation.countryForDisplay)
+    } else if (affiliation.country?.value) {
+      locationParts.push(affiliation.country.value)
+    }
+
+    // Combine organization and location
+    if (orgName && locationParts.length > 0) {
+      parts[0] = `${orgName}: ${locationParts.join(', ')}`
+    } else if (locationParts.length > 0) {
+      parts.push(locationParts.join(', '))
+    }
+
+    // Role and department
+    const roleParts: string[] = []
+    if (affiliation.roleTitle?.value) {
+      roleParts.push(affiliation.roleTitle.value)
+    }
+    if (affiliation.departmentName?.value) {
+      roleParts.push(affiliation.departmentName.value)
+    }
+
+    if (roleParts.length > 0) {
+      if (parts.length > 0) {
+        parts.push(`- ${roleParts.join(', ')}`)
+      } else {
+        parts.push(roleParts.join(', '))
+      }
+    }
+
+    return parts.join(' ')
   }
 }

@@ -1,6 +1,14 @@
-import { Component, HostBinding, Input, OnDestroy, OnInit } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  HostBinding,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core'
 import { combineLatest, Observable, of, Subject } from 'rxjs'
-import { first, takeUntil } from 'rxjs/operators'
+import { first, takeUntil, finalize } from 'rxjs/operators'
 import { OrganizationsService } from 'src/app/core'
 import { RecordAffiliationService } from 'src/app/core/record-affiliations/record-affiliations.service'
 import { OrgDisambiguated, UserInfo } from 'src/app/types'
@@ -12,8 +20,13 @@ import {
 } from 'src/app/types/record-affiliation.endpoint'
 import { UserRecord } from 'src/app/types/record.local'
 import { ModalAffiliationsComponent } from '../affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component'
+import { OrcidPanelComponent } from '@orcid/ui'
 import { TogglzService } from '../../../core/togglz/togglz.service'
+import { TogglzFlag } from '../../../core/togglz/togglz-flags.enum'
 import { PlatformInfoService } from '../../../cdk/platform-info'
+import { MatDialog } from '@angular/material/dialog'
+import { VerificationEmailModalService } from 'src/app/core/verification-email-modal/verification-email-modal.service'
+import { getAriaLabel } from 'src/app/constants'
 
 @Component({
   selector: 'app-affiliation-stack',
@@ -88,11 +101,19 @@ export class AffiliationStackComponent implements OnInit, OnDestroy {
   modalAffiliationsComponent = ModalAffiliationsComponent
   isMobile: boolean
 
+  // Panel header visibility/edit helpers
+  tooltipLabelEdit = $localize`:@@shared.edit:Edit`
+  visibilityError = false
+  editableVisibilityControl = true
+  bannerCaptionEnabled = false
+
   constructor(
     private _affiliationService: RecordAffiliationService,
     private _organizationsService: OrganizationsService,
     private _togglz: TogglzService,
-    private _platform: PlatformInfoService
+    private _platform: PlatformInfoService,
+    private _dialog: MatDialog,
+    private _verificationEmailModalService: VerificationEmailModalService
   ) {}
 
   /**
@@ -207,6 +228,77 @@ export class AffiliationStackComponent implements OnInit, OnDestroy {
       .subscribe()
   }
 
+  editAffiliation(affiliation: Affiliation) {
+    const hasVerifiedEmail = this.userRecord?.emails?.emails?.some(
+      (email) => email.verified
+    )
+    const primaryEmail = this.userRecord?.emails?.emails?.find(
+      (email) => email.primary
+    )
+
+    if (!hasVerifiedEmail) {
+      if (primaryEmail?.value) {
+        this._verificationEmailModalService.openVerificationEmailModal(
+          primaryEmail.value
+        )
+      }
+      return
+    }
+
+    this._platform
+      .get()
+      .pipe(first())
+      .subscribe((platform) => {
+        const dialogRef = this._dialog.open(ModalAffiliationsComponent, {
+          width: '850px',
+          maxWidth: platform.tabletOrHandset ? '99%' : '80vw',
+          ariaLabel: getAriaLabel(ModalAffiliationsComponent, this.type),
+        })
+
+        dialogRef.componentInstance.type = this.type
+        dialogRef.componentInstance.affiliation = affiliation
+      })
+  }
+
+  loadingFeatured: { [key: string]: boolean } = {}
+  @Output() featuredToggled = new EventEmitter<{
+    affiliationName: string
+    featured: boolean
+  }>()
+
+  toggleFeatured(affiliation: Affiliation) {
+    const putCode = affiliation.featured ? '' : affiliation.putCode.value
+    const wasFeatured = affiliation.featured
+    this.loadingFeatured[affiliation.putCode.value] = true
+    this._affiliationService
+      .updateFeatured(putCode)
+      .pipe(
+        finalize(() => {
+          this.loadingFeatured[affiliation.putCode.value] = false
+        })
+      )
+      .subscribe({
+        next: () => {
+          // Only emit if we're setting it as featured (not removing)
+          if (!wasFeatured) {
+            this.featuredToggled.emit({
+              affiliationName: affiliation.affiliationName?.value || '',
+              featured: true,
+            })
+          }
+        },
+      })
+  }
+
+  updateVisibility(visibility: any) {
+    // Apply visibility change to all affiliations in this stack
+    const putCodes = this.affiliationStack.affiliations
+      .map((a) => a.putCode.value)
+      .join(',')
+    this._affiliationService.updateVisibility(putCodes, visibility).subscribe()
+    this.visibilityError = false
+  }
+
   changeTopPanelOfTheStack(affiliation: Affiliation) {
     Object.keys(this.stackPanelsDisplay).forEach((key) => {
       this.stackPanelsDisplay[key].topPanelOfTheStack = false
@@ -225,6 +317,112 @@ export class AffiliationStackComponent implements OnInit, OnDestroy {
     return false
   }
 
+  getAffiliationIcon(type: AffiliationType): string | undefined {
+    if (!this.professionalActivities) {
+      return undefined
+    }
+
+    const iconMap: Record<string, string> = {
+      'invited-position': 'join_inner',
+      distinction: 'crown',
+      membership: 'card_membership',
+      service: 'badge',
+      'editorial-service': 'auto_stories',
+    }
+
+    return iconMap[type]
+  }
+
+  getAffiliationIconClass(type: AffiliationType): string | undefined {
+    if (!this.professionalActivities) {
+      return undefined
+    }
+
+    if (type === 'distinction' || type === 'editorial-service') {
+      return 'material-symbols-outlined'
+    }
+    return 'material-icons-outlined'
+  }
+
+  getAffiliationTitle(affiliation: Affiliation): string {
+    const parts: string[] = [affiliation.affiliationName.value]
+
+    const locationParts: string[] = []
+
+    if (affiliation.city?.value?.trim()) {
+      locationParts.push(affiliation.city.value)
+    }
+
+    if (affiliation.region?.value?.trim()) {
+      locationParts.push(affiliation.region.value)
+    }
+
+    if (affiliation.country?.value) {
+      locationParts.push(affiliation.country.value)
+    }
+
+    if (locationParts.length > 0) {
+      parts.push(': ' + locationParts.join(', '))
+    }
+
+    return parts.join('')
+  }
+
+  getFeaturedToggleTooltip(affiliation: Affiliation): string {
+    // Only show tooltip when not a public record
+    if (!!this.isPublicRecord) {
+      return ''
+    }
+
+    // Check if visibility is PUBLIC
+    const isPublic = affiliation.visibility?.visibility === 'PUBLIC'
+
+    if (!isPublic) {
+      return $localize`:@@shared.makePublicToEnableHighlighting:Make this affiliation public to enable highlighting`
+    }
+
+    if (affiliation.featured) {
+      return $localize`:@@shared.clickToRemoveHighlight:Click to remove this highlight`
+    }
+
+    return $localize`:@@shared.clickToHighlight:Click to highlight this affiliation`
+  }
+
+  isFeaturedToggleDisabled(affiliation: Affiliation): boolean {
+    // Disable if banner caption feature is disabled
+    if (!this.bannerCaptionEnabled) {
+      return true
+    }
+
+    // Disable if it's a public record
+    if (!!this.isPublicRecord) {
+      return true
+    }
+
+    // Disable if loading
+    if (this.loadingFeatured[affiliation.putCode.value]) {
+      return true
+    }
+
+    // Disable if visibility is not PUBLIC
+    const isPublic = affiliation.visibility?.visibility === 'PUBLIC'
+    if (!isPublic) {
+      return true
+    }
+
+    return false
+  }
+
+  getEnableStartToggl(affiliation: Affiliation): boolean {
+    if (!this.bannerCaptionEnabled) {
+      return false
+    }
+    return (
+      (!!this.isPublicRecord && affiliation.featured) ||
+      (!this.isPublicRecord && this.type === 'employment')
+    )
+  }
+
   ngOnInit(): void {
     this._platform
       .get()
@@ -232,6 +430,13 @@ export class AffiliationStackComponent implements OnInit, OnDestroy {
       .subscribe(
         (platform) => (this.isMobile = platform.columns4 || platform.columns8)
       )
+
+    this._togglz
+      .getStateOf(TogglzFlag.FEATURED_AFFILIATIONS)
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((enabled) => {
+        this.bannerCaptionEnabled = !!enabled
+      })
   }
 
   ngOnDestroy() {

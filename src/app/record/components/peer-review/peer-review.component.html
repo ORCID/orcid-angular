@@ -1,4 +1,8 @@
-<app-panel-data [borderBottom]="true" *ngIf="subPeerReview?.showDetails">
+<app-panel-data
+  [borderBottom]="true"
+  *ngIf="subPeerReview?.showDetails"
+  [deprecatedPadding]="true"
+>
   <app-panel-element
     [hideVisibility]="false"
     *ngIf="getPeerReview(subPeerReview.putCode.value) as peerReview"

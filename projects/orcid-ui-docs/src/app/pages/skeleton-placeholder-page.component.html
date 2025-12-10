@@ -1,0 +1,64 @@
+<app-documentation-page
+  title="Skeleton Placeholder"
+  description="A generalized shimmering placeholder component for loading states."
+>
+  <div controls>
+    <div class="controls-grid">
+      <mat-form-field appearance="outline">
+        <mat-label>Shape</mat-label>
+        <mat-select [(ngModel)]="config.shape">
+          <mat-option value="square">Square</mat-option>
+          <mat-option value="circle">Circle</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Width</mat-label>
+        <input matInput [(ngModel)]="config.width" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Height</mat-label>
+        <input matInput [(ngModel)]="config.height" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Shimmer Percentage</mat-label>
+        <input
+          matInput
+          type="number"
+          min="0"
+          max="100"
+          [(ngModel)]="config.shimmerPercentage"
+        />
+        <span matSuffix>%</span>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div examples>
+    <div class="example-group">
+      <h4>Playground</h4>
+      <div class="example-container">
+        <orcid-skeleton-placeholder
+          [shape]="config.shape"
+          [width]="config.width"
+          [height]="config.height"
+          [shimmerPercentage]="config.shimmerPercentage"
+        ></orcid-skeleton-placeholder>
+      </div>
+    </div>
+  </div>
+
+  <div inputs>
+    <ul>
+      <li><code>shape</code>: 'square' | 'circle' (default: 'square')</li>
+      <li><code>width</code>: string (default: '100%')</li>
+      <li><code>height</code>: string (default: '100%')</li>
+      <li>
+        <code>shimmerPercentage</code>: number (default: 100) - Percentage of
+        container size that the shimmer effect will cover (centered)
+      </li>
+    </ul>
+  </div>
+</app-documentation-page>

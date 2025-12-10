@@ -27,6 +27,82 @@
     id="cy-affiliation-employment"
   >
     <ng-container *ngIf="profileAffiliationsGroup.affiliationGroup.length > 0">
+      <app-alert-message
+        type="success"
+        *ngIf="showFeaturedSuccessAlert"
+        role="alert"
+        class="featured-success-alert"
+      >
+        <span content class="orc-font-body-small">
+          <span class="orc-font-body-small">
+            <ng-container
+              i18n="@@shared.featuredAffiliationSuccessMessageBefore"
+              >Your affiliation</ng-container
+            >
+            <strong>{{ featuredAffiliationName }}</strong>
+            <ng-container i18n="@@shared.featuredAffiliationSuccessMessageAfter"
+              >has been highlighted and will be shown at the top of your public
+              record. To remove this highlight click the star icon next to the
+              affiliation name.</ng-container
+            >
+          </span>
+          <p>
+            <a
+              class="underline brand-primary-darkest-link"
+              rel="noopener noreferrer"
+              target="_blank"
+              href="https://support.orcid.org/hc/en-us/articles/360006894834-Add-employment-information-to-your-ORCID-record"
+              i18n="@@shared.featuredAffiliationLearnMore"
+            >
+              Find out more about highlighting affiliations in your ORCID record
+            </a>
+          </p>
+        </span>
+      </app-alert-message>
+      <app-alert-message
+        type="notice"
+        *ngIf="showFeaturedNoticeAlert"
+        role="alert"
+        class="featured-notice-alert"
+      >
+        <span title i18n="@@shared.highlightYourAffiliations"
+          >Highlight your affiliations</span
+        >
+        <span content class="orc-font-body-small">
+          <span class="orc-font-body-small">
+            <ng-container i18n="@@shared.featuredAffiliationNoticeMessagePart1"
+              >Highlighted affiliations are shown at the top of your public
+              record.</ng-container
+            >
+            <ng-container
+              i18n="@@shared.featuredAffiliationNoticeMessagePart2Before"
+              >To highlight an affiliation click the</ng-container
+            >
+            <strong>star</strong>
+            <ng-container
+              i18n="@@shared.featuredAffiliationNoticeMessagePart2After"
+              >icon next to the affiliation name.</ng-container
+            >
+            <em
+              ><ng-container
+                i18n="@@shared.featuredAffiliationNoticeMessagePart3"
+                >You can only highlight one affiliation at a time.</ng-container
+              ></em
+            >
+          </span>
+          <p>
+            <a
+              class="underline brand-primary-darkest-link"
+              rel="noopener noreferrer"
+              target="_blank"
+              href="https://support.orcid.org/hc/en-us/articles/360006894834-Add-employment-information-to-your-ORCID-record"
+              i18n="@@shared.featuredAffiliationLearnMore"
+            >
+              Find out more about highlighting affiliations in your ORCID record
+            </a>
+          </p>
+        </span>
+      </app-alert-message>
       <app-affiliation-stack
         [userRecord]="userRecord"
         [isPublicRecord]="isPublicRecord"
@@ -37,6 +113,7 @@
         [affiliationStack]="affiliationGroup"
         [type]="affiliationType.employment"
         [userInfo]="userInfo"
+        (featuredToggled)="onFeaturedToggled($event)"
       ></app-affiliation-stack>
     </ng-container>
     <ng-container
