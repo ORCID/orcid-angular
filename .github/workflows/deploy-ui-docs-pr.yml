@@ -30,8 +30,11 @@ jobs:
       
       - name: Extract ticket ID from branch name
         id: extract-ticket
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+          REF_NAME: ${{ github.ref_name }}
         run: |
-          BRANCH_NAME="${{ github.head_ref || github.ref_name }}"
+          BRANCH_NAME="${HEAD_REF:-$REF_NAME}"
           echo "Branch name: $BRANCH_NAME"
           
           # Extract ticket ID (e.g., PD-1234 from lmendoza/PD-1234)
