@@ -92,9 +92,6 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   newAddedAffiliation: string
 
   featuredWorksTogglz = false
-  // Compact header shared state
-  compactEligible$ = this._compactService.eligible$
-  compactActive$ = this._compactService.compactActive$
 
   constructor(
     _userInfoService: UserInfoService,

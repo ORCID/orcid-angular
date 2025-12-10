@@ -1,48 +1,40 @@
 import { Injectable, Inject } from '@angular/core'
 import { NavigationEnd, Router } from '@angular/router'
-import { BehaviorSubject, combineLatest, fromEvent } from 'rxjs'
-import { distinctUntilChanged, filter, map, startWith } from 'rxjs/operators'
+import { combineLatest, fromEvent, Observable } from 'rxjs'
+import {
+  distinctUntilChanged,
+  filter,
+  map,
+  startWith,
+  shareReplay,
+} from 'rxjs/operators'
 import { TogglzService } from '../togglz/togglz.service'
 import { TogglzFlag } from '../togglz/togglz-flags.enum'
 import { isValidOrcidFormat } from 'src/app/constants'
-import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 
 /**
- * Centralizes the logic that determines whether the Header Compact mode
- * is eligible for the current route, and coordinates the current compact-active
- * state across components (e.g., Header and My ORCID).
+ * Service that determines when the compact header mode should be active
+ * based on scroll position and route eligibility.
  */
 @Injectable({ providedIn: 'root' })
 export class HeaderCompactService {
-  private readonly _eligibleSubject = new BehaviorSubject<boolean>(false)
-  private readonly _publicOrcidSubject = new BehaviorSubject<string | null>(
-    null
-  )
-  private readonly _compactActiveSubject = new BehaviorSubject<boolean>(false)
-  private readonly _isDesktopSubject = new BehaviorSubject<boolean>(true)
-  private readonly _scrollYSubject = new BehaviorSubject<number>(-1000)
-  private readonly _recordRestrictedSubject = new BehaviorSubject<boolean>(
-    false
-  )
-  // Threshold configuration
-  private readonly baseThresholdDesktop = -200
-  private readonly baseThresholdMobile = -170
-  private readonly hysteresisBuffer = 0
+  // Threshold for when compact mode should activate (scroll position relative to main-content)
+  private readonly scrollThreshold = -175
 
-  readonly eligible$ = this._eligibleSubject.asObservable()
-  readonly publicOrcid$ = this._publicOrcidSubject.asObservable()
-  readonly compactActive$ = this._compactActiveSubject.asObservable()
-  readonly isDesktop$ = this._isDesktopSubject.asObservable()
+  /**
+   * Single observable that emits true when compact mode should be active.
+   * Combines eligibility (public ORCID page) with scroll position.
+   */
+  readonly compactActive$: Observable<boolean>
 
   constructor(
     private router: Router,
     private togglz: TogglzService,
-    _platform: PlatformInfoService,
     @Inject(WINDOW) private window: Window
   ) {
-    // React to router changes and the feature flag
-    combineLatest([
+    // Check if current route is eligible (public ORCID page with feature flag enabled)
+    const eligible$ = combineLatest([
       this.togglz
         .getStateOf(TogglzFlag.HEADER_COMPACT)
         .pipe(startWith(false), distinctUntilChanged()),
@@ -52,82 +44,34 @@ export class HeaderCompactService {
         map(() => this.router.url),
         distinctUntilChanged()
       ),
-    ]).subscribe(([flagEnabled, url]) => {
-      const { eligible, publicOrcid } = this.computeEligibilityFromUrl(
-        flagEnabled,
-        url || ''
-      )
-      this._eligibleSubject.next(eligible)
-      this._publicOrcidSubject.next(publicOrcid)
-    })
-
-    // Track platform changes (desktop vs not)
-    _platform.get().subscribe((platform) => {
-      this._isDesktopSubject.next(!!platform?.columns12)
-      // Re-evaluate compact state on platform change
-      this.updateCompactState()
-    })
+    ]).pipe(
+      map(([flagEnabled, url]) => {
+        const clean = (url || '/').split('?')[0].split('#')[0]
+        const base = clean.split('/')[1] || ''
+        return flagEnabled && isValidOrcidFormat(base)
+      }),
+      distinctUntilChanged()
+    )
 
     // Track scroll position
-    fromEvent(this.window, 'scroll')
-      .pipe(
-        startWith(null as any),
-        map(() => this.getScrollY()),
-        distinctUntilChanged()
-      )
-      .subscribe((y) => {
-        if (y !== 0) {
-          this._scrollYSubject.next(y)
-          this.updateCompactState()
+    // Initialize with a value below threshold to prevent compact mode on page load
+    const scrollY$ = fromEvent(this.window, 'scroll').pipe(
+      map(() => this.getScrollY()),
+      startWith(this.scrollThreshold - 1),
+      distinctUntilChanged()
+    )
+
+    // Combine eligibility and scroll position to determine compact mode
+    this.compactActive$ = combineLatest([eligible$, scrollY$]).pipe(
+      map(([eligible, scrollY]) => {
+        if (!eligible) {
+          return false
         }
-      })
-
-    // Also recompute when eligibility toggles
-    this.eligible$.subscribe(() => this.updateCompactState())
-  }
-
-  /**
-   * Elegible only withing public Orcid pages
-   */
-  private computeEligibilityFromUrl(
-    flagEnabled: boolean,
-    url: string
-  ): { eligible: boolean; publicOrcid: string | null } {
-    const clean = (url || '/').split('?')[0].split('#')[0]
-    const base = clean.split('/')[1] || ''
-    const valid = flagEnabled && isValidOrcidFormat(base)
-    return { eligible: !!valid, publicOrcid: valid ? base : null }
-  }
-
-  private updateCompactState() {
-    const eligible = this._eligibleSubject.value
-    if (!eligible) {
-      if (this._compactActiveSubject.value !== false) {
-        this._compactActiveSubject.next(false)
-      }
-      return
-    }
-    const restricted = this._recordRestrictedSubject.value
-    if (restricted) {
-      if (this._compactActiveSubject.value !== false) {
-        this._compactActiveSubject.next(false)
-      }
-      return
-    }
-    const isDesktop = this._isDesktopSubject.value
-    const y = this._scrollYSubject.value
-    const threshold = isDesktop
-      ? this.baseThresholdDesktop
-      : this.baseThresholdMobile
-    // Hysteresis buffer to avoid jitter
-    const buffer = this.hysteresisBuffer
-    const enter = threshold + buffer
-    const exit = threshold - buffer
-    const current = this._compactActiveSubject.value
-    const next = current ? y > exit : y >= enter
-    if (next !== current) {
-      this._compactActiveSubject.next(next)
-    }
+        return scrollY >= this.scrollThreshold
+      }),
+      distinctUntilChanged(),
+      shareReplay(1)
+    )
   }
 
   private getScrollY(): number {

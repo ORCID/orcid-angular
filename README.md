@@ -1,3 +1,19 @@
+<p align="center">
+	<a href="https://orcid.org">
+		<img src="https://info.orcid.org/wp-content/uploads/2019/11/orcid_64x64.png" alt="ORCID Logo" width="80" height="80">
+	</a>
+</p>
+
+<h1 align="center">ORCID Angular Frontend</h1>
+
+<p align="center">
+	<a href="https://github.com/ORCID/orcid-angular/actions/workflows/bld_test_rel_tag.yml">
+		<img src="https://github.com/ORCID/orcid-angular/actions/workflows/bld_test_rel_tag.yml/badge.svg" alt="bld_test_rel_tag status">
+	</a>
+</p>
+
+---
+
 # Get started
 
 ## Serve the frond-end locally

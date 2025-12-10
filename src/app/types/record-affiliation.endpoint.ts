@@ -82,6 +82,7 @@ export interface Affiliation extends AssertionBase {
   affiliationExternalIdentifiers?: ExternalIdentifier[]
   organization?: Organization
   userIsSource?: boolean
+  featured?: boolean
 }
 
 export interface Organization {

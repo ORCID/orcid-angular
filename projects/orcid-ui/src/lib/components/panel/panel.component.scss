@@ -1,0 +1,118 @@
+.orcid-panel {
+  border-radius: 4px;
+  border: 1px solid var(--orcid-color-border-subtle, #dddddd);
+  background-color: var(--orcid-color-surface, #ffffff);
+  display: block;
+}
+
+.orcid-panel--preferred {
+  border-color: #bdbdbd !important;
+}
+
+.orcid-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px 0 16px;
+  border-radius: 3px;
+  border-color: #bdbdbd !important;
+  border-bottom: solid 1px;
+  background-color: #eee !important;
+  min-height: 56px;
+}
+
+.orcid-panel__header-main {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+
+  mat-icon {
+    flex-shrink: 0;
+  }
+
+  .vl {
+    border-left: 2px solid #bdbdbd;
+    height: 32px;
+    flex-shrink: 0;
+    margin: 0 16px;
+  }
+
+  h4 {
+    margin: 0;
+    flex: 1;
+    min-width: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+  }
+}
+
+.orcid-panel__header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.orcid-panel__icon-button {
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  color: var(--orcid-color-text-muted, #555555);
+}
+
+.orcid-panel__body {
+  padding: 16px;
+
+  &:empty {
+    padding: 0;
+    min-height: 0;
+    height: 0;
+  }
+}
+
+.orcid-panel__footer {
+  padding: 16px;
+  border-top: solid 1px #bdbdbd !important;
+}
+
+.orcid-panel__chip-button {
+  border-radius: 999px;
+  border: 1px solid var(--orcid-color-border-subtle, #dddddd);
+  padding: 0 12px;
+  min-height: 28px;
+  background-color: var(--orcid-color-surface, #ffffff);
+  color: var(--orcid-color-text, #222222);
+  cursor: pointer;
+  font: inherit;
+}
+
+.featured-affiliation-star-wrapper {
+  margin-inline-start: -12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.featured-affiliation-star {
+  width: 40px;
+  height: 40px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  line-height: normal;
+
+  &[disabled] {
+    pointer-events: none;
+  }
+
+  mat-icon {
+    line-height: inherit;
+
+    &.star-filled {
+      color: #ffc814;
+    }
+  }
+}

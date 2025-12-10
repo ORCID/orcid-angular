@@ -6,7 +6,7 @@ export default {
     changeOrigin: true,
     bypass: function (req, res, proxyOptions) {
       /// PRRINT REQUEST PATH
-      if (req.headers.accept.includes('html')) {
+      if (req.headers.accept && req.headers.accept.includes('html')) {
         return '/index.html'
       }
       req.headers['X-Dev-Header'] = 'local-host-proxy-call'
@@ -19,7 +19,7 @@ export default {
     changeOrigin: true,
     bypass: function (req, res, proxyOptions) {
       /// PRRINT REQUEST PATH
-      if (req.headers.accept.includes('html')) {
+      if (req.headers.accept && req.headers.accept.includes('html')) {
         return '/index.html'
       }
       req.headers['X-Dev-Header'] = 'local-host-proxy-call'
