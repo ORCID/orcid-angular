@@ -1,3 +1,9 @@
+## v2.126.4 - 2025-12-10
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.126.3...v2.126.4)
+
+- [#2698](https://github.com/ORCID/orcid-angular/pull/2698): PD-3704
+
 ## v2.126.3 - 2025-12-10
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.126.2...v2.126.3)
