@@ -36,7 +36,7 @@ yarn
 3- Serve the front-end locally
 
 ```
-yarn start
+yarn start-local
 ```
 
 ## Serve the frond-end locally using other languages
