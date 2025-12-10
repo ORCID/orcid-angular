@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core'
+import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core'
 import { CommonModule, NgIf } from '@angular/common'
 import { Router } from '@angular/router'
 import { RecordHeaderStateService } from 'src/app/core/record-header-state/record-header-state.service'
@@ -53,6 +53,7 @@ export class RecordHeaderComponent implements OnInit {
   displaySideBar: boolean
   displayBiography: boolean
   compactMode = false
+  @Input() disableCompactMode = false
   _recordSummaryOpen: boolean
 
   get recordSummaryOpen(): boolean {
@@ -149,7 +150,7 @@ export class RecordHeaderComponent implements OnInit {
     // Compact state
     this._compact.compactActive$
       .pipe(takeUntil(this.$destroy))
-      .subscribe((active) => (this.compactMode = !!active))
+      .subscribe((active) => (this.disableCompactMode ? this.compactMode = false : this.compactMode = !!active))
 
     // Subscribe to shared state for inputs
     this._state.loadingUserRecord$

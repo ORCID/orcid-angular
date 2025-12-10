@@ -3,11 +3,15 @@
     <app-top-bar-my-public-record-preview
       [isPublicRecord]="publicOrcid"
     ></app-top-bar-my-public-record-preview>
+
+
+    <!-- 
+    The following record is always display, even in compact mode it works as a hidden placeholder while the user scrolls the page
+    During compact mode the record header visible is displayed from header.component
+     -->
     <app-record-header
-      *ngIf="
-        !!publicOrcid &&
-        !((compactEligible$ | async) && (compactActive$ | async))
-      "
+      *ngIf="!!publicOrcid"
+      [disableCompactMode]="true"
     ></app-record-header>
     <!---
     On compact mode the record summary is displayed in the record header 
