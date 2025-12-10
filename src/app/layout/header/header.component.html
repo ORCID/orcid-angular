@@ -66,11 +66,7 @@
 <!-- Mobile/tablet spacer to offset fixed compact record header -->
 <div
   class="compact-record-header-spacer"
-  *ngIf="
-    !platform.columns12 &&
-    isCompactActive &&
-    (isPublicRecord$ | async)
-  "
+  *ngIf="!platform.columns12 && isCompactActive && (isPublicRecord$ | async)"
 ></div>
 
 <mat-divider></mat-divider>

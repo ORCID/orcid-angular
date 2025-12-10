@@ -1,7 +1,14 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs'
-import { catchError, finalize, map, retry, switchMap, tap } from 'rxjs/operators'
+import {
+  catchError,
+  finalize,
+  map,
+  retry,
+  switchMap,
+  tap,
+} from 'rxjs/operators'
 import {
   AffiliationUIGroup,
   AffiliationsEndpoint,

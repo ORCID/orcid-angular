@@ -133,7 +133,7 @@ export class AffiliationStacksGroupsComponent implements OnInit {
               'PROFESSIONAL_ACTIVITIES'
             )
           }
-          
+
           // Check for featured affiliation after affiliations are loaded
           this.checkForFeaturedAffiliationOnRegistration()
           // Check if notice alert should be shown (no featured affiliation)
@@ -224,7 +224,8 @@ export class AffiliationStacksGroupsComponent implements OnInit {
         if (platform.queryParameters.hasOwnProperty('justRegistered')) {
           const featuredAffiliation = this.findFeaturedAffiliation()
           if (featuredAffiliation) {
-            this.featuredAffiliationName = featuredAffiliation.affiliationName?.value || ''
+            this.featuredAffiliationName =
+              featuredAffiliation.affiliationName?.value || ''
             this.showFeaturedSuccessAlert = true
           }
         }
@@ -271,7 +272,11 @@ export class AffiliationStacksGroupsComponent implements OnInit {
     // 2. There are employment affiliations
     // 3. No featured affiliation exists
     // 4. Not a public record (users can only highlight on their own record)
-    if (this.showFeaturedSuccessAlert || !this.userRecord?.affiliations || this.isPublicRecord) {
+    if (
+      this.showFeaturedSuccessAlert ||
+      !this.userRecord?.affiliations ||
+      this.isPublicRecord
+    ) {
       this.showFeaturedNoticeAlert = false
       return
     }

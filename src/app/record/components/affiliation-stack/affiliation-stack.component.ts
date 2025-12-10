@@ -1,4 +1,12 @@
-import { Component, EventEmitter, HostBinding, Input, OnDestroy, OnInit, Output } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  HostBinding,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core'
 import { combineLatest, Observable, of, Subject } from 'rxjs'
 import { first, takeUntil, finalize } from 'rxjs/operators'
 import { OrganizationsService } from 'src/app/core'
@@ -253,7 +261,10 @@ export class AffiliationStackComponent implements OnInit, OnDestroy {
   }
 
   loadingFeatured: { [key: string]: boolean } = {}
-  @Output() featuredToggled = new EventEmitter<{ affiliationName: string; featured: boolean }>()
+  @Output() featuredToggled = new EventEmitter<{
+    affiliationName: string
+    featured: boolean
+  }>()
 
   toggleFeatured(affiliation: Affiliation) {
     const putCode = affiliation.featured ? '' : affiliation.putCode.value
