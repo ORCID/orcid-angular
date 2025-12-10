@@ -25,7 +25,6 @@
   min-width: 0;
   display: flex;
   align-items: center;
-  gap: 16px;
 
   mat-icon {
     flex-shrink: 0;
@@ -35,6 +34,7 @@
     border-left: 2px solid #bdbdbd;
     height: 32px;
     flex-shrink: 0;
+    margin: 0 16px;
   }
 
   h4 {
@@ -63,6 +63,12 @@
 
 .orcid-panel__body {
   padding: 16px;
+
+  &:empty {
+    padding: 0;
+    min-height: 0;
+    height: 0;
+  }
 }
 
 .orcid-panel__footer {
@@ -82,12 +88,17 @@
 }
 
 .featured-affiliation-star {
-  display: flex;
+  margin-inline-start: -12px;
+  width: 40px;
+  height: 40px;
+  display: flex !important;
   align-items: center;
-  margin-right: 8px;
-  cursor: pointer;
+  justify-content: center;
+  line-height: normal;
 
   mat-icon {
+    line-height: inherit;
+
     &.star-filled {
       color: #ffc814;
     }

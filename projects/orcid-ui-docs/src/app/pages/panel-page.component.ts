@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatSelectModule } from '@angular/material/select'
+import { MatTooltipModule } from '@angular/material/tooltip'
 import { DocumentationPageComponent } from '../components/documentation-page/documentation-page.component'
 
 @Component({
@@ -23,6 +24,7 @@ import { DocumentationPageComponent } from '../components/documentation-page/doc
     MatInputModule,
     MatCheckboxModule,
     MatSelectModule,
+    MatTooltipModule,
     DocumentationPageComponent,
   ],
   templateUrl: './panel-page.component.html',
@@ -35,10 +37,23 @@ export class PanelPageComponent {
     content:
       '<div>University of Example, Research Scientist</div>\n<div>2020 - Present</div>',
     footerText: 'Source: Self-asserted',
-    openState: true,
     isMobile: false,
     isPreferred: false,
-    isFeatured: false,
+    startToggleOn: false,
+    enableStartToggl: false,
+    startToggleDisabled: false,
+    startToggleTooltip: 'Click to highlight this affiliation',
+    hasExternalIds: false,
+    userVersionPresent: false,
+    showContent: true,
+  }
+
+  get showStackToggle(): boolean {
+    return (
+      this.config.hasExternalIds &&
+      this.config.userVersionPresent &&
+      !this.config.isPublicRecord
+    )
   }
 
   iconOptions = [
@@ -51,4 +66,8 @@ export class PanelPageComponent {
     { value: 'fitness_center', label: 'fitness_center' },
     { value: 'local_hospital', label: 'local_hospital' },
   ]
+
+  onToggleFeatured() {
+    console.log('Toggle button pressed')
+  }
 }

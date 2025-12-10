@@ -60,6 +60,13 @@
     letter-spacing: 0.5px;
   }
 
+  .example-description {
+    margin: 4px 0 12px 0;
+    color: var(--orcid-color-text-secondary, #666);
+    font-size: 0.875rem;
+    font-style: italic;
+  }
+
   // For mobile examples, ensure containers are centered in grid
   .example-container.mobile {
     margin: 0 auto;

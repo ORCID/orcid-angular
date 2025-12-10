@@ -1,6 +1,6 @@
 import { Component, HostBinding, Input, OnDestroy, OnInit } from '@angular/core'
 import { combineLatest, Observable, of, Subject } from 'rxjs'
-import { first, takeUntil } from 'rxjs/operators'
+import { first, takeUntil, finalize } from 'rxjs/operators'
 import { OrganizationsService } from 'src/app/core'
 import { RecordAffiliationService } from 'src/app/core/record-affiliations/record-affiliations.service'
 import { OrgDisambiguated, UserInfo } from 'src/app/types'
@@ -104,7 +104,7 @@ export class AffiliationStackComponent implements OnInit, OnDestroy {
     private _platform: PlatformInfoService,
     private _dialog: MatDialog,
     private _verificationEmailModalService: VerificationEmailModalService
-  ) { }
+  ) {}
 
   /**
    * Set the panelDetails and top of the stack card to default mode
@@ -152,7 +152,7 @@ export class AffiliationStackComponent implements OnInit, OnDestroy {
     const response =
       affiliation && this.affiliationStack
         ? this.affiliationStack.defaultAffiliation.putCode.value ===
-        affiliation.putCode.value
+          affiliation.putCode.value
         : false
     return response
   }
@@ -250,11 +250,18 @@ export class AffiliationStackComponent implements OnInit, OnDestroy {
       })
   }
 
-
+  loadingFeatured: { [key: string]: boolean } = {}
 
   toggleFeatured(affiliation: Affiliation) {
+    const putCode = affiliation.featured ? '' : affiliation.putCode.value
+    this.loadingFeatured[affiliation.putCode.value] = true
     this._affiliationService
-      .updateFeatured(affiliation.putCode.value)
+      .updateFeatured(putCode)
+      .pipe(
+        finalize(() => {
+          this.loadingFeatured[affiliation.putCode.value] = false
+        })
+      )
       .subscribe()
   }
 
@@ -334,6 +341,46 @@ export class AffiliationStackComponent implements OnInit, OnDestroy {
     }
 
     return parts.join('')
+  }
+
+  getFeaturedToggleTooltip(affiliation: Affiliation): string {
+    // Only show tooltip when not a public record
+    if (!!this.isPublicRecord) {
+      return ''
+    }
+
+    // Check if visibility is PUBLIC
+    const isPublic = affiliation.visibility?.visibility === 'PUBLIC'
+
+    if (!isPublic) {
+      return $localize`:@@affiliations.makePublicToEnableHighlighting:Make this affiliation public to enable highlighting`
+    }
+
+    if (affiliation.featured) {
+      return $localize`:@@affiliations.clickToRemoveHighlight:Click to remove this highlight`
+    }
+
+    return $localize`:@@affiliations.clickToHighlight:Click to highlight this affiliation`
+  }
+
+  isFeaturedToggleDisabled(affiliation: Affiliation): boolean {
+    // Disable if it's a public record
+    if (!!this.isPublicRecord) {
+      return true
+    }
+
+    // Disable if loading
+    if (this.loadingFeatured[affiliation.putCode.value]) {
+      return true
+    }
+
+    // Disable if visibility is not PUBLIC
+    const isPublic = affiliation.visibility?.visibility === 'PUBLIC'
+    if (!isPublic) {
+      return true
+    }
+
+    return false
   }
 
   ngOnInit(): void {

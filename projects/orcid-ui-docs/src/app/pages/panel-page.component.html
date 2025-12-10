@@ -1,5 +1,7 @@
-<app-documentation-page title="Panel"
-  description="The orcid-panel component is a versatile container used in the ORCID record UI to render affiliation stacks, professional activities, and other collapsible content. It supports multiple content projection slots, optional icon and title display, and provides built-in expand/collapse functionality. Key Features: Icon support, customizable title, content projection slots, preferred styling, collapsible body, and stack management.">
+<app-documentation-page
+  title="Panel"
+  description="The orcid-panel component is a versatile container used in the ORCID record UI to render affiliation stacks, professional activities, and other collapsible content. It supports multiple content projection slots, optional icon and title display, and provides built-in expand/collapse functionality. Key Features: Icon support, customizable title, content projection slots, highlighted border styling, collapsible body, and stack management."
+>
   <div controls>
     <p>Modify these values to see how they affect all examples below:</p>
     <div class="controls-grid">
@@ -17,29 +19,50 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Content (HTML)</mat-label>
-        <textarea matInput [(ngModel)]="config.content" rows="4" placeholder="<div>Line 1</div>"></textarea>
-      </mat-form-field>
-
       <mat-form-field appearance="outline">
         <mat-label>Footer Text</mat-label>
         <input matInput [(ngModel)]="config.footerText" />
       </mat-form-field>
     </div>
 
-    <h4>Stack management</h4>
+    <h4>Start Icon Management</h4>
     <div class="controls-grid">
-      <mat-checkbox [(ngModel)]="config.openState">
-        Open State (initial)
+      <mat-checkbox [(ngModel)]="config.enableStartToggl">
+        enableStartToggl
       </mat-checkbox>
+      <mat-checkbox [(ngModel)]="config.startToggleOn">
+        startToggleOn
+      </mat-checkbox>
+      <mat-checkbox [(ngModel)]="config.startToggleDisabled">
+        startToggleDisabled
+      </mat-checkbox>
+      <mat-form-field appearance="outline">
+        <mat-label>startToggleTooltip</mat-label>
+        <input matInput [(ngModel)]="config.startToggleTooltip" />
+      </mat-form-field>
+    </div>
 
+    <h4>Stack Management</h4>
+    <div class="controls-grid">
       <mat-checkbox [(ngModel)]="config.isPreferred">
-        Is Preferred
+        isPreferred
       </mat-checkbox>
-      <mat-checkbox [(ngModel)]="config.isFeatured">
-        Is Featured
+      <mat-checkbox [(ngModel)]="config.showContent">
+        Show Content
       </mat-checkbox>
+      <mat-form-field
+        appearance="outline"
+        class="full-width"
+        *ngIf="config.showContent"
+      >
+        <mat-label>Content (HTML)</mat-label>
+        <textarea
+          matInput
+          [(ngModel)]="config.content"
+          rows="4"
+          placeholder="<div>Line 1</div>"
+        ></textarea>
+      </mat-form-field>
     </div>
   </div>
 
@@ -51,10 +74,22 @@
       <div class="example-stack">
         <div class="example-item">
           <div class="example-container desktop">
-            <orcid-panel panelId="desktop-panel" [openState]="config.openState"
-              (openStateChange)="config.openState = $event" [title]="config.title" [icon]="config.icon || undefined"
-              [isPreferred]="config.isPreferred" [isFeatured]="config.isFeatured" [isMobile]="false" type="employment">
-              <div [innerHTML]="config.content"></div>
+            <orcid-panel
+              panelId="desktop-panel"
+              [title]="config.title"
+              [icon]="config.icon || undefined"
+              [isPreferred]="config.isPreferred"
+              [startToggleOn]="config.startToggleOn"
+              [enableStartToggl]="config.enableStartToggl"
+              [startToggleDisabled]="config.startToggleDisabled"
+              [startToggleTooltip]="config.startToggleTooltip"
+              (toggleFeatured)="onToggleFeatured()"
+              [isMobile]="false"
+            >
+              <div
+                *ngIf="config.showContent"
+                [innerHTML]="config.content"
+              ></div>
               <div panel-footer>{{ config.footerText }}</div>
             </orcid-panel>
           </div>
@@ -67,11 +102,323 @@
       <div class="example-stack">
         <div class="example-item">
           <div class="example-container mobile">
-            <orcid-panel panelId="mobile-panel" [openState]="config.openState"
-              (openStateChange)="config.openState = $event" [title]="config.title" [icon]="config.icon || undefined"
-              [isPreferred]="config.isPreferred" [isFeatured]="config.isFeatured" [isMobile]="true" type="employment">
-              <div [innerHTML]="config.content"></div>
+            <orcid-panel
+              panelId="mobile-panel"
+              [title]="config.title"
+              [icon]="config.icon || undefined"
+              [isPreferred]="config.isPreferred"
+              [startToggleOn]="config.startToggleOn"
+              [enableStartToggl]="config.enableStartToggl"
+              [startToggleDisabled]="config.startToggleDisabled"
+              [startToggleTooltip]="config.startToggleTooltip"
+              (toggleFeatured)="onToggleFeatured()"
+              [isMobile]="true"
+            >
+              <div
+                *ngIf="config.showContent"
+                [innerHTML]="config.content"
+              ></div>
               <div panel-footer>{{ config.footerText }}</div>
+            </orcid-panel>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="example-group">
+      <h4>Usage Scenarios</h4>
+      <div class="example-stack">
+        <!-- Basic Panel -->
+        <div class="example-item">
+          <h5>Basic Panel</h5>
+          <p class="example-description">Simple panel with title and content</p>
+          <div class="example-container desktop">
+            <orcid-panel panelId="scenario-1" title="Basic Affiliation">
+              <div>Basic content without icon or featured toggle</div>
+            </orcid-panel>
+          </div>
+        </div>
+
+        <!-- Panel with Icon (icon, iconClass) -->
+        <div class="example-item">
+          <h5>Panel with Icon (icon, iconClass)</h5>
+          <p class="example-description">
+            Panel with icon and iconClass set displaying an icon in the header
+          </p>
+          <div class="example-container desktop">
+            <orcid-panel
+              panelId="scenario-2"
+              title="Education"
+              icon="school"
+              iconClass="material-icons-outlined"
+            >
+              <div>Content with icon</div>
+            </orcid-panel>
+          </div>
+        </div>
+
+        <!-- Panel with Featured Toggle (enableStartToggl) -->
+        <div class="example-item">
+          <h5>Panel with Featured Toggle (enableStartToggl)</h5>
+          <p class="example-description">
+            Panel with enableStartToggl=true, startToggleOn=false,
+            startToggleTooltip set
+          </p>
+          <div class="example-container desktop">
+            <orcid-panel
+              panelId="scenario-3"
+              title="Employment"
+              [enableStartToggl]="true"
+              [startToggleOn]="false"
+              [startToggleTooltip]="'Click to highlight this affiliation'"
+              (toggleFeatured)="onToggleFeatured()"
+            >
+              <div>Content with featured toggle</div>
+            </orcid-panel>
+          </div>
+        </div>
+
+        <!-- Highlighted Border Panel (isPreferred) -->
+        <div class="example-item">
+          <h5>Highlighted Border Panel (isPreferred)</h5>
+          <p class="example-description">
+            Panel with isPreferred=true showing highlighted border and edit
+            button
+          </p>
+          <div class="example-container desktop">
+            <orcid-panel
+              panelId="scenario-4"
+              title="Affiliation with Highlighted Border"
+              [isPreferred]="true"
+            >
+              <div>Affiliation content with highlighted border</div>
+              <div panel-actions>
+                <button
+                  mat-icon-button
+                  [matTooltip]="'Edit'"
+                  style="color: black"
+                >
+                  <mat-icon class="material-icons-outlined">edit</mat-icon>
+                </button>
+              </div>
+            </orcid-panel>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="example-group">
+      <h4>Affiliation Stack Use Cases</h4>
+      <div class="example-stack">
+        <!-- My Orcid - Employment Not Featured (Public Visibility) -->
+        <div class="example-item">
+          <h5>My Orcid - Employment Not Featured (Public Visibility)</h5>
+          <p class="example-description">
+            Featured toggle enabled, tooltip: "Click to highlight this
+            affiliation"
+          </p>
+          <div class="example-container desktop">
+            <orcid-panel
+              panelId="use-case-1"
+              title="New Arizona State University: Sedona, Arizona, US"
+              [enableStartToggl]="true"
+              [startToggleOn]="false"
+              [startToggleDisabled]="false"
+              [startToggleTooltip]="'Click to highlight this affiliation'"
+              [isPreferred]="true"
+              (toggleFeatured)="onToggleFeatured()"
+            >
+              <div>Associate Professor, Department of Geography</div>
+              <div>2020 - Present</div>
+              <div panel-actions>
+                <button
+                  mat-icon-button
+                  [matTooltip]="'Edit'"
+                  style="color: black"
+                >
+                  <mat-icon class="material-icons-outlined">edit</mat-icon>
+                </button>
+              </div>
+            </orcid-panel>
+          </div>
+        </div>
+
+        <!-- My Orcid - Employment Featured (Public Visibility) -->
+        <div class="example-item">
+          <h5>My Orcid - Employment Featured (Public Visibility)</h5>
+          <p class="example-description">
+            Featured toggle enabled, tooltip: "Click to remove this highlight"
+          </p>
+          <div class="example-container desktop">
+            <orcid-panel
+              panelId="use-case-2"
+              title="New Arizona State University: Sedona, Arizona, US"
+              [enableStartToggl]="true"
+              [startToggleOn]="true"
+              [startToggleDisabled]="false"
+              [startToggleTooltip]="'Click to remove this highlight'"
+              [isPreferred]="true"
+              (toggleFeatured)="onToggleFeatured()"
+            >
+              <div>Associate Professor, Department of Geography</div>
+              <div>2020 - Present</div>
+              <div panel-actions>
+                <button
+                  mat-icon-button
+                  [matTooltip]="'Edit'"
+                  style="color: black"
+                >
+                  <mat-icon class="material-icons-outlined">edit</mat-icon>
+                </button>
+              </div>
+            </orcid-panel>
+          </div>
+        </div>
+
+        <!-- My Orcid - Employment Not Public Visibility -->
+        <div class="example-item">
+          <h5>My Orcid - Employment Not Public Visibility</h5>
+          <p class="example-description">
+            Featured toggle disabled, tooltip: "Make this affiliation public to
+            enable highlighting"
+          </p>
+          <div class="example-container desktop">
+            <orcid-panel
+              panelId="use-case-3"
+              title="New Arizona State University: Sedona, Arizona, US"
+              [enableStartToggl]="true"
+              [startToggleOn]="false"
+              [startToggleDisabled]="true"
+              [startToggleTooltip]="
+                'Make this affiliation public to enable highlighting'
+              "
+              [isPreferred]="true"
+              (toggleFeatured)="onToggleFeatured()"
+            >
+              <div>Associate Professor, Department of Geography</div>
+              <div>2020 - Present</div>
+              <div panel-actions>
+                <button
+                  mat-icon-button
+                  [matTooltip]="'Edit'"
+                  style="color: black"
+                >
+                  <mat-icon class="material-icons-outlined">edit</mat-icon>
+                </button>
+              </div>
+            </orcid-panel>
+          </div>
+        </div>
+
+        <!-- Public Record - Featured Employment -->
+        <div class="example-item">
+          <h5>Public Record - Featured Employment</h5>
+          <p class="example-description">
+            Featured toggle shown but disabled, no edit button, no tooltip
+          </p>
+          <div class="example-container desktop">
+            <orcid-panel
+              panelId="use-case-4"
+              title="New Arizona State University: Sedona, Arizona, US"
+              [enableStartToggl]="true"
+              [startToggleOn]="true"
+              [startToggleDisabled]="true"
+              [startToggleTooltip]="''"
+              [isPreferred]="true"
+              (toggleFeatured)="onToggleFeatured()"
+            >
+              <div>Associate Professor, Department of Geography</div>
+              <div>2020 - Present</div>
+            </orcid-panel>
+          </div>
+        </div>
+
+        <!-- Public Record - Non-Featured Employment -->
+        <div class="example-item">
+          <h5>Public Record - Non-Featured Employment</h5>
+          <p class="example-description">
+            Featured toggle not shown, no edit button
+          </p>
+          <div class="example-container desktop">
+            <orcid-panel
+              panelId="use-case-5"
+              title="New Arizona State University: Sedona, Arizona, US"
+              [enableStartToggl]="false"
+              [startToggleOn]="false"
+              [isPreferred]="true"
+            >
+              <div>Associate Professor, Department of Geography</div>
+              <div>2020 - Present</div>
+            </orcid-panel>
+          </div>
+        </div>
+
+        <!-- Professional Activities with Icon -->
+        <div class="example-item">
+          <h5>Professional Activities with Icon</h5>
+          <p class="example-description">
+            Shows icon for professional activities (invited-position,
+            distinction, etc.)
+          </p>
+          <div class="example-container desktop">
+            <orcid-panel
+              panelId="use-case-6"
+              title="Distinction Title"
+              icon="crown"
+              iconClass="material-symbols-outlined"
+              [isPreferred]="true"
+            >
+              <div>Distinction details</div>
+              <div>2020 - Present</div>
+              <div panel-actions>
+                <button
+                  mat-icon-button
+                  [matTooltip]="'Edit'"
+                  style="color: black"
+                >
+                  <mat-icon class="material-icons-outlined">edit</mat-icon>
+                </button>
+              </div>
+            </orcid-panel>
+          </div>
+        </div>
+
+        <!-- Non-Highlighted Affiliation (Stack Item) -->
+        <div class="example-item">
+          <h5>Non-Highlighted Affiliation (Stack Item)</h5>
+          <p class="example-description">
+            Stack item without highlighted border (not the default affiliation)
+          </p>
+          <div class="example-container desktop">
+            <orcid-panel
+              panelId="use-case-7"
+              title="Alternative Source Affiliation"
+              [isPreferred]="false"
+            >
+              <div>Alternative affiliation details</div>
+            </orcid-panel>
+          </div>
+        </div>
+
+        <!-- Loading State -->
+        <div class="example-item">
+          <h5>Loading State (Featured Toggle Disabled)</h5>
+          <p class="example-description">
+            Featured toggle disabled while processing
+          </p>
+          <div class="example-container desktop">
+            <orcid-panel
+              panelId="use-case-8"
+              title="New Arizona State University: Sedona, Arizona, US"
+              [enableStartToggl]="true"
+              [startToggleOn]="false"
+              [startToggleDisabled]="true"
+              [startToggleTooltip]="'Click to highlight this affiliation'"
+              [isPreferred]="true"
+              (toggleFeatured)="onToggleFeatured()"
+            >
+              <div>Associate Professor, Department of Geography</div>
+              <div>2020 - Present</div>
             </orcid-panel>
           </div>
         </div>
@@ -87,23 +434,34 @@
         <code>icon</code>: Optional Material icon name to display in the header
       </li>
       <li><code>iconClass</code>: Optional CSS class for icon styling</li>
-      <li><code>openState</code>: Boolean controlling expansion state</li>
       <li><code>isMobile</code>: Boolean for mobile-optimized layout</li>
-      <li><code>isPreferred</code>: Boolean to mark as preferred item</li>
       <li>
-        <code>type</code>: Panel type (affiliations, professional-activities,
-        etc.)
+        <code>isPreferred</code>: Boolean to show highlighted border around the
+        panel
+      </li>
+      <li>
+        <code>startToggleOn</code>: Boolean indicating if the start toggle is ON
+        (star filled)
+      </li>
+      <li>
+        <code>enableStartToggl</code>: Boolean to enable the featured toggle
+        button
+      </li>
+      <li>
+        <code>startToggleDisabled</code>: Boolean to disable the featured toggle
+        button
+      </li>
+      <li>
+        <code>startToggleTooltip</code>: String tooltip text for the featured
+        toggle button
       </li>
     </ul>
 
     <h3>Outputs</h3>
     <ul>
       <li>
-        <code>openStateChange</code>: Emitted when panel is expanded/collapsed
-      </li>
-      <li>
-        <code>displayTheStackChange</code>: Emitted when stack display is
-        toggled
+        <code>toggleFeatured</code>: Emitted when the featured toggle button is
+        clicked
       </li>
     </ul>
 
