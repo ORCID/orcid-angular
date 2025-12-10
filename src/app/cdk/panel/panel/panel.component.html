@@ -15,10 +15,6 @@
     }"
     [attr.id]="'cy-panel-component-' + panelId + '-' + type + '-' + putCode"
   >
-    <div class="featured-affiliation-star" *ngIf="isAffiliation()">
-      <mat-icon *ngIf="isFeatured" class="star-filled">star</mat-icon>
-      <mat-icon *ngIf="!isFeatured" class="star-outline">star_outline</mat-icon>
-    </div>
     <div class="featured-work-star" *ngIf="featuredWorksSection">
       <mat-icon> star_filled </mat-icon>
     </div>

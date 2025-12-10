@@ -35,5 +35,6 @@ export class SkeletonPlaceholderPageComponent {
     shape: 'square' as 'square' | 'circle',
     width: '100px',
     height: '100px',
+    shimmerPercentage: 100,
   }
 }

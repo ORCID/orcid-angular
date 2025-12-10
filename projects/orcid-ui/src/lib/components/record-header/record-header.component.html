@@ -86,6 +86,8 @@
         shape="circle"
         width="48px"
         height="48px"
+        [shimmerPercentage]="60"
+
       ></orcid-skeleton-placeholder>
     </div>
   </section>
@@ -160,6 +162,8 @@
           class="id-logo-placeholder"
         ></orcid-skeleton-placeholder>
         <orcid-skeleton-placeholder
+          width="331px"
+          height="24px"
           class="id-text-placeholder"
         ></orcid-skeleton-placeholder>
       </div>
@@ -181,11 +185,14 @@
         width="48px"
         height="48px"
         style="margin-right: 8px"
+        [shimmerPercentage]="60"
+
       ></orcid-skeleton-placeholder>
       <orcid-skeleton-placeholder
         shape="circle"
         width="48px"
         height="48px"
+        [shimmerPercentage]="60"
         style="margin-right: 8px"
       ></orcid-skeleton-placeholder>
     </div>
@@ -248,12 +255,13 @@
         ></orcid-skeleton-placeholder>
       </ng-container>
 
-      <ng-container *ngIf="!compactMode && !isDesktop">
+      <ng-container *ngIf="!compactMode">
         <orcid-skeleton-placeholder
           shape="square"
-          width="127px"
+          width="194px"
           height="36px"
           textHeightSkeleton="14px"
+          [shimmerPercentage]="70"
         ></orcid-skeleton-placeholder>
       </ng-container>
     </div>

@@ -1,19 +1,23 @@
 <div class="orcid-panel" [class.orcid-panel--preferred]="isPreferred">
   <div class="orcid-panel__header">
     <div class="orcid-panel__header-main">
-      <button
-        mat-icon-button
-        class="featured-affiliation-star"
+      <div
         *ngIf="enableStartToggl"
-        [disabled]="startToggleDisabled"
         [matTooltip]="startToggleTooltip"
-        (click)="toggleFeatured.emit()"
+        class="featured-affiliation-star-wrapper"
       >
-        <mat-icon *ngIf="startToggleOn" class="star-filled">star</mat-icon>
-        <mat-icon *ngIf="!startToggleOn" class="star-outline"
-          >star_outline</mat-icon
+        <button
+          mat-icon-button
+          class="featured-affiliation-star"
+          [disabled]="startToggleDisabled"
+          (click)="!startToggleDisabled && toggleFeatured.emit()"
         >
-      </button>
+          <mat-icon *ngIf="startToggleOn" class="star-filled">star</mat-icon>
+          <mat-icon *ngIf="!startToggleOn" class="star-outline"
+            >star_outline</mat-icon
+          >
+        </button>
+      </div>
       <ng-container *ngIf="showIcon">
         <mat-icon [class]="iconClass">{{ icon }}</mat-icon>
         <div class="vl"></div>

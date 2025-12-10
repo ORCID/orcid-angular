@@ -87,14 +87,26 @@
   font: inherit;
 }
 
-.featured-affiliation-star {
+.featured-affiliation-star-wrapper {
   margin-inline-start: -12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.featured-affiliation-star {
   width: 40px;
   height: 40px;
   display: flex !important;
   align-items: center;
   justify-content: center;
   line-height: normal;
+
+  &[disabled] {
+    pointer-events: none;
+  }
 
   mat-icon {
     line-height: inherit;

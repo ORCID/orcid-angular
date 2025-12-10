@@ -48,14 +48,6 @@ export class PanelPageComponent {
     showContent: true,
   }
 
-  get showStackToggle(): boolean {
-    return (
-      this.config.hasExternalIds &&
-      this.config.userVersionPresent &&
-      !this.config.isPublicRecord
-    )
-  }
-
   iconOptions = [
     { value: '', label: 'None' },
     { value: 'work', label: 'work' },

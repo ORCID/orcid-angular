@@ -21,6 +21,18 @@
         <mat-label>Height</mat-label>
         <input matInput [(ngModel)]="config.height" />
       </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Shimmer Percentage</mat-label>
+        <input
+          matInput
+          type="number"
+          min="0"
+          max="100"
+          [(ngModel)]="config.shimmerPercentage"
+        />
+        <span matSuffix>%</span>
+      </mat-form-field>
     </div>
   </div>
 
@@ -32,6 +44,7 @@
           [shape]="config.shape"
           [width]="config.width"
           [height]="config.height"
+          [shimmerPercentage]="config.shimmerPercentage"
         ></orcid-skeleton-placeholder>
       </div>
     </div>
@@ -42,6 +55,10 @@
       <li><code>shape</code>: 'square' | 'circle' (default: 'square')</li>
       <li><code>width</code>: string (default: '100%')</li>
       <li><code>height</code>: string (default: '100%')</li>
+      <li>
+        <code>shimmerPercentage</code>: number (default: 100) - Percentage of
+        container size that the shimmer effect will cover (centered)
+      </li>
     </ul>
   </div>
 </app-documentation-page>
