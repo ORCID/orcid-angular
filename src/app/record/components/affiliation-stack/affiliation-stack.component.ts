@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, OnDestroy, OnInit } from '@angular/core'
+import { Component, EventEmitter, HostBinding, Input, OnDestroy, OnInit, Output } from '@angular/core'
 import { combineLatest, Observable, of, Subject } from 'rxjs'
 import { first, takeUntil, finalize } from 'rxjs/operators'
 import { OrganizationsService } from 'src/app/core'
@@ -251,9 +251,11 @@ export class AffiliationStackComponent implements OnInit, OnDestroy {
   }
 
   loadingFeatured: { [key: string]: boolean } = {}
+  @Output() featuredToggled = new EventEmitter<{ affiliationName: string; featured: boolean }>()
 
   toggleFeatured(affiliation: Affiliation) {
     const putCode = affiliation.featured ? '' : affiliation.putCode.value
+    const wasFeatured = affiliation.featured
     this.loadingFeatured[affiliation.putCode.value] = true
     this._affiliationService
       .updateFeatured(putCode)
@@ -262,7 +264,17 @@ export class AffiliationStackComponent implements OnInit, OnDestroy {
           this.loadingFeatured[affiliation.putCode.value] = false
         })
       )
-      .subscribe()
+      .subscribe({
+        next: () => {
+          // Only emit if we're setting it as featured (not removing)
+          if (!wasFeatured) {
+            this.featuredToggled.emit({
+              affiliationName: affiliation.affiliationName?.value || '',
+              featured: true,
+            })
+          }
+        },
+      })
   }
 
   updateVisibility(visibility: any) {
@@ -353,14 +365,14 @@ export class AffiliationStackComponent implements OnInit, OnDestroy {
     const isPublic = affiliation.visibility?.visibility === 'PUBLIC'
 
     if (!isPublic) {
-      return $localize`:@@affiliations.makePublicToEnableHighlighting:Make this affiliation public to enable highlighting`
+      return $localize`:@@shared.makePublicToEnableHighlighting:Make this affiliation public to enable highlighting`
     }
 
     if (affiliation.featured) {
-      return $localize`:@@affiliations.clickToRemoveHighlight:Click to remove this highlight`
+      return $localize`:@@shared.clickToRemoveHighlight:Click to remove this highlight`
     }
 
-    return $localize`:@@affiliations.clickToHighlight:Click to highlight this affiliation`
+    return $localize`:@@shared.clickToHighlight:Click to highlight this affiliation`
   }
 
   isFeaturedToggleDisabled(affiliation: Affiliation): boolean {

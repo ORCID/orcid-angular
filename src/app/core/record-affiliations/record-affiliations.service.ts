@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs'
-import { catchError, map, retry, switchMap, tap } from 'rxjs/operators'
+import { catchError, finalize, map, retry, switchMap, tap } from 'rxjs/operators'
 import {
   AffiliationUIGroup,
   AffiliationsEndpoint,
@@ -286,6 +286,7 @@ export class RecordAffiliationService {
   }
 
   updateFeatured(putCode: string): Observable<any> {
+    this._$loading.next(true)
     return this._http
       .put(
         runtimeEnvironment.API_WEB + 'affiliations/featuredAffiliation.json',
@@ -299,7 +300,8 @@ export class RecordAffiliationService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        tap(() => this.getAffiliations({ forceReload: true }))
+        tap(() => this.getAffiliations({ forceReload: true })),
+        finalize(() => this._$loading.next(false))
       )
   }
 

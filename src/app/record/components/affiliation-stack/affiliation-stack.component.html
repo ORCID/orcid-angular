@@ -32,7 +32,7 @@
         *ngIf="
           affiliationStack.defaultAffiliation.visibility?.visibility &&
           isPreferred(affiliation) &&
-          isPublicRecord !== 'true'
+          !isPublicRecord
         "
       >
         <app-visibility-selector
@@ -52,7 +52,7 @@
     <div panel-edit>
       <button
         mat-icon-button
-        *ngIf="isPreferred(affiliation) && isPublicRecord !== 'true'"
+        *ngIf="isPreferred(affiliation) && !isPublicRecord"
         [matTooltip]="tooltipLabelEdit"
         (click)="editAffiliation(affiliation)"
       >
