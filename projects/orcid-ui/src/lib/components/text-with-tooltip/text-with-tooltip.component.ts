@@ -41,7 +41,7 @@ import { SkeletonPlaceholderComponent } from '../skeleton-placeholder/skeleton-p
       <ng-content></ng-content>
     </span>
     <orcid-skeleton-placeholder
-      *ngIf="loading"
+      *ngIf="loading && !hiddenSkeleton"
       [shape]="skeletonShape"
       [width]="skeletonWidth"
       [height]="textHeightSkeleton"
@@ -58,7 +58,6 @@ import { SkeletonPlaceholderComponent } from '../skeleton-placeholder/skeleton-p
   styles: [
     `
       :host {
-        display: inline-block;
         max-width: 100%;
         min-width: 0;
         vertical-align: middle;
@@ -113,6 +112,7 @@ export class TextWithTooltipComponent
   @Input() textHeightSkeleton = 'auto'
   @Input() height = 'auto'
   @Input() center = false
+  @Input() hiddenSkeleton = false
 
   @ViewChild('wrapperRef', { read: ElementRef, static: false })
   wrapperElement?: ElementRef<HTMLElement>
@@ -248,7 +248,7 @@ export class TextWithTooltipComponent
   get hostDisplay(): string {
     // Flex display for centering if needed, otherwise inline-block
     if (this.loading) {
-      return this.center ? 'flex' : 'inline-block'
+      return 'flex' // Always use flex when loading to enable vertical centering
     }
     return this.tooltipText ? (this.center ? 'flex' : 'inline-block') : 'none'
   }

@@ -20,7 +20,7 @@
       <orcid-text-with-tooltip
         [text]="title"
         [loading]="loading"
-        skeletonWidth="60%"
+        skeletonWidth="40%"
         textHeightSkeleton="24px"
         height="36px"
         [center]="!isDesktop"
@@ -39,10 +39,11 @@
     <!-- Other Names (Subtitle/Caption) -->
     <div class="other-names-area" *ngIf="subtitle || caption || loading">
       <orcid-text-with-tooltip
-        *ngIf="subtitle || loading"
+        *ngIf="subtitle"
         [text]="subtitle"
         [loading]="loading"
         skeletonWidth="40%"
+        [hiddenSkeleton]="true"
         textHeightSkeleton="14px"
         height="21px"
         [center]="!isDesktop"
@@ -52,9 +53,10 @@
         </p>
       </orcid-text-with-tooltip>
       <orcid-text-with-tooltip
-        *ngIf="caption || loading"
+        *ngIf="caption"
         [text]="caption"
         [loading]="loading"
+        [hiddenSkeleton]="true"
         skeletonWidth="50%"
         textHeightSkeleton="14px"
         height="24px"
