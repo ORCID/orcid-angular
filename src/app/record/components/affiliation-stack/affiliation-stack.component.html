@@ -17,10 +17,7 @@
     [isMobile]="isMobile"
     [startToggleOn]="affiliation.featured"
     (toggleFeatured)="toggleFeatured(affiliation)"
-    [enableStartToggl]="
-      (!!isPublicRecord && affiliation.featured) ||
-      (!isPublicRecord && type === 'employment')
-    "
+    [enableStartToggl]="getEnableStartToggl(affiliation)"
     [startToggleDisabled]="isFeaturedToggleDisabled(affiliation)"
     [startToggleTooltip]="getFeaturedToggleTooltip(affiliation)"
     *ngIf="isPreferred(affiliation) || displayTheStack"

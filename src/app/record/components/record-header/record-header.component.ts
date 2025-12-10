@@ -80,6 +80,7 @@ export class RecordHeaderComponent implements OnInit {
   bannerCaption = ''
   bannerPrimaryIdText = ''
   bannerSecondaryIdText = ''
+  bannerCaptionEnabled = false
 
   // Main action button properties
   mainActionName = ''
@@ -145,6 +146,19 @@ export class RecordHeaderComponent implements OnInit {
       .subscribe((enabled) => {
         this.headerCompactEnabled = !!enabled
         this.computeMainActionState()
+      })
+
+    this._togglz
+      .getStateOf(TogglzFlag.FEATURED_AFFILIATIONS)
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((enabled) => {
+        this.bannerCaptionEnabled = !!enabled
+        if (!enabled) {
+          this.bannerCaption = ''
+        } else {
+          // Reload featured employment if flag is enabled
+          this.loadFeaturedEmployment(this.isPublicRecord)
+        }
       })
 
     // Compact state
@@ -326,6 +340,10 @@ export class RecordHeaderComponent implements OnInit {
   }
 
   private loadFeaturedEmployment(publicRecordId?: string): void {
+    if (!this.bannerCaptionEnabled) {
+      this.bannerCaption = ''
+      return
+    }
     this._affiliations
       .getAffiliations({
         publicRecordId: publicRecordId || undefined,

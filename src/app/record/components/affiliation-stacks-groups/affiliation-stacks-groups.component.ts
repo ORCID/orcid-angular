@@ -4,6 +4,8 @@ import { Observable, Subject } from 'rxjs'
 import { first, takeUntil } from 'rxjs/operators'
 import { RecordAffiliationService } from 'src/app/core/record-affiliations/record-affiliations.service'
 import { RecordService } from 'src/app/core/record/record.service'
+import { TogglzService } from 'src/app/core/togglz/togglz.service'
+import { TogglzFlag } from 'src/app/core/togglz/togglz-flags.enum'
 import {
   Affiliation,
   AffiliationGroup,
@@ -72,14 +74,27 @@ export class AffiliationStacksGroupsComponent implements OnInit {
   showFeaturedSuccessAlert = false
   featuredAffiliationName = ''
   showFeaturedNoticeAlert = false
+  bannerCaptionEnabled = false
   constructor(
     private _record: RecordService,
     private _recordAffiliationService: RecordAffiliationService,
-    private _platform: PlatformInfoService
+    private _platform: PlatformInfoService,
+    private _togglz: TogglzService
   ) {}
 
   ngOnInit(): void {
     this.$loading = this._recordAffiliationService.$loading
+
+    this._togglz
+      .getStateOf(TogglzFlag.FEATURED_AFFILIATIONS)
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((enabled) => {
+        this.bannerCaptionEnabled = !!enabled
+        if (!enabled) {
+          this.showFeaturedSuccessAlert = false
+          this.showFeaturedNoticeAlert = false
+        }
+      })
 
     this._record
       .getRecord({
@@ -171,6 +186,9 @@ export class AffiliationStacksGroupsComponent implements OnInit {
   }
 
   onFeaturedToggled(event: { affiliationName: string; featured: boolean }) {
+    if (!this.bannerCaptionEnabled) {
+      return
+    }
     if (event.featured) {
       this.featuredAffiliationName = event.affiliationName
       this.showFeaturedSuccessAlert = true
@@ -189,6 +207,10 @@ export class AffiliationStacksGroupsComponent implements OnInit {
   }
 
   private checkForFeaturedAffiliationOnRegistration() {
+    // Only check if banner caption is enabled
+    if (!this.bannerCaptionEnabled) {
+      return
+    }
     // Only check if we haven't already shown the alert and affiliations are loaded
     if (this.showFeaturedSuccessAlert || !this.userRecord?.affiliations) {
       return
@@ -239,6 +261,11 @@ export class AffiliationStacksGroupsComponent implements OnInit {
   }
 
   private checkForFeaturedNoticeAlert() {
+    // Only show notice if banner caption is enabled
+    if (!this.bannerCaptionEnabled) {
+      this.showFeaturedNoticeAlert = false
+      return
+    }
     // Only show notice if:
     // 1. Not showing success alert
     // 2. There are employment affiliations

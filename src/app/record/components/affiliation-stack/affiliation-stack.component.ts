@@ -14,6 +14,7 @@ import { UserRecord } from 'src/app/types/record.local'
 import { ModalAffiliationsComponent } from '../affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component'
 import { OrcidPanelComponent } from '@orcid/ui'
 import { TogglzService } from '../../../core/togglz/togglz.service'
+import { TogglzFlag } from '../../../core/togglz/togglz-flags.enum'
 import { PlatformInfoService } from '../../../cdk/platform-info'
 import { MatDialog } from '@angular/material/dialog'
 import { VerificationEmailModalService } from 'src/app/core/verification-email-modal/verification-email-modal.service'
@@ -96,6 +97,7 @@ export class AffiliationStackComponent implements OnInit, OnDestroy {
   tooltipLabelEdit = $localize`:@@shared.edit:Edit`
   visibilityError = false
   editableVisibilityControl = true
+  bannerCaptionEnabled = false
 
   constructor(
     private _affiliationService: RecordAffiliationService,
@@ -376,6 +378,11 @@ export class AffiliationStackComponent implements OnInit, OnDestroy {
   }
 
   isFeaturedToggleDisabled(affiliation: Affiliation): boolean {
+    // Disable if banner caption feature is disabled
+    if (!this.bannerCaptionEnabled) {
+      return true
+    }
+
     // Disable if it's a public record
     if (!!this.isPublicRecord) {
       return true
@@ -395,6 +402,16 @@ export class AffiliationStackComponent implements OnInit, OnDestroy {
     return false
   }
 
+  getEnableStartToggl(affiliation: Affiliation): boolean {
+    if (!this.bannerCaptionEnabled) {
+      return false
+    }
+    return (
+      (!!this.isPublicRecord && affiliation.featured) ||
+      (!this.isPublicRecord && this.type === 'employment')
+    )
+  }
+
   ngOnInit(): void {
     this._platform
       .get()
@@ -402,6 +419,13 @@ export class AffiliationStackComponent implements OnInit, OnDestroy {
       .subscribe(
         (platform) => (this.isMobile = platform.columns4 || platform.columns8)
       )
+
+    this._togglz
+      .getStateOf(TogglzFlag.FEATURED_AFFILIATIONS)
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((enabled) => {
+        this.bannerCaptionEnabled = !!enabled
+      })
   }
 
   ngOnDestroy() {
