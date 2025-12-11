@@ -28,6 +28,7 @@ import { UserInfo } from '../../../types'
   templateUrl: './affiliation-stacks-groups.component.html',
   styleUrls: ['./affiliation-stacks-groups.component.scss'],
   standalone: false,
+  preserveWhitespaces: true,
 })
 export class AffiliationStacksGroupsComponent implements OnInit {
   $destroy: Subject<boolean> = new Subject<boolean>()
@@ -134,6 +135,15 @@ export class AffiliationStacksGroupsComponent implements OnInit {
             )
           }
 
+          // Ensure alerts are in sync with current featured affiliation state.
+          // If the previously featured affiliation has been removed (e.g. deleted),
+          // clear the success alert so the notice alert logic can run correctly.
+          const hasFeaturedAffiliation = !!this.findFeaturedAffiliation()
+          if (!hasFeaturedAffiliation) {
+            this.showFeaturedSuccessAlert = false
+            this.featuredAffiliationName = ''
+          }
+
           // Check for featured affiliation after affiliations are loaded
           this.checkForFeaturedAffiliationOnRegistration()
           // Check if notice alert should be shown (no featured affiliation)
@@ -194,7 +204,10 @@ export class AffiliationStacksGroupsComponent implements OnInit {
       this.showFeaturedSuccessAlert = true
       this.showFeaturedNoticeAlert = false
     } else {
-      // When featured is removed, check if notice should be shown
+      // When featured is removed, hide the success alert and clear name,
+      // then check if the notice should be shown
+      this.showFeaturedSuccessAlert = false
+      this.featuredAffiliationName = ''
       this.checkForFeaturedNoticeAlert()
     }
   }

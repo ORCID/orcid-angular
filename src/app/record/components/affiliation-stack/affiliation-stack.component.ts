@@ -279,13 +279,13 @@ export class AffiliationStackComponent implements OnInit, OnDestroy {
       )
       .subscribe({
         next: () => {
-          // Only emit if we're setting it as featured (not removing)
-          if (!wasFeatured) {
-            this.featuredToggled.emit({
-              affiliationName: affiliation.affiliationName?.value || '',
-              featured: true,
-            })
-          }
+          // Emit event for both featuring and unfeaturing so parent
+          // can update alerts accordingly
+          const nowFeatured = !wasFeatured
+          this.featuredToggled.emit({
+            affiliationName: affiliation.affiliationName?.value || '',
+            featured: nowFeatured,
+          })
         },
       })
   }

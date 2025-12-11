@@ -135,3 +135,9 @@ html {
     top: 0 !important;
   }
 }
+
+// Override left alignment for specific multiline tooltips used in the panel component
+.mdc-tooltip--multiline.no-left-align-tooltip .mat-mdc-tooltip-surface {
+  text-align: center;
+  max-width: unset;
+}
