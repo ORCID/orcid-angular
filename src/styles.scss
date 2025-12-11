@@ -118,6 +118,10 @@ html {
 }
 
 // Accent button directive styles (from orcid-ui)
+.accent-button {
+  color: white !important;
+}
+
 .accent-button:hover {
   background: var(--brand-secondary-dark, #085c77) !important;
 }
@@ -130,4 +134,10 @@ html {
     position: initial;
     top: 0 !important;
   }
+}
+
+// Override left alignment for specific multiline tooltips used in the panel component
+.mdc-tooltip--multiline.no-left-align-tooltip .mat-mdc-tooltip-surface {
+  text-align: center;
+  max-width: unset;
 }

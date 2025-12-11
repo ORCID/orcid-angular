@@ -1,0 +1,24 @@
+<section>
+  <h2>{{ title }}</h2>
+  <p>{{ description }}</p>
+
+  <section class="docs-section controls-panel">
+    <h3>Controls</h3>
+    <ng-content select="[controls]"></ng-content>
+  </section>
+
+  <section class="docs-section">
+    <h3>Examples</h3>
+    <ng-content select="[examples]"></ng-content>
+  </section>
+
+  <section class="docs-section">
+    <h3>Usage</h3>
+    <ng-content select="[usage]"></ng-content>
+  </section>
+
+  <section class="docs-section">
+    <h3>Inputs</h3>
+    <ng-content select="[inputs]"></ng-content>
+  </section>
+</section>

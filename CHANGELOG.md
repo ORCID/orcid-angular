@@ -1,3 +1,37 @@
+## v2.126.6 - 2025-12-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.126.5...v2.126.6)
+
+- [#2699](https://github.com/ORCID/orcid-angular/pull/2699): PD-3819 , PD-3821, PD-3817, PD-3818, PD-3813, PD-3814
+
+## v2.126.5 - 2025-12-10
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.126.4...v2.126.5)
+
+## v2.126.4 - 2025-12-10
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.126.3...v2.126.4)
+
+- [#2698](https://github.com/ORCID/orcid-angular/pull/2698): PD-3704
+
+## v2.126.3 - 2025-12-10
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.126.2...v2.126.3)
+
+- [#2690](https://github.com/ORCID/orcid-angular/pull/2690): Lmendoza/pd 3704
+
+## v2.126.2 - 2025-12-02
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.126.1...v2.126.2)
+
+## v2.126.1 - 2025-12-02
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.126.0...v2.126.1)
+
+## v2.126.0 - 2025-12-02
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.27...v2.126.0)
+
 ## v2.125.27 - 2025-12-02
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.125.26...v2.125.27)

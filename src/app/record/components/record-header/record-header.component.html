@@ -5,6 +5,7 @@
   [isDesktop]="platform?.columns12"
   [title]="bannerTitle"
   [subtitle]="bannerSubtitle"
+  [caption]="bannerCaption"
   [primaryIdText]="bannerPrimaryIdText"
   [secondaryIdText]="bannerSecondaryIdText"
   [expanded]="recordSummaryOpen"
@@ -12,6 +13,10 @@
   (expandedChange)="recordSummaryLinkClick()"
   [regionNames]="regionNames"
   [regionOrcidId]="regionOrcidId"
+  [mainActionName]="mainActionName"
+  (mainActionClicked)="onMainActionClick()"
+  [issueTitle]="issueTitle"
+  [showIssue]="!!userInfo?.RECORD_WITH_ISSUES"
 >
   <img
     header-banner-logo
@@ -22,30 +27,7 @@
     src="assets/vectors/orcid.logo.icon.svg"
     alt="orcid logo"
   />
-  <ng-container *ngIf="userInfo?.RECORD_WITH_ISSUES" header-banner-issue>
-    <ng-container
-      *ngIf="userInfo?.IS_DEACTIVATED === 'true' && !userInfo?.PRIMARY_RECORD"
-    >
-      {{ deactivatedMessage }}
-    </ng-container>
-    <ng-container
-      *ngIf="
-        userInfo?.IS_LOCKED === 'true' &&
-        userInfo?.IS_DEACTIVATED === 'false' &&
-        !userInfo?.PRIMARY_RECORD
-      "
-    >
-      {{ lockedMessage }}
-    </ng-container>
-    <ng-container *ngIf="!!userInfo?.PRIMARY_RECORD">
-      {{ deprecatedMessage }}
-    </ng-container>
-  </ng-container>
 
-  <app-record-edit-button
-    *ngIf="headerCompactEnabled"
-    record-header-name-actions
-  ></app-record-edit-button>
   <app-record-edit-button
     *ngIf="headerCompactEnabled"
     record-header-summary-actions

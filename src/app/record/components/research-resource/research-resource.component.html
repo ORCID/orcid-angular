@@ -1,6 +1,7 @@
 <app-panel-data
   class="orc-font-body-small"
   [borderBottom]="researchResource?.showDetails"
+  [deprecatedPadding]="true"
 >
   <app-panel-element [hideVisibility]="false">
     <div
@@ -236,7 +237,11 @@
               </a>
             </span>
           </div>
-          <app-panel-data [borderBottom]="true" *ngIf="item.showDetails">
+          <app-panel-data
+            [borderBottom]="true"
+            *ngIf="item.showDetails"
+            [deprecatedPadding]="true"
+          >
             <app-panel-element [hideVisibility]="false">
               <div class="description">
                 <app-display-external-ids

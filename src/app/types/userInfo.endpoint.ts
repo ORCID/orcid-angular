@@ -4,7 +4,6 @@ export interface UserInfo {
   PRIMARY_RECORD?: string
   IS_DEACTIVATED: string
   IS_LOCKED: string
-  ADMIN_MENU?: string
   DEVELOPER_TOOLS_ENABLED: string
   IS_PRIMARY_EMAIL_VERIFIED: string
   LOCKED: string

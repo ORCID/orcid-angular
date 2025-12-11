@@ -136,15 +136,6 @@
     <mat-icon>build</mat-icon>
     <span i18n="@@ngOrcid.selfService">Member tools </span>
   </button>
-  <button
-    mat-menu-item
-    *ngIf="userInfo && userInfo['ADMIN_MENU']"
-    (click)="goto('admin-actions')"
-    id="cy-admin-actions"
-  >
-    <mat-icon>verified_user</mat-icon>
-    <span i18n="@@ngOrcid.adminPage">Admin page</span>
-  </button>
   <button mat-menu-item (click)="navigateTo('/signout')" id="cy-signout">
     <mat-icon>exit_to_app</mat-icon>
     <span i18n="@@ngOrcid.logout">Logout</span>
