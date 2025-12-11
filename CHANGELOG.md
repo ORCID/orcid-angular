@@ -1,3 +1,9 @@
+## v2.126.6 - 2025-12-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.126.5...v2.126.6)
+
+- [#2699](https://github.com/ORCID/orcid-angular/pull/2699): PD-3819 , PD-3821, PD-3817, PD-3818, PD-3813, PD-3814
+
 ## v2.126.5 - 2025-12-10
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.126.4...v2.126.5)
