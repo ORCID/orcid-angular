@@ -53,7 +53,10 @@
         *ngIf="isPreferred(affiliation) && !isPublicRecord"
         [matTooltip]="tooltipLabelEdit"
         [attr.aria-label]="
-          type | appPanelActivityActionAriaLabel : 'edit' : affiliation.affiliationName?.value
+          type
+            | appPanelActivityActionAriaLabel
+              : 'edit'
+              : affiliation.affiliationName?.value
         "
         (click)="editAffiliation(affiliation)"
       >
