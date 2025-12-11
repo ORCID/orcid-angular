@@ -20,6 +20,7 @@
     [enableStartToggl]="getEnableStartToggl(affiliation)"
     [startToggleDisabled]="isFeaturedToggleDisabled(affiliation)"
     [startToggleTooltip]="getFeaturedToggleTooltip(affiliation)"
+    [startToggleViewOnly]="!!isPublicRecord"
     *ngIf="isPreferred(affiliation) || displayTheStack"
     id="{{ 'cy-affiliation-' + type + '-' + i }}"
   >
@@ -51,6 +52,9 @@
         mat-icon-button
         *ngIf="isPreferred(affiliation) && !isPublicRecord"
         [matTooltip]="tooltipLabelEdit"
+        [attr.aria-label]="
+          type | appPanelActivityActionAriaLabel : 'edit' : affiliation.affiliationName?.value
+        "
         (click)="editAffiliation(affiliation)"
       >
         <mat-icon class="material-icons-outlined">edit</mat-icon>

@@ -4,13 +4,17 @@
       <div
         *ngIf="enableStartToggl"
         [matTooltip]="startToggleTooltip"
+        [matTooltipClass]="'no-left-align-tooltip'"
         class="featured-affiliation-star-wrapper"
+        [class.view-only]="startToggleViewOnly"
       >
         <button
           mat-icon-button
           class="featured-affiliation-star"
+          [class.view-only]="startToggleViewOnly"
           [disabled]="startToggleDisabled"
-          (click)="!startToggleDisabled && toggleFeatured.emit()"
+          [attr.aria-label]="startToggleTooltip"
+          (click)="onToggleClick()"
         >
           <mat-icon *ngIf="startToggleOn" class="star-filled">star</mat-icon>
           <mat-icon *ngIf="!startToggleOn" class="star-outline"

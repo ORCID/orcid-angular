@@ -18,6 +18,7 @@ export class OrcidPanelComponent {
   @Input() enableStartToggl = false
   @Input() startToggleDisabled = false
   @Input() startToggleTooltip = ''
+  @Input() startToggleViewOnly = false
   @Input() icon?: string
   @Input() iconClass?: string
   @Input() title?: string
@@ -27,5 +28,15 @@ export class OrcidPanelComponent {
 
   get showIcon(): boolean {
     return !!this.icon
+  }
+
+  onToggleClick(): void {
+    if (this.startToggleDisabled) {
+      return
+    }
+
+    // Optimistically update the local state so the UI reflects the toggle immediately
+    this.startToggleOn = !this.startToggleOn
+    this.toggleFeatured.emit()
   }
 }

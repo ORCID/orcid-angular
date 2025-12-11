@@ -309,10 +309,17 @@ export class RecordHeaderComponent implements OnInit {
               this.ariaLabelName
             )
           } else {
-            if (
+            const hasAnyOtherPublicInfo =
               this.affiliations > 0 ||
               this.displaySideBar ||
               this.displayBiography
+
+            // Scenario 1: there is other public information on the record
+            if (
+              hasAnyOtherPublicInfo ||
+              // Scenario 2: no public information is available anywhere,
+              // matching the "no displayable data for this record" banner
+              (!hasAnyOtherPublicInfo && !this.userInfo?.RECORD_WITH_ISSUES)
             ) {
               this.creditName = this.privateName
             }
