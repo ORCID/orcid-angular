@@ -84,6 +84,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   loadingUserRecord: boolean
   globalExpandState = true
   initMyOrcidParameter = false
+  hideHeader = false
 
   regionActivities = $localize`:@@shared.activities:Activities`
   readyForIndexing: boolean
@@ -157,6 +158,11 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     })
 
     this._platform.get().subscribe((value) => (this.platform = value))
+    this._compactService.compactActive$
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((active) => {
+        this.hideHeader = active
+      })
     this._record
       .getRecord({
         publicRecordId: this.publicOrcid || undefined,
