@@ -1,8 +1,8 @@
+name: test_yarn
+
 on:
   workflow_call:
   workflow_dispatch:
-
-name: test_yarn
 
 jobs:
   test_yarn:

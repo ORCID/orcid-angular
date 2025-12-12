@@ -14,7 +14,7 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
-import { AlertMessageModule } from 'src/app/cdk/alert-message/alert-message.module'
+import { AlertMessageComponent } from '@orcid/ui'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { ReactiveFormsModule } from '@angular/forms'
@@ -28,7 +28,7 @@ describe('ModalEmailComponent', () => {
       imports: [
         HttpClientTestingModule,
         RouterTestingModule,
-        AlertMessageModule,
+        AlertMessageComponent,
         ReactiveFormsModule,
       ],
       declarations: [ModalEmailComponent],

@@ -129,7 +129,7 @@
       <h2 header class="names-header orc-font-body" i18n="@@topBar.names">
         Names
       </h2>
-      <app-panel-data>
+      <app-panel-data [deprecatedPadding]="true">
         <app-panel-element
           [visibility]="userRecord.names.visibility.visibility"
         >
@@ -190,7 +190,10 @@
       >
         Biography
       </h2>
-      <app-panel-data *ngIf="!!userRecord.biography.biography">
+      <app-panel-data
+        *ngIf="!!userRecord.biography.biography"
+        [deprecatedPadding]="true"
+      >
         <app-panel-element>
           <span
             id="biography-value"

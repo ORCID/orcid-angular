@@ -55,8 +55,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   labelLogo = $localize`:@@layout.ariaLabelConnectingResearchers:Connecting research and researchers`
   labelMenu = $localize`:@@layout.ariaLabelMenu:main menu`
 
-  // Compact header (feature-flagged) state
-  compactEligible = false
+  // Compact header state
   isCompactActive = false
 
   // Record header state consumed when compact header is active
@@ -107,10 +106,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
       )
       .subscribe()
 
-    // Subscribe to compact header eligibility (shared service)
-    this._compactService.eligible$.subscribe((eligible) => {
-      this.compactEligible = eligible
-    })
+    // Subscribe to compact header state
     this._compactService.compactActive$.subscribe(
       (active) => (this.isCompactActive = active)
     )

@@ -1,3 +1,5 @@
+@import 'src/assets/scss/material.palettes.scss';
+
 :host {
   width: 100%;
 }
@@ -6,6 +8,15 @@ app-affiliation-stack {
   margin-top: 24px;
 }
 
+.featured-success-alert,
+.featured-notice-alert {
+  margin-top: 16px;
+}
+
 p {
   margin-bottom: 0;
+}
+
+.brand-primary-darkest-link {
+  color: $brand-primary-darkest;
 }

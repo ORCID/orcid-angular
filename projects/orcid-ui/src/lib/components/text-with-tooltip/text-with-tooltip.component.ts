@@ -12,6 +12,7 @@ import {
   HostBinding,
 } from '@angular/core'
 import { CommonModule, NgIf } from '@angular/common'
+import { SkeletonPlaceholderComponent } from '../skeleton-placeholder/skeleton-placeholder.component'
 
 /**
  * A reusable component that displays text with a tooltip that only appears
@@ -27,9 +28,10 @@ import { CommonModule, NgIf } from '@angular/common'
 @Component({
   selector: 'orcid-text-with-tooltip',
   standalone: true,
-  imports: [CommonModule, NgIf],
+  imports: [CommonModule, NgIf, SkeletonPlaceholderComponent],
   template: `
     <span
+      *ngIf="!loading"
       #wrapperRef
       (mouseenter)="onMouseEnter($event)"
       (mousemove)="onMouseMove($event)"
@@ -38,6 +40,12 @@ import { CommonModule, NgIf } from '@angular/common'
     >
       <ng-content></ng-content>
     </span>
+    <orcid-skeleton-placeholder
+      *ngIf="loading && !hiddenSkeleton"
+      [shape]="skeletonShape"
+      [width]="skeletonWidth"
+      [height]="textHeightSkeleton"
+    ></orcid-skeleton-placeholder>
     <div
       *ngIf="showCustomTooltip"
       class="custom-tooltip"
@@ -50,15 +58,17 @@ import { CommonModule, NgIf } from '@angular/common'
   styles: [
     `
       :host {
-        display: inline-block;
         max-width: 100%;
         min-width: 0;
+        vertical-align: middle;
+        line-height: normal; /* Changed from 0 to normal to respect min-height */
       }
 
       .text-wrapper {
         display: inline-block;
         max-width: 100%;
         min-width: 0;
+        line-height: normal;
       }
 
       .text-wrapper ::ng-deep > * {
@@ -96,6 +106,13 @@ export class TextWithTooltipComponent
    * the projected content.
    */
   @Input() text = ''
+  @Input() loading = false
+  @Input() skeletonShape: 'square' | 'circle' = 'square'
+  @Input() skeletonWidth = '100%'
+  @Input() textHeightSkeleton = 'auto'
+  @Input() height = 'auto'
+  @Input() center = false
+  @Input() hiddenSkeleton = false
 
   @ViewChild('wrapperRef', { read: ElementRef, static: false })
   wrapperElement?: ElementRef<HTMLElement>
@@ -118,7 +135,7 @@ export class TextWithTooltipComponent
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['text']) {
+    if (changes['text'] || changes['loading']) {
       // Use setTimeout to ensure DOM has updated
       setTimeout(() => {
         this.checkOverflow()
@@ -214,19 +231,42 @@ export class TextWithTooltipComponent
   }
 
   get shouldShowTooltip(): boolean {
-    return this.overflows && !!this.tooltipText
+    return !this.loading && this.overflows && !!this.tooltipText
+  }
+
+  @HostBinding('style.width')
+  get hostWidth(): string {
+    return this.loading ? '100%' : 'auto'
+  }
+
+  @HostBinding('style.min-height')
+  get hostMinHeight(): string {
+    return this.height !== 'auto' ? this.height : '0'
   }
 
   @HostBinding('style.display')
   get hostDisplay(): string {
-    // Hide the host entirely when there is no text content,
-    // so containers like header banners don't reserve empty space.
-    return this.tooltipText ? 'inline-block' : 'none'
+    // Flex display for centering if needed, otherwise inline-block
+    if (this.loading) {
+      return 'flex' // Always use flex when loading to enable vertical centering
+    }
+    return this.tooltipText ? (this.center ? 'flex' : 'inline-block') : 'none'
+  }
+
+  @HostBinding('style.justify-content')
+  get hostJustifyContent(): string {
+    return this.center ? 'center' : 'normal'
+  }
+
+  @HostBinding('style.align-items')
+  get hostAlignItems(): string {
+    // Always center vertically if flex
+    return this.center || this.loading ? 'center' : 'normal'
   }
 
   @HostBinding('class.has-text')
   get hasTextClass(): boolean {
-    return !!this.tooltipText
+    return !!this.tooltipText || this.loading
   }
 
   onMouseEnter(event: MouseEvent) {

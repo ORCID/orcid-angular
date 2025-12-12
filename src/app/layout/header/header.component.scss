@@ -85,28 +85,6 @@ header.container.compact app-search {
   height: 160px;
 }
 
-/* Desktop global spacer to maintain scroll position while compact */
-.header-top-spacer {
-  height: 262px;
-  display: block;
-}
-
-.header-top-spacer.header-top-spacer--tall {
-  height: 270px;
-}
-
-/* On tablet/handset, allow a bit more space for wrapped lines/buttons */
-.columns-8 :host .header-top-spacer,
-.columns-4 :host .header-top-spacer {
-  height: 262px;
-  display: block;
-}
-
-.columns-8 :host .header-top-spacer.header-top-spacer--tall,
-.columns-4 :host .header-top-spacer.header-top-spacer--tall {
-  height: 302px;
-}
-
 nav.not-wordpress-display > .top-bar,
 nav.not-wordpress-display > .top-bar-new-info {
   margin-bottom: 60px;

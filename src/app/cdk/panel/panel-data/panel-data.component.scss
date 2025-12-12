@@ -6,6 +6,10 @@
   border-bottom: solid 1px;
 }
 
+:host.no-padding {
+  padding: 0;
+}
+
 :host.featured {
   padding-top: 0;
   padding-left: 48px;
