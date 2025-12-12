@@ -67,24 +67,23 @@ export class HeaderCompactService {
     )
 
     // Combine eligibility and scroll position to determine compact mode
-    this.compactActive$ = combineLatest([eligible$, scrollY$])
-      .pipe(
-        // Apply hysteresis: require extra pixels to flip states and reduce jitter
-        scan((active, [eligible, scrollY]) => {
-          if (!eligible) {
-            return false
-          }
-          const enterThreshold = this.scrollThreshold + this.hysteresis
-          const exitThreshold = this.scrollThreshold - this.hysteresis
-          if (active) {
-            return scrollY >= exitThreshold
-          } else {
-            return scrollY >= enterThreshold
-          }
-        }, false),
-        distinctUntilChanged(),
-        shareReplay(1)
-      )
+    this.compactActive$ = combineLatest([eligible$, scrollY$]).pipe(
+      // Apply hysteresis: require extra pixels to flip states and reduce jitter
+      scan((active, [eligible, scrollY]) => {
+        if (!eligible) {
+          return false
+        }
+        const enterThreshold = this.scrollThreshold + this.hysteresis
+        const exitThreshold = this.scrollThreshold - this.hysteresis
+        if (active) {
+          return scrollY >= exitThreshold
+        } else {
+          return scrollY >= enterThreshold
+        }
+      }, false),
+      distinctUntilChanged(),
+      shareReplay(1)
+    )
   }
 
   private getScrollY(): number {
