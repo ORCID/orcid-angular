@@ -11,7 +11,7 @@
   width: 100%;
   max-width: 1304px;
   margin: 0 auto;
-  padding: 16px 32px;
+  padding: 16px 16px;
   box-sizing: border-box;
   color: var(--orcid-color-brand-white, #ffffff);
   background: var(--orcid-color-brand-secondary-darkest, #003449);
@@ -143,6 +143,7 @@
     }
 
     .caption-text {
+      font-size: 16px;
       line-height: 24px;
     }
 
@@ -304,6 +305,19 @@
   }
 }
 
+.compact .compact-title-area {
+  orcid-text-with-tooltip {
+    display: block;
+    height: 24px;
+    line-height: 24px;
+  }
+
+  h1 {
+    height: 24px;
+    line-height: 24px;
+  }
+}
+
 .id-area {
   display: flex;
   align-items: center;
@@ -330,10 +344,6 @@
     font-weight: 400;
   }
 
-  // Logo sizing
-  ::ng-deep img.orcid-logo {
-    // Default handled by global styles or inputs, but we can enforce if needed
-  }
 }
 
 .id-actions-area {

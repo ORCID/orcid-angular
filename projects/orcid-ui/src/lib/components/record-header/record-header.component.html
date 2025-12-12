@@ -58,12 +58,15 @@
         [loading]="loading"
         [hiddenSkeleton]="true"
         skeletonWidth="50%"
-        textHeightSkeleton="14px"
+        [textHeightSkeleton]="isDesktop ? '16px' : '14px'"
         height="24px"
         [center]="!isDesktop"
         class="caption-text"
       >
-        <p class="orc-ui-font-body-small">
+        <p
+          class="caption-text"
+          [ngClass]="isDesktop ? 'orc-ui-font-body' : 'orc-ui-font-body-small'"
+        >
           {{ caption }}
         </p>
       </orcid-text-with-tooltip>
@@ -123,7 +126,7 @@
         [loading]="loading"
         skeletonWidth="50%"
         textHeightSkeleton="24px"
-        height="36px"
+        [height]="compactMode ? '24px' : '36px'"
       >
         <h1
           class="orc-ui-font-body-large"

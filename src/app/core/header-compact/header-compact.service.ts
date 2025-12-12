@@ -5,6 +5,7 @@ import {
   distinctUntilChanged,
   filter,
   map,
+  scan,
   startWith,
   shareReplay,
 } from 'rxjs/operators'
@@ -21,6 +22,10 @@ import { WINDOW } from 'src/app/cdk/window'
 export class HeaderCompactService {
   // Threshold for when compact mode should activate (scroll position relative to main-content)
   private readonly scrollThreshold = -175
+  // Pixels of hysteresis to reduce flicker when toggling
+  private readonly hysteresis = 5
+  // Cached absolute top of main-content to avoid layout-shift bounce (used for Firefox only)
+  private mainTopOffset: number | null = null
 
   /**
    * Single observable that emits true when compact mode should be active.
@@ -62,16 +67,24 @@ export class HeaderCompactService {
     )
 
     // Combine eligibility and scroll position to determine compact mode
-    this.compactActive$ = combineLatest([eligible$, scrollY$]).pipe(
-      map(([eligible, scrollY]) => {
-        if (!eligible) {
-          return false
-        }
-        return scrollY >= this.scrollThreshold
-      }),
-      distinctUntilChanged(),
-      shareReplay(1)
-    )
+    this.compactActive$ = combineLatest([eligible$, scrollY$])
+      .pipe(
+        // Apply hysteresis: require extra pixels to flip states and reduce jitter
+        scan((active, [eligible, scrollY]) => {
+          if (!eligible) {
+            return false
+          }
+          const enterThreshold = this.scrollThreshold + this.hysteresis
+          const exitThreshold = this.scrollThreshold - this.hysteresis
+          if (active) {
+            return scrollY >= exitThreshold
+          } else {
+            return scrollY >= enterThreshold
+          }
+        }, false),
+        distinctUntilChanged(),
+        shareReplay(1)
+      )
   }
 
   private getScrollY(): number {
@@ -94,9 +107,34 @@ export class HeaderCompactService {
 
     const rect = mainContainer.getBoundingClientRect()
 
-    // Distance scrolled relative to the top of .main-container
-    const distanceFromMainTop = -rect.top
+    const useCache = this.isFirefox()
+
+    // Cache the absolute top of main-content once to avoid layout shifts causing flicker (Firefox)
+    if (useCache) {
+      if (this.mainTopOffset === null) {
+        this.mainTopOffset = rect.top + globalScrollY
+      }
+    } else {
+      // Reset cache when not using it, so other browsers always use live values
+      this.mainTopOffset = null
+    }
+    const cachedTop =
+      useCache && this.mainTopOffset !== null
+        ? this.mainTopOffset
+        : rect.top + globalScrollY
+
+    // Distance scrolled relative to the cached top of .main-content
+    const distanceFromMainTop = globalScrollY - cachedTop
 
     return distanceFromMainTop
+  }
+
+  private isFirefox(): boolean {
+    try {
+      const ua = this.window?.navigator?.userAgent || ''
+      return /firefox/i.test(ua)
+    } catch {
+      return false
+    }
   }
 }
