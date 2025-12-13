@@ -11,6 +11,8 @@
     <app-record-header
       *ngIf="!!publicOrcid"
       [disableCompactMode]="true"
+      [style.visibility]="hideHeader ? 'hidden' : 'visible'"
+      [attr.aria-hidden]="hideHeader ? 'true' : null"
     ></app-record-header>
     <!---
     On compact mode the record summary is displayed in the record header 
