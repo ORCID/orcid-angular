@@ -1,3 +1,9 @@
+## v2.126.10 - 2025-12-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.126.9...v2.126.10)
+
+- [#2702](https://github.com/ORCID/orcid-angular/pull/2702): Revert "Lmendoza/pd 3822"
+
 ## v2.126.9 - 2025-12-15
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.126.8...v2.126.9)
