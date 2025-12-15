@@ -1,3 +1,9 @@
+## v2.126.8 - 2025-12-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.126.7...v2.126.8)
+
+- [#2701](https://github.com/ORCID/orcid-angular/pull/2701): Lmendoza/pd 3822
+
 ## v2.126.7 - 2025-12-12
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.126.6...v2.126.7)
