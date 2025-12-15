@@ -12,16 +12,17 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Subtitle</mat-label>
-        <input
-          matInput
-          [(ngModel)]="config.subtitle"
-          [disabled]="!config.showSubtitle"
-        />
+        <input matInput [(ngModel)]="config.subtitle" />
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Caption</mat-label>
         <input matInput [(ngModel)]="config.caption" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Issue title (optional)</mat-label>
+        <input matInput [(ngModel)]="config.issueTitle" />
       </mat-form-field>
 
       <mat-form-field appearance="outline">
@@ -34,10 +35,6 @@
         <input matInput [(ngModel)]="config.secondaryIdText" />
       </mat-form-field>
 
-      <mat-checkbox [(ngModel)]="config.showSubtitle">
-        Show Subtitle
-      </mat-checkbox>
-
       <mat-checkbox [(ngModel)]="config.showEditButton">
         Show Edit Button
       </mat-checkbox>
@@ -48,10 +45,6 @@
 
       <mat-checkbox [(ngModel)]="config.expanded">
         Expanded (initial state)
-      </mat-checkbox>
-
-      <mat-checkbox [(ngModel)]="config.showIssue">
-        Show Issue Banner
       </mat-checkbox>
 
       <mat-form-field appearance="outline">
@@ -81,8 +74,7 @@
               [compactMode]="false"
               [isDesktop]="true"
               [title]="config.title"
-              [issueTitle]="config.showIssue ? config.issueBannerText : ''"
-              [subtitle]="config.showSubtitle ? config.subtitle : ''"
+              [subtitle]="config.subtitle"
               [caption]="config.caption"
               [primaryIdText]="config.primaryIdText"
               [secondaryIdText]="config.secondaryIdText"
@@ -91,6 +83,7 @@
               (expandedChange)="config.expanded = $event"
               [regionNames]="config.regionNames"
               [regionOrcidId]="config.regionOrcidId"
+              [issueTitle]="config.issueTitle"
               [mainActionName]="mainActionName"
               (mainActionClicked)="onMainActionClick()"
             >
@@ -134,8 +127,7 @@
               [compactMode]="false"
               [isDesktop]="true"
               [title]="config.title"
-              [issueTitle]="config.showIssue ? config.issueBannerText : ''"
-              [subtitle]="config.showSubtitle ? config.subtitle : ''"
+              [subtitle]="config.subtitle"
               [caption]="config.caption"
               [primaryIdText]="config.primaryIdText"
               [secondaryIdText]="config.secondaryIdText"
@@ -144,6 +136,7 @@
               (expandedChange)="config.expanded = $event"
               [regionNames]="config.regionNames"
               [regionOrcidId]="config.regionOrcidId"
+              [issueTitle]="config.issueTitle"
               [mainActionName]="mainActionName"
               (mainActionClicked)="onMainActionClick()"
             >
@@ -193,8 +186,7 @@
               [compactMode]="true"
               [isDesktop]="true"
               [title]="config.title"
-              [issueTitle]="config.showIssue ? config.issueBannerText : ''"
-              [subtitle]="config.showSubtitle ? config.subtitle : ''"
+              [subtitle]="config.subtitle"
               [caption]="config.caption"
               [primaryIdText]="config.primaryIdText"
               [secondaryIdText]="config.secondaryIdText"
@@ -203,6 +195,7 @@
               (expandedChange)="config.expanded = $event"
               [regionNames]="config.regionNames"
               [regionOrcidId]="config.regionOrcidId"
+              [issueTitle]="config.issueTitle"
             >
               <img
                 header-banner-logo
@@ -255,8 +248,7 @@
               [compactMode]="true"
               [isDesktop]="true"
               [title]="config.title"
-              [issueTitle]="config.showIssue ? config.issueBannerText : ''"
-              [subtitle]="config.showSubtitle ? config.subtitle : ''"
+              [subtitle]="config.subtitle"
               [caption]="config.caption"
               [primaryIdText]="config.primaryIdText"
               [secondaryIdText]="config.secondaryIdText"
@@ -265,6 +257,7 @@
               (expandedChange)="config.expanded = $event"
               [regionNames]="config.regionNames"
               [regionOrcidId]="config.regionOrcidId"
+              [issueTitle]="config.issueTitle"
             >
               <img
                 header-banner-logo
@@ -323,8 +316,7 @@
               [compactMode]="false"
               [isDesktop]="false"
               [title]="config.title"
-              [issueTitle]="config.showIssue ? config.issueBannerText : ''"
-              [subtitle]="config.showSubtitle ? config.subtitle : ''"
+              [subtitle]="config.subtitle"
               [caption]="config.caption"
               [primaryIdText]="config.primaryIdText"
               [secondaryIdText]="config.secondaryIdText"
@@ -333,6 +325,7 @@
               (expandedChange)="config.expanded = $event"
               [regionNames]="config.regionNames"
               [regionOrcidId]="config.regionOrcidId"
+              [issueTitle]="config.issueTitle"
               [mainActionName]="mainActionName"
               (mainActionClicked)="onMainActionClick()"
             >
@@ -376,8 +369,7 @@
               [compactMode]="false"
               [isDesktop]="false"
               [title]="config.title"
-              [issueTitle]="config.showIssue ? config.issueBannerText : ''"
-              [subtitle]="config.showSubtitle ? config.subtitle : ''"
+              [subtitle]="config.subtitle"
               [caption]="config.caption"
               [primaryIdText]="config.primaryIdText"
               [secondaryIdText]="config.secondaryIdText"
@@ -386,6 +378,7 @@
               (expandedChange)="config.expanded = $event"
               [regionNames]="config.regionNames"
               [regionOrcidId]="config.regionOrcidId"
+              [issueTitle]="config.issueTitle"
               [mainActionName]="mainActionName"
               (mainActionClicked)="onMainActionClick()"
             >
@@ -433,8 +426,7 @@
               [compactMode]="true"
               [isDesktop]="false"
               [title]="config.title"
-              [issueTitle]="config.showIssue ? config.issueBannerText : ''"
-              [subtitle]="config.showSubtitle ? config.subtitle : ''"
+              [subtitle]="config.subtitle"
               [caption]="config.caption"
               [primaryIdText]="config.primaryIdText"
               [secondaryIdText]="config.secondaryIdText"
@@ -443,6 +435,7 @@
               (expandedChange)="config.expanded = $event"
               [regionNames]="config.regionNames"
               [regionOrcidId]="config.regionOrcidId"
+              [issueTitle]="config.issueTitle"
             >
               <img
                 header-banner-logo
@@ -496,8 +489,7 @@
               [compactMode]="true"
               [isDesktop]="false"
               [title]="config.title"
-              [issueTitle]="config.showIssue ? config.issueBannerText : ''"
-              [subtitle]="config.showSubtitle ? config.subtitle : ''"
+              [subtitle]="config.subtitle"
               [caption]="config.caption"
               [primaryIdText]="config.primaryIdText"
               [secondaryIdText]="config.secondaryIdText"
@@ -506,6 +498,7 @@
               (expandedChange)="config.expanded = $event"
               [regionNames]="config.regionNames"
               [regionOrcidId]="config.regionOrcidId"
+              [issueTitle]="config.issueTitle"
             >
               <img
                 header-banner-logo
@@ -553,130 +546,6 @@
       </div>
     </div>
 
-    <div class="example-group">
-      <h4>Issue banner</h4>
-      <div class="example-stack">
-        <div class="example-item">
-          <h5>Desktop View - Normal Mode (no names)</h5>
-          <div class="example-container desktop">
-            <orcid-header-banner
-              class="orcid-theme"
-              [loading]="false"
-              [compactMode]="false"
-              [isDesktop]="true"
-              [title]="''"
-              [subtitle]="''"
-              [primaryIdText]="config.primaryIdText"
-              [secondaryIdText]="config.secondaryIdText"
-              [expanded]="config.expanded"
-              [canToggleExpanded]="config.canToggleExpanded"
-              (expandedChange)="config.expanded = $event"
-              [regionNames]="config.regionNames"
-              [regionOrcidId]="config.regionOrcidId"
-              [issueTitle]="config.issueBannerText"
-            >
-              <img
-                header-banner-logo
-                class="orcid-logo"
-                src="https://qa.orcid.org/assets/vectors/orcid.logo.icon.svg"
-                alt="ORCID logo"
-              />
-            </orcid-header-banner>
-          </div>
-        </div>
-        <div class="example-item">
-          <h5>Desktop View - Compact Mode (no names)</h5>
-          <div class="example-container desktop">
-            <orcid-header-banner
-              class="orcid-theme"
-              [loading]="false"
-              [compactMode]="true"
-              [isDesktop]="true"
-              [title]="''"
-              [subtitle]="''"
-              [primaryIdText]="config.primaryIdText"
-              [secondaryIdText]="config.secondaryIdText"
-              [expanded]="config.expanded"
-              [canToggleExpanded]="config.canToggleExpanded"
-              (expandedChange)="config.expanded = $event"
-              [regionNames]="config.regionNames"
-              [regionOrcidId]="config.regionOrcidId"
-              [issueTitle]="config.issueBannerText"
-            >
-              <img
-                header-banner-logo
-                class="orcid-logo"
-                src="https://qa.orcid.org/assets/vectors/orcid.logo.icon.svg"
-                alt="ORCID logo"
-              />
-            </orcid-header-banner>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="example-group">
-      <h4>Mobile banners (no names)</h4>
-      <div class="example-grid">
-        <div class="example-item">
-          <h5>Mobile issue banner - Normal Mode</h5>
-          <div class="example-container mobile">
-            <orcid-header-banner
-              class="orcid-theme"
-              [loading]="false"
-              [compactMode]="false"
-              [isDesktop]="false"
-              [title]="''"
-              [subtitle]="''"
-              [primaryIdText]="config.primaryIdText"
-              [secondaryIdText]="config.secondaryIdText"
-              [expanded]="config.expanded"
-              [canToggleExpanded]="config.canToggleExpanded"
-              (expandedChange)="config.expanded = $event"
-              [regionNames]="config.regionNames"
-              [regionOrcidId]="config.regionOrcidId"
-              [issueTitle]="config.issueBannerText"
-            >
-              <img
-                header-banner-logo
-                class="orcid-logo"
-                src="https://qa.orcid.org/assets/vectors/orcid.logo.icon.svg"
-                alt="ORCID logo"
-              />
-            </orcid-header-banner>
-          </div>
-        </div>
-
-        <div class="example-item">
-          <h5>Mobile issue banner - Compact Mode</h5>
-          <div class="example-container mobile">
-            <orcid-header-banner
-              class="orcid-theme"
-              [loading]="false"
-              [compactMode]="true"
-              [isDesktop]="false"
-              [title]="''"
-              [subtitle]="''"
-              [primaryIdText]="config.primaryIdText"
-              [secondaryIdText]="config.secondaryIdText"
-              [expanded]="config.expanded"
-              [canToggleExpanded]="config.canToggleExpanded"
-              (expandedChange)="config.expanded = $event"
-              [regionNames]="config.regionNames"
-              [regionOrcidId]="config.regionOrcidId"
-              [issueTitle]="config.issueBannerText"
-            >
-              <img
-                header-banner-logo
-                class="orcid-logo"
-                src="https://qa.orcid.org/assets/vectors/orcid.logo.icon.svg"
-                alt="ORCID logo"
-              />
-            </orcid-header-banner>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 
   <div inputs>
@@ -691,10 +560,8 @@
         <code>loading</code>: shows a progress bar and hides content while
         loading
       </li>
-      <li>
-        <code>regionNames</code>, <code>regionOrcidId</code>,
-        <code>issueTitle</code>
-      </li>
+      <li><code>regionNames</code>, <code>regionOrcidId</code></li>
+      <li><code>issueTitle</code> (optional)</li>
     </ul>
 
     <h3>Outputs</h3>
