@@ -202,10 +202,7 @@
     </div>
 
     <!-- Summary Actions / Toggle -->
-    <div
-      class="summary-actions-area"
-      *ngIf="!loading && title && !hideTitle"
-    >
+    <div class="summary-actions-area" *ngIf="!loading && title && !hideTitle">
       <ng-container
         *ngIf="
           (compactMode && isDesktop && !expanded) ||
