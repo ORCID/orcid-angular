@@ -292,13 +292,36 @@ export class RecordAffiliationService {
       )
   }
 
-  updateFeatured(putCode: string): Observable<any> {
+  updateFeatured(
+    affiliation: Affiliation,
+    togglingOn: boolean
+  ): Observable<any> {
+    const targetPutCode = togglingOn ? affiliation.putCode.value : ''
+    const previousState = cloneDeep(this.lastEmittedValue)
+
+    // Optimistically update the shared affiliations observable so all consumers
+    // see the featured change immediately.
+    if (this.lastEmittedValue && this.$affiliations) {
+      this.lastEmittedValue.forEach((uiGroup) => {
+        uiGroup.affiliationGroup?.forEach((group) => {
+          group.affiliations?.forEach((item) => {
+            if (item.affiliationType?.value !== 'employment') {
+              return
+            }
+            item.featured =
+              togglingOn && item.putCode?.value === affiliation.putCode.value
+          })
+        })
+      })
+      this.$affiliations.next(this.lastEmittedValue)
+    }
+
     this._$loading.next(true)
     return this._http
       .put(
         runtimeEnvironment.API_WEB + 'affiliations/featuredAffiliation.json',
         {
-          putCode: putCode,
+          putCode: targetPutCode,
         },
         {
           headers: this.headers,
@@ -306,7 +329,14 @@ export class RecordAffiliationService {
       )
       .pipe(
         retry(3),
-        catchError((error) => this._errorHandler.handleError(error)),
+        catchError((error) => {
+          // Revert optimistic update on failure
+          if (previousState && this.$affiliations) {
+            this.lastEmittedValue = previousState
+            this.$affiliations.next(this.lastEmittedValue)
+          }
+          return this._errorHandler.handleError(error)
+        }),
         tap(() => this.getAffiliations({ forceReload: true })),
         finalize(() => this._$loading.next(false))
       )

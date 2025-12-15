@@ -43,7 +43,6 @@ export class HeaderBannerComponent {
    * Optional caption text displayed under the subtitle.
    */
   @Input() caption = ''
-  @Input() showIssue = false
   @Input() issueTitle = ''
 
   /**
@@ -69,6 +68,10 @@ export class HeaderBannerComponent {
    */
   @Input() mainActionName = ''
   @Output() mainActionClicked = new EventEmitter<void>()
+
+  get hideTitle(): boolean {
+    return !!this.issueTitle
+  }
 
   onToggleExpanded() {
     const next = !this.expanded
