@@ -1,5 +1,7 @@
 @layer theme, base, components, utilities;
 
-@import 'tailwindcss/theme.css' layer(theme);
-@import 'tailwindcss/utilities.css' layer(utilities);
-@source "./src/**/*.{html,ts}"
+@import "tailwindcss/theme.css" layer(theme) source(none);
+@import "tailwindcss/utilities.css" layer(utilities) source(none);
+
+
+@source "../../**/*.{html,ts}";
