@@ -22,7 +22,7 @@ import { UserSession } from 'src/app/types/session.local'
 import { CdkPortalOutlet, ComponentPortal } from '@angular/cdk/portal'
 import { OauthURLSessionManagerService } from 'src/app/core/oauth-urlsession-manager/oauth-urlsession-manager.service'
 import { FeatureLoggerService } from 'src/app/core/logging/feature-logger.service'
-import { TogglzFlag } from 'src/app/core/togglz/togglz-flags.enum'
+import { TogglzFlag } from 'src/app/types/config.endpoint'
 
 @Component({
   templateUrl: './authorize.component.html',

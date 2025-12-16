@@ -9,7 +9,7 @@ import { UserRecordOptions } from 'src/app/types/record.local'
 import { Router } from '@angular/router'
 import { PlatformInfo, PlatformInfoService } from '../../cdk/platform-info'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
-import { TogglzFlag } from 'src/app/core/togglz/togglz-flags.enum'
+import { TogglzFlag } from 'src/app/types/config.endpoint'
 
 @Injectable({
   providedIn: 'root',

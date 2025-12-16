@@ -12,7 +12,7 @@ import { UserService } from '../core'
 import { OauthURLSessionManagerService } from '../core/oauth-urlsession-manager/oauth-urlsession-manager.service'
 import { WINDOW } from '../cdk/window/window.service'
 import { TogglzService } from '../core/togglz/togglz.service'
-import { TogglzFlag } from '../core/togglz/togglz-flags.enum'
+import { TogglzFlag } from 'src/app/types/config.endpoint'
 
 @Injectable({
   providedIn: 'root',

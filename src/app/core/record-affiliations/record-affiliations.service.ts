@@ -301,6 +301,7 @@ export class RecordAffiliationService {
 
     // Optimistically update the shared affiliations observable so all consumers
     // see the featured change immediately.
+    // This prevents multiple panels from briefly showing as featured while we wait for the reload (PD-3859)
     if (this.lastEmittedValue && this.$affiliations) {
       this.lastEmittedValue.forEach((uiGroup) => {
         uiGroup.affiliationGroup?.forEach((group) => {

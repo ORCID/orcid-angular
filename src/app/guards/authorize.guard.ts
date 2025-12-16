@@ -19,7 +19,7 @@ import { OauthParameters } from '../types'
 import { OauthService } from '../core/oauth/oauth.service'
 import { FeatureLoggerService } from '../core/logging/feature-logger.service'
 import { AuthDecisionService } from '../core/auth-decision/auth-decision.service'
-import { TogglzFlag } from '../core/togglz/togglz-flags.enum'
+import { TogglzFlag } from 'src/app/types/config.endpoint'
 
 @Injectable({ providedIn: 'root' })
 export class AuthorizeGuard implements CanActivateChild {

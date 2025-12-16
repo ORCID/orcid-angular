@@ -17,6 +17,9 @@ import {
 import { WINDOW } from '../window'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
+import { TogglzService } from 'src/app/core/togglz/togglz.service'
+import { ConfigMessageKey } from 'src/app/types/config.endpoint'
+import { take } from 'rxjs/operators'
 
 export interface ReCaptchaConfig {
   theme?: 'dark' | 'light'
@@ -46,15 +49,16 @@ interface WindowWithCaptcha extends Window {
 export class RecaptchaDirective implements OnInit, ControlValueAccessor {
   @Output() captchaFail = new EventEmitter<boolean>()
   @Output() captchaLoaded = new EventEmitter<number>()
-  private onChange: (value: string) => void
-  private onTouched: (value: string) => void
+  private onChange: (value: string | null) => void
+  private onTouched: (value: string | null) => void
 
   constructor(
     @Inject(WINDOW) private window: WindowWithCaptcha,
     @Inject(LOCALE_ID) public locale: string,
     private ngZone: NgZone,
     private element: ElementRef,
-    private _errorHandler: ErrorHandlerService
+    private _errorHandler: ErrorHandlerService,
+    private _togglzService: TogglzService
   ) {}
 
   ngOnInit() {
@@ -64,21 +68,31 @@ export class RecaptchaDirective implements OnInit, ControlValueAccessor {
 
   registerReCaptchaCallback() {
     this.window.orcidReCaptchaOnLoad = () => {
-      const config = {
-        sitekey: runtimeEnvironment.GOOGLE_RECAPTCHA,
-        callback: (response: string) => {
-          this.ngZone.run(() => this.onSuccess(response))
-        },
+      this._togglzService
+        .getConfigurationOf(ConfigMessageKey.RECAPTCHA_WEB_KEY)
+        .pipe(take(1))
+        .subscribe({
+          next: (siteKey: string) => {
+            const config = {
+              sitekey: siteKey,
+              callback: (response: string) => {
+                this.ngZone.run(() => this.onSuccess(response))
+              },
 
-        'expired-callback': (response: string) => {
-          this.ngZone.run(() => this.onExpired())
-        },
-        'error-callback': () => {
-          this.ngZone.run(() => this.onCaptchaFail())
-        },
-      }
-      const id = this.render(this.element.nativeElement, config)
-      this.captchaLoaded.emit(id)
+              'expired-callback': (response: string) => {
+                this.ngZone.run(() => this.onExpired())
+              },
+              'error-callback': () => {
+                this.ngZone.run(() => this.onCaptchaFail())
+              },
+            }
+            const id = this.render(this.element.nativeElement, config)
+            this.captchaLoaded.emit(id)
+          },
+          error: () => {
+            this.ngZone.run(() => this.onCaptchaFail())
+          },
+        })
     }
   }
 
