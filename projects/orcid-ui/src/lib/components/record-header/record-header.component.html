@@ -10,7 +10,7 @@
   <!-- Names Section -->
   <section
     class="names-section"
-    *ngIf="!compactMode"
+    *ngIf="!compactMode && !hideTitle"
     [id]="'names'"
     role="region"
     [attr.aria-label]="regionNames"
@@ -73,7 +73,7 @@
     </div>
 
     <!-- Name Actions (Edit Button) -->
-    <div class="name-actions-area" *ngIf="!showIssue">
+    <div class="name-actions-area" *ngIf="!issueTitle">
       <button
         *ngIf="!loading && mainActionName"
         mat-icon-button
@@ -97,7 +97,7 @@
   </section>
 
   <!-- Issue Banner -->
-  <div class="issue-area" *ngIf="!loading && showIssue && issueTitle">
+  <div class="issue-area" *ngIf="!loading && issueTitle">
     <orcid-text-with-tooltip>
       <h1
         [ngClass]="{
@@ -110,7 +110,7 @@
     </orcid-text-with-tooltip>
   </div>
 
-  <mat-divider *ngIf="!compactMode || showIssue" class="divider"></mat-divider>
+  <mat-divider *ngIf="!compactMode || issueTitle" class="divider"></mat-divider>
 
   <!-- ID Section -->
   <section
@@ -120,7 +120,10 @@
     [attr.aria-label]="regionOrcidId"
   >
     <!-- Compact Title -->
-    <div class="compact-title-area" *ngIf="compactMode && (title || loading)">
+    <div
+      class="compact-title-area"
+      *ngIf="compactMode && (title || loading) && !hideTitle"
+    >
       <orcid-text-with-tooltip
         [text]="title"
         [loading]="loading"
@@ -199,7 +202,7 @@
     </div>
 
     <!-- Summary Actions / Toggle -->
-    <div class="summary-actions-area" *ngIf="!loading && title">
+    <div class="summary-actions-area" *ngIf="!loading && title && !hideTitle">
       <ng-container
         *ngIf="
           (compactMode && isDesktop && !expanded) ||

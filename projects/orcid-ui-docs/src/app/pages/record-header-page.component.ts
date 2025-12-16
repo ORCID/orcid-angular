@@ -38,15 +38,13 @@ export class RecordHeaderPageComponent {
     caption: 'Senior Researcher, Example University',
     primaryIdText: '0000-0001-2345-6789',
     secondaryIdText: 'https://orcid.org/0000-0001-2345-6789',
-    showSubtitle: true,
     showEditButton: true,
     canToggleExpanded: true,
     expanded: false,
     loading: false,
     regionNames: 'Names',
     regionOrcidId: 'Orcid iD',
-    issueBannerText: 'This record has been deactivated',
-    showIssue: false,
+    issueTitle: '',
   }
 
   get mainActionName(): string {

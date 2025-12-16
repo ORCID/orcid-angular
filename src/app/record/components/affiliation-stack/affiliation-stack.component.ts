@@ -267,14 +267,15 @@ export class AffiliationStackComponent implements OnInit, OnDestroy {
   }>()
 
   toggleFeatured(affiliation: Affiliation) {
-    const putCode = affiliation.featured ? '' : affiliation.putCode.value
     const wasFeatured = affiliation.featured
-    this.loadingFeatured[affiliation.putCode.value] = true
+    const togglingOn = !wasFeatured
     this._affiliationService
-      .updateFeatured(putCode)
+      .updateFeatured(affiliation, togglingOn)
       .pipe(
         finalize(() => {
-          this.loadingFeatured[affiliation.putCode.value] = false
+          this.affiliationStack.affiliations.forEach((item) => {
+            this.loadingFeatured[item.putCode.value] = false
+          })
         })
       )
       .subscribe({
