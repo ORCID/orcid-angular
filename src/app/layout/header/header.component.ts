@@ -21,7 +21,7 @@ import {
   ApplicationMenuItemBasic,
   MenuItemRequirement,
 } from 'src/app/types/menu.local'
-import { Config } from 'src/app/types/togglz.endpoint'
+import { Config } from 'src/app/types/config.endpoint'
 
 import { ApplicationRoutes } from '../../constants'
 import { menu } from './menu'
