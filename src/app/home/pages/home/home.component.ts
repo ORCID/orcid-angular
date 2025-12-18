@@ -4,7 +4,7 @@ import { WINDOW } from '../../../cdk/window'
 
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
-import { TogglzFlag } from 'src/app/core/togglz/togglz-flags.enum'
+import { TogglzFlag } from 'src/app/types/config.endpoint'
 import { switchMap, tap } from 'rxjs/operators'
 import { WordpressService } from 'src/app/core/wordpress/wordpress.service'
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'

@@ -16,7 +16,7 @@ import { TitleService } from './core/title-service/title.service'
 import { ZendeskService } from './core/zendesk/zendesk.service'
 import { ERROR_REPORT } from './errors'
 import { TogglzService } from './core/togglz/togglz.service'
-import { TogglzFlag } from './core/togglz/togglz-flags.enum'
+import { TogglzFlag } from './types/config.endpoint'
 import { NewRelicService } from './core/new-relic/new-relic.service'
 
 @Component({

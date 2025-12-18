@@ -10,7 +10,7 @@ import {
   shareReplay,
 } from 'rxjs/operators'
 import { TogglzService } from '../togglz/togglz.service'
-import { TogglzFlag } from '../togglz/togglz-flags.enum'
+import { TogglzFlag } from 'src/app/types/config.endpoint'
 import { isValidOrcidFormat } from 'src/app/constants'
 import { WINDOW } from 'src/app/cdk/window'
 

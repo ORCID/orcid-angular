@@ -21,7 +21,7 @@ import {
 import { TogglzService } from '../togglz/togglz.service'
 import { of, ReplaySubject } from 'rxjs'
 import { UserService } from '..'
-import { Config } from '../../types/config.endpoint'
+import { Config } from 'src/app/types/config.endpoint'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 

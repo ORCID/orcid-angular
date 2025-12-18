@@ -22,7 +22,7 @@ import { UserSession } from '../../types/session.local'
 import { UserService } from '../../core'
 import { TogglzService } from '../../core/togglz/togglz.service'
 import { of, ReplaySubject } from 'rxjs'
-import { Config } from '../../types/config.endpoint'
+import { Config } from 'src/app/types/config.endpoint'
 import { MatIconModule } from '@angular/material/icon'
 import { MatIconHarness } from '@angular/material/icon/testing'
 import {

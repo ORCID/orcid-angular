@@ -29,7 +29,7 @@ import { ModalWebsitesComponent } from '../modals/modal-websites/modal-websites.
 import { ActivatedRoute } from '@angular/router'
 import { RecordUtil } from 'src/app/shared/utils/record.util'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
-import { TogglzFlag } from 'src/app/core/togglz/togglz-flags.enum'
+import { TogglzFlag } from 'src/app/types/config.endpoint'
 
 @Component({
   selector: 'app-side-bar',

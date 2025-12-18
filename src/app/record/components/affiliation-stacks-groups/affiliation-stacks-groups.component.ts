@@ -5,7 +5,7 @@ import { first, takeUntil } from 'rxjs/operators'
 import { RecordAffiliationService } from 'src/app/core/record-affiliations/record-affiliations.service'
 import { RecordService } from 'src/app/core/record/record.service'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
-import { TogglzFlag } from 'src/app/core/togglz/togglz-flags.enum'
+import { TogglzFlag } from 'src/app/types/config.endpoint'
 import {
   Affiliation,
   AffiliationGroup,

@@ -15,7 +15,7 @@ import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { UserService } from 'src/app/core'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
-import { TogglzFlag } from 'src/app/core/togglz/togglz-flags.enum'
+import { TogglzFlag } from 'src/app/types/config.endpoint'
 import { ApplicationMenuItem, UserInfo } from 'src/app/types'
 import {
   ApplicationMenuItemBasic,

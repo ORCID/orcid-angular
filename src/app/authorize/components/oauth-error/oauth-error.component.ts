@@ -10,7 +10,7 @@ import { LegacyOauthRequestInfoForm as RequestInfoForm } from 'src/app/types/req
 import { UserSession } from 'src/app/types/session.local'
 import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
 import { JourneyType } from 'src/app/rum/journeys/types'
-import { TogglzFlag } from 'src/app/core/togglz/togglz-flags.enum'
+import { TogglzFlag } from 'src/app/types/config.endpoint'
 
 @Component({
   selector: 'app-oauth-error',

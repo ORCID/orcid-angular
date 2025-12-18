@@ -102,7 +102,7 @@ export class RecaptchaDirective implements OnInit, ControlValueAccessor {
               callback: (response: string) => {
                 this.ngZone.run(() => this.onSuccess(response))
               },
-              'expired-callback': (response: string) => {
+              'expired-callback': (_response: string) => {
                 this.ngZone.run(() => this.onExpired())
               },
               'error-callback': () => {
@@ -126,7 +126,7 @@ export class RecaptchaDirective implements OnInit, ControlValueAccessor {
       const id = this.render(this.element.nativeElement, config)
       this.renderId = id
       this.captchaLoaded.emit(id)
-    } catch (err) {
+    } catch (_err) {
       this.handleRenderError('render_exception')
     }
   }
@@ -139,7 +139,7 @@ export class RecaptchaDirective implements OnInit, ControlValueAccessor {
         this.renderId = id
         this.captchaLoaded.emit(id)
         return
-      } catch (_) {
+      } catch (_err) {
         // fall through
       }
     }
@@ -166,7 +166,7 @@ export class RecaptchaDirective implements OnInit, ControlValueAccessor {
     this._errorHandler.handleError(new Error(reason)).subscribe()
   }
 
-  private render(element: HTMLElement, config): number {
+  private render(element: HTMLElement, config: ReCaptchaConfig): number {
     return this.window.grecaptcha.render(element, config)
   }
 

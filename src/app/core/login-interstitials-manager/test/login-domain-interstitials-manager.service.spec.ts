@@ -13,7 +13,7 @@ import { LoginDomainInterstitialManagerService } from '../implementations/login-
 import { ShareEmailsDomainsDialogComponent } from 'src/app/cdk/interstitials/share-emails-domains/interstitial-dialog-extend/share-emails-domains-dialog.component'
 import { inject } from '@angular/core'
 import { WINDOW_PROVIDERS } from 'src/app/cdk/window'
-import { TogglzFlag } from '../../togglz/togglz-flags.enum'
+import { TogglzFlag } from 'src/app/types/config.endpoint'
 
 describe('LoginDomainInterstitialManagerService', () => {
   let service: LoginDomainInterstitialManagerService

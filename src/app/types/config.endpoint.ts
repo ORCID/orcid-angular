@@ -11,18 +11,19 @@ export const TogglzFlag = {
   OAUTH_DOMAINS_INTERSTITIAL: 'OAUTH_DOMAINS_INTERSTITIAL',
   LOGIN_AFFILIATION_INTERSTITIAL: 'LOGIN_AFFILIATION_INTERSTITIAL',
   OAUTH_AFFILIATION_INTERSTITIAL: 'OAUTH_AFFILIATION_INTERSTITIAL',
+  MAINTENANCE_MESSAGE: 'MAINTENANCE_MESSAGE',
   FEATURED_AFFILIATIONS: 'FEATURED_AFFILIATIONS',
 } as const
 
 export type TogglzFlag = (typeof TogglzFlag)[keyof typeof TogglzFlag]
 
 // Keys returned by config.json that are not Togglz flags.
-export const ConfigMessageKey = {   
+export const ConfigMessageKey = {
   RECAPTCHA_WEB_KEY: 'RECAPTCHA_WEB_KEY',
   MAINTENANCE_MESSAGE: 'MAINTENANCE_MESSAGE',
   SEARCH_BASE: 'SEARCH_BASE',
   PUB_BASE_URI: 'PUB_BASE_URI',
-  ABOUT_URI: 'ABOUT_URI'
+  ABOUT_URI: 'ABOUT_URI',
 } as const
 
 export type ConfigMessageKey =
