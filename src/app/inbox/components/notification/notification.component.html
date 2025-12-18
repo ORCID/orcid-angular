@@ -25,7 +25,7 @@
       <button
         mat-icon-button
         (click)="archive(); $event.stopPropagation()"
-        [ngClass]="{ hidden: archived }"
+        [ngClass]="{ hide: archived }"
         [attr.aria-label]="ariaLabelArchived"
         [matTooltip]="ariaLabelArchived"
       >
