@@ -17,8 +17,12 @@ import {
 import { WINDOW } from '../window'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
+import { TogglzService } from 'src/app/core/togglz/togglz.service'
+import { ConfigMessageKey } from 'src/app/types/config.endpoint'
+import { take } from 'rxjs/operators'
 
 export interface ReCaptchaConfig {
+  sitekey: string
   theme?: 'dark' | 'light'
   type?: 'audio' | 'image'
   size?: 'compact' | 'normal'
@@ -28,6 +32,7 @@ export interface ReCaptchaConfig {
 interface WindowWithCaptcha extends Window {
   grecaptcha: {
     render: (ElementRef, ReCaptchaConfig) => number
+    reset: (opt_widget_id?: number) => void
   }
   orcidReCaptchaOnLoad: () => void
 }
@@ -46,15 +51,19 @@ interface WindowWithCaptcha extends Window {
 export class RecaptchaDirective implements OnInit, ControlValueAccessor {
   @Output() captchaFail = new EventEmitter<boolean>()
   @Output() captchaLoaded = new EventEmitter<number>()
-  private onChange: (value: string) => void
-  private onTouched: (value: string) => void
+  private onChange: (value: string | null) => void
+  private onTouched: (value: string | null) => void
+  private renderId: number | null = null
+  private lastConfig: ReCaptchaConfig | null = null
+  private renderRetried = false
 
   constructor(
     @Inject(WINDOW) private window: WindowWithCaptcha,
     @Inject(LOCALE_ID) public locale: string,
     private ngZone: NgZone,
     private element: ElementRef,
-    private _errorHandler: ErrorHandlerService
+    private _errorHandler: ErrorHandlerService,
+    private _togglzService: TogglzService
   ) {}
 
   ngOnInit() {
@@ -64,28 +73,86 @@ export class RecaptchaDirective implements OnInit, ControlValueAccessor {
 
   registerReCaptchaCallback() {
     this.window.orcidReCaptchaOnLoad = () => {
-      const config = {
-        sitekey: runtimeEnvironment.GOOGLE_RECAPTCHA,
-        callback: (response: string) => {
-          this.ngZone.run(() => this.onSuccess(response))
-        },
+      this._togglzService
+        .getConfigurationOf(ConfigMessageKey.RECAPTCHA_WEB_KEY)
+        .pipe(take(1))
+        .subscribe({
+          next: (siteKey: string) => {
+            if (!siteKey) {
+              this.ngZone.run(() => this.onCaptchaFail('missing_sitekey'))
+              return
+            }
+            if (!this.window.grecaptcha || !this.window.grecaptcha.render) {
+              this.ngZone.run(() => this.onCaptchaFail('grecaptcha_not_ready'))
+              return
+            }
 
-        'expired-callback': (response: string) => {
-          this.ngZone.run(() => this.onExpired())
-        },
-        'error-callback': () => {
-          this.ngZone.run(() => this.onCaptchaFail())
-        },
-      }
-      const id = this.render(this.element.nativeElement, config)
-      this.captchaLoaded.emit(id)
+            if (this.renderId !== null) {
+              this.window.grecaptcha.reset(this.renderId)
+              this.captchaLoaded.emit(this.renderId)
+              return
+            }
+
+            const config: ReCaptchaConfig & {
+              callback: (response: string) => void
+              'expired-callback': (response: string) => void
+              'error-callback': () => void
+            } = {
+              sitekey: siteKey,
+              callback: (response: string) => {
+                this.ngZone.run(() => this.onSuccess(response))
+              },
+              'expired-callback': (_response: string) => {
+                this.ngZone.run(() => this.onExpired())
+              },
+              'error-callback': () => {
+                this.handleRenderError('recaptcha_error_callback')
+              },
+            }
+
+            this.lastConfig = config
+            this.renderRetried = false
+            this.renderCaptcha(config)
+          },
+          error: () => {
+            this.ngZone.run(() => this.onCaptchaFail('config_fetch_error'))
+          },
+        })
     }
+  }
+
+  private renderCaptcha(config: ReCaptchaConfig) {
+    try {
+      const id = this.render(this.element.nativeElement, config)
+      this.renderId = id
+      this.captchaLoaded.emit(id)
+    } catch (_err) {
+      this.handleRenderError('render_exception')
+    }
+  }
+
+  private handleRenderError(reason: string) {
+    if (!this.renderRetried && this.window.grecaptcha && this.lastConfig) {
+      this.renderRetried = true
+      try {
+        const id = this.render(this.element.nativeElement, this.lastConfig)
+        this.renderId = id
+        this.captchaLoaded.emit(id)
+        return
+      } catch (_err) {
+        // fall through
+      }
+    }
+    this.ngZone.run(() => this.onCaptchaFail(reason))
   }
 
   onExpired() {
     this.ngZone.run(() => {
       this.onChange(null)
       this.onTouched(null)
+      if (this.renderId !== null && this.window.grecaptcha) {
+        this.window.grecaptcha.reset(this.renderId)
+      }
     })
   }
 
@@ -94,12 +161,12 @@ export class RecaptchaDirective implements OnInit, ControlValueAccessor {
     this.onTouched(token)
   }
 
-  onCaptchaFail() {
+  onCaptchaFail(reason: string = 'captchaFail') {
     this.captchaFail.emit(true)
-    this._errorHandler.handleError(new Error('captchaFail')).subscribe()
+    this._errorHandler.handleError(new Error(reason)).subscribe()
   }
 
-  private render(element: HTMLElement, config): number {
+  private render(element: HTMLElement, config: ReCaptchaConfig): number {
     return this.window.grecaptcha.render(element, config)
   }
 

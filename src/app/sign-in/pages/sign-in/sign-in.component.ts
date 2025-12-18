@@ -19,7 +19,7 @@ import { FormSignInComponent } from '../../components/form-sign-in/form-sign-in.
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { ActivatedRoute, Router } from '@angular/router'
 import { OauthParameters } from 'src/app/types'
-import { TogglzFlag } from 'src/app/core/togglz/togglz-flags.enum'
+import { TogglzFlag } from 'src/app/types/config.endpoint'
 
 @Component({
   selector: 'app-sign-in',

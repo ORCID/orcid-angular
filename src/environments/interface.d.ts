@@ -10,7 +10,6 @@ export interface EnvironmentInterface {
   INFO_SITE: string
   GOOGLE_ANALYTICS_TESTING_MODE: boolean
   GOOGLE_TAG_MANAGER: string
-  GOOGLE_RECAPTCHA: string
   HELP_HERO_ID: string
   ZENDESK: string | null
   SHOW_TEST_WARNING_BANNER: boolean
