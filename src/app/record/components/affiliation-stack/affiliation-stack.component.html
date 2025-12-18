@@ -50,7 +50,11 @@
     <div panel-edit>
       <button
         mat-icon-button
-        *ngIf="isPreferred(affiliation) && !isPublicRecord"
+        *ngIf="
+          isPreferred(affiliation) &&
+          userIsSource(affiliation) &&
+          !isPublicRecord
+        "
         [matTooltip]="tooltipLabelEdit"
         [attr.aria-label]="
           type
