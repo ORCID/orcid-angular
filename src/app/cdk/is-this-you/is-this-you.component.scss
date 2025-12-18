@@ -15,7 +15,7 @@
   }
 }
 
-.fixed {
+.fixedClass {
   display: flex;
   justify-content: flex-end;
   flex-shrink: 0;
@@ -63,7 +63,7 @@ a:hover {
 
 :host.columns-8,
 :host.columns-4 {
-  .fixed {
+  .fixedClass {
     flex-direction: column;
   }
 }
