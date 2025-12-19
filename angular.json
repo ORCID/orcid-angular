@@ -127,11 +127,7 @@
               }
             ],
             "styles": [
-              {
-                "input": "src/assets/css/tailwind.css",
-                "bundleName": "tailwind",
-                "inject": true
-              },
+              "src/assets/css/tailwind.css",
               "src/assets/scss/noto-sans.scss",
               "src/assets/scss/material.scss",
               "projects/orcid-tokens/tokens.css",
