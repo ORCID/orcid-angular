@@ -105,6 +105,25 @@
 
       <mat-icon
         matSuffix
+        [matTooltip]="invalidISBNTooltip"
+        *ngIf="
+          externalIdForm.get('externalIdentifierId').hasError('invalidISBN')
+        "
+        >warning</mat-icon
+      >
+
+      <mat-hint
+        *ngIf="
+          externalIdForm.get('externalIdentifierId').hasError('invalidISBN')
+        "
+      >
+        <ng-container i18n="@@works.invalidISBN">
+          We are unable to validate this identifier. Please check it is correct before saving.
+        </ng-container>
+      </mat-hint>
+
+      <mat-icon
+        matSuffix
         [matTooltip]="unResolvedTooltip"
         *ngIf="
           externalIdForm.get('externalIdentifierId').hasError('unResolved')
@@ -125,7 +144,8 @@
 
       <mat-hint
         *ngIf="
-          !externalIdForm.get('externalIdentifierId').hasError('unResolved')
+          !externalIdForm.get('externalIdentifierId').hasError('unResolved') &&
+          !externalIdForm.get('externalIdentifierId').hasError('invalidISBN')
         "
       >
         <ng-container i18n="@@works.identifierAssociated"

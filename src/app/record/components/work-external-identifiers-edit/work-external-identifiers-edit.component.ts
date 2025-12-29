@@ -40,6 +40,8 @@ export class WorkExternalIdentifiersEditComponent
   unResolvedTooltip = $localize`:@@works.unResolved:We couldn't find a resource that matches the identifier you entered.
   Please check the value or enter a valid link to the resource.`
 
+  invalidISBNTooltip = $localize`:@@works.invalidISBN:We are unable to validate this identifier. Please check it is correct before saving.`
+
   workRelationships: WorkRelationships[] = Object.keys(
     WorkRelationships
   ) as WorkRelationships[]
