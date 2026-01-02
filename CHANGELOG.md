@@ -1,3 +1,31 @@
+## v2.127.4 - 2025-12-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.127.3...v2.127.4)
+
+## v2.127.3 - 2025-12-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.127.2...v2.127.3)
+
+- [#2705](https://github.com/ORCID/orcid-angular/pull/2705): PD-3822
+
+## v2.127.2 - 2025-12-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.127.1...v2.127.2)
+
+## v2.127.1 - 2025-12-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.127.0...v2.127.1)
+
+## v2.127.0 - 2025-12-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.126.11...v2.127.0)
+
+## v2.126.11 - 2025-12-17
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.126.10...v2.126.11)
+
+- [#2695](https://github.com/ORCID/orcid-angular/pull/2695): Transifex: update properties
+
 ## v2.126.10 - 2025-12-15
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.126.9...v2.126.10)

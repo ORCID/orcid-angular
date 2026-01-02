@@ -37,7 +37,7 @@ import { GoogleTagManagerService } from '../../../core/google-tag-manager/google
 import { Title } from '@angular/platform-browser'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { OauthURLSessionManagerService } from 'src/app/core/oauth-urlsession-manager/oauth-urlsession-manager.service'
-import { TogglzFlag } from 'src/app/core/togglz/togglz-flags.enum'
+import { TogglzFlag } from 'src/app/types/config.endpoint'
 
 @Component({
   selector: 'app-form-authorize',

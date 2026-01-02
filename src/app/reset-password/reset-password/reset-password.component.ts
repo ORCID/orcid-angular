@@ -19,7 +19,7 @@ import {
 import { OauthURLSessionManagerService } from 'src/app/core/oauth-urlsession-manager/oauth-urlsession-manager.service'
 import { PasswordRecoveryService } from 'src/app/core/password-recovery/password-recovery.service'
 import { RegisterService } from 'src/app/core/register/register.service'
-import { TogglzFlag } from 'src/app/core/togglz/togglz-flags.enum'
+import { TogglzFlag } from 'src/app/types/config.endpoint'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { OrcidValidators } from 'src/app/validators'
 

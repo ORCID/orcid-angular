@@ -163,7 +163,7 @@ $gutter-width: 16px !default;
         @include grid-classes('m', $i, $perc);
         $i: $i + 1;
       }
-      .m-auto {
+      .w-auto {
         width: auto;
       }
     }

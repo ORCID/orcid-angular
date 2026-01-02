@@ -14,7 +14,7 @@ import {
   BaseInterstitialDialogOutput,
 } from './dialog-interface'
 import { TogglzService } from '../../togglz/togglz.service'
-import { TogglzFlag } from '../../togglz/togglz-flags.enum'
+import { TogglzFlag } from 'src/app/types/config.endpoint'
 
 export abstract class LoginBaseInterstitialManagerService<
   TInput extends BaseInterstitialDialogInput,

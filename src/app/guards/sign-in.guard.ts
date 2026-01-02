@@ -13,7 +13,7 @@ import { TogglzService } from '../core/togglz/togglz.service'
 import { OauthParameters } from '../types'
 import { FeatureLoggerService } from '../core/logging/feature-logger.service'
 import { AuthDecisionService } from '../core/auth-decision/auth-decision.service'
-import { TogglzFlag } from '../core/togglz/togglz-flags.enum'
+import { TogglzFlag } from '../types/config.endpoint'
 
 @Injectable({
   providedIn: 'root',

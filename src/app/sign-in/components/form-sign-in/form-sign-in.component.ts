@@ -42,7 +42,7 @@ import { GoogleTagManagerService } from '../../../core/google-tag-manager/google
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { OauthURLSessionManagerService } from 'src/app/core/oauth-urlsession-manager/oauth-urlsession-manager.service'
-import { TogglzFlag } from 'src/app/core/togglz/togglz-flags.enum'
+import { TogglzFlag } from 'src/app/types/config.endpoint'
 
 @Component({
   selector: 'app-form-sign-in',
