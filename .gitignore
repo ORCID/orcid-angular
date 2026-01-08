@@ -12,6 +12,7 @@ src/locale/messages.xlf
 
 # dependencies
 /node_modules
+/.yarn-cache
 
 # have a persistent yarn cache in a single 'code' volume in a docker container
 /yarn_cache
