@@ -253,10 +253,7 @@ export class WorkFormComponent implements OnInit {
       if (externalIdentifierType === 'isbn') {
         if (!isValidISBN(control.value)) {
           return of({
-            validFormat: true,
-            resolved: false,
-            attemptedResolution: false,
-            generatedUrl: null,
+            invalidISBN: true,
           })
         }
       }
@@ -304,6 +301,7 @@ export class WorkFormComponent implements OnInit {
                 validFormat: true,
               }
             }
+            return null
           })
         )
     }
@@ -617,14 +615,15 @@ export class WorkFormComponent implements OnInit {
       ).every((workIdentifiersErrorList) => {
         return (
           // Either workIdentifiers is null
-          // OR it only contains allow error like unResolved or validFormat
+          // OR it only contains allow error like unResolved, invalidISBN
           !workIdentifiersErrorList ||
           (workIdentifiersErrorList &&
             Object.keys(workIdentifiersErrorList).length === 1 &&
             workIdentifiersErrorList.externalIdentifierId &&
             Object.keys(workIdentifiersErrorList.externalIdentifierId)
               .length === 1 &&
-            workIdentifiersErrorList.externalIdentifierId.unResolved)
+            (workIdentifiersErrorList.externalIdentifierId.unResolved ||
+              workIdentifiersErrorList.externalIdentifierId.invalidISBN))
         )
       })
     } else {
