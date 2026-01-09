@@ -115,8 +115,20 @@ function saveJsonAsXlf(json, name) {
           delete fileNode.$['target-language']
         }
       }
-      const builder = new Builder()
-      const xml = builder.buildObject(json)
+      // Build xml then normalize the header to match `tx pull` formatting exactly
+      const builder = new Builder({ xmldec: { version: '1.0' } })
+      let xml = builder.buildObject(json)
+      // Force xliff root tag + attribute order like tx pull
+      xml = xml.replace(
+        /<xliff[^>]*>/,
+        '<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">'
+      )
+      // Force xml declaration like tx pull (and keep <xliff> on same line)
+      xml = xml.replace(/^<\?xml[^>]*\?>/, '<?xml version="1.0" ?>')
+      xml = xml.replace(
+        /^<\?xml version="1\.0" \?>\s*\n\s*<xliff/,
+        '<?xml version="1.0" ?><xliff'
+      )
       fs.writeFile(
         './src/locale/messages.' + name + '.xlf',
         xml,
@@ -324,17 +336,27 @@ function setTarget(element, value) {
   if (element.segment) {
     element.segment[0].target = [value]
   } else {
-    // XLIFF 1.2: add state/approved hints for Transifex
-    element.target = [
-      {
-        _: value,
-        $: { state: 'translated' },
-      },
-    ]
-    if (element.$) {
-      element.$.approved = 'yes'
-    }
+    // Match tx pull format: plain <target>text</target> and keep it right after <source>
+    element.target = [value]
+    reorderXlf12TransUnit(element)
   }
+}
+
+function reorderXlf12TransUnit(element) {
+  // xml2js Builder keeps object key insertion order; tx pull expects <target> right after <source>
+  // Order: $ attrs, source, target, then everything else as-is (context-group(s), note(s), etc.)
+  const ordered: any = {}
+  if (element.$) ordered.$ = element.$
+  if (element.source) ordered.source = element.source
+  if (element.target) ordered.target = element.target
+
+  Object.keys(element).forEach((k) => {
+    if (k === '$' || k === 'source' || k === 'target') return
+    ordered[k] = element[k]
+  })
+
+  Object.keys(element).forEach((k) => delete element[k])
+  Object.assign(element, ordered)
 }
 
 function getTarget(element) {

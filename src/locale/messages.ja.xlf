@@ -1247,8 +1247,7 @@
       </trans-unit>
       <trans-unit id="account.copyTheCodeBelow" datatype="html" resname="account.copyTheCodeBelow">
         <source>Copy the code below and paste it into your personal website.</source>
-        <target>下記のコードをコピーして個人ウェブサイトに貼り付けます。
-</target>
+        <target>下記のコードをコピーして個人ウェブサイトに貼り付けます。\n</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-sharing-html-code/settings-sharing-html-code.component.html</context>
           <context context-type="linenumber">2,4</context>
@@ -2084,6 +2083,7 @@
       </trans-unit>
       <trans-unit id="authorize.youAreCurrentlySignin" datatype="html" resname="authorize.youAreCurrentlySignin">
         <source>You are currently signed in as:</source>
+        <target>以下のものとして現在サインインしています：</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.html</context>
           <context context-type="linenumber">21,23</context>
@@ -4751,7 +4751,7 @@
       </trans-unit>
       <trans-unit id="side-bar.ariaLabelUrl" datatype="html" resname="side-bar.ariaLabelUrl">
         <source>(Opens in a new tab)</source>
-        <target> (新しいタブが開きます)</target>
+        <target>(新しいタブが開きます)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-person-identifiers/modal-person-identifiers.component.ts</context>
           <context context-type="linenumber">28</context>
@@ -5028,7 +5028,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">44</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="record.manageYourWebsite" datatype="html" resname="record.manageYourWebsite">
         <source>Manage your websites &amp; social links</source>
@@ -5037,7 +5037,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">45</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="record.labelManageYourKeyword" datatype="html" resname="record.labelManageYourKeyword">
         <source>Manage your keywords</source>
@@ -5046,7 +5046,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">46</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="record.labelManageYourCountries" datatype="html" resname="record.labelManageYourCountries">
         <source>Manage your countries</source>
@@ -5055,7 +5055,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">47</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="record.labelManageYourPersonalIds" datatype="html" resname="record.labelManageYourPersonalIds">
         <source>Manage your personalIds</source>
@@ -5064,7 +5064,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">48</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="shared.pleaseReviewInvalidForm" datatype="html" resname="shared.pleaseReviewInvalidForm">
         <source>Please review the form and fix the issues before saving</source>
@@ -9168,6 +9168,7 @@
       </trans-unit>
       <trans-unit id="common.js.domain.warn.warning_1" datatype="html" resname="common.js.domain.warn.warning_1">
         <source>Warning!</source>
+        <target>警告!</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/environment-banner/environment-banner/environment-banner.component.html</context>
           <context context-type="linenumber">7</context>
@@ -9183,6 +9184,7 @@
       </trans-unit>
       <trans-unit id="common.js.domain.warn.is_the_official" datatype="html" resname="common.js.domain.warn.is_the_official">
         <source>is the official website. Sandbox only sends email messages to</source>
+        <target>は公式 Web サイトです。Sandbox は、電子メール・メッセージを</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/environment-banner/environment-banner/environment-banner.component.html</context>
           <context context-type="linenumber">19,21</context>
@@ -9198,6 +9200,7 @@
       </trans-unit>
       <trans-unit id="common.js.domain.warn.email_addresses" datatype="html" resname="common.js.domain.warn.email_addresses">
         <source>email addresses, see Sandbox FAQ for</source>
+        <target>電子メール・アドレスのみに送信します。詳細については、</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/environment-banner/environment-banner/environment-banner.component.html</context>
           <context context-type="linenumber">30</context>
@@ -9361,7 +9364,7 @@
       </trans-unit>
       <trans-unit id="home.more_news" datatype="html" resname="home.more_news">
         <source>MORE NEWS</source>
-        <target>その他のニュース</target>
+        <target>過去のニュース</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/components/news/news.component.html</context>
           <context context-type="linenumber">16,18</context>
@@ -9398,6 +9401,7 @@
       </trans-unit>
       <trans-unit id="home.distinguish_yourself" datatype="html" resname="home.distinguish_yourself">
         <source>Distinguish yourself in</source>
+        <target>自分を他の人と区別するには</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/pages/home/home.component.html</context>
           <context context-type="linenumber">26,28</context>
@@ -9406,6 +9410,7 @@
       </trans-unit>
       <trans-unit id="home.three_easy" datatype="html" resname="home.three_easy">
         <source>three easy steps</source>
+        <target>3 ステップで&lt;</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/pages/home/home.component.html</context>
           <context context-type="linenumber">29,30</context>
@@ -9454,6 +9459,7 @@
       </trans-unit>
       <trans-unit id="home.register_now" datatype="html" resname="home.register_now">
         <source>register now!</source>
+        <target>いますぐ登録しましょう!</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/pages/home/home.component.html</context>
           <context context-type="linenumber">84,86</context>
@@ -9770,7 +9776,7 @@
       </trans-unit>
       <trans-unit id="inbox.funding" datatype="html" resname="inbox.funding">
         <source>Funding</source>
-        <target>ファンディング</target>
+        <target>資金調達</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/inbox/components/notification-permission/notification-permission.component.ts</context>
           <context context-type="linenumber">56</context>
@@ -9786,7 +9792,7 @@
       </trans-unit>
       <trans-unit id="inbox.invitedPosition" datatype="html" resname="inbox.invitedPosition">
         <source>Invited Position</source>
-        <target>招待ポジション</target>
+        <target>招待されたポジション</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/inbox/components/notification-permission/notification-permission.component.ts</context>
           <context context-type="linenumber">58</context>
@@ -9946,7 +9952,7 @@
       </trans-unit>
       <trans-unit id="inbox.newItemAdded" datatype="html" resname="inbox.newItemAdded">
         <source>Added</source>
-        <target>追加されました</target>
+        <target>追加済み</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/inbox/components/notification-your-record-amended/notification-your-record-amended.component.ts</context>
           <context context-type="linenumber">45</context>
@@ -9982,7 +9988,7 @@
       </trans-unit>
       <trans-unit id="inbox.otherUpdate" datatype="html" resname="inbox.otherUpdate">
         <source>Other</source>
-        <target>その他のアウトプット</target>
+        <target>その他</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/inbox/components/notification-your-record-amended/notification-your-record-amended.component.ts</context>
           <context context-type="linenumber">51</context>
@@ -10478,7 +10484,7 @@
       </trans-unit>
       <trans-unit id="layout.ariaLabelConnectingResearchers" datatype="html" resname="layout.ariaLabelConnectingResearchers">
         <source>Connecting research and researchers</source>
-        <target>研究と研究者を結び付ける</target>
+        <target>研究と研究者をつなぐプラットフォーム</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/header/header.component.ts</context>
           <context context-type="linenumber">55</context>
@@ -10526,7 +10532,7 @@
       </trans-unit>
       <trans-unit id="public-layout.membership" datatype="html" resname="public-layout.membership">
         <source>Membership</source>
-        <target>メンバーシップ</target>
+        <target>会員制度</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/header/menu.ts</context>
           <context context-type="linenumber">15</context>
@@ -10554,7 +10560,7 @@
       </trans-unit>
       <trans-unit id="public-layout.resources" datatype="html" resname="public-layout.resources">
         <source>Resources</source>
-        <target>研究を行う上で必要な諸要素</target>
+        <target>リソース</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/header/menu.ts</context>
           <context context-type="linenumber">25</context>
@@ -14242,6 +14248,7 @@
       </trans-unit>
       <trans-unit id="works.invalidISBN" datatype="html" resname="works.invalidISBN">
         <source>We are unable to validate this identifier. Please check it is correct before saving.</source>
+        <target>We are unable to validate this identifier. Please check it is correct before saving.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
           <context context-type="linenumber">120,123</context>
@@ -14320,7 +14327,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="works.onlyIdentifierTypesFundedBy" datatype="html" resname="works.onlyIdentifierTypesFundedBy">
-        <source>Only identifier types &quot;grant number&quot;, &quot;doi&quot;, &quot;uri&quot; or &quot;proposal id&quot; are allowed when using &quot;funded-by&quot; identifiers</source>
+        <source>Only identifier types "grant number", "doi", "uri" or "proposal id" are allowed when using "funded-by" identifiers</source>
         <target>「資金提供者」の識別子を使用する場合は、識別子タイプ「許可番号」、「doi」、「uri」、または「プロポーザルID」のみが許可されます。</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
@@ -14328,7 +14335,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="works.atLestOneSelfIdRequired" datatype="html" resname="works.atLestOneSelfIdRequired">
-        <source>At least one &quot;self&quot; identifier is required when using &quot;version-of&quot; identifiers</source>
+        <source>At least one "self" identifier is required when using "version-of" identifiers</source>
         <target>「バージョン」の識別子を使用する場合は、少なくとも1つの「自分」の識別子が必要です。</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
@@ -15189,8 +15196,7 @@
       </trans-unit>
       <trans-unit id="works.identifiers" datatype="html" resname="works.identifiers">
         <source>Identifiers</source>
-        <target>
-識別子</target>
+        <target>\n識別子</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-modal/work-modal.component.html</context>
           <context context-type="linenumber">17,19</context>
@@ -15874,7 +15880,7 @@
       </trans-unit>
       <trans-unit id="register.passwordCantBeEmail" datatype="html" resname="register.passwordCantBeEmail">
         <source>Password must not be the same as your email address</source>
-        <target>パスワードにはメールアドレスと同じものは使用できません</target>
+        <target>メールアドレスと同じパスワードはご利用できません</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
           <context context-type="linenumber">105,107</context>
@@ -18250,7 +18256,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.orcidAccountHasBeenDeprecated" datatype="html" resname="ngOrcid.signin.orcidAccountHasBeenDeprecated">
         <source>This ORCID account has been deprecated. The active account is</source>
-        <target>このORCIDアカウントは廃止されました。アクティブなアカウントはこちらです: </target>
+        <target>このORCIDアカウントは廃止されました。アクティブなアカウントはこちらです:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/errors/print-errors/print-errors.component.html</context>
           <context context-type="linenumber">58,59</context>
@@ -18438,7 +18444,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.institutionalAccount" datatype="html" resname="ngOrcid.signin.institutionalAccount">
         <source>Access through your institution</source>
-        <target>お客様の機関からのアクセス</target>
+        <target>機関からのアクセス</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/social/social.component.ts</context>
           <context context-type="linenumber">18</context>
@@ -19190,7 +19196,7 @@
       </trans-unit>
       <trans-unit id="works.paper" datatype="html" resname="works.paper">
         <source>Conference paper</source>
-        <target>会議発表論文 </target>
+        <target>会議発表論文</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/types/works.endpoint.ts</context>
           <context context-type="linenumber">96</context>
@@ -19310,7 +19316,7 @@
       </trans-unit>
       <trans-unit id="works.onlineResource" datatype="html" resname="works.onlineResource">
         <source>Interactive resource</source>
-        <target>インタラクティブリソース </target>
+        <target>インタラクティブリソース</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/types/works.endpoint.ts</context>
           <context context-type="linenumber">111</context>

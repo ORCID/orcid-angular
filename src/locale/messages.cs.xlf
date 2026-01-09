@@ -1279,7 +1279,7 @@
       </trans-unit>
       <trans-unit id="account.downloadQR" datatype="html" resname="account.downloadQR">
         <source>Download your ORCID iD QR code and display it on posters, presentations, stickers, business cards - anywhere you want your ORCID iD to be found!</source>
-        <target>Stáhněte si QR kód svého ORCID iD a dejte si ho do prezentací, na plakáty, samolepky nebo vizitky – kamkoliv, kde má být k dispozici vaše ORCID iD! </target>
+        <target>Stáhněte si QR kód svého ORCID iD a dejte si ho do prezentací, na plakáty, samolepky nebo vizitky – kamkoliv, kde má být k dispozici vaše ORCID iD!</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-sharing-qr-code/settings-sharing-qr-code.component.html</context>
           <context context-type="linenumber">9,12</context>
@@ -1383,6 +1383,7 @@
       </trans-unit>
       <trans-unit id="register.password" datatype="html" resname="register.password">
         <source>Password</source>
+        <target>Heslo</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
           <context context-type="linenumber">83,84</context>
@@ -1462,6 +1463,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.noDevice1" datatype="html" resname="ngOrcid.signin.2fa.noDevice1">
         <source>Don't have your device?</source>
+        <target>Nemáte mobilního zařízení?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
           <context context-type="linenumber">206</context>
@@ -1481,6 +1483,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.recoveryCode" datatype="html" resname="ngOrcid.signin.2fa.recoveryCode">
         <source>Recovery code</source>
+        <target>Obnovující kód</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
           <context context-type="linenumber">226,228</context>
@@ -1492,6 +1495,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.noDevice2" datatype="html" resname="ngOrcid.signin.2fa.noDevice2">
         <source>Enter a recovery code</source>
+        <target>Zadejte obnovující kód</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
           <context context-type="linenumber">255</context>
@@ -1611,7 +1615,7 @@
       </trans-unit>
       <trans-unit id="authorize.accountSettings" datatype="html" resname="authorize.accountSettings">
         <source>account settings.</source>
-        <target>nastavení svého účtu.</target>
+        <target>nastavení účtu.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
           <context context-type="linenumber">384</context>
@@ -3239,7 +3243,7 @@
       </trans-unit>
       <trans-unit id="shared.partOf" datatype="html" resname="shared.partOf">
         <source>Part of</source>
-        <target>Je součástí</target>
+        <target>Část</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panel-data-line/panel-data-line.component.html</context>
           <context context-type="linenumber">11</context>
@@ -5024,16 +5028,16 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">44</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="record.manageYourWebsite" datatype="html" resname="record.manageYourWebsite">
         <source>Manage your websites &amp; social links</source>
-        <target>Spravovat odkazy na webové stránky a sociální sítě</target>
+        <target>Spravovat webové stránky a odkazy na sociální sítě</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">45</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="record.labelManageYourKeyword" datatype="html" resname="record.labelManageYourKeyword">
         <source>Manage your keywords</source>
@@ -5042,7 +5046,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">46</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="record.labelManageYourCountries" datatype="html" resname="record.labelManageYourCountries">
         <source>Manage your countries</source>
@@ -5051,7 +5055,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">47</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="record.labelManageYourPersonalIds" datatype="html" resname="record.labelManageYourPersonalIds">
         <source>Manage your personalIds</source>
@@ -5060,7 +5064,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">48</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="shared.pleaseReviewInvalidForm" datatype="html" resname="shared.pleaseReviewInvalidForm">
         <source>Please review the form and fix the issues before saving</source>
@@ -9164,6 +9168,7 @@
       </trans-unit>
       <trans-unit id="common.js.domain.warn.warning_1" datatype="html" resname="common.js.domain.warn.warning_1">
         <source>Warning!</source>
+        <target>Varování!</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/environment-banner/environment-banner/environment-banner.component.html</context>
           <context context-type="linenumber">7</context>
@@ -9179,6 +9184,7 @@
       </trans-unit>
       <trans-unit id="common.js.domain.warn.is_the_official" datatype="html" resname="common.js.domain.warn.is_the_official">
         <source>is the official website. Sandbox only sends email messages to</source>
+        <target>. Sandbox posílá e-mailové zprávy na adresu:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/environment-banner/environment-banner/environment-banner.component.html</context>
           <context context-type="linenumber">19,21</context>
@@ -9194,6 +9200,7 @@
       </trans-unit>
       <trans-unit id="common.js.domain.warn.email_addresses" datatype="html" resname="common.js.domain.warn.email_addresses">
         <source>email addresses, see Sandbox FAQ for</source>
+        <target>. Více informací najdete v</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/environment-banner/environment-banner/environment-banner.component.html</context>
           <context context-type="linenumber">30</context>
@@ -9357,7 +9364,7 @@
       </trans-unit>
       <trans-unit id="home.more_news" datatype="html" resname="home.more_news">
         <source>MORE NEWS</source>
-        <target>VÍCE NOVINEK</target>
+        <target>DALŠÍ NOVINKY</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/components/news/news.component.html</context>
           <context context-type="linenumber">16,18</context>
@@ -9394,6 +9401,7 @@
       </trans-unit>
       <trans-unit id="home.distinguish_yourself" datatype="html" resname="home.distinguish_yourself">
         <source>Distinguish yourself in</source>
+        <target>Odlište se</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/pages/home/home.component.html</context>
           <context context-type="linenumber">26,28</context>
@@ -9402,6 +9410,7 @@
       </trans-unit>
       <trans-unit id="home.three_easy" datatype="html" resname="home.three_easy">
         <source>three easy steps</source>
+        <target>ve třech jednoduchých krocích</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/pages/home/home.component.html</context>
           <context context-type="linenumber">29,30</context>
@@ -9434,6 +9443,7 @@
       </trans-unit>
       <trans-unit id="home.register" datatype="html" resname="home.register">
         <source>REGISTER</source>
+        <target>ZAREGISTRUJTE SE</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/pages/home/home.component.html</context>
           <context context-type="linenumber">69,71</context>
@@ -9449,6 +9459,7 @@
       </trans-unit>
       <trans-unit id="home.register_now" datatype="html" resname="home.register_now">
         <source>register now!</source>
+        <target>zaregistrujte se teď!</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/pages/home/home.component.html</context>
           <context context-type="linenumber">84,86</context>
@@ -9781,7 +9792,7 @@
       </trans-unit>
       <trans-unit id="inbox.invitedPosition" datatype="html" resname="inbox.invitedPosition">
         <source>Invited Position</source>
-        <target>Pozvaná pozice</target>
+        <target>Vyzvaná pozice</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/inbox/components/notification-permission/notification-permission.component.ts</context>
           <context context-type="linenumber">58</context>
@@ -9877,7 +9888,7 @@
       </trans-unit>
       <trans-unit id="inbox.service" datatype="html" resname="inbox.service">
         <source>Service</source>
-        <target>Servis</target>
+        <target>Služba</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/inbox/components/notification-permission/notification-permission.component.ts</context>
           <context context-type="linenumber">70</context>
@@ -9977,7 +9988,7 @@
       </trans-unit>
       <trans-unit id="inbox.otherUpdate" datatype="html" resname="inbox.otherUpdate">
         <source>Other</source>
-        <target>Další výstup</target>
+        <target>Jiné</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/inbox/components/notification-your-record-amended/notification-your-record-amended.component.ts</context>
           <context context-type="linenumber">51</context>
@@ -10109,6 +10120,7 @@
       </trans-unit>
       <trans-unit id="inbox.archiveSelected" datatype="html" resname="inbox.archiveSelected">
         <source>Archive selected</source>
+        <target>archiv vybrán</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/inbox/components/notifications/notifications.component.html</context>
           <context context-type="linenumber">32</context>
@@ -10116,6 +10128,7 @@
       </trans-unit>
       <trans-unit id="inbox.hideArchived" datatype="html" resname="inbox.hideArchived">
         <source>Hide archived</source>
+        <target>skrýt archivované</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/inbox/components/notifications/notifications.component.html</context>
           <context context-type="linenumber">38</context>
@@ -10799,6 +10812,7 @@
       </trans-unit>
       <trans-unit id="linking.title.1" datatype="html" resname="linking.title.1">
         <source>Link your</source>
+        <target>Propojte svůj účet</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/link-account/pages/link-account/link-account.component.html</context>
           <context context-type="linenumber">21,23</context>
@@ -10814,6 +10828,7 @@
       </trans-unit>
       <trans-unit id="linking.signed" datatype="html" resname="linking.signed">
         <source>You are signed into</source>
+        <target>jste přihlášeni do</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/link-account/pages/link-account/link-account.component.html</context>
           <context context-type="linenumber">28,30</context>
@@ -10869,7 +10884,7 @@
       </trans-unit>
       <trans-unit id="linking.button.2" datatype="html" resname="linking.button.2">
         <source>account</source>
-        <target>účtem</target>
+        <target>účet</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/link-account/pages/link-account/link-account.component.html</context>
           <context context-type="linenumber">96,98</context>
@@ -10897,6 +10912,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.registerNow" datatype="html" resname="ngOrcid.signin.registerNow">
         <source>Register now</source>
+        <target>Získejte svůj ORCID iD</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/link-account/pages/link-account/link-account.component.html</context>
           <context context-type="linenumber">121,123</context>
@@ -11044,6 +11060,7 @@
       </trans-unit>
       <trans-unit id="check_password_modal.password" datatype="html" resname="check_password_modal.password">
         <source>Password</source>
+        <target>Heslo</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">34</context>
@@ -11123,6 +11140,7 @@
       </trans-unit>
       <trans-unit id="orcid.frontend.reset.password.email_success_3" datatype="html" resname="orcid.frontend.reset.password.email_success_3">
         <source>If you do not receive a message within 10 minutes, please check your spam folder. If you still do not see a message, then</source>
+        <target>Pokud neobdržíte zprávu během 10 minut, prosím zkontrolujte složku spamu. Pokud stále zprávu nevidíte, pak</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">117,119</context>
@@ -12742,7 +12760,7 @@
       </trans-unit>
       <trans-unit id="peerReview.view" datatype="html" resname="peerReview.view">
         <source>View</source>
-        <target>Zobrazit</target>
+        <target>Prohlížet</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/peer-review-stack/peer-review-stack.component.html</context>
           <context context-type="linenumber">100,102</context>
@@ -14230,6 +14248,7 @@
       </trans-unit>
       <trans-unit id="works.invalidISBN" datatype="html" resname="works.invalidISBN">
         <source>We are unable to validate this identifier. Please check it is correct before saving.</source>
+        <target>We are unable to validate this identifier. Please check it is correct before saving.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
           <context context-type="linenumber">120,123</context>
@@ -14308,7 +14327,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="works.onlyIdentifierTypesFundedBy" datatype="html" resname="works.onlyIdentifierTypesFundedBy">
-        <source>Only identifier types &quot;grant number&quot;, &quot;doi&quot;, &quot;uri&quot; or &quot;proposal id&quot; are allowed when using &quot;funded-by&quot; identifiers</source>
+        <source>Only identifier types "grant number", "doi", "uri" or "proposal id" are allowed when using "funded-by" identifiers</source>
         <target>Při použití identifikátorů typu „financováno“ jsou povoleny pouze typy identifikátorů „číslo grantu“, „doi“, „uri“ nebo „id nabídky“.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
@@ -14316,7 +14335,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="works.atLestOneSelfIdRequired" datatype="html" resname="works.atLestOneSelfIdRequired">
-        <source>At least one &quot;self&quot; identifier is required when using &quot;version-of&quot; identifiers</source>
+        <source>At least one "self" identifier is required when using "version-of" identifiers</source>
         <target>Alespoň jeden „vlastní“ identifikátor je vyžadován, při použití identifikátorů „verze“</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
@@ -14417,7 +14436,7 @@
       </trans-unit>
       <trans-unit id="shared.works" datatype="html" resname="shared.works">
         <source>Works</source>
-        <target>Práce</target>
+        <target>Díla</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-featured-stack-group/work-featured-stack-group.component.html</context>
           <context context-type="linenumber">40</context>
@@ -14893,7 +14912,7 @@
       </trans-unit>
       <trans-unit id="works.urlMaxLength" datatype="html" resname="works.urlMaxLength">
         <source>Must be less than 2000 characters</source>
-        <target>Musí být kratší než 2 000 znaků</target>
+        <target>Musí být kratší než 2 000 znaků</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-form/work-form/work-form.component.html</context>
           <context context-type="linenumber">455,457</context>
@@ -15733,6 +15752,7 @@
       </trans-unit>
       <trans-unit id="register.additionalEmailMatchPrimary" datatype="html" resname="register.additionalEmailMatchPrimary">
         <source>Additional email cannot match primary email</source>
+        <target>Další e-mail nesedí s hlavním e-mailem.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/backend-error/backend-error.component.html</context>
           <context context-type="linenumber">25,27</context>
@@ -15748,6 +15768,7 @@
       </trans-unit>
       <trans-unit id="register.recaptchaRequired" datatype="html" resname="register.recaptchaRequired">
         <source>Please check the recaptcha box</source>
+        <target>Prosím, označte zaškrtávací políčko recaptcha</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-anti-robots/form-anti-robots.component.html</context>
           <context context-type="linenumber">8</context>
@@ -16103,7 +16124,7 @@
       </trans-unit>
       <trans-unit id="register.invalidName" datatype="html" resname="register.invalidName">
         <source>Invalid name characters or format</source>
-        <target>Neplatné znaky nebo formát</target>
+        <target>Neplatné znaky nebo formát názvu</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
           <context context-type="linenumber">46,48</context>
@@ -16483,6 +16504,7 @@
       </trans-unit>
       <trans-unit id="register.consentTo" datatype="html" resname="register.consentTo">
         <source>I consent to the</source>
+        <target>Souhlasím se zněním dokumentu</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-terms/form-terms.component.html</context>
           <context context-type="linenumber">19</context>
@@ -16490,6 +16512,7 @@
       </trans-unit>
       <trans-unit id="register.privacyPolicy" datatype="html" resname="register.privacyPolicy">
         <source>privacy policy</source>
+        <target>zásady ochrany osobních údajů</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-terms/form-terms.component.html</context>
           <context context-type="linenumber">26,28</context>
@@ -16673,7 +16696,7 @@
       </trans-unit>
       <trans-unit id="register.terms" datatype="html" resname="register.terms">
         <source>terms of use</source>
-        <target>podmínky používání</target>
+        <target>Podmínek užití ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/step-a/step-a.component.html</context>
           <context context-type="linenumber">42</context>
@@ -16689,6 +16712,7 @@
       </trans-unit>
       <trans-unit id="register.sign" datatype="html" resname="register.sign">
         <source>Sign In</source>
+        <target>se přihlaste</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/step-a/step-a.component.html</context>
           <context context-type="linenumber">48</context>
@@ -16944,7 +16968,7 @@
       </trans-unit>
       <trans-unit id="register.doesNotAllowCommonPassword" datatype="html" resname="register.doesNotAllowCommonPassword">
         <source>ORCID does not allow common passwords. Common passwords are insecure, easily-guessed words or phrases such as 'qwerty123'.</source>
-        <target>ORCID nepovoluje běžná hesla. Běžná hesla jsou nedostatečně bezpečná, snadno uhodnutelná slova nebo fráze, např &quot;qwerty123&quot;.</target>
+        <target>ORCID nepovoluje běžná hesla. Běžná hesla jsou nedostatečně bezpečná, snadno uhodnutelná slova nebo fráze, např "qwerty123".</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
           <context context-type="linenumber">289,292</context>
@@ -18124,6 +18148,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.deactivated" datatype="html" resname="ngOrcid.signin.deactivated">
         <source>A deactivated ORCID record is associated with this email address; to reactivate your ORCID record please enter your email address and submit the form to start the reactivate process.</source>
+        <target>Deaktivovaný ORCID záznam je spojen s touto e-mailovou adresou; Chcete-li znovu aktivovat záznam ORCID, zadejte prosím svou e-mailovou adresu a odešlete formulář a spusťte proces opětovného aktivace.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/errors/deactivated/deactivated.component.html</context>
           <context context-type="linenumber">4,8</context>
@@ -18159,6 +18184,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.emailHint" datatype="html" resname="ngOrcid.signin.emailHint">
         <source>example@email.com</source>
+        <target>Email</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/errors/deactivated/deactivated.component.html</context>
           <context context-type="linenumber">26</context>
@@ -18722,7 +18748,7 @@
       </trans-unit>
       <trans-unit id="account.never" datatype="html" resname="account.never">
         <source>Never</source>
-        <target>„Nikdy“,</target>
+        <target>Nikdy</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/types/account-default-visibility.endpoint.ts</context>
           <context context-type="linenumber">37</context>
@@ -19354,7 +19380,7 @@
       </trans-unit>
       <trans-unit id="works.working" datatype="html" resname="works.working">
         <source>Working paper</source>
-        <target>Pracovní dokument </target>
+        <target>Pracovní dokument</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/types/works.endpoint.ts</context>
           <context context-type="linenumber">119</context>
@@ -20358,6 +20384,7 @@
       </trans-unit>
       <trans-unit id="change_email_preferences.privacyPolicy" datatype="html" resname="change_email_preferences.privacyPolicy">
         <source>privacy policy</source>
+        <target>zásady ochrany osobních údajů</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
           <context context-type="linenumber">59</context>
@@ -20461,7 +20488,7 @@
       </trans-unit>
       <trans-unit id="register.contactLabel" datatype="html" resname="register.contactLabel">
         <source>Contact us.</source>
-        <target>Kontaktujte nás</target>
+        <target>Kontaktujte nás.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
           <context context-type="linenumber">110</context>

@@ -283,7 +283,7 @@
       </trans-unit>
       <trans-unit id="account.youWillNoLonger" datatype="html" resname="account.youWillNoLonger">
         <source>You will no longer be able to use your iD to sign in or access other services. Your public record remains accessible but will only contain the iD and a ‘Deactivated record’ message.</source>
-        <target>لن تتمكن بعد الآن من استخدام معرفك لتسجيل الدخول أو الوصول إلى خدمات أخرى. يظل سجلك العام قابلاً للوصول ولكنه سيحتوي فقط على معرف الهوية ورسالة &quot;السجل المعطل&quot;.</target>
+        <target>لن تتمكن بعد الآن من استخدام معرفك لتسجيل الدخول أو الوصول إلى خدمات أخرى. يظل سجلك العام قابلاً للوصول ولكنه سيحتوي فقط على معرف الهوية ورسالة "السجل المعطل".</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-deactivate/settings-actions-deactivate.component.html</context>
           <context context-type="linenumber">20,24</context>
@@ -1571,7 +1571,7 @@
       </trans-unit>
       <trans-unit id="topBar.knowledge" datatype="html" resname="topBar.knowledge">
         <source>ORCID help centre</source>
-        <target>مركز المساعدة الخاص بـ ORCID</target>
+        <target>مركز المساعدة التابع لـ ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
           <context context-type="linenumber">343,345</context>
@@ -3259,7 +3259,7 @@
       </trans-unit>
       <trans-unit id="shared.versionOf" datatype="html" resname="shared.versionOf">
         <source>Version of</source>
-        <target>نسخة من</target>
+        <target>إصدار</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panel-data-line/panel-data-line.component.html</context>
           <context context-type="linenumber">15,17</context>
@@ -4387,7 +4387,7 @@
       </trans-unit>
       <trans-unit id="side-bar.ariaLabelPrimaryEmailPublic" datatype="html" resname="side-bar.ariaLabelPrimaryEmailPublic">
         <source>Set primary email visibility to Everyone</source>
-        <target>تعيين رؤية البريد الإلكتروني الأساسي إلى &quot;الجميع&quot;</target>
+        <target>تعيين رؤية البريد الإلكتروني الأساسي إلى "الجميع"</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
           <context context-type="linenumber">65</context>
@@ -4395,7 +4395,7 @@
       </trans-unit>
       <trans-unit id="side-bar.ariaLabelPrimaryEmailTrustedParties" datatype="html" resname="side-bar.ariaLabelPrimaryEmailTrustedParties">
         <source>Set primary email visibility to Trusted Parties</source>
-        <target>تعيين رؤية البريد الإلكتروني الأساسي إلى &quot;الأطراف الموثوق بها&quot;</target>
+        <target>تعيين رؤية البريد الإلكتروني الأساسي إلى "الأطراف الموثوق بها"</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
           <context context-type="linenumber">66</context>
@@ -4403,7 +4403,7 @@
       </trans-unit>
       <trans-unit id="side-bar.ariaLabelPrimaryEmailPrivate" datatype="html" resname="side-bar.ariaLabelPrimaryEmailPrivate">
         <source>Set primary email visibility to Only Me</source>
-        <target>تعيين رؤية البريد الإلكتروني الأساسي إلى &quot;أنا فقط&quot;</target>
+        <target>تعيين رؤية البريد الإلكتروني الأساسي إلى "أنا فقط"</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
           <context context-type="linenumber">67</context>
@@ -4411,7 +4411,7 @@
       </trans-unit>
       <trans-unit id="side-bar.ariaLabelOtherEmailPublic" datatype="html" resname="side-bar.ariaLabelOtherEmailPublic">
         <source>Set other email visibility to Everyone</source>
-        <target>تعيين رؤية بريد إلكتروني آخر إلى &quot;الجميع&quot;</target>
+        <target>تعيين رؤية بريد إلكتروني آخر إلى "الجميع"</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
           <context context-type="linenumber">68</context>
@@ -4419,7 +4419,7 @@
       </trans-unit>
       <trans-unit id="side-bar.ariaLabelOtherEmailTrustedParties" datatype="html" resname="side-bar.ariaLabelOtherEmailTrustedParties">
         <source>Set other email visibility to Trusted Parties</source>
-        <target>تعيين رؤية بريد إلكتروني آخر إلى &quot;الأطراف الموثوق بها&quot;</target>
+        <target>تعيين رؤية بريد إلكتروني آخر إلى "الأطراف الموثوق بها"</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
           <context context-type="linenumber">69</context>
@@ -4427,7 +4427,7 @@
       </trans-unit>
       <trans-unit id="side-bar.ariaLabelOtherEmailPrivate" datatype="html" resname="side-bar.ariaLabelOtherEmailPrivate">
         <source>Set other email visibility to Only Me</source>
-        <target>تعيين رؤية بريد إلكتروني آخر إلى &quot;أنا فقط&quot;</target>
+        <target>تعيين رؤية بريد إلكتروني آخر إلى "أنا فقط"</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
           <context context-type="linenumber">70</context>
@@ -4435,7 +4435,7 @@
       </trans-unit>
       <trans-unit id="side-bar.ariaLabelEmailPublic" datatype="html" resname="side-bar.ariaLabelEmailPublic">
         <source>Set email visibility to Everyone</source>
-        <target>تعيين إمكانية رؤية البريد الإلكتروني على &quot;الجميع&quot;</target>
+        <target>تعيين إمكانية رؤية البريد الإلكتروني على "الجميع"</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
           <context context-type="linenumber">71</context>
@@ -4443,7 +4443,7 @@
       </trans-unit>
       <trans-unit id="side-bar.ariaLabelEmailTrustedParties" datatype="html" resname="side-bar.ariaLabelEmailTrustedParties">
         <source>Set email visibility to Trusted Parties</source>
-        <target>تعيين إمكانية رؤية البريد الإلكتروني على &quot;الأطراف الموثوقة&quot;</target>
+        <target>تعيين إمكانية رؤية البريد الإلكتروني على "الأطراف الموثوقة"</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
           <context context-type="linenumber">72</context>
@@ -4451,7 +4451,7 @@
       </trans-unit>
       <trans-unit id="side-bar.ariaLabelEmailPrivate" datatype="html" resname="side-bar.ariaLabelEmailPrivate">
         <source>Set email visibility to Only Me</source>
-        <target>تعيين رؤية البريد الإلكتروني على &quot;أنا فقط&quot;</target>
+        <target>تعيين رؤية البريد الإلكتروني على "أنا فقط"</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
           <context context-type="linenumber">73</context>
@@ -4499,7 +4499,7 @@
       </trans-unit>
       <trans-unit id="side-bar.visibilityTooltip" datatype="html" resname="side-bar.visibilityTooltip">
         <source>Visibility set to Only me</source>
-        <target>تم تعيين إمكانية الرؤية على &quot;أنا فقط&quot;</target>
+        <target>تم تعيين إمكانية الرؤية على "أنا فقط"</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
           <context context-type="linenumber">80</context>
@@ -5028,7 +5028,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">44</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="record.manageYourWebsite" datatype="html" resname="record.manageYourWebsite">
         <source>Manage your websites &amp; social links</source>
@@ -5037,7 +5037,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">45</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="record.labelManageYourKeyword" datatype="html" resname="record.labelManageYourKeyword">
         <source>Manage your keywords</source>
@@ -5046,7 +5046,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">46</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="record.labelManageYourCountries" datatype="html" resname="record.labelManageYourCountries">
         <source>Manage your countries</source>
@@ -5055,7 +5055,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">47</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="record.labelManageYourPersonalIds" datatype="html" resname="record.labelManageYourPersonalIds">
         <source>Manage your personalIds</source>
@@ -5064,7 +5064,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">48</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="shared.pleaseReviewInvalidForm" datatype="html" resname="shared.pleaseReviewInvalidForm">
         <source>Please review the form and fix the issues before saving</source>
@@ -5124,7 +5124,7 @@
       </trans-unit>
       <trans-unit id="topBar.toVerifyYourEmail" datatype="html" resname="topBar.toVerifyYourEmail">
         <source>To verify your email address, click the link in the email sent to:</source>
-        <target>لإتمام عملية التحقق من بريدك الإلكتروني، انقر على الرابط الموجود في الرسالة التي تم إرسالها بالبريد الإلكتروني إلى:</target>
+        <target>لإتمام عملية التحقق من بريدك الإلكتروني، يُرجى النقر على الرابط المرسل إلى:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/top-bar-verification-email/modals/top-bar-verification-email-modal/top-bar-verification-email-modal.component.html</context>
           <context context-type="linenumber">20,22</context>
@@ -8500,7 +8500,7 @@
       </trans-unit>
       <trans-unit id="developerTools.orcidOffersAnApi" datatype="html" resname="developerTools.orcidOffersAnApi">
         <source>ORCID offers a free Public API (Application Programming Interface) that allows your systems and applications to connect to the ORCID registry for non-commercial use.</source>
-        <target>يوفر أوركيد &quot;ORCID&quot; واجهة برمجة التطبيق العامة المجانية (API)، والتي تتيح لأنظمتك وتطبيقاتك الاتصال بسجل أوركيد المعني بالاستخدامات غير التجارية.</target>
+        <target>يوفر أوركيد "ORCID" واجهة برمجة التطبيق العامة المجانية (API)، والتي تتيح لأنظمتك وتطبيقاتك الاتصال بسجل أوركيد المعني بالاستخدامات غير التجارية.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/components/terms-of-use/terms-of-use.component.html</context>
           <context context-type="linenumber">10,14</context>
@@ -8516,7 +8516,7 @@
       </trans-unit>
       <trans-unit id="developerTools.allowUserToSignInto" datatype="html" resname="developerTools.allowUserToSignInto">
         <source>Allow users to sign into your system/application with their ORCID account</source>
-        <target>السماح للمستخدمين بتسجيل الدخول إلى نظامك/ تطبيقك باستخدام حساب أوركيد &quot;ORCID&quot; الخاص بهم.</target>
+        <target>السماح للمستخدمين بتسجيل الدخول إلى نظامك/ تطبيقك باستخدام حساب أوركيد "ORCID" الخاص بهم.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/components/terms-of-use/terms-of-use.component.html</context>
           <context context-type="linenumber">20,22</context>
@@ -8524,7 +8524,7 @@
       </trans-unit>
       <trans-unit id="developerTools.getAUserAuthenticated" datatype="html" resname="developerTools.getAUserAuthenticated">
         <source>Obtain users' authenticated ORCID iDs</source>
-        <target>الحصول على معرفات أوركيد &quot;ORCID&quot; المعتمدة للمستخدمين.</target>
+        <target>الحصول على معرفات أوركيد "ORCID" المعتمدة للمستخدمين.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/components/terms-of-use/terms-of-use.component.html</context>
           <context context-type="linenumber">23,25</context>
@@ -8532,7 +8532,7 @@
       </trans-unit>
       <trans-unit id="developerTools.retrieveMachineReadable" datatype="html" resname="developerTools.retrieveMachineReadable">
         <source>Read public information from ORCID records in machine-readable format</source>
-        <target>قراءة المعلومات العامة من سجلات أوركيد &quot;ORCID&quot; بصيغة قابلة للقراءة الآلية</target>
+        <target>قراءة المعلومات العامة من سجلات أوركيد "ORCID" بصيغة قابلة للقراءة الآلية</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/components/terms-of-use/terms-of-use.component.html</context>
           <context context-type="linenumber">26,28</context>
@@ -8540,7 +8540,7 @@
       </trans-unit>
       <trans-unit id="developerTools.performMachineSearch" datatype="html" resname="developerTools.performMachineSearch">
         <source>Search public data in the ORCID Registry</source>
-        <target>البحث في البيانات العامة بداخل سجل أوركيد &quot;ORCID&quot;</target>
+        <target>البحث في البيانات العامة بداخل سجل أوركيد "ORCID"</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/components/terms-of-use/terms-of-use.component.html</context>
           <context context-type="linenumber">29,31</context>
@@ -8548,7 +8548,7 @@
       </trans-unit>
       <trans-unit id="developerTools.obtainHigher" datatype="html" resname="developerTools.obtainHigher">
         <source>Obtain a higher usage quota than the ORCID Anonymous API</source>
-        <target>الحصول على حصة استخدام أعلى من واجهة برمجة التطبيق العامة التابعة لأوركيد &quot;ORCID&quot;</target>
+        <target>الحصول على حصة استخدام أعلى من واجهة برمجة التطبيق العامة التابعة لأوركيد "ORCID"</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/components/terms-of-use/terms-of-use.component.html</context>
           <context context-type="linenumber">32,34</context>
@@ -8556,7 +8556,7 @@
       </trans-unit>
       <trans-unit id="developerTools.orcidApiResful" datatype="html" resname="developerTools.orcidApiResful">
         <source>The ORCID Public API is RESTful and uses</source>
-        <target>تعتمد واجهة برمجة التطبيق العامة لأوركيد &quot;ORCID&quot; على معمارية REST وتستخدم</target>
+        <target>تعتمد واجهة برمجة التطبيق العامة لأوركيد "ORCID" على معمارية REST وتستخدم</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/components/terms-of-use/terms-of-use.component.html</context>
           <context context-type="linenumber">39</context>
@@ -8588,7 +8588,7 @@
       </trans-unit>
       <trans-unit id="developerTools.publicClientApplicationsAreGranted2" datatype="html" resname="developerTools.publicClientApplicationsAreGranted2">
         <source>If you need access to an ORCID API for commercial use, need a higher usage quota, organizational administration of your API credentials, or the ability to write data to or access Trusted Party data in ORCID records, our</source>
-        <target>إذا كنت بحاجة إلى الوصول إلى واجهة برمجة التطبيق العامة التابعة لأوركيد &quot;ORCID&quot; للاستخدام التجاري، أو ترغب في الحصول على حصة استخدام أعلى، أو إدارة مؤسسية لبيانات تسجيل الدخول إلى واجهة برمجة التطبيق، أو القدرة على كتابة البيانات أو الوصول إلى بيانات الأطراف الموثوقة في سجلات أوركيد &quot;ORCID&quot;، فإن</target>
+        <target>إذا كنت بحاجة إلى الوصول إلى واجهة برمجة التطبيق العامة التابعة لأوركيد "ORCID" للاستخدام التجاري، أو ترغب في الحصول على حصة استخدام أعلى، أو إدارة مؤسسية لبيانات تسجيل الدخول إلى واجهة برمجة التطبيق، أو القدرة على كتابة البيانات أو الوصول إلى بيانات الأطراف الموثوقة في سجلات أوركيد "ORCID"، فإن</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/components/terms-of-use/terms-of-use.component.html</context>
           <context context-type="linenumber">59,63</context>
@@ -8604,7 +8604,7 @@
       </trans-unit>
       <trans-unit id="developerTools.mayBeMoreAppropriate" datatype="html" resname="developerTools.mayBeMoreAppropriate">
         <source>is available to ORCID member organizations.</source>
-        <target>متاحة للمنظمات الأعضاء في أوركيد &quot;ORCID&quot;.</target>
+        <target>متاحة للمنظمات الأعضاء في أوركيد "ORCID".</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/components/terms-of-use/terms-of-use.component.html</context>
           <context context-type="linenumber">73,75</context>
@@ -8636,7 +8636,7 @@
       </trans-unit>
       <trans-unit id="developerTools.orcidPublicClientTermsOfService" datatype="html" resname="developerTools.orcidPublicClientTermsOfService">
         <source>ORCID Public APIs Terms of Service</source>
-        <target>الشروط الخاصة بخدمة واجهات برمجة التطبيق العامة التابعة لأوركيد &quot;ORCID&quot;</target>
+        <target>الشروط الخاصة بخدمة واجهات برمجة التطبيق العامة التابعة لأوركيد "ORCID"</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/components/terms-of-use/terms-of-use.component.html</context>
           <context context-type="linenumber">108,110</context>
@@ -8644,7 +8644,7 @@
       </trans-unit>
       <trans-unit id="developerTools.theOrcidPublicApiAllowsYouToRequestPermission" datatype="html" resname="developerTools.theOrcidPublicApiAllowsYouToRequestPermission">
         <source>The ORCID Public API is free for non-commercial use by individuals as stated in the</source>
-        <target>تعد واجهة برمجة التطبيق العامة التابعة لأوركيد &quot;ORCID&quot; خدمة مجانية للاستخدامات غير التجارية من قبل الأفراد كما هو موضح في</target>
+        <target>تعد واجهة برمجة التطبيق العامة التابعة لأوركيد "ORCID" خدمة مجانية للاستخدامات غير التجارية من قبل الأفراد كما هو موضح في</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/components/terms-of-use/terms-of-use.component.html</context>
           <context context-type="linenumber">116,119</context>
@@ -8668,7 +8668,7 @@
       </trans-unit>
       <trans-unit id="developerTools.byRegisteringForPublicApi" datatype="html" resname="developerTools.byRegisteringForPublicApi">
         <source>By “non-commercial” we mean that you may not charge any re-use fees for the Public API, and you may not make use of the Public API in connection with any revenue-generating product or service.</source>
-        <target>عند استخدامنا لمصطلح &quot;غير تجاري&quot;، فإننا نعني أنه لا يُسمح لك بفرض أي رسوم على إعادة استخدام واجهة برمجة التطبيق العامة، كما لا يجوز لك استخدام هذه الواجهة في سياق أي منتج أو خدمة تهدف إلى تحقيق أرباح.</target>
+        <target>عند استخدامنا لمصطلح "غير تجاري"، فإننا نعني أنه لا يُسمح لك بفرض أي رسوم على إعادة استخدام واجهة برمجة التطبيق العامة، كما لا يجوز لك استخدام هذه الواجهة في سياق أي منتج أو خدمة تهدف إلى تحقيق أرباح.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/components/terms-of-use/terms-of-use.component.html</context>
           <context context-type="linenumber">128,132</context>
@@ -8712,7 +8712,7 @@
       </trans-unit>
       <trans-unit id="developerTools.haveReadAndAgreeToTheOrcidPublicClientTermsOfService" datatype="html" resname="developerTools.haveReadAndAgreeToTheOrcidPublicClientTermsOfService">
         <source>I have read and agree to the ORCID Public APIs Terms of Service</source>
-        <target>لقد قرأت شروط خدمة واجهات برمجة التطبيق العامة التابعة لأوركيد &quot;ORCID&quot; وأوافق عليها</target>
+        <target>لقد قرأت شروط خدمة واجهات برمجة التطبيق العامة التابعة لأوركيد "ORCID" وأوافق عليها</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/components/terms-of-use/terms-of-use.component.html</context>
           <context context-type="linenumber">178,179</context>
@@ -9168,6 +9168,7 @@
       </trans-unit>
       <trans-unit id="common.js.domain.warn.warning_1" datatype="html" resname="common.js.domain.warn.warning_1">
         <source>Warning!</source>
+        <target>تحذير!</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/environment-banner/environment-banner/environment-banner.component.html</context>
           <context context-type="linenumber">7</context>
@@ -9183,6 +9184,7 @@
       </trans-unit>
       <trans-unit id="common.js.domain.warn.is_the_official" datatype="html" resname="common.js.domain.warn.is_the_official">
         <source>is the official website. Sandbox only sends email messages to</source>
+        <target> هو الموقع الإلكتروني الرسمي. يرسل Sandbox رسائل البريد الإلكتروني فقط إلى</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/environment-banner/environment-banner/environment-banner.component.html</context>
           <context context-type="linenumber">19,21</context>
@@ -9198,6 +9200,7 @@
       </trans-unit>
       <trans-unit id="common.js.domain.warn.email_addresses" datatype="html" resname="common.js.domain.warn.email_addresses">
         <source>email addresses, see Sandbox FAQ for</source>
+        <target> عناوين البريد الإلكتروني، مراجعة الأسئلة الشائعة حول Sandbox لـ</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/environment-banner/environment-banner/environment-banner.component.html</context>
           <context context-type="linenumber">30</context>
@@ -9398,6 +9401,7 @@
       </trans-unit>
       <trans-unit id="home.distinguish_yourself" datatype="html" resname="home.distinguish_yourself">
         <source>Distinguish yourself in</source>
+        <target>ميّز نفسك في</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/pages/home/home.component.html</context>
           <context context-type="linenumber">26,28</context>
@@ -9406,6 +9410,7 @@
       </trans-unit>
       <trans-unit id="home.three_easy" datatype="html" resname="home.three_easy">
         <source>three easy steps</source>
+        <target>ثلاث خطوات سهلة</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/pages/home/home.component.html</context>
           <context context-type="linenumber">29,30</context>
@@ -9454,6 +9459,7 @@
       </trans-unit>
       <trans-unit id="home.register_now" datatype="html" resname="home.register_now">
         <source>register now!</source>
+        <target>سجّل الآن!</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/pages/home/home.component.html</context>
           <context context-type="linenumber">84,86</context>
@@ -9534,6 +9540,7 @@
       </trans-unit>
       <trans-unit id="home.curious_about" datatype="html" resname="home.curious_about">
         <source>Curious about who our members are?</source>
+        <target>هل ترغب في معرفة أعضائنا؟</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/pages/home/home.component.html</context>
           <context context-type="linenumber">179,181</context>
@@ -9673,7 +9680,7 @@
       </trans-unit>
       <trans-unit id="inbox.affiliations" datatype="html" resname="inbox.affiliations">
         <source>Affiliations</source>
-        <target>الانتسابات</target>
+        <target>الانتماءات</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/inbox/components/notification-permission/notification-permission.component.ts</context>
           <context context-type="linenumber">44</context>
@@ -9705,7 +9712,7 @@
       </trans-unit>
       <trans-unit id="inbox.distinction" datatype="html" resname="inbox.distinction">
         <source>Distinction</source>
-        <target>امتياز</target>
+        <target>جائزة تميُّز</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/inbox/components/notification-permission/notification-permission.component.ts</context>
           <context context-type="linenumber">48</context>
@@ -9721,7 +9728,7 @@
       </trans-unit>
       <trans-unit id="inbox.education" datatype="html" resname="inbox.education">
         <source>Education</source>
-        <target>تعليم</target>
+        <target>الخلفية تعليمية</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/inbox/components/notification-permission/notification-permission.component.ts</context>
           <context context-type="linenumber">50</context>
@@ -9737,7 +9744,7 @@
       </trans-unit>
       <trans-unit id="inbox.employment" datatype="html" resname="inbox.employment">
         <source>Employment</source>
-        <target>التوظيف</target>
+        <target>الوظيفة</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/inbox/components/notification-permission/notification-permission.component.ts</context>
           <context context-type="linenumber">52</context>
@@ -9769,7 +9776,7 @@
       </trans-unit>
       <trans-unit id="inbox.funding" datatype="html" resname="inbox.funding">
         <source>Funding</source>
-        <target>تمويل</target>
+        <target>التمويل</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/inbox/components/notification-permission/notification-permission.component.ts</context>
           <context context-type="linenumber">56</context>
@@ -9785,7 +9792,7 @@
       </trans-unit>
       <trans-unit id="inbox.invitedPosition" datatype="html" resname="inbox.invitedPosition">
         <source>Invited Position</source>
-        <target>منصب شرفي</target>
+        <target>منصب بدعوة</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/inbox/components/notification-permission/notification-permission.component.ts</context>
           <context context-type="linenumber">58</context>
@@ -9849,7 +9856,7 @@
       </trans-unit>
       <trans-unit id="inbox.qualification" datatype="html" resname="inbox.qualification">
         <source>Qualification</source>
-        <target>مؤهل</target>
+        <target>المؤهلات</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/inbox/components/notification-permission/notification-permission.component.ts</context>
           <context context-type="linenumber">66</context>
@@ -9981,7 +9988,7 @@
       </trans-unit>
       <trans-unit id="inbox.otherUpdate" datatype="html" resname="inbox.otherUpdate">
         <source>Other</source>
-        <target>مخرجات أخرى</target>
+        <target>أخرى</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/inbox/components/notification-your-record-amended/notification-your-record-amended.component.ts</context>
           <context context-type="linenumber">51</context>
@@ -10177,7 +10184,7 @@
       </trans-unit>
       <trans-unit id="institutional.title" datatype="html" resname="institutional.title">
         <source>Access through your institution</source>
-        <target>الوصول من خلال مؤسستك</target>
+        <target>يمكنك الوصول من خلال معهدك</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/institutional/pages/institutional/institutional.component.html</context>
           <context context-type="linenumber">28,30</context>
@@ -10477,7 +10484,7 @@
       </trans-unit>
       <trans-unit id="layout.ariaLabelConnectingResearchers" datatype="html" resname="layout.ariaLabelConnectingResearchers">
         <source>Connecting research and researchers</source>
-        <target>ربط البحث والباحثين</target>
+        <target>ربط الأبحاث والباحثين</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/header/header.component.ts</context>
           <context context-type="linenumber">55</context>
@@ -10805,6 +10812,7 @@
       </trans-unit>
       <trans-unit id="linking.title.1" datatype="html" resname="linking.title.1">
         <source>Link your</source>
+        <target>ربط</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/link-account/pages/link-account/link-account.component.html</context>
           <context context-type="linenumber">21,23</context>
@@ -10844,7 +10852,7 @@
       </trans-unit>
       <trans-unit id="linking.questions" datatype="html" resname="linking.questions">
         <source>account.</source>
-        <target> حسابك.</target>
+        <target>حسابك.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/link-account/pages/link-account/link-account.component.html</context>
           <context context-type="linenumber">53,55</context>
@@ -10996,8 +11004,7 @@
       </trans-unit>
       <trans-unit id="record.headBackToMain" datatype="html" resname="record.headBackToMain">
         <source>Head back to the main ORCID homepage</source>
-        <target>عُد إلى صفحة ORCID الرئيسية
-</target>
+        <target>عُد إلى صفحة ORCID الرئيسية\n</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/page-not-found-404/not-found/not-found.component.html</context>
           <context context-type="linenumber">72,74</context>
@@ -12949,7 +12956,7 @@
       </trans-unit>
       <trans-unit id="topBar.ariaLabelCopyOrcidId" datatype="html" resname="topBar.ariaLabelCopyOrcidId">
         <source>Copy your ORCID iD to the clipboard</source>
-        <target>انسخ رقم المعرّف الخاص بالمعرّف المفتوح للباحثين والمساهمين &quot;ORCID&quot; الخاص بك إلى الحافظة </target>
+        <target>انسخ رقم المعرّف الخاص بالمعرّف المفتوح للباحثين والمساهمين "ORCID" الخاص بك إلى الحافظة</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
           <context context-type="linenumber">133</context>
@@ -12957,7 +12964,7 @@
       </trans-unit>
       <trans-unit id="topBar.ariaLabelViewPrintable" datatype="html" resname="topBar.ariaLabelViewPrintable">
         <source>View a printable version of your ORCID record (Opens in new tab)</source>
-        <target>عرض نسخة قابلة للطباعة من سجل المعرّف المفتوح للباحثين والمساهمين &quot;ORCID&quot; الخاص بك (تفتح في نافذة جديدة)</target>
+        <target>عرض نسخة قابلة للطباعة من سجل المعرّف المفتوح للباحثين والمساهمين "ORCID" الخاص بك (تفتح في نافذة جديدة)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
           <context context-type="linenumber">134</context>
@@ -12989,7 +12996,7 @@
       </trans-unit>
       <trans-unit id="topBar.contactOrcid" datatype="html" resname="topBar.contactOrcid">
         <source>contact ORCID support for further assistance.</source>
-        <target>التواصل مع فريق دعم المعرّف المفتوح للباحثين والمساهمين &quot;ORCID&quot; للحصول على المزيد من المساعدة.</target>
+        <target>التواصل مع فريق دعم المعرّف المفتوح للباحثين والمساهمين "ORCID" للحصول على المزيد من المساعدة.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-info/record-info.component.html</context>
           <context context-type="linenumber">30,31</context>
@@ -12997,7 +13004,7 @@
       </trans-unit>
       <trans-unit id="topBar.whenOrcidDeactivated" datatype="html" resname="topBar.whenOrcidDeactivated">
         <source>When an ORCID record is deactivated all information in the record is deleted. Deactivated records are not shown in registry searches.</source>
-        <target>عند تعطيل سجل المعرّف المفتوح للباحثين والمساهمين &quot;ORCID&quot;، يتم حذف جميع المعلومات المتعلقة بالسجل. لا يتم عرض السجلات التي تم تعطيلها في عمليات البحث الموجودة بالسجل.</target>
+        <target>عند تعطيل سجل المعرّف المفتوح للباحثين والمساهمين "ORCID"، يتم حذف جميع المعلومات المتعلقة بالسجل. لا يتم عرض السجلات التي تم تعطيلها في عمليات البحث الموجودة بالسجل.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-info/record-info.component.html</context>
           <context context-type="linenumber">43,46</context>
@@ -13005,8 +13012,7 @@
       </trans-unit>
       <trans-unit id="topBar.findOutReactivating" datatype="html" resname="topBar.findOutReactivating">
         <source>Find out more about reactivating an ORCID account</source>
-        <target>اطَّلِع على المزيد من المعلومات المتعلقة بإعادة تنشيط حساب المعرّف المفتوح للباحثين والمساهمين 
-&quot;ORCID&quot;</target>
+        <target>اطَّلِع على المزيد من المعلومات المتعلقة بإعادة تنشيط حساب المعرّف المفتوح للباحثين والمساهمين \n"ORCID"</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-info/record-info.component.html</context>
           <context context-type="linenumber">55,56</context>
@@ -13034,7 +13040,7 @@
       </trans-unit>
       <trans-unit id="topBar.deprecatedRecordIsDuplicate" datatype="html" resname="topBar.deprecatedRecordIsDuplicate">
         <source>A deprecated record is a duplicate or unwanted ORCID record that has been merged with another owned by the same person.</source>
-        <target>يعد السجل غير المستعمل نسخة مكررة أو غير مرغوب فيها من سجل المعرّف المفتوح للباحثين والمساهمين &quot;ORCID&quot; تم دمجها مع سجل آخر يملكه الشخص نفسه.</target>
+        <target>يعد السجل غير المستعمل نسخة مكررة أو غير مرغوب فيها من سجل المعرّف المفتوح للباحثين والمساهمين "ORCID" تم دمجها مع سجل آخر يملكه الشخص نفسه.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-info/record-info.component.html</context>
           <context context-type="linenumber">72,75</context>
@@ -13042,7 +13048,7 @@
       </trans-unit>
       <trans-unit id="topBar.findOutMoreAboutRemoving" datatype="html" resname="topBar.findOutMoreAboutRemoving">
         <source>Find out more about removing additional or duplicate ORCID records</source>
-        <target>تعرّف على المزيد من المعلومات المتعلقة بكيفية إزالة السجلات الإضافية أو المكررة في المعرّف المفتوح للباحثين والمساهمين &quot;ORCID&quot;.</target>
+        <target>تعرّف على المزيد من المعلومات المتعلقة بكيفية إزالة السجلات الإضافية أو المكررة في المعرّف المفتوح للباحثين والمساهمين "ORCID".</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-info/record-info.component.html</context>
           <context context-type="linenumber">84,85</context>
@@ -13066,7 +13072,7 @@
       </trans-unit>
       <trans-unit id="topBar.findOutVisibility" datatype="html" resname="topBar.findOutVisibility">
         <source>Find out more about visibility settings in ORCID</source>
-        <target>تعرّف على المزيد من المعلومات المتعلقة بإعدادات الرؤية في المعرّف المفتوح للباحثين والمساهمين &quot;ORCID&quot;</target>
+        <target>تعرّف على المزيد من المعلومات المتعلقة بإعدادات الرؤية في المعرّف المفتوح للباحثين والمساهمين "ORCID"</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-info/record-info.component.html</context>
           <context context-type="linenumber">113,114</context>
@@ -13438,7 +13444,7 @@
       </trans-unit>
       <trans-unit id="topBar.namesMaxLenght" datatype="html" resname="topBar.namesMaxLenght">
         <source>Must be less than 100 characters</source>
-        <target>يجب أن تكون أقل من 100 حرف</target>
+        <target>يجب أن يكون أقل من 100 حرف</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/modals/modal-name/modal-name.component.html</context>
           <context context-type="linenumber">125,127</context>
@@ -13710,8 +13716,7 @@
       </trans-unit>
       <trans-unit id="topBar.orcidSupport" datatype="html" resname="topBar.orcidSupport">
         <source>ORCID support</source>
-        <target>دعم ORCID
-</target>
+        <target>دعم ORCID\n</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
           <context context-type="linenumber">27</context>
@@ -13791,7 +13796,7 @@
       </trans-unit>
       <trans-unit id="topBar.hasBeenAddedToYourORCIDRecord" datatype="html" resname="topBar.hasBeenAddedToYourORCIDRecord">
         <source>has been added to your ORCID record. Manage your existing employment affiliations or add new ones in the</source>
-        <target>تمت إضافته إلى سجلك في ORCID. يمكنك إدارة انتماءاتك الوظيفية الحالية أو إضافة انتماءات جديدة في </target>
+        <target>تمت إضافته إلى سجلك في ORCID. يمكنك إدارة انتماءاتك الوظيفية الحالية أو إضافة انتماءات جديدة في</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
           <context context-type="linenumber">99,101</context>
@@ -13799,7 +13804,7 @@
       </trans-unit>
       <trans-unit id="topBar.employmentSection" datatype="html" resname="topBar.employmentSection">
         <source>Employment section</source>
-        <target>قسم &quot;العمل&quot;</target>
+        <target>قسم "العمل"</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
           <context context-type="linenumber">107</context>
@@ -14243,6 +14248,7 @@
       </trans-unit>
       <trans-unit id="works.invalidISBN" datatype="html" resname="works.invalidISBN">
         <source>We are unable to validate this identifier. Please check it is correct before saving.</source>
+        <target>We are unable to validate this identifier. Please check it is correct before saving.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
           <context context-type="linenumber">120,123</context>
@@ -14321,16 +14327,16 @@
         </context-group>
       </trans-unit>
       <trans-unit id="works.onlyIdentifierTypesFundedBy" datatype="html" resname="works.onlyIdentifierTypesFundedBy">
-        <source>Only identifier types &quot;grant number&quot;, &quot;doi&quot;, &quot;uri&quot; or &quot;proposal id&quot; are allowed when using &quot;funded-by&quot; identifiers</source>
-        <target>يُسمح باستخدام أنواع المعرفات التالية فحسب في حال استخدام معرفات &quot;ممولة من&quot;: &quot;رقم المنحة&quot; أو &quot;doi&quot; أو &quot;uri&quot; أو &quot;معرف الاقتراح&quot;</target>
+        <source>Only identifier types "grant number", "doi", "uri" or "proposal id" are allowed when using "funded-by" identifiers</source>
+        <target>يُسمح باستخدام أنواع المعرفات التالية فحسب في حال استخدام معرفات "ممولة من": "رقم المنحة" أو "doi" أو "uri" أو "معرف الاقتراح"</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
           <context context-type="linenumber">255,257</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.atLestOneSelfIdRequired" datatype="html" resname="works.atLestOneSelfIdRequired">
-        <source>At least one &quot;self&quot; identifier is required when using &quot;version-of&quot; identifiers</source>
-        <target>مطلوب معرف &quot;ذاتي&quot; واحد على الأقل عند استخدام معرفات &quot;إصدار&quot;</target>
+        <source>At least one "self" identifier is required when using "version-of" identifiers</source>
+        <target>مطلوب معرف "ذاتي" واحد على الأقل عند استخدام معرفات "إصدار"</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
           <context context-type="linenumber">264,266</context>
@@ -14422,7 +14428,7 @@
       </trans-unit>
       <trans-unit id="shared.toEnableFeaturing" datatype="html" resname="shared.toEnableFeaturing">
         <source>to your ORCID record to enable featuring. Click the ‘Add’ button in the</source>
-        <target>إلى سجل ORCID الخاص بك لتمكين العرض. انقر على زر &quot;إضافة&quot; في</target>
+        <target>إلى سجل ORCID الخاص بك لتمكين العرض. انقر على زر "إضافة" في</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-featured-stack-group/work-featured-stack-group.component.html</context>
           <context context-type="linenumber">38,39</context>
@@ -15054,7 +15060,7 @@
       </trans-unit>
       <trans-unit id="works.otherLabelMicrocopy" datatype="html" resname="works.otherLabelMicrocopy">
         <source>Selecting this will set the work type to ‘Other’</source>
-        <target>يؤدي تحديد هذا إلى ضبط نوع العمل على &quot;أخرى&quot;</target>
+        <target>يؤدي تحديد هذا إلى ضبط نوع العمل على "أخرى"</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-form/work-form/work-type-menu.ts</context>
           <context context-type="linenumber">78</context>
@@ -16530,7 +16536,7 @@
       </trans-unit>
       <trans-unit id="register.agree2" datatype="html" resname="register.agree2">
         <source>and agree to my data being publicly accessible where marked as “Visible to Everyone”.</source>
-        <target>وأوافق على أن تكون بياناتي متاحة للجمهور حيث علِّمت على أنها &quot;مرئية للجميع&quot;.</target>
+        <target>وأوافق على أن تكون بياناتي متاحة للجمهور حيث علِّمت على أنها "مرئية للجميع".</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-terms/form-terms.component.html</context>
           <context context-type="linenumber">40,41</context>
@@ -16962,7 +16968,7 @@
       </trans-unit>
       <trans-unit id="register.doesNotAllowCommonPassword" datatype="html" resname="register.doesNotAllowCommonPassword">
         <source>ORCID does not allow common passwords. Common passwords are insecure, easily-guessed words or phrases such as 'qwerty123'.</source>
-        <target>ORCID لا يسمح بكلمات المرور الشائعة. فهي غير آمنة وسهلة التخمين مثل &quot;qwerty123&quot;.</target>
+        <target>ORCID لا يسمح بكلمات المرور الشائعة. فهي غير آمنة وسهلة التخمين مثل "qwerty123".</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
           <context context-type="linenumber">289,292</context>
@@ -17114,7 +17120,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.search.affiliations" datatype="html" resname="ngOrcid.search.affiliations">
         <source>Affiliations</source>
-        <target>الانتسابات</target>
+        <target>انتسابات</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/search/components/results/results.component.html</context>
           <context context-type="linenumber">25,27</context>
@@ -17122,7 +17128,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.search.noResults" datatype="html" resname="ngOrcid.search.noResults">
         <source>No results found. Please edit your search terms.</source>
-        <target>لم يتم العثور على النتائج. يرجى تحرير مصطلحات البحث الخاصة بك.</target>
+        <target>لم يتم العثور على نتائج. يرجى تحرير مصطلحات البحث الخاصة بك.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/search/components/results/results.component.html</context>
           <context context-type="linenumber">61,63</context>
@@ -18178,6 +18184,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.emailHint" datatype="html" resname="ngOrcid.signin.emailHint">
         <source>example@email.com</source>
+        <target>example@email.com</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/errors/deactivated/deactivated.component.html</context>
           <context context-type="linenumber">26</context>
@@ -18257,7 +18264,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.deactivated.UsingOrcid.1" datatype="html" resname="ngOrcid.signin.deactivated.UsingOrcid.1">
         <source>To start reactivation please enter an email address associated with this account in the 'Email or ORCID iD' field above.</source>
-        <target>لبدء إعادة التنشيط، يُرجى إدخال عنوان بريد إلكتروني مرتبط بهذا الحساب في حقل &quot;البريد الإلكتروني أو معرف ORCID&quot; أعلاه.</target>
+        <target>لبدء إعادة التنشيط، يُرجى إدخال عنوان بريد إلكتروني مرتبط بهذا الحساب في حقل "البريد الإلكتروني أو معرف ORCID" أعلاه.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/errors/print-errors/print-errors.component.html</context>
           <context context-type="linenumber">69,72</context>
@@ -18921,7 +18928,7 @@
       </trans-unit>
       <trans-unit id="account.scopePathType.peerReviewReadLimited" datatype="html" resname="account.scopePathType.peerReviewReadLimited">
         <source>Read peer reviews from your ORCID record</source>
-        <target>الاطلاع على مراجعات النظراء من سجلك لدى ORCID </target>
+        <target>الاطلاع على مراجعات النظراء من سجلك لدى ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/types/account-trusted-organizations.ts</context>
           <context context-type="linenumber">64</context>
@@ -19033,7 +19040,7 @@
       </trans-unit>
       <trans-unit id="shared.service" datatype="html" resname="shared.service">
         <source>Service</source>
-        <target>الخدمة</target>
+        <target>خدمة</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/types/record-affiliation.endpoint.ts</context>
           <context context-type="linenumber">145</context>
@@ -19973,7 +19980,7 @@
       </trans-unit>
       <trans-unit id="works.fundedBy" datatype="html" resname="works.fundedBy">
         <source>Funded by</source>
-        <target>بتمويل من</target>
+        <target>ممول من</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/types/works.endpoint.ts</context>
           <context context-type="linenumber">626</context>
@@ -20193,6 +20200,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.registerClientApp" datatype="html" resname="ngOrcid.registerClientApp">
         <source>REGISTER A CLIENT APPLICATION</source>
+        <target>تسجيل طلب عميل</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
           <context context-type="linenumber">31</context>
@@ -20504,7 +20512,7 @@
       </trans-unit>
       <trans-unit id="register.affiliationsLabel" datatype="html" resname="register.affiliationsLabel">
         <source>Affiliations</source>
-        <target>الانتسابات</target>
+        <target>انتسابات</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
           <context context-type="linenumber">113</context>
@@ -20560,7 +20568,7 @@
       </trans-unit>
       <trans-unit id="authorize.readLimited" datatype="html" resname="authorize.readLimited">
         <source>Read your information with visibility set to Trusted Organizations</source>
-        <target>اقرأ معلوماتك مع تعيين الرؤية إلى &quot;المؤسسات الموثوق بها&quot;</target>
+        <target>اقرأ معلوماتك مع تعيين الرؤية إلى "المؤسسات الموثوق بها"</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
           <context context-type="linenumber">191,192</context>

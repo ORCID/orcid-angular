@@ -387,7 +387,7 @@
       </trans-unit>
       <trans-unit id="account.youCanEasilyDownload" datatype="html" resname="account.youCanEasilyDownload">
         <source>You can easily download an XML file of all your personal data in the ORCID registry. This file is unique to you and only you have access to it.</source>
-        <target>ORCID 레지스트리에서 모든 개인 데이터를 XML 파일로 쉽게 다운로드할 수 있습니다. 이 파일은 본인만 확인하고 접근할 수 있습니다. </target>
+        <target>ORCID 레지스트리에서 모든 개인 데이터를 XML 파일로 쉽게 다운로드할 수 있습니다. 이 파일은 본인만 확인하고 접근할 수 있습니다.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-download/settings-actions-download.component.html</context>
           <context context-type="linenumber">8,11</context>
@@ -515,7 +515,7 @@
       </trans-unit>
       <trans-unit id="account.removeDuplicate" datatype="html" resname="account.removeDuplicate">
         <source>Remove a duplicate record</source>
-        <target>중복 기록 삭제하기</target>
+        <target>중복된 기록 지우기</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions/settings-actions.component.ts</context>
           <context context-type="linenumber">14</context>
@@ -543,7 +543,7 @@
       </trans-unit>
       <trans-unit id="account.inAdditionToTheOptional" datatype="html" resname="account.inAdditionToTheOptional">
         <source>In addition to the optional account and record notifications, we may occasionally send you emails with service messages relating to your ORCID account. As the information in these emails may affect your privacy settings and the functioning of your ORCID account, you cannot opt-out of these service messages per our</source>
-        <target>선택적인 계정 및 레코드 알림에 더해, 종종 ORCID 계정과 관련한 서비스 메시지가 이메일로 전송될 수 있습니다. 이러한 이메일은 포함된 정보가 프라이버시 설정 및 ORCID 계정의 기능에 영향을 끼칠 수 있기에 이러한 서비스 메시지는 다음 정책에 따라 수신 거부할 수 없습니다. </target>
+        <target>선택적인 계정 및 레코드 알림에 더해, 종종 ORCID 계정과 관련한 서비스 메시지가 이메일로 전송될 수 있습니다. 이러한 이메일은 포함된 정보가 프라이버시 설정 및 ORCID 계정의 기능에 영향을 끼칠 수 있기에 이러한 서비스 메시지는 다음 정책에 따라 수신 거부할 수 없습니다.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-defaults-email-frequency/settings-defaults-email-frequency.component.html</context>
           <context context-type="linenumber">9,15</context>
@@ -1263,7 +1263,7 @@
       </trans-unit>
       <trans-unit id="account.defaultStyleShown" datatype="html" resname="account.defaultStyleShown">
         <source>Default styles shown above. The actual font/text colour should match your site.</source>
-        <target>위에 표시된 기본 스타일. 실제 글꼴/텍스트 색상은 사이트와 어울려야 합니다. </target>
+        <target>위에 표시된 기본 스타일. 실제 글꼴/텍스트 색상은 사이트와 어울려야 합니다.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-sharing-html-code/settings-sharing-html-code.component.html</context>
           <context context-type="linenumber">48,50</context>
@@ -1279,7 +1279,7 @@
       </trans-unit>
       <trans-unit id="account.downloadQR" datatype="html" resname="account.downloadQR">
         <source>Download your ORCID iD QR code and display it on posters, presentations, stickers, business cards - anywhere you want your ORCID iD to be found!</source>
-        <target>ORCID ID QR 코드를 다운로드하여 포스터, 프리젠테이션, 스티커, 명함에 넣어보세요. 원하는 곳 어디서든 본인의 ORCID ID를 찾을 수 있습니다! </target>
+        <target>ORCID ID QR 코드를 다운로드하여 포스터, 프리젠테이션, 스티커, 명함에 넣어보세요. 원하는 곳 어디서든 본인의 ORCID ID를 찾을 수 있습니다!</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-sharing-qr-code/settings-sharing-qr-code.component.html</context>
           <context context-type="linenumber">9,12</context>
@@ -2399,7 +2399,7 @@
       </trans-unit>
       <trans-unit id="shared.showDetails" datatype="html" resname="shared.showDetails">
         <source>Show details</source>
-        <target>세부정보 표시</target>
+        <target>세부정보 숨기기</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/account-panel/settings-panels-expand-buttons/settings-panels-expand-buttons.component.ts</context>
           <context context-type="linenumber">10</context>
@@ -5028,7 +5028,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">44</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="record.manageYourWebsite" datatype="html" resname="record.manageYourWebsite">
         <source>Manage your websites &amp; social links</source>
@@ -5037,7 +5037,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">45</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="record.labelManageYourKeyword" datatype="html" resname="record.labelManageYourKeyword">
         <source>Manage your keywords</source>
@@ -5046,7 +5046,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">46</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="record.labelManageYourCountries" datatype="html" resname="record.labelManageYourCountries">
         <source>Manage your countries</source>
@@ -5055,7 +5055,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">47</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="record.labelManageYourPersonalIds" datatype="html" resname="record.labelManageYourPersonalIds">
         <source>Manage your personalIds</source>
@@ -5064,7 +5064,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">48</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="shared.pleaseReviewInvalidForm" datatype="html" resname="shared.pleaseReviewInvalidForm">
         <source>Please review the form and fix the issues before saving</source>
@@ -8668,7 +8668,7 @@
       </trans-unit>
       <trans-unit id="developerTools.byRegisteringForPublicApi" datatype="html" resname="developerTools.byRegisteringForPublicApi">
         <source>By “non-commercial” we mean that you may not charge any re-use fees for the Public API, and you may not make use of the Public API in connection with any revenue-generating product or service.</source>
-        <target>&quot;비상업적&quot;이란 귀하가 퍼블릭 API에 대한 재사용 수수료를 청구할 수 없으며, 수익을 창출하는 제품 또는 서비스와 관련해서는 퍼블릭 API를 사용할 수 없습니다.</target>
+        <target>"비상업적"이란 귀하가 퍼블릭 API에 대한 재사용 수수료를 청구할 수 없으며, 수익을 창출하는 제품 또는 서비스와 관련해서는 퍼블릭 API를 사용할 수 없습니다.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/components/terms-of-use/terms-of-use.component.html</context>
           <context context-type="linenumber">128,132</context>
@@ -9168,6 +9168,7 @@
       </trans-unit>
       <trans-unit id="common.js.domain.warn.warning_1" datatype="html" resname="common.js.domain.warn.warning_1">
         <source>Warning!</source>
+        <target>경고!</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/environment-banner/environment-banner/environment-banner.component.html</context>
           <context context-type="linenumber">7</context>
@@ -9183,6 +9184,7 @@
       </trans-unit>
       <trans-unit id="common.js.domain.warn.is_the_official" datatype="html" resname="common.js.domain.warn.is_the_official">
         <source>is the official website. Sandbox only sends email messages to</source>
+        <target>가 공식 웹사이트입니다. Sandbox는</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/environment-banner/environment-banner/environment-banner.component.html</context>
           <context context-type="linenumber">19,21</context>
@@ -9198,6 +9200,7 @@
       </trans-unit>
       <trans-unit id="common.js.domain.warn.email_addresses" datatype="html" resname="common.js.domain.warn.email_addresses">
         <source>email addresses, see Sandbox FAQ for</source>
+        <target>이메일 주소로만 이메일 메시지를 전송합니다. 자세한 내용</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/environment-banner/environment-banner/environment-banner.component.html</context>
           <context context-type="linenumber">30</context>
@@ -9361,7 +9364,7 @@
       </trans-unit>
       <trans-unit id="home.more_news" datatype="html" resname="home.more_news">
         <source>MORE NEWS</source>
-        <target>더 많은 소식</target>
+        <target>뉴스 더 보기</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/components/news/news.component.html</context>
           <context context-type="linenumber">16,18</context>
@@ -9398,6 +9401,7 @@
       </trans-unit>
       <trans-unit id="home.distinguish_yourself" datatype="html" resname="home.distinguish_yourself">
         <source>Distinguish yourself in</source>
+        <target>자신을 돋보이게 하는 방법</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/pages/home/home.component.html</context>
           <context context-type="linenumber">26,28</context>
@@ -9406,6 +9410,7 @@
       </trans-unit>
       <trans-unit id="home.three_easy" datatype="html" resname="home.three_easy">
         <source>three easy steps</source>
+        <target>세단계만 거치면 됩니다</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/pages/home/home.component.html</context>
           <context context-type="linenumber">29,30</context>
@@ -9454,6 +9459,7 @@
       </trans-unit>
       <trans-unit id="home.register_now" datatype="html" resname="home.register_now">
         <source>register now!</source>
+        <target>지금 등록!</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/pages/home/home.component.html</context>
           <context context-type="linenumber">84,86</context>
@@ -9706,7 +9712,7 @@
       </trans-unit>
       <trans-unit id="inbox.distinction" datatype="html" resname="inbox.distinction">
         <source>Distinction</source>
-        <target>수훈</target>
+        <target>구분</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/inbox/components/notification-permission/notification-permission.component.ts</context>
           <context context-type="linenumber">48</context>
@@ -9722,7 +9728,7 @@
       </trans-unit>
       <trans-unit id="inbox.education" datatype="html" resname="inbox.education">
         <source>Education</source>
-        <target>학력</target>
+        <target>교육</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/inbox/components/notification-permission/notification-permission.component.ts</context>
           <context context-type="linenumber">50</context>
@@ -9770,7 +9776,7 @@
       </trans-unit>
       <trans-unit id="inbox.funding" datatype="html" resname="inbox.funding">
         <source>Funding</source>
-        <target>자금원</target>
+        <target>펀딩</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/inbox/components/notification-permission/notification-permission.component.ts</context>
           <context context-type="linenumber">56</context>
@@ -9786,7 +9792,7 @@
       </trans-unit>
       <trans-unit id="inbox.invitedPosition" datatype="html" resname="inbox.invitedPosition">
         <source>Invited Position</source>
-        <target>초빙직책</target>
+        <target>초청된 직책</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/inbox/components/notification-permission/notification-permission.component.ts</context>
           <context context-type="linenumber">58</context>
@@ -9802,7 +9808,7 @@
       </trans-unit>
       <trans-unit id="inbox.membership" datatype="html" resname="inbox.membership">
         <source>Membership</source>
-        <target>회원자격</target>
+        <target>멤버십</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/inbox/components/notification-permission/notification-permission.component.ts</context>
           <context context-type="linenumber">60</context>
@@ -9850,7 +9856,7 @@
       </trans-unit>
       <trans-unit id="inbox.qualification" datatype="html" resname="inbox.qualification">
         <source>Qualification</source>
-        <target>자격증</target>
+        <target>구별</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/inbox/components/notification-permission/notification-permission.component.ts</context>
           <context context-type="linenumber">66</context>
@@ -9882,7 +9888,7 @@
       </trans-unit>
       <trans-unit id="inbox.service" datatype="html" resname="inbox.service">
         <source>Service</source>
-        <target>공헌</target>
+        <target>서비스</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/inbox/components/notification-permission/notification-permission.component.ts</context>
           <context context-type="linenumber">70</context>
@@ -9982,7 +9988,7 @@
       </trans-unit>
       <trans-unit id="inbox.otherUpdate" datatype="html" resname="inbox.otherUpdate">
         <source>Other</source>
-        <target>다른 출력물</target>
+        <target>기타</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/inbox/components/notification-your-record-amended/notification-your-record-amended.component.ts</context>
           <context context-type="linenumber">51</context>
@@ -10178,7 +10184,7 @@
       </trans-unit>
       <trans-unit id="institutional.title" datatype="html" resname="institutional.title">
         <source>Access through your institution</source>
-        <target>기관을 통한 액세스</target>
+        <target>귀하의 기관을 통해 이용하세요</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/institutional/pages/institutional/institutional.component.html</context>
           <context context-type="linenumber">28,30</context>
@@ -10478,7 +10484,7 @@
       </trans-unit>
       <trans-unit id="layout.ariaLabelConnectingResearchers" datatype="html" resname="layout.ariaLabelConnectingResearchers">
         <source>Connecting research and researchers</source>
-        <target>연구결과물과 연구자 연결</target>
+        <target>연구 및 연구원 연결</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/header/header.component.ts</context>
           <context context-type="linenumber">55</context>
@@ -11210,7 +11216,7 @@
       </trans-unit>
       <trans-unit id="shared.featuredAffiliationNoticeMessagePart1" datatype="html" resname="shared.featuredAffiliationNoticeMessagePart1">
         <source>Highlighted affiliations are shown at the top of your public record.</source>
-        <target>강조 표시된 담당기관은 귀하의 공개 레코드 상단에 표시됩니다. </target>
+        <target>강조 표시된 담당기관은 귀하의 공개 레코드 상단에 표시됩니다.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/affiliation-stacks-groups.component.html</context>
           <context context-type="linenumber">74,75</context>
@@ -14078,7 +14084,7 @@
       </trans-unit>
       <trans-unit id="works.or" datatype="html" resname="works.or">
         <source>or</source>
-        <target>혹은</target>
+        <target>또는</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-details/work-details.component.html</context>
           <context context-type="linenumber">145,147</context>
@@ -14242,6 +14248,7 @@
       </trans-unit>
       <trans-unit id="works.invalidISBN" datatype="html" resname="works.invalidISBN">
         <source>We are unable to validate this identifier. Please check it is correct before saving.</source>
+        <target>We are unable to validate this identifier. Please check it is correct before saving.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
           <context context-type="linenumber">120,123</context>
@@ -14320,16 +14327,16 @@
         </context-group>
       </trans-unit>
       <trans-unit id="works.onlyIdentifierTypesFundedBy" datatype="html" resname="works.onlyIdentifierTypesFundedBy">
-        <source>Only identifier types &quot;grant number&quot;, &quot;doi&quot;, &quot;uri&quot; or &quot;proposal id&quot; are allowed when using &quot;funded-by&quot; identifiers</source>
-        <target>&quot;자금 제공 주체(funded-by)&quot; 식별자를 사용하는 경우 &quot;연구비 번호&quot;,&quot;디지털 개체 식별자(DOI)&quot;, 통합 리소스 식별자(URI)&quot; 또는 &quot;지원서 ID&quot; 식별자만 허용됩니다.</target>
+        <source>Only identifier types "grant number", "doi", "uri" or "proposal id" are allowed when using "funded-by" identifiers</source>
+        <target>"자금 제공 주체(funded-by)" 식별자를 사용하는 경우 "연구비 번호","디지털 개체 식별자(DOI)", 통합 리소스 식별자(URI)" 또는 "지원서 ID" 식별자만 허용됩니다.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
           <context context-type="linenumber">255,257</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.atLestOneSelfIdRequired" datatype="html" resname="works.atLestOneSelfIdRequired">
-        <source>At least one &quot;self&quot; identifier is required when using &quot;version-of&quot; identifiers</source>
-        <target>식별자의 &quot;버전&quot;을 이용하기 위해 적어도 하나의 &quot;자가&quot; 식별자가 필요합니다.</target>
+        <source>At least one "self" identifier is required when using "version-of" identifiers</source>
+        <target>식별자의 "버전"을 이용하기 위해 적어도 하나의 "자가" 식별자가 필요합니다.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
           <context context-type="linenumber">264,266</context>
@@ -14929,7 +14936,7 @@
       </trans-unit>
       <trans-unit id="works.selectACitationType" datatype="html" resname="works.selectACitationType">
         <source>Select a citation type</source>
-        <target>인용 유형 선택</target>
+        <target>인용구 종류를 선택하세요</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-form/work-form/work-form.component.html</context>
           <context context-type="linenumber">530,532</context>
@@ -15181,7 +15188,7 @@
       </trans-unit>
       <trans-unit id="work.works" datatype="html" resname="work.works">
         <source>Works</source>
-        <target>연구업적</target>
+        <target>연구들</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-modal/work-modal.component.html</context>
           <context context-type="linenumber">3</context>
@@ -15857,7 +15864,7 @@
       </trans-unit>
       <trans-unit id="register.passwordNotEmail" datatype="html" resname="register.passwordNotEmail">
         <source>Password must not be the same as your email address</source>
-        <target>비밀번호는 이메일 주소와 동일하지 않아야 합니다</target>
+        <target>패스워드는 귀하의 이메일 주소와 동일할 수 없습니다</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
           <context context-type="linenumber">41,43</context>
@@ -16529,7 +16536,7 @@
       </trans-unit>
       <trans-unit id="register.agree2" datatype="html" resname="register.agree2">
         <source>and agree to my data being publicly accessible where marked as “Visible to Everyone”.</source>
-        <target>그리고 &quot;모두에게 공개&quot;로 표시된 저의 데이터를 공개적으로 사용 가능하도록 하는 것에 동의합니다.</target>
+        <target>그리고 "모두에게 공개"로 표시된 저의 데이터를 공개적으로 사용 가능하도록 하는 것에 동의합니다.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-terms/form-terms.component.html</context>
           <context context-type="linenumber">40,41</context>
@@ -18157,7 +18164,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.contactSupport" datatype="html" resname="ngOrcid.signin.contactSupport">
         <source>contact support</source>
-        <target>지원팀 문의</target>
+        <target>지원팀에 문의하십시오</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/errors/deactivated/deactivated.component.html</context>
           <context context-type="linenumber">18,19</context>
@@ -18481,7 +18488,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.or" datatype="html" resname="ngOrcid.signin.or">
         <source>or</source>
-        <target>혹은</target>
+        <target>또는</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/pages/sign-in/sign-in.component.ts</context>
           <context context-type="linenumber">54</context>
@@ -18657,7 +18664,7 @@
       </trans-unit>
       <trans-unit id="account.clipboard" datatype="html" resname="account.clipboard">
         <source>Backup codes have been copied to the clipboard</source>
-        <target>백업 코드가 클립보드에 복사되었습니다. </target>
+        <target>백업 코드가 클립보드에 복사되었습니다.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-recovery-codes/two-factor-recovery-codes.component.ts</context>
           <context context-type="linenumber">21</context>
@@ -18741,7 +18748,7 @@
       </trans-unit>
       <trans-unit id="account.never" datatype="html" resname="account.never">
         <source>Never</source>
-        <target>받지 않음으로 설정하기 </target>
+        <target>받지 않음</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/types/account-default-visibility.endpoint.ts</context>
           <context context-type="linenumber">37</context>
@@ -19973,7 +19980,7 @@
       </trans-unit>
       <trans-unit id="works.fundedBy" datatype="html" resname="works.fundedBy">
         <source>Funded by</source>
-        <target>후원인</target>
+        <target>자금 제공 주체</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/types/works.endpoint.ts</context>
           <context context-type="linenumber">626</context>

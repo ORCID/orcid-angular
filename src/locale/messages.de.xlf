@@ -2599,7 +2599,7 @@
       </trans-unit>
       <trans-unit id="register.department" datatype="html" resname="register.department">
         <source>Department</source>
-        <target>Fakultät/Abteilung</target>
+        <target>Abteilung</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/affiliations-interstitial/interstitial-component/affiliations-interstitial.component.html</context>
           <context context-type="linenumber">168</context>
@@ -4083,7 +4083,7 @@
       </trans-unit>
       <trans-unit id="side-bar.verifyToAccessOrcidFeatures" datatype="html" resname="side-bar.verifyToAccessOrcidFeatures">
         <source>To access all of ORCID’s editing features you must verify at least one email address. Until then you will only be able to manage</source>
-        <target>Um Zugriff auf alle Bearbeitungsfunktionen von ORCID zu erhalten, müssen Sie mindestens eine E-Mail-Adresse verifizieren. Bis dahin können Sie nur </target>
+        <target>Um Zugriff auf alle Bearbeitungsfunktionen von ORCID zu erhalten, müssen Sie mindestens eine E-Mail-Adresse verifizieren. Bis dahin können Sie nur</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
           <context context-type="linenumber">59,61</context>
@@ -4251,7 +4251,7 @@
       </trans-unit>
       <trans-unit id="side-bar.whichVerifiedEmail" datatype="html" resname="side-bar.whichVerifiedEmail">
         <source>Which verified email address should we send your ORCID notifications to? You can change the frequency of these notification emails in</source>
-        <target>An welche verifizierte E-Mail-Adresse sollen wir Ihre ORCID-Benachrichtigungen senden? Sie können die Häufigkeit dieser Benachrichtigungs-E-Mails in </target>
+        <target>An welche verifizierte E-Mail-Adresse sollen wir Ihre ORCID-Benachrichtigungen senden? Sie können die Häufigkeit dieser Benachrichtigungs-E-Mails in</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
           <context context-type="linenumber">341,344</context>
@@ -5028,7 +5028,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">44</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="record.manageYourWebsite" datatype="html" resname="record.manageYourWebsite">
         <source>Manage your websites &amp; social links</source>
@@ -5037,7 +5037,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">45</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="record.labelManageYourKeyword" datatype="html" resname="record.labelManageYourKeyword">
         <source>Manage your keywords</source>
@@ -5046,7 +5046,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">46</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="record.labelManageYourCountries" datatype="html" resname="record.labelManageYourCountries">
         <source>Manage your countries</source>
@@ -5055,7 +5055,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">47</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="record.labelManageYourPersonalIds" datatype="html" resname="record.labelManageYourPersonalIds">
         <source>Manage your personalIds</source>
@@ -5064,7 +5064,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">48</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="shared.pleaseReviewInvalidForm" datatype="html" resname="shared.pleaseReviewInvalidForm">
         <source>Please review the form and fix the issues before saving</source>
@@ -9168,6 +9168,7 @@
       </trans-unit>
       <trans-unit id="common.js.domain.warn.warning_1" datatype="html" resname="common.js.domain.warn.warning_1">
         <source>Warning!</source>
+        <target>Achtung!</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/environment-banner/environment-banner/environment-banner.component.html</context>
           <context context-type="linenumber">7</context>
@@ -9183,6 +9184,7 @@
       </trans-unit>
       <trans-unit id="common.js.domain.warn.is_the_official" datatype="html" resname="common.js.domain.warn.is_the_official">
         <source>is the official website. Sandbox only sends email messages to</source>
+        <target>ist die offizielle Website. Sandbox schickt E-Mail-Nachrichten nur an</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/environment-banner/environment-banner/environment-banner.component.html</context>
           <context context-type="linenumber">19,21</context>
@@ -9198,6 +9200,7 @@
       </trans-unit>
       <trans-unit id="common.js.domain.warn.email_addresses" datatype="html" resname="common.js.domain.warn.email_addresses">
         <source>email addresses, see Sandbox FAQ for</source>
+        <target>-E-Mail-Adressen. In den häufig gestellten Fragen zu Sandbox finden Sie</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/environment-banner/environment-banner/environment-banner.component.html</context>
           <context context-type="linenumber">30</context>
@@ -9398,6 +9401,7 @@
       </trans-unit>
       <trans-unit id="home.distinguish_yourself" datatype="html" resname="home.distinguish_yourself">
         <source>Distinguish yourself in</source>
+        <target>Profilieren sie sich in</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/pages/home/home.component.html</context>
           <context context-type="linenumber">26,28</context>
@@ -9406,6 +9410,7 @@
       </trans-unit>
       <trans-unit id="home.three_easy" datatype="html" resname="home.three_easy">
         <source>three easy steps</source>
+        <target>drei einfachen schritten</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/pages/home/home.component.html</context>
           <context context-type="linenumber">29,30</context>
@@ -9454,6 +9459,7 @@
       </trans-unit>
       <trans-unit id="home.register_now" datatype="html" resname="home.register_now">
         <source>register now!</source>
+        <target>jetzt registrieren!</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/pages/home/home.component.html</context>
           <context context-type="linenumber">84,86</context>
@@ -10830,7 +10836,7 @@
       </trans-unit>
       <trans-unit id="linking.finish" datatype="html" resname="linking.finish">
         <source>To link your</source>
-        <target>Um Ihr Konto zu verknüpfen, </target>
+        <target>Um Ihr Konto zu verknüpfen,</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/link-account/pages/link-account/link-account.component.html</context>
           <context context-type="linenumber">43,45</context>
@@ -12958,7 +12964,7 @@
       </trans-unit>
       <trans-unit id="topBar.ariaLabelViewPrintable" datatype="html" resname="topBar.ariaLabelViewPrintable">
         <source>View a printable version of your ORCID record (Opens in new tab)</source>
-        <target>Sehen Sie sich eine druckbare Version Ihres ORCID-Eintrags an (wird in einem neuen Tab geöffnet), </target>
+        <target>Sehen Sie sich eine druckbare Version Ihres ORCID-Eintrags an (wird in einem neuen Tab geöffnet),</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
           <context context-type="linenumber">134</context>
@@ -12966,7 +12972,7 @@
       </trans-unit>
       <trans-unit id="topBar.weLockRecords" datatype="html" resname="topBar.weLockRecords">
         <source>We lock records when they violate conditions of our</source>
-        <target>Wir sperren Einträge, wenn sie gegen die Bestimmungen unserer </target>
+        <target>Wir sperren Einträge, wenn sie gegen die Bestimmungen unserer</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-info/record-info.component.html</context>
           <context context-type="linenumber">10,11</context>
@@ -12982,7 +12988,7 @@
       </trans-unit>
       <trans-unit id="topBar.recordLockedInError" datatype="html" resname="topBar.recordLockedInError">
         <source>If you feel this record has been locked in error please</source>
-        <target>Wenn Sie der Meinung sind, dass dieser Eintrag irrtümlich gesperrt wurde, </target>
+        <target>Wenn Sie der Meinung sind, dass dieser Eintrag irrtümlich gesperrt wurde,</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-info/record-info.component.html</context>
           <context context-type="linenumber">22,23</context>
@@ -14242,6 +14248,7 @@
       </trans-unit>
       <trans-unit id="works.invalidISBN" datatype="html" resname="works.invalidISBN">
         <source>We are unable to validate this identifier. Please check it is correct before saving.</source>
+        <target>We are unable to validate this identifier. Please check it is correct before saving.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
           <context context-type="linenumber">120,123</context>
@@ -14320,7 +14327,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="works.onlyIdentifierTypesFundedBy" datatype="html" resname="works.onlyIdentifierTypesFundedBy">
-        <source>Only identifier types &quot;grant number&quot;, &quot;doi&quot;, &quot;uri&quot; or &quot;proposal id&quot; are allowed when using &quot;funded-by&quot; identifiers</source>
+        <source>Only identifier types "grant number", "doi", "uri" or "proposal id" are allowed when using "funded-by" identifiers</source>
         <target>Bei der Verwendung von „funded by“-Kennungen sind nur die Kennungstypen „Fördernummer“, „doi“, „uri“ oder „Vorschlags-ID“ zulässig</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
@@ -14328,7 +14335,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="works.atLestOneSelfIdRequired" datatype="html" resname="works.atLestOneSelfIdRequired">
-        <source>At least one &quot;self&quot; identifier is required when using &quot;version-of&quot; identifiers</source>
+        <source>At least one "self" identifier is required when using "version-of" identifiers</source>
         <target>Bei Verwendung von „Version-of“-Bezeichnern ist mindestens ein „Self“-Bezeichner erforderlich</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
@@ -16913,7 +16920,7 @@
       </trans-unit>
       <trans-unit id="register.passwordRequirements3" datatype="html" resname="register.passwordRequirements3">
         <source>and</source>
-        <target>und</target>
+        <target>Und</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
           <context context-type="linenumber">272</context>

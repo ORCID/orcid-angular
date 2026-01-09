@@ -515,7 +515,7 @@
       </trans-unit>
       <trans-unit id="account.removeDuplicate" datatype="html" resname="account.removeDuplicate">
         <source>Remove a duplicate record</source>
-        <target>移除重複紀錄</target>
+        <target>移除重複的紀錄</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions/settings-actions.component.ts</context>
           <context context-type="linenumber">14</context>
@@ -1383,7 +1383,7 @@
       </trans-unit>
       <trans-unit id="register.password" datatype="html" resname="register.password">
         <source>Password</source>
-        <target>ORCID 密碼</target>
+        <target>密碼</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
           <context context-type="linenumber">83,84</context>
@@ -3243,7 +3243,7 @@
       </trans-unit>
       <trans-unit id="shared.partOf" datatype="html" resname="shared.partOf">
         <source>Part of</source>
-        <target>部分</target>
+        <target>部份</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panel-data-line/panel-data-line.component.html</context>
           <context context-type="linenumber">11</context>
@@ -3251,7 +3251,7 @@
       </trans-unit>
       <trans-unit id="shared.fundedBy" datatype="html" resname="shared.fundedBy">
         <source>Funded by</source>
-        <target>資助者</target>
+        <target>資助人</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panel-data-line/panel-data-line.component.html</context>
           <context context-type="linenumber">12,14</context>
@@ -3867,7 +3867,7 @@
       </trans-unit>
       <trans-unit id="share.sortTitle" datatype="html" resname="share.sortTitle">
         <source>Title</source>
-        <target>標題</target>
+        <target>頭銜</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/sort-label.pipe.ts</context>
           <context context-type="linenumber">10</context>
@@ -5028,7 +5028,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">44</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="record.manageYourWebsite" datatype="html" resname="record.manageYourWebsite">
         <source>Manage your websites &amp; social links</source>
@@ -5037,7 +5037,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">45</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="record.labelManageYourKeyword" datatype="html" resname="record.labelManageYourKeyword">
         <source>Manage your keywords</source>
@@ -5046,7 +5046,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">46</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="record.labelManageYourCountries" datatype="html" resname="record.labelManageYourCountries">
         <source>Manage your countries</source>
@@ -5055,7 +5055,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">47</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="record.labelManageYourPersonalIds" datatype="html" resname="record.labelManageYourPersonalIds">
         <source>Manage your personalIds</source>
@@ -5064,7 +5064,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">48</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="shared.pleaseReviewInvalidForm" datatype="html" resname="shared.pleaseReviewInvalidForm">
         <source>Please review the form and fix the issues before saving</source>
@@ -8484,7 +8484,7 @@
       </trans-unit>
       <trans-unit id="developerTools.thisSectionIsIntended" datatype="html" resname="developerTools.thisSectionIsIntended">
         <source>This section is intended for developers who plan to integrate ORCID into their system using the ORCID Public API.</source>
-        <target>此區段主要提供給開發人員使用，以供規劃使用 ORCID 公開 API 將 ORCID 整合至自己的系統。 </target>
+        <target>此區段主要提供給開發人員使用，以供規劃使用 ORCID 公開 API 將 ORCID 整合至自己的系統。</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/components/terms-of-use/terms-of-use.component.html</context>
           <context context-type="linenumber">1,4</context>
@@ -9168,6 +9168,7 @@
       </trans-unit>
       <trans-unit id="common.js.domain.warn.warning_1" datatype="html" resname="common.js.domain.warn.warning_1">
         <source>Warning!</source>
+        <target>警告！</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/environment-banner/environment-banner/environment-banner.component.html</context>
           <context context-type="linenumber">7</context>
@@ -9183,6 +9184,7 @@
       </trans-unit>
       <trans-unit id="common.js.domain.warn.is_the_official" datatype="html" resname="common.js.domain.warn.is_the_official">
         <source>is the official website. Sandbox only sends email messages to</source>
+        <target>是官方網站。沙盒僅將電子郵件消息傳送到</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/environment-banner/environment-banner/environment-banner.component.html</context>
           <context context-type="linenumber">19,21</context>
@@ -9198,6 +9200,7 @@
       </trans-unit>
       <trans-unit id="common.js.domain.warn.email_addresses" datatype="html" resname="common.js.domain.warn.email_addresses">
         <source>email addresses, see Sandbox FAQ for</source>
+        <target>電子郵件地址。有關更多信息，</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/environment-banner/environment-banner/environment-banner.component.html</context>
           <context context-type="linenumber">30</context>
@@ -9361,7 +9364,7 @@
       </trans-unit>
       <trans-unit id="home.more_news" datatype="html" resname="home.more_news">
         <source>MORE NEWS</source>
-        <target>更多新聞</target>
+        <target>更多消息</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/components/news/news.component.html</context>
           <context context-type="linenumber">16,18</context>
@@ -9398,6 +9401,7 @@
       </trans-unit>
       <trans-unit id="home.distinguish_yourself" datatype="html" resname="home.distinguish_yourself">
         <source>Distinguish yourself in</source>
+        <target>只需三個簡單步驟</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/pages/home/home.component.html</context>
           <context context-type="linenumber">26,28</context>
@@ -9406,6 +9410,7 @@
       </trans-unit>
       <trans-unit id="home.three_easy" datatype="html" resname="home.three_easy">
         <source>three easy steps</source>
+        <target>就能辨識您的身份</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/pages/home/home.component.html</context>
           <context context-type="linenumber">29,30</context>
@@ -9454,6 +9459,7 @@
       </trans-unit>
       <trans-unit id="home.register_now" datatype="html" resname="home.register_now">
         <source>register now!</source>
+        <target>立即註冊!</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/pages/home/home.component.html</context>
           <context context-type="linenumber">84,86</context>
@@ -9982,7 +9988,7 @@
       </trans-unit>
       <trans-unit id="inbox.otherUpdate" datatype="html" resname="inbox.otherUpdate">
         <source>Other</source>
-        <target>其他產出</target>
+        <target>其他</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/inbox/components/notification-your-record-amended/notification-your-record-amended.component.ts</context>
           <context context-type="linenumber">51</context>
@@ -10178,7 +10184,7 @@
       </trans-unit>
       <trans-unit id="institutional.title" datatype="html" resname="institutional.title">
         <source>Access through your institution</source>
-        <target>使用大學或機構單一簽入</target>
+        <target>透過您的機構存取</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/institutional/pages/institutional/institutional.component.html</context>
           <context context-type="linenumber">28,30</context>
@@ -10526,7 +10532,7 @@
       </trans-unit>
       <trans-unit id="public-layout.membership" datatype="html" resname="public-layout.membership">
         <source>Membership</source>
-        <target>會員</target>
+        <target>會員/訂閱</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/header/menu.ts</context>
           <context context-type="linenumber">15</context>
@@ -10554,7 +10560,7 @@
       </trans-unit>
       <trans-unit id="public-layout.resources" datatype="html" resname="public-layout.resources">
         <source>Resources</source>
-        <target>資源供給</target>
+        <target>資源</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/header/menu.ts</context>
           <context context-type="linenumber">25</context>
@@ -10634,6 +10640,7 @@
       </trans-unit>
       <trans-unit id="layout.public-layout.registry" datatype="html" resname="layout.public-layout.registry">
         <source>registry</source>
+        <target>註冊表</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/search/search.component.ts</context>
           <context context-type="linenumber">31</context>
@@ -10905,6 +10912,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.registerNow" datatype="html" resname="ngOrcid.signin.registerNow">
         <source>Register now</source>
+        <target>註冊 ORCID iD</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/link-account/pages/link-account/link-account.component.html</context>
           <context context-type="linenumber">121,123</context>
@@ -11052,7 +11060,7 @@
       </trans-unit>
       <trans-unit id="check_password_modal.password" datatype="html" resname="check_password_modal.password">
         <source>Password</source>
-        <target>ORCID 密碼</target>
+        <target>密碼</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">34</context>
@@ -11700,7 +11708,7 @@
       </trans-unit>
       <trans-unit id="shared.invalidIssn" datatype="html" resname="shared.invalidIssn">
         <source>Invalid ISSN</source>
-        <target>無效的國際標準期刊號 (ISSN) </target>
+        <target>無效的國際標準期刊號 (ISSN)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.html</context>
           <context context-type="linenumber">440,442</context>
@@ -12028,7 +12036,7 @@
       </trans-unit>
       <trans-unit id="shared.lastModified" datatype="html" resname="shared.lastModified">
         <source>Last modified</source>
-        <target>最後修改</target>
+        <target>上次修改時間</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation/affiliation.component.html</context>
           <context context-type="linenumber">122,124</context>
@@ -14076,7 +14084,7 @@
       </trans-unit>
       <trans-unit id="works.or" datatype="html" resname="works.or">
         <source>or</source>
-        <target>或</target>
+        <target>或者</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-details/work-details.component.html</context>
           <context context-type="linenumber">145,147</context>
@@ -14240,6 +14248,7 @@
       </trans-unit>
       <trans-unit id="works.invalidISBN" datatype="html" resname="works.invalidISBN">
         <source>We are unable to validate this identifier. Please check it is correct before saving.</source>
+        <target>We are unable to validate this identifier. Please check it is correct before saving.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
           <context context-type="linenumber">120,123</context>
@@ -14318,7 +14327,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="works.onlyIdentifierTypesFundedBy" datatype="html" resname="works.onlyIdentifierTypesFundedBy">
-        <source>Only identifier types &quot;grant number&quot;, &quot;doi&quot;, &quot;uri&quot; or &quot;proposal id&quot; are allowed when using &quot;funded-by&quot; identifiers</source>
+        <source>Only identifier types "grant number", "doi", "uri" or "proposal id" are allowed when using "funded-by" identifiers</source>
         <target>使用「資助者」標識符時，僅可使用標識符類型「補助金」、「DOI」、「URI」或「提案 ID」</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
@@ -14326,7 +14335,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="works.atLestOneSelfIdRequired" datatype="html" resname="works.atLestOneSelfIdRequired">
-        <source>At least one &quot;self&quot; identifier is required when using &quot;version-of&quot; identifiers</source>
+        <source>At least one "self" identifier is required when using "version-of" identifiers</source>
         <target>使用「版本」識別碼時至少需要一個「自我」識別碼</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
@@ -14427,7 +14436,7 @@
       </trans-unit>
       <trans-unit id="shared.works" datatype="html" resname="shared.works">
         <source>Works</source>
-        <target>研究作品</target>
+        <target>成果</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-featured-stack-group/work-featured-stack-group.component.html</context>
           <context context-type="linenumber">40</context>
@@ -15871,7 +15880,7 @@
       </trans-unit>
       <trans-unit id="register.passwordCantBeEmail" datatype="html" resname="register.passwordCantBeEmail">
         <source>Password must not be the same as your email address</source>
-        <target>密碼不得與您的電子郵件地址相同</target>
+        <target>密碼不能與您的電子郵件地址相同</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
           <context context-type="linenumber">105,107</context>
@@ -16835,6 +16844,7 @@
       </trans-unit>
       <trans-unit id="register.securityAndNotifications" datatype="html" resname="register.securityAndNotifications">
         <source>Security and notifications</source>
+        <target>安全和通知</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/pages/register/register.component.html</context>
           <context context-type="linenumber">34</context>
@@ -16894,7 +16904,7 @@
       </trans-unit>
       <trans-unit id="register.passwordRequirements1" datatype="html" resname="register.passwordRequirements1">
         <source>Passwords must be between</source>
-        <target>密碼必須包含 </target>
+        <target>密碼必須包含</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
           <context context-type="linenumber">269</context>
@@ -16902,7 +16912,7 @@
       </trans-unit>
       <trans-unit id="register.passwordRequirements2" datatype="html" resname="register.passwordRequirements2">
         <source>8</source>
-        <target>8 至 </target>
+        <target>8 至</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
           <context context-type="linenumber">271</context>
@@ -17170,7 +17180,7 @@
       </trans-unit>
       <trans-unit id="selfService.p1.1" datatype="html" resname="selfService.p1.1">
         <source>As of</source>
-        <target>自 </target>
+        <target>自</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/self-service/self-service/self-service.component.html</context>
           <context context-type="linenumber">25</context>
@@ -18478,7 +18488,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.or" datatype="html" resname="ngOrcid.signin.or">
         <source>or</source>
-        <target>或</target>
+        <target>或者</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/pages/sign-in/sign-in.component.ts</context>
           <context context-type="linenumber">54</context>
@@ -20026,6 +20036,7 @@
       </trans-unit>
       <trans-unit id="login.registerOrcidId" datatype="html" resname="login.registerOrcidId">
         <source>Register for an ORCID iD</source>
+        <target>註冊一個 ORCID iD</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
           <context context-type="linenumber">9</context>
@@ -20069,6 +20080,7 @@
       </trans-unit>
       <trans-unit id="public-layout.associations" datatype="html" resname="public-layout.associations">
         <source>Associations</source>
+        <target>關聯</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
           <context context-type="linenumber">14</context>
@@ -20156,6 +20168,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.outreach" datatype="html" resname="ngOrcid.outreach">
         <source>OUTREACH RESOURCES</source>
+        <target>拓展資源</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
           <context context-type="linenumber">26</context>
@@ -20195,6 +20208,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.currentIntegrations" datatype="html" resname="ngOrcid.currentIntegrations">
         <source>CURRENT INTEGRATIONS</source>
+        <target>目前整合</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
           <context context-type="linenumber">32</context>
@@ -20298,6 +20312,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.adoptionAndInt" datatype="html" resname="ngOrcid.adoptionAndInt">
         <source>ADOPTION AND INTEGRATION PROGRAM</source>
+        <target>採用和整合計劃</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
           <context context-type="linenumber">45</context>
@@ -20393,6 +20408,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.trademark2" datatype="html" resname="ngOrcid.trademark2">
         <source>Trademark and iD Display Guidelines</source>
+        <target>使用商標和顯示 iD 的方針</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
           <context context-type="linenumber">64</context>
@@ -20456,7 +20472,7 @@
       </trans-unit>
       <trans-unit id="register.titleLabel" datatype="html" resname="register.titleLabel">
         <source>Could this be you?</source>
-        <target>這些記錄是不是您的？</target>
+        <target>這是您嗎？</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
           <context context-type="linenumber">102</context>
@@ -20472,7 +20488,7 @@
       </trans-unit>
       <trans-unit id="register.contactLabel" datatype="html" resname="register.contactLabel">
         <source>Contact us.</source>
-        <target>與ORCID聯絡</target>
+        <target>聯繫我們。</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
           <context context-type="linenumber">110</context>
@@ -20520,7 +20536,7 @@
       </trans-unit>
       <trans-unit id="register.signinLabel" datatype="html" resname="register.signinLabel">
         <source>I ALREADY HAVE AN ID, GO BACK TO SIGN IN</source>
-        <target>我已有 iD 號，返回登入</target>
+        <target>我已經有一個 ID 了，返回登入</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
           <context context-type="linenumber">117</context>
@@ -20528,7 +20544,7 @@
       </trans-unit>
       <trans-unit id="register.continueLabel" datatype="html" resname="register.continueLabel">
         <source>NONE OF THESE ARE ME, CONTINUE WITH REGISTRATION</source>
-        <target>不是我的，繼續註冊</target>
+        <target>這些都不是我，繼續註冊</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
           <context context-type="linenumber">120</context>

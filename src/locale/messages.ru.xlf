@@ -283,7 +283,7 @@
       </trans-unit>
       <trans-unit id="account.youWillNoLonger" datatype="html" resname="account.youWillNoLonger">
         <source>You will no longer be able to use your iD to sign in or access other services. Your public record remains accessible but will only contain the iD and a ‘Deactivated record’ message.</source>
-        <target>Вы больше не сможете использовать свой iD для входа в систему или доступа к другим сервисам. Ваша общедоступная учетная запись остается доступной, но будет содержать только iD и сообщение &quot;Деактивированная учетная запись&quot;.</target>
+        <target>Вы больше не сможете использовать свой iD для входа в систему или доступа к другим сервисам. Ваша общедоступная учетная запись остается доступной, но будет содержать только iD и сообщение "Деактивированная учетная запись".</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-deactivate/settings-actions-deactivate.component.html</context>
           <context context-type="linenumber">20,24</context>
@@ -575,7 +575,7 @@
       </trans-unit>
       <trans-unit id="account.verifiedEmailAddress" datatype="html" resname="account.verifiedEmailAddress">
         <source>Verified email address</source>
-        <target>Подтвержденный адрес эл. почты</target>
+        <target>Подтвержденный адрес электронной почты</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-defaults-email-frequency/settings-defaults-email-frequency.component.html</context>
           <context context-type="linenumber">57,59</context>
@@ -2119,6 +2119,7 @@
       </trans-unit>
       <trans-unit id="authorize.ifAuthorize" datatype="html" resname="authorize.ifAuthorize">
         <source>If authorized, this organization will have access to your ORCID record, as outlined above and described in further detail in</source>
+        <target>После предоставления разрешения у этой организации будет доступ к вашей записи ORCID, как описано выше и более подробно в</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.html</context>
           <context context-type="linenumber">99,102</context>
@@ -2126,6 +2127,7 @@
       </trans-unit>
       <trans-unit id="authorize.privacyPolicy" datatype="html" resname="authorize.privacyPolicy">
         <source>ORCID’s privacy policy.</source>
+        <target>Политикой конфиденциальности ORCID.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.html</context>
           <context context-type="linenumber">110</context>
@@ -2397,7 +2399,7 @@
       </trans-unit>
       <trans-unit id="shared.showDetails" datatype="html" resname="shared.showDetails">
         <source>Show details</source>
-        <target>Показать информацию</target>
+        <target>Скрыть информацию</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/account-panel/settings-panels-expand-buttons/settings-panels-expand-buttons.component.ts</context>
           <context context-type="linenumber">10</context>
@@ -5026,7 +5028,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">44</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="record.manageYourWebsite" datatype="html" resname="record.manageYourWebsite">
         <source>Manage your websites &amp; social links</source>
@@ -5035,7 +5037,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">45</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="record.labelManageYourKeyword" datatype="html" resname="record.labelManageYourKeyword">
         <source>Manage your keywords</source>
@@ -5044,7 +5046,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">46</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="record.labelManageYourCountries" datatype="html" resname="record.labelManageYourCountries">
         <source>Manage your countries</source>
@@ -5053,7 +5055,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">47</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="record.labelManageYourPersonalIds" datatype="html" resname="record.labelManageYourPersonalIds">
         <source>Manage your personalIds</source>
@@ -5062,7 +5064,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">48</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="shared.pleaseReviewInvalidForm" datatype="html" resname="shared.pleaseReviewInvalidForm">
         <source>Please review the form and fix the issues before saving</source>
@@ -5278,6 +5280,7 @@
       </trans-unit>
       <trans-unit id="delegators.switchBack" datatype="html" resname="delegators.switchBack">
         <source>Switch back to me</source>
+        <target>Переключить на мою учетную запись</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/trusted-individuals-dropdown/trusted-individuals-dropdown.component.html</context>
           <context context-type="linenumber">44</context>
@@ -8569,7 +8572,7 @@
       </trans-unit>
       <trans-unit id="developerTools.wellEstablishedStandard" datatype="html" resname="developerTools.wellEstablishedStandard">
         <source>, a well-established, standard protocol for user-based permissions.</source>
-        <target> — надежный стандартный протокол для пользовательских разрешений.</target>
+        <target>— надежный стандартный протокол для пользовательских разрешений.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/components/terms-of-use/terms-of-use.component.html</context>
           <context context-type="linenumber">49,50</context>
@@ -8873,7 +8876,7 @@
       </trans-unit>
       <trans-unit id="developerTools.only" datatype="html" resname="developerTools.only">
         <source>Only</source>
-        <target>Принимаются </target>
+        <target>Принимаются</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/pages/developer-tools/developer-tools.component.html</context>
           <context context-type="linenumber">210</context>
@@ -9165,6 +9168,7 @@
       </trans-unit>
       <trans-unit id="common.js.domain.warn.warning_1" datatype="html" resname="common.js.domain.warn.warning_1">
         <source>Warning!</source>
+        <target>Внимание!</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/environment-banner/environment-banner/environment-banner.component.html</context>
           <context context-type="linenumber">7</context>
@@ -9180,6 +9184,7 @@
       </trans-unit>
       <trans-unit id="common.js.domain.warn.is_the_official" datatype="html" resname="common.js.domain.warn.is_the_official">
         <source>is the official website. Sandbox only sends email messages to</source>
+        <target>— это официальный сайт. Sandbox отправляет электронные письма только на те адреса, которые заканчиваются на</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/environment-banner/environment-banner/environment-banner.component.html</context>
           <context context-type="linenumber">19,21</context>
@@ -9195,6 +9200,7 @@
       </trans-unit>
       <trans-unit id="common.js.domain.warn.email_addresses" datatype="html" resname="common.js.domain.warn.email_addresses">
         <source>email addresses, see Sandbox FAQ for</source>
+        <target>.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/environment-banner/environment-banner/environment-banner.component.html</context>
           <context context-type="linenumber">30</context>
@@ -9358,7 +9364,7 @@
       </trans-unit>
       <trans-unit id="home.more_news" datatype="html" resname="home.more_news">
         <source>MORE NEWS</source>
-        <target>ЕЩЕ НОВОСТИ</target>
+        <target>БОЛЬШЕ НОВОСТЕЙ</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/components/news/news.component.html</context>
           <context context-type="linenumber">16,18</context>
@@ -9395,6 +9401,7 @@
       </trans-unit>
       <trans-unit id="home.distinguish_yourself" datatype="html" resname="home.distinguish_yourself">
         <source>Distinguish yourself in</source>
+        <target>Отличитесь от других</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/pages/home/home.component.html</context>
           <context context-type="linenumber">26,28</context>
@@ -9403,6 +9410,7 @@
       </trans-unit>
       <trans-unit id="home.three_easy" datatype="html" resname="home.three_easy">
         <source>three easy steps</source>
+        <target>всего за три простых шага</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/pages/home/home.component.html</context>
           <context context-type="linenumber">29,30</context>
@@ -9451,6 +9459,7 @@
       </trans-unit>
       <trans-unit id="home.register_now" datatype="html" resname="home.register_now">
         <source>register now!</source>
+        <target>зарегистрироваться!</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/pages/home/home.component.html</context>
           <context context-type="linenumber">84,86</context>
@@ -9467,6 +9476,7 @@
       </trans-unit>
       <trans-unit id="home.user_your" datatype="html" resname="home.user_your">
         <source>USE YOUR</source>
+        <target>ИСПОЛЬЗОВАТЬ ВАШ</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/pages/home/home.component.html</context>
           <context context-type="linenumber">101</context>
@@ -9782,7 +9792,7 @@
       </trans-unit>
       <trans-unit id="inbox.invitedPosition" datatype="html" resname="inbox.invitedPosition">
         <source>Invited Position</source>
-        <target>Приглашен(-а) на должность</target>
+        <target>Приглашённая должность</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/inbox/components/notification-permission/notification-permission.component.ts</context>
           <context context-type="linenumber">58</context>
@@ -9798,7 +9808,7 @@
       </trans-unit>
       <trans-unit id="inbox.membership" datatype="html" resname="inbox.membership">
         <source>Membership</source>
-        <target>Подписка</target>
+        <target>Членство</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/inbox/components/notification-permission/notification-permission.component.ts</context>
           <context context-type="linenumber">60</context>
@@ -9978,7 +9988,7 @@
       </trans-unit>
       <trans-unit id="inbox.otherUpdate" datatype="html" resname="inbox.otherUpdate">
         <source>Other</source>
-        <target>Другой результат</target>
+        <target>Другое</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/inbox/components/notification-your-record-amended/notification-your-record-amended.component.ts</context>
           <context context-type="linenumber">51</context>
@@ -10318,6 +10328,7 @@
       </trans-unit>
       <trans-unit id="layout.understood" datatype="html" resname="layout.understood">
         <source>Understood</source>
+        <target>Мне все понятно</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/banners/banners.component.html</context>
           <context context-type="linenumber">37</context>
@@ -10449,6 +10460,7 @@
       </trans-unit>
       <trans-unit id="header.signin" datatype="html" resname="header.signin">
         <source>Sign in</source>
+        <target>Регистрация</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/header/header.component.html</context>
           <context context-type="linenumber">155</context>
@@ -10472,7 +10484,7 @@
       </trans-unit>
       <trans-unit id="layout.ariaLabelConnectingResearchers" datatype="html" resname="layout.ariaLabelConnectingResearchers">
         <source>Connecting research and researchers</source>
-        <target>Мы связываем исследователей с их работами</target>
+        <target>Реестр исследователей и их работ</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/header/header.component.ts</context>
           <context context-type="linenumber">55</context>
@@ -10520,7 +10532,7 @@
       </trans-unit>
       <trans-unit id="public-layout.membership" datatype="html" resname="public-layout.membership">
         <source>Membership</source>
-        <target>Подписка</target>
+        <target>Членство в ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/header/menu.ts</context>
           <context context-type="linenumber">15</context>
@@ -10548,7 +10560,7 @@
       </trans-unit>
       <trans-unit id="public-layout.resources" datatype="html" resname="public-layout.resources">
         <source>Resources</source>
-        <target>Предоставление ресурсов</target>
+        <target>Ресурсы</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/header/menu.ts</context>
           <context context-type="linenumber">25</context>
@@ -10724,7 +10736,7 @@
       </trans-unit>
       <trans-unit id="workspace.developer_tools" datatype="html" resname="workspace.developer_tools">
         <source>Developer tools</source>
-        <target>Инструменты для разработчиков</target>
+        <target>Средства разработчика</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/user-menu/user-menu.component.html</context>
           <context context-type="linenumber">128</context>
@@ -11372,7 +11384,7 @@
       </trans-unit>
       <trans-unit id="shared.employment" datatype="html" resname="shared.employment">
         <source>Employment</source>
-        <target>Трудоустройство</target>
+        <target>Работа</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/affiliation-stacks-groups.component.ts</context>
           <context context-type="linenumber">166</context>
@@ -11400,7 +11412,7 @@
       </trans-unit>
       <trans-unit id="shared.membership" datatype="html" resname="shared.membership">
         <source>Membership and service</source>
-        <target>Членство и общественная работа</target>
+        <target>Членство и служба</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/affiliation-stacks-groups.component.ts</context>
           <context context-type="linenumber">172</context>
@@ -12116,7 +12128,7 @@
       </trans-unit>
       <trans-unit id="shared.relationship" datatype="html" resname="shared.relationship">
         <source>Relationship</source>
-        <target>Отношениe</target>
+        <target>Отношения</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/funding-external-identifiers-edit/funding-external-identifiers-edit.component.html</context>
           <context context-type="linenumber">103</context>
@@ -14016,7 +14028,7 @@
       </trans-unit>
       <trans-unit id="works.contributors" datatype="html" resname="works.contributors">
         <source>Contributors</source>
-        <target>Участники</target>
+        <target>Исследователи</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-details/work-details.component.html</context>
           <context context-type="linenumber">66</context>
@@ -14236,6 +14248,7 @@
       </trans-unit>
       <trans-unit id="works.invalidISBN" datatype="html" resname="works.invalidISBN">
         <source>We are unable to validate this identifier. Please check it is correct before saving.</source>
+        <target>We are unable to validate this identifier. Please check it is correct before saving.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
           <context context-type="linenumber">120,123</context>
@@ -14314,15 +14327,15 @@
         </context-group>
       </trans-unit>
       <trans-unit id="works.onlyIdentifierTypesFundedBy" datatype="html" resname="works.onlyIdentifierTypesFundedBy">
-        <source>Only identifier types &quot;grant number&quot;, &quot;doi&quot;, &quot;uri&quot; or &quot;proposal id&quot; are allowed when using &quot;funded-by&quot; identifiers</source>
-        <target>При использовании идентификаторов &quot;источник финансирования&quot; разрешены только идентификаторы типа &quot;номер гранта&quot;, &quot;DOI&quot;, &quot;URI&quot; или &quot;идентификатор предложения&quot;</target>
+        <source>Only identifier types "grant number", "doi", "uri" or "proposal id" are allowed when using "funded-by" identifiers</source>
+        <target>При использовании идентификаторов "источник финансирования" разрешены только идентификаторы типа "номер гранта", "DOI", "URI" или "идентификатор предложения"</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
           <context context-type="linenumber">255,257</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.atLestOneSelfIdRequired" datatype="html" resname="works.atLestOneSelfIdRequired">
-        <source>At least one &quot;self&quot; identifier is required when using &quot;version-of&quot; identifiers</source>
+        <source>At least one "self" identifier is required when using "version-of" identifiers</source>
         <target>Требуется по меньшей мере один идентификатор «самостоятельная» при использовании идентификаторов «версия»</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
@@ -14899,7 +14912,7 @@
       </trans-unit>
       <trans-unit id="works.urlMaxLength" datatype="html" resname="works.urlMaxLength">
         <source>Must be less than 2000 characters</source>
-        <target>Должно быть менее 2000 символов</target>
+        <target>Должно быть меньше 2000 символов</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-form/work-form/work-form.component.html</context>
           <context context-type="linenumber">455,457</context>
@@ -15851,7 +15864,7 @@
       </trans-unit>
       <trans-unit id="register.passwordNotEmail" datatype="html" resname="register.passwordNotEmail">
         <source>Password must not be the same as your email address</source>
-        <target>Пароль не должен совпадать с адресом электронной почты.</target>
+        <target>Пароль не должен совпадать с адресом электронной почты</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
           <context context-type="linenumber">41,43</context>
@@ -18135,6 +18148,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.deactivated" datatype="html" resname="ngOrcid.signin.deactivated">
         <source>A deactivated ORCID record is associated with this email address; to reactivate your ORCID record please enter your email address and submit the form to start the reactivate process.</source>
+        <target>С этим адресом электронной почты связана деактивированная запись ORCID. Чтобы повторно активировать запись ORCID, введите свой адрес электронной почты и отправьте форму для начала процесса реактивации.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/errors/deactivated/deactivated.component.html</context>
           <context context-type="linenumber">4,8</context>
@@ -18374,6 +18388,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.username" datatype="html" resname="ngOrcid.signin.username">
         <source>Email or 16-digit ORCID iD</source>
+        <target>Электронная почта или 16-значный идентификационный номер ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
           <context context-type="linenumber">88</context>
@@ -18429,7 +18444,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.institutionalAccount" datatype="html" resname="ngOrcid.signin.institutionalAccount">
         <source>Access through your institution</source>
-        <target>Доступ через институционную учётную запись</target>
+        <target>Доступ через Ваше учреждение</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/social/social.component.ts</context>
           <context context-type="linenumber">18</context>
@@ -19025,7 +19040,7 @@
       </trans-unit>
       <trans-unit id="shared.service" datatype="html" resname="shared.service">
         <source>Service</source>
-        <target>Общественная работа</target>
+        <target>Сервис</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/types/record-affiliation.endpoint.ts</context>
           <context context-type="linenumber">145</context>
@@ -19073,7 +19088,7 @@
       </trans-unit>
       <trans-unit id="funding.self" datatype="html" resname="funding.self">
         <source>Self</source>
-        <target>Самостоятельная</target>
+        <target>Самостоятельный</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/types/record-funding.endpoint.ts</context>
           <context context-type="linenumber">79</context>
@@ -19113,7 +19128,7 @@
       </trans-unit>
       <trans-unit id="works.reviewAndEditing" datatype="html" resname="works.reviewAndEditing">
         <source>Review and editing</source>
-        <target>Рецензии и редактура</target>
+        <target>Рецензирование и редактура</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/types/works.endpoint.ts</context>
           <context context-type="linenumber">85</context>
@@ -19965,7 +19980,7 @@
       </trans-unit>
       <trans-unit id="works.fundedBy" datatype="html" resname="works.fundedBy">
         <source>Funded by</source>
-        <target>Финансирование:</target>
+        <target>Источник финансирования</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/types/works.endpoint.ts</context>
           <context context-type="linenumber">626</context>
@@ -20241,6 +20256,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.ourPolicies" datatype="html" resname="ngOrcid.ourPolicies">
         <source>OUR POLICIES</source>
+        <target>НАШИ ПОЛИТИКИ</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
           <context context-type="linenumber">38</context>
@@ -20280,6 +20296,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.openSource" datatype="html" resname="ngOrcid.openSource">
         <source>OPEN SOURCE</source>
+        <target>ОТКРЫТЫЙ ИСХОДНЫЙ КОД</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
           <context context-type="linenumber">43</context>
@@ -20311,6 +20328,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.membershipComparison" datatype="html" resname="ngOrcid.membershipComparison">
         <source>MEMBERSHIP COMPARISON</source>
+        <target>СРАВНЕНИЕ ЧЛЕНСТВА</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
           <context context-type="linenumber">47</context>
@@ -20358,6 +20376,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.disputeProcedures" datatype="html" resname="ngOrcid.disputeProcedures">
         <source>DISPUTE PROCEDURES</source>
+        <target>ПРОЦЕДУРЫ ОСПАРИВАНИЯ</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
           <context context-type="linenumber">58</context>
@@ -20437,6 +20456,7 @@
       </trans-unit>
       <trans-unit id="workspace.self_service" datatype="html" resname="workspace.self_service">
         <source>Member Tools</source>
+        <target>Инструменты для членов</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
           <context context-type="linenumber">74</context>
@@ -20460,7 +20480,7 @@
       </trans-unit>
       <trans-unit id="register.bodyLabel" datatype="html" resname="register.bodyLabel">
         <source>We found some accounts with your name, which means you may have already created an ORCID iD using a different email address. Before creating an account, please confirm that none of these records belong to you. Not sure if any of these are you?</source>
-        <target>Мы нашли несколько учетных записей с Вашим именем, что может означать, что ранее Вы уже создали ORCID iD, используя другой адрес электронной почты. Перед созданием новой убедитесь, что ни одна из этих записей не принадлежит Вам. Не уверены, принадлежит ли одна из них Вам?</target>
+        <target>Мы нашли учетные записи с Вашим именем; возможно Вы уже имеете учетную запись ORCID под другими адресами электронной почты? Перед тем как создать новую учетную запись, просим подтвердить, что ни одна из указанных записей не принадлежит Вам. Не уверены, принадлежит ли одна из них Вам?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
           <context context-type="linenumber">105,108</context>
@@ -20548,7 +20568,7 @@
       </trans-unit>
       <trans-unit id="authorize.readLimited" datatype="html" resname="authorize.readLimited">
         <source>Read your information with visibility set to Trusted Organizations</source>
-        <target>Читайте свою информацию с параметром видимости, установленным на &quot;Доверенные организации&quot;</target>
+        <target>Читайте свою информацию с параметром видимости, установленным на "Доверенные организации"</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
           <context context-type="linenumber">191,192</context>

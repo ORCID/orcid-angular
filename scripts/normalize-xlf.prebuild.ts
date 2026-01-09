@@ -35,7 +35,17 @@ function normalizeXlf12Sources(path: string) {
     })
 
     const builder = new Builder()
-    const out = builder.buildObject(data)
+    let out = builder.buildObject(data)
+    // Match tx pull header formatting (xml decl + <xliff ...> on same line)
+    out = out.replace(
+      /<xliff[^>]*>/,
+      '<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">'
+    )
+    out = out.replace(/^<\?xml[^>]*\?>/, '<?xml version="1.0" ?>')
+    out = out.replace(
+      /^<\?xml version="1\.0" \?>\s*\n\s*<xliff/,
+      '<?xml version="1.0" ?><xliff'
+    )
     fs.writeFileSync(path, out, { encoding: 'utf8' })
   })
 }
