@@ -5,89 +5,86 @@
   "projects": {
     "ng-orcid": {
       "i18n": {
+        "sourceLocale": "en",
         "locales": {
-          "en": {
-            "translation": "src/locale/messages.static.en.xlf",
-            "baseHref": "/"
-          },
           "fr": {
-            "translation": "src/locale/messages.static.fr.xlf",
+            "translation": "src/locale/messages.fr.xlf",
             "baseHref": "/"
           },
           "ar": {
-            "translation": "src/locale/messages.static.ar.xlf",
+            "translation": "src/locale/messages.ar.xlf",
             "baseHref": "/"
           },
           "ca": {
-            "translation": "src/locale/messages.static.ca.xlf",
+            "translation": "src/locale/messages.ca.xlf",
             "baseHref": "/"
           },
           "cs": {
-            "translation": "src/locale/messages.static.cs.xlf",
+            "translation": "src/locale/messages.cs.xlf",
             "baseHref": "/"
           },
           "de": {
-            "translation": "src/locale/messages.static.de.xlf",
+            "translation": "src/locale/messages.de.xlf",
             "baseHref": "/"
           },
           "es": {
-            "translation": "src/locale/messages.static.es.xlf",
+            "translation": "src/locale/messages.es.xlf",
             "baseHref": "/"
           },
           "it": {
-            "translation": "src/locale/messages.static.it.xlf",
+            "translation": "src/locale/messages.it.xlf",
             "baseHref": "/"
           },
           "ja": {
-            "translation": "src/locale/messages.static.ja.xlf",
+            "translation": "src/locale/messages.ja.xlf",
             "baseHref": "/"
           },
           "ko": {
-            "translation": "src/locale/messages.static.ko.xlf",
+            "translation": "src/locale/messages.ko.xlf",
             "baseHref": "/"
           },
           "lr": {
-            "translation": "src/locale/messages.static.lr.xlf",
+            "translation": "src/locale/messages.lr.xlf",
             "baseHref": "/"
           },
           "pl": {
-            "translation": "src/locale/messages.static.pl.xlf",
+            "translation": "src/locale/messages.pl.xlf",
             "baseHref": "/"
           },
           "pt": {
-            "translation": "src/locale/messages.static.pt.xlf",
+            "translation": "src/locale/messages.pt.xlf",
             "baseHref": "/"
           },
           "rl": {
-            "translation": "src/locale/messages.static.rl.xlf",
+            "translation": "src/locale/messages.rl.xlf",
             "baseHref": "/"
           },
           "ru": {
-            "translation": "src/locale/messages.static.ru.xlf",
+            "translation": "src/locale/messages.ru.xlf",
             "baseHref": "/"
           },
           "tr": {
-            "translation": "src/locale/messages.static.tr.xlf",
+            "translation": "src/locale/messages.tr.xlf",
             "baseHref": "/"
           },
           "uk": {
-            "translation": "src/locale/messages.static.uk.xlf",
+            "translation": "src/locale/messages.uk.xlf",
             "baseHref": "/"
           },
           "xx": {
-            "translation": "src/locale/messages.static.xx.xlf",
+            "translation": "src/locale/messages.xx.xlf",
             "baseHref": "/"
           },
           "src": {
-            "translation": "src/locale/messages.static.source.xlf",
+            "translation": "src/locale/messages.source.xlf",
             "baseHref": "/"
           },
           "zh-CN": {
-            "translation": "src/locale/messages.static.zh_CN.xlf",
+            "translation": "src/locale/messages.zh_CN.xlf",
             "baseHref": "/"
           },
           "zh-TW": {
-            "translation": "src/locale/messages.static.zh_TW.xlf",
+            "translation": "src/locale/messages.zh_TW.xlf",
             "baseHref": "/"
           }
         }

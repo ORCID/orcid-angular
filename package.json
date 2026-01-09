@@ -21,7 +21,7 @@
     "postbuild": "ts-node -P scripts/tsconfig.json scripts/postbuild.ts",
     "build:i18n:clone": "ts-node -P scripts/tsconfig.json scripts/properties-clone.postbuild.ts",
     "build:i18n:generate-testing": "ts-node -P scripts/tsconfig.json scripts/properties-test-generator.postbuild.ts",
-    "build:i18n:extract": "ng extract-i18n --format=xlf2 --output-path src/locale",
+    "build:i18n:extract": "ng extract-i18n --format=xlf --output-path src/locale --out-file messages.xlf && tsx scripts/normalize-xlf.prebuild.ts",
     "build:i18n:generate": "ts-node -P scripts/tsconfig.json scripts/translate-file-generator.prebuild.ts",
     "build:i18n": "yarn build:i18n:extract && yarn build:i18n:generate",
     "build:prod": "yarn build",
