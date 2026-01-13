@@ -31,8 +31,8 @@ describe('FormPasswordComponent', () => {
         MdePopoverModule,
         RouterTestingModule,
         ReactiveFormsModule,
+        FormPasswordComponent,
       ],
-      declarations: [FormPasswordComponent],
       providers: [
         { provide: MatDialogRef, useValue: {} },
         { provide: MAT_DIALOG_DATA, useValue: {} },
