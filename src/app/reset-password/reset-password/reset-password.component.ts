@@ -1,10 +1,5 @@
-import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core'
-import {
-  UntypedFormBuilder,
-  UntypedFormControl,
-  UntypedFormGroup,
-  Validators,
-} from '@angular/forms'
+import { Component, Inject, OnInit, ViewChild } from '@angular/core'
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms'
 import { ActivatedRoute, Router, UrlTree } from '@angular/router'
 import { first, Subject } from 'rxjs'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
@@ -21,7 +16,7 @@ import { PasswordRecoveryService } from 'src/app/core/password-recovery/password
 import { RegisterService } from 'src/app/core/register/register.service'
 import { TogglzFlag } from 'src/app/types/config.endpoint'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
-import { OrcidValidators } from 'src/app/validators'
+import { FormPasswordComponent } from '../../register/components/form-password/form-password.component'
 
 @Component({
   selector: 'app-reset-password',
@@ -39,7 +34,8 @@ export class ResetPasswordComponent implements OnInit {
   hasLetterOrSymbolPattern = HAS_LETTER_OR_SYMBOL
   labelInfo = $localize`:@@register.ariaLabelInfoPassword:info about password`
 
-  @Output() loading = new EventEmitter<boolean>()
+  @ViewChild('passwordForm') passwordForm: FormPasswordComponent
+  loading = false
   errors: string[]
   $destroy = new Subject<void>()
   emailKey: string
@@ -72,57 +68,44 @@ export class ResetPasswordComponent implements OnInit {
     this._platform.get().subscribe((platform) => {
       this.isMobile = platform.columns4 || platform.columns8
     })
-    if (!this._route.snapshot.params.key) {
-      this._router.navigate([ApplicationRoutes.signin])
-    } else {
-      this.emailKey = this._route.snapshot.params.key
-    }
+    this.emailKey = this._route.snapshot.params.key
 
-    this._accountRecoveryService
-      .resetPasswordEmailValidateToken({
-        encryptedEmail: this.emailKey,
-      })
-      .subscribe((value) => {
-        if (value.errors.find((x) => x === 'invalidPasswordResetToken')) {
-          this.invalidPasswordResetToken = true
-        }
-        if (value.errors.find((x) => x === 'expiredPasswordResetToken')) {
-          this.expiredPasswordResetToken = true
-        }
-      })
-
-    this.form = this._fb.group(
-      {
-        password: new UntypedFormControl('', {
-          validators: [
-            Validators.required,
-            Validators.minLength(8),
-            Validators.maxLength(256),
-            Validators.pattern(this.hasNumberPattern),
-            Validators.pattern(this.hasLetterOrSymbolPattern),
-          ],
-          asyncValidators: [this._register.backendValueValidate('password')],
-        }),
-        retypedPassword: new UntypedFormControl('', Validators.required),
-      },
-      {
-        validators: OrcidValidators.matchValues('password', 'retypedPassword'),
+    this._route.data.subscribe((data) => {
+      if (
+        data.tokenVerification.errors.find(
+          (x) => x === 'invalidPasswordResetToken'
+        )
+      ) {
+        this.invalidPasswordResetToken = true
       }
-    )
+      if (
+        data.tokenVerification.errors.find(
+          (x) => x === 'expiredPasswordResetToken'
+        )
+      ) {
+        this.expiredPasswordResetToken = true
+      }
+    })
+
+    this.form = this._fb.group({
+      passwordGroup: [''],
+    })
   }
 
   save() {
     if (this.form.valid) {
-      this.loading.emit(true)
+      this.loading = true
+      const passwordValue = this.form.value.passwordGroup.password
+      const confirmValue = this.form.value.passwordGroup.passwordConfirm
       this._accountRecoveryService
         .resetPasswordEmail({
-          password: { value: this.form.value.password },
-          retypedPassword: { value: this.form.value.retypedPassword },
+          password: passwordValue,
+          retypedPassword: confirmValue,
           encryptedEmail: this.emailKey,
           successRedirectLocation: null,
         })
         .subscribe((value) => {
-          this.loading.emit(false)
+          this.loading = false
           if (!value.errors.length && !value.password.errors.length) {
             const oauthURLFromSessionManager =
               this._oauthURLSessionManagerService.get()
@@ -155,7 +138,7 @@ export class ResetPasswordComponent implements OnInit {
                 (x) => x === 'Pattern.registrationForm.password.containsEmail'
               )
             ) {
-              this.form.controls.retypedPassword.setErrors({
+              this.passwordForm.form.get('password')?.setErrors({
                 passwordIsEqualToTheEmail: true,
               })
             }
