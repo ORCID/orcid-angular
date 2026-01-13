@@ -145,7 +145,7 @@ export class ResetPasswordComponent implements OnInit {
           }
         })
     } else {
-      this.form.markAllAsTouched()
+      this.passwordForm.form.markAllAsTouched()
       this._snackBar.showValidationError()
     }
   }
