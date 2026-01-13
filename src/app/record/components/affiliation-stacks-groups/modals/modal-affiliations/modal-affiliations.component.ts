@@ -388,7 +388,9 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
 
     if (this.type === 'editorial-service') {
       affiliationToSave.affiliationType.value = AffiliationType['service']
-      const normalizedIssn = this.normaliseIssn(affiliationForm.get('issn').value);
+      const normalizedIssn = this.normaliseIssn(
+        affiliationForm.get('issn').value
+      )
       const issnUrl = `https://portal.issn.org/resource/ISSN/${normalizedIssn}`
       affiliationToSave.affiliationExternalIdentifiers = [
         {
@@ -736,25 +738,25 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
     }
   }
 
-  normaliseIssn( issn: string) {
+  normaliseIssn(issn: string) {
     if (issn) {
+      // Clean the string (remove spaces, hyphens, and en-dashes)
+      // Using a regex with the 'g' (global) flag replaces all occurrences
+      issn = issn.replace(/[- ]/g, '')
 
-        // Clean the string (remove spaces, hyphens, and en-dashes)
-        // Using a regex with the 'g' (global) flag replaces all occurrences
-        issn = issn.replace(/[- ]/g, "");
+      // Force 'X' to uppercase
+      issn = issn.replace(/x/g, 'X')
 
-        // Force 'X' to uppercase
-        issn = issn.replace(/x/g, "X");
-
-        // Format as 0000-000X
-        if (issn.length === 8) {
-          console.log("Formatted ISSN: " + issn.substring(0, 4) + "-" + issn.substring(4, 8));
-            return issn.substring(0, 4) + "-" + issn.substring(4, 8);
-        }
+      // Format as 0000-000X
+      if (issn.length === 8) {
+        console.log(
+          'Formatted ISSN: ' + issn.substring(0, 4) + '-' + issn.substring(4, 8)
+        )
+        return issn.substring(0, 4) + '-' + issn.substring(4, 8)
+      }
     }
 
     // 6. Return empty string if no match found (matching Java logic)
-    return "";
+    return ''
+  }
 }
-}
-
