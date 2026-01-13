@@ -8,7 +8,7 @@ import {
 import { ResetPasswordGuard } from './reset-password.guard'
 import { RouterTestingModule } from '@angular/router/testing'
 const ApplicationRoutes = {
-  signin: '',
+  signin: 'signin',
 }
 
 describe('ResetPasswordGuard', () => {
@@ -41,10 +41,9 @@ describe('ResetPasswordGuard', () => {
     const mockRoute = createMockRouteSnapshot('some-token-value')
     const result = guard.canActivate(mockRoute, mockStateSnapshot)
     expect(result).toBeTruthy()
-    expect(result).toBe('some-token-value')
   })
 
-  it('should return a UrlTree to home if the "key" query parameter does not exist', () => {
+  it('should return a UrlTree to signin if the "key" query parameter does not exist', () => {
     const mockRoute = createMockRouteSnapshot(null)
     const routerSpy = spyOn(router, 'createUrlTree').and.callThrough()
 

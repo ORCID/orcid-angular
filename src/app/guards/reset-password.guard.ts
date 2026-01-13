@@ -22,9 +22,7 @@ export class ResetPasswordGuard {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    return (
-      next.params['key'] ||
-      this._router.createUrlTree([ApplicationRoutes.signin])
-    )
+    const key = next.params['key']
+    return !!key || this._router.createUrlTree([ApplicationRoutes.signin])
   }
 }
