@@ -48,8 +48,9 @@ export const ORCID_URI_REGEXP =
 // https://regex101.com/r/M1fqZi/1
 export const URL_REGEXP =
   /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#%[\]@!\$&'\(\)\*\+\\,;=.>< ]+$/i
-// ISSN pattern 1234-5678
-export const ISSN_REGEXP = /^\d{4}-\d{4}$/
+// ISSN pattern using same validation as the backend
+//https://regex101.com/r/NYZTYS/1
+export const ISSN_REGEXP = /\b\d{4}-?\d{3}[\dXx]\b/
 /* PROTOCOL REQUIRED*/
 // https://regex101.com/r/pSnDC7/1
 export const URL_REGEXP_BACKEND =
