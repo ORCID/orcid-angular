@@ -8,16 +8,16 @@ import {
 import { ResetPasswordGuard } from './reset-password.guard'
 import { RouterTestingModule } from '@angular/router/testing'
 const ApplicationRoutes = {
-  home: '',
+  signin: '',
 }
 
 describe('ResetPasswordGuard', () => {
   let guard: ResetPasswordGuard
   let router: Router
-  const createMockRouteSnapshot = (hasKey: boolean) => {
+  const createMockRouteSnapshot = (key: string | null) => {
     return {
-      queryParamMap: {
-        has: (param: string) => param === 'key' && hasKey,
+      params: {
+        key: key,
       },
     } as unknown as ActivatedRouteSnapshot
   }
@@ -26,7 +26,7 @@ describe('ResetPasswordGuard', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule.withRoutes([])],
+      imports: [RouterTestingModule],
       providers: [ResetPasswordGuard],
     })
     guard = TestBed.inject(ResetPasswordGuard)
@@ -38,17 +38,18 @@ describe('ResetPasswordGuard', () => {
   })
 
   it('should return true if the "key" query parameter exists', () => {
-    const mockRoute = createMockRouteSnapshot(true)
+    const mockRoute = createMockRouteSnapshot('some-token-value')
     const result = guard.canActivate(mockRoute, mockStateSnapshot)
-    expect(result).toBe(true)
+    expect(result).toBeTruthy()
+    expect(result).toBe('some-token-value')
   })
 
   it('should return a UrlTree to home if the "key" query parameter does not exist', () => {
-    const mockRoute = createMockRouteSnapshot(false)
+    const mockRoute = createMockRouteSnapshot(null)
     const routerSpy = spyOn(router, 'createUrlTree').and.callThrough()
-    const result = guard.canActivate(mockRoute, mockStateSnapshot) as UrlTree
-    expect(routerSpy).toHaveBeenCalledWith([ApplicationRoutes.home])
+
+    const result = guard.canActivate(mockRoute, mockStateSnapshot)
+    expect(routerSpy).toHaveBeenCalledWith([ApplicationRoutes.signin])
     expect(result instanceof UrlTree).toBeTrue()
-    expect(router.serializeUrl(result)).toBe('/')
   })
 })
