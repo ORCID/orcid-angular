@@ -62,6 +62,9 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
   linkLabel = $localize`:@@shared.link:Link`
   issnLabel = $localize`:@@shared.link:Link`
   endDateLabel = $localize`:@@shared.endDate:End date`
+
+  ISSN_PORTAL_URL = 'https://portal.issn.org/resource/ISSN/'
+
   private _type: AffiliationType
   dateLabel: string
   @Input()
@@ -391,7 +394,7 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
       const normalizedIssn = this.normaliseIssn(
         affiliationForm.get('issn').value
       )
-      const issnUrl = `https://portal.issn.org/resource/ISSN/${normalizedIssn}`
+      const issnUrl = `${this.ISSN_PORTAL_URL}${normalizedIssn}`
       affiliationToSave.affiliationExternalIdentifiers = [
         {
           errors: [],
@@ -406,7 +409,7 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
             value: WorkRelationships.self,
             required: true,
           },
-          normalized: { value: affiliationForm.get('issn').value },
+          normalized: { value: normalizedIssn },
           normalizedUrl: { value: issnUrl },
         },
       ]
@@ -740,22 +743,18 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
 
   normaliseIssn(issn: string) {
     if (issn) {
-      // Clean the string (remove spaces, hyphens, and en-dashes)
+      // Clean the string (remove spaces, hyphens)
       // Using a regex with the 'g' (global) flag replaces all occurrences
+      issn = issn.replace(new RegExp(this.ISSN_PORTAL_URL, 'g'), '')
       issn = issn.replace(/[- ]/g, '')
 
       // Force 'X' to uppercase
       issn = issn.replace(/x/g, 'X')
-
       // Format as 0000-000X
       if (issn.length === 8) {
-        console.log(
-          'Formatted ISSN: ' + issn.substring(0, 4) + '-' + issn.substring(4, 8)
-        )
         return issn.substring(0, 4) + '-' + issn.substring(4, 8)
       }
     }
-
     // 6. Return empty string if no match found (matching Java logic)
     return ''
   }
