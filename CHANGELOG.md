@@ -1,3 +1,9 @@
+## v2.128.3 - 2026-01-14
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.128.2...v2.128.3)
+
+- [#2715](https://github.com/ORCID/orcid-angular/pull/2715): Aromanovv/pd 3786 update reset password UI
+
 ## v2.128.2 - 2026-01-14
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.128.1...v2.128.2)
