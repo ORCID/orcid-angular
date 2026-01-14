@@ -20,8 +20,11 @@ describe('BackendErrorComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule],
-      declarations: [BackendErrorComponent],
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+        BackendErrorComponent,
+      ],
       providers: [
         WINDOW_PROVIDERS,
         SignInService,

@@ -10,6 +10,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { FormDirectivesModule } from '../cdk/form-directives/form-directives.module'
 import { MatCardModule } from '@angular/material/card'
+import { AlertMessageComponent } from '@orcid/ui'
+import { MatRadioModule } from '@angular/material/radio'
 
 @NgModule({
   declarations: [PasswordRecoveryComponent],
@@ -24,6 +26,8 @@ import { MatCardModule } from '@angular/material/card'
     MatProgressBarModule,
     FormDirectivesModule,
     MatCardModule,
+    MatRadioModule,
+    AlertMessageComponent,
   ],
 })
 export class PasswordRecoveryModule {}
