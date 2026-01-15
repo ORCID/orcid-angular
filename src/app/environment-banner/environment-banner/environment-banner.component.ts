@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, HostBinding } from '@angular/core'
 import { CookieService } from 'ngx-cookie-service'
-import { WINDOW } from 'src/app/cdk/window'
+import { WINDOW } from '../../cdk/window'
 
 @Component({
   selector: 'app-environment-banner',

@@ -1,4 +1,10 @@
 #!/bin/bash
+
+# ⚠️  DEPRECATED: This script is part of the old .properties translation workflow.
+# ⚠️  The project now uses XLIFF files with Transifex instead.
+# ⚠️  For the new workflow, see .github/workflows/pull-translations.yml
+# ⚠️  This file is kept for reference during the migration period.
+
 # Function to process each .properties file
 process_file() {
   local file=$1
