@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common'
 import { Component, Input, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { take } from 'rxjs/operators'
@@ -8,8 +9,9 @@ import { RegisterBackendErrors } from 'src/app/types/register.local'
   selector: 'app-backend-error',
   templateUrl: './backend-error.component.html',
   styleUrls: ['./backend-error.component.scss'],
+  imports: [CommonModule],
   preserveWhitespaces: true,
-  standalone: false,
+  standalone: true,
 })
 export class BackendErrorComponent implements OnInit {
   recognizedError = RegisterBackendErrors

@@ -39,6 +39,7 @@ import { Observable } from 'rxjs/internal/Observable'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { RecordService } from 'src/app/core/record/record.service'
 import { WorkRelationships } from 'src/app/types/works.endpoint'
+import { normalize } from 'path'
 
 @Component({
   selector: 'app-modal-affiliations',
@@ -61,6 +62,9 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
   linkLabel = $localize`:@@shared.link:Link`
   issnLabel = $localize`:@@shared.link:Link`
   endDateLabel = $localize`:@@shared.endDate:End date`
+
+  ISSN_PORTAL_URL = 'https://portal.issn.org/resource/ISSN/'
+
   private _type: AffiliationType
   dateLabel: string
   @Input()
@@ -387,9 +391,10 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
 
     if (this.type === 'editorial-service') {
       affiliationToSave.affiliationType.value = AffiliationType['service']
-      const issnUrl = `https://portal.issn.org/resource/ISSN/${
+      const normalizedIssn = this.normaliseIssn(
         affiliationForm.get('issn').value
-      }`
+      )
+      const issnUrl = `${this.ISSN_PORTAL_URL}${normalizedIssn}`
       affiliationToSave.affiliationExternalIdentifiers = [
         {
           errors: [],
@@ -404,7 +409,7 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
             value: WorkRelationships.self,
             required: true,
           },
-          normalized: { value: affiliationForm.get('issn').value },
+          normalized: { value: normalizedIssn },
           normalizedUrl: { value: issnUrl },
         },
       ]
@@ -734,5 +739,23 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
         }
       )
     }
+  }
+
+  normaliseIssn(issn: string) {
+    if (issn) {
+      // Clean the string (remove spaces, hyphens)
+      // Using a regex with the 'g' (global) flag replaces all occurrences
+      issn = issn.replace(new RegExp(this.ISSN_PORTAL_URL, 'g'), '')
+      issn = issn.replace(/[- ]/g, '')
+
+      // Force 'X' to uppercase
+      issn = issn.replace(/x/g, 'X')
+      // Format as 0000-000X
+      if (issn.length === 8) {
+        return issn.substring(0, 4) + '-' + issn.substring(4, 8)
+      }
+    }
+    // 6. Return empty string if no match found (matching Java logic)
+    return ''
   }
 }

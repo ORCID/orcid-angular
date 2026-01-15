@@ -8,8 +8,10 @@ import {
   ViewChild,
 } from '@angular/core'
 import {
+  FormsModule,
   NG_ASYNC_VALIDATORS,
   NG_VALUE_ACCESSOR,
+  ReactiveFormsModule,
   UntypedFormControl,
   UntypedFormGroup,
   ValidatorFn,
@@ -26,6 +28,11 @@ import { RegisterObservabilityService } from '../../register-observability.servi
 import { RegisterStateService } from '../../register-state.service'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
+import { MatIconModule } from '@angular/material/icon'
+import { MatFormField, MatInputModule } from '@angular/material/input'
+import { CommonModule } from '@angular/common'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { BackendErrorComponent } from '../backend-error/backend-error.component'
 
 @Component({
   selector: 'app-form-password',
@@ -35,6 +42,14 @@ import { takeUntil } from 'rxjs/operators'
     './form-password.component.scss',
     '../register.scss-theme.scss',
     '../register.style.scss',
+  ],
+  imports: [
+    MatIconModule,
+    CommonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    BackendErrorComponent,
+    ReactiveFormsModule,
   ],
   providers: [
     {
@@ -49,7 +64,7 @@ import { takeUntil } from 'rxjs/operators'
     },
   ],
   preserveWhitespaces: true,
-  standalone: false,
+  standalone: true,
 })
 export class FormPasswordComponent
   extends BaseForm

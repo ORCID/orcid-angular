@@ -1,81 +1,51 @@
-import {
-  AfterViewInit,
-  Component,
-  Inject,
-  OnInit,
-  ViewChild,
-} from '@angular/core'
-import {
-  UntypedFormControl,
-  UntypedFormGroup,
-  Validators,
-} from '@angular/forms'
-import { MatChip } from '@angular/material/chips'
-import { matFormFieldAnimations } from '@angular/material/form-field'
+import { Component, OnInit } from '@angular/core'
+import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { Observable } from 'rxjs'
-import { WINDOW } from 'src/app/cdk/window'
-import { PasswordRecoveryService } from 'src/app/core/password-recovery/password-recovery.service'
+import { OrcidValidators } from 'src/app/validators'
 import { PasswordRecovery } from 'src/app/types'
+import { PasswordRecoveryService } from 'src/app/core/password-recovery/password-recovery.service'
 
 @Component({
   selector: 'app-password-recovery',
+  standalone: false,
   templateUrl: './password-recovery.component.html',
   styleUrls: [
-    './password-recovery.component.scss-theme.scss',
     './password-recovery.component.scss',
+    './password-recovery.component.scss-theme.scss',
   ],
-  animations: [matFormFieldAnimations.transitionMessages],
-  preserveWhitespaces: true,
-  standalone: false,
 })
-export class PasswordRecoveryComponent implements OnInit, AfterViewInit {
-  serverError = null
-  status = false
-  value = false
-  email = 'test'
-  _subscriptAnimationState = ''
+export class PasswordRecoveryComponent implements OnInit {
+  recoveryForm: FormGroup = new FormGroup({})
   loading = false
   submitted = false
-  @ViewChild('passwordChip') passwordChip: MatChip
+  constructor(private _passwordRecovery: PasswordRecoveryService) {}
+  ariaLabelLostAccess = $localize`:@@recovery.lostAccessToYourEmailAddresses:Lost access to your email addresses?`
+  ariaLabelTrySigningIn = $localize`:@@recovery.trySigningIn:Try signing in with your iD and password now`
+  ariaLabelIveForgotten = $localize`:@@recovery.iveForgotten:I've forgotten`
 
-  emailFormControl = new UntypedFormControl('', [Validators.required])
-  typeFormControl = new UntypedFormControl('resetPassword', [
-    Validators.required,
-  ])
-
-  recoveryForm = new UntypedFormGroup({
-    type: this.typeFormControl,
-    email: this.emailFormControl,
-  })
-
-  constructor(
-    private _passwordRecovery: PasswordRecoveryService,
-    @Inject(WINDOW) private window: Window
-  ) {}
-
-  ngOnInit() {}
-
-  ngAfterViewInit() {
-    // Avoid animations on load.
-    this._subscriptAnimationState = 'enter'
+  ngOnInit() {
+    this.recoveryForm = new FormGroup({
+      recoveryType: new FormControl('password', Validators.required),
+      email: new FormControl('', [Validators.required, OrcidValidators.email]),
+    })
   }
 
   onSubmit() {
-    const value = this.recoveryForm.getRawValue()
-    this.serverError = null
-    // Mark all elements as touch to display untouched FormControl errors
-    this.recoveryForm.markAllAsTouched()
-    // If the local validations pass, call the backend
     if (this.recoveryForm.valid) {
       this.loading = true
+      const { recoveryType, email } = this.recoveryForm.value
       let $recovery: Observable<PasswordRecovery>
-      if (this.typeFormControl.value === 'remindOrcidId') {
-        $recovery = this._passwordRecovery.remindOrcidId(value)
+      if (recoveryType === 'password') {
+        $recovery = this._passwordRecovery.resetPassword(
+          this.recoveryForm.getRawValue()
+        )
       } else {
-        $recovery = this._passwordRecovery.resetPassword(value)
+        $recovery = this._passwordRecovery.remindOrcidId(
+          this.recoveryForm.getRawValue()
+        )
       }
-      $recovery.subscribe(
-        (data) => {
+      $recovery.subscribe({
+        next: (data) => {
           this.loading = false
           // Sets the list of backend errors to the control
           if (data.errors && data.errors.length) {
@@ -86,15 +56,14 @@ export class PasswordRecoveryComponent implements OnInit, AfterViewInit {
             this.submitted = true
           }
         },
-        (error) => {
+        error: (error) => {
           // Display server errors
           this.loading = false
-        }
-      )
+        },
+      })
+    } else {
+      this.recoveryForm.markAllAsTouched()
+      this.recoveryForm.markAllAsDirty()
     }
-  }
-
-  navigateTo(val) {
-    this.window.location.href = val
   }
 }

@@ -15,6 +15,8 @@ import { MatChipsModule } from '@angular/material/chips'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { ReactiveFormsModule } from '@angular/forms'
+import { FormPasswordComponent } from '../../../register/components/form-password/form-password.component'
+import { MatRadioModule } from '@angular/material/radio'
 
 describe('PasswordRecoveryComponent', () => {
   let component: PasswordRecoveryComponent
@@ -27,6 +29,8 @@ describe('PasswordRecoveryComponent', () => {
         MatChipsModule,
         RouterTestingModule,
         ReactiveFormsModule,
+        FormPasswordComponent,
+        MatRadioModule,
       ],
       declarations: [PasswordRecoveryComponent],
       providers: [

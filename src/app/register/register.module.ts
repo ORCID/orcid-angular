@@ -47,13 +47,11 @@ import { AlertMessageComponent } from '@orcid/ui'
     StepC2Component,
     StepDComponent,
     FormPersonalComponent,
-    FormPasswordComponent,
     FormNotificationsComponent,
     FormVisibilityComponent,
     FormTermsComponent,
     FormPersonalAdditionalEmailsComponent,
     FormAntiRobotsComponent,
-    BackendErrorComponent,
     RegisterComponent,
     FormCurrentEmploymentComponent,
   ],
@@ -82,6 +80,8 @@ import { AlertMessageComponent } from '@orcid/ui'
     MatAutocompleteModule,
     MatSelectModule,
     SharedModule,
+    FormPasswordComponent,
+    BackendErrorComponent,
   ],
 })
 export class RegisterModule {}
