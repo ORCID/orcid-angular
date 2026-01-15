@@ -1,4 +1,4 @@
-name: Pull and clean properties
+name: Pull translations from Transifex
 
 on:
   workflow_dispatch: {}
@@ -10,11 +10,11 @@ permissions:
   pull-requests: write
 
 concurrency:
-  group: pull-and-clean-${{ github.ref }}
+  group: pull-translations-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
-  pull-clean:
+  pull-translations:
     runs-on: ubuntu-latest
     env:
       TX_TOKEN: ${{ secrets.TRANSIFEX_TOKEN }}
@@ -40,17 +40,13 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Install Transifex CLI (Go)
+      - name: Install Transifex CLI
         run: |
           curl -sSfL https://raw.githubusercontent.com/transifex/cli/master/install.sh | bash
-          # Move the tx binary into a directory on PATH for subsequent steps
           mkdir -p "$HOME/bin"
-
           install -m 0755 ./tx "$HOME/bin/tx"
           echo "$HOME/bin" >> "$GITHUB_PATH"
-          command -v tx || true
-          tx --version || true
-       
+          tx --version
 
       - name: Configure Transifex credentials
         run: |
@@ -67,15 +63,12 @@ jobs:
           chmod 600 "$HOME/.transifexrc"
           echo "Created ~/.transifexrc"
 
-      - name: Verify Transifex CLI
-        run: tx --version
-
       - name: Configure Git user
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Prepare transifex branch (hard reset to main)
+      - name: Prepare transifex branch
         id: prep
         run: |
           set -euo pipefail
@@ -110,16 +103,17 @@ jobs:
               echo "branch_state=created"
               echo "merge_strategy=created_from_main"
               echo "did_merge=false"
-              echo "did_reset=false"
+              echo="did_reset=false"
             } >> "$GITHUB_OUTPUT"
             git checkout -B transifex origin/main
           fi
 
-      - name: Make scripts executable
-        run: chmod +x .github/scripts/pull_and_clean_properties.sh
-
-      - name: Run pull_and_clean_properties.sh
-        run: bash .github/scripts/pull_and_clean_properties.sh
+      - name: Pull translations from Transifex
+        run: |
+          set -euo pipefail
+          echo "Pulling XLF translation files from Transifex..."
+          TX_CONFIG=.tx/config tx pull -a -r orcid-angular.messages-xlf --force --minimum-perc=0
+          echo "Translation pull complete"
 
       - name: Commit and push changes (if any)
         id: commit
@@ -131,7 +125,7 @@ jobs:
               git checkout transifex
             fi
             git add -A
-            git commit -m "Transifex: pull and normalize .properties via CI"
+            git commit -m "Transifex: pull XLF translations via CI"
             git push -f origin transifex
             echo "Changes pushed to transifex branch."
             echo "changes=true" >> "$GITHUB_OUTPUT"
@@ -236,11 +230,11 @@ jobs:
                 prevLine = 'Branch was created from main (no previous head).';
               }
               const body = [
-                'Automated update of .properties files via CI.',
+                'Automated update of XLF translation files via CI.',
                 '',
                 prevLine
               ].join('\n');
-              const created = await github.rest.pulls.create({ owner, repo, head, base, title: 'Transifex: update properties', body });
+              const created = await github.rest.pulls.create({ owner, repo, head, base, title: 'Transifex: update translations', body });
               core.info('Opened PR from transifex to main.');
               core.setOutput('pr_state', 'created');
               core.setOutput('pr_number', String(created.data.number));
