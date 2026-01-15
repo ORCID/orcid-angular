@@ -51,5 +51,3 @@ function normalizeXlf12Sources(path: string) {
 }
 
 normalizeXlf12Sources('./src/locale/messages.xlf')
-
-

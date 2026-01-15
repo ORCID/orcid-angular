@@ -9,7 +9,10 @@ import {
 } from '@angular/core'
 import { combineLatest, Observable, of, Subject } from 'rxjs'
 import { first, takeUntil, finalize } from 'rxjs/operators'
-import { OrganizationsService, VerificationEmailModalService } from 'src/app/core'
+import {
+  OrganizationsService,
+  VerificationEmailModalService,
+} from 'src/app/core'
 import { RecordAffiliationService } from 'src/app/core/record-affiliations/record-affiliations.service'
 import { OrgDisambiguated, UserInfo } from 'src/app/types'
 import {

@@ -106,11 +106,11 @@ function saveJsonAsXlf(json, name) {
     new Promise((resolve, reject) => {
       // Map language codes to match TX locale codes
       const langCodeMap = {
-        'tr': 'tr_TR',
-        'pl': 'pl_PL'
+        tr: 'tr_TR',
+        pl: 'pl_PL',
       }
       const filenameLang = langCodeMap[name] || name
-      
+
       // Ensure XLIFF 1.2 metadata is set
       const fileNode = json?.xliff?.file?.[0]
       if (fileNode?.$) {
@@ -194,8 +194,7 @@ function setLanguagePropertiesToLanguageFile(
         observer.error(error)
       }
       const fileNode = staticValues?.xliff?.file?.[0]
-      const units =
-        fileNode?.unit || fileNode?.body?.[0]?.['trans-unit'] || []
+      const units = fileNode?.unit || fileNode?.body?.[0]?.['trans-unit'] || []
 
       if (!Array.isArray(units) || units.length === 0) {
         observer.error(
