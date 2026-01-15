@@ -392,7 +392,7 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
     if (this.type === 'editorial-service') {
       affiliationToSave.affiliationType.value = AffiliationType['service']
       const normalizedIssn = this.normaliseIssn(
-        affiliationForm.get('issn').value
+        affiliationForm.get('issn')?.value?.trim()
       )
       const issnUrl = `${this.ISSN_PORTAL_URL}${normalizedIssn}`
       affiliationToSave.affiliationExternalIdentifiers = [
@@ -400,7 +400,7 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
           errors: [],
           externalIdentifierId: {
             errors: [],
-            value: affiliationForm.get('issn').value,
+            value: affiliationForm.get('issn')?.value?.trim(),
             required: true,
           },
           externalIdentifierType: { value: 'issn' },
@@ -743,19 +743,20 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
 
   normaliseIssn(issn: string) {
     if (issn) {
-      // Clean the string (remove spaces, hyphens)
-      // Using a regex with the 'g' (global) flag replaces all occurrences
-      issn = issn.replace(new RegExp(this.ISSN_PORTAL_URL, 'g'), '')
-      issn = issn.replace(/[- ]/g, '')
+      // 1. Remove the portal URL
+      issn = issn.replace(new RegExp(this.ISSN_PORTAL_URL, 'g'), '');
+      
+      // 2. Remove ALL non-alphanumeric characters (spaces, hyphens, dots, etc.)
+      issn = issn.replace(/[^a-zA-Z0-9]/g, '');
 
-      // Force 'X' to uppercase
-      issn = issn.replace(/x/g, 'X')
-      // Format as 0000-000X
+      // 3. Force 'X' to uppercase
+      issn = issn.replace(/x/g, 'X');
+
+      // 4. Format as 0000-000X if valid length
       if (issn.length === 8) {
         return issn.substring(0, 4) + '-' + issn.substring(4, 8)
       }
     }
-    // 6. Return empty string if no match found (matching Java logic)
     return ''
   }
 }
