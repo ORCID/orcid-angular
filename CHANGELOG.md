@@ -1,3 +1,9 @@
+## v2.128.4 - 2026-01-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.128.3...v2.128.4)
+
+- [#2713](https://github.com/ORCID/orcid-angular/pull/2713): PD-4733 - Bump @angular/core from 20.1.6 to 20.3.16
+
 ## v2.128.3 - 2026-01-14
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.128.2...v2.128.3)
