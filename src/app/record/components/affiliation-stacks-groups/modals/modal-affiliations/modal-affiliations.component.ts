@@ -744,13 +744,13 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
   normaliseIssn(issn: string) {
     if (issn) {
       // 1. Remove the portal URL
-      issn = issn.replace(new RegExp(this.ISSN_PORTAL_URL, 'g'), '');
-      
+      issn = issn.replace(new RegExp(this.ISSN_PORTAL_URL, 'g'), '')
+
       // 2. Remove ALL non-alphanumeric characters (spaces, hyphens, dots, etc.)
-      issn = issn.replace(/[^a-zA-Z0-9]/g, '');
+      issn = issn.replace(/[^a-zA-Z0-9]/g, '')
 
       // 3. Force 'X' to uppercase
-      issn = issn.replace(/x/g, 'X');
+      issn = issn.replace(/x/g, 'X')
 
       // 4. Format as 0000-000X if valid length
       if (issn.length === 8) {
