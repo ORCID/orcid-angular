@@ -13,6 +13,8 @@ import {
 } from '@angular/material/progress-bar'
 import { MatButtonModule } from '@angular/material/button'
 import { MdePopoverModule } from '../cdk/popover'
+import { FormPasswordComponent } from '../register/components/form-password/form-password.component'
+import { RegisterModule } from '../register/register.module'
 
 @NgModule({
   declarations: [ResetPasswordComponent],
@@ -27,6 +29,7 @@ import { MdePopoverModule } from '../cdk/popover'
     MatProgressBarModule,
     MatButtonModule,
     MdePopoverModule,
+    FormPasswordComponent,
   ],
 })
 export class ResetPasswordModule {}
