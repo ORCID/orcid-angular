@@ -177,7 +177,10 @@
     </div>
 
     <!-- ID Actions (Copy/Print) -->
-    <div class="id-actions-area" *ngIf="!compactMode && !loading">
+    <div
+      class="id-actions-area"
+      *ngIf="!compactMode && !loading && !issueTitle"
+    >
       <ng-content select="[header-banner-id-actions]"></ng-content>
     </div>
 

@@ -94,6 +94,15 @@ export class RecordHeaderComponent implements OnInit {
   private isLoggedIn = false
   private loggedUserOrcid: string | undefined
 
+  get noDisplayableData(): boolean {
+    return (
+      this.affiliations === 0 &&
+      !this.displaySideBar &&
+      !this.displayBiography &&
+      !this.userInfo?.RECORD_WITH_ISSUES
+    )
+  }
+
   // Issue banner property
   get issueTitle(): string {
     if (!this.userInfo?.RECORD_WITH_ISSUES) {
