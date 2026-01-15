@@ -103,7 +103,7 @@ jobs:
               echo "branch_state=created"
               echo "merge_strategy=created_from_main"
               echo "did_merge=false"
-              echo="did_reset=false"
+              echo "did_reset=false"
             } >> "$GITHUB_OUTPUT"
             git checkout -B transifex origin/main
           fi

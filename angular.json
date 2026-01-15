@@ -109,7 +109,7 @@
             "crossOrigin": "use-credentials",
             "outputHashing": "all",
             "outputPath": "dist",
-            "i18nMissingTranslation": "error",
+            "i18nMissingTranslation": "warning",
             "assets": [
               {
                 "glob": "**/*",

@@ -855,20 +855,12 @@
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
           <context context-type="linenumber">44</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">70</context>
-        </context-group>
       </trans-unit>
       <trans-unit id="shared.passwordCantBeEmpty" datatype="html" resname="shared.passwordCantBeEmpty">
         <source>Password cannot be empty</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
           <context context-type="linenumber">60,62</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">87,89</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.wrongPasswordPatternV2" datatype="html" resname="register.wrongPasswordPatternV2">
@@ -877,20 +869,12 @@
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
           <context context-type="linenumber">70,72</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">97,99</context>
-        </context-group>
       </trans-unit>
       <trans-unit id="register.passwordIsToLongV2" datatype="html" resname="register.passwordIsToLongV2">
         <source>Password must be between 8 and 256 characters</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
           <context context-type="linenumber">76,78</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">103,105</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.passwordLength" datatype="html" resname="register.passwordLength">
@@ -901,11 +885,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">125</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">146,148</context>
+          <context context-type="linenumber">129</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.passwordSymbolV2" datatype="html" resname="register.passwordSymbolV2">
@@ -914,10 +894,6 @@
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
           <context context-type="linenumber">111</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">160,162</context>
-        </context-group>
       </trans-unit>
       <trans-unit id="register.passwordNumberV2" datatype="html" resname="register.passwordNumberV2">
         <source>At least 1 number</source>
@@ -925,20 +901,12 @@
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
           <context context-type="linenumber">123</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">174,176</context>
-        </context-group>
       </trans-unit>
       <trans-unit id="account.confirmNewPassword" datatype="html" resname="account.confirmNewPassword">
         <source>Confirm new password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
           <context context-type="linenumber">135</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">189</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.passwordConfirmationRequired" datatype="html" resname="register.passwordConfirmationRequired">
@@ -949,11 +917,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">96,98</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">206,208</context>
+          <context context-type="linenumber">100,102</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.passwordConfirmationMatchV2" datatype="html" resname="register.passwordConfirmationMatchV2">
@@ -961,10 +925,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
           <context context-type="linenumber">158,160</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">213,215</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.yourPasswordHasBeenUpdate" datatype="html" resname="account.yourPasswordHasBeenUpdate">
@@ -1027,10 +987,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work/modals/works-visibility-modal/works-visibility-modal.component.html</context>
           <context context-type="linenumber">14,16</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">239,241</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.addExtraSecurity" datatype="html" resname="account.addExtraSecurity">
@@ -1269,7 +1225,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.ts</context>
-          <context context-type="linenumber">68</context>
+          <context context-type="linenumber">83</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.enterTheCode" datatype="html" resname="account.enterTheCode">
@@ -1531,7 +1487,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.ts</context>
-          <context context-type="linenumber">54</context>
+          <context context-type="linenumber">55</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -2518,7 +2474,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.ts</context>
-          <context context-type="linenumber">73</context>
+          <context context-type="linenumber">77</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/funding-stacks-groups/modals/modal-funding/modal-funding.component.html</context>
@@ -2565,7 +2521,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.ts</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">57</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/funding-stacks-groups/modals/modal-funding/modal-funding.component.html</context>
@@ -2624,7 +2580,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.ts</context>
-          <context context-type="linenumber">57</context>
+          <context context-type="linenumber">58</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/funding-stacks-groups/modals/modal-funding/modal-funding.component.html</context>
@@ -3666,7 +3622,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.ts</context>
-          <context context-type="linenumber">115</context>
+          <context context-type="linenumber">119</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/funding-stacks-groups/modals/modal-funding/modal-funding.component.ts</context>
@@ -3818,6 +3774,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
           <context context-type="linenumber">225,228</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
+          <context context-type="linenumber">134,136</context>
         </context-group>
       </trans-unit>
       <trans-unit id="side-bar.alreadyAssociated" datatype="html" resname="side-bar.alreadyAssociated">
@@ -4125,7 +4085,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.ts</context>
-          <context context-type="linenumber">571</context>
+          <context context-type="linenumber">576</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/modals/modal-delete-item/modal-delete-items.component.ts</context>
@@ -5375,306 +5335,306 @@
         <source>ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">113</context>
+          <context context-type="linenumber">114</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.twoFactorSetup" datatype="html" resname="share.twoFactorSetup">
         <source>2FA - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">114</context>
+          <context context-type="linenumber">115</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">115</context>
+          <context context-type="linenumber">116</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.institutionalLinking" datatype="html" resname="share.institutionalLinking">
         <source>Institutional linking - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">116</context>
+          <context context-type="linenumber">117</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.social" datatype="html" resname="share.social">
         <source>Social linking - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">117</context>
+          <context context-type="linenumber">118</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.institutional" datatype="html" resname="share.institutional">
         <source>Institutional sign in - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">118</context>
+          <context context-type="linenumber">119</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.inbox" datatype="html" resname="share.inbox">
         <source>Notifications inbox - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">119</context>
+          <context context-type="linenumber">120</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.signin" datatype="html" resname="share.signin">
         <source>Sign in - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">120</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/constants.ts</context>
           <context context-type="linenumber">121</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">127</context>
+          <context context-type="linenumber">122</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/constants.ts</context>
+          <context context-type="linenumber">128</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.authorize" datatype="html" resname="share.authorize">
         <source>Oauth - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">122</context>
+          <context context-type="linenumber">123</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.search" datatype="html" resname="share.search">
         <source>Search - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">123</context>
+          <context context-type="linenumber">124</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.reactivation" datatype="html" resname="share.reactivation">
         <source>Account reactivation - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">124</context>
+          <context context-type="linenumber">125</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.resetPassword" datatype="html" resname="share.resetPassword">
         <source>Reset password - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">125</context>
+          <context context-type="linenumber">126</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.register" datatype="html" resname="share.register">
         <source>Register - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">126</context>
+          <context context-type="linenumber">127</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.account" datatype="html" resname="share.account">
         <source>Account settings - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">128</context>
+          <context context-type="linenumber">129</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.deactivateAccount" datatype="html" resname="share.deactivateAccount">
         <source>Deactivate account - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">129</context>
+          <context context-type="linenumber">130</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.trustedParties" datatype="html" resname="share.trustedParties">
         <source>Trusted parties - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">130</context>
+          <context context-type="linenumber">131</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.resetPasswordEmail" datatype="html" resname="share.resetPasswordEmail">
         <source>Reset password - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">131</context>
+          <context context-type="linenumber">132</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.selfService" datatype="html" resname="share.selfService">
         <source>Self Service - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">132</context>
+          <context context-type="linenumber">133</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.developerTools" datatype="html" resname="share.developerTools">
         <source>Developer tools - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">133</context>
+          <context context-type="linenumber">134</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.orcidTitle" datatype="html" resname="share.orcidTitle">
         <source>- ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">137</context>
+          <context context-type="linenumber">138</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.myOrcidTitle" datatype="html" resname="share.myOrcidTitle">
         <source>- My ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">138</context>
+          <context context-type="linenumber">139</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByEmployment" datatype="html" resname="shared.dialogAriaLabeledByEmployment">
         <source>Manage employment dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">363</context>
+          <context context-type="linenumber">364</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByEducation" datatype="html" resname="shared.dialogAriaLabeledByEducation">
         <source>Manage education dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">365</context>
+          <context context-type="linenumber">366</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByQualification" datatype="html" resname="shared.dialogAriaLabeledByQualification">
         <source>Manage qualification dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">367</context>
+          <context context-type="linenumber">368</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByDistinction" datatype="html" resname="shared.dialogAriaLabeledByDistinction">
         <source>Manage distinction dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">369</context>
+          <context context-type="linenumber">370</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByInvitedPosition" datatype="html" resname="shared.dialogAriaLabeledByInvitedPosition">
         <source>Manage invited position dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">371</context>
+          <context context-type="linenumber">372</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByMembership" datatype="html" resname="shared.dialogAriaLabeledByMembership">
         <source>Manage membership dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">373</context>
+          <context context-type="linenumber">374</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByService" datatype="html" resname="shared.dialogAriaLabeledByService">
         <source>Manage service dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">375</context>
+          <context context-type="linenumber">376</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByEditorialService" datatype="html" resname="shared.dialogAriaLabeledByEditorialService">
         <source>Manage editorial service dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">377</context>
+          <context context-type="linenumber">378</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByBibtex" datatype="html" resname="shared.dialogAriaLabeledByBibtex">
         <source>Manage bibtex dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">380</context>
+          <context context-type="linenumber">381</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByExternalIdentifier" datatype="html" resname="shared.dialogAriaLabeledByExternalIdentifier">
         <source>Manage external identifier dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">382</context>
+          <context context-type="linenumber">383</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByNames" datatype="html" resname="shared.dialogAriaLabeledByNames">
         <source>Manage your names dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">384</context>
+          <context context-type="linenumber">385</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByBiography" datatype="html" resname="shared.dialogAriaLabeledByBiography">
         <source>Manage your biography dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">386</context>
+          <context context-type="linenumber">387</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByEmails" datatype="html" resname="shared.dialogAriaLabeledByEmails">
         <source>Manage your emails dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">388</context>
+          <context context-type="linenumber">389</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByCountries" datatype="html" resname="shared.dialogAriaLabeledByCountries">
         <source>Manage your countries dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">390</context>
+          <context context-type="linenumber">391</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByKeywords" datatype="html" resname="shared.dialogAriaLabeledByKeywords">
         <source>Manage your keywords dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">392</context>
+          <context context-type="linenumber">393</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByOtherIds" datatype="html" resname="shared.dialogAriaLabeledByOtherIds">
         <source>Manage your other IDs dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">394</context>
+          <context context-type="linenumber">395</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByWebsites" datatype="html" resname="shared.dialogAriaLabeledByWebsites">
         <source>Manage your websites &amp; social links dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">396</context>
+          <context context-type="linenumber">397</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByFunding" datatype="html" resname="shared.dialogAriaLabeledByFunding">
         <source>Manage funding dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">398</context>
+          <context context-type="linenumber">399</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByFundingSearch" datatype="html" resname="shared.dialogAriaLabeledByFundingSearch">
         <source>Manage funding search dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">400</context>
+          <context context-type="linenumber">401</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByWork" datatype="html" resname="shared.dialogAriaLabeledByWork">
         <source>Manage work dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">402</context>
+          <context context-type="linenumber">403</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByWorkSearch" datatype="html" resname="shared.dialogAriaLabeledByWorkSearch">
         <source>Manage work search dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">404</context>
+          <context context-type="linenumber">405</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.dialogAriaLabeledByPeerReview" datatype="html" resname="shared.dialogAriaLabeledByPeerReview">
         <source>Manage peer review dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">406</context>
+          <context context-type="linenumber">407</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.youAreOnPage" datatype="html" resname="shared.youAreOnPage">
@@ -9904,102 +9864,175 @@
           <context context-type="linenumber">19</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="ngOrcid.passwordAndOrcid" datatype="html" resname="ngOrcid.passwordAndOrcid">
-        <source>Password and ORCID iD Recovery</source>
+      <trans-unit id="recovery.passwordAndIdRecovery" datatype="html" resname="recovery.passwordAndIdRecovery">
+        <source>Password and iD recovery</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
-          <context context-type="linenumber">7,8</context>
+          <context context-type="linenumber">11,13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
+          <context context-type="linenumber">104</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
+          <context context-type="linenumber">117</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="ngOrcid.didYouForget" datatype="html" resname="ngOrcid.didYouForget">
-        <source>Did you forget your password or ORCID iD?</source>
+      <trans-unit id="recovery.lostAccessToYourEmailAddresses" datatype="html" resname="recovery.lostAccessToYourEmailAddresses">
+        <source>Lost access to your email addresses?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
-          <context context-type="linenumber">20,22</context>
+          <context context-type="linenumber">25,27</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.ts</context>
+          <context context-type="linenumber">22</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="check_password_modal.password" datatype="html" resname="check_password_modal.password">
-        <source>Password</source>
+      <trans-unit id="recovery.youCanAlwaysSignIn" datatype="html" resname="recovery.youCanAlwaysSignIn">
+        <source>You can always sign in to ORCID with your</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="recovery.16DigitOrcidId" datatype="html" resname="recovery.16DigitOrcidId">
+        <source>16-digit ORCID iD</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="register.and" datatype="html" resname="register.and">
+        <source>and</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/form-terms/form-terms.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="recovery.accountPassword" datatype="html" resname="recovery.accountPassword">
+        <source>account password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">34</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="common.orcid_id" datatype="html" resname="common.orcid_id">
-        <source>ORCID iD</source>
+      <trans-unit id="recovery.instead" datatype="html" resname="recovery.instead">
+        <source>instead.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
-          <context context-type="linenumber">42</context>
+          <context context-type="linenumber">35</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="ngOrcid.pleaseChooseRecovery" datatype="html" resname="ngOrcid.pleaseChooseRecovery">
-        <source>Please choose a recovery option</source>
+      <trans-unit id="recovery.trySigningIn" datatype="html" resname="recovery.trySigningIn">
+        <source>Try signing in with your iD and password now</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
-          <context context-type="linenumber">52</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.ts</context>
+          <context context-type="linenumber">23</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="oauth_sign_up.labelemail" datatype="html" resname="oauth_sign_up.labelemail">
+      <trans-unit id="recovery.whatHaveYouForgotten" datatype="html" resname="recovery.whatHaveYouForgotten">
+        <source>What have you forgotten?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
+          <context context-type="linenumber">51,53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="recovery.myOrcidAccountPassword" datatype="html" resname="recovery.myOrcidAccountPassword">
+        <source>my ORCID account password</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
+          <context context-type="linenumber">63</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="recovery.my16DigitOrcidId" datatype="html" resname="recovery.my16DigitOrcidId">
+        <source>my 16-digit ORCID iD</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
+          <context context-type="linenumber">71,73</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="recovery.whereShouldWeSend" datatype="html" resname="recovery.whereShouldWeSend">
+        <source>Where should we send the recovery email?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
+          <context context-type="linenumber">79,81</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="recovery.pleaseUseAnEmail" datatype="html" resname="recovery.pleaseUseAnEmail">
+        <source>Please use an email address associated with your ORCID account.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
+          <context context-type="linenumber">85,87</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="register.Email" datatype="html" resname="register.Email">
         <source>Email</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">96,97</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
+          <context context-type="linenumber">16</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="Email.resendClaim.invalidEmail" datatype="html" resname="Email.resendClaim.invalidEmail">
-        <source>Please enter a valid email address</source>
+      <trans-unit id="recovery.forExampleEmail" datatype="html" resname="recovery.forExampleEmail">
+        <source>For example: joe@institution.edu</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
-          <context context-type="linenumber">66</context>
+          <context context-type="linenumber">120,121</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="ngOrcid.recoverAccountDetails" datatype="html" resname="ngOrcid.recoverAccountDetails">
-        <source>RECOVER ACCOUNT DETAILS</source>
+      <trans-unit id="register.primaryEmailRequired" datatype="html" resname="register.primaryEmailRequired">
+        <source>An email is required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
-          <context context-type="linenumber">87,89</context>
+          <context context-type="linenumber">126</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="orcid.frontend.reset.password.email_success_1" datatype="html" resname="orcid.frontend.reset.password.email_success_1">
-        <source>We have sent a message to</source>
+      <trans-unit id="recovery.sendRecoveryEmail" datatype="html" resname="recovery.sendRecoveryEmail">
+        <source>Send recovery email</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
-          <context context-type="linenumber">98</context>
+          <context context-type="linenumber">150,152</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="orcid.frontend.reset.password.email_success_2" datatype="html" resname="orcid.frontend.reset.password.email_success_2">
-        <source>from reset@notify.orcid.org.</source>
+      <trans-unit id="recovery.weHaveSent" datatype="html" resname="recovery.weHaveSent">
+        <source>We have sent a recovery email to</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
-          <context context-type="linenumber">103</context>
+          <context context-type="linenumber">155</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="ngOrcid.youCanNow" datatype="html" resname="ngOrcid.youCanNow">
-        <source>You can now</source>
+      <trans-unit id="recovery.ifYouDoNotReceive" datatype="html" resname="recovery.ifYouDoNotReceive">
+        <source>If you do not receive the recovery email within 10 minutes please check your spam folder.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
-          <context context-type="linenumber">106</context>
+          <context context-type="linenumber">160,163</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="ngOrcid.returnToLoginPage" datatype="html" resname="ngOrcid.returnToLoginPage">
-        <source>return to the login page.</source>
+      <trans-unit id="recovery.backToSignIn" datatype="html" resname="recovery.backToSignIn">
+        <source>Back to sign in</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
-          <context context-type="linenumber">111</context>
+          <context context-type="linenumber">170</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="orcid.frontend.reset.password.email_success_3" datatype="html" resname="orcid.frontend.reset.password.email_success_3">
-        <source>If you do not receive a message within 10 minutes, please check your spam folder. If you still do not see a message, then</source>
+      <trans-unit id="recovery.iveForgotten" datatype="html" resname="recovery.iveForgotten">
+        <source>I've forgotten</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
-          <context context-type="linenumber">117,119</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="orcid.frontend.reset.password.email_success_4" datatype="html" resname="orcid.frontend.reset.password.email_success_4">
-        <source>contact us</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
-          <context context-type="linenumber">125</context>
+          <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.ts</context>
+          <context context-type="linenumber">24</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.makePublicToEnableHighlighting" datatype="html" resname="shared.makePublicToEnableHighlighting">
@@ -10607,7 +10640,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.ts</context>
-          <context context-type="linenumber">58</context>
+          <context context-type="linenumber">59</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-form/work-form/work-form.component.html</context>
@@ -10630,7 +10663,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.ts</context>
-          <context context-type="linenumber">63</context>
+          <context context-type="linenumber">64</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/funding-stacks-groups/modals/modal-funding/modal-funding.component.html</context>
@@ -10656,11 +10689,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.ts</context>
-          <context context-type="linenumber">61</context>
+          <context context-type="linenumber">62</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.ts</context>
-          <context context-type="linenumber">62</context>
+          <context context-type="linenumber">63</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.linkDescription" datatype="html" resname="shared.linkDescription">
@@ -10681,28 +10714,28 @@
         <source>Save changes to</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.ts</context>
-          <context context-type="linenumber">55</context>
+          <context context-type="linenumber">56</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.cancelChangesAndClose" datatype="html" resname="shared.cancelChangesAndClose">
         <source>Cancel changes and close</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.ts</context>
-          <context context-type="linenumber">60</context>
+          <context context-type="linenumber">61</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.distinctionDate" datatype="html" resname="shared.distinctionDate">
         <source>Date of distinction</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.ts</context>
-          <context context-type="linenumber">75</context>
+          <context context-type="linenumber">79</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.visibilityDescription" datatype="html" resname="shared.visibilityDescription">
         <source>Control who can see this information by setting the visibility. Your default visibility is</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.ts</context>
-          <context context-type="linenumber">116</context>
+          <context context-type="linenumber">120</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/funding-stacks-groups/modals/modal-funding/modal-funding.component.ts</context>
@@ -14238,25 +14271,21 @@
         <source>Password must not be the same as your email address</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">41,43</context>
+          <context context-type="linenumber">42,44</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.passwordIsToLongV22" datatype="html" resname="register.passwordIsToLongV22">
         <source>Password must be between 8 and 256 characters</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">58,60</context>
+          <context context-type="linenumber">59,61</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.passwordCantBeEmail" datatype="html" resname="register.passwordCantBeEmail">
         <source>Password must not be the same as your email address</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">105,107</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">225,227</context>
+          <context context-type="linenumber">109,111</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -14267,39 +14296,39 @@
         <source>Passwords do not match</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">114,116</context>
+          <context context-type="linenumber">118,120</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.yourPasswordHas" datatype="html" resname="register.yourPasswordHas">
         <source>Your password has:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">119</context>
+          <context context-type="linenumber">123</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.atLeastALetterOrSymbol" datatype="html" resname="register.atLeastALetterOrSymbol">
         <source>At least 1 letter or symbol</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">131,133</context>
+          <context context-type="linenumber">135,137</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.atLeastANumber" datatype="html" resname="register.atLeastANumber">
         <source>At least 1 number</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">139</context>
+          <context context-type="linenumber">143</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.ariaLabelInfoPassword" datatype="html" resname="register.ariaLabelInfoPassword">
         <source>info about password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.ts</context>
-          <context context-type="linenumber">58</context>
+          <context context-type="linenumber">73</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.ts</context>
-          <context context-type="linenumber">40</context>
+          <context context-type="linenumber">35</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -14310,7 +14339,7 @@
         <source>close</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.ts</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">74</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal-additional-emails/form-personal-additional-emails.component.ts</context>
@@ -14329,70 +14358,70 @@
         <source>Confirm your password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.ts</context>
-          <context context-type="linenumber">60</context>
+          <context context-type="linenumber">75</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.accesibiltiyOnlyThe8OrMoreCharactersConstrainIsMet" datatype="html" resname="register.accesibiltiyOnlyThe8OrMoreCharactersConstrainIsMet">
         <source>Your password must include at least 1 letter or symbol and 1 number</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.ts</context>
-          <context context-type="linenumber">62</context>
+          <context context-type="linenumber">77</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.accesibiltiyOnlyTheLetterOrSymbolConstrainIsMet" datatype="html" resname="register.accesibiltiyOnlyTheLetterOrSymbolConstrainIsMet">
         <source>Your password must be 8 or more characters and include at least 1 number</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.ts</context>
-          <context context-type="linenumber">63</context>
+          <context context-type="linenumber">78</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.accesibiltiyOnlyTheNumberConstrainIsMet" datatype="html" resname="register.accesibiltiyOnlyTheNumberConstrainIsMet">
         <source>Your password must be 8 or more characters and include at least 1 letter or symbol</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.ts</context>
-          <context context-type="linenumber">64</context>
+          <context context-type="linenumber">79</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.accesibilityOnlyTheNumberConstrainIsNotMet" datatype="html" resname="register.accesibilityOnlyTheNumberConstrainIsNotMet">
         <source>Your password must include at least 1 number</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.ts</context>
-          <context context-type="linenumber">65</context>
+          <context context-type="linenumber">80</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.accesibilityOnlyTheLetterOrSymbolConstrainIsNotMet" datatype="html" resname="register.accesibilityOnlyTheLetterOrSymbolConstrainIsNotMet">
         <source>Your password must include at least 1 letter or symbol</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.ts</context>
-          <context context-type="linenumber">66</context>
+          <context context-type="linenumber">81</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.accesibilityOnlyThe8OrMoreCharactersConstrainIsNotMet" datatype="html" resname="register.accesibilityOnlyThe8OrMoreCharactersConstrainIsNotMet">
         <source>Your password must be 8 or more characters</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.ts</context>
-          <context context-type="linenumber">67</context>
+          <context context-type="linenumber">82</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.allPasswordContrainsArMet" datatype="html" resname="register.allPasswordContrainsArMet">
         <source>All password constraints are met</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.ts</context>
-          <context context-type="linenumber">241</context>
+          <context context-type="linenumber">256</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.passwordAreValid" datatype="html" resname="register.passwordAreValid">
         <source>Your passwords match</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.ts</context>
-          <context context-type="linenumber">274</context>
+          <context context-type="linenumber">289</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.passwordAreNotValid" datatype="html" resname="register.passwordAreNotValid">
         <source>Your passwords do not match</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.ts</context>
-          <context context-type="linenumber">278</context>
+          <context context-type="linenumber">293</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.additionalEmails" datatype="html" resname="register.additionalEmails">
@@ -14821,13 +14850,6 @@
           <context context-type="linenumber">26,28</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="register.and" datatype="html" resname="register.and">
-        <source>and</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/components/form-terms/form-terms.component.html</context>
-          <context context-type="linenumber">29</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="register.termsOfUse2" datatype="html" resname="register.termsOfUse2">
         <source>terms of use</source>
         <context-group purpose="location">
@@ -15133,98 +15155,56 @@
         <source>Reset your password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">17,19</context>
+          <context context-type="linenumber">25,27</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="account.yourRessetPasswordLinkHasGoneBad" datatype="html" resname="account.yourRessetPasswordLinkHasGoneBad">
-        <source>There is a problem with your reset password link. Please check the link is not invalid and has not expired.</source>
+      <trans-unit id="reset.afterResetting" datatype="html" resname="reset.afterResetting">
+        <source>After resetting your password you will be asked to sign in using your email address or ORCID iD and your new password.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">43,45</context>
+          <context context-type="linenumber">33,36</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="account.requestANewLink" datatype="html" resname="account.requestANewLink">
-        <source>Request a new password reset link</source>
+      <trans-unit id="reset.saveYourNewPassword" datatype="html" resname="reset.saveYourNewPassword">
+        <source>Save your new password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="linenumber">56,58</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="reset.afterResettingYourPassword" datatype="html" resname="reset.afterResettingYourPassword">
-        <source>After resetting your password, you will be asked to sign in using your email address/ORCID iD and your new password.</source>
+      <trans-unit id="reset.cancelPasswordReset" datatype="html" resname="reset.cancelPasswordReset">
+        <source>Cancel password reset</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">58,61</context>
+          <context context-type="linenumber">64,65</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="register.passwordRequirements" datatype="html" resname="register.passwordRequirements">
-        <source>Password requirements</source>
+      <trans-unit id="reset.hasExpired" datatype="html" resname="reset.hasExpired">
+        <source>Your password reset link has expired</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">264,266</context>
+          <context context-type="linenumber">83</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="register.passwordRequirements1" datatype="html" resname="register.passwordRequirements1">
-        <source>Passwords must be between</source>
+      <trans-unit id="reset.invalidLink" datatype="html" resname="reset.invalidLink">
+        <source>There is a problem with your password reset link</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">269</context>
+          <context context-type="linenumber">87</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="register.passwordRequirements2" datatype="html" resname="register.passwordRequirements2">
-        <source>8</source>
+      <trans-unit id="reset.youCanRequestANewLink" datatype="html" resname="reset.youCanRequestANewLink">
+        <source>You can request a new link from</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">271</context>
+          <context context-type="linenumber">96</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="register.passwordRequirements3" datatype="html" resname="register.passwordRequirements3">
-        <source>and</source>
+      <trans-unit id="reset.pleaseTryTheLinkAgain" datatype="html" resname="reset.pleaseTryTheLinkAgain">
+        <source>Please try the link again. If this does not work you can request a new password reset link from</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">272</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="register.passwordRequirements4" datatype="html" resname="register.passwordRequirements4">
-        <source>256</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">273</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="register.passwordRequirements5" datatype="html" resname="register.passwordRequirements5">
-        <source>characters in length and are case sensitive.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">274,275</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="register.passwordRequirements6" datatype="html" resname="register.passwordRequirements6">
-        <source>Your password must contain</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">280</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="register.passwordRequirements7" datatype="html" resname="register.passwordRequirements7">
-        <source>At least 1 letter, symbol or space</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">283,285</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="register.passwordRequirements8" datatype="html" resname="register.passwordRequirements8">
-        <source>At least 1 number</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">286</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="register.doesNotAllowCommonPassword" datatype="html" resname="register.doesNotAllowCommonPassword">
-        <source>ORCID does not allow common passwords. Common passwords are insecure, easily-guessed words or phrases such as 'qwerty123'.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
-          <context context-type="linenumber">289,292</context>
+          <context context-type="linenumber">108,109</context>
         </context-group>
       </trans-unit>
       <trans-unit id="layout.searchTitle" datatype="html" resname="layout.searchTitle">
@@ -16400,13 +16380,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/errors/print-errors/print-errors.component.html</context>
           <context context-type="linenumber">119,120</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="register.Email" datatype="html" resname="register.Email">
-        <source>Email</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
-          <context context-type="linenumber">16</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.or" datatype="html" resname="account.or">
