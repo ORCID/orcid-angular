@@ -5,7 +5,10 @@
   "projects": {
     "ng-orcid": {
       "i18n": {
-        "sourceLocale": "en",
+        "sourceLocale": {
+          "code": "en",
+          "baseHref": "/"
+        },
         "locales": {
           "fr": {
             "translation": "src/locale/messages.fr.xlf",
