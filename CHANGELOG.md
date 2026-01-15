@@ -1,3 +1,10 @@
+## v2.128.7 - 2026-01-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.128.6...v2.128.7)
+
+- [#2720](https://github.com/ORCID/orcid-angular/pull/2720): PD-3658 Remove all translations to validate CI rebuilds those
+- [#2719](https://github.com/ORCID/orcid-angular/pull/2719): PD-3866 and PD-3864
+
 ## v2.128.6 - 2026-01-15
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.128.5...v2.128.6)
