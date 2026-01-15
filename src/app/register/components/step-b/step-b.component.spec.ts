@@ -26,8 +26,9 @@ describe('StepBComponent', () => {
         HttpClientModule,
         RouterTestingModule,
         MatSnackBarModule,
+        FormPasswordComponent,
       ],
-      declarations: [StepBComponent, FormPasswordComponent],
+      declarations: [StepBComponent],
       providers: [WINDOW_PROVIDERS, SnackbarService],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()

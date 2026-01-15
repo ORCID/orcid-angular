@@ -12,7 +12,6 @@ export const environment: EnvironmentInterface = {
   INFO_SITE: 'https://info.qa.orcid.org/',
   GOOGLE_ANALYTICS_TESTING_MODE: false,
   GOOGLE_TAG_MANAGER: 'GTM-M9Z7DHS',
-  GOOGLE_RECAPTCHA: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
   HELP_HERO_ID: 'oYFQMrzFHA',
   ZENDESK: null,
   SHOW_TEST_WARNING_BANNER: true,

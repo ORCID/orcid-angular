@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { Config } from 'src/app/types/togglz.endpoint'
+import { Config } from 'src/app/types/config.endpoint'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 
 @Component({

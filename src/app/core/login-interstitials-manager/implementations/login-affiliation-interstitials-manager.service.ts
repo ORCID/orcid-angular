@@ -10,7 +10,7 @@ import { InterstitialType } from 'src/app/cdk/interstitials/interstitial.type'
 import { QaFlag } from '../../qa-flag/qa-flags.enum'
 import { QaFlagsService } from '../../qa-flag/qa-flag.service'
 import { TogglzService } from '../../togglz/togglz.service'
-import { TogglzFlag } from '../../togglz/togglz-flags.enum'
+import { TogglzFlag } from 'src/app/types/config.endpoint'
 import { LoginBaseInterstitialManagerService } from '../abstractions/login-abstract-interstitial-manager.service'
 import { AffiliationsInterstitialComponent } from 'src/app/cdk/interstitials/affiliations-interstitial/interstitial-component/affiliations-interstitial.component'
 import {

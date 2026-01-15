@@ -114,7 +114,7 @@
         </div>
       </div>
       @if (works?.length === 5) {
-      <app-alert-message class="mb-4">
+      <app-alert-message class="mbottom-4">
         <h3 title class="orc-font-body" i18n="@@works.maxFeaturedWorks">
           You have the maximum number of featured works
         </h3>
@@ -131,15 +131,18 @@
   </section>
   <hr />
   <section id="add-featured-works">
-    <h3 class="orc-font-body mb-2" i18n="@@shared.addFeaturedWorks">
+    <h3 class="orc-font-body mbottom-2" i18n="@@shared.addFeaturedWorks">
       Add featured works
     </h3>
-    <div class="orc-font-body-small mb-4" i18n="@@shared.searchFeaturedWorks">
+    <div
+      class="orc-font-body-small mbottom-4"
+      i18n="@@shared.searchFeaturedWorks"
+    >
       Search your public works to find items to feature on your ORCID record.
     </div>
     <form
       role="search"
-      class="search-box orc-font-body-small mb-4"
+      class="search-box orc-font-body-small mbottom-4"
       (submit)="search(searchInput)"
     >
       <div class="input-wrapper">
@@ -166,12 +169,12 @@
     </form>
     <div class="orc-font-body-small you-searched-for">
       @if (searchResults || searchLengthExceeded) {
-      <div class="mb-4">
+      <div class="mbottom-4">
         <strong i18n="@@shared.youSearchedFor">You searched for:</strong
         >&nbsp;<span>{{ searchedTerm }}</span>
       </div>
       } @if (searchLengthExceeded) {
-      <app-alert-message class="mb-4">
+      <app-alert-message class="mbottom-4">
         <h3 title class="orc-font-body" i18n="@@shared.searchTermTooLong">
           Your search term is too long
         </h3>
@@ -249,7 +252,7 @@
           }
         </div>
         @if (idx < searchResults.length - 1) {
-        <hr class="mb-0" />
+        <hr class="mbottom-0" />
         } }
       </div>
       } }

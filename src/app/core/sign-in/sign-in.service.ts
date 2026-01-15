@@ -15,7 +15,7 @@ import { Title } from '@angular/platform-browser'
 
 import { CookieService } from 'ngx-cookie-service'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
-import { TogglzFlag } from '../togglz/togglz-flags.enum'
+import { TogglzFlag } from 'src/app/types/config.endpoint'
 
 @Injectable({
   providedIn: 'root',

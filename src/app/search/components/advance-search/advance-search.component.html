@@ -28,11 +28,11 @@
     (ngSubmit)="search()"
   >
     <div class="row firstRow">
-      <mat-form-field appearance="outline" class="col l3 m4 s4 grow">
+      <mat-form-field appearance="outline" class="col l3 m4 s4 growshrink">
         <mat-label i18n="@@ngOrcid.search.firstName">First Name</mat-label>
         <input matInput formControlName="firstName" #searchForm autofocus />
       </mat-form-field>
-      <mat-form-field appearance="outline" class="col l3 m4 s4 grow">
+      <mat-form-field appearance="outline" class="col l3 m4 s4 growshrink">
         <mat-label i18n="@@ngOrcid.search.lastName">Last Name</mat-label>
         <input matInput formControlName="lastName" />
       </mat-form-field>
@@ -53,7 +53,10 @@
           }}"
         />
       </mat-form-field>
-      <mat-form-field appearance="outline" class="keyword col l2 m3 s4 grow">
+      <mat-form-field
+        appearance="outline"
+        class="keyword col l2 m3 s4 growshrink"
+      >
         <mat-label i18n="@@ngOrcid.search.keyword">Keyword</mat-label>
         <input matInput formControlName="keyword" />
       </mat-form-field>

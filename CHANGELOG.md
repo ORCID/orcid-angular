@@ -1,3 +1,43 @@
+## v2.128.3 - 2026-01-14
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.128.2...v2.128.3)
+
+- [#2715](https://github.com/ORCID/orcid-angular/pull/2715): Aromanovv/pd 3786 update reset password UI
+
+## v2.128.2 - 2026-01-14
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.128.1...v2.128.2)
+
+## v2.128.1 - 2026-01-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.128.0...v2.128.1)
+
+## v2.128.0 - 2026-01-08
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.127.5...v2.128.0)
+
+## v2.127.5 - 2026-01-02
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.127.4...v2.127.5)
+
+## v2.127.4 - 2025-12-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.127.3...v2.127.4)
+
+## v2.127.3 - 2025-12-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.127.2...v2.127.3)
+
+- [#2705](https://github.com/ORCID/orcid-angular/pull/2705): PD-3822
+
+## v2.127.2 - 2025-12-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.127.1...v2.127.2)
+
+## v2.127.1 - 2025-12-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.127.0...v2.127.1)
+
 ## v2.127.0 - 2025-12-17
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.126.11...v2.127.0)

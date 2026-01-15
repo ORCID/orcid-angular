@@ -2,10 +2,12 @@ import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, ReplaySubject } from 'rxjs'
 import { map, switchMapTo } from 'rxjs/operators'
-import { Config } from 'src/app/types/togglz.endpoint'
+import {
+  Config,
+  ConfigMessageKey,
+  TogglzFlag,
+} from 'src/app/types/config.endpoint'
 import { MaintenanceMessage } from 'src/app/types/togglz.local'
-
-import { TogglzFlag } from './togglz-flags.enum'
 
 @Injectable({
   providedIn: 'root',
@@ -52,6 +54,10 @@ export class TogglzService {
     )
   }
 
+  getConfigurationOf(configKey: ConfigMessageKey): Observable<string> {
+    return this.getTogglz().pipe(map((data) => data.messages[configKey]))
+  }
+
   getMaintenanceMessages(): Observable<MaintenanceMessage> {
     return this.getMessageOf(TogglzFlag.MAINTENANCE_MESSAGE).pipe(
       map((value) => {
@@ -70,7 +76,7 @@ export class TogglzService {
   }
 
   nodelistToArray(nodes: NodeListOf<Element>): Element[] {
-    const list = []
+    const list: Element[] = []
     nodes.forEach((element) => {
       list.push(element)
     })
