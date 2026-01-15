@@ -48,7 +48,7 @@
             "baseHref": "/"
           },
           "pl": {
-            "translation": "src/locale/messages.pl.xlf",
+            "translation": "src/locale/messages.pl_PL.xlf",
             "baseHref": "/"
           },
           "pt": {
@@ -64,7 +64,7 @@
             "baseHref": "/"
           },
           "tr": {
-            "translation": "src/locale/messages.tr.xlf",
+            "translation": "src/locale/messages.tr_TR.xlf",
             "baseHref": "/"
           },
           "uk": {

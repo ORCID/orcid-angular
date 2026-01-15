@@ -7,11 +7,12 @@
     "sourceMap": true,
     "declaration": false,
     "module": "es2020",
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "experimentalDecorators": true,
     "paths": {
       "@orcid/tokens": ["projects/orcid-tokens/src/public-api.ts"],
-      "@orcid/ui": ["projects/orcid-ui/src/public-api.ts"]
+      "@orcid/ui": ["projects/orcid-ui/src/public-api.ts"],
+      "src/app/*": ["src/app/*"]
     },
     "resolveJsonModule": true,
     "esModuleInterop": true,

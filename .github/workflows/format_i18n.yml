@@ -18,7 +18,7 @@ jobs:
           node-version: 'v20.x'
           cache: 'yarn'
       - run: yarn
-      - run: yarn build:i18n:generate-testing
+      - run: yarn build:i18n
 
       - name: add and commit any files that have changed
         id: add_and_commit

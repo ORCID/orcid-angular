@@ -3534,7 +3534,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stack/affiliation-stack.component.ts</context>
-          <context context-type="linenumber">105</context>
+          <context context-type="linenumber">104</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/funding-external-identifiers-view-only/funding-external-identifiers-view-only.component.html</context>
@@ -11159,7 +11159,7 @@
         <target>Machen Sie diese Zugehörigkeit öffentlich, wenn Sie sie hervorheben möchten</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stack/affiliation-stack.component.ts</context>
-          <context context-type="linenumber">382</context>
+          <context context-type="linenumber">381</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.clickToRemoveHighlight" datatype="html" resname="shared.clickToRemoveHighlight">
@@ -11167,7 +11167,7 @@
         <target>Klicken Sie, um diese Hervorhebung zu entfernen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stack/affiliation-stack.component.ts</context>
-          <context context-type="linenumber">386</context>
+          <context context-type="linenumber">385</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.clickToHighlight" datatype="html" resname="shared.clickToHighlight">
@@ -11175,7 +11175,7 @@
         <target>Klicken Sie, um diese Zugehörigkeit hervorzuheben</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stack/affiliation-stack.component.ts</context>
-          <context context-type="linenumber">389</context>
+          <context context-type="linenumber">388</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.featuredAffiliationSuccessMessageBefore" datatype="html" resname="shared.featuredAffiliationSuccessMessageBefore">

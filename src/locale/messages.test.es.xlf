@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template" target-language="es">
+    <body>
+      <trans-unit id="testFirst" datatype="html">
+        <source>First string</source>
+        <target>Primera cadena</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">test.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="testSecond" datatype="html" resname="testSecond">
+        <source>Second string</source>
+        <target>Segunda cadena</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">test.component.html</context>
+          <context context-qtype="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="test.third" datatype="html" resname="test.third">
+        <source>Third string</source>
+        <target>Tercera cadena</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">test.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
+
+
+
+

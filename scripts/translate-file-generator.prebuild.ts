@@ -104,12 +104,19 @@ function generateLanguageFile(saveCode, file) {
 function saveJsonAsXlf(json, name) {
   return from(
     new Promise((resolve, reject) => {
+      // Map language codes to match TX locale codes
+      const langCodeMap = {
+        'tr': 'tr_TR',
+        'pl': 'pl_PL'
+      }
+      const filenameLang = langCodeMap[name] || name
+      
       // Ensure XLIFF 1.2 metadata is set
       const fileNode = json?.xliff?.file?.[0]
       if (fileNode?.$) {
         fileNode.$['source-language'] = 'en'
         if (name !== 'source') {
-          const target = name.replace('_', '-')
+          const target = filenameLang.replace('_', '-')
           fileNode.$['target-language'] = target
         } else {
           delete fileNode.$['target-language']
@@ -130,7 +137,7 @@ function saveJsonAsXlf(json, name) {
         '<?xml version="1.0" ?><xliff'
       )
       fs.writeFile(
-        './src/locale/messages.' + name + '.xlf',
+        './src/locale/messages.' + filenameLang + '.xlf',
         xml,
         (err) => {
           if (err) {

@@ -3534,7 +3534,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stack/affiliation-stack.component.ts</context>
-          <context context-type="linenumber">105</context>
+          <context context-type="linenumber">104</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/funding-external-identifiers-view-only/funding-external-identifiers-view-only.component.html</context>
@@ -4835,7 +4835,7 @@
       </trans-unit>
       <trans-unit id="topBar.invalidURL" datatype="html" resname="topBar.invalidURL">
         <source>Invalid URL</source>
-        <target>Nieprawidłowy adres URL</target>
+        <target>nieprawidłowy adres URL</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.html</context>
           <context context-type="linenumber">154,156</context>
@@ -4963,7 +4963,7 @@
       </trans-unit>
       <trans-unit id="record.ariaLabelpreviewPublicRecord" datatype="html" resname="record.ariaLabelpreviewPublicRecord">
         <source>Preview the public version of this record (Opens in a new tab)</source>
-        <target>Wyświetl podgląd publicznej wersji tego rekordu (otwiera się w nowej karcie)</target>
+        <target>Wyświetl podgląd publicznej wersji tego rekordu (Otwiera się w nowej karcie)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar-id/side-bar-id.component.ts</context>
           <context context-type="linenumber">19</context>
@@ -5028,7 +5028,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">44</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="record.manageYourWebsite" datatype="html" resname="record.manageYourWebsite">
         <source>Manage your websites &amp; social links</source>
@@ -5037,7 +5037,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">45</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="record.labelManageYourKeyword" datatype="html" resname="record.labelManageYourKeyword">
         <source>Manage your keywords</source>
@@ -5046,7 +5046,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">46</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="record.labelManageYourCountries" datatype="html" resname="record.labelManageYourCountries">
         <source>Manage your countries</source>
@@ -5055,7 +5055,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">47</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="record.labelManageYourPersonalIds" datatype="html" resname="record.labelManageYourPersonalIds">
         <source>Manage your personalIds</source>
@@ -5064,7 +5064,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">48</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="shared.pleaseReviewInvalidForm" datatype="html" resname="shared.pleaseReviewInvalidForm">
         <source>Please review the form and fix the issues before saving</source>
@@ -5148,7 +5148,7 @@
       </trans-unit>
       <trans-unit id="topBar.resendVerificationEmail" datatype="html" resname="topBar.resendVerificationEmail">
         <source>Resend verification email</source>
-        <target>Ponownie Wyślij weryfikacyjną wiadomość e-mail</target>
+        <target>Ponownie wyślij weryfikacyjną wiadomość e-mail</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/top-bar-verification-email/modals/top-bar-verification-email-modal/top-bar-verification-email-modal.component.html</context>
           <context context-type="linenumber">43,45</context>
@@ -8540,7 +8540,7 @@
       </trans-unit>
       <trans-unit id="developerTools.performMachineSearch" datatype="html" resname="developerTools.performMachineSearch">
         <source>Search public data in the ORCID Registry</source>
-        <target>Przeszukuj dane publiczne w rejestrze ORCID </target>
+        <target>Przeszukuj dane publiczne w rejestrze ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/components/terms-of-use/terms-of-use.component.html</context>
           <context context-type="linenumber">29,31</context>
@@ -9168,6 +9168,7 @@
       </trans-unit>
       <trans-unit id="common.js.domain.warn.warning_1" datatype="html" resname="common.js.domain.warn.warning_1">
         <source>Warning!</source>
+        <target>Ostrzeżenie!</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/environment-banner/environment-banner/environment-banner.component.html</context>
           <context context-type="linenumber">7</context>
@@ -9183,6 +9184,7 @@
       </trans-unit>
       <trans-unit id="common.js.domain.warn.is_the_official" datatype="html" resname="common.js.domain.warn.is_the_official">
         <source>is the official website. Sandbox only sends email messages to</source>
+        <target>to oficjalna witryna internetowa. Sandbox wysyła wiadomości e-mail tylko do</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/environment-banner/environment-banner/environment-banner.component.html</context>
           <context context-type="linenumber">19,21</context>
@@ -9198,6 +9200,7 @@
       </trans-unit>
       <trans-unit id="common.js.domain.warn.email_addresses" datatype="html" resname="common.js.domain.warn.email_addresses">
         <source>email addresses, see Sandbox FAQ for</source>
+        <target>adresy e-mail, zobacz często zadawane pytania dotyczące Sandbox</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/environment-banner/environment-banner/environment-banner.component.html</context>
           <context context-type="linenumber">30</context>
@@ -9398,6 +9401,7 @@
       </trans-unit>
       <trans-unit id="home.distinguish_yourself" datatype="html" resname="home.distinguish_yourself">
         <source>Distinguish yourself in</source>
+        <target>Wyróżnij się</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/pages/home/home.component.html</context>
           <context context-type="linenumber">26,28</context>
@@ -9406,6 +9410,7 @@
       </trans-unit>
       <trans-unit id="home.three_easy" datatype="html" resname="home.three_easy">
         <source>three easy steps</source>
+        <target>trzy proste kroki</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/pages/home/home.component.html</context>
           <context context-type="linenumber">29,30</context>
@@ -9454,6 +9459,7 @@
       </trans-unit>
       <trans-unit id="home.register_now" datatype="html" resname="home.register_now">
         <source>register now!</source>
+        <target>zarejestruj się teraz!</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/pages/home/home.component.html</context>
           <context context-type="linenumber">84,86</context>
@@ -9558,7 +9564,7 @@
       </trans-unit>
       <trans-unit id="inbox.account" datatype="html" resname="inbox.account">
         <source>account</source>
-        <target>konta</target>
+        <target>konto</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/inbox/components/notification-permission-institutional-connection/notification-permission-institutional-connection.component.html</context>
           <context context-type="linenumber">6</context>
@@ -10114,7 +10120,7 @@
       </trans-unit>
       <trans-unit id="inbox.archiveSelected" datatype="html" resname="inbox.archiveSelected">
         <source>Archive selected</source>
-        <target>Wybrane archiwum </target>
+        <target>Wybrane archiwum</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/inbox/components/notifications/notifications.component.html</context>
           <context context-type="linenumber">32</context>
@@ -10154,7 +10160,7 @@
       </trans-unit>
       <trans-unit id="inbox.accountSetting" datatype="html" resname="inbox.accountSetting">
         <source>account settings.</source>
-        <target>ustawieniach konta.</target>
+        <target>ustawienia konta.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/inbox/components/notifications/notifications.component.html</context>
           <context context-type="linenumber">77,78</context>
@@ -10990,7 +10996,7 @@
       </trans-unit>
       <trans-unit id="record.trySearching" datatype="html" resname="record.trySearching">
         <source>Try using our advanced search to find researchers by their name or ORCID iD</source>
-        <target>Skorzystaj z naszej zaawansowanej wyszukiwarki, aby znaleźć badaczy po ich nazwiskach lub identyfikatorach ORCID </target>
+        <target>Skorzystaj z naszej zaawansowanej wyszukiwarki, aby znaleźć badaczy po ich nazwiskach lub identyfikatorach ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/page-not-found-404/not-found/not-found.component.html</context>
           <context context-type="linenumber">62,65</context>
@@ -11153,7 +11159,7 @@
         <target>Wyróżnienie sprawi, że to powiązanie będzie widoczne publicznie</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stack/affiliation-stack.component.ts</context>
-          <context context-type="linenumber">382</context>
+          <context context-type="linenumber">381</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.clickToRemoveHighlight" datatype="html" resname="shared.clickToRemoveHighlight">
@@ -11161,7 +11167,7 @@
         <target>Kliknij, aby usunąć to wyróżnienie</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stack/affiliation-stack.component.ts</context>
-          <context context-type="linenumber">386</context>
+          <context context-type="linenumber">385</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.clickToHighlight" datatype="html" resname="shared.clickToHighlight">
@@ -11169,7 +11175,7 @@
         <target>Kliknij, aby wyróżnić to powiązanie</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stack/affiliation-stack.component.ts</context>
-          <context context-type="linenumber">389</context>
+          <context context-type="linenumber">388</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.featuredAffiliationSuccessMessageBefore" datatype="html" resname="shared.featuredAffiliationSuccessMessageBefore">
@@ -14242,6 +14248,7 @@
       </trans-unit>
       <trans-unit id="works.invalidISBN" datatype="html" resname="works.invalidISBN">
         <source>We are unable to validate this identifier. Please check it is correct before saving.</source>
+        <target>We are unable to validate this identifier. Please check it is correct before saving.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
           <context context-type="linenumber">120,123</context>
@@ -14320,7 +14327,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="works.onlyIdentifierTypesFundedBy" datatype="html" resname="works.onlyIdentifierTypesFundedBy">
-        <source>Only identifier types &quot;grant number&quot;, &quot;doi&quot;, &quot;uri&quot; or &quot;proposal id&quot; are allowed when using &quot;funded-by&quot; identifiers</source>
+        <source>Only identifier types "grant number", "doi", "uri" or "proposal id" are allowed when using "funded-by" identifiers</source>
         <target>W przypadku używania identyfikatorów „funded-by” dozwolone są tylko identyfikatory typu „grant number”, „doi”, „uri” lub „proposal id”</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
@@ -14328,7 +14335,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="works.atLestOneSelfIdRequired" datatype="html" resname="works.atLestOneSelfIdRequired">
-        <source>At least one &quot;self&quot; identifier is required when using &quot;version-of&quot; identifiers</source>
+        <source>At least one "self" identifier is required when using "version-of" identifiers</source>
         <target>W przypadku używania identyfikatorów „wersji” wymagany jest co najmniej jeden identyfikator „własny”.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
@@ -16205,7 +16212,7 @@
       </trans-unit>
       <trans-unit id="register.aDeactivated" datatype="html" resname="register.aDeactivated">
         <source>a deactivated</source>
-        <target>dezaktywowanym </target>
+        <target>dezaktywowanym</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
           <context context-type="linenumber">211,212</context>
@@ -16513,7 +16520,7 @@
       </trans-unit>
       <trans-unit id="register.and" datatype="html" resname="register.and">
         <source>and</source>
-        <target>a</target>
+        <target>i</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-terms/form-terms.component.html</context>
           <context context-type="linenumber">29</context>
@@ -17189,7 +17196,7 @@
       </trans-unit>
       <trans-unit id="selfService.p1.3" datatype="html" resname="selfService.p1.3">
         <source>, Self Service will no longer be available through the ORCID Registry.</source>
-        <target> Samoobsługa nie będzie już dostępna za pośrednictwem Rejestru ORCID.</target>
+        <target>Samoobsługa nie będzie już dostępna za pośrednictwem Rejestru ORCID.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/self-service/self-service/self-service.component.html</context>
           <context context-type="linenumber">31,32</context>

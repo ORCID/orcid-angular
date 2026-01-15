@@ -10,6 +10,15 @@ minimum_perc           = 0
 replace_edited_strings = false
 keep_translations      = false
 
+[o:orcid-inc-1:p:orcid-angular:r:messages-xlf-test]
+file_filter            = src/locale/messages.test.<lang>.xlf
+source_file            = src/locale/messages.test.xlf
+source_lang            = en
+type                   = XLIFF
+minimum_perc           = 0
+replace_edited_strings = true
+keep_translations      = true
+
 [o:orcid-inc-1:p:orcid-angular:r:environment-banner]
 file_filter            = src/locale/properties/environment-banner/environment-banner.<lang>.properties
 source_file            = src/locale/properties/environment-banner/environment-banner.en.properties
