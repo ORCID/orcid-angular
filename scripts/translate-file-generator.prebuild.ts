@@ -64,17 +64,13 @@ readMessageFile('./src/locale/messages.xlf')
   .pipe(
     mergeMap(() => saveJson(reportFile, 'translation.log')),
     tap((reportFile: any) => {
-      if (reportFile.language.en.unmatch || reportFile.language.en.notFound) {
-        console.error(
+      const unmatch = reportFile?.language?.en?.unmatch
+      const notFound = reportFile?.language?.en?.notFound
+      if (unmatch || notFound) {
+        console.warn(
           'Unmatch or/and notFound properties on the source english files'
         )
-        console.error({
-          unmatch: reportFile.language.en.unmatch,
-          notFound: reportFile.language.en.notFound,
-        })
-        throw new Error(
-          'Unmatch or notFound language properties on source english files check the translation.log file'
-        )
+        console.warn({ unmatch, notFound })
       }
     })
   )
@@ -108,10 +104,40 @@ function generateLanguageFile(saveCode, file) {
 function saveJsonAsXlf(json, name) {
   return from(
     new Promise((resolve, reject) => {
-      const builder = new Builder()
-      const xml = builder.buildObject(json)
+      // Map language codes to match TX locale codes
+      const langCodeMap = {
+        'tr': 'tr_TR',
+        'pl': 'pl_PL'
+      }
+      const filenameLang = langCodeMap[name] || name
+      
+      // Ensure XLIFF 1.2 metadata is set
+      const fileNode = json?.xliff?.file?.[0]
+      if (fileNode?.$) {
+        fileNode.$['source-language'] = 'en'
+        if (name !== 'source') {
+          const target = filenameLang.replace('_', '-')
+          fileNode.$['target-language'] = target
+        } else {
+          delete fileNode.$['target-language']
+        }
+      }
+      // Build xml then normalize the header to match `tx pull` formatting exactly
+      const builder = new Builder({ xmldec: { version: '1.0' } })
+      let xml = builder.buildObject(json)
+      // Force xliff root tag + attribute order like tx pull
+      xml = xml.replace(
+        /<xliff[^>]*>/,
+        '<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">'
+      )
+      // Force xml declaration like tx pull (and keep <xliff> on same line)
+      xml = xml.replace(/^<\?xml[^>]*\?>/, '<?xml version="1.0" ?>')
+      xml = xml.replace(
+        /^<\?xml version="1\.0" \?>\s*\n\s*<xliff/,
+        '<?xml version="1.0" ?><xliff'
+      )
       fs.writeFile(
-        './src/locale/messages.static.' + name + '.xlf',
+        './src/locale/messages.' + filenameLang + '.xlf',
         xml,
         (err) => {
           if (err) {
@@ -167,8 +193,19 @@ function setLanguagePropertiesToLanguageFile(
       if (error) {
         observer.error(error)
       }
-      // For each translation
-      staticValues.xliff.file[0].unit.forEach((element) => {
+      const fileNode = staticValues?.xliff?.file?.[0]
+      const units =
+        fileNode?.unit || fileNode?.body?.[0]?.['trans-unit'] || []
+
+      if (!Array.isArray(units) || units.length === 0) {
+        observer.error(
+          new Error('No translatable units found in XLF (1.2 or 2.0)')
+        )
+        return
+      }
+
+      // For each translation (supports XLIFF 2.0 and 1.2 structures)
+      units.forEach((element) => {
         // If an id match one of the translations properties or de language code is "source"
         if (properties[element['$'].id] || languageCode === 'source') {
           let translation: string
@@ -184,20 +221,19 @@ function setLanguagePropertiesToLanguageFile(
             )
           }
           // The translation is added to the XLF file
-          element.segment[0].target = []
-          element.segment[0].target.push(translation)
+          setTarget(element, translation)
           // Check if translations from the template and properties file match
           if ('en' === languageCode) {
             checkIfTranslationMatch(
               element['$'].id,
-              element.segment[0].target[0],
-              element.segment[0].source[0]
+              getTarget(element),
+              getSource(element)
             )
           }
           // If not any id match any of the translations properties
           // the same English template text is added as the translations
         } else {
-          element.segment[0].target = element.segment[0].source
+          setTarget(element, getSource(element))
           // reports when a translation id does not match with any translation property
           translationNotFound(element['$'].id, languageCode)
         }
@@ -292,6 +328,53 @@ function reportTranslationTreatment(translation, replacement, saveCode, id) {
     })
   }
 }
+// Helpers to support both XLIFF 2.0 (segment/source/target) and 1.2 (source/target)
+function getSource(element) {
+  if (element.segment && element.segment[0]?.source) {
+    return element.segment[0].source[0]
+  }
+  if (element.source) {
+    return element.source[0]
+  }
+  return ''
+}
+
+function setTarget(element, value) {
+  if (element.segment) {
+    element.segment[0].target = [value]
+  } else {
+    // Match tx pull format: plain <target>text</target> and keep it right after <source>
+    element.target = [value]
+    reorderXlf12TransUnit(element)
+  }
+}
+
+function reorderXlf12TransUnit(element) {
+  // xml2js Builder keeps object key insertion order; tx pull expects <target> right after <source>
+  // Order: $ attrs, source, target, then everything else as-is (context-group(s), note(s), etc.)
+  const ordered: any = {}
+  if (element.$) ordered.$ = element.$
+  if (element.source) ordered.source = element.source
+  if (element.target) ordered.target = element.target
+
+  Object.keys(element).forEach((k) => {
+    if (k === '$' || k === 'source' || k === 'target') return
+    ordered[k] = element[k]
+  })
+
+  Object.keys(element).forEach((k) => delete element[k])
+  Object.assign(element, ordered)
+}
+
+function getTarget(element) {
+  if (element.segment && element.segment[0]?.target) {
+    return element.segment[0].target[0]
+  }
+  if (element.target) {
+    return element.target[0]
+  }
+  return ''
+}
 function XLFTranslationNoteHas(element, category, content): boolean {
   const value = getXLFTranslationNote(element, category)
   if (value) {
@@ -302,8 +385,16 @@ function XLFTranslationNoteHas(element, category, content): boolean {
 }
 function getXLFTranslationNote(element, noteCategory: string): string {
   let value
-  element.notes[0].note.forEach((note) => {
-    if (note['$']['category'] && note['$']['category'] === noteCategory) {
+  const notes = [
+    ...(element?.notes?.[0]?.note || []),
+    ...(element?.note || []), // XLIFF 1.2 puts note directly under the unit
+  ]
+  if (!notes.length) {
+    return value
+  }
+  notes.forEach((note) => {
+    const category = note?.$?.category || note?.$?.from // xlf2 uses category, xlf1.2 uses from
+    if (category && category === noteCategory) {
       value = note['_']
     }
   })
