@@ -22,6 +22,8 @@ export class PasswordRecoveryComponent implements OnInit {
   ariaLabelLostAccess = $localize`:@@recovery.lostAccessToYourEmailAddresses:Lost access to your email addresses?`
   ariaLabelTrySigningIn = $localize`:@@recovery.trySigningIn:Try signing in with your iD and password now`
   ariaLabelIveForgotten = $localize`:@@recovery.iveForgotten:I've forgotten`
+  ariaLabelMyOrcidAccountPassword = $localize`:@@recovery.myOrcidAccountPassword:my ORCID account password`
+  ariaLabelMy16DigitOrcidId = $localize`:@@recovery.my16DigitOrcidId:my 16-digit ORCID iD`
 
   ngOnInit() {
     this.recoveryForm = new FormGroup({
