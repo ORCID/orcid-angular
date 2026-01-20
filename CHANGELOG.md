@@ -1,3 +1,14 @@
+## v2.128.11 - 2026-01-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.128.10...v2.128.11)
+
+- [#2728](https://github.com/ORCID/orcid-angular/pull/2728): PD-4781
+- [#2712](https://github.com/ORCID/orcid-angular/pull/2712): Bump @angular/compiler from 20.1.6 to 20.3.16
+- [#2724](https://github.com/ORCID/orcid-angular/pull/2724): PD-4777 remove extra whitespace
+- [#2725](https://github.com/ORCID/orcid-angular/pull/2725): PD-4778 fix error message string
+- [#2726](https://github.com/ORCID/orcid-angular/pull/2726): PD-4780 password reset aria fixes
+- [#2727](https://github.com/ORCID/orcid-angular/pull/2727): PD-4781
+
 ## v2.128.10 - 2026-01-15
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.128.9...v2.128.10)
