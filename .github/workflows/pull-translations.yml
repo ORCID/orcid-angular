@@ -24,8 +24,8 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          # Avoid using GITHUB_TOKEN for pushes; we'll use GH_PAT instead so downstream workflows trigger
-          persist-credentials: false
+          # Use GH_PAT so pushes trigger downstream workflows (not GITHUB_TOKEN)
+          token: ${{ env.GH_PAT }}
 
       - name: Ensure GH_PAT is provided (required to trigger downstream workflows)
         run: |
@@ -33,12 +33,6 @@ jobs:
             echo "GH_PAT secret is not set. This job requires a PAT with 'repo' and 'workflow' scopes so that pushes and PR creation trigger other workflows (like lint)." >&2
             exit 1
           fi
-
-      - name: Configure push auth (use GH_PAT)
-        run: |
-          git remote set-url origin https://x-access-token:${{ env.GH_PAT }}@github.com/${{ github.repository }}
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Install Transifex CLI
         run: |
