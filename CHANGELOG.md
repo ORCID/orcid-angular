@@ -1,3 +1,53 @@
+## v2.128.11 - 2026-01-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.128.10...v2.128.11)
+
+- [#2728](https://github.com/ORCID/orcid-angular/pull/2728): PD-4781
+- [#2712](https://github.com/ORCID/orcid-angular/pull/2712): Bump @angular/compiler from 20.1.6 to 20.3.16
+- [#2724](https://github.com/ORCID/orcid-angular/pull/2724): PD-4777 remove extra whitespace
+- [#2725](https://github.com/ORCID/orcid-angular/pull/2725): PD-4778 fix error message string
+- [#2726](https://github.com/ORCID/orcid-angular/pull/2726): PD-4780 password reset aria fixes
+- [#2727](https://github.com/ORCID/orcid-angular/pull/2727): PD-4781
+
+## v2.128.10 - 2026-01-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.128.9...v2.128.10)
+
+- [#2722](https://github.com/ORCID/orcid-angular/pull/2722): PD-3658
+
+## v2.128.9 - 2026-01-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.128.8...v2.128.9)
+
+- [#2721](https://github.com/ORCID/orcid-angular/pull/2721): PD-3658
+
+## v2.128.8 - 2026-01-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.128.7...v2.128.8)
+
+## v2.128.7 - 2026-01-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.128.6...v2.128.7)
+
+- [#2720](https://github.com/ORCID/orcid-angular/pull/2720): PD-3658 Remove all translations to validate CI rebuilds those
+- [#2719](https://github.com/ORCID/orcid-angular/pull/2719): PD-3866 and PD-3864
+
+## v2.128.6 - 2026-01-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.128.5...v2.128.6)
+
+## v2.128.5 - 2026-01-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.128.4...v2.128.5)
+
+- [#2717](https://github.com/ORCID/orcid-angular/pull/2717): Lmendoza PD-3909
+
+## v2.128.4 - 2026-01-15
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.128.3...v2.128.4)
+
+- [#2713](https://github.com/ORCID/orcid-angular/pull/2713): PD-4733 - Bump @angular/core from 20.1.6 to 20.3.16
+
 ## v2.128.3 - 2026-01-14
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.128.2...v2.128.3)

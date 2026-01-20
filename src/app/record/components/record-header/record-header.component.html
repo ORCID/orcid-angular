@@ -9,7 +9,7 @@
   [primaryIdText]="bannerPrimaryIdText"
   [secondaryIdText]="bannerSecondaryIdText"
   [expanded]="recordSummaryOpen"
-  [canToggleExpanded]="true"
+  [canToggleExpanded]="!noDisplayableData"
   (expandedChange)="recordSummaryLinkClick()"
   [regionNames]="regionNames"
   [regionOrcidId]="regionOrcidId"
@@ -32,10 +32,10 @@
     record-header-summary-actions
   ></app-record-edit-button>
 
-  <span header-banner-expanded-label>
+  <span header-banner-expanded-label *ngIf="!noDisplayableData">
     {{ hideSummaryLabel }}
   </span>
-  <span header-banner-collapsed-label>
+  <span header-banner-collapsed-label *ngIf="!noDisplayableData">
     {{ showSummaryLabel }}
   </span>
 

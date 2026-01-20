@@ -9,7 +9,10 @@ import {
 } from '@angular/core'
 import { combineLatest, Observable, of, Subject } from 'rxjs'
 import { first, takeUntil, finalize } from 'rxjs/operators'
-import { OrganizationsService } from 'src/app/core'
+import {
+  OrganizationsService,
+  VerificationEmailModalService,
+} from 'src/app/core'
 import { RecordAffiliationService } from 'src/app/core/record-affiliations/record-affiliations.service'
 import { OrgDisambiguated, UserInfo } from 'src/app/types'
 import {
@@ -25,7 +28,6 @@ import { TogglzService } from '../../../core/togglz/togglz.service'
 import { TogglzFlag } from 'src/app/types/config.endpoint'
 import { PlatformInfoService } from '../../../cdk/platform-info'
 import { MatDialog } from '@angular/material/dialog'
-import { VerificationEmailModalService } from 'src/app/core/verification-email-modal/verification-email-modal.service'
 import { getAriaLabel } from 'src/app/constants'
 
 @Component({

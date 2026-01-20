@@ -1,10 +1,10 @@
 {
   "chrome": {
-    "major": 111,
+    "major": 112,
     "minor": 0
   },
   "firefox": {
-    "major": 114,
+    "major": 115,
     "minor": 0
   },
   "android": {
@@ -12,7 +12,7 @@
     "minor": 0
   },
   "edge": {
-    "major": 111,
+    "major": 112,
     "minor": 0
   },
   "safari": {
@@ -24,11 +24,11 @@
     "minor": 0
   },
   "opera": {
-    "major": 97,
+    "major": 98,
     "minor": 0
   },
   "samsung": {
-    "major": 22,
+    "major": 23,
     "minor": 0
   }
 }

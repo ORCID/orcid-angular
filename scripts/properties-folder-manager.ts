@@ -299,7 +299,7 @@ From the many properties on Orcid Source that have the same english value of ${p
   private writeFileSyncRecursive(
     filename,
     content,
-    options = { encoding: 'utf8' }
+    options: fs.WriteFileOptions = { encoding: 'utf8' as BufferEncoding }
   ) {
     // create folder path if not exists
     filename

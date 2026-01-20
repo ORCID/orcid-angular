@@ -8,13 +8,13 @@ temp/**
 /dist
 /tmp
 /out-tsc
-src/locale/messages.xlf
 
 # dependencies
 /node_modules
 
 # have a persistent yarn cache in a single 'code' volume in a docker container
 /yarn_cache
+.yarn-cache
 
 # IDEs and editors
 /.idea
@@ -49,7 +49,6 @@ testem.log
 Thumbs.db
 .vscode/settings.json
 src/locale/translate-file-generator.js
-*.xlf
 src/locale/messages.translation.log.json
 sripts/lighthouse/environment.ts.js
 
