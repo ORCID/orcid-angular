@@ -1,8 +1,9 @@
-:host img {
+:host mat-icon {
   height: 32px;
-  width: 32px;
-  margin-left: 7px;
-  margin-right: 16px;
+  min-width: 32px;
+  font-size: 32px;
+  margin-left: 8px;
+  margin-right: 10px;
   [dir='rtl'] & {
     margin-right: -4px;
     margin-left: 4px;
@@ -10,4 +11,11 @@
 }
 mat-error {
   font-size: 14px !important;
+}
+
+.trusted {
+  font-variation-settings: 'FILL' 1 !important;
+}
+.inlined {
+  margin-top: 2px;
 }

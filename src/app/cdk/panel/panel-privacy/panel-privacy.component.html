@@ -9,11 +9,11 @@
   >
   <mat-icon
     aria-hidden="false"
-    class="trusted"
+    class="trusted material-symbols-outlined"
     *ngIf="visibility === 'LIMITED'"
     [attr.aria-label]="label"
     [ngClass]="{ active: visibility === 'LIMITED' }"
-    >visibility</mat-icon
+    >visibility_lock</mat-icon
   >
   <mat-icon
     aria-hidden="false"
@@ -21,6 +21,6 @@
     [attr.aria-label]="label"
     *ngIf="visibility === 'PRIVATE'"
     [ngClass]="{ active: visibility === 'PRIVATE' }"
-    >visibility</mat-icon
+    >visibility_off</mat-icon
   >
 </div>
