@@ -25,7 +25,7 @@ jobs:
         with:
           fetch-depth: 0
           # Use GH_PAT so pushes trigger downstream workflows (not GITHUB_TOKEN)
-          token: ${{ env.GH_PAT }}
+          token: ${{ secrets.GH_PAT }}
 
       - name: Ensure GH_PAT is provided (required to trigger downstream workflows)
         run: |
