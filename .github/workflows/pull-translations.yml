@@ -46,6 +46,7 @@ jobs:
           mkdir -p "$HOME/bin"
           install -m 0755 ./tx "$HOME/bin/tx"
           echo "$HOME/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/bin:$PATH"
           tx --version
 
       - name: Configure Transifex credentials
