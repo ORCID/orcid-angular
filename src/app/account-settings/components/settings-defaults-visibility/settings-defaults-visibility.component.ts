@@ -15,7 +15,10 @@ import { RecordService } from 'src/app/core/record/record.service'
 @Component({
   selector: 'app-settings-defaults-visibility',
   templateUrl: './settings-defaults-visibility.component.html',
-  styleUrls: ['./settings-defaults-visibility.component.scss'],
+  styleUrls: [
+    './settings-defaults-visibility.component.scss',
+    './settings-defaults-visibility.component.scss-theme.scss',
+  ],
   preserveWhitespaces: true,
   standalone: false,
 })
