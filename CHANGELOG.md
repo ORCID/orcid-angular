@@ -1,3 +1,13 @@
+## v2.128.12 - 2026-01-21
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.128.11...v2.128.12)
+
+- [#2697](https://github.com/ORCID/orcid-angular/pull/2697): Bump node-forge from 1.3.1 to 1.3.3
+- [#2692](https://github.com/ORCID/orcid-angular/pull/2692): Bump @angular/common from 20.1.6 to 20.3.14
+- [#2707](https://github.com/ORCID/orcid-angular/pull/2707): Transifex: update properties
+- [#2730](https://github.com/ORCID/orcid-angular/pull/2730): PD-3630 update visibility icons
+- [#2729](https://github.com/ORCID/orcid-angular/pull/2729): Lmendoza/pd 4781 v2
+
 ## v2.128.11 - 2026-01-20
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.128.10...v2.128.11)
