@@ -5,14 +5,19 @@
   padding: 16px;
 }
 
-.icon-circle {
+.icon-choice {
+  .menu-icon {
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+  }
   display: flex;
   height: 32px;
   width: 32px;
   border-radius: 50%;
   align-items: center;
   justify-content: center;
-  margin-inline-end: 16px;
+  margin-inline-end: 12px;
 }
 
 .main-menu {
@@ -21,7 +26,7 @@
 }
 
 .menu-icon {
-  margin-right: 6px;
+  margin-right: 8px;
 }
 
 [mat-button] {
@@ -39,6 +44,7 @@
   align-items: center;
 
   .icon-title-container {
+    margin-top: -1px;
     min-width: 100px;
     display: flex;
     align-items: center;
@@ -74,7 +80,6 @@ h1 {
     margin-right: 0;
   }
   min-width: 0;
-  width: 40px;
   border-radius: 50%;
   padding: 0;
   justify-content: center;
@@ -83,7 +88,7 @@ h1 {
 :host {
   ::ng-deep {
     button {
-      padding: 0 16px;
+      padding: 8px;
       .mdc-button__label {
         color: initial;
       }
@@ -95,4 +100,8 @@ h1 {
       display: flex;
     }
   }
+}
+
+.limitedIcon {
+  font-variation-settings: 'FILL' 1 !important;
 }

@@ -57,36 +57,6 @@
     border: solid 1px;
   }
 
-  svg path {
-    fill: black;
-  }
-  .icon-public,
-  .icon-private,
-  .icon-limited {
-    background-color: map-get($background, 'ui-background-lightest');
-  }
-  .selectedMenu {
-    .icon-public {
-      background: map-get($foreground, visibility-everyone);
-      svg path {
-        fill: white;
-      }
-    }
-
-    .icon-private {
-      background: map-get($foreground, visibility-private);
-      svg path {
-        fill: white;
-      }
-    }
-    .icon-limited {
-      background: map-get($foreground, visibility-trusted);
-      svg path {
-        fill: white;
-      }
-    }
-  }
-
   ::ng-deep {
     .mat-mdc-menu-item.selectedMenu.private-button:not([disabled]) {
       background: rgba(171, 22, 0, 0.05);
