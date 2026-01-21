@@ -39,7 +39,7 @@
     {{ showSummaryLabel }}
   </span>
 
-  <ng-container header-banner-id-actions>
+  <ng-container header-banner-id-actions *ngIf="!noDisplayableData">
     <button
       mat-icon-button
       class="orc-font-small-print"
