@@ -642,11 +642,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/visibility-selector/visibility-selector/visibility-selector.component.html</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">36</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/visibility-selector/visibility-selector/visibility-selector.component.html</context>
-          <context context-type="linenumber">88,90</context>
+          <context context-type="linenumber">92,94</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/visibility-selector/visibility-selector/visibility-selector.component.ts</context>
@@ -694,7 +694,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/visibility-selector/visibility-selector/visibility-selector.component.html</context>
-          <context context-type="linenumber">40</context>
+          <context context-type="linenumber">44</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-visibility/form-visibility.component.html</context>
@@ -1779,7 +1779,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/visibility-selector/visibility-selector/visibility-selector.component.html</context>
-          <context context-type="linenumber">110,112</context>
+          <context context-type="linenumber">116,118</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.trustedOrganizations" datatype="html" resname="account.trustedOrganizations">
@@ -3040,7 +3040,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/visibility-selector/visibility-selector/visibility-selector.component.html</context>
-          <context context-type="linenumber">132</context>
+          <context context-type="linenumber">138</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/visibility-selector/visibility-selector/visibility-selector.component.ts</context>
@@ -3059,7 +3059,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/visibility-selector/visibility-selector/visibility-selector.component.html</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="linenumber">39</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/visibility-selector/visibility-selector/visibility-selector.component.ts</context>
@@ -5272,35 +5272,35 @@
         <source>Set visibility for</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/visibility-selector/visibility-selector/visibility-selector.component.html</context>
-          <context context-type="linenumber">50,52</context>
+          <context context-type="linenumber">54,56</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.thisItemOnly" datatype="html" resname="shared.thisItemOnly">
         <source>This item only</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/visibility-selector/visibility-selector/visibility-selector.component.html</context>
-          <context context-type="linenumber">57</context>
+          <context context-type="linenumber">61</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.allItemsInThisGroup" datatype="html" resname="shared.allItemsInThisGroup">
         <source>All items in this group</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/visibility-selector/visibility-selector/visibility-selector.component.html</context>
-          <context context-type="linenumber">63</context>
+          <context context-type="linenumber">67</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.selectedItemsForVisibility" datatype="html" resname="shared.selectedItemsForVisibility">
         <source>Selected items</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/visibility-selector/visibility-selector/visibility-selector.component.html</context>
-          <context context-type="linenumber">69,70</context>
+          <context context-type="linenumber">73,74</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.moreInformationOnOrcidVisibility" datatype="html" resname="shared.moreInformationOnOrcidVisibility">
         <source>More information on ORCID visibility settings</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/visibility-selector/visibility-selector/visibility-selector.component.html</context>
-          <context context-type="linenumber">140,142</context>
+          <context context-type="linenumber">146,148</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.ariaLabelPublic" datatype="html" resname="share.ariaLabelPublic">
