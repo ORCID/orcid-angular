@@ -12,7 +12,9 @@
   @if (mobile) { @if (privacy === 'PUBLIC') {
   <mat-icon class="menu-icon publicIcon">visibility</mat-icon>
   } @if (privacy === 'LIMITED') {
-  <mat-icon class="menu-icon limitedIcon">visibility_lock</mat-icon>
+  <mat-icon class="menu-icon limitedIcon material-symbols-outlined"
+    >visibility_lock</mat-icon
+  >
   } @if (privacy === 'PRIVATE') {
   <mat-icon class="menu-icon privateIcon">visibility_off</mat-icon>
   } }
@@ -21,7 +23,9 @@
       @if (privacy === 'PUBLIC') {
       <mat-icon class="menu-icon publicIcon">visibility</mat-icon>
       } @if (privacy === 'LIMITED') {
-      <mat-icon class="menu-icon limitedIcon">visibility_lock</mat-icon>
+      <mat-icon class="menu-icon limitedIcon material-symbols-outlined"
+        >visibility_lock</mat-icon
+      >
       } @if (privacy === 'PRIVATE') {
       <mat-icon class="menu-icon privateIcon">visibility_off</mat-icon>
       }
@@ -105,7 +109,9 @@
     class="limited-button cy-visibility-limited flex-menu-item mb-2!"
   >
     <div class="icon-choice icon-limited">
-      <mat-icon class="menu-icon limitedIcon">visibility_lock</mat-icon>
+      <mat-icon class="menu-icon limitedIcon material-symbols-outlined"
+        >visibility_lock</mat-icon
+      >
     </div>
     <div class="title-container" i18n="@@account.trustedParties">
       Trusted Parties
