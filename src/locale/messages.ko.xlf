@@ -11004,6 +11004,7 @@
       </trans-unit>
       <trans-unit id="recovery.passwordAndIdRecovery" datatype="html" resname="recovery.passwordAndIdRecovery">
         <source>Password and iD recovery</source>
+        <target>비밀번호 및 iD 복구</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">11,13</context>
@@ -11019,6 +11020,7 @@
       </trans-unit>
       <trans-unit id="recovery.lostAccessToYourEmailAddresses" datatype="html" resname="recovery.lostAccessToYourEmailAddresses">
         <source>Lost access to your email addresses?</source>
+        <target>귀하의 이메일 주소에 액세스하실 수 없습니까?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">25,27</context>
@@ -11030,6 +11032,7 @@
       </trans-unit>
       <trans-unit id="recovery.youCanAlwaysSignIn" datatype="html" resname="recovery.youCanAlwaysSignIn">
         <source>You can always sign in to ORCID with your</source>
+        <target>항상 ORCID에 로그인할 수 있는 방법이 있는데, 바로</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">30</context>
@@ -11037,6 +11040,7 @@
       </trans-unit>
       <trans-unit id="recovery.16DigitOrcidId" datatype="html" resname="recovery.16DigitOrcidId">
         <source>16-digit ORCID iD</source>
+        <target>16자리 ORCID iD</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">31</context>
@@ -11056,6 +11060,7 @@
       </trans-unit>
       <trans-unit id="recovery.accountPassword" datatype="html" resname="recovery.accountPassword">
         <source>account password</source>
+        <target>계정 비밀번호</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">34</context>
@@ -11063,6 +11068,7 @@
       </trans-unit>
       <trans-unit id="recovery.instead" datatype="html" resname="recovery.instead">
         <source>instead.</source>
+        <target>를 사용하는 것입니다.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">35</context>
@@ -11070,6 +11076,7 @@
       </trans-unit>
       <trans-unit id="recovery.trySigningIn" datatype="html" resname="recovery.trySigningIn">
         <source>Try signing in with your iD and password now</source>
+        <target>지금 iD와 비밀번호로 로그인 시도</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">44</context>
@@ -11081,6 +11088,7 @@
       </trans-unit>
       <trans-unit id="recovery.whatHaveYouForgotten" datatype="html" resname="recovery.whatHaveYouForgotten">
         <source>What have you forgotten?</source>
+        <target>잊으신 것이 무엇입니까?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">52,54</context>
@@ -11092,6 +11100,7 @@
       </trans-unit>
       <trans-unit id="recovery.myOrcidAccountPassword" datatype="html" resname="recovery.myOrcidAccountPassword">
         <source>my ORCID account password</source>
+        <target>내 ORCID 계정 비밀번호</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">67,69</context>
@@ -11103,6 +11112,7 @@
       </trans-unit>
       <trans-unit id="recovery.my16DigitOrcidId" datatype="html" resname="recovery.my16DigitOrcidId">
         <source>my 16-digit ORCID iD</source>
+        <target>내 16자리 ORCID iD</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">79,81</context>
@@ -11114,6 +11124,7 @@
       </trans-unit>
       <trans-unit id="recovery.whereShouldWeSend" datatype="html" resname="recovery.whereShouldWeSend">
         <source>Where should we send the recovery email?</source>
+        <target>복구 이메일을 어디로 보내드리면 되겠습니까?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">88,90</context>
@@ -11121,6 +11132,7 @@
       </trans-unit>
       <trans-unit id="recovery.pleaseUseAnEmail" datatype="html" resname="recovery.pleaseUseAnEmail">
         <source>Please use an email address associated with your ORCID account.</source>
+        <target>귀하의 ORCID 계정과 연동된 이메일 주소를 사용하세요.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">94,96</context>
@@ -11140,6 +11152,7 @@
       </trans-unit>
       <trans-unit id="recovery.forExampleEmail" datatype="html" resname="recovery.forExampleEmail">
         <source>For example: joe@institution.edu</source>
+        <target>예: joe@institution.edu</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">129,130</context>
@@ -11159,6 +11172,7 @@
       </trans-unit>
       <trans-unit id="recovery.sendRecoveryEmail" datatype="html" resname="recovery.sendRecoveryEmail">
         <source>Send recovery email</source>
+        <target>복구 이메일 보내기</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">159,161</context>
@@ -11166,6 +11180,7 @@
       </trans-unit>
       <trans-unit id="recovery.weHaveSent" datatype="html" resname="recovery.weHaveSent">
         <source>We have sent a recovery email to</source>
+        <target>다음 주소로 복구 이메일을 보내드렸습니다.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">164</context>
@@ -11173,6 +11188,7 @@
       </trans-unit>
       <trans-unit id="recovery.ifYouDoNotReceive" datatype="html" resname="recovery.ifYouDoNotReceive">
         <source>If you do not receive the recovery email within 10 minutes please check your spam folder.</source>
+        <target>10분 이내에 복구 이메일이 수신되지 않았으면, 스팸 폴더를 확인하세요.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">168,171</context>
@@ -11180,6 +11196,7 @@
       </trans-unit>
       <trans-unit id="recovery.backToSignIn" datatype="html" resname="recovery.backToSignIn">
         <source>Back to sign in</source>
+        <target>로그인으로 돌아가기</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">178</context>
@@ -11187,6 +11204,7 @@
       </trans-unit>
       <trans-unit id="recovery.iveForgotten" datatype="html" resname="recovery.iveForgotten">
         <source>I've forgotten</source>
+        <target>잊은 것</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.ts</context>
           <context context-type="linenumber">24</context>
@@ -14286,6 +14304,7 @@
       </trans-unit>
       <trans-unit id="works.invalidISBN" datatype="html" resname="works.invalidISBN">
         <source>We are unable to validate this identifier. Please check it is correct before saving.</source>
+        <target>이 식별자를 검증할 수 없습니다. 정확한지 확인한 후 저장하세요.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
           <context context-type="linenumber">120,123</context>
@@ -16889,6 +16908,7 @@
       </trans-unit>
       <trans-unit id="reset.afterResetting" datatype="html" resname="reset.afterResetting">
         <source>After resetting your password you will be asked to sign in using your email address or ORCID iD and your new password.</source>
+        <target>비밀번호를 초기화하면 이메일 주소 또는 ORCID ID와 새 비밀번호로 로그인해야 합니다.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
           <context context-type="linenumber">33,36</context>
@@ -16896,6 +16916,7 @@
       </trans-unit>
       <trans-unit id="reset.saveYourNewPassword" datatype="html" resname="reset.saveYourNewPassword">
         <source>Save your new password</source>
+        <target>새 비밀번호 저장</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
           <context context-type="linenumber">56,58</context>
@@ -16903,6 +16924,7 @@
       </trans-unit>
       <trans-unit id="reset.cancelPasswordReset" datatype="html" resname="reset.cancelPasswordReset">
         <source>Cancel password reset</source>
+        <target>비밀번호 초기화 취소</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
           <context context-type="linenumber">64,65</context>
@@ -16910,6 +16932,7 @@
       </trans-unit>
       <trans-unit id="reset.hasExpired" datatype="html" resname="reset.hasExpired">
         <source>Your password reset link has expired</source>
+        <target>비밀번호 초기화 링크 만료됨</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
           <context context-type="linenumber">83</context>
@@ -16917,6 +16940,7 @@
       </trans-unit>
       <trans-unit id="reset.invalidLink" datatype="html" resname="reset.invalidLink">
         <source>There is a problem with your password reset link</source>
+        <target>비밀번호 초기화 링크에 문제 있음</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
           <context context-type="linenumber">87</context>
@@ -16924,6 +16948,7 @@
       </trans-unit>
       <trans-unit id="reset.youCanRequestANewLink" datatype="html" resname="reset.youCanRequestANewLink">
         <source>You can request a new link from</source>
+        <target>다음 위치에서 새 링크를 요청하세요.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
           <context context-type="linenumber">96</context>
@@ -16931,6 +16956,7 @@
       </trans-unit>
       <trans-unit id="reset.pleaseTryTheLinkAgain" datatype="html" resname="reset.pleaseTryTheLinkAgain">
         <source>Please try the link again. If this does not work you can request a new password reset link from</source>
+        <target>링크를 다시 사용해보세요. 동작하지 않는다면 다음 위치에서 새 비밀번호 초기화 링크를 요청하세요.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
           <context context-type="linenumber">108,109</context>
