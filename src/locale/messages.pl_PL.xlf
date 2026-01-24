@@ -9144,7 +9144,7 @@
       </trans-unit>
       <trans-unit id="common.js.domain.warn.is_the_official" datatype="html" resname="common.js.domain.warn.is_the_official">
         <source>is the official website. Sandbox only sends email messages to</source>
-        <target>to oficjalna witryna internetowa. Sandbox wysyła wiadomości e-mail tylko do</target>
+        <target>to oficjalna witryna internetowa. Sandbox wysyła wiadomości e-mail tylko na</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/environment-banner/environment-banner/environment-banner.component.html</context>
           <context context-type="linenumber">19,21</context>
@@ -14304,6 +14304,7 @@
       </trans-unit>
       <trans-unit id="works.invalidISBN" datatype="html" resname="works.invalidISBN">
         <source>We are unable to validate this identifier. Please check it is correct before saving.</source>
+        <target>Nie możemy zweryfikować tego identyfikatora. Przed zapisaniem sprawdź, czy jest prawidłowy.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
           <context context-type="linenumber">120,123</context>
@@ -16907,6 +16908,7 @@
       </trans-unit>
       <trans-unit id="reset.afterResetting" datatype="html" resname="reset.afterResetting">
         <source>After resetting your password you will be asked to sign in using your email address or ORCID iD and your new password.</source>
+        <target>Po zresetowaniu hasła poprosimy Cię o zalogowanie się przy użyciu swojego adresu e-mail lub identyfikatora ORCID oraz nowego hasła.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
           <context context-type="linenumber">33,36</context>
@@ -16914,6 +16916,7 @@
       </trans-unit>
       <trans-unit id="reset.saveYourNewPassword" datatype="html" resname="reset.saveYourNewPassword">
         <source>Save your new password</source>
+        <target>Zapisz swoje nowe hasło</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
           <context context-type="linenumber">56,58</context>
@@ -16921,6 +16924,7 @@
       </trans-unit>
       <trans-unit id="reset.cancelPasswordReset" datatype="html" resname="reset.cancelPasswordReset">
         <source>Cancel password reset</source>
+        <target>Anuluj reset hasła</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
           <context context-type="linenumber">64,65</context>
@@ -16928,6 +16932,7 @@
       </trans-unit>
       <trans-unit id="reset.hasExpired" datatype="html" resname="reset.hasExpired">
         <source>Your password reset link has expired</source>
+        <target>Twoje łącze do resetowania hasła wygasło</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
           <context context-type="linenumber">83</context>
@@ -16935,6 +16940,7 @@
       </trans-unit>
       <trans-unit id="reset.invalidLink" datatype="html" resname="reset.invalidLink">
         <source>There is a problem with your password reset link</source>
+        <target>Wystąpił problem z łączem do resetowania Twojego hasła</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
           <context context-type="linenumber">87</context>
@@ -16942,6 +16948,7 @@
       </trans-unit>
       <trans-unit id="reset.youCanRequestANewLink" datatype="html" resname="reset.youCanRequestANewLink">
         <source>You can request a new link from</source>
+        <target>Możesz poprosić o nowe łącze od</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
           <context context-type="linenumber">96</context>
@@ -16949,6 +16956,7 @@
       </trans-unit>
       <trans-unit id="reset.pleaseTryTheLinkAgain" datatype="html" resname="reset.pleaseTryTheLinkAgain">
         <source>Please try the link again. If this does not work you can request a new password reset link from</source>
+        <target>Spróbuj ponownie wykorzystać łącze. Jeśli to nie pomoże, możesz poprosić o nowe łącze do resetowania hasła od</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
           <context context-type="linenumber">108,109</context>
