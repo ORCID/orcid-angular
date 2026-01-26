@@ -11040,7 +11040,7 @@
       </trans-unit>
       <trans-unit id="recovery.16DigitOrcidId" datatype="html" resname="recovery.16DigitOrcidId">
         <source>16-digit ORCID iD</source>
-        <target>16místného hesla k účtu</target>
+        <target>16místného ORCID iD</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">31</context>
@@ -11060,7 +11060,7 @@
       </trans-unit>
       <trans-unit id="recovery.accountPassword" datatype="html" resname="recovery.accountPassword">
         <source>account password</source>
-        <target>ORCID iD</target>
+        <target>a hesla k účtu</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">34</context>

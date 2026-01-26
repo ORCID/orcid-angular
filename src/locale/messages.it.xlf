@@ -11032,7 +11032,7 @@
       </trans-unit>
       <trans-unit id="recovery.youCanAlwaysSignIn" datatype="html" resname="recovery.youCanAlwaysSignIn">
         <source>You can always sign in to ORCID with your</source>
-        <target>Puoi sempre accedere a ORCID con</target>
+        <target>Puoi sempre accedere a ORCID con il tuo</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">30</context>
@@ -11060,7 +11060,7 @@
       </trans-unit>
       <trans-unit id="recovery.accountPassword" datatype="html" resname="recovery.accountPassword">
         <source>account password</source>
-        <target>password dell’account</target>
+        <target>e la password dell’account</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">34</context>
