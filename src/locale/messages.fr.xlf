@@ -11004,6 +11004,7 @@
       </trans-unit>
       <trans-unit id="recovery.passwordAndIdRecovery" datatype="html" resname="recovery.passwordAndIdRecovery">
         <source>Password and iD recovery</source>
+        <target>Récupération du mot de passe et de l'iD</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">11,13</context>
@@ -11019,6 +11020,7 @@
       </trans-unit>
       <trans-unit id="recovery.lostAccessToYourEmailAddresses" datatype="html" resname="recovery.lostAccessToYourEmailAddresses">
         <source>Lost access to your email addresses?</source>
+        <target>Vous n'avez plus accès à vos adresses e-mail ?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">25,27</context>
@@ -11030,6 +11032,7 @@
       </trans-unit>
       <trans-unit id="recovery.youCanAlwaysSignIn" datatype="html" resname="recovery.youCanAlwaysSignIn">
         <source>You can always sign in to ORCID with your</source>
+        <target>Vous pouvez quand même vous connecter à ORCID avec votre</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">30</context>
@@ -11037,6 +11040,7 @@
       </trans-unit>
       <trans-unit id="recovery.16DigitOrcidId" datatype="html" resname="recovery.16DigitOrcidId">
         <source>16-digit ORCID iD</source>
+        <target>ORCID iD à 16 chiffres</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">31</context>
@@ -11056,6 +11060,7 @@
       </trans-unit>
       <trans-unit id="recovery.accountPassword" datatype="html" resname="recovery.accountPassword">
         <source>account password</source>
+        <target>mot de passe de compte</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">34</context>
@@ -11063,6 +11068,7 @@
       </trans-unit>
       <trans-unit id="recovery.instead" datatype="html" resname="recovery.instead">
         <source>instead.</source>
+        <target>à la place.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">35</context>
@@ -11070,6 +11076,7 @@
       </trans-unit>
       <trans-unit id="recovery.trySigningIn" datatype="html" resname="recovery.trySigningIn">
         <source>Try signing in with your iD and password now</source>
+        <target>Essayez de vous connecter avec votre iD et votre mot de passe</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">44</context>
@@ -11081,6 +11088,7 @@
       </trans-unit>
       <trans-unit id="recovery.whatHaveYouForgotten" datatype="html" resname="recovery.whatHaveYouForgotten">
         <source>What have you forgotten?</source>
+        <target>Qu'avez-vous oublié ?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">52,54</context>
@@ -11092,6 +11100,7 @@
       </trans-unit>
       <trans-unit id="recovery.myOrcidAccountPassword" datatype="html" resname="recovery.myOrcidAccountPassword">
         <source>my ORCID account password</source>
+        <target>le mot de passe de mon compte ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">67,69</context>
@@ -11103,6 +11112,7 @@
       </trans-unit>
       <trans-unit id="recovery.my16DigitOrcidId" datatype="html" resname="recovery.my16DigitOrcidId">
         <source>my 16-digit ORCID iD</source>
+        <target>mon ORCID iD à 16 chiffres</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">79,81</context>
@@ -11114,6 +11124,7 @@
       </trans-unit>
       <trans-unit id="recovery.whereShouldWeSend" datatype="html" resname="recovery.whereShouldWeSend">
         <source>Where should we send the recovery email?</source>
+        <target>À quelle adresse devons-nous envoyer l'e-mail de récupération ?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">88,90</context>
@@ -11121,6 +11132,7 @@
       </trans-unit>
       <trans-unit id="recovery.pleaseUseAnEmail" datatype="html" resname="recovery.pleaseUseAnEmail">
         <source>Please use an email address associated with your ORCID account.</source>
+        <target>Veuillez utiliser une adresse e-mail associée à votre compte ORCID.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">94,96</context>
@@ -11140,6 +11152,7 @@
       </trans-unit>
       <trans-unit id="recovery.forExampleEmail" datatype="html" resname="recovery.forExampleEmail">
         <source>For example: joe@institution.edu</source>
+        <target>Par exemple : joe@institution.edu</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">129,130</context>
@@ -11159,6 +11172,7 @@
       </trans-unit>
       <trans-unit id="recovery.sendRecoveryEmail" datatype="html" resname="recovery.sendRecoveryEmail">
         <source>Send recovery email</source>
+        <target>Envoyer l'e-mail de récupération</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">159,161</context>
@@ -11166,6 +11180,7 @@
       </trans-unit>
       <trans-unit id="recovery.weHaveSent" datatype="html" resname="recovery.weHaveSent">
         <source>We have sent a recovery email to</source>
+        <target>Nous avons envoyé un e-mail de récupération à</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">164</context>
@@ -11173,6 +11188,7 @@
       </trans-unit>
       <trans-unit id="recovery.ifYouDoNotReceive" datatype="html" resname="recovery.ifYouDoNotReceive">
         <source>If you do not receive the recovery email within 10 minutes please check your spam folder.</source>
+        <target>Si vous ne recevez pas l'e-mail de récupération dans les 10 prochaines minutes, vérifiez vos courriers indésirables.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">168,171</context>
@@ -11180,6 +11196,7 @@
       </trans-unit>
       <trans-unit id="recovery.backToSignIn" datatype="html" resname="recovery.backToSignIn">
         <source>Back to sign in</source>
+        <target>Retour au formulaire de connexion</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">178</context>
@@ -11187,6 +11204,7 @@
       </trans-unit>
       <trans-unit id="recovery.iveForgotten" datatype="html" resname="recovery.iveForgotten">
         <source>I've forgotten</source>
+        <target>J'ai oublié</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.ts</context>
           <context context-type="linenumber">24</context>
@@ -14286,6 +14304,7 @@
       </trans-unit>
       <trans-unit id="works.invalidISBN" datatype="html" resname="works.invalidISBN">
         <source>We are unable to validate this identifier. Please check it is correct before saving.</source>
+        <target>Nous n'avons pas pu valider cet identifiant. Vérifiez qu'il est correct avant d'enregistrer.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
           <context context-type="linenumber">120,123</context>
@@ -16889,6 +16908,7 @@
       </trans-unit>
       <trans-unit id="reset.afterResetting" datatype="html" resname="reset.afterResetting">
         <source>After resetting your password you will be asked to sign in using your email address or ORCID iD and your new password.</source>
+        <target>Après avoir réinitialisé votre mot de passe, vous devrez vous connecter à l'aide de votre adresse e-mail/ORCID iD et de votre nouveau mot de passe.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
           <context context-type="linenumber">33,36</context>
@@ -16896,6 +16916,7 @@
       </trans-unit>
       <trans-unit id="reset.saveYourNewPassword" datatype="html" resname="reset.saveYourNewPassword">
         <source>Save your new password</source>
+        <target>Enregistrer votre nouveau mot de passe</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
           <context context-type="linenumber">56,58</context>
@@ -16903,6 +16924,7 @@
       </trans-unit>
       <trans-unit id="reset.cancelPasswordReset" datatype="html" resname="reset.cancelPasswordReset">
         <source>Cancel password reset</source>
+        <target>Annuler la réinitialisation du mot de passe</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
           <context context-type="linenumber">64,65</context>
@@ -16910,6 +16932,7 @@
       </trans-unit>
       <trans-unit id="reset.hasExpired" datatype="html" resname="reset.hasExpired">
         <source>Your password reset link has expired</source>
+        <target>Votre lien de réinitialisation du mot de passe a expiré.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
           <context context-type="linenumber">83</context>
@@ -16917,6 +16940,7 @@
       </trans-unit>
       <trans-unit id="reset.invalidLink" datatype="html" resname="reset.invalidLink">
         <source>There is a problem with your password reset link</source>
+        <target>Le lien de réinitialisation du mot de passe n'est pas valide</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
           <context context-type="linenumber">87</context>
@@ -16924,6 +16948,7 @@
       </trans-unit>
       <trans-unit id="reset.youCanRequestANewLink" datatype="html" resname="reset.youCanRequestANewLink">
         <source>You can request a new link from</source>
+        <target>Vous pouvez demander un nouveau lien depuis</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
           <context context-type="linenumber">96</context>
@@ -16931,6 +16956,7 @@
       </trans-unit>
       <trans-unit id="reset.pleaseTryTheLinkAgain" datatype="html" resname="reset.pleaseTryTheLinkAgain">
         <source>Please try the link again. If this does not work you can request a new password reset link from</source>
+        <target>Veuillez réessayer. Si le lien de réinitialisation ne fonctionne toujours pas, vous pouvez en demander un autre depuis</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
           <context context-type="linenumber">108,109</context>
