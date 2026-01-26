@@ -27,6 +27,7 @@ import { takeUntil } from 'rxjs/operators'
   templateUrl: './form-visibility.component.html',
   styleUrls: [
     './form-visibility.component.scss',
+    './form-visibility.component.scss-theme.scss',
     '../register.style.scss',
     '../register.scss-theme.scss',
   ],

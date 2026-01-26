@@ -39,11 +39,9 @@
           [value]="visibilityOptions[0]"
           class="orcid-radio-button-with-icons"
         >
-          <img
-            src="./assets/vectors/visibility-everyone2.svg"
-            aria-hidden="true"
-            alt=""
-          />
+          <mat-icon aria-hidden="true" class="everyone mr-2 ml-1"
+            >visibility</mat-icon
+          >
           <div class="inlined">
             <div>
               <strong i18n="@@register.VisibilityEveryone">Everyone</strong>
@@ -65,11 +63,11 @@
           [value]="visibilityOptions[1]"
           class="orcid-radio-button-with-icons"
         >
-          <img
-            src="./assets/vectors/visibility-trusted-source2.jpg"
+          <mat-icon
             aria-hidden="true"
-            alt=""
-          />
+            class="trusted material-symbols-outlined mr-2 ml-1"
+            >visibility_lock</mat-icon
+          >
           <div class="inlined">
             <div>
               <strong i18n="@@register.VisibilityParties"
@@ -92,11 +90,9 @@
           [value]="visibilityOptions[2]"
           class="orcid-radio-button-with-icons"
         >
-          <img
-            src="./assets/vectors/visibility-only-me2.jpg"
-            aria-hidden="true"
-            alt=""
-          />
+          <mat-icon aria-hidden="true" class="private mr-2 ml-1"
+            >visibility_off</mat-icon
+          >
           <div class="inlined">
             <div>
               <strong i18n="@@register.VisibilityPrivate">Only me</strong>

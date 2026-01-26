@@ -7,17 +7,16 @@
     <mat-radio-group
       formControlName="activitiesVisibilityDefault"
       color="primary"
+      class="grid gap-2"
     >
       <mat-radio-button
         id="cy-visibility-everyone-input"
         [value]="visibilityOptions[0]"
         class="orcid-radio-button-with-icons"
       >
-        <img
-          src="./assets/vectors/visibility-everyone.svg"
-          aria-hidden="true"
-          alt=""
-        />
+        <mat-icon aria-hidden="true" class="everyone mr-2 ml-1"
+          >visibility</mat-icon
+        >
         <div class="inlined">
           <strong i18n="@@register.VisibilityEveryone">Everyone</strong>
 
@@ -31,11 +30,12 @@
         [value]="visibilityOptions[1]"
         class="orcid-radio-button-with-icons"
       >
-        <img
-          src="./assets/vectors/visibility-trusted-source.svg"
+        <mat-icon
           aria-hidden="true"
-          alt=""
-        />
+          class="trusted material-symbols-outlined mr-2 ml-1"
+          >visibility_lock</mat-icon
+        >
+
         <div class="inlined">
           <strong i18n="@@register.VisibilityTrusted"
             >Trusted Organizations</strong
@@ -50,11 +50,10 @@
         [value]="visibilityOptions[2]"
         class="orcid-radio-button-with-icons"
       >
-        <img
-          src="./assets/vectors/visibility-only-me.svg"
-          aria-hidden="true"
-          alt=""
-        />
+        <mat-icon aria-hidden="true" class="private mr-2 ml-1"
+          >visibility_off</mat-icon
+        >
+
         <div class="inlined">
           <strong i18n="@@register.VisibilityPrivate">Only me</strong>
 
