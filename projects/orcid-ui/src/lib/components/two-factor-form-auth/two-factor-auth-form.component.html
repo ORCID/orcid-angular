@@ -1,7 +1,14 @@
-@if (!showRecoveryCode) {
-<div class="input-container">
+@if (showAlert) {
+<app-alert-message type="notice" role="dialog" aria-live="polite" class="mb-4">
+  <div content class="content" i18n>
+    As two-factor authentication is currently active on your ORCID account you
+    need to enter a 2FA code from your authentication app to continue.
+  </div>
+</app-alert-message>
+} @if (!showRecoveryCode) {
+<div>
   <mat-label
-    class="orc-font-small-print"
+    class="orc-font-small-print font-bold! block mb-2!"
     id="2fa-input-label"
     i18n="@@account.twoPassword"
     [ngClass]="{
@@ -13,7 +20,7 @@
   <mat-form-field
     appearance="outline"
     [hideRequiredMarker]="true"
-    class="no-hint"
+    class="no-hint w-full"
   >
     <input
       id="twoFactorCode"
@@ -22,31 +29,28 @@
       aria-labelledby="2fa-input-label"
       [formControlName]="codeControlName"
       matInput
-      #twoFactorCodeInput
       [errorStateMatcher]="errorMatcher"
+      #twoFactorCodeInput
       [ngClass]="{
         error:
           twoFactorCodeWasTouched && parentForm.get(codeControlName).invalid
       }"
     />
   </mat-form-field>
-  <div class="two-factor-description orc-font-small-print">
-    <div class="two-factor-description-text">
+  <div class="flex orc-font-small-print">
+    <div class="mt-2 grow">
       @if (!parentForm.get(codeControlName).invalid || !twoFactorCodeWasTouched)
       {
-      <mat-hint i18n="@@account.enterTheCode">
+      <mat-hint class="leading-6" i18n="@@account.enterTheCode">
         Enter the code from your two-factor authentication app
       </mat-hint>
       }
       <mat-error
         *ngIf="parentForm.get(codeControlName).hasError('backendInvalid')"
       >
-        <p
-          i18n="@@ngOrcid.signin.2fa.badVerificationCode"
-          class="error-message"
-        >
+        <ng-container i18n="@@ngOrcid.signin.2fa.badVerificationCode">
           Invalid authentication code
-        </p>
+        </ng-container>
       </mat-error>
       <mat-error
         *ngIf="
@@ -54,12 +58,9 @@
           parentForm.get(codeControlName).hasError('required')
         "
       >
-        <p
-          i18n="@@ngOrcid.signin.2fa.verificationCodeRequired"
-          class="error-message"
-        >
+        <ng-container i18n="@@ngOrcid.signin.2fa.verificationCodeRequired">
           Authentication code is required
-        </p>
+        </ng-container>
       </mat-error>
       <mat-error
         *ngIf="
@@ -68,12 +69,9 @@
             parentForm.get(codeControlName).hasError('maxlength'))
         "
       >
-        <p
-          i18n="@@ngOrcid.signin.2fa.badVerificationCodeLength"
-          class="error-message"
-        >
+        <ng-container i18n="@@ngOrcid.signin.2fa.badVerificationCodeLength">
           Invalid authentication code length
-        </p>
+        </ng-container>
       </mat-error>
     </div>
     <mat-hint
@@ -81,16 +79,16 @@
         error:
           twoFactorCodeWasTouched && parentForm.get(codeControlName).invalid
       }"
-      class="two-factor-description-length"
+      class="mt-2 self-center leading-6"
     >
       {{ parentForm.get(codeControlName).value?.length || 0 }}/6
     </mat-hint>
   </div>
 </div>
 } @else {
-<div class="input-container">
+<div>
   <mat-label
-    class="orc-font-small-print"
+    class="orc-font-small-print font-bold! block mb-2!"
     id="recovery-input-label"
     i18n="@@ngOrcid.signin.2fa.recoveryCode"
     [ngClass]="{
@@ -104,7 +102,7 @@
   <mat-form-field
     appearance="outline"
     [hideRequiredMarker]="true"
-    class="no-hint"
+    class="no-hint w-full"
   >
     <input
       id="twoFactorRecoveryCode"
@@ -113,8 +111,8 @@
       aria-labelledby="recovery-input-label"
       [formControlName]="recoveryControlName"
       #twoFactorRecoveryCodeInput
-      matInput
       [errorStateMatcher]="errorMatcher"
+      matInput
       [ngClass]="{
         error:
           twoFactorRecoveryCodeWasTouched &&
@@ -122,20 +120,20 @@
       }"
     />
   </mat-form-field>
-  <div class="two-factor-description orc-font-small-print">
-    <div class="two-factor-description-text">
+  <div class="flex orc-font-small-print">
+    <div class="mt-2 grow">
       @if (!parentForm.get(recoveryControlName).invalid ||
       !twoFactorRecoveryCodeWasTouched) {
-      <mat-hint i18n="@@ngOrcid.signin.2fa.noDevice2"
+      <mat-hint class="leading-6" i18n="@@ngOrcid.signin.2fa.noDevice2"
         >Enter a recovery code</mat-hint
       >
       }
       <mat-error
         *ngIf="parentForm.get(recoveryControlName).hasError('backendInvalid')"
       >
-        <p i18n="@@ngOrcid.signin.2fa.badRecoveryCode" class="error-message">
+        <ng-container i18n="@@ngOrcid.signin.2fa.badRecoveryCode">
           Invalid recovery code
-        </p>
+        </ng-container>
       </mat-error>
       <mat-error
         *ngIf="
@@ -143,12 +141,9 @@
           parentForm.get(recoveryControlName).hasError('required')
         "
       >
-        <p
-          i18n="@@ngOrcid.signin.2fa.recoveryCodeRequired"
-          class="error-message"
-        >
+        <ng-container i18n="@@ngOrcid.signin.2fa.recoveryCodeRequired">
           Recovery code is required
-        </p>
+        </ng-container>
       </mat-error>
       <mat-error
         *ngIf="
@@ -157,12 +152,9 @@
             parentForm.get(recoveryControlName).hasError('maxlength'))
         "
       >
-        <p
-          i18n="@@ngOrcid.signin.2fa.badRecoveryCodeLength"
-          class="error-message"
-        >
+        <ng-container i18n="@@ngOrcid.signin.2fa.badRecoveryCodeLength">
           Invalid recovery code length
-        </p>
+        </ng-container>
       </mat-error>
     </div>
     <mat-hint
@@ -171,10 +163,56 @@
           twoFactorRecoveryCodeWasTouched &&
           parentForm.get(recoveryControlName).invalid
       }"
-      class="two-factor-description-length"
+      class="mt-2 self-center leading-6"
     >
       {{ parentForm.get(recoveryControlName).value?.length || 0 }}/10
     </mat-hint>
   </div>
 </div>
+} @if (showHelpText) {
+<ul class="leading-5.25">
+  @if (!showRecoveryCode) {
+  <li>
+    <div class="orc-font-body-small">
+      <ng-container i18n="@@ngOrcid.signin.2fa.noDevice1"
+        >Don't have your device?</ng-container
+      >&nbsp;<a
+        href="#"
+        (click)="toggleRecoveryCode($event)"
+        i18n="@@account.useARecoveryCode"
+        class="underline"
+        >Use a recovery code instead</a
+      >
+    </div>
+  </li>
+  } @else {
+  <li>
+    <div class="orc-font-body-small">
+      <ng-container i18n="@@account.dontHaveYourRecoveryCodes">
+        Don't have your recovery codes?</ng-container
+      >&nbsp;<a
+        href="#"
+        (click)="toggleRecoveryCode($event)"
+        i18n="@@account.useYourAuthenticationAppInstead"
+        class="underline"
+        >Use your authentication app instead</a
+      >
+    </div>
+  </li>
+  }
+  <li>
+    <div class="orc-font-body-small">
+      <ng-container i18n="@@ngOrcid.signin.2fa.noDeviceOrRecovery">
+        Don't have your device or recovery code?</ng-container
+      >&nbsp;<a
+        href="https://support.orcid.org/hc/en-us"
+        target="_blank"
+        rel="noopener noreferrer"
+        i18n="@@topBar.knowledge"
+        class="underline"
+        >ORCID help centre</a
+      >
+    </div>
+  </li>
+</ul>
 }

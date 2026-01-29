@@ -5,6 +5,7 @@ import {
   OnDestroy,
   OnInit,
   Output,
+  ViewChild,
 } from '@angular/core'
 import {
   UntypedFormBuilder,
@@ -17,6 +18,8 @@ import { HAS_LETTER_OR_SYMBOL, HAS_NUMBER } from 'src/app/constants'
 import { AccountSecurityPasswordService } from 'src/app/core/account-security-password/account-security-password.service'
 import { RegisterService } from 'src/app/core/register/register.service'
 import { OrcidValidators } from 'src/app/validators'
+import { TwoFactorAuthFormComponent } from '@orcid/ui'
+import { ErrorStateMatcherForTwoFactorFields } from '../../../sign-in/ErrorStateMatcherForTwoFactorFields'
 
 @Component({
   selector: 'app-settings-security-password',
@@ -33,12 +36,16 @@ export class SettingsSecurityPasswordComponent implements OnInit, OnDestroy {
   hasLetterOrSymbolPattern = HAS_LETTER_OR_SYMBOL
   @Input() twoFactorState: boolean
   @Output() loading = new EventEmitter<boolean>()
+  @ViewChild(TwoFactorAuthFormComponent)
+  twoFactorAuthFormComponent: TwoFactorAuthFormComponent
   errors: string[]
   success: boolean
   $destroy = new Subject<void>()
   currentValidate8orMoreCharactersStatus: boolean
   ccurentValidateAtLeastALetterOrSymbolStatus: boolean
   currentValidateAtLeastANumber: boolean
+  confirmPasswordPlaceholder = $localize`:@@accountSettings.security.password.confirmPasswordPlaceholder:Confirm your new password`
+  errorMatcher = new ErrorStateMatcherForTwoFactorFields()
 
   constructor(
     private _fb: UntypedFormBuilder,
@@ -77,17 +84,32 @@ export class SettingsSecurityPasswordComponent implements OnInit, OnDestroy {
   }
 
   save() {
+    this.success = false
+    this.form.get('oldPassword')?.markAsTouched()
+    this.form.get('password')?.markAsTouched()
+    this.form.get('retypedPassword')?.markAsTouched()
+
+    if (this.twoFactorState) {
+      this.form.get('twoFactorCode')?.markAsTouched()
+      this.form.get('twoFactorRecoveryCode')?.markAsTouched()
+    }
     if (this.form.valid) {
       this.loading.emit(true)
       this._accountPassword
         .updatePassword(this.form.value)
         .subscribe((value) => {
           this.loading.emit(false)
+          this.twoFactorAuthFormComponent?.processBackendResponse(value)
 
-          if (!value.password) {
-            this.form.reset()
+          if (value.success) {
+            setTimeout(() => {
+              if (document.activeElement instanceof HTMLElement) {
+                document.activeElement.blur()
+                this.form.reset()
+              }
+            })
             this.success = true
-          } else {
+          } else if (value.errors && value.errors.length > 0) {
             this.form.controls['oldPassword'].setErrors({
               backendErrors: value.errors || null,
             })
@@ -107,7 +129,7 @@ export class SettingsSecurityPasswordComponent implements OnInit, OnDestroy {
 
   get validateAtLeastALetterOrSymbol() {
     const status =
-      !(this.form.value?.password as string).trim().length ||
+      !(this.form.value?.password as string)?.trim().length ||
       this.form.hasError('required', 'password') ||
       this.form.getError('pattern', 'password')?.requiredPattern ==
         this.hasLetterOrSymbolPattern
@@ -119,7 +141,7 @@ export class SettingsSecurityPasswordComponent implements OnInit, OnDestroy {
 
   get validateAtLeastANumber() {
     const status =
-      !(this.form.value?.password as string).trim().length ||
+      !(this.form.value?.password as string)?.trim().length ||
       this.form.hasError('required', 'password') ||
       this.form.getError('pattern', 'password')?.requiredPattern ==
         this.hasNumberPattern
