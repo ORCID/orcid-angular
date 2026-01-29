@@ -84,15 +84,9 @@ export class SettingsSecurityPasswordComponent implements OnInit, OnDestroy {
   }
 
   save() {
+    this.form.markAllAsTouched()
     this.success = false
-    this.form.get('oldPassword')?.markAsTouched()
-    this.form.get('password')?.markAsTouched()
-    this.form.get('retypedPassword')?.markAsTouched()
 
-    if (this.twoFactorState) {
-      this.form.get('twoFactorCode')?.markAsTouched()
-      this.form.get('twoFactorRecoveryCode')?.markAsTouched()
-    }
     if (this.form.valid) {
       this.loading.emit(true)
       this._accountPassword

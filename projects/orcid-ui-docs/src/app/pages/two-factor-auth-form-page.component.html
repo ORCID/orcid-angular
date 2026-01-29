@@ -80,15 +80,9 @@
     <pre><code class="language-typescript"><span style="background-color: #fff59d; color: #000;">@ViewChild(TwoFactorAuthFormComponent) twoFactorComponent: TwoFactorAuthFormComponent;</span>
 
 save() &#123;
-  // 1. Mark fields as touched on submit
-  if (this.twoFactorEnabled) &#123;
-    <span style="background-color: #fff59d; color: #000;">this.form.get('twoFactorCode')?.markAsTouched();</span>
-    <span style="background-color: #fff59d; color: #000;">this.form.get('twoFactorRecoveryCode')?.markAsTouched();</span>
-  &#125;
-
   if (this.form.valid) &#123;
     this.service.update(this.form.value).subscribe(response => &#123;
-      // 2. Pass backend response to child to handle errors/focus
+      // Pass backend response to child to handle errors/focus
       <span style="background-color: #fff59d; color: #000;">this.twoFactorComponent?.processBackendResponse(response);</span>
       <span style="color: #666">// Used when we don't know if the user</span>
       <span style="color: #666">// has 2fa enabled (e.g. signin)</span>

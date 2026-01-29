@@ -3,6 +3,7 @@ import {
   Component,
   ElementRef,
   Input,
+  OnDestroy,
   OnInit,
   SkipSelf,
   ViewChild,
@@ -50,7 +51,7 @@ class ErrorStateMatcherForTwoFactorFields implements ErrorStateMatcher {
     './two-factor-auth-form.component.scss-theme.scss',
   ],
 })
-export class TwoFactorAuthFormComponent implements OnInit {
+export class TwoFactorAuthFormComponent implements OnInit, OnDestroy {
   @Input() codeControlName = 'twoFactorCode'
   @Input() recoveryControlName = 'twoFactorRecoveryCode'
   @Input() showAlert = false
@@ -145,5 +146,16 @@ export class TwoFactorAuthFormComponent implements OnInit {
         }
       })
     }
+  }
+
+  ngOnDestroy() {
+    const codeControl = this.parentForm.get(this.codeControlName)
+    const recoveryControl = this.parentForm.get(this.recoveryControlName)
+
+    codeControl?.removeValidators(Validators.required)
+    recoveryControl?.removeValidators(Validators.required)
+
+    codeControl?.updateValueAndValidity({ emitEvent: false })
+    recoveryControl?.updateValueAndValidity({ emitEvent: false })
   }
 }
