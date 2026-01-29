@@ -141,7 +141,7 @@ mat-card-content.authorize-content {
   }
 }
 
-.mat-raised-button.authorize-button {
+.mat-mdc-raised-button.authorize-button:not(:disabled) {
   color: #fff;
   background: #085c77;
 }
