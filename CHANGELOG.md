@@ -1,3 +1,9 @@
+## v2.129.1 - 2026-01-30
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.129.0...v2.129.1)
+
+- [#2737](https://github.com/ORCID/orcid-angular/pull/2737): Aromanovv/pd 4790 add 2fa to account settings password reset
+
 ## v2.129.0 - 2026-01-29
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.128.17...v2.129.0)
