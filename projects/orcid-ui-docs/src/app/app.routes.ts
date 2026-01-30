@@ -63,4 +63,11 @@ export const routes: Routes = [
         (m) => m.SkeletonPlaceholderPageComponent
       ),
   },
+  {
+    path: 'two-factor-auth-form',
+    loadComponent: () =>
+      import('./pages/two-factor-auth-form-page.component').then(
+        (m) => m.TwoFactorAuthFormPageComponent
+      ),
+  },
 ]

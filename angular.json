@@ -494,7 +494,10 @@
                 "input": "projects/orcid-ui-docs/public"
               }
             ],
-            "styles": ["projects/orcid-ui-docs/src/styles.scss"]
+            "styles": [
+              "projects/orcid-ui-docs/src/styles.scss",
+              "src/assets/css/tailwind.css"
+            ]
           },
           "configurations": {
             "production": {
