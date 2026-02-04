@@ -86,7 +86,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">125</context>
+          <context context-type="linenumber">134</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-details/work-details.component.ts</context>
@@ -706,7 +706,7 @@
         <target>Público</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-defaults-visibility/settings-defaults-visibility.component.html</context>
-          <context context-type="linenumber">22</context>
+          <context context-type="linenumber">21</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panel-privacy/panel-privacy.component.ts</context>
@@ -718,7 +718,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/visibility-selector/visibility-selector/visibility-selector.component.html</context>
-          <context context-type="linenumber">110,112</context>
+          <context context-type="linenumber">92,94</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/visibility-selector/visibility-selector/visibility-selector.component.ts</context>
@@ -726,7 +726,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-visibility/form-visibility.component.html</context>
-          <context context-type="linenumber">49</context>
+          <context context-type="linenumber">47</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.VisibilityEveryone2" datatype="html" resname="register.VisibilityEveryone2">
@@ -734,11 +734,11 @@
         <target>(87% de nuestros usuarios selecciona esta opción)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-defaults-visibility/settings-defaults-visibility.component.html</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">24</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-visibility/form-visibility.component.html</context>
-          <context context-type="linenumber">52</context>
+          <context context-type="linenumber">50</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.VisibilityTrusted" datatype="html" resname="register.VisibilityTrusted">
@@ -758,7 +758,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-visibility/form-visibility.component.html</context>
-          <context context-type="linenumber">79</context>
+          <context context-type="linenumber">77</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.VisibilityPrivate" datatype="html" resname="register.VisibilityPrivate">
@@ -766,7 +766,7 @@
         <target>Privado</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-defaults-visibility/settings-defaults-visibility.component.html</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">58</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/visibility-selector/visibility-selector/visibility-selector.component.html</context>
@@ -774,7 +774,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-visibility/form-visibility.component.html</context>
-          <context context-type="linenumber">102</context>
+          <context context-type="linenumber">98</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.VisibilityPrivate2" datatype="html" resname="register.VisibilityPrivate2">
@@ -782,11 +782,11 @@
         <target>(8% de nuestros usuarios selecciona esta opción)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-defaults-visibility/settings-defaults-visibility.component.html</context>
-          <context context-type="linenumber">62</context>
+          <context context-type="linenumber">61</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-visibility/form-visibility.component.html</context>
-          <context context-type="linenumber">105</context>
+          <context context-type="linenumber">101</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.visibilityDescription2" datatype="html" resname="register.visibilityDescription2">
@@ -794,11 +794,11 @@
         <target>Más información en la configuración de privacidad</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-defaults-visibility/settings-defaults-visibility.component.html</context>
-          <context context-type="linenumber">76</context>
+          <context context-type="linenumber">75</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-visibility/form-visibility.component.html</context>
-          <context context-type="linenumber">127,130</context>
+          <context context-type="linenumber">123,126</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.settings" datatype="html" resname="account.settings">
@@ -1966,7 +1966,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/visibility-selector/visibility-selector/visibility-selector.component.html</context>
-          <context context-type="linenumber">142,144</context>
+          <context context-type="linenumber">116,118</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.trustedOrganizations" datatype="html" resname="account.trustedOrganizations">
@@ -3326,7 +3326,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/visibility-selector/visibility-selector/visibility-selector.component.html</context>
-          <context context-type="linenumber">174</context>
+          <context context-type="linenumber">138</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/visibility-selector/visibility-selector/visibility-selector.component.ts</context>
@@ -3490,7 +3490,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stack/affiliation-stack.component.ts</context>
-          <context context-type="linenumber">104</context>
+          <context context-type="linenumber">107</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/funding-external-identifiers-view-only/funding-external-identifiers-view-only.component.html</context>
@@ -4138,7 +4138,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
-          <context context-type="linenumber">134,136</context>
+          <context context-type="linenumber">143,145</context>
         </context-group>
       </trans-unit>
       <trans-unit id="side-bar.alreadyAssociated" datatype="html" resname="side-bar.alreadyAssociated">
@@ -5327,7 +5327,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">128</context>
+          <context context-type="linenumber">137</context>
         </context-group>
       </trans-unit>
       <trans-unit id="summary.recordIsDeprecated" datatype="html" resname="summary.recordIsDeprecated">
@@ -5339,7 +5339,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">129</context>
+          <context context-type="linenumber">138</context>
         </context-group>
       </trans-unit>
       <trans-unit id="summary.recordIsDeactivated" datatype="html" resname="summary.recordIsDeactivated">
@@ -5351,7 +5351,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">127</context>
+          <context context-type="linenumber">136</context>
         </context-group>
       </trans-unit>
       <trans-unit id="summary.affiliations" datatype="html" resname="summary.affiliations">
@@ -5855,7 +5855,7 @@
         <target>Más información sobre la configuración de visibilidad de ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/visibility-selector/visibility-selector/visibility-selector.component.html</context>
-          <context context-type="linenumber">182,184</context>
+          <context context-type="linenumber">146,148</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.ariaLabelPublic" datatype="html" resname="share.ariaLabelPublic">
@@ -11004,7 +11004,7 @@
       </trans-unit>
       <trans-unit id="recovery.passwordAndIdRecovery" datatype="html" resname="recovery.passwordAndIdRecovery">
         <source>Password and iD recovery</source>
-        <target>MOCK TRANSLATIONS _ DELETE ME! </target>
+        <target>Recuperación de contraseña y iD</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">11,13</context>
@@ -11020,7 +11020,7 @@
       </trans-unit>
       <trans-unit id="recovery.lostAccessToYourEmailAddresses" datatype="html" resname="recovery.lostAccessToYourEmailAddresses">
         <source>Lost access to your email addresses?</source>
-        <target>MOCK TRANSLATIONS _ DELETE ME! </target>
+        <target>¿No dispone de acceso a sus direcciones de correo electrónico?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">25,27</context>
@@ -11032,7 +11032,7 @@
       </trans-unit>
       <trans-unit id="recovery.youCanAlwaysSignIn" datatype="html" resname="recovery.youCanAlwaysSignIn">
         <source>You can always sign in to ORCID with your</source>
-        <target>MOCK TRANSLATIONS _ DELETE ME! </target>
+        <target>Si lo desea, puede iniciar sesión en ORCID con su</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">30</context>
@@ -11040,7 +11040,7 @@
       </trans-unit>
       <trans-unit id="recovery.16DigitOrcidId" datatype="html" resname="recovery.16DigitOrcidId">
         <source>16-digit ORCID iD</source>
-        <target>MOCK TRANSLATIONS _ DELETE ME! </target>
+        <target>ORCID iD de 16 dígitos</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">31</context>
@@ -11060,7 +11060,7 @@
       </trans-unit>
       <trans-unit id="recovery.accountPassword" datatype="html" resname="recovery.accountPassword">
         <source>account password</source>
-        <target>MOCK TRANSLATIONS _ DELETE ME! </target>
+        <target>contraseña de la cuenta</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">34</context>
@@ -11068,7 +11068,7 @@
       </trans-unit>
       <trans-unit id="recovery.instead" datatype="html" resname="recovery.instead">
         <source>instead.</source>
-        <target>MOCK TRANSLATIONS _ DELETE ME! </target>
+        <target>de forma alternativa.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">35</context>
@@ -11076,7 +11076,7 @@
       </trans-unit>
       <trans-unit id="recovery.trySigningIn" datatype="html" resname="recovery.trySigningIn">
         <source>Try signing in with your iD and password now</source>
-        <target>MOCK TRANSLATIONS _ DELETE ME! </target>
+        <target>Pruebe a iniciar sesión con su iD y contraseña ahora</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">44</context>
@@ -11088,42 +11088,54 @@
       </trans-unit>
       <trans-unit id="recovery.whatHaveYouForgotten" datatype="html" resname="recovery.whatHaveYouForgotten">
         <source>What have you forgotten?</source>
-        <target>MOCK TRANSLATIONS _ DELETE ME! </target>
+        <target>¿Qué ha olvidado?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
-          <context context-type="linenumber">51,53</context>
+          <context context-type="linenumber">52,54</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
+          <context context-type="linenumber">56,58</context>
         </context-group>
       </trans-unit>
       <trans-unit id="recovery.myOrcidAccountPassword" datatype="html" resname="recovery.myOrcidAccountPassword">
         <source>my ORCID account password</source>
-        <target>MOCK TRANSLATIONS _ DELETE ME! </target>
+        <target>la contraseña de mi cuenta ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
-          <context context-type="linenumber">63</context>
+          <context context-type="linenumber">67,69</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.ts</context>
+          <context context-type="linenumber">25</context>
         </context-group>
       </trans-unit>
       <trans-unit id="recovery.my16DigitOrcidId" datatype="html" resname="recovery.my16DigitOrcidId">
         <source>my 16-digit ORCID iD</source>
-        <target>MOCK TRANSLATIONS _ DELETE ME! </target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
-          <context context-type="linenumber">71,73</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="recovery.whereShouldWeSend" datatype="html" resname="recovery.whereShouldWeSend">
-        <source>Where should we send the recovery email?</source>
-        <target>MOCK TRANSLATIONS _ DELETE ME! </target>
+        <target>mi ORCID iD de 16 dígitos</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">79,81</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.ts</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="recovery.whereShouldWeSend" datatype="html" resname="recovery.whereShouldWeSend">
+        <source>Where should we send the recovery email?</source>
+        <target>¿Dónde desea recibir el correo electrónico de recuperación?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
+          <context context-type="linenumber">88,90</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="recovery.pleaseUseAnEmail" datatype="html" resname="recovery.pleaseUseAnEmail">
         <source>Please use an email address associated with your ORCID account.</source>
-        <target>MOCK TRANSLATIONS _ DELETE ME! </target>
+        <target>Use una dirección de correo electrónico asociada a su cuenta ORCID.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
-          <context context-type="linenumber">85,87</context>
+          <context context-type="linenumber">94,96</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.Email" datatype="html" resname="register.Email">
@@ -11131,7 +11143,7 @@
         <target>Correo electrónico</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
-          <context context-type="linenumber">96,97</context>
+          <context context-type="linenumber">105,106</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.html</context>
@@ -11140,55 +11152,59 @@
       </trans-unit>
       <trans-unit id="recovery.forExampleEmail" datatype="html" resname="recovery.forExampleEmail">
         <source>For example: joe@institution.edu</source>
-        <target>MOCK TRANSLATIONS _ DELETE ME! </target>
+        <target>Por ejemplo: juan@institucion.edu</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
-          <context context-type="linenumber">120,121</context>
+          <context context-type="linenumber">129,130</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="register.primaryEmailRequired" datatype="html" resname="register.primaryEmailRequired">
-        <source>An email is required</source>
-        <target>Se necesita un correo electrónico</target>
+      <trans-unit id="register.primaryEmailRequired2" datatype="html" resname="register.primaryEmailRequired2">
+        <source>Please enter your email</source>
+        <target>Introduzca su correo electrónico</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
-          <context context-type="linenumber">126</context>
+          <context context-type="linenumber">135</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
+          <context context-type="linenumber">152,154</context>
         </context-group>
       </trans-unit>
       <trans-unit id="recovery.sendRecoveryEmail" datatype="html" resname="recovery.sendRecoveryEmail">
         <source>Send recovery email</source>
-        <target>MOCK TRANSLATIONS _ DELETE ME! </target>
+        <target>Enviar correo electrónico de recuperación</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
-          <context context-type="linenumber">150,152</context>
+          <context context-type="linenumber">159,161</context>
         </context-group>
       </trans-unit>
       <trans-unit id="recovery.weHaveSent" datatype="html" resname="recovery.weHaveSent">
         <source>We have sent a recovery email to</source>
-        <target>MOCK TRANSLATIONS _ DELETE ME! </target>
+        <target>Le hemos enviado un correo electrónico de recuperación a</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
-          <context context-type="linenumber">155</context>
+          <context context-type="linenumber">164</context>
         </context-group>
       </trans-unit>
       <trans-unit id="recovery.ifYouDoNotReceive" datatype="html" resname="recovery.ifYouDoNotReceive">
         <source>If you do not receive the recovery email within 10 minutes please check your spam folder.</source>
-        <target>MOCK TRANSLATIONS _ DELETE ME! </target>
+        <target>Si no recibe el correo electrónico de recuperación en un plazo de 10 minutos, revise la carpeta de correo basura (spam).</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
-          <context context-type="linenumber">160,163</context>
+          <context context-type="linenumber">168,171</context>
         </context-group>
       </trans-unit>
       <trans-unit id="recovery.backToSignIn" datatype="html" resname="recovery.backToSignIn">
         <source>Back to sign in</source>
-        <target>MOCK TRANSLATIONS _ DELETE ME! </target>
+        <target>Volver a iniciar sesión</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
-          <context context-type="linenumber">170</context>
+          <context context-type="linenumber">178</context>
         </context-group>
       </trans-unit>
       <trans-unit id="recovery.iveForgotten" datatype="html" resname="recovery.iveForgotten">
         <source>I've forgotten</source>
-        <target>MOCK TRANSLATIONS _ DELETE ME! </target>
+        <target>He olvidado</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.ts</context>
           <context context-type="linenumber">24</context>
@@ -11199,7 +11215,7 @@
         <target>Haga pública esta afiliación para poder destacarla</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stack/affiliation-stack.component.ts</context>
-          <context context-type="linenumber">381</context>
+          <context context-type="linenumber">384</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.clickToRemoveHighlight" datatype="html" resname="shared.clickToRemoveHighlight">
@@ -11207,7 +11223,7 @@
         <target>Haga clic para quitarla como destacada</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stack/affiliation-stack.component.ts</context>
-          <context context-type="linenumber">385</context>
+          <context context-type="linenumber">388</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.clickToHighlight" datatype="html" resname="shared.clickToHighlight">
@@ -11215,7 +11231,7 @@
         <target>Haga clic para destacar esta afiliación</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stack/affiliation-stack.component.ts</context>
-          <context context-type="linenumber">388</context>
+          <context context-type="linenumber">391</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.featuredAffiliationSuccessMessageBefore" datatype="html" resname="shared.featuredAffiliationSuccessMessageBefore">
@@ -12927,7 +12943,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">261</context>
+          <context context-type="linenumber">270</context>
         </context-group>
       </trans-unit>
       <trans-unit id="record.editYourOrcidRecord" datatype="html" resname="record.editYourOrcidRecord">
@@ -12939,7 +12955,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">265</context>
+          <context context-type="linenumber">274</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.names" datatype="html" resname="topBar.names">
@@ -12947,7 +12963,7 @@
         <target>Nombres</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">121</context>
+          <context context-type="linenumber">130</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/modals/modal-name/modal-name.component.html</context>
@@ -12967,7 +12983,7 @@
         <target>Registro imprimible</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">123</context>
+          <context context-type="linenumber">132</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.copyId" datatype="html" resname="topBar.copyId">
@@ -12975,7 +12991,7 @@
         <target>Copiar ID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">124</context>
+          <context context-type="linenumber">133</context>
         </context-group>
       </trans-unit>
       <trans-unit id="summary.hideRecordSummary" datatype="html" resname="summary.hideRecordSummary">
@@ -12983,7 +12999,7 @@
         <target>Ocultar el resumen del registro</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">130</context>
+          <context context-type="linenumber">139</context>
         </context-group>
       </trans-unit>
       <trans-unit id="summary.showRecordSummary" datatype="html" resname="summary.showRecordSummary">
@@ -12991,7 +13007,7 @@
         <target>Mostrar el resumen del registro</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">131</context>
+          <context context-type="linenumber">140</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.ariaLabelCopyOrcidId" datatype="html" resname="topBar.ariaLabelCopyOrcidId">
@@ -12999,7 +13015,7 @@
         <target>Copie su ORCID iD en el portapapeles</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">133</context>
+          <context context-type="linenumber">142</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.ariaLabelViewPrintable" datatype="html" resname="topBar.ariaLabelViewPrintable">
@@ -13007,7 +13023,7 @@
         <target>Visualice una versión imprimible de su registro ORCID (se abrirá en una pestaña nueva)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">134</context>
+          <context context-type="linenumber">143</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.weLockRecords" datatype="html" resname="topBar.weLockRecords">
@@ -14288,7 +14304,7 @@
       </trans-unit>
       <trans-unit id="works.invalidISBN" datatype="html" resname="works.invalidISBN">
         <source>We are unable to validate this identifier. Please check it is correct before saving.</source>
-        <target>We are unable to validate this identifier. Please check it is correct before saving.</target>
+        <target>No podemos validar este identificador. Comprueba si es correcto antes de guardar.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
           <context context-type="linenumber">120,123</context>
@@ -16194,14 +16210,6 @@
           <context context-type="linenumber">119</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="register.primaryEmailRequired2" datatype="html" resname="register.primaryEmailRequired2">
-        <source>Please enter your email</source>
-        <target>Introduzca su correo electrónico</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
-          <context context-type="linenumber">152,154</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="register.theEmailAddress" datatype="html" resname="register.theEmailAddress">
         <source>The email address</source>
         <target>La dirección de correo electrónico</target>
@@ -16623,7 +16631,7 @@
         <target>Todo el mundo puede ver estos artículos</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-visibility/form-visibility.component.html</context>
-          <context context-type="linenumber">57,59</context>
+          <context context-type="linenumber">55,57</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.VisibilityParties" datatype="html" resname="register.VisibilityParties">
@@ -16631,7 +16639,7 @@
         <target>Partes de confianza</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-visibility/form-visibility.component.html</context>
-          <context context-type="linenumber">76</context>
+          <context context-type="linenumber">74</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.onlyPeopleAndOrganization" datatype="html" resname="register.onlyPeopleAndOrganization">
@@ -16639,7 +16647,7 @@
         <target>Solo las personas y organizaciones a las que haya dado permiso</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-visibility/form-visibility.component.html</context>
-          <context context-type="linenumber">84,86</context>
+          <context context-type="linenumber">82,84</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.itemsArePrivateAndOnly" datatype="html" resname="register.itemsArePrivateAndOnly">
@@ -16647,7 +16655,7 @@
         <target>Los artículos con privados; solo usted puede verlos</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-visibility/form-visibility.component.html</context>
-          <context context-type="linenumber">110,112</context>
+          <context context-type="linenumber">106,108</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.ariaLabelMoreInformationOnVisibility" datatype="html" resname="register.ariaLabelMoreInformationOnVisibility">
@@ -16655,7 +16663,7 @@
         <target>Más información en los ajustes de visibilidad (se abrirá en una pestaña nueva)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-visibility/form-visibility.component.ts</context>
-          <context context-type="linenumber">52</context>
+          <context context-type="linenumber">53</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.create" datatype="html" resname="register.create">
@@ -16900,7 +16908,7 @@
       </trans-unit>
       <trans-unit id="reset.afterResetting" datatype="html" resname="reset.afterResetting">
         <source>After resetting your password you will be asked to sign in using your email address or ORCID iD and your new password.</source>
-        <target>MOCK TRANSLATIONS _ DELETE ME! </target>
+        <target>Cuando restablezca su contraseña, se le pedirá que inicie sesión con su dirección de correo electrónico o ORCID iD y su nueva contraseña.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
           <context context-type="linenumber">33,36</context>
@@ -16908,7 +16916,7 @@
       </trans-unit>
       <trans-unit id="reset.saveYourNewPassword" datatype="html" resname="reset.saveYourNewPassword">
         <source>Save your new password</source>
-        <target>MOCK TRANSLATIONS _ DELETE ME! </target>
+        <target>Guardar su nueva contraseña</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
           <context context-type="linenumber">56,58</context>
@@ -16916,7 +16924,7 @@
       </trans-unit>
       <trans-unit id="reset.cancelPasswordReset" datatype="html" resname="reset.cancelPasswordReset">
         <source>Cancel password reset</source>
-        <target>MOCK TRANSLATIONS _ DELETE ME! </target>
+        <target>Cancelar restablecimiento de contraseña</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
           <context context-type="linenumber">64,65</context>
@@ -16924,7 +16932,7 @@
       </trans-unit>
       <trans-unit id="reset.hasExpired" datatype="html" resname="reset.hasExpired">
         <source>Your password reset link has expired</source>
-        <target>MOCK TRANSLATIONS _ DELETE ME! </target>
+        <target>El enlace para restablecer la contraseña ha caducado</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
           <context context-type="linenumber">83</context>
@@ -16932,7 +16940,7 @@
       </trans-unit>
       <trans-unit id="reset.invalidLink" datatype="html" resname="reset.invalidLink">
         <source>There is a problem with your password reset link</source>
-        <target>MOCK TRANSLATIONS _ DELETE ME! </target>
+        <target>Hay un problema con su enlace para restablecer la contraseña</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
           <context context-type="linenumber">87</context>
@@ -16940,7 +16948,7 @@
       </trans-unit>
       <trans-unit id="reset.youCanRequestANewLink" datatype="html" resname="reset.youCanRequestANewLink">
         <source>You can request a new link from</source>
-        <target>MOCK TRANSLATIONS _ DELETE ME! </target>
+        <target>Puede solicitar un nuevo enlace en</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
           <context context-type="linenumber">96</context>
@@ -16948,7 +16956,7 @@
       </trans-unit>
       <trans-unit id="reset.pleaseTryTheLinkAgain" datatype="html" resname="reset.pleaseTryTheLinkAgain">
         <source>Please try the link again. If this does not work you can request a new password reset link from</source>
-        <target>MOCK TRANSLATIONS _ DELETE ME! </target>
+        <target>Vuelva a probar suerte el enlace. Si no funciona, solicite un nuevo enlace para restablecer la contraseña en</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/reset-password/reset-password/reset-password.component.html</context>
           <context context-type="linenumber">108,109</context>

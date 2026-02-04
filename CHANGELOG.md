@@ -1,3 +1,41 @@
+## v2.129.2 - 2026-02-04
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.129.1...v2.129.2)
+
+## v2.129.1 - 2026-01-30
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.129.0...v2.129.1)
+
+- [#2737](https://github.com/ORCID/orcid-angular/pull/2737): Aromanovv/pd 4790 add 2fa to account settings password reset
+
+## v2.129.0 - 2026-01-29
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.128.17...v2.129.0)
+
+## v2.128.17 - 2026-01-28
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.128.16...v2.128.17)
+
+## v2.128.16 - 2026-01-27
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.128.15...v2.128.16)
+
+- [#2736](https://github.com/ORCID/orcid-angular/pull/2736): Transifex: update translations
+
+## v2.128.15 - 2026-01-22
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.128.14...v2.128.15)
+
+- [#2735](https://github.com/ORCID/orcid-angular/pull/2735): PD-0000
+- [#2734](https://github.com/ORCID/orcid-angular/pull/2734):
+
+## v2.128.14 - 2026-01-22
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.128.13...v2.128.14)
+
+- [#2733](https://github.com/ORCID/orcid-angular/pull/2733):
+- [#2692](https://github.com/ORCID/orcid-angular/pull/2692):
+
 ## v2.128.13 - 2026-01-21
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.128.12...v2.128.13)
