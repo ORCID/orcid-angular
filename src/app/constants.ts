@@ -48,9 +48,12 @@ export const ORCID_URI_REGEXP =
 // https://regex101.com/r/M1fqZi/1
 export const URL_REGEXP =
   /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#%[\]@!\$&'\(\)\*\+\\,;=.>< ]+$/i
-// ISSN pattern using same validation as the backend
-//https://regex101.com/r/NYZTYS/1
-export const ISSN_REGEXP = /\b\d{4}-?\d{3}[\dXx]\b/
+export const ISSN_PORTAL_URL = 'https://portal.issn.org/resource/ISSN/'
+// Escape the URL characters for Regex (handling slashes and dots)
+const escapedUrl = ISSN_PORTAL_URL.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+export const ISSN_REGEXP = new RegExp(`^(?:${escapedUrl})?\\d{4}-?\\d{3}[\\dXx]$`);
+
+
 /* PROTOCOL REQUIRED*/
 // https://regex101.com/r/pSnDC7/1
 export const URL_REGEXP_BACKEND =
@@ -516,3 +519,23 @@ function isValidIsbn13(isbn: string): boolean {
   // The checksum must be perfectly divisible by 10.
   return checksum % 10 === 0
 }
+
+
+function normaliseIssn(issn: string): string {
+    if (issn) {
+      // 1. Remove the portal URL
+      issn = issn.replace(new RegExp(ISSN_PORTAL_URL, 'g'), '')
+
+      // 2. Remove ALL non-alphanumeric characters (spaces, hyphens, dots, etc.)
+      issn = issn.replace(/[^a-zA-Z0-9]/g, '')
+
+      // 3. Force 'X' to uppercase
+      issn = issn.replace(/x/g, 'X')
+
+      // 4. Format as 0000-000X if valid length
+      if (issn.length === 8) {
+        return issn.substring(0, 4) + '-' + issn.substring(4, 8)
+      }
+    }
+    return ''
+  }
