@@ -94,9 +94,9 @@ save() &#123;
     <h4>4. Interface Definition</h4>
     <p>
       The endpoint payload/response object needs to extend the
-      <strong><code>TwoFactorAuthForm</code></strong> interface/pojo.
+      <strong><code>AuthChallengeForm</code></strong> interface/pojo.
     </p>
-    <pre><code class="language-typescript">export interface TwoFactorAuthForm &#123;
+    <pre><code class="language-typescript">export interface AuthChallengeForm &#123;
   invalidTwoFactorCode?: boolean;
   invalidTwoFactorRecoveryCode?: boolean;
   twoFactorCode?: string;

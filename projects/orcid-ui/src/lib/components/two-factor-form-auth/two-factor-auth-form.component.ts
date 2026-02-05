@@ -52,13 +52,20 @@ class ErrorStateMatcherForTwoFactorFields implements ErrorStateMatcher {
   ],
 })
 export class TwoFactorAuthFormComponent implements OnInit, OnDestroy {
-  @Input() codeControlName = 'twoFactorCode'
-  @Input() recoveryControlName = 'twoFactorRecoveryCode'
+  @Input() codeControlName = 'twoFactorCodeControl'
+  @Input() recoveryControlName = 'twoFactorRecoveryCodeControl'
+  @Input() passwordControlName = 'passwordControl'
   @Input() showAlert = false
   @Input() showHelpText = true
+  @Input() showPasswordField = true
+  @Input() showTwoFactorField = false
+  @ViewChild('passwordInput') passwordInput: ElementRef
   @ViewChild('twoFactorCodeInput') twoFactorCodeInput: ElementRef
   @ViewChild('twoFactorRecoveryCodeInput')
   twoFactorRecoveryCodeInput: ElementRef
+  invalidPassword = false
+  invalidTwoFactorCode = false
+  invalidTwoFactorRecoveryCode = false
   showRecoveryCode = false
   parentForm: FormGroup
   errorMatcher = new ErrorStateMatcherForTwoFactorFields()
@@ -68,6 +75,10 @@ export class TwoFactorAuthFormComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.parentForm = this.controlContainer.control as FormGroup
     this.updateTwoFactorValidators()
+  }
+
+  get passwordWasTouched() {
+    return this.parentForm.get(this.passwordControlName).touched
   }
 
   get twoFactorCodeWasTouched() {
@@ -116,20 +127,25 @@ export class TwoFactorAuthFormComponent implements OnInit, OnDestroy {
   processBackendResponse(value: any) {
     const codeControl = this.parentForm.get(this.codeControlName)
     const recoveryControl = this.parentForm.get(this.recoveryControlName)
+    const passwordControl = this.parentForm.get(this.passwordControlName)
 
-    if (value.invalidPassword) {
+    /*     if (value.invalidPassword) {
       codeControl?.setValue(null)
       recoveryControl?.setValue(null)
       codeControl?.markAsUntouched()
       recoveryControl?.markAsUntouched()
+    } */
+
+    if (value.invalidPassword) {
+      passwordControl?.setErrors({ invalid: true })
     }
 
     if (value.invalidTwoFactorCode) {
-      codeControl?.setErrors({ backendInvalid: true })
+      codeControl?.setErrors({ invalid: true })
     }
 
     if (value.invalidTwoFactorRecoveryCode) {
-      recoveryControl?.setErrors({ backendInvalid: true })
+      recoveryControl?.setErrors({ invalid: true })
     }
 
     if (

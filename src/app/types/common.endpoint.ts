@@ -257,7 +257,7 @@ export interface DeactivationEndpoint {
   tokenVerification?: ExpiringLinkVerification
   deactivationSuccessful?: boolean
 }
-export interface TwoFactorAuthForm {
+export interface AuthChallengeForm {
   invalidTwoFactorCode?: boolean
   invalidTwoFactorRecoveryCode?: boolean
   twoFactorCode?: string
