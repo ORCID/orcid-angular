@@ -94,8 +94,6 @@ export class SettingsSecurityPasswordComponent implements OnInit, OnDestroy {
         .subscribe((value) => {
           this.loading.emit(false)
           this.twoFactorAuthFormComponent?.processBackendResponse(value)
-          console.log(value)
-
           if (value.passwordContainsEmail) {
             this.form.controls['password']?.setErrors({ containsEmail: true })
           }
