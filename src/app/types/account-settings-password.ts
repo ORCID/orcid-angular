@@ -1,6 +1,6 @@
-import { AuthChallengeForm } from './common.endpoint'
+import { AuthChallenge } from './common.endpoint'
 
-export interface AccountPasswordEndpoint extends AuthChallengeForm {
+export interface AccountPasswordEndpoint extends AuthChallenge {
   errors: string[]
   password: string
   retypedPassword: string

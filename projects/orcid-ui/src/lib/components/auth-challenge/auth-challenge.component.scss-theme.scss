@@ -1,7 +1,7 @@
 @use '@angular/material' as mat;
 @import 'src/assets/scss/material.orcid-theme.scss';
 
-@mixin two-factor-auth-form-theme($theme) {
+@mixin auth-challenge-theme($theme) {
   mat-hint {
     color: $text-dark-high;
   }
@@ -10,4 +10,4 @@
   }
 }
 
-@include two-factor-auth-form-theme($orcid-app-theme);
+@include auth-challenge-theme($orcid-app-theme);

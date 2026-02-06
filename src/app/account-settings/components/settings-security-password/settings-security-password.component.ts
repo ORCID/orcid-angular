@@ -18,7 +18,7 @@ import { HAS_LETTER_OR_SYMBOL, HAS_NUMBER } from 'src/app/constants'
 import { AccountSecurityPasswordService } from 'src/app/core/account-security-password/account-security-password.service'
 import { RegisterService } from 'src/app/core/register/register.service'
 import { OrcidValidators } from 'src/app/validators'
-import { TwoFactorAuthFormComponent } from '@orcid/ui'
+import { AuthChallengeComponent } from '@orcid/ui'
 import { ErrorStateMatcherForTwoFactorFields } from '../../../sign-in/ErrorStateMatcherForTwoFactorFields'
 
 @Component({
@@ -36,8 +36,8 @@ export class SettingsSecurityPasswordComponent implements OnInit, OnDestroy {
   hasLetterOrSymbolPattern = HAS_LETTER_OR_SYMBOL
   @Input() twoFactorState: boolean
   @Output() loading = new EventEmitter<boolean>()
-  @ViewChild(TwoFactorAuthFormComponent)
-  twoFactorAuthFormComponent: TwoFactorAuthFormComponent
+  @ViewChild(AuthChallengeComponent)
+  authChallengeComponent: AuthChallengeComponent
   errors: string[]
   success: boolean
   $destroy = new Subject<void>()
@@ -93,7 +93,7 @@ export class SettingsSecurityPasswordComponent implements OnInit, OnDestroy {
         .updatePassword(this.form.value)
         .subscribe((value) => {
           this.loading.emit(false)
-          this.twoFactorAuthFormComponent?.processBackendResponse(value)
+          this.authChallengeComponent?.processBackendResponse(value)
           if (value.passwordContainsEmail) {
             this.form.controls['password']?.setErrors({ containsEmail: true })
           }

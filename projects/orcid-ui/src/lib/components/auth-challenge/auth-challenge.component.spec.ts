@@ -7,7 +7,7 @@ import {
 } from '@angular/core/testing'
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
-import { TwoFactorAuthFormComponent } from './two-factor-auth-form.component'
+import { AuthChallengeComponent } from './auth-challenge.component'
 import { By } from '@angular/platform-browser'
 import '@angular/localize/init'
 
@@ -15,21 +15,21 @@ import '@angular/localize/init'
 @Component({
   template: `
     <form [formGroup]="form">
-      <app-two-factor-auth-form
+      <app-auth-challenge
         [showAlert]="showAlert"
         [showHelpText]="showHelpText"
         codeControlName="twoFactorCode"
         recoveryControlName="twoFactorRecoveryCode"
       >
-      </app-two-factor-auth-form>
+      </app-auth-challenge>
     </form>
   `,
   standalone: true,
-  imports: [ReactiveFormsModule, TwoFactorAuthFormComponent],
+  imports: [ReactiveFormsModule, AuthChallengeComponent],
 })
 class TestHostComponent {
-  @ViewChild(TwoFactorAuthFormComponent)
-  childComponent: TwoFactorAuthFormComponent
+  @ViewChild(AuthChallengeComponent)
+  childComponent: AuthChallengeComponent
 
   showAlert = false
   showHelpText = true
@@ -40,10 +40,10 @@ class TestHostComponent {
   })
 }
 
-describe('TwoFactorAuthFormComponent', () => {
+describe('AuthChallengeComponent', () => {
   let fixture: ComponentFixture<TestHostComponent>
   let hostComponent: TestHostComponent
-  let component: TwoFactorAuthFormComponent
+  let component: AuthChallengeComponent
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

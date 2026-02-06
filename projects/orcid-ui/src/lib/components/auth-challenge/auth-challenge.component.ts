@@ -29,7 +29,7 @@ class ErrorStateMatcherForTwoFactorFields implements ErrorStateMatcher {
 }
 
 @Component({
-  selector: 'app-two-factor-auth-form',
+  selector: 'app-auth-challenge',
   standalone: true,
   imports: [
     MatFormFieldModule,
@@ -45,13 +45,13 @@ class ErrorStateMatcherForTwoFactorFields implements ErrorStateMatcher {
       deps: [[new SkipSelf(), ControlContainer]],
     },
   ],
-  templateUrl: './two-factor-auth-form.component.html',
+  templateUrl: './auth-challenge.component.html',
   styleUrls: [
-    './two-factor-auth-form.component.scss',
-    './two-factor-auth-form.component.scss-theme.scss',
+    './auth-challenge.component.scss',
+    './auth-challenge.component.scss-theme.scss',
   ],
 })
-export class TwoFactorAuthFormComponent implements OnInit, OnDestroy {
+export class AuthChallengeComponent implements OnInit, OnDestroy {
   @Input() codeControlName = 'twoFactorCodeControl'
   @Input() recoveryControlName = 'twoFactorRecoveryCodeControl'
   @Input() passwordControlName = 'passwordControl'
