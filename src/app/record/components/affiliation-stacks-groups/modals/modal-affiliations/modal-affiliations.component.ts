@@ -64,7 +64,6 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
   issnLabel = $localize`:@@shared.link:Link`
   endDateLabel = $localize`:@@shared.endDate:End date`
 
-
   private _type: AffiliationType
   dateLabel: string
   @Input()
@@ -394,14 +393,17 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
       const normalizedIssn = this.normaliseIssn(
         affiliationForm.get('issn')?.value?.trim()
       )
-      const issnValue = affiliationForm.get('issn')?.value?.trim();
+      const issnValue = affiliationForm.get('issn')?.value?.trim()
       const issnUrl = `${ISSN_PORTAL_URL}${normalizedIssn}`
       affiliationToSave.affiliationExternalIdentifiers = [
         {
           errors: [],
           externalIdentifierId: {
             errors: [],
-            value: issnValue && issnValue.startsWith(ISSN_PORTAL_URL)?issnUrl:normalizedIssn,
+            value:
+              issnValue && issnValue.startsWith(ISSN_PORTAL_URL)
+                ? issnUrl
+                : normalizedIssn,
             required: true,
           },
           externalIdentifierType: { value: 'issn' },
