@@ -1177,19 +1177,11 @@
         </context-group>
         <target>RL</target>
       </trans-unit>
-      <trans-unit id="08f2e5ad4847aa140bd7c5bd6b374c9d21aa8aba" datatype="html" resname="08f2e5ad4847aa140bd7c5bd6b374c9d21aa8aba">
-        <source>Your ORCID account password has been updated</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">5,7</context>
-        </context-group>
-        <target>RL</target>
-      </trans-unit>
       <trans-unit id="account.changeOrUpdateAccountPassword" datatype="html" resname="account.changeOrUpdateAccountPassword">
         <source>Change or update your account password.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">10,12</context>
+          <context context-type="linenumber">2,4</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -1197,7 +1189,7 @@
         <source>Old password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">22</context>
+          <context context-type="linenumber">15</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -1205,7 +1197,7 @@
         <source>Password cannot be empty</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">47,49</context>
+          <context context-type="linenumber">22,24</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -1213,7 +1205,7 @@
         <source>New password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">69</context>
+          <context context-type="linenumber">44</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -1221,7 +1213,7 @@
         <source>Password cannot be empty</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">107,109</context>
+          <context context-type="linenumber">60,62</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -1229,7 +1221,7 @@
         <source>Password must meet all requirements</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">119,121</context>
+          <context context-type="linenumber">70,72</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -1237,7 +1229,43 @@
         <source>Password must be between 8 and 256 characters</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">126,128</context>
+          <context context-type="linenumber">76,78</context>
+        </context-group>
+        <target>RL</target>
+      </trans-unit>
+      <trans-unit id="register.passwordLength" datatype="html" resname="register.passwordLength">
+        <source>8 or more characters</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
+          <context context-type="linenumber">99</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
+          <context context-type="linenumber">129</context>
+        </context-group>
+        <target>RL</target>
+      </trans-unit>
+      <trans-unit id="register.passwordSymbolV2" datatype="html" resname="register.passwordSymbolV2">
+        <source>At least 1 letter or symbol</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
+          <context context-type="linenumber">111</context>
+        </context-group>
+        <target>RL</target>
+      </trans-unit>
+      <trans-unit id="register.passwordNumberV2" datatype="html" resname="register.passwordNumberV2">
+        <source>At least 1 number</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
+          <context context-type="linenumber">123</context>
+        </context-group>
+        <target>RL</target>
+      </trans-unit>
+      <trans-unit id="account.confirmNewPassword" datatype="html" resname="account.confirmNewPassword">
+        <source>Confirm new password</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
+          <context context-type="linenumber">135</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -1245,7 +1273,7 @@
         <source>Retype your password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">178,180</context>
+          <context context-type="linenumber">151,153</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
@@ -1257,55 +1285,15 @@
         <source>Passwords do not match</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">189,191</context>
+          <context context-type="linenumber">158,160</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
-      <trans-unit id="register.yourPasswordHas" datatype="html" resname="register.yourPasswordHas">
-        <source>Your password has:</source>
+      <trans-unit id="account.yourPasswordHasBeenUpdate" datatype="html" resname="account.yourPasswordHasBeenUpdate">
+        <source>Your password has been updated</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">195</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">123</context>
-        </context-group>
-        <target>RL</target>
-      </trans-unit>
-      <trans-unit id="register.passwordLength" datatype="html" resname="register.passwordLength">
-        <source>8 or more characters</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">201</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">129</context>
-        </context-group>
-        <target>RL</target>
-      </trans-unit>
-      <trans-unit id="register.atLeastALetterOrSymbol" datatype="html" resname="register.atLeastALetterOrSymbol">
-        <source>At least 1 letter or symbol</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">207,209</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">135,137</context>
-        </context-group>
-        <target>RL</target>
-      </trans-unit>
-      <trans-unit id="register.atLeastANumber" datatype="html" resname="register.atLeastANumber">
-        <source>At least 1 number</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">215</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">143</context>
+          <context context-type="linenumber">167,169</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -1313,7 +1301,7 @@
         <source>Save changes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">236,238</context>
+          <context context-type="linenumber">179,181</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-country/modal-country.component.html</context>
@@ -1362,14 +1350,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work/modals/works-visibility-modal/works-visibility-modal.component.html</context>
           <context context-type="linenumber">14,16</context>
-        </context-group>
-        <target>RL</target>
-      </trans-unit>
-      <trans-unit id="accountSettings.security.password.confirmPasswordPlaceholder" datatype="html" resname="accountSettings.security.password.confirmPasswordPlaceholder">
-        <source>Confirm your new password</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.ts</context>
-          <context context-type="linenumber">47</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -16043,6 +16023,30 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
           <context context-type="linenumber">118,120</context>
+        </context-group>
+        <target>RL</target>
+      </trans-unit>
+      <trans-unit id="register.yourPasswordHas" datatype="html" resname="register.yourPasswordHas">
+        <source>Your password has:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
+          <context context-type="linenumber">123</context>
+        </context-group>
+        <target>RL</target>
+      </trans-unit>
+      <trans-unit id="register.atLeastALetterOrSymbol" datatype="html" resname="register.atLeastALetterOrSymbol">
+        <source>At least 1 letter or symbol</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
+          <context context-type="linenumber">135,137</context>
+        </context-group>
+        <target>RL</target>
+      </trans-unit>
+      <trans-unit id="register.atLeastANumber" datatype="html" resname="register.atLeastANumber">
+        <source>At least 1 number</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
+          <context context-type="linenumber">143</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
