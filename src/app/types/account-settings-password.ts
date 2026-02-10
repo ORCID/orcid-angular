@@ -1,9 +1,6 @@
-import { TwoFactorAuthForm } from './common.endpoint'
-
-export interface AccountPasswordEndpoint extends TwoFactorAuthForm {
+export interface AccountPasswordEndpoint {
   errors: string[]
   password: string
   retypedPassword: string
   oldPassword: string
-  success?: boolean
 }
