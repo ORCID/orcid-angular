@@ -106,12 +106,14 @@ export class InboxService {
       AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL
     const url = `inbox/notifications.json?firstResult=0&maxResults=${maxResults}&includeArchived=${includeArchived}`
 
-    return this._http.get<InboxNotificationItem[]>(url, { headers: this.headers }).pipe(
-      retry(3),
-      catchError((error) =>
-        this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
+    return this._http
+      .get<InboxNotificationItem[]>(url, { headers: this.headers })
+      .pipe(
+        retry(3),
+        catchError((error) =>
+          this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
+        )
       )
-    )
   }
 
   /**
@@ -121,7 +123,10 @@ export class InboxService {
     depthLevel = 0,
     includeArchived = false
   ): Observable<InboxNotificationItem[]> {
-    const cacheKey = this._cache.notificationsPageKey(depthLevel, includeArchived)
+    const cacheKey = this._cache.notificationsPageKey(
+      depthLevel,
+      includeArchived
+    )
     const cached = this._cache.getNotificationsPage(cacheKey)
     if (cached) return cached
 
@@ -148,9 +153,7 @@ export class InboxService {
    * Emits after each page so callers can stop early (e.g. once enough items are found).
    * Unsubscribing stops further requests. Does not mutate cached inbox state.
    */
-  fetchNotificationsIncremental(
-    includeArchived = false
-  ): Observable<{
+  fetchNotificationsIncremental(includeArchived = false): Observable<{
     total: number
     notifications: InboxNotificationItem[]
     done: boolean
@@ -168,10 +171,7 @@ export class InboxService {
           concatMap((depth) =>
             this.fetchNotificationsPage(depth, includeArchived)
           ),
-          scan(
-            (acc, page) => acc.concat(page),
-            [] as InboxNotificationItem[]
-          ),
+          scan((acc, page) => acc.concat(page), [] as InboxNotificationItem[]),
           map((notifications) => ({
             total: target,
             notifications,
@@ -191,7 +191,9 @@ export class InboxService {
     if (inFlight) return inFlight
 
     const existing = this.lastEmittedValue?.find(
-      (n) => `${n.putCode}` === `${code}` && !!(n as { archivedDate?: number }).archivedDate
+      (n) =>
+        `${n.putCode}` === `${code}` &&
+        !!(n as { archivedDate?: number }).archivedDate
     )
     if (existing) return of(existing)
 
@@ -243,7 +245,8 @@ export class InboxService {
     if (inFlight) return inFlight
 
     const existing = this.lastEmittedValue?.find(
-      (n) => `${n.putCode}` === `${code}` && !!(n as { readDate?: number }).readDate
+      (n) =>
+        `${n.putCode}` === `${code}` && !!(n as { readDate?: number }).readDate
     )
     if (existing) return of(existing)
 
@@ -289,8 +292,7 @@ export class InboxService {
       .pipe(
         map((resp) => {
           // If the server bounced us to /login, treat as “not logged in”
-          const count =
-            resp.url?.includes('/login') ? null : resp.body ?? null
+          const count = resp.url?.includes('/login') ? null : resp.body ?? null
           return count
         }),
         tap((count) => {

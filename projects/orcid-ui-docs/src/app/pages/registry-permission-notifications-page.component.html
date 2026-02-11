@@ -36,7 +36,10 @@
     </div>
 
     <div style="display: grid; gap: 12px">
-      <mat-form-field appearance="outline" *ngFor="let item of notifications; let i = index">
+      <mat-form-field
+        appearance="outline"
+        *ngFor="let item of notifications; let i = index"
+      >
         <mat-label>Notification {{ i + 1 }} text</mat-label>
         <input matInput [(ngModel)]="item.text" />
       </mat-form-field>
@@ -70,7 +73,9 @@
     <ul>
       <li><code>title</code>: Header title string.</li>
       <li><code>subtitle</code>: Header subtitle string.</li>
-      <li><code>notifications</code>: Up to three notifications with actions.</li>
+      <li>
+        <code>notifications</code>: Up to three notifications with actions.
+      </li>
     </ul>
 
     <h4>Outputs</h4>

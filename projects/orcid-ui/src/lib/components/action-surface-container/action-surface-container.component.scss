@@ -19,8 +19,12 @@
 
 .action-surface-container__title {
   margin: 0;
-  font-family: var(--orcid-font-family-sans, 'Noto Sans', -apple-system,
-    sans-serif);
+  font-family: var(
+    --orcid-font-family-sans,
+    'Noto Sans',
+    -apple-system,
+    sans-serif
+  );
   font-size: 20px;
   line-height: 1.25;
   font-weight: var(--orcid-font-weight-bold, 700);
@@ -29,8 +33,12 @@
 
 .action-surface-container__subtitle {
   margin: 0;
-  font-family: var(--orcid-font-family-sans, 'Noto Sans', -apple-system,
-    sans-serif);
+  font-family: var(
+    --orcid-font-family-sans,
+    'Noto Sans',
+    -apple-system,
+    sans-serif
+  );
   color: var(--orcid-color-text-muted, #555555);
   font-size: var(--orcid-font-size-body-small, 14px);
   font-weight: var(--orcid-font-weight-normal, 400);

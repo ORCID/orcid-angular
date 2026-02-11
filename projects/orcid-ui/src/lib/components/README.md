@@ -65,9 +65,7 @@ All user-facing strings must be provided by the parent (e.g. from `$localize` in
 
 ```html
 <orcid-action-surface icon="work_outline">
-  <span text>
-    <strong>Org name</strong> message text from parent...
-  </span>
+  <span text> <strong>Org name</strong> message text from parent... </span>
   <div actions>
     <button mat-button>Action 1</button>
     <button mat-flat-button color="primary">Action 2</button>

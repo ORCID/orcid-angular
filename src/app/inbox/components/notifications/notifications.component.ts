@@ -190,9 +190,12 @@ export class NotificationsComponent
 
     if (!exists && this.hasMoreNotificationsToLoad()) {
       // Keep loading pages until we find the requested putCode or run out.
-      this._inbox.get(true, this.showArchived).pipe(first()).subscribe(() => {
-        this.tryOpenNotificationFromUrl()
-      })
+      this._inbox
+        .get(true, this.showArchived)
+        .pipe(first())
+        .subscribe(() => {
+          this.tryOpenNotificationFromUrl()
+        })
       return
     }
 

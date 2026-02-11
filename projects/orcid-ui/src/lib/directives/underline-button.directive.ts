@@ -23,16 +23,22 @@ export class UnderlineButtonDirective {
 
   @HostBinding('style.color')
   get textColor(): string | null {
-    return this.enabled ? 'var(--orcid-color-brand-secondary-dark, #085c77)' : null
+    return this.enabled
+      ? 'var(--orcid-color-brand-secondary-dark, #085c77)'
+      : null
   }
 
   @HostBinding('style.--mdc-text-button-label-text-color')
   get mdcTextButtonLabelColor(): string | null {
-    return this.enabled ? 'var(--orcid-color-brand-secondary-dark, #085c77)' : null
+    return this.enabled
+      ? 'var(--orcid-color-brand-secondary-dark, #085c77)'
+      : null
   }
 
   @HostBinding('style.--mat-text-button-label-text-color')
   get matTextButtonLabelColor(): string | null {
-    return this.enabled ? 'var(--orcid-color-brand-secondary-dark, #085c77)' : null
+    return this.enabled
+      ? 'var(--orcid-color-brand-secondary-dark, #085c77)'
+      : null
   }
 }

@@ -49,8 +49,12 @@
   overflow-wrap: normal;
   word-break: normal;
   hyphens: none;
-  font-family: var(--orcid-font-family-sans, 'Noto Sans', -apple-system,
-    sans-serif);
+  font-family: var(
+    --orcid-font-family-sans,
+    'Noto Sans',
+    -apple-system,
+    sans-serif
+  );
   font-size: var(--orcid-font-size-body-small, 14px);
   font-weight: var(--orcid-font-weight-normal, 400);
   line-height: 21px;

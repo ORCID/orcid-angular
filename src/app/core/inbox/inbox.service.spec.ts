@@ -64,8 +64,8 @@ describe('InboxService', () => {
         done()
       })
 
-      const req = httpController.expectOne(
-        (r) => r.url?.includes('inbox/unreadCount.json')
+      const req = httpController.expectOne((r) =>
+        r.url?.includes('inbox/unreadCount.json')
       )
       expect(req.request.method).toBe('GET')
       req.flush(5)
@@ -77,10 +77,13 @@ describe('InboxService', () => {
         done()
       })
 
-      const req = httpController.expectOne(
-        (r) => r.url?.includes('inbox/unreadCount.json')
+      const req = httpController.expectOne((r) =>
+        r.url?.includes('inbox/unreadCount.json')
       )
-      req.error(new ProgressEvent('error'), { status: 500, statusText: 'Server Error' })
+      req.error(new ProgressEvent('error'), {
+        status: 500,
+        statusText: 'Server Error',
+      })
     })
   })
 
@@ -153,7 +156,9 @@ describe('InboxService', () => {
         .map((_, i) => ({ putCode: i, notificationType: 'PERMISSION' } as any))
       const page2: InboxNotificationItem[] = Array(5)
         .fill(null)
-        .map((_, i) => ({ putCode: i + 10, notificationType: 'PERMISSION' } as any))
+        .map(
+          (_, i) => ({ putCode: i + 10, notificationType: 'PERMISSION' } as any)
+        )
 
       cache.clearTotalCount('test')
       cache.clearNotificationsPage('test')
@@ -173,13 +178,17 @@ describe('InboxService', () => {
 
       const page1Req = httpController.expectOne((r) => {
         const url = r.url || ''
-        return url.includes('notifications.json') && url.includes('firstResult=0')
+        return (
+          url.includes('notifications.json') && url.includes('firstResult=0')
+        )
       })
       page1Req.flush(page1)
 
       const page2Req = httpController.expectOne((r) => {
         const url = r.url || ''
-        return url.includes('notifications.json') && url.includes('firstResult=10')
+        return (
+          url.includes('notifications.json') && url.includes('firstResult=10')
+        )
       })
       page2Req.flush(page2)
     })

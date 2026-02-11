@@ -35,7 +35,9 @@ export class PermissionNotificationsService {
               notifications: InboxNotification[]
               done: boolean
             }) => {
-              const grouped = this.groupUnreadPermissionByClient(ev.notifications)
+              const grouped = this.groupUnreadPermissionByClient(
+                ev.notifications
+              )
               return (
                 grouped.length < maxItems &&
                 !ev.done &&

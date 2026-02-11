@@ -13,12 +13,16 @@ export class BrandSecondaryDarkButtonDirective {
 
   @HostBinding('style.--mdc-filled-button-container-color')
   get filledContainerColor(): string | null {
-    return this.enabled ? 'var(--orcid-color-brand-secondary-dark, #085c77)' : null
+    return this.enabled
+      ? 'var(--orcid-color-brand-secondary-dark, #085c77)'
+      : null
   }
 
   @HostBinding('style.--mdc-filled-button-hover-container-color')
   get filledHoverColor(): string | null {
-    return this.enabled ? 'var(--orcid-color-brand-secondary-dark, #085c77)' : null
+    return this.enabled
+      ? 'var(--orcid-color-brand-secondary-dark, #085c77)'
+      : null
   }
 
   @HostBinding('style.--mdc-filled-button-label-text-color')
@@ -28,7 +32,9 @@ export class BrandSecondaryDarkButtonDirective {
 
   @HostBinding('style.--mat-button-filled-container-color')
   get matFilledContainerColor(): string | null {
-    return this.enabled ? 'var(--orcid-color-brand-secondary-dark, #085c77)' : null
+    return this.enabled
+      ? 'var(--orcid-color-brand-secondary-dark, #085c77)'
+      : null
   }
 
   @HostBinding('style.--mat-button-filled-label-text-color')
@@ -38,7 +44,9 @@ export class BrandSecondaryDarkButtonDirective {
 
   @HostBinding('style.background-color')
   get backgroundColor(): string | null {
-    return this.enabled ? 'var(--orcid-color-brand-secondary-dark, #085c77)' : null
+    return this.enabled
+      ? 'var(--orcid-color-brand-secondary-dark, #085c77)'
+      : null
   }
 
   @HostBinding('style.color')

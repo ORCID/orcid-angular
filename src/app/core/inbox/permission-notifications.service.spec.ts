@@ -72,12 +72,18 @@ describe('PermissionNotificationsService', () => {
     const perm1 = createPermissionNotification({
       putCode: 1,
       sentDate: 2000,
-      source: { sourceClientId: { path: 'client-a' } as any, sourceName: { content: 'Org A' } },
+      source: {
+        sourceClientId: { path: 'client-a' } as any,
+        sourceName: { content: 'Org A' },
+      },
     })
     const perm2 = createPermissionNotification({
       putCode: 2,
       sentDate: 1000,
-      source: { sourceClientId: { path: 'client-b' } as any, sourceName: { content: 'Org B' } },
+      source: {
+        sourceClientId: { path: 'client-b' } as any,
+        sourceName: { content: 'Org B' },
+      },
     })
 
     inboxSpy.getUnreadCount.and.returnValue(of(5))
@@ -98,12 +104,18 @@ describe('PermissionNotificationsService', () => {
     const perm1 = createPermissionNotification({
       putCode: 1,
       sentDate: 2000,
-      source: { sourceClientId: { path: 'client-a' } as any, sourceName: { content: 'Org A' } },
+      source: {
+        sourceClientId: { path: 'client-a' } as any,
+        sourceName: { content: 'Org A' },
+      },
     })
     const perm2 = createPermissionNotification({
       putCode: 2,
       sentDate: 1500,
-      source: { sourceClientId: { path: 'client-a' } as any, sourceName: { content: 'Org A' } },
+      source: {
+        sourceClientId: { path: 'client-a' } as any,
+        sourceName: { content: 'Org A' },
+      },
     })
 
     inboxSpy.getUnreadCount.and.returnValue(of(5))
@@ -125,19 +137,28 @@ describe('PermissionNotificationsService', () => {
       sentDate: 2000,
       readDate: undefined,
       archivedDate: undefined,
-      source: { sourceClientId: { path: 'client-a' } as any, sourceName: { content: 'Org A' } },
+      source: {
+        sourceClientId: { path: 'client-a' } as any,
+        sourceName: { content: 'Org A' },
+      },
     })
     const permRead = createPermissionNotification({
       putCode: 2,
       sentDate: 1500,
       readDate: 9999,
-      source: { sourceClientId: { path: 'client-b' } as any, sourceName: { content: 'Org B' } },
+      source: {
+        sourceClientId: { path: 'client-b' } as any,
+        sourceName: { content: 'Org B' },
+      },
     })
     const permArchived = createPermissionNotification({
       putCode: 3,
       sentDate: 1000,
       archivedDate: 9999,
-      source: { sourceClientId: { path: 'client-c' } as any, sourceName: { content: 'Org C' } },
+      source: {
+        sourceClientId: { path: 'client-c' } as any,
+        sourceName: { content: 'Org C' },
+      },
     })
 
     inboxSpy.getUnreadCount.and.returnValue(of(5))
@@ -159,12 +180,18 @@ describe('PermissionNotificationsService', () => {
   it('should filter out non-PERMISSION notification types', (done) => {
     const perm = createPermissionNotification({
       putCode: 1,
-      source: { sourceClientId: { path: 'client-a' } as any, sourceName: { content: 'Org A' } },
+      source: {
+        sourceClientId: { path: 'client-a' } as any,
+        sourceName: { content: 'Org A' },
+      },
     })
     const otherType = {
       ...createPermissionNotification({ putCode: 2 }),
       notificationType: 'AMENDED',
-      source: { sourceClientId: { path: 'client-b' } as any, sourceName: { content: 'Org B' } },
+      source: {
+        sourceClientId: { path: 'client-b' } as any,
+        sourceName: { content: 'Org B' },
+      },
     } as any
 
     inboxSpy.getUnreadCount.and.returnValue(of(5))
@@ -184,17 +211,26 @@ describe('PermissionNotificationsService', () => {
       createPermissionNotification({
         putCode: 1,
         sentDate: 3000,
-        source: { sourceClientId: { path: 'client-a' } as any, sourceName: { content: 'A' } },
+        source: {
+          sourceClientId: { path: 'client-a' } as any,
+          sourceName: { content: 'A' },
+        },
       }),
       createPermissionNotification({
         putCode: 2,
         sentDate: 2000,
-        source: { sourceClientId: { path: 'client-b' } as any, sourceName: { content: 'B' } },
+        source: {
+          sourceClientId: { path: 'client-b' } as any,
+          sourceName: { content: 'B' },
+        },
       }),
       createPermissionNotification({
         putCode: 3,
         sentDate: 1000,
-        source: { sourceClientId: { path: 'client-c' } as any, sourceName: { content: 'C' } },
+        source: {
+          sourceClientId: { path: 'client-c' } as any,
+          sourceName: { content: 'C' },
+        },
       }),
     ]
 
@@ -215,12 +251,18 @@ describe('PermissionNotificationsService', () => {
     const perm1 = createPermissionNotification({
       putCode: 1,
       sentDate: 1000,
-      source: { sourceClientId: { path: 'client-a' } as any, sourceName: { content: 'A' } },
+      source: {
+        sourceClientId: { path: 'client-a' } as any,
+        sourceName: { content: 'A' },
+      },
     })
     const perm2 = createPermissionNotification({
       putCode: 2,
       sentDate: 3000,
-      source: { sourceClientId: { path: 'client-b' } as any, sourceName: { content: 'B' } },
+      source: {
+        sourceClientId: { path: 'client-b' } as any,
+        sourceName: { content: 'B' },
+      },
     })
 
     inboxSpy.getUnreadCount.and.returnValue(of(5))

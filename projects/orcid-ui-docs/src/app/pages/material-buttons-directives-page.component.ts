@@ -116,8 +116,8 @@ import {
       <h3>Underline Button Directive</h3>
       <p>
         The <code>orcidUnderlineButton</code> directive styles text buttons with
-        an underline and brand secondary dark color. Commonly used for "Read"
-        or secondary action buttons.
+        an underline and brand secondary dark color. Commonly used for "Read" or
+        secondary action buttons.
       </p>
 
       <div class="example-group">

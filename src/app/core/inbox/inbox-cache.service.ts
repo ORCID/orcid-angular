@@ -22,8 +22,14 @@ export class InboxCacheService {
   private _unreadCountAt = 0
   private _unreadCount$: Observable<number | null> | null = null
 
-  private _notificationsPage = new Map<string, Observable<InboxNotificationItem[]>>()
-  private _flagAsReadInFlight = new Map<string, Observable<InboxNotificationItem>>()
+  private _notificationsPage = new Map<
+    string,
+    Observable<InboxNotificationItem[]>
+  >()
+  private _flagAsReadInFlight = new Map<
+    string,
+    Observable<InboxNotificationItem>
+  >()
   private _flagAsArchiveInFlight = new Map<
     string,
     Observable<InboxNotificationItem>
@@ -85,11 +91,16 @@ export class InboxCacheService {
     return `${includeArchived ? 'archived' : 'nonArchived'}:${depthLevel}`
   }
 
-  getNotificationsPage(key: string): Observable<InboxNotificationItem[]> | undefined {
+  getNotificationsPage(
+    key: string
+  ): Observable<InboxNotificationItem[]> | undefined {
     return this._notificationsPage.get(key)
   }
 
-  setNotificationsPage(key: string, obs: Observable<InboxNotificationItem[]>): void {
+  setNotificationsPage(
+    key: string,
+    obs: Observable<InboxNotificationItem[]>
+  ): void {
     this._notificationsPage.set(key, obs)
   }
 
@@ -101,11 +112,16 @@ export class InboxCacheService {
 
   // --- In-flight deduplication (flag-as-read / flag-as-archive) ---
 
-  getFlagAsReadInFlight(key: string): Observable<InboxNotificationItem> | undefined {
+  getFlagAsReadInFlight(
+    key: string
+  ): Observable<InboxNotificationItem> | undefined {
     return this._flagAsReadInFlight.get(key)
   }
 
-  setFlagAsReadInFlight(key: string, obs: Observable<InboxNotificationItem>): void {
+  setFlagAsReadInFlight(
+    key: string,
+    obs: Observable<InboxNotificationItem>
+  ): void {
     this._flagAsReadInFlight.set(key, obs)
   }
 

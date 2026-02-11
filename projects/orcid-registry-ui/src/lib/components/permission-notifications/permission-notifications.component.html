@@ -3,11 +3,16 @@
     <orcid-action-surface
       *ngFor="let notification of visibleNotifications; let index = index"
       [icon]="notification.icon"
-      [iconColor]="notification.iconColor ?? 'var(--orcid-color-state-notice-dark, #ff9c00)'"
+      [iconColor]="
+        notification.iconColor ??
+        'var(--orcid-color-state-notice-dark, #ff9c00)'
+      "
     >
       <span text [innerHTML]="getTrustedHtml(notification.text)"></span>
       <div actions>
-        <ng-container *ngFor="let action of notification.actions; let actionIndex = index">
+        <ng-container
+          *ngFor="let action of notification.actions; let actionIndex = index"
+        >
           <ng-container [ngSwitch]="action.variant">
             <button
               *ngSwitchCase="'flat'"
