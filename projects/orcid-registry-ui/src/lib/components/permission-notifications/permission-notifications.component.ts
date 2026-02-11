@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core'
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core'
 import { DomSanitizer } from '@angular/platform-browser'
 import {
   NgClass,
@@ -45,6 +51,7 @@ export interface RegistryNotificationActionEvent {
 @Component({
   selector: 'orcid-registry-permission-notifications',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     NgClass,
     NgFor,

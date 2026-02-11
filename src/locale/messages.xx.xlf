@@ -13947,7 +13947,7 @@
         <target>X</target>
       </trans-unit>
       <trans-unit id="topBar.permissionNotificationsTitle" datatype="html" resname="topBar.permissionNotificationsTitle">
-        <source>Unread permission notifications</source>
+        <source>Organizations want to connect</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
           <context context-type="linenumber">71</context>
@@ -13955,7 +13955,7 @@
         <target>X</target>
       </trans-unit>
       <trans-unit id="topBar.permissionNotificationsSubtitle" datatype="html" resname="topBar.permissionNotificationsSubtitle">
-        <source>You have updates waiting for your review.</source>
+        <source>Connecting with trusted organizations helps keep your ORCID record up-to-date.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
           <context context-type="linenumber">72</context>
