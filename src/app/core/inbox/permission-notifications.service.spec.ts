@@ -46,7 +46,10 @@ describe('PermissionNotificationsService', () => {
       providers: [
         PermissionNotificationsService,
         { provide: InboxService, useValue: inboxSpy },
-        { provide: AccountTrustedOrganizationsService, useValue: trustedOrgsSpy },
+        {
+          provide: AccountTrustedOrganizationsService,
+          useValue: trustedOrgsSpy,
+        },
       ],
     })
     service = TestBed.inject(PermissionNotificationsService)

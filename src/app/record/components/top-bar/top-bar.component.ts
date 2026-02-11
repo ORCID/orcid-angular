@@ -157,7 +157,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
           .getStateOf(TogglzFlag.PERMISSION_NOTIFICATIONS)
           .pipe(take(1))
           .subscribe((value) => {
-            if (!value) {
+            if (value) {
               if (
                 !this.isPublicRecord &&
                 !this.recordWithIssues &&
@@ -212,7 +212,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
       .subscribe((grouped) => {
         this.permissionPanelRaw = grouped
         this.permissionPanelNotifications = grouped.map((n) => {
-          const orgName = n?.source?.sourceName?.content || ''
+          const orgName = n?.sourceDescription || ''
           const escaped = orgName
             .replace(/&/g, '&amp;')
             .replace(/</g, '&lt;')

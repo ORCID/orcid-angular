@@ -1,6 +1,13 @@
 import { Injectable } from '@angular/core'
 import { Observable, of } from 'rxjs'
-import { catchError, first, last, map, switchMap, takeWhile } from 'rxjs/operators'
+import {
+  catchError,
+  first,
+  last,
+  map,
+  switchMap,
+  takeWhile,
+} from 'rxjs/operators'
 import { InboxService } from './inbox.service'
 import {
   InboxNotification,
