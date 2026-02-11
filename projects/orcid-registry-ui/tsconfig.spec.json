@@ -3,19 +3,11 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "../../out-tsc/app",
-    "types": [],
-    "rootDir": "../..",
-    "composite": false
+    "outDir": "../../out-tsc/spec/orcid-registry-ui",
+    "declaration": false,
+    "types": ["jasmine"],
+    "composite": true
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["src/**/*.spec.ts"],
-  "references": [
-    {
-      "path": "../orcid-ui/tsconfig.lib.json"
-    },
-    {
-      "path": "../orcid-registry-ui/tsconfig.lib.json"
-    }
-  ]
+  "exclude": ["../../out-tsc"]
 }

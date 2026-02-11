@@ -3,19 +3,16 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "../../out-tsc/app",
+    "outDir": "../../out-tsc/lib",
+    "declaration": true,
+    "declarationMap": true,
+    "inlineSources": true,
     "types": [],
-    "rootDir": "../..",
-    "composite": false
+    "paths": {
+      "@orcid/ui": ["dist/orcid-ui"]
+    },
+    "composite": true
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["src/**/*.spec.ts"],
-  "references": [
-    {
-      "path": "../orcid-ui/tsconfig.lib.json"
-    },
-    {
-      "path": "../orcid-registry-ui/tsconfig.lib.json"
-    }
-  ]
+  "exclude": ["**/*.spec.ts"]
 }

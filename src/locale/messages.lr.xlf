@@ -13062,11 +13062,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">129,131</context>
+          <context context-type="linenumber">137,139</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
-          <context context-type="linenumber">57</context>
+          <context context-type="linenumber">68</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -13414,15 +13414,15 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">190,192</context>
+          <context context-type="linenumber">198,200</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">241,243</context>
+          <context context-type="linenumber">249,251</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
-          <context context-type="linenumber">58</context>
+          <context context-type="linenumber">69</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -13530,7 +13530,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">153,155</context>
+          <context context-type="linenumber">161,163</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -13638,7 +13638,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">137,139</context>
+          <context context-type="linenumber">145,147</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -13850,7 +13850,7 @@
         <source>Your account has been locked</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">16,18</context>
+          <context context-type="linenumber">24,26</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -13858,7 +13858,7 @@
         <source>Please contact</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">28</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -13866,7 +13866,7 @@
         <source>ORCID support</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">27</context>
+          <context context-type="linenumber">35</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -13874,7 +13874,7 @@
         <source>if you believe this account was locked in error.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">38</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -13882,7 +13882,7 @@
         <source>Email domains shared</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">37</context>
+          <context context-type="linenumber">45</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -13890,7 +13890,7 @@
         <source>The email domains</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">43</context>
+          <context context-type="linenumber">51</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -13898,7 +13898,7 @@
         <source>The email domain</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">48</context>
+          <context context-type="linenumber">56</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -13906,7 +13906,7 @@
         <source>and</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">63,65</context>
+          <context context-type="linenumber">71,73</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -13914,7 +13914,7 @@
         <source>are now visible on your public ORCID record. Manage your email addresses and domains in the</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">71,74</context>
+          <context context-type="linenumber">79,82</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -13922,7 +13922,7 @@
         <source>is now visible on your public ORCID record. Manage your email addresses and domains in the</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">78,81</context>
+          <context context-type="linenumber">86,89</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -13930,7 +13930,7 @@
         <source>Emails &amp; domains section</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">87</context>
+          <context context-type="linenumber">95</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -13938,7 +13938,7 @@
         <source>Employment affiliation added</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">95</context>
+          <context context-type="linenumber">103</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -13946,7 +13946,7 @@
         <source>has been added to your ORCID record. Manage your existing employment affiliations or add new ones in the</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">99,101</context>
+          <context context-type="linenumber">107,109</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -13954,7 +13954,7 @@
         <source>Employment section</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">107</context>
+          <context context-type="linenumber">115</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -13962,7 +13962,47 @@
         <source>Name</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">144,146</context>
+          <context context-type="linenumber">152,154</context>
+        </context-group>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="topBar.permissionNotificationsTitle" datatype="html" resname="topBar.permissionNotificationsTitle">
+        <source>Unread permission notifications</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
+          <context context-type="linenumber">73</context>
+        </context-group>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="topBar.permissionNotificationsSubtitle" datatype="html" resname="topBar.permissionNotificationsSubtitle">
+        <source>You have updates waiting for your review.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
+          <context context-type="linenumber">74</context>
+        </context-group>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="topBar.permissionWantsToAdd" datatype="html" resname="topBar.permissionWantsToAdd">
+        <source>wants to add information to your ORCID record</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
+          <context context-type="linenumber">291</context>
+        </context-group>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="topBar.permissionRead" datatype="html" resname="topBar.permissionRead">
+        <source>Read</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
+          <context context-type="linenumber">300</context>
+        </context-group>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="topBar.permissionConnectNow" datatype="html" resname="topBar.permissionConnectNow">
+        <source>Connect now</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
+          <context context-type="linenumber">306</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
