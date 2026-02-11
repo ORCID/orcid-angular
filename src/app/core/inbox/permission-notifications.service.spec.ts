@@ -1,8 +1,9 @@
 import { TestBed } from '@angular/core/testing'
-import { of } from 'rxjs'
+import { of, throwError } from 'rxjs'
 import { PermissionNotificationsService } from './permission-notifications.service'
 import { InboxService } from './inbox.service'
 import { InboxNotificationPermission } from '../../types/notifications.endpoint'
+import { AccountTrustedOrganizationsService } from '../account-trusted-organizations/account-trusted-organizations.service'
 
 function createPermissionNotification(
   overrides: Partial<InboxNotificationPermission> = {}
@@ -28,17 +29,24 @@ function createPermissionNotification(
 describe('PermissionNotificationsService', () => {
   let service: PermissionNotificationsService
   let inboxSpy: jasmine.SpyObj<InboxService>
+  let trustedOrgsSpy: jasmine.SpyObj<AccountTrustedOrganizationsService>
 
   beforeEach(() => {
     inboxSpy = jasmine.createSpyObj<InboxService>('InboxService', [
       'getUnreadCount',
       'fetchNotificationsIncremental',
     ])
+    trustedOrgsSpy = jasmine.createSpyObj<AccountTrustedOrganizationsService>(
+      'AccountTrustedOrganizationsService',
+      ['get']
+    )
+    trustedOrgsSpy.get.and.returnValue(of([]))
 
     TestBed.configureTestingModule({
       providers: [
         PermissionNotificationsService,
         { provide: InboxService, useValue: inboxSpy },
+        { provide: AccountTrustedOrganizationsService, useValue: trustedOrgsSpy },
       ],
     })
     service = TestBed.inject(PermissionNotificationsService)
@@ -96,6 +104,70 @@ describe('PermissionNotificationsService', () => {
       expect(result[0].source.sourceClientId.path).toBe('client-a')
       expect(result[1].source.sourceClientId.path).toBe('client-b')
       expect(inboxSpy.fetchNotificationsIncremental).toHaveBeenCalledWith(false)
+      expect(trustedOrgsSpy.get).toHaveBeenCalled()
+      done()
+    })
+  })
+
+  it('should filter out notifications from already trusted clientIds', (done) => {
+    const perm1 = createPermissionNotification({
+      putCode: 1,
+      sentDate: 2000,
+      source: {
+        sourceClientId: { path: 'client-a' } as any,
+        sourceName: { content: 'Org A' },
+      },
+    })
+    const perm2 = createPermissionNotification({
+      putCode: 2,
+      sentDate: 1000,
+      source: {
+        sourceClientId: { path: 'client-b' } as any,
+        sourceName: { content: 'Org B' },
+      },
+    })
+
+    trustedOrgsSpy.get.and.returnValue(of([{ clientId: 'client-a' } as any]))
+    inboxSpy.getUnreadCount.and.returnValue(of(5))
+    inboxSpy.fetchNotificationsIncremental.and.returnValue(
+      of({ total: 5, notifications: [perm1, perm2], done: true })
+    )
+
+    service.loadUnreadPermissionNotifications(3).subscribe((result) => {
+      expect(result.length).toBe(1)
+      expect(result[0].source.sourceClientId.path).toBe('client-b')
+      done()
+    })
+  })
+
+  it('should not fail if trusted-orgs lookup fails (no filtering applied)', (done) => {
+    const perm1 = createPermissionNotification({
+      putCode: 1,
+      sentDate: 2000,
+      source: {
+        sourceClientId: { path: 'client-a' } as any,
+        sourceName: { content: 'Org A' },
+      },
+    })
+    const perm2 = createPermissionNotification({
+      putCode: 2,
+      sentDate: 1000,
+      source: {
+        sourceClientId: { path: 'client-b' } as any,
+        sourceName: { content: 'Org B' },
+      },
+    })
+
+    trustedOrgsSpy.get.and.returnValue(throwError(() => new Error('fail')))
+    inboxSpy.getUnreadCount.and.returnValue(of(5))
+    inboxSpy.fetchNotificationsIncremental.and.returnValue(
+      of({ total: 5, notifications: [perm1, perm2], done: true })
+    )
+
+    service.loadUnreadPermissionNotifications(3).subscribe((result) => {
+      expect(result.length).toBe(2)
+      expect(result[0].source.sourceClientId.path).toBe('client-a')
+      expect(result[1].source.sourceClientId.path).toBe('client-b')
       done()
     })
   })

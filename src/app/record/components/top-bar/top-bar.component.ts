@@ -70,8 +70,8 @@ export class TopBarComponent implements OnInit, OnDestroy {
 
   ariaLabelName: string
 
-  permissionPanelTitle = $localize`:@@topBar.permissionNotificationsTitle:Unread permission notifications`
-  permissionPanelSubtitle = $localize`:@@topBar.permissionNotificationsSubtitle:You have updates waiting for your review.`
+  permissionPanelTitle = $localize`:@@topBar.permissionNotificationsTitle:Organizations want to connect`
+  permissionPanelSubtitle = $localize`:@@topBar.permissionNotificationsSubtitle:Connecting with trusted organizations helps keep your ORCID record up-to-date.`
   permissionPanelNotifications: RegistryPermissionNotification[] = []
   private permissionPanelRaw: InboxNotificationPermission[] = []
   private _permissionPanelLoadStarted = false
@@ -157,7 +157,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
           .getStateOf(TogglzFlag.PERMISSION_NOTIFICATIONS)
           .pipe(take(1))
           .subscribe((value) => {
-            if (value) {
+            if (!value) {
               if (
                 !this.isPublicRecord &&
                 !this.recordWithIssues &&
