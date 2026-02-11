@@ -1,0 +1,84 @@
+<app-documentation-page
+  title="Action Surface"
+  description="Compact surface with projected message text and Material actions."
+>
+  <div controls>
+    <p>This component relies on projected content for text and actions.</p>
+  </div>
+
+  <div examples>
+    <div class="example-group">
+      <h4>Desktop vs Mobile</h4>
+      <div class="example-grid">
+        <div class="example-item">
+          <h5>Desktop</h5>
+          <div class="example-container desktop">
+            <orcid-action-surface
+              icon="work_outline"
+              iconColor="var(--orcid-color-state-notice-dark, #ff9c00)"
+            >
+              <span text>
+                <strong>University of Oxford</strong> wants to add information to
+                your ORCID record
+              </span>
+              <div actions>
+                <button mat-button orcidUnderlineButton>Read</button>
+                <button mat-flat-button orcidBrandSecondaryDarkButton>
+                  Connect now
+                </button>
+              </div>
+            </orcid-action-surface>
+          </div>
+        </div>
+        <div class="example-item">
+          <h5>Mobile</h5>
+          <div class="example-container mobile">
+            <orcid-action-surface
+              class="mobile"
+              icon="work_outline"
+              iconColor="var(--orcid-color-state-notice-dark, #ff9c00)"
+            >
+              <span text>
+                <strong>University of Oxford</strong> wants to add information to
+                your ORCID record
+              </span>
+              <div actions class="mobile-actions">
+                <button mat-button orcidUnderlineButton>Read</button>
+                <button mat-flat-button orcidBrandSecondaryDarkButton>
+                  Connect now
+                </button>
+              </div>
+            </orcid-action-surface>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div usage>
+    <pre><code class="language-html">&lt;orcid-action-surface icon="work_outline"&gt;
+  &lt;span text&gt;
+    &lt;strong&gt;University of Oxford&lt;/strong&gt; wants to add information to your
+    ORCID record
+  &lt;/span&gt;
+  &lt;div actions&gt;
+    &lt;button mat-button class="orcid-underline-button"&gt;Read&lt;/button&gt;
+    &lt;button mat-flat-button color="primary"&gt;Connect now&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/orcid-action-surface&gt;
+</code></pre>
+  </div>
+
+  <div inputs>
+    <ul>
+      <li><code>icon</code>: Material icon name (optional).</li>
+      <li><code>iconColor</code>: CSS color value for the icon (optional).</li>
+    </ul>
+
+    <h4>Slots</h4>
+    <ul>
+      <li><code>[text]</code>: Projected message text.</li>
+      <li><code>[actions]</code>: Projected Material buttons.</li>
+    </ul>
+  </div>
+</app-documentation-page>

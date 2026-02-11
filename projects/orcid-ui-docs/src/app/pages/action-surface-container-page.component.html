@@ -1,0 +1,160 @@
+<app-documentation-page
+  title="Action Surface Container"
+  description="Container surface with optional title/subtitle and projected content."
+>
+  <div controls>
+    <p>
+      Uses content projection to render action surfaces or any other content
+      inside the container.
+    </p>
+    <div style="display: grid; gap: 16px; margin-bottom: 24px">
+      <mat-form-field appearance="outline">
+        <mat-label>Title</mat-label>
+        <input matInput [(ngModel)]="title" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Subtitle</mat-label>
+        <input matInput [(ngModel)]="subtitle" />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div examples class="examples-stack">
+    <div class="example-group">
+      <h4>Desktop vs Mobile</h4>
+      <div class="example-grid">
+        <div class="example-item">
+          <h5>Desktop</h5>
+          <div class="example-container desktop">
+            <orcid-action-surface-container
+              [title]="title"
+              [subtitle]="subtitle"
+            >
+              <orcid-action-surface
+                icon="work_outline"
+                iconColor="var(--orcid-color-state-notice-dark, #ff9c00)"
+              >
+                <span text
+                  ><strong>University of Oxford</strong> wants to add
+                  information.</span
+                >
+                <div actions>
+          <button mat-button orcidUnderlineButton>Read</button>
+          <button mat-flat-button orcidBrandSecondaryDarkButton>
+            Connect now
+          </button>
+                </div>
+              </orcid-action-surface>
+
+              <orcid-action-surface
+                icon="school"
+                iconColor="var(--orcid-color-state-notice-dark, #ff9c00)"
+              >
+                <span text
+                  ><strong>Royal Society</strong> wants to update your
+                  affiliation.</span
+                >
+                <div actions>
+          <button mat-button orcidUnderlineButton>Read</button>
+          <button mat-flat-button orcidBrandSecondaryDarkButton>
+            Connect now
+          </button>
+                </div>
+              </orcid-action-surface>
+            </orcid-action-surface-container>
+          </div>
+        </div>
+        <div class="example-item">
+          <h5>Mobile</h5>
+          <div class="example-container mobile">
+            <orcid-action-surface-container
+              [title]="title"
+              [subtitle]="subtitle"
+            >
+              <orcid-action-surface
+                class="mobile"
+                icon="work_outline"
+                iconColor="var(--orcid-color-state-notice-dark, #ff9c00)"
+              >
+                <span text
+                  ><strong>University of Oxford</strong> wants to add
+                  information.</span
+                >
+                <div actions>
+                  <button mat-button orcidUnderlineButton class="orcid-underline-button">Read</button>
+                  <button mat-flat-button orcidBrandSecondaryDarkButton color="primary">Connect now</button>
+                </div>
+              </orcid-action-surface>
+
+              <orcid-action-surface
+                class="mobile"
+                icon="school"
+                iconColor="var(--orcid-color-state-notice-dark, #ff9c00)"
+              >
+                <span text
+                  ><strong>Royal Society</strong> wants to update your
+                  affiliation.</span
+                >
+                <div actions>
+                  <button mat-button orcidUnderlineButton class="orcid-underline-button">Read</button>
+                  <button mat-flat-button orcidBrandSecondaryDarkButton color="primary">Connect now</button>
+                </div>
+              </orcid-action-surface>
+            </orcid-action-surface-container>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <orcid-action-surface-container
+      title="Quick actions"
+      subtitle="Use projected content that is not notifications."
+    >
+      <div class="example-actions">
+        <button mat-stroked-button>Export</button>
+        <button mat-stroked-button>Share</button>
+        <button mat-flat-button orcidBrandSecondaryDarkButton>
+          Create new
+        </button>
+      </div>
+    </orcid-action-surface-container>
+
+    <orcid-action-surface-container
+      title="Media surface"
+      subtitle="Project images or other media blocks."
+    >
+      <div class="example-media">
+        <img
+          class="example-media__image"
+          src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=320&q=80"
+          alt="Landscape preview"
+          loading="lazy"
+        />
+        <div class="example-media__content">
+          <p class="example-media__title">Featured highlight</p>
+          <p class="example-media__text">
+            Add supporting content next to a projected image.
+          </p>
+        </div>
+      </div>
+    </orcid-action-surface-container>
+  </div>
+
+  <div usage>
+    <pre><code class="language-html">&lt;orcid-action-surface-container
+  title="Unread permission notifications"
+  subtitle="You have 3 updates waiting for your review."
+&gt;
+  &lt;orcid-action-surface&gt;...&lt;/orcid-action-surface&gt;
+&lt;/orcid-action-surface-container&gt;
+</code></pre>
+  </div>
+
+  <div inputs>
+    <ul>
+      <li><code>title</code>: Optional title string.</li>
+      <li><code>subtitle</code>: Optional subtitle string.</li>
+    </ul>
+  </div>
+</app-documentation-page>

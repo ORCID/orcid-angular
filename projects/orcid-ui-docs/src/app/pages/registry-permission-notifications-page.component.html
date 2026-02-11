@@ -1,0 +1,83 @@
+<app-documentation-page
+  title="Registry Permission Notifications"
+  description="Registry surface for unread permission notifications built with Orcid UI action surfaces."
+>
+  <div controls>
+    <p>
+      This component is part of <code>@orcid/registry-ui</code> and supports up
+      to three notifications.
+    </p>
+    <div
+      style="
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+        margin-bottom: 24px;
+      "
+    >
+      <mat-form-field appearance="outline">
+        <mat-label>Title</mat-label>
+        <input matInput [(ngModel)]="title" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Subtitle</mat-label>
+        <input matInput [(ngModel)]="subtitle" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Notifications to show</mat-label>
+        <mat-select [(ngModel)]="notificationCount">
+          <mat-option [value]="1">1</mat-option>
+          <mat-option [value]="2">2</mat-option>
+          <mat-option [value]="3">3</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div style="display: grid; gap: 12px">
+      <mat-form-field appearance="outline" *ngFor="let item of notifications; let i = index">
+        <mat-label>Notification {{ i + 1 }} text</mat-label>
+        <input matInput [(ngModel)]="item.text" />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div examples>
+    <orcid-registry-permission-notifications
+      [title]="title"
+      [subtitle]="subtitle"
+      [notifications]="visibleNotifications"
+      (actionClicked)="onActionClicked($event)"
+    >
+    </orcid-registry-permission-notifications>
+    <div class="event-panel" *ngIf="lastAction">
+      <p class="event-title">Last action clicked</p>
+      <pre>{{ lastAction | json }}</pre>
+    </div>
+  </div>
+
+  <div usage>
+    <pre><code class="language-html">&lt;orcid-registry-permission-notifications
+  [title]="title"
+  [subtitle]="subtitle"
+  [notifications]="notifications"
+&gt;&lt;/orcid-registry-permission-notifications&gt;
+</code></pre>
+  </div>
+
+  <div inputs>
+    <ul>
+      <li><code>title</code>: Header title string.</li>
+      <li><code>subtitle</code>: Header subtitle string.</li>
+      <li><code>notifications</code>: Up to three notifications with actions.</li>
+    </ul>
+
+    <h4>Outputs</h4>
+    <ul>
+      <li>
+        <code>actionClicked</code>: Emits the notification and action metadata.
+      </li>
+    </ul>
+  </div>
+</app-documentation-page>
