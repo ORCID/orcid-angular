@@ -16,17 +16,15 @@ orcid-action-surface-container {
 
 .example-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   gap: 24px;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
+  min-width: 0;
 }
 
 .example-item {
   display: grid;
   gap: 8px;
+  min-width: 0;
 
   h5 {
     margin: 0;
@@ -38,20 +36,22 @@ orcid-action-surface-container {
 }
 
 .example-container {
-  border: 1px solid var(--orcid-color-border-subtle, #dddddd);
-  border-radius: 8px;
   padding: 16px;
   background: var(--orcid-surface, #ffffff);
 }
 
 .example-container.desktop {
-  min-width: 960px;
+  width: 100%;
+  max-width: 960px;
+  min-width: 0;
 }
 
 .example-container.mobile {
+  width: 100%;
   max-width: 375px;
-  min-width: 320px;
-  margin: 0 auto;
+  min-width: 0;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .example-container orcid-action-surface-container {

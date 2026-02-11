@@ -1,5 +1,10 @@
 orcid-action-surface {
-  max-width: 960px;
+  max-width: 100%;
+}
+
+.example-group {
+  max-width: 100%;
+  min-width: 0;
 }
 
 .example-group h4 {
@@ -11,17 +16,15 @@ orcid-action-surface {
 
 .example-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   gap: 24px;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
+  min-width: 0;
 }
 
 .example-item {
   display: grid;
   gap: 8px;
+  min-width: 0;
 
   h5 {
     margin: 0;
@@ -33,20 +36,22 @@ orcid-action-surface {
 }
 
 .example-container {
-  border: 1px solid var(--orcid-color-border-subtle, #dddddd);
   border-radius: 8px;
   padding: 16px;
   background: var(--orcid-surface, #ffffff);
+  min-width: 0;
 }
 
 .example-container.desktop {
-  min-width: 960px;
+  width: 100%;
+  max-width: 960px;
 }
 
 .example-container.mobile {
+  width: 100%;
   max-width: 375px;
-  min-width: 320px;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .example-container orcid-action-surface {
