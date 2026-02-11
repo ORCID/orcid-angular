@@ -3,8 +3,8 @@ import { UserRecord } from '../../../types/record.local'
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { ModalNameComponent } from './modals/modal-name/modal-name.component'
 import { ModalBiographyComponent } from './modals/modal-biography/modal-biography.component'
-import { takeUntil, tap } from 'rxjs/operators'
-import { of, Subject } from 'rxjs'
+import { takeUntil } from 'rxjs/operators'
+import { Subject } from 'rxjs'
 import { UserService } from '../../../core'
 import { RecordService } from '../../../core/record/record.service'
 import { Assertion, UserInfo } from '../../../types'
@@ -17,15 +17,13 @@ import { RecordUtil } from 'src/app/shared/utils/record.util'
 import { ModalEmailComponent } from 'src/app/cdk/side-bar/modals/modal-email/modal-email.component'
 import { WINDOW } from 'src/app/cdk/window'
 import { InboxService } from 'src/app/core/inbox/inbox.service'
+import { PermissionNotificationsService } from 'src/app/core/inbox/permission-notifications.service'
 import {
   RegistryNotificationActionEvent,
   RegistryPermissionNotification,
 } from '@orcid/registry-ui'
-import {
-  InboxNotification,
-  InboxNotificationPermission,
-} from 'src/app/types/notifications.endpoint'
-import { first, last, switchMap, takeWhile } from 'rxjs/operators'
+import { InboxNotificationPermission } from 'src/app/types/notifications.endpoint'
+import { first } from 'rxjs/operators'
 import { Router } from '@angular/router'
 
 @Component({
@@ -82,6 +80,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
     private _user: UserService,
     private _record: RecordService,
     private _inbox: InboxService,
+    private _permissionNotifications: PermissionNotificationsService,
     private _recordEmails: RecordEmailsService,
     private _verificationEmailModalService: VerificationEmailModalService,
     private _router: Router,
@@ -196,119 +195,41 @@ export class TopBarComponent implements OnInit, OnDestroy {
     }
   }
 
-  private _groupUnreadPermissionByClient(
-    notifications: InboxNotification[]
-  ): InboxNotificationPermission[] {
-    const unreadPermission = (notifications || [])
-      .filter(
-        (n): n is InboxNotificationPermission =>
-          n?.notificationType === 'PERMISSION' && !n.readDate && !n.archivedDate
-      )
-      .sort((a, b) => Number(b.sentDate || 0) - Number(a.sentDate || 0))
-    const byClient = new Map<string, InboxNotificationPermission>()
-    for (const n of unreadPermission) {
-      const clientId = n?.source?.sourceClientId?.path
-      if (!clientId) continue
-      if (!byClient.has(clientId)) byClient.set(clientId, n)
-    }
-    return Array.from(byClient.values()).sort(
-      (a, b) => Number(b.sentDate || 0) - Number(a.sentDate || 0)
-    )
-  }
-
   private loadUnreadPermissionNotifications(): void {
-    console.log('[TopBar] loadUnreadPermissionNotifications start')
-    this._inbox
-      .getUnreadCount()
-      .pipe(
-        takeUntil(this.$destroy),
-        first(),
-        switchMap((unreadCount: number | null) => {
-          console.log('[TopBar] getUnreadCount →', unreadCount)
-          if (unreadCount == null || unreadCount === 0) {
-            console.log('[TopBar] no unread, skip notifications.json')
-            return of({
-              total: 0,
-              notifications: [] as InboxNotification[],
-              done: true,
-            })
-          }
-          const maxNotificationsToScan = Math.min(50, unreadCount)
-          console.log(
-            '[TopBar] fetching notification pages (max to scan:',
-            maxNotificationsToScan,
-            ')'
-          )
-          return this._inbox.fetchNotificationsIncremental(false).pipe(
-            takeWhile(
-              (ev: {
-                total: number
-                notifications: InboxNotification[]
-                done: boolean
-              }) => {
-                const grouped = this._groupUnreadPermissionByClient(
-                  ev.notifications
-                )
-                return (
-                  grouped.length < 3 &&
-                  !ev.done &&
-                  ev.notifications.length < maxNotificationsToScan
-                )
+    this._permissionNotifications
+      .loadUnreadPermissionNotifications(3)
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((grouped) => {
+        this.permissionPanelRaw = grouped
+        this.permissionPanelNotifications = grouped.map((n) => {
+          const orgName = n?.source?.sourceName?.content || ''
+          const escaped = orgName
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+          const wantsToAddMsg = $localize`:@@topBar.permissionWantsToAdd:wants to add information to your ORCID record`
+          return {
+            id: n?.source?.sourceClientId?.path,
+            icon: 'automation',
+            iconColor: 'var(--orcid-color-state-notice-dark, #ff9c00)',
+            text: `<strong>${escaped}</strong> ${wantsToAddMsg}`,
+            actions: [
+              {
+                id: 'read',
+                label: $localize`:@@topBar.permissionRead:Read`,
+                variant: 'text',
+                underline: true,
               },
-              true
-            ),
-            last()
-          )
+              {
+                id: 'connect',
+                label: $localize`:@@topBar.permissionConnectNow:Connect now`,
+                variant: 'flat',
+              },
+            ],
+          }
         })
-      )
-      .subscribe(
-        (ev: {
-          total: number
-          notifications: InboxNotification[]
-          done: boolean
-        }) => {
-          const grouped = this._groupUnreadPermissionByClient(
-            ev?.notifications ?? []
-          ).slice(0, 3)
-          console.log(
-            '[TopBar] permission panel →',
-            grouped.length,
-            'items (from',
-            ev?.notifications?.length ?? 0,
-            'notifications)'
-          )
-
-          this.permissionPanelRaw = grouped
-          this.permissionPanelNotifications = grouped.map((n) => {
-            const orgName = n?.source?.sourceName?.content || ''
-            const escaped = orgName
-              .replace(/&/g, '&amp;')
-              .replace(/</g, '&lt;')
-              .replace(/>/g, '&gt;')
-              .replace(/"/g, '&quot;')
-            const wantsToAddMsg = $localize`:@@topBar.permissionWantsToAdd:wants to add information to your ORCID record`
-            return {
-              id: n?.source?.sourceClientId?.path,
-              icon: 'automation',
-              iconColor: 'var(--orcid-color-state-notice-dark, #ff9c00)',
-              text: `<strong>${escaped}</strong> ${wantsToAddMsg}`,
-              actions: [
-                {
-                  id: 'read',
-                  label: $localize`:@@topBar.permissionRead:Read`,
-                  variant: 'text',
-                  underline: true,
-                },
-                {
-                  id: 'connect',
-                  label: $localize`:@@topBar.permissionConnectNow:Connect now`,
-                  variant: 'flat',
-                },
-              ],
-            }
-          })
-        }
-      )
+      })
   }
 
   resendVerificationEmailModal(email: string) {
