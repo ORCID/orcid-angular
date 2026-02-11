@@ -37,6 +37,7 @@ import {
   MAX_LENGTH_LESS_THAN_TWO_THOUSAND,
   URL_REGEXP,
   isValidISBN,
+  ISSN_REGEXP,
 } from '../../../../constants'
 import {
   Contributor,
@@ -254,6 +255,17 @@ export class WorkFormComponent implements OnInit {
         if (!isValidISBN(control.value)) {
           return of({
             invalidISBN: true,
+          })
+        }
+      }
+
+      if (externalIdentifierType === 'issn') {
+        if (!ISSN_REGEXP.test(control.value)) {
+          control.markAsTouched()
+          return of({
+            validFormat: true,
+            resolved: false,
+            attemptedResolution: false,
           })
         }
       }
