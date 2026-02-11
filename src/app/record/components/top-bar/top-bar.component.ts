@@ -3,7 +3,7 @@ import { UserRecord } from '../../../types/record.local'
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { ModalNameComponent } from './modals/modal-name/modal-name.component'
 import { ModalBiographyComponent } from './modals/modal-biography/modal-biography.component'
-import { takeUntil } from 'rxjs/operators'
+import { take, takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 import { UserService } from '../../../core'
 import { RecordService } from '../../../core/record/record.service'
@@ -25,6 +25,8 @@ import {
 import { InboxNotificationPermission } from 'src/app/types/notifications.endpoint'
 import { first } from 'rxjs/operators'
 import { Router } from '@angular/router'
+import { TogglzService } from '../../../core/togglz/togglz.service'
+import { TogglzFlag } from '../../../types/config.endpoint'
 
 @Component({
   selector: 'app-top-bar',
@@ -84,6 +86,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
     private _recordEmails: RecordEmailsService,
     private _verificationEmailModalService: VerificationEmailModalService,
     private _router: Router,
+    private _togglz: TogglzService,
     @Inject(WINDOW) private window: Window
   ) {
     _platform
@@ -149,15 +152,22 @@ export class TopBarComponent implements OnInit, OnDestroy {
           )
         }
 
-        // Load permission notifications panel once (only for logged-in private record views)
-        if (
-          !this.isPublicRecord &&
-          !this.recordWithIssues &&
-          !this._permissionPanelLoadStarted
-        ) {
-          this._permissionPanelLoadStarted = true
-          this.loadUnreadPermissionNotifications()
-        }
+        // Load permission notifications panel once (only for logged-in private record views) and the togglz flag is active
+        this._togglz
+          .getStateOf(TogglzFlag.PERMISSION_NOTIFICATIONS)
+          .pipe(take(1))
+          .subscribe((value) => {
+            if (value) {
+              if (
+                !this.isPublicRecord &&
+                !this.recordWithIssues &&
+                !this._permissionPanelLoadStarted
+              ) {
+                this._permissionPanelLoadStarted = true
+                this.loadUnreadPermissionNotifications()
+              }
+            }
+          })
       })
   }
 
