@@ -25,7 +25,7 @@
     -apple-system,
     sans-serif
   );
-  font-size: 20px;
+  font-size: var(--orcid-font-size-body, 16px);
   line-height: 1.25;
   font-weight: var(--orcid-font-weight-bold, 700);
   color: var(--orcid-color-text-dark-high, #000000);

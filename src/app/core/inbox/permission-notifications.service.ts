@@ -97,7 +97,11 @@ export class PermissionNotificationsService {
         (n): n is InboxNotificationPermission =>
           n?.notificationType === 'PERMISSION' && !n.readDate && !n.archivedDate
       )
-      .sort((a, b) => Number(b.sentDate || 0) - Number(a.sentDate || 0))
+      .sort(
+        (a, b) =>
+          new Date(b.createdDate || 0).getTime() -
+          new Date(a.createdDate || 0).getTime()
+      )
     const byClient = new Map<string, InboxNotificationPermission>()
     for (const n of unreadPermission) {
       const clientId = n?.source?.sourceClientId?.path
@@ -106,7 +110,9 @@ export class PermissionNotificationsService {
       if (!byClient.has(clientId)) byClient.set(clientId, n)
     }
     return Array.from(byClient.values()).sort(
-      (a, b) => Number(b.sentDate || 0) - Number(a.sentDate || 0)
+      (a, b) =>
+        new Date(b.createdDate || 0).getTime() -
+        new Date(a.createdDate || 0).getTime()
     )
   }
 }

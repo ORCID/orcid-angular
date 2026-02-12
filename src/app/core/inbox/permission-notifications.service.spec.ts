@@ -322,10 +322,10 @@ describe('PermissionNotificationsService', () => {
     })
   })
 
-  it('should sort by sentDate descending', (done) => {
+  it('should sort by createdDate descending', (done) => {
     const perm1 = createPermissionNotification({
       putCode: 1,
-      sentDate: 1000,
+      createdDate: 1000,
       source: {
         sourceClientId: { path: 'client-a' } as any,
         sourceName: { content: 'A' },
@@ -333,7 +333,7 @@ describe('PermissionNotificationsService', () => {
     })
     const perm2 = createPermissionNotification({
       putCode: 2,
-      sentDate: 3000,
+      createdDate: 3000,
       source: {
         sourceClientId: { path: 'client-b' } as any,
         sourceName: { content: 'B' },
@@ -346,8 +346,8 @@ describe('PermissionNotificationsService', () => {
     )
 
     service.loadUnreadPermissionNotifications(3).subscribe((result) => {
-      expect(result[0].sentDate).toBe(3000)
-      expect(result[1].sentDate).toBe(1000)
+      expect(result[0].createdDate).toBe(3000)
+      expect(result[1].createdDate).toBe(1000)
       done()
     })
   })
