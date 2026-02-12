@@ -22,10 +22,7 @@ export class MaintenanceMessageComponent {
   closableElement: Element
   labelMaintenance = $localize`:@@layout.ariaLabelMaintenance:Maintenance message`
 
-  constructor(
-    togglz: TogglzService,
-    private cdr: ChangeDetectorRef,
-  ) {
+  constructor(togglz: TogglzService, private cdr: ChangeDetectorRef) {
     togglz
       .getMaintenanceMessages()
       .pipe(take(1))
