@@ -8,11 +8,6 @@
   gap: var(--orcid-space-4, 16px);
 }
 
-.permission-notifications__list ::ng-deep .action-surface__text {
-  font-size: var(--orcid-font-size-body-small, 14px);
-  line-height: 21px;
-}
-
 .registry-brand-secondary-dark:hover {
   background-color: var(--orcid-color-brand-secondary-dark, #085c77);
 }

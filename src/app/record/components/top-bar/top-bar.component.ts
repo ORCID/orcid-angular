@@ -191,7 +191,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
               (_, i) => i !== event.notificationIndex
             )
           if (target) {
-            ;(this.window as any).outOfRouterNavigation(target)
+            this.window.open(target, '_blank')
           }
         })
       return
