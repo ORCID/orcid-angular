@@ -35,6 +35,7 @@ class TestHostComponent {
   showHelpText = true
 
   form = new FormGroup({
+    passwordControl: new FormControl(''),
     twoFactorCode: new FormControl(''),
     twoFactorRecoveryCode: new FormControl(''),
   })
