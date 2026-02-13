@@ -52,8 +52,9 @@ class ErrorStateMatcherForTwoFactorFields implements ErrorStateMatcher {
   ],
 })
 export class AuthChallengeComponent implements OnInit, OnDestroy {
-  @Input() codeControlName = 'twoFactorCodeControl'
-  @Input() recoveryControlName = 'twoFactorRecoveryCodeControl'
+  @Input() codeControlName = 'twoFactorCode'
+  @Input() recoveryControlName = 'twoFactorRecoveryCode'
+  // has "control" in the name to avoid conflicts with account settings password reset form which has the password field/control
   @Input() passwordControlName = 'passwordControl'
   @Input() showAlert = false
   @Input() showHelpText = true
