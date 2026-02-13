@@ -11,7 +11,7 @@
   [emailVerified]="emailVerified"
   [justRegistered]="justRegistered"
 ></app-top-bar-verification-email>
-<ng-container *ngIf="!isPublicRecord && !recordWithIssues">
+<ng-container *ngIf="!isPublicRecord && !recordWithIssues && !userInfo?.LOCKED === 'true'">
   <orcid-registry-permission-notifications
     *ngIf="permissionPanelNotifications?.length"
     [title]="permissionPanelTitle"
