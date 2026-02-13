@@ -178,7 +178,8 @@ export class TopBarComponent implements OnInit, OnDestroy {
     }
 
     if (event.actionId === 'connect') {
-      const target = raw.authorizationUrl?.uri
+      const integration = this.parseOrcidIntegrationIntro(raw?.notificationIntro)
+      const target = integration?.link || raw.authorizationUrl?.uri
       this._inbox
         .flagAsRead(raw.putCode)
         .pipe(first())
@@ -212,7 +213,12 @@ export class TopBarComponent implements OnInit, OnDestroy {
       .subscribe((grouped) => {
         this.permissionPanelRaw = grouped
         this.permissionPanelNotifications = grouped.map((n) => {
-          const orgName = n?.sourceDescription || ''
+          const integration = this.parseOrcidIntegrationIntro(n?.notificationIntro)
+          const orgName =
+            integration?.memberName ||
+            n?.source?.sourceName?.content ||
+            n?.sourceDescription ||
+            ''
           const escaped = orgName
             .replace(/&/g, '&amp;')
             .replace(/</g, '&lt;')
@@ -240,6 +246,19 @@ export class TopBarComponent implements OnInit, OnDestroy {
           }
         })
       })
+  }
+
+  private parseOrcidIntegrationIntro(
+    intro?: string
+  ): { memberName: string; link: string } | null {
+    if (!intro || !intro.includes('::')) {
+      return null
+    }
+    const [memberName, link] = intro.split('::')
+    if (!memberName || !link) {
+      return null
+    }
+    return { memberName, link }
   }
 
   resendVerificationEmailModal(email: string) {
