@@ -11,17 +11,7 @@
   [emailVerified]="emailVerified"
   [justRegistered]="justRegistered"
 ></app-top-bar-verification-email>
-<ng-container
-  *ngIf="!isPublicRecord && !recordWithIssues && userInfo?.LOCKED !== 'true'"
->
-  <orcid-registry-permission-notifications
-    *ngIf="permissionPanelNotifications?.length"
-    [title]="permissionPanelTitle"
-    [subtitle]="permissionPanelSubtitle"
-    [notifications]="permissionPanelNotifications"
-    (actionClicked)="onPermissionPanelAction($event)"
-  ></orcid-registry-permission-notifications>
-
+<ng-container *ngIf="!isPublicRecord && !recordWithIssues">
   <app-alert-message *ngIf="userInfo?.LOCKED === 'true'">
     <h3 title i18n="@@topBar.accountHasBeenLocked">
       Your account has been locked

@@ -1,12 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  Inject,
-  OnDestroy,
-  OnInit,
-  QueryList,
-  ViewChildren,
-} from '@angular/core'
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms'
 import { forkJoin, Subject, Subscription } from 'rxjs'
 import { first, takeUntil, tap } from 'rxjs/operators'
@@ -16,8 +8,6 @@ import {
   InboxNotification,
   TotalNotificationCount,
 } from 'src/app/types/notifications.endpoint'
-import { ActivatedRoute } from '@angular/router'
-import { NotificationComponent } from '../notification/notification.component'
 
 @Component({
   selector: 'app-notifications',
@@ -26,9 +16,7 @@ import { NotificationComponent } from '../notification/notification.component'
   preserveWhitespaces: true,
   standalone: false,
 })
-export class NotificationsComponent
-  implements OnInit, OnDestroy, AfterViewInit
-{
+export class NotificationsComponent implements OnInit, OnDestroy {
   notifications: InboxNotification[]
   $destroy: Subject<boolean> = new Subject<boolean>()
   form: UntypedFormGroup = this._fromBuilder.group({})
@@ -40,10 +28,6 @@ export class NotificationsComponent
   indeterminate = false
   changesSubscription: Subscription
   amountOfSelectableItems: number
-  private openPutCodeFromUrl: number | null = null
-
-  @ViewChildren(NotificationComponent)
-  notificationComponents: QueryList<NotificationComponent>
 
   set generalCheck(value: boolean) {
     this._allCheck = value
@@ -62,12 +46,10 @@ export class NotificationsComponent
   constructor(
     private _inbox: InboxService,
     private _fromBuilder: UntypedFormBuilder,
-    private _route: ActivatedRoute,
     @Inject(WINDOW) private window: Window
   ) {}
 
   ngOnInit(): void {
-    this.openPutCodeFromUrl = this.getPutCodeFromUrl()
     this.form = this._fromBuilder.group({})
     this.loading = true
     this._inbox
@@ -99,14 +81,8 @@ export class NotificationsComponent
           } else {
             this.loading = false
           }
-          this.tryOpenNotificationFromUrl()
         })
       })
-  }
-
-  ngAfterViewInit(): void {
-    // When the view is ready, try opening again (ViewChildren becomes available)
-    this.tryOpenNotificationFromUrl()
   }
   ngOnDestroy() {
     this.$destroy.next(true)
@@ -160,70 +136,6 @@ export class NotificationsComponent
     // allowing the previous subscription on ngOnInit to handle the data
     this.loading = true
     this._inbox.get(true, this.showArchived).pipe(first()).subscribe()
-  }
-
-  private getPutCodeFromUrl(): number | null {
-    const qp =
-      this._route.snapshot.queryParamMap.get('open') ||
-      this._route.snapshot.queryParamMap.get('notification')
-    if (qp) {
-      const asNum = parseInt(qp, 10)
-      return Number.isFinite(asNum) ? asNum : null
-    }
-
-    const fragment = this._route.snapshot.fragment
-    if (fragment?.startsWith('notification-')) {
-      const maybe = parseInt(fragment.replace('notification-', ''), 10)
-      return Number.isFinite(maybe) ? maybe : null
-    }
-
-    return null
-  }
-
-  private tryOpenNotificationFromUrl(): void {
-    if (!this.openPutCodeFromUrl || !this.notifications?.length) {
-      return
-    }
-
-    const target = this.openPutCodeFromUrl
-    const exists = this.notifications.some((n) => n.putCode === target)
-
-    if (!exists && this.hasMoreNotificationsToLoad()) {
-      // Keep loading pages until we find the requested putCode or run out.
-      this._inbox
-        .get(true, this.showArchived)
-        .pipe(first())
-        .subscribe(() => {
-          this.tryOpenNotificationFromUrl()
-        })
-      return
-    }
-
-    // Scroll + open once the component instances exist.
-    setTimeout(() => {
-      const el = this.window.document.getElementById(`notification-${target}`)
-      if (el) {
-        // `scrollIntoView` can land the anchor too low depending on fixed headers/layout.
-        // Scroll to 20px above the element instead.
-        const offsetPx = 50
-        const y =
-          el.getBoundingClientRect().top + (this.window.scrollY || 0) - offsetPx
-        this.window.scrollTo({
-          top: Math.max(0, y),
-          behavior: 'smooth',
-        })
-      }
-
-      const cmp = this.notificationComponents
-        ?.toArray()
-        ?.find((c) => c.notification?.putCode === target)
-
-      if (cmp && !cmp.showNotificationContent) {
-        cmp.toggleNotificationContent()
-        // Only attempt to auto-open once.
-        this.openPutCodeFromUrl = null
-      }
-    })
   }
 
   // Use to check if the general checkbox is on indeterminate stated

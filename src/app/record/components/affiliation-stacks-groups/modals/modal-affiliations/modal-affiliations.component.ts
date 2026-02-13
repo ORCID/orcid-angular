@@ -27,7 +27,6 @@ import { RecordCountriesService } from '../../../../../core/record-countries/rec
 import { first, map, switchMap, tap } from 'rxjs/operators'
 import {
   ISSN_REGEXP,
-  ISSN_PORTAL_URL,
   MAX_LENGTH_LESS_THAN_ONE_THOUSAND,
   MAX_LENGTH_LESS_THAN_TWO_THOUSAND,
   URL_REGEXP,
@@ -63,6 +62,8 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
   linkLabel = $localize`:@@shared.link:Link`
   issnLabel = $localize`:@@shared.link:Link`
   endDateLabel = $localize`:@@shared.endDate:End date`
+
+  ISSN_PORTAL_URL = 'https://portal.issn.org/resource/ISSN/'
 
   private _type: AffiliationType
   dateLabel: string
@@ -393,17 +394,13 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
       const normalizedIssn = this.normaliseIssn(
         affiliationForm.get('issn')?.value?.trim()
       )
-      const issnValue = affiliationForm.get('issn')?.value?.trim()
-      const issnUrl = `${ISSN_PORTAL_URL}${normalizedIssn}`
+      const issnUrl = `${this.ISSN_PORTAL_URL}${normalizedIssn}`
       affiliationToSave.affiliationExternalIdentifiers = [
         {
           errors: [],
           externalIdentifierId: {
             errors: [],
-            value:
-              issnValue && issnValue.startsWith(ISSN_PORTAL_URL)
-                ? issnUrl
-                : normalizedIssn,
+            value: affiliationForm.get('issn')?.value?.trim(),
             required: true,
           },
           externalIdentifierType: { value: 'issn' },
@@ -747,7 +744,7 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
   normaliseIssn(issn: string) {
     if (issn) {
       // 1. Remove the portal URL
-      issn = issn.replace(new RegExp(ISSN_PORTAL_URL, 'g'), '')
+      issn = issn.replace(new RegExp(this.ISSN_PORTAL_URL, 'g'), '')
 
       // 2. Remove ALL non-alphanumeric characters (spaces, hyphens, dots, etc.)
       issn = issn.replace(/[^a-zA-Z0-9]/g, '')

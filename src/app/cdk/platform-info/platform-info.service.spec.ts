@@ -70,8 +70,8 @@ describe('PlatformInfoService', () => {
 
   it('marks a modern Firefox as supported', () => {
     const service = createServiceWithUserAgent(
-      // Firefox 116 on Windows 10 (matches supported-browsers.json minimum)
-      'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:116.0) Gecko/20100101 Firefox/116.0'
+      // Firefox 115 on Windows 10
+      'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:115.0) Gecko/20100101 Firefox/115.0'
     )
 
     const platform = (service as any).platformSubject.value

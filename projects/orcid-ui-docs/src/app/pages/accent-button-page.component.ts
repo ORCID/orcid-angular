@@ -3,38 +3,29 @@ import { CommonModule } from '@angular/common'
 import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
 import { MatTooltipModule } from '@angular/material/tooltip'
-import {
-  AccentButtonDirective,
-  BrandSecondaryDarkButtonDirective,
-  UnderlineButtonDirective,
-} from '@orcid/ui'
+import { AccentButtonDirective } from '@orcid/ui'
 
 @Component({
-  selector: 'orcid-material-buttons-directives-page',
+  selector: 'orcid-accent-button-page',
   standalone: true,
   imports: [
     CommonModule,
     AccentButtonDirective,
-    BrandSecondaryDarkButtonDirective,
-    UnderlineButtonDirective,
     MatButtonModule,
     MatIconModule,
     MatTooltipModule,
   ],
   template: `
-    <h2>Material Buttons Directives</h2>
+    <h2>Accent Button Directive</h2>
     <p>
-      The Orcid UI library provides several directives to style Material buttons
-      with brand colors and consistent styling.
+      The <code>AccentButtonDirective</code> applies hover background styling to
+      icon buttons. When a button with this directive is hovered, it displays
+      the accent color (<code>--brand-secondary-dark</code>).
     </p>
 
     <section class="docs-section">
-      <h3>Accent Button Directive</h3>
-      <p>
-        The <code>accentButton</code> directive applies hover background styling
-        to icon buttons. When a button with this directive is hovered, it
-        displays the accent color (<code>--brand-secondary-dark</code>).
-      </p>
+      <h3>Examples</h3>
+      <p>Hover over the buttons below to see the accent hover effect:</p>
 
       <div class="example-group">
         <h4>Icon Buttons with Accent Hover</h4>
@@ -78,60 +69,80 @@ import {
         </div>
       </div>
 
-      <h4>Usage</h4>
+      <div class="example-group">
+        <h4>Without Directive (Default Material Hover)</h4>
+        <div class="example-container">
+          <div class="button-group">
+            <button mat-icon-button matTooltip="Edit" aria-label="Edit">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="Copy" aria-label="Copy">
+              <mat-icon>content_copy</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="Print" aria-label="Print">
+              <mat-icon>
+                <span class="material-symbols-outlined">print</span>
+              </mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="Delete" aria-label="Delete">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+          <p class="note">
+            These buttons use the default Material Design hover behavior for
+            comparison.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="docs-section">
+      <h3>Usage</h3>
+      <p>Apply the <code>accentButton</code> directive to any icon button:</p>
       <pre><code>&lt;button mat-icon-button accentButton matTooltip="Edit"&gt;
   &lt;mat-icon&gt;edit&lt;/mat-icon&gt;
 &lt;/button&gt;</code></pre>
-    </section>
 
-    <section class="docs-section">
-      <h3>Brand Secondary Dark Button Directive</h3>
+      <h3>Styling</h3>
       <p>
-        The <code>orcidBrandSecondaryDarkButton</code> directive styles filled
-        buttons with the brand secondary dark color. It sets the background,
-        text color, and border to match the Orcid brand.
+        The directive applies the class <code>accent-button</code> to the host
+        element, which adds the following styles:
+      </p>
+      <pre><code>.accent-button {{ '{' }}
+  color: white !important;
+{{ '}' }}
+
+.accent-button:hover {{ '{' }}
+  background: var(--brand-secondary-dark, #085C77) !important;
+{{ '}' }}</code></pre>
+
+      <p>
+        The color uses the <code>--brand-secondary-dark</code> CSS custom
+        property with a fallback value of <code>#085C77</code>.
       </p>
 
-      <div class="example-group">
-        <h4>Filled Button with Brand Color</h4>
-        <div class="example-container">
-          <div class="button-group">
-            <button mat-flat-button orcidBrandSecondaryDarkButton>
-              Connect now
-            </button>
-            <button mat-flat-button orcidBrandSecondaryDarkButton>
-              Submit
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <h4>Usage</h4>
-      <pre><code>&lt;button mat-flat-button orcidBrandSecondaryDarkButton&gt;
-  Connect now
-&lt;/button&gt;</code></pre>
-    </section>
-
-    <section class="docs-section">
-      <h3>Underline Button Directive</h3>
+      <h3>CSS Variable</h3>
       <p>
-        The <code>orcidUnderlineButton</code> directive styles text buttons with
-        an underline and brand secondary dark color. Commonly used for "Read" or
-        secondary action buttons.
+        The directive uses the <code>--brand-secondary-dark</code> variable from
+        the Orcid design tokens. This variable is defined in
+        <code>@orcid/tokens</code> and should be available globally in your
+        application.
       </p>
 
-      <div class="example-group">
-        <h4>Text Button with Underline</h4>
-        <div class="example-container">
-          <div class="button-group">
-            <button mat-button orcidUnderlineButton>Read</button>
-            <button mat-button orcidUnderlineButton>Learn more</button>
-          </div>
-        </div>
-      </div>
-
-      <h4>Usage</h4>
-      <pre><code>&lt;button mat-button orcidUnderlineButton&gt;Read&lt;/button&gt;</code></pre>
+      <h3>Use Cases</h3>
+      <ul>
+        <li>
+          Icon buttons in headers and navigation that need consistent accent
+          hover styling
+        </li>
+        <li>
+          Action buttons that should stand out with the brand secondary color
+        </li>
+        <li>
+          Buttons on colored backgrounds where the default Material hover might
+          not be visible
+        </li>
+      </ul>
     </section>
   `,
   styles: [
@@ -225,4 +236,4 @@ import {
     `,
   ],
 })
-export class MaterialButtonsDirectivesPageComponent {}
+export class AccentButtonPageComponent {}

@@ -11,8 +11,7 @@
     "experimentalDecorators": true,
     "paths": {
       "@orcid/tokens": ["projects/orcid-tokens/src/public-api.ts"],
-      "@orcid/ui": ["projects/orcid-ui/src/public-api.ts"],
-      "@orcid/registry-ui": ["projects/orcid-registry-ui/src/public-api.ts"]
+      "@orcid/ui": ["projects/orcid-ui/src/public-api.ts"]
     },
     "resolveJsonModule": true,
     "esModuleInterop": true,
@@ -36,12 +35,6 @@
     },
     {
       "path": "./projects/orcid-ui/tsconfig.spec.json"
-    },
-    {
-      "path": "./projects/orcid-registry-ui/tsconfig.lib.json"
-    },
-    {
-      "path": "./projects/orcid-registry-ui/tsconfig.spec.json"
     },
     {
       "path": "./projects/orcid-tokens/tsconfig.lib.json"

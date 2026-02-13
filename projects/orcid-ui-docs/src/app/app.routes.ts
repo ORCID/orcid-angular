@@ -38,10 +38,10 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'material-buttons-directives',
+    path: 'accent-button',
     loadComponent: () =>
-      import('./pages/material-buttons-directives-page.component').then(
-        (m) => m.MaterialButtonsDirectivesPageComponent
+      import('./pages/accent-button-page.component').then(
+        (m) => m.AccentButtonPageComponent
       ),
   },
   {
@@ -49,27 +49,6 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/alert-message-page.component').then(
         (m) => m.AlertMessagePageComponent
-      ),
-  },
-  {
-    path: 'action-surface',
-    loadComponent: () =>
-      import('./pages/action-surface-page.component').then(
-        (m) => m.ActionSurfacePageComponent
-      ),
-  },
-  {
-    path: 'action-surface-container',
-    loadComponent: () =>
-      import('./pages/action-surface-container-page.component').then(
-        (m) => m.ActionSurfaceContainerPageComponent
-      ),
-  },
-  {
-    path: 'registry-permission-notifications',
-    loadComponent: () =>
-      import('./pages/registry-permission-notifications-page.component').then(
-        (m) => m.RegistryPermissionNotificationsPageComponent
       ),
   },
   {

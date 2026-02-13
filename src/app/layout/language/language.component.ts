@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Inject,
-  LOCALE_ID,
-} from '@angular/core'
+import { Component, OnInit, Inject, LOCALE_ID } from '@angular/core'
 
 import { WINDOW } from 'src/app/cdk/window'
 import { LanguageService } from 'src/app/core/language/language.service'
@@ -13,9 +8,8 @@ import { LanguageService } from 'src/app/core/language/language.service'
   templateUrl: './language.component.html',
   styleUrls: ['./language.component.scss'],
   standalone: false,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LanguageComponent {
+export class LanguageComponent implements OnInit {
   languageMenuOptions: { [key: string]: string }
   labelLanguage = $localize`:@@layout.ariaLabelLanguage:Select your preferred language. Current language is`
 
@@ -37,4 +31,6 @@ export class LanguageComponent {
       this.window.location.reload()
     })
   }
+
+  ngOnInit() {}
 }

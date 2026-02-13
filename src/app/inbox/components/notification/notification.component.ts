@@ -177,16 +177,15 @@ export class NotificationComponent
   }
 
   toggleNotificationContent() {
-    const opening = !this.showNotificationContent
-    this.state = opening ? 'open' : 'close'
-    // Always open/close immediately; marking as read should not block UX.
-    this.showNotificationContent = opening
-    if (opening && !this.notification.readDate) {
-      this._inbox.flagAsRead(this.notification.putCode).subscribe({
-        // readDate will be updated via InboxService/inboxSubject updates
-        next: () => {},
-        error: () => {},
-      })
+    this.state = !this.showNotificationContent ? 'open' : 'close'
+    if (this.state === 'open' && !this.notification.readDate) {
+      this._inbox
+        .flagAsRead(this.notification.putCode)
+        .subscribe(
+          () => (this.showNotificationContent = !this.showNotificationContent)
+        )
+    } else {
+      this.showNotificationContent = !this.showNotificationContent
     }
   }
 

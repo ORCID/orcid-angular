@@ -442,33 +442,6 @@
         }
       }
     },
-    "orcid-registry-ui": {
-      "projectType": "library",
-      "root": "projects/orcid-registry-ui",
-      "sourceRoot": "projects/orcid-registry-ui/src",
-      "prefix": "orcid",
-      "architect": {
-        "build": {
-          "builder": "@angular/build:ng-packagr",
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/orcid-registry-ui/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "projects/orcid-registry-ui/tsconfig.lib.json"
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "test": {
-          "builder": "@angular/build:karma",
-          "options": {
-            "tsConfig": "projects/orcid-registry-ui/tsconfig.spec.json",
-            "polyfills": ["zone.js", "zone.js/testing"]
-          }
-        }
-      }
-    },
     "orcid-tokens": {
       "projectType": "library",
       "root": "projects/orcid-tokens",
