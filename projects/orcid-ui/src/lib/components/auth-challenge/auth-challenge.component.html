@@ -209,7 +209,7 @@
   </div>
 </div>
 } @if (showHelpText) {
-<ul class="leading-5.25">
+<ul class="leading-5.25" data-testid="help-text-links">
   @if (!showRecoveryCode) {
   <li>
     <div class="orc-font-body-small">
@@ -220,6 +220,7 @@
         (click)="toggleRecoveryCode($event)"
         i18n="@@account.useARecoveryCode"
         class="underline"
+        data-testid="recovery-toggle"
         >Use a recovery code instead</a
       >
     </div>
@@ -232,6 +233,7 @@
       >&nbsp;<a
         href="#"
         (click)="toggleRecoveryCode($event)"
+        data-testid="recovery-toggle"
         i18n="@@account.useYourAuthenticationAppInstead"
         class="underline"
         >Use your authentication app instead</a
