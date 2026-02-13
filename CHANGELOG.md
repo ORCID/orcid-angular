@@ -1,3 +1,37 @@
+## v2.129.9 - 2026-02-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.129.8...v2.129.9)
+
+- [#2745](https://github.com/ORCID/orcid-angular/pull/2745): PD-4994,PD-4993
+
+## v2.129.8 - 2026-02-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.129.7...v2.129.8)
+
+## v2.129.7 - 2026-02-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.129.6...v2.129.7)
+
+## v2.129.6 - 2026-02-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.129.5...v2.129.6)
+
+- [#2742](https://github.com/ORCID/orcid-angular/pull/2742): Lmendoza/pd 3855
+
+## v2.129.5 - 2026-02-10
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.129.4...v2.129.5)
+
+- [#2741](https://github.com/ORCID/orcid-angular/pull/2741): ${PD-4790} revert pr #2737
+
+## v2.129.4 - 2026-02-10
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.129.3...v2.129.4)
+
+## v2.129.3 - 2026-02-10
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.129.2...v2.129.3)
+
 ## v2.129.2 - 2026-02-04
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.129.1...v2.129.2)

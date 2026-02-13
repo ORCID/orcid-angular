@@ -1,0 +1,20 @@
+<div class="action-surface">
+  <div class="action-surface__icon" *ngIf="icon">
+    <span
+      class="action-surface__icon-symbol material-symbols-outlined"
+      role="img"
+      [attr.aria-label]="icon"
+      [style.color]="iconColor"
+      >{{ icon }}</span
+    >
+  </div>
+
+  <div class="action-surface__body">
+    <div class="action-surface__text">
+      <ng-content select="[text]"></ng-content>
+    </div>
+    <div class="action-surface__actions">
+      <ng-content select="[actions]"></ng-content>
+    </div>
+  </div>
+</div>

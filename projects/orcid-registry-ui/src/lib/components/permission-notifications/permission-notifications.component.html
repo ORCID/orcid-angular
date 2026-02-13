@@ -1,0 +1,55 @@
+<orcid-action-surface-container [title]="title" [subtitle]="subtitle">
+  <div class="permission-notifications__list">
+    <orcid-action-surface
+      *ngFor="let notification of visibleNotifications; let index = index"
+      [icon]="notification.icon"
+      [iconColor]="
+        notification.iconColor ??
+        'var(--orcid-color-state-notice-dark, #ff9c00)'
+      "
+    >
+      <span text [innerHTML]="getTrustedHtml(notification.text)"></span>
+      <div actions>
+        <ng-container
+          *ngFor="let action of notification.actions; let actionIndex = index"
+        >
+          <ng-container [ngSwitch]="action.variant">
+            <button
+              *ngSwitchCase="'flat'"
+              mat-flat-button
+              [orcidBrandSecondaryDarkButton]="!action.color"
+              [color]="action.color"
+              [disabled]="action.disabled"
+              [ngClass]="{
+                'registry-underline-button': action.underline
+              }"
+              (click)="onActionClick(notification, index, action, actionIndex)"
+            >
+              {{ action.label }}
+            </button>
+            <button
+              *ngSwitchCase="'stroked'"
+              mat-stroked-button
+              [color]="action.color"
+              [disabled]="action.disabled"
+              [ngClass]="{ 'registry-underline-button': action.underline }"
+              (click)="onActionClick(notification, index, action, actionIndex)"
+            >
+              {{ action.label }}
+            </button>
+            <button
+              *ngSwitchDefault
+              mat-button
+              [color]="action.color"
+              [disabled]="action.disabled"
+              [orcidUnderlineButton]="action.underline"
+              (click)="onActionClick(notification, index, action, actionIndex)"
+            >
+              {{ action.label }}
+            </button>
+          </ng-container>
+        </ng-container>
+      </div>
+    </orcid-action-surface>
+  </div>
+</orcid-action-surface-container>

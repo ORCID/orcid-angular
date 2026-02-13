@@ -1177,19 +1177,11 @@
         </context-group>
         <target>X</target>
       </trans-unit>
-      <trans-unit id="08f2e5ad4847aa140bd7c5bd6b374c9d21aa8aba" datatype="html" resname="08f2e5ad4847aa140bd7c5bd6b374c9d21aa8aba">
-        <source>Your ORCID account password has been updated</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">5,7</context>
-        </context-group>
-        <target>X</target>
-      </trans-unit>
       <trans-unit id="account.changeOrUpdateAccountPassword" datatype="html" resname="account.changeOrUpdateAccountPassword">
         <source>Change or update your account password.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">10,12</context>
+          <context context-type="linenumber">2,4</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -1197,7 +1189,7 @@
         <source>Old password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">22</context>
+          <context context-type="linenumber">15</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -1205,7 +1197,7 @@
         <source>Password cannot be empty</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">47,49</context>
+          <context context-type="linenumber">22,24</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -1213,7 +1205,7 @@
         <source>New password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">69</context>
+          <context context-type="linenumber">44</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -1221,7 +1213,7 @@
         <source>Password cannot be empty</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">107,109</context>
+          <context context-type="linenumber">60,62</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -1229,7 +1221,7 @@
         <source>Password must meet all requirements</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">119,121</context>
+          <context context-type="linenumber">70,72</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -1237,7 +1229,43 @@
         <source>Password must be between 8 and 256 characters</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">126,128</context>
+          <context context-type="linenumber">76,78</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="register.passwordLength" datatype="html" resname="register.passwordLength">
+        <source>8 or more characters</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
+          <context context-type="linenumber">99</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
+          <context context-type="linenumber">129</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="register.passwordSymbolV2" datatype="html" resname="register.passwordSymbolV2">
+        <source>At least 1 letter or symbol</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
+          <context context-type="linenumber">111</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="register.passwordNumberV2" datatype="html" resname="register.passwordNumberV2">
+        <source>At least 1 number</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
+          <context context-type="linenumber">123</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="account.confirmNewPassword" datatype="html" resname="account.confirmNewPassword">
+        <source>Confirm new password</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
+          <context context-type="linenumber">135</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -1245,7 +1273,7 @@
         <source>Retype your password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">178,180</context>
+          <context context-type="linenumber">151,153</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
@@ -1257,55 +1285,15 @@
         <source>Passwords do not match</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">189,191</context>
+          <context context-type="linenumber">158,160</context>
         </context-group>
         <target>X</target>
       </trans-unit>
-      <trans-unit id="register.yourPasswordHas" datatype="html" resname="register.yourPasswordHas">
-        <source>Your password has:</source>
+      <trans-unit id="account.yourPasswordHasBeenUpdate" datatype="html" resname="account.yourPasswordHasBeenUpdate">
+        <source>Your password has been updated</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">195</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">123</context>
-        </context-group>
-        <target>X</target>
-      </trans-unit>
-      <trans-unit id="register.passwordLength" datatype="html" resname="register.passwordLength">
-        <source>8 or more characters</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">201</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">129</context>
-        </context-group>
-        <target>X</target>
-      </trans-unit>
-      <trans-unit id="register.atLeastALetterOrSymbol" datatype="html" resname="register.atLeastALetterOrSymbol">
-        <source>At least 1 letter or symbol</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">207,209</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">135,137</context>
-        </context-group>
-        <target>X</target>
-      </trans-unit>
-      <trans-unit id="register.atLeastANumber" datatype="html" resname="register.atLeastANumber">
-        <source>At least 1 number</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">215</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">143</context>
+          <context context-type="linenumber">167,169</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -1313,7 +1301,7 @@
         <source>Save changes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">236,238</context>
+          <context context-type="linenumber">179,181</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-country/modal-country.component.html</context>
@@ -1362,14 +1350,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work/modals/works-visibility-modal/works-visibility-modal.component.html</context>
           <context context-type="linenumber">14,16</context>
-        </context-group>
-        <target>X</target>
-      </trans-unit>
-      <trans-unit id="accountSettings.security.password.confirmPasswordPlaceholder" datatype="html" resname="accountSettings.security.password.confirmPasswordPlaceholder">
-        <source>Confirm your new password</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.ts</context>
-          <context context-type="linenumber">47</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -1737,7 +1717,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.ts</context>
-          <context context-type="linenumber">55</context>
+          <context context-type="linenumber">56</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -2529,7 +2509,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-form/work-form/work-form.component.ts</context>
-          <context context-type="linenumber">71</context>
+          <context context-type="linenumber">72</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-search-link-modal/modal-works-search-link.component.html</context>
@@ -2813,7 +2793,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.ts</context>
-          <context context-type="linenumber">77</context>
+          <context context-type="linenumber">76</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/funding-stacks-groups/modals/modal-funding/modal-funding.component.html</context>
@@ -2861,7 +2841,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.ts</context>
-          <context context-type="linenumber">57</context>
+          <context context-type="linenumber">58</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/funding-stacks-groups/modals/modal-funding/modal-funding.component.html</context>
@@ -2885,7 +2865,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-form/work-form/work-form.component.ts</context>
-          <context context-type="linenumber">65</context>
+          <context context-type="linenumber">66</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
@@ -2921,7 +2901,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.ts</context>
-          <context context-type="linenumber">58</context>
+          <context context-type="linenumber">59</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/funding-stacks-groups/modals/modal-funding/modal-funding.component.html</context>
@@ -2945,7 +2925,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-form/work-form/work-form.component.ts</context>
-          <context context-type="linenumber">66</context>
+          <context context-type="linenumber">67</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-current-employment/form-current-employment.component.html</context>
@@ -4057,7 +4037,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.ts</context>
-          <context context-type="linenumber">119</context>
+          <context context-type="linenumber">118</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/funding-stacks-groups/modals/modal-funding/modal-funding.component.ts</context>
@@ -4065,7 +4045,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-form/work-form/work-form.component.ts</context>
-          <context context-type="linenumber">111</context>
+          <context context-type="linenumber">112</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -4577,7 +4557,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.ts</context>
-          <context context-type="linenumber">576</context>
+          <context context-type="linenumber">579</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/modals/modal-delete-item/modal-delete-items.component.ts</context>
@@ -4585,7 +4565,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-form/work-form/work-form.component.ts</context>
-          <context context-type="linenumber">591</context>
+          <context context-type="linenumber">603</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-bibtex-modal/work-bibtex-modal.component.ts</context>
@@ -5986,7 +5966,7 @@
         <source>ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">114</context>
+          <context context-type="linenumber">118</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -5994,11 +5974,11 @@
         <source>2FA - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">115</context>
+          <context context-type="linenumber">119</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">116</context>
+          <context context-type="linenumber">120</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6006,7 +5986,7 @@
         <source>Institutional linking - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">117</context>
+          <context context-type="linenumber">121</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6014,7 +5994,7 @@
         <source>Social linking - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">118</context>
+          <context context-type="linenumber">122</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6022,7 +6002,7 @@
         <source>Institutional sign in - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">119</context>
+          <context context-type="linenumber">123</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6030,7 +6010,7 @@
         <source>Notifications inbox - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">120</context>
+          <context context-type="linenumber">124</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6038,15 +6018,15 @@
         <source>Sign in - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">121</context>
+          <context context-type="linenumber">125</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">122</context>
+          <context context-type="linenumber">126</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">128</context>
+          <context context-type="linenumber">132</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6054,7 +6034,7 @@
         <source>Oauth - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">123</context>
+          <context context-type="linenumber">127</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6062,7 +6042,7 @@
         <source>Search - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">124</context>
+          <context context-type="linenumber">128</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6070,7 +6050,7 @@
         <source>Account reactivation - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">125</context>
+          <context context-type="linenumber">129</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6078,7 +6058,7 @@
         <source>Reset password - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">126</context>
+          <context context-type="linenumber">130</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6086,7 +6066,7 @@
         <source>Register - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">127</context>
+          <context context-type="linenumber">131</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6094,7 +6074,7 @@
         <source>Account settings - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">129</context>
+          <context context-type="linenumber">133</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6102,7 +6082,7 @@
         <source>Deactivate account - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">130</context>
+          <context context-type="linenumber">134</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6110,7 +6090,7 @@
         <source>Trusted parties - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">131</context>
+          <context context-type="linenumber">135</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6118,7 +6098,7 @@
         <source>Reset password - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">132</context>
+          <context context-type="linenumber">136</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6126,7 +6106,7 @@
         <source>Self Service - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">133</context>
+          <context context-type="linenumber">137</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6134,7 +6114,7 @@
         <source>Developer tools - ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">134</context>
+          <context context-type="linenumber">138</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6142,7 +6122,7 @@
         <source>- ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">138</context>
+          <context context-type="linenumber">142</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6150,7 +6130,7 @@
         <source>- My ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">139</context>
+          <context context-type="linenumber">143</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6158,7 +6138,7 @@
         <source>Manage employment dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">364</context>
+          <context context-type="linenumber">368</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6166,7 +6146,7 @@
         <source>Manage education dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">366</context>
+          <context context-type="linenumber">370</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6174,7 +6154,7 @@
         <source>Manage qualification dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">368</context>
+          <context context-type="linenumber">372</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6182,7 +6162,7 @@
         <source>Manage distinction dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">370</context>
+          <context context-type="linenumber">374</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6190,7 +6170,7 @@
         <source>Manage invited position dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">372</context>
+          <context context-type="linenumber">376</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6198,7 +6178,7 @@
         <source>Manage membership dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">374</context>
+          <context context-type="linenumber">378</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6206,7 +6186,7 @@
         <source>Manage service dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">376</context>
+          <context context-type="linenumber">380</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6214,7 +6194,7 @@
         <source>Manage editorial service dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">378</context>
+          <context context-type="linenumber">382</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6222,7 +6202,7 @@
         <source>Manage bibtex dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">381</context>
+          <context context-type="linenumber">385</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6230,7 +6210,7 @@
         <source>Manage external identifier dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">383</context>
+          <context context-type="linenumber">387</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6238,7 +6218,7 @@
         <source>Manage your names dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">385</context>
+          <context context-type="linenumber">389</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6246,7 +6226,7 @@
         <source>Manage your biography dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">387</context>
+          <context context-type="linenumber">391</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6254,7 +6234,7 @@
         <source>Manage your emails dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">389</context>
+          <context context-type="linenumber">393</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6262,7 +6242,7 @@
         <source>Manage your countries dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">391</context>
+          <context context-type="linenumber">395</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6270,7 +6250,7 @@
         <source>Manage your keywords dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">393</context>
+          <context context-type="linenumber">397</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6278,7 +6258,7 @@
         <source>Manage your other IDs dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">395</context>
+          <context context-type="linenumber">399</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6286,7 +6266,7 @@
         <source>Manage your websites &amp; social links dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">397</context>
+          <context context-type="linenumber">401</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6294,7 +6274,7 @@
         <source>Manage funding dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">399</context>
+          <context context-type="linenumber">403</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6302,7 +6282,7 @@
         <source>Manage funding search dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">401</context>
+          <context context-type="linenumber">405</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6310,7 +6290,7 @@
         <source>Manage work dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">403</context>
+          <context context-type="linenumber">407</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6318,7 +6298,7 @@
         <source>Manage work search dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">405</context>
+          <context context-type="linenumber">409</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -6326,7 +6306,7 @@
         <source>Manage peer review dialog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/constants.ts</context>
-          <context context-type="linenumber">407</context>
+          <context context-type="linenumber">411</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -10650,7 +10630,7 @@
         <source>Select your preferred language. Current language is</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/language/language.component.ts</context>
-          <context context-type="linenumber">14</context>
+          <context context-type="linenumber">20</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -10662,7 +10642,7 @@
         <source>Maintenance message</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/maintenance-message/maintenance-message.component.ts</context>
-          <context context-type="linenumber">17</context>
+          <context context-type="linenumber">23</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -11966,7 +11946,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.ts</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">60</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-form/work-form/work-form.component.html</context>
@@ -11978,7 +11958,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-form/work-form/work-form.component.ts</context>
-          <context context-type="linenumber">67</context>
+          <context context-type="linenumber">68</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -11990,7 +11970,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.ts</context>
-          <context context-type="linenumber">64</context>
+          <context context-type="linenumber">65</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/funding-stacks-groups/modals/modal-funding/modal-funding.component.html</context>
@@ -12018,11 +11998,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.ts</context>
-          <context context-type="linenumber">62</context>
+          <context context-type="linenumber">63</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.ts</context>
-          <context context-type="linenumber">63</context>
+          <context context-type="linenumber">64</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -12046,7 +12026,7 @@
         <source>Save changes to</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.ts</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">57</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -12054,7 +12034,7 @@
         <source>Cancel changes and close</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.ts</context>
-          <context context-type="linenumber">61</context>
+          <context context-type="linenumber">62</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -12062,7 +12042,7 @@
         <source>Date of distinction</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.ts</context>
-          <context context-type="linenumber">79</context>
+          <context context-type="linenumber">78</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -12070,7 +12050,7 @@
         <source>Control who can see this information by setting the visibility. Your default visibility is</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.ts</context>
-          <context context-type="linenumber">120</context>
+          <context context-type="linenumber">119</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/funding-stacks-groups/modals/modal-funding/modal-funding.component.ts</context>
@@ -12078,7 +12058,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-form/work-form/work-form.component.ts</context>
-          <context context-type="linenumber">112</context>
+          <context context-type="linenumber">113</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work/modals/works-visibility-modal/works-visibility-modal.component.ts</context>
@@ -12738,7 +12718,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-form/work-form/work-form.component.ts</context>
-          <context context-type="linenumber">109</context>
+          <context context-type="linenumber">110</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -13062,11 +13042,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">129,131</context>
+          <context context-type="linenumber">139,141</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
-          <context context-type="linenumber">57</context>
+          <context context-type="linenumber">68</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -13414,15 +13394,15 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">190,192</context>
+          <context context-type="linenumber">200,202</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">241,243</context>
+          <context context-type="linenumber">251,253</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
-          <context context-type="linenumber">58</context>
+          <context context-type="linenumber">69</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -13530,7 +13510,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">153,155</context>
+          <context context-type="linenumber">163,165</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -13638,7 +13618,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">137,139</context>
+          <context context-type="linenumber">147,149</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -13850,7 +13830,7 @@
         <source>Your account has been locked</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">16,18</context>
+          <context context-type="linenumber">26,28</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -13858,7 +13838,7 @@
         <source>Please contact</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">30</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -13866,7 +13846,7 @@
         <source>ORCID support</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">27</context>
+          <context context-type="linenumber">37</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -13874,7 +13854,7 @@
         <source>if you believe this account was locked in error.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">40</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -13882,7 +13862,7 @@
         <source>Email domains shared</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">37</context>
+          <context context-type="linenumber">47</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -13890,7 +13870,7 @@
         <source>The email domains</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">43</context>
+          <context context-type="linenumber">53</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -13898,7 +13878,7 @@
         <source>The email domain</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">48</context>
+          <context context-type="linenumber">58</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -13906,7 +13886,7 @@
         <source>and</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">63,65</context>
+          <context context-type="linenumber">73,75</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -13914,7 +13894,7 @@
         <source>are now visible on your public ORCID record. Manage your email addresses and domains in the</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">71,74</context>
+          <context context-type="linenumber">81,84</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -13922,7 +13902,7 @@
         <source>is now visible on your public ORCID record. Manage your email addresses and domains in the</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">78,81</context>
+          <context context-type="linenumber">88,91</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -13930,7 +13910,7 @@
         <source>Emails &amp; domains section</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">87</context>
+          <context context-type="linenumber">97</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -13938,7 +13918,7 @@
         <source>Employment affiliation added</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">95</context>
+          <context context-type="linenumber">105</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -13946,7 +13926,7 @@
         <source>has been added to your ORCID record. Manage your existing employment affiliations or add new ones in the</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">99,101</context>
+          <context context-type="linenumber">109,111</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -13954,7 +13934,7 @@
         <source>Employment section</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">107</context>
+          <context context-type="linenumber">117</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -13962,7 +13942,47 @@
         <source>Name</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">144,146</context>
+          <context context-type="linenumber">154,156</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="topBar.permissionNotificationsTitle" datatype="html" resname="topBar.permissionNotificationsTitle">
+        <source>Organizations want to connect</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
+          <context context-type="linenumber">73</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="topBar.permissionNotificationsSubtitle" datatype="html" resname="topBar.permissionNotificationsSubtitle">
+        <source>Connecting with trusted organizations helps keep your ORCID record up-to-date.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
+          <context context-type="linenumber">74</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="topBar.permissionWantsToAdd" datatype="html" resname="topBar.permissionWantsToAdd">
+        <source>wants to add information to your ORCID record</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
+          <context context-type="linenumber">231</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="topBar.permissionRead" datatype="html" resname="topBar.permissionRead">
+        <source>Read</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
+          <context context-type="linenumber">240</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="topBar.permissionConnectNow" datatype="html" resname="topBar.permissionConnectNow">
+        <source>Connect now</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
+          <context context-type="linenumber">246</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -15090,7 +15110,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-form/work-form/work-form.component.ts</context>
-          <context context-type="linenumber">110</context>
+          <context context-type="linenumber">111</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -15154,7 +15174,7 @@
         <source>Select the language used in this form</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-form/work-form/work-form.component.ts</context>
-          <context context-type="linenumber">68</context>
+          <context context-type="linenumber">69</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -15162,7 +15182,7 @@
         <source>Select a country or location of publication</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-form/work-form/work-form.component.ts</context>
-          <context context-type="linenumber">69</context>
+          <context context-type="linenumber">70</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -15170,7 +15190,7 @@
         <source>Work</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-form/work-form/work-form.component.ts</context>
-          <context context-type="linenumber">70</context>
+          <context context-type="linenumber">71</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -15178,7 +15198,7 @@
         <source>Select a work type</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-form/work-form/work-form.component.ts</context>
-          <context context-type="linenumber">108</context>
+          <context context-type="linenumber">109</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -16043,6 +16063,30 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
           <context context-type="linenumber">118,120</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="register.yourPasswordHas" datatype="html" resname="register.yourPasswordHas">
+        <source>Your password has:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
+          <context context-type="linenumber">123</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="register.atLeastALetterOrSymbol" datatype="html" resname="register.atLeastALetterOrSymbol">
+        <source>At least 1 letter or symbol</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
+          <context context-type="linenumber">135,137</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="register.atLeastANumber" datatype="html" resname="register.atLeastANumber">
+        <source>At least 1 number</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
+          <context context-type="linenumber">143</context>
         </context-group>
         <target>X</target>
       </trans-unit>
