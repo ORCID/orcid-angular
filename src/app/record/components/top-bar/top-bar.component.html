@@ -13,7 +13,7 @@
 ></app-top-bar-verification-email>
 <ng-container *ngIf="!isPublicRecord && !recordWithIssues">
   <orcid-registry-permission-notifications
-    *ngIf="permissionPanelNotifications?.length"
+    *ngIf="permissionPanelNotifications?.length && userInfo?.LOCKED !== 'true'"
     [title]="permissionPanelTitle"
     [subtitle]="permissionPanelSubtitle"
     [notifications]="permissionPanelNotifications"

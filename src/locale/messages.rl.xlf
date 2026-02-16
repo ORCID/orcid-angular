@@ -13966,7 +13966,7 @@
         <source>wants to add information to your ORCID record</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
-          <context context-type="linenumber">221</context>
+          <context context-type="linenumber">231</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -13974,7 +13974,7 @@
         <source>Read</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
-          <context context-type="linenumber">230</context>
+          <context context-type="linenumber">240</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -13982,7 +13982,7 @@
         <source>Connect now</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
-          <context context-type="linenumber">236</context>
+          <context context-type="linenumber">246</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
