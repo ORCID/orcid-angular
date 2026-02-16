@@ -178,7 +178,9 @@ export class TopBarComponent implements OnInit, OnDestroy {
     }
 
     if (event.actionId === 'connect') {
-      const integration = this.parseOrcidIntegrationIntro(raw?.notificationIntro)
+      const integration = this.parseOrcidIntegrationIntro(
+        raw?.notificationIntro
+      )
       const target = integration?.link || raw.authorizationUrl?.uri
       this._inbox
         .flagAsRead(raw.putCode)
@@ -213,7 +215,9 @@ export class TopBarComponent implements OnInit, OnDestroy {
       .subscribe((grouped) => {
         this.permissionPanelRaw = grouped
         this.permissionPanelNotifications = grouped.map((n) => {
-          const integration = this.parseOrcidIntegrationIntro(n?.notificationIntro)
+          const integration = this.parseOrcidIntegrationIntro(
+            n?.notificationIntro
+          )
           const orgName =
             integration?.memberName ||
             n?.source?.sourceName?.content ||

@@ -11726,7 +11726,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">137,139</context>
+          <context context-type="linenumber">139,141</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
@@ -12041,11 +12041,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">198,200</context>
+          <context context-type="linenumber">200,202</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">249,251</context>
+          <context context-type="linenumber">251,253</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
@@ -12146,7 +12146,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">161,163</context>
+          <context context-type="linenumber">163,165</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.orcidHasANumber" datatype="html" resname="topBar.orcidHasANumber">
@@ -12243,7 +12243,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">145,147</context>
+          <context context-type="linenumber">147,149</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.whoCanSeeYourNames" datatype="html" resname="topBar.whoCanSeeYourNames">
@@ -12431,105 +12431,105 @@
         <source>Your account has been locked</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">24,26</context>
+          <context context-type="linenumber">26,28</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.pleasContact" datatype="html" resname="topBar.pleasContact">
         <source>Please contact</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">28</context>
+          <context context-type="linenumber">30</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.orcidSupport" datatype="html" resname="topBar.orcidSupport">
         <source>ORCID support</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="linenumber">37</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.ifYouBelieveWasLockedInError" datatype="html" resname="topBar.ifYouBelieveWasLockedInError">
         <source>if you believe this account was locked in error.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">38</context>
+          <context context-type="linenumber">40</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.emailDomainsShared" datatype="html" resname="topBar.emailDomainsShared">
         <source>Email domains shared</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">45</context>
+          <context context-type="linenumber">47</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.theEmailDomains" datatype="html" resname="topBar.theEmailDomains">
         <source>The email domains</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">51</context>
+          <context context-type="linenumber">53</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.theEmailDomain" datatype="html" resname="topBar.theEmailDomain">
         <source>The email domain</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">58</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.and" datatype="html" resname="topBar.and">
         <source>and</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">71,73</context>
+          <context context-type="linenumber">73,75</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.areNowVisibleOnYourPublicORCIDRecord" datatype="html" resname="topBar.areNowVisibleOnYourPublicORCIDRecord">
         <source>are now visible on your public ORCID record. Manage your email addresses and domains in the</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">79,82</context>
+          <context context-type="linenumber">81,84</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.isNowVisibleOnYourPublicORCIDRecord" datatype="html" resname="topBar.isNowVisibleOnYourPublicORCIDRecord">
         <source>is now visible on your public ORCID record. Manage your email addresses and domains in the</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">86,89</context>
+          <context context-type="linenumber">88,91</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.emailsDomainsSection" datatype="html" resname="topBar.emailsDomainsSection">
         <source>Emails &amp; domains section</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">95</context>
+          <context context-type="linenumber">97</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.employmentAffiliationAdded" datatype="html" resname="topBar.employmentAffiliationAdded">
         <source>Employment affiliation added</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">103</context>
+          <context context-type="linenumber">105</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.hasBeenAddedToYourORCIDRecord" datatype="html" resname="topBar.hasBeenAddedToYourORCIDRecord">
         <source>has been added to your ORCID record. Manage your existing employment affiliations or add new ones in the</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">107,109</context>
+          <context context-type="linenumber">109,111</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.employmentSection" datatype="html" resname="topBar.employmentSection">
         <source>Employment section</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">115</context>
+          <context context-type="linenumber">117</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.name" datatype="html" resname="topBar.name">
         <source>Name</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.html</context>
-          <context context-type="linenumber">152,154</context>
+          <context context-type="linenumber">154,156</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.permissionNotificationsTitle" datatype="html" resname="topBar.permissionNotificationsTitle">
@@ -12550,21 +12550,21 @@
         <source>wants to add information to your ORCID record</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
-          <context context-type="linenumber">221</context>
+          <context context-type="linenumber">231</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.permissionRead" datatype="html" resname="topBar.permissionRead">
         <source>Read</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
-          <context context-type="linenumber">230</context>
+          <context context-type="linenumber">240</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.permissionConnectNow" datatype="html" resname="topBar.permissionConnectNow">
         <source>Connect now</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
-          <context context-type="linenumber">236</context>
+          <context context-type="linenumber">246</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.yourContributionsToThisWork" datatype="html" resname="works.yourContributionsToThisWork">
