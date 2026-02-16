@@ -1,3 +1,12 @@
+export type RecordImportWizardMetadataType = 'Featured' | 'Default' | 'Certified'
+
+export interface RecordImportWizardMetadata {
+  type?: RecordImportWizardMetadataType
+  index?: number
+  defaultDescription?: string
+  logoUrl?: string
+}
+
 export interface RecordImportWizard {
   actTypes: string[]
   clientWebsite: string
@@ -6,6 +15,7 @@ export interface RecordImportWizard {
   id: string
   name: string
   redirectUri: string
+  redirectUriMetadata?: RecordImportWizardMetadata
   scopes: string
   status: string
   show: boolean
