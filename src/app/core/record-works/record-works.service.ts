@@ -556,9 +556,19 @@ export class RecordWorksService {
   }
 
   loadWorkImportWizardList(): Observable<RecordImportWizard[]> {
-    return this._http.get<RecordImportWizard[]>(
-      runtimeEnvironment.API_WEB + 'workspace/retrieve-work-import-wizards.json'
-    )
+    return this._togglz
+      .getStateOf(TogglzFlag.SEARCH_AND_LINK_WIZARD_WITH_CERTIFIED_AND_FEATURED_LINKS)
+      .pipe(
+        take(1),
+        switchMap((useNewEndpoint) =>
+          this._http.get<RecordImportWizard[]>(
+            runtimeEnvironment.API_WEB +
+              (useNewEndpoint
+                ? 'workspace/retrieve-search-and-link-wizard.json'
+                : 'workspace/retrieve-work-import-wizards.json')
+          )
+        )
+      )
   }
 
   loadExternalId(

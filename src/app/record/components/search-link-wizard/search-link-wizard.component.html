@@ -7,11 +7,18 @@
     >
       {{ recordImportWizard.name }}
     </a>
+    <span
+      *ngIf="recordImportWizard.isConnected"
+      class="orc-font-body-small wizard-connected"
+      i18n="@@works.connected"
+    >
+      Connected
+    </span>
   </h2>
   <p class="orc-font-body-small">
-    <ng-container *ngIf="recordImportWizard.description.length > 125">
+    <ng-container *ngIf="(recordImportWizard.description || recordImportWizard.redirectUriMetadata?.defaultDescription || '').length > 125">
       <ng-container *ngIf="!recordImportWizard.show">
-        {{ recordImportWizard.description.substring(0, 125) + '...' }}
+        {{ (recordImportWizard.description || recordImportWizard.redirectUriMetadata?.defaultDescription || '').substring(0, 125) + '...' }}
         <a
           class="underline"
           i18n="@@shared.showMore"
@@ -21,7 +28,7 @@
         </a>
       </ng-container>
       <ng-container *ngIf="recordImportWizard.show">
-        {{ recordImportWizard.description }}
+        {{ recordImportWizard.description || recordImportWizard.redirectUriMetadata?.defaultDescription || '' }}
         <br />
         <a
           class="underline"
@@ -32,8 +39,8 @@
         </a>
       </ng-container>
     </ng-container>
-    <ng-container *ngIf="recordImportWizard.description.length < 125">
-      {{ recordImportWizard.description }}
+    <ng-container *ngIf="(recordImportWizard.description || recordImportWizard.redirectUriMetadata?.defaultDescription || '').length <= 125">
+      {{ recordImportWizard.description || recordImportWizard.redirectUriMetadata?.defaultDescription || '' }}
     </ng-container>
   </p>
 </div>

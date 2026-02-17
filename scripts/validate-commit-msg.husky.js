@@ -1,10 +1,9 @@
 #!/usr/bin/env node
 
-// Enforce commit message format: AA-0000 [optional message]
-//  - AA: exactly 2 uppercase letters (A-Z)
-//  - 0000: exactly 4 digits
-//  - Example: PD-0000 Add feature
-//  - Also valid: PD-0000
+// Enforce commit message format: PROJECT-NNN [optional message]
+//  - PROJECT: one or more uppercase letters (A-Z)
+//  - NNN: one or more digits
+//  - Examples: PD-0000, ENGAGE-243, ENGAGE-243 Add feature
 
 const fs = require('fs')
 
@@ -49,16 +48,17 @@ try {
     process.exit(0)
   }
 
-  // Pattern: start, 2 uppercase letters, hyphen, 4 digits, optional space and message
-  const pattern = /^[A-Z]{2}-\d{4}(?:\s.+)?$/
+  // Pattern: PROJECT-NNN (e.g. PD-0000, ENGAGE-243), optional space and message
+  const pattern = /^[A-Z]+-\d+(?:\s.+)?$/
 
   if (!pattern.test(firstLine)) {
     console.error(
-      '\u001b[31mCommit message must start with an issue key like "AA-0000" followed by an optional message.\u001b[0m'
+      '\u001b[31mCommit message must start with an issue key like "PROJECT-NNN" (e.g. PD-0000, ENGAGE-243) followed by an optional message.\u001b[0m'
     )
     console.error('\nExamples:')
     console.error('  PD-0000')
-    console.error('  PD-0000 Fix broken tests')
+    console.error('  ENGAGE-243')
+    console.error('  ENGAGE-243 Fix broken tests')
     console.error('\nYour message was:')
     console.error(`  ${firstLine || '(empty)'}`)
     process.exit(1)

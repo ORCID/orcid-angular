@@ -11,6 +11,7 @@ import { BidiModule } from '@angular/cdk/bidi'
 import { PseudoModule } from 'src/locale/i18n.pseudo.component'
 import { TitleService } from './core/title-service/title.service'
 import { HttpContentTypeHeaderInterceptor } from './core/http-content-type-header-interceptor/http-content-type-header-interceptor'
+import { XsrfFallbackInterceptor } from './core/xsrf/xsrf-fallback.interceptor'
 import { FirefoxXsrfPreloadInterceptor } from './core/lang-preload/firefox-xsrf-preload.interceptor'
 import {
   HTTP_INTERCEPTORS,
@@ -54,6 +55,13 @@ import { FormsModule } from '@angular/forms'
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpContentTypeHeaderInterceptor,
+      multi: true,
+    },
+    // Fallback XSRF interceptor to ensure x-xsrf-token is present
+    // when using local proxy / same-origin dev setups.
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: XsrfFallbackInterceptor,
       multi: true,
     },
     provideHttpClient(
