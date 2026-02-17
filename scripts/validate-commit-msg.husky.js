@@ -1,11 +1,10 @@
 #!/usr/bin/env node
 
-// Enforce commit message format: AAAA-000[0] [optional message]
-//  - AAAA: 2+ uppercase letters (A-Z)
-//  - 000[0]: 3 or 4 digits
+// Enforce commit message format: AA-0000 [optional message]
+//  - AA: exactly 2 uppercase letters (A-Z)
+//  - 0000: exactly 4 digits
 //  - Example: PD-0000 Add feature
 //  - Also valid: PD-0000
-//  - Also valid: ENGAGE-243
 
 const fs = require('fs')
 
@@ -50,16 +49,15 @@ try {
     process.exit(0)
   }
 
-  // Pattern: start, 2+ uppercase letters, hyphen, 3-4 digits, optional space and message
-  const pattern = /^[A-Z]{2,}-\d{3,4}(?:\s.+)?$/
+  // Pattern: start, 2 uppercase letters, hyphen, 4 digits, optional space and message
+  const pattern = /^[A-Z]{2}-\d{4}(?:\s.+)?$/
 
   if (!pattern.test(firstLine)) {
     console.error(
-      '\u001b[31mCommit message must start with an issue key like "AAAA-000[0]" followed by an optional message.\u001b[0m'
+      '\u001b[31mCommit message must start with an issue key like "AA-0000" followed by an optional message.\u001b[0m'
     )
     console.error('\nExamples:')
     console.error('  PD-0000')
-    console.error('  ENGAGE-243')
     console.error('  PD-0000 Fix broken tests')
     console.error('\nYour message was:')
     console.error(`  ${firstLine || '(empty)'}`)

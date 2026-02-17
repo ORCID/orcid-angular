@@ -1,12 +1,5 @@
-<ng-template #wizardItem let-recordImportWizard>
-  <h2 class="orc-font-body-small wizard-header">
-    <img
-      *ngIf="recordImportWizard.redirectUriMetadata?.logoUrl"
-      [src]="recordImportWizard.redirectUriMetadata.logoUrl"
-      [alt]="recordImportWizard.name + ' logo'"
-      class="wizard-logo"
-      loading="lazy"
-    />
+<div *ngFor="let recordImportWizard of recordImportWizards">
+  <h2 class="orc-font-body-small">
     <a
       target="_blank"
       rel="noopener noreferrer"
@@ -14,17 +7,11 @@
     >
       {{ recordImportWizard.name }}
     </a>
-    <span
-      *ngIf="recordImportWizard.redirectUriMetadata?.type"
-      class="orc-font-body-small wizard-type"
-    >
-      {{ recordImportWizard.redirectUriMetadata.type }}
-    </span>
   </h2>
   <p class="orc-font-body-small">
-    <ng-container *ngIf="displayDescription(recordImportWizard).length > 125">
+    <ng-container *ngIf="recordImportWizard.description.length > 125">
       <ng-container *ngIf="!recordImportWizard.show">
-        {{ displayDescription(recordImportWizard).substring(0, 125) + '...' }}
+        {{ recordImportWizard.description.substring(0, 125) + '...' }}
         <a
           class="underline"
           i18n="@@shared.showMore"
@@ -34,7 +21,7 @@
         </a>
       </ng-container>
       <ng-container *ngIf="recordImportWizard.show">
-        {{ displayDescription(recordImportWizard) }}
+        {{ recordImportWizard.description }}
         <br />
         <a
           class="underline"
@@ -45,29 +32,8 @@
         </a>
       </ng-container>
     </ng-container>
-    <ng-container *ngIf="displayDescription(recordImportWizard).length < 125">
-      {{ displayDescription(recordImportWizard) }}
+    <ng-container *ngIf="recordImportWizard.description.length < 125">
+      {{ recordImportWizard.description }}
     </ng-container>
   </p>
-</ng-template>
-
-<h3 class="orc-font-body-small">Certified</h3>
-<ng-container
-  *ngFor="let recordImportWizard of certifiedWizards"
-  [ngTemplateOutlet]="wizardItem"
-  [ngTemplateOutletContext]="{ $implicit: recordImportWizard }"
-></ng-container>
-
-<h3 class="orc-font-body-small">Featured</h3>
-<ng-container
-  *ngFor="let recordImportWizard of featuredWizards"
-  [ngTemplateOutlet]="wizardItem"
-  [ngTemplateOutletContext]="{ $implicit: recordImportWizard }"
-></ng-container>
-
-<h3 class="orc-font-body-small">Default</h3>
-<ng-container
-  *ngFor="let recordImportWizard of defaultWizards"
-  [ngTemplateOutlet]="wizardItem"
-  [ngTemplateOutletContext]="{ $implicit: recordImportWizard }"
-></ng-container>
+</div>
