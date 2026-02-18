@@ -85,10 +85,10 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'two-factor-auth-form',
+    path: 'auth-challenge',
     loadComponent: () =>
-      import('./pages/two-factor-auth-form-page.component').then(
-        (m) => m.TwoFactorAuthFormPageComponent
+      import('./pages/auth-challenge-page.component').then(
+        (m) => m.AuthChallengePageComponent
       ),
   },
 ]

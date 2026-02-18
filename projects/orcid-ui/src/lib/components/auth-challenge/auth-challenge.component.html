@@ -1,11 +1,63 @@
-@if (showAlert) {
+@if (showAlert) { @if (showPasswordField) {
+<app-alert-message type="notice" role="dialog" aria-live="polite" class="mb-4">
+  <div title>Verify your ORCID account to continue</div>
+  <div content class="content" i18n>
+    Please enter your ORCID account password, and a two-factor authentication
+    code if requested.
+  </div>
+</app-alert-message>
+} @else {
 <app-alert-message type="notice" role="dialog" aria-live="polite" class="mb-4">
   <div content class="content" i18n>
     As two-factor authentication is currently active on your ORCID account you
     need to enter a 2FA code from your authentication app to continue.
   </div>
 </app-alert-message>
-} @if (!showRecoveryCode) {
+} } @if (showPasswordField) {
+<div class="row mb-6 flex flex-wrap">
+  <mat-label
+    class="orc-font-small-print block mb-2!"
+    id="password-input-label"
+    [ngClass]="{
+      error: parentForm.get(passwordControlName)?.invalid && passwordWasTouched
+    }"
+  >
+    <strong i18n="@@register.password">Password</strong>
+  </mat-label>
+  <mat-form-field
+    appearance="outline"
+    class="mat-form-field-min no-hint w-full"
+  >
+    <input
+      matInput
+      [formControlName]="passwordControlName"
+      id="password"
+      type="password"
+      aria-labelledby="password-input-label"
+      [errorStateMatcher]="errorMatcher"
+      [ngClass]="{
+        error:
+          parentForm.get(passwordControlName)?.invalid && passwordWasTouched
+      }"
+    />
+  </mat-form-field>
+  <mat-error
+    class="w-full orc-font-small-print mt-2"
+    *ngIf="
+      parentForm.get(passwordControlName).hasError('required') &&
+      passwordWasTouched
+    "
+    i18n="@@account.passwordCannotBeEmpty"
+  >
+    Password cannot be empty
+  </mat-error>
+  @if (parentForm.get(passwordControlName).hasError('invalid')) {
+  <mat-error class="w-full orc-font-small-print mt-2" i18n
+    >Invalid password
+  </mat-error>
+  }
+</div>
+} @if (showTwoFactorField) { @if (!showRecoveryCode) {
 <div>
   <mat-label
     class="orc-font-small-print font-bold! block mb-2!"
@@ -44,35 +96,29 @@
       <mat-hint class="leading-6" i18n="@@account.enterTheCode">
         Enter the code from your two-factor authentication app
       </mat-hint>
-      }
-      <mat-error
-        *ngIf="parentForm.get(codeControlName).hasError('backendInvalid')"
-      >
+      } @if (parentForm.get(codeControlName).hasError('invalid')) {
+      <mat-error>
         <ng-container i18n="@@ngOrcid.signin.2fa.badVerificationCode">
           Invalid authentication code
         </ng-container>
       </mat-error>
-      <mat-error
-        *ngIf="
-          twoFactorCodeWasTouched &&
-          parentForm.get(codeControlName).hasError('required')
-        "
-      >
+      } @if ( twoFactorCodeWasTouched &&
+      parentForm.get(codeControlName).hasError('required')) {
+      <mat-error>
         <ng-container i18n="@@ngOrcid.signin.2fa.verificationCodeRequired">
           Authentication code is required
         </ng-container>
       </mat-error>
-      <mat-error
-        *ngIf="
-          twoFactorCodeWasTouched &&
-          (parentForm.get(codeControlName).hasError('minlength') ||
-            parentForm.get(codeControlName).hasError('maxlength'))
-        "
-      >
+      } @if ( twoFactorCodeWasTouched &&
+      (parentForm.get(codeControlName).hasError('minlength') ||
+      parentForm.get(codeControlName).hasError('maxlength'))) {
+      <mat-error>
         <ng-container i18n="@@ngOrcid.signin.2fa.badVerificationCodeLength">
           Invalid authentication code length
         </ng-container>
       </mat-error>
+
+      }
     </div>
     <mat-hint
       [ngClass]="{
@@ -127,35 +173,28 @@
       <mat-hint class="leading-6" i18n="@@ngOrcid.signin.2fa.noDevice2"
         >Enter a recovery code</mat-hint
       >
-      }
-      <mat-error
-        *ngIf="parentForm.get(recoveryControlName).hasError('backendInvalid')"
-      >
+      } @if (parentForm.get(recoveryControlName).hasError('invalid')) {
+      <mat-error>
         <ng-container i18n="@@ngOrcid.signin.2fa.badRecoveryCode">
           Invalid recovery code
         </ng-container>
       </mat-error>
-      <mat-error
-        *ngIf="
-          twoFactorRecoveryCodeWasTouched &&
-          parentForm.get(recoveryControlName).hasError('required')
-        "
-      >
+      } @if (twoFactorRecoveryCodeWasTouched &&
+      parentForm.get(recoveryControlName).hasError('required')) {
+      <mat-error>
         <ng-container i18n="@@ngOrcid.signin.2fa.recoveryCodeRequired">
           Recovery code is required
         </ng-container>
       </mat-error>
-      <mat-error
-        *ngIf="
-          twoFactorRecoveryCodeWasTouched &&
-          (parentForm.get(recoveryControlName).hasError('minlength') ||
-            parentForm.get(recoveryControlName).hasError('maxlength'))
-        "
-      >
+      } @if (twoFactorRecoveryCodeWasTouched &&
+      (parentForm.get(recoveryControlName).hasError('minlength') ||
+      parentForm.get(recoveryControlName).hasError('maxlength'))) {
+      <mat-error>
         <ng-container i18n="@@ngOrcid.signin.2fa.badRecoveryCodeLength">
           Invalid recovery code length
         </ng-container>
       </mat-error>
+      }
     </div>
     <mat-hint
       [ngClass]="{
@@ -170,7 +209,7 @@
   </div>
 </div>
 } @if (showHelpText) {
-<ul class="leading-5.25">
+<ul class="leading-5.25" data-testid="help-text-links">
   @if (!showRecoveryCode) {
   <li>
     <div class="orc-font-body-small">
@@ -181,6 +220,7 @@
         (click)="toggleRecoveryCode($event)"
         i18n="@@account.useARecoveryCode"
         class="underline"
+        data-testid="recovery-toggle"
         >Use a recovery code instead</a
       >
     </div>
@@ -193,6 +233,7 @@
       >&nbsp;<a
         href="#"
         (click)="toggleRecoveryCode($event)"
+        data-testid="recovery-toggle"
         i18n="@@account.useYourAuthenticationAppInstead"
         class="underline"
         >Use your authentication app instead</a
@@ -215,4 +256,4 @@
     </div>
   </li>
 </ul>
-}
+} }

@@ -29,7 +29,7 @@ class ErrorStateMatcherForTwoFactorFields implements ErrorStateMatcher {
 }
 
 @Component({
-  selector: 'app-two-factor-auth-form',
+  selector: 'app-auth-challenge',
   standalone: true,
   imports: [
     MatFormFieldModule,
@@ -45,20 +45,28 @@ class ErrorStateMatcherForTwoFactorFields implements ErrorStateMatcher {
       deps: [[new SkipSelf(), ControlContainer]],
     },
   ],
-  templateUrl: './two-factor-auth-form.component.html',
+  templateUrl: './auth-challenge.component.html',
   styleUrls: [
-    './two-factor-auth-form.component.scss',
-    './two-factor-auth-form.component.scss-theme.scss',
+    './auth-challenge.component.scss',
+    './auth-challenge.component.scss-theme.scss',
   ],
 })
-export class TwoFactorAuthFormComponent implements OnInit, OnDestroy {
+export class AuthChallengeComponent implements OnInit, OnDestroy {
   @Input() codeControlName = 'twoFactorCode'
   @Input() recoveryControlName = 'twoFactorRecoveryCode'
+  // has "control" in the name to avoid conflicts with account settings password reset form which has the password field/control
+  @Input() passwordControlName = 'passwordControl'
   @Input() showAlert = false
   @Input() showHelpText = true
+  @Input() showPasswordField = true
+  @Input() showTwoFactorField = false
+  @ViewChild('passwordInput') passwordInput: ElementRef
   @ViewChild('twoFactorCodeInput') twoFactorCodeInput: ElementRef
   @ViewChild('twoFactorRecoveryCodeInput')
   twoFactorRecoveryCodeInput: ElementRef
+  invalidPassword = false
+  invalidTwoFactorCode = false
+  invalidTwoFactorRecoveryCode = false
   showRecoveryCode = false
   parentForm: FormGroup
   errorMatcher = new ErrorStateMatcherForTwoFactorFields()
@@ -68,6 +76,10 @@ export class TwoFactorAuthFormComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.parentForm = this.controlContainer.control as FormGroup
     this.updateTwoFactorValidators()
+  }
+
+  get passwordWasTouched() {
+    return this.parentForm.get(this.passwordControlName).touched
   }
 
   get twoFactorCodeWasTouched() {
@@ -116,20 +128,25 @@ export class TwoFactorAuthFormComponent implements OnInit, OnDestroy {
   processBackendResponse(value: any) {
     const codeControl = this.parentForm.get(this.codeControlName)
     const recoveryControl = this.parentForm.get(this.recoveryControlName)
+    const passwordControl = this.parentForm.get(this.passwordControlName)
 
-    if (value.invalidPassword) {
+    /*     if (value.invalidPassword) {
       codeControl?.setValue(null)
       recoveryControl?.setValue(null)
       codeControl?.markAsUntouched()
       recoveryControl?.markAsUntouched()
+    } */
+
+    if (value.invalidPassword) {
+      passwordControl?.setErrors({ invalid: true })
     }
 
     if (value.invalidTwoFactorCode) {
-      codeControl?.setErrors({ backendInvalid: true })
+      codeControl?.setErrors({ invalid: true })
     }
 
     if (value.invalidTwoFactorRecoveryCode) {
-      recoveryControl?.setErrors({ backendInvalid: true })
+      recoveryControl?.setErrors({ invalid: true })
     }
 
     if (

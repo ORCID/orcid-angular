@@ -257,6 +257,14 @@ export interface DeactivationEndpoint {
   tokenVerification?: ExpiringLinkVerification
   deactivationSuccessful?: boolean
 }
+export interface AuthChallenge {
+  invalidPassword?: boolean
+  invalidTwoFactorCode?: boolean
+  invalidTwoFactorRecoveryCode?: boolean
+  twoFactorCode?: string
+  twoFactorRecoveryCode?: string
+  twoFactorEnabled?: boolean
+}
 
 export type TokenStatus = 'VALID' | 'INVALID' | 'EXPIRED'
 export interface ExpiringLinkVerification {

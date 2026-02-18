@@ -7,7 +7,8 @@ import {
 } from '@angular/core/testing'
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
-import { TwoFactorAuthFormComponent } from './two-factor-auth-form.component'
+import { AuthChallengeComponent } from './auth-challenge.component'
+import { AlertMessageComponent } from '../alert-message/alert-message.component'
 import { By } from '@angular/platform-browser'
 import '@angular/localize/init'
 
@@ -15,35 +16,41 @@ import '@angular/localize/init'
 @Component({
   template: `
     <form [formGroup]="form">
-      <app-two-factor-auth-form
+      <app-auth-challenge
         [showAlert]="showAlert"
         [showHelpText]="showHelpText"
+        [showTwoFactorField]="showTwoFactorField"
+        [showPasswordField]="showPasswordField"
         codeControlName="twoFactorCode"
         recoveryControlName="twoFactorRecoveryCode"
+        passwordControlName="passwordControl"
       >
-      </app-two-factor-auth-form>
+      </app-auth-challenge>
     </form>
   `,
   standalone: true,
-  imports: [ReactiveFormsModule, TwoFactorAuthFormComponent],
+  imports: [ReactiveFormsModule, AuthChallengeComponent],
 })
 class TestHostComponent {
-  @ViewChild(TwoFactorAuthFormComponent)
-  childComponent: TwoFactorAuthFormComponent
+  @ViewChild(AuthChallengeComponent)
+  childComponent!: AuthChallengeComponent
 
   showAlert = false
   showHelpText = true
+  showTwoFactorField = true
+  showPasswordField = true
 
   form = new FormGroup({
+    passwordControl: new FormControl(''),
     twoFactorCode: new FormControl(''),
     twoFactorRecoveryCode: new FormControl(''),
   })
 }
 
-describe('TwoFactorAuthFormComponent', () => {
+describe('AuthChallengeComponent', () => {
   let fixture: ComponentFixture<TestHostComponent>
   let hostComponent: TestHostComponent
-  let component: TwoFactorAuthFormComponent
+  let component: AuthChallengeComponent
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -76,7 +83,10 @@ describe('TwoFactorAuthFormComponent', () => {
 
   describe('Toggling Recovery Code Mode', () => {
     it('should switch to Recovery mode when toggle link is clicked', fakeAsync(() => {
-      const toggleLink = fixture.debugElement.query(By.css('a')).nativeElement
+      // Robust query using data-testid instead of CSS classes
+      const toggleLink = fixture.debugElement.query(
+        By.css('[data-testid="recovery-toggle"]')
+      ).nativeElement
 
       toggleLink.click()
       fixture.detectChanges()
@@ -93,6 +103,7 @@ describe('TwoFactorAuthFormComponent', () => {
       recoveryControl?.setValue('')
       expect(recoveryControl?.hasError('required')).toBeTrue()
 
+      // IDs are safe to query by, as they are functionally required for a11y labels
       const recoveryInput = fixture.debugElement.query(
         By.css('#twoFactorRecoveryCode')
       )
@@ -106,7 +117,6 @@ describe('TwoFactorAuthFormComponent', () => {
       component.toggleRecoveryCode(new Event('click'))
 
       fixture.detectChanges()
-
       tick()
 
       const recoveryInputEl = fixture.debugElement.query(
@@ -124,33 +134,33 @@ describe('TwoFactorAuthFormComponent', () => {
   })
 
   describe('Backend Response Handling', () => {
-    it('should handle invalidPassword (reset all)', () => {
-      hostComponent.form.get('twoFactorCode')?.setValue('123456')
-
+    it('should apply backend error to password control', () => {
       component.processBackendResponse({ invalidPassword: true })
 
-      expect(hostComponent.form.get('twoFactorCode')?.value).toBeNull()
-      expect(hostComponent.form.get('twoFactorCode')?.touched).toBeFalse()
+      const control = hostComponent.form.get('passwordControl')
+      expect(control?.hasError('invalid')).toBeTrue()
     })
 
     it('should apply backend error to 2FA code', () => {
       component.processBackendResponse({ invalidTwoFactorCode: true })
 
       const control = hostComponent.form.get('twoFactorCode')
-      expect(control?.hasError('backendInvalid')).toBeTrue()
+      expect(control?.hasError('invalid')).toBeTrue()
     })
 
     it('should apply backend error to Recovery code', () => {
       component.processBackendResponse({ invalidTwoFactorRecoveryCode: true })
 
       const control = hostComponent.form.get('twoFactorRecoveryCode')
-      expect(control?.hasError('backendInvalid')).toBeTrue()
+      expect(control?.hasError('invalid')).toBeTrue()
     })
 
     it('should refocus input if response indicates success/continuation', fakeAsync(() => {
       component.processBackendResponse({
         twoFactorEnabled: true,
         invalidPassword: false,
+        invalidTwoFactorCode: false,
+        invalidTwoFactorRecoveryCode: false,
       })
 
       fixture.detectChanges()
@@ -164,11 +174,29 @@ describe('TwoFactorAuthFormComponent', () => {
   })
 
   describe('Inputs (@Input)', () => {
-    it('should display alert message if showAlert is true', () => {
+    it('should display verification alert message if showAlert and showPasswordField are true', () => {
       hostComponent.showAlert = true
+      hostComponent.showPasswordField = true
       fixture.detectChanges()
 
-      const alert = fixture.debugElement.query(By.css('app-alert-message'))
+      // Robust query by Angular Directive rather than HTML tag
+      const alert = fixture.debugElement.query(
+        By.directive(AlertMessageComponent)
+      )
+      expect(alert).toBeTruthy()
+      expect(alert.nativeElement.textContent).toContain(
+        'Verify your ORCID account to continue'
+      )
+    })
+
+    it('should display active 2FA alert message if showAlert is true but showPasswordField is false', () => {
+      hostComponent.showAlert = true
+      hostComponent.showPasswordField = false
+      fixture.detectChanges()
+
+      const alert = fixture.debugElement.query(
+        By.directive(AlertMessageComponent)
+      )
       expect(alert).toBeTruthy()
       expect(alert.nativeElement.textContent).toContain(
         'As two-factor authentication is currently active'
@@ -179,8 +207,19 @@ describe('TwoFactorAuthFormComponent', () => {
       hostComponent.showHelpText = false
       fixture.detectChanges()
 
-      const links = fixture.debugElement.query(By.css('ul.leading-5\\.25'))
+      // Querying by data-testid instead of utility classes
+      const links = fixture.debugElement.query(
+        By.css('[data-testid="help-text-links"]')
+      )
       expect(links).toBeFalsy()
+    })
+
+    it('should hide two-factor field if showTwoFactorField is false', () => {
+      hostComponent.showTwoFactorField = false
+      fixture.detectChanges()
+
+      const codeInput = fixture.debugElement.query(By.css('#twoFactorCode'))
+      expect(codeInput).toBeFalsy()
     })
   })
 })

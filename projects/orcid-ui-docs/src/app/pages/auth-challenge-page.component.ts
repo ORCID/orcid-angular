@@ -11,13 +11,13 @@ import { MatSelectModule } from '@angular/material/select'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { MatIconModule } from '@angular/material/icon'
-import { TwoFactorAuthFormComponent } from '@orcid/ui'
+import { AuthChallengeComponent } from '@orcid/ui'
 import { DocumentationPageComponent } from '../components/documentation-page/documentation-page.component'
 import '@angular/localize/init'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 
 @Component({
-  selector: 'two-factor-auth-form-page',
+  selector: 'auth-challenge-page',
   standalone: true,
   imports: [
     CommonModule,
@@ -27,16 +27,18 @@ import { MatCheckboxModule } from '@angular/material/checkbox'
     MatInputModule,
     MatCheckboxModule,
     MatIconModule,
-    TwoFactorAuthFormComponent,
+    AuthChallengeComponent,
     DocumentationPageComponent,
     ReactiveFormsModule,
   ],
-  styleUrls: ['./two-factor-auth-form-page.component.scss'],
-  templateUrl: './two-factor-auth-form-page.component.html',
+  styleUrls: ['./auth-challenge-page.component.scss'],
+  templateUrl: './auth-challenge-page.component.html',
 })
-export class TwoFactorAuthFormPageComponent implements OnInit {
+export class AuthChallengePageComponent implements OnInit {
   showAlert = false
   showHelpText = true
+  showPasswordField = true
+  showTwoFactorField = false
   form: UntypedFormGroup
 
   constructor(private _fb: UntypedFormBuilder) {}
@@ -48,6 +50,7 @@ export class TwoFactorAuthFormPageComponent implements OnInit {
         null,
         [Validators.minLength(10), Validators.maxLength(10)],
       ],
+      password: ['', Validators.required],
     })
   }
 }
