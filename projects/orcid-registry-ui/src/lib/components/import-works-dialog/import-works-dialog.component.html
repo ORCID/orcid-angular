@@ -1,0 +1,108 @@
+<orcid-modal [title]="title">
+  <div orcidModalBody>
+    <div class="import-works-dialog__intro" *ngIf="introText">
+      <p class="import-works-dialog__intro-text">{{ introText }}</p>
+      <a
+        *ngIf="supportLink"
+        class="import-works-dialog__support-link"
+        [href]="supportLink.url"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {{ supportLink.label }}
+      </a>
+    </div>
+
+    <section class="import-works-dialog__section" *ngIf="certifiedLinks.length">
+      <h3 class="import-works-dialog__section-heading">
+        ORCID Certified Services
+      </h3>
+      <div class="import-works-dialog__card-list">
+        <div
+          *ngFor="let link of certifiedLinks"
+          class="import-works-dialog__card import-works-dialog__card--certified"
+        >
+          <div class="import-works-dialog__card-icon" *ngIf="link.imageUrl || link.icon">
+            <img *ngIf="link.imageUrl" [src]="link.imageUrl" [alt]="link.name + ' logo'" class="import-works-dialog__card-img" />
+            <mat-icon *ngIf="!link.imageUrl && link.icon" [attr.aria-hidden]="true">{{ link.icon }}</mat-icon>
+          </div>
+          <div class="import-works-dialog__card-content">
+            <p class="import-works-dialog__card-title">{{ link.name }}</p>
+            <p class="import-works-dialog__card-description">
+              {{ link.description }}
+            </p>
+          </div>
+          <div class="import-works-dialog__card-actions">
+            <ng-container *ngIf="link.connected; else connectCertified">
+              <span class="import-works-dialog__connected">
+                <span class="import-works-dialog__connected-dot" aria-hidden="true"></span>
+                Connected
+              </span>
+            </ng-container>
+            <ng-template #connectCertified>
+              <button
+                mat-flat-button
+                class="import-works-dialog__btn-connect"
+                (click)="openInNewTab(link.url)"
+              >
+                Connect now
+              </button>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="import-works-dialog__section import-works-dialog__section--more" *ngIf="moreServicesLinks.length">
+      <div class="import-works-dialog__more-panel">
+        <button
+          type="button"
+          class="import-works-dialog__more-header"
+          (click)="toggleMoreServices()"
+          [attr.aria-expanded]="moreServicesExpanded"
+          [attr.aria-controls]="'import-works-more-list'"
+          id="import-works-more-heading"
+        >
+          <mat-icon class="import-works-dialog__more-chevron" aria-hidden="true">
+            {{ moreServicesExpanded ? 'expand_more' : 'expand_less' }}
+          </mat-icon>
+          <span class="import-works-dialog__more-heading-text">
+            More Services <span class="import-works-dialog__more-count">({{ moreServicesLinks.length }})</span>
+          </span>
+        </button>
+        <div
+          id="import-works-more-list"
+          class="import-works-dialog__more-list"
+          role="region"
+          [attr.aria-labelledby]="'import-works-more-heading'"
+          [hidden]="!moreServicesExpanded"
+        >
+          <div
+            *ngFor="let link of moreServicesLinks"
+            class="import-works-dialog__card import-works-dialog__card--more"
+          >
+            <div class="import-works-dialog__card-icon" *ngIf="link.imageUrl || link.icon">
+              <img *ngIf="link.imageUrl" [src]="link.imageUrl" [alt]="link.name + ' logo'" class="import-works-dialog__card-img" />
+              <mat-icon *ngIf="!link.imageUrl && link.icon" [attr.aria-hidden]="true">{{ link.icon }}</mat-icon>
+            </div>
+            <div class="import-works-dialog__card-content">
+              <p class="import-works-dialog__card-title">{{ link.name }}</p>
+              <p class="import-works-dialog__card-description">
+                {{ link.description }}
+              </p>
+            </div>
+            <div class="import-works-dialog__card-actions">
+              <button
+                mat-stroked-button
+                class="import-works-dialog__btn-connect-more"
+                (click)="openInNewTab(link.url)"
+              >
+                Connect now
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</orcid-modal>

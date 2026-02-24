@@ -5,7 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { MatSelectModule } from '@angular/material/select'
 import { SkeletonPlaceholderComponent } from '@orcid/ui'
-import { DocumentationPageComponent } from '../components/documentation-page/documentation-page.component'
+import { DocumentationPageComponent } from '../../components/documentation-page/documentation-page.component'
 
 @Component({
   selector: 'orcid-skeleton-placeholder-page',
