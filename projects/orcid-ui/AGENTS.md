@@ -23,7 +23,7 @@ Use this document as a fast orientation and a checklist for making safe, consist
   - `projects/orcid-tokens/tokens.scss` (SCSS source-of-truth)
   - `projects/orcid-tokens/tokens.css` (CSS variables used by apps/docs)
   - `projects/orcid-tokens/tokens.json` (structured token map)
-- Keep `projects/orcid-ui-docs` updated with a docs page + route + sidebar link.
+- Keep `projects/orcid-ui-docs` updated with a docs page + route + sidebar link. When you **change a component’s API** (inputs, data types, public behavior), update the main app (or other consumers) and that component’s doc page (usage snippet, inputs list, examples).
 - Verify builds:
   - `npm run build:tokens`
   - `npm run build:ui`
@@ -42,6 +42,10 @@ Use this document as a fast orientation and a checklist for making safe, consist
 - Components generally rely on **CSS variables** in `tokens.css` (e.g. `--orcid-space-*`, `--orcid-font-*`, `--orcid-color-*`).
 - Some SCSS (typography/theme helpers) imports token SCSS.
 - Prefer token variables over hard-coded colors/sizes.
+
+### Loading and placeholder states
+
+- Prefer existing **skeleton/placeholder components** from this library (e.g. `SkeletonPlaceholderComponent`) for loading or empty states so loading UIs stay consistent. Check `public-api.ts` and the docs before adding new spinners or custom placeholders.
 
 ## MCP Figma-to-code workflow used in this repo
 

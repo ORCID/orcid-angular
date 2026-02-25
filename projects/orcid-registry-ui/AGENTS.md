@@ -16,6 +16,7 @@ This package (`projects/orcid-registry-ui`, published as `@orcid/registry-ui`) c
 - **Components**: `projects/orcid-registry-ui/src/lib/components/**`
 - Prefer **standalone components**. Use `@orcid/ui` for base primitives (modals, action surfaces, etc.) and **orcid-tokens** CSS variables for layout/color/typography.
 - Dialogs that use the shared modal chrome should use `OrcidModalComponent` and `ORCID_MODAL_DIALOG_PANEL_CLASS` from `@orcid/ui` when opening with `MatDialog`.
+- **Dialog data (MAT_DIALOG_DATA):** If the host may open the dialog first and assign full data later (e.g. after an async request), the data interface can include an optional flag (e.g. `loading?: boolean`) so the dialog can show a skeleton or placeholder until the host sets the complete data.
 
 ## Dependencies
 
@@ -25,6 +26,10 @@ This package (`projects/orcid-registry-ui`, published as `@orcid/registry-ui`) c
 ## Building
 
 - From repo root: `ng build orcid-registry-ui` (or use the npm script if defined).
+
+## When changing this library’s API
+
+If you add or change **inputs**, **data types**, or **public behavior** in a registry-ui component, update **both** the main app usage (under `src/`) and the component’s doc page (usage snippet, inputs list, examples) so they stay in sync.
 
 ## Docs site (`projects/orcid-ui-docs`)
 
