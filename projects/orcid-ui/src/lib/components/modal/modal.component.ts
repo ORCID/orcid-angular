@@ -12,7 +12,6 @@ export const ORCID_MODAL_DIALOG_PANEL_CLASS = 'orcid-modal-dialog-panel'
   imports: [NgIf, MatButtonModule, MatIconModule],
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class OrcidModalComponent {
   /** Optional title string for the modal header. */

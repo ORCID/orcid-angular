@@ -28,16 +28,27 @@ export interface ImportWorksMoreLink {
 
 /**
  * Data passed into the Import your works dialog via MAT_DIALOG_DATA.
+ * All user-facing strings (title, introText, labels) should be passed in so the host app can supply translatable text.
  */
 export interface ImportWorksDialogData {
+  /** When true, shows shimmer skeleton placeholders for the link sections instead of content. */
+  loading?: boolean
   /** Header/title of the dialog. */
   title: string
   /** Optional intro paragraph above the sections. */
   introText?: string
-  /** Optional support link shown below intro (e.g. "Find out more about importing works..."). */
+  /** Optional support link shown below intro. */
   supportLink?: { url: string; label: string }
-  /** Links shown under "ORCID Certified Services". */
+  /** Section heading for certified services (e.g. "ORCID Certified Services"). */
+  certifiedSectionHeading?: string
+  /** Section heading for non-certified services (e.g. "More Services"). */
+  moreServicesHeading?: string
+  /** Button label for connecting to a service (e.g. "Connect now"). */
+  connectNowLabel?: string
+  /** Label shown when a certified service is already connected (e.g. "Connected"). */
+  connectedLabel?: string
+  /** Links shown under the certified section heading. */
   certifiedLinks: ImportWorksCertifiedLink[]
-  /** Ordered list of links shown under "More Services". */
+  /** Ordered list of links shown under the more services heading. */
   moreServicesLinks: ImportWorksMoreLink[]
 }

@@ -21,3 +21,17 @@ export interface RecordImportWizard {
   status?: string
   show?: boolean
 }
+
+/**
+ * Response shape from GET workspace/retrieve-works-search-and-link-wizard.json.
+ * Uses "connected" (JSON) instead of "isConnected".
+ */
+export interface SearchAndLinkWizardFormSummaryResponse {
+  id: string
+  name: string
+  description?: string
+  redirectUri: string
+  scopes: string
+  redirectUriMetadata?: RecordImportWizardMetadata
+  connected?: boolean
+}

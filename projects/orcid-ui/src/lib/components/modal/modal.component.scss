@@ -1,3 +1,15 @@
+/* So orcid-modal host participates in flex when used inside a dialog (e.g. import-works-dialog) and does not overflow */
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+  max-width: 100%;
+  height: 100%;
+}
+
 /* Constrain overlay and inner container so height is bounded and body scrolls inside .orcid-modal__container */
 .orcid-modal-dialog-panel {
   max-height: 90vh;
@@ -161,4 +173,3 @@
     overflow: hidden;
   }
 }
-

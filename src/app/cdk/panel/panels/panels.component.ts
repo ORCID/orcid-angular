@@ -89,6 +89,8 @@ export class PanelsComponent implements OnInit {
     const menuOption = this.addMenuOptions.find((x) => x.action === action)
     if (menuOption && menuOption.modal) {
       this.openModal(menuOption.modal, { ...menuOption, type: menuOption.type })
+    } else if (menuOption && type === 'works') {
+      this.addEvent.emit(action)
     } else {
       switch (type) {
         case 'employment':

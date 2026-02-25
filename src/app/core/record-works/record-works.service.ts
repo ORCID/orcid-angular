@@ -1,6 +1,12 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs'
+import {
+  BehaviorSubject,
+  forkJoin,
+  Observable,
+  of,
+  ReplaySubject,
+} from 'rxjs'
 import {
   catchError,
   first,
@@ -36,7 +42,15 @@ import {
   VisibilityStrings,
 } from '../../types/common.endpoint'
 import { DEFAULT_PAGE_SIZE, EXTERNAL_ID_TYPE_WORK } from 'src/app/constants'
-import { RecordImportWizard } from '../../types/record-peer-review-import.endpoint'
+import {
+  RecordImportWizard,
+  SearchAndLinkWizardFormSummaryResponse,
+} from '../../types/record-peer-review-import.endpoint'
+import type {
+  ImportWorksDialogData,
+  ImportWorksCertifiedLink,
+  ImportWorksMoreLink,
+} from '@orcid/registry-ui'
 import { SortOrderType } from '../../types/sort'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { TogglzFlag } from 'src/app/types/config.endpoint'
@@ -564,11 +578,162 @@ export class RecordWorksService {
           this._http.get<RecordImportWizard[]>(
             runtimeEnvironment.API_WEB +
               (useNewEndpoint
-                ? 'workspace/retrieve-search-and-link-wizard.json'
+                ? 'workspace/retrieve-works-search-and-link-wizard.json'
                 : 'workspace/retrieve-work-import-wizards.json')
           )
         )
       )
+  }
+
+  /**
+   * Returns the static part of the Import Works dialog data (title, intro, labels, empty link lists).
+   * Sets loading: true so the dialog shows skeleton placeholders until full data is assigned.
+   * Use this to open the dialog immediately; then pass full data from loadSearchAndLinkWizardDialogData when it loads.
+   */
+  getImportWorksDialogDataSkeleton(): ImportWorksDialogData {
+    return this._getImportWorksDialogDataStatic([], [], true)
+  }
+
+  private _getImportWorksDialogDataStatic(
+    certifiedLinks: ImportWorksCertifiedLink[],
+    moreServicesLinks: ImportWorksMoreLink[],
+    loading?: boolean
+  ): ImportWorksDialogData {
+    return {
+      ...(loading !== undefined && { loading }),
+      title: $localize`:@@works.importYourWorks:Import your works`,
+      introText: $localize`:@@works.importIntroText:These services can help you update your ORCID record quickly by searching for your research outputs from various databases. Connect to a service to grant permission and add selected research outputs to your ORCID record.`,
+      supportLink: {
+        url: 'https://support.orcid.org/hc/en-us/articles/360006973653-Add-works-by-direct-import-from-other-systems',
+        label: $localize`:@@works.importSupportLinkLabel:Find out more about importing works into your ORCID record`,
+      },
+      certifiedSectionHeading: $localize`:@@works.certifiedSectionHeading:ORCID Certified Services`,
+      moreServicesHeading: $localize`:@@works.moreServicesHeading:More Services`,
+      connectNowLabel: $localize`:@@works.connectNow:Connect now`,
+      connectedLabel: $localize`:@@works.connected:Connected`,
+      certifiedLinks,
+      moreServicesLinks,
+    }
+  }
+
+  /**
+   * Loads data for the new Import Works dialog (certified + more services).
+   * Use when SEARCH_AND_LINK_WIZARD_WITH_CERTIFIED_AND_FEATURED_LINKS is enabled.
+   * Certified/Featured: description from S3 localize.properties by client id, else redirectUriMetadata.defaultDescription.
+   * More Services: description from top-level `description` only.
+   */
+  loadSearchAndLinkWizardDialogData(locale: string): Observable<ImportWorksDialogData> {
+    const list$ = this._http.get<SearchAndLinkWizardFormSummaryResponse[]>(
+      runtimeEnvironment.API_WEB + 'workspace/retrieve-works-search-and-link-wizard.json'
+    )
+    const baseUrl = (runtimeEnvironment as { CERTIFIED_LINKS_LOCALIZE_BASE_URL?: string })
+      .CERTIFIED_LINKS_LOCALIZE_BASE_URL?.replace(/\/$/, '')
+    const localizeUrl = baseUrl ? `${baseUrl}/works-search-and-link.${locale}.properties` : null
+    const localize$ = localizeUrl
+      ? this._http.get(localizeUrl, { responseType: 'text' }).pipe(
+          catchError(() => of(''))
+        )
+      : of('')
+
+    return forkJoin({ list: list$, localize: localize$ }).pipe(
+      map(({ list, localize }) => {
+        const localizeByClientId = this._parsePropertiesFile(localize)
+        const certifiedLinks: ImportWorksCertifiedLink[] = []
+        const featuredForMore: Array<{ link: ImportWorksMoreLink; index: number }> = []
+        const defaultForMore: ImportWorksMoreLink[] = []
+
+        for (const item of list) {
+          const type = item.redirectUriMetadata?.type
+          const connected = item.connected ?? false
+          const name = item.name ?? ''
+          const redirectUri = item.redirectUri ?? ''
+          const scopes = item.scopes ?? ''
+          const oauthUrl = this._buildOAuthAuthorizeUrl(item.id, scopes, redirectUri)
+          const imageUrl = item.redirectUriMetadata?.logoUrl
+
+          if (type === 'Certified') {
+            const description =
+              localizeByClientId[`${item.id}-client-description`] ??
+              localizeByClientId[item.id] ??
+              item.redirectUriMetadata?.defaultDescription ??
+              ''
+            certifiedLinks.push({
+              name,
+              description,
+              url: oauthUrl,
+              connected,
+              imageUrl,
+            })
+          } else if (type === 'Featured') {
+            const description =
+              localizeByClientId[`${item.id}-client-description`] ??
+              localizeByClientId[item.id] ??
+              item.redirectUriMetadata?.defaultDescription ??
+              ''
+            const index = item.redirectUriMetadata?.index ?? 999
+            featuredForMore.push({
+              link: { name, description, url: oauthUrl, imageUrl },
+              index,
+            })
+          } else {
+            const description = item.description ?? ''
+            defaultForMore.push({ name, description, url: oauthUrl, imageUrl })
+          }
+        }
+
+        featuredForMore.sort((a, b) => a.index - b.index)
+        const moreServicesLinks: ImportWorksMoreLink[] = [
+          ...featuredForMore.map((x) => x.link),
+          ...defaultForMore,
+        ]
+
+        return this._getImportWorksDialogDataStatic(certifiedLinks, moreServicesLinks, false)
+      })
+    )
+  }
+
+  /**
+   * Builds the OAuth authorize URL used when the user clicks "Connect now".
+   * Matches the format used by the legacy search-link-wizard.
+   */
+  private _buildOAuthAuthorizeUrl(
+    clientId: string,
+    scopes: string,
+    redirectUri: string
+  ): string {
+    const base = (runtimeEnvironment as { BASE_URL?: string }).BASE_URL ?? ''
+    return (
+      base +
+      'oauth/authorize' +
+      '?client_id=' +
+      encodeURIComponent(clientId) +
+      '&response_type=code' +
+      '&scope=' +
+      encodeURIComponent(scopes) +
+      '&redirect_uri=' +
+      encodeURIComponent(redirectUri)
+    )
+  }
+
+  /**
+   * Parses a Java .properties file into a key-value map.
+   * Handles key=value lines and skips comments/empty lines.
+   */
+  private _parsePropertiesFile(text: string): Record<string, string> {
+    const out: Record<string, string> = {}
+    if (!text || typeof text !== 'string') return out
+    const lines = text.split(/\r?\n/)
+    for (const line of lines) {
+      const trimmed = line.trim()
+      if (!trimmed || trimmed.startsWith('#')) continue
+      const eq = trimmed.indexOf('=')
+      if (eq < 0) continue
+      const key = trimmed.slice(0, eq).trim()
+      let value = trimmed.slice(eq + 1).trim()
+      value = value.replace(/\\n/g, '\n').replace(/\\t/g, '\t').replace(/\\\\/g, '\\')
+      out[key] = value
+    }
+    return out
   }
 
   loadExternalId(

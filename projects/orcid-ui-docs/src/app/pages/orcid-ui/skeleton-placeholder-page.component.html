@@ -1,8 +1,12 @@
 <app-documentation-page
   title="Skeleton Placeholder"
-  description="A generalized shimmering placeholder component for loading states."
+  description="Shimmering placeholder for loading states. Supports both accent (dark) and light backgrounds so the effect stays visible in either context."
 >
   <div controls>
+    <p>
+      Use the controls below to try different shapes, sizes, and background modes. Toggle
+      <strong>Use on accent background</strong> to switch between light shimmer (for dark areas) and dark shimmer (for white/light surfaces).
+    </p>
     <div class="controls-grid">
       <mat-form-field appearance="outline">
         <mat-label>Shape</mat-label>
@@ -33,32 +37,83 @@
         />
         <span matSuffix>%</span>
       </mat-form-field>
+
+      <mat-checkbox [(ngModel)]="config.accentBackground">
+        Use on accent background
+      </mat-checkbox>
     </div>
   </div>
 
   <div examples>
     <div class="example-group">
       <h4>Playground</h4>
-      <div class="example-container">
+      <p class="example-caption">
+        Background switches with the checkbox: dark when accent, white when surface.
+      </p>
+      <div class="example-container" [ngClass]="config.accentBackground ? 'accent' : 'surface'">
         <orcid-skeleton-placeholder
           [shape]="config.shape"
           [width]="config.width"
           [height]="config.height"
           [shimmerPercentage]="config.shimmerPercentage"
+          [accentBackground]="config.accentBackground"
         ></orcid-skeleton-placeholder>
+      </div>
+    </div>
+
+    <div class="example-group">
+      <h4>Both variants</h4>
+      <p class="example-caption">
+        Same placeholder on accent (left) and on surface (right).
+      </p>
+      <div class="examples-row">
+        <div class="example-container accent">
+          <orcid-skeleton-placeholder
+            shape="square"
+            width="80px"
+            height="80px"
+            [accentBackground]="true"
+          ></orcid-skeleton-placeholder>
+        </div>
+        <div class="example-container surface">
+          <orcid-skeleton-placeholder
+            shape="square"
+            width="80px"
+            height="80px"
+            [accentBackground]="false"
+          ></orcid-skeleton-placeholder>
+        </div>
       </div>
     </div>
   </div>
 
+  <div usage>
+    <pre><code class="language-html">&lt;!-- On accent/dark (e.g. record header) — default --&gt;
+&lt;orcid-skeleton-placeholder
+  shape="circle"
+  width="36px"
+  height="36px"
+&gt;&lt;/orcid-skeleton-placeholder&gt;
+
+&lt;!-- On light/white (e.g. cards, dialogs) --&gt;
+&lt;orcid-skeleton-placeholder
+  shape="square"
+  width="48px"
+  height="48px"
+  [accentBackground]="false"
+&gt;&lt;/orcid-skeleton-placeholder&gt;</code></pre>
+  </div>
+
   <div inputs>
+    <p>
+      All inputs are optional. Use <code>accentBackground</code> to match the component’s background so the shimmer is visible.
+    </p>
     <ul>
-      <li><code>shape</code>: 'square' | 'circle' (default: 'square')</li>
-      <li><code>width</code>: string (default: '100%')</li>
-      <li><code>height</code>: string (default: '100%')</li>
-      <li>
-        <code>shimmerPercentage</code>: number (default: 100) - Percentage of
-        container size that the shimmer effect will cover (centered)
-      </li>
+      <li><code>shape</code>: <code>'square'</code> | <code>'circle'</code> (default: <code>'square'</code>)</li>
+      <li><code>width</code>: string (default: <code>'100%'</code>) — any valid CSS width</li>
+      <li><code>height</code>: string (default: <code>'100%'</code>) — any valid CSS height</li>
+      <li><code>shimmerPercentage</code>: number (default: 100) — percentage of the element the shimmer band covers, centered</li>
+      <li><code>accentBackground</code>: boolean (default: <code>true</code>) — <code>true</code> for accent/dark backgrounds (light shimmer); <code>false</code> for light/white backgrounds (dark shimmer)</li>
     </ul>
   </div>
 </app-documentation-page>

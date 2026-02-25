@@ -144,6 +144,30 @@
   flex-shrink: 0;
 }
 
+// Skeleton (shimmer) card placeholders
+.import-works-dialog__card--skeleton {
+  pointer-events: none;
+
+  .import-works-dialog__skeleton-title {
+    margin-bottom: 2px;
+    display: block;
+  }
+
+  .import-works-dialog__skeleton-line {
+    margin-top: 4px;
+    display: block;
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+  }
+
+  .import-works-dialog__skeleton-btn {
+    border-radius: 4px;
+    display: block;
+  }
+}
+
 
 .import-works-dialog__btn-connect {
   font-size: var(--orcid-font-size-body-small, 14px) !important;

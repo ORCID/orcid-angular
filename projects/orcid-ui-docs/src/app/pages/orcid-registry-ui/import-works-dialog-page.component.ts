@@ -1,6 +1,8 @@
 import { Component } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { FormsModule } from '@angular/forms'
+import { of } from 'rxjs'
+import { delay } from 'rxjs/operators'
 import { MatButtonModule } from '@angular/material/button'
 import { MatDialog } from '@angular/material/dialog'
 import { MatFormFieldModule } from '@angular/material/form-field'
@@ -88,6 +90,39 @@ export class ImportWorksDialogPageComponent {
     this._dialog.open(ImportWorksDialogComponent, {
       panelClass: ORCID_MODAL_DIALOG_PANEL_CLASS,
       data,
+      width: '850px',
+      maxHeight: '90vh',
     })
+  }
+
+  /** Opens the dialog with loading (shimmer) state, then fills in data after a short delay to demo the flow. */
+  openDialogWithLoading(): void {
+    const dialogRef = this._dialog.open(ImportWorksDialogComponent, {
+      panelClass: ORCID_MODAL_DIALOG_PANEL_CLASS,
+      data: {
+        loading: true,
+        title: this.title,
+        certifiedLinks: [],
+        moreServicesLinks: [],
+      } as ImportWorksDialogData,
+      width: '850px',
+      maxHeight: '90vh',
+    })
+    const data: ImportWorksDialogData = {
+      loading: false,
+      title: this.title,
+      introText: this.introText,
+      supportLink:
+        this.supportLinkUrl && this.supportLinkLabel
+          ? { url: this.supportLinkUrl, label: this.supportLinkLabel }
+          : undefined,
+      certifiedLinks: [...this.certifiedLinks],
+      moreServicesLinks: [...this.moreServicesLinks],
+    }
+    of(data)
+      .pipe(delay(5000))
+      .subscribe((d) => {
+        dialogRef.componentInstance.data = d
+      })
   }
 }

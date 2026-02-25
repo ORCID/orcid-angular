@@ -68,6 +68,9 @@
       <button mat-flat-button type="button" (click)="openDialog()">
         Open Import your works dialog
       </button>
+      <button mat-stroked-button type="button" (click)="openDialogWithLoading()">
+        Open with loading (shimmer)
+      </button>
     </div>
   </div>
 
@@ -81,6 +84,23 @@ import &#123;
 
 // ...
 
+// Open with loading state (shimmer), then update when data is ready:
+const dialogRef = this.dialog.open(ImportWorksDialogComponent, &#123;
+  panelClass: ORCID_MODAL_DIALOG_PANEL_CLASS,
+  data: &#123;
+    loading: true,
+    title: 'Import your works',
+    certifiedLinks: [],
+    moreServicesLinks: [],
+  &#125; as ImportWorksDialogData,
+  width: '850px',
+  maxHeight: '90vh',
+&#125;)
+this.loadDialogData().subscribe((data) => &#123;
+  dialogRef.componentInstance.data = &#123; ...data, loading: false &#125;
+&#125;)
+
+// Or open with data already loaded:
 this.dialog.open(ImportWorksDialogComponent, &#123;
   panelClass: ORCID_MODAL_DIALOG_PANEL_CLASS,
   data: &#123;
@@ -90,6 +110,8 @@ this.dialog.open(ImportWorksDialogComponent, &#123;
     certifiedLinks: [&#123; name, description, url, connected &#125;],
     moreServicesLinks: [&#123; name, description, url &#125;],
   &#125; as ImportWorksDialogData,
+  width: '850px',
+  maxHeight: '90vh',
 &#125;)</code></pre>
   </div>
 
@@ -99,6 +121,7 @@ this.dialog.open(ImportWorksDialogComponent, &#123;
       <code>ImportWorksDialogData</code>.
     </p>
     <ul>
+      <li><code>loading</code>: Optional. When <code>true</code>, the dialog shows shimmer skeleton placeholders for both sections (certified and more services) instead of link content. Use when fetching data asynchronously; set to <code>false</code> when data is ready (e.g. <code>dialogRef.componentInstance.data = &#123; ...data, loading: false &#125;</code>). Uses <code>orcid-skeleton-placeholder</code> from <code>@orcid/ui</code>.</li>
       <li><code>title</code>: Header text.</li>
       <li><code>introText</code>: Optional intro paragraph.</li>
       <li><code>supportLink</code>: Optional &#123; url, label &#125; link below intro.</li>

@@ -1,12 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { Subject } from 'rxjs'
 import { MatDialogRef } from '@angular/material/dialog'
-import { take, takeUntil } from 'rxjs/operators'
+import { takeUntil } from 'rxjs/operators'
 import { RecordImportWizard } from '../../../../../types/record-peer-review-import.endpoint'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import { RecordWorksService } from '../../../../../core/record-works/record-works.service'
-import { TogglzService } from '../../../../../core/togglz/togglz.service'
-import { TogglzFlag } from '../../../../../types/config.endpoint'
 import { sortBy } from 'lodash'
 
 @Component({
@@ -26,23 +24,14 @@ export class ModalWorksSearchLinkComponent implements OnInit, OnDestroy {
   workTypeSelected = 'All'
   geographicalAreaSelected = 'All'
   total = 0
-  /** When true, use new search-and-link endpoint and UI (no work type/geo filters, show isConnected). */
-  useNewSearchLinkUi = false
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
-    private _recordWorksService: RecordWorksService,
-    private _togglz: TogglzService
+    private _recordWorksService: RecordWorksService
   ) {}
 
   ngOnInit(): void {
-    this._togglz
-      .getStateOf(TogglzFlag.SEARCH_AND_LINK_WIZARD_WITH_CERTIFIED_AND_FEATURED_LINKS)
-      .pipe(take(1), takeUntil(this.$destroy))
-      .subscribe((enabled) => {
-        this.useNewSearchLinkUi = enabled
-        this.loadWorkImportWizardList()
-      })
+    this.loadWorkImportWizardList()
   }
 
   loadWorkImportWizardList(): void {
