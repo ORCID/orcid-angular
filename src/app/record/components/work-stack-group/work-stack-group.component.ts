@@ -3,7 +3,10 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  Inject,
   Input,
+  LOCALE_ID,
+  OnDestroy,
   OnInit,
   Output,
   QueryList,
@@ -15,7 +18,7 @@ import { MatDialog } from '@angular/material/dialog'
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator'
 import { isEmpty } from 'lodash'
 import { Observable, Subject } from 'rxjs'
-import { first, take } from 'rxjs/operators'
+import { first, take, takeUntil } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import {
   ADD_EVENT_ACTION,
@@ -50,6 +53,11 @@ import { ModalCombineWorksWithSelectorComponent } from '../work/modals/modal-com
 import { GroupingSuggestions } from 'src/app/types/works.endpoint'
 import { AnnouncerService } from 'src/app/core/announcer/announcer.service'
 import { TogglzService } from '../../../core/togglz/togglz.service'
+import { TogglzFlag } from '../../../types/config.endpoint'
+import {
+  ImportWorksDialogComponent,
+  ORCID_MODAL_DIALOG_PANEL_CLASS,
+} from '@orcid/registry-ui'
 
 @Component({
   selector: 'app-work-stack-group',
@@ -60,7 +68,7 @@ import { TogglzService } from '../../../core/togglz/togglz.service'
   ],
   standalone: false,
 })
-export class WorkStackGroupComponent implements OnInit {
+export class WorkStackGroupComponent implements OnInit, OnDestroy {
   paginatorLabel
   showManageSimilarWorks = false
   defaultPageSize = DEFAULT_PAGE_SIZE
@@ -78,11 +86,10 @@ export class WorkStackGroupComponent implements OnInit {
 
   userRecordContext: UserRecordOptions = {}
 
-  addMenuOptions = [
+  private _baseAddMenuOptions = [
     {
       label: $localize`:@@shared.searchLink:Search & Link`,
       action: ADD_EVENT_ACTION.searchAndLink,
-      modal: ModalWorksSearchLinkComponent,
       id: 'cy-add-work-search-link',
     },
     {
@@ -105,7 +112,6 @@ export class WorkStackGroupComponent implements OnInit {
       modal: WorkBibtexModalComponent,
       id: 'cy-add-work-bibtext',
     },
-
     {
       label: $localize`:@@shared.addManually:Add manually`,
       action: ADD_EVENT_ACTION.addManually,
@@ -113,6 +119,14 @@ export class WorkStackGroupComponent implements OnInit {
       id: 'cy-add-work-manually',
     },
   ]
+
+  addMenuOptions: {
+    label: string
+    action: ADD_EVENT_ACTION
+    modal?: ComponentType<any>
+    type?: EXTERNAL_ID_TYPE_WORK
+    id?: string
+  }[] = this._buildAddMenuOptions(false)
 
   $destroy: Subject<boolean> = new Subject<boolean>()
   $loading: Observable<boolean>
@@ -143,7 +157,8 @@ export class WorkStackGroupComponent implements OnInit {
     private _works: RecordWorksService,
     private _matPaginatorIntl: MatPaginatorIntl,
     private _announce: AnnouncerService,
-    private _togglz: TogglzService
+    private _togglz: TogglzService,
+    @Inject(LOCALE_ID) private _locale: string
   ) {}
 
   ngOnInit(): void {
@@ -168,6 +183,57 @@ export class WorkStackGroupComponent implements OnInit {
     this._platform.get().subscribe((platform) => {
       this.platform = platform
     })
+
+    this._togglz
+      .getStateOf(TogglzFlag.SEARCH_AND_LINK_WIZARD_WITH_CERTIFIED_AND_FEATURED_LINKS)
+      .pipe(take(1), takeUntil(this.$destroy))
+      .subscribe((useCertifiedAndFeatured) => {
+        this.addMenuOptions = this._buildAddMenuOptions(useCertifiedAndFeatured)
+      })
+  }
+
+  private _buildAddMenuOptions(useCertifiedAndFeatured: boolean) {
+    return this._baseAddMenuOptions.map((opt) => {
+      if (opt.action === ADD_EVENT_ACTION.searchAndLink) {
+        return {
+          ...opt,
+          modal: useCertifiedAndFeatured
+            ? undefined
+            : ModalWorksSearchLinkComponent,
+        }
+      }
+      return { ...opt }
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.$destroy.next(true)
+    this.$destroy.unsubscribe()
+  }
+
+  /** Called when user chooses Search & Link and the certified/featured dialog is used (no modal in addMenuOptions). */
+  onAddEvent(action: ADD_EVENT_ACTION): void {
+    if (action !== ADD_EVENT_ACTION.searchAndLink) {
+      return
+    }
+    const dialogRef = this._dialog.open(ImportWorksDialogComponent, {
+      panelClass: ORCID_MODAL_DIALOG_PANEL_CLASS,
+      data: this._works.getImportWorksDialogDataSkeleton(),
+      width: '850px',
+      maxHeight: '90vh',
+    })
+    this._works
+      .loadSearchAndLinkWizardDialogData(this._normalizeLocale())
+      .pipe(takeUntil(this.$destroy))
+      .subscribe({
+        next: (data) => {
+          dialogRef.componentInstance.data = { ...data, loading: false }
+        },
+      })
+  }
+
+  private _normalizeLocale(): string {
+    return this._locale === 'en-US' ? 'en' : this._locale
   }
 
   private getGroupingSuggestions() {

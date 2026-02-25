@@ -18,6 +18,7 @@
     [sortTypes]="sortTypes"
     [sortType]="'date'"
     [addMenuOptions]="addMenuOptions"
+    (addEvent)="onAddEvent($event)"
     (sort)="sortEvent($event)"
     [type]="'works'"
     id="cy-works-panels"

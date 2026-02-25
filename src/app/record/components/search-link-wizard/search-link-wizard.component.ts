@@ -15,20 +15,19 @@ export class SearchLinkWizardComponent implements OnInit {
   ngOnInit(): void {}
 
   openImportWizardUrlFilter(client: RecordImportWizard): string {
-    if (client.status === 'RETIRED') {
-      return client.clientWebsite
-    } else {
-      return (
-        runtimeEnvironment.BASE_URL +
-        'oauth/authorize' +
-        '?client_id=' +
-        client.id +
-        '&response_type=code&scope=' +
-        client.scopes +
-        '&redirect_uri=' +
-        client.redirectUri
-      )
+    if (client.isConnected || client.status === 'RETIRED') {
+      return client.clientWebsite || '#'
     }
+    return (
+      runtimeEnvironment.BASE_URL +
+      'oauth/authorize' +
+      '?client_id=' +
+      client.id +
+      '&response_type=code&scope=' +
+      encodeURIComponent(client.scopes) +
+      '&redirect_uri=' +
+      encodeURIComponent(client.redirectUri)
+    )
   }
 
   toggle(recordImportWizard: RecordImportWizard) {

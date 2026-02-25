@@ -5,7 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { MatButtonModule } from '@angular/material/button'
 import { TextWithTooltipComponent } from '@orcid/ui'
-import { DocumentationPageComponent } from '../components/documentation-page/documentation-page.component'
+import { DocumentationPageComponent } from '../../components/documentation-page/documentation-page.component'
 
 @Component({
   selector: 'orcid-text-with-tooltip-page',
