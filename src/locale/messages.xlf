@@ -3483,7 +3483,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.ts</context>
-          <context context-type="linenumber">83</context>
+          <context context-type="linenumber">91</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.addManually" datatype="html" resname="shared.addManually">
@@ -3494,7 +3494,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.ts</context>
-          <context context-type="linenumber">110</context>
+          <context context-type="linenumber">116</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.sort" datatype="html" resname="shared.sort">
@@ -7577,6 +7577,59 @@
           <context context-type="linenumber">291</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="works.importYourWorks" datatype="html" resname="works.importYourWorks">
+        <source>Import your works</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
+          <context context-type="linenumber">600</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="works.importIntroText" datatype="html" resname="works.importIntroText">
+        <source>These services can help you update your ORCID record quickly by searching for your research outputs from various databases. Connect to a service to grant permission and add selected research outputs to your ORCID record.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
+          <context context-type="linenumber">601</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="works.importSupportLinkLabel" datatype="html" resname="works.importSupportLinkLabel">
+        <source>Find out more about importing works into your ORCID record</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
+          <context context-type="linenumber">604</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="works.certifiedSectionHeading" datatype="html" resname="works.certifiedSectionHeading">
+        <source>ORCID Certified Services</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
+          <context context-type="linenumber">606</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="works.moreServicesHeading" datatype="html" resname="works.moreServicesHeading">
+        <source>More Services</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
+          <context context-type="linenumber">607</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="works.connectNow" datatype="html" resname="works.connectNow">
+        <source>Connect now</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
+          <context context-type="linenumber">608</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="works.connected" datatype="html" resname="works.connected">
+        <source>Connected</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
+          <context context-type="linenumber">609</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/search-link-wizard/search-link-wizard.component.html</context>
+          <context context-type="linenumber">14,16</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="developerTools.generateNewClientSecret" datatype="html" resname="developerTools.generateNewClientSecret">
         <source>Generate a new client secret</source>
         <context-group purpose="location">
@@ -11487,7 +11540,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.html</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">57</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.selected" datatype="html" resname="shared.selected">
@@ -11946,14 +11999,14 @@
         <source>Show more</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/search-link-wizard/search-link-wizard.component.html</context>
-          <context context-type="linenumber">19,21</context>
+          <context context-type="linenumber">26,28</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.showLess" datatype="html" resname="shared.showLess">
         <source>Show less</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/search-link-wizard/search-link-wizard.component.html</context>
-          <context context-type="linenumber">30,32</context>
+          <context context-type="linenumber">37,39</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.isThisYou" datatype="html" resname="topBar.isThisYou">
@@ -13133,11 +13186,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.ts</context>
-          <context context-type="linenumber">67</context>
+          <context context-type="linenumber">75</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.ts</context>
-          <context context-type="linenumber">124</context>
+          <context context-type="linenumber">138</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work/modals/works-visibility-modal/works-visibility-modal.component.ts</context>
@@ -13173,7 +13226,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.ts</context>
-          <context context-type="linenumber">68</context>
+          <context context-type="linenumber">76</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -13188,7 +13241,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.ts</context>
-          <context context-type="linenumber">69</context>
+          <context context-type="linenumber">77</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -13203,7 +13256,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.ts</context>
-          <context context-type="linenumber">70</context>
+          <context context-type="linenumber">78</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.featuredWorks" datatype="html" resname="shared.featuredWorks">
@@ -13225,7 +13278,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.ts</context>
-          <context context-type="linenumber">125</context>
+          <context context-type="linenumber">139</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.featuredWork" datatype="html" resname="shared.featuredWork">
@@ -13981,21 +14034,21 @@
         <source>Items currently selected</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.html</context>
-          <context context-type="linenumber">64,65</context>
+          <context context-type="linenumber">65,66</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.actions" datatype="html" resname="shared.actions">
         <source>Actions</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.html</context>
-          <context context-type="linenumber">76</context>
+          <context context-type="linenumber">77</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.exportSelectedWorks" datatype="html" resname="works.exportSelectedWorks">
         <source>Export selected works</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.html</context>
-          <context context-type="linenumber">88</context>
+          <context context-type="linenumber">89</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work/modals/modal-export-works/modal-export-works.component.html</context>
@@ -14006,14 +14059,14 @@
         <source>Export ALL works</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.html</context>
-          <context context-type="linenumber">96</context>
+          <context context-type="linenumber">97</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.groupSelectedWorks" datatype="html" resname="works.groupSelectedWorks">
         <source>Group selected works</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.html</context>
-          <context context-type="linenumber">123</context>
+          <context context-type="linenumber">124</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work/modals/modal-combine-works/modal-combine-works.component.html</context>
@@ -14028,70 +14081,70 @@
         <source>5 works maximum,</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.html</context>
-          <context context-type="linenumber">131</context>
+          <context context-type="linenumber">132</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.selected" datatype="html" resname="works.selected">
         <source>selected</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.html</context>
-          <context context-type="linenumber">134</context>
+          <context context-type="linenumber">135</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.setVisibilityForSelectedWorks" datatype="html" resname="works.setVisibilityForSelectedWorks">
         <source>Set visibility for selected works</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.html</context>
-          <context context-type="linenumber">145</context>
+          <context context-type="linenumber">146</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.deleteSelectedWorks" datatype="html" resname="works.deleteSelectedWorks">
         <source>Delete selected works</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.html</context>
-          <context context-type="linenumber">159</context>
+          <context context-type="linenumber">160</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.manageSimilarWorks" datatype="html" resname="works.manageSimilarWorks">
         <source>Manage similar works</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.html</context>
-          <context context-type="linenumber">170,172</context>
+          <context context-type="linenumber">171,173</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.worksDescription" datatype="html" resname="shared.worksDescription">
         <source>Add your research outputs such as publications, data sets, conference presentations and more.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.html</context>
-          <context context-type="linenumber">189,192</context>
+          <context context-type="linenumber">190,193</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.worksLearnMore" datatype="html" resname="shared.worksLearnMore">
         <source>Learn more about adding works to your ORCID record</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.html</context>
-          <context context-type="linenumber">199,201</context>
+          <context context-type="linenumber">200,202</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.addDoi" datatype="html" resname="works.addDoi">
         <source>Add DOI</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.ts</context>
-          <context context-type="linenumber">89</context>
+          <context context-type="linenumber">96</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.addPubmed" datatype="html" resname="works.addPubmed">
         <source>Add PubMed ID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.ts</context>
-          <context context-type="linenumber">96</context>
+          <context context-type="linenumber">103</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.addBibtex" datatype="html" resname="works.addBibtex">
         <source>Add BibTeX</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.ts</context>
-          <context context-type="linenumber">103</context>
+          <context context-type="linenumber">110</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.combineSelectedWorks" datatype="html" resname="works.combineSelectedWorks">
