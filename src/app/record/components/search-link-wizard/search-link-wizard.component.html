@@ -16,9 +16,9 @@
     </span>
   </h2>
   <p class="orc-font-body-small">
-    <ng-container *ngIf="(recordImportWizard.description || recordImportWizard.redirectUriMetadata?.defaultDescription || '').length > 125">
+    <ng-container *ngIf="(recordImportWizard.description || '').length > 125">
       <ng-container *ngIf="!recordImportWizard.show">
-        {{ (recordImportWizard.description || recordImportWizard.redirectUriMetadata?.defaultDescription || '').substring(0, 125) + '...' }}
+        {{ (recordImportWizard.description || '').substring(0, 125) + '...' }}
         <a
           class="underline"
           i18n="@@shared.showMore"
@@ -28,7 +28,7 @@
         </a>
       </ng-container>
       <ng-container *ngIf="recordImportWizard.show">
-        {{ recordImportWizard.description || recordImportWizard.redirectUriMetadata?.defaultDescription || '' }}
+        {{ recordImportWizard.description || '' }}
         <br />
         <a
           class="underline"
@@ -39,8 +39,8 @@
         </a>
       </ng-container>
     </ng-container>
-    <ng-container *ngIf="(recordImportWizard.description || recordImportWizard.redirectUriMetadata?.defaultDescription || '').length <= 125">
-      {{ recordImportWizard.description || recordImportWizard.redirectUriMetadata?.defaultDescription || '' }}
+    <ng-container *ngIf="(recordImportWizard.description || '').length <= 125">
+      {{ recordImportWizard.description || '' }}
     </ng-container>
   </p>
 </div>

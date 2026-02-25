@@ -24,7 +24,6 @@ export interface RecordImportWizard {
 
 /**
  * Response shape from GET workspace/retrieve-works-search-and-link-wizard.json.
- * Uses "connected" (JSON) instead of "isConnected".
  */
 export interface SearchAndLinkWizardFormSummaryResponse {
   id: string

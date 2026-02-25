@@ -17,6 +17,8 @@ declare const runtimeEnvironment: any
  * support (configured via withXsrfConfiguration) does not attach the header,
  * especially when using the local proxy setup.
  *
+ * Only active when not in production (local development runs).
+ *
  * Behaviour:
  * - For mutating backend calls (POST/PUT/PATCH/DELETE) to ORCID web APIs:
  *   - If an XSRF header is already present, do nothing.
@@ -32,6 +34,11 @@ export class XsrfFallbackInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+    // Only apply fallback in local development (e.g. proxy / same-origin dev)
+    if (runtimeEnvironment.production) {
+      return next.handle(req)
+    }
+
     const method = req.method.toUpperCase()
 
     // Only care about mutating requests
