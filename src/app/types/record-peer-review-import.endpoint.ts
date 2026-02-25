@@ -1,4 +1,7 @@
-export type RecordImportWizardMetadataType = 'Featured' | 'Default' | 'Certified'
+export type RecordImportWizardMetadataType =
+  | 'Featured'
+  | 'Default'
+  | 'Certified'
 
 export interface RecordImportWizardMetadata {
   type?: RecordImportWizardMetadataType

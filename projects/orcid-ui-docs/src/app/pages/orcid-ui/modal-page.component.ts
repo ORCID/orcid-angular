@@ -6,10 +6,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatDialog, MatDialogModule } from '@angular/material/dialog'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
-import {
-  OrcidModalComponent,
-  ORCID_MODAL_DIALOG_PANEL_CLASS,
-} from '@orcid/ui'
+import { OrcidModalComponent, ORCID_MODAL_DIALOG_PANEL_CLASS } from '@orcid/ui'
 import { DocumentationPageComponent } from '../../components/documentation-page/documentation-page.component'
 
 type ModalDocsConfig = {
@@ -39,7 +36,9 @@ type ModalDocsConfig = {
       </div>
 
       <div orcidModalFooter>
-        <button mat-button type="button" mat-dialog-close="cancel">Cancel</button>
+        <button mat-button type="button" mat-dialog-close="cancel">
+          Cancel
+        </button>
         <button mat-flat-button type="button" mat-dialog-close="confirm">
           Confirm
         </button>
@@ -91,4 +90,3 @@ export class ModalPageComponent {
     })
   }
 }
-

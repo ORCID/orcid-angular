@@ -68,8 +68,7 @@ export class ImportWorksDialogPageComponent {
     },
     {
       name: 'Europe PMC',
-      description:
-        'Link your Europe PMC publications to your ORCID record.',
+      description: 'Link your Europe PMC publications to your ORCID record.',
       url: 'https://europepmc.org/',
     },
   ]

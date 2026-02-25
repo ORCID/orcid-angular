@@ -40,10 +40,7 @@
   border-radius: var(--orcid-space-1, 4px);
   border: 2px solid var(--orcid-ui-background-darkest, #212121);
   background: var(--orcid-surface, #ffffff);
-  box-shadow: var(
-    --orcid-shadow-modal,
-    4px 4px 20px 0px rgba(0, 0, 0, 0.2)
-  );
+  box-shadow: var(--orcid-shadow-modal, 4px 4px 20px 0px rgba(0, 0, 0, 0.2));
   overflow: hidden;
   display: flex;
   flex-direction: column;

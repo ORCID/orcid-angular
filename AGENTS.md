@@ -13,12 +13,11 @@ Both are path-mapped from repo root (`tsconfig.json`). Main app and docs consume
 
 ## When changing a library component’s API
 
-Update the main app and that component’s doc page (usage snippet, inputs list, examples). 
+Update the main app and that component’s doc page (usage snippet, inputs list, examples).
 
 ## If component styles differ between docs and main app
 
 If a library component (e.g. in orcid-registry-ui) looks correct in the docs app but wrong in the main app (e.g. missing margins or spacing), try **resetting the main project**: clean build artifacts, reinstall, or reset local overrides. Stale or inconsistent build/cache state in the main app can cause component styles to not apply as in docs; a fresh build often resolves it.
-
 
 ## Dialogs and async data
 

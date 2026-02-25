@@ -69,9 +69,13 @@ describe('XsrfFallbackInterceptor', () => {
   it('passes through when x-xsrf-token header is already present', () => {
     cookieGetSpy.and.returnValue('cookie-token')
     http
-      .post(apiBase + 'works/work.json', {}, {
-        headers: { 'x-xsrf-token': 'existing-token' },
-      })
+      .post(
+        apiBase + 'works/work.json',
+        {},
+        {
+          headers: { 'x-xsrf-token': 'existing-token' },
+        }
+      )
       .subscribe()
 
     const req = httpMock.expectOne(apiBase + 'works/work.json')

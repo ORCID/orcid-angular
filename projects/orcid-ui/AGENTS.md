@@ -1,4 +1,5 @@
 # Orcid UI — Agent Notes
+
 This repo contains an Angular library at `projects/orcid-ui` published as `@orcid/ui`.
 Use this document as a fast orientation and a checklist for making safe, consistent changes.
 
@@ -81,5 +82,3 @@ import { MatDialog } from '@angular/material/dialog'
 ```
 
 escape braces in the HTML (e.g. `&#123;` and `&#125;`) to avoid template parse errors.
-
-

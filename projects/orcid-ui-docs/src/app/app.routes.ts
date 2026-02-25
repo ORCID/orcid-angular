@@ -40,9 +40,9 @@ export const routes: Routes = [
   {
     path: 'material-buttons-directives',
     loadComponent: () =>
-      import('./pages/orcid-ui/material-buttons-directives-page.component').then(
-        (m) => m.MaterialButtonsDirectivesPageComponent
-      ),
+      import(
+        './pages/orcid-ui/material-buttons-directives-page.component'
+      ).then((m) => m.MaterialButtonsDirectivesPageComponent),
   },
   {
     path: 'alert-message',

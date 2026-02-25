@@ -76,18 +76,27 @@ describe('WorkStackGroupComponent', () => {
       componentInstance: { data: null },
       afterClosed: () => of(undefined),
     } as any)
-    const skeleton = { loading: true, certifiedLinks: [], moreServicesLinks: [] }
-    spyOn(recordWorksService, 'getImportWorksDialogDataSkeleton').and.returnValue(
-      skeleton as any
-    )
+    const skeleton = {
+      loading: true,
+      certifiedLinks: [],
+      moreServicesLinks: [],
+    }
+    spyOn(
+      recordWorksService,
+      'getImportWorksDialogDataSkeleton'
+    ).and.returnValue(skeleton as any)
     spyOn(
       recordWorksService,
       'loadSearchAndLinkWizardDialogData'
-    ).and.returnValue(of({ loading: false, certifiedLinks: [], moreServicesLinks: [] } as any))
+    ).and.returnValue(
+      of({ loading: false, certifiedLinks: [], moreServicesLinks: [] } as any)
+    )
 
     component.onAddEvent(ADD_EVENT_ACTION.searchAndLink)
 
-    expect(recordWorksService.getImportWorksDialogDataSkeleton).toHaveBeenCalled()
+    expect(
+      recordWorksService.getImportWorksDialogDataSkeleton
+    ).toHaveBeenCalled()
     expect(matDialog.open).toHaveBeenCalledWith(
       jasmine.anything(),
       jasmine.objectContaining({
@@ -96,7 +105,9 @@ describe('WorkStackGroupComponent', () => {
         maxHeight: '90vh',
       })
     )
-    expect(recordWorksService.loadSearchAndLinkWizardDialogData).toHaveBeenCalled()
+    expect(
+      recordWorksService.loadSearchAndLinkWizardDialogData
+    ).toHaveBeenCalled()
   })
 
   it('onAddEvent(non-searchAndLink) does not open dialog', () => {

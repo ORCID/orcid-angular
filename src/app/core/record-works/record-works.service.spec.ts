@@ -125,7 +125,10 @@ describe('RecordWorksService', () => {
           name: 'Certified Service',
           redirectUri: 'https://app.example/cb',
           scopes: '/read-limited',
-          redirectUriMetadata: { type: 'Certified', defaultDescription: 'Cert desc' },
+          redirectUriMetadata: {
+            type: 'Certified',
+            defaultDescription: 'Cert desc',
+          },
         },
         {
           id: 'more-1',

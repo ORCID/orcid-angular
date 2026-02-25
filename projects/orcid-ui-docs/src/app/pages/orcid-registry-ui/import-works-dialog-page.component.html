@@ -4,7 +4,8 @@
 >
   <div controls>
     <p>
-      Configure the dialog data and open it to preview. This component is part of
+      Configure the dialog data and open it to preview. This component is part
+      of
       <code>@orcid/registry-ui</code>.
     </p>
     <div class="controls-grid">
@@ -30,7 +31,10 @@
     </div>
 
     <h4>Certified links (first connected = show "Connected")</h4>
-    <div class="controls-grid" *ngFor="let link of certifiedLinks; let i = index">
+    <div
+      class="controls-grid"
+      *ngFor="let link of certifiedLinks; let i = index"
+    >
       <mat-form-field appearance="outline">
         <mat-label>Certified {{ i + 1 }} name</mat-label>
         <input matInput [(ngModel)]="link.name" />
@@ -47,7 +51,10 @@
     </div>
 
     <h4>More services links</h4>
-    <div class="controls-grid" *ngFor="let link of moreServicesLinks; let i = index">
+    <div
+      class="controls-grid"
+      *ngFor="let link of moreServicesLinks; let i = index"
+    >
       <mat-form-field appearance="outline">
         <mat-label>More {{ i + 1 }} name</mat-label>
         <input matInput [(ngModel)]="link.name" />
@@ -68,7 +75,11 @@
       <button mat-flat-button type="button" (click)="openDialog()">
         Open Import your works dialog
       </button>
-      <button mat-stroked-button type="button" (click)="openDialogWithLoading()">
+      <button
+        mat-stroked-button
+        type="button"
+        (click)="openDialogWithLoading()"
+      >
         Open with loading (shimmer)
       </button>
     </div>
@@ -121,20 +132,35 @@ this.dialog.open(ImportWorksDialogComponent, &#123;
       <code>ImportWorksDialogData</code>.
     </p>
     <ul>
-      <li><code>loading</code>: Optional. When <code>true</code>, the dialog shows shimmer skeleton placeholders for both sections (certified and more services) instead of link content. Use when fetching data asynchronously; set to <code>false</code> when data is ready (e.g. <code>dialogRef.componentInstance.data = &#123; ...data, loading: false &#125;</code>). Uses <code>orcid-skeleton-placeholder</code> from <code>@orcid/ui</code>.</li>
+      <li>
+        <code>loading</code>: Optional. When <code>true</code>, the dialog shows
+        shimmer skeleton placeholders for both sections (certified and more
+        services) instead of link content. Use when fetching data
+        asynchronously; set to <code>false</code> when data is ready (e.g.
+        <code
+          >dialogRef.componentInstance.data = &#123; ...data, loading: false
+          &#125;</code
+        >). Uses <code>orcid-skeleton-placeholder</code> from
+        <code>@orcid/ui</code>.
+      </li>
       <li><code>title</code>: Header text.</li>
       <li><code>introText</code>: Optional intro paragraph.</li>
-      <li><code>supportLink</code>: Optional &#123; url, label &#125; link below intro.</li>
       <li>
-        <code>certifiedLinks</code>: Array of &#123; name, description, url, connected?, icon? &#125;. Optional <code>icon</code> is a Material icon name.
-        When <code>connected</code> is true, the card shows "Connected" instead of "Connect now".
+        <code>supportLink</code>: Optional &#123; url, label &#125; link below
+        intro.
       </li>
       <li>
-        <code>moreServicesLinks</code>: Ordered array of &#123; name, description, url, icon? &#125;. Optional <code>icon</code> is a Material icon name.
+        <code>certifiedLinks</code>: Array of &#123; name, description, url,
+        connected?, icon? &#125;. Optional <code>icon</code> is a Material icon
+        name. When <code>connected</code> is true, the card shows "Connected"
+        instead of "Connect now".
+      </li>
+      <li>
+        <code>moreServicesLinks</code>: Ordered array of &#123; name,
+        description, url, icon? &#125;. Optional <code>icon</code> is a Material
+        icon name.
       </li>
     </ul>
-    <p>
-      "Connect now" buttons open the link <code>url</code> in a new tab.
-    </p>
+    <p>"Connect now" buttons open the link <code>url</code> in a new tab.</p>
   </div>
 </app-documentation-page>

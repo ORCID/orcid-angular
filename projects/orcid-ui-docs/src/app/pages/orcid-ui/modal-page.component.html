@@ -15,7 +15,9 @@
         <input matInput [(ngModel)]="config.closeAriaLabel" />
       </mat-form-field>
 
-      <mat-checkbox [(ngModel)]="config.showClose"> Show close icon </mat-checkbox>
+      <mat-checkbox [(ngModel)]="config.showClose">
+        Show close icon
+      </mat-checkbox>
 
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Body text</mat-label>
@@ -65,7 +67,9 @@ this.dialog.open(YourDialogComponent, &#123;
     <ul>
       <li><code>title</code>: Header title text (optional).</li>
       <li><code>showClose</code>: Show/hide the close icon button.</li>
-      <li><code>closeAriaLabel</code>: Accessible label for the close button.</li>
+      <li>
+        <code>closeAriaLabel</code>: Accessible label for the close button.
+      </li>
     </ul>
 
     <h4>Slots</h4>
@@ -76,4 +80,3 @@ this.dialog.open(YourDialogComponent, &#123;
     </ul>
   </div>
 </app-documentation-page>
-

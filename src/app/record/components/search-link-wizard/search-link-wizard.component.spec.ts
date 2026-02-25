@@ -59,7 +59,6 @@ describe('SearchLinkWizardComponent', () => {
       )
     })
 
-
     it('builds OAuth authorize URL when not connected and not retired', () => {
       const client: RecordImportWizard = {
         id: 'my-client',

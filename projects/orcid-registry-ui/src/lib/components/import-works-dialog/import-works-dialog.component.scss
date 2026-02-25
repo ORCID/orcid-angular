@@ -62,7 +62,8 @@
   gap: var(--orcid-space-4, 16px);
 }
 
-.import-works-dialog__card-list:has(.import-works-dialog__card--certified) .import-works-dialog__card--certified {
+.import-works-dialog__card-list:has(.import-works-dialog__card--certified)
+  .import-works-dialog__card--certified {
   border-top: none;
 }
 
@@ -167,7 +168,6 @@
     display: block;
   }
 }
-
 
 .import-works-dialog__btn-connect {
   font-size: var(--orcid-font-size-body-small, 14px) !important;

@@ -185,7 +185,9 @@ export class WorkStackGroupComponent implements OnInit, OnDestroy {
     })
 
     this._togglz
-      .getStateOf(TogglzFlag.SEARCH_AND_LINK_WIZARD_WITH_CERTIFIED_AND_FEATURED_LINKS)
+      .getStateOf(
+        TogglzFlag.SEARCH_AND_LINK_WIZARD_WITH_CERTIFIED_AND_FEATURED_LINKS
+      )
       .pipe(take(1), takeUntil(this.$destroy))
       .subscribe((useCertifiedAndFeatured) => {
         this.addMenuOptions = this._buildAddMenuOptions(useCertifiedAndFeatured)

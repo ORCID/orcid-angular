@@ -45,7 +45,7 @@ import { CommonModule } from '@angular/common'
           90deg,
           transparent 0%,
           rgba(0, 0, 0, 0.05) 25%,
-          rgba(0, 0, 0, 0.10) 50%,
+          rgba(0, 0, 0, 0.1) 50%,
           rgba(0, 0, 0, 0.05) 75%,
           transparent 100%
         );
@@ -93,8 +93,9 @@ export class SkeletonPlaceholderComponent {
 
   @HostBinding('class') get hostClasses(): string {
     const shapeClass = this.shape
-    const surfaceClass =
-      !this.accentBackground ? 'skeleton-placeholder--surface' : ''
+    const surfaceClass = !this.accentBackground
+      ? 'skeleton-placeholder--surface'
+      : ''
     return [shapeClass, surfaceClass].filter(Boolean).join(' ')
   }
 

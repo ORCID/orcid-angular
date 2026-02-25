@@ -1,12 +1,6 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import {
-  BehaviorSubject,
-  forkJoin,
-  Observable,
-  of,
-  ReplaySubject,
-} from 'rxjs'
+import { BehaviorSubject, forkJoin, Observable, of, ReplaySubject } from 'rxjs'
 import {
   catchError,
   first,
@@ -571,7 +565,9 @@ export class RecordWorksService {
 
   loadWorkImportWizardList(): Observable<RecordImportWizard[]> {
     return this._togglz
-      .getStateOf(TogglzFlag.SEARCH_AND_LINK_WIZARD_WITH_CERTIFIED_AND_FEATURED_LINKS)
+      .getStateOf(
+        TogglzFlag.SEARCH_AND_LINK_WIZARD_WITH_CERTIFIED_AND_FEATURED_LINKS
+      )
       .pipe(
         take(1),
         switchMap((useNewEndpoint) =>
@@ -622,24 +618,33 @@ export class RecordWorksService {
    * Certified/Featured: description from S3 localize.properties by client id, else redirectUriMetadata.defaultDescription.
    * More Services: description from top-level `description` only.
    */
-  loadSearchAndLinkWizardDialogData(locale: string): Observable<ImportWorksDialogData> {
+  loadSearchAndLinkWizardDialogData(
+    locale: string
+  ): Observable<ImportWorksDialogData> {
     const list$ = this._http.get<SearchAndLinkWizardFormSummaryResponse[]>(
-      runtimeEnvironment.API_WEB + 'workspace/retrieve-works-search-and-link-wizard.json'
+      runtimeEnvironment.API_WEB +
+        'workspace/retrieve-works-search-and-link-wizard.json'
     )
-    const baseUrl = (runtimeEnvironment as { CERTIFIED_LINKS_LOCALIZE_BASE_URL?: string })
-      .CERTIFIED_LINKS_LOCALIZE_BASE_URL?.replace(/\/$/, '')
-    const localizeUrl = baseUrl ? `${baseUrl}/works-search-and-link.${locale}.properties` : null
+    const baseUrl = (
+      runtimeEnvironment as { CERTIFIED_LINKS_LOCALIZE_BASE_URL?: string }
+    ).CERTIFIED_LINKS_LOCALIZE_BASE_URL?.replace(/\/$/, '')
+    const localizeUrl = baseUrl
+      ? `${baseUrl}/works-search-and-link.${locale}.properties`
+      : null
     const localize$ = localizeUrl
-      ? this._http.get(localizeUrl, { responseType: 'text' }).pipe(
-          catchError(() => of(''))
-        )
+      ? this._http
+          .get(localizeUrl, { responseType: 'text' })
+          .pipe(catchError(() => of('')))
       : of('')
 
     return forkJoin({ list: list$, localize: localize$ }).pipe(
       map(({ list, localize }) => {
         const localizeByClientId = this._parsePropertiesFile(localize)
         const certifiedLinks: ImportWorksCertifiedLink[] = []
-        const featuredForMore: Array<{ link: ImportWorksMoreLink; index: number }> = []
+        const featuredForMore: Array<{
+          link: ImportWorksMoreLink
+          index: number
+        }> = []
         const defaultForMore: ImportWorksMoreLink[] = []
 
         for (const item of list) {
@@ -648,7 +653,11 @@ export class RecordWorksService {
           const name = item.name ?? ''
           const redirectUri = item.redirectUri ?? ''
           const scopes = item.scopes ?? ''
-          const oauthUrl = this._buildOAuthAuthorizeUrl(item.id, scopes, redirectUri)
+          const oauthUrl = this._buildOAuthAuthorizeUrl(
+            item.id,
+            scopes,
+            redirectUri
+          )
           const imageUrl = item.redirectUriMetadata?.logoUrl
 
           if (type === 'Certified') {
@@ -687,7 +696,11 @@ export class RecordWorksService {
           ...defaultForMore,
         ]
 
-        return this._getImportWorksDialogDataStatic(certifiedLinks, moreServicesLinks, false)
+        return this._getImportWorksDialogDataStatic(
+          certifiedLinks,
+          moreServicesLinks,
+          false
+        )
       })
     )
   }
@@ -730,7 +743,10 @@ export class RecordWorksService {
       if (eq < 0) continue
       const key = trimmed.slice(0, eq).trim()
       let value = trimmed.slice(eq + 1).trim()
-      value = value.replace(/\\n/g, '\n').replace(/\\t/g, '\t').replace(/\\\\/g, '\\')
+      value = value
+        .replace(/\\n/g, '\n')
+        .replace(/\\t/g, '\t')
+        .replace(/\\\\/g, '\\')
       out[key] = value
     }
     return out

@@ -4,8 +4,10 @@
 >
   <div controls>
     <p>
-      Use the controls below to try different shapes, sizes, and background modes. Toggle
-      <strong>Use on accent background</strong> to switch between light shimmer (for dark areas) and dark shimmer (for white/light surfaces).
+      Use the controls below to try different shapes, sizes, and background
+      modes. Toggle
+      <strong>Use on accent background</strong> to switch between light shimmer
+      (for dark areas) and dark shimmer (for white/light surfaces).
     </p>
     <div class="controls-grid">
       <mat-form-field appearance="outline">
@@ -48,9 +50,13 @@
     <div class="example-group">
       <h4>Playground</h4>
       <p class="example-caption">
-        Background switches with the checkbox: dark when accent, white when surface.
+        Background switches with the checkbox: dark when accent, white when
+        surface.
       </p>
-      <div class="example-container" [ngClass]="config.accentBackground ? 'accent' : 'surface'">
+      <div
+        class="example-container"
+        [ngClass]="config.accentBackground ? 'accent' : 'surface'"
+      >
         <orcid-skeleton-placeholder
           [shape]="config.shape"
           [width]="config.width"
@@ -106,14 +112,31 @@
 
   <div inputs>
     <p>
-      All inputs are optional. Use <code>accentBackground</code> to match the component’s background so the shimmer is visible.
+      All inputs are optional. Use <code>accentBackground</code> to match the
+      component’s background so the shimmer is visible.
     </p>
     <ul>
-      <li><code>shape</code>: <code>'square'</code> | <code>'circle'</code> (default: <code>'square'</code>)</li>
-      <li><code>width</code>: string (default: <code>'100%'</code>) — any valid CSS width</li>
-      <li><code>height</code>: string (default: <code>'100%'</code>) — any valid CSS height</li>
-      <li><code>shimmerPercentage</code>: number (default: 100) — percentage of the element the shimmer band covers, centered</li>
-      <li><code>accentBackground</code>: boolean (default: <code>true</code>) — <code>true</code> for accent/dark backgrounds (light shimmer); <code>false</code> for light/white backgrounds (dark shimmer)</li>
+      <li>
+        <code>shape</code>: <code>'square'</code> |
+        <code>'circle'</code> (default: <code>'square'</code>)
+      </li>
+      <li>
+        <code>width</code>: string (default: <code>'100%'</code>) — any valid
+        CSS width
+      </li>
+      <li>
+        <code>height</code>: string (default: <code>'100%'</code>) — any valid
+        CSS height
+      </li>
+      <li>
+        <code>shimmerPercentage</code>: number (default: 100) — percentage of
+        the element the shimmer band covers, centered
+      </li>
+      <li>
+        <code>accentBackground</code>: boolean (default: <code>true</code>) —
+        <code>true</code> for accent/dark backgrounds (light shimmer);
+        <code>false</code> for light/white backgrounds (dark shimmer)
+      </li>
     </ul>
   </div>
 </app-documentation-page>

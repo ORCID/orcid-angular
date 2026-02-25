@@ -29,4 +29,3 @@ export class OrcidModalComponent {
     this.dialogRef?.close()
   }
 }
-
