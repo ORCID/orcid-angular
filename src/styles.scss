@@ -141,3 +141,11 @@ html {
   text-align: center;
   max-width: unset;
 }
+
+// Import your works modal: full width/height on mobile (overlay pane is outside component so this must be global)
+@media (max-width: 599px) {
+  .cdk-overlay-pane.mat-mdc-dialog-panel.orcid-modal-dialog-panel {
+    max-width: 100vw !important;
+    min-width: 100vw !important;
+  }
+}
