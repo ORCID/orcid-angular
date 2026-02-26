@@ -120,7 +120,12 @@
         </mat-icon>
         <ng-container *ngIf="!isMobile" i18n="@@shared.add"> Add </ng-container>
       </button>
-      <mat-menu #menuAdd="matMenu">
+      <mat-menu
+        #menuAdd="matMenu"
+        [class.works-add-menu-panel]="
+          type === 'works' && useNewWorksAddMenuStyle
+        "
+      >
         <ng-container *ngIf="type === 'education' || type === 'qualification'">
           <button mat-menu-item (click)="add('education')">
             <ng-container i18n="@@shared.addEducation"
@@ -202,7 +207,34 @@
             >
           </button>
         </ng-container>
-        <ng-container *ngIf="type === 'works'">
+        <ng-container *ngIf="type === 'works' && useNewWorksAddMenuStyle">
+          <button
+            mat-menu-item
+            class="works-add-menu-item"
+            [class.works-add-menu-divider]="option.id === 'cy-add-work-doi'"
+            *ngFor="let option of addMenuOptions"
+            (click)="add('works', option.action)"
+            id="{{ option.id }}"
+          >
+            <div class="works-add-menu-text">
+              <span
+                class="works-add-menu-title"
+                [class.works-add-menu-title-italic]="
+                  option.id === 'cy-add-work-manually'
+                "
+              >
+                {{ option.label }}
+              </span>
+              <span
+                class="works-add-menu-description"
+                *ngIf="option.description"
+              >
+                {{ option.description }}
+              </span>
+            </div>
+          </button>
+        </ng-container>
+        <ng-container *ngIf="type === 'works' && !useNewWorksAddMenuStyle">
           <button
             mat-menu-item
             *ngFor="let option of addMenuOptions"

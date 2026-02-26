@@ -93,3 +93,68 @@
     transform: translate(-50%, -50%);
   }
 }
+
+::ng-deep .works-add-menu-panel {
+  max-width: 384px;
+}
+
+::ng-deep .works-add-menu-panel .mat-mdc-menu-content {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+button.mat-mdc-menu-item.works-add-menu-item {
+  align-items: flex-start;
+  min-height: 0;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  white-space: normal;
+}
+
+.works-add-menu-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--orcid-space-1, 4px);
+  width: 100%;
+  max-width: 384px;
+  padding: var(--orcid-space-4, 16px);
+}
+
+.works-add-menu-title {
+  font-family: var(--orcid-font-family-sans);
+  font-size: var(--orcid-font-size-body-small, 14px);
+  font-weight: var(--orcid-font-weight-normal, 400);
+  line-height: 21px;
+  letter-spacing: var(--orcid-letter-spacing-body-small, 0.25px);
+}
+
+/* Match Material's hover selector so title bold applies in overlay (same state as background) */
+::ng-deep
+  .mat-mdc-menu-item.works-add-menu-item:not([disabled]):hover
+  .works-add-menu-title,
+::ng-deep
+  .mat-mdc-menu-item.works-add-menu-item:not([disabled]).cdk-keyboard-focused
+  .works-add-menu-title,
+::ng-deep
+  .mat-mdc-menu-item.works-add-menu-item:not([disabled]).cdk-mouse-focused
+  .cdk-focused
+  .works-add-menu-title {
+  font-weight: var(--orcid-font-weight-bold, 700);
+}
+
+.works-add-menu-title-italic {
+  font-style: italic;
+}
+
+.works-add-menu-description {
+  font-family: var(--orcid-font-family-sans);
+  font-size: var(--orcid-font-size-small-print, 12px);
+  font-weight: var(--orcid-font-weight-normal, 400);
+  line-height: 18px;
+  letter-spacing: var(--orcid-letter-spacing-small-print, 0.5px);
+}
+
+button.mat-mdc-menu-item.works-add-menu-item.works-add-menu-divider {
+  border-top: 1px solid var(--orcid-ui-background-light, #eeeeee);
+}

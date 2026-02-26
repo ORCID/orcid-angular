@@ -64,10 +64,13 @@ export class PanelsComponent implements OnInit {
   @Input() addMenuOptions: {
     action: ADD_EVENT_ACTION
     label: string
+    description?: string
     modal?: ComponentType<any>
     type?: EXTERNAL_ID_TYPE_WORK
     id?: string
   }[] = []
+
+  @Input() useNewWorksAddMenuStyle = false
 
   @Input() labelAddButton = $localize`:@@shared.sortItems:Sort Items`
   @Input() labelExportButton = $localize`:@@shared.exportItems:Export Items`
