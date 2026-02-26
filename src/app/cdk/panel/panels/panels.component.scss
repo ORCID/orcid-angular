@@ -130,9 +130,16 @@ button.mat-mdc-menu-item.works-add-menu-item {
 }
 
 /* Match Material's hover selector so title bold applies in overlay (same state as background) */
-::ng-deep .mat-mdc-menu-item.works-add-menu-item:not([disabled]):hover .works-add-menu-title,
-::ng-deep .mat-mdc-menu-item.works-add-menu-item:not([disabled]).cdk-keyboard-focused .works-add-menu-title,
-::ng-deep .mat-mdc-menu-item.works-add-menu-item:not([disabled]).cdk-mouse-focused .cdk-focused .works-add-menu-title {
+::ng-deep
+  .mat-mdc-menu-item.works-add-menu-item:not([disabled]):hover
+  .works-add-menu-title,
+::ng-deep
+  .mat-mdc-menu-item.works-add-menu-item:not([disabled]).cdk-keyboard-focused
+  .works-add-menu-title,
+::ng-deep
+  .mat-mdc-menu-item.works-add-menu-item:not([disabled]).cdk-mouse-focused
+  .cdk-focused
+  .works-add-menu-title {
   font-weight: var(--orcid-font-weight-bold, 700);
 }
 
