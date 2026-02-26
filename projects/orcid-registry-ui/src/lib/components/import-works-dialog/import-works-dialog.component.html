@@ -95,7 +95,7 @@
               <ng-container *ngIf="link.connected; else connectCertified">
                 <span
                   class="import-works-dialog__connected"
-                  [attr.aria-label]="'Connected with ' + link.name"
+                  [attr.aria-label]="getConnectedAriaLabel(link.name)"
                 >
                   <span
                     class="import-works-dialog__connected-dot"
@@ -108,7 +108,7 @@
                 <button
                   mat-flat-button
                   class="import-works-dialog__btn-connect"
-                  [attr.aria-label]="'Connect with ' + link.name + ' now'"
+                  [attr.aria-label]="getConnectNowAriaLabel(link.name)"
                   (click)="openInNewTab(link.url)"
                 >
                   {{ connectNowLabel }}
@@ -236,7 +236,7 @@
                 <button
                   mat-stroked-button
                   class="import-works-dialog__btn-connect-more"
-                  [attr.aria-label]="'Connect with ' + link.name + ' now'"
+                  [attr.aria-label]="getConnectNowAriaLabel(link.name)"
                   (click)="openInNewTab(link.url)"
                 >
                   {{ connectNowLabel }}

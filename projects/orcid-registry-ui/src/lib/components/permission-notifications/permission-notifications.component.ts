@@ -73,8 +73,6 @@ export interface RegistryNotificationActionEvent {
 export class PermissionNotificationsComponent {
   @Input() title = ''
   @Input() subtitle = ''
-  /** Heading level for the panel title (1–3). Use 2 for section headings per Import your works modal a11y (Figma 204-6345). */
-  @Input() headingLevel: 1 | 2 | 3 = 2
   @Input() notifications: RegistryPermissionNotification[] = []
 
   @Output() actionClicked = new EventEmitter<RegistryNotificationActionEvent>()

@@ -53,6 +53,16 @@ export interface ImportWorksDialogData {
   showMoreServicesAriaLabel?: string
   /** Aria-label for the More Services toggle when expanded (e.g. "Hide more services"). */
   hideMoreServicesAriaLabel?: string
+  /**
+   * Aria-label template for the "Connect now" button. Use {{name}} for the service/CSP name.
+   * Example: "Connect with {{name}} now" (translatable via host).
+   */
+  connectNowAriaLabelTemplate?: string
+  /**
+   * Aria-label template for the connected state. Use {{name}} for the service/CSP name.
+   * Example: "Connected with {{name}}" (translatable via host).
+   */
+  connectedAriaLabelTemplate?: string
   /** Links shown under the certified section heading. */
   certifiedLinks: ImportWorksCertifiedLink[]
   /** Ordered list of links shown under the more services heading. */

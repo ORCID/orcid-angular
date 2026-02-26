@@ -610,6 +610,8 @@ export class RecordWorksService {
       closeAriaLabel: $localize`:@@works.closeImportYourWorks:Close Import your works`,
       showMoreServicesAriaLabel: $localize`:@@works.showMoreServices:Show more services`,
       hideMoreServicesAriaLabel: $localize`:@@works.hideMoreServices:Hide more services`,
+      connectNowAriaLabelTemplate: $localize`:@@works.connectWithCspNow:Connect with {{name}} now`,
+      connectedAriaLabelTemplate: $localize`:@@works.connectedWithCsp:Connected with {{name}}`,
       certifiedLinks,
       moreServicesLinks,
     }

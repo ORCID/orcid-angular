@@ -100,6 +100,20 @@ export class ImportWorksDialogComponent {
     return this.data?.connectedLabel ?? 'Connected'
   }
 
+  /** Aria-label for the Connect now button (translatable template with {{name}}). */
+  getConnectNowAriaLabel(name: string): string {
+    const template =
+      this.data?.connectNowAriaLabelTemplate ?? 'Connect with {{name}} now'
+    return template.replace(/\{\{name\}\}/g, name)
+  }
+
+  /** Aria-label for the connected state (translatable template with {{name}}). */
+  getConnectedAriaLabel(name: string): string {
+    const template =
+      this.data?.connectedAriaLabelTemplate ?? 'Connected with {{name}}'
+    return template.replace(/\{\{name\}\}/g, name)
+  }
+
   get loading(): boolean {
     return this.data?.loading === true
   }

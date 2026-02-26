@@ -26,15 +26,6 @@
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Heading level</mat-label>
-        <mat-select [(ngModel)]="headingLevel">
-          <mat-option [value]="1">1 (e.g. modal title)</mat-option>
-          <mat-option [value]="2">2 (section, default)</mat-option>
-          <mat-option [value]="3">3</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
         <mat-label>Notifications to show</mat-label>
         <mat-select [(ngModel)]="notificationCount">
           <mat-option [value]="1">1</mat-option>
@@ -59,7 +50,6 @@
     <orcid-registry-permission-notifications
       [title]="title"
       [subtitle]="subtitle"
-      [headingLevel]="headingLevel"
       [notifications]="visibleNotifications"
       (actionClicked)="onActionClicked($event)"
     >
@@ -74,7 +64,6 @@
     <pre><code class="language-html">&lt;orcid-registry-permission-notifications
   [title]="title"
   [subtitle]="subtitle"
-  [headingLevel]="2"
   [notifications]="notifications"
 &gt;&lt;/orcid-registry-permission-notifications&gt;
 </code></pre>
@@ -84,9 +73,6 @@
     <ul>
       <li><code>title</code>: Header title string.</li>
       <li><code>subtitle</code>: Header subtitle string.</li>
-      <li>
-        <code>headingLevel</code>: 1 | 2 | 3 — heading level for the title (default 2 for section headings, per Figma 204-6345 a11y).
-      </li>
       <li>
         <code>notifications</code>: Up to three notifications with actions. Each action may set <code>ariaLabel</code> (e.g. "Connect with The LENS") for accessible tab order labels.
       </li>
