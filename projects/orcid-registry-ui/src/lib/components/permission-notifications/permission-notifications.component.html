@@ -1,8 +1,4 @@
-<orcid-action-surface-container
-  [title]="title"
-  [subtitle]="subtitle"
-  [headingLevel]="2"
->
+<orcid-action-surface-container [title]="title" [subtitle]="subtitle">
   <div class="permission-notifications__list">
     <orcid-action-surface
       *ngFor="let notification of visibleNotifications; let index = index"

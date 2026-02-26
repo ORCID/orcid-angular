@@ -21,6 +21,4 @@ import { NgIf } from '@angular/common'
 export class ActionSurfaceContainerComponent {
   @Input() title = ''
   @Input() subtitle = ''
-  /** Heading level for the title (1–3). Use 2 for section headings per Import your works modal a11y*/
-  @Input() headingLevel: 1 | 2 | 3 = 3
 }
