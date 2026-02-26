@@ -1,8 +1,20 @@
 <section class="action-surface-container">
   <header class="action-surface-container__header">
+    <h1
+      *ngIf="title && headingLevel === 1"
+      class="action-surface-container__title orc-ui-font-body-large"
+    >
+      {{ title }}
+    </h1>
+    <h2
+      *ngIf="title && headingLevel === 2"
+      class="action-surface-container__title orc-ui-font-body-large"
+    >
+      {{ title }}
+    </h2>
     <h3
-      class="action-surface-container__title orcid-font-size-body-large"
-      *ngIf="title"
+      *ngIf="title && headingLevel === 3"
+      class="action-surface-container__title orc-ui-font-body-large"
     >
       {{ title }}
     </h3>

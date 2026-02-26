@@ -1,4 +1,8 @@
-<orcid-action-surface-container [title]="title" [subtitle]="subtitle">
+<orcid-action-surface-container
+  [title]="title"
+  [subtitle]="subtitle"
+  [headingLevel]="headingLevel"
+>
   <div class="permission-notifications__list">
     <orcid-action-surface
       *ngFor="let notification of visibleNotifications; let index = index"
@@ -17,6 +21,7 @@
             <button
               *ngSwitchCase="'flat'"
               mat-flat-button
+              [attr.aria-label]="action.ariaLabel ?? action.label"
               [orcidBrandSecondaryDarkButton]="!action.color"
               [color]="action.color"
               [disabled]="action.disabled"
@@ -30,6 +35,7 @@
             <button
               *ngSwitchCase="'stroked'"
               mat-stroked-button
+              [attr.aria-label]="action.ariaLabel ?? action.label"
               [color]="action.color"
               [disabled]="action.disabled"
               [ngClass]="{ 'registry-underline-button': action.underline }"
@@ -40,6 +46,7 @@
             <button
               *ngSwitchDefault
               mat-button
+              [attr.aria-label]="action.ariaLabel ?? action.label"
               [color]="action.color"
               [disabled]="action.disabled"
               [orcidUnderlineButton]="action.underline"

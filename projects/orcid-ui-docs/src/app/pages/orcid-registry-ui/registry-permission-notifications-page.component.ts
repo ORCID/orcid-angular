@@ -31,6 +31,7 @@ import { DocumentationPageComponent } from '../../components/documentation-page/
 export class RegistryPermissionNotificationsPageComponent {
   title = 'Unread permission notifications'
   subtitle = 'You have 3 updates waiting for your review.'
+  headingLevel: 1 | 2 | 3 = 2
   notificationCount = 3
   lastAction?: RegistryNotificationActionEvent
 

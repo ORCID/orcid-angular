@@ -1,6 +1,14 @@
+/* Figma Search — link: typography/spacing/links (211-6598), a11y (204-6345). */
+
 :host {
   display: block;
   width: 100%;
+}
+
+/* Section heading: 18px bold (body-large). */
+:host.permission-notifications-panel ::ng-deep .action-surface-container__title {
+  font-size: var(--orcid-font-size-body-large, 18px) !important;
+  font-weight: var(--orcid-font-weight-bold, 700);
 }
 
 /* PD-4982: Organization Connect panel spacing. Higher specificity + !important so overrides win over @orcid/ui. */
@@ -14,6 +22,12 @@
 
 :host.permission-notifications-panel ::ng-deep .action-surface__actions {
   gap: var(--orcid-space-6, 32px) !important;
+}
+
+/* Intro/body and list item text: 14px (body-small) — already set by action-surface__text; ensure links match design. */
+:host.permission-notifications-panel ::ng-deep .action-surface__text a {
+  color: var(--orcid-color-brand-secondary-dark, #085c77);
+  text-decoration: underline;
 }
 
 .permission-notifications__list {

@@ -254,12 +254,17 @@
   flex-shrink: 0;
   width: 24px;
   height: 24px;
+  min-width: 24px;
+  min-height: 24px;
   font-size: 24px;
+  line-height: 24px;
   color: var(--orcid-color-text, #222222);
 }
 
 .import-works-dialog__more-heading-text {
   flex: 1;
+  margin: 0;
+  font: inherit;
 }
 
 // Count and parentheses: muted style so it's not null (Figma 129-4920)

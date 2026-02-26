@@ -607,6 +607,9 @@ export class RecordWorksService {
       moreServicesHeading: $localize`:@@works.moreServicesHeading:More Services`,
       connectNowLabel: $localize`:@@works.connectNow:Connect now`,
       connectedLabel: $localize`:@@works.connected:Connected`,
+      closeAriaLabel: $localize`:@@works.closeImportYourWorks:Close Import your works`,
+      showMoreServicesAriaLabel: $localize`:@@works.showMoreServices:Show more services`,
+      hideMoreServicesAriaLabel: $localize`:@@works.hideMoreServices:Hide more services`,
       certifiedLinks,
       moreServicesLinks,
     }

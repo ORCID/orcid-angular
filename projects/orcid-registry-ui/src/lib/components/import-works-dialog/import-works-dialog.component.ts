@@ -60,6 +60,18 @@ export class ImportWorksDialogComponent {
     this.moreServicesExpanded = !this.moreServicesExpanded
   }
 
+  /** Aria-label for the More Services toggle: show/hide label based on expanded state (translatable via data). */
+  get moreServicesToggleAriaLabel(): string {
+    return this.moreServicesExpanded
+      ? (this.data?.hideMoreServicesAriaLabel ?? 'Hide more services')
+      : (this.data?.showMoreServicesAriaLabel ?? 'Show more services')
+  }
+
+  /** Aria-label for the dialog close button (translatable via data). */
+  get closeAriaLabel(): string {
+    return this.data?.closeAriaLabel ?? 'Close Import your works'
+  }
+
   get title(): string {
     return this.data?.title ?? 'Import your works'
   }
