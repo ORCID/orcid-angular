@@ -1,0 +1,16 @@
+orcid-registry-permission-notifications {
+  max-width: 960px;
+}
+
+.event-panel {
+  margin-top: 16px;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid var(--orcid-color-border-subtle, #dddddd);
+  background: var(--orcid-ui-background-lightest, #fafafa);
+}
+
+.event-title {
+  margin: 0 0 8px 0;
+  font-weight: var(--orcid-font-weight-medium, 500);
+}

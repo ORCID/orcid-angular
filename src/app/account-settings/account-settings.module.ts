@@ -46,7 +46,7 @@ import { SettingsSharingComponent } from './components/settings-sharing/settings
 import { SettingsComponent } from './components/settings/settings.component'
 import { AccountSettingsComponent } from './pages/account-settings/account-settings.component'
 import { MatDialogModule } from '@angular/material/dialog'
-import { AlertMessageComponent, TwoFactorAuthFormComponent } from '@orcid/ui'
+import { AlertMessageComponent } from '@orcid/ui'
 import { ConfirmDeactivateAccountComponent } from './pages/confirm-deactivate-account/confirm-deactivate-account.component'
 
 @NgModule({
@@ -102,7 +102,6 @@ import { ConfirmDeactivateAccountComponent } from './pages/confirm-deactivate-ac
     AccountPanelModule,
     TopBarMyPublicRecordPreviewModule,
     AlertMessageComponent,
-    TwoFactorAuthFormComponent,
   ],
   providers: [VerificationEmailModalService],
 })

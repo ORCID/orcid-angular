@@ -56,6 +56,34 @@
       color: $orcid-dark-primary-text;
     }
   }
+
+  ::ng-deep .works-add-menu-panel .mat-mdc-menu-item {
+    background-color: mat.m2-get-color-from-palette(
+      $background,
+      ui-background-lightest
+    );
+    color: mat.m2-get-color-from-palette($foreground, text-dark-high);
+  }
+
+  ::ng-deep .works-add-menu-panel .mat-mdc-menu-item:hover,
+  ::ng-deep .works-add-menu-panel .mat-mdc-menu-item.cdk-keyboard-focused,
+  ::ng-deep .works-add-menu-panel .mat-mdc-menu-item.cdk-mouse-focused {
+    background-color: mat.m2-get-color-from-palette($background, ui-background);
+    color: mat.m2-get-color-from-palette($foreground, text-dark-high);
+
+    .works-add-menu-title,
+    .works-add-menu-description {
+      color: mat.m2-get-color-from-palette($foreground, text-dark-high);
+    }
+
+    .works-add-menu-title {
+      font-weight: 700;
+    }
+  }
+
+  ::ng-deep .works-add-menu-panel {
+    border: 1px solid var(--orcid-ui-background, #bdbdbd);
+  }
 }
 
 @include stack-container-header-theme($orcid-app-theme);

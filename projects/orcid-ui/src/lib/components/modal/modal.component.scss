@@ -1,0 +1,172 @@
+/* So orcid-modal host participates in flex when used inside a dialog (e.g. import-works-dialog) and does not overflow */
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+  max-width: 100%;
+  height: 100%;
+}
+
+/* Constrain overlay and inner container so height is bounded and body scrolls inside .orcid-modal__container */
+.orcid-modal-dialog-panel {
+  max-height: 90vh;
+  max-width: min(850px, calc(100vw - 2 * var(--orcid-space-4, 16px)));
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.orcid-modal-dialog-panel .mat-mdc-dialog-inner-container {
+  max-height: 90vh;
+  max-width: 100%;
+  min-height: 0;
+  min-width: 0;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.orcid-modal-dialog-panel .mat-mdc-dialog-surface {
+  padding: 0;
+  border-radius: var(--orcid-space-1, 4px);
+  border: 2px solid var(--orcid-ui-background-darkest, #212121);
+  background: var(--orcid-surface, #ffffff);
+  box-shadow: var(--orcid-shadow-modal, 4px 4px 20px 0px rgba(0, 0, 0, 0.2));
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+  max-height: 90vh;
+  min-height: 0;
+  min-width: 0;
+  flex: 1 1 auto;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* So the dialog content host participates in flex and constrains the scroll area */
+.orcid-modal-dialog-panel .mat-mdc-dialog-surface > * {
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+@media (max-width: 600px) {
+  .orcid-modal-dialog-panel {
+    width: calc(100vw - 2 * var(--orcid-space-2, 8px));
+    max-width: calc(100vw - 2 * var(--orcid-space-2, 8px));
+  }
+
+  .orcid-modal-dialog-panel .mat-mdc-dialog-container {
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .orcid-modal-dialog-panel .mat-mdc-dialog-inner-container {
+    max-width: 100%;
+  }
+
+  .orcid-modal-dialog-panel .mat-mdc-dialog-surface {
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+.orcid-modal {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+  height: 100%;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.orcid-modal__header {
+  background: var(--orcid-ui-background-darkest, #212121);
+  color: var(--orcid-color-brand-white, #ffffff);
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: var(--orcid-space-4, 16px);
+  padding-right: var(--orcid-space-2, 8px);
+  box-sizing: border-box;
+}
+
+.orcid-modal__title {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  font-family: var(
+    --orcid-font-family-sans,
+    'Noto Sans',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif
+  );
+  font-size: var(--orcid-font-size-body-large, 18px);
+  font-weight: var(--orcid-font-weight-bold, 700);
+  line-height: 27px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.orcid-modal__close {
+  flex: 0 0 auto;
+}
+
+.orcid-modal__container {
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: var(--orcid-space-4, 16px);
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow-wrap: break-word;
+}
+
+.orcid-modal__footer {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--orcid-space-2, 8px);
+  padding: var(--orcid-space-4, 16px);
+  border-top: 1px solid var(--orcid-ui-background-light, #eeeeee);
+  box-sizing: border-box;
+
+  /* Completely hide when no content is projected or only empty elements are projected */
+  &:empty,
+  &:not(:has(*)),
+  &:not(:has(*:not(:empty))) {
+    display: none !important;
+    visibility: hidden;
+    height: 0;
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+    border: none;
+    overflow: hidden;
+  }
+}

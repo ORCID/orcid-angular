@@ -1,0 +1,31 @@
+<div class="orcid-modal" data-node-id="211:8545">
+  <header class="orcid-modal__header" data-node-id="4987:16036">
+    <div class="orcid-modal__title" data-node-id="161:5">
+      <ng-container *ngIf="title; else projectedTitle">
+        {{ title }}
+      </ng-container>
+      <ng-template #projectedTitle>
+        <ng-content select="[orcidModalTitle]"></ng-content>
+      </ng-template>
+    </div>
+
+    <button
+      *ngIf="showClose"
+      mat-icon-button
+      type="button"
+      class="orcid-modal__close"
+      [attr.aria-label]="closeAriaLabel"
+      (click)="close()"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </header>
+
+  <div class="orcid-modal__container" data-node-id="5101:19095">
+    <ng-content select="[orcidModalBody]"></ng-content>
+  </div>
+
+  <footer class="orcid-modal__footer">
+    <ng-content select="[orcidModalFooter]"></ng-content>
+  </footer>
+</div>

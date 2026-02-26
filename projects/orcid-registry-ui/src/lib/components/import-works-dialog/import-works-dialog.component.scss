@@ -1,0 +1,350 @@
+// Typography and layout aligned with Figma (node 211-8545, 108-5385, 129-4920)
+// Font sizes: intro/body 14px, section heading 18px, card title 18px, card description 14px, buttons 14px
+
+// So orcid-modal (height: 100%) has a defined parent and does not overflow
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.import-works-dialog__intro {
+  margin-bottom: var(--orcid-space-6, 32px);
+}
+
+.import-works-dialog__intro-text {
+  margin: 0 0 var(--orcid-space-4, 16px);
+  font-family: var(--orcid-font-family-sans, 'Noto Sans', sans-serif);
+  font-size: var(--orcid-font-size-body-small, 14px);
+  font-weight: var(--orcid-font-weight-normal, 400);
+  line-height: 21px;
+  letter-spacing: 0.25px;
+  color: var(--orcid-color-text, #222222);
+}
+
+.import-works-dialog__support-link {
+  font-family: var(--orcid-font-family-sans, 'Noto Sans', sans-serif);
+  font-size: var(--orcid-font-size-body-small, 14px);
+  font-weight: var(--orcid-font-weight-normal, 400);
+  line-height: 21px;
+  letter-spacing: 0.25px;
+  color: var(--orcid-color-brand-secondary-dark, #085c77);
+  text-decoration: underline;
+}
+
+.import-works-dialog__section {
+  margin-bottom: var(--orcid-space-6, 32px);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.import-works-dialog__section-heading {
+  margin: 0 0 var(--orcid-space-4, 16px);
+  font-family: var(--orcid-font-family-sans, 'Noto Sans', sans-serif);
+  font-size: var(--orcid-font-size-body-large, 18px);
+  font-weight: var(--orcid-font-weight-bold, 700);
+  line-height: 24px;
+  color: var(--orcid-color-text-dark-high, #000000);
+}
+
+// Certified: cards with no side borders (Figma Service/Certified) – top divider only, shadow
+.import-works-dialog__card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.import-works-dialog__card-list:has(.import-works-dialog__card--certified) {
+  gap: var(--orcid-space-4, 16px);
+}
+
+.import-works-dialog__card-list:has(.import-works-dialog__card--certified)
+  .import-works-dialog__card--certified {
+  border-top: none;
+}
+
+.import-works-dialog__card {
+  display: flex;
+  align-items: center;
+  gap: var(--orcid-space-4, 16px);
+  padding: var(--orcid-space-4, 16px);
+  background: var(--orcid-surface, #ffffff);
+  border-radius: var(--orcid-space-1, 4px);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+
+  &--certified {
+    border: none;
+  }
+
+  &--more {
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+    border-top: 1px solid var(--orcid-ui-background-light, #eeeeee);
+    border-left: none;
+    border-right: none;
+    padding: var(--orcid-space-4, 16px);
+
+    &:first-child {
+      border-top: none;
+    }
+  }
+}
+
+.import-works-dialog__card-icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--orcid-color-text-muted, #555555);
+
+  .import-works-dialog__card-img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+  }
+
+  mat-icon {
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.import-works-dialog__card-content {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.import-works-dialog__card-title {
+  margin: 0 0 2px;
+  font-family: var(--orcid-font-family-sans, 'Noto Sans', sans-serif);
+  font-size: var(--orcid-font-size-body-large, 18px);
+  font-weight: var(--orcid-font-weight-bold, 700);
+  line-height: 27px;
+  color: var(--orcid-color-text-dark-high, #000000);
+}
+
+.import-works-dialog__card-description {
+  margin: 0;
+  font-family: var(--orcid-font-family-sans, 'Noto Sans', sans-serif);
+  font-size: var(--orcid-font-size-body-small, 14px);
+  font-weight: var(--orcid-font-weight-normal, 400);
+  line-height: 21px;
+  letter-spacing: 0.25px;
+  color: var(--orcid-color-text, #222222);
+}
+
+.import-works-dialog__card-actions {
+  flex-shrink: 0;
+}
+
+// Skeleton (shimmer) card placeholders
+.import-works-dialog__card--skeleton {
+  pointer-events: none;
+
+  .import-works-dialog__skeleton-title {
+    margin-bottom: 2px;
+    display: block;
+  }
+
+  .import-works-dialog__skeleton-line {
+    margin-top: 4px;
+    display: block;
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+  }
+
+  .import-works-dialog__skeleton-btn {
+    border-radius: 4px;
+    display: block;
+  }
+}
+
+.import-works-dialog__btn-connect {
+  font-size: var(--orcid-font-size-body-small, 14px) !important;
+  line-height: 21px !important;
+  letter-spacing: 0.25px !important;
+  background-color: var(--orcid-color-brand-secondary-dark, #085c77) !important;
+  color: var(--orcid-color-brand-white, #ffffff) !important;
+}
+
+.import-works-dialog__btn-connect-more {
+  font-size: var(--orcid-font-size-body-small, 14px) !important;
+  line-height: 21px !important;
+  letter-spacing: 0.25px !important;
+  color: var(--orcid-color-brand-secondary-darkest, #003449) !important;
+  border-color: var(--orcid-ui-background-light, #eeeeee) !important;
+}
+
+// Connected: border and button-like appearance (Figma 129-4920)
+.import-works-dialog__connected {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--orcid-space-2, 8px);
+  padding: var(--orcid-space-2, 8px) var(--orcid-space-3, 12px);
+  font-family: var(--orcid-font-family-sans, 'Noto Sans', sans-serif);
+  font-size: var(--orcid-font-size-body-small, 14px);
+  font-weight: var(--orcid-font-weight-normal, 400);
+  line-height: 21px;
+  letter-spacing: 0.25px;
+  color: var(--orcid-color-text-dark-high, #000000);
+  background: var(--orcid-surface, #ffffff);
+  border: 1px solid var(--orcid-ui-background-light, #eeeeee);
+  border-radius: var(--orcid-space-1, 4px);
+  box-sizing: border-box;
+}
+
+.import-works-dialog__connected-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #28a745;
+}
+
+// More Services: single panel (Figma Forms/Sections/More services) with collapsible list
+.import-works-dialog__section--more {
+  margin-bottom: var(--orcid-space-6, 32px);
+}
+
+.import-works-dialog__more-panel {
+  background: var(--orcid-surface, #ffffff);
+  border: none;
+  border-bottom: 1px solid var(--orcid-ui-background-light, #eeeeee);
+  border-radius: var(--orcid-space-1, 4px);
+  overflow: hidden;
+}
+
+.import-works-dialog__more-header {
+  display: flex;
+  align-items: center;
+  gap: var(--orcid-space-2, 8px);
+  width: 100%;
+  min-height: 48px;
+  padding: 0 var(--orcid-space-4, 16px);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--orcid-font-family-sans, 'Noto Sans', sans-serif);
+  font-size: var(--orcid-font-size-body-large, 18px);
+  font-weight: var(--orcid-font-weight-bold, 700);
+  line-height: 24px;
+  color: var(--orcid-color-text-dark-high, #000000);
+
+  &:hover {
+    background: var(--orcid-ui-background-lightest, #fafafa);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--orcid-color-brand-secondary-dark, #085c77);
+    outline-offset: 2px;
+  }
+}
+
+.import-works-dialog__more-chevron {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  font-size: 24px;
+  color: var(--orcid-color-text, #222222);
+}
+
+.import-works-dialog__more-heading-text {
+  flex: 1;
+}
+
+// Count and parentheses: muted style so it's not null (Figma 129-4920)
+.import-works-dialog__more-count {
+  font-weight: var(--orcid-font-weight-normal, 400);
+  color: var(--orcid-color-text-muted, #555555);
+}
+
+.import-works-dialog__more-list {
+  border-top: 1px solid var(--orcid-ui-background-light, #eeeeee);
+
+  &[hidden] {
+    display: none !important;
+  }
+}
+
+// Mobile (Figma 129-4920): certified = icon next to title (vertical align); full-width actions; touch-friendly
+@media (max-width: 600px) {
+  .import-works-dialog__card {
+    flex-wrap: wrap;
+    gap: var(--orcid-space-2, 8px);
+
+    .import-works-dialog__card-icon {
+      order: 0;
+    }
+
+    .import-works-dialog__card-content {
+      order: 1;
+      flex: 1 1 0;
+      min-width: 0;
+    }
+
+    .import-works-dialog__card-actions {
+      order: 2;
+      width: 100%;
+      flex: 1 1 100%;
+      justify-content: flex-start;
+    }
+  }
+
+  // Certified cards: icon next to title, vertically aligned (Figma 129-4920)
+  .import-works-dialog__card--certified {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto auto;
+    gap: var(--orcid-space-2, 8px) var(--orcid-space-4, 16px);
+
+    .import-works-dialog__card-icon {
+      grid-column: 1;
+      grid-row: 1;
+      align-self: center;
+      order: unset;
+    }
+
+    .import-works-dialog__card-content {
+      display: contents;
+      order: unset;
+    }
+
+    .import-works-dialog__card-title {
+      grid-column: 2;
+      grid-row: 1;
+      align-self: center;
+      margin: 0;
+    }
+
+    .import-works-dialog__card-description {
+      grid-column: 1 / -1;
+      grid-row: 2;
+    }
+
+    .import-works-dialog__card-actions {
+      grid-column: 1 / -1;
+      grid-row: 3;
+      order: unset;
+    }
+  }
+
+  .import-works-dialog__btn-connect,
+  .import-works-dialog__btn-connect-more {
+    min-height: 40px;
+  }
+
+  .import-works-dialog__more-header {
+    min-height: 48px;
+    padding: var(--orcid-space-2, 8px) var(--orcid-space-4, 16px);
+  }
+}

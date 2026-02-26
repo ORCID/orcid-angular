@@ -9,7 +9,6 @@
   [loading]="settingSecurityPasswordLoading"
 >
   <app-settings-security-password
-    [twoFactorState]="twoFactorState"
     *ngIf="settingSecurityPasswordOpen"
     (loading)="settingSecurityPasswordLoading = $event"
   >
