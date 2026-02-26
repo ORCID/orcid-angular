@@ -86,7 +86,46 @@ export class WorkStackGroupComponent implements OnInit, OnDestroy {
 
   userRecordContext: UserRecordOptions = {}
 
-  private _baseAddMenuOptions = [
+  /** New dropdown: order and copy match Figma (node 177:15217). Used when SEARCH_AND_LINK_WIZARD_WITH_CERTIFIED_AND_FEATURED_LINKS is true. */
+  private _baseAddMenuOptionsNew = [
+    {
+      label: $localize`:@@works.addMenu.importFromServices:Import works from other services`,
+      description: $localize`:@@works.addMenu.importFromServicesDescription:Connect with services that can help keep your ORCID record up-to-date`,
+      action: ADD_EVENT_ACTION.searchAndLink,
+      id: 'cy-add-work-search-link',
+    },
+    {
+      label: $localize`:@@works.addMenu.importBibtex:Import works from a BibTeX file`,
+      description: $localize`:@@works.addMenu.importBibtexDescription:Import works into your ORCID record using BibTeX`,
+      action: ADD_EVENT_ACTION.bibText,
+      modal: WorkBibtexModalComponent,
+      id: 'cy-add-work-bibtext',
+    },
+    {
+      label: $localize`:@@works.addMenu.addWorkDoi:Add work with a DOI`,
+      action: ADD_EVENT_ACTION.doi,
+      modal: WorkExternalIdModalComponent,
+      type: EXTERNAL_ID_TYPE_WORK.doi,
+      id: 'cy-add-work-doi',
+    },
+    {
+      label: $localize`:@@works.addMenu.addWorkPubmed:Add work with a PubMed ID`,
+      action: ADD_EVENT_ACTION.pubMed,
+      modal: WorkExternalIdModalComponent,
+      type: EXTERNAL_ID_TYPE_WORK.pubMed,
+      id: 'cy-add-work-pubmed',
+    },
+    {
+      label: $localize`:@@works.addMenu.addWorkManually:Add work manually`,
+      description: $localize`:@@works.addMenu.addWorkManuallyDescription:Enter the work details yourself`,
+      action: ADD_EVENT_ACTION.addManually,
+      modal: WorkModalComponent,
+      id: 'cy-add-work-manually',
+    },
+  ]
+
+  /** Legacy dropdown: simple labels, original order. Used when SEARCH_AND_LINK_WIZARD_WITH_CERTIFIED_AND_FEATURED_LINKS is false. */
+  private _baseAddMenuOptionsLegacy = [
     {
       label: $localize`:@@shared.searchLink:Search & Link`,
       action: ADD_EVENT_ACTION.searchAndLink,
@@ -122,11 +161,15 @@ export class WorkStackGroupComponent implements OnInit, OnDestroy {
 
   addMenuOptions: {
     label: string
+    description?: string
     action: ADD_EVENT_ACTION
     modal?: ComponentType<any>
     type?: EXTERNAL_ID_TYPE_WORK
     id?: string
   }[] = this._buildAddMenuOptions(false)
+
+  /** True when SEARCH_AND_LINK_WIZARD_WITH_CERTIFIED_AND_FEATURED_LINKS is on: show new Figma-style Works add dropdown. */
+  useNewWorksAddMenuStyle = false
 
   $destroy: Subject<boolean> = new Subject<boolean>()
   $loading: Observable<boolean>
@@ -190,12 +233,16 @@ export class WorkStackGroupComponent implements OnInit, OnDestroy {
       )
       .pipe(take(1), takeUntil(this.$destroy))
       .subscribe((useCertifiedAndFeatured) => {
+        this.useNewWorksAddMenuStyle = useCertifiedAndFeatured
         this.addMenuOptions = this._buildAddMenuOptions(useCertifiedAndFeatured)
       })
   }
 
   private _buildAddMenuOptions(useCertifiedAndFeatured: boolean) {
-    return this._baseAddMenuOptions.map((opt) => {
+    const base = useCertifiedAndFeatured
+      ? this._baseAddMenuOptionsNew
+      : this._baseAddMenuOptionsLegacy
+    return base.map((opt) => {
       if (opt.action === ADD_EVENT_ACTION.searchAndLink) {
         return {
           ...opt,
