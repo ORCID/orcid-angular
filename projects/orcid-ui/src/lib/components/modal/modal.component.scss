@@ -1,4 +1,3 @@
-/* So orcid-modal host participates in flex when used inside a dialog (e.g. import-works-dialog) and does not overflow */
 :host {
   display: flex;
   flex-direction: column;
@@ -10,7 +9,6 @@
   height: 100%;
 }
 
-/* Constrain overlay and inner container so height is bounded and body scrolls inside .orcid-modal__container */
 .orcid-modal-dialog-panel {
   max-height: 90vh;
   max-width: min(850px, calc(100vw - 2 * var(--orcid-space-4, 16px)));
@@ -54,7 +52,6 @@
   box-sizing: border-box;
 }
 
-/* So the dialog content host participates in flex and constrains the scroll area */
 .orcid-modal-dialog-panel .mat-mdc-dialog-surface > * {
   flex: 1 1 auto;
   min-height: 0;
@@ -64,25 +61,31 @@
   overflow: hidden;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 599px) {
   .orcid-modal-dialog-panel {
-    width: calc(100vw - 2 * var(--orcid-space-2, 8px));
-    max-width: calc(100vw - 2 * var(--orcid-space-2, 8px));
+    width: 100vw !important;
+    max-width: 100vw !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
   }
 
   .orcid-modal-dialog-panel .mat-mdc-dialog-container {
     max-width: 100%;
+    max-height: 100vh;
     overflow: hidden;
   }
 
   .orcid-modal-dialog-panel .mat-mdc-dialog-inner-container {
     max-width: 100%;
+    max-height: 100vh;
   }
 
   .orcid-modal-dialog-panel .mat-mdc-dialog-surface {
     min-width: 0;
     width: 100%;
     max-width: 100%;
+    height: 100vh;
+    max-height: 100vh;
   }
 }
 
@@ -156,7 +159,6 @@
   border-top: 1px solid var(--orcid-ui-background-light, #eeeeee);
   box-sizing: border-box;
 
-  /* Completely hide when no content is projected or only empty elements are projected */
   &:empty,
   &:not(:has(*)),
   &:not(:has(*:not(:empty))) {

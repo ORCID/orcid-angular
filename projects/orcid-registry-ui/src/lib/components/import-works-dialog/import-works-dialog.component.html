@@ -1,4 +1,4 @@
-<orcid-modal [title]="title">
+<orcid-modal [title]="title" [closeAriaLabel]="closeAriaLabel">
   <div orcidModalBody>
     <div class="import-works-dialog__intro" *ngIf="introText">
       <p class="import-works-dialog__intro-text">{{ introText }}</p>
@@ -14,12 +14,15 @@
     </div>
 
     <section
-      class="import-works-dialog__section"
+      id="certified-services"
+      class="import-works-dialog__section certified-services"
+      role="region"
+      aria-labelledby="import-works-certified-heading"
       *ngIf="loading || certifiedLinks.length"
     >
-      <h3 class="import-works-dialog__section-heading">
+      <h2 id="import-works-certified-heading" class="import-works-dialog__section-heading">
         {{ certifiedSectionHeading }}
-      </h3>
+      </h2>
       <div class="import-works-dialog__card-list">
         <!-- Shimmer skeleton cards while loading -->
         <ng-container *ngIf="loading">
@@ -90,7 +93,10 @@
             </div>
             <div class="import-works-dialog__card-actions">
               <ng-container *ngIf="link.connected; else connectCertified">
-                <span class="import-works-dialog__connected">
+                <span
+                  class="import-works-dialog__connected"
+                  [attr.aria-label]="getConnectedAriaLabel(link.name)"
+                >
                   <span
                     class="import-works-dialog__connected-dot"
                     aria-hidden="true"
@@ -102,6 +108,7 @@
                 <button
                   mat-flat-button
                   class="import-works-dialog__btn-connect"
+                  [attr.aria-label]="getConnectNowAriaLabel(link.name)"
                   (click)="openInNewTab(link.url)"
                 >
                   {{ connectNowLabel }}
@@ -114,17 +121,23 @@
     </section>
 
     <section
-      class="import-works-dialog__section import-works-dialog__section--more"
+      id="more-services"
+      class="import-works-dialog__section import-works-dialog__section--more more-services"
+      role="region"
+      aria-labelledby="import-works-more-heading"
       *ngIf="loading || moreServicesLinks.length"
     >
       <div class="import-works-dialog__more-panel">
-        <button
-          type="button"
+        <div
           class="import-works-dialog__more-header"
           (click)="toggleMoreServices()"
+          (keydown.enter)="toggleMoreServices()"
+          (keydown.space)="toggleMoreServices(); $event.preventDefault()"
+          tabindex="0"
+          role="button"
           [attr.aria-expanded]="moreServicesExpanded"
           [attr.aria-controls]="'import-works-more-list'"
-          id="import-works-more-heading"
+          [attr.aria-label]="moreServicesToggleAriaLabel"
         >
           <mat-icon
             class="import-works-dialog__more-chevron"
@@ -132,13 +145,13 @@
           >
             {{ moreServicesExpanded ? 'expand_more' : 'expand_less' }}
           </mat-icon>
-          <span class="import-works-dialog__more-heading-text">
+          <h2 id="import-works-more-heading" class="import-works-dialog__more-heading-text">
             {{ moreServicesHeading }}
             <span class="import-works-dialog__more-count" *ngIf="!loading"
               >({{ moreServicesLinks.length }})</span
             >
-          </span>
-        </button>
+          </h2>
+        </div>
         <div
           id="import-works-more-list"
           class="import-works-dialog__more-list"
@@ -223,6 +236,7 @@
                 <button
                   mat-stroked-button
                   class="import-works-dialog__btn-connect-more"
+                  [attr.aria-label]="getConnectNowAriaLabel(link.name)"
                   (click)="openInNewTab(link.url)"
                 >
                   {{ connectNowLabel }}

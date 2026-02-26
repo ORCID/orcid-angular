@@ -265,11 +265,13 @@ export class WorkStackGroupComponent implements OnInit, OnDestroy {
     if (action !== ADD_EVENT_ACTION.searchAndLink) {
       return
     }
+    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 599
     const dialogRef = this._dialog.open(ImportWorksDialogComponent, {
       panelClass: ORCID_MODAL_DIALOG_PANEL_CLASS,
       data: this._works.getImportWorksDialogDataSkeleton(),
-      width: '850px',
-      maxHeight: '90vh',
+      width: isMobile ? '100vw' : '850px',
+      height: isMobile ? '100vh' : undefined,
+      maxHeight: isMobile ? '100vh' : '90vh',
     })
     this._works
       .loadSearchAndLinkWizardDialogData(this._normalizeLocale())

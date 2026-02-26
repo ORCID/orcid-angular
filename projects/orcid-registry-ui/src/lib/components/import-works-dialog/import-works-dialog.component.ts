@@ -60,6 +60,18 @@ export class ImportWorksDialogComponent {
     this.moreServicesExpanded = !this.moreServicesExpanded
   }
 
+  /** Aria-label for the More Services toggle: show/hide label based on expanded state (translatable via data). */
+  get moreServicesToggleAriaLabel(): string {
+    return this.moreServicesExpanded
+      ? (this.data?.hideMoreServicesAriaLabel ?? 'Hide more services')
+      : (this.data?.showMoreServicesAriaLabel ?? 'Show more services')
+  }
+
+  /** Aria-label for the dialog close button (translatable via data). */
+  get closeAriaLabel(): string {
+    return this.data?.closeAriaLabel ?? 'Close Import your works'
+  }
+
   get title(): string {
     return this.data?.title ?? 'Import your works'
   }
@@ -86,6 +98,20 @@ export class ImportWorksDialogComponent {
 
   get connectedLabel(): string {
     return this.data?.connectedLabel ?? 'Connected'
+  }
+
+  /** Aria-label for the Connect now button (translatable template with {{name}}). */
+  getConnectNowAriaLabel(name: string): string {
+    const template =
+      this.data?.connectNowAriaLabelTemplate ?? 'Connect with {{name}} now'
+    return template.replace(/\{\{name\}\}/g, name)
+  }
+
+  /** Aria-label for the connected state (translatable template with {{name}}). */
+  getConnectedAriaLabel(name: string): string {
+    const template =
+      this.data?.connectedAriaLabelTemplate ?? 'Connected with {{name}}'
+    return template.replace(/\{\{name\}\}/g, name)
   }
 
   get loading(): boolean {
