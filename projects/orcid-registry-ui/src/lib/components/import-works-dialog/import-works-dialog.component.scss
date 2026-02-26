@@ -182,7 +182,11 @@
 // Button typography: body-small per Figma (Noto Sans, 14px, weight 400, line-height 21px, letter-spacing 0.25px)
 .import-works-dialog__btn-connect,
 .import-works-dialog__btn-connect-more {
-  font-family: var(--orcid-font-family-sans, 'Noto Sans', sans-serif) !important;
+  font-family: var(
+    --orcid-font-family-sans,
+    'Noto Sans',
+    sans-serif
+  ) !important;
   font-size: var(--orcid-font-size-body-small, 14px) !important;
   font-weight: var(--orcid-font-weight-normal, 400) !important;
   line-height: 21px !important;
