@@ -9,7 +9,7 @@
       "
     >
       <span text [innerHTML]="getTrustedHtml(notification.text)"></span>
-      <div actions>
+      <ng-container actions>
         <ng-container
           *ngFor="let action of notification.actions; let actionIndex = index"
         >
@@ -49,7 +49,7 @@
             </button>
           </ng-container>
         </ng-container>
-      </div>
+      </ng-container>
     </orcid-action-surface>
   </div>
 </orcid-action-surface-container>

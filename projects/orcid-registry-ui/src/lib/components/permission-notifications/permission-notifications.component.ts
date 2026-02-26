@@ -50,6 +50,7 @@ export interface RegistryNotificationActionEvent {
 
 @Component({
   selector: 'orcid-registry-permission-notifications',
+  host: { class: 'permission-notifications-panel' },
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
