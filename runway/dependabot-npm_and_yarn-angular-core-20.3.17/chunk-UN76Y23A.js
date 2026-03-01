@@ -1,0 +1,1 @@
+import{gb as e}from"./chunk-G4I46L7B.js";var n=(()=>{class t{static{this.\u0275fac=function(i){return new(i||t)}}static{this.\u0275dir=e({type:t,selectors:[["","accentButton",""]],hostAttrs:[1,"accent-button"]})}}return t})();export{n as a};
