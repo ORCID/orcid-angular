@@ -614,6 +614,7 @@ export class RecordWorksService {
       connectedAriaLabelTemplate: $localize`:@@works.connectedWithCsp:Connected with {{name}}`,
       certifiedLinks,
       moreServicesLinks,
+      placeholderIconUrl: 'assets/vectors/CSPs/csp-placeholder.svg',
     }
   }
 
@@ -645,7 +646,10 @@ export class RecordWorksService {
     return forkJoin({ list: list$, localize: localize$ }).pipe(
       map(({ list, localize }) => {
         const localizeByClientId = this._parsePropertiesFile(localize)
-        const certifiedLinks: ImportWorksCertifiedLink[] = []
+        const certifiedForList: Array<{
+          link: ImportWorksCertifiedLink
+          index: number
+        }> = []
         const featuredForMore: Array<{
           link: ImportWorksMoreLink
           index: number
@@ -663,7 +667,12 @@ export class RecordWorksService {
             scopes,
             redirectUri
           )
-          const imageUrl = item.redirectUriMetadata?.logoUrl
+          // Backend returns redirectUriMetadata from DB as-is; logoUrl may be absent (Certified can have no logo)
+          const rawLogoUrl = item.redirectUriMetadata?.logoUrl
+          const imageUrl =
+            typeof rawLogoUrl === 'string' && rawLogoUrl.trim() !== ''
+              ? rawLogoUrl.trim()
+              : undefined
 
           if (type === 'Certified') {
             const description =
@@ -671,12 +680,16 @@ export class RecordWorksService {
               localizeByClientId[item.id] ??
               item.redirectUriMetadata?.defaultDescription ??
               ''
-            certifiedLinks.push({
-              name,
-              description,
-              url: oauthUrl,
-              connected,
-              imageUrl,
+            const index = item.redirectUriMetadata?.index ?? 999
+            certifiedForList.push({
+              link: {
+                name,
+                description,
+                url: oauthUrl,
+                connected,
+                imageUrl,
+              },
+              index,
             })
           } else if (type === 'Featured') {
             const description =
@@ -695,7 +708,14 @@ export class RecordWorksService {
           }
         }
 
+        certifiedForList.sort((a, b) => a.index - b.index)
+        const certifiedLinks: ImportWorksCertifiedLink[] =
+          certifiedForList.map((x) => x.link)
+
         featuredForMore.sort((a, b) => a.index - b.index)
+        defaultForMore.sort((a, b) =>
+          a.name.localeCompare(b.name, undefined, { sensitivity: 'base' })
+        )
         const moreServicesLinks: ImportWorksMoreLink[] = [
           ...featuredForMore.map((x) => x.link),
           ...defaultForMore,

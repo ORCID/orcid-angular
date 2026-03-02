@@ -126,6 +126,11 @@ export class ImportWorksDialogComponent {
     return this.data?.moreServicesLinks ?? []
   }
 
+  /** URL for the placeholder icon when a service has no imageUrl or icon. */
+  get placeholderIconUrl(): string | undefined {
+    return this.data?.placeholderIconUrl
+  }
+
   openInNewTab(url: string): void {
     if (url) {
       window.open(url, '_blank', 'noopener,noreferrer')
