@@ -16,6 +16,16 @@ describe('sanitizeHtmlForTrustedBypass', () => {
     expect(sanitizeHtmlForTrustedBypass(html)).toBe('Text  more')
   })
 
+  it('strips img tags (e.g. img with onerror)', () => {
+    const html = `test <img src=x onerror=alert('malicious-code')>`
+    expect(sanitizeHtmlForTrustedBypass(html)).toBe('test ')
+  })
+
+  it('strips event-handler attributes from any tag', () => {
+    const html = '<span onclick="alert(1)">click</span>'
+    expect(sanitizeHtmlForTrustedBypass(html)).toBe('<span >click</span>')
+  })
+
   it('leaves safe markup intact', () => {
     const html = '<span class="highlight">safe</span>'
     expect(sanitizeHtmlForTrustedBypass(html)).toBe(html)

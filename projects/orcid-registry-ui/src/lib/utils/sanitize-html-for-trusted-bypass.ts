@@ -1,6 +1,7 @@
 /**
- * Sanitizes HTML by removing script and style tags (and their content) so the
- * result is safe to pass to DomSanitizer.bypassSecurityTrustHtml().
+ * Sanitizes HTML by removing script/style tags, executable elements (img, iframe,
+ * etc.), and event-handler attributes so the result is safe to pass to
+ * DomSanitizer.bypassSecurityTrustHtml().
  */
 export function sanitizeHtmlForTrustedBypass(html: string): string {
   if (typeof html !== 'string') {
@@ -9,4 +10,10 @@ export function sanitizeHtmlForTrustedBypass(html: string): string {
   return html
     .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '')
     .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, '')
+    .replace(/<img\b[^>]*>/gi, '')
+    .replace(/<iframe\b[^>]*>[\s\S]*?<\/iframe>/gi, '')
+    .replace(/<object\b[^>]*>[\s\S]*?<\/object>/gi, '')
+    .replace(/<embed\b[^>]*>/gi, '')
+    .replace(/<svg\b[^>]*>[\s\S]*?<\/svg>/gi, '')
+    .replace(/\s+on\w+\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]*)/gi, '')
 }
