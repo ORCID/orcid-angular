@@ -2,6 +2,8 @@
  * Sanitizes HTML by removing script/style tags, executable elements (img, iframe,
  * etc.), and event-handler attributes so the result is safe to pass to
  * DomSanitizer.bypassSecurityTrustHtml().
+ * Use this whenever you need to render HTML that may contain user/content while
+ * allowing only safe markup (e.g. no scripts).
  */
 export function sanitizeHtmlForTrustedBypass(html: string): string {
   if (typeof html !== 'string') {
