@@ -61,10 +61,9 @@ export class SnackbarService {
     }
 
     if (errorReport?.analytics) {
-      const description = `${errorReport.analytics.code}/${error?.message ?? ''}`.replace(
-        / /g,
-        ''
-      )
+      const description = `${errorReport.analytics.code}/${
+        error?.message ?? ''
+      }`.replace(/ /g, '')
       console.error(`
         __Report error GA__
         description: ${description}
