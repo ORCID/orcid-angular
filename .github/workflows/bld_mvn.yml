@@ -110,24 +110,38 @@ jobs:
           git diff
           git rev-parse --abbrev-ref HEAD
 
-      - name: build our project and deploy
+      - name: build our project
         run: |
           mvn -T 1C --batch-mode \
               -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn \
-              --settings settings-deploy.xml \
               --file "pom.xml" \
-              -DaltReleaseDeploymentRepository="github::${ARTIFACT_URL}${ARTIFACT_REPO_PATH}" \
-              --activate-profiles "${build_env}" -Dnodejs.workingDirectory=. \
-              deploy -Dmaven.test.skip
+              --activate-profiles prod -Dnodejs.workingDirectory=. \
+              package -Dmaven.test.skip
 
           echo "------------------------------------------------------"
-
           find . -name '*.war'
           find . -name '*.jar'
         env:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
-          ARTIFACT_URL: '${{ secrets.ARTIFACT_URL }}'
-          ARTIFACT_REPO_PATH: '${{ secrets.ARTIFACT_REPO_PATH }}'
-          ARTIFACT_USER: '${{ secrets.ARTIFACT_USER }}'
-          ARTIFACT_PASSWORD: '${{ secrets.ARTIFACT_PASSWORD }}'
-          build_env: prod
+
+      - name: deploy same artifact for all environments
+        run: |
+          WAR_FILE="target/orcid-web-frontend-prod.war"
+          REPO_URL="${ARTIFACT_URL}${ARTIFACT_REPO_PATH}"
+          for artifact_id in orcid-web-frontend-prod orcid-web-frontend-sandbox orcid-web-frontend-qa orcid-web-frontend-int; do
+            mvn -B deploy:deploy-file \
+              --settings settings-deploy.xml \
+              -Durl="${REPO_URL}" \
+              -DrepositoryId=github \
+              -DgroupId=org.orcid \
+              -DartifactId="${artifact_id}" \
+              -Dversion="${{ steps.version.outputs.version_tag_numeric }}" \
+              -Dpackaging=war \
+              -Dfile="${WAR_FILE}" \
+              -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
+          done
+        env:
+          ARTIFACT_URL: ${{ secrets.ARTIFACT_URL }}
+          ARTIFACT_REPO_PATH: ${{ secrets.ARTIFACT_REPO_PATH }}
+          ARTIFACT_USER: ${{ secrets.ARTIFACT_USER }}
+          ARTIFACT_PASSWORD: ${{ secrets.ARTIFACT_PASSWORD }}
