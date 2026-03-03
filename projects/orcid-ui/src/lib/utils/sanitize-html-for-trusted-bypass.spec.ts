@@ -23,7 +23,7 @@ describe('sanitizeHtmlForTrustedBypass', () => {
 
   it('strips event-handler attributes from any tag', () => {
     const html = '<span onclick="alert(1)">click</span>'
-    expect(sanitizeHtmlForTrustedBypass(html)).toBe('<span >click</span>')
+    expect(sanitizeHtmlForTrustedBypass(html)).toBe('<span>click</span>')
   })
 
   it('leaves safe markup intact', () => {
