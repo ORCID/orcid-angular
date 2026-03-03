@@ -6,7 +6,7 @@
 .action-surface-container {
   display: grid;
   gap: var(--orcid-space-4, 16px);
-  padding: var(--orcid-space-5, 24px);
+  padding: var(--action-surface-container-padding, var(--orcid-space-4, 16px));
   border-radius: var(--orcid-space-1, 4px);
   border: 2px solid var(--orcid-color-border-container, #333333);
   background: var(--orcid-surface, #ffffff);
@@ -25,7 +25,10 @@
     -apple-system,
     sans-serif
   );
-  font-size: var(--orcid-font-size-body, 16px);
+  font-size: var(
+    --action-surface-container-title-font-size,
+    var(--orcid-font-size-body-large, 18px)
+  );
   line-height: 1.25;
   font-weight: var(--orcid-font-weight-bold, 700);
   color: var(--orcid-color-text-dark-high, #000000);

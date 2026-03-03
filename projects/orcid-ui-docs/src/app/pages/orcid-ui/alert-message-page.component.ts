@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material/input'
 import { MatOptionModule } from '@angular/material/core'
 import { MatIconModule } from '@angular/material/icon'
 import { AlertMessageComponent } from '@orcid/ui'
-import { DocumentationPageComponent } from '../components/documentation-page/documentation-page.component'
+import { DocumentationPageComponent } from '../../components/documentation-page/documentation-page.component'
 
 @Component({
   selector: 'orcid-alert-message-page',

@@ -25,6 +25,8 @@ import { Config } from 'src/app/types/config.endpoint'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 
+declare const runtimeEnvironment: { API_WEB: string }
+
 describe('RecordWorksService', () => {
   let service: RecordWorksService
   let togglzService: TogglzService
@@ -47,6 +49,7 @@ describe('RecordWorksService', () => {
         MatSnackBar,
         MatDialog,
         Overlay,
+        { provide: TogglzService, useValue: fakeTogglzService },
       ],
     })
     service = TestBed.inject(RecordWorksService)
@@ -96,6 +99,94 @@ describe('RecordWorksService', () => {
     )
     expect(requestGroupingSuggestions.length).toEqual(1)
     requestGroupingSuggestions.forEach((grouping) => grouping.flush({}))
+  })
+
+  describe('getImportWorksDialogDataSkeleton', () => {
+    it('returns dialog data with loading true and empty link lists', () => {
+      const skeleton = service.getImportWorksDialogDataSkeleton()
+      expect(skeleton.loading).toBe(true)
+      expect(skeleton.certifiedLinks).toEqual([])
+      expect(skeleton.moreServicesLinks).toEqual([])
+      expect(skeleton.title).toBeDefined()
+      expect(skeleton.introText).toBeDefined()
+      expect(skeleton.supportLink).toBeDefined()
+      expect(skeleton.certifiedSectionHeading).toBeDefined()
+      expect(skeleton.moreServicesHeading).toBeDefined()
+      expect(skeleton.connectNowLabel).toBeDefined()
+      expect(skeleton.connectedLabel).toBeDefined()
+    })
+  })
+
+  describe('loadSearchAndLinkWizardDialogData', () => {
+    it('requests retrieve-works-search-and-link-wizard.json and returns mapped dialog data', (done) => {
+      const listPayload = [
+        {
+          id: 'cert-1',
+          name: 'Certified Service',
+          redirectUri: 'https://app.example/cb',
+          scopes: '/read-limited',
+          redirectUriMetadata: {
+            type: 'Certified',
+            defaultDescription: 'Cert desc',
+          },
+        },
+        {
+          id: 'more-1',
+          name: 'More Service',
+          description: 'More desc',
+          redirectUri: 'https://app.example/cb2',
+          scopes: '/activities/update',
+        },
+      ]
+
+      service.loadSearchAndLinkWizardDialogData('en').subscribe((data) => {
+        expect(data.loading).toBe(false)
+        expect(data.certifiedLinks.length).toBe(1)
+        expect(data.certifiedLinks[0].name).toBe('Certified Service')
+        expect(data.certifiedLinks[0].description).toBe('Cert desc')
+        expect(data.moreServicesLinks.length).toBe(1)
+        expect(data.moreServicesLinks[0].name).toBe('More Service')
+        expect(data.moreServicesLinks[0].description).toBe('More desc')
+        done()
+      })
+
+      const wizardReq = httpTestingController.expectOne(
+        runtimeEnvironment.API_WEB +
+          'workspace/retrieve-works-search-and-link-wizard.json'
+      )
+      expect(wizardReq.request.method).toBe('GET')
+      wizardReq.flush(listPayload)
+
+      // Service also requests localize .properties when CERTIFIED_LINKS_LOCALIZE_BASE_URL is set
+      const localizeReqs = httpTestingController.match(
+        (req) =>
+          req.url.includes('works-search-and-link') &&
+          req.url.endsWith('.properties')
+      )
+      localizeReqs.forEach((r) => r.flush(''))
+    })
+
+    it('returns empty certified and more lists when API returns empty array', (done) => {
+      service.loadSearchAndLinkWizardDialogData('en').subscribe((data) => {
+        expect(data.certifiedLinks).toEqual([])
+        expect(data.moreServicesLinks).toEqual([])
+        expect(data.loading).toBe(false)
+        done()
+      })
+
+      const wizardReq = httpTestingController.expectOne(
+        runtimeEnvironment.API_WEB +
+          'workspace/retrieve-works-search-and-link-wizard.json'
+      )
+      wizardReq.flush([])
+
+      const localizeReqs = httpTestingController.match(
+        (req) =>
+          req.url.includes('works-search-and-link') &&
+          req.url.endsWith('.properties')
+      )
+      localizeReqs.forEach((r) => r.flush(''))
+    })
   })
 })
 

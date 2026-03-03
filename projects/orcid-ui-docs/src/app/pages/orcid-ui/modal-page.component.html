@@ -1,0 +1,82 @@
+<app-documentation-page
+  title="Modal"
+  description="Base modal shell built on Angular Material Dialog, providing a header, scrollable container, and footer slots. Use panelClass=ORCID_MODAL_DIALOG_PANEL_CLASS when opening MatDialog to apply the ORCID modal chrome (border, radius, shadow)."
+>
+  <div controls>
+    <p>Modify these values and open the modal to preview:</p>
+    <div class="controls-grid">
+      <mat-form-field appearance="outline">
+        <mat-label>Title</mat-label>
+        <input matInput [(ngModel)]="config.title" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Close aria-label</mat-label>
+        <input matInput [(ngModel)]="config.closeAriaLabel" />
+      </mat-form-field>
+
+      <mat-checkbox [(ngModel)]="config.showClose">
+        Show close icon
+      </mat-checkbox>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Body text</mat-label>
+        <textarea matInput [(ngModel)]="config.body" rows="3"></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div examples>
+    <div class="example-group">
+      <h4>Dialog preview</h4>
+      <div class="example-container">
+        <button mat-flat-button type="button" (click)="openModal()">
+          Open modal
+        </button>
+
+        <p class="orc-ui-font-body-small result" *ngIf="lastResult">
+          Last close result: <strong>{{ lastResult }}</strong>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div usage>
+    <pre><code class="language-ts">import &#123; MatDialog &#125; from '@angular/material/dialog'
+import &#123; ORCID_MODAL_DIALOG_PANEL_CLASS &#125; from '@orcid/ui'
+
+// ...
+this.dialog.open(YourDialogComponent, &#123;
+  panelClass: ORCID_MODAL_DIALOG_PANEL_CLASS,
+&#125;)</code></pre>
+
+    <pre><code class="language-html">&lt;orcid-modal title="Import your works"&gt;
+  &lt;div orcidModalBody&gt;
+    Modal content
+  &lt;/div&gt;
+
+  &lt;div orcidModalFooter&gt;
+    &lt;button mat-button mat-dialog-close="cancel"&gt;Cancel&lt;/button&gt;
+    &lt;button mat-flat-button mat-dialog-close="confirm"&gt;Confirm&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/orcid-modal&gt;</code></pre>
+  </div>
+
+  <div inputs>
+    <h4>Inputs</h4>
+    <ul>
+      <li><code>title</code>: Header title text (optional).</li>
+      <li><code>showClose</code>: Show/hide the close icon button.</li>
+      <li>
+        <code>closeAriaLabel</code>: Accessible label for the close button.
+      </li>
+    </ul>
+
+    <h4>Slots</h4>
+    <ul>
+      <li><code>[orcidModalTitle]</code>: Project a custom title area.</li>
+      <li><code>[orcidModalBody]</code>: Scrollable container content.</li>
+      <li><code>[orcidModalFooter]</code>: Footer actions/content.</li>
+    </ul>
+  </div>
+</app-documentation-page>

@@ -26,6 +26,8 @@ export type RegistryNotificationButtonVariant = 'text' | 'flat' | 'stroked'
 export interface RegistryNotificationAction {
   id?: string
   label: string
+  /** Accessible label for the button. Falls back to label if not set. */
+  ariaLabel?: string
   variant?: RegistryNotificationButtonVariant
   color?: 'primary' | 'accent' | 'warn'
   underline?: boolean
@@ -50,6 +52,7 @@ export interface RegistryNotificationActionEvent {
 
 @Component({
   selector: 'orcid-registry-permission-notifications',
+  host: { class: 'permission-notifications-panel' },
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [

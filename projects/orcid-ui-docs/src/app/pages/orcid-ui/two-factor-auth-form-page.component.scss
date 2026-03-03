@@ -1,0 +1,45 @@
+section {
+  display: grid;
+  gap: 1.25rem;
+}
+
+app-two-factor-auth-from {
+  margin-top: 0.5rem;
+}
+
+pre {
+  background: #1e1e1e;
+  color: #fff;
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  overflow-x: auto;
+}
+
+::ng-deep {
+  mat-form-field {
+    width: 100%;
+  }
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+  }
+  .mat-mdc-form-field-infix {
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+  }
+
+  .mat-mdc-text-field-wrapper {
+    height: 40px !important;
+  }
+  mat-hint,
+  mat-label {
+    font-size: 12px;
+  }
+  mat-error {
+    font-size: 12px;
+  }
+}
+
+form {
+  font-size: 14px;
+}

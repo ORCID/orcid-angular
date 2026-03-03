@@ -1,0 +1,16 @@
+.controls-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+
+  .full-width {
+    grid-column: 1 / -1;
+  }
+}
+
+.example-container {
+  padding: 16px;
+  border-radius: 8px;
+  background: var(--orcid-surface, #ffffff);
+}

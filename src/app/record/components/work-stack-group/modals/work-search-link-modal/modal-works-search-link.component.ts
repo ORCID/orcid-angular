@@ -19,8 +19,8 @@ export class ModalWorksSearchLinkComponent implements OnInit, OnDestroy {
   loadingWorks = true
   recordImportWizardsOriginal: RecordImportWizard[]
   recordImportWizards: RecordImportWizard[]
-  workTypes = []
-  geographicalAreas = []
+  workTypes: string[] = []
+  geographicalAreas: string[] = []
   workTypeSelected = 'All'
   geographicalAreaSelected = 'All'
   total = 0
@@ -39,52 +39,51 @@ export class ModalWorksSearchLinkComponent implements OnInit, OnDestroy {
       .loadWorkImportWizardList()
       .pipe(takeUntil(this.$destroy))
       .subscribe((recordImportWizards) => {
+        recordImportWizards.forEach((w) => (w.show = w.show ?? false))
         this.recordImportWizardsOriginal = sortBy(recordImportWizards, 'name')
-        this.recordImportWizards = this.recordImportWizardsOriginal
+        this.recordImportWizards = [...this.recordImportWizardsOriginal]
         recordImportWizards.forEach((recordImportWizard) => {
-          recordImportWizard.actTypes.forEach((actType) => {
+          recordImportWizard.actTypes?.forEach((actType) => {
             if (!this.workTypes.includes(actType)) {
               this.workTypes.push(actType)
             }
           })
-
-          recordImportWizard.geoAreas.forEach((geoArea) => {
+          recordImportWizard.geoAreas?.forEach((geoArea) => {
             if (!this.geographicalAreas.includes(geoArea)) {
               this.geographicalAreas.push(geoArea)
             }
           })
         })
         this.loadingWorks = false
-
         this.total = this.recordImportWizardsOriginal.length
       })
   }
 
   searchAndLink() {
-    this.recordImportWizards = []
-    this.recordImportWizardsOriginal.forEach((recordImportWizard) => {
-      if (
-        this.workTypeSelected === 'All' &&
-        this.geographicalAreaSelected === 'All'
-      ) {
-        this.recordImportWizards = this.recordImportWizardsOriginal
-      } else if (
-        this.workTypeSelected === 'All' &&
-        recordImportWizard.geoAreas.includes(this.geographicalAreaSelected)
-      ) {
-        this.recordImportWizards.push(recordImportWizard)
-      } else if (
-        this.geographicalAreaSelected === 'All' &&
-        recordImportWizard.actTypes.includes(this.workTypeSelected)
-      ) {
-        this.recordImportWizards.push(recordImportWizard)
-      } else if (
-        recordImportWizard.actTypes.includes(this.workTypeSelected) &&
-        recordImportWizard.geoAreas.includes(this.geographicalAreaSelected)
-      ) {
-        this.recordImportWizards.push(recordImportWizard)
-      }
-    })
+    if (
+      this.workTypeSelected === 'All' &&
+      this.geographicalAreaSelected === 'All'
+    ) {
+      this.recordImportWizards = [...this.recordImportWizardsOriginal]
+    } else {
+      this.recordImportWizards = this.recordImportWizardsOriginal.filter(
+        (recordImportWizard) => {
+          const matchWorkType =
+            this.workTypeSelected === 'All' ||
+            (recordImportWizard.actTypes?.length
+              ? recordImportWizard.actTypes.includes(this.workTypeSelected)
+              : true)
+          const matchGeo =
+            this.geographicalAreaSelected === 'All' ||
+            (recordImportWizard.geoAreas?.length
+              ? recordImportWizard.geoAreas.includes(
+                  this.geographicalAreaSelected
+                )
+              : true)
+          return matchWorkType && matchGeo
+        }
+      )
+    }
     this.total = this.recordImportWizards.length
   }
 
