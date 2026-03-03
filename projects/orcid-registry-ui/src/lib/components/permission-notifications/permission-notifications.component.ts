@@ -6,7 +6,7 @@ import {
   Output,
 } from '@angular/core'
 import { DomSanitizer } from '@angular/platform-browser'
-import { sanitizeHtmlForTrustedBypass } from '../../utils/sanitize-html-for-trusted-bypass'
+import { sanitizeHtmlForTrustedBypass } from '@orcid/ui'
 import {
   NgClass,
   NgFor,
