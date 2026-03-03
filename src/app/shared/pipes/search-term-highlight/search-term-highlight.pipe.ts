@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core'
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
-import { sanitizeHtmlForTrustedBypass } from '../../utils/sanitize-html-for-trusted-bypass'
+import { sanitizeHtmlForTrustedBypass } from '@orcid/ui'
 
 @Pipe({
   name: 'searchTermHighlight',

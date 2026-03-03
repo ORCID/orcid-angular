@@ -1,4 +1,4 @@
-import { sanitizeHtmlForTrustedBypass } from '@orcid/ui'
+import { sanitizeHtmlForTrustedBypass } from './sanitize-html-for-trusted-bypass'
 
 describe('sanitizeHtmlForTrustedBypass', () => {
   it('strips script tags and their content', () => {
