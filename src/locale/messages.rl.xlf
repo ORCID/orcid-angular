@@ -8502,6 +8502,46 @@
         </context-group>
         <target>RL</target>
       </trans-unit>
+      <trans-unit id="works.closeImportYourWorks" datatype="html" resname="works.closeImportYourWorks">
+        <source>Close Import your works</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
+          <context context-type="linenumber">610</context>
+        </context-group>
+        <target>RL</target>
+      </trans-unit>
+      <trans-unit id="works.showMoreServices" datatype="html" resname="works.showMoreServices">
+        <source>Show more services</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
+          <context context-type="linenumber">611</context>
+        </context-group>
+        <target>RL</target>
+      </trans-unit>
+      <trans-unit id="works.hideMoreServices" datatype="html" resname="works.hideMoreServices">
+        <source>Hide more services</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
+          <context context-type="linenumber">612</context>
+        </context-group>
+        <target>RL</target>
+      </trans-unit>
+      <trans-unit id="works.connectWithCspNow" datatype="html" resname="works.connectWithCspNow">
+        <source>Connect with {{name}} now</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
+          <context context-type="linenumber">613</context>
+        </context-group>
+        <target>RL</target>
+      </trans-unit>
+      <trans-unit id="works.connectedWithCsp" datatype="html" resname="works.connectedWithCsp">
+        <source>Connected with {{name}}</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
+          <context context-type="linenumber">614</context>
+        </context-group>
+        <target>RL</target>
+      </trans-unit>
       <trans-unit id="developerTools.generateNewClientSecret" datatype="html" resname="developerTools.generateNewClientSecret">
         <source>Generate a new client secret</source>
         <context-group purpose="location">
