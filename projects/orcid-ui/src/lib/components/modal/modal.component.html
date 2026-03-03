@@ -14,7 +14,9 @@
       mat-icon-button
       type="button"
       class="orcid-modal__close"
-      [attr.aria-label]="closeAriaLabel || (title ? 'Close ' + title : 'Close dialog')"
+      [attr.aria-label]="
+        closeAriaLabel || (title ? 'Close ' + title : 'Close dialog')
+      "
       (click)="close()"
     >
       <mat-icon>close</mat-icon>

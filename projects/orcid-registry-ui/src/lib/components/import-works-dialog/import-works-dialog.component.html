@@ -20,7 +20,10 @@
       aria-labelledby="import-works-certified-heading"
       *ngIf="loading || certifiedLinks.length"
     >
-      <h2 id="import-works-certified-heading" class="import-works-dialog__section-heading">
+      <h2
+        id="import-works-certified-heading"
+        class="import-works-dialog__section-heading"
+      >
         {{ certifiedSectionHeading }}
       </h2>
       <div class="import-works-dialog__card-list">
@@ -89,9 +92,7 @@
                   class="import-works-dialog__card-img import-works-dialog__card-img--placeholder"
                   aria-hidden="true"
                 />
-                <mat-icon
-                  *ngIf="!placeholderIconUrl"
-                  [attr.aria-hidden]="true"
+                <mat-icon *ngIf="!placeholderIconUrl" [attr.aria-hidden]="true"
                   >link</mat-icon
                 >
               </ng-container>
@@ -140,7 +141,9 @@
     >
       <div
         class="import-works-dialog__more-panel"
-        [class.import-works-dialog__more-panel--collapsed]="!moreServicesExpanded"
+        [class.import-works-dialog__more-panel--collapsed]="
+          !moreServicesExpanded
+        "
       >
         <div
           class="import-works-dialog__more-header"
@@ -159,7 +162,10 @@
           >
             {{ moreServicesExpanded ? 'expand_more' : 'expand_less' }}
           </mat-icon>
-          <h2 id="import-works-more-heading" class="import-works-dialog__more-heading-text">
+          <h2
+            id="import-works-more-heading"
+            class="import-works-dialog__more-heading-text"
+          >
             {{ moreServicesHeading }}
             <span class="import-works-dialog__more-count" *ngIf="!loading"
               >({{ moreServicesLinks.length }})</span

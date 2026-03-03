@@ -79,7 +79,10 @@
 }
 
 .action-surface__text a {
-  color: var(--action-surface-link-color, var(--orcid-color-brand-secondary-dark, #085c77));
+  color: var(
+    --action-surface-link-color,
+    var(--orcid-color-brand-secondary-dark, #085c77)
+  );
   text-decoration: var(--action-surface-link-decoration, underline);
 }
 

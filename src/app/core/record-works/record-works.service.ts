@@ -709,8 +709,9 @@ export class RecordWorksService {
         }
 
         certifiedForList.sort((a, b) => a.index - b.index)
-        const certifiedLinks: ImportWorksCertifiedLink[] =
-          certifiedForList.map((x) => x.link)
+        const certifiedLinks: ImportWorksCertifiedLink[] = certifiedForList.map(
+          (x) => x.link
+        )
 
         featuredForMore.sort((a, b) => a.index - b.index)
         defaultForMore.sort((a, b) =>
