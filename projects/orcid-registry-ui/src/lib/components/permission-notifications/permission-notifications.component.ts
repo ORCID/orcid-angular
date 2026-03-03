@@ -6,6 +6,7 @@ import {
   Output,
 } from '@angular/core'
 import { DomSanitizer } from '@angular/platform-browser'
+import { sanitizeHtmlForTrustedBypass } from '../../utils/sanitize-html-for-trusted-bypass'
 import {
   NgClass,
   NgFor,
@@ -80,7 +81,8 @@ export class PermissionNotificationsComponent {
   constructor(private _sanitizer: DomSanitizer) {}
 
   getTrustedHtml(text: string) {
-    return this._sanitizer.bypassSecurityTrustHtml(text)
+    const safe = sanitizeHtmlForTrustedBypass(text ?? '')
+    return this._sanitizer.bypassSecurityTrustHtml(safe)
   }
 
   get visibleNotifications(): RegistryPermissionNotification[] {

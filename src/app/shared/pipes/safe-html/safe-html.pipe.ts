@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core'
 import { DomSanitizer } from '@angular/platform-browser'
+import { sanitizeHtmlForTrustedBypass } from '../../utils/sanitize-html-for-trusted-bypass'
 
 @Pipe({
   name: 'safeHtml',
@@ -7,7 +8,9 @@ import { DomSanitizer } from '@angular/platform-browser'
 })
 export class SafeHtmlPipe implements PipeTransform {
   constructor(private sanitized: DomSanitizer) {}
-  transform(value) {
-    return this.sanitized.bypassSecurityTrustHtml(value)
+  transform(value: string | null | undefined) {
+    if (value == null) return value
+    const safe = sanitizeHtmlForTrustedBypass(String(value))
+    return this.sanitized.bypassSecurityTrustHtml(safe)
   }
 }
