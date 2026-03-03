@@ -158,8 +158,10 @@ describe('RecordWorksService', () => {
       wizardReq.flush(listPayload)
 
       // Service also requests localize .properties when CERTIFIED_LINKS_LOCALIZE_BASE_URL is set
-      const localizeReqs = httpTestingController.match((req) =>
-        req.url.includes('works-search-and-link') && req.url.endsWith('.properties')
+      const localizeReqs = httpTestingController.match(
+        (req) =>
+          req.url.includes('works-search-and-link') &&
+          req.url.endsWith('.properties')
       )
       localizeReqs.forEach((r) => r.flush(''))
     })
@@ -178,8 +180,10 @@ describe('RecordWorksService', () => {
       )
       wizardReq.flush([])
 
-      const localizeReqs = httpTestingController.match((req) =>
-        req.url.includes('works-search-and-link') && req.url.endsWith('.properties')
+      const localizeReqs = httpTestingController.match(
+        (req) =>
+          req.url.includes('works-search-and-link') &&
+          req.url.endsWith('.properties')
       )
       localizeReqs.forEach((r) => r.flush(''))
     })
