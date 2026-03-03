@@ -23,6 +23,11 @@ on:
         type: boolean
         required: false
         default: true
+      run_docker:
+        description: 'Whether to run Docker builds'
+        type: boolean
+        required: false
+        default: true
 
   workflow_dispatch:
     inputs:
@@ -49,6 +54,11 @@ on:
         type: string
       rel_tag:
         description: Whether to tag the code
+        type: boolean
+        required: false
+        default: true
+      run_docker:
+        description: 'Whether to run Docker builds'
         type: boolean
         required: false
         default: true
@@ -101,6 +111,7 @@ jobs:
       ref: ${{ inputs.ref }}
 
   bld_docker:
+    if: ${{ inputs.run_docker }}
     uses: ./.github/workflows/bld_docker.yml
     secrets: inherit # pass all secrets for uploading assets
     needs:

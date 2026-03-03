@@ -9,11 +9,6 @@ permissions:
 on:
   workflow_call:
     inputs:
-      artifact_name:
-        description: 'Name of the artifact env'
-        required: false
-        default: 'prod'
-        type: string
       version_tag:
         description: 'Name of the tag to build'
         required: false
@@ -32,11 +27,6 @@ on:
 
   workflow_dispatch:
     inputs:
-      artifact_name:
-        description: 'Name of the artifact env'
-        required: false
-        default: 'prod'
-        type: string
       version_tag:
         description: 'Version tag to use: (bump must also be set to none to keep a specific version'
         required: false
@@ -61,14 +51,6 @@ on:
 
 jobs:
   bld_mvn:
-    strategy:
-      matrix:
-        include:
-          - artifact_name: prod
-          - artifact_name: sandbox
-          - artifact_name: qa
-          - artifact_name: int
-
     runs-on: ubuntu-latest
     steps:
       - name: git-checkout-ref-action
@@ -110,7 +92,7 @@ jobs:
         shell: bash
         env:
           version_tag_numeric: '${{ steps.version.outputs.version_tag_numeric }}'
-          project: '${{ matrix.artifact_name }}'
+          project: prod
 
       - name: bump version using prod profile
         run: |
@@ -148,4 +130,4 @@ jobs:
           ARTIFACT_REPO_PATH: '${{ secrets.ARTIFACT_REPO_PATH }}'
           ARTIFACT_USER: '${{ secrets.ARTIFACT_USER }}'
           ARTIFACT_PASSWORD: '${{ secrets.ARTIFACT_PASSWORD }}'
-          build_env: '${{ matrix.artifact_name }}'
+          build_env: prod
