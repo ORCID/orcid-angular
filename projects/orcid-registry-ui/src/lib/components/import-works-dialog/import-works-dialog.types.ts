@@ -67,4 +67,9 @@ export interface ImportWorksDialogData {
   certifiedLinks: ImportWorksCertifiedLink[]
   /** Ordered list of links shown under the more services heading. */
   moreServicesLinks: ImportWorksMoreLink[]
+  /**
+   * Optional URL for the placeholder icon shown when a service has no imageUrl or icon
+   * (e.g. assets/vectors/CSPs/csp-placeholder.svg).
+   */
+  placeholderIconUrl?: string
 }

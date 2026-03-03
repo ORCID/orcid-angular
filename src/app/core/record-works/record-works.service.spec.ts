@@ -150,12 +150,18 @@ describe('RecordWorksService', () => {
         done()
       })
 
-      const req = httpTestingController.expectOne(
+      const wizardReq = httpTestingController.expectOne(
         runtimeEnvironment.API_WEB +
           'workspace/retrieve-works-search-and-link-wizard.json'
       )
-      expect(req.request.method).toBe('GET')
-      req.flush(listPayload)
+      expect(wizardReq.request.method).toBe('GET')
+      wizardReq.flush(listPayload)
+
+      // Service also requests localize .properties when CERTIFIED_LINKS_LOCALIZE_BASE_URL is set
+      const localizeReqs = httpTestingController.match((req) =>
+        req.url.includes('works-search-and-link') && req.url.endsWith('.properties')
+      )
+      localizeReqs.forEach((r) => r.flush(''))
     })
 
     it('returns empty certified and more lists when API returns empty array', (done) => {
@@ -166,11 +172,16 @@ describe('RecordWorksService', () => {
         done()
       })
 
-      const req = httpTestingController.expectOne(
+      const wizardReq = httpTestingController.expectOne(
         runtimeEnvironment.API_WEB +
           'workspace/retrieve-works-search-and-link-wizard.json'
       )
-      req.flush([])
+      wizardReq.flush([])
+
+      const localizeReqs = httpTestingController.match((req) =>
+        req.url.includes('works-search-and-link') && req.url.endsWith('.properties')
+      )
+      localizeReqs.forEach((r) => r.flush(''))
     })
   })
 })

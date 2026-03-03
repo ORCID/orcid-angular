@@ -72,10 +72,7 @@
             *ngFor="let link of certifiedLinks"
             class="import-works-dialog__card import-works-dialog__card--certified"
           >
-            <div
-              class="import-works-dialog__card-icon"
-              *ngIf="link.imageUrl || link.icon"
-            >
+            <div class="import-works-dialog__card-icon">
               <img
                 *ngIf="link.imageUrl"
                 [src]="link.imageUrl"
@@ -87,6 +84,18 @@
                 [attr.aria-hidden]="true"
                 >{{ link.icon }}</mat-icon
               >
+              <ng-container *ngIf="!link.imageUrl && !link.icon">
+                <img
+                  *ngIf="placeholderIconUrl"
+                  [src]="placeholderIconUrl"
+                  alt=""
+                  class="import-works-dialog__card-img import-works-dialog__card-img--placeholder"
+                  aria-hidden="true"
+                />
+                <mat-icon *ngIf="!placeholderIconUrl" [attr.aria-hidden]="true"
+                  >link</mat-icon
+                >
+              </ng-container>
             </div>
             <div class="import-works-dialog__card-content">
               <p class="import-works-dialog__card-title">{{ link.name }}</p>
@@ -130,7 +139,12 @@
       aria-labelledby="import-works-more-heading"
       *ngIf="loading || moreServicesLinks.length"
     >
-      <div class="import-works-dialog__more-panel">
+      <div
+        class="import-works-dialog__more-panel"
+        [class.import-works-dialog__more-panel--collapsed]="
+          !moreServicesExpanded
+        "
+      >
         <div
           class="import-works-dialog__more-header"
           (click)="toggleMoreServices()"

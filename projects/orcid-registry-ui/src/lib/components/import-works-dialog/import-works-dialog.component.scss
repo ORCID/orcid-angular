@@ -118,6 +118,10 @@
     width: 48px;
     height: 48px;
     object-fit: contain;
+
+    &--placeholder {
+      object-fit: contain;
+    }
   }
 
   mat-icon {
@@ -239,6 +243,10 @@
   border-bottom: 1px solid var(--orcid-ui-background-light, #eeeeee);
   border-radius: var(--orcid-space-1, 4px);
   overflow: hidden;
+
+  &--collapsed {
+    border-bottom: none;
+  }
 }
 
 .import-works-dialog__more-header {
