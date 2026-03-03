@@ -12,7 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { MatIconModule } from '@angular/material/icon'
 import { TwoFactorAuthFormComponent } from '@orcid/ui'
-import { DocumentationPageComponent } from '../components/documentation-page/documentation-page.component'
+import { DocumentationPageComponent } from '../../components/documentation-page/documentation-page.component'
 import '@angular/localize/init'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 

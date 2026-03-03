@@ -18,6 +18,8 @@ export interface EnvironmentInterface {
   VERBOSE_SNACKBAR_ERRORS_REPORTS: boolean
   WORDPRESS_S3: string
   WORDPRESS_S3_FALLBACK: string
+  /** Base URL for certified links (e.g. S3 bucket). Fetched as {CERTIFIED_LINKS_LOCALIZE_BASE_URL}/works-search-and-link.{lang}.properties */
+  CERTIFIED_LINKS_LOCALIZE_BASE_URL?: string
   NEW_RELIC_APP: string
   LANGUAGE_MENU_OPTIONS: {
     [key: string]: string

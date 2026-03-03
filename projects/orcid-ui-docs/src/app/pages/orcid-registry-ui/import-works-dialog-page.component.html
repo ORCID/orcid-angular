@@ -1,0 +1,166 @@
+<app-documentation-page
+  title="Import your works dialog"
+  description="Registry dialog for importing works from certified and other services. Uses the orcid-modal shell from @orcid/ui. Data is passed via MAT_DIALOG_DATA; action buttons open the service URL in a new tab."
+>
+  <div controls>
+    <p>
+      Configure the dialog data and open it to preview. This component is part
+      of
+      <code>@orcid/registry-ui</code>.
+    </p>
+    <div class="controls-grid">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Title</mat-label>
+        <input matInput [(ngModel)]="title" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Intro text</mat-label>
+        <textarea matInput [(ngModel)]="introText" rows="3"></textarea>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Support link URL</mat-label>
+        <input matInput [(ngModel)]="supportLinkUrl" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Support link label</mat-label>
+        <input matInput [(ngModel)]="supportLinkLabel" />
+      </mat-form-field>
+    </div>
+
+    <h4>Certified links (first connected = show "Connected")</h4>
+    <div
+      class="controls-grid"
+      *ngFor="let link of certifiedLinks; let i = index"
+    >
+      <mat-form-field appearance="outline">
+        <mat-label>Certified {{ i + 1 }} name</mat-label>
+        <input matInput [(ngModel)]="link.name" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Certified {{ i + 1 }} URL</mat-label>
+        <input matInput [(ngModel)]="link.url" />
+      </mat-form-field>
+      <mat-checkbox [(ngModel)]="link.connected">Connected</mat-checkbox>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Certified {{ i + 1 }} description</mat-label>
+        <textarea matInput [(ngModel)]="link.description" rows="2"></textarea>
+      </mat-form-field>
+    </div>
+
+    <h4>More services links</h4>
+    <div
+      class="controls-grid"
+      *ngFor="let link of moreServicesLinks; let i = index"
+    >
+      <mat-form-field appearance="outline">
+        <mat-label>More {{ i + 1 }} name</mat-label>
+        <input matInput [(ngModel)]="link.name" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>More {{ i + 1 }} URL</mat-label>
+        <input matInput [(ngModel)]="link.url" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>More {{ i + 1 }} description</mat-label>
+        <textarea matInput [(ngModel)]="link.description" rows="2"></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div examples>
+    <div class="example-container">
+      <button mat-flat-button type="button" (click)="openDialog()">
+        Open Import your works dialog
+      </button>
+      <button
+        mat-stroked-button
+        type="button"
+        (click)="openDialogWithLoading()"
+      >
+        Open with loading (shimmer)
+      </button>
+    </div>
+  </div>
+
+  <div usage>
+    <pre><code class="language-ts">import &#123; MatDialog &#125; from '@angular/material/dialog'
+import &#123;
+  ImportWorksDialogComponent,
+  ORCID_MODAL_DIALOG_PANEL_CLASS,
+  type ImportWorksDialogData,
+&#125; from '@orcid/registry-ui'
+
+// ...
+
+// Open with loading state (shimmer), then update when data is ready:
+const dialogRef = this.dialog.open(ImportWorksDialogComponent, &#123;
+  panelClass: ORCID_MODAL_DIALOG_PANEL_CLASS,
+  data: &#123;
+    loading: true,
+    title: 'Import your works',
+    certifiedLinks: [],
+    moreServicesLinks: [],
+  &#125; as ImportWorksDialogData,
+  width: '850px',
+  maxHeight: '90vh',
+&#125;)
+this.loadDialogData().subscribe((data) => &#123;
+  dialogRef.componentInstance.data = &#123; ...data, loading: false &#125;
+&#125;)
+
+// Or open with data already loaded:
+this.dialog.open(ImportWorksDialogComponent, &#123;
+  panelClass: ORCID_MODAL_DIALOG_PANEL_CLASS,
+  data: &#123;
+    title: 'Import your works',
+    introText: '...',
+    supportLink: &#123; url: '...', label: '...' &#125;,
+    certifiedLinks: [&#123; name, description, url, connected &#125;],
+    moreServicesLinks: [&#123; name, description, url &#125;],
+  &#125; as ImportWorksDialogData,
+  width: '850px',
+  maxHeight: '90vh',
+&#125;)</code></pre>
+  </div>
+
+  <div inputs>
+    <p>
+      Dialog content is driven by <code>MAT_DIALOG_DATA</code> of type
+      <code>ImportWorksDialogData</code>.
+    </p>
+    <ul>
+      <li>
+        <code>loading</code>: Optional. When <code>true</code>, the dialog shows
+        shimmer skeleton placeholders for both sections (certified and more
+        services) instead of link content. Use when fetching data
+        asynchronously; set to <code>false</code> when data is ready (e.g.
+        <code
+          >dialogRef.componentInstance.data = &#123; ...data, loading: false
+          &#125;</code
+        >). Uses <code>orcid-skeleton-placeholder</code> from
+        <code>@orcid/ui</code>.
+      </li>
+      <li><code>title</code>: Header text.</li>
+      <li><code>introText</code>: Optional intro paragraph.</li>
+      <li>
+        <code>supportLink</code>: Optional &#123; url, label &#125; link below
+        intro.
+      </li>
+      <li>
+        <code>certifiedLinks</code>: Array of &#123; name, description, url,
+        connected?, icon? &#125;. Optional <code>icon</code> is a Material icon
+        name. When <code>connected</code> is true, the card shows "Connected"
+        instead of "Connect now".
+      </li>
+      <li>
+        <code>moreServicesLinks</code>: Ordered array of &#123; name,
+        description, url, icon? &#125;. Optional <code>icon</code> is a Material
+        icon name.
+      </li>
+    </ul>
+    <p>"Connect now" buttons open the link <code>url</code> in a new tab.</p>
+  </div>
+</app-documentation-page>

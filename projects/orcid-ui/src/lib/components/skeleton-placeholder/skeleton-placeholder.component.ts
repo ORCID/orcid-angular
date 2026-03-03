@@ -15,6 +15,7 @@ import { CommonModule } from '@angular/common'
         overflow: hidden;
       }
 
+      /* Default: accent/dark background — light shimmer (production behavior) */
       :host::before {
         content: '';
         position: absolute;
@@ -29,6 +30,24 @@ import { CommonModule } from '@angular/common'
           rgba(255, 255, 255, 0.12) 50%,
           rgba(255, 255, 255, 0.08) 70%,
           rgba(255, 255, 255, 0.08) 100%
+        );
+        background-size: 200% 100%;
+        animation: shimmer 2s infinite ease-in-out;
+      }
+
+      /* Light/white background — dark shimmer so it’s visible on surface */
+      :host.skeleton-placeholder--surface {
+        background-color: rgba(0, 0, 0, 0.04);
+      }
+
+      :host.skeleton-placeholder--surface::before {
+        background: linear-gradient(
+          90deg,
+          transparent 0%,
+          rgba(0, 0, 0, 0.05) 25%,
+          rgba(0, 0, 0, 0.1) 50%,
+          rgba(0, 0, 0, 0.05) 75%,
+          transparent 100%
         );
         background-size: 200% 100%;
         animation: shimmer 2s infinite ease-in-out;
@@ -66,9 +85,18 @@ export class SkeletonPlaceholderComponent {
   @Input() width = '100%'
   @Input() height = '100%'
   @Input() shimmerPercentage = 100
+  /**
+   * When true (default), shimmer is tuned for accent/dark backgrounds (light shimmer).
+   * When false, shimmer is tuned for light/white backgrounds (dark shimmer).
+   */
+  @Input() accentBackground = true
 
-  @HostBinding('class') get hostClasses() {
-    return this.shape
+  @HostBinding('class') get hostClasses(): string {
+    const shapeClass = this.shape
+    const surfaceClass = !this.accentBackground
+      ? 'skeleton-placeholder--surface'
+      : ''
+    return [shapeClass, surfaceClass].filter(Boolean).join(' ')
   }
 
   @HostBinding('style.width') get hostWidth() {

@@ -1,0 +1,12 @@
+.example-container {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 8px;
+  background: var(--orcid-surface, #ffffff);
+}
+
+.result {
+  margin: 0;
+  color: var(--orcid-color-text-muted, #555555);
+}

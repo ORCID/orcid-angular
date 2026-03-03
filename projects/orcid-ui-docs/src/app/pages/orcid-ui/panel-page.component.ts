@@ -9,7 +9,7 @@ import { MatInputModule } from '@angular/material/input'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatSelectModule } from '@angular/material/select'
 import { MatTooltipModule } from '@angular/material/tooltip'
-import { DocumentationPageComponent } from '../components/documentation-page/documentation-page.component'
+import { DocumentationPageComponent } from '../../components/documentation-page/documentation-page.component'
 
 @Component({
   selector: 'orcid-panel-page',

@@ -38,7 +38,7 @@
 .action-surface__body {
   display: flex;
   align-items: center;
-  gap: var(--orcid-space-5, 24px);
+  gap: var(--action-surface-body-gap, var(--orcid-space-4, 16px));
   flex: 1;
   min-width: 0;
 }
@@ -68,7 +68,7 @@
 .action-surface__actions {
   display: flex;
   align-items: center;
-  gap: var(--orcid-space-5, 24px);
+  gap: var(--action-surface-actions-gap, var(--orcid-space-6, 32px));
   flex-wrap: wrap;
   flex-shrink: 0;
 
@@ -76,6 +76,14 @@
     font-size: var(--orcid-font-size-body-small, 14px);
     font-weight: var(--orcid-font-weight-normal, 400);
   }
+}
+
+.action-surface__text a {
+  color: var(
+    --action-surface-link-color,
+    var(--orcid-color-brand-secondary-dark, #085c77)
+  );
+  text-decoration: var(--action-surface-link-decoration, underline);
 }
 
 @mixin action-surface-mobile-layout {

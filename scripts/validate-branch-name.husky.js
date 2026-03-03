@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 
-// Enforce branch naming: <developer-name>/AA-0000[anything]
+// Enforce branch naming: <developer-name>/PROJECT-NNN[anything]
 // - developer-name: lowercase letters, numbers, dot, underscore, hyphen (one or more)
-// - ticket: exactly 2 uppercase letters, hyphen, exactly 4 digits (e.g., PD-0000)
+// - ticket: one or more uppercase letters, hyphen, one or more digits (e.g., PD-0000, ENGAGE-243)
 // - suffix: any optional characters after the ticket (e.g., "/feature-x", "-refactor", etc.)
 // Special allowed names: transifex
 // Examples:
 //   yourname/PD-0000
+//   lmendoza/ENGAGE-243
 //   yourname/PD-0000-my-feature
 //   your.name/AB-0123/quick-fix
 
@@ -67,15 +68,16 @@ function main() {
     process.exit(0)
   }
 
-  // developer-name / AA-0000 [anything]
-  const pattern = /^[a-z0-9._-]+\/[A-Z]{2}-\d{4}.*$/
+  // developer-name / PROJECT-NNN [anything] (e.g. PD-0000, ENGAGE-243)
+  const pattern = /^[a-z0-9._-]+\/[A-Z]+-\d+.*$/
 
   if (!pattern.test(branch)) {
     console.error(
-      '\u001b[31mBranch name must follow "<developer-name>/AA-0000[anything]" or be a special allowed name (e.g., "transifex").\u001b[0m'
+      '\u001b[31mBranch name must follow "<developer-name>/PROJECT-NNN[anything]" or be a special allowed name (e.g., "transifex").\u001b[0m'
     )
     console.error('\nExamples:')
     console.error('  yourname/PD-0000')
+    console.error('  lmendoza/ENGAGE-243')
     console.error('  yourname/PD-0000-my-feature')
     console.error('  your.name/AB-0123/quick-fix')
     console.error('  transifex')

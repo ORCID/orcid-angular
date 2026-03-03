@@ -10,7 +10,7 @@ import {
   RegistryNotificationActionEvent,
   RegistryPermissionNotification,
 } from '@orcid/registry-ui'
-import { DocumentationPageComponent } from '../components/documentation-page/documentation-page.component'
+import { DocumentationPageComponent } from '../../components/documentation-page/documentation-page.component'
 
 @Component({
   selector: 'orcid-registry-permission-notifications-page',
