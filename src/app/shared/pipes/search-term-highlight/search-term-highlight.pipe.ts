@@ -13,8 +13,11 @@ export class SearchTermHighlightPipe implements PipeTransform {
     value: string | null | undefined,
     searchTerm: string | null | undefined
   ): SafeHtml | string | null | undefined {
-    if (!value || !searchTerm) {
+    if (!value) {
       return value
+    }
+    if (!searchTerm) {
+      return sanitizeHtmlForTrustedBypass(value)
     }
     const escapedSearch = searchTerm.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
     const regex = new RegExp(escapedSearch, 'gi')
