@@ -27,5 +27,4 @@ jobs:
       # NOTE: passing in a specific branch means that commits made during the pipeline before the final build is completed will be included
       #       the default is to always checkout the current commit that runs the pipeline in each job
       ref: main
-      run_docker: false
 

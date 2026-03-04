@@ -27,7 +27,7 @@ on:
         description: 'Whether to run Docker builds'
         type: boolean
         required: false
-        default: true
+        default: false
 
   workflow_dispatch:
     inputs:
@@ -61,7 +61,7 @@ on:
         description: 'Whether to run Docker builds'
         type: boolean
         required: false
-        default: true
+        default: false
 
 # cancel running job if another commit comes in
 concurrency:
