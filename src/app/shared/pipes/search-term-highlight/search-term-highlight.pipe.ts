@@ -16,15 +16,15 @@ export class SearchTermHighlightPipe implements PipeTransform {
     if (!value) {
       return value
     }
-    let replacedValue = value
-    if (searchTerm) {
-      const escapedSearch = searchTerm.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
-      const regex = new RegExp(escapedSearch, 'gi')
-      replacedValue = value.replace(
-        regex,
-        (match) => `<span class="highlight">${match}</span>`
-      )
+    if (!searchTerm) {
+      return sanitizeHtmlForTrustedBypass(value)
     }
+    const escapedSearch = searchTerm.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
+    const regex = new RegExp(escapedSearch, 'gi')
+    const replacedValue = value.replace(
+      regex,
+      (match) => `<span class="highlight">${match}</span>`
+    )
     const sanitized = sanitizeHtmlForTrustedBypass(replacedValue)
     return this.sanitizer.bypassSecurityTrustHtml(sanitized)
   }
