@@ -1,9 +1,121 @@
+## v2.130.9 - 2026-03-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.130.8...v2.130.9)
+
+- [#2760](https://github.com/ORCID/orcid-angular/pull/2760): Lmendoza/pd 5100
+
+## v2.130.8 - 2026-03-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.130.7...v2.130.8)
+
+## v2.130.7 - 2026-03-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.130.6...v2.130.7)
+
+- [#2758](https://github.com/ORCID/orcid-angular/pull/2758): PD-5076
+
+## v2.130.6 - 2026-03-03
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.130.5...v2.130.6)
+
+- [#2757](https://github.com/ORCID/orcid-angular/pull/2757): PD-5079
+
+## v2.130.5 - 2026-02-26
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.130.4...v2.130.5)
+
+## v2.130.4 - 2026-02-26
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.130.3...v2.130.4)
+
+## v2.130.3 - 2026-02-26
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.130.2...v2.130.3)
+
+## v2.130.2 - 2026-02-26
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.130.1...v2.130.2)
+
+- [#2753](https://github.com/ORCID/orcid-angular/pull/2753): PD-4788
+
+## v2.130.1 - 2026-02-25
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.130.0...v2.130.1)
+
+## v2.130.0 - 2026-02-18
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.129.10...v2.130.0)
+
+## v2.129.10 - 2026-02-16
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.129.9...v2.129.10)
+
+- [#2747](https://github.com/ORCID/orcid-angular/pull/2747): PD-4994
+
+## v2.129.9 - 2026-02-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.129.8...v2.129.9)
+
+- [#2745](https://github.com/ORCID/orcid-angular/pull/2745): PD-4994,PD-4993
+
+## v2.129.8 - 2026-02-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.129.7...v2.129.8)
+
+## v2.129.7 - 2026-02-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.129.6...v2.129.7)
+
+## v2.129.6 - 2026-02-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.129.5...v2.129.6)
+
+- [#2742](https://github.com/ORCID/orcid-angular/pull/2742): Lmendoza/pd 3855
+
+## v2.129.5 - 2026-02-10
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.129.4...v2.129.5)
+
+- [#2741](https://github.com/ORCID/orcid-angular/pull/2741): ${PD-4790} revert pr #2737
+
+## v2.129.4 - 2026-02-10
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.129.3...v2.129.4)
+
+## v2.129.3 - 2026-02-10
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.129.2...v2.129.3)
+
+## v2.129.2 - 2026-02-04
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.129.1...v2.129.2)
+
+## v2.129.1 - 2026-01-30
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.129.0...v2.129.1)
+
+- [#2737](https://github.com/ORCID/orcid-angular/pull/2737): Aromanovv/pd 4790 add 2fa to account settings password reset
+
+## v2.129.0 - 2026-01-29
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.128.17...v2.129.0)
+
+## v2.128.17 - 2026-01-28
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.128.16...v2.128.17)
+
+## v2.128.16 - 2026-01-27
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.128.15...v2.128.16)
+
+- [#2736](https://github.com/ORCID/orcid-angular/pull/2736): Transifex: update translations
+
 ## v2.128.15 - 2026-01-22
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.128.14...v2.128.15)
 
 - [#2735](https://github.com/ORCID/orcid-angular/pull/2735): PD-0000
-- [#2734](https://github.com/ORCID/orcid-angular/pull/2734): 
+- [#2734](https://github.com/ORCID/orcid-angular/pull/2734):
 
 ## v2.128.14 - 2026-01-22
 

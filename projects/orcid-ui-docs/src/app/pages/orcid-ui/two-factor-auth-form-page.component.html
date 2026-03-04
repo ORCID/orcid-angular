@@ -1,0 +1,150 @@
+<app-documentation-page
+  title="Two Factor Authentication Form"
+  description="The &lt;app-two-factor-auth-form&gt; component is a subform that validates a user's 2fa or recovery code."
+>
+  <div controls>
+    <p>Customize the subform to preview different configurations:</p>
+
+    <div style="display: grid; gap: 16px; margin-bottom: 24px">
+      <mat-checkbox [(ngModel)]="showHelpText">
+        Display help text / controls
+      </mat-checkbox>
+
+      <mat-checkbox [(ngModel)]="showAlert"> Display alert </mat-checkbox>
+
+      <button
+        style="width: 100px; height: 40px; margin-left: 10px"
+        mat-button
+        (click)="form.reset()"
+      >
+        Reset form
+      </button>
+    </div>
+  </div>
+
+  <div examples>
+    <form [formGroup]="form" class="w-[537px]">
+      <app-two-factor-auth-form
+        [showAlert]="showAlert"
+        [showHelpText]="showHelpText"
+        codeControlName="twoFactorCode"
+        recoveryControlName="twoFactorRecoveryCode"
+      >
+      </app-two-factor-auth-form>
+    </form>
+  </div>
+
+  <div usage style="font-size: 14px">
+    <p>
+      This component is a sub-form that must be placed inside a parent
+      <code>[formGroup]</code>. It manages the UI switching and validation logic
+      between the 2FA code and recovery code inputs.
+    </p>
+
+    <p>To implement this component, use the code highlighted in yellow.</p>
+
+    <h4>1. Template</h4>
+    <p>
+      Place the component inside your existing form. Ensure the control names
+      passed here match your FormGroup definition.
+    </p>
+    <pre><code class="language-html">&lt;form [formGroup]="form" (ngSubmit)="save()"&gt;
+  &lt;!-- Other inputs... --&gt;
+
+  &#64;if (twoFactorEnabled) &#123;
+    <span style="background-color: #fff59d; color: #000;">&lt;app-two-factor-auth-form</span>
+      <span style="background-color: #fff59d; color: #000;">codeControlName="twoFactorCode"</span>
+      <span style="background-color: #fff59d; color: #000;">recoveryControlName="twoFactorRecoveryCode"</span>
+      <span style="background-color: #fff59d; color: #000;">[showAlert]="true"&gt;</span>
+    <span style="background-color: #fff59d; color: #000;">&lt;/app-two-factor-auth-form&gt;</span>
+  &#125;
+&lt;/form&gt;</code></pre>
+
+    <h4>2. Form Configuration</h4>
+    <p>
+      Initialize the controls in your parent component. Note that
+      <code>Validators.required</code> is managed automatically by the child
+      component and should not be added here.
+    </p>
+    <pre><code class="language-typescript">this.form = this.fb.group(&#123;
+  // ... other controls
+  <span style="background-color: #fff59d; color: #000;">twoFactorCode: [null, [Validators.minLength(6), Validators.maxLength(6)]],</span>
+  <span style="background-color: #fff59d; color: #000;">twoFactorRecoveryCode: [null, [Validators.minLength(10), Validators.maxLength(10)]],</span>
+&#125;);</code></pre>
+
+    <h4>3. Handling Submit & Responses</h4>
+    <p>
+      Use <code>@ViewChild</code> to access the component. This allows you to
+      delegate backend error mapping and focus management.
+    </p>
+    <pre><code class="language-typescript"><span style="background-color: #fff59d; color: #000;">@ViewChild(TwoFactorAuthFormComponent) twoFactorComponent: TwoFactorAuthFormComponent;</span>
+
+save() &#123;
+  if (this.form.valid) &#123;
+    this.service.update(this.form.value).subscribe(response => &#123;
+      // Pass backend response to child to handle errors/focus
+      <span style="background-color: #fff59d; color: #000;">this.twoFactorComponent?.processBackendResponse(response);</span>
+      <span style="color: #666">// Used when we don't know if the user</span>
+      <span style="color: #666">// has 2fa enabled (e.g. signin)</span>
+      <span style="background-color: #fff59d; color: #000;">this.twoFactorEnabled = response.twoFactorEnabled;</span>
+    &#125;);
+  &#125;
+&#125;</code></pre>
+
+    <h4>4. Interface Definition</h4>
+    <p>
+      The endpoint payload/response object needs to extend the
+      <strong><code>TwoFactorAuthForm</code></strong> interface/pojo.
+    </p>
+    <pre><code class="language-typescript">export interface TwoFactorAuthForm &#123;
+  invalidTwoFactorCode?: boolean;
+  invalidTwoFactorRecoveryCode?: boolean;
+  twoFactorCode?: string;
+  twoFactorRecoveryCode?: string;
+  twoFactorEnabled?: boolean;
+&#125;</code></pre>
+
+    <h4>5. Backend Implementation</h4>
+    <p>
+      The backend should use the
+      <code>TwoFactorAuthenticationManager</code> to validate the request.
+    </p>
+    <p>
+      If no codes are provided, the backend will assume it is a two-step form
+      flow: it will set the <code>twoFactorEnabled</code> flag to true and
+      return the form so the UI can display the inputs. Otherwise, it will
+      validate the codes, assign error flags if necessary, and return the form.
+    </p>
+    <p>
+      In case the 2FA check passes successfully, the manager returns
+      <code>true</code> and the function proceeds to the next step.
+    </p>
+    <pre><code class="language-java"><span style="background-color: #fff59d; color: #000;">if (!twoFactorAuthenticationManager.validateTwoFactorAuthForm(orcid, form)) &#123;</span>
+    <span style="background-color: #fff59d; color: #000;">return form;</span>
+<span style="background-color: #fff59d; color: #000;">&#125;</span></code></pre>
+  </div>
+  <div inputs>
+    <ul style="font-size: 14px">
+      <li>
+        <code style="font-weight: bold">codeControlName</code>:
+        <code>string</code>. The name of the form control for the 6-digit
+        authentication code. (default <code>'twoFactorCode'</code>)
+      </li>
+      <li>
+        <code style="font-weight: bold">recoveryControlName</code>:
+        <code>string</code>. The name of the form control for the 10-character
+        recovery code. (default <code>'twoFactorRecoveryCode'</code>)
+      </li>
+      <li>
+        <code style="font-weight: bold">showAlert</code>: <code>boolean</code>.
+        Whether to display the notice alert indicating 2FA is active. (default
+        <code>false</code>)
+      </li>
+      <li>
+        <code style="font-weight: bold">showHelpText</code>:
+        <code>boolean</code>. Whether to display the helper links (e.g. "Use a
+        recovery code instead") below the inputs. (default <code>true</code>)
+      </li>
+    </ul>
+  </div>
+</app-documentation-page>

@@ -64,10 +64,13 @@ export class PanelsComponent implements OnInit {
   @Input() addMenuOptions: {
     action: ADD_EVENT_ACTION
     label: string
+    description?: string
     modal?: ComponentType<any>
     type?: EXTERNAL_ID_TYPE_WORK
     id?: string
   }[] = []
+
+  @Input() useNewWorksAddMenuStyle = false
 
   @Input() labelAddButton = $localize`:@@shared.sortItems:Sort Items`
   @Input() labelExportButton = $localize`:@@shared.exportItems:Export Items`
@@ -89,6 +92,8 @@ export class PanelsComponent implements OnInit {
     const menuOption = this.addMenuOptions.find((x) => x.action === action)
     if (menuOption && menuOption.modal) {
       this.openModal(menuOption.modal, { ...menuOption, type: menuOption.type })
+    } else if (menuOption && type === 'works') {
+      this.addEvent.emit(action)
     } else {
       switch (type) {
         case 'employment':

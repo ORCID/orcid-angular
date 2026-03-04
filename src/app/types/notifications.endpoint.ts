@@ -97,6 +97,12 @@ export interface InboxNotificationPermission extends InboxNotification {
   notificationIntro: string
 }
 
+export type InboxNotificationItem =
+  | InboxNotificationAmended
+  | InboxNotificationHtml
+  | InboxNotificationInstitutional
+  | InboxNotificationPermission
+
 export type notificationType =
   | 'AMENDED'
   | 'ADMINISTRATIVE'

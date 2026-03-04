@@ -5,62 +5,106 @@ export const routes: Routes = [
     path: '',
     pathMatch: 'full',
     loadComponent: () =>
-      import('./pages/overview-page.component').then(
+      import('./pages/orcid-ui/overview-page.component').then(
         (m) => m.OverviewPageComponent
       ),
   },
   {
     path: 'colors',
     loadComponent: () =>
-      import('./pages/colors-page.component').then(
+      import('./pages/orcid-ui/colors-page.component').then(
         (m) => m.ColorsPageComponent
       ),
   },
   {
     path: 'typography',
     loadComponent: () =>
-      import('./pages/typography-page.component').then(
+      import('./pages/orcid-ui/typography-page.component').then(
         (m) => m.TypographyPageComponent
       ),
   },
   {
     path: 'record-header',
     loadComponent: () =>
-      import('./pages/record-header-page.component').then(
+      import('./pages/orcid-ui/record-header-page.component').then(
         (m) => m.RecordHeaderPageComponent
       ),
   },
   {
     path: 'text-with-tooltip',
     loadComponent: () =>
-      import('./pages/text-with-tooltip-page.component').then(
+      import('./pages/orcid-ui/text-with-tooltip-page.component').then(
         (m) => m.TextWithTooltipPageComponent
       ),
   },
   {
-    path: 'accent-button',
+    path: 'material-buttons-directives',
     loadComponent: () =>
-      import('./pages/accent-button-page.component').then(
-        (m) => m.AccentButtonPageComponent
-      ),
+      import(
+        './pages/orcid-ui/material-buttons-directives-page.component'
+      ).then((m) => m.MaterialButtonsDirectivesPageComponent),
   },
   {
     path: 'alert-message',
     loadComponent: () =>
-      import('./pages/alert-message-page.component').then(
+      import('./pages/orcid-ui/alert-message-page.component').then(
         (m) => m.AlertMessagePageComponent
+      ),
+  },
+  {
+    path: 'action-surface',
+    loadComponent: () =>
+      import('./pages/orcid-ui/action-surface-page.component').then(
+        (m) => m.ActionSurfacePageComponent
+      ),
+  },
+  {
+    path: 'action-surface-container',
+    loadComponent: () =>
+      import('./pages/orcid-ui/action-surface-container-page.component').then(
+        (m) => m.ActionSurfaceContainerPageComponent
       ),
   },
   {
     path: 'panel',
     loadComponent: () =>
-      import('./pages/panel-page.component').then((m) => m.PanelPageComponent),
+      import('./pages/orcid-ui/panel-page.component').then(
+        (m) => m.PanelPageComponent
+      ),
+  },
+  {
+    path: 'modal',
+    loadComponent: () =>
+      import('./pages/orcid-ui/modal-page.component').then(
+        (m) => m.ModalPageComponent
+      ),
   },
   {
     path: 'skeleton-placeholder',
     loadComponent: () =>
-      import('./pages/skeleton-placeholder-page.component').then(
+      import('./pages/orcid-ui/skeleton-placeholder-page.component').then(
         (m) => m.SkeletonPlaceholderPageComponent
       ),
+  },
+  {
+    path: 'two-factor-auth-form',
+    loadComponent: () =>
+      import('./pages/orcid-ui/two-factor-auth-form-page.component').then(
+        (m) => m.TwoFactorAuthFormPageComponent
+      ),
+  },
+  {
+    path: 'registry-permission-notifications',
+    loadComponent: () =>
+      import(
+        './pages/orcid-registry-ui/registry-permission-notifications-page.component'
+      ).then((m) => m.RegistryPermissionNotificationsPageComponent),
+  },
+  {
+    path: 'registry-import-works-dialog',
+    loadComponent: () =>
+      import(
+        './pages/orcid-registry-ui/import-works-dialog-page.component'
+      ).then((m) => m.ImportWorksDialogPageComponent),
   },
 ]

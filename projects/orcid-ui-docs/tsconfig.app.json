@@ -5,8 +5,17 @@
   "compilerOptions": {
     "outDir": "../../out-tsc/app",
     "types": [],
-    "composite": true
+    "rootDir": "../..",
+    "composite": false
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["src/**/*.spec.ts"]
+  "exclude": ["src/**/*.spec.ts"],
+  "references": [
+    {
+      "path": "../orcid-ui/tsconfig.lib.json"
+    },
+    {
+      "path": "../orcid-registry-ui/tsconfig.lib.json"
+    }
+  ]
 }

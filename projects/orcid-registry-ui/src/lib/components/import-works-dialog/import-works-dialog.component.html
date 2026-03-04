@@ -1,0 +1,271 @@
+<orcid-modal [title]="title" [closeAriaLabel]="closeAriaLabel">
+  <div orcidModalBody>
+    <div class="import-works-dialog__intro" *ngIf="introText">
+      <p class="import-works-dialog__intro-text">{{ introText }}</p>
+      <a
+        *ngIf="supportLink"
+        class="import-works-dialog__support-link"
+        [href]="supportLink.url"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {{ supportLink.label }}
+      </a>
+    </div>
+
+    <section
+      id="certified-services"
+      class="import-works-dialog__section certified-services"
+      role="region"
+      aria-labelledby="import-works-certified-heading"
+      *ngIf="loading || certifiedLinks.length"
+    >
+      <h2
+        id="import-works-certified-heading"
+        class="import-works-dialog__section-heading"
+      >
+        {{ certifiedSectionHeading }}
+      </h2>
+      <div class="import-works-dialog__card-list">
+        <!-- Shimmer skeleton cards while loading -->
+        <ng-container *ngIf="loading">
+          <div
+            *ngFor="let _ of certifiedSkeletonCount"
+            class="import-works-dialog__card import-works-dialog__card--certified import-works-dialog__card--skeleton"
+            aria-hidden="true"
+          >
+            <div class="import-works-dialog__card-icon">
+              <orcid-skeleton-placeholder
+                [accentBackground]="false"
+                shape="square"
+                width="48px"
+                height="48px"
+              ></orcid-skeleton-placeholder>
+            </div>
+            <div class="import-works-dialog__card-content">
+              <orcid-skeleton-placeholder
+                [accentBackground]="false"
+                class="import-works-dialog__skeleton-title"
+                height="27px"
+                width="60%"
+              ></orcid-skeleton-placeholder>
+              <orcid-skeleton-placeholder
+                [accentBackground]="false"
+                class="import-works-dialog__skeleton-line"
+                height="21px"
+                width="85%"
+              ></orcid-skeleton-placeholder>
+            </div>
+            <div class="import-works-dialog__card-actions">
+              <orcid-skeleton-placeholder
+                [accentBackground]="false"
+                class="import-works-dialog__skeleton-btn"
+                height="36px"
+                width="120px"
+              ></orcid-skeleton-placeholder>
+            </div>
+          </div>
+        </ng-container>
+        <!-- Real certified links -->
+        <ng-container *ngIf="!loading">
+          <div
+            *ngFor="let link of certifiedLinks"
+            class="import-works-dialog__card import-works-dialog__card--certified"
+          >
+            <div class="import-works-dialog__card-icon">
+              <img
+                *ngIf="link.imageUrl"
+                [src]="link.imageUrl"
+                [alt]="link.name + ' logo'"
+                class="import-works-dialog__card-img"
+              />
+              <mat-icon
+                *ngIf="!link.imageUrl && link.icon"
+                [attr.aria-hidden]="true"
+                >{{ link.icon }}</mat-icon
+              >
+              <ng-container *ngIf="!link.imageUrl && !link.icon">
+                <img
+                  *ngIf="placeholderIconUrl"
+                  [src]="placeholderIconUrl"
+                  alt=""
+                  class="import-works-dialog__card-img import-works-dialog__card-img--placeholder"
+                  aria-hidden="true"
+                />
+                <mat-icon *ngIf="!placeholderIconUrl" [attr.aria-hidden]="true"
+                  >link</mat-icon
+                >
+              </ng-container>
+            </div>
+            <div class="import-works-dialog__card-content">
+              <p class="import-works-dialog__card-title">{{ link.name }}</p>
+              <p class="import-works-dialog__card-description">
+                {{ link.description }}
+              </p>
+            </div>
+            <div class="import-works-dialog__card-actions">
+              <ng-container *ngIf="link.connected; else connectCertified">
+                <span
+                  class="import-works-dialog__connected"
+                  [attr.aria-label]="getConnectedAriaLabel(link.name)"
+                >
+                  <span
+                    class="import-works-dialog__connected-dot"
+                    aria-hidden="true"
+                  ></span>
+                  {{ connectedLabel }}
+                </span>
+              </ng-container>
+              <ng-template #connectCertified>
+                <button
+                  mat-flat-button
+                  class="import-works-dialog__btn-connect"
+                  [attr.aria-label]="getConnectNowAriaLabel(link.name)"
+                  (click)="openInNewTab(link.url)"
+                >
+                  {{ connectNowLabel }}
+                </button>
+              </ng-template>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </section>
+
+    <section
+      id="more-services"
+      class="import-works-dialog__section import-works-dialog__section--more more-services"
+      role="region"
+      aria-labelledby="import-works-more-heading"
+      *ngIf="loading || moreServicesLinks.length"
+    >
+      <div
+        class="import-works-dialog__more-panel"
+        [class.import-works-dialog__more-panel--collapsed]="
+          !moreServicesExpanded
+        "
+      >
+        <div
+          class="import-works-dialog__more-header"
+          (click)="toggleMoreServices()"
+          (keydown.enter)="toggleMoreServices()"
+          (keydown.space)="toggleMoreServices(); $event.preventDefault()"
+          tabindex="0"
+          role="button"
+          [attr.aria-expanded]="moreServicesExpanded"
+          [attr.aria-controls]="'import-works-more-list'"
+          [attr.aria-label]="moreServicesToggleAriaLabel"
+        >
+          <mat-icon
+            class="import-works-dialog__more-chevron"
+            aria-hidden="true"
+          >
+            {{ moreServicesExpanded ? 'expand_more' : 'expand_less' }}
+          </mat-icon>
+          <h2
+            id="import-works-more-heading"
+            class="import-works-dialog__more-heading-text"
+          >
+            {{ moreServicesHeading }}
+            <span class="import-works-dialog__more-count" *ngIf="!loading"
+              >({{ moreServicesLinks.length }})</span
+            >
+          </h2>
+        </div>
+        <div
+          id="import-works-more-list"
+          class="import-works-dialog__more-list"
+          role="region"
+          [attr.aria-labelledby]="'import-works-more-heading'"
+          [hidden]="!moreServicesExpanded"
+        >
+          <!-- Shimmer skeleton cards while loading -->
+          <ng-container *ngIf="loading">
+            <div
+              *ngFor="let _ of moreServicesSkeletonCount"
+              class="import-works-dialog__card import-works-dialog__card--more import-works-dialog__card--skeleton"
+              aria-hidden="true"
+            >
+              <div class="import-works-dialog__card-icon">
+                <orcid-skeleton-placeholder
+                  [accentBackground]="false"
+                  shape="square"
+                  width="48px"
+                  height="48px"
+                ></orcid-skeleton-placeholder>
+              </div>
+              <div class="import-works-dialog__card-content">
+                <orcid-skeleton-placeholder
+                  [accentBackground]="false"
+                  class="import-works-dialog__skeleton-title"
+                  height="27px"
+                  width="55%"
+                ></orcid-skeleton-placeholder>
+                <orcid-skeleton-placeholder
+                  [accentBackground]="false"
+                  class="import-works-dialog__skeleton-line"
+                  height="21px"
+                  width="100%"
+                ></orcid-skeleton-placeholder>
+                <orcid-skeleton-placeholder
+                  [accentBackground]="false"
+                  class="import-works-dialog__skeleton-line"
+                  height="21px"
+                  width="80%"
+                ></orcid-skeleton-placeholder>
+              </div>
+              <div class="import-works-dialog__card-actions">
+                <orcid-skeleton-placeholder
+                  [accentBackground]="false"
+                  class="import-works-dialog__skeleton-btn"
+                  height="36px"
+                  width="120px"
+                ></orcid-skeleton-placeholder>
+              </div>
+            </div>
+          </ng-container>
+          <!-- Real more services links -->
+          <ng-container *ngIf="!loading">
+            <div
+              *ngFor="let link of moreServicesLinks"
+              class="import-works-dialog__card import-works-dialog__card--more"
+            >
+              <div
+                class="import-works-dialog__card-icon"
+                *ngIf="link.imageUrl || link.icon"
+              >
+                <img
+                  *ngIf="link.imageUrl"
+                  [src]="link.imageUrl"
+                  [alt]="link.name + ' logo'"
+                  class="import-works-dialog__card-img"
+                />
+                <mat-icon
+                  *ngIf="!link.imageUrl && link.icon"
+                  [attr.aria-hidden]="true"
+                  >{{ link.icon }}</mat-icon
+                >
+              </div>
+              <div class="import-works-dialog__card-content">
+                <p class="import-works-dialog__card-title">{{ link.name }}</p>
+                <p class="import-works-dialog__card-description">
+                  {{ link.description }}
+                </p>
+              </div>
+              <div class="import-works-dialog__card-actions">
+                <button
+                  mat-stroked-button
+                  class="import-works-dialog__btn-connect-more"
+                  [attr.aria-label]="getConnectNowAriaLabel(link.name)"
+                  (click)="openInNewTab(link.url)"
+                >
+                  {{ connectNowLabel }}
+                </button>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </section>
+  </div>
+</orcid-modal>
