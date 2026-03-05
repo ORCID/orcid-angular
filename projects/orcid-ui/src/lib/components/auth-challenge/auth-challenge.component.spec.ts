@@ -1,80 +1,74 @@
-import { Component, ViewChild } from '@angular/core'
 import {
   ComponentFixture,
   TestBed,
   fakeAsync,
   tick,
 } from '@angular/core/testing'
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
+import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 import { AuthChallengeComponent } from './auth-challenge.component'
-import { AlertMessageComponent } from '../alert-message/alert-message.component'
 import { By } from '@angular/platform-browser'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import '@angular/localize/init'
 
-// 1. Define a Host Component to simulate the Parent Form
-@Component({
-  template: `
-    <form [formGroup]="form">
-      <app-auth-challenge
-        [showAlert]="showAlert"
-        [showHelpText]="showHelpText"
-        [showTwoFactorField]="showTwoFactorField"
-        [showPasswordField]="showPasswordField"
-        codeControlName="twoFactorCode"
-        recoveryControlName="twoFactorRecoveryCode"
-        passwordControlName="passwordControl"
-      >
-      </app-auth-challenge>
-    </form>
-  `,
-  standalone: true,
-  imports: [ReactiveFormsModule, AuthChallengeComponent],
-})
-class TestHostComponent {
-  @ViewChild(AuthChallengeComponent)
-  childComponent!: AuthChallengeComponent
-
-  showAlert = false
-  showHelpText = true
-  showTwoFactorField = true
-  showPasswordField = true
-
-  form = new FormGroup({
-    passwordControl: new FormControl(''),
-    twoFactorCode: new FormControl(''),
-    twoFactorRecoveryCode: new FormControl(''),
-  })
-}
-
 describe('AuthChallengeComponent', () => {
-  let fixture: ComponentFixture<TestHostComponent>
-  let hostComponent: TestHostComponent
+  let fixture: ComponentFixture<AuthChallengeComponent>
   let component: AuthChallengeComponent
+  let form: FormGroup
+  let mockDialogRef: any
 
   beforeEach(async () => {
+    // 1. Create a mock form to pass into the dialog data
+    form = new FormGroup({
+      passwordControl: new FormControl(''),
+      twoFactorCode: new FormControl(''),
+      twoFactorRecoveryCode: new FormControl(''),
+    })
+
+    // 2. Mock the MatDialogRef so updateSize() doesn't throw an error
+    mockDialogRef = {
+      updateSize: jasmine.createSpy('updateSize'),
+      close: jasmine.createSpy('close'),
+    }
+
+    // 3. Mock the MAT_DIALOG_DATA
+    const mockDialogData = {
+      parentForm: form,
+      showPasswordField: true,
+      showTwoFactorField: true,
+      showHelpText: true,
+      codeControlName: 'twoFactorCode',
+      recoveryControlName: 'twoFactorRecoveryCode',
+      passwordControlName: 'passwordControl',
+      actionDescription: 'login', // Mock label
+    }
+
     await TestBed.configureTestingModule({
-      imports: [NoopAnimationsModule, TestHostComponent],
+      imports: [NoopAnimationsModule, AuthChallengeComponent],
+      providers: [
+        { provide: MatDialogRef, useValue: mockDialogRef },
+        { provide: MAT_DIALOG_DATA, useValue: mockDialogData },
+      ],
     }).compileComponents()
 
-    fixture = TestBed.createComponent(TestHostComponent)
-    hostComponent = fixture.componentInstance
-
+    fixture = TestBed.createComponent(AuthChallengeComponent)
+    component = fixture.componentInstance
     fixture.detectChanges()
-    component = hostComponent.childComponent
   })
 
-  it('should create', () => {
+  it('should create and set default size', () => {
     expect(component).toBeTruthy()
+    expect(mockDialogRef.updateSize).toHaveBeenCalledWith('580px')
   })
 
   describe('Initialization', () => {
-    it('should set Validators.required on the 2FA Code by default', () => {
-      const codeControl = hostComponent.form.get('twoFactorCode')
-      const recoveryControl = hostComponent.form.get('twoFactorRecoveryCode')
+    it('should set Validators.required on the 2FA Code by default and mark as untouched', () => {
+      const codeControl = form.get('twoFactorCode')
+      const recoveryControl = form.get('twoFactorRecoveryCode')
 
       codeControl?.setValue('')
       expect(codeControl?.hasError('required')).toBeTrue()
+      expect(codeControl?.touched).toBeFalse() // Checks the markAsUntouched logic
 
       recoveryControl?.setValue('')
       expect(recoveryControl?.hasError('required')).toBeFalse()
@@ -83,7 +77,6 @@ describe('AuthChallengeComponent', () => {
 
   describe('Toggling Recovery Code Mode', () => {
     it('should switch to Recovery mode when toggle link is clicked', fakeAsync(() => {
-      // Robust query using data-testid instead of CSS classes
       const toggleLink = fixture.debugElement.query(
         By.css('[data-testid="recovery-toggle"]')
       ).nativeElement
@@ -94,8 +87,8 @@ describe('AuthChallengeComponent', () => {
 
       expect(component.showRecoveryCode).toBeTrue()
 
-      const codeControl = hostComponent.form.get('twoFactorCode')
-      const recoveryControl = hostComponent.form.get('twoFactorRecoveryCode')
+      const codeControl = form.get('twoFactorCode')
+      const recoveryControl = form.get('twoFactorRecoveryCode')
 
       codeControl?.setValue('')
       expect(codeControl?.hasError('required')).toBeFalse()
@@ -103,7 +96,6 @@ describe('AuthChallengeComponent', () => {
       recoveryControl?.setValue('')
       expect(recoveryControl?.hasError('required')).toBeTrue()
 
-      // IDs are safe to query by, as they are functionally required for a11y labels
       const recoveryInput = fixture.debugElement.query(
         By.css('#twoFactorRecoveryCode')
       )
@@ -127,9 +119,9 @@ describe('AuthChallengeComponent', () => {
     }))
 
     it('should clear values when switching modes', () => {
-      hostComponent.form.get('twoFactorCode')?.setValue('123456')
+      form.get('twoFactorCode')?.setValue('123456')
       component.toggleRecoveryCode(new Event('click'))
-      expect(hostComponent.form.get('twoFactorCode')?.value).toBeNull()
+      expect(form.get('twoFactorCode')?.value).toBeNull()
     })
   })
 
@@ -137,21 +129,21 @@ describe('AuthChallengeComponent', () => {
     it('should apply backend error to password control', () => {
       component.processBackendResponse({ invalidPassword: true })
 
-      const control = hostComponent.form.get('passwordControl')
+      const control = form.get('passwordControl')
       expect(control?.hasError('invalid')).toBeTrue()
     })
 
     it('should apply backend error to 2FA code', () => {
       component.processBackendResponse({ invalidTwoFactorCode: true })
 
-      const control = hostComponent.form.get('twoFactorCode')
+      const control = form.get('twoFactorCode')
       expect(control?.hasError('invalid')).toBeTrue()
     })
 
     it('should apply backend error to Recovery code', () => {
       component.processBackendResponse({ invalidTwoFactorRecoveryCode: true })
 
-      const control = hostComponent.form.get('twoFactorRecoveryCode')
+      const control = form.get('twoFactorRecoveryCode')
       expect(control?.hasError('invalid')).toBeTrue()
     })
 
@@ -173,41 +165,12 @@ describe('AuthChallengeComponent', () => {
     }))
   })
 
-  describe('Inputs (@Input)', () => {
-    it('should display verification alert message if showAlert and showPasswordField are true', () => {
-      hostComponent.showAlert = true
-      hostComponent.showPasswordField = true
-      fixture.detectChanges()
-
-      // Robust query by Angular Directive rather than HTML tag
-      const alert = fixture.debugElement.query(
-        By.directive(AlertMessageComponent)
-      )
-      expect(alert).toBeTruthy()
-      expect(alert.nativeElement.textContent).toContain(
-        'Verify your ORCID account to continue'
-      )
-    })
-
-    it('should display active 2FA alert message if showAlert is true but showPasswordField is false', () => {
-      hostComponent.showAlert = true
-      hostComponent.showPasswordField = false
-      fixture.detectChanges()
-
-      const alert = fixture.debugElement.query(
-        By.directive(AlertMessageComponent)
-      )
-      expect(alert).toBeTruthy()
-      expect(alert.nativeElement.textContent).toContain(
-        'As two-factor authentication is currently active'
-      )
-    })
-
+  describe('Dialog Data (formerly @Input)', () => {
     it('should hide help text links if showHelpText is false', () => {
-      hostComponent.showHelpText = false
+      // Modify data directly
+      component.data.showHelpText = false
       fixture.detectChanges()
 
-      // Querying by data-testid instead of utility classes
       const links = fixture.debugElement.query(
         By.css('[data-testid="help-text-links"]')
       )
@@ -215,11 +178,42 @@ describe('AuthChallengeComponent', () => {
     })
 
     it('should hide two-factor field if showTwoFactorField is false', () => {
-      hostComponent.showTwoFactorField = false
+      component.data.showTwoFactorField = false
       fixture.detectChanges()
 
       const codeInput = fixture.debugElement.query(By.css('#twoFactorCode'))
       expect(codeInput).toBeFalsy()
+    })
+
+    it('should hide password field if showPasswordField is false', () => {
+      component.data.showPasswordField = false
+      fixture.detectChanges()
+
+      const passwordInput = fixture.debugElement.query(By.css('#password'))
+      expect(passwordInput).toBeFalsy()
+    })
+  })
+
+  describe('Submission & Cleanup', () => {
+    it('should emit submitAttempt and trigger loading state on submit', () => {
+      spyOn(component.submitAttempt, 'emit')
+      component.onSubmit()
+
+      expect(component.loading).toBeTrue()
+      expect(component.submitAttempt.emit).toHaveBeenCalled()
+    })
+
+    it('should clear forms and remove validators on destroy', () => {
+      component.ngOnDestroy()
+
+      const codeControl = form.get('twoFactorCode')
+      const recoveryControl = form.get('twoFactorRecoveryCode')
+
+      expect(codeControl?.value).toBeNull()
+      expect(recoveryControl?.value).toBeNull()
+
+      expect(codeControl?.hasValidator(Validators.required)).toBeFalse()
+      expect(recoveryControl?.hasValidator(Validators.required)).toBeFalse()
     })
   })
 })
