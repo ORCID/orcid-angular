@@ -910,7 +910,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="account.youHaventAdded" datatype="html" resname="account.youHaventAdded">
-        <source>You haven't added any alternate sign in accounts yet.</source>
+        <source>You haven&apos;t added any alternate sign in accounts yet.</source>
         <target>أنت لم تقم بإضافة أي حسابات تسجيل الدخول البديلة</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
@@ -1418,7 +1418,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.noDevice1" datatype="html" resname="ngOrcid.signin.2fa.noDevice1">
-        <source>Don't have your device?</source>
+        <source>Don&apos;t have your device?</source>
         <target>أليس لديك جهازك؟</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -1498,7 +1498,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="account.dontHaveYourRecoveryCodes" datatype="html" resname="account.dontHaveYourRecoveryCodes">
-        <source>Don't have your recovery codes?</source>
+        <source>Don&apos;t have your recovery codes?</source>
         <target>ألا تمتلك رموز استرداد؟</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -1514,7 +1514,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.noDeviceOrRecovery" datatype="html" resname="ngOrcid.signin.2fa.noDeviceOrRecovery">
-        <source>Don't have your device or recovery code?</source>
+        <source>Don&apos;t have your device or recovery code?</source>
         <target>ألا يمكنك الدخول إلى تطبيق غوغل أوثنتيكاتور أو رمز الاسترداد؟</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -1622,7 +1622,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="account.youCantAddYourSelf" datatype="html" resname="account.youCantAddYourSelf">
-        <source>You can't add yourself as a trusted individual</source>
+        <source>You can&apos;t add yourself as a trusted individual</source>
         <target>لا يمكنك إضافة نفسك كشخص موثوق به</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-trusted-parties/components/dialog-add-trusted-individuals-your-own-email/dialog-add-trusted-individuals-your-own-email.component.html</context>
@@ -1942,7 +1942,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="account.youHavenAddAnyTrusted" datatype="html" resname="account.youHavenAddAnyTrusted">
-        <source>You haven't added any trusted individuals yet.</source>
+        <source>You haven&apos;t added any trusted individuals yet.</source>
         <target>لم تقم بإضافة أي أفراد موثوق بهم حتى الآن.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals/settings-trusted-individuals.component.html</context>
@@ -1994,7 +1994,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="account.youHavenAddAnyOrg" datatype="html" resname="account.youHavenAddAnyOrg">
-        <source>You haven't added any trusted organizations yet.</source>
+        <source>You haven&apos;t added any trusted organizations yet.</source>
         <target>أنت لم تقم بإضافة أي المنظمات الموثوق بها</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-organizations/settings-trusted-organizations.component.html</context>
@@ -2018,7 +2018,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="account.youHavenBeenAddAsTrusted" datatype="html" resname="account.youHavenBeenAddAsTrusted">
-        <source>You haven't been added as a trusted individual yet.</source>
+        <source>You haven&apos;t been added as a trusted individual yet.</source>
         <target>لم تتم إضافتك كفرد موثوق به حتى الآن.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-users-that-thrust-you/settings-users-that-thrust-you.component.html</context>
@@ -2282,7 +2282,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="authorize.errorLockedMemberID1" datatype="html" resname="authorize.errorLockedMemberID1">
-        <source>Error: The provided request couldn't be completed because the integration and hence, the client</source>
+        <source>Error: The provided request couldn&apos;t be completed because the integration and hence, the client</source>
         <target>خطأ: لم يمكن إتمام الطلب المقدم لأن التكامل، وبالتالي العميل</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/oauth-error/oauth-error.component.html</context>
@@ -2342,7 +2342,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="authorize.error" datatype="html" resname="authorize.error">
-        <source>You have reached this page due to an error with the application's integration. Please report this error to the organization that is requesting your ORCID iD.</source>
+        <source>You have reached this page due to an error with the application&apos;s integration. Please report this error to the organization that is requesting your ORCID iD.</source>
         <target>لقد وصلت إلى هذه الصفحة بسبب خطأ في دمج التطبيق. يُرجى إبلاغ المؤسسة التي تطلب معرِّف أوركيد الخاص بك بهذا الخطأ.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/oauth-error/oauth-error.component.html</context>
@@ -3042,7 +3042,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="register.prefilledOrganization" datatype="html" resname="register.prefilledOrganization">
-        <source>Organization - We've added an organization based on your email domain</source>
+        <source>Organization - We&apos;ve added an organization based on your email domain</source>
         <target>المؤسسة - أضفنا مؤسسة بناءً على نطاق بريدك الإلكتروني</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/affiliations-interstitial/interstitial-component/affiliations-interstitial.component.ts</context>
@@ -3190,7 +3190,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="myOrcidAlerts.invalidVerifyUrl" datatype="html" resname="myOrcidAlerts.invalidVerifyUrl">
-        <source>Your email couldn't be verified, please check the link you used to verify it.</source>
+        <source>Your email couldn&apos;t be verified, please check the link you used to verify it.</source>
         <target>لم يتم تأكيد بريدك الالكتروني، يرجى التحقق من الرابط الذي استخدمته لتأكيده.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/my-orcid-alerts/my-orcid-alerts.component.html</context>
@@ -4450,7 +4450,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="side-bar.deleteTooltip" datatype="html" resname="side-bar.deleteTooltip">
-        <source>You can't delete the only email address in your account</source>
+        <source>You can&apos;t delete the only email address in your account</source>
         <target>لا يمكنك حذف عنوان البريد الإلكتروني الوحيد في حسابك</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
@@ -6843,7 +6843,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="share.CI" datatype="html" resname="share.CI">
-        <source>Côte d'Ivoire</source>
+        <source>Côte d&apos;Ivoire</source>
         <target>كوت ديفوار</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-countries/record-countries.service.ts</context>
@@ -8483,7 +8483,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="developerTools.getAUserAuthenticated" datatype="html" resname="developerTools.getAUserAuthenticated">
-        <source>Obtain users' authenticated ORCID iDs</source>
+        <source>Obtain users&apos; authenticated ORCID iDs</source>
         <target>الحصول على معرفات أوركيد &quot;ORCID&quot; المعتمدة للمستخدمين.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/components/terms-of-use/terms-of-use.component.html</context>
@@ -9279,7 +9279,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.passwordError" datatype="html" resname="ngOrcid.passwordError">
-        <source>We couldn't recover your account details. Please try again, and if the error persists please</source>
+        <source>We couldn&apos;t recover your account details. Please try again, and if the error persists please</source>
         <target>لم نتمكن من استعادة تفاصيل حسابك. يُرجى المحاولة مرة أخرى، وإذا استمر الخطأ من فضلك</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/errors.ts</context>
@@ -9291,7 +9291,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.registerError" datatype="html" resname="ngOrcid.registerError">
-        <source>We couldn't complete your registration. Please try again, and if the error persists please</source>
+        <source>We couldn&apos;t complete your registration. Please try again, and if the error persists please</source>
         <target>لم نتمكن من استعادة تفاصيل حسابك. يُرجى المحاولة مرة أخرى، وإذا استمر الخطأ من فضلك</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/errors.ts</context>
@@ -9303,7 +9303,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.reactivationAccountError" datatype="html" resname="ngOrcid.reactivationAccountError">
-        <source>We couldn't reactivate your ORCID account. Please try again, and if the error persists please</source>
+        <source>We couldn&apos;t reactivate your ORCID account. Please try again, and if the error persists please</source>
         <target>لم نتمكن من إعادة تنشيط حساب أوركيد الخاص بك. يُرجى إعادة المحاولة مرة أخرى، وإذا استمر الخطأ فيُرجى</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/errors.ts</context>
@@ -10127,7 +10127,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="inbox.youDontHaveUnarchived" datatype="html" resname="inbox.youDontHaveUnarchived">
-        <source>You don't have any unarchived notifications right now.</source>
+        <source>You don&apos;t have any unarchived notifications right now.</source>
         <target>ليس لديك أية إشعارات غير مؤرشفة في الوقت الحالي.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/inbox/components/notifications/notifications.component.html</context>
@@ -11203,7 +11203,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="recovery.iveForgotten" datatype="html" resname="recovery.iveForgotten">
-        <source>I've forgotten</source>
+        <source>I&apos;ve forgotten</source>
         <target>نسيتُ ذلك</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.ts</context>
@@ -13111,7 +13111,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="record.noPublicInformation" datatype="html" resname="record.noPublicInformation">
-        <source>There's no displayable data for this record</source>
+        <source>There&apos;s no displayable data for this record</source>
         <target>لا توجد بيانات خاصة بهذا السجل متاحة للعرض</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-info/record-info.component.html</context>
@@ -14315,7 +14315,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="works.unResolved" datatype="html" resname="works.unResolved">
-        <source>We couldn't find a resource that matches the identifier you entered. Please check the value or enter a valid link to the resource.</source>
+        <source>We couldn&apos;t find a resource that matches the identifier you entered. Please check the value or enter a valid link to the resource.</source>
         <target>لم نتمكن من العثور على مورد يتطابق مع المعرّف الذي أدخلته بنجاح. يرجى التحقق من القيمة أو إدخال رابط صالح للمورد.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
@@ -16723,7 +16723,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="register.orcids" datatype="html" resname="register.orcids">
-        <source>Per ORCID's</source>
+        <source>Per ORCID&apos;s</source>
         <target>للمعرف</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/step-a/step-a.component.html</context>
@@ -17059,7 +17059,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.search.orcidIdPatterError" datatype="html" resname="ngOrcid.search.orcidIdPatterError">
-        <source>Given value doesn't match ORCID iD pattern</source>
+        <source>Given value doesn&apos;t match ORCID iD pattern</source>
         <target>القيمة المحددة لا تتطابق مع نمط معرّف ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/search/components/advance-search/advance-search.component.html</context>
@@ -17159,7 +17159,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="selfService.heading" datatype="html" resname="selfService.heading">
-        <source>We're updating ORCID Self Service</source>
+        <source>We&apos;re updating ORCID Self Service</source>
         <target>نعمل على تحديث خدمة أوركيد الذاتية</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/self-service/self-service/self-service.component.html</context>
@@ -18251,7 +18251,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.deactivated.UsingOrcid.1" datatype="html" resname="ngOrcid.signin.deactivated.UsingOrcid.1">
-        <source>To start reactivation please enter an email address associated with this account in the 'Email or ORCID iD' field above.</source>
+        <source>To start reactivation please enter an email address associated with this account in the &apos;Email or ORCID iD&apos; field above.</source>
         <target>لبدء إعادة التنشيط، يُرجى إدخال عنوان بريد إلكتروني مرتبط بهذا الحساب في حقل &quot;البريد الإلكتروني أو معرف ORCID&quot; أعلاه.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/errors/print-errors/print-errors.component.html</context>
@@ -18459,7 +18459,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.dontHaveYourOrcid" datatype="html" resname="ngOrcid.signin.dontHaveYourOrcid">
-        <source>Don't have your ORCID iD yet?</source>
+        <source>Don&apos;t have your ORCID iD yet?</source>
         <target>أليس لديك معرف ORCID الخاص بك حتى الآن؟</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/pages/sign-in/sign-in.component.html</context>
@@ -18507,7 +18507,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="account.knowledgeBaseForList" datatype="html" resname="account.knowledgeBaseForList">
-        <source>See the Knowledge Base for a list of apps we've tested ourselves</source>
+        <source>See the Knowledge Base for a list of apps we&apos;ve tested ourselves</source>
         <target>اطلع على قاعدة المعارف للحصول على قائمة بالتطبيقات التي اختبرناها بأنفسنا</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
@@ -18531,7 +18531,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="account.cantScan" datatype="html" resname="account.cantScan">
-        <source>Can't scan the barcode?</source>
+        <source>Can&apos;t scan the barcode?</source>
         <target>لا يمكن مسح هذا الرمز ؟</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
