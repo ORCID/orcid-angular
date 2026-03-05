@@ -11,13 +11,8 @@ import { MatSelectModule } from '@angular/material/select'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { MatIconModule } from '@angular/material/icon'
-<<<<<<<< HEAD:projects/orcid-ui-docs/src/app/pages/auth-challenge-page.component.ts
 import { AuthChallengeComponent } from '@orcid/ui'
 import { DocumentationPageComponent } from '../components/documentation-page/documentation-page.component'
-========
-import { TwoFactorAuthFormComponent } from '@orcid/ui'
-import { DocumentationPageComponent } from '../../components/documentation-page/documentation-page.component'
->>>>>>>> main:projects/orcid-ui-docs/src/app/pages/orcid-ui/two-factor-auth-form-page.component.ts
 import '@angular/localize/init'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 

@@ -27,7 +27,6 @@ import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatIconModule } from '@angular/material/icon'
 import { MatInputModule } from '@angular/material/input'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
-import { RouterLink } from '@angular/router'
 
 class ErrorStateMatcherForTwoFactorFields implements ErrorStateMatcher {
   constructor() {}
@@ -44,7 +43,6 @@ class ErrorStateMatcherForTwoFactorFields implements ErrorStateMatcher {
     MatIconModule,
     MatButtonModule,
     MatProgressBarModule,
-    RouterLink,
     CommonModule,
     MatInputModule,
     ReactiveFormsModule,
