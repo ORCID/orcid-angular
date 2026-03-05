@@ -20,6 +20,7 @@ import { RegisterService } from 'src/app/core/register/register.service'
 import { OrcidValidators } from 'src/app/validators'
 import { AuthChallengeComponent } from '@orcid/ui'
 import { ErrorStateMatcherForTwoFactorFields } from '../../../sign-in/ErrorStateMatcherForTwoFactorFields'
+import { MatDialog } from '@angular/material/dialog'
 
 @Component({
   selector: 'app-settings-security-password',
@@ -40,17 +41,20 @@ export class SettingsSecurityPasswordComponent implements OnInit, OnDestroy {
   authChallengeComponent: AuthChallengeComponent
   errors: string[]
   success: boolean
+  cancel: boolean
   $destroy = new Subject<void>()
   currentValidate8orMoreCharactersStatus: boolean
   ccurentValidateAtLeastALetterOrSymbolStatus: boolean
   currentValidateAtLeastANumber: boolean
   confirmPasswordPlaceholder = $localize`:@@accountSettings.security.password.confirmPasswordPlaceholder:Confirm your new password`
+  authChallengeLabel = $localize`:@@accountSettings.security.password.authChallengeLabel:complete your password reset`
   errorMatcher = new ErrorStateMatcherForTwoFactorFields()
 
   constructor(
     private _fb: UntypedFormBuilder,
     private _register: RegisterService,
-    private _accountPassword: AccountSecurityPasswordService
+    private _accountPassword: AccountSecurityPasswordService,
+    private _dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -83,17 +87,73 @@ export class SettingsSecurityPasswordComponent implements OnInit, OnDestroy {
     )
   }
 
+  openAuthChallenge() {
+    const dialogRef = this._dialog.open<AuthChallengeComponent>(
+      AuthChallengeComponent,
+      {
+        data: {
+          parentForm: this.form,
+          showPasswordField: false,
+          actionDescription: this.authChallengeLabel,
+        },
+      }
+    )
+
+    dialogRef.componentInstance.submitAttempt.subscribe(() => {
+      this._accountPassword.updatePassword(this.form.value).subscribe({
+        next: (response: any) => {
+          dialogRef.close(response)
+        },
+        error: (errorResponse: any) => {
+          dialogRef.componentInstance.loading = false
+          dialogRef.componentInstance.processBackendResponse(
+            errorResponse.error
+          )
+        },
+      })
+    })
+
+    dialogRef.componentInstance.submitAttempt.subscribe(() => {
+      this._accountPassword.updatePassword(this.form.value).subscribe({
+        next: (response: any) => {
+          if (response.success) {
+            setTimeout(() => {
+              if (document.activeElement instanceof HTMLElement) {
+                document.activeElement.blur()
+              }
+              this.form.reset()
+              dialogRef.close(true)
+            })
+            this.success = true
+          } else {
+            dialogRef.componentInstance.loading = false
+            dialogRef.componentInstance.processBackendResponse(response)
+          }
+        },
+      })
+    })
+
+    dialogRef.afterClosed().subscribe((success) => {
+      if (!success) {
+        if (document.activeElement instanceof HTMLElement) {
+          document.activeElement.blur()
+        }
+        this.form.reset()
+        this.cancel = true
+      }
+    })
+  }
+
   save() {
     this.form.markAllAsTouched()
     this.success = false
-
+    this.cancel = false
     if (this.form.valid) {
       this.loading.emit(true)
       this._accountPassword
         .updatePassword(this.form.value)
         .subscribe((value) => {
           this.loading.emit(false)
-          this.authChallengeComponent?.processBackendResponse(value)
           if (value.passwordContainsEmail) {
             this.form.controls['password']?.setErrors({ containsEmail: true })
           }
@@ -105,10 +165,14 @@ export class SettingsSecurityPasswordComponent implements OnInit, OnDestroy {
               }
             })
             this.success = true
-          } else if (value.errors && value.errors.length > 0) {
-            this.form.controls['oldPassword'].setErrors({
-              backendErrors: value.errors || null,
-            })
+          } else {
+            if (value.errors && value.errors.length > 0) {
+              this.form.controls['oldPassword'].setErrors({
+                backendErrors: value.errors || null,
+              })
+            } else if (value.twoFactorEnabled && !value.passwordContainsEmail) {
+              this.openAuthChallenge()
+            }
           }
         })
     }

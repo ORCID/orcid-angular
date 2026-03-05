@@ -8,6 +8,23 @@
   .error {
     color: $state-warning-darkest !important;
   }
+  hr {
+    background: $ui-background-light;
+  }
+  .icon {
+    background-color: $brand-primary;
+  }
+  button {
+    background: $brand-secondary-dark !important;
+    color: white !important;
+  }
+  mat-icon {
+    color: white;
+  }
+  .cancel {
+    background-color: white !important;
+    color: $brand-secondary-dark !important;
+  }
 }
 
 @include auth-challenge-theme($orcid-app-theme);

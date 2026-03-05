@@ -2,24 +2,32 @@ import { CommonModule } from '@angular/common'
 import {
   Component,
   ElementRef,
-  Input,
+  Inject,
   OnDestroy,
   OnInit,
-  SkipSelf,
   ViewChild,
+  EventEmitter,
+  Output,
 } from '@angular/core'
 import {
   AbstractControl,
-  ControlContainer,
   FormGroup,
   ReactiveFormsModule,
   UntypedFormControl,
   Validators,
 } from '@angular/forms'
+import { MatButtonModule } from '@angular/material/button'
 import { ErrorStateMatcher } from '@angular/material/core'
+import {
+  MAT_DIALOG_DATA,
+  MatDialogModule,
+  MatDialogRef,
+} from '@angular/material/dialog'
 import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatIconModule } from '@angular/material/icon'
 import { MatInputModule } from '@angular/material/input'
-import { AlertMessageComponent } from '../alert-message/alert-message.component'
+import { MatProgressBarModule } from '@angular/material/progress-bar'
+import { RouterLink } from '@angular/router'
 
 class ErrorStateMatcherForTwoFactorFields implements ErrorStateMatcher {
   constructor() {}
@@ -33,17 +41,14 @@ class ErrorStateMatcherForTwoFactorFields implements ErrorStateMatcher {
   standalone: true,
   imports: [
     MatFormFieldModule,
+    MatIconModule,
+    MatButtonModule,
+    MatProgressBarModule,
+    RouterLink,
     CommonModule,
     MatInputModule,
     ReactiveFormsModule,
-    AlertMessageComponent,
-  ],
-  viewProviders: [
-    {
-      provide: ControlContainer,
-      useFactory: (container: ControlContainer) => container,
-      deps: [[new SkipSelf(), ControlContainer]],
-    },
+    MatDialogModule,
   ],
   templateUrl: './auth-challenge.component.html',
   styleUrls: [
@@ -52,66 +57,88 @@ class ErrorStateMatcherForTwoFactorFields implements ErrorStateMatcher {
   ],
 })
 export class AuthChallengeComponent implements OnInit, OnDestroy {
-  @Input() codeControlName = 'twoFactorCode'
-  @Input() recoveryControlName = 'twoFactorRecoveryCode'
-  // has "control" in the name to avoid conflicts with account settings password reset form which has the password field/control
-  @Input() passwordControlName = 'passwordControl'
-  @Input() showAlert = false
-  @Input() showHelpText = true
-  @Input() showPasswordField = true
-  @Input() showTwoFactorField = false
   @ViewChild('passwordInput') passwordInput: ElementRef
   @ViewChild('twoFactorCodeInput') twoFactorCodeInput: ElementRef
   @ViewChild('twoFactorRecoveryCodeInput')
   twoFactorRecoveryCodeInput: ElementRef
+
+  @Output() submitAttempt = new EventEmitter<void>()
+
   invalidPassword = false
   invalidTwoFactorCode = false
   invalidTwoFactorRecoveryCode = false
   showRecoveryCode = false
   parentForm: FormGroup
   errorMatcher = new ErrorStateMatcherForTwoFactorFields()
+  loading = false
 
-  constructor(private controlContainer: ControlContainer) {}
+  constructor(
+    private matRef: MatDialogRef<AuthChallengeComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
+    this.matRef.updateSize('580px')
+    const defaultData = {
+      codeControlName: 'twoFactorCode',
+      recoveryControlName: 'twoFactorRecoveryCode',
+      passwordControlName: 'passwordControl',
+      showPasswordField: true,
+      showTwoFactorField: true,
+      parentForm: null,
+    }
+
+    this.data = { ...defaultData, ...(data || {}) }
+  }
 
   ngOnInit() {
-    this.parentForm = this.controlContainer.control as FormGroup
+    this.parentForm = this.data.parentForm
+    this.parentForm?.get(this.data.codeControlName)?.markAsUntouched()
+    this.parentForm?.get(this.data.recoveryControlName)?.markAsUntouched()
     this.updateTwoFactorValidators()
   }
 
   get passwordWasTouched() {
-    return this.parentForm.get(this.passwordControlName).touched
+    return this.parentForm?.get(this.data.passwordControlName)?.touched
   }
 
   get twoFactorCodeWasTouched() {
-    return this.parentForm.get(this.codeControlName).touched
+    return this.parentForm?.get(this.data.codeControlName)?.touched
   }
 
   get twoFactorRecoveryCodeWasTouched() {
-    return this.parentForm.get(this.recoveryControlName).touched
+    return this.parentForm?.get(this.data.recoveryControlName)?.touched
+  }
+
+  onSubmit() {
+    this.loading = true
+    this.parentForm.markAllAsTouched()
+    this.submitAttempt.emit()
   }
 
   toggleRecoveryCode(event: Event) {
     event.preventDefault()
     this.showRecoveryCode = !this.showRecoveryCode
+
     if (this.showRecoveryCode) {
       setTimeout(() => {
         this.twoFactorRecoveryCodeInput?.nativeElement.focus()
       })
-      this.parentForm.get(this.codeControlName)?.setValue(null)
-      this.parentForm.get(this.recoveryControlName)?.markAsUntouched()
+      this.parentForm?.get(this.data.codeControlName)?.setValue(null)
+      this.parentForm?.get(this.data.recoveryControlName)?.markAsUntouched()
     } else {
       setTimeout(() => {
         this.twoFactorCodeInput?.nativeElement.focus()
       })
-      this.parentForm.get(this.recoveryControlName)?.setValue(null)
-      this.parentForm.get(this.codeControlName)?.markAsUntouched()
+      this.parentForm?.get(this.data.recoveryControlName)?.setValue(null)
+      this.parentForm?.get(this.data.codeControlName)?.markAsUntouched()
     }
     this.updateTwoFactorValidators()
   }
 
   private updateTwoFactorValidators() {
-    const twoFactorCodeControl = this.parentForm.get(this.codeControlName)
-    const recoveryCodeControl = this.parentForm.get(this.recoveryControlName)
+    const twoFactorCodeControl = this.parentForm?.get(this.data.codeControlName)
+    const recoveryCodeControl = this.parentForm?.get(
+      this.data.recoveryControlName
+    )
 
     if (this.showRecoveryCode) {
       twoFactorCodeControl?.removeValidators(Validators.required)
@@ -126,16 +153,11 @@ export class AuthChallengeComponent implements OnInit, OnDestroy {
   }
 
   processBackendResponse(value: any) {
-    const codeControl = this.parentForm.get(this.codeControlName)
-    const recoveryControl = this.parentForm.get(this.recoveryControlName)
-    const passwordControl = this.parentForm.get(this.passwordControlName)
+    this.loading = false
 
-    /*     if (value.invalidPassword) {
-      codeControl?.setValue(null)
-      recoveryControl?.setValue(null)
-      codeControl?.markAsUntouched()
-      recoveryControl?.markAsUntouched()
-    } */
+    const codeControl = this.parentForm?.get(this.data.codeControlName)
+    const recoveryControl = this.parentForm?.get(this.data.recoveryControlName)
+    const passwordControl = this.parentForm?.get(this.data.passwordControlName)
 
     if (value.invalidPassword) {
       passwordControl?.setErrors({ invalid: true })
@@ -166,8 +188,11 @@ export class AuthChallengeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    const codeControl = this.parentForm.get(this.codeControlName)
-    const recoveryControl = this.parentForm.get(this.recoveryControlName)
+    const codeControl = this.parentForm?.get(this.data.codeControlName)
+    const recoveryControl = this.parentForm?.get(this.data.recoveryControlName)
+
+    codeControl?.setValue(null)
+    recoveryControl?.setValue(null)
 
     codeControl?.removeValidators(Validators.required)
     recoveryControl?.removeValidators(Validators.required)
