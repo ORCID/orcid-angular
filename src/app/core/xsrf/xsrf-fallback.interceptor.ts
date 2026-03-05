@@ -39,10 +39,10 @@ export class XsrfFallbackInterceptor implements HttpInterceptor {
       return next.handle(req)
     }
 
-    const method = req.method.toUpperCase()
+    const method = (req.method ?? '').toUpperCase()
 
     // Only care about mutating requests
-    if (!['POST', 'PUT', 'PATCH', 'DELETE'].includes(method)) {
+    if (!method || !['POST', 'PUT', 'PATCH', 'DELETE'].includes(method)) {
       return next.handle(req)
     }
 
