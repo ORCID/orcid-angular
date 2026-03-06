@@ -158,30 +158,20 @@ export class AuthChallengeComponent implements OnInit, OnDestroy {
     const passwordControl = this.parentForm?.get(this.data.passwordControlName)
 
     if (value.invalidPassword) {
+      this.passwordInput?.nativeElement.focus()
       passwordControl?.setErrors({ invalid: true })
-    }
+      codeControl?.setValue(null)
+      codeControl?.markAsUntouched()
+      recoveryControl?.setValue(null)
+      recoveryControl?.markAsUntouched()
+    } else {
+      if (value.invalidTwoFactorCode) {
+        codeControl?.setErrors({ invalid: true })
+      }
 
-    if (value.invalidTwoFactorCode) {
-      codeControl?.setErrors({ invalid: true })
-    }
-
-    if (value.invalidTwoFactorRecoveryCode) {
-      recoveryControl?.setErrors({ invalid: true })
-    }
-
-    if (
-      value.twoFactorEnabled &&
-      !value.invalidPassword &&
-      !value.invalidTwoFactorCode &&
-      !value.invalidTwoFactorRecoveryCode
-    ) {
-      setTimeout(() => {
-        if (this.showRecoveryCode) {
-          this.twoFactorRecoveryCodeInput?.nativeElement.focus()
-        } else {
-          this.twoFactorCodeInput?.nativeElement.focus()
-        }
-      })
+      if (value.invalidTwoFactorRecoveryCode) {
+        recoveryControl?.setErrors({ invalid: true })
+      }
     }
   }
 

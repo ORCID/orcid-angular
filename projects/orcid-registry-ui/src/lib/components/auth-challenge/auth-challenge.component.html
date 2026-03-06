@@ -52,6 +52,7 @@
     >
       <input
         matInput
+        #passwordInput
         [formControlName]="data.passwordControlName"
         id="password"
         type="password"
@@ -75,7 +76,7 @@
     </mat-error>
     } @if (parentForm.get(data.passwordControlName)?.hasError('invalid')) {
     <mat-error class="w-full orc-font-small-print mt-2" i18n>
-      Invalid password
+      The password does not match our records
     </mat-error>
     }
   </div>
