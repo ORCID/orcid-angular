@@ -679,6 +679,7 @@ export class RecordWorksService {
               localizeByClientId[`${item.id}-client-description`] ??
               localizeByClientId[item.id] ??
               item.redirectUriMetadata?.defaultDescription ??
+              item.description ??
               ''
             const index = item.redirectUriMetadata?.index ?? 999
             certifiedForList.push({
@@ -696,6 +697,7 @@ export class RecordWorksService {
               localizeByClientId[`${item.id}-client-description`] ??
               localizeByClientId[item.id] ??
               item.redirectUriMetadata?.defaultDescription ??
+              item.description ??
               ''
             const index = item.redirectUriMetadata?.index ?? 999
             featuredForMore.push({
