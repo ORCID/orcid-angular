@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core'
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
+import { sanitizeHtmlForTrustedBypass } from '@orcid/ui'
 
 @Pipe({
   name: 'searchTermHighlight',
@@ -8,15 +9,23 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 export class SearchTermHighlightPipe implements PipeTransform {
   constructor(private sanitizer: DomSanitizer) {}
 
-  transform(value: string, searchTerm: string): SafeHtml {
-    if (!value || !searchTerm) {
+  transform(
+    value: string | null | undefined,
+    searchTerm: string | null | undefined
+  ): SafeHtml | string | null | undefined {
+    if (!value) {
       return value
     }
-    const regex = new RegExp(searchTerm, 'gi')
+    if (!searchTerm) {
+      return sanitizeHtmlForTrustedBypass(value)
+    }
+    const escapedSearch = searchTerm.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
+    const regex = new RegExp(escapedSearch, 'gi')
     const replacedValue = value.replace(
       regex,
       (match) => `<span class="highlight">${match}</span>`
     )
-    return this.sanitizer.bypassSecurityTrustHtml(replacedValue)
+    const sanitized = sanitizeHtmlForTrustedBypass(replacedValue)
+    return this.sanitizer.bypassSecurityTrustHtml(sanitized)
   }
 }

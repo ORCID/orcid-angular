@@ -621,8 +621,8 @@ export class RecordWorksService {
   /**
    * Loads data for the new Import Works dialog (certified + more services).
    * Use when SEARCH_AND_LINK_WIZARD_WITH_CERTIFIED_AND_FEATURED_LINKS is enabled.
-   * Certified/Featured: description from S3 localize.properties by client id, else redirectUriMetadata.defaultDescription.
-   * More Services: description from top-level `description` only.
+   * Certified, Featured, and Default: description from S3 localize.properties by client id
+   * (keys `${clientId}-client-description` or `clientId`), else redirectUriMetadata.defaultDescription or top-level description.
    */
   loadSearchAndLinkWizardDialogData(
     locale: string
@@ -679,6 +679,7 @@ export class RecordWorksService {
               localizeByClientId[`${item.id}-client-description`] ??
               localizeByClientId[item.id] ??
               item.redirectUriMetadata?.defaultDescription ??
+              item.description ??
               ''
             const index = item.redirectUriMetadata?.index ?? 999
             certifiedForList.push({
@@ -696,6 +697,7 @@ export class RecordWorksService {
               localizeByClientId[`${item.id}-client-description`] ??
               localizeByClientId[item.id] ??
               item.redirectUriMetadata?.defaultDescription ??
+              item.description ??
               ''
             const index = item.redirectUriMetadata?.index ?? 999
             featuredForMore.push({
@@ -703,7 +705,12 @@ export class RecordWorksService {
               index,
             })
           } else {
-            const description = item.description ?? ''
+            const description =
+              localizeByClientId[`${item.id}-client-description`] ??
+              localizeByClientId[item.id] ??
+              item.redirectUriMetadata?.defaultDescription ??
+              item.description ??
+              ''
             defaultForMore.push({ name, description, url: oauthUrl, imageUrl })
           }
         }

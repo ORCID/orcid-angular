@@ -1,6 +1,5 @@
 import { DomSanitizer } from '@angular/platform-browser'
 import { SearchTermHighlightPipe } from './search-term-highlight.pipe'
-import { SecurityContext } from '@angular/core'
 
 describe('HighlightPipe', () => {
   let sanitizer: DomSanitizer
@@ -8,7 +7,6 @@ describe('HighlightPipe', () => {
 
   beforeEach(() => {
     sanitizer = {
-      sanitize: (ctx: SecurityContext, value: any) => value,
       bypassSecurityTrustHtml: (value: string) => value,
     } as any
 
@@ -61,6 +59,14 @@ describe('HighlightPipe', () => {
     const value = 'This is some text'
     const searchTerm = 'javascript'
     expect(pipe.transform(value, searchTerm)).toBe(value)
+  })
+
+  it('should strip script tags via sanitizer so scripts are not executed (XSS-safe)', () => {
+    const value = 'Hello <script>alert(1)</script> world'
+    const searchTerm = 'world'
+    const result = pipe.transform(value, searchTerm) as string
+    expect(result).not.toContain('<script>')
+    expect(result).toContain('<span class="highlight">world</span>')
   })
 
   it('should handle special regex characters in the search term by escaping them', () => {
