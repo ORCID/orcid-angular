@@ -18,9 +18,10 @@ import { HAS_LETTER_OR_SYMBOL, HAS_NUMBER } from 'src/app/constants'
 import { AccountSecurityPasswordService } from 'src/app/core/account-security-password/account-security-password.service'
 import { RegisterService } from 'src/app/core/register/register.service'
 import { OrcidValidators } from 'src/app/validators'
-import { AuthChallengeComponent } from '@orcid/ui'
+import { AuthChallengeComponent } from '@orcid/registry-ui'
 import { ErrorStateMatcherForTwoFactorFields } from '../../../sign-in/ErrorStateMatcherForTwoFactorFields'
 import { MatDialog } from '@angular/material/dialog'
+import { AuthChallengeData } from '../../../types/common.endpoint'
 
 @Component({
   selector: 'app-settings-security-password',
@@ -95,36 +96,15 @@ export class SettingsSecurityPasswordComponent implements OnInit, OnDestroy {
           parentForm: this.form,
           showPasswordField: false,
           actionDescription: this.authChallengeLabel,
-        },
+        } as AuthChallengeData,
       }
     )
 
     dialogRef.componentInstance.submitAttempt.subscribe(() => {
       this._accountPassword.updatePassword(this.form.value).subscribe({
         next: (response: any) => {
-          dialogRef.close(response)
-        },
-        error: (errorResponse: any) => {
-          dialogRef.componentInstance.loading = false
-          dialogRef.componentInstance.processBackendResponse(
-            errorResponse.error
-          )
-        },
-      })
-    })
-
-    dialogRef.componentInstance.submitAttempt.subscribe(() => {
-      this._accountPassword.updatePassword(this.form.value).subscribe({
-        next: (response: any) => {
           if (response.success) {
-            setTimeout(() => {
-              if (document.activeElement instanceof HTMLElement) {
-                document.activeElement.blur()
-              }
-              this.form.reset()
-              dialogRef.close(true)
-            })
-            this.success = true
+            dialogRef.close(true)
           } else {
             dialogRef.componentInstance.loading = false
             dialogRef.componentInstance.processBackendResponse(response)
@@ -134,11 +114,13 @@ export class SettingsSecurityPasswordComponent implements OnInit, OnDestroy {
     })
 
     dialogRef.afterClosed().subscribe((success) => {
-      if (!success) {
-        if (document.activeElement instanceof HTMLElement) {
-          document.activeElement.blur()
-        }
-        this.form.reset()
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur()
+      }
+      this.form.reset()
+      if (success) {
+        this.success = true
+      } else {
         this.cancel = true
       }
     })

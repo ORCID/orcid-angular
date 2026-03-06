@@ -1,3 +1,4 @@
+import { UntypedFormGroup } from '@angular/forms'
 import { WorkRelationships } from './works.endpoint'
 
 export interface LastModifiedDate {
@@ -264,6 +265,17 @@ export interface AuthChallenge {
   twoFactorCode?: string
   twoFactorRecoveryCode?: string
   twoFactorEnabled?: boolean
+}
+
+export interface AuthChallengeData {
+  actionDescription?: string
+  showPasswordField?: boolean
+  showTwoFactorField?: boolean
+  codeControlName?: string
+  recoveryControlName?: string
+  passwordControlName?: string
+  parentForm?: UntypedFormGroup
+  memberName?: string
 }
 
 export type TokenStatus = 'VALID' | 'INVALID' | 'EXPIRED'

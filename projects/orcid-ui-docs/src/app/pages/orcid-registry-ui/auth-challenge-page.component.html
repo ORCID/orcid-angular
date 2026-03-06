@@ -6,12 +6,6 @@
     <p>Customize the subform to preview different configurations:</p>
 
     <div style="display: grid; gap: 16px; margin-bottom: 24px">
-      <mat-checkbox [(ngModel)]="showHelpText">
-        Display 2FA help text / controls
-      </mat-checkbox>
-
-      <mat-checkbox [(ngModel)]="showAlert"> Display alert </mat-checkbox>
-
       <mat-checkbox [(ngModel)]="showPasswordField">
         Display password field
       </mat-checkbox>
@@ -26,6 +20,10 @@
         (click)="form.reset()"
       >
         Reset form
+      </button>
+
+      <button mat-flat-button type="button" (click)="openDialog()">
+        Open Authentiation Challenge
       </button>
     </div>
   </div>

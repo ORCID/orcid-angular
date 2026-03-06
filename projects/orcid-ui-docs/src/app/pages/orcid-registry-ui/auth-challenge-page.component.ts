@@ -11,10 +11,11 @@ import { MatSelectModule } from '@angular/material/select'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { MatIconModule } from '@angular/material/icon'
-import { AuthChallengeComponent } from '@orcid/ui'
+import { AuthChallengeComponent } from '@orcid/registry-ui'
 import '@angular/localize/init'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { DocumentationPageComponent } from '../../components/documentation-page/documentation-page.component'
+import { MatDialog } from '@angular/material/dialog'
 
 @Component({
   selector: 'auth-challenge-page',
@@ -35,13 +36,14 @@ import { DocumentationPageComponent } from '../../components/documentation-page/
   templateUrl: './auth-challenge-page.component.html',
 })
 export class AuthChallengePageComponent implements OnInit {
-  showAlert = false
-  showHelpText = true
   showPasswordField = true
   showTwoFactorField = false
+  actionDescription: String
+  memberName: String
   form: UntypedFormGroup
+  data: any
 
-  constructor(private _fb: UntypedFormBuilder) {}
+  constructor(private _fb: UntypedFormBuilder, private _dialog: MatDialog) {}
 
   ngOnInit() {
     this.form = this._fb.group({
@@ -51,6 +53,17 @@ export class AuthChallengePageComponent implements OnInit {
         [Validators.minLength(10), Validators.maxLength(10)],
       ],
       password: ['', Validators.required],
+    })
+  }
+
+  openDialog() {
+    const dialogRef = this._dialog.open(AuthChallengeComponent, {
+      data: {
+        actionDescription: this.actionDescription,
+        memberName: this.memberName,
+        showPasswordField: this.showPasswordField,
+        showTwoFactorField: this.showTwoFactorField,
+      },
     })
   }
 }
