@@ -14048,6 +14048,7 @@
       </trans-unit>
       <trans-unit id="topBar.permissionNotificationsTitle" datatype="html" resname="topBar.permissionNotificationsTitle">
         <source>Organizations want to connect</source>
+        <target>Organisationen möchten sich verbinden</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
           <context context-type="linenumber">73</context>
@@ -14055,6 +14056,7 @@
       </trans-unit>
       <trans-unit id="topBar.permissionNotificationsSubtitle" datatype="html" resname="topBar.permissionNotificationsSubtitle">
         <source>Connecting with trusted organizations helps keep your ORCID record up-to-date.</source>
+        <target>Wenn Sie sich mit vertrauenswürdigen Organisationen verbinden, hilft das, Ihren ORCID-Eintrag auf dem aktuellen Stand zu halten.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
           <context context-type="linenumber">74</context>
@@ -14062,6 +14064,7 @@
       </trans-unit>
       <trans-unit id="topBar.permissionWantsToAdd" datatype="html" resname="topBar.permissionWantsToAdd">
         <source>wants to add information to your ORCID record</source>
+        <target>möchte Informationen zu Ihrem ORCID-Eintrag hinzufügen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
           <context context-type="linenumber">231</context>
@@ -14069,6 +14072,7 @@
       </trans-unit>
       <trans-unit id="topBar.permissionRead" datatype="html" resname="topBar.permissionRead">
         <source>Read</source>
+        <target>Lesen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
           <context context-type="linenumber">240</context>
@@ -15768,6 +15772,7 @@
       </trans-unit>
       <trans-unit id="works.addMenu.importFromServices" datatype="html" resname="works.addMenu.importFromServices">
         <source>Import works from other services</source>
+        <target>Werke aus anderen Diensten importieren</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.ts</context>
           <context context-type="linenumber">92</context>
@@ -15775,6 +15780,7 @@
       </trans-unit>
       <trans-unit id="works.addMenu.importFromServicesDescription" datatype="html" resname="works.addMenu.importFromServicesDescription">
         <source>Connect with services that can help keep your ORCID record up-to-date</source>
+        <target>Stellen sie eine Verbindung zu Diensten her, die Ihren ORCID-Eintrag auf dem aktuellen Stand halten</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.ts</context>
           <context context-type="linenumber">93</context>
@@ -15782,6 +15788,7 @@
       </trans-unit>
       <trans-unit id="works.addMenu.importBibtex" datatype="html" resname="works.addMenu.importBibtex">
         <source>Import works from a BibTeX file</source>
+        <target>Werke aus einer BibTeX-Datei importieren</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.ts</context>
           <context context-type="linenumber">98</context>
@@ -15789,6 +15796,7 @@
       </trans-unit>
       <trans-unit id="works.addMenu.importBibtexDescription" datatype="html" resname="works.addMenu.importBibtexDescription">
         <source>Import works into your ORCID record using BibTeX</source>
+        <target>Importieren Sie mit BibTeX Werke in Ihren ORCID-Eintrag</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.ts</context>
           <context context-type="linenumber">99</context>
@@ -15796,6 +15804,7 @@
       </trans-unit>
       <trans-unit id="works.addMenu.addWorkDoi" datatype="html" resname="works.addMenu.addWorkDoi">
         <source>Add work with a DOI</source>
+        <target>Werk mit DOI hinzufügen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.ts</context>
           <context context-type="linenumber">105</context>
@@ -15803,6 +15812,7 @@
       </trans-unit>
       <trans-unit id="works.addMenu.addWorkPubmed" datatype="html" resname="works.addMenu.addWorkPubmed">
         <source>Add work with a PubMed ID</source>
+        <target>Werk mit PubMed-ID hinzufügen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.ts</context>
           <context context-type="linenumber">112</context>
@@ -15810,6 +15820,7 @@
       </trans-unit>
       <trans-unit id="works.addMenu.addWorkManually" datatype="html" resname="works.addMenu.addWorkManually">
         <source>Add work manually</source>
+        <target>Werk manuell hinzufügen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.ts</context>
           <context context-type="linenumber">119</context>
@@ -15817,6 +15828,7 @@
       </trans-unit>
       <trans-unit id="works.addMenu.addWorkManuallyDescription" datatype="html" resname="works.addMenu.addWorkManuallyDescription">
         <source>Enter the work details yourself</source>
+        <target>Geben Sie die Werkdetails selber ein</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.ts</context>
           <context context-type="linenumber">120</context>
