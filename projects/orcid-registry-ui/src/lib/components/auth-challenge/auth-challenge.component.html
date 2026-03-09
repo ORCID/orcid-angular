@@ -23,12 +23,10 @@
     <span i18n>Enter</span>&nbsp;@if (data.showPasswordField) {<ng-container
       i18n
       >your ORCID account password</ng-container
-    >}@if (data.showPasswordField && data.showTwoFactorField) {<ng-container
-      i18n
-      >and</ng-container
-    >}@if (data.showTwoFactorField) {<ng-container i18n
-      >a two-factor authentication code</ng-container
-    >}&nbsp;to&nbsp;{{ data.actionDescription }}@if (data.memberName) {&nbsp;<b
+    >&nbsp;}@if (data.showPasswordField && data.showTwoFactorField)
+    {<ng-container i18n>and</ng-container>&nbsp;}@if (data.showTwoFactorField)
+    {<ng-container i18n>a two-factor authentication code</ng-container
+    >&nbsp;}to&nbsp;{{ data.actionDescription }}@if (data.memberName) {&nbsp;<b
       >{{ data.memberName }}</b
     >}
   </p>
@@ -284,7 +282,7 @@
   <button
     mat-raised-button
     type="submit"
-    class="row orc-font-body mat-elevation-z0 text-center h-10! mb-6 block"
+    class="row orc-font-body mat-elevation-z0 text-center h-10! mb-6 block w-full"
     i18n
     [disabled]="isSubmitDisabled"
     [ngClass]="{ 'verify-button-loading': isSubmitDisabled }"
