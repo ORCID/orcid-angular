@@ -1,3 +1,7 @@
+:host {
+  font-family: var(--orcid-font-family-sans, 'Noto Sans', sans-serif);
+}
+
 .grow {
   flex-grow: 1;
 }

@@ -141,7 +141,10 @@ export class AuthChallengeComponent implements OnInit, OnDestroy {
       this.data.recoveryControlName
     )
 
-    if (this.showRecoveryCode) {
+    if (!this.data.showTwoFactorField) {
+      twoFactorCodeControl?.removeValidators(Validators.required)
+      recoveryCodeControl?.removeValidators(Validators.required)
+    } else if (this.showRecoveryCode) {
       twoFactorCodeControl?.removeValidators(Validators.required)
       recoveryCodeControl?.addValidators(Validators.required)
     } else {
@@ -151,22 +154,6 @@ export class AuthChallengeComponent implements OnInit, OnDestroy {
 
     twoFactorCodeControl?.updateValueAndValidity()
     recoveryCodeControl?.updateValueAndValidity()
-  }
-
-  get isSubmitDisabled(): boolean {
-    if (this.loading || !this.parentForm) {
-      return true
-    }
-
-    const activeControlName = this.showRecoveryCode
-      ? this.data.recoveryControlName
-      : this.data.codeControlName
-
-    const activeControl = this.parentForm.get(activeControlName)
-
-    return (
-      this.parentForm.invalid || activeControl?.invalid || !activeControl?.value
-    )
   }
 
   processBackendResponse(value: any) {
