@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="37fa222e5a5b6d9018702696271db5b7ab5ae7a4" datatype="html" resname="37fa222e5a5b6d9018702696271db5b7ab5ae7a4">
         <source>As two-factor authentication is currently active on your ORCID account you need to enter a 2FA code from your authentication app to continue.</source>
+        <target>Dato che l’autenticazione a due fattori è attualmente attiva sul tuo account ORCID, per continuare è necessario inserire un codice 2FA dalla tua app di autenticazione.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-ui/src/lib/components/two-factor-form-auth/two-factor-auth-form.component.html</context>
           <context context-type="linenumber">3,6</context>
@@ -8443,6 +8444,7 @@
       </trans-unit>
       <trans-unit id="works.importYourWorks" datatype="html" resname="works.importYourWorks">
         <source>Import your works</source>
+        <target>Importa i tuoi lavori</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
           <context context-type="linenumber">600</context>
@@ -8450,6 +8452,7 @@
       </trans-unit>
       <trans-unit id="works.importIntroText" datatype="html" resname="works.importIntroText">
         <source>These services can help you update your ORCID record quickly by searching for your research outputs from various databases. Connect to a service to grant permission and add selected research outputs to your ORCID record.</source>
+        <target>Questi servizi possono aiutarti ad aggiornare velocemente il tuo record ORCID cercando tra i risultati di ricerca da diversi database. Collegati a un servizio per concedere l’autorizzazione e aggiungere i risultati di ricerca selezionati al tuo record ORCID.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
           <context context-type="linenumber">601</context>
@@ -8457,6 +8460,7 @@
       </trans-unit>
       <trans-unit id="works.importSupportLinkLabel" datatype="html" resname="works.importSupportLinkLabel">
         <source>Find out more about importing works into your ORCID record</source>
+        <target>Scopri di più su come importare i lavori nel tuo record ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
           <context context-type="linenumber">604</context>
@@ -8464,6 +8468,7 @@
       </trans-unit>
       <trans-unit id="works.certifiedSectionHeading" datatype="html" resname="works.certifiedSectionHeading">
         <source>ORCID Certified Services</source>
+        <target>Servizi certificati ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
           <context context-type="linenumber">606</context>
@@ -8471,6 +8476,7 @@
       </trans-unit>
       <trans-unit id="works.moreServicesHeading" datatype="html" resname="works.moreServicesHeading">
         <source>More Services</source>
+        <target>Altri servizi</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
           <context context-type="linenumber">607</context>
@@ -8478,6 +8484,7 @@
       </trans-unit>
       <trans-unit id="works.connectNow" datatype="html" resname="works.connectNow">
         <source>Connect now</source>
+        <target>Collega</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
           <context context-type="linenumber">608</context>
@@ -8485,6 +8492,7 @@
       </trans-unit>
       <trans-unit id="works.connected" datatype="html" resname="works.connected">
         <source>Connected</source>
+        <target>Collegato</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
           <context context-type="linenumber">609</context>
@@ -8496,6 +8504,7 @@
       </trans-unit>
       <trans-unit id="works.closeImportYourWorks" datatype="html" resname="works.closeImportYourWorks">
         <source>Close Import your works</source>
+        <target>Chiudi Importa i tuoi lavori</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
           <context context-type="linenumber">610</context>
@@ -8503,6 +8512,7 @@
       </trans-unit>
       <trans-unit id="works.showMoreServices" datatype="html" resname="works.showMoreServices">
         <source>Show more services</source>
+        <target>Mostra altri servizi</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
           <context context-type="linenumber">611</context>
@@ -8510,6 +8520,7 @@
       </trans-unit>
       <trans-unit id="works.hideMoreServices" datatype="html" resname="works.hideMoreServices">
         <source>Hide more services</source>
+        <target>Nascondi altri servizi</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
           <context context-type="linenumber">612</context>
@@ -8517,6 +8528,7 @@
       </trans-unit>
       <trans-unit id="works.connectWithCspNow" datatype="html" resname="works.connectWithCspNow">
         <source>Connect with {{name}} now</source>
+        <target>Collega {{name}}</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
           <context context-type="linenumber">613</context>
@@ -8524,6 +8536,7 @@
       </trans-unit>
       <trans-unit id="works.connectedWithCsp" datatype="html" resname="works.connectedWithCsp">
         <source>Connected with {{name}}</source>
+        <target>Collegato con {{name}}</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
           <context context-type="linenumber">614</context>
@@ -14035,6 +14048,7 @@
       </trans-unit>
       <trans-unit id="topBar.permissionNotificationsTitle" datatype="html" resname="topBar.permissionNotificationsTitle">
         <source>Organizations want to connect</source>
+        <target>Organizzazioni desiderano collegarsi</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
           <context context-type="linenumber">73</context>
@@ -14042,6 +14056,7 @@
       </trans-unit>
       <trans-unit id="topBar.permissionNotificationsSubtitle" datatype="html" resname="topBar.permissionNotificationsSubtitle">
         <source>Connecting with trusted organizations helps keep your ORCID record up-to-date.</source>
+        <target>Il collegamento con organizzazioni affidabili aiuta a mantenere aggiornato il tuo record ORCID.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
           <context context-type="linenumber">74</context>
@@ -14049,6 +14064,7 @@
       </trans-unit>
       <trans-unit id="topBar.permissionWantsToAdd" datatype="html" resname="topBar.permissionWantsToAdd">
         <source>wants to add information to your ORCID record</source>
+        <target>vuole aggiungere informazioni al tuo record ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
           <context context-type="linenumber">231</context>
@@ -14056,6 +14072,7 @@
       </trans-unit>
       <trans-unit id="topBar.permissionRead" datatype="html" resname="topBar.permissionRead">
         <source>Read</source>
+        <target>Lettura</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
           <context context-type="linenumber">240</context>
@@ -14063,6 +14080,7 @@
       </trans-unit>
       <trans-unit id="topBar.permissionConnectNow" datatype="html" resname="topBar.permissionConnectNow">
         <source>Connect now</source>
+        <target>Collega</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
           <context context-type="linenumber">246</context>
@@ -15754,6 +15772,7 @@
       </trans-unit>
       <trans-unit id="works.addMenu.importFromServices" datatype="html" resname="works.addMenu.importFromServices">
         <source>Import works from other services</source>
+        <target>Importa lavori da altri servizi</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.ts</context>
           <context context-type="linenumber">92</context>
@@ -15761,6 +15780,7 @@
       </trans-unit>
       <trans-unit id="works.addMenu.importFromServicesDescription" datatype="html" resname="works.addMenu.importFromServicesDescription">
         <source>Connect with services that can help keep your ORCID record up-to-date</source>
+        <target>Collegati a servizi che ti aiutano a mantenere aggiornato il tuo record ORCID</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.ts</context>
           <context context-type="linenumber">93</context>
@@ -15768,6 +15788,7 @@
       </trans-unit>
       <trans-unit id="works.addMenu.importBibtex" datatype="html" resname="works.addMenu.importBibtex">
         <source>Import works from a BibTeX file</source>
+        <target>Importa lavori da un file BibTeX</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.ts</context>
           <context context-type="linenumber">98</context>
@@ -15775,6 +15796,7 @@
       </trans-unit>
       <trans-unit id="works.addMenu.importBibtexDescription" datatype="html" resname="works.addMenu.importBibtexDescription">
         <source>Import works into your ORCID record using BibTeX</source>
+        <target>Importa lavori nel tuo record ORCID usando BibTeX</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.ts</context>
           <context context-type="linenumber">99</context>
@@ -15782,6 +15804,7 @@
       </trans-unit>
       <trans-unit id="works.addMenu.addWorkDoi" datatype="html" resname="works.addMenu.addWorkDoi">
         <source>Add work with a DOI</source>
+        <target>Aggiungi lavoro tramite DOI</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.ts</context>
           <context context-type="linenumber">105</context>
@@ -15789,6 +15812,7 @@
       </trans-unit>
       <trans-unit id="works.addMenu.addWorkPubmed" datatype="html" resname="works.addMenu.addWorkPubmed">
         <source>Add work with a PubMed ID</source>
+        <target>Aggiungi lavoro tramite ID PubMed</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.ts</context>
           <context context-type="linenumber">112</context>
@@ -15796,6 +15820,7 @@
       </trans-unit>
       <trans-unit id="works.addMenu.addWorkManually" datatype="html" resname="works.addMenu.addWorkManually">
         <source>Add work manually</source>
+        <target>Aggiungi lavoro manualmente</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.ts</context>
           <context context-type="linenumber">119</context>
@@ -15803,6 +15828,7 @@
       </trans-unit>
       <trans-unit id="works.addMenu.addWorkManuallyDescription" datatype="html" resname="works.addMenu.addWorkManuallyDescription">
         <source>Enter the work details yourself</source>
+        <target>Aggiungi tu i dettagli del lavoro</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/work-stack-group.component.ts</context>
           <context context-type="linenumber">120</context>
