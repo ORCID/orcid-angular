@@ -8,7 +8,6 @@ import {
   ViewChild,
   EventEmitter,
   Output,
-  ChangeDetectorRef,
 } from '@angular/core'
 import {
   AbstractControl,
@@ -73,8 +72,7 @@ export class AuthChallengeComponent implements OnInit, OnDestroy {
 
   constructor(
     private matRef: MatDialogRef<AuthChallengeComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private cdr: ChangeDetectorRef
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.matRef.updateSize('580px')
     const defaultData = {
@@ -94,7 +92,6 @@ export class AuthChallengeComponent implements OnInit, OnDestroy {
     this.parentForm?.get(this.data.codeControlName)?.markAsUntouched()
     this.parentForm?.get(this.data.recoveryControlName)?.markAsUntouched()
     this.updateTwoFactorValidators()
-    this.cdr.detectChanges()
   }
 
   get passwordWasTouched() {
