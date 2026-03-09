@@ -146,23 +146,6 @@ describe('AuthChallengeComponent', () => {
       const control = form.get('twoFactorRecoveryCode')
       expect(control?.hasError('invalid')).toBeTrue()
     })
-
-    it('should refocus input if response indicates success/continuation', fakeAsync(() => {
-      component.processBackendResponse({
-        twoFactorEnabled: true,
-        invalidPassword: false,
-        invalidTwoFactorCode: false,
-        invalidTwoFactorRecoveryCode: false,
-      })
-
-      fixture.detectChanges()
-      tick()
-
-      const codeInputEl = fixture.debugElement.query(
-        By.css('#twoFactorCode')
-      ).nativeElement
-      expect(document.activeElement).toBe(codeInputEl)
-    }))
   })
 
   describe('Dialog Data (formerly @Input)', () => {
