@@ -286,8 +286,8 @@
     type="submit"
     class="row orc-font-body mat-elevation-z0 text-center h-10! mb-6 block"
     i18n
-    [disabled]="loading || parentForm.invalid"
-    [ngClass]="{ 'verify-button-loading': loading || parentForm.invalid }"
+    [disabled]="isSubmitDisabled"
+    [ngClass]="{ 'verify-button-loading': isSubmitDisabled }"
   >
     Verify my account and continue
   </button>
