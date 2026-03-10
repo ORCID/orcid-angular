@@ -262,12 +262,13 @@ export interface AuthChallenge {
   invalidPassword?: boolean
   invalidTwoFactorCode?: boolean
   invalidTwoFactorRecoveryCode?: boolean
+  password?: string
   twoFactorCode?: string
   twoFactorRecoveryCode?: string
   twoFactorEnabled?: boolean
 }
 
-export interface AuthChallengeData {
+export interface AuthChallengeFormData {
   actionDescription?: string
   showPasswordField?: boolean
   showTwoFactorField?: boolean

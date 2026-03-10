@@ -21,7 +21,7 @@ import { OrcidValidators } from 'src/app/validators'
 import { AuthChallengeComponent } from '@orcid/registry-ui'
 import { ErrorStateMatcherForTwoFactorFields } from '../../../sign-in/ErrorStateMatcherForTwoFactorFields'
 import { MatDialog } from '@angular/material/dialog'
-import { AuthChallengeData } from '../../../types/common.endpoint'
+import { AuthChallengeFormData } from '../../../types/common.endpoint'
 
 @Component({
   selector: 'app-settings-security-password',
@@ -96,7 +96,7 @@ export class SettingsSecurityPasswordComponent implements OnInit, OnDestroy {
           parentForm: this.form,
           showPasswordField: false,
           actionDescription: this.authChallengeLabel,
-        } as AuthChallengeData,
+        } as AuthChallengeFormData,
       }
     )
 

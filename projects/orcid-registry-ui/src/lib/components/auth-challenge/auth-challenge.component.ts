@@ -78,7 +78,7 @@ export class AuthChallengeComponent implements OnInit, OnDestroy {
     const defaultData = {
       codeControlName: 'twoFactorCode',
       recoveryControlName: 'twoFactorRecoveryCode',
-      passwordControlName: 'passwordControl',
+      passwordControlName: 'password',
       showPasswordField: true,
       showTwoFactorField: true,
       parentForm: null,
