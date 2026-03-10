@@ -3,7 +3,7 @@
     <body>
       <trans-unit id="37fa222e5a5b6d9018702696271db5b7ab5ae7a4" datatype="html" resname="37fa222e5a5b6d9018702696271db5b7ab5ae7a4">
         <source>As two-factor authentication is currently active on your ORCID account you need to enter a 2FA code from your authentication app to continue.</source>
-        <target>نظرًا لتفعيل يزة المصادقة ثنائية العوامل حاليًا في حساب ORCID الخاص بك، يجب إدخال رمز 2FA من تطبيق المصادقة لديك للاستمرار.</target>
+        <target>نظرًا لتفعيل ميزة المصادقة ثنائية العوامل حاليًا في حساب ORCID الخاص بك، يجب إدخال رمز 2FA من تطبيق المصادقة لديك للاستمرار.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-ui/src/lib/components/two-factor-form-auth/two-factor-auth-form.component.html</context>
           <context context-type="linenumber">3,6</context>

@@ -8452,7 +8452,7 @@
       </trans-unit>
       <trans-unit id="works.importIntroText" datatype="html" resname="works.importIntroText">
         <source>These services can help you update your ORCID record quickly by searching for your research outputs from various databases. Connect to a service to grant permission and add selected research outputs to your ORCID record.</source>
-        <target>Tyto služby vám mohou pomoci rychle aktualizovat svůj záznam ORCID vyhledáním výstupů výzkumu v různých databázích. Připojte se ke službě, abyste mohli udělit povolení a přidat vybrané výstupy výzkumu do svého záznamu ORCID.</target>
+        <target>Tyto služby vám mohou pomoci rychle aktualizovat váš záznam ORCID vyhledáním výstupů výzkumu v různých databázích. Připojte se ke službě, abyste mohli udělit povolení a přidat vybrané výstupy výzkumu do vašeho záznamu ORCID.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
           <context context-type="linenumber">601</context>
