@@ -14072,7 +14072,7 @@
       </trans-unit>
       <trans-unit id="topBar.permissionRead" datatype="html" resname="topBar.permissionRead">
         <source>Read</source>
-        <target>Lettura</target>
+        <target>Leggi</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/top-bar.component.ts</context>
           <context context-type="linenumber">240</context>

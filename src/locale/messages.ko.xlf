@@ -8528,7 +8528,7 @@
       </trans-unit>
       <trans-unit id="works.connectWithCspNow" datatype="html" resname="works.connectWithCspNow">
         <source>Connect with {{name}} now</source>
-        <target>지금 {{name}}과(와) 연결</target>
+        <target>지금 {{name}}에 연결</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
           <context context-type="linenumber">613</context>
@@ -8536,7 +8536,7 @@
       </trans-unit>
       <trans-unit id="works.connectedWithCsp" datatype="html" resname="works.connectedWithCsp">
         <source>Connected with {{name}}</source>
-        <target>{{name}}과(와) 연결됨</target>
+        <target>{{name}}에 연결됨</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
           <context context-type="linenumber">614</context>
