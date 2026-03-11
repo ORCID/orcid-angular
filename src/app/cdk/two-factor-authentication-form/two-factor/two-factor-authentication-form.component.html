@@ -2,6 +2,7 @@
   <div class="input-container">
     <mat-label
       class="orc-font-small-print"
+      for="totp"
       i18n="@@ngOrcid.signin.2fa.label"
       [ngClass]="{
         error: isVerificationCodeInvalid
@@ -20,7 +21,11 @@
         formControlName="verificationCode"
         cdkFocusInitial
         appTrim
-        autocomplete="off"
+        autocomplete="one-time-code"
+        id="totp"
+        inputmode="numeric"
+        name="totp"
+        type="text"
       />
     </mat-form-field>
     <ng-container *ngIf="!recoveryCode">
@@ -119,7 +124,10 @@
         #inputRecoveryCode
         formControlName="recoveryCode"
         appTrim
-        autocomplete="off"
+        autocomplete="one-time-code"
+        inputmode="numeric"
+        name="totp"
+        type="text"
       />
     </mat-form-field>
     <ng-container *ngIf="recoveryCode">

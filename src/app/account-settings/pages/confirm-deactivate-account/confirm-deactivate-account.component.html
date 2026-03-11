@@ -128,8 +128,9 @@
         >
           <input
             id="twoFactorCode"
-            type="text"
+            autocomplete="one-time-code"
             inputmode="numeric"
+            name="totp"
             aria-labelledby="2fa-input-label"
             formControlName="twoFactorCode"
             matInput
