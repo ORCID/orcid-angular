@@ -84,12 +84,9 @@ The following tools are not required to work on the project but they facilitate 
 
 ## Build the application for other environments
 
-The following commands are used to build the application for non-local environments
+Build the application for deployment (prod, sandbox, qa, int all use the same asset; environment is resolved at runtime):
 
-- `yarn build:prod`
-- `yarn build:sandbox`
-- `yarn build:qa`
-- `yarn build:int`
+- `yarn build`
 
 ## Learn more
 

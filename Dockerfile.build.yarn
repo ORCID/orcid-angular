@@ -1,7 +1,5 @@
 FROM node:22.12.0-bullseye AS build
 
-ARG build_env
-
 WORKDIR /app
 
 COPY package.json .
@@ -16,7 +14,7 @@ COPY scripts/ scripts/
 
 # RUN apk add gettext
 
-RUN yarn build:${build_env}
+RUN yarn build
 
 FROM nginx:1.26.2-alpine
 #FROM nginx:1.26.2-bookworm
