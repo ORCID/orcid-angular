@@ -1,4 +1,4 @@
-<?xml version="1.0" ?><xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
   <file source-language="en" datatype="plaintext" original="ng2.template" target-language="tr-TR">
     <body>
       <trans-unit id="37fa222e5a5b6d9018702696271db5b7ab5ae7a4" datatype="html" resname="37fa222e5a5b6d9018702696271db5b7ab5ae7a4">
@@ -178,7 +178,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.noDevice1" datatype="html" resname="ngOrcid.signin.2fa.noDevice1">
-        <source>Don&apos;t have your device?</source>
+        <source>Don't have your device?</source>
         <target>Cihazınız yok mu?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-ui/src/lib/components/two-factor-form-auth/two-factor-auth-form.component.html</context>
@@ -206,7 +206,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="account.dontHaveYourRecoveryCodes" datatype="html" resname="account.dontHaveYourRecoveryCodes">
-        <source>Don&apos;t have your recovery codes?</source>
+        <source>Don't have your recovery codes?</source>
         <target>Kurtarma kodlarınız sizde değil mi?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-ui/src/lib/components/two-factor-form-auth/two-factor-auth-form.component.html</context>
@@ -230,7 +230,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.2fa.noDeviceOrRecovery" datatype="html" resname="ngOrcid.signin.2fa.noDeviceOrRecovery">
-        <source>Don&apos;t have your device or recovery code?</source>
+        <source>Don't have your device or recovery code?</source>
         <target>Cihazınız veya kurtarma kodunuz yok mu?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-ui/src/lib/components/two-factor-form-auth/two-factor-auth-form.component.html</context>
@@ -543,7 +543,7 @@
       </trans-unit>
       <trans-unit id="account.youWillNoLonger" datatype="html" resname="account.youWillNoLonger">
         <source>You will no longer be able to use your iD to sign in or access other services. Your public record remains accessible but will only contain the iD and a ‘Deactivated record’ message.</source>
-        <target>Artık oturum açmak veya diğer hizmetlere erişmek için kimliğinizi kullanamazsınız. Herkese açık kaydınız erişilebilir olarak kalır, ancak yalnızca kimliği ve &quot;Devre dışı bırakılan kayıt&quot; mesajını içerir.</target>
+        <target>Artık oturum açmak veya diğer hizmetlere erişmek için kimliğinizi kullanamazsınız. Herkese açık kaydınız erişilebilir olarak kalır, ancak yalnızca kimliği ve "Devre dışı bırakılan kayıt" mesajını içerir.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-actions-deactivate/settings-actions-deactivate.component.html</context>
           <context context-type="linenumber">20,24</context>
@@ -991,7 +991,7 @@
       </trans-unit>
       <trans-unit id="register.VisibilityEveryone2" datatype="html" resname="register.VisibilityEveryone2">
         <source>(87% of users choose this)</source>
-        <target>(Kullanıcıların %87&apos;si bunu seçiyor)</target>
+        <target>(Kullanıcıların %87'si bunu seçiyor)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-defaults-visibility/settings-defaults-visibility.component.html</context>
           <context context-type="linenumber">24</context>
@@ -1011,7 +1011,7 @@
       </trans-unit>
       <trans-unit id="register.VisibilityTrusted2" datatype="html" resname="register.VisibilityTrusted2">
         <source>(5% of users choose this)</source>
-        <target>(Kullanıcıların %5&apos;i bunu seçiyor)</target>
+        <target>(Kullanıcıların %5'i bunu seçiyor)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-defaults-visibility/settings-defaults-visibility.component.html</context>
           <context context-type="linenumber">44</context>
@@ -1039,7 +1039,7 @@
       </trans-unit>
       <trans-unit id="register.VisibilityPrivate2" datatype="html" resname="register.VisibilityPrivate2">
         <source>(8% of users choose this)</source>
-        <target>(Kullanıcıların %8&apos;i bunu seçiyor)</target>
+        <target>(Kullanıcıların %8'i bunu seçiyor)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-defaults-visibility/settings-defaults-visibility.component.html</context>
           <context context-type="linenumber">61</context>
@@ -1103,7 +1103,7 @@
       </trans-unit>
       <trans-unit id="account.youCanSignIntoOrcid" datatype="html" resname="account.youCanSignIntoOrcid">
         <source>You can sign into ORCID using any of the institutional accounts you have linked to your ORCID record.</source>
-        <target>ORCID kaydınıza bağladığınız kurumsal hesapları kullanarak ORCID&apos;e giriş yapabilirsiniz.</target>
+        <target>ORCID kaydınıza bağladığınız kurumsal hesapları kullanarak ORCID'e giriş yapabilirsiniz.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
           <context context-type="linenumber">2,5</context>
@@ -1111,7 +1111,7 @@
       </trans-unit>
       <trans-unit id="account.learnMoreAboutUsing" datatype="html" resname="account.learnMoreAboutUsing">
         <source>Learn more about using alternate accounts to sign in to ORCID</source>
-        <target>ORCID&apos;de oturum açmak için alternatif hesaplar kullanmakla ilgili daha fazla bilgi edinin</target>
+        <target>ORCID'de oturum açmak için alternatif hesaplar kullanmakla ilgili daha fazla bilgi edinin</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
           <context context-type="linenumber">14,16</context>
@@ -1170,7 +1170,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="account.youHaventAdded" datatype="html" resname="account.youHaventAdded">
-        <source>You haven&apos;t added any alternate sign in accounts yet.</source>
+        <source>You haven't added any alternate sign in accounts yet.</source>
         <target>Henüz alternatif bir oturum açma hesabı eklemediniz.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
@@ -1367,7 +1367,7 @@
       </trans-unit>
       <trans-unit id="account.eachTimeYouSignIn" datatype="html" resname="account.eachTimeYouSignIn">
         <source>Each time you sign in to ORCID you’ll be prompted to enter a six-digit code we send to your preferred 2FA authentication application.</source>
-        <target>ORCID&apos;de her oturum açtığınızda, tercih ettiğiniz 2FA kimlik doğrulama uygulamasına gönderdiğimiz altı haneli bir kod girmeniz istenir.</target>
+        <target>ORCID'de her oturum açtığınızda, tercih ettiğiniz 2FA kimlik doğrulama uygulamasına gönderdiğimiz altı haneli bir kod girmeniz istenir.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
           <context context-type="linenumber">8,11</context>
@@ -1475,7 +1475,7 @@
       </trans-unit>
       <trans-unit id="account.aQrCodeIsMachine" datatype="html" resname="account.aQrCodeIsMachine">
         <source>A QR code is a machine-readable graphic that contains information, typically a website URL. Your ORCID iD QR code is unique to you and it represents your ORCID iD. Anyone who scans it with a QR code reader such as a mobile phone will be sent to your public ORCID record.</source>
-        <target>QR kodu, genellikle bir web sitesi URL&apos;si gibi bilgiler içeren, makine tarafından okunabilir bir grafiktir. ORCID kimliği QR kodunuz size özeldir ve ORCID kimliğinizi temsil eder. Cep telefonu gibi bir QR kod okuyucu ile tarayanlar, herkese açık ORCID kaydınıza yönlendirilir.</target>
+        <target>QR kodu, genellikle bir web sitesi URL'si gibi bilgiler içeren, makine tarafından okunabilir bir grafiktir. ORCID kimliği QR kodunuz size özeldir ve ORCID kimliğinizi temsil eder. Cep telefonu gibi bir QR kod okuyucu ile tarayanlar, herkese açık ORCID kaydınıza yönlendirilir.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-sharing-qr-code/settings-sharing-qr-code.component.html</context>
           <context context-type="linenumber">2,7</context>
@@ -1507,7 +1507,7 @@
       </trans-unit>
       <trans-unit id="account.htmlCode" datatype="html" resname="account.htmlCode">
         <source>Display your ORCID iD on the web</source>
-        <target>ORCID kimliğinizi web&apos;de yayınlayın</target>
+        <target>ORCID kimliğinizi web'de yayınlayın</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-sharing/settings-sharing.component.ts</context>
           <context context-type="linenumber">11</context>
@@ -1619,7 +1619,7 @@
       </trans-unit>
       <trans-unit id="account.cancelDeactivation" datatype="html" resname="account.cancelDeactivation">
         <source>Cancel deactivation and sign in to ORCID</source>
-        <target>Devre dışı bırakma işlemini iptal edin ve ORCID&apos;e giriş yapın</target>
+        <target>Devre dışı bırakma işlemini iptal edin ve ORCID'e giriş yapın</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
           <context context-type="linenumber">363</context>
@@ -1694,7 +1694,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="account.youCantAddYourSelf" datatype="html" resname="account.youCantAddYourSelf">
-        <source>You can&apos;t add yourself as a trusted individual</source>
+        <source>You can't add yourself as a trusted individual</source>
         <target>Kendinizi güvenilir kişi olarak ekleyemezsiniz</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-trusted-parties/components/dialog-add-trusted-individuals-your-own-email/dialog-add-trusted-individuals-your-own-email.component.html</context>
@@ -1879,7 +1879,7 @@
       </trans-unit>
       <trans-unit id="account.searchOrcidTrusted" datatype="html" resname="account.searchOrcidTrusted">
         <source>Search ORCID for trusted individuals</source>
-        <target>Güvenilir kişiler için ORCID&apos;de arama yap</target>
+        <target>Güvenilir kişiler için ORCID'de arama yap</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals-search/settings-trusted-individuals-search.component.html</context>
           <context context-type="linenumber">27,29</context>
@@ -2014,7 +2014,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="account.youHavenAddAnyTrusted" datatype="html" resname="account.youHavenAddAnyTrusted">
-        <source>You haven&apos;t added any trusted individuals yet.</source>
+        <source>You haven't added any trusted individuals yet.</source>
         <target>Henüz güvenilir bir kişi eklemediniz.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals/settings-trusted-individuals.component.html</context>
@@ -2066,7 +2066,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="account.youHavenAddAnyOrg" datatype="html" resname="account.youHavenAddAnyOrg">
-        <source>You haven&apos;t added any trusted organizations yet.</source>
+        <source>You haven't added any trusted organizations yet.</source>
         <target>Henüz güvenilir kuruluş eklemediniz.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-organizations/settings-trusted-organizations.component.html</context>
@@ -2090,7 +2090,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="account.youHavenBeenAddAsTrusted" datatype="html" resname="account.youHavenBeenAddAsTrusted">
-        <source>You haven&apos;t been added as a trusted individual yet.</source>
+        <source>You haven't been added as a trusted individual yet.</source>
         <target>Henüz güvenilir bir kişi eklenmediniz.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-users-that-thrust-you/settings-users-that-thrust-you.component.html</context>
@@ -2117,26 +2117,6 @@
           <context context-type="linenumber">21,23</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="public-layout.sign_out" datatype="html" resname="public-layout.sign_out">
-        <source>Sign out</source>
-        <target>Oturumu kapat</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.html</context>
-          <context context-type="linenumber">51</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/layout/header/header.component.html</context>
-          <context context-type="linenumber">171</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/layout/header/menu.ts</context>
-          <context context-type="linenumber">46</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">57</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="authorize.organizationAskedFollowingAccess" datatype="html" resname="authorize.organizationAskedFollowingAccess">
         <source>This organization has asked for the following access to your ORCID record:</source>
         <target>Bu kuruluş, ORCID kaydınıza aşağıdaki erişimleri istedi:</target>
@@ -2155,7 +2135,7 @@
       </trans-unit>
       <trans-unit id="authorize.privacyPolicy" datatype="html" resname="authorize.privacyPolicy">
         <source>ORCID’s privacy policy.</source>
-        <target>ORCID&apos;inizin gizlilik politikasında yönetebilirsiniz.</target>
+        <target>ORCID'inizin gizlilik politikasında yönetebilirsiniz.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.html</context>
           <context context-type="linenumber">110</context>
@@ -2315,7 +2295,7 @@
       </trans-unit>
       <trans-unit id="authorize.errorInvalidRedirect1" datatype="html" resname="authorize.errorInvalidRedirect1">
         <source>Error: The provided redirect URI</source>
-        <target>Hata: Sağlanan yönlendirme URI&apos;si</target>
+        <target>Hata: Sağlanan yönlendirme URI'si</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/oauth-error/oauth-error.component.html</context>
           <context context-type="linenumber">30,31</context>
@@ -2323,7 +2303,7 @@
       </trans-unit>
       <trans-unit id="authorize.errorInvalidRedirect2" datatype="html" resname="authorize.errorInvalidRedirect2">
         <source>does not match the redirect URIs registered by</source>
-        <target>şu kurum tarafından kaydedilen yeniden yönlendirme URI&apos;leriyle eşleşmiyor:</target>
+        <target>şu kurum tarafından kaydedilen yeniden yönlendirme URI'leriyle eşleşmiyor:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/oauth-error/oauth-error.component.html</context>
           <context context-type="linenumber">35,36</context>
@@ -2354,7 +2334,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="authorize.errorLockedMemberID1" datatype="html" resname="authorize.errorLockedMemberID1">
-        <source>Error: The provided request couldn&apos;t be completed because the integration and hence, the client</source>
+        <source>Error: The provided request couldn't be completed because the integration and hence, the client</source>
         <target>Hata: Sağlanan istek tamamlanamadı çünkü entegrasyon ve dolayısıyla istemci</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/oauth-error/oauth-error.component.html</context>
@@ -2414,7 +2394,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="authorize.error" datatype="html" resname="authorize.error">
-        <source>You have reached this page due to an error with the application&apos;s integration. Please report this error to the organization that is requesting your ORCID iD.</source>
+        <source>You have reached this page due to an error with the application's integration. Please report this error to the organization that is requesting your ORCID iD.</source>
         <target>Uygulamanın entegrasyonundaki bir hata nedeniyle bu sayfaya ulaştınız. Lütfen bu hatayı ORCID kimliğinizi isteyen kuruluşa bildirin.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/oauth-error/oauth-error.component.html</context>
@@ -3114,7 +3094,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="register.prefilledOrganization" datatype="html" resname="register.prefilledOrganization">
-        <source>Organization - We&apos;ve added an organization based on your email domain</source>
+        <source>Organization - We've added an organization based on your email domain</source>
         <target>Kuruluş - E-posta alan adınıza bağlı olarak bir kuruluş ekledik</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/interstitials/affiliations-interstitial/interstitial-component/affiliations-interstitial.component.ts</context>
@@ -3262,7 +3242,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="myOrcidAlerts.invalidVerifyUrl" datatype="html" resname="myOrcidAlerts.invalidVerifyUrl">
-        <source>Your email couldn&apos;t be verified, please check the link you used to verify it.</source>
+        <source>Your email couldn't be verified, please check the link you used to verify it.</source>
         <target>E-postanız doğrulanamadı, lütfen doğrulamak için kullandığınız bağlantıyı kontrol edin.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/my-orcid-alerts/my-orcid-alerts.component.html</context>
@@ -3941,94 +3921,6 @@
           <context context-type="linenumber">15</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="side-bar.countries" datatype="html" resname="side-bar.countries">
-        <source>Countries</source>
-        <target>Ülkeler</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-country/modal-country.component.html</context>
-          <context context-type="linenumber">6</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.html</context>
-          <context context-type="linenumber">441,443</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.countriesOrLocationsDescription" datatype="html" resname="side-bar.countriesOrLocationsDescription">
-        <source>Add countries or locations to your ORCID record to highlight where you conduct your research or where your research is focused. You can add as many countries or locations as you want.</source>
-        <target>Araştırmanızı nerede yürüttüğünüzü veya araştırmanızın nereye odaklandığını vurgulamak için ORCID kaydınıza ülkeler veya konumlar ekleyin. İstediğiniz kadar ülke veya konum ekleyebilirsiniz.</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-country/modal-country.component.html</context>
-          <context context-type="linenumber">37,41</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.myCountriesAndLocations" datatype="html" resname="side-bar.myCountriesAndLocations">
-        <source>My countries/locations</source>
-        <target>Ülkelerim/konumlarım</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-country/modal-country.component.html</context>
-          <context context-type="linenumber">49,51</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.addCountryOrLocation" datatype="html" resname="side-bar.addCountryOrLocation">
-        <source>Add a country or location</source>
-        <target>Bir ülke veya konum ekle</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-country/modal-country.component.html</context>
-          <context context-type="linenumber">175</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.addAnotherCountryOrLocation" datatype="html" resname="side-bar.addAnotherCountryOrLocation">
-        <source>Add another country or location</source>
-        <target>Başka bir ülke veya konum ekle</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-country/modal-country.component.html</context>
-          <context context-type="linenumber">180</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelCountrySave" datatype="html" resname="side-bar.ariaLabelCountrySave">
-        <source>Save changes to Countries</source>
-        <target>Ülke değişikliklerini kaydet</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-country/modal-country.component.ts</context>
-          <context context-type="linenumber">35</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelCountryCancel" datatype="html" resname="side-bar.ariaLabelCountryCancel">
-        <source>Cancel changes and close Countries</source>
-        <target>Değişiklikleri iptal et ve Ülkeleri kapat</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-country/modal-country.component.ts</context>
-          <context context-type="linenumber">36</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelCountryDelete" datatype="html" resname="side-bar.ariaLabelCountryDelete">
-        <source>Delete Country or location</source>
-        <target>Ülkeyi veya konumu sil</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-country/modal-country.component.ts</context>
-          <context context-type="linenumber">37</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelCountrySelect" datatype="html" resname="side-bar.ariaLabelCountrySelect">
-        <source>Select country or location</source>
-        <target>Ülke veya konum seç</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-country/modal-country.component.ts</context>
-          <context context-type="linenumber">38</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-country/modal-country.component.ts</context>
-          <context context-type="linenumber">39</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelCountryClose" datatype="html" resname="side-bar.ariaLabelCountryClose">
-        <source>Close Countries</source>
-        <target>Ülkeleri kapat</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-country/modal-country.component.ts</context>
-          <context context-type="linenumber">40</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="shared.selectACountryOrLocation" datatype="html" resname="shared.selectACountryOrLocation">
         <source>Select a country or location</source>
         <target>Bir ülke veya konum seçin</target>
@@ -4093,460 +3985,12 @@
           <context context-type="linenumber">61,63</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="side-bar.havingMultipleEmails" datatype="html" resname="side-bar.havingMultipleEmails">
-        <source>Having multiple email addresses helps you maintain access to your ORCID record. A mix of personal and professional email addresses works best.</source>
-        <target>Birden fazla e-posta adresine sahip olmak, ORCID kaydınıza erişiminizi korumanıza yardımcı olur. Kişisel ve profesyonel e-posta adreslerini birlikte kullanmak en iyi sonucu verecektir.</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">47,50</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.pleaseVerifyWarning" datatype="html" resname="side-bar.pleaseVerifyWarning">
-        <source>Please verify your email addresses</source>
-        <target>Lütfen e-posta adreslerinizi onaylayın</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">53,55</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.verifyToAccessOrcidFeatures" datatype="html" resname="side-bar.verifyToAccessOrcidFeatures">
-        <source>To access all of ORCID’s editing features you must verify at least one email address. Until then you will only be able to manage</source>
-        <target>ORCID&apos;in tüm düzenleme özelliklerine erişebilmek için en az bir e-posta adresini doğrulamanız gerekmektedir. O zamana kadar sadece şunları yönetebilirsiniz:</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">59,61</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.names" datatype="html" resname="side-bar.names">
-        <source>names</source>
-        <target>adlar</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">63</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.and" datatype="html" resname="side-bar.and">
-        <source>and</source>
-        <target>ile</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">64</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.emailAddresses" datatype="html" resname="side-bar.emailAddresses">
-        <source>email addresses</source>
-        <target>e-posta adresleri</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">65</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.inYourOrcidRecord" datatype="html" resname="side-bar.inYourOrcidRecord">
-        <source>in your ORCID record.</source>
-        <target>ORCID kaydınızda.</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">67</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.emailAddressesUppercase" datatype="html" resname="side-bar.emailAddressesUppercase">
-        <source>Email addresses</source>
-        <target>E-posta adresleri</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">73,75</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.html</context>
-          <context context-type="linenumber">205,207</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.unverified" datatype="html" resname="side-bar.unverified">
-        <source>Unverified</source>
-        <target>Doğrulanmamış</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">180</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.verificationEmailSent" datatype="html" resname="side-bar.verificationEmailSent">
-        <source>Verification email sent</source>
-        <target>Doğrulama e-postası gönderildi</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">187</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.resendVerification" datatype="html" resname="side-bar.resendVerification">
-        <source>Resend verification email</source>
-        <target>Doğrulama e-postasını yeniden gönder</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">194,195</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="sideBar.primaryEmailRequired" datatype="html" resname="sideBar.primaryEmailRequired">
         <source>An email is required</source>
         <target>Bir e-posta gereklidir</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
           <context context-type="linenumber">205,207</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.emailCanNotBeDuplicated" datatype="html" resname="side-bar.emailCanNotBeDuplicated">
-        <source>Email can not be duplicated</source>
-        <target>E-posta çoğaltılamaz</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">215,217</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.invalidEmailErrorMessage" datatype="html" resname="side-bar.invalidEmailErrorMessage">
-        <source>Please enter a valid email address, for example joe@institution.edu</source>
-        <target>Lütfen geçerli bir e-posta girin, örneğin mehmet@kurum.edu</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">225,228</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
-          <context context-type="linenumber">143,145</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.alreadyAssociated" datatype="html" resname="side-bar.alreadyAssociated">
-        <source>This email is already associated with an ORCID record.</source>
-        <target>Bu e-posta zaten bir ORCID kaydıyla ilişkilendirilmiştir.</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">237,239</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.anotherEmail" datatype="html" resname="side-bar.anotherEmail">
-        <source>Add another email address</source>
-        <target>Başka bir e-posta adresi ekle</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">257,259</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.verifiedEmailDomains" datatype="html" resname="side-bar.verifiedEmailDomains">
-        <source>Verified email domains</source>
-        <target>Doğrulanmış e-posta etki alanları</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">268,270</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.html</context>
-          <context context-type="linenumber">153,155</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.html</context>
-          <context context-type="linenumber">219,221</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.whenYouVerifyEmail" datatype="html" resname="side-bar.whenYouVerifyEmail">
-        <source>When you verify a professional email address we will add the associated domain to your record. You can choose to show an email domain on your public record instead of the full email address.</source>
-        <target>Profesyonel bir e-posta adresini doğruladığınızda, ilgili etki alanını kaydınıza ekleriz. Herkese açık kaydınızda tüm e-posta adresiniz yerine bir e-posta etki alanını göstermeyi tercih edebilirsiniz.</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">273,276</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.findOutMoreAboutVerifiedEmailDomains" datatype="html" resname="side-bar.findOutMoreAboutVerifiedEmailDomains">
-        <source>Find out more about verified email domains</source>
-        <target>Doğrulanmış e-posta etki alanları hakkında daha fazla bilgi edinin</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">283</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.noVerifiedEmailDomains" datatype="html" resname="side-bar.noVerifiedEmailDomains">
-        <source>No verified email domains</source>
-        <target>Doğrulanmış e-posta etki alanı yok</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">288</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.html</context>
-          <context context-type="linenumber">235</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.emailNotifications" datatype="html" resname="side-bar.emailNotifications">
-        <source>Email notifications</source>
-        <target>E-posta bildirimleri</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">337,339</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.whichVerifiedEmail" datatype="html" resname="side-bar.whichVerifiedEmail">
-        <source>Which verified email address should we send your ORCID notifications to? You can change the frequency of these notification emails in</source>
-        <target>ORCID bildirimlerinizi hangi doğrulanmış e-posta adresine gönderelim? Bu e-postaların sıklığını değiştirmek için:</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">341,344</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.yourOrcidAccountSettings" datatype="html" resname="side-bar.yourOrcidAccountSettings">
-        <source>your ORCID account settings.</source>
-        <target>ORCID hesap ayarlarınız.</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.html</context>
-          <context context-type="linenumber">351</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelOrcidTermsOfUseBase" datatype="html" resname="side-bar.ariaLabelOrcidTermsOfUseBase">
-        <source>ORCID knowledge base (Opens in a new tab)</source>
-        <target>ORCID bilgi bankası (Yeni bir sekmede açılır)</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
-          <context context-type="linenumber">51</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/top-bar-verification-email/modals/top-bar-verification-email-modal/top-bar-verification-email-modal.component.ts</context>
-          <context context-type="linenumber">22</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelOrcidTermsSupport" datatype="html" resname="side-bar.ariaLabelOrcidTermsSupport">
-        <source>ORCID support page (Opens in a new tab)</source>
-        <target>ORCID destek sayfası (Yeni bir sekmede açılır)</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
-          <context context-type="linenumber">52</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/top-bar-verification-email/modals/top-bar-verification-email-modal/top-bar-verification-email-modal.component.ts</context>
-          <context context-type="linenumber">23</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelOrcidTermsOfUseLink" datatype="html" resname="side-bar.ariaLabelOrcidTermsOfUseLink">
-        <source>ORCID terms of use (Opens in a new tab)</source>
-        <target>ORCID kullanım koşulları (Yeni bir sekmede açılır)</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
-          <context context-type="linenumber">53</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelEmailSave" datatype="html" resname="side-bar.ariaLabelEmailSave">
-        <source>Save changes to Emails</source>
-        <target>E-posta değişikliklerini kaydet</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
-          <context context-type="linenumber">54</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelEmailAndDomainsSave" datatype="html" resname="side-bar.ariaLabelEmailAndDomainsSave">
-        <source>Save changes to Emails &amp; domains</source>
-        <target>E-postalar ve etki alanları değişikliklerini kaydet</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
-          <context context-type="linenumber">55</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.notificationsAreSentToEmail" datatype="html" resname="side-bar.notificationsAreSentToEmail">
-        <source>Notifications are sent to</source>
-        <target>Bildirimler gönderildi:</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
-          <context context-type="linenumber">56</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelEmailCancel" datatype="html" resname="side-bar.ariaLabelEmailCancel">
-        <source>Cancel changes and close Emails</source>
-        <target>Değişiklikleri iptal et ve E-postaları kapat</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
-          <context context-type="linenumber">57</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelEmailAndDomainsCancel" datatype="html" resname="side-bar.ariaLabelEmailAndDomainsCancel">
-        <source>Cancel changes and close Emails &amp; domains</source>
-        <target>Değişiklikleri iptal et ve E-postalar ve etki alanlarını kapat</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
-          <context context-type="linenumber">58</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelEmailDelete" datatype="html" resname="side-bar.ariaLabelEmailDelete">
-        <source>Delete Email</source>
-        <target>E-postayı Sil</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
-          <context context-type="linenumber">59</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelEmailAndDomainsClose" datatype="html" resname="side-bar.ariaLabelEmailAndDomainsClose">
-        <source>Close Emails &amp; domains</source>
-        <target>E-posta ve etki alanlarını kapat</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
-          <context context-type="linenumber">60</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelEmailClose" datatype="html" resname="side-bar.ariaLabelEmailClose">
-        <source>Close Emails</source>
-        <target>E-postaları Kapat</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
-          <context context-type="linenumber">61</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.emailAddress" datatype="html" resname="side-bar.emailAddress">
-        <source>Email address</source>
-        <target>E-posta adresi</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
-          <context context-type="linenumber">62</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.newEmailAddress" datatype="html" resname="side-bar.newEmailAddress">
-        <source>New email address</source>
-        <target>Yeni e-posta adresi</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
-          <context context-type="linenumber">63</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.otherEmails" datatype="html" resname="side-bar.otherEmails">
-        <source>Other email addresses</source>
-        <target>Diğer e-posta adresleri</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
-          <context context-type="linenumber">64</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelPrimaryEmailPublic" datatype="html" resname="side-bar.ariaLabelPrimaryEmailPublic">
-        <source>Set primary email visibility to Everyone</source>
-        <target>Birincil e-posta görünürlüğünü Herkes olarak ayarla</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
-          <context context-type="linenumber">65</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelPrimaryEmailTrustedParties" datatype="html" resname="side-bar.ariaLabelPrimaryEmailTrustedParties">
-        <source>Set primary email visibility to Trusted Parties</source>
-        <target>Birincil e-posta görünürlüğünü Güvenilir Taraflar olarak ayarla</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
-          <context context-type="linenumber">66</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelPrimaryEmailPrivate" datatype="html" resname="side-bar.ariaLabelPrimaryEmailPrivate">
-        <source>Set primary email visibility to Only Me</source>
-        <target>Birincil e-posta görünürlüğünü Yalnızca Ben olarak ayarla</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
-          <context context-type="linenumber">67</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelOtherEmailPublic" datatype="html" resname="side-bar.ariaLabelOtherEmailPublic">
-        <source>Set other email visibility to Everyone</source>
-        <target>Diğer e-posta görünürlüğünü Herkes olarak ayarla</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
-          <context context-type="linenumber">68</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelOtherEmailTrustedParties" datatype="html" resname="side-bar.ariaLabelOtherEmailTrustedParties">
-        <source>Set other email visibility to Trusted Parties</source>
-        <target>Diğer e-posta görünürlüğünü Güvenilen Taraflar olarak ayarla</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
-          <context context-type="linenumber">69</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelOtherEmailPrivate" datatype="html" resname="side-bar.ariaLabelOtherEmailPrivate">
-        <source>Set other email visibility to Only Me</source>
-        <target>Diğer e-posta görünürlüğünü Yalnızca Ben olarak ayarla</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
-          <context context-type="linenumber">70</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelEmailPublic" datatype="html" resname="side-bar.ariaLabelEmailPublic">
-        <source>Set email visibility to Everyone</source>
-        <target>E-posta görünürlüğünü Herkes olarak ayarla</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
-          <context context-type="linenumber">71</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelEmailTrustedParties" datatype="html" resname="side-bar.ariaLabelEmailTrustedParties">
-        <source>Set email visibility to Trusted Parties</source>
-        <target>E-posta görünürlüğünü Güvenilen Taraflar olarak ayarla</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
-          <context context-type="linenumber">72</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelEmailPrivate" datatype="html" resname="side-bar.ariaLabelEmailPrivate">
-        <source>Set email visibility to Only Me</source>
-        <target>E-posta görünürlüğünü Yalnızca Ben olarak ayarla</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
-          <context context-type="linenumber">73</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelDomainVisibilityPublic" datatype="html" resname="side-bar.ariaLabelDomainVisibilityPublic">
-        <source>Set domain visibility to Everyone</source>
-        <target>Etki alanı görünürlüğünü Herkes olarak ayarla</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
-          <context context-type="linenumber">74</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelDomainVisibilityTrustedParties" datatype="html" resname="side-bar.ariaLabelDomainVisibilityTrustedParties">
-        <source>Set domain visibility to Trusted Parties</source>
-        <target>Etki alanı görünürlüğünü Güvenilen Taraflar olarak ayarla</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
-          <context context-type="linenumber">75</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelDomainVisibilityPrivate" datatype="html" resname="side-bar.ariaLabelDomainVisibilityPrivate">
-        <source>Set domain visibility to Only Me</source>
-        <target>Etki alanı görünürlüğünü Yalnızca Ben olarak ayarla</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
-          <context context-type="linenumber">76</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaOpenAccountSettings" datatype="html" resname="side-bar.ariaOpenAccountSettings">
-        <source>Open your ORCID account settings</source>
-        <target>ORCID hesap ayarlarınızı açın</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
-          <context context-type="linenumber">77</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.deleteTooltip" datatype="html" resname="side-bar.deleteTooltip">
-        <source>You can&apos;t delete the only email address in your account</source>
-        <target>Hesabınızdaki tek e-posta adresini silemezsiniz</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
-          <context context-type="linenumber">79</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.visibilityTooltip" datatype="html" resname="side-bar.visibilityTooltip">
-        <source>Visibility set to Only me</source>
-        <target>Görünürlük Yalnızca ben olarak ayarlandı</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
-          <context context-type="linenumber">80</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.orcidEmailValidation" datatype="html" resname="side-bar.orcidEmailValidation">
-        <source>ORCID email validation</source>
-        <target>ORCID e-posta doğrulaması</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-email/modal-email.component.ts</context>
-          <context context-type="linenumber">81</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
-          <context context-type="linenumber">50</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.pleaseReview" datatype="html" resname="shared.pleaseReview">
@@ -4633,54 +4077,6 @@
           <context context-type="linenumber">172,174</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="side-bar.ariaLabelKeywordSave" datatype="html" resname="side-bar.ariaLabelKeywordSave">
-        <source>Save changes to Keywords</source>
-        <target>Anahtar Kelime değişikliklerini kaydet</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-keyword/modal-keyword.component.ts</context>
-          <context context-type="linenumber">44</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelKeywordCancel" datatype="html" resname="side-bar.ariaLabelKeywordCancel">
-        <source>Cancel changes to Keywords</source>
-        <target>Anahtar Kelime değişikliklerini iptal et</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-keyword/modal-keyword.component.ts</context>
-          <context context-type="linenumber">45</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelKeywordDelete" datatype="html" resname="side-bar.ariaLabelKeywordDelete">
-        <source>Delete Keyword</source>
-        <target>Anahtar Kelimeyi Sil</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-keyword/modal-keyword.component.ts</context>
-          <context context-type="linenumber">46</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelKeywordNew" datatype="html" resname="side-bar.ariaLabelKeywordNew">
-        <source>New Keyword</source>
-        <target>Yeni Anahtar Kelime</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-keyword/modal-keyword.component.ts</context>
-          <context context-type="linenumber">47</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelKeyword" datatype="html" resname="side-bar.ariaLabelKeyword">
-        <source>Keyword</source>
-        <target>Anahtar kelime</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-keyword/modal-keyword.component.ts</context>
-          <context context-type="linenumber">48</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelCloseKeywords" datatype="html" resname="side-bar.ariaLabelCloseKeywords">
-        <source>Close Keywords</source>
-        <target>Anahtar Kelimeleri kapat</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-keyword/modal-keyword.component.ts</context>
-          <context context-type="linenumber">49</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="topBar.keyword" datatype="html" resname="topBar.keyword">
         <source>Keyword</source>
         <target>Anahtar kelime</target>
@@ -4691,70 +4087,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
           <context context-type="linenumber">237</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.personalIdentifiers" datatype="html" resname="side-bar.personalIdentifiers">
-        <source>Other IDs</source>
-        <target>Diğer Kimlikler</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-person-identifiers/modal-person-identifiers.component.html</context>
-          <context context-type="linenumber">5</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.personIdentifiersDescription" datatype="html" resname="side-bar.personIdentifiersDescription">
-        <source>Other identifiers, also called Person identifiers, are unique IDs that systems such as ISNI and Scopus use to identify you. These identifiers can only be added to your record by trusted organizations you have connected to ORCID.</source>
-        <target>Kişi tanımlayıcıları olarak da adlandırılan diğer tanımlayıcılar, ISNI ve Scopus gibi sistemlerin sizi tanımlamak için kullandığı benzersiz kimliklerdir. Bu tanımlayıcılar yalnızca ORCID&apos;e bağladığınız güvenilir kuruluşlar tarafından kaydınıza eklenebilir.</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-person-identifiers/modal-person-identifiers.component.html</context>
-          <context context-type="linenumber">34,39</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.findOutMore" datatype="html" resname="side-bar.findOutMore">
-        <source>Find out more on our</source>
-        <target>Daha fazla bilgi için</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-person-identifiers/modal-person-identifiers.component.html</context>
-          <context context-type="linenumber">42,44</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.personIdentifiersSupport" datatype="html" resname="side-bar.personIdentifiersSupport">
-        <source>Other identifiers support page.</source>
-        <target>Diğer tanımlayıcıların destek sayfası.</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-person-identifiers/modal-person-identifiers.component.html</context>
-          <context context-type="linenumber">53</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.myOtherIdentifiers" datatype="html" resname="side-bar.myOtherIdentifiers">
-        <source>My other identifiers</source>
-        <target>Diğer tanımlayıcılarım</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-person-identifiers/modal-person-identifiers.component.html</context>
-          <context context-type="linenumber">63,65</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelPersonalIdSave" datatype="html" resname="side-bar.ariaLabelPersonalIdSave">
-        <source>Save changes to Other identifiers</source>
-        <target>Diğer tanımlayıcı değişikliklerini kaydet</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-person-identifiers/modal-person-identifiers.component.ts</context>
-          <context context-type="linenumber">22</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelPersonalIdCancel" datatype="html" resname="side-bar.ariaLabelPersonalIdCancel">
-        <source>Cancel changes and close Other identifiers</source>
-        <target>Değişiklikleri iptal et ve Diğer tanımlayıcıları kapat</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-person-identifiers/modal-person-identifiers.component.ts</context>
-          <context context-type="linenumber">23</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelPersonalIdClose" datatype="html" resname="side-bar.ariaLabelPersonalIdClose">
-        <source>Close Other identifiers</source>
-        <target>Diğer tanımlayıcıları kapat</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-person-identifiers/modal-person-identifiers.component.ts</context>
-          <context context-type="linenumber">24</context>
         </context-group>
       </trans-unit>
       <trans-unit id="share.ariaLabelDelete" datatype="html" resname="share.ariaLabelDelete">
@@ -4771,22 +4103,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-person-identifiers/modal-person-identifiers.component.ts</context>
           <context context-type="linenumber">26</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelOtherIdsSupport" datatype="html" resname="side-bar.ariaLabelOtherIdsSupport">
-        <source>Find out how to add other identifiers to your ORCID record (Opens in a new tab)</source>
-        <target>ORCID kaydınıza nasıl başka tanımlayıcılar ekleyeceğinizi öğrenin (Yeni bir sekmede açılır)</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-person-identifiers/modal-person-identifiers.component.ts</context>
-          <context context-type="linenumber">27</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelUrl" datatype="html" resname="side-bar.ariaLabelUrl">
-        <source>(Opens in a new tab)</source>
-        <target>(Yeni bir sekmede açılır)</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-person-identifiers/modal-person-identifiers.component.ts</context>
-          <context context-type="linenumber">28</context>
         </context-group>
       </trans-unit>
       <trans-unit id="topBar.websites" datatype="html" resname="topBar.websites">
@@ -4905,54 +4221,6 @@
           <context context-type="linenumber">332,334</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="side-bar.ariaLabelWebsiteSave" datatype="html" resname="side-bar.ariaLabelWebsiteSave">
-        <source>Save changes to Websites &amp; social links</source>
-        <target>Web siteleri ve sosyal bağlantı değişikliklerini kaydet</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.ts</context>
-          <context context-type="linenumber">46</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelWebsiteCancel" datatype="html" resname="side-bar.ariaLabelWebsiteCancel">
-        <source>Cancel changes to Websites &amp; social links</source>
-        <target>Web siteleri ve sosyal bağlantı değişikliklerini iptal et</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.ts</context>
-          <context context-type="linenumber">47</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelWebsiteDelete" datatype="html" resname="side-bar.ariaLabelWebsiteDelete">
-        <source>Delete Websites or social link</source>
-        <target>Web sitesi veya sosyal bağlantıyı sil</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.ts</context>
-          <context context-type="linenumber">48</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelWebsiteClose" datatype="html" resname="side-bar.ariaLabelWebsiteClose">
-        <source>Close Websites and social links</source>
-        <target>Web sitelerini ve sosyal bağlantıları kapat</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.ts</context>
-          <context context-type="linenumber">49</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelWebsiteTitle" datatype="html" resname="side-bar.ariaLabelWebsiteTitle">
-        <source>Websites or social link Title</source>
-        <target>Web siteleri veya sosyal bağlantı Başlığı</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.ts</context>
-          <context context-type="linenumber">50</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.ariaLabelWebsiteUrl" datatype="html" resname="side-bar.ariaLabelWebsiteUrl">
-        <source>Link URL</source>
-        <target>Bağlantı URL&apos;si</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.ts</context>
-          <context context-type="linenumber">51</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="topBar.description" datatype="html" resname="topBar.description">
         <source>Link Title</source>
         <target>Bağlantı Başlığı</target>
@@ -4967,7 +4235,7 @@
       </trans-unit>
       <trans-unit id="topBar.url" datatype="html" resname="topBar.url">
         <source>Link URL</source>
-        <target>Bağlantı URL&apos;si</target>
+        <target>Bağlantı URL'si</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-websites/modal-websites.component.ts</context>
           <context context-type="linenumber">72</context>
@@ -5021,14 +4289,6 @@
           <context context-type="linenumber">19,21</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="side-bar.verifiedEmailAddresses" datatype="html" resname="side-bar.verifiedEmailAddresses">
-        <source>Verified email addresses</source>
-        <target>Doğrulanmış e-posta adresleri</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.html</context>
-          <context context-type="linenumber">111,113</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="record.websitesAndSocialLinks" datatype="html" resname="record.websitesAndSocialLinks">
         <source>Websites &amp; social links</source>
         <target>Web siteleri ve sosyal bağlantılar</target>
@@ -5060,7 +4320,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">44</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="record.manageYourWebsite" datatype="html" resname="record.manageYourWebsite">
         <source>Manage your websites &amp; social links</source>
@@ -5069,7 +4329,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">45</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="record.labelManageYourKeyword" datatype="html" resname="record.labelManageYourKeyword">
         <source>Manage your keywords</source>
@@ -5078,7 +4338,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">46</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="record.labelManageYourCountries" datatype="html" resname="record.labelManageYourCountries">
         <source>Manage your countries</source>
@@ -5087,7 +4347,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">47</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="record.labelManageYourPersonalIds" datatype="html" resname="record.labelManageYourPersonalIds">
         <source>Manage your personalIds</source>
@@ -5096,7 +4356,7 @@
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">48</context>
         </context-group>
-        <note priority="1" from="description">&quot;</note>
+        <note priority="1" from="description">"</note>
       </trans-unit>
       <trans-unit id="shared.pleaseReviewInvalidForm" datatype="html" resname="shared.pleaseReviewInvalidForm">
         <source>Please review the form and fix the issues before saving</source>
@@ -5148,7 +4408,7 @@
       </trans-unit>
       <trans-unit id="topBar.youNeedToVerify" datatype="html" resname="topBar.youNeedToVerify">
         <source>You need to verify at least one email address in order to access all of ORCID’s editing features.</source>
-        <target>ORCID&apos;in tüm düzenleme özelliklerine erişmek için en az bir e-posta adresini doğrulamanız gerekir.</target>
+        <target>ORCID'in tüm düzenleme özelliklerine erişmek için en az bir e-posta adresini doğrulamanız gerekir.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/top-bar-verification-email/modals/top-bar-verification-email-modal/top-bar-verification-email-modal.component.html</context>
           <context context-type="linenumber">17,18</context>
@@ -5190,18 +4450,6 @@
           <context context-type="linenumber">31,33</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="side-bar.needHelp" datatype="html" resname="side-bar.needHelp">
-        <source>Need help?</source>
-        <target>Yardıma mı ihtiyacınız var?</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/top-bar-verification-email/modals/top-bar-verification-email-modal/top-bar-verification-email-modal.component.html</context>
-          <context context-type="linenumber">49</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/top-bar-verification-email/top-bar-verification-email.component.html</context>
-          <context context-type="linenumber">55</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="topBar.visitOur" datatype="html" resname="topBar.visitOur">
         <source>Visit the</source>
         <target>Ziyaret edin:</target>
@@ -5212,7 +4460,7 @@
       </trans-unit>
       <trans-unit id="topBar.thankYouForRegistering" datatype="html" resname="topBar.thankYouForRegistering">
         <source>Thank you for registering with ORCID</source>
-        <target>ORCID&apos;e kayıt olduğunuz için teşekkür ederiz</target>
+        <target>ORCID'e kayıt olduğunuz için teşekkür ederiz</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/top-bar-verification-email/top-bar-verification-email.component.html</context>
           <context context-type="linenumber">3,5</context>
@@ -5232,46 +4480,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/top-bar-verification-email/top-bar-verification-email.component.html</context>
           <context context-type="linenumber">20,24</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.pleaseVerify" datatype="html" resname="side-bar.pleaseVerify">
-        <source>Please verify your email addresses</source>
-        <target>Lütfen e-posta adreslerinizi onaylayın</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/top-bar-verification-email/top-bar-verification-email.component.html</context>
-          <context context-type="linenumber">38,40</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.youNeedToVerify" datatype="html" resname="side-bar.youNeedToVerify">
-        <source>You need to verify at least one email address in order to access all of ORCID’s editing features.</source>
-        <target>ORCID&apos;in tüm düzenleme özelliklerine erişmek için en az bir e-posta adresini doğrulamanız gerekir.</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/top-bar-verification-email/top-bar-verification-email.component.html</context>
-          <context context-type="linenumber">43,46</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.youNeedToVerify2" datatype="html" resname="side-bar.youNeedToVerify2">
-        <source>To verify your email address, click the link in the email sent to:</source>
-        <target>E-posta adresinizi doğrulamak için şu adrese gönderilen e-postadaki bağlantıya tıklayın:</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/top-bar-verification-email/top-bar-verification-email.component.html</context>
-          <context context-type="linenumber">48,50</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.visitOur" datatype="html" resname="side-bar.visitOur">
-        <source>Visit the</source>
-        <target>Ziyaret edin:</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/top-bar-verification-email/top-bar-verification-email.component.html</context>
-          <context context-type="linenumber">56</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="side-bar.knowledge" datatype="html" resname="side-bar.knowledge">
-        <source>ORCID help centre</source>
-        <target>ORCID yardım merkezi</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/top-bar-verification-email/top-bar-verification-email.component.html</context>
-          <context context-type="linenumber">63,64</context>
         </context-group>
       </trans-unit>
       <trans-unit id="myOrcidAlerts.emailVerified" datatype="html" resname="myOrcidAlerts.emailVerified">
@@ -5752,18 +4960,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/trusted-summary/component/trusted-summary/trusted-summary.component.ts</context>
           <context context-type="linenumber">85</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="public-layout.my_orcid" datatype="html" resname="public-layout.my_orcid">
-        <source>ORCID Record</source>
-        <target>ORCID Kaydı</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/trusted-summary/component/trusted-summary/trusted-summary.component.ts</context>
-          <context context-type="linenumber">86</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">76</context>
         </context-group>
       </trans-unit>
       <trans-unit id="summary.viewAffiliations" datatype="html" resname="summary.viewAffiliations">
@@ -6915,7 +6111,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="share.CI" datatype="html" resname="share.CI">
-        <source>Côte d&apos;Ivoire</source>
+        <source>Côte d'Ivoire</source>
         <target>Fildişi Sahili</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-countries/record-countries.service.ts</context>
@@ -8616,7 +7812,7 @@
       </trans-unit>
       <trans-unit id="developerTools.thisSectionIsIntended" datatype="html" resname="developerTools.thisSectionIsIntended">
         <source>This section is intended for developers who plan to integrate ORCID into their system using the ORCID Public API.</source>
-        <target>Bu bölüm, ORCID Ortak API kullanarak ORCID&apos;i sistemlerine entegre etmeyi planlayan geliştiricilere yöneliktir.</target>
+        <target>Bu bölüm, ORCID Ortak API kullanarak ORCID'i sistemlerine entegre etmeyi planlayan geliştiricilere yöneliktir.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/components/terms-of-use/terms-of-use.component.html</context>
           <context context-type="linenumber">1,4</context>
@@ -8632,7 +7828,7 @@
       </trans-unit>
       <trans-unit id="developerTools.orcidOffersAnApi" datatype="html" resname="developerTools.orcidOffersAnApi">
         <source>ORCID offers a free Public API (Application Programming Interface) that allows your systems and applications to connect to the ORCID registry for non-commercial use.</source>
-        <target>ORCID, sistemlerinizin ve uygulamalarınızın ticari olmayan kullanım için ORCID kaydına bağlanmasına olanak tanıyan ücretsiz bir Herkese Açık API&apos;dir (Uygulama Programı Arabirimi).</target>
+        <target>ORCID, sistemlerinizin ve uygulamalarınızın ticari olmayan kullanım için ORCID kaydına bağlanmasına olanak tanıyan ücretsiz bir Herkese Açık API'dir (Uygulama Programı Arabirimi).</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/components/terms-of-use/terms-of-use.component.html</context>
           <context context-type="linenumber">10,14</context>
@@ -8655,7 +7851,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="developerTools.getAUserAuthenticated" datatype="html" resname="developerTools.getAUserAuthenticated">
-        <source>Obtain users&apos; authenticated ORCID iDs</source>
+        <source>Obtain users' authenticated ORCID iDs</source>
         <target>Kullanıcıların doğrulanmış ORCID kimliklerini almak</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/components/terms-of-use/terms-of-use.component.html</context>
@@ -8680,7 +7876,7 @@
       </trans-unit>
       <trans-unit id="developerTools.obtainHigher" datatype="html" resname="developerTools.obtainHigher">
         <source>Obtain a higher usage quota than the ORCID Anonymous API</source>
-        <target>ORCID Anonim API&apos;sinden daha yüksek kullanım kotası elde etmek</target>
+        <target>ORCID Anonim API'sinden daha yüksek kullanım kotası elde etmek</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/components/terms-of-use/terms-of-use.component.html</context>
           <context context-type="linenumber">32,34</context>
@@ -8688,7 +7884,7 @@
       </trans-unit>
       <trans-unit id="developerTools.orcidApiResful" datatype="html" resname="developerTools.orcidApiResful">
         <source>The ORCID Public API is RESTful and uses</source>
-        <target>ORCID Herkes Açık API&apos;si, RESTful API&apos;dir ve</target>
+        <target>ORCID Herkes Açık API'si, RESTful API'dir ve</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/components/terms-of-use/terms-of-use.component.html</context>
           <context context-type="linenumber">39</context>
@@ -8704,7 +7900,7 @@
       </trans-unit>
       <trans-unit id="developerTools.wellEstablishedStandard" datatype="html" resname="developerTools.wellEstablishedStandard">
         <source>, a well-established, standard protocol for user-based permissions.</source>
-        <target>OAuth 2.0&apos;yi kullanır.</target>
+        <target>OAuth 2.0'yi kullanır.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/components/terms-of-use/terms-of-use.component.html</context>
           <context context-type="linenumber">49,50</context>
@@ -8720,7 +7916,7 @@
       </trans-unit>
       <trans-unit id="developerTools.publicClientApplicationsAreGranted2" datatype="html" resname="developerTools.publicClientApplicationsAreGranted2">
         <source>If you need access to an ORCID API for commercial use, need a higher usage quota, organizational administration of your API credentials, or the ability to write data to or access Trusted Party data in ORCID records, our</source>
-        <target>ORCID API&apos;sine ticari kullanım için erişmeniz gerekiyorsa, daha yüksek kullanım kotasına, API kimlik bilgilerinizin organizasyonel yönetimine veya ORCID kayıtlarına veri yazma ya da kayıtlardaki Güvenilir Taraf verilerine erişme kapasitesine ihtiyaç duyuyorsanız</target>
+        <target>ORCID API'sine ticari kullanım için erişmeniz gerekiyorsa, daha yüksek kullanım kotasına, API kimlik bilgilerinizin organizasyonel yönetimine veya ORCID kayıtlarına veri yazma ya da kayıtlardaki Güvenilir Taraf verilerine erişme kapasitesine ihtiyaç duyuyorsanız</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/components/terms-of-use/terms-of-use.component.html</context>
           <context context-type="linenumber">59,63</context>
@@ -8728,7 +7924,7 @@
       </trans-unit>
       <trans-unit id="developerTools.memberApi" datatype="html" resname="developerTools.memberApi">
         <source>Member API</source>
-        <target>Üye API&apos;miz</target>
+        <target>Üye API'miz</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/components/terms-of-use/terms-of-use.component.html</context>
           <context context-type="linenumber">70,72</context>
@@ -8760,7 +7956,7 @@
       </trans-unit>
       <trans-unit id="developerTools.fillOutMoreAobutTheDifferences" datatype="html" resname="developerTools.fillOutMoreAobutTheDifferences">
         <source>Find out more about the differences between the Public and Member APIs</source>
-        <target>Ortak ve Üye API&apos;ler arasındaki farklar hakkında daha fazla bilgi edinin</target>
+        <target>Ortak ve Üye API'ler arasındaki farklar hakkında daha fazla bilgi edinin</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/components/terms-of-use/terms-of-use.component.html</context>
           <context context-type="linenumber">100</context>
@@ -8768,7 +7964,7 @@
       </trans-unit>
       <trans-unit id="developerTools.orcidPublicClientTermsOfService" datatype="html" resname="developerTools.orcidPublicClientTermsOfService">
         <source>ORCID Public APIs Terms of Service</source>
-        <target>ORCID Herkese Açık API&apos;leri Hizmet Koşulları</target>
+        <target>ORCID Herkese Açık API'leri Hizmet Koşulları</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/components/terms-of-use/terms-of-use.component.html</context>
           <context context-type="linenumber">108,110</context>
@@ -8776,7 +7972,7 @@
       </trans-unit>
       <trans-unit id="developerTools.theOrcidPublicApiAllowsYouToRequestPermission" datatype="html" resname="developerTools.theOrcidPublicApiAllowsYouToRequestPermission">
         <source>The ORCID Public API is free for non-commercial use by individuals as stated in the</source>
-        <target>ORCID Herkese Açık API&apos;si, Herkese Açık API&apos;ler Hizmet Koşulları</target>
+        <target>ORCID Herkese Açık API'si, Herkese Açık API'ler Hizmet Koşulları</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/components/terms-of-use/terms-of-use.component.html</context>
           <context context-type="linenumber">116,119</context>
@@ -8800,7 +7996,7 @@
       </trans-unit>
       <trans-unit id="developerTools.byRegisteringForPublicApi" datatype="html" resname="developerTools.byRegisteringForPublicApi">
         <source>By “non-commercial” we mean that you may not charge any re-use fees for the Public API, and you may not make use of the Public API in connection with any revenue-generating product or service.</source>
-        <target>&quot;Ticari olmayan&quot; ifadesi ile, Herkes Açık API için herhangi bir yeniden kullanım ücreti talep edemeyeceğiniz ve Herkes Açık API&apos;yi gelir getiren herhangi bir ürün veya hizmetle bağlantılı olarak kullanamayacağınız kastedilir.</target>
+        <target>"Ticari olmayan" ifadesi ile, Herkes Açık API için herhangi bir yeniden kullanım ücreti talep edemeyeceğiniz ve Herkes Açık API'yi gelir getiren herhangi bir ürün veya hizmetle bağlantılı olarak kullanamayacağınız kastedilir.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/components/terms-of-use/terms-of-use.component.html</context>
           <context context-type="linenumber">128,132</context>
@@ -8844,7 +8040,7 @@
       </trans-unit>
       <trans-unit id="developerTools.haveReadAndAgreeToTheOrcidPublicClientTermsOfService" datatype="html" resname="developerTools.haveReadAndAgreeToTheOrcidPublicClientTermsOfService">
         <source>I have read and agree to the ORCID Public APIs Terms of Service</source>
-        <target>ORCID Herkese Açık API&apos;leri Hizmet Koşullarını okudum ve kabul ediyorum</target>
+        <target>ORCID Herkese Açık API'leri Hizmet Koşullarını okudum ve kabul ediyorum</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/components/terms-of-use/terms-of-use.component.html</context>
           <context context-type="linenumber">178,179</context>
@@ -8884,7 +8080,7 @@
       </trans-unit>
       <trans-unit id="developerTools.addYourApplicationDetails" datatype="html" resname="developerTools.addYourApplicationDetails">
         <source>Add your application details and one or more redirect URIs in the form below. Once these details are saved we’ll generate your client ID and secret so you can start using the Public API right away.</source>
-        <target>Uygulama ayrıntılarınızı ve bir ya da daha fazla yeniden yönlendirme URI&apos;nizi aşağıdaki forma ekleyin. Bu ayrıntılar kaydedildiğinde istemci kimliğinizi ve gizli dizinizi oluşturacağız, böylece Ortak API&apos;yi hemen kullanmaya başlayabilirsiniz.</target>
+        <target>Uygulama ayrıntılarınızı ve bir ya da daha fazla yeniden yönlendirme URI'nizi aşağıdaki forma ekleyin. Bu ayrıntılar kaydedildiğinde istemci kimliğinizi ve gizli dizinizi oluşturacağız, böylece Ortak API'yi hemen kullanmaya başlayabilirsiniz.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/pages/developer-tools/developer-tools.component.html</context>
           <context context-type="linenumber">49,54</context>
@@ -8932,7 +8128,7 @@
       </trans-unit>
       <trans-unit id="developerTools.applicationUrl" datatype="html" resname="developerTools.applicationUrl">
         <source>Application URL</source>
-        <target>Uygulama URL&apos;si</target>
+        <target>Uygulama URL'si</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/pages/developer-tools/developer-tools.component.html</context>
           <context context-type="linenumber">120</context>
@@ -8984,7 +8180,7 @@
       </trans-unit>
       <trans-unit id="developerTools.redirectUris" datatype="html" resname="developerTools.redirectUris">
         <source>Redirect URIs</source>
-        <target>Yeniden yönlendirme URI&apos;leri</target>
+        <target>Yeniden yönlendirme URI'leri</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/pages/developer-tools/developer-tools.component.html</context>
           <context context-type="linenumber">189,191</context>
@@ -8992,7 +8188,7 @@
       </trans-unit>
       <trans-unit id="developerTools.onceTheUserHasAuthorized" datatype="html" resname="developerTools.onceTheUserHasAuthorized">
         <source>Once the user has authorized your application, they will be returned to a URI that you specify. You must provide these URIs in advance or your integration users will experience an error.</source>
-        <target>Kullanıcı uygulamanıza izin verdiği zaman, belirttiğiniz bir URI&apos;ye geri dönecektir. Bu URI&apos;leri önceden vermelisiniz, aksi halde entegrasyon kullanıcılarınız hatayla karşılaşır.</target>
+        <target>Kullanıcı uygulamanıza izin verdiği zaman, belirttiğiniz bir URI'ye geri dönecektir. Bu URI'leri önceden vermelisiniz, aksi halde entegrasyon kullanıcılarınız hatayla karşılaşır.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/pages/developer-tools/developer-tools.component.html</context>
           <context context-type="linenumber">194,198</context>
@@ -9016,7 +8212,7 @@
       </trans-unit>
       <trans-unit id="developerTools.httpsURI" datatype="html" resname="developerTools.httpsURI">
         <source>HTTPS URIs</source>
-        <target>HTTPS URI&apos;leri</target>
+        <target>HTTPS URI'leri</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/pages/developer-tools/developer-tools.component.html</context>
           <context context-type="linenumber">211</context>
@@ -9056,7 +8252,7 @@
       </trans-unit>
       <trans-unit id="developerTools.registerAllRedirectURIs" datatype="html" resname="developerTools.registerAllRedirectURIs">
         <source>Register all redirect URIs fully where possible.</source>
-        <target>Mümkün olduğunda her zaman tüm yeniden yönlendirme URI&apos;lerini bütün olarak kaydedin</target>
+        <target>Mümkün olduğunda her zaman tüm yeniden yönlendirme URI'lerini bütün olarak kaydedin</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/pages/developer-tools/developer-tools.component.html</context>
           <context context-type="linenumber">228</context>
@@ -9064,7 +8260,7 @@
       </trans-unit>
       <trans-unit id="developerTools.thisIsTheMostSecure" datatype="html" resname="developerTools.thisIsTheMostSecure">
         <source>This is the most secure option and what we recommend. For more information about redirect URIs, please see our</source>
-        <target>Bu seçeneği tavsiye ederiz, çünkü en güvenli seçenektir. Yeniden yönlendirme URI&apos;leri hakkında daha fazla bilgi almak için lütfen</target>
+        <target>Bu seçeneği tavsiye ederiz, çünkü en güvenli seçenektir. Yeniden yönlendirme URI'leri hakkında daha fazla bilgi almak için lütfen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/pages/developer-tools/developer-tools.component.html</context>
           <context context-type="linenumber">231,233</context>
@@ -9080,7 +8276,7 @@
       </trans-unit>
       <trans-unit id="developerTools.addARedirectUriBefore" datatype="html" resname="developerTools.addARedirectUriBefore">
         <source>Please add a redirect URI before saving your application</source>
-        <target>Uygulamanızı kaydetmeden önce lütfen bir yeniden yönlendirme URI&apos;si ekleyin</target>
+        <target>Uygulamanızı kaydetmeden önce lütfen bir yeniden yönlendirme URI'si ekleyin</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/pages/developer-tools/developer-tools.component.html</context>
           <context context-type="linenumber">253,255</context>
@@ -9088,7 +8284,7 @@
       </trans-unit>
       <trans-unit id="developerTools.redirectUriCannotBeEmpty" datatype="html" resname="developerTools.redirectUriCannotBeEmpty">
         <source>Redirect URI cannot be empty</source>
-        <target>Yeniden yönlendirme URI&apos;si boş bırakılamaz</target>
+        <target>Yeniden yönlendirme URI'si boş bırakılamaz</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/pages/developer-tools/developer-tools.component.html</context>
           <context context-type="linenumber">279,281</context>
@@ -9104,7 +8300,7 @@
       </trans-unit>
       <trans-unit id="developerTools.addAnotherRedirectUri" datatype="html" resname="developerTools.addAnotherRedirectUri">
         <source>Add another redirect URI</source>
-        <target>Başka bir yeniden yönlendirme URI&apos;si ekleyin</target>
+        <target>Başka bir yeniden yönlendirme URI'si ekleyin</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/pages/developer-tools/developer-tools.component.html</context>
           <context context-type="linenumber">317,319</context>
@@ -9180,7 +8376,7 @@
       </trans-unit>
       <trans-unit id="developerTools.replaceWithRedirect" datatype="html" resname="developerTools.replaceWithRedirect">
         <source>REPLACE WITH REDIRECT URI</source>
-        <target>YENİDEN YÖNLENDİRME URI&apos;Sİ İLE DEĞİŞTİR</target>
+        <target>YENİDEN YÖNLENDİRME URI'Sİ İLE DEĞİŞTİR</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/pages/developer-tools/developer-tools.component.html</context>
           <context context-type="linenumber">352</context>
@@ -9244,7 +8440,7 @@
       </trans-unit>
       <trans-unit id="developerTools.redirectUrisMustBeUnique" datatype="html" resname="developerTools.redirectUrisMustBeUnique">
         <source>Redirect URIs must be unique</source>
-        <target>Yeniden yönlendirme URI&apos;leri benzersiz olmalıdır</target>
+        <target>Yeniden yönlendirme URI'leri benzersiz olmalıdır</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/pages/developer-tools/developer-tools.component.html</context>
           <context context-type="linenumber">439,441</context>
@@ -9268,7 +8464,7 @@
       </trans-unit>
       <trans-unit id="developerTools.ariaLabelWebsiteDelete" datatype="html" resname="developerTools.ariaLabelWebsiteDelete">
         <source>Delete redirect URI</source>
-        <target>Yeniden yönlendirme URI&apos;sini silin</target>
+        <target>Yeniden yönlendirme URI'sini silin</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/developer-tools/pages/developer-tools/developer-tools.component.ts</context>
           <context context-type="linenumber">54</context>
@@ -9332,7 +8528,7 @@
       </trans-unit>
       <trans-unit id="common.js.domain.warn.email_addresses" datatype="html" resname="common.js.domain.warn.email_addresses">
         <source>email addresses, see Sandbox FAQ for</source>
-        <target>e-posta adresleri, şunun için Korumalı Alan SSS&apos;lerine bakın:</target>
+        <target>e-posta adresleri, şunun için Korumalı Alan SSS'lerine bakın:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/environment-banner/environment-banner/environment-banner.component.html</context>
           <context context-type="linenumber">30</context>
@@ -9451,7 +8647,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.passwordError" datatype="html" resname="ngOrcid.passwordError">
-        <source>We couldn&apos;t recover your account details. Please try again, and if the error persists please</source>
+        <source>We couldn't recover your account details. Please try again, and if the error persists please</source>
         <target>Hesap bilgilerinizi kurtaramadık. Lütfen tekrar deneyin ve hata devam ederse lütfen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/errors.ts</context>
@@ -9463,7 +8659,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.registerError" datatype="html" resname="ngOrcid.registerError">
-        <source>We couldn&apos;t complete your registration. Please try again, and if the error persists please</source>
+        <source>We couldn't complete your registration. Please try again, and if the error persists please</source>
         <target>Kaydınızı tamamlayamadık. Lütfen tekrar deneyin ve hata devam ederse lütfen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/errors.ts</context>
@@ -9475,7 +8671,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.reactivationAccountError" datatype="html" resname="ngOrcid.reactivationAccountError">
-        <source>We couldn&apos;t reactivate your ORCID account. Please try again, and if the error persists please</source>
+        <source>We couldn't reactivate your ORCID account. Please try again, and if the error persists please</source>
         <target>ORCID hesabınızı yeniden etkinleştiremedik. Lütfen tekrar deneyin ve hata devam ederse lütfen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/errors.ts</context>
@@ -9656,7 +8852,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.membersMakeOrcid" datatype="html" resname="ngOrcid.membersMakeOrcid">
         <source>Our organizational members make ORCID possible!</source>
-        <target>Organizasyon üyelerimiz ORCID&apos;i mümkün kılıyor!</target>
+        <target>Organizasyon üyelerimiz ORCID'i mümkün kılıyor!</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/pages/home/home.component.html</context>
           <context context-type="linenumber">166,168</context>
@@ -9688,7 +8884,7 @@
       </trans-unit>
       <trans-unit id="inbox.youCanNowSignin" datatype="html" resname="inbox.youCanNowSignin">
         <source>You can now sign in to ORCID with your</source>
-        <target>Artık ORCID&apos;de şu hesabınızla oturum açabilirsiniz:</target>
+        <target>Artık ORCID'de şu hesabınızla oturum açabilirsiniz:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/inbox/components/notification-permission-institutional-connection/notification-permission-institutional-connection.component.html</context>
           <context context-type="linenumber">3</context>
@@ -10299,7 +9495,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="inbox.youDontHaveUnarchived" datatype="html" resname="inbox.youDontHaveUnarchived">
-        <source>You don&apos;t have any unarchived notifications right now.</source>
+        <source>You don't have any unarchived notifications right now.</source>
         <target>Şu anda arşivlenmemiş bildiriminiz bulunmuyor.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/inbox/components/notifications/notifications.component.html</context>
@@ -10332,7 +9528,7 @@
       </trans-unit>
       <trans-unit id="institutional.account" datatype="html" resname="institutional.account">
         <source>You may sign in to the ORCID Registry using institutional accounts you already have, like one from your university. If you don’t have an ORCID iD, you will be prompted to create one.</source>
-        <target>ORCID Kaydı&apos;na üniversite hesabınız gibi zaten sahip olduğunuz kurumsal bir hesabı kullanarak giriş yapabilirsiniz. Bir ORCID kimliğiniz yoksa, bir kimlik oluşturmanız istenecektir.</target>
+        <target>ORCID Kaydı'na üniversite hesabınız gibi zaten sahip olduğunuz kurumsal bir hesabı kullanarak giriş yapabilirsiniz. Bir ORCID kimliğiniz yoksa, bir kimlik oluşturmanız istenecektir.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/institutional/pages/institutional/institutional.component.html</context>
           <context context-type="linenumber">44,49</context>
@@ -10496,7 +9692,7 @@
       </trans-unit>
       <trans-unit id="footer.copyright_cc0_3" datatype="html" resname="footer.copyright_cc0_3">
         <source>the ORCID logo, and the iD logo are trademarks of ORCID, Inc. ORCID is registered in the US and other jurisdictions.</source>
-        <target>ORCID logosu ve iD logosu ORCID, Inc.&apos;nin tescilli markalarıdır. ORCID, ABD ve diğer yetki alanlarında kayıtlıdır.</target>
+        <target>ORCID logosu ve iD logosu ORCID, Inc.'nin tescilli markalarıdır. ORCID, ABD ve diğer yetki alanlarında kayıtlıdır.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/footer/footer.component.html</context>
           <context context-type="linenumber">139,140</context>
@@ -10582,14 +9778,6 @@
           <context context-type="linenumber">23</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="confirm-oauth-access.connectingresearchandresearchers" datatype="html" resname="confirm-oauth-access.connectingresearchandresearchers">
-        <source>Connecting research and researchers</source>
-        <target>Araştırma ve araştırmacılar buluşuyor</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/layout/header/header.component.html</context>
-          <context context-type="linenumber">27,29</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="header.signin" datatype="html" resname="header.signin">
         <source>Sign in</source>
         <target>Oturum aç</target>
@@ -10638,94 +9826,6 @@
           <context context-type="linenumber">130</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="public-layout.about" datatype="html" resname="public-layout.about">
-        <source>About</source>
-        <target>Hakkında</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/layout/header/menu.ts</context>
-          <context context-type="linenumber">5</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">6</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="public-layout.for_researchers" datatype="html" resname="public-layout.for_researchers">
-        <source>For Researchers</source>
-        <target>Araştırmacılar İçin</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/layout/header/menu.ts</context>
-          <context context-type="linenumber">10</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">4</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="public-layout.membership" datatype="html" resname="public-layout.membership">
-        <source>Membership</source>
-        <target>Üyelik</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/layout/header/menu.ts</context>
-          <context context-type="linenumber">15</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">29</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">125</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="public-layout.documentation" datatype="html" resname="public-layout.documentation">
-        <source>Documentation</source>
-        <target>Belgeleme</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/layout/header/menu.ts</context>
-          <context context-type="linenumber">20</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">126</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="public-layout.resources" datatype="html" resname="public-layout.resources">
-        <source>Resources</source>
-        <target>Kaynaklar</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/layout/header/menu.ts</context>
-          <context context-type="linenumber">25</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">25</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="public-layout.newsEvents" datatype="html" resname="public-layout.newsEvents">
-        <source>News &amp; Events</source>
-        <target>Haberler &amp; Etkinlikler</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/layout/header/menu.ts</context>
-          <context context-type="linenumber">31</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">127</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="public-layout.sign_in" datatype="html" resname="public-layout.sign_in">
-        <source>SIGN IN</source>
-        <target>OTURUM AÇ</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/layout/header/menu.ts</context>
-          <context context-type="linenumber">37</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">8</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="layout.ariaLabelLanguage" datatype="html" resname="layout.ariaLabelLanguage">
         <source>Select your preferred language. Current language is</source>
         <target>Tercih ettiğiniz dili seçin. Mevcut dil:</target>
@@ -10764,42 +9864,10 @@
       </trans-unit>
       <trans-unit id="layout.ariaLabelSearchBy" datatype="html" resname="layout.ariaLabelSearchBy">
         <source>Search by name, affiliation or ORCID iD</source>
-        <target>Ad, bağlı kuruluş veya ORCID iD&apos;ye göre arama yapın</target>
+        <target>Ad, bağlı kuruluş veya ORCID iD'ye göre arama yapın</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/search/search.component.ts</context>
           <context context-type="linenumber">25</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="layout.public-layout.registry" datatype="html" resname="layout.public-layout.registry">
-        <source>registry</source>
-        <target>kayıt</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/layout/search/search.component.ts</context>
-          <context context-type="linenumber">31</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/layout/search/search.component.ts</context>
-          <context context-type="linenumber">38</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/layout/search/search.component.ts</context>
-          <context context-type="linenumber">87</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">65</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="layout.public-layout.website" datatype="html" resname="layout.public-layout.website">
-        <source>website</source>
-        <target>web sitesi</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/layout/search/search.component.ts</context>
-          <context context-type="linenumber">34</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">66</context>
         </context-group>
       </trans-unit>
       <trans-unit id="layout.ariaLabelSearchRegistry" datatype="html" resname="layout.ariaLabelSearchRegistry">
@@ -10896,7 +9964,7 @@
       </trans-unit>
       <trans-unit id="layout.ariaLabelSigninRegister" datatype="html" resname="layout.ariaLabelSigninRegister">
         <source>Sign in to ORCID or register for your ORCID iD</source>
-        <target>ORCID&apos;de oturum açın veya ORCID kimliği için kaydolun</target>
+        <target>ORCID'de oturum açın veya ORCID kimliği için kaydolun</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layout/user-menu/user-menu.component.ts</context>
           <context context-type="linenumber">30</context>
@@ -10976,7 +10044,7 @@
       </trans-unit>
       <trans-unit id="linking.account" datatype="html" resname="linking.account">
         <source>account please sign in to ORCID below. You will only need to do this once. Once the accounts are linked you will be able to sign in to your ORCID record with your</source>
-        <target>lütfen aşağıdan ORCID&apos;de oturum açın. Bunu sadece bir kez yapmanız gerekecektir. Hesaplar bağlandıktan sonra, ORCID kaydınıza</target>
+        <target>lütfen aşağıdan ORCID'de oturum açın. Bunu sadece bir kez yapmanız gerekecektir. Hesaplar bağlandıktan sonra, ORCID kaydınıza</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/link-account/pages/link-account/link-account.component.html</context>
           <context context-type="linenumber">47,51</context>
@@ -11072,7 +10140,7 @@
       </trans-unit>
       <trans-unit id="record.ifYouTyped" datatype="html" resname="record.ifYouTyped">
         <source>If you typed in a URL or link by hand</source>
-        <target>URL&apos;yi veya bağlantıyı elle yazdıysanız</target>
+        <target>URL'yi veya bağlantıyı elle yazdıysanız</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/page-not-found-404/not-found/not-found.component.html</context>
           <context context-type="linenumber">23,25</context>
@@ -11080,7 +10148,7 @@
       </trans-unit>
       <trans-unit id="record.pleaseCheck" datatype="html" resname="record.pleaseCheck">
         <source>Please check the URL or link for typos or mistakes. If you are looking for a specific ORCID record make sure the ORCID iD - the 16-digit number at the end of the URL - is right. A correctly-formatted ORCID iD URL looks like this: https://orcid.org/1234-5678-9101-1121</source>
-        <target>Lütfen URL veya bağlantıyı gözden geçirerek yazım hataları veya yanlışlıklar olup olmadığını kontrol edin. Eğer belirli bir ORCID kaydı arıyorsanız ORCID Kimliği&apos;nin, yani URL&apos;nin sonundaki 16 haneli sayının doğru yazıldığından emin olun. Doğru biçimlendirilmiş bir ORCID Kimliği URL&apos;si şöyle görünür: https://orcid.org/1234-5678-9101-1121</target>
+        <target>Lütfen URL veya bağlantıyı gözden geçirerek yazım hataları veya yanlışlıklar olup olmadığını kontrol edin. Eğer belirli bir ORCID kaydı arıyorsanız ORCID Kimliği'nin, yani URL'nin sonundaki 16 haneli sayının doğru yazıldığından emin olun. Doğru biçimlendirilmiş bir ORCID Kimliği URL'si şöyle görünür: https://orcid.org/1234-5678-9101-1121</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/page-not-found-404/not-found/not-found.component.html</context>
           <context context-type="linenumber">26,32</context>
@@ -11152,7 +10220,7 @@
       </trans-unit>
       <trans-unit id="record.signinToOricd" datatype="html" resname="record.signinToOricd">
         <source>Sign in to ORCID and manage your record</source>
-        <target>ORCID&apos;de oturum açın ve kaydınızı yönetin</target>
+        <target>ORCID'de oturum açın ve kaydınızı yönetin</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/page-not-found-404/not-found/not-found.component.html</context>
           <context context-type="linenumber">90,92</context>
@@ -11204,7 +10272,7 @@
       </trans-unit>
       <trans-unit id="recovery.youCanAlwaysSignIn" datatype="html" resname="recovery.youCanAlwaysSignIn">
         <source>You can always sign in to ORCID with your</source>
-        <target>ORCID&apos;e girmek için her zaman</target>
+        <target>ORCID'e girmek için her zaman</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.html</context>
           <context context-type="linenumber">30</context>
@@ -11375,7 +10443,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="recovery.iveForgotten" datatype="html" resname="recovery.iveForgotten">
-        <source>I&apos;ve forgotten</source>
+        <source>I've forgotten</source>
         <target>Unuttum</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/password-recovery/pages/password-recovery/password-recovery.component.ts</context>
@@ -11944,7 +11012,7 @@
       </trans-unit>
       <trans-unit id="shared.url" datatype="html" resname="shared.url">
         <source>Homepage URL</source>
-        <target>Giriş Sayfası URL&apos;si</target>
+        <target>Giriş Sayfası URL'si</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component.html</context>
           <context context-type="linenumber">451</context>
@@ -12372,7 +11440,7 @@
       </trans-unit>
       <trans-unit id="funding.grantUrlColon" datatype="html" resname="funding.grantUrlColon">
         <source>Grant URL:</source>
-        <target>Hibe URL&apos;si:</target>
+        <target>Hibe URL'si:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/funding-external-identifiers-view-only/funding-external-identifiers-view-only.component.ts</context>
           <context context-type="linenumber">12</context>
@@ -13283,7 +12351,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="record.noPublicInformation" datatype="html" resname="record.noPublicInformation">
-        <source>There&apos;s no displayable data for this record</source>
+        <source>There's no displayable data for this record</source>
         <target>Bu kayıt için görüntülenebilir veri yok</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-info/record-info.component.html</context>
@@ -13300,7 +12368,7 @@
       </trans-unit>
       <trans-unit id="topBar.findOutVisibility" datatype="html" resname="topBar.findOutVisibility">
         <source>Find out more about visibility settings in ORCID</source>
-        <target>ORCID&apos;deki görünürlük ayarlarıyla ilgili ilgili daha fazla bilgi edinin</target>
+        <target>ORCID'deki görünürlük ayarlarıyla ilgili ilgili daha fazla bilgi edinin</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-info/record-info.component.html</context>
           <context context-type="linenumber">113,114</context>
@@ -14188,7 +13256,7 @@
       </trans-unit>
       <trans-unit id="works.cannotEditListOfContributors" datatype="html" resname="works.cannotEditListOfContributors">
         <source>You cannot edit the list of contributors on a work with more than 50 named participants.</source>
-        <target>50&apos;den fazla katılımcı adı bulunan bir çalışmanın katkıda bulunanlar listesini düzenleyemezsiniz.</target>
+        <target>50'den fazla katılımcı adı bulunan bir çalışmanın katkıda bulunanlar listesini düzenleyemezsiniz.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-contributors/work-contributors.component.html</context>
           <context context-type="linenumber">82,85</context>
@@ -14196,7 +13264,7 @@
       </trans-unit>
       <trans-unit id="works.findOutMoreAboutContributors" datatype="html" resname="works.findOutMoreAboutContributors">
         <source>Find out more about managing contributors in ORCID</source>
-        <target>ORCID&apos;de katkıda bulunanları yönetmekle ilgili daha fazla bilgi edinin</target>
+        <target>ORCID'de katkıda bulunanları yönetmekle ilgili daha fazla bilgi edinin</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-contributors/work-contributors.component.html</context>
           <context context-type="linenumber">92,94</context>
@@ -14527,7 +13595,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="works.unResolved" datatype="html" resname="works.unResolved">
-        <source>We couldn&apos;t find a resource that matches the identifier you entered. Please check the value or enter a valid link to the resource.</source>
+        <source>We couldn't find a resource that matches the identifier you entered. Please check the value or enter a valid link to the resource.</source>
         <target>Girdiğiniz tanımlayıcıyla eşleşen bir kaynak bulamadık. Lütfen değeri kontrol edin veya kaynak için geçerli bir bağlantı girin.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
@@ -14556,7 +13624,7 @@
       </trans-unit>
       <trans-unit id="works.identifierUrl" datatype="html" resname="works.identifierUrl">
         <source>Identifier URL</source>
-        <target>Tanımlayıcı URL&apos;si</target>
+        <target>Tanımlayıcı URL'si</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
           <context context-type="linenumber">180,181</context>
@@ -14595,16 +13663,16 @@
         </context-group>
       </trans-unit>
       <trans-unit id="works.onlyIdentifierTypesFundedBy" datatype="html" resname="works.onlyIdentifierTypesFundedBy">
-        <source>Only identifier types &quot;grant number&quot;, &quot;doi&quot;, &quot;uri&quot; or &quot;proposal id&quot; are allowed when using &quot;funded-by&quot; identifiers</source>
-        <target>&quot;Fon sağlayan&quot; tanımlayıcılar kullanılırken yalnızca &quot;hibe numarası&quot;, &quot;doi&quot;, &quot;uri&quot; veya &quot;teklif kimliği&quot; tanımlayıcı türlerine izin verilir</target>
+        <source>Only identifier types "grant number", "doi", "uri" or "proposal id" are allowed when using "funded-by" identifiers</source>
+        <target>"Fon sağlayan" tanımlayıcılar kullanılırken yalnızca "hibe numarası", "doi", "uri" veya "teklif kimliği" tanımlayıcı türlerine izin verilir</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
           <context context-type="linenumber">255,257</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.atLestOneSelfIdRequired" datatype="html" resname="works.atLestOneSelfIdRequired">
-        <source>At least one &quot;self&quot; identifier is required when using &quot;version-of&quot; identifiers</source>
-        <target>&quot;Sürüm&quot; tanımlayıcıları kullanılırken en az bir &quot;kendi&quot; tanımlayıcısı gereklidir</target>
+        <source>At least one "self" identifier is required when using "version-of" identifiers</source>
+        <target>"Sürüm" tanımlayıcıları kullanılırken en az bir "kendi" tanımlayıcısı gereklidir</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-external-identifiers-edit/work-external-identifiers-edit.component.html</context>
           <context context-type="linenumber">264,266</context>
@@ -14696,7 +13764,7 @@
       </trans-unit>
       <trans-unit id="shared.toEnableFeaturing" datatype="html" resname="shared.toEnableFeaturing">
         <source>to your ORCID record to enable featuring. Click the ‘Add’ button in the</source>
-        <target>Böylece ORCID kaydınızda öne çıkarmayı etkinleştirebilirsiniz. Aşağıdaki bölümdeki &quot;Ekle&quot; butonuna tıklayarak</target>
+        <target>Böylece ORCID kaydınızda öne çıkarmayı etkinleştirebilirsiniz. Aşağıdaki bölümdeki "Ekle" butonuna tıklayarak</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-featured-stack-group/work-featured-stack-group.component.html</context>
           <context context-type="linenumber">38,39</context>
@@ -15154,14 +14222,6 @@
           <context context-type="linenumber">198</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="works.subtitle-2" datatype="html" resname="works.subtitle-2">
-        <source>Work subtitle</source>
-        <target>Çalışma altyazısı</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/record/components/work-form/work-form/work-form.component.html</context>
-          <context context-type="linenumber">246</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="shared.publicationDate" datatype="html" resname="shared.publicationDate">
         <source>Publication date</source>
         <target>Yayın tarihi</target>
@@ -15328,7 +14388,7 @@
       </trans-unit>
       <trans-unit id="works.otherLabelMicrocopy" datatype="html" resname="works.otherLabelMicrocopy">
         <source>Selecting this will set the work type to ‘Other’</source>
-        <target>Bunu seçmek, çalışma türünü &quot;Diğer&quot; olarak ayarlayacaktır</target>
+        <target>Bunu seçmek, çalışma türünü "Diğer" olarak ayarlayacaktır</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-form/work-form/work-type-menu.ts</context>
           <context context-type="linenumber">78</context>
@@ -15376,7 +14436,7 @@
       </trans-unit>
       <trans-unit id="works.disseminationDescription" datatype="html" resname="works.disseminationDescription">
         <source>Blog posts, media articles, speeches and podcasts</source>
-        <target>Blog gönderileri, medya makaleleri, konuşmalar ve podcast&apos;ler</target>
+        <target>Blog gönderileri, medya makaleleri, konuşmalar ve podcast'ler</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-form/work-form/work-type-menu.ts</context>
           <context context-type="linenumber">124</context>
@@ -15476,7 +14536,7 @@
       </trans-unit>
       <trans-unit id="works.importBibTex" datatype="html" resname="works.importBibTex">
         <source>Works - Import BibTeX</source>
-        <target>Çalışmalar - BibTeX&apos;i içe aktar</target>
+        <target>Çalışmalar - BibTeX'i içe aktar</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-bibtex-modal/work-bibtex-modal.component.html</context>
           <context context-type="linenumber">3,4</context>
@@ -15492,7 +14552,7 @@
       </trans-unit>
       <trans-unit id="works.importCitations" datatype="html" resname="works.importCitations">
         <source>Import citations from BibTex (.bib) files, including files exported from Google Scholar.</source>
-        <target>Google Scholar&apos;dan dışa aktarılan dosyalar da dahil olmak üzere BibTex (.bib) dosyalarından alıntıları içe aktarın.</target>
+        <target>Google Scholar'dan dışa aktarılan dosyalar da dahil olmak üzere BibTex (.bib) dosyalarından alıntıları içe aktarın.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-bibtex-modal/work-bibtex-modal.component.html</context>
           <context context-type="linenumber">30,33</context>
@@ -15500,7 +14560,7 @@
       </trans-unit>
       <trans-unit id="works.moreInformation" datatype="html" resname="works.moreInformation">
         <source>More information on importing BibTeX files into ORCID</source>
-        <target>BibTeX dosyalarını ORCID&apos;e içe aktarma hakkında daha fazla bilgi</target>
+        <target>BibTeX dosyalarını ORCID'e içe aktarma hakkında daha fazla bilgi</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-bibtex-modal/work-bibtex-modal.component.html</context>
           <context context-type="linenumber">40,42</context>
@@ -15532,7 +14592,7 @@
       </trans-unit>
       <trans-unit id="works.foundInBibTex" datatype="html" resname="works.foundInBibTex">
         <source>Works found in BibTeX</source>
-        <target>BibTeX&apos;te bulunan çalışmalar</target>
+        <target>BibTeX'te bulunan çalışmalar</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-bibtex-modal/work-bibtex-modal.component.html</context>
           <context context-type="linenumber">86,88</context>
@@ -15548,7 +14608,7 @@
       </trans-unit>
       <trans-unit id="works.addFromDOI" datatype="html" resname="works.addFromDOI">
         <source>Works - Add work from DOI</source>
-        <target>Çalışmalar - DOI&apos;den çalışma ekle</target>
+        <target>Çalışmalar - DOI'den çalışma ekle</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-external-id-modal/work-external-id-modal.component.html</context>
           <context context-type="linenumber">6,8</context>
@@ -15556,7 +14616,7 @@
       </trans-unit>
       <trans-unit id="works.addFromPubMed" datatype="html" resname="works.addFromPubMed">
         <source>Works - Add work from PubMed</source>
-        <target>Çalışmalar - PubMed&apos;den iş ekle</target>
+        <target>Çalışmalar - PubMed'den iş ekle</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-external-id-modal/work-external-id-modal.component.html</context>
           <context context-type="linenumber">12,14</context>
@@ -15572,7 +14632,7 @@
       </trans-unit>
       <trans-unit id="works.youCanUseFullDOI" datatype="html" resname="works.youCanUseFullDOI">
         <source>You can use the full DOI URL or just the identifier value.</source>
-        <target>Tam DOI URL&apos;sini veya yalnızca tanımlayıcı değerini kullanabilirsiniz.</target>
+        <target>Tam DOI URL'sini veya yalnızca tanımlayıcı değerini kullanabilirsiniz.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-external-id-modal/work-external-id-modal.component.html</context>
           <context context-type="linenumber">99,101</context>
@@ -15580,7 +14640,7 @@
       </trans-unit>
       <trans-unit id="works.typeOrPastePubMed" datatype="html" resname="works.typeOrPastePubMed">
         <source>Type or paste the full PubMed URL or just the identifier value</source>
-        <target>Tam PubMed URL&apos;sini veya yalnızca tanımlayıcı değerini yazın veya yapıştırın</target>
+        <target>Tam PubMed URL'sini veya yalnızca tanımlayıcı değerini yazın veya yapıştırın</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-external-id-modal/work-external-id-modal.component.html</context>
           <context context-type="linenumber">105,107</context>
@@ -15612,7 +14672,7 @@
       </trans-unit>
       <trans-unit id="works.retrieveWorkDOI" datatype="html" resname="works.retrieveWorkDOI">
         <source>Retrieve work details from DOI</source>
-        <target>DOI&apos;den çalışma ayrıntılarını al</target>
+        <target>DOI'den çalışma ayrıntılarını al</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-external-id-modal/work-external-id-modal.component.html</context>
           <context context-type="linenumber">167,169</context>
@@ -15620,7 +14680,7 @@
       </trans-unit>
       <trans-unit id="works.retrieveWorkPubMed" datatype="html" resname="works.retrieveWorkPubMed">
         <source>Retrieve work details from PubMed</source>
-        <target>PubMed&apos;den iş ayrıntılarını al</target>
+        <target>PubMed'den iş ayrıntılarını al</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-stack-group/modals/work-external-id-modal/work-external-id-modal.component.html</context>
           <context context-type="linenumber">173,175</context>
@@ -15984,7 +15044,7 @@
       </trans-unit>
       <trans-unit id="works.exportSelectedWorksBibtex" datatype="html" resname="works.exportSelectedWorksBibtex">
         <source>Export selected works to BibTeX</source>
-        <target>Seçilen çalışmaları BibTeX&apos;e aktar</target>
+        <target>Seçilen çalışmaları BibTeX'e aktar</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work/modals/modal-export-works/modal-export-works.component.html</context>
           <context context-type="linenumber">14,16</context>
@@ -15992,7 +15052,7 @@
       </trans-unit>
       <trans-unit id="works.exportSelectedWorksBibtexDescription" datatype="html" resname="works.exportSelectedWorksBibtexDescription">
         <source>Export selected works to a BibTeX file. Please note that exporting to BibTeX may cause problems for text in some languages.</source>
-        <target>Seçilen çalışmaları bir BibTeX dosyasına aktarın. BibTeX&apos;e dışa aktarmanın bazı dillerde metin için sorunlara neden olabileceğini lütfen unutmayın.</target>
+        <target>Seçilen çalışmaları bir BibTeX dosyasına aktarın. BibTeX'e dışa aktarmanın bazı dillerde metin için sorunlara neden olabileceğini lütfen unutmayın.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work/modals/modal-export-works/modal-export-works.component.html</context>
           <context context-type="linenumber">30,33</context>
@@ -16564,7 +15624,7 @@
       </trans-unit>
       <trans-unit id="register.signInToOrcidUsingThisEmail" datatype="html" resname="register.signInToOrcidUsingThisEmail">
         <source>Sign in to ORCID using this email address</source>
-        <target>Bu e-posta adresini kullanarak ORCID&apos;de oturum açın</target>
+        <target>Bu e-posta adresini kullanarak ORCID'de oturum açın</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-personal/form-personal.component.html</context>
           <context context-type="linenumber">225,226</context>
@@ -16816,7 +15876,7 @@
       </trans-unit>
       <trans-unit id="register.youMustAccept2" datatype="html" resname="register.youMustAccept2">
         <source>You must accept the terms of use and consent to your data being processed in the United States</source>
-        <target>Kullanım koşullarımızı kabul etmeniz ve verilerinizin Birleşik Devletler&apos;de işlenmesine rıza göstermeniz gerekmektedir</target>
+        <target>Kullanım koşullarımızı kabul etmeniz ve verilerinizin Birleşik Devletler'de işlenmesine rıza göstermeniz gerekmektedir</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-terms/form-terms.component.html</context>
           <context context-type="linenumber">9,10</context>
@@ -16848,7 +15908,7 @@
       </trans-unit>
       <trans-unit id="register.agree2" datatype="html" resname="register.agree2">
         <source>and agree to my data being publicly accessible where marked as “Visible to Everyone”.</source>
-        <target>ve verilerimin &quot;Herkes Tarafından Görülebilir&quot; olarak işaretlendiği yerlerde herkese açık olmasını kabul ediyorum.</target>
+        <target>ve verilerimin "Herkes Tarafından Görülebilir" olarak işaretlendiği yerlerde herkese açık olmasını kabul ediyorum.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-terms/form-terms.component.html</context>
           <context context-type="linenumber">40,41</context>
@@ -16856,7 +15916,7 @@
       </trans-unit>
       <trans-unit id="register.dataProcessed" datatype="html" resname="register.dataProcessed">
         <source>I consent to my data being processed in the United States.</source>
-        <target>Verilerimin Amerika Birleşik Devletleri&apos;nde işlenmesine izin veriyorum.</target>
+        <target>Verilerimin Amerika Birleşik Devletleri'nde işlenmesine izin veriyorum.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-terms/form-terms.component.html</context>
           <context context-type="linenumber">50,52</context>
@@ -16864,7 +15924,7 @@
       </trans-unit>
       <trans-unit id="register.moreInformation" datatype="html" resname="register.moreInformation">
         <source>More information on how ORCID process your data.</source>
-        <target>ORCID&apos;in verilerinizi nasıl işlediği hakkında daha fazla bilgi.</target>
+        <target>ORCID'in verilerinizi nasıl işlediği hakkında daha fazla bilgi.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-terms/form-terms.component.html</context>
           <context context-type="linenumber">62,64</context>
@@ -16999,8 +16059,8 @@
         </context-group>
       </trans-unit>
       <trans-unit id="register.orcids" datatype="html" resname="register.orcids">
-        <source>Per ORCID&apos;s</source>
-        <target>ORCID&apos;in</target>
+        <source>Per ORCID's</source>
+        <target>ORCID'in</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/step-a/step-a.component.html</context>
           <context context-type="linenumber">34</context>
@@ -17335,7 +16395,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.search.orcidIdPatterError" datatype="html" resname="ngOrcid.search.orcidIdPatterError">
-        <source>Given value doesn&apos;t match ORCID iD pattern</source>
+        <source>Given value doesn't match ORCID iD pattern</source>
         <target>Verilen değer ORCID Kimliği örüntüsüyle eşleşmiyor</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/search/components/advance-search/advance-search.component.html</context>
@@ -17435,8 +16495,8 @@
         </context-group>
       </trans-unit>
       <trans-unit id="selfService.heading" datatype="html" resname="selfService.heading">
-        <source>We&apos;re updating ORCID Self Service</source>
-        <target>ORCID Self Servis&apos;i güncelliyoruz</target>
+        <source>We're updating ORCID Self Service</source>
+        <target>ORCID Self Servis'i güncelliyoruz</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/self-service/self-service/self-service.component.html</context>
           <context context-type="linenumber">12,14</context>
@@ -17468,7 +16528,7 @@
       </trans-unit>
       <trans-unit id="selfService.p2.1" datatype="html" resname="selfService.p2.1">
         <source>An enhanced version of Self Service will be added to the</source>
-        <target>Self Servis&apos;in geliştirilmiş bir sürümü şuraya eklenecek:</target>
+        <target>Self Servis'in geliştirilmiş bir sürümü şuraya eklenecek:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/self-service/self-service/self-service.component.html</context>
           <context context-type="linenumber">38,39</context>
@@ -17476,7 +16536,7 @@
       </trans-unit>
       <trans-unit id="selfService.p2.2" datatype="html" resname="selfService.p2.2">
         <source>ORCID Member Portal</source>
-        <target>ORCID Üye Portalı&apos;na</target>
+        <target>ORCID Üye Portalı'na</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/self-service/self-service/self-service.component.html</context>
           <context context-type="linenumber">47</context>
@@ -18488,7 +17548,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.cannotSignInToOrcid" datatype="html" resname="ngOrcid.signin.cannotSignInToOrcid">
         <source>You cannot sign in to ORCID with this email address until you have claimed the record.</source>
-        <target>Kaydı talep edene dek bu e-posta adresiyle ORCID&apos;de oturum açamazsınız.</target>
+        <target>Kaydı talep edene dek bu e-posta adresiyle ORCID'de oturum açamazsınız.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/errors/print-errors/print-errors.component.html</context>
           <context context-type="linenumber">28,31</context>
@@ -18496,7 +17556,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.cannotSignInToOrcidWithId" datatype="html" resname="ngOrcid.signin.cannotSignInToOrcidWithId">
         <source>You cannot sign in to ORCID with this iD until you have claimed the record.</source>
-        <target>Kaydı talep edene dek bu kimlikle ORCID&apos;de oturum açamazsınız.</target>
+        <target>Kaydı talep edene dek bu kimlikle ORCID'de oturum açamazsınız.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/errors/print-errors/print-errors.component.html</context>
           <context context-type="linenumber">35,38</context>
@@ -18527,8 +17587,8 @@
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.deactivated.UsingOrcid.1" datatype="html" resname="ngOrcid.signin.deactivated.UsingOrcid.1">
-        <source>To start reactivation please enter an email address associated with this account in the &apos;Email or ORCID iD&apos; field above.</source>
-        <target>Yeniden etkinleştirmeyi başlatmak için lütfen yukarıdaki &quot;E-posta veya ORCID kimliği&quot; alanına bu hesapla ilişkili bir e-posta adresi girin.</target>
+        <source>To start reactivation please enter an email address associated with this account in the 'Email or ORCID iD' field above.</source>
+        <target>Yeniden etkinleştirmeyi başlatmak için lütfen yukarıdaki "E-posta veya ORCID kimliği" alanına bu hesapla ilişkili bir e-posta adresi girin.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/errors/print-errors/print-errors.component.html</context>
           <context context-type="linenumber">69,72</context>
@@ -18724,7 +17784,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.signin.signInToOrcid" datatype="html" resname="ngOrcid.signin.signInToOrcid">
         <source>Sign in to ORCID</source>
-        <target>ORCID&apos;de oturum aç</target>
+        <target>ORCID'de oturum aç</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/pages/sign-in/sign-in.component.html</context>
           <context context-type="linenumber">26,28</context>
@@ -18735,7 +17795,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.signin.dontHaveYourOrcid" datatype="html" resname="ngOrcid.signin.dontHaveYourOrcid">
-        <source>Don&apos;t have your ORCID iD yet?</source>
+        <source>Don't have your ORCID iD yet?</source>
         <target>Henüz ORCID Kimliğiniz yok mu?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/pages/sign-in/sign-in.component.html</context>
@@ -18752,7 +17812,7 @@
       </trans-unit>
       <trans-unit id="account.knowledgeBaseEnabling" datatype="html" resname="account.knowledgeBaseEnabling">
         <source>See the Knowledge Base for step-by-step instructions on enabling 2FA</source>
-        <target>2FA&apos;yı etkinleştirmekle ilgili talimat adımları için Bilgi Bankası&apos;na bakın</target>
+        <target>2FA'yı etkinleştirmekle ilgili talimat adımları için Bilgi Bankası'na bakın</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
           <context context-type="linenumber">19,21</context>
@@ -18783,8 +17843,8 @@
         </context-group>
       </trans-unit>
       <trans-unit id="account.knowledgeBaseForList" datatype="html" resname="account.knowledgeBaseForList">
-        <source>See the Knowledge Base for a list of apps we&apos;ve tested ourselves</source>
-        <target>Kendimizi test ettiğimiz uygulamaların listesi için Bilgi Bankası&apos;na bakın</target>
+        <source>See the Knowledge Base for a list of apps we've tested ourselves</source>
+        <target>Kendimizi test ettiğimiz uygulamaların listesi için Bilgi Bankası'na bakın</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
           <context context-type="linenumber">68</context>
@@ -18807,7 +17867,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="account.cantScan" datatype="html" resname="account.cantScan">
-        <source>Can&apos;t scan the barcode?</source>
+        <source>Can't scan the barcode?</source>
         <target>Barkodu tarayamıyor musunuz?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
@@ -20252,7 +19312,7 @@
       </trans-unit>
       <trans-unit id="works.partOfDescription" datatype="html" resname="works.partOfDescription">
         <source>The identifier applies to part of a larger work. For example, the ISBN of the book in which the work was published.</source>
-        <target>Tanımlayıcı, çalışmanın yayınlandığı kitabın ISBN&apos;si gibi daha büyük bir çalışmanın bir kısmı için geçerlidir.</target>
+        <target>Tanımlayıcı, çalışmanın yayınlandığı kitabın ISBN'si gibi daha büyük bir çalışmanın bir kısmı için geçerlidir.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/types/works.endpoint.ts</context>
           <context context-type="linenumber">631</context>
@@ -20274,22 +19334,6 @@
           <context context-type="linenumber">633</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="public-layout.for_organizations" datatype="html" resname="public-layout.for_organizations">
-        <source>For Organizations</source>
-        <target>Kuruluşlar İçin</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">5</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="public-layout.help" datatype="html" resname="public-layout.help">
-        <source>Help</source>
-        <target>Yardım</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">7</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="login.registerOrcidId" datatype="html" resname="login.registerOrcidId">
         <source>Register for an ORCID iD</source>
         <target>ORCID Kimliği için kaydolun</target>
@@ -20308,118 +19352,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
           <context context-type="linenumber">75</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="public-layout.funders" datatype="html" resname="public-layout.funders">
-        <source>Funders</source>
-        <target>Finansman Sağlayıcılar</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">11</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="public-layout.research_organizations" datatype="html" resname="public-layout.research_organizations">
-        <source>Research Organizations</source>
-        <target>Araştırma Kuruluşları</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">12</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="public-layout.publishers" datatype="html" resname="public-layout.publishers">
-        <source>Publishers</source>
-        <target>Yayıncılar</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">13</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="public-layout.associations" datatype="html" resname="public-layout.associations">
-        <source>Associations</source>
-        <target>İştirakler</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">14</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="public-layout.integrators" datatype="html" resname="public-layout.integrators">
-        <source>Integrators</source>
-        <target>Entegratörler</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">15</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="public-layout.what_is_orcid" datatype="html" resname="public-layout.what_is_orcid">
-        <source>What is ORCID</source>
-        <target>ORCID Nedir?</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">16</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="public-layout.the_orcid_team" datatype="html" resname="public-layout.the_orcid_team">
-        <source>The ORCID Team</source>
-        <target>ORCID Ekibi</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">17</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="public-layout.the_orcid_community" datatype="html" resname="public-layout.the_orcid_community">
-        <source>The ORCID Community</source>
-        <target>ORCID Topluluğu</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">18</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="public-layout.events" datatype="html" resname="public-layout.events">
-        <source>Events</source>
-        <target>Etkinlikler</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">19</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="public-layout.news" datatype="html" resname="public-layout.news">
-        <source>News</source>
-        <target>Haberler</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">20</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="public-layout.faq" datatype="html" resname="public-layout.faq">
-        <source>FAQ</source>
-        <target>SSS</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">21</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="public-layout.give_feedback" datatype="html" resname="public-layout.give_feedback">
-        <source>Give Feedback</source>
-        <target>Geri Bildirimde Bulunun</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">22</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="public-layout.contact_us" datatype="html" resname="public-layout.contact_us">
-        <source>Contact us</source>
-        <target>Bizimle iletişime geçin</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">23</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="public-layout.knowledge_base" datatype="html" resname="public-layout.knowledge_base">
-        <source>Knowledge Base</source>
-        <target>Bilgi Bankası</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">24</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.outreach" datatype="html" resname="ngOrcid.outreach">
@@ -20448,7 +19380,7 @@
       </trans-unit>
       <trans-unit id="ngOrcid.theOrcidApi" datatype="html" resname="ngOrcid.theOrcidApi">
         <source>THE ORCID API</source>
-        <target>ORCID API&apos;Sİ</target>
+        <target>ORCID API'Sİ</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
           <context context-type="linenumber">30</context>
@@ -20486,22 +19418,6 @@
           <context context-type="linenumber">34</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="public-layout.our_mission" datatype="html" resname="public-layout.our_mission">
-        <source>Our Mission</source>
-        <target>Misyonumuz</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">35</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="public-layout.our_principles" datatype="html" resname="public-layout.our_principles">
-        <source>Our Principles</source>
-        <target>İlkelerimiz</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">36</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="ngOrcid.ourGovernance" datatype="html" resname="ngOrcid.ourGovernance">
         <source>OUR GOVERNANCE</source>
         <target>YÖNETİMİMİZ</target>
@@ -20516,38 +19432,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
           <context context-type="linenumber">38</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="public-layout.working_groups" datatype="html" resname="public-layout.working_groups">
-        <source>Working Groups</source>
-        <target>Çalışma Grupları</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">39</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="public-layout.sponsors" datatype="html" resname="public-layout.sponsors">
-        <source>Sponsors</source>
-        <target>Sponsor</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">40</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="public-layout.launch_partners" datatype="html" resname="public-layout.launch_partners">
-        <source>Launch Partners</source>
-        <target>Lansman İş Ortakları</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">41</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="public-layout.members" datatype="html" resname="public-layout.members">
-        <source>Members</source>
-        <target>Üyeler</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">42</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.openSource" datatype="html" resname="ngOrcid.openSource">
@@ -20588,22 +19472,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
           <context context-type="linenumber">47</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="public-layout.standard_member_agreement" datatype="html" resname="public-layout.standard_member_agreement">
-        <source>Standard Member Agreement</source>
-        <target>Standart Üye Sözleşmesi</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">49</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="public-layout.our_members" datatype="html" resname="public-layout.our_members">
-        <source>Our Members</source>
-        <target>Üyelerimiz</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">51</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ngOrcid.standartCreatorAgreement" datatype="html" resname="ngOrcid.standartCreatorAgreement">
@@ -20686,14 +19554,6 @@
           <context context-type="linenumber">68</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="public-layout.account_setting" datatype="html" resname="public-layout.account_setting">
-        <source>Account Settings</source>
-        <target>Hesap Ayarları</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">70</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="admin.members.workspace_link" datatype="html" resname="admin.members.workspace_link">
         <source>Manage members</source>
         <target>Üyeleri yönet</target>
@@ -20716,14 +19576,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
           <context context-type="linenumber">74</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="public-layout.my_orcid_record" datatype="html" resname="public-layout.my_orcid_record">
-        <source>My ORCID Record</source>
-        <target>ORCID Kaydım</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">77</context>
         </context-group>
       </trans-unit>
       <trans-unit id="register.titleLabel" datatype="html" resname="register.titleLabel">
