@@ -44,6 +44,21 @@
         ({{ affiliation.departmentName.value }})
       </ng-container>
     </div>
+    <div class="general-data" *ngIf="affiliation?.url?.value">
+      <span class="orc-font-body-small" i18n="@@shared.url">URL:</span>
+      <a
+        class="underline"
+        *ngIf="affiliation.url?.value | isUrl"
+        rel="noopener noreferrer"
+        target="_blank"
+        [href]="affiliation.url.value"
+      >
+        {{ affiliation.url.value }}
+      </a>
+      <ng-container *ngIf="!(affiliation.url?.value | isUrl)">
+        {{ affiliation.url.value }}
+      </ng-container>
+    </div>
     <div class="type">
       {{ affiliation?.affiliationType?.value | affiliationTypeLabel }}
     </div>
