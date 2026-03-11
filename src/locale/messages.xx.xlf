@@ -11950,7 +11950,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation/affiliation.component.html</context>
-          <context context-type="linenumber">94</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/affiliation/affiliation.component.html</context>
+          <context context-type="linenumber">109</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/funding/funding.component.html</context>
@@ -12170,7 +12174,7 @@
         <source>Show more detail</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation/affiliation.component.html</context>
-          <context context-type="linenumber">67</context>
+          <context context-type="linenumber">82</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/funding/funding.component.html</context>
@@ -12198,7 +12202,7 @@
         <source>Show less detail</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation/affiliation.component.html</context>
-          <context context-type="linenumber">80</context>
+          <context context-type="linenumber">95</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/funding/funding.component.html</context>
@@ -12226,7 +12230,7 @@
         <source>Added</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation/affiliation.component.html</context>
-          <context context-type="linenumber">114</context>
+          <context context-type="linenumber">129</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/funding/funding.component.html</context>
@@ -12266,7 +12270,7 @@
         <source>Last modified</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation/affiliation.component.html</context>
-          <context context-type="linenumber">122,124</context>
+          <context context-type="linenumber">137,139</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/funding/funding.component.html</context>
