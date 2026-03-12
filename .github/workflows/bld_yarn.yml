@@ -7,31 +7,10 @@ permissions:
 
 on:
   workflow_call:
-    inputs:
-      artifact_name:
-        description: 'Name of the artifact env'
-        required: false
-        default: 'prod'
-        type: string
-
   workflow_dispatch:
-    inputs:
-      artifact_name:
-        description: 'Name of the artifact env'
-        required: false
-        default: 'prod'
-        type: string
 
 jobs:
   bld_yarn:
-    strategy:
-      matrix:
-        include:
-          - artifact_name: prod
-# yarn build is only used as a test
-#           - artifact_name: sandbox
-#           - artifact_name: qa
-#           - artifact_name: int
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -41,4 +20,4 @@ jobs:
           node-version: 'v20.x'
           cache: 'yarn'
       - run: yarn
-      - run: yarn build:${{ inputs.artifact_name }}
+      - run: yarn build

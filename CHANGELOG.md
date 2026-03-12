@@ -1,3 +1,33 @@
+## v2.131.4 - 2026-03-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.3...v2.131.4)
+
+- [#2761](https://github.com/ORCID/orcid-angular/pull/2761): PD-5108
+
+## v2.131.3 - 2026-03-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.2...v2.131.3)
+
+## v2.131.2 - 2026-03-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.1...v2.131.2)
+
+## v2.131.1 - 2026-03-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.0...v2.131.1)
+
+### Feature
+
+- enable autocomplete for one-time-code (#2749)
+
+## v2.131.0 - 2026-03-11
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.130.13...v2.131.0)
+
+## v2.130.13 - 2026-03-10
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.130.12...v2.130.13)
+
 ## v2.130.12 - 2026-03-05
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.130.11...v2.130.12)

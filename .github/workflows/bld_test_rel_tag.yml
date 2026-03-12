@@ -23,6 +23,11 @@ on:
         type: boolean
         required: false
         default: true
+      run_docker:
+        description: 'Whether to run Docker builds'
+        type: boolean
+        required: false
+        default: false
 
   workflow_dispatch:
     inputs:
@@ -52,6 +57,11 @@ on:
         type: boolean
         required: false
         default: true
+      run_docker:
+        description: 'Whether to run Docker builds'
+        type: boolean
+        required: false
+        default: false
 
 # cancel running job if another commit comes in
 concurrency:
@@ -101,6 +111,7 @@ jobs:
       ref: ${{ inputs.ref }}
 
   bld_docker:
+    if: ${{ inputs.run_docker }}
     uses: ./.github/workflows/bld_docker.yml
     secrets: inherit # pass all secrets for uploading assets
     needs:
