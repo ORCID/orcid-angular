@@ -148,10 +148,7 @@ export class RegisterObservabilityService {
   }
 
   stepLoaded(step: 'a' | 'b' | 'c2' | 'c' | 'd') {
-    this._observability.recordEvent(
-      'orcid_registration',
-      stepLoadedEvent(step)
-    )
+    this._observability.recordEvent('orcid_registration', stepLoadedEvent(step))
   }
 
   initializeJourney(reactivation) {

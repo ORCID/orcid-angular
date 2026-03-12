@@ -267,7 +267,9 @@ export class PanelComponent implements OnInit {
   }
 
   expandItem() {
-    this._rumEvents.recordSimpleEvent(AppEventName.RecordExpandFeaturedWorkClicked)
+    this._rumEvents.recordSimpleEvent(
+      AppEventName.RecordExpandFeaturedWorkClicked
+    )
     const modalComponent = this._dialog.open(
       ExpandedWorkFeaturedModalComponent,
       {
