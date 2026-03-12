@@ -13,7 +13,7 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms'
-import { Subject } from 'rxjs'
+import { Subject, takeUntil } from 'rxjs'
 import { HAS_LETTER_OR_SYMBOL, HAS_NUMBER } from 'src/app/constants'
 import { AccountSecurityPasswordService } from 'src/app/core/account-security-password/account-security-password.service'
 import { RegisterService } from 'src/app/core/register/register.service'
@@ -101,7 +101,7 @@ export class SettingsSecurityPasswordComponent implements OnInit, OnDestroy {
     )
 
     dialogRef.componentInstance.submitAttempt
-      .takeUntil(dialogRef.afterClosed())
+      .pipe(takeUntil(dialogRef.afterClosed()))
       .subscribe(() => {
         this._accountPassword.updatePassword(this.form.value).subscribe({
           next: (response: any) => {
