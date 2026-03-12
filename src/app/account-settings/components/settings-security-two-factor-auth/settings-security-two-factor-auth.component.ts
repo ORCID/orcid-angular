@@ -36,6 +36,7 @@ export class SettingsSecurityTwoFactorAuthComponent implements OnInit {
           this.twoFactorStateOutput.emit(false)
         }
       })
+
   }
 
   twoFactor() {
