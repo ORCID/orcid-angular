@@ -47,6 +47,7 @@ import { SettingsComponent } from './components/settings/settings.component'
 import { AccountSettingsComponent } from './pages/account-settings/account-settings.component'
 import { MatDialogModule } from '@angular/material/dialog'
 import { AlertMessageComponent } from '@orcid/ui'
+import { AuthChallengeComponent } from '@orcid/registry-ui'
 import { ConfirmDeactivateAccountComponent } from './pages/confirm-deactivate-account/confirm-deactivate-account.component'
 
 @NgModule({
@@ -102,6 +103,7 @@ import { ConfirmDeactivateAccountComponent } from './pages/confirm-deactivate-ac
     AccountPanelModule,
     TopBarMyPublicRecordPreviewModule,
     AlertMessageComponent,
+    AuthChallengeComponent,
   ],
   providers: [VerificationEmailModalService],
 })

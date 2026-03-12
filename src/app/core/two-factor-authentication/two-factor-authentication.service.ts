@@ -11,6 +11,7 @@ import {
 import { catchError, retry } from 'rxjs/operators'
 import { ERROR_REPORT } from '../../errors'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
+import { AuthChallenge } from '../../types/common.endpoint'
 
 @Injectable({
   providedIn: 'root',
@@ -31,10 +32,10 @@ export class TwoFactorAuthenticationService {
     )
   }
 
-  disable(): Observable<Status> {
+  disable(data: AuthChallenge): Observable<Status> {
     return this._http.post<Status>(
       runtimeEnvironment.BASE_URL + '2FA/disable.json',
-      {},
+      data,
       { headers: this.headers }
     )
   }

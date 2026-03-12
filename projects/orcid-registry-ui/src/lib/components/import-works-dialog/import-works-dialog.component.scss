@@ -143,6 +143,18 @@
   font-weight: var(--orcid-font-weight-bold, 700);
   line-height: 27px;
   color: var(--orcid-color-text-dark-high, #000000);
+
+  // Certified: 4px vertical space between CSP title and description (PD-5141)
+  .import-works-dialog__card--certified & {
+    margin-bottom: 4px;
+  }
+}
+
+// More Services: item titles 16px/24px; 2px spacing maintained (PD-5141)
+.import-works-dialog__card-title--more {
+  margin: 0 0 2px;
+  font-size: 16px;
+  line-height: 24px;
 }
 
 .import-works-dialog__card-description {

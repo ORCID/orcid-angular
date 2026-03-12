@@ -1,0 +1,48 @@
+:host {
+  font-family: var(--orcid-font-family-sans, 'Noto Sans', sans-serif);
+}
+
+.grow {
+  flex-grow: 1;
+}
+
+.container {
+  padding: 64px;
+}
+
+ul {
+  padding-left: 24px;
+  margin-top: 16px;
+  margin-bottom: 0;
+}
+
+input {
+  font-size: 14px !important;
+}
+
+.verify-button-loading {
+  opacity: 30%;
+}
+
+hr {
+  margin-top: 32px;
+  margin-bottom: 32px;
+  height: 1px;
+}
+
+mat-icon {
+  height: 37px;
+  width: 37px;
+  font-size: 37px;
+}
+
+.cancel {
+  text-decoration-line: underline;
+}
+
+mat-progress-bar {
+  margin-top: -64px;
+  margin-left: -64px;
+  position: absolute;
+  max-width: 580px;
+}

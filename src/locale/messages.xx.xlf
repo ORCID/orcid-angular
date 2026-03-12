@@ -1,19 +1,87 @@
 <?xml version="1.0" ?><xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
   <file source-language="en" datatype="plaintext" original="ng2.template" target-language="xx">
     <body>
-      <trans-unit id="37fa222e5a5b6d9018702696271db5b7ab5ae7a4" datatype="html" resname="37fa222e5a5b6d9018702696271db5b7ab5ae7a4">
-        <source>As two-factor authentication is currently active on your ORCID account you need to enter a 2FA code from your authentication app to continue.</source>
+      <trans-unit id="34ffe29756a4433b9d5b883db26413783e1c08d9" datatype="html" resname="34ffe29756a4433b9d5b883db26413783e1c08d9">
+        <source>Verify your ORCID account</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">projects/orcid-ui/src/lib/components/two-factor-form-auth/two-factor-auth-form.component.html</context>
-          <context context-type="linenumber">3,6</context>
+          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
+          <context context-type="linenumber">15,17</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="3ab786af0ee4de6cf71ac145c3c7a089fe81dadb" datatype="html" resname="3ab786af0ee4de6cf71ac145c3c7a089fe81dadb">
+        <source>Enter</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="e65c0a651252b987d33f5e244972055e71e88742" datatype="html" resname="e65c0a651252b987d33f5e244972055e71e88742">
+        <source>your ORCID account password</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="dce4fb53bd401f2ded36a8c45cb471eff6b529d4" datatype="html" resname="dce4fb53bd401f2ded36a8c45cb471eff6b529d4">
+        <source>and</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="4b7984f50afed5b65ccf49d51bcb43cf35f49a25" datatype="html" resname="4b7984f50afed5b65ccf49d51bcb43cf35f49a25">
+        <source>a two-factor authentication code</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="register.password" datatype="html" resname="register.password">
+        <source>Password</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
+          <context context-type="linenumber">83,84</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="account.passwordCannotBeEmpty" datatype="html" resname="account.passwordCannotBeEmpty">
+        <source>Password cannot be empty</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
+          <context context-type="linenumber">68,70</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
+          <context context-type="linenumber">51,53</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="48679ad8c0f76c54cd6537e208dbd8c5d632519b" datatype="html" resname="48679ad8c0f76c54cd6537e208dbd8c5d632519b">
+        <source>The password does not match our records</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
+          <context context-type="linenumber">72,74</context>
         </context-group>
         <target>X</target>
       </trans-unit>
       <trans-unit id="account.twoPassword" datatype="html" resname="account.twoPassword">
         <source>Two-factor authentication</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">projects/orcid-ui/src/lib/components/two-factor-form-auth/two-factor-auth-form.component.html</context>
-          <context context-type="linenumber">17,19</context>
+          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
+          <context context-type="linenumber">88,90</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security/settings-security.component.ts</context>
@@ -28,8 +96,8 @@
       <trans-unit id="account.enterTheCode" datatype="html" resname="account.enterTheCode">
         <source>Enter the code from your two-factor authentication app</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">projects/orcid-ui/src/lib/components/two-factor-form-auth/two-factor-auth-form.component.html</context>
-          <context context-type="linenumber">44,46</context>
+          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
+          <context context-type="linenumber">116,118</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -40,8 +108,8 @@
       <trans-unit id="ngOrcid.signin.2fa.badVerificationCode" datatype="html" resname="ngOrcid.signin.2fa.badVerificationCode">
         <source>Invalid authentication code</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">projects/orcid-ui/src/lib/components/two-factor-form-auth/two-factor-auth-form.component.html</context>
-          <context context-type="linenumber">51,53</context>
+          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
+          <context context-type="linenumber">121,123</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -60,8 +128,8 @@
       <trans-unit id="ngOrcid.signin.2fa.verificationCodeRequired" datatype="html" resname="ngOrcid.signin.2fa.verificationCodeRequired">
         <source>Authentication code is required</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">projects/orcid-ui/src/lib/components/two-factor-form-auth/two-factor-auth-form.component.html</context>
-          <context context-type="linenumber">61,63</context>
+          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
+          <context context-type="linenumber">128,130</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -80,8 +148,8 @@
       <trans-unit id="ngOrcid.signin.2fa.badVerificationCodeLength" datatype="html" resname="ngOrcid.signin.2fa.badVerificationCodeLength">
         <source>Invalid authentication code length</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">projects/orcid-ui/src/lib/components/two-factor-form-auth/two-factor-auth-form.component.html</context>
-          <context context-type="linenumber">72,74</context>
+          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
+          <context context-type="linenumber">136,138</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -100,8 +168,8 @@
       <trans-unit id="ngOrcid.signin.2fa.recoveryCode" datatype="html" resname="ngOrcid.signin.2fa.recoveryCode">
         <source>Recovery code</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">projects/orcid-ui/src/lib/components/two-factor-form-auth/two-factor-auth-form.component.html</context>
-          <context context-type="linenumber">99,101</context>
+          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
+          <context context-type="linenumber">165,167</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -116,8 +184,8 @@
       <trans-unit id="ngOrcid.signin.2fa.noDevice2" datatype="html" resname="ngOrcid.signin.2fa.noDevice2">
         <source>Enter a recovery code</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">projects/orcid-ui/src/lib/components/two-factor-form-auth/two-factor-auth-form.component.html</context>
-          <context context-type="linenumber">128</context>
+          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
+          <context context-type="linenumber">194</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -132,8 +200,8 @@
       <trans-unit id="ngOrcid.signin.2fa.badRecoveryCode" datatype="html" resname="ngOrcid.signin.2fa.badRecoveryCode">
         <source>Invalid recovery code</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">projects/orcid-ui/src/lib/components/two-factor-form-auth/two-factor-auth-form.component.html</context>
-          <context context-type="linenumber">134,136</context>
+          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
+          <context context-type="linenumber">198,200</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -148,8 +216,8 @@
       <trans-unit id="ngOrcid.signin.2fa.recoveryCodeRequired" datatype="html" resname="ngOrcid.signin.2fa.recoveryCodeRequired">
         <source>Recovery code is required</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">projects/orcid-ui/src/lib/components/two-factor-form-auth/two-factor-auth-form.component.html</context>
-          <context context-type="linenumber">144,146</context>
+          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
+          <context context-type="linenumber">205,207</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -164,8 +232,8 @@
       <trans-unit id="ngOrcid.signin.2fa.badRecoveryCodeLength" datatype="html" resname="ngOrcid.signin.2fa.badRecoveryCodeLength">
         <source>Invalid recovery code length</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">projects/orcid-ui/src/lib/components/two-factor-form-auth/two-factor-auth-form.component.html</context>
-          <context context-type="linenumber">155,157</context>
+          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
+          <context context-type="linenumber">213,215</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -180,8 +248,8 @@
       <trans-unit id="ngOrcid.signin.2fa.noDevice1" datatype="html" resname="ngOrcid.signin.2fa.noDevice1">
         <source>Don't have your device?</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">projects/orcid-ui/src/lib/components/two-factor-form-auth/two-factor-auth-form.component.html</context>
-          <context context-type="linenumber">178</context>
+          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
+          <context context-type="linenumber">233,235</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -196,8 +264,8 @@
       <trans-unit id="account.useARecoveryCode" datatype="html" resname="account.useARecoveryCode">
         <source>Use a recovery code instead</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">projects/orcid-ui/src/lib/components/two-factor-form-auth/two-factor-auth-form.component.html</context>
-          <context context-type="linenumber">184</context>
+          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
+          <context context-type="linenumber">242,244</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -208,8 +276,8 @@
       <trans-unit id="account.dontHaveYourRecoveryCodes" datatype="html" resname="account.dontHaveYourRecoveryCodes">
         <source>Don't have your recovery codes?</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">projects/orcid-ui/src/lib/components/two-factor-form-auth/two-factor-auth-form.component.html</context>
-          <context context-type="linenumber">191,192</context>
+          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
+          <context context-type="linenumber">248,250</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -220,8 +288,8 @@
       <trans-unit id="account.useYourAuthenticationAppInstead" datatype="html" resname="account.useYourAuthenticationAppInstead">
         <source>Use your authentication app instead</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">projects/orcid-ui/src/lib/components/two-factor-form-auth/two-factor-auth-form.component.html</context>
-          <context context-type="linenumber">198</context>
+          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
+          <context context-type="linenumber">257,259</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -232,8 +300,8 @@
       <trans-unit id="ngOrcid.signin.2fa.noDeviceOrRecovery" datatype="html" resname="ngOrcid.signin.2fa.noDeviceOrRecovery">
         <source>Don't have your device or recovery code?</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">projects/orcid-ui/src/lib/components/two-factor-form-auth/two-factor-auth-form.component.html</context>
-          <context context-type="linenumber">205,206</context>
+          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
+          <context context-type="linenumber">263,265</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -248,8 +316,8 @@
       <trans-unit id="topBar.knowledge" datatype="html" resname="topBar.knowledge">
         <source>ORCID help centre</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">projects/orcid-ui/src/lib/components/two-factor-form-auth/two-factor-auth-form.component.html</context>
-          <context context-type="linenumber">213</context>
+          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
+          <context context-type="linenumber">272,274</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -258,6 +326,22 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/top-bar-verification-email/modals/top-bar-verification-email-modal/top-bar-verification-email-modal.component.html</context>
           <context context-type="linenumber">59</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="fafb17564938e09a75096ad3e513a6ee4ad19931" datatype="html" resname="fafb17564938e09a75096ad3e513a6ee4ad19931">
+        <source>Verify my account and continue</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
+          <context context-type="linenumber">288,290</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="fc4c8aa10015fe4b6481bf3719ff91f5bcebd1d5" datatype="html" resname="fc4c8aa10015fe4b6481bf3719ff91f5bcebd1d5">
+        <source>Cancel account verification</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
+          <context context-type="linenumber">298,300</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -345,7 +429,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">134</context>
+          <context context-type="linenumber">136</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-details/work-details.component.ts</context>
@@ -1177,11 +1261,27 @@
         </context-group>
         <target>X</target>
       </trans-unit>
-      <trans-unit id="account.changeOrUpdateAccountPassword" datatype="html" resname="account.changeOrUpdateAccountPassword">
+      <trans-unit id="08f2e5ad4847aa140bd7c5bd6b374c9d21aa8aba" datatype="html" resname="08f2e5ad4847aa140bd7c5bd6b374c9d21aa8aba">
+        <source>Your ORCID account password has been updated</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
+          <context context-type="linenumber">5,7</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="ac0550d41d1eb6218c68e93a0c715d048293a85b" datatype="html" resname="ac0550d41d1eb6218c68e93a0c715d048293a85b">
+        <source>Your account password has not been updated</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
+          <context context-type="linenumber">11,13</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="c8b3d163107a99060c9b027ffcecf515f32e4000" datatype="html" resname="c8b3d163107a99060c9b027ffcecf515f32e4000">
         <source>Change or update your account password.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">2,4</context>
+          <context context-type="linenumber">16</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -1189,15 +1289,7 @@
         <source>Old password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">15</context>
-        </context-group>
-        <target>X</target>
-      </trans-unit>
-      <trans-unit id="account.passwordCannotBeEmpty" datatype="html" resname="account.passwordCannotBeEmpty">
-        <source>Password cannot be empty</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">22,24</context>
+          <context context-type="linenumber">26</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -1205,7 +1297,7 @@
         <source>New password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">44</context>
+          <context context-type="linenumber">73</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -1213,7 +1305,7 @@
         <source>Password cannot be empty</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">60,62</context>
+          <context context-type="linenumber">112,114</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -1221,7 +1313,23 @@
         <source>Password must meet all requirements</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">70,72</context>
+          <context context-type="linenumber">124,126</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="register.passwordCantBeEmail" datatype="html" resname="register.passwordCantBeEmail">
+        <source>Password must not be the same as your email address</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
+          <context context-type="linenumber">131,133</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
+          <context context-type="linenumber">109,111</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
+          <context context-type="linenumber">123</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -1229,43 +1337,7 @@
         <source>Password must be between 8 and 256 characters</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">76,78</context>
-        </context-group>
-        <target>X</target>
-      </trans-unit>
-      <trans-unit id="register.passwordLength" datatype="html" resname="register.passwordLength">
-        <source>8 or more characters</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">99</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">129</context>
-        </context-group>
-        <target>X</target>
-      </trans-unit>
-      <trans-unit id="register.passwordSymbolV2" datatype="html" resname="register.passwordSymbolV2">
-        <source>At least 1 letter or symbol</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">111</context>
-        </context-group>
-        <target>X</target>
-      </trans-unit>
-      <trans-unit id="register.passwordNumberV2" datatype="html" resname="register.passwordNumberV2">
-        <source>At least 1 number</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">123</context>
-        </context-group>
-        <target>X</target>
-      </trans-unit>
-      <trans-unit id="account.confirmNewPassword" datatype="html" resname="account.confirmNewPassword">
-        <source>Confirm new password</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">135</context>
+          <context context-type="linenumber">139,141</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -1273,7 +1345,7 @@
         <source>Retype your password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">151,153</context>
+          <context context-type="linenumber">192,194</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
@@ -1285,15 +1357,55 @@
         <source>Passwords do not match</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">158,160</context>
+          <context context-type="linenumber">203,205</context>
         </context-group>
         <target>X</target>
       </trans-unit>
-      <trans-unit id="account.yourPasswordHasBeenUpdate" datatype="html" resname="account.yourPasswordHasBeenUpdate">
-        <source>Your password has been updated</source>
+      <trans-unit id="register.yourPasswordHas" datatype="html" resname="register.yourPasswordHas">
+        <source>Your password has:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">167,169</context>
+          <context context-type="linenumber">209</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
+          <context context-type="linenumber">123</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="register.passwordLength" datatype="html" resname="register.passwordLength">
+        <source>8 or more characters</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
+          <context context-type="linenumber">215</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
+          <context context-type="linenumber">129</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="register.atLeastALetterOrSymbol" datatype="html" resname="register.atLeastALetterOrSymbol">
+        <source>At least 1 letter or symbol</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
+          <context context-type="linenumber">221,223</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
+          <context context-type="linenumber">135,137</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="register.atLeastANumber" datatype="html" resname="register.atLeastANumber">
+        <source>At least 1 number</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
+          <context context-type="linenumber">229</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
+          <context context-type="linenumber">143</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -1301,7 +1413,7 @@
         <source>Save changes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
-          <context context-type="linenumber">179,181</context>
+          <context context-type="linenumber">240,242</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/modals/modal-country/modal-country.component.html</context>
@@ -1353,11 +1465,43 @@
         </context-group>
         <target>X</target>
       </trans-unit>
+      <trans-unit id="accountSettings.security.password.confirmPasswordPlaceholder" datatype="html" resname="accountSettings.security.password.confirmPasswordPlaceholder">
+        <source>Confirm your new password</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.ts</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="accountSettings.security.password.authChallengeLabel" datatype="html" resname="accountSettings.security.password.authChallengeLabel">
+        <source>complete your password reset</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.ts</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="9ac367b075ae56728c151e6b8ff03b5c16a38127" datatype="html" resname="9ac367b075ae56728c151e6b8ff03b5c16a38127">
+        <source>Two-factor authentication has been disabled</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
+          <context context-type="linenumber">4,6</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="2b63693f3f85f5f642f0aa7ec61159f9e35a9457" datatype="html" resname="2b63693f3f85f5f642f0aa7ec61159f9e35a9457">
+        <source>Two-factor authentication was not disabled</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
+          <context context-type="linenumber">10,12</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
       <trans-unit id="account.addExtraSecurity" datatype="html" resname="account.addExtraSecurity">
         <source>Add extra security to your ORCID account by enabling two-factor authentication (2FA).</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">3,6</context>
+          <context context-type="linenumber">16,19</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
@@ -1369,7 +1513,7 @@
         <source>Each time you sign in to ORCID you’ll be prompted to enter a six-digit code we send to your preferred 2FA authentication application.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">8,11</context>
+          <context context-type="linenumber">21,24</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/two-factor-setup/components/two-factor-enable/two-factor-enable.component.html</context>
@@ -1381,7 +1525,7 @@
         <source>Two-factor authentication is currently:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">14,16</context>
+          <context context-type="linenumber">27,29</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -1389,7 +1533,7 @@
         <source>ON</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">32</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/account-panel/settings-panels/settings-panels.component.html</context>
@@ -1401,7 +1545,7 @@
         <source>OFF</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">33</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/account-panel/settings-panels/settings-panels.component.html</context>
@@ -1413,7 +1557,7 @@
         <source>Turn on two-factor authentication</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">29,31</context>
+          <context context-type="linenumber">42,44</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -1421,7 +1565,15 @@
         <source>Turn off two-factor authentication</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
-          <context context-type="linenumber">32,34</context>
+          <context context-type="linenumber">45,47</context>
+        </context-group>
+        <target>X</target>
+      </trans-unit>
+      <trans-unit id="accountSettings.security.disable2FA" datatype="html" resname="accountSettings.security.disable2FA">
+        <source>disable 2FA</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.ts</context>
+          <context context-type="linenumber">31</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -1582,18 +1734,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/my-orcid-alerts/my-orcid-alerts.component.html</context>
           <context context-type="linenumber">39,41</context>
-        </context-group>
-        <target>X</target>
-      </trans-unit>
-      <trans-unit id="register.password" datatype="html" resname="register.password">
-        <source>Password</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
-          <context context-type="linenumber">83,84</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">11</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -3405,7 +3545,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/types/common.endpoint.ts</context>
-          <context context-type="linenumber">227</context>
+          <context context-type="linenumber">228</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -3557,7 +3697,7 @@
         <source>Edit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panel/panel.component.ts</context>
-          <context context-type="linenumber">136</context>
+          <context context-type="linenumber">138</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stack/affiliation-stack.component.ts</context>
@@ -3581,7 +3721,7 @@
         <source>Make a copy and edit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panel/panel.component.ts</context>
-          <context context-type="linenumber">137</context>
+          <context context-type="linenumber">139</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -3589,7 +3729,7 @@
         <source>Open sources to edit you own version</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panel/panel.component.ts</context>
-          <context context-type="linenumber">138</context>
+          <context context-type="linenumber">140</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -3597,7 +3737,7 @@
         <source>You can only edit your own version</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panel/panel.component.ts</context>
-          <context context-type="linenumber">139</context>
+          <context context-type="linenumber">141</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -3605,7 +3745,7 @@
         <source>This group of items has mixed visibility settings. Please select a visibility to apply to all items in the group.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panel/panel.component.ts</context>
-          <context context-type="linenumber">140,141</context>
+          <context context-type="linenumber">142,143</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -3613,7 +3753,7 @@
         <source>Expand item</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panel/panel.component.ts</context>
-          <context context-type="linenumber">142</context>
+          <context context-type="linenumber">144</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -3621,7 +3761,7 @@
         <source>Expand featured item</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panel/panel.component.ts</context>
-          <context context-type="linenumber">143</context>
+          <context context-type="linenumber">145</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -3629,7 +3769,7 @@
         <source>Open other sources</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panel/panel.component.ts</context>
-          <context context-type="linenumber">144</context>
+          <context context-type="linenumber">146</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -5398,7 +5538,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">137</context>
+          <context context-type="linenumber">139</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -5410,7 +5550,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">138</context>
+          <context context-type="linenumber">140</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -5422,7 +5562,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">136</context>
+          <context context-type="linenumber">138</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -13118,7 +13258,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">270</context>
+          <context context-type="linenumber">276</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -13130,7 +13270,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">274</context>
+          <context context-type="linenumber">280</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -13138,7 +13278,7 @@
         <source>Names</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">130</context>
+          <context context-type="linenumber">132</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/modals/modal-name/modal-name.component.html</context>
@@ -13158,7 +13298,7 @@
         <source>Printable record</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">132</context>
+          <context context-type="linenumber">134</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -13166,7 +13306,7 @@
         <source>Copy iD</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">133</context>
+          <context context-type="linenumber">135</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -13174,7 +13314,7 @@
         <source>Hide record summary</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">139</context>
+          <context context-type="linenumber">141</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -13182,7 +13322,7 @@
         <source>Show record summary</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">140</context>
+          <context context-type="linenumber">142</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -13190,7 +13330,7 @@
         <source>Copy your ORCID iD to the clipboard</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">142</context>
+          <context context-type="linenumber">144</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -13198,7 +13338,7 @@
         <source>View a printable version of your ORCID record (Opens in new tab)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">143</context>
+          <context context-type="linenumber">145</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -16214,47 +16354,11 @@
         </context-group>
         <target>X</target>
       </trans-unit>
-      <trans-unit id="register.passwordCantBeEmail" datatype="html" resname="register.passwordCantBeEmail">
-        <source>Password must not be the same as your email address</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">109,111</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
-          <context context-type="linenumber">123</context>
-        </context-group>
-        <target>X</target>
-      </trans-unit>
       <trans-unit id="register.passwordConfirmationMatch2" datatype="html" resname="register.passwordConfirmationMatch2">
         <source>Passwords do not match</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
           <context context-type="linenumber">118,120</context>
-        </context-group>
-        <target>X</target>
-      </trans-unit>
-      <trans-unit id="register.yourPasswordHas" datatype="html" resname="register.yourPasswordHas">
-        <source>Your password has:</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">123</context>
-        </context-group>
-        <target>X</target>
-      </trans-unit>
-      <trans-unit id="register.atLeastALetterOrSymbol" datatype="html" resname="register.atLeastALetterOrSymbol">
-        <source>At least 1 letter or symbol</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">135,137</context>
-        </context-group>
-        <target>X</target>
-      </trans-unit>
-      <trans-unit id="register.atLeastANumber" datatype="html" resname="register.atLeastANumber">
-        <source>At least 1 number</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/register/components/form-password/form-password.component.html</context>
-          <context context-type="linenumber">143</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -19246,7 +19350,7 @@
         <source>Everyone</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/types/common.endpoint.ts</context>
-          <context context-type="linenumber">225</context>
+          <context context-type="linenumber">226</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -19254,7 +19358,7 @@
         <source>Trusted parties</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/types/common.endpoint.ts</context>
-          <context context-type="linenumber">226</context>
+          <context context-type="linenumber">227</context>
         </context-group>
         <target>X</target>
       </trans-unit>
