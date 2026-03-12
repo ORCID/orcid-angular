@@ -7,6 +7,7 @@ import { TestBed, fakeAsync, flushMicrotasks } from '@angular/core/testing'
 import { CookieService } from 'ngx-cookie-service'
 import { FirefoxXsrfPreloadInterceptor } from './firefox-xsrf-preload.interceptor'
 import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
+import { AppEventName } from 'src/app/register/app-event-names'
 import { WINDOW } from 'src/app/cdk/window'
 import { Platform } from '@angular/cdk/platform'
 
@@ -110,7 +111,7 @@ describe('FirefoxXsrfPreloadInterceptor', () => {
 
     expect(fetchSpy).toHaveBeenCalled()
     expect(recordSimpleEventSpy).toHaveBeenCalledWith(
-      'xsrf_missing_after_preload',
+      AppEventName.XsrfMissingAfterPreload,
       jasmine.objectContaining({
         error: 'xsrf_missing',
       })

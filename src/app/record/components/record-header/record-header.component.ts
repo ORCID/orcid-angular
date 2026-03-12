@@ -32,6 +32,8 @@ import {
   AffiliationUIGroup,
   Affiliation,
 } from 'src/app/types/record-affiliation.endpoint'
+import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
+import { AppEventName } from 'src/app/register/app-event-names'
 
 @Component({
   selector: 'app-record-header',
@@ -151,7 +153,8 @@ export class RecordHeaderComponent implements OnInit {
     private _compact: HeaderCompactService,
     private _togglz: TogglzService,
     private _router: Router,
-    private _affiliations: RecordAffiliationService
+    private _affiliations: RecordAffiliationService,
+    private _rumEvents: RumJourneyEventService
   ) {}
 
   ngOnInit(): void {
@@ -251,6 +254,9 @@ export class RecordHeaderComponent implements OnInit {
   }
   recordSummaryLinkClick() {
     const next = !this.recordSummaryOpen
+    this._rumEvents.recordSimpleEvent(AppEventName.RecordSummaryToggleClicked, {
+      expanded: next,
+    })
     this._state.setRecordSummaryOpen(next)
     this.recordSummaryOpenChange.emit(next)
   }
