@@ -11,13 +11,14 @@ import { MatSelectModule } from '@angular/material/select'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { MatIconModule } from '@angular/material/icon'
-import { TwoFactorAuthFormComponent } from '@orcid/ui'
-import { DocumentationPageComponent } from '../../components/documentation-page/documentation-page.component'
+import { AuthChallengeComponent } from '@orcid/registry-ui'
 import '@angular/localize/init'
 import { MatCheckboxModule } from '@angular/material/checkbox'
+import { DocumentationPageComponent } from '../../components/documentation-page/documentation-page.component'
+import { MatDialog } from '@angular/material/dialog'
 
 @Component({
-  selector: 'two-factor-auth-form-page',
+  selector: 'auth-challenge-page',
   standalone: true,
   imports: [
     CommonModule,
@@ -27,19 +28,22 @@ import { MatCheckboxModule } from '@angular/material/checkbox'
     MatInputModule,
     MatCheckboxModule,
     MatIconModule,
-    TwoFactorAuthFormComponent,
+    AuthChallengeComponent,
     DocumentationPageComponent,
     ReactiveFormsModule,
   ],
-  styleUrls: ['./two-factor-auth-form-page.component.scss'],
-  templateUrl: './two-factor-auth-form-page.component.html',
+  styleUrls: ['./auth-challenge-page.component.scss'],
+  templateUrl: './auth-challenge-page.component.html',
 })
-export class TwoFactorAuthFormPageComponent implements OnInit {
-  showAlert = false
-  showHelpText = true
+export class AuthChallengePageComponent implements OnInit {
+  showPasswordField = true
+  showTwoFactorField = false
+  actionDescription: String
+  memberName: String
   form: UntypedFormGroup
+  data: any
 
-  constructor(private _fb: UntypedFormBuilder) {}
+  constructor(private _fb: UntypedFormBuilder, private _dialog: MatDialog) {}
 
   ngOnInit() {
     this.form = this._fb.group({
@@ -48,6 +52,18 @@ export class TwoFactorAuthFormPageComponent implements OnInit {
         null,
         [Validators.minLength(10), Validators.maxLength(10)],
       ],
+      password: ['', Validators.required],
+    })
+  }
+
+  openDialog() {
+    const dialogRef = this._dialog.open(AuthChallengeComponent, {
+      data: {
+        actionDescription: this.actionDescription,
+        memberName: this.memberName,
+        showPasswordField: this.showPasswordField,
+        showTwoFactorField: this.showTwoFactorField,
+      },
     })
   }
 }
