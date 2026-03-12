@@ -86,7 +86,6 @@ export class SettingsSecurityTwoFactorAuthComponent implements OnInit {
         this.cancel = true
       }
     })
-
   }
 
   twoFactor() {
