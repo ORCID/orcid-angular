@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { ApplicationRoutes } from '../../../constants'
 import { Router } from '@angular/router'
-import { first } from 'rxjs/operators'
+import { first, takeUntil } from 'rxjs/operators'
 import { TwoFactorAuthenticationService } from '../../../core/two-factor-authentication/two-factor-authentication.service'
 import { MatDialog } from '@angular/material/dialog'
 import { AuthChallengeComponent } from '@orcid/registry-ui'
@@ -60,7 +60,7 @@ export class SettingsSecurityTwoFactorAuthComponent implements OnInit {
     )
 
     dialogRef.componentInstance.submitAttempt
-      .takeUntil(dialogRef.afterClosed())
+      .pipe(takeUntil(dialogRef.afterClosed()))
       .subscribe(() => {
         this.twoFactorAuthenticationService
           .disable(this.form.value)
