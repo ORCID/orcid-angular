@@ -24,7 +24,7 @@ import {
 export class SettingsSecurityTwoFactorAuthComponent implements OnInit {
   @Input() twoFactorState: boolean
   @Output() twoFactorStateOutput = new EventEmitter<any>()
-  @Output() loading = new EventEmitter<boolean>()
+
   form: UntypedFormGroup
   success = false
   cancel = false
@@ -59,23 +59,25 @@ export class SettingsSecurityTwoFactorAuthComponent implements OnInit {
       }
     )
 
-    dialogRef.componentInstance.submitAttempt.subscribe(() => {
-      this.twoFactorAuthenticationService
-        .disable(this.form.value)
-        .pipe(first())
-        .subscribe({
-          next: (response: any) => {
-            if (response.success) {
-              this.twoFactorState = response.enabled
-              this.twoFactorStateOutput.emit(false)
-              dialogRef.close(true)
-            } else {
-              dialogRef.componentInstance.loading = false
-              dialogRef.componentInstance.processBackendResponse(response)
-            }
-          },
-        })
-    })
+    dialogRef.componentInstance.submitAttempt
+      .takeUntil(dialogRef.afterClosed())
+      .subscribe(() => {
+        this.twoFactorAuthenticationService
+          .disable(this.form.value)
+          .pipe(first())
+          .subscribe({
+            next: (response: any) => {
+              if (response.success) {
+                this.twoFactorState = response.enabled
+                this.twoFactorStateOutput.emit(false)
+                dialogRef.close(true)
+              } else {
+                dialogRef.componentInstance.loading = false
+                dialogRef.componentInstance.processBackendResponse(response)
+              }
+            },
+          })
+      })
 
     dialogRef.afterClosed().subscribe((success) => {
       if (success) {
