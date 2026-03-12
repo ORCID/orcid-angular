@@ -36,19 +36,3 @@ The app sends events to **New Relic** (and optionally logs them in the console) 
 
 - **All event name strings** live in **`AppEventName`** in `src/app/register/app-event-names.ts`. Do not hardcode event names elsewhere.
 - For **dynamic** names (e.g. `step-${step}-loaded`), add a small helper in the same file (e.g. `stepLoadedEvent(step)`) and use it when calling `recordEvent`.
-
-### Where to call
-
-- Call **`recordSimpleEvent` at the place where the action happens** (e.g. in the component method that handles the button click). Do not add wrapper "observability services" for one-off events; inject `RumJourneyEventService` and call it directly.
-- For **journey** events, use the existing pattern: e.g. `RegisterObservabilityService` for `orcid_registration` (it injects `RumJourneyEventService`, calls `startJourney` / `recordEvent` / `finishJourney`). Other journey types: `oauth_authorization`, `orcid_notifications` (see `src/app/rum/journeys/types.ts`).
-
-### Adding a new observable action
-
-1. Add the event name to **`AppEventName`** in `src/app/register/app-event-names.ts` (or a dynamic helper there).
-2. In the component (or service) where the action occurs, inject **`RumJourneyEventService`**.
-3. At the right moment (e.g. click handler), call **`this._rumEvents.recordSimpleEvent(AppEventName.YourNewEvent, { ... })`** with optional attributes. For journey flows, use the existing journey service and **`recordEvent`** with the enum value.
-
-### Console logs
-
-- RUM events are printed to the console only when **`runtimeEnvironment.debugger`** is true (typically dev/sandbox). Format: `[RUM][simple] : event <name> <attrs>` or `[RUM][journey:<type>] : event <name> <payload>`.
-- QA can filter the console by `[RUM]` to verify events. See `docs/qa-observability-console-logs.md` for a QA-facing note.
