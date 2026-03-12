@@ -345,7 +345,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">134</context>
+          <context context-type="linenumber">136</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-details/work-details.component.ts</context>
@@ -3557,7 +3557,7 @@
         <source>Edit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panel/panel.component.ts</context>
-          <context context-type="linenumber">136</context>
+          <context context-type="linenumber">138</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation-stack/affiliation-stack.component.ts</context>
@@ -3581,7 +3581,7 @@
         <source>Make a copy and edit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panel/panel.component.ts</context>
-          <context context-type="linenumber">137</context>
+          <context context-type="linenumber">139</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -3589,7 +3589,7 @@
         <source>Open sources to edit you own version</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panel/panel.component.ts</context>
-          <context context-type="linenumber">138</context>
+          <context context-type="linenumber">140</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -3597,7 +3597,7 @@
         <source>You can only edit your own version</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panel/panel.component.ts</context>
-          <context context-type="linenumber">139</context>
+          <context context-type="linenumber">141</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -3605,7 +3605,7 @@
         <source>This group of items has mixed visibility settings. Please select a visibility to apply to all items in the group.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panel/panel.component.ts</context>
-          <context context-type="linenumber">140,141</context>
+          <context context-type="linenumber">142,143</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -3613,7 +3613,7 @@
         <source>Expand item</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panel/panel.component.ts</context>
-          <context context-type="linenumber">142</context>
+          <context context-type="linenumber">144</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -3621,7 +3621,7 @@
         <source>Expand featured item</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panel/panel.component.ts</context>
-          <context context-type="linenumber">143</context>
+          <context context-type="linenumber">145</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -3629,7 +3629,7 @@
         <source>Open other sources</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/panel/panel/panel.component.ts</context>
-          <context context-type="linenumber">144</context>
+          <context context-type="linenumber">146</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -5398,7 +5398,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">137</context>
+          <context context-type="linenumber">139</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -5410,7 +5410,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">138</context>
+          <context context-type="linenumber">140</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -5422,7 +5422,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">136</context>
+          <context context-type="linenumber">138</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -13118,7 +13118,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">270</context>
+          <context context-type="linenumber">276</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -13130,7 +13130,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">274</context>
+          <context context-type="linenumber">280</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -13138,7 +13138,7 @@
         <source>Names</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">130</context>
+          <context context-type="linenumber">132</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/top-bar/modals/modal-name/modal-name.component.html</context>
@@ -13158,7 +13158,7 @@
         <source>Printable record</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">132</context>
+          <context context-type="linenumber">134</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -13166,7 +13166,7 @@
         <source>Copy iD</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">133</context>
+          <context context-type="linenumber">135</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -13174,7 +13174,7 @@
         <source>Hide record summary</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">139</context>
+          <context context-type="linenumber">141</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -13182,7 +13182,7 @@
         <source>Show record summary</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">140</context>
+          <context context-type="linenumber">142</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -13190,7 +13190,7 @@
         <source>Copy your ORCID iD to the clipboard</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">142</context>
+          <context context-type="linenumber">144</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -13198,7 +13198,7 @@
         <source>View a printable version of your ORCID record (Opens in new tab)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/record-header/record-header.component.ts</context>
-          <context context-type="linenumber">143</context>
+          <context context-type="linenumber">145</context>
         </context-group>
         <target>X</target>
       </trans-unit>
