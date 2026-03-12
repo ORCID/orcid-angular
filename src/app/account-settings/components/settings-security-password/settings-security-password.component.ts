@@ -45,7 +45,7 @@ export class SettingsSecurityPasswordComponent implements OnInit, OnDestroy {
   cancel: boolean
   $destroy = new Subject<void>()
   currentValidate8orMoreCharactersStatus: boolean
-  ccurentValidateAtLeastALetterOrSymbolStatus: boolean
+  currentValidateAtLeastALetterOrSymbolStatus: boolean
   currentValidateAtLeastANumber: boolean
   confirmPasswordPlaceholder = $localize`:@@accountSettings.security.password.confirmPasswordPlaceholder:Confirm your new password`
   authChallengeLabel = $localize`:@@accountSettings.security.password.authChallengeLabel:complete your password reset`
@@ -100,18 +100,20 @@ export class SettingsSecurityPasswordComponent implements OnInit, OnDestroy {
       }
     )
 
-    dialogRef.componentInstance.submitAttempt.subscribe(() => {
-      this._accountPassword.updatePassword(this.form.value).subscribe({
-        next: (response: any) => {
-          if (response.success) {
-            dialogRef.close(true)
-          } else {
-            dialogRef.componentInstance.loading = false
-            dialogRef.componentInstance.processBackendResponse(response)
-          }
-        },
+    dialogRef.componentInstance.submitAttempt
+      .takeUntil(dialogRef.afterClosed())
+      .subscribe(() => {
+        this._accountPassword.updatePassword(this.form.value).subscribe({
+          next: (response: any) => {
+            if (response.success) {
+              dialogRef.close(true)
+            } else {
+              dialogRef.componentInstance.loading = false
+              dialogRef.componentInstance.processBackendResponse(response)
+            }
+          },
+        })
       })
-    })
 
     dialogRef.afterClosed().subscribe((success) => {
       if (document.activeElement instanceof HTMLElement) {
@@ -176,7 +178,7 @@ export class SettingsSecurityPasswordComponent implements OnInit, OnDestroy {
       this.form.getError('pattern', 'password')?.requiredPattern ==
         this.hasLetterOrSymbolPattern
 
-    this.ccurentValidateAtLeastALetterOrSymbolStatus = status
+    this.currentValidateAtLeastALetterOrSymbolStatus = status
 
     return status
   }
