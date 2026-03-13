@@ -1,9 +1,13 @@
 window.NREUM || (NREUM = {})
+// Cost-saving: disable session replay and session trace (high $). We still record
+// all app events (addPageAction: registration journey, record expand, errors, etc.).
 NREUM.init = {
   performance: { capture_measures: true },
   browser_consent_mode: { enabled: false },
   privacy: { cookies_enabled: true },
   ajax: { capture_payloads: 'none' },
+  session_replay: { enabled: false },
+  session_trace: { enabled: false },
 }
 
 NREUM.loader_config = {
