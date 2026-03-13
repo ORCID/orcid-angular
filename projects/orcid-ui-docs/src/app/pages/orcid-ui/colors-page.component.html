@@ -12,67 +12,72 @@
       <span class="col-visual">Preview</span>
     </div>
     @for (token of brandColours; track token.name) {
-      <div class="token-panel-row">
-        <span class="col-token">
-          <span class="token-name">{{ token.name }}</span>
-          <span class="token-value">{{ token.value }}</span>
-        </span>
-        <span class="col-visual">
-          <span
-            class="token-swatch"
-            [style.background-color]="token.value"
-            [attr.aria-label]="token.name"
-          ></span>
-        </span>
-      </div>
+    <div class="token-panel-row">
+      <span class="col-token">
+        <span class="token-name">{{ token.name }}</span>
+        <span class="token-value">{{ token.value }}</span>
+      </span>
+      <span class="col-visual">
+        <span
+          class="token-swatch"
+          [style.background-color]="token.value"
+          [attr.aria-label]="token.name"
+        ></span>
+      </span>
+    </div>
     }
   </div>
 
   <p class="token-section-title">State colours</p>
-  <p class="token-docs-intro">Warning, notice, and info states with light, lightest, dark, and darkest variants.</p>
+  <p class="token-docs-intro">
+    Warning, notice, and info states with light, lightest, dark, and darkest
+    variants.
+  </p>
   <div class="token-panel">
     <div class="token-panel-header">
       <span class="col-token">Token</span>
       <span class="col-visual">Preview</span>
     </div>
     @for (token of stateColours; track token.name) {
-      <div class="token-panel-row">
-        <span class="col-token">
-          <span class="token-name">{{ token.name }}</span>
-          <span class="token-value">{{ token.value }}</span>
-        </span>
-        <span class="col-visual">
-          <span
-            class="token-swatch"
-            [style.background-color]="token.value"
-            [attr.aria-label]="token.name"
-          ></span>
-        </span>
-      </div>
+    <div class="token-panel-row">
+      <span class="col-token">
+        <span class="token-name">{{ token.name }}</span>
+        <span class="token-value">{{ token.value }}</span>
+      </span>
+      <span class="col-visual">
+        <span
+          class="token-swatch"
+          [style.background-color]="token.value"
+          [attr.aria-label]="token.name"
+        ></span>
+      </span>
+    </div>
     }
   </div>
 
   <p class="token-section-title">Visibility colours</p>
-  <p class="token-docs-intro">Record visibility: everyone, trusted parties, only me.</p>
+  <p class="token-docs-intro">
+    Record visibility: everyone, trusted parties, only me.
+  </p>
   <div class="token-panel">
     <div class="token-panel-header">
       <span class="col-token">Token</span>
       <span class="col-visual">Preview</span>
     </div>
     @for (token of visibilityColours; track token.name) {
-      <div class="token-panel-row">
-        <span class="col-token">
-          <span class="token-name">{{ token.name }}</span>
-          <span class="token-value">{{ token.value }}</span>
-        </span>
-        <span class="col-visual">
-          <span
-            class="token-swatch"
-            [style.background-color]="token.value"
-            [attr.aria-label]="token.name"
-          ></span>
-        </span>
-      </div>
+    <div class="token-panel-row">
+      <span class="col-token">
+        <span class="token-name">{{ token.name }}</span>
+        <span class="token-value">{{ token.value }}</span>
+      </span>
+      <span class="col-visual">
+        <span
+          class="token-swatch"
+          [style.background-color]="token.value"
+          [attr.aria-label]="token.name"
+        ></span>
+      </span>
+    </div>
     }
   </div>
 
@@ -84,23 +89,25 @@
       <span class="col-visual">Preview</span>
     </div>
     @for (token of uiBackgroundColours; track token.name) {
-      <div class="token-panel-row">
-        <span class="col-token">
-          <span class="token-name">{{ token.name }}</span>
-          <span class="token-value">{{ token.value }}</span>
-        </span>
-        <span class="col-visual">
-          <span
-            class="token-swatch"
-            [style.background-color]="token.value"
-            [attr.aria-label]="token.name"
-          ></span>
-        </span>
-      </div>
+    <div class="token-panel-row">
+      <span class="col-token">
+        <span class="token-name">{{ token.name }}</span>
+        <span class="token-value">{{ token.value }}</span>
+      </span>
+      <span class="col-visual">
+        <span
+          class="token-swatch"
+          [style.background-color]="token.value"
+          [attr.aria-label]="token.name"
+        ></span>
+      </span>
+    </div>
     }
   </div>
 
   <p class="token-docs-intro token-docs-footnote">
-    Legacy variables (e.g. <code>--orcid-color-primary</code>, <code>--orcid-surface</code>) exist for backward compatibility and are not part of the design-approved set.
+    Legacy variables (e.g. <code>--orcid-color-primary</code>,
+    <code>--orcid-surface</code>) exist for backward compatibility and are not
+    part of the design-approved set.
   </p>
 </section>
