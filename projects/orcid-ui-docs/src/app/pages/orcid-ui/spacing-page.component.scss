@@ -1,0 +1,16 @@
+.spacing-docs {
+  .token-bar {
+    display: block;
+    height: 20px;
+    min-width: 12px;
+    border-radius: 4px;
+    background: #085c77;
+    flex-shrink: 0;
+  }
+
+  .token-docs-footnote {
+    margin-top: 8px;
+    font-size: 0.75rem;
+    color: #888;
+  }
+}
