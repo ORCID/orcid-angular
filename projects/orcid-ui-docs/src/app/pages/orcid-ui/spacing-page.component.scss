@@ -1,63 +1,16 @@
 .spacing-docs {
-  .docs-token-section {
-    margin-top: var(--orcid-space-6, 32px);
-
-    h3 {
-      margin: 0 0 var(--orcid-space-2, 8px);
-      font-size: 1.125rem;
-    }
-  }
-
-  .token-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--orcid-space-3, 12px);
-  }
-
-  .token-card {
-    display: flex;
-    align-items: center;
-    gap: var(--orcid-space-4, 16px);
-    padding: var(--orcid-space-3, 12px) var(--orcid-space-4, 16px);
-    border: 1px solid var(--orcid-color-border-subtle, #ddd);
-    border-radius: 6px;
-    background: var(--orcid-surface, #fff);
-  }
-
   .token-bar {
+    display: block;
+    height: 20px;
+    min-width: 12px;
+    border-radius: 4px;
+    background: #085c77;
     flex-shrink: 0;
-    height: 24px;
-    min-width: 4px;
-    border-radius: 2px;
-    background: var(--orcid-color-brand-secondary-dark, #085c77);
   }
 
-  .token-details {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    min-width: 0;
-  }
-
-  .token-name {
-    font-size: 0.9375rem;
-    font-weight: 600;
-    font-family: ui-monospace, monospace;
-    color: var(--orcid-color-text, #222);
-  }
-
-  .token-var {
-    font-size: 0.8125rem;
-    font-family: ui-monospace, monospace;
-    color: var(--orcid-color-text-muted, #555);
-  }
-
-  .token-value {
+  .token-docs-footnote {
+    margin-top: 8px;
     font-size: 0.75rem;
-    color: var(--orcid-color-text-muted, #555);
-    font-family: ui-monospace, monospace;
+    color: #888;
   }
 }

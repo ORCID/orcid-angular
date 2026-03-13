@@ -1,99 +1,65 @@
 <section class="token-docs typography-docs">
   <h2>Typography</h2>
-  <p>
-    Typography tokens from <code>@orcid/tokens</code>. Prefer these CSS
-    variables (or equivalent Tailwind theme keys) over hardcoded font sizes,
-    weights, and line heights so the UI stays aligned with the design system.
+  <p class="token-docs-intro">
+    Font family, weights, and type scale. Use via CSS variables or Tailwind theme.
   </p>
 
-  <section class="docs-token-section">
-    <h3>Font family</h3>
-    <p class="token-section-desc">
-      Primary sans-serif stack used across Orcid UI.
-    </p>
-    <div class="token-ref">
-      <code>--orcid-font-family-sans</code>
-      <span class="token-value">'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif</span>
+  <span class="docs-official-badge">Orcid Design official</span>
+
+  <p class="token-section-title">Font family</p>
+  <div class="token-panel">
+    <div class="token-panel-header">
+      <span class="col-token">Token</span>
+      <span class="col-visual">Preview</span>
     </div>
-    <p class="specimen" style="font-family: var(--orcid-font-family-sans);">
-      The quick brown fox jumps over the lazy dog. 0123456789
-    </p>
-  </section>
-
-  <section class="docs-token-section">
-    <h3>Font weights</h3>
-    <p class="token-section-desc">
-      Weight scale for hierarchy and emphasis.
-    </p>
-    <ul class="token-scale-list">
-      @for (w of weightScale; track w.var) {
-        <li class="scale-row">
-          <code>{{ w.var }}</code>
-          <span class="scale-value">{{ w.value }}</span>
-          <span class="scale-specimen" [style.font-weight]="w.value">Sample text</span>
-        </li>
-      }
-    </ul>
-  </section>
-
-  <section class="docs-token-section">
-    <h3>Type scale (size, line-height, letter-spacing)</h3>
-    <p class="token-section-desc">
-      Semantic size tokens with specimen previews. Use the token name in CSS
-      rather than hardcoding pixel values.
-    </p>
-
-    <div class="specimen-block">
-      <div class="specimen-row">
-        <code class="specimen-label">--orcid-font-size-display-large</code>
-        <p class="specimen-text specimen-display-large">Display Large</p>
-      </div>
-      <div class="specimen-row">
-        <code class="specimen-label">--orcid-font-size-heading</code>
-        <p class="specimen-text specimen-heading">Heading</p>
-      </div>
-      <div class="specimen-row">
-        <code class="specimen-label">--orcid-font-size-heading-small</code>
-        <p class="specimen-text specimen-heading-small">Heading Small</p>
-      </div>
-      <div class="specimen-row">
-        <code class="specimen-label">--orcid-font-size-body-large</code>
-        <p class="specimen-text specimen-body-large">Body large: use for lead paragraphs or emphasis.</p>
-      </div>
-      <div class="specimen-row">
-        <code class="specimen-label">--orcid-font-size-body</code>
-        <p class="specimen-text specimen-body">Body: default text size for most content.</p>
-      </div>
-      <div class="specimen-row">
-        <code class="specimen-label">--orcid-font-size-body-small</code>
-        <p class="specimen-text specimen-body-small">Body small: captions and secondary text.</p>
-      </div>
-      <div class="specimen-row">
-        <code class="specimen-label">--orcid-font-size-small-print</code>
-        <p class="specimen-text specimen-small-print">Small print: labels and fine print.</p>
-      </div>
+    <div class="token-panel-row">
+      <span class="col-token">
+        <span class="token-name">--orcid-font-family-sans</span>
+        <span class="token-value">'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif</span>
+      </span>
+      <span class="col-visual">
+        <span class="typography-preview typography-specimen" style="font-family: var(--orcid-font-family-sans);">The quick brown fox jumps over the lazy dog. 0123456789</span>
+      </span>
     </div>
+  </div>
 
-    <h4>Full scale reference</h4>
-    <ul class="token-scale-list">
-      @for (s of sizeScale; track s.var) {
-        <li class="scale-row">
-          <code>{{ s.var }}</code>
-          <span class="scale-value">{{ s.size }}</span>
-          <span class="scale-value">lh: {{ s.lineHeight }}</span>
-          <span class="scale-value">ls: {{ s.letterSpacing }}</span>
-        </li>
-      }
-    </ul>
-  </section>
+  <p class="token-section-title">Font weights</p>
+  <div class="token-panel">
+    <div class="token-panel-header">
+      <span class="col-token">Token</span>
+      <span class="col-visual">Preview</span>
+    </div>
+    @for (w of weightScale; track w.var) {
+      <div class="token-panel-row">
+        <span class="col-token">
+          <span class="token-name">{{ w.var }}</span>
+          <span class="token-value">{{ w.value }}</span>
+        </span>
+        <span class="col-visual">
+          <span class="typography-preview typography-weight-preview" [style.font-weight]="w.value">Aa</span>
+        </span>
+      </div>
+    }
+  </div>
 
-  <section class="docs-token-section docs-note">
-    <h3>Usage</h3>
-    <p>
-      Use semantic tokens (e.g. <code>var(--orcid-font-size-body)</code>,
-      <code>var(--orcid-line-height-body)</code>) in component styles instead of
-      raw values. This keeps typography consistent and makes it easier to align
-      with Figma once design tokens are introduced there.
-    </p>
-  </section>
+  <p class="token-section-title">Type scale</p>
+  <div class="token-panel">
+    <div class="token-panel-header">
+      <span class="col-token">Token</span>
+      <span class="col-visual">Preview</span>
+    </div>
+    @for (item of typeScale; track item.sizeVar) {
+      <div class="token-panel-row">
+        <span class="col-token">
+          <span class="token-name">{{ item.sizeVar }}</span>
+          <span class="token-name">{{ item.lineHeightVar }}</span>
+          <span class="token-name">{{ item.letterSpacingVar }}</span>
+          <span class="token-value token-value--compound">{{ item.size }} / {{ item.lineHeight }} / {{ item.letterSpacing }}</span>
+        </span>
+        <span class="col-visual">
+          <span class="typography-preview" [attr.class]="'typography-preview ' + item.specimenClass + (item.isParagraph ? ' typography-preview--paragraph' : '')">{{ item.previewText }}</span>
+        </span>
+      </div>
+    }
+  </div>
 </section>

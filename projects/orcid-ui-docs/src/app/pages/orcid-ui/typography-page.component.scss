@@ -1,115 +1,73 @@
 .typography-docs {
-  .docs-token-section {
-    margin-top: var(--orcid-space-6, 32px);
-
-    h3 {
-      margin: 0 0 var(--orcid-space-2, 8px);
-      font-size: 1.125rem;
-    }
-
-    h4 {
-      margin: var(--orcid-space-5, 24px) 0 var(--orcid-space-3, 12px);
-      font-size: 1rem;
-    }
+  .token-value--compound {
+    margin-top: 4px;
   }
 
-  .token-section-desc {
-    margin: 0 0 var(--orcid-space-4, 16px);
-    color: var(--orcid-color-text-muted, #555);
-    font-size: 0.9375rem;
+  /* Equal columns for typography panels */
+  .token-panel-header,
+  .token-panel-row {
+    grid-template-columns: 1fr 1fr;
   }
 
-  .token-ref {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    margin-bottom: var(--orcid-space-4, 16px);
-
-    code {
-      font-size: 0.8125rem;
-      font-family: ui-monospace, monospace;
-    }
-
-    .token-value {
-      font-size: 0.75rem;
-      color: var(--orcid-color-text-muted, #555);
-      font-family: ui-monospace, monospace;
-    }
+  .token-panel-header .col-visual,
+  .token-panel-row .col-visual {
+    width: auto;
+    max-width: none;
   }
 
-  .specimen {
-    padding: var(--orcid-space-4, 16px);
-    background: var(--orcid-surface-subtle, #f5f5f5);
-    border-radius: 6px;
-    margin: 0;
-    font-size: var(--orcid-font-size-body, 16px);
+  .col-visual .typography-preview {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
   }
 
-  .token-scale-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--orcid-space-2, 8px);
+  .col-visual .typography-preview--paragraph {
+    white-space: normal;
+    text-overflow: clip;
+    overflow: visible;
+    max-width: 32em;
+    line-height: inherit;
   }
 
-  .scale-row {
-    display: flex;
-    align-items: center;
-    gap: var(--orcid-space-4, 16px);
-    padding: var(--orcid-space-2, 8px) var(--orcid-space-3, 12px);
-    border-radius: 4px;
-    background: var(--orcid-surface, #fff);
-    border: 1px solid var(--orcid-color-border-subtle, #ddd);
+  .typography-specimen {
     font-size: 0.875rem;
-
-    code {
-      flex: 0 0 220px;
-      font-size: 0.8125rem;
-      font-family: ui-monospace, monospace;
-    }
-
-    .scale-value {
-      color: var(--orcid-color-text-muted, #555);
-      font-family: ui-monospace, monospace;
-      font-size: 0.8125rem;
-    }
-
-    .scale-specimen {
-      margin-left: auto;
-    }
+    white-space: normal;
+    text-overflow: clip;
+    line-height: 1.4;
   }
 
-  .specimen-block {
-    display: flex;
-    flex-direction: column;
-    gap: var(--orcid-space-5, 24px);
-    margin-bottom: var(--orcid-space-5, 24px);
+  .typography-preview {
+    font-family: var(--orcid-font-family-sans);
+    color: #222;
   }
 
-  .specimen-row {
-    display: flex;
-    flex-direction: column;
-    gap: var(--orcid-space-2, 8px);
-
-    .specimen-label {
-      font-size: 0.75rem;
-      font-family: ui-monospace, monospace;
-      color: var(--orcid-color-text-muted, #555);
-    }
-
-    .specimen-text {
-      margin: 0;
-      font-family: var(--orcid-font-family-sans);
-      color: var(--orcid-color-text, #222);
-    }
+  .typography-weight-preview {
+    font-size: 1.25rem;
   }
 
   .specimen-display-large {
     font-size: var(--orcid-font-size-display-large);
     line-height: var(--orcid-line-height-display-large);
     letter-spacing: var(--orcid-letter-spacing-display-large);
+  }
+
+  .specimen-display {
+    font-size: var(--orcid-font-size-display);
+    line-height: var(--orcid-line-height-display);
+    letter-spacing: var(--orcid-letter-spacing-display);
+  }
+
+  .specimen-display-small {
+    font-size: var(--orcid-font-size-display-small);
+    line-height: var(--orcid-line-height-display-small);
+    letter-spacing: var(--orcid-letter-spacing-display-small);
+  }
+
+  .specimen-heading-large {
+    font-size: var(--orcid-font-size-heading-large);
+    line-height: var(--orcid-line-height-heading-large);
+    letter-spacing: var(--orcid-letter-spacing-heading-large);
   }
 
   .specimen-heading {
@@ -122,6 +80,12 @@
     font-size: var(--orcid-font-size-heading-small);
     line-height: var(--orcid-line-height-heading-small);
     letter-spacing: var(--orcid-letter-spacing-heading-small);
+  }
+
+  .specimen-heading-6 {
+    font-size: var(--orcid-font-size-heading-6);
+    line-height: var(--orcid-line-height-heading-6);
+    letter-spacing: var(--orcid-letter-spacing-heading-6);
   }
 
   .specimen-body-large {
@@ -146,23 +110,5 @@
     font-size: var(--orcid-font-size-small-print);
     line-height: var(--orcid-line-height-small-print);
     letter-spacing: var(--orcid-letter-spacing-small-print);
-  }
-
-  .docs-note {
-    padding: var(--orcid-space-4, 16px);
-    background: var(--orcid-surface-subtle, #f5f5f5);
-    border-radius: 6px;
-    border-left: 4px solid var(--orcid-color-brand-secondary-dark, #085c77);
-
-    p {
-      margin: 0;
-      font-size: 0.9375rem;
-      line-height: 1.5;
-    }
-
-    code {
-      font-size: 0.875em;
-      font-family: ui-monospace, monospace;
-    }
   }
 }

@@ -57,3 +57,140 @@ body {
   margin: 0;
   background: #ffffff;
 }
+
+/* Token docs pages (Colors, Spacing, Typography) – table layout in global scope so it applies to router-outlet content */
+.token-docs {
+
+  > h2 {
+    margin: 0 0 4px 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #222;
+  }
+
+  > .token-docs-intro {
+    margin: 0 0 10px 0;
+    font-size: 0.8125rem;
+    color: #666;
+    line-height: 1.45;
+  }
+
+  code {
+    font-family: ui-monospace, 'SF Mono', Monaco, monospace;
+    font-size: 0.8125rem;
+    background: rgba(0, 0, 0, 0.06);
+    padding: 1px 4px;
+    border-radius: 3px;
+  }
+
+  .token-panel {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 12px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  }
+
+  .token-panel-header,
+  .token-panel-row {
+    display: grid;
+    grid-template-columns: 1fr 72px;
+    align-items: center;
+    gap: 0;
+    padding: 0;
+  }
+
+  .token-panel-header .col-token,
+  .token-panel-header .col-visual,
+  .token-panel-row .col-token,
+  .token-panel-row .col-visual {
+    padding: 6px 10px;
+    min-width: 0;
+  }
+
+  .token-panel-header .col-visual,
+  .token-panel-row .col-visual {
+    width: 72px;
+    max-width: 72px;
+    border-left: 1px solid #e8e8e8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .token-panel-header {
+    font-size: 0.625rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #666;
+    background: #f5f5f5;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .token-panel-row {
+    font-size: 0.75rem;
+    border-bottom: 1px solid #eee;
+    min-height: 36px;
+  }
+
+  .token-panel-row:last-child {
+    border-bottom: none;
+  }
+
+  .token-panel-row .col-token .token-name {
+    font-family: ui-monospace, 'SF Mono', Monaco, monospace;
+    font-weight: 500;
+    color: #222;
+    display: block;
+  }
+
+  .token-panel-row .col-token .token-value {
+    font-family: ui-monospace, 'SF Mono', Monaco, monospace;
+    font-size: 0.6875rem;
+    color: #666;
+    display: block;
+    margin-top: 1px;
+  }
+
+  .docs-official-badge {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 8px;
+    padding: 4px 10px;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #085c77;
+    background: #e0f4fc;
+    border-radius: 4px;
+  }
+
+  .token-section-title {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #666;
+    margin: 12px 0 6px 0;
+  }
+
+  .token-section-title:first-of-type {
+    margin-top: 0;
+  }
+
+  /* Typography page: equal columns and full-width preview so specimens are visible */
+  /* Section has both token-docs and typography-docs on the same element */
+  .token-docs.typography-docs .token-panel-header,
+  .token-docs.typography-docs .token-panel-row {
+    grid-template-columns: 1fr 1fr;
+  }
+  .token-docs.typography-docs .token-panel-header .col-visual,
+  .token-docs.typography-docs .token-panel-row .col-visual {
+    width: auto;
+    max-width: none;
+    min-width: 0;
+  }
+}
