@@ -1,46 +1,71 @@
 // Source of truth for Orcid design tokens in SCSS form.
 // Keep `tokens.css` and `tokens.json` in sync with these values.
+//
+// ========== ORCID DESIGN OFFICIAL ==========
+// Prefer these for new work. Source: design system.
 
-// Colors
-$orcid-color-primary: #a6ce39;
-$orcid-color-primary-contrast: #ffffff;
-$orcid-color-surface: #ffffff;
-$orcid-color-surface-subtle: #f5f5f5;
-$orcid-color-text: #222222;
-$orcid-color-text-muted: #555555;
-$orcid-color-border-subtle: #dddddd;
-$orcid-color-border-container: #333333;
-$orcid-ui-background-lightest: #fafafa;
-$orcid-ui-background-light: #eeeeee;
-$orcid-ui-background-darkest: #212121;
-
-// Brand secondary palette (blue)
-$orcid-color-brand-secondary-darkest: #003449;
+// Brand colours (official)
+$orcid-color-brand-logo-grey: #a6a8ab;
+$orcid-color-brand-primary: #a6ce39;
+$orcid-color-brand-primary-light: #d4e7a1;
+$orcid-color-brand-primary-lightest: #f5f9e8;
+$orcid-color-brand-primary-dark: #7faa26;
+$orcid-color-brand-primary-darkest: #447405;
+$orcid-color-brand-secondary: #2e7f9f;
+$orcid-color-brand-secondary-light: #8ec2db;
 $orcid-color-brand-secondary-dark: #085c77;
-$orcid-color-brand-secondary-lightest: #d0f3ff;
-$orcid-color-brand-white: #ffffff;
+$orcid-color-brand-secondary-darkest: #003449;
+$orcid-color-brand-tertiary-lightest: #dccddb;
+$orcid-color-brand-citrus-lemon: #ffc814;
+$orcid-color-brand-citrus-lemon-lightest: #fffcf3;
 
-// Spacing (4px base scale)
-$orcid-space-1: 4px;
-$orcid-space-2: 8px;
-$orcid-space-3: 12px;
-$orcid-space-4: 16px;
-$orcid-space-5: 24px;
-$orcid-space-6: 32px;
+// State colours (official: warning, notice, info)
+$orcid-color-state-warning: #f44336;
+$orcid-color-state-warning-light: #ffcdd2;
+$orcid-color-state-warning-lightest: #ffebee;
+$orcid-color-state-warning-dark: #d32f2f;
+$orcid-color-state-warning-darkest: #b71c1c;
+$orcid-color-state-notice: #ffbf00;
+$orcid-color-state-notice-light: #ffdf72;
+$orcid-color-state-notice-lightest: #ffecab;
+$orcid-color-state-notice-dark: #ff9c00;
+$orcid-color-state-notice-darkest: #ff6400;
+$orcid-color-state-info: #2962ff;
+$orcid-color-state-info-light: #64b5f6;
+$orcid-color-state-info-lightest: #bbdefb;
+$orcid-color-state-info-dark: #1565c0;
+$orcid-color-state-info-darkest: #0d47a1;
 
-// Typography
+// Visibility colours (official: record visibility)
+$orcid-color-visibility-everyone: #00a500;
+$orcid-color-visibility-trusted: #ffbd32;
+$orcid-color-visibility-onlyme: #ab1600;
+
+// UI background (official)
+$orcid-color-ui-background: #bdbdbd;
+$orcid-color-ui-background-light: #eeeeee;
+$orcid-color-ui-background-lightest: #fafafa;
+$orcid-color-ui-background-dark: #616161;
+$orcid-color-ui-background-darkest: #212121;
+
+// Spacing (official: design scale XXS → XL)
+$orcid-space-xxs: 2px;
+$orcid-space-xs: 4px;
+$orcid-space-s: 8px;
+$orcid-space-base: 16px;
+$orcid-space-m: 24px;
+$orcid-space-l: 32px;
+$orcid-space-xl: 64px;
+
+// Typography (official)
 $orcid-font-family-sans: 'Noto Sans', -apple-system, BlinkMacSystemFont,
   'Segoe UI', sans-serif;
-
-// Font weights
 $orcid-font-weight-light: 200;
 $orcid-font-weight-regular: 300;
 $orcid-font-weight-normal: 400;
 $orcid-font-weight-medium: 500;
 $orcid-font-weight-semibold: 600;
 $orcid-font-weight-bold: 700;
-
-// Font sizes
 $orcid-font-size-display-large: 96px;
 $orcid-font-size-display: 60px;
 $orcid-font-size-display-small: 48px;
@@ -52,9 +77,7 @@ $orcid-font-size-body-large: 18px;
 $orcid-font-size-body: 16px;
 $orcid-font-size-body-small: 14px;
 $orcid-font-size-small-print: 12px;
-
-// Line heights
-$orcid-line-height-display-large: 96px;
+$orcid-line-height-display-large: 120px;
 $orcid-line-height-display: normal;
 $orcid-line-height-display-small: 48px;
 $orcid-line-height-heading-large: normal;
@@ -67,8 +90,6 @@ $orcid-line-height-body-small: 24px;
 $orcid-line-height-subtitle-1: 28px;
 $orcid-line-height-subtitle-2: 1.75;
 $orcid-line-height-small-print: 16px;
-
-// Letter spacing
 $orcid-letter-spacing-display-large: -1.5px;
 $orcid-letter-spacing-display: -0.5px;
 $orcid-letter-spacing-display-small: 0px;
@@ -86,5 +107,32 @@ $orcid-letter-spacing-small-print: 0.5px;
 $orcid-letter-spacing-button: 0px;
 $orcid-letter-spacing-title-alt: 1.3px;
 
-// Shadows
+//
+// ========== NOT OFFICIAL (legacy / provisional) ==========
+// Backward compatibility only. Not from design system.
+
+// Colors (legacy)
+$orcid-color-primary: #a6ce39;
+$orcid-color-primary-contrast: #ffffff;
+$orcid-color-surface: #ffffff;
+$orcid-color-surface-subtle: #f5f5f5;
+$orcid-color-text: #222222;
+$orcid-color-text-muted: #555555;
+$orcid-color-border-subtle: #dddddd;
+$orcid-color-border-container: #333333;
+$orcid-ui-background-lightest: #fafafa;
+$orcid-ui-background-light: #eeeeee;
+$orcid-ui-background-darkest: #212121;
+$orcid-color-brand-secondary-lightest: #d0f3ff;
+$orcid-color-brand-white: #ffffff;
+
+// Spacing (legacy numeric scale)
+$orcid-space-1: 4px;
+$orcid-space-2: 8px;
+$orcid-space-3: 12px;
+$orcid-space-4: 16px;
+$orcid-space-5: 24px;
+$orcid-space-6: 32px;
+
+// Shadows (legacy)
 $orcid-shadow-modal: 4px 4px 20px 0px rgba(0, 0, 0, 0.2);

@@ -1,0 +1,17 @@
+.colors-docs {
+  .token-swatch {
+    display: block;
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    flex-shrink: 0;
+    background-color: #e0e0e0; /* fallback if binding missing */
+  }
+
+  .token-docs-footnote {
+    margin-top: 4px;
+    font-size: 0.6875rem;
+    color: #888;
+  }
+}
