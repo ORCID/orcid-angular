@@ -42,9 +42,36 @@ export class TogglzService {
     return this.togglzSubject.asObservable()
   }
 
+  /**
+   * Resolves the effective on/off state of a feature.
+   * - If the flag is "false", returns false.
+   * - If the flag is "true" and there is no percentage (or 100), returns true.
+   * - If the flag is "true" and FEATURE_PERCENTAGE is 1–99, uses a per-session random
+   *   sample (stored in sessionStorage) so that roughly that percentage of users get true.
+   */
   getStateOf(togglzFeatureName: TogglzFlag): Observable<boolean> {
     return this.getTogglz().pipe(
-      map((data) => data.messages[togglzFeatureName] === 'true')
+      map((data) => {
+        const enabled = data.messages[togglzFeatureName] === 'true'
+        if (!enabled) return false
+
+        const messages = data.messages as Record<string, string>
+        const pctStr = messages[`${togglzFeatureName}_PERCENTAGE`] ?? '100'
+        const pct = Math.max(
+          0,
+          Math.min(100, parseInt(pctStr, 10) || 100)
+        )
+        if (pct >= 100) return true
+        if (pct <= 0) return false
+
+        const storageKey = `togglz-sample-${togglzFeatureName}`
+        const stored = sessionStorage.getItem(storageKey)
+        if (stored !== null) return stored === 'true'
+
+        const sampled = Math.random() * 100 < pct
+        sessionStorage.setItem(storageKey, String(sampled))
+        return sampled
+      })
     )
   }
 

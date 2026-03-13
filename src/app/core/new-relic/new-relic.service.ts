@@ -1,31 +1,33 @@
 import { Inject, Injectable } from '@angular/core'
+import { take } from 'rxjs/operators'
 import { WINDOW } from 'src/app/cdk/window'
+import { TogglzFlag } from 'src/app/types/config.endpoint'
+import { TogglzService } from 'src/app/core/togglz/togglz.service'
 
 @Injectable({
   providedIn: 'root',
 })
 export class NewRelicService {
-  private readonly DECISION_KEY = 'nr-sampled' // flag in sessionStorage
-  sampled: boolean = false
-  constructor(@Inject(WINDOW) private window: Window) {
-    const stored = sessionStorage.getItem(this.DECISION_KEY)
+  rumTogglz: boolean = false
 
-    if (stored === null) {
-      // first time in this tab
-      this.sampled = Math.random() < 0.05 // 5 % chance
-      sessionStorage.setItem(this.DECISION_KEY, String(this.sampled))
-    } else {
-      this.sampled = stored === 'true'
-    }
-  }
+  constructor(
+    @Inject(WINDOW) private window: Window,
+    private togglzService: TogglzService
+  ) {}
 
   public init() {
-    if (
-      (window as any)?.newrelic?.start &&
-      typeof (window as any).newrelic.start === 'function' &&
-      this.sampled
-    ) {
-      ;(window as any).newrelic.start()
-    }
+    this.togglzService
+      .getStateOf(TogglzFlag.RUM)
+      .pipe(take(1))
+      .subscribe((rum) => {
+        this.rumTogglz = rum
+        if (
+          (this.window as any)?.newrelic?.start &&
+          typeof (this.window as any).newrelic.start === 'function' &&
+          this.rumTogglz
+        ) {
+          ;(this.window as any).newrelic.start()
+        }
+      })
   }
 }

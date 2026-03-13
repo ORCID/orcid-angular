@@ -15,8 +15,6 @@ import { GoogleTagManagerService } from './core/google-tag-manager/google-tag-ma
 import { TitleService } from './core/title-service/title.service'
 import { ZendeskService } from './core/zendesk/zendesk.service'
 import { ERROR_REPORT } from './errors'
-import { TogglzService } from './core/togglz/togglz.service'
-import { TogglzFlag } from './types/config.endpoint'
 import { NewRelicService } from './core/new-relic/new-relic.service'
 
 @Component({
@@ -53,7 +51,6 @@ export class AppComponent {
     private _errorHandler: ErrorHandlerService,
     @Inject(WINDOW) private _window: Window,
     _titleService: TitleService,
-    _togglzService: TogglzService,
     _newRelicService: NewRelicService
   ) {
     _titleService.init()
@@ -86,13 +83,7 @@ export class AppComponent {
       )
       .subscribe()
 
-    _togglzService
-      .getStateOf(TogglzFlag.NEW_RELIC_BROWSER_MONITORING)
-      .subscribe((NEW_RELIC_BROWSER_MONITORING) => {
-        if (NEW_RELIC_BROWSER_MONITORING) {
-          _newRelicService.init()
-        }
-      })
+    _newRelicService.init()
 
     _router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
