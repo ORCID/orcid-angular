@@ -1,0 +1,168 @@
+.typography-docs {
+  .docs-token-section {
+    margin-top: var(--orcid-space-6, 32px);
+
+    h3 {
+      margin: 0 0 var(--orcid-space-2, 8px);
+      font-size: 1.125rem;
+    }
+
+    h4 {
+      margin: var(--orcid-space-5, 24px) 0 var(--orcid-space-3, 12px);
+      font-size: 1rem;
+    }
+  }
+
+  .token-section-desc {
+    margin: 0 0 var(--orcid-space-4, 16px);
+    color: var(--orcid-color-text-muted, #555);
+    font-size: 0.9375rem;
+  }
+
+  .token-ref {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: var(--orcid-space-4, 16px);
+
+    code {
+      font-size: 0.8125rem;
+      font-family: ui-monospace, monospace;
+    }
+
+    .token-value {
+      font-size: 0.75rem;
+      color: var(--orcid-color-text-muted, #555);
+      font-family: ui-monospace, monospace;
+    }
+  }
+
+  .specimen {
+    padding: var(--orcid-space-4, 16px);
+    background: var(--orcid-surface-subtle, #f5f5f5);
+    border-radius: 6px;
+    margin: 0;
+    font-size: var(--orcid-font-size-body, 16px);
+  }
+
+  .token-scale-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--orcid-space-2, 8px);
+  }
+
+  .scale-row {
+    display: flex;
+    align-items: center;
+    gap: var(--orcid-space-4, 16px);
+    padding: var(--orcid-space-2, 8px) var(--orcid-space-3, 12px);
+    border-radius: 4px;
+    background: var(--orcid-surface, #fff);
+    border: 1px solid var(--orcid-color-border-subtle, #ddd);
+    font-size: 0.875rem;
+
+    code {
+      flex: 0 0 220px;
+      font-size: 0.8125rem;
+      font-family: ui-monospace, monospace;
+    }
+
+    .scale-value {
+      color: var(--orcid-color-text-muted, #555);
+      font-family: ui-monospace, monospace;
+      font-size: 0.8125rem;
+    }
+
+    .scale-specimen {
+      margin-left: auto;
+    }
+  }
+
+  .specimen-block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--orcid-space-5, 24px);
+    margin-bottom: var(--orcid-space-5, 24px);
+  }
+
+  .specimen-row {
+    display: flex;
+    flex-direction: column;
+    gap: var(--orcid-space-2, 8px);
+
+    .specimen-label {
+      font-size: 0.75rem;
+      font-family: ui-monospace, monospace;
+      color: var(--orcid-color-text-muted, #555);
+    }
+
+    .specimen-text {
+      margin: 0;
+      font-family: var(--orcid-font-family-sans);
+      color: var(--orcid-color-text, #222);
+    }
+  }
+
+  .specimen-display-large {
+    font-size: var(--orcid-font-size-display-large);
+    line-height: var(--orcid-line-height-display-large);
+    letter-spacing: var(--orcid-letter-spacing-display-large);
+  }
+
+  .specimen-heading {
+    font-size: var(--orcid-font-size-heading);
+    line-height: var(--orcid-line-height-heading);
+    letter-spacing: var(--orcid-letter-spacing-heading);
+  }
+
+  .specimen-heading-small {
+    font-size: var(--orcid-font-size-heading-small);
+    line-height: var(--orcid-line-height-heading-small);
+    letter-spacing: var(--orcid-letter-spacing-heading-small);
+  }
+
+  .specimen-body-large {
+    font-size: var(--orcid-font-size-body-large);
+    line-height: var(--orcid-line-height-body-large);
+    letter-spacing: var(--orcid-letter-spacing-body-large);
+  }
+
+  .specimen-body {
+    font-size: var(--orcid-font-size-body);
+    line-height: var(--orcid-line-height-body);
+    letter-spacing: var(--orcid-letter-spacing-body);
+  }
+
+  .specimen-body-small {
+    font-size: var(--orcid-font-size-body-small);
+    line-height: var(--orcid-line-height-body-small);
+    letter-spacing: var(--orcid-letter-spacing-body-small);
+  }
+
+  .specimen-small-print {
+    font-size: var(--orcid-font-size-small-print);
+    line-height: var(--orcid-line-height-small-print);
+    letter-spacing: var(--orcid-letter-spacing-small-print);
+  }
+
+  .docs-note {
+    padding: var(--orcid-space-4, 16px);
+    background: var(--orcid-surface-subtle, #f5f5f5);
+    border-radius: 6px;
+    border-left: 4px solid var(--orcid-color-brand-secondary-dark, #085c77);
+
+    p {
+      margin: 0;
+      font-size: 0.9375rem;
+      line-height: 1.5;
+    }
+
+    code {
+      font-size: 0.875em;
+      font-family: ui-monospace, monospace;
+    }
+  }
+}

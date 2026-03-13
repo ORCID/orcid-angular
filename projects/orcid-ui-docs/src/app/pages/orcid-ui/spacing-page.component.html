@@ -1,0 +1,28 @@
+<section class="token-docs spacing-docs">
+  <h2>Spacing</h2>
+  <p>
+    Spacing tokens for margins, padding, and gaps. Use the design scale below
+    via CSS variables (e.g. <code>--orcid-space-base</code>) or Tailwind
+    theme keys for consistent layout.
+  </p>
+
+  <section class="docs-token-section">
+    <h3>Spacing scale</h3>
+    <ul class="token-list">
+      @for (token of spacingTokens; track token.var) {
+        <li class="token-card">
+          <span
+            class="token-bar"
+            [style.width.px]="token.pixels"
+            title="{{ token.value }}"
+          ></span>
+          <div class="token-details">
+            <code class="token-name">{{ token.name }}</code>
+            <span class="token-var">{{ token.var }}</span>
+            <span class="token-value">{{ token.value }}</span>
+          </div>
+        </li>
+      }
+    </ul>
+  </section>
+</section>

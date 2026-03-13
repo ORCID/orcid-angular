@@ -20,7 +20,16 @@ $orcid-color-brand-secondary-dark: #085c77;
 $orcid-color-brand-secondary-lightest: #d0f3ff;
 $orcid-color-brand-white: #ffffff;
 
-// Spacing (4px base scale)
+// Spacing (design scale: XXS → XL)
+$orcid-space-xxs: 2px;
+$orcid-space-xs: 4px;
+$orcid-space-s: 8px;
+$orcid-space-base: 16px;
+$orcid-space-m: 24px;
+$orcid-space-l: 32px;
+$orcid-space-xl: 64px;
+
+// Spacing (legacy numeric scale, 4px base)
 $orcid-space-1: 4px;
 $orcid-space-2: 8px;
 $orcid-space-3: 12px;

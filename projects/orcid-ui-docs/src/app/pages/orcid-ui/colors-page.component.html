@@ -1,0 +1,28 @@
+<section class="token-docs colors-docs">
+  <h2>Colors</h2>
+  <p>
+    The only defined colours for now are the brand palette below. Use these
+    names and values as the single source of truth; code can map them to
+    CSS variables (e.g. <code>--orcid-color-brand-primary</code>) or
+    Tailwind theme keys as needed.
+  </p>
+
+  <section class="docs-token-section">
+    <h3>Brand colours</h3>
+    <ul class="token-list">
+      @for (token of brandColours; track token.name) {
+        <li class="token-card">
+          <span
+            class="token-swatch"
+            [style.background]="token.value"
+            [style.color]="token.foreground"
+          ></span>
+          <div class="token-details">
+            <code class="token-name">{{ token.name }}</code>
+            <span class="token-value">{{ token.value }}</span>
+          </div>
+        </li>
+      }
+    </ul>
+  </section>
+</section>

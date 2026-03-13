@@ -65,6 +65,28 @@
   min-width: 0;
 }
 
+/* Shared token docs pages (Colors, Typography) */
+.docs-content .token-docs {
+  max-width: 56rem;
+
+  > h2 {
+    margin: 0 0 var(--orcid-space-3, 12px);
+    font-size: 1.5rem;
+  }
+
+  > p {
+    margin: 0 0 var(--orcid-space-5, 24px);
+    color: var(--orcid-color-text-muted, #555);
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+
+  code {
+    font-family: ui-monospace, monospace;
+    font-size: 0.875em;
+  }
+}
+
 @media (max-width: 768px) {
   .docs-shell {
     grid-template-columns: 1fr;
