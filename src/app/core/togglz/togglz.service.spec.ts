@@ -62,87 +62,105 @@ describe('TogglzService', () => {
   })
 
   describe('getStateOf (feature value: true/false or percentage 0-100)', () => {
-    function triggerConfigAndFlush(messages: Record<string, string>) {
+    /**
+     * Subscribe to getStateOf first so getTogglz() runs and the HTTP pipeline is set up,
+     * then trigger the config request and flush the response.
+     */
+    function subscribeThenTriggerConfigAndFlush(
+      messages: Record<string, string>,
+      assert: (result: boolean) => void,
+      done: () => void
+    ) {
+      service.getStateOf(TogglzFlag.RUM).subscribe((result) => {
+        assert(result)
+        done()
+      })
       service.reportUserStatusChecked(1)
-      const req = httpMock.expectOne((r) => r.url.startsWith(API_WEB) && r.url.includes('config.json'))
+      const req = httpMock.expectOne((r) =>
+        r.url.startsWith(API_WEB) && r.url.includes('config.json')
+      )
       req.flush(configWithMessages(messages))
     }
 
     it('returns true when value is "true"', (done) => {
-      triggerConfigAndFlush({ [TogglzFlag.RUM]: 'true' })
-      service.getStateOf(TogglzFlag.RUM).subscribe((result) => {
-        expect(result).toBe(true)
-        done()
-      })
+      subscribeThenTriggerConfigAndFlush(
+        { [TogglzFlag.RUM]: 'true' },
+        (result) => expect(result).toBe(true),
+        done
+      )
     })
 
     it('returns true when value is "100"', (done) => {
-      triggerConfigAndFlush({ [TogglzFlag.RUM]: '100' })
-      service.getStateOf(TogglzFlag.RUM).subscribe((result) => {
-        expect(result).toBe(true)
-        done()
-      })
+      subscribeThenTriggerConfigAndFlush(
+        { [TogglzFlag.RUM]: '100' },
+        (result) => expect(result).toBe(true),
+        done
+      )
     })
 
     it('returns false when value is "false"', (done) => {
-      triggerConfigAndFlush({ [TogglzFlag.RUM]: 'false' })
-      service.getStateOf(TogglzFlag.RUM).subscribe((result) => {
-        expect(result).toBe(false)
-        done()
-      })
+      subscribeThenTriggerConfigAndFlush(
+        { [TogglzFlag.RUM]: 'false' },
+        (result) => expect(result).toBe(false),
+        done
+      )
     })
 
     it('returns false when value is "0"', (done) => {
-      triggerConfigAndFlush({ [TogglzFlag.RUM]: '0' })
-      service.getStateOf(TogglzFlag.RUM).subscribe((result) => {
-        expect(result).toBe(false)
-        done()
-      })
+      subscribeThenTriggerConfigAndFlush(
+        { [TogglzFlag.RUM]: '0' },
+        (result) => expect(result).toBe(false),
+        done
+      )
     })
 
     it('for percentage value, returns stored decision from sessionStorage when present', (done) => {
       sessionStorageMock[`togglz-sample-${TogglzFlag.RUM}`] = 'true'
-      triggerConfigAndFlush({ [TogglzFlag.RUM]: '50' })
-      service.getStateOf(TogglzFlag.RUM).subscribe((result) => {
-        expect(result).toBe(true)
-        done()
-      })
+      subscribeThenTriggerConfigAndFlush(
+        { [TogglzFlag.RUM]: '50' },
+        (result) => expect(result).toBe(true),
+        done
+      )
     })
 
     it('for percentage value, returns false when sessionStorage has "false"', (done) => {
       sessionStorageMock[`togglz-sample-${TogglzFlag.RUM}`] = 'false'
-      triggerConfigAndFlush({ [TogglzFlag.RUM]: '50' })
-      service.getStateOf(TogglzFlag.RUM).subscribe((result) => {
-        expect(result).toBe(false)
-        done()
-      })
+      subscribeThenTriggerConfigAndFlush(
+        { [TogglzFlag.RUM]: '50' },
+        (result) => expect(result).toBe(false),
+        done
+      )
     })
 
     it('for percentage value with no stored decision, computes sample and persists to sessionStorage', (done) => {
       const randomSpy = spyOn(Math, 'random').and.returnValue(0.3)
-      triggerConfigAndFlush({ [TogglzFlag.RUM]: '50' })
-      service.getStateOf(TogglzFlag.RUM).subscribe((result) => {
-        expect(result).toBe(true)
-        expect(sessionStorage.setItem).toHaveBeenCalledWith(
-          `togglz-sample-${TogglzFlag.RUM}`,
-          'true'
-        )
-        randomSpy.calls.reset()
-        done()
-      })
+      subscribeThenTriggerConfigAndFlush(
+        { [TogglzFlag.RUM]: '50' },
+        (result) => {
+          expect(result).toBe(true)
+          expect(sessionStorage.setItem).toHaveBeenCalledWith(
+            `togglz-sample-${TogglzFlag.RUM}`,
+            'true'
+          )
+          randomSpy.calls.reset()
+        },
+        done
+      )
     })
 
     it('for percentage value when random is above threshold, returns false and persists', (done) => {
       spyOn(Math, 'random').and.returnValue(0.6)
-      triggerConfigAndFlush({ [TogglzFlag.RUM]: '50' })
-      service.getStateOf(TogglzFlag.RUM).subscribe((result) => {
-        expect(result).toBe(false)
-        expect(sessionStorage.setItem).toHaveBeenCalledWith(
-          `togglz-sample-${TogglzFlag.RUM}`,
-          'false'
-        )
-        done()
-      })
+      subscribeThenTriggerConfigAndFlush(
+        { [TogglzFlag.RUM]: '50' },
+        (result) => {
+          expect(result).toBe(false)
+          expect(sessionStorage.setItem).toHaveBeenCalledWith(
+            `togglz-sample-${TogglzFlag.RUM}`,
+            'false'
+          )
+        },
+        done
+      )
     })
   })
 })
