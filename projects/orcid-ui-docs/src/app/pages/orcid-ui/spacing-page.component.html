@@ -1,0 +1,36 @@
+<section class="token-docs spacing-docs">
+  <h2>Spacing</h2>
+  <p class="token-docs-intro">
+    Spacing scale for margins, padding, and gaps. Use via CSS variables or
+    Tailwind theme.
+  </p>
+
+  <span class="docs-official-badge">Orcid Design official</span>
+
+  <div class="token-panel">
+    <div class="token-panel-header">
+      <span class="col-token">Token</span>
+      <span class="col-visual">Preview</span>
+    </div>
+    @for (token of spacingTokens; track token.var) {
+    <div class="token-panel-row">
+      <span class="col-token">
+        <span class="token-name">{{ token.name }}</span>
+        <span class="token-value">{{ token.value }}</span>
+      </span>
+      <span class="col-visual">
+        <span
+          class="token-bar"
+          [style.width.px]="token.displayWidth"
+          [attr.aria-label]="token.value"
+        ></span>
+      </span>
+    </div>
+    }
+  </div>
+
+  <p class="token-docs-intro token-docs-footnote">
+    Legacy scale <code>--orcid-space-1</code> …
+    <code>--orcid-space-6</code> remains for backward compatibility.
+  </p>
+</section>
