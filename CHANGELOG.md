@@ -1,3 +1,15 @@
+## v2.131.7 - 2026-03-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.6...v2.131.7)
+
+- [#2746](https://github.com/ORCID/orcid-angular/pull/2746): Aromanovv/pd 4790 improve auth challenge
+
+## v2.131.6 - 2026-03-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.5...v2.131.6)
+
+- [#2767](https://github.com/ORCID/orcid-angular/pull/2767): PD-4792 add auth challenge to disable 2fa
+
 ## v2.131.5 - 2026-03-12
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.4...v2.131.5)
