@@ -42,9 +42,35 @@ export class TogglzService {
     return this.togglzSubject.asObservable()
   }
 
+  /**
+   * Resolves the effective on/off state of a feature.
+   * Value per feature is either "true"/"false" or a number 0-100 (percentage).
+   * - "false" or "0" → false.
+   * - "true" or "100" → true.
+   * - "1"-"99" → per-session random sample (sessionStorage) so that % of users get true.
+   */
   getStateOf(togglzFeatureName: TogglzFlag): Observable<boolean> {
     return this.getTogglz().pipe(
-      map((data) => data.messages[togglzFeatureName] === 'true')
+      map((data) => {
+        const raw = data.messages[togglzFeatureName]
+        if (raw === 'false' || raw === '0') return false
+        if (raw === 'true' || raw === '100') return true
+
+        const pct = Math.max(
+          0,
+          Math.min(100, parseInt(raw ?? '0', 10) || 0)
+        )
+        if (pct <= 0) return false
+        if (pct >= 100) return true
+
+        const storageKey = `togglz-sample-${togglzFeatureName}`
+        const stored = sessionStorage.getItem(storageKey)
+        if (stored !== null) return stored === 'true'
+
+        const sampled = Math.random() * 100 < pct
+        sessionStorage.setItem(storageKey, String(sampled))
+        return sampled
+      })
     )
   }
 
