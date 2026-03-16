@@ -16,7 +16,9 @@ import { TogglzFlag } from 'src/app/types/config.endpoint'
 
 const API_WEB = 'https://test.orcid.org/'
 
-function configWithMessages(messages: Record<string, string>): { messages: Record<string, string> } {
+function configWithMessages(messages: Record<string, string>): {
+  messages: Record<string, string>
+} {
   return { messages }
 }
 
@@ -29,12 +31,14 @@ describe('TogglzService', () => {
     ;(window as any).runtimeEnvironment = { API_WEB }
 
     sessionStorageMock = {}
-    spyOn(sessionStorage, 'getItem').and.callFake((key: string) =>
-      sessionStorageMock[key] ?? null
+    spyOn(sessionStorage, 'getItem').and.callFake(
+      (key: string) => sessionStorageMock[key] ?? null
     )
-    spyOn(sessionStorage, 'setItem').and.callFake((key: string, value: string) => {
-      sessionStorageMock[key] = value
-    })
+    spyOn(sessionStorage, 'setItem').and.callFake(
+      (key: string, value: string) => {
+        sessionStorageMock[key] = value
+      }
+    )
 
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, RouterTestingModule],
@@ -76,8 +80,8 @@ describe('TogglzService', () => {
         done()
       })
       service.reportUserStatusChecked(1)
-      const req = httpMock.expectOne((r) =>
-        r.url.startsWith(API_WEB) && r.url.includes('config.json')
+      const req = httpMock.expectOne(
+        (r) => r.url.startsWith(API_WEB) && r.url.includes('config.json')
       )
       req.flush(configWithMessages(messages))
     }

@@ -56,10 +56,7 @@ export class TogglzService {
         if (raw === 'false' || raw === '0') return false
         if (raw === 'true' || raw === '100') return true
 
-        const pct = Math.max(
-          0,
-          Math.min(100, parseInt(raw ?? '0', 10) || 0)
-        )
+        const pct = Math.max(0, Math.min(100, parseInt(raw ?? '0', 10) || 0))
         if (pct <= 0) return false
         if (pct >= 100) return true
 
