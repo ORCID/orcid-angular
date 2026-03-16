@@ -104,25 +104,6 @@
     [orgDisambiguated]="orgDisambiguated"
   ></app-org-identifier>
 
-  <!-- URL -->
-  <app-display-attribute *ngIf="affiliation?.url?.value">
-    <h3 class="orc-font-body-small" i18n="@@shared.url">URL</h3>
-
-    <div>
-      <a
-        class="underline"
-        *ngIf="affiliation.url?.value | isUrl"
-        rel="noopener noreferrer"
-        target="_blank"
-        href="{{ affiliation.url.value }}"
-      >
-        {{ affiliation.url.value }}
-      </a>
-      <ng-container *ngIf="!(affiliation.url?.value | isUrl)">
-        {{ affiliation.url.value }}
-      </ng-container>
-    </div>
-  </app-display-attribute>
 
   <!-- ADDED DATE-->
   <app-display-attribute>
