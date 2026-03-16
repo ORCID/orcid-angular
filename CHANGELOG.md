@@ -1,3 +1,9 @@
+## v2.131.10 - 2026-03-16
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.9...v2.131.10)
+
+- [#2775](https://github.com/ORCID/orcid-angular/pull/2775): PD-3898
+
 ## v2.131.9 - 2026-03-16
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.8...v2.131.9)
