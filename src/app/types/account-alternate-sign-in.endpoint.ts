@@ -1,3 +1,5 @@
+import { AuthChallenge } from './common.endpoint'
+
 export interface SocialAccount {
   dateCreated: number
   lastModified: number
@@ -26,7 +28,7 @@ export interface SocialAccountId {
   provideruserid: string
 }
 
-export interface SocialAccountDeleteResponse {
+export interface SocialAccountDeleteData extends AuthChallenge {
   errors?: any[]
   password?: string
   idToManage: SocialAccountId

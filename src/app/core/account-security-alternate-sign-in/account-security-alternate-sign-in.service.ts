@@ -5,7 +5,7 @@ import { catchError, map, retry, switchMap } from 'rxjs/operators'
 import { EMAIL_REGEXP } from 'src/app/constants'
 import {
   SocialAccount,
-  SocialAccountDeleteResponse,
+  SocialAccountDeleteData,
   SocialAccountId,
 } from 'src/app/types/account-alternate-sign-in.endpoint'
 import { Institutional } from 'src/app/types/institutional.endpoint'
@@ -65,11 +65,11 @@ export class AccountSecurityAlternateSignInService {
       return account.displayname
     }
   }
-  delete(idToManage: SocialAccountId): Observable<SocialAccountDeleteResponse> {
+  delete(data: SocialAccountDeleteData): Observable<SocialAccountDeleteData> {
     return this._http
-      .post<SocialAccountDeleteResponse>(
+      .post<SocialAccountDeleteData>(
         runtimeEnvironment.API_WEB + `account/revokeSocialAccount.json`,
-        { idToManage },
+        data,
         {
           headers: this.headers,
         }

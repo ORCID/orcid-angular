@@ -1,4 +1,23 @@
 <app-settings-panels-data *ngIf="accounts$ | async as accounts">
+  @if (success) {
+  <app-alert-message type="success" class="mb-4.5">
+    <div content class="mt-0.5" i18n>
+      <span>The alternate sign in account</span>&nbsp;<strong>{{
+        deletedAccount
+      }}</strong
+      >&nbsp;<span>has been unlinked</span>
+    </div>
+  </app-alert-message>
+  } @if (cancel) {
+  <app-alert-message type="warning" class="mb-4.5">
+    <div content class="mt-0.5" i18n>
+      <span>The alternate sign in account</span>&nbsp;<strong>{{
+        deletedAccount
+      }}</strong
+      >&nbsp;<span>has not been unlinked</span>
+    </div>
+  </app-alert-message>
+  }
   <p i18n="@@account.youCanSignIntoOrcid">
     You can sign into ORCID using any of the institutional accounts you have
     linked to your ORCID record.
