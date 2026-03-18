@@ -110,8 +110,10 @@ jobs:
           git diff
           git rev-parse --abbrev-ref HEAD
 
-      - name: Append version comment to index.html
-        run: 'echo "<!-- version: $version_tag_numeric -->" >> src/index.html'
+      - name: Write version.json
+        run: |
+          mkdir -p src/assets
+          echo "{\"version\":\"$version_tag_numeric\"}" > src/assets/version.json
         env:
           version_tag_numeric: ${{ format('{0}', steps.version.outputs.version_tag_numeric) }}
 
