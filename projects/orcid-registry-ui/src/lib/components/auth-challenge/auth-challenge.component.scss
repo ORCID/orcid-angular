@@ -46,3 +46,12 @@ mat-progress-bar {
   position: absolute;
   max-width: 580px;
 }
+
+@media (max-width: 600px) {
+  .container {
+    padding: 32px;
+  }
+  ::ng-deep .mat-mdc-dialog-panel {
+    min-width: 90vw !important;
+  }
+}
