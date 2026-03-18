@@ -1,3 +1,8 @@
+::ng-deep .mat-mdc-dialog-panel {
+  max-height: 94vh !important;
+  max-width: 90vw !important;
+}
+
 :host {
   font-family: var(--orcid-font-family-sans, 'Noto Sans', sans-serif);
 }
@@ -50,8 +55,5 @@ mat-progress-bar {
 @media (max-width: 600px) {
   .container {
     padding: 32px;
-  }
-  ::ng-deep .mat-mdc-dialog-panel {
-    min-width: 90vw !important;
   }
 }
