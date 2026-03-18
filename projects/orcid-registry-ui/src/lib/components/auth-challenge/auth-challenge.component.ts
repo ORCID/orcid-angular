@@ -89,6 +89,10 @@ export class AuthChallengeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.parentForm = this.data.parentForm
+    if (this.data.showPasswordField) {
+      this.parentForm.get(this.data.passwordControlName)?.setValue(null)
+      this.parentForm.get(this.data.passwordControlName)?.markAsUntouched()
+    }
     this.parentForm?.get(this.data.codeControlName)?.markAsUntouched()
     this.parentForm?.get(this.data.recoveryControlName)?.markAsUntouched()
     this.updateTwoFactorValidators()
