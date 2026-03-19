@@ -16,6 +16,7 @@ import {
   takeUntil,
   switchMap,
   tap,
+  finalize,
 } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
@@ -171,13 +172,23 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
           if (useAuthServerFlag === true) {
             this._oauth
               .authorizeOnAuthServer(this.oauthRequest, value)
+              .pipe(
+                take(1),
+                finalize(() => (this.loadingAuthorizeEndpoint = false))
+              )
               .subscribe((redirectUrl) => {
                 this.redirectUrl.next(redirectUrl)
               })
           } else {
-            this._oauth.authorize(value).subscribe((data) => {
-              this.redirectUrl.next(data.redirectUrl)
-            })
+            this._oauth
+              .authorize(value)
+              .pipe(
+                take(1),
+                finalize(() => (this.loadingAuthorizeEndpoint = false))
+              )
+              .subscribe((data) => {
+                this.redirectUrl.next(data.redirectUrl)
+              })
           }
         })
       )

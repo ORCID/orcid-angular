@@ -133,6 +133,7 @@
       i18n="@@authorize.authorize"
       (click)="authorize()"
       id="authorize-button"
+      [disabled]="loadingAuthorizeEndpoint"
     >
       Authorize access
     </button>
