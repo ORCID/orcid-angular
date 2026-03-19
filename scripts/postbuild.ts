@@ -19,8 +19,8 @@ glob.sync('./dist/*/index.html').forEach((file) => {
   data = buildInfo(data, options)
   // Replace all the `*.js` references to match updated JS file names with the language code.
   data = addLanguageCodeToHashesOnToHTMLFiles(data, options)
+  data = newRelic(data, options)
   data = addOneTrustNotAutoBlockForAppScripts(data)
-  data = newRelic(data)
 
   // data = robotsMetadata(data, options) DISABLE robots headers, as those will be handle via nginx
   save(data, options)
