@@ -3,10 +3,6 @@ section {
   gap: 1.25rem;
 }
 
-app-two-factor-auth-from {
-  margin-top: 0.5rem;
-}
-
 pre {
   background: #1e1e1e;
   color: #fff;
@@ -38,8 +34,4 @@ pre {
   mat-error {
     font-size: 12px;
   }
-}
-
-form {
-  font-size: 14px;
 }

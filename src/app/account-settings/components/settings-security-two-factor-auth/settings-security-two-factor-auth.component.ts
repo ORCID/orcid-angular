@@ -92,6 +92,8 @@ export class SettingsSecurityTwoFactorAuthComponent implements OnInit {
     if (!this.twoFactorState) {
       this._router.navigate([ApplicationRoutes.twoFactorSetup])
     } else {
+      this.cancel = false
+      this.success = false
       this.openAuthChallenge()
     }
   }

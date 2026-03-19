@@ -259,6 +259,7 @@ export interface DeactivationEndpoint {
   deactivationSuccessful?: boolean
 }
 export interface AuthChallenge {
+  success?: boolean
   invalidPassword?: boolean
   invalidTwoFactorCode?: boolean
   invalidTwoFactorRecoveryCode?: boolean

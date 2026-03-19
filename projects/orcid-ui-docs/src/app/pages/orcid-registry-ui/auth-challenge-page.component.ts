@@ -16,6 +16,8 @@ import '@angular/localize/init'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { DocumentationPageComponent } from '../../components/documentation-page/documentation-page.component'
 import { MatDialog } from '@angular/material/dialog'
+import { MatButtonModule } from '@angular/material/button'
+import { takeUntil } from 'rxjs/operators'
 
 @Component({
   selector: 'auth-challenge-page',
@@ -25,10 +27,10 @@ import { MatDialog } from '@angular/material/dialog'
     FormsModule,
     MatSelectModule,
     MatFormFieldModule,
+    MatButtonModule,
     MatInputModule,
     MatCheckboxModule,
     MatIconModule,
-    AuthChallengeComponent,
     DocumentationPageComponent,
     ReactiveFormsModule,
   ],
@@ -37,11 +39,10 @@ import { MatDialog } from '@angular/material/dialog'
 })
 export class AuthChallengePageComponent implements OnInit {
   showPasswordField = true
-  showTwoFactorField = false
-  actionDescription: String
-  memberName: String
+  showTwoFactorField = true
+  actionDescription = 'perform this action on'
+  memberName = 'Example Account'
   form: UntypedFormGroup
-  data: any
 
   constructor(private _fb: UntypedFormBuilder, private _dialog: MatDialog) {}
 
@@ -52,18 +53,38 @@ export class AuthChallengePageComponent implements OnInit {
         null,
         [Validators.minLength(10), Validators.maxLength(10)],
       ],
-      password: ['', Validators.required],
+      password: [null, Validators.required],
     })
   }
 
   openDialog() {
     const dialogRef = this._dialog.open(AuthChallengeComponent, {
       data: {
+        parentForm: this.form,
         actionDescription: this.actionDescription,
         memberName: this.memberName,
         showPasswordField: this.showPasswordField,
         showTwoFactorField: this.showTwoFactorField,
       },
+    })
+
+    // Mock the submission to show developers how the error handling works!
+    dialogRef.componentInstance.submitAttempt
+      .pipe(takeUntil(dialogRef.afterClosed()))
+      .subscribe(() => {
+        // Simulate a 1-second backend delay
+        setTimeout(() => {
+          // Fake a backend response complaining about a bad password
+          dialogRef.componentInstance.processBackendResponse({
+            success: false,
+            invalidPassword: true,
+            invalidTwoFactorCode: false,
+          })
+        }, 1000)
+      })
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.form.reset()
     })
   }
 }

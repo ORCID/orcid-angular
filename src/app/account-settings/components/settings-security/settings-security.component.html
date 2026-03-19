@@ -39,6 +39,7 @@
   [loading]="settingSecurityAlternateAccountsLoading"
 >
   <app-settings-security-alternate-sign-in
+    [twoFactorState]="twoFactorState"
     (loading)="settingSecurityAlternateAccountsLoading = $event"
     *ngIf="settingSecurityAlternateAccounts"
   ></app-settings-security-alternate-sign-in>
