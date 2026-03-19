@@ -1185,11 +1185,45 @@
         </context-group>
         <target>LR</target>
       </trans-unit>
+      <trans-unit id="5b21d9823ca7f77be95b0b05732c3d7567030c9b" datatype="html" resname="5b21d9823ca7f77be95b0b05732c3d7567030c9b">
+        <source>
+          The alternate sign in account  has been unlinked
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span>"/>
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span>"/>
+          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong>"/>
+          <x id="INTERPOLATION" equiv-text="ount&#xA;      }}"/>
+          <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&amp;n"/>
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span>"/>
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span>"/>
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
+          <context context-type="linenumber">5,10</context>
+        </context-group>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="15bb29a265d5f63b912cce5c330c997e65d02ea0" datatype="html" resname="15bb29a265d5f63b912cce5c330c997e65d02ea0">
+        <source>
+          The alternate sign in account  has not been unlinked
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span>"/>
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span>"/>
+          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong>"/>
+          <x id="INTERPOLATION" equiv-text="ount&#xA;      }}"/>
+          <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&amp;n"/>
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span>"/>
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span>"/>
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
+          <context context-type="linenumber">14,19</context>
+        </context-group>
+        <target>LR</target>
+      </trans-unit>
       <trans-unit id="account.youCanSignIntoOrcid" datatype="html" resname="account.youCanSignIntoOrcid">
         <source>You can sign into ORCID using any of the institutional accounts you have linked to your ORCID record.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
-          <context context-type="linenumber">2,5</context>
+          <context context-type="linenumber">21,24</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -1197,7 +1231,7 @@
         <source>Learn more about using alternate accounts to sign in to ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
-          <context context-type="linenumber">14,16</context>
+          <context context-type="linenumber">33,35</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -1205,11 +1239,11 @@
         <source>Account</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
-          <context context-type="linenumber">27</context>
+          <context context-type="linenumber">46</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
-          <context context-type="linenumber">49,51</context>
+          <context context-type="linenumber">68,70</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -1217,11 +1251,11 @@
         <source>Alternate sign in ID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">49</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
-          <context context-type="linenumber">62,64</context>
+          <context context-type="linenumber">81,83</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -1229,11 +1263,11 @@
         <source>Access granted</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">52</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
-          <context context-type="linenumber">69,71</context>
+          <context context-type="linenumber">88,90</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals/settings-trusted-individuals.component.html</context>
@@ -1257,7 +1291,15 @@
         <source>You haven't added any alternate sign in accounts yet.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
-          <context context-type="linenumber">92,94</context>
+          <context context-type="linenumber">111,113</context>
+        </context-group>
+        <target>LR</target>
+      </trans-unit>
+      <trans-unit id="accountSettings.security.unlinkTheAlternateSignInAccount" datatype="html" resname="accountSettings.security.unlinkTheAlternateSignInAccount">
+        <source>unlink the alternate sign in account</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.ts</context>
+          <context context-type="linenumber">45</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
