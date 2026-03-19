@@ -7,6 +7,32 @@
   font-family: var(--orcid-font-family-sans, 'Noto Sans', sans-serif);
 }
 
+h1 {
+  font-size: var(--orcid-font-size-heading-small, 24px);
+  line-height: 36px;
+}
+
+h1,
+mat-hint,
+mat-error,
+mat-label,
+button {
+  letter-spacing: 0.5px;
+}
+
+.verify-button {
+  font-size: var(--orcid-font-size-body, 16px);
+  line-height: 24px;
+  font-weight: 700;
+}
+
+p,
+a {
+  font-size: var(--orcid-font-size-body-small, 14px);
+  line-height: 21px;
+  letter-spacing: 0.25px;
+}
+
 .grow {
   flex-grow: 1;
 }
@@ -33,6 +59,7 @@ hr {
   margin-top: 32px;
   margin-bottom: 32px;
   height: 1px;
+  border: 0;
 }
 
 mat-icon {

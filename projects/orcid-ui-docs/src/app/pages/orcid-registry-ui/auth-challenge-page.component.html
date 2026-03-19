@@ -1,9 +1,9 @@
 <app-documentation-page
   title="Auth Challenge Component"
-  description="The &lt;app-auth-challenge&gt; component is a subform that validates user credentials (password) and manages 2FA/recovery code inputs."
+  description="The AuthChallengeComponent is a Dialog that validates user credentials (password) and manages 2FA/recovery code inputs before allowing sensitive actions."
 >
   <div controls>
-    <p>Customize the subform to preview different configurations:</p>
+    <p>Customize the dialog to preview different configurations:</p>
 
     <div style="display: grid; gap: 16px; margin-bottom: 24px">
       <mat-checkbox [(ngModel)]="showPasswordField">
@@ -14,160 +14,186 @@
         Display two-factor field
       </mat-checkbox>
 
-      <button
-        style="width: 100px; height: 40px; margin-left: 10px"
-        mat-button
-        (click)="form.reset()"
-      >
-        Reset form
-      </button>
+      <mat-form-field appearance="outline">
+        <mat-label>Action Description</mat-label>
+        <input matInput [(ngModel)]="actionDescription" />
+      </mat-form-field>
 
-      <button mat-flat-button type="button" (click)="openDialog()">
-        Open Authentiation Challenge
-      </button>
+      <mat-form-field appearance="outline">
+        <mat-label>Member name (trailing bold text)</mat-label>
+        <input matInput [(ngModel)]="memberName" />
+      </mat-form-field>
+
+      <div>
+        <button
+          mat-flat-button
+          color="primary"
+          type="button"
+          (click)="openDialog()"
+          style="margin-right: 10px"
+        >
+          Open Authentication Challenge
+        </button>
+
+        <button
+          style="width: 100px; height: 40px"
+          mat-button
+          (click)="form.reset()"
+        >
+          Reset form
+        </button>
+      </div>
     </div>
   </div>
 
   <div examples>
-    <form [formGroup]="form" class="w-[537px]">
-      <!--       <app-auth-challenge
-        [showAlert]="showAlert"
-        [showHelpText]="showHelpText"
-        [showPasswordField]="showPasswordField"
-        [showTwoFactorField]="showTwoFactorField"
-        codeControlName="twoFactorCode"
-        recoveryControlName="twoFactorRecoveryCode"
-        passwordControlName="password"
-      >
-      </app-auth-challenge> -->
-    </form>
+    <form [formGroup]="form" class="w-[537px]"></form>
   </div>
 
   <div usage style="font-size: 14px">
     <p>
-      This component is a sub-form that must be placed inside a parent
-      <code>[formGroup]</code>. It manages the UI switching and validation logic
-      between the password field, 2FA code, and recovery code inputs.
+      This component is a <strong>MatDialog</strong>. It manages the UI
+      switching and validation logic between the password field, 2FA code, and
+      recovery code inputs. You must pass a parent <code>[formGroup]</code> into
+      it via the dialog data so it can attach its controls.
     </p>
 
     <p>To implement this component, use the code highlighted in yellow.</p>
 
-    <h4>1. Template</h4>
-    <p>
-      Place the component inside your existing form. You can toggle the
-      visibility of the password or 2FA fields using the boolean inputs.
-    </p>
-    <pre><code class="language-html">&lt;form [formGroup]="form" (ngSubmit)="save()"&gt;
-  &lt;!-- Other inputs... --&gt;
-
-  <span style="background-color: #fff59d; color: #000;">&lt;app-auth-challenge</span>
-    <span style="background-color: #fff59d; color: #000;">[showPasswordField]="true"</span>
-    <span style="background-color: #fff59d; color: #000;">[showTwoFactorField]="true"</span>
-    <span style="background-color: #fff59d; color: #000;">passwordControlName="password"</span>
-    <span style="background-color: #fff59d; color: #000;">codeControlName="twoFactorCode"</span>
-    <span style="background-color: #fff59d; color: #000;">recoveryControlName="twoFactorRecoveryCode"</span>
-    <span style="background-color: #fff59d; color: #000;">[showAlert]="true"&gt;</span>
-  <span style="background-color: #fff59d; color: #000;">&lt;/app-auth-challenge&gt;</span>
-
-&lt;/form&gt;</code></pre>
-
-    <h4>2. Form Configuration</h4>
+    <h4>1. Form Configuration</h4>
     <p>
       Initialize the controls in your parent component. Note that
       <code>Validators.required</code> for the 2FA fields is managed
-      automatically by the child component.
+      automatically by the dialog component based on the fields being shown.
     </p>
     <pre><code class="language-typescript">this.form = this.fb.group(&#123;
-  // ... other controls
-  <span style="background-color: #fff59d; color: #000;">password: ['', Validators.required],</span>
+  // ... other controls like 'id'
+  <span style="background-color: #fff59d; color: #000;">password: [null, Validators.required],</span>
   <span style="background-color: #fff59d; color: #000;">twoFactorCode: [null, [Validators.minLength(6), Validators.maxLength(6)]],</span>
   <span style="background-color: #fff59d; color: #000;">twoFactorRecoveryCode: [null, [Validators.minLength(10), Validators.maxLength(10)]],</span>
 &#125;);</code></pre>
 
-    <h4>3. Handling Submit & Responses</h4>
+    <h4>2. Opening and Handling the Dialog</h4>
     <p>
-      Use <code>@ViewChild</code> to access the component. This allows you to
-      delegate backend error mapping (invalid password, invalid codes) and focus
-      management.
+      Use the following method to open the dialog, listen for the verify button
+      click, trigger your backend request, and handle the final success/cancel
+      state. You can copy and paste this directly into your component.
     </p>
-    <pre><code class="language-typescript"><span style="background-color: #fff59d; color: #000;">@ViewChild(AuthChallengeComponent) authChallengeComponent: AuthChallengeComponent;</span>
+    <pre><code class="language-typescript">openAuthChallenge() &#123;
+  // 1. Open the dialog
+  const dialogRef = this._matDialog.open&lt;AuthChallengeComponent&gt;(
+    AuthChallengeComponent,
+    &#123;
+      data: &#123;
+        parentForm: this.form,
+        actionDescription: 'unlink the alternate sign in account',
+        memberName: 'Google',
+        showTwoFactorField: this.twoFactorState, // true or false
+      &#125; as AuthChallengeFormData,
+    &#125;
+  );
 
-save() &#123;
-  if (this.form.valid) &#123;
-    this.service.update(this.form.value).subscribe(response => &#123;
-      // Pass backend response to child to handle errors (password/2fa) or focus
-      <span style="background-color: #fff59d; color: #000;">this.authChallengeComponent?.processBackendResponse(response);</span>
-      
-      <span style="color: #666">// Used when we don't know if the user</span>
-      <span style="color: #666">// has 2fa enabled (e.g. signin)</span>
-      <span style="background-color: #fff59d; color: #000;">if (response.twoFactorEnabled && !response.invalidPassword) &#123;</span>
-         <span style="background-color: #fff59d; color: #000;">this.twoFactorEnabled = true;</span>
-      <span style="background-color: #fff59d; color: #000;">&#125;</span>
+  // 2. Listen for the verify button click inside the dialog
+  dialogRef.componentInstance.submitAttempt
+    .pipe(
+      takeUntil(dialogRef.afterClosed()),
+      switchMap(() => this.myService.delete(this.form.value).pipe(first()))
+    )
+    .subscribe(&#123;
+      next: (response: any) => &#123;
+        if (response.success) &#123;
+          // Close the dialog and pass true for success
+          dialogRef.close(true);
+        &#125; else &#123;
+          // Pass backend response back to the dialog to display errors
+          dialogRef.componentInstance.loading = false;
+          dialogRef.componentInstance.processBackendResponse(response);
+        &#125;
+      &#125;,
     &#125;);
-  &#125;
+
+  // 3. Listen for when the dialog actually closes
+  dialogRef.afterClosed().subscribe((success) => &#123;
+    this.form.reset();
+    
+    if (success) &#123;
+      // Action completed successfully
+      this.success = true;
+    &#125; else &#123;
+      // User canceled or closed the dialog
+      this.cancel = true;
+    &#125;
+  &#125;);
 &#125;</code></pre>
-    <h4>4. Interface Definition</h4>
+
+    <h4>3. Interface Definitions</h4>
     <p>
       The endpoint payload/response object needs to extend the
-      <strong><code>AuthChallenge</code></strong> interface/pojo.
+      <strong><code>AuthChallenge</code></strong> interface. The dialog
+      configuration uses the
+      <strong><code>AuthChallengeFormData</code></strong> interface.
     </p>
     <pre><code class="language-typescript">export interface AuthChallenge &#123;
+  success?: boolean;
   invalidPassword?: boolean;
   invalidTwoFactorCode?: boolean;
   invalidTwoFactorRecoveryCode?: boolean;
+  password?: string;
   twoFactorCode?: string;
   twoFactorRecoveryCode?: string;
   twoFactorEnabled?: boolean;
+&#125;
+
+export interface AuthChallengeFormData &#123;
+  actionDescription?: string;
+  showPasswordField?: boolean;
+  showTwoFactorField?: boolean;
+  codeControlName?: string;
+  recoveryControlName?: string;
+  passwordControlName?: string;
+  parentForm?: UntypedFormGroup;
+  memberName?: string;
 &#125;</code></pre>
 
-    <h4>5. Backend Implementation</h4>
+    <h4>4. Backend Implementation</h4>
     <p>
-      The backend validation consists of two steps: verifying the password and
-      validating the 2FA status.
-    </p>
-    <p>
-      <strong>1. Password Check:</strong> First, retrieve the user profile and
-      validate the submitted password against the stored encrypted password. If
-      it does not match, set the <code>invalidPassword</code> flag and return
-      the form.
-    </p>
-    <p>
-      <strong>2. 2FA Check:</strong> If the password is valid, use the
-      <code>TwoFactorAuthenticationManager</code>. If no codes are provided, it
-      will assume a two-step flow (enabling the <code>twoFactorEnabled</code>
-      flag). Otherwise, it validates the provided codes.
+      The backend validation consists of verifying the password and the 2FA
+      status. If both pass, set <code>success</code> to true.
     </p>
 
-    <pre><code class="language-java"><span style="background-color: #fff59d; color: #000;">ProfileEntity profile = profileEntityCacheManager.retrieve(getCurrentUserOrcid());</span>
+    <pre><code class="language-java">ProfileEntity profile = profileEntityCacheManager.retrieve(getCurrentUserOrcid());
 
-<span style="color: #666">// 1. Validate Password</span>
+<span style="color: #666;">// 1. Validate Password</span>
 <span style="background-color: #fff59d; color: #000;">if (form.getPassword() == null || !encryptionManager.hashMatches(form.getPassword(), profile.getEncryptedPassword())) &#123;</span>
     <span style="background-color: #fff59d; color: #000;">form.setInvalidPassword(true);</span>
     <span style="background-color: #fff59d; color: #000;">return form;</span>
 <span style="background-color: #fff59d; color: #000;">&#125;</span>
 
-<span style="color: #666">// 2. Validate 2FA</span>
-<span style="background-color: #fff59d; color: #000;">if (!twoFactorAuthenticationManager.validateTwoFactorAuthForm(orcid, form)) &#123;</span>
+<span style="color: #666;">// 2. Validate 2FA</span>
+<span style="background-color: #fff59d; color: #000;">if (!twoFactorAuthenticationManager.validateTwoFactorAuthForm(getCurrentUserOrcid(), form)) &#123;</span>
     <span style="background-color: #fff59d; color: #000;">return form;</span>
-<span style="background-color: #fff59d; color: #000;">&#125;</span></code></pre>
+<span style="background-color: #fff59d; color: #000;">&#125;</span>
+
+<span style="color: #666;">// 3. Mark as successful</span>
+<span style="background-color: #fff59d; color: #000;">form.setSuccess(true);</span>
+return form;</code></pre>
   </div>
 
   <div inputs>
     <ul style="font-size: 14px">
       <li>
-        <code style="font-weight: bold">passwordControlName</code>:
-        <code>string</code>. The name of the form control for the password
-        input. (default <code>'passwordControl'</code>)
+        <code style="font-weight: bold">parentForm</code>:
+        <code>UntypedFormGroup</code>. <strong>(Required)</strong> The parent
+        form group containing the controls.
       </li>
       <li>
-        <code style="font-weight: bold">codeControlName</code>:
-        <code>string</code>. The name of the form control for the 6-digit
-        authentication code. (default <code>'twoFactorCodeControl'</code>)
+        <code style="font-weight: bold">actionDescription</code>:
+        <code>string</code>. The contextual text for what the user is doing
+        (e.g. <code>'unlink the alternate sign in account'</code>).
       </li>
       <li>
-        <code style="font-weight: bold">recoveryControlName</code>:
-        <code>string</code>. The name of the form control for the 10-character
-        recovery code. (default <code>'twoFactorRecoveryCodeControl'</code>)
+        <code style="font-weight: bold">memberName</code>: <code>string</code>.
+        The target of the action to be bolded (e.g. <code>'Google'</code>).
       </li>
       <li>
         <code style="font-weight: bold">showPasswordField</code>:
@@ -177,17 +203,22 @@ save() &#123;
       <li>
         <code style="font-weight: bold">showTwoFactorField</code>:
         <code>boolean</code>. Whether to display the 2FA/Recovery input fields.
-        (default <code>false</code>)
+        (default <code>true</code>)
       </li>
       <li>
-        <code style="font-weight: bold">showAlert</code>: <code>boolean</code>.
-        Whether to display the notice alert indicating 2FA is active or password
-        verification is needed. (default <code>false</code>)
+        <code style="font-weight: bold">passwordControlName</code>:
+        <code>string</code>. Custom form control name. (default
+        <code>'password'</code>)
       </li>
       <li>
-        <code style="font-weight: bold">showHelpText</code>:
-        <code>boolean</code>. Whether to display the helper links (e.g. "Use a
-        recovery code instead") below the inputs. (default <code>true</code>)
+        <code style="font-weight: bold">codeControlName</code>:
+        <code>string</code>. Custom form control name. (default
+        <code>'twoFactorCode'</code>)
+      </li>
+      <li>
+        <code style="font-weight: bold">recoveryControlName</code>:
+        <code>string</code>. Custom form control name. (default
+        <code>'twoFactorRecoveryCode'</code>)
       </li>
     </ul>
   </div>
