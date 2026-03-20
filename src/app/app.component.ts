@@ -16,6 +16,7 @@ import { TitleService } from './core/title-service/title.service'
 import { ZendeskService } from './core/zendesk/zendesk.service'
 import { ERROR_REPORT } from './errors'
 import { NewRelicService } from './core/new-relic/new-relic.service'
+import { OneTrustAccessibilityService } from './core/onetrust/onetrust-accessibility.service'
 
 @Component({
   selector: 'app-root',
@@ -51,7 +52,8 @@ export class AppComponent {
     private _errorHandler: ErrorHandlerService,
     @Inject(WINDOW) private _window: Window,
     _titleService: TitleService,
-    _newRelicService: NewRelicService
+    _newRelicService: NewRelicService,
+    _oneTrustAccessibilityService: OneTrustAccessibilityService
   ) {
     _titleService.init()
     _platformInfo
@@ -84,6 +86,7 @@ export class AppComponent {
       .subscribe()
 
     _newRelicService.init()
+    _oneTrustAccessibilityService.init()
 
     _router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
