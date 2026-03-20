@@ -1,3 +1,51 @@
+## v2.131.17 - 2026-03-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.16...v2.131.17)
+
+- [#2786](https://github.com/ORCID/orcid-angular/pull/2786): PD-0000 - Add XSRF header fallback for prod code
+
+## v2.131.16 - 2026-03-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.15...v2.131.16)
+
+- [#2783](https://github.com/ORCID/orcid-angular/pull/2783): PD-3857
+
+## v2.131.15 - 2026-03-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.14...v2.131.15)
+
+## v2.131.14 - 2026-03-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.13...v2.131.14)
+
+## v2.131.13 - 2026-03-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.12...v2.131.13)
+
+## v2.131.12 - 2026-03-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.11...v2.131.12)
+
+## v2.131.11 - 2026-03-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.10...v2.131.11)
+
+## v2.131.10 - 2026-03-16
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.9...v2.131.10)
+
+- [#2775](https://github.com/ORCID/orcid-angular/pull/2775): PD-3898
+
+## v2.131.9 - 2026-03-16
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.8...v2.131.9)
+
+- [#2774](https://github.com/ORCID/orcid-angular/pull/2774): Lmendoza/pd 5176
+
+## v2.131.8 - 2026-03-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.7...v2.131.8)
+
 ## v2.131.7 - 2026-03-12
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.6...v2.131.7)

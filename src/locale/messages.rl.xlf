@@ -1185,11 +1185,45 @@
         </context-group>
         <target>RL</target>
       </trans-unit>
+      <trans-unit id="5b21d9823ca7f77be95b0b05732c3d7567030c9b" datatype="html" resname="5b21d9823ca7f77be95b0b05732c3d7567030c9b">
+        <source>
+          The alternate sign in account  has been unlinked
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span>"/>
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span>"/>
+          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong>"/>
+          <x id="INTERPOLATION" equiv-text="ount&#xA;      }}"/>
+          <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&amp;n"/>
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span>"/>
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span>"/>
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
+          <context context-type="linenumber">5,10</context>
+        </context-group>
+        <target>RL</target>
+      </trans-unit>
+      <trans-unit id="15bb29a265d5f63b912cce5c330c997e65d02ea0" datatype="html" resname="15bb29a265d5f63b912cce5c330c997e65d02ea0">
+        <source>
+          The alternate sign in account  has not been unlinked
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span>"/>
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span>"/>
+          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong>"/>
+          <x id="INTERPOLATION" equiv-text="ount&#xA;      }}"/>
+          <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&amp;n"/>
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span>"/>
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span>"/>
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
+          <context context-type="linenumber">14,19</context>
+        </context-group>
+        <target>RL</target>
+      </trans-unit>
       <trans-unit id="account.youCanSignIntoOrcid" datatype="html" resname="account.youCanSignIntoOrcid">
         <source>You can sign into ORCID using any of the institutional accounts you have linked to your ORCID record.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
-          <context context-type="linenumber">2,5</context>
+          <context context-type="linenumber">21,24</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -1197,7 +1231,7 @@
         <source>Learn more about using alternate accounts to sign in to ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
-          <context context-type="linenumber">14,16</context>
+          <context context-type="linenumber">33,35</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -1205,11 +1239,11 @@
         <source>Account</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
-          <context context-type="linenumber">27</context>
+          <context context-type="linenumber">46</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
-          <context context-type="linenumber">49,51</context>
+          <context context-type="linenumber">68,70</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -1217,11 +1251,11 @@
         <source>Alternate sign in ID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">49</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
-          <context context-type="linenumber">62,64</context>
+          <context context-type="linenumber">81,83</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -1229,11 +1263,11 @@
         <source>Access granted</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">52</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
-          <context context-type="linenumber">69,71</context>
+          <context context-type="linenumber">88,90</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals/settings-trusted-individuals.component.html</context>
@@ -1257,7 +1291,15 @@
         <source>You haven't added any alternate sign in accounts yet.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
-          <context context-type="linenumber">92,94</context>
+          <context context-type="linenumber">111,113</context>
+        </context-group>
+        <target>RL</target>
+      </trans-unit>
+      <trans-unit id="accountSettings.security.unlinkTheAlternateSignInAccount" datatype="html" resname="accountSettings.security.unlinkTheAlternateSignInAccount">
+        <source>unlink the alternate sign in account</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.ts</context>
+          <context context-type="linenumber">45</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -2245,7 +2287,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.html</context>
-          <context context-type="linenumber">136,138</context>
+          <context context-type="linenumber">137,139</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -2321,7 +2363,7 @@
         <source>Deny access</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.html</context>
-          <context context-type="linenumber">141</context>
+          <context context-type="linenumber">142</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -2329,7 +2371,7 @@
         <source>Authorize access for</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">66</context>
+          <context context-type="linenumber">67</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -2337,7 +2379,7 @@
         <source>- ORCID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">67</context>
+          <context context-type="linenumber">68</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -2345,11 +2387,11 @@
         <source>Get your ORCID iD</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">203</context>
+          <context context-type="linenumber">214</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">207</context>
+          <context context-type="linenumber">218</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -2361,7 +2403,7 @@
         <source>Add/update information about you (country, keywords, etc.)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">211</context>
+          <context context-type="linenumber">222</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -2373,7 +2415,7 @@
         <source>Add/update your research activities (works, affiliations, etc.)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">215</context>
+          <context context-type="linenumber">226</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -2381,7 +2423,7 @@
         <source>Read your information with visibility set to Trusted parties</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">219</context>
+          <context context-type="linenumber">230</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -2389,11 +2431,11 @@
         <source>Allow this organization or application to get your 16-character ORCID iD and read information on your ORCID record you have marked as public.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">230</context>
+          <context context-type="linenumber">241</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">234</context>
+          <context context-type="linenumber">245</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -2405,7 +2447,7 @@
         <source>Allow this organization or application to add information about you (for example, your country, key words, other identifiers - but not your biography) that is stored in their system(s) to the lefthand section of your ORCID record. They will also be able to update this and any other information they have added, but will not be able to edit information added by you or by another trusted organization.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">239</context>
+          <context context-type="linenumber">250</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -2417,7 +2459,7 @@
         <source>Allow this organization or application to add information about your research activities (for example, works, affiliations) that is stored in their system(s) to your ORCID record. They will also be able to update this and any other information they have added, but will not be able to edit information added by you or by another trusted organization.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">244</context>
+          <context context-type="linenumber">255</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -2429,7 +2471,7 @@
         <source>Allow this organization or application to read any information from your record you have marked as limited access. They cannot read information you have marked as private.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authorize/components/form-authorize/form-authorize.component.ts</context>
-          <context context-type="linenumber">249</context>
+          <context context-type="linenumber">260</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -6483,6 +6525,14 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/work-featured/modals/manage-work-featured-modal/manage-work-featured-modal.component.html</context>
           <context context-type="linenumber">209</context>
+        </context-group>
+        <target>RL</target>
+      </trans-unit>
+      <trans-unit id="layout.oneTrustFocusAnnouncement" datatype="html" resname="layout.oneTrustFocusAnnouncement">
+        <source>Cookie settings dialog opened. Focus moved to this dialog. Please review the options and make a choice to continue.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/announcer/announcer.service.ts</context>
+          <context context-type="linenumber">15</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -12093,10 +12143,6 @@
           <context context-type="linenumber">48</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/record/components/affiliation/affiliation.component.html</context>
-          <context context-type="linenumber">109</context>
-        </context-group>
-        <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/funding/funding.component.html</context>
           <context context-type="linenumber">51</context>
         </context-group>
@@ -12370,7 +12416,7 @@
         <source>Added</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation/affiliation.component.html</context>
-          <context context-type="linenumber">129</context>
+          <context context-type="linenumber">109</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/funding/funding.component.html</context>
@@ -12410,7 +12456,7 @@
         <source>Last modified</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation/affiliation.component.html</context>
-          <context context-type="linenumber">137,139</context>
+          <context context-type="linenumber">117,119</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/funding/funding.component.html</context>

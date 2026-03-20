@@ -24,6 +24,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'spacing',
+    loadComponent: () =>
+      import('./pages/orcid-ui/spacing-page.component').then(
+        (m) => m.SpacingPageComponent
+      ),
+  },
+  {
     path: 'record-header',
     loadComponent: () =>
       import('./pages/orcid-ui/record-header-page.component').then(

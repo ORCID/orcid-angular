@@ -45,19 +45,6 @@ describe('XsrfFallbackInterceptor', () => {
     httpMock.verify()
   })
 
-  it('passes through without adding header when production is true', () => {
-    const env = (window as any).runtimeEnvironment
-    env.production = true
-    cookieGetSpy.and.returnValue('xsrf-token-123')
-
-    http.post(apiBase + 'works/work.json', {}).subscribe()
-
-    const req = httpMock.expectOne(apiBase + 'works/work.json')
-    expect(req.request.headers.has('x-xsrf-token')).toBe(false)
-    req.flush({})
-    env.production = false
-  })
-
   it('passes through GET requests without adding header', () => {
     http.get(apiBase + 'works/works.json').subscribe()
 

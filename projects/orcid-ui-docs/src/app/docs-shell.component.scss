@@ -65,6 +65,147 @@
   min-width: 0;
 }
 
+/* Shared token docs pages – Figma-style panel layout */
+.docs-content .token-docs {
+  max-width: 52rem;
+
+  > h2 {
+    margin: 0 0 4px 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #222;
+  }
+
+  > .token-docs-intro {
+    margin: 0 0 20px 0;
+    font-size: 0.8125rem;
+    color: #666;
+    line-height: 1.45;
+  }
+
+  code {
+    font-family: ui-monospace, 'SF Mono', Monaco, monospace;
+    font-size: 0.8125rem;
+    background: rgba(0, 0, 0, 0.06);
+    padding: 1px 4px;
+    border-radius: 3px;
+  }
+
+  /* Figma-style token panel: card with explicit table-like columns */
+  .token-panel {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  }
+
+  /* Table: Token (left) | Visual (right) */
+  .token-panel-header,
+  .token-panel-row {
+    display: grid;
+    grid-template-columns: 1fr 140px;
+    align-items: center;
+    gap: 0;
+    padding: 0;
+  }
+
+  .token-panel-header .col-token,
+  .token-panel-header .col-visual,
+  .token-panel-row .col-token,
+  .token-panel-row .col-visual {
+    padding: 12px 16px;
+    min-width: 0;
+  }
+
+  .token-panel-header .col-visual,
+  .token-panel-row .col-visual {
+    width: 140px;
+    max-width: 140px;
+    border-left: 1px solid #e8e8e8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .token-panel-header {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #666;
+    background: #f5f5f5;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .token-panel-row {
+    font-size: 0.8125rem;
+    border-bottom: 1px solid #eee;
+    min-height: 52px;
+  }
+
+  .token-panel-row:last-child {
+    border-bottom: none;
+  }
+
+  .token-panel-row .col-token .token-name {
+    font-family: ui-monospace, 'SF Mono', Monaco, monospace;
+    font-weight: 500;
+    color: #222;
+    display: block;
+  }
+
+  .token-panel-row .col-token .token-value {
+    font-family: ui-monospace, 'SF Mono', Monaco, monospace;
+    font-size: 0.75rem;
+    color: #666;
+    display: block;
+    margin-top: 2px;
+  }
+
+  .docs-official-badge {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 12px;
+    padding: 4px 10px;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #085c77;
+    background: #e0f4fc;
+    border-radius: 4px;
+  }
+
+  .docs-not-official-badge {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 12px;
+    padding: 4px 10px;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #555;
+    background: #eee;
+    border-radius: 4px;
+  }
+
+  .token-section-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #666;
+    margin: 24px 0 10px 0;
+  }
+
+  .token-section-title:first-of-type {
+    margin-top: 0;
+  }
+}
+
 @media (max-width: 768px) {
   .docs-shell {
     grid-template-columns: 1fr;

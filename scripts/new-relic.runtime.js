@@ -1,696 +1,505 @@
-const newRelicRegProdBrowser = '772335825'
-const newRelicRegQaBrowser = '772335827'
-const newRelicRegSboxrowser = '772335828'
-
-var domain =
-  window.location.hostname +
-  (window.location.port ? ':' + window.location.port : '') +
-  window.location.pathname
-
-newRelicKey = newRelicRegProdBrowser
-if (domain.includes('qa.orcid.org')) {
-  newRelicKey = '772335825'
-} else if (domain.includes('sandbox.orcid.org')) {
-  newRelicKey = newRelicRegSboxrowser
-} else if (domain.includes('localhost:4200')) {
-  newRelicKey = newRelicRegQaBrowser
-} else if (domain.includes('dev.orcid.org')) {
-  newRelicKey = newRelicRegQaBrowser
-} else if (domain.includes('localhost')) {
-  newRelicKey = newRelicRegQaBrowser
-}
-
 window.NREUM || (NREUM = {})
 NREUM.init = {
-  session_replay: {
-    enabled: true,
-    block_selector: '',
-    mask_text_selector: '*',
-    sampling_rate: 100.0, // 10% * 5% gate at new-relic.service.ts = 5% total sessions recorded.
-    error_sampling_rate: 100.0, // 100% * 5% gate at new-relic.service.ts = 5% errored sessions recorded.
-    mask_all_inputs: true,
-    collect_fonts: true,
-    inline_images: false,
-    inline_stylesheet: true,
-    mask_input_options: {},
-    autoStart: false,
-  },
-  distributed_tracing: {
-    enabled: true,
-  },
-  privacy: {
-    cookies_enabled: true,
-  },
-  ajax: { autoStart: false },
+  performance: { capture_measures: true },
+  browser_consent_mode: { enabled: false },
+  privacy: { cookies_enabled: true },
+  session_replay: { enabled: false },
+  session_trace: { enabled: false },
+  ajax: { capture_payloads: 'none', autoStart: false },
+  page_view_event: { autoStart: false },
+  page_view_timing: { autoStart: false },
   jserrors: { autoStart: false },
   metrics: { autoStart: false },
   generic_events: { autoStart: false },
-  page_view_event: { autoStart: false },
-  page_view_timing: { autoStart: false },
-  session_trace: { autoStart: false },
-  spa: { autoStart: false },
+  soft_navigations: { autoStart: false },
 }
 
 NREUM.loader_config = {
   accountID: '1106049',
   trustKey: '1106049',
-  agentID: newRelicKey,
+  agentID: '772335825',
   licenseKey: 'dde0290a31',
-  applicationID: newRelicKey,
+  applicationID: '772335825',
 }
 NREUM.info = {
   beacon: 'bam.nr-data.net',
   errorBeacon: 'bam.nr-data.net',
   licenseKey: 'dde0290a31',
-  applicationID: newRelicKey,
+  applicationID: '772335825',
   sa: 1,
-} /*! For license information please see nr-loader-spa-1.285.0.min.js.LICENSE.txt */
+} /*! For license information please see nr-loader-spa-1.310.1.min.js.LICENSE.txt */
 ;(() => {
   var e,
     t,
     r = {
-      8122: (e, t, r) => {
-        'use strict'
-        r.d(t, { a: () => i })
-        var n = r(944)
-        function i(e, t) {
-          try {
-            if (!e || 'object' != typeof e) return (0, n.R)(3)
-            if (!t || 'object' != typeof t) return (0, n.R)(4)
-            const r = Object.create(
-                Object.getPrototypeOf(t),
-                Object.getOwnPropertyDescriptors(t)
-              ),
-              o = 0 === Object.keys(r).length ? e : r
-            for (let a in o)
-              if (void 0 !== e[a])
-                try {
-                  if (null === e[a]) {
-                    r[a] = null
-                    continue
-                  }
-                  Array.isArray(e[a]) && Array.isArray(t[a])
-                    ? (r[a] = Array.from(new Set([...e[a], ...t[a]])))
-                    : 'object' == typeof e[a] && 'object' == typeof t[a]
-                    ? (r[a] = i(e[a], t[a]))
-                    : (r[a] = e[a])
-                } catch (e) {
-                  ;(0, n.R)(1, e)
-                }
-            return r
-          } catch (e) {
-            ;(0, n.R)(2, e)
-          }
-        }
-      },
-      2555: (e, t, r) => {
-        'use strict'
-        r.d(t, { Vp: () => c, fn: () => s, x1: () => u })
-        var n = r(384),
-          i = r(8122)
-        const o = {
-            beacon: n.NT.beacon,
-            errorBeacon: n.NT.errorBeacon,
-            licenseKey: void 0,
-            applicationID: void 0,
-            sa: void 0,
-            queueTime: void 0,
-            applicationTime: void 0,
-            ttGuid: void 0,
-            user: void 0,
-            account: void 0,
-            product: void 0,
-            extra: void 0,
-            jsAttributes: {},
-            userAttributes: void 0,
-            atts: void 0,
-            transactionName: void 0,
-            tNamePlain: void 0,
-          },
-          a = {}
-        function s(e) {
-          try {
-            const t = c(e)
-            return !!t.licenseKey && !!t.errorBeacon && !!t.applicationID
-          } catch (e) {
-            return !1
-          }
-        }
-        function c(e) {
-          if (!e)
-            throw new Error('All info objects require an agent identifier!')
-          if (!a[e]) throw new Error('Info for '.concat(e, ' was never set'))
-          return a[e]
-        }
-        function u(e, t) {
-          if (!e)
-            throw new Error('All info objects require an agent identifier!')
-          a[e] = (0, i.a)(t, o)
-          const r = (0, n.nY)(e)
-          r && (r.info = a[e])
-        }
-      },
-      9417: (e, t, r) => {
-        'use strict'
-        r.d(t, { D0: () => h, gD: () => g, xN: () => p })
-        var n = r(3333)
-        const i = (e) => {
-          if (!e || 'string' != typeof e) return !1
-          try {
-            document.createDocumentFragment().querySelector(e)
-          } catch {
-            return !1
-          }
-          return !0
-        }
-        var o = r(2614),
-          a = r(944),
-          s = r(384),
-          c = r(8122)
-        const u = '[data-nr-mask]',
-          d = () => {
-            const e = {
-              feature_flags: [],
-              experimental: { marks: !1, measures: !1, resources: !1 },
-              mask_selector: '*',
-              block_selector: '[data-nr-block]',
-              mask_input_options: {
-                color: !1,
-                date: !1,
-                'datetime-local': !1,
-                email: !1,
-                month: !1,
-                number: !1,
-                range: !1,
-                search: !1,
-                tel: !1,
-                text: !1,
-                time: !1,
-                url: !1,
-                week: !1,
-                textarea: !1,
-                select: !1,
-                password: !0,
-              },
-            }
-            return {
-              ajax: {
-                deny_list: void 0,
-                block_internal: !0,
-                enabled: !0,
-                autoStart: !0,
-              },
-              distributed_tracing: {
-                enabled: void 0,
-                exclude_newrelic_header: void 0,
-                cors_use_newrelic_header: void 0,
-                cors_use_tracecontext_headers: void 0,
-                allowed_origins: void 0,
-              },
-              get feature_flags() {
-                return e.feature_flags
-              },
-              set feature_flags(t) {
-                e.feature_flags = t
-              },
-              generic_events: { enabled: !0, autoStart: !0 },
-              harvest: { interval: 30 },
-              jserrors: { enabled: !0, autoStart: !0 },
-              logging: { enabled: !0, autoStart: !0 },
-              metrics: { enabled: !0, autoStart: !0 },
-              obfuscate: void 0,
-              page_action: { enabled: !0 },
-              page_view_event: { enabled: !0, autoStart: !0 },
-              page_view_timing: { enabled: !0, autoStart: !0 },
-              performance: {
-                get capture_marks() {
-                  return (
-                    e.feature_flags.includes(n.$v.MARKS) || e.experimental.marks
-                  )
-                },
-                set capture_marks(t) {
-                  e.experimental.marks = t
-                },
-                get capture_measures() {
-                  return (
-                    e.feature_flags.includes(n.$v.MEASURES) ||
-                    e.experimental.measures
-                  )
-                },
-                set capture_measures(t) {
-                  e.experimental.measures = t
-                },
-                capture_detail: !0,
-                resources: {
-                  get enabled() {
-                    return (
-                      e.feature_flags.includes(n.$v.RESOURCES) ||
-                      e.experimental.resources
-                    )
-                  },
-                  set enabled(t) {
-                    e.experimental.resources = t
-                  },
-                  asset_types: [],
-                  first_party_domains: [],
-                  ignore_newrelic: !0,
-                },
-              },
-              privacy: { cookies_enabled: !0 },
-              proxy: { assets: void 0, beacon: void 0 },
-              session: { expiresMs: o.wk, inactiveMs: o.BB },
-              session_replay: {
-                autoStart: !0,
-                enabled: !1,
-                preload: !1,
-                sampling_rate: 10,
-                error_sampling_rate: 100,
-                collect_fonts: !1,
-                inline_images: !1,
-                fix_stylesheets: !0,
-                mask_all_inputs: !0,
-                get mask_text_selector() {
-                  return e.mask_selector
-                },
-                set mask_text_selector(t) {
-                  i(t)
-                    ? (e.mask_selector = ''.concat(t, ',').concat(u))
-                    : '' === t || null === t
-                    ? (e.mask_selector = u)
-                    : (0, a.R)(5, t)
-                },
-                get block_class() {
-                  return 'nr-block'
-                },
-                get ignore_class() {
-                  return 'nr-ignore'
-                },
-                get mask_text_class() {
-                  return 'nr-mask'
-                },
-                get block_selector() {
-                  return e.block_selector
-                },
-                set block_selector(t) {
-                  i(t)
-                    ? (e.block_selector += ','.concat(t))
-                    : '' !== t && (0, a.R)(6, t)
-                },
-                get mask_input_options() {
-                  return e.mask_input_options
-                },
-                set mask_input_options(t) {
-                  t && 'object' == typeof t
-                    ? (e.mask_input_options = { ...t, password: !0 })
-                    : (0, a.R)(7, t)
-                },
-              },
-              session_trace: { enabled: !0, autoStart: !0 },
-              soft_navigations: { enabled: !0, autoStart: !0 },
-              spa: { enabled: !0, autoStart: !0 },
-              ssl: void 0,
-              user_actions: {
-                enabled: !0,
-                elementAttributes: ['id', 'className', 'tagName', 'type'],
-              },
-            }
-          },
-          l = {},
-          f = 'All configuration objects require an agent identifier!'
-        function h(e) {
-          if (!e) throw new Error(f)
-          if (!l[e])
-            throw new Error('Configuration for '.concat(e, ' was never set'))
-          return l[e]
-        }
-        function p(e, t) {
-          if (!e) throw new Error(f)
-          l[e] = (0, c.a)(t, d())
-          const r = (0, s.nY)(e)
-          r && (r.init = l[e])
-        }
-        function g(e, t) {
-          if (!e) throw new Error(f)
-          var r = h(e)
-          if (r) {
-            for (var n = t.split('.'), i = 0; i < n.length - 1; i++)
-              if ('object' != typeof (r = r[n[i]])) return
-            r = r[n[n.length - 1]]
-          }
-          return r
-        }
-      },
-      5603: (e, t, r) => {
-        'use strict'
-        r.d(t, { a: () => c, o: () => s })
-        var n = r(384),
-          i = r(8122)
-        const o = {
-            accountID: void 0,
-            trustKey: void 0,
-            agentID: void 0,
-            licenseKey: void 0,
-            applicationID: void 0,
-            xpid: void 0,
-          },
-          a = {}
-        function s(e) {
-          if (!e)
-            throw new Error(
-              'All loader-config objects require an agent identifier!'
-            )
-          if (!a[e])
-            throw new Error('LoaderConfig for '.concat(e, ' was never set'))
-          return a[e]
-        }
-        function c(e, t) {
-          if (!e)
-            throw new Error(
-              'All loader-config objects require an agent identifier!'
-            )
-          a[e] = (0, i.a)(t, o)
-          const r = (0, n.nY)(e)
-          r && (r.loader_config = a[e])
-        }
-      },
-      3371: (e, t, r) => {
-        'use strict'
-        r.d(t, { V: () => f, f: () => l })
-        var n = r(8122),
-          i = r(384),
-          o = r(6154),
-          a = r(9324)
-        let s = 0
-        const c = {
-            buildEnv: a.F3,
-            distMethod: a.Xs,
-            version: a.xv,
-            originTime: o.WN,
-          },
-          u = {
-            customTransaction: void 0,
-            disabled: !1,
-            isolatedBacklog: !1,
-            loaderType: void 0,
-            maxBytes: 3e4,
-            onerror: void 0,
-            ptid: void 0,
-            releaseIds: {},
-            appMetadata: {},
-            session: void 0,
-            denyList: void 0,
-            timeKeeper: void 0,
-            obfuscator: void 0,
-            harvester: void 0,
-          },
-          d = {}
-        function l(e) {
-          if (!e)
-            throw new Error('All runtime objects require an agent identifier!')
-          if (!d[e]) throw new Error('Runtime for '.concat(e, ' was never set'))
-          return d[e]
-        }
-        function f(e, t) {
-          if (!e)
-            throw new Error('All runtime objects require an agent identifier!')
-          ;(d[e] = { ...(0, n.a)(t, u), ...c }),
-            Object.hasOwnProperty.call(d[e], 'harvestCount') ||
-              Object.defineProperty(d[e], 'harvestCount', { get: () => ++s })
-          const r = (0, i.nY)(e)
-          r && (r.runtime = d[e])
-        }
-      },
-      9324: (e, t, r) => {
-        'use strict'
-        r.d(t, { F3: () => i, Xs: () => o, Yq: () => a, xv: () => n })
-        const n = '1.285.0',
-          i = 'PROD',
-          o = 'CDN',
-          a = '^2.0.0-alpha.18'
-      },
-      6154: (e, t, r) => {
+      384: (e, t, r) => {
         'use strict'
         r.d(t, {
-          A4: () => s,
-          OF: () => d,
-          RI: () => i,
-          WN: () => h,
-          bv: () => o,
-          gm: () => a,
-          lR: () => f,
-          m: () => u,
-          mw: () => c,
-          sb: () => l,
+          NT: () => a,
+          US: () => l,
+          Zm: () => c,
+          bQ: () => u,
+          dV: () => d,
+          pV: () => f,
         })
-        var n = r(1863)
-        const i = 'undefined' != typeof window && !!window.document,
-          o =
-            'undefined' != typeof WorkerGlobalScope &&
-            (('undefined' != typeof self &&
-              self instanceof WorkerGlobalScope &&
-              self.navigator instanceof WorkerNavigator) ||
-              ('undefined' != typeof globalThis &&
-                globalThis instanceof WorkerGlobalScope &&
-                globalThis.navigator instanceof WorkerNavigator)),
-          a = i
-            ? window
-            : 'undefined' != typeof WorkerGlobalScope &&
-              (('undefined' != typeof self &&
-                self instanceof WorkerGlobalScope &&
-                self) ||
-                ('undefined' != typeof globalThis &&
-                  globalThis instanceof WorkerGlobalScope &&
-                  globalThis)),
-          s = 'complete' === a?.document?.readyState,
-          c = Boolean('hidden' === a?.document?.visibilityState),
-          u = '' + a?.location,
-          d = /iPad|iPhone|iPod/.test(a.navigator?.userAgent),
-          l = d && 'undefined' == typeof SharedWorker,
-          f = (() => {
-            const e = a.navigator?.userAgent?.match(/Firefox[/\s](\d+\.\d+)/)
-            return Array.isArray(e) && e.length >= 2 ? +e[1] : 0
-          })(),
-          h = Date.now() - (0, n.t)()
-      },
-      7295: (e, t, r) => {
-        'use strict'
-        r.d(t, { Xv: () => a, gX: () => i, iW: () => o })
-        var n = []
-        function i(e) {
-          if (!e || o(e)) return !1
-          if (0 === n.length) return !0
-          for (var t = 0; t < n.length; t++) {
-            var r = n[t]
-            if ('*' === r.hostname) return !1
-            if (s(r.hostname, e.hostname) && c(r.pathname, e.pathname))
-              return !1
-          }
-          return !0
-        }
-        function o(e) {
-          return void 0 === e.hostname
-        }
-        function a(e) {
-          if (((n = []), e && e.length))
-            for (var t = 0; t < e.length; t++) {
-              let r = e[t]
-              if (!r) continue
-              0 === r.indexOf('http://')
-                ? (r = r.substring(7))
-                : 0 === r.indexOf('https://') && (r = r.substring(8))
-              const i = r.indexOf('/')
-              let o, a
-              i > 0
-                ? ((o = r.substring(0, i)), (a = r.substring(i)))
-                : ((o = r), (a = ''))
-              let [s] = o.split(':')
-              n.push({ hostname: s, pathname: a })
-            }
-        }
-        function s(e, t) {
-          return !(e.length > t.length) && t.indexOf(e) === t.length - e.length
-        }
-        function c(e, t) {
+        var n = r(6154),
+          i = r(1863),
+          s = r(944),
+          o = r(1910)
+        const a = { beacon: 'bam.nr-data.net', errorBeacon: 'bam.nr-data.net' }
+        function c() {
           return (
-            0 === e.indexOf('/') && (e = e.substring(1)),
-            0 === t.indexOf('/') && (t = t.substring(1)),
-            '' === e || e === t
+            n.gm.NREUM || (n.gm.NREUM = {}),
+            void 0 === n.gm.newrelic && (n.gm.newrelic = n.gm.NREUM),
+            n.gm.NREUM
+          )
+        }
+        function d() {
+          let e = c()
+          return (
+            e.o ||
+              ((e.o = {
+                ST: n.gm.setTimeout,
+                SI: n.gm.setImmediate || n.gm.setInterval,
+                CT: n.gm.clearTimeout,
+                XHR: n.gm.XMLHttpRequest,
+                REQ: n.gm.Request,
+                EV: n.gm.Event,
+                PR: n.gm.Promise,
+                MO: n.gm.MutationObserver,
+                FETCH: n.gm.fetch,
+                WS: n.gm.WebSocket,
+              }),
+              (0, o.i)(...Object.values(e.o))),
+            e
+          )
+        }
+        function u(e, t) {
+          let r = c()
+          ;(r.initializedAgents ??= {}),
+            (t.initializedAt = { ms: (0, i.t)(), date: new Date() }),
+            (r.initializedAgents[e] = t),
+            2 === Object.keys(r.initializedAgents).length && (0, s.R)(69)
+        }
+        function l(e, t) {
+          c()[e] = t
+        }
+        function f() {
+          return (
+            (function () {
+              let e = c()
+              const t = e.info || {}
+              e.info = { beacon: a.beacon, errorBeacon: a.errorBeacon, ...t }
+            })(),
+            (function () {
+              let e = c()
+              const t = e.init || {}
+              e.init = { ...t }
+            })(),
+            d(),
+            (function () {
+              let e = c()
+              const t = e.loader_config || {}
+              e.loader_config = { ...t }
+            })(),
+            c()
           )
         }
       },
-      3241: (e, t, r) => {
+      782: (e, t, r) => {
         'use strict'
-        r.d(t, { W: () => o })
-        var n = r(6154)
-        const i = 'newrelic'
-        function o(e = {}) {
-          try {
-            n.gm.dispatchEvent(new CustomEvent(i, { detail: e }))
-          } catch (e) {}
+        r.d(t, { T: () => n })
+        const n = r(860).K7.pageViewTiming
+      },
+      860: (e, t, r) => {
+        'use strict'
+        r.d(t, {
+          $J: () => u,
+          K7: () => c,
+          P3: () => d,
+          XX: () => i,
+          Yy: () => a,
+          df: () => s,
+          qY: () => n,
+          v4: () => o,
+        })
+        const n = 'events',
+          i = 'jserrors',
+          s = 'browser/blobs',
+          o = 'rum',
+          a = 'browser/logs',
+          c = {
+            ajax: 'ajax',
+            genericEvents: 'generic_events',
+            jserrors: i,
+            logging: 'logging',
+            metrics: 'metrics',
+            pageAction: 'page_action',
+            pageViewEvent: 'page_view_event',
+            pageViewTiming: 'page_view_timing',
+            sessionReplay: 'session_replay',
+            sessionTrace: 'session_trace',
+            softNav: 'soft_navigations',
+          },
+          d = {
+            [c.pageViewEvent]: 1,
+            [c.pageViewTiming]: 2,
+            [c.metrics]: 3,
+            [c.jserrors]: 4,
+            [c.softNav]: 5,
+            [c.ajax]: 6,
+            [c.sessionTrace]: 7,
+            [c.sessionReplay]: 8,
+            [c.logging]: 9,
+            [c.genericEvents]: 10,
+          },
+          u = {
+            [c.pageViewEvent]: o,
+            [c.pageViewTiming]: n,
+            [c.ajax]: n,
+            [c.softNav]: n,
+            [c.metrics]: i,
+            [c.jserrors]: i,
+            [c.sessionTrace]: s,
+            [c.sessionReplay]: s,
+            [c.logging]: a,
+            [c.genericEvents]: 'ins',
+          }
+      },
+      944: (e, t, r) => {
+        'use strict'
+        r.d(t, { R: () => i })
+        var n = r(3241)
+        function i(e, t) {
+          'function' == typeof console.debug &&
+            (console.debug(
+              'New Relic Warning: https://github.com/newrelic/newrelic-browser-agent/blob/main/docs/warning-codes.md#'.concat(
+                e
+              ),
+              t
+            ),
+            (0, n.W)({
+              agentIdentifier: null,
+              drained: null,
+              type: 'data',
+              name: 'warn',
+              feature: 'warn',
+              data: { code: e, secondary: t },
+            }))
+        }
+      },
+      993: (e, t, r) => {
+        'use strict'
+        r.d(t, { A$: () => s, ET: () => o, TZ: () => a, p_: () => i })
+        var n = r(860)
+        const i = {
+            ERROR: 'ERROR',
+            WARN: 'WARN',
+            INFO: 'INFO',
+            DEBUG: 'DEBUG',
+            TRACE: 'TRACE',
+          },
+          s = { OFF: 0, ERROR: 1, WARN: 2, INFO: 3, DEBUG: 4, TRACE: 5 },
+          o = 'log',
+          a = n.K7.logging
+      },
+      1541: (e, t, r) => {
+        'use strict'
+        r.d(t, { U: () => i, f: () => n })
+        const n = { MFE: 'MFE', BA: 'BA' }
+        function i(e, t) {
+          if (2 !== t?.harvestEndpointVersion) return {}
+          const r = t.agentRef.runtime.appMetadata.agents[0].entityGuid
+          return e
+            ? {
+                'source.id': e.id,
+                'source.name': e.name,
+                'source.type': e.type,
+                'parent.id': e.parent?.id || r,
+                'parent.type': e.parent?.type || n.BA,
+              }
+            : { 'entity.guid': r, appId: t.agentRef.info.applicationID }
         }
       },
       1687: (e, t, r) => {
         'use strict'
-        r.d(t, { Ak: () => c, Ze: () => l, x3: () => u })
-        var n = r(7836),
-          i = r(3606),
+        r.d(t, { Ak: () => d, Ze: () => f, x3: () => u })
+        var n = r(3241),
+          i = r(7836),
+          s = r(3606),
           o = r(860),
           a = r(2646)
-        const s = {}
-        function c(e, t) {
+        const c = {}
+        function d(e, t) {
           const r = { staged: !1, priority: o.P3[t] || 0 }
-          d(e), s[e].get(t) || s[e].set(t, r)
+          l(e), c[e].get(t) || c[e].set(t, r)
         }
         function u(e, t) {
           e &&
-            s[e] &&
-            (s[e].get(t) && s[e].delete(t), h(e, t, !1), s[e].size && f(e))
+            c[e] &&
+            (c[e].get(t) && c[e].delete(t), p(e, t, !1), c[e].size && h(e))
         }
-        function d(e) {
+        function l(e) {
           if (!e) throw new Error('agentIdentifier required')
-          s[e] || (s[e] = new Map())
+          c[e] || (c[e] = new Map())
         }
-        function l(e = '', t = 'feature', r = !1) {
-          if ((d(e), !e || !s[e].get(t) || r)) return h(e, t)
-          ;(s[e].get(t).staged = !0), f(e)
+        function f(e = '', t = 'feature', r = !1) {
+          if ((l(e), !e || !c[e].get(t) || r)) return p(e, t)
+          ;(c[e].get(t).staged = !0), h(e)
         }
-        function f(e) {
-          const t = Array.from(s[e])
+        function h(e) {
+          const t = Array.from(c[e])
           t.every(([e, t]) => t.staged) &&
             (t.sort((e, t) => e[1].priority - t[1].priority),
             t.forEach(([t]) => {
-              s[e].delete(t), h(e, t)
+              c[e].delete(t), p(e, t)
             }))
         }
-        function h(e, t, r = !0) {
-          const o = e ? n.ee.get(e) : n.ee,
-            s = i.i.handlers
-          if (!o.aborted && o.backlog && s) {
-            if (r) {
+        function p(e, t, r = !0) {
+          const o = e ? i.ee.get(e) : i.ee,
+            c = s.i.handlers
+          if (!o.aborted && o.backlog && c) {
+            if (
+              ((0, n.W)({
+                agentIdentifier: e,
+                type: 'lifecycle',
+                name: 'drain',
+                feature: t,
+              }),
+              r)
+            ) {
               const e = o.backlog[t],
-                r = s[t]
+                r = c[t]
               if (r) {
-                for (let t = 0; e && t < e.length; ++t) p(e[t], r)
+                for (let t = 0; e && t < e.length; ++t) g(e[t], r)
                 Object.entries(r).forEach(([e, t]) => {
                   Object.values(t || {}).forEach((t) => {
                     t[0]?.on &&
-                      t[0]?.context() instanceof a.y &&
+                      t[0].context() instanceof a.y &&
+                      !t[0].listeners(e).includes(t[1]) &&
                       t[0].on(e, t[1])
                   })
                 })
               }
             }
-            o.isolatedBacklog || delete s[t],
+            o.isolatedBacklog || delete c[t],
               (o.backlog[t] = null),
               o.emit('drain-' + t, [])
           }
         }
-        function p(e, t) {
+        function g(e, t) {
           var r = e[1]
           Object.values(t[r] || {}).forEach((t) => {
             var r = e[0]
             if (t[0] === r) {
               var n = t[1],
                 i = e[3],
-                o = e[2]
-              n.apply(i, o)
+                s = e[2]
+              n.apply(i, s)
             }
           })
         }
       },
-      7836: (e, t, r) => {
+      1738: (e, t, r) => {
         'use strict'
-        r.d(t, { P: () => c, ee: () => u })
-        var n = r(384),
-          i = r(8990),
-          o = r(3371),
-          a = r(2646),
-          s = r(5607)
-        const c = 'nr@context:'.concat(s.W),
-          u = (function e(t, r) {
-            var n = {},
-              s = {},
-              d = {},
-              l = !1
-            try {
-              l = 16 === r.length && (0, o.f)(r).isolatedBacklog
-            } catch (e) {}
-            var f = {
-              on: p,
-              addEventListener: p,
-              removeEventListener: function (e, t) {
-                var r = n[e]
-                if (!r) return
-                for (var i = 0; i < r.length; i++) r[i] === t && r.splice(i, 1)
-              },
-              emit: function (e, r, n, i, o) {
-                !1 !== o && (o = !0)
-                if (u.aborted && !i) return
-                t && o && t.emit(e, r, n)
-                for (var a = h(n), c = g(e), d = c.length, l = 0; l < d; l++)
-                  c[l].apply(a, r)
-                var p = v()[s[e]]
-                p && p.push([f, e, r, a])
-                return a
-              },
-              get: m,
-              listeners: g,
-              context: h,
-              buffer: function (e, t) {
-                const r = v()
-                if (((t = t || 'feature'), f.aborted)) return
-                Object.entries(e || {}).forEach(([e, n]) => {
-                  ;(s[n] = t), t in r || (r[t] = [])
+        r.d(t, { U: () => h, Y: () => f })
+        var n = r(3241),
+          i = r(9908),
+          s = r(1863),
+          o = r(944),
+          a = r(5701),
+          c = r(3969),
+          d = r(8362),
+          u = r(860),
+          l = r(4261)
+        function f(e, t, r, s) {
+          const f = s || r
+          !f ||
+            (f[e] && f[e] !== d.d.prototype[e]) ||
+            (f[e] = function () {
+              ;(0, i.p)(
+                c.xV,
+                ['API/' + e + '/called'],
+                void 0,
+                u.K7.metrics,
+                r.ee
+              ),
+                (0, n.W)({
+                  agentIdentifier: r.agentIdentifier,
+                  drained: !!a.B?.[r.agentIdentifier],
+                  type: 'data',
+                  name: 'api',
+                  feature: l.Pl + e,
+                  data: {},
                 })
-              },
-              abort: function () {
-                ;(f._aborted = !0),
-                  Object.keys(f.backlog).forEach((e) => {
-                    delete f.backlog[e]
-                  })
-              },
-              isBuffering: function (e) {
-                return !!v()[s[e]]
-              },
-              debugId: r,
-              backlog: l
-                ? {}
-                : t && 'object' == typeof t.backlog
-                ? t.backlog
-                : {},
-              isolatedBacklog: l,
-            }
-            return (
-              Object.defineProperty(f, 'aborted', {
-                get: () => {
-                  let e = f._aborted || !1
-                  return e || (t && (e = t.aborted), e)
-                },
-              }),
-              f
-            )
-            function h(e) {
-              return e && e instanceof a.y
-                ? e
-                : e
-                ? (0, i.I)(e, c, () => new a.y(c))
-                : new a.y(c)
-            }
-            function p(e, t) {
-              n[e] = g(e).concat(t)
-            }
-            function g(e) {
-              return n[e] || []
-            }
-            function m(t) {
-              return (d[t] = d[t] || e(f, t))
-            }
-            function v() {
-              return f.backlog
-            }
-          })(void 0, 'globalEE'),
-          d = (0, n.Zm)()
-        d.ee || (d.ee = u)
+              try {
+                return t.apply(this, arguments)
+              } catch (e) {
+                ;(0, o.R)(23, e)
+              }
+            })
+        }
+        function h(e, t, r, n, o) {
+          const a = e.info
+          null === r ? delete a.jsAttributes[t] : (a.jsAttributes[t] = r),
+            (o || null === r) &&
+              (0, i.p)(l.Pl + n, [(0, s.t)(), t, r], void 0, 'session', e.ee)
+        }
+      },
+      1741: (e, t, r) => {
+        'use strict'
+        r.d(t, { W: () => s })
+        var n = r(944),
+          i = r(4261)
+        class s {
+          #e(e, ...t) {
+            if (this[e] !== s.prototype[e]) return this[e](...t)
+            ;(0, n.R)(35, e)
+          }
+          addPageAction(e, t) {
+            return this.#e(i.hG, e, t)
+          }
+          register(e) {
+            return this.#e(i.eY, e)
+          }
+          recordCustomEvent(e, t) {
+            return this.#e(i.fF, e, t)
+          }
+          setPageViewName(e, t) {
+            return this.#e(i.Fw, e, t)
+          }
+          setCustomAttribute(e, t, r) {
+            return this.#e(i.cD, e, t, r)
+          }
+          noticeError(e, t) {
+            return this.#e(i.o5, e, t)
+          }
+          setUserId(e, t = !1) {
+            return this.#e(i.Dl, e, t)
+          }
+          setApplicationVersion(e) {
+            return this.#e(i.nb, e)
+          }
+          setErrorHandler(e) {
+            return this.#e(i.bt, e)
+          }
+          addRelease(e, t) {
+            return this.#e(i.k6, e, t)
+          }
+          log(e, t) {
+            return this.#e(i.$9, e, t)
+          }
+          start() {
+            return this.#e(i.d3)
+          }
+          finished(e) {
+            return this.#e(i.BL, e)
+          }
+          recordReplay() {
+            return this.#e(i.CH)
+          }
+          pauseReplay() {
+            return this.#e(i.Tb)
+          }
+          addToTrace(e) {
+            return this.#e(i.U2, e)
+          }
+          setCurrentRouteName(e) {
+            return this.#e(i.PA, e)
+          }
+          interaction(e) {
+            return this.#e(i.dT, e)
+          }
+          wrapLogger(e, t, r) {
+            return this.#e(i.Wb, e, t, r)
+          }
+          measure(e, t) {
+            return this.#e(i.V1, e, t)
+          }
+          consent(e) {
+            return this.#e(i.Pv, e)
+          }
+        }
+      },
+      1863: (e, t, r) => {
+        'use strict'
+        function n() {
+          return Math.floor(performance.now())
+        }
+        r.d(t, { t: () => n })
+      },
+      1910: (e, t, r) => {
+        'use strict'
+        r.d(t, { i: () => s })
+        var n = r(944)
+        const i = new Map()
+        function s(...e) {
+          return e.every((e) => {
+            if (i.has(e)) return i.get(e)
+            const t = 'function' == typeof e ? e.toString() : '',
+              r = t.includes('[native code]'),
+              s = t.includes('nrWrapper')
+            return r || s || (0, n.R)(64, e?.name || t), i.set(e, r), r
+          })
+        }
+      },
+      2555: (e, t, r) => {
+        'use strict'
+        r.d(t, { D: () => a, f: () => o })
+        var n = r(384),
+          i = r(8122)
+        const s = {
+          beacon: n.NT.beacon,
+          errorBeacon: n.NT.errorBeacon,
+          licenseKey: void 0,
+          applicationID: void 0,
+          sa: void 0,
+          queueTime: void 0,
+          applicationTime: void 0,
+          ttGuid: void 0,
+          user: void 0,
+          account: void 0,
+          product: void 0,
+          extra: void 0,
+          jsAttributes: {},
+          userAttributes: void 0,
+          atts: void 0,
+          transactionName: void 0,
+          tNamePlain: void 0,
+        }
+        function o(e) {
+          try {
+            return !!e.licenseKey && !!e.errorBeacon && !!e.applicationID
+          } catch (e) {
+            return !1
+          }
+        }
+        const a = (e) => (0, i.a)(e, s)
+      },
+      2614: (e, t, r) => {
+        'use strict'
+        r.d(t, {
+          BB: () => o,
+          H3: () => n,
+          g: () => d,
+          iL: () => c,
+          tS: () => a,
+          uh: () => i,
+          wk: () => s,
+        })
+        const n = 'NRBA',
+          i = 'SESSION',
+          s = 144e5,
+          o = 18e5,
+          a = {
+            STARTED: 'session-started',
+            PAUSE: 'session-pause',
+            RESET: 'session-reset',
+            RESUME: 'session-resume',
+            UPDATE: 'session-update',
+          },
+          c = { SAME_TAB: 'same-tab', CROSS_TAB: 'cross-tab' },
+          d = { OFF: 0, FULL: 1, ERROR: 2 }
       },
       2646: (e, t, r) => {
         'use strict'
@@ -701,29 +510,256 @@ NREUM.info = {
           }
         }
       },
-      9908: (e, t, r) => {
+      2843: (e, t, r) => {
         'use strict'
-        r.d(t, { d: () => n, p: () => i })
-        var n = r(7836).ee.get('handle')
-        function i(e, t, r, i, o) {
-          o
-            ? (o.buffer([e], i), o.emit(e, t, r))
-            : (n.buffer([e], i), n.emit(e, t, r))
+        r.d(t, { G: () => s, u: () => i })
+        var n = r(3878)
+        function i(e, t = !1, r, i) {
+          ;(0, n.DD)(
+            'visibilitychange',
+            function () {
+              if (t) return void ('hidden' === document.visibilityState && e())
+              e(document.visibilityState)
+            },
+            r,
+            i
+          )
+        }
+        function s(e, t, r) {
+          ;(0, n.sp)('pagehide', e, t, r)
+        }
+      },
+      3241: (e, t, r) => {
+        'use strict'
+        r.d(t, { W: () => s })
+        var n = r(6154)
+        const i = 'newrelic'
+        function s(e = {}) {
+          try {
+            n.gm.dispatchEvent(new CustomEvent(i, { detail: e }))
+          } catch (e) {}
+        }
+      },
+      3304: (e, t, r) => {
+        'use strict'
+        r.d(t, { A: () => s })
+        var n = r(7836)
+        const i = () => {
+          const e = new WeakSet()
+          return (t, r) => {
+            if ('object' == typeof r && null !== r) {
+              if (e.has(r)) return
+              e.add(r)
+            }
+            return r
+          }
+        }
+        function s(e) {
+          try {
+            return JSON.stringify(e, i()) ?? ''
+          } catch (e) {
+            try {
+              n.ee.emit('internal-error', [e])
+            } catch (e) {}
+            return ''
+          }
+        }
+      },
+      3333: (e, t, r) => {
+        'use strict'
+        r.d(t, {
+          $v: () => u,
+          TZ: () => n,
+          Xh: () => c,
+          Zp: () => i,
+          kd: () => d,
+          mq: () => a,
+          nf: () => o,
+          qN: () => s,
+        })
+        const n = r(860).K7.genericEvents,
+          i = ['auxclick', 'click', 'copy', 'keydown', 'paste', 'scrollend'],
+          s = ['focus', 'blur'],
+          o = 4,
+          a = 1e3,
+          c = 2e3,
+          d = ['PageAction', 'UserAction', 'BrowserPerformance'],
+          u = { RESOURCES: 'experimental.resources', REGISTER: 'register' }
+      },
+      3434: (e, t, r) => {
+        'use strict'
+        r.d(t, { Jt: () => s, YM: () => d })
+        var n = r(7836),
+          i = r(5607)
+        const s = 'nr@original:'.concat(i.W),
+          o = 50
+        var a = Object.prototype.hasOwnProperty,
+          c = !1
+        function d(e, t) {
+          return (
+            e || (e = n.ee),
+            (r.inPlace = function (e, t, n, i, s) {
+              n || (n = '')
+              const o = '-' === n.charAt(0)
+              for (let a = 0; a < t.length; a++) {
+                const c = t[a],
+                  d = e[c]
+                l(d) || (e[c] = r(d, o ? c + n : n, i, c, s))
+              }
+            }),
+            (r.flag = s),
+            r
+          )
+          function r(t, r, n, c, d) {
+            return l(t)
+              ? t
+              : (r || (r = ''),
+                (nrWrapper[s] = t),
+                (function (e, t, r) {
+                  if (Object.defineProperty && Object.keys)
+                    try {
+                      return (
+                        Object.keys(e).forEach(function (r) {
+                          Object.defineProperty(t, r, {
+                            get: function () {
+                              return e[r]
+                            },
+                            set: function (t) {
+                              return (e[r] = t), t
+                            },
+                          })
+                        }),
+                        t
+                      )
+                    } catch (e) {
+                      u([e], r)
+                    }
+                  for (var n in e) a.call(e, n) && (t[n] = e[n])
+                })(t, nrWrapper, e),
+                nrWrapper)
+            function nrWrapper() {
+              var s, a, l, f
+              let h
+              try {
+                ;(a = this),
+                  (s = [...arguments]),
+                  (l = 'function' == typeof n ? n(s, a) : n || {})
+              } catch (t) {
+                u([t, '', [s, a, c], l], e)
+              }
+              i(r + 'start', [s, a, c], l, d)
+              const p = performance.now()
+              let g
+              try {
+                return (f = t.apply(a, s)), (g = performance.now()), f
+              } catch (e) {
+                throw (
+                  ((g = performance.now()),
+                  i(r + 'err', [s, a, e], l, d),
+                  (h = e),
+                  h)
+                )
+              } finally {
+                const e = g - p,
+                  t = {
+                    start: p,
+                    end: g,
+                    duration: e,
+                    isLongTask: e >= o,
+                    methodName: c,
+                    thrownError: h,
+                  }
+                t.isLongTask && i('long-task', [t, a], l, d),
+                  i(r + 'end', [s, a, f], l, d)
+              }
+            }
+          }
+          function i(r, n, i, s) {
+            if (!c || t) {
+              var o = c
+              c = !0
+              try {
+                e.emit(r, n, i, t, s)
+              } catch (t) {
+                u([t, r, n, i], e)
+              }
+              c = o
+            }
+          }
+        }
+        function u(e, t) {
+          t || (t = n.ee)
+          try {
+            t.emit('internal-error', e)
+          } catch (e) {}
+        }
+        function l(e) {
+          return !(e && 'function' == typeof e && e.apply && !e[s])
         }
       },
       3606: (e, t, r) => {
         'use strict'
-        r.d(t, { i: () => o })
+        r.d(t, { i: () => s })
         var n = r(9908)
-        o.on = a
-        var i = (o.handlers = {})
-        function o(e, t, r, o) {
-          a(o || n.d, i, e, t, r)
+        s.on = o
+        var i = (s.handlers = {})
+        function s(e, t, r, s) {
+          o(s || n.d, i, e, t, r)
         }
-        function a(e, t, r, i, o) {
-          o || (o = 'feature'), e || (e = n.d)
-          var a = (t[o] = t[o] || {})
-          ;(a[r] = a[r] || []).push([e, i])
+        function o(e, t, r, i, s) {
+          s || (s = 'feature'), e || (e = n.d)
+          var o = (t[s] = t[s] || {})
+          ;(o[r] = o[r] || []).push([e, i])
+        }
+      },
+      3738: (e, t, r) => {
+        'use strict'
+        r.d(t, {
+          He: () => i,
+          Kp: () => a,
+          Lc: () => d,
+          Rz: () => u,
+          TZ: () => n,
+          bD: () => s,
+          d3: () => o,
+          jx: () => l,
+          sl: () => f,
+          uP: () => c,
+        })
+        const n = r(860).K7.sessionTrace,
+          i = 'bstResource',
+          s = 'resource',
+          o = '-start',
+          a = '-end',
+          c = 'fn' + o,
+          d = 'fn' + a,
+          u = 'pushState',
+          l = 1e3,
+          f = 3e4
+      },
+      3785: (e, t, r) => {
+        'use strict'
+        r.d(t, { R: () => c, b: () => d })
+        var n = r(9908),
+          i = r(1863),
+          s = r(860),
+          o = r(3969),
+          a = r(993)
+        function c(e, t, r = {}, c = a.p_.INFO, d = !0, u, l = (0, i.t)()) {
+          ;(0, n.p)(
+            o.xV,
+            ['API/logging/'.concat(c.toLowerCase(), '/called')],
+            void 0,
+            s.K7.metrics,
+            e
+          ),
+            (0, n.p)(a.ET, [l, t, r, c, d, u], void 0, s.K7.logging, e)
+        }
+        function d(e) {
+          return (
+            'string' == typeof e &&
+            Object.values(a.p_).some((t) => t === e.toUpperCase().trim())
+          )
         }
       },
       3878: (e, t, r) => {
@@ -734,91 +770,688 @@ NREUM.info = {
         function i(e, t, r = !1, i) {
           window.addEventListener(e, t, n(r, i))
         }
-        function o(e, t, r = !1, i) {
+        function s(e, t, r = !1, i) {
           document.addEventListener(e, t, n(r, i))
         }
-        r.d(t, { DD: () => o, jT: () => n, sp: () => i })
+        r.d(t, { DD: () => s, jT: () => n, sp: () => i })
+      },
+      3962: (e, t, r) => {
+        'use strict'
+        r.d(t, {
+          AM: () => o,
+          O2: () => l,
+          OV: () => s,
+          Qu: () => f,
+          TZ: () => c,
+          ih: () => h,
+          pP: () => a,
+          t1: () => u,
+          tC: () => i,
+          wD: () => d,
+        })
+        var n = r(860)
+        const i = ['click', 'keydown', 'submit'],
+          s = 'popstate',
+          o = 'api',
+          a = 'initialPageLoad',
+          c = n.K7.softNav,
+          d = 5e3,
+          u = 500,
+          l = { INITIAL_PAGE_LOAD: '', ROUTE_CHANGE: 1, UNSPECIFIED: 2 },
+          f = { INTERACTION: 1, AJAX: 2, CUSTOM_END: 3, CUSTOM_TRACER: 4 },
+          h = {
+            IP: 'in progress',
+            PF: 'pending finish',
+            FIN: 'finished',
+            CAN: 'cancelled',
+          }
+      },
+      3969: (e, t, r) => {
+        'use strict'
+        r.d(t, {
+          TZ: () => n,
+          XG: () => a,
+          rs: () => i,
+          xV: () => o,
+          z_: () => s,
+        })
+        const n = r(860).K7.metrics,
+          i = 'sm',
+          s = 'cm',
+          o = 'storeSupportabilityMetrics',
+          a = 'storeEventMetrics'
+      },
+      4234: (e, t, r) => {
+        'use strict'
+        r.d(t, { W: () => s })
+        var n = r(7836),
+          i = r(1687)
+        class s {
+          constructor(e, t) {
+            ;(this.agentIdentifier = e),
+              (this.ee = n.ee.get(e)),
+              (this.featureName = t),
+              (this.blocked = !1)
+          }
+          deregisterDrain() {
+            ;(0, i.x3)(this.agentIdentifier, this.featureName)
+          }
+        }
+      },
+      4261: (e, t, r) => {
+        'use strict'
+        r.d(t, {
+          $9: () => u,
+          BL: () => c,
+          CH: () => p,
+          Dl: () => R,
+          Fw: () => w,
+          PA: () => v,
+          Pl: () => n,
+          Pv: () => x,
+          Tb: () => f,
+          U2: () => o,
+          V1: () => A,
+          Wb: () => T,
+          bt: () => b,
+          cD: () => y,
+          d3: () => E,
+          dT: () => d,
+          eY: () => g,
+          fF: () => h,
+          hG: () => s,
+          hw: () => i,
+          k6: () => a,
+          nb: () => m,
+          o5: () => l,
+        })
+        const n = 'api-',
+          i = n + 'ixn-',
+          s = 'addPageAction',
+          o = 'addToTrace',
+          a = 'addRelease',
+          c = 'finished',
+          d = 'interaction',
+          u = 'log',
+          l = 'noticeError',
+          f = 'pauseReplay',
+          h = 'recordCustomEvent',
+          p = 'recordReplay',
+          g = 'register',
+          m = 'setApplicationVersion',
+          v = 'setCurrentRouteName',
+          y = 'setCustomAttribute',
+          b = 'setErrorHandler',
+          w = 'setPageViewName',
+          R = 'setUserId',
+          E = 'start',
+          T = 'wrapLogger',
+          A = 'measure',
+          x = 'consent'
+      },
+      5205: (e, t, r) => {
+        'use strict'
+        r.d(t, { j: () => _ })
+        var n = r(384),
+          i = r(1741)
+        var s = r(2555),
+          o = r(3333)
+        const a = (e) => {
+          if (!e || 'string' != typeof e) return !1
+          try {
+            document.createDocumentFragment().querySelector(e)
+          } catch {
+            return !1
+          }
+          return !0
+        }
+        var c = r(2614),
+          d = r(944),
+          u = r(8122)
+        const l = '[data-nr-mask]',
+          f = (e) =>
+            (0, u.a)(
+              e,
+              (() => {
+                const e = {
+                  feature_flags: [],
+                  experimental: {
+                    allow_registered_children: !1,
+                    resources: !1,
+                  },
+                  mask_selector: '*',
+                  block_selector: '[data-nr-block]',
+                  mask_input_options: {
+                    color: !1,
+                    date: !1,
+                    'datetime-local': !1,
+                    email: !1,
+                    month: !1,
+                    number: !1,
+                    range: !1,
+                    search: !1,
+                    tel: !1,
+                    text: !1,
+                    time: !1,
+                    url: !1,
+                    week: !1,
+                    textarea: !1,
+                    select: !1,
+                    password: !0,
+                  },
+                }
+                return {
+                  ajax: {
+                    deny_list: void 0,
+                    block_internal: !0,
+                    enabled: !0,
+                    autoStart: !0,
+                  },
+                  api: {
+                    get allow_registered_children() {
+                      return (
+                        e.feature_flags.includes(o.$v.REGISTER) ||
+                        e.experimental.allow_registered_children
+                      )
+                    },
+                    set allow_registered_children(t) {
+                      e.experimental.allow_registered_children = t
+                    },
+                    duplicate_registered_data: !1,
+                  },
+                  browser_consent_mode: { enabled: !1 },
+                  distributed_tracing: {
+                    enabled: void 0,
+                    exclude_newrelic_header: void 0,
+                    cors_use_newrelic_header: void 0,
+                    cors_use_tracecontext_headers: void 0,
+                    allowed_origins: void 0,
+                  },
+                  get feature_flags() {
+                    return e.feature_flags
+                  },
+                  set feature_flags(t) {
+                    e.feature_flags = t
+                  },
+                  generic_events: { enabled: !0, autoStart: !0 },
+                  harvest: { interval: 30 },
+                  jserrors: { enabled: !0, autoStart: !0 },
+                  logging: { enabled: !0, autoStart: !0 },
+                  metrics: { enabled: !0, autoStart: !0 },
+                  obfuscate: void 0,
+                  page_action: { enabled: !0 },
+                  page_view_event: { enabled: !0, autoStart: !0 },
+                  page_view_timing: { enabled: !0, autoStart: !0 },
+                  performance: {
+                    capture_marks: !1,
+                    capture_measures: !1,
+                    capture_detail: !0,
+                    resources: {
+                      get enabled() {
+                        return (
+                          e.feature_flags.includes(o.$v.RESOURCES) ||
+                          e.experimental.resources
+                        )
+                      },
+                      set enabled(t) {
+                        e.experimental.resources = t
+                      },
+                      asset_types: [],
+                      first_party_domains: [],
+                      ignore_newrelic: !0,
+                    },
+                  },
+                  privacy: { cookies_enabled: !0 },
+                  proxy: { assets: void 0, beacon: void 0 },
+                  session: { expiresMs: c.wk, inactiveMs: c.BB },
+                  session_replay: {
+                    autoStart: !0,
+                    enabled: !1,
+                    preload: !1,
+                    sampling_rate: 10,
+                    error_sampling_rate: 100,
+                    collect_fonts: !1,
+                    inline_images: !1,
+                    fix_stylesheets: !0,
+                    mask_all_inputs: !0,
+                    get mask_text_selector() {
+                      return e.mask_selector
+                    },
+                    set mask_text_selector(t) {
+                      a(t)
+                        ? (e.mask_selector = ''.concat(t, ',').concat(l))
+                        : '' === t || null === t
+                        ? (e.mask_selector = l)
+                        : (0, d.R)(5, t)
+                    },
+                    get block_class() {
+                      return 'nr-block'
+                    },
+                    get ignore_class() {
+                      return 'nr-ignore'
+                    },
+                    get mask_text_class() {
+                      return 'nr-mask'
+                    },
+                    get block_selector() {
+                      return e.block_selector
+                    },
+                    set block_selector(t) {
+                      a(t)
+                        ? (e.block_selector += ','.concat(t))
+                        : '' !== t && (0, d.R)(6, t)
+                    },
+                    get mask_input_options() {
+                      return e.mask_input_options
+                    },
+                    set mask_input_options(t) {
+                      t && 'object' == typeof t
+                        ? (e.mask_input_options = { ...t, password: !0 })
+                        : (0, d.R)(7, t)
+                    },
+                  },
+                  session_trace: { enabled: !0, autoStart: !0 },
+                  soft_navigations: { enabled: !0, autoStart: !0 },
+                  ssl: void 0,
+                  user_actions: {
+                    enabled: !0,
+                    elementAttributes: ['id', 'className', 'tagName', 'type'],
+                  },
+                }
+              })()
+            )
+        var h = r(6154),
+          p = r(9324)
+        let g = 0
+        const m = {
+            buildEnv: p.F3,
+            distMethod: p.Xs,
+            version: p.xv,
+            originTime: h.WN,
+          },
+          v = { consented: !1 },
+          y = {
+            appMetadata: {},
+            get consented() {
+              return this.session?.state?.consent || v.consented
+            },
+            set consented(e) {
+              v.consented = e
+            },
+            customTransaction: void 0,
+            denyList: void 0,
+            disabled: !1,
+            harvester: void 0,
+            isolatedBacklog: !1,
+            isRecording: !1,
+            loaderType: void 0,
+            maxBytes: 3e4,
+            obfuscator: void 0,
+            onerror: void 0,
+            ptid: void 0,
+            releaseIds: {},
+            session: void 0,
+            timeKeeper: void 0,
+            registeredEntities: [],
+            jsAttributesMetadata: { bytes: 0 },
+            get harvestCount() {
+              return ++g
+            },
+          },
+          b = (e) => {
+            const t = (0, u.a)(e, y),
+              r = Object.keys(m).reduce(
+                (e, t) => (
+                  (e[t] = {
+                    value: m[t],
+                    writable: !1,
+                    configurable: !0,
+                    enumerable: !0,
+                  }),
+                  e
+                ),
+                {}
+              )
+            return Object.defineProperties(t, r)
+          }
+        var w = r(5701)
+        const R = (e) => {
+          const t = e.startsWith('http')
+          ;(e += '/'), (r.p = t ? e : 'https://' + e)
+        }
+        var E = r(7836),
+          T = r(3241)
+        const A = {
+            accountID: void 0,
+            trustKey: void 0,
+            agentID: void 0,
+            licenseKey: void 0,
+            applicationID: void 0,
+            xpid: void 0,
+          },
+          x = (e) => (0, u.a)(e, A),
+          S = new Set()
+        function _(e, t = {}, r, o) {
+          let {
+            init: a,
+            info: c,
+            loader_config: d,
+            runtime: u = {},
+            exposed: l = !0,
+          } = t
+          if (!c) {
+            const e = (0, n.pV)()
+            ;(a = e.init), (c = e.info), (d = e.loader_config)
+          }
+          ;(e.init = f(a || {})),
+            (e.loader_config = x(d || {})),
+            (c.jsAttributes ??= {}),
+            h.bv && (c.jsAttributes.isWorker = !0),
+            (e.info = (0, s.D)(c))
+          const p = e.init,
+            g = [c.beacon, c.errorBeacon]
+          S.has(e.agentIdentifier) ||
+            (p.proxy.assets && (R(p.proxy.assets), g.push(p.proxy.assets)),
+            p.proxy.beacon && g.push(p.proxy.beacon),
+            (e.beacons = [...g]),
+            (function (e) {
+              const t = (0, n.pV)()
+              Object.getOwnPropertyNames(i.W.prototype).forEach((r) => {
+                const n = i.W.prototype[r]
+                if ('function' != typeof n || 'constructor' === n) return
+                let s = t[r]
+                e[r] &&
+                  !1 !== e.exposed &&
+                  'micro-agent' !== e.runtime?.loaderType &&
+                  (t[r] = (...t) => {
+                    const n = e[r](...t)
+                    return s ? s(...t) : n
+                  })
+              })
+            })(e),
+            (0, n.US)('activatedFeatures', w.B)),
+            (u.denyList = [
+              ...(p.ajax.deny_list || []),
+              ...(p.ajax.block_internal ? g : []),
+            ]),
+            (u.ptid = e.agentIdentifier),
+            (u.loaderType = r),
+            (e.runtime = b(u)),
+            S.has(e.agentIdentifier) ||
+              ((e.ee = E.ee.get(e.agentIdentifier)),
+              (e.exposed = l),
+              (0, T.W)({
+                agentIdentifier: e.agentIdentifier,
+                drained: !!w.B?.[e.agentIdentifier],
+                type: 'lifecycle',
+                name: 'initialize',
+                feature: void 0,
+                data: e.config,
+              })),
+            S.add(e.agentIdentifier)
+        }
+      },
+      5270: (e, t, r) => {
+        'use strict'
+        r.d(t, { Aw: () => o, SR: () => s, rF: () => a })
+        var n = r(384),
+          i = r(7767)
+        function s(e) {
+          return (
+            !!(0, n.dV)().o.MO && (0, i.V)(e) && !0 === e?.session_trace.enabled
+          )
+        }
+        function o(e) {
+          return !0 === e?.session_replay.preload && s(e)
+        }
+        function a(e, t) {
+          try {
+            if ('string' == typeof t?.type) {
+              if ('password' === t.type.toLowerCase())
+                return '*'.repeat(e?.length || 0)
+              if (
+                void 0 !== t?.dataset?.nrUnmask ||
+                t?.classList?.contains('nr-unmask')
+              )
+                return e
+            }
+          } catch (e) {}
+          return 'string' == typeof e
+            ? e.replace(/[\S]/g, '*')
+            : '*'.repeat(e?.length || 0)
+        }
+      },
+      5289: (e, t, r) => {
+        'use strict'
+        r.d(t, { GG: () => o, Qr: () => c, sB: () => a })
+        var n = r(3878),
+          i = r(6389)
+        function s() {
+          return (
+            'undefined' == typeof document || 'complete' === document.readyState
+          )
+        }
+        function o(e, t) {
+          if (s()) return e()
+          const r = (0, i.J)(e),
+            o = setInterval(() => {
+              s() && (clearInterval(o), r())
+            }, 500)
+          ;(0, n.sp)('load', r, t)
+        }
+        function a(e) {
+          if (s()) return e()
+          ;(0, n.DD)('DOMContentLoaded', e)
+        }
+        function c(e) {
+          if (s()) return e()
+          ;(0, n.sp)('popstate', e)
+        }
       },
       5607: (e, t, r) => {
         'use strict'
         r.d(t, { W: () => n })
         const n = (0, r(9566).bz)()
       },
-      9566: (e, t, r) => {
+      5701: (e, t, r) => {
         'use strict'
-        r.d(t, { LA: () => s, ZF: () => c, bz: () => a, el: () => u })
-        var n = r(6154)
-        const i = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
+        r.d(t, { B: () => s, t: () => o })
+        var n = r(3241)
+        const i = new Set(),
+          s = {}
         function o(e, t) {
-          return e ? 15 & e[t] : (16 * Math.random()) | 0
-        }
-        function a() {
-          const e = n.gm?.crypto || n.gm?.msCrypto
-          let t,
-            r = 0
-          return (
+          const r = t.agentIdentifier
+          ;(s[r] ??= {}),
             e &&
-              e.getRandomValues &&
-              (t = e.getRandomValues(new Uint8Array(30))),
-            i
-              .split('')
-              .map((e) =>
-                'x' === e
-                  ? o(t, r++).toString(16)
-                  : 'y' === e
-                  ? ((3 & o()) | 8).toString(16)
-                  : e
-              )
-              .join('')
-          )
-        }
-        function s(e) {
-          const t = n.gm?.crypto || n.gm?.msCrypto
-          let r,
-            i = 0
-          t && t.getRandomValues && (r = t.getRandomValues(new Uint8Array(e)))
-          const a = []
-          for (var s = 0; s < e; s++) a.push(o(r, i++).toString(16))
-          return a.join('')
-        }
-        function c() {
-          return s(16)
-        }
-        function u() {
-          return s(32)
+              'object' == typeof e &&
+              (i.has(r) ||
+                (t.ee.emit('rumresp', [e]),
+                (s[r] = e),
+                i.add(r),
+                (0, n.W)({
+                  agentIdentifier: r,
+                  loaded: !0,
+                  drained: !0,
+                  type: 'lifecycle',
+                  name: 'load',
+                  feature: void 0,
+                  data: e,
+                })))
         }
       },
-      2614: (e, t, r) => {
+      6154: (e, t, r) => {
         'use strict'
         r.d(t, {
-          BB: () => a,
-          H3: () => n,
-          g: () => u,
-          iL: () => c,
-          tS: () => s,
-          uh: () => i,
-          wk: () => o,
+          OF: () => d,
+          RI: () => i,
+          WN: () => f,
+          bv: () => s,
+          eN: () => h,
+          gm: () => o,
+          lR: () => l,
+          m: () => c,
+          mw: () => a,
+          sb: () => u,
         })
-        const n = 'NRBA',
-          i = 'SESSION',
-          o = 144e5,
-          a = 18e5,
-          s = {
-            STARTED: 'session-started',
-            PAUSE: 'session-pause',
-            RESET: 'session-reset',
-            RESUME: 'session-resume',
-            UPDATE: 'session-update',
-          },
-          c = { SAME_TAB: 'same-tab', CROSS_TAB: 'cross-tab' },
-          u = { OFF: 0, FULL: 1, ERROR: 2 }
+        var n = r(1863)
+        const i = 'undefined' != typeof window && !!window.document,
+          s =
+            'undefined' != typeof WorkerGlobalScope &&
+            (('undefined' != typeof self &&
+              self instanceof WorkerGlobalScope &&
+              self.navigator instanceof WorkerNavigator) ||
+              ('undefined' != typeof globalThis &&
+                globalThis instanceof WorkerGlobalScope &&
+                globalThis.navigator instanceof WorkerNavigator)),
+          o = i
+            ? window
+            : 'undefined' != typeof WorkerGlobalScope &&
+              (('undefined' != typeof self &&
+                self instanceof WorkerGlobalScope &&
+                self) ||
+                ('undefined' != typeof globalThis &&
+                  globalThis instanceof WorkerGlobalScope &&
+                  globalThis)),
+          a = Boolean('hidden' === o?.document?.visibilityState),
+          c = '' + o?.location,
+          d = /iPad|iPhone|iPod/.test(o.navigator?.userAgent),
+          u = d && 'undefined' == typeof SharedWorker,
+          l = (() => {
+            const e = o.navigator?.userAgent?.match(/Firefox[/\s](\d+\.\d+)/)
+            return Array.isArray(e) && e.length >= 2 ? +e[1] : 0
+          })(),
+          f = Date.now() - (0, n.t)(),
+          h = () =>
+            'undefined' != typeof PerformanceNavigationTiming &&
+            o?.performance?.getEntriesByType('navigation')?.[0]?.responseStart
       },
-      1863: (e, t, r) => {
+      6344: (e, t, r) => {
         'use strict'
-        function n() {
-          return Math.floor(performance.now())
+        r.d(t, {
+          BB: () => u,
+          Qb: () => l,
+          TZ: () => i,
+          Ug: () => o,
+          Vh: () => s,
+          _s: () => a,
+          bc: () => d,
+          yP: () => c,
+        })
+        var n = r(2614)
+        const i = r(860).K7.sessionReplay,
+          s = 'errorDuringReplay',
+          o = 0.12,
+          a = {
+            DomContentLoaded: 0,
+            Load: 1,
+            FullSnapshot: 2,
+            IncrementalSnapshot: 3,
+            Meta: 4,
+            Custom: 5,
+          },
+          c = { [n.g.ERROR]: 15e3, [n.g.FULL]: 3e5, [n.g.OFF]: 0 },
+          d = {
+            RESET: { message: 'Session was reset', sm: 'Reset' },
+            IMPORT: { message: 'Recorder failed to import', sm: 'Import' },
+            TOO_MANY: { message: '429: Too Many Requests', sm: 'Too-Many' },
+            TOO_BIG: { message: 'Payload was too large', sm: 'Too-Big' },
+            CROSS_TAB: {
+              message: 'Session Entity was set to OFF on another tab',
+              sm: 'Cross-Tab',
+            },
+            ENTITLEMENTS: {
+              message: 'Session Replay is not allowed and will not be started',
+              sm: 'Entitlement',
+            },
+          },
+          u = 5e3,
+          l = {
+            API: 'api',
+            RESUME: 'resume',
+            SWITCH_TO_FULL: 'switchToFull',
+            INITIALIZE: 'initialize',
+            PRELOAD: 'preload',
+          }
+      },
+      6389: (e, t, r) => {
+        'use strict'
+        function n(e, t = 500, r = {}) {
+          const n = r?.leading || !1
+          let i
+          return (...r) => {
+            n &&
+              void 0 === i &&
+              (e.apply(this, r),
+              (i = setTimeout(() => {
+                i = clearTimeout(i)
+              }, t))),
+              n ||
+                (clearTimeout(i),
+                (i = setTimeout(() => {
+                  e.apply(this, r)
+                }, t)))
+          }
         }
-        r.d(t, { t: () => n })
+        function i(e) {
+          let t = !1
+          return (...r) => {
+            t || ((t = !0), e.apply(this, r))
+          }
+        }
+        r.d(t, { J: () => i, s: () => n })
+      },
+      6630: (e, t, r) => {
+        'use strict'
+        r.d(t, { T: () => n })
+        const n = r(860).K7.pageViewEvent
+      },
+      6774: (e, t, r) => {
+        'use strict'
+        r.d(t, { T: () => n })
+        const n = r(860).K7.jserrors
+      },
+      7295: (e, t, r) => {
+        'use strict'
+        r.d(t, { Xv: () => o, gX: () => i, iW: () => s })
+        var n = []
+        function i(e) {
+          if (!e || s(e)) return !1
+          if (0 === n.length) return !0
+          if ('*' === n[0].hostname) return !1
+          for (var t = 0; t < n.length; t++) {
+            var r = n[t]
+            if (r.hostname.test(e.hostname) && r.pathname.test(e.pathname))
+              return !1
+          }
+          return !0
+        }
+        function s(e) {
+          return void 0 === e.hostname
+        }
+        function o(e) {
+          if (((n = []), e && e.length))
+            for (var t = 0; t < e.length; t++) {
+              let r = e[t]
+              if (!r) continue
+              if ('*' === r) return void (n = [{ hostname: '*' }])
+              0 === r.indexOf('http://')
+                ? (r = r.substring(7))
+                : 0 === r.indexOf('https://') && (r = r.substring(8))
+              const i = r.indexOf('/')
+              let s, o
+              i > 0
+                ? ((s = r.substring(0, i)), (o = r.substring(i)))
+                : ((s = r), (o = '*'))
+              let [c] = s.split(':')
+              n.push({ hostname: a(c), pathname: a(o, !0) })
+            }
+        }
+        function a(e, t = !1) {
+          const r = e
+            .replace(/[.+?^${}()|[\]\\]/g, (e) => '\\' + e)
+            .replace(/\*/g, '.*?')
+          return new RegExp((t ? '^' : '') + r + '$')
+        }
       },
       7485: (e, t, r) => {
         'use strict'
@@ -853,44 +1486,256 @@ NREUM.info = {
           }
         }
       },
-      944: (e, t, r) => {
+      7699: (e, t, r) => {
         'use strict'
-        function n(e, t) {
-          'function' == typeof console.debug &&
-            console.debug(
-              'New Relic Warning: https://github.com/newrelic/newrelic-browser-agent/blob/main/docs/warning-codes.md#'.concat(
-                e
-              ),
-              t
-            )
-        }
-        r.d(t, { R: () => n })
+        r.d(t, { It: () => s, KC: () => a, No: () => i, qh: () => o })
+        var n = r(860)
+        const i = 16e3,
+          s = 1e6,
+          o = 'SESSION_ERROR',
+          a = {
+            [n.K7.logging]: !0,
+            [n.K7.genericEvents]: !1,
+            [n.K7.jserrors]: !1,
+            [n.K7.ajax]: !1,
+          }
       },
-      5701: (e, t, r) => {
+      7767: (e, t, r) => {
         'use strict'
-        r.d(t, { B: () => a, t: () => s })
-        var n = r(7836),
-          i = r(3241)
-        const o = new Set(),
-          a = {}
-        function s(e, t) {
-          const r = n.ee.get(t)
-          ;(a[t] ??= {}),
-            e &&
-              'object' == typeof e &&
-              (o.has(t) ||
-                (r.emit('rumresp', [e]),
-                (a[t] = e),
-                o.add(t),
-                (0, i.W)({
-                  agentIdentifier: t,
-                  loaded: !0,
-                  type: 'lifecycle',
-                  name: 'load',
-                  feature: void 0,
-                  data: e,
-                })))
+        r.d(t, { V: () => i })
+        var n = r(6154)
+        const i = (e) => n.RI && !0 === e?.privacy.cookies_enabled
+      },
+      7836: (e, t, r) => {
+        'use strict'
+        r.d(t, { P: () => a, ee: () => c })
+        var n = r(384),
+          i = r(8990),
+          s = r(2646),
+          o = r(5607)
+        const a = 'nr@context:'.concat(o.W),
+          c = (function e(t, r) {
+            var n = {},
+              o = {},
+              u = {},
+              l = !1
+            try {
+              l =
+                16 === r.length &&
+                d.initializedAgents?.[r]?.runtime.isolatedBacklog
+            } catch (e) {}
+            var f = {
+              on: p,
+              addEventListener: p,
+              removeEventListener: function (e, t) {
+                var r = n[e]
+                if (!r) return
+                for (var i = 0; i < r.length; i++) r[i] === t && r.splice(i, 1)
+              },
+              emit: function (e, r, n, i, s) {
+                !1 !== s && (s = !0)
+                if (c.aborted && !i) return
+                t && s && t.emit(e, r, n)
+                var a = h(n)
+                g(e).forEach((e) => {
+                  e.apply(a, r)
+                })
+                var d = v()[o[e]]
+                d && d.push([f, e, r, a])
+                return a
+              },
+              get: m,
+              listeners: g,
+              context: h,
+              buffer: function (e, t) {
+                const r = v()
+                if (((t = t || 'feature'), f.aborted)) return
+                Object.entries(e || {}).forEach(([e, n]) => {
+                  ;(o[n] = t), t in r || (r[t] = [])
+                })
+              },
+              abort: function () {
+                ;(f._aborted = !0),
+                  Object.keys(f.backlog).forEach((e) => {
+                    delete f.backlog[e]
+                  })
+              },
+              isBuffering: function (e) {
+                return !!v()[o[e]]
+              },
+              debugId: r,
+              backlog: l
+                ? {}
+                : t && 'object' == typeof t.backlog
+                ? t.backlog
+                : {},
+              isolatedBacklog: l,
+            }
+            return (
+              Object.defineProperty(f, 'aborted', {
+                get: () => {
+                  let e = f._aborted || !1
+                  return e || (t && (e = t.aborted), e)
+                },
+              }),
+              f
+            )
+            function h(e) {
+              return e && e instanceof s.y
+                ? e
+                : e
+                ? (0, i.I)(e, a, () => new s.y(a))
+                : new s.y(a)
+            }
+            function p(e, t) {
+              n[e] = g(e).concat(t)
+            }
+            function g(e) {
+              return n[e] || []
+            }
+            function m(t) {
+              return (u[t] = u[t] || e(f, t))
+            }
+            function v() {
+              return f.backlog
+            }
+          })(void 0, 'globalEE'),
+          d = (0, n.Zm)()
+        d.ee || (d.ee = c)
+      },
+      7866: (e, t, r) => {
+        'use strict'
+        r.d(t, {
+          Nc: () => s,
+          cn: () => a,
+          fL: () => i,
+          h3: () => n,
+          hB: () => o,
+        })
+        const n = /function (.+?)\s*\(/,
+          i =
+            /^\s*at .+ \(eval at \S+ \((?:(?:file|http|https):[^)]+)?\)(?:, [^:]*:\d+:\d+)?\)$/i,
+          s = /^\s*at Function code \(Function code:\d+:\d+\)\s*/i,
+          o =
+            /^\s*at (?:((?:\[object object\])?(?:[^(]*\([^)]*\))*[^()]*(?: \[as \S+\])?) )?\(?((?:file|http|https|chrome-extension):.*?)?:(\d+)(?::(\d+))?\)?\s*$/i,
+          a =
+            /^\s*(?:([^@]*)(?:\(.*?\))?@)?((?:file|http|https|chrome|safari-extension).*?):(\d+)(?::(\d+))?\s*$/i
+      },
+      8122: (e, t, r) => {
+        'use strict'
+        r.d(t, { a: () => i })
+        var n = r(944)
+        function i(e, t) {
+          try {
+            if (!e || 'object' != typeof e) return (0, n.R)(3)
+            if (!t || 'object' != typeof t) return (0, n.R)(4)
+            const r = Object.create(
+                Object.getPrototypeOf(t),
+                Object.getOwnPropertyDescriptors(t)
+              ),
+              s = 0 === Object.keys(r).length ? e : r
+            for (let o in s)
+              if (void 0 !== e[o])
+                try {
+                  if (null === e[o]) {
+                    r[o] = null
+                    continue
+                  }
+                  Array.isArray(e[o]) && Array.isArray(t[o])
+                    ? (r[o] = Array.from(new Set([...e[o], ...t[o]])))
+                    : 'object' == typeof e[o] && 'object' == typeof t[o]
+                    ? (r[o] = i(e[o], t[o]))
+                    : (r[o] = e[o])
+                } catch (e) {
+                  r[o] || (0, n.R)(1, e)
+                }
+            return r
+          } catch (e) {
+            ;(0, n.R)(2, e)
+          }
         }
+      },
+      8139: (e, t, r) => {
+        'use strict'
+        r.d(t, { u: () => f })
+        var n = r(7836),
+          i = r(3434),
+          s = r(8990),
+          o = r(6154)
+        const a = {},
+          c = o.gm.XMLHttpRequest,
+          d = 'addEventListener',
+          u = 'removeEventListener',
+          l = 'nr@wrapped:'.concat(n.P)
+        function f(e) {
+          var t = (function (e) {
+            return (e || n.ee).get('events')
+          })(e)
+          if (a[t.debugId]++) return t
+          a[t.debugId] = 1
+          var r = (0, i.YM)(t, !0)
+          function f(e) {
+            r.inPlace(e, [d, u], '-', p)
+          }
+          function p(e, t) {
+            return e[1]
+          }
+          return (
+            'getPrototypeOf' in Object &&
+              (o.RI && h(document, f), c && h(c.prototype, f), h(o.gm, f)),
+            t.on(d + '-start', function (e, t) {
+              var n = e[1]
+              if (
+                null !== n &&
+                ('function' == typeof n || 'object' == typeof n) &&
+                'newrelic' !== e[0]
+              ) {
+                var i = (0, s.I)(n, l, function () {
+                  var e = {
+                    object: function () {
+                      if ('function' != typeof n.handleEvent) return
+                      return n.handleEvent.apply(n, arguments)
+                    },
+                    function: n,
+                  }[typeof n]
+                  return e ? r(e, 'fn-', null, e.name || 'anonymous') : n
+                })
+                this.wrapped = e[1] = i
+              }
+            }),
+            t.on(u + '-start', function (e) {
+              e[1] = this.wrapped || e[1]
+            }),
+            t
+          )
+        }
+        function h(e, t, ...r) {
+          let n = e
+          for (
+            ;
+            'object' == typeof n && !Object.prototype.hasOwnProperty.call(n, d);
+
+          )
+            n = Object.getPrototypeOf(n)
+          n && t(n, ...r)
+        }
+      },
+      8362: (e, t, r) => {
+        'use strict'
+        r.d(t, { d: () => s })
+        var n = r(9566),
+          i = r(1741)
+        class s extends i.W {
+          agentIdentifier = (0, n.LA)(16)
+        }
+      },
+      8374: (e, t, r) => {
+        r.nc = (() => {
+          try {
+            return document?.currentScript?.nonce
+          } catch (e) {}
+          return ''
+        })()
       },
       8990: (e, t, r) => {
         'use strict'
@@ -913,350 +1758,13 @@ NREUM.info = {
           return (e[t] = i), i
         }
       },
-      6389: (e, t, r) => {
+      9119: (e, t, r) => {
         'use strict'
-        function n(e, t = 500, r = {}) {
-          const n = r?.leading || !1
-          let i
-          return (...r) => {
-            n &&
-              void 0 === i &&
-              (e.apply(this, r),
-              (i = setTimeout(() => {
-                i = clearTimeout(i)
-              }, t))),
-              n ||
-                (clearTimeout(i),
-                (i = setTimeout(() => {
-                  e.apply(this, r)
-                }, t)))
-          }
-        }
-        function i(e) {
-          let t = !1
-          return (...r) => {
-            t || ((t = !0), e.apply(this, r))
-          }
-        }
-        r.d(t, { J: () => i, s: () => n })
-      },
-      3304: (e, t, r) => {
-        'use strict'
-        r.d(t, { A: () => o })
-        var n = r(7836)
-        const i = () => {
-          const e = new WeakSet()
-          return (t, r) => {
-            if ('object' == typeof r && null !== r) {
-              if (e.has(r)) return
-              e.add(r)
-            }
-            return r
-          }
-        }
-        function o(e) {
-          try {
-            return JSON.stringify(e, i()) ?? ''
-          } catch (e) {
-            try {
-              n.ee.emit('internal-error', [e])
-            } catch (e) {}
-            return ''
-          }
-        }
-      },
-      5289: (e, t, r) => {
-        'use strict'
-        r.d(t, { GG: () => o, sB: () => a })
-        var n = r(3878)
-        function i() {
-          return (
-            'undefined' == typeof document || 'complete' === document.readyState
-          )
-        }
-        function o(e, t) {
-          if (i()) return e()
-          ;(0, n.sp)('load', e, t)
-        }
-        function a(e) {
-          if (i()) return e()
-          ;(0, n.DD)('DOMContentLoaded', e)
-        }
-      },
-      384: (e, t, r) => {
-        'use strict'
-        r.d(t, {
-          NT: () => o,
-          US: () => d,
-          Zm: () => a,
-          bQ: () => c,
-          dV: () => s,
-          nY: () => u,
-          pV: () => l,
-        })
-        var n = r(6154),
-          i = r(1863)
-        const o = { beacon: 'bam.nr-data.net', errorBeacon: 'bam.nr-data.net' }
-        function a() {
-          return (
-            n.gm.NREUM || (n.gm.NREUM = {}),
-            void 0 === n.gm.newrelic && (n.gm.newrelic = n.gm.NREUM),
-            n.gm.NREUM
-          )
-        }
-        function s() {
-          let e = a()
-          return (
-            e.o ||
-              (e.o = {
-                ST: n.gm.setTimeout,
-                SI: n.gm.setImmediate,
-                CT: n.gm.clearTimeout,
-                XHR: n.gm.XMLHttpRequest,
-                REQ: n.gm.Request,
-                EV: n.gm.Event,
-                PR: n.gm.Promise,
-                MO: n.gm.MutationObserver,
-                FETCH: n.gm.fetch,
-                WS: n.gm.WebSocket,
-              }),
-            e
-          )
-        }
-        function c(e, t) {
-          let r = a()
-          ;(r.initializedAgents ??= {}),
-            (t.initializedAt = { ms: (0, i.t)(), date: new Date() }),
-            (r.initializedAgents[e] = t)
-        }
-        function u(e) {
-          let t = a()
-          return t.initializedAgents?.[e]
-        }
-        function d(e, t) {
-          a()[e] = t
-        }
-        function l() {
-          return (
-            (function () {
-              let e = a()
-              const t = e.info || {}
-              e.info = { beacon: o.beacon, errorBeacon: o.errorBeacon, ...t }
-            })(),
-            (function () {
-              let e = a()
-              const t = e.init || {}
-              e.init = { ...t }
-            })(),
-            s(),
-            (function () {
-              let e = a()
-              const t = e.loader_config || {}
-              e.loader_config = { ...t }
-            })(),
-            a()
-          )
-        }
-      },
-      2843: (e, t, r) => {
-        'use strict'
-        r.d(t, { u: () => i })
-        var n = r(3878)
-        function i(e, t = !1, r, i) {
-          ;(0, n.DD)(
-            'visibilitychange',
-            function () {
-              if (t) return void ('hidden' === document.visibilityState && e())
-              e(document.visibilityState)
-            },
-            r,
-            i
-          )
-        }
-      },
-      8139: (e, t, r) => {
-        'use strict'
-        r.d(t, { u: () => f })
-        var n = r(7836),
-          i = r(3434),
-          o = r(8990),
-          a = r(6154)
-        const s = {},
-          c = a.gm.XMLHttpRequest,
-          u = 'addEventListener',
-          d = 'removeEventListener',
-          l = 'nr@wrapped:'.concat(n.P)
-        function f(e) {
-          var t = (function (e) {
-            return (e || n.ee).get('events')
-          })(e)
-          if (s[t.debugId]++) return t
-          s[t.debugId] = 1
-          var r = (0, i.YM)(t, !0)
-          function f(e) {
-            r.inPlace(e, [u, d], '-', p)
-          }
-          function p(e, t) {
-            return e[1]
-          }
-          return (
-            'getPrototypeOf' in Object &&
-              (a.RI && h(document, f), c && h(c.prototype, f), h(a.gm, f)),
-            t.on(u + '-start', function (e, t) {
-              var n = e[1]
-              if (
-                null !== n &&
-                ('function' == typeof n || 'object' == typeof n)
-              ) {
-                var i = (0, o.I)(n, l, function () {
-                  var e = {
-                    object: function () {
-                      if ('function' != typeof n.handleEvent) return
-                      return n.handleEvent.apply(n, arguments)
-                    },
-                    function: n,
-                  }[typeof n]
-                  return e ? r(e, 'fn-', null, e.name || 'anonymous') : n
-                })
-                this.wrapped = e[1] = i
-              }
-            }),
-            t.on(d + '-start', function (e) {
-              e[1] = this.wrapped || e[1]
-            }),
-            t
-          )
-        }
-        function h(e, t, ...r) {
-          let n = e
-          for (
-            ;
-            'object' == typeof n && !Object.prototype.hasOwnProperty.call(n, u);
-
-          )
-            n = Object.getPrototypeOf(n)
-          n && t(n, ...r)
-        }
-      },
-      3434: (e, t, r) => {
-        'use strict'
-        r.d(t, { Jt: () => o, YM: () => c })
-        var n = r(7836),
-          i = r(5607)
-        const o = 'nr@original:'.concat(i.W)
-        var a = Object.prototype.hasOwnProperty,
-          s = !1
-        function c(e, t) {
-          return (
-            e || (e = n.ee),
-            (r.inPlace = function (e, t, n, i, o) {
-              n || (n = '')
-              const a = '-' === n.charAt(0)
-              for (let s = 0; s < t.length; s++) {
-                const c = t[s],
-                  u = e[c]
-                d(u) || (e[c] = r(u, a ? c + n : n, i, c, o))
-              }
-            }),
-            (r.flag = o),
-            r
-          )
-          function r(t, r, n, s, c) {
-            return d(t)
-              ? t
-              : (r || (r = ''),
-                (nrWrapper[o] = t),
-                (function (e, t, r) {
-                  if (Object.defineProperty && Object.keys)
-                    try {
-                      return (
-                        Object.keys(e).forEach(function (r) {
-                          Object.defineProperty(t, r, {
-                            get: function () {
-                              return e[r]
-                            },
-                            set: function (t) {
-                              return (e[r] = t), t
-                            },
-                          })
-                        }),
-                        t
-                      )
-                    } catch (e) {
-                      u([e], r)
-                    }
-                  for (var n in e) a.call(e, n) && (t[n] = e[n])
-                })(t, nrWrapper, e),
-                nrWrapper)
-            function nrWrapper() {
-              var o, a, d, l
-              try {
-                ;(a = this),
-                  (o = [...arguments]),
-                  (d = 'function' == typeof n ? n(o, a) : n || {})
-              } catch (t) {
-                u([t, '', [o, a, s], d], e)
-              }
-              i(r + 'start', [o, a, s], d, c)
-              try {
-                return (l = t.apply(a, o))
-              } catch (e) {
-                throw (i(r + 'err', [o, a, e], d, c), e)
-              } finally {
-                i(r + 'end', [o, a, l], d, c)
-              }
-            }
-          }
-          function i(r, n, i, o) {
-            if (!s || t) {
-              var a = s
-              s = !0
-              try {
-                e.emit(r, n, i, t, o)
-              } catch (t) {
-                u([t, r, n, i], e)
-              }
-              s = a
-            }
-          }
-        }
-        function u(e, t) {
-          t || (t = n.ee)
-          try {
-            t.emit('internal-error', e)
-          } catch (e) {}
-        }
-        function d(e) {
-          return !(e && 'function' == typeof e && e.apply && !e[o])
-        }
-      },
-      9414: (e, t, r) => {
-        'use strict'
-        r.d(t, { J: () => c })
-        var n = r(7836),
-          i = r(2646),
-          o = r(944),
-          a = r(3434)
-        const s = new Map()
-        function c(e, t, r, c) {
-          if (
-            'object' != typeof t ||
-            !t ||
-            'string' != typeof r ||
-            !r ||
-            'function' != typeof t[r]
-          )
-            return (0, o.R)(29)
-          const u = (function (e) {
-              return (e || n.ee).get('logger')
-            })(e),
-            d = (0, a.YM)(u),
-            l = new i.y(n.P)
-          ;(l.level = c.level), (l.customAttributes = c.customAttributes)
-          const f = t[r]?.[a.Jt] || t[r]
-          return (
-            s.set(f, l), d.inPlace(t, [r], 'wrap-logger-', () => s.get(f)), u
-          )
+        r.d(t, { L: () => s })
+        var n = /([^?#]*)[^#]*(#[^?]*|$).*/,
+          i = /([^?#]*)().*/
+        function s(e, t) {
+          return e ? e.replace(t ? n : i, '$1$2') : e
         }
       },
       9300: (e, t, r) => {
@@ -1264,748 +1772,82 @@ NREUM.info = {
         r.d(t, { T: () => n })
         const n = r(860).K7.ajax
       },
-      3333: (e, t, r) => {
+      9324: (e, t, r) => {
         'use strict'
         r.d(t, {
-          $v: () => u,
-          TZ: () => n,
-          Zp: () => i,
-          kd: () => c,
-          mq: () => s,
-          nf: () => a,
-          qN: () => o,
+          AJ: () => o,
+          F3: () => i,
+          Xs: () => s,
+          Yq: () => a,
+          xv: () => n,
         })
-        const n = r(860).K7.genericEvents,
-          i = ['auxclick', 'click', 'copy', 'keydown', 'paste', 'scrollend'],
-          o = ['focus', 'blur'],
-          a = 4,
-          s = 1e3,
-          c = ['PageAction', 'UserAction', 'BrowserPerformance'],
-          u = {
-            MARKS: 'experimental.marks',
-            MEASURES: 'experimental.measures',
-            RESOURCES: 'experimental.resources',
-          }
+        const n = '1.310.1',
+          i = 'PROD',
+          s = 'CDN',
+          o = '@newrelic/rrweb',
+          a = '1.0.1'
       },
-      6774: (e, t, r) => {
+      9566: (e, t, r) => {
         'use strict'
-        r.d(t, { T: () => n })
-        const n = r(860).K7.jserrors
-      },
-      993: (e, t, r) => {
-        'use strict'
-        r.d(t, { A$: () => o, ET: () => a, TZ: () => s, p_: () => i })
-        var n = r(860)
-        const i = {
-            ERROR: 'ERROR',
-            WARN: 'WARN',
-            INFO: 'INFO',
-            DEBUG: 'DEBUG',
-            TRACE: 'TRACE',
-          },
-          o = { OFF: 0, ERROR: 1, WARN: 2, INFO: 3, DEBUG: 4, TRACE: 5 },
-          a = 'log',
-          s = n.K7.logging
-      },
-      3785: (e, t, r) => {
-        'use strict'
-        r.d(t, { R: () => c, b: () => u })
-        var n = r(9908),
-          i = r(1863),
-          o = r(860),
-          a = r(8154),
-          s = r(993)
-        function c(e, t, r = {}, c = s.p_.INFO) {
-          ;(0, n.p)(
-            a.xV,
-            ['API/logging/'.concat(c.toLowerCase(), '/called')],
-            void 0,
-            o.K7.metrics,
-            e
-          ),
-            (0, n.p)(s.ET, [(0, i.t)(), t, r, c], void 0, o.K7.logging, e)
+        r.d(t, { LA: () => a, ZF: () => c, bz: () => o, el: () => d })
+        var n = r(6154)
+        const i = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
+        function s(e, t) {
+          return e ? 15 & e[t] : (16 * Math.random()) | 0
         }
-        function u(e) {
+        function o() {
+          const e = n.gm?.crypto || n.gm?.msCrypto
+          let t,
+            r = 0
           return (
-            'string' == typeof e &&
-            Object.values(s.p_).some((t) => t === e.toUpperCase().trim())
-          )
-        }
-      },
-      8154: (e, t, r) => {
-        'use strict'
-        r.d(t, {
-          z_: () => o,
-          XG: () => s,
-          TZ: () => n,
-          rs: () => i,
-          xV: () => a,
-        })
-        r(6154), r(9566), r(384)
-        const n = r(860).K7.metrics,
-          i = 'sm',
-          o = 'cm',
-          a = 'storeSupportabilityMetrics',
-          s = 'storeEventMetrics'
-      },
-      6630: (e, t, r) => {
-        'use strict'
-        r.d(t, { T: () => n })
-        const n = r(860).K7.pageViewEvent
-      },
-      782: (e, t, r) => {
-        'use strict'
-        r.d(t, { T: () => n })
-        const n = r(860).K7.pageViewTiming
-      },
-      6344: (e, t, r) => {
-        'use strict'
-        r.d(t, {
-          BB: () => d,
-          G4: () => o,
-          Qb: () => l,
-          TZ: () => i,
-          Ug: () => a,
-          _s: () => s,
-          bc: () => u,
-          yP: () => c,
-        })
-        var n = r(2614)
-        const i = r(860).K7.sessionReplay,
-          o = {
-            RECORD: 'recordReplay',
-            PAUSE: 'pauseReplay',
-            REPLAY_RUNNING: 'replayRunning',
-            ERROR_DURING_REPLAY: 'errorDuringReplay',
-          },
-          a = 0.12,
-          s = {
-            DomContentLoaded: 0,
-            Load: 1,
-            FullSnapshot: 2,
-            IncrementalSnapshot: 3,
-            Meta: 4,
-            Custom: 5,
-          },
-          c = { [n.g.ERROR]: 15e3, [n.g.FULL]: 3e5, [n.g.OFF]: 0 },
-          u = {
-            RESET: { message: 'Session was reset', sm: 'Reset' },
-            IMPORT: { message: 'Recorder failed to import', sm: 'Import' },
-            TOO_MANY: { message: '429: Too Many Requests', sm: 'Too-Many' },
-            TOO_BIG: { message: 'Payload was too large', sm: 'Too-Big' },
-            CROSS_TAB: {
-              message: 'Session Entity was set to OFF on another tab',
-              sm: 'Cross-Tab',
-            },
-            ENTITLEMENTS: {
-              message: 'Session Replay is not allowed and will not be started',
-              sm: 'Entitlement',
-            },
-          },
-          d = 5e3,
-          l = { API: 'api' }
-      },
-      5270: (e, t, r) => {
-        'use strict'
-        r.d(t, { Aw: () => c, CT: () => u, SR: () => s, rF: () => d })
-        var n = r(384),
-          i = r(9417),
-          o = r(7767),
-          a = r(6154)
-        function s(e) {
-          return (
-            !!(0, n.dV)().o.MO &&
-            (0, o.V)(e) &&
-            !0 === (0, i.gD)(e, 'session_trace.enabled')
-          )
-        }
-        function c(e) {
-          return !0 === (0, i.gD)(e, 'session_replay.preload') && s(e)
-        }
-        function u(e, t) {
-          const r = t.correctAbsoluteTimestamp(e)
-          return {
-            originalTimestamp: e,
-            correctedTimestamp: r,
-            timestampDiff: e - r,
-            originTime: a.WN,
-            correctedOriginTime: t.correctedOriginTime,
-            originTimeDiff: Math.floor(a.WN - t.correctedOriginTime),
-          }
-        }
-        function d(e, t) {
-          try {
-            if ('string' == typeof t?.type) {
-              if ('password' === t.type.toLowerCase())
-                return '*'.repeat(e?.length || 0)
-              if (
-                void 0 !== t?.dataset?.nrUnmask ||
-                t?.classList?.contains('nr-unmask')
+            e &&
+              e.getRandomValues &&
+              (t = e.getRandomValues(new Uint8Array(30))),
+            i
+              .split('')
+              .map((e) =>
+                'x' === e
+                  ? s(t, r++).toString(16)
+                  : 'y' === e
+                  ? ((3 & s()) | 8).toString(16)
+                  : e
               )
-                return e
-            }
-          } catch (e) {}
-          return 'string' == typeof e
-            ? e.replace(/[\S]/g, '*')
-            : '*'.repeat(e?.length || 0)
+              .join('')
+          )
+        }
+        function a(e) {
+          const t = n.gm?.crypto || n.gm?.msCrypto
+          let r,
+            i = 0
+          t && t.getRandomValues && (r = t.getRandomValues(new Uint8Array(e)))
+          const o = []
+          for (var a = 0; a < e; a++) o.push(s(r, i++).toString(16))
+          return o.join('')
+        }
+        function c() {
+          return a(16)
+        }
+        function d() {
+          return a(32)
         }
       },
-      3738: (e, t, r) => {
+      9908: (e, t, r) => {
         'use strict'
-        r.d(t, {
-          He: () => i,
-          Kp: () => s,
-          Lc: () => u,
-          Rz: () => d,
-          TZ: () => n,
-          bD: () => o,
-          d3: () => a,
-          jx: () => l,
-          uP: () => c,
-        })
-        const n = r(860).K7.sessionTrace,
-          i = 'bstResource',
-          o = 'resource',
-          a = '-start',
-          s = '-end',
-          c = 'fn' + a,
-          u = 'fn' + s,
-          d = 'pushState',
-          l = 1e3
-      },
-      3962: (e, t, r) => {
-        'use strict'
-        r.d(t, {
-          AM: () => o,
-          O2: () => c,
-          Qu: () => u,
-          TZ: () => s,
-          ih: () => d,
-          pP: () => a,
-          tC: () => i,
-        })
-        var n = r(860)
-        const i = ['click', 'keydown', 'submit', 'popstate'],
-          o = 'api',
-          a = 'initialPageLoad',
-          s = n.K7.softNav,
-          c = { INITIAL_PAGE_LOAD: '', ROUTE_CHANGE: 1, UNSPECIFIED: 2 },
-          u = { INTERACTION: 1, AJAX: 2, CUSTOM_END: 3, CUSTOM_TRACER: 4 },
-          d = { IP: 'in progress', FIN: 'finished', CAN: 'cancelled' }
-      },
-      7378: (e, t, r) => {
-        'use strict'
-        r.d(t, {
-          $p: () => x,
-          BR: () => b,
-          Kp: () => R,
-          L3: () => y,
-          Lc: () => c,
-          NC: () => o,
-          SG: () => d,
-          TZ: () => i,
-          U6: () => p,
-          UT: () => m,
-          d3: () => w,
-          dT: () => f,
-          e5: () => A,
-          gx: () => v,
-          l9: () => l,
-          oW: () => h,
-          op: () => g,
-          rw: () => u,
-          tH: () => T,
-          uP: () => s,
-          wW: () => E,
-          xq: () => a,
-        })
-        var n = r(384)
-        const i = r(860).K7.spa,
-          o = ['click', 'submit', 'keypress', 'keydown', 'keyup', 'change'],
-          a = 999,
-          s = 'fn-start',
-          c = 'fn-end',
-          u = 'cb-start',
-          d = 'api-ixn-',
-          l = 'remaining',
-          f = 'interaction',
-          h = 'spaNode',
-          p = 'jsonpNode',
-          g = 'fetch-start',
-          m = 'fetch-done',
-          v = 'fetch-body-',
-          b = 'jsonp-end',
-          y = (0, n.dV)().o.ST,
-          w = '-start',
-          R = '-end',
-          x = '-body',
-          E = 'cb' + R,
-          A = 'jsTime',
-          T = 'fetch'
-      },
-      4234: (e, t, r) => {
-        'use strict'
-        r.d(t, { W: () => o })
-        var n = r(7836),
-          i = r(1687)
-        class o {
-          constructor(e, t) {
-            ;(this.agentIdentifier = e),
-              (this.ee = n.ee.get(e)),
-              (this.featureName = t),
-              (this.blocked = !1)
-          }
-          deregisterDrain() {
-            ;(0, i.x3)(this.agentIdentifier, this.featureName)
-          }
+        r.d(t, { d: () => n, p: () => i })
+        var n = r(7836).ee.get('handle')
+        function i(e, t, r, i, s) {
+          s
+            ? (s.buffer([e], i), s.emit(e, t, r))
+            : (n.buffer([e], i), n.emit(e, t, r))
         }
-      },
-      7767: (e, t, r) => {
-        'use strict'
-        r.d(t, { V: () => o })
-        var n = r(9417),
-          i = r(6154)
-        const o = (e) => i.RI && !0 === (0, n.gD)(e, 'privacy.cookies_enabled')
-      },
-      8969: (e, t, r) => {
-        'use strict'
-        r.d(t, { j: () => I })
-        var n = r(860),
-          i = r(2555),
-          o = r(3371),
-          a = r(9908),
-          s = r(7836),
-          c = r(1687),
-          u = r(5289),
-          d = r(6154),
-          l = r(944),
-          f = r(8154),
-          h = r(384),
-          p = r(6344)
-        const g = [
-            'setErrorHandler',
-            'finished',
-            'addToTrace',
-            'addRelease',
-            'recordCustomEvent',
-            'addPageAction',
-            'setCurrentRouteName',
-            'setPageViewName',
-            'setCustomAttribute',
-            'interaction',
-            'noticeError',
-            'setUserId',
-            'setApplicationVersion',
-            'start',
-            p.G4.RECORD,
-            p.G4.PAUSE,
-            'log',
-            'wrapLogger',
-          ],
-          m = ['setErrorHandler', 'finished', 'addToTrace', 'addRelease']
-        var v = r(1863),
-          b = r(2614),
-          y = r(993),
-          w = r(3785),
-          R = r(9414),
-          x = r(3241),
-          E = r(5701)
-        function A() {
-          const e = (0, h.pV)()
-          g.forEach((t) => {
-            e[t] = (...r) =>
-              (function (t, ...r) {
-                let n = []
-                return (
-                  Object.values(e.initializedAgents).forEach((e) => {
-                    e && e.api
-                      ? e.exposed && e.api[t] && n.push(e.api[t](...r))
-                      : (0, l.R)(38, t)
-                  }),
-                  n.length > 1 ? n : n[0]
-                )
-              })(t, ...r)
-          })
-        }
-        const T = {}
-        var S = r(9417),
-          N = r(5603)
-        const _ = (e) => {
-          const t = e.startsWith('http')
-          ;(e += '/'), (r.p = t ? e : 'https://' + e)
-        }
-        let O = !1
-        function I(e, t = {}, g, I) {
-          let {
-            init: P,
-            info: j,
-            loader_config: C,
-            runtime: k = {},
-            exposed: L = !0,
-          } = t
-          k.loaderType = g
-          const H = (0, h.pV)()
-          j || ((P = H.init), (j = H.info), (C = H.loader_config)),
-            (0, S.xN)(e.agentIdentifier, P || {}),
-            (0, N.a)(e.agentIdentifier, C || {}),
-            (j.jsAttributes ??= {}),
-            d.bv && (j.jsAttributes.isWorker = !0),
-            (0, i.x1)(e.agentIdentifier, j)
-          const M = (0, S.D0)(e.agentIdentifier),
-            D = [j.beacon, j.errorBeacon]
-          O ||
-            (M.proxy.assets && (_(M.proxy.assets), D.push(M.proxy.assets)),
-            M.proxy.beacon && D.push(M.proxy.beacon),
-            A(),
-            (0, h.US)('activatedFeatures', E.B),
-            (e.runSoftNavOverSpa &&=
-              !0 === M.soft_navigations.enabled &&
-              M.feature_flags.includes('soft_nav'))),
-            (k.denyList = [
-              ...(M.ajax.deny_list || []),
-              ...(M.ajax.block_internal ? D : []),
-            ]),
-            (k.ptid = e.agentIdentifier),
-            (0, o.V)(e.agentIdentifier, k),
-            (e.ee = s.ee.get(e.agentIdentifier)),
-            void 0 === e.api &&
-              (e.api = (function (e, t, h = !1) {
-                t || (0, c.Ak)(e, 'api')
-                const g = {}
-                var A = s.ee.get(e),
-                  S = A.get('tracer')
-                ;(T[e] = b.g.OFF),
-                  A.on(p.G4.REPLAY_RUNNING, (t) => {
-                    T[e] = t
-                  })
-                var N = 'api-',
-                  _ = N + 'ixn-'
-                function O(t, r, n, o) {
-                  const a = (0, i.Vp)(e)
-                  return (
-                    null === r
-                      ? delete a.jsAttributes[t]
-                      : (0, i.x1)(e, {
-                          ...a,
-                          jsAttributes: { ...a.jsAttributes, [t]: r },
-                        }),
-                    j(N, n, !0, o || null === r ? 'session' : void 0)(t, r)
-                  )
-                }
-                function I() {}
-                ;(g.log = function (
-                  e,
-                  { customAttributes: t = {}, level: r = y.p_.INFO } = {}
-                ) {
-                  ;(0, a.p)(f.xV, ['API/log/called'], void 0, n.K7.metrics, A),
-                    (0, w.R)(A, e, t, r)
-                }),
-                  (g.wrapLogger = (
-                    e,
-                    t,
-                    { customAttributes: r = {}, level: i = y.p_.INFO } = {}
-                  ) => {
-                    ;(0, a.p)(
-                      f.xV,
-                      ['API/wrapLogger/called'],
-                      void 0,
-                      n.K7.metrics,
-                      A
-                    ),
-                      (0, R.J)(A, e, t, { customAttributes: r, level: i })
-                  }),
-                  m.forEach((e) => {
-                    g[e] = j(N, e, !0, 'api')
-                  }),
-                  (g.addPageAction = j(
-                    N,
-                    'addPageAction',
-                    !0,
-                    n.K7.genericEvents
-                  )),
-                  (g.recordCustomEvent = j(
-                    N,
-                    'recordCustomEvent',
-                    !0,
-                    n.K7.genericEvents
-                  )),
-                  (g.setPageViewName = function (t, r) {
-                    if ('string' == typeof t)
-                      return (
-                        '/' !== t.charAt(0) && (t = '/' + t),
-                        ((0, o.f)(e).customTransaction =
-                          (r || 'http://custom.transaction') + t),
-                        j(N, 'setPageViewName', !0)()
-                      )
-                  }),
-                  (g.setCustomAttribute = function (e, t, r = !1) {
-                    if ('string' == typeof e) {
-                      if (
-                        ['string', 'number', 'boolean'].includes(typeof t) ||
-                        null === t
-                      )
-                        return O(e, t, 'setCustomAttribute', r)
-                      ;(0, l.R)(40, typeof t)
-                    } else (0, l.R)(39, typeof e)
-                  }),
-                  (g.setUserId = function (e) {
-                    if ('string' == typeof e || null === e)
-                      return O('enduser.id', e, 'setUserId', !0)
-                    ;(0, l.R)(41, typeof e)
-                  }),
-                  (g.setApplicationVersion = function (e) {
-                    if ('string' == typeof e || null === e)
-                      return O(
-                        'application.version',
-                        e,
-                        'setApplicationVersion',
-                        !1
-                      )
-                    ;(0, l.R)(42, typeof e)
-                  }),
-                  (g.start = () => {
-                    try {
-                      ;(0, a.p)(
-                        f.xV,
-                        ['API/start/called'],
-                        void 0,
-                        n.K7.metrics,
-                        A
-                      ),
-                        A.emit('manual-start-all')
-                    } catch (e) {
-                      ;(0, l.R)(23, e)
-                    }
-                  }),
-                  (g[p.G4.RECORD] = function () {
-                    ;(0, a.p)(
-                      f.xV,
-                      ['API/recordReplay/called'],
-                      void 0,
-                      n.K7.metrics,
-                      A
-                    ),
-                      (0, a.p)(p.G4.RECORD, [], void 0, n.K7.sessionReplay, A)
-                  }),
-                  (g[p.G4.PAUSE] = function () {
-                    ;(0, a.p)(
-                      f.xV,
-                      ['API/pauseReplay/called'],
-                      void 0,
-                      n.K7.metrics,
-                      A
-                    ),
-                      (0, a.p)(p.G4.PAUSE, [], void 0, n.K7.sessionReplay, A)
-                  }),
-                  (g.interaction = function (e) {
-                    return new I().get('object' == typeof e ? e : {})
-                  })
-                const P = (I.prototype = {
-                  createTracer: function (e, t) {
-                    var r = {},
-                      i = this,
-                      o = 'function' == typeof t
-                    return (
-                      (0, a.p)(
-                        f.xV,
-                        ['API/createTracer/called'],
-                        void 0,
-                        n.K7.metrics,
-                        A
-                      ),
-                      h ||
-                        (0, a.p)(
-                          _ + 'tracer',
-                          [(0, v.t)(), e, r],
-                          i,
-                          n.K7.spa,
-                          A
-                        ),
-                      function () {
-                        if (
-                          (S.emit(
-                            (o ? '' : 'no-') + 'fn-start',
-                            [(0, v.t)(), i, o],
-                            r
-                          ),
-                          o)
-                        )
-                          try {
-                            return t.apply(this, arguments)
-                          } catch (e) {
-                            const t = 'string' == typeof e ? new Error(e) : e
-                            throw (S.emit('fn-err', [arguments, this, t], r), t)
-                          } finally {
-                            S.emit('fn-end', [(0, v.t)()], r)
-                          }
-                      }
-                    )
-                  },
-                })
-                function j(t, r, i, o) {
-                  return function () {
-                    return (
-                      (0, a.p)(
-                        f.xV,
-                        ['API/' + r + '/called'],
-                        void 0,
-                        n.K7.metrics,
-                        A
-                      ),
-                      (0, x.W)({
-                        agentIdentifier: e,
-                        loaded: !!E.B?.[e],
-                        type: 'data',
-                        name: 'api',
-                        feature: t + r,
-                        data: { notSpa: i, bufferGroup: o },
-                      }),
-                      o &&
-                        (0, a.p)(
-                          t + r,
-                          [i ? (0, v.t)() : performance.now(), ...arguments],
-                          i ? null : this,
-                          o,
-                          A
-                        ),
-                      i ? void 0 : this
-                    )
-                  }
-                }
-                function C() {
-                  r.e(478)
-                    .then(r.bind(r, 8778))
-                    .then(({ setAPI: t }) => {
-                      t(e), (0, c.Ze)(e, 'api')
-                    })
-                    .catch((e) => {
-                      ;(0, l.R)(27, e), A.abort()
-                    })
-                }
-                return (
-                  [
-                    'actionText',
-                    'setName',
-                    'setAttribute',
-                    'save',
-                    'ignore',
-                    'onEnd',
-                    'getContext',
-                    'end',
-                    'get',
-                  ].forEach((e) => {
-                    P[e] = j(_, e, void 0, h ? n.K7.softNav : n.K7.spa)
-                  }),
-                  (g.setCurrentRouteName = h
-                    ? j(_, 'routeName', void 0, n.K7.softNav)
-                    : j(N, 'routeName', !0, n.K7.spa)),
-                  (g.noticeError = function (t, r) {
-                    'string' == typeof t && (t = new Error(t)),
-                      (0, a.p)(
-                        f.xV,
-                        ['API/noticeError/called'],
-                        void 0,
-                        n.K7.metrics,
-                        A
-                      ),
-                      (0, a.p)(
-                        'err',
-                        [t, (0, v.t)(), !1, r, !!T[e]],
-                        void 0,
-                        n.K7.jserrors,
-                        A
-                      )
-                  }),
-                  d.RI ? (0, u.GG)(() => C(), !0) : C(),
-                  g
-                )
-              })(e.agentIdentifier, I, e.runSoftNavOverSpa)),
-            void 0 === e.exposed && (e.exposed = L),
-            O ||
-              (0, x.W)({
-                agentIdentifier: e.agentIdentifier,
-                loaded: !!E.B?.[e.agentIdentifier],
-                type: 'lifecycle',
-                name: 'initialize',
-                feature: void 0,
-                data: { init: M, info: j, loader_config: C, runtime: k },
-              }),
-            (O = !0)
-        }
-      },
-      8374: (e, t, r) => {
-        r.nc = (() => {
-          try {
-            return document?.currentScript?.nonce
-          } catch (e) {}
-          return ''
-        })()
-      },
-      860: (e, t, r) => {
-        'use strict'
-        r.d(t, {
-          $J: () => d,
-          K7: () => c,
-          P3: () => u,
-          XX: () => i,
-          Yy: () => s,
-          df: () => o,
-          qY: () => n,
-          v4: () => a,
-        })
-        const n = 'events',
-          i = 'jserrors',
-          o = 'browser/blobs',
-          a = 'rum',
-          s = 'browser/logs',
-          c = {
-            ajax: 'ajax',
-            genericEvents: 'generic_events',
-            jserrors: i,
-            logging: 'logging',
-            metrics: 'metrics',
-            pageAction: 'page_action',
-            pageViewEvent: 'page_view_event',
-            pageViewTiming: 'page_view_timing',
-            sessionReplay: 'session_replay',
-            sessionTrace: 'session_trace',
-            softNav: 'soft_navigations',
-            spa: 'spa',
-          },
-          u = {
-            [c.pageViewEvent]: 1,
-            [c.pageViewTiming]: 2,
-            [c.metrics]: 3,
-            [c.jserrors]: 4,
-            [c.spa]: 5,
-            [c.ajax]: 6,
-            [c.sessionTrace]: 7,
-            [c.softNav]: 8,
-            [c.sessionReplay]: 9,
-            [c.logging]: 10,
-            [c.genericEvents]: 11,
-          },
-          d = {
-            [c.pageViewEvent]: a,
-            [c.pageViewTiming]: n,
-            [c.ajax]: n,
-            [c.spa]: n,
-            [c.softNav]: n,
-            [c.metrics]: i,
-            [c.jserrors]: i,
-            [c.sessionTrace]: o,
-            [c.sessionReplay]: o,
-            [c.logging]: s,
-            [c.genericEvents]: 'ins',
-          }
       },
     },
     n = {}
   function i(e) {
     var t = n[e]
     if (void 0 !== t) return t.exports
-    var o = (n[e] = { exports: {} })
-    return r[e](o, o.exports, i), o.exports
+    var s = (n[e] = { exports: {} })
+    return r[e](s, s.exports, i), s.exports
   }
   ;(i.m = r),
     (i.d = (e, t) => {
@@ -2019,64 +1861,63 @@ NREUM.info = {
       Promise.all(Object.keys(i.f).reduce((t, r) => (i.f[r](e, t), t), []))),
     (i.u = (e) =>
       ({ 212: 'nr-spa-compressor', 249: 'nr-spa-recorder', 478: 'nr-spa' }[e] +
-      '-1.285.0.min.js')),
+      '-1.310.1.min.js')),
     (i.o = (e, t) => Object.prototype.hasOwnProperty.call(e, t)),
     (e = {}),
-    (t = 'NRBA-1.285.0.PROD:'),
-    (i.l = (r, n, o, a) => {
+    (t = 'NRBA-1.310.1.PROD:'),
+    (i.l = (r, n, s, o) => {
       if (e[r]) e[r].push(n)
       else {
-        var s, c
-        if (void 0 !== o)
+        var a, c
+        if (void 0 !== s)
           for (
-            var u = document.getElementsByTagName('script'), d = 0;
-            d < u.length;
-            d++
+            var d = document.getElementsByTagName('script'), u = 0;
+            u < d.length;
+            u++
           ) {
-            var l = u[d]
+            var l = d[u]
             if (
               l.getAttribute('src') == r ||
-              l.getAttribute('data-webpack') == t + o
+              l.getAttribute('data-webpack') == t + s
             ) {
-              s = l
+              a = l
               break
             }
           }
-        if (!s) {
+        if (!a) {
           c = !0
           var f = {
-            478: 'sha512-73OmviyU40lnC5NZHvj5egb1Dktz4of17DYc4nbj2RduD/YSRadVPKgqV4pTV++UKRfMh1kiyzvZ3EZ9+nCVRA==',
-            249: 'sha512-K0uLsDVOs99bSE/U1/+N3dF9ugBMgNxv9bGCDosl/OYQ9Vbh3OEiiDdoeJ2Jyez+MV++R54r9pGP4l89pkOgrw==',
-            212: 'sha512-xpg2N/nVV3R+2dh1bNPkgU4MdEfsSknhvWWYRI9zgj8nuzl1HP8n4T1tr6iNK7k+LC8m/kDrZH58sW6X5daNDQ==',
+            478: 'sha512-DeqFdXQE4jC8a4pm4mRmKcvJcc0AwELF034DvhaEDGgJkABtwtC38fNnc5r/h2Ao/FbfITw8xLU63nj0RuK7eQ==',
+            249: 'sha512-omU0YV+hQgZOl40hWu2N/rhIaUJZ39c9UlgZbATxeG40NXrj8Ql6+lKlr7TG1xepBqnrxKzZpw7zzYci3rWWjQ==',
+            212: 'sha512-c9QUv59w2LTBgdjv9nbbpoyRqBOF2XbGfNVUaeBznaQEi49XTybGIsD9vogQKm7J8zdheuqHIho6/kaczmIUDw==',
           }
-          ;((s = document.createElement('script')).charset = 'utf-8'),
-            (s.timeout = 120),
-            i.nc && s.setAttribute('nonce', i.nc),
-            s.setAttribute('data-webpack', t + o),
-            (s.src = r),
-            0 !== s.src.indexOf(window.location.origin + '/') &&
-              (s.crossOrigin = 'anonymous'),
-            f[a] && (s.integrity = f[a])
+          ;((a = document.createElement('script')).charset = 'utf-8'),
+            i.nc && a.setAttribute('nonce', i.nc),
+            a.setAttribute('data-webpack', t + s),
+            (a.src = r),
+            0 !== a.src.indexOf(window.location.origin + '/') &&
+              (a.crossOrigin = 'anonymous'),
+            f[o] && (a.integrity = f[o])
         }
         e[r] = [n]
         var h = (t, n) => {
-            ;(s.onerror = s.onload = null), clearTimeout(p)
+            ;(a.onerror = a.onload = null), clearTimeout(p)
             var i = e[r]
             if (
               (delete e[r],
-              s.parentNode && s.parentNode.removeChild(s),
+              a.parentNode && a.parentNode.removeChild(a),
               i && i.forEach((e) => e(n)),
               t)
             )
               return t(n)
           },
           p = setTimeout(
-            h.bind(null, void 0, { type: 'timeout', target: s }),
+            h.bind(null, void 0, { type: 'timeout', target: a }),
             12e4
           )
-        ;(s.onerror = h.bind(null, s.onerror)),
-          (s.onload = h.bind(null, s.onload)),
-          c && document.head.appendChild(s)
+        ;(a.onerror = h.bind(null, a.onerror)),
+          (a.onload = h.bind(null, a.onload)),
+          c && document.head.appendChild(a)
       }
     }),
     (i.r = (e) => {
@@ -2093,22 +1934,22 @@ NREUM.info = {
         if (0 !== n)
           if (n) r.push(n[2])
           else {
-            var o = new Promise((r, i) => (n = e[t] = [r, i]))
-            r.push((n[2] = o))
-            var a = i.p + i.u(t),
-              s = new Error()
+            var s = new Promise((r, i) => (n = e[t] = [r, i]))
+            r.push((n[2] = s))
+            var o = i.p + i.u(t),
+              a = new Error()
             i.l(
-              a,
+              o,
               (r) => {
                 if (i.o(e, t) && (0 !== (n = e[t]) && (e[t] = void 0), n)) {
-                  var o = r && ('load' === r.type ? 'missing' : r.type),
-                    a = r && r.target && r.target.src
-                  ;(s.message =
-                    'Loading chunk ' + t + ' failed.\n(' + o + ': ' + a + ')'),
-                    (s.name = 'ChunkLoadError'),
-                    (s.type = o),
-                    (s.request = a),
-                    n[1](s)
+                  var s = r && ('load' === r.type ? 'missing' : r.type),
+                    o = r && r.target && r.target.src
+                  ;(a.message =
+                    'Loading chunk ' + t + ' failed: (' + s + ': ' + o + ')'),
+                    (a.name = 'ChunkLoadError'),
+                    (a.type = s),
+                    (a.request = o),
+                    n[1](a)
                 }
               },
               'chunk-' + t,
@@ -2118,244 +1959,356 @@ NREUM.info = {
       }
       var t = (t, r) => {
           var n,
-            o,
-            [a, s, c] = r,
-            u = 0
-          if (a.some((t) => 0 !== e[t])) {
-            for (n in s) i.o(s, n) && (i.m[n] = s[n])
+            s,
+            [o, a, c] = r,
+            d = 0
+          if (o.some((t) => 0 !== e[t])) {
+            for (n in a) i.o(a, n) && (i.m[n] = a[n])
             if (c) c(i)
           }
-          for (t && t(r); u < a.length; u++)
-            (o = a[u]), i.o(e, o) && e[o] && e[o][0](), (e[o] = 0)
+          for (t && t(r); d < o.length; d++)
+            (s = o[d]), i.o(e, s) && e[s] && e[s][0](), (e[s] = 0)
         },
-        r = (self['webpackChunk:NRBA-1.285.0.PROD'] =
-          self['webpackChunk:NRBA-1.285.0.PROD'] || [])
+        r = (self['webpackChunk:NRBA-1.310.1.PROD'] =
+          self['webpackChunk:NRBA-1.310.1.PROD'] || [])
       r.forEach(t.bind(null, 0)), (r.push = t.bind(null, r.push.bind(r)))
     })(),
     (() => {
       'use strict'
       i(8374)
-      var e = i(944),
-        t = i(6344),
-        r = i(9566)
-      class n {
-        agentIdentifier
-        constructor() {
-          this.agentIdentifier = (0, r.LA)(16)
-        }
-        #e(t, ...r) {
-          if ('function' == typeof this.api?.[t]) return this.api[t](...r)
-          ;(0, e.R)(35, t)
-        }
-        addPageAction(e, t) {
-          return this.#e('addPageAction', e, t)
-        }
-        recordCustomEvent(e, t) {
-          return this.#e('recordCustomEvent', e, t)
-        }
-        setPageViewName(e, t) {
-          return this.#e('setPageViewName', e, t)
-        }
-        setCustomAttribute(e, t, r) {
-          return this.#e('setCustomAttribute', e, t, r)
-        }
-        noticeError(e, t) {
-          return this.#e('noticeError', e, t)
-        }
-        setUserId(e) {
-          return this.#e('setUserId', e)
-        }
-        setApplicationVersion(e) {
-          return this.#e('setApplicationVersion', e)
-        }
-        setErrorHandler(e) {
-          return this.#e('setErrorHandler', e)
-        }
-        addRelease(e, t) {
-          return this.#e('addRelease', e, t)
-        }
-        log(e, t) {
-          return this.#e('log', e, t)
-        }
-      }
-      class o extends n {
-        #e(t, ...r) {
-          if ('function' == typeof this.api?.[t]) return this.api[t](...r)
-          ;(0, e.R)(35, t)
-        }
-        start() {
-          return this.#e('start')
-        }
-        finished(e) {
-          return this.#e('finished', e)
-        }
-        recordReplay() {
-          return this.#e(t.G4.RECORD)
-        }
-        pauseReplay() {
-          return this.#e(t.G4.PAUSE)
-        }
-        addToTrace(e) {
-          return this.#e('addToTrace', e)
-        }
-        setCurrentRouteName(e) {
-          return this.#e('setCurrentRouteName', e)
-        }
-        interaction() {
-          return this.#e('interaction')
-        }
-        wrapLogger(e, t, r) {
-          return this.#e('wrapLogger', e, t, r)
-        }
-      }
-      var a = i(860),
-        s = i(9417)
-      const c = Object.values(a.K7)
-      function u(e) {
-        const t = {}
-        return (
-          c.forEach((r) => {
-            t[r] = (function (e, t) {
-              return !0 === (0, s.gD)(t, ''.concat(e, '.enabled'))
-            })(r, e)
-          }),
-          t
-        )
-      }
-      var d = i(8969)
-      var l = i(1687),
-        f = i(4234),
-        h = i(5289),
-        p = i(6154),
-        g = i(5270),
-        m = i(7767),
-        v = i(6389)
-      class b extends f.W {
-        constructor(e, t, r = !0) {
+      var e = i(8362),
+        t = i(860)
+      const r = Object.values(t.K7)
+      var n = i(5205)
+      var s = i(9908),
+        o = i(1863),
+        a = i(4261),
+        c = i(1738)
+      var d = i(1687),
+        u = i(4234),
+        l = i(5289),
+        f = i(6154),
+        h = i(944),
+        p = i(5270),
+        g = i(7767),
+        m = i(6389),
+        v = i(7699)
+      class y extends u.W {
+        constructor(e, t) {
           super(e.agentIdentifier, t),
-            (this.auto = r),
+            (this.agentRef = e),
             (this.abortHandler = void 0),
             (this.featAggregate = void 0),
-            (this.onAggregateImported = void 0),
-            !1 === e.init[this.featureName].autoStart && (this.auto = !1),
-            this.auto
-              ? (0, l.Ak)(e.agentIdentifier, t)
-              : this.ee.on(
-                  'manual-start-all',
-                  (0, v.J)(() => {
-                    ;(0, l.Ak)(e.agentIdentifier, this.featureName),
-                      (this.auto = !0),
-                      this.importAggregator(e)
-                  })
-                )
+            (this.loadedSuccessfully = void 0),
+            (this.onAggregateImported = new Promise((e) => {
+              this.loadedSuccessfully = e
+            })),
+            (this.deferred = Promise.resolve()),
+            !1 === e.init[this.featureName].autoStart
+              ? (this.deferred = new Promise((t, r) => {
+                  this.ee.on(
+                    'manual-start-all',
+                    (0, m.J)(() => {
+                      ;(0, d.Ak)(e.agentIdentifier, this.featureName), t()
+                    })
+                  )
+                }))
+              : (0, d.Ak)(e.agentIdentifier, t)
         }
-        importAggregator(t, r = {}) {
-          if (this.featAggregate || !this.auto) return
-          let n
-          this.onAggregateImported = new Promise((e) => {
-            n = e
-          })
-          const o = async () => {
-            let o
+        importAggregator(e, t, r = {}) {
+          if (this.featAggregate) return
+          const n = async () => {
+            let n
+            await this.deferred
             try {
-              if ((0, m.V)(this.agentIdentifier)) {
-                const { setupAgentSession: e } = await i
+              if ((0, g.V)(e.init)) {
+                const { setupAgentSession: t } = await i
                   .e(478)
-                  .then(i.bind(i, 6526))
-                o = e(t)
+                  .then(i.bind(i, 8766))
+                n = t(e)
               }
-            } catch (t) {
-              ;(0, e.R)(20, t),
-                this.ee.emit('internal-error', [t]),
-                this.featureName === a.K7.sessionReplay && this.abortHandler?.()
+            } catch (e) {
+              ;(0, h.R)(20, e),
+                this.ee.emit('internal-error', [e]),
+                (0, s.p)(v.qh, [e], void 0, this.featureName, this.ee)
             }
             try {
-              if (!this.#t(this.featureName, o))
+              if (!this.#t(this.featureName, n, e.init))
                 return (
-                  (0, l.Ze)(this.agentIdentifier, this.featureName), void n(!1)
+                  (0, d.Ze)(this.agentIdentifier, this.featureName),
+                  void this.loadedSuccessfully(!1)
                 )
-              const { lazyFeatureLoader: e } = await i
-                  .e(478)
-                  .then(i.bind(i, 6103)),
-                { Aggregate: a } = await e(this.featureName, 'aggregate')
-              ;(this.featAggregate = new a(t, r)),
-                t.runtime.harvester.initializedAggregates.push(
+              const { Aggregate: i } = await t()
+              ;(this.featAggregate = new i(e, r)),
+                e.runtime.harvester.initializedAggregates.push(
                   this.featAggregate
                 ),
-                n(!0)
-            } catch (t) {
-              ;(0, e.R)(34, t),
+                this.loadedSuccessfully(!0)
+            } catch (e) {
+              ;(0, h.R)(34, e),
                 this.abortHandler?.(),
-                (0, l.Ze)(this.agentIdentifier, this.featureName, !0),
-                n(!1),
+                (0, d.Ze)(this.agentIdentifier, this.featureName, !0),
+                this.loadedSuccessfully(!1),
                 this.ee && this.ee.abort()
             }
           }
-          p.RI ? (0, h.GG)(() => o(), !0) : o()
+          f.RI ? (0, l.GG)(() => n(), !0) : n()
         }
-        #t(e, t) {
+        #t(e, r, n) {
+          if (this.blocked) return !1
           switch (e) {
-            case a.K7.sessionReplay:
-              return (0, g.SR)(this.agentIdentifier) && !!t
-            case a.K7.sessionTrace:
-              return !!t
+            case t.K7.sessionReplay:
+              return (0, p.SR)(n) && !!r
+            case t.K7.sessionTrace:
+              return !!r
             default:
               return !0
           }
         }
       }
-      var y = i(6630)
-      class w extends b {
-        static featureName = y.T
-        constructor(e, t = !0) {
-          super(e, y.T, t), this.importAggregator(e)
+      var b = i(6630),
+        w = i(2614),
+        R = i(3241)
+      class E extends y {
+        static featureName = b.T
+        constructor(e) {
+          var t
+          super(e, b.T),
+            this.setupInspectionEvents(e.agentIdentifier),
+            (t = e),
+            (0, c.Y)(
+              a.Fw,
+              function (e, r) {
+                'string' == typeof e &&
+                  ('/' !== e.charAt(0) && (e = '/' + e),
+                  (t.runtime.customTransaction =
+                    (r || 'http://custom.transaction') + e),
+                  (0, s.p)(a.Pl + a.Fw, [(0, o.t)()], void 0, void 0, t.ee))
+              },
+              t
+            ),
+            this.importAggregator(e, () => i.e(478).then(i.bind(i, 2467)))
+        }
+        setupInspectionEvents(e) {
+          const t = (t, r) => {
+            t &&
+              (0, R.W)({
+                agentIdentifier: e,
+                timeStamp: t.timeStamp,
+                loaded: 'complete' === t.target.readyState,
+                type: 'window',
+                name: r,
+                data: t.target.location + '',
+              })
+          }
+          ;(0, l.sB)((e) => {
+            t(e, 'DOMContentLoaded')
+          }),
+            (0, l.GG)((e) => {
+              t(e, 'load')
+            }),
+            (0, l.Qr)((e) => {
+              t(e, 'navigate')
+            }),
+            this.ee.on(w.tS.UPDATE, (t, r) => {
+              ;(0, R.W)({
+                agentIdentifier: e,
+                type: 'lifecycle',
+                name: 'session',
+                data: r,
+              })
+            })
         }
       }
-      var R = i(384)
-      var x = i(9908),
-        E = i(2843),
-        A = i(3878),
-        T = i(782),
-        S = i(1863)
-      class N extends b {
-        static featureName = T.T
-        constructor(e, t = !0) {
-          super(e, T.T, t),
-            p.RI &&
-              ((0, E.u)(
-                () => (0, x.p)('docHidden', [(0, S.t)()], void 0, T.T, this.ee),
+      var T = i(384)
+      class A extends e.d {
+        constructor(e) {
+          var t
+          ;(super(), f.gm)
+            ? ((this.features = {}),
+              (0, T.bQ)(this.agentIdentifier, this),
+              (this.desiredFeatures = new Set(e.features || [])),
+              this.desiredFeatures.add(E),
+              (0, n.j)(this, e, e.loaderType || 'agent'),
+              (t = this),
+              (0, c.Y)(
+                a.cD,
+                function (e, r, n = !1) {
+                  if ('string' == typeof e) {
+                    if (
+                      ['string', 'number', 'boolean'].includes(typeof r) ||
+                      null === r
+                    )
+                      return (0, c.U)(t, e, r, a.cD, n)
+                    ;(0, h.R)(40, typeof r)
+                  } else (0, h.R)(39, typeof e)
+                },
+                t
+              ),
+              (function (e) {
+                ;(0, c.Y)(
+                  a.Dl,
+                  function (t, r = !1) {
+                    if ('string' != typeof t && null !== t)
+                      return void (0, h.R)(41, typeof t)
+                    const n = e.info.jsAttributes['enduser.id']
+                    r && null != n && n !== t
+                      ? (0, s.p)(
+                          a.Pl + 'setUserIdAndResetSession',
+                          [t],
+                          void 0,
+                          'session',
+                          e.ee
+                        )
+                      : (0, c.U)(e, 'enduser.id', t, a.Dl, !0)
+                  },
+                  e
+                )
+              })(this),
+              (function (e) {
+                ;(0, c.Y)(
+                  a.nb,
+                  function (t) {
+                    if ('string' == typeof t || null === t)
+                      return (0, c.U)(e, 'application.version', t, a.nb, !1)
+                    ;(0, h.R)(42, typeof t)
+                  },
+                  e
+                )
+              })(this),
+              (function (e) {
+                ;(0, c.Y)(
+                  a.d3,
+                  function () {
+                    e.ee.emit('manual-start-all')
+                  },
+                  e
+                )
+              })(this),
+              (function (e) {
+                ;(0, c.Y)(
+                  a.Pv,
+                  function (t = !0) {
+                    if ('boolean' == typeof t) {
+                      if (
+                        ((0, s.p)(a.Pl + a.Pv, [t], void 0, 'session', e.ee),
+                        (e.runtime.consented = t),
+                        t)
+                      ) {
+                        const t = e.features.page_view_event
+                        t.onAggregateImported.then((e) => {
+                          const r = t.featAggregate
+                          e && !r.sentRum && r.sendRum()
+                        })
+                      }
+                    } else (0, h.R)(65, typeof t)
+                  },
+                  e
+                )
+              })(this),
+              this.run())
+            : (0, h.R)(21)
+        }
+        get config() {
+          return {
+            info: this.info,
+            init: this.init,
+            loader_config: this.loader_config,
+            runtime: this.runtime,
+          }
+        }
+        get api() {
+          return this
+        }
+        run() {
+          try {
+            const e = (function (e) {
+                const t = {}
+                return (
+                  r.forEach((r) => {
+                    t[r] = !!e[r]?.enabled
+                  }),
+                  t
+                )
+              })(this.init),
+              n = [...this.desiredFeatures]
+            n.sort((e, r) => t.P3[e.featureName] - t.P3[r.featureName]),
+              n.forEach((r) => {
+                if (!e[r.featureName] && r.featureName !== t.K7.pageViewEvent)
+                  return
+                const n = (function (e) {
+                  switch (e) {
+                    case t.K7.ajax:
+                      return [t.K7.jserrors]
+                    case t.K7.sessionTrace:
+                      return [t.K7.ajax, t.K7.pageViewEvent]
+                    case t.K7.sessionReplay:
+                      return [t.K7.sessionTrace]
+                    case t.K7.pageViewTiming:
+                      return [t.K7.pageViewEvent]
+                    default:
+                      return []
+                  }
+                })(r.featureName).filter((e) => !(e in this.features))
+                n.length > 0 &&
+                  (0, h.R)(36, {
+                    targetFeature: r.featureName,
+                    missingDependencies: n,
+                  }),
+                  (this.features[r.featureName] = new r(this))
+              })
+          } catch (e) {
+            ;(0, h.R)(22, e)
+            for (const e in this.features) this.features[e].abortHandler?.()
+            const t = (0, T.Zm)()
+            delete t.initializedAgents[this.agentIdentifier]?.features,
+              delete this.sharedAggregator
+            return t.ee.get(this.agentIdentifier).abort(), !1
+          }
+        }
+      }
+      var x = i(2843),
+        S = i(782)
+      class _ extends y {
+        static featureName = S.T
+        constructor(e) {
+          super(e, S.T),
+            f.RI &&
+              ((0, x.u)(
+                () => (0, s.p)('docHidden', [(0, o.t)()], void 0, S.T, this.ee),
                 !0
               ),
-              (0, A.sp)('pagehide', () =>
-                (0, x.p)('winPagehide', [(0, S.t)()], void 0, T.T, this.ee)
+              (0, x.G)(() =>
+                (0, s.p)('winPagehide', [(0, o.t)()], void 0, S.T, this.ee)
               ),
-              this.importAggregator(e))
+              this.importAggregator(e, () => i.e(478).then(i.bind(i, 9917))))
         }
       }
-      var _ = i(8154)
-      class O extends b {
-        static featureName = _.TZ
-        constructor(e, t = !0) {
-          super(e, _.TZ, t),
-            p.RI &&
+      var O = i(3969)
+      class I extends y {
+        static featureName = O.TZ
+        constructor(e) {
+          super(e, O.TZ),
+            f.RI &&
               document.addEventListener('securitypolicyviolation', (e) => {
-                ;(0, x.p)(
-                  _.xV,
+                ;(0, s.p)(
+                  O.xV,
                   ['Generic/CSPViolation/Detected'],
                   void 0,
                   this.featureName,
                   this.ee
                 )
               }),
-            this.importAggregator(e)
+            this.importAggregator(e, () => i.e(478).then(i.bind(i, 6555)))
         }
       }
-      var I = i(6774),
-        P = i(3304)
-      class j {
+      var N = i(6774),
+        P = i(3878),
+        k = i(3304)
+      class D {
         constructor(e, t, r, n, i) {
           ;(this.name = 'UncaughtError'),
-            (this.message = 'string' == typeof e ? e : (0, P.A)(e)),
+            (this.message = 'string' == typeof e ? e : (0, k.A)(e)),
             (this.sourceURL = t),
             (this.line = r),
             (this.column = n),
@@ -2363,20 +2316,21 @@ NREUM.info = {
         }
       }
       function C(e) {
-        return H(e)
+        return M(e)
           ? e
-          : new j(
+          : new D(
               void 0 !== e?.message ? e.message : e,
               e?.filename || e?.sourceURL,
               e?.lineno || e?.line,
               e?.colno || e?.col,
-              e?.__newrelic
+              e?.__newrelic,
+              e?.cause
             )
       }
-      function k(e) {
+      function j(e) {
         const t = 'Unhandled Promise Rejection: '
         if (!e?.reason) return
-        if (H(e.reason)) {
+        if (M(e.reason)) {
           try {
             e.reason.message.startsWith(t) ||
               (e.reason.message = t + e.reason.message)
@@ -2391,96 +2345,426 @@ NREUM.info = {
           e.error instanceof SyntaxError &&
           !/:\d+$/.test(e.error.stack?.trim())
         ) {
-          const t = new j(
+          const t = new D(
             e.message,
             e.filename,
             e.lineno,
             e.colno,
-            e.error.__newrelic
+            e.error.__newrelic,
+            e.cause
           )
           return (t.name = SyntaxError.name), t
         }
-        return H(e.error) ? e.error : C(e)
+        return M(e.error) ? e.error : C(e)
       }
-      function H(e) {
+      function M(e) {
         return e instanceof Error && !!e.stack
       }
-      class M extends b {
-        static featureName = I.T
-        #r = !1
-        constructor(e, r = !0) {
-          super(e, I.T, r)
+      function B(e, r, n, i, a = (0, o.t)()) {
+        'string' == typeof e && (e = new Error(e)),
+          (0, s.p)(
+            'err',
+            [e, a, !1, r, n.runtime.isRecording, void 0, i],
+            void 0,
+            t.K7.jserrors,
+            n.ee
+          ),
+          (0, s.p)('uaErr', [], void 0, t.K7.genericEvents, n.ee)
+      }
+      var H = i(1541),
+        K = i(993),
+        W = i(3785)
+      function U(
+        e,
+        { customAttributes: t = {}, level: r = K.p_.INFO } = {},
+        n,
+        i,
+        s = (0, o.t)()
+      ) {
+        ;(0, W.R)(n.ee, e, t, r, !1, i, s)
+      }
+      function F(e, r, n, i, c = (0, o.t)()) {
+        ;(0, s.p)(a.Pl + a.hG, [c, e, r, i], void 0, t.K7.genericEvents, n.ee)
+      }
+      function V(e, r, n, i, c = (0, o.t)()) {
+        const { start: d, end: u, customAttributes: l } = r || {},
+          f = { customAttributes: l || {} }
+        if (
+          'object' != typeof f.customAttributes ||
+          'string' != typeof e ||
+          0 === e.length
+        )
+          return void (0, h.R)(57)
+        const p = (e, t) =>
+          null == e
+            ? t
+            : 'number' == typeof e
+            ? e
+            : e instanceof PerformanceMark
+            ? e.startTime
+            : Number.NaN
+        if (
+          ((f.start = p(d, 0)),
+          (f.end = p(u, c)),
+          Number.isNaN(f.start) || Number.isNaN(f.end))
+        )
+          (0, h.R)(57)
+        else {
+          if (((f.duration = f.end - f.start), !(f.duration < 0)))
+            return (
+              (0, s.p)(
+                a.Pl + a.V1,
+                [f, e, i],
+                void 0,
+                t.K7.genericEvents,
+                n.ee
+              ),
+              f
+            )
+          ;(0, h.R)(58)
+        }
+      }
+      function G(e, r = {}, n, i, c = (0, o.t)()) {
+        ;(0, s.p)(a.Pl + a.fF, [c, e, r, i], void 0, t.K7.genericEvents, n.ee)
+      }
+      var z = i(9119),
+        Y = i(7866)
+      const q = new Set()
+      let Z = []
+      if (f.gm.PerformanceObserver?.supportedEntryTypes.includes('resource')) {
+        new PerformanceObserver((e) => {
+          e.getEntries().forEach((e) => {
+            if (
+              ((e) =>
+                'script' === e.initiatorType ||
+                ('link' === e.initiatorType && e.name.endsWith('.js')))(e)
+            ) {
+              q.size > 250 && q.delete(q.values().next().value), q.add(e)
+              const t = []
+              Z.forEach(({ test: r, addedAt: n }, i) => {
+                ;(r(e) || (0, o.t)() - n > 1e4) && t.push(i)
+              }),
+                (Z = Z.filter((e, r) => !t.includes(r)))
+            }
+          })
+        }).observe({ type: 'resource', buffered: !0 })
+      }
+      function X() {
+        const e = {
+            registeredAt: (0, o.t)(),
+            reportedAt: void 0,
+            fetchStart: 0,
+            fetchEnd: 0,
+            asset: void 0,
+            type: 'unknown',
+          },
+          t = (function () {
+            let e
+            try {
+              const t = Error.stackTraceLimit
+              ;(Error.stackTraceLimit = 50),
+                (e = new Error().stack),
+                (Error.stackTraceLimit = t)
+            } catch (t) {
+              e = new Error().stack
+            }
+            return e
+          })()
+        if (!t) return e
+        const r =
+          f.gm.performance
+            ?.getEntriesByType('navigation')
+            ?.find((e) => 'navigation' === e.initiatorType)?.name || ''
+        try {
+          const n = (function (e) {
+            if (!e || 'string' != typeof e) return []
+            const t = new Set(),
+              r = e.split('\n')
+            for (const e of r) {
+              const r = e.match(Y.cn) || e.match(Y.hB)
+              r && r[2] && t.add((0, z.L)(r[2]))
+            }
+            return [...t]
+          })(t).at(-1)
+          if (!n) return e
+          if (r.includes(n))
+            return (e.asset = (0, z.L)(r)), (e.type = 'inline'), e
+          const i =
+            performance.getEntriesByType('resource').find(s) || [...q].find(s)
+          function s(e) {
+            const t = (0, z.L)(e.name)
+            return t.endsWith(n) || n.endsWith(t)
+          }
+          function a(t) {
+            ;(e.fetchStart = Math.floor(t.startTime)),
+              (e.fetchEnd = Math.floor(t.responseEnd)),
+              (e.asset = t.name),
+              (e.type = t.initiatorType)
+          }
+          i
+            ? a(i)
+            : (function (e) {
+                if (!e || !f.gm.document) return !1
+                try {
+                  const t = f.gm.document.querySelectorAll(
+                    'link[rel="preload"][as="script"]'
+                  )
+                  for (const r of t) if ((0, z.L)(r.href) === e) return !0
+                } catch (e) {}
+                return !1
+              })(n) &&
+              ((e.asset = n),
+              (e.type = 'preload'),
+              Z.push({
+                addedAt: (0, o.t)(),
+                test: (e) => !!s(e) && (a(e), !0),
+              }))
+        } catch (c) {}
+        return e
+      }
+      const J = ['name', 'id', 'type']
+      function Q(e) {
+        ;(0, c.Y)(
+          a.eY,
+          function (t) {
+            return ee(e, t)
+          },
+          e
+        )
+      }
+      function ee(e, r, n) {
+        ;(0, h.R)(54, 'newrelic.register'),
+          (r ||= {}),
+          (r.type = H.f.MFE),
+          (r.licenseKey ||= e.info.licenseKey),
+          (r.blocked = !1),
+          (r.parent = n || {}),
+          ('object' != typeof r.tags ||
+            null === r.tags ||
+            Array.isArray(r.tags)) &&
+            (r.tags = {})
+        const i = X(),
+          a = {}
+        Object.entries(r.tags).forEach(([e, t]) => {
+          J.includes(e) || (a['source.'.concat(e)] = t)
+        }),
+          (r.isolated ??= !0)
+        let c = () => {}
+        const d = e.runtime.registeredEntities
+        if (!r.isolated) {
+          const e = d.find(
+            ({
+              metadata: {
+                target: { id: e },
+              },
+            }) => e === r.id && !r.isolated
+          )
+          if (e) return e
+        }
+        const u = (e) => {
+          ;(r.blocked = !0), (c = e)
+        }
+        function l(e) {
+          return (
+            ('string' == typeof e && !!e.trim() && e.trim().length < 501) ||
+            'number' == typeof e
+          )
+        }
+        e.init.api.allow_registered_children || u((0, m.J)(() => (0, h.R)(55))),
+          (l(r.id) && l(r.name)) || u((0, m.J)(() => (0, h.R)(48, r)))
+        const f = {
+            addPageAction: (t, n = {}) => y(F, [t, { ...a, ...n }, e], r),
+            deregister: () => {
+              g(), u((0, m.J)(() => (0, h.R)(68)))
+            },
+            log: (t, n = {}) =>
+              y(
+                U,
+                [
+                  t,
+                  {
+                    ...n,
+                    customAttributes: { ...a, ...(n.customAttributes || {}) },
+                  },
+                  e,
+                ],
+                r
+              ),
+            measure: (t, n = {}) =>
+              y(
+                V,
+                [
+                  t,
+                  {
+                    ...n,
+                    customAttributes: { ...a, ...(n.customAttributes || {}) },
+                  },
+                  e,
+                ],
+                r
+              ),
+            noticeError: (t, n = {}) => y(B, [t, { ...a, ...n }, e], r),
+            register: (t = {}) => y(ee, [e, t], f.metadata.target),
+            recordCustomEvent: (t, n = {}) => y(G, [t, { ...a, ...n }, e], r),
+            setApplicationVersion: (e) => v('application.version', e),
+            setCustomAttribute: (e, t) => v(e, t),
+            setUserId: (e) => v('enduser.id', e),
+            metadata: { customAttributes: a, target: r, timings: i },
+          },
+          p = () => (r.blocked && c(), r.blocked)
+        function g() {
+          i.reportedAt ||
+            ((i.reportedAt = (0, o.t)()),
+            f.recordCustomEvent('MicroFrontEndTiming', {
+              assetUrl: i.asset,
+              assetType: i.type,
+              timeToLoad: i.registeredAt - i.fetchStart,
+              timeToBeRequested: i.fetchStart,
+              timeToFetch: i.fetchEnd - i.fetchStart,
+              timeToRegister: i.registeredAt - i.fetchEnd,
+              timeAlive: i.reportedAt - i.registeredAt,
+            }))
+        }
+        p() || (d.push(f), (0, x.G)(g))
+        const v = (e, t) => {
+            p() || (a[e] = t)
+          },
+          y = (r, n, i) => {
+            if (p() && r !== ee) return
+            const a = (0, o.t)()
+            ;(0, s.p)(
+              O.xV,
+              ['API/register/'.concat(r.name, '/called')],
+              void 0,
+              t.K7.metrics,
+              e.ee
+            )
+            try {
+              if (e.init.api.duplicate_registered_data && r !== ee) {
+                let e = n
+                if (n[1] instanceof Object) {
+                  const t = { 'child.id': i.id, 'child.type': i.type }
+                  e =
+                    'customAttributes' in n[1]
+                      ? [
+                          n[0],
+                          {
+                            ...n[1],
+                            customAttributes: {
+                              ...n[1].customAttributes,
+                              ...t,
+                            },
+                          },
+                          ...n.slice(2),
+                        ]
+                      : [n[0], { ...n[1], ...t }, ...n.slice(2)]
+                }
+                r(...e, void 0, a)
+              }
+              return r(...n, i, a)
+            } catch (e) {
+              ;(0, h.R)(50, e)
+            }
+          }
+        return f
+      }
+      class te extends y {
+        static featureName = N.T
+        constructor(e) {
+          var t
+          super(e, N.T),
+            (t = e),
+            (0, c.Y)(a.o5, (e, r) => B(e, r, t), t),
+            (function (e) {
+              ;(0, c.Y)(
+                a.bt,
+                function (t) {
+                  e.runtime.onerror = t
+                },
+                e
+              )
+            })(e),
+            (function (e) {
+              let t = 0
+              ;(0, c.Y)(
+                a.k6,
+                function (e, r) {
+                  ++t > 10 ||
+                    (this.runtime.releaseIds[e.slice(-200)] = ('' + r).slice(
+                      -200
+                    ))
+                },
+                e
+              )
+            })(e),
+            Q(e)
           try {
             this.removeOnAbort = new AbortController()
           } catch (e) {}
-          this.ee.on('internal-error', (e, t) => {
+          this.ee.on('internal-error', (t, r) => {
             this.abortHandler &&
-              (0, x.p)(
+              (0, s.p)(
                 'ierr',
-                [C(e), (0, S.t)(), !0, {}, this.#r, t],
+                [C(t), (0, o.t)(), !0, {}, e.runtime.isRecording, r],
                 void 0,
                 this.featureName,
                 this.ee
               )
           }),
-            this.ee.on(t.G4.REPLAY_RUNNING, (e) => {
-              this.#r = e
-            }),
-            p.gm.addEventListener(
+            f.gm.addEventListener(
               'unhandledrejection',
-              (e) => {
+              (t) => {
                 this.abortHandler &&
-                  (0, x.p)(
+                  (0, s.p)(
                     'err',
                     [
-                      k(e),
-                      (0, S.t)(),
+                      j(t),
+                      (0, o.t)(),
                       !1,
                       { unhandledPromiseRejection: 1 },
-                      this.#r,
+                      e.runtime.isRecording,
                     ],
                     void 0,
                     this.featureName,
                     this.ee
                   )
               },
-              (0, A.jT)(!1, this.removeOnAbort?.signal)
+              (0, P.jT)(!1, this.removeOnAbort?.signal)
             ),
-            p.gm.addEventListener(
+            f.gm.addEventListener(
               'error',
-              (e) => {
+              (t) => {
                 this.abortHandler &&
-                  (0, x.p)(
+                  (0, s.p)(
                     'err',
-                    [L(e), (0, S.t)(), !1, {}, this.#r],
+                    [L(t), (0, o.t)(), !1, {}, e.runtime.isRecording],
                     void 0,
                     this.featureName,
                     this.ee
                   )
               },
-              (0, A.jT)(!1, this.removeOnAbort?.signal)
+              (0, P.jT)(!1, this.removeOnAbort?.signal)
             ),
-            (this.abortHandler = this.#n),
-            this.importAggregator(e)
+            (this.abortHandler = this.#r),
+            this.importAggregator(e, () => i.e(478).then(i.bind(i, 2176)))
         }
-        #n() {
+        #r() {
           this.removeOnAbort?.abort(), (this.abortHandler = void 0)
         }
       }
-      var D = i(8990)
-      let K = 1
-      const U = 'nr@id'
-      function V(e) {
+      var re = i(8990)
+      let ne = 1
+      function ie(e) {
         const t = typeof e
         return !e || ('object' !== t && 'function' !== t)
           ? -1
-          : e === p.gm
+          : e === f.gm
           ? 0
-          : (0, D.I)(e, U, function () {
-              return K++
+          : (0, re.I)(e, 'nr@id', function () {
+              return ne++
             })
       }
-      function G(e) {
+      function se(e) {
         if ('string' == typeof e && e.length) return e.length
         if ('object' == typeof e) {
           if (
@@ -2493,31 +2777,31 @@ NREUM.info = {
             return e.size
           if (!('undefined' != typeof FormData && e instanceof FormData))
             try {
-              return (0, P.A)(e).length
+              return (0, k.A)(e).length
             } catch (e) {
               return
             }
         }
       }
-      var F = i(8139),
-        B = i(7836),
-        W = i(3434)
-      const z = {},
-        q = ['open', 'send']
-      function Z(t) {
-        var r = t || B.ee
-        const n = (function (e) {
-          return (e || B.ee).get('xhr')
-        })(r)
-        if (void 0 === p.gm.XMLHttpRequest) return n
-        if (z[n.debugId]++) return n
-        ;(z[n.debugId] = 1), (0, F.u)(r)
-        var i = (0, W.YM)(n),
-          o = p.gm.XMLHttpRequest,
-          a = p.gm.MutationObserver,
-          s = p.gm.Promise,
-          c = p.gm.setInterval,
-          u = 'readystatechange',
+      var oe = i(8139),
+        ae = i(7836),
+        ce = i(3434)
+      const de = {},
+        ue = ['open', 'send']
+      function le(e) {
+        var t = e || ae.ee
+        const r = (function (e) {
+          return (e || ae.ee).get('xhr')
+        })(t)
+        if (void 0 === f.gm.XMLHttpRequest) return r
+        if (de[r.debugId]++) return r
+        ;(de[r.debugId] = 1), (0, oe.u)(t)
+        var n = (0, ce.YM)(r),
+          i = f.gm.XMLHttpRequest,
+          s = f.gm.MutationObserver,
+          o = f.gm.Promise,
+          a = f.gm.setInterval,
+          c = 'readystatechange',
           d = [
             'onload',
             'onerror',
@@ -2527,160 +2811,159 @@ NREUM.info = {
             'onprogress',
             'ontimeout',
           ],
-          l = [],
-          f = (p.gm.XMLHttpRequest = function (t) {
-            const r = new o(t),
-              a = n.context(r)
+          u = [],
+          l = (f.gm.XMLHttpRequest = function (e) {
+            const t = new i(e),
+              s = r.context(t)
             try {
-              n.emit('new-xhr', [r], a),
-                r.addEventListener(
-                  u,
-                  ((s = a),
+              r.emit('new-xhr', [t], s),
+                t.addEventListener(
+                  c,
+                  ((o = s),
                   function () {
                     var e = this
                     e.readyState > 3 &&
-                      !s.resolved &&
-                      ((s.resolved = !0), n.emit('xhr-resolved', [], e)),
-                      i.inPlace(e, d, 'fn-', y)
+                      !o.resolved &&
+                      ((o.resolved = !0), r.emit('xhr-resolved', [], e)),
+                      n.inPlace(e, d, 'fn-', b)
                   }),
-                  (0, A.jT)(!1)
+                  (0, P.jT)(!1)
                 )
-            } catch (t) {
-              ;(0, e.R)(15, t)
+            } catch (e) {
+              ;(0, h.R)(15, e)
               try {
-                n.emit('internal-error', [t])
+                r.emit('internal-error', [e])
               } catch (e) {}
             }
-            var s
-            return r
+            var o
+            return t
           })
-        function h(e, t) {
-          i.inPlace(t, ['onreadystatechange'], 'fn-', y)
+        function p(e, t) {
+          n.inPlace(t, ['onreadystatechange'], 'fn-', b)
         }
         if (
           ((function (e, t) {
             for (var r in e) t[r] = e[r]
-          })(o, f),
-          (f.prototype = o.prototype),
-          i.inPlace(f.prototype, q, '-xhr-', y),
-          n.on('send-xhr-start', function (e, t) {
-            h(e, t),
+          })(i, l),
+          (l.prototype = i.prototype),
+          n.inPlace(l.prototype, ue, '-xhr-', b),
+          r.on('send-xhr-start', function (e, t) {
+            p(e, t),
               (function (e) {
-                l.push(e),
-                  a && (g ? g.then(b) : c ? c(b) : ((m = -m), (v.data = m)))
+                u.push(e),
+                  s && (g ? g.then(y) : a ? a(y) : ((m = -m), (v.data = m)))
               })(t)
           }),
-          n.on('open-xhr-start', h),
-          a)
+          r.on('open-xhr-start', p),
+          s)
         ) {
-          var g = s && s.resolve()
-          if (!c && !s) {
+          var g = o && o.resolve()
+          if (!a && !o) {
             var m = 1,
               v = document.createTextNode(m)
-            new a(b).observe(v, { characterData: !0 })
+            new s(y).observe(v, { characterData: !0 })
           }
         } else
-          r.on('fn-end', function (e) {
-            ;(e[0] && e[0].type === u) || b()
+          t.on('fn-end', function (e) {
+            ;(e[0] && e[0].type === c) || y()
           })
-        function b() {
-          for (var e = 0; e < l.length; e++) h(0, l[e])
-          l.length && (l = [])
+        function y() {
+          for (var e = 0; e < u.length; e++) p(0, u[e])
+          u.length && (u = [])
         }
-        function y(e, t) {
+        function b(e, t) {
           return t
         }
-        return n
+        return r
       }
-      var Y = 'fetch-',
-        J = Y + 'body-',
-        X = ['arrayBuffer', 'blob', 'json', 'text', 'formData'],
-        Q = p.gm.Request,
-        ee = p.gm.Response,
-        te = 'prototype'
-      const re = {}
-      function ne(e) {
+      var fe = 'fetch-',
+        he = fe + 'body-',
+        pe = ['arrayBuffer', 'blob', 'json', 'text', 'formData'],
+        ge = f.gm.Request,
+        me = f.gm.Response,
+        ve = 'prototype'
+      const ye = {}
+      function be(e) {
         const t = (function (e) {
-          return (e || B.ee).get('fetch')
+          return (e || ae.ee).get('fetch')
         })(e)
-        if (!(Q && ee && p.gm.fetch)) return t
-        if (re[t.debugId]++) return t
+        if (!(ge && me && f.gm.fetch)) return t
+        if (ye[t.debugId]++) return t
         function r(e, r, n) {
           var i = e[r]
           'function' == typeof i &&
             (e[r] = function () {
               var e,
                 r = [...arguments],
-                o = {}
-              t.emit(n + 'before-start', [r], o),
-                o[B.P] && o[B.P].dt && (e = o[B.P].dt)
-              var a = i.apply(this, r)
+                s = {}
+              t.emit(n + 'before-start', [r], s),
+                s[ae.P] && s[ae.P].dt && (e = s[ae.P].dt)
+              var o = i.apply(this, r)
               return (
-                t.emit(n + 'start', [r, e], a),
-                a.then(
+                t.emit(n + 'start', [r, e], o),
+                o.then(
                   function (e) {
-                    return t.emit(n + 'end', [null, e], a), e
+                    return t.emit(n + 'end', [null, e], o), e
                   },
                   function (e) {
-                    throw (t.emit(n + 'end', [e], a), e)
+                    throw (t.emit(n + 'end', [e], o), e)
                   }
                 )
               )
             })
         }
         return (
-          (re[t.debugId] = 1),
-          X.forEach((e) => {
-            r(Q[te], e, J), r(ee[te], e, J)
+          (ye[t.debugId] = 1),
+          pe.forEach((e) => {
+            r(ge[ve], e, he), r(me[ve], e, he)
           }),
-          r(p.gm, 'fetch', Y),
-          t.on(Y + 'end', function (e, r) {
+          r(f.gm, 'fetch', fe),
+          t.on(fe + 'end', function (e, r) {
             var n = this
             if (r) {
               var i = r.headers.get('content-length')
-              null !== i && (n.rxSize = i), t.emit(Y + 'done', [null, r], n)
-            } else t.emit(Y + 'done', [e], n)
+              null !== i && (n.rxSize = i), t.emit(fe + 'done', [null, r], n)
+            } else t.emit(fe + 'done', [e], n)
           }),
           t
         )
       }
-      var ie = i(7485),
-        oe = i(5603)
-      class ae {
+      var we = i(7485),
+        Re = i(9566)
+      class Ee {
         constructor(e) {
-          this.agentIdentifier = e
+          this.agentRef = e
         }
         generateTracePayload(e) {
-          if (!this.shouldGenerateTrace(e)) return null
-          var t = (0, oe.o)(this.agentIdentifier)
-          if (!t) return null
-          var n = (t.accountID || '').toString() || null,
-            i = (t.agentID || '').toString() || null,
-            o = (t.trustKey || '').toString() || null
-          if (!n || !i) return null
-          var a = (0, r.ZF)(),
-            s = (0, r.el)(),
-            c = Date.now(),
-            u = { spanId: a, traceId: s, timestamp: c }
+          const t = this.agentRef.loader_config
+          if (!this.shouldGenerateTrace(e) || !t) return null
+          var r = (t.accountID || '').toString() || null,
+            n = (t.agentID || '').toString() || null,
+            i = (t.trustKey || '').toString() || null
+          if (!r || !n) return null
+          var s = (0, Re.ZF)(),
+            o = (0, Re.el)(),
+            a = Date.now(),
+            c = { spanId: s, traceId: o, timestamp: a }
           return (
             (e.sameOrigin ||
               (this.isAllowedOrigin(e) &&
                 this.useTraceContextHeadersForCors())) &&
-              ((u.traceContextParentHeader =
-                this.generateTraceContextParentHeader(a, s)),
-              (u.traceContextStateHeader = this.generateTraceContextStateHeader(
+              ((c.traceContextParentHeader =
+                this.generateTraceContextParentHeader(s, o)),
+              (c.traceContextStateHeader = this.generateTraceContextStateHeader(
+                s,
                 a,
-                c,
+                r,
                 n,
-                i,
-                o
+                i
               ))),
             ((e.sameOrigin && !this.excludeNewrelicHeader()) ||
               (!e.sameOrigin &&
                 this.isAllowedOrigin(e) &&
                 this.useNewrelicHeaderForCors())) &&
-              (u.newrelicHeader = this.generateTraceHeader(a, s, c, n, i, o)),
-            u
+              (c.newrelicHeader = this.generateTraceHeader(s, o, a, r, n, i)),
+            c
           )
         }
         generateTraceContextParentHeader(e, t) {
@@ -2689,29 +2972,27 @@ NREUM.info = {
         generateTraceContextStateHeader(e, t, r, n, i) {
           return i + '@nr=0-1-' + r + '-' + n + '-' + e + '----' + t
         }
-        generateTraceHeader(e, t, r, n, i, o) {
-          if (!('function' == typeof p.gm?.btoa)) return null
-          var a = {
+        generateTraceHeader(e, t, r, n, i, s) {
+          if (!('function' == typeof f.gm?.btoa)) return null
+          var o = {
             v: [0, 1],
             d: { ty: 'Browser', ac: n, ap: i, id: e, tr: t, ti: r },
           }
-          return o && n !== o && (a.d.tk = o), btoa((0, P.A)(a))
+          return s && n !== s && (o.d.tk = s), btoa((0, k.A)(o))
         }
         shouldGenerateTrace(e) {
-          return this.isDtEnabled() && this.isAllowedOrigin(e)
+          return (
+            this.agentRef.init?.distributed_tracing?.enabled &&
+            this.isAllowedOrigin(e)
+          )
         }
         isAllowedOrigin(e) {
-          var t = !1,
-            r = {}
-          if (
-            ((0, s.gD)(this.agentIdentifier, 'distributed_tracing') &&
-              (r = (0, s.D0)(this.agentIdentifier).distributed_tracing),
-            e.sameOrigin)
-          )
-            t = !0
-          else if (r.allowed_origins instanceof Array)
+          var t = !1
+          const r = this.agentRef.init?.distributed_tracing
+          if (e.sameOrigin) t = !0
+          else if (r?.allowed_origins instanceof Array)
             for (var n = 0; n < r.allowed_origins.length; n++) {
-              var i = (0, ie.D)(r.allowed_origins[n])
+              var i = (0, we.D)(r.allowed_origins[n])
               if (
                 e.hostname === i.hostname &&
                 e.protocol === i.protocol &&
@@ -2723,150 +3004,156 @@ NREUM.info = {
             }
           return t
         }
-        isDtEnabled() {
-          var e = (0, s.gD)(this.agentIdentifier, 'distributed_tracing')
-          return !!e && !!e.enabled
-        }
         excludeNewrelicHeader() {
-          var e = (0, s.gD)(this.agentIdentifier, 'distributed_tracing')
+          var e = this.agentRef.init?.distributed_tracing
           return !!e && !!e.exclude_newrelic_header
         }
         useNewrelicHeaderForCors() {
-          var e = (0, s.gD)(this.agentIdentifier, 'distributed_tracing')
+          var e = this.agentRef.init?.distributed_tracing
           return !!e && !1 !== e.cors_use_newrelic_header
         }
         useTraceContextHeadersForCors() {
-          var e = (0, s.gD)(this.agentIdentifier, 'distributed_tracing')
+          var e = this.agentRef.init?.distributed_tracing
           return !!e && !!e.cors_use_tracecontext_headers
         }
       }
-      var se = i(9300),
-        ce = i(7295),
-        ue = ['load', 'error', 'abort', 'timeout'],
-        de = ue.length,
-        le = (0, R.dV)().o.REQ,
-        fe = (0, R.dV)().o.XHR
-      const he = 'X-NewRelic-App-Data'
-      class pe extends b {
-        static featureName = se.T
-        constructor(e, t = !0) {
-          super(e, se.T, t),
-            (this.dt = new ae(e.agentIdentifier)),
-            (this.handler = (e, t, r, n) => (0, x.p)(e, t, r, n, this.ee))
+      var Te = i(9300),
+        Ae = i(7295)
+      function xe(e) {
+        return 'string' == typeof e
+          ? e
+          : e instanceof (0, T.dV)().o.REQ
+          ? e.url
+          : f.gm?.URL && e instanceof URL
+          ? e.href
+          : void 0
+      }
+      var Se = ['load', 'error', 'abort', 'timeout'],
+        _e = Se.length,
+        Oe = (0, T.dV)().o.REQ,
+        Ie = (0, T.dV)().o.XHR
+      const Ne = 'X-NewRelic-App-Data'
+      class Pe extends y {
+        static featureName = Te.T
+        constructor(e) {
+          super(e, Te.T),
+            (this.dt = new Ee(e)),
+            (this.handler = (e, t, r, n) => (0, s.p)(e, t, r, n, this.ee))
           try {
             const e = {
               xmlhttprequest: 'xhr',
               fetch: 'fetch',
               beacon: 'beacon',
             }
-            p.gm?.performance?.getEntriesByType('resource').forEach((t) => {
-              if (t.initiatorType in e && 0 !== t.responseStatus) {
-                const r = { status: t.responseStatus },
-                  n = {
-                    rxSize: t.transferSize,
-                    duration: Math.floor(t.duration),
+            f.gm?.performance?.getEntriesByType('resource').forEach((r) => {
+              if (r.initiatorType in e && 0 !== r.responseStatus) {
+                const n = { status: r.responseStatus },
+                  i = {
+                    rxSize: r.transferSize,
+                    duration: Math.floor(r.duration),
                     cbTime: 0,
                   }
-                ge(r, t.name),
+                ke(n, r.name),
                   this.handler(
                     'xhr',
-                    [r, n, t.startTime, t.responseEnd, e[t.initiatorType]],
+                    [n, i, r.startTime, r.responseEnd, e[r.initiatorType]],
                     void 0,
-                    a.K7.ajax
+                    t.K7.ajax
                   )
               }
             })
           } catch (e) {}
-          ne(this.ee),
-            Z(this.ee),
-            (function (e, t, r, n) {
-              function i(e) {
+          be(this.ee),
+            le(this.ee),
+            (function (e, r, n, i) {
+              function a(e) {
                 var t = this
                 ;(t.totalCbs = 0),
                   (t.called = 0),
                   (t.cbTime = 0),
-                  (t.end = R),
+                  (t.end = T),
                   (t.ended = !1),
                   (t.xhrGuids = {}),
                   (t.lastSize = null),
                   (t.loadCaptureCalled = !1),
                   (t.params = this.params || {}),
                   (t.metrics = this.metrics || {}),
+                  (t.latestLongtaskEnd = 0),
                   e.addEventListener(
                     'load',
                     function (r) {
-                      E(t, e)
+                      A(t, e)
                     },
-                    (0, A.jT)(!1)
+                    (0, P.jT)(!1)
                   ),
-                  p.lR ||
+                  f.lR ||
                     e.addEventListener(
                       'progress',
                       function (e) {
                         t.lastSize = e.loaded
                       },
-                      (0, A.jT)(!1)
+                      (0, P.jT)(!1)
                     )
               }
-              function o(e) {
+              function c(e) {
                 ;(this.params = { method: e[0] }),
-                  ge(this, e[1]),
+                  ke(this, e[1]),
                   (this.metrics = {})
               }
-              function s(t, r) {
+              function d(t, r) {
                 e.loader_config.xpid &&
                   this.sameOrigin &&
                   r.setRequestHeader('X-NewRelic-ID', e.loader_config.xpid)
-                var i = n.generateTracePayload(this.parsedOrigin)
-                if (i) {
-                  var o = !1
-                  i.newrelicHeader &&
-                    (r.setRequestHeader('newrelic', i.newrelicHeader),
-                    (o = !0)),
-                    i.traceContextParentHeader &&
+                var n = i.generateTracePayload(this.parsedOrigin)
+                if (n) {
+                  var s = !1
+                  n.newrelicHeader &&
+                    (r.setRequestHeader('newrelic', n.newrelicHeader),
+                    (s = !0)),
+                    n.traceContextParentHeader &&
                       (r.setRequestHeader(
                         'traceparent',
-                        i.traceContextParentHeader
+                        n.traceContextParentHeader
                       ),
-                      i.traceContextStateHeader &&
+                      n.traceContextStateHeader &&
                         r.setRequestHeader(
                           'tracestate',
-                          i.traceContextStateHeader
+                          n.traceContextStateHeader
                         ),
-                      (o = !0)),
-                    o && (this.dt = i)
+                      (s = !0)),
+                    s && (this.dt = n)
                 }
               }
-              function c(e, r) {
+              function u(e, t) {
                 var n = this.metrics,
                   i = e[0],
-                  o = this
+                  s = this
                 if (n && i) {
-                  var a = G(i)
+                  var a = se(i)
                   a && (n.txSize = a)
                 }
-                ;(this.startTime = (0, S.t)()),
+                ;(this.startTime = (0, o.t)()),
                   (this.body = i),
                   (this.listener = function (e) {
                     try {
                       'abort' !== e.type ||
-                        o.loadCaptureCalled ||
-                        (o.params.aborted = !0),
+                        s.loadCaptureCalled ||
+                        (s.params.aborted = !0),
                         ('load' !== e.type ||
-                          (o.called === o.totalCbs &&
-                            (o.onloadCalled || 'function' != typeof r.onload) &&
-                            'function' == typeof o.end)) &&
-                          o.end(r)
+                          (s.called === s.totalCbs &&
+                            (s.onloadCalled || 'function' != typeof t.onload) &&
+                            'function' == typeof s.end)) &&
+                          s.end(t)
                     } catch (e) {
                       try {
-                        t.emit('internal-error', [e])
+                        r.emit('internal-error', [e])
                       } catch (e) {}
                     }
                   })
-                for (var s = 0; s < de; s++)
-                  r.addEventListener(ue[s], this.listener, (0, A.jT)(!1))
+                for (var c = 0; c < _e; c++)
+                  t.addEventListener(Se[c], this.listener, (0, P.jT)(!1))
               }
-              function u(e, t, r) {
+              function l(e, t, r) {
                 ;(this.cbTime += e),
                   t ? (this.onloadCalled = !0) : (this.called += 1),
                   this.called !== this.totalCbs ||
@@ -2874,77 +3161,77 @@ NREUM.info = {
                     'function' != typeof this.end ||
                     this.end(r)
               }
-              function d(e, t) {
-                var r = '' + V(e) + !!t
+              function h(e, t) {
+                var r = '' + ie(e) + !!t
                 this.xhrGuids &&
                   !this.xhrGuids[r] &&
                   ((this.xhrGuids[r] = !0), (this.totalCbs += 1))
               }
-              function l(e, t) {
-                var r = '' + V(e) + !!t
+              function p(e, t) {
+                var r = '' + ie(e) + !!t
                 this.xhrGuids &&
                   this.xhrGuids[r] &&
                   (delete this.xhrGuids[r], (this.totalCbs -= 1))
               }
-              function f() {
-                this.endTime = (0, S.t)()
+              function g() {
+                this.endTime = (0, o.t)()
               }
-              function h(e, r) {
-                r instanceof fe &&
+              function m(e, t) {
+                t instanceof Ie &&
                   'load' === e[0] &&
-                  t.emit('xhr-load-added', [e[1], e[2]], r)
+                  r.emit('xhr-load-added', [e[1], e[2]], t)
               }
-              function g(e, r) {
-                r instanceof fe &&
+              function v(e, t) {
+                t instanceof Ie &&
                   'load' === e[0] &&
-                  t.emit('xhr-load-removed', [e[1], e[2]], r)
+                  r.emit('xhr-load-removed', [e[1], e[2]], t)
               }
-              function m(e, t, r) {
-                t instanceof fe &&
+              function y(e, t, r) {
+                t instanceof Ie &&
                   ('onload' === r && (this.onload = !0),
                   ('load' === (e[0] && e[0].type) || this.onload) &&
-                    (this.xhrCbStart = (0, S.t)()))
+                    (this.xhrCbStart = (0, o.t)()))
               }
-              function v(e, r) {
+              function b(e, t) {
                 this.xhrCbStart &&
-                  t.emit(
+                  r.emit(
                     'xhr-cb-time',
-                    [(0, S.t)() - this.xhrCbStart, this.onload, r],
-                    r
+                    [(0, o.t)() - this.xhrCbStart, this.onload, t],
+                    t
                   )
               }
-              function b(e) {
+              function w(e) {
                 var t,
                   r = e[1] || {}
                 if (
                   ('string' == typeof e[0]
                     ? 0 === (t = e[0]).length &&
-                      p.RI &&
-                      (t = '' + p.gm.location.href)
+                      f.RI &&
+                      (t = '' + f.gm.location.href)
                     : e[0] && e[0].url
                     ? (t = e[0].url)
-                    : p.gm?.URL && e[0] && e[0] instanceof URL
+                    : f.gm?.URL && e[0] && e[0] instanceof URL
                     ? (t = e[0].href)
                     : 'function' == typeof e[0].toString &&
                       (t = e[0].toString()),
                   'string' == typeof t && 0 !== t.length)
                 ) {
                   t &&
-                    ((this.parsedOrigin = (0, ie.D)(t)),
+                    ((this.parsedOrigin = (0, we.D)(t)),
                     (this.sameOrigin = this.parsedOrigin.sameOrigin))
-                  var i = n.generateTracePayload(this.parsedOrigin)
-                  if (i && (i.newrelicHeader || i.traceContextParentHeader))
+                  var n = i.generateTracePayload(this.parsedOrigin)
+                  if (n && (n.newrelicHeader || n.traceContextParentHeader))
                     if (e[0] && e[0].headers)
-                      s(e[0].headers, i) && (this.dt = i)
+                      a(e[0].headers, n) && (this.dt = n)
                     else {
-                      var o = {}
-                      for (var a in r) o[a] = r[a]
-                      ;(o.headers = new Headers(r.headers || {})),
-                        s(o.headers, i) && (this.dt = i),
-                        e.length > 1 ? (e[1] = o) : e.push(o)
+                      var s = {}
+                      for (var o in r) s[o] = r[o]
+                      ;(s.headers = new Headers(r.headers || {})),
+                        a(s.headers, n) && (this.dt = n),
+                        e.length > 1 ? (e[1] = s) : e.push(s)
                     }
                 }
-                function s(e, t) {
+                function a(e, t) {
                   var r = !1
                   return (
                     t.newrelicHeader &&
@@ -2958,128 +3245,119 @@ NREUM.info = {
                   )
                 }
               }
-              function y(e, t) {
+              function R(e, t) {
                 ;(this.params = {}),
                   (this.metrics = {}),
-                  (this.startTime = (0, S.t)()),
+                  (this.startTime = (0, o.t)()),
                   (this.dt = t),
                   e.length >= 1 && (this.target = e[0]),
                   e.length >= 2 && (this.opts = e[1])
-                var r,
-                  n = this.opts || {},
-                  i = this.target
-                'string' == typeof i
-                  ? (r = i)
-                  : 'object' == typeof i && i instanceof le
-                  ? (r = i.url)
-                  : p.gm?.URL &&
-                    'object' == typeof i &&
-                    i instanceof URL &&
-                    (r = i.href),
-                  ge(this, r)
-                var o = (
-                  '' + ((i && i instanceof le && i.method) || n.method || 'GET')
+                var r = this.opts || {},
+                  n = this.target
+                ke(this, xe(n))
+                var i = (
+                  '' + ((n && n instanceof Oe && n.method) || r.method || 'GET')
                 ).toUpperCase()
-                ;(this.params.method = o),
-                  (this.body = n.body),
-                  (this.txSize = G(n.body) || 0)
+                ;(this.params.method = i),
+                  (this.body = r.body),
+                  (this.txSize = se(r.body) || 0)
               }
-              function w(e, t) {
+              function E(e, r) {
                 if (
-                  ((this.endTime = (0, S.t)()),
+                  ((this.endTime = (0, o.t)()),
                   this.params || (this.params = {}),
-                  (0, ce.iW)(this.params))
+                  (0, Ae.iW)(this.params))
                 )
                   return
-                let n
-                ;(this.params.status = t ? t.status : 0),
+                let i
+                ;(this.params.status = r ? r.status : 0),
                   'string' == typeof this.rxSize &&
                     this.rxSize.length > 0 &&
-                    (n = +this.rxSize)
-                const i = {
+                    (i = +this.rxSize)
+                const s = {
                   txSize: this.txSize,
-                  rxSize: n,
-                  duration: (0, S.t)() - this.startTime,
+                  rxSize: i,
+                  duration: (0, o.t)() - this.startTime,
                 }
-                r(
+                n(
                   'xhr',
-                  [this.params, i, this.startTime, this.endTime, 'fetch'],
+                  [this.params, s, this.startTime, this.endTime, 'fetch'],
                   this,
-                  a.K7.ajax
+                  t.K7.ajax
                 )
               }
-              function R(e) {
-                const t = this.params,
-                  n = this.metrics
+              function T(e) {
+                const r = this.params,
+                  i = this.metrics
                 if (!this.ended) {
                   this.ended = !0
-                  for (let t = 0; t < de; t++)
-                    e.removeEventListener(ue[t], this.listener, !1)
-                  t.aborted ||
-                    (0, ce.iW)(t) ||
-                    ((n.duration = (0, S.t)() - this.startTime),
+                  for (let t = 0; t < _e; t++)
+                    e.removeEventListener(Se[t], this.listener, !1)
+                  r.aborted ||
+                    (0, Ae.iW)(r) ||
+                    ((i.duration = (0, o.t)() - this.startTime),
                     this.loadCaptureCalled || 4 !== e.readyState
-                      ? null == t.status && (t.status = 0)
-                      : E(this, e),
-                    (n.cbTime = this.cbTime),
-                    r(
+                      ? null == r.status && (r.status = 0)
+                      : A(this, e),
+                    (i.cbTime = this.cbTime),
+                    n(
                       'xhr',
-                      [t, n, this.startTime, this.endTime, 'xhr'],
+                      [r, i, this.startTime, this.endTime, 'xhr'],
                       this,
-                      a.K7.ajax
+                      t.K7.ajax
                     ))
                 }
               }
-              function E(e, r) {
-                e.params.status = r.status
-                var n = (function (e, t) {
+              function A(e, n) {
+                e.params.status = n.status
+                var i = (function (e, t) {
                   var r = e.responseType
                   return 'json' === r && null !== t
                     ? t
                     : 'arraybuffer' === r || 'blob' === r || 'json' === r
-                    ? G(e.response)
+                    ? se(e.response)
                     : 'text' === r || '' === r || void 0 === r
-                    ? G(e.responseText)
+                    ? se(e.responseText)
                     : void 0
-                })(r, e.lastSize)
+                })(n, e.lastSize)
                 if (
-                  (n && (e.metrics.rxSize = n),
-                  e.sameOrigin && r.getAllResponseHeaders().indexOf(he) >= 0)
+                  (i && (e.metrics.rxSize = i),
+                  e.sameOrigin && n.getAllResponseHeaders().indexOf(Ne) >= 0)
                 ) {
-                  var i = r.getResponseHeader(he)
-                  i &&
-                    ((0, x.p)(
-                      _.rs,
+                  var o = n.getResponseHeader(Ne)
+                  o &&
+                    ((0, s.p)(
+                      O.rs,
                       ['Ajax/CrossApplicationTracing/Header/Seen'],
                       void 0,
-                      a.K7.metrics,
-                      t
+                      t.K7.metrics,
+                      r
                     ),
-                    (e.params.cat = i.split(', ').pop()))
+                    (e.params.cat = o.split(', ').pop()))
                 }
                 e.loadCaptureCalled = !0
               }
-              t.on('new-xhr', i),
-                t.on('open-xhr-start', o),
-                t.on('open-xhr-end', s),
-                t.on('send-xhr-start', c),
-                t.on('xhr-cb-time', u),
-                t.on('xhr-load-added', d),
-                t.on('xhr-load-removed', l),
-                t.on('xhr-resolved', f),
-                t.on('addEventListener-end', h),
-                t.on('removeEventListener-end', g),
-                t.on('fn-end', v),
-                t.on('fetch-before-start', b),
-                t.on('fetch-start', y),
-                t.on('fn-start', m),
-                t.on('fetch-done', w)
+              r.on('new-xhr', a),
+                r.on('open-xhr-start', c),
+                r.on('open-xhr-end', d),
+                r.on('send-xhr-start', u),
+                r.on('xhr-cb-time', l),
+                r.on('xhr-load-added', h),
+                r.on('xhr-load-removed', p),
+                r.on('xhr-resolved', g),
+                r.on('addEventListener-end', m),
+                r.on('removeEventListener-end', v),
+                r.on('fn-end', b),
+                r.on('fetch-before-start', w),
+                r.on('fetch-start', R),
+                r.on('fn-start', y),
+                r.on('fetch-done', E)
             })(e, this.ee, this.handler, this.dt),
-            this.importAggregator(e)
+            this.importAggregator(e, () => i.e(478).then(i.bind(i, 3845)))
         }
       }
-      function ge(e, t) {
-        var r = (0, ie.D)(t),
+      function ke(e, t) {
+        var r = (0, we.D)(t),
           n = e.params || e
         ;(n.hostname = r.hostname),
           (n.port = r.port),
@@ -3089,677 +3367,735 @@ NREUM.info = {
           (e.parsedOrigin = r),
           (e.sameOrigin = r.sameOrigin)
       }
-      const me = {},
-        ve = ['pushState', 'replaceState']
-      function be(e) {
+      const De = {},
+        Ce = ['pushState', 'replaceState']
+      function je(e) {
         const t = (function (e) {
-          return (e || B.ee).get('history')
+          return (e || ae.ee).get('history')
         })(e)
         return (
-          !p.RI ||
-            me[t.debugId]++ ||
-            ((me[t.debugId] = 1),
-            (0, W.YM)(t).inPlace(window.history, ve, '-')),
+          !f.RI ||
+            De[t.debugId]++ ||
+            ((De[t.debugId] = 1),
+            (0, ce.YM)(t).inPlace(window.history, Ce, '-')),
           t
         )
       }
-      var ye = i(3738)
+      var Le = i(3738)
+      function Me(e) {
+        ;(0, c.Y)(
+          a.BL,
+          function (r = Date.now()) {
+            const n = r - f.WN
+            n < 0 && (0, h.R)(62, r),
+              (0, s.p)(O.XG, [a.BL, { time: n }], void 0, t.K7.metrics, e.ee),
+              e.addToTrace({ name: a.BL, start: r, origin: 'nr' }),
+              (0, s.p)(a.Pl + a.hG, [n, a.BL], void 0, t.K7.genericEvents, e.ee)
+          },
+          e
+        )
+      }
       const {
-        He: we,
-        bD: Re,
-        d3: xe,
-        Kp: Ee,
-        TZ: Ae,
-        Lc: Te,
-        uP: Se,
-        Rz: Ne,
-      } = ye
-      class _e extends b {
-        static featureName = Ae
-        constructor(e, t = !0) {
-          super(e, Ae, t)
-          if (!(0, m.V)(this.agentIdentifier))
-            return void this.deregisterDrain()
-          const r = this.ee
-          let n
-          be(r),
-            (this.eventsEE = (0, F.u)(r)),
-            this.eventsEE.on(Se, function (e, t) {
-              this.bstStart = (0, S.t)()
+        He: Be,
+        bD: He,
+        d3: Ke,
+        Kp: We,
+        TZ: Ue,
+        Lc: Fe,
+        uP: Ve,
+        Rz: Ge,
+      } = Le
+      class ze extends y {
+        static featureName = Ue
+        constructor(e) {
+          var r
+          super(e, Ue),
+            (r = e),
+            (0, c.Y)(
+              a.U2,
+              function (e) {
+                if (!(e && 'object' == typeof e && e.name && e.start)) return
+                const n = {
+                  n: e.name,
+                  s: e.start - f.WN,
+                  e: (e.end || e.start) - f.WN,
+                  o: e.origin || '',
+                  t: 'api',
+                }
+                n.s < 0 || n.e < 0 || n.e < n.s
+                  ? (0, h.R)(61, { start: n.s, end: n.e })
+                  : (0, s.p)('bstApi', [n], void 0, t.K7.sessionTrace, r.ee)
+              },
+              r
+            ),
+            Me(e)
+          if (!(0, g.V)(e.init)) return void this.deregisterDrain()
+          const n = this.ee
+          let d
+          je(n),
+            (this.eventsEE = (0, oe.u)(n)),
+            this.eventsEE.on(Ve, function (e, t) {
+              this.bstStart = (0, o.t)()
             }),
-            this.eventsEE.on(Te, function (e, t) {
+            this.eventsEE.on(Fe, function (e, r) {
               ;(0,
-              x.p)('bst', [e[0], t, this.bstStart, (0, S.t)()], void 0, a.K7.sessionTrace, r)
+              s.p)('bst', [e[0], r, this.bstStart, (0, o.t)()], void 0, t.K7.sessionTrace, n)
             }),
-            r.on(Ne + xe, function (e) {
-              ;(this.time = (0, S.t)()),
+            n.on(Ge + Ke, function (e) {
+              ;(this.time = (0, o.t)()),
                 (this.startPath = location.pathname + location.hash)
             }),
-            r.on(Ne + Ee, function (e) {
+            n.on(Ge + We, function (e) {
               ;(0,
-              x.p)('bstHist', [location.pathname + location.hash, this.startPath, this.time], void 0, a.K7.sessionTrace, r)
+              s.p)('bstHist', [location.pathname + location.hash, this.startPath, this.time], void 0, t.K7.sessionTrace, n)
             })
           try {
-            ;(n = new PerformanceObserver((e) => {
-              const t = e.getEntries()
-              ;(0, x.p)(we, [t], void 0, a.K7.sessionTrace, r)
+            ;(d = new PerformanceObserver((e) => {
+              const r = e.getEntries()
+              ;(0, s.p)(Be, [r], void 0, t.K7.sessionTrace, n)
             })),
-              n.observe({ type: Re, buffered: !0 })
+              d.observe({ type: He, buffered: !0 })
           } catch (e) {}
-          this.importAggregator(e, { resourceObserver: n })
+          this.importAggregator(e, () => i.e(478).then(i.bind(i, 6974)), {
+            resourceObserver: d,
+          })
         }
       }
-      var Oe = i(2614)
-      class Ie extends b {
-        static featureName = t.TZ
-        #i
-        #o
-        constructor(e, r = !0) {
+      var Ye = i(6344)
+      class qe extends y {
+        static featureName = Ye.TZ
+        #n
+        recorder
+        constructor(e) {
+          var r
           let n
-          super(e, t.TZ, r), (this.replayRunning = !1), (this.#o = e)
+          super(e, Ye.TZ),
+            (r = e),
+            (0, c.Y)(
+              a.CH,
+              function () {
+                ;(0, s.p)(a.CH, [], void 0, t.K7.sessionReplay, r.ee)
+              },
+              r
+            ),
+            (function (e) {
+              ;(0, c.Y)(
+                a.Tb,
+                function () {
+                  ;(0, s.p)(a.Tb, [], void 0, t.K7.sessionReplay, e.ee)
+                },
+                e
+              )
+            })(e)
           try {
             n = JSON.parse(
-              localStorage.getItem(''.concat(Oe.H3, '_').concat(Oe.uh))
+              localStorage.getItem(''.concat(w.H3, '_').concat(w.uh))
             )
           } catch (e) {}
-          ;(0, g.SR)(e.agentIdentifier) &&
-            this.ee.on(t.G4.RECORD, () => this.#a()),
-            this.#s(n)
-              ? ((this.#i = n?.sessionReplayMode), this.#c())
-              : this.importAggregator(e),
+          ;(0, p.SR)(e.init) && this.ee.on(a.CH, () => this.#i()),
+            this.#s(n) &&
+              this.importRecorder().then((e) => {
+                e.startRecording(Ye.Qb.PRELOAD, n?.sessionReplayMode)
+              }),
+            this.importAggregator(
+              this.agentRef,
+              () => i.e(478).then(i.bind(i, 6167)),
+              this
+            ),
             this.ee.on('err', (e) => {
-              this.replayRunning &&
-                ((this.errorNoticed = !0),
-                (0, x.p)(
-                  t.G4.ERROR_DURING_REPLAY,
-                  [e],
-                  void 0,
-                  this.featureName,
-                  this.ee
-                ))
-            }),
-            this.ee.on(t.G4.REPLAY_RUNNING, (e) => {
-              this.replayRunning = e
+              this.blocked ||
+                (this.agentRef.runtime.isRecording &&
+                  ((this.errorNoticed = !0),
+                  (0, s.p)(Ye.Vh, [e], void 0, this.featureName, this.ee)))
             })
         }
         #s(e) {
           return (
             (e &&
-              (e.sessionReplayMode === Oe.g.FULL ||
-                e.sessionReplayMode === Oe.g.ERROR)) ||
-            (0, g.Aw)(this.agentIdentifier)
+              (e.sessionReplayMode === w.g.FULL ||
+                e.sessionReplayMode === w.g.ERROR)) ||
+            (0, p.Aw)(this.agentRef.init)
           )
         }
-        #u = !1
-        async #c(e) {
-          if (!this.#u) {
-            this.#u = !0
-            try {
-              const { Recorder: t } = await Promise.all([
-                i.e(478),
-                i.e(249),
-              ]).then(i.bind(i, 8589))
-              ;(this.recorder ??= new t({
-                mode: this.#i,
-                agentIdentifier: this.agentIdentifier,
-                trigger: e,
-                ee: this.ee,
-                agentRef: this.#o,
-              })),
-                this.recorder.startRecording(),
-                (this.abortHandler = this.recorder.stopRecording)
-            } catch (e) {}
-            this.importAggregator(this.#o, {
-              recorder: this.recorder,
-              errorNoticed: this.errorNoticed,
-            })
-          }
+        importRecorder() {
+          return this.recorder
+            ? Promise.resolve(this.recorder)
+            : ((this.#n ??= Promise.all([i.e(478), i.e(249)])
+                .then(i.bind(i, 4866))
+                .then(
+                  ({ Recorder: e }) => (
+                    (this.recorder = new e(this)), this.recorder
+                  )
+                )
+                .catch((e) => {
+                  throw (
+                    (this.ee.emit('internal-error', [e]),
+                    (this.blocked = !0),
+                    e)
+                  )
+                })),
+              this.#n)
         }
-        #a() {
-          this.featAggregate
-            ? this.featAggregate.mode !== Oe.g.FULL &&
-              this.featAggregate.initializeRecording(Oe.g.FULL, !0)
-            : ((this.#i = Oe.g.FULL),
-              this.#c(t.Qb.API),
-              this.recorder &&
-                this.recorder.parent.mode !== Oe.g.FULL &&
-                ((this.recorder.parent.mode = Oe.g.FULL),
-                this.recorder.stopRecording(),
-                this.recorder.startRecording(),
-                (this.abortHandler = this.recorder.stopRecording)))
+        #i() {
+          this.blocked ||
+            (this.featAggregate
+              ? this.featAggregate.mode !== w.g.FULL &&
+                this.featAggregate.initializeRecording(w.g.FULL, !0, Ye.Qb.API)
+              : this.importRecorder().then(() => {
+                  this.recorder.startRecording(Ye.Qb.API, w.g.FULL)
+                }))
         }
       }
-      var Pe = i(3962)
-      class je extends b {
-        static featureName = Pe.TZ
-        constructor(e, t = !0) {
-          if ((super(e, Pe.TZ, t), !p.RI || !(0, R.dV)().o.MO)) return
-          const r = be(this.ee)
-          Pe.tC.forEach((e) => {
-            ;(0, A.sp)(
+      var Ze = i(3962)
+      class Xe extends y {
+        static featureName = Ze.TZ
+        constructor(e) {
+          if (
+            (super(e, Ze.TZ),
+            (function (e) {
+              const r = e.ee.get('tracer')
+              function n() {}
+              ;(0, c.Y)(
+                a.dT,
+                function (e) {
+                  return new n().get('object' == typeof e ? e : {})
+                },
+                e
+              )
+              const i = (n.prototype = {
+                createTracer: function (n, i) {
+                  var a = {},
+                    c = this,
+                    d = 'function' == typeof i
+                  return (
+                    (0, s.p)(
+                      O.xV,
+                      ['API/createTracer/called'],
+                      void 0,
+                      t.K7.metrics,
+                      e.ee
+                    ),
+                    function () {
+                      if (
+                        (r.emit(
+                          (d ? '' : 'no-') + 'fn-start',
+                          [(0, o.t)(), c, d],
+                          a
+                        ),
+                        d)
+                      )
+                        try {
+                          return i.apply(this, arguments)
+                        } catch (e) {
+                          const t = 'string' == typeof e ? new Error(e) : e
+                          throw (r.emit('fn-err', [arguments, this, t], a), t)
+                        } finally {
+                          r.emit('fn-end', [(0, o.t)()], a)
+                        }
+                    }
+                  )
+                },
+              })
+              ;[
+                'actionText',
+                'setName',
+                'setAttribute',
+                'save',
+                'ignore',
+                'onEnd',
+                'getContext',
+                'end',
+                'get',
+              ].forEach((r) => {
+                c.Y.apply(this, [
+                  r,
+                  function () {
+                    return (
+                      (0, s.p)(
+                        a.hw + r,
+                        [performance.now(), ...arguments],
+                        this,
+                        t.K7.softNav,
+                        e.ee
+                      ),
+                      this
+                    )
+                  },
+                  e,
+                  i,
+                ])
+              }),
+                (0, c.Y)(
+                  a.PA,
+                  function () {
+                    ;(0, s.p)(
+                      a.hw + 'routeName',
+                      [performance.now(), ...arguments],
+                      void 0,
+                      t.K7.softNav,
+                      e.ee
+                    )
+                  },
+                  e
+                )
+            })(e),
+            !f.RI || !(0, T.dV)().o.MO)
+          )
+            return
+          const r = je(this.ee)
+          try {
+            this.removeOnAbort = new AbortController()
+          } catch (e) {}
+          Ze.tC.forEach((e) => {
+            ;(0, P.sp)(
               e,
               (e) => {
-                a(e)
+                l(e)
               },
-              !0
+              !0,
+              this.removeOnAbort?.signal
             )
           })
           const n = () =>
-            (0, x.p)(
+            (0, s.p)(
               'newURL',
-              [(0, S.t)(), '' + window.location],
+              [(0, o.t)(), '' + window.location],
               void 0,
               this.featureName,
               this.ee
             )
-          r.on('pushState-end', n), r.on('replaceState-end', n)
-          try {
-            this.removeOnAbort = new AbortController()
-          } catch (e) {}
-          ;(0, A.sp)(
-            'popstate',
-            (e) =>
-              (0, x.p)(
-                'newURL',
-                [e.timeStamp, '' + window.location],
-                void 0,
-                this.featureName,
-                this.ee
-              ),
-            !0,
-            this.removeOnAbort?.signal
-          )
-          let i = !1
-          const o = new ((0, R.dV)().o.MO)((e, t) => {
-              i ||
-                ((i = !0),
+          r.on('pushState-end', n),
+            r.on('replaceState-end', n),
+            (0, P.sp)(
+              Ze.OV,
+              (e) => {
+                l(e),
+                  (0, s.p)(
+                    'newURL',
+                    [e.timeStamp, '' + window.location],
+                    void 0,
+                    this.featureName,
+                    this.ee
+                  )
+              },
+              !0,
+              this.removeOnAbort?.signal
+            )
+          let d = !1
+          const u = new ((0, T.dV)().o.MO)((e, t) => {
+              d ||
+                ((d = !0),
                 requestAnimationFrame(() => {
-                  ;(0, x.p)(
+                  ;(0, s.p)(
                     'newDom',
-                    [(0, S.t)()],
+                    [(0, o.t)()],
                     void 0,
                     this.featureName,
                     this.ee
                   ),
-                    (i = !1)
+                    (d = !1)
                 }))
             }),
-            a = (0, v.s)(
+            l = (0, m.s)(
               (e) => {
-                ;(0, x.p)('newUIEvent', [e], void 0, this.featureName, this.ee),
-                  o.observe(document.body, {
+                'loading' !== document.readyState &&
+                  ((0, s.p)(
+                    'newUIEvent',
+                    [e],
+                    void 0,
+                    this.featureName,
+                    this.ee
+                  ),
+                  u.observe(document.body, {
                     attributes: !0,
                     childList: !0,
                     subtree: !0,
                     characterData: !0,
-                  })
+                  }))
               },
               100,
               { leading: !0 }
             )
           ;(this.abortHandler = function () {
             this.removeOnAbort?.abort(),
-              o.disconnect(),
+              u.disconnect(),
               (this.abortHandler = void 0)
           }),
-            this.importAggregator(e, { domObserver: o })
+            this.importAggregator(e, () => i.e(478).then(i.bind(i, 4393)), {
+              domObserver: u,
+            })
         }
       }
-      var Ce = i(7378)
-      const ke = {},
-        Le = ['appendChild', 'insertBefore', 'replaceChild']
-      function He(e) {
-        const t = (function (e) {
-          return (e || B.ee).get('jsonp')
-        })(e)
-        if (!p.RI || ke[t.debugId]) return t
-        ke[t.debugId] = !0
-        var r = (0, W.YM)(t),
-          n = /[?&](?:callback|cb)=([^&#]+)/,
-          i = /(.*)\.([^.]+)/,
-          o = /^(\w+)(\.|$)(.*)$/
-        function a(e, t) {
-          if (!e) return t
-          const r = e.match(o),
-            n = r[1]
-          return a(r[3], t[n])
-        }
-        return (
-          r.inPlace(Node.prototype, Le, 'dom-'),
-          t.on('dom-start', function (e) {
-            !(function (e) {
-              if (
-                !e ||
-                'string' != typeof e.nodeName ||
-                'script' !== e.nodeName.toLowerCase()
-              )
-                return
-              if ('function' != typeof e.addEventListener) return
-              var o = ((s = e.src), (c = s.match(n)), c ? c[1] : null)
-              var s, c
-              if (!o) return
-              var u = (function (e) {
-                var t = e.match(i)
-                if (t && t.length >= 3)
-                  return { key: t[2], parent: a(t[1], window) }
-                return { key: e, parent: window }
-              })(o)
-              if ('function' != typeof u.parent[u.key]) return
-              var d = {}
-              function l() {
-                t.emit('jsonp-end', [], d),
-                  e.removeEventListener('load', l, (0, A.jT)(!1)),
-                  e.removeEventListener('error', f, (0, A.jT)(!1))
-              }
-              function f() {
-                t.emit('jsonp-error', [], d),
-                  t.emit('jsonp-end', [], d),
-                  e.removeEventListener('load', l, (0, A.jT)(!1)),
-                  e.removeEventListener('error', f, (0, A.jT)(!1))
-              }
-              r.inPlace(u.parent, [u.key], 'cb-', d),
-                e.addEventListener('load', l, (0, A.jT)(!1)),
-                e.addEventListener('error', f, (0, A.jT)(!1)),
-                t.emit('new-jsonp', [e.src], d)
-            })(e[0])
-          }),
-          t
-        )
+      var $e = i(3333)
+      const Je = {},
+        Qe = new Set()
+      function et(e) {
+        return 'string' == typeof e
+          ? { type: 'string', size: new TextEncoder().encode(e).length }
+          : e instanceof ArrayBuffer
+          ? { type: 'ArrayBuffer', size: e.byteLength }
+          : e instanceof Blob
+          ? { type: 'Blob', size: e.size }
+          : e instanceof DataView
+          ? { type: 'DataView', size: e.byteLength }
+          : ArrayBuffer.isView(e)
+          ? { type: 'TypedArray', size: e.byteLength }
+          : { type: 'unknown', size: 0 }
       }
-      const Me = {}
-      function De(e) {
-        const t = (function (e) {
-          return (e || B.ee).get('promise')
-        })(e)
-        if (Me[t.debugId]) return t
-        Me[t.debugId] = !0
-        var r = t.context,
-          n = (0, W.YM)(t),
-          i = p.gm.Promise
-        return (
-          i &&
-            (function () {
-              function e(r) {
-                var o = t.context(),
-                  a = n(r, 'executor-', o, null, !1)
-                const s = Reflect.construct(i, [a], e)
-                return (
-                  (t.context(s).getCtx = function () {
-                    return o
-                  }),
-                  s
-                )
-              }
-              ;(p.gm.Promise = e),
-                Object.defineProperty(e, 'name', { value: 'Promise' }),
-                (e.toString = function () {
-                  return i.toString()
-                }),
-                Object.setPrototypeOf(e, i),
-                ['all', 'race'].forEach(function (r) {
-                  const n = i[r]
-                  e[r] = function (e) {
-                    let i = !1
-                    ;[...(e || [])].forEach((e) => {
-                      this.resolve(e).then(a('all' === r), a(!1))
+      class tt {
+        constructor(e, t) {
+          ;(this.timestamp = (0, o.t)()),
+            (this.currentUrl = (0, z.L)(window.location.href)),
+            (this.socketId = (0, Re.LA)(8)),
+            (this.requestedUrl = (0, z.L)(e)),
+            (this.requestedProtocols = Array.isArray(t)
+              ? t.join(',')
+              : t || ''),
+            (this.openedAt = void 0),
+            (this.protocol = void 0),
+            (this.extensions = void 0),
+            (this.binaryType = void 0),
+            (this.messageOrigin = void 0),
+            (this.messageCount = 0),
+            (this.messageBytes = 0),
+            (this.messageBytesMin = 0),
+            (this.messageBytesMax = 0),
+            (this.messageTypes = void 0),
+            (this.sendCount = 0),
+            (this.sendBytes = 0),
+            (this.sendBytesMin = 0),
+            (this.sendBytesMax = 0),
+            (this.sendTypes = void 0),
+            (this.closedAt = void 0),
+            (this.closeCode = void 0),
+            (this.closeReason = 'unknown'),
+            (this.closeWasClean = void 0),
+            (this.connectedDuration = 0),
+            (this.hasErrors = void 0)
+        }
+      }
+      class rt extends y {
+        static featureName = $e.TZ
+        constructor(e) {
+          super(e, $e.TZ)
+          const r = e.init.feature_flags.includes('websockets'),
+            n = [
+              e.init.page_action.enabled,
+              e.init.performance.capture_marks,
+              e.init.performance.capture_measures,
+              e.init.performance.resources.enabled,
+              e.init.user_actions.enabled,
+              r,
+            ]
+          var d
+          let u, l
+          if (
+            ((d = e),
+            (0, c.Y)(a.hG, (e, t) => F(e, t, d), d),
+            (function (e) {
+              ;(0, c.Y)(a.fF, (t, r) => G(t, r, e), e)
+            })(e),
+            Me(e),
+            Q(e),
+            (function (e) {
+              ;(0, c.Y)(a.V1, (t, r) => V(t, r, e), e)
+            })(e),
+            r &&
+              (l = (function (e) {
+                if (!(0, T.dV)().o.WS) return e
+                const t = e.get('websockets')
+                if (Je[t.debugId]++) return t
+                ;(Je[t.debugId] = 1),
+                  (0, x.G)(() => {
+                    const e = (0, o.t)()
+                    Qe.forEach((r) => {
+                      ;(r.nrData.closedAt = e),
+                        (r.nrData.closeCode = 1001),
+                        (r.nrData.closeReason = 'Page navigating away'),
+                        (r.nrData.closeWasClean = !1),
+                        r.nrData.openedAt &&
+                          (r.nrData.connectedDuration = e - r.nrData.openedAt),
+                        t.emit('ws', [r.nrData], r)
                     })
-                    const o = n.apply(this, arguments)
-                    return o
-                    function a(e) {
-                      return function () {
-                        t.emit('propagate', [null, !i], o, !1, !1),
-                          (i = i || !e)
-                      }
+                  })
+                class r extends WebSocket {
+                  static name = 'WebSocket'
+                  static toString() {
+                    return 'function WebSocket() { [native code] }'
+                  }
+                  toString() {
+                    return '[object WebSocket]'
+                  }
+                  get [Symbol.toStringTag]() {
+                    return r.name
+                  }
+                  #o(e) {
+                    ;((e.__newrelic ??= {}).socketId = this.nrData.socketId),
+                      (this.nrData.hasErrors ??= !0)
+                  }
+                  constructor(...e) {
+                    super(...e),
+                      (this.nrData = new tt(e[0], e[1])),
+                      this.addEventListener('open', () => {
+                        ;(this.nrData.openedAt = (0, o.t)()),
+                          ['protocol', 'extensions', 'binaryType'].forEach(
+                            (e) => {
+                              this.nrData[e] = this[e]
+                            }
+                          ),
+                          Qe.add(this)
+                      }),
+                      this.addEventListener('message', (e) => {
+                        const { type: t, size: r } = et(e.data)
+                        ;(this.nrData.messageOrigin ??= (0, z.L)(e.origin)),
+                          this.nrData.messageCount++,
+                          (this.nrData.messageBytes += r),
+                          (this.nrData.messageBytesMin = Math.min(
+                            this.nrData.messageBytesMin || 1 / 0,
+                            r
+                          )),
+                          (this.nrData.messageBytesMax = Math.max(
+                            this.nrData.messageBytesMax,
+                            r
+                          )),
+                          (this.nrData.messageTypes ?? '').includes(t) ||
+                            (this.nrData.messageTypes = this.nrData.messageTypes
+                              ? ''
+                                  .concat(this.nrData.messageTypes, ',')
+                                  .concat(t)
+                              : t)
+                      }),
+                      this.addEventListener('close', (e) => {
+                        ;(this.nrData.closedAt = (0, o.t)()),
+                          (this.nrData.closeCode = e.code),
+                          e.reason && (this.nrData.closeReason = e.reason),
+                          (this.nrData.closeWasClean = e.wasClean),
+                          (this.nrData.connectedDuration =
+                            this.nrData.closedAt - this.nrData.openedAt),
+                          Qe.delete(this),
+                          t.emit('ws', [this.nrData], this)
+                      })
+                  }
+                  addEventListener(e, t, ...r) {
+                    const n = this,
+                      i =
+                        'function' == typeof t
+                          ? function (...e) {
+                              try {
+                                return t.apply(this, e)
+                              } catch (e) {
+                                throw (n.#o(e), e)
+                              }
+                            }
+                          : t?.handleEvent
+                          ? {
+                              handleEvent: function (...e) {
+                                try {
+                                  return t.handleEvent.apply(t, e)
+                                } catch (e) {
+                                  throw (n.#o(e), e)
+                                }
+                              },
+                            }
+                          : t
+                    return super.addEventListener(e, i, ...r)
+                  }
+                  send(e) {
+                    if (this.readyState === WebSocket.OPEN) {
+                      const { type: t, size: r } = et(e)
+                      this.nrData.sendCount++,
+                        (this.nrData.sendBytes += r),
+                        (this.nrData.sendBytesMin = Math.min(
+                          this.nrData.sendBytesMin || 1 / 0,
+                          r
+                        )),
+                        (this.nrData.sendBytesMax = Math.max(
+                          this.nrData.sendBytesMax,
+                          r
+                        )),
+                        (this.nrData.sendTypes ?? '').includes(t) ||
+                          (this.nrData.sendTypes = this.nrData.sendTypes
+                            ? ''.concat(this.nrData.sendTypes, ',').concat(t)
+                            : t)
+                    }
+                    try {
+                      return super.send(e)
+                    } catch (e) {
+                      throw (this.#o(e), e)
                     }
                   }
-                }),
-                ['resolve', 'reject'].forEach(function (r) {
-                  const n = i[r]
-                  e[r] = function (e) {
-                    const r = n.apply(this, arguments)
-                    return e !== r && t.emit('propagate', [e, !0], r, !1, !1), r
+                  close(...e) {
+                    try {
+                      super.close(...e)
+                    } catch (e) {
+                      throw (this.#o(e), e)
+                    }
                   }
-                }),
-                (e.prototype = i.prototype)
-              const o = i.prototype.then
-              ;(i.prototype.then = function (...e) {
-                var i = this,
-                  a = r(i)
-                ;(a.promise = i),
-                  (e[0] = n(e[0], 'cb-', a, null, !1)),
-                  (e[1] = n(e[1], 'cb-', a, null, !1))
-                const s = o.apply(this, e)
-                return (
-                  (a.nextPromise = s),
-                  t.emit('propagate', [i, !0], s, !1, !1),
-                  s
-                )
-              }),
-                (i.prototype.then[W.Jt] = o),
-                t.on('executor-start', function (e) {
-                  ;(e[0] = n(e[0], 'resolve-', this, null, !1)),
-                    (e[1] = n(e[1], 'resolve-', this, null, !1))
-                }),
-                t.on('executor-err', function (e, t, r) {
-                  e[1](r)
-                }),
-                t.on('cb-end', function (e, r, n) {
-                  t.emit('propagate', [n, !0], this.nextPromise, !1, !1)
-                }),
-                t.on('propagate', function (e, r, n) {
-                  ;(this.getCtx && !r) ||
-                    (this.getCtx = function () {
-                      if (e instanceof Promise) var r = t.context(e)
-                      return r && r.getCtx ? r.getCtx() : this
-                    })
-                })
-            })(),
-          t
-        )
-      }
-      const Ke = {},
-        Ue = 'setTimeout',
-        Ve = 'setInterval',
-        Ge = 'clearTimeout',
-        Fe = '-start',
-        Be = [Ue, 'setImmediate', Ve, Ge, 'clearImmediate']
-      function We(e) {
-        const t = (function (e) {
-          return (e || B.ee).get('timer')
-        })(e)
-        if (Ke[t.debugId]++) return t
-        Ke[t.debugId] = 1
-        var r = (0, W.YM)(t)
-        return (
-          r.inPlace(p.gm, Be.slice(0, 2), Ue + '-'),
-          r.inPlace(p.gm, Be.slice(2, 3), Ve + '-'),
-          r.inPlace(p.gm, Be.slice(3), Ge + '-'),
-          t.on(Ve + Fe, function (e, t, n) {
-            e[0] = r(e[0], 'fn-', null, n)
-          }),
-          t.on(Ue + Fe, function (e, t, n) {
-            ;(this.method = n),
-              (this.timerDuration = isNaN(e[1]) ? 0 : +e[1]),
-              (e[0] = r(e[0], 'fn-', this, n))
-          }),
-          t
-        )
-      }
-      const ze = {}
-      function qe(e) {
-        const t = (function (e) {
-          return (e || B.ee).get('mutation')
-        })(e)
-        if (!p.RI || ze[t.debugId]) return t
-        ze[t.debugId] = !0
-        var r = (0, W.YM)(t),
-          n = p.gm.MutationObserver
-        return (
-          n &&
-            ((window.MutationObserver = function (e) {
-              return this instanceof n
-                ? new n(r(e, 'fn-'))
-                : n.apply(this, arguments)
-            }),
-            (MutationObserver.prototype = n.prototype)),
-          t
-        )
-      }
-      const {
-        TZ: Ze,
-        d3: Ye,
-        Kp: Je,
-        $p: Xe,
-        wW: $e,
-        e5: Qe,
-        tH: et,
-        uP: tt,
-        rw: rt,
-        Lc: nt,
-      } = Ce
-      class it extends b {
-        static featureName = Ze
-        constructor(e, t = !0) {
-          if ((super(e, Ze, t), !p.RI)) return
-          try {
-            this.removeOnAbort = new AbortController()
-          } catch (e) {}
-          let r,
-            n = 0
-          const i = this.ee.get('tracer'),
-            o = He(this.ee),
-            a = De(this.ee),
-            s = We(this.ee),
-            c = Z(this.ee),
-            u = this.ee.get('events'),
-            d = ne(this.ee),
-            l = be(this.ee),
-            f = qe(this.ee)
-          function h(e, t) {
-            l.emit('newURL', ['' + window.location, t])
-          }
-          function g() {
-            n++, (r = window.location.hash), (this[tt] = (0, S.t)())
-          }
-          function m() {
-            n--, window.location.hash !== r && h(0, !0)
-            var e = (0, S.t)()
-            ;(this[Qe] = ~~this[Qe] + e - this[tt]), (this[nt] = e)
-          }
-          function v(e, t) {
-            e.on(t, function () {
-              this[t] = (0, S.t)()
-            })
-          }
-          this.ee.on(tt, g),
-            a.on(rt, g),
-            o.on(rt, g),
-            this.ee.on(nt, m),
-            a.on($e, m),
-            o.on($e, m),
-            this.ee.on('fn-err', (...t) => {
-              t[2]?.__newrelic?.[e.agentIdentifier] ||
-                (0, x.p)(
-                  'function-err',
-                  [...t],
-                  void 0,
-                  this.featureName,
-                  this.ee
-                )
-            }),
-            this.ee.buffer([tt, nt, 'xhr-resolved'], this.featureName),
-            u.buffer([tt], this.featureName),
-            s.buffer(
-              ['setTimeout' + Je, 'clearTimeout' + Ye, tt],
-              this.featureName
-            ),
-            c.buffer([tt, 'new-xhr', 'send-xhr' + Ye], this.featureName),
-            d.buffer(
-              [et + Ye, et + '-done', et + Xe + Ye, et + Xe + Je],
-              this.featureName
-            ),
-            l.buffer(['newURL'], this.featureName),
-            f.buffer([tt], this.featureName),
-            a.buffer(
-              ['propagate', rt, $e, 'executor-err', 'resolve' + Ye],
-              this.featureName
-            ),
-            i.buffer([tt, 'no-' + tt], this.featureName),
-            o.buffer(
-              ['new-jsonp', 'cb-start', 'jsonp-error', 'jsonp-end'],
-              this.featureName
-            ),
-            v(d, et + Ye),
-            v(d, et + '-done'),
-            v(o, 'new-jsonp'),
-            v(o, 'jsonp-end'),
-            v(o, 'cb-start'),
-            l.on('pushState-end', h),
-            l.on('replaceState-end', h),
-            window.addEventListener(
-              'hashchange',
-              h,
-              (0, A.jT)(!0, this.removeOnAbort?.signal)
-            ),
-            window.addEventListener(
-              'load',
-              h,
-              (0, A.jT)(!0, this.removeOnAbort?.signal)
-            ),
-            window.addEventListener(
-              'popstate',
-              function () {
-                h(0, n > 1)
-              },
-              (0, A.jT)(!0, this.removeOnAbort?.signal)
-            ),
-            (this.abortHandler = this.#n),
-            this.importAggregator(e)
-        }
-        #n() {
-          this.removeOnAbort?.abort(), (this.abortHandler = void 0)
-        }
-      }
-      var ot = i(3333)
-      class at extends b {
-        static featureName = ot.TZ
-        constructor(e, t = !0) {
-          super(e, ot.TZ, t)
-          const r = [
-            e.init.page_action.enabled,
-            e.init.performance.capture_marks,
-            e.init.performance.capture_measures,
-            e.init.user_actions.enabled,
-            e.init.performance.resources.enabled,
-          ]
-          if (
-            p.RI &&
-            (e.init.user_actions.enabled &&
-              (ot.Zp.forEach((e) =>
-                (0, A.sp)(
+                }
+                return (f.gm.WebSocket = r), t
+              })(this.ee)),
+            f.RI)
+          ) {
+            if (
+              (be(this.ee),
+              le(this.ee),
+              (u = je(this.ee)),
+              e.init.user_actions.enabled)
+            ) {
+              function h(t) {
+                const r = (0, we.D)(t)
+                return e.beacons.includes(r.hostname + ':' + r.port)
+              }
+              function p() {
+                u.emit('navChange')
+              }
+              $e.Zp.forEach((e) =>
+                (0, P.sp)(
                   e,
-                  (e) => (0, x.p)('ua', [e], void 0, this.featureName, this.ee),
+                  (e) => (0, s.p)('ua', [e], void 0, this.featureName, this.ee),
                   !0
                 )
               ),
-              ot.qN.forEach((e) => {
-                const t = (0, v.s)(
-                  (e) => {
-                    ;(0, x.p)('ua', [e], void 0, this.featureName, this.ee)
+                $e.qN.forEach((e) => {
+                  const t = (0, m.s)(
+                    (e) => {
+                      ;(0, s.p)('ua', [e], void 0, this.featureName, this.ee)
+                    },
+                    500,
+                    { leading: !0 }
+                  )
+                  ;(0, P.sp)(e, t)
+                }),
+                f.gm.addEventListener(
+                  'error',
+                  () => {
+                    ;(0, s.p)('uaErr', [], void 0, t.K7.genericEvents, this.ee)
                   },
-                  500,
-                  { leading: !0 }
+                  (0, P.jT)(!1, this.removeOnAbort?.signal)
+                ),
+                this.ee.on('open-xhr-start', (e, r) => {
+                  h(e[1]) ||
+                    r.addEventListener('readystatechange', () => {
+                      2 === r.readyState &&
+                        (0, s.p)(
+                          'uaXhr',
+                          [],
+                          void 0,
+                          t.K7.genericEvents,
+                          this.ee
+                        )
+                    })
+                }),
+                this.ee.on('fetch-start', (e) => {
+                  e.length >= 1 &&
+                    !h(xe(e[0])) &&
+                    (0, s.p)('uaXhr', [], void 0, t.K7.genericEvents, this.ee)
+                }),
+                u.on('pushState-end', p),
+                u.on('replaceState-end', p),
+                window.addEventListener(
+                  'hashchange',
+                  p,
+                  (0, P.jT)(!0, this.removeOnAbort?.signal)
+                ),
+                window.addEventListener(
+                  'popstate',
+                  p,
+                  (0, P.jT)(!0, this.removeOnAbort?.signal)
                 )
-                ;(0, A.sp)(e, t)
-              })),
-            e.init.performance.resources.enabled &&
-              p.gm.PerformanceObserver?.supportedEntryTypes.includes(
-                'resource'
-              ))
-          ) {
-            new PerformanceObserver((e) => {
-              e.getEntries().forEach((e) => {
-                ;(0, x.p)(
-                  'browserPerformance.resource',
-                  [e],
-                  void 0,
-                  this.featureName,
-                  this.ee
-                )
-              })
-            }).observe({ type: 'resource', buffered: !0 })
+            }
+            if (
+              e.init.performance.resources.enabled &&
+              f.gm.PerformanceObserver?.supportedEntryTypes.includes('resource')
+            ) {
+              new PerformanceObserver((e) => {
+                e.getEntries().forEach((e) => {
+                  ;(0, s.p)(
+                    'browserPerformance.resource',
+                    [e],
+                    void 0,
+                    this.featureName,
+                    this.ee
+                  )
+                })
+              }).observe({ type: 'resource', buffered: !0 })
+            }
           }
-          r.some((e) => e) ? this.importAggregator(e) : this.deregisterDrain()
-        }
-      }
-      var st = i(993),
-        ct = i(3785),
-        ut = i(9414)
-      class dt extends b {
-        static featureName = st.TZ
-        constructor(e, t = !0) {
-          super(e, st.TZ, t)
-          const r = this.ee
-          ;(0, ut.J)(r, p.gm.console, 'log', { level: 'info' }),
-            (0, ut.J)(r, p.gm.console, 'error', { level: 'error' }),
-            (0, ut.J)(r, p.gm.console, 'warn', { level: 'warn' }),
-            (0, ut.J)(r, p.gm.console, 'info', { level: 'info' }),
-            (0, ut.J)(r, p.gm.console, 'debug', { level: 'debug' }),
-            (0, ut.J)(r, p.gm.console, 'trace', { level: 'trace' }),
-            this.ee.on('wrap-logger-end', function ([e]) {
-              const { level: t, customAttributes: n } = this
-              ;(0, ct.R)(r, e, n, t)
-            }),
-            this.importAggregator(e)
-        }
-      }
-      new (class extends o {
-        constructor(t) {
-          super(),
-            p.gm
-              ? ((this.features = {}),
-                (0, R.bQ)(this.agentIdentifier, this),
-                (this.desiredFeatures = new Set(t.features || [])),
-                this.desiredFeatures.add(w),
-                (this.runSoftNavOverSpa = [...this.desiredFeatures].some(
-                  (e) => e.featureName === a.K7.softNav
-                )),
-                (0, d.j)(this, t, t.loaderType || 'agent'),
-                this.run())
-              : (0, e.R)(21)
-        }
-        get config() {
-          return {
-            info: this.info,
-            init: this.init,
-            loader_config: this.loader_config,
-            runtime: this.runtime,
-          }
-        }
-        run() {
+          r &&
+            l.on('ws', (e) => {
+              ;(0, s.p)('ws-complete', [e], void 0, this.featureName, this.ee)
+            })
           try {
-            const t = u(this.agentIdentifier),
-              r = [...this.desiredFeatures]
-            r.sort((e, t) => a.P3[e.featureName] - a.P3[t.featureName]),
-              r.forEach((r) => {
-                if (!t[r.featureName] && r.featureName !== a.K7.pageViewEvent)
-                  return
-                if (this.runSoftNavOverSpa && r.featureName === a.K7.spa) return
-                if (!this.runSoftNavOverSpa && r.featureName === a.K7.softNav)
-                  return
-                const n = (function (e) {
-                  switch (e) {
-                    case a.K7.ajax:
-                      return [a.K7.jserrors]
-                    case a.K7.sessionTrace:
-                      return [a.K7.ajax, a.K7.pageViewEvent]
-                    case a.K7.sessionReplay:
-                      return [a.K7.sessionTrace]
-                    case a.K7.pageViewTiming:
-                      return [a.K7.pageViewEvent]
-                    default:
-                      return []
-                  }
-                })(r.featureName).filter((e) => !(e in this.features))
-                n.length > 0 &&
-                  (0, e.R)(36, {
-                    targetFeature: r.featureName,
-                    missingDependencies: n,
-                  }),
-                  (this.features[r.featureName] = new r(this))
-              })
-          } catch (t) {
-            ;(0, e.R)(22, t)
-            for (const e in this.features) this.features[e].abortHandler?.()
-            const r = (0, R.Zm)()
-            delete r.initializedAgents[this.agentIdentifier]?.api,
-              delete r.initializedAgents[this.agentIdentifier]?.features,
-              delete this.sharedAggregator
-            return r.ee.get(this.agentIdentifier).abort(), !1
-          }
+            this.removeOnAbort = new AbortController()
+          } catch (g) {}
+          ;(this.abortHandler = () => {
+            this.removeOnAbort?.abort(), (this.abortHandler = void 0)
+          }),
+            n.some((e) => e)
+              ? this.importAggregator(e, () => i.e(478).then(i.bind(i, 8019)))
+              : this.deregisterDrain()
         }
-      })({
-        features: [pe, w, N, _e, Ie, O, M, at, dt, je, it],
+      }
+      var nt = i(2646)
+      const it = new Map()
+      function st(e, t, r, n, i = !0) {
+        if (
+          'object' != typeof t ||
+          !t ||
+          'string' != typeof r ||
+          !r ||
+          'function' != typeof t[r]
+        )
+          return (0, h.R)(29)
+        const s = (function (e) {
+            return (e || ae.ee).get('logger')
+          })(e),
+          o = (0, ce.YM)(s),
+          a = new nt.y(ae.P)
+        ;(a.level = n.level),
+          (a.customAttributes = n.customAttributes),
+          (a.autoCaptured = i)
+        const c = t[r]?.[ce.Jt] || t[r]
+        return (
+          it.set(c, a), o.inPlace(t, [r], 'wrap-logger-', () => it.get(c)), s
+        )
+      }
+      var ot = i(1910)
+      class at extends y {
+        static featureName = K.TZ
+        constructor(e) {
+          var t
+          super(e, K.TZ),
+            (t = e),
+            (0, c.Y)(a.$9, (e, r) => U(e, r, t), t),
+            (function (e) {
+              ;(0, c.Y)(
+                a.Wb,
+                (
+                  t,
+                  r,
+                  { customAttributes: n = {}, level: i = K.p_.INFO } = {}
+                ) => {
+                  st(e.ee, t, r, { customAttributes: n, level: i }, !1)
+                },
+                e
+              )
+            })(e),
+            Q(e)
+          const r = this.ee
+          ;['log', 'error', 'warn', 'info', 'debug', 'trace'].forEach((e) => {
+            ;(0, ot.i)(f.gm.console[e]),
+              st(r, f.gm.console, e, { level: 'log' === e ? 'info' : e })
+          }),
+            this.ee.on('wrap-logger-end', function ([e]) {
+              const { level: t, customAttributes: n, autoCaptured: i } = this
+              ;(0, W.R)(r, e, n, t, i)
+            }),
+            this.importAggregator(e, () => i.e(478).then(i.bind(i, 5288)))
+        }
+      }
+      new A({
+        features: [Pe, E, _, ze, qe, I, te, rt, at, Xe],
         loaderType: 'spa',
       })
     })()
