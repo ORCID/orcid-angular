@@ -1,3 +1,9 @@
+## v2.131.17 - 2026-03-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.16...v2.131.17)
+
+- [#2786](https://github.com/ORCID/orcid-angular/pull/2786): PD-0000 - Add XSRF header fallback for prod code
+
 ## v2.131.16 - 2026-03-20
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.15...v2.131.16)
