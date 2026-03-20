@@ -105,16 +105,18 @@
             </div>
             <div class="import-works-dialog__card-actions">
               <ng-container *ngIf="link.connected; else connectCertified">
-                <span
+                <button
+                  type="button"
                   class="import-works-dialog__connected"
                   [attr.aria-label]="getConnectedAriaLabel(link.name)"
+                  (click)="openInNewTab(link.url)"
                 >
                   <span
                     class="import-works-dialog__connected-dot"
                     aria-hidden="true"
                   ></span>
                   {{ connectedLabel }}
-                </span>
+                </button>
               </ng-container>
               <ng-template #connectCertified>
                 <button
