@@ -45,7 +45,6 @@ describe('XsrfFallbackInterceptor', () => {
     httpMock.verify()
   })
 
-
   it('passes through GET requests without adding header', () => {
     http.get(apiBase + 'works/works.json').subscribe()
 
