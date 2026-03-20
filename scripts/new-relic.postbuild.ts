@@ -1,46 +1,41 @@
 import { readFileSync, writeFileSync } from 'fs'
 import { join } from 'path'
+import { createHash } from 'crypto'
 
+// fingerprint: orcid-angular/new-relic.postbuild.ts:v1
 const newRelicSourcePath = join(__dirname, 'new-relic.runtime.js')
 
-let minifiedNewRelicJs: string | undefined
+let newRelicCode: string | undefined
+let newRelicContentHash: string | undefined
 
-function getMinifiedNewRelicJs(): string {
-  if (minifiedNewRelicJs !== undefined) {
-    return minifiedNewRelicJs
+function getNewRelicCode(): string {
+  if (newRelicCode !== undefined) {
+    return newRelicCode
   }
-  const { minify_sync } = require('terser') as {
-    minify_sync: (
-      code: string,
-      options?: Record<string, unknown>
-    ) => { code?: string; error?: Error }
+  newRelicCode = readFileSync(newRelicSourcePath, 'utf8')
+  return newRelicCode
+}
+
+function getNewRelicContentHash(): string {
+  if (newRelicContentHash !== undefined) {
+    return newRelicContentHash
   }
-  const source = readFileSync(newRelicSourcePath, 'utf8')
-  const result = minify_sync(source, {
-    compress: true,
-    mangle: true,
-    format: { comments: false },
-  })
-  if (result.error) {
-    throw result.error
-  }
-  if (!result.code) {
-    throw new Error('terser returned empty code for new-relic.runtime.js')
-  }
-  minifiedNewRelicJs = result.code
-  return minifiedNewRelicJs
+  const code = getNewRelicCode()
+  newRelicContentHash = createHash('sha256').update(code).digest('hex').slice(0, 16)
+  return newRelicContentHash
 }
 
 export function newRelic(
   indexHtml: string,
   options: { folder: string; languageCode: string }
 ) {
+  const hash = getNewRelicContentHash()
   writeFileSync(
-    join(options.folder, 'new-relic.runtime.js'),
-    getMinifiedNewRelicJs(),
+    join(options.folder, `new-relic.runtime.${hash}.js`),
+    getNewRelicCode(),
     'utf8'
   )
-  const src = `new-relic.runtime-${options.languageCode}.js`
+  const src = `new-relic.runtime.${hash}-${options.languageCode}.js`
   return indexHtml.replace(
     '<!-- NEW_RELIC_PLACEHOLDER -->',
     `<script type="text/javascript" src="${src}"></script>`

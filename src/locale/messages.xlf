@@ -5905,6 +5905,13 @@
           <context context-type="linenumber">209</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="layout.oneTrustFocusAnnouncement" datatype="html" resname="layout.oneTrustFocusAnnouncement">
+        <source>Cookie settings dialog opened. Focus moved to this dialog. Please review the options and make a choice to continue.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/announcer/announcer.service.ts</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="record.ogDescription1" datatype="html" resname="record.ogDescription1">
         <source>ORCID record for</source>
         <context-group purpose="location">
