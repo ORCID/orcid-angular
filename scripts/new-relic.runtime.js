@@ -1,8 +1,4 @@
 window.NREUM || (NREUM = {})
-// Cost-saving: disable session replay and session trace (high $). We still record
-// all app events (addPageAction: registration journey, record expand, errors, etc.).
-// autoStart: false so no data is sent until NewRelicService calls newrelic.start()
-// only for users who are sampled (RUM togglz percentage).
 NREUM.init = {
   performance: { capture_measures: true },
   browser_consent_mode: { enabled: false },
