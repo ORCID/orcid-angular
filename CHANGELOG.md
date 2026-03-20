@@ -1,3 +1,9 @@
+## v2.131.16 - 2026-03-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.15...v2.131.16)
+
+- [#2783](https://github.com/ORCID/orcid-angular/pull/2783): PD-3857
+
 ## v2.131.15 - 2026-03-19
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.14...v2.131.15)
