@@ -211,7 +211,10 @@ export class OneTrustAccessibilityService implements OnDestroy {
   }
 
   private _restorePolicyLinkTabIndex(): void {
-    if (!this._policyLinkElement || !this._document.contains(this._policyLinkElement)) {
+    if (
+      !this._policyLinkElement ||
+      !this._document.contains(this._policyLinkElement)
+    ) {
       this._policyLinkElement = null
       this._policyLinkOriginalTabIndex = undefined
       return
