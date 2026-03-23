@@ -2,7 +2,7 @@
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.17...v2.131.18)
 
-- [#2787](https://github.com/ORCID/orcid-angular/pull/2787): PD-5211, COMMS-1503, PD-5176 
+- [#2787](https://github.com/ORCID/orcid-angular/pull/2787): PD-5211, COMMS-1503, PD-5176
 
 ## v2.131.17 - 2026-03-20
 
