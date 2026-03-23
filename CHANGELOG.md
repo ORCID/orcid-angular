@@ -1,3 +1,9 @@
+## v2.131.19 - 2026-03-23
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.18...v2.131.19)
+
+- [#2788](https://github.com/ORCID/orcid-angular/pull/2788): PD-4866 Set the visibility object to null if the biography element co…
+
 ## v2.131.18 - 2026-03-20
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.17...v2.131.18)
