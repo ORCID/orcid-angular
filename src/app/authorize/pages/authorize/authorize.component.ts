@@ -140,14 +140,25 @@ export class AuthorizeComponent {
   private alreadyAuthorizeRedirect(
     oauthSession: RequestInfoForm
   ): Observable<boolean> {
+    const query = this.platform?.queryParameters as Record<string, unknown>
+    const urlQuery = new URLSearchParams(this.window?.location?.search || '')
+    const queryClientId =
+      (typeof query?.client_id === 'string' ? query.client_id : undefined) ||
+      urlQuery.get('client_id') ||
+      undefined
+    const queryScope =
+      (typeof query?.scope === 'string' ? query.scope : undefined) ||
+      urlQuery.get('scope') ||
+      undefined
     this.redirectUrl = oauthSession.redirectUrl
     const scopeSummary =
       oauthSession.scopesAsString ||
-      oauthSession.scopes?.map((s) => s.value).join(' ')
+      oauthSession.scopes?.map((s) => s.value).join(' ') ||
+      queryScope
     this._observability.recordSimpleEvent(
       AppEventName.OauthAuthorizePageAlreadyAuthorizedRedirect,
       {
-        client_id: oauthSession.clientId,
+        client_id: oauthSession.clientId || queryClientId,
         redirect_target: oauthSession.redirectUrl,
         scope: scopeSummary,
         oauth2_authorization_page_flag: this.OAUTH2_AUTHORIZATION_ENABLE,

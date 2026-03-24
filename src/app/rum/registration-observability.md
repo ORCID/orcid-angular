@@ -46,7 +46,7 @@ Events are emitted from two places:
 
 `RegisterObservabilityService.completeJourney(...)` exists and emits journey completion plus `finishJourney(...)`.
 
-At present, the registration page flow mainly relies on intermediate and completion-like events emitted during submit/redirect handling; explicit `completeJourney(...)` is available in the service and can be wired where needed.
+The registration page now calls `completeJourney(...)` on successful final redirect handling, so registrations that reach a valid redirect URL produce explicit journey completion telemetry.
 
 ## What gets instrumented
 
@@ -71,8 +71,13 @@ The register page emits events around:
 - validation-error stage
 - registration confirmation stage
 - confirmation-error stage (unexpected responses)
+- pipeline error stage (submit observable error callback)
 
 Event payloads may include backend validator or response objects for debugging.
+
+## Guard-level registration handoff
+
+`RegisterGuard` emits a simple event when it redirects an already-logged-in OAuth registration path to `/oauth/authorize`, including OAuth query context attributes. This helps explain pre-form exits that do not traverse full register journey steps.
 
 ## Reactivation context
 
@@ -92,26 +97,3 @@ Use prefixed fields:
 - `journeyContext_*` for registration context
 - `eventAttribute_*` for event payload
 
-## Alerting guidance
-
-For alert stability, prefer nearby stage conversions for operational alerts (for example validate -> confirmation), and use broader funnel conversions for dashboard trend analysis.
-
-Recommended protections:
-
-- traffic gate condition
-- sliding window aggregation
-- evaluation offset for late-arriving events
-
-## Common pitfalls
-
-- Using `eventName` instead of `system_eventName` in NRQL.
-- Mixing simple-event selectors with journey-event selectors.
-- Expecting strict cohort conversion from short time-bucket ratios.
-- Alerting on low-volume windows without a denominator guard.
-
-## Troubleshooting checklist
-
-- No registration events: verify journey start is called before any step events.
-- Missing submit milestones: inspect register submit branches and unexpected error handling paths.
-- Over-100% conversion in short windows: check denominator window alignment and low traffic conditions.
-- Noisy alerts: adjust aggregation/sliding windows and add traffic guard conditions.

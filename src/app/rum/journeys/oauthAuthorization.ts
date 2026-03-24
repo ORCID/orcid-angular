@@ -3,6 +3,14 @@ export interface OauthAuthorizationContext {
   redirect_uri?: string
   response_type?: string
   scope?: string
+  /** True when the user is authorizing while in trusted-individual delegation mode. */
+  acting_as_trusted_user?: boolean
+  /** Effective ORCID of the active delegated account (when present). */
+  effective_user_orcid?: string
+  /** Real signed-in ORCID behind the delegated account context (when present). */
+  real_user_orcid?: string
+  /** True when current delegation context was assigned by admin. */
+  delegated_by_admin?: boolean
   /**
    * Full OAuth route query string (`key=value&…`), sorted keys.
    * Use this when individual fields are not enough (e.g. `state`, `prompt`, `nonce`).

@@ -14,6 +14,7 @@ import { WINDOW } from '../cdk/window'
 import { TogglzService } from '../core/togglz/togglz.service'
 import { AuthDecisionService } from '../core/auth-decision/auth-decision.service'
 import { OauthService } from '../core/oauth/oauth.service'
+import { RumJourneyEventService } from '../rum/service/customEvent.service'
 
 describe('AuthorizeGuard', () => {
   let guard: AuthorizeGuard
@@ -23,6 +24,7 @@ describe('AuthorizeGuard', () => {
   let togglz: { getStateOf: jasmine.Spy }
   let oauthService: { validateRedirectUri: jasmine.Spy }
   let decisionMock: { decideForAuthorize: jasmine.Spy }
+  let observabilityMock: { recordSimpleEvent: jasmine.Spy }
   let win: { location: { href: string }; outOfRouterNavigation: jasmine.Spy }
   function stubUrlTree(
     path: string,
@@ -42,6 +44,9 @@ describe('AuthorizeGuard', () => {
     decisionMock = {
       decideForAuthorize: jasmine.createSpy('decideForAuthorize'),
     }
+    observabilityMock = {
+      recordSimpleEvent: jasmine.createSpy('recordSimpleEvent'),
+    }
 
     win = {
       location: { href: 'href' },
@@ -58,6 +63,7 @@ describe('AuthorizeGuard', () => {
         { provide: TogglzService, useValue: togglz },
         { provide: OauthService, useValue: oauthService },
         { provide: AuthDecisionService, useValue: decisionMock },
+        { provide: RumJourneyEventService, useValue: observabilityMock },
       ],
     })
 

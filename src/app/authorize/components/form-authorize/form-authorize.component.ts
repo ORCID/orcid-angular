@@ -115,6 +115,7 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
           this._observability.startJourney(
             'oauth_authorization',
             this.buildOauthAuthorizationJourneyContext(
+              userInfo,
               this.oauthRequest,
               platform.queryParameters
             )
@@ -328,6 +329,15 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
   }
 
   changeAccount(delegator: Delegator) {
+    this._observability.recordSimpleEvent(
+      AppEventName.OauthAuthorizeSwitchDelegatedAccount,
+      {
+        delegator_giver_orcid: delegator?.giverOrcid?.path,
+        delegator_receiver_orcid: delegator?.receiverOrcid?.path,
+        approval_date: delegator?.approvalDate,
+        current_effective_orcid_url: this.orcidUrl,
+      }
+    )
     this.loadingTrustedIndividuals = true
     this.loadingUserInfo = true
 
@@ -345,6 +355,7 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
    * matches the browser address bar when the session is partial (common locally).
    */
   private buildOauthAuthorizationJourneyContext(
+    session: UserSession | undefined,
     oauthRequest: RequestInfoForm | undefined,
     queryParams: Params | undefined
   ): OauthAuthorizationContext {
@@ -363,6 +374,10 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
         query?.response_type ||
         undefined,
       scope: scopeFromSession || scopeFromQuery || undefined,
+      acting_as_trusted_user: session?.userInfo?.IN_DELEGATION_MODE === 'true',
+      effective_user_orcid: session?.userInfo?.EFFECTIVE_USER_ORCID || undefined,
+      real_user_orcid: session?.userInfo?.REAL_USER_ORCID || undefined,
+      delegated_by_admin: session?.userInfo?.DELEGATED_BY_ADMIN === 'true',
       oauth_query_string: serializeQueryParamsForRum(queryParams),
     }
   }

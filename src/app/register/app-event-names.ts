@@ -38,6 +38,10 @@ export enum AppEventName {
   OauthAuthorizeGuardValidateRedirectUriError = 'oauth_authorize_guard_validate_redirect_uri_error',
   /** Authorize route guard: OAuth2 `prompt=none` + logged in → `outOfRouterNavigation(target)`. */
   OauthAuthorizeGuardOutOfRouterNavigation = 'oauth_authorize_guard_out_of_router_navigation',
+  /** Authorize route guard: decision redirects to local /signin (query params preserved). */
+  OauthAuthorizeGuardRedirectToLogin = 'oauth_authorize_guard_redirect_to_login',
+  /** Authorize route guard: account is locked; redirecting to /my-orcid. */
+  OauthAuthorizeGuardRedirectToMyOrcid = 'oauth_authorize_guard_redirect_to_my_orcid',
   /**
    * Authorize page: session already has a redirect URL (e.g. `prompt=none` + non-openid scope) —
    * immediate `outOfRouterNavigation` without showing the form. Distinct from guard-only openid silent auth.
@@ -48,6 +52,24 @@ export enum AppEventName {
    * Use **`error_category`** (see `getOauthAuthorizationErrorCategory`) for NRQL facets.
    */
   OauthAuthorizationValidationFailed = 'oauth_authorization_validation_failed',
+  /** OAuth service: client-handled OAuth session error redirected with `#error=...`. */
+  OauthSessionClientHandledErrorRedirect = 'oauth_session_client_handled_error_redirect',
+  /** OAuth service: session init detected error and routed to authorize page. */
+  OauthSessionNavigateAuthorizeError = 'oauth_session_navigate_authorize_error',
+  /** OAuth auth-server authorize response contained error body (non access_denied). */
+  OauthAuthorizeAuthServerErrorBody = 'oauth_authorize_auth_server_error_body',
+  /** Authorize screen: user switched delegated/trusted-individual account. */
+  OauthAuthorizeSwitchDelegatedAccount = 'oauth_authorize_switch_delegated_account',
+
+  // ─── Sign-in / Register guard final outcomes ───────────────────────────────
+  SignInGuardRedirectToAuthorize = 'sign_in_guard_redirect_to_authorize',
+  SignInGuardRedirectToRegister = 'sign_in_guard_redirect_to_register',
+  SignInOauthInvalidGrant = 'sign_in_oauth_invalid_grant',
+  TwoFactorSignInGuardRedirectToMyOrcid = 'two_factor_signin_guard_redirect_to_my_orcid',
+  RegisterGuardRedirectToAuthorize = 'register_guard_redirect_to_authorize',
+
+  // ─── Registration lifecycle / pipeline outcomes ────────────────────────────
+  RegisterPipelineError = 'register_pipeline_error',
 }
 
 /** Event name for step back button: `step-${step}-back-button-clicked` */

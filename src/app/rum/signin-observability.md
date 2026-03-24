@@ -8,6 +8,8 @@ Primary emitters:
 
 - `sign-in/components/form-sign-in/form-sign-in.component.ts`
 - `core/sign-in/sign-in.service.ts`
+- `guards/sign-in.guard.ts`
+- `guards/two-factor-signin.guard.ts`
 - `core/error-handler/error-handler.service.ts` (global cross-cutting errors)
 
 ## Event model
@@ -37,6 +39,8 @@ In `FormSignInComponent.onSubmit()`:
   - bad credentials fallback
 
 These events represent business/application outcomes from sign-in responses.
+
+Additionally, the OAuth edge state `invalid_grant` in post-login OAuth handoff is emitted as a dedicated simple event.
 
 ### HTTP/transport failure event (service-level)
 
@@ -76,6 +80,12 @@ Sign-in events capture context for:
 
 The component also handles 2FA and several UX error states, and emits corresponding failure flags for downstream analysis.
 
+Guard outcomes are captured for:
+
+- sign-in guard redirect to authorize
+- sign-in guard redirect to register
+- two-factor guard redirect to my-orcid when already logged in
+
 ## Querying guidance
 
 Use `PageAction` with direct `actionName` filters (simple events).
@@ -86,16 +96,3 @@ Patterns:
 - Application rejection rate: success vs failure events
 - Transport health: sign-in HTTP error event, optionally faceted by flow label and status
 - Correlation with global transport issues: compare with `http_error`
-
-## Practical alerting recommendations
-
-- Keep sign-in success/failure and sign-in HTTP error as separate conditions.
-- Add traffic guards for percentage alerts to avoid noise at low volume.
-- Use sliding windows and short evaluation intervals for stable but responsive signal.
-
-## Troubleshooting checklist
-
-- Missing success/failure events: verify component submit path and returned response shape.
-- Missing HTTP error events: verify failures survive retries and enter catch path.
-- Unexpected duplicates: check if global `http_error` is being counted together with sign-in HTTP error in a single chart.
-- Query mismatch: ensure the query uses `actionName` (simple events), not `system_eventName` (journey events).

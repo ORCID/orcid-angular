@@ -43,6 +43,7 @@ Context includes OAuth essentials and the serialized full query:
 - `response_type`
 - `scope`
 - `oauth_query_string`
+- delegation context (`acting_as_trusted_user`, effective/real ORCID fields when present)
 
 The query string is intentionally preserved to keep parameters that are not always materialized in strongly typed fields.
 
@@ -68,6 +69,11 @@ Several OAuth-relevant outcomes are tracked as standalone simple events:
 - redirect URI validation API failure route-to-404
 - already-authorized page redirect path
 - OAuth validation failure surfaced on OAuth error page
+- authorize guard redirect-to-login and redirect-to-my-orcid outcomes
+- OAuth session client-handled `#error` redirects
+- OAuth session navigate-to-authorize error outcomes
+- auth-server authorize response-body errors (non-`access_denied`)
+- trusted-individual/delegated account switch action from authorize screen
 
 These appear in New Relic as `PageAction` with `actionName = <eventName>`.
 
@@ -100,6 +106,13 @@ Feature flags determine path selection, and OAuth journey payloads include attri
 - immediate out-of-router redirects
 - login-required redirects after redirect URI validation
 - invalid redirect URI and validation-error 404 routes
+- redirect-to-login outcomes
+- redirect-to-my-orcid outcomes for locked accounts
+
+Guard outcome events include decision metadata from `AuthDecisionService`:
+
+- `decision_action`
+- `decision_reason`
 
 This captures high-signal routing outcomes that may otherwise be invisible when users never reach the authorize form.
 
@@ -125,9 +138,3 @@ Use:
 
 Filter/facet on direct attributes, for example URL/redirect/normalized error fields.
 
-## Common troubleshooting checks
-
-- If expected journey events are missing, verify `startJourney` happened before `recordEvent`.
-- If data appears duplicated, confirm one-time start guards are intact in reactive streams.
-- If OAuth failure dashboards look empty but incidents exist, check whether failures are currently only represented by global `http_error` and not an OAuth-specific event in that path.
-- If selector queries fail, ensure journey queries use `system_eventName` and not `eventName`.

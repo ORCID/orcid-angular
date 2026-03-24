@@ -366,6 +366,14 @@ export class FormSignInComponent implements OnInit, OnDestroy {
       .subscribe((requestInfoForm: RequestInfoForm) => {
         // TODO the following error needds to be migrated to the new Oauth Server or removed
         if (requestInfoForm?.error === 'invalid_grant') {
+          this._observability.recordSimpleEvent(AppEventName.SignInOauthInvalidGrant, {
+            isOauth: !!this.signInLocal?.isOauth,
+            signInType: this.signInLocal?.type || 'regular',
+            oauth_error: requestInfoForm?.error,
+            oauth_error_description: String(
+              requestInfoForm?.errorDescription || ''
+            ).slice(0, 500),
+          })
           this.isOauthError.next(true)
           this.authorizationFormSubmitted = false
           this.loading.next(false)
