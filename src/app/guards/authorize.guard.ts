@@ -20,6 +20,8 @@ import { OauthService } from '../core/oauth/oauth.service'
 import { FeatureLoggerService } from '../core/logging/feature-logger.service'
 import { AuthDecisionService } from '../core/auth-decision/auth-decision.service'
 import { TogglzFlag } from '../types/config.endpoint'
+import { RumJourneyEventService } from '../rum/service/customEvent.service'
+import { AppEventName } from '../register/app-event-names'
 
 @Injectable({ providedIn: 'root' })
 export class AuthorizeGuard implements CanActivateChild {
@@ -32,7 +34,8 @@ export class AuthorizeGuard implements CanActivateChild {
     private _togglzService: TogglzService,
     private oauthService: OauthService,
     private readonly featureLogger: FeatureLoggerService,
-    private readonly authDecision: AuthDecisionService
+    private readonly authDecision: AuthDecisionService,
+    private readonly _observability: RumJourneyEventService
   ) {}
 
   canActivateChild(
@@ -57,10 +60,13 @@ export class AuthorizeGuard implements CanActivateChild {
         this.featureLogger.debug('Authorize Guard', ...decision.trace)
         switch (decision.action) {
           case 'redirectToMyOrcid':
+            console.log('redirectToMyOrcid', decision.payload)
             return of(this.router.createUrlTree(['/my-orcid']))
           case 'redirectToLogin':
+            console.log('redirectToLogin', decision.payload)
             return this.redirectToLoginPage()
           case 'validateRedirectUri': {
+            console.log('validateRedirectUri', decision.payload)
             const { clientId, redirectUri } = (decision.payload || {}) as any
             return this.validateRedirectUriAndRedirect({
               ...(queryParams as any),
@@ -69,7 +75,18 @@ export class AuthorizeGuard implements CanActivateChild {
             })
           }
           case 'outOfRouterNavigation': {
-            const { target } = (decision.payload || {}) as any
+            console.log('outOfRouterNavigation', decision.payload)
+            const { target } = (decision.payload || {}) as { target?: string }
+            this._observability.recordSimpleEvent(
+              AppEventName.OauthAuthorizeGuardOutOfRouterNavigation,
+              {
+                target,
+                client_id: queryParams.client_id,
+                redirect_uri: queryParams.redirect_uri,
+                prompt: queryParams.prompt,
+                scope: queryParams.scope,
+              }
+            )
             ;(this.window as any).outOfRouterNavigation(target)
             return NEVER
           }
@@ -93,6 +110,14 @@ export class AuthorizeGuard implements CanActivateChild {
             // valid → redirect to the specified URI
             const target = `${queryParams.redirect_uri}#login_required`
 
+            this._observability.recordSimpleEvent(
+              AppEventName.OauthAuthorizeGuardLoginRequiredRedirect,
+              {
+                client_id: queryParams.client_id,
+                redirect_uri: queryParams.redirect_uri,
+              }
+            )
+
             this.featureLogger.debug(
               'Authorize Guard',
               'Redirecting out of router to',
@@ -102,6 +127,13 @@ export class AuthorizeGuard implements CanActivateChild {
             return false
           }
           // invalid → send to your 404 page
+          this._observability.recordSimpleEvent(
+            AppEventName.OauthAuthorizeGuardInvalidRedirectUri,
+            {
+              client_id: queryParams.client_id,
+              redirect_uri: queryParams.redirect_uri,
+            }
+          )
           this.featureLogger.warn(
             'Authorize Guard',
             'Invalid redirect_uri → /404'
@@ -110,6 +142,13 @@ export class AuthorizeGuard implements CanActivateChild {
         }),
         catchError(() => {
           // in case of error, redirect to 404
+          this._observability.recordSimpleEvent(
+            AppEventName.OauthAuthorizeGuardValidateRedirectUriError,
+            {
+              client_id: queryParams.client_id,
+              redirect_uri: queryParams.redirect_uri,
+            }
+          )
           this.featureLogger.error(
             'Authorize Guard',
             'Error validating redirect_uri → /404'

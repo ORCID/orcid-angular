@@ -24,6 +24,15 @@ function generateId(): string {
   return Math.random().toString(36).slice(2) + Date.now().toString(36)
 }
 
+/** Pretty-print payloads for debugger console output. */
+function rumDebugJson(data: unknown): string {
+  try {
+    return JSON.stringify(data, null, 2)
+  } catch {
+    return String(data)
+  }
+}
+
 @Injectable({ providedIn: 'root' })
 export class RumJourneyEventService {
   private journeys: Partial<Record<JourneyType, JourneyState>> = {}
@@ -37,8 +46,9 @@ export class RumJourneyEventService {
     if (this.journeys[journeyType]) {
       if (runtimeEnvironment.debugger) {
         console.debug(
-          `[RUM][journey:${journeyType}] : start (ignored, already started)`,
-          context
+          `[RUM][journey:${journeyType}] : start (ignored, already started)\n${rumDebugJson(
+            context
+          )}`
         )
       }
       return
@@ -50,7 +60,9 @@ export class RumJourneyEventService {
       context: { ...context },
     }
     if (runtimeEnvironment.debugger) {
-      console.debug(`[RUM][journey:${journeyType}] : start`, context)
+      console.debug(
+        `[RUM][journey:${journeyType}] : start\n${rumDebugJson(context)}`
+      )
     }
   }
 
@@ -61,7 +73,9 @@ export class RumJourneyEventService {
       nr.addPageAction(eventName, attrs || {})
     }
     if (runtimeEnvironment.debugger) {
-      console.debug(`[RUM][simple] : event ${eventName}`, attrs || {})
+      console.debug(
+        `[RUM][simple] : event ${eventName}\n${rumDebugJson(attrs || {})}`
+      )
     }
   }
 
@@ -83,9 +97,9 @@ export class RumJourneyEventService {
     if (!state) {
       if (runtimeEnvironment.debugger) {
         console.debug(
-          `[RUM][journey:${journeyType}] : recordEvent before start ignored`,
-          eventName,
-          eventAttrs
+          `[RUM][journey:${journeyType}] : recordEvent before start ignored\n${rumDebugJson(
+            { eventName, eventAttrs }
+          )}`
         )
       }
       return
@@ -105,8 +119,9 @@ export class RumJourneyEventService {
     }
     if (runtimeEnvironment.debugger) {
       console.debug(
-        `[RUM][journey:${journeyType}] : event ${eventName}`,
-        payload
+        `[RUM][journey:${journeyType}] : event ${eventName}\n${rumDebugJson(
+          payload
+        )}`
       )
     }
   }
@@ -132,7 +147,9 @@ export class RumJourneyEventService {
     }
     delete this.journeys[journeyType]
     if (runtimeEnvironment.debugger) {
-      console.debug(`[RUM][journey:${journeyType}] : finished`, payload)
+      console.debug(
+        `[RUM][journey:${journeyType}] : finished\n${rumDebugJson(payload)}`
+      )
     }
   }
 }

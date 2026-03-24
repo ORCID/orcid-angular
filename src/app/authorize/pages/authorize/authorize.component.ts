@@ -23,6 +23,8 @@ import { CdkPortalOutlet, ComponentPortal } from '@angular/cdk/portal'
 import { OauthURLSessionManagerService } from 'src/app/core/oauth-urlsession-manager/oauth-urlsession-manager.service'
 import { FeatureLoggerService } from 'src/app/core/logging/feature-logger.service'
 import { TogglzFlag } from 'src/app/types/config.endpoint'
+import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
+import { AppEventName } from 'src/app/register/app-event-names'
 
 @Component({
   templateUrl: './authorize.component.html',
@@ -57,7 +59,8 @@ export class AuthorizeComponent {
     private loginMainInterstitialsManagerService: LoginMainInterstitialsManagerService,
     private toglzService: TogglzService,
     private oauthUrlSessionManger: OauthURLSessionManagerService,
-    private readonly featureLogger: FeatureLoggerService
+    private readonly featureLogger: FeatureLoggerService,
+    private readonly _observability: RumJourneyEventService
   ) {
     this.log = this.featureLogger.scoped('Auth Component')
   }
@@ -138,6 +141,18 @@ export class AuthorizeComponent {
     oauthSession: RequestInfoForm
   ): Observable<boolean> {
     this.redirectUrl = oauthSession.redirectUrl
+    const scopeSummary =
+      oauthSession.scopesAsString ||
+      oauthSession.scopes?.map((s) => s.value).join(' ')
+    this._observability.recordSimpleEvent(
+      AppEventName.OauthAuthorizePageAlreadyAuthorizedRedirect,
+      {
+        client_id: oauthSession.clientId,
+        redirect_target: oauthSession.redirectUrl,
+        scope: scopeSummary,
+        oauth2_authorization_page_flag: this.OAUTH2_AUTHORIZATION_ENABLE,
+      }
+    )
     return this.finishRedirect()
   }
 

@@ -3,6 +3,11 @@ export interface OauthAuthorizationContext {
   redirect_uri?: string
   response_type?: string
   scope?: string
+  /**
+   * Full OAuth route query string (`key=value&…`), sorted keys.
+   * Use this when individual fields are not enough (e.g. `state`, `prompt`, `nonce`).
+   */
+  oauth_query_string?: string
 }
 
 export interface OauthAuthorizationEventAttributes {
@@ -10,4 +15,13 @@ export interface OauthAuthorizationEventAttributes {
   errorCode?: string
   errorDescription?: string
   OAUTH_AUTHORIZATION?: boolean
+  /** Registry `authorize.json` vs auth server `oauth2/authorize` (HTTP failure path). */
+  oauth_authorize_endpoint?: 'legacy' | 'auth_server'
+  /** Approve vs deny action that triggered the failed request. */
+  oauth_authorize_approved?: boolean
+  /** Failed authorize request HTTP status (when available). */
+  authorize_http_status?: number
+  authorize_http_status_text?: string
+  /** Path + query of the failed authorize request URL. */
+  authorize_request_url_path_and_query?: string
 }

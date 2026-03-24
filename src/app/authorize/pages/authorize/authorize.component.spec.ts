@@ -16,6 +16,7 @@ import { RecordService } from '../../../core/record/record.service'
 import { LoginMainInterstitialsManagerService } from 'src/app/core/login-interstitials-manager/login-main-interstitials-manager.service'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { OauthURLSessionManagerService } from 'src/app/core/oauth-urlsession-manager/oauth-urlsession-manager.service'
+import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
 
 import { AuthorizeComponent } from './authorize.component'
 
@@ -35,6 +36,7 @@ describe('AuthorizeComponent', () => {
   let loginInterstitialsSpy: jasmine.SpyObj<LoginMainInterstitialsManagerService>
   let togglzSpy: jasmine.SpyObj<TogglzService>
   let oauthUrlSessionSpy: jasmine.SpyObj<OauthURLSessionManagerService>
+  let rumSpy: jasmine.SpyObj<RumJourneyEventService>
   let windowMock: any
 
   beforeEach(() => {
@@ -51,6 +53,7 @@ describe('AuthorizeComponent', () => {
     oauthUrlSessionSpy = jasmine.createSpyObj('OauthURLSessionManagerService', [
       'clear',
     ])
+    rumSpy = jasmine.createSpyObj('RumJourneyEventService', ['recordSimpleEvent'])
 
     windowMock = {
       outOfRouterNavigation: jasmine.createSpy('outOfRouterNavigation'),
@@ -88,6 +91,7 @@ describe('AuthorizeComponent', () => {
           provide: OauthURLSessionManagerService,
           useValue: oauthUrlSessionSpy,
         },
+        { provide: RumJourneyEventService, useValue: rumSpy },
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
@@ -189,6 +193,7 @@ describe('AuthorizeComponent', () => {
     expect(windowMock.outOfRouterNavigation).toHaveBeenCalledWith(
       '/go?code=123'
     )
+    expect(rumSpy.recordSimpleEvent).toHaveBeenCalled()
   }))
 
   it('handleOauthSession (oauth2): already authorized without interstitial -> redirects and clears', fakeAsync(() => {
@@ -208,6 +213,7 @@ describe('AuthorizeComponent', () => {
 
     expect(oauthUrlSessionSpy.clear).toHaveBeenCalledTimes(1)
     expect(windowMock.outOfRouterNavigation).toHaveBeenCalledWith('/ok')
+    expect(rumSpy.recordSimpleEvent).toHaveBeenCalled()
   }))
 
   it('handleOauthSession: already authorized WITH interstitial -> schedules interstitial', fakeAsync(() => {

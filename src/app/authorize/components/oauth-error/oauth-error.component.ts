@@ -9,8 +9,10 @@ import { OauthParameters } from 'src/app/types'
 import { LegacyOauthRequestInfoForm as RequestInfoForm } from 'src/app/types/request-info-form.endpoint'
 import { UserSession } from 'src/app/types/session.local'
 import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
-import { JourneyType } from 'src/app/rum/journeys/types'
 import { TogglzFlag } from 'src/app/types/config.endpoint'
+import { AppEventName } from 'src/app/register/app-event-names'
+import { serializeQueryParamsForRum } from 'src/app/rum/serialize-oauth-query-for-rum'
+import { getOauthAuthorizationErrorCategory } from 'src/app/rum/oauth-authorization-error-category'
 
 @Component({
   selector: 'app-oauth-error',
@@ -57,14 +59,39 @@ export class OauthErrorComponent implements OnInit, OnDestroy {
             redirect_uri: this.queryParams?.redirect_uri,
             response_type: this.queryParams?.response_type,
             scope: this.queryParams?.scope,
+            oauth_query_string: serializeQueryParamsForRum(
+              platform.queryParameters
+            ),
           })
           this._observability.recordEvent(
             'oauth_authorization',
-            'error_page_loaded',
+            AppEventName.OauthErrorPageLoaded,
             {
               error: this.error,
               errorCode: this.errorCode,
               errorDescription: this.errorDescription,
+            }
+          )
+          this._observability.recordSimpleEvent(
+            AppEventName.OauthAuthorizationValidationFailed,
+            {
+              surface: 'oauth_error_page',
+              error_category: getOauthAuthorizationErrorCategory(
+                this.error,
+                this.errorCode
+              ),
+              oauth_error: this.error,
+              oauth_error_code: this.errorCode,
+              oauth_error_description: String(
+                this.errorDescription ?? ''
+              ).slice(0, 500),
+              client_id: this.queryParams?.client_id,
+              redirect_uri: this.queryParams?.redirect_uri,
+              response_type: this.queryParams?.response_type,
+              scope: this.queryParams?.scope,
+              oauth_query_string: serializeQueryParamsForRum(
+                platform.queryParameters
+              ),
             }
           )
           this.oauthJourneyStarted = true
@@ -86,7 +113,7 @@ export class OauthErrorComponent implements OnInit, OnDestroy {
           // Report feature flag status
           this._observability.recordEvent(
             'oauth_authorization',
-            'flag_status',
+            AppEventName.OauthAuthorizationFlagStatus,
             {
               OAUTH_AUTHORIZATION: this.TOGGLZ_OAUTH_AUTHORIZATION,
             }

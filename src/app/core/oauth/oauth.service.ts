@@ -166,7 +166,10 @@ export class OauthService {
           } else {
             return res.headers.get('location')
           }
-        })
+        }),
+        catchError((error) =>
+          this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
+        )
       )
   }
 
