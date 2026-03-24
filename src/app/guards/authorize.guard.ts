@@ -61,20 +61,17 @@ export class AuthorizeGuard implements CanActivateChild {
         this.featureLogger.debug('Authorize Guard', ...decision.trace)
         switch (decision.action) {
           case 'redirectToMyOrcid':
-            console.log('redirectToMyOrcid', decision.payload)
             this._observability.recordSimpleEvent(
               AppEventName.OauthAuthorizeGuardRedirectToMyOrcid,
               this.buildDecisionAttrs(queryParams as OauthParameters, decision)
             )
             return of(this.router.createUrlTree(['/my-orcid']))
           case 'redirectToLogin':
-            console.log('redirectToLogin', decision.payload)
             return this.redirectToLoginPage(
               queryParams as OauthParameters,
               decision
             )
           case 'validateRedirectUri': {
-            console.log('validateRedirectUri', decision.payload)
             const { clientId, redirectUri } = (decision.payload || {}) as any
             return this.validateRedirectUriAndRedirect(
               {
@@ -86,7 +83,6 @@ export class AuthorizeGuard implements CanActivateChild {
             )
           }
           case 'outOfRouterNavigation': {
-            console.log('outOfRouterNavigation', decision.payload)
             const { target } = (decision.payload || {}) as { target?: string }
             this._observability.recordSimpleEvent(
               AppEventName.OauthAuthorizeGuardOutOfRouterNavigation,
