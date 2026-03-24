@@ -168,31 +168,23 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
     this._togglz
       .getStateOf(TogglzFlag.OAUTH_AUTHORIZATION)
       .pipe(
-        tap((useAuthServerFlag) => {
-          if (useAuthServerFlag === true) {
-            this._oauth
-              .authorizeOnAuthServer(this.oauthRequest, value)
-              .pipe(
-                take(1),
-                finalize(() => (this.loadingAuthorizeEndpoint = false))
-              )
-              .subscribe((redirectUrl) => {
-                this.redirectUrl.next(redirectUrl)
-              })
-          } else {
-            this._oauth
-              .authorize(value)
-              .pipe(
-                take(1),
-                finalize(() => (this.loadingAuthorizeEndpoint = false))
-              )
-              .subscribe((data) => {
-                this.redirectUrl.next(data.redirectUrl)
-              })
-          }
+        take(1),
+        switchMap((useAuthServerFlag) => {
+          return useAuthServerFlag
+            ? this._oauth.authorizeOnAuthServer(this.oauthRequest, value)
+            : this._oauth.authorize(value)
         })
       )
-      .subscribe()
+      .subscribe({
+        next: (redirectUrl: string) => {
+          console.log('Redirecting to:', redirectUrl)
+          this.redirectUrl.next(redirectUrl)
+        },
+        error: (err) => {
+          console.error('Authorization error:', err)
+          this.loadingAuthorizeEndpoint = false
+        },
+      })
   }
 
   getIconName(ScopeObject: Scope): string {

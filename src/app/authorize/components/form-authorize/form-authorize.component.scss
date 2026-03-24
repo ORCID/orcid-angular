@@ -145,3 +145,7 @@ mat-card-content.authorize-content {
   color: #fff;
   background: #085c77;
 }
+
+.authorize-button:disabled {
+  opacity: 0.3;
+}
