@@ -95,7 +95,7 @@ export class OauthService {
       )
   }
 
-  authorize(approved: boolean): Observable<RequestInfoForm> {
+  authorize(approved: boolean): Observable<string> {
     const value: OauthAuthorize = {
       // tslint:disable-next-line: max-line-length
       // TODO @angel please confirm that persistentTokenEnabled is always true https://github.com/ORCID/ORCID-Source/blob/master/orcid-web/src/main/webapp/static/javascript/ng1Orcid/app/modules/oauthAuthorization/oauthAuthorization.component.ts#L161
@@ -119,7 +119,8 @@ export class OauthService {
         ),
         tap((requestInfo) => {
           this.requestInfoSubject.next(requestInfo)
-        })
+        }),
+        map((requestInfo) => requestInfo.redirectUrl)
       )
   }
 
@@ -153,18 +154,25 @@ export class OauthService {
         observe: 'response',
       })
       .pipe(
-        map((res: HttpResponse<any>) => {
+        switchMap((res: HttpResponse<any>) => {
           if (res.body && res.body['error']) {
-            if (res.body['error'] == 'access_denied') {
-              return res.body['uri']
+            if (res.body['error'] === 'access_denied') {
+              return of(res.body['uri'])
             } else {
-              this._errorHandler.handleError(
-                res.body,
+              const errorMessage =
+                res.body['error_description'] ||
+                'Authorization failed on server'
+              const authError = new Error(errorMessage)
+
+              authError.name = res.body['error'] || 'AuthError'
+
+              return this._errorHandler.handleError(
+                authError,
                 ERROR_REPORT.STANDARD_VERBOSE
               )
             }
           } else {
-            return res.headers.get('location')
+            return of(res.headers.get('location'))
           }
         })
       )
