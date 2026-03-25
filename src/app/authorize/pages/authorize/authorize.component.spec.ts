@@ -20,6 +20,9 @@ import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
 
 import { AuthorizeComponent } from './authorize.component'
 
+/** Must match {@link AuthorizeComponent} RUM redirect delay before `outOfRouterNavigation`. */
+const RUM_REDIRECT_FLUSH_DELAY_MS = 400
+
 // Dummy interstitial component used for typing purposes in tests
 @Component({ template: '', standalone: true })
 class DummyInterstitialComponent {
@@ -189,7 +192,7 @@ describe('AuthorizeComponent', () => {
 
     ;(component as any).OAUTH2_AUTHORIZATION_ENABLE = false
     ;(component as any).handleOauthSession(session)
-    tick()
+    tick(RUM_REDIRECT_FLUSH_DELAY_MS)
 
     expect(oauthUrlSessionSpy.clear).toHaveBeenCalledTimes(1) // because flag true in finishRedirect
     expect(windowMock.outOfRouterNavigation).toHaveBeenCalledWith(
@@ -211,7 +214,7 @@ describe('AuthorizeComponent', () => {
     } as any
 
     ;(component as any).handleOauthSession(session)
-    tick()
+    tick(RUM_REDIRECT_FLUSH_DELAY_MS)
 
     expect(oauthUrlSessionSpy.clear).toHaveBeenCalledTimes(1)
     expect(windowMock.outOfRouterNavigation).toHaveBeenCalledWith('/ok')
@@ -385,7 +388,7 @@ describe('AuthorizeComponent', () => {
       return of(false)
     })
     ;(component as any).finishRedirect().subscribe()
-    tick()
+    tick(RUM_REDIRECT_FLUSH_DELAY_MS)
 
     expect(oauthUrlSessionSpy.clear).toHaveBeenCalled()
     expect(windowMock.outOfRouterNavigation).toHaveBeenCalledWith('/final')
@@ -397,7 +400,7 @@ describe('AuthorizeComponent', () => {
 
     togglzSpy.getStateOf.and.returnValue(of(false))
     ;(component as any).finishRedirect().subscribe()
-    tick()
+    tick(RUM_REDIRECT_FLUSH_DELAY_MS)
 
     expect(oauthUrlSessionSpy.clear).not.toHaveBeenCalled()
     expect(windowMock.outOfRouterNavigation).toHaveBeenCalledWith('/final')
@@ -409,7 +412,7 @@ describe('AuthorizeComponent', () => {
 
     togglzSpy.getStateOf.and.returnValue(of(false))
     ;(component as any).finishRedirect().subscribe()
-    tick()
+    tick(RUM_REDIRECT_FLUSH_DELAY_MS)
 
     expect(windowMock.outOfRouterNavigation).toHaveBeenCalledWith(undefined)
   }))
