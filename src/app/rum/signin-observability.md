@@ -25,11 +25,11 @@ Primary emitters:
 
 ```mermaid
 flowchart TD
-  FormSignIn["FormSignInComponent"] -->|"single: sign_in_success, sign_in_failure, sign_in_oauth_invalid_grant_legacy"| RumService["RumJourneyEventService"]
-  SignInService["SignInService"] -->|"single: sign_in_http_error"| RumService
-  SignInGuard["SignInGuard"] -->|"single: sign_in_guard_redirect_to_authorize, sign_in_guard_redirect_to_register"| RumService
-  TwoFactorGuard["TwoFactorSignInGuard"] -->|"single: two_factor_signin_guard_redirect_to_my_orcid"| RumService
-  ErrorHandlerService["ErrorHandlerService"] -->|"single global: http_error, client_error"| RumService
+  FormSignIn["FormSignInComponent"] -->|"single events"| RumService["RumJourneyEventService"]
+  SignInService["SignInService"] -->|"single events"| RumService
+  SignInGuard["SignInGuard"] -->|"single events"| RumService
+  TwoFactorGuard["TwoFactorSignInGuard"] -->|"single events"| RumService
+  ErrorHandlerService["ErrorHandlerService"] -->|"single global events"| RumService
 ```
 
 ## Key events and where they fire

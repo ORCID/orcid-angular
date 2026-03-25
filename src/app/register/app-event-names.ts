@@ -26,7 +26,6 @@ export enum AppEventName {
 
   // ─── OAuth authorization journey events ────────────────────────────────────
   OauthErrorPageLoaded = 'error_page_loaded',
-  OauthAuthorizationFlagStatus = 'flag_status',
   OauthAuthorizationSuccess = 'authorization_success',
   OauthAuthorizationDenied = 'authorization_denied',
   OauthAuthorizationError = 'authorization_error',

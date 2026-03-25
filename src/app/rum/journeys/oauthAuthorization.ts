@@ -3,6 +3,8 @@ export interface OauthAuthorizationContext {
   redirect_uri?: string
   response_type?: string
   scope?: string
+  /** OAuth auth-server feature flag state for the current flow. */
+  OAUTH_AUTHORIZATION?: boolean
   /** True when the user is authorizing while in trusted-individual delegation mode. */
   acting_as_trusted_user?: boolean
   /** Effective ORCID of the active delegated account (when present). */

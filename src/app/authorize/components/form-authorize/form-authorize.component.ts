@@ -184,6 +184,9 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
       .pipe(
         take(1),
         tap((useAuthServerFlag) => {
+          this._observability.updateJourneyContext('oauth_authorization', {
+            OAUTH_AUTHORIZATION: useAuthServerFlag,
+          })
           if (useAuthServerFlag === true) {
             this._oauth
               .authorizeOnAuthServer(this.oauthRequest, value)

@@ -13,6 +13,7 @@ import { TogglzFlag } from 'src/app/types/config.endpoint'
 import { AppEventName } from 'src/app/register/app-event-names'
 import { serializeQueryParamsForRum } from 'src/app/rum/serialize-oauth-query-for-rum'
 import { getOauthAuthorizationErrorCategory } from 'src/app/rum/oauth-authorization-error-category'
+import { OauthAuthorizationContext } from 'src/app/rum/journeys/oauthAuthorization'
 
 @Component({
   selector: 'app-oauth-error',
@@ -110,13 +111,11 @@ export class OauthErrorComponent implements OnInit, OnDestroy {
           } else {
             this.TOGGLZ_OAUTH_AUTHORIZATION = false
           }
-          // Report feature flag status
-          this._observability.recordEvent(
+          this._observability.updateJourneyContext(
             'oauth_authorization',
-            AppEventName.OauthAuthorizationFlagStatus,
             {
               OAUTH_AUTHORIZATION: this.TOGGLZ_OAUTH_AUTHORIZATION,
-            }
+            } as Partial<OauthAuthorizationContext>
           )
         })
       )

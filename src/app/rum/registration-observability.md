@@ -31,10 +31,10 @@ Related pre-flow guard signal:
 
 ```mermaid
 flowchart TD
-  RegisterComponent["RegisterComponent"] -->|"journey via RegisterObservabilityService: register_pipeline_error, register-validate, register-confirmation"| RegisterObs["RegisterObservabilityService"]
-  FormComponents["FormPersonal + FormPassword + Stepper"] -->|"journey via RegisterObservabilityService: step-a-next-button-clicked, step-b-next-button-clicked, step-c2-next-button-clicked, step-c2-skip-button-clicked, step-c-next-button-clicked, step-d-next-button-clicked, step-*-loaded, step-*-back-button-clicked"| RegisterObs
-  RegisterObs -->|"journey orcid_registration: journey-complete + journey_finished (and dynamic reportRegisterEvent names)"| RumService["RumJourneyEventService"]
-  RegisterGuard["RegisterGuard"] -->|"single: register_guard_redirect_to_authorize"| RumService
+  RegisterComponent["RegisterComponent"] -->|"journey events via RegisterObservabilityService"| RegisterObs["RegisterObservabilityService"]
+  FormComponents["FormPersonal + FormPassword + Stepper"] -->|"journey events via RegisterObservabilityService"| RegisterObs
+  RegisterObs -->|"journey events (orcid_registration)"| RumService["RumJourneyEventService"]
+  RegisterGuard["RegisterGuard"] -->|"single events"| RumService
 ```
 
 ## Key events and where they fire

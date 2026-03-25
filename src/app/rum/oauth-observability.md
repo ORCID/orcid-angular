@@ -32,14 +32,13 @@ Primary emitters:
 
 ```mermaid
 flowchart TD
-  AuthorizeGuard["AuthorizeGuard"] -->|"single: oauth_authorize_guard_*"| RumService["RumJourneyEventService"]
-  FormAuthorize["FormAuthorizeComponent"] -->|"journey oauth_authorization: authorization_success, authorization_denied, authorization_error"| RumService
-  FormAuthorize -->|"single: oauth_authorize_switch_delegated_account"| RumService
-  OauthErrorComponent["OauthErrorComponent"] -->|"journey oauth_authorization: error_page_loaded, flag_status"| RumService
-  OauthErrorComponent -->|"single: oauth_authorization_validation_failed"| RumService
-  OauthService["OauthService"] -->|"single: oauth_authorize_auth_server_error_body"| RumService
-  OauthService -->|"single legacy: oauth_session_client_handled_error_redirect_legacy, oauth_session_navigate_authorize_error_legacy"| RumService
-  AuthorizeComponent["AuthorizeComponent"] -->|"single: oauth_authorize_page_already_authorized_redirect"| RumService
+  AuthorizeGuard["AuthorizeGuard"] -->|"single events"| RumService["RumJourneyEventService"]
+  FormAuthorize["FormAuthorizeComponent"] -->|"journey events (oauth_authorization)"| RumService
+  FormAuthorize -->|"single events"| RumService
+  OauthErrorComponent["OauthErrorComponent"] -->|"journey events (oauth_authorization)"| RumService
+  OauthErrorComponent -->|"single events"| RumService
+  OauthService["OauthService"] -->|"single events (includes legacy-only service events)"| RumService
+  AuthorizeComponent["AuthorizeComponent"] -->|"single events"| RumService
 ```
 
 ## Key events and where they fire
@@ -47,10 +46,11 @@ flowchart TD
 Journey events (`actionName = oauth_authorization`):
 
 - `error_page_loaded`
-- `flag_status`
 - `authorization_success`
 - `authorization_denied`
 - `authorization_error`
+
+`OAUTH_AUTHORIZATION` is now carried in journey context (not emitted as a standalone journey event).
 
 Simple OAuth-related events include:
 

@@ -160,6 +160,8 @@ export class OauthService {
         map((res: HttpResponse<any>) => {
           if (res.body && res.body['error']) {
             if (res.body['error'] == 'access_denied') {
+              // Not a server error per see, just a user denied the authorization
+
               return res.body['uri']
             } else {
               this._observability.recordSimpleEvent(
