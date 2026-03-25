@@ -76,11 +76,8 @@ export class OauthErrorComponent implements OnInit, OnDestroy {
               error: this.error,
               errorCode: this.errorCode,
               errorDescription: this.errorDescription,
-            }
-          )
-          this._observability.recordSimpleEvent(
-            AppEventName.OauthAuthorizationValidationFailed,
-            {
+              // Keep parity with the legacy simple-event payload so NR queries
+              // can facet on the same attribute keys (now under `eventAttribute_*`).
               surface: 'oauth_error_page',
               error_category: getOauthAuthorizationErrorCategory(
                 this.error,
@@ -91,13 +88,6 @@ export class OauthErrorComponent implements OnInit, OnDestroy {
               oauth_error_description: String(
                 this.errorDescription ?? ''
               ).slice(0, 500),
-              client_id: this.queryParams?.client_id,
-              redirect_uri: this.queryParams?.redirect_uri,
-              response_type: this.queryParams?.response_type,
-              scope: this.queryParams?.scope,
-              oauth_query_string: serializeQueryParamsForRum(
-                platform.queryParameters
-              ),
             }
           )
           this.oauthJourneyStarted = true

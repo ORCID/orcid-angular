@@ -19,7 +19,6 @@ export const TERMINATING_SIMPLE_EVENT_NAMES: ReadonlySet<string> = new Set([
   AppEventName.OauthAuthorizeGuardRedirectToLogin,
   AppEventName.OauthAuthorizeGuardRedirectToMyOrcid,
   AppEventName.OauthAuthorizePageAlreadyAuthorizedRedirect,
-  AppEventName.OauthAuthorizationValidationFailed,
   AppEventName.OauthSessionClientHandledErrorRedirectLegacy,
   AppEventName.OauthSessionNavigateAuthorizeErrorLegacy,
   AppEventName.OauthAuthorizeAuthServerErrorBody,
