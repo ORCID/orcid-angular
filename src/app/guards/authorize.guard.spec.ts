@@ -1,4 +1,4 @@
-import { TestBed, fakeAsync, tick } from '@angular/core/testing'
+import { TestBed } from '@angular/core/testing'
 import {
   Router,
   UrlTree,
@@ -8,6 +8,7 @@ import {
 import { of, firstValueFrom } from 'rxjs'
 
 import { AuthorizeGuard } from './authorize.guard'
+import { AppEventName } from '../rum/app-event-names'
 import { UserService } from '../core'
 import { PlatformInfoService } from '../cdk/platform-info'
 import { WINDOW } from '../cdk/window'
@@ -135,7 +136,7 @@ describe('AuthorizeGuard', () => {
       expect(result).toEqual(stubUrlTree('/my-orcid'))
     })
 
-    it('triggers delayed outOfRouterNavigation when action is outOfRouterNavigation', fakeAsync(() => {
+    it('triggers outOfRouterNavigation when action is outOfRouterNavigation', () => {
       togglz.getStateOf.and.returnValue(of(true))
       user.getUserSession.and.returnValue(of({ oauthSession: {} } as any))
       decisionMock.decideForAuthorize.and.returnValue({
@@ -147,22 +148,24 @@ describe('AuthorizeGuard', () => {
         makeSnapshot({}),
         {} as RouterStateSnapshot
       )
-      let resolved = false
-      firstValueFrom(result$)
-        .then(() => {
-          resolved = true
+      let gotEmission = false
+      const sub = result$.subscribe({
+        next: () => {
+          gotEmission = true
+        },
+      })
+
+      expect(observabilityMock.recordSimpleEvent).toHaveBeenCalledWith(
+        AppEventName.OauthAuthorizeGuardOutOfRouterNavigation,
+        jasmine.objectContaining({
+          target: 'https://cb',
         })
-        .catch(() => {})
-
-      tick(149)
-      expect(win.outOfRouterNavigation).not.toHaveBeenCalled()
-      expect(resolved).toBeFalse()
-
-      tick(1)
+      )
       expect(win.outOfRouterNavigation).toHaveBeenCalledWith('https://cb')
-      // This branch intentionally returns NEVER after redirecting.
-      expect(resolved).toBeFalse()
-    }))
+      // This branch intentionally returns NEVER after redirecting (no emission).
+      expect(gotEmission).toBeFalse()
+      sub.unsubscribe()
+    })
 
     it("returns UrlTree '/404' when outOfRouterNavigation target is missing", async () => {
       router.createUrlTree.and.returnValue(stubUrlTree('/404'))
@@ -191,6 +194,13 @@ describe('AuthorizeGuard', () => {
       expect(oauthService.validateRedirectUri).toHaveBeenCalledWith(
         'c',
         'https://cb'
+      )
+      expect(observabilityMock.recordSimpleEvent).toHaveBeenCalledWith(
+        AppEventName.OauthAuthorizeGuardLoginRequiredRedirect,
+        jasmine.any(Object)
+      )
+      expect(win.outOfRouterNavigation).toHaveBeenCalledWith(
+        'https://cb#login_required'
       )
       expect(result).toBeFalse()
     })
