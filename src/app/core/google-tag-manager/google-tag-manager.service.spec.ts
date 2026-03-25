@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { RouterTestingModule } from '@angular/router/testing'
 import { WINDOW_PROVIDERS } from '../../cdk/window'
+import { HttpClientTestingModule } from '@angular/common/http/testing'
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 
@@ -27,7 +28,7 @@ describe('GoogleTagManagerService', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
+      imports: [RouterTestingModule, HttpClientTestingModule],
       providers: [
         WINDOW_PROVIDERS,
         GoogleTagManagerService,
