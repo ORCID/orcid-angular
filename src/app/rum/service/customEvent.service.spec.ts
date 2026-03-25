@@ -24,7 +24,10 @@ describe('RumJourneyEventService', () => {
       providers: [
         RumJourneyEventService,
         { provide: WINDOW, useValue: mockWindow },
-        { provide: NewRelicService, useValue: { forceHarvestNow: forceHarvestNowSpy } },
+        {
+          provide: NewRelicService,
+          useValue: { forceHarvestNow: forceHarvestNowSpy },
+        },
       ],
     })
 
@@ -141,9 +144,13 @@ describe('RumJourneyEventService', () => {
     addPageActionSpy.calls.reset()
     forceHarvestNowSpy.calls.reset()
 
-    service.recordEvent('oauth_authorization', AppEventName.OauthAuthorizationSuccess, {
-      OAUTH_AUTHORIZATION: true,
-    })
+    service.recordEvent(
+      'oauth_authorization',
+      AppEventName.OauthAuthorizationSuccess,
+      {
+        OAUTH_AUTHORIZATION: true,
+      }
+    )
 
     expect(addPageActionSpy).toHaveBeenCalledTimes(1)
     expect(forceHarvestNowSpy).toHaveBeenCalledTimes(1)

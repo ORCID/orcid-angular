@@ -16,7 +16,7 @@ NREUM.init = {
   // UserAction / interaction events (click, blur, keydown, etc.)
   generic_events: { enabled: true, autoStart: false },
   page_action: { enabled: true }, // addPageAction API default collection
-  user_actions : { enabled: false },
+  user_actions: { enabled: false },
   // SPA soft-navigation / route-change instrumentation
   soft_navigations: { enabled: false, autoStart: false },
 }

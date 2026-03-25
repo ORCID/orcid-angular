@@ -87,4 +87,3 @@ export function stepBackButtonClickedEvent(step: string): string {
 export function stepLoadedEvent(step: 'a' | 'b' | 'c2' | 'c' | 'd'): string {
   return `step-${step}-loaded`
 }
-
