@@ -39,15 +39,36 @@ flowchart TD
 
 ## Key events and where they fire
 
-Journey events include:
+Journey events (`actionName = 'orcid_registration'`):
 
-- step loaded/clicked progression events (step A/B/C2/C/D)
-- validate/confirmation stages
-- `journey-complete` and `journey_finished` when completion path runs.
+- From `RegisterObservabilityService.initializeJourney(...)`:
+  - starts journey with context keys like `isReactivation`, `coulumn4`, `column8`, `column12`.
+- From `RegisterObservabilityService.stepLoaded(...)`:
+  - `step-a-loaded`, `step-b-loaded`, `step-c2-loaded`, `step-c-loaded`, `step-d-loaded`.
+- From `RegisterObservabilityService` step actions:
+  - `step-a-sign-in-button-clicked`
+  - `step-a-next-button-clicked`
+  - `step-b-next-button-clicked`
+  - `step-c2-next-button-clicked`
+  - `step-c2-skip-button-clicked`
+  - `step-c-next-button-clicked`
+  - `step-d-next-button-clicked`
+  - dynamic back-button events: `step-<x>-back-button-clicked`.
+- From `RegisterComponent.register(...)` via `reportRegisterEvent/reportRegisterErrorEvent`:
+  - `prefill_register-form`
+  - `register-validate`
+  - `register-validate-error`
+  - `register-confirmation`
+  - `register-confirmation-error`
+  - `register_pipeline_error` (submit pipeline failure branch).
+- Completion events:
+  - `journey-complete` emitted by `RegisterObservabilityService.completeJourney(...)`.
+  - `journey_finished` emitted by `finishJourney(...)` immediately after completion.
 
-Simple event outside journey:
+Simple events (outside `orcid_registration` journey):
 
-- `register_guard_redirect_to_authorize` from `RegisterGuard` for OAuth handoff pre-exits.
+- From `RegisterGuard`:
+  - `register_guard_redirect_to_authorize` when an OAuth-aware signed-in session is redirected away from register.
 
 ## NRQL query patterns
 

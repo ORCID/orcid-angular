@@ -333,10 +333,7 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
     this._observability.recordSimpleEvent(
       AppEventName.OauthAuthorizeSwitchDelegatedAccount,
       {
-        delegator_giver_orcid: delegator?.giverOrcid?.path,
-        delegator_receiver_orcid: delegator?.receiverOrcid?.path,
         approval_date: delegator?.approvalDate,
-        current_effective_orcid_url: this.orcidUrl,
       }
     )
     this.loadingTrustedIndividuals = true
@@ -376,8 +373,6 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
         undefined,
       scope: scopeFromSession || scopeFromQuery || undefined,
       acting_as_trusted_user: session?.userInfo?.IN_DELEGATION_MODE === 'true',
-      effective_user_orcid: session?.userInfo?.EFFECTIVE_USER_ORCID || undefined,
-      real_user_orcid: session?.userInfo?.REAL_USER_ORCID || undefined,
       delegated_by_admin: session?.userInfo?.DELEGATED_BY_ADMIN === 'true',
       oauth_query_string: serializeQueryParamsForRum(queryParams),
     }

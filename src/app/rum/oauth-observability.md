@@ -83,4 +83,5 @@ Legacy-only OAuth events:
 - `access_denied` from auth server is treated as an expected deny outcome path, not a service error.
 - OAuth telemetry is intentionally layered with global `http_error` / `client_error` from `ErrorHandlerService`; dual signals are expected.
 - The auth-server vs legacy endpoint split is tracked in OAuth error attrs (`oauth_authorize_endpoint`) where applicable.
+- OAuth emitters avoid personal fields by design, and telemetry payloads are also sanitized before send; ORCID iDs, emails, and PID-like identifiers are not forwarded to New Relic.
 

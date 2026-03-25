@@ -8,6 +8,13 @@ type JourneyState = {
   context: Record<string, unknown>
 }
 
+const BLOCKED_RUM_KEY_PATTERN =
+  /(orcid|email|pid|delegator)/i
+const ORCID_VALUE_PATTERN = /\b\d{4}-\d{4}-\d{4}-\d{3}[\dX]\b/i
+const EMAIL_VALUE_PATTERN =
+  /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i
+const PID_SANITIZED_VALUE = '[REDACTED_BY_PID_SANITIZER]'
+
 function withPrefix<T extends object>(
   obj: T,
   prefix: string
@@ -17,6 +24,35 @@ function withPrefix<T extends object>(
     result[`${prefix}${key}`] = (obj as any)[key]
   }
   return result
+}
+
+function sanitizeRumValue(value: unknown): unknown {
+  if (Array.isArray(value)) {
+    return value.map((item) => sanitizeRumValue(item))
+  }
+
+  if (value && typeof value === 'object') {
+    const input = value as Record<string, unknown>
+    const output: Record<string, unknown> = {}
+    for (const [key, rawValue] of Object.entries(input)) {
+      if (BLOCKED_RUM_KEY_PATTERN.test(key)) {
+        output[key] = PID_SANITIZED_VALUE
+        continue
+      }
+      const cleaned = sanitizeRumValue(rawValue)
+      output[key] = cleaned
+    }
+    return output
+  }
+
+  if (typeof value === 'string') {
+    if (ORCID_VALUE_PATTERN.test(value) || EMAIL_VALUE_PATTERN.test(value)) {
+      return PID_SANITIZED_VALUE
+    }
+    return value
+  }
+
+  return value
 }
 
 function generateId(): string {
@@ -43,11 +79,14 @@ export class RumJourneyEventService {
     journeyType: T,
     context: JourneyContextMap[T]
   ): void {
+    const sanitizedContext = sanitizeRumValue(
+      context
+    ) as JourneyContextMap[T] | undefined
     if (this.journeys[journeyType]) {
       if (runtimeEnvironment.debugger) {
         console.debug(
           `[RUM][journey:${journeyType}] : start (ignored, already started)\n${rumDebugJson(
-            context
+            sanitizedContext || {}
           )}`
         )
       }
@@ -57,24 +96,30 @@ export class RumJourneyEventService {
     this.journeys[journeyType] = {
       startTime: Date.now(),
       journeyId,
-      context: { ...context },
+      context: { ...(sanitizedContext || {}) },
     }
     if (runtimeEnvironment.debugger) {
       console.debug(
-        `[RUM][journey:${journeyType}] : start\n${rumDebugJson(context)}`
+        `[RUM][journey:${journeyType}] : start\n${rumDebugJson(
+          sanitizedContext || {}
+        )}`
       )
     }
   }
 
   // Records a standalone event without requiring a journey lifecycle
   recordSimpleEvent(eventName: string, attrs?: Record<string, unknown>): void {
+    const sanitizedAttrs = sanitizeRumValue(attrs || {}) as Record<
+      string,
+      unknown
+    >
     const nr = (this.window as any).newrelic
     if (typeof nr?.addPageAction === 'function') {
-      nr.addPageAction(eventName, attrs || {})
+      nr.addPageAction(eventName, sanitizedAttrs)
     }
     if (runtimeEnvironment.debugger) {
       console.debug(
-        `[RUM][simple] : event ${eventName}\n${rumDebugJson(attrs || {})}`
+        `[RUM][simple] : event ${eventName}\n${rumDebugJson(sanitizedAttrs)}`
       )
     }
   }
@@ -85,7 +130,10 @@ export class RumJourneyEventService {
   ): void {
     const state = this.journeys[journeyType]
     if (!state) return
-    state.context = { ...state.context, ...extraContext }
+    state.context = {
+      ...state.context,
+      ...(sanitizeRumValue(extraContext) as Record<string, unknown>),
+    }
   }
 
   recordEvent<T extends JourneyType>(
@@ -105,9 +153,13 @@ export class RumJourneyEventService {
       return
     }
     const elapsedMs = Date.now() - state.startTime
+    const sanitizedEventAttrs = sanitizeRumValue(eventAttrs || {}) as Record<
+      string,
+      unknown
+    >
     const payload = {
       ...withPrefix(state.context, 'journeyContext_'),
-      ...withPrefix(eventAttrs || ({} as any), 'eventAttribute_'),
+      ...withPrefix(sanitizedEventAttrs, 'eventAttribute_'),
       system_eventName: eventName,
       system_elapsedMs: elapsedMs,
       system_journeyId: state.journeyId,
@@ -133,9 +185,13 @@ export class RumJourneyEventService {
     const state = this.journeys[journeyType]
     if (!state) return
     const elapsedMs = Date.now() - state.startTime
+    const sanitizedFinalAttrs = sanitizeRumValue(finalAttrs || {}) as Record<
+      string,
+      unknown
+    >
     const payload = {
       ...withPrefix(state.context, 'journeyContext_'),
-      ...withPrefix(finalAttrs || ({} as any), 'eventAttribute_'),
+      ...withPrefix(sanitizedFinalAttrs, 'eventAttribute_'),
       system_eventName: 'journey_finished',
       system_elapsedMs: elapsedMs,
       system_journeyId: state.journeyId,

@@ -28,8 +28,8 @@ describe('RumJourneyEventService', () => {
 
   it('records events with prefixed keys and system fields', () => {
     service.startJourney('oauth_authorization', {
-      client_id: 'client-123',
       scope: 'read',
+      response_type: 'code',
     })
 
     service.recordEvent('oauth_authorization', 'error_page_loaded', {
@@ -41,8 +41,8 @@ describe('RumJourneyEventService', () => {
     expect(eventType).toBe('oauth_authorization')
 
     // journey context prefixes
-    expect(payload.journeyContext_client_id).toBe('client-123')
     expect(payload.journeyContext_scope).toBe('read')
+    expect(payload.journeyContext_response_type).toBe('code')
 
     // event attr prefixes
     expect(payload.eventAttribute_error).toBe('invalid_request')
@@ -74,7 +74,7 @@ describe('RumJourneyEventService', () => {
   })
 
   it('updateJourneyContext merges additional context for subsequent events', () => {
-    service.startJourney('oauth_authorization', { client_id: 'c1' })
+    service.startJourney('oauth_authorization', { response_type: 'code' })
     service.updateJourneyContext('oauth_authorization', { scope: 'email' })
 
     service.recordEvent('oauth_authorization', 'flag_status', {
@@ -82,20 +82,60 @@ describe('RumJourneyEventService', () => {
     })
 
     const [, payload] = addPageActionSpy.calls.mostRecent().args
-    expect(payload.journeyContext_client_id).toBe('c1')
+    expect(payload.journeyContext_response_type).toBe('code')
     expect(payload.journeyContext_scope).toBe('email')
     expect(payload.eventAttribute_OAUTH_AUTHORIZATION).toBe(true)
   })
 
   it('ignores second startJourney call for the same journey', () => {
-    service.startJourney('oauth_authorization', { client_id: 'first' })
+    service.startJourney('oauth_authorization', { response_type: 'first' })
     // Second call should be ignored
-    service.startJourney('oauth_authorization', { client_id: 'second' })
+    service.startJourney('oauth_authorization', { response_type: 'second' })
 
     service.recordEvent('oauth_authorization', 'check')
     const [, payload] = addPageActionSpy.calls.mostRecent().args
-    expect(payload.journeyContext_client_id).toBe('first')
-    expect(payload.journeyContext_client_id).not.toBe('second')
+    expect(payload.journeyContext_response_type).toBe('first')
+    expect(payload.journeyContext_response_type).not.toBe('second')
+  })
+
+  it('drops sensitive identifiers from simple-event payloads', () => {
+    service.recordSimpleEvent('privacy_check', {
+      client_id: 'cid-1',
+      redirect_uri: 'https://example.org/callback',
+      oauth_query_string: 'client_id=cid-1&redirect_uri=https://example.org/callback',
+      email: 'user@example.org',
+      safe_attr: 'ok',
+    })
+
+    const [, payload] = addPageActionSpy.calls.mostRecent().args
+    expect(payload.client_id).toBe('cid-1')
+    expect(payload.redirect_uri).toBe('https://example.org/callback')
+    expect(payload.oauth_query_string).toContain('client_id=cid-1')
+    expect(payload.email).toBe('[REDACTED_BY_PID_SANITIZER]')
+    expect(payload.safe_attr).toBe('ok')
+  })
+
+  it('drops sensitive nested values from journey payloads', () => {
+    service.startJourney('orcid_registration', {
+      isReactivation: true,
+      email: 'test@example.org',
+    } as any)
+
+    service.recordEvent('orcid_registration', 'step_a_next_button_clicked', {
+      formValues: {
+        orcid: '0000-0002-1825-0097',
+        email: 'test@example.org',
+        country: 'US',
+      },
+    } as any)
+
+    const [, payload] = addPageActionSpy.calls.mostRecent().args
+    expect(payload.journeyContext_email).toBe('[REDACTED_BY_PID_SANITIZER]')
+    expect(payload.eventAttribute_formValues).toEqual({
+      orcid: '[REDACTED_BY_PID_SANITIZER]',
+      email: '[REDACTED_BY_PID_SANITIZER]',
+      country: 'US',
+    })
   })
 
   it('guards when New Relic is unavailable', () => {

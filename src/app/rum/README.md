@@ -67,3 +67,4 @@ Flow charts live in each flow-specific doc:
 - For mixed simple + journey dashboards, remember `actionName` means different things.
 - Keep event names stable whenever possible; renames require NRQL/dashboard migration.
 - With `runtimeEnvironment.debugger` enabled, emissions are logged in the browser console with `[RUM]`.
+- RUM emitters should avoid sending personal values directly; `RumJourneyEventService` also sanitizes payloads as a safety net (for example ORCID iDs, emails, and PID-like identifiers).

@@ -81,6 +81,7 @@ describe('OauthService', () => {
       AppEventName.OauthSessionClientHandledErrorRedirectLegacy,
       jasmine.objectContaining({
         oauth_error: 'login_required',
+        oauth_error_code: '401',
         client_id: 'client-id',
         redirect_uri: 'https://example.org/callback',
       })
@@ -110,6 +111,7 @@ describe('OauthService', () => {
       AppEventName.OauthSessionNavigateAuthorizeErrorLegacy,
       jasmine.objectContaining({
         oauth_error: 'server_error',
+        oauth_errors: 'oauth_issue',
         client_id: 'client-id',
         redirect_uri: 'https://example.org/callback',
       })

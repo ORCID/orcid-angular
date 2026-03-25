@@ -11,9 +11,9 @@ import { UserSession } from 'src/app/types/session.local'
 import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
 import { TogglzFlag } from 'src/app/types/config.endpoint'
 import { AppEventName } from 'src/app/register/app-event-names'
-import { serializeQueryParamsForRum } from 'src/app/rum/serialize-oauth-query-for-rum'
 import { getOauthAuthorizationErrorCategory } from 'src/app/rum/oauth-authorization-error-category'
 import { OauthAuthorizationContext } from 'src/app/rum/journeys/oauthAuthorization'
+import { serializeQueryParamsForRum } from 'src/app/rum/serialize-oauth-query-for-rum'
 
 @Component({
   selector: 'app-oauth-error',
