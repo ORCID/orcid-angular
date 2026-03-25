@@ -6529,7 +6529,7 @@
         <target>LR</target>
       </trans-unit>
       <trans-unit id="layout.oneTrustFocusAnnouncement" datatype="html" resname="layout.oneTrustFocusAnnouncement">
-        <source>Cookie settings dialog opened. Focus moved to this dialog. Please review the options and make a choice to continue.</source>
+        <source>Cookie consent dialog opened</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/announcer/announcer.service.ts</context>
           <context context-type="linenumber">15</context>
@@ -16916,7 +16916,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">464</context>
+          <context context-type="linenumber">463</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -16936,7 +16936,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">466</context>
+          <context context-type="linenumber">465</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -16948,11 +16948,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">467</context>
+          <context context-type="linenumber">466</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">488</context>
+          <context context-type="linenumber">487</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/locale/i18n.pseudo.component.html</context>
@@ -18808,7 +18808,7 @@
         <source>Claiming your account</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">485</context>
+          <context context-type="linenumber">484</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
@@ -18816,7 +18816,7 @@
         <source>Thank you for claiming your ORCID record; please complete the process by following the steps in the email we are now sending you. If you don’t receive an email from us, please</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/sign-in/components/form-sign-in/form-sign-in.component.ts</context>
-          <context context-type="linenumber">487</context>
+          <context context-type="linenumber">486</context>
         </context-group>
         <target>LR</target>
       </trans-unit>
