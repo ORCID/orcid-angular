@@ -52,10 +52,10 @@ export enum AppEventName {
    * Use **`error_category`** (see `getOauthAuthorizationErrorCategory`) for NRQL facets.
    */
   OauthAuthorizationValidationFailed = 'oauth_authorization_validation_failed',
-  /** OAuth service: client-handled OAuth session error redirected with `#error=...`. */
-  OauthSessionClientHandledErrorRedirect = 'oauth_session_client_handled_error_redirect',
-  /** OAuth service: session init detected error and routed to authorize page. */
-  OauthSessionNavigateAuthorizeError = 'oauth_session_navigate_authorize_error',
+  /** Legacy OAuth service: client-handled OAuth session error redirected with `#error=...`. */
+  OauthSessionClientHandledErrorRedirectLegacy = 'oauth_session_client_handled_error_redirect_legacy',
+  /** Legacy OAuth service: session init detected error and routed to authorize page. */
+  OauthSessionNavigateAuthorizeErrorLegacy = 'oauth_session_navigate_authorize_error_legacy',
   /** OAuth auth-server authorize response contained error body (non access_denied). */
   OauthAuthorizeAuthServerErrorBody = 'oauth_authorize_auth_server_error_body',
   /** Authorize screen: user switched delegated/trusted-individual account. */
@@ -64,7 +64,7 @@ export enum AppEventName {
   // ─── Sign-in / Register guard final outcomes ───────────────────────────────
   SignInGuardRedirectToAuthorize = 'sign_in_guard_redirect_to_authorize',
   SignInGuardRedirectToRegister = 'sign_in_guard_redirect_to_register',
-  SignInOauthInvalidGrant = 'sign_in_oauth_invalid_grant',
+  SignInOauthInvalidGrantLegacy = 'sign_in_oauth_invalid_grant_legacy',
   TwoFactorSignInGuardRedirectToMyOrcid = 'two_factor_signin_guard_redirect_to_my_orcid',
   RegisterGuardRedirectToAuthorize = 'register_guard_redirect_to_authorize',
 

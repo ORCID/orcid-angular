@@ -1,8 +1,10 @@
 # Sign-in observability
 
-This document describes sign-in observability: where events are emitted, how success/failure is classified, and how to query it reliably in New Relic.
+## Purpose
 
-## Scope
+Document sign-in observability signals, including component outcomes, service transport errors, and guard decisions.
+
+## Scope / Emitters
 
 Primary emitters:
 
@@ -10,89 +12,56 @@ Primary emitters:
 - `core/sign-in/sign-in.service.ts`
 - `guards/sign-in.guard.ts`
 - `guards/two-factor-signin.guard.ts`
-- `core/error-handler/error-handler.service.ts` (global cross-cutting errors)
+- `core/error-handler/error-handler.service.ts` (global cross-cutting)
 
 ## Event model
 
-Sign-in currently uses simple events (not a dedicated journey type).
+- Sign-in uses simple events (no dedicated sign-in journey type).
+- New Relic model:
+  - `eventType() = 'PageAction'`
+  - `actionName = <eventName>`.
 
-Each sign-in event is emitted with `recordSimpleEvent(...)`, so in New Relic:
+## Flow diagram
 
-- `eventType() = 'PageAction'`
-- `actionName` equals the event name
+```mermaid
+flowchart TD
+  FormSignIn["FormSignInComponent"] -->|"single: sign_in_success, sign_in_failure, sign_in_oauth_invalid_grant_legacy"| RumService["RumJourneyEventService"]
+  SignInService["SignInService"] -->|"single: sign_in_http_error"| RumService
+  SignInGuard["SignInGuard"] -->|"single: sign_in_guard_redirect_to_authorize, sign_in_guard_redirect_to_register"| RumService
+  TwoFactorGuard["TwoFactorSignInGuard"] -->|"single: two_factor_signin_guard_redirect_to_my_orcid"| RumService
+  ErrorHandlerService["ErrorHandlerService"] -->|"single global: http_error, client_error"| RumService
+```
 
-## Classification
+## Key events and where they fire
 
-Sign-in telemetry intentionally separates application-level and HTTP-level failures.
+Common sign-in event names:
 
-### Application outcome events (component-level)
+- `sign_in_success`
+- `sign_in_failure`
+- `sign_in_http_error`
+- `sign_in_oauth_invalid_grant_legacy`
+- `sign_in_guard_redirect_to_authorize`
+- `sign_in_guard_redirect_to_register`
+- `two_factor_signin_guard_redirect_to_my_orcid`
 
-In `FormSignInComponent.onSubmit()`:
+`sign_in_failure` includes classification attrs (deprecated, disabled, unclaimed, bad verification/recovery code, invalid user type, bad credentials fallback).
 
-- Success path records a success event before redirect logic.
-- Unsuccessful sign-in responses (`success: false`) record failure with classification flags such as:
-  - deprecated
-  - disabled
-  - unclaimed
-  - bad verification or recovery code
-  - invalid user type
-  - bad credentials fallback
+## NRQL query patterns
 
-These events represent business/application outcomes from sign-in responses.
+Success vs failure:
 
-Additionally, the OAuth edge state `invalid_grant` in post-login OAuth handoff is emitted as a dedicated simple event.
+- `FROM PageAction SELECT count(*) WHERE actionName IN ('sign_in_success','sign_in_failure') FACET actionName`
 
-### HTTP/transport failure event (service-level)
+Transport errors:
 
-In `SignInService.signIn()`:
+- `FROM PageAction SELECT count(*) WHERE actionName = 'sign_in_http_error' FACET sign_in_flow, status`
 
-- HTTP POST calls are retried (`retry(3)`).
-- On final failure, `recordSignInHttpError(...)` emits a dedicated sign-in HTTP error event with flow context.
+Guard routing:
 
-Included attributes typically contain:
+- `FROM PageAction SELECT count(*) WHERE actionName LIKE 'sign_in_guard_%'`
 
-- flow label (password legacy, password auth-server, social, institutional)
-- OAuth context boolean
-- HTTP status/statusText/request URL path+query when available
-- non-HTTP marker for unexpected error object types
+## Troubleshooting / gotchas
 
-This event represents transport/API failure, distinct from application rejection.
-
-### Global errors that can co-exist
-
-`ErrorHandlerService` also emits cross-app simple error events (`http_error`, `client_error`).
-
-As a result, a single failing sign-in request can produce:
-
-- a sign-in-specific HTTP error event
-- and a global error event
-
-This is expected and supports both flow-specific and platform-wide monitoring.
-
-## Flow context captured in sign-in
-
-Sign-in events capture context for:
-
-- regular sign-in
-- social sign-in
-- institutional sign-in
-- OAuth-related sign-in situations where session/query context affects redirect behavior
-
-The component also handles 2FA and several UX error states, and emits corresponding failure flags for downstream analysis.
-
-Guard outcomes are captured for:
-
-- sign-in guard redirect to authorize
-- sign-in guard redirect to register
-- two-factor guard redirect to my-orcid when already logged in
-
-## Querying guidance
-
-Use `PageAction` with direct `actionName` filters (simple events).
-
-Patterns:
-
-- Success trend: filter by sign-in success `actionName`
-- Application rejection rate: success vs failure events
-- Transport health: sign-in HTTP error event, optionally faceted by flow label and status
-- Correlation with global transport issues: compare with `http_error`
+- A single failing request can legitimately emit both `sign_in_http_error` and global `http_error`/`client_error`.
+- `sign_in_oauth_invalid_grant_legacy` is legacy OAuth handoff specific, not a generic sign-in failure.
+- Guard events can explain exits where users never submit the sign-in form.

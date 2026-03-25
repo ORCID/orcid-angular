@@ -1,58 +1,69 @@
-# Client RUM / observability (New Relic)
+# Client RUM / Observability (New Relic)
 
-This folder contains the app-side observability plumbing used to emit browser events to New Relic.
+## Purpose
 
-## What this folder owns
+Define the shared browser observability plumbing used by the app to send `PageAction` events to New Relic with consistent event names and payload shape.
 
-- Event transport through `window.newrelic.addPageAction`.
-- Journey lifecycle state (`start`, `record`, `finish`) in memory.
-- Shared payload conventions used by dashboards and alerts.
-- Journey type contracts under `journeys/`.
+## Scope / Emitters
 
-## Core building blocks
+Primary files in this folder/domain:
 
-| Piece | Role |
-|--------|------|
-| `service/customEvent.service.ts` | Emits simple events and journey events. |
-| `register/app-event-names.ts` | Central source of event name strings/helpers. |
-| `journeys/types.ts` + `journeys/*.ts` | Type-safe context and event attributes per journey. |
+- `service/customEvent.service.ts`
+- `register/app-event-names.ts`
+- `journeys/types.ts`
+- `journeys/*.ts`
 
-## Payload model (important for NRQL)
+Flow-specific docs:
+
+- `oauth-observability.md`
+- `signin-observability.md`
+- `registration-observability.md`
+
+## Event model
 
 ### Simple events
 
-- Sent with `recordSimpleEvent(eventName, attrs?)`.
-- New Relic `actionName` is the provided `eventName`.
-- Custom attributes are stored directly on the PageAction payload.
+- Emitted via `recordSimpleEvent(eventName, attrs?)`.
+- New Relic stores them as `PageAction` where:
+  - `actionName = <eventName>`
+  - attributes are top-level fields.
 
 ### Journey events
 
-- Sent with `startJourney(journeyType, context)` + `recordEvent(journeyType, eventName, attrs?)`.
-- New Relic `actionName` is the `journeyType`.
-- Logical event name is stored in `system_eventName`.
-- Attributes are prefixed:
-  - `journeyContext_*` for journey context.
-  - `eventAttribute_*` for per-event attributes.
+- Emitted via `startJourney(journeyType, context)`, `recordEvent(...)`, and optionally `finishJourney(...)`.
+- New Relic stores them as `PageAction` where:
+  - `actionName = <journeyType>`
+  - `system_eventName` holds the logical step/event
+  - `journeyContext_*` stores journey context
+  - `eventAttribute_*` stores per-event attributes.
 
-## Querying guidance
+## Flow diagram
 
-- For simple events, filter on `actionName`.
-- For journey events, filter on `actionName = <journeyType>` and `system_eventName`.
-- Prefer scoped attributes (`journeyContext_*`, `eventAttribute_*`) over free-form payload fields when building alerts.
+Flow charts live in each flow-specific doc:
 
-## Deep-dive docs by flow
+- `oauth-observability.md`
+- `signin-observability.md`
+- `registration-observability.md`
 
-- `oauth-observability.md` - OAuth authorize and OAuth error observability.
-- `signin-observability.md` - Sign-in observability and HTTP failure instrumentation.
-- `registration-observability.md` - Registration journey observability and step/funnel instrumentation.
+## Key events and where they fire
 
-## Adding or changing observability
+- `AppEventName` in `register/app-event-names.ts` is the canonical name source.
+- `RumJourneyEventService` is the canonical transport.
+- Domain flows (OAuth, sign-in, registration) call this service and own business-specific attributes.
 
-1. Add/adjust event names in `register/app-event-names.ts`.
-2. Emit via `recordSimpleEvent` or journey methods in the relevant flow.
-3. Keep naming and payload shape stable for dashboard/alert continuity.
-4. Add or update tests around any new payload formatter/helper in this folder.
+## NRQL query patterns
 
-## Debugging
+- Simple events:
+  - `FROM PageAction SELECT count(*) WHERE actionName = 'sign_in_success'`
+- Journey events:
+  - `FROM PageAction SELECT count(*) WHERE actionName = 'oauth_authorization' AND system_eventName = 'authorization_error'`
+- Keep dashboards scoped to prefixed journey fields:
+  - `journeyContext_*`
+  - `eventAttribute_*`
 
-- With `runtimeEnvironment.debugger` enabled, RUM emissions are printed to console with a `[RUM]` prefix and pretty JSON payloads.
+## Troubleshooting / gotchas
+
+- `recordEvent(...)` is ignored when `startJourney(...)` was not called.
+- For mixed simple + journey dashboards, remember `actionName` means different things.
+- Keep event names stable whenever possible; renames require NRQL/dashboard migration.
+- With `runtimeEnvironment.debugger` enabled, emissions are logged in the browser console with `[RUM]`.

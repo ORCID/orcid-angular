@@ -1,10 +1,12 @@
 # Registration observability
 
-This document explains how registration observability is emitted across the registration flow, including journey setup, step instrumentation, validation/submission signals, and NRQL usage.
+## Purpose
 
-## Scope
+Describe registration instrumentation end-to-end: journey lifecycle, step/funnel signals, and completion outcomes.
 
-Primary sources:
+## Scope / Emitters
+
+Primary emitters:
 
 - `register/register-observability.service.ts`
 - `register/pages/register/register.component.ts`
@@ -12,88 +14,58 @@ Primary sources:
 - `register/components/form-password/form-password.component.ts`
 - `register/app-event-names.ts`
 
+Related pre-flow guard signal:
+
+- `guards/register.guard.ts` (`register_guard_redirect_to_authorize`)
+
 ## Event model
 
-Registration is instrumented as a journey with:
+- Registration uses journey events with `journeyType = orcid_registration`.
+- New Relic model:
+  - `actionName = 'orcid_registration'`
+  - logical event in `system_eventName`
+  - journey context in `journeyContext_*`
+  - per-event attrs in `eventAttribute_*`.
 
-- `journeyType = orcid_registration`
+## Flow diagram
 
-In New Relic, journey events appear as:
+```mermaid
+flowchart TD
+  RegisterComponent["RegisterComponent"] -->|"journey via RegisterObservabilityService: register_pipeline_error, register-validate, register-confirmation"| RegisterObs["RegisterObservabilityService"]
+  FormComponents["FormPersonal + FormPassword + Stepper"] -->|"journey via RegisterObservabilityService: step-a-next-button-clicked, step-b-next-button-clicked, step-c2-next-button-clicked, step-c2-skip-button-clicked, step-c-next-button-clicked, step-d-next-button-clicked, step-*-loaded, step-*-back-button-clicked"| RegisterObs
+  RegisterObs -->|"journey orcid_registration: journey-complete + journey_finished (and dynamic reportRegisterEvent names)"| RumService["RumJourneyEventService"]
+  RegisterGuard["RegisterGuard"] -->|"single: register_guard_redirect_to_authorize"| RumService
+```
 
-- `eventType() = 'PageAction'`
-- `actionName = 'orcid_registration'`
-- logical event name in `system_eventName`
-- context and event attrs under prefixed keys:
-  - `journeyContext_*`
-  - `eventAttribute_*`
+## Key events and where they fire
 
-## Journey lifecycle
+Journey events include:
 
-### Start
+- step loaded/clicked progression events (step A/B/C2/C/D)
+- validate/confirmation stages
+- `journey-complete` and `journey_finished` when completion path runs.
 
-`RegisterObservabilityService.initializeJourney(...)` starts the registration journey once per registration page lifecycle (guarded by `registrationJourneyStarted`).
+Simple event outside journey:
 
-Initial context includes reactivation and platform layout signals used by the flow.
+- `register_guard_redirect_to_authorize` from `RegisterGuard` for OAuth handoff pre-exits.
 
-### During the flow
+## NRQL query patterns
 
-Events are emitted from two places:
+Journey funnel:
 
-- Service-level helpers for step transitions/buttons and dynamic step-loaded markers.
-- Component-level instrumentation for field-match and submit/confirm milestones.
+- `FROM PageAction SELECT count(*) WHERE actionName = 'orcid_registration' FACET system_eventName`
 
-### Finish
+Completion view:
 
-`RegisterObservabilityService.completeJourney(...)` exists and emits journey completion plus `finishJourney(...)`.
+- `FROM PageAction SELECT count(*) WHERE actionName = 'orcid_registration' AND system_eventName IN ('journey-complete','journey_finished')`
 
-The registration page now calls `completeJourney(...)` on successful final redirect handling, so registrations that reach a valid redirect URL produce explicit journey completion telemetry.
+Guard exits:
 
-## What gets instrumented
+- `FROM PageAction SELECT count(*) WHERE actionName = 'register_guard_redirect_to_authorize'`
 
-### Step navigation and progression
+## Troubleshooting / gotchas
 
-The flow emits step-loaded and navigation events as users move through the stepper, including next/back paths and optional skip behavior where applicable.
-
-### Field matching and form-state milestones
-
-Key UX milestones are emitted from form components:
-
-- email match state changes in step A
-- password validity/match milestones in step B
-
-These events are useful for diagnosing early drop-off before final submission.
-
-### Submit pipeline milestones
-
-The register page emits events around:
-
-- backend validate stage
-- validation-error stage
-- registration confirmation stage
-- confirmation-error stage (unexpected responses)
-- pipeline error stage (submit observable error callback)
-
-Event payloads may include backend validator or response objects for debugging.
-
-## Guard-level registration handoff
-
-`RegisterGuard` emits a simple event when it redirects an already-logged-in OAuth registration path to `/oauth/authorize`, including OAuth query context attributes. This helps explain pre-form exits that do not traverse full register journey steps.
-
-## Reactivation context
-
-Registration journey context includes reactivation state when relevant, allowing NRQL segmentation of regular registration vs reactivation scenarios.
-
-## Querying guidance
-
-For registration, always query journey style:
-
-- `actionName = 'orcid_registration'`
-- `system_eventName = ...`
-
-Do not use `eventName` for this journey.
-
-Use prefixed fields:
-
-- `journeyContext_*` for registration context
-- `eventAttribute_*` for event payload
+- Registration is mostly journey-based; querying by simple `actionName = 'register_*'` misses main funnel steps.
+- Missing completion metrics often indicate redirect/response edge cases before `completeJourney(...)`.
+- Reactivation and layout context are carried in journey context fields and should be used for segmentation.
 

@@ -182,8 +182,6 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
     this._togglz
       .getStateOf(TogglzFlag.OAUTH_AUTHORIZATION)
       .pipe(
-        // Config can re-emit when togglz refreshes; without take(1) each emission
-        // re-runs authorize → duplicate HTTP calls and duplicate RUM events.
         take(1),
         tap((useAuthServerFlag) => {
           if (useAuthServerFlag === true) {

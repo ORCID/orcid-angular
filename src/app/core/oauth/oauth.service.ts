@@ -242,7 +242,7 @@ export class OauthService {
       )
     ) {
       this._observability.recordSimpleEvent(
-        AppEventName.OauthSessionClientHandledErrorRedirect,
+        AppEventName.OauthSessionClientHandledErrorRedirectLegacy,
         {
           oauth_error: session.error,
           oauth_error_code: session.errorCode,
@@ -262,7 +262,7 @@ export class OauthService {
       return NEVER
     } else if (session.error || (session.errors && session.errors.length)) {
       this._observability.recordSimpleEvent(
-        AppEventName.OauthSessionNavigateAuthorizeError,
+        AppEventName.OauthSessionNavigateAuthorizeErrorLegacy,
         {
           oauth_error: session.error,
           oauth_error_description: String(session.errorDescription || '').slice(
