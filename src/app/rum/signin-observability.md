@@ -6,7 +6,7 @@ Document sign-in observability signals, including component outcomes, service tr
 
 ## Scope / Emitters
 
-Primary emitters:
+Primary emitters (paths relative to `src/app/`):
 
 - `sign-in/components/form-sign-in/form-sign-in.component.ts`
 - `core/sign-in/sign-in.service.ts`
@@ -25,11 +25,11 @@ Primary emitters:
 
 ```mermaid
 flowchart TD
-  FormSignIn["FormSignInComponent"] -->|"single events"| RumService["RumJourneyEventService"]
-  SignInService["SignInService"] -->|"single events"| RumService
-  SignInGuard["SignInGuard"] -->|"single events"| RumService
-  TwoFactorGuard["TwoFactorSignInGuard"] -->|"single events"| RumService
-  ErrorHandlerService["ErrorHandlerService"] -->|"single global events"| RumService
+  FormSignIn["FormSignInComponent"] -->|"simple events"| RumService["RumJourneyEventService"]
+  SignInService["SignInService"] -->|"simple events"| RumService
+  SignInGuard["SignInGuard"] -->|"simple events"| RumService
+  TwoFactorGuard["TwoFactorSignInGuard"] -->|"simple events"| RumService
+  ErrorHandlerService["ErrorHandlerService"] -->|"global simple events"| RumService
 ```
 
 ## Key events and where they fire
@@ -56,9 +56,9 @@ Transport errors:
 
 - `FROM PageAction SELECT count(*) WHERE actionName = 'sign_in_http_error' FACET sign_in_flow, status`
 
-Guard routing:
+Guard routing (includes `SignInGuard` and `TwoFactorSignInGuard`):
 
-- `FROM PageAction SELECT count(*) WHERE actionName LIKE 'sign_in_guard_%'`
+- `FROM PageAction SELECT count(*) WHERE actionName LIKE 'sign_in_guard_%' OR actionName = 'two_factor_signin_guard_redirect_to_my_orcid'`
 
 ## Troubleshooting / gotchas
 

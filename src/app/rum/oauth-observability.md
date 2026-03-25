@@ -6,7 +6,7 @@ Describe how OAuth authorization and OAuth error flows emit observability signal
 
 ## Scope / Emitters
 
-Primary emitters:
+Primary emitters (paths relative to `src/app/`):
 
 - `authorize/components/form-authorize/form-authorize.component.ts`
 - `authorize/components/oauth-error/oauth-error.component.ts`
@@ -32,13 +32,13 @@ Primary emitters:
 
 ```mermaid
 flowchart TD
-  AuthorizeGuard["AuthorizeGuard"] -->|"single events"| RumService["RumJourneyEventService"]
+  AuthorizeGuard["AuthorizeGuard"] -->|"simple events"| RumService["RumJourneyEventService"]
   FormAuthorize["FormAuthorizeComponent"] -->|"journey events (oauth_authorization)"| RumService
-  FormAuthorize -->|"single events"| RumService
+  FormAuthorize -->|"simple events"| RumService
   OauthErrorComponent["OauthErrorComponent"] -->|"journey events (oauth_authorization)"| RumService
-  OauthErrorComponent -->|"single events"| RumService
-  OauthService["OauthService"] -->|"single events (includes legacy-only service events)"| RumService
-  AuthorizeComponent["AuthorizeComponent"] -->|"single events"| RumService
+  OauthErrorComponent -->|"simple events"| RumService
+  OauthService["OauthService"] -->|"simple events (includes legacy-only service events)"| RumService
+  AuthorizeComponent["AuthorizeComponent"] -->|"simple events"| RumService
 ```
 
 ## Key events and where they fire

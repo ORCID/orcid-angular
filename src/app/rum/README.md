@@ -6,12 +6,12 @@ Define the shared browser observability plumbing used by the app to send `PageAc
 
 ## Scope / Emitters
 
-Primary files in this folder/domain:
+Primary files (paths relative to `src/app/`):
 
-- `service/customEvent.service.ts`
+- `rum/service/customEvent.service.ts`
 - `register/app-event-names.ts`
-- `journeys/types.ts`
-- `journeys/*.ts`
+- `rum/journeys/types.ts`
+- `rum/journeys/*.ts`
 
 Flow-specific docs:
 
@@ -48,7 +48,7 @@ Flow charts live in each flow-specific doc:
 ## Key events and where they fire
 
 - `AppEventName` in `register/app-event-names.ts` is the canonical name source.
-- `RumJourneyEventService` is the canonical transport.
+- `RumJourneyEventService` (`rum/service/customEvent.service.ts`) is the canonical transport.
 - Domain flows (OAuth, sign-in, registration) call this service and own business-specific attributes.
 
 ## NRQL query patterns

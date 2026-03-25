@@ -6,7 +6,7 @@ Describe registration instrumentation end-to-end: journey lifecycle, step/funnel
 
 ## Scope / Emitters
 
-Primary emitters:
+Primary emitters (paths relative to `src/app/`):
 
 - `register/register-observability.service.ts`
 - `register/pages/register/register.component.ts`
@@ -34,7 +34,7 @@ flowchart TD
   RegisterComponent["RegisterComponent"] -->|"journey events via RegisterObservabilityService"| RegisterObs["RegisterObservabilityService"]
   FormComponents["FormPersonal + FormPassword + Stepper"] -->|"journey events via RegisterObservabilityService"| RegisterObs
   RegisterObs -->|"journey events (orcid_registration)"| RumService["RumJourneyEventService"]
-  RegisterGuard["RegisterGuard"] -->|"single events"| RumService
+  RegisterGuard["RegisterGuard"] -->|"simple events"| RumService
 ```
 
 ## Key events and where they fire
@@ -42,7 +42,7 @@ flowchart TD
 Journey events (`actionName = 'orcid_registration'`):
 
 - From `RegisterObservabilityService.initializeJourney(...)`:
-  - starts journey with context keys like `isReactivation`, `coulumn4`, `column8`, `column12`.
+  - starts journey with context keys like `isReactivation`, `coulumn4`, `column8`, `column12` (the key is emitted as `coulumn4` in code—use `journeyContext_coulumn4` in NRQL; fixing the spelling would be a breaking change for dashboards).
 - From `RegisterObservabilityService.stepLoaded(...)`:
   - `step-a-loaded`, `step-b-loaded`, `step-c2-loaded`, `step-c-loaded`, `step-d-loaded`.
 - From `RegisterObservabilityService` step actions:
