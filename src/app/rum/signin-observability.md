@@ -21,6 +21,10 @@ Primary emitters (paths relative to `src/app/`):
   - `eventType() = 'PageAction'`
   - `actionName = <eventName>`.
 
+## New Relic harvest on terminal outcomes
+
+Sign-in success, failure, HTTP transport errors, guard redirects, and related simple events are classified as **terminating** where applicable; after `addPageAction` succeeds, `RumJourneyEventService` calls `forceHarvestNow()` so events are pushed before possible navigation away. See [`terminating-rum-events.ts`](./terminating-rum-events.ts) and the overview in [RUM README — Terminating events and New Relic harvest](./README.md#terminating-events-and-new-relic-harvest-flush).
+
 ## Flow diagram
 
 ```mermaid

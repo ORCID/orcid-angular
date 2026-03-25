@@ -8,7 +8,7 @@ import { ErrorReport } from 'src/app/types'
 import { ERROR_REPORT } from 'src/app/errors'
 import { CookieService } from 'ngx-cookie-service'
 import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
-import { AppEventName } from 'src/app/register/app-event-names'
+import { AppEventName } from 'src/app/rum/app-event-names'
 
 @Injectable({
   providedIn: 'root',

@@ -11,7 +11,7 @@ import {
   AppEventName,
   stepBackButtonClickedEvent,
   stepLoadedEvent,
-} from './app-event-names'
+} from '../rum/app-event-names'
 import init from 'helphero'
 @Injectable({
   providedIn: 'root',

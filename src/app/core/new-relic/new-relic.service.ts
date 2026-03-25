@@ -16,6 +16,8 @@ export class NewRelicService {
   ) {}
 
   public init() {
+    ;(this.window as any).orcidForceRumHarvest = () => this.forceHarvestNow()
+
     this.togglzService
       .getStateOf(TogglzFlag.RUM)
       .pipe(take(1))
@@ -29,5 +31,25 @@ export class NewRelicService {
           ;(this.window as any).newrelic.start()
         }
       })
+  }
+
+  public forceHarvestNow() {
+    const initializedAgents =
+      (this.window as any)?.NREUM?.initializedAgents ??
+      ({} as Record<string, unknown>)
+    const agent = Object.values(initializedAgents)[0] as any
+    const harvester = agent?.runtime?.harvester
+    const initializedAggregates = harvester?.initializedAggregates ?? []
+
+    initializedAggregates.forEach((aggregate: any) => {
+      if (typeof aggregate?.makeHarvestPayload !== 'function') {
+        return
+      }
+      try {
+        harvester?.triggerHarvestFor?.(aggregate)
+      } catch {
+        // Never block navigation or user flow for telemetry.
+      }
+    })
   }
 }

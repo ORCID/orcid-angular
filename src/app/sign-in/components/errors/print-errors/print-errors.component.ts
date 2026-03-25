@@ -58,6 +58,6 @@ export class PrintErrorsComponent implements OnInit {
   }
 
   navigateTo(val) {
-    this.window.location.href = val
+    ;(this.window as any).outOfRouterNavigation(val)
   }
 }

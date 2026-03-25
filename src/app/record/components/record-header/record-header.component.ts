@@ -33,7 +33,7 @@ import {
   Affiliation,
 } from 'src/app/types/record-affiliation.endpoint'
 import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
-import { AppEventName } from 'src/app/register/app-event-names'
+import { AppEventName } from 'src/app/rum/app-event-names'
 
 @Component({
   selector: 'app-record-header',

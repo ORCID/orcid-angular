@@ -11,7 +11,7 @@ import { UserService } from '../core'
 import { PlatformInfoService } from '../cdk/platform-info'
 import { OauthService } from '../core/oauth/oauth.service'
 import { RumJourneyEventService } from '../rum/service/customEvent.service'
-import { AppEventName } from '../register/app-event-names'
+import { AppEventName } from '../rum/app-event-names'
 
 @Injectable({
   providedIn: 'root',

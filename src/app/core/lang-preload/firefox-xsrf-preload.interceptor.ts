@@ -9,7 +9,7 @@ import { Observable, Subject } from 'rxjs'
 import { switchMap, take } from 'rxjs/operators'
 import { CookieService } from 'ngx-cookie-service'
 import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
-import { AppEventName } from 'src/app/register/app-event-names'
+import { AppEventName } from 'src/app/rum/app-event-names'
 import { WINDOW } from 'src/app/cdk/window'
 import { Platform } from '@angular/cdk/platform'
 

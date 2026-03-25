@@ -12,7 +12,7 @@ Primary emitters (paths relative to `src/app/`):
 - `register/pages/register/register.component.ts`
 - `register/components/form-personal/form-personal.component.ts`
 - `register/components/form-password/form-password.component.ts`
-- `register/app-event-names.ts`
+- `rum/app-event-names.ts`
 
 Related pre-flow guard signal:
 
@@ -26,6 +26,10 @@ Related pre-flow guard signal:
   - logical event in `system_eventName`
   - journey context in `journeyContext_*`
   - per-event attrs in `eventAttribute_*`.
+
+## New Relic harvest on terminal outcomes
+
+Registration completion uses `finishJourney('orcid_registration')`, which **always** triggers a harvest after the final `addPageAction`. Pipeline failures (`register_pipeline_error`), `*-error` journey events from `reportRegisterErrorEvent`, and `journey-complete` are also treated as terminating for flush purposes. Details: [`terminating-rum-events.ts`](./terminating-rum-events.ts) and [RUM README — Terminating events and New Relic harvest](./README.md#terminating-events-and-new-relic-harvest-flush).
 
 ## Flow diagram
 

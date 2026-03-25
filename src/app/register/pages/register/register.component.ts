@@ -35,7 +35,7 @@ import { RegisterObservabilityService } from '../../register-observability.servi
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { OauthURLSessionManagerService } from 'src/app/core/oauth-urlsession-manager/oauth-urlsession-manager.service'
 import { TogglzFlag } from 'src/app/types/config.endpoint'
-import { AppEventName } from 'src/app/register/app-event-names'
+import { AppEventName } from 'src/app/rum/app-event-names'
 
 @Component({
   selector: 'app-register',
@@ -320,7 +320,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     if (isRedirectToTheAuthorizationPage(response)) {
       this._oauthURLSessionManagerService.clear()
       this._oauthURLSessionManagerService.setJustRegistered(true)
-      this.window.location.href = response.url
+      ;(this.window as any).outOfRouterNavigation(response.url)
     } else {
       if (
         response.url.indexOf('orcid.org/my-orcid') > 0 &&
@@ -335,7 +335,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             this.window.scrollTo(0, 0)
           })
       } else {
-        this.window.location.href = response.url
+        ;(this.window as any).outOfRouterNavigation(response.url)
       }
     }
   }

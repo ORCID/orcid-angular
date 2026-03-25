@@ -28,6 +28,10 @@ Primary emitters (paths relative to `src/app/`):
 - Simple signals:
   - `actionName = <eventName>` on `PageAction`.
 
+## New Relic harvest on terminal outcomes
+
+OAuth guard outcomes, the oauth-error page, and journey terminals such as `authorization_success`, `authorization_denied`, `authorization_error`, `authorization_logout`, and `error_page_loaded` are wired as **terminating** events: after a successful `addPageAction`, `RumJourneyEventService` triggers an immediate harvest so data is less likely to be lost on redirect or tab close. The exact name lists and rules are in [`terminating-rum-events.ts`](./terminating-rum-events.ts). Overview: [RUM README — Terminating events and New Relic harvest](./README.md#terminating-events-and-new-relic-harvest-flush).
+
 ## Flow diagram
 
 ```mermaid
@@ -36,7 +40,6 @@ flowchart TD
   FormAuthorize["FormAuthorizeComponent"] -->|"journey events (oauth_authorization)"| RumService
   FormAuthorize -->|"simple events"| RumService
   OauthErrorComponent["OauthErrorComponent"] -->|"journey events (oauth_authorization)"| RumService
-  OauthErrorComponent -->|"simple events"| RumService
   OauthService["OauthService"] -->|"simple events (includes legacy-only service events)"| RumService
   AuthorizeComponent["AuthorizeComponent"] -->|"simple events"| RumService
 ```
@@ -64,7 +67,6 @@ Simple OAuth-related events include:
 
 - Guard decisions (`oauth_authorize_guard_*`)
 - `oauth_authorize_page_already_authorized_redirect`
-- `oauth_authorization_validation_failed`
 - `oauth_authorize_auth_server_error_body`
 - `oauth_authorize_switch_delegated_account`
 - Legacy-only service events:
@@ -77,6 +79,7 @@ Journey view:
 
 - `FROM PageAction SELECT count(*) WHERE actionName = 'oauth_authorization' FACET system_eventName`
 - `FROM PageAction SELECT count(*) WHERE actionName = 'oauth_authorization' FACET journeyContext_justRegistered`
+- `FROM PageAction SELECT count(*) WHERE actionName = 'oauth_authorization' AND system_eventName = 'error_page_loaded' FACET eventAttribute_error_category`
 
 Simple OAuth events:
 

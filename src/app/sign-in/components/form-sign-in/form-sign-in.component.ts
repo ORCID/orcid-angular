@@ -44,7 +44,7 @@ import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { OauthURLSessionManagerService } from 'src/app/core/oauth-urlsession-manager/oauth-urlsession-manager.service'
 import { TogglzFlag } from 'src/app/types/config.endpoint'
 import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
-import { AppEventName } from 'src/app/register/app-event-names'
+import { AppEventName } from 'src/app/rum/app-event-names'
 
 @Component({
   selector: 'app-form-sign-in',
@@ -115,8 +115,7 @@ export class FormSignInComponent implements OnInit, OnDestroy {
     private _snackBar: SnackbarService,
     private _togglzService: TogglzService,
     private _oauthUrlSessionManager: OauthURLSessionManagerService,
-    private _observability: RumJourneyEventService,
-    @Inject(WINDOW) private _window: any
+    private _observability: RumJourneyEventService
   ) {
     this.signInLocal.type = this.signInType
     combineLatest([_userInfo.getUserSession(), _platformInfo.get()])
@@ -396,7 +395,7 @@ export class FormSignInComponent implements OnInit, OnDestroy {
       if (!urlRedirect.startsWith('https://')) {
         urlRedirect = `https://${urlRedirect}`
       }
-      this._window.outOfRouterNavigation(urlRedirect)
+      ;(this.window as any).outOfRouterNavigation(urlRedirect)
     } else {
       if (
         (this.platform.social || this.platform.institutional) &&
@@ -438,9 +437,9 @@ export class FormSignInComponent implements OnInit, OnDestroy {
   }
 
   navigateToClaim() {
-    this.window.location.href = `/resend-claim?email=${encodeURIComponent(
-      this.email
-    )}`
+    ;(this.window as any).outOfRouterNavigation(
+      `/resend-claim?email=${encodeURIComponent(this.email)}`
+    )
   }
 
   signInActiveAccount() {
@@ -495,10 +494,10 @@ export class FormSignInComponent implements OnInit, OnDestroy {
   }
 
   navigateTo(val: string): void {
-    if (val.indexOf('orcid.org/my-orcid')) {
+    if (val.indexOf('orcid.org/my-orcid') >= 0) {
       this._router.navigate(['/my-orcid'])
     } else {
-      this.window.location.href = val
+      ;(this.window as any).outOfRouterNavigation(val)
     }
   }
 

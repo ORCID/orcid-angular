@@ -34,5 +34,6 @@ The app sends events to **New Relic** (and optionally logs them in the console) 
 
 ### Event names: use the enum
 
-- **All event name strings** live in **`AppEventName`** in `src/app/register/app-event-names.ts`. Do not hardcode event names elsewhere.
+- **All event name strings** live in **`AppEventName`** in `src/app/rum/app-event-names.ts`. Do not hardcode event names elsewhere.
 - For **dynamic** names (e.g. `step-${step}-loaded`), add a small helper in the same file (e.g. `stepLoadedEvent(step)`) and use it when calling `recordEvent`.
+- **Terminal outcomes** (user leaves the flow, error screen, success that navigates away): add the event to **`src/app/rum/terminating-rum-events.ts`** so `RumJourneyEventService` triggers an immediate NR harvest after recording.

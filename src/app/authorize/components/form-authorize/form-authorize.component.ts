@@ -40,7 +40,7 @@ import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { OauthURLSessionManagerService } from 'src/app/core/oauth-urlsession-manager/oauth-urlsession-manager.service'
 import { TogglzFlag } from 'src/app/types/config.endpoint'
 import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
-import { AppEventName } from 'src/app/register/app-event-names'
+import { AppEventName } from 'src/app/rum/app-event-names'
 import { OauthAuthorizationContext } from 'src/app/rum/journeys/oauthAuthorization'
 import { oauthAuthorizeHttpFailureEventAttrs } from 'src/app/rum/oauth-authorize-http-failure-event-attrs'
 import { serializeQueryParamsForRum } from 'src/app/rum/serialize-oauth-query-for-rum'
@@ -178,7 +178,7 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
           this.performRedirect()
         })
     } else {
-      this.window.location.href = '/signout'
+      ;(this.window as any).outOfRouterNavigation('/signout')
     }
   }
 
@@ -188,7 +188,7 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
       ? new URLSearchParams(this.platformInfo.queryParameters).toString()
       : ''
     const signinUrl = queryParams ? `/signin?${queryParams}` : '/signin'
-    this.window.location.href = signinUrl
+    ;(this.window as any).outOfRouterNavigation(signinUrl)
   }
 
   authorize(value = true) {

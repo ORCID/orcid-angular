@@ -19,6 +19,11 @@ export interface OauthAuthorizationEventAttributes {
   errorCode?: string
   errorDescription?: string
   OAUTH_AUTHORIZATION?: boolean
+  surface?: string
+  error_category?: string
+  oauth_error?: string
+  oauth_error_code?: string
+  oauth_error_description?: string
   /** Registry `authorize.json` vs auth server `oauth2/authorize` (HTTP failure path). */
   oauth_authorize_endpoint?: 'legacy' | 'auth_server'
   /** Approve vs deny action that triggered the failed request. */

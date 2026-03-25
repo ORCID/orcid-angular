@@ -9,7 +9,7 @@ import { WINDOW } from '../../cdk/window'
 import { PlatformInfoService } from '../../cdk/platform-info'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
-import { AppEventName } from 'src/app/register/app-event-names'
+import { AppEventName } from 'src/app/rum/app-event-names'
 
 describe('OauthService', () => {
   let service: OauthService

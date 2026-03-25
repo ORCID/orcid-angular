@@ -36,7 +36,7 @@ import { objectToUrlParameters } from '../../constants'
 import { CookieService } from 'ngx-cookie-service'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
-import { AppEventName } from 'src/app/register/app-event-names'
+import { AppEventName } from 'src/app/rum/app-event-names'
 import { serializeQueryParamsForRum } from 'src/app/rum/serialize-oauth-query-for-rum'
 
 const OAUTH_SESSION_ERROR_CODES_HANDLE_BY_CLIENT_APP = [
