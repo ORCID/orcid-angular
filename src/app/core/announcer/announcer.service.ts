@@ -12,7 +12,7 @@ export class AnnouncerService {
   thereAreLabel = $localize`:@@shared.thereAre:There are`
   onEachPageLabel = $localize`:@@shared.onEachPage:on each page`
   showingLabel = $localize`:@@shared.showing:Showing`
-  oneTrustFocusAnnouncement = $localize`:@@layout.oneTrustFocusAnnouncement:Cookie consent dialog opened`
+  oneTrustFocusAnnouncement = $localize`:@@layout.oneTrustFocusAnnouncement:Cookie settings dialog opened. Focus moved to this dialog. Please review the options and make a choice to continue.`
   lastAnnouncement: string
 
   liveAnnouncePagination(paginatorLabel: PageEvent, itemType: string) {

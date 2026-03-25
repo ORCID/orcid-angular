@@ -47,6 +47,6 @@ export class SocialComponent implements OnInit {
   ngOnInit() {}
 
   navigateTo(val) {
-    ;(this.window as any).outOfRouterNavigation(val)
+    this.window.location.href = val
   }
 }

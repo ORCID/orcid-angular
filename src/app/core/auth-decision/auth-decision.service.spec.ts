@@ -188,7 +188,6 @@ describe('AuthDecisionService', () => {
       const qp = {} as OauthParameters
       const res = service.decideForAuthorize(session, true, qp)
       expect(res.action).toBe('redirectToMyOrcid')
-      expect(res.reason).toBe('account_locked')
     })
 
     it('redirects to login when no oauthSession', () => {
@@ -196,7 +195,6 @@ describe('AuthDecisionService', () => {
       const qp = {} as OauthParameters
       const res = service.decideForAuthorize(session, true, qp)
       expect(res.action).toBe('redirectToLogin')
-      expect(res.reason).toBe('no_oauth_session')
     })
   })
 
@@ -257,7 +255,6 @@ describe('AuthDecisionService', () => {
       expect(res.action).toBe('validateRedirectUri')
       expect((res.payload as any).clientId).toBe('c')
       expect((res.payload as any).redirectUri).toBe('https://cb')
-      expect(res.reason).toBe('prompt_none_not_logged')
     })
 
     it("returns outOfRouterNavigation when prompt='none', logged, scope=openId and redirectUrl exists", () => {
@@ -272,7 +269,6 @@ describe('AuthDecisionService', () => {
       const res = service.decideForAuthorize(session, true, qp)
       expect(res.action).toBe('outOfRouterNavigation')
       expect((res.payload as any).target).toBe('https://cb#something')
-      expect(res.reason).toBe('prompt_none_logged_openid_with_target')
     })
 
     it("allows when prompt='none', logged, scope=openId but missing backend redirectUrl", () => {

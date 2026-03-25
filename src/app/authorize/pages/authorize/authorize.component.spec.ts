@@ -15,9 +15,7 @@ import { UserService } from '../../../core'
 import { RecordService } from '../../../core/record/record.service'
 import { LoginMainInterstitialsManagerService } from 'src/app/core/login-interstitials-manager/login-main-interstitials-manager.service'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
-import { TogglzFlag } from 'src/app/types/config.endpoint'
 import { OauthURLSessionManagerService } from 'src/app/core/oauth-urlsession-manager/oauth-urlsession-manager.service'
-import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
 
 import { AuthorizeComponent } from './authorize.component'
 
@@ -37,7 +35,6 @@ describe('AuthorizeComponent', () => {
   let loginInterstitialsSpy: jasmine.SpyObj<LoginMainInterstitialsManagerService>
   let togglzSpy: jasmine.SpyObj<TogglzService>
   let oauthUrlSessionSpy: jasmine.SpyObj<OauthURLSessionManagerService>
-  let rumSpy: jasmine.SpyObj<RumJourneyEventService>
   let windowMock: any
 
   beforeEach(() => {
@@ -53,9 +50,6 @@ describe('AuthorizeComponent', () => {
     togglzSpy = jasmine.createSpyObj('TogglzService', ['getStateOf'])
     oauthUrlSessionSpy = jasmine.createSpyObj('OauthURLSessionManagerService', [
       'clear',
-    ])
-    rumSpy = jasmine.createSpyObj('RumJourneyEventService', [
-      'recordSimpleEvent',
     ])
 
     windowMock = {
@@ -94,7 +88,6 @@ describe('AuthorizeComponent', () => {
           provide: OauthURLSessionManagerService,
           useValue: oauthUrlSessionSpy,
         },
-        { provide: RumJourneyEventService, useValue: rumSpy },
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
@@ -113,7 +106,7 @@ describe('AuthorizeComponent', () => {
 
   it('ngOnInit: sets OAUTH2_AUTHORIZATION_ENABLE from OAUTH_AUTHORIZATION flag', () => {
     togglzSpy.getStateOf.and.callFake((flag: string) =>
-      of(flag === TogglzFlag.OAUTH_AUTHORIZATION)
+      of(flag === 'OAUTH_AUTHORIZATION')
     )
     createComponent()
     expect((component as any).OAUTH2_AUTHORIZATION_ENABLE).toBeTrue()
@@ -174,12 +167,12 @@ describe('AuthorizeComponent', () => {
     expect(component.loading).toBeFalse()
   })
 
-  it('handleOauthSession: already authorized without interstitial -> redirects', () => {
+  it('handleOauthSession: already authorized without interstitial -> redirects', fakeAsync(() => {
     createComponent()
 
     togglzSpy.getStateOf.and.callFake((flag: string) => {
-      if (flag === TogglzFlag.OAUTH2_AUTHORIZATION) return of(true)
-      if (flag === TogglzFlag.OAUTH_AUTHORIZATION) return of(true)
+      if (flag === 'OAUTH2_AUTHORIZATION') return of(true)
+      if (flag === 'OAUTH_AUTHORIZATION') return of(true)
       return of(false)
     })
 
@@ -190,19 +183,19 @@ describe('AuthorizeComponent', () => {
 
     ;(component as any).OAUTH2_AUTHORIZATION_ENABLE = false
     ;(component as any).handleOauthSession(session)
+    tick()
 
     expect(oauthUrlSessionSpy.clear).toHaveBeenCalledTimes(1) // because flag true in finishRedirect
     expect(windowMock.outOfRouterNavigation).toHaveBeenCalledWith(
       '/go?code=123'
     )
-    expect(rumSpy.recordSimpleEvent).toHaveBeenCalled()
-  })
+  }))
 
-  it('handleOauthSession (oauth2): already authorized without interstitial -> redirects and clears', () => {
+  it('handleOauthSession (oauth2): already authorized without interstitial -> redirects and clears', fakeAsync(() => {
     createComponent()
     ;(component as any).OAUTH2_AUTHORIZATION_ENABLE = true
     togglzSpy.getStateOf.and.callFake((flag: string) =>
-      of(flag === TogglzFlag.OAUTH2_AUTHORIZATION)
+      of(flag === 'OAUTH2_AUTHORIZATION')
     )
 
     const session = {
@@ -211,11 +204,11 @@ describe('AuthorizeComponent', () => {
     } as any
 
     ;(component as any).handleOauthSession(session)
+    tick()
 
     expect(oauthUrlSessionSpy.clear).toHaveBeenCalledTimes(1)
     expect(windowMock.outOfRouterNavigation).toHaveBeenCalledWith('/ok')
-    expect(rumSpy.recordSimpleEvent).toHaveBeenCalled()
-  })
+  }))
 
   it('handleOauthSession: already authorized WITH interstitial -> schedules interstitial', fakeAsync(() => {
     createComponent()
@@ -375,40 +368,43 @@ describe('AuthorizeComponent', () => {
     expect(finishSpy).toHaveBeenCalled()
   })
 
-  it('finishRedirect: togglz true -> clears session and navigates', () => {
+  it('finishRedirect: togglz true -> clears session and navigates', fakeAsync(() => {
     createComponent()
     ;(component as any).redirectUrl = '/final'
 
     togglzSpy.getStateOf.and.callFake((flag: string) => {
-      if (flag === TogglzFlag.OAUTH2_AUTHORIZATION) return of(true)
+      if (flag === 'OAUTH2_AUTHORIZATION') return of(true)
       return of(false)
     })
     ;(component as any).finishRedirect().subscribe()
+    tick()
 
     expect(oauthUrlSessionSpy.clear).toHaveBeenCalled()
     expect(windowMock.outOfRouterNavigation).toHaveBeenCalledWith('/final')
-  })
+  }))
 
-  it('finishRedirect: togglz false -> navigates without clearing', () => {
+  it('finishRedirect: togglz false -> navigates without clearing', fakeAsync(() => {
     createComponent()
     ;(component as any).redirectUrl = '/final'
 
     togglzSpy.getStateOf.and.returnValue(of(false))
     ;(component as any).finishRedirect().subscribe()
+    tick()
 
     expect(oauthUrlSessionSpy.clear).not.toHaveBeenCalled()
     expect(windowMock.outOfRouterNavigation).toHaveBeenCalledWith('/final')
-  })
+  }))
 
-  it('finishRedirect: undefined redirectUrl still calls navigation', () => {
+  it('finishRedirect: undefined redirectUrl still calls navigation', fakeAsync(() => {
     createComponent()
     ;(component as any).redirectUrl = undefined as any
 
     togglzSpy.getStateOf.and.returnValue(of(false))
     ;(component as any).finishRedirect().subscribe()
+    tick()
 
     expect(windowMock.outOfRouterNavigation).toHaveBeenCalledWith(undefined)
-  })
+  }))
 
   describe('isUserAlreadyAuthorized', () => {
     it('legacy oauth: true when redirectUrl contains responseType param', () => {

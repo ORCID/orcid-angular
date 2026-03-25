@@ -215,7 +215,7 @@ export class InstitutionalComponent implements OnInit {
   }
 
   navigateTo(val) {
-    ;(this.window as any).outOfRouterNavigation(val)
+    this.window.location.href = val
   }
 
   handleImgError(ev: any) {

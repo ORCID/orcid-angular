@@ -9,12 +9,8 @@ import { OauthParameters } from 'src/app/types'
 import { LegacyOauthRequestInfoForm as RequestInfoForm } from 'src/app/types/request-info-form.endpoint'
 import { UserSession } from 'src/app/types/session.local'
 import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
+import { JourneyType } from 'src/app/rum/journeys/types'
 import { TogglzFlag } from 'src/app/types/config.endpoint'
-import { AppEventName } from 'src/app/rum/app-event-names'
-import { getOauthAuthorizationErrorCategory } from 'src/app/rum/oauth-authorization-error-category'
-import { OauthAuthorizationContext } from 'src/app/rum/journeys/oauthAuthorization'
-import { serializeQueryParamsForRum } from 'src/app/rum/serialize-oauth-query-for-rum'
-import { OauthURLSessionManagerService } from 'src/app/core/oauth-urlsession-manager/oauth-urlsession-manager.service'
 
 @Component({
   selector: 'app-oauth-error',
@@ -40,8 +36,7 @@ export class OauthErrorComponent implements OnInit, OnDestroy {
     private _platformInfo: PlatformInfoService,
     private _zendesk: ZendeskService,
     private _togglz: TogglzService,
-    private _observability: RumJourneyEventService,
-    private _oauthURLSessionManagerService: OauthURLSessionManagerService
+    private _observability: RumJourneyEventService
   ) {
     combineLatest([_userInfo.getUserSession(), this._platformInfo.get()])
       .pipe(takeUntil(this.$destroy))
@@ -57,35 +52,19 @@ export class OauthErrorComponent implements OnInit, OnDestroy {
 
         // Initialize journey and record initial error context once
         if (!this.oauthJourneyStarted) {
-          const justRegistered =
-            this._oauthURLSessionManagerService.consumeJustRegistered()
           this._observability.startJourney('oauth_authorization', {
             client_id: this.queryParams?.client_id,
             redirect_uri: this.queryParams?.redirect_uri,
             response_type: this.queryParams?.response_type,
             scope: this.queryParams?.scope,
-            justRegistered: justRegistered ? true : undefined,
-            oauth_query_string: serializeQueryParamsForRum(
-              platform.queryParameters
-            ),
           })
           this._observability.recordEvent(
             'oauth_authorization',
-            AppEventName.OauthErrorPageLoaded,
+            'error_page_loaded',
             {
               error: this.error,
               errorCode: this.errorCode,
               errorDescription: this.errorDescription,
-              surface: 'oauth_error_page',
-              error_category: getOauthAuthorizationErrorCategory(
-                this.error,
-                this.errorCode
-              ),
-              oauth_error: this.error,
-              oauth_error_code: this.errorCode,
-              oauth_error_description: String(
-                this.errorDescription ?? ''
-              ).slice(0, 500),
             }
           )
           this.oauthJourneyStarted = true
@@ -104,9 +83,14 @@ export class OauthErrorComponent implements OnInit, OnDestroy {
           } else {
             this.TOGGLZ_OAUTH_AUTHORIZATION = false
           }
-          this._observability.updateJourneyContext('oauth_authorization', {
-            OAUTH_AUTHORIZATION: this.TOGGLZ_OAUTH_AUTHORIZATION,
-          } as Partial<OauthAuthorizationContext>)
+          // Report feature flag status
+          this._observability.recordEvent(
+            'oauth_authorization',
+            'flag_status',
+            {
+              OAUTH_AUTHORIZATION: this.TOGGLZ_OAUTH_AUTHORIZATION,
+            }
+          )
         })
       )
       .subscribe()

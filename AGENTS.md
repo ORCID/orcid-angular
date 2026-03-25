@@ -25,7 +25,7 @@ When a dialog or view needs data from an HTTP (or other async) call, opening the
 
 ## RUM / Observability
 
-The app sends events to **New Relic** (and optionally logs them in the console) for analytics and debugging. The central service is **`RumJourneyEventService`** (`src/app/rum/service/customEvent.service.ts`). For a fuller overview (simple vs journey events, sign-in/OAuth naming), see **`src/app/rum/README.md`**.
+The app sends events to **New Relic** (and optionally logs them in the console) for analytics and debugging. The central service is **`RumJourneyEventService`** (`src/app/rum/service/customEvent.service.ts`).
 
 ### Two ways to record events
 
@@ -34,6 +34,5 @@ The app sends events to **New Relic** (and optionally logs them in the console) 
 
 ### Event names: use the enum
 
-- **All event name strings** live in **`AppEventName`** in `src/app/rum/app-event-names.ts`. Do not hardcode event names elsewhere.
+- **All event name strings** live in **`AppEventName`** in `src/app/register/app-event-names.ts`. Do not hardcode event names elsewhere.
 - For **dynamic** names (e.g. `step-${step}-loaded`), add a small helper in the same file (e.g. `stepLoadedEvent(step)`) and use it when calling `recordEvent`.
-- **Terminal outcomes** (user leaves the flow, error screen, success that navigates away): add the event to **`src/app/rum/terminating-rum-events.ts`** so `RumJourneyEventService` triggers an immediate NR harvest after recording.

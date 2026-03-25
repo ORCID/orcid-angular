@@ -16,11 +16,6 @@ export interface AuthDecisionResult {
   action: AuthDecisionAction
   trace: string[]
   payload?: unknown
-  /**
-   * Stable machine-friendly reason code for observability and analytics.
-   * Keep compact and avoid embedding user input.
-   */
-  reason?: string
 }
 
 @Injectable({ providedIn: 'root' })
@@ -38,7 +33,7 @@ export class AuthDecisionService {
 
     if (!hasOauth) {
       trace.push('No oauthSession → allow to show login')
-      return { action: 'allow', trace, reason: 'no_oauth_session' }
+      return { action: 'allow', trace }
     }
 
     if (!isOauthAuthorizationTogglzEnable) {
@@ -73,34 +68,24 @@ export class AuthDecisionService {
           }`
         )
         return userExists
-          ? { action: 'allow', trace, reason: 'identifier_user_exists' }
-          : {
-              action: 'redirectToRegister',
-              trace,
-              payload: { queryParams },
-              reason: 'identifier_user_missing',
-            }
+          ? { action: 'allow', trace }
+          : { action: 'redirectToRegister', trace, payload: { queryParams } }
       }
       trace.push('Legacy: allow (no identifier)')
-      return { action: 'allow', trace, reason: 'not_logged_no_identifier' }
+      return { action: 'allow', trace }
     }
 
     if (!session.oauthSession?.forceLogin) {
       trace.push(
         'Legacy: logged in and backend responds with forceLogin=false → redirectToAuthorize'
       )
-      return {
-        action: 'redirectToAuthorize',
-        trace,
-        payload: { queryParams },
-        reason: 'logged_in_not_force_login',
-      }
+      return { action: 'redirectToAuthorize', trace, payload: { queryParams } }
     }
 
     trace.push(
       'Legacy: Backend responds with forceLogin=true → allow to show login'
     )
-    return { action: 'allow', trace, reason: 'force_login_required' }
+    return { action: 'allow', trace }
   }
 
   private decideSignInOAuth2(
@@ -117,15 +102,10 @@ export class AuthDecisionService {
       trace.push('OAuth2: not logged in')
       if (showLoginIsFalse) {
         trace.push("OAuth2: show_login === 'false' → redirectToRegister")
-        return {
-          action: 'redirectToRegister',
-          trace,
-          payload: { queryParams },
-          reason: 'show_login_false',
-        }
+        return { action: 'redirectToRegister', trace, payload: { queryParams } }
       }
       trace.push('OAuth2: allow (go to login)')
-      return { action: 'allow', trace, reason: 'not_logged' }
+      return { action: 'allow', trace }
     }
 
     // HANDLE CASES WHERE THE USER IS LOGGED IN
@@ -135,15 +115,10 @@ export class AuthDecisionService {
       trace.push(
         'OAuth2: logged in and not prompt=login on openid → redirectToAuthorize'
       )
-      return {
-        action: 'redirectToAuthorize',
-        trace,
-        payload: { queryParams },
-        reason: 'logged_in_not_forced_prompt_login',
-      }
+      return { action: 'redirectToAuthorize', trace, payload: { queryParams } }
     }
     trace.push('OAuth2: prompt=login with openid → allow (show login)')
-    return { action: 'allow', trace, reason: 'prompt_login_with_openid' }
+    return { action: 'allow', trace }
   }
 
   decideForAuthorize(
@@ -155,11 +130,7 @@ export class AuthDecisionService {
 
     if (session?.userInfo?.LOCKED === 'true') {
       trace.push('Account locked → redirectToMyOrcid')
-      return {
-        action: 'redirectToMyOrcid',
-        trace,
-        reason: 'account_locked',
-      }
+      return { action: 'redirectToMyOrcid', trace }
     }
 
     const hasOauth = !!session?.oauthSession
@@ -176,7 +147,7 @@ export class AuthDecisionService {
     }
 
     trace.push('No oauthSession → redirectToLogin')
-    return { action: 'redirectToLogin', trace, reason: 'no_oauth_session' }
+    return { action: 'redirectToLogin', trace }
   }
 
   private decideAuthorizeLegacy(
@@ -186,18 +157,14 @@ export class AuthDecisionService {
     const { error, forceLogin } = session.oauthSession || ({} as any)
     if (error) {
       trace.push('Legacy: error present → allow (show error)')
-      return { action: 'allow', trace, reason: 'legacy_session_error' }
+      return { action: 'allow', trace }
     }
     if (forceLogin || !session.oauthSessionIsLoggedIn) {
       trace.push('Legacy: forceLogin or not logged → redirectToLogin')
-      return {
-        action: 'redirectToLogin',
-        trace,
-        reason: forceLogin ? 'legacy_force_login' : 'legacy_not_logged',
-      }
+      return { action: 'redirectToLogin', trace }
     }
     trace.push('Legacy: allow')
-    return { action: 'allow', trace, reason: 'legacy_allow' }
+    return { action: 'allow', trace }
   }
 
   private decideAuthorizeOAuth2(
@@ -217,7 +184,6 @@ export class AuthDecisionService {
           clientId: queryParams.client_id,
           redirectUri: queryParams.redirect_uri,
         },
-        reason: 'prompt_none_not_logged',
       }
     }
 
@@ -227,39 +193,22 @@ export class AuthDecisionService {
         trace.push(
           "OAuth2: prompt='none' (openid) and logged with and backend responds with redirectUrl → outOfRouterNavigation"
         )
-        return {
-          action: 'outOfRouterNavigation',
-          trace,
-          payload: { target },
-          reason: 'prompt_none_logged_openid_with_target',
-        }
+        return { action: 'outOfRouterNavigation', trace, payload: { target } }
       }
       trace.push(
         "OAuth2: prompt='none' but not openid or missing redirectUrl → allow"
       )
-      return {
-        action: 'allow',
-        trace,
-        reason: isOpenId
-          ? 'prompt_none_logged_openid_missing_target'
-          : 'prompt_none_logged_non_openid',
-      }
+      return { action: 'allow', trace }
     }
 
     if (!session.oauthSessionIsLoggedIn || forceLoginByPrompt) {
       trace.push(
         'OAuth2: not logged or forced by prompt+openid → redirectToLogin'
       )
-      return {
-        action: 'redirectToLogin',
-        trace,
-        reason: !session.oauthSessionIsLoggedIn
-          ? 'oauth2_not_logged'
-          : 'prompt_login_with_openid',
-      }
+      return { action: 'redirectToLogin', trace }
     }
 
     trace.push('OAuth2: allow')
-    return { action: 'allow', trace, reason: 'oauth2_allow' }
+    return { action: 'allow', trace }
   }
 }
