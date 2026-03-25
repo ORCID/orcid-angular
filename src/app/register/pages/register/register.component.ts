@@ -286,7 +286,10 @@ export class RegisterComponent implements OnInit, AfterViewInit {
                   'unknown',
               }
             )
-          },
+            this._errorHandler
+              .handleError(error, ERROR_REPORT.REGISTER)
+              .subscribe()
+          }
         })
     } else {
       this.loading = false

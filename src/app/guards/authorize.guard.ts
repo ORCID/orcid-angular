@@ -99,6 +99,13 @@ export class AuthorizeGuard implements CanActivateChild {
                 ),
               }
             )
+            if (!target) {
+              this.featureLogger.error(
+                'Authorize Guard',
+                'Missing outOfRouterNavigation target → /404'
+              )
+              return of(this.router.createUrlTree(['/404']))
+            }
             this.navigateOutOfRouterWithRumFlush(target)
             return NEVER
           }

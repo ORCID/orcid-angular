@@ -1,11 +1,11 @@
-import { TestBed } from '@angular/core/testing'
+import { TestBed, fakeAsync, tick } from '@angular/core/testing'
 import {
   Router,
   UrlTree,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
 } from '@angular/router'
-import { of, firstValueFrom, NEVER, from, timeout } from 'rxjs'
+import { of, firstValueFrom } from 'rxjs'
 
 import { AuthorizeGuard } from './authorize.guard'
 import { UserService } from '../core'
@@ -135,20 +135,47 @@ describe('AuthorizeGuard', () => {
       expect(result).toEqual(stubUrlTree('/my-orcid'))
     })
 
-    it('triggers outOfRouterNavigation when action is outOfRouterNavigation', async () => {
+    it('triggers delayed outOfRouterNavigation when action is outOfRouterNavigation', fakeAsync(() => {
+      togglz.getStateOf.and.returnValue(of(true))
+      user.getUserSession.and.returnValue(of({ oauthSession: {} } as any))
       decisionMock.decideForAuthorize.and.returnValue({
         action: 'outOfRouterNavigation',
         trace: [],
         payload: { target: 'https://cb' },
       })
-      const result = runGuardHelper({}, { oauthSession: {} }, true)
+      const result$ = guard.canActivateChild(
+        makeSnapshot({}),
+        {} as RouterStateSnapshot
+      )
+      let resolved = false
+      firstValueFrom(result$)
+        .then(() => {
+          resolved = true
+        })
+        .catch(() => {})
+
+      tick(149)
+      expect(win.outOfRouterNavigation).not.toHaveBeenCalled()
+      expect(resolved).toBeFalse()
+
+      tick(1)
       expect(win.outOfRouterNavigation).toHaveBeenCalledWith('https://cb')
-      // Expect a promise that never resolves
-      expect(result).toBeInstanceOf(Promise)
-      // Test that it never emits by trying to get first value with timeout
-      await expectAsync(
-        firstValueFrom(from(result).pipe(timeout(100)))
-      ).toBeRejected()
+      // This branch intentionally returns NEVER after redirecting.
+      expect(resolved).toBeFalse()
+    }))
+
+    it("returns UrlTree '/404' when outOfRouterNavigation target is missing", async () => {
+      router.createUrlTree.and.returnValue(stubUrlTree('/404'))
+      decisionMock.decideForAuthorize.and.returnValue({
+        action: 'outOfRouterNavigation',
+        trace: [],
+        payload: {},
+      })
+
+      const result = await runGuardHelper({}, { oauthSession: {} }, true)
+      expect(win.outOfRouterNavigation).not.toHaveBeenCalled()
+      expect(router.createUrlTree).toHaveBeenCalledWith(['/404'])
+      expect(result).toEqual(stubUrlTree('/404'))
     })
 
     it('validates redirect and navigates when action is validateRedirectUri', async () => {
