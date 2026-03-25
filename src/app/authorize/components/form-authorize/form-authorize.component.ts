@@ -76,6 +76,9 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
 
   /** RUM: `combineLatest` emits on every session/platform update; journey must start once. */
   private oauthAuthorizationJourneyStarted = false
+  private oauthLogoutReported = false
+  private oauthPageLoadedReported = false
+  private justRegisteredFromRegistration = false
 
   constructor(
     @Inject(WINDOW) private window: Window,
@@ -112,6 +115,8 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
         this.oauthRequest = userInfo.oauthSession
         // Session request info may omit fields that are still on the URL; merge for RUM.
         if (!this.oauthAuthorizationJourneyStarted) {
+          this.justRegisteredFromRegistration =
+            this._oauthURLSessionManagerService.consumeJustRegistered()
           this._observability.startJourney(
             'oauth_authorization',
             this.buildOauthAuthorizationJourneyContext(
@@ -123,10 +128,19 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
           this.oauthAuthorizationJourneyStarted = true
         }
         if (userInfo.loggedIn) {
+          this.oauthLogoutReported = false
           this.userName = userInfo.displayName
           this.orcidUrl = userInfo.effectiveOrcidUrl
+          if (!this.oauthPageLoadedReported) {
+            this._observability.recordEvent(
+              'oauth_authorization',
+              AppEventName.OauthAuthorizationPageLoaded
+            )
+            this.oauthPageLoadedReported = true
+          }
         } else {
           // if the user logouts in the middle of a oauth section on another tab
+          this.reportOauthAuthorizationLogout('session_logged_out')
           this._router.navigate([ApplicationRoutes.signin], {
             queryParams: platform.queryParameters,
           })
@@ -149,6 +163,7 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
   }
 
   logout() {
+    this.reportOauthAuthorizationLogout('user_initiated_logout')
     if (this.OAUTH_AUTHORIZATION) {
       this._user
         .noRedirectLogout()
@@ -348,6 +363,22 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
     this.$destroy.unsubscribe()
   }
 
+  private reportOauthAuthorizationLogout(
+    reason: 'session_logged_out' | 'user_initiated_logout'
+  ): void {
+    if (this.oauthLogoutReported || !this.oauthAuthorizationJourneyStarted) {
+      return
+    }
+    this._observability.recordEvent(
+      'oauth_authorization',
+      AppEventName.OauthAuthorizationLogout,
+      {
+        oauth_logout_reason: reason,
+      }
+    )
+    this.oauthLogoutReported = true
+  }
+
   /**
    * Prefer server session fields; fall back to URL query params so journey context
    * matches the browser address bar when the session is partial (common locally).
@@ -372,6 +403,7 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
         query?.response_type ||
         undefined,
       scope: scopeFromSession || scopeFromQuery || undefined,
+      justRegistered: this.justRegisteredFromRegistration ? true : undefined,
       acting_as_trusted_user: session?.userInfo?.IN_DELEGATION_MODE === 'true',
       delegated_by_admin: session?.userInfo?.DELEGATED_BY_ADMIN === 'true',
       oauth_query_string: serializeQueryParamsForRum(queryParams),

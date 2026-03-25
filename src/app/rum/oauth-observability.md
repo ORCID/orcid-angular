@@ -45,12 +45,20 @@ flowchart TD
 
 Journey events (`actionName = oauth_authorization`):
 
+- `authorization_page_loaded`
 - `error_page_loaded`
 - `authorization_success`
 - `authorization_denied`
 - `authorization_error`
+- `authorization_logout` (logout interruption marker inside the OAuth journey)
 
-`OAUTH_AUTHORIZATION` is now carried in journey context (not emitted as a standalone journey event).
+Key journey context fields:
+
+- `journeyContext_OAUTH_AUTHORIZATION` (feature-flag state)
+- `journeyContext_justRegistered` (true only when OAuth starts immediately after successful registration)
+
+`OAUTH_AUTHORIZATION` is carried in journey context (not emitted as a standalone journey event).
+`justRegistered` is a one-time internal handoff flag (stored client-side), not a URL query parameter on OAuth authorize URLs.
 
 Simple OAuth-related events include:
 
@@ -68,6 +76,7 @@ Simple OAuth-related events include:
 Journey view:
 
 - `FROM PageAction SELECT count(*) WHERE actionName = 'oauth_authorization' FACET system_eventName`
+- `FROM PageAction SELECT count(*) WHERE actionName = 'oauth_authorization' FACET journeyContext_justRegistered`
 
 Simple OAuth events:
 
@@ -80,8 +89,10 @@ Legacy-only OAuth events:
 ## Troubleshooting / gotchas
 
 - `recordEvent(...)` is dropped when the journey was not started.
+- Mid-session logout paths record `authorization_logout` with `eventAttribute_oauth_logout_reason` (`session_logged_out` or `user_initiated_logout`) inside the same journey.
+- Success/deny redirects use a short client-side delay (~400ms) before `outOfRouterNavigation(...)` to improve event delivery reliability for `authorization_success` / `authorization_denied`.
 - `access_denied` from auth server is treated as an expected deny outcome path, not a service error.
 - OAuth telemetry is intentionally layered with global `http_error` / `client_error` from `ErrorHandlerService`; dual signals are expected.
 - The auth-server vs legacy endpoint split is tracked in OAuth error attrs (`oauth_authorize_endpoint`) where applicable.
-- OAuth emitters avoid personal fields by design, and telemetry payloads are also sanitized before send; ORCID iDs, emails, and PID-like identifiers are not forwarded to New Relic.
+- OAuth emitters avoid personal fields by design, and telemetry payloads are sanitized before send; ORCID iDs, emails, and PID-like identifiers are obfuscated into hint strings before forwarding to New Relic.
 

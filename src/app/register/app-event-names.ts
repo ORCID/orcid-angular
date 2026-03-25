@@ -26,9 +26,12 @@ export enum AppEventName {
 
   // ─── OAuth authorization journey events ────────────────────────────────────
   OauthErrorPageLoaded = 'error_page_loaded',
+  OauthAuthorizationPageLoaded = 'authorization_page_loaded',
   OauthAuthorizationSuccess = 'authorization_success',
   OauthAuthorizationDenied = 'authorization_denied',
   OauthAuthorizationError = 'authorization_error',
+  /** OAuth journey: user logged out in the middle of authorization flow. */
+  OauthAuthorizationLogout = 'authorization_logout',
   /** Authorize route guard: redirect_uri validated; navigating away with `#login_required`. */
   OauthAuthorizeGuardLoginRequiredRedirect = 'oauth_authorize_guard_login_required_redirect',
   /** Authorize route guard: redirect_uri failed validation → app 404. */

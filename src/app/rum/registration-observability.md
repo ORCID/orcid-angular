@@ -64,6 +64,7 @@ Journey events (`actionName = 'orcid_registration'`):
 - Completion events:
   - `journey-complete` emitted by `RegisterObservabilityService.completeJourney(...)`.
   - `journey_finished` emitted by `finishJourney(...)` immediately after completion.
+  - `eventAttribute_redirectUrl` contains the backend-provided redirect URL (not rewritten to append `justRegistered`).
 
 Simple events (outside `orcid_registration` journey):
 
@@ -89,4 +90,5 @@ Guard exits:
 - Registration is mostly journey-based; querying by simple `actionName = 'register_*'` misses main funnel steps.
 - Missing completion metrics often indicate redirect/response edge cases before `completeJourney(...)`.
 - Reactivation and layout context are carried in journey context fields and should be used for segmentation.
+- Post-registration OAuth attribution is carried by the OAuth journey context (`journeyContext_justRegistered`) via an internal one-time client handoff, not by mutating OAuth query parameters.
 

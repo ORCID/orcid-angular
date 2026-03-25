@@ -316,6 +316,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     })
     if (isRedirectToTheAuthorizationPage(response)) {
       this._oauthURLSessionManagerService.clear()
+      this._oauthURLSessionManagerService.setJustRegistered(true)
       this.window.location.href = response.url
     } else {
       if (

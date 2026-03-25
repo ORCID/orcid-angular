@@ -1,6 +1,6 @@
 import { ComponentType } from '@angular/cdk/overlay'
 import { Component, Inject, ViewChild } from '@angular/core'
-import { Observable, forkJoin, of } from 'rxjs'
+import { Observable, forkJoin, of, timer } from 'rxjs'
 import {
   filter,
   finalize,
@@ -33,6 +33,10 @@ import { AppEventName } from 'src/app/register/app-event-names'
   standalone: false,
 })
 export class AuthorizeComponent {
+  /**
+   * Small delay to increase odds that RUM events are harvested before leaving app.
+   */
+  private static readonly RUM_REDIRECT_FLUSH_DELAY_MS = 400
   @ViewChild('interstitialOutlet', { static: false, read: CdkPortalOutlet })
   outlet!: CdkPortalOutlet
 
@@ -124,12 +128,17 @@ export class AuthorizeComponent {
    */
   private finishRedirect(): Observable<boolean> {
     return this.toglzService.getStateOf(TogglzFlag.OAUTH2_AUTHORIZATION).pipe(
-      tap((useAuthServerFlag) => {
+      switchMap((useAuthServerFlag) => {
         if (useAuthServerFlag === true) {
           this.oauthUrlSessionManger.clear()
         }
         this.log.info('Redirecting', this.redirectUrl)
-        ;(this.window as any).outOfRouterNavigation(this.redirectUrl)
+        return timer(AuthorizeComponent.RUM_REDIRECT_FLUSH_DELAY_MS).pipe(
+          tap(() => {
+            ;(this.window as any).outOfRouterNavigation(this.redirectUrl)
+          }),
+          mapTo(true)
+        )
       })
     )
   }

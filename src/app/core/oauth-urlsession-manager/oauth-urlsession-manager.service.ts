@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core'
 
 const LOCALSTORAGE_KEY = 'oauthRedirectUrl'
+const LOCALSTORAGE_JUST_REGISTERED_KEY = 'oauthJustRegistered'
 
 /**
  * 30 minutes expressed in milliseconds.
@@ -11,6 +12,11 @@ interface StoredRedirect {
   /** Full OAuth URL (query string and all) */
   url: string
   /** Epoch-millis when this entry should be considered expired */
+  expiresAt: number
+}
+
+interface StoredBooleanFlag {
+  value: boolean
   expiresAt: number
 }
 
@@ -37,6 +43,17 @@ export class OauthURLSessionManagerService {
     }
 
     localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(payload))
+  }
+
+  /**
+   * Persist a one-time flag indicating OAuth flow continues right after registration.
+   */
+  setJustRegistered(value = true): void {
+    const payload: StoredBooleanFlag = {
+      value: !!value,
+      expiresAt: Date.now() + EXPIRATION_MS,
+    }
+    localStorage.setItem(LOCALSTORAGE_JUST_REGISTERED_KEY, JSON.stringify(payload))
   }
 
   /**
@@ -72,6 +89,28 @@ export class OauthURLSessionManagerService {
    */
   clear(): void {
     localStorage.removeItem(LOCALSTORAGE_KEY)
+    localStorage.removeItem(LOCALSTORAGE_JUST_REGISTERED_KEY)
+  }
+
+  /**
+   * Read and clear one-time post-registration flag.
+   */
+  consumeJustRegistered(): boolean {
+    const raw = localStorage.getItem(LOCALSTORAGE_JUST_REGISTERED_KEY)
+    if (!raw) {
+      return false
+    }
+    try {
+      const payload = JSON.parse(raw) as StoredBooleanFlag
+      if (payload.expiresAt && payload.expiresAt > Date.now()) {
+        return !!payload.value
+      }
+    } catch {
+      // Ignore malformed payload and return false.
+    } finally {
+      localStorage.removeItem(LOCALSTORAGE_JUST_REGISTERED_KEY)
+    }
+    return false
   }
 
   /**

@@ -13,7 +13,37 @@ const BLOCKED_RUM_KEY_PATTERN =
 const ORCID_VALUE_PATTERN = /\b\d{4}-\d{4}-\d{4}-\d{3}[\dX]\b/i
 const EMAIL_VALUE_PATTERN =
   /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i
-const PID_SANITIZED_VALUE = '[REDACTED_BY_PID_SANITIZER]'
+const PID_HINT_PREFIX = '[PID_HINT:'
+
+function sensitiveHint(kind: string, details: string): string {
+  return `${PID_HINT_PREFIX}${kind};${details}]`
+}
+
+function summarizeStringValue(value: string): string {
+  const len = value.length
+  return `len=${len}`
+}
+
+function sanitizeSensitiveValue(value: unknown, key?: string): string {
+  if (typeof value === 'string') {
+    if (ORCID_VALUE_PATTERN.test(value)) {
+      return sensitiveHint('orcid', summarizeStringValue(value))
+    }
+    if (EMAIL_VALUE_PATTERN.test(value)) {
+      return sensitiveHint('email', summarizeStringValue(value))
+    }
+    return sensitiveHint(
+      'sensitive_key',
+      `key=${(key || 'unknown').toLowerCase()};${summarizeStringValue(value)}`
+    )
+  }
+
+  const valueType = Array.isArray(value) ? 'array' : typeof value
+  return sensitiveHint(
+    'sensitive_key',
+    `key=${(key || 'unknown').toLowerCase()};type=${valueType}`
+  )
+}
 
 function withPrefix<T extends object>(
   obj: T,
@@ -36,7 +66,7 @@ function sanitizeRumValue(value: unknown): unknown {
     const output: Record<string, unknown> = {}
     for (const [key, rawValue] of Object.entries(input)) {
       if (BLOCKED_RUM_KEY_PATTERN.test(key)) {
-        output[key] = PID_SANITIZED_VALUE
+        output[key] = sanitizeSensitiveValue(rawValue, key)
         continue
       }
       const cleaned = sanitizeRumValue(rawValue)
@@ -47,7 +77,7 @@ function sanitizeRumValue(value: unknown): unknown {
 
   if (typeof value === 'string') {
     if (ORCID_VALUE_PATTERN.test(value) || EMAIL_VALUE_PATTERN.test(value)) {
-      return PID_SANITIZED_VALUE
+      return sanitizeSensitiveValue(value)
     }
     return value
   }

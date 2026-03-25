@@ -98,7 +98,7 @@ describe('RumJourneyEventService', () => {
     expect(payload.journeyContext_response_type).not.toBe('second')
   })
 
-  it('drops sensitive identifiers from simple-event payloads', () => {
+  it('obfuscates sensitive identifiers into hint strings for simple-event payloads', () => {
     service.recordSimpleEvent('privacy_check', {
       client_id: 'cid-1',
       redirect_uri: 'https://example.org/callback',
@@ -111,11 +111,11 @@ describe('RumJourneyEventService', () => {
     expect(payload.client_id).toBe('cid-1')
     expect(payload.redirect_uri).toBe('https://example.org/callback')
     expect(payload.oauth_query_string).toContain('client_id=cid-1')
-    expect(payload.email).toBe('[REDACTED_BY_PID_SANITIZER]')
+    expect(payload.email).toBe('[PID_HINT:email;len=16]')
     expect(payload.safe_attr).toBe('ok')
   })
 
-  it('drops sensitive nested values from journey payloads', () => {
+  it('obfuscates sensitive nested values into hint strings for journey payloads', () => {
     service.startJourney('orcid_registration', {
       isReactivation: true,
       email: 'test@example.org',
@@ -130,10 +130,10 @@ describe('RumJourneyEventService', () => {
     } as any)
 
     const [, payload] = addPageActionSpy.calls.mostRecent().args
-    expect(payload.journeyContext_email).toBe('[REDACTED_BY_PID_SANITIZER]')
+    expect(payload.journeyContext_email).toBe('[PID_HINT:email;len=16]')
     expect(payload.eventAttribute_formValues).toEqual({
-      orcid: '[REDACTED_BY_PID_SANITIZER]',
-      email: '[REDACTED_BY_PID_SANITIZER]',
+      orcid: '[PID_HINT:orcid;len=19]',
+      email: '[PID_HINT:email;len=16]',
       country: 'US',
     })
   })

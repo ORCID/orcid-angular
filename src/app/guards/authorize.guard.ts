@@ -26,6 +26,11 @@ import { serializeQueryParamsForRum } from '../rum/serialize-oauth-query-for-rum
 
 @Injectable({ providedIn: 'root' })
 export class AuthorizeGuard implements CanActivateChild {
+  /**
+   * Small delay to increase odds that RUM events are harvested before leaving app.
+   */
+  private static readonly RUM_REDIRECT_FLUSH_DELAY_MS = 150
+
   constructor(
     private _user: UserService,
     private readonly router: Router,
@@ -94,7 +99,7 @@ export class AuthorizeGuard implements CanActivateChild {
                 ),
               }
             )
-            ;(this.window as any).outOfRouterNavigation(target)
+            this.navigateOutOfRouterWithRumFlush(target)
             return NEVER
           }
           case 'allow':
@@ -130,7 +135,7 @@ export class AuthorizeGuard implements CanActivateChild {
               'Redirecting out of router to',
               target
             )
-            ;(this.window as any).outOfRouterNavigation(target)
+            this.navigateOutOfRouterWithRumFlush(target)
             return false
           }
           // invalid → send to your 404 page
@@ -201,5 +206,12 @@ export class AuthorizeGuard implements CanActivateChild {
       scope: queryParams?.scope,
       oauth_query_string: serializeQueryParamsForRum(queryParams as any),
     }
+  }
+
+  private navigateOutOfRouterWithRumFlush(target?: string): void {
+    if (!target) return
+    setTimeout(() => {
+      ;(this.window as any).outOfRouterNavigation(target)
+    }, AuthorizeGuard.RUM_REDIRECT_FLUSH_DELAY_MS)
   }
 }
