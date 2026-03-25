@@ -29,7 +29,6 @@ export const TERMINATING_SIMPLE_EVENT_NAMES: ReadonlySet<string> = new Set([
   AppEventName.TwoFactorSignInGuardRedirectToMyOrcid,
   AppEventName.RegisterGuardRedirectToAuthorize,
   AppEventName.RegisterPipelineError,
-  // OAuth authorization page-level validation failures are terminal surfaces.
   AppEventName.OauthAuthorizationValidationFailed,
 ])
 

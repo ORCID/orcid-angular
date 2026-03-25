@@ -19,15 +19,7 @@ export interface OauthAuthorizationEventAttributes {
   errorCode?: string
   errorDescription?: string
   OAUTH_AUTHORIZATION?: boolean
-  /**
-   * Legacy parity field used for NR faceting of OAuth error surfaces.
-   * Sent as `eventAttribute_surface` by `RumJourneyEventService`.
-   */
   surface?: string
-  /**
-   * Legacy parity fields used to keep New Relic attribute keys consistent
-   * with the previously-sent simple-event payload.
-   */
   error_category?: string
   oauth_error?: string
   oauth_error_code?: string

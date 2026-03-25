@@ -333,7 +333,7 @@ describe('FormAuthorizeComponent', () => {
       expect(mockWindow.location.href).toContain('redirect_uri=')
     })
 
-    it('should redirect to signin even when noRedirectLogout fails', (done) => {
+    it('should redirect to signin even when noRedirectLogout fails', () => {
       const queryParams = {
         email: 'test@example.com',
         scope: 'read write',
@@ -345,17 +345,13 @@ describe('FormAuthorizeComponent', () => {
 
       component.logout()
 
-      // Wait for the async operation to complete
-      setTimeout(() => {
-        expect(userService.noRedirectLogout).toHaveBeenCalled()
-        expect(mockWindow.location.href).toBe(
-          '/signin?email=test%40example.com&scope=read+write'
-        )
-        done()
-      }, 100)
+      expect(userService.noRedirectLogout).toHaveBeenCalled()
+      expect(mockWindow.location.href).toBe(
+        '/signin?email=test%40example.com&scope=read+write'
+      )
     })
 
-    it('should redirect to signin with empty query parameters when noRedirectLogout fails', (done) => {
+    it('should redirect to signin with empty query parameters when noRedirectLogout fails', () => {
       component.platformInfo.queryParameters = {}
       userService.noRedirectLogout.and.returnValue(
         throwError(() => new Error('Logout failed'))
@@ -363,11 +359,7 @@ describe('FormAuthorizeComponent', () => {
 
       component.logout()
 
-      // Wait for the async operation to complete
-      setTimeout(() => {
-        expect(mockWindow.location.href).toBe('/signin')
-        done()
-      }, 100)
+      expect(mockWindow.location.href).toBe('/signin')
     })
 
     it('should redirect to signout when OAUTH_AUTHORIZATION is false', () => {
