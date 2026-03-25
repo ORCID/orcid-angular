@@ -28,6 +28,10 @@ Primary emitters (paths relative to `src/app/`):
 - Simple signals:
   - `actionName = <eventName>` on `PageAction`.
 
+## New Relic harvest on terminal outcomes
+
+OAuth guard outcomes, the oauth-error page (including `oauth_authorization_validation_failed`), and journey terminals such as `authorization_success`, `authorization_denied`, `authorization_error`, `authorization_logout`, and `error_page_loaded` are wired as **terminating** events: after a successful `addPageAction`, `RumJourneyEventService` triggers an immediate harvest so data is less likely to be lost on redirect or tab close. The exact name lists and rules are in [`terminating-rum-events.ts`](./terminating-rum-events.ts). Overview: [RUM README — Terminating events and New Relic harvest](./README.md#terminating-events-and-new-relic-harvest-flush).
+
 ## Flow diagram
 
 ```mermaid

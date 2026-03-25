@@ -21,7 +21,7 @@ import { FeatureLoggerService } from '../core/logging/feature-logger.service'
 import { AuthDecisionService } from '../core/auth-decision/auth-decision.service'
 import { TogglzFlag } from '../types/config.endpoint'
 import { RumJourneyEventService } from '../rum/service/customEvent.service'
-import { AppEventName } from '../register/app-event-names'
+import { AppEventName } from '../rum/app-event-names'
 import { serializeQueryParamsForRum } from '../rum/serialize-oauth-query-for-rum'
 
 @Injectable({ providedIn: 'root' })

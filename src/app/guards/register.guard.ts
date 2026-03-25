@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators'
 
 import { UserService } from '../core'
 import { RumJourneyEventService } from '../rum/service/customEvent.service'
-import { AppEventName } from '../register/app-event-names'
+import { AppEventName } from '../rum/app-event-names'
 import { serializeQueryParamsForRum } from '../rum/serialize-oauth-query-for-rum'
 
 @Injectable({

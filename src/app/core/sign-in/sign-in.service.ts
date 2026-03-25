@@ -22,7 +22,7 @@ import { CookieService } from 'ngx-cookie-service'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { TogglzFlag } from 'src/app/types/config.endpoint'
 import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
-import { AppEventName } from 'src/app/register/app-event-names'
+import { AppEventName } from 'src/app/rum/app-event-names'
 
 @Injectable({
   providedIn: 'root',

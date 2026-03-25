@@ -1,6 +1,11 @@
 import { Inject, Injectable } from '@angular/core'
 import { WINDOW } from 'src/app/cdk/window'
+import { NewRelicService } from 'src/app/core/new-relic/new-relic.service'
 import { JourneyType, JourneyContextMap, EventAttrMap } from '../journeys/types'
+import {
+  isTerminatingJourneyEvent,
+  isTerminatingSimpleEvent,
+} from '../terminating-rum-events'
 
 type JourneyState = {
   startTime: number
@@ -101,18 +106,23 @@ function rumDebugJson(data: unknown): string {
 export class RumJourneyEventService {
   private journeys: Partial<Record<JourneyType, JourneyState>> = {}
 
-  constructor(@Inject(WINDOW) private window: Window) {}
+  constructor(
+    @Inject(WINDOW) private window: Window,
+    private newRelic: NewRelicService
+  ) {}
 
+  /** @returns true if `addPageAction` ran successfully */
   private safeAddPageAction(
     eventType: string,
     payload: Record<string, unknown>
-  ) {
+  ): boolean {
     const nr = (this.window as any).newrelic
     if (typeof nr?.addPageAction !== 'function') {
-      return
+      return false
     }
     try {
       nr.addPageAction(eventType, payload)
+      return true
     } catch (error) {
       if (runtimeEnvironment.debugger) {
         console.warn(
@@ -122,6 +132,7 @@ export class RumJourneyEventService {
           })}`
         )
       }
+      return false
     }
   }
 
@@ -163,7 +174,10 @@ export class RumJourneyEventService {
       string,
       unknown
     >
-    this.safeAddPageAction(eventName, sanitizedAttrs)
+    const sent = this.safeAddPageAction(eventName, sanitizedAttrs)
+    if (sent && isTerminatingSimpleEvent(eventName)) {
+      this.newRelic.forceHarvestNow()
+    }
     if (runtimeEnvironment.debugger) {
       console.debug(
         `[RUM][simple] : event ${eventName}\n${rumDebugJson(sanitizedAttrs)}`
@@ -212,7 +226,10 @@ export class RumJourneyEventService {
       system_journeyId: state.journeyId,
       system_journeyType: journeyType,
     }
-    this.safeAddPageAction(journeyType, payload)
+    const sent = this.safeAddPageAction(journeyType, payload)
+    if (sent && isTerminatingJourneyEvent(journeyType, eventName)) {
+      this.newRelic.forceHarvestNow()
+    }
     if (runtimeEnvironment.debugger) {
       console.debug(
         `[RUM][journey:${journeyType}] : event ${eventName}\n${rumDebugJson(
@@ -241,8 +258,11 @@ export class RumJourneyEventService {
       system_journeyId: state.journeyId,
       system_journeyType: journeyType,
     }
-    this.safeAddPageAction(journeyType, payload)
+    const sent = this.safeAddPageAction(journeyType, payload)
     delete this.journeys[journeyType]
+    if (sent) {
+      this.newRelic.forceHarvestNow()
+    }
     if (runtimeEnvironment.debugger) {
       console.debug(
         `[RUM][journey:${journeyType}] : finished\n${rumDebugJson(payload)}`

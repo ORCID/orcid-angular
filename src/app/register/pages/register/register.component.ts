@@ -35,7 +35,7 @@ import { RegisterObservabilityService } from '../../register-observability.servi
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { OauthURLSessionManagerService } from 'src/app/core/oauth-urlsession-manager/oauth-urlsession-manager.service'
 import { TogglzFlag } from 'src/app/types/config.endpoint'
-import { AppEventName } from 'src/app/register/app-event-names'
+import { AppEventName } from 'src/app/rum/app-event-names'
 
 @Component({
   selector: 'app-register',

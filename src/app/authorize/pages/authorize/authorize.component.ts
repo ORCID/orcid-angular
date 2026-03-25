@@ -24,7 +24,7 @@ import { OauthURLSessionManagerService } from 'src/app/core/oauth-urlsession-man
 import { FeatureLoggerService } from 'src/app/core/logging/feature-logger.service'
 import { TogglzFlag } from 'src/app/types/config.endpoint'
 import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
-import { AppEventName } from 'src/app/register/app-event-names'
+import { AppEventName } from 'src/app/rum/app-event-names'
 
 @Component({
   templateUrl: './authorize.component.html',

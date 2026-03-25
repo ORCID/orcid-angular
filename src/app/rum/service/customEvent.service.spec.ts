@@ -1,12 +1,15 @@
 import { TestBed } from '@angular/core/testing'
 import { RumJourneyEventService } from './customEvent.service'
 import { WINDOW } from 'src/app/cdk/window'
+import { NewRelicService } from 'src/app/core/new-relic/new-relic.service'
+import { AppEventName } from 'src/app/rum/app-event-names'
 
 declare const global: any
 
 describe('RumJourneyEventService', () => {
   let service: RumJourneyEventService
   let addPageActionSpy: jasmine.Spy
+  let forceHarvestNowSpy: jasmine.Spy
   let mockWindow: any
 
   beforeEach(() => {
@@ -14,12 +17,14 @@ describe('RumJourneyEventService', () => {
     global.runtimeEnvironment = { debugger: false }
 
     addPageActionSpy = jasmine.createSpy('addPageAction')
+    forceHarvestNowSpy = jasmine.createSpy('forceHarvestNow')
     mockWindow = { newrelic: { addPageAction: addPageActionSpy } }
 
     TestBed.configureTestingModule({
       providers: [
         RumJourneyEventService,
         { provide: WINDOW, useValue: mockWindow },
+        { provide: NewRelicService, useValue: { forceHarvestNow: forceHarvestNowSpy } },
       ],
     })
 
@@ -52,6 +57,7 @@ describe('RumJourneyEventService', () => {
     expect(typeof payload.system_elapsedMs).toBe('number')
     expect(payload.system_journeyType).toBe('oauth_authorization')
     expect(typeof payload.system_journeyId).toBe('string')
+    expect(forceHarvestNowSpy).toHaveBeenCalledTimes(1)
   })
 
   it('finishJourney sends final event and clears state', () => {
@@ -66,11 +72,14 @@ describe('RumJourneyEventService', () => {
     expect(payload.system_eventName).toBe('journey_finished')
     expect(payload.journeyContext_isReactivation).toBe(true)
     expect(payload.eventAttribute_response).toEqual({ ok: true })
+    expect(forceHarvestNowSpy).toHaveBeenCalledTimes(1)
 
     // Further events after finish should be ignored (no throw, no NR call)
     addPageActionSpy.calls.reset()
+    forceHarvestNowSpy.calls.reset()
     service.recordEvent('orcid_registration', 'after_finish_event')
     expect(addPageActionSpy).not.toHaveBeenCalled()
+    expect(forceHarvestNowSpy).not.toHaveBeenCalled()
   })
 
   it('updateJourneyContext merges additional context for subsequent events', () => {
@@ -85,6 +94,7 @@ describe('RumJourneyEventService', () => {
     expect(payload.journeyContext_response_type).toBe('code')
     expect(payload.journeyContext_scope).toBe('email')
     expect(payload.eventAttribute_OAUTH_AUTHORIZATION).toBe(true)
+    expect(forceHarvestNowSpy).not.toHaveBeenCalled()
   })
 
   it('ignores second startJourney call for the same journey', () => {
@@ -96,6 +106,7 @@ describe('RumJourneyEventService', () => {
     const [, payload] = addPageActionSpy.calls.mostRecent().args
     expect(payload.journeyContext_response_type).toBe('first')
     expect(payload.journeyContext_response_type).not.toBe('second')
+    expect(forceHarvestNowSpy).not.toHaveBeenCalled()
   })
 
   it('obfuscates sensitive identifiers into hint strings for simple-event payloads', () => {
@@ -114,6 +125,28 @@ describe('RumJourneyEventService', () => {
     expect(payload.oauth_query_string).toContain('client_id=cid-1')
     expect(payload.email).toBe('[PID_HINT:email;len=16]')
     expect(payload.safe_attr).toBe('ok')
+    expect(forceHarvestNowSpy).not.toHaveBeenCalled()
+  })
+
+  it('recordSimpleEvent triggers harvest for terminating events', () => {
+    service.recordSimpleEvent(AppEventName.OauthAuthorizationValidationFailed, {
+      surface: 'oauth_error_page',
+    })
+    expect(addPageActionSpy).toHaveBeenCalled()
+    expect(forceHarvestNowSpy).toHaveBeenCalledTimes(1)
+  })
+
+  it('recordEvent triggers harvest for oauth authorization_success', () => {
+    service.startJourney('oauth_authorization', { response_type: 'code' })
+    addPageActionSpy.calls.reset()
+    forceHarvestNowSpy.calls.reset()
+
+    service.recordEvent('oauth_authorization', AppEventName.OauthAuthorizationSuccess, {
+      OAUTH_AUTHORIZATION: true,
+    })
+
+    expect(addPageActionSpy).toHaveBeenCalledTimes(1)
+    expect(forceHarvestNowSpy).toHaveBeenCalledTimes(1)
   })
 
   it('obfuscates sensitive nested values into hint strings for journey payloads', () => {
@@ -137,13 +170,22 @@ describe('RumJourneyEventService', () => {
       email: '[PID_HINT:email;len=16]',
       country: 'US',
     })
+    expect(forceHarvestNowSpy).not.toHaveBeenCalled()
   })
 
   it('guards when New Relic is unavailable', () => {
+    const localForceHarvest = jasmine.createSpy('forceHarvestNow')
     // Recreate service with no newrelic
     TestBed.resetTestingModule()
     TestBed.configureTestingModule({
-      providers: [RumJourneyEventService, { provide: WINDOW, useValue: {} }],
+      providers: [
+        RumJourneyEventService,
+        { provide: WINDOW, useValue: {} },
+        {
+          provide: NewRelicService,
+          useValue: { forceHarvestNow: localForceHarvest },
+        },
+      ],
     })
     const localService = TestBed.inject(RumJourneyEventService)
 
@@ -155,6 +197,7 @@ describe('RumJourneyEventService', () => {
       localService.recordEvent('orcid_notifications', 'open_inbox')
       localService.finishJourney('orcid_notifications')
     }).not.toThrow()
+    expect(localForceHarvest).not.toHaveBeenCalled()
   })
 
   it('guards when New Relic addPageAction throws', () => {
@@ -165,11 +208,16 @@ describe('RumJourneyEventService', () => {
         },
       },
     }
+    const localForceHarvest = jasmine.createSpy('forceHarvestNow')
     TestBed.resetTestingModule()
     TestBed.configureTestingModule({
       providers: [
         RumJourneyEventService,
         { provide: WINDOW, useValue: throwingWindow },
+        {
+          provide: NewRelicService,
+          useValue: { forceHarvestNow: localForceHarvest },
+        },
       ],
     })
     const localService = TestBed.inject(RumJourneyEventService)
@@ -182,5 +230,6 @@ describe('RumJourneyEventService', () => {
       localService.recordEvent('oauth_authorization', 'event')
       localService.finishJourney('oauth_authorization')
     }).not.toThrow()
+    expect(localForceHarvest).not.toHaveBeenCalled()
   })
 })
