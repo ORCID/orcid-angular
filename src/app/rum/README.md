@@ -15,9 +15,9 @@ Primary files in this folder/domain:
 
 Flow-specific docs:
 
-- `oauth-observability.md`
-- `signin-observability.md`
-- `registration-observability.md`
+- [`oauth-observability.md`](./oauth-observability.md)
+- [`signin-observability.md`](./signin-observability.md)
+- [`registration-observability.md`](./registration-observability.md)
 
 ## Event model
 
@@ -41,9 +41,9 @@ Flow-specific docs:
 
 Flow charts live in each flow-specific doc:
 
-- `oauth-observability.md`
-- `signin-observability.md`
-- `registration-observability.md`
+- [`oauth-observability.md`](./oauth-observability.md)
+- [`signin-observability.md`](./signin-observability.md)
+- [`registration-observability.md`](./registration-observability.md)
 
 ## Key events and where they fire
 
