@@ -156,4 +156,31 @@ describe('RumJourneyEventService', () => {
       localService.finishJourney('orcid_notifications')
     }).not.toThrow()
   })
+
+  it('guards when New Relic addPageAction throws', () => {
+    const throwingWindow = {
+      newrelic: {
+        addPageAction: () => {
+          throw new Error('nr exploded')
+        },
+      },
+    }
+    TestBed.resetTestingModule()
+    TestBed.configureTestingModule({
+      providers: [
+        RumJourneyEventService,
+        { provide: WINDOW, useValue: throwingWindow },
+      ],
+    })
+    const localService = TestBed.inject(RumJourneyEventService)
+
+    expect(() => {
+      localService.recordSimpleEvent('simple_event', { foo: 'bar' })
+      localService.startJourney('oauth_authorization', {
+        response_type: 'code',
+      })
+      localService.recordEvent('oauth_authorization', 'event')
+      localService.finishJourney('oauth_authorization')
+    }).not.toThrow()
+  })
 })

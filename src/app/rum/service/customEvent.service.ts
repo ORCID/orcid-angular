@@ -103,6 +103,28 @@ export class RumJourneyEventService {
 
   constructor(@Inject(WINDOW) private window: Window) {}
 
+  private safeAddPageAction(
+    eventType: string,
+    payload: Record<string, unknown>
+  ) {
+    const nr = (this.window as any).newrelic
+    if (typeof nr?.addPageAction !== 'function') {
+      return
+    }
+    try {
+      nr.addPageAction(eventType, payload)
+    } catch (error) {
+      if (runtimeEnvironment.debugger) {
+        console.warn(
+          `[RUM] addPageAction failed for ${eventType}\n${rumDebugJson({
+            error,
+            payload,
+          })}`
+        )
+      }
+    }
+  }
+
   startJourney<T extends JourneyType>(
     journeyType: T,
     context: JourneyContextMap[T]
@@ -141,10 +163,7 @@ export class RumJourneyEventService {
       string,
       unknown
     >
-    const nr = (this.window as any).newrelic
-    if (typeof nr?.addPageAction === 'function') {
-      nr.addPageAction(eventName, sanitizedAttrs)
-    }
+    this.safeAddPageAction(eventName, sanitizedAttrs)
     if (runtimeEnvironment.debugger) {
       console.debug(
         `[RUM][simple] : event ${eventName}\n${rumDebugJson(sanitizedAttrs)}`
@@ -193,10 +212,7 @@ export class RumJourneyEventService {
       system_journeyId: state.journeyId,
       system_journeyType: journeyType,
     }
-    const nr = (this.window as any).newrelic
-    if (typeof nr?.addPageAction === 'function') {
-      nr.addPageAction(journeyType, payload)
-    }
+    this.safeAddPageAction(journeyType, payload)
     if (runtimeEnvironment.debugger) {
       console.debug(
         `[RUM][journey:${journeyType}] : event ${eventName}\n${rumDebugJson(
@@ -225,10 +241,7 @@ export class RumJourneyEventService {
       system_journeyId: state.journeyId,
       system_journeyType: journeyType,
     }
-    const nr = (this.window as any).newrelic
-    if (typeof nr?.addPageAction === 'function') {
-      nr.addPageAction(journeyType, payload)
-    }
+    this.safeAddPageAction(journeyType, payload)
     delete this.journeys[journeyType]
     if (runtimeEnvironment.debugger) {
       console.debug(
