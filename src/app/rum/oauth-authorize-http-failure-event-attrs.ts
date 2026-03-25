@@ -22,8 +22,9 @@ export function oauthAuthorizeHttpFailureEventAttrs(
   if (error instanceof HttpErrorResponse) {
     attrs.authorize_http_status = error.status
     attrs.authorize_http_status_text = error.statusText
-    attrs.authorize_request_url_path_and_query =
-      requestUrlPathAndQueryForRum(error.url)
+    attrs.authorize_request_url_path_and_query = requestUrlPathAndQueryForRum(
+      error.url
+    )
   } else if (
     error &&
     typeof error === 'object' &&

@@ -91,4 +91,3 @@ Guard exits:
 - Missing completion metrics often indicate redirect/response edge cases before `completeJourney(...)`.
 - Reactivation and layout context are carried in journey context fields and should be used for segmentation.
 - Post-registration OAuth attribution is carried by the OAuth journey context (`journeyContext_justRegistered`) via an internal one-time client handoff, not by mutating OAuth query parameters.
-

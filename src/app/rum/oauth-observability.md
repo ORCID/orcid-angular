@@ -95,4 +95,3 @@ Legacy-only OAuth events:
 - OAuth telemetry is intentionally layered with global `http_error` / `client_error` from `ErrorHandlerService`; dual signals are expected.
 - The auth-server vs legacy endpoint split is tracked in OAuth error attrs (`oauth_authorize_endpoint`) where applicable.
 - OAuth emitters avoid personal fields by design, and telemetry payloads are sanitized before send; ORCID iDs, emails, and PID-like identifiers are obfuscated into hint strings before forwarding to New Relic.
-

@@ -55,7 +55,8 @@ export class ErrorHandlerService {
             processedError instanceof HttpErrorResponse ||
             (processedError !== null &&
               typeof processedError === 'object' &&
-              typeof (processedError as HttpErrorResponse).status === 'number' &&
+              typeof (processedError as HttpErrorResponse).status ===
+                'number' &&
               'url' in (processedError as object))
 
           if (httpLike) {

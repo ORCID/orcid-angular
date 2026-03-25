@@ -53,7 +53,9 @@ describe('AuthorizeComponent', () => {
     oauthUrlSessionSpy = jasmine.createSpyObj('OauthURLSessionManagerService', [
       'clear',
     ])
-    rumSpy = jasmine.createSpyObj('RumJourneyEventService', ['recordSimpleEvent'])
+    rumSpy = jasmine.createSpyObj('RumJourneyEventService', [
+      'recordSimpleEvent',
+    ])
 
     windowMock = {
       outOfRouterNavigation: jasmine.createSpy('outOfRouterNavigation'),

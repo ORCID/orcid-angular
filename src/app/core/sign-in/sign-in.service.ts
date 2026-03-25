@@ -108,11 +108,7 @@ export class SignInService {
           .pipe(
             retry(3),
             catchError((error) => {
-              this.recordSignInHttpError(
-                error,
-                signInLocal,
-                usingOauthServer
-              )
+              this.recordSignInHttpError(error, signInLocal, usingOauthServer)
               return this._errorHandler.handleError(error)
             }),
             switchMap((response) => {
@@ -126,7 +122,7 @@ export class SignInService {
             })
           )
       })
-      )
+    )
   }
 
   /**

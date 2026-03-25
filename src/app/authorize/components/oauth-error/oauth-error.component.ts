@@ -116,12 +116,9 @@ export class OauthErrorComponent implements OnInit, OnDestroy {
           } else {
             this.TOGGLZ_OAUTH_AUTHORIZATION = false
           }
-          this._observability.updateJourneyContext(
-            'oauth_authorization',
-            {
-              OAUTH_AUTHORIZATION: this.TOGGLZ_OAUTH_AUTHORIZATION,
-            } as Partial<OauthAuthorizationContext>
-          )
+          this._observability.updateJourneyContext('oauth_authorization', {
+            OAUTH_AUTHORIZATION: this.TOGGLZ_OAUTH_AUTHORIZATION,
+          } as Partial<OauthAuthorizationContext>)
         })
       )
       .subscribe()

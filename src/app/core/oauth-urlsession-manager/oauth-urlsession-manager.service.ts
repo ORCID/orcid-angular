@@ -53,7 +53,10 @@ export class OauthURLSessionManagerService {
       value: !!value,
       expiresAt: Date.now() + EXPIRATION_MS,
     }
-    localStorage.setItem(LOCALSTORAGE_JUST_REGISTERED_KEY, JSON.stringify(payload))
+    localStorage.setItem(
+      LOCALSTORAGE_JUST_REGISTERED_KEY,
+      JSON.stringify(payload)
+    )
   }
 
   /**

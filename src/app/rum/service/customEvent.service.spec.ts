@@ -102,7 +102,8 @@ describe('RumJourneyEventService', () => {
     service.recordSimpleEvent('privacy_check', {
       client_id: 'cid-1',
       redirect_uri: 'https://example.org/callback',
-      oauth_query_string: 'client_id=cid-1&redirect_uri=https://example.org/callback',
+      oauth_query_string:
+        'client_id=cid-1&redirect_uri=https://example.org/callback',
       email: 'user@example.org',
       safe_attr: 'ok',
     })

@@ -18,6 +18,8 @@ describe('oauthAuthorizeHttpFailureEventAttrs', () => {
     expect(attrs.oauth_authorize_approved).toBe(true)
     expect(attrs.OAUTH_AUTHORIZATION).toBe(true)
     expect(attrs.authorize_http_status).toBe(0)
-    expect(attrs.authorize_request_url_path_and_query).toContain('/oauth2/authorize')
+    expect(attrs.authorize_request_url_path_and_query).toContain(
+      '/oauth2/authorize'
+    )
   })
 })

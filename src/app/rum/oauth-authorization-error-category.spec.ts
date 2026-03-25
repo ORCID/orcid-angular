@@ -2,7 +2,9 @@ import { getOauthAuthorizationErrorCategory } from './oauth-authorization-error-
 
 describe('getOauthAuthorizationErrorCategory', () => {
   it('returns invalid_scope', () => {
-    expect(getOauthAuthorizationErrorCategory('invalid_scope')).toBe('invalid_scope')
+    expect(getOauthAuthorizationErrorCategory('invalid_scope')).toBe(
+      'invalid_scope'
+    )
   })
 
   it('returns redirect_uri_invalid for redirect-related errors', () => {
@@ -12,6 +14,8 @@ describe('getOauthAuthorizationErrorCategory', () => {
   })
 
   it('returns unknown for empty input', () => {
-    expect(getOauthAuthorizationErrorCategory(undefined, undefined)).toBe('unknown')
+    expect(getOauthAuthorizationErrorCategory(undefined, undefined)).toBe(
+      'unknown'
+    )
   })
 })

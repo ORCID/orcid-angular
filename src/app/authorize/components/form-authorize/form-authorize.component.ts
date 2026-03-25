@@ -102,9 +102,9 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
       })
 
     combineLatest({
-      userInfo: this._user.getUserSession().pipe(
-        map((session) => this.removeScopesWithSameDescription(session))
-      ),
+      userInfo: this._user
+        .getUserSession()
+        .pipe(map((session) => this.removeScopesWithSameDescription(session))),
       platform: this._platformInfo.get(),
     })
       .pipe(takeUntil(this.$destroy))
@@ -397,7 +397,8 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
 
     return {
       client_id: oauthRequest?.clientId || query?.client_id || undefined,
-      redirect_uri: oauthRequest?.redirectUrl || query?.redirect_uri || undefined,
+      redirect_uri:
+        oauthRequest?.redirectUrl || query?.redirect_uri || undefined,
       response_type:
         (oauthRequest?.responseType as string | undefined) ||
         query?.response_type ||

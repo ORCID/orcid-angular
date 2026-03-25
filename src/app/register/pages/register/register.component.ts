@@ -289,7 +289,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             this._errorHandler
               .handleError(error, ERROR_REPORT.REGISTER)
               .subscribe()
-          }
+          },
         })
     } else {
       this.loading = false

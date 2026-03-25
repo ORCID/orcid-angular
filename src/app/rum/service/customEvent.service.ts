@@ -8,11 +8,9 @@ type JourneyState = {
   context: Record<string, unknown>
 }
 
-const BLOCKED_RUM_KEY_PATTERN =
-  /(orcid|email|pid|delegator)/i
+const BLOCKED_RUM_KEY_PATTERN = /(orcid|email|pid|delegator)/i
 const ORCID_VALUE_PATTERN = /\b\d{4}-\d{4}-\d{4}-\d{3}[\dX]\b/i
-const EMAIL_VALUE_PATTERN =
-  /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i
+const EMAIL_VALUE_PATTERN = /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i
 const PID_HINT_PREFIX = '[PID_HINT:'
 
 function sensitiveHint(kind: string, details: string): string {
@@ -109,9 +107,9 @@ export class RumJourneyEventService {
     journeyType: T,
     context: JourneyContextMap[T]
   ): void {
-    const sanitizedContext = sanitizeRumValue(
-      context
-    ) as JourneyContextMap[T] | undefined
+    const sanitizedContext = sanitizeRumValue(context) as
+      | JourneyContextMap[T]
+      | undefined
     if (this.journeys[journeyType]) {
       if (runtimeEnvironment.debugger) {
         console.debug(
