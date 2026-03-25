@@ -188,7 +188,11 @@
       [userRecord]="userRecord"
       [type]="'top-bar'"
       id="biography-panel"
-      [visibility]="userRecord.biography.visibility.visibility"
+      [visibility]="
+        userRecord.biography?.biography?.value
+          ? userRecord.biography.visibility.visibility
+          : null
+      "
       [editableVisibilityControl]="true"
     >
       <h2

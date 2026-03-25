@@ -21,7 +21,10 @@ function getNewRelicContentHash(): string {
     return newRelicContentHash
   }
   const code = getNewRelicCode()
-  newRelicContentHash = createHash('sha256').update(code).digest('hex').slice(0, 16)
+  newRelicContentHash = createHash('sha256')
+    .update(code)
+    .digest('hex')
+    .slice(0, 16)
   return newRelicContentHash
 }
 
