@@ -25,7 +25,7 @@ When a dialog or view needs data from an HTTP (or other async) call, opening the
 
 ## RUM / Observability
 
-The app sends events to **New Relic** (and optionally logs them in the console) for analytics and debugging. The central service is **`RumJourneyEventService`** (`src/app/rum/service/customEvent.service.ts`).
+The app sends events to **New Relic** (and optionally logs them in the console) for analytics and debugging. The central service is **`RumJourneyEventService`** (`src/app/rum/service/customEvent.service.ts`). For a fuller overview (simple vs journey events, sign-in/OAuth naming), see **`src/app/rum/README.md`**.
 
 ### Two ways to record events
 

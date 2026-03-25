@@ -14,6 +14,9 @@ import { OauthParameters } from '../types'
 import { FeatureLoggerService } from '../core/logging/feature-logger.service'
 import { AuthDecisionService } from '../core/auth-decision/auth-decision.service'
 import { TogglzFlag } from '../types/config.endpoint'
+import { RumJourneyEventService } from '../rum/service/customEvent.service'
+import { AppEventName } from '../register/app-event-names'
+import { serializeQueryParamsForRum } from '../rum/serialize-oauth-query-for-rum'
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +27,8 @@ export class SignInGuard {
     private _router: Router,
     private _togglzService: TogglzService,
     private readonly featureLogger: FeatureLoggerService,
-    private readonly authDecision: AuthDecisionService
+    private readonly authDecision: AuthDecisionService,
+    private readonly _observability: RumJourneyEventService
   ) {}
 
   canActivateChild(
@@ -49,8 +53,16 @@ export class SignInGuard {
         this.featureLogger.debug('Sign-In Guard', ...decision.trace)
         switch (decision.action) {
           case 'redirectToAuthorize':
+            this._observability.recordSimpleEvent(
+              AppEventName.SignInGuardRedirectToAuthorize,
+              this.buildDecisionAttrs(queryParams, decision)
+            )
             return this.redirectToAuthorize(queryParams)
           case 'redirectToRegister':
+            this._observability.recordSimpleEvent(
+              AppEventName.SignInGuardRedirectToRegister,
+              this.buildDecisionAttrs(queryParams, decision)
+            )
             return this.redirectToRegister(queryParams)
           case 'allow':
           default:
@@ -70,5 +82,20 @@ export class SignInGuard {
     return this._router.createUrlTree(['/register'], {
       queryParams,
     })
+  }
+
+  private buildDecisionAttrs(
+    queryParams: OauthParameters,
+    decision: { action: string; reason?: string }
+  ): Record<string, unknown> {
+    return {
+      decision_action: decision.action,
+      decision_reason: decision.reason,
+      client_id: queryParams?.client_id,
+      redirect_uri: queryParams?.redirect_uri,
+      prompt: queryParams?.prompt,
+      scope: queryParams?.scope,
+      oauth_query_string: serializeQueryParamsForRum(queryParams as any),
+    }
   }
 }

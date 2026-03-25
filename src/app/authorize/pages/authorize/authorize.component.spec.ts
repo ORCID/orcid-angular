@@ -16,8 +16,12 @@ import { RecordService } from '../../../core/record/record.service'
 import { LoginMainInterstitialsManagerService } from 'src/app/core/login-interstitials-manager/login-main-interstitials-manager.service'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { OauthURLSessionManagerService } from 'src/app/core/oauth-urlsession-manager/oauth-urlsession-manager.service'
+import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
 
 import { AuthorizeComponent } from './authorize.component'
+
+/** Must match {@link AuthorizeComponent} RUM redirect delay before `outOfRouterNavigation`. */
+const RUM_REDIRECT_FLUSH_DELAY_MS = 400
 
 // Dummy interstitial component used for typing purposes in tests
 @Component({ template: '', standalone: true })
@@ -35,6 +39,7 @@ describe('AuthorizeComponent', () => {
   let loginInterstitialsSpy: jasmine.SpyObj<LoginMainInterstitialsManagerService>
   let togglzSpy: jasmine.SpyObj<TogglzService>
   let oauthUrlSessionSpy: jasmine.SpyObj<OauthURLSessionManagerService>
+  let rumSpy: jasmine.SpyObj<RumJourneyEventService>
   let windowMock: any
 
   beforeEach(() => {
@@ -50,6 +55,9 @@ describe('AuthorizeComponent', () => {
     togglzSpy = jasmine.createSpyObj('TogglzService', ['getStateOf'])
     oauthUrlSessionSpy = jasmine.createSpyObj('OauthURLSessionManagerService', [
       'clear',
+    ])
+    rumSpy = jasmine.createSpyObj('RumJourneyEventService', [
+      'recordSimpleEvent',
     ])
 
     windowMock = {
@@ -88,6 +96,7 @@ describe('AuthorizeComponent', () => {
           provide: OauthURLSessionManagerService,
           useValue: oauthUrlSessionSpy,
         },
+        { provide: RumJourneyEventService, useValue: rumSpy },
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
@@ -183,12 +192,13 @@ describe('AuthorizeComponent', () => {
 
     ;(component as any).OAUTH2_AUTHORIZATION_ENABLE = false
     ;(component as any).handleOauthSession(session)
-    tick()
+    tick(RUM_REDIRECT_FLUSH_DELAY_MS)
 
     expect(oauthUrlSessionSpy.clear).toHaveBeenCalledTimes(1) // because flag true in finishRedirect
     expect(windowMock.outOfRouterNavigation).toHaveBeenCalledWith(
       '/go?code=123'
     )
+    expect(rumSpy.recordSimpleEvent).toHaveBeenCalled()
   }))
 
   it('handleOauthSession (oauth2): already authorized without interstitial -> redirects and clears', fakeAsync(() => {
@@ -204,10 +214,11 @@ describe('AuthorizeComponent', () => {
     } as any
 
     ;(component as any).handleOauthSession(session)
-    tick()
+    tick(RUM_REDIRECT_FLUSH_DELAY_MS)
 
     expect(oauthUrlSessionSpy.clear).toHaveBeenCalledTimes(1)
     expect(windowMock.outOfRouterNavigation).toHaveBeenCalledWith('/ok')
+    expect(rumSpy.recordSimpleEvent).toHaveBeenCalled()
   }))
 
   it('handleOauthSession: already authorized WITH interstitial -> schedules interstitial', fakeAsync(() => {
@@ -377,7 +388,7 @@ describe('AuthorizeComponent', () => {
       return of(false)
     })
     ;(component as any).finishRedirect().subscribe()
-    tick()
+    tick(RUM_REDIRECT_FLUSH_DELAY_MS)
 
     expect(oauthUrlSessionSpy.clear).toHaveBeenCalled()
     expect(windowMock.outOfRouterNavigation).toHaveBeenCalledWith('/final')
@@ -389,7 +400,7 @@ describe('AuthorizeComponent', () => {
 
     togglzSpy.getStateOf.and.returnValue(of(false))
     ;(component as any).finishRedirect().subscribe()
-    tick()
+    tick(RUM_REDIRECT_FLUSH_DELAY_MS)
 
     expect(oauthUrlSessionSpy.clear).not.toHaveBeenCalled()
     expect(windowMock.outOfRouterNavigation).toHaveBeenCalledWith('/final')
@@ -401,7 +412,7 @@ describe('AuthorizeComponent', () => {
 
     togglzSpy.getStateOf.and.returnValue(of(false))
     ;(component as any).finishRedirect().subscribe()
-    tick()
+    tick(RUM_REDIRECT_FLUSH_DELAY_MS)
 
     expect(windowMock.outOfRouterNavigation).toHaveBeenCalledWith(undefined)
   }))

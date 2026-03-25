@@ -66,7 +66,7 @@ describe('FormAuthorizeComponent', () => {
     ])
     const oauthURLSessionManagerServiceSpy = jasmine.createSpyObj(
       'OauthURLSessionManagerService',
-      ['getOauthUrlSession']
+      ['getOauthUrlSession', 'consumeJustRegistered']
     )
     const mockWindowSpy = jasmine.createSpyObj('Window', ['location'])
 

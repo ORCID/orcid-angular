@@ -1,6 +1,6 @@
 import { ComponentType } from '@angular/cdk/overlay'
 import { Component, Inject, ViewChild } from '@angular/core'
-import { Observable, forkJoin, of } from 'rxjs'
+import { Observable, forkJoin, of, timer } from 'rxjs'
 import {
   filter,
   finalize,
@@ -23,6 +23,8 @@ import { CdkPortalOutlet, ComponentPortal } from '@angular/cdk/portal'
 import { OauthURLSessionManagerService } from 'src/app/core/oauth-urlsession-manager/oauth-urlsession-manager.service'
 import { FeatureLoggerService } from 'src/app/core/logging/feature-logger.service'
 import { TogglzFlag } from 'src/app/types/config.endpoint'
+import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
+import { AppEventName } from 'src/app/register/app-event-names'
 
 @Component({
   templateUrl: './authorize.component.html',
@@ -31,6 +33,10 @@ import { TogglzFlag } from 'src/app/types/config.endpoint'
   standalone: false,
 })
 export class AuthorizeComponent {
+  /**
+   * Small delay to increase odds that RUM events are harvested before leaving app.
+   */
+  private static readonly RUM_REDIRECT_FLUSH_DELAY_MS = 400
   @ViewChild('interstitialOutlet', { static: false, read: CdkPortalOutlet })
   outlet!: CdkPortalOutlet
 
@@ -57,7 +63,8 @@ export class AuthorizeComponent {
     private loginMainInterstitialsManagerService: LoginMainInterstitialsManagerService,
     private toglzService: TogglzService,
     private oauthUrlSessionManger: OauthURLSessionManagerService,
-    private readonly featureLogger: FeatureLoggerService
+    private readonly featureLogger: FeatureLoggerService,
+    private readonly _observability: RumJourneyEventService
   ) {
     this.log = this.featureLogger.scoped('Auth Component')
   }
@@ -121,12 +128,17 @@ export class AuthorizeComponent {
    */
   private finishRedirect(): Observable<boolean> {
     return this.toglzService.getStateOf(TogglzFlag.OAUTH2_AUTHORIZATION).pipe(
-      tap((useAuthServerFlag) => {
+      switchMap((useAuthServerFlag) => {
         if (useAuthServerFlag === true) {
           this.oauthUrlSessionManger.clear()
         }
         this.log.info('Redirecting', this.redirectUrl)
-        ;(this.window as any).outOfRouterNavigation(this.redirectUrl)
+        return timer(AuthorizeComponent.RUM_REDIRECT_FLUSH_DELAY_MS).pipe(
+          tap(() => {
+            ;(this.window as any).outOfRouterNavigation(this.redirectUrl)
+          }),
+          mapTo(true)
+        )
       })
     )
   }
@@ -137,7 +149,30 @@ export class AuthorizeComponent {
   private alreadyAuthorizeRedirect(
     oauthSession: RequestInfoForm
   ): Observable<boolean> {
+    const query = this.platform?.queryParameters as Record<string, unknown>
+    const urlQuery = new URLSearchParams(this.window?.location?.search || '')
+    const queryClientId =
+      (typeof query?.client_id === 'string' ? query.client_id : undefined) ||
+      urlQuery.get('client_id') ||
+      undefined
+    const queryScope =
+      (typeof query?.scope === 'string' ? query.scope : undefined) ||
+      urlQuery.get('scope') ||
+      undefined
     this.redirectUrl = oauthSession.redirectUrl
+    const scopeSummary =
+      oauthSession.scopesAsString ||
+      oauthSession.scopes?.map((s) => s.value).join(' ') ||
+      queryScope
+    this._observability.recordSimpleEvent(
+      AppEventName.OauthAuthorizePageAlreadyAuthorizedRedirect,
+      {
+        client_id: oauthSession.clientId || queryClientId,
+        redirect_target: oauthSession.redirectUrl,
+        scope: scopeSummary,
+        oauth2_authorization_page_flag: this.OAUTH2_AUTHORIZATION_ENABLE,
+      }
+    )
     return this.finishRedirect()
   }
 

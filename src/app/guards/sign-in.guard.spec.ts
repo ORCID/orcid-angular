@@ -14,6 +14,7 @@ import { of, firstValueFrom } from 'rxjs'
 import { UserService } from '../core/user/user.service'
 import { TogglzService } from '../core/togglz/togglz.service'
 import { AuthDecisionService } from '../core/auth-decision/auth-decision.service'
+import { RumJourneyEventService } from '../rum/service/customEvent.service'
 
 describe('SignInGuard', () => {
   let guard: SignInGuard
@@ -21,6 +22,7 @@ describe('SignInGuard', () => {
   let userServiceMock: { getUserSession: jasmine.Spy }
   let togglzServiceMock: { getStateOf: jasmine.Spy }
   let decisionMock: { decideForSignIn: jasmine.Spy }
+  let observabilityMock: { recordSimpleEvent: jasmine.Spy }
 
   beforeEach(() => {
     userServiceMock = {
@@ -32,6 +34,9 @@ describe('SignInGuard', () => {
     decisionMock = {
       decideForSignIn: jasmine.createSpy('decideForSignIn'),
     }
+    observabilityMock = {
+      recordSimpleEvent: jasmine.createSpy('recordSimpleEvent'),
+    }
 
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, RouterTestingModule],
@@ -39,6 +44,7 @@ describe('SignInGuard', () => {
         { provide: UserService, useValue: userServiceMock },
         { provide: TogglzService, useValue: togglzServiceMock },
         { provide: AuthDecisionService, useValue: decisionMock },
+        { provide: RumJourneyEventService, useValue: observabilityMock },
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })

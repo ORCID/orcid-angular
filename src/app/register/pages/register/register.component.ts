@@ -35,6 +35,7 @@ import { RegisterObservabilityService } from '../../register-observability.servi
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { OauthURLSessionManagerService } from 'src/app/core/oauth-urlsession-manager/oauth-urlsession-manager.service'
 import { TogglzFlag } from 'src/app/types/config.endpoint'
+import { AppEventName } from 'src/app/register/app-event-names'
 
 @Component({
   selector: 'app-register',
@@ -229,47 +230,66 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             )
           })
         )
-        .subscribe((response) => {
-          this.loading = false
-          if (response.url && !this.isOauthAuthorizationTogglzEnable) {
-            this._registerObservabilityService.reportRegisterEvent(
-              'register-confirmation',
-              {
-                response,
+        .subscribe({
+          next: (response) => {
+            this.loading = false
+            if (response.url && !this.isOauthAuthorizationTogglzEnable) {
+              this._registerObservabilityService.reportRegisterEvent(
+                'register-confirmation',
+                {
+                  response,
+                }
+              )
+              this.afterRegisterRedirectionHandler(response)
+            } else if (this.isOauthAuthorizationTogglzEnable) {
+              this._registerObservabilityService.reportRegisterEvent(
+                'register-confirmation',
+                {
+                  response,
+                }
+              )
+              // Verify if we have a oauth redirct url stored in local memory
+              let storedUrl = this._oauthURLSessionManagerService.get()
+              if (storedUrl) {
+                this.afterRegisterRedirectionHandler({
+                  url: this._oauthURLSessionManagerService.get(),
+                })
+              } else {
+                this.afterRegisterRedirectionHandler(response)
               }
-            )
-            this.afterRegisterRedirectionHandler(response)
-          } else if (this.isOauthAuthorizationTogglzEnable) {
-            this._registerObservabilityService.reportRegisterEvent(
-              'register-confirmation',
-              {
-                response,
-              }
-            )
-            // Verify if we have a oauth redirct url stored in local memory
-            let storedUrl = this._oauthURLSessionManagerService.get()
-            if (storedUrl) {
-              this.afterRegisterRedirectionHandler({
-                url: this._oauthURLSessionManagerService.get(),
-              })
             } else {
+              // This is unexpected and will be reported as an error
+              this._registerObservabilityService.reportRegisterErrorEvent(
+                'register-confirmation',
+                {
+                  response,
+                }
+              )
+              this._errorHandler.handleError(
+                new Error('registerUnexpectedConfirmation'),
+                ERROR_REPORT.REGISTER
+              )
+              // The user will be redirected to the page suggested by the backend
               this.afterRegisterRedirectionHandler(response)
             }
-          } else {
-            // This is unexpected and will be reported as an error
-            this._registerObservabilityService.reportRegisterErrorEvent(
-              'register-confirmation',
+          },
+          error: (error) => {
+            this.loading = false
+            this._registerObservabilityService.reportRegisterEvent(
+              AppEventName.RegisterPipelineError,
               {
-                response,
+                stage: 'register_submit',
+                error:
+                  error?.message ||
+                  error?.statusText ||
+                  error?.status ||
+                  'unknown',
               }
             )
-            this._errorHandler.handleError(
-              new Error('registerUnexpectedConfirmation'),
-              ERROR_REPORT.REGISTER
-            )
-            // The user will be redirected to the page suggested by the backend
-            this.afterRegisterRedirectionHandler(response)
-          }
+            this._errorHandler
+              .handleError(error, ERROR_REPORT.REGISTER)
+              .subscribe()
+          },
         })
     } else {
       this.loading = false
@@ -294,8 +314,12 @@ export class RegisterComponent implements OnInit, AfterViewInit {
       this._router.navigate(['/signin'])
       return
     }
+    this._registerObservabilityService.completeJourney({
+      redirectUrl: response.url,
+    })
     if (isRedirectToTheAuthorizationPage(response)) {
       this._oauthURLSessionManagerService.clear()
+      this._oauthURLSessionManagerService.setJustRegistered(true)
       this.window.location.href = response.url
     } else {
       if (

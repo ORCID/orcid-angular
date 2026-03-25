@@ -50,14 +50,23 @@ export class ErrorHandlerService {
       )
       .pipe(
         catchError((processedError: Error | HttpErrorResponse) => {
-          // Server error
-          if (processedError instanceof HttpErrorResponse) {
+          // Server / transport error (includes plain objects from spread HttpErrorResponse above)
+          const httpLike =
+            processedError instanceof HttpErrorResponse ||
+            (processedError !== null &&
+              typeof processedError === 'object' &&
+              typeof (processedError as HttpErrorResponse).status ===
+                'number' &&
+              'url' in (processedError as object))
+
+          if (httpLike) {
+            const http = processedError as HttpErrorResponse
             try {
               this._observability.recordSimpleEvent(AppEventName.HttpError, {
-                status: processedError.status,
-                statusText: processedError.statusText,
-                url: processedError.url,
-                name: processedError.name,
+                status: http.status,
+                statusText: http.statusText,
+                url: http.url,
+                name: http.name,
                 browserSupport: this.browserSupport,
                 csrf: this.checkCSRF(),
               })
@@ -65,10 +74,10 @@ export class ErrorHandlerService {
             console.error(
               `
 __Server error__
-(status:${processedError.status} (${processedError.statusText}) url: ${processedError.url})
-name: "${processedError.name}"
-message: "${processedError.message}"
-ok: "${processedError.ok}"
+(status:${http.status} (${http.statusText}) url: ${http.url})
+name: "${http.name}"
+message: "${http.message}"
+ok: "${http.ok}"
             `
             )
           } else {
@@ -92,7 +101,7 @@ stack: "${processedError.stack}"
           }
 
           this._snackBar.showErrorMessage(processedError, errorReport)
-          return throwError(processedError)
+          return throwError(() => processedError)
         })
       )
   }

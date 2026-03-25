@@ -46,8 +46,6 @@ export class RegisterObservabilityService {
       'orcid_registration',
       AppEventName.StepANextButtonClicked,
       {
-        // List all form controls errors
-        formValues: form.value,
         formValid: form.valid,
         errors: {
           givenNamesError: form.controls.givenNames.errors,
@@ -68,8 +66,6 @@ export class RegisterObservabilityService {
       'orcid_registration',
       AppEventName.StepBNextButtonClicked,
       {
-        // List all form controls errors
-        formValues: form.value,
         formValid: form.valid,
         errors: {
           passwordError: form.controls.password.errors,
@@ -84,8 +80,6 @@ export class RegisterObservabilityService {
       'orcid_registration',
       AppEventName.StepC2NextButtonClicked,
       {
-        // List all form controls errors
-        formValues: form.value,
         formValid: form.valid,
         errors: {
           departmentNameError: form.controls.departmentName.errors,
@@ -102,8 +96,6 @@ export class RegisterObservabilityService {
       'orcid_registration',
       AppEventName.StepC2SkipButtonClicked,
       {
-        // List all form controls errors
-        formValues: form.value,
         formValid: form.valid,
         errors: {
           departmentNameError: form.controls.departmentName.errors,
@@ -120,8 +112,6 @@ export class RegisterObservabilityService {
       'orcid_registration',
       AppEventName.StepCNextButtonClicked,
       {
-        // List all form controls errors
-        formValues: form.value,
         formValid: form.valid,
         errors: {
           visibilityErrors: form.controls.activitiesVisibilityDefault.errors,
@@ -135,8 +125,6 @@ export class RegisterObservabilityService {
       'orcid_registration',
       AppEventName.StepDNextButtonClicked,
       {
-        // List all form controls errors
-        formValues: form.value,
         formValid: form.valid,
         errors: {
           captcha: form.controls.captcha.errors,
