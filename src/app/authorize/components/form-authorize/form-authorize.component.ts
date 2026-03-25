@@ -7,8 +7,8 @@ import {
   OnInit,
   Output,
 } from '@angular/core'
-import { Params, Router } from '@angular/router'
-import { combineLatest, forkJoin, Observable, Subject, throwError } from 'rxjs'
+import { Router } from '@angular/router'
+import { forkJoin, Observable, Subject } from 'rxjs'
 import {
   catchError,
   map,
@@ -39,12 +39,6 @@ import { Title } from '@angular/platform-browser'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { OauthURLSessionManagerService } from 'src/app/core/oauth-urlsession-manager/oauth-urlsession-manager.service'
 import { TogglzFlag } from 'src/app/types/config.endpoint'
-import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
-import { AppEventName } from 'src/app/rum/app-event-names'
-import { OauthAuthorizationContext } from 'src/app/rum/journeys/oauthAuthorization'
-import { oauthAuthorizeHttpFailureEventAttrs } from 'src/app/rum/oauth-authorize-http-failure-event-attrs'
-import { serializeQueryParamsForRum } from 'src/app/rum/serialize-oauth-query-for-rum'
-import { OauthParameters } from 'src/app/types/oauth.locale'
 
 @Component({
   selector: 'app-form-authorize',
@@ -74,12 +68,6 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
   orcid = $localize`:@@authorize.dashOrcid:- ORCID`
   OAUTH_AUTHORIZATION: boolean
 
-  /** RUM: `combineLatest` emits on every session/platform update; journey must start once. */
-  private oauthAuthorizationJourneyStarted = false
-  private oauthLogoutReported = false
-  private oauthPageLoadedReported = false
-  private justRegisteredFromRegistration = false
-
   constructor(
     @Inject(WINDOW) private window: Window,
     private _user: UserService,
@@ -89,8 +77,7 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
     private _trustedIndividuals: TrustedIndividualsService,
     private _titleService: Title,
     private _togglz: TogglzService,
-    private _oauthURLSessionManagerService: OauthURLSessionManagerService,
-    private _observability: RumJourneyEventService
+    private _oauthURLSessionManagerService: OauthURLSessionManagerService
   ) {}
 
   ngOnInit(): void {
@@ -101,49 +88,34 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
         this.OAUTH_AUTHORIZATION = OAUTH_AUTHORIZATION
       })
 
-    combineLatest({
-      userInfo: this._user
-        .getUserSession()
-        .pipe(map((session) => this.removeScopesWithSameDescription(session))),
-      platform: this._platformInfo.get(),
-    })
-      .pipe(takeUntil(this.$destroy))
-      .subscribe(({ userInfo, platform }) => {
+    this._platformInfo
+      .get()
+      .pipe(take(1))
+      .subscribe((platform) => (this.platformInfo = platform))
+
+    this._user
+      .getUserSession()
+      .pipe(
+        takeUntil(this.$destroy),
+        map((userInfo) => this.removeScopesWithSameDescription(userInfo))
+      )
+      .subscribe((userInfo) => {
         this.loadingUserInfo = false
         this.loadingTrustedIndividuals = false
-        this.platformInfo = platform
         this.oauthRequest = userInfo.oauthSession
-        // Session request info may omit fields that are still on the URL; merge for RUM.
-        if (!this.oauthAuthorizationJourneyStarted) {
-          this.justRegisteredFromRegistration =
-            this._oauthURLSessionManagerService.consumeJustRegistered()
-          this._observability.startJourney(
-            'oauth_authorization',
-            this.buildOauthAuthorizationJourneyContext(
-              userInfo,
-              this.oauthRequest,
-              platform.queryParameters
-            )
-          )
-          this.oauthAuthorizationJourneyStarted = true
-        }
         if (userInfo.loggedIn) {
-          this.oauthLogoutReported = false
           this.userName = userInfo.displayName
           this.orcidUrl = userInfo.effectiveOrcidUrl
-          if (!this.oauthPageLoadedReported) {
-            this._observability.recordEvent(
-              'oauth_authorization',
-              AppEventName.OauthAuthorizationPageLoaded
-            )
-            this.oauthPageLoadedReported = true
-          }
         } else {
           // if the user logouts in the middle of a oauth section on another tab
-          this.reportOauthAuthorizationLogout('session_logged_out')
-          this._router.navigate([ApplicationRoutes.signin], {
-            queryParams: platform.queryParameters,
-          })
+          this._platformInfo
+            .get()
+            .pipe(take(1))
+            .subscribe((platform) =>
+              this._router.navigate([ApplicationRoutes.signin], {
+                queryParams: platform.queryParameters,
+              })
+            )
         }
       })
 
@@ -163,7 +135,6 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-    this.reportOauthAuthorizationLogout('user_initiated_logout')
     if (this.OAUTH_AUTHORIZATION) {
       this._user
         .noRedirectLogout()
@@ -178,7 +149,7 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
           this.performRedirect()
         })
     } else {
-      ;(this.window as any).outOfRouterNavigation('/signout')
+      this.window.location.href = '/signout'
     }
   }
 
@@ -188,7 +159,7 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
       ? new URLSearchParams(this.platformInfo.queryParameters).toString()
       : ''
     const signinUrl = queryParams ? `/signin?${queryParams}` : '/signin'
-    ;(this.window as any).outOfRouterNavigation(signinUrl)
+    this.window.location.href = signinUrl
   }
 
   authorize(value = true) {
@@ -197,39 +168,11 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
     this._togglz
       .getStateOf(TogglzFlag.OAUTH_AUTHORIZATION)
       .pipe(
-        take(1),
         tap((useAuthServerFlag) => {
-          this._observability.updateJourneyContext('oauth_authorization', {
-            OAUTH_AUTHORIZATION: useAuthServerFlag,
-          })
           if (useAuthServerFlag === true) {
             this._oauth
               .authorizeOnAuthServer(this.oauthRequest, value)
               .pipe(
-                tap(() => {
-                  this._observability.recordEvent(
-                    'oauth_authorization',
-                    value
-                      ? AppEventName.OauthAuthorizationSuccess
-                      : AppEventName.OauthAuthorizationDenied,
-                    {
-                      OAUTH_AUTHORIZATION: true,
-                    }
-                  )
-                }),
-                catchError((error) => {
-                  this._observability.recordEvent(
-                    'oauth_authorization',
-                    AppEventName.OauthAuthorizationError,
-                    oauthAuthorizeHttpFailureEventAttrs(
-                      error,
-                      'auth_server',
-                      value,
-                      true
-                    )
-                  )
-                  return throwError(() => error)
-                }),
                 take(1),
                 finalize(() => (this.loadingAuthorizeEndpoint = false))
               )
@@ -240,30 +183,6 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
             this._oauth
               .authorize(value)
               .pipe(
-                tap(() => {
-                  this._observability.recordEvent(
-                    'oauth_authorization',
-                    value
-                      ? AppEventName.OauthAuthorizationSuccess
-                      : AppEventName.OauthAuthorizationDenied,
-                    {
-                      OAUTH_AUTHORIZATION: false,
-                    }
-                  )
-                }),
-                catchError((error) => {
-                  this._observability.recordEvent(
-                    'oauth_authorization',
-                    AppEventName.OauthAuthorizationError,
-                    oauthAuthorizeHttpFailureEventAttrs(
-                      error,
-                      'legacy',
-                      value,
-                      false
-                    )
-                  )
-                  return throwError(() => error)
-                }),
                 take(1),
                 finalize(() => (this.loadingAuthorizeEndpoint = false))
               )
@@ -345,12 +264,6 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
   }
 
   changeAccount(delegator: Delegator) {
-    this._observability.recordSimpleEvent(
-      AppEventName.OauthAuthorizeSwitchDelegatedAccount,
-      {
-        approval_date: delegator?.approvalDate,
-      }
-    )
     this.loadingTrustedIndividuals = true
     this.loadingUserInfo = true
 
@@ -361,54 +274,6 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.$destroy.next(true)
     this.$destroy.unsubscribe()
-  }
-
-  private reportOauthAuthorizationLogout(
-    reason: 'session_logged_out' | 'user_initiated_logout'
-  ): void {
-    if (this.oauthLogoutReported || !this.oauthAuthorizationJourneyStarted) {
-      return
-    }
-    this._observability.recordEvent(
-      'oauth_authorization',
-      AppEventName.OauthAuthorizationLogout,
-      {
-        oauth_logout_reason: reason,
-      }
-    )
-    this.oauthLogoutReported = true
-  }
-
-  /**
-   * Prefer server session fields; fall back to URL query params so journey context
-   * matches the browser address bar when the session is partial (common locally).
-   */
-  private buildOauthAuthorizationJourneyContext(
-    session: UserSession | undefined,
-    oauthRequest: RequestInfoForm | undefined,
-    queryParams: Params | undefined
-  ): OauthAuthorizationContext {
-    const query = queryParams as Partial<OauthParameters>
-    const scopeFromSession = oauthRequest?.scopes
-      ?.map((scope) => scope.value)
-      .join(' ')
-    const scopeFromQuery =
-      typeof query?.scope === 'string' ? query.scope : undefined
-
-    return {
-      client_id: oauthRequest?.clientId || query?.client_id || undefined,
-      redirect_uri:
-        oauthRequest?.redirectUrl || query?.redirect_uri || undefined,
-      response_type:
-        (oauthRequest?.responseType as string | undefined) ||
-        query?.response_type ||
-        undefined,
-      scope: scopeFromSession || scopeFromQuery || undefined,
-      justRegistered: this.justRegisteredFromRegistration ? true : undefined,
-      acting_as_trusted_user: session?.userInfo?.IN_DELEGATION_MODE === 'true',
-      delegated_by_admin: session?.userInfo?.DELEGATED_BY_ADMIN === 'true',
-      oauth_query_string: serializeQueryParamsForRum(queryParams),
-    }
   }
 
   private removeScopesWithSameDescription(userInfo: UserSession) {

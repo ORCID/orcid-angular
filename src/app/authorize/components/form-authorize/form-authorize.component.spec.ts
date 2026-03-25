@@ -66,7 +66,7 @@ describe('FormAuthorizeComponent', () => {
     ])
     const oauthURLSessionManagerServiceSpy = jasmine.createSpyObj(
       'OauthURLSessionManagerService',
-      ['getOauthUrlSession', 'consumeJustRegistered']
+      ['getOauthUrlSession']
     )
     const mockWindowSpy = jasmine.createSpyObj('Window', ['location'])
 
@@ -119,9 +119,6 @@ describe('FormAuthorizeComponent', () => {
       PlatformInfoService
     ) as jasmine.SpyObj<PlatformInfoService>
     mockWindow = TestBed.inject(WINDOW) as jasmine.SpyObj<Window>
-    ;(mockWindow as any).outOfRouterNavigation = (value: string) => {
-      mockWindow.location.href = value
-    }
 
     // Setup default mocks
     togglzService.getStateOf.and.returnValue(of(false))
@@ -333,7 +330,7 @@ describe('FormAuthorizeComponent', () => {
       expect(mockWindow.location.href).toContain('redirect_uri=')
     })
 
-    it('should redirect to signin even when noRedirectLogout fails', () => {
+    it('should redirect to signin even when noRedirectLogout fails', (done) => {
       const queryParams = {
         email: 'test@example.com',
         scope: 'read write',
@@ -345,13 +342,17 @@ describe('FormAuthorizeComponent', () => {
 
       component.logout()
 
-      expect(userService.noRedirectLogout).toHaveBeenCalled()
-      expect(mockWindow.location.href).toBe(
-        '/signin?email=test%40example.com&scope=read+write'
-      )
+      // Wait for the async operation to complete
+      setTimeout(() => {
+        expect(userService.noRedirectLogout).toHaveBeenCalled()
+        expect(mockWindow.location.href).toBe(
+          '/signin?email=test%40example.com&scope=read+write'
+        )
+        done()
+      }, 100)
     })
 
-    it('should redirect to signin with empty query parameters when noRedirectLogout fails', () => {
+    it('should redirect to signin with empty query parameters when noRedirectLogout fails', (done) => {
       component.platformInfo.queryParameters = {}
       userService.noRedirectLogout.and.returnValue(
         throwError(() => new Error('Logout failed'))
@@ -359,7 +360,11 @@ describe('FormAuthorizeComponent', () => {
 
       component.logout()
 
-      expect(mockWindow.location.href).toBe('/signin')
+      // Wait for the async operation to complete
+      setTimeout(() => {
+        expect(mockWindow.location.href).toBe('/signin')
+        done()
+      }, 100)
     })
 
     it('should redirect to signout when OAUTH_AUTHORIZATION is false', () => {

@@ -143,11 +143,6 @@
           },
           "configurations": {
             "local": {
-              "scripts": [
-                "/scripts/environment.runtime.js",
-                "/scripts/onetrust.runtime.js",
-                "/scripts/new-relic.runtime.js"
-              ],
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -169,11 +164,6 @@
               "outputPath": "dist"
             },
             "local-with-proxy": {
-              "scripts": [
-                "/scripts/environment.runtime.js",
-                "/scripts/onetrust.runtime.js",
-                "/scripts/new-relic.runtime.js"
-              ],
               "optimization": false,
               "outputHashing": "none",
               "sourceMap": true,
@@ -190,11 +180,6 @@
               ]
             },
             "local-with-proxy-localize-en": {
-              "scripts": [
-                "/scripts/environment.runtime.js",
-                "/scripts/onetrust.runtime.js",
-                "/scripts/new-relic.runtime.js"
-              ],
               "localize": ["en"],
               "optimization": false,
               "outputHashing": "none",
@@ -212,27 +197,12 @@
               ]
             },
             "local-with-proxy-localize-fr": {
-              "scripts": [
-                "/scripts/environment.runtime.js",
-                "/scripts/onetrust.runtime.js",
-                "/scripts/new-relic.runtime.js"
-              ],
               "localize": ["fr"]
             },
             "local-with-proxy-localize-ar": {
-              "scripts": [
-                "/scripts/environment.runtime.js",
-                "/scripts/onetrust.runtime.js",
-                "/scripts/new-relic.runtime.js"
-              ],
               "localize": ["ar"]
             },
             "local-with-proxy-localize-xx": {
-              "scripts": [
-                "/scripts/environment.runtime.js",
-                "/scripts/onetrust.runtime.js",
-                "/scripts/new-relic.runtime.js"
-              ],
               "localize": ["xx"]
             },
             "production": {

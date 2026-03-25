@@ -34,7 +34,7 @@ import { TogglzService } from '../../../core/togglz/togglz.service'
 import { getAriaLabel } from '../../../constants'
 import { RecordBiographyService } from 'src/app/core/record-biography/record-biography.service'
 import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
-import { AppEventName } from 'src/app/rum/app-event-names'
+import { AppEventName } from 'src/app/register/app-event-names'
 import { ExpandedWorkFeaturedModalComponent } from 'src/app/record/components/work-featured/modals/expanded-work-featured-modal/expanded-work-featured-modal.component'
 
 @Component({

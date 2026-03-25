@@ -1,24 +1,17 @@
 window.NREUM || (NREUM = {})
 NREUM.init = {
-  performance: { capture_measures: false },
+  performance: { capture_measures: true },
   browser_consent_mode: { enabled: false },
   privacy: { cookies_enabled: true },
-  // --- Temporarily disabled (noise / volume); re-enable in NREUM.init when ready ---
-  session_replay: { enabled: false }, // Session replay
-  session_trace: { enabled: false }, // Session traces / long tasks
-  // XHR/fetch instrumentation (custom timings, Ajax events)
-  ajax: { enabled: false, capture_payloads: 'none', autoStart: false },
-  page_view_event: { enabled: false, autoStart: false }, // Initial page view beacon payload
-  page_view_timing: { enabled: false, autoStart: false }, // Web vitals / timing harvest
-  jserrors: { enabled: false, autoStart: false }, // Uncaught JS error reports
-  // Custom metrics aggregate (separate from PageView timing)
-  metrics: { enabled: false, autoStart: false },
-  // UserAction / interaction events (click, blur, keydown, etc.)
-  generic_events: { enabled: true, autoStart: false },
-  page_action: { enabled: true }, // addPageAction API default collection
-  user_actions: { enabled: false },
-  // SPA soft-navigation / route-change instrumentation
-  soft_navigations: { enabled: false, autoStart: false },
+  session_replay: { enabled: false },
+  session_trace: { enabled: false },
+  ajax: { capture_payloads: 'none', autoStart: false },
+  page_view_event: { autoStart: false },
+  page_view_timing: { autoStart: false },
+  jserrors: { autoStart: false },
+  metrics: { autoStart: false },
+  generic_events: { autoStart: false },
+  soft_navigations: { autoStart: false },
 }
 
 NREUM.loader_config = {
