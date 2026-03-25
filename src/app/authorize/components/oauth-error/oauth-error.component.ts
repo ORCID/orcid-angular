@@ -76,8 +76,6 @@ export class OauthErrorComponent implements OnInit, OnDestroy {
               error: this.error,
               errorCode: this.errorCode,
               errorDescription: this.errorDescription,
-              // Keep parity with the legacy simple-event payload so NR queries
-              // can facet on the same attribute keys (now under `eventAttribute_*`).
               surface: 'oauth_error_page',
               error_category: getOauthAuthorizationErrorCategory(
                 this.error,
