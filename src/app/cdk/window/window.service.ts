@@ -23,7 +23,17 @@ export class BrowserWindowRef extends WindowRef {
   constructor() {
     if (!(window as any).outOfRouterNavigation) {
       ;(window as any).outOfRouterNavigation = (value) => {
-        window.location.href = value
+        const HARVEST_TIMEOUT_MS = 100
+        try {
+          if (typeof (window as any).orcidForceRumHarvest === 'function') {
+            ;(window as any).orcidForceRumHarvest()
+          }
+        } catch {
+          // Keep navigation resilient even if RUM flush fails.
+        }
+        window.setTimeout(() => {
+          window.location.href = value
+        }, HARVEST_TIMEOUT_MS)
       }
     }
     super()
