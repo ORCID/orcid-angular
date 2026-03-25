@@ -379,7 +379,7 @@ export class FormPersonalComponent
 
   navigateToClaim(email) {
     email = encodeURIComponent(email)
-    this.window.location.href = `/resend-claim?email=${email}`
+    ;(this.window as any).outOfRouterNavigation(`/resend-claim?email=${email}`)
   }
 
   reactivateEmail(email) {

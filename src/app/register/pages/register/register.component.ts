@@ -320,7 +320,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     if (isRedirectToTheAuthorizationPage(response)) {
       this._oauthURLSessionManagerService.clear()
       this._oauthURLSessionManagerService.setJustRegistered(true)
-      this.window.location.href = response.url
+      ;(this.window as any).outOfRouterNavigation(response.url)
     } else {
       if (
         response.url.indexOf('orcid.org/my-orcid') > 0 &&
@@ -335,7 +335,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             this.window.scrollTo(0, 0)
           })
       } else {
-        this.window.location.href = response.url
+        ;(this.window as any).outOfRouterNavigation(response.url)
       }
     }
   }
