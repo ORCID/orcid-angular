@@ -1,10 +1,4 @@
-import {
-  ComponentFixture,
-  TestBed,
-  waitForAsync,
-  fakeAsync,
-  tick,
-} from '@angular/core/testing'
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 import { of, throwError } from 'rxjs'
 import { HttpResponse } from '@angular/common/http'
 
@@ -126,9 +120,7 @@ describe('FormAuthorizeComponent', () => {
     ) as jasmine.SpyObj<PlatformInfoService>
     mockWindow = TestBed.inject(WINDOW) as jasmine.SpyObj<Window>
     ;(mockWindow as any).outOfRouterNavigation = (value: string) => {
-      setTimeout(() => {
-        mockWindow.location.href = value
-      }, 100)
+      mockWindow.location.href = value
     }
 
     // Setup default mocks
@@ -246,7 +238,7 @@ describe('FormAuthorizeComponent', () => {
       } as PlatformInfo
     })
 
-    it('should redirect to signin with query parameters on successful logout', fakeAsync(() => {
+    it('should redirect to signin with query parameters on successful logout', () => {
       const queryParams = {
         email: 'test@example.com',
         scope: 'read write',
@@ -260,13 +252,12 @@ describe('FormAuthorizeComponent', () => {
       component.logout()
 
       expect(userService.noRedirectLogout).toHaveBeenCalled()
-      tick(100)
       expect(mockWindow.location.href).toBe(
         '/signin?email=test%40example.com&scope=read+write&state=test-state'
       )
-    }))
+    })
 
-    it('should handle special characters in email query parameter', fakeAsync(() => {
+    it('should handle special characters in email query parameter', () => {
       const queryParams = {
         email: 'test+special@example.com',
         scope: 'read write',
@@ -279,13 +270,12 @@ describe('FormAuthorizeComponent', () => {
 
       component.logout()
 
-      tick(100)
       expect(mockWindow.location.href).toBe(
         '/signin?email=test%2Bspecial%40example.com&scope=read+write&state=test-state'
       )
-    }))
+    })
 
-    it('should handle email with unicode characters', fakeAsync(() => {
+    it('should handle email with unicode characters', () => {
       const queryParams = {
         email: 'tëst@éxämplé.com',
         scope: 'read write',
@@ -298,13 +288,12 @@ describe('FormAuthorizeComponent', () => {
 
       component.logout()
 
-      tick(100)
       expect(mockWindow.location.href).toBe(
         '/signin?email=t%C3%ABst%40%C3%A9x%C3%A4mpl%C3%A9.com&scope=read+write&state=test-state'
       )
-    }))
+    })
 
-    it('should handle spaces in scope parameter correctly', fakeAsync(() => {
+    it('should handle spaces in scope parameter correctly', () => {
       const queryParams = {
         email: 'test@example.com',
         scope: 'read write update',
@@ -317,13 +306,12 @@ describe('FormAuthorizeComponent', () => {
 
       component.logout()
 
-      tick(100)
       expect(mockWindow.location.href).toBe(
         '/signin?email=test%40example.com&scope=read+write+update&state=test-state'
       )
-    }))
+    })
 
-    it('should handle complex query parameters with special characters', fakeAsync(() => {
+    it('should handle complex query parameters with special characters', () => {
       const queryParams = {
         email: 'user+tag@sub.domain.com',
         scope: 'read write update',
@@ -337,16 +325,15 @@ describe('FormAuthorizeComponent', () => {
 
       component.logout()
 
-      tick(100)
       expect(mockWindow.location.href).toContain(
         'email=user%2Btag%40sub.domain.com'
       )
       expect(mockWindow.location.href).toContain('scope=read+write+update')
       expect(mockWindow.location.href).toContain('state=test-state-123')
       expect(mockWindow.location.href).toContain('redirect_uri=')
-    }))
+    })
 
-    it('should redirect to signin even when noRedirectLogout fails', fakeAsync(() => {
+    it('should redirect to signin even when noRedirectLogout fails', (done) => {
       const queryParams = {
         email: 'test@example.com',
         scope: 'read write',
@@ -358,14 +345,17 @@ describe('FormAuthorizeComponent', () => {
 
       component.logout()
 
-      expect(userService.noRedirectLogout).toHaveBeenCalled()
-      tick(100)
-      expect(mockWindow.location.href).toBe(
-        '/signin?email=test%40example.com&scope=read+write'
-      )
-    }))
+      // Wait for the async operation to complete
+      setTimeout(() => {
+        expect(userService.noRedirectLogout).toHaveBeenCalled()
+        expect(mockWindow.location.href).toBe(
+          '/signin?email=test%40example.com&scope=read+write'
+        )
+        done()
+      }, 100)
+    })
 
-    it('should redirect to signin with empty query parameters when noRedirectLogout fails', fakeAsync(() => {
+    it('should redirect to signin with empty query parameters when noRedirectLogout fails', (done) => {
       component.platformInfo.queryParameters = {}
       userService.noRedirectLogout.and.returnValue(
         throwError(() => new Error('Logout failed'))
@@ -373,21 +363,23 @@ describe('FormAuthorizeComponent', () => {
 
       component.logout()
 
-      tick(100)
-      expect(mockWindow.location.href).toBe('/signin')
-    }))
+      // Wait for the async operation to complete
+      setTimeout(() => {
+        expect(mockWindow.location.href).toBe('/signin')
+        done()
+      }, 100)
+    })
 
-    it('should redirect to signout when OAUTH_AUTHORIZATION is false', fakeAsync(() => {
+    it('should redirect to signout when OAUTH_AUTHORIZATION is false', () => {
       component.OAUTH_AUTHORIZATION = false
 
       component.logout()
 
-      tick(100)
       expect(mockWindow.location.href).toBe('/signout')
       expect(userService.noRedirectLogout).not.toHaveBeenCalled()
-    }))
+    })
 
-    it('should handle null query parameters gracefully', fakeAsync(() => {
+    it('should handle null query parameters gracefully', () => {
       component.platformInfo.queryParameters = null
       userService.noRedirectLogout.and.returnValue(
         of(new HttpResponse({ body: 'OK' }))
@@ -395,11 +387,10 @@ describe('FormAuthorizeComponent', () => {
 
       component.logout()
 
-      tick(100)
       expect(mockWindow.location.href).toBe('/signin')
-    }))
+    })
 
-    it('should handle undefined query parameters gracefully', fakeAsync(() => {
+    it('should handle undefined query parameters gracefully', () => {
       component.platformInfo.queryParameters = undefined
       userService.noRedirectLogout.and.returnValue(
         of(new HttpResponse({ body: 'OK' }))
@@ -407,8 +398,7 @@ describe('FormAuthorizeComponent', () => {
 
       component.logout()
 
-      tick(100)
       expect(mockWindow.location.href).toBe('/signin')
-    }))
+    })
   })
 })
