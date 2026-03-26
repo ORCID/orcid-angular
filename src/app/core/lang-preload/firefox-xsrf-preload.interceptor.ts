@@ -9,6 +9,7 @@ import { Observable, Subject } from 'rxjs'
 import { switchMap, take } from 'rxjs/operators'
 import { CookieService } from 'ngx-cookie-service'
 import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
+import { AppEventName } from 'src/app/rum/app-event-names'
 import { WINDOW } from 'src/app/cdk/window'
 import { Platform } from '@angular/cdk/platform'
 
@@ -83,7 +84,7 @@ export class FirefoxXsrfPreloadInterceptor implements HttpInterceptor {
           if (!this.hasXsrfCookie()) {
             try {
               this._observability.recordSimpleEvent(
-                'xsrf_missing_after_preload',
+                AppEventName.XsrfMissingAfterPreload,
                 {
                   error: 'xsrf_missing',
                   errorDescription:

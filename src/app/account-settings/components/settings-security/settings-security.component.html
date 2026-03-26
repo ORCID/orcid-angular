@@ -9,6 +9,7 @@
   [loading]="settingSecurityPasswordLoading"
 >
   <app-settings-security-password
+    [twoFactorState]="twoFactorState"
     *ngIf="settingSecurityPasswordOpen"
     (loading)="settingSecurityPasswordLoading = $event"
   >
@@ -26,7 +27,6 @@
   <app-settings-security-two-factor-auth
     [twoFactorState]="twoFactorState"
     (twoFactorStateOutput)="twoFactorStateChanges($event)"
-    (loading)="settingSecurityTwoFactorLoading = $event"
   >
   </app-settings-security-two-factor-auth>
 </app-settings-panels>
@@ -39,6 +39,7 @@
   [loading]="settingSecurityAlternateAccountsLoading"
 >
   <app-settings-security-alternate-sign-in
+    [twoFactorState]="twoFactorState"
     (loading)="settingSecurityAlternateAccountsLoading = $event"
     *ngIf="settingSecurityAlternateAccounts"
   ></app-settings-security-alternate-sign-in>

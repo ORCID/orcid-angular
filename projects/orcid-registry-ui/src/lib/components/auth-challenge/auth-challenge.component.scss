@@ -1,0 +1,86 @@
+::ng-deep .mat-mdc-dialog-panel {
+  max-height: 94vh !important;
+  max-width: 90vw !important;
+}
+
+:host {
+  font-family: var(--orcid-font-family-sans, 'Noto Sans', sans-serif);
+}
+
+h1 {
+  font-size: var(--orcid-font-size-heading-small, 24px);
+  line-height: 36px;
+}
+
+h1,
+mat-hint,
+mat-error,
+mat-label,
+button {
+  letter-spacing: 0.5px;
+}
+
+.verify-button {
+  font-size: var(--orcid-font-size-body, 16px);
+  line-height: 24px;
+  font-weight: 700;
+}
+
+p,
+a {
+  font-size: var(--orcid-font-size-body-small, 14px);
+  line-height: 21px;
+  letter-spacing: 0.25px;
+}
+
+.grow {
+  flex-grow: 1;
+}
+
+.container {
+  padding: 64px;
+}
+
+ul {
+  padding-left: 24px;
+  margin-top: 16px;
+  margin-bottom: 0;
+}
+
+input {
+  font-size: 14px !important;
+}
+
+.verify-button-loading {
+  opacity: 30%;
+}
+
+hr {
+  margin-top: 32px;
+  margin-bottom: 32px;
+  height: 1px;
+  border: 0;
+}
+
+mat-icon {
+  height: 37px;
+  width: 37px;
+  font-size: 37px;
+}
+
+.cancel {
+  text-decoration-line: underline;
+}
+
+mat-progress-bar {
+  margin-top: -64px;
+  margin-left: -64px;
+  position: absolute;
+  max-width: 580px;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 32px;
+  }
+}

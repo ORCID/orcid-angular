@@ -33,6 +33,8 @@ import { WINDOW } from 'src/app/cdk/window'
 import { TogglzService } from '../../../core/togglz/togglz.service'
 import { getAriaLabel } from '../../../constants'
 import { RecordBiographyService } from 'src/app/core/record-biography/record-biography.service'
+import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
+import { AppEventName } from 'src/app/rum/app-event-names'
 import { ExpandedWorkFeaturedModalComponent } from 'src/app/record/components/work-featured/modals/expanded-work-featured-modal/expanded-work-featured-modal.component'
 
 @Component({
@@ -153,6 +155,7 @@ export class PanelComponent implements OnInit {
     private _worksService: RecordWorksService,
     private _verificationEmailModalService: VerificationEmailModalService,
     private _recordBiographyService: RecordBiographyService,
+    private _rumEvents: RumJourneyEventService,
     private _togglzService: TogglzService
   ) {}
 
@@ -264,6 +267,9 @@ export class PanelComponent implements OnInit {
   }
 
   expandItem() {
+    this._rumEvents.recordSimpleEvent(
+      AppEventName.RecordExpandFeaturedWorkClicked
+    )
     const modalComponent = this._dialog.open(
       ExpandedWorkFeaturedModalComponent,
       {

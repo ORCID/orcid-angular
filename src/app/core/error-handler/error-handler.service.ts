@@ -8,6 +8,7 @@ import { ErrorReport } from 'src/app/types'
 import { ERROR_REPORT } from 'src/app/errors'
 import { CookieService } from 'ngx-cookie-service'
 import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
+import { AppEventName } from 'src/app/rum/app-event-names'
 
 @Injectable({
   providedIn: 'root',
@@ -49,14 +50,23 @@ export class ErrorHandlerService {
       )
       .pipe(
         catchError((processedError: Error | HttpErrorResponse) => {
-          // Server error
-          if (processedError instanceof HttpErrorResponse) {
+          // Server / transport error (includes plain objects from spread HttpErrorResponse above)
+          const httpLike =
+            processedError instanceof HttpErrorResponse ||
+            (processedError !== null &&
+              typeof processedError === 'object' &&
+              typeof (processedError as HttpErrorResponse).status ===
+                'number' &&
+              'url' in (processedError as object))
+
+          if (httpLike) {
+            const http = processedError as HttpErrorResponse
             try {
-              this._observability.recordSimpleEvent('http_error', {
-                status: processedError.status,
-                statusText: processedError.statusText,
-                url: processedError.url,
-                name: processedError.name,
+              this._observability.recordSimpleEvent(AppEventName.HttpError, {
+                status: http.status,
+                statusText: http.statusText,
+                url: http.url,
+                name: http.name,
                 browserSupport: this.browserSupport,
                 csrf: this.checkCSRF(),
               })
@@ -64,16 +74,16 @@ export class ErrorHandlerService {
             console.error(
               `
 __Server error__
-(status:${processedError.status} (${processedError.statusText}) url: ${processedError.url})
-name: "${processedError.name}"
-message: "${processedError.message}"
-ok: "${processedError.ok}"
+(status:${http.status} (${http.statusText}) url: ${http.url})
+name: "${http.name}"
+message: "${http.message}"
+ok: "${http.ok}"
             `
             )
           } else {
             // Client side error
             try {
-              this._observability.recordSimpleEvent('client_error', {
+              this._observability.recordSimpleEvent(AppEventName.ClientError, {
                 name: processedError.name,
                 message: processedError.message,
                 browserSupport: this.browserSupport,
@@ -91,7 +101,7 @@ stack: "${processedError.stack}"
           }
 
           this._snackBar.showErrorMessage(processedError, errorReport)
-          return throwError(processedError)
+          return throwError(() => processedError)
         })
       )
   }

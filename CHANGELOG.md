@@ -1,3 +1,97 @@
+## v2.131.23 - 2026-03-25
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.22...v2.131.23)
+
+## v2.131.22 - 2026-03-25
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.21...v2.131.22)
+
+## v2.131.21 - 2026-03-25
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.20...v2.131.21)
+
+## v2.131.20 - 2026-03-24
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.19...v2.131.20)
+
+## v2.131.19 - 2026-03-23
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.18...v2.131.19)
+
+- [#2788](https://github.com/ORCID/orcid-angular/pull/2788): PD-4866 Set the visibility object to null if the biography element co…
+
+## v2.131.18 - 2026-03-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.17...v2.131.18)
+
+- [#2787](https://github.com/ORCID/orcid-angular/pull/2787): PD-5211, COMMS-1503, PD-5176
+
+## v2.131.17 - 2026-03-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.16...v2.131.17)
+
+- [#2786](https://github.com/ORCID/orcid-angular/pull/2786): PD-0000 - Add XSRF header fallback for prod code
+
+## v2.131.16 - 2026-03-20
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.15...v2.131.16)
+
+- [#2783](https://github.com/ORCID/orcid-angular/pull/2783): PD-3857
+
+## v2.131.15 - 2026-03-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.14...v2.131.15)
+
+## v2.131.14 - 2026-03-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.13...v2.131.14)
+
+## v2.131.13 - 2026-03-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.12...v2.131.13)
+
+## v2.131.12 - 2026-03-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.11...v2.131.12)
+
+## v2.131.11 - 2026-03-19
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.10...v2.131.11)
+
+## v2.131.10 - 2026-03-16
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.9...v2.131.10)
+
+- [#2775](https://github.com/ORCID/orcid-angular/pull/2775): PD-3898
+
+## v2.131.9 - 2026-03-16
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.8...v2.131.9)
+
+- [#2774](https://github.com/ORCID/orcid-angular/pull/2774): Lmendoza/pd 5176
+
+## v2.131.8 - 2026-03-13
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.7...v2.131.8)
+
+## v2.131.7 - 2026-03-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.6...v2.131.7)
+
+- [#2746](https://github.com/ORCID/orcid-angular/pull/2746): Aromanovv/pd 4790 improve auth challenge
+
+## v2.131.6 - 2026-03-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.5...v2.131.6)
+
+- [#2767](https://github.com/ORCID/orcid-angular/pull/2767): PD-4792 add auth challenge to disable 2fa
+
+## v2.131.5 - 2026-03-12
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.4...v2.131.5)
+
+- [#2771](https://github.com/ORCID/orcid-angular/pull/2771): PD-5141
+
 ## v2.131.4 - 2026-03-11
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.131.3...v2.131.4)

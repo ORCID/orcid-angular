@@ -98,23 +98,25 @@
               </ng-container>
             </div>
             <div class="import-works-dialog__card-content">
-              <p class="import-works-dialog__card-title">{{ link.name }}</p>
+              <h3 class="import-works-dialog__card-title">{{ link.name }}</h3>
               <p class="import-works-dialog__card-description">
                 {{ link.description }}
               </p>
             </div>
             <div class="import-works-dialog__card-actions">
               <ng-container *ngIf="link.connected; else connectCertified">
-                <span
+                <button
+                  type="button"
                   class="import-works-dialog__connected"
                   [attr.aria-label]="getConnectedAriaLabel(link.name)"
+                  (click)="openInNewTab(link.url)"
                 >
                   <span
                     class="import-works-dialog__connected-dot"
                     aria-hidden="true"
                   ></span>
                   {{ connectedLabel }}
-                </span>
+                </button>
               </ng-container>
               <ng-template #connectCertified>
                 <button
@@ -247,7 +249,11 @@
                 >
               </div>
               <div class="import-works-dialog__card-content">
-                <p class="import-works-dialog__card-title">{{ link.name }}</p>
+                <h3
+                  class="import-works-dialog__card-title import-works-dialog__card-title--more"
+                >
+                  {{ link.name }}
+                </h3>
                 <p class="import-works-dialog__card-description">
                   {{ link.description }}
                 </p>

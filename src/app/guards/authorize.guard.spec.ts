@@ -5,15 +5,17 @@ import {
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
 } from '@angular/router'
-import { of, firstValueFrom, NEVER, from, timeout } from 'rxjs'
+import { of, firstValueFrom } from 'rxjs'
 
 import { AuthorizeGuard } from './authorize.guard'
+import { AppEventName } from '../rum/app-event-names'
 import { UserService } from '../core'
 import { PlatformInfoService } from '../cdk/platform-info'
 import { WINDOW } from '../cdk/window'
 import { TogglzService } from '../core/togglz/togglz.service'
 import { AuthDecisionService } from '../core/auth-decision/auth-decision.service'
 import { OauthService } from '../core/oauth/oauth.service'
+import { RumJourneyEventService } from '../rum/service/customEvent.service'
 
 describe('AuthorizeGuard', () => {
   let guard: AuthorizeGuard
@@ -23,6 +25,7 @@ describe('AuthorizeGuard', () => {
   let togglz: { getStateOf: jasmine.Spy }
   let oauthService: { validateRedirectUri: jasmine.Spy }
   let decisionMock: { decideForAuthorize: jasmine.Spy }
+  let observabilityMock: { recordSimpleEvent: jasmine.Spy }
   let win: { location: { href: string }; outOfRouterNavigation: jasmine.Spy }
   function stubUrlTree(
     path: string,
@@ -42,6 +45,9 @@ describe('AuthorizeGuard', () => {
     decisionMock = {
       decideForAuthorize: jasmine.createSpy('decideForAuthorize'),
     }
+    observabilityMock = {
+      recordSimpleEvent: jasmine.createSpy('recordSimpleEvent'),
+    }
 
     win = {
       location: { href: 'href' },
@@ -58,6 +64,7 @@ describe('AuthorizeGuard', () => {
         { provide: TogglzService, useValue: togglz },
         { provide: OauthService, useValue: oauthService },
         { provide: AuthDecisionService, useValue: decisionMock },
+        { provide: RumJourneyEventService, useValue: observabilityMock },
       ],
     })
 
@@ -129,20 +136,49 @@ describe('AuthorizeGuard', () => {
       expect(result).toEqual(stubUrlTree('/my-orcid'))
     })
 
-    it('triggers outOfRouterNavigation when action is outOfRouterNavigation', async () => {
+    it('triggers outOfRouterNavigation when action is outOfRouterNavigation', () => {
+      togglz.getStateOf.and.returnValue(of(true))
+      user.getUserSession.and.returnValue(of({ oauthSession: {} } as any))
       decisionMock.decideForAuthorize.and.returnValue({
         action: 'outOfRouterNavigation',
         trace: [],
         payload: { target: 'https://cb' },
       })
-      const result = runGuardHelper({}, { oauthSession: {} }, true)
+      const result$ = guard.canActivateChild(
+        makeSnapshot({}),
+        {} as RouterStateSnapshot
+      )
+      let gotEmission = false
+      const sub = result$.subscribe({
+        next: () => {
+          gotEmission = true
+        },
+      })
+
+      expect(observabilityMock.recordSimpleEvent).toHaveBeenCalledWith(
+        AppEventName.OauthAuthorizeGuardOutOfRouterNavigation,
+        jasmine.objectContaining({
+          target: 'https://cb',
+        })
+      )
       expect(win.outOfRouterNavigation).toHaveBeenCalledWith('https://cb')
-      // Expect a promise that never resolves
-      expect(result).toBeInstanceOf(Promise)
-      // Test that it never emits by trying to get first value with timeout
-      await expectAsync(
-        firstValueFrom(from(result).pipe(timeout(100)))
-      ).toBeRejected()
+      // This branch intentionally returns NEVER after redirecting (no emission).
+      expect(gotEmission).toBeFalse()
+      sub.unsubscribe()
+    })
+
+    it("returns UrlTree '/404' when outOfRouterNavigation target is missing", async () => {
+      router.createUrlTree.and.returnValue(stubUrlTree('/404'))
+      decisionMock.decideForAuthorize.and.returnValue({
+        action: 'outOfRouterNavigation',
+        trace: [],
+        payload: {},
+      })
+
+      const result = await runGuardHelper({}, { oauthSession: {} }, true)
+      expect(win.outOfRouterNavigation).not.toHaveBeenCalled()
+      expect(router.createUrlTree).toHaveBeenCalledWith(['/404'])
+      expect(result).toEqual(stubUrlTree('/404'))
     })
 
     it('validates redirect and navigates when action is validateRedirectUri', async () => {
@@ -158,6 +194,13 @@ describe('AuthorizeGuard', () => {
       expect(oauthService.validateRedirectUri).toHaveBeenCalledWith(
         'c',
         'https://cb'
+      )
+      expect(observabilityMock.recordSimpleEvent).toHaveBeenCalledWith(
+        AppEventName.OauthAuthorizeGuardLoginRequiredRedirect,
+        jasmine.any(Object)
+      )
+      expect(win.outOfRouterNavigation).toHaveBeenCalledWith(
+        'https://cb#login_required'
       )
       expect(result).toBeFalse()
     })

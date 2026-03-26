@@ -7,6 +7,11 @@ import { RumJourneyEventService } from '../rum/service/customEvent.service'
 import { JourneyType } from '../rum/journeys/types'
 import { UntypedFormArray, UntypedFormGroup } from '@angular/forms'
 import { RegisterStateService } from './register-state.service'
+import {
+  AppEventName,
+  stepBackButtonClickedEvent,
+  stepLoadedEvent,
+} from '../rum/app-event-names'
 import init from 'helphero'
 @Injectable({
   providedIn: 'root',
@@ -24,7 +29,7 @@ export class RegisterObservabilityService {
     this._registrationStateService.getBackButtonClick().subscribe((step) => {
       this._observability.recordEvent(
         'orcid_registration',
-        `step-${step.step}-back-button-clicked`
+        stepBackButtonClickedEvent(step.step)
       )
     })
   }
@@ -32,17 +37,15 @@ export class RegisterObservabilityService {
   signInButtonClicked() {
     this._observability.recordEvent(
       'orcid_registration',
-      'step-a-sign-in-button-clicked'
+      AppEventName.StepASignInButtonClicked
     )
   }
 
   stepANextButtonClicked(form: UntypedFormGroup) {
     this._observability.recordEvent(
       'orcid_registration',
-      'step-a-next-button-clicked',
+      AppEventName.StepANextButtonClicked,
       {
-        // List all form controls errors
-        formValues: form.value,
         formValid: form.valid,
         errors: {
           givenNamesError: form.controls.givenNames.errors,
@@ -61,10 +64,8 @@ export class RegisterObservabilityService {
   stepBNextButtonClicked(form: UntypedFormGroup) {
     this._observability.recordEvent(
       'orcid_registration',
-      'step-b-next-button-clicked',
+      AppEventName.StepBNextButtonClicked,
       {
-        // List all form controls errors
-        formValues: form.value,
         formValid: form.valid,
         errors: {
           passwordError: form.controls.password.errors,
@@ -77,10 +78,8 @@ export class RegisterObservabilityService {
   stepC2NextButtonClicked(form: UntypedFormGroup) {
     this._observability.recordEvent(
       'orcid_registration',
-      'step-c2-next-button-clicked',
+      AppEventName.StepC2NextButtonClicked,
       {
-        // List all form controls errors
-        formValues: form.value,
         formValid: form.valid,
         errors: {
           departmentNameError: form.controls.departmentName.errors,
@@ -95,10 +94,8 @@ export class RegisterObservabilityService {
   stepC2SkipButtonClicked(form: UntypedFormGroup) {
     this._observability.recordEvent(
       'orcid_registration',
-      'step-c2-skip-button-clicked',
+      AppEventName.StepC2SkipButtonClicked,
       {
-        // List all form controls errors
-        formValues: form.value,
         formValid: form.valid,
         errors: {
           departmentNameError: form.controls.departmentName.errors,
@@ -113,10 +110,8 @@ export class RegisterObservabilityService {
   stepCNextButtonClicked(form: UntypedFormGroup) {
     this._observability.recordEvent(
       'orcid_registration',
-      'step-c-next-button-clicked',
+      AppEventName.StepCNextButtonClicked,
       {
-        // List all form controls errors
-        formValues: form.value,
         formValid: form.valid,
         errors: {
           visibilityErrors: form.controls.activitiesVisibilityDefault.errors,
@@ -128,10 +123,8 @@ export class RegisterObservabilityService {
   stepDNextButtonClicked(form: UntypedFormGroup) {
     this._observability.recordEvent(
       'orcid_registration',
-      'step-d-next-button-clicked',
+      AppEventName.StepDNextButtonClicked,
       {
-        // List all form controls errors
-        formValues: form.value,
         formValid: form.valid,
         errors: {
           captcha: form.controls.captcha.errors,
@@ -143,7 +136,7 @@ export class RegisterObservabilityService {
   }
 
   stepLoaded(step: 'a' | 'b' | 'c2' | 'c' | 'd') {
-    this._observability.recordEvent('orcid_registration', `step-${step}-loaded`)
+    this._observability.recordEvent('orcid_registration', stepLoadedEvent(step))
   }
 
   initializeJourney(reactivation) {
@@ -158,7 +151,7 @@ export class RegisterObservabilityService {
   completeJourney(attributes: any = {}) {
     this._observability.recordEvent(
       'orcid_registration',
-      'journey-complete',
+      AppEventName.JourneyComplete,
       attributes
     )
     this._observability.finishJourney('orcid_registration')

@@ -1,4 +1,9 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+  HttpParams,
+} from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { catchError, map, retry, switchMap, first, take } from 'rxjs/operators'
 
@@ -16,6 +21,8 @@ import { Title } from '@angular/platform-browser'
 import { CookieService } from 'ngx-cookie-service'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { TogglzFlag } from 'src/app/types/config.endpoint'
+import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
+import { AppEventName } from 'src/app/rum/app-event-names'
 
 @Injectable({
   providedIn: 'root',
@@ -27,7 +34,8 @@ export class SignInService {
     private _errorHandler: ErrorHandlerService,
     private _cookie: CookieService,
     private _togglz: TogglzService,
-    private _userService: UserService
+    private _userService: UserService,
+    private _observability: RumJourneyEventService
   ) {}
 
   /**
@@ -99,7 +107,10 @@ export class SignInService {
           })
           .pipe(
             retry(3),
-            catchError((error) => this._errorHandler.handleError(error)),
+            catchError((error) => {
+              this.recordSignInHttpError(error, signInLocal, usingOauthServer)
+              return this._errorHandler.handleError(error)
+            }),
             switchMap((response) => {
               // call refreshUserSession with force session update to handle register actions from sessions with a logged in user
               return this._userService
@@ -112,6 +123,57 @@ export class SignInService {
           )
       })
     )
+  }
+
+  /**
+   * Reports sign-in HTTP/network failures with flow context for NR dashboards.
+   * Application-level failures (200 + success: false) use {@link AppEventName.SignInFailure}.
+   */
+  private recordSignInHttpError(
+    error: unknown,
+    signInLocal: SignInLocal,
+    usingOauthServer: boolean
+  ): void {
+    const attrs: Record<string, unknown> = {
+      sign_in_flow: this.getSignInFlowLabel(signInLocal, usingOauthServer),
+      oauth_context: !!signInLocal.isOauth,
+    }
+    if (error instanceof HttpErrorResponse) {
+      attrs.status = error.status
+      attrs.statusText = error.statusText
+      attrs.url_path_and_query = this.urlPathAndQueryForReport(error.url)
+    } else {
+      attrs.error_kind = 'non_http'
+    }
+    this._observability.recordSimpleEvent(AppEventName.SignInHttpError, attrs)
+  }
+
+  private getSignInFlowLabel(
+    signInLocal: SignInLocal,
+    usingOauthServer: boolean
+  ): string {
+    if (signInLocal.type === TypeSignIn.institutional) {
+      return 'institutional'
+    }
+    if (signInLocal.type === TypeSignIn.social) {
+      return 'social'
+    }
+    return usingOauthServer ? 'password_oauth_server' : 'password_legacy'
+  }
+
+  /** Path + query for failed request URL (query helps debug OAuth/sign-in issues). */
+  private urlPathAndQueryForReport(
+    url: string | null | undefined
+  ): string | undefined {
+    if (!url) {
+      return undefined
+    }
+    try {
+      const u = new URL(url)
+      return u.pathname + u.search
+    } catch {
+      return url
+    }
   }
 
   reactivation(username: string) {

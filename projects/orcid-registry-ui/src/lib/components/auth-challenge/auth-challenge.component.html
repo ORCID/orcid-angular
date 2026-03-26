@@ -1,0 +1,301 @@
+<form
+  [formGroup]="parentForm"
+  (ngSubmit)="onSubmit()"
+  class="container"
+  [tabindex]="-1"
+>
+  @if (loading) {
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  }
+  <div
+    class="icon self-center w-16 h-16 mb-8 content-center ml-auto mr-auto rounded-[50%] text-center"
+  >
+    <mat-icon class="material-symbols-outlined">person_check</mat-icon>
+  </div>
+  <h1 class="orc-font-heading-small text-center font-normal" i18n>
+    Verify your ORCID account
+  </h1>
+  <p class="orc-font-body-small text-center mb-8">
+    <span i18n>Enter</span>&nbsp;@if (data.showPasswordField) {<ng-container
+      i18n
+      >your ORCID account password</ng-container
+    >&nbsp;}@if (data.showPasswordField && data.showTwoFactorField)
+    {<ng-container i18n>and</ng-container>&nbsp;}@if (data.showTwoFactorField)
+    {<ng-container i18n>a two-factor authentication code</ng-container
+    >&nbsp;}to&nbsp;{{ data.actionDescription }}@if (data.memberName) {&nbsp;<b
+      >{{ data.memberName }}</b
+    >}
+  </p>
+
+  @if (data.showPasswordField) {
+  <div class="row mb-6 flex flex-wrap">
+    <mat-label
+      class="orc-font-small-print block mb-2!"
+      id="password-input-label"
+      [ngClass]="{
+        error:
+          parentForm.get(data.passwordControlName)?.invalid &&
+          passwordWasTouched
+      }"
+    >
+      <strong i18n="@@register.password">Password</strong>
+    </mat-label>
+    <mat-form-field
+      appearance="outline"
+      class="mat-form-field-min no-hint w-full"
+    >
+      <input
+        matInput
+        #passwordInput
+        [formControlName]="data.passwordControlName"
+        id="password"
+        type="password"
+        aria-labelledby="password-input-label"
+        [errorStateMatcher]="errorMatcher"
+        [ngClass]="{
+          error:
+            parentForm.get(data.passwordControlName)?.invalid &&
+            passwordWasTouched
+        }"
+      />
+    </mat-form-field>
+
+    @if (parentForm.get(data.passwordControlName)?.hasError('required') &&
+    passwordWasTouched) {
+    <mat-error
+      class="w-full orc-font-small-print mt-2"
+      i18n="@@account.passwordCannotBeEmpty"
+    >
+      Password cannot be empty
+    </mat-error>
+    } @if (parentForm.get(data.passwordControlName)?.hasError('invalid')) {
+    <mat-error class="w-full orc-font-small-print mt-2" i18n>
+      The password does not match our records
+    </mat-error>
+    }
+  </div>
+  } @if (data.showTwoFactorField) { @if (!showRecoveryCode) {
+  <div>
+    <mat-label
+      class="orc-font-small-print font-bold! block mb-2!"
+      id="2fa-input-label"
+      i18n="@@account.twoPassword"
+      [ngClass]="{
+        error:
+          twoFactorCodeWasTouched &&
+          parentForm.get(data.codeControlName)?.invalid
+      }"
+    >
+      Two-factor authentication
+    </mat-label>
+    <mat-form-field
+      appearance="outline"
+      [hideRequiredMarker]="true"
+      class="no-hint w-full"
+    >
+      <input
+        id="twoFactorCode"
+        type="text"
+        inputmode="numeric"
+        aria-labelledby="2fa-input-label"
+        [formControlName]="data.codeControlName"
+        matInput
+        [errorStateMatcher]="errorMatcher"
+        #twoFactorCodeInput
+        [ngClass]="{
+          error:
+            twoFactorCodeWasTouched &&
+            parentForm.get(data.codeControlName)?.invalid
+        }"
+      />
+    </mat-form-field>
+    <div class="flex orc-font-small-print">
+      <div class="mt-2 grow">
+        @if (!parentForm.get(data.codeControlName)?.invalid ||
+        !twoFactorCodeWasTouched) {
+        <mat-hint class="leading-6" i18n="@@account.enterTheCode">
+          Enter the code from your two-factor authentication app
+        </mat-hint>
+        } @if (parentForm.get(data.codeControlName)?.hasError('invalid')) {
+        <mat-error>
+          <ng-container i18n="@@ngOrcid.signin.2fa.badVerificationCode">
+            Invalid authentication code
+          </ng-container>
+        </mat-error>
+        } @if ( twoFactorCodeWasTouched &&
+        parentForm.get(data.codeControlName)?.hasError('required')) {
+        <mat-error>
+          <ng-container i18n="@@ngOrcid.signin.2fa.verificationCodeRequired">
+            Authentication code is required
+          </ng-container>
+        </mat-error>
+        } @if ( twoFactorCodeWasTouched &&
+        (parentForm.get(data.codeControlName)?.hasError('minlength') ||
+        parentForm.get(data.codeControlName)?.hasError('maxlength'))) {
+        <mat-error>
+          <ng-container i18n="@@ngOrcid.signin.2fa.badVerificationCodeLength">
+            Invalid authentication code length
+          </ng-container>
+        </mat-error>
+        }
+      </div>
+      <mat-hint
+        [ngClass]="{
+          error:
+            twoFactorCodeWasTouched &&
+            parentForm.get(data.codeControlName)?.invalid
+        }"
+        class="mt-2 self-center leading-6"
+      >
+        {{ parentForm.get(data.codeControlName)?.value?.length || 0 }}/6
+      </mat-hint>
+    </div>
+  </div>
+  } @else {
+  <div>
+    <mat-label
+      class="orc-font-small-print font-bold! block mb-2!"
+      id="recovery-input-label"
+      i18n="@@ngOrcid.signin.2fa.recoveryCode"
+      [ngClass]="{
+        error:
+          twoFactorRecoveryCodeWasTouched &&
+          parentForm.get(data.recoveryControlName)?.invalid
+      }"
+    >
+      Recovery code
+    </mat-label>
+    <mat-form-field
+      appearance="outline"
+      [hideRequiredMarker]="true"
+      class="no-hint w-full"
+    >
+      <input
+        id="twoFactorRecoveryCode"
+        type="text"
+        inputmode="numeric"
+        aria-labelledby="recovery-input-label"
+        [formControlName]="data.recoveryControlName"
+        #twoFactorRecoveryCodeInput
+        [errorStateMatcher]="errorMatcher"
+        matInput
+        [ngClass]="{
+          error:
+            twoFactorRecoveryCodeWasTouched &&
+            parentForm.get(data.recoveryControlName)?.invalid
+        }"
+      />
+    </mat-form-field>
+    <div class="flex orc-font-small-print">
+      <div class="mt-2 grow">
+        @if (!parentForm.get(data.recoveryControlName)?.invalid ||
+        !twoFactorRecoveryCodeWasTouched) {
+        <mat-hint class="leading-6" i18n="@@ngOrcid.signin.2fa.noDevice2"
+          >Enter a recovery code</mat-hint
+        >
+        } @if (parentForm.get(data.recoveryControlName)?.hasError('invalid')) {
+        <mat-error>
+          <ng-container i18n="@@ngOrcid.signin.2fa.badRecoveryCode">
+            Invalid recovery code
+          </ng-container>
+        </mat-error>
+        } @if (twoFactorRecoveryCodeWasTouched &&
+        parentForm.get(data.recoveryControlName)?.hasError('required')) {
+        <mat-error>
+          <ng-container i18n="@@ngOrcid.signin.2fa.recoveryCodeRequired">
+            Recovery code is required
+          </ng-container>
+        </mat-error>
+        } @if (twoFactorRecoveryCodeWasTouched &&
+        (parentForm.get(data.recoveryControlName)?.hasError('minlength') ||
+        parentForm.get(data.recoveryControlName)?.hasError('maxlength'))) {
+        <mat-error>
+          <ng-container i18n="@@ngOrcid.signin.2fa.badRecoveryCodeLength">
+            Invalid recovery code length
+          </ng-container>
+        </mat-error>
+        }
+      </div>
+      <mat-hint
+        [ngClass]="{
+          error:
+            twoFactorRecoveryCodeWasTouched &&
+            parentForm.get(data.recoveryControlName)?.invalid
+        }"
+        class="mt-2 self-center leading-6"
+      >
+        {{ parentForm.get(data.recoveryControlName)?.value?.length || 0 }}/10
+      </mat-hint>
+    </div>
+  </div>
+  } @if (!showRecoveryCode) {
+  <div class="text-center orc-font-body-small mt-6">
+    <p i18n="@@ngOrcid.signin.2fa.noDevice1" class="m-0 leading-6">
+      Don't have your device?
+    </p>
+    <a
+      href="#"
+      (click)="toggleRecoveryCode($event)"
+      i18n="@@account.useARecoveryCode"
+      class="underline"
+      data-testid="recovery-toggle"
+    >
+      Use a recovery code instead
+    </a>
+  </div>
+  } @else {
+  <div class="text-center orc-font-body-small mt-6">
+    <p i18n="@@account.dontHaveYourRecoveryCodes" class="m-0 leading-6">
+      Don't have your recovery codes?
+    </p>
+    <a
+      href="#"
+      (click)="toggleRecoveryCode($event)"
+      data-testid="recovery-toggle"
+      i18n="@@account.useYourAuthenticationAppInstead"
+      class="underline"
+    >
+      Use your authentication app instead
+    </a>
+  </div>
+  } <br />
+  <div class="text-center orc-font-body-small mt-4">
+    <p i18n="@@ngOrcid.signin.2fa.noDeviceOrRecovery" class="m-0 leading-6">
+      Don't have your device or recovery code?
+    </p>
+    <a
+      class="underline"
+      href="https://support.orcid.org/hc/en-us/articles/360006971673-Secure-your-account-with-two-factor-authentication"
+      target="_blank"
+      rel="noopener noreferrer"
+      i18n="@@topBar.knowledge"
+    >
+      ORCID help centre
+    </a>
+  </div>
+  }
+  <hr />
+  <button
+    mat-raised-button
+    type="submit"
+    class="verify-button row orc-font-body mat-elevation-z0 text-center h-10! mb-6 block w-full"
+    i18n
+    [disabled]="loading || parentForm.invalid || parentForm.pending"
+    [ngClass]="{
+      'verify-button-loading':
+        loading || parentForm.invalid || parentForm.pending
+    }"
+  >
+    Verify my account and continue
+  </button>
+
+  <button
+    mat-button
+    type="button"
+    mat-dialog-close
+    class="text-center orc-font-body-small h-10! w-full block content-center cancel font-normal!"
+    i18n
+  >
+    Cancel account verification
+  </button>
+</form>

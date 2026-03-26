@@ -29,12 +29,15 @@ function createServiceWithUserAgent(userAgent: string): PlatformInfoService {
 
   // Override supported browsers with a simple known matrix for the tests.
   // This avoids depending on the generated supported-browsers.json contents.
+  // The constructor already ran with the real JSON; recompute after overriding.
   service.supportedBrowsers = {
     chrome: { major: 90, minor: 0 },
     firefox: { major: 88, minor: 0 },
     safari: { major: 16, minor: 4 },
     edge: { major: 90, minor: 0 },
   }
+  service.platform.unsupportedBrowser = service.isUnsupportedBrowser(userAgent)
+  service.platformSubject.next(service.platform)
 
   return TestBed.inject(PlatformInfoService)
 }

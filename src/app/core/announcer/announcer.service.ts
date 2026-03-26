@@ -12,6 +12,7 @@ export class AnnouncerService {
   thereAreLabel = $localize`:@@shared.thereAre:There are`
   onEachPageLabel = $localize`:@@shared.onEachPage:on each page`
   showingLabel = $localize`:@@shared.showing:Showing`
+  oneTrustFocusAnnouncement = $localize`:@@layout.oneTrustFocusAnnouncement:Cookie consent dialog opened`
   lastAnnouncement: string
 
   liveAnnouncePagination(paginatorLabel: PageEvent, itemType: string) {
@@ -48,11 +49,11 @@ export class AnnouncerService {
 
     if (this.lastAnnouncement !== announcement) {
       this.lastAnnouncement = announcement
-      this.announce(announcement)
+      this.liveAnnounce(announcement)
     }
   }
 
-  private announce(announcement: string) {
+  liveAnnounce(announcement: string) {
     if (runtimeEnvironment.debugger) {
       console.debug('📢' + announcement)
     }
