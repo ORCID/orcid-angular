@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="34ffe29756a4433b9d5b883db26413783e1c08d9" datatype="html" resname="34ffe29756a4433b9d5b883db26413783e1c08d9">
         <source>Verify your ORCID account</source>
+        <target>查看您的 ORCID 帐户</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
           <context context-type="linenumber">15,17</context>
@@ -10,6 +11,7 @@
       </trans-unit>
       <trans-unit id="3ab786af0ee4de6cf71ac145c3c7a089fe81dadb" datatype="html" resname="3ab786af0ee4de6cf71ac145c3c7a089fe81dadb">
         <source>Enter</source>
+        <target>输入</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
           <context context-type="linenumber">19</context>
@@ -17,6 +19,7 @@
       </trans-unit>
       <trans-unit id="e65c0a651252b987d33f5e244972055e71e88742" datatype="html" resname="e65c0a651252b987d33f5e244972055e71e88742">
         <source>your ORCID account password</source>
+        <target>你的 ORCID 帐户密码</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
           <context context-type="linenumber">21</context>
@@ -32,6 +35,7 @@
       </trans-unit>
       <trans-unit id="4b7984f50afed5b65ccf49d51bcb43cf35f49a25" datatype="html" resname="4b7984f50afed5b65ccf49d51bcb43cf35f49a25">
         <source>a two-factor authentication code</source>
+        <target>双重验证代码</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
           <context context-type="linenumber">24</context>
@@ -67,6 +71,7 @@
       </trans-unit>
       <trans-unit id="48679ad8c0f76c54cd6537e208dbd8c5d632519b" datatype="html" resname="48679ad8c0f76c54cd6537e208dbd8c5d632519b">
         <source>The password does not match our records</source>
+        <target>该密码与我们的记录不符</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
           <context context-type="linenumber">72,74</context>
@@ -326,6 +331,7 @@
       </trans-unit>
       <trans-unit id="fafb17564938e09a75096ad3e513a6ee4ad19931" datatype="html" resname="fafb17564938e09a75096ad3e513a6ee4ad19931">
         <source>Verify my account and continue</source>
+        <target>验证我的帐户并继续</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
           <context context-type="linenumber">288,290</context>
@@ -333,6 +339,7 @@
       </trans-unit>
       <trans-unit id="fc4c8aa10015fe4b6481bf3719ff91f5bcebd1d5" datatype="html" resname="fc4c8aa10015fe4b6481bf3719ff91f5bcebd1d5">
         <source>Cancel account verification</source>
+        <target>取消帐户验证</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
           <context context-type="linenumber">298,300</context>
@@ -1189,6 +1196,17 @@
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
         </source>
+        <target>
+          备用登录帐户  已被取消关联
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
+          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>
+          <x id="INTERPOLATION" equiv-text="ount
+      }}"/>
+          <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&amp;n"/>
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
+        </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
           <context context-type="linenumber">5,10</context>
@@ -1205,6 +1223,17 @@
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
         </source>
+        <target>
+          备用登录帐户  尚未被取消关联
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
+          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>
+          <x id="INTERPOLATION" equiv-text="ount
+      }}"/>
+          <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&amp;n"/>
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
+        </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
           <context context-type="linenumber">14,19</context>
@@ -1288,6 +1317,7 @@
       </trans-unit>
       <trans-unit id="accountSettings.security.unlinkTheAlternateSignInAccount" datatype="html" resname="accountSettings.security.unlinkTheAlternateSignInAccount">
         <source>unlink the alternate sign in account</source>
+        <target>取消备用登录帐户</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.ts</context>
           <context context-type="linenumber">45</context>
@@ -1295,6 +1325,7 @@
       </trans-unit>
       <trans-unit id="08f2e5ad4847aa140bd7c5bd6b374c9d21aa8aba" datatype="html" resname="08f2e5ad4847aa140bd7c5bd6b374c9d21aa8aba">
         <source>Your ORCID account password has been updated</source>
+        <target>您的 ORCID 帐户密码已更新</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
           <context context-type="linenumber">5,7</context>
@@ -1302,6 +1333,7 @@
       </trans-unit>
       <trans-unit id="ac0550d41d1eb6218c68e93a0c715d048293a85b" datatype="html" resname="ac0550d41d1eb6218c68e93a0c715d048293a85b">
         <source>Your account password has not been updated</source>
+        <target>您的帐户密码尚未更新</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
           <context context-type="linenumber">11,13</context>
@@ -1497,6 +1529,7 @@
       </trans-unit>
       <trans-unit id="accountSettings.security.password.confirmPasswordPlaceholder" datatype="html" resname="accountSettings.security.password.confirmPasswordPlaceholder">
         <source>Confirm your new password</source>
+        <target>确认新密码</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.ts</context>
           <context context-type="linenumber">50</context>
@@ -1504,6 +1537,7 @@
       </trans-unit>
       <trans-unit id="accountSettings.security.password.authChallengeLabel" datatype="html" resname="accountSettings.security.password.authChallengeLabel">
         <source>complete your password reset</source>
+        <target>完成密码重置</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.ts</context>
           <context context-type="linenumber">51</context>
@@ -1511,6 +1545,7 @@
       </trans-unit>
       <trans-unit id="9ac367b075ae56728c151e6b8ff03b5c16a38127" datatype="html" resname="9ac367b075ae56728c151e6b8ff03b5c16a38127">
         <source>Two-factor authentication has been disabled</source>
+        <target>双因素验证已禁用</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
           <context context-type="linenumber">4,6</context>
@@ -1518,6 +1553,7 @@
       </trans-unit>
       <trans-unit id="2b63693f3f85f5f642f0aa7ec61159f9e35a9457" datatype="html" resname="2b63693f3f85f5f642f0aa7ec61159f9e35a9457">
         <source>Two-factor authentication was not disabled</source>
+        <target>双因素验证未禁用</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.html</context>
           <context context-type="linenumber">10,12</context>
@@ -1597,6 +1633,7 @@
       </trans-unit>
       <trans-unit id="accountSettings.security.disable2FA" datatype="html" resname="accountSettings.security.disable2FA">
         <source>disable 2FA</source>
+        <target>禁用 2FA</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.ts</context>
           <context context-type="linenumber">31</context>
@@ -6513,6 +6550,7 @@
       </trans-unit>
       <trans-unit id="layout.oneTrustFocusAnnouncement" datatype="html" resname="layout.oneTrustFocusAnnouncement">
         <source>Cookie consent dialog opened</source>
+        <target>Cookie 同意对话框已打开</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/announcer/announcer.service.ts</context>
           <context context-type="linenumber">15</context>
