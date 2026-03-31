@@ -5,7 +5,7 @@
         <source>Verify your ORCID account</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">15,17</context>
+          <context context-type="linenumber">19,21</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -13,7 +13,7 @@
         <source>Enter</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">23</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -21,7 +21,7 @@
         <source>your ORCID account password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">21</context>
+          <context context-type="linenumber">25</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -29,7 +29,7 @@
         <source>and</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">23</context>
+          <context context-type="linenumber">27</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -37,7 +37,7 @@
         <source>a two-factor authentication code</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">24</context>
+          <context context-type="linenumber">28</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -45,7 +45,7 @@
         <source>Password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">41</context>
+          <context context-type="linenumber">45</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -61,7 +61,7 @@
         <source>Password cannot be empty</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">68,70</context>
+          <context context-type="linenumber">72,74</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.html</context>
@@ -73,7 +73,7 @@
         <source>The password does not match our records</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">72,74</context>
+          <context context-type="linenumber">76,78</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -81,7 +81,7 @@
         <source>Two-factor authentication</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">88,90</context>
+          <context context-type="linenumber">92,94</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security/settings-security.component.ts</context>
@@ -97,7 +97,7 @@
         <source>Enter the code from your two-factor authentication app</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">116,118</context>
+          <context context-type="linenumber">120,122</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -109,7 +109,7 @@
         <source>Invalid authentication code</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">121,123</context>
+          <context context-type="linenumber">125,127</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -129,7 +129,7 @@
         <source>Authentication code is required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">128,130</context>
+          <context context-type="linenumber">132,134</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -149,7 +149,7 @@
         <source>Invalid authentication code length</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">136,138</context>
+          <context context-type="linenumber">140,142</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -169,7 +169,7 @@
         <source>Recovery code</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">165,167</context>
+          <context context-type="linenumber">169,171</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -185,7 +185,7 @@
         <source>Enter a recovery code</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">194</context>
+          <context context-type="linenumber">198</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -201,7 +201,7 @@
         <source>Invalid recovery code</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">198,200</context>
+          <context context-type="linenumber">202,204</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -217,7 +217,7 @@
         <source>Recovery code is required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">205,207</context>
+          <context context-type="linenumber">209,211</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -233,7 +233,7 @@
         <source>Invalid recovery code length</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">213,215</context>
+          <context context-type="linenumber">217,219</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -249,7 +249,7 @@
         <source>Don't have your device?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">233,235</context>
+          <context context-type="linenumber">237,239</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -265,7 +265,7 @@
         <source>Use a recovery code instead</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">242,244</context>
+          <context context-type="linenumber">246,248</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -277,7 +277,7 @@
         <source>Don't have your recovery codes?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">248,250</context>
+          <context context-type="linenumber">252,254</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -289,7 +289,7 @@
         <source>Use your authentication app instead</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">257,259</context>
+          <context context-type="linenumber">261,263</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -301,7 +301,7 @@
         <source>Don't have your device or recovery code?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">263,265</context>
+          <context context-type="linenumber">267,269</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -317,7 +317,7 @@
         <source>ORCID help centre</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">272,274</context>
+          <context context-type="linenumber">276,278</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/pages/confirm-deactivate-account/confirm-deactivate-account.component.html</context>
@@ -333,7 +333,7 @@
         <source>Verify my account and continue</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">288,290</context>
+          <context context-type="linenumber">292,294</context>
         </context-group>
         <target>X</target>
       </trans-unit>
@@ -341,7 +341,7 @@
         <source>Cancel account verification</source>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
-          <context context-type="linenumber">298,300</context>
+          <context context-type="linenumber">302,304</context>
         </context-group>
         <target>X</target>
       </trans-unit>
