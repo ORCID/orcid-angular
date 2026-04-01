@@ -19,7 +19,7 @@
       </trans-unit>
       <trans-unit id="e65c0a651252b987d33f5e244972055e71e88742" datatype="html" resname="e65c0a651252b987d33f5e244972055e71e88742">
         <source>your ORCID account password</source>
-        <target>das Passwort für Ihr ORCID-Konto ein</target>
+        <target>das Passwort für Ihr ORCID-Konto</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
           <context context-type="linenumber">21</context>
@@ -1317,7 +1317,7 @@
       </trans-unit>
       <trans-unit id="accountSettings.security.unlinkTheAlternateSignInAccount" datatype="html" resname="accountSettings.security.unlinkTheAlternateSignInAccount">
         <source>unlink the alternate sign in account</source>
-        <target>Verbindung zum alternativen Anmeldekonto trennen</target>
+        <target>die Verbindung zum alternativen Anmeldekonto zu trennen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.ts</context>
           <context context-type="linenumber">45</context>
@@ -1537,7 +1537,7 @@
       </trans-unit>
       <trans-unit id="accountSettings.security.password.authChallengeLabel" datatype="html" resname="accountSettings.security.password.authChallengeLabel">
         <source>complete your password reset</source>
-        <target>Zurücksetzen des Passworts abschließen</target>
+        <target>das Zurücksetzen des Passworts abzuschließen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.ts</context>
           <context context-type="linenumber">51</context>
@@ -1633,7 +1633,7 @@
       </trans-unit>
       <trans-unit id="accountSettings.security.disable2FA" datatype="html" resname="accountSettings.security.disable2FA">
         <source>disable 2FA</source>
-        <target>Zwei-Faktor-Authentifizierung deaktivieren</target>
+        <target>die Zwei-Faktor-Authentifizierung zu deaktivieren</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.ts</context>
           <context context-type="linenumber">31</context>

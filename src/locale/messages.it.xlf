@@ -1317,7 +1317,7 @@
       </trans-unit>
       <trans-unit id="accountSettings.security.unlinkTheAlternateSignInAccount" datatype="html" resname="accountSettings.security.unlinkTheAlternateSignInAccount">
         <source>unlink the alternate sign in account</source>
-        <target>scollega l’account di accesso alternativo</target>
+        <target>scollegare l’account di accesso alternativo</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.ts</context>
           <context context-type="linenumber">45</context>
@@ -1537,7 +1537,7 @@
       </trans-unit>
       <trans-unit id="accountSettings.security.password.authChallengeLabel" datatype="html" resname="accountSettings.security.password.authChallengeLabel">
         <source>complete your password reset</source>
-        <target>completa la reimpostazione della password</target>
+        <target>completare la reimpostazione della password</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.ts</context>
           <context context-type="linenumber">51</context>
@@ -1633,7 +1633,7 @@
       </trans-unit>
       <trans-unit id="accountSettings.security.disable2FA" datatype="html" resname="accountSettings.security.disable2FA">
         <source>disable 2FA</source>
-        <target>disattiva 2FA</target>
+        <target>disattivare 2FA</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.ts</context>
           <context context-type="linenumber">31</context>

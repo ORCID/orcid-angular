@@ -1317,7 +1317,7 @@
       </trans-unit>
       <trans-unit id="accountSettings.security.unlinkTheAlternateSignInAccount" datatype="html" resname="accountSettings.security.unlinkTheAlternateSignInAccount">
         <source>unlink the alternate sign in account</source>
-        <target>odłącz alternatywne konto logowania</target>
+        <target>odłączyć alternatywne konto logowania</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.ts</context>
           <context context-type="linenumber">45</context>
@@ -1537,7 +1537,7 @@
       </trans-unit>
       <trans-unit id="accountSettings.security.password.authChallengeLabel" datatype="html" resname="accountSettings.security.password.authChallengeLabel">
         <source>complete your password reset</source>
-        <target>ukończ reset hasła</target>
+        <target>ukończ resetowanie hasła</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-password/settings-security-password.component.ts</context>
           <context context-type="linenumber">51</context>
