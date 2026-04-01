@@ -5,7 +5,16 @@ export default {
     logLevel: 'debug',
     changeOrigin: true,
     bypass: function (req, res, proxyOptions) {
-      /// PRRINT REQUEST PATH
+      const match = (req.url || '').match(
+        /^\/(\d{4}-\d{4}-\d{4}-\d{3}[\dX])\/print\/?$/i
+      )
+      if (match) {
+        return `/print-view/index.html?orcid=${encodeURIComponent(match[1])}`
+      }
+      // Keep /print-view fully local so Angular is never involved.
+      if (req.url?.startsWith('/print-view/')) {
+        return req.url
+      }
       if (req.headers.accept && req.headers.accept.includes('html')) {
         return '/index.html'
       }
@@ -18,7 +27,16 @@ export default {
     logLevel: 'debug',
     changeOrigin: true,
     bypass: function (req, res, proxyOptions) {
-      /// PRRINT REQUEST PATH
+      const match = (req.url || '').match(
+        /^\/(\d{4}-\d{4}-\d{4}-\d{3}[\dX])\/print\/?$/i
+      )
+      if (match) {
+        return `/print-view/index.html?orcid=${encodeURIComponent(match[1])}`
+      }
+      // Keep /print-view fully local so Angular is never involved.
+      if (req.url?.startsWith('/print-view/')) {
+        return req.url
+      }
       if (req.headers.accept && req.headers.accept.includes('html')) {
         return '/index.html'
       }
