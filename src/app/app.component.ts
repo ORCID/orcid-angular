@@ -8,7 +8,10 @@ import {
 import { PlatformInfo } from './cdk/platform-info'
 import { PlatformInfoService } from './cdk/platform-info/platform-info.service'
 import { WINDOW } from './cdk/window'
-import { ApplicationRoutes, HeadlessOnOauthRoutes } from './constants'
+import {
+  ApplicationRoutes,
+  HeadlessOnOauthRoutes,
+} from './constants'
 import { UserService } from './core'
 import { ErrorHandlerService } from './core/error-handler/error-handler.service'
 import { GoogleTagManagerService } from './core/google-tag-manager/google-tag-manager.service'
