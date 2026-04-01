@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { Client } from 'src/app/types/developer-tools'
 import { Observable } from 'rxjs'
-import { retry, catchError } from 'rxjs/operators'
+import { catchError } from 'rxjs/operators'
 import { ERROR_REPORT } from 'src/app/errors'
 
 @Injectable({
@@ -21,7 +21,6 @@ export class DeveloperToolsService {
         runtimeEnvironment.BASE_URL + 'developer-tools/get-client.json'
       )
       .pipe(
-        retry(3),
         catchError((error) =>
           this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
         )
@@ -35,7 +34,6 @@ export class DeveloperToolsService {
         client
       )
       .pipe(
-        retry(3),
         catchError((error) =>
           this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
         )
@@ -49,7 +47,6 @@ export class DeveloperToolsService {
         client
       )
       .pipe(
-        retry(3),
         catchError((error) =>
           this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
         )
@@ -64,7 +61,6 @@ export class DeveloperToolsService {
         client
       )
       .pipe(
-        retry(3),
         catchError((error) =>
           this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
         )
@@ -79,7 +75,6 @@ export class DeveloperToolsService {
         {}
       )
       .pipe(
-        retry(3),
         catchError((error) =>
           this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
         )
@@ -94,7 +89,6 @@ export class DeveloperToolsService {
         client
       )
       .pipe(
-        retry(3),
         catchError((error) =>
           this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
         )

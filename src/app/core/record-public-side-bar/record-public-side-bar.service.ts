@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, of, ReplaySubject } from 'rxjs'
-import { retry, catchError, tap } from 'rxjs/operators'
+import { catchError, tap } from 'rxjs/operators'
 import {
   SideBarPublicUserRecord,
   UserRecord,
@@ -55,7 +55,6 @@ export class RecordPublicSideBarService {
           }
         )
         .pipe(
-          retry(3),
           catchError((error) => this._errorHandler.handleError(error)),
           catchError(() => of({} as SideBarPublicUserRecord)),
           tap((record) => {

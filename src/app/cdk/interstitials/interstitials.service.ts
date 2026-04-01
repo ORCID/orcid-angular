@@ -5,7 +5,6 @@ import {
   catchError,
   filter,
   map,
-  retry,
   switchMap,
   take,
   tap,
@@ -85,7 +84,6 @@ export class InterstitialsService {
         `${runtimeEnvironment.API_WEB}account/hasInterstitialFlag/${interstitialName}`
       )
       .pipe(
-        retry(3),
         switchMap((hasFlag) => {
           if (hasFlag) {
             return this.setInterstitialsViewed(interstitialName, false).pipe(
@@ -105,7 +103,6 @@ export class InterstitialsService {
         interstitialName
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )
   }

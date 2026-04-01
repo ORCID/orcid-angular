@@ -5,7 +5,6 @@ import {
   catchError,
   finalize,
   map,
-  retry,
   switchMap,
   tap,
 } from 'rxjs/operators'
@@ -66,7 +65,6 @@ export class RecordAffiliationService {
     this._$loading.next(true)
     this.getGroupAndSortAffiliations(options)
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         catchError(() => of([])),
         tap((value) => {
@@ -126,7 +124,6 @@ export class RecordAffiliationService {
           }affiliationDetails.json?id=${putCode}&type=${type}`
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )
   }
@@ -141,7 +138,6 @@ export class RecordAffiliationService {
             `${options.publicRecordId}/affiliationGroups.json`
         )
         .pipe(
-          retry(3),
           map((data) => this._affiliationsGroupingService.transform(data)),
           map((data) => this._affiliationsSortService.transform(data)),
           catchError((error) => this._errorHandler.handleError(error))
@@ -152,7 +148,6 @@ export class RecordAffiliationService {
           runtimeEnvironment.API_WEB + `affiliations/affiliationGroups.json`
         )
         .pipe(
-          retry(3),
           map((data) => this._affiliationsGroupingService.transform(data)),
           map((data) => this._affiliationsSortService.transform(data)),
           catchError((error) => this._errorHandler.handleError(error))
@@ -201,7 +196,6 @@ export class RecordAffiliationService {
         }
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => this.getAffiliations({ forceReload: true }))
       )
@@ -220,7 +214,6 @@ export class RecordAffiliationService {
           }
         )
         .pipe(
-          retry(3),
           catchError((error) => this._errorHandler.handleError(error))
         )
     } else {
@@ -239,7 +232,6 @@ export class RecordAffiliationService {
         }
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )
   }
@@ -257,7 +249,6 @@ export class RecordAffiliationService {
           visibility
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => this.getAffiliations({ forceReload: true }))
       )
@@ -272,7 +263,6 @@ export class RecordAffiliationService {
           encodeURIComponent(putCode)
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => this.getAffiliations({ forceReload: true }))
       )
@@ -286,7 +276,6 @@ export class RecordAffiliationService {
           putCode
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => this.getAffiliations({ forceReload: true }))
       )
@@ -328,7 +317,6 @@ export class RecordAffiliationService {
         }
       )
       .pipe(
-        retry(3),
         catchError((error) => {
           // Revert optimistic update on failure
           if (previousState && this.$affiliations) {
@@ -351,7 +339,6 @@ export class RecordAffiliationService {
         }
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )
   }

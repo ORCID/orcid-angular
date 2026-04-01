@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { UntypedFormGroup } from '@angular/forms'
 import { Observable, throwError } from 'rxjs'
-import { catchError, first, map, retry, switchMap, tap } from 'rxjs/operators'
+import { catchError, first, map, switchMap, tap } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { LegacyOauthRequestInfoForm as RequestInfoForm } from 'src/app/types/request-info-form.endpoint'
 import {
@@ -60,7 +60,6 @@ export class RegisterService extends _RegisterServiceMixingBase {
         }
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )
   }
@@ -71,7 +70,6 @@ export class RegisterService extends _RegisterServiceMixingBase {
         withCredentials: true,
       })
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )
       .pipe(map((form) => (this.backendRegistrationForm = form)))
@@ -139,7 +137,6 @@ export class RegisterService extends _RegisterServiceMixingBase {
             )
           )
           .pipe(
-            retry(3),
             catchError((error) =>
               this._errorHandler.handleError(error, ERROR_REPORT.REGISTER)
             ),

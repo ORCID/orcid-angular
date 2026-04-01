@@ -4,7 +4,7 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { Observable, of } from 'rxjs'
 import { TrustedSummary } from 'src/app/types/trust-summary'
 
-import { catchError, retry, shareReplay, tap } from 'rxjs/operators'
+import { catchError, shareReplay, tap } from 'rxjs/operators'
 import { ERROR_REPORT } from 'src/app/errors'
 
 @Injectable({
@@ -30,7 +30,6 @@ export class TrustedSummaryService {
           headers: this.headers,
         })
         .pipe(
-          retry(3),
           catchError((error) =>
             this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
           ),

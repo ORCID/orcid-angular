@@ -17,7 +17,6 @@ import {
   first,
   last,
   map,
-  retry,
   retryWhen,
   startWith,
   switchMap,
@@ -57,6 +56,7 @@ import { TogglzFlag } from 'src/app/types/config.endpoint'
 import { LOCAL_SESSION_UID } from 'src/app/constants'
 import { Params } from '@angular/router'
 import { CookieService } from 'ngx-cookie-service'
+import { retryTransient } from '../http/retry-transient'
 
 @Injectable({
   providedIn: 'root',
@@ -129,7 +129,7 @@ export class UserService {
           })
           .pipe(map((response) => !!response.loggedIn))
           .pipe(
-            retry(3),
+            retryTransient(),
             catchError((error) =>
               this._errorHandler.handleError(
                 error,

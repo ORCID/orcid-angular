@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, Subject } from 'rxjs'
-import { catchError, map, retry, tap } from 'rxjs/operators'
+import { catchError, map, tap } from 'rxjs/operators'
 import {
   ExpandedSearchResultsContent,
   SearchResultsByEmailOrOrcid,
@@ -34,7 +34,6 @@ export class AccountTrustedIndividualsService {
         { headers: this.headers }
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         map((x) => {
           return x.map((x) => {
@@ -55,7 +54,6 @@ export class AccountTrustedIndividualsService {
         { headers: this.headers }
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => this.updateTrustedIndividualsSuccess.next())
       )
@@ -70,7 +68,6 @@ export class AccountTrustedIndividualsService {
         }
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )
   }
@@ -82,7 +79,6 @@ export class AccountTrustedIndividualsService {
         { headers: this.headers }
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => this.updateTrustedIndividualsSuccess.next())
       )
@@ -95,7 +91,6 @@ export class AccountTrustedIndividualsService {
         { headers: this.headers }
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )
   }
@@ -107,7 +102,6 @@ export class AccountTrustedIndividualsService {
         { headers: this.headers }
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => this.updateTrustedIndividualsSuccess.next())
       )
@@ -121,7 +115,6 @@ export class AccountTrustedIndividualsService {
         { headers: this.headers }
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )
   }
@@ -133,7 +126,6 @@ export class AccountTrustedIndividualsService {
         { headers: this.headers }
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => this.updateTrustedIndividualsSuccess.next())
       )

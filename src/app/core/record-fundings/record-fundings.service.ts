@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs'
-import { catchError, retry, switchMap, tap } from 'rxjs/operators'
+import { catchError, switchMap, tap } from 'rxjs/operators'
 import { Funding, FundingGroup } from 'src/app/types/record-funding.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
 
@@ -43,7 +43,6 @@ export class RecordFundingsService {
             (options.sortAsc != null ? options.sortAsc : false)
         )
         .pipe(
-          retry(3),
           catchError((error) => this._errorHandler.handleError(error)),
           catchError(() => of([])),
           tap((data) => {
@@ -57,7 +56,6 @@ export class RecordFundingsService {
     } else {
       this.getAndSortFundings(options)
         .pipe(
-          retry(3),
           catchError((error) => this._errorHandler.handleError(error)),
           tap((data) => {
             this._$loading.next(false)
@@ -78,7 +76,6 @@ export class RecordFundingsService {
           `fundings/fundingDetails.json?id=${putCode}`
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )
     /* TODO: Fetch group id info */
@@ -92,7 +89,6 @@ export class RecordFundingsService {
           `/fundingDetails.json?id=${putCode}`
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )
   }
@@ -114,7 +110,6 @@ export class RecordFundingsService {
           (options?.sortAsc != null ? options.sortAsc : false)
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )
   }
@@ -136,7 +131,6 @@ export class RecordFundingsService {
           visibility
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => this.getFundings({ forceReload: true }))
       )
@@ -150,7 +144,6 @@ export class RecordFundingsService {
           encodeURIComponent(putCode)
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => this.getFundings({ forceReload: true }))
       )
@@ -160,7 +153,6 @@ export class RecordFundingsService {
     return this._http
       .get<Funding>(runtimeEnvironment.API_WEB + `fundings/funding.json`)
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )
   }
@@ -172,7 +164,6 @@ export class RecordFundingsService {
         funding
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => this.getFundings({ forceReload: true }))
       )
@@ -191,7 +182,6 @@ export class RecordFundingsService {
           }
         )
         .pipe(
-          retry(3),
           catchError((error) => this._errorHandler.handleError(error))
         )
     } else {
@@ -214,7 +204,6 @@ export class RecordFundingsService {
           putCode
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => this.getFundings({ forceReload: true }))
       )
