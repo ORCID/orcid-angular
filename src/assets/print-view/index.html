@@ -1,26 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>ORCID Print View</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Printable ORCID profile loaded from the registry record JSON API.">
-    <link rel="stylesheet" href="/print-view/cv-style.css?v=20260330a">
-</head>
-<body>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Printable ORCID profile loaded from the registry record JSON API."
+    />
+    <link rel="stylesheet" href="/print-view/cv-style.css?v=20260330a" />
+  </head>
+  <body>
     <header class="app-controls no-print">
-        <button id="print-button" type="button" aria-label="Print this ORCID profile">Print / Save as PDF</button>
+      <button
+        id="print-button"
+        type="button"
+        aria-label="Print this ORCID profile"
+      >
+        Print / Save as PDF
+      </button>
     </header>
 
-    <div id="status" class="status no-print" role="status" aria-live="polite"></div>
+    <div
+      id="status"
+      class="status no-print"
+      role="status"
+      aria-live="polite"
+    ></div>
 
     <main id="cv-root" class="cv-root" aria-busy="true">
-        <p class="loading">Loading ORCID record...</p>
+      <p class="loading">Loading ORCID record...</p>
     </main>
     <noscript>
-        <p class="loading">This page requires JavaScript to load ORCID data.</p>
+      <p class="loading">This page requires JavaScript to load ORCID data.</p>
     </noscript>
 
     <script src="/print-view/fetch-orcid.js?v=20260330a"></script>
-</body>
+  </body>
 </html>
