@@ -35,7 +35,7 @@
       </trans-unit>
       <trans-unit id="4b7984f50afed5b65ccf49d51bcb43cf35f49a25" datatype="html" resname="4b7984f50afed5b65ccf49d51bcb43cf35f49a25">
         <source>a two-factor authentication code</source>
-        <target>код для двухфакторной аутентификации</target>
+        <target>и код для двухфакторной аутентификации, чтобы</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
           <context context-type="linenumber">24</context>
@@ -1197,7 +1197,7 @@
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
         </source>
         <target>
-          Альтернативный аккаунт для входа в систему был отсоединен
+          Альтернативный аккаунт для входа в систему был отвязан
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
           <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>
@@ -1224,7 +1224,7 @@
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
         </source>
         <target>
-          Альтернативный аккаунт для входа в систему не был отсоединен
+          Альтернативный аккаунт для входа в систему не был отвязан
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>
           <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>
@@ -1317,7 +1317,7 @@
       </trans-unit>
       <trans-unit id="accountSettings.security.unlinkTheAlternateSignInAccount" datatype="html" resname="accountSettings.security.unlinkTheAlternateSignInAccount">
         <source>unlink the alternate sign in account</source>
-        <target>отсоединить альтернативный способ входа в аккаунт</target>
+        <target>отвязать альтернативный способ входа в аккаунт</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.ts</context>
           <context context-type="linenumber">45</context>

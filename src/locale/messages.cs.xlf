@@ -1317,7 +1317,7 @@
       </trans-unit>
       <trans-unit id="accountSettings.security.unlinkTheAlternateSignInAccount" datatype="html" resname="accountSettings.security.unlinkTheAlternateSignInAccount">
         <source>unlink the alternate sign in account</source>
-        <target>Odpojit alternativního přihlašovacího účtu</target>
+        <target>odpojit alternativní přihlašovací účet</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.ts</context>
           <context context-type="linenumber">45</context>
@@ -1633,7 +1633,7 @@
       </trans-unit>
       <trans-unit id="accountSettings.security.disable2FA" datatype="html" resname="accountSettings.security.disable2FA">
         <source>disable 2FA</source>
-        <target>deaktivovat 2FA</target>
+        <target>deaktivovat 2FO</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-two-factor-auth/settings-security-two-factor-auth.component.ts</context>
           <context context-type="linenumber">31</context>
