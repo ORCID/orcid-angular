@@ -1,23 +1,37 @@
-<mat-form-field class="orcid-language-select" appearance="fill">
-  <mat-select
-    id="cy-language-menu"
-    [value]="locale"
-    [attr.aria-label]="labelLanguage"
-    (selectionChange)="changeLanguage($event.value)"
-    panelClass="orcid-language-select-panel"
-  >
-    <mat-select-trigger>
-      <span class="orcid-language-select__value">{{
-        languageMenuOptions[locale]
-      }}</span>
-    </mat-select-trigger>
+<button
+  mat-button
+  [matMenuTriggerFor]="languageMenu"
+  [attr.aria-label]="labelLanguage"
+  class="orcid-button-light-grey"
+>
+  <div class="row middle space-between button-box no-wrap">
+    <p class="col no-gutters">{{ languageMenuOptions[locale] }}</p>
+    <mat-icon>expand_more</mat-icon>
+  </div>
+</button>
 
-    <mat-option
-      *ngFor="let language of languageMenuOptions | keyvalue"
-      [value]="language.key"
+<mat-menu
+  #languageMenu="matMenu"
+  id="cy-language-menu"
+  [attr.aria-label]="labelLanguage"
+>
+  <div
+    *ngFor="let language of languageMenuOptions | keyvalue"
+    (click)="changeLanguage(language.key)"
+    mat-menu-item
+    [ngClass]="{ 'orcid-mat-menu-item-active': language.key === locale }"
+    class="orcid-menu-item-small"
+  >
+    <button
+      mat-menu-item
+      [ngClass]="{ 'orcid-mat-menu-item-active': language.key === locale }"
+      class="orcid-menu-item-small"
       [attr.aria-label]="language.value"
     >
-      {{ language.value }}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
+      <div class="row middle space-between">
+        {{ language.value }}
+        <mat-icon *ngIf="language.key === locale">check</mat-icon>
+      </div>
+    </button>
+  </div>
+</mat-menu>

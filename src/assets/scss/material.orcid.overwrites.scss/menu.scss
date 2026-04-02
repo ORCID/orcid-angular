@@ -28,22 +28,7 @@
   align-items: center;
 }
 
-// Keep selected option styling on Material defaults.
-// (Some components may override this locally via panelClass if needed.)
-
-// High-contrast keyboard focus state for options (WCAG 2.2 AA).
-// Use cdk-keyboard-focused so hover/active visuals remain unchanged.
-.mat-mdc-option.cdk-keyboard-focused:not(.mdc-list-item--disabled) {
-  // Figma spec: border 2px #1098ff + background 5% #1098ff
-  background-color: rgba(16, 152, 255, 0.05);
-  position: relative;
-
-  &::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border: 2px solid #1098ff;
-    pointer-events: none;
-    box-sizing: border-box;
-  }
+.mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled)
+  .mdc-list-item__primary-text {
+  --mat-option-selected-state-label-text-color: #{$brand-secondary-dark};
 }

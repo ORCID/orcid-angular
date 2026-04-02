@@ -4,8 +4,6 @@ import { MatButtonModule } from '@angular/material/button'
 import { MatRippleModule } from '@angular/material/core'
 import { MatIconModule } from '@angular/material/icon'
 import { MatMenuModule } from '@angular/material/menu'
-import { MatFormFieldModule } from '@angular/material/form-field'
-import { MatSelectModule } from '@angular/material/select'
 import { RouterModule } from '@angular/router'
 
 import { FooterComponent } from './footer/footer.component'
@@ -32,8 +30,6 @@ import { RecordHeaderComponent } from '../record/components/record-header/record
     CoreModule,
     MatMenuModule,
     MatButtonModule,
-    MatFormFieldModule,
-    MatSelectModule,
     RouterModule,
     MatIconModule,
     FormsModule,
