@@ -13,7 +13,6 @@ import {
   first,
   last,
   map,
-  retry,
   shareReplay,
   switchMap,
   tap,
@@ -38,6 +37,7 @@ import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { RumJourneyEventService } from 'src/app/rum/service/customEvent.service'
 import { AppEventName } from 'src/app/rum/app-event-names'
 import { serializeQueryParamsForRum } from 'src/app/rum/serialize-oauth-query-for-rum'
+import { retryTransient } from '../http/retry-transient'
 
 const OAUTH_SESSION_ERROR_CODES_HANDLE_BY_CLIENT_APP = [
   'login_required',
@@ -93,7 +93,7 @@ export class OauthService {
       .pipe(
         // Return null if the requestInfo is empty
         map((requestInfo) => (requestInfo.clientId ? requestInfo : undefined)),
-        retry(3),
+        retryTransient(),
         catchError((error) => this._errorHandler.handleError(error)),
         switchMap((session) => this.handleSessionErrors(session))
       )
@@ -117,7 +117,7 @@ export class OauthService {
         { headers: this.headers, withCredentials: true }
       )
       .pipe(
-        retry(3),
+        retryTransient(),
         catchError((error) =>
           this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
         ),
@@ -215,7 +215,7 @@ export class OauthService {
           { headers: this.headers }
         )
         .pipe(
-          retry(3),
+          retryTransient(),
           catchError((error) =>
             this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
           ),
@@ -311,7 +311,7 @@ export class OauthService {
         }
       )
       .pipe(
-        retry(3),
+        retryTransient(),
         catchError((error) =>
           this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
         )
@@ -324,7 +324,7 @@ export class OauthService {
         headers: this.headers,
       })
       .pipe(
-        retry(3),
+        retryTransient(),
         catchError((error) =>
           this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
         )

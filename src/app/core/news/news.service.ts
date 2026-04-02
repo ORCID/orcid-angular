@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
-import { catchError, flatMap, retry } from 'rxjs/operators'
+import { catchError, flatMap } from 'rxjs/operators'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 import { Parser } from 'xml2js'
 
@@ -21,7 +21,6 @@ export class NewsService {
     const url = runtimeEnvironment.API_NEWS
     // Get the news!
     return this._http.get(url, { responseType: 'text' }).pipe(
-      retry(3),
       catchError((error) => this._errorHandler.handleError(error)),
       flatMap(
         (data) =>

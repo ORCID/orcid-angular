@@ -6,7 +6,7 @@ import {
   Delegator,
 } from 'src/app/types/trusted-individuals.endpoint'
 
-import { catchError, map, retry, tap } from 'rxjs/operators'
+import { catchError, map, tap } from 'rxjs/operators'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
 @Injectable({
@@ -52,7 +52,6 @@ export class TrustedIndividualsService {
         { headers: this.headers }
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => this.updateDelegatorSuccess.next())
       )

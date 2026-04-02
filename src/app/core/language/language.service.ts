@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
-import { retry, catchError, switchMap, tap } from 'rxjs/operators'
+import { catchError, switchMap, tap } from 'rxjs/operators'
 import { of } from 'rxjs'
 import { ERROR_REPORT } from 'src/app/errors'
 
@@ -34,9 +34,7 @@ export class LanguageService {
         }
       }),
       switchMap(() =>
-        this._http
-          .get(runtimeEnvironment.API_WEB + 'lang.json?lang=' + languageCode)
-          .pipe(retry(3))
+        this._http.get(runtimeEnvironment.API_WEB + 'lang.json?lang=' + languageCode)
       ),
       catchError((error) =>
         this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
