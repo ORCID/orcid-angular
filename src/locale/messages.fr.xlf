@@ -11,7 +11,7 @@
       </trans-unit>
       <trans-unit id="3ab786af0ee4de6cf71ac145c3c7a089fe81dadb" datatype="html" resname="3ab786af0ee4de6cf71ac145c3c7a089fe81dadb">
         <source>Enter</source>
-        <target>Entrer</target>
+        <target>Entrez</target>
         <context-group purpose="location">
           <context context-type="sourcefile">projects/orcid-registry-ui/src/lib/components/auth-challenge/auth-challenge.component.html</context>
           <context context-type="linenumber">19</context>
