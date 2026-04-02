@@ -1,13 +1,84 @@
 :host {
-  > button {
+  display: inline-flex;
+}
+
+.orcid-language-select {
+  width: auto;
+}
+
+// Make the select look like the previous header button
+// (overlay panel styles live globally in material overrides).
+.orcid-language-select ::ng-deep {
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+  }
+
+  // Avoid Material "focused" blue ink/underline styles.
+  .mdc-line-ripple {
+    display: none;
+  }
+
+  .mat-mdc-form-field-infix {
+    padding-top: 0;
+    padding-bottom: 0;
+    min-height: unset;
+  }
+
+  .mdc-text-field {
+    background: #fafafa;
+    border: 1px solid #616161;
     padding: 0 7px 0 12px;
-    p {
-      margin: 0;
-      margin-right: 7px;
+    border-radius: 4px;
+  }
+
+  .mdc-text-field--focused {
+    box-shadow: none;
+  }
+
+  .mat-mdc-select-trigger {
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .mat-mdc-select-value {
+    max-width: unset;
+  }
+
+  .mat-mdc-select-value-text {
+    color: rgba(0, 0, 0, 0.9);
+    font-weight: 700;
+  }
+
+  .mat-mdc-select-arrow {
+    color: rgba(0, 0, 0, 0.9);
+  }
+
+  .mat-mdc-select-arrow-wrapper {
+    transform: none;
+  }
+}
+
+// Panel (overlay) styles
+// NOTE: this class is applied via `panelClass="orcid-language-select-panel"`.
+::ng-deep .orcid-language-select-panel {
+  .mat-mdc-option {
+    height: 56px;
+    min-height: 56px;
+    padding: 0 16px;
+    align-items: center;
+  }
+
+  // Selected state per Figma: grey background, dark text, dark check
+  .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) {
+    background-color: #eee;
+
+    .mdc-list-item__primary-text {
+      color: rgba(0, 0, 0, 0.9);
     }
-    mat-icon {
-      height: auto;
-      width: auto;
-    }
+
+    // Angular Material option uses CSS variables for the selection indicator color.
+    --mat-option-selected-state-icon-color: rgba(0, 0, 0, 0.9);
   }
 }
