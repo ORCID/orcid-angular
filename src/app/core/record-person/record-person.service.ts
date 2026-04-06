@@ -80,9 +80,7 @@ export class RecordPersonService {
   private getPersonHttpCall(orcid: string): Observable<Person> {
     return this._http
       .get<Person>(runtimeEnvironment.API_WEB + `${orcid}/person.json`)
-      .pipe(
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
 
   private setupFullCountryCodes(data: Person) {

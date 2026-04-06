@@ -48,9 +48,7 @@ export class SearchComponent implements OnInit, OnDestroy {
         }),
         // Call the backend to get search results
         switchMap((value) =>
-          _searchService.search(value).pipe(
-            catchError((err) => EMPTY)
-          )
+          _searchService.search(value).pipe(catchError((err) => EMPTY))
         )
       )
       .subscribe((data) => {

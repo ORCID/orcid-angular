@@ -34,9 +34,7 @@ export class AccountActionsDeactivateService {
       .get<ExpiringLinkVerification>(
         runtimeEnvironment.API_WEB + `account/deactivate/` + token
       )
-      .pipe(
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
 
   deactivateAccount(
@@ -48,9 +46,7 @@ export class AccountActionsDeactivateService {
         runtimeEnvironment.API_WEB + `account/deactivate/` + token,
         data
       )
-      .pipe(
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
 
   generateDeactivationLink(): Observable<DeactivateResponse> {
@@ -59,8 +55,6 @@ export class AccountActionsDeactivateService {
         runtimeEnvironment.API_WEB + `account/send-deactivate-account.json`,
         this.options
       )
-      .pipe(
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
 }

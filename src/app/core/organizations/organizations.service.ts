@@ -23,9 +23,7 @@ export class OrganizationsService {
           runtimeEnvironment.API_WEB +
             `orgs/disambiguated/${type}?value=${encodeURIComponent(value)}`
         )
-        .pipe(
-          catchError((error) => this._errorHandler.handleError(error))
-        )
+        .pipe(catchError((error) => this._errorHandler.handleError(error)))
     } else {
       return of(null)
     }

@@ -75,9 +75,7 @@ export class RecordFundingsService {
         runtimeEnvironment.API_WEB +
           `fundings/fundingDetails.json?id=${putCode}`
       )
-      .pipe(
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
     /* TODO: Fetch group id info */
   }
 
@@ -88,9 +86,7 @@ export class RecordFundingsService {
           orcid +
           `/fundingDetails.json?id=${putCode}`
       )
-      .pipe(
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
 
   changeUserRecordContext(userRecordContext: UserRecordOptions) {
@@ -109,9 +105,7 @@ export class RecordFundingsService {
           '&sortAsc=' +
           (options?.sortAsc != null ? options.sortAsc : false)
       )
-      .pipe(
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
 
   set(value): Observable<FundingGroup[]> {
@@ -152,9 +146,7 @@ export class RecordFundingsService {
   getFunding(): Observable<Funding> {
     return this._http
       .get<Funding>(runtimeEnvironment.API_WEB + `fundings/funding.json`)
-      .pipe(
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
 
   save(funding: Funding) {
@@ -181,9 +173,7 @@ export class RecordFundingsService {
             headers: this.headers,
           }
         )
-        .pipe(
-          catchError((error) => this._errorHandler.handleError(error))
-        )
+        .pipe(catchError((error) => this._errorHandler.handleError(error)))
     } else {
       return of([])
     }

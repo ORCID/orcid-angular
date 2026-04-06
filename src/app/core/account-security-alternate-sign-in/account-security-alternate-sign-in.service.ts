@@ -73,9 +73,7 @@ export class AccountSecurityAlternateSignInService {
           headers: this.headers,
         }
       )
-      .pipe(
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
 
   populateIdPNames({

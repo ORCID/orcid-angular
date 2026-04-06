@@ -142,9 +142,7 @@ export class RecordEmailsService {
         runtimeEnvironment.API_WEB + `account/validateEmail.json`,
         value
       )
-      .pipe(
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
 
   backendEmailValidate(

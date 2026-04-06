@@ -1,13 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { combineLatest, Observable, of, ReplaySubject, Subject } from 'rxjs'
-import {
-  catchError,
-  map,
-  startWith,
-  takeUntil,
-  tap,
-} from 'rxjs/operators'
+import { catchError, map, startWith, takeUntil, tap } from 'rxjs/operators'
 import {
   EmailsEndpoint,
   ExternalIdentifier,
@@ -252,9 +246,7 @@ export class RecordService {
         runtimeEnvironment.API_WEB + `my-orcid/externalIdentifiers.json`,
         { headers: this.headers }
       )
-      .pipe(
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
 
   getKeywords(): Observable<Keywords> {
@@ -265,9 +257,7 @@ export class RecordService {
           headers: this.headers,
         }
       )
-      .pipe(
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
 
   // Just a place holder for posting external identifiers, since the frontend does never calls this function
@@ -280,9 +270,7 @@ export class RecordService {
         website,
         { headers: this.headers }
       )
-      .pipe(
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
 
   postKeywords(keywords: Keywords): Observable<Keywords> {
@@ -292,9 +280,7 @@ export class RecordService {
         keywords,
         { headers: this.headers }
       )
-      .pipe(
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
 
   getPreferences(
@@ -326,9 +312,7 @@ export class RecordService {
         names,
         { headers: this.headers }
       )
-      .pipe(
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
 
   getLastModifiedTime(

@@ -1,13 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs'
-import {
-  catchError,
-  finalize,
-  map,
-  switchMap,
-  tap,
-} from 'rxjs/operators'
+import { catchError, finalize, map, switchMap, tap } from 'rxjs/operators'
 import {
   AffiliationUIGroup,
   AffiliationsEndpoint,
@@ -123,9 +117,7 @@ export class RecordAffiliationService {
               : 'affiliations/'
           }affiliationDetails.json?id=${putCode}&type=${type}`
       )
-      .pipe(
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
 
   private getGroupAndSortAffiliations(
@@ -213,9 +205,7 @@ export class RecordAffiliationService {
             headers: this.headers,
           }
         )
-        .pipe(
-          catchError((error) => this._errorHandler.handleError(error))
-        )
+        .pipe(catchError((error) => this._errorHandler.handleError(error)))
     } else {
       return of([])
     }
@@ -231,9 +221,7 @@ export class RecordAffiliationService {
           headers: this.headers,
         }
       )
-      .pipe(
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
 
   updateVisibility(
@@ -338,8 +326,6 @@ export class RecordAffiliationService {
           headers: this.headers,
         }
       )
-      .pipe(
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
 }

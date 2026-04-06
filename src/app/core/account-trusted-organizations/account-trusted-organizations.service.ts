@@ -23,9 +23,7 @@ export class AccountTrustedOrganizationsService {
         runtimeEnvironment.API_WEB + `account/get-trusted-orgs.json`,
         { headers: this.headers }
       )
-      .pipe(
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
 
   delete(
@@ -39,8 +37,6 @@ export class AccountTrustedOrganizationsService {
         undefined,
         { headers: this.headers }
       )
-      .pipe(
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
 }

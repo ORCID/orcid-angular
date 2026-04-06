@@ -67,9 +67,7 @@ export class AccountTrustedIndividualsService {
           headers: this.headers,
         }
       )
-      .pipe(
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
   add(value: ExpandedSearchResultsContent) {
     return this._http
@@ -90,9 +88,7 @@ export class AccountTrustedIndividualsService {
           `account/search-for-delegate-by-email/${encodeURIComponent(email)}/`,
         { headers: this.headers }
       )
-      .pipe(
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
   addByEmail(delegateEmail: string) {
     return this._http
@@ -114,9 +110,7 @@ export class AccountTrustedIndividualsService {
           `account/search-for-delegate-by-orcid/${encodeURIComponent(email)}/`,
         { headers: this.headers }
       )
-      .pipe(
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
   addByOrcid(delegateToManage: string) {
     return this._http

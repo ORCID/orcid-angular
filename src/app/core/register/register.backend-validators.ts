@@ -67,9 +67,7 @@ export function RegisterBackendValidatorMixin<
             `oauth/custom/register/${this.formInputs[controlName].validationEndpoint}.json`,
           value
         )
-        .pipe(
-          catchError((error) => this._errorHandler.handleError(error))
-        )
+        .pipe(catchError((error) => this._errorHandler.handleError(error)))
     }
 
     validateAdditionalEmailsReactivation(
@@ -80,9 +78,7 @@ export function RegisterBackendValidatorMixin<
           `${runtimeEnvironment.API_WEB}reactivateAdditionalEmailsValidate.json`,
           value
         )
-        .pipe(
-          catchError((error) => this._errorHandler.handleError(error))
-        )
+        .pipe(catchError((error) => this._errorHandler.handleError(error)))
     }
 
     backendValueValidate(
@@ -178,9 +174,7 @@ export function RegisterBackendValidatorMixin<
           `${runtimeEnvironment.API_WEB}register.json`,
           registerForm
         )
-        .pipe(
-          catchError((error) => this._errorHandler.handleError(error))
-        )
+        .pipe(catchError((error) => this._errorHandler.handleError(error)))
     }
 
     public setFormGroupEmailErrors(

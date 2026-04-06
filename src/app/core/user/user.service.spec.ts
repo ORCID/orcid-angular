@@ -47,10 +47,16 @@ describe('UserService', () => {
           provide: DiscoService,
           useValue: { getInstitutionNameBaseOnId: () => of('') },
         },
-        { provide: UserInfoService, useValue: { getUserInfo: () => of({} as UserInfo) } },
+        {
+          provide: UserInfoService,
+          useValue: { getUserInfo: () => of({} as UserInfo) },
+        },
         {
           provide: TogglzService,
-          useValue: { getStateOf: () => of(false), reportUserStatusChecked: () => {} },
+          useValue: {
+            getStateOf: () => of(false),
+            reportUserStatusChecked: () => {},
+          },
         },
         { provide: CookieService, useValue: { get: () => '' } },
         ErrorHandlerService,

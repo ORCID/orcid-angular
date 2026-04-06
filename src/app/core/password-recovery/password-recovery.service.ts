@@ -68,9 +68,7 @@ export class PasswordRecoveryService {
           withCredentials: true,
         }
       )
-      .pipe(
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
   resetPasswordEmailValidateToken(
     resetPassword: ResetPasswordEmailFormValidate
@@ -85,8 +83,6 @@ export class PasswordRecoveryService {
           withCredentials: true,
         }
       )
-      .pipe(
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
 }

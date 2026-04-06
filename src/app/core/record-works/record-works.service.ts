@@ -1,14 +1,7 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { BehaviorSubject, forkJoin, Observable, of, ReplaySubject } from 'rxjs'
-import {
-  catchError,
-  first,
-  map,
-  switchMap,
-  take,
-  tap,
-} from 'rxjs/operators'
+import { catchError, first, map, switchMap, take, tap } from 'rxjs/operators'
 import {
   PublicWorkSearchEndpoint,
   PublicWorkSearchResult,
