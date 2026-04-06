@@ -7,7 +7,6 @@ import {
   finalize,
   first,
   map,
-  retry,
   scan,
   shareReplay,
   switchMap,
@@ -109,7 +108,6 @@ export class InboxService {
     return this._http
       .get<InboxNotificationItem[]>(url, { headers: this.headers })
       .pipe(
-        retry(3),
         catchError((error) =>
           this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
         )
@@ -138,7 +136,6 @@ export class InboxService {
     const req$ = this._http
       .get<InboxNotificationItem[]>(url, { headers: this.headers })
       .pipe(
-        retry(3),
         catchError((error) =>
           this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
         ),
@@ -204,7 +201,6 @@ export class InboxService {
         withCredentials: true,
       })
       .pipe(
-        retry(3),
         catchError((error) =>
           this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
         ),
@@ -257,7 +253,6 @@ export class InboxService {
         withCredentials: true,
       })
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         tap((data) => {
           if (this.lastEmittedValue) {
@@ -352,7 +347,6 @@ export class InboxService {
     const req$ = this._http
       .get<TotalNotificationCount>(url, { headers: this.headers })
       .pipe(
-        retry(3),
         map((value) => {
           value.archived = value.all - value.nonArchived
           return value

@@ -3,7 +3,7 @@ import { Observable, of, ReplaySubject } from 'rxjs'
 import { WebsitesEndPoint } from '../../types/record-websites.endpoint'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 
-import { catchError, map, retry, tap } from 'rxjs/operators'
+import { catchError, map, tap } from 'rxjs/operators'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { UserRecordOptions } from 'src/app/types/record.local'
 import { RecordPublicSideBarService } from '../record-public-side-bar/record-public-side-bar.service'
@@ -51,7 +51,6 @@ export class RecordWebsitesService {
         }
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         catchError(() => of({ websites: [] } as WebsitesEndPoint)),
         tap((value) => {
@@ -70,7 +69,6 @@ export class RecordWebsitesService {
         { headers: this.headers }
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => this.getWebsites({ forceReload: true }))
       )

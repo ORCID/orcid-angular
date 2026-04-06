@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
-import { catchError, retry } from 'rxjs/operators'
+import { catchError } from 'rxjs/operators'
 import { AccountPasswordEndpoint } from 'src/app/types/account-settings-password'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
@@ -29,7 +29,6 @@ export class AccountSecurityPasswordService {
         { headers: this.headers }
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )
   }

@@ -4,7 +4,6 @@ import { combineLatest, Observable, of, ReplaySubject, Subject } from 'rxjs'
 import {
   catchError,
   map,
-  retry,
   startWith,
   takeUntil,
   tap,
@@ -254,7 +253,6 @@ export class RecordService {
         { headers: this.headers }
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )
   }
@@ -268,7 +266,6 @@ export class RecordService {
         }
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )
   }
@@ -284,7 +281,6 @@ export class RecordService {
         { headers: this.headers }
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )
   }
@@ -297,7 +293,6 @@ export class RecordService {
         { headers: this.headers }
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )
   }
@@ -319,7 +314,6 @@ export class RecordService {
         { headers: this.headers }
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         catchError(() => of({} as Preferences))
       )
@@ -333,7 +327,6 @@ export class RecordService {
         { headers: this.headers }
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )
   }

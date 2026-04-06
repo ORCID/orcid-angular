@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, ReplaySubject } from 'rxjs'
-import { catchError, first, map, retry, switchMap, tap } from 'rxjs/operators'
+import { catchError, first, map, switchMap, tap } from 'rxjs/operators'
 import { Person } from 'src/app/types'
 import { UserRecordOptions } from 'src/app/types/record.local'
 
@@ -81,7 +81,6 @@ export class RecordPersonService {
     return this._http
       .get<Person>(runtimeEnvironment.API_WEB + `${orcid}/person.json`)
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )
   }

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, of } from 'rxjs'
-import { catchError, retry } from 'rxjs/operators'
+import { catchError } from 'rxjs/operators'
 import { WHITE_SPACE_REGEXP } from 'src/app/constants'
 import { OrgDisambiguated } from 'src/app/types'
 
@@ -24,7 +24,6 @@ export class OrganizationsService {
             `orgs/disambiguated/${type}?value=${encodeURIComponent(value)}`
         )
         .pipe(
-          retry(3),
           catchError((error) => this._errorHandler.handleError(error))
         )
     } else {

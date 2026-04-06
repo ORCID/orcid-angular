@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
-import { catchError, retry } from 'rxjs/operators'
+import { catchError } from 'rxjs/operators'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import {
@@ -35,7 +35,6 @@ export class AccountActionsDeactivateService {
         runtimeEnvironment.API_WEB + `account/deactivate/` + token
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )
   }
@@ -50,7 +49,6 @@ export class AccountActionsDeactivateService {
         data
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )
   }
@@ -62,7 +60,6 @@ export class AccountActionsDeactivateService {
         this.options
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )
   }

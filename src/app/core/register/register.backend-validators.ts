@@ -6,7 +6,7 @@ import {
   ValidationErrors,
 } from '@angular/forms'
 import { Observable, of } from 'rxjs'
-import { catchError, map, retry } from 'rxjs/operators'
+import { catchError, map } from 'rxjs/operators'
 import { Constructor } from 'src/app/types'
 import { RegisterForm } from 'src/app/types/register.endpoint'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
@@ -68,7 +68,6 @@ export function RegisterBackendValidatorMixin<
           value
         )
         .pipe(
-          retry(3),
           catchError((error) => this._errorHandler.handleError(error))
         )
     }
@@ -82,7 +81,6 @@ export function RegisterBackendValidatorMixin<
           value
         )
         .pipe(
-          retry(3),
           catchError((error) => this._errorHandler.handleError(error))
         )
     }
@@ -181,7 +179,6 @@ export function RegisterBackendValidatorMixin<
           registerForm
         )
         .pipe(
-          retry(3),
           catchError((error) => this._errorHandler.handleError(error))
         )
     }

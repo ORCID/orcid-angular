@@ -17,7 +17,6 @@ import {
   first,
   last,
   map,
-  retry,
   retryWhen,
   startWith,
   switchMap,
@@ -57,6 +56,7 @@ import { TogglzFlag } from 'src/app/types/config.endpoint'
 import { LOCAL_SESSION_UID } from 'src/app/constants'
 import { Params } from '@angular/router'
 import { CookieService } from 'ngx-cookie-service'
+import { retryTransient } from '../http/retry-transient'
 
 @Injectable({
   providedIn: 'root',
@@ -129,7 +129,7 @@ export class UserService {
           })
           .pipe(map((response) => !!response.loggedIn))
           .pipe(
-            retry(3),
+            retryTransient(),
             catchError((error) =>
               this._errorHandler.handleError(
                 error,
@@ -166,78 +166,74 @@ export class UserService {
       return this.$userSessionSubject
     } else {
       this.sessionInitialized = true
-      // trigger every 60 seconds if tab active  or  every 5 minutes  if tab hidden or
-      // on _recheck subject event
-      this.interval$.subscribe((timerVars) => {
-        merge(
-          timer(timerVars.start, timerVars.interval).pipe(
-            takeUntil(this.reset$),
-            map((timerUpdate) => {
-              return { timerUpdate }
-            })
+      // Trigger based on the configured timer and on manual refresh requests.
+      this.interval$
+        .pipe(
+          switchMap((timerVars) =>
+            merge(
+              timer(timerVars.start, timerVars.interval).pipe(
+                map((timerUpdate) => ({ timerUpdate }))
+              ),
+              this._recheck
+            ).pipe(takeUntil(this.reset$))
           ),
-          this._recheck
+          // Check user status only when needed
+          filter(() => this.keepRefreshingUserSession),
+          // Check for updates on userStatus.json
+          switchMap((checkTrigger) => {
+            this.$userStatusChecked.next(null)
+            return this.getUserStatus().pipe(
+              map((loggedIn) => {
+                return { loggedIn, checkTrigger }
+              })
+            )
+          }),
+          // Filter followup calls if the user status has no change
+          //
+          // Also turns on the flag loggingStateComesFromTheServer
+          // indicating that the current logging state is taken from the server,
+          // and not the initial assumption. (more on this on the following pipe)
+          filter((result: UserSessionUpdateParameters) => {
+            this.loggingStateComesFromTheServer = true
+            return this.userStatusHasChange(result)
+          }),
+
+          // When the user lands on the Orcid app:
+          // Take a eager approach:
+          // create a trigger that just assumes the user is logging.
+          // So instead of waiting until `userStatus` responds, at the very beginning of the app initialization
+          // calling userInfo.json, nameForm.json
+          // (this avoid unnecessary extra waiting for logged in users)
+          //
+          // When the user change tabs:
+          // Take a lazy approach:
+          // and empty trigger will be created, to not call the any endpoint until the next `userStatus` call responds.
+          startWith(
+            !this.loggingStateComesFromTheServer
+              ? { loggedIn: true, checkTrigger: { timerUpdate: -1 } }
+              : {}
+          ),
+          // Ignore empty triggers.
+          filter(
+            (trigger: UserSessionUpdateParameters) =>
+              trigger.checkTrigger !== undefined
+          ),
+
+          switchMap((updateParameters: UserSessionUpdateParameters) => {
+            if (updateParameters) {
+              return this.handleUserDataUpdate(updateParameters)
+            }
+          }),
+          map((data) => this.computesUpdatedUserData(data)),
+          // Debugger for the user session on development time
+          tap((session) =>
+            runtimeEnvironment.debugger ? console.debug(session) : null
+          ),
+          tap((session) => {
+            this.$userSessionSubject.next(session)
+          })
         )
-          .pipe(
-            // Check user status only when needed
-            filter((value) => this.keepRefreshingUserSession),
-            // Check for updates on userStatus.json
-            switchMap((checkTrigger) => {
-              this.$userStatusChecked.next(null)
-              return this.getUserStatus().pipe(
-                map((loggedIn) => {
-                  return { loggedIn, checkTrigger }
-                })
-              )
-            }),
-            // Filter followup calls if the user status has no change
-            //
-            // Also turns on the flag loggingStateComesFromTheServer
-            // indicating that the current logging state is taken from the server,
-            // and not the initial assumption. (more on this on the following pipe)
-            filter((result: UserSessionUpdateParameters) => {
-              this.loggingStateComesFromTheServer = true
-              return this.userStatusHasChange(result)
-            }),
-
-            // When the user lands on the Orcid app:
-            // Take a eager approach:
-            // create a trigger that just assumes the user is logging.
-            // So instead of waiting until `userStatus` responds, at the very beginning of the app initialization
-            // calling userInfo.json, nameForm.json
-            // (this avoid unnecessary extra waiting for logged in users)
-            //
-            // When the user change tabs:
-            // Take a lazy approach:
-            // and empty trigger will be created, to not call the any endpoint until the next `userStatus` call responds.
-
-            startWith(
-              !this.loggingStateComesFromTheServer
-                ? { loggedIn: true, checkTrigger: { timerUpdate: -1 } }
-                : {}
-            ),
-            // Ignore empty triggers.
-            filter(
-              (trigger: UserSessionUpdateParameters) =>
-                trigger.checkTrigger !== undefined
-            ),
-
-            switchMap((updateParameters: UserSessionUpdateParameters) => {
-              if (updateParameters) {
-                return this.handleUserDataUpdate(updateParameters)
-              }
-            }),
-            map((data) => this.computesUpdatedUserData(data)),
-            // Debugger for the user session on development time
-            tap((session) =>
-              runtimeEnvironment.debugger ? console.debug(session) : null
-            ),
-            tap((session) => {
-              this.$userSessionSubject.next(session)
-            })
-          )
-          .subscribe()
-      })
+        .subscribe()
 
       return this.$userSessionSubject.asObservable()
     }

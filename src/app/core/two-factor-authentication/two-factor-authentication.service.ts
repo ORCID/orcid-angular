@@ -8,7 +8,7 @@ import {
   TwoFactor,
   TwoFactorSetup,
 } from '../../types/two-factor.endpoint'
-import { catchError, retry } from 'rxjs/operators'
+import { catchError } from 'rxjs/operators'
 import { ERROR_REPORT } from '../../errors'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { AuthChallenge } from '../../types/common.endpoint'
@@ -78,7 +78,6 @@ export class TwoFactorAuthenticationService {
         headers: this.headers,
       })
       .pipe(
-        retry(3),
         catchError((error) =>
           this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
         )
@@ -95,7 +94,6 @@ export class TwoFactorAuthenticationService {
         }
       )
       .pipe(
-        retry(3),
         catchError((error) =>
           this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
         )

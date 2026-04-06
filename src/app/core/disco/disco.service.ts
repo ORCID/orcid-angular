@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, ReplaySubject } from 'rxjs'
-import { catchError, first, map, retry, take, tap } from 'rxjs/operators'
+import { catchError, first, map, take, tap } from 'rxjs/operators'
 
 import { Institutional } from '../../types/institutional.endpoint'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
@@ -93,7 +93,6 @@ export class DiscoService {
           tap((feed) => {
             this.discoFeedSubject.next(feed)
           }),
-          retry(3),
           catchError((error) =>
             this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
           )
