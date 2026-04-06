@@ -417,7 +417,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/account-trusted-individuals/account-trusted-individuals.service.ts</context>
-          <context context-type="linenumber">43</context>
+          <context context-type="linenumber">42</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/search/search.service.ts</context>
@@ -8640,7 +8640,7 @@
         <source>Import your works</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">600</context>
+          <context context-type="linenumber">593</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -8648,7 +8648,7 @@
         <source>These services can help you update your ORCID record quickly by searching for your research outputs from various databases. Connect to a service to grant permission and add selected research outputs to your ORCID record.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">601</context>
+          <context context-type="linenumber">594</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -8656,7 +8656,7 @@
         <source>Find out more about importing works into your ORCID record</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">604</context>
+          <context context-type="linenumber">597</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -8664,7 +8664,7 @@
         <source>ORCID Certified Services</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">606</context>
+          <context context-type="linenumber">599</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -8672,7 +8672,7 @@
         <source>More Services</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">607</context>
+          <context context-type="linenumber">600</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -8680,7 +8680,7 @@
         <source>Connect now</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">608</context>
+          <context context-type="linenumber">601</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -8688,7 +8688,7 @@
         <source>Connected</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">609</context>
+          <context context-type="linenumber">602</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/search-link-wizard/search-link-wizard.component.html</context>
@@ -8700,7 +8700,7 @@
         <source>Close Import your works</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">610</context>
+          <context context-type="linenumber">603</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -8708,7 +8708,7 @@
         <source>Show more services</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">611</context>
+          <context context-type="linenumber">604</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -8716,7 +8716,7 @@
         <source>Hide more services</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">612</context>
+          <context context-type="linenumber">605</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -8724,7 +8724,7 @@
         <source>Connect with {{name}} now</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">613</context>
+          <context context-type="linenumber">606</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
@@ -8732,7 +8732,7 @@
         <source>Connected with {{name}}</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">614</context>
+          <context context-type="linenumber">607</context>
         </context-group>
         <target>RL</target>
       </trans-unit>
