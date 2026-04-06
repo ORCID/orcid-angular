@@ -106,7 +106,9 @@ export class HomeComponent implements OnInit {
         const parser = new DOMParser()
         const doc = parser.parseFromString(html, 'text/html')
 
-        doc.querySelectorAll('script,link[rel="stylesheet"]').forEach((n) => n.remove())
+        doc
+          .querySelectorAll('script,link[rel="stylesheet"]')
+          .forEach((n) => n.remove())
 
         this.wordpressView = this.sanitizer.bypassSecurityTrustHtml(
           doc.body?.innerHTML ?? html
