@@ -27,6 +27,7 @@ export class HomeComponent implements OnInit {
   platform
   wordpressView!: SafeHtml
   notWordpressDisplay: boolean
+  private wordpressAssetsLoaded = false
 
   constructor(
     _platformInfo: PlatformInfoService,
@@ -54,9 +55,12 @@ export class HomeComponent implements OnInit {
       .subscribe()
   }
   private setupHompage() {
+    // Note: scripts inserted via [innerHTML] won't execute. We must load the
+    // required CSS/JS via real DOM nodes.
     return this.setupCss().pipe(
       switchMap(() => this.setupHtml()),
-      switchMap(() => this.setupJs())
+      switchMap(() => this.setupJs()),
+      switchMap(() => this.setupModulesJs())
     )
   }
 
@@ -73,6 +77,7 @@ export class HomeComponent implements OnInit {
   setupJs() {
     return this.wordpressService.getHomePageJS().pipe(
       tap((js) => {
+        if (this.wordpressAssetsLoaded) return
         const script = this.document.createElement('script')
         script.innerHTML = js
         this.document.body.appendChild(script)
@@ -80,11 +85,32 @@ export class HomeComponent implements OnInit {
     )
   }
 
+  setupModulesJs() {
+    return this.wordpressService.getHomePageModulesJS().pipe(
+      tap((js) => {
+        if (this.wordpressAssetsLoaded) return
+        const script = this.document.createElement('script')
+        script.type = 'module'
+        script.innerHTML = js
+        this.document.body.appendChild(script)
+        this.wordpressAssetsLoaded = true
+      })
+    )
+  }
+
   setupHtml() {
     return this.wordpressService.getHomePagePost().pipe(
       tap((html) => {
-        this.wordpressView = this.sanitizer.bypassSecurityTrustHtml(html)
-        this.wordpressView
+        // Parse and render only body content. Any <link>/<script> tags in the
+        // fetched HTML would not execute when injected via [innerHTML] anyway.
+        const parser = new DOMParser()
+        const doc = parser.parseFromString(html, 'text/html')
+
+        doc.querySelectorAll('script,link[rel="stylesheet"]').forEach((n) => n.remove())
+
+        this.wordpressView = this.sanitizer.bypassSecurityTrustHtml(
+          doc.body?.innerHTML ?? html
+        )
       })
     )
   }
