@@ -98,7 +98,11 @@
 </app-panel-data>
 
 <!-- DATA DISPLAY WHEN "MORE DETAILS" IS CLICKED -->
-<app-panel-data [borderBottom]="false" *ngIf="panelDetailsState?.state">
+<app-panel-data
+  class="mt-4"
+  [borderBottom]="false"
+  *ngIf="panelDetailsState?.state"
+>
   <!-- ORGANIZATION DISAMBIGUATED IDS-->
   <app-org-identifier
     [orgDisambiguated]="orgDisambiguated"
