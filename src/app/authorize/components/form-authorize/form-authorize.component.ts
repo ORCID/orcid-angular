@@ -190,9 +190,9 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
     const signinUrl = queryParams ? `/signin?${queryParams}` : '/signin'
     ;(this.window as any).outOfRouterNavigation(signinUrl)
   }
-  
+
   authorize(value = true) {
-    this.loadingAuthorizeEndpoint = true;
+    this.loadingAuthorizeEndpoint = true
 
     this._togglz
       .getStateOf(TogglzFlag.OAUTH_AUTHORIZATION)
@@ -202,36 +202,38 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
           // 1. New logic: Update journey context right away
           this._observability.updateJourneyContext('oauth_authorization', {
             OAUTH_AUTHORIZATION: useAuthServerFlag,
-          });
+          })
         }),
         switchMap((useAuthServerFlag) => {
           if (useAuthServerFlag === true) {
-            return this._oauth.authorizeOnAuthServer(this.oauthRequest, value).pipe(
-              // 2. Auth Server Telemetry
-              tap(() => {
-                this._observability.recordEvent(
-                  'oauth_authorization',
-                  value
-                    ? AppEventName.OauthAuthorizationSuccess
-                    : AppEventName.OauthAuthorizationDenied,
-                  { OAUTH_AUTHORIZATION: true }
-                );
-              }),
-              catchError((error) => {
-                this._observability.recordEvent(
-                  'oauth_authorization',
-                  AppEventName.OauthAuthorizationError,
-                  oauthAuthorizeHttpFailureEventAttrs(
-                    error,
-                    'auth_server',
-                    value,
-                    true
+            return this._oauth
+              .authorizeOnAuthServer(this.oauthRequest, value)
+              .pipe(
+                // 2. Auth Server Telemetry
+                tap(() => {
+                  this._observability.recordEvent(
+                    'oauth_authorization',
+                    value
+                      ? AppEventName.OauthAuthorizationSuccess
+                      : AppEventName.OauthAuthorizationDenied,
+                    { OAUTH_AUTHORIZATION: true }
                   )
-                );
-                // Throw the error down to the final subscribe block
-                return throwError(() => error);
-              })
-            );
+                }),
+                catchError((error) => {
+                  this._observability.recordEvent(
+                    'oauth_authorization',
+                    AppEventName.OauthAuthorizationError,
+                    oauthAuthorizeHttpFailureEventAttrs(
+                      error,
+                      'auth_server',
+                      value,
+                      true
+                    )
+                  )
+                  // Throw the error down to the final subscribe block
+                  return throwError(() => error)
+                })
+              )
           } else {
             return this._oauth.authorize(value).pipe(
               // 3. Legacy Telemetry
@@ -242,7 +244,7 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
                     ? AppEventName.OauthAuthorizationSuccess
                     : AppEventName.OauthAuthorizationDenied,
                   { OAUTH_AUTHORIZATION: false }
-                );
+                )
               }),
               catchError((error) => {
                 this._observability.recordEvent(
@@ -254,11 +256,11 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
                     value,
                     false
                   )
-                );
+                )
                 // Throw the error down to the final subscribe block
-                return throwError(() => error);
+                return throwError(() => error)
               })
-            );
+            )
           }
         })
       )
