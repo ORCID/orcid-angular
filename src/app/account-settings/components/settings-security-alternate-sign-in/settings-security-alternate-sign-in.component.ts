@@ -43,6 +43,7 @@ export class SettingsSecurityAlternateSignInComponent
   isMobile: any
   refreshAccounts$ = new BehaviorSubject<void>(undefined)
   authChallengeLabel = $localize`:@@accountSettings.security.unlinkTheAlternateSignInAccount:unlink the alternate sign in account`
+  labelDeleteButton = $localize`:@@shared.delete:Delete`
 
   constructor(
     private _accountSettingAlternate: AccountSecurityAlternateSignInService,

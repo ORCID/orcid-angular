@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable, of, ReplaySubject } from 'rxjs'
-import { catchError, map, retry, tap } from 'rxjs/operators'
+import { catchError, map, tap } from 'rxjs/operators'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { OtherNamesEndPoint } from '../../types/record-other-names.endpoint'
 
@@ -60,7 +60,6 @@ export class RecordOtherNamesService {
         }
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         catchError(() => of({ otherNames: [] } as OtherNamesEndPoint)),
         tap((value) => {
@@ -82,7 +81,6 @@ export class RecordOtherNamesService {
         { headers: this.headers }
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => this.getOtherNames({ forceReload: true }))
       )

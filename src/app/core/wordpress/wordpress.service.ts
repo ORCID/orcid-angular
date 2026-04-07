@@ -64,6 +64,23 @@ export class WordpressService {
     )
   }
 
+  getHomePageModulesJS(): Observable<string> {
+    const primaryUrl = `${runtimeEnvironment.WORDPRESS_S3}/wordpress-homepage-modules.js`
+    const fallbackUrl = `${runtimeEnvironment.WORDPRESS_S3_FALLBACK}/wordpress-homepage-modules.js`
+    return this.fetchWithFallback(primaryUrl, fallbackUrl).pipe(
+      map((data: { html: string; url: string }) => {
+        // Keep asset URL rewriting consistent with the classic bundle.
+        const find = './assets/'
+        const regex = new RegExp(find, 'g')
+        const updated = data.html.replace(
+          regex,
+          `${data.url.replace(/wordpress-homepage-modules.*\.js$/, '')}assets/`
+        )
+        return updated
+      })
+    )
+  }
+
   private fetchWithFallback(
     primaryUrl: string,
     fallbackUrl: string

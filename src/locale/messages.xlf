@@ -383,7 +383,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/account-trusted-individuals/account-trusted-individuals.service.ts</context>
-          <context context-type="linenumber">43</context>
+          <context context-type="linenumber">42</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/search/search.service.ts</context>
@@ -1126,33 +1126,33 @@
         <source>Account</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
-          <context context-type="linenumber">46</context>
+          <context context-type="linenumber">50</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
-          <context context-type="linenumber">68,70</context>
+          <context context-type="linenumber">72,74</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.alternateSignInID" datatype="html" resname="account.alternateSignInID">
         <source>Alternate sign in ID</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
-          <context context-type="linenumber">49</context>
+          <context context-type="linenumber">53</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
-          <context context-type="linenumber">81,83</context>
+          <context context-type="linenumber">85,87</context>
         </context-group>
       </trans-unit>
       <trans-unit id="account.accessGranted" datatype="html" resname="account.accessGranted">
         <source>Access granted</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
-          <context context-type="linenumber">52</context>
+          <context context-type="linenumber">56</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
-          <context context-type="linenumber">88,90</context>
+          <context context-type="linenumber">92,94</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-trusted-parties/components/settings-trusted-individuals/settings-trusted-individuals.component.html</context>
@@ -1175,7 +1175,7 @@
         <source>You haven't added any alternate sign in accounts yet.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.html</context>
-          <context context-type="linenumber">111,113</context>
+          <context context-type="linenumber">120,122</context>
         </context-group>
       </trans-unit>
       <trans-unit id="accountSettings.security.unlinkTheAlternateSignInAccount" datatype="html" resname="accountSettings.security.unlinkTheAlternateSignInAccount">
@@ -1183,6 +1183,25 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.ts</context>
           <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared.delete" datatype="html" resname="shared.delete">
+        <source>Delete</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/account-settings/components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component.ts</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cdk/panel/panel-source/panel-source.component.ts</context>
+          <context context-type="linenumber">102</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/funding-external-identifiers-view-only/funding-external-identifiers-view-only.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/record/components/work-external-identifiers-view-only/work-external-identifiers-view-only.component.html</context>
+          <context context-type="linenumber">48</context>
         </context-group>
       </trans-unit>
       <trans-unit id="08f2e5ad4847aa140bd7c5bd6b374c9d21aa8aba" datatype="html" resname="08f2e5ad4847aa140bd7c5bd6b374c9d21aa8aba">
@@ -3404,21 +3423,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cdk/side-bar/side-bar/side-bar.component.ts</context>
           <context context-type="linenumber">49</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="shared.delete" datatype="html" resname="shared.delete">
-        <source>Delete</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cdk/panel/panel-source/panel-source.component.ts</context>
-          <context context-type="linenumber">102</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/record/components/funding-external-identifiers-view-only/funding-external-identifiers-view-only.component.html</context>
-          <context context-type="linenumber">25</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/record/components/work-external-identifiers-view-only/work-external-identifiers-view-only.component.html</context>
-          <context context-type="linenumber">48</context>
         </context-group>
       </trans-unit>
       <trans-unit id="shared.edit" datatype="html" resname="shared.edit">
@@ -7753,49 +7757,49 @@
         <source>Import your works</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">600</context>
+          <context context-type="linenumber">593</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.importIntroText" datatype="html" resname="works.importIntroText">
         <source>These services can help you update your ORCID record quickly by searching for your research outputs from various databases. Connect to a service to grant permission and add selected research outputs to your ORCID record.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">601</context>
+          <context context-type="linenumber">594</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.importSupportLinkLabel" datatype="html" resname="works.importSupportLinkLabel">
         <source>Find out more about importing works into your ORCID record</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">604</context>
+          <context context-type="linenumber">597</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.certifiedSectionHeading" datatype="html" resname="works.certifiedSectionHeading">
         <source>ORCID Certified Services</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">606</context>
+          <context context-type="linenumber">599</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.moreServicesHeading" datatype="html" resname="works.moreServicesHeading">
         <source>More Services</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">607</context>
+          <context context-type="linenumber">600</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.connectNow" datatype="html" resname="works.connectNow">
         <source>Connect now</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">608</context>
+          <context context-type="linenumber">601</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.connected" datatype="html" resname="works.connected">
         <source>Connected</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">609</context>
+          <context context-type="linenumber">602</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/search-link-wizard/search-link-wizard.component.html</context>
@@ -7806,35 +7810,35 @@
         <source>Close Import your works</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">610</context>
+          <context context-type="linenumber">603</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.showMoreServices" datatype="html" resname="works.showMoreServices">
         <source>Show more services</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">611</context>
+          <context context-type="linenumber">604</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.hideMoreServices" datatype="html" resname="works.hideMoreServices">
         <source>Hide more services</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">612</context>
+          <context context-type="linenumber">605</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.connectWithCspNow" datatype="html" resname="works.connectWithCspNow">
         <source>Connect with {{name}} now</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">613</context>
+          <context context-type="linenumber">606</context>
         </context-group>
       </trans-unit>
       <trans-unit id="works.connectedWithCsp" datatype="html" resname="works.connectedWithCsp">
         <source>Connected with {{name}}</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/record-works/record-works.service.ts</context>
-          <context context-type="linenumber">614</context>
+          <context context-type="linenumber">607</context>
         </context-group>
       </trans-unit>
       <trans-unit id="developerTools.generateNewClientSecret" datatype="html" resname="developerTools.generateNewClientSecret">
@@ -11155,7 +11159,7 @@
         <source>Added</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation/affiliation.component.html</context>
-          <context context-type="linenumber">109</context>
+          <context context-type="linenumber">113</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/funding/funding.component.html</context>
@@ -11194,7 +11198,7 @@
         <source>Last modified</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/affiliation/affiliation.component.html</context>
-          <context context-type="linenumber">117,119</context>
+          <context context-type="linenumber">121,123</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/record/components/funding/funding.component.html</context>

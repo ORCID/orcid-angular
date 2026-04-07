@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { Observable, of, ReplaySubject } from 'rxjs'
-import { catchError, map, retry, tap } from 'rxjs/operators'
+import { catchError, map, tap } from 'rxjs/operators'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { NamesEndPoint } from '../../types/record-name.endpoint'
@@ -50,7 +50,6 @@ export class RecordNamesService {
         }
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         catchError(() => of({} as NamesEndPoint)),
         tap((value) => {
@@ -72,7 +71,6 @@ export class RecordNamesService {
         }
       )
       .pipe(
-        retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => this.getNames({ forceReload: true }))
       )

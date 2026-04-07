@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
-import { catchError, retry } from 'rxjs/operators'
+import { catchError } from 'rxjs/operators'
 import { VisibilityStrings } from 'src/app/types/common.endpoint'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
@@ -25,9 +25,6 @@ export class AccountDefaultVisibilityService {
         frequency,
         { headers: this.headers }
       )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
 }
