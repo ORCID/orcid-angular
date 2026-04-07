@@ -1,3 +1,10 @@
+## v2.132.11 - 2026-04-07
+
+[Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.132.10...v2.132.11)
+
+- [#2805](https://github.com/ORCID/orcid-angular/pull/2805): PD-5329 add label to global search
+- [#2790](https://github.com/ORCID/orcid-angular/pull/2790): PD-5144 improve disable authorize access button logic
+
 ## v2.132.10 - 2026-04-06
 
 [Full Changelog](https://github.com/ORCID/orcid-angular/compare/v2.132.9...v2.132.10)
